@@ -140,6 +140,11 @@ body, input, textarea
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+body
+{
+	font-size: 75%;
+}
+
 a.samples
 {
 	color: #189DE1;
