@@ -175,115 +175,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
     </div>
 
     <script>
-        var dropbox;
-
-        // dropbox = document.getElementById("editable");
-        // dropbox.addEventListener("dragenter", dragenter, false);
-        // dropbox.addEventListener("dragover", dragover, false);
-        // dropbox.addEventListener("drop", drop, false);
-
-        // function dragenter(e) {
-        //   e.stopPropagation();
-        //   e.preventDefault();
-        // }
-
-        // function dragover(e) {
-        //   e.stopPropagation();
-        //   e.preventDefault();
-        // }
-
-        // function drop(e) {
-        //   e.stopPropagation();
-        //   e.preventDefault();
-
-        //   var dt = e.dataTransfer;
-        //   var files = dt.files;
-
-        //   handleFiles(files);
-        // }
-
-        // function handleFiles(files) {
-        //   for (var i = 0; i < files.length; i++) {
-        //     var file = files[i];
-        //     var imageType = /image.*/;
-
-        //     if (!file.type.match(imageType)) {
-        //       continue;
-        //     }
-
-        //     var preview = document.querySelector('#preview');
-
-        //     var img = document.createElement("img");
-        //     img.classList.add("obj");
-        //     img.file = file;
-        //     preview.appendChild(img);
-
-        //     var reader = new FileReader();
-        //     reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-        //     reader.readAsDataURL(file);
-        //   }
-        // }
-
-    </script>
-
-    <!--
-    <script>
-        YUI().use('node', 'overlay', 'event-mouseenter', 'dom-screen', function(Y) {
-            var dropbox;
-
-            dropbox = Y.one("#editable");
-            dropbox.on("dragenter", dragenter);
-            dropbox.on("dragover", dragover);
-            dropbox.on("drop", drop);
-
-            function dragenter(e) {
-              e.stopPropagation();
-              e.preventDefault();
-            }
-
-            function dragover(e) {
-              e.stopPropagation();
-              e.preventDefault();
-            }
-
-            function drop(e) {
-                debugger;
-              e.stopPropagation();
-              e.preventDefault();
-
-              var dt = e._event.dataTransfer;
-              var files = dt.files;
-
-              handleFiles(files);
-            }
-
-            function handleFiles(files) {
-              for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                var imageType = /image.*/;
-
-                if (!file.type.match(imageType)) {
-                  continue;
-                "}
-                "
-                var preview = document.querySelector('#preview');
-
-                var img = document.createElement("img");
-                img.classList.add("obj");
-                img.file = file;
-                preview.appendChild(img);
-
-                var reader = new FileReader();
-                reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-                reader.readAsDataURL(file);
-              }
-            }
-        });
-    </script>
-    -->
-
-    <script>
-        // We need to turn off the automatic editor creation first.
         CKEDITOR.disableAutoInline = true;
 
         var editor = CKEDITOR.inline('editable');
@@ -363,7 +254,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
             Y.one('#add-content').on('mouseenter', function(event) {
                 window.clearTimeout(window.leaveTimeout);
             });
-
 
             window.addOverlay = new Y.Overlay({
                 srcNode: '#add-content',
@@ -486,8 +376,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                 var doc = Y.config.doc;
 
-                // debugger;
-
                 if (Y.Lang.isFunction(doc.caretPositionFromPoint)) {
                     start = doc.caretPositionFromPoint(startX, startY);
                     end = doc.caretPositionFromPoint(endX, endY);
@@ -520,7 +408,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                     editor.getSelection().selectRanges([range]);
                 }
                 else if (Y.Lang.isFunction(doc.body.createTextRange)) {
-                    // debugger;
                     var sel = editor.getSelection();
 
                     sel.unlock();
