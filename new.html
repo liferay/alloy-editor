@@ -6,9 +6,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Inline Editing by Code &mdash; CKEditor Sample</title>
+    <title>Advanced Editing</title>
 
-    <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1-dist/css/bootstrap.min.css">
+    <link href="http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
@@ -80,7 +80,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     </style>
 
-    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui-min.js"></script>
+    <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
 
     <script src="ckeditor/ckeditor.js"></script>
     <style>
@@ -177,17 +177,18 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
     <script>
         CKEDITOR.disableAutoInline = true;
 
-        var editor = CKEDITOR.inline('editable');
+        YUI().use('node', 'overlay', 'event-mouseenter', 'dom-screen', 'node-event-simulate', 'aui-debounce', function(Y) {
 
-        window.editor = editor;
+            var editor = CKEDITOR.inline('editable');
 
-        editor.on('configLoaded', function() {
-            // Remove unnecessary plugins to make the editor simpler.
-            editor.config.allowedContent = true;
-            editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
-        });
+            window.editor = editor;
 
-        YUI().use('node', 'overlay', 'event-mouseenter', 'dom-screen', 'node-event-simulate', function(Y) {
+            editor.on('configLoaded', function() {
+                // Remove unnecessary plugins to make the editor simpler.
+                editor.config.allowedContent = true;
+                editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
+            });
+
             function setContentTimeout() {
                 window.leaveTimeout = setTimeout(
                     function() {
@@ -196,92 +197,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                     1000
                 );
             }
-
-            Y.one(editable).on('mouseup', function() {
-                setTimeout( function() {
-                    setState();
-                }, 0 );
-            });
-
-            Y.one(editable).on('keyup', function() {
-                setTimeout( function() {
-                    setState();
-                }, 0 );
-            });
-
-            Y.one(editable).on('mouseup', function() {
-                setTimeout( function() {
-                    handleAdd();
-                }, 0 );
-            });
-
-            Y.one(editable).on('keyup', function() {
-                setTimeout( function() {
-                    handleAdd();
-                }, 0 );
-            });
-
-            window.overlay = new Y.Overlay({
-                srcNode:"#overlay",
-                visible: false
-            }).render();
-
-            window.add = new Y.Overlay({
-                srcNode:"#add-wrapper",
-                visible: false,
-                height: '20px',
-                width: '20px'
-            }).render();
-
-            Y.one('#add-wrapper').on(['mouseenter', 'click'], function(event) {
-                var xy = window.add.get('xy');
-
-                window.clearTimeout(window.leaveTimeout);
-
-                window.addOverlay.show();
-
-                window.addOverlay.set('xy', [xy[0] + 20, xy[1]]);
-            });
-
-            Y.one('#add-wrapper').on('mouseleave', function(event) {
-                setContentTimeout();
-            });
-
-            Y.one('#add-content').on('mouseleave', function(event) {
-                setContentTimeout();
-            });
-
-            Y.one('#add-content').on('mouseenter', function(event) {
-                window.clearTimeout(window.leaveTimeout);
-            });
-
-            window.addOverlay = new Y.Overlay({
-                srcNode: '#add-content',
-                visible: false
-            }).render();
-
-            window.editorNode = Y.one('#editable');
-
-            Y.one('#bold').on('click', function(event) {
-                editor.execCommand('bold');
-            });
-
-            Y.one('#italic').on('click', function(event) {
-                editor.execCommand('italic');
-            });
-
-            Y.one('#underline').on('click', function(event) {
-                editor.execCommand('underline');
-            });
-
-
-            editor.on('selectionChange', function() {
-                setTimeout(function() {
-                        setState();
-                    },
-                    0
-                );
-            });
 
             function getCaretXY() {
                 var sel = editor.getSelection(),
@@ -293,7 +208,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 bookmarkNodeEl.id = 'test123';
 
                 var result = [
-                    window.editorNode.getDOMNode().offsetLeft - 30,
+                    bookmarkNodeEl.offsetLeft,
                     bookmarkNodeEl.offsetTop
                 ];
 
@@ -302,43 +217,39 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 return result;
             }
 
-            function handleAdd(event) {
-                if (isSelectionEmpty()) {
-                    var caretXY = getCaretXY();
+            function showAdd(selectionRegion) {
+                var xy = getAddButtonXY(selectionRegion);
 
-                    window.add.set('xy', caretXY);
+                window.add.set('xy', xy);
 
-                    window.add.show();
-                }
-                else {
-                    window.add.hide();
-                }
-
-                window.addOverlay.hide();
+                window.add.show();
             }
 
-            function isSelectionEmpty() {
-                var sel = editor.getSelection(),
+            function hideAdd() {
+                window.add.hide();
+            }
+
+            function isSelectionEmpty(selection) {
+                var sel = selection || editor.getSelection(),
                     ranges = sel.getRanges(),
                     selectionIsEmpty = sel.getType() == CKEDITOR.SELECTION_NONE || (ranges.length == 1 && ranges[0].collapsed);
 
                 return selectionIsEmpty;
             }
 
-            function setState() {
-                if (!isSelectionEmpty()) {
-                    var xy = getSelectionXY();
+            function showToolbar(selectionRegion) {
+                var xy = getToolbarXY(selectionRegion);
 
-                    window.overlay.set('xy', xy);
+                window.overlay.set('xy', xy);
 
-                    overlay.show();
-                }
-                else {
-                    overlay.hide();
-                }
+                window.overlay.show();
             }
 
-            function getSelectionXY() {
+            function hideToolbar(argument) {
+                window.overlay.hide();
+            }
+
+            function getSelectionRegion() {
                 if (document.getSelection) {
                     var selection = document.getSelection(),
                         range = selection.getRangeAt(0),
@@ -350,17 +261,56 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                         clientRects = range.getClientRects()
                 }
 
+                var left = Infinity, right = -Infinity, top = Infinity, bottom = 0;
+
+                Y.Array.each(
+                    clientRects,
+                    function(item, index, collection) {
+                        if (item.left < left) {
+                            left = item.left;
+                        }
+
+                        if (item.right > right) {
+                            right = item.right;
+                        }
+
+                        if (item.top < top) {
+                            top = item.top;
+                        }
+
+                        if (item.bottom > bottom) {
+                            bottom = item.bottom;
+                        }
+                    }
+                );
+
+                return {
+                    left: left,
+                    right: right,
+                    top: top,
+                    bottom: bottom
+                };
+            }
+
+            function getToolbarXY(selectionRegion) {
                 var bb = overlay.get('boundingBox');
 
-                var selectionWidth = clientRects[0].right - clientRects[0].left;
+                var selectionWidth = selectionRegion.right - selectionRegion.left;
 
                 var halfSelection = selectionWidth / 2;
 
-                var left = window.editorNode.get('docScrollX') + 10 + clientRects[0].left - bb.getDOMNode().offsetWidth / 2;
+                var left = window.editorNode.get('docScrollX') + 10 + selectionRegion.left - bb.getDOMNode().offsetWidth / 2;
 
-                var top = clientRects[0].top + window.editorNode.get('docScrollY') - bb.getDOMNode().offsetHeight;
+                var top = selectionRegion.top + window.editorNode.get('docScrollY') - bb.getDOMNode().offsetHeight;
 
                 return [left + halfSelection, top];
+            }
+
+            function getAddButtonXY(selectionRegion) {
+                return [
+                    window.editorNode.get('docScrollX') + window.editorNode.getDOMNode().offsetLeft - 30,
+                    window.editorNode.get('docScrollY') + selectionRegion.top
+                ];
             }
 
             Y.one('#editable').on('dragstart', function(event) {
@@ -480,6 +430,84 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                 return false;
             }
+
+            var handleUI = Y.debounce(
+                function(event) {
+                    var selectionEmpty = isSelectionEmpty();
+
+                    var selectionRegion = getSelectionRegion();
+
+                    showAdd(selectionRegion);
+
+                    window.addOverlay.hide();
+
+                    if (selectionEmpty) {
+                        console.log('show add');
+                        hideToolbar();
+                    }
+                    else {
+                        console.log('hide add');
+                        showToolbar(selectionRegion);
+                    }
+                },
+                50
+            );
+
+            window.overlay = new Y.Overlay({
+                srcNode:"#overlay",
+                visible: false
+            }).render();
+
+            window.add = new Y.Overlay({
+                srcNode:"#add-wrapper",
+                visible: false,
+                height: '20px',
+                width: '20px'
+            }).render();
+
+            Y.one('#add-wrapper').on(['mouseenter', 'click'], function(event) {
+                var xy = window.add.get('xy');
+
+                window.clearTimeout(window.leaveTimeout);
+
+                window.addOverlay.show();
+
+                window.addOverlay.set('xy', [xy[0] + 20, xy[1]]);
+            });
+
+            Y.one('#add-wrapper').on('mouseleave', function(event) {
+                setContentTimeout();
+            });
+
+            Y.one('#add-content').on('mouseleave', function(event) {
+                setContentTimeout();
+            });
+
+            Y.one('#add-content').on('mouseenter', function(event) {
+                window.clearTimeout(window.leaveTimeout);
+            });
+
+            window.addOverlay = new Y.Overlay({
+                srcNode: '#add-content',
+                visible: false
+            }).render();
+
+            window.editorNode = Y.one('#editable');
+
+            Y.one('#bold').on('click', function(event) {
+                editor.execCommand('bold');
+            });
+
+            Y.one('#italic').on('click', function(event) {
+                editor.execCommand('italic');
+            });
+
+            Y.one('#underline').on('click', function(event) {
+                editor.execCommand('underline');
+            });
+
+            window.editorNode.on('mouseup', handleUI);
+            window.editorNode.on('keypress', handleUI);
         });
     </script>
 
