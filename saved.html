@@ -199,10 +199,18 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
             }
 
             function getCaretXY() {
-                var sel = editor.getSelection(),
-                    ranges = sel.getRanges(),
-                    bookmarks = sel.createBookmarks(),
-                    bookmarkNodeEl = bookmarks[0].startNode.$;
+                var bookmarkNodeEl,
+                    bookmarks,
+                    ranges,
+                    sel;
+
+                sel = editor.getSelection();
+
+                bookmarks = sel.createBookmarks2();
+
+                ranges = sel.getRanges();
+                bookmarks = sel.createBookmarks();
+                bookmarkNodeEl = bookmarks[0].startNode.$;
 
                 bookmarkNodeEl.style.display = 'inline-block';
                 bookmarkNodeEl.id = 'test123';
@@ -211,7 +219,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                 var result = bookmarkNodeEl.getXY();
 
-                bookmarkNodeEl.remove();
+                sel.selectBookmarks(bookmarks);
 
                 return result;
             }
