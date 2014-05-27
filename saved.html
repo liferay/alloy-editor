@@ -507,8 +507,8 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                         var direction = selectionRegion.direction;
 
-                        if (selectionRegion.startRect.top !== selectionRegion.endRect.top && selectionRegion.direction === 0) {
-                            direction = 0;
+                        if (selectionRegion.startRect.top === selectionRegion.endRect.top) {
+                            direction = 1;
                         }
 
                         if (event.pageX && event.pageY) {
