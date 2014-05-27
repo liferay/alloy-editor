@@ -424,10 +424,10 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 }
             }
 
-            // dropbox = document.querySelector('#editable');
-            // dropbox.addEventListener('dragenter', dragenter, false);
-            // dropbox.addEventListener('dragover', dragover, false);
-            // dropbox.addEventListener('drop', drop, false);
+            dropbox = document.querySelector('#editable');
+            dropbox.addEventListener('dragenter', dragenter, false);
+            dropbox.addEventListener('dragover', dragover, false);
+            dropbox.addEventListener('drop', drop, false);
 
             function dragenter(e) {
                 if (Y.UA.ie) {
