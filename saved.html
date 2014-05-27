@@ -177,7 +177,9 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
     <script>
         CKEDITOR.disableAutoInline = true;
 
-        YUI().use('node', 'overlay', 'event-mouseenter', 'dom-screen', 'node-event-simulate', 'aui-debounce', 'gesture-simulate', function(Y) {
+        YUI({
+            filter: 'raw'
+        }).use('node', 'overlay', 'event-mouseenter', 'dom-screen', 'node-event-simulate', 'aui-debounce', 'gesture-simulate', function(Y) {
 
             var editor = CKEDITOR.inline('editable');
 
@@ -198,28 +200,33 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 );
             }
 
-            function getCaretXY() {
+            function getCaretXY(selection) {
                 var bookmarkNodeEl,
                     bookmarks,
                     ranges,
-                    sel;
+                    region,
+                    result;
 
-                sel = editor.getSelection();
+                selection = selection || editor.getSelection();
 
-                bookmarks = sel.createBookmarks2();
+                if (isSelectionEmpty(selection)) {
+                    ranges = selection.getRanges();
+                    bookmarks = selection.createBookmarks();
+                    bookmarkNodeEl = bookmarks[0].startNode.$;
 
-                ranges = sel.getRanges();
-                bookmarks = sel.createBookmarks();
-                bookmarkNodeEl = bookmarks[0].startNode.$;
+                    bookmarkNodeEl.style.display = 'inline-block';
 
-                bookmarkNodeEl.style.display = 'inline-block';
-                bookmarkNodeEl.id = 'test123';
+                    bookmarkNodeEl = Y.one(bookmarkNodeEl);
 
-                var bookmarkNodeEl = Y.one(bookmarkNodeEl);
+                    result = bookmarkNodeEl.getXY();
 
-                var result = bookmarkNodeEl.getXY();
+                    bookmarkNodeEl.remove();
+                }
+                else {
+                    region = getSelectionRegion();
 
-                sel.selectBookmarks(bookmarks);
+                    result = [region.left, region.top];
+                }
 
                 return result;
             }
@@ -242,8 +249,8 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 return selectionIsEmpty;
             }
 
-            function showToolbar(left, top) {
-                var xy = getToolbarXYPoint(left, top);
+            function showToolbar(left, top, direction) {
+                var xy = getToolbarXYPoint(left, top, direction);
 
                 window.overlay.set('xy', xy);
 
@@ -266,7 +273,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                         clientRects = range.getClientRects()
                 }
 
-                var left = Infinity, right = -Infinity, top = Infinity, bottom = 0;
+                var left = Infinity, right = -Infinity, top = Infinity, bottom = 0, direction = 0 /* top to bottom */;
 
                 Y.Array.each(
                     clientRects,
@@ -289,14 +296,44 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                     }
                 );
 
+                if (selection.anchorNode && selection.anchorNode.compareDocumentPosition) {
+                    position = selection.anchorNode.compareDocumentPosition(selection.focusNode);
+
+                    if (!position && selection.anchorOffset > selection.focusOffset || position === Node.DOCUMENT_POSITION_PRECEDING) {
+                        direction = 1;
+                    }
+                }
+
                 var docScrollX = window.editorNode.get('docScrollX');
                 var docScrollY = window.editorNode.get('docScrollY');
 
+                var startRect = clientRects[0];
+                var endRect = clientRects[clientRects.length - 1];
+
                 return {
+                    bottom: docScrollY + bottom,
+                    direction: direction,
+                    endRect: {
+                        bottom: docScrollY + endRect.bottom,
+                        height: endRect.height,
+                        left: docScrollX + endRect.left,
+                        right: docScrollX + endRect.right,
+                        top: docScrollY + endRect.top,
+                        width: endRect.width
+                    },
+                    height: bottom - top + docScrollY,
                     left: docScrollX + left,
                     right: docScrollX + right,
                     top: docScrollY + top,
-                    bottom: docScrollY + bottom
+                    startRect: {
+                        bottom: docScrollY + startRect.bottom,
+                        height: startRect.height,
+                        left: docScrollX + startRect.left,
+                        right: docScrollX + startRect.right,
+                        top: docScrollY + startRect.top,
+                        width: startRect.width
+                    },
+                    width: right - left + docScrollX
                 };
             }
 
@@ -314,13 +351,13 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 return [left + halfSelection, top];
             }
 
-            function getToolbarXYPoint(left, top) {
+            function getToolbarXYPoint(left, top, direction) {
                 //debugger;
                 var bb = overlay.get('boundingBox');
 
                 var left = left - bb.getDOMNode().offsetWidth / 2;
 
-                var top = top - bb.getDOMNode().offsetHeight - 10;
+                var top = top - bb.getDOMNode().offsetHeight + (direction === 0 ? 30 : 0);
 
                 return [left, top];
             }
@@ -387,10 +424,10 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 }
             }
 
-            dropbox = document.querySelector('#editable');
-            dropbox.addEventListener('dragenter', dragenter, false);
-            dropbox.addEventListener('dragover', dragover, false);
-            dropbox.addEventListener('drop', drop, false);
+            // dropbox = document.querySelector('#editable');
+            // dropbox.addEventListener('dragenter', dragenter, false);
+            // dropbox.addEventListener('dragover', dragover, false);
+            // dropbox.addEventListener('drop', drop, false);
 
             function dragenter(e) {
                 if (Y.UA.ie) {
@@ -445,13 +482,14 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
             var handleUI = Y.debounce(
                 function(event) {
+                    console.log('handleUI');
                     var selectionEmpty = isSelectionEmpty();
 
                     var editorNode = window.editorNode.getDOMNode();
 
                     var selectionRegion = getSelectionRegion();
 
-                    var caretXY = getCaretXY();
+                    console.log(selectionRegion);
 
                     showAdd(editorNode.offsetLeft - 30, selectionRegion.top - 5);
 
@@ -467,22 +505,35 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                         var xy;
 
+                        var direction = selectionRegion.direction;
+
+                        if (selectionRegion.startRect.top !== selectionRegion.endRect.top && selectionRegion.direction === 0) {
+                            direction = 0;
+                        }
+
                         if (event.pageX && event.pageY) {
                             x = event.pageX;
-                            y = event.pageY;
-                        }
-                        else {
-                            if (caretXY[1] < selectionRegion.top) {
-                                x = caretXY[0];
-                                y = caretXY[1];
+
+                            if (direction === 1) {
+                                y = Math.min(event.pageY, selectionRegion.top);
                             }
                             else {
-                                x = selectionRegion.left;
-                                y = selectionRegion.top;
+                                y = Math.max(event.pageY, selectionRegion.bottom);
+                            }
+                        }
+                        else {
+                            // debugger;
+                            x = selectionRegion.left + selectionRegion.width/2;
+
+                            if (direction === 0) {
+                                y = selectionRegion.endRect.top;
+                            }
+                            else {
+                                y = selectionRegion.startRect.top;
                             }
                         }
 
-                        showToolbar(x, y);
+                        showToolbar(x, y, direction);
                     }
                 },
                 50
@@ -541,7 +592,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 editor.execCommand('underline');
             });
 
-            window.editorNode.on('click', handleUI);
+            window.editorNode.on('mouseup', handleUI);
             window.editorNode.on('keyup', handleUI);
 
             Y.one('#testBtn').on('click', function() {
