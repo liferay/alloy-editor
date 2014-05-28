@@ -162,6 +162,8 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
         <p>Launched by a <strong>Saturn V</strong> rocket from <a href="http://en.wikipedia.org/wiki/Kennedy_Space_Center" title="Kennedy Space Center">Kennedy Space Center</a> in Merritt Island, Florida on July 16, Apollo 11 was the fifth manned mission of <a href="http://en.wikipedia.org/wiki/NASA" title="NASA">NASA</a>&#39;s Apollo program. The Apollo spacecraft had three parts:</p>
 
+        <img src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg">
+
         <ol>
             <li><strong>Command Module</strong> with a cabin for the three astronauts which was the only part which landed back on Earth</li>
             <li><strong>Service Module</strong> which supported the Command Module with propulsion, electrical power, oxygen and water</li>
@@ -204,7 +206,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 var bookmarkNodeEl,
                     bookmarks,
                     ranges,
-                    region,
+                    data,
                     result;
 
                 selection = selection || editor.getSelection();
@@ -223,9 +225,9 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                     bookmarkNodeEl.remove();
                 }
                 else {
-                    region = getSelectionRegion();
+                    data = getSelectionData();
 
-                    result = [region.left, region.top];
+                    result = [data.region.left, data.region.top];
                 }
 
                 return result;
@@ -261,16 +263,27 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 window.overlay.hide();
             }
 
-            function getSelectionRegion() {
+            function getSelectionData() {
+                var selection = editor.getSelection();
+
+                var nativeSelection = selection.getNative();
+
                 if (document.getSelection) {
-                    var selection = document.getSelection(),
-                        range = selection.getRangeAt(0),
-                        clientRects = range.getClientRects();
+                    var rangeCount = nativeSelection.rangeCount,
+                        clientRects;
+
+                    for (var i = 0; i < rangeCount; i++) {
+                        if (!clientRects) {
+                            clientRects = nativeSelection.getRangeAt(i).getClientRects();
+                        }
+                        else {
+                            clientRects.push(nativeSelection.getRangeAt(i).getClientRects());
+                        }
+                    }
                 }
                 else {
-                    var selection = document.selection,
-                        range = selection.createRange(),
-                        clientRects = range.getClientRects()
+                    var range = nativeSelection.createRange(),
+                        clientRects = range.getClientRects();
                 }
 
                 var left = Infinity, right = -Infinity, top = Infinity, bottom = 0, direction = 0 /* top to bottom */;
@@ -296,10 +309,10 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                     }
                 );
 
-                if (selection.anchorNode && selection.anchorNode.compareDocumentPosition) {
-                    position = selection.anchorNode.compareDocumentPosition(selection.focusNode);
+                if (nativeSelection.anchorNode && nativeSelection.anchorNode.compareDocumentPosition) {
+                    position = nativeSelection.anchorNode.compareDocumentPosition(nativeSelection.focusNode);
 
-                    if (!position && selection.anchorOffset > selection.focusOffset || position === Node.DOCUMENT_POSITION_PRECEDING) {
+                    if (!position && nativeSelection.anchorOffset > nativeSelection.focusOffset || position === Node.DOCUMENT_POSITION_PRECEDING) {
                         direction = 1;
                     }
                 }
@@ -307,46 +320,55 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 var docScrollX = window.editorNode.get('docScrollX');
                 var docScrollY = window.editorNode.get('docScrollY');
 
-                var startRect = clientRects[0];
-                var endRect = clientRects[clientRects.length - 1];
-
-                return {
-                    bottom: docScrollY + bottom,
-                    direction: direction,
-                    endRect: {
-                        bottom: docScrollY + endRect.bottom,
-                        height: endRect.height,
-                        left: docScrollX + endRect.left,
-                        right: docScrollX + endRect.right,
-                        top: docScrollY + endRect.top,
-                        width: endRect.width
-                    },
-                    height: bottom - top + docScrollY,
-                    left: docScrollX + left,
-                    right: docScrollX + right,
-                    top: docScrollY + top,
-                    startRect: {
-                        bottom: docScrollY + startRect.bottom,
-                        height: startRect.height,
-                        left: docScrollX + startRect.left,
-                        right: docScrollX + startRect.right,
-                        top: docScrollY + startRect.top,
-                        width: startRect.width
-                    },
-                    width: right - left + docScrollX
+                var result = {
+                    element: selection.getSelectedElement(),
+                    text: selection.getSelectedText()
                 };
+
+                if (clientRects.length) {
+                    var startRect = clientRects[0];
+                    var endRect = clientRects[clientRects.length - 1];
+
+                    result.region = {
+                        bottom: docScrollY + bottom,
+                        direction: direction,
+                        endRect: {
+                            bottom: docScrollY + endRect.bottom,
+                            height: endRect.height,
+                            left: docScrollX + endRect.left,
+                            right: docScrollX + endRect.right,
+                            top: docScrollY + endRect.top,
+                            width: endRect.width
+                        },
+                        height: bottom - top + docScrollY,
+                        left: docScrollX + left,
+                        right: docScrollX + right,
+                        top: docScrollY + top,
+                        startRect: {
+                            bottom: docScrollY + startRect.bottom,
+                            height: startRect.height,
+                            left: docScrollX + startRect.left,
+                            right: docScrollX + startRect.right,
+                            top: docScrollY + startRect.top,
+                            width: startRect.width
+                        },
+                        width: right - left + docScrollX
+                    };
+                }
+
+                return result;
             }
 
-            function getToolbarXYRegion(selectionRegion) {
+            function getToolbarXYRegion(selectionData) {
                 var bb = overlay.get('boundingBox');
 
-                var selectionWidth = selectionRegion.right - selectionRegion.left;
+                var selectionWidth = selectionData.region.right - selectionData.region.left;
 
                 var halfSelection = selectionWidth / 2;
 
-                var left = window.editorNode.get('docScrollX') + 10 + selectionRegion.left - bb.getDOMNode().offsetWidth / 2;
+                var left = window.editorNode.get('docScrollX') + 10 + selectionData.region.left - bb.getDOMNode().offsetWidth / 2;
 
-                var top = selectionRegion.top + window.editorNode.get('docScrollY') - bb.getDOMNode().offsetHeight;
+                var top = selectionData.region.top + window.editorNode.get('docScrollY') - bb.getDOMNode().offsetHeight;
 
                 return [left + halfSelection, top];
             }
@@ -487,11 +509,18 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                     var editorNode = window.editorNode.getDOMNode();
 
-                    var selectionRegion = getSelectionRegion();
+                    var selectionData = getSelectionData();
 
-                    console.log(selectionRegion);
+                    console.log(selectionData);
 
-                    showAdd(editorNode.offsetLeft - 30, selectionRegion.top - 5);
+                    if (selectionData.region) {
+                        showAdd(editorNode.offsetLeft - 30, selectionData.region.top - 5);
+                    }
+                    else {
+                        hideAdd();
+
+                        return;
+                    }
 
                     window.addOverlay.hide();
 
@@ -505,9 +534,9 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                         var xy;
 
-                        var direction = selectionRegion.direction;
+                        var direction = selectionData.region.direction;
 
-                        if (selectionRegion.startRect.top === selectionRegion.endRect.top) {
+                        if (selectionData.region.startRect.top === selectionData.region.endRect.top) {
                             direction = 1;
                         }
 
@@ -515,21 +544,21 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                             x = event.pageX;
 
                             if (direction === 1) {
-                                y = Math.min(event.pageY, selectionRegion.top);
+                                y = Math.min(event.pageY, selectionData.region.top);
                             }
                             else {
-                                y = Math.max(event.pageY, selectionRegion.bottom);
+                                y = Math.max(event.pageY, selectionData.region.bottom);
                             }
                         }
                         else {
                             // debugger;
-                            x = selectionRegion.left + selectionRegion.width/2;
+                            x = selectionData.region.left + selectionData.region.width/2;
 
                             if (direction === 0) {
-                                y = selectionRegion.endRect.top;
+                                y = selectionData.region.endRect.top;
                             }
                             else {
-                                y = selectionRegion.startRect.top;
+                                y = selectionData.region.startRect.top;
                             }
                         }
 
