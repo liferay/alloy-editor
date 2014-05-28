@@ -263,12 +263,16 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 window.overlay.hide();
             }
 
-            function getSelectionData() {
-                var selection = editor.getSelection();
+            function getSelectionRegion(selection) {
+                selection = selection || editor.getSelection();
 
                 var nativeSelection = selection.getNative();
 
-                if (document.getSelection) {
+                if (nativeSelection.createRange) {
+                    var range = nativeSelection.createRange(),
+                        clientRects = range.getClientRects();
+                }
+                else {
                     var rangeCount = nativeSelection.rangeCount,
                         clientRects;
 
@@ -280,10 +284,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                             clientRects.push(nativeSelection.getRangeAt(i).getClientRects());
                         }
                     }
-                }
-                else {
-                    var range = nativeSelection.createRange(),
-                        clientRects = range.getClientRects();
                 }
 
                 var left = Infinity, right = -Infinity, top = Infinity, bottom = 0, direction = 0 /* top to bottom */;
@@ -320,16 +320,13 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 var docScrollX = window.editorNode.get('docScrollX');
                 var docScrollY = window.editorNode.get('docScrollY');
 
-                var result = {
-                    element: selection.getSelectedElement(),
-                    text: selection.getSelectedText()
-                };
+                var region;
 
                 if (clientRects.length) {
                     var startRect = clientRects[0];
                     var endRect = clientRects[clientRects.length - 1];
 
-                    result.region = {
+                    region = {
                         bottom: docScrollY + bottom,
                         direction: direction,
                         endRect: {
@@ -355,6 +352,21 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                         width: right - left + docScrollX
                     };
                 }
+
+                return region;
+            }
+
+            function getSelectionData() {
+                var selection = editor.getSelection();
+
+                var nativeSelection = selection.getNative();
+
+                var result = {
+                    element: selection.getSelectedElement(),
+                    text: selection.getSelectedText()
+                };
+
+                result.region = getSelectionRegion(selection);
 
                 return result;
             }
