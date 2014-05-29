@@ -181,16 +181,31 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
         YUI({
             filter: 'raw'
-        }).use('node', 'overlay', 'event-mouseenter', 'dom-screen', 'node-event-simulate', 'aui-debounce', 'gesture-simulate', function(Y) {
+        }).use('node', 'overlay', 'event-mouseenter', 'dom-screen', 'node-event-simulate', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', function(Y) {
 
             var editor = CKEDITOR.inline('editable');
 
             window.editor = editor;
 
+            var elements = ['strong', 'em', 'u', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'table', 'img'];
+
             editor.on('configLoaded', function() {
                 // Remove unnecessary plugins to make the editor simpler.
                 editor.config.allowedContent = true;
                 editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
+
+                // debugger;
+
+                Y.Array.each(
+                    elements,
+                    function(item, index, array) {
+                        var style = new CKEDITOR.style({element: item});
+                        elements[index] = {
+                            name: item,
+                            style: style
+                        };
+                    }
+                );
             });
 
             function setContentTimeout() {
@@ -356,6 +371,23 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 return region;
             }
 
+            function updateUI() {
+                Y.Array.each(
+                    elements,
+                    function(item, index, collection) {
+                        var result = item.style.checkActive( editor.elementPath(), editor );
+
+                        console.log('style', item.name, 'applied: ', result);
+                    }
+                );
+                // var style = new CKEDITOR.style({element: 'strong'});
+
+                // var result = style.checkActive( editor.elementPath(), editor );
+
+                // console.log('selection has been made bold: ', result);
+
+            }
+
             function getSelectionData() {
                 var selection = editor.getSelection();
 
@@ -367,6 +399,8 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 };
 
                 result.region = getSelectionRegion(selection);
+
+                updateUI();
 
                 return result;
             }
@@ -580,6 +614,39 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 50
             );
 
+            function applyStyle(event) {
+                debugger;
+                editor.applyStyle(style);
+            }
+
+            var strongButton = new Y.ToggleButton({
+                srcNode: '#strong',
+                on: {
+                    'click': applyStyle
+                }
+            }).render();
+
+            var emButton = new Y.ToggleButton({
+                srcNode: '#em',
+                on: {
+                    'click': applyStyle
+                }
+            }).render();
+
+            var uButton = new Y.ToggleButton({
+                srcNode: '#u',
+                on: {
+                    'click': applyStyle
+                }
+            }).render();
+
+            var aButton = new Y.ToggleButton({
+                srcNode: '#a',
+                on: {
+                    'click': applyStyle
+                }
+            }).render();
+
             window.overlay = new Y.Overlay({
                 srcNode:"#overlay",
                 visible: false
@@ -621,18 +688,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
             window.editorNode = Y.one('#editable');
 
-            Y.one('#bold').on('click', function(event) {
-                editor.execCommand('bold');
-            });
-
-            Y.one('#italic').on('click', function(event) {
-                editor.execCommand('italic');
-            });
-
-            Y.one('#underline').on('click', function(event) {
-                editor.execCommand('underline');
-            });
-
             window.editorNode.on('mouseup', handleUI);
             window.editorNode.on('keyup', handleUI);
 
@@ -644,10 +699,12 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         });
     </script>
 
+
     <div id="overlay" class="btn-group">
-      <button id="bold" type="button" class="btn btn-default">Bold</button>
-      <button id="italic" type="button" class="btn btn-default">Italic</button>
-      <button id="underline" type="button" class="btn btn-default">Underline</button>
+        <button id="strong" class="btn"><i class="icon-bold"></i></button>
+        <button id="em" class="btn"><i class="icon-italic"></i></button>
+        <button id="u" class="btn"><i class="icon-magnet"></i></button>
+        <button id="a" class="btn"><i class="icon-share"></i></button>
     </div>
 
     <div id="add-wrapper" class="btn-group">
