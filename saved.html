@@ -78,6 +78,27 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             position: absolute;
         }
 
+        .input-wrapper {
+            margin-left: 0;
+        }
+
+        .input-container {
+            margin-left: 5px;
+            width: 210px;
+        }
+
+        .input-clear-container {
+            width: 20px;
+        }
+
+        #linkInput {
+            margin: 5px 0 5px 0px;
+        }
+
+        #mainButtons {
+            margin: 5px;
+        }
+
     </style>
 
     <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
@@ -283,6 +304,12 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                 var nativeSelection = selection.getNative();
 
+                if (!nativeSelection) {
+                    return;
+                }
+
+                var region;
+
                 if (nativeSelection.createRange) {
                     var range = nativeSelection.createRange(),
                         clientRects = range.getClientRects();
@@ -335,8 +362,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 var docScrollX = window.editorNode.get('docScrollX');
                 var docScrollY = window.editorNode.get('docScrollY');
 
-                var region;
-
                 if (clientRects.length) {
                     var startRect = clientRects[0];
                     var endRect = clientRects[clientRects.length - 1];
@@ -372,12 +397,18 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
             }
 
             function updateUI() {
+                var path = editor.elementPath();
+
                 Y.Array.each(
                     elements,
                     function(item, index, collection) {
-                        var result = item.style.checkActive( editor.elementPath(), editor );
+                        var result = item.style.checkActive(path, editor);
 
-                        console.log('style', item.name, 'applied: ', result);
+                        var btnInst = buttons[item.name];
+
+                        if (btnInst) {
+                            btnInst.set('pressed', !!result);
+                        }
                     }
                 );
                 // var style = new CKEDITOR.style({element: 'strong'});
@@ -425,7 +456,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                 var left = left - bb.getDOMNode().offsetWidth / 2;
 
-                var top = top - bb.getDOMNode().offsetHeight + (direction === 0 ? 30 : 0);
+                var top = top - bb.getDOMNode().offsetHeight + (direction === 0 ? 40 : 0);
 
                 return [left, top];
             }
@@ -615,41 +646,158 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
             );
 
             function applyStyle(event) {
-                debugger;
-                editor.applyStyle(style);
+                var btnInst = event.target;
+
+                var btnId = btnInst.get('srcNode').get('id');
+
+                var style;
+
+                Y.Array.some(
+                    elements,
+                    function(item, index) {
+                        if (item.name === btnId) {
+                            style = item.style;
+
+                            return true;
+                        }
+                    }
+                );
+
+                if (style) {
+                    if (btnInst.get('pressed')) {
+                        editor.applyStyle(style);
+                    }
+                    else {
+                        editor.removeStyle(style);
+                    }
+                }
             }
 
-            var strongButton = new Y.ToggleButton({
-                srcNode: '#strong',
-                on: {
-                    'click': applyStyle
-                }
-            }).render();
+            function handleLink(event) {
+                function getSelectedLink(editor) {
+                    var selection = editor.getSelection();
 
-            var emButton = new Y.ToggleButton({
-                srcNode: '#em',
-                on: {
-                    'click': applyStyle
-                }
-            }).render();
+                    var selectedElement = selection.getSelectedElement();
 
-            var uButton = new Y.ToggleButton({
-                srcNode: '#u',
-                on: {
-                    'click': applyStyle
-                }
-            }).render();
+                    if (selectedElement && selectedElement.is('a')){
+                        return selectedElement;
+                    }
 
-            var aButton = new Y.ToggleButton({
-                srcNode: '#a',
-                on: {
-                    'click': applyStyle
+                    var range = selection.getRanges()[0];
+
+                    if (range) {
+                        range.shrink( CKEDITOR.SHRINK_TEXT );
+
+                        return editor.elementPath(range.getCommonAncestor()).contains('a', 1);
+                    }
+
+                    return null;
                 }
-            }).render();
+
+                function createLink(URI) {
+                    var selection = editor.getSelection();
+
+                    var range = selection.getRanges()[ 0 ];
+
+                    if (range.collapsed) {
+                        var text = new CKEDITOR.dom.text(URI, editor.document);
+                        range.insertNode(text);
+                        range.selectNodeContents(text);
+                    }
+
+                    var style = new CKEDITOR.style({
+                        element: 'a',
+                        attributes: {
+                            href: URI,
+                            'data-cke-saved-href': URI
+                        }
+                    });
+
+                    style.type = CKEDITOR.STYLE_INLINE;
+                    style.applyToRange(range, editor);
+                    range.select();
+                }
+
+                function updateLink(URI) {
+                    
+                }
+
+                var btnInst = event.target;
+
+                if (btnInst.get('pressed')) {
+                    var selection = editor.getSelection();
+                    var ranges = selection.getRanges();
+
+                    Y.one('#mainButtons').addClass('hide');
+                    Y.one('#inputWrapper').removeClass('hide');
+                    Y.one('#linkInput').focus();
+
+                    createLink('/');
+
+                    debugger;
+
+                    var element = getSelectedLink(editor);
+                }
+                else {
+                    var style = new CKEDITOR.style({
+                        alwaysRemoveElement: 1,
+                        element: 'a',
+                        type: CKEDITOR.STYLE_INLINE
+                    });
+
+                    editor.removeStyle(style);
+                }
+            }
+
+            function handleCloseLink() {
+                window.overlay.hide();
+            }
+
+            var buttons = {
+                strong: new Y.ToggleButton({
+                    srcNode: '#strong',
+                    on: {
+                        'click': applyStyle
+                    }
+                }).render(),
+
+                em: new Y.ToggleButton({
+                    srcNode: '#em',
+                    on: {
+                        'click': applyStyle
+                    }
+                }).render(),
+
+                u: new Y.ToggleButton({
+                    srcNode: '#u',
+                    on: {
+                        'click': applyStyle
+                    }
+                }).render(),
+
+                a: new Y.ToggleButton({
+                    srcNode: '#a',
+                    on: {
+                        'click': handleLink
+                    }
+                }).render()
+            };
+
+            Y.one('.input-clear-container').on('click', handleCloseLink);
 
             window.overlay = new Y.Overlay({
                 srcNode:"#overlay",
-                visible: false
+                visible: false,
+                on: {
+                    'visibleChange': function(event) {
+                        if (!event.newVal) {
+                            Y.one('#inputWrapper').addClass('hide');
+                            Y.one('#mainButtons').removeClass('hide');
+
+                            Y.one('#linkInput').set('value', '');
+                        }
+                    }
+                }
             }).render();
 
             window.add = new Y.Overlay({
@@ -701,11 +849,23 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
 
     <div id="overlay" class="btn-group">
-        <button id="strong" class="btn"><i class="icon-bold"></i></button>
-        <button id="em" class="btn"><i class="icon-italic"></i></button>
-        <button id="u" class="btn"><i class="icon-magnet"></i></button>
-        <button id="a" class="btn"><i class="icon-share"></i></button>
+        <div id="mainButtons">
+            <button id="strong" class="btn"><i class="icon-bold"></i></button>
+            <button id="em" class="btn"><i class="icon-italic"></i></button>
+            <button id="u" class="btn"><i class="icon-magnet"></i></button>
+            <button id="a" class="btn"><i class="icon-share"></i></button>
+        </div>
+
+        <div id="inputWrapper" class="row input-wrapper hide">
+            <div class="span10 input-container">
+                <input class="input-large" id="linkInput" type="text" placeholder="Type or paste link here">
+            </div>
+            <div class="span2 input-clear-container">
+                <span id="removeLink"><i class="icon-remove"></i></span>
+            </div>
+        </div>
     </div>
+
 
     <div id="add-wrapper" class="btn-group">
       <button id="Add" type="button" class="btn btn-default">+</button>
