@@ -588,13 +588,14 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                     var selectionData = getSelectionData();
 
-                    console.log(selectionData);
+                    // console.log(selectionData);
 
                     if (selectionData.region) {
                         showAdd(editorNode.offsetLeft - 30, selectionData.region.top - 5);
                     }
                     else {
                         hideAdd();
+                        hideToolbar();
 
                         return;
                     }
@@ -697,7 +698,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 function createLink(URI) {
                     var selection = editor.getSelection();
 
-                    var range = selection.getRanges()[ 0 ];
+                    var range = selection.getRanges()[0];
 
                     if (range.collapsed) {
                         var text = new CKEDITOR.dom.text(URI, editor.document);
@@ -719,7 +720,22 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 }
 
                 function updateLink(URI) {
-                    
+                    var element = getSelectedLink(editor);
+
+                    element.setAttributes({
+                        href: URI,
+                        'data-cke-saved-href': URI
+                    });
+                }
+
+                function removeLink() {
+                    var style = new CKEDITOR.style({
+                        alwaysRemoveElement: 1,
+                        element: 'a',
+                        type: CKEDITOR.STYLE_INLINE
+                    });
+
+                    editor.removeStyle(style);
                 }
 
                 var btnInst = event.target;
@@ -730,27 +746,44 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                     Y.one('#mainButtons').addClass('hide');
                     Y.one('#inputWrapper').removeClass('hide');
-                    Y.one('#linkInput').focus();
+
+                    var linkInput = Y.one('#linkInput');
+                    linkInput.focus();                    
 
                     createLink('/');
 
-                    debugger;
+                    linkInput.once('blur', function(event) {
+                        console.log('blur');
+                        var link = linkInput.get('value');
 
-                    var element = getSelectedLink(editor);
+                        if (link) {
+                            updateLink(link);
+                        }
+                        else {
+                            removeLink();
+                        }
+
+                        // debugger;
+
+                        var range = editor.getSelection().getRanges()[0];
+
+                        var endContainer = range.endContainer;
+                        var endOffset = range.endOffset;
+
+                        range = editor.createRange();
+                        range.moveToPosition(endContainer, endOffset);
+                        range.select();
+                    });
                 }
                 else {
-                    var style = new CKEDITOR.style({
-                        alwaysRemoveElement: 1,
-                        element: 'a',
-                        type: CKEDITOR.STYLE_INLINE
-                    });
-
-                    editor.removeStyle(style);
+                    removeLink();
                 }
             }
 
             function handleCloseLink() {
+                console.log('close link');
                 window.overlay.hide();
+                handleUI();
             }
 
             var buttons = {
@@ -842,7 +875,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
             Y.one('#testBtn').on('click', function() {
                 var caretXY = getCaretXY();
 
-                console.log(caretXY);
+                // console.log(caretXY);
             });
         });
     </script>
