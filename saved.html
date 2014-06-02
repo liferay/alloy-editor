@@ -408,8 +408,8 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                 region.direction = direction;
 
-                region.height = bottom - top + docScrollY;
-                region.width = right - left + docScrollX;
+                region.height = bottom - top;
+                region.width = right - left;
 
                 if (clientRects.length) {
                     var startRect = clientRects[0];
@@ -632,7 +632,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                     // console.log(selectionData);
 
                     if (selectionData.region) {
-                        showAdd(editorNode.offsetLeft - 30, selectionData.region.top - 5);
+                        showAdd(editorNode.offsetLeft - 30, selectionData.region.top);
                     }
                     else {
                         hideAdd();
