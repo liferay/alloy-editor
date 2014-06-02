@@ -216,7 +216,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
         YUI({
             filter: 'raw'
-        }).use('node', 'overlay', 'event-mouseenter', 'dom-screen', 'node-event-simulate', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', function(Y) {
+        }).use('node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', function(Y) {
 
             var editor = CKEDITOR.inline('editable');
 
@@ -252,37 +252,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 );
             }
 
-            function getCaretXY(selection) {
-                var bookmarkNodeEl,
-                    bookmarks,
-                    ranges,
-                    data,
-                    result;
-
-                selection = selection || editor.getSelection();
-
-                if (isSelectionEmpty(selection)) {
-                    ranges = selection.getRanges();
-                    bookmarks = selection.createBookmarks();
-                    bookmarkNodeEl = bookmarks[0].startNode.$;
-
-                    bookmarkNodeEl.style.display = 'inline-block';
-
-                    bookmarkNodeEl = Y.one(bookmarkNodeEl);
-
-                    result = bookmarkNodeEl.getXY();
-
-                    bookmarkNodeEl.remove();
-                }
-                else {
-                    data = getSelectionData();
-
-                    result = [data.region.left, data.region.top];
-                }
-
-                return result;
-            }
-
             function showAdd(x, y) {
                 window.add.set('xy', [x, y]);
 
@@ -291,14 +260,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
             function hideAdd() {
                 window.add.hide();
-            }
-
-            function isSelectionEmpty(selection) {
-                var sel = selection || editor.getSelection(),
-                    ranges = sel.getRanges(),
-                    selectionIsEmpty = sel.getType() == CKEDITOR.SELECTION_NONE || (ranges.length == 1 && ranges[0].collapsed);
-
-                return selectionIsEmpty;
             }
 
             function showToolbar(left, top, direction) {
@@ -311,130 +272,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
             function hideToolbar(argument) {
                 window.overlay.hide();
-            }
-
-            function getDocScrollXY() {
-                var docDefaultView = document.defaultView,
-                    pageXOffset = (docDefaultView) ? docDefaultView.pageYOffset : 0,
-                    pageYOffset = (docDefaultView) ? docDefaultView.pageXOffset : 0;
-
-                return [
-                    Math.max(document['documentElement'].scrollLeft, document.body.scrollLeft, pageXOffset),
-                    Math.max(document['documentElement'].scrollTop, document.body.scrollTop, pageYOffset)
-                ];
-            }
-
-            function getSelectionRegion(selection) {
-                selection = selection || editor.getSelection();
-
-                var nativeSelection = selection.getNative();
-
-                if (!nativeSelection) {
-                    return;
-                }
-
-                var region;
-
-                if (nativeSelection.createRange) {
-                    var range = nativeSelection.createRange(),
-                        clientRects = range.getClientRects();
-                }
-                else {
-                    var rangeCount = nativeSelection.rangeCount,
-                        clientRects = nativeSelection.getRangeAt(0).getClientRects();
-                }
-
-                var left = Infinity, right = -Infinity, top = Infinity, bottom = 0, direction = 0 /* top to bottom */;
-
-                if (clientRects.length === 0) {
-                    var bookmarks = selection.createBookmarks();
-                    bookmarkNodeEl = bookmarks[0].startNode.$;
-
-                    bookmarkNodeEl.style.display = 'inline-block';
-
-                    var region = new CKEDITOR.dom.element(bookmarkNodeEl).getClientRect();
-
-                    bottom = region.bottom;
-                    left = region.left;
-                    right = region.right;
-                    top = region.top;
-
-                    bookmarkNodeEl.remove();
-                }
-                else {
-                    Y.Array.each(
-                        clientRects,
-                        function(item, index, collection) {
-                            if (item.left < left) {
-                                left = item.left;
-                            }
-
-                            if (item.right > right) {
-                                right = item.right;
-                            }
-
-                            if (item.top < top) {
-                                top = item.top;
-                            }
-
-                            if (item.bottom > bottom) {
-                                bottom = item.bottom;
-                            }
-                        }
-                    );
-                }
-
-                var docScrollXY = getDocScrollXY();
-
-                var docScrollX = docScrollXY[0];
-                var docScrollY = docScrollXY[1];
-
-                region = {
-                    bottom: docScrollY + bottom,
-                    left: docScrollX + left,
-                    right: docScrollX + right,
-                    top: docScrollY + top
-                };
-
-                console.log('despues: left, top, right, bottom', region);
-
-                if (nativeSelection.anchorNode && nativeSelection.anchorNode.compareDocumentPosition) {
-                    position = nativeSelection.anchorNode.compareDocumentPosition(nativeSelection.focusNode);
-
-                    if (!position && nativeSelection.anchorOffset > nativeSelection.focusOffset || position === Node.DOCUMENT_POSITION_PRECEDING) {
-                        direction = 1;
-                    }
-                }
-
-                region.direction = direction;
-
-                region.height = bottom - top;
-                region.width = right - left;
-
-                if (clientRects.length) {
-                    var startRect = clientRects[0];
-                    var endRect = clientRects[clientRects.length - 1];
-
-                    region.endRect = {
-                        bottom: docScrollY + endRect.bottom,
-                        height: endRect.height,
-                        left: docScrollX + endRect.left,
-                        right: docScrollX + endRect.right,
-                        top: docScrollY + endRect.top,
-                        width: endRect.width
-                    };
-
-                    region.startRect = {
-                        bottom: docScrollY + startRect.bottom,
-                        height: startRect.height,
-                        left: docScrollX + startRect.left,
-                        right: docScrollX + startRect.right,
-                        top: docScrollY + startRect.top,
-                        width: startRect.width
-                    };
-                }
-
-                return region;
             }
 
             function updateUI() {
@@ -458,23 +295,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                 // console.log('selection has been made bold: ', result);
 
-            }
-
-            function getSelectionData() {
-                var selection = editor.getSelection();
-
-                var nativeSelection = selection.getNative();
-
-                var result = {
-                    element: selection.getSelectedElement(),
-                    text: selection.getSelectedText()
-                };
-
-                result.region = getSelectionRegion(selection);
-
-                updateUI();
-
-                return result;
             }
 
             function getToolbarXYRegion(selectionData) {
@@ -505,64 +325,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
             Y.one('#editable').on('dragstart', function(event) {
                 console.log('dragstart');
             });
-
-            function createSelectionFromPoint(x, y) {
-                createSelectionFromRange(x, y, x, y);
-            }
-
-            function createSelectionFromRange(startX, startY, endX, endY) {
-                var start, end, range;
-
-                var doc = Y.config.doc;
-
-                if (Y.Lang.isFunction(doc.caretPositionFromPoint)) {
-                    start = doc.caretPositionFromPoint(startX, startY);
-                    end = doc.caretPositionFromPoint(endX, endY);
-
-                    startContainer = start.offsetNode;
-                    endContainer = end.offsetNode;
-
-                    startOffset = start.offset;
-                    endOffset = end.offset;
-
-                    range = editor.createRange();
-                }
-                else if (Y.Lang.isFunction(doc.caretRangeFromPoint)) {
-                    start = doc.caretRangeFromPoint(startX, startY);
-                    end = doc.caretRangeFromPoint(endX, endY);
-
-                    startContainer = start.startContainer;
-                    endContainer = end.startContainer;
-
-                    startOffset = start.startOffset;
-                    endOffset = end.startOffset;
-
-                    range = editor.createRange();
-                }
-
-                if (range && document.getSelection) {
-                    range.setStart(new CKEDITOR.dom.node(startContainer), startOffset);
-                    range.setEnd(new CKEDITOR.dom.node(endContainer), endOffset);
-
-                    editor.getSelection().selectRanges([range]);
-                }
-                else if (Y.Lang.isFunction(doc.body.createTextRange)) {
-                    var sel = editor.getSelection();
-
-                    sel.unlock();
-
-                    range = doc.body.createTextRange();
-                    range.moveToPoint(startX, startY);
-
-                    var endRange = range.duplicate();
-                    endRange.moveToPoint(endX, endY);
-
-                    range.setEndPoint('EndToEnd', endRange);
-                    range.select();
-
-                    editor.getSelection().lock();
-                }
-            }
 
             dropbox = document.querySelector('#editable');
             dropbox.addEventListener('dragenter', dragenter, false);
