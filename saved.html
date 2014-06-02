@@ -8,7 +8,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <meta charset="utf-8">
     <title>Advanced Editing</title>
 
-    <link href="http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!--[if IE 7]>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
+    <![endif]-->
 
     <style>
         body {
@@ -88,15 +94,21 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         }
 
         .input-clear-container {
-            width: 20px;
+            width: 40px;
         }
 
         #linkInput {
             margin: 5px 0 5px 0px;
+            width: 185px;
         }
 
         #mainButtons {
             margin: 5px;
+        }
+
+        .input-clear-container {
+            margin-left: -10px;
+            margin-top: 5px;
         }
 
     </style>
@@ -190,6 +202,8 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
             <li><strong>Service Module</strong> which supported the Command Module with propulsion, electrical power, oxygen and water</li>
             <li><strong>Lunar Module</strong> for landing on the Moon.</li>
         </ol>
+
+        <p></p>
 
         <p>After being sent to the Moon by the Saturn V&#39;s upper stage, the astronauts separated the spacecraft from it and travelled for three days until they entered into lunar orbit. Armstrong and Aldrin then moved into the Lunar Module and landed in the <a href="http://en.wikipedia.org/wiki/Mare_Tranquillitatis" title="Mare Tranquillitatis">Sea of Tranquility</a>. They stayed a total of about 21 and a half hours on the lunar surface. After lifting off in the upper part of the Lunar Module and rejoining Collins in the Command Module, they returned to Earth and landed in the <a href="http://en.wikipedia.org/wiki/Pacific_Ocean" title="Pacific Ocean">Pacific Ocean</a> on July 24.</p>
 
@@ -299,6 +313,17 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 window.overlay.hide();
             }
 
+            function getDocScrollXY() {
+                var docDefaultView = document.defaultView,
+                    pageXOffset = (docDefaultView) ? docDefaultView.pageYOffset : 0,
+                    pageYOffset = (docDefaultView) ? docDefaultView.pageXOffset : 0;
+
+                return [
+                    Math.max(document['documentElement'].scrollLeft, document.body.scrollLeft, pageXOffset),
+                    Math.max(document['documentElement'].scrollTop, document.body.scrollTop, pageYOffset)
+                ];
+            }
+
             function getSelectionRegion(selection) {
                 selection = selection || editor.getSelection();
 
@@ -316,40 +341,62 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 }
                 else {
                     var rangeCount = nativeSelection.rangeCount,
-                        clientRects;
-
-                    for (var i = 0; i < rangeCount; i++) {
-                        if (!clientRects) {
-                            clientRects = nativeSelection.getRangeAt(i).getClientRects();
-                        }
-                        else {
-                            clientRects.push(nativeSelection.getRangeAt(i).getClientRects());
-                        }
-                    }
+                        clientRects = nativeSelection.getRangeAt(0).getClientRects();
                 }
 
                 var left = Infinity, right = -Infinity, top = Infinity, bottom = 0, direction = 0 /* top to bottom */;
 
-                Y.Array.each(
-                    clientRects,
-                    function(item, index, collection) {
-                        if (item.left < left) {
-                            left = item.left;
-                        }
+                if (clientRects.length === 0) {
+                    var bookmarks = selection.createBookmarks();
+                    bookmarkNodeEl = bookmarks[0].startNode.$;
 
-                        if (item.right > right) {
-                            right = item.right;
-                        }
+                    bookmarkNodeEl.style.display = 'inline-block';
 
-                        if (item.top < top) {
-                            top = item.top;
-                        }
+                    var region = new CKEDITOR.dom.element(bookmarkNodeEl).getClientRect();
 
-                        if (item.bottom > bottom) {
-                            bottom = item.bottom;
+                    bottom = region.bottom;
+                    left = region.left;
+                    right = region.right;
+                    top = region.top;
+
+                    bookmarkNodeEl.remove();
+                }
+                else {
+                    Y.Array.each(
+                        clientRects,
+                        function(item, index, collection) {
+                            if (item.left < left) {
+                                left = item.left;
+                            }
+
+                            if (item.right > right) {
+                                right = item.right;
+                            }
+
+                            if (item.top < top) {
+                                top = item.top;
+                            }
+
+                            if (item.bottom > bottom) {
+                                bottom = item.bottom;
+                            }
                         }
-                    }
-                );
+                    );
+                }
+
+                var docScrollXY = getDocScrollXY();
+
+                var docScrollX = docScrollXY[0];
+                var docScrollY = docScrollXY[1];
+
+                region = {
+                    bottom: docScrollY + bottom,
+                    left: docScrollX + left,
+                    right: docScrollX + right,
+                    top: docScrollY + top
+                };
+
+                console.log('despues: left, top, right, bottom', region);
 
                 if (nativeSelection.anchorNode && nativeSelection.anchorNode.compareDocumentPosition) {
                     position = nativeSelection.anchorNode.compareDocumentPosition(nativeSelection.focusNode);
@@ -359,37 +406,31 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                     }
                 }
 
-                var docScrollX = window.editorNode.get('docScrollX');
-                var docScrollY = window.editorNode.get('docScrollY');
+                region.direction = direction;
+
+                region.height = bottom - top + docScrollY;
+                region.width = right - left + docScrollX;
 
                 if (clientRects.length) {
                     var startRect = clientRects[0];
                     var endRect = clientRects[clientRects.length - 1];
 
-                    region = {
-                        bottom: docScrollY + bottom,
-                        direction: direction,
-                        endRect: {
-                            bottom: docScrollY + endRect.bottom,
-                            height: endRect.height,
-                            left: docScrollX + endRect.left,
-                            right: docScrollX + endRect.right,
-                            top: docScrollY + endRect.top,
-                            width: endRect.width
-                        },
-                        height: bottom - top + docScrollY,
-                        left: docScrollX + left,
-                        right: docScrollX + right,
-                        top: docScrollY + top,
-                        startRect: {
-                            bottom: docScrollY + startRect.bottom,
-                            height: startRect.height,
-                            left: docScrollX + startRect.left,
-                            right: docScrollX + startRect.right,
-                            top: docScrollY + startRect.top,
-                            width: startRect.width
-                        },
-                        width: right - left + docScrollX
+                    region.endRect = {
+                        bottom: docScrollY + endRect.bottom,
+                        height: endRect.height,
+                        left: docScrollX + endRect.left,
+                        right: docScrollX + endRect.right,
+                        top: docScrollY + endRect.top,
+                        width: endRect.width
+                    };
+
+                    region.startRect = {
+                        bottom: docScrollY + startRect.bottom,
+                        height: startRect.height,
+                        left: docScrollX + startRect.left,
+                        right: docScrollX + startRect.right,
+                        top: docScrollY + startRect.top,
+                        width: startRect.width
                     };
                 }
 
@@ -748,12 +789,13 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                     Y.one('#inputWrapper').removeClass('hide');
 
                     var linkInput = Y.one('#linkInput');
-                    linkInput.focus();                    
+                    linkInput.focus();
 
                     createLink('/');
 
                     linkInput.once('blur', function(event) {
                         console.log('blur');
+                        // debugger;
                         var link = linkInput.get('value');
 
                         if (link) {
@@ -767,12 +809,19 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
                         var range = editor.getSelection().getRanges()[0];
 
-                        var endContainer = range.endContainer;
-                        var endOffset = range.endOffset;
+                        range.collapse();
 
-                        range = editor.createRange();
-                        range.moveToPosition(endContainer, endOffset);
                         range.select();
+                    });
+
+                    var handler = linkInput.on('keypress', function(event) {
+                        if (event.charCode === 13) {
+                            handler.detach();
+
+                            window.overlay.hide();
+
+                            // handleUI();
+                        }
                     });
                 }
                 else {
@@ -782,7 +831,11 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
             function handleCloseLink() {
                 console.log('close link');
+
+                Y.one('#linkInput').set('value');
+
                 window.overlay.hide();
+
                 handleUI();
             }
 
@@ -827,6 +880,9 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                             Y.one('#inputWrapper').addClass('hide');
                             Y.one('#mainButtons').removeClass('hide');
 
+                            console.log('hide toolbar');
+                        }
+                        else {
                             Y.one('#linkInput').set('value', '');
                         }
                     }
@@ -885,8 +941,8 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         <div id="mainButtons">
             <button id="strong" class="btn"><i class="icon-bold"></i></button>
             <button id="em" class="btn"><i class="icon-italic"></i></button>
-            <button id="u" class="btn"><i class="icon-magnet"></i></button>
-            <button id="a" class="btn"><i class="icon-share"></i></button>
+            <button id="u" class="btn"><i class="icon-underline"></i></button>
+            <button id="a" class="btn"><i class="icon-link"></i></button>
         </div>
 
         <div id="inputWrapper" class="row input-wrapper hide">
@@ -894,7 +950,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 <input class="input-large" id="linkInput" type="text" placeholder="Type or paste link here">
             </div>
             <div class="span2 input-clear-container">
-                <span id="removeLink"><i class="icon-remove"></i></span>
+                <button id="removeLink" class="btn"><i class="icon-remove"></i></button>
             </div>
         </div>
     </div>
