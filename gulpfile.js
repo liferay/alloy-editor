@@ -3,7 +3,10 @@ var wrap = require('gulp-wrap');
 var rename = require('gulp-rename');
 var path = require('path');
 
-console.log(path.resolve(__dirname + 'src/selection-region.js'));
+gulp.task('copy-js', function() {
+	return gulp.src(path.resolve(__dirname + '/src/*.js'))
+		.pipe(gulp.dest(path.resolve(__dirname + '/dist')));
+});
 
 gulp.task('selection-region-ckeditor-plugin', function() {
 	return gulp.src(path.resolve(__dirname + '/src/selection-region.js'))
@@ -12,4 +15,4 @@ gulp.task('selection-region-ckeditor-plugin', function() {
 	    .pipe(gulp.dest(path.resolve(__dirname + '/dist')));
 });
 
-gulp.task('default', ['selection-region-ckeditor-plugin']);
+gulp.task('default', ['copy-js', 'selection-region-ckeditor-plugin']);

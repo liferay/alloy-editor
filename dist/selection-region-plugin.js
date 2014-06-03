@@ -4,18 +4,21 @@
 	function SelectionRegion() {}
 
 SelectionRegion.prototype = {
-    createSelectionFromPoint: function(editor, x, y) {
-        this.createSelectionFromRange(editor, x, y, x, y);
+    createSelectionFromPoint: function(x, y) {
+        this.createSelectionFromRange(x, y, x, y);
     },
 
-    createSelectionFromRange: function(editor, startX, startY, endX, endY) {
-        var end,
+    createSelectionFromRange: function(startX, startY, endX, endY) {
+        var editor,
+            end,
             endContainer,
             endOffset,
             range,
             start,
             startContainer,
             startOffset;
+
+        editor = this.editor;
 
         if (typeof document.caretPositionFromPoint == 'function') {
             start = document.caretPositionFromPoint(startX, startY);
@@ -27,7 +30,7 @@ SelectionRegion.prototype = {
             startOffset = start.offset;
             endOffset = end.offset;
 
-            range = editor.createRange();
+            range = this.createRange();
         }
         else if (typeof document.caretRangeFromPoint == 'function') {
             start = document.caretRangeFromPoint(startX, startY);
@@ -39,7 +42,7 @@ SelectionRegion.prototype = {
             startOffset = start.startOffset;
             endOffset = end.startOffset;
 
-            range = editor.createRange();
+            range = this.createRange();
         }
 
         if (range && document.getSelection) {
@@ -49,7 +52,7 @@ SelectionRegion.prototype = {
             editor.getSelection().selectRanges([range]);
         }
         else if (typeof document.body.createTextRange == 'function') {
-            var sel = editor.getSelection();
+            var sel = this.getSelection();
 
             sel.unlock();
 
@@ -66,7 +69,7 @@ SelectionRegion.prototype = {
         }
     },
 
-    getCaretRegion: function(editor) {
+    getCaretRegion: function() {
         var bookmarkNodeEl,
             bookmarks,
             docScrollX,
@@ -75,8 +78,8 @@ SelectionRegion.prototype = {
             region,
             selection;
 
-        if (this.isSelectionEmpty(editor)) {
-            selection = editor.getSelection();
+        if (this.isSelectionEmpty()) {
+            selection = this.getSelection();
 
             bookmarks = selection.createBookmarks();
             bookmarkNodeEl = bookmarks[0].startNode.$;
@@ -99,16 +102,16 @@ SelectionRegion.prototype = {
             };
         }
         else {
-            region = this.getSelectionRegion(editor);
+            region = this.getSelectionRegion();
         }
 
         return region;
     },
 
-    getCaretXY: function(editor) {
+    getCaretXY: function() {
         var region;
 
-        region = this.getCaretRegion(editor);
+        region = this.getCaretRegion();
 
         return [
             region.left,
@@ -116,11 +119,11 @@ SelectionRegion.prototype = {
         ];
     },
 
-    getSelectionData: function(editor) {
+    getSelectionData: function() {
         var result,
             selection;
 
-        selection = editor.getSelection();
+        selection = this.getSelection();
 
         result = {
             element: selection.getSelectedElement(),
@@ -132,20 +135,20 @@ SelectionRegion.prototype = {
         return result;
     },
 
-    getSelectionRegion: function(editor) {
+    getSelectionRegion: function() {
         var direction,
             region;
 
         direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
 
-        if (this.isSelectionEmpty(editor)) {
-            region = this.getCaretRegion(editor);
+        if (this.isSelectionEmpty()) {
+            region = this.getCaretRegion();
         }
         else {
-            region = this.getClientRectsRegion(editor);
+            region = this.getClientRectsRegion();
         }
 
-        region.direction = this._getSelectionDirection(editor);
+        region.direction = this._getSelectionDirection();
 
         region.height = region.bottom - region.top;
         region.width = region.right - region.left;
@@ -153,15 +156,15 @@ SelectionRegion.prototype = {
         return region;
     },
 
-    isSelectionEmpty: function(editor) {
+    isSelectionEmpty: function() {
         var ranges,
-            selection = editor.getSelection();
+            selection = this.getSelection();
 
         return (selection.getType() === CKEDITOR.SELECTION_NONE) ||
             ((ranges = selection.getRanges()) && ranges.length === 1 && ranges[0].collapsed);
     },
 
-    getClientRectsRegion: function(editor) {
+    getClientRectsRegion: function() {
         var bottom,
             clientRects,
             docScrollX,
@@ -181,7 +184,7 @@ SelectionRegion.prototype = {
             startRect,
             top;
 
-        selection = editor.getSelection();
+        selection = this.getSelection();
         nativeSelection = selection.getNative();
 
         if (nativeSelection.createRange) {
@@ -218,7 +221,7 @@ SelectionRegion.prototype = {
             }
         }
 
-        docScrollXY = this.getDocScrollXY();
+        docScrollXY = this._getDocScrollXY();
         docScrollX = docScrollXY[0];
         docScrollY = docScrollXY[1];
 
@@ -275,14 +278,14 @@ SelectionRegion.prototype = {
         ];
     },
 
-    _getSelectionDirection: function(editor) {
+    _getSelectionDirection: function() {
         var anchorNode,
             direction,
             nativeSelection,
             position,
             selection;
 
-        selection = editor.getSelection();
+        selection = this.getSelection();
         nativeSelection = selection.getNative();
 
         direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
