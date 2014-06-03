@@ -1,8 +1,6 @@
-var CKDOMElement = CKEDITOR.dom.element;
+function SelectionRegion() {}
 
-function Base() {}
-
-Base.prototype = {
+SelectionRegion.prototype = {
     createSelectionFromPoint: function(editor, x, y) {
         this.createSelectionFromRange(editor, x, y, x, y);
     },
@@ -135,7 +133,7 @@ Base.prototype = {
         var direction,
             region;
 
-        direction = Base.SELECTION_TOP_TO_BOTTOM;
+        direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
 
         if (this.isSelectionEmpty(editor)) {
             region = this.getCaretRegion(editor);
@@ -284,19 +282,16 @@ Base.prototype = {
         selection = editor.getSelection();
         nativeSelection = selection.getNative();
 
-        direction = Base.SELECTION_TOP_TO_BOTTOM;
+        direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
 
         if ((anchorNode = nativeSelection.anchorNode) && anchorNode.compareDocumentPosition) {
             position = anchorNode.compareDocumentPosition(nativeSelection.focusNode);
 
             if (!position && nativeSelection.anchorOffset > nativeSelection.focusOffset || position === Node.DOCUMENT_POSITION_PRECEDING) {
-                direction = Base.SELECTION_BOTTOM_TO_TOP;
+                direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
             }
         }
 
         return direction;
     }
 };
-
-Base.SELECTION_TOP_TO_BOTTOM = 0;
-Base.SELECTION_BOTTOM_TO_TOP = 1;

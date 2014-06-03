@@ -115,7 +115,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
 
-    <script src="ckeditor/ckeditor.js"></script>
+    <script src="lib/ckeditor/ckeditor.js"></script>
+    <script src="dist/selection-region-plugin.js"></script>
+
     <style>
 
         #editable
@@ -216,7 +218,8 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
         YUI({
             filter: 'raw'
-        }).use('node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', function(Y) {
+        }).use('node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', 'lao-editor', function(Y) {
+            debugger;
 
             var editor = CKEDITOR.inline('editable');
 
@@ -228,8 +231,9 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
                 // Remove unnecessary plugins to make the editor simpler.
                 editor.config.allowedContent = true;
                 editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
+                editor.config.extraPlugins = 'selectionregion';
 
-                // debugger;
+                debugger;
 
                 Y.Array.each(
                     elements,
