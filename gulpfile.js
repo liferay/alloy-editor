@@ -7,9 +7,9 @@ console.log(path.resolve(__dirname + 'src/selection-region.js'));
 
 gulp.task('selection-region-ckeditor-plugin', function() {
 	return gulp.src(path.resolve(__dirname + '/src/selection-region.js'))
-		.pipe(wrap({ src: 'templates/selection-region-ckeditor-plugin.template'}))
+		.pipe(wrap({ src: path.resolve(__dirname + '/templates/selection-region-ckeditor-plugin.template')}))
 	    .pipe(rename('selection-region-plugin.js'))
-	    .pipe(gulp.dest('./dist'));
+	    .pipe(gulp.dest(path.resolve(__dirname + '/dist')));
 });
 
 gulp.task('default', ['selection-region-ckeditor-plugin']);

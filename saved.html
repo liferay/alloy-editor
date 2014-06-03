@@ -225,11 +225,14 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
             window.editor = editor;
 
+            debugger;
+
             var elements = ['strong', 'em', 'u', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'table', 'img'];
 
             editor.on('configLoaded', function() {
-                // Remove unnecessary plugins to make the editor simpler.
                 editor.config.allowedContent = true;
+
+                // Remove unnecessary plugins to make the editor simpler.
                 editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
                 editor.config.extraPlugins = 'selectionregion';
 

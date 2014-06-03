@@ -309,9 +309,9 @@ SelectionRegion.prototype = {
                 debugger;
                 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-                for (var attr in SelectionRegion) {
-                    if (hasOwnProperty.call(SelectionRegion, attr) && typeof editor[attr] == 'undefined') {
-                        editor[attr] = SelectionRegion[attr];
+                for (var attr in SelectionRegion.prototype) {
+                    if (hasOwnProperty.call(SelectionRegion.prototype, attr) && typeof editor[attr] == 'undefined') {
+                        editor[attr] = SelectionRegion.prototype[attr];
                     }
                 }
             }
