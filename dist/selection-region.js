@@ -46,7 +46,7 @@ SelectionRegion.prototype = {
             range.setStart(new CKEDITOR.dom.node(startContainer), startOffset);
             range.setEnd(new CKEDITOR.dom.node(endContainer), endOffset);
 
-            editor.getSelection().selectRanges([range]);
+            this.getSelection().selectRanges([range]);
         }
         else if (typeof document.body.createTextRange == 'function') {
             var sel = this.getSelection();
@@ -62,7 +62,7 @@ SelectionRegion.prototype = {
             range.setEndPoint('EndToEnd', endRange);
             range.select();
 
-            editor.getSelection().lock();
+            this.getSelection().lock();
         }
     },
 
