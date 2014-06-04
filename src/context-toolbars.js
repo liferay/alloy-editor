@@ -184,7 +184,7 @@
                             var dt = e.dataTransfer;
                             var files = dt.files;
 
-                            createSelectionFromPoint(e.clientX, e.clientY);
+                            editor.createSelectionFromPoint(e.clientX, e.clientY);
 
                             handleFiles(files);
                         }
@@ -310,7 +310,6 @@
 
                             if (btnInst.get('pressed')) {
                                 var selection = editor.getSelection();
-                                var ranges = selection.getRanges();
 
                                 Y.one('#mainButtons').addClass('hide');
                                 Y.one('#inputWrapper').removeClass('hide');
