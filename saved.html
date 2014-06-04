@@ -54,14 +54,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             position: absolute;
         }
         /* Overlay Look/Feel */
-        .yui3-overlay-content {
+        .yui3-toolbarstyles-content {
             background-color: #ECEFFB;
             border: 1px solid #9EA8C6;
             border-radius: 3px;
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
         }
 
-        .yui3-overlay-content .yui3-widget-hd {
+        .yui3-toolbarstyles-content .yui3-widget-hd {
             background-color: #B6BFDA;
             color: #30418C;
             font-size: 120%;
@@ -70,11 +70,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             border-radius: 2px 2px 0 0;
         }
 
-        .yui3-overlay-content .yui3-widget-bd {
+        .yui3-toolbarstyles-content .yui3-widget-bd {
             padding: 0.4em 0.6em 0.5em;
         }
 
-        .yui3-overlay-content .yui3-widget-ft {
+        .yui3-toolbarstyles-content .yui3-widget-ft {
             background-color:#DFE3F5;
             padding: 0.4em 0.6em 0.5em;
             border-radius: 0 0 2px 2px;
@@ -117,6 +117,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     <script src="lib/ckeditor/ckeditor.js"></script>
     <script src="dist/selection-region-plugin.js"></script>
+    <script src="dist/toolbar-styles.js"></script>
     <script src="dist/context-toolbars.js"></script>
 
     <style>
@@ -217,8 +218,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
     <script>
         CKEDITOR.disableAutoInline = true;
 
-        debugger;
-
         var editor = CKEDITOR.inline('editable');
 
         window.editor = editor;
@@ -233,14 +232,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
     </script>
 
 
-    <div id="overlay" class="btn-group">
-        <div id="mainButtons">
-            <button id="strong" class="btn"><i class="icon-bold"></i></button>
-            <button id="em" class="btn"><i class="icon-italic"></i></button>
-            <button id="u" class="btn"><i class="icon-underline"></i></button>
-            <button id="a" class="btn"><i class="icon-link"></i></button>
-        </div>
-
+    <div id="overlay">
         <div id="inputWrapper" class="row input-wrapper hide">
             <div class="span10 input-container">
                 <input class="input-large" id="linkInput" type="text" placeholder="Type or paste link here">

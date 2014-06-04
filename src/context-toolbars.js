@@ -4,7 +4,7 @@
         {
             init: function(editor) {
                 YUI().use(
-                    'node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate',
+                    'node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', 'toolbar-styles',
                     function(Y) {
                         var editorNode = Y.one(editor.element.$);
 
@@ -76,7 +76,7 @@
                                         }
                                     }
 
-                                    showToolbar(x, y, direction);
+                                    overlay.showAtPoint(x, y, direction);
                                 }
                             },
                             50
@@ -101,57 +101,8 @@
                             add.hide();
                         }
 
-                        function showToolbar(left, top, direction) {
-                            var xy = getToolbarXYPoint(left, top, direction);
-
-                            overlay.set('xy', xy);
-
-                            overlay.show();
-                        }
-
                         function hideToolbar() {
                             overlay.hide();
-                        }
-
-                        function updateUI() {
-                            var path = editor.elementPath();
-
-                            Y.Array.each(
-                                elements,
-                                function(item, index, collection) {
-                                    var result = item.style.checkActive(path, editor);
-
-                                    var btnInst = buttons[item.name];
-
-                                    if (btnInst) {
-                                        btnInst.set('pressed', !!result);
-                                    }
-                                }
-                            );
-                        }
-
-                        function getToolbarXYRegion(selectionData) {
-                            var bb = overlay.get('boundingBox');
-
-                            var selectionWidth = selectionData.region.right - selectionData.region.left;
-
-                            var halfSelection = selectionWidth / 2;
-
-                            var left = editorNode.get('docScrollX') + 10 + selectionData.region.left - bb.getDOMNode().offsetWidth / 2;
-
-                            var top = selectionData.region.top + editorNode.get('docScrollY') - bb.getDOMNode().offsetHeight;
-
-                            return [left + halfSelection, top];
-                        }
-
-                        function getToolbarXYPoint(left, top, direction) {
-                            var bb = overlay.get('boundingBox');
-
-                            var left = left - bb.getDOMNode().offsetWidth / 2;
-
-                            var top = top - bb.getDOMNode().offsetHeight + (direction === 0 ? 40 : 0);
-
-                            return [left, top];
                         }
 
                         Y.one('#editable').on('dragstart', function(event) {
@@ -212,34 +163,6 @@
                             }
 
                             return false;
-                        }
-
-                        function applyStyle(event) {
-                            var btnInst = event.target;
-
-                            var btnId = btnInst.get('srcNode').get('id');
-
-                            var style;
-
-                            Y.Array.some(
-                                elements,
-                                function(item, index) {
-                                    if (item.name === btnId) {
-                                        style = item.style;
-
-                                        return true;
-                                    }
-                                }
-                            );
-
-                            if (style) {
-                                if (btnInst.get('pressed')) {
-                                    editor.applyStyle(style);
-                                }
-                                else {
-                                    editor.removeStyle(style);
-                                }
-                            }
                         }
 
                         function handleLink(event) {
@@ -365,54 +288,12 @@
                             handleUI();
                         }
 
-                        var buttons = {
-                            strong: new Y.ToggleButton({
-                                srcNode: '#strong',
-                                on: {
-                                    'click': applyStyle
-                                }
-                            }).render(),
-
-                            em: new Y.ToggleButton({
-                                srcNode: '#em',
-                                on: {
-                                    'click': applyStyle
-                                }
-                            }).render(),
-
-                            u: new Y.ToggleButton({
-                                srcNode: '#u',
-                                on: {
-                                    'click': applyStyle
-                                }
-                            }).render(),
-
-                            a: new Y.ToggleButton({
-                                srcNode: '#a',
-                                on: {
-                                    'click': handleLink
-                                }
-                            }).render()
-                        };
-
                         Y.one('.input-clear-container').on('click', handleCloseLink);
 
-                        var overlay = new Y.Overlay({
+                        var overlay = new Y.ToolbarStyles({
+                            editor: editor,
                             srcNode: '#overlay',
-                            visible: false,
-                            on: {
-                                'visibleChange': function(event) {
-                                    if (!event.newVal) {
-                                        Y.one('#inputWrapper').addClass('hide');
-                                        Y.one('#mainButtons').removeClass('hide');
-                                    }
-                                    else {
-                                        updateUI();
-
-                                        Y.one('#linkInput').set('value', '');
-                                    }
-                                }
-                            }
+                            visible: false
                         }).render();
 
                         var add = new Y.Overlay({

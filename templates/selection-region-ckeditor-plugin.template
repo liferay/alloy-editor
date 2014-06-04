@@ -10,7 +10,6 @@
         'selectionregion',
         {
             init: function(editor) {
-                debugger;
                 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
                 for (var attr in SelectionRegion.prototype) {
