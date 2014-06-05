@@ -1,15 +1,9 @@
 YUI.add('toolbar-styles', function (Y) {
     var Lang = Y.Lang,
         YArray = Y.Array,
+        YObject = Y.Object,
 
-        BUTTON_STYLE = {
-            b: 'strong',
-            i: 'em',
-            u: 'u',
-            a: 'a'
-        };
-
-    var ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition], {
+    ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition], {
         initializer: function() {
             var instance = this,
                 styles;
@@ -21,9 +15,12 @@ YUI.add('toolbar-styles', function (Y) {
             YArray.each(
                 instance.STYLES,
                 function(item) {
-                    styles[item] = new CKEDITOR.style({
-                        element: item
-                    });
+                    styles[item] = {
+                        name: item,
+                        style: new CKEDITOR.style({
+                            element: item
+                        })
+                    }
                 }
             );
 
@@ -77,7 +74,7 @@ YUI.add('toolbar-styles', function (Y) {
                     if (Lang.isString(fun)) {
                         fun = Y.rbind(instance[fun], instance, {
                             button: item,
-                            style: BUTTON_STYLE[item]
+                            style: item
                         });
                     }
 
@@ -107,10 +104,10 @@ YUI.add('toolbar-styles', function (Y) {
                 editor = this.get('editor');
 
                 if (btnInst.get('pressed')) {
-                    CKEDITOR.editor.applyStyle(style);
+                    editor.applyStyle(style);
                 }
                 else {
-                    CKEDITOR.editor.removeStyle(style);
+                    editor.removeStyle(style);
                 }
             }
         },
@@ -156,18 +153,21 @@ YUI.add('toolbar-styles', function (Y) {
         },
 
         _updateUI: function() {
-            var editor,
+            var instance = this,
+                editor,
                 path;
 
             editor = this.get('editor');
             path = editor.elementPath();
 
-            YArray.each(
+            YObject.each(
                 this._styles,
                 function(item) {
-                    var result = item.style.checkActive(path, editor);
+                    var btnInst,
+                        result;
 
-                    var btnInst = this._buttons[item.name];
+                    result = item.style.checkActive(path, editor);
+                    btnInst = instance._buttons[item.name];
 
                     if (btnInst) {
                         btnInst.set('pressed', !!result);
@@ -190,8 +190,8 @@ YUI.add('toolbar-styles', function (Y) {
         STYLES: ['strong', 'em', 'u', 'a'],
 
         BUTTONS_ACTIONS: {
-            'b': '_applyStyle',
-            'i': '_applyStyle',
+            'strong': '_applyStyle',
+            'em': '_applyStyle',
             'u': '_applyStyle',
             'a': '_handleLink'
         },
@@ -202,13 +202,13 @@ YUI.add('toolbar-styles', function (Y) {
         ATTRS: {
             buttons: {
                 validator: Lang.isArray,
-                value: ['b', 'i', 'u', 'a']
+                value: ['strong', 'em', 'u', 'a']
             },
 
             buttonsContent: {
                 value: {
-                    b: '<i class="icon-bold"></i>',
-                    i: '<i class="icon-italic"></i>',
+                    strong: '<i class="icon-bold"></i>',
+                    em: '<i class="icon-italic"></i>',
                     u: '<i class="icon-underline"></i>',
                     a: '<i class="icon-link"></i>'
                 }
