@@ -71,7 +71,7 @@ YUI.add('toolbar-styles', function (Y) {
                 instance.get('buttons'),
                 function(item) {
                     buttons[item] = new Y.ToggleButton({
-                        label: buttonsContent[item],
+                        labelHTML: buttonsContent[item],
                         on: {
                             'click': Y.bind(instance.BUTTONS_ACTIONS[item], instance, item)
                         },
