@@ -2,6 +2,7 @@ YUI.add('toolbar-styles', function (Y) {
     var Lang = Y.Lang,
         YArray = Y.Array,
         YObject = Y.Object,
+        YNode = Y.Node,
 
     ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition], {
         initializer: function() {
@@ -20,7 +21,7 @@ YUI.add('toolbar-styles', function (Y) {
                         style: new CKEDITOR.style({
                             element: item
                         })
-                    }
+                    };
                 }
             );
 
@@ -59,7 +60,7 @@ YUI.add('toolbar-styles', function (Y) {
 
             buttons = {};
 
-            buttonsContainer = Y.Node.create(instance.TPL_BUTTON_CONTAINER);
+            buttonsContainer = YNode.create(instance.TPL_BUTTON_CONTAINER);
 
             buttonsContent = instance.get('buttonsContent');
             contentBox = instance.get('contentBox');
@@ -69,7 +70,10 @@ YUI.add('toolbar-styles', function (Y) {
             YArray.each(
                 instance.get('buttons'),
                 function(item) {
-                    var fun = instance.BUTTONS_ACTIONS[item];
+                    var btnSrcNode,
+                        fun;
+
+                    fun = instance.BUTTONS_ACTIONS[item];
 
                     if (Lang.isString(fun)) {
                         fun = Y.rbind(instance[fun], instance, {
@@ -78,13 +82,21 @@ YUI.add('toolbar-styles', function (Y) {
                         });
                     }
 
+                    btnSrcNode = YNode.create(
+                        Lang.sub(instance.TPL_BUTTON, {
+                            content: buttonsContent[item]
+                        })
+                    );
+
                     buttons[item] = new Y.ToggleButton({
-                        labelHTML: buttonsContent[item],
+                        srcNode: btnSrcNode,
                         on: {
                             'click': fun
                         },
                         render: buttonsContainer
                     });
+
+                    buttonsContainer.appendChild(btnSrcNode);
                 }
             );
 
@@ -93,12 +105,23 @@ YUI.add('toolbar-styles', function (Y) {
             instance._buttons = buttons;
         },
 
+        showAtPoint: function(left, top, direction) {
+            var xy;
+
+            this.show();
+
+            xy = this._getToolbarXYPoint(left, top, direction);
+
+            this.set('xy', xy);
+
+        },
+
         _applyStyle: function(event, params) {
             var btnInst = event.target,
                 editor,
                 style;
 
-            style = this._styles[params.style];
+            style = this._styles[params.style].style;
 
             if (style) {
                 editor = this.get('editor');
@@ -176,17 +199,6 @@ YUI.add('toolbar-styles', function (Y) {
             );
         },
 
-        showAtPoint: function(left, top, direction) {
-            var xy;
-
-            this.show();
-
-            xy = this._getToolbarXYPoint(left, top, direction);
-
-            this.set('xy', xy);
-
-        },
-
         STYLES: ['strong', 'em', 'u', 'a'],
 
         BUTTONS_ACTIONS: {
@@ -196,7 +208,9 @@ YUI.add('toolbar-styles', function (Y) {
             'a': '_handleLink'
         },
 
-        TPL_BUTTON_CONTAINER: '<div class="btn-container"></div>'
+        TPL_BUTTON_CONTAINER: '<div class="btn-container"></div>',
+
+        TPL_BUTTON: '<button>{content}</button>'
     },
     {
         ATTRS: {
