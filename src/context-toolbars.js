@@ -3,7 +3,9 @@
         'contexttoolbars',
         {
             init: function(editor) {
-                YUI().use(
+                YUI({
+                    filter: 'raw'
+                }).use(
                     'node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', 'toolbar-styles',
                     function(Y) {
                         var editorNode = Y.one(editor.element.$);

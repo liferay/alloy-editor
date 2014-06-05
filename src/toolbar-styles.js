@@ -2,7 +2,7 @@ YUI.add('toolbar-styles', function (Y) {
     var Lang = Y.Lang,
         YArray = Y.Array;
 
-    var ToolbarStyles = Y.Base.create('toolbarstyles', Y.Overlay, [], {
+    var ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [], {
         initializer: function() {
             var instance = this,
                 styles;
@@ -35,6 +35,7 @@ YUI.add('toolbar-styles', function (Y) {
             contentBox = instance.get('contentBox');
 
             instance.on('visibleChange', function(event) {
+                console.log('vc: ' + event.newVal);
                 if (event.newVal) {
                     instance._updateUI();
 
@@ -168,6 +169,8 @@ YUI.add('toolbar-styles', function (Y) {
         showAtPoint: function(left, top, direction) {
             var xy = this._getToolbarXYPoint(left, top, direction);
 
+            debugger;
+
             this.set('xy', xy);
 
             this.show();
@@ -221,5 +224,5 @@ YUI.add('toolbar-styles', function (Y) {
     Y.ToolbarStyles = ToolbarStyles;
 
 },'0.1', {
-    requires: ['overlay', 'button']
+    requires: ['widget', 'button', ]
 });
