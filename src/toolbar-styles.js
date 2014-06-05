@@ -1,8 +1,15 @@
 YUI.add('toolbar-styles', function (Y) {
     var Lang = Y.Lang,
-        YArray = Y.Array;
+        YArray = Y.Array,
 
-    var ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [], {
+        BUTTON_STYLE = {
+            b: 'strong',
+            i: 'em',
+            u: 'u',
+            a: 'a'
+        };
+
+    var ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition], {
         initializer: function() {
             var instance = this,
                 styles;
@@ -14,14 +21,9 @@ YUI.add('toolbar-styles', function (Y) {
             YArray.each(
                 instance.STYLES,
                 function(item) {
-                    var style = new CKEDITOR.style({
+                    styles[item] = new CKEDITOR.style({
                         element: item
                     });
-
-                    styles[item] = {
-                        name: item,
-                        style: style
-                    };
                 }
             );
 
@@ -35,7 +37,6 @@ YUI.add('toolbar-styles', function (Y) {
             contentBox = instance.get('contentBox');
 
             instance.on('visibleChange', function(event) {
-                console.log('vc: ' + event.newVal);
                 if (event.newVal) {
                     instance._updateUI();
 
@@ -71,10 +72,19 @@ YUI.add('toolbar-styles', function (Y) {
             YArray.each(
                 instance.get('buttons'),
                 function(item) {
+                    var fun = instance.BUTTONS_ACTIONS[item];
+
+                    if (Lang.isString(fun)) {
+                        fun = Y.rbind(instance[fun], instance, {
+                            button: item,
+                            style: BUTTON_STYLE[item]
+                        });
+                    }
+
                     buttons[item] = new Y.ToggleButton({
                         labelHTML: buttonsContent[item],
                         on: {
-                            'click': Y.bind(instance.BUTTONS_ACTIONS[item], instance, item)
+                            'click': fun
                         },
                         render: buttonsContainer
                     });
@@ -86,26 +96,21 @@ YUI.add('toolbar-styles', function (Y) {
             instance._buttons = buttons;
         },
 
-        _applyStyle: function(event, buttonName) {
+        _applyStyle: function(event, params) {
             var btnInst = event.target,
                 editor,
                 style;
 
-            editor = this.get('editor');
-
-            style = YArray.find(
-                this._styles,
-                function(item) {
-                    return (item.name === buttonName);
-                }
-            );
+            style = this._styles[params.style];
 
             if (style) {
+                editor = this.get('editor');
+
                 if (btnInst.get('pressed')) {
-                    editor.applyStyle(style);
+                    CKEDITOR.editor.applyStyle(style);
                 }
                 else {
-                    editor.removeStyle(style);
+                    CKEDITOR.editor.removeStyle(style);
                 }
             }
         },
@@ -120,7 +125,12 @@ YUI.add('toolbar-styles', function (Y) {
 
             offsetLeft = this.get('offsetSel');
 
-            top = top - bbDOMNode.offsetHeight + (direction === 0 ? offsetLeft.topToBottom : offsetLeft.bottomToTop);
+            if (direction === 0) { // top to bottom
+                top = top + offsetLeft.topToBottom;
+            }
+            else {
+                top = top - bbDOMNode.offsetHeight - offsetLeft.bottomToTop;
+            }
 
             return [left, top];
         },
@@ -167,22 +177,23 @@ YUI.add('toolbar-styles', function (Y) {
         },
 
         showAtPoint: function(left, top, direction) {
-            var xy = this._getToolbarXYPoint(left, top, direction);
+            var xy;
 
-            debugger;
+            this.show();
+
+            xy = this._getToolbarXYPoint(left, top, direction);
 
             this.set('xy', xy);
 
-            this.show();
         },
 
         STYLES: ['strong', 'em', 'u', 'a'],
 
         BUTTONS_ACTIONS: {
-            'b': this._applyStyle,
-            'i': this._applyStyle,
-            'u': this._applyStyle,
-            'a': this._handleLink
+            'b': '_applyStyle',
+            'i': '_applyStyle',
+            'u': '_applyStyle',
+            'a': '_handleLink'
         },
 
         TPL_BUTTON_CONTAINER: '<div class="btn-container"></div>'
@@ -214,8 +225,8 @@ YUI.add('toolbar-styles', function (Y) {
 
             offsetSel: {
                 value: {
-                    topToBottom: 40,
-                    bottomToTop: 10
+                    topToBottom: 5,
+                    bottomToTop: 5
                 }
             }
         }
@@ -224,5 +235,5 @@ YUI.add('toolbar-styles', function (Y) {
     Y.ToolbarStyles = ToolbarStyles;
 
 },'0.1', {
-    requires: ['widget', 'button', ]
+    requires: ['array-extras', 'button', 'widget', 'widget-position']
 });
