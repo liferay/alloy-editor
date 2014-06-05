@@ -137,19 +137,19 @@ YUI.add('toolbar-styles', function (Y) {
 
         _getToolbarXYPoint: function(left, top, direction) {
             var bbDOMNode,
-                offsetLeft;
+                offsetSel;
 
             bbDOMNode = this.get('boundingBox').getDOMNode();
 
             left = left - bbDOMNode.offsetWidth / 2;
 
-            offsetLeft = this.get('offsetSel');
+            offsetSel = this.get('offsetSel');
 
             if (direction === 0) { // top to bottom
-                top = top + offsetLeft.topToBottom;
+                top = top + offsetSel.topToBottom;
             }
             else {
-                top = top - bbDOMNode.offsetHeight - offsetLeft.bottomToTop;
+                top = top - bbDOMNode.offsetHeight - offsetSel.bottomToTop;
             }
 
             return [left, top];
