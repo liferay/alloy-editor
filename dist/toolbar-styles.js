@@ -279,9 +279,11 @@ YUI.add('toolbar-styles', function (Y) {
                     range.collapse();
 
                     range.select();
+
+                    instance._linkContainer.one('input').set('value', '');
                 });
 
-                instance._linkContainer.one('.input-clear-container').once('click', instance._handleCloseLink, this);
+                instance._linkContainer.one('.input-clear-container').once('click', instance.hide, this);
 
                 keypressHandler = linkInput.on('keypress', function(event) {
                     if (event.charCode === 13) {
@@ -368,12 +370,6 @@ YUI.add('toolbar-styles', function (Y) {
             editor = this.get('editor');
 
             editor.removeStyle(style);
-        },
-
-        _handleCloseLink: function() {
-            this._linkContainer.one('input').set('value', '');
-
-            this.hide();
         },
 
         _updateLink: function(URI) {
