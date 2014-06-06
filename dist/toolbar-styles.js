@@ -6,15 +6,14 @@ YUI.add('toolbar-styles', function (Y) {
 
     ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition], {
         initializer: function() {
-            var instance = this,
-                styles;
+            var styles;
 
-            instance._editorNode = Y.one(instance.get('editor').element.$);
+            this._editorNode = Y.one(this.get('editor').element.$);
 
             styles = {};
 
             YArray.each(
-                instance.STYLES,
+                this.STYLES,
                 function(item) {
                     styles[item] = {
                         name: item,
@@ -25,7 +24,7 @@ YUI.add('toolbar-styles', function (Y) {
                 }
             );
 
-            instance._styles = styles;
+            this._styles = styles;
         },
 
         bindUI: function() {

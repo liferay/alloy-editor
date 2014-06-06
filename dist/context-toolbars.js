@@ -71,25 +71,6 @@
                             50
                         );
 
-                        function setContentTimeout() {
-                            window.leaveTimeout = setTimeout(
-                                function() {
-                                    addOverlay.hide();
-                                },
-                                1000
-                            );
-                        }
-
-                        function showAdd(x, y) {
-                            add.set('xy', [x, y]);
-
-                            add.show();
-                        }
-
-                        function hideAdd() {
-                            add.hide();
-                        }
-
                         function hideToolbar() {
                             overlay.hide();
                         }
@@ -100,7 +81,7 @@
                             visible: false
                         }).render();
 
-                        var add = new Y.Overlay({
+                        var add = new Y.ToolbarAdd({
                             srcNode: '#add-wrapper',
                             visible: false,
                             height: '20px',
@@ -128,11 +109,6 @@
                         Y.one('#add-content').on('mouseenter', function(event) {
                             window.clearTimeout(window.leaveTimeout);
                         });
-
-                        addOverlay = new Y.Overlay({
-                            srcNode: '#add-content',
-                            visible: false
-                        }).render();
 
                         editorNode = Y.one('#editable');
 
