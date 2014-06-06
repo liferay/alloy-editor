@@ -37,12 +37,10 @@ YUI.add('toolbar-styles', function (Y) {
             instance.on('visibleChange', function(event) {
                 if (event.newVal) {
                     instance._updateUI();
-
-                    // Y.one('#linkInput').set('value', '');
                 }
                 else {
-                    // Y.one('#inputWrapper').addClass('hide');
-                    contentBox.one('.btn-container').removeClass('hide');
+                    instance._linkContainer.addClass('hide');
+                    instance._buttonsContainer.removeClass('hide');
                 }
             });
         },
@@ -54,7 +52,9 @@ YUI.add('toolbar-styles', function (Y) {
         renderUI: function() {
             var instance = this,
                 buttons,
-                buttonsContainer;
+                buttonsContainer,
+                contentBox,
+                linkContainer;
 
             buttons = {};
 
@@ -71,7 +71,22 @@ YUI.add('toolbar-styles', function (Y) {
                 }
             );
 
-            this.get('contentBox').appendChild(buttonsContainer);
+            instance._buttonsContainer = buttonsContainer;
+
+            linkContainer = YNode.create(
+                Lang.sub(
+                    instance.TPL_LINK_CONTAINER, {
+                        placeholder: this.get('strings').linkPlaceholder
+                    }
+                )
+            );
+
+            contentBox = this.get('contentBox');
+
+            contentBox.appendChild(buttonsContainer);
+            contentBox.appendChild(linkContainer);
+
+            instance._linkContainer = linkContainer;
 
             instance._buttons = buttons;
         },
@@ -224,6 +239,156 @@ YUI.add('toolbar-styles', function (Y) {
             return [left + halfSelectionWidth, top];
         },
 
+        _handleLink: function(event) {
+            var instance = this,
+                btnInst,
+                editor,
+                keypressHandler,
+                link,
+                linkInput,
+                range,
+                selection;
+
+            btnInst = event.target;
+
+            editor = instance.get('editor');
+
+            if (btnInst.get('pressed')) {
+                selection = editor.getSelection();
+
+                instance._buttonsContainer.addClass('hide');
+                instance._linkContainer.removeClass('hide');
+
+                linkInput = instance._linkContainer.one('input');
+                linkInput.focus();
+
+                instance._createLink('/');
+
+                linkInput.once('blur', function() {
+                    link = linkInput.get('value');
+
+                    if (link) {
+                        instance._updateLink(link);
+                    }
+                    else {
+                        instance._removeLink();
+                    }
+
+                    range = editor.getSelection().getRanges()[0];
+
+                    range.collapse();
+
+                    range.select();
+                });
+
+                instance._linkContainer.one('.input-clear-container').once('click', instance._handleCloseLink, this);
+
+                keypressHandler = linkInput.on('keypress', function(event) {
+                    if (event.charCode === 13) {
+                        keypressHandler.detach();
+
+                        instance.hide();
+                    }
+                });
+            }
+            else {
+                instance._removeLink();
+            }
+        },
+
+        _getSelectedLink: function() {
+            var editor,
+                range,
+                selection,
+                selectedElement;
+
+            editor = this.get('editor');
+
+            selection = editor.getSelection();
+
+            selectedElement = selection.getSelectedElement();
+
+            if (selectedElement && selectedElement.is('a')) {
+                return selectedElement;
+            }
+
+            range = selection.getRanges()[0];
+
+            if (range) {
+                range.shrink(CKEDITOR.SHRINK_TEXT);
+
+                return editor.elementPath(range.getCommonAncestor()).contains('a', 1);
+            }
+
+            return null;
+        },
+
+        _createLink: function(URI) {
+            var editor,
+                range,
+                selection,
+                style,
+                text;
+
+            editor = this.get('editor');
+
+            selection = editor.getSelection();
+
+            range = selection.getRanges()[0];
+
+            if (range.collapsed) {
+                text = new CKEDITOR.dom.text(URI, editor.document);
+                range.insertNode(text);
+                range.selectNodeContents(text);
+            }
+
+            style = new CKEDITOR.style({
+                element: 'a',
+                attributes: {
+                    href: URI,
+                    'data-cke-saved-href': URI
+                }
+            });
+
+            style.type = CKEDITOR.STYLE_INLINE;
+            style.applyToRange(range, editor);
+            range.select();
+        },
+
+        _removeLink: function() {
+            var editor,
+                style;
+
+            style = new CKEDITOR.style({
+                alwaysRemoveElement: 1,
+                element: 'a',
+                type: CKEDITOR.STYLE_INLINE
+            });
+
+            editor = this.get('editor');
+
+            editor.removeStyle(style);
+        },
+
+        _handleCloseLink: function() {
+            this._linkContainer.one('input').set('value', '');
+
+            this.hide();
+        },
+
+        _updateLink: function(URI) {
+            var editor,
+                element;
+
+            editor = this.get('editor');
+            element = this._getSelectedLink(editor);
+
+            element.setAttributes({
+                href: URI,
+                'data-cke-saved-href': URI
+            });
+        },
+
         _updateUI: function() {
             var instance = this,
                 editor,
@@ -259,7 +424,17 @@ YUI.add('toolbar-styles', function (Y) {
 
         TPL_BUTTON_CONTAINER: '<div class="btn-container"></div>',
 
-        TPL_BUTTON: '<button>{content}</button>'
+        TPL_BUTTON: '<button>{content}</button>',
+
+        TPL_LINK_CONTAINER:
+            '<div class="row input-wrapper hide">' +
+                '<div class="span10 input-container">' +
+                    '<input class="input-large" type="text" placeholder="{placeholder}">' +
+                '</div>' +
+                '<div class="span2 input-clear-container">' +
+                    '<button class="btn"><i class="icon-remove"></i></button>' +
+                '</div>' +
+            '</div>'
     },
     {
         ATTRS: {
@@ -290,6 +465,12 @@ YUI.add('toolbar-styles', function (Y) {
                 value: {
                     topToBottom: 5,
                     bottomToTop: 5
+                }
+            },
+
+            strings: {
+                value: {
+                    linkPlaceholder: 'Type or paste link here'
                 }
             }
         }
