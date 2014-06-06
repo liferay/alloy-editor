@@ -39,8 +39,10 @@ YUI.add('toolbar-styles', function (Y) {
                     instance._updateUI();
                 }
                 else {
-                    instance._linkContainer.addClass('hide');
-                    instance._buttonsContainer.removeClass('hide');
+                    if (instance._linkContainer) {
+                        instance._linkContainer.addClass('hide');
+                        instance._buttonsContainer.removeClass('hide');
+                    }
                 }
             });
         },
@@ -52,6 +54,7 @@ YUI.add('toolbar-styles', function (Y) {
         renderUI: function() {
             var instance = this,
                 buttons,
+                buttonsConfig,
                 buttonsContainer,
                 contentBox,
                 linkContainer;
@@ -62,8 +65,10 @@ YUI.add('toolbar-styles', function (Y) {
 
             buttonsContainer.addClass('btn-group');
 
+            buttonsConfig = instance.get('buttons');
+
             YArray.each(
-                instance.get('buttons'),
+                buttonsConfig,
                 function(item) {
                     var button = instance._createButton(item, buttonsContainer);
 
@@ -71,22 +76,25 @@ YUI.add('toolbar-styles', function (Y) {
                 }
             );
 
-            instance._buttonsContainer = buttonsContainer;
-
-            linkContainer = YNode.create(
-                Lang.sub(
-                    instance.TPL_LINK_CONTAINER, {
-                        placeholder: this.get('strings').linkPlaceholder
-                    }
-                )
-            );
-
             contentBox = this.get('contentBox');
 
             contentBox.appendChild(buttonsContainer);
-            contentBox.appendChild(linkContainer);
 
-            instance._linkContainer = linkContainer;
+            instance._buttonsContainer = buttonsContainer;
+
+            if (YArray.indexOf(buttonsConfig, 'a') >= 0) {
+                linkContainer = YNode.create(
+                    Lang.sub(
+                        instance.TPL_LINK_CONTAINER, {
+                            placeholder: this.get('strings').linkPlaceholder
+                        }
+                    )
+                );
+
+                contentBox.appendChild(linkContainer);
+
+                instance._linkContainer = linkContainer;
+            }
 
             instance._buttons = buttons;
         },

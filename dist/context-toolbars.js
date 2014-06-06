@@ -12,19 +12,6 @@
 
                         var addOverlay;
 
-                        var elements = ['strong', 'em', 'u', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'table', 'img'];
-
-                        Y.Array.each(
-                            elements,
-                            function(item, index) {
-                                var style = new CKEDITOR.style({element: item});
-                                elements[index] = {
-                                    name: item,
-                                    style: style
-                                };
-                            }
-                        );
-
                         var handleUI = Y.debounce(
                             function(event) {
                                 var selectionEmpty = editor.isSelectionEmpty();
@@ -110,13 +97,7 @@
                         var overlay = new Y.ToolbarStyles({
                             editor: editor,
                             srcNode: '#overlay',
-                            visible: false,
-                            buttons: [
-                                'strong',
-                                'em',
-                                'u',
-                                'a'
-                            ]
+                            visible: false
                         }).render();
 
                         var add = new Y.Overlay({
