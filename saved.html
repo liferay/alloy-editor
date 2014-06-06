@@ -94,6 +94,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <script src="dist/selection-region-plugin.js"></script>
     <script src="dist/toolbar-styles.js"></script>
     <script src="dist/context-toolbars.js"></script>
+    <script src="dist/drop-images.js"></script>
 
     <style>
 
@@ -202,7 +203,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
             // Remove unnecessary plugins to make the editor simpler.
             editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
-            editor.config.extraPlugins = 'contexttoolbars,selectionregion';
+            editor.config.extraPlugins = 'contexttoolbars,selectionregion,dropimages';
         });
     </script>
 

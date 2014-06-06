@@ -54,53 +54,24 @@ YUI.add('toolbar-styles', function (Y) {
         renderUI: function() {
             var instance = this,
                 buttons,
-                buttonsContainer,
-                buttonsContent,
-                contentBox;
+                buttonsContainer;
 
             buttons = {};
 
             buttonsContainer = YNode.create(instance.TPL_BUTTON_CONTAINER);
-
-            buttonsContent = instance.get('buttonsContent');
-            contentBox = instance.get('contentBox');
 
             buttonsContainer.addClass('btn-group');
 
             YArray.each(
                 instance.get('buttons'),
                 function(item) {
-                    var btnSrcNode,
-                        fun;
+                    var button = instance._createButton(item, buttonsContainer);
 
-                    fun = instance.BUTTONS_ACTIONS[item];
-
-                    if (Lang.isString(fun)) {
-                        fun = Y.rbind(instance[fun], instance, {
-                            button: item,
-                            style: item
-                        });
-                    }
-
-                    btnSrcNode = YNode.create(
-                        Lang.sub(instance.TPL_BUTTON, {
-                            content: buttonsContent[item]
-                        })
-                    );
-
-                    buttons[item] = new Y.ToggleButton({
-                        srcNode: btnSrcNode,
-                        on: {
-                            'click': fun
-                        },
-                        render: buttonsContainer
-                    });
-
-                    buttonsContainer.appendChild(btnSrcNode);
+                    buttons[item] = button;
                 }
             );
 
-            contentBox.appendChild(buttonsContainer);
+            this.get('contentBox').appendChild(buttonsContainer);
 
             instance._buttons = buttons;
         },
@@ -133,6 +104,84 @@ YUI.add('toolbar-styles', function (Y) {
                     editor.removeStyle(style);
                 }
             }
+        },
+
+        _createButton: function(buttonConfig, buttonsContainer) {
+            var button,
+                contentBox;
+
+            contentBox = this.get('contentBox');
+
+            if (Lang.isString(buttonConfig)) {
+                button = this._createDefaultButton(buttonConfig, buttonsContainer);
+            }
+            else {
+                button = this._createCustomButton(buttonConfig, buttonsContainer);
+            }
+
+            return button;
+        },
+
+        _createCustomButton: function(buttonConfig, buttonsContainer) {
+            var btnSrcNode,
+                button;
+
+            if (buttonConfig.html) {
+                btnSrcNode = YNode.create(buttonConfig.html);
+            }
+            else {
+                btnSrcNode = YNode.create(
+                    Lang.sub(this.TPL_BUTTON, {
+                        content: buttonConfig.content
+                    })
+                );
+            }
+
+            button = new Y.ToggleButton({
+                srcNode: btnSrcNode,
+                on: buttonConfig.on,
+                render: buttonsContainer
+            });
+
+            buttonsContainer.appendChild(btnSrcNode);
+
+            return button;
+        },
+
+        _createDefaultButton: function(buttonConfig, buttonsContainer) {
+            var btnSrcNode,
+                button,
+                buttonsContent,
+                fun;
+
+            fun = this.BUTTONS_ACTIONS[buttonConfig];
+
+            if (Lang.isString(fun)) {
+                fun = Y.rbind(this[fun], this, {
+                    button: buttonConfig,
+                    style: buttonConfig
+                });
+            }
+
+            buttonsContent = this.get('buttonsContent');
+
+            btnSrcNode = YNode.create(
+                Lang.sub(this.TPL_BUTTON, {
+                    content: buttonsContent[buttonConfig]
+                })
+            );
+
+            button = new Y.ToggleButton({
+                srcNode: btnSrcNode,
+                on: {
+                    'click': fun
+                },
+                render: buttonsContainer
+            });
+
+            buttonsContainer.appendChild(btnSrcNode);
+
+            return button;
         },
 
         _getToolbarXYPoint: function(left, top, direction) {

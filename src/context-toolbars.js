@@ -107,66 +107,6 @@
                             overlay.hide();
                         }
 
-                        Y.one('#editable').on('dragstart', function(event) {
-                            console.log('dragstart');
-                        });
-
-                        var dropbox = document.querySelector('#editable');
-                        dropbox.addEventListener('dragenter', dragenter, false);
-                        dropbox.addEventListener('dragover', dragover, false);
-                        dropbox.addEventListener('drop', drop, false);
-
-                        function dragenter(e) {
-                            if (Y.UA.ie) {
-                                e.stopPropagation();
-                                e.preventDefault();
-                            }
-                        }
-
-                        function dragover(e) {
-                            if (Y.UA.ie) {
-                                e.stopPropagation();
-                                e.preventDefault();
-                            }
-                        }
-
-                        function drop(e) {
-                            e.stopPropagation();
-                            e.preventDefault();
-
-                            var dt = e.dataTransfer;
-                            var files = dt.files;
-
-                            editor.createSelectionFromPoint(e.clientX, e.clientY);
-
-                            handleFiles(files);
-                        }
-
-                        function handleFiles(files) {
-                            for (var i = 0; i < files.length; i++) {
-                                var file = files[i];
-                                var imageType = /image.*/;
-
-                                if (!file.type.match(imageType)) {
-                                    continue;
-                                }
-
-                                var reader = new FileReader();
-
-                                reader.addEventListener('loadend', function(e, file) {
-                                    var bin = reader.result;
-
-                                    var el = CKEDITOR.dom.element.createFromHtml('<img src="' + bin + '" border="0" title="Hello" >');
-
-                                    editor.insertElement(el);
-                                });
-
-                                reader.readAsDataURL(file);
-                            }
-
-                            return false;
-                        }
-
                         function handleLink(event) {
                             function getSelectedLink(editor) {
                                 var selection = editor.getSelection();
@@ -281,8 +221,6 @@
                         }
 
                         function handleCloseLink() {
-                            console.log('close link');
-
                             Y.one('#linkInput').set('value');
 
                             overlay.hide();
@@ -295,7 +233,13 @@
                         var overlay = new Y.ToolbarStyles({
                             editor: editor,
                             srcNode: '#overlay',
-                            visible: false
+                            visible: false,
+                            buttons: [
+                                'strong',
+                                'em',
+                                'u',
+                                'a'
+                            ]
                         }).render();
 
                         var add = new Y.Overlay({
