@@ -6,7 +6,7 @@
                 YUI({
                     filter: 'raw'
                 }).use(
-                    'node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', 'toolbar-styles',
+                    'node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', 'toolbar-styles', 'toolbar-add',
                     function(Y) {
                         var editorNode = Y.one(editor.element.$);
 
@@ -82,9 +82,10 @@
                         }).render();
 
                         var add = new Y.ToolbarAdd({
+                            editor: editor,
+                            height: '20px',
                             srcNode: '#add-wrapper',
                             visible: false,
-                            height: '20px',
                             width: '20px'
                         }).render();
 
@@ -96,18 +97,6 @@
                             addOverlay.show();
 
                             addOverlay.set('xy', [xy[0] + 20, xy[1]]);
-                        });
-
-                        Y.one('#add-wrapper').on('mouseleave', function(event) {
-                            setContentTimeout();
-                        });
-
-                        Y.one('#add-content').on('mouseleave', function(event) {
-                            setContentTimeout();
-                        });
-
-                        Y.one('#add-content').on('mouseenter', function(event) {
-                            window.clearTimeout(window.leaveTimeout);
                         });
 
                         editorNode = Y.one('#editable');

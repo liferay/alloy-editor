@@ -1,12 +1,26 @@
 YUI.add('toolbar-add', function (Y) {
     var Lang = Y.Lang,
-        ANode = A.Node,
+        YNode = Y.Node,
 
     ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.WidgetPosition], {
         initializer: function() {
             var instance = this;
 
             instance._editorNode = Y.one(instance.get('editor').element.$);
+        },
+
+        bindUI: function() {
+            Y.one('#add-wrapper').on('mouseleave', function(event) {
+                setContentTimeout();
+            });
+
+            Y.one('#add-content').on('mouseleave', function(event) {
+                setContentTimeout();
+            });
+
+            Y.one('#add-content').on('mouseenter', function(event) {
+                window.clearTimeout(window.leaveTimeout);
+            });
         },
 
         destructor: function() {
@@ -19,7 +33,7 @@ YUI.add('toolbar-add', function (Y) {
             var addOverlay,
                 addNode;
 
-            addNode = ANode.create(this.TPL_ADD);
+            addNode = YNode.create(this.TPL_ADD);
 
             addOverlay = new Y.Overlay({
                 srcNode: addNode,
@@ -57,6 +71,10 @@ YUI.add('toolbar-add', function (Y) {
             '</div>'
     }, {
         ATTRS: {
+            editor: {
+                validator: Lang.isObject
+            },
+
             hideTimeout: {
                 validator: Lang.isNumber,
                 value: 1000
