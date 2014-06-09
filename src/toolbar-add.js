@@ -2,13 +2,10 @@ YUI.add('toolbar-add', function (Y) {
     var Lang = Y.Lang,
         YArray = Y.Array,
         YNode = Y.Node,
+        YObject = Y.Object,
 
-    ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.WidgetPosition], {
+    ToolbarAdd = Y.Base.create('toolbaradd', Y.ToolbarBase, [], {
         initializer: function() {
-            var instance = this;
-
-            instance._editorNode = Y.one(instance.get('editor').element.$);
-
             this._hideButtonsContainerFn = Y.debounce(this._hideButtonsContainer, this.get('hideTimeout'));
         },
 
@@ -26,6 +23,8 @@ YUI.add('toolbar-add', function (Y) {
 
             boundingBox.on('mouseenter', this._handleMouseEnter, this);
             buttonsBoundingBox.on('mouseenter', this._handleMouseEnter, this);
+
+            this._buttonsOverlay.on('visibleChange', this._onButtonsOverlayVisibleChange, this);
         },
 
         destructor: function() {
@@ -64,38 +63,12 @@ YUI.add('toolbar-add', function (Y) {
                 [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]);
         },
 
-        _createButton: function(buttonType, container) {
-            var btnSrcNode,
-                button,
-                buttonsContent,
-                fun;
+        _handleCode: function(event) {
 
-            buttonsContent = this.get('buttonsContent');
+        },
 
-            btnSrcNode = YNode.create(
-                Lang.sub(this.TPL_BUTTON, {
-                    content: buttonsContent[buttonType],
-                    type: buttonType
-                })
-            );
+        _handleImage: function(event) {
 
-            fun = this.BUTTONS_ACTIONS[buttonType];
-
-            if (Lang.isString(fun)) {
-                fun = Y.rbind(this[fun], this, {
-                    button: buttonType
-                });
-            }
-
-            button = new Y.Button({
-                srcNode: btnSrcNode,
-                on: {
-                    'click': fun
-                },
-                render: container
-            });
-
-            return button;
         },
 
         _handleMouseEnter: function() {
@@ -110,6 +83,17 @@ YUI.add('toolbar-add', function (Y) {
 
         _hideButtonsContainer: function() {
             this._buttonsOverlay.hide();
+        },
+
+        _onButtonsOverlayVisibleChange: function(event) {
+            if (!event.newVal) {
+                YObject.each(
+                    this._buttons,
+                    function(item) {
+                        item.set('pressed', false);
+                    }
+                );
+            }
         },
 
         _renderAddNode: function() {
@@ -139,46 +123,16 @@ YUI.add('toolbar-add', function (Y) {
         },
 
         _renderButtonsOverlay: function() {
-            var buttonsNode;
+            var buttonsContainer;
 
-            buttonsNode = YNode.create(this.TPL_BUTTONS);
+            buttonsContainer = YNode.create(this.TPL_BUTTON_CONTAINER);
 
-            this._renderButtons(buttonsNode);
+            this._renderButtons(buttonsContainer);
 
             this._buttonsOverlay = new Y.Overlay({
                 visible: false,
-                srcNode: buttonsNode
+                srcNode: buttonsContainer
             }).render();
-        },
-
-        _renderButtons: function(container) {
-            var instance = this,
-                buttons,
-                buttonsConfig;
-
-            buttonsConfig = instance.get('buttons');
-
-            buttons = [];
-
-            YArray.each(
-                buttonsConfig,
-                function(item) {
-                    buttons.push(instance._createButton(item, container));
-                }
-            );
-
-            this._buttons = buttons;
-        },
-
-        _setLeaveTimeout: function() {
-            var instance = this;
-
-            instance._leaveTimeout = setTimeout(
-                function() {
-                    instance.hide();
-                },
-                instance.get('hideTimeout')
-            );
         },
 
         _showButtonsContainer: function() {
@@ -194,14 +148,13 @@ YUI.add('toolbar-add', function (Y) {
 
         TPL_ADD:
             '<div class="btn-group add-content-wrapper">' +
-              '<button type="button" class="btn btn-default btn-add">{content}</button>' +
+              '<button type="button" class="btn btn-add">{content}</button>' +
             '</div>',
 
-        TPL_BUTTON: '<button type="button" class="btn btn-default btn-add-{type}">{content}</i></button>',
+        TPL_BUTTON: '<button type="button" class="btn btn-add-{type}">{content}</i></button>',
 
-        TPL_BUTTONS:
-          '<div class="btn-group btn-group-vertical add-content">' +
-          '</div>'
+        TPL_BUTTON_CONTAINER:
+          '<div class="btn-group btn-group-vertical add-content"></div>'
     }, {
         ATTRS: {
             buttons: {
@@ -225,10 +178,6 @@ YUI.add('toolbar-add', function (Y) {
                 }
             },
 
-            editor: {
-                validator: Lang.isObject
-            },
-
             hideTimeout: {
                 validator: Lang.isNumber,
                 value: 1000
@@ -238,5 +187,5 @@ YUI.add('toolbar-add', function (Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 },'0.1', {
-    requires: ['array-extras', 'array-invoke', 'button', 'widget', 'widget-position', 'aui-debounce']
+    requires: ['array-extras', 'array-invoke', 'button', 'toolbar-base', 'aui-debounce']
 });

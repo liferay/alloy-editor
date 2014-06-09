@@ -3,9 +3,7 @@
         'contexttoolbars',
         {
             init: function(editor) {
-                YUI({
-                    filter: 'raw'
-                }).use(
+                YUI().use(
                     'node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', 'toolbar-styles', 'toolbar-add',
                     function(Y) {
                         var editorNode = Y.one(editor.element.$);
@@ -74,7 +72,6 @@
                         }
 
                         function hideAdd() {
-                            console.log('hide add');
                             add.hide();
                         }
 

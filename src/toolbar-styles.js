@@ -4,11 +4,9 @@ YUI.add('toolbar-styles', function (Y) {
         YObject = Y.Object,
         YNode = Y.Node,
 
-    ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition], {
+    ToolbarStyles = Y.Base.create('toolbarstyles', Y.ToolbarBase, [], {
         initializer: function() {
             var styles;
-
-            this._editorNode = Y.one(this.get('editor').element.$);
 
             styles = {};
 
@@ -28,22 +26,29 @@ YUI.add('toolbar-styles', function (Y) {
         },
 
         bindUI: function() {
-            var instance = this,
-                contentBox;
+            var contentBox;
 
-            contentBox = instance.get('contentBox');
+            contentBox = this.get('contentBox');
 
-            instance.on('visibleChange', function(event) {
+            this.on('visibleChange', function(event) {
                 if (event.newVal) {
-                    instance._updateUI();
+                    this._updateUI();
                 }
                 else {
-                    if (instance._linkContainer) {
-                        instance._linkContainer.addClass('hide');
-                        instance._buttonsContainer.removeClass('hide');
+                    if (this._linkContainer) {
+                        this._linkContainer.addClass('hide');
+                        this._buttonsContainer.removeClass('hide');
                     }
                 }
             });
+
+            if (this._linkInput) {
+                this._linkInput.on('keypress', function(event) {
+                    if (event.charCode === 13) {
+                        this.hide();
+                    }
+                });
+            }
         },
 
         destructor: function() {
@@ -52,34 +57,22 @@ YUI.add('toolbar-styles', function (Y) {
 
         renderUI: function() {
             var instance = this,
-                buttons,
                 buttonsConfig,
                 buttonsContainer,
                 contentBox,
                 linkContainer;
 
-            buttons = {};
-
             buttonsContainer = YNode.create(instance.TPL_BUTTON_CONTAINER);
 
-            buttonsContainer.addClass('btn-group');
-
-            buttonsConfig = instance.get('buttons');
-
-            YArray.each(
-                buttonsConfig,
-                function(item) {
-                    var button = instance._createButton(item, buttonsContainer);
-
-                    buttons[item] = button;
-                }
-            );
+            this._renderButtons(buttonsContainer);
 
             contentBox = this.get('contentBox');
 
             contentBox.appendChild(buttonsContainer);
 
             instance._buttonsContainer = buttonsContainer;
+
+            buttonsConfig = instance.get('buttons');
 
             if (YArray.indexOf(buttonsConfig, 'a') >= 0) {
                 linkContainer = YNode.create(
@@ -93,9 +86,9 @@ YUI.add('toolbar-styles', function (Y) {
                 contentBox.appendChild(linkContainer);
 
                 instance._linkContainer = linkContainer;
-            }
 
-            instance._buttons = buttons;
+                instance._linkInput = linkContainer.one('input');
+            }
         },
 
         showAtPoint: function(left, top, direction) {
@@ -114,7 +107,7 @@ YUI.add('toolbar-styles', function (Y) {
                 editor,
                 style;
 
-            style = this._styles[params.style].style;
+            style = this._styles[params.button].style;
 
             if (style) {
                 editor = this.get('editor');
@@ -128,99 +121,21 @@ YUI.add('toolbar-styles', function (Y) {
             }
         },
 
-        _createButton: function(buttonConfig, buttonsContainer) {
-            var button,
-                contentBox;
-
-            contentBox = this.get('contentBox');
-
-            if (Lang.isString(buttonConfig)) {
-                button = this._createDefaultButton(buttonConfig, buttonsContainer);
-            }
-            else {
-                button = this._createCustomButton(buttonConfig, buttonsContainer);
-            }
-
-            return button;
-        },
-
-        _createCustomButton: function(buttonConfig, buttonsContainer) {
-            var btnSrcNode,
-                button;
-
-            if (buttonConfig.html) {
-                btnSrcNode = YNode.create(buttonConfig.html);
-            }
-            else {
-                btnSrcNode = YNode.create(
-                    Lang.sub(this.TPL_BUTTON, {
-                        content: buttonConfig.content
-                    })
-                );
-            }
-
-            button = new Y.ToggleButton({
-                srcNode: btnSrcNode,
-                on: buttonConfig.on,
-                render: buttonsContainer
-            });
-
-            buttonsContainer.appendChild(btnSrcNode);
-
-            return button;
-        },
-
-        _createDefaultButton: function(buttonConfig, buttonsContainer) {
-            var btnSrcNode,
-                button,
-                buttonsContent,
-                fun;
-
-            fun = this.BUTTONS_ACTIONS[buttonConfig];
-
-            if (Lang.isString(fun)) {
-                fun = Y.rbind(this[fun], this, {
-                    button: buttonConfig,
-                    style: buttonConfig
-                });
-            }
-
-            buttonsContent = this.get('buttonsContent');
-
-            btnSrcNode = YNode.create(
-                Lang.sub(this.TPL_BUTTON, {
-                    content: buttonsContent[buttonConfig]
-                })
-            );
-
-            button = new Y.ToggleButton({
-                srcNode: btnSrcNode,
-                on: {
-                    'click': fun
-                },
-                render: buttonsContainer
-            });
-
-            buttonsContainer.appendChild(btnSrcNode);
-
-            return button;
-        },
-
         _getToolbarXYPoint: function(left, top, direction) {
             var bbDOMNode,
-                offsetSel;
+                offsetFromSel;
 
             bbDOMNode = this.get('boundingBox').getDOMNode();
 
             left = left - bbDOMNode.offsetWidth / 2;
 
-            offsetSel = this.get('offsetSel');
+            offsetFromSel = this.get('offsetFromSel');
 
             if (direction === 0) { // top to bottom
-                top = top + offsetSel.topToBottom;
+                top = top + offsetFromSel.topToBottom;
             }
             else {
-                top = top - bbDOMNode.offsetHeight - offsetSel.bottomToTop;
+                top = top - bbDOMNode.offsetHeight - offsetFromSel.bottomToTop;
             }
 
             return [left, top];
@@ -229,6 +144,7 @@ YUI.add('toolbar-styles', function (Y) {
         _getToolbarXYRegion: function(selectionData) {
             var boundingBox,
                 bbDOMNode,
+                gutter,
                 halfSelectionWidth,
                 left,
                 top;
@@ -239,9 +155,11 @@ YUI.add('toolbar-styles', function (Y) {
 
             halfSelectionWidth = (selectionData.region.right - selectionData.region.left) / 2;
 
-            left = this._editorNode.get('docScrollX') + this.get('offsetLeft') + selectionData.region.left - bbDOMNode.offsetWidth / 2;
+            gutter = this.get('gutter');
 
-            top = selectionData.region.top + this._editorNode.get('docScrollY') - bbDOMNode.offsetHeight;
+            left = this._editorNode.get('docScrollX') + gutter.left + selectionData.region.left - bbDOMNode.offsetWidth / 2;
+
+            top = selectionData.region.top + this._editorNode.get('docScrollY') - gutter.top + bbDOMNode.offsetHeight;
 
             return [left + halfSelectionWidth, top];
         },
@@ -250,7 +168,6 @@ YUI.add('toolbar-styles', function (Y) {
             var instance = this,
                 btnInst,
                 editor,
-                keypressHandler,
                 link,
                 linkInput,
                 range,
@@ -266,7 +183,8 @@ YUI.add('toolbar-styles', function (Y) {
                 instance._buttonsContainer.addClass('hide');
                 instance._linkContainer.removeClass('hide');
 
-                linkInput = instance._linkContainer.one('input');
+                linkInput = instance._linkInput;
+
                 linkInput.focus();
 
                 instance._createLink('/');
@@ -291,14 +209,6 @@ YUI.add('toolbar-styles', function (Y) {
                 });
 
                 instance._linkContainer.one('.input-clear-container').once('click', instance.hide, this);
-
-                keypressHandler = linkInput.on('keypress', function(event) {
-                    if (event.charCode === 13) {
-                        keypressHandler.detach();
-
-                        instance.hide();
-                    }
-                });
             }
             else {
                 instance._removeLink();
@@ -425,9 +335,9 @@ YUI.add('toolbar-styles', function (Y) {
             'a': '_handleLink'
         },
 
-        TPL_BUTTON_CONTAINER: '<div class="btn-container"></div>',
+        TPL_BUTTON_CONTAINER: '<div class="btn-group btn-container"></div>',
 
-        TPL_BUTTON: '<button>{content}</button>',
+        TPL_BUTTON: '<button class="btn">{content}</button>',
 
         TPL_LINK_CONTAINER:
             '<div class="row input-wrapper hide">' +
@@ -456,16 +366,15 @@ YUI.add('toolbar-styles', function (Y) {
                 }
             },
 
-            editor: {
-                validator: Lang.isObject
+            gutter: {
+                validator: Lang.isArray,
+                value: {
+                    left: 10,
+                    top: 0
+                }
             },
 
-            offsetLeft: {
-                validator: Lang.isNumber,
-                value: 10
-            },
-
-            offsetSel: {
+            offsetFromSel: {
                 value: {
                     topToBottom: 5,
                     bottomToTop: 5
@@ -483,5 +392,5 @@ YUI.add('toolbar-styles', function (Y) {
     Y.ToolbarStyles = ToolbarStyles;
 
 },'0.1', {
-    requires: ['array-extras', 'button', 'widget', 'widget-position']
+    requires: ['array-extras', 'array-invoke', 'button', 'toolbar-base']
 });
