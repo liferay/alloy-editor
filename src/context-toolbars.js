@@ -10,8 +10,6 @@
                     function(Y) {
                         var editorNode = Y.one(editor.element.$);
 
-                        var addOverlay;
-
                         var handleUI = Y.debounce(
                             function(event) {
                                 var selectionEmpty = editor.isSelectionEmpty();
@@ -21,7 +19,9 @@
                                 var editorDOMNode = editorNode.getDOMNode();
 
                                 if (selectionData.region) {
-                                    showAdd(editorDOMNode.offsetLeft - 30, selectionData.region.top);
+                                    var startRect = selectionData.region.startRect || selectionData.region;
+
+                                    add.showAtPoint(editorDOMNode.offsetLeft, selectionData.region.top + startRect.height/2);
                                 }
                                 else {
                                     hideAdd();
@@ -29,8 +29,6 @@
 
                                     return;
                                 }
-
-                                addOverlay.hide();
 
                                 if (selectionEmpty) {
                                     hideToolbar();
@@ -75,29 +73,22 @@
                             overlay.hide();
                         }
 
+                        function hideAdd() {
+                            console.log('hide add');
+                            add.hide();
+                        }
+
                         var overlay = new Y.ToolbarStyles({
                             editor: editor,
-                            srcNode: '#overlay',
                             visible: false
                         }).render();
 
                         var add = new Y.ToolbarAdd({
                             editor: editor,
                             height: '20px',
-                            srcNode: '#add-wrapper',
                             visible: false,
                             width: '20px'
                         }).render();
-
-                        Y.one('#add-wrapper').on(['mouseenter', 'click'], function(event) {
-                            var xy = add.get('xy');
-
-                            window.clearTimeout(window.leaveTimeout);
-
-                            addOverlay.show();
-
-                            addOverlay.set('xy', [xy[0] + 20, xy[1]]);
-                        });
 
                         editorNode = Y.one('#editable');
 

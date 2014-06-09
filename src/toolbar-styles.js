@@ -447,6 +447,7 @@ YUI.add('toolbar-styles', function (Y) {
             },
 
             buttonsContent: {
+                validator: Lang.isObject,
                 value: {
                     strong: '<i class="icon-bold"></i>',
                     em: '<i class="icon-italic"></i>',

@@ -47,11 +47,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             height: 20px;
         }
 
-        .yui3-toolbarstyles-hidden {
+        .yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden {
             display: none;
         }
 
-        .yui3-toolbarstyles {
+        .yui3-toolbarstyles, .yui3-toolbaradd {
             position: absolute;
         }
 
@@ -103,8 +103,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     </style>
 </head>
 <body class="yui3-skin-sam">
-    <button id="testBtn">Click me!</button>
-
     <h1 class="samples">
         <a href="index.html">CKEditor Samples</a> &raquo; Inline Editing by Code
     </h1>
@@ -202,31 +200,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
             editor.config.extraPlugins = 'contexttoolbars,selectionregion,dropimages';
         });
     </script>
-
-
-    <div id="overlay">
-        <div id="inputWrapper" class="row input-wrapper hide">
-            <div class="span10 input-container">
-                <input class="input-large" id="linkInput" type="text" placeholder="Type or paste link here">
-            </div>
-            <div class="span2 input-clear-container">
-                <button id="removeLink" class="btn"><i class="icon-remove"></i></button>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="add-wrapper" class="btn-group">
-      <button id="Add" type="button" class="btn btn-default">+</button>
-    </div>
-
-    <div id="add-content">
-      <div class="btn-group btn-group-vertical">
-            <button id="addImage" type="button" class="btn btn-default">Image</button>
-            <button id="addCode" type="button" class="btn btn-default">Code</button>
-            <button id="addHorizontalLine" type="button" class="btn btn-default">Hor line</button>
-      </div>
-    </div>
 
     <div id="footer">
         <hr>
