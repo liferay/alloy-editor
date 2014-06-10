@@ -63,12 +63,39 @@ YUI.add('toolbar-add', function (Y) {
                 [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]);
         },
 
+        _getInputFile: function() {
+            var id,
+                inputFile;
+
+            inputFile = this._inputFile;
+
+            if (!inputFile) {
+                id = Y.guid();
+
+                Y.one('body').prepend('<input type="file" id="' + id + '"  style="display: none;"></input>');
+
+                inputFile = Y.one('#' + id);
+
+                inputFile.on('change', function() {
+                    console.log(inputFile.get('value'));
+
+                    inputFile.set('value', '');
+                });
+
+                this._inputFile = inputFile;
+            }
+
+            return inputFile;
+        },
+
         _handleCode: function(event) {
 
         },
 
         _handleImage: function(event) {
+            var inputFile = this._getInputFile();
 
+            inputFile.simulate('click');
         },
 
         _handleMouseEnter: function() {
@@ -131,7 +158,8 @@ YUI.add('toolbar-add', function (Y) {
 
             this._buttonsOverlay = new Y.Overlay({
                 visible: false,
-                srcNode: buttonsContainer
+                srcNode: buttonsContainer,
+                zIndex: 1
             }).render();
         },
 
@@ -187,5 +215,5 @@ YUI.add('toolbar-add', function (Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 },'0.1', {
-    requires: ['array-extras', 'array-invoke', 'button', 'toolbar-base', 'aui-debounce']
+    requires: ['array-has', 'array-invoke', 'button', 'node-event-simulate', 'toolbar-base', 'aui-debounce']
 });

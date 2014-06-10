@@ -10,12 +10,20 @@ YUI.add('toolbar-base', function (Y) {
 
     	_createButton: function(buttonConfig, buttonsContainer) {
             var button,
-                contentBox;
+                contentBox,
+                customRenderer;
 
             contentBox = this.get('contentBox');
 
             if (Lang.isString(buttonConfig)) {
-                button = this._createDefaultButton(buttonConfig, buttonsContainer);
+                customRenderer = '_renderUI' + buttonConfig.substring(0, 1).toUpperCase() + buttonConfig.substring(1);
+
+                if (Lang.isFunction(this[customRenderer])) {
+                    button = this[customRenderer](buttonsContainer);
+                }
+                else {
+                    button = this._createDefaultButton(buttonConfig, buttonsContainer);
+                }
             }
             else {
                 button = this._createCustomButton(buttonConfig, buttonsContainer);

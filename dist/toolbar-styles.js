@@ -47,7 +47,8 @@ YUI.add('toolbar-styles', function (Y) {
                     if (event.charCode === 13) {
                         this.hide();
                     }
-                });
+                },
+                this);
             }
         },
 
