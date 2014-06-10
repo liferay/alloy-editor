@@ -132,6 +132,9 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
             attribute of the <code>&lt;div&gt;</code> element to be converted into an inline instance.
         </p>
     </div>
+
+    <h1 contenteditable="true" id="editHeader">This should be article header</h1>
+
     <div id="editable" contenteditable="true">
         <p id="test123"><strong>Apollo 11</strong> was the spaceflight that landed the first humans, Americans <a href="http://en.wikipedia.org/wiki/Neil_Armstrong" title="Neil Armstrong">Neil Armstrong</a> and <a href="http://en.wikipedia.org/wiki/Buzz_Aldrin" title="Buzz Aldrin">Buzz Aldrin</a>, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the lunar surface 6 hours later on July 21 at 02:56 UTC.</p>
 
@@ -197,18 +200,27 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
     <script>
         CKEDITOR.disableAutoInline = true;
+    </script>
 
+    <script>
         var editor = CKEDITOR.inline('editable');
 
-        window.editor = editor;
+        editor.config.allowedContent = true;
 
-        editor.on('configLoaded', function() {
-            editor.config.allowedContent = true;
+        // Remove unnecessary plugins to make the editor simpler.
+        editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
+        editor.config.extraPlugins = 'contexttoolbars,selectionregion,dropimages';
+    </script>
 
-            // Remove unnecessary plugins to make the editor simpler.
-            editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
-            editor.config.extraPlugins = 'contexttoolbars,selectionregion,dropimages';
-        });
+    <script>
+        var editor = CKEDITOR.inline('editHeader');
+
+        editor.config.allowedContent = true;
+
+        // Remove unnecessary plugins to make the editor simpler.
+        editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
+        // editor.config.extraPlugins = 'contexttoolbars,selectionregion,dropimages';
+
     </script>
 
     <div id="footer">

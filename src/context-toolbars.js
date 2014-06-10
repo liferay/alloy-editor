@@ -87,7 +87,7 @@
                             width: '20px'
                         }).render();
 
-                        editorNode = Y.one('#editable');
+                        editorNode = Y.one(editor.element.$);
 
                         editorNode.on('mouseup', handleUI);
                         editorNode.on('keyup', handleUI);
