@@ -3,37 +3,27 @@
         'placeholder',
         {
             init: function(editor) {
+                editor.on('focus', this._onFocus, this);
+                editor.on('blur', this._onBlur, this);
+
                 this._editor = editor;
-
-                this._attachMouseListener();
-
-                this._attachBlurListener();
-            },
-
-            _attachMouseListener: function() {
-                var editable = this._editor.editable(this._editor.element.$);
-
-                this._mouseListener = editable.attachListener(editable, 'mousedown', this._onMouseDown, this);
-            },
-
-            _attachBlurListener: function() {
-                this._editor.on('blur', this._onBlur, this);
             },
 
             _onBlur: function() {
-                this._mouseListener.removeListener('mousedown', this._onMouseDown);
-
                 if (this._editor.getData() === '') {
                     this._editor.setData(this._placeholderVal);
-
-                    this._attachMouseListener();
                 }
             },
 
-            _onMouseDown: function() {
-                this._placeholderVal = this._editor.getData();
+            _onFocus: function() {
+                if (typeof this._placeholderVal == 'undefined') {
+                    this._placeholderVal = this._editor.getData();
 
-                this._editor.setData('');
+                    this._editor.setData('');
+                }
+                else if (this._editor.getData() === this._placeholderVal) {
+                    this._editor.setData('');
+                }
             }
         }
     );
