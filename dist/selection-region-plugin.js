@@ -178,8 +178,6 @@ SelectionRegion.prototype = {
         right = -Infinity;
         top = Infinity;
 
-        console.log(clientRects.length);
-
         if (clientRects.length === 0) {
             region = this.getCaretRegion();
         }

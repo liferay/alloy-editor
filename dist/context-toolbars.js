@@ -36,7 +36,10 @@
 
                                     var direction = selectionData.region.direction;
 
-                                    if (selectionData.region.startRect.top === selectionData.region.endRect.top) {
+                                    var endRect = selectionData.region.endRect;
+                                    var startRect = selectionData.region.startRect;
+
+                                    if (endRect && endRect && startRect.top === endRect.top) {
                                         direction = 1;
                                     }
 
