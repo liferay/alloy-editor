@@ -85,7 +85,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             z-index: 1;
         }
 
-        .editorPlaceholder {
+        .editor-placeholder {
             background-color: lightyellow;
         }
 
@@ -133,9 +133,9 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         </p>
     </div>
 
-    <div class="editorPlaceholder" contenteditable="true" id="headline">Write here your headline</div>
+    <div class="editor-placeholder" contenteditable="true" id="headline">Write here your headline</div>
 
-    <div class="editorPlaceholder" contenteditable="true" id="description">Write here your description</div>
+    <div class="editor-placeholder" contenteditable="true" id="description">Write here your description</div>
 
     <div id="editable" contenteditable="true">
         <p id="test123"><strong>Apollo 11</strong> was the spaceflight that landed the first humans, Americans <a href="http://en.wikipedia.org/wiki/Neil_Armstrong" title="Neil Armstrong">Neil Armstrong</a> and <a href="http://en.wikipedia.org/wiki/Buzz_Aldrin" title="Buzz Aldrin">Buzz Aldrin</a>, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the lunar surface 6 hours later on July 21 at 02:56 UTC.</p>
@@ -211,7 +211,9 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
         // Remove unnecessary plugins to make the editor simpler.
         editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
-        editor.config.extraPlugins = 'contexttoolbars,selectionregion,dropimages';
+        editor.config.extraPlugins = 'contexttoolbars,selectionregion,dropimages,placeholder';
+        editor.config.placeholderValue = 'Write here!';
+        editor.config.placeholderClass = 'editor-placeholder';
     </script>
 
     <script>
@@ -222,6 +224,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         // Remove unnecessary plugins to make the editor simpler.
         editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
         editor.config.extraPlugins = 'placeholder';
+        editor.config.placeholderClass = 'editor-placeholder';
 
     </script>
 
@@ -234,6 +237,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         // Remove unnecessary plugins to make the editor simpler.
         editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
         editor.config.extraPlugins = 'placeholder';
+        editor.config.placeholderClass = 'editor-placeholder';
 
     </script>
 

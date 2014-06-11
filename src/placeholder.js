@@ -1,28 +1,52 @@
 ;(function() {
+    var REGEX_EOL = /(?:\r?\n)+$/;
+
     CKEDITOR.plugins.add(
         'placeholder',
         {
             init: function(editor) {
                 editor.on('focus', this._onFocus, this);
                 editor.on('blur', this._onBlur, this);
-
-                this._editor = editor;
             },
 
-            _onBlur: function() {
-                if (this._editor.getData() === '') {
-                    this._editor.setData(this._placeholderVal);
+            _onBlur: function(event) {
+                var editor = event.editor;
+
+                if (editor.getData() === '') {
+                    editor.setData(editor.config.placeholderValue);
+
+                    new CKEDITOR.dom.element(editor.element.$).addClass(editor.config.placeholderClass);
                 }
             },
 
-            _onFocus: function() {
-                if (typeof this._placeholderVal == 'undefined') {
-                    this._placeholderVal = this._editor.getData();
+            _onFocus: function(event) {
+                var config,
+                    data,
+                    editor,
+                    element;
 
-                    this._editor.setData('');
+                editor = event.editor;
+                config = editor.config;
+
+                if (!config.placeholderValue) {
+                    config.placeholderValue = editor.getData();
+
+                    editor.setData('');
+
+                    new CKEDITOR.dom.element(editor.element.$).removeClass(config.placeholderClass);
                 }
-                else if (this._editor.getData() === this._placeholderVal) {
-                    this._editor.setData('');
+                else {
+                    element = document.createElement('div');
+
+                    element.innerHTML = editor.getData();
+
+                    data = element.innerText || element.textContent;
+
+                    if (data === config.placeholderValue || data.replace(REGEX_EOL, '') === config.placeholderValue) {
+                        editor.setData('');
+
+                        new CKEDITOR.dom.element(editor.element.$).removeClass(config.placeholderClass);
+                    }
                 }
             }
         }
