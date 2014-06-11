@@ -9,13 +9,17 @@
                 editor.on('blur', this._onBlur, this);
             },
 
+            _addPlaceholder: function(editor) {
+                editor.setData(editor.config.placeholderValue);
+
+                new CKEDITOR.dom.element(editor.element.$).addClass(editor.config.placeholderClass);
+            },
+
             _onBlur: function(event) {
                 var editor = event.editor;
 
                 if (editor.getData() === '') {
-                    editor.setData(editor.config.placeholderValue);
-
-                    new CKEDITOR.dom.element(editor.element.$).addClass(editor.config.placeholderClass);
+                    this._addPlaceholder(editor);
                 }
             },
 
@@ -28,26 +32,33 @@
                 editor = event.editor;
                 config = editor.config;
 
+                data = editor.getData();
+
                 if (!config.placeholderValue) {
                     config.placeholderValue = editor.getData();
 
-                    editor.setData('');
-
-                    new CKEDITOR.dom.element(editor.element.$).removeClass(config.placeholderClass);
+                    this._removePlaceholder(editor);
+                }
+                else if (data === config.placeholderValue) {
+                    this._removePlaceholder(editor);
                 }
                 else {
                     element = document.createElement('div');
 
-                    element.innerHTML = editor.getData();
+                    element.innerHTML = data;
 
                     data = element.innerText || element.textContent;
 
                     if (data === config.placeholderValue || data.replace(REGEX_EOL, '') === config.placeholderValue) {
-                        editor.setData('');
-
-                        new CKEDITOR.dom.element(editor.element.$).removeClass(config.placeholderClass);
+                        this._removePlaceholder(editor);
                     }
                 }
+            },
+
+            _removePlaceholder: function(editor) {
+                editor.setData('');
+
+                new CKEDITOR.dom.element(editor.element.$).removeClass(editor.config.placeholderClass);
             }
         }
     );
