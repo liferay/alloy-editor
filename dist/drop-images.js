@@ -41,19 +41,13 @@
 
             _onDragEnter: function(event) {
                 if (isIE) {
-                    event = new CKEDITOR.dom.event(event.data.$);
-
-                    event.preventDefault();
-                    event.stopPropagation();
+                    this._preventEvent(event);
                 }
             },
 
             _onDragOver: function(event) {
                 if (isIE) {
-                    event = new CKEDITOR.dom.event(event.data.$);
-
-                    event.preventDefault();
-                    event.stopPropagation();
+                    this._preventEvent(event);
                 }
             },
 
@@ -70,6 +64,13 @@
                 event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
 
                 this._handleFiles(nativeEvent.dataTransfer.files, editor);
+            },
+
+            _preventEvent: function(event) {
+                event = new CKEDITOR.dom.event(event.data.$);
+
+                event.preventDefault();
+                event.stopPropagation();
             },
 
             _processFile: function(file, editor) {

@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"fun",
+				"fun	Function"
+			],
+			[
+				"con",
+				"config"
+			],
+			[
+				"_a",
+				"_attachBlurListener"
+			],
+			[
+				"_",
+				"_attachMouseListener"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"input",
+				"inputFile"
+			],
+			[
+				"inpu",
+				"inputFile"
+			],
+			[
 				"butt",
 				"buttonsContainer"
 			],
@@ -42,10 +70,6 @@
 			[
 				"x",
 				"x"
-			],
-			[
-				"input",
-				"inputNode"
 			],
 			[
 				"_get",
@@ -148,10 +172,6 @@
 				"charAt"
 			],
 			[
-				"inpu",
-				"inputMirror"
-			],
-			[
 				"_ac",
 				"_acUpdateValue"
 			],
@@ -170,10 +190,6 @@
 			[
 				"raw",
 				"rawResult"
-			],
-			[
-				"con",
-				"content"
 			],
 			[
 				"orig",
@@ -498,32 +514,44 @@
 			[
 				"mari",
 				"margin-bottom"
-			],
-			[
-				"TPL_TA",
-				"TPL_TAGS_CONTAINER"
-			],
-			[
-				"padd",
-				"padding-left"
-			],
-			[
-				"setS",
-				"setStyle"
-			],
-			[
-				"des",
-				"destroy"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/toolbar-base.js",
+			"file": "saved.html",
 			"settings":
 			{
-				"buffer_size": 3444,
+				"buffer_size": 10283,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/drop-images.js",
+			"settings":
+			{
+				"buffer_size": 2700,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "YUI.add('toolbar-base', function (Y) {\n    var Lang = Y.Lang,\n    	YArray = Y.Array,\n    	YNode = Y.Node,\n",
+			"file": "src/twitter-tweet.js",
+			"file_size": 7,
+			"file_write_time": 130469547660000000,
+			"settings":
+			{
+				"buffer_size": 106,
+				"line_ending": "Unix",
+				"name": "twitter"
+			}
+		},
+		{
+			"file": "src/toolbar-styles.js",
+			"settings":
+			{
+				"buffer_size": 10866,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,15 +559,15 @@
 			"file": "src/toolbar-add.js",
 			"settings":
 			{
-				"buffer_size": 5475,
+				"buffer_size": 6160,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "saved.html",
+			"file": "src/toolbar-base.js",
 			"settings":
 			{
-				"buffer_size": 8930,
+				"buffer_size": 3444,
 				"line_ending": "Unix"
 			}
 		}
@@ -547,7 +575,7 @@
 	"build_system": "Packages/User/gulp.sublime-build",
 	"command_palette":
 	{
-		"height": 47.0,
+		"height": 247.0,
 		"selected_items":
 		[
 			[
@@ -719,7 +747,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 449.0
+		"width": 476.0
 	},
 	"console":
 	{
@@ -746,10 +774,20 @@
 	],
 	"file_history":
 	[
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbar-link.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbar-base.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbar-styles.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/placeholder.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/context-toolbars.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbar-add.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/drop-images.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/selection-region.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/saved.html",
+		"/Users/iliyan/Desktop/test.html",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/dist/placeholder.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/gulpfile.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/dist/toolbar-base.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/dist/toolbar-add.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbar-add.js",
 		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/liferay/surface.js",
 		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/liferay/surface_app.js",
 		"/Users/iliyan/projects/liferay/portal/util-java/src/com/liferay/util/SetUtil.java",
@@ -863,17 +901,7 @@
 		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/fckeditor/editor/dialog/fck_flash.html",
 		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/ckeditor/plugins/iframe/dialogs/iframe.js",
 		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/ckeditor/skins/kama/dialog_ie.css",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/ckeditor/lang/da.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/fckeditor/editor/_source/classes/fckeditingarea.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/ckeditor/plugins/autocomplete/plugin.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/tiny_mce/plugins/spellchecker/editor_plugin.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/aui/cache-plugin/cache-plugin.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/aui/plugin/plugin.js",
-		"/Users/iliyan/projects/liferay/portal/portal-service/src/com/liferay/portal/model/Plugin.java",
-		"/Users/iliyan/projects/liferay/portal/modules/portal/portal-console/classes/plugin.properties",
-		"/Users/iliyan/projects/liferay/portal/portal-impl/src/com/liferay/portal/model/impl/UserGroupImpl.java",
-		"/Users/iliyan/projects/liferay/portal/portal-impl/test/integration/com/liferay/portal/lar/dependencies/layout_links_user_group.txt",
-		"/Users/iliyan/projects/liferay/portal/portal-impl/classes/content/Language_uk.properties"
+		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/ckeditor/lang/da.js"
 	],
 	"find":
 	{
@@ -884,6 +912,7 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"*.js",
 			"*.java",
 			"*.js*",
 			"*",
@@ -1010,8 +1039,7 @@
 			"*.js*",
 			"*.jsp",
 			"*.js*",
-			"*.j*",
-			"*.js*"
+			"*.j*"
 		]
 	},
 	"find_state":
@@ -1019,6 +1047,39 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"func =",
+			"_processFile",
+			"instance._editor",
+			"event.editor",
+			"this._ed",
+			"addEventListener",
+			"this.",
+			"editorPlaceholder",
+			"editorpla",
+			"x.",
+			"frag",
+			"editor.config",
+			"this._placeholderValue",
+			"_placeholderValue",
+			"placeholderVal",
+			"event.editor",
+			"this._editor",
+			".$);",
+			"var editable = this._editor.element.$;",
+			"extra",
+			"                    \n",
+			"editor2",
+			"editor",
+			"editorNode = Y.one('#editable');",
+			"editable",
+			"_getInputFile",
+			"click",
+			"extra",
+			"dropimages",
+			"ckeditor",
+			"drop",
+			"_onButtonsOverlayVisibleChange",
+			"hide",
 			"all_pages",
 			"p_p_isolated",
 			"isisolated",
@@ -1113,40 +1174,7 @@
 			" while(node)",
 			"tplReplace",
 			"_replaceFn",
-			"_replaceHTML",
-			"_replaceHTML\n_replaceHTML",
-			"_replaceHtml",
-			"replaceMode",
-			"while(",
-			"a.array",
-			"updateWalker.end()",
-			"_replaceFn",
-			"_onPopState",
-			"function(response, refreshPage) {",
-			"refresh",
-			"postReply",
-			"postreply",
-			"debugg",
-			"getPatternPortletURL",
-			"getSurfaceIds",
-			"getAllowedPortletIds",
-			"bottomJs",
-			"bottom_js.jspf",
-			"PropsValues.JAVASCRIPT_SINGLE_PAGE_APPLICATION_ENABLED",
-			"getProperty(\"javascript\")",
-			"paste-javascript-code",
-			"detachUpdateSection",
-			"Liferay.after(",
-			"debugger",
-			"portletId",
-			"<%= portletId %>",
-			"destroyPortlet",
-			"if (form.formNode.compareTo(formNode)) {",
-			"handles",
-			"_registerMenu",
-			"_registerTask",
-			"push",
-			"node"
+			"_replaceHTML"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1292,11 +1320,160 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
+					"file": "saved.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10283,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3699,
+								3699
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2025.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/drop-images.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2700,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2145,
+								2145
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 592.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/twitter-tweet.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 106,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								106,
+								106
+							]
+						],
+						"settings":
+						{
+							"auto_name": "twitter",
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/toolbar-styles.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10866,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9538,
+								9538
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6151.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/toolbar-add.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6160,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4808,
+								4908
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3081.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "src/toolbar-base.js",
 					"semi_transient": false,
 					"settings":
@@ -1308,8 +1485,8 @@
 						"selection":
 						[
 							[
-								962,
-								962
+								2021,
+								2054
 							]
 						],
 						"settings":
@@ -1319,70 +1496,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/toolbar-add.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5475,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3992,
-								3992
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1966.0,
+						"translation.y": 958.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "saved.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8930,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								631,
-								631
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1450,6 +1567,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"placeholder",
+				"src/placeholder.js"
+			],
 			[
 				"surface.js",
 				"portal-web/docroot/html/js/liferay/surface_app.js"
@@ -1957,10 +2078,6 @@
 			[
 				"aglibaui/button/",
 				"portal-web/docroot/html/taglib/aui/button/init-ext.jspf"
-			],
-			[
-				"html/taglib/aui/input/init.jsp",
-				"portal-web/docroot/html/taglib/aui/input/init.jsp"
 			]
 		],
 		"width": 0.0

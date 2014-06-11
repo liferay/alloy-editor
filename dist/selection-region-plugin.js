@@ -78,10 +78,12 @@ SelectionRegion.prototype = {
             region,
             selection;
 
+        console.log('getCaretRegion');
+
         if (this.isSelectionEmpty()) {
             selection = this.getSelection();
 
-            bookmarks = selection.createBookmarks();
+            bookmarks = selection.createBookmarks2();
             bookmarkNodeEl = bookmarks[0].startNode.$;
 
             bookmarkNodeEl.style.display = 'inline-block';
