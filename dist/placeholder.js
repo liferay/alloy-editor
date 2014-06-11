@@ -1,5 +1,5 @@
 ;(function() {
-    var REGEX_EOL = /(?:\r?\n)+$/;
+    var REGEX_EOL = /(?:\r?\n\s*)+$/;
 
     CKEDITOR.plugins.add(
         'placeholder',
