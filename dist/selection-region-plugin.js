@@ -78,47 +78,27 @@ SelectionRegion.prototype = {
             region,
             selection;
 
-        console.log('getCaretRegion');
+        selection = this.getSelection();
 
-        if (this.isSelectionEmpty()) {
-            selection = this.getSelection();
+        bookmarks = selection.createBookmarks();
+        bookmarkNodeEl = bookmarks[0].startNode.$;
 
-            bookmarks = selection.createBookmarks2();
-            bookmarkNodeEl = bookmarks[0].startNode.$;
+        bookmarkNodeEl.style.display = 'inline-block';
 
-            bookmarkNodeEl.style.display = 'inline-block';
+        region = new CKEDITOR.dom.element(bookmarkNodeEl).getClientRect();
 
-            region = new CKDOMElement(bookmarkNodeEl).getClientRect();
+        bookmarkNodeEl.parentNode.removeChild(bookmarkNodeEl);
 
-            bookmarkNodeEl.parentNode.removeChild(bookmarkNodeEl);
+        docScrollXY = this._getDocScrollXY();
+        docScrollX = docScrollXY[0];
+        docScrollY = docScrollXY[1];
 
-            docScrollXY = this._getDocScrollXY();
-            docScrollX = docScrollXY[0];
-            docScrollY = docScrollXY[1];
-
-            region = {
-                bottom: docScrollY + region.bottom,
-                left: docScrollX + region.left,
-                right: docScrollX + region.right,
-                top: docScrollY + region.top
-            };
-        }
-        else {
-            region = this.getSelectionRegion();
-        }
-
-        return region;
-    },
-
-    getCaretXY: function() {
-        var region;
-
-        region = this.getCaretRegion();
-
-        return [
-            region.left,
-            region.top
-        ];
+        return {
+            bottom: docScrollY + region.bottom,
+            left: docScrollX + region.left,
+            right: docScrollX + region.right,
+            top: docScrollY + region.top
+        };
     },
 
     getSelectionData: function() {
@@ -143,12 +123,7 @@ SelectionRegion.prototype = {
 
         direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
 
-        if (this.isSelectionEmpty()) {
-            region = this.getCaretRegion();
-        }
-        else {
-            region = this.getClientRectsRegion();
-        }
+        region = this.getClientRectsRegion();
 
         region.direction = this._getSelectionDirection();
 
@@ -203,58 +178,65 @@ SelectionRegion.prototype = {
         right = -Infinity;
         top = Infinity;
 
-        for (i = 0, length = clientRects.length; i < length; i++) {
-            item = clientRects[i];
+        console.log(clientRects.length);
 
-            if (item.left < left) {
-                left = item.left;
-            }
-
-            if (item.right > right) {
-                right = item.right;
-            }
-
-            if (item.top < top) {
-                top = item.top;
-            }
-
-            if (item.bottom > bottom) {
-                bottom = item.bottom;
-            }
+        if (clientRects.length === 0) {
+            region = this.getCaretRegion();
         }
+        else {
+            for (i = 0, length = clientRects.length; i < length; i++) {
+                item = clientRects[i];
 
-        docScrollXY = this._getDocScrollXY();
-        docScrollX = docScrollXY[0];
-        docScrollY = docScrollXY[1];
+                if (item.left < left) {
+                    left = item.left;
+                }
 
-        region = {
-            bottom: docScrollY + bottom,
-            left: docScrollX + left,
-            right: docScrollX + right,
-            top: docScrollY + top
-        };
+                if (item.right > right) {
+                    right = item.right;
+                }
 
-        if (clientRects.length) {
-            endRect = clientRects[clientRects.length - 1];
-            startRect = clientRects[0];
+                if (item.top < top) {
+                    top = item.top;
+                }
 
-            region.endRect = {
-                bottom: docScrollY + endRect.bottom,
-                height: endRect.height,
-                left: docScrollX + endRect.left,
-                right: docScrollX + endRect.right,
-                top: docScrollY + endRect.top,
-                width: endRect.width
+                if (item.bottom > bottom) {
+                    bottom = item.bottom;
+                }
+            }
+
+            docScrollXY = this._getDocScrollXY();
+            docScrollX = docScrollXY[0];
+            docScrollY = docScrollXY[1];
+
+            region = {
+                bottom: docScrollY + bottom,
+                left: docScrollX + left,
+                right: docScrollX + right,
+                top: docScrollY + top
             };
 
-            region.startRect = {
-                bottom: docScrollY + startRect.bottom,
-                height: startRect.height,
-                left: docScrollX + startRect.left,
-                right: docScrollX + startRect.right,
-                top: docScrollY + startRect.top,
-                width: startRect.width
-            };
+            if (clientRects.length) {
+                endRect = clientRects[clientRects.length - 1];
+                startRect = clientRects[0];
+
+                region.endRect = {
+                    bottom: docScrollY + endRect.bottom,
+                    height: endRect.height,
+                    left: docScrollX + endRect.left,
+                    right: docScrollX + endRect.right,
+                    top: docScrollY + endRect.top,
+                    width: endRect.width
+                };
+
+                region.startRect = {
+                    bottom: docScrollY + startRect.bottom,
+                    height: startRect.height,
+                    left: docScrollX + startRect.left,
+                    right: docScrollX + startRect.right,
+                    top: docScrollY + startRect.top,
+                    width: startRect.width
+                };
+            }
         }
 
         return region;
