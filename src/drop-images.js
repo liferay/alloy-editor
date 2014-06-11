@@ -7,16 +7,22 @@
             init: function(editor) {
                 var editable;
 
-                editable = editor.element.$;
+                editable = new CKEDITOR.editable(editor, editor.element.$);
 
-                this._editor = editor;
+                editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
+                    editor: editor
+                });
 
-                editable.addEventListener('dragenter', CKEDITOR.tools.bind(this._onDragEnter, this));
-                editable.addEventListener('dragover', CKEDITOR.tools.bind(this._onDragOver, this));
-                editable.addEventListener('drop', CKEDITOR.tools.bind(this._onDragDrop, this));
+                editable.attachListener(editable, 'dragover', this._onDragOver, this, {
+                    editor: editor
+                });
+
+                editable.attachListener(editable, 'drop', this._onDragDrop, this, {
+                    editor: editor
+                });
             },
 
-            _handleFiles: function(files) {
+            _handleFiles: function(files, editor) {
                 var i,
                     imageType,
                     file;
@@ -26,7 +32,7 @@
                     imageType = /image.*/;
 
                     if (file.type.match(imageType)) {
-                        this._processFile(file);
+                        this._processFile(file, editor);
                     }
                 }
 
@@ -35,30 +41,38 @@
 
             _onDragEnter: function(event) {
                 if (isIE) {
-                    event.stopPropagation();
+                    event = new CKEDITOR.dom.event(event.data.$);
+
                     event.preventDefault();
+                    event.stopPropagation();
                 }
             },
 
             _onDragOver: function(event) {
                 if (isIE) {
-                    event.stopPropagation();
+                    event = new CKEDITOR.dom.event(event.data.$);
+
                     event.preventDefault();
+                    event.stopPropagation();
                 }
             },
 
             _onDragDrop: function(event) {
-                event.stopPropagation();
-                event.preventDefault();
+                var editor,
+                    nativeEvent;
 
-                this._editor.createSelectionFromPoint(event.clientX, event.clientY);
+                nativeEvent = event.data.$;
 
-                this._handleFiles(event.dataTransfer.files);
+                new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+                editor = event.listenerData.editor;
+
+                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                this._handleFiles(nativeEvent.dataTransfer.files, editor);
             },
 
-            _processFile: function(file) {
-                var instance = this;
-
+            _processFile: function(file, editor) {
                 var reader = new FileReader();
 
                 reader.addEventListener('loadend', function() {
@@ -69,7 +83,7 @@
 
                     el = CKEDITOR.dom.element.createFromHtml('<img src="' + bin + '">');
 
-                    instance._editor.insertElement(el);
+                    editor.insertElement(el);
 
                     CKEDITOR.fire('imagedrop', el);
                 });
