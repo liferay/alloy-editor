@@ -3,8 +3,12 @@
         'contexttoolbars',
         {
             init: function(editor) {
+                var buttonModules = this._getButtonModules();
+
+                buttonModules.push('node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', 'toolbar-styles', 'toolbar-add');
+
                 YUI().use(
-                    'node', 'overlay', 'event-mouseenter', 'aui-debounce', 'aui-toolbar', 'gesture-simulate', 'toolbar-styles', 'toolbar-add',
+                    buttonModules,
                     function(Y) {
                         var editorNode = Y.one(editor.element.$);
 
@@ -19,7 +23,7 @@
                                 if (selectionData.region) {
                                     var startRect = selectionData.region.startRect || selectionData.region;
 
-                                    add.showAtPoint(editorDOMNode.offsetLeft, selectionData.region.top + startRect.height/2);
+                                    // add.showAtPoint(editorDOMNode.offsetLeft, selectionData.region.top + startRect.height/2);
                                 }
                                 else {
                                     hideAdd();
@@ -75,20 +79,21 @@
                         }
 
                         function hideAdd() {
-                            add.hide();
+                            // add.hide();
                         }
 
                         var overlay = new Y.ToolbarStyles({
+                            buttons: ToolbarsConfig.styles,
                             editor: editor,
                             visible: false
                         }).render();
 
-                        var add = new Y.ToolbarAdd({
-                            editor: editor,
-                            height: '20px',
-                            visible: false,
-                            width: '20px'
-                        }).render();
+                        // var add = new Y.ToolbarAdd({
+                        //     editor: editor,
+                        //     height: '20px',
+                        //     visible: false,
+                        //     width: '20px'
+                        // }).render();
 
                         editorNode = Y.one(editor.element.$);
 
@@ -96,6 +101,16 @@
                         editorNode.on('keyup', handleUI);
                     }
                 );
+            },
+
+            _getButtonModules: function() {
+                var buttonModules = [];
+
+                for (var i = ToolbarsConfig.styles.length - 1; i >= 0; i--) {
+                    buttonModules.push('button-' + ToolbarsConfig.styles[i]);
+                };
+
+                return buttonModules;
             }
         }
     );
