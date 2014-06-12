@@ -20,24 +20,7 @@ YUI.add('button-base', function (Y) {
         },
 
         renderUI: function() {
-            var buttonsContainer,
-                btnSrcNode;
-
-            buttonsContainer = this.get('host').get('buttonsContainer');
-
-            btnSrcNode = YNode.create(
-                Lang.sub(this.TPL_BUTTON, {
-                    content: this.TPL_CONTENT
-                })
-            );
-
-            this._button = new Y.ToggleButton({
-                srcNode: btnSrcNode,
-                on: {
-                    click: Y.bind(this._onClick, this)
-                },
-                render: buttonsContainer
-            });
+            this._renderButtonUI();
         },
 
         bindUI: function() {
@@ -69,6 +52,27 @@ YUI.add('button-base', function (Y) {
             else {
                 editor.removeStyle(this._style);
             }
+        },
+
+        _renderButtonUI: function() {
+            var buttonsContainer,
+                btnSrcNode;
+
+            buttonsContainer = this.get('host').get('buttonsContainer');
+
+            btnSrcNode = YNode.create(
+                Lang.sub(this.TPL_BUTTON, {
+                    content: this.TPL_CONTENT
+                })
+            );
+
+            this._button = new Y.ToggleButton({
+                srcNode: btnSrcNode,
+                on: {
+                    click: Y.bind(this._onClick, this)
+                },
+                render: buttonsContainer
+            });
         },
 
         TPL_BUTTON: '<button class="btn">{content}</button>'

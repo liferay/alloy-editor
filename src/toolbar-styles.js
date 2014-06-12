@@ -3,7 +3,7 @@ YUI.add('toolbar-styles', function (Y) {
         YArray = Y.Array,
     	YNode = Y.Node,
 
-    ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition], {
+    ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide], {
     	initializer: function() {
             var instance = this;
 
@@ -16,7 +16,9 @@ YUI.add('toolbar-styles', function (Y) {
 
                     instanceName = instance._getButtonInstanceName(item);
 
-                    instance.plug(Y[instanceName]);
+                    item = Lang.isObject(item) ? item : {};
+
+                    instance.plug(Y[instanceName], item);
                 }
             );
     	},
@@ -109,5 +111,5 @@ YUI.add('toolbar-styles', function (Y) {
 
     Y.ToolbarStyles = ToolbarStyles;
 },'', {
-    requires: ['widget', 'widget-position']
+    requires: ['widget', 'widget-position', 'widget-autohide']
 });

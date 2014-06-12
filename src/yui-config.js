@@ -15,8 +15,8 @@ var YUI_config = {
             requires: ["button-base"]
         },
 
-        "button-link": {
-            fullpath: "/dist/plugins/button-link.js",
+        "button-a": {
+            fullpath: "/dist/plugins/button-a.js",
             requires: ["button-base"]
         },
 

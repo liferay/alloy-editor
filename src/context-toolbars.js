@@ -108,7 +108,7 @@
 
                 for (var i = ToolbarsConfig.styles.length - 1; i >= 0; i--) {
                     buttonModules.push('button-' + ToolbarsConfig.styles[i]);
-                };
+                }
 
                 return buttonModules;
             }
