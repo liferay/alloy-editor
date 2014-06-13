@@ -58,6 +58,3 @@ YUI.add('button-image', function (Y) {
 },'', {
     requires: ['button-base', 'node-event-simulate']
 });
-
-
-// code: '<i class="icon-code"></i>'

@@ -44,5 +44,10 @@ var YUI_config = {
             fullpath: "/dist/plugins/button-code.js",
             requires: ["button-base"]
         },
+
+        "button-twitter": {
+            fullpath: "/dist/plugins/button-twitter.js",
+            requires: ["button-base"]
+        }
     },
 };

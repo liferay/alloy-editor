@@ -80,7 +80,7 @@ YUI.add('toolbar-styles', function (Y) {
         ATTRS: {
             buttons: {
                 validator: Lang.isArray,
-                value: ['strong', 'em', 'u', 'h1', 'h2', 'a']
+                value: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
             },
 
             buttonsContainer: {
