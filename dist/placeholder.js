@@ -1,4 +1,6 @@
 ;(function() {
+    'use strict';
+
     var REGEX_EOL = /(?:\r?\n\s*)+$/;
 
     CKEDITOR.plugins.add(

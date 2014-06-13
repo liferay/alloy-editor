@@ -1,4 +1,6 @@
 YUI.add('button-twitter', function (Y) {
+    'use strict';
+
     var Lang = Y.Lang;
 
     var Tweet = Y.Base.create('tweet', Y.Plugin.Base, [Y.ButtonBase], {

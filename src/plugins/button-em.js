@@ -1,4 +1,6 @@
 YUI.add('button-em', function (Y) {
+    'use strict';
+
     var Lang = Y.Lang;
 
     var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {

@@ -1,4 +1,6 @@
 ;(function() {
+    'use strict';
+
     var isIE = CKEDITOR.env.ie;
 
     CKEDITOR.plugins.add(

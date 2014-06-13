@@ -1,4 +1,6 @@
 YUI.add('button-h1', function (Y) {
+    'use strict';
+
     var Lang = Y.Lang;
 
     var H1 = Y.Base.create('h1', Y.Plugin.Base, [Y.ButtonBase], {

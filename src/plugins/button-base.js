@@ -1,4 +1,6 @@
 YUI.add('button-base', function (Y) {
+    'use strict';
+
     var Lang = Y.Lang,
         YNode = Y.Node;
 

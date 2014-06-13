@@ -1,4 +1,6 @@
 ;(function() {
+    'use strict';
+
     CKEDITOR.plugins.add(
         'contexttoolbars',
         {

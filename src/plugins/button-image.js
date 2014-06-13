@@ -1,4 +1,6 @@
 YUI.add('button-image', function (Y) {
+    'use strict';
+
     var Lang = Y.Lang;
 
     var BtnImage = Y.Base.create('image', Y.Plugin.Base, [Y.ButtonBase], {

@@ -1,4 +1,6 @@
 YUI.add('button-strong', function (Y) {
+    'use strict';
+
     var Lang = Y.Lang;
 
     var Strong = Y.Base.create('strong', Y.Plugin.Base, [Y.ButtonBase], {

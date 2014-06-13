@@ -1,4 +1,6 @@
 YUI.add('toolbar-add', function (Y) {
+    'use strict';
+
     var Lang = Y.Lang,
         YArray = Y.Array,
         YNode = Y.Node,
