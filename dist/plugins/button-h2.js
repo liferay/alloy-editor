@@ -2,7 +2,7 @@ YUI.add('button-h2', function (Y) {
     var Lang = Y.Lang;
 
     var H2 = Y.Base.create('h2', Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: '<i class="icon-h2"></i>'
+        TPL_CONTENT: 'H2'
     }, {
         NAME: 'h2',
 
