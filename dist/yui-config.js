@@ -33,6 +33,16 @@ var YUI_config = {
         "button-u": {
             fullpath: "/dist/plugins/button-underline.js",
             requires: ["button-base"]
-        }
+        },
+
+        "button-image": {
+            fullpath: "/dist/plugins/button-image.js",
+            requires: ["button-base"]
+        },
+
+        "button-code": {
+            fullpath: "/dist/plugins/button-code.js",
+            requires: ["button-base"]
+        },
     },
 };

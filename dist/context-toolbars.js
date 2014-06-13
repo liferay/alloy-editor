@@ -23,7 +23,7 @@
                                 if (selectionData.region) {
                                     var startRect = selectionData.region.startRect || selectionData.region;
 
-                                    // add.showAtPoint(editorDOMNode.offsetLeft, selectionData.region.top + startRect.height/2);
+                                    add.showAtPoint(editorDOMNode.offsetLeft, selectionData.region.top + startRect.height/2);
                                 }
                                 else {
                                     hideAdd();
@@ -79,7 +79,7 @@
                         }
 
                         function hideAdd() {
-                            // add.hide();
+                            add.hide();
                         }
 
                         var overlay = new Y.ToolbarStyles({
@@ -88,12 +88,13 @@
                             visible: false
                         }).render();
 
-                        // var add = new Y.ToolbarAdd({
-                        //     editor: editor,
-                        //     height: '20px',
-                        //     visible: false,
-                        //     width: '20px'
-                        // }).render();
+                        var add = new Y.ToolbarAdd({
+                            buttons: ToolbarsConfig.add,
+                            editor: editor,
+                            height: '20px',
+                            visible: false,
+                            width: '20px'
+                        }).render();
 
                         editorNode = Y.one(editor.element.$);
 
@@ -108,6 +109,10 @@
 
                 for (var i = ToolbarsConfig.styles.length - 1; i >= 0; i--) {
                     buttonModules.push('button-' + ToolbarsConfig.styles[i]);
+                }
+
+                for (var i = ToolbarsConfig.add.length - 1; i >= 0; i--) {
+                    buttonModules.push('button-' + ToolbarsConfig.add[i]);
                 }
 
                 return buttonModules;

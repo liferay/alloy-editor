@@ -55,8 +55,9 @@ YUI.add('button-base', function (Y) {
         },
 
         _renderButtonUI: function() {
-            var buttonsContainer,
-                btnSrcNode;
+            var btnInst,
+                btnSrcNode,
+                buttonsContainer;
 
             buttonsContainer = this.get('host').get('buttonsContainer');
 
@@ -66,7 +67,9 @@ YUI.add('button-base', function (Y) {
                 })
             );
 
-            this._button = new Y.ToggleButton({
+            btnInst = this.get('toggle') ? 'ToggleButton' : 'Button';
+
+            this._button = new Y[btnInst]({
                 srcNode: btnSrcNode,
                 on: {
                     click: Y.bind(this._onClick, this)
@@ -76,6 +79,14 @@ YUI.add('button-base', function (Y) {
         },
 
         TPL_BUTTON: '<button class="btn">{content}</button>'
+    };
+
+    ButtonBase.ATTRS = {
+        toggle: {
+            validator: Lang.isBoolean,
+            value: true,
+            writeOnce: 'initOnly'
+        }
     };
 
     Y.ButtonBase = ButtonBase;

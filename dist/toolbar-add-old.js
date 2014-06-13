@@ -4,24 +4,9 @@ YUI.add('toolbar-add', function (Y) {
         YNode = Y.Node,
         YObject = Y.Object,
 
-    ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide], {
+    ToolbarAdd = Y.Base.create('toolbaradd', Y.ToolbarBase, [], {
         initializer: function() {
-            var instance = this;
-
-            instance._hideButtonsContainerFn = Y.debounce(instance._hideButtonsContainer, instance.get('hideTimeout'));
-
-            YArray.each(
-                instance.get('buttons'),
-                function(item) {
-                    var instanceName;
-
-                    instanceName = instance._getButtonInstanceName(item);
-
-                    item = Lang.isObject(item) ? item : {};
-
-                    instance.plug(Y[instanceName], item);
-                }
-            );
+            this._hideButtonsContainerFn = Y.debounce(this._hideButtonsContainer, this.get('hideTimeout'));
         },
 
         bindUI: function() {
@@ -43,6 +28,8 @@ YUI.add('toolbar-add', function (Y) {
         },
 
         destructor: function() {
+            YArray.invoke(this._buttons, 'destroy');
+
             this._addButton.destroy();
 
             this._buttonsOverlay.destroy();
@@ -76,12 +63,39 @@ YUI.add('toolbar-add', function (Y) {
                 [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]);
         },
 
-        _getButtonsContainer: function() {
-            return this._buttonsContainer;
+        _getInputFile: function() {
+            var id,
+                inputFile;
+
+            inputFile = this._inputFile;
+
+            if (!inputFile) {
+                id = Y.guid();
+
+                Y.one('body').prepend('<input type="file" id="' + id + '"  style="display: none;"></input>');
+
+                inputFile = Y.one('#' + id);
+
+                inputFile.on('change', function() {
+                    console.log(inputFile.get('value'));
+
+                    inputFile.set('value', '');
+                });
+
+                this._inputFile = inputFile;
+            }
+
+            return inputFile;
         },
 
-        _getButtonInstanceName: function(buttonName) {
-            return 'Button' + buttonName.substring(0, 1).toUpperCase() + buttonName.substring(1);
+        _handleCode: function(event) {
+
+        },
+
+        _handleImage: function(event) {
+            var inputFile = this._getInputFile();
+
+            inputFile.simulate('click');
         },
 
         _handleMouseEnter: function() {
@@ -112,11 +126,14 @@ YUI.add('toolbar-add', function (Y) {
         _renderAddNode: function() {
             var addButton,
                 addNode,
+                buttonsContent,
                 contentBox;
+
+            buttonsContent = this.get('buttonsContent');
 
             addNode = YNode.create(Lang.sub(
                 this.TPL_ADD, {
-                    content: this.TPL_ADD_CONTENT
+                    content: buttonsContent.add
             }));
 
             addButton = new Y.Button({
@@ -137,13 +154,13 @@ YUI.add('toolbar-add', function (Y) {
 
             buttonsContainer = YNode.create(this.TPL_BUTTON_CONTAINER);
 
+            this._renderButtons(buttonsContainer);
+
             this._buttonsOverlay = new Y.Overlay({
                 visible: false,
                 srcNode: buttonsContainer,
                 zIndex: 1
             }).render();
-
-            this._buttonsContainer = buttonsContainer;
         },
 
         _showButtonsContainer: function() {
@@ -162,7 +179,7 @@ YUI.add('toolbar-add', function (Y) {
               '<button type="button" class="btn btn-add">{content}</button>' +
             '</div>',
 
-        TPL_ADD_CONTENT: '<i class="icon-plus-sign"></i>',
+        TPL_BUTTON: '<button type="button" class="btn btn-add-{type}">{content}</i></button>',
 
         TPL_BUTTON_CONTAINER:
           '<div class="btn-group btn-group-vertical add-content"></div>'
@@ -173,13 +190,13 @@ YUI.add('toolbar-add', function (Y) {
                 value: ['image', 'code']
             },
 
-            buttonsContainer: {
-                getter: '_getButtonsContainer',
-                readOnly: true
-            },
-
-            editor: {
-                validator: Lang.isObject
+            buttonsContent: {
+                validator: Lang.isObject,
+                value: {
+                    add: '<i class="icon-plus-sign"></i>',
+                    image: '<i class="icon-picture"></i>',
+                    code: '<i class="icon-code"></i>'
+                }
             },
 
             gutter: {
@@ -198,5 +215,5 @@ YUI.add('toolbar-add', function (Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 },'0.1', {
-    requires: ['widget', 'widget-position', 'widget-autohide', 'aui-debounce']
+    requires: ['array-has', 'array-invoke', 'button', 'node-event-simulate', 'toolbar-base', 'aui-debounce']
 });
