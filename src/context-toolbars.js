@@ -107,13 +107,16 @@
             },
 
             _getButtonModules: function() {
-                var buttonModules = [];
+                var buttonModules,
+                    i;
 
-                for (var i = ToolbarsConfig.styles.length - 1; i >= 0; i--) {
+                buttonModules = [];
+
+                for (i = ToolbarsConfig.styles.length - 1; i >= 0; i--) {
                     buttonModules.push('button-' + ToolbarsConfig.styles[i]);
                 }
 
-                for (var i = ToolbarsConfig.add.length - 1; i >= 0; i--) {
+                for (i = ToolbarsConfig.add.length - 1; i >= 0; i--) {
                     buttonModules.push('button-' + ToolbarsConfig.add[i]);
                 }
 
