@@ -54,5 +54,5 @@ var YUI_config = {
             fullpath: '/dist/plugins/button-twitter.js',
             requires: ['plugin', 'node-base']
         }
-    },
+    }
 };
