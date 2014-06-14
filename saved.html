@@ -100,7 +100,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <script src="dist/toolbar-base.js"></script>
     <script src="dist/toolbar-styles.js"></script>
     <script src="dist/toolbar-add.js"></script>
-    <script src="dist/context-toolbars.js"></script>
+    <script src="dist/uicore.js"></script>
     <script src="dist/drop-images.js"></script>
     <script src="dist/placeholder.js"></script>
 
@@ -212,8 +212,8 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         editor.config.allowedContent = true;
 
         // Remove unnecessary plugins to make the editor simpler.
-        editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
-        editor.config.extraPlugins = 'contexttoolbars,selectionregion,dropimages,placeholder';
+        editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
+        editor.config.extraPlugins = 'uicore,selectionregion,dropimages,placeholder';
         editor.config.placeholderValue = 'Write here!';
         editor.config.placeholderClass = 'editor-placeholder';
     </script>
@@ -224,7 +224,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         editor.config.allowedContent = true;
 
         // Remove unnecessary plugins to make the editor simpler.
-        editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
+        editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
         editor.config.extraPlugins = 'placeholder';
         editor.config.placeholderClass = 'editor-placeholder';
 
@@ -237,7 +237,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         editor.config.allowedContent = true;
 
         // Remove unnecessary plugins to make the editor simpler.
-        editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,contextmenu,liststyle,tabletools,link';
+        editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
         editor.config.extraPlugins = 'placeholder';
         editor.config.placeholderClass = 'editor-placeholder';
 

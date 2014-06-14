@@ -7,6 +7,16 @@ YUI.add('toolbar-add', function (Y) {
         YObject = Y.Object,
 
     ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetAutohide], {
+        initializer: function () {
+            var editorNode;
+
+            editorNode = Y.one(this.get('editor').element.$);
+
+            this._hideButtonsContainerFn = Y.debounce(this._hideButtonsContainer, this.get('hideTimeout'));
+
+            this._editorDOMNode = editorNode.getDOMNode();
+        },
+
         bindUI: function() {
             var boundingBox,
                 buttonsBoundingBox;
@@ -81,6 +91,22 @@ YUI.add('toolbar-add', function (Y) {
                         item.set('pressed', false);
                     }
                 );
+            }
+        },
+
+        _onEditorInteraction: function(event) {
+            var selectionData,
+                startRect;
+
+            selectionData = event.selectionData;
+
+            if (selectionData.region) {
+                startRect = selectionData.region.startRect || selectionData.region;
+
+                this.showAtPoint(this._editorDOMNode.offsetLeft, selectionData.region.top + startRect.height/2);
+            }
+            else {
+                this.hide();
             }
         },
 

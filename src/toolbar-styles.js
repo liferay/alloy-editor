@@ -40,7 +40,7 @@ YUI.add('toolbar-styles', function (Y) {
 
             offsetFromSel = this.get('offsetFromSel');
 
-            if (direction === 0) { // top to bottom
+            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
                 top = top + offsetFromSel.topToBottom;
             }
             else {
@@ -48,6 +48,63 @@ YUI.add('toolbar-styles', function (Y) {
             }
 
             return [left, top];
+        },
+
+        _onEditorInteraction: function(event) {
+            var direction,
+                editor,
+                endRect,
+                selectionData,
+                selectionEmpty,
+                startRect,
+                x,
+                y,
+                yuiEvent;
+
+            editor = this.get('editor');
+
+            selectionEmpty = editor.isSelectionEmpty();
+
+            selectionData = event.selectionData;
+
+            if (selectionData.region && !selectionEmpty) {
+                direction = selectionData.region.direction;
+
+                endRect = selectionData.region.endRect;
+                startRect = selectionData.region.startRect;
+
+                if (endRect && endRect && startRect.top === endRect.top) {
+                    direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+                }
+
+                yuiEvent = event.yuiEvent;
+
+                if (yuiEvent.pageX && yuiEvent.pageY) {
+                    x = yuiEvent.pageX;
+
+                    if (direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
+                        y = Math.min(yuiEvent.pageY, selectionData.region.top);
+                    }
+                    else {
+                        y = Math.max(yuiEvent.pageY, selectionData.region.bottom);
+                    }
+                }
+                else {
+                    x = selectionData.region.left + selectionData.region.width/2;
+
+                    if (direction === 0) {
+                        y = selectionData.region.endRect.top;
+                    }
+                    else {
+                        y = selectionData.region.startRect.top;
+                    }
+                }
+
+                this.showAtPoint(x, y, direction);
+            }
+            else {
+                this.hide();
+            }
         },
 
         TPL_BUTTON_CONTAINER: '<div class="btn-group btn-container"></div>'
