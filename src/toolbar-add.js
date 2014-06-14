@@ -6,26 +6,7 @@ YUI.add('toolbar-add', function (Y) {
         YNode = Y.Node,
         YObject = Y.Object,
 
-    ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide], {
-        initializer: function() {
-            var instance = this;
-
-            instance._hideButtonsContainerFn = Y.debounce(instance._hideButtonsContainer, instance.get('hideTimeout'));
-
-            YArray.each(
-                instance.get('buttons'),
-                function(item) {
-                    var instanceName;
-
-                    instanceName = instance._getButtonInstanceName(item);
-
-                    item = Lang.isObject(item) ? item : {};
-
-                    instance.plug(Y[instanceName], item);
-                }
-            );
-        },
-
+    ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetAutohide], {
         bindUI: function() {
             var boundingBox,
                 buttonsBoundingBox;
@@ -76,14 +57,6 @@ YUI.add('toolbar-add', function (Y) {
         _alignButtonsContainer: function() {
             this._buttonsOverlay.align(this._addContentWrapper,
                 [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]);
-        },
-
-        _getButtonsContainer: function() {
-            return this._buttonsContainer;
-        },
-
-        _getButtonInstanceName: function(buttonName) {
-            return 'Button' + buttonName.substring(0, 1).toUpperCase() + buttonName.substring(1);
         },
 
         _handleMouseEnter: function() {
@@ -154,11 +127,6 @@ YUI.add('toolbar-add', function (Y) {
             this._alignButtonsContainer();
         },
 
-        BUTTONS_ACTIONS: {
-            'image': '_handleImage',
-            'code': '_handleCode'
-        },
-
         TPL_ADD:
             '<div class="btn-group add-content-wrapper">' +
               '<button type="button" class="btn btn-add">{content}</button>' +
@@ -180,11 +148,8 @@ YUI.add('toolbar-add', function (Y) {
                 readOnly: true
             },
 
-            editor: {
-                validator: Lang.isObject
-            },
-
             gutter: {
+                validator: Lang.isArray,
                 value: {
                     left: 5,
                     top: 0
@@ -200,5 +165,5 @@ YUI.add('toolbar-add', function (Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 },'0.1', {
-    requires: ['widget', 'widget-position', 'widget-autohide', 'aui-debounce']
+    requires: ['widget', 'widget-position', 'widget-autohide', 'aui-debounce', 'toolbar-base']
 });

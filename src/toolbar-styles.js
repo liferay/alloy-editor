@@ -5,27 +5,8 @@ YUI.add('toolbar-styles', function (Y) {
         YArray = Y.Array,
     	YNode = Y.Node,
 
-    ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide], {
-    	initializer: function() {
-            var instance = this;
-
-    		instance._editorNode = Y.one(instance.get('editor').element.$);
-
-            YArray.each(
-                instance.get('buttons'),
-                function(item) {
-                    var instanceName;
-
-                    instanceName = instance._getButtonInstanceName(item);
-
-                    item = Lang.isObject(item) ? item : {};
-
-                    instance.plug(Y[instanceName], item);
-                }
-            );
-    	},
-
-        renderUI: function() {
+    ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.ToolbarBase], {
+    	renderUI: function() {
             var instance = this,
                 buttonsContainer,
                 contentBox;
@@ -47,14 +28,6 @@ YUI.add('toolbar-styles', function (Y) {
             xy = this._getToolbarXYPoint(left, top, direction);
 
             this.set('xy', xy);
-        },
-
-        _getButtonsContainer: function() {
-            return this._buttonsContainer;
-        },
-
-        _getButtonInstanceName: function(buttonName) {
-            return 'Button' + buttonName.substring(0, 1).toUpperCase() + buttonName.substring(1);
         },
 
         _getToolbarXYPoint: function(left, top, direction) {
@@ -90,11 +63,7 @@ YUI.add('toolbar-styles', function (Y) {
                 readOnly: true
             },
 
-        	editor: {
-                validator: Lang.isObject
-            },
-
-            gutter: {
+        	gutter: {
                 validator: Lang.isArray,
                 value: {
                     left: 10,
@@ -113,5 +82,5 @@ YUI.add('toolbar-styles', function (Y) {
 
     Y.ToolbarStyles = ToolbarStyles;
 },'', {
-    requires: ['widget', 'widget-position', 'widget-autohide']
+    requires: ['widget', 'widget-position', 'widget-autohide', 'toolbar-base']
 });
