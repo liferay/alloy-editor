@@ -8,13 +8,19 @@ YUI.add('button-base', function (Y) {
 
     ButtonBase.prototype = {
         initializer: function() {
-            this._style = new CKEDITOR.style({
-                element: this.get('element')
-            });
+            var element;
+
+            element = this.get('element');
+
+            if (element) {
+                this._style = new CKEDITOR.style({
+                    element: this.get('element')
+                });
+            }
 
             this.afterHostMethod('renderUI', this.renderUI, this);
             this.afterHostMethod('bindUI', this.bindUI, this);
-            this.afterHostEvent('visibleChange', this.updateUI, this);
+            this.afterHostEvent(['visibleChange', 'actionPerformed'], this.updateUI, this);
         },
 
         destructor: function() {
@@ -38,22 +44,32 @@ YUI.add('button-base', function (Y) {
 
             elementPath = editor.elementPath();
 
-            result = this._style.checkActive(elementPath, editor);
+            if (this._style) {
+                result = this._style.checkActive(elementPath, editor);
 
-            this._button.set('pressed', !!result);
+                this._button.set('pressed', !!result);
+            }
         },
 
         _onClick: function() {
             var editor;
 
-            editor = this.get('host').get('editor');
+            if (this._style) {
+                editor = this.get('host').get('editor');
 
-            if (this._button.get('pressed')) {
-                editor.applyStyle(this._style);
+                if (this._button.get('pressed')) {
+                    editor.applyStyle(this._style);
+                }
+                else {
+                    editor.removeStyle(this._style);
+                }
             }
-            else {
-                editor.removeStyle(this._style);
-            }
+        },
+
+        _afterClick: function() {
+            this.fire('actionPerformed', {
+                style: this._style
+            });
         },
 
         _renderButtonUI: function() {
@@ -72,11 +88,14 @@ YUI.add('button-base', function (Y) {
             btnInst = this.get('toggle') ? 'ToggleButton' : 'Button';
 
             this._button = new Y[btnInst]({
-                srcNode: btnSrcNode,
+                after: {
+                    click: Y.bind(this._afterClick, this)
+                },
                 on: {
                     click: Y.bind(this._onClick, this)
                 },
-                render: buttonsContainer
+                render: buttonsContainer,
+                srcNode: btnSrcNode
             });
         },
 

@@ -22,10 +22,6 @@
 
                         editorNode = Y.one(editor.element.$);
 
-                        Y.publish('editorInteraction', {
-                            broadcast: true
-                        });
-
                         instance._createToolbars(Y, editor);
 
                         handleUI = Y.debounce(
@@ -68,7 +64,7 @@
                                 })
                             );
                         }
-                        else {
+                        else if(ToolbarsConfig[i]) {
                             editor.config.toolbars[i] = new Y[this._getToolbarName(i)](
                                 this._merge(defaultConfig, ToolbarsConfig[i])
                             );
@@ -93,7 +89,7 @@
                                 modules.push('button-' + ToolbarsConfig[i][j]);
                             }
                         }
-                        else {
+                        else if (ToolbarsConfig[i]) {
                             for (j = ToolbarsConfig[i].buttons.length - 1; j >= 0; j--) { // put button modules
                                 modules.push('button-' + ToolbarsConfig[i].buttons[j]);
                             }

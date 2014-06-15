@@ -42,11 +42,6 @@ YUI.add('button-image', function (Y) {
         NS: 'image',
 
         ATTRS: {
-            element: {
-                validator: Lang.isString,
-                value: 'image'
-            },
-
             toggle: {
                 validator: Lang.isBoolean,
                 value: false,

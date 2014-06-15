@@ -15,11 +15,6 @@ YUI.add('button-code', function (Y) {
         NS: 'code',
 
         ATTRS: {
-            element: {
-                validator: Lang.isString,
-                value: 'code'
-            },
-
             toggle: {
                 validator: Lang.isBoolean,
                 value: false,

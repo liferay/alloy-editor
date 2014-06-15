@@ -19,13 +19,21 @@ YUI.add('toolbar-base', function (Y) {
 
                     instanceName = instance._getButtonInstanceName(item);
 
-                    item = Lang.isObject(item) ? item : {};
+                    item = Lang.isObject(item) ? item : null;
 
                     instance.plug(Y[instanceName], item);
+
+                    // Each button will fire actionPerformed when user interacts with it. Here we will
+                    // re-fire this event to the other buttons so they will be able to update their UI too.
+                    instance[Y[instanceName].NS].after('actionPerformed', instance._afterActionPerformed, instance);
                 }
             );
 
             Y.on('editorInteraction', instance._onEditorInteraction, instance);
+        },
+
+        _afterActionPerformed: function(event) {
+            this.fire('actionPerformed', event);
         },
 
         _getButtonsContainer: function() {
@@ -34,10 +42,6 @@ YUI.add('toolbar-base', function (Y) {
 
         _getButtonInstanceName: function(buttonName) {
             return 'Button' + buttonName.substring(0, 1).toUpperCase() + buttonName.substring(1);
-        },
-
-        _onEditorInteraction: function(event) {
-            debugger;
         }
     };
 
