@@ -175,7 +175,7 @@
             }
             else {
                 rangeCount = nativeSelection.rangeCount;
-                clientRects = nativeSelection.getRangeAt(0).getClientRects();
+                clientRects = (nativeSelection.rangeCount > 0) ? nativeSelection.getRangeAt(0).getClientRects() : [];
             }
 
             bottom = 0;
