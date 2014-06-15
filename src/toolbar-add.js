@@ -191,5 +191,5 @@ YUI.add('toolbar-add', function (Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 },'0.1', {
-    requires: ['widget', 'widget-position', 'widget-autohide', 'aui-debounce', 'toolbar-base']
+    requires: ['overlay', 'widget', 'widget-position', 'widget-autohide', 'aui-debounce', 'toolbar-base']
 });
