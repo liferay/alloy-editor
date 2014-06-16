@@ -40,7 +40,7 @@ YUI.add('button-left', function (Y) {
             }
         },
 
-        TPL_CONTENT: '<i class="icon-indent-left"></i>'
+        TPL_CONTENT: '<i class="icon-align-left"></i>'
     }, {
         NAME: 'left',
 

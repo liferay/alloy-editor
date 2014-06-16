@@ -40,7 +40,7 @@ YUI.add('button-right', function (Y) {
             }
         },
 
-        TPL_CONTENT: '<i class="icon-indent-right"></i>'
+        TPL_CONTENT: '<i class="icon-align-right"></i>'
     }, {
         NAME: 'right',
 
