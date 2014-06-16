@@ -110,6 +110,8 @@ YUI.add('button-a', function (Y) {
 
                 instance._createLink('/');
 
+                instance._link = instance._getSelectedLink();
+
                 instance.onceHostEvent('visibleChange', instance._handleLink, instance);
             }
             else {
@@ -131,15 +133,9 @@ YUI.add('button-a', function (Y) {
                 this._removeLink();
             }
 
-            editor = this.get('host').get('editor');
-
-            range = editor.getSelection().getRanges()[0];
-
-            range.collapse();
-
-            range.select();
-
             this._linkInput.set('value', '');
+
+            this._link = null;
         },
 
         _onKeyPress: function(event) {
@@ -195,12 +191,13 @@ YUI.add('button-a', function (Y) {
 
         _updateLink: function(URI) {
             var editor,
-                element;
+                style;
 
             editor = this.get('host').get('editor');
-            element = this._getSelectedLink(editor);
 
-            element.setAttributes({
+            style = this._link || this._getSelectedLink(editor);
+
+            style.setAttributes({
                 href: URI,
                 'data-cke-saved-href': URI
             });
