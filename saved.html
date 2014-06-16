@@ -48,25 +48,44 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             position: absolute;
         }
 
-        .input-wrapper {
+        .link-wrapper {
             background-color: #F1F1F1;;
             border-radius: 5px;
             margin-left: 0;
         }
 
+        .link-wrapper {
+            padding-left: 2px;
+            width: 240px;
+        }
+
+        .link-wrapper input {
+            border: none;
+            margin: 5px 0 5px 0;
+            width: 165px;
+        }
+
+        .link-wrapper input[type="text"]:focus {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+            border-color: white;
+        }
+
         .input-container {
-            margin-left: 5px;
-            width: 210px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px #cccccc solid;
+            padding: 5px 5px 8px 0;
         }
 
-        .input-container input {
-            margin: 5px 0 5px 0px;
-            width: 185px;
+        .input-container .input-clear {
+            cursor: pointer;
         }
 
-        .input-clear-container {
+        .input-close-container {
             margin-left: -10px;
             margin-top: 5px;
+            margin-right: 2px;
             width: 40px;
         }
 
@@ -217,7 +236,6 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
         editor.config.extraPlugins = 'placeholder';
         editor.config.placeholderClass = 'editor-placeholder';
-
     </script>
 
 

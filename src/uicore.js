@@ -12,8 +12,6 @@
 
                 modules = ['node', 'aui-debounce'].concat(this._getModules());
 
-                console.log(modules);
-
                 YUI().use(
                     modules,
                     function(Y) {

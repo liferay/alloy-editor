@@ -15,6 +15,9 @@ YUI.add('button-a', function (Y) {
             this.onHostEvent('visibleChange', this._onVisibleChange, this);
 
             this._linkInput.on('keypress', this._onKeyPress, this);
+
+            this._linkContainer.one('.input-close-container').on('click', this._onCloseClick, this);
+            this._linkContainer.one('.input-clear').on('click', this._onClearClick, this);
         },
 
         _getSelectedLink: function() {
@@ -64,11 +67,11 @@ YUI.add('button-a', function (Y) {
             }
 
             style = new CKEDITOR.style({
-                element: 'a',
                 attributes: {
-                    href: URI,
-                    'data-cke-saved-href': URI
-                }
+                    'data-cke-saved-href': URI,
+                    href: URI
+                },
+                element: this.get('element')
             });
 
             style.type = CKEDITOR.STYLE_INLINE;
@@ -77,6 +80,10 @@ YUI.add('button-a', function (Y) {
         },
 
         _onClearClick: function() {
+            this._linkInput.set('value', '');
+        },
+
+        _onCloseClick: function() {
             this.get('host').hide();
         },
 
@@ -84,9 +91,7 @@ YUI.add('button-a', function (Y) {
             var instance = this,
                 btnInst,
                 editor,
-                link,
                 linkInput,
-                range,
                 selection;
 
             btnInst = event.target;
@@ -105,30 +110,36 @@ YUI.add('button-a', function (Y) {
 
                 instance._createLink('/');
 
-                linkInput.once('blur', function() {
-                    link = linkInput.get('value');
-
-                    if (link) {
-                        instance._updateLink(link);
-                    }
-                    else {
-                        instance._removeLink();
-                    }
-
-                    range = editor.getSelection().getRanges()[0];
-
-                    range.collapse();
-
-                    range.select();
-
-                    instance._linkContainer.one('input').set('value', '');
-                });
-
-                instance._linkContainer.one('.input-clear-container').once('click', instance._onClearClick, this);
+                instance.onceHostEvent('visibleChange', instance._handleLink, instance);
             }
             else {
                 instance._removeLink();
             }
+        },
+
+        _handleLink: function() {
+            var editor,
+                link,
+                range;
+
+            link = this._linkInput.get('value');
+
+            if (link) {
+                this._updateLink(link);
+            }
+            else {
+                this._removeLink();
+            }
+
+            editor = this.get('host').get('editor');
+
+            range = editor.getSelection().getRanges()[0];
+
+            range.collapse();
+
+            range.select();
+
+            this._linkInput.set('value', '');
         },
 
         _onKeyPress: function(event) {
@@ -198,12 +209,17 @@ YUI.add('button-a', function (Y) {
         TPL_CONTENT: '<i class="icon-link"></i>',
 
         TPL_LINK_CONTAINER:
-            '<div class="row input-wrapper hide">' +
-                '<div class="span10 input-container">' +
-                    '<input class="input-large" type="text" placeholder="{placeholder}"></input>' +
+            '<div class="row link-wrapper hide">' +
+                '<div class="pull-left input-wrapper">' +
+                    '<span class="input-container">' +
+                        '<input class="input-large" type="text" placeholder="{placeholder}"></input>' +
+                        '<span class="input-clear">' +
+                            '<i class="icon-remove"></i>' +
+                        '</span>' +
+                    '</span>' +
                 '</div>' +
-                '<div class="span2 input-clear-container">' +
-                    '<button class="btn"><i class="icon-remove"></i></button>' +
+                '<div class="pull-right input-close-container">' +
+                    '<button class="btn"><i class="icon-ok"></i></button>' +
                 '</div>' +
             '</div>'
     }, {
