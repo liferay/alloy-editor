@@ -1,8 +1,6 @@
 ;(function() {
     'use strict';
 
-    var CKDOMElement = CKEDITOR.dom.element;
-
     CKEDITOR.SELECTION_TOP_TO_BOTTOM = 0;
     CKEDITOR.SELECTION_BOTTOM_TO_TOP = 1;
 

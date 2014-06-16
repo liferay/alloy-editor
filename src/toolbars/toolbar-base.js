@@ -46,9 +46,15 @@ YUI.add('toolbar-base', function (Y) {
     };
 
     ToolbarBase.ATTRS = {
+        buttonsContainer: {
+            getter: '_getButtonsContainer',
+            readOnly: true
+        },
+
         editor: {
             validator: Lang.isObject
-        }
+        },
+
     };
 
     Y.ToolbarBase = ToolbarBase;

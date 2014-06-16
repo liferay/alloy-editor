@@ -5,5 +5,7 @@ var ToolbarsConfig = {
 		width: '20px'
 	},
 
+	image: ['left', 'right'],
+
 	styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
 };

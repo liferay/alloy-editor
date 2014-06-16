@@ -2,8 +2,7 @@ YUI.add('toolbar-styles', function (Y) {
     'use strict';
 
     var Lang = Y.Lang,
-        YArray = Y.Array,
-    	YNode = Y.Node,
+        YNode = Y.Node,
 
     ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.ToolbarBase], {
     	renderUI: function() {
@@ -67,7 +66,7 @@ YUI.add('toolbar-styles', function (Y) {
 
             selectionData = event.selectionData;
 
-            if (selectionData.region && !selectionEmpty) {
+            if (!selectionData.element && selectionData.region && !selectionEmpty) {
                 direction = selectionData.region.direction;
 
                 endRect = selectionData.region.endRect;
@@ -115,13 +114,8 @@ YUI.add('toolbar-styles', function (Y) {
                 value: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
             },
 
-            buttonsContainer: {
-                getter: '_getButtonsContainer',
-                readOnly: true
-            },
-
-        	gutter: {
-                validator: Lang.isArray,
+            gutter: {
+                validator: Lang.isObject,
                 value: {
                     left: 10,
                     top: 0

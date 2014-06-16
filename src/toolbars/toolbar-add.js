@@ -2,7 +2,6 @@ YUI.add('toolbar-add', function (Y) {
     'use strict';
 
     var Lang = Y.Lang,
-        YArray = Y.Array,
         YNode = Y.Node,
         YObject = Y.Object,
 
@@ -169,13 +168,8 @@ YUI.add('toolbar-add', function (Y) {
                 value: ['image', 'code']
             },
 
-            buttonsContainer: {
-                getter: '_getButtonsContainer',
-                readOnly: true
-            },
-
             gutter: {
-                validator: Lang.isArray,
+                validator: Lang.isObject,
                 value: {
                     left: 5,
                     top: 0

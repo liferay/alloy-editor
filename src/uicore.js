@@ -8,17 +8,17 @@
         {
             init: function(editor) {
                 var instance = this,
-                    inputEvent,
                     modules;
 
                 modules = ['node', 'aui-debounce'].concat(this._getModules());
+
+                console.log(modules);
 
                 YUI().use(
                     modules,
                     function(Y) {
                         var editorNode,
-                            handleUI,
-                            toolbars;
+                            handleUI;
 
                         editorNode = Y.one(editor.element.$);
 

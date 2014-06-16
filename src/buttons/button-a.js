@@ -140,7 +140,7 @@ YUI.add('button-a', function (Y) {
         _onVisibleChange: function(event) {
             if (!event.newVal) {
                 this._linkContainer.addClass('hide');
-                this._buttonsContainer.removeClass('hide');
+                this.get('host').get('buttonsContainer').removeClass('hide');
             }
         },
 
@@ -200,7 +200,7 @@ YUI.add('button-a', function (Y) {
         TPL_LINK_CONTAINER:
             '<div class="row input-wrapper hide">' +
                 '<div class="span10 input-container">' +
-                    '<input class="input-large" type="text" placeholder="{placeholder}">' +
+                    '<input class="input-large" type="text" placeholder="{placeholder}"></input>' +
                 '</div>' +
                 '<div class="span2 input-clear-container">' +
                     '<button class="btn"><i class="icon-remove"></i></button>' +
