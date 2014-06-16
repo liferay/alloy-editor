@@ -159,7 +159,7 @@ YUI.add('button-a', function (Y) {
             var editor,
                 style;
 
-            style = new CKEDITOR.style({
+            style = this._link || new CKEDITOR.style({
                 alwaysRemoveElement: 1,
                 element: 'a',
                 type: CKEDITOR.STYLE_INLINE
