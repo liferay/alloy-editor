@@ -17,6 +17,8 @@ YUI.add('button-a', function (Y) {
             this._linkInput.on('keypress', this._onKeyPress, this);
             this._linkInput.on('valuechange', this._onValueChange, this);
 
+            this._showText.on('click', this._switchToTextMode, this);
+
             this._closeLink.on('click', this._onCloseClick, this);
             this._inputClear.on('click', this._onClearClick, this);
         },
@@ -118,7 +120,9 @@ YUI.add('button-a', function (Y) {
 
                 instance._link = instance._getSelectedLink();
 
-                instance.onceHostEvent('visibleChange', instance._handleLink, instance);
+                this._defaultLink = true;
+
+                instance._visibleChangeHandle = instance.onceHostEvent('visibleChange', instance._handleLink, instance);
             }
             else {
                 instance._removeLink();
@@ -162,12 +166,23 @@ YUI.add('button-a', function (Y) {
         },
 
         _onVisibleChange: function(event) {
+            var link;
+
             if (!event.newVal) {
                 this._linkContainer.addClass('hide');
                 this.get('host').get('buttonsContainer').removeClass('hide');
 
                 this._inputClear.hide();
                 this._closeLink.disable();
+            }
+            else {
+                // showing, check if we are over link already
+                // if we are, open the host in link mode
+                link = this._getSelectedLink();
+
+                if (link) {
+                    this._switchToLinkMode(link);
+                }
             }
         },
 
@@ -217,6 +232,68 @@ YUI.add('button-a', function (Y) {
                 render: linkContainer.one('.input-close-container'),
                 srcNode: linkContainer.one('.close-link')
             });
+
+            this._showText = new Y.Button({
+                render: linkContainer.one('.show-text-container'),
+                srcNode: linkContainer.one('.show-text')
+            });
+        },
+
+        _switchToTextMode: function() {
+            var bookmarks,
+                editor,
+                linkText,
+                selection;
+
+            if (this._visibleChangeHandle) {
+                this._visibleChangeHandle.detach();
+            }
+
+            linkText = this._linkInput.get('value');
+
+            if (!linkText) {
+                editor = this.get('host').get('editor');
+
+                selection = editor.getSelection();
+
+                bookmarks = selection.createBookmarks();
+
+                this._handleLink();
+
+                selection.selectBookmarks(bookmarks);
+            }
+            else {
+                this._handleLink();
+            }
+
+            this._linkContainer.addClass('hide');
+            this._buttonsContainer.removeClass('hide');
+
+            this.fire('actionPerformed');
+        },
+
+        _switchToLinkMode: function(link) {
+            var linkInput;
+
+            link = link || this._getSelectedLink();
+
+            this._buttonsContainer.addClass('hide');
+            this._linkContainer.removeClass('hide');
+            this._inputClear.show();
+
+            linkInput = this._linkInput;
+
+            linkInput.set('value', link.$.href);
+
+            setTimeout(
+                function() {
+                    linkInput.select();
+                    linkInput.focus();
+                }, 0);
+
+            this._link = link;
+
+            this._visibleChangeHandle = this.onceHostEvent('visibleChange', this._handleLink, this);
         },
 
         _updateLink: function(URI) {
@@ -228,8 +305,8 @@ YUI.add('button-a', function (Y) {
             style = this._link || this._getSelectedLink(editor);
 
             style.setAttributes({
-                href: URI,
-                'data-cke-saved-href': URI
+                'data-cke-saved-href': URI,
+                href: URI
             });
         },
 
@@ -237,6 +314,9 @@ YUI.add('button-a', function (Y) {
 
         TPL_LINK_CONTAINER:
             '<div class="row link-wrapper hide">' +
+                '<div class="pull-left show-text-container">' +
+                    '<button class="btn show-text"><i class="icon-font"></i></button>' +
+                '</div>' +
                 '<div class="pull-left input-wrapper">' +
                     '<span class="input-container">' +
                         '<input class="input-large" type="text" placeholder="{placeholder}"></input>' +
