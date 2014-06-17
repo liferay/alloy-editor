@@ -16,7 +16,9 @@
                 end,
                 endContainer,
                 endOffset,
+                endRange,
                 range,
+                selection,
                 start,
                 startContainer,
                 startOffset;
@@ -55,14 +57,14 @@
                 this.getSelection().selectRanges([range]);
             }
             else if (typeof document.body.createTextRange == 'function') {
-                var sel = this.getSelection();
+                selection = this.getSelection();
 
-                sel.unlock();
+                selection.unlock();
 
                 range = document.body.createTextRange();
                 range.moveToPoint(startX, startY);
 
-                var endRange = range.duplicate();
+                endRange = range.duplicate();
                 endRange.moveToPoint(endX, endY);
 
                 range.setEndPoint('EndToEnd', endRange);

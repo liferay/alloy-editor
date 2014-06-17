@@ -23,8 +23,12 @@ YUI.add('button-a', function (Y) {
             this._clearInput.on('click', this._onClearInputClick, this);
         },
 
-        _attachVisibleChangeHandler: function() {
-            this._visibleChangeHandle = this.onceHostEvent('visibleChange', this._handleLink, this);
+        _attachHideHandler: function() {
+            this._hideHandle = this.onceHostEvent('visibleChange', function(event) {
+                if (!event.newVal) {
+                    this._handleLink();
+                }
+            }, this);
         },
 
         _getSelectedLink: function() {
@@ -124,7 +128,7 @@ YUI.add('button-a', function (Y) {
 
                 this._defaultLink = instance._link = instance._getSelectedLink();
 
-                this._attachVisibleChangeHandler();
+                this._attachHideHandler();
             }
             else {
                 instance._removeLink();
@@ -206,11 +210,11 @@ YUI.add('button-a', function (Y) {
             editor.removeStyle(style);
         },
 
-        _removeVisibleChangeHandler: function() {
-            if (this._visibleChangeHandle) {
-                this._visibleChangeHandle.detach();
+        _removeHideHandler: function() {
+            if (this._hideHandle) {
+                this._hideHandle.detach();
 
-                this._visibleChangeHandle = null;
+                this._hideHandle = null;
             }
         },
 
@@ -258,7 +262,7 @@ YUI.add('button-a', function (Y) {
                 linkText,
                 selection;
 
-            this._removeVisibleChangeHandler();
+            this._removeHideHandler();
 
             if (this._defaultLink) {
                 // We were in text mode and default link has been created.
@@ -305,6 +309,8 @@ YUI.add('button-a', function (Y) {
 
             linkInput.set('value', link.$.href);
 
+            console.log(link.$.href);
+
             setTimeout(
                 function() {
                     linkInput.select();
@@ -313,7 +319,7 @@ YUI.add('button-a', function (Y) {
 
             this._link = link;
 
-            this._attachVisibleChangeHandler();
+            this._attachHideHandler();
         },
 
         _updateLink: function(URI) {
