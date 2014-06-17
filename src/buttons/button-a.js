@@ -19,8 +19,12 @@ YUI.add('button-a', function (Y) {
 
             this._showText.on('click', this._switchToTextMode, this);
 
-            this._closeLink.on('click', this._onCloseClick, this);
-            this._inputClear.on('click', this._onClearClick, this);
+            this._closeLink.on('click', this._onCloseLinkClick, this);
+            this._clearInput.on('click', this._onClearInputClick, this);
+        },
+
+        _attachVisibleChangeHandler: function() {
+            this._visibleChangeHandle = this.onceHostEvent('visibleChange', this._handleLink, this);
         },
 
         _getSelectedLink: function() {
@@ -82,16 +86,16 @@ YUI.add('button-a', function (Y) {
             range.select();
         },
 
-        _onClearClick: function() {
+        _onClearInputClick: function() {
             this._linkInput.set('value', '');
 
             this._linkInput.focus();
 
-            this._inputClear.hide();
+            this._clearInput.hide();
             this._closeLink.disable();
         },
 
-        _onCloseClick: function() {
+        _onCloseLinkClick: function() {
             this.get('host').hide();
         },
 
@@ -118,11 +122,9 @@ YUI.add('button-a', function (Y) {
 
                 instance._createLink('/');
 
-                instance._link = instance._getSelectedLink();
+                this._defaultLink = instance._link = instance._getSelectedLink();
 
-                this._defaultLink = true;
-
-                instance._visibleChangeHandle = instance.onceHostEvent('visibleChange', instance._handleLink, instance);
+                this._attachVisibleChangeHandler();
             }
             else {
                 instance._removeLink();
@@ -154,12 +156,12 @@ YUI.add('button-a', function (Y) {
 
         _onValueChange: function(event) {
             if (event.newVal) {
-                this._inputClear.show();
+                this._clearInput.show();
 
                 this._closeLink.enable();
             }
             else {
-                this._inputClear.hide();
+                this._clearInput.hide();
 
                 this._closeLink.disable();
             }
@@ -172,7 +174,7 @@ YUI.add('button-a', function (Y) {
                 this._linkContainer.addClass('hide');
                 this.get('host').get('buttonsContainer').removeClass('hide');
 
-                this._inputClear.hide();
+                this._clearInput.hide();
                 this._closeLink.disable();
             }
             else {
@@ -182,6 +184,9 @@ YUI.add('button-a', function (Y) {
 
                 if (link) {
                     this._switchToLinkMode(link);
+                }
+                else {
+                    this._switchToTextMode();
                 }
             }
         },
@@ -199,6 +204,14 @@ YUI.add('button-a', function (Y) {
             editor = this.get('host').get('editor');
 
             editor.removeStyle(style);
+        },
+
+        _removeVisibleChangeHandler: function() {
+            if (this._visibleChangeHandle) {
+                this._visibleChangeHandle.detach();
+
+                this._visibleChangeHandle = null;
+            }
         },
 
         _renderLinkUI: function() {
@@ -223,9 +236,9 @@ YUI.add('button-a', function (Y) {
 
             this._linkInput = linkContainer.one('input');
 
-            this._inputClear = linkContainer.one('.input-clear i');
+            this._clearInput = linkContainer.one('.input-clear i');
 
-            this._inputClear.hide();
+            this._clearInput.hide();
 
             this._closeLink = new Y.Button({
                 disabled: true,
@@ -245,31 +258,36 @@ YUI.add('button-a', function (Y) {
                 linkText,
                 selection;
 
-            if (this._visibleChangeHandle) {
-                this._visibleChangeHandle.detach();
-            }
+            this._removeVisibleChangeHandler();
 
-            linkText = this._linkInput.get('value');
+            if (this._defaultLink) {
+                // We were in text mode and default link has been created.
+                // If there is link text, we have to update the link with the new value.
+                // Otherwise, we have to remove the link and restore the selection.
+                linkText = this._linkInput.get('value');
 
-            if (!linkText) {
-                editor = this.get('host').get('editor');
+                if (!linkText) {
+                    editor = this.get('host').get('editor');
 
-                selection = editor.getSelection();
+                    selection = editor.getSelection();
 
-                bookmarks = selection.createBookmarks();
+                    bookmarks = selection.createBookmarks();
 
-                this._handleLink();
+                    this._handleLink();
 
-                selection.selectBookmarks(bookmarks);
-            }
-            else {
-                this._handleLink();
+                    selection.selectBookmarks(bookmarks);
+                }
+                else {
+                    this._handleLink();
+                }
+
+                this._defaultLink = null;
+
+                this.fire('actionPerformed');
             }
 
             this._linkContainer.addClass('hide');
             this._buttonsContainer.removeClass('hide');
-
-            this.fire('actionPerformed');
         },
 
         _switchToLinkMode: function(link) {
@@ -277,9 +295,11 @@ YUI.add('button-a', function (Y) {
 
             link = link || this._getSelectedLink();
 
+            this._clearInput.show();
+            this._closeLink.disable();
+
             this._buttonsContainer.addClass('hide');
             this._linkContainer.removeClass('hide');
-            this._inputClear.show();
 
             linkInput = this._linkInput;
 
@@ -293,7 +313,7 @@ YUI.add('button-a', function (Y) {
 
             this._link = link;
 
-            this._visibleChangeHandle = this.onceHostEvent('visibleChange', this._handleLink, this);
+            this._attachVisibleChangeHandler();
         },
 
         _updateLink: function(URI) {
