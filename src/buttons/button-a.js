@@ -15,9 +15,10 @@ YUI.add('button-a', function (Y) {
             this.onHostEvent('visibleChange', this._onVisibleChange, this);
 
             this._linkInput.on('keypress', this._onKeyPress, this);
+            this._linkInput.on('valuechange', this._onValueChange, this);
 
-            this._linkContainer.one('.input-close-container').on('click', this._onCloseClick, this);
-            this._linkContainer.one('.input-clear').on('click', this._onClearClick, this);
+            this._closeLink.on('click', this._onCloseClick, this);
+            this._inputClear.on('click', this._onClearClick, this);
         },
 
         _getSelectedLink: function() {
@@ -81,6 +82,11 @@ YUI.add('button-a', function (Y) {
 
         _onClearClick: function() {
             this._linkInput.set('value', '');
+
+            this._linkInput.focus();
+
+            this._inputClear.hide();
+            this._closeLink.disable();
         },
 
         _onCloseClick: function() {
@@ -120,9 +126,7 @@ YUI.add('button-a', function (Y) {
         },
 
         _handleLink: function() {
-            var editor,
-                link,
-                range;
+            var link;
 
             link = this._linkInput.get('value');
 
@@ -144,10 +148,26 @@ YUI.add('button-a', function (Y) {
             }
         },
 
+        _onValueChange: function(event) {
+            if (event.newVal) {
+                this._inputClear.show();
+
+                this._closeLink.enable();
+            }
+            else {
+                this._inputClear.hide();
+
+                this._closeLink.disable();
+            }
+        },
+
         _onVisibleChange: function(event) {
             if (!event.newVal) {
                 this._linkContainer.addClass('hide');
                 this.get('host').get('buttonsContainer').removeClass('hide');
+
+                this._inputClear.hide();
+                this._closeLink.disable();
             }
         },
 
@@ -187,6 +207,16 @@ YUI.add('button-a', function (Y) {
             this._linkContainer = linkContainer;
 
             this._linkInput = linkContainer.one('input');
+
+            this._inputClear = linkContainer.one('.input-clear i');
+
+            this._inputClear.hide();
+
+            this._closeLink = new Y.Button({
+                disabled: true,
+                render: linkContainer.one('.input-close-container'),
+                srcNode: linkContainer.one('.close-link')
+            });
         },
 
         _updateLink: function(URI) {
@@ -216,7 +246,7 @@ YUI.add('button-a', function (Y) {
                     '</span>' +
                 '</div>' +
                 '<div class="pull-right input-close-container">' +
-                    '<button class="btn"><i class="icon-ok"></i></button>' +
+                    '<button class="btn close-link"><i class="icon-ok"></i></button>' +
                 '</div>' +
             '</div>'
     }, {
@@ -241,5 +271,5 @@ YUI.add('button-a', function (Y) {
     Y.ButtonA = A;
 
 },'', {
-    requires: ['button-base']
+    requires: ['button-base', 'event-valuechange']
 });

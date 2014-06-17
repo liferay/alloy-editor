@@ -17,7 +17,7 @@ var YUI_config = {
 
         'button-a': {
             fullpath: '/dist/buttons/button-a.js',
-            requires: ['button-base']
+            requires: ['button-base', 'event-valuechange']
         },
 
         'button-h1': {
