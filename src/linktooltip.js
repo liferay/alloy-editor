@@ -15,7 +15,7 @@
                             function() {
                                 tooltip.hide();
                             },
-                            editor.config.linktooltip.hideDelay || 3000);
+                            editor.config.linktooltip.hideDelay || 2000);
                     }
 
                     function bindTooltip() {
@@ -91,7 +91,7 @@
                         var line = 1;
 
                         for (var i = 1; i <= lines; i++) {
-                            if (event.pageY <= region.top + lineHeight * i) {
+                            if (event.pageY < region.top + lineHeight * i) {
                                 break;
                             }
 
@@ -99,7 +99,7 @@
                         }
 
 
-                        gutter = (gutter.top || 5);
+                        gutter = (gutter.top || 0);
 
                         var y = region.top + line * lineHeight + gutter;
 
