@@ -309,8 +309,6 @@ YUI.add('button-a', function (Y) {
 
             linkInput.set('value', link.$.href);
 
-            console.log(link.$.href);
-
             setTimeout(
                 function() {
                     linkInput.select();
