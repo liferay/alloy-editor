@@ -62,35 +62,25 @@
                         return tooltip;
                     }
 
-                    function onLinkMouseEnter(event) {
+                    function getXY(x, y, link) {
                         var gutter,
-                            link,
+                            i,
+                            line,
                             lineHeight,
-                            linkText,
-                            region,
-                            tooltip;
-
-                        clearTimeout(hideHandle);
-
-                        link = event.currentTarget;
+                            lines,
+                            region;
 
                         lineHeight = parseInt(link.getComputedStyle('lineHeight'), 10);
 
-                        region = link.get('region');
-
-                        tooltip = getTooltip();
-
-                        linkText = link.getAttribute('href');
-
-                        tooltip.set('bodyContent', '<a href="' + Y.Escape.html(linkText) + '" target="_blank">' + Y.Escape.html(linkText) + '</a>');
-
                         gutter = editor.config.linktooltip.gutter || {};
 
-                        var lines = Math.ceil((region.bottom - region.top) / lineHeight);
+                        region = link.get('region');
 
-                        var line = 1;
+                        lines = Math.ceil((region.bottom - region.top) / lineHeight);
 
-                        for (var i = 1; i <= lines; i++) {
+                        line = 1;
+
+                        for (i = 1; i <= lines; i++) {
                             if (event.pageY < region.top + lineHeight * i) {
                                 break;
                             }
@@ -98,12 +88,32 @@
                             ++line;
                         }
 
-
                         gutter = (gutter.top || 0);
 
-                        var y = region.top + line * lineHeight + gutter;
+                        y = region.top + line * lineHeight + gutter;
 
-                        tooltip.set('xy', [event.pageX, y]);
+                        return [x, y];
+                    }
+
+                    function onLinkMouseEnter(event) {
+                        var link,
+                            linkText,
+                            tooltip,
+                            xy;
+
+                        clearTimeout(hideHandle);
+
+                        link = event.currentTarget;
+
+                        tooltip = getTooltip();
+
+                        linkText = link.getAttribute('href');
+
+                        tooltip.set('bodyContent', '<a href="' + Y.Escape.html(linkText) + '" target="_blank">' + Y.Escape.html(linkText) + '</a>');
+
+                        xy = getXY(event.pageX, event.pageX, link);
+
+                        tooltip.set('xy', xy);
 
                         tooltip.show();
 
