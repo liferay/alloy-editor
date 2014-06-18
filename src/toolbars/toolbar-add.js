@@ -25,8 +25,8 @@ YUI.add('toolbar-add', function (Y) {
             boundingBox = this.get('boundingBox');
             buttonsBoundingBox = this._buttonsOverlay.get('boundingBox');
 
-            buttonsBoundingBox.on('mouseleave', this._handleMouseLeave, this);
             boundingBox.on('mouseleave', this._handleMouseLeave, this);
+            buttonsBoundingBox.on('mouseleave', this._handleMouseLeave, this);
 
             boundingBox.on('mouseenter', this._handleMouseEnter, this);
             buttonsBoundingBox.on('mouseenter', this._handleMouseEnter, this);

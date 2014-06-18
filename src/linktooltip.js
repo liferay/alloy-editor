@@ -10,23 +10,27 @@
                         node,
                         tooltip;
 
+                    function attachHiddenHandle() {
+                        hideHandle = setTimeout(
+                            function() {
+                                tooltip.hide();
+                            },
+                            editor.config.linktooltip.hideDelay || 3000);
+                    }
+
                     function bindTooltip() {
                         var boundingBox;
 
                         boundingBox = tooltip.get('boundingBox');
 
-                        tooltip.on('visibleChange', function(event) {
-                            if (event.newVal) {
-                                hideHandle = setTimeout(
-                                    function() {
-                                        //tooltip.hide();
-                                    },
-                                    3000);
-                            }
-                        });
-
                         boundingBox.on('mouseenter', function() {
                             clearTimeout(hideHandle);
+                        });
+
+                        boundingBox.on('mouseleave', function() {
+                            clearTimeout(hideHandle);
+
+                            attachHiddenHandle();
                         });
                     }
 
@@ -41,6 +45,7 @@
 
                         if (!tooltip) {
                             tooltip = new Y.Overlay({
+                                constrain: true,
                                 render: true,
                                 zIndex: 1
                             });
@@ -62,17 +67,25 @@
                             region,
                             tooltip;
 
+                        clearTimeout(hideHandle);
+
                         link = event.currentTarget;
 
-                        region = Y.DOM.region(link);
+                        region = link.get('region');
 
                         tooltip = getTooltip();
 
                         tooltip.set('bodyContent', link.getAttribute('href'));
 
-                        tooltip.set('xy', [event.pageX, event.pageY + 5]);
+                        tooltip.set('xy', [event.pageX, region.bottom + 5]);
 
                         tooltip.show();
+
+                        link.once('mouseleave', function() {
+                            clearTimeout(hideHandle);
+
+                            attachHiddenHandle();
+                        });
                     }
 
                     node = Y.one(editor.element.$);

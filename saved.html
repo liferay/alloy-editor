@@ -112,6 +112,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         }
 
         .link-tooltip {
+            cursor: pointer;
             background-color: #009AE5;
             border-radius: 3px;
             color: white;
@@ -245,6 +246,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         editor.config.extraPlugins = 'uicore,selectionregion,dropimages,placeholder,linktooltip';
         editor.config.placeholderValue = 'Write here!';
         editor.config.placeholderClass = 'editor-placeholder';
+        editor.config.title = false;
     </script>
 
     <script>
@@ -256,6 +258,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
         editor.config.extraPlugins = 'placeholder';
         editor.config.placeholderClass = 'editor-placeholder';
+        editor.config.title = false;
     </script>
 
 
@@ -268,7 +271,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
         editor.config.extraPlugins = 'placeholder';
         editor.config.placeholderClass = 'editor-placeholder';
-
+        editor.config.title = false;
     </script>
 
     <div id="footer">
