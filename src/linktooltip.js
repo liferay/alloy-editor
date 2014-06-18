@@ -5,7 +5,7 @@
         'linktooltip',
         {
             init: function(editor) {
-                YUI().use('dom-screen', 'node-event-delegate', 'event-mouseenter', 'overlay', function(Y) {
+                YUI().use('dom-screen', 'escape', 'node-event-delegate', 'event-mouseenter', 'overlay', function(Y) {
                     var hideHandle,
                         node,
                         tooltip;
@@ -63,7 +63,10 @@
                     }
 
                     function onLinkMouseEnter(event) {
-                        var link,
+                        var gutter,
+                            link,
+                            lineHeight,
+                            linkText,
                             region,
                             tooltip;
 
@@ -71,13 +74,36 @@
 
                         link = event.currentTarget;
 
+                        lineHeight = parseInt(link.getComputedStyle('lineHeight'), 10);
+
                         region = link.get('region');
 
                         tooltip = getTooltip();
 
-                        tooltip.set('bodyContent', link.getAttribute('href'));
+                        linkText = link.getAttribute('href');
 
-                        tooltip.set('xy', [event.pageX, region.bottom + 5]);
+                        tooltip.set('bodyContent', '<a href="' + Y.Escape.html(linkText) + '" target="_blank">' + Y.Escape.html(linkText) + '</a>');
+
+                        gutter = editor.config.linktooltip.gutter || {};
+
+                        var lines = Math.ceil((region.bottom - region.top) / lineHeight);
+
+                        var line = 1;
+
+                        for (var i = 1; i <= lines; i++) {
+                            if (event.pageY <= region.top + lineHeight * i) {
+                                break;
+                            }
+
+                            ++line;
+                        }
+
+
+                        gutter = (gutter.top || 5);
+
+                        var y = region.top + line * lineHeight + gutter;
+
+                        tooltip.set('xy', [event.pageX, y]);
 
                         tooltip.show();
 
