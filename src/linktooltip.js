@@ -2,58 +2,42 @@
     'use strict';
 
     YUI.add('linktooltip', function (Y) {
-        var LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetPosition], {
+        var Lang = Y.Lang,
+
+        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetStack, Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain], {
             initializer: function() {
-                // body...
+                this._eventHandles = [];
             },
 
-            attachHiddenHandle: function() {
+            destroy: function() {
+                (new Y.EventHandle(this._eventHandles)).detach();
+            },
+
+            bindUI: function() {
+                var boundingBox;
+
+                boundingBox = this.get('boundingBox');
+
+                boundingBox.on('mouseenter', this._onBBMouseEnter, this);
+                boundingBox.on('mouseleave', this._onBBMouseExit, this);
+
+                this._eventHandles.push(
+                    Y.one(this.get('editor').element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]', this, editor)
+                );
+            },
+
+            _attachHiddenHandle: function() {
+                var instance = this;
+
                 this._hideHandle = setTimeout(
                     function() {
-                        tooltip.hide();
+                        instance.hide();
                     },
-                    editor.config.linktooltip.hideDelay || 2000);
+                    this.get('hideDelay')
+                );
             },
 
-            bindTooltip: function() {
-                var boundingBox;
-
-                boundingBox = tooltip.get('boundingBox');
-
-                mouseEnterHandle = boundingBox.on('mouseenter', onBBMouseEnter);
-
-                mouseExitHandle = boundingBox.on('mouseleave', onBBMouseExit);
-            },
-
-            getTooltip: function() {
-                var boundingBox;
-
-                if (!editor.config.linktooltip) {
-                    editor.config.linktooltip = {};
-                }
-
-                tooltip = editor.config.linktooltip.el;
-
-                if (!tooltip) {
-                    tooltip = new Y.Overlay({
-                        constrain: true,
-                        render: true,
-                        zIndex: 1
-                    });
-
-                    boundingBox = tooltip.get('boundingBox');
-
-                    boundingBox.addClass('link-tooltip');
-
-                    editor.config.linktooltip.el = tooltip;
-
-                    bindTooltip();
-                }
-
-                return tooltip;
-            },
-
-            getXY: function(x, y, link) {
+            _getXY: function(x, y, link) {
                 var gutter,
                     i,
                     line,
@@ -63,7 +47,7 @@
 
                 lineHeight = parseInt(link.getComputedStyle('lineHeight'), 10);
 
-                gutter = editor.config.linktooltip.gutter || {};
+                gutter = this.get('gutter');
 
                 region = link.get('region');
 
@@ -79,56 +63,88 @@
                     ++line;
                 }
 
-                gutter = (gutter.top || 0);
+                gutter = (gutter.top);
 
                 y = region.top + line * lineHeight + gutter;
 
                 return [x, y];
             },
 
-            onLinkMouseEnter: function(event) {
-                var link,
+            _onLinkMouseEnter: function(event) {
+                var instance = this,
+                    content,
+                    contentBox,
+                    escapedLinkText,
+                    link,
                     linkText,
-                    tooltip,
                     xy;
 
-                clearTimeout(hideHandle);
+                clearTimeout(instance._hideHandle);
 
                 link = event.currentTarget;
 
-                tooltip = getTooltip();
-
                 linkText = link.getAttribute('href');
 
-                tooltip.set('bodyContent', '<a contenteditable="true" href="' + Y.Escape.html(linkText) + '" target="_blank">' + Y.Escape.html(linkText) + '</a>');
+                contentBox = instance.get('contentBox');
 
-                xy = getXY(event.pageX, event.pageX, link);
+                escapedLinkText = Y.Escape.html(linkText);
 
-                tooltip.set('xy', xy);
+                content = Lang.sub(
+                    instance.TPL_CONTENT,
+                    {
+                        content: escapedLinkText,
+                        href: escapedLinkText
+                    }
+                );
 
-                tooltip.show();
+                contentBox.set('innerHTML', content);
+
+                xy = instance._getXY(event.pageX, event.pageX, link);
+
+                instance.set('xy', xy);
+
+                instance.show();
 
                 link.once('mouseleave', function() {
-                    clearTimeout(hideHandle);
+                    clearTimeout(instance._hideHandle);
 
-                    attachHiddenHandle();
+                    instance._attachHiddenHandle();
                 });
             },
 
-            onBBMouseEnter: function() {
-                clearTimeout(hideHandle);
+            _onBBMouseEnter: function() {
+                clearTimeout(this._hideHandle);
             },
 
-            onBBMouseExit: function() {
-                clearTimeout(hideHandle);
+            _onBBMouseExit: function() {
+                clearTimeout(this._hideHandle);
 
-                attachHiddenHandle();
-            }
-        },
-        {
+                this._attachHiddenHandle();
+            },
+
+            TPL_CONTENT: '<a contenteditable="true" href="{href}" target="_blank">{content}</a>'
+        }, {
             ATTRS: {
                 editor: {
                     validator: Y.Lang.isObject
+                },
+
+                gutter: {
+                    validator: Lang.isObject,
+                    value: {
+                        top: 0,
+                        left: 0
+                    }
+                },
+
+                hideDelay: {
+                    validator: Lang.isNumber,
+                    value: 2000
+                },
+
+                zIndex: {
+                    validator: Lang.isNumber,
+                    value: 1
                 }
             }
         });
@@ -139,26 +155,20 @@
         requires: ['dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'overlay']
     });
 
-
-    YUI().use(, function(Y) {
-                    var hideHandle,
-                        node,
-                        tooltip,
-                        mouseExitHandle,
-                        mouseEnterHandle;
-
-                    
-
-                    node = Y.one(editor.element.$);
-
-                    node.delegate('mouseenter', onLinkMouseEnter, 'a[href]', this, editor);
-                });
-
     CKEDITOR.plugins.add(
         'linktooltip',
         {
             init: function(editor) {
-                
+                YUI().use('linktooltip', function(Y) {
+                    var config,
+                        tooltip;
+
+                    config = Y.merge({
+                        editor: editor
+                    }, editor.config.linktooltip);
+
+                    tooltip = new Y.LinkTooltip(config).render();
+                });
             }
         }
     );
