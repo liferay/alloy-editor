@@ -101,9 +101,9 @@
 
                 xy = instance._getXY(event.pageX, event.pageX, link);
 
-                instance.set('xy', xy);
-
                 instance.show();
+
+                instance.set('xy', xy);
 
                 link.once('mouseleave', function() {
                     clearTimeout(instance._hideHandle);

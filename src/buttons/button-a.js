@@ -3,6 +3,7 @@ YUI.add('button-a', function (Y) {
 
     var Lang = Y.Lang,
         YNode = Y.Node,
+        Link = CKEDITOR.plugins.UITools.Link,
 
     A = Y.Base.create('a', Y.Plugin.Base, [Y.ButtonBase], {
         renderUI: function() {
@@ -29,65 +30,6 @@ YUI.add('button-a', function (Y) {
                     this._handleLink();
                 }
             }, this);
-        },
-
-        _getSelectedLink: function() {
-            var editor,
-                range,
-                selection,
-                selectedElement;
-
-            editor = this.get('host').get('editor');
-
-            selection = editor.getSelection();
-
-            selectedElement = selection.getSelectedElement();
-
-            if (selectedElement && selectedElement.is('a')) {
-                return selectedElement;
-            }
-
-            range = selection.getRanges()[0];
-
-            if (range) {
-                range.shrink(CKEDITOR.SHRINK_TEXT);
-
-                return editor.elementPath(range.getCommonAncestor()).contains('a', 1);
-            }
-
-            return null;
-        },
-
-        _createLink: function(URI) {
-            var editor,
-                range,
-                selection,
-                style,
-                text;
-
-            editor = this.get('host').get('editor');
-
-            selection = editor.getSelection();
-
-            range = selection.getRanges()[0];
-
-            if (range.collapsed) {
-                text = new CKEDITOR.dom.text(URI, editor.document);
-                range.insertNode(text);
-                range.selectNodeContents(text);
-            }
-
-            style = new CKEDITOR.style({
-                attributes: {
-                    'data-cke-saved-href': URI,
-                    href: URI
-                },
-                element: this.get('element')
-            });
-
-            style.type = CKEDITOR.STYLE_INLINE;
-            style.applyToRange(range, editor);
-            range.select();
         },
 
         _onClearInputClick: function() {
@@ -124,27 +66,30 @@ YUI.add('button-a', function (Y) {
 
                 linkInput.focus();
 
-                instance._createLink('/');
+                Link.create('/');
 
-                this._defaultLink = instance._link = instance._getSelectedLink();
+                this._defaultLink = instance._link = Link.getFromSelection();
 
                 this._attachHideHandler();
             }
             else {
-                instance._removeLink();
+                Link.remove();
             }
         },
 
         _handleLink: function() {
-            var link;
+            var editor,
+                href;
 
-            link = this._linkInput.get('value');
+            href = this._linkInput.get('value');
 
-            if (link) {
-                this._updateLink(link);
+            editor = this.get('host').get('editor');
+
+            if (href) {
+                Link.update(href, this._link);
             }
             else {
-                this._removeLink();
+                Link.remove();
             }
 
             this._linkInput.set('value', '');
@@ -172,7 +117,8 @@ YUI.add('button-a', function (Y) {
         },
 
         _onVisibleChange: function(event) {
-            var link;
+            var editor,
+                link;
 
             if (!event.newVal) {
                 this._linkContainer.addClass('hide');
@@ -184,7 +130,9 @@ YUI.add('button-a', function (Y) {
             else {
                 // showing, check if we are over link already
                 // if we are, open the host in link mode
-                link = this._getSelectedLink();
+                editor = this.get('host').get('editor');
+
+                link = Link.getFromSelection();
 
                 if (link) {
                     this._switchToLinkMode(link);
@@ -193,21 +141,6 @@ YUI.add('button-a', function (Y) {
                     this._switchToTextMode();
                 }
             }
-        },
-
-        _removeLink: function() {
-            var editor,
-                style;
-
-            style = this._link || new CKEDITOR.style({
-                alwaysRemoveElement: 1,
-                element: 'a',
-                type: CKEDITOR.STYLE_INLINE
-            });
-
-            editor = this.get('host').get('editor');
-
-            editor.removeStyle(style);
         },
 
         _removeHideHandler: function() {
@@ -295,9 +228,12 @@ YUI.add('button-a', function (Y) {
         },
 
         _switchToLinkMode: function(link) {
-            var linkInput;
+            var editor,
+                linkInput;
 
-            link = link || this._getSelectedLink();
+            editor = this.get('host').get('editor');
+
+            link = link || Link.getFromSelection();
 
             this._clearInput.show();
             this._closeLink.disable();
@@ -318,20 +254,6 @@ YUI.add('button-a', function (Y) {
             this._link = link;
 
             this._attachHideHandler();
-        },
-
-        _updateLink: function(URI) {
-            var editor,
-                style;
-
-            editor = this.get('host').get('editor');
-
-            style = this._link || this._getSelectedLink(editor);
-
-            style.setAttributes({
-                'data-cke-saved-href': URI,
-                href: URI
-            });
         },
 
         TPL_CONTENT: '<i class="icon-link"></i>',

@@ -132,6 +132,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <script src="dist/yui-config.js"></script>
     <script src="dist/toolbars-config.js"></script>
     <script src="dist/selection-region.js"></script>
+    <script src="dist/uitools.js"></script>
     <script src="dist/drop-images.js"></script>
     <script src="dist/placeholder.js"></script>
     <script src="dist/linktooltip.js"></script>
@@ -246,7 +247,7 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
 
         // Remove unnecessary plugins to make the editor simpler.
         editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
-        editor.config.extraPlugins = 'uicore,selectionregion,dropimages,placeholder,linktooltip';
+        editor.config.extraPlugins = 'uicore,selectionregion,dropimages,placeholder,linktooltip,uitools';
         editor.config.placeholderValue = 'Write here!';
         editor.config.placeholderClass = 'editor-placeholder';
         editor.config.title = false;
