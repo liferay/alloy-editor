@@ -65,6 +65,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             width: 165px;
         }
 
+        .link-wrapper input::-ms-clear {
+            display: none;
+        }
+
         .link-wrapper input[type="text"]:focus {
             box-shadow: none;
             -webkit-box-shadow: none;
@@ -130,10 +134,15 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         .yui3-linktooltip .link-container .link-preview,
         .yui3-linktooltip .link-container .link-preview:focus,
         .yui3-linktooltip .link-container .link-preview:hover {
+            padding: 4px;
             color: #0088cc;
             cursor: text;
             outline: none;
             text-decoration: none;
+        }
+
+        .yui3-linktooltip .link-container .link-preview-focused {
+            background-color: #fff;
         }
 
     </style>

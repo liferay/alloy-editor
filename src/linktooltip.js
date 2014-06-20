@@ -3,14 +3,18 @@
 
     YUI.add('linktooltip', function (Y) {
         var Lang = Y.Lang,
+            Link = CKEDITOR.plugins.UITools.Link,
 
-        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetStack, Y.WidgetPosition, Y.WidgetPositionConstrain], {
+        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetStack, Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
             initializer: function() {
                 this._eventHandles = [];
             },
 
-            destroy: function() {
+            destructor: function() {
                 (new Y.EventHandle(this._eventHandles)).detach();
+
+                this._bbMouseEnterHandle.detach();
+                this._bbMouseLeaveHandle.detach();
             },
 
             renderUI: function() {
@@ -36,18 +40,34 @@
             },
 
             bindUI: function() {
-                var boundingBox;
-
-                boundingBox = this.get('boundingBox');
-
-                boundingBox.on('mouseenter', this._onBBMouseEnter, this);
-                boundingBox.on('mouseleave', this._onBBMouseExit, this);
+                this._bindBBMouseEnter();
 
                 this._btnGo.on('click', this._onBtnGoClick, this);
+                this._btnRemove.on('click', this._onBtnRemoveClick, this);
+
+                this._linkPreview.on('keypress', this._onLinkPreviewKeyPress, this);
+
+                this.on('visibleChhange', this._onVisibleChange, this);
 
                 this._eventHandles.push(
                     Y.one(this.get('editor').element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]', this)
                 );
+            },
+
+            _bindBBMouseLeave: function() {
+                var boundingBox;
+
+                boundingBox = this.get('boundingBox');
+
+                this._bbMouseLeaveHandle = boundingBox.once('mouseleave', this._onBBMouseLeave, this);
+            },
+
+            _bindBBMouseEnter: function() {
+                var boundingBox;
+
+                boundingBox = this.get('boundingBox');
+
+                this._bbMouseEnterHandle = boundingBox.on('mouseenter', this._onBBMouseEnter, this);
             },
 
             _attachHiddenHandle: function() {
@@ -96,24 +116,30 @@
 
             _onBBMouseEnter: function() {
                 clearTimeout(this._hideHandle);
+
+                this._bindBBMouseLeave();
             },
 
-            _onBBMouseExit: function() {
+            _onBBMouseLeave: function() {
                 clearTimeout(this._hideHandle);
 
                 this._attachHiddenHandle();
             },
 
             _onBtnGoClick: function() {
-                Y.config.win.open(this._linkPreview.getAttribute('href'));
+                Y.config.win.open(this._linkPreview.get('innerHTML'));
             },
 
             _onBtnRemoveClick: function() {
-                
+                Link.remove(this._currentLink);
+
+                this.hide();
             },
 
             _onLinkClick: function(event) {
                 event.preventDefault();
+
+                this._onStartLinkEdit();
             },
 
             _onLinkMouseEnter: function(event) {
@@ -128,9 +154,13 @@
 
                 linkText = link.getAttribute('href');
 
+                this._linkPreview.blur();
+
                 this._linkPreview.setAttribute('href', linkText);
 
                 this._linkPreview.set('innerHTML', Y.Escape.html(linkText));
+
+                this._linkPreview.removeClass('link-preview-focused');
 
                 instance.show();
 
@@ -138,11 +168,29 @@
 
                 instance.set('xy', xy);
 
+                this._currentLink = new CKEDITOR.dom.element(link.getDOMNode());
+
                 link.once('mouseleave', function() {
                     clearTimeout(instance._hideHandle);
 
                     instance._attachHiddenHandle();
                 });
+            },
+
+            _onLinkPreviewKeyPress: function(event) {
+                if (event.charCode === 13) {
+                    Link.update(this._linkPreview.get('innerHTML'), this._currentLink);
+
+                    this.hide();
+                }
+            },
+
+            _onStartLinkEdit: function() {
+                clearTimeout(this._hideHandle);
+
+                this._bbMouseLeaveHandle.detach();
+
+                this._linkPreview.addClass('link-preview-focused');
             },
 
             TPL_CONTENT:
@@ -189,7 +237,7 @@
         Y.LinkTooltip = LinkTooltip;
 
     },'', {
-        requires: ['button', 'dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget', 'widget-stack', 'widget-position', 'widget-position-constrain']
+        requires: ['button', 'dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget', 'widget-stack', 'widget-position', 'widget-position-constrain', 'widget-autohide']
     });
 
     CKEDITOR.plugins.add(
