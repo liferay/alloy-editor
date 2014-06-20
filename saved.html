@@ -119,8 +119,20 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             border-radius: 5px;
         }
 
-        .yui3-linktooltip a {
-            color: black;
+        .yui3-linktooltip .link-container {
+            background-color: #f5f5f5;
+            border: none;
+            margin-right: 10px;
+            margin-top: 3px;
+            outline: none;
+        }
+
+        .yui3-linktooltip .link-container .link-preview,
+        .yui3-linktooltip .link-container .link-preview:focus,
+        .yui3-linktooltip .link-container .link-preview:hover {
+            color: #0088cc;
+            cursor: text;
+            outline: none;
             text-decoration: none;
         }
 

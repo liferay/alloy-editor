@@ -1,6 +1,42 @@
 ;(function() {
     'use strict';
 
+    /**
+     * Debounce function
+     */
+
+    CKEDITOR.plugins.UITools = {
+        debounce: function(callback, timeout, context, args) {
+            var callFn,
+                debounceHandle;
+
+            callFn = function() {
+                var callContext,
+                    calArgs;
+
+                callContext = context || this;
+                calArgs = args || arguments;
+
+                clearTimeout(debounceHandle);
+
+                debounceHandle = setTimeout(function() {
+                    timeout.apply(callContext, calArgs);
+                }, timeout);
+            };
+
+            callFn.cancel = function() {
+                clearTimeout(debounceHandle);
+            };
+
+            return callFn;
+        }
+    };
+
+
+    /**
+     * Link utilities
+     */
+
     function Link(editor) {
         this._editor = editor;
     }
@@ -85,11 +121,14 @@
         }
     };
 
+    /**
+     * Add UITools plugin to CKEditor
+     */
+
     CKEDITOR.plugins.add(
         'uitools',
         {
             init: function(editor) {
-                CKEDITOR.plugins.UITools = {};
 
                 CKEDITOR.plugins.UITools.Link = new Link(editor);
             }

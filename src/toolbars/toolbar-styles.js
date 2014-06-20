@@ -114,6 +114,11 @@ YUI.add('toolbar-styles', function (Y) {
                 value: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
             },
 
+            constrain: {
+                validator: Lang.isBoolean,
+                value: true
+            },
+
             gutter: {
                 validator: Lang.isObject,
                 value: {
