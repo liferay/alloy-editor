@@ -33,7 +33,7 @@
             });
 
             style.type = CKEDITOR.STYLE_INLINE;
-            style.applyToRange(range, editor);
+            style.applyToRange(range, this._editor);
             range.select();
         },
 

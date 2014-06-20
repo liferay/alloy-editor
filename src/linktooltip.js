@@ -22,7 +22,7 @@
                 boundingBox.on('mouseleave', this._onBBMouseExit, this);
 
                 this._eventHandles.push(
-                    Y.one(this.get('editor').element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]', this, editor)
+                    Y.one(this.get('editor').element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]', this)
                 );
             },
 
