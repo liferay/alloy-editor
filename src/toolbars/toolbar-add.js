@@ -158,7 +158,7 @@ YUI.add('toolbar-add', function (Y) {
               '<button type="button" class="btn btn-add">{content}</button>' +
             '</div>',
 
-        TPL_ADD_CONTENT: '<i class="icon-plus-sign"></i>',
+        TPL_ADD_CONTENT: '<i class="icon-plus-circle"></i>',
 
         TPL_BUTTON_CONTAINER:
           '<div class="btn-group btn-group-vertical add-content"></div>'
@@ -186,5 +186,5 @@ YUI.add('toolbar-add', function (Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 },'0.1', {
-    requires: ['overlay', 'widget', 'widget-position', 'widget-autohide', 'toolbar-base']
+    requires: ['widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
 });

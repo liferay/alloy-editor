@@ -108,5 +108,5 @@ YUI.add('toolbar-image', function (Y) {
 
     Y.ToolbarImage = ToolbarImage;
 },'', {
-    requires: ['dom-screen', 'widget', 'widget-position', 'widget-autohide', 'toolbar-base']
+    requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
 });

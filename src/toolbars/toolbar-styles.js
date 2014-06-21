@@ -138,5 +138,5 @@ YUI.add('toolbar-styles', function (Y) {
 
     Y.ToolbarStyles = ToolbarStyles;
 },'', {
-    requires: ['widget', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base']
+    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base']
 });

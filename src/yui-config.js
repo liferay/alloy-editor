@@ -67,17 +67,17 @@ var YUI_config = {
 
         'toolbar-add': {
             fullpath: '/dist/toolbars/toolbar-add.js',
-            requires: ['overlay', 'widget', 'widget-position', 'widget-autohide', 'toolbar-base']
+            requires: ['overlay', 'widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
         },
 
         'toolbar-styles': {
             fullpath: '/dist/toolbars/toolbar-styles.js',
-            requires: ['widget', 'widget-position', 'widget-autohide', 'toolbar-base']
+            requires: ['widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
         },
 
         'toolbar-image': {
             fullpath: '/dist/toolbars/toolbar-image.js',
-            requires: ['dom-screen', 'widget', 'widget-position', 'widget-autohide', 'toolbar-base']
+            requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
         }
     }
 };

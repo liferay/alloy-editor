@@ -264,7 +264,7 @@
         Y.LinkTooltip = LinkTooltip;
 
     },'', {
-        requires: ['button', 'dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget', 'widget-stack', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+        requires: ['button', 'dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget-base', 'widget-stack', 'widget-position', 'widget-position-constrain', 'widget-autohide']
     });
 
     CKEDITOR.plugins.add(
