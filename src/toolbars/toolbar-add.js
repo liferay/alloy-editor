@@ -154,14 +154,14 @@ YUI.add('toolbar-add', function (Y) {
         },
 
         TPL_ADD:
-            '<div class="btn-group add-content-wrapper">' +
-              '<button type="button" class="btn btn-add">{content}</button>' +
+            '<div class="add-content-wrapper">' +
+              '<button type="button" class="btn-add">{content}</button>' +
             '</div>',
 
         TPL_ADD_CONTENT: '<i class="icon-plus-circle"></i>',
 
         TPL_BUTTON_CONTAINER:
-          '<div class="btn-group btn-group-vertical add-content"></div>'
+          '<div class="add-content"></div>'
     }, {
         ATTRS: {
             buttons: {

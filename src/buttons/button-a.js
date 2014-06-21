@@ -261,7 +261,7 @@ YUI.add('button-a', function (Y) {
         TPL_LINK_CONTAINER:
             '<div class="row link-wrapper hide">' +
                 '<div class="pull-left show-text-container">' +
-                    '<button class="btn show-text"><i class="icon-font"></i></button>' +
+                    '<button class="show-text"><i class="icon-font"></i></button>' +
                 '</div>' +
                 '<div class="pull-left input-wrapper">' +
                     '<span class="input-container">' +
@@ -272,7 +272,7 @@ YUI.add('button-a', function (Y) {
                     '</span>' +
                 '</div>' +
                 '<div class="pull-right input-close-container">' +
-                    '<button class="btn close-link"><i class="icon-ok"></i></button>' +
+                    '<button class="close-link"><i class="icon-ok"></i></button>' +
                 '</div>' +
             '</div>'
     }, {

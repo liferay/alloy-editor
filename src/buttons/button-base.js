@@ -99,7 +99,7 @@ YUI.add('button-base', function (Y) {
             });
         },
 
-        TPL_BUTTON: '<button class="btn">{content}</button>'
+        TPL_BUTTON: '<button>{content}</button>'
     };
 
     ButtonBase.ATTRS = {

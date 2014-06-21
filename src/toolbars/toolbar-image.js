@@ -88,7 +88,7 @@ YUI.add('toolbar-image', function (Y) {
             }
         },
 
-        TPL_BUTTON_CONTAINER: '<div class="btn-group btn-container"></div>'
+        TPL_BUTTON_CONTAINER: '<div class="toolbar-image"></div>'
     }, {
         ATTRS: {
             buttons: {

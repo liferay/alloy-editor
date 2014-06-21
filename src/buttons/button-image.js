@@ -18,8 +18,6 @@ YUI.add('button-image', function (Y) {
                 inputFile = Y.one('#' + id);
 
                 inputFile.on('change', function() {
-                    console.log(inputFile.get('value'));
-
                     inputFile.set('value', '');
                 });
 
