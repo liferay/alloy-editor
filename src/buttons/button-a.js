@@ -89,7 +89,7 @@ YUI.add('button-a', function (Y) {
                 Link.update(href, this._link);
             }
             else {
-                Link.remove();
+                Link.remove(this._link);
             }
 
             this._linkInput.set('value', '');

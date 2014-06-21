@@ -121,6 +121,10 @@
         }
     };
 
+    /**
+     * Add UITools plugin to CKEditor
+     */
+
     CKEDITOR.plugins.add(
         'uitools',
         {

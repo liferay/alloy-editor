@@ -3,30 +3,75 @@
 
     YUI.add('linktooltip', function (Y) {
         var Lang = Y.Lang,
+            Link = CKEDITOR.plugins.UITools.Link,
 
-        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetStack, Y.WidgetPosition, Y.WidgetPositionConstrain], {
+        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetStack, Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
             initializer: function() {
                 this._eventHandles = [];
             },
 
-            destroy: function() {
+            destructor: function() {
                 (new Y.EventHandle(this._eventHandles)).detach();
+
+                this._bbMouseEnterHandle.detach();
+                this._bbMouseLeaveHandle.detach();
+            },
+
+            renderUI: function() {
+                var content;
+
+                content = Y.Node.create(this.TPL_CONTENT);
+
+                this._btnGo = new Y.Button({
+                    srcNode: content.one('.go-link'),
+                    render: content.one('.link-remove-contaner')
+                });
+
+                this._btnRemove = new Y.Button({
+                    srcNode: content.one('.remove-link'),
+                    render: content.one('.link-remove-contaner')
+                });
+
+                this._linkPreview = content.one('.link-preview');
+
+                this._linkPreview.on('click', this._onLinkClick, this);
+
+                this.get('contentBox').appendChild(content);
             },
 
             bindUI: function() {
-                var boundingBox,
-                    editor;
+                var editor;
 
-                boundingBox = this.get('boundingBox');
+                this._bindBBMouseEnter();
 
-                boundingBox.on('mouseenter', this._onBBMouseEnter, this);
-                boundingBox.on('mouseleave', this._onBBMouseExit, this);
+                this._btnGo.on('click', this._onBtnGoClick, this);
+                this._btnRemove.on('click', this._onBtnRemoveClick, this);
+
+                this._linkPreview.on('keypress', this._onLinkPreviewKeyPress, this);
+
+                this.on('visibleChhange', this._onVisibleChange, this);
 
                 editor = this.get('editor');
 
                 this._eventHandles.push(
                     Y.one(editor.element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]', this, editor)
                 );
+            },
+
+            _bindBBMouseLeave: function() {
+                var boundingBox;
+
+                boundingBox = this.get('boundingBox');
+
+                this._bbMouseLeaveHandle = boundingBox.once('mouseleave', this._onBBMouseLeave, this);
+            },
+
+            _bindBBMouseEnter: function() {
+                var boundingBox;
+
+                boundingBox = this.get('boundingBox');
+
+                this._bbMouseEnterHandle = boundingBox.on('mouseenter', this._onBBMouseEnter, this);
             },
 
             _attachHiddenHandle: function() {
@@ -59,7 +104,7 @@
                 line = 1;
 
                 for (i = 1; i <= lines; i++) {
-                    if (event.pageY < region.top + lineHeight * i) {
+                    if (y < region.top + lineHeight * i) {
                         break;
                     }
 
@@ -73,11 +118,36 @@
                 return [x, y];
             },
 
+            _onBBMouseEnter: function() {
+                clearTimeout(this._hideHandle);
+
+                this._bindBBMouseLeave();
+            },
+
+            _onBBMouseLeave: function() {
+                clearTimeout(this._hideHandle);
+
+                this._attachHiddenHandle();
+            },
+
+            _onBtnGoClick: function() {
+                Y.config.win.open(this._linkPreview.get('innerHTML'));
+            },
+
+            _onBtnRemoveClick: function() {
+                Link.remove(this._currentLink);
+
+                this.hide();
+            },
+
+            _onLinkClick: function(event) {
+                event.preventDefault();
+
+                this._onStartLinkEdit();
+            },
+
             _onLinkMouseEnter: function(event) {
                 var instance = this,
-                    content,
-                    contentBox,
-                    escapedLinkText,
                     link,
                     linkText,
                     xy;
@@ -88,25 +158,21 @@
 
                 linkText = link.getAttribute('href');
 
-                contentBox = instance.get('contentBox');
+                this._linkPreview.blur();
 
-                escapedLinkText = Y.Escape.html(linkText);
+                this._linkPreview.setAttribute('href', linkText);
 
-                content = Lang.sub(
-                    instance.TPL_CONTENT,
-                    {
-                        content: escapedLinkText,
-                        href: escapedLinkText
-                    }
-                );
+                this._linkPreview.set('innerHTML', Y.Escape.html(linkText));
 
-                contentBox.set('innerHTML', content);
-
-                xy = instance._getXY(event.pageX, event.pageX, link);
+                this._linkPreview.removeClass('link-preview-focused');
 
                 instance.show();
 
+                xy = instance._getXY(event.pageX, event.pageY, link);
+
                 instance.set('xy', xy);
+
+                this._currentLink = new CKEDITOR.dom.element(link.getDOMNode());
 
                 link.once('mouseleave', function() {
                     clearTimeout(instance._hideHandle);
@@ -115,19 +181,39 @@
                 });
             },
 
-            _onBBMouseEnter: function() {
-                clearTimeout(this._hideHandle);
+            _onLinkPreviewKeyPress: function(event) {
+                if (event.charCode === 13) {
+                    Link.update(this._linkPreview.get('innerHTML'), this._currentLink);
+
+                    this.hide();
+                }
             },
 
-            _onBBMouseExit: function() {
+            _onStartLinkEdit: function() {
                 clearTimeout(this._hideHandle);
 
-                this._attachHiddenHandle();
+                this._bbMouseLeaveHandle.detach();
+
+                this._linkPreview.addClass('link-preview-focused');
             },
 
-            TPL_CONTENT: '<a contenteditable="true" href="{href}" target="_blank">{content}</a>'
+            TPL_CONTENT:
+                '<div class="pull-left link-container">' +
+                    '<a contenteditable="true" class="link-preview"></a>' +
+                '</div>' +
+                '<div class="pull-left link-go-contaner">' +
+                    '<button class="go-link"><i class="icon-share"></i></button>' +
+                '</div>' +
+                '<div class="pull-left link-remove-contaner">' +
+                    '<button class="remove-link"><i class="icon-remove"></i></button>' +
+                '</div>'
         }, {
             ATTRS: {
+                constrain: {
+                    validator: Lang.isBoolean,
+                    value: true
+                },
+
                 editor: {
                     validator: Y.Lang.isObject
                 },
@@ -155,7 +241,7 @@
         Y.LinkTooltip = LinkTooltip;
 
     },'', {
-        requires: ['dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget', 'widget-stack', 'widget-position', 'widget-position-constrain']
+        requires: ['button', 'dom-screen', 'escape', 'node-event-delegate', 'event-mouseenter', 'widget', 'widget-stack', 'widget-position', 'widget-position-constrain', 'widget-autohide']
     });
 
     CKEDITOR.plugins.add(
@@ -167,7 +253,8 @@
                         tooltip;
 
                     config = Y.merge({
-                        editor: editor
+                        editor: editor,
+                        visible: false
                     }, editor.config.linktooltip);
 
                     tooltip = new Y.LinkTooltip(config).render();
