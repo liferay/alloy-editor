@@ -101,21 +101,26 @@
 
                 region = link.get('region');
 
-                lines = Math.ceil((region.bottom - region.top) / lineHeight);
+                gutter = gutter.top;
 
-                line = 1;
+                if (Lang.isNumber(lineHeight)) {
+                    line = 1;
 
-                for (i = 1; i <= lines; i++) {
-                    if (y < region.top + lineHeight * i) {
-                        break;
+                    lines =  Math.ceil((region.bottom - region.top) / lineHeight);
+
+                    for (i = 1; i <= lines; i++) {
+                        if (y < region.top + lineHeight * i) {
+                            break;
+                        }
+
+                        ++line;
                     }
 
-                    ++line;
+                    y = region.top + line * lineHeight + gutter;
                 }
-
-                gutter = (gutter.top);
-
-                y = region.top + line * lineHeight + gutter;
+                else {
+                    y = region.bottom + gutter;
+                }
 
                 return [x, y];
             },
