@@ -4,6 +4,7 @@ YUI.add('toolbar-add', function (Y) {
     var Lang = Y.Lang,
         YNode = Y.Node,
         YObject = Y.Object,
+        UITools = CKEDITOR.plugins.UITools,
 
     ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetAutohide], {
         initializer: function () {
@@ -11,7 +12,7 @@ YUI.add('toolbar-add', function (Y) {
 
             editorNode = Y.one(this.get('editor').element.$);
 
-            this._hideButtonsContainerFn = Y.debounce(this._hideButtonsContainer, this.get('hideTimeout'));
+            this._hideButtonsContainerFn = UITools.debounce(this._hideButtonsContainer, this.get('hideTimeout'));
 
             this._editorDOMNode = editorNode.getDOMNode();
         },
@@ -185,5 +186,5 @@ YUI.add('toolbar-add', function (Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 },'0.1', {
-    requires: ['overlay', 'widget', 'widget-position', 'widget-autohide', 'aui-debounce', 'toolbar-base']
+    requires: ['overlay', 'widget', 'widget-position', 'widget-autohide', 'toolbar-base']
 });

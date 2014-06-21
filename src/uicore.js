@@ -1,7 +1,8 @@
 ;(function() {
     'use strict';
 
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var hasOwnProperty = Object.prototype.hasOwnProperty,
+        UITools = CKEDITOR.plugins.UITools;
 
     CKEDITOR.plugins.add(
         'uicore',
@@ -10,7 +11,7 @@
                 var instance = this,
                     modules;
 
-                modules = ['node', 'aui-debounce'].concat(this._getModules());
+                modules = ['node-base'].concat(this._getModules());
 
                 YUI().use(
                     modules,
@@ -22,7 +23,7 @@
 
                         instance._createToolbars(Y, editor);
 
-                        handleUI = Y.debounce(
+                        handleUI = UITools.debounce(
                             function(event) {
                                 Y.fire('editorInteraction', {
                                     editor: editor,

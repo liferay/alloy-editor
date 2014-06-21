@@ -4,7 +4,7 @@ YUI.add('toolbar-styles', function (Y) {
     var Lang = Y.Lang,
         YNode = Y.Node,
 
-    ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.ToolbarBase], {
+    ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.WidgetPositionConstrain, Y.ToolbarBase], {
     	renderUI: function() {
             var instance = this,
                 buttonsContainer,
@@ -133,5 +133,5 @@ YUI.add('toolbar-styles', function (Y) {
 
     Y.ToolbarStyles = ToolbarStyles;
 },'', {
-    requires: ['widget', 'widget-position', 'widget-autohide', 'toolbar-base']
+    requires: ['widget', 'widget-position', 'widget-constrain', 'widget-autohide', 'toolbar-base']
 });

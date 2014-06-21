@@ -67,7 +67,7 @@ var YUI_config = {
 
         'toolbar-add': {
             fullpath: '/dist/toolbars/toolbar-add.js',
-            requires: ['overlay', 'widget', 'widget-position', 'widget-autohide', 'aui-debounce', 'toolbar-base']
+            requires: ['overlay', 'widget', 'widget-position', 'widget-autohide', 'toolbar-base']
         },
 
         'toolbar-styles': {

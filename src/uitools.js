@@ -1,6 +1,42 @@
 ;(function() {
     'use strict';
 
+    /**
+     * Debounce function
+     */
+
+    CKEDITOR.plugins.UITools = {
+        debounce: function(callback, timeout, context, args) {
+            var callFn,
+                debounceHandle;
+
+            callFn = function() {
+                var callContext,
+                    calArgs;
+
+                callContext = context || this;
+                calArgs = args || arguments;
+
+                clearTimeout(debounceHandle);
+
+                debounceHandle = setTimeout(function() {
+                    callback.apply(callContext, calArgs);
+                }, timeout);
+            };
+
+            callFn.cancel = function() {
+                clearTimeout(debounceHandle);
+            };
+
+            return callFn;
+        }
+    };
+
+
+    /**
+     * Link utilities
+     */
+
     function Link(editor) {
         this._editor = editor;
     }
@@ -33,7 +69,7 @@
             });
 
             style.type = CKEDITOR.STYLE_INLINE;
-            style.applyToRange(range, editor);
+            style.applyToRange(range, this._editor);
             range.select();
         },
 
@@ -89,8 +125,6 @@
         'uitools',
         {
             init: function(editor) {
-                CKEDITOR.plugins.UITools = {};
-
                 CKEDITOR.plugins.UITools.Link = new Link(editor);
             }
         }

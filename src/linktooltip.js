@@ -4,7 +4,7 @@
     YUI.add('linktooltip', function (Y) {
         var Lang = Y.Lang,
 
-        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetStack, Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain], {
+        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetStack, Y.WidgetPosition, Y.WidgetPositionConstrain], {
             initializer: function() {
                 this._eventHandles = [];
             },
@@ -14,15 +14,18 @@
             },
 
             bindUI: function() {
-                var boundingBox;
+                var boundingBox,
+                    editor;
 
                 boundingBox = this.get('boundingBox');
 
                 boundingBox.on('mouseenter', this._onBBMouseEnter, this);
                 boundingBox.on('mouseleave', this._onBBMouseExit, this);
 
+                editor = this.get('editor');
+
                 this._eventHandles.push(
-                    Y.one(this.get('editor').element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]', this, editor)
+                    Y.one(editor.element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]', this, editor)
                 );
             },
 
@@ -152,7 +155,7 @@
         Y.LinkTooltip = LinkTooltip;
 
     },'', {
-        requires: ['dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'overlay']
+        requires: ['dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget', 'widget-stack', 'widget-position', 'widget-position-constrain']
     });
 
     CKEDITOR.plugins.add(
