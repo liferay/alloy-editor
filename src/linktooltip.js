@@ -49,13 +49,15 @@
 
                 this._linkPreview.on('keypress', this._onLinkPreviewKeyPress, this);
 
-                this.on('visibleChhange', this._onVisibleChange, this);
+                this.on('visibleChange', this._onVisibleChange, this);
 
                 editor = this.get('editor');
 
                 this._eventHandles.push(
                     Y.one(editor.element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]', this, editor)
                 );
+
+                this.get('boundingBox').on('clickoutside', this._onClickOutside, this);
             },
 
             _bindBBMouseLeave: function() {
@@ -134,6 +136,10 @@
                 Y.config.win.open(this._linkPreview.get('innerHTML'));
             },
 
+            _onClickOutside: function() {
+                this.hide();
+            },
+
             _onBtnRemoveClick: function() {
                 Link.remove(this._currentLink);
 
@@ -151,6 +157,10 @@
                     link,
                     linkText,
                     xy;
+
+                if (this._editMode) {
+                    return;
+                }
 
                 clearTimeout(instance._hideHandle);
 
@@ -190,11 +200,19 @@
             },
 
             _onStartLinkEdit: function() {
+                this._editMode = true;
+
                 clearTimeout(this._hideHandle);
 
                 this._bbMouseLeaveHandle.detach();
 
                 this._linkPreview.addClass('link-preview-focused');
+            },
+
+            _onVisibleChange: function(event) {
+                if (!event.newVal) {
+                    this._editMode = false;
+                }
             },
 
             TPL_CONTENT:
@@ -241,7 +259,7 @@
         Y.LinkTooltip = LinkTooltip;
 
     },'', {
-        requires: ['button', 'dom-screen', 'escape', 'node-event-delegate', 'event-mouseenter', 'widget', 'widget-stack', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+        requires: ['button', 'dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget', 'widget-stack', 'widget-position', 'widget-position-constrain', 'widget-autohide']
     });
 
     CKEDITOR.plugins.add(
