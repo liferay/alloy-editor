@@ -1,0 +1,9 @@
+/* line 4, ../../sass/skin/lao-editor-skin.scss */
+.yui3-toolbarstyles .link-wrapper {
+  background-color: #F1F1F1;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
