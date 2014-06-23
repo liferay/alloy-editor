@@ -184,7 +184,7 @@ YUI.add('button-a', function (Y) {
             });
 
             this._showText = new Y.Button({
-                render: linkContainer.one('.show-text-container'),
+                render: linkContainer.one('.show-buttons-container'),
                 srcNode: linkContainer.one('.show-text')
             });
         },
@@ -260,7 +260,7 @@ YUI.add('button-a', function (Y) {
 
         TPL_LINK_CONTAINER:
             '<div class="row link-wrapper hide">' +
-                '<div class="pull-left show-text-container">' +
+                '<div class="pull-left show-buttons-container">' +
                     '<button class="show-text"><i class="icon-font"></i></button>' +
                 '</div>' +
                 '<div class="pull-left input-wrapper">' +

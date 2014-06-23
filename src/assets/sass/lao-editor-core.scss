@@ -1,5 +1,13 @@
-.yui3-toolbarstyles, .yui3-toolbaradd, .yui3-toolbarimage, .yui3-linktooltip {
+.hide {
+    display: none !important;
+}
+
+.yui3-toolbarstyles, .yui3-toolbaradd, .yui3-toolbaradd-buttons, .yui3-toolbarimage, .yui3-linktooltip {
     position: absolute;
+
+    .yui3-button {
+        padding: .2em .5em .22em;
+    }
 }
 
 .yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbarimage-hidden, .yui3-linktooltip-hidden {
@@ -9,25 +17,39 @@
 .yui3-toolbarstyles {
     .link-wrapper {
         margin-left: 0;
+        padding-left: 2px;
+        width: 290px;
+
+        .input-container {
+            padding: 3px 5px 4px 0;
+
+            input {
+                margin: 5px 0 5px 0;
+                outline: none;
+                width: 165px;
+            }
+
+            input::-ms-clear {
+                display: none;
+            }
+        }
+
+        .show-buttons-container {
+            float: left;
+            margin-top: 5px;
+        }
+
+        .input-wrapper {
+            float: left;
+            margin: 2px 0 0 5px;
+        }
+
+        .input-close-container {
+            float: left;
+            margin: 5px 2px 0 -10px;
+            width: 40px;
+        }
     }
-}
-
-.link-wrapper {
-    padding-left: 2px;
-    width: 280px;
-}
-
-.link-wrapper input {
-    margin: 5px 0 5px 0;
-    width: 165px;
-}
-
-.link-wrapper input::-ms-clear {
-    display: none;
-}
-
-.input-container {
-    padding: 5px 5px 8px 0;
 }
 
 .input-container .input-clear {
@@ -38,17 +60,6 @@
 
 .input-container .input-clear i {
     cursor: pointer;
-}
-
-.input-close-container {
-    margin-left: -10px;
-    margin-top: 5px;
-    margin-right: 2px;
-    width: 40px;
-}
-
-.show-text-container {
-    margin-top: 5px;
 }
 
 .yui3-overlay, .yui3-toolbaradd, .yui3-toolbarstyles, .yui3-toolbarimage {

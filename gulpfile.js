@@ -1,6 +1,12 @@
 var compass = require('gulp-compass'),
 	gulp = require('gulp'),
-	path = require('path');
+	path = require('path'),
+	clean = require('gulp-clean');
+
+gulp.task('clean', function() {
+	return gulp.src(path.resolve(__dirname + '/dist/**/*.*'), {read: false})
+		.pipe(clean());
+});
 
 gulp.task('copy-js', function() {
 	return gulp.src(path.resolve(__dirname + '/src/**/*.js'))
@@ -26,4 +32,4 @@ gulp.task('compass', function() {
 		}));
 	});
 
-gulp.task('default', ['copy-js', 'copy-css', 'copy-fonts', 'compass']);
+gulp.task('default', ['clean', 'copy-js', 'copy-css', 'copy-fonts', 'compass']);
