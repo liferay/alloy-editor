@@ -5,7 +5,7 @@
         var Lang = Y.Lang,
             Link = CKEDITOR.plugins.UITools.Link,
 
-        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetStack, Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
+        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
             initializer: function() {
                 this._eventHandles = [];
             },
@@ -224,11 +224,11 @@
                 '<div class="pull-left link-container">' +
                     '<a contenteditable="true" class="link-preview"></a>' +
                 '</div>' +
-                '<div class="pull-left link-go-contaner">' +
-                    '<button class="go-link"><i class="icon-share"></i></button>' +
+                '<div class="pull-left btn-group link-go-contaner">' +
+                    '<button class="btn go-link"><i class="icon-share"></i></button>' +
                 '</div>' +
-                '<div class="pull-left link-remove-contaner">' +
-                    '<button class="remove-link"><i class="icon-remove"></i></button>' +
+                '<div class="pull-left btn-group link-remove-contaner">' +
+                    '<button class="btn remove-link"><i class="icon-remove"></i></button>' +
                 '</div>'
         }, {
             ATTRS: {
@@ -252,11 +252,6 @@
                 hideDelay: {
                     validator: Lang.isNumber,
                     value: 2000
-                },
-
-                zIndex: {
-                    validator: Lang.isNumber,
-                    value: 1
                 }
             }
         });
@@ -264,7 +259,7 @@
         Y.LinkTooltip = LinkTooltip;
 
     },'', {
-        requires: ['button', 'dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget-base', 'widget-stack', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+        requires: ['button', 'dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
     });
 
     CKEDITOR.plugins.add(

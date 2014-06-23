@@ -1,7 +1,7 @@
 @import "compass/css3";
 
 .yui3-toolbarstyles {
-    background-color: #F1F1F1;
+    background-color: #e6e6e6;
     @include border-radius(5px);
 }
 
@@ -11,8 +11,14 @@
     }
 }
 
-.link-wrapper input {
-    border: none;
+.link-wrapper {
+    input {
+        border: none;
+    }
+
+    .close-link {
+        @include border-radius(0 5px 5px 0);
+    }
 }
 
 .link-wrapper input[type="text"]:focus {
@@ -21,9 +27,10 @@
 }
 
 .input-container {
+    @include border-radius(5px 0 0 5px);
     background-color: white;
-    @include border-radius(5px);
     border: 1px #cccccc solid;
+    border-right: none;
 }
 
 

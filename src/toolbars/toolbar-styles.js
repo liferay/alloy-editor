@@ -106,7 +106,7 @@ YUI.add('toolbar-styles', function (Y) {
             }
         },
 
-        TPL_BUTTON_CONTAINER: '<div class="toolbar-styles"></div>'
+        TPL_BUTTON_CONTAINER: '<div class="btn-group toolbar-styles"></div>'
     }, {
         ATTRS: {
             buttons: {

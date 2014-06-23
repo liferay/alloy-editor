@@ -161,7 +161,7 @@ YUI.add('toolbar-add', function (Y) {
         TPL_ADD_CONTENT: '<i class="icon-plus-circle"></i>',
 
         TPL_BUTTON_CONTAINER:
-          '<div class="yui3-toolbaradd-buttons"></div>'
+          '<div class="btn-group yui3-toolbaradd-buttons"></div>'
     }, {
         ATTRS: {
             buttons: {
