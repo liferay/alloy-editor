@@ -15,10 +15,17 @@
 }
 
 .yui3-toolbarstyles {
+    height: 32px;
+    padding: 1px;
+
+    .toolbar-styles {
+        margin: 3px 2px 0 2px;
+    }
+
     .link-wrapper {
         margin-left: 0;
         padding-left: 2px;
-        width: 290px;
+        width: 250px;
 
         .input-container {
             padding: 3px 5px 4px 0;
@@ -36,18 +43,17 @@
 
         .show-buttons-container {
             float: left;
-            margin-top: 5px;
+            margin-top: 3px;
         }
 
         .input-wrapper {
             float: left;
-            margin: 2px 0 0 5px;
+            margin: 1px 0 0 1px;
         }
 
         .input-close-container {
-            float: left;
-            margin: 5px 2px 0 -10px;
-            width: 40px;
+            float: right;
+            margin: 3px 0 0 0;
         }
     }
 }

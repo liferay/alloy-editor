@@ -17,73 +17,81 @@
   display: none;
 }
 
-/* line 18, ../sass/lao-editor-core.scss */
+/* line 17, ../sass/lao-editor-core.scss */
+.yui3-toolbarstyles {
+  height: 32px;
+  padding: 1px;
+}
+/* line 21, ../sass/lao-editor-core.scss */
+.yui3-toolbarstyles .toolbar-styles {
+  margin: 3px 2px 0 2px;
+}
+/* line 25, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper {
   margin-left: 0;
   padding-left: 2px;
-  width: 290px;
+  width: 250px;
 }
-/* line 23, ../sass/lao-editor-core.scss */
+/* line 30, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-container {
   padding: 3px 5px 4px 0;
 }
-/* line 26, ../sass/lao-editor-core.scss */
+/* line 33, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-container input {
   margin: 5px 0 5px 0;
   outline: none;
   width: 165px;
 }
-/* line 32, ../sass/lao-editor-core.scss */
+/* line 39, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-container input::-ms-clear {
   display: none;
 }
-/* line 37, ../sass/lao-editor-core.scss */
+/* line 44, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .show-buttons-container {
   float: left;
-  margin-top: 5px;
+  margin-top: 3px;
 }
-/* line 42, ../sass/lao-editor-core.scss */
+/* line 49, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-wrapper {
   float: left;
-  margin: 2px 0 0 5px;
+  margin: 1px 0 0 1px;
 }
-/* line 47, ../sass/lao-editor-core.scss */
+/* line 54, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-close-container {
-  float: left;
-  margin: 5px 2px 0 -10px;
-  width: 40px;
+  float: right;
+  margin: 3px 0 0 0;
 }
 
-/* line 55, ../sass/lao-editor-core.scss */
+/* line 61, ../sass/lao-editor-core.scss */
 .input-container .input-clear {
   display: inline-block;
   height: 11px;
   width: 12px;
 }
 
-/* line 61, ../sass/lao-editor-core.scss */
+/* line 67, ../sass/lao-editor-core.scss */
 .input-container .input-clear i {
   cursor: pointer;
 }
 
-/* line 65, ../sass/lao-editor-core.scss */
+/* line 71, ../sass/lao-editor-core.scss */
 .yui3-overlay, .yui3-toolbaradd, .yui3-toolbarstyles, .yui3-toolbarimage {
   z-index: 1;
 }
 
-/* line 69, ../sass/lao-editor-core.scss */
+/* line 75, ../sass/lao-editor-core.scss */
 .yui3-linktooltip {
   min-height: 16px;
   padding: 2px 5px 2px 5px;
 }
 
-/* line 74, ../sass/lao-editor-core.scss */
+/* line 80, ../sass/lao-editor-core.scss */
 .yui3-linktooltip .link-container {
   margin-right: 10px;
   margin-top: 3px;
 }
 
-/* line 81, ../sass/lao-editor-core.scss */
+/* line 87, ../sass/lao-editor-core.scss */
 .yui3-linktooltip .link-container .link-preview,
 .yui3-linktooltip .link-container .link-preview:focus,
 .yui3-linktooltip .link-container .link-preview:hover {

@@ -1,9 +1,13 @@
 @import "compass/css3";
 
 .yui3-toolbarstyles {
-    .link-wrapper {
-        background-color: #F1F1F1;
-        @include border-radius(5px);
+    background-color: #F1F1F1;
+    @include border-radius(5px);
+}
+
+.yui3-toolbarstyles, .yui3-toolbaradd, .yui3-toolbaradd-buttons, .yui3-toolbarimage, .yui3-linktooltip {
+    .yui3-button {
+        outline: none;
     }
 }
 
