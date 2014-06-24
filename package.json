@@ -10,8 +10,11 @@
     "gulp-concat": "~2.2.0",
     "gulp-rename": "~1.2.0",
     "gulp-sass": "~0.7.2",
+    "gulp-template": "^0.1.1",
     "gulp-wrap": "~0.3.0",
-    "run-sequence": "^0.3.6"
+    "rimraf": "^2.2.8",
+    "run-sequence": "^0.3.6",
+    "yargs": "^1.2.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"margi",
+				"margin-top"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
 				"link",
 				"linkText"
 			],
@@ -78,10 +86,6 @@
 			[
 				"_link",
 				"_linkInput"
-			],
-			[
-				"padd",
-				"padding-left"
 			],
 			[
 				"margin",
@@ -262,10 +266,6 @@
 			[
 				"event",
 				"_eventHandles"
-			],
-			[
-				"margi",
-				"margin-right"
 			],
 			[
 				"fin",
@@ -519,69 +519,17 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/linktooltip.js",
-			"settings":
-			{
-				"buffer_size": 6244,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/toolbars/toolbar-styles.js",
-			"settings":
-			{
-				"buffer_size": 4061,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "saved.html",
-			"settings":
-			{
-				"buffer_size": 11495,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/uitools.js",
-			"settings":
-			{
-				"buffer_size": 3151,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/buttons/button-a.js",
-			"settings":
-			{
-				"buffer_size": 8441,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/toolbars/toolbar-add.js",
-			"settings":
-			{
-				"buffer_size": 5463,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/yui-config.js",
-			"settings":
-			{
-				"buffer_size": 2351,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/User/gulp.sublime-build",
 	"command_palette":
 	{
-		"height": 147.0,
+		"height": 127.0,
 		"selected_items":
 		[
+			[
+				"pretty",
+				"HTMLPrettify"
+			],
 			[
 				"insta",
 				"Package Control: Install Package"
@@ -777,40 +725,61 @@
 	"expanded_folders":
 	[
 		"/Users/iliyan/projects/lao-wysiwyg-editor",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/lib",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons"
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/assets",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/assets/font",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/assets/sass",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/assets/sass/skin",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbars"
 	],
 	"file_history":
 	[
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-a.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/linktooltip.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/assets/sass/skin/lao-editor-skin.scss",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/assets/sass/lao-editor-core.scss",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/uicore.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/saved.html",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/yui-config.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/uitools.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/linkedittooltip.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbars-config.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/lib/ckeditor/plugins/link/dialogs/anchor.js",
+		"/Users/iliyan/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/.gitignore",
+		"/Users/iliyan/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbars/toolbar-add.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/assets/font/font.css",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-image.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-left.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbars/toolbar-styles.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/drop-images.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbars/toolbar-image.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-base.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/bootstrap.css",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/assets/css/lao-editor-core.css",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/assets/.sass-cache/128c557bf84659f175667f3257d4a78264fc9be2/lao-editor-core.scssc",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/gulpfile.js",
+		"/Users/iliyan/Library/Application Support/Sublime Text 3/Packages/User/test123456.sublime-build",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-h1.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-h2.js",
+		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-em.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/lib/ckeditor/plugins/wsc/LICENSE.md",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/lib/ckeditor/plugins/wsc/dialogs/wsc_ie.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/lao-wysiwyg-editor.sublime-project",
 		"/Users/iliyan/Library/Application Support/Sublime Text 3/Packages/JSHint Gutter/JSHint.sublime-settings",
 		"/Users/iliyan/Library/Application Support/Sublime Text 3/Packages/JSHint Gutter/.jshintrc",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-twitter.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/drop-images.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/lib/ckeditor/plugins/scayt/dialogs/options.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/lib/ckeditor/skins/moono/dialog.css",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/lib/ckeditor/samples/assets/outputxhtml/outputxhtml.css",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/uicore.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/linktooltip.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbars/toolbar-styles.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/selection-region.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-a.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-base.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/saved.html",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-image.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-underline.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-right.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/yui-config.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-strong.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-code.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-em.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbars/toolbar-image.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/buttons/button-left.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbars/toolbar-base.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbars/toolbar-add.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbar-styles.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbar-add.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/toolbar-image.js",
@@ -855,7 +824,6 @@
 		"/Users/iliyan/projects/lao-wysiwyg-editor/dist/toolbar-add.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/placeholder.js",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/src/widgets/widget-base.js",
-		"/Users/iliyan/projects/lao-wysiwyg-editor/gulpfile.js",
 		"/Users/iliyan/Desktop/test.html",
 		"/Users/iliyan/projects/lao-wysiwyg-editor/dist/placeholder.js",
 		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/liferay/surface.js",
@@ -894,22 +862,7 @@
 		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/css/taglib_1.css",
 		"/Users/iliyan/projects/liferay/portal/portal-service/src/com/liferay/portlet/asset/service/AssetTagLocalService.java",
 		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/portlet/sites_admin/edit_team_assignments_user_groups.jsp",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/portlet/dynamic_data_mapping/template_action.jsp",
-		"/Users/iliyan/projects/liferay/portal/test.properties",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/taglib/ui/search_container/init.jsp",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/css/portal/search_combobox.css",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/ckeditor_diffs/plugins/autocomplete/autocomplete.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/aui/overlay/overlay.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/build.xml",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/ckeditor.jsp",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/portlet/journal/js/content.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/portlet/document_selector/pages.jsp",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/liferay/util.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/editor/ckeditor_diffs/plugins/autocomplete/plugin.js",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/liferay/modules.js",
-		"/Users/iliyan/projects/liferay/portal/portal-impl/test/integration/com/liferay/portal/verify/VerifyLayoutTest.java",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/aui/overlay/assets/skins/night/overlay.css",
-		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/js/aui/overlay/assets/skins/sam/overlay.css"
+		"/Users/iliyan/projects/liferay/portal/portal-web/docroot/html/portlet/dynamic_data_mapping/template_action.jsp"
 	],
 	"find":
 	{
@@ -1052,9 +1005,73 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"this._linkPreview",
+			"visible",
+			"_onLinkClick",
+			"_attachHiddenHandle",
+			"_onBBMouseLeave",
+			"_bindBBMouseLeave",
+			"linkedittooltip",
+			"linktooltip",
+			"LinkTooltip",
+			"linktooltip",
+			"'linktooltip'",
+			"PATH_JAVASCRIPT + ",
+			"/dist/",
+			"fullpath",
+			"data-cke",
+			"merge",
+			"_getModules",
+			"ToolbarsConfig",
+			"editor.config.toolbars",
+			"toolbars",
+			"ToolbarsConfig",
+			"mouseenter",
+			"createlink",
+			"mouseenter",
+			"createlink",
+			"_merge",
+			"merge",
+			"icon-plus",
+			"icon-",
+			"share",
+			"share-square",
+			"share-square-o",
+			"plug",
+			"editor: {",
+			"_buttonsOverlay",
+			"_onButtonsOverlayVisibleChange",
+			"buttons",
+			"_renderButtonsOverlay",
+			"plug",
+			"5px 5px 5px 0;",
+			"margin: 5px 0 5px 0;",
+			"margin: 5px 0 5px 0; *",
+			"margin: 1px 0 0 1px;",
+			"32px",
+			"margin-top: 3px;",
+			"row",
+			"zindex",
+			"height: 32px;",
+			"<button",
+			"float",
+			";\n",
+			"260",
+			"width: 40",
+			"margin-top: 5px;",
+			"pull-left ",
+			"pull-left",
+			"height",
+			"input-wrapper",
+			"show-buttons-container",
+			"show-text-container",
+			"link-container",
+			"linktooltip",
+			"h1",
+			"bootst",
 			"_getXY",
 			"currenttri",
 			"mouseenter",
@@ -1118,71 +1135,7 @@
 			"aui-",
 			"this._defaultLink",
 			"_defaultLink",
-			"this._visibleChangeHandle.",
-			"_attachVisibleChangeHandler",
-			"_addVisibleChangeHandler",
-			"this._visibleChangeHandle =",
-			"instance.",
-			"_handleLink",
-			"this._closeLink",
-			"_switchToLinkMode",
-			"this._visibleChangeHandle",
-			"_switchToTextMode",
-			"updateui",
-			"updateUI",
-			"updateui",
-			"_switchToTextMode",
-			"switchtotext",
-			"_switchToLinkMode",
-			"_onCloseClick",
-			"_onClearClick",
-			"_inputClear",
-			"_switchToLinkMode",
-			"_onVisibleChange",
-			"bookmarks",
-			".select(",
-			"new CKEDITOR.style",
-			"_removeLink",
-			"range.select();",
-			"_removeLink",
-			"handlelink",
-			"removelink",
-			"'visibleChange'",
-			"_switchToLinkMode",
-			"'visibleChange'",
-			"change",
-			"visibilecha",
-			"visibilitycha",
-			"_visibleChangeHandle",
-			"._handleLink",
-			"instance._visibleChangeHandle",
-			"handle",
-			"_handleLink",
-			"handlelink",
-			"removelink",
-			"_removeLink",
-			"_handleLink",
-			"handlelink",
-			"_switchToTextMode",
-			"select",
-			"actionper",
-			"instance",
-			"_handleli",
-			"switch",
-			"_createLink",
-			"_handleLink",
-			"removelink",
-			"_switchToTextMode",
-			"input-close-container",
-			"renderlinkui",
-			"_switchToEditMode",
-			"switch",
-			"instance",
-			"switch",
-			"_handleLink",
-			"_updateLink",
-			"this._getSelectedLink()",
-			"this._link"
+			"this._visibleChangeHandle."
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1190,6 +1143,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"LinkEditTooltip",
+			"show-buttons-container",
 			"Right",
 			"right",
 			"'",
@@ -1315,9 +1270,7 @@
 			"'",
 			"Lang.toInt",
 			"'",
-			"],",
-			": [",
-			""
+			"],"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1328,219 +1281,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/linktooltip.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6244,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6069,
-								6069
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3110.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/toolbars/toolbar-styles.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4061,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3489,
-								3489
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1523.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "saved.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11495,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3438,
-								3434
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2452.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/uitools.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3151,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3106,
-								3112
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1685.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/buttons/button-a.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8441,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2479,
-								2493
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1206.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/toolbars/toolbar-add.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5463,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1059,
-								1059
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/yui-config.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2351,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								33,
-								33
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -2143,7 +1885,7 @@
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 321.0,
 	"status_bar_visible": true,
 	"template_settings":

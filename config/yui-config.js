@@ -8,9 +8,9 @@ else {
 }
 
 YUI_config.groups.LREditor = {
-    base: '/dist/',
-    combine: false,
-    comboBase: '',
+    base: '<%= base %>',
+    combine: <%= combine %>,
+    comboBase: '<%= comboBase %>',
     modules: {
         'button-base': {
             path: 'buttons/button-base.js',
@@ -92,5 +92,5 @@ YUI_config.groups.LREditor = {
             requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
         }
     },
-    root: '/dist/'
+    root: '<%= root %>'
 };
