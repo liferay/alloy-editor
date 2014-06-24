@@ -58,14 +58,14 @@
                     if (hasOwnProperty.call(ToolbarsConfig, i)) {
                         if (CKEDITOR.tools.isArray(ToolbarsConfig[i])) {
                             editor.config.toolbars[i] = new Y[this._getToolbarName(i)](
-                                this._merge(defaultConfig, {
+                                UITools.merge(defaultConfig, {
                                     buttons: ToolbarsConfig[i]
                                 })
                             );
                         }
                         else if(ToolbarsConfig[i]) {
                             editor.config.toolbars[i] = new Y[this._getToolbarName(i)](
-                                this._merge(defaultConfig, ToolbarsConfig[i])
+                                UITools.merge(defaultConfig, ToolbarsConfig[i])
                             );
                         }
                     }
@@ -101,26 +101,6 @@
 
             _getToolbarName: function(name) {
                 return 'Toolbar' + name.substring(0, 1).toUpperCase() + name.substring(1);
-            },
-
-            _merge: function () {
-                var i = 0,
-                    key,
-                    len = arguments.length,
-                    obj,
-                    result = {};
-
-                for (; i < len; ++i) {
-                    obj = arguments[i];
-
-                    for (key in obj) {
-                        if (hasOwnProperty.call(obj, key)) {
-                            result[key] = obj[key];
-                        }
-                    }
-               }
-
-                return result;
             }
         }
     );

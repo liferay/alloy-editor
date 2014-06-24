@@ -54,7 +54,7 @@
                 editor = this.get('editor');
 
                 this._eventHandles.push(
-                    Y.one(editor.element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]', this, editor)
+                    Y.one(editor.element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]:not([cke-data-default])', this, editor)
                 );
 
                 this.get('boundingBox').on('clickoutside', this._onClickOutside, this);

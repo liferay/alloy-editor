@@ -1,11 +1,7 @@
 ;(function() {
     'use strict';
 
-    /**
-     * Debounce function
-     */
-
-    CKEDITOR.plugins.UITools = {
+    var UITools = {
         debounce: function(callback, timeout, context, args) {
             var callFn,
                 debounceHandle;
@@ -29,8 +25,30 @@
             };
 
             return callFn;
+        },
+
+        merge: function () {
+            var i = 0,
+                key,
+                len = arguments.length,
+                obj,
+                result = {};
+
+            for (; i < len; ++i) {
+                obj = arguments[i];
+
+                for (key in obj) {
+                    if (hasOwnProperty.call(obj, key)) {
+                        result[key] = obj[key];
+                    }
+                }
+           }
+
+            return result;
         }
     };
+
+    CKEDITOR.plugins.UITools = UITools;
 
 
     /**
@@ -44,8 +62,9 @@
     Link.prototype = {
         constructor: Link,
 
-        create: function(URI) {
-            var range,
+        create: function(URI, attrs) {
+            var linkAttrs,
+                range,
                 selection,
                 style,
                 text;
@@ -60,11 +79,13 @@
                 range.selectNodeContents(text);
             }
 
+            linkAttrs = UITools.merge({
+                'data-cke-saved-href': URI,
+                href: URI
+            }, attrs);
+
             style = new CKEDITOR.style({
-                attributes: {
-                    'data-cke-saved-href': URI,
-                    href: URI
-                },
+                attributes: linkAttrs,
                 element: 'a'
             });
 
