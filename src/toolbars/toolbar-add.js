@@ -3,7 +3,6 @@ YUI.add('toolbar-add', function (Y) {
 
     var Lang = Y.Lang,
         YNode = Y.Node,
-        YObject = Y.Object,
         UITools = CKEDITOR.plugins.UITools,
 
     ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetAutohide], {
@@ -31,8 +30,6 @@ YUI.add('toolbar-add', function (Y) {
 
             boundingBox.on('mouseenter', this._handleMouseEnter, this);
             buttonsBoundingBox.on('mouseenter', this._handleMouseEnter, this);
-
-            this._buttonsOverlay.on('visibleChange', this._onButtonsOverlayVisibleChange, this);
         },
 
         destructor: function() {
@@ -83,17 +80,6 @@ YUI.add('toolbar-add', function (Y) {
             this._buttonsOverlay.hide();
         },
 
-        _onButtonsOverlayVisibleChange: function(event) {
-            if (!event.newVal) {
-                YObject.each(
-                    this._buttons,
-                    function(item) {
-                        item.set('pressed', false);
-                    }
-                );
-            }
-        },
-
         _onEditorInteraction: function(event) {
             var selectionData,
                 startRect;
@@ -139,8 +125,8 @@ YUI.add('toolbar-add', function (Y) {
             buttonsContainer = YNode.create(this.TPL_BUTTON_CONTAINER);
 
             this._buttonsOverlay = new Y.Overlay({
-                visible: false,
                 srcNode: buttonsContainer,
+                visible: false,
                 zIndex: 1
             }).render();
 
