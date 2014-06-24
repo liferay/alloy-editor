@@ -56,8 +56,12 @@
 }
 /* line 42, ../../sass/skin/lao-editor-skin.scss */
 .yui3-linktooltip .link-container {
+  -webkit-border-radius: 5px 0 0 5px;
+  -moz-border-radius: 5px 0 0 5px;
+  -ms-border-radius: 5px 0 0 5px;
+  -o-border-radius: 5px 0 0 5px;
+  border-radius: 5px 0 0 5px;
   background-color: #f5f5f5;
-  border: none;
   outline: none;
 }
 /* line 47, ../../sass/skin/lao-editor-skin.scss */
