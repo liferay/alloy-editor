@@ -6,7 +6,7 @@ var clean = require('gulp-clean'),
 
 gulp.task('clean', function() {
     return gulp.src(path.resolve(__dirname + '/dist/**/*.*'), {read: false})
-        .pipe(clean());
+        .pipe(clean({force: true}));
 });
 
 gulp.task('copy-js', function() {
