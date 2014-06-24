@@ -1,16 +1,20 @@
 ;(function() {
     'use strict';
 
-    YUI.add('linktooltip', function (Y) {
+    YUI.add('linkedittooltip', function (Y) {
         var Lang = Y.Lang,
+            Link = CKEDITOR.plugins.UITools.Link,
 
-        LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
+        LinkEditTooltip = Y.Base.create('linkedittooltip', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
             initializer: function() {
                 this._eventHandles = [];
             },
 
             destructor: function() {
                 (new Y.EventHandle(this._eventHandles)).detach();
+
+                this._bbMouseEnterHandle.detach();
+                this._bbMouseLeaveHandle.detach();
             },
 
             renderUI: function() {
@@ -18,15 +22,34 @@
 
                 content = Y.Node.create(this.TPL_CONTENT);
 
-                this.get('contentBox').appendChild(content);
+                this._btnGo = new Y.Button({
+                    srcNode: content.one('.go-link'),
+                    render: content.one('.link-remove-contaner')
+                });
+
+                this._btnRemove = new Y.Button({
+                    srcNode: content.one('.remove-link'),
+                    render: content.one('.link-remove-contaner')
+                });
 
                 this._linkPreview = content.one('.link-preview');
+
+                this._linkPreview.on('click', this._onLinkClick, this);
+
+                this.get('contentBox').appendChild(content);
             },
 
             bindUI: function() {
                 var editor;
 
                 this._bindBBMouseEnter();
+
+                this._btnGo.on('click', this._onBtnGoClick, this);
+                this._btnRemove.on('click', this._onBtnRemoveClick, this);
+
+                this._linkPreview.on('keypress', this._onLinkPreviewKeyPress, this);
+
+                this.on('visibleChange', this._onVisibleChange, this);
 
                 editor = this.get('editor');
 
@@ -114,8 +137,24 @@
                 this._attachHiddenHandle();
             },
 
+            _onBtnGoClick: function() {
+                Y.config.win.open(this._linkPreview.get('innerHTML'));
+            },
+
             _onClickOutside: function() {
                 this.hide();
+            },
+
+            _onBtnRemoveClick: function() {
+                Link.remove(this._currentLink);
+
+                this.hide();
+            },
+
+            _onLinkClick: function(event) {
+                event.preventDefault();
+
+                this._onStartLinkEdit();
             },
 
             _onLinkMouseEnter: function(event) {
@@ -134,15 +173,21 @@
 
                 linkText = link.getAttribute('href');
 
+                this._linkPreview.blur();
+
                 this._linkPreview.setAttribute('href', linkText);
 
                 this._linkPreview.set('innerHTML', Y.Escape.html(linkText));
+
+                this._linkPreview.removeClass('link-preview-focused');
 
                 instance.show();
 
                 xy = instance._getXY(event.pageX, event.pageY, link);
 
                 instance.set('xy', xy);
+
+                this._currentLink = new CKEDITOR.dom.element(link.getDOMNode());
 
                 link.once('mouseleave', function() {
                     clearTimeout(instance._hideHandle);
@@ -151,9 +196,39 @@
                 });
             },
 
+            _onLinkPreviewKeyPress: function(event) {
+                if (event.charCode === 13) {
+                    Link.update(this._linkPreview.get('innerHTML'), this._currentLink);
+
+                    this.hide();
+                }
+            },
+
+            _onStartLinkEdit: function() {
+                this._editMode = true;
+
+                clearTimeout(this._hideHandle);
+
+                this._bbMouseLeaveHandle.detach();
+
+                this._linkPreview.addClass('link-preview-focused');
+            },
+
+            _onVisibleChange: function(event) {
+                if (!event.newVal) {
+                    this._editMode = false;
+                }
+            },
+
             TPL_CONTENT:
-                '<div class="link-container">' +
-                    '<a class="link-preview" target="_blank"></a>' +
+                '<div class="pull-left link-container">' +
+                    '<a contenteditable="true" class="link-preview"></a>' +
+                '</div>' +
+                '<div class="pull-left btn-group link-go-contaner">' +
+                    '<button class="btn go-link"><i class="icon-share"></i></button>' +
+                '</div>' +
+                '<div class="pull-left btn-group link-remove-contaner">' +
+                    '<button class="btn remove-link"><i class="icon-remove"></i></button>' +
                 '</div>'
         }, {
             ATTRS: {
@@ -181,26 +256,26 @@
             }
         });
 
-        Y.LinkTooltip = LinkTooltip;
+        Y.LinkEditTooltip = LinkEditTooltip;
 
     },'', {
-        requires: ['dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+        requires: ['button', 'dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
     });
 
     CKEDITOR.plugins.add(
-        'linktooltip',
+        'linkedittooltip',
         {
             init: function(editor) {
-                YUI().use('linktooltip', function(Y) {
+                YUI().use('linkedittooltip', function(Y) {
                     var config,
                         tooltip;
 
                     config = Y.merge({
                         editor: editor,
                         visible: false
-                    }, editor.config.linktooltip);
+                    }, editor.config.linkedittooltip);
 
-                    tooltip = new Y.LinkTooltip(config).render();
+                    tooltip = new Y.LinkEditTooltip(config).render();
                 });
             }
         }

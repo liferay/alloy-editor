@@ -40,18 +40,9 @@
     border: 1px solid #999;
 
     .link-container {
-        @include border-radius(5px 0 0 5px);
-        background-color: #f5f5f5;
-        outline: none;
-
         .link-preview {
             color: #0088cc;
             outline: none;
-            text-decoration: none;
-        }
-
-        .link-preview-focused {
-            background-color: #fff;
         }
     }
 }
