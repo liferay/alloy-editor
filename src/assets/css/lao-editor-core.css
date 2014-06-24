@@ -41,11 +41,7 @@
   margin: 3px 0 0 3px;
 }
 
-/* line 44, ../sass/lao-editor-core.scss */
-.yui3-linktooltip {
-  padding: 2px;
-}
-/* line 50, ../sass/lao-editor-core.scss */
+/* line 48, ../sass/lao-editor-core.scss */
 .yui3-linktooltip .link-container .link-preview,
 .yui3-linktooltip .link-container .link-preview:focus,
 .yui3-linktooltip .link-container .link-preview:hover {
