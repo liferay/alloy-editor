@@ -1,83 +1,96 @@
-var YUI_config = {
+if (typeof YUI_config == 'undefined') {
+    var YUI_config = {
+        groups: {}
+    };
+}
+else {
+    YUI_config.groups = YUI_config.groups || {};
+}
+
+YUI_config.groups.LREditor = {
+    base: '/dist/',
+    combine: false,
+    comboBase: '',
     modules: {
-    	'button-base': {
-            fullpath: '/dist/buttons/button-base.js',
+        'button-base': {
+            path: 'buttons/button-base.js',
             requires: ['base-build', 'plugin', 'button']
         },
 
         'button-strong': {
-            fullpath: '/dist/buttons/button-strong.js',
+            path: 'buttons/button-strong.js',
             requires: ['button-base']
         },
 
         'button-em': {
-            fullpath: '/dist/buttons/button-em.js',
+            path: 'buttons/button-em.js',
             requires: ['button-base']
         },
 
         'button-a': {
-            fullpath: '/dist/buttons/button-a.js',
+            path: 'buttons/button-a.js',
             requires: ['button-base', 'event-valuechange']
         },
 
         'button-h1': {
-            fullpath: '/dist/buttons/button-h1.js',
+            path: 'buttons/button-h1.js',
             requires: ['button-base']
         },
 
         'button-h2': {
-            fullpath: '/dist/buttons/button-h2.js',
+            path: 'buttons/button-h2.js',
             requires: ['button-base']
         },
 
         'button-u': {
-            fullpath: '/dist/buttons/button-underline.js',
+            path: 'buttons/button-underline.js',
             requires: ['button-base']
         },
 
         'button-image': {
-            fullpath: '/dist/buttons/button-image.js',
+            path: 'buttons/button-image.js',
             requires: ['button-base']
         },
 
         'button-code': {
-            fullpath: '/dist/buttons/button-code.js',
+            path: 'buttons/button-code.js',
             requires: ['button-base']
         },
 
         'button-twitter': {
-            fullpath: '/dist/buttons/button-twitter.js',
+            path: 'buttons/button-twitter.js',
             requires: ['button-base']
         },
 
         'button-left': {
-            fullpath: '/dist/buttons/button-left.js',
+            path: 'buttons/button-left.js',
             requires: ['button-base']
         },
 
         'button-right': {
-            fullpath: '/dist/buttons/button-right.js',
+            path: 'buttons/button-right.js',
             requires: ['button-base']
         },
 
         'toolbar-base': {
-            fullpath: '/dist/toolbars/toolbar-base.js',
+            path: 'toolbars/toolbar-base.js',
             requires: ['plugin', 'node-base']
         },
 
         'toolbar-add': {
-            fullpath: '/dist/toolbars/toolbar-add.js',
+            path: 'toolbars/toolbar-add.js',
             requires: ['overlay', 'widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
         },
 
         'toolbar-styles': {
-            fullpath: '/dist/toolbars/toolbar-styles.js',
+            path: 'toolbars/toolbar-styles.js',
             requires: ['widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
         },
 
         'toolbar-image': {
-            fullpath: '/dist/toolbars/toolbar-image.js',
+            path: 'toolbars/toolbar-image.js',
             requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
         }
-    }
+    },
+    root: '/dist/'
 };
