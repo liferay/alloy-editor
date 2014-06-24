@@ -25,11 +25,14 @@
 
                         handleUI = UITools.debounce(
                             function(event) {
-                                Y.fire('editorInteraction', {
-                                    editor: editor,
-                                    yuiEvent: event,
-                                    selectionData: editor.getSelectionData()
-                                });
+                                if (event.type !== 'keyup' || (event.charCode === 27 && editor.config.allowEsc)) {
+                                    Y.fire('editorInteraction', {
+                                        editor: editor,
+                                        yuiEvent: event,
+                                        selectionData: editor.getSelectionData()
+                                    });
+                                }
+
                             },
                             editor.config.uicore ? editor.config.uicore.delay : 50
                         );
