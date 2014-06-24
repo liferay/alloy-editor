@@ -11,7 +11,7 @@
                 var instance = this,
                     modules;
 
-                modules = ['node-base'].concat(this._getModules());
+                modules = ['node-base'].concat(this._getModules(editor));
 
                 YUI().use(
                     modules,
@@ -44,9 +44,10 @@
 
             _createToolbars: function(Y, editor) {
                 var defaultConfig,
-                    i;
+                    i,
+                    toolbarsConfig;
 
-                editor.config.toolbars = {};
+                editor.config.toolbarsInstances = {};
 
                 defaultConfig = {
                     editor: editor,
@@ -54,43 +55,48 @@
                     visible: false
                 };
 
-                for (i in ToolbarsConfig) {
-                    if (hasOwnProperty.call(ToolbarsConfig, i)) {
-                        if (CKEDITOR.tools.isArray(ToolbarsConfig[i])) {
+                toolbarsConfig = editor.config.toolbars;
+
+                for (i in toolbarsConfig) {
+                    if (hasOwnProperty.call(toolbarsConfig, i)) {
+                        if (CKEDITOR.tools.isArray(toolbarsConfig[i])) {
                             editor.config.toolbars[i] = new Y[this._getToolbarName(i)](
                                 UITools.merge(defaultConfig, {
-                                    buttons: ToolbarsConfig[i]
+                                    buttons: toolbarsConfig[i]
                                 })
                             );
                         }
-                        else if(ToolbarsConfig[i]) {
+                        else if(toolbarsConfig[i]) {
                             editor.config.toolbars[i] = new Y[this._getToolbarName(i)](
-                                UITools.merge(defaultConfig, ToolbarsConfig[i])
+                                UITools.merge(defaultConfig, toolbarsConfig[i])
                             );
                         }
                     }
                 }
             },
 
-            _getModules: function() {
+            _getModules: function(editor) {
                 var i,
                     j,
-                    modules;
+                    modules,
+                    toolbarsConfig;
 
                 modules = [];
 
-                for (i in ToolbarsConfig) {
-                    if (hasOwnProperty.call(ToolbarsConfig, i)) {
+                toolbarsConfig = editor.config.toolbars;
+
+                for (i in toolbarsConfig) {
+                    if (hasOwnProperty.call(toolbarsConfig, i)) {
                         modules.push('toolbar-' + i); // put toolbar module
 
-                        if (CKEDITOR.tools.isArray(ToolbarsConfig[i])) {
-                            for (j = ToolbarsConfig[i].length - 1; j >= 0; j--) { // put button modules
-                                modules.push('button-' + ToolbarsConfig[i][j]);
+                        if (CKEDITOR.tools.isArray(toolbarsConfig[i])) {
+                            for (j = toolbarsConfig[i].length - 1; j >= 0; j--) { // put button modules
+                                modules.push('button-' + toolbarsConfig[i][j]);
                             }
                         }
-                        else if (ToolbarsConfig[i]) {
-                            for (j = ToolbarsConfig[i].buttons.length - 1; j >= 0; j--) { // put button modules
-                                modules.push('button-' + ToolbarsConfig[i].buttons[j]);
+                        else if (toolbarsConfig[i]) {
+                            for (j = toolbarsConfig[i].buttons.length - 1; j >= 0; j--) { // put button modules
+                                modules.push('button-' + toolbarsConfig[i].buttons[j]);
                             }
                         }
                     }

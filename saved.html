@@ -129,6 +129,12 @@ var editor = CKEDITOR.inline( document.getElementById( 'editable' ) );
         editor.config.allowedContent = true;
 
         // Remove unnecessary plugins to make the editor simpler.
+        editor.config.toolbars = {
+            add: ['image', 'code'],
+            image: ['left', 'right'],
+            styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
+        };
+
         editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
         editor.config.extraPlugins = 'uicore,selectionregion,dropimages,placeholder,linktooltip,uitools';
         editor.config.placeholderValue = 'Write here!';
