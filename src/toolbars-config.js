@@ -1,9 +1,5 @@
 var ToolbarsConfig = {
-	add: {
-		buttons: ['image', 'code'],
-		height: '20px',
-		width: '20px'
-	},
+	add: ['image', 'code'],
 
 	image: ['left', 'right'],
 

@@ -9,11 +9,9 @@
 
 .yui3-toolbarstyles {
     .link-wrapper {
-        width: 275px;
-
         .input-container {
-            padding: 5px;
-
+            display: inline-block;
+            padding: 2.5px;
 
             input {
                 outline: none;
@@ -34,18 +32,14 @@
                 }
             }
         }
-
-        .input-wrapper {
-            margin: 3px 0 0 3px;
-        }
     }
 }
 
 .yui3-linktooltip {
     .link-container {
-        .link-preview,
-        .link-preview:focus,
-        .link-preview:hover {
+        .link-preview {
+            display: inline-block;
+            height: 28px;
             padding: 4px;
         }
     }

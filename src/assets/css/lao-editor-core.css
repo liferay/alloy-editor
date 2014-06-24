@@ -9,41 +9,34 @@
   display: none;
 }
 
-/* line 11, ../sass/lao-editor-core.scss */
-.yui3-toolbarstyles .link-wrapper {
-  width: 275px;
-}
-/* line 14, ../sass/lao-editor-core.scss */
+/* line 12, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-container {
-  padding: 5px;
+  display: inline-block;
+  padding: 2.5px;
 }
-/* line 18, ../sass/lao-editor-core.scss */
+/* line 16, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-container input {
   outline: none;
   width: 165px;
 }
-/* line 23, ../sass/lao-editor-core.scss */
+/* line 21, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-container input::-ms-clear {
   display: none;
 }
-/* line 27, ../sass/lao-editor-core.scss */
+/* line 25, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-container .input-clear {
   display: inline-block;
   height: 11px;
   width: 12px;
 }
-/* line 32, ../sass/lao-editor-core.scss */
+/* line 30, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-container .input-clear i {
   cursor: pointer;
 }
-/* line 38, ../sass/lao-editor-core.scss */
-.yui3-toolbarstyles .link-wrapper .input-wrapper {
-  margin: 3px 0 0 3px;
-}
 
-/* line 48, ../sass/lao-editor-core.scss */
-.yui3-linktooltip .link-container .link-preview,
-.yui3-linktooltip .link-container .link-preview:focus,
-.yui3-linktooltip .link-container .link-preview:hover {
+/* line 40, ../sass/lao-editor-core.scss */
+.yui3-linktooltip .link-container .link-preview {
+  display: inline-block;
+  height: 28px;
   padding: 4px;
 }
