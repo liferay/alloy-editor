@@ -89,6 +89,8 @@ YUI.add('button-a', function (Y) {
 
             if (href) {
                 Link.update(href, this._link);
+
+                this._link.removeAttribute('data-cke-default-link');
             }
             else {
                 Link.remove(this._link);
