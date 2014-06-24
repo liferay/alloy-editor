@@ -5,7 +5,8 @@ YUI.add('button-image', function (Y) {
 
     var BtnImage = Y.Base.create('image', Y.Plugin.Base, [Y.ButtonBase], {
     	_getInputFile: function() {
-            var id,
+            var instance = this,
+                id,
                 inputFile;
 
             inputFile = this._inputFile;
@@ -18,6 +19,19 @@ YUI.add('button-image', function (Y) {
                 inputFile = Y.one('#' + id);
 
                 inputFile.on('change', function() {
+                    var el,
+                        reader;
+
+                    reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
+
+                        instance.get('host').get('editor').insertElement(el);
+                    };
+
+                    reader.readAsDataURL(inputFile.getDOMNode().files[0]);
+
                     inputFile.set('value', '');
                 });
 
