@@ -67,7 +67,7 @@ YUI.add('button-a', function (Y) {
                 linkInput.focus();
 
                 Link.create('/', {
-                    'cke-data-default': true
+                    'data-cke-default-link': true
                 });
 
                 this._defaultLink = instance._link = Link.getFromSelection();
