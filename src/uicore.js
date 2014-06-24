@@ -32,7 +32,6 @@
                                         selectionData: editor.getSelectionData()
                                     });
                                 }
-
                             },
                             editor.config.uicore ? editor.config.uicore.delay : 50
                         );
