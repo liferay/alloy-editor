@@ -42,17 +42,13 @@
 }
 
 .yui3-linktooltip {
-    min-height: 16px;
-    padding: 2px 5px 2px 5px;
-}
+    padding: 2px;
 
-.yui3-linktooltip .link-container {
-    margin-right: 10px;
-    margin-top: 3px;
-}
-
-.yui3-linktooltip .link-container .link-preview,
-.yui3-linktooltip .link-container .link-preview:focus,
-.yui3-linktooltip .link-container .link-preview:hover {
-    padding: 4px;
+    .link-container {
+        .link-preview,
+        .link-preview:focus,
+        .link-preview:hover {
+            padding: 4px;
+        }
+    }
 }

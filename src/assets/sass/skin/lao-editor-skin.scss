@@ -3,6 +3,28 @@
 .yui3-toolbarstyles {
     background-color: #e6e6e6;
     @include border-radius(5px);
+
+    .link-wrapper {
+        input {
+            border: none;
+        }
+
+        input[type="text"]:focus {
+            @include box-shadow(none);
+            border-color: white;
+        }
+
+        .close-link {
+            @include border-radius(0 5px 5px 0);
+        }
+
+        .input-container {
+            @include border-radius(5px 0 0 5px);
+            background-color: white;
+            border: 1px #cccccc solid;
+            border-right: none;
+        }
+    }
 }
 
 .yui3-toolbarstyles, .yui3-toolbaradd, .yui3-toolbaradd-buttons, .yui3-toolbarimage, .yui3-linktooltip {
@@ -11,53 +33,30 @@
     }
 }
 
-.link-wrapper {
-    input {
-        border: none;
-    }
-
-    .close-link {
-        @include border-radius(0 5px 5px 0);
-    }
-}
-
-.link-wrapper input[type="text"]:focus {
-    @include box-shadow(none);
-    border-color: white;
-}
-
-.input-container {
-    @include border-radius(5px 0 0 5px);
-    background-color: white;
-    border: 1px #cccccc solid;
-    border-right: none;
-}
-
-
-.editor-placeholder {
-    background-color: lightyellow;
-}
-
 .yui3-linktooltip {
     border: 1px solid #333333;
     background-color: #f5f5f5;
     @include border-radius(5px);
+
+    .link-container {
+        background-color: #f5f5f5;
+        border: none;
+        outline: none;
+
+        .link-preview,
+        .link-preview:focus,
+        .link-preview:hover {
+            color: #0088cc;
+            outline: none;
+            text-decoration: none;
+        }
+
+        .link-preview-focused {
+            background-color: #fff;
+        }
+    }
 }
 
-.yui3-linktooltip .link-container {
-    background-color: #f5f5f5;
-    border: none;
-    outline: none;
-}
-
-.yui3-linktooltip .link-container .link-preview,
-.yui3-linktooltip .link-container .link-preview:focus,
-.yui3-linktooltip .link-container .link-preview:hover {
-    color: #0088cc;
-    outline: none;
-    text-decoration: none;
-}
-
-.yui3-linktooltip .link-container .link-preview-focused {
-    background-color: #fff;
+.editor-placeholder {
+    background-color: lightyellow;
 }
