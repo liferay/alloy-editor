@@ -81,7 +81,8 @@ YUI.add('toolbar-add', function (Y) {
         },
 
         _onEditorInteraction: function(event) {
-            var selectionData,
+            var editorX,
+                selectionData,
                 startRect;
 
             selectionData = event.selectionData;
@@ -89,7 +90,9 @@ YUI.add('toolbar-add', function (Y) {
             if (selectionData.region) {
                 startRect = selectionData.region.startRect || selectionData.region;
 
-                this.showAtPoint(this._editorDOMNode.offsetLeft, selectionData.region.top + startRect.height/2);
+                editorX = this._editorNode.getX();
+
+                this.showAtPoint(editorX, selectionData.region.top + startRect.height/2);
             }
             else {
                 this.hide();

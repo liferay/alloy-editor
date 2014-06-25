@@ -25,7 +25,7 @@
 
                         handleUI = UITools.debounce(
                             function(event) {
-                                if (event.type !== 'keyup' || (event.charCode === 27 && editor.config.allowEsc)) {
+                                if (event.type !== 'keyup' || event.charCode !== 27 || editor.config.allowEsc) {
                                     Y.fire('editorInteraction', {
                                         editor: editor,
                                         yuiEvent: event,

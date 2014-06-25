@@ -121,13 +121,18 @@
         remove: function(link) {
             var style;
 
-            style = link || new CKEDITOR.style({
-                alwaysRemoveElement: 1,
-                element: 'a',
-                type: CKEDITOR.STYLE_INLINE
-            });
+            if (link) {
+                link.remove(this._editor);
+            }
+            else {
+                style = link || new CKEDITOR.style({
+                    alwaysRemoveElement: 1,
+                    element: 'a',
+                    type: CKEDITOR.STYLE_INLINE
+                });
 
-            this._editor.removeStyle(style);
+                this._editor.removeStyle(style);
+            }
         },
 
         update: function(URI, link) {

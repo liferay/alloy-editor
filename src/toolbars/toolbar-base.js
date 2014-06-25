@@ -53,8 +53,7 @@ YUI.add('toolbar-base', function (Y) {
 
         editor: {
             validator: Lang.isObject
-        },
-
+        }
     };
 
     Y.ToolbarBase = ToolbarBase;

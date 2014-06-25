@@ -271,7 +271,7 @@ YUI.add('button-a', function (Y) {
                     '<span class="input-container">' +
                         '<input class="input-large" type="text" placeholder="{placeholder}"></input>' +
                         '<span class="input-clear">' +
-                            '<i class="icon-remove"></i>' +
+                            '<i class="icon-remove-small"></i>' +
                         '</span>' +
                     '</span>' +
                 '</div>' +
