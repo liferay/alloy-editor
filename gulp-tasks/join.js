@@ -11,7 +11,7 @@ gulp.task('join-css', function() {
     cssDir = path.join(ROOT, 'dist', 'assets', 'css');
     fontDir = path.join(ROOT, 'dist', 'assets', 'font');
 
-    return gulp.src(
+    gulp.src(
         [
             path.join(cssDir, 'lao-editor-core.css'),
             path.join(cssDir, 'skin', 'lao-editor-skin.css'),
@@ -19,13 +19,17 @@ gulp.task('join-css', function() {
         ])
         .pipe(concat('lao-editor.css'))
         .pipe(gulp.dest(path.join(ROOT, 'dist', 'assets')));
+
+    return gulp.src(path.join(fontDir, 'fonts', '/**/*'))
+        .pipe(gulp.dest(path.join(ROOT, 'dist', 'assets', 'fonts')));
 });
 
-gulp.task('join-plugins', function() {
-  gulp.src([
+gulp.task('join-plugins-config', function() {
+  return gulp.src([
+        path.join(ROOT, 'dist', 'yui-config.js'),
         path.join(ROOT, 'src', 'core', '/**/*.js'),
         path.join(ROOT, 'src', 'plugins', '/**/*.js')
     ])
     .pipe(concat('plugins.js'))
-    .pipe(gulp.dest(path.join(ROOT, 'dist', 'plugins')));
+    .pipe(gulp.dest(path.join(ROOT, 'dist')));
 });

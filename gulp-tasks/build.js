@@ -6,15 +6,15 @@ var gulp = require('gulp'),
     ROOT = path.join(__dirname, '..');
 
 gulp.task('build', function() {
-    runSequence('clean', 'compass',
+    return runSequence('clean', 'compass',
         ['copy-js', 'copy-css', 'copy-fonts', 'export-env', 'copy-ckeditor'],
-        'join-css', 'join-plugins');
+        'join-css', 'join-plugins-config');
 });
 
 gulp.task('release', function() {
-    runSequence('clean', 'compass',
+    return runSequence('clean', 'compass',
         ['copy-js', 'copy-css', 'copy-fonts', 'export-env', 'copy-ckeditor'],
-        'join-css', 'join-plugins', function() {
+        ['join-css', 'join-plugins-config'], function() {
             return gulp.src(
                     path.join(ROOT, 'dist', '/**/*')
                 )

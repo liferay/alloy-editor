@@ -1,15 +1,15 @@
 ;(function() {
     'use strict';
 
-    var hasOwnProperty = Object.prototype.hasOwnProperty,
-        UITools = CKEDITOR.plugins.UITools;
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
 
     CKEDITOR.plugins.add(
         'uicore',
         {
             init: function(editor) {
                 var instance = this,
-                    modules;
+                    modules,
+                    UITools = CKEDITOR.plugins.UITools;
 
                 modules = ['node-base'].concat(this._getModules(editor));
 
@@ -47,7 +47,8 @@
             _createToolbars: function(Y, editor) {
                 var defaultConfig,
                     i,
-                    toolbarsConfig;
+                    toolbarsConfig,
+                    UITools = CKEDITOR.plugins.UITools;
 
                 editor.config.toolbarsInstances = {};
 
