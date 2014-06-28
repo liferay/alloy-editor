@@ -4,10 +4,6 @@ var gulp = require('gulp'),
 
     ROOT = path.join(__dirname, '..');
 
-gulp.task('clean', function() {
-    rimraf(path.join(ROOT, 'dist'), function(err) {
-        if (err) {
-            throw err;
-        }
-    });
+gulp.task('clean', function(callback) {
+    rimraf(path.join(ROOT, 'dist'), callback);
 });
