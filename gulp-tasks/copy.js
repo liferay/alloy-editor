@@ -1,4 +1,5 @@
 var argv = require('yargs').argv,
+    concat = require('gulp-concat'),
 	gulp = require('gulp'),
 	path = require('path'),
 
@@ -26,4 +27,14 @@ gulp.task('copy-ckeditor', function() {
         return gulp.src(path.join(ROOT, 'lib', 'ckeditor', '/**'))
             .pipe(gulp.dest(path.join(ROOT, 'dist', 'ckeditor')));
     }
+});
+
+gulp.task('join-plugins-config', function() {
+  return gulp.src([
+        path.join(ROOT, 'dist', 'yui-config.js'),
+        path.join(ROOT, 'src', 'core', '/**/*.js'),
+        path.join(ROOT, 'src', 'plugins', '/**/*.js')
+    ])
+    .pipe(concat('plugins.js'))
+    .pipe(gulp.dest(path.join(ROOT, 'dist')));
 });
