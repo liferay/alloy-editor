@@ -25,8 +25,7 @@ svgConfig = {
     className: '.icon-%f',
     generatePreview: false,
     pngPath: '%f',
-    svgPath: '%f',
-    unit: 20 // add 20px padding
+    svgPath: '%f'
 };
 
 gulp.task('make-sprites', function () {
@@ -69,7 +68,7 @@ gulp.task('remove-svg-files', function() {
     cssDir = path.join(ROOT, 'dist', 'assets', 'css');
     svgDir = path.join(ROOT, 'dist', 'assets', 'svg');
 
-    return gulp.src([cssDir, svgDir])
+    return gulp.src([cssDir, svgDir], { read: false })
         .pipe(rimraf({force: true}));
 });
 
