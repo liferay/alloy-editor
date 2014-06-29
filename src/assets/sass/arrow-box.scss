@@ -1,0 +1,33 @@
+.arrow-box {
+	position: relative;
+
+	&:after {
+		border-width: 5px;
+		border: solid transparent;
+		content: ' ';
+		height: 0;
+		pointer-events: none;
+		position: absolute;
+		width: 0;
+	}
+
+	&.arrow-box-bottom:after {
+		left: 50%;
+		top: 100%;
+	}
+
+	&.arrow-box-top:after {
+		bottom: 100%;
+		left: 50%;
+	}
+
+	&.arrow-box-left:after {
+		right: 100%;
+		top: 50%;
+	}
+
+	&.arrow-box-right:after {
+		left: 100%;
+		top: 50%;
+	}
+}

@@ -53,8 +53,8 @@ gulp.task('join-css', function() {
 
     return gulp.src(
         [
-            path.join(cssDir, 'lao-editor-core.css'),
-            path.join(cssDir, 'skin', 'lao-editor-skin.css'),
+            path.join(cssDir, '*.css'),
+            path.join(cssDir, 'skin', '*.css'),
             path.join(svgDir, 'css', 'sprites.css')
         ])
         .pipe(concat('lao-editor.css'))

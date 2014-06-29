@@ -1,0 +1,19 @@
+.arrow-box {
+	background: #88b7d5;
+	
+	&.arrow-box-bottom:after {
+		border-top-color: #88b7d5;
+	}
+
+	&.arrow-box-top:after {
+		border-bottom-color: #88b7d5;
+	}
+
+	&.arrow-box-left:after {
+		border-right-color: #88b7d5;
+	}
+
+	&.arrow-box-right:after {
+		border-left-color: #88b7d5;
+	}
+}

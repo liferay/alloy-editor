@@ -1,0 +1,20 @@
+/* line 1, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box {
+  background: #88b7d5;
+}
+/* line 4, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box.arrow-box-bottom:after {
+  border-top-color: #88b7d5;
+}
+/* line 8, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box.arrow-box-top:after {
+  border-bottom-color: #88b7d5;
+}
+/* line 12, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box.arrow-box-left:after {
+  border-right-color: #88b7d5;
+}
+/* line 16, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box.arrow-box-right:after {
+  border-left-color: #88b7d5;
+}

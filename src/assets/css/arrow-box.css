@@ -1,0 +1,34 @@
+/* line 1, ../sass/arrow-box.scss */
+.arrow-box {
+  position: relative;
+}
+/* line 4, ../sass/arrow-box.scss */
+.arrow-box:after {
+  border-width: 5px;
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+}
+/* line 14, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-bottom:after {
+  left: 50%;
+  top: 100%;
+}
+/* line 19, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-top:after {
+  bottom: 100%;
+  left: 50%;
+}
+/* line 24, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-left:after {
+  right: 100%;
+  top: 50%;
+}
+/* line 29, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-right:after {
+  left: 100%;
+  top: 50%;
+}
