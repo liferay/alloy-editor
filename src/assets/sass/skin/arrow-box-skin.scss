@@ -1,19 +1,45 @@
 .arrow-box {
-	background: #88b7d5;
-	
-	&.arrow-box-bottom:after {
-		border-top-color: #88b7d5;
-	}
+	&:after, &:before {
+        border: solid transparent;
+    }
 
-	&.arrow-box-top:after {
-		border-bottom-color: #88b7d5;
-	}
+    &.arrow-box-top {
+        &:after {
+            border-bottom-color: #e6e6e6;
+        }
 
-	&.arrow-box-left:after {
-		border-right-color: #88b7d5;
-	}
+        &:before {
+            border-bottom-color: #e1e1e1;
+        }
+    }
 
-	&.arrow-box-right:after {
-		border-left-color: #88b7d5;
-	}
+    &.arrow-box-bottom {
+        &:after {
+            border-top-color: #e6e6e6;
+        }
+
+        &:before {
+            border-top-color: #e1e1e1;
+        }
+    }
+
+    &.arrow-box-left {
+        &:after {
+            border-right-color: #e6e6e6;
+        }
+
+        &:before {
+            border-right-color: #e1e1e1;
+        }
+    }
+
+    &.arrow-box-right {
+        &:after {
+            border-left-color: #e6e6e6;
+        }
+
+        &:before {
+            border-left-color: #e1e1e1;
+        }
+    }
 }

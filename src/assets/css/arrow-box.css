@@ -1,34 +1,68 @@
-/* line 1, ../sass/arrow-box.scss */
-.arrow-box {
-  position: relative;
-}
-/* line 4, ../sass/arrow-box.scss */
-.arrow-box:after {
-  border-width: 5px;
-  border: solid transparent;
+/* line 2, ../sass/arrow-box.scss */
+.arrow-box:after, .arrow-box:before {
   content: ' ';
   height: 0;
-  pointer-events: none;
-  position: absolute;
   width: 0;
+  position: absolute;
+  pointer-events: none;
 }
-/* line 14, ../sass/arrow-box.scss */
-.arrow-box.arrow-box-bottom:after {
-  left: 50%;
-  top: 100%;
-}
-/* line 19, ../sass/arrow-box.scss */
-.arrow-box.arrow-box-top:after {
+/* line 11, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-top:after, .arrow-box.arrow-box-top:before {
   bottom: 100%;
   left: 50%;
 }
-/* line 24, ../sass/arrow-box.scss */
-.arrow-box.arrow-box-left:after {
+/* line 16, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-top:after {
+  border-width: 7px;
+  margin-left: -7px;
+}
+/* line 21, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-top:before {
+  border-width: 9px;
+  margin-left: -9px;
+}
+/* line 28, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-bottom:after, .arrow-box.arrow-box-bottom:before {
+  top: 100%;
+  left: 50%;
+}
+/* line 33, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-bottom:after {
+  border-width: 7px;
+  margin-left: -7px;
+}
+/* line 38, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-bottom:before {
+  border-width: 9px;
+  margin-left: -9px;
+}
+/* line 45, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-left:after, .arrow-box.arrow-box-left:before {
   right: 100%;
   top: 50%;
 }
-/* line 29, ../sass/arrow-box.scss */
-.arrow-box.arrow-box-right:after {
+/* line 50, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-left:after {
+  border-width: 7px;
+  margin-top: -7px;
+}
+/* line 55, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-left:before {
+  border-width: 9px;
+  margin-top: -9px;
+}
+/* line 62, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-right:after, .arrow-box.arrow-box-right:before {
   left: 100%;
   top: 50%;
+}
+/* line 67, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-right:after {
+  border-width: 7px;
+  margin-top: -7px;
+}
+/* line 72, ../sass/arrow-box.scss */
+.arrow-box.arrow-box-right:before {
+  border-width: 9px;
+  margin-top: -9px;
 }

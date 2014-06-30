@@ -1,33 +1,77 @@
 .arrow-box {
-	position: relative;
+    &:after, &:before {
+        content: ' ';
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
 
-	&:after {
-		border-width: 5px;
-		border: solid transparent;
-		content: ' ';
-		height: 0;
-		pointer-events: none;
-		position: absolute;
-		width: 0;
-	}
+    &.arrow-box-top {
+        &:after, &:before {
+            bottom: 100%;
+            left: 50%;
+        }
 
-	&.arrow-box-bottom:after {
-		left: 50%;
-		top: 100%;
-	}
+        &:after {
+            border-width: 7px;
+            margin-left: -7px;
+        }
 
-	&.arrow-box-top:after {
-		bottom: 100%;
-		left: 50%;
-	}
+        &:before {
+            border-width: 9px;
+            margin-left: -9px;
+        }
+    }
 
-	&.arrow-box-left:after {
-		right: 100%;
-		top: 50%;
-	}
+    &.arrow-box-bottom {
+        &:after, &:before {
+            top: 100%;
+            left: 50%;
+        }
 
-	&.arrow-box-right:after {
-		left: 100%;
-		top: 50%;
-	}
+        &:after {
+            border-width: 7px;
+            margin-left: -7px;
+        }
+
+        &:before {
+            border-width: 9px;
+            margin-left: -9px;
+        }
+    }
+
+    &.arrow-box-left {
+        &:after, &:before {
+            right: 100%;
+            top: 50%;
+        }
+
+        &:after {
+            border-width: 7px;
+            margin-top: -7px;
+        }
+
+        &:before {
+            border-width: 9px;
+            margin-top: -9px;
+        }
+    }
+
+    &.arrow-box-right {
+        &:after, &:before {
+            left: 100%;
+            top: 50%;
+        }
+
+        &:after {
+            border-width: 7px;
+            margin-top: -7px;
+        }
+
+        &:before {
+            border-width: 9px;
+            margin-top: -9px;
+        }
+    }
 }

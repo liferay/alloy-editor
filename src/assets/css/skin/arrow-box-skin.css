@@ -1,20 +1,36 @@
-/* line 1, ../../sass/skin/arrow-box-skin.scss */
-.arrow-box {
-  background: #88b7d5;
+/* line 2, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box:after, .arrow-box:before {
+  border: solid transparent;
 }
-/* line 4, ../../sass/skin/arrow-box-skin.scss */
-.arrow-box.arrow-box-bottom:after {
-  border-top-color: #88b7d5;
-}
-/* line 8, ../../sass/skin/arrow-box-skin.scss */
+/* line 7, ../../sass/skin/arrow-box-skin.scss */
 .arrow-box.arrow-box-top:after {
-  border-bottom-color: #88b7d5;
+  border-bottom-color: #e6e6e6;
 }
-/* line 12, ../../sass/skin/arrow-box-skin.scss */
+/* line 11, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box.arrow-box-top:before {
+  border-bottom-color: #e1e1e1;
+}
+/* line 17, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box.arrow-box-bottom:after {
+  border-top-color: #e6e6e6;
+}
+/* line 21, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box.arrow-box-bottom:before {
+  border-top-color: #e1e1e1;
+}
+/* line 27, ../../sass/skin/arrow-box-skin.scss */
 .arrow-box.arrow-box-left:after {
-  border-right-color: #88b7d5;
+  border-right-color: #e6e6e6;
 }
-/* line 16, ../../sass/skin/arrow-box-skin.scss */
+/* line 31, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box.arrow-box-left:before {
+  border-right-color: #e1e1e1;
+}
+/* line 37, ../../sass/skin/arrow-box-skin.scss */
 .arrow-box.arrow-box-right:after {
-  border-left-color: #88b7d5;
+  border-left-color: #e6e6e6;
+}
+/* line 41, ../../sass/skin/arrow-box-skin.scss */
+.arrow-box.arrow-box-right:before {
+  border-left-color: #e1e1e1;
 }

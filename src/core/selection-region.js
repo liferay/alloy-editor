@@ -252,12 +252,14 @@
                 pageXOffset,
                 pageYOffset;
 
+
+
             docBody = document.body;
             docDefaultView = document.defaultView;
             docElement = document.documentElement;
 
-            pageXOffset = (docDefaultView) ? docDefaultView.pageYOffset : 0;
-            pageYOffset = (docDefaultView) ? docDefaultView.pageXOffset : 0;
+            pageXOffset = (docDefaultView) ? docDefaultView.pageXOffset : 0;
+            pageYOffset = (docDefaultView) ? docDefaultView.pageYOffset : 0;
 
             return [
                 Math.max(docElement.scrollLeft, docBody.scrollLeft, pageXOffset),

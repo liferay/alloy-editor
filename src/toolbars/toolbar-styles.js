@@ -12,6 +12,8 @@ YUI.add('toolbar-styles', function (Y) {
 
             buttonsContainer = YNode.create(instance.TPL_BUTTON_CONTAINER);
 
+            this.get('boundingBox').addClass('arrow-box');
+
             contentBox = this.get('contentBox');
 
             contentBox.appendChild(buttonsContainer);
@@ -20,7 +22,17 @@ YUI.add('toolbar-styles', function (Y) {
         },
 
         showAtPoint: function(left, top, direction) {
-            var xy;
+            var xy,
+                boundingBox;
+
+            boundingBox = this.get('boundingBox');
+
+            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                boundingBox.replaceClass('arrow-box-bottom', 'arrow-box-top');
+            }
+            else {
+                boundingBox.replaceClass('arrow-box-top', 'arrow-box-bottom');
+            }
 
             this.show();
 
@@ -31,22 +43,53 @@ YUI.add('toolbar-styles', function (Y) {
 
         _getToolbarXYPoint: function(left, top, direction) {
             var bbDOMNode,
-                offsetFromSel;
+                gutter;
 
             bbDOMNode = this.get('boundingBox').getDOMNode();
 
-            left = left - bbDOMNode.offsetWidth / 2;
+            gutter = this.get('gutter');
 
-            offsetFromSel = this.get('offsetFromSel');
+            left = left - gutter.left - (bbDOMNode.offsetWidth/2);
 
             if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                top = top + offsetFromSel.topToBottom;
+                top = top + gutter.top;
             }
             else {
-                top = top - bbDOMNode.offsetHeight - offsetFromSel.bottomToTop;
+                top = top - bbDOMNode.offsetHeight - gutter.top;
             }
 
             return [left, top];
+        },
+
+        _getXPoint: function(selectionData, eventX) {
+            var left,
+                leftDist,
+                region,
+                right,
+                rightDist,
+                x;
+
+            region = selectionData.region;
+
+            left = region.startRect ? region.startRect.left : region.left;
+            right = region.endRect ? region.endRect.right : region.right;
+
+            if (left < eventX && right > eventX) {
+                x = eventX;
+            }
+            else {
+                leftDist = Math.abs(left - eventX);
+                rightDist = Math.abs(right - eventX);
+
+                if (leftDist < rightDist) { // user raised the mouse on left on the selection
+                    x = left;
+                }
+                else {
+                    x = right;
+                }
+            }
+
+            return x;
         },
 
         _onEditorInteraction: function(event) {
@@ -79,7 +122,7 @@ YUI.add('toolbar-styles', function (Y) {
                 yuiEvent = event.yuiEvent;
 
                 if (yuiEvent.pageX && yuiEvent.pageY) {
-                    x = yuiEvent.pageX;
+                    x = this._getXPoint(selectionData, yuiEvent.pageX);
 
                     if (direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
                         y = Math.min(yuiEvent.pageY, selectionData.region.top);
@@ -122,15 +165,8 @@ YUI.add('toolbar-styles', function (Y) {
             gutter: {
                 validator: Lang.isObject,
                 value: {
-                    left: 10,
-                    top: 0
-                }
-            },
-
-            offsetFromSel: {
-                value: {
-                    topToBottom: 5,
-                    bottomToTop: 5
+                    left: 0,
+                    top: 10
                 }
             }
 		}
