@@ -12,6 +12,8 @@ YUI.add('toolbar-image', function (Y) {
 
             buttonsContainer = YNode.create(instance.TPL_BUTTON_CONTAINER);
 
+            this.get('boundingBox').addClass('arrow-box arrow-box-bottom');
+
             contentBox = this.get('contentBox');
 
             contentBox.appendChild(buttonsContainer);
@@ -88,7 +90,7 @@ YUI.add('toolbar-image', function (Y) {
             }
         },
 
-        TPL_BUTTON_CONTAINER: '<div class="toolbar-image"></div>'
+        TPL_BUTTON_CONTAINER: '<div class="btn-group toolbar-image"></div>'
     }, {
         ATTRS: {
             buttons: {
@@ -100,7 +102,7 @@ YUI.add('toolbar-image', function (Y) {
                 validator: Lang.isObject,
                 value: {
                     left: 0,
-                    top: 5
+                    top: 10
                 }
             }
 		}
