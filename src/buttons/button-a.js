@@ -130,6 +130,8 @@ YUI.add('button-a', function (Y) {
 
                 this._clearInput.hide();
                 this._closeLink.disable();
+
+                this._defaultLink = null;
             }
             else {
                 // showing, check if we are over link already
