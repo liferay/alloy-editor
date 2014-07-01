@@ -16,6 +16,8 @@ YUI.add('toolbar-image', function (Y) {
 
             contentBox = this.get('contentBox');
 
+            contentBox.addClass('btn-toolbar');
+
             contentBox.appendChild(buttonsContainer);
 
             instance._buttonsContainer = buttonsContainer;

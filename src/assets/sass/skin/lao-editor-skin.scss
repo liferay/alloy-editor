@@ -1,10 +1,6 @@
 @import "compass/css3";
 
 .yui3-toolbarstyles {
-    @include border-radius(5px);
-    background-color: #e6e6e6;
-    border: 1px solid #e1e1e1;
-
     .link-wrapper {
         input {
             border: none;
