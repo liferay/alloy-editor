@@ -24,6 +24,7 @@ gulp.task('sass2css', function() {
 svgConfig = {
     className: '.icon-%f',
     generatePreview: false,
+    padding: 5,
     pngPath: '%f',
     svgPath: '%f'
 };
