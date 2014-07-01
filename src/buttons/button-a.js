@@ -24,6 +24,32 @@ YUI.add('button-a', function (Y) {
             this._clearInput.on('click', this._onClearInputClick, this);
         },
 
+        updateUI: function() {
+            var editor,
+                elementPath,
+                iconLinkNode,
+                result;
+
+            editor = this.get('host').get('editor');
+
+            elementPath = editor.elementPath();
+
+            if (this._style) {
+                result = this._style.checkActive(elementPath, editor);
+
+                this._button.set('pressed', !!result);
+            }
+
+            iconLinkNode = this._button.get('boundingBox').one('i');
+
+            if (this._button.get('pressed')) {
+                iconLinkNode.replaceClass('icon-link', 'icon-unlink');
+            }
+            else {
+                iconLinkNode.replaceClass('icon-unlink', 'icon-link');
+            }
+        },
+
         _attachHideHandler: function() {
             this._hideHandle = this.onceHostEvent('visibleChange', function(event) {
                 if (!event.newVal) {
