@@ -16,10 +16,13 @@
         }
 
         .input-container {
-            @include border-radius(5px 0 0 5px);
             background-color: white;
             border-right: none;
             border: 1px #cccccc solid;
+        }
+
+        .input-close-container {
+            background-color: #d9d9d9;
         }
     }
 }
