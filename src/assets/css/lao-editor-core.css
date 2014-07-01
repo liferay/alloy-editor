@@ -27,14 +27,20 @@
 .yui3-toolbarstyles .link-wrapper .input-container .input-clear {
   display: inline-block;
   height: 11px;
+  vertical-align: text-top;
   width: 12px;
 }
-/* line 30, ../sass/lao-editor-core.scss */
+/* line 31, ../sass/lao-editor-core.scss */
 .yui3-toolbarstyles .link-wrapper .input-container .input-clear i {
   cursor: pointer;
 }
 
-/* line 40, ../sass/lao-editor-core.scss */
+/* line 41, ../sass/lao-editor-core.scss */
+.yui3-linktooltip .link-container .icon-link-container {
+  margin: 0 5px 0 5px;
+  vertical-align: text-top;
+}
+/* line 46, ../sass/lao-editor-core.scss */
 .yui3-linktooltip .link-container .link-preview {
   display: inline-block;
   padding: 4px;

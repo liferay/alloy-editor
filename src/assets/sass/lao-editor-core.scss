@@ -25,6 +25,7 @@
             .input-clear {
                 display: inline-block;
                 height: 11px;
+                vertical-align: text-top;
                 width: 12px;
 
                 i {
@@ -37,6 +38,11 @@
 
 .yui3-linktooltip {
     .link-container {
+        .icon-link-container {
+            margin: 0 5px 0 5px;
+            vertical-align: text-top;
+        }
+
         .link-preview {
             display: inline-block;
             padding: 4px;

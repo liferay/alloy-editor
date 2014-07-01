@@ -153,6 +153,9 @@
 
             TPL_CONTENT:
                 '<div class="link-container">' +
+                    '<span class="icon-link-container">' +
+                        '<i class="icon-link"></i>' +
+                    '</span>' +
                     '<a class="link-preview" target="_blank"></a>' +
                 '</div>'
         }, {
