@@ -36,11 +36,57 @@ YUI.add('toolbar-styles', function (Y) {
                 boundingBox.replaceClass('arrow-box-top', 'arrow-box-bottom');
             }
 
-            this.show();
+            if (!this.get('visible')) {
+                this.show();
+            }
 
             xy = this._getToolbarXYPoint(left, top, direction);
 
             this.set('xy', xy);
+        },
+
+        _calculatePosition: function(selectionData, pos) {
+            var direction,
+                endRect,
+                startRect,
+                x,
+                y;
+
+            direction = selectionData.region.direction;
+
+            endRect = selectionData.region.endRect;
+            startRect = selectionData.region.startRect;
+
+            if (endRect && endRect && startRect.top === endRect.top) {
+                direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+            }
+
+            if (pos.x && pos.y) {
+                x = this._getXPoint(selectionData, pos.x);
+
+                if (direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
+                    y = Math.min(pos.y, selectionData.region.top);
+                }
+                else {
+                    y = Math.max(pos.y, selectionData.region.bottom);
+                }
+            }
+            else {
+                x = selectionData.region.left + selectionData.region.width/2;
+
+                if (direction === 0) {
+                    y = selectionData.region.endRect.top;
+                }
+                else {
+                    y = selectionData.region.startRect.top;
+                }
+            }
+
+            return {
+                direction: direction,
+                x: x,
+                y: y
+            };
         },
 
         _getToolbarXYPoint: function(left, top, direction) {
@@ -97,12 +143,9 @@ YUI.add('toolbar-styles', function (Y) {
         _onEditorInteraction: function(event) {
             var direction,
                 editor,
-                endRect,
+                position,
                 selectionData,
                 selectionEmpty,
-                startRect,
-                x,
-                y,
                 yuiEvent;
 
             editor = this.get('editor');
@@ -111,40 +154,16 @@ YUI.add('toolbar-styles', function (Y) {
 
             selectionData = event.selectionData;
 
+            yuiEvent = event.yuiEvent;
+
             if (!selectionData.element && selectionData.region && !selectionEmpty) {
-                direction = selectionData.region.direction;
+                position = this._calculatePosition(selectionData, {
+                    x: yuiEvent.pageX,
+                    y: yuiEvent.pageY
+                });
 
-                endRect = selectionData.region.endRect;
-                startRect = selectionData.region.startRect;
+                this.showAtPoint(position.x, position.y, position.direction);
 
-                if (endRect && endRect && startRect.top === endRect.top) {
-                    direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
-                }
-
-                yuiEvent = event.yuiEvent;
-
-                if (yuiEvent.pageX && yuiEvent.pageY) {
-                    x = this._getXPoint(selectionData, yuiEvent.pageX);
-
-                    if (direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
-                        y = Math.min(yuiEvent.pageY, selectionData.region.top);
-                    }
-                    else {
-                        y = Math.max(yuiEvent.pageY, selectionData.region.bottom);
-                    }
-                }
-                else {
-                    x = selectionData.region.left + selectionData.region.width/2;
-
-                    if (direction === 0) {
-                        y = selectionData.region.endRect.top;
-                    }
-                    else {
-                        y = selectionData.region.startRect.top;
-                    }
-                }
-
-                this.showAtPoint(x, y, direction);
             }
             else {
                 this.hide();

@@ -50,6 +50,33 @@ YUI.add('button-a', function (Y) {
             }
         },
 
+        _adjustHostPosition: function(oldHostWidth) {
+            var curHostWidth,
+                curXY,
+                diff,
+                host,
+                x;
+
+            host = this.get('host');
+
+            if (host.get('visible')) {
+                curHostWidth = host.get('boundingBox').get('offsetWidth');
+
+                diff = Math.abs((oldHostWidth - curHostWidth) / 2);
+
+                curXY = host.get('xy');
+
+                if (curHostWidth < oldHostWidth) {
+                    x = curXY[0] + diff;
+                }
+                else {
+                    x = curXY[0] - diff;
+                }
+
+                host.set('xy', [x, curXY[1]]);
+            }
+        },
+
         _attachHideHandler: function() {
             this._hideHandle = this.onceHostEvent('visibleChange', function(event) {
                 if (!event.newVal) {
@@ -75,6 +102,7 @@ YUI.add('button-a', function (Y) {
             var instance = this,
                 btnInst,
                 editor,
+                oldHostWidth,
                 linkInput,
                 selection;
 
@@ -85,8 +113,12 @@ YUI.add('button-a', function (Y) {
             if (btnInst.get('pressed')) {
                 selection = editor.getSelection();
 
+                oldHostWidth = this.get('host').get('boundingBox').get('offsetWidth');
+
                 instance._buttonsContainer.addClass('hide');
                 instance._linkContainer.removeClass('hide');
+
+                this._adjustHostPosition(oldHostWidth);
 
                 linkInput = instance._linkInput;
 
@@ -225,6 +257,7 @@ YUI.add('button-a', function (Y) {
             var bookmarks,
                 editor,
                 linkText,
+                oldHostWidth,
                 selection;
 
             this._removeHideHandler();
@@ -255,8 +288,12 @@ YUI.add('button-a', function (Y) {
                 this.fire('actionPerformed');
             }
 
+            oldHostWidth = this.get('host').get('boundingBox').get('offsetWidth');
+
             this._linkContainer.addClass('hide');
             this._buttonsContainer.removeClass('hide');
+
+            this._adjustHostPosition(oldHostWidth);
         },
 
         _switchToLinkMode: function(link) {

@@ -30,7 +30,9 @@ YUI.add('toolbar-image', function (Y) {
         showAtPoint: function(left, top, direction) {
             var xy;
 
-            this.show();
+            if (!this.get('visible')) {
+                this.show();
+            }
 
             xy = this._getToolbarXYPoint(left, top, direction);
 

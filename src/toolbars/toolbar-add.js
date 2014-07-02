@@ -52,7 +52,9 @@ YUI.add('toolbar-add', function (Y) {
 
             this._hideButtonsContainer();
 
-            this.show();
+            if (!this.get('visible')) {
+                this.show();
+            }
 
             addContentWrapperNode = this._addContentWrapper.getDOMNode();
 
