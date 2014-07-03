@@ -12,10 +12,9 @@ gulp.task('build', function() {
 });
 
 gulp.task('release', function() {
-    return runSequence('clean',
-        ['sass2css', 'svg-sprite'],
+    return runSequence('clean', 'make-css',
         ['copy-js', 'copy-css', 'copy-fonts', 'export-env', 'copy-ckeditor'],
-        ['make-css', 'join-plugins-config'], function() {
+        'join-plugins-config', function() {
             return gulp.src(
                     path.join(ROOT, 'dist', '/**/*')
                 )
