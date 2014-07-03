@@ -1,7 +1,11 @@
-YUI_config.groups.LREditor = {
-    base: Liferay.AUI.getJavaScriptRootPath() + '/editor/ckeditor/plugins/newui/',
-    combine: true,
-    comboBase: Liferay.AUI.getComboPath(),
-    modules: <%= modules %>,
-    root: Liferay.AUI.getJavaScriptRootPath() + '/editor/ckeditor/plugins/newui/'
-};
+YUI.applyConfig({
+    groups: {
+        LREditor: {
+            base: Liferay.AUI.getJavaScriptRootPath() + '/editor/ckeditor/plugins/newui/',
+            combine: true,
+            comboBase: Liferay.AUI.getComboPath(),
+            modules: <%= modules %>,
+            root: Liferay.AUI.getJavaScriptRootPath() + '/editor/ckeditor/plugins/newui/'
+        }
+    }
+});

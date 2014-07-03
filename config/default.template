@@ -1,16 +1,11 @@
-if (typeof YUI_config == 'undefined') {
-    var YUI_config = {
-        groups: {}
-    };
-}
-else {
-    YUI_config.groups = YUI_config.groups || {};
-}
-
-YUI_config.groups.LREditor = {
-    base: '/dist/',
-    combine: false,
-    comboBase: '',
-    modules: <%= modules %>,
-    root: '/dist/'
-};
+YUI.applyConfig({
+    groups: {
+        LREditor: {
+            base: '/dist/',
+            combine: false,
+            comboBase: '',
+            modules: <%= modules %>,
+            root: '/dist/'
+        }
+    }
+});
