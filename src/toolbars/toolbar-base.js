@@ -8,9 +8,12 @@ YUI.add('toolbar-base', function (Y) {
 
     ToolbarBase.prototype = {
         initializer: function() {
-            var instance = this;
+            var instance = this,
+                editor;
 
-            instance._editorNode = Y.one(instance.get('editor').element.$);
+            editor = instance.get('editor');
+
+            instance._editorNode = Y.one(editor.element.$);
 
             YArray.each(
                 instance.get('buttons'),
@@ -29,7 +32,7 @@ YUI.add('toolbar-base', function (Y) {
                 }
             );
 
-            Y.on('editorInteraction', instance._onEditorInteraction, instance);
+            editor.on('editorInteraction', instance._onEditorInteraction, instance);
         },
 
         _afterActionPerformed: function(event) {

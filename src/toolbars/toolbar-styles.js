@@ -141,25 +141,24 @@ YUI.add('toolbar-styles', function (Y) {
         },
 
         _onEditorInteraction: function(event) {
-            var direction,
-                editor,
+            var editor,
                 position,
                 selectionData,
                 selectionEmpty,
-                yuiEvent;
+                nativeEvent;
 
             editor = this.get('editor');
 
             selectionEmpty = editor.isSelectionEmpty();
 
-            selectionData = event.selectionData;
+            selectionData = event.data.selectionData;
 
-            yuiEvent = event.yuiEvent;
+            nativeEvent = event.data.nativeEvent;
 
             if (!selectionData.element && selectionData.region && !selectionEmpty) {
                 position = this._calculatePosition(selectionData, {
-                    x: yuiEvent.pageX,
-                    y: yuiEvent.pageY
+                    x: nativeEvent.pageX,
+                    y: nativeEvent.pageY
                 });
 
                 this.showAtPoint(position.x, position.y, position.direction);

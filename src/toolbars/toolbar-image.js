@@ -70,7 +70,7 @@ YUI.add('toolbar-image', function (Y) {
                 name,
                 selectionData;
 
-            selectionData = event.selectionData;
+            selectionData = event.data.selectionData;
 
             element = selectionData.element;
 

@@ -87,7 +87,7 @@ YUI.add('toolbar-add', function (Y) {
                 selectionData,
                 startRect;
 
-            selectionData = event.selectionData;
+            selectionData = event.data.selectionData;
 
             if (selectionData.region) {
                 startRect = selectionData.region.startRect || selectionData.region;
