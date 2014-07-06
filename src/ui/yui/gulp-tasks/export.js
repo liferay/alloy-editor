@@ -15,5 +15,5 @@ gulp.task('export-env', function() {
             modules: yuiModules
             }))
         .pipe(rename('yui-config.js'))
-        .pipe(gulp.dest(path.join(ROOT, 'dist')));
+        .pipe(gulp.dest(path.join(ROOT, 'tmp')));
     });

@@ -32,25 +32,25 @@ svgConfig = {
 gulp.task('make-sprites', function () {
     return gulp.src(path.join(ROOT, 'src', 'assets', 'svg', '*.svg'))
         .pipe(svg(svgConfig)) // pass svgConfig option
-        .pipe(gulp.dest(path.join(ROOT, 'dist', 'assets', 'svg')))
+        .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets', 'svg')))
         .pipe(png());
 });
 
 gulp.task('copy-sprites', function() {
     var svgDir;
 
-    svgDir = path.join(ROOT, 'dist', 'assets', 'svg');
+    svgDir = path.join(ROOT, 'tmp', 'assets', 'svg');
 
     return gulp.src(path.join(svgDir, 'sprites', '/**/*.*'))
-        .pipe(gulp.dest(path.join(ROOT, 'dist', 'assets', 'sprites')));
+        .pipe(gulp.dest(path.join(ROOT, '..', '..', '..', 'dist', 'assets', 'sprites')));
 });
 
 gulp.task('join-css', function() {
     var cssDir,
         svgDir;
 
-    cssDir = path.join(ROOT, 'dist', 'assets', 'css');
-    svgDir = path.join(ROOT, 'dist', 'assets', 'svg');
+    cssDir = path.join(ROOT, 'src', 'assets', 'css');
+    svgDir = path.join(ROOT, 'tmp', 'assets', 'svg');
 
     return gulp.src(
         [
@@ -58,21 +58,21 @@ gulp.task('join-css', function() {
             path.join(cssDir, 'skin', '*.css'),
             path.join(svgDir, 'css', 'sprites.css')
         ])
-        .pipe(concat('lao-editor.css'))
-        .pipe(gulp.dest(path.join(ROOT, 'dist', 'assets')));
+        .pipe(concat('alloy-editor.css'))
+        .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets')));
 });
 
 gulp.task('remove-svg-files', function() {
     var cssDir,
         svgDir;
 
-    cssDir = path.join(ROOT, 'dist', 'assets', 'css');
-    svgDir = path.join(ROOT, 'dist', 'assets', 'svg');
+    cssDir = path.join(ROOT, 'tmp', 'assets', 'css');
+    svgDir = path.join(ROOT, 'tmp', 'assets', 'svg');
 
     return gulp.src([cssDir, svgDir], { read: false })
         .pipe(rimraf({force: true}));
 });
 
-gulp.task('make-css', function() {
-    return runSequence('sass2css', 'make-sprites', 'copy-sprites', 'join-css', 'remove-svg-files');
+gulp.task('make-css', function(callback) {
+    runSequence('sass2css', 'make-sprites', 'copy-sprites', 'join-css', 'remove-svg-files', callback);
 });

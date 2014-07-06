@@ -5,11 +5,9 @@
         'uicore',
         {
             init: function(editor) {
-                var editable,
-                    handleUI,
-                    UITools = CKEDITOR.plugins.UITools;
+                var handleUI;
 
-                handleUI = UITools.debounce(
+                handleUI = CKEDITOR.tools.debounce(
                     function(event) {
                         if (event.type !== 'keyup' || event.charCode !== 27 || editor.config.allowEsc) {
                             editor.fire('editorInteraction', {

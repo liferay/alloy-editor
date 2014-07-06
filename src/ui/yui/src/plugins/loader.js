@@ -40,14 +40,14 @@
 	                if (hasOwnProperty.call(toolbarsConfig, i)) {
 	                    if (CKEDITOR.tools.isArray(toolbarsConfig[i])) {
 	                        editor.config.toolbars[i] = new Y[this._getToolbarName(i)](
-	                            UITools.merge(defaultConfig, {
+	                            Y.merge(defaultConfig, {
 	                                buttons: toolbarsConfig[i]
 	                            })
 	                        );
 	                    }
 	                    else if(toolbarsConfig[i]) {
 	                        editor.config.toolbars[i] = new Y[this._getToolbarName(i)](
-	                            UITools.merge(defaultConfig, toolbarsConfig[i])
+	                            Y.merge(defaultConfig, toolbarsConfig[i])
 	                        );
 	                    }
 	                }

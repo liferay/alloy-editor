@@ -3,7 +3,7 @@ YUI.add('button-a', function (Y) {
 
     var Lang = Y.Lang,
         YNode = Y.Node,
-        Link = CKEDITOR.plugins.UITools.Link,
+        Link = CKEDITOR.tools.Link,
 
     A = Y.Base.create('a', Y.Plugin.Base, [Y.ButtonBase], {
         renderUI: function() {

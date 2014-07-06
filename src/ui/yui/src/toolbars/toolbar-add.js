@@ -11,7 +11,7 @@ YUI.add('toolbar-add', function (Y) {
 
             editorNode = Y.one(this.get('editor').element.$);
 
-            this._hideButtonsContainerFn = UITools.debounce(this._hideButtonsContainer, this.get('hideTimeout'));
+            this._hideButtonsContainerFn = CKEDITOR.tools.debounce(this._hideButtonsContainer, this.get('hideTimeout'));
 
             this._editorDOMNode = editorNode.getDOMNode();
         },

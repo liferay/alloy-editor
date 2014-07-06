@@ -1,56 +1,6 @@
 ;(function() {
     'use strict';
 
-    var UITools = {
-        debounce: function(callback, timeout, context, args) {
-            var callFn,
-                debounceHandle;
-
-            callFn = function() {
-                var callContext,
-                    calArgs;
-
-                callContext = context || this;
-                calArgs = args || arguments;
-
-                clearTimeout(debounceHandle);
-
-                debounceHandle = setTimeout(function() {
-                    callback.apply(callContext, calArgs);
-                }, timeout);
-            };
-
-            callFn.cancel = function() {
-                clearTimeout(debounceHandle);
-            };
-
-            return callFn;
-        },
-
-        merge: function () {
-            var i = 0,
-                key,
-                len = arguments.length,
-                obj,
-                result = {};
-
-            for (; i < len; ++i) {
-                obj = arguments[i];
-
-                for (key in obj) {
-                    if (hasOwnProperty.call(obj, key)) {
-                        result[key] = obj[key];
-                    }
-                }
-           }
-
-            return result;
-        }
-    };
-
-    CKEDITOR.plugins.UITools = UITools;
-
-
     /**
      * Link utilities
      */
@@ -79,7 +29,7 @@
                 range.selectNodeContents(text);
             }
 
-            linkAttrs = UITools.merge({
+            linkAttrs = CKEDITOR.tools.merge({
                 'data-cke-saved-href': URI,
                 href: URI
             }, attrs);
@@ -147,15 +97,11 @@
         }
     };
 
-    /**
-     * Add UITools plugin to CKEditor
-     */
-
     CKEDITOR.plugins.add(
-        'uitools',
+        'linktools',
         {
             init: function(editor) {
-                CKEDITOR.plugins.UITools.Link = new Link(editor);
+                CKEDITOR.tools.Link = new Link(editor);
             }
         }
     );
