@@ -1,0 +1,16 @@
+<link href="bootstrap.css" rel="stylesheet">
+<link href="alloy-editor/assets/alloy-editor.css" rel="stylesheet">
+
+<script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
+
+<script src="alloy-editor/ckeditor/ckeditor.js"></script>
+<script src="alloy-editor/yui-config.js"></script>
+<script src="alloy-editor/debounce.js"></script>
+<script src="alloy-editor/link.js"></script>
+<script src="alloy-editor/uicore.js"></script>
+<script src="alloy-editor/selection-region.js"></script>
+<script src="alloy-editor/drop-images.js"></script>
+<script src="alloy-editor/linktooltip.js"></script>
+<script src="alloy-editor/placeholder.js"></script>
+<script src="alloy-editor/tools.js"></script>
+<script src="alloy-editor/loader.js"></script>

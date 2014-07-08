@@ -1,11 +1,11 @@
 YUI.applyConfig({
     groups: {
         AlloyEditor: {
-            base: Liferay.AUI.getJavaScriptRootPath() + '/editor/alloy/',
+            base: Liferay.AUI.getJavaScriptRootPath() + '/editor/alloyeditor/',
             combine: true,
             comboBase: Liferay.AUI.getComboPath(),
             modules: <%= modules %>,
-            root: Liferay.AUI.getJavaScriptRootPath() + '/editor/alloy/'
+            root: Liferay.AUI.getJavaScriptRootPath() + '/editor/alloyeditor/'
         }
     }
 });

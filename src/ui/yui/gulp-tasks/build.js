@@ -8,16 +8,18 @@ var gulp = require('gulp'),
 gulp.task('build', function(callback) {
     runSequence('clean-all', 'make-css',
         ['copy-js', 'copy-css', 'copy-fonts', 'export-env', 'copy-ckeditor'],
-        'join-plugins-config', 'create-alloy-editor', 'clean-tmp', callback);
+        'join-js',
+        ['create-alloy-editor', 'copy-demo'],
+        'clean-tmp', callback);
 });
 
 gulp.task('release', ['build'], function() {
     var dest,
         pjson;
 
-    pjson = require(path.join(ROOT, '..', '..', '..', 'package.json'));
-
     dest = path.join(ROOT, '..', '..', '..', 'dist');
+
+    pjson = require(path.join(ROOT, '..', '..', '..', 'package.json'));
 
     return gulp.src(path.join(dest, '/**'))
         .pipe(zip('alloy-editor-' + pjson.version + '.zip'))
