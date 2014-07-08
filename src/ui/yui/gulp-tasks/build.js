@@ -13,12 +13,13 @@ gulp.task('build', function(callback) {
 
 gulp.task('release', ['build'], function() {
     var dest,
-    src;
+        pjson;
 
-    src = path.join(ROOT, '..', '..', '..', 'dist', 'alloy-editor');
+    pjson = require(path.join(ROOT, '..', '..', '..', 'package.json'));
+
     dest = path.join(ROOT, '..', '..', '..', 'dist');
 
-    return gulp.src(path.join(src, '/**'))
-        .pipe(zip('alloy-editor.zip'))
+    return gulp.src(path.join(dest, '/**'))
+        .pipe(zip('alloy-editor-' + pjson.version + '.zip'))
         .pipe(gulp.dest(dest));
 });
