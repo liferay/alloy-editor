@@ -8,13 +8,17 @@ var gulp = require('gulp'),
 gulp.task('build', function(callback) {
     runSequence('clean-all', 'make-css',
         ['copy-js', 'copy-css', 'copy-fonts', 'export-env', 'copy-ckeditor'],
-        'join-plugins-config', 'copy-to-dist', 'clean-tmp', callback);
+        'join-plugins-config', 'create-alloy-editor', 'clean-tmp', callback);
 });
 
 gulp.task('release', ['build'], function() {
-    var dist = path.join(ROOT, '..', '..', '..', 'dist');
+    var dest,
+    src;
 
-    return gulp.src(path.join(dist, '/**'))
+    src = path.join(ROOT, '..', '..', '..', 'dist', 'alloy-editor');
+    dest = path.join(ROOT, '..', '..', '..', 'dist');
+
+    return gulp.src(path.join(src, '/**'))
         .pipe(zip('alloy-editor.zip'))
-        .pipe(gulp.dest(dist));
+        .pipe(gulp.dest(dest));
 });

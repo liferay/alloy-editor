@@ -1,5 +1,4 @@
-var argv = require('yargs').argv,
-    concat = require('gulp-concat'),
+var concat = require('gulp-concat'),
 	gulp = require('gulp'),
 	path = require('path'),
 
@@ -20,16 +19,9 @@ gulp.task('copy-js', function() {
         .pipe(gulp.dest(path.join(ROOT, 'tmp')));
 });
 
-gulp.task('copy-ckeditor', function(callback) {
-    var env = argv.env || 'default';
-
-    if (env === 'default') {
-        return gulp.src(path.join(ROOT, '..', '..', '..', 'lib', 'ckeditor', '/**'))
-            .pipe(gulp.dest(path.join(ROOT, 'tmp', 'ckeditor')));
-    }
-    else {
-        callback();
-    }
+gulp.task('copy-ckeditor', function() {
+    return gulp.src(path.join(ROOT, '..', '..', '..', 'lib', 'ckeditor', '/**'))
+        .pipe(gulp.dest(path.join(ROOT, 'tmp', 'ckeditor')));
 });
 
 gulp.task('join-plugins-config', function() {
@@ -42,11 +34,11 @@ gulp.task('join-plugins-config', function() {
         path.join(ROOT, 'src', 'core', '/**/*.js'),
         path.join(ROOT, 'src', 'plugins', '/**/*.js')
     ])
-    .pipe(concat('plugins.js'))
+    .pipe(concat('all.js'))
     .pipe(gulp.dest(path.join(ROOT, 'tmp')));
 });
 
-gulp.task('copy-to-dist', function() {
+gulp.task('create-alloy-editor', function() {
     return gulp.src(path.join(ROOT, 'tmp', '/**/*.*'))
-        .pipe(gulp.dest(path.join(ROOT, '..', '..', '..', 'dist')));
+        .pipe(gulp.dest(path.join(ROOT, '..', '..', '..', 'dist', 'alloy-editor')));
 });

@@ -42,7 +42,7 @@ gulp.task('copy-sprites', function() {
     svgDir = path.join(ROOT, 'tmp', 'assets', 'svg');
 
     return gulp.src(path.join(svgDir, 'sprites', '/**/*.*'))
-        .pipe(gulp.dest(path.join(ROOT, '..', '..', '..', 'dist', 'assets', 'sprites')));
+        .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets', 'sprites')));
 });
 
 gulp.task('join-css', function() {

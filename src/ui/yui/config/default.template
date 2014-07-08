@@ -1,11 +1,11 @@
 YUI.applyConfig({
     groups: {
-        LREditor: {
-            base: '/dist/',
+        AlloyEditor: {
+            base: '/alloy-editor/',
             combine: false,
             comboBase: '',
             modules: <%= modules %>,
-            root: '/dist/'
+            root: '/alloy-editor/'
         }
     }
 });
