@@ -24,7 +24,7 @@ gulp.task('copy-ckeditor', function(callback) {
     var env = argv.env || 'default';
 
     if (env === 'default') {
-        return gulp.src(path.join(ROOT, 'lib', 'ckeditor', '/**'))
+        return gulp.src(path.join(ROOT, '..', '..', '..', 'lib', 'ckeditor', '/**'))
             .pipe(gulp.dest(path.join(ROOT, 'tmp', 'ckeditor')));
     }
     else {
