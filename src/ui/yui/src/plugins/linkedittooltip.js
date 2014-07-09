@@ -225,10 +225,10 @@
                     '<a contenteditable="true" class="link-preview"></a>' +
                 '</div>' +
                 '<div class="pull-left btn-group link-go-contaner">' +
-                    '<button class="btn go-link"><i class="icon-share"></i></button>' +
+                    '<button class="btn go-link"><i class="alloy-editor-icon-share"></i></button>' +
                 '</div>' +
                 '<div class="pull-left btn-group link-remove-contaner">' +
-                    '<button class="btn remove-link"><i class="icon-remove"></i></button>' +
+                    '<button class="btn remove-link"><i class="alloy-editor-icon-remove"></i></button>' +
                 '</div>'
         }, {
             ATTRS: {

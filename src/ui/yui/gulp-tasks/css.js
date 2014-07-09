@@ -4,11 +4,6 @@ var concat = require('gulp-concat'),
     path = require('path'),
     rimraf = require('gulp-rimraf'),
     runSequence = require('run-sequence'),
-    svgSprites = require('gulp-svg-sprites'),
-
-    png = svgSprites.png,
-    svg = svgSprites.svg,
-    svgConfig,
 
     ROOT = path.join(__dirname, '..');
 
@@ -21,58 +16,32 @@ gulp.task('sass2css', function() {
         }));
 });
 
-svgConfig = {
-    className: '.icon-%f',
-    generatePreview: false,
-    padding: 5,
-    pngPath: '%f',
-    svgPath: '%f'
-};
+gulp.task('copy-fonts', function() {
+    var fontDir;
 
-gulp.task('make-sprites', function () {
-    return gulp.src(path.join(ROOT, 'src', 'assets', 'svg', '*.svg'))
-        .pipe(svg(svgConfig)) // pass svgConfig option
-        .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets', 'svg')))
-        .pipe(png());
-});
+    fontDir = path.join(ROOT, 'src', 'assets', 'font');
 
-gulp.task('copy-sprites', function() {
-    var svgDir;
-
-    svgDir = path.join(ROOT, 'tmp', 'assets', 'svg');
-
-    return gulp.src(path.join(svgDir, 'sprites', '/**/*.*'))
-        .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets', 'sprites')));
+    return gulp.src(path.join(fontDir, '/**/*.*'))
+        .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets', 'font')));
 });
 
 gulp.task('join-css', function() {
     var cssDir,
-        svgDir;
+        fontDir;
 
     cssDir = path.join(ROOT, 'src', 'assets', 'css');
-    svgDir = path.join(ROOT, 'tmp', 'assets', 'svg');
+    fontDir = path.join(ROOT, 'tmp', 'assets', 'font');
 
     return gulp.src(
         [
             path.join(cssDir, '*.css'),
             path.join(cssDir, 'skin', '*.css'),
-            path.join(svgDir, 'css', 'sprites.css')
+            path.join(fontDir, 'font.css')
         ])
         .pipe(concat('alloy-editor.css'))
         .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets')));
 });
 
-gulp.task('remove-svg-files', function() {
-    var cssDir,
-        svgDir;
-
-    cssDir = path.join(ROOT, 'tmp', 'assets', 'css');
-    svgDir = path.join(ROOT, 'tmp', 'assets', 'svg');
-
-    return gulp.src([cssDir, svgDir], { read: false })
-        .pipe(rimraf({force: true}));
-});
-
 gulp.task('make-css', function(callback) {
-    runSequence('sass2css', 'make-sprites', 'copy-sprites', 'join-css', 'remove-svg-files', callback);
+    runSequence('sass2css', 'copy-fonts', 'join-css', callback);
 });

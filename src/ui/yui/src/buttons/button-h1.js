@@ -4,7 +4,7 @@ YUI.add('button-h1', function (Y) {
     var Lang = Y.Lang;
 
     var H1 = Y.Base.create('h1', Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: '<i class="icon-h1"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-h1"></i>'
     }, {
         NAME: 'h1',
 

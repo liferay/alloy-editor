@@ -325,23 +325,23 @@ YUI.add('button-a', function (Y) {
             this._attachHideHandler();
         },
 
-        TPL_CONTENT: '<i class="icon-link"></i>',
+        TPL_CONTENT: '<i class="alloy-editor-icon-link"></i>',
 
         TPL_LINK_CONTAINER:
             '<div class="link-wrapper hide">' +
                 '<div class="pull-left btn-group show-buttons-container">' +
-                    '<button class="btn show-text"><i class="icon-font"></i></button>' +
+                    '<button class="btn show-text"><i class="alloy-editor-icon-font"></i></button>' +
                 '</div>' +
                 '<div class="pull-left btn-group input-wrapper">' +
                     '<span class="input-container">' +
                         '<input class="input-large" type="text" placeholder="{placeholder}"></input>' +
                         '<span class="input-clear">' +
-                            '<i class="icon-remove-small"></i>' +
+                            '<i class="alloy-editor-icon-remove-small"></i>' +
                         '</span>' +
                     '</span>' +
                 '</div>' +
                 '<div class="pull-right btn-group input-close-container">' +
-                    '<button class="btn close-link"><i class="icon-ok"></i></button>' +
+                    '<button class="btn close-link"><i class="alloy-editor-icon-ok"></i></button>' +
                 '</div>' +
             '</div>'
     }, {

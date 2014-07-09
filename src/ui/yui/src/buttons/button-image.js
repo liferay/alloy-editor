@@ -47,7 +47,7 @@ YUI.add('button-image', function (Y) {
             inputFile.simulate('click');
         },
 
-        TPL_CONTENT: '<i class="icon-image"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-image"></i>'
     }, {
         NAME: 'image',
 

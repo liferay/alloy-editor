@@ -20,7 +20,7 @@ YUI.add('button-twitter', function (Y) {
             );
         },
 
-        TPL_CONTENT: '<i class="icon-twitter"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-twitter"></i>'
     }, {
         NAME: 'tweet',
 

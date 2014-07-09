@@ -8,7 +8,7 @@ YUI.add('button-code', function (Y) {
 
         },
 
-        TPL_CONTENT: '<i class="icon-code"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-code"></i>'
     }, {
         NAME: 'code',
 

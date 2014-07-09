@@ -149,7 +149,7 @@ YUI.add('toolbar-add', function (Y) {
               '<button type="button" class="btn-add">{content}</button>' +
             '</div>',
 
-        TPL_ADD_CONTENT: '<i class="icon-add"></i>',
+        TPL_ADD_CONTENT: '<i class="alloy-editor-icon-add"></i>',
 
         TPL_BUTTON_CONTAINER:
           '<div class="btn-group-vertical yui3-toolbaradd-buttons"></div>'

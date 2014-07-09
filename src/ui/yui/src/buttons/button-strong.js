@@ -4,7 +4,7 @@ YUI.add('button-strong', function (Y) {
     var Lang = Y.Lang;
 
     var Strong = Y.Base.create('strong', Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: '<i class="icon-bold"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-bold"></i>'
     }, {
         NAME: 'strong',
 

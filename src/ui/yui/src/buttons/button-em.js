@@ -4,7 +4,7 @@ YUI.add('button-em', function (Y) {
     var Lang = Y.Lang;
 
     var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: '<i class="icon-italic"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-italic"></i>'
     }, {
         NAME: 'em',
 

@@ -40,7 +40,7 @@ YUI.add('button-left', function (Y) {
             }
         },
 
-        TPL_CONTENT: '<i class="icon-align-left"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-align-left"></i>'
     }, {
         NAME: 'left',
 

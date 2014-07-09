@@ -1,0 +1,76 @@
+@font-face {
+	font-family: 'alloyeditor';
+	src:url('font/fonts/alloyeditor.eot?os2poq');
+	src:url('font/fonts/alloyeditor.eot?#iefixos2poq') format('embedded-opentype'),
+		url('font/fonts/alloyeditor.woff?os2poq') format('woff'),
+		url('font/fonts/alloyeditor.ttf?os2poq') format('truetype'),
+		url('font/fonts/alloyeditor.svg?os2poq#alloyeditor') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="alloy-editor-icon-"], [class*=" alloy-editor-icon-"] {
+	font-family: 'alloyeditor';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.alloy-editor-icon-h1:before {
+	content: "\e606";
+}
+.alloy-editor-icon-h2:before {
+	content: "\e607";
+}
+.alloy-editor-icon-font:before {
+	content: "\f031";
+}
+.alloy-editor-icon-bold:before {
+	content: "\f032";
+}
+.alloy-editor-icon-italic:before {
+	content: "\f033";
+}
+.alloy-editor-icon-align-left:before {
+	content: "\f036";
+}
+.alloy-editor-icon-align-right:before {
+	content: "\f038";
+}
+.alloy-editor-icon-image:before {
+	content: "\f03e";
+}
+.alloy-editor-icon-share:before {
+	content: "\f045";
+}
+.alloy-editor-icon-add:before {
+	content: "\f055";
+}
+.alloy-editor-icon-twitter:before {
+	content: "\f099";
+}
+.alloy-editor-icon-link:before {
+	content: "\f0c1";
+}
+.alloy-editor-icon-underline:before {
+	content: "\f0cd";
+}
+.alloy-editor-icon-code:before {
+	content: "\f121";
+}
+.alloy-editor-icon-remove:before {
+	content: "\e600";
+}
+.alloy-editor-icon-ok:before {
+	content: "\e601";
+}
+.alloy-editor-icon-remove-small:before {
+	content: "\e602";
+}
