@@ -78,7 +78,30 @@ styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter', 'facebook': {
 Btw, you may overwrite any of the params of the default buttons, just by passing such config object.
 
 ## How to create my own toolbar?
-[Todo: write documentation here]
+
+
+Adding a new toolbar is also as straightforward, as adding a button. If you use the default YUI3 based UI, you may create a standard module, which extends Widget. For your convenience, there is an extension, called ToolbarBase, which you can mix in your Widget. Then, name your toolbar somehow, for example ToolbarTable and load it on the page. Don't forget to add it to the configuration of the toolbars, like this:
+
+````
+editor.config.toolbars = {
+    table: ['button1', 'button2'],
+    add: ['image', 'code'],
+    image: ['left', 'right'],
+    styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
+};
+
+````
+
+In this exmaple, "button1" and "button2" will be the buttons, which will be loaded on this toolbar.
+
+### How to help
+
+You may help in many ways:
+* Help us to improve the documentation.
+* Create some buttons.
+* Create some toolbars.
+* Create UI, which is written using different framework than YUI3.
+
 
 ### License
 MIT License
