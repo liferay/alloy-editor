@@ -23,6 +23,66 @@ If you want to have a zip file, execute ```` gulp release ````
 3. If you decided to go with mongoose, then go to project folder and execute:
 ```` mongoose -document_root dist/alloy-editor-0.1.0 ````, where 0.1.0 is the current version of the editor. Don't worry, "dist" folder will contain only one folder, so you don't have to remember this 0.1.0
 
+## How to embed it in my own page?
+
+1. Add Boostrap 3 and Alloy Editor's CSS to the page.
+
+````html
+<link href="bootstrap.css" rel="stylesheet">
+<link href="alloy-editor/assets/alloy-editor.css" rel="stylesheet">
+````
+
+2. Add YUI3 or AlloyUI seed file to the page
+
+````html
+<script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
+````
+
+or
+
+````html
+<script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
+````
+
+3. Add CKEditor's JavaScript file and Alloy Editor JavaSript:
+
+````html
+<script src="alloy-editor/ckeditor/ckeditor.js"></script>
+<script src="alloy-editor/all.js"></script>
+````
+
+4. Add Alloy Editor's JavaScript:
+
+```javascript
+var editor = CKEDITOR.inline('editable');
+
+editor.config.allowedContent = true;
+
+editor.config.toolbars = {
+    add: ['image', 'code'],
+    image: ['left', 'right'],
+    styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
+};
+
+editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
+editor.config.extraPlugins = 'debounce,linktools,uicore,selectionregion,dropimages,placeholder,linktooltip,uitools,uiloader';
+editor.config.placeholderClass = 'alloy-editor-placeholder';
+editor.config.title = false;
+````
+
+In the above configuration, "editable" is the ID of the element, which will be made editable. You can fully reconfigure the toolbars using the configuration object. See below for more information.
+````javascript
+editor.config.toolbars = {....}
+````
+
+Aloy Editor comes with optimized version of CKEditor. Many plugins were removed. However, if you prefer the OOTB version, then you have to remove some of its plugins, like this:
+
+````javascript
+editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
+````
+
+"extraPlugins" is a list with the default plugins from Alloy Editor. However, you can customize these. For example, if you don't want the plugin for adding images via D&D, then just remove "dropimages" from "extraPlugins" property above.
+
 ## What is wrong with the UI of CKEditor? Why do you think Alloy Editor provides better UI?
 
 CKEditor's UI is just old school. The toolbar appears on top, in case of inline editing it appears on top or on bottom. However, any modern editor UI places the toolbar just above the selection.
