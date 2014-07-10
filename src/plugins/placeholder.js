@@ -12,9 +12,16 @@
             },
 
             _addPlaceholder: function(editor) {
-                editor.setData(editor.config.placeholderValue);
+                var editorNode,
+                    placeholder;
 
-                new CKEDITOR.dom.element(editor.element.$).addClass(editor.config.placeholderClass);
+                editorNode = new CKEDITOR.dom.element(editor.element.$);
+
+                placeholder = editor.config.placeholderValue || editorNode.getAttribute('data-placeholder');
+
+                editor.setData(placeholder);
+
+                editorNode.addClass(editor.config.placeholderClass);
             },
 
             _onBlur: function(event) {
@@ -29,19 +36,23 @@
                 var config,
                     data,
                     editor,
-                    element;
+                    editorNode,
+                    element,
+                    placeholder;
 
                 editor = event.editor;
                 config = editor.config;
 
                 data = editor.getData();
 
-                if (!config.placeholderValue) {
+                placeholder = config.placeholderValue || new CKEDITOR.dom.element(editor.element.$).getAttribute('data-placeholder');
+
+                if (!placeholder) {
                     config.placeholderValue = editor.getData();
 
                     this._removePlaceholder(editor);
                 }
-                else if (data === config.placeholderValue) {
+                else if (data === placeholder) {
                     this._removePlaceholder(editor);
                 }
                 else {
@@ -51,7 +62,7 @@
 
                     data = element.innerText || element.textContent;
 
-                    if (data === config.placeholderValue || data.replace(REGEX_EOL, '') === config.placeholderValue) {
+                    if (data === placeholder || data.replace(REGEX_EOL, '') === placeholder) {
                         this._removePlaceholder(editor);
                     }
                 }
