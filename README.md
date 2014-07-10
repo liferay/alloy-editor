@@ -56,7 +56,26 @@ styles: ['em', 'strong']
 Now the tollbar of styles will have only two buttons, and they will be for "em" (aka. italic) and "strong" (aka bold).
 
 ## How to create my own button?
-[Todo: write documentation here]
+
+If you run the editor with the default UI, which is written in YUI3, then adding a button will be straightforward. Buttons are standard YUI3 modules, which extend Widget. For your convenience, there is also base class, which you can extend.
+Use CKEditor's API to do the real job and that is it!
+
+For example, if you want to add a button, which posts the selected text to Facebook, create a YUI3 module, let's say Y.ButtonFacebook and load it on the page.
+Then, add it to the configuration of the tollbar, like this:
+
+```` styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter', 'facebook'] ````
+
+Of course, the buttons accept configuration parameters, so you can do this with your button:
+
+````
+styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter', 'facebook': {
+    customParam: 'param1',
+    customParam2: 'param2'
+}];
+
+````
+
+Btw, you may overwrite any of the params of the default buttons, just by passing such config object.
 
 ## How to create my own toolbar?
 [Todo: write documentation here]
