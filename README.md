@@ -24,13 +24,18 @@ Alloy Editor is a WYSIWYG editor, based on CKEditor, with completely rewritten U
 
 It is just old school. The toolbar appears on top, in case of inline editing it appears on top or on bottom. However, any modern editor UI places the toolbar just above the selection.
 
-## Whhy Alloy Editor provides better UI?
+## Why Alloy Editor provides better UI?
 
 It supports multiple toolbars, and super easy toolbar configuration. Adding buttons is also very easy. The core is fully separated from the UI, so you can add your own UI if you want. The default UI is built using YUI3, but you can create one using whatever Framework you want.
 
+## Toolbar configuration
+[Todo: write documentation here]
+
 ## How to create my own button?
+[Todo: write documentation here]
 
 ## How to create my own toolbar?
+[Todo: write documentation here]
 
 ### License
 MIT License
