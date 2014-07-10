@@ -5,12 +5,12 @@ var gulp = require('gulp'),
     ROOT = path.join(__dirname, '..');
 
 gulp.task('clean-tmp', function() {
-	return gulp.src(path.join(ROOT, 'tmp'), { read: false })
+	return gulp.src(path.join(ROOT, 'tmp'), {read: false})
         .pipe(rimraf({force: true}));
 });
 
 gulp.task('clean-dist', function() {
-	return gulp.src(path.join(ROOT, '..', '..', '..', 'dist'), { read: false })
+	return gulp.src(path.join(ROOT, '..', '..', '..', 'dist'), {read: false})
         .pipe(rimraf({force: true}));
 });
 

@@ -12,11 +12,6 @@ gulp.task('copy-css', function() {
         .pipe(gulp.dest(path.join(ROOT, 'tmp')));
 });
 
-gulp.task('copy-fonts', function() {
-    return gulp.src(path.join(ROOT, 'src/assets/font/fonts/**/*.*'))
-        .pipe(gulp.dest(path.join(ROOT, 'tmp/assets/font/fonts')));
-});
-
 gulp.task('copy-js', function() {
     return gulp.src(path.join(ROOT, 'src/**/*.js'))
         .pipe(gulp.dest(path.join(ROOT, 'tmp')));

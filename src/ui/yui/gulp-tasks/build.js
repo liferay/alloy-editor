@@ -8,9 +8,9 @@ var gulp = require('gulp'),
 gulp.task('build', function(callback) {
     runSequence('clean-all', 'make-css',
         ['copy-js', 'copy-css', 'copy-fonts', 'export-env', 'copy-ckeditor'],
-        'join-js',
+        ['join-js', 'clean-fontcss'],
         ['create-alloy-editor', 'copy-demo'],
-        'clean-tmp', callback);
+        ['clean-tmp'], callback);
 });
 
 gulp.task('release', ['build'], function() {

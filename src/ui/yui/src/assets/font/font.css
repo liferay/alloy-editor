@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'alloyeditor';
-	src:url('font/fonts/alloyeditor.eot?os2poq');
-	src:url('font/fonts/alloyeditor.eot?#iefixos2poq') format('embedded-opentype'),
-		url('font/fonts/alloyeditor.woff?os2poq') format('woff'),
-		url('font/fonts/alloyeditor.ttf?os2poq') format('truetype'),
-		url('font/fonts/alloyeditor.svg?os2poq#alloyeditor') format('svg');
+	src:url('fonts/alloyeditor.eot?os2poq');
+	src:url('fonts/alloyeditor.eot?#iefixos2poq') format('embedded-opentype'),
+		url('fonts/alloyeditor.woff?os2poq') format('woff'),
+		url('fonts/alloyeditor.ttf?os2poq') format('truetype'),
+		url('fonts/alloyeditor.svg?os2poq#alloyeditor') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }

@@ -5,12 +5,12 @@
 
 <script src="alloy-editor/ckeditor/ckeditor.js"></script>
 <script src="alloy-editor/yui-config.js"></script>
-<script src="alloy-editor/debounce.js"></script>
-<script src="alloy-editor/link.js"></script>
-<script src="alloy-editor/uicore.js"></script>
-<script src="alloy-editor/selection-region.js"></script>
-<script src="alloy-editor/drop-images.js"></script>
-<script src="alloy-editor/linktooltip.js"></script>
-<script src="alloy-editor/placeholder.js"></script>
-<script src="alloy-editor/tools.js"></script>
-<script src="alloy-editor/loader.js"></script>
+<script src="alloy-editor/plugins/debounce.js"></script>
+<script src="alloy-editor/plugins/link.js"></script>
+<script src="alloy-editor/plugins/uicore.js"></script>
+<script src="alloy-editor/plugins/selection-region.js"></script>
+<script src="alloy-editor/plugins/drop-images.js"></script>
+<script src="alloy-editor/plugins/linktooltip.js"></script>
+<script src="alloy-editor/plugins/placeholder.js"></script>
+<script src="alloy-editor/plugins/tools.js"></script>
+<script src="alloy-editor/plugins/loader.js"></script>
