@@ -6,11 +6,10 @@ Alloy Editor is a WYSIWYG editor, based on CKEditor, with completely rewritten U
 
 ## How to build it
 
-1. Fork the repository, so you can send then patches
+1. Fork the repository, so you can send then patches.
 2. Navigate to the directory you forked/cloned the repo.
 2. Install NodeJS (http://nodejs.org/)
-3. Run 
-```` [sudo] npm install -g gulp ````
+3. Run ```` [sudo] npm install -g gulp ````
 4. Run ```` npm install ````
 5. Run ```` gulp ````
 
@@ -156,6 +155,65 @@ editor.config.toolbars = {
 ````
 
 In this exmaple, "button1" and "button2" will be the buttons, which will be loaded on this toolbar.
+
+Example:
+
+````javascript
+YUI.add('toolbar-table', function (Y) {
+    'use strict';
+
+    // Create a standard YUI3 module, which extends Widget. It also mixes Y.ToolbarBase extension, and two others:
+    // Y.WidgetPosition and Y.WidgetAutohide
+    var ToolbarTable = Y.Base.create('toolbartable', Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetAutohide], {
+        initializer: function () {
+            // write some initialization code, if needed
+        },
+
+        // render the toolbar here, this function is part of the standard YUI3 Widget API
+        renderUI: function() {
+        },
+
+        // bind some events here, this function is part of the standard YUI3 Widget API
+        bindUI: function() {
+        },
+
+        // This is the main part of your toolbar. If you use Y.ToolbarBase extension, as above, this function will be
+        // invoked when user interacts somehow with the editor. This might be mouse click or keypress. Here you have to
+        // check if toolbar should be visible or not. If so, you will have to calculate the position of the toolbar and show it.
+        // The "event" attribute contains everything you need. See the comment inside the function for more information.
+        _onEditorInteraction: function(event) {
+            // Check if the selection is empty
+
+            var editor = this.get('editor');
+
+            var selectionEmpty = editor.isSelectionEmpty();
+
+            // If there is selection, and only text is selected (not an image for example), show the toolbar
+
+            if (!selectionEmpty && !selectionData.element && selectionData.region) {
+                // Get the position where user released the mouse
+                var nativeEvent = event.data.nativeEvent;
+
+                var pos = {
+                    x: nativeEvent.pageX,
+                    y: nativeEvent.pageY
+                };
+
+                // You may get also the selection direction. This will help you to determine if user selected the text from
+                // top to bottom or from bottom to top. Using this information, you will be able to show the toolbar
+                // above or below the selection.
+
+                var direction = selectionData.region.direction;
+
+                // direction can be one of these: CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
+
+                // Then show the toolbar on the position.
+                // Of course, it may happen that user used keyboard to make a selection. In this case, you may get the starting rectangle of the
+                // selection.
+            }
+        }
+    });
+````
 
 ### How to help
 
