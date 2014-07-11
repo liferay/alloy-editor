@@ -50,6 +50,6 @@
 }
 
 /* line 49, ../../sass/skin/alloy-editor-skin.scss */
-.alloy-editor-placeholder {
+.alloy-editor-placeholder:empty:not(:focus) {
   background-color: lightyellow;
 }

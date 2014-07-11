@@ -46,6 +46,6 @@
     }
 }
 
-.alloy-editor-placeholder {
+.alloy-editor-placeholder:empty:not(:focus) {
     background-color: lightyellow;
 }
