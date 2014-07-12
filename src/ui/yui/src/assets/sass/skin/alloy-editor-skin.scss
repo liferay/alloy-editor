@@ -27,12 +27,6 @@
     }
 }
 
-.yui3-toolbarstyles, .yui3-toolbaradd, .yui3-toolbaradd-buttons, .yui3-toolbarimage, .yui3-linktooltip {
-    .yui3-button {
-        outline: none;
-    }
-}
-
 .yui3-linktooltip {
     @include border-radius(5px);
     background-color: #f5f5f5;
@@ -41,7 +35,6 @@
     .link-container {
         .link-preview {
             color: #0088cc;
-            outline: none;
         }
     }
 }

@@ -1,13 +1,13 @@
-.yui3-toolbarstyles, .yui3-toolbaradd, .yui3-toolbaradd-buttons, .yui3-toolbarimage, .yui3-linktooltip {
+.alloy-editor-toolbar, .alloy-editor-tooltip-link {
     position: absolute;
     z-index: 1;
 }
 
-.yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbarimage-hidden, .yui3-linktooltip-hidden {
+.yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbaradditems-hidden, .yui3-toolbarimage-hidden, .yui3-linktooltip-hidden {
     display: none;
 }
 
-.yui3-toolbarstyles {
+.alloy-editor-toolbar-styles {
     .link-wrapper {
         .input-container {
             display: inline-block;
@@ -46,10 +46,15 @@
         .link-preview {
             display: inline-block;
             padding: 4px;
+            outline: none;
         }
     }
 }
 
-.alloy-editor-placeholder:empty:not(:focus):before{
+.alloy-editor-toolbar .alloy-editor-button {
+    outline: none;
+}
+
+.alloy-editor-placeholder:empty:not(:focus):before {
     content:attr(data-placeholder);
 }

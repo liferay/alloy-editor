@@ -1,4 +1,4 @@
-.arrow-box {
+.alloy-editor-arrow-box {
     &:after, &:before {
         content: ' ';
         height: 0;
@@ -7,7 +7,7 @@
         pointer-events: none;
     }
 
-    &.arrow-box-top {
+    &.alloy-editor-arrow-box-top {
         &:after, &:before {
             bottom: 100%;
             left: 50%;
@@ -24,7 +24,7 @@
         }
     }
 
-    &.arrow-box-bottom {
+    &.alloy-editor-arrow-box-bottom {
         &:after, &:before {
             top: 100%;
             left: 50%;
@@ -41,7 +41,7 @@
         }
     }
 
-    &.arrow-box-left {
+    &.alloy-editor-arrow-box-left {
         &:after, &:before {
             right: 100%;
             top: 50%;
@@ -58,7 +58,7 @@
         }
     }
 
-    &.arrow-box-right {
+    &.alloy-editor-arrow-box-right {
         &:after, &:before {
             left: 100%;
             top: 50%;

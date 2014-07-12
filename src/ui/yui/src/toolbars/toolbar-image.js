@@ -10,7 +10,7 @@ YUI.add('toolbar-image', function (Y) {
                 buttonsContainer,
                 contentBox;
 
-            buttonsContainer = YNode.create(instance.TPL_BUTTON_CONTAINER);
+            buttonsContainer = YNode.create(instance.TPL_BUTTONS_CONTAINER);
 
             this.get('boundingBox').addClass('arrow-box arrow-box-bottom');
 
@@ -94,7 +94,11 @@ YUI.add('toolbar-image', function (Y) {
             }
         },
 
-        TPL_BUTTON_CONTAINER: '<div class="btn-group toolbar-image"></div>'
+        BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-image"></div>',
+
+        CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
+
+        TPL_BUTTONS_CONTAINER: '<div class="alloy-editor-toolbar-buttons btn-group"></div>'
     }, {
         ATTRS: {
             buttons: {

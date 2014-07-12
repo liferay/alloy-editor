@@ -151,9 +151,11 @@
                 });
             },
 
+            BOUNDING_TEMPLATE: '<div class="alloy-editor-tooltip-link"></div>',
+
             TPL_CONTENT:
                 '<div class="link-container">' +
-                    '<span class="alloy-editor-icon-link-container">' +
+                    '<span class="icon-link-container">' +
                         '<i class="alloy-editor-icon-link"></i>' +
                     '</span>' +
                     '<a class="link-preview" target="_blank"></a>' +

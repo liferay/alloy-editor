@@ -23,8 +23,7 @@
 	        _createToolbars: function(Y, editor) {
 	            var defaultConfig,
 	                i,
-	                toolbarsConfig,
-	                UITools = CKEDITOR.plugins.UITools;
+	                toolbarsConfig;
 
 	            editor.config.toolbarsInstances = {};
 

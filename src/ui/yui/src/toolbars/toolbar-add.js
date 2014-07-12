@@ -3,7 +3,8 @@ YUI.add('toolbar-add', function (Y) {
 
     var Lang = Y.Lang,
         YNode = Y.Node,
-        UITools = CKEDITOR.plugins.UITools,
+
+        ToolbarAddItems,
 
     ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetAutohide], {
         initializer: function () {
@@ -47,7 +48,7 @@ YUI.add('toolbar-add', function (Y) {
         },
 
         showAtPoint: function(x, y) {
-            var addContentWrapperNode,
+            var addContentBtnNode,
                 gutter;
 
             this._hideButtonsContainer();
@@ -56,15 +57,15 @@ YUI.add('toolbar-add', function (Y) {
                 this.show();
             }
 
-            addContentWrapperNode = this._addContentWrapper.getDOMNode();
+            addContentBtnNode = this._addContentBtnContainer.getDOMNode();
 
             gutter = this.get('gutter');
 
-            this.set('xy', [x - addContentWrapperNode.offsetWidth - gutter.left, y - gutter.top - addContentWrapperNode.offsetHeight/2]);
+            this.set('xy', [x - addContentBtnNode.offsetWidth - gutter.left, y - gutter.top - addContentBtnNode.offsetHeight/2]);
         },
 
-        _alignButtonsContainer: function() {
-            this._buttonsOverlay.align(this._addContentWrapper,
+        _alignButtonsOverlay: function() {
+            this._buttonsOverlay.align(this._addContentBtnContainer,
                 [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]);
         },
 
@@ -121,19 +122,21 @@ YUI.add('toolbar-add', function (Y) {
 
             this._addButton = addButton;
 
-            this._addContentWrapper = this.get('contentBox').one('.add-content-wrapper');
+            this._addContentBtnContainer = this.get('boundingBox').one('.alloy-editor-toolbar-buttons');
         },
 
         _renderButtonsOverlay: function() {
             var buttonsContainer;
 
-            buttonsContainer = YNode.create(this.TPL_BUTTON_CONTAINER);
+            buttonsContainer = YNode.create(this.TPL_BUTTONS_CONTAINER);
 
-            this._buttonsOverlay = new Y.Overlay({
-                srcNode: buttonsContainer,
+            this._buttonsOverlay = new ToolbarAddItems({
+                render: true,
                 visible: false,
                 zIndex: 1
-            }).render();
+            });
+
+            this._buttonsOverlay.get('contentBox').appendChild(buttonsContainer);
 
             this._buttonsContainer = buttonsContainer;
         },
@@ -141,18 +144,22 @@ YUI.add('toolbar-add', function (Y) {
         _showButtonsContainer: function() {
             this._buttonsOverlay.show();
 
-            this._alignButtonsContainer();
+            this._alignButtonsOverlay();
         },
 
+        BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add"></div>',
+
+        CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
+
         TPL_ADD:
-            '<div class="add-content-wrapper">' +
-              '<button type="button" class="btn-add">{content}</button>' +
+            '<div class="alloy-editor-toolbar-buttons">' +
+              '<button type="button" class="alloy-editor-button btn-add">{content}</button>' +
             '</div>',
 
         TPL_ADD_CONTENT: '<i class="alloy-editor-icon-add"></i>',
 
-        TPL_BUTTON_CONTAINER:
-          '<div class="btn-group-vertical yui3-toolbaradd-buttons"></div>'
+        TPL_BUTTONS_CONTAINER:
+            '<div class="alloy-editor-toolbar-buttons btn-group-vertical"></div>'
     }, {
         ATTRS: {
             buttons: {
@@ -176,6 +183,16 @@ YUI.add('toolbar-add', function (Y) {
     });
 
     Y.ToolbarAdd = ToolbarAdd;
+
+
+    // Create another class which will serve as container for the buttons.
+    ToolbarAddItems = Y.Base.create('toolbaradditems', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetAutohide], {
+        BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add-items"></div>',
+
+        CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>'
+    }, {
+
+    });
 },'0.1', {
-    requires: ['widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
+    requires: ['widget-base', 'widget-position', 'widget-position-align', 'widget-autohide', 'toolbar-base']
 });

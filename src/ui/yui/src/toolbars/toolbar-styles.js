@@ -10,13 +10,9 @@ YUI.add('toolbar-styles', function (Y) {
                 buttonsContainer,
                 contentBox;
 
-            buttonsContainer = YNode.create(instance.TPL_BUTTON_CONTAINER);
-
-            this.get('boundingBox').addClass('arrow-box');
+            buttonsContainer = YNode.create(instance.TPL_BUTTONS_CONTAINER);
 
             contentBox = this.get('contentBox');
-
-            contentBox.addClass('btn-toolbar');
 
             contentBox.appendChild(buttonsContainer);
 
@@ -30,10 +26,10 @@ YUI.add('toolbar-styles', function (Y) {
             boundingBox = this.get('boundingBox');
 
             if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                boundingBox.replaceClass('arrow-box-bottom', 'arrow-box-top');
+                boundingBox.replaceClass('alloy-editor-arrow-box-bottom', 'alloy-editor-arrow-box-top');
             }
             else {
-                boundingBox.replaceClass('arrow-box-top', 'arrow-box-bottom');
+                boundingBox.replaceClass('alloy-editor-arrow-box-top', 'alloy-editor-arrow-box-bottom');
             }
 
             if (!this.get('visible')) {
@@ -169,7 +165,11 @@ YUI.add('toolbar-styles', function (Y) {
             }
         },
 
-        TPL_BUTTON_CONTAINER: '<div class="btn-group toolbar-styles"></div>'
+        BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-styles alloy-editor-arrow-box"></div>',
+
+        CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
+
+        TPL_BUTTONS_CONTAINER: '<div class="btn-group alloy-editor-toolbar-buttons"></div>'
     }, {
         ATTRS: {
             buttons: {

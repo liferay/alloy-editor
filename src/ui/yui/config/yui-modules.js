@@ -66,7 +66,7 @@
 
     'toolbar-add': {
         path: 'toolbars/toolbar-add.js',
-        requires: ['overlay', 'node-screen', 'widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
+        requires: ['widget-base', 'widget-position', 'widget-position-align', 'widget-autohide', 'toolbar-base']
     },
 
     'toolbar-styles': {
