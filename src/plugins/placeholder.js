@@ -8,21 +8,22 @@
                 editor.on('blur', this._onBlur, this);
             },
 
-            _addPlaceholder: function(editor) {
-                var editorNode;
-
-                editorNode = new CKEDITOR.dom.element(editor.element.$);
-
-                editorNode.setHtml('');
-
-                editorNode.addClass(editor.config.placeholderClass);
-            },
-
             _onBlur: function(event) {
-                var editor = event.editor;
+                var editor,
+                    editorNode;
+
+                editor = event.editor;
 
                 if (editor.getData() === '') {
-                    this._addPlaceholder(editor);
+                    editorNode = new CKEDITOR.dom.element(editor.element.$);
+
+                    // Despite getData() returns empty string, the content still may have
+                    // content - an empty paragrapgh. This prevents :empty selector in
+                    // placeholder's CSS and placeholder does not appear.
+                    // For that reason we will intentionally remove any content from editorNode.
+                    editorNode.setHtml('');
+
+                    editorNode.addClass(editor.config.placeholderClass);
                 }
             }
         }
