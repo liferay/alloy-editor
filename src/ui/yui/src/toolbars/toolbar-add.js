@@ -152,7 +152,7 @@ YUI.add('toolbar-add', function (Y) {
         CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
 
         TPL_ADD:
-            '<div class="alloy-editor-toolbar-buttons">' +
+            '<div class="alloy-editor-toolbar-buttons btn-group">' +
               '<button type="button" class="alloy-editor-button btn-add">{content}</button>' +
             '</div>',
 
