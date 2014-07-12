@@ -1,6 +1,6 @@
 @import "compass/css3";
 
-.yui3-toolbarstyles {
+.alloy-editor-toolbar-styles {
     .link-wrapper {
         input {
             border: none;
@@ -27,7 +27,7 @@
     }
 }
 
-.yui3-linktooltip {
+.alloy-editor-tooltip-link {
     @include border-radius(5px);
     background-color: #f5f5f5;
     border: 1px solid #999;

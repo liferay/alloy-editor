@@ -1,16 +1,16 @@
 /* line 5, ../../sass/skin/alloy-editor-skin.scss */
-.yui3-toolbarstyles .link-wrapper input {
+.alloy-editor-toolbar-styles .link-wrapper input {
   border: none;
 }
 /* line 9, ../../sass/skin/alloy-editor-skin.scss */
-.yui3-toolbarstyles .link-wrapper input[type="text"]:focus {
+.alloy-editor-toolbar-styles .link-wrapper input[type="text"]:focus {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
   border-color: white;
 }
 /* line 14, ../../sass/skin/alloy-editor-skin.scss */
-.yui3-toolbarstyles .link-wrapper .close-link {
+.alloy-editor-toolbar-styles .link-wrapper .close-link {
   -webkit-border-radius: 0 5px 5px 0;
   -moz-border-radius: 0 5px 5px 0;
   -ms-border-radius: 0 5px 5px 0;
@@ -18,18 +18,18 @@
   border-radius: 0 5px 5px 0;
 }
 /* line 18, ../../sass/skin/alloy-editor-skin.scss */
-.yui3-toolbarstyles .link-wrapper .input-container {
+.alloy-editor-toolbar-styles .link-wrapper .input-container {
   background-color: white;
   border-right: none;
   border: 1px #cccccc solid;
 }
 /* line 24, ../../sass/skin/alloy-editor-skin.scss */
-.yui3-toolbarstyles .link-wrapper .input-close-container {
+.alloy-editor-toolbar-styles .link-wrapper .input-close-container {
   background-color: #d9d9d9;
 }
 
 /* line 30, ../../sass/skin/alloy-editor-skin.scss */
-.yui3-linktooltip {
+.alloy-editor-tooltip-link {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -39,7 +39,7 @@
   border: 1px solid #999;
 }
 /* line 36, ../../sass/skin/alloy-editor-skin.scss */
-.yui3-linktooltip .link-container .link-preview {
+.alloy-editor-tooltip-link .link-container .link-preview {
   color: #0088cc;
 }
 

@@ -80,7 +80,7 @@ YUI.add('toolbar-add', function (Y) {
         },
 
         _hideButtonsContainer: function() {
-            this._buttonsOverlay.hide();
+            // this._buttonsOverlay.hide();
         },
 
         _onEditorInteraction: function(event) {
@@ -159,7 +159,7 @@ YUI.add('toolbar-add', function (Y) {
         TPL_ADD_CONTENT: '<i class="alloy-editor-icon-add"></i>',
 
         TPL_BUTTONS_CONTAINER:
-            '<div class="alloy-editor-toolbar-buttons btn-group-vertical"></div>'
+            '<div class="alloy-editor-toolbar-buttons btn-group btn-group-vertical"></div>'
     }, {
         ATTRS: {
             buttons: {

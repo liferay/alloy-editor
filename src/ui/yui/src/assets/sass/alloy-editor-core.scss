@@ -36,7 +36,13 @@
     }
 }
 
-.yui3-linktooltip {
+.alloy-editor-toolbar-add-items {
+    .btn-group-vertical {
+        margin-left: 5px;
+    }
+}
+
+.alloy-editor-tooltip-link {
     .link-container {
         .icon-link-container {
             margin: 0 5px 0 5px;
