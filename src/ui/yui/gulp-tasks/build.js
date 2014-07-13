@@ -2,7 +2,6 @@
 
 var argv = require('yargs').argv,
     gulp = require('gulp'),
-    gulpif = require('gulp-if'),
     gulpIgnore = require('gulp-ignore'),
     minifyCSS = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
