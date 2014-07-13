@@ -1,6 +1,8 @@
 'use strict';
 
-var gulp = require('gulp'),
+var argv = require('yargs').argv,
+    gulp = require('gulp'),
+    gulpif = require('gulp-if'),
     gulpIgnore = require('gulp-ignore'),
     minifyCSS = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
@@ -33,7 +35,7 @@ gulp.task('minimize-js', function() {
         .pipe(gulp.dest(distFolder));
 });
 
-gulp.task('create-zip', function() {
+gulp.task('create-zip', [(argv['prevent-minimize'] ? '' : 'minimize')], function() {
     var pjson;
 
     pjson = require(path.join(ROOT, '..', '..', '..', 'package.json'));
@@ -46,5 +48,5 @@ gulp.task('create-zip', function() {
 gulp.task('minimize', ['minimize-css', 'minimize-js']);
 
 gulp.task('release', function(callback) {
-    runSequence('build', 'clean-joined-files', 'minimize', 'create-zip', callback);
+    runSequence('build', 'clean-joined-files', 'create-zip', callback);
 });
