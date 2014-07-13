@@ -24,14 +24,15 @@ If you want to have a zip file, execute ```` gulp release ````
 
 ## How to embed it in my own page?
 
-1. Add Boostrap 3 and Alloy Editor's CSS to the page.
+<ol>
+<li>Add Boostrap 3 and Alloy Editor's CSS to the page.</li>
 
 ````html
 <link href="bootstrap.css" rel="stylesheet">
 <link href="alloy-editor/assets/alloy-editor.css" rel="stylesheet">
 ````
 
-2. Add YUI3 or AlloyUI seed file to the page
+<li> Add YUI3 or AlloyUI seed file to the page</li>
 
 ````html
 <script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
@@ -43,14 +44,14 @@ or
 <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
 ````
 
-3. Add CKEditor's JavaScript file and Alloy Editor JavaSript:
+<li> Add CKEditor's JavaScript file and Alloy Editor JavaSript:</li>
 
 ````html
 <script src="alloy-editor/ckeditor/ckeditor.js"></script>
 <script src="alloy-editor/all.js"></script>
 ````
 
-4. Add Alloy Editor's JavaScript:
+<li> Add Alloy Editor's JavaScript:</li>
 
 ```javascript
 var editor = CKEDITOR.inline('editable');
