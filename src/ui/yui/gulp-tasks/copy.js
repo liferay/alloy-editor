@@ -1,3 +1,5 @@
+'use strict';
+
 var argv = require('yargs').argv,
     concat = require('gulp-concat'),
 	gulp = require('gulp'),

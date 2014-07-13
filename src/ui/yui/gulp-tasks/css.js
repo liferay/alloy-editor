@@ -1,3 +1,5 @@
+'use strict';
+
 var concat = require('gulp-concat'),
     compass = require('gulp-compass'),
     gulp = require('gulp'),
