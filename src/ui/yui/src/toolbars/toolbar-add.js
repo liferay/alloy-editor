@@ -80,7 +80,7 @@ YUI.add('toolbar-add', function (Y) {
         },
 
         _hideButtonsContainer: function() {
-            // this._buttonsOverlay.hide();
+            this._buttonsOverlay.hide();
         },
 
         _onEditorInteraction: function(event) {
