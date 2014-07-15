@@ -43,10 +43,10 @@ YUI.add('button-a', function (Y) {
             iconLinkNode = this._button.get('boundingBox').one('i');
 
             if (this._button.get('pressed')) {
-                iconLinkNode.replaceClass('icon-link', 'icon-unlink');
+                iconLinkNode.replaceClass('alloy-editor-icon-link', 'alloy-editor-icon-unlink');
             }
             else {
-                iconLinkNode.replaceClass('icon-unlink', 'icon-link');
+                iconLinkNode.replaceClass('alloy-editor-icon-unlink', 'alloy-editor-icon-link');
             }
         },
 

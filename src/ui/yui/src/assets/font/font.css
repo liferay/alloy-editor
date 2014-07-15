@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'alloyeditor';
-	src:url('fonts/alloyeditor.eot?os2poq');
-	src:url('fonts/alloyeditor.eot?#iefixos2poq') format('embedded-opentype'),
-		url('fonts/alloyeditor.woff?os2poq') format('woff'),
-		url('fonts/alloyeditor.ttf?os2poq') format('truetype'),
-		url('fonts/alloyeditor.svg?os2poq#alloyeditor') format('svg');
+	src:url('fonts/alloyeditor.eot?ovioco');
+	src:url('fonts/alloyeditor.eot?#iefixovioco') format('embedded-opentype'),
+		url('fonts/alloyeditor.woff?ovioco') format('woff'),
+		url('fonts/alloyeditor.ttf?ovioco') format('truetype'),
+		url('fonts/alloyeditor.svg?ovioco#alloyeditor') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,11 +23,8 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.alloy-editor-icon-h1:before {
-	content: "\e606";
-}
-.alloy-editor-icon-h2:before {
-	content: "\e607";
+.alloy-editor-icon-unlink:before {
+	content: "\f127";
 }
 .alloy-editor-icon-font:before {
 	content: "\f031";
@@ -64,6 +61,12 @@
 }
 .alloy-editor-icon-code:before {
 	content: "\f121";
+}
+.alloy-editor-icon-h1:before {
+	content: "\e606";
+}
+.alloy-editor-icon-h2:before {
+	content: "\e607";
 }
 .alloy-editor-icon-remove:before {
 	content: "\e600";
