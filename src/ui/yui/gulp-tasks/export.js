@@ -1,7 +1,6 @@
 'use strict';
 
-var argv = require('yargs').argv,
-    fs = require('fs'),
+var fs = require('fs'),
     gulp = require('gulp'),
     path = require('path'),
     rename = require('gulp-rename'),
@@ -12,7 +11,7 @@ var argv = require('yargs').argv,
 gulp.task('export-env', function() {
     var yuiModules = fs.readFileSync(path.join(ROOT, 'config', 'yui-modules.js'));
 
-    return gulp.src(path.join(ROOT, 'config', (argv.env || 'default') + '.template'))
+    return gulp.src(path.join(ROOT, 'config', 'yui-config.template'))
         .pipe(template({
             modules: yuiModules
             }))

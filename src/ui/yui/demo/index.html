@@ -82,51 +82,23 @@
         </div>
 
         <script>
-            CKEDITOR.disableAutoInline = true;
-        </script>
+            YUI().use('alloy-editor', function(Y) {
+                var editor = new Y.AlloyEditor({
+                    srcNode: '#editable'
+                });
 
-        <script>
-            var editor = CKEDITOR.inline('editable');
+                var editor2 = new Y.AlloyEditor({
+                    srcNode: '#headline',
+                    toolbars: {}
+                });
 
-            editor.config.allowedContent = true;
-
-            editor.config.toolbars = {
-                add: ['image', 'code'],
-                image: ['left', 'right'],
-                styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
-            };
-
-            editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
-            editor.config.extraPlugins = 'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader';
-            editor.config.placeholderClass = 'alloy-editor-placeholder';
-            editor.config.title = false;
-        </script>
-
-        <script>
-            var editor = CKEDITOR.inline('headline');
-
-            editor.config.allowedContent = true;
-
-            editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
-            editor.config.extraPlugins = 'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader';
-            editor.config.placeholderClass = 'alloy-editor-placeholder';
-            editor.config.title = false;
-        </script>
-
-
-        <script>
-            var editor = CKEDITOR.inline('description');
-
-            editor.config.allowedContent = true;
-
-            editor.config.toolbars = {
-                add: ['image', 'code']
-            };
-
-            editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
-            editor.config.extraPlugins = 'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader';
-            editor.config.placeholderClass = 'alloy-editor-placeholder';
-            editor.config.title = false;
+                var editor3 = new Y.AlloyEditor({
+                    srcNode: '#description',
+                    toolbars: {
+                        add: ['image', 'code']
+                    }
+                });
+            });
         </script>
 
         <div id="footer">
