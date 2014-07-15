@@ -1,41 +1,28 @@
 ;(function() {
     'use strict';
 
-    /**
-     * Add Debounce plugin to CKEditor
-     */
+    CKEDITOR.tools.debounce = function(callback, timeout, context, args) {
+        var callFn,
+            debounceHandle;
 
-    CKEDITOR.plugins.add(
-        'debounce',
-        {
-            init: function(editor) {
-                CKEDITOR.tools.debounce = this.debounce;
-            },
+        callFn = function() {
+            var callContext,
+                calArgs;
 
-            debounce: function(callback, timeout, context, args) {
-                var callFn,
-                    debounceHandle;
+            callContext = context || this;
+            calArgs = args || arguments;
 
-                callFn = function() {
-                    var callContext,
-                        calArgs;
+            clearTimeout(debounceHandle);
 
-                    callContext = context || this;
-                    calArgs = args || arguments;
+            debounceHandle = setTimeout(function() {
+                callback.apply(callContext, calArgs);
+            }, timeout);
+        };
 
-                    clearTimeout(debounceHandle);
+        callFn.cancel = function() {
+            clearTimeout(debounceHandle);
+        };
 
-                    debounceHandle = setTimeout(function() {
-                        callback.apply(callContext, calArgs);
-                    }, timeout);
-                };
-
-                callFn.cancel = function() {
-                    clearTimeout(debounceHandle);
-                };
-
-                return callFn;
-            }
-        }
-    );
+        return callFn;
+    };
 }());

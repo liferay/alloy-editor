@@ -28,14 +28,17 @@ gulp.task('join-js', function() {
     var editorSRC = path.join(ROOT, '..', '..', '..', 'src');
 
     return gulp.src([
-        path.join(editorSRC, 'core', '/**/*.js'),
+        path.join(editorSRC, 'core', 'debounce.js'),
+        path.join(editorSRC, 'core', 'link.js'),
+        path.join(editorSRC, 'core', 'selection-region.js'),
+        path.join(editorSRC, 'core', 'tools.js'),
+        path.join(editorSRC, 'core', 'uicore.js'),
         path.join(editorSRC, 'plugins', '/**/*.js'),
         path.join(ROOT, 'tmp', 'yui-config.js'),
-        path.join(ROOT, 'src', 'core', '/**/*.js'),
         path.join(ROOT, 'src', 'plugins', '/**/*.js')
     ])
     .pipe(gulp.dest(path.join(ROOT, 'tmp', 'plugins')))
-    .pipe(concat('all.js'))
+    .pipe(concat('core.js'))
     .pipe(gulp.dest(path.join(ROOT, 'tmp')));
 });
 

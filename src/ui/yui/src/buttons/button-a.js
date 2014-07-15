@@ -3,9 +3,12 @@ YUI.add('button-a', function (Y) {
 
     var Lang = Y.Lang,
         YNode = Y.Node,
-        Link = CKEDITOR.tools.Link,
 
     A = Y.Base.create('a', Y.Plugin.Base, [Y.ButtonBase], {
+        initializer: function() {
+            this._ckLink = new CKEDITOR.Link(this.get('host').get('editor'));
+        },
+
         renderUI: function() {
             this._renderButtonUI();
 
@@ -124,16 +127,16 @@ YUI.add('button-a', function (Y) {
 
                 linkInput.focus();
 
-                Link.create('/', {
+                this._ckLink.create('/', {
                     'data-cke-default-link': true
                 });
 
-                this._defaultLink = instance._link = Link.getFromSelection();
+                this._defaultLink = instance._link = this._ckLink.getFromSelection();
 
                 this._attachHideHandler();
             }
             else {
-                Link.remove();
+                this._ckLink.remove();
             }
         },
 
@@ -146,12 +149,12 @@ YUI.add('button-a', function (Y) {
             editor = this.get('host').get('editor');
 
             if (href) {
-                Link.update(href, this._link);
+                this._ckLink.update(href, this._link);
 
                 this._link.removeAttribute('data-cke-default-link');
             }
             else {
-                Link.remove(this._link);
+                this._ckLink.remove(this._link);
             }
 
             this._linkInput.set('value', '');
@@ -196,7 +199,7 @@ YUI.add('button-a', function (Y) {
                 // if we are, open the host in link mode
                 editor = this.get('host').get('editor');
 
-                link = Link.getFromSelection();
+                link = this._ckLink.getFromSelection();
 
                 if (link) {
                     this._switchToLinkMode(link);
@@ -302,7 +305,7 @@ YUI.add('button-a', function (Y) {
 
             editor = this.get('host').get('editor');
 
-            link = link || Link.getFromSelection();
+            link = link || this._ckLink.getFromSelection();
 
             this._clearInput.show();
             this._closeLink.disable();

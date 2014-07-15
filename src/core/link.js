@@ -97,12 +97,5 @@
         }
     };
 
-    CKEDITOR.plugins.add(
-        'linktools',
-        {
-            init: function(editor) {
-                CKEDITOR.tools.Link = new Link(editor);
-            }
-        }
-    );
+    CKEDITOR.Link = Link;
 }());
