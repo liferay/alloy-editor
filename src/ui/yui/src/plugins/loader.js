@@ -16,6 +16,10 @@
 	                modules,
 	                function(Y) {
 	                	instance._createToolbars(Y, editor);
+
+	                    editor.fire('toolbarsReady', {
+	                        toolbars: editor.config.toolbars
+	                    });
 	                }
 	            );
         	},
