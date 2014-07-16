@@ -44,44 +44,64 @@ or
 <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
 ````
 
-<li> Add CKEditor's JavaScript file and Alloy Editor JavaSript:</li>
+<li> Add AlloyEditor file to the page: </li>
+
+There are **a few ways** to include the editor on the page. The simplest one is to add the whole editor with all UI on the page, like this:
 
 ````html
-<script src="alloy-editor/ckeditor/ckeditor.js"></script>
-<script src="alloy-editor/all.js"></script>
+<script src="alloy-editor/alloy-editor-all.js"></script>
 ````
 
-<li> Add Alloy Editor's JavaScript:</li>
+If you don't want to load the whole UI, but to let the editor do that for you depending on the toolbar configuration you choose, then you can add only the core part, joined with CKEditor:
+
+````html
+<script>
+    var CKEDITOR_BASEPATH = '/alloy-editor/';
+</script>
+
+<script src="alloy-editor/alloy-editor.js"></script>
+````
+
+Change the value of CKEDITOR_BASEPATH according to the place where you plan to deploy AlloyEditor.
+
+The third way to add it on the page is to separate CKEditor's code from those of AlloyEditor, like this:
+
+````html
+<script src="alloy-editor/ckeditor.js"></script>
+<script src="alloy-editor/alloy-editor-core.js"></script>
+````
+
+Please note that in this case there is **no need** to specify CKEDITOR_BASEPATH.
+
+<li> Create instances of AlloyEditor and specify the configuration:</li>
 
 ```javascript
-var editor = CKEDITOR.inline('editable');
+var editor = new Y.AlloyEditor({
+    srcNode: '#description',
+    toolbars: {
+        add: ['image', 'code'],
+        image: ['left', 'right'],
+        styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
+    }
+});
 
-editor.config.allowedContent = true;
-
-editor.config.toolbars = {
-    add: ['image', 'code'],
-    image: ['left', 'right'],
-    styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
-};
-
-editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
-editor.config.extraPlugins = 'debounce,linktools,uicore,selectionregion,dropimages,placeholder,linktooltip,uitools,uiloader';
-editor.config.placeholderClass = 'alloy-editor-placeholder';
-editor.config.title = false;
 ````
 
-In the above configuration, "editable" is the ID of the element, which will be made editable. You can fully reconfigure the toolbars using the configuration object. See below for more information.
+In the above configuration, "editable" is the ID of the element, which will be made editable. You can fully reconfigure the toolbars, or to remove them entirely. See below for more information.
 ````javascript
-editor.config.toolbars = {....}
+toolbars = {....}
+
 ````
 
 Aloy Editor comes with optimized version of CKEditor. Many plugins were removed. However, if you prefer the OOTB version, then you have to remove some of its plugins, like this:
 
 ````javascript
-editor.config.removePlugins = 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link';
+new Y.AlloyEditor({
+    removePlugins: 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link'
+});
 ````
 
-"extraPlugins" is a list with the default plugins from Alloy Editor. However, you can customize these. For example, if you don't want the plugin for adding images via D&D, then just remove "dropimages" from "extraPlugins" property above.
+"extraPlugins" config property is a list with the default plugins from Alloy Editor. However, you can customize these. For example, if you don't want the plugin for adding images via D&D, then just remove "dropimages" from "extraPlugins" property.
 
 ## What is wrong with the UI of CKEditor? Why do you think Alloy Editor provides better UI?
 
