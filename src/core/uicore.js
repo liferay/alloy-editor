@@ -9,7 +9,7 @@
 
                 handleUI = CKEDITOR.tools.debounce(
                     function(event) {
-                        if (event.type !== 'keyup' || event.charCode !== 27 || editor.config.allowEsc) {
+                        if (event.name !== 'keyup' || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
                             editor.fire('editorInteraction', {
                                 nativeEvent: event.data.$,
                                 selectionData: editor.getSelectionData()
