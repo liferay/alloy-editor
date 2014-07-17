@@ -29,8 +29,6 @@
                     i,
                     toolbarsConfig;
 
-                editor.config.toolbarsInstances = {};
-
                 defaultConfig = {
                     editor: editor,
                     render: true,
