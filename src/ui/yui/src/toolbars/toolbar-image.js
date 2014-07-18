@@ -4,7 +4,7 @@ YUI.add('toolbar-image', function (Y) {
     var Lang = Y.Lang,
         YNode = Y.Node,
 
-    ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.ToolbarBase], {
+    ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide, Y.ToolbarBase], {
         renderUI: function() {
             var instance = this,
                 buttonsContainer,
