@@ -3,6 +3,10 @@
 
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
+    if (CKEDITOR.plugins.get('uiloader')) {
+        return;
+    }
+
     CKEDITOR.plugins.add(
         'uiloader',
         {

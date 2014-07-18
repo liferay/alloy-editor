@@ -1,7 +1,7 @@
 ;(function() {
     'use strict';
 
-    CKEDITOR.tools.debounce = function(callback, timeout, context, args) {
+    CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function(callback, timeout, context, args) {
         var callFn,
             debounceHandle;
 

@@ -1,7 +1,7 @@
 ;(function() {
     'use strict';
 
-    CKEDITOR.tools.merge = function() {
+    CKEDITOR.tools.merge = CKEDITOR.tools.merge || function() {
         var i = 0,
             key,
             len = arguments.length,

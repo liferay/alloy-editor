@@ -97,5 +97,5 @@
         }
     };
 
-    CKEDITOR.Link = Link;
+    CKEDITOR.Link = CKEDITOR.Link || Link;
 }());

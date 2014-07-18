@@ -1,6 +1,10 @@
 ;(function() {
     'use strict';
 
+    if (CKEDITOR.plugins.get('uicore')) {
+        return;
+    }
+
     CKEDITOR.plugins.add(
         'uicore',
         {

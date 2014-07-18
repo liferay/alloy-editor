@@ -1,6 +1,10 @@
 ;(function() {
     'use strict';
 
+    if (CKEDITOR.plugins.get('linktooltip')) {
+        return;
+    }
+
     YUI.add('linktooltip', function (Y) {
         var Lang = Y.Lang,
 

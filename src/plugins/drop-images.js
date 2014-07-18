@@ -3,6 +3,10 @@
 
     var isIE = CKEDITOR.env.ie;
 
+    if (CKEDITOR.plugins.get('dropimages')) {
+        return;
+    }
+
     CKEDITOR.plugins.add(
         'dropimages',
         {

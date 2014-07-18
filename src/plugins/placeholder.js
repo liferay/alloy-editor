@@ -1,6 +1,10 @@
 ;(function() {
     'use strict';
 
+    if (CKEDITOR.plugins.get('placeholder')) {
+        return;
+    }
+
     CKEDITOR.plugins.add(
         'placeholder',
         {
