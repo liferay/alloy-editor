@@ -25,6 +25,13 @@ YUI.add('toolbar-styles', function (Y) {
 
             boundingBox = this.get('boundingBox');
 
+            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                boundingBox.replaceClass('alloy-editor-arrow-box-bottom', 'alloy-editor-arrow-box-top');
+            }
+            else {
+                boundingBox.replaceClass('alloy-editor-arrow-box-top', 'alloy-editor-arrow-box-bottom');
+            }
+
             if (!this.get('visible')) {
                 this.show();
             }
@@ -158,54 +165,6 @@ YUI.add('toolbar-styles', function (Y) {
             }
         },
 
-        _moveToPoint: function(xy, direction) {
-            var boundingBox,
-                boundingBoxNode,
-                height,
-                transition,
-                y;
-
-            boundingBox = this.get('boundingBox');
-
-            boundingBox.setStyle('visibility', 'hidden');
-
-            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                boundingBox.replaceClass('alloy-editor-arrow-box-bottom', 'alloy-editor-arrow-box-top');
-            }
-            else {
-                boundingBox.replaceClass('alloy-editor-arrow-box-top', 'alloy-editor-arrow-box-bottom');
-            }
-
-            transition = this.get('transition');
-
-            if (transition) {
-                boundingBoxNode = boundingBox.getDOMNode();
-
-                height = boundingBoxNode.offsetHeight;
-
-                if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    y = xy[1] - height;
-                }
-                else {
-                    y = xy[1] + height;
-                }
-
-                this.set('xy', [xy[0], y]);
-
-                transition.left = xy[0] + 'px';
-                transition.top = xy[1] + 'px';
-
-                boundingBox.setStyle('visibility', 'visible');
-
-                boundingBox.transition(transition);
-            }
-            else {
-                boundingBox.setStyle('visibility', 'visible');
-
-                this.set('xy', xy);
-            }
-        },
-
         BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-styles alloy-editor-arrow-box"></div>',
 
         CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
@@ -229,18 +188,11 @@ YUI.add('toolbar-styles', function (Y) {
                     left: 0,
                     top: 10
                 }
-            },
-
-            transition: {
-                value: {
-                    easing: 'ease-out',
-                    duration: 0.15
-                }
             }
 		}
 	});
 
     Y.ToolbarStyles = ToolbarStyles;
 },'', {
-    requires: ['toolbar-base', 'transition', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+    requires: ['toolbar-base', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
 });

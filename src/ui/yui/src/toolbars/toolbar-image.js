@@ -36,7 +36,7 @@ YUI.add('toolbar-image', function (Y) {
 
             xy = this._getToolbarXYPoint(left, top, direction);
 
-            this.set('xy', xy);
+            this._moveToPoint(xy, direction);
         },
 
         _getToolbarXYPoint: function(left, top) {
@@ -94,7 +94,7 @@ YUI.add('toolbar-image', function (Y) {
             }
         },
 
-        BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-image"></div>',
+        BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-image alloy-editor-arrow-box alloy-editor-arrow-box-bottom"></div>',
 
         CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
 

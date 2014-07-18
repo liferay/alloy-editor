@@ -45,7 +45,48 @@ YUI.add('toolbar-base', function (Y) {
 
         _getButtonInstanceName: function(buttonName) {
             return 'Button' + buttonName.substring(0, 1).toUpperCase() + buttonName.substring(1);
-        }
+        },
+
+        _moveToPoint: function(xy, direction) {
+            var boundingBox,
+                boundingBoxNode,
+                height,
+                transition,
+                y;
+
+            boundingBox = this.get('boundingBox');
+
+            boundingBox.setStyle('visibility', 'hidden');
+
+            transition = this.get('transition');
+
+            if (transition) {
+                boundingBoxNode = boundingBox.getDOMNode();
+
+                height = boundingBoxNode.offsetHeight;
+
+                if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                    y = xy[1] - height;
+                }
+                else {
+                    y = xy[1] + height;
+                }
+
+                this.set('xy', [xy[0], y]);
+
+                transition.left = xy[0] + 'px';
+                transition.top = xy[1] + 'px';
+
+                boundingBox.setStyle('visibility', 'visible');
+
+                boundingBox.transition(transition);
+            }
+            else {
+                boundingBox.setStyle('visibility', 'visible');
+
+                this.set('xy', xy);
+            }
+        },
     };
 
     ToolbarBase.ATTRS = {
@@ -56,6 +97,13 @@ YUI.add('toolbar-base', function (Y) {
 
         editor: {
             validator: Lang.isObject
+        },
+
+        transition: {
+            value: {
+                easing: 'ease-out',
+                duration: 0.1
+            }
         }
     };
 

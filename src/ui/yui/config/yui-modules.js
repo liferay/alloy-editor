@@ -79,7 +79,7 @@
     'toolbar-base': {
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-base.js',
-        requires: ['plugin', 'node-base']
+        requires: ['plugin', 'node-base', 'transition']
     },
 
     'toolbar-add': {
@@ -91,7 +91,7 @@
     'toolbar-styles': {
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-styles.js',
-        requires: ['toolbar-base', 'transition', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+        requires: ['toolbar-base', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
     },
 
     'toolbar-image': {
