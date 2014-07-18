@@ -167,6 +167,11 @@ YUI.add('toolbar-add', function (Y) {
                 value: ['image', 'code']
             },
 
+            constrain: {
+                validator: Lang.isBoolean,
+                value: true
+            },
+
             gutter: {
                 validator: Lang.isObject,
                 value: {
@@ -194,5 +199,5 @@ YUI.add('toolbar-add', function (Y) {
 
     });
 },'0.1', {
-    requires: ['widget-base', 'widget-position', 'widget-position-align', 'widget-autohide', 'toolbar-base']
+    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'widget-autohide', 'toolbar-base']
 });

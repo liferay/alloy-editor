@@ -106,6 +106,11 @@ YUI.add('toolbar-image', function (Y) {
                 value: ['left', 'right']
             },
 
+            constrain: {
+                validator: Lang.isBoolean,
+                value: true
+            },
+
             gutter: {
                 validator: Lang.isObject,
                 value: {
@@ -118,5 +123,5 @@ YUI.add('toolbar-image', function (Y) {
 
     Y.ToolbarImage = ToolbarImage;
 },'', {
-    requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-autohide', 'toolbar-base']
+    requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base']
 });
