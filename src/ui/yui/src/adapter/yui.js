@@ -29,9 +29,13 @@ YUI.add('alloy-editor', function (Y) {
         destructor: function() {
             var inst;
 
-            inst = CKEDITOR.instances[this.get('srcNode')];
+            inst = CKEDITOR.instances[this.get('srcNode').get('id')];
 
             if (inst) {
+                Y.Object.each(inst.config.toolbars, function(value) {
+                    value.destroy();
+                });
+
                 inst.destroy();
             }
         },
@@ -96,6 +100,5 @@ YUI.add('alloy-editor', function (Y) {
 
     Y.AlloyEditor = AlloyEditor;
 },'', {
-    requires: ['base-build', 'node-base'
-    ]
+    requires: ['base-build', 'node-base']
 });
