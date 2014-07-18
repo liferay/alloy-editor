@@ -38,7 +38,7 @@ YUI.add('toolbar-styles', function (Y) {
 
             xy = this._getToolbarXYPoint(left, top, direction);
 
-            this._moveToPoint(xy, direction);
+            this._moveToPoint(this.getConstrainedXY(xy), direction);
         },
 
         _calculatePosition: function(selectionData, pos) {

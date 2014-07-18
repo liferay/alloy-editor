@@ -36,7 +36,7 @@ YUI.add('toolbar-image', function (Y) {
 
             xy = this._getToolbarXYPoint(left, top, direction);
 
-            this._moveToPoint(xy, direction);
+            this._moveToPoint(this.getConstrainedXY(xy), direction);
         },
 
         _getToolbarXYPoint: function(left, top) {

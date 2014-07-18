@@ -6,7 +6,7 @@ YUI.add('toolbar-add', function (Y) {
 
         ToolbarAddItems,
 
-    ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetAutohide], {
+    ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
         initializer: function () {
             var editorNode;
 
@@ -61,7 +61,7 @@ YUI.add('toolbar-add', function (Y) {
 
             gutter = this.get('gutter');
 
-            this.set('xy', [x - addContentBtnNode.offsetWidth - gutter.left, y - gutter.top - addContentBtnNode.offsetHeight/2]);
+            this.set('xy', this.getConstrainedXY([x - addContentBtnNode.offsetWidth - gutter.left, y - gutter.top - addContentBtnNode.offsetHeight/2]));
         },
 
         _alignButtonsOverlay: function() {
