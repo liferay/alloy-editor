@@ -1,5 +1,10 @@
 {
-    "project": {},
+    "project": {
+        "name": "AlloyEditor",
+        "description": "An WYSIWYG built on top of CKEditor, with completely rewritten UI",
+        "version": "0.1.0",
+        "url": "https://github.com/ipeychev/alloy-editor/"
+    },
     "files": {
         "src/core/debounce.js": {
             "name": "src/core/debounce.js",
