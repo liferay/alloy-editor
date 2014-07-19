@@ -1,8 +1,11 @@
-;(function() {
+(function() {
     'use strict';
 
     /**
-     * Link utilities
+     * Link class utility. Provides methods for create, delete and update links.
+     *
+     * @class CKEDITOR.Link
+     * @constructor
      */
 
     function Link(editor) {
@@ -12,6 +15,13 @@
     Link.prototype = {
         constructor: Link,
 
+        /**
+         * Create a link with given URI as href.
+         *
+         * @method create
+         * @param {String} URI The URI of the link.
+         * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
+         */
         create: function(URI, attrs) {
             var linkAttrs,
                 range,
@@ -44,6 +54,12 @@
             range.select();
         },
 
+        /**
+         * Retrieves a link from the current selection.
+         *
+         * @method getFromSelection
+         * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
+         */
         getFromSelection: function() {
             var range,
                 selection,
@@ -68,13 +84,18 @@
             return null;
         },
 
+        /**
+         * Removes a link from the editor.
+         *
+         * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+         * @method remove
+         */
         remove: function(link) {
             var style;
 
             if (link) {
                 link.remove(this._editor);
-            }
-            else {
+            } else {
                 style = link || new CKEDITOR.style({
                     alwaysRemoveElement: 1,
                     element: 'a',
@@ -85,6 +106,13 @@
             }
         },
 
+        /**
+         * Updates the href of an already existing link.
+         *
+         * @param {String} The new URI of the link.
+         * @param {CKEDITOR.dom.element} link The link element which href should be removed.
+         * @method update
+         */
         update: function(URI, link) {
             var style;
 
