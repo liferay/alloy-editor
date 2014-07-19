@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/plugins/placeholder.js - AlloyEditor</title>
+    <title>src/ui/yui/src/buttons/button-underline.js - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -96,76 +96,50 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/plugins/placeholder.js</h1>
+                        <h1 class="file-heading">File: src/ui/yui/src/buttons/button-underline.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-(function() {
+YUI.add(&#x27;button-u&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
-    if (CKEDITOR.plugins.get(&#x27;placeholder&#x27;)) {
-        return;
-    }
+    var Lang = Y.Lang;
 
     /**
-     * CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
-     * is no content to the editor, there will be hint to the user.
+     * Button Underline. A standard AlloyUI/YUI class which allows to apply underline style to
+     * editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.
      *
-     * @class CKEDITOR.plugins.placeholder
+     * @class Y.ButtonU
+     * @constructor
      */
+    var Underline = Y.Base.create(&#x27;underline&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-underline&quot;&gt;&lt;/i&gt;&#x27;
+    }, {
+        NAME: &#x27;underline&#x27;,
 
-    /**
-     * Specifies the placeholder class which have to be aded to editor when editor is not focuced.
-     *
-     * @attribute placeholderClass
-     * @default alloy-editor-placeholder
-     * @type String
-     */
+        NS: &#x27;underline&#x27;,
 
-    CKEDITOR.plugins.add(
-        &#x27;placeholder&#x27;, {
+        ATTRS: {
 
             /**
-             * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers a &#x27;blur&#x27; listener to CKEditor&#x27;s blur event.
+             * @description Specifies the style, which should be applied to the current selection in editor.
              *
-             * @method init
-             * @param {Object} editor The current editor instance
+             * @attribute element
+             * @default &#x27;u&#x27;
+             * @type String
              */
-            init: function(editor) {
-                editor.on(&#x27;blur&#x27;, this._onBlur, this);
-            },
-
-            /**
-             * Handles the fired blur event. The function removes any data from CKEditor, because an
-             * empty paragraph may still exist despite for the user the editor looks empty and
-             * adds a class, specified via &quot;placeholderClass&quot; config attribute.
-             *
-             * @method init
-             * @protected
-             * @param {CKEDITOR.dom.event} editor Blur event, fired from CKEditor
-             */
-            _onBlur: function(event) {
-                var editor,
-                    editorNode;
-
-                editor = event.editor;
-
-                if (editor.getData() === &#x27;&#x27;) {
-                    editorNode = new CKEDITOR.dom.element(editor.element.$);
-
-                    // Despite getData() returns empty string, the content still may have
-                    // content - an empty paragrapgh. This prevents :empty selector in
-                    // placeholder&#x27;s CSS and placeholder does not appear.
-                    // For that reason we will intentionally remove any content from editorNode.
-                    editorNode.setHtml(&#x27;&#x27;);
-
-                    editorNode.addClass(editor.config.placeholderClass);
-                }
+            element: {
+                validator: Lang.isString,
+                value: &#x27;u&#x27;
             }
         }
-    );
-}());
+    });
+
+    Y.ButtonU = Underline;
+
+}, &#x27;&#x27;, {
+    requires: [&#x27;button-base&#x27;]
+});
     </pre>
 </div>
 

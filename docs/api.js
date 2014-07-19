@@ -7,7 +7,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "CKEDITOR.plugins.placeholder",
         "CKEDITOR.plugins.selectionregion",
         "CKEDITOR.plugins.uicore",
-        "CKEDITOR.tools"
+        "CKEDITOR.tools",
+        "Y.ButtonU"
     ],
     "modules": [],
     "allModules": []

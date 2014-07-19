@@ -75,6 +75,15 @@
             },
             "fors": {},
             "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-underline.js": {
+            "name": "src/ui/yui/src/buttons/button-underline.js",
+            "modules": {},
+            "classes": {
+                "Y.ButtonU": 1
+            },
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {},
@@ -164,6 +173,19 @@
             "file": "src/ui/yui/src/adapter/yui.js",
             "line": 9,
             "description": "YUI3 Adapter for CKEditor. This class provides YUI3 like way of creating instances of\nCKEditor and passing configuration paramters to it.",
+            "is_constructor": 1
+        },
+        "Y.ButtonU": {
+            "name": "Y.ButtonU",
+            "shortname": "Y.ButtonU",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-underline.js",
+            "line": 6,
+            "description": "Button Underline. A standard AlloyUI/YUI class which allows to apply underline style to\neditor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.",
             "is_constructor": 1
         }
     },
@@ -779,6 +801,16 @@
             "name": "toolbars",
             "type": "Object",
             "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-underline.js",
+            "line": 22,
+            "description": "Specifies the style, which should be applied to the current selection in editor.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'u'",
+            "type": "String",
+            "class": "Y.ButtonU"
         }
     ],
     "warnings": []
