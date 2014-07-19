@@ -1,20 +1,47 @@
-;(function() {
+(function() {
     'use strict';
 
-     if (CKEDITOR.plugins.get('selectionregion')) {
+    if (CKEDITOR.plugins.get('selectionregion')) {
         return;
     }
 
     CKEDITOR.SELECTION_TOP_TO_BOTTOM = 0;
     CKEDITOR.SELECTION_BOTTOM_TO_TOP = 1;
 
+    /**
+     * SelectionRegion utility class which provides metadata about the selection. The metadata may be the start and end
+     * rectangles, caret region, etc. **This class is not intended to be used standalone. Its functions will
+     * be merged into each editor instance, so the developer may use them directly, without making
+     * an instance of this class**. This class will be registered as CKEditor plugin with the name "selectionregion".
+     *
+     * @class SelectionRegion
+     * @constructor
+     */
     function SelectionRegion() {}
 
     SelectionRegion.prototype = {
+        constructor: SelectionRegion,
+
+        /**
+         * Creates selection from two points in page coordinates.
+         *
+         * @method createSelectionFromPoint
+         * @param {Number} x X point in page coordinates.
+         * @param {Number} y Y point in page coordinates.
+         */
         createSelectionFromPoint: function(x, y) {
             this.createSelectionFromRange(x, y, x, y);
         },
 
+        /**
+         * Creates selection from range. A range contains of two points in page coordinates.
+         *
+         * @method createSelectionFromRange
+         * @param {Number} startX X coordinate of the first point.
+         * @param {Number} startY Y coordinate of the first point.
+         * @param {Number} endX X coordinate of the second point.
+         * @param {Number} endY Y coordinate of the second point.
+         */
         createSelectionFromRange: function(startX, startY, endX, endY) {
             var editor,
                 end,
@@ -40,8 +67,7 @@
                 endOffset = end.offset;
 
                 range = this.createRange();
-            }
-            else if (typeof document.caretRangeFromPoint == 'function') {
+            } else if (typeof document.caretRangeFromPoint == 'function') {
                 start = document.caretRangeFromPoint(startX, startY);
                 end = document.caretRangeFromPoint(endX, endY);
 
@@ -59,8 +85,7 @@
                 range.setEnd(new CKEDITOR.dom.node(endContainer), endOffset);
 
                 this.getSelection().selectRanges([range]);
-            }
-            else if (typeof document.body.createTextRange == 'function') {
+            } else if (typeof document.body.createTextRange == 'function') {
                 selection = this.getSelection();
 
                 selection.unlock();
@@ -78,6 +103,16 @@
             }
         },
 
+        /**
+         * Returns the region of the current position of the caret.
+         *
+         * @method getCaretRegion
+         * @return {Object} Returns object with the following properties:
+         * - bottom
+         * - left
+         * - right
+         * - top
+         */
         getCaretRegion: function() {
             var bookmarkNodeEl,
                 bookmarks,
@@ -110,6 +145,15 @@
             };
         },
 
+        /**
+         * Returns data for the current selection.
+         *
+         * @method getSelectionData
+         * @return {Object} Returns object with the following data:
+         * - element - The currently selected element, if any
+         * - text - The selected text
+         * - region - The data, returned from {{#crossLink "SelectionRegion/getSelectionRegion:method"}}{{/crossLink}}
+         */
         getSelectionData: function() {
             var result,
                 selection;
@@ -126,6 +170,18 @@
             return result;
         },
 
+        /**
+         * Returns the region of the current selection.
+         *
+         * @method getSelectionRegion
+         * @return {Object} Returns object which is being returned from
+         * {{#crossLink "SelectionRegion/getClientRectsRegion:method"}}{{/crossLink}} with three more properties:
+         * - direction - the direction of the selection. Can be one of these:
+         *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
+         *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
+         * - height - The height of the selection region
+         * - width - The width of the selection region
+         */
         getSelectionRegion: function() {
             var direction,
                 region;
@@ -142,6 +198,12 @@
             return region;
         },
 
+        /**
+         * Returns true if the current selection is empty, false otherwise.
+         *
+         * @method isSelectionEmpty
+         * @return {Boolean} Returns true if the current selection is empty, false otherwise.
+         */
         isSelectionEmpty: function() {
             var ranges,
                 selection = this.getSelection();
@@ -150,6 +212,31 @@
                 ((ranges = selection.getRanges()) && ranges.length === 1 && ranges[0].collapsed);
         },
 
+        /**
+         * Returns object with data about the [client rectangles](https://developer.mozilla.org/en-US/docs/Web/API/Element.getClientRects) of the selection,
+         * normalized across browses. All offsets below are in page coordinates.
+         *
+         * @method getClientRectsRegion
+         * @return {Object} Returns object with the following data:
+         * - bottom - bottom offset of all client rectangles
+         * - left - left offset of all client rectangles
+         * - right - right offset of all client rectangles
+         * - top - top offset of all client rectangles
+         * - startRect - An Object, which contains the following information:
+         *     + bottom - bottom offset
+         *     + height - the height of the rectangle
+         *     + left - left offset of the selection
+         *     + right - right offset of the selection
+         *     + top - top offset of the selection
+         *     + width - the width of the rectangle
+         * - endRect - An Object, which contains the following information:
+         *     + bottom - bottom offset
+         *     + height - the height of the rectangle
+         *     + left - left offset of the selection
+         *     + right - right offset of the selection
+         *     + top - top offset of the selection
+         *     + width - the width of the rectangle
+         */
         getClientRectsRegion: function() {
             var bottom,
                 clientRects,
@@ -176,8 +263,7 @@
             if (nativeSelection.createRange) {
                 range = nativeSelection.createRange();
                 clientRects = range.getClientRects();
-            }
-            else {
+            } else {
                 rangeCount = nativeSelection.rangeCount;
                 clientRects = (nativeSelection.rangeCount > 0) ? nativeSelection.getRangeAt(0).getClientRects() : [];
             }
@@ -189,8 +275,7 @@
 
             if (clientRects.length === 0) {
                 region = this.getCaretRegion();
-            }
-            else {
+            } else {
                 for (i = 0, length = clientRects.length; i < length; i++) {
                     item = clientRects[i];
 
@@ -249,14 +334,19 @@
             return region;
         },
 
+        /**
+         * Retrieves document scrollX and scrollY in an array.
+         *
+         * @method _getDocScrollXY
+         * @protected
+         * @return {Array} Returns an array with two items - document scrollX and scrollY in page coordinates.
+         */
         _getDocScrollXY: function() {
             var docBody,
                 docDefaultView,
                 docElement,
                 pageXOffset,
                 pageYOffset;
-
-
 
             docBody = document.body;
             docDefaultView = document.defaultView;
@@ -271,6 +361,16 @@
             ];
         },
 
+        /**
+         * Retrieves the direction of the selection. The direction is from top to bottom or from bottom to top.
+         * For IE < 9 it is not possible so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.
+         *
+         * @method _getSelectionDirection
+         * @protected
+         * @return {Number} Returns a number which represents selection direction. It might be one of these:
+         * - CKEDITOR.SELECTION_TOP_TO_BOTTOM;
+         * - CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+         */
         _getSelectionDirection: function() {
             var anchorNode,
                 direction,
@@ -296,8 +396,7 @@
     };
 
     CKEDITOR.plugins.add(
-        'selectionregion',
-        {
+        'selectionregion', {
             init: function(editor) {
                 var attr,
                     hasOwnProperty;
