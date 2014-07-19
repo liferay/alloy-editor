@@ -1,13 +1,35 @@
-;(function() {
+(function() {
     'use strict';
 
     if (CKEDITOR.plugins.get('uicore')) {
         return;
     }
 
+    /**
+     * UICore class which will handle user interactions with the editor. These interactions
+     * might be triggered via mouse, keyboard or touch devices. The class fill fire an event via
+     * CKEditor's event system - "editorInteraction". The UI may listen to this event and
+     * execute some actions - for example to show/hide toolbars.
+     *
+     * By default if user presses the Esc key, 'editorInteraction' event won't be fired. However, this behaviour can be changed
+     * by setting "allowEsc" config property in editor's configuration to true.
+     *
+     * @class CKEDITOR.plugins.uicore
+     */
+
+    /**
+     * Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,
+     * or touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout
+     * is 50ms. This value can be overwritten via uicore.delay property of editor's configuration, like:
+     * editor.config.uicore.delay = 100
+     *
+     * @event editorInteraction
+     * @param {Object} data An object which contains the following properties:
+     * - nativeEvent - The event as received from CKEditor
+     * - selectionData - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
+     */
     CKEDITOR.plugins.add(
-        'uicore',
-        {
+        'uicore', {
             init: function(editor) {
                 var handleUI;
 
