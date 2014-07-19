@@ -11,10 +11,10 @@
     /**
      * SelectionRegion utility class which provides metadata about the selection. The metadata may be the start and end
      * rectangles, caret region, etc. **This class is not intended to be used standalone. Its functions will
-     * be merged into each editor instance, so the developer may use them directly, without making
-     * an instance of this class**. This class will be registered as CKEditor plugin with the name "selectionregion".
+     * be merged into each editor instance, so the developer may use them directly via the editor, without making
+     * an instance of this class**.
      *
-     * @class SelectionRegion
+     * @class CKEDITOR.plugins.selectionregion
      * @constructor
      */
     function SelectionRegion() {}
@@ -152,7 +152,7 @@
          * @return {Object} Returns object with the following data:
          * - element - The currently selected element, if any
          * - text - The selected text
-         * - region - The data, returned from {{#crossLink "SelectionRegion/getSelectionRegion:method"}}{{/crossLink}}
+         * - region - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionRegion:method"}}{{/crossLink}}
          */
         getSelectionData: function() {
             var result,
@@ -175,7 +175,7 @@
          *
          * @method getSelectionRegion
          * @return {Object} Returns object which is being returned from
-         * {{#crossLink "SelectionRegion/getClientRectsRegion:method"}}{{/crossLink}} with three more properties:
+         * {{#crossLink "CKEDITOR.plugins.selectionregion/getClientRectsRegion:method"}}{{/crossLink}} with three more properties:
          * - direction - the direction of the selection. Can be one of these:
          *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
          *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
