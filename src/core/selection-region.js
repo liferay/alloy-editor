@@ -363,7 +363,7 @@
 
         /**
          * Retrieves the direction of the selection. The direction is from top to bottom or from bottom to top.
-         * For IE < 9 it is not possible so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.
+         * For IE < 9 it is not possible, so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.
          *
          * @method _getSelectionDirection
          * @protected

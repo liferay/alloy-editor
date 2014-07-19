@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * CKEDITOR.tools class utility. Provides an additional debounce method to CKEDITOR.tools.
+     * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
      *
      * @class CKEDITOR.tools
      */
