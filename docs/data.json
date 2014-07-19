@@ -1,0 +1,780 @@
+{
+    "project": {},
+    "files": {
+        "src/core/debounce.js": {
+            "name": "src/core/debounce.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/core/link.js": {
+            "name": "src/core/link.js",
+            "modules": {},
+            "classes": {
+                "CKEDITOR.Link": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/core/selection-region.js": {
+            "name": "src/core/selection-region.js",
+            "modules": {},
+            "classes": {
+                "CKEDITOR.plugins.selectionregion": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/core/tools.js": {
+            "name": "src/core/tools.js",
+            "modules": {},
+            "classes": {
+                "CKEDITOR.tools": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/core/uicore.js": {
+            "name": "src/core/uicore.js",
+            "modules": {},
+            "classes": {
+                "CKEDITOR.plugins.uicore": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/plugins/drop-images.js": {
+            "name": "src/plugins/drop-images.js",
+            "modules": {},
+            "classes": {
+                "CKEDITOR.plugins.dropimages": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/plugins/placeholder.js": {
+            "name": "src/plugins/placeholder.js",
+            "modules": {},
+            "classes": {
+                "CKEDITOR.plugins.placeholder": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/adapter/yui.js": {
+            "name": "src/ui/yui/src/adapter/yui.js",
+            "modules": {},
+            "classes": {
+                "AlloyEditor": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "CKEDITOR.tools": {
+            "name": "CKEDITOR.tools",
+            "shortname": "CKEDITOR.tools",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/core/tools.js",
+            "line": 4,
+            "description": "CKEDITOR.tools class utility which adds additional methods to those of CKEditor."
+        },
+        "CKEDITOR.Link": {
+            "name": "CKEDITOR.Link",
+            "shortname": "CKEDITOR.Link",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/core/link.js",
+            "line": 4,
+            "description": "Link class utility. Provides methods for create, delete and update links.",
+            "is_constructor": 1
+        },
+        "CKEDITOR.plugins.selectionregion": {
+            "name": "CKEDITOR.plugins.selectionregion",
+            "shortname": "CKEDITOR.plugins.selectionregion",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/core/selection-region.js",
+            "line": 11,
+            "description": "SelectionRegion utility class which provides metadata about the selection. The metadata may be the start and end\nrectangles, caret region, etc. **This class is not intended to be used standalone. Its functions will\nbe merged into each editor instance, so the developer may use them directly via the editor, without making\nan instance of this class**.",
+            "is_constructor": 1
+        },
+        "CKEDITOR.plugins.uicore": {
+            "name": "CKEDITOR.plugins.uicore",
+            "shortname": "CKEDITOR.plugins.uicore",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/core/uicore.js",
+            "line": 8,
+            "description": "UICore class which will handle user interactions with the editor. These interactions\nmight be triggered via mouse, keyboard or touch devices. The class fill fire an event via\nCKEditor's event system - \"editorInteraction\". The UI may listen to this event and\nexecute some actions - for example to show/hide toolbars.\n\nBy default if user presses the Esc key, 'editorInteraction' event won't be fired. However, this behaviour can be changed\nby setting {{#crossLink \"CKEDITOR.plugins.uicore/allowEsc:attribute\"}}{{/crossLink}} config property in editor's configuration to true."
+        },
+        "CKEDITOR.plugins.dropimages": {
+            "name": "CKEDITOR.plugins.dropimages",
+            "shortname": "CKEDITOR.plugins.dropimages",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/plugins/drop-images.js",
+            "line": 10,
+            "description": "CKEditor plugin which allows Drag&Drop of images directly into the edit area. The image will be encoded\nas Data URI."
+        },
+        "CKEDITOR.plugins.placeholder": {
+            "name": "CKEDITOR.plugins.placeholder",
+            "shortname": "CKEDITOR.plugins.placeholder",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/plugins/placeholder.js",
+            "line": 8,
+            "description": "CKEditor plugin which allows adding a placeholder to the editor. In this case, if there\nis no content to the editor, there will be hint to the user."
+        },
+        "AlloyEditor": {
+            "name": "AlloyEditor",
+            "shortname": "AlloyEditor",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 9,
+            "description": "YUI3 Adapter for CKEditor. This class provides YUI3 like way of creating instances of\nCKEditor and passing configuration paramters to it.",
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/core/debounce.js",
+            "line": 10,
+            "description": "Debounce util function. If a function execution is expensive, it might be debounced. This means\nthat it will be executed after some amount of time after its last call. For example, if we attach a\na function on scroll event, it might be called hundreds times per second. In this case it may be\ndebounced with, let's say 100ms. The real execution of this function will happen 100ms after last\nscroll event.",
+            "itemtype": "method",
+            "name": "debounce",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "The callback which has to be called after given timeout.",
+                    "type": "Function"
+                },
+                {
+                    "name": "timeout",
+                    "description": "Timeout in milliseconds after which the callback will be called.",
+                    "type": "Number"
+                },
+                {
+                    "name": "context",
+                    "description": "The context in which the callback will be called. This argument is optional.",
+                    "type": "Object"
+                },
+                {
+                    "name": "args",
+                    "description": "An array of arguments which the callback will receive.",
+                    "type": "Array"
+                }
+            ],
+            "class": "CKEDITOR.tools"
+        },
+        {
+            "file": "src/core/link.js",
+            "line": 18,
+            "description": "Create a link with given URI as href.",
+            "itemtype": "method",
+            "name": "create",
+            "params": [
+                {
+                    "name": "URI",
+                    "description": "The URI of the link.",
+                    "type": "String"
+                },
+                {
+                    "name": "attrs",
+                    "description": "A config object with link attributes. These might be arbitrary DOM attributes.",
+                    "type": "Object"
+                }
+            ],
+            "class": "CKEDITOR.Link"
+        },
+        {
+            "file": "src/core/link.js",
+            "line": 57,
+            "description": "Retrieves a link from the current selection.",
+            "itemtype": "method",
+            "name": "getFromSelection",
+            "return": {
+                "description": "The retrieved link or null if not found.",
+                "type": "CKEDITOR.dom.element"
+            },
+            "class": "CKEDITOR.Link"
+        },
+        {
+            "file": "src/core/link.js",
+            "line": 87,
+            "description": "Removes a link from the editor.",
+            "params": [
+                {
+                    "name": "link",
+                    "description": "The link element which link style should be removed.",
+                    "type": "CKEDITOR.dom.element"
+                }
+            ],
+            "itemtype": "method",
+            "name": "remove",
+            "class": "CKEDITOR.Link"
+        },
+        {
+            "file": "src/core/link.js",
+            "line": 109,
+            "description": "Updates the href of an already existing link.",
+            "params": [
+                {
+                    "name": "The",
+                    "description": "new URI of the link.",
+                    "type": "String"
+                },
+                {
+                    "name": "link",
+                    "description": "The link element which href should be removed.",
+                    "type": "CKEDITOR.dom.element"
+                }
+            ],
+            "itemtype": "method",
+            "name": "update",
+            "class": "CKEDITOR.Link"
+        },
+        {
+            "file": "src/core/selection-region.js",
+            "line": 25,
+            "description": "Creates selection from two points in page coordinates.",
+            "itemtype": "method",
+            "name": "createSelectionFromPoint",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "X point in page coordinates.",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "Y point in page coordinates.",
+                    "type": "Number"
+                }
+            ],
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
+            "file": "src/core/selection-region.js",
+            "line": 36,
+            "description": "Creates selection from range. A range contains of two points in page coordinates.",
+            "itemtype": "method",
+            "name": "createSelectionFromRange",
+            "params": [
+                {
+                    "name": "startX",
+                    "description": "X coordinate of the first point.",
+                    "type": "Number"
+                },
+                {
+                    "name": "startY",
+                    "description": "Y coordinate of the first point.",
+                    "type": "Number"
+                },
+                {
+                    "name": "endX",
+                    "description": "X coordinate of the second point.",
+                    "type": "Number"
+                },
+                {
+                    "name": "endY",
+                    "description": "Y coordinate of the second point.",
+                    "type": "Number"
+                }
+            ],
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
+            "file": "src/core/selection-region.js",
+            "line": 106,
+            "description": "Returns the region of the current position of the caret.",
+            "itemtype": "method",
+            "name": "getCaretRegion",
+            "return": {
+                "description": "Returns object with the following properties:\n- bottom\n- left\n- right\n- top",
+                "type": "Object"
+            },
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
+            "file": "src/core/selection-region.js",
+            "line": 148,
+            "description": "Returns data for the current selection.",
+            "itemtype": "method",
+            "name": "getSelectionData",
+            "return": {
+                "description": "Returns object with the following data:\n- element - The currently selected element, if any\n- text - The selected text\n- region - The data, returned from {{#crossLink \"CKEDITOR.plugins.selectionregion/getSelectionRegion:method\"}}{{/crossLink}}",
+                "type": "Object"
+            },
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
+            "file": "src/core/selection-region.js",
+            "line": 173,
+            "description": "Returns the region of the current selection.",
+            "itemtype": "method",
+            "name": "getSelectionRegion",
+            "return": {
+                "description": "Returns object which is being returned from\n{{#crossLink \"CKEDITOR.plugins.selectionregion/getClientRectsRegion:method\"}}{{/crossLink}} with three more properties:\n- direction - the direction of the selection. Can be one of these:\n  1. CKEDITOR.SELECTION_TOP_TO_BOTTOM\n  2. CKEDITOR.SELECTION_BOTTOM_TO_TOP\n- height - The height of the selection region\n- width - The width of the selection region",
+                "type": "Object"
+            },
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
+            "file": "src/core/selection-region.js",
+            "line": 201,
+            "description": "Returns true if the current selection is empty, false otherwise.",
+            "itemtype": "method",
+            "name": "isSelectionEmpty",
+            "return": {
+                "description": "Returns true if the current selection is empty, false otherwise.",
+                "type": "Boolean"
+            },
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
+            "file": "src/core/selection-region.js",
+            "line": 215,
+            "description": "Returns object with data about the [client rectangles](https://developer.mozilla.org/en-US/docs/Web/API/Element.getClientRects) of the selection,\nnormalized across browses. All offsets below are in page coordinates.",
+            "itemtype": "method",
+            "name": "getClientRectsRegion",
+            "return": {
+                "description": "Returns object with the following data:\n- bottom - bottom offset of all client rectangles\n- left - left offset of all client rectangles\n- right - right offset of all client rectangles\n- top - top offset of all client rectangles\n- startRect - An Object, which contains the following information:\n    + bottom - bottom offset\n    + height - the height of the rectangle\n    + left - left offset of the selection\n    + right - right offset of the selection\n    + top - top offset of the selection\n    + width - the width of the rectangle\n- endRect - An Object, which contains the following information:\n    + bottom - bottom offset\n    + height - the height of the rectangle\n    + left - left offset of the selection\n    + right - right offset of the selection\n    + top - top offset of the selection\n    + width - the width of the rectangle",
+                "type": "Object"
+            },
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
+            "file": "src/core/selection-region.js",
+            "line": 337,
+            "description": "Retrieves document scrollX and scrollY in an array.",
+            "itemtype": "method",
+            "name": "_getDocScrollXY",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "Returns an array with two items - document scrollX and scrollY in page coordinates.",
+                "type": "Array"
+            },
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
+            "file": "src/core/selection-region.js",
+            "line": 364,
+            "description": "Retrieves the direction of the selection. The direction is from top to bottom or from bottom to top.\nFor IE < 9 it is not possible, so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.",
+            "itemtype": "method",
+            "name": "_getSelectionDirection",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "Returns a number which represents selection direction. It might be one of these:\n- CKEDITOR.SELECTION_TOP_TO_BOTTOM;\n- CKEDITOR.SELECTION_BOTTOM_TO_TOP;",
+                "type": "Number"
+            },
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
+            "file": "src/core/tools.js",
+            "line": 10,
+            "description": "Returns a new object containing all of the properties of all the supplied\nobjects. The properties from later objects will overwrite those in earlier\nobjects.\n\nPassing in a single object will create a shallow copy of it.",
+            "itemtype": "method",
+            "name": "merge",
+            "params": [
+                {
+                    "name": "objects",
+                    "description": "One or more objects to merge.",
+                    "type": "Object",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "A new merged object.",
+                "type": "Object"
+            },
+            "class": "CKEDITOR.tools"
+        },
+        {
+            "file": "src/core/uicore.js",
+            "line": 20,
+            "description": "Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,\nor touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout\nis 50ms. This value can be overwritten via {{#crossLink \"CKEDITOR.plugins.uicore/delay:attribute\"}}{{/crossLink}} property of editor's configuration, like:\neditor.config.uicore.delay = 100",
+            "itemtype": "event",
+            "name": "editorInteraction",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "An object which contains the following properties:\n- nativeEvent - The event as received from CKEditor\n- selectionData - The data, returned from {{#crossLink \"CKEDITOR.plugins.selectionregion/getSelectionData:method\"}}{{/crossLink}}",
+                    "type": "Object"
+                }
+            ],
+            "class": "CKEDITOR.plugins.uicore"
+        },
+        {
+            "file": "src/core/uicore.js",
+            "line": 32,
+            "description": "If set to true, the editor will still fire {{#crossLink \"CKEDITOR.plugins.uicore/editorInteraction:event\"}}{{/crossLink}} event,\nif user presses Esc key.",
+            "itemtype": "attribute",
+            "name": "allowEsc",
+            "default": "false",
+            "type": "Boolean",
+            "class": "CKEDITOR.plugins.uicore"
+        },
+        {
+            "file": "src/core/uicore.js",
+            "line": 41,
+            "description": "Specifies the default timeout after which the {{#crossLink \"CKEDITOR.plugins.uicore/editorInteraction:event\"}}{{/crossLink}} event\nwill be fired.",
+            "itemtype": "attribute",
+            "name": "delay",
+            "default": "50 (ms)",
+            "type": "Number",
+            "class": "CKEDITOR.plugins.uicore"
+        },
+        {
+            "file": "src/plugins/drop-images.js",
+            "line": 18,
+            "description": "Initialization of the plugin, part of CKEditor plugin lifecycle.\nThe function registers a 'dragenter', 'dragover' and 'drop' events on the editing area.",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "The current editor instance",
+                    "type": "Object"
+                }
+            ],
+            "class": "CKEDITOR.plugins.dropimages"
+        },
+        {
+            "file": "src/plugins/drop-images.js",
+            "line": 43,
+            "description": "Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further\nprocessing to {{#crossLink \"CKEDITOR.plugins.dropimages/_processFile:method\"}}{{/crossLink}}",
+            "itemtype": "method",
+            "name": "_handleFiles",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "files",
+                    "description": "Array of dropped files. Only the images from this list will be processed.",
+                    "type": "Array"
+                },
+                {
+                    "name": "editor",
+                    "description": "The current editor instance",
+                    "type": "Object"
+                }
+            ],
+            "class": "CKEDITOR.plugins.dropimages"
+        },
+        {
+            "file": "src/plugins/drop-images.js",
+            "line": 69,
+            "description": "Handles drag enter event. In case of IE, this function will prevent the event.",
+            "itemtype": "method",
+            "name": "_onDragEnter",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "dragenter event, as received natively from CKEditor",
+                    "type": "DOM event"
+                }
+            ],
+            "class": "CKEDITOR.plugins.dropimages"
+        },
+        {
+            "file": "src/plugins/drop-images.js",
+            "line": 82,
+            "description": "Handles drag over event. In case of IE, this function will prevent the event.",
+            "itemtype": "method",
+            "name": "_onDragOver",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "dragover event, as received natively from CKEditor",
+                    "type": "DOM event"
+                }
+            ],
+            "class": "CKEDITOR.plugins.dropimages"
+        },
+        {
+            "file": "src/plugins/drop-images.js",
+            "line": 95,
+            "description": "Handles drag drop event. The function will create selection from the current points and\nwill send a list of files to be processed to\n{{#crossLink \"CKEDITOR.plugins.dropimages/_handleFiles:method\"}}{{/crossLink}}",
+            "itemtype": "method",
+            "name": "_onDragDrop",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "dragdrop event, as received natively from CKEditor",
+                    "type": "CKEDITOR.dom.event"
+                }
+            ],
+            "class": "CKEDITOR.plugins.dropimages"
+        },
+        {
+            "file": "src/plugins/drop-images.js",
+            "line": 119,
+            "description": "Prevents a native event.",
+            "itemtype": "method",
+            "name": "_preventEvent",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The event to be prevented.",
+                    "type": "DOM event"
+                }
+            ],
+            "class": "CKEDITOR.plugins.dropimages"
+        },
+        {
+            "file": "src/plugins/drop-images.js",
+            "line": 133,
+            "description": "Processes an image file. The function creates an element and sets a source\na Data URI, then fires an event 'imagedrop' via CKEditor event system.",
+            "itemtype": "method",
+            "name": "_preventEvent",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The event to be prevented.",
+                    "type": "DOM event"
+                }
+            ],
+            "class": "CKEDITOR.plugins.dropimages"
+        },
+        {
+            "file": "src/plugins/drop-images.js",
+            "line": 160,
+            "description": "Fired when an image is being added to the editor successfully.",
+            "itemtype": "event",
+            "name": "imagedrop",
+            "params": [
+                {
+                    "name": "el",
+                    "description": "The created image with src, created as Data URI",
+                    "type": "CKEDITOR.dom.element"
+                }
+            ],
+            "class": "CKEDITOR.plugins.dropimages"
+        },
+        {
+            "file": "src/plugins/placeholder.js",
+            "line": 15,
+            "description": "Specifies the placeholder class which have to be aded to editor when editor is not focuced.",
+            "itemtype": "attribute",
+            "name": "placeholderClass",
+            "default": "alloy-editor-placeholder",
+            "type": "String",
+            "class": "CKEDITOR.plugins.placeholder"
+        },
+        {
+            "file": "src/plugins/placeholder.js",
+            "line": 26,
+            "description": "Initialization of the plugin, part of CKEditor plugin lifecycle.\nThe function registers a 'blur' listener to CKEditor's blur event.",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "The current editor instance",
+                    "type": "Object"
+                }
+            ],
+            "class": "CKEDITOR.plugins.placeholder"
+        },
+        {
+            "file": "src/plugins/placeholder.js",
+            "line": 37,
+            "description": "Handles the fired blur event. The function removes any data from CKEditor, because an\nempty paragraph may still exist despite for the user the editor looks empty and\nadds a class, specified via \"placeholderClass\" config attribute.",
+            "itemtype": "method",
+            "name": "init",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "Blur event, fired from CKEditor",
+                    "type": "CKEDITOR.dom.event"
+                }
+            ],
+            "class": "CKEDITOR.plugins.placeholder"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 18,
+            "description": "Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor\ninstace, passing it the provided configuration attributes.",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Configuration object literal for the editor",
+                    "type": "Object"
+                }
+            ],
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 45,
+            "description": "Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor\ninstance and destroys all created toolbars.",
+            "itemtype": "method",
+            "name": "destructor",
+            "access": "protected",
+            "tagname": "",
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 66,
+            "description": "Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.",
+            "itemtype": "method",
+            "name": "_getNativeEditor",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "The current instance of CKEditor.",
+                "type": "Object"
+            },
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 77,
+            "description": "Validates the allowed content attribute. Look [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the supported values.",
+            "itemtype": "method",
+            "name": "_validateAllowedContent",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "True if the value was accepted, false otherwise.",
+                "type": "Boolean"
+            },
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 88,
+            "description": "Validates toolbars attribute. May be empty string or null, which means the current instance of AlloyEdtor shouldn't\nhave any toolbars, or Object, which properties are the desired toolbars.",
+            "itemtype": "method",
+            "name": "_validateToolbars",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "True if the value was accepted, false otherwise.",
+                "type": "Boolean"
+            },
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 101,
+            "description": "Configures the allowed content for the current instance of AlloyEditor.\nLook on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)\nfor more information about the valid values.",
+            "itemtype": "attribute",
+            "name": "allowedContent",
+            "default": "true",
+            "writeonce": "",
+            "type": "{Boolean, String, Object}",
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 117,
+            "description": "Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.",
+            "itemtype": "attribute",
+            "name": "nativeEditor",
+            "readonly": "",
+            "type": "{Object}",
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 129,
+            "description": "Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to\nmake AlloyEditor to work properly.",
+            "itemtype": "attribute",
+            "name": "extraPlugins",
+            "default": "'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader'",
+            "writeonce": "",
+            "type": "{String}",
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 144,
+            "description": "Specifies the class, which should be added by Placeholder plugin\n{{#crossLink \"CKEDITOR.plugins.placeholder}}{{/crossLink}}\nwhen editor is not focused.",
+            "itemtype": "attribute",
+            "name": "placeholderClass",
+            "default": "'alloy-editor-placeholder'",
+            "writeonce": "",
+            "type": "{String}",
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 160,
+            "description": "Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.\nThese plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor\ncomes with its own highly optimized copy of CKEditor (just customized via their official download page).\nThis version does not come with the unneeded plugins, so the value of this property won't be needed.\nHowever, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the plugins\nif you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them entirely\nfrom CKEditor. It just removes them from its current instance, in which you will use different UI - those of\nAlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same page!",
+            "itemtype": "attribute",
+            "name": "removePlugins",
+            "default": "'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link'",
+            "writeonce": "",
+            "type": "{String}",
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 181,
+            "description": "The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.",
+            "itemtype": "attribute",
+            "name": "srcNode",
+            "type": "String | Node",
+            "writeonce": "",
+            "class": "AlloyEditor"
+        },
+        {
+            "file": "src/ui/yui/src/adapter/yui.js",
+            "line": 193,
+            "description": "Specifies the Toolbars of the current editor instance. The value should be an object\nwith one or more properties. Each of these will represent a toolbar. The value of these properties\ncan be string or Object. If String, the value of the string should represent the buttons. If object,\none of these properties should be 'buttons', which will represent the buttons of this Toolbar and\nall the other properties will be different configuration parameters of the Toolbar. Example:\n<pre><code>\n    toolbars: {\n        table: { // this would be a toolbar configuration, which specifies both Toolbar attributes and its buttons\n            buttons: ['button1', button2],\n            width: 25\n        },\n        add: ['image', 'code'], // here we specify only the buttons of this toolbar and leave the other options unmodified.\n        image: ['left', 'right'],\n        styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']\n    }\n</pre></code>",
+            "default": "toolbars {\n        add: ['image', 'code'],\n        image: ['left', 'right'],\n        styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']\n    }",
+            "itemtype": "attribute",
+            "name": "toolbars",
+            "type": "Object",
+            "class": "AlloyEditor"
+        }
+    ],
+    "warnings": []
+}
