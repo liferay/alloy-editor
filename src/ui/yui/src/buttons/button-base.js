@@ -9,8 +9,46 @@ YUI.add('button-base', function(Y) {
     /**
      * The ButtonBase class provides common functionality for a button like
      * reacting on click event, rendering and updating the UI.
-     * A button implementation may be simple as changing the style of selection
-     * to bold, italic, underline, etc. or to be pretty
+     * A button implementation may be as simple as changing the style of selection
+     * to bold, italic, underline, etc. or to be very complex - for example, to change
+     * the UI of the host (toolbar). <br />
+     * ToolbarBase and ButtonBase will provide everything you need to implement whatever you need.
+     * Toolbars, which mix ToolbarBase extension will provide a container, where the button
+     * should render. This container is accessible via "buttonsContainer" attribute.
+     * If your button just changes the style of the selection, then everything you have to do
+     * in order to implement it is: <br />
+     * - extend Y.Plugin.Base and mix Y.ButtonBase extension
+     * - specify the element to which you want to style the selection. This should be done via
+     * "element" attribute. Here is the code: <br />
+     * <pre><code>
+     *    YUI.add('button-em', function (Y) {
+     *        'use strict';
+     *
+     *         var Lang = Y.Lang;
+     *
+     *         var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {
+     *             TPL_CONTENT: '&lt;i class=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/i&gt;'
+     *         }, {
+     *             NAME: 'em',
+     *
+     *             NS: 'em',
+     *
+     *             ATTRS: {
+     *                 element: {
+     *                     validator: Lang.isString,
+     *                     value: 'em'
+     *                 }
+     *             }
+     *         });
+     *
+     *         Y.ButtonEm = Em;
+     *
+     *     },'', {
+     *         requires: ['button-base']
+     *     });
+     * </code></pre>
+     *
+     * The code above creates a button, which will allow user to make selection italic.
      *
      * @class ButtonBase
      */
