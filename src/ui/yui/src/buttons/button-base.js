@@ -1,4 +1,4 @@
-YUI.add('button-base', function (Y) {
+YUI.add('button-base', function(Y) {
     'use strict';
 
     var Lang = Y.Lang,
@@ -6,7 +6,22 @@ YUI.add('button-base', function (Y) {
 
     function ButtonBase() {}
 
+    /**
+     * The ButtonBase class provides common functionality for a button like
+     * reacting on click event, rendering and updating the UI.
+     * A button implementation may be simple as changing the style of selection
+     * to bold, italic, underline, etc. or to be pretty
+     *
+     * @class ButtonBase
+     */
     ButtonBase.prototype = {
+        /**
+         * Initializer lifecycle implementation for the ButtonBase class.
+         *
+         * @method initializer
+         * @protected
+         * @param  config {Object} Configuration object literal for the editor
+         */
         initializer: function() {
             var element;
 
@@ -27,6 +42,13 @@ YUI.add('button-base', function (Y) {
             this._button.destroy();
         },
 
+        /**
+         * Renders the button UI on the host which is typically a toolbar. The protected
+         * {{#crossLink "Y.ButtonBase/_renderButtonUI:method"}}{{/crossLink}} will be called,
+         * so the buttons which mix this extension will be able to overwrite the default behaviour.
+         *
+         * @method renderUI
+         */
         renderUI: function() {
             this._renderButtonUI();
         },
@@ -59,8 +81,7 @@ YUI.add('button-base', function (Y) {
 
                 if (this._button.get('pressed')) {
                     editor.applyStyle(this._style);
-                }
-                else {
+                } else {
                     editor.removeStyle(this._style);
                 }
             }
@@ -72,6 +93,12 @@ YUI.add('button-base', function (Y) {
             });
         },
 
+        /**
+         *
+         * A Toolbar provides DOM Node where the buttons render. By default Toolbars,
+         * which extend ToolbarBase extension will provide and attribute, called "buttonsContainer".
+         * The value of this attribute is the container where button should render.
+         */
         _renderButtonUI: function() {
             var btnInst,
                 btnSrcNode,
@@ -112,6 +139,6 @@ YUI.add('button-base', function (Y) {
 
     Y.ButtonBase = ButtonBase;
 
-},'', {
+}, '', {
     requires: ['base-build', 'plugin', 'button']
 });
