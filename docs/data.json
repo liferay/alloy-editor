@@ -76,6 +76,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/ui/yui/src/buttons/button-base.js": {
+            "name": "src/ui/yui/src/buttons/button-base.js",
+            "modules": {},
+            "classes": {
+                "ButtonBase": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ui/yui/src/buttons/button-underline.js": {
             "name": "src/ui/yui/src/buttons/button-underline.js",
             "modules": {},
@@ -174,6 +183,18 @@
             "line": 9,
             "description": "YUI3 Adapter for CKEditor. This class provides YUI3 like way of creating instances of\nCKEditor and passing configuration paramters to it.",
             "is_constructor": 1
+        },
+        "ButtonBase": {
+            "name": "ButtonBase",
+            "shortname": "ButtonBase",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-base.js",
+            "line": 9,
+            "description": "The ButtonBase class provides common functionality for a button like\nreacting on click event, rendering and updating the UI.\nA button implementation may be as simple as changing the style of selection\nto bold, italic, underline, etc. or to be very complex - for example, to change\nthe UI of the host (toolbar). <br />\nToolbarBase and ButtonBase will provide everything you need to implement whatever you need.\nToolbars, which mix ToolbarBase extension will provide a container, where the button\nshould render. This container is accessible via \"buttonsContainer\" attribute.\nIf your button just changes the style of the selection, then everything you have to do\nin order to implement it is: <br />\n- extend Y.Plugin.Base and mix Y.ButtonBase extension\n- specify the element to which you want to style the selection. This should be done via\n\"element\" attribute. Here is the code: <br />\n<pre><code>\n   YUI.add('button-em', function (Y) {\n       'use strict';\n\n        var Lang = Y.Lang;\n\n        var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {\n            TPL_CONTENT: '&lt;i class=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/i&gt;'\n        }, {\n            NAME: 'em',\n\n            NS: 'em',\n\n            ATTRS: {\n                element: {\n                    validator: Lang.isString,\n                    value: 'em'\n                }\n            }\n        });\n\n        Y.ButtonEm = Em;\n\n    },'', {\n        requires: ['button-base']\n    });\n</code></pre>\n\nThe code above creates a button, which will allow user to make selection italic."
         },
         "Y.ButtonU": {
             "name": "Y.ButtonU",
@@ -803,6 +824,37 @@
             "class": "AlloyEditor"
         },
         {
+            "file": "src/ui/yui/src/buttons/button-base.js",
+            "line": 56,
+            "description": "Initializer lifecycle implementation for the ButtonBase class.",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Configuration object literal for the editor",
+                    "type": "Object"
+                }
+            ],
+            "class": "ButtonBase"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-base.js",
+            "line": 83,
+            "description": "Renders the button UI on the host which is typically a toolbar. The protected\n{{#crossLink \"Y.ButtonBase/_renderButtonUI:method\"}}{{/crossLink}} will be called,\nso the buttons which mix this extension will be able to overwrite the default behaviour.",
+            "itemtype": "method",
+            "name": "renderUI",
+            "class": "ButtonBase"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-base.js",
+            "line": 134,
+            "description": "A Toolbar provides DOM Node where the buttons render. By default Toolbars,\n which extend ToolbarBase extension will provide and attribute, called \"buttonsContainer\".\n The value of this attribute is the container where button should render.",
+            "class": "ButtonBase"
+        },
+        {
             "file": "src/ui/yui/src/buttons/button-underline.js",
             "line": 22,
             "description": "Specifies the style, which should be applied to the current selection in editor.",
@@ -813,5 +865,10 @@
             "class": "Y.ButtonU"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "Missing item type\nA Toolbar provides DOM Node where the buttons render. By default Toolbars,\n which extend ToolbarBase extension will provide and attribute, called \"buttonsContainer\".\n The value of this attribute is the container where button should render.",
+            "line": " src/ui/yui/src/buttons/button-base.js:134"
+        }
+    ]
 }

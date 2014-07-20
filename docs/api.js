@@ -2,6 +2,7 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "AlloyEditor",
+        "ButtonBase",
         "CKEDITOR.Link",
         "CKEDITOR.plugins.dropimages",
         "CKEDITOR.plugins.placeholder",

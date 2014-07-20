@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CKEDITOR.tools - AlloyEditor</title>
+    <title>ButtonBase - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -98,7 +98,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>CKEDITOR.tools Class</h1>
+                        <h1>ButtonBase Class</h1>
 <div class="box meta">
     
 
@@ -106,7 +106,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_core_tools.js.html#l4"><code>src&#x2F;core&#x2F;tools.js:4</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:9</code></a>
         </div>
     
 
@@ -118,7 +118,51 @@
 
 
 <div class="box intro">
-    <p>CKEDITOR.tools class utility which adds additional methods to those of CKEditor.</p>
+    <p>The ButtonBase class provides common functionality for a button like
+reacting on click event, rendering and updating the UI.
+A button implementation may be as simple as changing the style of selection
+to bold, italic, underline, etc. or to be very complex - for example, to change
+the UI of the host (toolbar). <br />
+ToolbarBase and ButtonBase will provide everything you need to implement whatever you need.
+Toolbars, which mix ToolbarBase extension will provide a container, where the button
+should render. This container is accessible via &quot;buttonsContainer&quot; attribute.
+If your button just changes the style of the selection, then everything you have to do
+in order to implement it is: <br /></p>
+<ul>
+<li>extend Y.Plugin.Base and mix Y.ButtonBase extension</li>
+<li><p>specify the element to which you want to style the selection. This should be done via
+&quot;element&quot; attribute. Here is the code: <br /></p>
+<pre class="code prettyprint"><code>
+ YUI.add('button-em', function (Y) {
+     'use strict';
+
+      var Lang = Y.Lang;
+
+      var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {
+          TPL_CONTENT: '&lt;i class=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/i&gt;'
+      }, {
+          NAME: 'em',
+
+          NS: 'em',
+
+          ATTRS: {
+              element: {
+                  validator: Lang.isString,
+                  value: 'em'
+              }
+          }
+      });
+
+      Y.ButtonEm = Em;
+
+  },'', {
+      requires: ['button-base']
+  });
+</code></pre>
+
+</li>
+</ul>
+<p>The code above creates a button, which will allow user to make selection italic.</p>
 
 </div>
 
@@ -146,15 +190,15 @@
 
                     <ul class="index-list methods">
                         
-                            <li class="index-item method">
-                                <a href="#method_debounce">debounce</a>
+                            <li class="index-item method protected">
+                                <a href="#method_initializer">initializer</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_merge">merge</a>
+                                <a href="#method_renderUI">renderUI</a>
 
                                 
                                 
@@ -176,8 +220,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_debounce" class="method item">
-    <h3 class="name"><code>debounce</code></h3>
+                    <div id="method_initializer" class="method item protected">
+    <h3 class="name"><code>initializer</code></h3>
 
     
         <div class="args">
@@ -185,25 +229,7 @@
             
                 <li class="arg">
                     
-                        <code>callback</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>timeout</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>context</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>args</code>
+                        <code>config</code>
                     
                 </li>
             
@@ -215,6 +241,8 @@
 
     
 
+    
+        <span class="flag protected">protected</span>
     
 
     
@@ -236,7 +264,7 @@
             
         
         
-        <a href="../files/src_core_debounce.js.html#l10"><code>src&#x2F;core&#x2F;debounce.js:10</code></a>
+        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l56"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:56</code></a>
         
         </p>
 
@@ -247,11 +275,7 @@
     </div>
 
     <div class="description">
-        <p>Debounce util function. If a function execution is expensive, it might be debounced. This means
-that it will be executed after some amount of time after its last call. For example, if we attach a
-a function on scroll event, it might be called hundreds times per second. In this case it may be
-debounced with, let&#39;s say 100ms. The real execution of this function will happen 100ms after last
-scroll event.</p>
+        <p>Initializer lifecycle implementation for the ButtonBase class.</p>
 
     </div>
 
@@ -263,62 +287,14 @@ scroll event.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The callback which has to be called after given timeout.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">timeout</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Timeout in milliseconds after which the callback will be called.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">context</code>
+                        <code class="param-name">config</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The context in which the callback will be called. This argument is optional.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">args</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>An array of arguments which the callback will receive.</p>
+                        <p>Configuration object literal for the editor</p>
 
                     </div>
 
@@ -335,27 +311,13 @@ scroll event.</p>
 </div>
 
                 
-                    <div id="method_merge" class="method item">
-    <h3 class="name"><code>merge</code></h3>
+                    <div id="method_renderUI" class="method item">
+    <h3 class="name"><code>renderUI</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>objects</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-        </span>
     
 
     
@@ -381,7 +343,7 @@ scroll event.</p>
             
         
         
-        <a href="../files/src_core_tools.js.html#l10"><code>src&#x2F;core&#x2F;tools.js:10</code></a>
+        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l83"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:83</code></a>
         
         </p>
 
@@ -392,55 +354,14 @@ scroll event.</p>
     </div>
 
     <div class="description">
-        <p>Returns a new object containing all of the properties of all the supplied
-objects. The properties from later objects will overwrite those in earlier
-objects.</p>
-<p>Passing in a single object will create a shallow copy of it.</p>
+        <p>Renders the button UI on the host which is typically a toolbar. The protected
+Y.ButtonBase/_renderButtonUI:method will be called,
+so the buttons which mix this extension will be able to overwrite the default behaviour.</p>
 
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">objects</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-                        <span class="flag multiple" title="This argument may occur one or more times.">multiple</span>
-                    
-
-                    <div class="param-description">
-                        <p>One or more objects to merge.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-                    
-                    <p>A new merged object.</p>
-
-                
-            </div>
-        </div>
     
 
     
