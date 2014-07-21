@@ -79,7 +79,9 @@
         "src/ui/yui/src/buttons/button-a.js": {
             "name": "src/ui/yui/src/buttons/button-a.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "ButtonA": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -87,7 +89,25 @@
             "name": "src/ui/yui/src/buttons/button-base.js",
             "modules": {},
             "classes": {
-                "Y.ButtonBase": 1
+                "ButtonBase": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-image.js": {
+            "name": "src/ui/yui/src/buttons/button-image.js",
+            "modules": {},
+            "classes": {
+                "ButtonImage": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-left.js": {
+            "name": "src/ui/yui/src/buttons/button-left.js",
+            "modules": {},
+            "classes": {
+                "ButtonLeft": 1
             },
             "fors": {},
             "namespaces": {}
@@ -96,7 +116,7 @@
             "name": "src/ui/yui/src/buttons/button-underline.js",
             "modules": {},
             "classes": {
-                "Y.ButtonU": 1
+                "ButtonU": 1
             },
             "fors": {},
             "namespaces": {}
@@ -191,9 +211,21 @@
             "description": "YUI3 Adapter for CKEditor. This class provides YUI3 like way of creating instances of\nCKEditor and passing configuration paramters to it.",
             "is_constructor": 1
         },
-        "Y.ButtonBase": {
-            "name": "Y.ButtonBase",
-            "shortname": "Y.ButtonBase",
+        "ButtonA": {
+            "name": "ButtonA",
+            "shortname": "ButtonA",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 7,
+            "description": "The ButtonA class provides functionality for creating a link button."
+        },
+        "ButtonBase": {
+            "name": "ButtonBase",
+            "shortname": "ButtonBase",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -203,9 +235,33 @@
             "line": 9,
             "description": "The ButtonBase class provides common functionality for a button like\nreacting on click event, rendering and updating the UI.\nA button implementation may be as simple as changing the style of selection\nto bold, italic, underline, etc. or to be very complex - for example, to change\nthe UI of the host (toolbar). <br />\nToolbarBase and ButtonBase will provide everything you need to implement whatever you need.\nToolbars, which mix ToolbarBase extension will provide a container, where the button\nshould render. This container is accessible via \"buttonsContainer\" attribute.\nIf your button just changes the style of the selection, then everything you have to do\nin order to implement it is: <br />\n- extend Y.Plugin.Base and mix Y.ButtonBase extension\n- specify the element to which you want to style the selection. This should be done via\n\"element\" attribute. Here is the code: <br />\n<pre><code>\n   YUI.add('button-em', function (Y) {\n       'use strict';\n\n        var Lang = Y.Lang;\n\n        var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {\n            TPL_CONTENT: '&lt;i class=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/i&gt;'\n        }, {\n            NAME: 'em',\n\n            NS: 'em',\n\n            ATTRS: {\n                element: {\n                    validator: Lang.isString,\n                    value: 'em'\n                }\n            }\n        });\n\n        Y.ButtonEm = Em;\n\n    },'', {\n        requires: ['button-base']\n    });\n</code></pre>\n\nThe code above creates a button, which will allow user to make selection italic.\n\nA more complex button may change the UI of the host (Toolbar) too. If the Toolbar mix\nToolbarBase extension, then it will export an attribute, called \"buttonContainer\". By\ndefault, the buttons will be rendered in this container, so one button will be able to\nhide the others and provide a different UI for the host (container)."
         },
-        "Y.ButtonU": {
-            "name": "Y.ButtonU",
-            "shortname": "Y.ButtonU",
+        "ButtonImage": {
+            "name": "ButtonImage",
+            "shortname": "ButtonImage",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-image.js",
+            "line": 6,
+            "description": "The ButtonImage class provides functionality for changing the alignment of an image."
+        },
+        "ButtonLeft": {
+            "name": "ButtonLeft",
+            "shortname": "ButtonLeft",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-left.js",
+            "line": 6,
+            "description": "The ButtonImage class provides functionality for changing the alignment of an image."
+        },
+        "ButtonU": {
+            "name": "ButtonU",
+            "shortname": "ButtonU",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -832,9 +888,194 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 7,
-            "description": "*\n         * @class Y.ButtonA",
-            "class": "Y.ButtonBase"
+            "line": 13,
+            "description": "Initializer lifecycle implementation for the ButtonA class.",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Configuration object literal for the editor",
+                    "type": "Object"
+                }
+            ],
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 24,
+            "description": "Renders the button which handles the link creation on the current selection and\nthe UI, which provides input element where the user will be able to specify the\nhref of the link.",
+            "itemtype": "method",
+            "name": "renderUI",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 37,
+            "description": "Binds event subscriptions from the UI and the source (if assigned).\nRegisters a few events, like handling key press, or mouse events on\nthe button for clearing the link.",
+            "itemtype": "method",
+            "name": "bindUI",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 56,
+            "description": "Overwrites the default implementation from {{#crossLink \"Y.ButtonBase/updateUI:method\"}}{{/crossLink}}.\nThe button updates its \"pressed\" attribute and changes the UI accordingly to the presence or lack of\nlink style of the selection.",
+            "itemtype": "method",
+            "name": "updateUI",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 88,
+            "description": "Changes position of the Toolbar, and adjusts it according to the selection,\nsince the width of the UI for adding/edtiting of link href  might be shorter\nor larger than the default Toolbar UI.",
+            "itemtype": "method",
+            "name": "_adjustHostPosition",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 122,
+            "description": "Attaches a visibleChange listener on the Toolbar so the UI will commit or discard the link\nif the button hides.",
+            "itemtype": "method",
+            "name": "_attachHideHandler",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 137,
+            "description": "Attaches a visibleChange listener so the UI will commit or discard the link\nwhen the button hides.",
+            "itemtype": "method",
+            "name": "_onClearInputClick",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 153,
+            "description": "Hides the Toolbar on clicking the close link button.",
+            "itemtype": "method",
+            "name": "_onCloseLinkClick",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 163,
+            "description": "Handles the click event from the user. If button status is \"pressed\", activates the UI for\ncreating the link. Otherwise, removes the link from the current selection.\nOn activating the UI for link creation, a default link with href= \"/\" will be created and it\nwill be keep in button instance as _defaultLink property.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 210,
+            "description": "Updates the default link with the real href, if any, or removes the\ndefault link from the current selection.\nSee {{#crossLink \"Y.ButtonA/_onClick:method\"}}{{/crossLink}} for more information\nabout the default link.",
+            "itemtype": "method",
+            "name": "_handleLink",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 240,
+            "description": "Checks if user presses Enter key and hides the Toolbar, if so.",
+            "itemtype": "method",
+            "name": "_onKeyPress",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 252,
+            "description": "Shows or hides the close link button if link input contains some value.",
+            "itemtype": "method",
+            "name": "_onValueChange",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 270,
+            "description": "On button hide, restore the default UI for creating link.\nOn button show, checks if the current selection has link style or not.\nIf it has, activates the UI for editing link, otherwise, activates the UI\nfor creating a link.",
+            "itemtype": "method",
+            "name": "_onValueChange",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 306,
+            "description": "Removes the attached visibleChange handler on the Toolbar which\nhandles the commit or discard process of the link.\nSee {{#crossLink \"Y.ButtonA/_attachHideHandler:method\"}}{{/crossLink}} for more information.",
+            "itemtype": "method",
+            "name": "_removeHideHandler",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 322,
+            "description": "Creates the UI for adding a link.",
+            "itemtype": "method",
+            "name": "_renderLinkUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 366,
+            "description": "Changes the UI of the Toolbar so the user will be able to change the styles\nof the selection instead to create a link.",
+            "itemtype": "method",
+            "name": "_switchToTextMode",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 415,
+            "description": "Changes the UI of the Toolbar so the user will be able to to create a link to\nchange the styles of the selection.",
+            "itemtype": "method",
+            "name": "_switchToLinkMode",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 475,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'a'",
+            "type": "String",
+            "class": "ButtonA"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-a.js",
+            "line": 487,
+            "description": "Collection of strings used to label elements of the button's UI.\nButtonA provides one string property, to specify the value of link placeholder.",
+            "itemtype": "attribute",
+            "name": "strings",
+            "default": "{placeholder: 'Type or paste link here'}",
+            "type": "String",
+            "class": "ButtonA"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -842,7 +1083,7 @@
             "description": "Fired once after user clicks on the button. ButtonBase will listen to this event and\ncall {{#crossLink \"Y.ButtonBase/updateUI:method\"}}{{/crossLink}}, so the buttons\nwill have chance to update their UI accordingly. For example, if user clicks on\nH2 button, and then clicks on H1 button, H2 button should remove its\n{{#crossLink \"Y.ButtonBase/pressed:attribute\"}}{{/crossLink}}, since these two styles\nare mutually exclusive.",
             "itemtype": "event",
             "name": "actionPerformed",
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -859,7 +1100,7 @@
                     "type": "Object"
                 }
             ],
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -869,7 +1110,7 @@
             "name": "destructor",
             "access": "protected",
             "tagname": "",
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -877,7 +1118,7 @@
             "description": "Renders the button UI on the host which is typically a toolbar. The protected\n{{#crossLink \"Y.ButtonBase/_renderButtonUI:method\"}}{{/crossLink}} will be called,\nso the buttons which mix this extension will be able to overwrite the default behaviour.",
             "itemtype": "method",
             "name": "renderUI",
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -885,7 +1126,7 @@
             "description": "ButtonBase does not provide implementation, the buttons which mix this extension\nmay provide one.",
             "itemtype": "method",
             "name": "bindUI",
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -893,7 +1134,7 @@
             "description": "Updates the toggle status of the button. If the selection has the style, specified by\nthe button, its status will be made active and \"pressed\" attribute of the button will be\nset to true, otherwise, it will be set to false. ButtonStrong for example is toggleable button.\nOnce \"updateUI\" function is called, the implementation will check if style \"strong\" is active on\nthe current selection. If so, \"pressed\" attribute of the button will be set to true and removed\notherwise.",
             "itemtype": "method",
             "name": "updateUI",
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -901,7 +1142,7 @@
             "description": "Applies the style for this button if its current status is pressed\nand removes it if button is not pressed. For example, ButtonStrong will\napply style \"strong\" to the selection, when pressed.",
             "itemtype": "method",
             "name": "_onClick\nprotected",
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -911,7 +1152,7 @@
             "name": "_afterClick",
             "access": "protected",
             "tagname": "",
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -921,7 +1162,7 @@
             "name": "_renderButtonUI",
             "access": "protected",
             "tagname": "",
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
         },
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
@@ -931,7 +1172,62 @@
             "name": "toggle",
             "default": "true",
             "type": "Boolean",
-            "class": "Y.ButtonBase"
+            "class": "ButtonBase"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-image.js",
+            "line": 12,
+            "description": "Fired when an image file is added as an element in the editor.",
+            "itemtype": "event",
+            "name": "imageadd",
+            "params": [
+                {
+                    "name": "el",
+                    "description": "The created img element in editor.",
+                    "type": "CKEDITOR.dom.element"
+                }
+            ],
+            "class": "ButtonImage"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-image.js",
+            "line": 19,
+            "description": "Creates an input element of type \"file\" if not already created and registers\nan event on input value change.",
+            "itemtype": "method",
+            "name": "_getInputFile",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonImage"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-image.js",
+            "line": 47,
+            "description": "Simulates \"click\" event on the input field when user presses the button. This\ntriggers the native open file dialog from the browser. This method works on IE9+.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonImage"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-image.js",
+            "line": 60,
+            "description": "On input change, reads the chosen file and creates an img element with src as Data URI.\nThen, fires an {{#crossLink \"Y.ButtonImage/imageadd:event\"}}{{/crossLink}} via CKEditor\nmessage system.",
+            "itemtype": "method",
+            "name": "_onInputChange",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonImage"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-image.js",
+            "line": 101,
+            "description": "Specifies if this button will be toggleable, or not.\nButtonImage will be not toggleable by default.",
+            "itemtype": "attribute",
+            "name": "toggle",
+            "default": "false",
+            "type": "Boolean",
+            "class": "ButtonImage"
         },
         {
             "file": "src/ui/yui/src/buttons/button-underline.js",
@@ -941,13 +1237,8 @@
             "name": "element",
             "default": "'u'",
             "type": "String",
-            "class": "Y.ButtonU"
+            "class": "ButtonU"
         }
     ],
-    "warnings": [
-        {
-            "message": "Missing item type\n*\n         * @class Y.ButtonA",
-            "line": " src/ui/yui/src/buttons/button-a.js:7"
-        }
-    ]
+    "warnings": []
 }

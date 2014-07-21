@@ -43,6 +43,16 @@
             
                 <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
             
+                <li><a href="../classes/ButtonA.html">ButtonA</a></li>
+            
+                <li><a href="../classes/ButtonBase.html">ButtonBase</a></li>
+            
+                <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+            
+                <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
+            
+                <li><a href="../classes/ButtonU.html">ButtonU</a></li>
+            
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
             
                 <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
@@ -54,10 +64,6 @@
                 <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
             
                 <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
-            
-                <li><a href="../classes/Y.ButtonBase.html">Y.ButtonBase</a></li>
-            
-                <li><a href="../classes/Y.ButtonU.html">Y.ButtonU</a></li>
             
             </ul>
 
@@ -109,21 +115,42 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
         YNode = Y.Node,
 
         /**
-         
+         * The ButtonA class provides functionality for creating a link button.
          *
-         * @class Y.ButtonA
+         * @class ButtonA
          */
         A = Y.Base.create(&#x27;a&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+            /**
+             * Initializer lifecycle implementation for the ButtonA class.
+             *
+             * @method initializer
+             * @protected
+             * @param  config {Object} Configuration object literal for the editor
+             */
             initializer: function() {
                 this._ckLink = new CKEDITOR.Link(this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;));
             },
 
+            /**
+             * Renders the button which handles the link creation on the current selection and
+             * the UI, which provides input element where the user will be able to specify the
+             * href of the link.
+             *
+             * @method renderUI
+             */
             renderUI: function() {
                 this._renderButtonUI();
 
                 this._renderLinkUI();
             },
 
+            /**
+             * Binds event subscriptions from the UI and the source (if assigned).
+             * Registers a few events, like handling key press, or mouse events on
+             * the button for clearing the link.
+             *
+             * @method bindUI
+             */
             bindUI: function() {
                 this.onHostEvent(&#x27;visibleChange&#x27;, this._onVisibleChange, this);
 
@@ -136,6 +163,13 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 this._clearInput.on(&#x27;click&#x27;, this._onClearInputClick, this);
             },
 
+            /**
+             * Overwrites the default implementation from {{#crossLink &quot;Y.ButtonBase/updateUI:method&quot;}}{{/crossLink}}.
+             * The button updates its &quot;pressed&quot; attribute and changes the UI accordingly to the presence or lack of
+             * link style of the selection.
+             *
+             * @method updateUI
+             */
             updateUI: function() {
                 var editor,
                     elementPath,
@@ -161,6 +195,14 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 }
             },
 
+            /**
+             * Changes position of the Toolbar, and adjusts it according to the selection,
+             * since the width of the UI for adding/edtiting of link href  might be shorter
+             * or larger than the default Toolbar UI.
+             *
+             * @method _adjustHostPosition
+             * @protected
+             */
             _adjustHostPosition: function(oldHostWidth) {
                 var curHostWidth,
                     curXY,
@@ -187,6 +229,13 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 }
             },
 
+            /**
+             * Attaches a visibleChange listener on the Toolbar so the UI will commit or discard the link
+             * if the button hides.
+             *
+             * @method _attachHideHandler
+             * @protected
+             */
             _attachHideHandler: function() {
                 this._hideHandle = this.onceHostEvent(&#x27;visibleChange&#x27;, function(event) {
                     if (!event.newVal) {
@@ -195,6 +244,13 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 }, this);
             },
 
+            /**
+             * Attaches a visibleChange listener so the UI will commit or discard the link
+             * when the button hides.
+             *
+             * @method _onClearInputClick
+             * @protected
+             */
             _onClearInputClick: function() {
                 this._linkInput.set(&#x27;value&#x27;, &#x27;&#x27;);
 
@@ -204,10 +260,25 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 this._closeLink.disable();
             },
 
+            /**
+             * Hides the Toolbar on clicking the close link button.
+             *
+             * @method _onCloseLinkClick
+             * @protected
+             */
             _onCloseLinkClick: function() {
                 this.get(&#x27;host&#x27;).hide();
             },
 
+            /**
+             * Handles the click event from the user. If button status is &quot;pressed&quot;, activates the UI for
+             * creating the link. Otherwise, removes the link from the current selection.
+             * On activating the UI for link creation, a default link with href= &quot;/&quot; will be created and it
+             * will be keep in button instance as _defaultLink property.
+             *
+             * @method _onClick
+             * @protected
+             */
             _onClick: function(event) {
                 var instance = this,
                     btnInst,
@@ -246,6 +317,15 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 }
             },
 
+            /**
+             * Updates the default link with the real href, if any, or removes the
+             * default link from the current selection.
+             * See {{#crossLink &quot;Y.ButtonA/_onClick:method&quot;}}{{/crossLink}} for more information
+             * about the default link.
+             *
+             * @method _handleLink
+             * @protected
+             */
             _handleLink: function() {
                 var editor,
                     href;
@@ -267,12 +347,24 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 this._link = null;
             },
 
+            /**
+             * Checks if user presses Enter key and hides the Toolbar, if so.
+             *
+             * @method _onKeyPress
+             * @protected
+             */
             _onKeyPress: function(event) {
                 if (event.charCode === 13) {
                     this.get(&#x27;host&#x27;).hide();
                 }
             },
 
+            /**
+             * Shows or hides the close link button if link input contains some value.
+             *
+             * @method _onValueChange
+             * @protected
+             */
             _onValueChange: function(event) {
                 if (event.newVal) {
                     this._clearInput.show();
@@ -285,6 +377,15 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 }
             },
 
+            /**
+             * On button hide, restore the default UI for creating link.
+             * On button show, checks if the current selection has link style or not.
+             * If it has, activates the UI for editing link, otherwise, activates the UI
+             * for creating a link.
+             *
+             * @method _onValueChange
+             * @protected
+             */
             _onVisibleChange: function(event) {
                 var editor,
                     link;
@@ -312,6 +413,14 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 }
             },
 
+            /**
+             * Removes the attached visibleChange handler on the Toolbar which
+             * handles the commit or discard process of the link.
+             * See {{#crossLink &quot;Y.ButtonA/_attachHideHandler:method&quot;}}{{/crossLink}} for more information.
+             *
+             * @method _removeHideHandler
+             * @protected
+             */
             _removeHideHandler: function() {
                 if (this._hideHandle) {
                     this._hideHandle.detach();
@@ -320,6 +429,12 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 }
             },
 
+            /**
+             * Creates the UI for adding a link.
+             *
+             * @method _renderLinkUI
+             * @protected
+             */
             _renderLinkUI: function() {
                 var contentBox,
                     linkContainer;
@@ -358,6 +473,13 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 });
             },
 
+            /**
+             * Changes the UI of the Toolbar so the user will be able to change the styles
+             * of the selection instead to create a link.
+             *
+             * @method _switchToTextMode
+             * @protected
+             */
             _switchToTextMode: function() {
                 var bookmarks,
                     editor,
@@ -400,6 +522,13 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 this._adjustHostPosition(oldHostWidth);
             },
 
+            /**
+             * Changes the UI of the Toolbar so the user will be able to to create a link to
+             * change the styles of the selection.
+             *
+             * @method _switchToLinkMode
+             * @protected
+             */
             _switchToLinkMode: function(link) {
                 var editor,
                     linkInput;
@@ -453,11 +582,26 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
             NS: &#x27;a&#x27;,
 
             ATTRS: {
+                /**
+                 * Specifies the element (style) which this button handles.
+                 *
+                 * @attribute element
+                 * @default &#x27;a&#x27;
+                 * @type String
+                 */
                 element: {
                     validator: Lang.isString,
                     value: &#x27;a&#x27;
                 },
 
+                /**
+                 * Collection of strings used to label elements of the button&#x27;s UI.
+                 * ButtonA provides one string property, to specify the value of link placeholder.
+                 *
+                 * @attribute strings
+                 * @default {placeholder: &#x27;Type or paste link here&#x27;}
+                 * @type String
+                 */
                 strings: {
                     value: {
                         placeholder: &#x27;Type or paste link here&#x27;

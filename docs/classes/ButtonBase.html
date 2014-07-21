@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Y.ButtonBase - AlloyEditor</title>
+    <title>ButtonBase - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -43,6 +43,16 @@
             
                 <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
             
+                <li><a href="../classes/ButtonA.html">ButtonA</a></li>
+            
+                <li><a href="../classes/ButtonBase.html">ButtonBase</a></li>
+            
+                <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+            
+                <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
+            
+                <li><a href="../classes/ButtonU.html">ButtonU</a></li>
+            
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
             
                 <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
@@ -54,10 +64,6 @@
                 <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
             
                 <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
-            
-                <li><a href="../classes/Y.ButtonBase.html">Y.ButtonBase</a></li>
-            
-                <li><a href="../classes/Y.ButtonU.html">Y.ButtonU</a></li>
             
             </ul>
 
@@ -98,7 +104,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Y.ButtonBase Class</h1>
+                        <h1>ButtonBase Class</h1>
 <div class="box meta">
     
 
@@ -344,8 +350,8 @@ protected</a>
     </div>
 
     <div class="description">
-        <p>Fires <a href="../classes/Y.ButtonBase.html#event_actionPerformed" class="crosslink">actionPerformed</a>. ButtonBase listens
-to this event and it will call <a href="../classes/Y.ButtonBase.html#method_updateUI" class="crosslink">updateUI</a>
+        <p>Fires Y.ButtonBase/actionPerformed:event. ButtonBase listens
+to this event and it will call Y.ButtonBase/updateUI:method
 function, so the buttons which are mutually exclusive, like H1 and H2 will be able to
 update their UI accordingly.</p>
 
@@ -728,7 +734,7 @@ button instance.</p>
 
     <div class="description">
         <p>Renders the button UI on the host which is typically a toolbar. The protected
-<a href="../classes/Y.ButtonBase.html#method__renderButtonUI" class="crosslink">_renderButtonUI</a> will be called,
+Y.ButtonBase/_renderButtonUI:method will be called,
 so the buttons which mix this extension will be able to overwrite the default behaviour.</p>
 
     </div>
@@ -959,7 +965,7 @@ Buttons may be &quot;toggleable&quot; or &quot;push&quot; buttons.</p>
 
     <div class="description">
         <p>Fired once after user clicks on the button. ButtonBase will listen to this event and
-call <a href="../classes/Y.ButtonBase.html#method_updateUI" class="crosslink">updateUI</a>, so the buttons
+call Y.ButtonBase/updateUI:method, so the buttons
 will have chance to update their UI accordingly. For example, if user clicks on
 H2 button, and then clicks on H1 button, H2 button should remove its
 Y.ButtonBase/pressed:attribute, since these two styles

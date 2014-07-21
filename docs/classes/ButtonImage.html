@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CKEDITOR.plugins.placeholder - AlloyEditor</title>
+    <title>ButtonImage - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,7 +104,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>CKEDITOR.plugins.placeholder Class</h1>
+                        <h1>ButtonImage Class</h1>
 <div class="box meta">
     
 
@@ -112,7 +112,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_plugins_placeholder.js.html#l8"><code>src&#x2F;plugins&#x2F;placeholder.js:8</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_buttons_button-image.js.html#l6"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-image.js:6</code></a>
         </div>
     
 
@@ -124,8 +124,7 @@
 
 
 <div class="box intro">
-    <p>CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
-is no content to the editor, there will be hint to the user.</p>
+    <p>The ButtonImage class provides functionality for changing the alignment of an image.</p>
 
 </div>
 
@@ -143,6 +142,8 @@ is no content to the editor, there will be hint to the user.</p>
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
         
         
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+        
     </ul>
 
     <div>
@@ -155,15 +156,22 @@ is no content to the editor, there will be hint to the user.</p>
 
                     <ul class="index-list methods">
                         
-                            <li class="index-item method">
-                                <a href="#method_init">init</a>
+                            <li class="index-item method protected">
+                                <a href="#method__getInputFile">_getInputFile</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method_init">init</a>
+                                <a href="#method__onClick">_onClick</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__onInputChange">_onInputChange</a>
 
                                 
                                 
@@ -182,13 +190,28 @@ is no content to the editor, there will be hint to the user.</p>
                     <ul class="index-list attrs">
                         
                             <li class="index-item attr">
-                                <a href="#attr_placeholderClass">placeholderClass</a>
+                                <a href="#attr_toggle">toggle</a>
                             </li>
                         
                     </ul>
                 </div>
             
 
+            
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                        
+                            <li class="index-item event">
+                                <a href="#event_imageadd">imageadd</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
             
         </div>
 
@@ -197,111 +220,11 @@ is no content to the editor, there will be hint to the user.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_init" class="method item">
-    <h3 class="name"><code>init</code></h3>
+                    <div id="method__getInputFile" class="method item protected">
+    <h3 class="name"><code>_getInputFile</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>editor</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_plugins_placeholder.js.html#l26"><code>src&#x2F;plugins&#x2F;placeholder.js:26</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Initialization of the plugin, part of CKEditor plugin lifecycle.
-The function registers a &#39;blur&#39; listener to CKEditor&#39;s blur event.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">editor</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The current editor instance</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_init" class="method item protected">
-    <h3 class="name"><code>init</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>editor</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -331,7 +254,7 @@ The function registers a &#39;blur&#39; listener to CKEditor&#39;s blur event.</
             
         
         
-        <a href="../files/src_plugins_placeholder.js.html#l37"><code>src&#x2F;plugins&#x2F;placeholder.js:37</code></a>
+        <a href="../files/src_ui_yui_src_buttons_button-image.js.html#l19"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-image.js:19</code></a>
         
         </p>
 
@@ -342,36 +265,128 @@ The function registers a &#39;blur&#39; listener to CKEditor&#39;s blur event.</
     </div>
 
     <div class="description">
-        <p>Handles the fired blur event. The function removes any data from CKEditor, because an
-empty paragraph may still exist despite for the user the editor looks empty and
-adds a class, specified via &quot;placeholderClass&quot; config attribute.</p>
+        <p>Creates an input element of type &quot;file&quot; if not already created and registers
+an event on input value change.</p>
 
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
+    
+
+    
+</div>
+
+                
+                    <div id="method__onClick" class="method item protected">
+    <h3 class="name"><code>_onClick</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
             
-                <li class="param">
-                    
-                        <code class="param-name">editor</code>
-                        <span class="type">CKEDITOR.dom.event</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Blur event, fired from CKEditor</p>
-
-                    </div>
-
-                    
-                </li>
+                
+                <p>
+                
+                Defined in
+                
             
-            </ul>
-        </div>
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-image.js.html#l47"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-image.js:47</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Simulates &quot;click&quot; event on the input field when user presses the button. This
+triggers the native open file dialog from the browser. This method works on IE9+.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onInputChange" class="method item protected">
+    <h3 class="name"><code>_onInputChange</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-image.js.html#l60"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-image.js:60</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>On input change, reads the chosen file and creates an img element with src as Data URI.
+Then, fires an Y.ButtonImage/imageadd:event via CKEditor
+message system.</p>
+
+    </div>
+
     
 
     
@@ -390,10 +405,10 @@ adds a class, specified via &quot;placeholderClass&quot; config attribute.</p>
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_placeholderClass" class="attr item">
-    <a name="config_placeholderClass"></a> 
-    <h3 class="name"><code>placeholderClass</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    <div id="attr_toggle" class="attr item">
+    <a name="config_toggle"></a> 
+    <h3 class="name"><code>toggle</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
     
 
@@ -420,7 +435,7 @@ adds a class, specified via &quot;placeholderClass&quot; config attribute.</p>
             
         
         
-        <a href="../files/src_plugins_placeholder.js.html#l15"><code>src&#x2F;plugins&#x2F;placeholder.js:15</code></a>
+        <a href="../files/src_ui_yui_src_buttons_button-image.js.html#l101"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-image.js:101</code></a>
         
         </p>
 
@@ -430,20 +445,21 @@ adds a class, specified via &quot;placeholderClass&quot; config attribute.</p>
     </div>
 
     <div class="description">
-        <p>Specifies the placeholder class which have to be aded to editor when editor is not focuced.</p>
+        <p>Specifies if this button will be toggleable, or not.
+ButtonImage will be not toggleable by default.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> alloy-editor-placeholder</p>
+        <p><strong>Default:</strong> false</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>placeholderClassChange</code></h4>
+            <h4>Fires event <code>toggleChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>placeholderClass</code> is
+            Fires when the value for the configuration attribute <code>toggle</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -498,6 +514,80 @@ adds a class, specified via &quot;placeholderClass&quot; config attribute.</p>
             </div>
         
 
+        
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_imageadd" class="events item">
+    <h3 class="name"><code>imageadd</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-image.js.html#l12"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-image.js:12</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fired when an image file is added as an element in the editor.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">el</code>
+                        <span class="type">CKEDITOR.dom.element</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The created img element in editor.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+            </div>
         
     </div>
 </div>

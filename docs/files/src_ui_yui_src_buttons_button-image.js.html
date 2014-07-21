@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/plugins/placeholder.js - AlloyEditor</title>
+    <title>src/ui/yui/src/buttons/button-image.js - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,76 +104,131 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/plugins/placeholder.js</h1>
+                        <h1 class="file-heading">File: src/ui/yui/src/buttons/button-image.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-(function() {
+YUI.add(&#x27;button-image&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
-    if (CKEDITOR.plugins.get(&#x27;placeholder&#x27;)) {
-        return;
-    }
+    var Lang = Y.Lang;
 
     /**
-     * CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
-     * is no content to the editor, there will be hint to the user.
+     * The ButtonImage class provides functionality for changing the alignment of an image.
      *
-     * @class CKEDITOR.plugins.placeholder
+     * @class ButtonImage
      */
 
     /**
-     * Specifies the placeholder class which have to be aded to editor when editor is not focuced.
+     * Fired when an image file is added as an element in the editor.
      *
-     * @attribute placeholderClass
-     * @default alloy-editor-placeholder
-     * @type String
+     * @event imageadd
+     * @param {CKEDITOR.dom.element} el The created img element in editor.
      */
+    var BtnImage = Y.Base.create(&#x27;image&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        /**
+         * Creates an input element of type &quot;file&quot; if not already created and registers
+         * an event on input value change.
+         *
+         * @method _getInputFile
+         * @protected
+         */
+        _getInputFile: function() {
+            var id,
+                inputFile;
 
-    CKEDITOR.plugins.add(
-        &#x27;placeholder&#x27;, {
+            inputFile = this._inputFile;
 
+            if (!inputFile) {
+                id = Y.guid();
+
+                Y.one(&#x27;body&#x27;).prepend(&#x27;&lt;input type=&quot;file&quot; id=&quot;&#x27; + id + &#x27;&quot;  style=&quot;display: none;&quot;&gt;&lt;/input&gt;&#x27;);
+
+                inputFile = Y.one(&#x27;#&#x27; + id);
+
+                inputFile.on(&#x27;change&#x27;, this._onInputChange, this);
+
+                this._inputFile = inputFile;
+            }
+
+            return inputFile;
+        },
+
+        /**
+         * Simulates &quot;click&quot; event on the input field when user presses the button. This
+         * triggers the native open file dialog from the browser. This method works on IE9+.
+         *
+         * @method _onClick
+         * @protected
+         */
+        _onClick: function() {
+            var inputFile = this._getInputFile();
+
+            inputFile.simulate(&#x27;click&#x27;);
+        },
+
+        /**
+         * On input change, reads the chosen file and creates an img element with src as Data URI.
+         * Then, fires an {{#crossLink &quot;Y.ButtonImage/imageadd:event&quot;}}{{/crossLink}} via CKEditor
+         * message system.
+         *
+         * @method _onInputChange
+         * @protected
+         */
+        _onInputChange: function() {
+            var instance = this,
+                editor,
+                inputFile,
+                el,
+                reader;
+
+            reader = new FileReader();
+
+            reader.onload = function(event) {
+                editor = instance.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
+
+                el = CKEDITOR.dom.element.createFromHtml(&#x27;&lt;img src=&quot;&#x27; + event.target.result + &#x27;&quot;&gt;&#x27;);
+
+                editor.insertElement(el);
+
+                editor.fire(&#x27;imageadd&#x27;, el);
+            };
+
+            inputFile = this._inputFile;
+
+            reader.readAsDataURL(inputFile.getDOMNode().files[0]);
+
+            inputFile.set(&#x27;value&#x27;, &#x27;&#x27;);
+        },
+
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-image&quot;&gt;&lt;/i&gt;&#x27;
+    }, {
+        NAME: &#x27;image&#x27;,
+
+        NS: &#x27;image&#x27;,
+
+        ATTRS: {
             /**
-             * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers a &#x27;blur&#x27; listener to CKEditor&#x27;s blur event.
+             * Specifies if this button will be toggleable, or not.
+             * ButtonImage will be not toggleable by default.
              *
-             * @method init
-             * @param {Object} editor The current editor instance
+             * @attribute toggle
+             * @default false
+             * @type Boolean
              */
-            init: function(editor) {
-                editor.on(&#x27;blur&#x27;, this._onBlur, this);
-            },
-
-            /**
-             * Handles the fired blur event. The function removes any data from CKEditor, because an
-             * empty paragraph may still exist despite for the user the editor looks empty and
-             * adds a class, specified via &quot;placeholderClass&quot; config attribute.
-             *
-             * @method init
-             * @protected
-             * @param {CKEDITOR.dom.event} editor Blur event, fired from CKEditor
-             */
-            _onBlur: function(event) {
-                var editor,
-                    editorNode;
-
-                editor = event.editor;
-
-                if (editor.getData() === &#x27;&#x27;) {
-                    editorNode = new CKEDITOR.dom.element(editor.element.$);
-
-                    // Despite getData() returns empty string, the content still may have
-                    // content - an empty paragrapgh. This prevents :empty selector in
-                    // placeholder&#x27;s CSS and placeholder does not appear.
-                    // For that reason we will intentionally remove any content from editorNode.
-                    editorNode.setHtml(&#x27;&#x27;);
-
-                    editorNode.addClass(editor.config.placeholderClass);
-                }
+            toggle: {
+                validator: Lang.isBoolean,
+                value: false,
+                writeOnce: &#x27;initOnly&#x27;
             }
         }
-    );
-}());
+    });
+
+    Y.ButtonImage = BtnImage;
+
+}, &#x27;&#x27;, {
+    requires: [&#x27;button-base&#x27;, &#x27;node-event-simulate&#x27;]
+});
     </pre>
 </div>
 
