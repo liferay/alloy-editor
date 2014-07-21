@@ -4,7 +4,7 @@ YUI.add('button-image', function(Y) {
     var Lang = Y.Lang;
 
     /**
-     * The ButtonImage class provides functionality for changing the alignment of an image.
+     * The ButtonImage class provides functionality for adding an image to the editor.
      *
      * @class ButtonImage
      */
@@ -105,6 +105,7 @@ YUI.add('button-image', function(Y) {
              * @attribute toggle
              * @default false
              * @type Boolean
+             * @writeOnce 'initOnly'
              */
             toggle: {
                 validator: Lang.isBoolean,

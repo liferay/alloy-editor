@@ -235,6 +235,7 @@ YUI.add('button-base', function(Y) {
          * @attribute toggle
          * @default true
          * @type Boolean
+         * @writeOnce 'initOnly'
          */
         toggle: {
             validator: Lang.isBoolean,
