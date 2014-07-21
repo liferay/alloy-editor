@@ -7,7 +7,7 @@ YUI.add('button-a', function(Y) {
         /**
          * The ButtonA class provides functionality for creating a link button.
          *
-         * @class Y.ButtonA
+         * @class ButtonA
          */
         A = Y.Base.create('a', Y.Plugin.Base, [Y.ButtonBase], {
             /**
@@ -54,7 +54,7 @@ YUI.add('button-a', function(Y) {
             },
 
             /**
-             * Overwrites the default implementation from {{#crossLink "Y.ButtonBase/updateUI:method"}}{{/crossLink}}.
+             * Overwrites the default implementation from {{#crossLink "ButtonBase/updateUI:method"}}{{/crossLink}}.
              * The button updates its "pressed" attribute and changes the UI accordingly to the presence or lack of
              * link style of the selection.
              *
@@ -210,7 +210,7 @@ YUI.add('button-a', function(Y) {
             /**
              * Updates the default link with the real href, if any, or removes the
              * default link from the current selection.
-             * See {{#crossLink "Y.ButtonA/_onClick:method"}}{{/crossLink}} for more information
+             * See {{#crossLink "ButtonA/_onClick:method"}}{{/crossLink}} for more information
              * about the default link.
              *
              * @method _handleLink
@@ -306,7 +306,7 @@ YUI.add('button-a', function(Y) {
             /**
              * Removes the attached visibleChange handler on the Toolbar which
              * handles the commit or discard process of the link.
-             * See {{#crossLink "Y.ButtonA/_attachHideHandler:method"}}{{/crossLink}} for more information.
+             * See {{#crossLink "ButtonA/_attachHideHandler:method"}}{{/crossLink}} for more information.
              *
              * @method _removeHideHandler
              * @protected

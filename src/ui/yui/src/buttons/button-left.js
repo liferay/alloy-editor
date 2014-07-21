@@ -1,8 +1,13 @@
-YUI.add('button-left', function (Y) {
+YUI.add('button-left', function(Y) {
     'use strict';
 
     var Lang = Y.Lang;
 
+    /**
+     * The ButtonImage class provides functionality for changing the alignment of an image.
+     *
+     * @class ButtonLeft
+     */
     var Left = Y.Base.create('left', Y.Plugin.Base, [Y.ButtonBase], {
         updateUI: function() {
             var editor,
@@ -34,8 +39,7 @@ YUI.add('button-left', function (Y) {
 
             if (btnInst.get('pressed')) {
                 element.setStyle('float', 'left');
-            }
-            else {
+            } else {
                 element.removeStyle('float');
             }
         },
@@ -56,6 +60,6 @@ YUI.add('button-left', function (Y) {
 
     Y.ButtonLeft = Left;
 
-},'', {
+}, '', {
     requires: ['button-base']
 });

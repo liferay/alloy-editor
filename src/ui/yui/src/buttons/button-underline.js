@@ -7,7 +7,7 @@ YUI.add('button-u', function(Y) {
      * Button Underline. A standard AlloyUI/YUI class which allows to apply underline style to
      * editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.
      *
-     * @class Y.ButtonU
+     * @class ButtonU
      * @constructor
      */
     var Underline = Y.Base.create('underline', Y.Plugin.Base, [Y.ButtonBase], {

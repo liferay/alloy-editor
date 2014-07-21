@@ -55,15 +55,15 @@ YUI.add('button-base', function(Y) {
      * default, the buttons will be rendered in this container, so one button will be able to
      * hide the others and provide a different UI for the host (container).
      *
-     * @class Y.ButtonBase
+     * @class ButtonBase
      */
 
     /**
      * Fired once after user clicks on the button. ButtonBase will listen to this event and
-     * call {{#crossLink "Y.ButtonBase/updateUI:method"}}{{/crossLink}}, so the buttons
+     * call {{#crossLink "ButtonBase/updateUI:method"}}{{/crossLink}}, so the buttons
      * will have chance to update their UI accordingly. For example, if user clicks on
      * H2 button, and then clicks on H1 button, H2 button should remove its
-     * {{#crossLink "Y.ButtonBase/pressed:attribute"}}{{/crossLink}}, since these two styles
+     * {{#crossLink "ButtonBase/pressed:attribute"}}{{/crossLink}}, since these two styles
      * are mutually exclusive.
      *
      * @event actionPerformed
@@ -105,7 +105,7 @@ YUI.add('button-base', function(Y) {
 
         /**
          * Renders the button UI on the host which is typically a toolbar. The protected
-         * {{#crossLink "Y.ButtonBase/_renderButtonUI:method"}}{{/crossLink}} will be called,
+         * {{#crossLink "ButtonBase/_renderButtonUI:method"}}{{/crossLink}} will be called,
          * so the buttons which mix this extension will be able to overwrite the default behaviour.
          *
          * @method renderUI
@@ -173,8 +173,8 @@ YUI.add('button-base', function(Y) {
         },
 
         /**
-         * Fires {{#crossLink "Y.ButtonBase/actionPerformed:event"}}{{/crossLink}}. ButtonBase listens
-         * to this event and it will call {{#crossLink "Y.ButtonBase/updateUI:method"}}{{/crossLink}}
+         * Fires {{#crossLink "ButtonBase/actionPerformed:event"}}{{/crossLink}}. ButtonBase listens
+         * to this event and it will call {{#crossLink "ButtonBase/updateUI:method"}}{{/crossLink}}
          * function, so the buttons which are mutually exclusive, like H1 and H2 will be able to
          * update their UI accordingly.
          *

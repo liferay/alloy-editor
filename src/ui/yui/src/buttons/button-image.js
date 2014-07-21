@@ -6,7 +6,7 @@ YUI.add('button-image', function(Y) {
     /**
      * The ButtonImage class provides functionality for changing the alignment of an image.
      *
-     * @class Y.ButtonImage
+     * @class ButtonImage
      */
 
     /**
@@ -59,7 +59,7 @@ YUI.add('button-image', function(Y) {
 
         /**
          * On input change, reads the chosen file and creates an img element with src as Data URI.
-         * Then, fires an {{#crossLink "Y.ButtonImage/imageadd:event"}}{{/crossLink}} via CKEditor
+         * Then, fires an {{#crossLink "ButtonImage/imageadd:event"}}{{/crossLink}} via CKEditor
          * message system.
          *
          * @method _onInputChange
