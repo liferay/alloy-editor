@@ -112,6 +112,33 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/ui/yui/src/buttons/button-right.js": {
+            "name": "src/ui/yui/src/buttons/button-right.js",
+            "modules": {},
+            "classes": {
+                "ButtonRight": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-strong.js": {
+            "name": "src/ui/yui/src/buttons/button-strong.js",
+            "modules": {},
+            "classes": {
+                "ButtonStrong": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-twitter.js": {
+            "name": "src/ui/yui/src/buttons/button-twitter.js",
+            "modules": {},
+            "classes": {
+                "ButtonTwitter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ui/yui/src/buttons/button-underline.js": {
             "name": "src/ui/yui/src/buttons/button-underline.js",
             "modules": {},
@@ -245,7 +272,7 @@
             "extension_for": [],
             "file": "src/ui/yui/src/buttons/button-image.js",
             "line": 6,
-            "description": "The ButtonImage class provides functionality for changing the alignment of an image."
+            "description": "The ButtonImage class provides functionality for adding an image to the editor."
         },
         "ButtonLeft": {
             "name": "ButtonLeft",
@@ -257,7 +284,43 @@
             "extension_for": [],
             "file": "src/ui/yui/src/buttons/button-left.js",
             "line": 6,
-            "description": "The ButtonImage class provides functionality for changing the alignment of an image."
+            "description": "The ButtonLeft class provides functionality for changing the alignment of an image."
+        },
+        "ButtonRight": {
+            "name": "ButtonRight",
+            "shortname": "ButtonRight",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-right.js",
+            "line": 6,
+            "description": "The ButtonRight class provides functionality for changing the alignment of an image."
+        },
+        "ButtonStrong": {
+            "name": "ButtonStrong",
+            "shortname": "ButtonStrong",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-strong.js",
+            "line": 6,
+            "description": "The ButtonStrong class provides functionality for applying \"strong\" (bold) style to a text selection."
+        },
+        "ButtonTwitter": {
+            "name": "ButtonTwitter",
+            "shortname": "ButtonTwitter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-twitter.js",
+            "line": 6,
+            "description": "The ButtonTwitter class provides functionality for sending tweets based on the selected text."
         },
         "ButtonU": {
             "name": "ButtonU",
@@ -922,7 +985,7 @@
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
             "line": 56,
-            "description": "Overwrites the default implementation from {{#crossLink \"Y.ButtonBase/updateUI:method\"}}{{/crossLink}}.\nThe button updates its \"pressed\" attribute and changes the UI accordingly to the presence or lack of\nlink style of the selection.",
+            "description": "Overwrites the default implementation from {{#crossLink \"ButtonBase/updateUI:method\"}}{{/crossLink}}.\nThe button updates its \"pressed\" attribute and changes the UI accordingly to the presence or lack of\nlink style of the selection.",
             "itemtype": "method",
             "name": "updateUI",
             "class": "ButtonA"
@@ -980,7 +1043,7 @@
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
             "line": 210,
-            "description": "Updates the default link with the real href, if any, or removes the\ndefault link from the current selection.\nSee {{#crossLink \"Y.ButtonA/_onClick:method\"}}{{/crossLink}} for more information\nabout the default link.",
+            "description": "Updates the default link with the real href, if any, or removes the\ndefault link from the current selection.\nSee {{#crossLink \"ButtonA/_onClick:method\"}}{{/crossLink}} for more information\nabout the default link.",
             "itemtype": "method",
             "name": "_handleLink",
             "access": "protected",
@@ -1020,7 +1083,7 @@
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
             "line": 306,
-            "description": "Removes the attached visibleChange handler on the Toolbar which\nhandles the commit or discard process of the link.\nSee {{#crossLink \"Y.ButtonA/_attachHideHandler:method\"}}{{/crossLink}} for more information.",
+            "description": "Removes the attached visibleChange handler on the Toolbar which\nhandles the commit or discard process of the link.\nSee {{#crossLink \"ButtonA/_attachHideHandler:method\"}}{{/crossLink}} for more information.",
             "itemtype": "method",
             "name": "_removeHideHandler",
             "access": "protected",
@@ -1080,7 +1143,7 @@
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
             "line": 61,
-            "description": "Fired once after user clicks on the button. ButtonBase will listen to this event and\ncall {{#crossLink \"Y.ButtonBase/updateUI:method\"}}{{/crossLink}}, so the buttons\nwill have chance to update their UI accordingly. For example, if user clicks on\nH2 button, and then clicks on H1 button, H2 button should remove its\n{{#crossLink \"Y.ButtonBase/pressed:attribute\"}}{{/crossLink}}, since these two styles\nare mutually exclusive.",
+            "description": "Fired once after user clicks on the button. ButtonBase will listen to this event and\ncall {{#crossLink \"ButtonBase/updateUI:method\"}}{{/crossLink}}, so the buttons\nwill have chance to update their UI accordingly. For example, if user clicks on\nH2 button, and then clicks on H1 button, H2 button should remove its\n{{#crossLink \"ButtonBase/pressed:attribute\"}}{{/crossLink}}, since these two styles\nare mutually exclusive.",
             "itemtype": "event",
             "name": "actionPerformed",
             "class": "ButtonBase"
@@ -1115,7 +1178,7 @@
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
             "line": 106,
-            "description": "Renders the button UI on the host which is typically a toolbar. The protected\n{{#crossLink \"Y.ButtonBase/_renderButtonUI:method\"}}{{/crossLink}} will be called,\nso the buttons which mix this extension will be able to overwrite the default behaviour.",
+            "description": "Renders the button UI on the host which is typically a toolbar. The protected\n{{#crossLink \"ButtonBase/_renderButtonUI:method\"}}{{/crossLink}} will be called,\nso the buttons which mix this extension will be able to overwrite the default behaviour.",
             "itemtype": "method",
             "name": "renderUI",
             "class": "ButtonBase"
@@ -1147,7 +1210,7 @@
         {
             "file": "src/ui/yui/src/buttons/button-base.js",
             "line": 175,
-            "description": "Fires {{#crossLink \"Y.ButtonBase/actionPerformed:event\"}}{{/crossLink}}. ButtonBase listens\nto this event and it will call {{#crossLink \"Y.ButtonBase/updateUI:method\"}}{{/crossLink}}\nfunction, so the buttons which are mutually exclusive, like H1 and H2 will be able to\nupdate their UI accordingly.",
+            "description": "Fires {{#crossLink \"ButtonBase/actionPerformed:event\"}}{{/crossLink}}. ButtonBase listens\nto this event and it will call {{#crossLink \"ButtonBase/updateUI:method\"}}{{/crossLink}}\nfunction, so the buttons which are mutually exclusive, like H1 and H2 will be able to\nupdate their UI accordingly.",
             "itemtype": "method",
             "name": "_afterClick",
             "access": "protected",
@@ -1172,6 +1235,7 @@
             "name": "toggle",
             "default": "true",
             "type": "Boolean",
+            "writeonce": "'initOnly'",
             "class": "ButtonBase"
         },
         {
@@ -1212,7 +1276,7 @@
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
             "line": 60,
-            "description": "On input change, reads the chosen file and creates an img element with src as Data URI.\nThen, fires an {{#crossLink \"Y.ButtonImage/imageadd:event\"}}{{/crossLink}} via CKEditor\nmessage system.",
+            "description": "On input change, reads the chosen file and creates an img element with src as Data URI.\nThen, fires an {{#crossLink \"ButtonImage/imageadd:event\"}}{{/crossLink}} via CKEditor\nmessage system.",
             "itemtype": "method",
             "name": "_onInputChange",
             "access": "protected",
@@ -1227,7 +1291,133 @@
             "name": "toggle",
             "default": "false",
             "type": "Boolean",
+            "writeonce": "'initOnly'",
             "class": "ButtonImage"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-left.js",
+            "line": 12,
+            "description": "Updates \"pressed\" attribute of the button. If the currently selected element\nis an image and this image is explicitly left aligned,\n\"pressed\" attribute will be set to true, otherwise - to false.",
+            "itemtype": "method",
+            "name": "updateUI",
+            "class": "ButtonLeft"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-left.js",
+            "line": 35,
+            "description": "Handles the click event. If the current status of button is \"pressed\",\napplies \"float: left\" style to the image and removes \"float\" style otherwise.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonLeft"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-left.js",
+            "line": 68,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'left'",
+            "type": "String",
+            "class": "ButtonLeft"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-right.js",
+            "line": 12,
+            "description": "Updates \"pressed\" attribute of the button. If the currently selected element\nis an image and this image is explicitly right aligned,\n\"pressed\" attribute will be set to true, otherwise - to false.",
+            "itemtype": "method",
+            "name": "updateUI",
+            "class": "ButtonRight"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-right.js",
+            "line": 35,
+            "description": "Handles the click event. If the current status of button is \"pressed\",\napplies \"float: right\" style to the image and removes \"float\" style otherwise.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonRight"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-right.js",
+            "line": 68,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'right'",
+            "type": "String",
+            "class": "ButtonRight"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-strong.js",
+            "line": 19,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'strong'",
+            "type": "String",
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-twitter.js",
+            "line": 12,
+            "description": "Overwrites the default behaviour of ButtonBase's\n{{#crossLink \"ButtonBase/updateUI:method\"}}{{/crossLink}} method since\nthis button does is not toggleable.",
+            "itemtype": "method",
+            "name": "updateUI",
+            "class": "ButtonTwitter"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-twitter.js",
+            "line": 23,
+            "description": "Reads the selected text from the editor and opens a browser window so the\nuser will be able to tweet directly the text.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonTwitter"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-twitter.js",
+            "line": 49,
+            "description": "Specifies if the button is toggleable, or not. ButtonTwitter will be not toggleable by default.",
+            "itemtype": "attribute",
+            "name": "toggle",
+            "default": "false",
+            "type": "Boolean",
+            "writeonce": "'initOnly'",
+            "class": "ButtonTwitter"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-twitter.js",
+            "line": 63,
+            "description": "Specifies the URL where user can tweet the selected text.",
+            "itemtype": "attribute",
+            "name": "tweetURL",
+            "default": "'https://twitter.com/intent/tweet?text='",
+            "type": "String",
+            "class": "ButtonTwitter"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-twitter.js",
+            "line": 75,
+            "description": "Specifies the properties of the browser window where the selected text\nwill appear.",
+            "itemtype": "attribute",
+            "name": "windowProperties",
+            "default": "'resizable,status,width=400,height=250'",
+            "type": "String",
+            "class": "ButtonTwitter"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-twitter.js",
+            "line": 88,
+            "description": "Specifies the title of the browser window where the selected text\nwill appear.",
+            "itemtype": "attribute",
+            "name": "windowTitle",
+            "default": "''",
+            "type": "String",
+            "class": "ButtonTwitter"
         },
         {
             "file": "src/ui/yui/src/buttons/button-underline.js",

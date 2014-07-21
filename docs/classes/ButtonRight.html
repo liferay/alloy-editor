@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ButtonU - AlloyEditor</title>
+    <title>ButtonRight - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,7 +110,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ButtonU Class</h1>
+                        <h1>ButtonRight Class</h1>
 <div class="box meta">
     
 
@@ -118,7 +118,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_ui_yui_src_buttons_button-underline.js.html#l6"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-underline.js:6</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_buttons_button-right.js.html#l6"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-right.js:6</code></a>
         </div>
     
 
@@ -130,16 +130,138 @@
 
 
 <div class="box intro">
-    <p>Button Underline. A standard AlloyUI/YUI class which allows to apply underline style to
-editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.</p>
+    <p>The ButtonRight class provides functionality for changing the alignment of an image.</p>
 
 </div>
 
 
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_ButtonU" class="method item">
-    <h3 class="name"><code>ButtonU</code></h3>
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__onClick">_onClick</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_updateUI">updateUI</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_element">element</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__onClick" class="method item protected">
+    <h3 class="name"><code>_onClick</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-right.js.html#l35"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-right.js:35</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handles the click event. If the current status of button is &quot;pressed&quot;,
+applies &quot;float: right&quot; style to the image and removes &quot;float&quot; style otherwise.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_updateUI" class="method item">
+    <h3 class="name"><code>updateUI</code></h3>
 
     
         <span class="paren">()</span>
@@ -170,7 +292,7 @@ editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-underline.js.html#l6"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-underline.js:6</code></a>
+        <a href="../files/src_ui_yui_src_buttons_button-right.js.html#l12"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-right.js:12</code></a>
         
         </p>
 
@@ -181,7 +303,10 @@ editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.</p>
     </div>
 
     <div class="description">
-        
+        <p>Updates &quot;pressed&quot; attribute of the button. If the currently selected element
+is an image and this image is explicitly right aligned,
+&quot;pressed&quot; attribute will be set to true, otherwise - to false.</p>
+
     </div>
 
     
@@ -191,46 +316,8 @@ editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.</p>
     
 </div>
 
-    </div>
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-        
-        
-            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-
-            
-
-            
-                <div class="index-section attrs">
-                    <h3>Attributes</h3>
-
-                    <ul class="index-list attrs">
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_element">element</a>
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-        </div>
-
+                
+            </div>
         
 
         
@@ -270,7 +357,7 @@ editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-underline.js.html#l22"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-underline.js:22</code></a>
+        <a href="../files/src_ui_yui_src_buttons_button-right.js.html#l68"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-right.js:68</code></a>
         
         </p>
 
@@ -280,12 +367,12 @@ editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.</p>
     </div>
 
     <div class="description">
-        <p>Specifies the style, which should be applied to the current selection in editor.</p>
+        <p>Specifies the element (style) which this button handles.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;u&#x27;</p>
+        <p><strong>Default:</strong> &#x27;right&#x27;</p>
     
 
     

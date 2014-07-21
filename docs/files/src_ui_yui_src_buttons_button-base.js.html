@@ -51,6 +51,12 @@
             
                 <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
             
+                <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
+            
+                <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
+            
+                <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+            
                 <li><a href="../classes/ButtonU.html">ButtonU</a></li>
             
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
@@ -170,10 +176,10 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
 
     /**
      * Fired once after user clicks on the button. ButtonBase will listen to this event and
-     * call {{#crossLink &quot;Y.ButtonBase/updateUI:method&quot;}}{{/crossLink}}, so the buttons
+     * call {{#crossLink &quot;ButtonBase/updateUI:method&quot;}}{{/crossLink}}, so the buttons
      * will have chance to update their UI accordingly. For example, if user clicks on
      * H2 button, and then clicks on H1 button, H2 button should remove its
-     * {{#crossLink &quot;Y.ButtonBase/pressed:attribute&quot;}}{{/crossLink}}, since these two styles
+     * {{#crossLink &quot;ButtonBase/pressed:attribute&quot;}}{{/crossLink}}, since these two styles
      * are mutually exclusive.
      *
      * @event actionPerformed
@@ -215,7 +221,7 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
 
         /**
          * Renders the button UI on the host which is typically a toolbar. The protected
-         * {{#crossLink &quot;Y.ButtonBase/_renderButtonUI:method&quot;}}{{/crossLink}} will be called,
+         * {{#crossLink &quot;ButtonBase/_renderButtonUI:method&quot;}}{{/crossLink}} will be called,
          * so the buttons which mix this extension will be able to overwrite the default behaviour.
          *
          * @method renderUI
@@ -283,8 +289,8 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
         },
 
         /**
-         * Fires {{#crossLink &quot;Y.ButtonBase/actionPerformed:event&quot;}}{{/crossLink}}. ButtonBase listens
-         * to this event and it will call {{#crossLink &quot;Y.ButtonBase/updateUI:method&quot;}}{{/crossLink}}
+         * Fires {{#crossLink &quot;ButtonBase/actionPerformed:event&quot;}}{{/crossLink}}. ButtonBase listens
+         * to this event and it will call {{#crossLink &quot;ButtonBase/updateUI:method&quot;}}{{/crossLink}}
          * function, so the buttons which are mutually exclusive, like H1 and H2 will be able to
          * update their UI accordingly.
          *
@@ -345,6 +351,7 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
          * @attribute toggle
          * @default true
          * @type Boolean
+         * @writeOnce &#x27;initOnly&#x27;
          */
         toggle: {
             validator: Lang.isBoolean,

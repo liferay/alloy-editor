@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/core/debounce.js - AlloyEditor</title>
+    <title>src/ui/yui/src/buttons/button-right.js - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,57 +110,96 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/core/debounce.js</h1>
+                        <h1 class="file-heading">File: src/ui/yui/src/buttons/button-right.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-(function() {
+YUI.add(&#x27;button-right&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
-    /**
-     * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
-     *
-     * @class CKEDITOR.tools
-     */
+    var Lang = Y.Lang;
 
     /**
-     * Debounce util function. If a function execution is expensive, it might be debounced. This means
-     * that it will be executed after some amount of time after its last call. For example, if we attach a
-     * a function on scroll event, it might be called hundreds times per second. In this case it may be
-     * debounced with, let&#x27;s say 100ms. The real execution of this function will happen 100ms after last
-     * scroll event.
+     * The ButtonRight class provides functionality for changing the alignment of an image.
      *
-     * @method debounce
-     * @param {Function} callback The callback which has to be called after given timeout.
-     * @param {Number} timeout Timeout in milliseconds after which the callback will be called.
-     * @param {Object} context The context in which the callback will be called. This argument is optional.
-     * @param {Array} args An array of arguments which the callback will receive.
+     * @class ButtonRight
      */
-    CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function(callback, timeout, context, args) {
-        var callFn,
-            debounceHandle;
+    var Right = Y.Base.create(&#x27;right&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        /**
+         * Updates &quot;pressed&quot; attribute of the button. If the currently selected element
+         * is an image and this image is explicitly right aligned,
+         * &quot;pressed&quot; attribute will be set to true, otherwise - to false.
+         *
+         * @method updateUI
+         */
+        updateUI: function() {
+            var editor,
+                element,
+                styleFloat;
 
-        callFn = function() {
-            var callContext,
-                calArgs;
+            editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
 
-            callContext = context || this;
-            calArgs = args || arguments;
+            element = editor.getSelection().getSelectedElement();
 
-            clearTimeout(debounceHandle);
+            if (element &amp;&amp; element.getName() === &#x27;img&#x27;) {
+                styleFloat = element.getStyle(&#x27;float&#x27;);
 
-            debounceHandle = setTimeout(function() {
-                callback.apply(callContext, calArgs);
-            }, timeout);
-        };
+                this._button.set(&#x27;pressed&#x27;, styleFloat === &#x27;right&#x27;);
+            }
+        },
 
-        callFn.cancel = function() {
-            clearTimeout(debounceHandle);
-        };
+        /**
+         * Handles the click event. If the current status of button is &quot;pressed&quot;,
+         * applies &quot;float: right&quot; style to the image and removes &quot;float&quot; style otherwise.
+         *
+         * @method _onClick
+         * @protected
+         */
+        _onClick: function(event) {
+            var instance = this,
+                btnInst,
+                editor,
+                element;
 
-        return callFn;
-    };
-}());
+            btnInst = event.target;
+
+            editor = instance.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
+
+            element = editor.getSelection().getSelectedElement();
+
+            if (btnInst.get(&#x27;pressed&#x27;)) {
+                element.setStyle(&#x27;float&#x27;, &#x27;right&#x27;);
+            } else {
+                element.removeStyle(&#x27;float&#x27;);
+            }
+        },
+
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-align-right&quot;&gt;&lt;/i&gt;&#x27;
+    }, {
+        NAME: &#x27;right&#x27;,
+
+        NS: &#x27;right&#x27;,
+
+        ATTRS: {
+            /**
+             * Specifies the element (style) which this button handles.
+             *
+             * @attribute element
+             * @default &#x27;right&#x27;
+             * @type String
+             */
+            element: {
+                validator: Lang.isString,
+                value: &#x27;right&#x27;
+            }
+        }
+    });
+
+    Y.ButtonRight = Right;
+
+}, &#x27;&#x27;, {
+    requires: [&#x27;button-base&#x27;]
+});
     </pre>
 </div>
 

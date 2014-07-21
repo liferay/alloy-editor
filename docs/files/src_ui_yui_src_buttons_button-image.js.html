@@ -51,6 +51,12 @@
             
                 <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
             
+                <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
+            
+                <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
+            
+                <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+            
                 <li><a href="../classes/ButtonU.html">ButtonU</a></li>
             
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
@@ -114,7 +120,7 @@ YUI.add(&#x27;button-image&#x27;, function(Y) {
     var Lang = Y.Lang;
 
     /**
-     * The ButtonImage class provides functionality for changing the alignment of an image.
+     * The ButtonImage class provides functionality for adding an image to the editor.
      *
      * @class ButtonImage
      */
@@ -169,7 +175,7 @@ YUI.add(&#x27;button-image&#x27;, function(Y) {
 
         /**
          * On input change, reads the chosen file and creates an img element with src as Data URI.
-         * Then, fires an {{#crossLink &quot;Y.ButtonImage/imageadd:event&quot;}}{{/crossLink}} via CKEditor
+         * Then, fires an {{#crossLink &quot;ButtonImage/imageadd:event&quot;}}{{/crossLink}} via CKEditor
          * message system.
          *
          * @method _onInputChange
@@ -215,6 +221,7 @@ YUI.add(&#x27;button-image&#x27;, function(Y) {
              * @attribute toggle
              * @default false
              * @type Boolean
+             * @writeOnce &#x27;initOnly&#x27;
              */
             toggle: {
                 validator: Lang.isBoolean,

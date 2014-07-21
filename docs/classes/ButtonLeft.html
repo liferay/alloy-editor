@@ -51,6 +51,12 @@
             
                 <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
             
+                <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
+            
+                <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
+            
+                <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+            
                 <li><a href="../classes/ButtonU.html">ButtonU</a></li>
             
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
@@ -124,7 +130,7 @@
 
 
 <div class="box intro">
-    <p>The ButtonImage class provides functionality for changing the alignment of an image.</p>
+    <p>The ButtonLeft class provides functionality for changing the alignment of an image.</p>
 
 </div>
 
@@ -135,7 +141,11 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
         
         
     </ul>
@@ -145,18 +155,284 @@
             <h2 class="off-left">Item Index</h2>
 
             
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__onClick">_onClick</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_updateUI">updateUI</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
 
+            
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_element">element</a>
+                            </li>
+                        
+                    </ul>
+                </div>
             
 
             
         </div>
 
         
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__onClick" class="method item protected">
+    <h3 class="name"><code>_onClick</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-left.js.html#l35"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-left.js:35</code></a>
+        
+        </p>
+
 
         
 
+        
+    </div>
+
+    <div class="description">
+        <p>Handles the click event. If the current status of button is &quot;pressed&quot;,
+applies &quot;float: left&quot; style to the image and removes &quot;float&quot; style otherwise.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_updateUI" class="method item">
+    <h3 class="name"><code>updateUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-left.js.html#l12"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-left.js:12</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Updates &quot;pressed&quot; attribute of the button. If the currently selected element
+is an image and this image is explicitly left aligned,
+&quot;pressed&quot; attribute will be set to true, otherwise - to false.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_element" class="attr item">
+    <a name="config_element"></a> 
+    <h3 class="name"><code>element</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-left.js.html#l68"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-left.js:68</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the element (style) which this button handles.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;left&#x27;</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>elementChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>element</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         

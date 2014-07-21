@@ -51,6 +51,12 @@
             
                 <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
             
+                <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
+            
+                <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
+            
+                <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+            
                 <li><a href="../classes/ButtonU.html">ButtonU</a></li>
             
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
@@ -114,11 +120,18 @@ YUI.add(&#x27;button-left&#x27;, function(Y) {
     var Lang = Y.Lang;
 
     /**
-     * The ButtonImage class provides functionality for changing the alignment of an image.
+     * The ButtonLeft class provides functionality for changing the alignment of an image.
      *
      * @class ButtonLeft
      */
     var Left = Y.Base.create(&#x27;left&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        /**
+         * Updates &quot;pressed&quot; attribute of the button. If the currently selected element
+         * is an image and this image is explicitly left aligned,
+         * &quot;pressed&quot; attribute will be set to true, otherwise - to false.
+         *
+         * @method updateUI
+         */
         updateUI: function() {
             var editor,
                 element,
@@ -135,6 +148,13 @@ YUI.add(&#x27;button-left&#x27;, function(Y) {
             }
         },
 
+        /**
+         * Handles the click event. If the current status of button is &quot;pressed&quot;,
+         * applies &quot;float: left&quot; style to the image and removes &quot;float&quot; style otherwise.
+         *
+         * @method _onClick
+         * @protected
+         */
         _onClick: function(event) {
             var instance = this,
                 btnInst,
@@ -161,6 +181,13 @@ YUI.add(&#x27;button-left&#x27;, function(Y) {
         NS: &#x27;left&#x27;,
 
         ATTRS: {
+            /**
+             * Specifies the element (style) which this button handles.
+             *
+             * @attribute element
+             * @default &#x27;left&#x27;
+             * @type String
+             */
             element: {
                 validator: Lang.isString,
                 value: &#x27;left&#x27;

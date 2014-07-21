@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/core/debounce.js - AlloyEditor</title>
+    <title>src/ui/yui/src/buttons/button-twitter.js - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,57 +110,117 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/core/debounce.js</h1>
+                        <h1 class="file-heading">File: src/ui/yui/src/buttons/button-twitter.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-(function() {
+YUI.add(&#x27;button-twitter&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
-    /**
-     * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
-     *
-     * @class CKEDITOR.tools
-     */
+    var Lang = Y.Lang;
 
     /**
-     * Debounce util function. If a function execution is expensive, it might be debounced. This means
-     * that it will be executed after some amount of time after its last call. For example, if we attach a
-     * a function on scroll event, it might be called hundreds times per second. In this case it may be
-     * debounced with, let&#x27;s say 100ms. The real execution of this function will happen 100ms after last
-     * scroll event.
+     * The ButtonTwitter class provides functionality for sending tweets based on the selected text.
      *
-     * @method debounce
-     * @param {Function} callback The callback which has to be called after given timeout.
-     * @param {Number} timeout Timeout in milliseconds after which the callback will be called.
-     * @param {Object} context The context in which the callback will be called. This argument is optional.
-     * @param {Array} args An array of arguments which the callback will receive.
+     * @class ButtonTwitter
      */
-    CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function(callback, timeout, context, args) {
-        var callFn,
-            debounceHandle;
+    var Tweet = Y.Base.create(&#x27;tweet&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        /**
+         * Overwrites the default behaviour of ButtonBase&#x27;s
+         * {{#crossLink &quot;ButtonBase/updateUI:method&quot;}}{{/crossLink}} method since
+         * this button does is not toggleable.
+         *
+         * @method updateUI
+         */
+        updateUI: function() {
+            // NOP
+        },
 
-        callFn = function() {
-            var callContext,
-                calArgs;
+        /**
+         * Reads the selected text from the editor and opens a browser window so the
+         * user will be able to tweet directly the text.
+         *
+         * @method _onClick
+         * @protected
+         */
+        _onClick: function() {
+            var editor;
 
-            callContext = context || this;
-            calArgs = args || arguments;
+            editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
 
-            clearTimeout(debounceHandle);
+            window.open(
+                this.get(&#x27;tweetURL&#x27;) + encodeURIComponent(editor.getSelection().getSelectedText()),
+                this.get(&#x27;windowTitle&#x27;),
+                this.get(&#x27;windowProperties&#x27;)
+            );
+        },
 
-            debounceHandle = setTimeout(function() {
-                callback.apply(callContext, calArgs);
-            }, timeout);
-        };
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-twitter&quot;&gt;&lt;/i&gt;&#x27;
+    }, {
+        NAME: &#x27;tweet&#x27;,
 
-        callFn.cancel = function() {
-            clearTimeout(debounceHandle);
-        };
+        NS: &#x27;tweet&#x27;,
 
-        return callFn;
-    };
-}());
+        ATTRS: {
+            /**
+             * Specifies if the button is toggleable, or not. ButtonTwitter will be not toggleable by default.
+             *
+             * @attribute toggle
+             * @default false
+             * @type Boolean
+             * @writeOnce &#x27;initOnly&#x27;
+             */
+            toggle: {
+                validator: Lang.isBoolean,
+                value: false,
+                writeOnce: &#x27;initOnly&#x27;
+            },
+
+            /**
+             * Specifies the URL where user can tweet the selected text.
+             *
+             * @attribute tweetURL
+             * @default &#x27;https://twitter.com/intent/tweet?text=&#x27;
+             * @type String
+             */
+            tweetURL: {
+                validator: Lang.isString,
+                value: &#x27;https://twitter.com/intent/tweet?text=&#x27;
+            },
+
+            /**
+             * Specifies the properties of the browser window where the selected text
+             * will appear.
+             *
+             * @attribute windowProperties
+             * @default &#x27;resizable,status,width=400,height=250&#x27;
+             * @type String
+             */
+            windowProperties: {
+                validator: Lang.isString,
+                value: &#x27;resizable,status,width=400,height=250&#x27;
+            },
+
+            /**
+             * Specifies the title of the browser window where the selected text
+             * will appear.
+             *
+             * @attribute windowTitle
+             * @default &#x27;&#x27;
+             * @type String
+             */
+            windowTitle: {
+                validator: Lang.isString,
+                value: &#x27;&#x27;
+            }
+        }
+    });
+
+    Y.ButtonTwitter = Tweet;
+
+}, &#x27;&#x27;, {
+    requires: [&#x27;button-base&#x27;]
+});
     </pre>
 </div>
 

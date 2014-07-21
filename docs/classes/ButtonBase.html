@@ -51,6 +51,12 @@
             
                 <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
             
+                <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
+            
+                <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
+            
+                <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+            
                 <li><a href="../classes/ButtonU.html">ButtonU</a></li>
             
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
@@ -350,8 +356,8 @@ protected</a>
     </div>
 
     <div class="description">
-        <p>Fires Y.ButtonBase/actionPerformed:event. ButtonBase listens
-to this event and it will call Y.ButtonBase/updateUI:method
+        <p>Fires <a href="../classes/ButtonBase.html#event_actionPerformed" class="crosslink">actionPerformed</a>. ButtonBase listens
+to this event and it will call <a href="../classes/ButtonBase.html#method_updateUI" class="crosslink">updateUI</a>
 function, so the buttons which are mutually exclusive, like H1 and H2 will be able to
 update their UI accordingly.</p>
 
@@ -734,7 +740,7 @@ button instance.</p>
 
     <div class="description">
         <p>Renders the button UI on the host which is typically a toolbar. The protected
-Y.ButtonBase/_renderButtonUI:method will be called,
+<a href="../classes/ButtonBase.html#method__renderButtonUI" class="crosslink">_renderButtonUI</a> will be called,
 so the buttons which mix this extension will be able to overwrite the default behaviour.</p>
 
     </div>
@@ -965,10 +971,10 @@ Buttons may be &quot;toggleable&quot; or &quot;push&quot; buttons.</p>
 
     <div class="description">
         <p>Fired once after user clicks on the button. ButtonBase will listen to this event and
-call Y.ButtonBase/updateUI:method, so the buttons
+call <a href="../classes/ButtonBase.html#method_updateUI" class="crosslink">updateUI</a>, so the buttons
 will have chance to update their UI accordingly. For example, if user clicks on
 H2 button, and then clicks on H1 button, H2 button should remove its
-Y.ButtonBase/pressed:attribute, since these two styles
+ButtonBase/pressed:attribute, since these two styles
 are mutually exclusive.</p>
 
     </div>
