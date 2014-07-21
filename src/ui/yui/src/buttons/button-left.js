@@ -4,11 +4,18 @@ YUI.add('button-left', function(Y) {
     var Lang = Y.Lang;
 
     /**
-     * The ButtonImage class provides functionality for changing the alignment of an image.
+     * The ButtonLeft class provides functionality for changing the alignment of an image.
      *
      * @class ButtonLeft
      */
     var Left = Y.Base.create('left', Y.Plugin.Base, [Y.ButtonBase], {
+        /**
+         * Updates "pressed" attribute of the button. If the currently selected element
+         * is an image and this image is explicitly left aligned,
+         * "pressed" attribute will be set to true, otherwise - to false.
+         *
+         * @method updateUI
+         */
         updateUI: function() {
             var editor,
                 element,
@@ -25,6 +32,13 @@ YUI.add('button-left', function(Y) {
             }
         },
 
+        /**
+         * Handles the click event. If the current status of button is "pressed",
+         * applies "float: left" style to the image and removes "float" style otherwise.
+         *
+         * @method _onClick
+         * @protected
+         */
         _onClick: function(event) {
             var instance = this,
                 btnInst,
@@ -51,6 +65,13 @@ YUI.add('button-left', function(Y) {
         NS: 'left',
 
         ATTRS: {
+            /**
+             * Specifies the element (style) which this button handles.
+             *
+             * @attribute element
+             * @default 'left'
+             * @type String
+             */
             element: {
                 validator: Lang.isString,
                 value: 'left'
