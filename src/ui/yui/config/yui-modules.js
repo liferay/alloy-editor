@@ -49,7 +49,7 @@
     'button-image': {
         group: 'AlloyEditor',
         path: 'buttons/button-image.js',
-        requires: ['button-base']
+        requires: ['button-base', 'node-event-simulate']
     },
 
     'button-code': {
