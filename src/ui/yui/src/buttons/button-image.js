@@ -99,7 +99,8 @@ YUI.add('button-image', function(Y) {
 
         ATTRS: {
             /**
-             * Specifies that this button will be not toggleable.
+             * Specifies if this button will be toggleable, or not.
+             * ButtonImage will be not toggleable by default.
              *
              * @attribute toggle
              * @default false
