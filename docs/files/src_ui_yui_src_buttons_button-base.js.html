@@ -43,8 +43,6 @@
             
                 <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
             
-                <li><a href="../classes/ButtonBase.html">ButtonBase</a></li>
-            
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
             
                 <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
@@ -56,6 +54,8 @@
                 <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
             
                 <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+            
+                <li><a href="../classes/Y.ButtonBase.html">Y.ButtonBase</a></li>
             
                 <li><a href="../classes/Y.ButtonU.html">Y.ButtonU</a></li>
             
@@ -154,7 +154,23 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
      *
      * The code above creates a button, which will allow user to make selection italic.
      *
-     * @class ButtonBase
+     * A more complex button may change the UI of the host (Toolbar) too. If the Toolbar mix
+     * ToolbarBase extension, then it will export an attribute, called &quot;buttonContainer&quot;. By
+     * default, the buttons will be rendered in this container, so one button will be able to
+     * hide the others and provide a different UI for the host (container).
+     *
+     * @class Y.ButtonBase
+     */
+
+    /**
+     * Fired once after user clicks on the button. ButtonBase will listen to this event and
+     * call {{#crossLink &quot;Y.ButtonBase/updateUI:method&quot;}}{{/crossLink}}, so the buttons
+     * will have chance to update their UI accordingly. For example, if user clicks on
+     * H2 button, and then clicks on H1 button, H2 button should remove its
+     * {{#crossLink &quot;Y.ButtonBase/pressed:attribute&quot;}}{{/crossLink}}, since these two styles
+     * are mutually exclusive.
+     *
+     * @event actionPerformed
      */
     ButtonBase.prototype = {
         /**
@@ -180,6 +196,13 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
             this.afterHostEvent([&#x27;visibleChange&#x27;, &#x27;actionPerformed&#x27;], this.updateUI, this);
         },
 
+        /**
+         * Destructor lifecycle implementation for the ButtonBase class. Destroys the internal
+         * button instance.
+         *
+         * @method destructor
+         * @protected
+         */
         destructor: function() {
             this._button.destroy();
         },
@@ -195,10 +218,26 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
             this._renderButtonUI();
         },
 
+        /**
+         * ButtonBase does not provide implementation, the buttons which mix this extension
+         * may provide one.
+         *
+         * @method bindUI
+         */
         bindUI: function() {
             // NOP, buttons should override it
         },
 
+        /**
+         * Updates the toggle status of the button. If the selection has the style, specified by
+         * the button, its status will be made active and &quot;pressed&quot; attribute of the button will be
+         * set to true, otherwise, it will be set to false. ButtonStrong for example is toggleable button.
+         * Once &quot;updateUI&quot; function is called, the implementation will check if style &quot;strong&quot; is active on
+         * the current selection. If so, &quot;pressed&quot; attribute of the button will be set to true and removed
+         * otherwise.
+         *
+         * @method updateUI
+         */
         updateUI: function() {
             var editor,
                 elementPath,
@@ -215,6 +254,14 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
             }
         },
 
+        /**
+         * Applies the style for this button if its current status is pressed
+         * and removes it if button is not pressed. For example, ButtonStrong will
+         * apply style &quot;strong&quot; to the selection, when pressed.
+         *
+         * @method _onClick
+         * protected
+         */
         _onClick: function() {
             var editor;
 
@@ -229,6 +276,15 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
             }
         },
 
+        /**
+         * Fires {{#crossLink &quot;Y.ButtonBase/actionPerformed:event&quot;}}{{/crossLink}}. ButtonBase listens
+         * to this event and it will call {{#crossLink &quot;Y.ButtonBase/updateUI:method&quot;}}{{/crossLink}}
+         * function, so the buttons which are mutually exclusive, like H1 and H2 will be able to
+         * update their UI accordingly.
+         *
+         * @method _afterClick
+         * @protected
+         */
         _afterClick: function() {
             this.fire(&#x27;actionPerformed&#x27;, {
                 style: this._style
@@ -236,10 +292,14 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
         },
 
         /**
+         * A Toolbar should provide a container (DOM Node) where the buttons will be rendered.
+         * By default Toolbars, which extend ToolbarBase extension will expose an attribute,
+         * called &quot;buttonsContainer&quot;. The value of this attribute is the container where buttons will
+         * be rendered, so they will share common container and one button may hide the others
+         * temporally and provide custom UI for the Toolbar.
          *
-         * A Toolbar provides DOM Node where the buttons render. By default Toolbars,
-         * which extend ToolbarBase extension will provide and attribute, called &quot;buttonsContainer&quot;.
-         * The value of this attribute is the container where button should render.
+         * @method _renderButtonUI
+         * @protected
          */
         _renderButtonUI: function() {
             var btnInst,
@@ -272,6 +332,14 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
     };
 
     ButtonBase.ATTRS = {
+        /**
+         * Specifies if the button is toggleable, or not.
+         * Buttons may be &quot;toggleable&quot; or &quot;push&quot; buttons.
+         *
+         * @attribute toggle
+         * @default true
+         * @type Boolean
+         */
         toggle: {
             validator: Lang.isBoolean,
             value: true,
