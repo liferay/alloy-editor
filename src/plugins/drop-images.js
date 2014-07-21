@@ -151,7 +151,7 @@
 
                     editor.insertElement(el);
 
-                    CKEDITOR.fire('imagedrop', el);
+                    editor.fire('imagedrop', el);
                 });
 
                 reader.readAsDataURL(file);
