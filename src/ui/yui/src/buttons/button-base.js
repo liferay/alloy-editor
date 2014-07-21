@@ -50,7 +50,23 @@ YUI.add('button-base', function(Y) {
      *
      * The code above creates a button, which will allow user to make selection italic.
      *
-     * @class ButtonBase
+     * A more complex button may change the UI of the host (Toolbar) too. If the Toolbar mix
+     * ToolbarBase extension, then it will export an attribute, called "buttonContainer". By
+     * default, the buttons will be rendered in this container, so one button will be able to
+     * hide the others and provide a different UI for the host (container).
+     *
+     * @class Y.ButtonBase
+     */
+
+    /**
+     * Fired once after user clicks on the button. ButtonBase will listen to this event and
+     * call {{#crossLink "Y.ButtonBase/updateUI:method"}}{{/crossLink}}, so the buttons
+     * will have chance to update their UI accordingly. For example, if user clicks on
+     * H2 button, and then clicks on H1 button, H2 button should remove its
+     * {{#crossLink "Y.ButtonBase/pressed:attribute"}}{{/crossLink}}, since these two styles
+     * are mutually exclusive.
+     *
+     * @event actionPerformed
      */
     ButtonBase.prototype = {
         /**
@@ -76,6 +92,13 @@ YUI.add('button-base', function(Y) {
             this.afterHostEvent(['visibleChange', 'actionPerformed'], this.updateUI, this);
         },
 
+        /**
+         * Destructor lifecycle implementation for the ButtonBase class. Destroys the internal
+         * button instance.
+         *
+         * @method destructor
+         * @protected
+         */
         destructor: function() {
             this._button.destroy();
         },
@@ -91,10 +114,26 @@ YUI.add('button-base', function(Y) {
             this._renderButtonUI();
         },
 
+        /**
+         * ButtonBase does not provide implementation, the buttons which mix this extension
+         * may provide one.
+         *
+         * @method bindUI
+         */
         bindUI: function() {
             // NOP, buttons should override it
         },
 
+        /**
+         * Updates the toggle status of the button. If the selection has the style, specified by
+         * the button, its status will be made active and "pressed" attribute of the button will be
+         * set to true, otherwise, it will be set to false. ButtonStrong for example is toggleable button.
+         * Once "updateUI" function is called, the implementation will check if style "strong" is active on
+         * the current selection. If so, "pressed" attribute of the button will be set to true and removed
+         * otherwise.
+         *
+         * @method updateUI
+         */
         updateUI: function() {
             var editor,
                 elementPath,
@@ -111,6 +150,14 @@ YUI.add('button-base', function(Y) {
             }
         },
 
+        /**
+         * Applies the style for this button if its current status is pressed
+         * and removes it if button is not pressed. For example, ButtonStrong will
+         * apply style "strong" to the selection, when pressed.
+         *
+         * @method _onClick
+         * protected
+         */
         _onClick: function() {
             var editor;
 
@@ -125,6 +172,15 @@ YUI.add('button-base', function(Y) {
             }
         },
 
+        /**
+         * Fires {{#crossLink "Y.ButtonBase/actionPerformed:event"}}{{/crossLink}}. ButtonBase listens
+         * to this event and it will call {{#crossLink "Y.ButtonBase/updateUI:method"}}{{/crossLink}}
+         * function, so the buttons which are mutually exclusive, like H1 and H2 will be able to
+         * update their UI accordingly.
+         *
+         * @method _afterClick
+         * @protected
+         */
         _afterClick: function() {
             this.fire('actionPerformed', {
                 style: this._style
@@ -132,10 +188,14 @@ YUI.add('button-base', function(Y) {
         },
 
         /**
+         * A Toolbar should provide a container (DOM Node) where the buttons will be rendered.
+         * By default Toolbars, which extend ToolbarBase extension will expose an attribute,
+         * called "buttonsContainer". The value of this attribute is the container where buttons will
+         * be rendered, so they will share common container and one button may hide the others
+         * temporally and provide custom UI for the Toolbar.
          *
-         * A Toolbar provides DOM Node where the buttons render. By default Toolbars,
-         * which extend ToolbarBase extension will provide and attribute, called "buttonsContainer".
-         * The value of this attribute is the container where button should render.
+         * @method _renderButtonUI
+         * @protected
          */
         _renderButtonUI: function() {
             var btnInst,
@@ -168,6 +228,14 @@ YUI.add('button-base', function(Y) {
     };
 
     ButtonBase.ATTRS = {
+        /**
+         * Specifies if the button is toggleable, or not.
+         * Buttons may be "toggleable" or "push" buttons.
+         *
+         * @attribute toggle
+         * @default true
+         * @type Boolean
+         */
         toggle: {
             validator: Lang.isBoolean,
             value: true,
