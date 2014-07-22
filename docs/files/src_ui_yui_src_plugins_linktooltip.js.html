@@ -83,6 +83,12 @@
             
                 <li><a href="../classes/LinkTooltip.html">LinkTooltip</a></li>
             
+                <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+            
+                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+            
+                <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -231,8 +237,8 @@
                 },
 
                 /**
-                 * Hides the linktooltip container after some delay, specified by
-                 * {{#crossLink &quot;LinkTooltip/hideDelay:attribute&quot;}}{{/crossLink}} attribute.
+                 * Hides the linktooltip container after some timeout, specified by
+                 * {{#crossLink &quot;LinkTooltip/hideTimeout:attribute&quot;}}{{/crossLink}} attribute.
                  *
                  * @method _attachHiddenHandle
                  * @protected
@@ -244,7 +250,7 @@
                         function() {
                             instance.hide();
                         },
-                        this.get(&#x27;hideDelay&#x27;)
+                        this.get(&#x27;hideTimeout&#x27;)
                     );
                 },
 
@@ -404,7 +410,7 @@
                     },
 
                     /**
-                     * Specifies the gutter of the toolbar. The gutter object contains the top and left
+                     * Specifies the gutter of the tooltip. The gutter object contains the top and left
                      * offsets from the point, where the tooltip is supposed to appear.
                      *
                      * @attribute gutter
@@ -423,13 +429,13 @@
                     },
 
                     /**
-                     * Specifies the delay after which the link tooltip will be hidden.
+                     * Specifies the timeout after which the link tooltip will be hidden.
                      *
-                     * @attribute hideDelay
+                     * @attribute hideTimeout
                      * @default 2000 (sec)
                      * @type Number
                      */
-                    hideDelay: {
+                    hideTimeout: {
                         validator: Lang.isNumber,
                         value: 2000
                     }

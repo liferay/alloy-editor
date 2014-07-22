@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/core/link.js - AlloyEditor</title>
+    <title>src/ui/yui/src/toolbars/toolbar-base.js - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -128,139 +128,189 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/core/link.js</h1>
+                        <h1 class="file-heading">File: src/ui/yui/src/toolbars/toolbar-base.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-(function() {
+YUI.add(&#x27;toolbar-base&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
+    var Lang = Y.Lang,
+        YArray = Y.Array;
+
+    function ToolbarBase() {}
+
     /**
-     * Link class utility. Provides methods for create, delete and update links.
+     * The ToolbarBase extension is a common base for all AlloyEditor&#x27;s Toolbars.
      *
-     * @class CKEDITOR.Link
-     * @constructor
+     * @class ToolbarBase
      */
-
-    function Link(editor) {
-        this._editor = editor;
-    }
-
-    Link.prototype = {
-        constructor: Link,
-
+    ToolbarBase.prototype = {
         /**
-         * Create a link with given URI as href.
+         * Initializer lifecycle implementation for the ToolbarBase class.
          *
-         * @method create
-         * @param {String} URI The URI of the link.
-         * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
+         * @method initializer
+         * @protected
+         * @param config {Object} Configuration object literal for the toolbar
          */
-        create: function(URI, attrs) {
-            var linkAttrs,
-                range,
-                selection,
-                style,
-                text;
+        initializer: function() {
+            var instance = this,
+                editor;
 
-            selection = this._editor.getSelection();
+            editor = instance.get(&#x27;editor&#x27;);
 
-            range = selection.getRanges()[0];
+            instance._editorNode = Y.one(editor.element.$);
 
-            if (range.collapsed) {
-                text = new CKEDITOR.dom.text(URI, this._editor.document);
-                range.insertNode(text);
-                range.selectNodeContents(text);
-            }
+            YArray.each(
+                instance.get(&#x27;buttons&#x27;),
+                function(item) {
+                    var instanceName;
 
-            linkAttrs = CKEDITOR.tools.merge({
-                &#x27;data-cke-saved-href&#x27;: URI,
-                href: URI
-            }, attrs);
+                    instanceName = instance._getButtonInstanceName(item);
 
-            style = new CKEDITOR.style({
-                attributes: linkAttrs,
-                element: &#x27;a&#x27;
-            });
+                    item = Lang.isObject(item) ? item : null;
 
-            style.type = CKEDITOR.STYLE_INLINE;
-            style.applyToRange(range, this._editor);
-            range.select();
+                    instance.plug(Y[instanceName], item);
+
+                    // Each button will fire actionPerformed when user interacts with it. Here we will
+                    // re-fire this event to the other buttons so they will be able to update their UI too.
+                    instance[Y[instanceName].NS].after(&#x27;actionPerformed&#x27;, instance._afterActionPerformed, instance);
+                }
+            );
+
+            editor.on(&#x27;editorInteraction&#x27;, instance._onEditorInteraction, instance);
         },
 
         /**
-         * Retrieves a link from the current selection.
+         * Fires {{#crossLink &quot;ButtonBase/_afterActionPerformed:event&quot;}}{{/crossLink}} so the buttons
+         * attached to Toolbar, which mixes this extension will be notified that user performed
+         * an action.
          *
-         * @method getFromSelection
-         * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
+         * @method _afterActionPerformed
+         * @protected
          */
-        getFromSelection: function() {
-            var range,
-                selection,
-                selectedElement;
-
-            selection = this._editor.getSelection();
-
-            selectedElement = selection.getSelectedElement();
-
-            if (selectedElement &amp;&amp; selectedElement.is(&#x27;a&#x27;)) {
-                return selectedElement;
-            }
-
-            range = selection.getRanges()[0];
-
-            if (range) {
-                range.shrink(CKEDITOR.SHRINK_TEXT);
-
-                return this._editor.elementPath(range.getCommonAncestor()).contains(&#x27;a&#x27;, 1);
-            }
-
-            return null;
+        _afterActionPerformed: function(event) {
+            this.fire(&#x27;actionPerformed&#x27;, event);
         },
 
         /**
-         * Removes a link from the editor.
+         * Returns the container in which all buttons are being rendered.
          *
-         * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
-         * @method remove
+         * @method _getButtonsContainer
+         * @protected
+         * @return {Node} The container of all buttons attached to the current isntance of Toolbar.
          */
-        remove: function(link) {
-            var style;
+        _getButtonsContainer: function() {
+            return this._buttonsContainer;
+        },
 
-            if (link) {
-                link.remove(this._editor);
+        /**
+         * Resolves and returns the name of the Button from the current editor configuration.
+         *
+         * @method _getButtonInstanceName
+         * @protected
+         * @return {String} The constructed name of Button.
+         * See {{#crossLink &quot;CKEDITOR.plugins.uiloader/_getModules:method&quot;}}{{/crossLink}}
+         * for more information about the rules for constructing button names.
+         */
+        _getButtonInstanceName: function(buttonName) {
+            return &#x27;Button&#x27; + buttonName.substring(0, 1).toUpperCase() + buttonName.substring(1);
+        },
+
+        /**
+         * Moves the Toolbar to a point in page coordinates. If transition was specified via the
+         * {{#crossLink &quot;ToolbarBase/transition:attribute&quot;}}{{/crossLink}}, it will be applied too.
+         *
+         * @method _moveToPoint
+         * @protected
+         */
+        _moveToPoint: function(xy, direction) {
+            var boundingBox,
+                boundingBoxNode,
+                height,
+                transition,
+                y;
+
+            boundingBox = this.get(&#x27;boundingBox&#x27;);
+
+            boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;hidden&#x27;);
+
+            transition = this.get(&#x27;transition&#x27;);
+
+            if (transition) {
+                boundingBoxNode = boundingBox.getDOMNode();
+
+                height = boundingBoxNode.offsetHeight;
+
+                if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                    y = xy[1] - height;
+                } else {
+                    y = xy[1] + height;
+                }
+
+                this.set(&#x27;xy&#x27;, [xy[0], y]);
+
+                transition.left = xy[0] + &#x27;px&#x27;;
+                transition.top = xy[1] + &#x27;px&#x27;;
+
+                boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;visible&#x27;);
+
+                boundingBox.transition(transition);
             } else {
-                style = link || new CKEDITOR.style({
-                    alwaysRemoveElement: 1,
-                    element: &#x27;a&#x27;,
-                    type: CKEDITOR.STYLE_INLINE
-                });
+                boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;visible&#x27;);
 
-                this._editor.removeStyle(style);
+                this.set(&#x27;xy&#x27;, xy);
             }
+        },
+    };
+
+    ToolbarBase.ATTRS = {
+        /**
+         * Returns the container in Toolbar&#x27;s contentBox, where all buttons are rendered.
+         *
+         * @attribute buttonsContainer
+         * @type Node
+         * @readOnly
+         */
+        buttonsContainer: {
+            getter: &#x27;_getButtonsContainer&#x27;,
+            readOnly: true
         },
 
         /**
-         * Updates the href of an already existing link.
+         * Contains the native editor implementation.
          *
-         * @param {String} The new URI of the link.
-         * @param {CKEDITOR.dom.element} link The link element which href should be removed.
-         * @method update
+         * @attribute editor
+         * @default true
+         * @type Object
          */
-        update: function(URI, link) {
-            var style;
+        editor: {
+            validator: Lang.isObject
+        },
 
-            style = link || this.getFromSelection();
-
-            style.setAttributes({
-                &#x27;data-cke-saved-href&#x27;: URI,
-                href: URI
-            });
+        /**
+         * Specifies the transition which should be applied when Toolbars moves to given position.
+         *
+         * @attribute transition
+         * @default {
+         *    easing: &#x27;ease-out&#x27;,
+         *    duration: 0.1
+         *  }
+         * @type Object
+         */
+        transition: {
+            value: {
+                easing: &#x27;ease-out&#x27;,
+                duration: 0.1
+            }
         }
     };
 
-    CKEDITOR.Link = CKEDITOR.Link || Link;
-}());
+    Y.ToolbarBase = ToolbarBase;
+
+}, &#x27;&#x27;, {
+    requires: [&#x27;plugin&#x27;, &#x27;node-base&#x27;]
+});
     </pre>
 </div>
 

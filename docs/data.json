@@ -193,6 +193,25 @@
             },
             "fors": {},
             "namespaces": {}
+        },
+        "src/ui/yui/src/toolbars/toolbar-add.js": {
+            "name": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "modules": {},
+            "classes": {
+                "ToolbarAdd": 1,
+                "ToolbarAddItems": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/toolbars/toolbar-base.js": {
+            "name": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "modules": {},
+            "classes": {
+                "ToolbarBase": 1
+            },
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {},
@@ -452,6 +471,42 @@
             "file": "src/ui/yui/src/plugins/loader.js",
             "line": 10,
             "description": "The CKEDITOR.plugins.uiloader plugin loads the editor UI on demand, depending on the\nconfiguration of the Toolbars and Buttons."
+        },
+        "ToolbarAdd": {
+            "name": "ToolbarAdd",
+            "shortname": "ToolbarAdd",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 9,
+            "description": "The ToolbarAdd class provides functionality for adding content to the editor."
+        },
+        "ToolbarAddItems": {
+            "name": "ToolbarAddItems",
+            "shortname": "ToolbarAddItems",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 322,
+            "description": "The ToolbarAddItems class hosts buttons for adding content to the current editor instance. This class is intended to be\nused internally by {{#crossLink \"ToolbarAdd\"}}{{/crossLink}} class."
+        },
+        "ToolbarBase": {
+            "name": "ToolbarBase",
+            "shortname": "ToolbarBase",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 9,
+            "description": "The ToolbarBase extension is a common base for all AlloyEditor's Toolbars."
         }
     },
     "classitems": [
@@ -713,7 +768,7 @@
         {
             "file": "src/core/uicore.js",
             "line": 20,
-            "description": "Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,\nor touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout\nis 50ms. This value can be overwritten via {{#crossLink \"CKEDITOR.plugins.uicore/delay:attribute\"}}{{/crossLink}}\nproperty of editor's configuration, like: editor.config.uicore.delay = 100",
+            "description": "Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,\nor touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout\nis 50ms. This value can be overwritten via {{#crossLink \"CKEDITOR.plugins.uicore/timeout:attribute\"}}{{/crossLink}}\nproperty of editor's configuration, like: editor.config.uicore.timeout = 100",
             "itemtype": "event",
             "name": "editorInteraction",
             "params": [
@@ -740,7 +795,7 @@
             "line": 41,
             "description": "Specifies the default timeout after which the {{#crossLink \"CKEDITOR.plugins.uicore/editorInteraction:event\"}}{{/crossLink}} event\nwill be fired.",
             "itemtype": "attribute",
-            "name": "delay",
+            "name": "timeout",
             "default": "50 (ms)",
             "type": "Number",
             "class": "CKEDITOR.plugins.uicore"
@@ -1655,7 +1710,7 @@
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
             "line": 105,
-            "description": "Hides the linktooltip container after some delay, specified by\n{{#crossLink \"LinkTooltip/hideDelay:attribute\"}}{{/crossLink}} attribute.",
+            "description": "Hides the linktooltip container after some timeout, specified by\n{{#crossLink \"LinkTooltip/hideTimeout:attribute\"}}{{/crossLink}} attribute.",
             "itemtype": "method",
             "name": "_attachHiddenHandle",
             "access": "protected",
@@ -1735,7 +1790,7 @@
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
             "line": 278,
-            "description": "Specifies the gutter of the toolbar. The gutter object contains the top and left\noffsets from the point, where the tooltip is supposed to appear.",
+            "description": "Specifies the gutter of the tooltip. The gutter object contains the top and left\noffsets from the point, where the tooltip is supposed to appear.",
             "itemtype": "attribute",
             "name": "gutter",
             "default": "{\n  left: 0,\n  top: 0\n}",
@@ -1745,9 +1800,9 @@
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
             "line": 297,
-            "description": "Specifies the delay after which the link tooltip will be hidden.",
+            "description": "Specifies the timeout after which the link tooltip will be hidden.",
             "itemtype": "attribute",
-            "name": "hideDelay",
+            "name": "hideTimeout",
             "default": "2000 (sec)",
             "type": "Number",
             "class": "LinkTooltip"
@@ -1799,6 +1854,274 @@
                 "type": "String"
             },
             "class": "CKEDITOR.plugins.uiloader"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 15,
+            "description": "Initializer lifecycle implementation for the ToolbarAdd class.",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Configuration object literal for the toolbar",
+                    "type": "Object"
+                }
+            ],
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 32,
+            "description": "Attaches events to the boundingBox which will help to handle the appearance of the\nmenu with the buttons.",
+            "itemtype": "method",
+            "name": "bindUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 55,
+            "description": "Destroys the buttons container and its hide handler.",
+            "itemtype": "method",
+            "name": "destructor",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 69,
+            "description": "Renders the two containers - for button add and the overlay which hosts the buttons.",
+            "itemtype": "method",
+            "name": "renderUI",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 80,
+            "description": "Calculates and sets the position of the toolbar.",
+            "itemtype": "method",
+            "name": "showAtPoint",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 102,
+            "description": "Aligns the position of buttons overlay, so it shows next to the button container.",
+            "itemtype": "method",
+            "name": "_alignButtonsOverlay",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 112,
+            "description": "On mouseenter event, cancels the hide listener for hiding the buttons overlay.",
+            "itemtype": "method",
+            "name": "_handleMouseEnter",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 122,
+            "description": "On mouseleave event, cancels and then starts again the hide listener for hiding the buttons overlay.",
+            "itemtype": "method",
+            "name": "_handleMouseEnter",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 134,
+            "description": "Hides the buttons overlay.",
+            "itemtype": "method",
+            "name": "_hideButtonsContainer",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 144,
+            "description": "Displays or hides the toolbar when user interacts with the editor\n(via mouse, keyboard or touch device).\nToolbarAdd displays itself always - regardless of the fact the selection\nis empty or not. It might be hidden only if there is no any selection region.",
+            "itemtype": "method",
+            "name": "_hideButtonsContainer",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 171,
+            "description": "Renders the button add container.",
+            "itemtype": "method",
+            "name": "_renderAddNode",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 200,
+            "description": "Renders the overlay which contains the buttons for adding content.",
+            "itemtype": "method",
+            "name": "_renderButtonsOverlay",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 222,
+            "description": "Displays both containers - for add button and those which hosts the buttons\nfor adding content.",
+            "itemtype": "method",
+            "name": "_showButtonsContainer",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 248,
+            "description": "Specifies the buttons, which will be attached to the current instance of the toolbar.\nA button configuration can be simple string with the name of the button, or an object\nwith properties, like this:\n<pre><code>\n    buttons: ['image']\n</pre></code>\n    or:\n<pre><code>\n    buttons: [\n        'image': {\n            zIndex: 1024,\n            property2: 1024\n        }\n    ]\n</pre></code>",
+            "itemtype": "attribute",
+            "name": "buttons",
+            "default": "['image', 'code']",
+            "type": "Array",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 274,
+            "description": "Specifies whether the toolbar show be constrained to the viewport.",
+            "itemtype": "attribute",
+            "name": "constrain",
+            "default": "true",
+            "type": "Boolean",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 286,
+            "description": "Specifies the gutter of the toolbar. The gutter object contains the top and left\noffsets from the point, where the toolbar is supposed to appear.",
+            "itemtype": "attribute",
+            "name": "gutter",
+            "default": "{\n  left: 5,\n  top: 0\n}",
+            "type": "Object",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-add.js",
+            "line": 305,
+            "description": "Specifies the timeout after which the buttons overlay will be hidden.",
+            "itemtype": "attribute",
+            "name": "hideTimeout",
+            "default": "1000 (sec)",
+            "type": "Number",
+            "class": "ToolbarAdd"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 15,
+            "description": "Initializer lifecycle implementation for the ToolbarBase class.",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Configuration object literal for the toolbar",
+                    "type": "Object"
+                }
+            ],
+            "class": "ToolbarBase"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 50,
+            "description": "Fires {{#crossLink \"ButtonBase/_afterActionPerformed:event\"}}{{/crossLink}} so the buttons\nattached to Toolbar, which mixes this extension will be notified that user performed\nan action.",
+            "itemtype": "method",
+            "name": "_afterActionPerformed",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarBase"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 62,
+            "description": "Returns the container in which all buttons are being rendered.",
+            "itemtype": "method",
+            "name": "_getButtonsContainer",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "The container of all buttons attached to the current isntance of Toolbar.",
+                "type": "Node"
+            },
+            "class": "ToolbarBase"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 73,
+            "description": "Resolves and returns the name of the Button from the current editor configuration.",
+            "itemtype": "method",
+            "name": "_getButtonInstanceName",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "The constructed name of Button.\nSee {{#crossLink \"CKEDITOR.plugins.uiloader/_getModules:method\"}}{{/crossLink}}\nfor more information about the rules for constructing button names.",
+                "type": "String"
+            },
+            "class": "ToolbarBase"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 86,
+            "description": "Moves the Toolbar to a point in page coordinates. If transition was specified via the\n{{#crossLink \"ToolbarBase/transition:attribute\"}}{{/crossLink}}, it will be applied too.",
+            "itemtype": "method",
+            "name": "_moveToPoint",
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarBase"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 134,
+            "description": "Returns the container in Toolbar's contentBox, where all buttons are rendered.",
+            "itemtype": "attribute",
+            "name": "buttonsContainer",
+            "type": "Node",
+            "readonly": "",
+            "class": "ToolbarBase"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 146,
+            "description": "Contains the native editor implementation.",
+            "itemtype": "attribute",
+            "name": "editor",
+            "default": "true",
+            "type": "Object",
+            "class": "ToolbarBase"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 157,
+            "description": "Specifies the transition which should be applied when Toolbars moves to given position.",
+            "itemtype": "attribute",
+            "name": "transition",
+            "default": "{\n   easing: 'ease-out',\n   duration: 0.1\n }",
+            "type": "Object",
+            "class": "ToolbarBase"
         }
     ],
     "warnings": []

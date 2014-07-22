@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/core/link.js - AlloyEditor</title>
+    <title>ToolbarAddItems - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -128,140 +128,64 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/core/link.js</h1>
+                        <h1>ToolbarAddItems Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-(function() {
-    &#x27;use strict&#x27;;
+    
 
-    /**
-     * Link class utility. Provides methods for create, delete and update links.
-     *
-     * @class CKEDITOR.Link
-     * @constructor
-     */
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l322"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:322</code></a>
+        </div>
+    
 
-    function Link(editor) {
-        this._editor = editor;
-    }
+    
 
-    Link.prototype = {
-        constructor: Link,
+    
+</div>
 
-        /**
-         * Create a link with given URI as href.
-         *
-         * @method create
-         * @param {String} URI The URI of the link.
-         * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
-         */
-        create: function(URI, attrs) {
-            var linkAttrs,
-                range,
-                selection,
-                style,
-                text;
 
-            selection = this._editor.getSelection();
 
-            range = selection.getRanges()[0];
+<div class="box intro">
+    <p>The ToolbarAddItems class hosts buttons for adding content to the current editor instance. This class is intended to be
+used internally by <a href="../classes/ToolbarAdd.html" class="crosslink">ToolbarAdd</a> class.</p>
 
-            if (range.collapsed) {
-                text = new CKEDITOR.dom.text(URI, this._editor.document);
-                range.insertNode(text);
-                range.selectNodeContents(text);
-            }
+</div>
 
-            linkAttrs = CKEDITOR.tools.merge({
-                &#x27;data-cke-saved-href&#x27;: URI,
-                href: URI
-            }, attrs);
 
-            style = new CKEDITOR.style({
-                attributes: linkAttrs,
-                element: &#x27;a&#x27;
-            });
 
-            style.type = CKEDITOR.STYLE_INLINE;
-            style.applyToRange(range, this._editor);
-            range.select();
-        },
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-        /**
-         * Retrieves a link from the current selection.
-         *
-         * @method getFromSelection
-         * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
-         */
-        getFromSelection: function() {
-            var range,
-                selection,
-                selectedElement;
+        
+        
+        
+        
+    </ul>
 
-            selection = this._editor.getSelection();
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
 
-            selectedElement = selection.getSelectedElement();
+            
 
-            if (selectedElement &amp;&amp; selectedElement.is(&#x27;a&#x27;)) {
-                return selectedElement;
-            }
+            
 
-            range = selection.getRanges()[0];
+            
 
-            if (range) {
-                range.shrink(CKEDITOR.SHRINK_TEXT);
+            
+        </div>
 
-                return this._editor.elementPath(range.getCommonAncestor()).contains(&#x27;a&#x27;, 1);
-            }
+        
 
-            return null;
-        },
+        
 
-        /**
-         * Removes a link from the editor.
-         *
-         * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
-         * @method remove
-         */
-        remove: function(link) {
-            var style;
+        
 
-            if (link) {
-                link.remove(this._editor);
-            } else {
-                style = link || new CKEDITOR.style({
-                    alwaysRemoveElement: 1,
-                    element: &#x27;a&#x27;,
-                    type: CKEDITOR.STYLE_INLINE
-                });
-
-                this._editor.removeStyle(style);
-            }
-        },
-
-        /**
-         * Updates the href of an already existing link.
-         *
-         * @param {String} The new URI of the link.
-         * @param {CKEDITOR.dom.element} link The link element which href should be removed.
-         * @method update
-         */
-        update: function(URI, link) {
-            var style;
-
-            style = link || this.getFromSelection();
-
-            style.setAttributes({
-                &#x27;data-cke-saved-href&#x27;: URI,
-                href: URI
-            });
-        }
-    };
-
-    CKEDITOR.Link = CKEDITOR.Link || Link;
-}());
-    </pre>
+        
+    </div>
 </div>
 
                     </div>

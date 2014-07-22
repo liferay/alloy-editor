@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CKEDITOR.plugins.uicore - AlloyEditor</title>
+    <title>ToolbarBase - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -128,7 +128,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>CKEDITOR.plugins.uicore Class</h1>
+                        <h1>ToolbarBase Class</h1>
 <div class="box meta">
     
 
@@ -136,7 +136,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_core_uicore.js.html#l8"><code>src&#x2F;core&#x2F;uicore.js:8</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:9</code></a>
         </div>
     
 
@@ -148,12 +148,7 @@
 
 
 <div class="box intro">
-    <p>UICore class which will handle user interactions with the editor. These interactions
-might be triggered via mouse, keyboard or touch devices. The class fill fire an event via
-CKEditor&#39;s event system - "editorInteraction". The UI may listen to this event and
-execute some actions - for example to show/hide toolbars.</p>
-<p>By default if user presses the Esc key, &#39;editorInteraction&#39; event won&#39;t be fired. However, this behaviour can be changed
-by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class="crosslink">allowEsc</a> config property in editor&#39;s configuration to true.</p>
+    <p>The ToolbarBase extension is a common base for all AlloyEditor&#39;s Toolbars.</p>
 
 </div>
 
@@ -171,8 +166,6 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
         
         
-            <li class="api-class-tab events"><a href="#events">Events</a></li>
-        
     </ul>
 
     <div>
@@ -186,7 +179,35 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
-                                <a href="#method_init">init</a>
+                                <a href="#method__afterActionPerformed">_afterActionPerformed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__getButtonInstanceName">_getButtonInstanceName</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__getButtonsContainer">_getButtonsContainer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__moveToPoint">_moveToPoint</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_initializer">initializer</a>
 
                                 
                                 
@@ -205,32 +226,21 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
                     <ul class="index-list attrs">
                         
                             <li class="index-item attr">
-                                <a href="#attr_allowEsc">allowEsc</a>
+                                <a href="#attr_buttonsContainer">buttonsContainer</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_timeout">timeout</a>
+                                <a href="#attr_editor">editor</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_transition">transition</a>
                             </li>
                         
                     </ul>
                 </div>
             
 
-            
-                <div class="index-section events">
-                    <h3>Events</h3>
-
-                    <ul class="index-list events">
-                        
-                            <li class="index-item event">
-                                <a href="#event_editorInteraction">editorInteraction</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
         </div>
 
@@ -239,8 +249,8 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_init" class="method item protected">
-    <h3 class="name"><code>init</code></h3>
+                    <div id="method__afterActionPerformed" class="method item protected">
+    <h3 class="name"><code>_afterActionPerformed</code></h3>
 
     
         <span class="paren">()</span>
@@ -273,7 +283,7 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
             
         
         
-        <a href="../files/src_core_uicore.js.html#l52"><code>src&#x2F;core&#x2F;uicore.js:52</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l50"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:50</code></a>
         
         </p>
 
@@ -284,10 +294,313 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
     </div>
 
     <div class="description">
-        <p>Initializer lifecycle implementation for the UICore plugin.</p>
+        <p>Fires ButtonBase/_afterActionPerformed:event so the buttons
+attached to Toolbar, which mixes this extension will be notified that user performed
+an action.</p>
 
     </div>
 
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__getButtonInstanceName" class="method item protected">
+    <h3 class="name"><code>_getButtonInstanceName</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l73"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:73</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Resolves and returns the name of the Button from the current editor configuration.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    <p>The constructed name of Button.
+See <a href="../classes/CKEDITOR.plugins.uiloader.html#method__getModules" class="crosslink">_getModules</a>
+for more information about the rules for constructing button names.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__getButtonsContainer" class="method item protected">
+    <h3 class="name"><code>_getButtonsContainer</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Node</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l62"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:62</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the container in which all buttons are being rendered.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Node</span>:
+                    
+                    <p>The container of all buttons attached to the current isntance of Toolbar.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__moveToPoint" class="method item protected">
+    <h3 class="name"><code>_moveToPoint</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l86"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:86</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Moves the Toolbar to a point in page coordinates. If transition was specified via the
+<a href="../classes/ToolbarBase.html#attr_transition" class="crosslink">transition</a>, it will be applied too.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_initializer" class="method item protected">
+    <h3 class="name"><code>initializer</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>config</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l15"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:15</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initializer lifecycle implementation for the ToolbarBase class.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">config</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Configuration object literal for the toolbar</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -306,10 +619,10 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_allowEsc" class="attr item">
-    <a name="config_allowEsc"></a> 
-    <h3 class="name"><code>allowEsc</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    <div id="attr_buttonsContainer" class="attr item">
+    <a name="config_buttonsContainer"></a> 
+    <h3 class="name"><code>buttonsContainer</code></h3>
+    <span class="type">Node</span>
 
     
 
@@ -323,6 +636,8 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
 
     
 
+    
+        <span class="flag readonly">readonly</span>
     
 
     <div class="meta">
@@ -336,7 +651,7 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
             
         
         
-        <a href="../files/src_core_uicore.js.html#l32"><code>src&#x2F;core&#x2F;uicore.js:32</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l134"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:134</code></a>
         
         </p>
 
@@ -346,21 +661,18 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
     </div>
 
     <div class="description">
-        <p>If set to true, the editor will still fire <a href="../classes/CKEDITOR.plugins.uicore.html#event_editorInteraction" class="crosslink">editorInteraction</a> event,
-if user presses Esc key.</p>
+        <p>Returns the container in Toolbar&#39;s contentBox, where all buttons are rendered.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> false</p>
-    
 
     
         <div class="emits box">
-            <h4>Fires event <code>allowEscChange</code></h4>
+            <h4>Fires event <code>buttonsContainerChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>allowEsc</code> is
+            Fires when the value for the configuration attribute <code>buttonsContainer</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -412,10 +724,10 @@ if user presses Esc key.</p>
 </div>
 
                 
-                    <div id="attr_timeout" class="attr item">
-    <a name="config_timeout"></a> 
-    <h3 class="name"><code>timeout</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    <div id="attr_editor" class="attr item">
+    <a name="config_editor"></a> 
+    <h3 class="name"><code>editor</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
     
 
@@ -442,7 +754,7 @@ if user presses Esc key.</p>
             
         
         
-        <a href="../files/src_core_uicore.js.html#l41"><code>src&#x2F;core&#x2F;uicore.js:41</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l146"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:146</code></a>
         
         </p>
 
@@ -452,21 +764,128 @@ if user presses Esc key.</p>
     </div>
 
     <div class="description">
-        <p>Specifies the default timeout after which the <a href="../classes/CKEDITOR.plugins.uicore.html#event_editorInteraction" class="crosslink">editorInteraction</a> event
-will be fired.</p>
+        <p>Contains the native editor implementation.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> 50 (ms)</p>
+        <p><strong>Default:</strong> true</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>timeoutChange</code></h4>
+            <h4>Fires event <code>editorChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>timeout</code> is
+            Fires when the value for the configuration attribute <code>editor</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_transition" class="attr item">
+    <a name="config_transition"></a> 
+    <h3 class="name"><code>transition</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l157"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:157</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the transition which should be applied when Toolbars moves to given position.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> {
+   easing: &#x27;ease-out&#x27;,
+   duration: 0.1
+ }</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>transitionChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>transition</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -521,87 +940,6 @@ will be fired.</p>
             </div>
         
 
-        
-            <div id="events" class="api-class-tabpanel">
-                <h2 class="off-left">Events</h2>
-
-                
-                    <div id="event_editorInteraction" class="events item">
-    <h3 class="name"><code>editorInteraction</code></h3>
-    <span class="type"></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_uicore.js.html#l20"><code>src&#x2F;core&#x2F;uicore.js:20</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,
-or touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout
-is 50ms. This value can be overwritten via <a href="../classes/CKEDITOR.plugins.uicore.html#attr_timeout" class="crosslink">timeout</a>
-property of editor&#39;s configuration, like: editor.config.uicore.timeout = 100</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Event Payload:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">data</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>An object which contains the following properties:</p>
-<ul>
-<li>nativeEvent - The event as received from CKEditor</li>
-<li>selectionData - The data, returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></li>
-</ul>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-
-    
-</div>
-
-                
-            </div>
         
     </div>
 </div>

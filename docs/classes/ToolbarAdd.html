@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>LinkTooltip - AlloyEditor</title>
+    <title>ToolbarAdd - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -128,7 +128,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>LinkTooltip Class</h1>
+                        <h1>ToolbarAdd Class</h1>
 <div class="box meta">
     
 
@@ -136,7 +136,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l11"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:11</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:9</code></a>
         </div>
     
 
@@ -148,8 +148,7 @@
 
 
 <div class="box intro">
-    <p>The LinkTooltip class provides functionality for showing tooltip over link elements in editor.
-The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDITOR.plugins.linktooltip.html" class="crosslink">CKEDITOR.plugins.linktooltip</a></p>
+    <p>The ToolbarAdd class provides functionality for adding content to the editor.</p>
 
 </div>
 
@@ -180,56 +179,56 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
-                                <a href="#method__attachHiddenHandle">_attachHiddenHandle</a>
+                                <a href="#method__alignButtonsOverlay">_alignButtonsOverlay</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__bindBBMouseEnter">_bindBBMouseEnter</a>
+                                <a href="#method__handleMouseEnter">_handleMouseEnter</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__bindBBMouseLeave">_bindBBMouseLeave</a>
+                                <a href="#method__handleMouseEnter">_handleMouseEnter</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__getXY">_getXY</a>
+                                <a href="#method__hideButtonsContainer">_hideButtonsContainer</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onBBMouseEnter">_onBBMouseEnter</a>
+                                <a href="#method__hideButtonsContainer">_hideButtonsContainer</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onBBMouseEnter">_onBBMouseEnter</a>
+                                <a href="#method__renderAddNode">_renderAddNode</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onClickOutside">_onClickOutside</a>
+                                <a href="#method__renderButtonsOverlay">_renderButtonsOverlay</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onLinkMouseEnter">_onLinkMouseEnter</a>
+                                <a href="#method__showButtonsContainer">_showButtonsContainer</a>
 
                                 
                                 
@@ -263,6 +262,13 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
                                 
                             </li>
                         
+                            <li class="index-item method">
+                                <a href="#method_showAtPoint">showAtPoint</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -276,11 +282,11 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
                     <ul class="index-list attrs">
                         
                             <li class="index-item attr">
-                                <a href="#attr_constrain">constrain</a>
+                                <a href="#attr_buttons">buttons</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_editor">editor</a>
+                                <a href="#attr_constrain">constrain</a>
                             </li>
                         
                             <li class="index-item attr">
@@ -303,8 +309,8 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__attachHiddenHandle" class="method item protected">
-    <h3 class="name"><code>_attachHiddenHandle</code></h3>
+                    <div id="method__alignButtonsOverlay" class="method item protected">
+    <h3 class="name"><code>_alignButtonsOverlay</code></h3>
 
     
         <span class="paren">()</span>
@@ -337,7 +343,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l105"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:105</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l102"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:102</code></a>
         
         </p>
 
@@ -348,8 +354,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
     </div>
 
     <div class="description">
-        <p>Hides the linktooltip container after some timeout, specified by
-<a href="../classes/LinkTooltip.html#attr_hideTimeout" class="crosslink">hideTimeout</a> attribute.</p>
+        <p>Aligns the position of buttons overlay, so it shows next to the button container.</p>
 
     </div>
 
@@ -361,8 +366,8 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
 </div>
 
                 
-                    <div id="method__bindBBMouseEnter" class="method item protected">
-    <h3 class="name"><code>_bindBBMouseEnter</code></h3>
+                    <div id="method__handleMouseEnter" class="method item protected">
+    <h3 class="name"><code>_handleMouseEnter</code></h3>
 
     
         <span class="paren">()</span>
@@ -395,7 +400,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l91"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:91</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l112"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:112</code></a>
         
         </p>
 
@@ -406,7 +411,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
     </div>
 
     <div class="description">
-        <p>Adds mouseenter listener to the boundingBox.</p>
+        <p>On mouseenter event, cancels the hide listener for hiding the buttons overlay.</p>
 
     </div>
 
@@ -418,8 +423,8 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
 </div>
 
                 
-                    <div id="method__bindBBMouseLeave" class="method item protected">
-    <h3 class="name"><code>_bindBBMouseLeave</code></h3>
+                    <div id="method__handleMouseEnter" class="method item protected">
+    <h3 class="name"><code>_handleMouseEnter</code></h3>
 
     
         <span class="paren">()</span>
@@ -452,7 +457,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l77"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:77</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l122"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:122</code></a>
         
         </p>
 
@@ -463,7 +468,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
     </div>
 
     <div class="description">
-        <p>Adds mouseleave listener to the boundingBox.</p>
+        <p>On mouseleave event, cancels and then starts again the hide listener for hiding the buttons overlay.</p>
 
     </div>
 
@@ -475,8 +480,8 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
 </div>
 
                 
-                    <div id="method__getXY" class="method item protected">
-    <h3 class="name"><code>_getXY</code></h3>
+                    <div id="method__hideButtonsContainer" class="method item protected">
+    <h3 class="name"><code>_hideButtonsContainer</code></h3>
 
     
         <span class="paren">()</span>
@@ -509,7 +514,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l123"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:123</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l144"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:144</code></a>
         
         </p>
 
@@ -520,9 +525,10 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
     </div>
 
     <div class="description">
-        <p>Calculates and returns the most appropriate position where link tooltip should appear.
-The position depends on the specified <a href="../classes/LinkTooltip.html#attr_gutter" class="crosslink">gutter</a>,
-and on the fact if the link occupies more than one line in the editor.</p>
+        <p>Displays or hides the toolbar when user interacts with the editor
+(via mouse, keyboard or touch device).
+ToolbarAdd displays itself always - regardless of the fact the selection
+is empty or not. It might be hidden only if there is no any selection region.</p>
 
     </div>
 
@@ -534,8 +540,8 @@ and on the fact if the link occupies more than one line in the editor.</p>
 </div>
 
                 
-                    <div id="method__onBBMouseEnter" class="method item protected">
-    <h3 class="name"><code>_onBBMouseEnter</code></h3>
+                    <div id="method__hideButtonsContainer" class="method item protected">
+    <h3 class="name"><code>_hideButtonsContainer</code></h3>
 
     
         <span class="paren">()</span>
@@ -568,7 +574,7 @@ and on the fact if the link occupies more than one line in the editor.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l182"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:182</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l134"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:134</code></a>
         
         </p>
 
@@ -579,8 +585,7 @@ and on the fact if the link occupies more than one line in the editor.</p>
     </div>
 
     <div class="description">
-        <p>Handles mouse leave event on the boundingBox.
-Clears any already started hide handle and attaches it again.</p>
+        <p>Hides the buttons overlay.</p>
 
     </div>
 
@@ -592,8 +597,8 @@ Clears any already started hide handle and attaches it again.</p>
 </div>
 
                 
-                    <div id="method__onBBMouseEnter" class="method item protected">
-    <h3 class="name"><code>_onBBMouseEnter</code></h3>
+                    <div id="method__renderAddNode" class="method item protected">
+    <h3 class="name"><code>_renderAddNode</code></h3>
 
     
         <span class="paren">()</span>
@@ -626,7 +631,7 @@ Clears any already started hide handle and attaches it again.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l169"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:169</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l171"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:171</code></a>
         
         </p>
 
@@ -637,8 +642,7 @@ Clears any already started hide handle and attaches it again.</p>
     </div>
 
     <div class="description">
-        <p>Handles mouse enter event on the boundingBox.
-Clears any already started hide handle and attaches mouse leave listener to the boundingBox.</p>
+        <p>Renders the button add container.</p>
 
     </div>
 
@@ -650,8 +654,8 @@ Clears any already started hide handle and attaches mouse leave listener to the 
 </div>
 
                 
-                    <div id="method__onClickOutside" class="method item protected">
-    <h3 class="name"><code>_onClickOutside</code></h3>
+                    <div id="method__renderButtonsOverlay" class="method item protected">
+    <h3 class="name"><code>_renderButtonsOverlay</code></h3>
 
     
         <span class="paren">()</span>
@@ -684,7 +688,7 @@ Clears any already started hide handle and attaches mouse leave listener to the 
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l195"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:195</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l200"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:200</code></a>
         
         </p>
 
@@ -695,7 +699,7 @@ Clears any already started hide handle and attaches mouse leave listener to the 
     </div>
 
     <div class="description">
-        <p>Hides the tooltip on clicking outside of the boundingBox.</p>
+        <p>Renders the overlay which contains the buttons for adding content.</p>
 
     </div>
 
@@ -707,8 +711,8 @@ Clears any already started hide handle and attaches mouse leave listener to the 
 </div>
 
                 
-                    <div id="method__onLinkMouseEnter" class="method item protected">
-    <h3 class="name"><code>_onLinkMouseEnter</code></h3>
+                    <div id="method__showButtonsContainer" class="method item protected">
+    <h3 class="name"><code>_showButtonsContainer</code></h3>
 
     
         <span class="paren">()</span>
@@ -741,7 +745,7 @@ Clears any already started hide handle and attaches mouse leave listener to the 
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l205"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:205</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l222"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:222</code></a>
         
         </p>
 
@@ -752,8 +756,8 @@ Clears any already started hide handle and attaches mouse leave listener to the 
     </div>
 
     <div class="description">
-        <p>Reads the link href, updates tooltip content with the read value,
-shows the tooltip and attaches mouse leave listener on the boundingBox.</p>
+        <p>Displays both containers - for add button and those which hosts the buttons
+for adding content.</p>
 
     </div>
 
@@ -799,7 +803,7 @@ shows the tooltip and attaches mouse leave listener on the boundingBox.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l54"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:54</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l32"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:32</code></a>
         
         </p>
 
@@ -810,10 +814,8 @@ shows the tooltip and attaches mouse leave listener on the boundingBox.</p>
     </div>
 
     <div class="description">
-        <p>Attaches event listeners such as mouseenter on link elements. Links, which have
-"data-cke-default-link" attribute will be ignored. These links are considered as
-internal; they are being created by automatically when user triggers link creation.
-See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick</a> for more information.</p>
+        <p>Attaches events to the boundingBox which will help to handle the appearance of the
+menu with the buttons.</p>
 
     </div>
 
@@ -859,7 +861,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l29"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:29</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l55"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:55</code></a>
         
         </p>
 
@@ -870,7 +872,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
     </div>
 
     <div class="description">
-        <p>Destructor lifecycle implementation for the LinkTooltip class. Destroys the iattached event listeners.</p>
+        <p>Destroys the buttons container and its hide handler.</p>
 
     </div>
 
@@ -926,7 +928,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l18"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:18</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l15"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:15</code></a>
         
         </p>
 
@@ -937,7 +939,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
     </div>
 
     <div class="description">
-        <p>Initializer lifecycle implementation for the LinkTooltip class.</p>
+        <p>Initializer lifecycle implementation for the ToolbarAdd class.</p>
 
     </div>
 
@@ -956,7 +958,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
                     
 
                     <div class="param-description">
-                        <p>Configuration object literal for the editor</p>
+                        <p>Configuration object literal for the toolbar</p>
 
                     </div>
 
@@ -1005,7 +1007,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l39"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:39</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l69"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:69</code></a>
         
         </p>
 
@@ -1016,7 +1018,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
     </div>
 
     <div class="description">
-        <p>Renders the link tooltip node on contentBox.</p>
+        <p>Renders the two containers - for button add and the overlay which hosts the buttons.</p>
 
     </div>
 
@@ -1028,20 +1030,12 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
 </div>
 
                 
-            </div>
-        
+                    <div id="method_showAtPoint" class="method item">
+    <h3 class="name"><code>showAtPoint</code></h3>
 
-        
-
-        
-            <div id="attrs" class="api-class-tabpanel">
-                <h2 class="off-left">Attributes</h2>
-
-                
-                    <div id="attr_constrain" class="attr item">
-    <a name="config_constrain"></a> 
-    <h3 class="name"><code>constrain</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+    
+        <span class="paren">()</span>
+    
 
     
 
@@ -1068,7 +1062,70 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l255"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:255</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l80"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:80</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Calculates and sets the position of the toolbar.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_buttons" class="attr item">
+    <a name="config_buttons"></a> 
+    <h3 class="name"><code>buttons</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l248"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:248</code></a>
         
         </p>
 
@@ -1078,20 +1135,34 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
     </div>
 
     <div class="description">
-        <p>Specifies if the link tooltip show be constrained to the viewport.</p>
+        <p>Specifies the buttons, which will be attached to the current instance of the toolbar.
+A button configuration can be simple string with the name of the button, or an object
+with properties, like this:</p>
+<p><pre class="code prettyprint"><code>
+    buttons: [&#39;image&#39;]
+</pre></code>
+    or:</p>
+<p><pre class="code prettyprint"><code>
+    buttons: [
+        &#39;image&#39;: {
+            zIndex: 1024,
+            property2: 1024
+        }
+    ]
+</pre></code></p>
 
     </div>
 
     
-        <p><strong>Default:</strong> true</p>
+        <p><strong>Default:</strong> [&#x27;image&#x27;, &#x27;code&#x27;]</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>constrainChange</code></h4>
+            <h4>Fires event <code>buttonsChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>constrain</code> is
+            Fires when the value for the configuration attribute <code>buttons</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -1143,10 +1214,10 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
 </div>
 
                 
-                    <div id="attr_editor" class="attr item">
-    <a name="config_editor"></a> 
-    <h3 class="name"><code>editor</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    <div id="attr_constrain" class="attr item">
+    <a name="config_constrain"></a> 
+    <h3 class="name"><code>constrain</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
     
 
@@ -1173,7 +1244,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l267"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:267</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l274"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:274</code></a>
         
         </p>
 
@@ -1183,7 +1254,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
     </div>
 
     <div class="description">
-        <p>Contains the native editor implementation.</p>
+        <p>Specifies whether the toolbar show be constrained to the viewport.</p>
 
     </div>
 
@@ -1193,10 +1264,10 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
 
     
         <div class="emits box">
-            <h4>Fires event <code>editorChange</code></h4>
+            <h4>Fires event <code>constrainChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>editor</code> is
+            Fires when the value for the configuration attribute <code>constrain</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -1278,7 +1349,7 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l278"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:278</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l286"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:286</code></a>
         
         </p>
 
@@ -1288,14 +1359,14 @@ See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick
     </div>
 
     <div class="description">
-        <p>Specifies the gutter of the tooltip. The gutter object contains the top and left
-offsets from the point, where the tooltip is supposed to appear.</p>
+        <p>Specifies the gutter of the toolbar. The gutter object contains the top and left
+offsets from the point, where the toolbar is supposed to appear.</p>
 
     </div>
 
     
         <p><strong>Default:</strong> {
-  left: 0,
+  left: 5,
   top: 0
 }</p>
     
@@ -1387,7 +1458,7 @@ offsets from the point, where the tooltip is supposed to appear.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l297"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:297</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l305"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:305</code></a>
         
         </p>
 
@@ -1397,12 +1468,12 @@ offsets from the point, where the tooltip is supposed to appear.</p>
     </div>
 
     <div class="description">
-        <p>Specifies the timeout after which the link tooltip will be hidden.</p>
+        <p>Specifies the timeout after which the buttons overlay will be hidden.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> 2000 (sec)</p>
+        <p><strong>Default:</strong> 1000 (sec)</p>
     
 
     
