@@ -108,6 +108,10 @@ YUI.add('toolbar-base', function(Y) {
 
                 height = boundingBoxNode.offsetHeight;
 
+                // Change the original points where the Toolbar should be positioned.
+                // The X will be the same, but we will extract or add the height of the
+                // Toolbar to the Y point.
+
                 if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
                     y = xy[1] - height;
                 } else {
@@ -122,6 +126,13 @@ YUI.add('toolbar-base', function(Y) {
                 boundingBox.setStyle('visibility', 'visible');
 
                 boundingBox.transition(transition);
+
+                // Restore the original points where the Toorbad had to move.
+                // Adding UI_SRC as the source of the event will prevent toolbar to move,
+                // it will just set update XY attribute.
+                this.set('xy', xy, {
+                    src: Y.Widget.UI_SRC
+                });
             } else {
                 boundingBox.setStyle('visibility', 'visible');
 
