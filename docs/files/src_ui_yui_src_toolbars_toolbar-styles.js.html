@@ -172,8 +172,8 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
              * Calculates and sets the position of the toolbar.
              *
              * @method showAtPoint
-             * @param {Number} left The left point in page coordinates where Toolbar should be shown.
-             * @param {Number} right The right point in page coordinates where Toolbar should be shown.
+             * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
+             * @param {Number} right The right offset in page coordinates where Toolbar should be shown.
              * @param {Number} direction The direction of the selection. May be one of the following:
              * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
              */
@@ -262,11 +262,11 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
              *
              * @method _getToolbarXYPoint
              * @protected
-             * @param {Number} left The left point in page coordinates where Toolbar should be shown.
-             * @param {Number} right The right point in page coordinates where Toolbar should be shown.
+             * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
+             * @param {Number} right The right offset in page coordinates where Toolbar should be shown.
              * @param {Number} direction The direction of the selection. May be one of the following:
              * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
-             * @return {Array} An Array with left and top in page coordinates.
+             * @return {Array} An Array with left and top offsets in page coordinates.
              */
             _getToolbarXYPoint: function(left, top, direction) {
                 var bbDOMNode,
@@ -333,7 +333,7 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
              * @method _onEditorInteraction
              * @protected
              * @param {Object} event The editorInteraction event payload.
-             * See {{#crossLink &quot;CKEDITOR.plugins.uicore/editorInteraction:event&quot;}}{{/crossLink}} for more
+             * See {{#crossLink &quot;CKEDITOR.plugins.uicore/editorInteraction:event&quot;}}{{/crossLink}} event for more
              * information.
              */
             _onEditorInteraction: function(event) {
@@ -371,16 +371,55 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
             TPL_BUTTONS_CONTAINER: &#x27;&lt;div class=&quot;btn-group alloy-editor-toolbar-buttons&quot;&gt;&lt;/div&gt;&#x27;
         }, {
             ATTRS: {
+                /**
+                 * Specifies the buttons, which will be attached to the current instance of the toolbar.
+                 * A button configuration can be simple string with the name of the button, or an object
+                 * with properties, like this:
+                 * &lt;pre&gt;&lt;code&gt;
+                 *     buttons: [&#x27;strong&#x27;]
+                 * &lt;/pre&gt;&lt;/code&gt;
+                 *     or:
+                 * &lt;pre&gt;&lt;code&gt;
+                 *     buttons: [
+                 *         &#x27;strong&#x27;: {
+                 *             zIndex: 1024,
+                 *             property2: 1024
+                 *         }
+                 *     ]
+                 * &lt;/pre&gt;&lt;/code&gt;
+                 *
+                 * @attribute buttons
+                 * @default [&#x27;strong&#x27;, &#x27;em&#x27;, &#x27;u&#x27;, &#x27;h1&#x27;, &#x27;h2&#x27;, &#x27;a&#x27;, &#x27;twitter&#x27;]
+                 * @type Array
+                 */
                 buttons: {
                     validator: Lang.isArray,
                     value: [&#x27;strong&#x27;, &#x27;em&#x27;, &#x27;u&#x27;, &#x27;h1&#x27;, &#x27;h2&#x27;, &#x27;a&#x27;, &#x27;twitter&#x27;]
                 },
 
+                /**
+                 * Specifies whether the toolbar show be constrained to some node or to the viewport.
+                 *
+                 * @attribute constrain
+                 * @default true (will be constrained to the viewport)
+                 * @type Boolean
+                 */
                 constrain: {
                     validator: Lang.isBoolean,
                     value: true
                 },
 
+                /**
+                 * Specifies the gutter of the toolbar. The gutter object contains the top and left
+                 * offsets from the point, where the toolbar is supposed to appear.
+                 *
+                 * @attribute gutter
+                 * @default {
+                 *   left: 0,
+                 *   top: 10
+                 * }
+                 * @type Object
+                 */
                 gutter: {
                     validator: Lang.isObject,
                     value: {

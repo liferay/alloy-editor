@@ -186,12 +186,13 @@ YUI.add(&#x27;toolbar-base&#x27;, function(Y) {
         },
 
         /**
-         * Fires {{#crossLink &quot;ButtonBase/_afterActionPerformed:event&quot;}}{{/crossLink}} so the buttons
+         * Re-fires {{#crossLink &quot;ButtonBase/actionPerformed:event&quot;}}{{/crossLink}} so the buttons
          * attached to Toolbar, which mixes this extension will be notified that user performed
          * an action.
          *
          * @method _afterActionPerformed
          * @protected
+         * @param {EventFacade} event The {{#crossLink &quot;ButtonBase/actionPerformed:event&quot;}}{{/crossLink}} event.
          */
         _afterActionPerformed: function(event) {
             this.fire(&#x27;actionPerformed&#x27;, event);
@@ -213,6 +214,7 @@ YUI.add(&#x27;toolbar-base&#x27;, function(Y) {
          *
          * @method _getButtonInstanceName
          * @protected
+         * @param {String} buttonName The name of the button as specified in Toolbar configuration.
          * @return {String} The constructed name of Button.
          * See {{#crossLink &quot;CKEDITOR.plugins.uiloader/_getModules:method&quot;}}{{/crossLink}}
          * for more information about the rules for constructing button names.
@@ -226,6 +228,10 @@ YUI.add(&#x27;toolbar-base&#x27;, function(Y) {
          * {{#crossLink &quot;ToolbarBase/transition:attribute&quot;}}{{/crossLink}}, it will be applied too.
          *
          * @method _moveToPoint
+         * @param {Array} xy The point in page coordinates where Toolbar should move.
+         * @param {Number} direction The direction of the selection. Can be one of these:
+         *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
+         *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
          * @protected
          */
         _moveToPoint: function(xy, direction) {

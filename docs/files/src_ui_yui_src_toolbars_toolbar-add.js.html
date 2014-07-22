@@ -220,6 +220,8 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
              * Calculates and sets the position of the toolbar.
              *
              * @method showAtPoint
+             * @param {Number} x Point X in page coordinates.
+             * @param {Number} y Point Y in page coordinates.
              */
             showAtPoint: function(x, y) {
                 var addContentBtnNode,
@@ -288,6 +290,7 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
              *
              * @method _hideButtonsContainer
              * @protected
+             * @param {EventFacade} event Event that triggered when user interacted with the editor.
              */
             _onEditorInteraction: function(event) {
                 var editorX,

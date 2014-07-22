@@ -257,7 +257,17 @@
     <h3 class="name"><code>_afterActionPerformed</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -298,12 +308,36 @@
     </div>
 
     <div class="description">
-        <p>Fires ButtonBase/_afterActionPerformed:event so the buttons
+        <p>Re-fires <a href="../classes/ButtonBase.html#event_actionPerformed" class="crosslink">actionPerformed</a> so the buttons
 attached to Toolbar, which mixes this extension will be notified that user performed
 an action.</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The <a href="../classes/ButtonBase.html#event_actionPerformed" class="crosslink">actionPerformed</a> event.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -316,7 +350,17 @@ an action.</p>
     <h3 class="name"><code>_getButtonInstanceName</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>buttonName</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -350,7 +394,7 @@ an action.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l73"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:73</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l74"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:74</code></a>
         
         </p>
 
@@ -365,6 +409,30 @@ an action.</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">buttonName</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name of the button as specified in Toolbar configuration.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -427,7 +495,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l62"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:62</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l63"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:63</code></a>
         
         </p>
 
@@ -468,7 +536,23 @@ for more information about the rules for constructing button names.</p>
     <h3 class="name"><code>_moveToPoint</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>xy</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>direction</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -498,7 +582,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l86"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:86</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l88"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:88</code></a>
         
         </p>
 
@@ -514,6 +598,50 @@ for more information about the rules for constructing button names.</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">xy</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The point in page coordinates where Toolbar should move.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">direction</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The direction of the selection. Can be one of these:</p>
+<ol>
+<li>CKEDITOR.SELECTION_TOP_TO_BOTTOM</li>
+<li>CKEDITOR.SELECTION_BOTTOM_TO_TOP</li>
+</ol>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -655,7 +783,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l145"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:145</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l151"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:151</code></a>
         
         </p>
 
@@ -758,7 +886,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l157"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:157</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l163"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:163</code></a>
         
         </p>
 
@@ -863,7 +991,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l168"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:168</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l174"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:174</code></a>
         
         </p>
 

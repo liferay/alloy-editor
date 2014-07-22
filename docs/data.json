@@ -257,7 +257,14 @@
             "file": "src/core/link.js",
             "line": 4,
             "description": "Link class utility. Provides methods for create, delete and update links.",
-            "is_constructor": 1
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "The",
+                    "description": "CKEditor instance.",
+                    "type": "Object"
+                }
+            ]
         },
         "CKEDITOR.plugins.selectionregion": {
             "name": "CKEDITOR.plugins.selectionregion",
@@ -475,7 +482,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 318,
+            "line": 322,
             "description": "CKEDITOR plugin which allows displaying tooltip over links in the editor.\nInternally it uses {{#crossLink \"LinkTooltip\"}}{{/crossLink}}. You may specify all\nproperties which {{#crossLink \"LinkTooltip\"}}{{/crossLink}} accepts via editor.config.linktooltip property."
         },
         "CKEDITOR.plugins.uiloader": {
@@ -511,7 +518,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 323,
+            "line": 326,
             "description": "The ToolbarAddItems class hosts buttons for adding content to the current editor instance. This class is intended to be\nused internally by {{#crossLink \"ToolbarAdd\"}}{{/crossLink}} class."
         },
         "ToolbarBase": {
@@ -584,7 +591,7 @@
         },
         {
             "file": "src/core/link.js",
-            "line": 18,
+            "line": 19,
             "description": "Create a link with given URI as href.",
             "itemtype": "method",
             "name": "create",
@@ -604,7 +611,7 @@
         },
         {
             "file": "src/core/link.js",
-            "line": 57,
+            "line": 58,
             "description": "Retrieves a link from the current selection.",
             "itemtype": "method",
             "name": "getFromSelection",
@@ -616,7 +623,7 @@
         },
         {
             "file": "src/core/link.js",
-            "line": 87,
+            "line": 88,
             "description": "Removes a link from the editor.",
             "params": [
                 {
@@ -631,12 +638,12 @@
         },
         {
             "file": "src/core/link.js",
-            "line": 109,
+            "line": 110,
             "description": "Updates the href of an already existing link.",
             "params": [
                 {
-                    "name": "The",
-                    "description": "new URI of the link.",
+                    "name": "URI",
+                    "description": "The new URI of the link.",
                     "type": "String"
                 },
                 {
@@ -672,7 +679,7 @@
         {
             "file": "src/core/selection-region.js",
             "line": 36,
-            "description": "Creates selection from range. A range contains of two points in page coordinates.",
+            "description": "Creates selection from range. A range consists from two points in page coordinates.",
             "itemtype": "method",
             "name": "createSelectionFromRange",
             "params": [
@@ -702,7 +709,7 @@
         {
             "file": "src/core/selection-region.js",
             "line": 106,
-            "description": "Returns the region of the current position of the caret.",
+            "description": "Returns the region of the current position of the caret. The points are in page coordinates.",
             "itemtype": "method",
             "name": "getCaretRegion",
             "return": {
@@ -788,6 +795,23 @@
             "class": "CKEDITOR.plugins.selectionregion"
         },
         {
+            "file": "src/core/selection-region.js",
+            "line": 400,
+            "description": "Initializer lifecycle implementation for the SelectionRegion plugin.",
+            "itemtype": "method",
+            "name": "init",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "The current CKEditor instance.",
+                    "type": "Object"
+                }
+            ],
+            "class": "CKEDITOR.plugins.selectionregion"
+        },
+        {
             "file": "src/core/tools.js",
             "line": 10,
             "description": "Returns a new object containing all of the properties of all the supplied\nobjects. The properties from later objects will overwrite those in earlier\nobjects.\n\nPassing in a single object will create a shallow copy of it.",
@@ -850,6 +874,13 @@
             "name": "init",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "The current CKEditor instance.",
+                    "type": "Object"
+                }
+            ],
             "class": "CKEDITOR.plugins.uicore"
         },
         {
@@ -1042,7 +1073,7 @@
             "params": [
                 {
                     "name": "config",
-                    "description": "Configuration object literal for the editor",
+                    "description": "Configuration object literal for the editor.",
                     "type": "Object"
                 }
             ],
@@ -1094,6 +1125,13 @@
             "name": "_validateToolbars",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "The value which should be validated.",
+                    "type": "Any"
+                }
+            ],
             "return": {
                 "description": "True if the value was accepted, false otherwise.",
                 "type": "Boolean"
@@ -1102,7 +1140,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 101,
+            "line": 102,
             "description": "Configures the allowed content for the current instance of AlloyEditor.\nLook on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)\nfor more information about the valid values.",
             "itemtype": "attribute",
             "name": "allowedContent",
@@ -1113,7 +1151,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 117,
+            "line": 118,
             "description": "Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.",
             "itemtype": "attribute",
             "name": "nativeEditor",
@@ -1123,7 +1161,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 129,
+            "line": 130,
             "description": "Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to\nmake AlloyEditor to work properly.",
             "itemtype": "attribute",
             "name": "extraPlugins",
@@ -1134,7 +1172,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 144,
+            "line": 145,
             "description": "Specifies the class, which should be added by Placeholder plugin\n{{#crossLink \"CKEDITOR.plugins.placeholder}}{{/crossLink}}\nwhen editor is not focused.",
             "itemtype": "attribute",
             "name": "placeholderClass",
@@ -1145,7 +1183,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 160,
+            "line": 161,
             "description": "Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.\nThese plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor\ncomes with its own highly optimized copy of CKEditor (just customized via their official download page).\nThis version does not come with the unneeded plugins, so the value of this property won't be needed.\nHowever, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the plugins\nif you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them entirely\nfrom CKEditor. It just removes them from its current instance, in which you will use different UI - those of\nAlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same page!",
             "itemtype": "attribute",
             "name": "removePlugins",
@@ -1156,7 +1194,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 181,
+            "line": 182,
             "description": "The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.",
             "itemtype": "attribute",
             "name": "srcNode",
@@ -1166,7 +1204,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 193,
+            "line": 194,
             "description": "Specifies the Toolbars of the current editor instance. The value should be an object\nwith one or more properties. Each of these will represent a toolbar. The value of these properties\ncan be string or Object. If String, the value of the string should represent the buttons. If object,\none of these properties should be 'buttons', which will represent the buttons of this Toolbar and\nall the other properties will be different configuration parameters of the Toolbar. Example:\n<pre><code>\n    toolbars: {\n        table: { // this would be a toolbar configuration, which specifies both Toolbar attributes and its buttons\n            buttons: ['button1', button2],\n            width: 25\n        },\n        add: ['image', 'code'], // here we specify only the buttons of this toolbar and leave the other options unmodified.\n        image: ['left', 'right'],\n        styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']\n    }\n</pre></code>",
             "default": "toolbars {\n        add: ['image', 'code'],\n        image: ['left', 'right'],\n        styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']\n    }",
             "itemtype": "attribute",
@@ -1227,11 +1265,18 @@
             "name": "_adjustHostPosition",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "oldHostWidth",
+                    "description": "The previous width of the host (Toolbar).",
+                    "type": "Number"
+                }
+            ],
             "class": "ButtonA"
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 124,
+            "line": 125,
             "description": "Attaches a visibleChange listener on the Toolbar so the UI will commit or discard the link\nif the button hides.",
             "itemtype": "method",
             "name": "_attachHideHandler",
@@ -1241,7 +1286,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 139,
+            "line": 140,
             "description": "Attaches a visibleChange listener so the UI will commit or discard the link\nwhen the button hides.",
             "itemtype": "method",
             "name": "_onClearInputClick",
@@ -1251,7 +1296,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 155,
+            "line": 156,
             "description": "Hides the Toolbar on clicking the close link button.",
             "itemtype": "method",
             "name": "_onCloseLinkClick",
@@ -1261,17 +1306,24 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 165,
+            "line": 166,
             "description": "Handles the click event from the user. If button status is \"pressed\", activates the UI for\ncreating the link. Otherwise, removes the link from the current selection.\nOn activating the UI for link creation, a default link with href= \"/\" will be created and it\nwill be kept in button instance as _defaultLink property. This link will also have an attribute,\ncalled \"data-cke-default-link\", so these links will be easily distinguished from the others.\nAn implementation of Link Tooltip for example may ignore these links.",
             "itemtype": "method",
             "name": "_onClick",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ButtonA"
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 214,
+            "line": 216,
             "description": "Updates the default link with the real href, if any, or removes the\ndefault link from the current selection.\nSee {{#crossLink \"ButtonA/_onClick:method\"}}{{/crossLink}} for more information\nabout the default link.",
             "itemtype": "method",
             "name": "_handleLink",
@@ -1281,37 +1333,58 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 244,
+            "line": 246,
             "description": "Checks if user presses Enter key and hides the Toolbar, if so.",
             "itemtype": "method",
             "name": "_onKeyPress",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user pressed a key.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ButtonA"
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 256,
+            "line": 259,
             "description": "Shows or hides the close link button if link input contains some value.",
             "itemtype": "method",
             "name": "_onValueChange",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "An Event Facade object with the new and old value\nof the input container.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ButtonA"
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 274,
+            "line": 279,
             "description": "On button hide, restore the default UI for creating link.\nOn button show, checks if the current selection has link style or not.\nIf it has, activates the UI for editing link, otherwise, activates the UI\nfor creating a link.",
             "itemtype": "method",
             "name": "_onValueChange",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "An Event Facade object with the new and old value\nof visible property.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ButtonA"
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 310,
+            "line": 317,
             "description": "Removes the attached visibleChange handler on the Toolbar which\nhandles the commit or discard process of the link.\nSee {{#crossLink \"ButtonA/_attachHideHandler:method\"}}{{/crossLink}} for more information.",
             "itemtype": "method",
             "name": "_removeHideHandler",
@@ -1321,7 +1394,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 326,
+            "line": 333,
             "description": "Creates the UI for adding a link.",
             "itemtype": "method",
             "name": "_renderLinkUI",
@@ -1331,7 +1404,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 370,
+            "line": 377,
             "description": "Changes the UI of the Toolbar so the user will be able to change the styles\nof the selection instead to create a link.",
             "itemtype": "method",
             "name": "_switchToTextMode",
@@ -1341,17 +1414,24 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 419,
+            "line": 426,
             "description": "Changes the UI of the Toolbar so the user will be able to to create a link to\nchange the styles of the selection.",
             "itemtype": "method",
             "name": "_switchToLinkMode",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "link",
+                    "description": "The currently selected link from editor selection.",
+                    "type": "CKEDITOR.dom.element"
+                }
+            ],
             "class": "ButtonA"
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 479,
+            "line": 487,
             "description": "Specifies the element (style) which this button handles.",
             "itemtype": "attribute",
             "name": "element",
@@ -1361,7 +1441,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 491,
+            "line": 499,
             "description": "Collection of strings used to label elements of the button's UI.\nButtonA provides one string property, to specify the value of link placeholder.",
             "itemtype": "attribute",
             "name": "strings",
@@ -1529,16 +1609,23 @@
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
             "line": 47,
-            "description": "Simulates \"click\" event on the input field when user presses the button. This\ntriggers the native open file dialog from the browser. This method works on IE9+.",
+            "description": "Simulates \"click\" event on the input field when user presses the button. This\ntriggers the native open file dialog from the browser. This method works on IE9+ only.",
             "itemtype": "method",
             "name": "_onClick",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ButtonImage"
         },
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
-            "line": 60,
+            "line": 61,
             "description": "On input change, reads the chosen file and creates an img element with src as Data URI.\nThen, fires an {{#crossLink \"ButtonImage/imageadd:event\"}}{{/crossLink}} via CKEditor\nmessage system.",
             "itemtype": "method",
             "name": "_onInputChange",
@@ -1548,7 +1635,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
-            "line": 101,
+            "line": 102,
             "description": "Specifies if this button will be toggleable, or not.\nButtonImage will be not toggleable by default.",
             "itemtype": "attribute",
             "name": "toggle",
@@ -1573,11 +1660,18 @@
             "name": "_onClick",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ButtonLeft"
         },
         {
             "file": "src/ui/yui/src/buttons/button-left.js",
-            "line": 68,
+            "line": 69,
             "description": "Specifies the element (style) which this button handles.",
             "itemtype": "attribute",
             "name": "element",
@@ -1601,11 +1695,18 @@
             "name": "_onClick",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ButtonRight"
         },
         {
             "file": "src/ui/yui/src/buttons/button-right.js",
-            "line": 68,
+            "line": 69,
             "description": "Specifies the element (style) which this button handles.",
             "itemtype": "attribute",
             "name": "element",
@@ -1776,12 +1877,29 @@
             "itemtype": "method",
             "name": "_getXY",
             "access": "protected",
-            "tagname": "returns {Array} An Array with the most appropriate x and y points in page coordinates.",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Point X in page coordinates.",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "Point Y in page coordinates.",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "The link over which the tooltip should be shown.\nreturns {Array} An Array with the most appropriate x and y points in page coordinates.",
+                    "type": "Node"
+                }
+            ],
             "class": "LinkTooltip"
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 170,
+            "line": 173,
             "description": "Handles mouse enter event on the boundingBox.\nClears any already started hide handle and attaches mouse leave listener to the boundingBox.",
             "itemtype": "method",
             "name": "_onBBMouseEnter",
@@ -1791,7 +1909,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 183,
+            "line": 186,
             "description": "Handles mouse leave event on the boundingBox.\nClears any already started hide handle and attaches it again.",
             "itemtype": "method",
             "name": "_onBBMouseEnter",
@@ -1801,7 +1919,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 196,
+            "line": 199,
             "description": "Hides the tooltip on clicking outside of the boundingBox.",
             "itemtype": "method",
             "name": "_onClickOutside",
@@ -1811,17 +1929,24 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 206,
+            "line": 209,
             "description": "Reads the link href, updates tooltip content with the read value,\nshows the tooltip and attaches mouse leave listener on the boundingBox.",
             "itemtype": "method",
             "name": "_onLinkMouseEnter",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user positioned the mouse over the link.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "LinkTooltip"
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 256,
+            "line": 260,
             "description": "Specifies whether the toolbar show be constrained to some node or to the viewport.",
             "itemtype": "attribute",
             "name": "constrain",
@@ -1831,7 +1956,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 268,
+            "line": 272,
             "description": "Contains the native editor implementation.",
             "itemtype": "attribute",
             "name": "editor",
@@ -1841,7 +1966,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 279,
+            "line": 283,
             "description": "Specifies the gutter of the tooltip. The gutter object contains the top and left\noffsets from the point, where the tooltip is supposed to appear.",
             "itemtype": "attribute",
             "name": "gutter",
@@ -1851,7 +1976,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 298,
+            "line": 302,
             "description": "Specifies the timeout after which the link tooltip will be hidden.",
             "itemtype": "attribute",
             "name": "hideTimeout",
@@ -1872,7 +1997,7 @@
         {
             "file": "src/ui/yui/src/plugins/loader.js",
             "line": 42,
-            "description": "Creates instances of toolbars as specified by the editor configuration.\nA simple editor toolbar configuration may look like this:\n<pre><code>\n  toolbars: {\n      add: ['image', 'code']\n  }\n</code></pre>\nIn this case we have very simple configuration - the editor will have\nonly one toolbar, with two buttons - for adding images and code into the\neditor. These buttons will also not have any specific configuration.\nIn order to pass configuration attributes to the tollbars, the configuration\nmay be specified like this:\n<pre><code>\n  toolbars: {\n     add: {\n          buttons: ['image', 'code'],\n          zIndex: 1024\n      }\n  }\n</code></pre>\nIn this case, toolbar \"add\" receives two attributes - the first one is the\nlist of buttons (each button also can be specified via an configuration object)\nand another attribute, which specifies its zIndex.",
+            "description": "Creates instances of toolbars as specified by the editor configuration.\nA simple editor toolbar configuration may look like this:\n<pre><code>\n  toolbars: {\n      add: ['image', 'code']\n  }\n</code></pre>\nIn this case we have very simple configuration - the editor will have\nonly one toolbar, with two buttons - for adding images and code into the\neditor. These buttons will also not have any specific configuration.\nIn order to pass configuration attributes to the toolbars, the configuration\nmay be specified like this:\n<pre><code>\n  toolbars: {\n     add: {\n          buttons: ['image', 'code'],\n          zIndex: 1024\n      }\n  }\n</code></pre>\nIn this case, toolbar \"add\" receives two attributes - the first one is the\nlist of buttons (each button also can be specified via an configuration object)\nand another attribute, which specifies its zIndex.",
             "itemtype": "method",
             "name": "_createToolbars",
             "access": "protected",
@@ -1960,11 +2085,23 @@
             "description": "Calculates and sets the position of the toolbar.",
             "itemtype": "method",
             "name": "showAtPoint",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Point X in page coordinates.",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "Point Y in page coordinates.",
+                    "type": "Number"
+                }
+            ],
             "class": "ToolbarAdd"
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 103,
+            "line": 105,
             "description": "Aligns the position of buttons overlay, so it shows next to the button container.",
             "itemtype": "method",
             "name": "_alignButtonsOverlay",
@@ -1974,7 +2111,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 113,
+            "line": 115,
             "description": "On mouseenter event, cancels the hide listener for hiding the buttons overlay.",
             "itemtype": "method",
             "name": "_handleMouseEnter",
@@ -1984,7 +2121,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 123,
+            "line": 125,
             "description": "On mouseleave event, cancels and then starts again the hide listener for hiding the buttons overlay.",
             "itemtype": "method",
             "name": "_handleMouseEnter",
@@ -1994,7 +2131,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 135,
+            "line": 137,
             "description": "Hides the buttons overlay.",
             "itemtype": "method",
             "name": "_hideButtonsContainer",
@@ -2004,17 +2141,24 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 145,
+            "line": 147,
             "description": "Displays or hides the toolbar when user interacts with the editor\n(via mouse, keyboard or touch device).\nToolbarAdd displays itself always - regardless of the fact the selection\nis empty or not. It might be hidden only if there is no any selection region.",
             "itemtype": "method",
             "name": "_hideButtonsContainer",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user interacted with the editor.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ToolbarAdd"
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 172,
+            "line": 175,
             "description": "Renders the button add container.",
             "itemtype": "method",
             "name": "_renderAddNode",
@@ -2024,7 +2168,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 201,
+            "line": 204,
             "description": "Renders the overlay which contains the buttons for adding content.",
             "itemtype": "method",
             "name": "_renderButtonsOverlay",
@@ -2034,7 +2178,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 223,
+            "line": 226,
             "description": "Displays both containers - for add button and those which hosts the buttons\nfor adding content.",
             "itemtype": "method",
             "name": "_showButtonsContainer",
@@ -2044,7 +2188,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 249,
+            "line": 252,
             "description": "Specifies the buttons, which will be attached to the current instance of the toolbar.\nA button configuration can be simple string with the name of the button, or an object\nwith properties, like this:\n<pre><code>\n    buttons: ['image']\n</pre></code>\n    or:\n<pre><code>\n    buttons: [\n        'image': {\n            zIndex: 1024,\n            property2: 1024\n        }\n    ]\n</pre></code>",
             "itemtype": "attribute",
             "name": "buttons",
@@ -2054,7 +2198,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 275,
+            "line": 278,
             "description": "Specifies whether the toolbar show be constrained to some node or to the viewport.",
             "itemtype": "attribute",
             "name": "constrain",
@@ -2064,7 +2208,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 287,
+            "line": 290,
             "description": "Specifies the gutter of the toolbar. The gutter object contains the top and left\noffsets from the point, where the toolbar is supposed to appear.",
             "itemtype": "attribute",
             "name": "gutter",
@@ -2074,7 +2218,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-add.js",
-            "line": 306,
+            "line": 309,
             "description": "Specifies the timeout after which the buttons overlay will be hidden.",
             "itemtype": "attribute",
             "name": "hideTimeout",
@@ -2102,16 +2246,23 @@
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
             "line": 50,
-            "description": "Fires {{#crossLink \"ButtonBase/_afterActionPerformed:event\"}}{{/crossLink}} so the buttons\nattached to Toolbar, which mixes this extension will be notified that user performed\nan action.",
+            "description": "Re-fires {{#crossLink \"ButtonBase/actionPerformed:event\"}}{{/crossLink}} so the buttons\nattached to Toolbar, which mixes this extension will be notified that user performed\nan action.",
             "itemtype": "method",
             "name": "_afterActionPerformed",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The {{#crossLink \"ButtonBase/actionPerformed:event\"}}{{/crossLink}} event.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ToolbarBase"
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 62,
+            "line": 63,
             "description": "Returns the container in which all buttons are being rendered.",
             "itemtype": "method",
             "name": "_getButtonsContainer",
@@ -2125,12 +2276,19 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 73,
+            "line": 74,
             "description": "Resolves and returns the name of the Button from the current editor configuration.",
             "itemtype": "method",
             "name": "_getButtonInstanceName",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "buttonName",
+                    "description": "The name of the button as specified in Toolbar configuration.",
+                    "type": "String"
+                }
+            ],
             "return": {
                 "description": "The constructed name of Button.\nSee {{#crossLink \"CKEDITOR.plugins.uiloader/_getModules:method\"}}{{/crossLink}}\nfor more information about the rules for constructing button names.",
                 "type": "String"
@@ -2139,17 +2297,29 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 86,
+            "line": 88,
             "description": "Moves the Toolbar to a point in page coordinates. If transition was specified via the\n{{#crossLink \"ToolbarBase/transition:attribute\"}}{{/crossLink}}, it will be applied too.",
             "itemtype": "method",
             "name": "_moveToPoint",
+            "params": [
+                {
+                    "name": "xy",
+                    "description": "The point in page coordinates where Toolbar should move.",
+                    "type": "Array"
+                },
+                {
+                    "name": "direction",
+                    "description": "The direction of the selection. Can be one of these:\n  1. CKEDITOR.SELECTION_TOP_TO_BOTTOM\n  2. CKEDITOR.SELECTION_BOTTOM_TO_TOP",
+                    "type": "Number"
+                }
+            ],
             "access": "protected",
             "tagname": "",
             "class": "ToolbarBase"
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 145,
+            "line": 151,
             "description": "Returns the container in Toolbar's contentBox, where all buttons are rendered.",
             "itemtype": "attribute",
             "name": "buttonsContainer",
@@ -2159,7 +2329,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 157,
+            "line": 163,
             "description": "Contains the native editor implementation.",
             "itemtype": "attribute",
             "name": "editor",
@@ -2169,7 +2339,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 168,
+            "line": 174,
             "description": "Specifies the transition which should be applied when Toolbar moves to given position.",
             "itemtype": "attribute",
             "name": "transition",
@@ -2203,25 +2373,54 @@
             "description": "Calculates and sets the position of the toolbar.",
             "itemtype": "method",
             "name": "showAtPoint",
+            "params": [
+                {
+                    "name": "left",
+                    "description": "The left offset in page coordinates.",
+                    "type": "Number"
+                },
+                {
+                    "name": "top",
+                    "description": "The top offset in page coordinates.",
+                    "type": "Number"
+                },
+                {
+                    "name": "direction",
+                    "description": "The direction of the selection. Can be one of these:\n  1. CKEDITOR.SELECTION_TOP_TO_BOTTOM\n  2. CKEDITOR.SELECTION_BOTTOM_TO_TOP",
+                    "type": "Number"
+                }
+            ],
             "class": "ToolbarImage"
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 64,
+            "line": 69,
             "description": "Calculates the position of the Toolbar, taking in consideration\nthe {{#crossLink \"ToolbarImage/gutter:attribute\"}}{{/crossLink}}",
             "itemtype": "method",
             "name": "_getToolbarXYPoint",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "left",
+                    "description": "The left offset in page coordinates.",
+                    "type": "Number"
+                },
+                {
+                    "name": "top",
+                    "description": "The top offset in page coordinates.",
+                    "type": "Number"
+                }
+            ],
             "return": {
-                "description": "An array with left and top coordinates of the point in page coordinates.",
+                "description": "An array with left and top offsets of the point in page coordinates.",
                 "type": "Array"
             },
             "class": "ToolbarImage"
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 87,
+            "line": 94,
             "description": "After changing the attributes of the image, updates the position of the Toolbar.",
             "itemtype": "method",
             "name": "_onActionPerformed",
@@ -2231,27 +2430,41 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 104,
+            "line": 111,
             "description": "Once after user interacts with the editor, shows or hides the Toolbar.\nThe Toolbar will be hidden if the currently selected element is not an image.",
             "itemtype": "method",
             "name": "_onEditorInteraction",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user interacted with the editor.",
+                    "type": "EventFacade"
+                }
+            ],
             "class": "ToolbarImage"
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 129,
+            "line": 137,
             "description": "Moves the Toolbar to specified position.",
             "itemtype": "method",
             "name": "_updateUI",
             "access": "protected",
             "tagname": "",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "The selected image element from the editor.",
+                    "type": "CKEDITOR.dom.element"
+                }
+            ],
             "class": "ToolbarImage"
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 152,
+            "line": 161,
             "description": "Specifies the buttons, which will be attached to the current instance of the toolbar.\nA button configuration can be simple string with the name of the button, or an object\nwith properties, like this:\n<pre><code>\n    buttons: ['left']\n</pre></code>\n    or:\n<pre><code>\n    buttons: [\n        'left': {\n            zIndex: 1024,\n            property2: 1024\n        }\n    ]\n</pre></code>",
             "itemtype": "attribute",
             "name": "buttons",
@@ -2261,7 +2474,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 178,
+            "line": 187,
             "description": "Specifies whether the toolbar show be constrained to some node or to the viewport.",
             "itemtype": "attribute",
             "name": "constrain",
@@ -2271,7 +2484,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 190,
+            "line": 199,
             "description": "Specifies the gutter of the tooltip. The gutter object contains the top and left\noffsets from the point, where the tooltip is supposed to appear.",
             "itemtype": "attribute",
             "name": "gutter",
@@ -2298,12 +2511,12 @@
             "params": [
                 {
                     "name": "left",
-                    "description": "The left point in page coordinates where Toolbar should be shown.",
+                    "description": "The left offset in page coordinates where Toolbar should be shown.",
                     "type": "Number"
                 },
                 {
                     "name": "right",
-                    "description": "The right point in page coordinates where Toolbar should be shown.",
+                    "description": "The right offset in page coordinates where Toolbar should be shown.",
                     "type": "Number"
                 },
                 {
@@ -2351,12 +2564,12 @@
             "params": [
                 {
                     "name": "left",
-                    "description": "The left point in page coordinates where Toolbar should be shown.",
+                    "description": "The left offset in page coordinates where Toolbar should be shown.",
                     "type": "Number"
                 },
                 {
                     "name": "right",
-                    "description": "The right point in page coordinates where Toolbar should be shown.",
+                    "description": "The right offset in page coordinates where Toolbar should be shown.",
                     "type": "Number"
                 },
                 {
@@ -2366,7 +2579,7 @@
                 }
             ],
             "return": {
-                "description": "An Array with left and top in page coordinates.",
+                "description": "An Array with left and top offsets in page coordinates.",
                 "type": "Array"
             },
             "class": "ToolbarStyles"
@@ -2408,10 +2621,40 @@
             "params": [
                 {
                     "name": "event",
-                    "description": "The editorInteraction event payload.\nSee {{#crossLink \"CKEDITOR.plugins.uicore/editorInteraction:event\"}}{{/crossLink}} for more\ninformation.",
+                    "description": "The editorInteraction event payload.\nSee {{#crossLink \"CKEDITOR.plugins.uicore/editorInteraction:event\"}}{{/crossLink}} event for more\ninformation.",
                     "type": "Object"
                 }
             ],
+            "class": "ToolbarStyles"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
+            "line": 236,
+            "description": "Specifies the buttons, which will be attached to the current instance of the toolbar.\nA button configuration can be simple string with the name of the button, or an object\nwith properties, like this:\n<pre><code>\n    buttons: ['strong']\n</pre></code>\n    or:\n<pre><code>\n    buttons: [\n        'strong': {\n            zIndex: 1024,\n            property2: 1024\n        }\n    ]\n</pre></code>",
+            "itemtype": "attribute",
+            "name": "buttons",
+            "default": "['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']",
+            "type": "Array",
+            "class": "ToolbarStyles"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
+            "line": 262,
+            "description": "Specifies whether the toolbar show be constrained to some node or to the viewport.",
+            "itemtype": "attribute",
+            "name": "constrain",
+            "default": "true (will be constrained to the viewport)",
+            "type": "Boolean",
+            "class": "ToolbarStyles"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
+            "line": 274,
+            "description": "Specifies the gutter of the toolbar. The gutter object contains the top and left\noffsets from the point, where the toolbar is supposed to appear.",
+            "itemtype": "attribute",
+            "name": "gutter",
+            "default": "{\n  left: 0,\n  top: 10\n}",
+            "type": "Object",
             "class": "ToolbarStyles"
         }
     ],

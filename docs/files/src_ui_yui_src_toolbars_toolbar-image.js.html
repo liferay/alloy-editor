@@ -186,6 +186,11 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
              * Calculates and sets the position of the toolbar.
              *
              * @method showAtPoint
+             * @param {Number} left The left offset in page coordinates.
+             * @param {Number} top The top offset in page coordinates.
+             * @param {Number} direction The direction of the selection. Can be one of these:
+             *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
+             *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
              */
             showAtPoint: function(left, top, direction) {
                 var xy;
@@ -205,7 +210,9 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
              *
              * @method _getToolbarXYPoint
              * @protected
-             * @return {Array} An array with left and top coordinates of the point in page coordinates.
+             * @param {Number} left The left offset in page coordinates.
+             * @param {Number} top The top offset in page coordinates.
+             * @return {Array} An array with left and top offsets of the point in page coordinates.
              */
             _getToolbarXYPoint: function(left, top) {
                 var bbDOMNode,
@@ -245,6 +252,7 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
              *
              * @method _onEditorInteraction
              * @protected
+             * @param {EventFacade} event Event that triggered when user interacted with the editor.
              */
             _onEditorInteraction: function(event) {
                 var element,
@@ -269,6 +277,7 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
              *
              * @method _updateUI
              * @protected
+             * @param {CKEDITOR.dom.element} element The selected image element from the editor.
              */
             _updateUI: function(element) {
                 var region;

@@ -167,6 +167,8 @@
         
         
         
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
         
     </ul>
 
@@ -228,6 +230,26 @@
 
             
 
+            
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_buttons">buttons</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_constrain">constrain</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_gutter">gutter</a>
+                            </li>
+                        
+                    </ul>
+                </div>
             
 
             
@@ -447,7 +469,7 @@ CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
 
     <div class="description">
         <p>Returns the position of the Toolbar taking in consideration the
-ToolbarStyles/gutter:attribute attribute.</p>
+<a href="../classes/ToolbarStyles.html#attr_gutter" class="crosslink">gutter</a> attribute.</p>
 
     </div>
 
@@ -466,7 +488,7 @@ ToolbarStyles/gutter:attribute attribute.</p>
                     
 
                     <div class="param-description">
-                        <p>The left point in page coordinates where Toolbar should be shown.</p>
+                        <p>The left offset in page coordinates where Toolbar should be shown.</p>
 
                     </div>
 
@@ -482,7 +504,7 @@ ToolbarStyles/gutter:attribute attribute.</p>
                     
 
                     <div class="param-description">
-                        <p>The right point in page coordinates where Toolbar should be shown.</p>
+                        <p>The right offset in page coordinates where Toolbar should be shown.</p>
 
                     </div>
 
@@ -519,7 +541,7 @@ CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
                     
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
                     
-                    <p>An Array with left and top in page coordinates.</p>
+                    <p>An Array with left and top offsets in page coordinates.</p>
 
                 
             </div>
@@ -596,7 +618,7 @@ CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
 
     <div class="description">
         <p>Returns the position of the Toolbar taking in consideration the
-ToolbarStyles/gutter:attribute attribute.</p>
+<a href="../classes/ToolbarStyles.html#attr_gutter" class="crosslink">gutter</a> attribute.</p>
 
     </div>
 
@@ -738,7 +760,7 @@ returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_g
 
                     <div class="param-description">
                         <p>The editorInteraction event payload.
-See <a href="../classes/CKEDITOR.plugins.uicore.html#event_editorInteraction" class="crosslink">editorInteraction</a> for more
+See <a href="../classes/CKEDITOR.plugins.uicore.html#event_editorInteraction" class="crosslink">editorInteraction</a> event for more
 information.</p>
 
                     </div>
@@ -897,7 +919,7 @@ information.</p>
                     
 
                     <div class="param-description">
-                        <p>The left point in page coordinates where Toolbar should be shown.</p>
+                        <p>The left offset in page coordinates where Toolbar should be shown.</p>
 
                     </div>
 
@@ -913,7 +935,7 @@ information.</p>
                     
 
                     <div class="param-description">
-                        <p>The right point in page coordinates where Toolbar should be shown.</p>
+                        <p>The right offset in page coordinates where Toolbar should be shown.</p>
 
                     </div>
 
@@ -952,6 +974,345 @@ CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
 
         
 
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_buttons" class="attr item">
+    <a name="config_buttons"></a> 
+    <h3 class="name"><code>buttons</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l236"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:236</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the buttons, which will be attached to the current instance of the toolbar.
+A button configuration can be simple string with the name of the button, or an object
+with properties, like this:</p>
+<p><pre class="code prettyprint"><code>
+    buttons: [&#39;strong&#39;]
+</pre></code>
+    or:</p>
+<p><pre class="code prettyprint"><code>
+    buttons: [
+        &#39;strong&#39;: {
+            zIndex: 1024,
+            property2: 1024
+        }
+    ]
+</pre></code></p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> [&#x27;strong&#x27;, &#x27;em&#x27;, &#x27;u&#x27;, &#x27;h1&#x27;, &#x27;h2&#x27;, &#x27;a&#x27;, &#x27;twitter&#x27;]</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>buttonsChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>buttons</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_constrain" class="attr item">
+    <a name="config_constrain"></a> 
+    <h3 class="name"><code>constrain</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l262"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:262</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies whether the toolbar show be constrained to some node or to the viewport.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> true (will be constrained to the viewport)</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>constrainChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>constrain</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_gutter" class="attr item">
+    <a name="config_gutter"></a> 
+    <h3 class="name"><code>gutter</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l274"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:274</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the gutter of the toolbar. The gutter object contains the top and left
+offsets from the point, where the toolbar is supposed to appear.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> {
+  left: 0,
+  top: 10
+}</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>gutterChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>gutter</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         
