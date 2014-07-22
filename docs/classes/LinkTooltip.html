@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ButtonA - AlloyEditor</title>
+    <title>LinkTooltip - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,7 +122,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ButtonA Class</h1>
+                        <h1>LinkTooltip Class</h1>
 <div class="box meta">
     
 
@@ -130,7 +130,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l7"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:7</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l11"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:11</code></a>
         </div>
     
 
@@ -142,7 +142,8 @@
 
 
 <div class="box intro">
-    <p>The ButtonA class provides functionality for creating a link button.</p>
+    <p>The LinkTooltip class provides functionality for showing tooltip over link elements in editor.
+The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDITOR.plugins.linktooltip.html" class="crosslink">CKEDITOR.plugins.linktooltip</a></p>
 
 </div>
 
@@ -173,98 +174,70 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
-                                <a href="#method__adjustHostPosition">_adjustHostPosition</a>
+                                <a href="#method__attachHiddenHandle">_attachHiddenHandle</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__attachHideHandler">_attachHideHandler</a>
+                                <a href="#method__bindBBMouseEnter">_bindBBMouseEnter</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__handleLink">_handleLink</a>
+                                <a href="#method__bindBBMouseLeave">_bindBBMouseLeave</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onClearInputClick">_onClearInputClick</a>
+                                <a href="#method__getXY">_getXY</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onClick">_onClick</a>
+                                <a href="#method__onBBMouseEnter">_onBBMouseEnter</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onCloseLinkClick">_onCloseLinkClick</a>
+                                <a href="#method__onBBMouseEnter">_onBBMouseEnter</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onKeyPress">_onKeyPress</a>
+                                <a href="#method__onClickOutside">_onClickOutside</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onValueChange">_onValueChange</a>
+                                <a href="#method__onLinkMouseEnter">_onLinkMouseEnter</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onValueChange">_onValueChange</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__removeHideHandler">_removeHideHandler</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__renderLinkUI">_renderLinkUI</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__switchToLinkMode">_switchToLinkMode</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__switchToTextMode">_switchToTextMode</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
                                 <a href="#method_bindUI">bindUI</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_destructor">destructor</a>
 
                                 
                                 
@@ -284,13 +257,6 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_updateUI">updateUI</a>
-
-                                
-                                
-                            </li>
-                        
                     </ul>
                 </div>
             
@@ -304,11 +270,19 @@
                     <ul class="index-list attrs">
                         
                             <li class="index-item attr">
-                                <a href="#attr_element">element</a>
+                                <a href="#attr_constrain">constrain</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_strings">strings</a>
+                                <a href="#attr_editor">editor</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_gutter">gutter</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hideDelay">hideDelay</a>
                             </li>
                         
                     </ul>
@@ -323,8 +297,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__adjustHostPosition" class="method item protected">
-    <h3 class="name"><code>_adjustHostPosition</code></h3>
+                    <div id="method__attachHiddenHandle" class="method item protected">
+    <h3 class="name"><code>_attachHiddenHandle</code></h3>
 
     
         <span class="paren">()</span>
@@ -357,7 +331,7 @@
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l88"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:88</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l105"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:105</code></a>
         
         </p>
 
@@ -368,9 +342,8 @@
     </div>
 
     <div class="description">
-        <p>Changes position of the Toolbar, and adjusts it according to the selection,
-since the width of the UI for adding/edtiting of link href  might be shorter
-or larger than the default Toolbar UI.</p>
+        <p>Hides the linktooltip container after some delay, specified by
+<a href="../classes/LinkTooltip.html#attr_hideDelay" class="crosslink">hideDelay</a> attribute.</p>
 
     </div>
 
@@ -382,8 +355,8 @@ or larger than the default Toolbar UI.</p>
 </div>
 
                 
-                    <div id="method__attachHideHandler" class="method item protected">
-    <h3 class="name"><code>_attachHideHandler</code></h3>
+                    <div id="method__bindBBMouseEnter" class="method item protected">
+    <h3 class="name"><code>_bindBBMouseEnter</code></h3>
 
     
         <span class="paren">()</span>
@@ -416,7 +389,7 @@ or larger than the default Toolbar UI.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l122"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:122</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l91"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:91</code></a>
         
         </p>
 
@@ -427,8 +400,7 @@ or larger than the default Toolbar UI.</p>
     </div>
 
     <div class="description">
-        <p>Attaches a visibleChange listener on the Toolbar so the UI will commit or discard the link
-if the button hides.</p>
+        <p>Adds mouseenter listener to the boundingBox.</p>
 
     </div>
 
@@ -440,8 +412,8 @@ if the button hides.</p>
 </div>
 
                 
-                    <div id="method__handleLink" class="method item protected">
-    <h3 class="name"><code>_handleLink</code></h3>
+                    <div id="method__bindBBMouseLeave" class="method item protected">
+    <h3 class="name"><code>_bindBBMouseLeave</code></h3>
 
     
         <span class="paren">()</span>
@@ -474,7 +446,7 @@ if the button hides.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l212"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:212</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l77"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:77</code></a>
         
         </p>
 
@@ -485,10 +457,7 @@ if the button hides.</p>
     </div>
 
     <div class="description">
-        <p>Updates the default link with the real href, if any, or removes the
-default link from the current selection.
-See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick</a> for more information
-about the default link.</p>
+        <p>Adds mouseleave listener to the boundingBox.</p>
 
     </div>
 
@@ -500,8 +469,8 @@ about the default link.</p>
 </div>
 
                 
-                    <div id="method__onClearInputClick" class="method item protected">
-    <h3 class="name"><code>_onClearInputClick</code></h3>
+                    <div id="method__getXY" class="method item protected">
+    <h3 class="name"><code>_getXY</code></h3>
 
     
         <span class="paren">()</span>
@@ -534,7 +503,7 @@ about the default link.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l137"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:137</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l123"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:123</code></a>
         
         </p>
 
@@ -545,8 +514,9 @@ about the default link.</p>
     </div>
 
     <div class="description">
-        <p>Attaches a visibleChange listener so the UI will commit or discard the link
-when the button hides.</p>
+        <p>Calculates and returns the most appropriate position where link tooltip should appear.
+The position depends on the specified <a href="../classes/LinkTooltip.html#attr_gutter" class="crosslink">gutter</a>,
+and on the fact if the link occupies more than one line in the editor.</p>
 
     </div>
 
@@ -558,8 +528,8 @@ when the button hides.</p>
 </div>
 
                 
-                    <div id="method__onClick" class="method item protected">
-    <h3 class="name"><code>_onClick</code></h3>
+                    <div id="method__onBBMouseEnter" class="method item protected">
+    <h3 class="name"><code>_onBBMouseEnter</code></h3>
 
     
         <span class="paren">()</span>
@@ -592,7 +562,7 @@ when the button hides.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l163"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:163</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l182"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:182</code></a>
         
         </p>
 
@@ -603,12 +573,8 @@ when the button hides.</p>
     </div>
 
     <div class="description">
-        <p>Handles the click event from the user. If button status is &quot;pressed&quot;, activates the UI for
-creating the link. Otherwise, removes the link from the current selection.
-On activating the UI for link creation, a default link with href= &quot;/&quot; will be created and it
-will be kept in button instance as _defaultLink property. This link will also have an attribute,
-called &quot;data-cke-default-link&quot;, so these links will be easily distinguished from the others.
-An implementation of Link Tooltip for example may ignore these links.</p>
+        <p>Handles mouse leave event on the boundingBox.
+Clears any already started hide handle and attaches it again.</p>
 
     </div>
 
@@ -620,8 +586,8 @@ An implementation of Link Tooltip for example may ignore these links.</p>
 </div>
 
                 
-                    <div id="method__onCloseLinkClick" class="method item protected">
-    <h3 class="name"><code>_onCloseLinkClick</code></h3>
+                    <div id="method__onBBMouseEnter" class="method item protected">
+    <h3 class="name"><code>_onBBMouseEnter</code></h3>
 
     
         <span class="paren">()</span>
@@ -654,7 +620,7 @@ An implementation of Link Tooltip for example may ignore these links.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l153"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:153</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l169"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:169</code></a>
         
         </p>
 
@@ -665,7 +631,8 @@ An implementation of Link Tooltip for example may ignore these links.</p>
     </div>
 
     <div class="description">
-        <p>Hides the Toolbar on clicking the close link button.</p>
+        <p>Handles mouse enter event on the boundingBox.
+Clears any already started hide handle and attaches mouse leave listener to the boundingBox.</p>
 
     </div>
 
@@ -677,8 +644,8 @@ An implementation of Link Tooltip for example may ignore these links.</p>
 </div>
 
                 
-                    <div id="method__onKeyPress" class="method item protected">
-    <h3 class="name"><code>_onKeyPress</code></h3>
+                    <div id="method__onClickOutside" class="method item protected">
+    <h3 class="name"><code>_onClickOutside</code></h3>
 
     
         <span class="paren">()</span>
@@ -711,7 +678,7 @@ An implementation of Link Tooltip for example may ignore these links.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l242"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:242</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l195"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:195</code></a>
         
         </p>
 
@@ -722,7 +689,7 @@ An implementation of Link Tooltip for example may ignore these links.</p>
     </div>
 
     <div class="description">
-        <p>Checks if user presses Enter key and hides the Toolbar, if so.</p>
+        <p>Hides the tooltip on clicking outside of the boundingBox.</p>
 
     </div>
 
@@ -734,8 +701,8 @@ An implementation of Link Tooltip for example may ignore these links.</p>
 </div>
 
                 
-                    <div id="method__onValueChange" class="method item protected">
-    <h3 class="name"><code>_onValueChange</code></h3>
+                    <div id="method__onLinkMouseEnter" class="method item protected">
+    <h3 class="name"><code>_onLinkMouseEnter</code></h3>
 
     
         <span class="paren">()</span>
@@ -768,7 +735,7 @@ An implementation of Link Tooltip for example may ignore these links.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l272"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:272</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l205"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:205</code></a>
         
         </p>
 
@@ -779,10 +746,8 @@ An implementation of Link Tooltip for example may ignore these links.</p>
     </div>
 
     <div class="description">
-        <p>On button hide, restore the default UI for creating link.
-On button show, checks if the current selection has link style or not.
-If it has, activates the UI for editing link, otherwise, activates the UI
-for creating a link.</p>
+        <p>Reads the link href, updates tooltip content with the read value,
+shows the tooltip and attaches mouse leave listener on the boundingBox.</p>
 
     </div>
 
@@ -794,296 +759,7 @@ for creating a link.</p>
 </div>
 
                 
-                    <div id="method__onValueChange" class="method item protected">
-    <h3 class="name"><code>_onValueChange</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l254"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:254</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Shows or hides the close link button if link input contains some value.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__removeHideHandler" class="method item protected">
-    <h3 class="name"><code>_removeHideHandler</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l308"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:308</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Removes the attached visibleChange handler on the Toolbar which
-handles the commit or discard process of the link.
-See <a href="../classes/ButtonA.html#method__attachHideHandler" class="crosslink">_attachHideHandler</a> for more information.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__renderLinkUI" class="method item protected">
-    <h3 class="name"><code>_renderLinkUI</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l324"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:324</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Creates the UI for adding a link.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__switchToLinkMode" class="method item protected">
-    <h3 class="name"><code>_switchToLinkMode</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l417"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:417</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Changes the UI of the Toolbar so the user will be able to to create a link to
-change the styles of the selection.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__switchToTextMode" class="method item protected">
-    <h3 class="name"><code>_switchToTextMode</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l368"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:368</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Changes the UI of the Toolbar so the user will be able to change the styles
-of the selection instead to create a link.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_bindUI" class="method item">
+                    <div id="method_bindUI" class="method item protected">
     <h3 class="name"><code>bindUI</code></h3>
 
     
@@ -1095,6 +771,8 @@ of the selection instead to create a link.</p>
     
 
     
+        <span class="flag protected">protected</span>
+    
 
     
 
@@ -1115,7 +793,7 @@ of the selection instead to create a link.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l37"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:37</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l54"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:54</code></a>
         
         </p>
 
@@ -1126,9 +804,67 @@ of the selection instead to create a link.</p>
     </div>
 
     <div class="description">
-        <p>Binds event subscriptions from the UI and the source (if assigned).
-Registers a few events, like handling key press, or mouse events on
-the button for clearing the link.</p>
+        <p>Attaches event listeners such as mouseenter on link elements. Links, which have
+"data-cke-default-link" attribute will be ignored. These links are considered as
+internal; they are being created by automatically when user triggers link creation.
+See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick</a> for more information.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_destructor" class="method item protected">
+    <h3 class="name"><code>destructor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l29"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:29</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Destructor lifecycle implementation for the LinkTooltip class. Destroys the iattached event listeners.</p>
 
     </div>
 
@@ -1184,7 +920,7 @@ the button for clearing the link.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l13"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:13</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l18"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:18</code></a>
         
         </p>
 
@@ -1195,7 +931,7 @@ the button for clearing the link.</p>
     </div>
 
     <div class="description">
-        <p>Initializer lifecycle implementation for the ButtonA class.</p>
+        <p>Initializer lifecycle implementation for the LinkTooltip class.</p>
 
     </div>
 
@@ -1263,7 +999,7 @@ the button for clearing the link.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l24"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:24</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l39"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:39</code></a>
         
         </p>
 
@@ -1274,66 +1010,7 @@ the button for clearing the link.</p>
     </div>
 
     <div class="description">
-        <p>Renders the button which handles the link creation on the current selection and
-the UI, which provides input element where the user will be able to specify the
-href of the link.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_updateUI" class="method item">
-    <h3 class="name"><code>updateUI</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l56"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:56</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Overwrites the default implementation from <a href="../classes/ButtonBase.html#method_updateUI" class="crosslink">updateUI</a>.
-The button updates its "pressed" attribute and changes the UI accordingly to the presence or lack of
-link style of the selection.</p>
+        <p>Renders the link tooltip node on contentBox.</p>
 
     </div>
 
@@ -1355,10 +1032,10 @@ link style of the selection.</p>
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_element" class="attr item">
-    <a name="config_element"></a> 
-    <h3 class="name"><code>element</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    <div id="attr_constrain" class="attr item">
+    <a name="config_constrain"></a> 
+    <h3 class="name"><code>constrain</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
     
 
@@ -1385,7 +1062,7 @@ link style of the selection.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l477"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:477</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l255"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:255</code></a>
         
         </p>
 
@@ -1395,20 +1072,20 @@ link style of the selection.</p>
     </div>
 
     <div class="description">
-        <p>Specifies the element (style) which this button handles.</p>
+        <p>Specifies if the link tooltip show be constrained to the viewport.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;a&#x27;</p>
+        <p><strong>Default:</strong> true</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>elementChange</code></h4>
+            <h4>Fires event <code>constrainChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>element</code> is
+            Fires when the value for the configuration attribute <code>constrain</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -1460,10 +1137,10 @@ link style of the selection.</p>
 </div>
 
                 
-                    <div id="attr_strings" class="attr item">
-    <a name="config_strings"></a> 
-    <h3 class="name"><code>strings</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    <div id="attr_editor" class="attr item">
+    <a name="config_editor"></a> 
+    <h3 class="name"><code>editor</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
     
 
@@ -1490,7 +1167,7 @@ link style of the selection.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-a.js.html#l489"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-a.js:489</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l267"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:267</code></a>
         
         </p>
 
@@ -1500,21 +1177,234 @@ link style of the selection.</p>
     </div>
 
     <div class="description">
-        <p>Collection of strings used to label elements of the button&#39;s UI.
-ButtonA provides one string property, to specify the value of link placeholder.</p>
+        <p>Contains the native editor implementation.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> {placeholder: &#x27;Type or paste link here&#x27;}</p>
+        <p><strong>Default:</strong> true</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>stringsChange</code></h4>
+            <h4>Fires event <code>editorChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>strings</code> is
+            Fires when the value for the configuration attribute <code>editor</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_gutter" class="attr item">
+    <a name="config_gutter"></a> 
+    <h3 class="name"><code>gutter</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l278"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:278</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the gutter of the toolbar. The gutter object contains the top and left
+offsets from the point, where the tooltip is supposed to appear.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> {
+  left: 0,
+  top: 0
+}</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>gutterChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>gutter</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hideDelay" class="attr item">
+    <a name="config_hideDelay"></a> 
+    <h3 class="name"><code>hideDelay</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l297"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:297</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the delay after which the link tooltip will be hidden.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 2000 (sec)</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>hideDelayChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>hideDelay</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the

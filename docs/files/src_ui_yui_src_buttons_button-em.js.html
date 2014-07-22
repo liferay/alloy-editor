@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/ui/yui/src/buttons/button-underline.js - AlloyEditor</title>
+    <title>src/ui/yui/src/buttons/button-em.js - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,46 +122,44 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/ui/yui/src/buttons/button-underline.js</h1>
+                        <h1 class="file-heading">File: src/ui/yui/src/buttons/button-em.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-YUI.add(&#x27;button-u&#x27;, function(Y) {
+YUI.add(&#x27;button-em&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
     var Lang = Y.Lang;
 
     /**
-     * Button Underline. A standard AlloyUI/YUI class which allows to apply underline style to
-     * editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.
+     * The ButtonEm class provides functionality for applying &quot;em&quot; (emphasize, italic) style
+     * to the selection.
      *
-     * @class ButtonU
-     * @constructor
+     * @class ButtonEm
      */
-    var Underline = Y.Base.create(&#x27;underline&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-underline&quot;&gt;&lt;/i&gt;&#x27;
+    var Em = Y.Base.create(&#x27;em&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/i&gt;&#x27;
     }, {
-        NAME: &#x27;underline&#x27;,
+        NAME: &#x27;em&#x27;,
 
-        NS: &#x27;underline&#x27;,
+        NS: &#x27;em&#x27;,
 
         ATTRS: {
-
             /**
-             * @description Specifies the style, which should be applied to the current selection in editor.
+             * Specifies the element (style) which this button handles.
              *
              * @attribute element
-             * @default &#x27;u&#x27;
+             * @default &#x27;em&#x27;
              * @type String
              */
             element: {
                 validator: Lang.isString,
-                value: &#x27;u&#x27;
+                value: &#x27;em&#x27;
             }
         }
     });
 
-    Y.ButtonU = Underline;
+    Y.ButtonEm = Em;
 
 }, &#x27;&#x27;, {
     requires: [&#x27;button-base&#x27;]

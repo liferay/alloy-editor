@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/ui/yui/src/buttons/button-underline.js - AlloyEditor</title>
+    <title>CKEDITOR.plugins.linktooltip - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,51 +122,65 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/ui/yui/src/buttons/button-underline.js</h1>
+                        <h1>CKEDITOR.plugins.linktooltip Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-YUI.add(&#x27;button-u&#x27;, function(Y) {
-    &#x27;use strict&#x27;;
+    
 
-    var Lang = Y.Lang;
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l317"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:317</code></a>
+        </div>
+    
 
-    /**
-     * Button Underline. A standard AlloyUI/YUI class which allows to apply underline style to
-     * editor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.
-     *
-     * @class ButtonU
-     * @constructor
-     */
-    var Underline = Y.Base.create(&#x27;underline&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-underline&quot;&gt;&lt;/i&gt;&#x27;
-    }, {
-        NAME: &#x27;underline&#x27;,
+    
 
-        NS: &#x27;underline&#x27;,
+    
+</div>
 
-        ATTRS: {
 
-            /**
-             * @description Specifies the style, which should be applied to the current selection in editor.
-             *
-             * @attribute element
-             * @default &#x27;u&#x27;
-             * @type String
-             */
-            element: {
-                validator: Lang.isString,
-                value: &#x27;u&#x27;
-            }
-        }
-    });
 
-    Y.ButtonU = Underline;
+<div class="box intro">
+    <p>CKEDITOR plugin which allows displaying tooltip over links in the editor.
+Internally it uses <a href="../classes/LinkTooltip.html" class="crosslink">LinkTooltip</a>. You may specify all
+properties which <a href="../classes/LinkTooltip.html" class="crosslink">LinkTooltip</a> accepts via editor.config.linktooltip property.</p>
 
-}, &#x27;&#x27;, {
-    requires: [&#x27;button-base&#x27;]
-});
-    </pre>
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

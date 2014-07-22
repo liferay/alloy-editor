@@ -94,6 +94,33 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/ui/yui/src/buttons/button-em.js": {
+            "name": "src/ui/yui/src/buttons/button-em.js",
+            "modules": {},
+            "classes": {
+                "ButtonEm": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-h1.js": {
+            "name": "src/ui/yui/src/buttons/button-h1.js",
+            "modules": {},
+            "classes": {
+                "ButtonH1": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-h2.js": {
+            "name": "src/ui/yui/src/buttons/button-h2.js",
+            "modules": {},
+            "classes": {
+                "ButtonH2": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ui/yui/src/buttons/button-image.js": {
             "name": "src/ui/yui/src/buttons/button-image.js",
             "modules": {},
@@ -144,6 +171,25 @@
             "modules": {},
             "classes": {
                 "ButtonU": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/plugins/linktooltip.js": {
+            "name": "src/ui/yui/src/plugins/linktooltip.js",
+            "modules": {},
+            "classes": {
+                "LinkTooltip": 1,
+                "CKEDITOR.plugins.linktooltip": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/plugins/loader.js": {
+            "name": "src/ui/yui/src/plugins/loader.js",
+            "modules": {},
+            "classes": {
+                "CKEDITOR.plugins.uiloader": 1
             },
             "fors": {},
             "namespaces": {}
@@ -262,6 +308,42 @@
             "line": 9,
             "description": "The ButtonBase class provides common functionality for a button like\nreacting on click event, rendering and updating the UI.\nA button implementation may be as simple as changing the style of selection\nto bold, italic, underline, etc. or to be very complex - for example, to change\nthe UI of the host (toolbar). <br />\nToolbarBase and ButtonBase will provide everything you need to implement whatever you need.\nToolbars, which mix ToolbarBase extension will provide a container, where the button\nshould render. This container is accessible via \"buttonsContainer\" attribute.\nIf your button just changes the style of the selection, then everything you have to do\nin order to implement it is: <br />\n- extend Y.Plugin.Base and mix Y.ButtonBase extension\n- specify the element to which you want to style the selection. This should be done via\n\"element\" attribute. Here is the code: <br />\n<pre><code>\n   YUI.add('button-em', function (Y) {\n       'use strict';\n\n        var Lang = Y.Lang;\n\n        var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {\n            TPL_CONTENT: '&lt;i class=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/i&gt;'\n        }, {\n            NAME: 'em',\n\n            NS: 'em',\n\n            ATTRS: {\n                element: {\n                    validator: Lang.isString,\n                    value: 'em'\n                }\n            }\n        });\n\n        Y.ButtonEm = Em;\n\n    },'', {\n        requires: ['button-base']\n    });\n</code></pre>\n\nThe code above creates a button, which will allow user to make selection italic.\n\nA more complex button may change the UI of the host (Toolbar) too. If the Toolbar mix\nToolbarBase extension, then it will export an attribute, called \"buttonContainer\". By\ndefault, the buttons will be rendered in this container, so one button will be able to\nhide the others and provide a different UI for the host (container)."
         },
+        "ButtonEm": {
+            "name": "ButtonEm",
+            "shortname": "ButtonEm",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-em.js",
+            "line": 6,
+            "description": "The ButtonEm class provides functionality for applying \"em\" (emphasize, italic) style\nto the selection."
+        },
+        "ButtonH1": {
+            "name": "ButtonH1",
+            "shortname": "ButtonH1",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-h1.js",
+            "line": 6,
+            "description": "The ButtonH1 class provides functionality for applying HTML heading, level 1\nto the selection."
+        },
+        "ButtonH2": {
+            "name": "ButtonH2",
+            "shortname": "ButtonH2",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-h2.js",
+            "line": 6,
+            "description": "The ButtonH2 class provides functionality for applying HTML heading, level 2\nto the selection."
+        },
         "ButtonImage": {
             "name": "ButtonImage",
             "shortname": "ButtonImage",
@@ -334,6 +416,42 @@
             "line": 6,
             "description": "Button Underline. A standard AlloyUI/YUI class which allows to apply underline style to\neditor selection. Extends Y.Plugin.Base and mixes Y.ButtonBase extension.",
             "is_constructor": 1
+        },
+        "LinkTooltip": {
+            "name": "LinkTooltip",
+            "shortname": "LinkTooltip",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 11,
+            "description": "The LinkTooltip class provides functionality for showing tooltip over link elements in editor.\nThe class will be also registered as CKEDITOR plugin - {{#crossLink \"CKEDITOR.plugins.linktooltip\"}}{{/crossLink}}"
+        },
+        "CKEDITOR.plugins.linktooltip": {
+            "name": "CKEDITOR.plugins.linktooltip",
+            "shortname": "CKEDITOR.plugins.linktooltip",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 317,
+            "description": "CKEDITOR plugin which allows displaying tooltip over links in the editor.\nInternally it uses {{#crossLink \"LinkTooltip\"}}{{/crossLink}}. You may specify all\nproperties which {{#crossLink \"LinkTooltip\"}}{{/crossLink}} accepts via editor.config.linktooltip property."
+        },
+        "CKEDITOR.plugins.uiloader": {
+            "name": "CKEDITOR.plugins.uiloader",
+            "shortname": "CKEDITOR.plugins.uiloader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/plugins/loader.js",
+            "line": 10,
+            "description": "The CKEDITOR.plugins.uiloader plugin loads the editor UI on demand, depending on the\nconfiguration of the Toolbars and Buttons."
         }
     },
     "classitems": [
@@ -625,6 +743,16 @@
             "name": "delay",
             "default": "50 (ms)",
             "type": "Number",
+            "class": "CKEDITOR.plugins.uicore"
+        },
+        {
+            "file": "src/core/uicore.js",
+            "line": 52,
+            "description": "Initializer lifecycle implementation for the UICore plugin.",
+            "itemtype": "method",
+            "name": "init",
+            "access": "protected",
+            "tagname": "",
             "class": "CKEDITOR.plugins.uicore"
         },
         {
@@ -1033,7 +1161,7 @@
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
             "line": 163,
-            "description": "Handles the click event from the user. If button status is \"pressed\", activates the UI for\ncreating the link. Otherwise, removes the link from the current selection.\nOn activating the UI for link creation, a default link with href= \"/\" will be created and it\nwill be keep in button instance as _defaultLink property.",
+            "description": "Handles the click event from the user. If button status is \"pressed\", activates the UI for\ncreating the link. Otherwise, removes the link from the current selection.\nOn activating the UI for link creation, a default link with href= \"/\" will be created and it\nwill be kept in button instance as _defaultLink property. This link will also have an attribute,\ncalled \"data-cke-default-link\", so these links will be easily distinguished from the others.\nAn implementation of Link Tooltip for example may ignore these links.",
             "itemtype": "method",
             "name": "_onClick",
             "access": "protected",
@@ -1042,7 +1170,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 210,
+            "line": 212,
             "description": "Updates the default link with the real href, if any, or removes the\ndefault link from the current selection.\nSee {{#crossLink \"ButtonA/_onClick:method\"}}{{/crossLink}} for more information\nabout the default link.",
             "itemtype": "method",
             "name": "_handleLink",
@@ -1052,7 +1180,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 240,
+            "line": 242,
             "description": "Checks if user presses Enter key and hides the Toolbar, if so.",
             "itemtype": "method",
             "name": "_onKeyPress",
@@ -1062,7 +1190,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 252,
+            "line": 254,
             "description": "Shows or hides the close link button if link input contains some value.",
             "itemtype": "method",
             "name": "_onValueChange",
@@ -1072,7 +1200,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 270,
+            "line": 272,
             "description": "On button hide, restore the default UI for creating link.\nOn button show, checks if the current selection has link style or not.\nIf it has, activates the UI for editing link, otherwise, activates the UI\nfor creating a link.",
             "itemtype": "method",
             "name": "_onValueChange",
@@ -1082,7 +1210,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 306,
+            "line": 308,
             "description": "Removes the attached visibleChange handler on the Toolbar which\nhandles the commit or discard process of the link.\nSee {{#crossLink \"ButtonA/_attachHideHandler:method\"}}{{/crossLink}} for more information.",
             "itemtype": "method",
             "name": "_removeHideHandler",
@@ -1092,7 +1220,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 322,
+            "line": 324,
             "description": "Creates the UI for adding a link.",
             "itemtype": "method",
             "name": "_renderLinkUI",
@@ -1102,7 +1230,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 366,
+            "line": 368,
             "description": "Changes the UI of the Toolbar so the user will be able to change the styles\nof the selection instead to create a link.",
             "itemtype": "method",
             "name": "_switchToTextMode",
@@ -1112,7 +1240,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 415,
+            "line": 417,
             "description": "Changes the UI of the Toolbar so the user will be able to to create a link to\nchange the styles of the selection.",
             "itemtype": "method",
             "name": "_switchToLinkMode",
@@ -1122,7 +1250,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 475,
+            "line": 477,
             "description": "Specifies the element (style) which this button handles.",
             "itemtype": "attribute",
             "name": "element",
@@ -1132,7 +1260,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-a.js",
-            "line": 487,
+            "line": 489,
             "description": "Collection of strings used to label elements of the button's UI.\nButtonA provides one string property, to specify the value of link placeholder.",
             "itemtype": "attribute",
             "name": "strings",
@@ -1237,6 +1365,36 @@
             "type": "Boolean",
             "writeonce": "'initOnly'",
             "class": "ButtonBase"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-em.js",
+            "line": 20,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'em'",
+            "type": "String",
+            "class": "ButtonEm"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-h1.js",
+            "line": 20,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'h1'",
+            "type": "String",
+            "class": "ButtonH1"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-h2.js",
+            "line": 20,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'h2'",
+            "type": "String",
+            "class": "ButtonH2"
         },
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
@@ -1428,6 +1586,219 @@
             "default": "'u'",
             "type": "String",
             "class": "ButtonU"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 18,
+            "description": "Initializer lifecycle implementation for the LinkTooltip class.",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Configuration object literal for the editor",
+                    "type": "Object"
+                }
+            ],
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 29,
+            "description": "Destructor lifecycle implementation for the LinkTooltip class. Destroys the iattached event listeners.",
+            "itemtype": "method",
+            "name": "destructor",
+            "access": "protected",
+            "tagname": "",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 39,
+            "description": "Renders the link tooltip node on contentBox.",
+            "itemtype": "method",
+            "name": "renderUI",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 54,
+            "description": "Attaches event listeners such as mouseenter on link elements. Links, which have\n\"data-cke-default-link\" attribute will be ignored. These links are considered as\ninternal; they are being created by automatically when user triggers link creation.\nSee {{#crossLink \"ButtonA/_onClick:method\"}}{{/crossLink}} for more information.",
+            "itemtype": "method",
+            "name": "bindUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 77,
+            "description": "Adds mouseleave listener to the boundingBox.",
+            "itemtype": "method",
+            "name": "_bindBBMouseLeave",
+            "access": "protected",
+            "tagname": "",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 91,
+            "description": "Adds mouseenter listener to the boundingBox.",
+            "itemtype": "method",
+            "name": "_bindBBMouseEnter",
+            "access": "protected",
+            "tagname": "",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 105,
+            "description": "Hides the linktooltip container after some delay, specified by\n{{#crossLink \"LinkTooltip/hideDelay:attribute\"}}{{/crossLink}} attribute.",
+            "itemtype": "method",
+            "name": "_attachHiddenHandle",
+            "access": "protected",
+            "tagname": "",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 123,
+            "description": "Calculates and returns the most appropriate position where link tooltip should appear.\nThe position depends on the specified {{#crossLink \"LinkTooltip/gutter:attribute\"}}{{/crossLink}},\nand on the fact if the link occupies more than one line in the editor.",
+            "itemtype": "method",
+            "name": "_getXY",
+            "access": "protected",
+            "tagname": "returns {Array} An Array with the most appropriate x and y points in page coordinates.",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 169,
+            "description": "Handles mouse enter event on the boundingBox.\nClears any already started hide handle and attaches mouse leave listener to the boundingBox.",
+            "itemtype": "method",
+            "name": "_onBBMouseEnter",
+            "access": "protected",
+            "tagname": "",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 182,
+            "description": "Handles mouse leave event on the boundingBox.\nClears any already started hide handle and attaches it again.",
+            "itemtype": "method",
+            "name": "_onBBMouseEnter",
+            "access": "protected",
+            "tagname": "",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 195,
+            "description": "Hides the tooltip on clicking outside of the boundingBox.",
+            "itemtype": "method",
+            "name": "_onClickOutside",
+            "access": "protected",
+            "tagname": "",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 205,
+            "description": "Reads the link href, updates tooltip content with the read value,\nshows the tooltip and attaches mouse leave listener on the boundingBox.",
+            "itemtype": "method",
+            "name": "_onLinkMouseEnter",
+            "access": "protected",
+            "tagname": "",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 255,
+            "description": "Specifies if the link tooltip show be constrained to the viewport.",
+            "itemtype": "attribute",
+            "name": "constrain",
+            "default": "true",
+            "type": "Boolean",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 267,
+            "description": "Contains the native editor implementation.",
+            "itemtype": "attribute",
+            "name": "editor",
+            "default": "true",
+            "type": "Object",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 278,
+            "description": "Specifies the gutter of the toolbar. The gutter object contains the top and left\noffsets from the point, where the tooltip is supposed to appear.",
+            "itemtype": "attribute",
+            "name": "gutter",
+            "default": "{\n  left: 0,\n  top: 0\n}",
+            "type": "Object",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/linktooltip.js",
+            "line": 297,
+            "description": "Specifies the delay after which the link tooltip will be hidden.",
+            "itemtype": "attribute",
+            "name": "hideDelay",
+            "default": "2000 (sec)",
+            "type": "Number",
+            "class": "LinkTooltip"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/loader.js",
+            "line": 18,
+            "description": "Initializer lifecycle implementation for the UILoader plugin.",
+            "itemtype": "method",
+            "name": "init",
+            "access": "protected",
+            "tagname": "",
+            "class": "CKEDITOR.plugins.uiloader"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/loader.js",
+            "line": 42,
+            "description": "Creates instances of toolbars as specified by the editor configuration.\nA simple editor toolbar configuration may look like this:\n<pre><code>\n  toolbars: {\n      add: ['image', 'code']\n  }\n</code></pre>\nIn this case we have very simple configuration - the editor will have\nonly one toolbar, with two buttons - for adding images and code into the\neditor. These buttons will also not have any specific configuration.\nIn order to pass configuration attributes to the tollbars, the configuration\nmay be specified like this:\n<pre><code>\n  toolbars: {\n     add: {\n          buttons: ['image', 'code'],\n          zIndex: 1024\n      }\n  }\n</code></pre>\nIn this case, toolbar \"add\" receives two attributes - the first one is the\nlist of buttons (each button also can be specified via an configuration object)\nand another attribute, which specifies its zIndex.",
+            "itemtype": "method",
+            "name": "_createToolbars",
+            "access": "protected",
+            "tagname": "",
+            "class": "CKEDITOR.plugins.uiloader"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/loader.js",
+            "line": 100,
+            "description": "Retrieves a list of modules for all registered buttons and toolbars in the current\neditor configuration.\nThe module will be automatically discovered if it follows this specification:\n- if this is a Toolbar, the module should start with the word \"module\", followed by \"-\"\nand then the name of the toolbar. Example: 'toolbar-add'.\n- if the module is an button, then the module should start with the word \"button\",\nfollowed by \"-\" and then the name of the button. Example: \"button-image\".\n- In order to be instantiated successfully, the toolbar should expose itself as an object,\nattached to the current YUI/AlloyUI instance. The name should start with the name Toolbar,\nfollowed by the name of the toolbar, as specified in the configuration. Example: Y.ToolbarAdd.\n- In order to be instantiated successfully, the button should expose itself as an object,\nattached to the current YUI/AlloyUI instance. The name should start with the name Button,\nfollowed by the name of the button, as specified in the configuration. Example: Y.ButtonImage.",
+            "itemtype": "method",
+            "name": "_getModules",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "An array of all discovered modules of toolbars and buttons, as specified by\nthe current editor configuration.",
+                "type": "Array"
+            },
+            "class": "CKEDITOR.plugins.uiloader"
+        },
+        {
+            "file": "src/ui/yui/src/plugins/loader.js",
+            "line": 149,
+            "description": "Resolves the name of the Toolbar from the current editor configuration.\nSee {{#crossLink \"CKEDITOR.plugins.uiloader/_getModules:method\"}}{{/crossLink}}\nfor more information about the rules for constructing toolbar names.",
+            "itemtype": "method",
+            "name": "_getToolbarName",
+            "access": "protected",
+            "tagname": "",
+            "return": {
+                "description": "The constructed name of the Toolbar.",
+                "type": "String"
+            },
+            "class": "CKEDITOR.plugins.uiloader"
         }
     ],
     "warnings": []

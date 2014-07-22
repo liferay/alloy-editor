@@ -4,6 +4,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "AlloyEditor",
         "ButtonA",
         "ButtonBase",
+        "ButtonEm",
+        "ButtonH1",
+        "ButtonH2",
         "ButtonImage",
         "ButtonLeft",
         "ButtonRight",
@@ -12,10 +15,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonU",
         "CKEDITOR.Link",
         "CKEDITOR.plugins.dropimages",
+        "CKEDITOR.plugins.linktooltip",
         "CKEDITOR.plugins.placeholder",
         "CKEDITOR.plugins.selectionregion",
         "CKEDITOR.plugins.uicore",
-        "CKEDITOR.tools"
+        "CKEDITOR.plugins.uiloader",
+        "CKEDITOR.tools",
+        "LinkTooltip"
     ],
     "modules": [],
     "allModules": []

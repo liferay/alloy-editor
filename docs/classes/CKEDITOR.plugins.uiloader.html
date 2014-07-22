@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CKEDITOR.tools - AlloyEditor</title>
+    <title>CKEDITOR.plugins.uiloader - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,7 +122,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>CKEDITOR.tools Class</h1>
+                        <h1>CKEDITOR.plugins.uiloader Class</h1>
 <div class="box meta">
     
 
@@ -130,7 +130,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_core_tools.js.html#l4"><code>src&#x2F;core&#x2F;tools.js:4</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_plugins_loader.js.html#l10"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:10</code></a>
         </div>
     
 
@@ -142,7 +142,8 @@
 
 
 <div class="box intro">
-    <p>CKEDITOR.tools class utility which adds additional methods to those of CKEditor.</p>
+    <p>The CKEDITOR.plugins.uiloader plugin loads the editor UI on demand, depending on the
+configuration of the Toolbars and Buttons.</p>
 
 </div>
 
@@ -170,15 +171,29 @@
 
                     <ul class="index-list methods">
                         
-                            <li class="index-item method">
-                                <a href="#method_debounce">debounce</a>
+                            <li class="index-item method protected">
+                                <a href="#method__createToolbars">_createToolbars</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_merge">merge</a>
+                            <li class="index-item method protected">
+                                <a href="#method__getModules">_getModules</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__getToolbarName">_getToolbarName</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_init">init</a>
 
                                 
                                 
@@ -200,45 +215,19 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_debounce" class="method item">
-    <h3 class="name"><code>debounce</code></h3>
+                    <div id="method__createToolbars" class="method item protected">
+    <h3 class="name"><code>_createToolbars</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>timeout</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>context</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>args</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
 
     
 
+    
+        <span class="flag protected">protected</span>
     
 
     
@@ -260,7 +249,7 @@
             
         
         
-        <a href="../files/src_core_debounce.js.html#l10"><code>src&#x2F;core&#x2F;debounce.js:10</code></a>
+        <a href="../files/src_ui_yui_src_plugins_loader.js.html#l42"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:42</code></a>
         
         </p>
 
@@ -271,86 +260,32 @@
     </div>
 
     <div class="description">
-        <p>Debounce util function. If a function execution is expensive, it might be debounced. This means
-that it will be executed after some amount of time after its last call. For example, if we attach a
-a function on scroll event, it might be called hundreds times per second. In this case it may be
-debounced with, let&#39;s say 100ms. The real execution of this function will happen 100ms after last
-scroll event.</p>
+        <p>Creates instances of toolbars as specified by the editor configuration.
+A simple editor toolbar configuration may look like this:</p>
+<p><pre class="code prettyprint"><code>
+  toolbars: {
+      add: [&#39;image&#39;, &#39;code&#39;]
+  }
+</code></pre>
+In this case we have very simple configuration - the editor will have
+only one toolbar, with two buttons - for adding images and code into the
+editor. These buttons will also not have any specific configuration.
+In order to pass configuration attributes to the tollbars, the configuration
+may be specified like this:</p>
+<p><pre class="code prettyprint"><code>
+  toolbars: {
+     add: {
+          buttons: [&#39;image&#39;, &#39;code&#39;],
+          zIndex: 1024
+      }
+  }
+</code></pre>
+In this case, toolbar &quot;add&quot; receives two attributes - the first one is the
+list of buttons (each button also can be specified via an configuration object)
+and another attribute, which specifies its zIndex.</p>
 
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The callback which has to be called after given timeout.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">timeout</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Timeout in milliseconds after which the callback will be called.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The context in which the callback will be called. This argument is optional.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">args</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>An array of arguments which the callback will receive.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -359,31 +294,23 @@ scroll event.</p>
 </div>
 
                 
-                    <div id="method_merge" class="method item">
-    <h3 class="name"><code>merge</code></h3>
+                    <div id="method__getModules" class="method item protected">
+    <h3 class="name"><code>_getModules</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>objects</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
         </span>
     
 
     
 
+    
+        <span class="flag protected">protected</span>
     
 
     
@@ -405,7 +332,7 @@ scroll event.</p>
             
         
         
-        <a href="../files/src_core_tools.js.html#l10"><code>src&#x2F;core&#x2F;tools.js:10</code></a>
+        <a href="../files/src_ui_yui_src_plugins_loader.js.html#l100"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:100</code></a>
         
         </p>
 
@@ -416,39 +343,24 @@ scroll event.</p>
     </div>
 
     <div class="description">
-        <p>Returns a new object containing all of the properties of all the supplied
-objects. The properties from later objects will overwrite those in earlier
-objects.</p>
-<p>Passing in a single object will create a shallow copy of it.</p>
+        <p>Retrieves a list of modules for all registered buttons and toolbars in the current
+editor configuration.
+The module will be automatically discovered if it follows this specification:</p>
+<ul>
+<li>if this is a Toolbar, the module should start with the word &quot;module&quot;, followed by &quot;-&quot;
+and then the name of the toolbar. Example: &#39;toolbar-add&#39;.</li>
+<li>if the module is an button, then the module should start with the word &quot;button&quot;,
+followed by &quot;-&quot; and then the name of the button. Example: &quot;button-image&quot;.</li>
+<li>In order to be instantiated successfully, the toolbar should expose itself as an object,
+attached to the current YUI/AlloyUI instance. The name should start with the name Toolbar,
+followed by the name of the toolbar, as specified in the configuration. Example: Y.ToolbarAdd.</li>
+<li>In order to be instantiated successfully, the button should expose itself as an object,
+attached to the current YUI/AlloyUI instance. The name should start with the name Button,
+followed by the name of the button, as specified in the configuration. Example: Y.ButtonImage.</li>
+</ul>
 
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">objects</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-                        <span class="flag multiple" title="This argument may occur one or more times.">multiple</span>
-                    
-
-                    <div class="param-description">
-                        <p>One or more objects to merge.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -458,13 +370,148 @@ objects.</p>
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
                     
-                    <p>A new merged object.</p>
+                    <p>An array of all discovered modules of toolbars and buttons, as specified by
+the current editor configuration.</p>
 
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__getToolbarName" class="method item protected">
+    <h3 class="name"><code>_getToolbarName</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_plugins_loader.js.html#l149"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:149</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Resolves the name of the Toolbar from the current editor configuration.
+See <a href="../classes/CKEDITOR.plugins.uiloader.html#method__getModules" class="crosslink">_getModules</a>
+for more information about the rules for constructing toolbar names.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    <p>The constructed name of the Toolbar.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_init" class="method item protected">
+    <h3 class="name"><code>init</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_plugins_loader.js.html#l18"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:18</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initializer lifecycle implementation for the UILoader plugin.</p>
+
+    </div>
+
+    
+
     
 
     
