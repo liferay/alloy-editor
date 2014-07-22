@@ -1,127 +1,223 @@
-YUI.add('toolbar-image', function (Y) {
+YUI.add('toolbar-image', function(Y) {
     'use strict';
 
     var Lang = Y.Lang,
         YNode = Y.Node,
 
-    ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide, Y.ToolbarBase], {
-        renderUI: function() {
-            var instance = this,
-                buttonsContainer,
-                contentBox;
+        /**
+         * The ToolbarImage class hosts the buttons for aligning and manipulating an image.
+         *
+         * @class ToolbarImage
+         */
+        ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide, Y.ToolbarBase], {
+            /**
+             * Creates the container where buttons, attached to the instance of Toolbar should render.
+             *
+             * @method renderUI
+             * @protected
+             */
+            renderUI: function() {
+                var instance = this,
+                    buttonsContainer,
+                    contentBox;
 
-            buttonsContainer = YNode.create(instance.TPL_BUTTONS_CONTAINER);
+                buttonsContainer = YNode.create(instance.TPL_BUTTONS_CONTAINER);
 
-            this.get('boundingBox').addClass('arrow-box arrow-box-bottom');
+                this.get('boundingBox').addClass('arrow-box arrow-box-bottom');
 
-            contentBox = this.get('contentBox');
+                contentBox = this.get('contentBox');
 
-            contentBox.addClass('btn-toolbar');
+                contentBox.addClass('btn-toolbar');
 
-            contentBox.appendChild(buttonsContainer);
+                contentBox.appendChild(buttonsContainer);
 
-            instance._buttonsContainer = buttonsContainer;
-        },
+                instance._buttonsContainer = buttonsContainer;
+            },
 
-        bindUI: function() {
-            this.on('actionPerformed', this._onActionPerformed, this);
-        },
+            /**
+             * Creates and adds Node element - the container where buttons should render.
+             *
+             * @method bindUI
+             * @protected
+             */
+            bindUI: function() {
+                this.on('actionPerformed', this._onActionPerformed, this);
+            },
 
-        showAtPoint: function(left, top, direction) {
-            var xy;
+            /**
+             * Calculates and sets the position of the toolbar.
+             *
+             * @method showAtPoint
+             * @param {Number} left The left offset in page coordinates.
+             * @param {Number} top The top offset in page coordinates.
+             * @param {Number} direction The direction of the selection. Can be one of these:
+             *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
+             *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
+             */
+            showAtPoint: function(left, top, direction) {
+                var xy;
 
-            if (!this.get('visible')) {
-                this.show();
-            }
+                if (!this.get('visible')) {
+                    this.show();
+                }
 
-            xy = this._getToolbarXYPoint(left, top, direction);
+                xy = this._getToolbarXYPoint(left, top, direction);
 
-            this._moveToPoint(this.getConstrainedXY(xy), direction);
-        },
+                this._moveToPoint(this.getConstrainedXY(xy), direction);
+            },
 
-        _getToolbarXYPoint: function(left, top) {
-            var bbDOMNode,
-                gutter;
+            /**
+             * Calculates the position of the Toolbar, taking in consideration
+             * the {{#crossLink "ToolbarImage/gutter:attribute"}}{{/crossLink}}
+             *
+             * @method _getToolbarXYPoint
+             * @protected
+             * @param {Number} left The left offset in page coordinates.
+             * @param {Number} top The top offset in page coordinates.
+             * @return {Array} An array with left and top offsets of the point in page coordinates.
+             */
+            _getToolbarXYPoint: function(left, top) {
+                var bbDOMNode,
+                    gutter;
 
-            bbDOMNode = this.get('boundingBox').getDOMNode();
+                bbDOMNode = this.get('boundingBox').getDOMNode();
 
-            left = left - bbDOMNode.offsetWidth / 2;
+                left = left - bbDOMNode.offsetWidth / 2;
 
-            gutter = this.get('gutter');
+                gutter = this.get('gutter');
 
-            top = top - bbDOMNode.offsetHeight - gutter.top;
+                top = top - bbDOMNode.offsetHeight - gutter.top;
 
-            return [left, top];
-        },
+                return [left, top];
+            },
 
-        _onActionPerformed: function() {
-            var editor,
-                element;
+            /**
+             * After changing the attributes of the image, updates the position of the Toolbar.
+             *
+             * @method _onActionPerformed
+             * @protected
+             */
+            _onActionPerformed: function() {
+                var editor,
+                    element;
 
-            editor = this.get('editor');
+                editor = this.get('editor');
 
-            element = editor.getSelection().getSelectedElement();
+                element = editor.getSelection().getSelectedElement();
 
-            this._updateUI(element);
-        },
-
-        _onEditorInteraction: function(event) {
-            var element,
-                name,
-                selectionData;
-
-            selectionData = event.data.selectionData;
-
-            element = selectionData.element;
-
-            name = element ? element.getName() : null;
-
-            if (name === 'img') {
                 this._updateUI(element);
-            }
-            else {
-                this.hide();
-            }
-        },
-
-        _updateUI: function(element) {
-            var region;
-
-            if (element) {
-                region = Y.DOM.region(element.$);
-
-                this.showAtPoint(region.left + (region.right - region.left)/2, region.top);
-            }
-        },
-
-        BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-image alloy-editor-arrow-box alloy-editor-arrow-box-bottom"></div>',
-
-        CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
-
-        TPL_BUTTONS_CONTAINER: '<div class="alloy-editor-toolbar-buttons btn-group"></div>'
-    }, {
-        ATTRS: {
-            buttons: {
-                validator: Lang.isArray,
-                value: ['left', 'right']
             },
 
-            constrain: {
-                validator: Lang.isBoolean,
-                value: true
+            /**
+             * Once after user interacts with the editor, shows or hides the Toolbar.
+             * The Toolbar will be hidden if the currently selected element is not an image.
+             *
+             * @method _onEditorInteraction
+             * @protected
+             * @param {EventFacade} event Event that triggered when user interacted with the editor.
+             */
+            _onEditorInteraction: function(event) {
+                var element,
+                    name,
+                    selectionData;
+
+                selectionData = event.data.selectionData;
+
+                element = selectionData.element;
+
+                name = element ? element.getName() : null;
+
+                if (name === 'img') {
+                    this._updateUI(element);
+                } else {
+                    this.hide();
+                }
             },
 
-            gutter: {
-                validator: Lang.isObject,
-                value: {
-                    left: 0,
-                    top: 10
+            /**
+             * Moves the Toolbar to specified position.
+             *
+             * @method _updateUI
+             * @protected
+             * @param {CKEDITOR.dom.element} element The selected image element from the editor.
+             */
+            _updateUI: function(element) {
+                var region;
+
+                if (element) {
+                    region = Y.DOM.region(element.$);
+
+                    this.showAtPoint(region.left + (region.right - region.left) / 2, region.top);
+                }
+            },
+
+            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-image alloy-editor-arrow-box alloy-editor-arrow-box-bottom"></div>',
+
+            CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
+
+            TPL_BUTTONS_CONTAINER: '<div class="alloy-editor-toolbar-buttons btn-group"></div>'
+        }, {
+            ATTRS: {
+                /**
+                 * Specifies the buttons, which will be attached to the current instance of the toolbar.
+                 * A button configuration can be simple string with the name of the button, or an object
+                 * with properties, like this:
+                 * <pre><code>
+                 *     buttons: ['left']
+                 * </pre></code>
+                 *     or:
+                 * <pre><code>
+                 *     buttons: [
+                 *         'left': {
+                 *             zIndex: 1024,
+                 *             property2: 1024
+                 *         }
+                 *     ]
+                 * </pre></code>
+                 *
+                 * @attribute buttons
+                 * @default ['left', 'right']
+                 * @type Array
+                 */
+                buttons: {
+                    validator: Lang.isArray,
+                    value: ['left', 'right']
+                },
+
+                /**
+                 * Specifies whether the toolbar show be constrained to some node or to the viewport.
+                 *
+                 * @attribute constrain
+                 * @default true (will be constrained to the viewport)
+                 * @type Boolean
+                 */
+                constrain: {
+                    validator: Lang.isBoolean,
+                    value: true
+                },
+
+                /**
+                 * Specifies the gutter of the tooltip. The gutter object contains the top and left
+                 * offsets from the point, where the tooltip is supposed to appear.
+                 *
+                 * @attribute gutter
+                 * @default {
+                 *   left: 0,
+                 *   top: 0
+                 * }
+                 * @type Object
+                 */
+                gutter: {
+                    validator: Lang.isObject,
+                    value: {
+                        left: 0,
+                        top: 10
+                    }
                 }
             }
-		}
-	});
+        });
 
     Y.ToolbarImage = ToolbarImage;
-},'', {
+}, '', {
     requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base']
 });
