@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CKEDITOR.plugins.dropimages - AlloyEditor</title>
+    <title>ToolbarStyles - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,7 +132,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>CKEDITOR.plugins.dropimages Class</h1>
+                        <h1>ToolbarStyles Class</h1>
 <div class="box meta">
     
 
@@ -140,7 +140,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_plugins_drop-images.js.html#l10"><code>src&#x2F;plugins&#x2F;drop-images.js:10</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l7"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:7</code></a>
         </div>
     
 
@@ -152,8 +152,7 @@
 
 
 <div class="box intro">
-    <p>CKEditor plugin which allows Drag&amp;Drop of images directly into the edit area. The image will be encoded
-as Data URI.</p>
+    <p>The ToolbarStyles class hosts the buttons for styling text selection.</p>
 
 </div>
 
@@ -169,8 +168,6 @@ as Data URI.</p>
         
         
         
-            <li class="api-class-tab events"><a href="#events">Events</a></li>
-        
     </ul>
 
     <div>
@@ -184,49 +181,42 @@ as Data URI.</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
-                                <a href="#method__handleFiles">_handleFiles</a>
+                                <a href="#method__calculatePosition">_calculatePosition</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onDragDrop">_onDragDrop</a>
+                                <a href="#method__getToolbarXYPoint">_getToolbarXYPoint</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onDragEnter">_onDragEnter</a>
+                                <a href="#method__getXPoint">_getXPoint</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onDragOver">_onDragOver</a>
+                                <a href="#method__onEditorInteraction">_onEditorInteraction</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__preventEvent">_preventEvent</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__preventEvent">_preventEvent</a>
+                                <a href="#method_renderUI">renderUI</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_init">init</a>
+                                <a href="#method_showAtPoint">showAtPoint</a>
 
                                 
                                 
@@ -240,21 +230,6 @@ as Data URI.</p>
 
             
 
-            
-                <div class="index-section events">
-                    <h3>Events</h3>
-
-                    <ul class="index-list events">
-                        
-                            <li class="index-item event">
-                                <a href="#event_imagedrop">imagedrop</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
         </div>
 
@@ -263,8 +238,8 @@ as Data URI.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__handleFiles" class="method item protected">
-    <h3 class="name"><code>_handleFiles</code></h3>
+                    <div id="method__calculatePosition" class="method item protected">
+    <h3 class="name"><code>_calculatePosition</code></h3>
 
     
         <div class="args">
@@ -272,13 +247,13 @@ as Data URI.</p>
             
                 <li class="arg">
                     
-                        <code>files</code>
+                        <code>selectionData</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code>editor</code>
+                        <code>pos</code>
                     
                 </li>
             
@@ -286,6 +261,10 @@ as Data URI.</p>
         </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        </span>
     
 
     
@@ -313,7 +292,7 @@ as Data URI.</p>
             
         
         
-        <a href="../files/src_plugins_drop-images.js.html#l43"><code>src&#x2F;plugins&#x2F;drop-images.js:43</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l63"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:63</code></a>
         
         </p>
 
@@ -324,8 +303,8 @@ as Data URI.</p>
     </div>
 
     <div class="description">
-        <p>Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
-processing to CKEDITOR.plugins.dropimages/_processFile:method</p>
+        <p>Calculates the position of the toolbar. Depending on the direction of the
+selection, ToolbarStyles may appear above on or on bottom of the selection.</p>
 
     </div>
 
@@ -337,30 +316,33 @@ processing to CKEDITOR.plugins.dropimages/_processFile:method</p>
             
                 <li class="param">
                     
-                        <code class="param-name">files</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Array of dropped files. Only the images from this list will be processed.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">editor</code>
+                        <code class="param-name">selectionData</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The current editor instance</p>
+                        <p>The data about the selection in the editor as
+returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">pos</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Contains the coordinates of the position, considered as most appropriate.
+This may be the point where the user released the mouse, or just the beginning or the end of
+the selection.</p>
 
                     </div>
 
@@ -372,13 +354,29 @@ processing to CKEDITOR.plugins.dropimages/_processFile:method</p>
     
 
     
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                    
+                    <p>An Object which contains the following properties:
+direction, x, y, where x and y are in page coordinates and direction can be one of these:
+CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
+
+                
+            </div>
+        </div>
+    
 
     
 </div>
 
                 
-                    <div id="method__onDragDrop" class="method item protected">
-    <h3 class="name"><code>_onDragDrop</code></h3>
+                    <div id="method__getToolbarXYPoint" class="method item protected">
+    <h3 class="name"><code>_getToolbarXYPoint</code></h3>
 
     
         <div class="args">
@@ -386,7 +384,19 @@ processing to CKEDITOR.plugins.dropimages/_processFile:method</p>
             
                 <li class="arg">
                     
-                        <code>event</code>
+                        <code>left</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>right</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>direction</code>
                     
                 </li>
             
@@ -394,6 +404,10 @@ processing to CKEDITOR.plugins.dropimages/_processFile:method</p>
         </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+        </span>
     
 
     
@@ -421,7 +435,7 @@ processing to CKEDITOR.plugins.dropimages/_processFile:method</p>
             
         
         
-        <a href="../files/src_plugins_drop-images.js.html#l95"><code>src&#x2F;plugins&#x2F;drop-images.js:95</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l121"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:121</code></a>
         
         </p>
 
@@ -432,9 +446,8 @@ processing to CKEDITOR.plugins.dropimages/_processFile:method</p>
     </div>
 
     <div class="description">
-        <p>Handles drag drop event. The function will create selection from the current points and
-will send a list of files to be processed to
-<a href="../classes/CKEDITOR.plugins.dropimages.html#method__handleFiles" class="crosslink">_handleFiles</a></p>
+        <p>Returns the position of the Toolbar taking in consideration the
+ToolbarStyles/gutter:attribute attribute.</p>
 
     </div>
 
@@ -446,14 +459,47 @@ will send a list of files to be processed to
             
                 <li class="param">
                     
-                        <code class="param-name">event</code>
-                        <span class="type">CKEDITOR.dom.event</span>
+                        <code class="param-name">left</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>dragdrop event, as received natively from CKEditor</p>
+                        <p>The left point in page coordinates where Toolbar should be shown.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">right</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The right point in page coordinates where Toolbar should be shown.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">direction</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The direction of the selection. May be one of the following:
+CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
 
                     </div>
 
@@ -465,13 +511,27 @@ will send a list of files to be processed to
     
 
     
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+                    
+                    <p>An Array with left and top in page coordinates.</p>
+
+                
+            </div>
+        </div>
+    
 
     
 </div>
 
                 
-                    <div id="method__onDragEnter" class="method item protected">
-    <h3 class="name"><code>_onDragEnter</code></h3>
+                    <div id="method__getXPoint" class="method item protected">
+    <h3 class="name"><code>_getXPoint</code></h3>
 
     
         <div class="args">
@@ -479,7 +539,13 @@ will send a list of files to be processed to
             
                 <li class="arg">
                     
-                        <code>event</code>
+                        <code>selectionData</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>eventX</code>
                     
                 </li>
             
@@ -487,6 +553,10 @@ will send a list of files to be processed to
         </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
     
 
     
@@ -514,7 +584,7 @@ will send a list of files to be processed to
             
         
         
-        <a href="../files/src_plugins_drop-images.js.html#l69"><code>src&#x2F;plugins&#x2F;drop-images.js:69</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l152"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:152</code></a>
         
         </p>
 
@@ -525,7 +595,8 @@ will send a list of files to be processed to
     </div>
 
     <div class="description">
-        <p>Handles drag enter event. In case of IE, this function will prevent the event.</p>
+        <p>Returns the position of the Toolbar taking in consideration the
+ToolbarStyles/gutter:attribute attribute.</p>
 
     </div>
 
@@ -537,378 +608,329 @@ will send a list of files to be processed to
             
                 <li class="param">
                     
-                        <code class="param-name">event</code>
-                        <span class="type">DOM event</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>dragenter event, as received natively from CKEditor</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__onDragOver" class="method item protected">
-    <h3 class="name"><code>_onDragOver</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>event</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_plugins_drop-images.js.html#l82"><code>src&#x2F;plugins&#x2F;drop-images.js:82</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Handles drag over event. In case of IE, this function will prevent the event.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">event</code>
-                        <span class="type">DOM event</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>dragover event, as received natively from CKEditor</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__preventEvent" class="method item protected">
-    <h3 class="name"><code>_preventEvent</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>event</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_plugins_drop-images.js.html#l119"><code>src&#x2F;plugins&#x2F;drop-images.js:119</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Prevents a native event.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">event</code>
-                        <span class="type">DOM event</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The event to be prevented.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__preventEvent" class="method item protected">
-    <h3 class="name"><code>_preventEvent</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>event</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_plugins_drop-images.js.html#l133"><code>src&#x2F;plugins&#x2F;drop-images.js:133</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Processes an image file. The function creates an element and sets a source
-a Data URI, then fires an event &#39;imagedrop&#39; via CKEditor event system.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">event</code>
-                        <span class="type">DOM event</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The event to be prevented.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_init" class="method item">
-    <h3 class="name"><code>init</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>editor</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_plugins_drop-images.js.html#l18"><code>src&#x2F;plugins&#x2F;drop-images.js:18</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Initialization of the plugin, part of CKEditor plugin lifecycle.
-The function registers a &#39;dragenter&#39;, &#39;dragover&#39; and &#39;drop&#39; events on the editing area.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">editor</code>
+                        <code class="param-name">selectionData</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The current editor instance</p>
+                        <p>The data about the selection in the editor as
+returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">eventX</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The X coordinate received from the native event (mouseup).</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    
+                    <p>The calculated X point in page coordinates.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__onEditorInteraction" class="method item protected">
+    <h3 class="name"><code>_onEditorInteraction</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l192"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:192</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Calculates the most appropriate position where the Toolbar should be displayed and shows it.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The editorInteraction event payload.
+See <a href="../classes/CKEDITOR.plugins.uicore.html#event_editorInteraction" class="crosslink">editorInteraction</a> for more
+information.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_renderUI" class="method item protected">
+    <h3 class="name"><code>renderUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l13"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:13</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Creates the container where buttons, attached to the instance of Toolbar should render.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_showAtPoint" class="method item">
+    <h3 class="name"><code>showAtPoint</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>left</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>right</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>direction</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l33"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:33</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Calculates and sets the position of the toolbar.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">left</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The left point in page coordinates where Toolbar should be shown.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">right</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The right point in page coordinates where Toolbar should be shown.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">direction</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The direction of the selection. May be one of the following:
+CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
 
                     </div>
 
@@ -932,80 +954,6 @@ The function registers a &#39;dragenter&#39;, &#39;dragover&#39; and &#39;drop&#
 
         
 
-        
-            <div id="events" class="api-class-tabpanel">
-                <h2 class="off-left">Events</h2>
-
-                
-                    <div id="event_imagedrop" class="events item">
-    <h3 class="name"><code>imagedrop</code></h3>
-    <span class="type"></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_plugins_drop-images.js.html#l160"><code>src&#x2F;plugins&#x2F;drop-images.js:160</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Fired when an image is being added to the editor successfully.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Event Payload:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">el</code>
-                        <span class="type">CKEDITOR.dom.element</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The created image with src, created as Data URI</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-
-    
-</div>
-
-                
-            </div>
         
     </div>
 </div>

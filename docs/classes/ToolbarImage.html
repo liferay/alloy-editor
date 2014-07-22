@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ToolbarAdd - AlloyEditor</title>
+    <title>ToolbarImage - AlloyEditor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,7 +132,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ToolbarAdd Class</h1>
+                        <h1>ToolbarImage Class</h1>
 <div class="box meta">
     
 
@@ -140,7 +140,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:9</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l7"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:7</code></a>
         </div>
     
 
@@ -152,7 +152,7 @@
 
 
 <div class="box intro">
-    <p>The ToolbarAdd class provides functionality for adding content to the editor.</p>
+    <p>The ToolbarImage class hosts the buttons for aligning and manipulating an image.</p>
 
 </div>
 
@@ -183,56 +183,28 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
-                                <a href="#method__alignButtonsOverlay">_alignButtonsOverlay</a>
+                                <a href="#method__getToolbarXYPoint">_getToolbarXYPoint</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__handleMouseEnter">_handleMouseEnter</a>
+                                <a href="#method__onActionPerformed">_onActionPerformed</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__handleMouseEnter">_handleMouseEnter</a>
+                                <a href="#method__onEditorInteraction">_onEditorInteraction</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__hideButtonsContainer">_hideButtonsContainer</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__hideButtonsContainer">_hideButtonsContainer</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__renderAddNode">_renderAddNode</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__renderButtonsOverlay">_renderButtonsOverlay</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__showButtonsContainer">_showButtonsContainer</a>
+                                <a href="#method__updateUI">_updateUI</a>
 
                                 
                                 
@@ -240,20 +212,6 @@
                         
                             <li class="index-item method protected">
                                 <a href="#method_bindUI">bindUI</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method_destructor">destructor</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method_initializer">initializer</a>
 
                                 
                                 
@@ -297,10 +255,6 @@
                                 <a href="#attr_gutter">gutter</a>
                             </li>
                         
-                            <li class="index-item attr">
-                                <a href="#attr_hideTimeout">hideTimeout</a>
-                            </li>
-                        
                     </ul>
                 </div>
             
@@ -313,8 +267,84 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__alignButtonsOverlay" class="method item protected">
-    <h3 class="name"><code>_alignButtonsOverlay</code></h3>
+                    <div id="method__getToolbarXYPoint" class="method item protected">
+    <h3 class="name"><code>_getToolbarXYPoint</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l64"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:64</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Calculates the position of the Toolbar, taking in consideration
+the <a href="../classes/ToolbarImage.html#attr_gutter" class="crosslink">gutter</a></p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+                    
+                    <p>An array with left and top coordinates of the point in page coordinates.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__onActionPerformed" class="method item protected">
+    <h3 class="name"><code>_onActionPerformed</code></h3>
 
     
         <span class="paren">()</span>
@@ -347,7 +377,7 @@
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l103"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:103</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l87"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:87</code></a>
         
         </p>
 
@@ -358,7 +388,7 @@
     </div>
 
     <div class="description">
-        <p>Aligns the position of buttons overlay, so it shows next to the button container.</p>
+        <p>After changing the attributes of the image, updates the position of the Toolbar.</p>
 
     </div>
 
@@ -370,8 +400,8 @@
 </div>
 
                 
-                    <div id="method__handleMouseEnter" class="method item protected">
-    <h3 class="name"><code>_handleMouseEnter</code></h3>
+                    <div id="method__onEditorInteraction" class="method item protected">
+    <h3 class="name"><code>_onEditorInteraction</code></h3>
 
     
         <span class="paren">()</span>
@@ -404,7 +434,7 @@
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l113"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:113</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l104"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:104</code></a>
         
         </p>
 
@@ -415,7 +445,8 @@
     </div>
 
     <div class="description">
-        <p>On mouseenter event, cancels the hide listener for hiding the buttons overlay.</p>
+        <p>Once after user interacts with the editor, shows or hides the Toolbar.
+The Toolbar will be hidden if the currently selected element is not an image.</p>
 
     </div>
 
@@ -427,8 +458,8 @@
 </div>
 
                 
-                    <div id="method__handleMouseEnter" class="method item protected">
-    <h3 class="name"><code>_handleMouseEnter</code></h3>
+                    <div id="method__updateUI" class="method item protected">
+    <h3 class="name"><code>_updateUI</code></h3>
 
     
         <span class="paren">()</span>
@@ -461,7 +492,7 @@
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l123"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:123</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l129"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:129</code></a>
         
         </p>
 
@@ -472,296 +503,7 @@
     </div>
 
     <div class="description">
-        <p>On mouseleave event, cancels and then starts again the hide listener for hiding the buttons overlay.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__hideButtonsContainer" class="method item protected">
-    <h3 class="name"><code>_hideButtonsContainer</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l145"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:145</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Displays or hides the toolbar when user interacts with the editor
-(via mouse, keyboard or touch device).
-ToolbarAdd displays itself always - regardless of the fact the selection
-is empty or not. It might be hidden only if there is no any selection region.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__hideButtonsContainer" class="method item protected">
-    <h3 class="name"><code>_hideButtonsContainer</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l135"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:135</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Hides the buttons overlay.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__renderAddNode" class="method item protected">
-    <h3 class="name"><code>_renderAddNode</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l172"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:172</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Renders the button add container.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__renderButtonsOverlay" class="method item protected">
-    <h3 class="name"><code>_renderButtonsOverlay</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l201"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:201</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Renders the overlay which contains the buttons for adding content.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__showButtonsContainer" class="method item protected">
-    <h3 class="name"><code>_showButtonsContainer</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l223"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:223</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Displays both containers - for add button and those which hosts the buttons
-for adding content.</p>
+        <p>Moves the Toolbar to specified position.</p>
 
     </div>
 
@@ -807,7 +549,7 @@ for adding content.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l32"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:32</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l37"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:37</code></a>
         
         </p>
 
@@ -818,159 +560,10 @@ for adding content.</p>
     </div>
 
     <div class="description">
-        <p>Attaches events to the boundingBox which will help to handle the appearance of the
-menu with the buttons.</p>
+        <p>Creates and adds Node element - the container where buttons should render.</p>
 
     </div>
 
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_destructor" class="method item protected">
-    <h3 class="name"><code>destructor</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l55"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:55</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Destroys the buttons container and its hide handler.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_initializer" class="method item protected">
-    <h3 class="name"><code>initializer</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>config</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l15"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:15</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Initializer lifecycle implementation for the ToolbarAdd class.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">config</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Configuration object literal for the toolbar</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -1013,7 +606,7 @@ menu with the buttons.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l69"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:69</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l13"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:13</code></a>
         
         </p>
 
@@ -1024,7 +617,7 @@ menu with the buttons.</p>
     </div>
 
     <div class="description">
-        <p>Renders the two containers - for button add and the overlay which hosts the buttons.</p>
+        <p>Creates the container where buttons, attached to the instance of Toolbar should render.</p>
 
     </div>
 
@@ -1068,7 +661,7 @@ menu with the buttons.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l81"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:81</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l47"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:47</code></a>
         
         </p>
 
@@ -1131,7 +724,7 @@ menu with the buttons.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l249"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:249</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l152"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:152</code></a>
         
         </p>
 
@@ -1145,12 +738,12 @@ menu with the buttons.</p>
 A button configuration can be simple string with the name of the button, or an object
 with properties, like this:</p>
 <p><pre class="code prettyprint"><code>
-    buttons: [&#39;image&#39;]
+    buttons: [&#39;left&#39;]
 </pre></code>
     or:</p>
 <p><pre class="code prettyprint"><code>
     buttons: [
-        &#39;image&#39;: {
+        &#39;left&#39;: {
             zIndex: 1024,
             property2: 1024
         }
@@ -1160,7 +753,7 @@ with properties, like this:</p>
     </div>
 
     
-        <p><strong>Default:</strong> [&#x27;image&#x27;, &#x27;code&#x27;]</p>
+        <p><strong>Default:</strong> [&#x27;left&#x27;, &#x27;right&#x27;]</p>
     
 
     
@@ -1250,7 +843,7 @@ with properties, like this:</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l275"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:275</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l178"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:178</code></a>
         
         </p>
 
@@ -1355,7 +948,7 @@ with properties, like this:</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l287"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:287</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l190"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:190</code></a>
         
         </p>
 
@@ -1365,14 +958,14 @@ with properties, like this:</p>
     </div>
 
     <div class="description">
-        <p>Specifies the gutter of the toolbar. The gutter object contains the top and left
-offsets from the point, where the toolbar is supposed to appear.</p>
+        <p>Specifies the gutter of the tooltip. The gutter object contains the top and left
+offsets from the point, where the tooltip is supposed to appear.</p>
 
     </div>
 
     
         <p><strong>Default:</strong> {
-  left: 5,
+  left: 0,
   top: 0
 }</p>
     
@@ -1383,111 +976,6 @@ offsets from the point, where the toolbar is supposed to appear.</p>
 
             <p>
             Fires when the value for the configuration attribute <code>gutter</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_hideTimeout" class="attr item">
-    <a name="config_hideTimeout"></a> 
-    <h3 class="name"><code>hideTimeout</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-add.js.html#l306"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-add.js:306</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Specifies the timeout after which the buttons overlay will be hidden.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 1000 (sec)</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>hideTimeoutChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>hideTimeout</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the

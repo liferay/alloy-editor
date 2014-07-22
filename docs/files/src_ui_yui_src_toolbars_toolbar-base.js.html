@@ -89,6 +89,10 @@
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
+                <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -242,6 +246,10 @@ YUI.add(&#x27;toolbar-base&#x27;, function(Y) {
 
                 height = boundingBoxNode.offsetHeight;
 
+                // Change the original points where the Toolbar should be positioned.
+                // The X will be the same, but we will extract or add the height of the
+                // Toolbar to the Y point.
+
                 if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
                     y = xy[1] - height;
                 } else {
@@ -256,6 +264,13 @@ YUI.add(&#x27;toolbar-base&#x27;, function(Y) {
                 boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;visible&#x27;);
 
                 boundingBox.transition(transition);
+
+                // Restore the original points where the Toorbad had to move.
+                // Adding UI_SRC as the source of the event will prevent toolbar to move,
+                // it will just set update XY attribute.
+                this.set(&#x27;xy&#x27;, xy, {
+                    src: Y.Widget.UI_SRC
+                });
             } else {
                 boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;visible&#x27;);
 
@@ -289,7 +304,7 @@ YUI.add(&#x27;toolbar-base&#x27;, function(Y) {
         },
 
         /**
-         * Specifies the transition which should be applied when Toolbars moves to given position.
+         * Specifies the transition which should be applied when Toolbar moves to given position.
          *
          * @attribute transition
          * @default {

@@ -24,7 +24,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "LinkTooltip",
         "ToolbarAdd",
         "ToolbarAddItems",
-        "ToolbarBase"
+        "ToolbarBase",
+        "ToolbarImage",
+        "ToolbarStyles"
     ],
     "modules": [],
     "allModules": []

@@ -89,6 +89,10 @@
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
+                <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -174,6 +178,7 @@
                  * Renders the link tooltip node on contentBox.
                  *
                  * @method renderUI
+                 * @protected
                  */
                 renderUI: function() {
                     var content;
@@ -387,10 +392,10 @@
             }, {
                 ATTRS: {
                     /**
-                     * Specifies if the link tooltip show be constrained to the viewport.
+                     * Specifies whether the toolbar show be constrained to some node or to the viewport.
                      *
                      * @attribute constrain
-                     * @default true
+                     * @default true (will be constrained to the viewport)
                      * @type Boolean
                      */
                     constrain: {

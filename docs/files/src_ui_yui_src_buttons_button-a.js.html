@@ -89,6 +89,10 @@
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
+                <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -161,6 +165,7 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
              * href of the link.
              *
              * @method renderUI
+             * @protected
              */
             renderUI: function() {
                 this._renderButtonUI();
@@ -174,6 +179,7 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
              * the button for clearing the link.
              *
              * @method bindUI
+             * @protected
              */
             bindUI: function() {
                 this.onHostEvent(&#x27;visibleChange&#x27;, this._onVisibleChange, this);

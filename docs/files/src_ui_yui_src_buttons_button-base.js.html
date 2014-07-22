@@ -89,6 +89,10 @@
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
+                <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -243,6 +247,7 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
          * so the buttons which mix this extension will be able to overwrite the default behaviour.
          *
          * @method renderUI
+         * @protected
          */
         renderUI: function() {
             this._renderButtonUI();
@@ -253,6 +258,7 @@ YUI.add(&#x27;button-base&#x27;, function(Y) {
          * may provide one.
          *
          * @method bindUI
+         * @protected
          */
         bindUI: function() {
             // NOP, buttons should override it
