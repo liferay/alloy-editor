@@ -20,8 +20,8 @@
     /**
      * Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,
      * or touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout
-     * is 50ms. This value can be overwritten via {{#crossLink "CKEDITOR.plugins.uicore/delay:attribute"}}{{/crossLink}}
-     * property of editor's configuration, like: editor.config.uicore.delay = 100
+     * is 50ms. This value can be overwritten via {{#crossLink "CKEDITOR.plugins.uicore/timeout:attribute"}}{{/crossLink}}
+     * property of editor's configuration, like: editor.config.uicore.timeout = 100
      *
      * @event editorInteraction
      * @param {Object} data An object which contains the following properties:
@@ -42,7 +42,7 @@
      * Specifies the default timeout after which the {{#crossLink "CKEDITOR.plugins.uicore/editorInteraction:event"}}{{/crossLink}} event
      * will be fired.
      *
-     * @attribute delay
+     * @attribute timeout
      * @default 50 (ms)
      * @type Number
      */
@@ -67,7 +67,7 @@
                             });
                         }
                     },
-                    editor.config.uicore ? editor.config.uicore.delay : 50
+                    editor.config.uicore ? editor.config.uicore.timeout : 50
                 );
 
                 editor.on('contentDom', function() {

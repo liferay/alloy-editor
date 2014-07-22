@@ -103,8 +103,8 @@
                 },
 
                 /**
-                 * Hides the linktooltip container after some delay, specified by
-                 * {{#crossLink "LinkTooltip/hideDelay:attribute"}}{{/crossLink}} attribute.
+                 * Hides the linktooltip container after some timeout, specified by
+                 * {{#crossLink "LinkTooltip/hideTimeout:attribute"}}{{/crossLink}} attribute.
                  *
                  * @method _attachHiddenHandle
                  * @protected
@@ -116,7 +116,7 @@
                         function() {
                             instance.hide();
                         },
-                        this.get('hideDelay')
+                        this.get('hideTimeout')
                     );
                 },
 
@@ -276,7 +276,7 @@
                     },
 
                     /**
-                     * Specifies the gutter of the toolbar. The gutter object contains the top and left
+                     * Specifies the gutter of the tooltip. The gutter object contains the top and left
                      * offsets from the point, where the tooltip is supposed to appear.
                      *
                      * @attribute gutter
@@ -295,13 +295,13 @@
                     },
 
                     /**
-                     * Specifies the delay after which the link tooltip will be hidden.
+                     * Specifies the timeout after which the link tooltip will be hidden.
                      *
-                     * @attribute hideDelay
+                     * @attribute hideTimeout
                      * @default 2000 (sec)
                      * @type Number
                      */
-                    hideDelay: {
+                    hideTimeout: {
                         validator: Lang.isNumber,
                         value: 2000
                     }
