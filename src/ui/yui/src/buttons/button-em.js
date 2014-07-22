@@ -7,7 +7,7 @@ YUI.add('button-em', function(Y) {
      * The ButtonEm class provides functionality for applying "em" (emphasize, italic) style
      * to the selection.
      *
-     * @class Y.ButtonEm
+     * @class ButtonEm
      */
     var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {
         TPL_CONTENT: '<i class="alloy-editor-icon-italic"></i>'

@@ -74,7 +74,7 @@ YUI.add('button-base', function(Y) {
          *
          * @method initializer
          * @protected
-         * @param  config {Object} Configuration object literal for the editor
+         * @param config {Object} Configuration object literal for the editor
          */
         initializer: function() {
             var element;

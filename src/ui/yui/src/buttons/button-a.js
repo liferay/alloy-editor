@@ -164,7 +164,9 @@ YUI.add('button-a', function(Y) {
              * Handles the click event from the user. If button status is "pressed", activates the UI for
              * creating the link. Otherwise, removes the link from the current selection.
              * On activating the UI for link creation, a default link with href= "/" will be created and it
-             * will be keep in button instance as _defaultLink property.
+             * will be kept in button instance as _defaultLink property. This link will also have an attribute,
+             * called "data-cke-default-link", so these links will be easily distinguished from the others.
+             * An implementation of Link Tooltip for example may ignore these links.
              *
              * @method _onClick
              * @protected

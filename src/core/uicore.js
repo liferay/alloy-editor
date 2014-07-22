@@ -49,6 +49,12 @@
 
     CKEDITOR.plugins.add(
         'uicore', {
+            /**
+             * Initializer lifecycle implementation for the UICore plugin.
+             *
+             * @method init
+             * @protected
+             */
             init: function(editor) {
                 var handleUI;
 

@@ -7,7 +7,7 @@ YUI.add('button-h2', function(Y) {
      * The ButtonH2 class provides functionality for applying HTML heading, level 2
      * to the selection.
      *
-     * @class Y.ButtonH2
+     * @class ButtonH2
      */
     var H2 = Y.Base.create('h2', Y.Plugin.Base, [Y.ButtonBase], {
         TPL_CONTENT: '<i class="alloy-editor-icon-h2"></i>'
