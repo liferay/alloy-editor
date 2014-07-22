@@ -1,4 +1,4 @@
-YUI.add('button-code', function (Y) {
+YUI.add('button-code', function(Y) {
     'use strict';
 
     var Lang = Y.Lang;
@@ -12,19 +12,11 @@ YUI.add('button-code', function (Y) {
     }, {
         NAME: 'code',
 
-        NS: 'code',
-
-        ATTRS: {
-            toggle: {
-                validator: Lang.isBoolean,
-                value: false,
-                writeOnce: 'initOnly'
-            }
-        }
+        NS: 'code'
     });
 
     Y.ButtonCode = BtnCode;
 
-},'', {
+}, '', {
     requires: ['button-base']
 });
