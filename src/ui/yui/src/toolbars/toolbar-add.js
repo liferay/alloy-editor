@@ -70,6 +70,7 @@ YUI.add('toolbar-add', function(Y) {
              * Renders the two containers - for button add and the overlay which hosts the buttons.
              *
              * @method renderUI
+             * @protected
              */
             renderUI: function() {
                 this._renderAddNode();
@@ -81,6 +82,8 @@ YUI.add('toolbar-add', function(Y) {
              * Calculates and sets the position of the toolbar.
              *
              * @method showAtPoint
+             * @param {Number} x Point X in page coordinates.
+             * @param {Number} y Point Y in page coordinates.
              */
             showAtPoint: function(x, y) {
                 var addContentBtnNode,
@@ -149,6 +152,7 @@ YUI.add('toolbar-add', function(Y) {
              *
              * @method _hideButtonsContainer
              * @protected
+             * @param {EventFacade} event Event that triggered when user interacted with the editor.
              */
             _onEditorInteraction: function(event) {
                 var editorX,
@@ -272,10 +276,10 @@ YUI.add('toolbar-add', function(Y) {
                 },
 
                 /**
-                 * Specifies whether the toolbar show be constrained to the viewport.
+                 * Specifies whether the toolbar show be constrained to some node or to the viewport.
                  *
                  * @attribute constrain
-                 * @default true
+                 * @default true (will be constrained to the viewport)
                  * @type Boolean
                  */
                 constrain: {

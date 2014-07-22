@@ -40,6 +40,7 @@
                  * Renders the link tooltip node on contentBox.
                  *
                  * @method renderUI
+                 * @protected
                  */
                 renderUI: function() {
                     var content;
@@ -127,6 +128,9 @@
                  *
                  * @method _getXY
                  * @protected
+                 * @param {Number} x Point X in page coordinates.
+                 * @param {Number} y Point Y in page coordinates.
+                 * @param {Node} y The link over which the tooltip should be shown.
                  * returns {Array} An Array with the most appropriate x and y points in page coordinates.
                  */
                 _getXY: function(x, y, link) {
@@ -208,6 +212,7 @@
                  *
                  * @method _onLinkMouseEnter
                  * @protected
+                 * @param {EventFacade} event Event that triggered when user positioned the mouse over the link.
                  */
                 _onLinkMouseEnter: function(event) {
                     var instance = this,
@@ -253,10 +258,10 @@
             }, {
                 ATTRS: {
                     /**
-                     * Specifies if the link tooltip show be constrained to the viewport.
+                     * Specifies whether the toolbar show be constrained to some node or to the viewport.
                      *
                      * @attribute constrain
-                     * @default true
+                     * @default true (will be constrained to the viewport)
                      * @type Boolean
                      */
                     constrain: {

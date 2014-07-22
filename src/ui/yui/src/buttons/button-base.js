@@ -109,6 +109,7 @@ YUI.add('button-base', function(Y) {
          * so the buttons which mix this extension will be able to overwrite the default behaviour.
          *
          * @method renderUI
+         * @protected
          */
         renderUI: function() {
             this._renderButtonUI();
@@ -119,6 +120,7 @@ YUI.add('button-base', function(Y) {
          * may provide one.
          *
          * @method bindUI
+         * @protected
          */
         bindUI: function() {
             // NOP, buttons should override it

@@ -34,7 +34,7 @@
         },
 
         /**
-         * Creates selection from range. A range contains of two points in page coordinates.
+         * Creates selection from range. A range consists from two points in page coordinates.
          *
          * @method createSelectionFromRange
          * @param {Number} startX X coordinate of the first point.
@@ -104,7 +104,7 @@
         },
 
         /**
-         * Returns the region of the current position of the caret.
+         * Returns the region of the current position of the caret. The points are in page coordinates.
          *
          * @method getCaretRegion
          * @return {Object} Returns object with the following properties:
@@ -397,6 +397,13 @@
 
     CKEDITOR.plugins.add(
         'selectionregion', {
+            /**
+             * Initializer lifecycle implementation for the SelectionRegion plugin.
+             *
+             * @method init
+             * @protected
+             * @param {Object} editor The current CKEditor instance.
+             */
             init: function(editor) {
                 var attr,
                     hasOwnProperty;

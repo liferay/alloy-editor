@@ -46,10 +46,11 @@ YUI.add('button-image', function(Y) {
 
         /**
          * Simulates "click" event on the input field when user presses the button. This
-         * triggers the native open file dialog from the browser. This method works on IE9+.
+         * triggers the native open file dialog from the browser. This method works on IE9+ only.
          *
          * @method _onClick
          * @protected
+         * @param {EventFacade} event Event that triggered when user clicked on the button.
          */
         _onClick: function() {
             var inputFile = this._getInputFile();

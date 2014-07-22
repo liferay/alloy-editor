@@ -38,6 +38,7 @@ YUI.add('button-left', function(Y) {
          *
          * @method _onClick
          * @protected
+         * @param {EventFacade} event Event that triggered when user clicked on the button.
          */
         _onClick: function(event) {
             var instance = this,

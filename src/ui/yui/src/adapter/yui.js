@@ -21,7 +21,7 @@ YUI.add('alloy-editor', function(Y) {
          *
          * @method initializer
          * @protected
-         * @param  config {Object} Configuration object literal for the editor
+         * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function(config) {
             var editor;
@@ -91,6 +91,7 @@ YUI.add('alloy-editor', function(Y) {
          *
          * @method _validateToolbars
          * @protected
+         * @param {Any} value The value which should be validated.
          * @return {Boolean} True if the value was accepted, false otherwise.
          */
         _validateToolbars: function(value) {

@@ -27,6 +27,7 @@ YUI.add('button-a', function(Y) {
              * href of the link.
              *
              * @method renderUI
+             * @protected
              */
             renderUI: function() {
                 this._renderButtonUI();
@@ -40,6 +41,7 @@ YUI.add('button-a', function(Y) {
              * the button for clearing the link.
              *
              * @method bindUI
+             * @protected
              */
             bindUI: function() {
                 this.onHostEvent('visibleChange', this._onVisibleChange, this);
@@ -92,6 +94,7 @@ YUI.add('button-a', function(Y) {
              *
              * @method _adjustHostPosition
              * @protected
+             * @param {Number} oldHostWidth The previous width of the host (Toolbar).
              */
             _adjustHostPosition: function(oldHostWidth) {
                 var curHostWidth,
@@ -170,6 +173,7 @@ YUI.add('button-a', function(Y) {
              *
              * @method _onClick
              * @protected
+             * @param {EventFacade} event Event that triggered when user clicked on the button.
              */
             _onClick: function(event) {
                 var instance = this,
@@ -244,6 +248,7 @@ YUI.add('button-a', function(Y) {
              *
              * @method _onKeyPress
              * @protected
+             * @param {EventFacade} event Event that triggered when user pressed a key.
              */
             _onKeyPress: function(event) {
                 if (event.charCode === 13) {
@@ -256,6 +261,8 @@ YUI.add('button-a', function(Y) {
              *
              * @method _onValueChange
              * @protected
+             * @param {EventFacade} event An Event Facade object with the new and old value
+             * of the input container.
              */
             _onValueChange: function(event) {
                 if (event.newVal) {
@@ -277,6 +284,8 @@ YUI.add('button-a', function(Y) {
              *
              * @method _onValueChange
              * @protected
+             * @param {EventFacade} event An Event Facade object with the new and old value
+             * of visible property.
              */
             _onVisibleChange: function(event) {
                 var editor,
@@ -420,6 +429,7 @@ YUI.add('button-a', function(Y) {
              *
              * @method _switchToLinkMode
              * @protected
+             * @param {CKEDITOR.dom.element} link The currently selected link from editor selection.
              */
             _switchToLinkMode: function(link) {
                 var editor,

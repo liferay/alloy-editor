@@ -25,7 +25,7 @@
      *
      * @event editorInteraction
      * @param {Object} data An object which contains the following properties:
-     * - nativeEvent - The event as received from CKEditor
+     * - nativeEvent - The event as received from CKEditor.
      * - selectionData - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
      */
 
@@ -54,6 +54,7 @@
              *
              * @method init
              * @protected
+             * @param {Object} editor The current CKEditor instance.
              */
             init: function(editor) {
                 var handleUI;
