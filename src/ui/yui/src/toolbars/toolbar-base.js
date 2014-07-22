@@ -155,7 +155,7 @@ YUI.add('toolbar-base', function(Y) {
         },
 
         /**
-         * Specifies the transition which should be applied when Toolbars moves to given position.
+         * Specifies the transition which should be applied when Toolbar moves to given position.
          *
          * @attribute transition
          * @default {
