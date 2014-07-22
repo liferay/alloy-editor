@@ -125,9 +125,9 @@ editor.config.toolbars = {
 };
 ````
 
-The configuration above represents the three toolbars - for adding (images, code, etc.), aligning images and styling text. You may remove any of those and this tollbar won't be shown. Not only that, but its code won't be loaded at all. This is just the opposite what most editor's UI do - they load everything and then just hide it.
+The configuration above represents the three toolbars - for adding (images, code, etc.), aligning images and styling text. You may remove any of those and this toolbar won't be shown. Not only that, but its code won't be loaded at all. This is just the opposite what most editor's UI do - they load everything and then just hide it.
 
-So, if you want to remove the tollbar for adding, just delete the property "add" from the object above.
+So, if you want to remove the toolbar for adding, just delete the property "add" from the object above.
 
 #### Buttons reordering
 
@@ -136,7 +136,7 @@ If you are not happy with the order of the buttons, you can just reorder them in
 styles: ['em', 'strong']
 ````
 
-Now the tollbar of styles will have only two buttons, and they will be for "em" (aka. italic) and "strong" (aka bold).
+Now the toolbar of styles will have only two buttons, and they will be for "em" (aka. italic) and "strong" (aka bold).
 
 ## How to create my own button?
 
@@ -144,7 +144,7 @@ If you run the editor with the default UI, which is written in YUI3, then adding
 Use CKEditor's API to do the real job and that is it!
 
 For example, if you want to add a button, which posts the selected text to Facebook, create a YUI3 module, let's say Y.ButtonFacebook and load it on the page.
-Then, add it to the configuration of the tollbar, like this:
+Then, add it to the configuration of the toolbar, like this:
 
 ```` styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter', 'facebook'] ````
 
