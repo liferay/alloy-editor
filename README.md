@@ -24,6 +24,8 @@ If you want to have a zip file, execute ```` gulp release ````
 
 ## How to embed it in my own page?
 
+The section below supposes that you are using the default UI, which is built using AlloyUI/YUI3 and Bootstrap. The core of AlloyEditor is fully separated from the UI and creating another UI, based on any other framework, like jQuery, React or using just vanilla JavaScript and CSS is easy.
+
 <ol>
 <li>Add Boostrap 3 and Alloy Editor's CSS to the page.</li>
 
@@ -236,7 +238,17 @@ YUI.add('toolbar-table', function (Y) {
     });
 ````
 
-### How to help
+## AlloyEditor architecture
+
+The main idea behind the editor is to fully separate the core from the UI. And not only to separate it, but to give opportunity of people to add very easy new Buttons and Toolbars.
+
+### The core
+AlloyEditor uses under the hood CKEditor. In general, there are two ways to create an editor - to start from scratch or to step on something already existing. To start creating an editor from scratch is challenging. It is challenging mainly because browsers generate very inconsistent HTML, not to mention how buggy they are. In fact, to create an editor, which is able to handle all browsers, let's say IE9+, Chrome, Firefox and Safari, is very hard. Fortunately, CKEditor does it well, so it was the natural choice not only because of that, but because it is mature, well documented and configurable.
+
+In this section we will talk about the default UI, which is built using AlloyUI/YUI3 and Bootstrap.
+
+
+## How to help
 
 You may help in many ways:
 * Help us to improve the documentation.
