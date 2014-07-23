@@ -186,6 +186,59 @@ YUI.add(&#x27;toolbar-base&#x27;, function(Y) {
         },
 
         /**
+         * Applies transition specified via {{#crossLink &quot;ToolbarBase/transition:attribute&quot;}}{{/crossLink}} attribute.
+         *
+         * @method _applyTransition
+         * @param {Array} xy The point in page coordinates where Toolbar should move.
+         * @param {Number} direction The direction of the selection. Can be one of these:
+         *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
+         *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
+         * @protected
+         */
+        _applyTransition: function(xy, direction) {
+            var boundingBox,
+                boundingBoxNode,
+                height,
+                transition,
+                y;
+
+            transition = this.get(&#x27;transition&#x27;);
+
+            boundingBox = this.get(&#x27;boundingBox&#x27;);
+
+            boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;hidden&#x27;);
+            boundingBoxNode = boundingBox.getDOMNode();
+
+            height = boundingBoxNode.offsetHeight;
+
+            // Change the original points where the Toolbar should be positioned.
+            // The X will be the same, but we will extract or add the height of the
+            // Toolbar to the Y point.
+
+            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                y = xy[1] - height;
+            } else {
+                y = xy[1] + height;
+            }
+
+            this.set(&#x27;xy&#x27;, [xy[0], y]);
+
+            transition.left = xy[0] + &#x27;px&#x27;;
+            transition.top = xy[1] + &#x27;px&#x27;;
+
+            boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;visible&#x27;);
+
+            boundingBox.transition(transition);
+
+            // Restore the original points where the Toorbad had to move.
+            // Adding UI_SRC as the source of the event will prevent toolbar to move,
+            // it will just set update XY attribute.
+            this.set(&#x27;xy&#x27;, xy, {
+                src: Y.Widget.UI_SRC
+            });
+        },
+
+        /**
          * Re-fires {{#crossLink &quot;ButtonBase/actionPerformed:event&quot;}}{{/crossLink}} so the buttons
          * attached to Toolbar, which mixes this extension will be notified that user performed
          * an action.
@@ -225,64 +278,33 @@ YUI.add(&#x27;toolbar-base&#x27;, function(Y) {
 
         /**
          * Moves the Toolbar to a point in page coordinates. If transition was specified via the
-         * {{#crossLink &quot;ToolbarBase/transition:attribute&quot;}}{{/crossLink}}, it will be applied too.
+         * {{#crossLink &quot;ToolbarBase/transition:attribute&quot;}}{{/crossLink}}, the movement will be
+         * delegated to the transition, except if Toolbar is already visible. In the last case
+         * transition will be ignored.
          *
          * @method _moveToPoint
          * @param {Array} xy The point in page coordinates where Toolbar should move.
          * @param {Number} direction The direction of the selection. Can be one of these:
          *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
          *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
+         * @param {Object} config Provides additional configuration attributes to the function.
+         * This parameter is optional. If not provided, the transition will be applied (if any).
+         * Supported parameters are:
+         * - visible: true or false. If toolbar is visible, the transition will be applied (if any).
+         * If not, it will be suppressed and only the new position will be set.
          * @protected
          */
-        _moveToPoint: function(xy, direction) {
-            var boundingBox,
-                boundingBoxNode,
-                height,
-                transition,
-                y;
-
-            boundingBox = this.get(&#x27;boundingBox&#x27;);
-
-            boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;hidden&#x27;);
+        _moveToPoint: function(xy, direction, config) {
+            var transition;
 
             transition = this.get(&#x27;transition&#x27;);
 
-            if (transition) {
-                boundingBoxNode = boundingBox.getDOMNode();
-
-                height = boundingBoxNode.offsetHeight;
-
-                // Change the original points where the Toolbar should be positioned.
-                // The X will be the same, but we will extract or add the height of the
-                // Toolbar to the Y point.
-
-                if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    y = xy[1] - height;
-                } else {
-                    y = xy[1] + height;
-                }
-
-                this.set(&#x27;xy&#x27;, [xy[0], y]);
-
-                transition.left = xy[0] + &#x27;px&#x27;;
-                transition.top = xy[1] + &#x27;px&#x27;;
-
-                boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;visible&#x27;);
-
-                boundingBox.transition(transition);
-
-                // Restore the original points where the Toorbad had to move.
-                // Adding UI_SRC as the source of the event will prevent toolbar to move,
-                // it will just set update XY attribute.
-                this.set(&#x27;xy&#x27;, xy, {
-                    src: Y.Widget.UI_SRC
-                });
+            if (transition &amp;&amp; (!config || !config.visible)) {
+                this._applyTransition(xy, direction);
             } else {
-                boundingBox.setStyle(&#x27;visibility&#x27;, &#x27;visible&#x27;);
-
                 this.set(&#x27;xy&#x27;, xy);
             }
-        },
+        }
     };
 
     ToolbarBase.ATTRS = {

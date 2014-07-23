@@ -178,8 +178,9 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
              * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
              */
             showAtPoint: function(left, top, direction) {
-                var xy,
-                    boundingBox;
+                var boundingBox,
+                    xy,
+                    visible;
 
                 boundingBox = this.get(&#x27;boundingBox&#x27;);
 
@@ -189,13 +190,17 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
                     boundingBox.replaceClass(&#x27;alloy-editor-arrow-box-top&#x27;, &#x27;alloy-editor-arrow-box-bottom&#x27;);
                 }
 
-                if (!this.get(&#x27;visible&#x27;)) {
+                visible = this.get(&#x27;visible&#x27;);
+
+                if (!visible) {
                     this.show();
                 }
 
                 xy = this._getToolbarXYPoint(left, top, direction);
 
-                this._moveToPoint(this.getConstrainedXY(xy), direction);
+                this._moveToPoint(this.getConstrainedXY(xy), direction, {
+                    visible: visible
+                });
             },
 
             /**

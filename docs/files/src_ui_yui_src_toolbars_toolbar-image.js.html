@@ -193,15 +193,20 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
              *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
              */
             showAtPoint: function(left, top, direction) {
-                var xy;
+                var xy,
+                    visible;
 
-                if (!this.get(&#x27;visible&#x27;)) {
+                visible = this.get(&#x27;visible&#x27;);
+
+                if (!visible) {
                     this.show();
                 }
 
                 xy = this._getToolbarXYPoint(left, top, direction);
 
-                this._moveToPoint(this.getConstrainedXY(xy), direction);
+                this._moveToPoint(this.getConstrainedXY(xy), direction, {
+                    visible: visible
+                });
             },
 
             /**

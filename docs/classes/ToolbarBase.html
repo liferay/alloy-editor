@@ -190,6 +190,13 @@
                             </li>
                         
                             <li class="index-item method protected">
+                                <a href="#method__applyTransition">_applyTransition</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
                                 <a href="#method__getButtonInstanceName">_getButtonInstanceName</a>
 
                                 
@@ -297,7 +304,7 @@
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l50"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:50</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l103"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:103</code></a>
         
         </p>
 
@@ -330,6 +337,123 @@ an action.</p>
 
                     <div class="param-description">
                         <p>The <a href="../classes/ButtonBase.html#event_actionPerformed" class="crosslink">actionPerformed</a> event.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__applyTransition" class="method item protected">
+    <h3 class="name"><code>_applyTransition</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>xy</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>direction</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l50"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:50</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Applies transition specified via <a href="../classes/ToolbarBase.html#attr_transition" class="crosslink">transition</a> attribute.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">xy</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The point in page coordinates where Toolbar should move.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">direction</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The direction of the selection. Can be one of these:</p>
+<ol>
+<li>CKEDITOR.SELECTION_TOP_TO_BOTTOM</li>
+<li>CKEDITOR.SELECTION_BOTTOM_TO_TOP</li>
+</ol>
 
                     </div>
 
@@ -394,7 +518,7 @@ an action.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l74"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:74</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l127"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:127</code></a>
         
         </p>
 
@@ -495,7 +619,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l63"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:63</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l116"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:116</code></a>
         
         </p>
 
@@ -551,6 +675,12 @@ for more information about the rules for constructing button names.</p>
                     
                 </li>
             
+                <li class="arg">
+                    
+                        <code>config</code>
+                    
+                </li>
+            
             </ul><span class="paren">)</span>
         </div>
     
@@ -582,7 +712,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l88"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:88</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l141"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:141</code></a>
         
         </p>
 
@@ -594,7 +724,9 @@ for more information about the rules for constructing button names.</p>
 
     <div class="description">
         <p>Moves the Toolbar to a point in page coordinates. If transition was specified via the
-<a href="../classes/ToolbarBase.html#attr_transition" class="crosslink">transition</a>, it will be applied too.</p>
+<a href="../classes/ToolbarBase.html#attr_transition" class="crosslink">transition</a>, the movement will be
+delegated to the transition, except if Toolbar is already visible. In the last case
+transition will be ignored.</p>
 
     </div>
 
@@ -634,6 +766,28 @@ for more information about the rules for constructing button names.</p>
 <li>CKEDITOR.SELECTION_TOP_TO_BOTTOM</li>
 <li>CKEDITOR.SELECTION_BOTTOM_TO_TOP</li>
 </ol>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">config</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Provides additional configuration attributes to the function.
+This parameter is optional. If not provided, the transition will be applied (if any).
+Supported parameters are:</p>
+<ul>
+<li>visible: true or false. If toolbar is visible, the transition will be applied (if any).
+If not, it will be suppressed and only the new position will be set.</li>
+</ul>
 
                     </div>
 
@@ -783,7 +937,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l151"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:151</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l173"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:173</code></a>
         
         </p>
 
@@ -886,7 +1040,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l163"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:163</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l185"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:185</code></a>
         
         </p>
 
@@ -991,7 +1145,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l174"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:174</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l196"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:196</code></a>
         
         </p>
 

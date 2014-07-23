@@ -2246,6 +2246,28 @@
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
             "line": 50,
+            "description": "Applies transition specified via {{#crossLink \"ToolbarBase/transition:attribute\"}}{{/crossLink}} attribute.",
+            "itemtype": "method",
+            "name": "_applyTransition",
+            "params": [
+                {
+                    "name": "xy",
+                    "description": "The point in page coordinates where Toolbar should move.",
+                    "type": "Array"
+                },
+                {
+                    "name": "direction",
+                    "description": "The direction of the selection. Can be one of these:\n  1. CKEDITOR.SELECTION_TOP_TO_BOTTOM\n  2. CKEDITOR.SELECTION_BOTTOM_TO_TOP",
+                    "type": "Number"
+                }
+            ],
+            "access": "protected",
+            "tagname": "",
+            "class": "ToolbarBase"
+        },
+        {
+            "file": "src/ui/yui/src/toolbars/toolbar-base.js",
+            "line": 103,
             "description": "Re-fires {{#crossLink \"ButtonBase/actionPerformed:event\"}}{{/crossLink}} so the buttons\nattached to Toolbar, which mixes this extension will be notified that user performed\nan action.",
             "itemtype": "method",
             "name": "_afterActionPerformed",
@@ -2262,7 +2284,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 63,
+            "line": 116,
             "description": "Returns the container in which all buttons are being rendered.",
             "itemtype": "method",
             "name": "_getButtonsContainer",
@@ -2276,7 +2298,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 74,
+            "line": 127,
             "description": "Resolves and returns the name of the Button from the current editor configuration.",
             "itemtype": "method",
             "name": "_getButtonInstanceName",
@@ -2297,8 +2319,8 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 88,
-            "description": "Moves the Toolbar to a point in page coordinates. If transition was specified via the\n{{#crossLink \"ToolbarBase/transition:attribute\"}}{{/crossLink}}, it will be applied too.",
+            "line": 141,
+            "description": "Moves the Toolbar to a point in page coordinates. If transition was specified via the\n{{#crossLink \"ToolbarBase/transition:attribute\"}}{{/crossLink}}, the movement will be\ndelegated to the transition, except if Toolbar is already visible. In the last case\ntransition will be ignored.",
             "itemtype": "method",
             "name": "_moveToPoint",
             "params": [
@@ -2311,6 +2333,11 @@
                     "name": "direction",
                     "description": "The direction of the selection. Can be one of these:\n  1. CKEDITOR.SELECTION_TOP_TO_BOTTOM\n  2. CKEDITOR.SELECTION_BOTTOM_TO_TOP",
                     "type": "Number"
+                },
+                {
+                    "name": "config",
+                    "description": "Provides additional configuration attributes to the function.\nThis parameter is optional. If not provided, the transition will be applied (if any).\nSupported parameters are:\n- visible: true or false. If toolbar is visible, the transition will be applied (if any).\nIf not, it will be suppressed and only the new position will be set.",
+                    "type": "Object"
                 }
             ],
             "access": "protected",
@@ -2319,7 +2346,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 151,
+            "line": 173,
             "description": "Returns the container in Toolbar's contentBox, where all buttons are rendered.",
             "itemtype": "attribute",
             "name": "buttonsContainer",
@@ -2329,7 +2356,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 163,
+            "line": 185,
             "description": "Contains the native editor implementation.",
             "itemtype": "attribute",
             "name": "editor",
@@ -2339,7 +2366,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-base.js",
-            "line": 174,
+            "line": 196,
             "description": "Specifies the transition which should be applied when Toolbar moves to given position.",
             "itemtype": "attribute",
             "name": "transition",
@@ -2394,7 +2421,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 69,
+            "line": 74,
             "description": "Calculates the position of the Toolbar, taking in consideration\nthe {{#crossLink \"ToolbarImage/gutter:attribute\"}}{{/crossLink}}",
             "itemtype": "method",
             "name": "_getToolbarXYPoint",
@@ -2420,7 +2447,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 94,
+            "line": 99,
             "description": "After changing the attributes of the image, updates the position of the Toolbar.",
             "itemtype": "method",
             "name": "_onActionPerformed",
@@ -2430,7 +2457,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 111,
+            "line": 116,
             "description": "Once after user interacts with the editor, shows or hides the Toolbar.\nThe Toolbar will be hidden if the currently selected element is not an image.",
             "itemtype": "method",
             "name": "_onEditorInteraction",
@@ -2447,7 +2474,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 137,
+            "line": 142,
             "description": "Moves the Toolbar to specified position.",
             "itemtype": "method",
             "name": "_updateUI",
@@ -2464,7 +2491,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 161,
+            "line": 166,
             "description": "Specifies the buttons, which will be attached to the current instance of the toolbar.\nA button configuration can be simple string with the name of the button, or an object\nwith properties, like this:\n<pre><code>\n    buttons: ['left']\n</pre></code>\n    or:\n<pre><code>\n    buttons: [\n        'left': {\n            zIndex: 1024,\n            property2: 1024\n        }\n    ]\n</pre></code>",
             "itemtype": "attribute",
             "name": "buttons",
@@ -2474,7 +2501,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 187,
+            "line": 192,
             "description": "Specifies whether the toolbar show be constrained to some node or to the viewport.",
             "itemtype": "attribute",
             "name": "constrain",
@@ -2484,7 +2511,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-image.js",
-            "line": 199,
+            "line": 204,
             "description": "Specifies the gutter of the tooltip. The gutter object contains the top and left\noffsets from the point, where the tooltip is supposed to appear.",
             "itemtype": "attribute",
             "name": "gutter",
@@ -2529,7 +2556,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
-            "line": 63,
+            "line": 68,
             "description": "Calculates the position of the toolbar. Depending on the direction of the\nselection, ToolbarStyles may appear above on or on bottom of the selection.",
             "itemtype": "method",
             "name": "_calculatePosition",
@@ -2555,7 +2582,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
-            "line": 121,
+            "line": 126,
             "description": "Returns the position of the Toolbar taking in consideration the\n{{#crossLink \"ToolbarStyles/gutter:attribute\"}}{{/crossLink}} attribute.",
             "itemtype": "method",
             "name": "_getToolbarXYPoint",
@@ -2586,7 +2613,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
-            "line": 152,
+            "line": 157,
             "description": "Returns the position of the Toolbar taking in consideration the\n{{#crossLink \"ToolbarStyles/gutter:attribute\"}}{{/crossLink}} attribute.",
             "itemtype": "method",
             "name": "_getXPoint",
@@ -2612,7 +2639,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
-            "line": 192,
+            "line": 197,
             "description": "Calculates the most appropriate position where the Toolbar should be displayed and shows it.",
             "itemtype": "method",
             "name": "_onEditorInteraction",
@@ -2629,7 +2656,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
-            "line": 236,
+            "line": 241,
             "description": "Specifies the buttons, which will be attached to the current instance of the toolbar.\nA button configuration can be simple string with the name of the button, or an object\nwith properties, like this:\n<pre><code>\n    buttons: ['strong']\n</pre></code>\n    or:\n<pre><code>\n    buttons: [\n        'strong': {\n            zIndex: 1024,\n            property2: 1024\n        }\n    ]\n</pre></code>",
             "itemtype": "attribute",
             "name": "buttons",
@@ -2639,7 +2666,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
-            "line": 262,
+            "line": 267,
             "description": "Specifies whether the toolbar show be constrained to some node or to the viewport.",
             "itemtype": "attribute",
             "name": "constrain",
@@ -2649,7 +2676,7 @@
         },
         {
             "file": "src/ui/yui/src/toolbars/toolbar-styles.js",
-            "line": 274,
+            "line": 279,
             "description": "Specifies the gutter of the toolbar. The gutter object contains the top and left\noffsets from the point, where the toolbar is supposed to appear.",
             "itemtype": "attribute",
             "name": "gutter",
