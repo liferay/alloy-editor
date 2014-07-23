@@ -55,15 +55,20 @@ YUI.add('toolbar-image', function(Y) {
              *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
              */
             showAtPoint: function(left, top, direction) {
-                var xy;
+                var xy,
+                    visible;
 
-                if (!this.get('visible')) {
+                visible = this.get('visible');
+
+                if (!visible) {
                     this.show();
                 }
 
                 xy = this._getToolbarXYPoint(left, top, direction);
 
-                this._moveToPoint(this.getConstrainedXY(xy), direction);
+                this._moveToPoint(this.getConstrainedXY(xy), direction, {
+                    visible: visible
+                });
             },
 
             /**

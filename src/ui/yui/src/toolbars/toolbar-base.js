@@ -149,19 +149,24 @@ YUI.add('toolbar-base', function(Y) {
          * @param {Number} direction The direction of the selection. Can be one of these:
          *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
          *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
+         * @param {Object} config Provides additional configuration attributes to the function.
+         * This parameter is optional. If not provided, the transition will be applied (if any).
+         * Supported parameters are:
+         * - visible: true or false. If toolbar is visible, the transition will be applied (if any).
+         * If not, it will be suppressed and only the new position will be set.
          * @protected
          */
-        _moveToPoint: function(xy, direction) {
+        _moveToPoint: function(xy, direction, config) {
             var transition;
 
             transition = this.get('transition');
 
-            if (transition && !this.get('visible')) {
+            if (transition && (!config || !config.visible)) {
                 this._applyTransition(xy, direction);
             } else {
                 this.set('xy', xy);
             }
-        },
+        }
     };
 
     ToolbarBase.ATTRS = {
