@@ -109,8 +109,8 @@ YUI.add('toolbar-styles', function(Y) {
                 } else {
                     x = selectionData.region.left + selectionData.region.width / 2;
 
-                    if (direction === 0) {
-                        y = selectionData.region.endRect.top;
+                    if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                        y = selectionData.region.endRect.bottom;
                     } else {
                         y = selectionData.region.startRect.top;
                     }
