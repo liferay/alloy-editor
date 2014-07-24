@@ -347,6 +347,19 @@ YUI.add('toolbar-table', function (Y) {
     });
 ````
 
+## How to create a new UI
+
+You don't like AlloyUI/YUI3? You prefer jQuery? Or you are JavaScript ninja and prefer writing vanilla JS? Welcome on the board.
+To create a new UI is straightforward task:
+- Fork the repository, build and prepare it. See above for more information how to.
+- Create a new directory under ````src/ui````, let's say ````jquery````.
+- Create a subfolder, called "gulp-tasks".
+- In order to build the project using your UI, execute ````gulp ui jquery````.
+
+That is everything. How will you structure the directories, which modules will you use, will you load Buttons and Toolbars on demand, what gulp tasks will you add - these questions are entirely up to you. The good news are that you won't start from scratch entirely. You still will be able to use the core of AlloyEditor, as well as the API from CKEditor.
+
+Once you are ready with the UI - please send us pull request and we will merge it.
+
 ## AlloyEditor architecture
 
 The main idea behind the editor is to fully separate the core from the UI. And not only to separate it, but to give opportunity to people to add very easy new Buttons and Toolbars or to create completely new UI, based on different Framework or vanilla JavaScript.
