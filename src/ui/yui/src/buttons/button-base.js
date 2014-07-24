@@ -226,7 +226,7 @@ YUI.add('button-base', function(Y) {
             });
         },
 
-        TPL_BUTTON: '<button class="alloy-editor-button btn">{content}</button>'
+        TPL_BUTTON: '<button class="alloy-editor-button btn btn-default">{content}</button>'
     };
 
     ButtonBase.ATTRS = {

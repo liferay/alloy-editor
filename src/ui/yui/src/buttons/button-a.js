@@ -464,7 +464,7 @@ YUI.add('button-a', function(Y) {
 
             TPL_LINK_CONTAINER: '<div class="link-wrapper hide">' +
                 '<div class="pull-left btn-group show-buttons-container">' +
-                '<button class="alloy-editor-button btn switch-to-edit"><i class="alloy-editor-icon-font"></i></button>' +
+                '<button class="alloy-editor-button btn btn-default switch-to-edit"><i class="alloy-editor-icon-font"></i></button>' +
                 '</div>' +
                 '<div class="pull-left btn-group input-wrapper">' +
                 '<span class="input-container">' +
@@ -475,7 +475,7 @@ YUI.add('button-a', function(Y) {
                 '</span>' +
                 '</div>' +
                 '<div class="pull-right btn-group input-close-container">' +
-                '<button class="alloy-editor-button btn close-link"><i class="alloy-editor-icon-ok"></i></button>' +
+                '<button class="alloy-editor-button btn btn-default close-link"><i class="alloy-editor-icon-ok"></i></button>' +
                 '</div>' +
                 '</div>'
         }, {
