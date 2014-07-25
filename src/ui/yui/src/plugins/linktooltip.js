@@ -339,6 +339,10 @@
                     }, editor.config.linktooltip);
 
                     tooltip = new Y.LinkTooltip(config).render();
+
+                    editor.on('destroy', function() {
+                        tooltip.destroy();
+                    });
                 });
             }
         }
