@@ -76,7 +76,7 @@ Please note that in this case there is **no need** to specify CKEDITOR_BASEPATH.
 
 ````javascript
 var editor = new Y.AlloyEditor({
-    srcNode: '#description',
+    srcNode: '#editable',
     toolbars: {
         add: ['image', 'code'],
         image: ['left', 'right'],
