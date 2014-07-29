@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+  <title>Tutorial - Create UI | Alloy Editor</title>
+
+  <meta charset="utf-8">
+  <meta name="author" content="Iliyan Peychev">
+  <meta name="description" content="Alloy Editor is modern WYSIWIG editor built on top of CKEditor, designed to create modern and gorgeous web content.">
+
+  <!-- Facebook Tags -->
+  <meta property="fb:app_id" content="176947299114210">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/alloy-editor">
+  <meta property="og:image" content="/alloy-editor/website/img/facebook-share.jpg">
+  <meta property="og:title" content="Tutorial - Create UI | Alloy Editor">
+  <meta property="og:description" content="Alloy Editor is modern WYSIWIG editor built on top of CKEditor, designed to create modern and gorgeous web content.">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/alloy-editor/website/img/favicon.ico">
+
+  <!-- CSS: Alloy Bootstrap -->
+  <link href="http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS: Website style -->
+  <link href="/alloy-editor/website/css/main.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
+
+  <!-- JS -->
+  <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+  <div id="wrap">
+
+    <a class="github-ribbon" href="https://github.com/liferay/alloy-editor/">
+      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/alloy-editor">
+            <img src="/alloy-editor/website/img/logo.png" alt="AlloyEditor Logo" width="211" height="34">
+          </a>
+          <div class="pull-right">
+            <ul class="nav">
+              <li><a href="/alloy-editor/examples/">Examples</a></li>
+              <li><a href="/alloy-editor/tutorials/">Tutorials</a></li>
+              <li><a href="/alloy-editor/api/" target="_blank">API Docs</a></li>
+              <li><a href="/alloy-editor/contributing/">Contributing</a></li>
+              <li><a href="/alloy-editor/about/">About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
+      <h2>Tutorials</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="span3 bs-docs-sidebar">
+
+    <p class="related">General</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials"><i class="icon-chevron-right"></i> How to use it?</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/how-to-build-it"><i class="icon-chevron-right"></i> How to build it?</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/architecture"><i class="icon-chevron-right"></i> Architecture</a></li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+
+    <p class="related">List of modules</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/button"><i class="icon-chevron-right"></i> Create Buttons</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar"><i class="icon-chevron-right"></i> Create Toolbars</a></li>
+          
+        
+      
+        
+          
+            <li class="active"><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create UI</a></li>
+            
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar_config"><i class="icon-chevron-right"></i> Toolbar Configuration</a></li>
+          
+        
+      
+    </ul>
+
+  </div>
+
+  <div class="span9">
+
+    <h1>Create UI</h1>
+
+    
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#">Introduction</a>
+        </li>
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    
+
+    
+
+    <p>You don&#39;t like AlloyUI/YUI3? You prefer jQuery? Or you are JavaScript ninja and prefer writing vanilla JS? Welcome on the board.
+To create a new UI is straightforward task:</p>
+<ul>
+<li>Fork the repository, build and prepare it. See above for more information how to.</li>
+<li>Create a new directory under <code>src/ui</code>, let&#39;s say <code>jquery</code>.</li>
+<li>Create a subfolder, called &quot;gulp-tasks&quot;.</li>
+<li>In order to build the project using your UI, execute <code>gulp ui jquery</code>.</li>
+</ul>
+<p>That is everything. How will you structure the directories, which modules will you use, will you load Buttons and Toolbars on demand, what gulp tasks will you add - these questions are entirely up to you. The good news are that you won&#39;t start from scratch entirely. You still will be able to use the core of AlloyEditor, as well as the API from CKEditor.</p>
+<p>Once you are ready with the UI - please send us pull request and we will merge it.</p>
+
+
+    
+    <div class="alert alert-success">
+        For more information about configuration, check out our <a href="" target="_blank">API Docs</a>.
+    </div>
+    
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'alloyui';
+
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+
+  </div>
+
+</div>
+    </div>
+
+    <div id="push"></div>
+
+  </div>
+
+  <div class="footer navbar">
+    <div class="container">
+      <p class="pull-left">
+        <a href="http://liferay.com/">
+          <img src="/alloy-editor/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+        </a>
+      </p>
+      <p class="copyright pull-right"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">MIT</a> License.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37033501-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+</body>
+</html>

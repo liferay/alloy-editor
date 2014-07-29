@@ -383,6 +383,13 @@ pre {
   margin: 80px 0 0 0;
 }
 
+/* Editor demo */
+.editor-demo {
+  background: url('../img/editor_demo.gif') no-repeat 0 -253px;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
 /* Buttons */
 
 .bt {

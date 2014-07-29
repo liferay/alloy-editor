@@ -6,7 +6,7 @@
 
   <meta charset="utf-8">
   <meta name="author" content="Iliyan Peychev">
-  <meta name="description" content="A few things you should do to start writing content with a beautiful editor ;)">
+  <meta name="description" content="The section below supposes that you are using the default UI, which is built using AlloyUI/YUI3 and Bootstrap. The core of AlloyEditor is fully separated from the UI and creating another UI, based on any other framework, like jQuery, React or using just vanilla JavaScript and CSS is easy.">
 
   <!-- Facebook Tags -->
   <meta property="fb:app_id" content="176947299114210">
@@ -14,7 +14,7 @@
   <meta property="og:url" content="/alloy-editor">
   <meta property="og:image" content="/alloy-editor/website/img/facebook-share.jpg">
   <meta property="og:title" content="Tutorial - How to use it? | Alloy Editor">
-  <meta property="og:description" content="A few things you should do to start writing content with a beautiful editor ;)">
+  <meta property="og:description" content="The section below supposes that you are using the default UI, which is built using AlloyUI/YUI3 and Bootstrap. The core of AlloyEditor is fully separated from the UI and creating another UI, based on any other framework, like jQuery, React or using just vanilla JavaScript and CSS is easy.">
 
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="/alloy-editor/website/img/favicon.ico">
@@ -51,6 +51,7 @@
               <li><a href="/alloy-editor/examples/">Examples</a></li>
               <li><a href="/alloy-editor/tutorials/">Tutorials</a></li>
               <li><a href="/alloy-editor/api/" target="_blank">API Docs</a></li>
+              <li><a href="/alloy-editor/contributing/">Contributing</a></li>
               <li><a href="/alloy-editor/about/">About</a></li>
             </ul>
           </div>
@@ -80,11 +81,59 @@
             
         
       
+        
+          
+            <li><a href="/alloy-editor/tutorials/how-to-build-it"><i class="icon-chevron-right"></i> How to build it?</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/architecture"><i class="icon-chevron-right"></i> Architecture</a></li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     </ul>
 
     <p class="related">List of modules</p>
     <ul class="nav nav-list bs-docs-sidenav affix-top">
       
+        
+      
+        
+      
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/button"><i class="icon-chevron-right"></i> Create Buttons</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar"><i class="icon-chevron-right"></i> Create Toolbars</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create UI</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar_config"><i class="icon-chevron-right"></i> Toolbar Configuration</a></li>
+          
         
       
     </ul>
@@ -98,60 +147,72 @@
     
 
     
-      <p>A few things you should do to start writing content with a beautiful editor ;)</p>
+      <p>The section below supposes that you are using the default UI, which is built using AlloyUI/YUI3 and Bootstrap. The core of AlloyEditor is fully separated from the UI and creating another UI, based on any other framework, like jQuery, React or using just vanilla JavaScript and CSS is easy.</p>
       <hr>
     
 
-    <h4>1. Copy and paste</h4>
+    <h4>1. Add Boostrap 3 and Alloy Editor's CSS to the page.</h4>
 
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"bootstrap.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"alloy-editor/assets/alloy-editor.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span></code></pre>
+
+<hr>
+
+<h4>2. Add YUI3 or AlloyUI seed file to the page.</h4>
+
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+or
 <pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://cdn.alloyui.com/2.5.0/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
-<p>This is an ultra-small bit of JavaScript that enables you to load any AlloyUI modules on your page.</p>
-
-<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span></code></pre>
-<p>And this is the base style for all components, it's a fork from the popular <a href="http://liferay.github.io/alloy-bootstrap/">Bootstrap</a> project with some minor additions.</p>
 
 <hr>
 
-<h4>2. Getting started!</h4>
+<h4>3. Add AlloyEditor file to the page:</h4>
 
-<p>Let's create an YUI instance and do some simple stuff, like capturing a DOM element and attaching a click event to it. Then let's run some transitions!</p>
+There are a <strong>few ways</strong> to include the editor on the page. The simplest one is to add the whole editor with all UI on the page, like this:
 
-<pre class="highlight"><code class="hljs actionscript">YUI().<span class="hljs-keyword">use</span>(
-  <span class="hljs-string">'node'</span>,
-  <span class="hljs-string">'transition'</span>,
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(Y)</span> {</span>
-    Y.one(<span class="hljs-string">'.btn'</span>).on(
-      <span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-        <span class="hljs-keyword">this</span>.transition(
-          {
-            width: <span class="hljs-string">'500px'</span>
-          }
-        );
-      }
-    );
-  }
-);</code></pre>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"alloy-editor/alloy-editor-all.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
 
-<div style="text-align: center;">
-  <button id="try-btn" class="btn btn-large btn-block btn-primary" type="button">Try me now!</button>
-</div>
+If you don't want to load the whole UI, but to let the editor do that for you depending on the toolbar configuration you choose, then you can add only the core part, joined with CKEditor:
+
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">var</span> CKEDITOR_BASEPATH = <span class="hljs-string">'/alloy-editor/'</span>;
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"alloy-editor/alloy-editor.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+
+Change the value of CKEDITOR_BASEPATH according to the place where you plan to deploy AlloyEditor.
+
+The third way to add it on the page is to separate CKEditor's code from those of AlloyEditor, like this:
+
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"alloy-editor/ckeditor.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"alloy-editor/alloy-editor-core.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+
+Please note that in this case there is <strong>no need</strong> to specify CKEDITOR_BASEPATH.
 
 <hr>
 
-<h4>3. Using a UI component</h4>
+<h4>4. Create instances of AlloyEditor and specify the configuration:</h4>
 
-<p>Now let's take advantage of all the power that AlloyUI has and use <a href="/alloy-editor/tutorials/carousel">Carousel</a>, one the UI components.</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> editor = <span class="hljs-keyword">new</span> Y.AlloyEditor({
+    srcNode: <span class="hljs-string">'#editable'</span>,
+    toolbars: {
+        add: [<span class="hljs-string">'image'</span>, <span class="hljs-string">'code'</span>],
+        image: [<span class="hljs-string">'left'</span>, <span class="hljs-string">'right'</span>],
+        styles: [<span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>]
+    }
+});</code></pre>
 
-<pre class="highlight"><code class="hljs javascript">YUI().use(
-  <span class="hljs-string">'aui-carousel'</span>,
-  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
-    <span class="hljs-keyword">new</span> Y.Carousel(
-      {
-        contentBox: <span class="hljs-string">'#myCarousel'</span>,
-      }
-    ).render();
-  }
-);</code></pre>
+In the above configuration, "editable" is the ID of the element, which will be made editable. You can fully reconfigure the toolbars, or to remove them entirely. See below for more information.
+
+<pre class="highlight"><code class="hljs javascript">toolbars = {....}</code></pre>
+
+Aloy Editor comes with optimized version of CKEditor. Many plugins were removed. However, if you prefer the OOTB version, then you have to remove some of its plugins, like this:
+
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">new</span> Y.AlloyEditor({
+    removePlugins: <span class="hljs-string">'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link'</span>
+});</code></pre>
+
+"extraPlugins" config property is a list with the default plugins from Alloy Editor. However, you can customize these. For example, if you don't want the plugin for adding images via D&D, then just remove "dropimages" from "extraPlugins" property.
 
 <div id="myCarousel">
   <div class="aui-carousel-item" style="background: url(/alloy-editor/carousel/img/1.jpg);"></div>

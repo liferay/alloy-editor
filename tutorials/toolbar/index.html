@@ -1,0 +1,283 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+  <title>Tutorial - Create Toolbars | Alloy Editor</title>
+
+  <meta charset="utf-8">
+  <meta name="author" content="Iliyan Peychev">
+  <meta name="description" content="Adding a new toolbar is also as straightforward, as adding a button. If you use the default YUI3 based UI, you may create a standard module, which extends Widget. For your convenience, there is an extension, called ToolbarBase, which you can mix in your Widget. Then, name your toolbar somehow, for example ToolbarTable and load it on the page. Don't forget to add it to the configuration of the toolbars, like this:">
+
+  <!-- Facebook Tags -->
+  <meta property="fb:app_id" content="176947299114210">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/alloy-editor">
+  <meta property="og:image" content="/alloy-editor/website/img/facebook-share.jpg">
+  <meta property="og:title" content="Tutorial - Create Toolbars | Alloy Editor">
+  <meta property="og:description" content="Adding a new toolbar is also as straightforward, as adding a button. If you use the default YUI3 based UI, you may create a standard module, which extends Widget. For your convenience, there is an extension, called ToolbarBase, which you can mix in your Widget. Then, name your toolbar somehow, for example ToolbarTable and load it on the page. Don't forget to add it to the configuration of the toolbars, like this:">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/alloy-editor/website/img/favicon.ico">
+
+  <!-- CSS: Alloy Bootstrap -->
+  <link href="http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS: Website style -->
+  <link href="/alloy-editor/website/css/main.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
+
+  <!-- JS -->
+  <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+  <div id="wrap">
+
+    <a class="github-ribbon" href="https://github.com/liferay/alloy-editor/">
+      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/alloy-editor">
+            <img src="/alloy-editor/website/img/logo.png" alt="AlloyEditor Logo" width="211" height="34">
+          </a>
+          <div class="pull-right">
+            <ul class="nav">
+              <li><a href="/alloy-editor/examples/">Examples</a></li>
+              <li><a href="/alloy-editor/tutorials/">Tutorials</a></li>
+              <li><a href="/alloy-editor/api/" target="_blank">API Docs</a></li>
+              <li><a href="/alloy-editor/contributing/">Contributing</a></li>
+              <li><a href="/alloy-editor/about/">About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
+      <h2>Tutorials</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="span3 bs-docs-sidebar">
+
+    <p class="related">General</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials"><i class="icon-chevron-right"></i> How to use it?</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/how-to-build-it"><i class="icon-chevron-right"></i> How to build it?</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/architecture"><i class="icon-chevron-right"></i> Architecture</a></li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+
+    <p class="related">List of modules</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/button"><i class="icon-chevron-right"></i> Create Buttons</a></li>
+          
+        
+      
+        
+          
+            <li class="active"><a href="/alloy-editor/tutorials/toolbar"><i class="icon-chevron-right"></i> Create Toolbars</a></li>
+            
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create UI</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar_config"><i class="icon-chevron-right"></i> Toolbar Configuration</a></li>
+          
+        
+      
+    </ul>
+
+  </div>
+
+  <div class="span9">
+
+    <h1>Create Toolbars</h1>
+
+    
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#">Introduction</a>
+        </li>
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    
+
+    
+      <p>Adding a new toolbar is also as straightforward, as adding a button. If you use the default YUI3 based UI, you may create a standard module, which extends Widget. For your convenience, there is an extension, called ToolbarBase, which you can mix in your Widget. Then, name your toolbar somehow, for example ToolbarTable and load it on the page. Don't forget to add it to the configuration of the toolbars, like this:</p>
+      <hr>
+    
+
+    <pre class="highlight"><code class="hljs javascript">toolbars = {
+    table: [<span class="hljs-string">'button1'</span>, <span class="hljs-string">'button2'</span>],
+    add: [<span class="hljs-string">'image'</span>, <span class="hljs-string">'code'</span>],
+    image: [<span class="hljs-string">'left'</span>, <span class="hljs-string">'right'</span>],
+    styles: [<span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>]
+};
+</code></pre>
+<p>In this exmaple, &quot;button1&quot; and &quot;button2&quot; will be the buttons, which will be loaded on this toolbar.</p>
+<p>Example:</p>
+<pre class="highlight"><code class="hljs javascript">YUI.add(<span class="hljs-string">'toolbar-table'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(Y)</span> {</span>
+<span class="hljs-pi">    'use strict'</span>;
+
+    <span class="hljs-comment">// Create a standard YUI3 module, which extends Widget. It also mixes Y.ToolbarBase extension, and two others:</span>
+    <span class="hljs-comment">// Y.WidgetPosition and Y.WidgetAutohide</span>
+    <span class="hljs-keyword">var</span> ToolbarTable = Y.Base.create(<span class="hljs-string">'toolbartable'</span>, Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetAutohide], {
+        initializer: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+            <span class="hljs-comment">// write some initialization code, if needed</span>
+        },
+
+        <span class="hljs-comment">// render the toolbar here, this function is part of the standard YUI3 Widget API</span>
+        renderUI: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+        },
+
+        <span class="hljs-comment">// bind some events here, this function is part of the standard YUI3 Widget API</span>
+        bindUI: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+        },
+
+        <span class="hljs-comment">// This is the main part of your toolbar. If you use Y.ToolbarBase extension, as above, this function will be</span>
+        <span class="hljs-comment">// invoked when user interacts somehow with the editor. This might be mouse click or keypress. Here you have to</span>
+        <span class="hljs-comment">// check if toolbar should be visible or not. If so, you will have to calculate the position of the toolbar and show it.</span>
+        <span class="hljs-comment">// The "event" attribute contains everything you need. See the comment inside the function for more information.</span>
+        _onEditorInteraction: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span> {</span>
+            <span class="hljs-comment">// Check if the selection is empty</span>
+
+            <span class="hljs-keyword">var</span> editor = <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'editor'</span>);
+
+            <span class="hljs-keyword">var</span> selectionEmpty = editor.isSelectionEmpty();
+
+            <span class="hljs-comment">// If there is selection, and only text is selected (not an image for example), show the toolbar</span>
+
+            <span class="hljs-keyword">if</span> (!selectionEmpty &amp;&amp; !selectionData.element &amp;&amp; selectionData.region) {
+                <span class="hljs-comment">// Get the position where user released the mouse</span>
+                <span class="hljs-keyword">var</span> nativeEvent = event.data.nativeEvent;
+
+                <span class="hljs-keyword">var</span> pos = {
+                    x: nativeEvent.pageX,
+                    y: nativeEvent.pageY
+                };
+
+                <span class="hljs-comment">// You may get also the selection direction. This will help you to determine if user selected the text from</span>
+                <span class="hljs-comment">// top to bottom or from bottom to top. Using this information, you will be able to show the toolbar</span>
+                <span class="hljs-comment">// above or below the selection.</span>
+
+                <span class="hljs-keyword">var</span> direction = selectionData.region.direction;
+
+                <span class="hljs-comment">// direction can be one of these: CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</span>
+
+                <span class="hljs-comment">// Then show the toolbar on the position.</span>
+                <span class="hljs-comment">// Of course, it may happen that user used keyboard to make a selection. In this case, you may get the starting rectangle of the</span>
+                <span class="hljs-comment">// selection.</span>
+            }
+        }
+    });
+</code></pre>
+
+
+    
+    <div class="alert alert-success">
+        For more information about configuration, check out our <a href="" target="_blank">API Docs</a>.
+    </div>
+    
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'alloyui';
+
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+
+  </div>
+
+</div>
+    </div>
+
+    <div id="push"></div>
+
+  </div>
+
+  <div class="footer navbar">
+    <div class="container">
+      <p class="pull-left">
+        <a href="http://liferay.com/">
+          <img src="/alloy-editor/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+        </a>
+      </p>
+      <p class="copyright pull-right"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">MIT</a> License.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37033501-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+</body>
+</html>

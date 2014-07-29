@@ -2,7 +2,7 @@
 <html>
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 
-  <title>Examples | Alloy Editor</title>
+  <title>Tutorial - How to build it? | Alloy Editor</title>
 
   <meta charset="utf-8">
   <meta name="author" content="Iliyan Peychev">
@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="/alloy-editor">
   <meta property="og:image" content="/alloy-editor/website/img/facebook-share.jpg">
-  <meta property="og:title" content="Examples | Alloy Editor">
+  <meta property="og:title" content="Tutorial - How to build it? | Alloy Editor">
   <meta property="og:description" content="Alloy Editor is modern WYSIWIG editor built on top of CKEditor, designed to create modern and gorgeous web content.">
 
   <!-- Favicon -->
@@ -63,51 +63,117 @@
       <div class="banner page-banner">
   <div class="container">
     <div class="presentation">
-      <h2>Examples</h2>
+      <h2>Tutorials</h2>
     </div>
   </div>
 </div>
 
-<div id="page-example">
-  <div class="container">
+<div class="container">
 
-    <div class="row">
-      <div class="title span5">
-        <h3>featuring...</h3>
-      </div>
-    </div>
+  <div class="span3 bs-docs-sidebar">
 
-    
-
-    <div class="row">
-      <div class="title span5">
-        <h3>and more!</h3>
-      </div>
-    </div>
-
-    
+    <p class="related">General</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
       
-    
+        
+          
+            <li><a href="/alloy-editor/tutorials"><i class="icon-chevron-right"></i> How to use it?</a></li>
+          
+        
       
-    
+        
+          
+            <li class="active"><a href="/alloy-editor/tutorials/how-to-build-it"><i class="icon-chevron-right"></i> How to build it?</a></li>
+            
+        
       
-    
+        
+          
+            <li><a href="/alloy-editor/tutorials/architecture"><i class="icon-chevron-right"></i> Architecture</a></li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
 
-    <div class="row">
-      <div class="span12 title">
-        <p class="call">and this is just the beginning!</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <p style="text-align: center; margin-bottom: 25px;">AlloyUI 2.0 is just a preview release, soon you're going to find even more components here \o/</p>
-    </div>
-
-    <div class="row">
-      <a class="bt" id="bt-contribute" href="/alloy-editor/contributing/">Contribute</a>
-    </div>
+    <p class="related">List of modules</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/button"><i class="icon-chevron-right"></i> Create Buttons</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar"><i class="icon-chevron-right"></i> Create Toolbars</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create UI</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar_config"><i class="icon-chevron-right"></i> Toolbar Configuration</a></li>
+          
+        
+      
+    </ul>
 
   </div>
+
+  <div class="span9">
+
+    <h1>How to build it?</h1>
+
+    
+
+    
+
+    <ol>
+<li>Fork the repository, so you can send then patches.</li>
+<li>Navigate to the directory you forked/cloned the repo.</li>
+<li>Install NodeJS (<a href="http://nodejs.org/">http://nodejs.org/</a>)</li>
+<li>Run <code>[sudo] npm install -g gulp</code></li>
+<li>Run <code>npm install</code></li>
+<li>Run <code>gulp</code></li>
+</ol>
+<p>If you want to have a zip file, execute <code>gulp release</code></p>
+
+
+    
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'alloyui';
+
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+
+  </div>
+
 </div>
     </div>
 

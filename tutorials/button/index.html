@@ -1,0 +1,303 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+  <title>Tutorial - Create Buttons | Alloy Editor</title>
+
+  <meta charset="utf-8">
+  <meta name="author" content="Iliyan Peychev">
+  <meta name="description" content="If you run the editor with the default UI, which is written in AlloyUI/YUI3, then adding a button will be straightforward. Buttons are standard YUI3 modules, which extend Widget. For your convenience, there is also a base class, which you can extend (ButtonBase). Then, use CKEditor's API to do style the content and that is it!">
+
+  <!-- Facebook Tags -->
+  <meta property="fb:app_id" content="176947299114210">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/alloy-editor">
+  <meta property="og:image" content="/alloy-editor/website/img/facebook-share.jpg">
+  <meta property="og:title" content="Tutorial - Create Buttons | Alloy Editor">
+  <meta property="og:description" content="If you run the editor with the default UI, which is written in AlloyUI/YUI3, then adding a button will be straightforward. Buttons are standard YUI3 modules, which extend Widget. For your convenience, there is also a base class, which you can extend (ButtonBase). Then, use CKEditor's API to do style the content and that is it!">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/alloy-editor/website/img/favicon.ico">
+
+  <!-- CSS: Alloy Bootstrap -->
+  <link href="http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS: Website style -->
+  <link href="/alloy-editor/website/css/main.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
+
+  <!-- JS -->
+  <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+  <div id="wrap">
+
+    <a class="github-ribbon" href="https://github.com/liferay/alloy-editor/">
+      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/alloy-editor">
+            <img src="/alloy-editor/website/img/logo.png" alt="AlloyEditor Logo" width="211" height="34">
+          </a>
+          <div class="pull-right">
+            <ul class="nav">
+              <li><a href="/alloy-editor/examples/">Examples</a></li>
+              <li><a href="/alloy-editor/tutorials/">Tutorials</a></li>
+              <li><a href="/alloy-editor/api/" target="_blank">API Docs</a></li>
+              <li><a href="/alloy-editor/contributing/">Contributing</a></li>
+              <li><a href="/alloy-editor/about/">About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
+      <h2>Tutorials</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="span3 bs-docs-sidebar">
+
+    <p class="related">General</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials"><i class="icon-chevron-right"></i> How to use it?</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/how-to-build-it"><i class="icon-chevron-right"></i> How to build it?</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/architecture"><i class="icon-chevron-right"></i> Architecture</a></li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+
+    <p class="related">List of modules</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="active"><a href="/alloy-editor/tutorials/button"><i class="icon-chevron-right"></i> Create Buttons</a></li>
+            
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar"><i class="icon-chevron-right"></i> Create Toolbars</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create UI</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar_config"><i class="icon-chevron-right"></i> Toolbar Configuration</a></li>
+          
+        
+      
+    </ul>
+
+  </div>
+
+  <div class="span9">
+
+    <h1>Create Buttons</h1>
+
+    
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#">Introduction</a>
+        </li>
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    
+
+    
+      <p>If you run the editor with the default UI, which is written in AlloyUI/YUI3, then adding a button will be straightforward. Buttons are standard YUI3 modules, which extend Widget. For your convenience, there is also a base class, which you can extend (ButtonBase). Then, use CKEditor's API to do style the content and that is it!</p>
+      <hr>
+    
+
+    <p>For example, if you want to add a button, which posts the selected text to Facebook, create a YUI3 module, let&#39;s say Y.ButtonFacebook and load it on the page.
+Then, add it to the configuration of the toolbar, like this:</p>
+<pre class="highlight"><code class="hljs javascript">styles: [<span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>, <span class="hljs-string">'facebook'</span>]
+</code></pre>
+<p>Of course, the buttons accept configuration parameters, so you can do this with your button:</p>
+<pre class="highlight"><code class="hljs javascript">styles: [
+    <span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>, <span class="hljs-string">'facebook'</span>: {
+        customParam: <span class="hljs-string">'param1'</span>,
+        customParam2: <span class="hljs-string">'param2'</span>
+    }
+];
+</code></pre>
+<p>You may overwrite any of the params of the default buttons, just by passing such config object.</p>
+<p>And then, add the configuration of styles toolbar to the toolbars attribute:</p>
+<pre class="highlight"><code class="hljs javascript">toolbars: {
+    styles: [
+        <span class="hljs-string">'facebook'</span>: {
+            customParam: <span class="hljs-string">'param1'</span>,
+            customParam2: <span class="hljs-string">'param2'</span>
+        }
+    ];
+}
+</code></pre>
+<h4 id="full-example-of-creating-a-new-button-">Full example of creating a new button.</h4>
+<p>Here is an example how can you create a button which handles H3 styling of an selection:</p>
+<pre class="highlight"><code class="hljs javascript">YUI.add(<span class="hljs-string">'button-h3'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+<span class="hljs-pi">    'use strict'</span>;
+
+    <span class="hljs-keyword">var</span> Lang = Y.Lang;
+
+    <span class="hljs-comment">/**
+     * The ButtonH3 class provides functionality for applying HTML heading, level 3
+     * to the selection.
+     *
+     * @class ButtonH3
+     */</span>
+    <span class="hljs-keyword">var</span> H3 = Y.Base.create(<span class="hljs-string">'h3'</span>, Y.Plugin.Base, [Y.ButtonBase], {
+        TPL_CONTENT: <span class="hljs-string">'&lt;i class="alloy-editor-icon-h3"&gt;&lt;/i&gt;'</span> <span class="hljs-comment">// the content of the button - if could be text or an icon</span>
+    }, {
+        NAME: <span class="hljs-string">'h3'</span>,
+
+        NS: <span class="hljs-string">'h3'</span>,
+
+        ATTRS: {
+            <span class="hljs-comment">/**
+             * Specifies the element (style) which this button handles.
+             *
+             * @attribute element
+             * @default 'h3'
+             * @type String
+             */</span>
+            element: {
+                validator: Lang.isString,
+                value: <span class="hljs-string">'h3'</span>
+            }
+        }
+    });
+
+    Y.ButtonH3 = H3;
+
+}, <span class="hljs-string">''</span>, {
+    requires: [<span class="hljs-string">'button-base'</span>]
+});
+</code></pre>
+<p>Then, you have to add it to the configuration of the Toolbar where you want to use it. Buttons, which handle styles make sense to be added to styles toolbar:</p>
+<pre class="highlight"><code class="hljs javascript">toolbars: {
+    styles: [<span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'h3'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>, <span class="hljs-string">'facebook'</span>]
+}
+</code></pre>
+<p>In this case H3 button will appear after H2 button.</p>
+<p>If course, the JavaScript file, which contains the code of the button, should be added on the page. You have two options here:</p>
+<ul>
+<li>to add this file to the page in the way you prefer. Add another <code>&lt;script&gt;</code> element, or join this file among your other files.</li>
+<li>To use AlloyUI/YUI3. If you use the default UI, which uses AlloyUI/YUI3, you will be able to get the benefits of the <a href="http://yuilibrary.com/yui/docs/api/classes/Loader.html">Loader</a>. Add a bit of JavaScript and register your button to the current YUI instance, like this:</li>
+</ul>
+<pre class="highlight"><code class="hljs javascript">YUI.applyConfig({
+    modules: {
+        <span class="hljs-string">'button-h3'</span>: {
+            fullpath: <span class="hljs-string">'./button-h3.js'</span>
+        }
+    }
+});
+</code></pre>
+<p>See YUI3 <a href="http://yuilibrary.com/yui/docs/api/classes/YUI.html#method_applyConfig">documentation</a> for more information.</p>
+
+
+    
+    <div class="alert alert-success">
+        For more information about configuration, check out our <a href="" target="_blank">API Docs</a>.
+    </div>
+    
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'alloyui';
+
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+
+  </div>
+
+</div>
+    </div>
+
+    <div id="push"></div>
+
+  </div>
+
+  <div class="footer navbar">
+    <div class="container">
+      <p class="pull-left">
+        <a href="http://liferay.com/">
+          <img src="/alloy-editor/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+        </a>
+      </p>
+      <p class="copyright pull-right"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">MIT</a> License.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37033501-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+</body>
+</html>

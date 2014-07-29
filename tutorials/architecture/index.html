@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+  <title>Tutorial - Architecture | Alloy Editor</title>
+
+  <meta charset="utf-8">
+  <meta name="author" content="Iliyan Peychev">
+  <meta name="description" content="The main idea behind the editor is to fully separate the core from the UI. And not only to separate it, but to give opportunity to people to add very easy new Buttons and Toolbars or to create completely new UI, based on different Framework or vanilla JavaScript.">
+
+  <!-- Facebook Tags -->
+  <meta property="fb:app_id" content="176947299114210">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/alloy-editor">
+  <meta property="og:image" content="/alloy-editor/website/img/facebook-share.jpg">
+  <meta property="og:title" content="Tutorial - Architecture | Alloy Editor">
+  <meta property="og:description" content="The main idea behind the editor is to fully separate the core from the UI. And not only to separate it, but to give opportunity to people to add very easy new Buttons and Toolbars or to create completely new UI, based on different Framework or vanilla JavaScript.">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/alloy-editor/website/img/favicon.ico">
+
+  <!-- CSS: Alloy Bootstrap -->
+  <link href="http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS: Website style -->
+  <link href="/alloy-editor/website/css/main.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
+
+  <!-- JS -->
+  <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+  <div id="wrap">
+
+    <a class="github-ribbon" href="https://github.com/liferay/alloy-editor/">
+      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/alloy-editor">
+            <img src="/alloy-editor/website/img/logo.png" alt="AlloyEditor Logo" width="211" height="34">
+          </a>
+          <div class="pull-right">
+            <ul class="nav">
+              <li><a href="/alloy-editor/examples/">Examples</a></li>
+              <li><a href="/alloy-editor/tutorials/">Tutorials</a></li>
+              <li><a href="/alloy-editor/api/" target="_blank">API Docs</a></li>
+              <li><a href="/alloy-editor/contributing/">Contributing</a></li>
+              <li><a href="/alloy-editor/about/">About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
+      <h2>Tutorials</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="span3 bs-docs-sidebar">
+
+    <p class="related">General</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials"><i class="icon-chevron-right"></i> How to use it?</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/how-to-build-it"><i class="icon-chevron-right"></i> How to build it?</a></li>
+          
+        
+      
+        
+          
+            <li class="active"><a href="/alloy-editor/tutorials/architecture"><i class="icon-chevron-right"></i> Architecture</a></li>
+            
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+
+    <p class="related">List of modules</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/button"><i class="icon-chevron-right"></i> Create Buttons</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar"><i class="icon-chevron-right"></i> Create Toolbars</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create UI</a></li>
+          
+        
+      
+        
+          
+            <li><a href="/alloy-editor/tutorials/toolbar_config"><i class="icon-chevron-right"></i> Toolbar Configuration</a></li>
+          
+        
+      
+    </ul>
+
+  </div>
+
+  <div class="span9">
+
+    <h1>Architecture</h1>
+
+    
+
+    
+      <p>The main idea behind the editor is to fully separate the core from the UI. And not only to separate it, but to give opportunity to people to add very easy new Buttons and Toolbars or to create completely new UI, based on different Framework or vanilla JavaScript.</p>
+      <hr>
+    
+
+    <h3 id="the-core">The core</h3>
+<p>AlloyEditor uses CKEditor under the hood to deal with the HTML. Browsers still generate very inconsistent HTML, not to mention how buggy they are. In fact, to create an editor, which is able to handle all browsers, let&#39;s say IE9+, Chrome, Firefox and Safari, is very challenging. Fortunately, CKEditor does it well, so it was the natural choice not only because of that, but because it is mature, well documented and configurable.
+Not everything from CKEditor is being used. In fact, AlloyEditor uses only the core from it. The whole UI has been discarded and the version of CKEditor which comes in AlloyEditor is twice smaller than the version OOTB.</p>
+<p>On top of what CKEditor provides, new plugins and modules were created, which form the core of AlloyEditor.
+Among these plugins is a plugin, which adds new functions which provide information about the selection - its regions, direction and so on. This is the key part and that is what allows the Toolbars to display themselves just above or below the selection. Other plugins are related to Drag&amp;Drop of images directly in the editor, or they provide common API for creating, editing and removing links and so on.</p>
+<p>There is no much dependency of CKEditor in AlloyEditor. If there is better base, or if we reach the point when creation of new core would be easier but we still will be able to support the majority of the browsers, nothing prevents us of replacing CKEditor core with our own.</p>
+<h3 id="the-ui">The UI</h3>
+<p>The UI has been thought in the way that it should provide the following functionality:</p>
+<ul>
+<li>Toolbars should allow adding, removing and reordering Buttons.</li>
+<li>The developer should be able to add new Toolbars to the editor.</li>
+<li>If some Button or Toolbar is not being used, its code shouldn&#39;t be loaded at all. This is just the opposite of what most editors do - they load the whole UI, regardless of the fact some buttons are being removed from the Toolbar.</li>
+<li>It should be easy to create a new UI. The default one uses AlloyUI/YUI3 because it provides rich components infrastructure, flexibility and code loading on demand. However, if developer wants to use another Framework or to create UI using vanilla JavaScript and CSS - that should be possible.</li>
+</ul>
+<p>Currently AlloyEditor supports only one UI - it uses AlloyUI/YUI3. Please feel free to contact us if you want to contribute another UI.</p>
+
+
+    
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'alloyui';
+
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+
+  </div>
+
+</div>
+    </div>
+
+    <div id="push"></div>
+
+  </div>
+
+  <div class="footer navbar">
+    <div class="container">
+      <p class="pull-left">
+        <a href="http://liferay.com/">
+          <img src="/alloy-editor/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+        </a>
+      </p>
+      <p class="copyright pull-right"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">MIT</a> License.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37033501-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+</body>
+</html>
