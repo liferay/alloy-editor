@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+  <title>Tutorial - How to use it? | Alloy Editor</title>
+
+  <meta charset="utf-8">
+  <meta name="author" content="Iliyan Peychev">
+  <meta name="description" content="A few things you should do to start writing content with a beautiful editor ;)">
+
+  <!-- Facebook Tags -->
+  <meta property="fb:app_id" content="176947299114210">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://localhost:9778">
+  <meta property="og:image" content="http://localhost:9778/website/img/facebook-share.jpg">
+  <meta property="og:title" content="Tutorial - How to use it? | Alloy Editor">
+  <meta property="og:description" content="A few things you should do to start writing content with a beautiful editor ;)">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="http://localhost:9778/website/img/favicon.ico">
+
+  <!-- CSS: Alloy Bootstrap -->
+  <link href="http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS: Website style -->
+  <link href="http://localhost:9778/website/css/main.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
+
+  <!-- JS -->
+  <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+  <div id="wrap">
+
+    <a class="github-ribbon" href="https://github.com/liferay/alloy-editor/">
+      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="http://localhost:9778">
+            <img src="http://localhost:9778/website/img/logo.png" alt="AlloyEditor Logo" width="211" height="34">
+          </a>
+          <div class="pull-right">
+            <ul class="nav">
+              <li><a href="http://localhost:9778/examples/">Examples</a></li>
+              <li><a href="http://localhost:9778/tutorials/">Tutorials</a></li>
+              <li><a href="http://localhost:9778/api/" target="_blank">API Docs</a></li>
+              <li><a href="http://localhost:9778/about/">About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
+      <h2>Tutorials</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="span3 bs-docs-sidebar">
+
+    <p class="related">General</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+          
+            <li class="active"><a href="http://localhost:9778/tutorials"><i class="icon-chevron-right"></i> How to use it?</a></li>
+            
+        
+      
+    </ul>
+
+    <p class="related">List of modules</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+      
+    </ul>
+
+  </div>
+
+  <div class="span9">
+
+    <h1>How to use it?</h1>
+
+    
+
+    
+      <p>A few things you should do to start writing content with a beautiful editor ;)</p>
+      <hr>
+    
+
+    <h4>1. Copy and paste</h4>
+
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://cdn.alloyui.com/2.5.0/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+<p>This is an ultra-small bit of JavaScript that enables you to load any AlloyUI modules on your page.</p>
+
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span></code></pre>
+<p>And this is the base style for all components, it's a fork from the popular <a href="http://liferay.github.io/alloy-bootstrap/">Bootstrap</a> project with some minor additions.</p>
+
+<hr>
+
+<h4>2. Getting started!</h4>
+
+<p>Let's create an YUI instance and do some simple stuff, like capturing a DOM element and attaching a click event to it. Then let's run some transitions!</p>
+
+<pre class="highlight"><code class="hljs actionscript">YUI().<span class="hljs-keyword">use</span>(
+  <span class="hljs-string">'node'</span>,
+  <span class="hljs-string">'transition'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(Y)</span> {</span>
+    Y.one(<span class="hljs-string">'.btn'</span>).on(
+      <span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+        <span class="hljs-keyword">this</span>.transition(
+          {
+            width: <span class="hljs-string">'500px'</span>
+          }
+        );
+      }
+    );
+  }
+);</code></pre>
+
+<div style="text-align: center;">
+  <button id="try-btn" class="btn btn-large btn-block btn-primary" type="button">Try me now!</button>
+</div>
+
+<hr>
+
+<h4>3. Using a UI component</h4>
+
+<p>Now let's take advantage of all the power that AlloyUI has and use <a href="http://localhost:9778/tutorials/carousel">Carousel</a>, one the UI components.</p>
+
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-carousel'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+    <span class="hljs-keyword">new</span> Y.Carousel(
+      {
+        contentBox: <span class="hljs-string">'#myCarousel'</span>,
+      }
+    ).render();
+  }
+);</code></pre>
+
+<div id="myCarousel">
+  <div class="aui-carousel-item" style="background: url(http://localhost:9778/carousel/img/1.jpg);"></div>
+  <div class="aui-carousel-item" style="background: url(http://localhost:9778/carousel/img/2.jpg);"></div>
+  <div class="aui-carousel-item" style="background: url(http://localhost:9778/carousel/img/3.jpg);"></div>
+  <div class="aui-carousel-item" style="background: url(http://localhost:9778/carousel/img/4.jpg);"></div>
+</div>
+
+<div class="row">
+  <div class="span9 title">
+    <p class="call">and this is just the beginning!</p>
+  </div>
+</div>
+
+<div class="row">
+  <p style="text-align: center; margin-bottom: 25px;">Go ahead and navigate between other components using the list on the left.</p>
+</div>
+
+<link rel="stylesheet" href="http://localhost:9778/carousel/css/basic.css" />
+<script src="http://localhost:9778/website/js/tutorial-demo.js"></script>
+
+    
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'alloyui';
+
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+
+  </div>
+
+</div>
+    </div>
+
+    <div id="push"></div>
+
+  </div>
+
+  <div class="footer navbar">
+    <div class="container">
+      <p class="pull-left">
+        <a href="http://liferay.com/">
+          <img src="http://localhost:9778/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+        </a>
+      </p>
+      <p class="copyright pull-right"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">BSD</a> License.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37033501-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+</body>
+</html>
