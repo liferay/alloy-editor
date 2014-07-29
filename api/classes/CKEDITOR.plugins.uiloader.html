@@ -374,17 +374,19 @@ and another attribute, which specifies its zIndex.</p>
     <div class="description">
         <p>Retrieves a list of modules for all registered buttons and toolbars in the current
 editor configuration.
-The module will be automatically discovered if it follows this specification:
-- if this is a Toolbar, the module should start with the word &quot;module&quot;, followed by &quot;-&quot;
-and then the name of the toolbar. Example: &#39;toolbar-add&#39;.
-- if the module is an button, then the module should start with the word &quot;button&quot;,
-followed by &quot;-&quot; and then the name of the button. Example: &quot;button-image&quot;.
-- In order to be instantiated successfully, the toolbar should expose itself as an object,
+The module will be automatically discovered if it follows this specification:</p>
+<ul>
+<li>if this is a Toolbar, the module should start with the word &quot;module&quot;, followed by &quot;-&quot;
+and then the name of the toolbar. Example: &#39;toolbar-add&#39;.</li>
+<li>if the module is an button, then the module should start with the word &quot;button&quot;,
+followed by &quot;-&quot; and then the name of the button. Example: &quot;button-image&quot;.</li>
+<li>In order to be instantiated successfully, the toolbar should expose itself as an object,
 attached to the current YUI/AlloyUI instance. The name should start with the name Toolbar,
-followed by the name of the toolbar, as specified in the configuration. Example: Y.ToolbarAdd.
-- In order to be instantiated successfully, the button should expose itself as an object,
+followed by the name of the toolbar, as specified in the configuration. Example: Y.ToolbarAdd.</li>
+<li>In order to be instantiated successfully, the button should expose itself as an object,
 attached to the current YUI/AlloyUI instance. The name should start with the name Button,
-followed by the name of the button, as specified in the configuration. Example: Y.ButtonImage.</p>
+followed by the name of the button, as specified in the configuration. Example: Y.ButtonImage.</li>
+</ul>
 
     </div>
 

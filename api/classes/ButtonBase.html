@@ -180,38 +180,41 @@ ToolbarBase and ButtonBase will provide everything you need to implement whateve
 Toolbars, which mix ToolbarBase extension will provide a container, where the button
 should render. This container is accessible via &quot;buttonsContainer&quot; attribute.
 If your button just changes the style of the selection, then everything you have to do
-in order to implement it is: <br />
-- extend Y.Plugin.Base and mix Y.ButtonBase extension
-- specify the element to which you want to style the selection. This should be done via
+in order to implement it is: <br /></p>
+<ul>
+<li>extend Y.Plugin.Base and mix Y.ButtonBase extension</li>
+<li><p>specify the element to which you want to style the selection. This should be done via
 &quot;element&quot; attribute. Here is the code: <br /></p>
 <pre class="code prettyprint"><code>
-   YUI.add('button-em', function (Y) {
-       'use strict';
+ YUI.add('button-em', function (Y) {
+     'use strict';
 
-        var Lang = Y.Lang;
+      var Lang = Y.Lang;
 
-        var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {
-            TPL_CONTENT: '&lt;i class=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/i&gt;'
-        }, {
-            NAME: 'em',
+      var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {
+          TPL_CONTENT: '&lt;i class=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/i&gt;'
+      }, {
+          NAME: 'em',
 
-            NS: 'em',
+          NS: 'em',
 
-            ATTRS: {
-                element: {
-                    validator: Lang.isString,
-                    value: 'em'
-                }
-            }
-        });
+          ATTRS: {
+              element: {
+                  validator: Lang.isString,
+                  value: 'em'
+              }
+          }
+      });
 
-        Y.ButtonEm = Em;
+      Y.ButtonEm = Em;
 
-    },'', {
-        requires: ['button-base']
-    });
+  },'', {
+      requires: ['button-base']
+  });
 </code></pre>
 
+</li>
+</ul>
 <p>The code above creates a button, which will allow user to make selection italic.</p>
 <p>A more complex button may change the UI of the host (Toolbar) too. If the Toolbar mix
 ToolbarBase extension, then it will export an attribute, called &quot;buttonContainer&quot;. By
