@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>ToolbarBase - AlloyEditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="AlloyEditor" src="../assets/img/logo-small.png" title="AlloyEditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>0.1.0</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview">
+        <ul class="nav nav-tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes tab-pane">
+            
+                <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+            
+                <li><a href="../classes/ButtonA.html">ButtonA</a></li>
+            
+                <li><a href="../classes/ButtonBase.html">ButtonBase</a></li>
+            
+                <li><a href="../classes/ButtonEm.html">ButtonEm</a></li>
+            
+                <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+            
+                <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+            
+                <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+            
+                <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
+            
+                <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
+            
+                <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
+            
+                <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+            
+                <li><a href="../classes/ButtonU.html">ButtonU</a></li>
+            
+                <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.linktooltip.html">CKEDITOR.plugins.linktooltip</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.uiloader.html">CKEDITOR.plugins.uiloader</a></li>
+            
+                <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+            
+                <li><a href="../classes/LinkTooltip.html">LinkTooltip</a></li>
+            
+                <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+            
+                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+            
+                <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
+            
+                <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules tab-pane">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+    <h1>ToolbarBase <small>Class</small></h1>
+</div>
+
+<div class="well well-small">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:9</code></a>
+        </div>
+    
+
+    
+
+    
+</div>
+
+
+
+<div class="well well-small intro">
+    <p>The ToolbarBase extension is a common base for all AlloyEditor&#39;s Toolbars.</p>
+
+</div>
+
+
+
+<div id="classdocs">
+    <ul class="api-class-tabs nav nav-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index tab-pane">
+            <h2 class="off-left">Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__afterActionPerformed">_afterActionPerformed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__applyTransition">_applyTransition</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__getButtonInstanceName">_getButtonInstanceName</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__getButtonsContainer">_getButtonsContainer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__moveToPoint">_moveToPoint</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_initializer">initializer</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+                <div class="index-section attrs tab-pane">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_buttonsContainer">buttonsContainer</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_editor">editor</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_transition">transition</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__afterActionPerformed" class="method item protected">
+    <h3 class="name"><code>_afterActionPerformed</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l103"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:103</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Re-fires <a href="../classes/ButtonBase.html#event_actionPerformed" class="crosslink">actionPerformed</a> so the buttons
+attached to Toolbar, which mixes this extension will be notified that user performed
+an action.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The <a href="../classes/ButtonBase.html#event_actionPerformed" class="crosslink">actionPerformed</a> event.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__applyTransition" class="method item protected">
+    <h3 class="name"><code>_applyTransition</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>xy</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>direction</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l50"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:50</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Applies transition specified via <a href="../classes/ToolbarBase.html#attr_transition" class="crosslink">transition</a> attribute.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">xy</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The point in page coordinates where Toolbar should move.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">direction</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The direction of the selection. Can be one of these:</p>
+<ol>
+<li>CKEDITOR.SELECTION_TOP_TO_BOTTOM</li>
+<li>CKEDITOR.SELECTION_BOTTOM_TO_TOP</li>
+</ol>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__getButtonInstanceName" class="method item protected">
+    <h3 class="name"><code>_getButtonInstanceName</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>buttonName</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l127"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:127</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Resolves and returns the name of the Button from the current editor configuration.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">buttonName</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name of the button as specified in Toolbar configuration.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    <p>The constructed name of Button.
+See <a href="../classes/CKEDITOR.plugins.uiloader.html#method__getModules" class="crosslink">_getModules</a>
+for more information about the rules for constructing button names.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__getButtonsContainer" class="method item protected">
+    <h3 class="name"><code>_getButtonsContainer</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Node</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l116"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:116</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the container in which all buttons are being rendered.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Node</span>:
+                    
+                    <p>The container of all buttons attached to the current isntance of Toolbar.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__moveToPoint" class="method item protected">
+    <h3 class="name"><code>_moveToPoint</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>xy</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>direction</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>config</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l141"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:141</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Moves the Toolbar to a point in page coordinates. If transition was specified via the
+<a href="../classes/ToolbarBase.html#attr_transition" class="crosslink">transition</a>, the movement will be
+delegated to the transition, except if Toolbar is already visible. In the last case
+transition will be ignored.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">xy</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The point in page coordinates where Toolbar should move.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">direction</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The direction of the selection. Can be one of these:</p>
+<ol>
+<li>CKEDITOR.SELECTION_TOP_TO_BOTTOM</li>
+<li>CKEDITOR.SELECTION_BOTTOM_TO_TOP</li>
+</ol>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">config</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Provides additional configuration attributes to the function.
+This parameter is optional. If not provided, the transition will be applied (if any).
+Supported parameters are:</p>
+<ul>
+<li>visible: true or false. If toolbar is visible, the transition will be applied (if any).
+If not, it will be suppressed and only the new position will be set.</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_initializer" class="method item protected">
+    <h3 class="name"><code>initializer</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>config</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l15"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:15</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initializer lifecycle implementation for the ToolbarBase class.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">config</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Configuration object literal for the toolbar</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel tab-pane">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_buttonsContainer" class="attr item">
+    <a name="config_buttonsContainer"></a> 
+    <h3 class="name"><code>buttonsContainer</code></h3>
+    <span class="type">Node</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag readonly">readonly</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l173"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:173</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the container in Toolbar&#39;s contentBox, where all buttons are rendered.</p>
+
+    </div>
+
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>buttonsContainerChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>buttonsContainer</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_editor" class="attr item">
+    <a name="config_editor"></a> 
+    <h3 class="name"><code>editor</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l185"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:185</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Contains the native editor implementation.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>editorChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>editor</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_transition" class="attr item">
+    <a name="config_transition"></a> 
+    <h3 class="name"><code>transition</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l196"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:196</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the transition which should be applied when Toolbar moves to given position.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> {
+   easing: &#x27;ease-out&#x27;,
+   duration: 0.1
+ }</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>transitionChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>transition</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

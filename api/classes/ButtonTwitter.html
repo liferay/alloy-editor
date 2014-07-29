@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>ButtonTwitter - AlloyEditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="AlloyEditor" src="../assets/img/logo-small.png" title="AlloyEditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>0.1.0</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview">
+        <ul class="nav nav-tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes tab-pane">
+            
+                <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+            
+                <li><a href="../classes/ButtonA.html">ButtonA</a></li>
+            
+                <li><a href="../classes/ButtonBase.html">ButtonBase</a></li>
+            
+                <li><a href="../classes/ButtonEm.html">ButtonEm</a></li>
+            
+                <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+            
+                <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+            
+                <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+            
+                <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
+            
+                <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
+            
+                <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
+            
+                <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+            
+                <li><a href="../classes/ButtonU.html">ButtonU</a></li>
+            
+                <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.linktooltip.html">CKEDITOR.plugins.linktooltip</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.uiloader.html">CKEDITOR.plugins.uiloader</a></li>
+            
+                <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+            
+                <li><a href="../classes/LinkTooltip.html">LinkTooltip</a></li>
+            
+                <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+            
+                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+            
+                <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
+            
+                <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules tab-pane">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+    <h1>ButtonTwitter <small>Class</small></h1>
+</div>
+
+<div class="well well-small">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_ui_yui_src_buttons_button-twitter.js.html#l6"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-twitter.js:6</code></a>
+        </div>
+    
+
+    
+
+    
+</div>
+
+
+
+<div class="well well-small intro">
+    <p>The ButtonTwitter class provides functionality for sending tweets based on the selected text.</p>
+
+</div>
+
+
+
+<div id="classdocs">
+    <ul class="api-class-tabs nav nav-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index tab-pane">
+            <h2 class="off-left">Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__onClick">_onClick</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_updateUI">updateUI</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+                <div class="index-section attrs tab-pane">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_toggle">toggle</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_tweetURL">tweetURL</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_windowProperties">windowProperties</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_windowTitle">windowTitle</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__onClick" class="method item protected">
+    <h3 class="name"><code>_onClick</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-twitter.js.html#l23"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-twitter.js:23</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reads the selected text from the editor and opens a browser window so the
+user will be able to tweet directly the text.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_updateUI" class="method item">
+    <h3 class="name"><code>updateUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-twitter.js.html#l12"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-twitter.js:12</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Overwrites the default behaviour of ButtonBase&#39;s
+<a href="../classes/ButtonBase.html#method_updateUI" class="crosslink">updateUI</a> method since
+this button does is not toggleable.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel tab-pane">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_toggle" class="attr item">
+    <a name="config_toggle"></a> 
+    <h3 class="name"><code>toggle</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-twitter.js.html#l49"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-twitter.js:49</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies if the button is toggleable, or not. ButtonTwitter will be not toggleable by default.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>toggleChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>toggle</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_tweetURL" class="attr item">
+    <a name="config_tweetURL"></a> 
+    <h3 class="name"><code>tweetURL</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-twitter.js.html#l63"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-twitter.js:63</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the URL where user can tweet the selected text.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;https://twitter.com/intent/tweet?text=&#x27;</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>tweetURLChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>tweetURL</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_windowProperties" class="attr item">
+    <a name="config_windowProperties"></a> 
+    <h3 class="name"><code>windowProperties</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-twitter.js.html#l75"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-twitter.js:75</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the properties of the browser window where the selected text
+will appear.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;resizable,status,width=400,height=250&#x27;</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>windowPropertiesChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>windowProperties</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_windowTitle" class="attr item">
+    <a name="config_windowTitle"></a> 
+    <h3 class="name"><code>windowTitle</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_buttons_button-twitter.js.html#l88"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-twitter.js:88</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies the title of the browser window where the selected text
+will appear.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&#x27;</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>windowTitleChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>windowTitle</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

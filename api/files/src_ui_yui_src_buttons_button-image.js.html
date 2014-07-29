@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/yui/src/buttons/button-image.js - AlloyEditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="AlloyEditor" src="../assets/img/logo-small.png" title="AlloyEditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>0.1.0</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview">
+        <ul class="nav nav-tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes tab-pane">
+            
+                <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+            
+                <li><a href="../classes/ButtonA.html">ButtonA</a></li>
+            
+                <li><a href="../classes/ButtonBase.html">ButtonBase</a></li>
+            
+                <li><a href="../classes/ButtonEm.html">ButtonEm</a></li>
+            
+                <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+            
+                <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+            
+                <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+            
+                <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
+            
+                <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
+            
+                <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
+            
+                <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+            
+                <li><a href="../classes/ButtonU.html">ButtonU</a></li>
+            
+                <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.linktooltip.html">CKEDITOR.plugins.linktooltip</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+            
+                <li><a href="../classes/CKEDITOR.plugins.uiloader.html">CKEDITOR.plugins.uiloader</a></li>
+            
+                <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+            
+                <li><a href="../classes/LinkTooltip.html">LinkTooltip</a></li>
+            
+                <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+            
+                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+            
+                <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
+            
+                <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules tab-pane">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+  <h1><small>File</small> <code>src/ui/yui/src/buttons/button-image.js</code></h1>
+</div>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+YUI.add(&#x27;button-image&#x27;, function(Y) {
+    &#x27;use strict&#x27;;
+
+    var Lang = Y.Lang;
+
+    /**
+     * The ButtonImage class provides functionality for adding an image to the editor.
+     *
+     * @class ButtonImage
+     */
+
+    /**
+     * Fired when an image file is added as an element in the editor.
+     *
+     * @event imageadd
+     * @param {CKEDITOR.dom.element} el The created img element in editor.
+     */
+    var BtnImage = Y.Base.create(&#x27;image&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        /**
+         * Creates an input element of type &quot;file&quot; if not already created and registers
+         * an event on input value change.
+         *
+         * @method _getInputFile
+         * @protected
+         */
+        _getInputFile: function() {
+            var id,
+                inputFile;
+
+            inputFile = this._inputFile;
+
+            if (!inputFile) {
+                id = Y.guid();
+
+                Y.one(&#x27;body&#x27;).prepend(&#x27;&lt;input type=&quot;file&quot; id=&quot;&#x27; + id + &#x27;&quot;  style=&quot;display: none;&quot;&gt;&lt;/input&gt;&#x27;);
+
+                inputFile = Y.one(&#x27;#&#x27; + id);
+
+                inputFile.on(&#x27;change&#x27;, this._onInputChange, this);
+
+                this._inputFile = inputFile;
+            }
+
+            return inputFile;
+        },
+
+        /**
+         * Simulates &quot;click&quot; event on the input field when user presses the button. This
+         * triggers the native open file dialog from the browser. This method works on IE9+ only.
+         *
+         * @method _onClick
+         * @protected
+         * @param {EventFacade} event Event that triggered when user clicked on the button.
+         */
+        _onClick: function() {
+            var inputFile = this._getInputFile();
+
+            inputFile.simulate(&#x27;click&#x27;);
+        },
+
+        /**
+         * On input change, reads the chosen file and creates an img element with src as Data URI.
+         * Then, fires an {{#crossLink &quot;ButtonImage/imageadd:event&quot;}}{{/crossLink}} via CKEditor
+         * message system.
+         *
+         * @method _onInputChange
+         * @protected
+         */
+        _onInputChange: function() {
+            var instance = this,
+                editor,
+                inputFile,
+                el,
+                reader;
+
+            reader = new FileReader();
+
+            reader.onload = function(event) {
+                editor = instance.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
+
+                el = CKEDITOR.dom.element.createFromHtml(&#x27;&lt;img src=&quot;&#x27; + event.target.result + &#x27;&quot;&gt;&#x27;);
+
+                editor.insertElement(el);
+
+                editor.fire(&#x27;imageadd&#x27;, el);
+            };
+
+            inputFile = this._inputFile;
+
+            reader.readAsDataURL(inputFile.getDOMNode().files[0]);
+
+            inputFile.set(&#x27;value&#x27;, &#x27;&#x27;);
+        },
+
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-image&quot;&gt;&lt;/i&gt;&#x27;
+    }, {
+        NAME: &#x27;image&#x27;,
+
+        NS: &#x27;image&#x27;,
+
+        ATTRS: {
+            /**
+             * Specifies if this button will be toggleable, or not.
+             * ButtonImage will be not toggleable by default.
+             *
+             * @attribute toggle
+             * @default false
+             * @type Boolean
+             * @writeOnce &#x27;initOnly&#x27;
+             */
+            toggle: {
+                validator: Lang.isBoolean,
+                value: false,
+                writeOnce: &#x27;initOnly&#x27;
+            }
+        }
+    });
+
+    Y.ButtonImage = BtnImage;
+
+}, &#x27;&#x27;, {
+    requires: [&#x27;button-base&#x27;, &#x27;node-event-simulate&#x27;]
+});
+    </pre>
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>
