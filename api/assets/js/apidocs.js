@@ -6,7 +6,7 @@ function (Y) {
 var win          = Y.config.win,
     localStorage = win.localStorage,
 
-    bdNode = Y.one('#bd'),
+    docsMainNode = Y.one('#docs-main'),
 
     pjax,
     defaultRoute,
@@ -23,7 +23,7 @@ if (!Y.getLocation().protocol.match(/^https?\:/)) {
 // on the loaded content.
 defaultRoute = Y.Pjax.defaultRoute.concat(function (req, res, next) {
     prettyPrint();
-    bdNode.removeClass('loading');
+    docsMainNode.removeClass('loading');
 
     next();
 });
@@ -66,7 +66,7 @@ pjax = new Y.Pjax({
 // -- Utility Functions --------------------------------------------------------
 
 pjax.checkVisibility = function (tab) {
-    tab || (tab = selectedTab);
+    tab = tab || (tab = selectedTab);
 
     if (!tab) { return; }
 
@@ -231,7 +231,7 @@ pjax.updateTabState = function (src) {
                 if (classTabView.get('rendered')) {
                     Y.Widget.getByNode(tab).set('selected', 1);
                 } else {
-                    tab.addClass('yui3-tab-selected');
+                    tab.addClass('tab-selected');
                 }
             }
         }
@@ -255,7 +255,7 @@ pjax.updateTabState = function (src) {
         if (classTabView.get('rendered')) {
             Y.Widget.getByNode(tab).set('selected', 1);
         } else {
-            tab.addClass('yui3-tab-selected');
+            tab.addClass('tab-selected');
         }
     }
 };
@@ -284,7 +284,7 @@ pjax.handleClasses = function (req, res, next) {
     var status = res.ioResponse.status;
 
     // Handles success and local filesystem XHRs.
-    if (res.ioResponse.readyState === 4 && (!status || (status >= 200 && status < 300))) {
+    if (!status || (status >= 200 && status < 300)) {
         pjax.initClassTabView();
     }
 
@@ -295,7 +295,7 @@ pjax.handleFiles = function (req, res, next) {
     var status = res.ioResponse.status;
 
     // Handles success and local filesystem XHRs.
-    if (res.ioResponse.readyState === 4 && (!status || (status >= 200 && status < 300))) {
+    if (!status || (status >= 200 && status < 300)) {
         pjax.initLineNumbers();
     }
 
@@ -310,7 +310,7 @@ pjax.onNavigate = function (e) {
         tab;
 
     if (hash) {
-        tab = originTarget && originTarget.ancestor('.yui3-tab', true);
+        tab = originTarget && originTarget.ancestor('.nav-tabs', true);
 
         if (hash === win.location.hash) {
             pjax.updateTabState('hashchange');
@@ -325,10 +325,10 @@ pjax.onNavigate = function (e) {
     // Only scroll to the top of the page when the URL doesn't have a hash.
     this.set('scrollToTop', !e.url.match(/#.+$/));
 
-    bdNode.addClass('loading');
+    docsMainNode.addClass('loading');
 };
 
-pjax.onOptionClick = function (e) {
+pjax.onOptionClick = function () {
     pjax.updateVisibility();
 };
 
@@ -363,7 +363,7 @@ Y.APIList.rootPath = pjax.get('root');
 
 Y.one('#api-options').delegate('click', pjax.onOptionClick, 'input');
 
-Y.on('hashchange', function (e) {
+Y.on('hashchange', function () {
     pjax.updateTabState('hashchange');
 }, win);
 

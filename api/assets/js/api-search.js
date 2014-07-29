@@ -44,7 +44,7 @@ Y.APISearch = Y.Base.create('apiSearch', Y.Base, [Y.AutoCompleteBase], {
                 desc = Y.Escape.html(desc);
             }
 
-            raw['class'] || (raw['class'] = '');
+            raw['class'] = raw['class'] || (raw['class'] = '');
             raw.description = desc;
 
             // Use the highlighted result name.

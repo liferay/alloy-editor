@@ -25,8 +25,7 @@ html {
 }
 
 body {
-    /*font: 13px/1.4 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', 'Bitstream Vera Sans', 'Helvetica', 'Arial', sans-serif;*/
-    font: 13px/1.4 'Helvetica', 'Arial', sans-serif;
+    font-size: 12px;
     margin: 0;
     padding: 0;
 }
@@ -95,10 +94,9 @@ h5, h6 { font-size: 107.692%; }
 code, kbd, pre, samp {
     font-family: Menlo, Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
     font-size: 92.308%;
-    line-height: 1.35;
 }
 
-p code, p kbd, p samp, li code {
+p code, p kbd, p samp {
     background: #FCFBFA;
     border: 1px solid #EFEEED;
     padding: 0 3px;
@@ -192,11 +190,6 @@ th {
 
 .sidebar {
     padding: 0 15px 0 10px;
-}
-#bd {
-    padding: 7px 0 130px;
-    position: relative;
-    width: 99%;
 }
 
 /* -- Table of Contents ----------------------------------------------------- */
@@ -311,13 +304,13 @@ abbr {
     cursor: help;
 }
 
-.prettyprint li.L0, 
-.prettyprint li.L1, 
-.prettyprint li.L2, 
-.prettyprint li.L3, 
-.prettyprint li.L5, 
-.prettyprint li.L6, 
-.prettyprint li.L7, 
+.prettyprint li.L0,
+.prettyprint li.L1,
+.prettyprint li.L2,
+.prettyprint li.L3,
+.prettyprint li.L5,
+.prettyprint li.L6,
+.prettyprint li.L7,
 .prettyprint li.L8 {
     list-style: decimal;
 }
@@ -451,14 +444,12 @@ h2, h3, h4, h5, h6 {
 }
 
 /* Loading spinners. */
-#bd.loading .apidocs,
-#api-list.loading .yui3-tabview-panel {
+#docs-main.loading {
     background: #fff url(../img/spinner.gif) no-repeat center 70px;
     min-height: 150px;
 }
 
-#bd.loading .apidocs .content,
-#api-list.loading .yui3-tabview-panel .apis {
+#docs-main.loading .content {
     display: none;
 }
 
@@ -505,7 +496,6 @@ kbd .cmd { font-family: Monaco, Helvetica; }
 }
 
 /* -- Generic Item Index styles --------------------------------------------- */
-.apidocs .index { margin: 1.5em 0 3em; }
 
 .apidocs .index h3 {
     border-bottom: 1px solid #efefef;
@@ -573,8 +563,8 @@ kbd .cmd { font-family: Monaco, Helvetica; }
 
 .apidocs .item {
     border-bottom: 1px solid #efefef;
-    margin: 1.5em 0 2em;
-    padding-bottom: 2em;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .apidocs .item h4,
@@ -623,6 +613,10 @@ kbd .cmd { font-family: Monaco, Helvetica; }
     padding: 0;
 }
 
+.apidocs .param .param-description {
+    padding-top: 2px;
+}
+
 .apidocs .param { margin-bottom: 1em; }
 
 .apidocs .param .type,
@@ -654,6 +648,10 @@ kbd .cmd { font-family: Monaco, Helvetica; }
 .apidocs .constructor .item {
     border: none;
     padding-bottom: 0;
+}
+
+.apidocs .constructor {
+    padding-bottom: 10px;
 }
 
 /* -- File Source View ------------------------------------------------------ */
@@ -719,12 +717,12 @@ kbd .cmd { font-family: Monaco, Helvetica; }
 }
 
 /* -- API options ----------------------------------------------------------- */
-#api-options {
+/*#api-options {
     font-size: 11px;
     margin-top: 2.2em;
     position: absolute;
     right: 1.5em;
-}
+}*/
 
 /*#api-options label { margin-right: 0.6em; }*/
 
@@ -761,6 +759,7 @@ kbd .cmd { font-family: Monaco, Helvetica; }
     border-radius: 3px;
     color: #333;
     outline: none;
+    text-decoration: none;
 }
 
 .api-list-item a:hover,
@@ -779,5 +778,102 @@ kbd .cmd { font-family: Monaco, Helvetica; }
 
 .api-list-item .yui3-highlight {
     font-weight: bold;
+}
+
+.form-inline label {
+    line-height: 20px;
+}
+
+/* -- Navigation Bar -------------------------------------------------------- */
+
+.navbar .nav {
+    margin-left: -50px;
+}
+
+.navbar .navbar-inner .brand {
+    margin: 0;
+    cursor: default;
+    padding: 10px 5px 10px 16px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.navbar-text {
+    font-size: 12px;
+    padding-left: 5px;
+    cursor: default;
+    line-height: 45px !important;
+}
+
+.navbar-form {
+    margin-right: 3px;
+}
+
+#api-options {
+    margin-top: 20px;
+    padding-right: 20px;
+    font-size: 12px;
+}
+
+#api-options label {
+    font-size: 12px;
+}
+
+#api-options input {
+    vertical-align: top;
+}
+
+/* -- Sidebar --------------------------------------------------------------- */
+
+#sidebar .tab-content {
+    border: 1px solid #DFDFDF;
+    border-top: 0px;
+    padding-bottom: 5px;
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+
+#api-tabview-filter input {
+    width: 94.5%;
+}
+
+#api-tabview ul {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#sidebar .tab-pane li a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#sidebar .tab-pane li a:hover,
+#sidebar .tab-pane li a:focus {
+    outline: 0;
+    border: 0;
+    text-decoration: none;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    background-color: #0088cc;
+}
+
+/* -- Content --------------------------------------------------------------- */
+
+#docs-main {
+    margin-top: 65px;
+}
+
+.content {
+    padding-bottom: 50px;
+}
+
+.content .page-header h1 small {
+    padding-left: 5px;
+}
+
+.content .well:not(.moduledesc) p {
+    margin: 9px 0;
 }
 
