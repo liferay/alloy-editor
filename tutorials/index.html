@@ -83,12 +83,6 @@
       
         
           
-            <li><a href="/alloy-editor/tutorials/how-it-works"><i class="icon-chevron-right"></i> How it works?</a></li>
-          
-        
-      
-        
-          
             <li><a href="/alloy-editor/tutorials/how-to-build-it"><i class="icon-chevron-right"></i> How to build it?</a></li>
           
         
@@ -106,15 +100,17 @@
         
       
         
+          
+            <li><a href="/alloy-editor/tutorials/toolbar-configuration"><i class="icon-chevron-right"></i> Toolbar configuration</a></li>
+          
+        
       
         
       
     </ul>
 
-    <p class="related">List of modules</p>
+    <p class="related">Create UI elements</p>
     <ul class="nav nav-list bs-docs-sidenav affix-top">
-      
-        
       
         
       
@@ -135,16 +131,12 @@
         
       
         
-          
-            <li><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create UI</a></li>
-          
-        
       
         
       
         
           
-            <li><a href="/alloy-editor/tutorials/toolbar_config"><i class="icon-chevron-right"></i> Toolbar Configuration</a></li>
+            <li><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create entirely new UI</a></li>
           
         
       
@@ -172,9 +164,12 @@
 
 <h4>2. Add YUI3 or AlloyUI seed file to the page.</h4>
 
-<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
-or
+The line below will add AlloyUI to the page:
 <pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://cdn.alloyui.com/2.5.0/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+
+but if you prefer to use YUI3 instead, replace the above with the following:
+
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
 
 <hr>
 
@@ -226,25 +221,15 @@ Aloy Editor comes with optimized version of CKEditor. Many plugins were removed.
 
 "extraPlugins" config property is a list with the default plugins from Alloy Editor. However, you can customize these. For example, if you don't want the plugin for adding images via D&D, then just remove "dropimages" from "extraPlugins" property.
 
-<div id="myCarousel">
-  <div class="aui-carousel-item" style="background: url(/alloy-editor/carousel/img/1.jpg);"></div>
-  <div class="aui-carousel-item" style="background: url(/alloy-editor/carousel/img/2.jpg);"></div>
-  <div class="aui-carousel-item" style="background: url(/alloy-editor/carousel/img/3.jpg);"></div>
-  <div class="aui-carousel-item" style="background: url(/alloy-editor/carousel/img/4.jpg);"></div>
-</div>
-
 <div class="row">
   <div class="span9 title">
-    <p class="call">and this is just the beginning!</p>
+    <p class="call">but that is not everything!</p>
   </div>
 </div>
 
 <div class="row">
-  <p style="text-align: center; margin-bottom: 25px;">Go ahead and navigate between other components using the list on the left.</p>
+  <p style="text-align: center; margin-bottom: 25px;">Go ahead and check the configuration options, or the architecture of the editor using the list on the left.</p>
 </div>
-
-<link rel="stylesheet" href="/alloy-editor/carousel/css/basic.css" />
-<script src="/alloy-editor/website/js/tutorial-demo.js"></script>
 
     
 

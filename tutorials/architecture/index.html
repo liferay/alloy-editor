@@ -83,12 +83,6 @@
       
         
           
-            <li><a href="/alloy-editor/tutorials/how-it-works"><i class="icon-chevron-right"></i> How it works?</a></li>
-          
-        
-      
-        
-          
             <li><a href="/alloy-editor/tutorials/how-to-build-it"><i class="icon-chevron-right"></i> How to build it?</a></li>
           
         
@@ -106,15 +100,17 @@
         
       
         
+          
+            <li><a href="/alloy-editor/tutorials/toolbar-configuration"><i class="icon-chevron-right"></i> Toolbar configuration</a></li>
+          
+        
       
         
       
     </ul>
 
-    <p class="related">List of modules</p>
+    <p class="related">Create UI elements</p>
     <ul class="nav nav-list bs-docs-sidenav affix-top">
-      
-        
       
         
       
@@ -135,16 +131,12 @@
         
       
         
-          
-            <li><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create UI</a></li>
-          
-        
       
         
       
         
           
-            <li><a href="/alloy-editor/tutorials/toolbar_config"><i class="icon-chevron-right"></i> Toolbar Configuration</a></li>
+            <li><a href="/alloy-editor/tutorials/ui"><i class="icon-chevron-right"></i> Create entirely new UI</a></li>
           
         
       
@@ -164,11 +156,17 @@
     
 
     <h3 id="the-core">The core</h3>
+<p>Built on top of CKEditor</p>
 <p>AlloyEditor uses CKEditor under the hood to deal with the HTML. Browsers still generate very inconsistent HTML, not to mention how buggy they are. In fact, to create an editor, which is able to handle all browsers, let&#39;s say IE9+, Chrome, Firefox and Safari, is very challenging. Fortunately, CKEditor does it well, so it was the natural choice not only because of that, but because it is mature, well documented and configurable.
 Not everything from CKEditor is being used. In fact, AlloyEditor uses only the core from it. The whole UI has been discarded and the version of CKEditor which comes in AlloyEditor is twice smaller than the version OOTB.</p>
+<hr>
+
+<p>Plugins and UI Core</p>
 <p>On top of what CKEditor provides, new plugins and modules were created, which form the core of AlloyEditor.
 Among these plugins is a plugin, which adds new functions which provide information about the selection - its regions, direction and so on. This is the key part and that is what allows the Toolbars to display themselves just above or below the selection. Other plugins are related to Drag&amp;Drop of images directly in the editor, or they provide common API for creating, editing and removing links and so on.</p>
 <p>There is no much dependency of CKEditor in AlloyEditor. If there is better base, or if we reach the point when creation of new core would be easier but we still will be able to support the majority of the browsers, nothing prevents us of replacing CKEditor core with our own.</p>
+<hr>
+
 <h3 id="the-ui">The UI</h3>
 <p>The UI has been thought in the way that it should provide the following functionality:</p>
 <ul>
