@@ -53,26 +53,40 @@
                 },
 
                 /**
-                 * Attaches event listeners such as mouseenter on link elements. Links, which have
-                 * "data-cke-default-link" attribute will be ignored. These links are considered as
-                 * internal; they are being created by automatically when user triggers link creation.
+                 * Attaches event listeners such as mousemove in order to track movement overlink elements.
+                 * Links, which have "data-cke-default-link" attribute will be ignored. These links are considered as
+                 * internal; they are being created automatically when user triggers link creation.
                  * See {{#crossLink "ButtonA/_onClick:method"}}{{/crossLink}} for more information.
+                 * The attached mousemove listener is debounced with 100 ms delay.
                  *
                  * @method bindUI
                  * @protected
                  */
                 bindUI: function() {
-                    var editor;
+                    var editable,
+                        editor;
 
                     this._bindBBMouseEnter();
 
                     editor = this.get('editor');
 
-                    this._eventHandles.push(
-                        Y.one(editor.element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]:not([data-cke-default-link])', this, editor)
-                    );
+                    // FIXME: Here we use mousemove and check manually if we are entering a link or not.
+                    // This is because as soon as we do:
+                    // Y.one(editor.element.$).delegate('mouseenter', this._onLinkMouseEnter,
+                    //    'a[href]:not([data-cke-default-link])', this, editor)
+                    // then toggling strong elements does not work at all.
+                    //
+                    // The second issue is with YUI's 'clickoutside' module.
+                    // If we do that one:
+                    // this.get('boundingBox').on('clickoutside', this._onClickOutside, this);
+                    // then we suddenly have ids to the strong elements, and CKEditor can't remove them.
 
-                    this.get('boundingBox').on('clickoutside', this._onClickOutside, this);
+                    editable = editor.editable();
+
+                    this._eventHandles.push(
+                        editable.on('mousemove', CKEDITOR.tools.debounce(this._onMouseMove, 100, this)),
+                        editable.on('click', this._onClickOutside, this)
+                    );
                 },
 
                 /**
@@ -116,6 +130,8 @@
                     this._hideHandle = setTimeout(
                         function() {
                             instance.hide();
+
+                            instance._link = null;
                         },
                         this.get('hideTimeout')
                     );
@@ -139,13 +155,14 @@
                         line,
                         lineHeight,
                         lines,
-                        region;
+                        region,
+                        scrollPos;
 
                     lineHeight = parseInt(link.getComputedStyle('lineHeight'), 10);
 
                     gutter = this.get('gutter');
 
-                    region = link.get('region');
+                    region = link.getClientRect();
 
                     gutter = gutter.top;
 
@@ -167,7 +184,9 @@
                         y = region.bottom + gutter;
                     }
 
-                    return [x, y];
+                    scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
+
+                    return [x + scrollPos.x, y + scrollPos.y];
                 },
 
                 /**
@@ -202,49 +221,73 @@
                  * @method _onClickOutside
                  * @protected
                  */
-                _onClickOutside: function() {
+                _onClickOutside: function(event) {
+                    var boundingBox,
+                        target;
+
+                    target = event.data.getTarget().$;
+
+                    boundingBox = this.get('boundingBox');
+
+                    if (target === boundingBox.getDOMNode() || boundingBox.contains(target)) {
+                        return;
+                    }
+
+                    this._link = null;
+
                     this.hide();
                 },
 
                 /**
-                 * Reads the link href, updates tooltip content with the read value,
+                 * Checks if the target is a link and it is not link with attribute "data-cke-default-link".
+                 * If so, reads the link href, updates tooltip content with href value,
                  * shows the tooltip and attaches mouse leave listener on the boundingBox.
                  *
-                 * @method _onLinkMouseEnter
+                 * @method _onMouseMove
                  * @protected
-                 * @param {EventFacade} event Event that triggered when user positioned the mouse over the link.
+                 * @param {EventFacade} event Event that triggered when user moves the mouse.
                  */
-                _onLinkMouseEnter: function(event) {
+                _onMouseMove: function(event) {
                     var instance = this,
+                        eventData,
                         link,
                         linkText,
+                        target,
                         xy;
 
-                    if (this._editMode) {
+                    target = event.data.getTarget();
+
+                    if (target.$ === instance._link) {
                         return;
                     }
 
-                    clearTimeout(instance._hideHandle);
+                    if (target.getName() === 'a' && target.getAttribute('href') && !target.hasAttribute('data-cke-default-link')) {
+                        instance._link = target.$;
 
-                    link = event.currentTarget;
-
-                    linkText = link.getAttribute('href');
-
-                    this._linkPreview.setAttribute('href', linkText);
-
-                    this._linkPreview.set('innerHTML', Y.Escape.html(linkText));
-
-                    instance.show();
-
-                    xy = instance._getXY(event.pageX, event.pageY, link);
-
-                    instance.set('xy', xy);
-
-                    link.once('mouseleave', function() {
                         clearTimeout(instance._hideHandle);
 
-                        instance._attachHiddenHandle();
-                    });
+                        link = target;
+
+                        linkText = link.getAttribute('href');
+
+                        instance._linkPreview.setAttribute('href', linkText);
+
+                        instance._linkPreview.set('innerHTML', Y.Escape.html(linkText));
+
+                        instance.show();
+
+                        eventData = event.data.$;
+
+                        xy = instance._getXY(eventData.pageX, eventData.pageY, link);
+
+                        instance.set('xy', xy);
+
+                        link.once('mouseleave', function() {
+                            clearTimeout(instance._hideHandle);
+
+                            instance._attachHiddenHandle();
+                        });
+                    }
                 },
 
                 BOUNDING_TEMPLATE: '<div class="alloy-editor-tooltip-link"></div>',
@@ -316,7 +359,7 @@
         Y.LinkTooltip = LinkTooltip;
 
     }, '', {
-        requires: ['dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+        requires: ['escape', 'event-mouseenter', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
     });
 
     /**
