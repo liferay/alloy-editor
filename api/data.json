@@ -482,7 +482,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 322,
+            "line": 365,
             "description": "CKEDITOR plugin which allows displaying tooltip over links in the editor.\nInternally it uses {{#crossLink \"LinkTooltip\"}}{{/crossLink}}. You may specify all\nproperties which {{#crossLink \"LinkTooltip\"}}{{/crossLink}} accepts via editor.config.linktooltip property."
         },
         "CKEDITOR.plugins.uiloader": {
@@ -720,7 +720,7 @@
         },
         {
             "file": "src/core/selection-region.js",
-            "line": 148,
+            "line": 144,
             "description": "Returns data for the current selection.",
             "itemtype": "method",
             "name": "getSelectionData",
@@ -732,7 +732,7 @@
         },
         {
             "file": "src/core/selection-region.js",
-            "line": 173,
+            "line": 169,
             "description": "Returns the region of the current selection.",
             "itemtype": "method",
             "name": "getSelectionRegion",
@@ -744,7 +744,7 @@
         },
         {
             "file": "src/core/selection-region.js",
-            "line": 201,
+            "line": 197,
             "description": "Returns true if the current selection is empty, false otherwise.",
             "itemtype": "method",
             "name": "isSelectionEmpty",
@@ -756,7 +756,7 @@
         },
         {
             "file": "src/core/selection-region.js",
-            "line": 215,
+            "line": 211,
             "description": "Returns object with data about the [client rectangles](https://developer.mozilla.org/en-US/docs/Web/API/Element.getClientRects) of the selection,\nnormalized across browses. All offsets below are in page coordinates.",
             "itemtype": "method",
             "name": "getClientRectsRegion",
@@ -768,21 +768,7 @@
         },
         {
             "file": "src/core/selection-region.js",
-            "line": 337,
-            "description": "Retrieves document scrollX and scrollY in an array.",
-            "itemtype": "method",
-            "name": "_getDocScrollXY",
-            "access": "protected",
-            "tagname": "",
-            "return": {
-                "description": "Returns an array with two items - document scrollX and scrollY in page coordinates.",
-                "type": "Array"
-            },
-            "class": "CKEDITOR.plugins.selectionregion"
-        },
-        {
-            "file": "src/core/selection-region.js",
-            "line": 364,
+            "line": 329,
             "description": "Retrieves the direction of the selection. The direction is from top to bottom or from bottom to top.\nFor IE < 9 it is not possible, so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.",
             "itemtype": "method",
             "name": "_getSelectionDirection",
@@ -796,7 +782,7 @@
         },
         {
             "file": "src/core/selection-region.js",
-            "line": 400,
+            "line": 365,
             "description": "Initializer lifecycle implementation for the SelectionRegion plugin.",
             "itemtype": "method",
             "name": "init",
@@ -1833,7 +1819,7 @@
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
             "line": 55,
-            "description": "Attaches event listeners such as mouseenter on link elements. Links, which have\n\"data-cke-default-link\" attribute will be ignored. These links are considered as\ninternal; they are being created by automatically when user triggers link creation.\nSee {{#crossLink \"ButtonA/_onClick:method\"}}{{/crossLink}} for more information.",
+            "description": "Attaches event listeners such as mousemove in order to track movement overlink elements.\nLinks, which have \"data-cke-default-link\" attribute will be ignored. These links are considered as\ninternal; they are being created automatically when user triggers link creation.\nSee {{#crossLink \"ButtonA/_onClick:method\"}}{{/crossLink}} for more information.\nThe attached mousemove listener is debounced with 100 ms delay.",
             "itemtype": "method",
             "name": "bindUI",
             "access": "protected",
@@ -1842,7 +1828,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 78,
+            "line": 92,
             "description": "Adds mouseleave listener to the boundingBox.",
             "itemtype": "method",
             "name": "_bindBBMouseLeave",
@@ -1852,7 +1838,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 92,
+            "line": 106,
             "description": "Adds mouseenter listener to the boundingBox.",
             "itemtype": "method",
             "name": "_bindBBMouseEnter",
@@ -1862,7 +1848,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 106,
+            "line": 120,
             "description": "Hides the linktooltip container after some timeout, specified by\n{{#crossLink \"LinkTooltip/hideTimeout:attribute\"}}{{/crossLink}} attribute.",
             "itemtype": "method",
             "name": "_attachHiddenHandle",
@@ -1872,7 +1858,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 124,
+            "line": 140,
             "description": "Calculates and returns the most appropriate position where link tooltip should appear.\nThe position depends on the specified {{#crossLink \"LinkTooltip/gutter:attribute\"}}{{/crossLink}},\nand on the fact if the link occupies more than one line in the editor.",
             "itemtype": "method",
             "name": "_getXY",
@@ -1899,7 +1885,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 173,
+            "line": 192,
             "description": "Handles mouse enter event on the boundingBox.\nClears any already started hide handle and attaches mouse leave listener to the boundingBox.",
             "itemtype": "method",
             "name": "_onBBMouseEnter",
@@ -1909,7 +1895,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 186,
+            "line": 205,
             "description": "Handles mouse leave event on the boundingBox.\nClears any already started hide handle and attaches it again.",
             "itemtype": "method",
             "name": "_onBBMouseEnter",
@@ -1919,7 +1905,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 199,
+            "line": 218,
             "description": "Hides the tooltip on clicking outside of the boundingBox.",
             "itemtype": "method",
             "name": "_onClickOutside",
@@ -1929,16 +1915,16 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 209,
-            "description": "Reads the link href, updates tooltip content with the read value,\nshows the tooltip and attaches mouse leave listener on the boundingBox.",
+            "line": 241,
+            "description": "Checks if the target is a link and it is not link with attribute \"data-cke-default-link\".\nIf so, reads the link href, updates tooltip content with href value,\nshows the tooltip and attaches mouse leave listener on the boundingBox.",
             "itemtype": "method",
-            "name": "_onLinkMouseEnter",
+            "name": "_onMouseMove",
             "access": "protected",
             "tagname": "",
             "params": [
                 {
                     "name": "event",
-                    "description": "Event that triggered when user positioned the mouse over the link.",
+                    "description": "Event that triggered when user moves the mouse.",
                     "type": "EventFacade"
                 }
             ],
@@ -1946,7 +1932,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 260,
+            "line": 303,
             "description": "Specifies whether the toolbar show be constrained to some node or to the viewport.",
             "itemtype": "attribute",
             "name": "constrain",
@@ -1956,7 +1942,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 272,
+            "line": 315,
             "description": "Contains the native editor implementation.",
             "itemtype": "attribute",
             "name": "editor",
@@ -1966,7 +1952,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 283,
+            "line": 326,
             "description": "Specifies the gutter of the tooltip. The gutter object contains the top and left\noffsets from the point, where the tooltip is supposed to appear.",
             "itemtype": "attribute",
             "name": "gutter",
@@ -1976,7 +1962,7 @@
         },
         {
             "file": "src/ui/yui/src/plugins/linktooltip.js",
-            "line": 302,
+            "line": 345,
             "description": "Specifies the timeout after which the link tooltip will be hidden.",
             "itemtype": "attribute",
             "name": "hideTimeout",
