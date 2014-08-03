@@ -98,5 +98,13 @@
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-image.js',
         requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base']
+    },
+
+    'selector-patch': {
+        condition: {
+            trigger: 'selector-native'
+        },
+        group: 'AlloyEditor',
+        path: 'plugins/selector-patch.js'
     }
 }
