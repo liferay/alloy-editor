@@ -252,7 +252,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__onMouseMove">_onMouseMove</a>
+                                <a href="#method__onLinkMouseEnter">_onLinkMouseEnter</a>
 
                                 
                                 
@@ -360,7 +360,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l120"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:120</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l106"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:106</code></a>
         
         </p>
 
@@ -418,7 +418,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l106"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:106</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l92"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:92</code></a>
         
         </p>
 
@@ -475,7 +475,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l92"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:92</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l78"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:78</code></a>
         
         </p>
 
@@ -554,7 +554,7 @@ The class will be also registered as CKEDITOR plugin - <a href="../classes/CKEDI
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l140"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:140</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l124"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:124</code></a>
         
         </p>
 
@@ -670,7 +670,7 @@ returns {Array} An Array with the most appropriate x and y points in page coordi
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l205"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:205</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l186"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:186</code></a>
         
         </p>
 
@@ -728,7 +728,7 @@ Clears any already started hide handle and attaches it again.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l192"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:192</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l173"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:173</code></a>
         
         </p>
 
@@ -786,7 +786,7 @@ Clears any already started hide handle and attaches mouse leave listener to the 
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l218"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:218</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l199"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:199</code></a>
         
         </p>
 
@@ -809,8 +809,8 @@ Clears any already started hide handle and attaches mouse leave listener to the 
 </div>
 
                 
-                    <div id="method__onMouseMove" class="method item protected">
-    <h3 class="name"><code>_onMouseMove</code></h3>
+                    <div id="method__onLinkMouseEnter" class="method item protected">
+    <h3 class="name"><code>_onLinkMouseEnter</code></h3>
 
     
         <div class="args">
@@ -853,7 +853,7 @@ Clears any already started hide handle and attaches mouse leave listener to the 
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l241"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:241</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l209"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:209</code></a>
         
         </p>
 
@@ -864,8 +864,7 @@ Clears any already started hide handle and attaches mouse leave listener to the 
     </div>
 
     <div class="description">
-        <p>Checks if the target is a link and it is not link with attribute &quot;data-cke-default-link&quot;.
-If so, reads the link href, updates tooltip content with href value,
+        <p>Reads the link href, updates tooltip content with the read value,
 shows the tooltip and attaches mouse leave listener on the boundingBox.</p>
 
     </div>
@@ -885,7 +884,7 @@ shows the tooltip and attaches mouse leave listener on the boundingBox.</p>
                     
 
                     <div class="param-description">
-                        <p>Event that triggered when user moves the mouse.</p>
+                        <p>Event that triggered when user positioned the mouse over the link.</p>
 
                     </div>
 
@@ -947,11 +946,10 @@ shows the tooltip and attaches mouse leave listener on the boundingBox.</p>
     </div>
 
     <div class="description">
-        <p>Attaches event listeners such as mousemove in order to track movement overlink elements.
-Links, which have "data-cke-default-link" attribute will be ignored. These links are considered as
-internal; they are being created automatically when user triggers link creation.
-See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick</a> for more information.
-The attached mousemove listener is debounced with 100 ms delay.</p>
+        <p>Attaches event listeners such as mouseenter on link elements. Links, which have
+"data-cke-default-link" attribute will be ignored. These links are considered as
+internal; they are being created by automatically when user triggers link creation.
+See <a href="../classes/ButtonA.html#method__onClick" class="crosslink">_onClick</a> for more information.</p>
 
     </div>
 
@@ -1208,7 +1206,7 @@ The attached mousemove listener is debounced with 100 ms delay.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l303"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:303</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l260"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:260</code></a>
         
         </p>
 
@@ -1313,7 +1311,7 @@ The attached mousemove listener is debounced with 100 ms delay.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l315"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:315</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l272"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:272</code></a>
         
         </p>
 
@@ -1418,7 +1416,7 @@ The attached mousemove listener is debounced with 100 ms delay.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l326"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:326</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l283"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:283</code></a>
         
         </p>
 
@@ -1527,7 +1525,7 @@ offsets from the point, where the tooltip is supposed to appear.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l345"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:345</code></a>
+        <a href="../files/src_ui_yui_src_plugins_linktooltip.js.html#l302"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;linktooltip.js:302</code></a>
         
         </p>
 
