@@ -116,9 +116,11 @@
         getCaretRegion: function() {
             var bookmarkNodeEl,
                 bookmarks,
+                docScrollX,
+                docScrollXY,
+                docScrollY,
                 region,
-                selection,
-                scrollPos;
+                selection;
 
             selection = this.getSelection();
 
@@ -131,13 +133,15 @@
 
             bookmarkNodeEl.parentNode.removeChild(bookmarkNodeEl);
 
-            scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
+            docScrollXY = this._getDocScrollXY();
+            docScrollX = docScrollXY[0];
+            docScrollY = docScrollXY[1];
 
             return {
-                bottom: scrollPos.y + region.bottom,
-                left: scrollPos.x + region.left,
-                right: scrollPos.x + region.right,
-                top: scrollPos.y + region.top
+                bottom: docScrollY + region.bottom,
+                left: docScrollX + region.left,
+                right: docScrollX + region.right,
+                top: docScrollY + region.top
             };
         },
 
@@ -236,6 +240,9 @@
         getClientRectsRegion: function() {
             var bottom,
                 clientRects,
+                docScrollX,
+                docScrollXY,
+                docScrollY,
                 endRect,
                 i,
                 item,
@@ -247,7 +254,6 @@
                 region,
                 right,
                 selection,
-                scrollPos,
                 startRect,
                 top;
 
@@ -290,13 +296,15 @@
                     }
                 }
 
-                scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
+                docScrollXY = this._getDocScrollXY();
+                docScrollX = docScrollXY[0];
+                docScrollY = docScrollXY[1];
 
                 region = {
-                    bottom: scrollPos.y + bottom,
-                    left: scrollPos.x + left,
-                    right: scrollPos.x + right,
-                    top: scrollPos.y + top
+                    bottom: docScrollY + bottom,
+                    left: docScrollX + left,
+                    right: docScrollX + right,
+                    top: docScrollY + top
                 };
 
                 if (clientRects.length) {
@@ -304,26 +312,53 @@
                     startRect = clientRects[0];
 
                     region.endRect = {
-                        bottom: scrollPos.y + endRect.bottom,
+                        bottom: docScrollY + endRect.bottom,
                         height: endRect.height,
-                        left: scrollPos.x + endRect.left,
-                        right: scrollPos.x + endRect.right,
-                        top: scrollPos.y + endRect.top,
+                        left: docScrollX + endRect.left,
+                        right: docScrollX + endRect.right,
+                        top: docScrollY + endRect.top,
                         width: endRect.width
                     };
 
                     region.startRect = {
-                        bottom: scrollPos.y + startRect.bottom,
+                        bottom: docScrollY + startRect.bottom,
                         height: startRect.height,
-                        left: scrollPos.x + startRect.left,
-                        right: scrollPos.x + startRect.right,
-                        top: scrollPos.y + startRect.top,
+                        left: docScrollX + startRect.left,
+                        right: docScrollX + startRect.right,
+                        top: docScrollY + startRect.top,
                         width: startRect.width
                     };
                 }
             }
 
             return region;
+        },
+
+        /**
+         * Retrieves document scrollX and scrollY in an array.
+         *
+         * @method _getDocScrollXY
+         * @protected
+         * @return {Array} Returns an array with two items - document scrollX and scrollY in page coordinates.
+         */
+        _getDocScrollXY: function() {
+            var docBody,
+                docDefaultView,
+                docElement,
+                pageXOffset,
+                pageYOffset;
+
+            docBody = document.body;
+            docDefaultView = document.defaultView;
+            docElement = document.documentElement;
+
+            pageXOffset = (docDefaultView) ? docDefaultView.pageXOffset : 0;
+            pageYOffset = (docDefaultView) ? docDefaultView.pageYOffset : 0;
+
+            return [
+                Math.max(docElement.scrollLeft, docBody.scrollLeft, pageXOffset),
+                Math.max(docElement.scrollTop, docBody.scrollTop, pageYOffset)
+            ];
         },
 
         /**
