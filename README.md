@@ -1,4 +1,4 @@
-Alloy Editor - WYSIWYG editor, based on CKEditor, with completely rewritten UI.
+Alloy Editor
 ==================
 
 ## How to build it
