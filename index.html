@@ -48,7 +48,7 @@
           </a>
           <div class="pull-right">
             <ul class="nav">
-              <li><a href="/alloy-editor/examples/">Examples</a></li>
+              <li><a href="/alloy-editor/examples/">Example</a></li>
               <li><a href="/alloy-editor/tutorials/">Tutorials</a></li>
               <li><a href="/alloy-editor/api/" target="_blank">API Docs</a></li>
               <li><a href="/alloy-editor/contributing/">Contributing</a></li>
@@ -106,14 +106,16 @@
 
       <div class="instructions span12">
         <p class="steps">2 - Start using AlloyEditor</p>
-        <p class="description">Then initialize AlloyEditor and specify the configuration.</p>
-        <pre class="highlight"><code class="hljs cs"><span class="hljs-keyword">var</span> editor = <span class="hljs-keyword">new</span> Y.AlloyEditor({
-    srcNode: <span class="hljs-string">'#editable'</span>,
-    toolbars: {
-        add: [<span class="hljs-string">'image'</span>, <span class="hljs-string">'code'</span>],
-        image: [<span class="hljs-string">'left'</span>, <span class="hljs-string">'right'</span>],
-        styles: [<span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>]
-    }
+        <p class="description">Load the module, initialize AlloyEditor and specify the configuration.</p>
+        <pre class="highlight"><code class="hljs php">YUI().<span class="hljs-keyword">use</span>(<span class="hljs-string">'alloy-editor'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+    <span class="hljs-keyword">var</span> editor = <span class="hljs-keyword">new</span> Y.AlloyEditor({
+        srcNode: <span class="hljs-string">'#editable'</span>,
+        toolbars: {
+            add: [<span class="hljs-string">'image'</span>, <span class="hljs-string">'code'</span>],
+            image: [<span class="hljs-string">'left'</span>, <span class="hljs-string">'right'</span>],
+            styles: [<span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>]
+        }
+    });
 });</code></pre>
       </div>
     </div>

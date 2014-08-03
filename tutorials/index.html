@@ -48,7 +48,7 @@
           </a>
           <div class="pull-right">
             <ul class="nav">
-              <li><a href="/alloy-editor/examples/">Examples</a></li>
+              <li><a href="/alloy-editor/examples/">Example</a></li>
               <li><a href="/alloy-editor/tutorials/">Tutorials</a></li>
               <li><a href="/alloy-editor/api/" target="_blank">API Docs</a></li>
               <li><a href="/alloy-editor/contributing/">Contributing</a></li>
@@ -200,13 +200,15 @@ Please note that in this case there is <strong>no need</strong> to specify CKEDI
 
 <h4>4. Create instances of AlloyEditor and specify the configuration:</h4>
 
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> editor = <span class="hljs-keyword">new</span> Y.AlloyEditor({
-    srcNode: <span class="hljs-string">'#editable'</span>,
-    toolbars: {
-        add: [<span class="hljs-string">'image'</span>, <span class="hljs-string">'code'</span>],
-        image: [<span class="hljs-string">'left'</span>, <span class="hljs-string">'right'</span>],
-        styles: [<span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>]
-    }
+<pre class="highlight"><code class="hljs javascript">YUI().use(<span class="hljs-string">'alloy-editor'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+    <span class="hljs-keyword">var</span> editor = <span class="hljs-keyword">new</span> Y.AlloyEditor({
+        srcNode: <span class="hljs-string">'#editable'</span>,
+        toolbars: {
+            add: [<span class="hljs-string">'image'</span>, <span class="hljs-string">'code'</span>],
+            image: [<span class="hljs-string">'left'</span>, <span class="hljs-string">'right'</span>],
+            styles: [<span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>]
+        }
+    });
 });</code></pre>
 
 In the above configuration, "editable" is the ID of the element, which will be made editable. You can fully reconfigure the toolbars, or to remove them entirely. See below for more information.

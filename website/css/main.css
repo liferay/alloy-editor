@@ -154,7 +154,7 @@ body {
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6em;
 }
@@ -183,6 +183,10 @@ pre {
   margin: 10px 0 5px;
   padding: 0 3px 2px;
   border-radius: 6px;
+}
+
+[contenteditable]:focus {
+  outline: none;
 }
 
 #wrap {

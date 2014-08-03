@@ -1,0 +1,1 @@
+YUI.add("button-em",function(e){"use strict";var t=e.Lang,a=e.Base.create("em",e.Plugin.Base,[e.ButtonBase],{TPL_CONTENT:'<i class="alloy-editor-icon-italic"></i>'},{NAME:"em",NS:"em",ATTRS:{element:{validator:t.isString,value:"em"}}});e.ButtonEm=a},"",{requires:["button-base"]});

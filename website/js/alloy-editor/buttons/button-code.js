@@ -1,0 +1,1 @@
+YUI.add("button-code",function(e){"use strict";var o=(e.Lang,e.Base.create("code",e.Plugin.Base,[e.ButtonBase],{_handleCode:function(){},TPL_CONTENT:'<i class="alloy-editor-icon-code"></i>'},{NAME:"code",NS:"code"}));e.ButtonCode=o},"",{requires:["button-base"]});

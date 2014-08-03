@@ -1,0 +1,1 @@
+YUI.add("button-u",function(e){"use strict";var n=e.Lang,t=e.Base.create("underline",e.Plugin.Base,[e.ButtonBase],{TPL_CONTENT:'<i class="alloy-editor-icon-underline"></i>'},{NAME:"underline",NS:"underline",ATTRS:{element:{validator:n.isString,value:"u"}}});e.ButtonU=t},"",{requires:["button-base"]});

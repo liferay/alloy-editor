@@ -2,7 +2,7 @@
 <html>
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 
-  <title>Examples | Alloy Editor</title>
+  <title>Example | Alloy Editor</title>
 
   <meta charset="utf-8">
   <meta name="author" content="Iliyan Peychev">
@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="/alloy-editor">
   <meta property="og:image" content="/alloy-editor/website/img/facebook-share.jpg">
-  <meta property="og:title" content="Examples | Alloy Editor">
+  <meta property="og:title" content="Example | Alloy Editor">
   <meta property="og:description" content="Alloy Editor is a modern WYSIWYG editor built on top of CKEditor, designed to create modern and gorgeous web content.">
 
   <!-- Favicon -->
@@ -48,7 +48,7 @@
           </a>
           <div class="pull-right">
             <ul class="nav">
-              <li><a href="/alloy-editor/examples/">Examples</a></li>
+              <li><a href="/alloy-editor/examples/">Example</a></li>
               <li><a href="/alloy-editor/tutorials/">Tutorials</a></li>
               <li><a href="/alloy-editor/api/" target="_blank">API Docs</a></li>
               <li><a href="/alloy-editor/contributing/">Contributing</a></li>
@@ -63,64 +63,171 @@
       <div class="banner page-banner">
   <div class="container">
     <div class="presentation">
-      <h2>Examples</h2>
+      <h2 id="headerEditable" contenteditable="true" class="alloy-editor-paceholder" data-placeholder="Write heading here">Play with the content, don't struggle with it.</h2>
     </div>
   </div>
 </div>
 
 <div id="page-example">
-  <div class="container">
+    <div class="container" id="contentEditable" contenteditable="true" data-placeholder="Write content here">
+        <h3>
+            <img src="/website/img/liferay.png" style="float: right;">
+            AlloyEditor - WYSIWYG Editor, build on top of CKEditor. By <a href="http://www.liferay.com">Liferay.</a>
+        </h3>
 
-    <div class="row">
-      <div class="title span5">
-        <h3>featuring...</h3>
-      </div>
+        <h4>Editing the content on the fly</h4>
+        <p>Yes, you can edit this content <strong>right here and right now</strong>. Just select some text and the toolbar for styling will appear. Not only it will appear, but it will appear where you <strong>expect</strong> it - where you release the mouse. If you don't have mouse, but only keyboard, the toolbar will appear where selection starts, or ends.</p>
+
+        <h4>Paste content</h4>
+        <p>You can also paste content <em>directly</em> from web! In most cases, it will work out of the box.</p>
+
+        <h4>Images aligning</h4>
+        <p>Oh, and we also support <strong>images aligning</strong>.</p>
+
+        <h4>Drag&Drop images</h4>
+        <p>Want to <strong>Drag&Drop</strong> images from your Desktop directly to the editor? Nothing easier than this. Try now right here (but keep in mind this requires IE10+, Chrome, Firefox or Safari).
+
+        <h4>Styling content</h4>
+        <p>Currently we have implementation of the following styles:
+            <ul>
+                <li>Strong (Bold)</li>
+                <li>Emphasize (Italic)</li>
+                <li>Underline</li>
+                <li>Heading Level 1</li>
+                <li>Heading Level 2</li>
+            </ul>
+        </p>
+
+        <h4>Adding content</h4>
+        <p>Editing is good, but what about adding content? Well, right now you can:
+            <ul>
+                <li>Insert images</li>
+                <li>Add links</li>
+                <li>Send tweets</li>
+            </ul>
+        </p>
+
+        <h4>Browser support</h4>
+        <p>AlloyEditor supports IE7+, Chrome, Firefox and Safari.</p>
+
+        <h4>Want to help us?</h4>
+        <p>We are not ready. There is more work to do and if you are developer, you are welcome to contribute code. We need to create more buttons, more toolbars, and why not to create another UI layer, not based on YUI/AlloyUI?</p>
+
+        <p>If you want to use the editor, go ahead. However, don't forget to send us some feedback. That's everything we need.</p>
     </div>
 
-    
+    <hr>
 
-    <div class="row">
-      <div class="title span5">
-        <h3>and more!</h3>
-      </div>
-    </div>
+    <div class="container">
+        <p>P.S. Do you know that H4 button, which you probably used to add/remove Headings Level 4 (H4 styling), like <strong>"Editing the content on the fly"</strong> was especially added for this page? It does not exists as default button in AlloyEditor. However, adding a new button is extremely easy. Here is the code of H4 button:</p>
 
-    
-      
-    
-      
-    
-      
-        <div class="span4 example">
-          <h2><a href="/alloy-editor/examples/_sample">Sample</a></h2>
-          <a href="/alloy-editor/examples/_sample">
-            <img src="/alloy-editor/website/img/example-sample.jpg" alt="Sample" />
-          </a>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+        <div id="h4CodeContainer" class="container">
+        <pre class="highlight"><code class="hljs javascript">YUI.add(<span class="hljs-string">'button-h4'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+<span class="hljs-pi">        'use strict'</span>;
+
+        <span class="hljs-keyword">var</span> Lang = Y.Lang;
+
+        <span class="hljs-keyword">var</span> H4 = Y.Base.create(<span class="hljs-string">'h4'</span>, Y.Plugin.Base, [Y.ButtonBase], {
+             <span class="hljs-comment">// There is no icon for H4 right now, but look ma, even a simple text is enough.</span>
+             <span class="hljs-comment">// In production, it would be better to add icon instead raw text.</span>
+            TPL_CONTENT: <span class="hljs-string">'&lt;i class="alloy-editor-icon-h4"&gt;h4&lt;/i&gt;'</span>
+        }, {
+            NAME: <span class="hljs-string">'h4'</span>,
+
+            NS: <span class="hljs-string">'h4'</span>,
+
+            ATTRS: {
+                element: {
+                    validator: Lang.isString,
+                    value: <span class="hljs-string">'h4'</span>
+                }
+            }
+        });
+
+        Y.ButtonH4 = H4;
+
+    }, <span class="hljs-string">''</span>, {
+        requires: [<span class="hljs-string">'button-base'</span>]
+    });</code></pre>
+
+    <p>And then we used it just like this:</p>
+
+    <pre class="highlight"><code class="hljs php">YUI().<span class="hljs-keyword">use</span>(<span class="hljs-string">'alloy-editor'</span>, <span class="hljs-string">'button-h4'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+        <span class="hljs-keyword">var</span> editor = <span class="hljs-keyword">new</span> Y.AlloyEditor({
+            srcNode: <span class="hljs-string">'#contentEditable'</span>,
+            toolbars: {
+                add: [<span class="hljs-string">'image'</span>],
+                image: [<span class="hljs-string">'left'</span>, <span class="hljs-string">'right'</span>],
+                styles: [<span class="hljs-string">'strong'</span>, <span class="hljs-string">'em'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'h1'</span>, <span class="hljs-string">'h2'</span>, <span class="hljs-string">'h4'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'twitter'</span>]
+            }
+        });
+    });</code></pre>
         </div>
-      
-    
-      
-    
-      
-    
-
-    <div class="row">
-      <div class="span12 title">
-        <p class="call">and this is just the beginning!</p>
-      </div>
     </div>
-
-    <div class="row">
-      <p style="text-align: center; margin-bottom: 25px;">AlloyUI 2.0 is just a preview release, soon you're going to find even more components here \o/</p>
-    </div>
-
-    <div class="row">
-      <a class="bt" id="bt-contribute" href="/alloy-editor/contributing/">Contribute</a>
-    </div>
-
-  </div>
 </div>
+
+<link href="/alloy-editor/website/js/alloy-editor/assets/alloy-editor.css" rel="stylesheet">
+
+<link href="/alloy-editor/website/css/alloy-editor-custom.css" rel="stylesheet">
+
+<script>
+    var CKEDITOR_BASEPATH = '/alloy-editor/website/js/alloy-editor/';
+</script>
+
+<script src="/alloy-editor/website/js/alloy-editor/alloy-editor-all.js"></script>
+
+<script id="buttonH4">
+    YUI.add('button-h4', function(Y) {
+        'use strict';
+
+        var Lang = Y.Lang;
+
+        var H4 = Y.Base.create('h4', Y.Plugin.Base, [Y.ButtonBase], {
+             // There is no icon for H4 right now, but look ma, even a simple text is enough.
+             // In production, it would be better to add icon instead raw text.
+            TPL_CONTENT: '<i class="alloy-editor-icon-h4">h4</i>'
+        }, {
+            NAME: 'h4',
+
+            NS: 'h4',
+
+            ATTRS: {
+                element: {
+                    validator: Lang.isString,
+                    value: 'h4'
+                }
+            }
+        });
+
+        Y.ButtonH4 = H4;
+
+    }, '', {
+        requires: ['button-base']
+    });
+</script>
+
+<script>
+    YUI().use('alloy-editor', 'button-h4', function(Y) {
+        var headingEditor = new Y.AlloyEditor({
+            srcNode: '#headerEditable',
+            toolbars: {
+                styles: {
+                    buttons: ['h1', 'h2', 'twitter'],
+                    zIndex: 500
+                }
+            }
+        });
+
+        var editor = new Y.AlloyEditor({
+            srcNode: '#contentEditable',
+            toolbars: {
+                add: ['image'],
+                image: ['left', 'right'],
+                styles: ['strong', 'em', 'u', 'h1', 'h2', 'h4', 'a', 'twitter']
+            }
+        });
+    });
+</script>
     </div>
 
     <div id="push"></div>
