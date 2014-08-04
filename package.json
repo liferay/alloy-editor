@@ -1,6 +1,6 @@
 {
   "name": "alloy-editor",
-  "version": "0.1.0",
+  "version": "0.2",
   "description": "Alloy Editor",
   "dependencies": {},
   "devDependencies": {
@@ -23,16 +23,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ipeychev/alloy-editor.git"
+    "url": "https://github.com/liferay/alloy-editor.git"
   },
   "keywords": [
     "editor",
     "wysiwyg"
   ],
   "author": "Iliyan Peychev",
-  "license": "BSD",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ipeychev/alloy-editor/issues"
+    "url": "https://github.com/liferay/alloy-editor/issues"
   },
-  "homepage": "https://github.com/ipeychev/alloy-editor"
+  "homepage": "https://github.com/liferay/alloy-editor"
 }
