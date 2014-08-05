@@ -252,6 +252,11 @@ pre {
   padding-top: 15px !important;
 }
 
+
+.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+  color: #F0F0F0;
+}
+
 /* Version Dropdown */
 
 #version {
