@@ -11,19 +11,19 @@
   <!-- Facebook Tags -->
   <meta property="fb:app_id" content="176947299114210">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="/alloy-editor">
-  <meta property="og:image" content="/alloy-editor/website/img/facebook-share.jpg">
+  <meta property="og:url" content="//alloyeditor.com">
+  <meta property="og:image" content="//alloyeditor.com/website/img/facebook-share.jpg">
   <meta property="og:title" content="Alloy Editor">
   <meta property="og:description" content="Alloy Editor is a modern WYSIWYG editor built on top of CKEditor, designed to create modern and gorgeous web content.">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="/alloy-editor/website/img/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="//alloyeditor.com/website/img/favicon.ico">
 
   <!-- CSS: Alloy Bootstrap -->
   <link href="http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- CSS: Website style -->
-  <link href="/alloy-editor/website/css/main.css" rel="stylesheet">
+  <link href="//alloyeditor.com/website/css/main.css" rel="stylesheet">
 
   <!-- Fonts -->
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
@@ -43,16 +43,16 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="/alloy-editor">
-            <img src="/alloy-editor/website/img/logo.png" alt="AlloyEditor Logo" width="211" height="34">
+          <a class="brand" href="//alloyeditor.com">
+            <img src="//alloyeditor.com/website/img/logo.png" alt="AlloyEditor Logo" width="211" height="34">
           </a>
           <div class="pull-right">
             <ul class="nav">
-              <li><a href="/alloy-editor/examples/">Example</a></li>
-              <li><a href="/alloy-editor/tutorials/">Tutorials</a></li>
-              <li><a href="/alloy-editor/api/" target="_blank">API Docs</a></li>
-              <li><a href="/alloy-editor/contributing/">Contributing</a></li>
-              <li><a href="/alloy-editor/about/">About</a></li>
+              <li><a href="//alloyeditor.com/examples/">Example</a></li>
+              <li><a href="//alloyeditor.com/tutorials/">Tutorials</a></li>
+              <li><a href="//alloyeditor.com/api/" target="_blank">API Docs</a></li>
+              <li><a href="//alloyeditor.com/contributing/">Contributing</a></li>
+              <li><a href="//alloyeditor.com/about/">About</a></li>
             </ul>
           </div>
         </div>
@@ -62,7 +62,7 @@
     <div id="content">
       <div class="banner home-banner">
   <div class="container">
-    <img src="/alloy-editor/website/img/screenshots.png" alt="Screenshots of AlloyEditor" width="1193" height="450">
+    <img src="//alloyeditor.com/website/img/screenshots.png" alt="Screenshots of AlloyEditor" width="1193" height="450">
     <div class="presentation">
       <h2>Alloy Editor</h2>
       <h3>Editing made sexy again!</h3>
@@ -94,18 +94,24 @@
     </div>
 
     <div class="row">
+    <div class="instructions span12">
+        <p class="steps">1 - Download AlloyEditor</p>
+        <p class="description">
+        Download AlloyEditor from <a href="https://github.com/liferay/alloy-editor/releases/download/v0.2/alloy-editor-0.2.zip" onclick="_gaq.push(['_trackEvent', 'Downloads', 'Top', 'https://github.com/liferay/alloy-editor/releases/download/v0.2/alloy-editor-0.2.zip']);">here</a>, then unzip it.
+      </div>
+
       <div class="instructions span12">
-        <p class="steps">1 - Copy and paste</p>
-        <p class="description">First load the seed, CSS and AlloyEditor files.</p>
-        <pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"bootstrap.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"alloy-editor/assets/alloy-editor.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span>
+        <p class="steps">2 - Copy and paste</p>
+        <p class="description">
+        <pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"alloy-editor/assets/alloy-editor.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://cdn.alloyui.com/2.5.0/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"alloy-editor/alloy-editor-all.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
       </div>
 
 
       <div class="instructions span12">
-        <p class="steps">2 - Start using AlloyEditor</p>
+        <p class="steps">3 - Start using AlloyEditor</p>
         <p class="description">Load the module, initialize AlloyEditor and specify the configuration.</p>
         <pre class="highlight"><code class="hljs php">YUI().<span class="hljs-keyword">use</span>(<span class="hljs-string">'alloy-editor'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
     <span class="hljs-keyword">var</span> editor = <span class="hljs-keyword">new</span> Y.AlloyEditor({
@@ -129,7 +135,7 @@
     <div class="row">
       <div class="instructions span12">
         <p class="description">Using YUI3 instead Alloy:</p>
-        <pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"bootstrap.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span>
+        <pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"alloy-editor/assets/alloy-editor.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"alloy-editor/alloy-editor-all.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
@@ -147,18 +153,18 @@
 
     <hr>
 
-    <p>Want to <a href="tutorials/toolbar-configuration">customize the toolbars?</a></p>
+    <p>Want to <a href="//alloyeditor.com/tutorials/toolbar-configuration">customize the toolbars?</a></p>
 
-    <p>Want to <a href="tutorials/toolbar-configuration#buttons-reordering">reorder, add or remove buttons?</a></p>
+    <p>Want to <a href="//alloyeditor.com/tutorials/toolbar-configuration#buttons-reordering">reorder, add or remove buttons?</a></p>
 
-    <p>Want to <a href="tutorials/button">create new Button?</a></p>
+    <p>Want to <a href="//alloyeditor.com/tutorials/button">create new Button?</a></p>
 
-    <p>Want to <a href="tutorials/toolbar">create new Toolbar?</a></p>
+    <p>Want to <a href="//alloyeditor.com/tutorials/toolbar">create new Toolbar?</a></p>
 
-    <p>Want <a href="tutorials">more</a>?</p>
+    <p>Want <a href="//alloyeditor.com/tutorials">more</a>?</p>
 
     <div>
-      <h2><a class="btn btn-link link-to-tutorials" href="/alloy-editor/tutorials/" style="padding-left: 0;">Check the full tutorial &raquo;</a></h2>
+      <h2><a class="btn btn-link link-to-tutorials" href="//alloyeditor.com/tutorials/" style="padding-left: 0;">Check the full tutorial &raquo;</a></h2>
     </div>
 
     <hr>
@@ -166,7 +172,7 @@
   </div>
 </div>
 
-<script src="/alloy-editor/website/js/quote.js"></script>
+<script src="//alloyeditor.com/website/js/quote.js"></script>
     </div>
 
     <div id="push"></div>
@@ -177,7 +183,7 @@
     <div class="container">
       <p class="pull-left">
         <a href="http://liferay.com/">
-          <img src="/alloy-editor/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+          <img src="//alloyeditor.com/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
         </a>
       </p>
       <p class="copyright pull-right"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">MIT</a> License.</p>
