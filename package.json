@@ -1,6 +1,6 @@
 {
   "name": "alloy-editor",
-  "version": "0.2",
+  "version": "0.2.1",
   "description": "Alloy Editor",
   "dependencies": {},
   "devDependencies": {
@@ -30,9 +30,9 @@
     "wysiwyg"
   ],
   "author": "Iliyan Peychev",
-  "license": "MIT",
+  "license": "LGPL",
   "bugs": {
     "url": "https://github.com/liferay/alloy-editor/issues"
   },
-  "homepage": "https://github.com/liferay/alloy-editor"
+  "homepage": "http://alloyeditor.com"
 }

@@ -392,4 +392,4 @@ You may help in many ways:
 
 
 ### License
-MIT License
+[LGPL License](LICENSE.md)
