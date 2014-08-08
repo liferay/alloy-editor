@@ -516,6 +516,22 @@ pre {
   margin-top: 30px;
 }
 
+#page-example h4 {
+  margin-top: 50px;
+}
+
+#page-example h4:first-of-type {
+  margin-top: 20px;
+}
+
+.popover.sample-hint {
+  background-color: #2bb2e4;
+}
+
+.popover.sample-hint .arrow::after {
+  border-top-color: #2bb2e4;
+}
+
 .instructions {
   margin-top: 25px;
 }
