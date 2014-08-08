@@ -534,6 +534,10 @@ pre {
   border-top-color: #2bb2e4;
 }
 
+.headingsNote {
+  font-size: 14px;
+}
+
 .instructions {
   margin-top: 25px;
 }
