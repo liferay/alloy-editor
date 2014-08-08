@@ -516,6 +516,14 @@ pre {
   margin-top: 30px;
 }
 
+.popover.sample-hint {
+  background-color: gold;
+}
+
+.popover.sample-hint .arrow::after {
+  border-top-color: gold;
+}
+
 .instructions {
   margin-top: 25px;
 }

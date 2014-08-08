@@ -224,7 +224,31 @@
 </script>
 
 <script>
-    YUI().use('alloy-editor', 'button-h4', function(Y) {
+    YUI().use('alloy-editor', 'button-h4', 'aui-popover', 'widget-anim', function(Y) {
+        var contentEditableNode = Y.one('#contentEditable');
+
+        function destroyPopover() {
+            popoverAnim.destroy();
+        }
+
+        var popoverAnim = new Y.Popover({
+            align: {
+                node: contentEditableNode,
+                points: [Y.WidgetPositionAlign.TC, Y.WidgetPositionAlign.TC]
+            },
+            bodyContent: 'You can edit the content of this page directly.<br>Just click inside the content below and start typing, adding text or styling it.',
+            cssClass: 'sample-hint',
+            id: 'sampleHint',
+            plugins: [Y.Plugin.WidgetAnim],
+            position: 'top',
+            render: true,
+            zIndex: 500
+        });
+
+        contentEditableNode.once('focus', destroyPopover);
+
+        popoverAnim.get('boundingBox').once('click', destroyPopover);
+
         var headingEditor = new Y.AlloyEditor({
             srcNode: '#headerEditable',
             toolbars: {
