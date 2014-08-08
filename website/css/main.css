@@ -525,7 +525,9 @@ pre {
 }
 
 .popover.sample-hint {
+  color: #fff;
   background-color: #2bb2e4;
+  font-size: 14px;
 }
 
 .popover.sample-hint .arrow::after {
