@@ -1730,7 +1730,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-twitter.js",
-            "line": 49,
+            "line": 57,
             "description": "Specifies if the button is toggleable, or not. ButtonTwitter will be not toggleable by default.",
             "itemtype": "attribute",
             "name": "toggle",
@@ -1741,17 +1741,17 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-twitter.js",
-            "line": 63,
+            "line": 71,
             "description": "Specifies the URL where user can tweet the selected text.",
             "itemtype": "attribute",
             "name": "tweetURL",
-            "default": "'https://twitter.com/intent/tweet?text='",
+            "default": "'https://twitter.com/intent/tweet?text={text}&url={url}'",
             "type": "String",
             "class": "ButtonTwitter"
         },
         {
             "file": "src/ui/yui/src/buttons/button-twitter.js",
-            "line": 75,
+            "line": 83,
             "description": "Specifies the properties of the browser window where the selected text\nwill appear.",
             "itemtype": "attribute",
             "name": "windowProperties",
@@ -1761,7 +1761,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-twitter.js",
-            "line": 88,
+            "line": 96,
             "description": "Specifies the title of the browser window where the selected text\nwill appear.",
             "itemtype": "attribute",
             "name": "windowTitle",
