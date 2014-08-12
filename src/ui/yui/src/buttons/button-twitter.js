@@ -28,12 +28,20 @@ YUI.add('button-twitter', function(Y) {
          * @protected
          */
         _onClick: function() {
-            var editor;
+            var editor,
+                tweetURL;
+
+            tweetURL = this.get('tweetURL');
 
             editor = this.get('host').get('editor');
 
+            tweetURL = Lang.sub(tweetURL, {
+                text: encodeURIComponent(editor.getSelection().getSelectedText()),
+                url: encodeURIComponent(Y.config.win.location)
+            });
+
             window.open(
-                this.get('tweetURL') + encodeURIComponent(editor.getSelection().getSelectedText()),
+                tweetURL,
                 this.get('windowTitle'),
                 this.get('windowProperties')
             );
@@ -64,12 +72,12 @@ YUI.add('button-twitter', function(Y) {
              * Specifies the URL where user can tweet the selected text.
              *
              * @attribute tweetURL
-             * @default 'https://twitter.com/intent/tweet?text='
+             * @default 'https://twitter.com/intent/tweet?text={text}&url={url}'
              * @type String
              */
             tweetURL: {
                 validator: Lang.isString,
-                value: 'https://twitter.com/intent/tweet?text='
+                value: 'https://twitter.com/intent/tweet?text={text}&url={url}'
             },
 
             /**
