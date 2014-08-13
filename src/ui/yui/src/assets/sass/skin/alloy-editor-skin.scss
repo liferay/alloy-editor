@@ -1,7 +1,75 @@
 @import "compass/css3";
 
+
+.alloy-editor-toolbar {
+    @include border-radius(3px);
+    @include box-shadow(0px 0px 20px 0px rgba(188, 188, 188, 0.8));
+    border: 1px solid #e1e1e1;
+}
+
+.alloy-editor-toolbar {
+    .alloy-editor-button {
+        @include box-shadow(none);
+        background-color: #fff;
+        border-left: 1px solid #e1e1e1;
+        border-right: 1px solid #e1e1e1;
+        color: #999da0;
+
+        &:hover {
+            background-color: #f7f7f7;
+            background-image: none;
+        }
+
+        &:first-child {
+            border-left: none;
+        }
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &.yui3-button-selected, &.yui3-button-active, &.yui3-button:active {
+            @include box-shadow(none);
+            background-color: #fff;
+            color: #1a1b1c;
+        }
+
+        &.yui3-button-active, &.yui3-button:active {
+            border-left: 1px solid #e1e1e1;
+            border-right: 1px solid #e1e1e1;
+
+            &:first-child {
+                border-left: none;
+            }
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        &.yui3-button-selected, &.yui3-button-active, &.yui3-button:active {
+            &:hover {
+                background-color: #f7f7f7;
+            }
+        }
+    }
+}
+
 .alloy-editor-toolbar-styles {
     .link-wrapper {
+        margin-left: 5px;
+
+        .switch-to-edit {
+            @include border-radius(0);
+            border-right: 1px solid #e1e1e1;
+
+            &:last-child {
+                &:active {
+                    border-right: 1px solid #e1e1e1;
+                }
+            }
+        }
+
         input {
             border: none;
         }
@@ -11,34 +79,79 @@
             border-color: white;
         }
 
-        .close-link {
-            @include border-radius(0 5px 5px 0);
-        }
-
         .input-container {
             background-color: white;
-            border-right: none;
-            border: 1px #cccccc solid;
+            padding: 7px;
         }
 
         .input-close-container {
-            background-color: #d9d9d9;
+            .close-link {
+                @include border-radius(0 5px 5px 0);
+                border-left: 1px solid #e1e1e1;
+
+                &:last-child {
+                    &:active {
+                        border-left: 1px solid #e1e1e1;
+                    }
+                }
+            }
+
+            .yui3-button[disabled], .yui3-button-disabled {
+                @include box-shadow(none);
+                color: #d3d3d3;
+                opacity: 1;
+            }
         }
+    }
+}
+
+.alloy-editor-toolbar-add, .alloy-editor-toolbar-add-items {
+    @include box-shadow(none);
+
+    .alloy-editor-button {
+        height: 30px;
+        padding: 8px 8px 8px 9px;
+        width: 30px;
+    }
+
+    .btn-group-vertical {
+        .alloy-editor-button {
+            border-bottom: 1px solid #e1e1e1;
+            border-top: 1px solid #e1e1e1;
+
+            &:first-child {
+                border-top: 0;
+            }
+
+            &:last-child:not(:first-child) {
+                @include border-bottom-left-radius(0);
+                border-bottom: 0;
+                border-left: none;
+            }
+        }
+    }
+}
+
+.alloy-editor-toolbar-add-items {
+    .alloy-editor-button {
+        @include border-radius(0);
+        border-left: none;
+        border-right: none;
     }
 }
 
 .alloy-editor-tooltip-link {
     @include border-radius(5px);
-    background-color: #f5f5f5;
+    background-color: #fff;
     border: 1px solid #999;
 
     .link-container {
         .link-preview {
-            color: #0088cc;
+            color: #1a1b1c;
         }
     }
 }
 
 .alloy-editor-placeholder:empty:not(:focus) {
-    background-color: lightyellow;
+    background-color: #ffffe0;
 }

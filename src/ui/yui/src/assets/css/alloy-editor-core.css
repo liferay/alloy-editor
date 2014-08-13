@@ -1,63 +1,65 @@
 /* line 1, ../sass/alloy-editor-core.scss */
+.yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbaradditems-hidden, .yui3-toolbarimage-hidden, .yui3-linktooltip-hidden {
+  display: none;
+}
+
+/* line 5, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar, .alloy-editor-tooltip-link {
   position: absolute;
   z-index: 1;
 }
 
-/* line 6, ../sass/alloy-editor-core.scss */
-.yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbaradditems-hidden, .yui3-toolbarimage-hidden, .yui3-linktooltip-hidden {
-  display: none;
+/* line 11, ../sass/alloy-editor-core.scss */
+.alloy-editor-toolbar .alloy-editor-button {
+  padding: 10px 10px 8px 10px;
+  outline: none;
+  height: 36px;
 }
 
-/* line 12, ../sass/alloy-editor-core.scss */
+/* line 20, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container {
   display: inline-block;
   padding: 2px;
 }
-/* line 16, ../sass/alloy-editor-core.scss */
+/* line 24, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container input {
   outline: none;
   width: 165px;
 }
-/* line 21, ../sass/alloy-editor-core.scss */
+/* line 29, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container input::-ms-clear {
   display: none;
 }
-/* line 25, ../sass/alloy-editor-core.scss */
+/* line 33, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear {
   display: inline-block;
   height: 11px;
   vertical-align: text-top;
   width: 12px;
 }
-/* line 31, ../sass/alloy-editor-core.scss */
+/* line 39, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear i {
   cursor: pointer;
 }
 
-/* line 40, ../sass/alloy-editor-core.scss */
+/* line 48, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-add-items .btn-group-vertical {
   margin-left: 5px;
 }
 
-/* line 47, ../sass/alloy-editor-core.scss */
+/* line 55, ../sass/alloy-editor-core.scss */
 .alloy-editor-tooltip-link .link-container .icon-link-container {
   margin: 0 5px 0 5px;
   vertical-align: text-top;
 }
-/* line 52, ../sass/alloy-editor-core.scss */
+/* line 60, ../sass/alloy-editor-core.scss */
 .alloy-editor-tooltip-link .link-container .link-preview {
   display: inline-block;
   padding: 4px;
   outline: none;
 }
 
-/* line 60, ../sass/alloy-editor-core.scss */
-.alloy-editor-toolbar .alloy-editor-button {
-  outline: none;
-}
-
-/* line 64, ../sass/alloy-editor-core.scss */
+/* line 68, ../sass/alloy-editor-core.scss */
 .alloy-editor-placeholder:empty:not(:focus):before {
   content: attr(data-placeholder);
 }

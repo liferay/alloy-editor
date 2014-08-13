@@ -5,41 +5,41 @@
 
     &.alloy-editor-arrow-box-top {
         &:after {
-            border-bottom-color: #e6e6e6;
+            border-bottom-color: #fff;
         }
 
         &:before {
-            border-bottom-color: #c1c1c1;
+            border-bottom-color: #e1e1e1;
         }
     }
 
     &.alloy-editor-arrow-box-bottom {
         &:after {
-            border-top-color: #e6e6e6;
+            border-top-color: #fff;
         }
 
         &:before {
-            border-top-color: #c1c1c1;
+            border-top-color: #e1e1e1;
         }
     }
 
     &.alloy-editor-arrow-box-left {
         &:after {
-            border-right-color: #e6e6e6;
+            border-right-color: #fff;
         }
 
         &:before {
-            border-right-color: #c1c1c1;
+            border-right-color: #e1e1e1;
         }
     }
 
     &.alloy-editor-arrow-box-right {
         &:after {
-            border-left-color: #e6e6e6;
+            border-left-color: #fff;
         }
 
         &:before {
-            border-left-color: #c1c1c1;
+            border-left-color: #e1e1e1;
         }
     }
 }
