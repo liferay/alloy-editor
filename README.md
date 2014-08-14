@@ -15,9 +15,7 @@ If you want to have a zip file, execute ```` gulp release ````
 ## How to run the demo
 
 1. Build it following the steps above.
-2. Download some simple web server. I like very much "mongoose" (https://code.google.com/p/mongoose/)
-3. If you decided to go with mongoose, then go to project folder and execute:
-```` mongoose -document_root dist/alloy-editor-0.2 ````, where 0.2 is the current version of the editor. Don't worry, "dist" folder will contain only one folder, so you don't have to remember this 0.2
+2. Go to the dist folder and start index.html file in some browser.
 
 ## How to embed it in my own page?
 
