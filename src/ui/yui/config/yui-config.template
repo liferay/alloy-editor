@@ -7,7 +7,7 @@
         YUI.applyConfig({
             groups: {
                 AlloyEditor: {
-                    base: '/alloy-editor/',
+                    base: 'alloy-editor/',
                     combine: false,
                     comboBase: '',
                     modules: modules,
