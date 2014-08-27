@@ -82,6 +82,12 @@
         requires: ['plugin', 'node-base', 'transition']
     },
 
+    'toolbar-position': {
+        group: 'AlloyEditor',
+        path: 'toolbars/toolbar-position.js',
+        requires: ['node-base']
+    },
+
     'toolbar-add': {
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-add.js',
