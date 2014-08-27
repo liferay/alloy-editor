@@ -4,14 +4,14 @@ YUI.add('toolbar-add', function(Y) {
     var Lang = Y.Lang,
         YNode = Y.Node,
 
-        ToolbarAddItems,
+        ToolbarAddTrigger,
 
         /**
          * The ToolbarAdd class provides functionality for adding content to the editor.
          *
          * @class ToolbarAdd
          */
-        ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
+        ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.ToolbarPosition, Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
             /**
              * Initializer lifecycle implementation for the ToolbarAdd class.
              *
@@ -24,124 +24,88 @@ YUI.add('toolbar-add', function(Y) {
 
                 editorNode = Y.one(this.get('editor').element.$);
 
-                this._hideButtonsContainerFn = CKEDITOR.tools.debounce(this._hideButtonsContainer, this.get('hideTimeout'));
-
                 this._editorDOMNode = editorNode.getDOMNode();
+
+                this._toolbars = {};
             },
 
             /**
-             * Attaches events to the boundingBox which will help to handle the appearance of the
+             * Attaches events to the add button which will help to handle the appearance of the
              * menu with the buttons.
              *
              * @method bindUI
              * @protected
              */
             bindUI: function() {
-                var boundingBox,
-                    buttonsBoundingBox;
-
-                this._addButton.on(['click', 'mouseenter'], this._showButtonsContainer, this);
-
-                boundingBox = this.get('boundingBox');
-                buttonsBoundingBox = this._buttonsOverlay.get('boundingBox');
-
-                boundingBox.on('mouseleave', this._handleMouseLeave, this);
-                buttonsBoundingBox.on('mouseleave', this._handleMouseLeave, this);
-
-                boundingBox.on('mouseenter', this._handleMouseEnter, this);
-                buttonsBoundingBox.on('mouseenter', this._handleMouseEnter, this);
+                this._triggerButton.on('click', this._showToolbarAddContent, this);
+                this.get('editor').on('toolbarsReady', this._onToolbarsReady, this);
+                this.on('visibleChange', this._onVisibleChange, this);
             },
 
             /**
-             * Destroys the buttons container and its hide handler.
+             * Destroys the add trigger and the trigger button.
              *
              * @method destructor
              * @protected
              */
             destructor: function() {
-                this._addButton.destroy();
+                this._triggerButton.destroy();
 
-                this._buttonsOverlay.destroy();
-
-                this._hideButtonsContainerFn.cancel();
+                this._trigger.destroy();
             },
 
             /**
-             * Renders the two containers - for button add and the overlay which hosts the buttons.
+             * Renders the two containers - for button add and the toolbar.
              *
              * @method renderUI
              * @protected
              */
             renderUI: function() {
-                this._renderAddNode();
+                this._renderToolbarAddContent();
 
-                this._renderButtonsOverlay();
+                this._renderTrigger();
             },
 
             /**
              * Calculates and sets the position of the toolbar.
              *
              * @method showAtPoint
-             * @param {Number} x Point X in page coordinates.
-             * @param {Number} y Point Y in page coordinates.
+             * @param {Object} triggerPosition Position (x,y) for the trigger.
+             * @param {Object} toolbarPosition Position (x,y) for the toolbar.
              */
-            showAtPoint: function(x, y) {
-                var addContentBtnNode,
-                    gutter;
+            showAtPoint: function(triggerPosition, toolbarPosition) {
+                var triggerButtonContainer,
+                    triggerGutter;
 
-                this._hideButtonsContainer();
-
-                if (!this.get('visible')) {
-                    this.show();
+                if (!this._trigger.get('visible')) {
+                    this._trigger.show();
                 }
 
-                addContentBtnNode = this._addContentBtnContainer.getDOMNode();
+                triggerButtonContainer = this._triggerButtonContainer.getDOMNode();
 
-                gutter = this.get('gutter');
+                triggerGutter = this.get('triggerGutter');
 
-                this.set('xy', this.getConstrainedXY([x - addContentBtnNode.offsetWidth - gutter.left, y - gutter.top - addContentBtnNode.offsetHeight / 2]));
+                this._trigger.set('xy', this.getConstrainedXY([triggerPosition.x - triggerButtonContainer.offsetWidth - triggerGutter.left, triggerPosition.y - triggerGutter.top - triggerButtonContainer.offsetHeight / 2]));
+
+                this._toolbarPosition = toolbarPosition;
             },
 
             /**
-             * Aligns the position of buttons overlay, so it shows next to the button container.
+             * Hides all present toolbars other than this one.
              *
-             * @method _alignButtonsOverlay
+             * @method _hideEditorToolbars
              * @protected
              */
-            _alignButtonsOverlay: function() {
-                this._buttonsOverlay.align(this._addContentBtnContainer, [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]);
-            },
+            _hideEditorToolbars: function() {
+                var editorToolbars;
 
-            /**
-             * On mouseenter event, cancels the hide listener for hiding the buttons overlay.
-             *
-             * @method _handleMouseEnter
-             * @protected
-             */
-            _handleMouseEnter: function() {
-                this._hideButtonsContainerFn.cancel();
-            },
+                editorToolbars = this._toolbars;
 
-            /**
-             * On mouseleave event, cancels and then starts again the hide listener for hiding the buttons overlay.
-             *
-             * @method _handleMouseEnter
-             * @protected
-             */
-            _handleMouseLeave: function() {
-                this._hideButtonsContainerFn.cancel();
-
-                this._hideButtonsContainerFn();
-            },
-
-            /**
-             * Hides the buttons overlay.
-             *
-             * @method _hideButtonsContainer
-             * @protected
-             */
-            _hideButtonsContainer: function() {
-                this._buttonsOverlay.hide();
+                Y.Object.each(editorToolbars, function(item) {
+                    if (this !== item) {
+                        item.hide();
+                    }
+                });
             },
 
             /**
@@ -150,103 +114,184 @@ YUI.add('toolbar-add', function(Y) {
              * ToolbarAdd displays itself always - regardless of the fact the selection
              * is empty or not. It might be hidden only if there is no any selection region.
              *
-             * @method _hideButtonsContainer
+             * @method _onEditorInteraction
              * @protected
              * @param {EventFacade} event Event that triggered when user interacted with the editor.
              */
             _onEditorInteraction: function(event) {
                 var editorX,
+                    nativeEvent,
+                    position,
                     selectionData,
-                    startRect;
+                    startRect,
+                    toolbarPosition,
+                    triggerPosition;
 
                 selectionData = event.data.selectionData;
+
+                nativeEvent = event.data.nativeEvent;
+
+                this.hide();
 
                 if (selectionData.region) {
                     startRect = selectionData.region.startRect || selectionData.region;
 
-                    editorX = this._editorNode.getX();
+                    triggerPosition = {
+                        x: this._editorNode.getX(),
+                        y: selectionData.region.top + startRect.height / 2
+                    };
 
-                    this.showAtPoint(editorX, selectionData.region.top + startRect.height / 2);
-                } else {
-                    this.hide();
+                    toolbarPosition = this._calculatePosition(selectionData, {
+                        x: nativeEvent.pageX,
+                        y: nativeEvent.pageY
+                    });
+
+                    this.showAtPoint(triggerPosition, toolbarPosition);
                 }
             },
 
             /**
-             * Renders the button add container.
+             * Stores the editor initialized toolbars.
              *
-             * @method _renderAddNode
+             * @method _onToolbarsReady
              * @protected
+             * @param {EventFacade} event Event that triggered when all editor toolbars are initialized.
              */
-            _renderAddNode: function() {
-                var addButton,
-                    addNode,
-                    contentBox;
-
-                addNode = YNode.create(Lang.sub(
-                    this.TPL_ADD, {
-                        content: this.TPL_ADD_CONTENT
-                    }));
-
-                addButton = new Y.Button({
-                    srcNode: addNode.one('.btn-add')
-                }).render(addNode);
-
-                contentBox = this.get('contentBox');
-
-                contentBox.appendChild(addNode);
-
-                this._addButton = addButton;
-
-                this._addContentBtnContainer = this.get('boundingBox').one('.alloy-editor-toolbar-buttons');
+            _onToolbarsReady: function(event) {
+                this._toolbars = event.data.toolbars;
             },
 
             /**
-             * Renders the overlay which contains the buttons for adding content.
+             * Adds a marker-class on editorNode to indicate the add toolbar is visible.
              *
-             * @method _renderButtonsOverlay
+             * @method _onVisibleChange
+             * @protected
+             * @param {EventFacade} event Event that triggered when toolbar visibility changes.
+             */
+            _onVisibleChange: function(event) {
+                this._editorNode.toggleClass('alloyeditor-add-toolbar', event.newVal);
+            },
+
+            /**
+             * Creates the container where buttons, attached to the instance of Toolbar should render.
+             *
+             * @method _renderButtons
              * @protected
              */
-            _renderButtonsOverlay: function() {
-                var buttonsContainer;
+            _renderToolbarAddContent: function() {
+                var instance = this,
+                    buttonsContainer,
+                    contentBox;
 
-                buttonsContainer = YNode.create(this.TPL_BUTTONS_CONTAINER);
+                buttonsContainer = YNode.create(instance.TPL_BUTTONS_CONTAINER);
 
-                this._buttonsOverlay = new ToolbarAddItems({
+                contentBox = this.get('contentBox');
+
+                contentBox.appendChild(buttonsContainer);
+
+                instance._buttonsContainer = buttonsContainer;
+            },
+
+            /**
+             * Renders the toolbar trigger.
+             *
+             * @method _renderTrigger
+             * @protected
+             */
+            _renderTrigger: function() {
+                var triggerButton,
+                    triggerButtonContainer;
+
+                triggerButtonContainer = YNode.create(Lang.sub(
+                    this.TPL_TRIGGER, {
+                        content: this.TPL_TRIGGER_CONTENT
+                    }));
+
+                this._trigger = new ToolbarAddTrigger({
                     render: true,
                     visible: false,
                     zIndex: 1
                 });
 
-                this._buttonsOverlay.get('contentBox').appendChild(buttonsContainer);
+                triggerButton = new Y.Button({
+                    srcNode: triggerButtonContainer.one('.btn-add')
+                }).render(triggerButtonContainer);
 
-                this._buttonsContainer = buttonsContainer;
+                this._trigger.get('contentBox').appendChild(triggerButtonContainer);
+
+                this._triggerButton = triggerButton;
+
+                this._triggerButtonContainer = triggerButtonContainer;
             },
 
             /**
-             * Displays both containers - for add button and those which hosts the buttons
-             * for adding content.
+             * Calculates and sets the position of the toolbar. Internally, uses a toolbarPosition
+             * object stored from the previous editorInteraction event.
              *
-             * @method _showButtonsContainer
+             * @method _showToolbar
              * @protected
              */
-            _showButtonsContainer: function() {
-                this._buttonsOverlay.show();
+            _showToolbar: function() {
+                var boundingBox,
+                    toolbarPosition,
+                    visible,
+                    xy;
 
-                this._alignButtonsOverlay();
+                boundingBox = this.get('boundingBox');
+
+                toolbarPosition = this._toolbarPosition;
+
+                if (this.get('editor').isSelectionEmpty()) {
+                    toolbarPosition.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+                }
+
+                if (toolbarPosition.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                    boundingBox.replaceClass('alloy-editor-arrow-box-bottom', 'alloy-editor-arrow-box-top');
+                } else {
+                    boundingBox.replaceClass('alloy-editor-arrow-box-top', 'alloy-editor-arrow-box-bottom');
+                }
+
+                visible = this.get('visible');
+
+                if (!visible) {
+                    this.show();
+                }
+
+                xy = this._getToolbarXYPoint(toolbarPosition.x, toolbarPosition.y, toolbarPosition.direction);
+
+                this._moveToPoint(this.getConstrainedXY(xy), toolbarPosition.direction, {
+                    visible: visible
+                });
             },
 
-            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add"></div>',
+            /**
+             * Shows the toolbar and hides the toolbar trigger on the margin.
+             *
+             * @method _showToolbarAddContent
+             * @protected
+             */
+            _showToolbarAddContent: function() {
+                this._hideEditorToolbars();
+
+                this._showToolbar();
+
+                this._trigger.hide();
+
+                this._editorNode.focus();
+            },
+
+            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add alloy-editor-arrow-box"></div>',
 
             CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
 
-            TPL_ADD: '<div class="alloy-editor-toolbar-buttons btn-group">' +
+            TPL_BUTTONS_CONTAINER: '<div class="alloy-editor-toolbar-buttons btn-group"></div>',
+
+            TPL_TRIGGER: '<div class="alloy-editor-toolbar-buttons btn-group">' +
                 '<button type="button" class="alloy-editor-button btn btn-add">{content}</button>' +
                 '</div>',
 
-            TPL_ADD_CONTENT: '<i class="alloy-editor-icon-add"></i>',
+            TPL_TRIGGER_CONTENT: '<i class="alloy-editor-icon-add"></i>'
 
-            TPL_BUTTONS_CONTAINER: '<div class="alloy-editor-toolbar-buttons btn-group btn-group-vertical"></div>'
         }, {
             ATTRS: {
                 /**
@@ -288,34 +333,22 @@ YUI.add('toolbar-add', function(Y) {
                 },
 
                 /**
-                 * Specifies the gutter of the toolbar. The gutter object contains the top and left
-                 * offsets from the point, where the toolbar is supposed to appear.
+                 * Specifies the gutter of the trigger button. The gutter object contains the top
+                 * and left offsets from the point, where the trigger is supposed to appear.
                  *
                  * @attribute gutter
                  * @default {
-                 *   left: 5,
+                 *   left: 15,
                  *   top: 0
                  * }
                  * @type Object
                  */
-                gutter: {
+                triggerGutter: {
                     validator: Lang.isObject,
                     value: {
-                        left: 5,
+                        left: 15,
                         top: 0
                     }
-                },
-
-                /**
-                 * Specifies the timeout after which the buttons overlay will be hidden.
-                 *
-                 * @attribute hideTimeout
-                 * @default 1000 (sec)
-                 * @type Number
-                 */
-                hideTimeout: {
-                    validator: Lang.isNumber,
-                    value: 1000
                 }
             }
         });
@@ -324,18 +357,18 @@ YUI.add('toolbar-add', function(Y) {
 
 
     /**
-     * The ToolbarAddItems class hosts buttons for adding content to the current editor instance. This class is intended to be
+     * The ToolbarAddTrigger class hosts controls for showing the toolbar with the add controls. This class is intended to be
      * used internally by {{#crossLink "ToolbarAdd"}}{{/crossLink}} class.
      *
-     * @class ToolbarAddItems
+     * @class ToolbarAddTrigger
      */
-    ToolbarAddItems = Y.Base.create('toolbaradditems', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetAutohide], {
-        BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add-items"></div>',
+    ToolbarAddTrigger = Y.Base.create('toolbaraddtrigger', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetAutohide], {
+        BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add-trigger"></div>',
 
         CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>'
     }, {
 
     });
 }, '0.1', {
-    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'widget-autohide', 'toolbar-base']
+    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'widget-autohide', 'toolbar-base', 'toolbar-position']
 });

@@ -1,5 +1,5 @@
 /* line 1, ../sass/alloy-editor-core.scss */
-.yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbaradditems-hidden, .yui3-toolbarimage-hidden, .yui3-linktooltip-hidden {
+.yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbaraddtrigger-hidden, .yui3-toolbarimage-hidden, .yui3-linktooltip-hidden {
   display: none;
 }
 
@@ -47,24 +47,19 @@
   font-size: 20px;
 }
 
-/* line 54, ../sass/alloy-editor-core.scss */
-.alloy-editor-toolbar-add-items .btn-group-vertical {
-  margin-left: 5px;
-}
-
-/* line 61, ../sass/alloy-editor-core.scss */
+/* line 55, ../sass/alloy-editor-core.scss */
 .alloy-editor-tooltip-link .link-container .icon-link-container {
   margin: 0 5px 0 5px;
   vertical-align: text-top;
 }
-/* line 66, ../sass/alloy-editor-core.scss */
+/* line 60, ../sass/alloy-editor-core.scss */
 .alloy-editor-tooltip-link .link-container .link-preview {
   display: inline-block;
   padding: 4px;
   outline: none;
 }
 
-/* line 74, ../sass/alloy-editor-core.scss */
+/* line 68, ../sass/alloy-editor-core.scss */
 .alloy-editor-placeholder:empty:not(:focus):before {
   content: attr(data-placeholder);
 }

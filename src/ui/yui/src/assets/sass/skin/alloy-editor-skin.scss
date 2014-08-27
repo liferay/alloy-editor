@@ -105,7 +105,7 @@
     }
 }
 
-.alloy-editor-toolbar-add, .alloy-editor-toolbar-add-items {
+.alloy-editor-toolbar-add-trigger {
     @include box-shadow(none);
 
     .alloy-editor-button {
@@ -129,14 +129,6 @@
                 border-left: none;
             }
         }
-    }
-}
-
-.alloy-editor-toolbar-add-items {
-    .alloy-editor-button {
-        @include border-radius(0);
-        border-left: none;
-        border-right: none;
     }
 }
 
