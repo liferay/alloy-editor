@@ -2,12 +2,21 @@
 
 var concat = require('gulp-concat'),
     compass = require('gulp-compass'),
+    es = require('event-stream'),
+    fs = require('fs'),
     gulp = require('gulp'),
     path = require('path'),
     rimraf = require('gulp-rimraf'),
     runSequence = require('run-sequence'),
 
     ROOT = path.join(__dirname, '..');
+
+function getFolders(dir) {
+    return fs.readdirSync(dir)
+        .filter(function(file) {
+            return fs.statSync(path.join(dir, file)).isDirectory();
+        });
+}
 
 gulp.task('sass2css', function() {
     return gulp.src(path.join(ROOT, 'src', '**/*.scss'))
@@ -35,19 +44,28 @@ gulp.task('clean-fontcss', function() {
 
 gulp.task('join-css', function() {
     var cssDir,
-        fontDir;
+        fontDir,
+        skinsDir,
+        skins;
 
     cssDir = path.join(ROOT, 'src', 'assets', 'css');
     fontDir = path.join(ROOT, 'tmp', 'assets');
+    skinsDir = path.join(ROOT, 'src', 'assets', 'css', 'skin');
 
-    return gulp.src(
-        [
-            path.join(cssDir, '*.css'),
-            path.join(cssDir, 'skin', '*.css'),
-            path.join(fontDir, 'font.css')
-        ])
-        .pipe(concat('alloy-editor.css'))
-        .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets')));
+    skins = getFolders(skinsDir);
+
+    var tasks = skins.map(function(skin) {
+        return gulp.src(
+            [
+                path.join(cssDir, '*.css'),
+                path.join(cssDir, 'skin', skin, '*.css'),
+                path.join(fontDir, 'font.css')
+            ])
+            .pipe(concat('alloy-editor-' + skin + '.css'))
+            .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets')));
+    });
+
+    return es.concat.apply(null, tasks);
 });
 
 gulp.task('make-css', function(callback) {
