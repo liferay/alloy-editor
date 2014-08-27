@@ -9,7 +9,7 @@ YUI.add('toolbar-image', function(Y) {
          *
          * @class ToolbarImage
          */
-        ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide, Y.ToolbarBase], {
+        ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide, Y.ToolbarBase, Y.ToolbarPosition], {
             /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
@@ -69,31 +69,6 @@ YUI.add('toolbar-image', function(Y) {
                 this._moveToPoint(this.getConstrainedXY(xy), direction, {
                     visible: visible
                 });
-            },
-
-            /**
-             * Calculates the position of the Toolbar, taking in consideration
-             * the {{#crossLink "ToolbarImage/gutter:attribute"}}{{/crossLink}}
-             *
-             * @method _getToolbarXYPoint
-             * @protected
-             * @param {Number} left The left offset in page coordinates.
-             * @param {Number} top The top offset in page coordinates.
-             * @return {Array} An array with left and top offsets of the point in page coordinates.
-             */
-            _getToolbarXYPoint: function(left, top) {
-                var bbDOMNode,
-                    gutter;
-
-                bbDOMNode = this.get('boundingBox').getDOMNode();
-
-                left = left - bbDOMNode.offsetWidth / 2;
-
-                gutter = this.get('gutter');
-
-                top = top - bbDOMNode.offsetHeight - gutter.top;
-
-                return [left, top];
             },
 
             /**
@@ -199,30 +174,11 @@ YUI.add('toolbar-image', function(Y) {
                 constrain: {
                     validator: Lang.isBoolean,
                     value: true
-                },
-
-                /**
-                 * Specifies the gutter of the tooltip. The gutter object contains the top and left
-                 * offsets from the point, where the tooltip is supposed to appear.
-                 *
-                 * @attribute gutter
-                 * @default {
-                 *   left: 0,
-                 *   top: 0
-                 * }
-                 * @type Object
-                 */
-                gutter: {
-                    validator: Lang.isObject,
-                    value: {
-                        left: 0,
-                        top: 10
-                    }
                 }
             }
         });
 
     Y.ToolbarImage = ToolbarImage;
 }, '', {
-    requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base']
+    requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base', 'toolbar-position']
 });
