@@ -1,0 +1,36 @@
+/* line 2, ../../../sass/skin/ocean/arrow-box-skin.scss */
+.alloy-editor-arrow-box:after, .alloy-editor-arrow-box:before {
+  border: solid transparent;
+}
+/* line 7, ../../../sass/skin/ocean/arrow-box-skin.scss */
+.alloy-editor-arrow-box.alloy-editor-arrow-box-top:after {
+  border-bottom-color: #215ec0;
+}
+/* line 11, ../../../sass/skin/ocean/arrow-box-skin.scss */
+.alloy-editor-arrow-box.alloy-editor-arrow-box-top:before {
+  border-bottom-color: #215ec0;
+}
+/* line 17, ../../../sass/skin/ocean/arrow-box-skin.scss */
+.alloy-editor-arrow-box.alloy-editor-arrow-box-bottom:after {
+  border-top-color: #215ec0;
+}
+/* line 21, ../../../sass/skin/ocean/arrow-box-skin.scss */
+.alloy-editor-arrow-box.alloy-editor-arrow-box-bottom:before {
+  border-top-color: #215ec0;
+}
+/* line 27, ../../../sass/skin/ocean/arrow-box-skin.scss */
+.alloy-editor-arrow-box.alloy-editor-arrow-box-left:after {
+  border-right-color: #215ec0;
+}
+/* line 31, ../../../sass/skin/ocean/arrow-box-skin.scss */
+.alloy-editor-arrow-box.alloy-editor-arrow-box-left:before {
+  border-right-color: #215ec0;
+}
+/* line 37, ../../../sass/skin/ocean/arrow-box-skin.scss */
+.alloy-editor-arrow-box.alloy-editor-arrow-box-right:after {
+  border-left-color: #215ec0;
+}
+/* line 41, ../../../sass/skin/ocean/arrow-box-skin.scss */
+.alloy-editor-arrow-box.alloy-editor-arrow-box-right:before {
+  border-left-color: #215ec0;
+}
