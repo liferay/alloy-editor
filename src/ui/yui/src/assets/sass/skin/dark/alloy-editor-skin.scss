@@ -1,0 +1,118 @@
+@import "compass/css3";
+
+$prefixes: ("-webkit-", "-moz-", "-o-", "");
+
+@each $prefix in $prefixes {
+    ::#{$prefix}selection {
+        @include text-shadow(none);
+        background: #d3effa !important;
+    }
+
+    .alloyeditor-add-toolbar {
+        ::#{$prefix}selection {
+            @include text-shadow(none);
+            background: #f3dada !important;
+        }
+    }
+}
+
+.alloy-editor-toolbar {
+    @include opacity(0.95);
+    border: none;
+}
+
+.alloy-editor-toolbar {
+    .alloy-editor-button {
+        @include box-shadow(none);
+        @include transition(color 0.1s ease-out);
+        background-color: #2f323d;
+        background-image: none;
+        color: #fff;
+        height: 40px;
+        width: 40px;
+
+        &:hover {
+            background-image: none;
+            color: #44b6e0;
+        }
+
+        &.yui3-button-selected, &.yui3-button-active, &.yui3-button:active {
+            @include box-shadow(none);
+            background-color: #2f323d;
+            color: #44b6e0;
+        }
+
+        &.yui3-button-selected, &.yui3-button-active, &.yui3-button:active {
+            &:hover {
+                background-color: #2f323d;
+            }
+        }
+    }
+}
+
+.alloy-editor-toolbar-styles {
+    .link-wrapper {
+        @include border-radius(4px);
+        background-color: #2f323d;
+        height: 40px;
+        margin-left: 5px;
+
+        input {
+            border: none;
+        }
+
+        .input-container {
+            background-color: #fff;
+            color: #2f232d;
+            margin: 4px;
+            padding: 5px;
+
+            .input-clear {
+                color: #b1b1b1;
+            }
+        }
+
+        .input-close-container {
+            .close-link {
+                color: #27be0e;
+
+                &.yui3-button[disabled], &.yui3-button-disabled {
+                    @include box-shadow(none);
+                    color: #fff;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.alloy-editor-toolbar-add-trigger {
+    @include box-shadow(none);
+
+    .alloy-editor-button {
+        @include border-radius(13px);
+
+        height: 26px;
+        padding: 6px;
+        width: 26px;
+    }
+}
+
+.alloy-editor-tooltip-link {
+    @include border-radius(4px);
+    @include opacity(0.95);
+    background-color: #2f323d;
+    padding: 2px 4px;
+
+    .link-container {
+        color: #fff;
+
+        .link-preview {
+            color: #fff;
+        }
+    }
+}
+
+.alloy-editor-placeholder:empty:not(:focus) {
+    background-color: #ffffe0;
+}
