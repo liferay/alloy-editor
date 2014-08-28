@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'alloyeditor';
-	src:url('fonts/alloyeditor.eot?-tvh8ta');
-	src:url('fonts/alloyeditor.eot?#iefix-tvh8ta') format('embedded-opentype'),
-		url('fonts/alloyeditor.woff?-tvh8ta') format('woff'),
-		url('fonts/alloyeditor.ttf?-tvh8ta') format('truetype'),
-		url('fonts/alloyeditor.svg?-tvh8ta#alloyeditor') format('svg');
+	src:url('fonts/alloyeditor.eot?czpkrq');
+	src:url('fonts/alloyeditor.eot?#iefixczpkrq') format('embedded-opentype'),
+		url('fonts/alloyeditor.woff?czpkrq') format('woff'),
+		url('fonts/alloyeditor.ttf?czpkrq') format('truetype'),
+		url('fonts/alloyeditor.svg?czpkrq#alloyeditor') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,60 +23,75 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.alloy-editor-icon-back:before {
-	content: "\e600";
+.alloy-editor-icon-align-left:before {
+	content: "\f036";
+}
+.alloy-editor-icon-align-center:before {
+	content: "\f037";
+}
+.alloy-editor-icon-align-right:before {
+	content: "\f038";
 }
 .alloy-editor-icon-bold:before {
+	content: "\e600";
+}
+.alloy-editor-icon-italic:before {
 	content: "\e601";
 }
-.alloy-editor-icon-ok:before {
+.alloy-editor-icon-underline:before {
 	content: "\e602";
 }
-.alloy-editor-icon-remove-small:before {
+.alloy-editor-icon-unlink:before {
 	content: "\e603";
 }
-.alloy-editor-icon-code:before {
+.alloy-editor-icon-twitter:before {
 	content: "\e604";
 }
 .alloy-editor-icon-edit:before {
 	content: "\e605";
 }
-.alloy-editor-icon-h1:before {
+.alloy-editor-icon-media-sign:before {
 	content: "\e606";
 }
-.alloy-editor-icon-h2:before {
+.alloy-editor-icon-add:before {
 	content: "\e607";
 }
-.alloy-editor-icon-h3:before {
+.alloy-editor-icon-code:before {
 	content: "\e608";
 }
-.alloy-editor-icon-h4:before {
+.alloy-editor-icon-ok:before {
 	content: "\e609";
 }
-.alloy-editor-icon-image:before {
+.alloy-editor-icon-remove:before {
 	content: "\e60a";
 }
-.alloy-editor-icon-italic:before {
+.alloy-editor-icon-link:before {
 	content: "\e60b";
 }
-.alloy-editor-icon-align-left:before {
+.alloy-editor-icon-h2:before {
 	content: "\e60c";
 }
-.alloy-editor-icon-link:before {
+.alloy-editor-icon-h1:before {
 	content: "\e60d";
 }
-.alloy-editor-icon-add:before {
+.alloy-editor-icon-image-sign:before {
 	content: "\e60e";
 }
-.alloy-editor-icon-align-right:before {
+.alloy-editor-icon-twitter-sign:before {
 	content: "\e60f";
 }
-.alloy-editor-icon-twitter:before {
+.alloy-editor-icon-code-sign:before {
 	content: "\e610";
 }
-.alloy-editor-icon-underline:before {
+.alloy-editor-icon-quote-sign:before {
 	content: "\e611";
 }
-.alloy-editor-icon-unlink:before {
+.alloy-editor-icon-hline-sign:before {
 	content: "\e612";
+}
+.alloy-editor-icon-h3:before {
+	content: "\e613";
+}
+.alloy-editor-icon-h4:before {
+	content: "\e614";
 }
