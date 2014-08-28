@@ -92,7 +92,7 @@ YUI.add('button-image', function(Y) {
             inputFile.set('value', '');
         },
 
-        TPL_CONTENT: '<i class="alloy-editor-icon-image"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-image-sign"></i>'
     }, {
         NAME: 'image',
 

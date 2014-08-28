@@ -23,7 +23,7 @@
 
             input {
                 outline: none;
-                width: 165px;
+                width: 162px;
             }
 
             input::-ms-clear {
@@ -32,9 +32,9 @@
 
             .input-clear {
                 display: inline-block;
-                height: 11px;
+                height: 14px;
                 vertical-align: text-top;
-                width: 12px;
+                width: 14px;
 
                 i {
                     cursor: pointer;
@@ -47,6 +47,10 @@
 .alloy-editor-toolbar-add-items {
     .btn-group-vertical {
         margin-left: 5px;
+    }
+
+    .alloy-editor-button {
+        font-size: 20px;
     }
 }
 

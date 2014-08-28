@@ -24,7 +24,7 @@
 /* line 24, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container input {
   outline: none;
-  width: 165px;
+  width: 162px;
 }
 /* line 29, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container input::-ms-clear {
@@ -33,9 +33,9 @@
 /* line 33, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear {
   display: inline-block;
-  height: 11px;
+  height: 14px;
   vertical-align: text-top;
-  width: 12px;
+  width: 14px;
 }
 /* line 39, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear i {
@@ -43,23 +43,28 @@
 }
 
 /* line 48, ../sass/alloy-editor-core.scss */
+.alloy-editor-toolbar-add .alloy-editor-button {
+  font-size: 20px;
+}
+
+/* line 54, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-add-items .btn-group-vertical {
   margin-left: 5px;
 }
 
-/* line 55, ../sass/alloy-editor-core.scss */
+/* line 61, ../sass/alloy-editor-core.scss */
 .alloy-editor-tooltip-link .link-container .icon-link-container {
   margin: 0 5px 0 5px;
   vertical-align: text-top;
 }
-/* line 60, ../sass/alloy-editor-core.scss */
+/* line 66, ../sass/alloy-editor-core.scss */
 .alloy-editor-tooltip-link .link-container .link-preview {
   display: inline-block;
   padding: 4px;
   outline: none;
 }
 
-/* line 68, ../sass/alloy-editor-core.scss */
+/* line 74, ../sass/alloy-editor-core.scss */
 .alloy-editor-placeholder:empty:not(:focus):before {
   content: attr(data-placeholder);
 }
