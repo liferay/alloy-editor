@@ -46,10 +46,34 @@
         requires: ['button-base']
     },
 
+    'button-twitterquote': {
+        group: 'AlloyEditor',
+        path: 'buttons/button-twitterquote.js',
+        requires: ['button-base']
+    },
+
+    'button-hline': {
+        group: 'AlloyEditor',
+        path: 'buttons/button-hline.js',
+        requires: ['button-base']
+    },
+
     'button-image': {
         group: 'AlloyEditor',
         path: 'buttons/button-image.js',
         requires: ['button-base', 'node-event-simulate']
+    },
+
+    'button-media': {
+        group: 'AlloyEditor',
+        path: 'buttons/button-media.js',
+        requires: ['button-base']
+    },
+
+    'button-quote': {
+        group: 'AlloyEditor',
+        path: 'buttons/button-quote.js',
+        requires: ['button-base']
     },
 
     'button-code': {

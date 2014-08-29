@@ -272,7 +272,7 @@ YUI.add('toolbar-add', function(Y) {
                  */
                 buttons: {
                     validator: Lang.isArray,
-                    value: ['image', 'code']
+                    value: ['twitterquote', 'hline', 'image', 'media', 'quote', 'code']
                 },
 
                 /**
