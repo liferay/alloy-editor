@@ -211,7 +211,7 @@ YUI.add('alloy-editor', function(Y) {
              *
              * @default
              *     toolbars {
-             *         add: ['twitterquote', 'hline', 'image', 'media', 'quote', 'code'],
+             *         add: ['image'],
              *         image: ['left', 'right'],
              *         styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
              *     }
@@ -221,7 +221,7 @@ YUI.add('alloy-editor', function(Y) {
             toolbars: {
                 validator: '_validateToolbars',
                 value: {
-                    add: ['twitterquote', 'hline', 'image', 'media', 'quote', 'code'],
+                    add: ['image'],
                     image: ['left', 'right'],
                     styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
                 }

@@ -312,12 +312,12 @@ YUI.add('toolbar-add', function(Y) {
                  * </pre></code>
                  *
                  * @attribute buttons
-                 * @default ['image', 'code']
+                 * @default ['image']
                  * @type Array
                  */
                 buttons: {
                     validator: Lang.isArray,
-                    value: ['twitterquote', 'hline', 'image', 'media', 'quote', 'code']
+                    value: ['image']
                 },
 
                 /**
