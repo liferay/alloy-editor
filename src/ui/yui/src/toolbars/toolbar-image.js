@@ -127,7 +127,7 @@ YUI.add('toolbar-image', function(Y) {
                 if (element) {
                     region = Y.DOM.region(element.$);
 
-                    this.showAtPoint(region.left + (region.right - region.left) / 2, region.top);
+                    this.showAtPoint(region.left + (region.right - region.left) / 2, region.top, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
                 }
             },
 

@@ -91,12 +91,16 @@ YUI.add('toolbar-position', function(Y) {
 
             gutter = this.get('gutter');
 
-            left = left - gutter.left - (bbDOMNode.offsetWidth / 2);
+            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
 
-            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                top = top + gutter.top;
-            } else {
-                top = top - bbDOMNode.offsetHeight - gutter.top;
+                left = left - gutter.left - (bbDOMNode.offsetWidth / 2);
+                top = (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) ? (top + gutter.top) : (top - bbDOMNode.offsetHeight - gutter.top);
+
+            } else if (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT || direction === CKEDITOR.SELECTION_RIGHT_TO_LEFT) {
+
+                left = (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT) ? (left + gutter.left + bbDOMNode.offsetHeight / 2) : (left - 3 * bbDOMNode.offsetHeight / 2 - gutter.left);
+                top = top - gutter.top - (bbDOMNode.offsetHeight / 2);
+
             }
 
             return [left, top];

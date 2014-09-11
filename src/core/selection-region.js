@@ -7,6 +7,8 @@
 
     CKEDITOR.SELECTION_TOP_TO_BOTTOM = 0;
     CKEDITOR.SELECTION_BOTTOM_TO_TOP = 1;
+    CKEDITOR.SELECTION_LEFT_TO_RIGHT = 2;
+    CKEDITOR.SELECTION_RIGHT_TO_LEFT = 3;
 
     /**
      * SelectionRegion utility class which provides metadata about the selection. The metadata may be the start and end

@@ -4,6 +4,13 @@ YUI.add('toolbar-add', function(Y) {
     var Lang = Y.Lang,
         YNode = Y.Node,
 
+        ARROW_BOX_CLASSES = [
+            'alloy-editor-arrow-box-top',
+            'alloy-editor-arrow-box-bottom',
+            'alloy-editor-arrow-box-left',
+            'alloy-editor-arrow-box-right'
+        ],
+
         ToolbarAddTrigger,
 
         /**
@@ -82,15 +89,15 @@ YUI.add('toolbar-add', function(Y) {
 
                 boundingBox = this.get('boundingBox');
 
-                if (this.get('editor').isSelectionEmpty()) {
-                    direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+                if (this._isCurrentLineEmpty()) {
+                    direction = CKEDITOR.SELECTION_LEFT_TO_RIGHT;
                 }
 
-                if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    boundingBox.replaceClass('alloy-editor-arrow-box-bottom', 'alloy-editor-arrow-box-top');
-                } else {
-                    boundingBox.replaceClass('alloy-editor-arrow-box-top', 'alloy-editor-arrow-box-bottom');
-                }
+                Y.Array.each(ARROW_BOX_CLASSES, function(item) {
+                    boundingBox.removeClass(item);
+                });
+
+                boundingBox.addClass(ARROW_BOX_CLASSES[direction || 0]);
 
                 visible = this.get('visible');
 

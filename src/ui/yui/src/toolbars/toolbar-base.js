@@ -2,7 +2,9 @@ YUI.add('toolbar-base', function(Y) {
     'use strict';
 
     var Lang = Y.Lang,
-        YArray = Y.Array;
+        YArray = Y.Array,
+
+        EMPTY_LINE_REGEX = /\r?\n/;
 
     function ToolbarBase() {}
 
@@ -66,6 +68,8 @@ YUI.add('toolbar-base', function(Y) {
                 boundingBoxNode,
                 height,
                 transition,
+                x,
+                width,
                 y;
 
             transition = this.get('transition');
@@ -76,18 +80,23 @@ YUI.add('toolbar-base', function(Y) {
             boundingBoxNode = boundingBox.getDOMNode();
 
             height = boundingBoxNode.offsetHeight;
+            width = boundingBoxNode.offsetWidth;
 
             // Change the original points where the Toolbar should be positioned.
             // The X will be the same, but we will extract or add the height of the
             // Toolbar to the Y point.
+            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
 
-            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                y = xy[1] - height;
-            } else {
-                y = xy[1] + height;
+                x = xy[0];
+                y = (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) ? (xy[1] - height) : (xy[1] + height);
+
+            } else if (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT || direction === CKEDITOR.SELECTION_RIGHT_TO_LEFT) {
+
+                x = (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT) ? (xy[0] - width) : (xy[0] + width);
+                y = xy[1];
             }
 
-            this.set('xy', [xy[0], y]);
+            this.set('xy', [x, y]);
 
             transition.left = xy[0] + 'px';
             transition.top = xy[1] + 'px';
@@ -140,6 +149,21 @@ YUI.add('toolbar-base', function(Y) {
          */
         _getButtonInstanceName: function(buttonName) {
             return 'Button' + buttonName.substring(0, 1).toUpperCase() + buttonName.substring(1);
+        },
+
+        /**
+         * Detects if the current line is empty
+         *
+         * @method _isCurrentLineEmpty
+         * @protected
+         * @return {Boolean} True if the current line is empty.
+         */
+        _isCurrentLineEmpty: function() {
+            var currentLine;
+
+            currentLine = this.get('editor').getSelection().getRanges()[0].getCommonAncestor();
+
+            return EMPTY_LINE_REGEX.test(currentLine.getText());
         },
 
         /**
