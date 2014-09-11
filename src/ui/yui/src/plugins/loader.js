@@ -98,6 +98,25 @@
             },
 
             /**
+             * Resolves the name of a button module passed through configuration.
+             *
+             * @method  _getButtonName
+             * @protected
+             * @param  {String|Object} button A string representing the button or an object
+             * with a name attribute.
+             * @return {String} The name of the button.
+             */
+            _getButtonName: function(button) {
+                var buttonName = button;
+
+                if (typeof button !== 'string') {
+                    buttonName = button.name;
+                }
+
+                return buttonName
+            },
+
+            /**
              * Retrieves a list of modules for all registered buttons and toolbars in the current
              * editor configuration.
              * The module will be automatically discovered if it follows this specification:
@@ -133,11 +152,11 @@
 
                         if (CKEDITOR.tools.isArray(toolbarsConfig[i])) {
                             for (j = toolbarsConfig[i].length - 1; j >= 0; j--) { // put button modules
-                                modules.push('button-' + toolbarsConfig[i][j]);
+                                modules.push('button-' + this._getButtonName(toolbarsConfig[i][j]));
                             }
                         } else if (toolbarsConfig[i]) {
                             for (j = toolbarsConfig[i].buttons.length - 1; j >= 0; j--) { // put button modules
-                                modules.push('button-' + toolbarsConfig[i].buttons[j]);
+                                modules.push('button-' + this._getButtonName(toolbarsConfig[i].buttons[j]));
                             }
                         }
                     }

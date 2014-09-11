@@ -148,9 +148,12 @@ YUI.add('toolbar-image', function(Y) {
                  *     or:
                  * <pre><code>
                  *     buttons: [
-                 *         'left': {
-                 *             zIndex: 1024,
-                 *             property2: 1024
+                 *         {
+                 *             name: 'left',
+                 *             cfg: {
+                 *                 zIndex: 1024,
+                 *                 property2: 1024
+                 *             }
                  *         }
                  *     ]
                  * </pre></code>

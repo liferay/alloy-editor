@@ -119,9 +119,12 @@ YUI.add('toolbar-styles', function(Y) {
                  *     or:
                  * <pre><code>
                  *     buttons: [
-                 *         'strong': {
-                 *             zIndex: 1024,
-                 *             property2: 1024
+                 *         {
+                 *             name: 'strong',
+                 *             cfg: {
+                 *                 zIndex: 1024,
+                 *                 property2: 1024
+                 *             }
                  *         }
                  *     ]
                  * </pre></code>

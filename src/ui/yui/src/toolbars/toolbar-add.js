@@ -304,9 +304,12 @@ YUI.add('toolbar-add', function(Y) {
                  *     or:
                  * <pre><code>
                  *     buttons: [
-                 *         'image': {
-                 *             zIndex: 1024,
-                 *             property2: 1024
+                 *         {
+                 *             name: 'image',
+                 *             cfg: {
+                 *                 zIndex: 1024,
+                 *                 property2: 1024
+                 *             }
                  *         }
                  *     ]
                  * </pre></code>

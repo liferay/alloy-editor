@@ -30,13 +30,17 @@ YUI.add('toolbar-base', function(Y) {
             YArray.each(
                 instance.get('buttons'),
                 function(item) {
-                    var instanceName;
+                    var buttonName,
+                        cfg,
+                        instanceName;
 
-                    instanceName = instance._getButtonInstanceName(item);
+                    buttonName = Lang.isObject(item) ? item.name : item;
 
-                    item = Lang.isObject(item) ? item : null;
+                    instanceName = instance._getButtonInstanceName(buttonName);
 
-                    instance.plug(Y[instanceName], item);
+                    cfg = Lang.isObject(item) ? item.cfg : null;
+
+                    instance.plug(Y[instanceName], cfg);
 
                     // Each button will fire actionPerformed when user interacts with it. Here we will
                     // re-fire this event to the other buttons so they will be able to update their UI too.
