@@ -70,24 +70,39 @@ YUI.add('toolbar-add', function(Y) {
              * Calculates and sets the position of the toolbar.
              *
              * @method showAtPoint
-             * @param {Object} triggerPosition Position (x,y) for the trigger.
-             * @param {Object} toolbarPosition Position (x,y) for the toolbar.
+             * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
+             * @param {Number} top The top offset in page coordinates where Toolbar should be shown.
+             * @param {Number} direction The direction of the selection. May be one of the following:
+             * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
              */
-            showAtPoint: function(triggerPosition, toolbarPosition) {
-                var triggerButtonContainer,
-                    triggerGutter;
+            showAtPoint: function(left, top, direction) {
+                var boundingBox,
+                    visible,
+                    xy;
 
-                if (!this._trigger.get('visible')) {
-                    this._trigger.show();
+                boundingBox = this.get('boundingBox');
+
+                if (this.get('editor').isSelectionEmpty()) {
+                    direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
                 }
 
-                triggerButtonContainer = this._triggerButtonContainer.getDOMNode();
+                if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                    boundingBox.replaceClass('alloy-editor-arrow-box-bottom', 'alloy-editor-arrow-box-top');
+                } else {
+                    boundingBox.replaceClass('alloy-editor-arrow-box-top', 'alloy-editor-arrow-box-bottom');
+                }
 
-                triggerGutter = this.get('triggerGutter');
+                visible = this.get('visible');
 
-                this._trigger.set('xy', this.getConstrainedXY([triggerPosition.x - triggerButtonContainer.offsetWidth - triggerGutter.left, triggerPosition.y - triggerGutter.top - triggerButtonContainer.offsetHeight / 2]));
+                if (!visible) {
+                    this.show();
+                }
 
-                this._toolbarPosition = toolbarPosition;
+                xy = this._getToolbarXYPoint(left, top, direction);
+
+                this._moveToPoint(this.getConstrainedXY(xy), direction, {
+                    visible: visible
+                });
             },
 
             /**
@@ -136,17 +151,12 @@ YUI.add('toolbar-add', function(Y) {
                 if (selectionData.region) {
                     startRect = selectionData.region.startRect || selectionData.region;
 
-                    triggerPosition = {
-                        x: this._editorNode.getX(),
-                        y: selectionData.region.top + startRect.height / 2
-                    };
-
-                    toolbarPosition = this._calculatePosition(selectionData, {
+                    this._toolbarPosition = this._calculatePosition(selectionData, {
                         x: nativeEvent.pageX,
                         y: nativeEvent.pageY
                     });
 
-                    this.showAtPoint(triggerPosition, toolbarPosition);
+                    this._showTriggerAtPoint(this._editorNode.getX(), selectionData.region.top + startRect.height / 2);
                 }
             },
 
@@ -225,46 +235,6 @@ YUI.add('toolbar-add', function(Y) {
             },
 
             /**
-             * Calculates and sets the position of the toolbar. Internally, uses a toolbarPosition
-             * object stored from the previous editorInteraction event.
-             *
-             * @method _showToolbar
-             * @protected
-             */
-            _showToolbar: function() {
-                var boundingBox,
-                    toolbarPosition,
-                    visible,
-                    xy;
-
-                boundingBox = this.get('boundingBox');
-
-                toolbarPosition = this._toolbarPosition;
-
-                if (this.get('editor').isSelectionEmpty()) {
-                    toolbarPosition.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
-                }
-
-                if (toolbarPosition.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    boundingBox.replaceClass('alloy-editor-arrow-box-bottom', 'alloy-editor-arrow-box-top');
-                } else {
-                    boundingBox.replaceClass('alloy-editor-arrow-box-top', 'alloy-editor-arrow-box-bottom');
-                }
-
-                visible = this.get('visible');
-
-                if (!visible) {
-                    this.show();
-                }
-
-                xy = this._getToolbarXYPoint(toolbarPosition.x, toolbarPosition.y, toolbarPosition.direction);
-
-                this._moveToPoint(this.getConstrainedXY(xy), toolbarPosition.direction, {
-                    visible: visible
-                });
-            },
-
-            /**
              * Shows the toolbar and hides the toolbar trigger on the margin.
              *
              * @method _showToolbarAddContent
@@ -273,11 +243,34 @@ YUI.add('toolbar-add', function(Y) {
             _showToolbarAddContent: function() {
                 this._hideEditorToolbars();
 
-                this._showToolbar();
+                this.showAtPoint(this._toolbarPosition.x, this._toolbarPosition.y, this._toolbarPosition.direction);
 
                 this._trigger.hide();
 
                 this._editorNode.focus();
+            },
+
+            /**
+             * Calculates and sets the position of the add toolbar trigger.
+             *
+             * @method _showTriggerAtPoint
+             * @protected
+             * @param {Number} left The left offset in page coordinates where Trigger should be shown.
+             * @param {Number} top The top offset in page coordinates where Trigger should be shown.
+             */
+            _showTriggerAtPoint: function(left, top) {
+                var triggerButtonContainer,
+                    triggerGutter;
+
+                if (!this._trigger.get('visible')) {
+                    this._trigger.show();
+                }
+
+                triggerButtonContainer = this._triggerButtonContainer.getDOMNode();
+
+                triggerGutter = this.get('triggerGutter');
+
+                this._trigger.set('xy', this.getConstrainedXY([left - triggerButtonContainer.offsetWidth - triggerGutter.left, top - triggerGutter.top - triggerButtonContainer.offsetHeight / 2]));
             },
 
             BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add alloy-editor-arrow-box"></div>',

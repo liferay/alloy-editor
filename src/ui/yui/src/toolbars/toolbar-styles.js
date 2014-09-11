@@ -35,7 +35,7 @@ YUI.add('toolbar-styles', function(Y) {
              *
              * @method showAtPoint
              * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
-             * @param {Number} right The right offset in page coordinates where Toolbar should be shown.
+             * @param {Number} top The right offset in page coordinates where Toolbar should be shown.
              * @param {Number} direction The direction of the selection. May be one of the following:
              * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
              */
