@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.2</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -202,27 +204,6 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
-                                <a href="#method__calculatePosition">_calculatePosition</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__getToolbarXYPoint">_getToolbarXYPoint</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__getXPoint">_getXPoint</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
                                 <a href="#method__onEditorInteraction">_onEditorInteraction</a>
 
                                 
@@ -263,10 +244,6 @@
                                 <a href="#attr_constrain">constrain</a>
                             </li>
                         
-                            <li class="index-item attr">
-                                <a href="#attr_gutter">gutter</a>
-                            </li>
-                        
                     </ul>
                 </div>
             
@@ -277,431 +254,6 @@
         
             <div id="methods" class="api-class-tabpanel tab-pane">
                 <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method__calculatePosition" class="method item protected">
-    <h3 class="name"><code>_calculatePosition</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>selectionData</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>pos</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l68"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:68</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Calculates the position of the toolbar. Depending on the direction of the
-selection, ToolbarStyles may appear above on or on bottom of the selection.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">selectionData</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The data about the selection in the editor as
-returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">pos</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Contains the coordinates of the position, considered as most appropriate.
-This may be the point where the user released the mouse, or just the beginning or the end of
-the selection.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-                    
-                    <p>An Object which contains the following properties:
-direction, x, y, where x and y are in page coordinates and direction can be one of these:
-CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__getToolbarXYPoint" class="method item protected">
-    <h3 class="name"><code>_getToolbarXYPoint</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>left</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>right</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>direction</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l126"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:126</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns the position of the Toolbar taking in consideration the
-<a href="../classes/ToolbarStyles.html#attr_gutter" class="crosslink">gutter</a> attribute.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">left</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The left offset in page coordinates where Toolbar should be shown.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">right</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The right offset in page coordinates where Toolbar should be shown.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">direction</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The direction of the selection. May be one of the following:
-CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
-                    
-                    <p>An Array with left and top offsets in page coordinates.</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__getXPoint" class="method item protected">
-    <h3 class="name"><code>_getXPoint</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>selectionData</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>eventX</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l157"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:157</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns the position of the Toolbar taking in consideration the
-<a href="../classes/ToolbarStyles.html#attr_gutter" class="crosslink">gutter</a> attribute.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">selectionData</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The data about the selection in the editor as
-returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">eventX</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The X coordinate received from the native event (mouseup).</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
-                    
-                    <p>The calculated X point in page coordinates.</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
 
                 
                     <div id="method__onEditorInteraction" class="method item protected">
@@ -748,7 +300,7 @@ returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_g
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l197"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:197</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l68"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:68</code></a>
         
         </p>
 
@@ -869,7 +421,7 @@ information.</p>
             
                 <li class="arg">
                     
-                        <code>right</code>
+                        <code>top</code>
                     
                 </li>
             
@@ -947,7 +499,7 @@ information.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">right</code>
+                        <code class="param-name">top</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
 
@@ -1028,7 +580,7 @@ CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l241"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:241</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l112"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:112</code></a>
         
         </p>
 
@@ -1047,9 +599,12 @@ with properties, like this:</p>
     or:</p>
 <p><pre class="code prettyprint"><code>
     buttons: [
-        &#39;strong&#39;: {
-            zIndex: 1024,
-            property2: 1024
+        {
+            name: &#39;strong&#39;,
+            cfg: {
+                zIndex: 1024,
+                property2: 1024
+            }
         }
     ]
 </pre></code></p>
@@ -1147,7 +702,7 @@ with properties, like this:</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l267"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:267</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l141"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:141</code></a>
         
         </p>
 
@@ -1171,115 +726,6 @@ with properties, like this:</p>
 
             <p>
             Fires when the value for the configuration attribute <code>constrain</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_gutter" class="attr item">
-    <a name="config_gutter"></a> 
-    <h3 class="name"><code>gutter</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-styles.js.html#l279"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-styles.js:279</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Specifies the gutter of the toolbar. The gutter object contains the top and left
-offsets from the point, where the toolbar is supposed to appear.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> {
-  left: 0,
-  top: 10
-}</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>gutterChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>gutter</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the

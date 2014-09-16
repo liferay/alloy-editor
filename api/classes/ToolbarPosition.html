@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonBase - AlloyEditor</title>
+    <title>ToolbarPosition - AlloyEditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -151,7 +151,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-    <h1>ButtonBase <small>Class</small></h1>
+    <h1>ToolbarPosition <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
@@ -161,7 +161,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:9</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-position.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-position.js:9</code></a>
         </div>
     
 
@@ -173,55 +173,8 @@
 
 
 <div class="well well-small intro">
-    <p>The ButtonBase class provides common functionality for a button like
-reacting on click event, rendering and updating the UI.
-A button implementation may be as simple as changing the style of selection
-to bold, italic, underline, etc. or to be very complex - for example, to change
-the UI of the host (toolbar). <br />
-ToolbarBase and ButtonBase will provide everything you need to implement whatever you need.
-Toolbars, which mix ToolbarBase extension will provide a container, where the button
-should render. This container is accessible via &quot;buttonsContainer&quot; attribute.
-If your button just changes the style of the selection, then everything you have to do
-in order to implement it is: <br /></p>
-<ul>
-<li>extend Y.Plugin.Base and mix Y.ButtonBase extension</li>
-<li><p>specify the element to which you want to style the selection. This should be done via
-&quot;element&quot; attribute. Here is the code: <br /></p>
-<pre class="code prettyprint"><code>
- YUI.add('button-em', function (Y) {
-     'use strict';
-
-      var Lang = Y.Lang;
-
-      var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {
-          TPL_CONTENT: '&lt;i class=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/i&gt;'
-      }, {
-          NAME: 'em',
-
-          NS: 'em',
-
-          ATTRS: {
-              element: {
-                  validator: Lang.isString,
-                  value: 'em'
-              }
-          }
-      });
-
-      Y.ButtonEm = Em;
-
-  },'', {
-      requires: ['button-base']
-  });
-</code></pre>
-
-</li>
-</ul>
-<p>The code above creates a button, which will allow user to make selection italic.</p>
-<p>A more complex button may change the UI of the host (Toolbar) too. If the Toolbar mix
-ToolbarBase extension, then it will export an attribute, called &quot;buttonContainer&quot;. By
-default, the buttons will be rendered in this container, so one button will be able to
-hide the others and provide a different UI for the host (container).</p>
+    <p>The ToolbarPosition extension provides functionality to position a toolbar
+based on the current selection and the toolbar contents.</p>
 
 </div>
 
@@ -239,8 +192,6 @@ hide the others and provide a different UI for the host (container).</p>
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
         
         
-            <li class="api-class-tab events"><a href="#events">Events</a></li>
-        
     </ul>
 
     <div>
@@ -254,58 +205,21 @@ hide the others and provide a different UI for the host (container).</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
-                                <a href="#method__afterClick">_afterClick</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method__onClick
-protected">_onClick
-protected</a>
+                                <a href="#method__calculatePosition">_calculatePosition</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__renderButtonUI">_renderButtonUI</a>
+                                <a href="#method__getToolbarXYPoint">_getToolbarXYPoint</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method_bindUI">bindUI</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method_destructor">destructor</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method_initializer">initializer</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method_renderUI">renderUI</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_updateUI">updateUI</a>
+                                <a href="#method__getXPoint">_getXPoint</a>
 
                                 
                                 
@@ -324,28 +238,13 @@ protected</a>
                     <ul class="index-list attrs">
                         
                             <li class="index-item attr">
-                                <a href="#attr_toggle">toggle</a>
+                                <a href="#attr_gutter">gutter</a>
                             </li>
                         
                     </ul>
                 </div>
             
 
-            
-                <div class="index-section events tab-pane">
-                    <h3>Events</h3>
-
-                    <ul class="index-list events">
-                        
-                            <li class="index-item event">
-                                <a href="#event_actionPerformed">actionPerformed</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
         </div>
 
@@ -354,304 +253,8 @@ protected</a>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__afterClick" class="method item protected">
-    <h3 class="name"><code>_afterClick</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l177"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:177</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Fires <a href="../classes/ButtonBase.html#event_actionPerformed" class="crosslink">actionPerformed</a>. ButtonBase listens
-to this event and it will call <a href="../classes/ButtonBase.html#method_updateUI" class="crosslink">updateUI</a>
-function, so the buttons which are mutually exclusive, like H1 and H2 will be able to
-update their UI accordingly.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__onClick
-protected" class="method item">
-    <h3 class="name"><code>_onClick
-protected</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l155"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:155</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Applies the style for this button if its current status is pressed
-and removes it if button is not pressed. For example, ButtonStrong will
-apply style &quot;strong&quot; to the selection, when pressed.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__renderButtonUI" class="method item protected">
-    <h3 class="name"><code>_renderButtonUI</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l192"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:192</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>A Toolbar should provide a container (DOM Node) where the buttons will be rendered.
-By default Toolbars, which extend ToolbarBase extension will expose an attribute,
-called &quot;buttonsContainer&quot;. The value of this attribute is the container where buttons will
-be rendered, so they will share common container and one button may hide the others
-temporally and provide custom UI for the Toolbar.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_bindUI" class="method item protected">
-    <h3 class="name"><code>bindUI</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l118"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:118</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>ButtonBase does not provide implementation, the buttons which mix this extension
-may provide one.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_destructor" class="method item protected">
-    <h3 class="name"><code>destructor</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l95"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:95</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Destructor lifecycle implementation for the ButtonBase class. Destroys the internal
-button instance.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_initializer" class="method item protected">
-    <h3 class="name"><code>initializer</code></h3>
+                    <div id="method__calculatePosition" class="method item protected">
+    <h3 class="name"><code>_calculatePosition</code></h3>
 
     
         <div class="args">
@@ -659,7 +262,13 @@ button instance.</p>
             
                 <li class="arg">
                     
-                        <code>config</code>
+                        <code>selectionData</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>pos</code>
                     
                 </li>
             
@@ -668,6 +277,10 @@ button instance.</p>
     
 
     
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        </span>
+    
 
     
 
@@ -694,7 +307,7 @@ button instance.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l72"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:72</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-position.js.html#l16"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-position.js:16</code></a>
         
         </p>
 
@@ -705,7 +318,8 @@ button instance.</p>
     </div>
 
     <div class="description">
-        <p>Initializer lifecycle implementation for the ButtonBase class.</p>
+        <p>Calculates the position of the toolbar. Depending on the direction of the
+selection, ToolbarStyles may appear above on or on bottom of the selection.</p>
 
     </div>
 
@@ -717,14 +331,33 @@ button instance.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">config</code>
+                        <code class="param-name">selectionData</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Configuration object literal for the editor</p>
+                        <p>The data about the selection in the editor as
+returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">pos</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Contains the coordinates of the position, considered as most appropriate.
+This may be the point where the user released the mouse, or just the beginning or the end of
+the selection.</p>
 
                     </div>
 
@@ -736,18 +369,60 @@ button instance.</p>
     
 
     
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                    
+                    <p>An Object which contains the following properties:
+direction, x, y, where x and y are in page coordinates and direction can be one of these:
+CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
+
+                
+            </div>
+        </div>
+    
 
     
 </div>
 
                 
-                    <div id="method_renderUI" class="method item protected">
-    <h3 class="name"><code>renderUI</code></h3>
+                    <div id="method__getToolbarXYPoint" class="method item protected">
+    <h3 class="name"><code>_getToolbarXYPoint</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>left</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>right</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>direction</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+        </span>
     
 
     
@@ -775,7 +450,7 @@ button instance.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l106"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:106</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-position.js.html#l74"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-position.js:74</code></a>
         
         </p>
 
@@ -786,31 +461,123 @@ button instance.</p>
     </div>
 
     <div class="description">
-        <p>Renders the button UI on the host which is typically a toolbar. The protected
-<a href="../classes/ButtonBase.html#method__renderButtonUI" class="crosslink">_renderButtonUI</a> will be called,
-so the buttons which mix this extension will be able to overwrite the default behaviour.</p>
+        <p>Returns the position of the Toolbar taking in consideration the
+ToolbarStyles/gutter:attribute attribute.</p>
 
     </div>
 
     
+        <div class="params">
+            <h4>Parameters:</h4>
 
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">left</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The left offset in page coordinates where Toolbar should be shown.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">right</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The right offset in page coordinates where Toolbar should be shown.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">direction</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The direction of the selection. May be one of the following:
+CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+                    
+                    <p>An Array with left and top offsets in page coordinates.</p>
+
+                
+            </div>
+        </div>
     
 
     
 </div>
 
                 
-                    <div id="method_updateUI" class="method item">
-    <h3 class="name"><code>updateUI</code></h3>
+                    <div id="method__getXPoint" class="method item protected">
+    <h3 class="name"><code>_getXPoint</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>selectionData</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>eventX</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
     
 
     
 
     
-
+        <span class="flag protected">protected</span>
     
 
     
@@ -832,7 +599,7 @@ so the buttons which mix this extension will be able to overwrite the default be
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l129"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:129</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-position.js.html#l109"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-position.js:109</code></a>
         
         </p>
 
@@ -843,17 +610,68 @@ so the buttons which mix this extension will be able to overwrite the default be
     </div>
 
     <div class="description">
-        <p>Updates the toggle status of the button. If the selection has the style, specified by
-the button, its status will be made active and &quot;pressed&quot; attribute of the button will be
-set to true, otherwise, it will be set to false. ButtonStrong for example is toggleable button.
-Once &quot;updateUI&quot; function is called, the implementation will check if style &quot;strong&quot; is active on
-the current selection. If so, &quot;pressed&quot; attribute of the button will be set to true and removed
-otherwise.</p>
+        <p>Returns the position of the Toolbar taking in consideration the
+ToolbarStyles/gutter:attribute attribute.</p>
 
     </div>
 
     
+        <div class="params">
+            <h4>Parameters:</h4>
 
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">selectionData</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The data about the selection in the editor as
+returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">eventX</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The X coordinate received from the native event (mouseup).</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    
+                    <p>The calculated X point in page coordinates.</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -870,10 +688,10 @@ otherwise.</p>
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_toggle" class="attr item">
-    <a name="config_toggle"></a> 
-    <h3 class="name"><code>toggle</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    <div id="attr_gutter" class="attr item">
+    <a name="config_gutter"></a> 
+    <h3 class="name"><code>gutter</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
     
 
@@ -900,7 +718,7 @@ otherwise.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l233"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:233</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-position.js.html#l151"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-position.js:151</code></a>
         
         </p>
 
@@ -910,21 +728,24 @@ otherwise.</p>
     </div>
 
     <div class="description">
-        <p>Specifies if the button is toggleable, or not.
-Buttons may be &quot;toggleable&quot; or &quot;push&quot; buttons.</p>
+        <p>Specifies the gutter of the toolbar. The gutter object contains the top and left
+offsets from the point, where the toolbar is supposed to appear.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> true</p>
+        <p><strong>Default:</strong> {
+  left: 0,
+  top: 10
+}</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>toggleChange</code></h4>
+            <h4>Fires event <code>gutterChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>toggle</code> is
+            Fires when the value for the configuration attribute <code>gutter</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -979,61 +800,6 @@ Buttons may be &quot;toggleable&quot; or &quot;push&quot; buttons.</p>
             </div>
         
 
-        
-            <div id="events" class="api-class-tabpanel tab-pane">
-                <h2 class="off-left">Events</h2>
-
-                
-                    <div id="event_actionPerformed" class="events item">
-    <h3 class="name"><code>actionPerformed</code></h3>
-    <span class="type"></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_buttons_button-base.js.html#l61"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;buttons&#x2F;button-base.js:61</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Fired once after user clicks on the button. ButtonBase will listen to this event and
-call <a href="../classes/ButtonBase.html#method_updateUI" class="crosslink">updateUI</a>, so the buttons
-will have chance to update their UI accordingly. For example, if user clicks on
-H2 button, and then clicks on H1 button, H2 button should remove its
-ButtonBase/pressed:attribute, since these two styles
-are mutually exclusive.</p>
-
-    </div>
-
-    
-
-
-    
-</div>
-
-                
-            </div>
         
     </div>
 </div>

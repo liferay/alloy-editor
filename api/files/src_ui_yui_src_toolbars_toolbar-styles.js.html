@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.2</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -165,7 +167,7 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
          *
          * @class ToolbarStyles
          */
-        ToolbarStyles = Y.Base.create(&#x27;toolbarstyles&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.WidgetPositionConstrain, Y.ToolbarBase], {
+        ToolbarStyles = Y.Base.create(&#x27;toolbarstyles&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
             /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
@@ -191,7 +193,7 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
              *
              * @method showAtPoint
              * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
-             * @param {Number} right The right offset in page coordinates where Toolbar should be shown.
+             * @param {Number} top The right offset in page coordinates where Toolbar should be shown.
              * @param {Number} direction The direction of the selection. May be one of the following:
              * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
              */
@@ -219,135 +221,6 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
                 this._moveToPoint(this.getConstrainedXY(xy), direction, {
                     visible: visible
                 });
-            },
-
-            /**
-             * Calculates the position of the toolbar. Depending on the direction of the
-             * selection, ToolbarStyles may appear above on or on bottom of the selection.
-             *
-             * @method _calculatePosition
-             * @protected
-             * @param {Object} selectionData The data about the selection in the editor as
-             * returned from {{#crossLink &quot;CKEDITOR.plugins.selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
-             * @param {Number} pos Contains the coordinates of the position, considered as most appropriate.
-             * This may be the point where the user released the mouse, or just the beginning or the end of
-             * the selection.
-             * @return {Object} An Object which contains the following properties:
-             * direction, x, y, where x and y are in page coordinates and direction can be one of these:
-             * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
-             */
-            _calculatePosition: function(selectionData, pos) {
-                var direction,
-                    endRect,
-                    startRect,
-                    x,
-                    y;
-
-                direction = selectionData.region.direction;
-
-                endRect = selectionData.region.endRect;
-                startRect = selectionData.region.startRect;
-
-                if (endRect &amp;&amp; endRect &amp;&amp; startRect.top === endRect.top) {
-                    direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
-                }
-
-                // If we have the point where user released the mouse, show Toolbar at this point
-                // otherwise show it on the middle of the selection.
-                if (pos.x &amp;&amp; pos.y) {
-                    x = this._getXPoint(selectionData, pos.x);
-
-                    if (direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
-                        y = Math.min(pos.y, selectionData.region.top);
-                    } else {
-                        y = Math.max(pos.y, selectionData.region.bottom);
-                    }
-                } else {
-                    x = selectionData.region.left + selectionData.region.width / 2;
-
-                    if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                        y = selectionData.region.endRect.bottom;
-                    } else {
-                        y = selectionData.region.startRect.top;
-                    }
-                }
-
-                return {
-                    direction: direction,
-                    x: x,
-                    y: y
-                };
-            },
-
-            /**
-             * Returns the position of the Toolbar taking in consideration the
-             * {{#crossLink &quot;ToolbarStyles/gutter:attribute&quot;}}{{/crossLink}} attribute.
-             *
-             * @method _getToolbarXYPoint
-             * @protected
-             * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
-             * @param {Number} right The right offset in page coordinates where Toolbar should be shown.
-             * @param {Number} direction The direction of the selection. May be one of the following:
-             * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
-             * @return {Array} An Array with left and top offsets in page coordinates.
-             */
-            _getToolbarXYPoint: function(left, top, direction) {
-                var bbDOMNode,
-                    gutter;
-
-                bbDOMNode = this.get(&#x27;boundingBox&#x27;).getDOMNode();
-
-                gutter = this.get(&#x27;gutter&#x27;);
-
-                left = left - gutter.left - (bbDOMNode.offsetWidth / 2);
-
-                if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    top = top + gutter.top;
-                } else {
-                    top = top - bbDOMNode.offsetHeight - gutter.top;
-                }
-
-                return [left, top];
-            },
-
-            /**
-             * Returns the position of the Toolbar taking in consideration the
-             * {{#crossLink &quot;ToolbarStyles/gutter:attribute&quot;}}{{/crossLink}} attribute.
-             *
-             * @method _getXPoint
-             * @protected
-             * @param {Object} selectionData The data about the selection in the editor as
-             * returned from {{#crossLink &quot;CKEDITOR.plugins.selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
-             * @param {Object} eventX The X coordinate received from the native event (mouseup).
-             * @return {Number} The calculated X point in page coordinates.
-             */
-            _getXPoint: function(selectionData, eventX) {
-                var left,
-                    leftDist,
-                    region,
-                    right,
-                    rightDist,
-                    x;
-
-                region = selectionData.region;
-
-                left = region.startRect ? region.startRect.left : region.left;
-                right = region.endRect ? region.endRect.right : region.right;
-
-                if (left &lt; eventX &amp;&amp; right &gt; eventX) {
-                    x = eventX;
-                } else {
-                    leftDist = Math.abs(left - eventX);
-                    rightDist = Math.abs(right - eventX);
-
-                    if (leftDist &lt; rightDist) { // user raised the mouse on left on the selection
-                        x = left;
-                    } else {
-                        x = right;
-                    }
-                }
-
-                return x;
             },
 
             /**
@@ -404,9 +277,12 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
                  *     or:
                  * &lt;pre&gt;&lt;code&gt;
                  *     buttons: [
-                 *         &#x27;strong&#x27;: {
-                 *             zIndex: 1024,
-                 *             property2: 1024
+                 *         {
+                 *             name: &#x27;strong&#x27;,
+                 *             cfg: {
+                 *                 zIndex: 1024,
+                 *                 property2: 1024
+                 *             }
                  *         }
                  *     ]
                  * &lt;/pre&gt;&lt;/code&gt;
@@ -430,32 +306,13 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
                 constrain: {
                     validator: Lang.isBoolean,
                     value: true
-                },
-
-                /**
-                 * Specifies the gutter of the toolbar. The gutter object contains the top and left
-                 * offsets from the point, where the toolbar is supposed to appear.
-                 *
-                 * @attribute gutter
-                 * @default {
-                 *   left: 0,
-                 *   top: 10
-                 * }
-                 * @type Object
-                 */
-                gutter: {
-                    validator: Lang.isObject,
-                    value: {
-                        left: 0,
-                        top: 10
-                    }
                 }
             }
         });
 
     Y.ToolbarStyles = ToolbarStyles;
 }, &#x27;&#x27;, {
-    requires: [&#x27;toolbar-base&#x27;, &#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;, &#x27;widget-autohide&#x27;]
+    requires: [&#x27;toolbar-base&#x27;, &#x27;toolbar-position&#x27;, &#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;, &#x27;widget-autohide&#x27;]
 });
     </pre>
 </div>

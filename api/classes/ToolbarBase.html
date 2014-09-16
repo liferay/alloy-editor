@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.2</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -159,7 +161,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:9</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l11"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:11</code></a>
         </div>
     
 
@@ -224,6 +226,13 @@
                         
                             <li class="index-item method protected">
                                 <a href="#method__getButtonsContainer">_getButtonsContainer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__isCurrentLineEmpty">_isCurrentLineEmpty</a>
 
                                 
                                 
@@ -323,7 +332,7 @@
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l103"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:103</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l116"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:116</code></a>
         
         </p>
 
@@ -422,7 +431,7 @@ an action.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l50"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:50</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l56"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:56</code></a>
         
         </p>
 
@@ -537,7 +546,7 @@ an action.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l127"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:127</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l140"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:140</code></a>
         
         </p>
 
@@ -638,7 +647,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l116"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:116</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l129"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:129</code></a>
         
         </p>
 
@@ -665,6 +674,81 @@ for more information about the rules for constructing button names.</p>
                         <span class="type">Node</span>:
                     
                     <p>The container of all buttons attached to the current isntance of Toolbar.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__isCurrentLineEmpty" class="method item protected">
+    <h3 class="name"><code>_isCurrentLineEmpty</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l154"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:154</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Detects if the current line is empty</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    <p>True if the current line is empty.</p>
 
                 
             </div>
@@ -731,7 +815,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l141"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:141</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l169"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:169</code></a>
         
         </p>
 
@@ -867,7 +951,7 @@ If not, it will be suppressed and only the new position will be set.</li>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l15"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:15</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l17"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:17</code></a>
         
         </p>
 
@@ -956,7 +1040,7 @@ If not, it will be suppressed and only the new position will be set.</li>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l173"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:173</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l201"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:201</code></a>
         
         </p>
 
@@ -1059,7 +1143,7 @@ If not, it will be suppressed and only the new position will be set.</li>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l185"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:185</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l213"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:213</code></a>
         
         </p>
 
@@ -1164,7 +1248,7 @@ If not, it will be suppressed and only the new position will be set.</li>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l196"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:196</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l224"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:224</code></a>
         
         </p>
 
