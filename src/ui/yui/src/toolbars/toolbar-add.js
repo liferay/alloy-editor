@@ -18,7 +18,7 @@ YUI.add('toolbar-add', function(Y) {
          *
          * @class ToolbarAdd
          */
-        ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.ToolbarPosition, Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
+        ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.ToolbarPosition, Y.WidgetPosition, Y.WidgetPositionConstrain], {
             /**
              * Initializer lifecycle implementation for the ToolbarAdd class.
              *
@@ -239,6 +239,8 @@ YUI.add('toolbar-add', function(Y) {
                 this._triggerButton = triggerButton;
 
                 this._triggerButtonContainer = triggerButtonContainer;
+
+                this._triggerButtonContainer.on('keydown', this._onKeyDown, this);
             },
 
             /**
@@ -254,7 +256,9 @@ YUI.add('toolbar-add', function(Y) {
 
                 this._trigger.hide();
 
-                this._editorNode.focus();
+                this.focus();
+
+                Y.soon(this._editorNode.focus);
             },
 
             /**
@@ -335,6 +339,10 @@ YUI.add('toolbar-add', function(Y) {
                     value: true
                 },
 
+                defaultToolbar: {
+                    value: true
+                },
+
                 /**
                  * Specifies the gutter of the trigger button. The gutter object contains the top
                  * and left offsets from the point, where the trigger is supposed to appear.
@@ -358,7 +366,6 @@ YUI.add('toolbar-add', function(Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 
-
     /**
      * The ToolbarAddTrigger class hosts controls for showing the toolbar with the add controls. This class is intended to be
      * used internally by {{#crossLink "ToolbarAdd"}}{{/crossLink}} class.
@@ -373,5 +380,5 @@ YUI.add('toolbar-add', function(Y) {
 
     });
 }, '0.1', {
-    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'widget-autohide', 'toolbar-base', 'toolbar-position']
+    requires: ['timers', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'toolbar-base', 'toolbar-position']
 });

@@ -6,6 +6,10 @@ YUI.add('toolbar-base', function(Y) {
 
         EMPTY_LINE_REGEX = /\r?\n/;
 
+    var KEY_ESC = 27;
+
+    var KEY_TAB = 9;
+
     function ToolbarBase() {}
 
     /**
@@ -51,6 +55,72 @@ YUI.add('toolbar-base', function(Y) {
             );
 
             editor.on('editorInteraction', instance._onEditorInteraction, instance);
+        },
+
+        syncUI: function() {
+            var buttonsContainer = this.get('buttonsContainer');
+
+            buttonsContainer.plug(Y.Plugin.NodeFocusManager, {
+                activeDescendant: 0,
+                circular   : true,
+                descendants: 'button',
+                focusClass : 'focus',
+                keys       : {next: 'down:39', previous: 'down:37'}
+            });
+
+            Y.one(buttonsContainer.getDOMNode()).on('keydown', this._onKeyDown, this);
+        },
+
+        /**
+         * Check if toolbar ir currently focused. If not, put focus on it. If yes, 
+         * retrieves focus to editor (works like 'ESC' button)
+         *
+         * @method removeFocus
+         * @protected
+         */
+        focus: function() {
+            var buttonsContainer = this.get('buttonsContainer');
+
+            if (!buttonsContainer.focusManager.get('focused')) {
+                buttonsContainer.focusManager.focus(0);
+            }
+        },
+
+        /**
+         * Search between the editor's toolbars the next one to be focused.
+         * If noone else is visible, the default button ('add') will be shown
+         */
+        focusNextToolbar: function() {
+           var defaultToolbar,
+               found = false,
+               i,
+               toolbars = this.get('editor').config.toolbars;
+
+            for (i in toolbars) {
+                if (toolbars[i].get('defaultToolbar')) {
+                    defaultToolbar = toolbars[i];
+                }
+
+                //skip current toolbar
+                if ((toolbars[i].get('buttonsContainer') != this.get('buttonsContainer')) && toolbars[i].get('visible')) {
+                    toolbars[i].focus();
+                    found = true;
+                }
+            }
+
+            if (!found && defaultToolbar) {
+                defaultToolbar._triggerButton ? defaultToolbar._triggerButton.focus() : defaultToolbar.focus();
+            }
+        },
+
+        /**
+         * Check if toolbar ir currently focused and retrieve focus to editor
+         *
+         * @method removeFocus
+         * @protected
+         */
+        removeFocus: function() {
+            this.get('editor').focus();
         },
 
         /**
@@ -194,6 +264,19 @@ YUI.add('toolbar-base', function(Y) {
             } else {
                 this.set('xy', xy);
             }
+        },
+
+        _onKeyDown: function(evt) {
+            var instance = this;
+
+            if (evt.keyCode === KEY_TAB) {
+                evt.preventDefault();
+
+                instance.focusNextToolbar();
+
+            } else if (evt.keyCode === KEY_ESC) {
+                instance.removeFocus();
+            }
         }
     };
 
@@ -208,6 +291,13 @@ YUI.add('toolbar-base', function(Y) {
         buttonsContainer: {
             getter: '_getButtonsContainer',
             readOnly: true
+        },
+
+        /**
+         * There should be only one default toolbar.
+         */
+        defaultToolbar: {
+            validator: Lang.isBoolean
         },
 
         /**
@@ -242,5 +332,5 @@ YUI.add('toolbar-base', function(Y) {
     Y.ToolbarBase = ToolbarBase;
 
 }, '', {
-    requires: ['plugin', 'node-base']
+    requires: ['node-focusmanager', 'node-base', 'plugin']
 });
