@@ -50,7 +50,30 @@ YUI.add('toolbar-base', function(Y) {
                 }
             );
 
+            instance.after('render', instance._afterRender, instance);
+
             editor.on('editorInteraction', instance._onEditorInteraction, instance);
+        },
+
+        /**
+         * When toolbar has been rendered, initialize the focus manager and attach
+         * listener for keyboard events
+         *
+         * @method _afterRender
+         * @protected
+         */
+        _afterRender: function() {
+            var buttonsContainer = this.get('buttonsContainer');
+
+            buttonsContainer.plug(Y.Plugin.NodeFocusManager, {
+                activeDescendant: 0,
+                circular: true,
+                descendants: 'button',
+                focusClass: 'focus',
+                keys: {next: 'down:39', previous: 'down:37'}
+            });
+
+            Y.one(buttonsContainer.getDOMNode()).on('keydown', this._onKeyDown, this);
         },
 
         /**
@@ -128,11 +151,30 @@ YUI.add('toolbar-base', function(Y) {
         },
 
         /**
+         * If toolbar is visible, puts focus on it with FocusManager
+         *
+         * @method focus
+         * @protected
+         * @return {Boolean} if toolbar has been focused or not
+         */
+        _focus: function() {
+            var buttonsContainer;
+
+            buttonsContainer = this.get('buttonsContainer');
+
+            if (this.get('visible')) {
+                buttonsContainer.focusManager.focus(0);
+            }
+
+            return this.get('visible');
+        },
+
+        /**
          * Returns the container in which all buttons are being rendered.
          *
          * @method _getButtonsContainer
          * @protected
-         * @return {Node} The container of all buttons attached to the current isntance of Toolbar.
+         * @return {Node} The container of all buttons attached to the current instance of Toolbar.
          */
         _getButtonsContainer: function() {
             return this._buttonsContainer;
@@ -198,6 +240,27 @@ YUI.add('toolbar-base', function(Y) {
         },
 
         /**
+         * Fires <code>toolbarKeyDown</code> event. Editor should listen this event
+         * and perform the associated action
+         *
+         * @param {Event} event key event
+         * @protected
+         */
+        _onKeyDown: function(event) {
+            this.get('editor').fire('toolbarKeyDown', event);
+        },
+
+        /**
+         * Return focus to editor
+         *
+         * @method removeFocus
+         * @protected
+         */
+        _removeFocus: function() {
+            this.get('editor').focus();
+        },
+
+        /**
          * Returns true if the passed node is a child node of the toolbar, false otherwise.
          *
          * @method ownsNode
@@ -254,5 +317,5 @@ YUI.add('toolbar-base', function(Y) {
     Y.ToolbarBase = ToolbarBase;
 
 }, '', {
-    requires: ['plugin', 'node-base']
+    requires: ['node-focusmanager', 'node-base', 'plugin']
 });

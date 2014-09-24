@@ -89,7 +89,7 @@ YUI.add('button-base', function(Y) {
 
             this.afterHostMethod('renderUI', this.renderUI, this);
             this.afterHostMethod('bindUI', this.bindUI, this);
-            this.afterHostEvent(['visibleChange', 'actionPerformed'], this.updateUI, this);
+            this.afterHostEvent(['positionChange', 'actionPerformed'], this.updateUI, this);
         },
 
         /**

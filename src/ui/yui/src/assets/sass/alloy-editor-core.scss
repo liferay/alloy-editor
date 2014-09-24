@@ -12,6 +12,10 @@
         padding: 10px 10px 8px 10px;
         outline: none;
         height: 36px;
+
+        &:focus {
+            color: #44B6E0;
+        }
     }
 }
 
@@ -67,4 +71,8 @@
 
 .alloy-editor-placeholder:empty:not(:focus):before {
     content:attr(data-placeholder);
+}
+
+alloy-editor-toolbar .alloy-editor-button.focus {
+    color: #44B6E0;
 }
