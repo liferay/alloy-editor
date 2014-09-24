@@ -3,6 +3,8 @@
 
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
+    var KEY_F10 = 121;
+
     if (CKEDITOR.plugins.get('uiloader')) {
         return;
     }
@@ -34,6 +36,12 @@
 
                         editor.fire('toolbarsReady', {
                             toolbars: editor.config.toolbars
+                        });
+
+                        Y.one(editor.element.$).on('keydown', function(evt) {
+                            if (evt.altKey && evt.keyCode === KEY_F10) {
+                                instance._focusVisibleToolbar(editor);
+                            }
                         });
                     }
                 );
@@ -94,6 +102,33 @@
                             );
                         }
                     }
+                }
+            },
+
+            /**
+             *
+             * Focus the visible toolbar. If there are not visible toolbars,
+             * triggers 'click' event on 'add' button
+             */
+            _focusVisibleToolbar: function(editor) {
+                var defaultToolbar,
+                    toolbarsConfig = editor.config.toolbars,
+                    toolbar;
+
+                for (var i in toolbarsConfig) {
+                    if (toolbarsConfig[i].get('defaultToolbar')) {
+                        defaultToolbar = toolbarsConfig[i];
+                    }
+
+                    if (toolbarsConfig[i].get('visible')) {
+                        toolbar = toolbarsConfig[i];
+                        toolbar.focus();
+                    }
+                }
+
+                //set focus on default toolbar
+                if (!toolbar && defaultToolbar) {
+                    defaultToolbar._triggerButton ? defaultToolbar._triggerButton.focus() : defaultToolbar.focus();
                 }
             },
 
