@@ -75,7 +75,7 @@ YUI.add('toolbar-base', function(Y) {
          * Check if toolbar ir currently focused. If not, put focus on it. If yes, 
          * retrieves focus to editor (works like 'ESC' button)
          *
-         * @method removeFocus
+         * @method focus
          * @protected
          */
         focus: function() {
@@ -89,6 +89,9 @@ YUI.add('toolbar-base', function(Y) {
         /**
          * Search between the editor's toolbars the next one to be focused.
          * If noone else is visible, the default button ('add') will be shown
+         *
+         * @method focusNextToolbar
+         * @protected
          */
         focusNextToolbar: function() {
            var defaultToolbar,
