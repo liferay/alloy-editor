@@ -1,0 +1,21 @@
+.alloy-editor-toolbar {
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    position: absolute;
+}
+
+.alloy-editor-toolbar-hidden {
+    display: none;
+}
+
+.alloy-editor-button.alloy-editor-button-checked {
+    background-color: #c6c6c6;
+}
+
+.alloy-editor-toolbar .alloy-editor-button {
+    border-radius: 0;
+}
+
+.alloy-editor-toolbar .alloy-editor-button:not(:first-child) {
+    border-left: 1px solid #d3d3d3;
+}
