@@ -9,7 +9,7 @@ YUI.add('toolbar-image', function(Y) {
          *
          * @class ToolbarImage
          */
-        ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide, Y.ToolbarBase, Y.ToolbarPosition], {
+        ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
             /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
@@ -183,5 +183,5 @@ YUI.add('toolbar-image', function(Y) {
 
     Y.ToolbarImage = ToolbarImage;
 }, '', {
-    requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base', 'toolbar-position']
+    requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'toolbar-base', 'toolbar-position']
 });
