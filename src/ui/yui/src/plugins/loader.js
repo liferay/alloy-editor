@@ -219,8 +219,7 @@
 
             /**
              *
-             * Focus the visible toolbar. If there are not visible toolbars,
-             * triggers 'click' event on 'add' button
+             * Hide all toolbars
              */
             _hideToolbars: function(editor) {
                 var toolbarsConfig = editor.config.toolbars;
