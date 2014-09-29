@@ -273,9 +273,9 @@ YUI.add('toolbar-add', function(Y) {
 
                 this._trigger.hide();
 
-                this.focus();
+                this._editorNode.focus();
 
-                Y.soon(this._editorNode.focus);
+                this.focus();
             },
 
             /**
@@ -397,5 +397,5 @@ YUI.add('toolbar-add', function(Y) {
 
     });
 }, '0.1', {
-    requires: ['timers', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'toolbar-base', 'toolbar-position']
+    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'toolbar-base', 'toolbar-position']
 });
