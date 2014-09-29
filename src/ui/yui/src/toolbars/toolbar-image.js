@@ -9,7 +9,9 @@ YUI.add('toolbar-image', function(Y) {
          *
          * @class ToolbarImage
          */
-        ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide, Y.ToolbarBase, Y.ToolbarPosition], {
+        ToolbarImage = Y.Base.create('toolbarimage', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain,
+            Y.WidgetAutohide, Y.ToolbarBase, Y.ToolbarPosition], {
+
             /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
@@ -35,13 +37,15 @@ YUI.add('toolbar-image', function(Y) {
             },
 
             /**
-             * Creates and adds Node element - the container where buttons should render.
+             * Attaches listeners to <code>actionPerformed</code> and <code>toolbarsHide</code> events.
              *
              * @method bindUI
              * @protected
              */
             bindUI: function() {
                 this.on('actionPerformed', this._onActionPerformed, this);
+
+                this.get('editor').on('toolbarsHide', this._onToolbarsHide, this);
             },
 
             /**
@@ -115,6 +119,15 @@ YUI.add('toolbar-image', function(Y) {
             },
 
             /**
+             * Hides the toolbar in case of <code>toolbarsHide</code> event.
+             *
+             * @method _onToolbarsHide
+             */
+            _onToolbarsHide: function() {
+                this.hide();
+            },
+
+            /**
              * Moves the Toolbar to specified position.
              *
              * @method _updateUI
@@ -127,11 +140,13 @@ YUI.add('toolbar-image', function(Y) {
                 if (element) {
                     region = Y.DOM.region(element.$);
 
-                    this.showAtPoint(region.left + (region.right - region.left) / 2, region.top, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+                    this.showAtPoint(region.left + (region.right - region.left) / 2, region.top,
+                        CKEDITOR.SELECTION_BOTTOM_TO_TOP);
                 }
             },
 
-            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-image alloy-editor-arrow-box alloy-editor-arrow-box-bottom"></div>',
+            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-image alloy-editor-arrow-box ' +
+                'alloy-editor-arrow-box-bottom"></div>',
 
             CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
 
@@ -183,5 +198,6 @@ YUI.add('toolbar-image', function(Y) {
 
     Y.ToolbarImage = ToolbarImage;
 }, '', {
-    requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base', 'toolbar-position']
+    requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide',
+    'toolbar-base', 'toolbar-position']
 });

@@ -9,7 +9,9 @@ YUI.add('toolbar-styles', function(Y) {
          *
          * @class ToolbarStyles
          */
-        ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
+        ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide,
+                Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
+
             /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
@@ -28,6 +30,16 @@ YUI.add('toolbar-styles', function(Y) {
                 contentBox.appendChild(buttonsContainer);
 
                 instance._buttonsContainer = buttonsContainer;
+            },
+
+            /**
+             * Attaches listener to <code>toolbarsHide</code> event.
+             *
+             * @method bindUI
+             * @protected
+             */
+            bindUI: function() {
+                this.get('editor').on('toolbarsHide', this._onToolbarsHide, this);
             },
 
             /**
@@ -102,7 +114,17 @@ YUI.add('toolbar-styles', function(Y) {
                 }
             },
 
-            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-styles alloy-editor-arrow-box"></div>',
+            /**
+             * Hides the toolbar in case of <code>toolbarsHide</code> event.
+             *
+             * @method _onToolbarsHide
+             */
+            _onToolbarsHide: function() {
+                this.hide();
+            },
+
+            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-styles alloy-editor-arrow-box">' +
+                '</div>',
 
             CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
 
@@ -154,5 +176,6 @@ YUI.add('toolbar-styles', function(Y) {
 
     Y.ToolbarStyles = ToolbarStyles;
 }, '', {
-    requires: ['toolbar-base', 'toolbar-position', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+    requires: ['toolbar-base', 'toolbar-position', 'widget-base', 'widget-position', 'widget-position-constrain',
+        'widget-autohide']
 });

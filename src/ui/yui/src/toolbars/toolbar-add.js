@@ -44,9 +44,14 @@ YUI.add('toolbar-add', function(Y) {
              * @protected
              */
             bindUI: function() {
+                var editor;
+
+                editor = this.get('editor');
+
                 this._triggerButton.on('click', this._showToolbarAddContent, this);
-                this.get('editor').on('toolbarsReady', this._onToolbarsReady, this);
                 this.on('visibleChange', this._onVisibleChange, this);
+                editor.on('toolbarsReady', this._onToolbarsReady, this);
+                editor.on('toolbarsHide', this._onToolbarsHide, this);
             },
 
             /**
@@ -141,13 +146,9 @@ YUI.add('toolbar-add', function(Y) {
              * @param {EventFacade} event Event that triggered when user interacted with the editor.
              */
             _onEditorInteraction: function(event) {
-                var editorX,
-                    nativeEvent,
-                    position,
+                var nativeEvent,
                     selectionData,
-                    startRect,
-                    toolbarPosition,
-                    triggerPosition;
+                    startRect;
 
                 selectionData = event.data.selectionData;
 
@@ -165,6 +166,17 @@ YUI.add('toolbar-add', function(Y) {
 
                     this._showTriggerAtPoint(this._editorNode.getX(), selectionData.region.top + startRect.height / 2);
                 }
+            },
+
+            /**
+             * Hides the toolbar and the trigger in case of <code>toolbarsHide</code> event.
+             *
+             * @method _onToolbarsHide
+             */
+            _onToolbarsHide: function() {
+                this.hide();
+
+                this._trigger.hide();
             },
 
             /**
@@ -187,6 +199,18 @@ YUI.add('toolbar-add', function(Y) {
              */
             _onVisibleChange: function(event) {
                 this._editorNode.toggleClass('alloyeditor-add-toolbar', event.newVal);
+            },
+
+            /**
+             * Returns true if the passed node is a child node of the toolbar, false otherwise.
+             *
+             * @method ownsNode
+             * @param  {Node|HTMLElement} node The node which should be checked if it is child node of the current
+             * toolbar.
+             * @return {Boolean} True if the passed node is child node of the current toolbar.
+             */
+            ownsNode: function(node) {
+                return this.get('boundingBox').contains(node) || this._trigger.get('boundingBox').contains(node);
             },
 
             /**

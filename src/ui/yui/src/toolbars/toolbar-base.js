@@ -90,7 +90,8 @@ YUI.add('toolbar-base', function(Y) {
                 x = xy[0];
                 y = (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) ? (xy[1] - height) : (xy[1] + height);
 
-            } else if (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT || direction === CKEDITOR.SELECTION_RIGHT_TO_LEFT) {
+            } else if (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT ||
+                direction === CKEDITOR.SELECTION_RIGHT_TO_LEFT) {
 
                 x = (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT) ? (xy[0] - width) : (xy[0] + width);
                 y = xy[1];
@@ -194,6 +195,17 @@ YUI.add('toolbar-base', function(Y) {
             } else {
                 this.set('xy', xy);
             }
+        },
+
+        /**
+         * Returns true if the passed node is a child node of the toolbar, false otherwise.
+         *
+         * @method ownsNode
+         * @param  {Node|HTMLElement} node The node which should be checked if it is child node of the current toolbar.
+         * @return {Boolean} True if the passed node is child node of the current toolbar.
+         */
+        ownsNode: function(node) {
+            return this.get('boundingBox').contains(node);
         }
     };
 

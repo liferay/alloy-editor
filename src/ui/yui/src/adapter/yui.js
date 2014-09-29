@@ -24,9 +24,12 @@ YUI.add('alloy-editor', function(Y) {
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function(config) {
-            var editor;
+            var editor,
+                node;
 
-            editor = CKEDITOR.inline(this.get('srcNode').getDOMNode());
+            node = this.get('srcNode');
+
+            editor = CKEDITOR.inline(node.getDOMNode());
 
             editor.config.allowedContent = this.get('allowedContent');
 
@@ -40,6 +43,9 @@ YUI.add('alloy-editor', function(Y) {
             Y.mix(editor.config, config);
 
             this._editor = editor;
+
+            this._docInteractHandler = Y.one(Y.config.doc).on(['click', 'keyup'],
+                CKEDITOR.tools.debounce(this._onDocInteract, this.get('toolbarsHideDelay'), this));
         },
 
         /**
@@ -50,17 +56,19 @@ YUI.add('alloy-editor', function(Y) {
          * @protected
          */
         destructor: function() {
-            var inst;
+            var editorInstance;
 
-            inst = CKEDITOR.instances[this.get('srcNode').get('id')];
+            editorInstance = CKEDITOR.instances[this.get('srcNode').get('id')];
 
-            if (inst) {
-                Y.Object.each(inst.config.toolbars, function(value) {
+            if (editorInstance) {
+                Y.Object.each(editorInstance.config.toolbars, function(value) {
                     value.destroy();
                 });
 
-                inst.destroy();
+                editorInstance.destroy();
             }
+
+            this._docInteractHandler.detach();
         },
 
         /**
@@ -75,7 +83,37 @@ YUI.add('alloy-editor', function(Y) {
         },
 
         /**
-         * Validates the allowed content attribute. Look [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the supported values.
+         * Fires <code>toolbarsHide</code> event if none of the toolbars or their child nodes is the element user is
+         * currently interacting.
+         *
+         * @method _onDocInteract
+         * @protected
+         * @param {EventFacade} event EventFacade object
+         */
+        _onDocInteract: function(event) {
+            var editorInstance,
+                result,
+                srcNode;
+
+            srcNode = this.get('srcNode');
+
+            result = (srcNode === event.target) || (srcNode.contains(event.target));
+
+            editorInstance = CKEDITOR.instances[srcNode.get('id')];
+
+            result = result || Y.some(editorInstance.config.toolbars, function(toolbar) {
+                return toolbar.ownsNode(event.target);
+            });
+
+            if (!result) {
+                this._editor.fire('toolbarsHide');
+            }
+        },
+
+        /**
+         * Validates the allowed content attribute. Look
+         * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
+         * supported values.
          *
          * @method _validateAllowedContent
          * @protected
@@ -86,8 +124,8 @@ YUI.add('alloy-editor', function(Y) {
         },
 
         /**
-         * Validates toolbars attribute. May be empty string or null, which means the current instance of AlloyEdtor shouldn't
-         * have any toolbars, or Object, which properties are the desired toolbars.
+         * Validates toolbars attribute. May be empty string or null, which means the current instance of AlloyEdtor
+         * shouldn't have any toolbars, or Object, which properties are the desired toolbars.
          *
          * @method _validateToolbars
          * @protected
@@ -116,18 +154,6 @@ YUI.add('alloy-editor', function(Y) {
             },
 
             /**
-             * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
-             *
-             * @attribute nativeEditor
-             * @readOnly
-             * @type {Object}
-             */
-            nativeEditor: {
-                getter: '_getNativeEditor',
-                readOnly: true
-            },
-
-            /**
              * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
              * make AlloyEditor to work properly.
              *
@@ -140,6 +166,18 @@ YUI.add('alloy-editor', function(Y) {
                 validator: Lang.isString,
                 value: 'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader',
                 writeOnce: true
+            },
+
+            /**
+             * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
+             *
+             * @attribute nativeEditor
+             * @readOnly
+             * @type {Object}
+             */
+            nativeEditor: {
+                getter: '_getNativeEditor',
+                readOnly: true
             },
 
             /**
@@ -163,10 +201,11 @@ YUI.add('alloy-editor', function(Y) {
              * These plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor
              * comes with its own highly optimized copy of CKEditor (just customized via their official download page).
              * This version does not come with the unneeded plugins, so the value of this property won't be needed.
-             * However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the plugins
-             * if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them entirely
-             * from CKEditor. It just removes them from its current instance, in which you will use different UI - those of
-             * AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same page!
+             * However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the
+             * plugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them
+             * entirely from CKEditor. It just removes them from its current instance, in which you will use different
+             * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
+             * page!
              *
              * @attribute removePlugins
              * @default 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link'
@@ -225,6 +264,18 @@ YUI.add('alloy-editor', function(Y) {
                     image: ['left', 'right'],
                     styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
                 }
+            },
+
+            /**
+             * Specifies the delay, after which the Toolbars will be hidden as soon as user interacts with another
+             * element on the page, not part of the UI of editor.
+             *
+             * @attribute toolbarsHideDelay
+             * @type {Number}
+             */
+            toolbarsHideDelay: {
+                validator: Lang.isNumber,
+                value: 100
             }
         }
     });
