@@ -203,22 +203,22 @@
                 '<button data-type="bold" class="alloy-editor-button alloy-editor-button-bold">' +
                     '<i class="alloy-editor-icon"></i>' +
                 '</button>' +
-                '<button data-type="italic" class="alloy-editor-button-italic">' +
+                '<button data-type="italic" class="alloy-editor-button alloy-editor-button-italic">' +
                     '<i class="alloy-editor-icon"></i>' +
                 '</button>' +
-                '<button data-type="underline" class="alloy-editor-button-underline">' +
+                '<button data-type="underline" class="alloy-editor-button alloy-editor-button-underline">' +
                     '<i class="alloy-editor-icon"></i>' +
                 '</button>' +
-                '<button data-type="h1" class="alloy-editor-button-h1">' +
+                '<button data-type="h1" class="alloy-editor-button alloy-editor-button-h1">' +
                     '<i class="alloy-editor-icon"></i>' +
                 '</button>' +
-                '<button data-type="h2" class="alloy-editor-button-h2">' +
+                '<button data-type="h2" class="alloy-editor-button alloy-editor-button-h2">' +
                     '<i class="alloy-editor-icon"></i>' +
                 '</button>' +
-                '<button data-type="h3" class="alloy-editor-button-h3">' +
+                '<button data-type="h3" class="alloy-editor-button alloy-editor-button-h3">' +
                     '<i class="alloy-editor-icon"></i>' +
                 '</button>' +
-                '<button data-type="h4" class="alloy-editor-button-h4">' +
+                '<button data-type="h4" class="alloy-editor-button alloy-editor-button-h4">' +
                     '<i class="alloy-editor-icon"></i>' +
                 '</button>' +
             '</div>'
