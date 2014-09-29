@@ -9,7 +9,7 @@ YUI.add('toolbar-styles', function(Y) {
          *
          * @class ToolbarStyles
          */
-        ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
+        ToolbarStyles = Y.Base.create('toolbarstyles', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
             /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
@@ -89,6 +89,8 @@ YUI.add('toolbar-styles', function(Y) {
 
                 nativeEvent = event.data.nativeEvent;
 
+                this.hide();
+
                 if (!selectionData.element && selectionData.region && !selectionEmpty) {
                     position = this._calculatePosition(selectionData, {
                         x: nativeEvent.pageX,
@@ -96,9 +98,6 @@ YUI.add('toolbar-styles', function(Y) {
                     });
 
                     this.showAtPoint(position.x, position.y, position.direction);
-
-                } else {
-                    this.hide();
                 }
             },
 
@@ -154,5 +153,5 @@ YUI.add('toolbar-styles', function(Y) {
 
     Y.ToolbarStyles = ToolbarStyles;
 }, '', {
-    requires: ['toolbar-base', 'toolbar-position', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+    requires: ['toolbar-base', 'toolbar-position', 'widget-base', 'widget-position', 'widget-position-constrain']
 });

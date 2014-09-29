@@ -3,6 +3,10 @@
 
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
+    var KEY_ESC = 27;
+
+    var KEY_F10 = 121;
+
     if (CKEDITOR.plugins.get('uiloader')) {
         return;
     }
@@ -34,6 +38,14 @@
 
                         editor.fire('toolbarsReady', {
                             toolbars: editor.config.toolbars
+                        });
+
+                        Y.one(editor.element.$).on('keydown', function(evt) {
+                            if (evt.altKey && evt.keyCode === KEY_F10) {
+                                instance._focusVisibleToolbar(editor);
+                            } else if (evt.keyCode === KEY_ESC) {
+                                instance._hideToolbars(editor);
+                            }
                         });
                     }
                 );
@@ -94,6 +106,33 @@
                             );
                         }
                     }
+                }
+            },
+
+            /**
+             *
+             * Focus the visible toolbar. If there are not visible toolbars,
+             * triggers 'click' event on 'add' button
+             */
+            _focusVisibleToolbar: function(editor) {
+                var defaultToolbar,
+                    toolbarsConfig = editor.config.toolbars,
+                    toolbar;
+
+                for (var i in toolbarsConfig) {
+                    if (toolbarsConfig[i].get('defaultToolbar')) {
+                        defaultToolbar = toolbarsConfig[i];
+                    }
+
+                    if (toolbarsConfig[i].get('visible')) {
+                        toolbar = toolbarsConfig[i];
+                        toolbar.focus();
+                    }
+                }
+
+                //set focus on default toolbar
+                if (!toolbar && defaultToolbar) {
+                    defaultToolbar._triggerButton ? defaultToolbar._triggerButton.focus() : defaultToolbar.focus();
                 }
             },
 
@@ -176,6 +215,20 @@
              */
             _getToolbarName: function(name) {
                 return 'Toolbar' + name.substring(0, 1).toUpperCase() + name.substring(1);
+            },
+
+            /**
+             *
+             * Hide all toolbars
+             */
+            _hideToolbars: function(editor) {
+                var toolbarsConfig = editor.config.toolbars;
+
+                for (var i in toolbarsConfig) {
+                    toolbarsConfig[i].hide();
+                }
+
+                editor.element.$.focus();
             }
         }
     );

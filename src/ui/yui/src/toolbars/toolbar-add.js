@@ -18,7 +18,7 @@ YUI.add('toolbar-add', function(Y) {
          *
          * @class ToolbarAdd
          */
-        ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.ToolbarPosition, Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
+        ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.ToolbarPosition, Y.WidgetPosition, Y.WidgetPositionConstrain], {
             /**
              * Initializer lifecycle implementation for the ToolbarAdd class.
              *
@@ -71,6 +71,18 @@ YUI.add('toolbar-add', function(Y) {
                 this._renderToolbarAddContent();
 
                 this._renderTrigger();
+            },
+
+            /**
+             * Return the focus to editor and show again the _triggerButton
+             *
+             * @method removeFocus
+             * @protected
+             */
+            removeFocus: function() {
+                this.get('editor').focus();
+
+                this._showTriggerAtPoint(this._triggerButtonPosition.left, this._triggerButtonPosition.top);
             },
 
             /**
@@ -163,7 +175,12 @@ YUI.add('toolbar-add', function(Y) {
                         y: nativeEvent.pageY
                     });
 
-                    this._showTriggerAtPoint(this._editorNode.getX(), selectionData.region.top + startRect.height / 2);
+                    this._triggerButtonPosition = {
+                        left: this._editorNode.getX(),
+                        top: selectionData.region.top + startRect.height / 2
+                    }
+
+                    this._showTriggerAtPoint(this._triggerButtonPosition.left, this._triggerButtonPosition.top);
                 }
             },
 
@@ -239,6 +256,8 @@ YUI.add('toolbar-add', function(Y) {
                 this._triggerButton = triggerButton;
 
                 this._triggerButtonContainer = triggerButtonContainer;
+
+                this._triggerButtonContainer.on('keydown', this._onKeyDown, this);
             },
 
             /**
@@ -255,6 +274,8 @@ YUI.add('toolbar-add', function(Y) {
                 this._trigger.hide();
 
                 this._editorNode.focus();
+
+                this.focus();
             },
 
             /**
@@ -335,6 +356,10 @@ YUI.add('toolbar-add', function(Y) {
                     value: true
                 },
 
+                defaultToolbar: {
+                    value: true
+                },
+
                 /**
                  * Specifies the gutter of the trigger button. The gutter object contains the top
                  * and left offsets from the point, where the trigger is supposed to appear.
@@ -358,14 +383,13 @@ YUI.add('toolbar-add', function(Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 
-
     /**
      * The ToolbarAddTrigger class hosts controls for showing the toolbar with the add controls. This class is intended to be
      * used internally by {{#crossLink "ToolbarAdd"}}{{/crossLink}} class.
      *
      * @class ToolbarAddTrigger
      */
-    ToolbarAddTrigger = Y.Base.create('toolbaraddtrigger', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetAutohide], {
+    ToolbarAddTrigger = Y.Base.create('toolbaraddtrigger', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign], {
         BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add-trigger"></div>',
 
         CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>'
@@ -373,5 +397,5 @@ YUI.add('toolbar-add', function(Y) {
 
     });
 }, '0.1', {
-    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'widget-autohide', 'toolbar-base', 'toolbar-position']
+    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'toolbar-base', 'toolbar-position']
 });
