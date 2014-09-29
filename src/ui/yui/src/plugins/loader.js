@@ -3,6 +3,8 @@
 
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
+    var KEY_ESC = 27;
+
     var KEY_F10 = 121;
 
     if (CKEDITOR.plugins.get('uiloader')) {
@@ -41,6 +43,8 @@
                         Y.one(editor.element.$).on('keydown', function(evt) {
                             if (evt.altKey && evt.keyCode === KEY_F10) {
                                 instance._focusVisibleToolbar(editor);
+                            } else if (evt.keyCode === KEY_ESC) {
+                                instance._hideToolbars(editor);
                             }
                         });
                     }
@@ -211,6 +215,21 @@
              */
             _getToolbarName: function(name) {
                 return 'Toolbar' + name.substring(0, 1).toUpperCase() + name.substring(1);
+            },
+
+            /**
+             *
+             * Focus the visible toolbar. If there are not visible toolbars,
+             * triggers 'click' event on 'add' button
+             */
+            _hideToolbars: function(editor) {
+                var toolbarsConfig = editor.config.toolbars;
+
+                for (var i in toolbarsConfig) {
+                    toolbarsConfig[i].hide();
+                }
+
+                editor.element.$.focus();
             }
         }
     );
