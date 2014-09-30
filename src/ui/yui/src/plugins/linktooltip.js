@@ -10,11 +10,13 @@
 
             /**
              * The LinkTooltip class provides functionality for showing tooltip over link elements in editor.
-             * The class will be also registered as CKEDITOR plugin - {{#crossLink "CKEDITOR.plugins.linktooltip"}}{{/crossLink}}
+             * The class will be also registered as CKEDITOR plugin -
+             * {{#crossLink "CKEDITOR.plugins.linktooltip"}}{{/crossLink}}
              *
              * @class LinkTooltip
              */
-            LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
+            LinkTooltip = Y.Base.create('linktooltip', Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain,
+                Y.WidgetAutohide], {
                 /**
                  * Initializer lifecycle implementation for the LinkTooltip class.
                  *
@@ -27,7 +29,8 @@
                 },
 
                 /**
-                 * Destructor lifecycle implementation for the LinkTooltip class. Destroys the iattached event listeners.
+                 * Destructor lifecycle implementation for the LinkTooltip class. Destroys the iattached event
+                 * listeners.
                  *
                  * @method destructor
                  * @protected
@@ -69,7 +72,8 @@
                     editor = this.get('editor');
 
                     this._eventHandles.push(
-                        Y.one(editor.element.$).delegate('mouseenter', this._onLinkMouseEnter, 'a[href]:not([data-cke-default-link])', this, editor)
+                        Y.one(editor.element.$).delegate('mouseenter', this._onLinkMouseEnter,
+                            'a[href]:not([data-cke-default-link])', this, editor)
                     );
 
                     this.get('boundingBox').on('clickoutside', this._onClickOutside, this);
@@ -316,7 +320,8 @@
         Y.LinkTooltip = LinkTooltip;
 
     }, '', {
-        requires: ['dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+        requires: ['dom-screen', 'escape', 'event-outside', 'node-event-delegate', 'event-mouseenter', 'widget-base',
+            'widget-position', 'widget-position-constrain', 'widget-autohide']
     });
 
     /**
