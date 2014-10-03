@@ -31,7 +31,7 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
         height: 40px;
         width: 40px;
 
-        &:hover {
+        &:hover, &:focus {
             background-image: none;
             color: #41bdea;
         }

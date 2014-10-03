@@ -5,6 +5,7 @@ YUI.add('alloy-editor', function(Y) {
 
     var Lang = Y.Lang,
         AlloyEditor,
+
         KEY_ESC = 27,
         KEY_F10 = 121,
         KEY_TAB = 9;
@@ -28,6 +29,7 @@ YUI.add('alloy-editor', function(Y) {
          */
         initializer: function(config) {
             var editor,
+                eventsDelay,
                 node;
 
             node = this.get('srcNode');
@@ -47,12 +49,18 @@ YUI.add('alloy-editor', function(Y) {
 
             this._editor = editor;
 
+            eventsDelay = this.get('eventsDelay');
+
             this._eventHandles = [
                 Y.one(Y.config.doc).on(['click', 'keyup'],
-                    CKEDITOR.tools.debounce(this._onDocInteract, this.get('toolbarsHideDelay'), this)),
-                Y.one(editor.element.$).on('keydown', this._onEditorKeyDown, this),
-                editor.on('toolbarKeyDown', this._onToolbarKeyDown, this)
+                    CKEDITOR.tools.debounce(this._onDocInteract, eventsDelay, this)),
+                node.on('keydown',
+                    CKEDITOR.tools.debounce(this._onEditorKey, eventsDelay, this))
             ];
+
+            // Custom events will be attached automatically, there is no need to put them in to the list
+            // with event handles
+            editor.on('toolbarKey', this._onToolbarKey, this);
         },
 
         /**
@@ -75,75 +83,60 @@ YUI.add('alloy-editor', function(Y) {
                 editorInstance.destroy();
             }
 
-            A.Array.invoke(instance._eventHandles, 'detach');
+            (new Y.EventHandle(this._eventHandles)).detach();
         },
 
         /**
-         * It makes a circular search between toolbars to find the next toolbar
-         * that has to be focused.
+         * Searches among toolbars to find the next toolbar that should be focused.
          *
          * @method _focusNextToolbar
          * @protected
          */
         _focusNextToolbar: function() {
-            var currentFocusedToolbar,
-                found,
-                i,
-                indexOfCurrentToolbar,
-                splice,
-                toolbar,
+            var currentToolbarIndex,
+                focusedToolbar,
+                lastPart,
                 toolbars;
 
-            currentFocusedToolbar = this._focusedToolbar;
+            focusedToolbar = this._focusedToolbar;
 
             toolbars = this._editor.config.toolbars;
 
-            //We need to convert toolbars to an array so we can reorder it
-            toolbars = Object.keys(toolbars).map(function(item) { return toolbars[item] });
+            //We need to convert toolbars to an array so we can reorder them.
+            toolbars = Y.Object.keys(toolbars).map(function(item) {
+                return toolbars[item];
+            });
 
-            indexOfCurrentToolbar = toolbars.indexOf(currentFocusedToolbar);
+            currentToolbarIndex = Y.Array.indexOf(toolbars, focusedToolbar);
 
-            splice = toolbars.splice(indexOfCurrentToolbar, toolbars.length - indexOfCurrentToolbar);
+            lastPart = toolbars.splice(currentToolbarIndex);
 
-            toolbars = splice.concat(toolbars);
+            toolbars = lastPart.concat(toolbars);
 
-            for (i = 0; i < toolbars.length; i++) {
-                toolbar = toolbars[i];
-
-                if (!found && (toolbar != currentFocusedToolbar) && toolbar._focus()) {
+            Y.Array.some(toolbars, function(toolbar) {
+                if (toolbar !== focusedToolbar && toolbar.focus()) {
                     this._focusedToolbar = toolbar;
 
-                    found = true;
+                    return true;
                 }
-            }
+            }, this);
         },
 
         /**
-         * Searches for the first visible toolbar in editor. If there is none, but
-         * there is a toolbar with a trigger button, this one will be selected.
+         * Focuses the first visible toolbar in editor or if there is not any, focuses the last of the other
+         * toolbars which accept the request for focusing.
          *
          * @method _focusVisibleToolbar
          * @protected
          */
         _focusVisibleToolbar: function() {
-            var currentFocusedToolbar,
-                found,
-                i,
-                toolbars;
+            Y.Object.some(this._editor.config.toolbars, function(toolbar) {
+                if (toolbar != this._focusedToolbar && toolbar.focus()) {
+                    this._focusedToolbar = toolbar;
 
-            currentFocusedToolbar = this._focusedToolbar;
-
-            toolbars = this._editor.config.toolbars;
-
-            for (i in toolbars) {
-                if (hasOwnProperty.call(toolbars, i)) {
-                    if (!found && (toolbars[i] != currentFocusedToolbar) && toolbars[i]._focus()) {
-                        this._focusedToolbar = toolbars[i];
-
-                        found = toolbars[i].get('visible');
-                    }
+                    return toolbar.get('visible');
                 }
-            }
+            }, this);
         },
 
         /**
@@ -164,14 +157,9 @@ YUI.add('alloy-editor', function(Y) {
          * @protected
          */
         _hideToolbars: function() {
-            var i,
-                toolbars;
-
-            toolbars = this._editor.config.toolbars;
-
-            for (i in toolbars) {
-                toolbars[i].hide();
-            }
+            Y.Object.each(this._editor.config.toolbars, function(toolbar) {
+                toolbar.hide();
+            });
         },
 
         /**
@@ -204,14 +192,14 @@ YUI.add('alloy-editor', function(Y) {
 
         /**
          * Handles key events in the editor:
-         *  - ALT + F10: access to toolbar
+         *  - ALT + F10: focus the toolbar
          *  - ESC: hide visible toolbars
          *
-         * @method _onEditorKeyDown
-         * @param {Event} event keyboard event
+         * @method _onEditorKey
+         * @param {EventFacade} event Event that triggered when user pressed a key inside the editor.
          * @protected
          */
-        _onEditorKeyDown: function(event) {
+        _onEditorKey: function(event) {
             if (event.altKey && event.keyCode === KEY_F10) {
                 this._focusVisibleToolbar();
 
@@ -223,19 +211,19 @@ YUI.add('alloy-editor', function(Y) {
         /**
          * Handles key events in the toolbar:
          *  - TAB: focus next toolbar
-         *  - ESC: return focus to editor
+         *  - ESC: focus the editor
          *
-         * @method  _onToolbarKeyDown
-         * @param  {Event} eventkeyboard event
+         * @method _onToolbarKey
+         * @param {Event} event keyboard event
          * @protected
          */
-        _onToolbarKeyDown: function(event) {
+        _onToolbarKey: function(event) {
             if (event.data.keyCode === KEY_TAB) {
                 event.data.preventDefault();
                 this._focusNextToolbar();
 
             } else if (event.data.keyCode === KEY_ESC) {
-                this._focusedToolbar._removeFocus();
+                this._focusedToolbar.blur();
                 this._focusedToolbar = null;
             }
         },
@@ -281,6 +269,17 @@ YUI.add('alloy-editor', function(Y) {
                 validator: '_validateAllowedContent',
                 value: true,
                 writeOnce: true
+            },
+
+            /**
+             * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
+             *
+             * @attribute eventsDelay
+             * @type {Number}
+             */
+            eventsDelay: {
+                validator: Lang.isNumber,
+                value: 100
             },
 
             /**
@@ -394,18 +393,6 @@ YUI.add('alloy-editor', function(Y) {
                     image: ['left', 'right'],
                     styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
                 }
-            },
-
-            /**
-             * Specifies the delay, after which the Toolbars will be hidden as soon as user interacts with another
-             * element on the page, not part of the UI of editor.
-             *
-             * @attribute toolbarsHideDelay
-             * @type {Number}
-             */
-            toolbarsHideDelay: {
-                validator: Lang.isNumber,
-                value: 100
             }
         }
     });

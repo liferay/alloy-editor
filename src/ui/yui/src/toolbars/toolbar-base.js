@@ -4,6 +4,9 @@ YUI.add('toolbar-base', function(Y) {
     var Lang = Y.Lang,
         YArray = Y.Array,
 
+        KEY_ARROW_LEFT = 37,
+        KEY_ARROW_RIGHT = 39,
+
         EMPTY_LINE_REGEX = /\r?\n/;
 
     function ToolbarBase() {}
@@ -56,6 +59,47 @@ YUI.add('toolbar-base', function(Y) {
         },
 
         /**
+         * Returns focus to editor.
+         *
+         * @method blur
+         */
+        blur: function() {
+            this.get('editor').focus();
+        },
+
+        /**
+         * If toolbar is visible, focuses the first button.
+         *
+         * @method focus
+         * @return {Boolean} True if toolbar has been focused, false otherwise.
+         */
+        focus: function() {
+            var buttonsContainer,
+                visible;
+
+            buttonsContainer = this.get('buttonsContainer');
+
+            visible = this.get('visible');
+
+            if (visible) {
+                buttonsContainer.focusManager.focus(0);
+            }
+
+            return visible;
+        },
+
+        /**
+         * Returns true if the passed node is a child node of the toolbar, false otherwise.
+         *
+         * @method ownsNode
+         * @param  {Node|HTMLElement} node The node which should be checked if it is child node of the current toolbar.
+         * @return {Boolean} True if the passed node is child node of the current toolbar.
+         */
+        ownsNode: function(node) {
+            return this.get('boundingBox').contains(node);
+        },
+
+        /**
          * When toolbar has been rendered, initialize the focus manager and attach
          * listener for keyboard events
          *
@@ -70,10 +114,13 @@ YUI.add('toolbar-base', function(Y) {
                 circular: true,
                 descendants: 'button',
                 focusClass: 'focus',
-                keys: {next: 'down:39', previous: 'down:37'}
+                keys: {
+                    next: 'down:' + KEY_ARROW_RIGHT,
+                    previous: 'down:' + KEY_ARROW_LEFT
+                }
             });
 
-            Y.one(buttonsContainer.getDOMNode()).on('keydown', this._onKeyDown, this);
+            buttonsContainer.on('keydown', this._onKeyDown, this);
         },
 
         /**
@@ -151,25 +198,6 @@ YUI.add('toolbar-base', function(Y) {
         },
 
         /**
-         * If toolbar is visible, puts focus on it with FocusManager
-         *
-         * @method focus
-         * @protected
-         * @return {Boolean} if toolbar has been focused or not
-         */
-        _focus: function() {
-            var buttonsContainer;
-
-            buttonsContainer = this.get('buttonsContainer');
-
-            if (this.get('visible')) {
-                buttonsContainer.focusManager.focus(0);
-            }
-
-            return this.get('visible');
-        },
-
-        /**
          * Returns the container in which all buttons are being rendered.
          *
          * @method _getButtonsContainer
@@ -240,35 +268,15 @@ YUI.add('toolbar-base', function(Y) {
         },
 
         /**
-         * Fires <code>toolbarKeyDown</code> event. Editor should listen this event
-         * and perform the associated action
+         * Fires <code>toolbarKey</code> event. Editor should listen this event
+         * and perform the associated action.
          *
-         * @param {Event} event key event
+         * @method _onKeyDown
+         * @param {EventFacade} event Event that triggered when user pressed a key inside the toolbar.
          * @protected
          */
         _onKeyDown: function(event) {
-            this.get('editor').fire('toolbarKeyDown', event);
-        },
-
-        /**
-         * Return focus to editor
-         *
-         * @method removeFocus
-         * @protected
-         */
-        _removeFocus: function() {
-            this.get('editor').focus();
-        },
-
-        /**
-         * Returns true if the passed node is a child node of the toolbar, false otherwise.
-         *
-         * @method ownsNode
-         * @param  {Node|HTMLElement} node The node which should be checked if it is child node of the current toolbar.
-         * @return {Boolean} True if the passed node is child node of the current toolbar.
-         */
-        ownsNode: function(node) {
-            return this.get('boundingBox').contains(node);
+            this.get('editor').fire('toolbarKey', event);
         }
     };
 

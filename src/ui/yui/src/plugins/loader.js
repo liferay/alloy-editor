@@ -3,10 +3,6 @@
 
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-    var KEY_ESC = 27;
-
-    var KEY_F10 = 121;
-
     if (CKEDITOR.plugins.get('uiloader')) {
         return;
     }

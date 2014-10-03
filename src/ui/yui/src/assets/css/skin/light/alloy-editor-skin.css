@@ -22,7 +22,7 @@
   color: #999da0;
 }
 /* line 18, ../../../sass/skin/light/alloy-editor-skin.scss */
-.alloy-editor-toolbar .alloy-editor-button:hover {
+.alloy-editor-toolbar .alloy-editor-button:hover, .alloy-editor-toolbar .alloy-editor-button:focus {
   background-color: #f7f7f7;
   background-image: none;
 }

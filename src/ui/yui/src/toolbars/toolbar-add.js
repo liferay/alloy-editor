@@ -67,6 +67,47 @@ YUI.add('toolbar-add', function(Y) {
             },
 
             /**
+             * Returns the focus to the editor and shows again the trigger.
+             *
+             * @method blur
+             */
+            blur: function() {
+                this.get('editor').focus();
+
+                this._showTriggerAtPoint(this._triggerButtonPosition.left, this._triggerButtonPosition.top);
+            },
+
+            /**
+             * Focus the toolbar. If it is visible, focus the first button, otherwise focus the trigger button.
+             *
+             * @method focus
+             * @return {Boolean} True if toolbar has been focused, false otherwise.
+             */
+            focus: function() {
+                var buttonsContainer = this.get('buttonsContainer');
+
+                if (this.get('visible')) {
+                    buttonsContainer.focusManager.focus(0);
+                } else {
+                    this._triggerButton.focus();
+                }
+
+                return true;
+            },
+
+            /**
+             * Returns true if the passed node is a child node of the toolbar, false otherwise.
+             *
+             * @method ownsNode
+             * @param  {Node|HTMLElement} node The node which should be checked if it is child node of the current
+             * toolbar.
+             * @return {Boolean} True if the passed node is child node of the current toolbar.
+             */
+            ownsNode: function(node) {
+                return this.get('boundingBox').contains(node) || this._trigger.get('boundingBox').contains(node);
+            },
+
+            /**
              * Renders the two containers - for button add and the toolbar.
              *
              * @method renderUI
@@ -77,7 +118,6 @@ YUI.add('toolbar-add', function(Y) {
 
                 this._renderTrigger();
             },
-
 
             /**
              * Calculates and sets the position of the toolbar.
@@ -116,26 +156,6 @@ YUI.add('toolbar-add', function(Y) {
                 this._moveToPoint(this.getConstrainedXY(xy), direction, {
                     visible: visible
                 });
-            },
-
-            /**
-             * If toolbar is visible, puts focus on it with FocusManager. 
-             * If not, trigger button is focused
-             *
-             * @method _focus
-             * @protected
-             * @return {Boolean} if toolbar has been focused
-             */
-            _focus: function() {
-                var buttonsContainer = this.get('buttonsContainer');
-
-                if (this.get('visible')) {
-                    buttonsContainer.focusManager.focus(0);
-                } else {
-                    this._triggerButton.focus();
-                }
-
-                return true;
             },
 
             /**
@@ -228,30 +248,6 @@ YUI.add('toolbar-add', function(Y) {
             },
 
             /**
-             * Returns true if the passed node is a child node of the toolbar, false otherwise.
-             *
-             * @method ownsNode
-             * @param  {Node|HTMLElement} node The node which should be checked if it is child node of the current
-             * toolbar.
-             * @return {Boolean} True if the passed node is child node of the current toolbar.
-             */
-            ownsNode: function(node) {
-                return this.get('boundingBox').contains(node) || this._trigger.get('boundingBox').contains(node);
-            },
-
-            /**
-             * Returns the focus to the editor and shows again the _triggerButton
-             *
-             * @method _removeFocus
-             * @protected
-             */
-            _removeFocus: function() {
-                this.get('editor').focus();
-
-                this._showTriggerAtPoint(this._triggerButtonPosition.left, this._triggerButtonPosition.top);
-            },
-
-            /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
              * @method _renderButtons
@@ -320,7 +316,7 @@ YUI.add('toolbar-add', function(Y) {
 
                 this._editorNode.focus();
 
-                this._focus();
+                this.focus();
             },
 
             /**

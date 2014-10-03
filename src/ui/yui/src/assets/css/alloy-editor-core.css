@@ -15,60 +15,56 @@
   outline: none;
   height: 36px;
 }
-/* line 16, ../sass/alloy-editor-core.scss */
-.alloy-editor-toolbar .alloy-editor-button:focus {
-  color: #44B6E0;
-}
 
-/* line 24, ../sass/alloy-editor-core.scss */
+/* line 20, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container {
   display: inline-block;
   padding: 2px;
 }
-/* line 28, ../sass/alloy-editor-core.scss */
+/* line 24, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container input {
   outline: none;
   width: 162px;
 }
-/* line 33, ../sass/alloy-editor-core.scss */
+/* line 29, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container input::-ms-clear {
   display: none;
 }
-/* line 37, ../sass/alloy-editor-core.scss */
+/* line 33, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear {
   display: inline-block;
   height: 14px;
   vertical-align: text-top;
   width: 14px;
 }
-/* line 43, ../sass/alloy-editor-core.scss */
+/* line 39, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear i {
   cursor: pointer;
 }
 
-/* line 52, ../sass/alloy-editor-core.scss */
+/* line 48, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-add .alloy-editor-button {
   font-size: 20px;
 }
 
-/* line 59, ../sass/alloy-editor-core.scss */
+/* line 55, ../sass/alloy-editor-core.scss */
 .alloy-editor-tooltip-link .link-container .icon-link-container {
   margin: 0 5px 0 5px;
   vertical-align: text-top;
 }
-/* line 64, ../sass/alloy-editor-core.scss */
+/* line 60, ../sass/alloy-editor-core.scss */
 .alloy-editor-tooltip-link .link-container .link-preview {
   display: inline-block;
   padding: 4px;
   outline: none;
 }
 
-/* line 72, ../sass/alloy-editor-core.scss */
+/* line 68, ../sass/alloy-editor-core.scss */
 .alloy-editor-placeholder:empty:not(:focus):before {
   content: attr(data-placeholder);
 }
 
-/* line 76, ../sass/alloy-editor-core.scss */
+/* line 72, ../sass/alloy-editor-core.scss */
 alloy-editor-toolbar .alloy-editor-button.focus {
   color: #44B6E0;
 }

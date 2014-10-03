@@ -15,7 +15,7 @@
         border-right: 1px solid #e1e1e1;
         color: #999da0;
 
-        &:hover {
+        &:hover, &:focus {
             background-color: #f7f7f7;
             background-image: none;
         }
