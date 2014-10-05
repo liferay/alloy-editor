@@ -115,19 +115,19 @@
     'toolbar-add': {
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-add.js',
-        requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'widget-autohide', 'toolbar-base']
+        requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'toolbar-base']
     },
 
     'toolbar-styles': {
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-styles.js',
-        requires: ['toolbar-base', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide']
+        requires: ['toolbar-base', 'widget-base', 'widget-position', 'widget-position-constrain']
     },
 
     'toolbar-image': {
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-image.js',
-        requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-autohide', 'toolbar-base']
+        requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'toolbar-base']
     },
 
     'selector-patch': {

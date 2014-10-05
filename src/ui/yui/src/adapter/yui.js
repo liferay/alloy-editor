@@ -225,6 +225,8 @@ YUI.add('alloy-editor', function(Y) {
             } else if (event.data.keyCode === KEY_ESC) {
                 this._focusedToolbar.blur();
                 this._focusedToolbar = null;
+
+                this._hideToolbars();
             }
         },
 
