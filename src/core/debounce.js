@@ -29,7 +29,19 @@
                 calArgs;
 
             callContext = context || this;
-            calArgs = args || arguments;
+
+            //var callerArgs = [arguments];
+            // try {
+
+            var result = [],
+                len,
+                startIndex = 0;
+
+            for (len = arguments.length; startIndex < len; ++startIndex) {
+                result.push(arguments[startIndex]);
+            }
+
+            calArgs = result.concat(args || []);
 
             clearTimeout(debounceHandle);
 
