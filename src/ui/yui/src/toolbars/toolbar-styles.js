@@ -108,6 +108,8 @@ YUI.add('toolbar-styles', function(Y) {
                     this.showAtPoint(position.x, position.y, position.direction);
 
                     this.fire('positionChange', this);
+
+                    editor.fire('toolbarActive', this);
                 } else {
                     this.hide();
                 }

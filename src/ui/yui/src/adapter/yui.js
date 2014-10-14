@@ -52,7 +52,7 @@ YUI.add('alloy-editor', function(Y) {
             eventsDelay = this.get('eventsDelay');
 
             this._eventHandles = [
-                Y.one(Y.config.doc).on(['click', 'keyup'],
+                Y.one(Y.config.doc).on(['click', 'keydown'],
                     CKEDITOR.tools.debounce(this._onDocInteract, eventsDelay, this)),
                 node.on('keydown',
                     CKEDITOR.tools.debounce(this._onEditorKey, eventsDelay, this))
@@ -61,6 +61,8 @@ YUI.add('alloy-editor', function(Y) {
             // Custom events will be attached automatically, there is no need to put them in to the list
             // with event handles
             editor.on('toolbarKey', this._onToolbarKey, this);
+
+            editor.on('toolbarActive', this._onToolbarActive, this);
         },
 
         /**
@@ -93,12 +95,12 @@ YUI.add('alloy-editor', function(Y) {
          * @protected
          */
         _focusNextToolbar: function() {
-            var currentToolbarIndex,
-                focusedToolbar,
+            var activeToolbar,
+                currentToolbarIndex,
                 lastPart,
                 toolbars;
 
-            focusedToolbar = this._focusedToolbar;
+            activeToolbar = this._activeToolbar;
 
             toolbars = this._editor.config.toolbars;
 
@@ -107,15 +109,15 @@ YUI.add('alloy-editor', function(Y) {
                 return toolbars[item];
             });
 
-            currentToolbarIndex = Y.Array.indexOf(toolbars, focusedToolbar);
+            currentToolbarIndex = Y.Array.indexOf(toolbars, activeToolbar);
 
             lastPart = toolbars.splice(currentToolbarIndex);
 
             toolbars = lastPart.concat(toolbars);
 
             Y.Array.some(toolbars, function(toolbar) {
-                if (toolbar !== focusedToolbar && toolbar.focus()) {
-                    this._focusedToolbar = toolbar;
+                if (toolbar !== activeToolbar && toolbar.focus()) {
+                    this._activeToolbar = toolbar;
 
                     return true;
                 }
@@ -131,8 +133,8 @@ YUI.add('alloy-editor', function(Y) {
          */
         _focusVisibleToolbar: function() {
             Y.Object.some(this._editor.config.toolbars, function(toolbar) {
-                if (toolbar != this._focusedToolbar && toolbar.focus()) {
-                    this._focusedToolbar = toolbar;
+                if (toolbar != this._activeToolbar && toolbar.focus()) {
+                    this._activeToolbar = toolbar;
 
                     return toolbar.get('visible');
                 }
@@ -209,6 +211,16 @@ YUI.add('alloy-editor', function(Y) {
         },
 
         /**
+         * Handles activating a toolbar.
+         *
+         * @method _onToolbarActive
+         * @protected
+         */
+        _onToolbarActive: function(event) {
+            this._activeToolbar = event.data;
+        },
+
+        /**
          * Handles key events in the toolbar:
          *  - TAB: focus next toolbar
          *  - ESC: focus the editor
@@ -223,8 +235,8 @@ YUI.add('alloy-editor', function(Y) {
                 this._focusNextToolbar();
 
             } else if (event.data.keyCode === KEY_ESC) {
-                this._focusedToolbar.blur();
-                this._focusedToolbar = null;
+                this._activeToolbar.blur();
+                this._activeToolbar = null;
 
                 this._hideToolbars();
             }

@@ -25,28 +25,24 @@
             debounceHandle;
 
         callFn = function() {
-            var callContext,
-                calArgs;
+            var callArgs,
+                callContext,
+                len,
+                result = [],
+                startIndex = 0;
 
             callContext = context || this;
-
-            //var callerArgs = [arguments];
-            // try {
-
-            var result = [],
-                len,
-                startIndex = 0;
 
             for (len = arguments.length; startIndex < len; ++startIndex) {
                 result.push(arguments[startIndex]);
             }
 
-            calArgs = result.concat(args || []);
+            callArgs = result.concat(args || []);
 
             clearTimeout(debounceHandle);
 
             debounceHandle = setTimeout(function() {
-                callback.apply(callContext, calArgs);
+                callback.apply(callContext, callArgs);
             }, timeout);
         };
 

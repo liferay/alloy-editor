@@ -25,7 +25,7 @@
     'button-a': {
         group: 'AlloyEditor',
         path: 'buttons/button-a.js',
-        requires: ['button-base', 'event-valuechange']
+        requires: ['button-base', 'event-valuechange', 'node-focusmanager']
     },
 
     'button-h1': {

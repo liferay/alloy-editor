@@ -140,6 +140,10 @@ YUI.add('toolbar-image', function(Y) {
 
                     this.showAtPoint(region.left + (region.right - region.left) / 2, region.top,
                         CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+
+                    this.fire('positionChange', this);
+
+                    this.get('editor').fire('toolbarActive', this);
                 }
             },
 

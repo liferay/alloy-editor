@@ -317,6 +317,8 @@ YUI.add('toolbar-add', function(Y) {
                 this._editorNode.focus();
 
                 this.focus();
+
+                this.get('editor').fire('toolbarActive', this);
             },
 
             /**

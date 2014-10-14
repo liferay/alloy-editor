@@ -34,7 +34,6 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
         &:hover, &:focus {
             background-image: none;
             color: #44b6e0;
-            border: 1px solid red;
         }
 
         &.yui3-button-selected, &.yui3-button-active, &.yui3-button:active {
