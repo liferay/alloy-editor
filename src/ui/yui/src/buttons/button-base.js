@@ -208,7 +208,8 @@ YUI.add('button-base', function(Y) {
 
             btnSrcNode = YNode.create(
                 Lang.sub(this.TPL_BUTTON, {
-                    content: this.TPL_CONTENT
+                    content: this.TPL_CONTENT,
+                    label: this.get('strings').label
                 })
             );
 
@@ -226,10 +227,25 @@ YUI.add('button-base', function(Y) {
             });
         },
 
-        TPL_BUTTON: '<button class="alloy-editor-button btn btn-default">{content}</button>'
+        TPL_BUTTON: '<button aria-label="{label}" class="alloy-editor-button btn btn-default">{content}</button>'
     };
 
     ButtonBase.ATTRS = {
+        /**
+         * Collection of strings used to label elements of the button's UI.
+         * ButtonBase provides string properties to specify the label of the button.
+         *
+         * @attribute strings
+         * @default {label: 'Button'}
+         * @type Object
+         */
+        strings: {
+            validator: Lang.isObject,
+            value: {
+                label: 'Button'
+            }
+        },
+
         /**
          * Specifies if the button is toggleable, or not.
          * Buttons may be "toggleable" or "push" buttons.

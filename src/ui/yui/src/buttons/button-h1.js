@@ -27,6 +27,21 @@ YUI.add('button-h1', function(Y) {
             element: {
                 validator: Lang.isString,
                 value: 'h1'
+            },
+
+            /**
+             * Collection of strings used to label elements of the button's UI.
+             * ButtonH1 provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: 'Heading level 1'}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: 'Heading level 1'
+                }
             }
         }
     });

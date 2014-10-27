@@ -54,6 +54,7 @@ YUI.add('toolbar-base', function(Y) {
             );
 
             instance.after('render', instance._afterRender, instance);
+            instance.after('visibleChange', instance._afterVisibleChange, instance);
 
             editor.on('editorInteraction', instance._onEditorInteraction, instance);
         },
@@ -121,6 +122,18 @@ YUI.add('toolbar-base', function(Y) {
             });
 
             buttonsContainer.on('keydown', this._onKeyDown, this);
+        },
+
+        _afterVisibleChange: function(event) {
+            var strings = this.get('strings');
+
+            this.get('editor').fire('ariaUpdate', {
+                msg: Lang.sub(strings.state, {
+                    focus: (event.newVal ? strings.focus : ''),
+                    name: this.name,
+                    state: (event.newVal ? strings.visible : strings.hidden)
+                })
+            });
         },
 
         /**
@@ -302,6 +315,29 @@ YUI.add('toolbar-base', function(Y) {
          */
         editor: {
             validator: Lang.isObject
+        },
+
+        /**
+         * Collection of strings used to label elements of the toolbar's UI.
+         * ToolbarBase provides string properties to specify the messages for:
+         *  - How to focus on the toolbar
+         *  - Possible toolbar states (hidden and visible)
+         *  - Current toolbar state. This works as a template. It's possible to
+         *  use the placeholders {name}, {state} and {focus} to inject messages
+         *  into the generated string.
+         *
+         * @attribute strings
+         * @default {focus: 'Press Alt + F10 to focus on the toolbar.', hidden: 'hidden', state: 'Toolbar {name} is now {state}. {focus}', visible: 'visible'}
+         * @type Object
+         */
+        strings: {
+            validator: Lang.isObject,
+            value: {
+                focus: 'Press Alt + F10 to focus on the toolbar.',
+                hidden: 'hidden',
+                state: 'Toolbar {name} is now {state}. {focus}',
+                visible: 'visible'
+            }
         },
 
         /**

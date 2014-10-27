@@ -43,7 +43,6 @@ YUI.add('alloy-editor', function(Y) {
             editor.config.removePlugins = this.get('removePlugins');
             editor.config.extraPlugins = this.get('extraPlugins');
             editor.config.placeholderClass = this.get('placeholderClass');
-            editor.config.title = false;
 
             Y.mix(editor.config, config);
 

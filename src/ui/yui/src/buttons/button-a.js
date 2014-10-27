@@ -506,12 +506,18 @@ YUI.add('button-a', function(Y) {
              */
             _renderLinkUI: function() {
                 var contentBox,
-                    linkContainer;
+                    linkContainer,
+                    strings;
+
+                strings = this.get('strings');
 
                 linkContainer = YNode.create(
                     Lang.sub(
                         this.TPL_LINK_CONTAINER, {
-                            placeholder: this.get('strings').placeholder
+                            back: strings.back,
+                            clear: strings.clear,
+                            confirm: strings.confirm,
+                            placeholder: strings.placeholder
                         }
                     )
                 );
@@ -687,16 +693,16 @@ YUI.add('button-a', function(Y) {
                 '<div class="pull-left btn-group input-wrapper">' +
                 '<span class="input-container">' +
                 '<input class="input-large" type="text" placeholder="{placeholder}"></input>' +
-                '<span class="input-clear">' +
+                '<span aria-label="{clear}" class="input-clear">' +
                 '<i class="alloy-editor-icon-remove"></i>' +
                 '</span>' +
                 '</span>' +
                 '</div>' +
                 '<div class="pull-left btn-group input-close-container">' +
-                '<button class="alloy-editor-button btn btn-default close-link"><i class="alloy-editor-icon-ok"></i></button>' +
+                '<button aria-label="{confirm}" class="alloy-editor-button btn btn-default close-link"><i class="alloy-editor-icon-ok"></i></button>' +
                 '</div>' +
                 '<div class="pull-right btn-group show-buttons-container">' +
-                '<button class="alloy-editor-button btn btn-default switch-to-edit"><i class="alloy-editor-icon-remove"></i></button>' +
+                '<button aria-label="{back}" class="alloy-editor-button btn btn-default switch-to-edit"><i class="alloy-editor-icon-remove"></i></button>' +
                 '</div>' +
                 '</div>'
         }, {
@@ -719,14 +725,21 @@ YUI.add('button-a', function(Y) {
 
                 /**
                  * Collection of strings used to label elements of the button's UI.
-                 * ButtonA provides one string property, to specify the value of link placeholder.
+                 * ButtonA provides string properties to specify the messages for:
+                 *  - Link input placeholder
+                 *  - Button label
+                 *  - Button actions (back, clear and confirm)
                  *
                  * @attribute strings
-                 * @default {placeholder: 'Type or paste link here'}
-                 * @type String
+                 * @default {back: 'Back', clear: 'Clear', confirm: 'Confirm', label: 'Link', placeholder: 'Type or paste link here'}
+                 * @type Object
                  */
                 strings: {
                     value: {
+                        back: 'Back',
+                        clear: 'Clear',
+                        confirm: 'Confirm',
+                        label: 'Link',
                         placeholder: 'Type or paste link here'
                     }
                 }

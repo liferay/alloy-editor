@@ -29,6 +29,21 @@ YUI.add('button-u', function(Y) {
             element: {
                 validator: Lang.isString,
                 value: 'u'
+            },
+
+            /**
+             * Collection of strings used to label elements of the button's UI.
+             * ButtonU provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: 'Underline'}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: 'Underline'
+                }
             }
         }
     });

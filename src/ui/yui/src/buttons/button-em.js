@@ -27,6 +27,21 @@ YUI.add('button-em', function(Y) {
             element: {
                 validator: Lang.isString,
                 value: 'em'
+            },
+
+            /**
+             * Collection of strings used to label elements of the button's UI.
+             * ButtonEm provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: 'Italic'}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: 'Italic'
+                }
             }
         }
     });

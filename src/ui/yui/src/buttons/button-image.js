@@ -100,6 +100,21 @@ YUI.add('button-image', function(Y) {
 
         ATTRS: {
             /**
+             * Collection of strings used to label elements of the button's UI.
+             * ButtonImage provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: 'Image'}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: 'Image'
+                }
+            },
+
+            /**
              * Specifies if this button will be toggleable, or not.
              * ButtonImage will be not toggleable by default.
              *

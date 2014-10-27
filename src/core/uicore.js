@@ -57,10 +57,27 @@
              * @param {Object} editor The current CKEditor instance.
              */
             init: function(editor) {
-                var handleUI;
+                var handleUI,
+                    handleAria,
+                    ariaState = [],
+                    ariaStatusElement,
+                    uiTasksTimeout;
+
+                ariaStatusElement = this._createAriaStatusElement(editor.id);
+
+                uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
+
+                handleAria = CKEDITOR.tools.debounce(
+                    function(event) {
+                        ariaStatusElement.innerHTML = ariaState.join('. ');
+                    },
+                    uiTasksTimeout
+                );
 
                 handleUI = CKEDITOR.tools.debounce(
                     function(event) {
+                        ariaState = [];
+
                         if (event.name !== 'keyup' || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
                             editor.fire('editorInteraction', {
                                 nativeEvent: event.data.$,
@@ -68,8 +85,13 @@
                             });
                         }
                     },
-                    editor.config.uicore ? editor.config.uicore.timeout : 50
+                    uiTasksTimeout
                 );
+
+                editor.on('ariaUpdate', function(event) {
+                    ariaState.push(event.data.msg);
+                    handleAria();
+                });
 
                 editor.on('contentDom', function() {
                     var editable = editor.editable();
@@ -77,6 +99,19 @@
                     editable.attachListener(editable, 'mouseup', handleUI);
                     editable.attachListener(editable, 'keyup', handleUI);
                 });
+            },
+
+            _createAriaStatusElement: function(id) {
+                var statusElement;
+
+                statusElement = document.createElement('div');
+                statusElement.setAttribute('aria-live', 'polite');
+                statusElement.setAttribute('role', 'status');
+                statusElement.setAttribute('id', id + '_aria');
+
+                document.body.appendChild(statusElement);
+
+                return statusElement;
             }
         }
     );

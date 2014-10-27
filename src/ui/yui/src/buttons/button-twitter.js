@@ -55,6 +55,21 @@ YUI.add('button-twitter', function(Y) {
 
         ATTRS: {
             /**
+             * Collection of strings used to label elements of the button's UI.
+             * ButtonTwitter provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: 'Tweet'}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: 'Tweet'
+                }
+            },
+
+            /**
              * Specifies if the button is toggleable, or not. ButtonTwitter will be not toggleable by default.
              *
              * @attribute toggle
