@@ -18,7 +18,8 @@ YUI.add('toolbar-add', function(Y) {
          *
          * @class ToolbarAdd
          */
-        ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.ToolbarPosition, Y.WidgetPosition, Y.WidgetPositionConstrain], {
+        ToolbarAdd = Y.Base.create('toolbaradd', Y.Widget, [Y.ToolbarBase, Y.ToolbarPosition, Y.WidgetPosition,
+            Y.WidgetPositionConstrain], {
             /**
              * Initializer lifecycle implementation for the ToolbarAdd class.
              *
@@ -49,6 +50,7 @@ YUI.add('toolbar-add', function(Y) {
                 editor = this.get('editor');
 
                 this._triggerButton.on('click', this._showToolbarAddContent, this);
+
                 this.on('visibleChange', this._onVisibleChange, this);
                 editor.on('toolbarsReady', this._onToolbarsReady, this);
                 editor.on('toolbarsHide', this._onToolbarsHide, this);
@@ -279,6 +281,7 @@ YUI.add('toolbar-add', function(Y) {
 
                 triggerButtonContainer = YNode.create(Lang.sub(
                     this.TPL_TRIGGER, {
+                        addContent: this.get('strings').addContent,
                         content: this.TPL_TRIGGER_CONTENT
                     }));
 
@@ -330,28 +333,42 @@ YUI.add('toolbar-add', function(Y) {
              * @param {Number} top The top offset in page coordinates where Trigger should be shown.
              */
             _showTriggerAtPoint: function(left, top) {
-                var triggerButtonContainer,
+                var strings,
+                    triggerButtonContainer,
                     triggerGutter;
 
                 if (!this._trigger.get('visible')) {
                     this._trigger.show();
+
+                    strings = this.get('strings');
+
+                    this.get('editor').fire('ariaUpdate', {
+                        message: Lang.sub(strings.state, {
+                            focus: strings.focus,
+                            name: this.name,
+                            state: strings.visible
+                        })
+                    });
                 }
 
                 triggerButtonContainer = this._triggerButtonContainer.getDOMNode();
 
                 triggerGutter = this.get('triggerGutter');
 
-                this._trigger.set('xy', this.getConstrainedXY([left - triggerButtonContainer.offsetWidth - triggerGutter.left, top - triggerGutter.top - triggerButtonContainer.offsetHeight / 2]));
+                this._trigger.set('xy', this.getConstrainedXY([left - triggerButtonContainer.offsetWidth -
+                    triggerGutter.left, top - triggerGutter.top - triggerButtonContainer.offsetHeight / 2]));
             },
 
-            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add alloy-editor-arrow-box"></div>',
+            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-add alloy-editor-arrow-box">' +
+                '</div>',
 
             CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
 
             TPL_BUTTONS_CONTAINER: '<div class="alloy-editor-toolbar-buttons btn-group"></div>',
 
             TPL_TRIGGER: '<div class="alloy-editor-toolbar-buttons btn-group">' +
-                '<button type="button" class="alloy-editor-button btn btn-add">{content}</button>' +
+                '<button aria-label="{addContent}" class="alloy-editor-button btn btn-add" type="button">{content}' +
+                '</button>' +
                 '</div>',
 
             TPL_TRIGGER_CONTENT: '<i class="alloy-editor-icon-add"></i>'
@@ -400,6 +417,31 @@ YUI.add('toolbar-add', function(Y) {
                 },
 
                 /**
+                 * Collection of strings used to label elements of the toolbar's UI.
+                 * ToolbarBase provides string properties to specify the messages for:
+                 *  - How to focus on the toolbar
+                 *  - Possible toolbar states (hidden and visible)
+                 *  - Current toolbar state. This works as a template. It's possible to
+                 *  use the placeholders {name}, {state} and {focus} to inject messages
+                 *  into the generated string.
+                 *
+                 * @attribute strings
+                 * @default {addContent: 'Add content', focus: 'Press Alt + F10 to focus on the toolbar.',
+                 *     hidden: 'hidden', state: 'Toolbar {name} is now {state}. {focus}', visible: 'visible'}
+                 * @type Object
+                 */
+                strings: {
+                    validator: Lang.isObject,
+                    value: {
+                        addContent: 'Add content',
+                        focus: 'Press Alt + F10 to focus on the toolbar.',
+                        hidden: 'hidden',
+                        state: 'Toolbar {name} is now {state}. {focus}',
+                        visible: 'visible'
+                    }
+                },
+
+                /**
                  * Specifies the gutter of the trigger button. The gutter object contains the top
                  * and left offsets from the point, where the trigger is supposed to appear.
                  *
@@ -423,8 +465,8 @@ YUI.add('toolbar-add', function(Y) {
     Y.ToolbarAdd = ToolbarAdd;
 
     /**
-     * The ToolbarAddTrigger class hosts controls for showing the toolbar with the add controls. This class is intended to be
-     * used internally by {{#crossLink "ToolbarAdd"}}{{/crossLink}} class.
+     * The ToolbarAddTrigger class hosts controls for showing the toolbar with the add controls. This class is intended
+     * to be used internally by {{#crossLink "ToolbarAdd"}}{{/crossLink}} class.
      *
      * @class ToolbarAddTrigger
      */
@@ -436,5 +478,6 @@ YUI.add('toolbar-add', function(Y) {
 
     });
 }, '0.1', {
-    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'toolbar-base', 'toolbar-position']
+    requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'toolbar-base',
+        'toolbar-position']
 });

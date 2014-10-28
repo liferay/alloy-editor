@@ -699,10 +699,12 @@ YUI.add('button-a', function(Y) {
                 '</span>' +
                 '</div>' +
                 '<div class="pull-left btn-group input-close-container">' +
-                '<button aria-label="{confirm}" class="alloy-editor-button btn btn-default close-link"><i class="alloy-editor-icon-ok"></i></button>' +
+                '<button aria-label="{confirm}" class="alloy-editor-button btn btn-default close-link">' +
+                '<i class="alloy-editor-icon-ok"></i></button>' +
                 '</div>' +
                 '<div class="pull-right btn-group show-buttons-container">' +
-                '<button aria-label="{back}" class="alloy-editor-button btn btn-default switch-to-edit"><i class="alloy-editor-icon-remove"></i></button>' +
+                '<button aria-label="{back}" class="alloy-editor-button btn btn-default switch-to-edit">' +
+                '<i class="alloy-editor-icon-remove"></i></button>' +
                 '</div>' +
                 '</div>'
         }, {
@@ -731,7 +733,8 @@ YUI.add('button-a', function(Y) {
                  *  - Button actions (back, clear and confirm)
                  *
                  * @attribute strings
-                 * @default {back: 'Back', clear: 'Clear', confirm: 'Confirm', label: 'Link', placeholder: 'Type or paste link here'}
+                 * @default {back: 'Back', clear: 'Clear', confirm: 'Confirm', label: 'Link', placeholder: 
+                 *     'Type or paste link here'}
                  * @type Object
                  */
                 strings: {

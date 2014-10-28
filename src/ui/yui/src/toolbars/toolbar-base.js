@@ -124,11 +124,20 @@ YUI.add('toolbar-base', function(Y) {
             buttonsContainer.on('keydown', this._onKeyDown, this);
         },
 
+        /**
+         * Handles showing or hiding of the toolbar.
+         * Fires {{#crossLink "CKEDITOR.plugins.uicore/ariaUpdate:event"}}{{/crossLink}} event with the status changes
+         * of the toolbar.
+         *
+         * @method _afterVisibleChange
+         * @protected
+         * @param {EventFacade} event Event that triggered the toolbar has been made visible or hidden.
+         */
         _afterVisibleChange: function(event) {
             var strings = this.get('strings');
 
             this.get('editor').fire('ariaUpdate', {
-                msg: Lang.sub(strings.state, {
+                message: Lang.sub(strings.state, {
                     focus: (event.newVal ? strings.focus : ''),
                     name: this.name,
                     state: (event.newVal ? strings.visible : strings.hidden)

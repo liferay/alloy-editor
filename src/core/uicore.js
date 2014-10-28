@@ -29,6 +29,14 @@
      * - selectionData - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
      */
 
+     /**
+      * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
+      *
+      * @event ariaUpdate
+      * @param {Object} data An object which contains the following properties:
+      * - message - The provided message from the UI element.
+      */
+
     /**
      * If set to true, the editor will still fire {{#crossLink "CKEDITOR.plugins.uicore/editorInteraction:event"}}{{/crossLink}} event,
      * if user presses Esc key.
@@ -57,19 +65,19 @@
              * @param {Object} editor The current CKEditor instance.
              */
             init: function(editor) {
-                var handleUI,
-                    handleAria,
+                var ariaElement,
                     ariaState = [],
-                    ariaStatusElement,
+                    handleAria,
+                    handleUI,
                     uiTasksTimeout;
 
-                ariaStatusElement = this._createAriaStatusElement(editor.id);
+                ariaElement = this._createAriaElement(editor.id);
 
                 uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
 
                 handleAria = CKEDITOR.tools.debounce(
                     function(event) {
-                        ariaStatusElement.innerHTML = ariaState.join('. ');
+                        ariaElement.innerHTML = ariaState.join('. ');
                     },
                     uiTasksTimeout
                 );
@@ -89,7 +97,14 @@
                 );
 
                 editor.on('ariaUpdate', function(event) {
-                    ariaState.push(event.data.msg);
+                    // handleAria is debounced function, so if it is being called multiple times, it will
+                    // be canceled until some time passes.
+                    // For that reason here we explicitly append the current message to the list of messages
+                    // and call handleAria. Since it is debounced, when some timeout passes,
+                    // all the messages will be applied to the live region and not only the last one.
+
+                    ariaState.push(event.data.message);
+
                     handleAria();
                 });
 
@@ -101,13 +116,24 @@
                 });
             },
 
-            _createAriaStatusElement: function(id) {
+            /**
+             * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
+             *
+             * @method _createAriaElement
+             * @protected
+             * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
+             * @return {HTMLElement} The created and applied to DOM element.
+             */
+            _createAriaElement: function(id) {
                 var statusElement;
 
                 statusElement = document.createElement('div');
+
+                statusElement.className = 'sr-only';
+
                 statusElement.setAttribute('aria-live', 'polite');
                 statusElement.setAttribute('role', 'status');
-                statusElement.setAttribute('id', id + '_aria');
+                statusElement.setAttribute('id', id + 'LiveRegion');
 
                 document.body.appendChild(statusElement);
 
