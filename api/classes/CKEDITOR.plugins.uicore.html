@@ -211,6 +211,13 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
+                                <a href="#method__createAriaElement">_createAriaElement</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
                                 <a href="#method_init">init</a>
 
                                 
@@ -248,6 +255,13 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
                     <ul class="index-list events">
                         
                             <li class="index-item event">
+                                <a href="#event_ariaUpdate">ariaUpdate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
                                 <a href="#event_editorInteraction">editorInteraction</a>
 
                                 
@@ -262,6 +276,115 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
         
             <div id="methods" class="api-class-tabpanel tab-pane">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__createAriaElement" class="method item protected">
+    <h3 class="name"><code>_createAriaElement</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>id</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_uicore.js.html#l119"><code>src&#x2F;core&#x2F;uicore.js:119</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Creates and applies an HTML element to the body of the document which will contain ARIA messages.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">id</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The provided id of the element. It will be used as prefix for the final element Id.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
+                    
+                    <p>The created and applied to DOM element.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
 
                 
                     <div id="method_init" class="method item protected">
@@ -308,7 +431,7 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
             
         
         
-        <a href="../files/src_core_uicore.js.html#l52"><code>src&#x2F;core&#x2F;uicore.js:52</code></a>
+        <a href="../files/src_core_uicore.js.html#l60"><code>src&#x2F;core&#x2F;uicore.js:60</code></a>
         
         </p>
 
@@ -395,7 +518,7 @@ by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class
             
         
         
-        <a href="../files/src_core_uicore.js.html#l32"><code>src&#x2F;core&#x2F;uicore.js:32</code></a>
+        <a href="../files/src_core_uicore.js.html#l40"><code>src&#x2F;core&#x2F;uicore.js:40</code></a>
         
         </p>
 
@@ -501,7 +624,7 @@ if user presses Esc key.</p>
             
         
         
-        <a href="../files/src_core_uicore.js.html#l41"><code>src&#x2F;core&#x2F;uicore.js:41</code></a>
+        <a href="../files/src_core_uicore.js.html#l49"><code>src&#x2F;core&#x2F;uicore.js:49</code></a>
         
         </p>
 
@@ -583,6 +706,77 @@ will be fired.</p>
         
             <div id="events" class="api-class-tabpanel tab-pane">
                 <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_ariaUpdate" class="events item">
+    <h3 class="name"><code>ariaUpdate</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_uicore.js.html#l32"><code>src&#x2F;core&#x2F;uicore.js:32</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>An object which contains the following properties:</p>
+<ul>
+<li>message - The provided message from the UI element.</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
 
                 
                     <div id="event_editorInteraction" class="events item">

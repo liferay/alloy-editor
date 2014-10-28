@@ -162,6 +162,12 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
     var Lang = Y.Lang,
         YNode = Y.Node,
 
+        KEY_ARROW_LEFT = 37,
+        KEY_ARROW_RIGHT = 39,
+        KEY_ENTER = 13,
+        KEY_ESC = 27,
+        KEY_TAB = 9,
+
         /**
          * The ButtonA class provides functionality for creating a link button.
          *
@@ -203,14 +209,17 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
              */
             bindUI: function() {
                 this.onHostEvent(&#x27;visibleChange&#x27;, this._onVisibleChange, this);
+                this.onHostEvent(&#x27;positionChange&#x27;, this._switchView, this);
 
-                this._linkInput.on(&#x27;keypress&#x27;, this._onKeyPress, this);
+                this._linkInput.on(&#x27;keydown&#x27;, this._onLinkInputKeyDown, this);
                 this._linkInput.on(&#x27;valuechange&#x27;, this._onValueChange, this);
 
-                this._showText.on(&#x27;click&#x27;, this._switchToTextMode, this);
+                this._switchToTextButton.on(&#x27;click&#x27;, this._onSwitchButtonClick, this);
 
                 this._closeLink.on(&#x27;click&#x27;, this._onCloseLinkClick, this);
                 this._clearInput.on(&#x27;click&#x27;, this._onClearInputClick, this);
+
+                this._linkContainer.delegate(&#x27;keydown&#x27;, this._onLinkContainerKeyDown, &#x27;button&#x27;, this);
             },
 
             /**
@@ -290,9 +299,143 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
             _attachHideHandler: function() {
                 this._hideHandle = this.onceHostEvent(&#x27;visibleChange&#x27;, function(event) {
                     if (!event.newVal) {
-                        this._handleLink();
+                        this._updateLink();
                     }
                 }, this);
+            },
+
+            /**
+             * Attaches a hook to Toolbar activation.
+             *
+             * @method _attachToolbarActiveHook
+             */
+            _attachToolbarActiveHook: function() {
+                this._toolbarActiveHandler = Y.Do.before(this._onToolbarActive, this.get(&#x27;host&#x27;), &#x27;focus&#x27;, this);
+            },
+
+            /**
+             * Handles the situation when user cancels committing the changes in the link.
+             *
+             * @method _cancelLinkChanges
+             * @protected
+             */
+            _cancelLinkChanges: function() {
+                // Detach hide handler, so link processing will be done here and not on toolbar hide.
+                this._detachHideHandler();
+
+                // If there is default link, it should be removed.
+                // Otherwise, we just skip updating the href of the link.
+                if (this._defaultLink) {
+                    this._removeLink(this._defaultLink);
+                }
+
+                // In both cases we have to set empty value to the link input.
+                this._linkInput.set(&#x27;value&#x27;, &#x27;&#x27;);
+            },
+
+            /**
+             * Detaches the hook to Toolbar focus method.
+             *
+             * @method _detachFocusHandler
+             */
+            _detachFocusHandler: function() {
+                if (this._toolbarActiveHandler) {
+                    Y.Do.detach(this._toolbarActiveHandler);
+
+                    this._toolbarActiveHandler = null;
+                }
+            },
+
+            /**
+             * Detaches the attached visibleChange handler on the Toolbar which
+             * handles the commit or discard process of the link.
+             * See {{#crossLink &quot;ButtonA/_attachHideHandler:method&quot;}}{{/crossLink}} for more information.
+             *
+             * @method _detachHideHandler
+             * @protected
+             */
+            _detachHideHandler: function() {
+                if (this._hideHandle) {
+                    this._hideHandle.detach();
+
+                    this._hideHandle = null;
+                }
+            },
+
+            /**
+             * Handles pressing Enter key on link input.
+             *
+             * @method _handleLinkInputEnter
+             * @protected
+             * @param {EventFacade} event Event that triggered when user pressed Enter on link input
+             */
+            _handleLinkInputEnter: function(event) {
+                var editor,
+                    host,
+                    ranges,
+                    selection;
+
+                // Editor has listener for click and keydown in order to detect
+                // when user will stop interact with the editor. On each click and keydown the target is being checked
+                // and if it is not part of the editor node or part of any Toolbar, editor assumes
+                // the user navigated to other part of the page. In this case it hides the toolbars.
+                // In order to prevent that, we have to stop propagating key ENTER to editor because in
+                // this case the target will be body and the editor will assume the user stopped
+                // to interact with the editor and it will hide the toolbars.
+                event.stopPropagation();
+
+                host = this.get(&#x27;host&#x27;);
+
+                editor = host.get(&#x27;editor&#x27;);
+
+                selection = editor.getSelection();
+
+                ranges = selection.getRanges();
+
+                host.hide();
+
+                setTimeout(function() {
+                    var range;
+
+                    range = editor.createRange();
+
+                    range.moveToPosition(ranges[0].endContainer, CKEDITOR.POSITION_AFTER_END);
+
+                    selection.selectRanges([range]);
+                }, 0);
+            },
+
+            /**
+             * Handles pressing Esc key on link input.
+             *
+             * @method _handleLinkInputEsc
+             * @protected
+             * @param {EventFacade} event Event that triggered when user pressed Esc on link input
+             */
+            _handleLinkInputEsc: function(event) {
+                this._cancelLinkChanges();
+
+                this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;).fire(&#x27;toolbarKey&#x27;, event);
+            },
+
+            /**
+             * Handles pressing Tab key on link input.
+             *
+             * @method _handleLinkInputTab
+             * @protected
+             * @param {EventFacade} event Event that triggered when user pressed Tab on link input
+             */
+            _handleLinkInputTab: function() {
+                event.preventDefault();
+
+                if (!this._closeLink.get(&#x27;disabled&#x27;)) {
+                    // focus this._switchToTextButton
+                    this._linkContainer.focusManager.focus(0);
+                }
+                else {
+                    // focus this._closeLink
+                    this._linkContainer.focusManager.focus(1);
+                }
             },
 
             /**
@@ -337,8 +480,8 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                 var instance = this,
                     btnInst,
                     editor,
-                    oldHostWidth,
                     linkInput,
+                    oldHostWidth,
                     selection;
 
                 btnInst = event.target;
@@ -365,6 +508,7 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
 
                     this._defaultLink = instance._link = this._ckLink.getFromSelection();
 
+                    this._attachToolbarActiveHook();
                     this._attachHideHandler();
                 } else {
                     this._ckLink.remove();
@@ -372,46 +516,73 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
             },
 
             /**
-             * Updates the default link with the real href, if any, or removes the
-             * default link from the current selection.
-             * See {{#crossLink &quot;ButtonA/_onClick:method&quot;}}{{/crossLink}} for more information
-             * about the default link.
+             * Handles keydown events attached to link UI.
              *
-             * @method _handleLink
-             * @protected
-             */
-            _handleLink: function() {
-                var editor,
-                    href;
-
-                href = this._linkInput.get(&#x27;value&#x27;);
-
-                editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
-
-                if (href) {
-                    this._ckLink.update(href, this._link);
-
-                    this._link.removeAttribute(&#x27;data-cke-default-link&#x27;);
-                } else {
-                    this._ckLink.remove(this._link);
-                }
-
-                this._linkInput.set(&#x27;value&#x27;, &#x27;&#x27;);
-
-                this._link = null;
-            },
-
-            /**
-             * Checks if user presses Enter key and hides the Toolbar, if so.
-             *
-             * @method _onKeyPress
+             * @method _onLinkContainerKeyDown
              * @protected
              * @param {EventFacade} event Event that triggered when user pressed a key.
              */
-            _onKeyPress: function(event) {
-                if (event.charCode === 13) {
-                    this.get(&#x27;host&#x27;).hide();
+            _onLinkContainerKeyDown: function(event) {
+                if (event.charCode === KEY_TAB) {
+                    event.preventDefault();
                 }
+
+                this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;).fire(&#x27;toolbarKey&#x27;, event);
+            },
+
+            /**
+             * Handles pressing key on link input.
+             * - on Esc it reverts any changes.
+             * - on Enter it commits any changes made to the link.
+             * - on Tab it navigates to the next button on the UI for link creation.
+             *
+             * @method _onLinkInputKeyDown
+             * @protected
+             * @param {EventFacade} event Event that triggered when user pressed a key.
+             */
+            _onLinkInputKeyDown: function(event) {
+                if (event.keyCode === KEY_ESC) {
+                    this._handleLinkInputEsc(event);
+
+                } else if (event.keyCode === KEY_ENTER) {
+                    this._handleLinkInputEnter(event);
+
+                } else if (event.keyCode === KEY_TAB) {
+                    this._handleLinkInputTab(event);
+                }
+            },
+
+            /**
+             * Handles clicking on switch to text view button.
+             *
+             * @method _onSwitchButtonClick
+             * @protected
+             * @param {EventFacade} event An Event Facade object
+             */
+            _onSwitchButtonClick: function(event) {
+                this._switchToTextView();
+
+                // call again focus on the toolbar so that the some of styles buttons will be focused
+                this.get(&#x27;host&#x27;).focus();
+            },
+
+            /**
+             * Handles focus event when link container is visible. In this case input element is the element
+             * which should be focused.
+             *
+             * @method _onToolbarActive
+             * @protected
+             */
+            _onToolbarActive: function() {
+                var result = false;
+
+                if (!this._linkContainer.hasClass(&#x27;hide&#x27;)) {
+                    this._linkInput.focus();
+
+                    result = true;
+                }
+
+                return new Y.Do.Halt(null, result);
             },
 
             /**
@@ -440,15 +611,12 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
              * If it has, activates the UI for editing link, otherwise, activates the UI
              * for creating a link.
              *
-             * @method _onValueChange
+             * @method _onVisibleChange
              * @protected
              * @param {EventFacade} event An Event Facade object with the new and old value
              * of visible property.
              */
             _onVisibleChange: function(event) {
-                var editor,
-                    link;
-
                 if (!event.newVal) {
                     this._linkContainer.addClass(&#x27;hide&#x27;);
                     this.get(&#x27;host&#x27;).get(&#x27;buttonsContainer&#x27;).removeClass(&#x27;hide&#x27;);
@@ -457,35 +625,35 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                     this._closeLink.disable();
 
                     this._defaultLink = null;
-                } else {
-                    // showing, check if we are over link already
-                    // if we are, open the host in link mode
-                    editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
 
-                    link = this._ckLink.getFromSelection();
-
-                    if (link) {
-                        this._switchToLinkMode(link);
-                    } else {
-                        this._switchToTextMode();
-                    }
+                    this._detachFocusHandler();
                 }
             },
 
             /**
-             * Removes the attached visibleChange handler on the Toolbar which
-             * handles the commit or discard process of the link.
-             * See {{#crossLink &quot;ButtonA/_attachHideHandler:method&quot;}}{{/crossLink}} for more information.
+             * Removes link and restores the editor selection.
              *
-             * @method _removeHideHandler
-             * @protected
+             * @method _removeLink
+             * @param {CKEDITOR.dom.element} link optional The link which should be removed.
              */
-            _removeHideHandler: function() {
-                if (this._hideHandle) {
-                    this._hideHandle.detach();
+            _removeLink: function(link) {
+                var bookmarks,
+                    editor,
+                    selection;
 
-                    this._hideHandle = null;
-                }
+                link = link || this._link;
+
+                editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
+
+                selection = editor.getSelection();
+
+                bookmarks = selection.createBookmarks();
+
+                this._linkInput.set(&#x27;value&#x27;, &#x27;&#x27;);
+
+                this._ckLink.remove(link);
+
+                selection.selectBookmarks(bookmarks);
             },
 
             /**
@@ -496,12 +664,18 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
              */
             _renderLinkUI: function() {
                 var contentBox,
-                    linkContainer;
+                    linkContainer,
+                    strings;
+
+                strings = this.get(&#x27;strings&#x27;);
 
                 linkContainer = YNode.create(
                     Lang.sub(
                         this.TPL_LINK_CONTAINER, {
-                            placeholder: this.get(&#x27;strings&#x27;).placeholder
+                            back: strings.back,
+                            clear: strings.clear,
+                            confirm: strings.confirm,
+                            placeholder: strings.placeholder
                         }
                     )
                 );
@@ -526,9 +700,20 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                     srcNode: linkContainer.one(&#x27;.close-link&#x27;)
                 });
 
-                this._showText = new Y.Button({
+                this._switchToTextButton = new Y.Button({
                     render: linkContainer.one(&#x27;.show-buttons-container&#x27;),
                     srcNode: linkContainer.one(&#x27;.switch-to-edit&#x27;)
+                });
+
+                linkContainer.plug(Y.Plugin.NodeFocusManager, {
+                    activeDescendant: 0,
+                    circular: true,
+                    descendants: &#x27;button&#x27;,
+                    focusClass: &#x27;focus&#x27;,
+                    keys: {
+                        next: &#x27;down:&#x27; + KEY_ARROW_RIGHT,
+                        previous: &#x27;down:&#x27; + KEY_ARROW_LEFT
+                    }
                 });
             },
 
@@ -536,17 +721,15 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
              * Changes the UI of the Toolbar so the user will be able to change the styles
              * of the selection instead to create a link.
              *
-             * @method _switchToTextMode
+             * @method _switchToTextView
              * @protected
              */
-            _switchToTextMode: function() {
-                var bookmarks,
-                    editor,
-                    linkText,
-                    oldHostWidth,
-                    selection;
+            _switchToTextView: function() {
+                var linkText,
+                    oldHostWidth;
 
-                this._removeHideHandler();
+                this._detachFocusHandler();
+                this._detachHideHandler();
 
                 if (this._defaultLink) {
                     // We were in text mode and default link has been created.
@@ -555,17 +738,9 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
                     linkText = this._linkInput.get(&#x27;value&#x27;);
 
                     if (!linkText) {
-                        editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
-
-                        selection = editor.getSelection();
-
-                        bookmarks = selection.createBookmarks();
-
-                        this._handleLink();
-
-                        selection.selectBookmarks(bookmarks);
+                        this._removeLink();
                     } else {
-                        this._handleLink();
+                        this._updateLink();
                     }
 
                     this._defaultLink = null;
@@ -585,11 +760,11 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
              * Changes the UI of the Toolbar so the user will be able to to create a link to
              * change the styles of the selection.
              *
-             * @method _switchToLinkMode
+             * @method _switchToLinkView
              * @protected
              * @param {CKEDITOR.dom.element} link The currently selected link from editor selection.
              */
-            _switchToLinkMode: function(link) {
+            _switchToLinkView: function(link) {
                 var editor,
                     linkInput;
 
@@ -607,33 +782,87 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
 
                 linkInput.set(&#x27;value&#x27;, link.$.href);
 
-                setTimeout(
-                    function() {
-                        linkInput.select();
-                        linkInput.focus();
-                    }, 0);
+                setTimeout(function() {
+                    linkInput.select();
+                    linkInput.focus();
+                }, 0);
 
                 this._link = link;
 
+                this._attachToolbarActiveHook();
                 this._attachHideHandler();
+            },
+
+            /**
+             * Checks if the current selection is a link, and changes the UI of the toolbar to
+             * link view if so. Otherwise, switches to text view.
+             *
+             * @method  _switchView
+             * @protected
+             */
+            _switchView: function() {
+                var editor,
+                    link;
+
+                editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
+
+                link = this._ckLink.getFromSelection();
+
+                if (link) {
+                    this._switchToLinkView(link);
+                } else {
+                    this._switchToTextView();
+                }
+            },
+
+            /**
+             * Updates the default link with the real href, if any, or removes the
+             * default link from the current selection.
+             * See {{#crossLink &quot;ButtonA/_onClick:method&quot;}}{{/crossLink}} for more information
+             * about the default link.
+             *
+             * @method _updateLink
+             * @protected
+             */
+            _updateLink: function() {
+                var editor,
+                    href;
+
+                href = this._linkInput.get(&#x27;value&#x27;);
+
+                editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
+
+                if (href) {
+                    this._ckLink.update(href, this._link);
+
+                    this._link.removeAttribute(&#x27;data-cke-default-link&#x27;);
+                } else {
+                    this._ckLink.remove(this._link);
+                }
+
+                this._linkInput.set(&#x27;value&#x27;, &#x27;&#x27;);
+
+                this._link = null;
             },
 
             TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-link&quot;&gt;&lt;/i&gt;&#x27;,
 
             TPL_LINK_CONTAINER: &#x27;&lt;div class=&quot;link-wrapper hide&quot;&gt;&#x27; +
-                &#x27;&lt;div class=&quot;pull-left btn-group show-buttons-container&quot;&gt;&#x27; +
-                &#x27;&lt;button class=&quot;alloy-editor-button btn btn-default switch-to-edit&quot;&gt;&lt;i class=&quot;alloy-editor-icon-edit&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27; +
-                &#x27;&lt;/div&gt;&#x27; +
                 &#x27;&lt;div class=&quot;pull-left btn-group input-wrapper&quot;&gt;&#x27; +
                 &#x27;&lt;span class=&quot;input-container&quot;&gt;&#x27; +
                 &#x27;&lt;input class=&quot;input-large&quot; type=&quot;text&quot; placeholder=&quot;{placeholder}&quot;&gt;&lt;/input&gt;&#x27; +
-                &#x27;&lt;span class=&quot;input-clear&quot;&gt;&#x27; +
+                &#x27;&lt;span aria-label=&quot;{clear}&quot; class=&quot;input-clear&quot;&gt;&#x27; +
                 &#x27;&lt;i class=&quot;alloy-editor-icon-remove&quot;&gt;&lt;/i&gt;&#x27; +
                 &#x27;&lt;/span&gt;&#x27; +
                 &#x27;&lt;/span&gt;&#x27; +
                 &#x27;&lt;/div&gt;&#x27; +
-                &#x27;&lt;div class=&quot;pull-right btn-group input-close-container&quot;&gt;&#x27; +
-                &#x27;&lt;button class=&quot;alloy-editor-button btn btn-default close-link&quot;&gt;&lt;i class=&quot;alloy-editor-icon-ok&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27; +
+                &#x27;&lt;div class=&quot;pull-left btn-group input-close-container&quot;&gt;&#x27; +
+                &#x27;&lt;button aria-label=&quot;{confirm}&quot; class=&quot;alloy-editor-button btn btn-default close-link&quot;&gt;&#x27; +
+                &#x27;&lt;i class=&quot;alloy-editor-icon-ok&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27; +
+                &#x27;&lt;/div&gt;&#x27; +
+                &#x27;&lt;div class=&quot;pull-right btn-group show-buttons-container&quot;&gt;&#x27; +
+                &#x27;&lt;button aria-label=&quot;{back}&quot; class=&quot;alloy-editor-button btn btn-default switch-to-edit&quot;&gt;&#x27; +
+                &#x27;&lt;i class=&quot;alloy-editor-icon-remove&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27; +
                 &#x27;&lt;/div&gt;&#x27; +
                 &#x27;&lt;/div&gt;&#x27;
         }, {
@@ -656,14 +885,22 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
 
                 /**
                  * Collection of strings used to label elements of the button&#x27;s UI.
-                 * ButtonA provides one string property, to specify the value of link placeholder.
+                 * ButtonA provides string properties to specify the messages for:
+                 *  - Link input placeholder
+                 *  - Button label
+                 *  - Button actions (back, clear and confirm)
                  *
                  * @attribute strings
-                 * @default {placeholder: &#x27;Type or paste link here&#x27;}
-                 * @type String
+                 * @default {back: &#x27;Back&#x27;, clear: &#x27;Clear&#x27;, confirm: &#x27;Confirm&#x27;, label: &#x27;Link&#x27;, placeholder: 
+                 *     &#x27;Type or paste link here&#x27;}
+                 * @type Object
                  */
                 strings: {
                     value: {
+                        back: &#x27;Back&#x27;,
+                        clear: &#x27;Clear&#x27;,
+                        confirm: &#x27;Confirm&#x27;,
+                        label: &#x27;Link&#x27;,
                         placeholder: &#x27;Type or paste link here&#x27;
                     }
                 }
@@ -673,8 +910,9 @@ YUI.add(&#x27;button-a&#x27;, function(Y) {
     Y.ButtonA = A;
 
 }, &#x27;&#x27;, {
-    requires: [&#x27;button-base&#x27;, &#x27;event-valuechange&#x27;]
+    requires: [&#x27;button-base&#x27;, &#x27;event-valuechange&#x27;, &#x27;node-focusmanager&#x27;]
 });
+
     </pre>
 </div>
 

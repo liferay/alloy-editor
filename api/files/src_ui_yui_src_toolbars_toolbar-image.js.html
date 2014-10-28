@@ -167,7 +167,7 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
          *
          * @class ToolbarImage
          */
-        ToolbarImage = Y.Base.create(&#x27;toolbarimage&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide, Y.ToolbarBase, Y.ToolbarPosition], {
+        ToolbarImage = Y.Base.create(&#x27;toolbarimage&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
             /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
@@ -193,13 +193,15 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
             },
 
             /**
-             * Creates and adds Node element - the container where buttons should render.
+             * Attaches listeners to &lt;code&gt;actionPerformed&lt;/code&gt; and &lt;code&gt;toolbarsHide&lt;/code&gt; events.
              *
              * @method bindUI
              * @protected
              */
             bindUI: function() {
                 this.on(&#x27;actionPerformed&#x27;, this._onActionPerformed, this);
+
+                this.get(&#x27;editor&#x27;).on(&#x27;toolbarsHide&#x27;, this._onToolbarsHide, this);
             },
 
             /**
@@ -273,6 +275,15 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
             },
 
             /**
+             * Hides the toolbar in case of &lt;code&gt;toolbarsHide&lt;/code&gt; event.
+             *
+             * @method _onToolbarsHide
+             */
+            _onToolbarsHide: function() {
+                this.hide();
+            },
+
+            /**
              * Moves the Toolbar to specified position.
              *
              * @method _updateUI
@@ -285,11 +296,17 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
                 if (element) {
                     region = Y.DOM.region(element.$);
 
-                    this.showAtPoint(region.left + (region.right - region.left) / 2, region.top, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+                    this.showAtPoint(region.left + (region.right - region.left) / 2, region.top,
+                        CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+
+                    this.fire(&#x27;positionChange&#x27;, this);
+
+                    this.get(&#x27;editor&#x27;).fire(&#x27;toolbarActive&#x27;, this);
                 }
             },
 
-            BOUNDING_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar alloy-editor-toolbar-image alloy-editor-arrow-box alloy-editor-arrow-box-bottom&quot;&gt;&lt;/div&gt;&#x27;,
+            BOUNDING_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar alloy-editor-toolbar-image alloy-editor-arrow-box &#x27; +
+                &#x27;alloy-editor-arrow-box-bottom&quot;&gt;&lt;/div&gt;&#x27;,
 
             CONTENT_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar-content btn-toolbar&quot;&gt;&lt;/div&gt;&#x27;,
 
@@ -341,8 +358,9 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
 
     Y.ToolbarImage = ToolbarImage;
 }, &#x27;&#x27;, {
-    requires: [&#x27;dom-screen&#x27;, &#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;, &#x27;widget-autohide&#x27;, &#x27;toolbar-base&#x27;, &#x27;toolbar-position&#x27;]
+    requires: [&#x27;dom-screen&#x27;, &#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;, &#x27;toolbar-base&#x27;, &#x27;toolbar-position&#x27;]
 });
+
     </pre>
 </div>
 

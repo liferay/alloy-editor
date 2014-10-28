@@ -176,7 +176,8 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
          *
          * @class ToolbarAdd
          */
-        ToolbarAdd = Y.Base.create(&#x27;toolbaradd&#x27;, Y.Widget, [Y.ToolbarBase, Y.ToolbarPosition, Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide], {
+        ToolbarAdd = Y.Base.create(&#x27;toolbaradd&#x27;, Y.Widget, [Y.ToolbarBase, Y.ToolbarPosition, Y.WidgetPosition,
+            Y.WidgetPositionConstrain], {
             /**
              * Initializer lifecycle implementation for the ToolbarAdd class.
              *
@@ -202,9 +203,15 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
              * @protected
              */
             bindUI: function() {
+                var editor;
+
+                editor = this.get(&#x27;editor&#x27;);
+
                 this._triggerButton.on(&#x27;click&#x27;, this._showToolbarAddContent, this);
-                this.get(&#x27;editor&#x27;).on(&#x27;toolbarsReady&#x27;, this._onToolbarsReady, this);
+
                 this.on(&#x27;visibleChange&#x27;, this._onVisibleChange, this);
+                editor.on(&#x27;toolbarsReady&#x27;, this._onToolbarsReady, this);
+                editor.on(&#x27;toolbarsHide&#x27;, this._onToolbarsHide, this);
             },
 
             /**
@@ -217,6 +224,47 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
                 this._triggerButton.destroy();
 
                 this._trigger.destroy();
+            },
+
+            /**
+             * Returns the focus to the editor and shows again the trigger.
+             *
+             * @method blur
+             */
+            blur: function() {
+                this.get(&#x27;editor&#x27;).focus();
+
+                this._showTriggerAtPoint(this._triggerButtonPosition.left, this._triggerButtonPosition.top);
+            },
+
+            /**
+             * Focus the toolbar. If it is visible, focus the first button, otherwise focus the trigger button.
+             *
+             * @method focus
+             * @return {Boolean} True if toolbar has been focused, false otherwise.
+             */
+            focus: function() {
+                var buttonsContainer = this.get(&#x27;buttonsContainer&#x27;);
+
+                if (this.get(&#x27;visible&#x27;)) {
+                    buttonsContainer.focusManager.focus(0);
+                } else {
+                    this._triggerButton.focus();
+                }
+
+                return true;
+            },
+
+            /**
+             * Returns true if the passed node is a child node of the toolbar, false otherwise.
+             *
+             * @method ownsNode
+             * @param  {Node|HTMLElement} node The node which should be checked if it is child node of the current
+             * toolbar.
+             * @return {Boolean} True if the passed node is child node of the current toolbar.
+             */
+            ownsNode: function(node) {
+                return this.get(&#x27;boundingBox&#x27;).contains(node) || this._trigger.get(&#x27;boundingBox&#x27;).contains(node);
             },
 
             /**
@@ -299,13 +347,9 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
              * @param {EventFacade} event Event that triggered when user interacted with the editor.
              */
             _onEditorInteraction: function(event) {
-                var editorX,
-                    nativeEvent,
-                    position,
+                var nativeEvent,
                     selectionData,
-                    startRect,
-                    toolbarPosition,
-                    triggerPosition;
+                    startRect;
 
                 selectionData = event.data.selectionData;
 
@@ -321,8 +365,24 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
                         y: nativeEvent.pageY
                     });
 
-                    this._showTriggerAtPoint(this._editorNode.getX(), selectionData.region.top + startRect.height / 2);
+                    this._triggerButtonPosition = {
+                        left: this._editorNode.getX(),
+                        top: selectionData.region.top + startRect.height / 2
+                    };
+
+                    this._showTriggerAtPoint(this._triggerButtonPosition.left, this._triggerButtonPosition.top);
                 }
+            },
+
+            /**
+             * Hides the toolbar and the trigger in case of &lt;code&gt;toolbarsHide&lt;/code&gt; event.
+             *
+             * @method _onToolbarsHide
+             */
+            _onToolbarsHide: function() {
+                this.hide();
+
+                this._trigger.hide();
             },
 
             /**
@@ -379,6 +439,7 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
 
                 triggerButtonContainer = YNode.create(Lang.sub(
                     this.TPL_TRIGGER, {
+                        addContent: this.get(&#x27;strings&#x27;).addContent,
                         content: this.TPL_TRIGGER_CONTENT
                     }));
 
@@ -397,6 +458,8 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
                 this._triggerButton = triggerButton;
 
                 this._triggerButtonContainer = triggerButtonContainer;
+
+                this._triggerButtonContainer.on(&#x27;keydown&#x27;, this._onKeyDown, this);
             },
 
             /**
@@ -413,6 +476,10 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
                 this._trigger.hide();
 
                 this._editorNode.focus();
+
+                this.focus();
+
+                this.get(&#x27;editor&#x27;).fire(&#x27;toolbarActive&#x27;, this);
             },
 
             /**
@@ -424,28 +491,42 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
              * @param {Number} top The top offset in page coordinates where Trigger should be shown.
              */
             _showTriggerAtPoint: function(left, top) {
-                var triggerButtonContainer,
+                var strings,
+                    triggerButtonContainer,
                     triggerGutter;
 
                 if (!this._trigger.get(&#x27;visible&#x27;)) {
                     this._trigger.show();
+
+                    strings = this.get(&#x27;strings&#x27;);
+
+                    this.get(&#x27;editor&#x27;).fire(&#x27;ariaUpdate&#x27;, {
+                        message: Lang.sub(strings.state, {
+                            focus: strings.focus,
+                            name: this.name,
+                            state: strings.visible
+                        })
+                    });
                 }
 
                 triggerButtonContainer = this._triggerButtonContainer.getDOMNode();
 
                 triggerGutter = this.get(&#x27;triggerGutter&#x27;);
 
-                this._trigger.set(&#x27;xy&#x27;, this.getConstrainedXY([left - triggerButtonContainer.offsetWidth - triggerGutter.left, top - triggerGutter.top - triggerButtonContainer.offsetHeight / 2]));
+                this._trigger.set(&#x27;xy&#x27;, this.getConstrainedXY([left - triggerButtonContainer.offsetWidth -
+                    triggerGutter.left, top - triggerGutter.top - triggerButtonContainer.offsetHeight / 2]));
             },
 
-            BOUNDING_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar alloy-editor-toolbar-add alloy-editor-arrow-box&quot;&gt;&lt;/div&gt;&#x27;,
+            BOUNDING_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar alloy-editor-toolbar-add alloy-editor-arrow-box&quot;&gt;&#x27; +
+                &#x27;&lt;/div&gt;&#x27;,
 
             CONTENT_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar-content btn-toolbar&quot;&gt;&lt;/div&gt;&#x27;,
 
             TPL_BUTTONS_CONTAINER: &#x27;&lt;div class=&quot;alloy-editor-toolbar-buttons btn-group&quot;&gt;&lt;/div&gt;&#x27;,
 
             TPL_TRIGGER: &#x27;&lt;div class=&quot;alloy-editor-toolbar-buttons btn-group&quot;&gt;&#x27; +
-                &#x27;&lt;button type=&quot;button&quot; class=&quot;alloy-editor-button btn btn-add&quot;&gt;{content}&lt;/button&gt;&#x27; +
+                &#x27;&lt;button aria-label=&quot;{addContent}&quot; class=&quot;alloy-editor-button btn btn-add&quot; type=&quot;button&quot;&gt;{content}&#x27; +
+                &#x27;&lt;/button&gt;&#x27; +
                 &#x27;&lt;/div&gt;&#x27;,
 
             TPL_TRIGGER_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-add&quot;&gt;&lt;/i&gt;&#x27;
@@ -494,6 +575,31 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
                 },
 
                 /**
+                 * Collection of strings used to label elements of the toolbar&#x27;s UI.
+                 * ToolbarBase provides string properties to specify the messages for:
+                 *  - How to focus on the toolbar
+                 *  - Possible toolbar states (hidden and visible)
+                 *  - Current toolbar state. This works as a template. It&#x27;s possible to
+                 *  use the placeholders {name}, {state} and {focus} to inject messages
+                 *  into the generated string.
+                 *
+                 * @attribute strings
+                 * @default {addContent: &#x27;Add content&#x27;, focus: &#x27;Press Alt + F10 to focus on the toolbar.&#x27;,
+                 *     hidden: &#x27;hidden&#x27;, state: &#x27;Toolbar {name} is now {state}. {focus}&#x27;, visible: &#x27;visible&#x27;}
+                 * @type Object
+                 */
+                strings: {
+                    validator: Lang.isObject,
+                    value: {
+                        addContent: &#x27;Add content&#x27;,
+                        focus: &#x27;Press Alt + F10 to focus on the toolbar.&#x27;,
+                        hidden: &#x27;hidden&#x27;,
+                        state: &#x27;Toolbar {name} is now {state}. {focus}&#x27;,
+                        visible: &#x27;visible&#x27;
+                    }
+                },
+
+                /**
                  * Specifies the gutter of the trigger button. The gutter object contains the top
                  * and left offsets from the point, where the trigger is supposed to appear.
                  *
@@ -516,14 +622,13 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
 
     Y.ToolbarAdd = ToolbarAdd;
 
-
     /**
-     * The ToolbarAddTrigger class hosts controls for showing the toolbar with the add controls. This class is intended to be
-     * used internally by {{#crossLink &quot;ToolbarAdd&quot;}}{{/crossLink}} class.
+     * The ToolbarAddTrigger class hosts controls for showing the toolbar with the add controls. This class is intended
+     * to be used internally by {{#crossLink &quot;ToolbarAdd&quot;}}{{/crossLink}} class.
      *
      * @class ToolbarAddTrigger
      */
-    ToolbarAddTrigger = Y.Base.create(&#x27;toolbaraddtrigger&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetAutohide], {
+    ToolbarAddTrigger = Y.Base.create(&#x27;toolbaraddtrigger&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign], {
         BOUNDING_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar alloy-editor-toolbar-add-trigger&quot;&gt;&lt;/div&gt;&#x27;,
 
         CONTENT_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar-content btn-toolbar&quot;&gt;&lt;/div&gt;&#x27;
@@ -531,7 +636,8 @@ YUI.add(&#x27;toolbar-add&#x27;, function(Y) {
 
     });
 }, &#x27;0.1&#x27;, {
-    requires: [&#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;, &#x27;widget-position-align&#x27;, &#x27;widget-autohide&#x27;, &#x27;toolbar-base&#x27;, &#x27;toolbar-position&#x27;]
+    requires: [&#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;, &#x27;widget-position-align&#x27;, &#x27;toolbar-base&#x27;,
+        &#x27;toolbar-position&#x27;]
 });
     </pre>
 </div>

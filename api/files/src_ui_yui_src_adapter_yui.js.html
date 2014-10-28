@@ -162,7 +162,11 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
     var Lang = Y.Lang,
-        AlloyEditor;
+        AlloyEditor,
+
+        KEY_ESC = 27,
+        KEY_F10 = 121,
+        KEY_TAB = 9;
 
     /**
      * YUI3 Adapter for CKEditor. This class provides YUI3 like way of creating instances of
@@ -182,9 +186,13 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function(config) {
-            var editor;
+            var editor,
+                eventsDelay,
+                node;
 
-            editor = CKEDITOR.inline(this.get(&#x27;srcNode&#x27;).getDOMNode());
+            node = this.get(&#x27;srcNode&#x27;);
+
+            editor = CKEDITOR.inline(node.getDOMNode());
 
             editor.config.allowedContent = this.get(&#x27;allowedContent&#x27;);
 
@@ -193,11 +201,25 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
             editor.config.removePlugins = this.get(&#x27;removePlugins&#x27;);
             editor.config.extraPlugins = this.get(&#x27;extraPlugins&#x27;);
             editor.config.placeholderClass = this.get(&#x27;placeholderClass&#x27;);
-            editor.config.title = false;
 
             Y.mix(editor.config, config);
 
             this._editor = editor;
+
+            eventsDelay = this.get(&#x27;eventsDelay&#x27;);
+
+            this._eventHandles = [
+                Y.one(Y.config.doc).on([&#x27;click&#x27;, &#x27;keydown&#x27;],
+                    CKEDITOR.tools.debounce(this._onDocInteract, eventsDelay, this)),
+                node.on(&#x27;keydown&#x27;,
+                    CKEDITOR.tools.debounce(this._onEditorKey, eventsDelay, this))
+            ];
+
+            // Custom events will be attached automatically, there is no need to put them in to the list
+            // with event handles
+            editor.on(&#x27;toolbarKey&#x27;, this._onToolbarKey, this);
+
+            editor.on(&#x27;toolbarActive&#x27;, this._onToolbarActive, this);
         },
 
         /**
@@ -208,17 +230,72 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
          * @protected
          */
         destructor: function() {
-            var inst;
+            var editorInstance;
 
-            inst = CKEDITOR.instances[this.get(&#x27;srcNode&#x27;).get(&#x27;id&#x27;)];
+            editorInstance = CKEDITOR.instances[this.get(&#x27;srcNode&#x27;).get(&#x27;id&#x27;)];
 
-            if (inst) {
-                Y.Object.each(inst.config.toolbars, function(value) {
+            if (editorInstance) {
+                Y.Object.each(editorInstance.config.toolbars, function(value) {
                     value.destroy();
                 });
 
-                inst.destroy();
+                editorInstance.destroy();
             }
+
+            (new Y.EventHandle(this._eventHandles)).detach();
+        },
+
+        /**
+         * Searches among toolbars to find the next toolbar that should be focused.
+         *
+         * @method _focusNextToolbar
+         * @protected
+         */
+        _focusNextToolbar: function() {
+            var activeToolbar,
+                currentToolbarIndex,
+                lastPart,
+                toolbars;
+
+            activeToolbar = this._activeToolbar;
+
+            toolbars = this._editor.config.toolbars;
+
+            //We need to convert toolbars to an array so we can reorder them.
+            toolbars = Y.Object.keys(toolbars).map(function(item) {
+                return toolbars[item];
+            });
+
+            currentToolbarIndex = Y.Array.indexOf(toolbars, activeToolbar);
+
+            lastPart = toolbars.splice(currentToolbarIndex);
+
+            toolbars = lastPart.concat(toolbars);
+
+            Y.Array.some(toolbars, function(toolbar) {
+                if (toolbar !== activeToolbar &amp;&amp; toolbar.focus()) {
+                    this._activeToolbar = toolbar;
+
+                    return true;
+                }
+            }, this);
+        },
+
+        /**
+         * Focuses the first visible toolbar in editor or if there is not any, focuses the last of the other
+         * toolbars which accept the request for focusing.
+         *
+         * @method _focusVisibleToolbar
+         * @protected
+         */
+        _focusVisibleToolbar: function() {
+            Y.Object.some(this._editor.config.toolbars, function(toolbar) {
+                if (toolbar != this._activeToolbar &amp;&amp; toolbar.focus()) {
+                    this._activeToolbar = toolbar;
+
+                    return toolbar.get(&#x27;visible&#x27;);
+                }
+            }, this);
         },
 
         /**
@@ -233,7 +310,99 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
         },
 
         /**
-         * Validates the allowed content attribute. Look [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the supported values.
+         * Hide all visible toolbars in editor
+         *
+         * @method _hideToolbars
+         * @protected
+         */
+        _hideToolbars: function() {
+            Y.Object.each(this._editor.config.toolbars, function(toolbar) {
+                toolbar.hide();
+            });
+        },
+
+        /**
+         * Fires &lt;code&gt;toolbarsHide&lt;/code&gt; event if none of the toolbars or their child nodes is the element user is
+         * currently interacting.
+         *
+         * @method _onDocInteract
+         * @protected
+         * @param {EventFacade} event EventFacade object
+         */
+        _onDocInteract: function(event) {
+            var editorInstance,
+                result,
+                srcNode;
+
+            srcNode = this.get(&#x27;srcNode&#x27;);
+
+            result = (srcNode === event.target) || (srcNode.contains(event.target));
+
+            editorInstance = CKEDITOR.instances[srcNode.get(&#x27;id&#x27;)];
+
+            result = result || Y.some(editorInstance.config.toolbars, function(toolbar) {
+                return toolbar.ownsNode(event.target);
+            });
+
+            if (!result) {
+                this._editor.fire(&#x27;toolbarsHide&#x27;);
+            }
+        },
+
+        /**
+         * Handles key events in the editor:
+         *  - ALT + F10: focus the toolbar
+         *  - ESC: hide visible toolbars
+         *
+         * @method _onEditorKey
+         * @param {EventFacade} event Event that triggered when user pressed a key inside the editor.
+         * @protected
+         */
+        _onEditorKey: function(event) {
+            if (event.altKey &amp;&amp; event.keyCode === KEY_F10) {
+                this._focusVisibleToolbar();
+
+            } else if (event.keyCode === KEY_ESC) {
+                this._hideToolbars();
+            }
+        },
+
+        /**
+         * Handles activating a toolbar.
+         *
+         * @method _onToolbarActive
+         * @protected
+         */
+        _onToolbarActive: function(event) {
+            this._activeToolbar = event.data;
+        },
+
+        /**
+         * Handles key events in the toolbar:
+         *  - TAB: focus next toolbar
+         *  - ESC: focus the editor
+         *
+         * @method _onToolbarKey
+         * @param {Event} event keyboard event
+         * @protected
+         */
+        _onToolbarKey: function(event) {
+            if (event.data.keyCode === KEY_TAB) {
+                event.data.preventDefault();
+                this._focusNextToolbar();
+
+            } else if (event.data.keyCode === KEY_ESC) {
+                this._activeToolbar.blur();
+                this._activeToolbar = null;
+
+                this._hideToolbars();
+            }
+        },
+
+        /**
+         * Validates the allowed content attribute. Look
+         * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
+         * supported values.
          *
          * @method _validateAllowedContent
          * @protected
@@ -244,8 +413,8 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
         },
 
         /**
-         * Validates toolbars attribute. May be empty string or null, which means the current instance of AlloyEdtor shouldn&#x27;t
-         * have any toolbars, or Object, which properties are the desired toolbars.
+         * Validates toolbars attribute. May be empty string or null, which means the current instance of AlloyEdtor
+         * shouldn&#x27;t have any toolbars, or Object, which properties are the desired toolbars.
          *
          * @method _validateToolbars
          * @protected
@@ -274,15 +443,14 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
             },
 
             /**
-             * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
+             * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
              *
-             * @attribute nativeEditor
-             * @readOnly
-             * @type {Object}
+             * @attribute eventsDelay
+             * @type {Number}
              */
-            nativeEditor: {
-                getter: &#x27;_getNativeEditor&#x27;,
-                readOnly: true
+            eventsDelay: {
+                validator: Lang.isNumber,
+                value: 100
             },
 
             /**
@@ -298,6 +466,18 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
                 validator: Lang.isString,
                 value: &#x27;uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader&#x27;,
                 writeOnce: true
+            },
+
+            /**
+             * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
+             *
+             * @attribute nativeEditor
+             * @readOnly
+             * @type {Object}
+             */
+            nativeEditor: {
+                getter: &#x27;_getNativeEditor&#x27;,
+                readOnly: true
             },
 
             /**
@@ -321,10 +501,11 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
              * These plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor
              * comes with its own highly optimized copy of CKEditor (just customized via their official download page).
              * This version does not come with the unneeded plugins, so the value of this property won&#x27;t be needed.
-             * However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the plugins
-             * if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn&#x27;t remove them entirely
-             * from CKEditor. It just removes them from its current instance, in which you will use different UI - those of
-             * AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same page!
+             * However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the
+             * plugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn&#x27;t remove them
+             * entirely from CKEditor. It just removes them from its current instance, in which you will use different
+             * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
+             * page!
              *
              * @attribute removePlugins
              * @default &#x27;contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link&#x27;

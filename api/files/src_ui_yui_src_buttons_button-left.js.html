@@ -234,6 +234,21 @@ YUI.add(&#x27;button-left&#x27;, function(Y) {
             element: {
                 validator: Lang.isString,
                 value: &#x27;left&#x27;
+            },
+
+            /**
+             * Collection of strings used to label elements of the button&#x27;s UI.
+             * ButtonLeft provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: &#x27;Align left&#x27;}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: &#x27;Align left&#x27;
+                }
             }
         }
     });

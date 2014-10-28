@@ -167,7 +167,7 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
          *
          * @class ToolbarStyles
          */
-        ToolbarStyles = Y.Base.create(&#x27;toolbarstyles&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetAutohide, Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
+        ToolbarStyles = Y.Base.create(&#x27;toolbarstyles&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
             /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
@@ -186,6 +186,16 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
                 contentBox.appendChild(buttonsContainer);
 
                 instance._buttonsContainer = buttonsContainer;
+            },
+
+            /**
+             * Attaches listener to &lt;code&gt;toolbarsHide&lt;/code&gt; event.
+             *
+             * @method bindUI
+             * @protected
+             */
+            bindUI: function() {
+                this.get(&#x27;editor&#x27;).on(&#x27;toolbarsHide&#x27;, this._onToolbarsHide, this);
             },
 
             /**
@@ -255,12 +265,25 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
 
                     this.showAtPoint(position.x, position.y, position.direction);
 
+                    this.fire(&#x27;positionChange&#x27;, this);
+
+                    editor.fire(&#x27;toolbarActive&#x27;, this);
                 } else {
                     this.hide();
                 }
             },
 
-            BOUNDING_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar alloy-editor-toolbar-styles alloy-editor-arrow-box&quot;&gt;&lt;/div&gt;&#x27;,
+            /**
+             * Hides the toolbar in case of &lt;code&gt;toolbarsHide&lt;/code&gt; event.
+             *
+             * @method _onToolbarsHide
+             */
+            _onToolbarsHide: function() {
+                this.hide();
+            },
+
+            BOUNDING_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar alloy-editor-toolbar-styles alloy-editor-arrow-box&quot;&gt;&#x27; +
+                &#x27;&lt;/div&gt;&#x27;,
 
             CONTENT_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar-content btn-toolbar&quot;&gt;&lt;/div&gt;&#x27;,
 
@@ -312,8 +335,9 @@ YUI.add(&#x27;toolbar-styles&#x27;, function(Y) {
 
     Y.ToolbarStyles = ToolbarStyles;
 }, &#x27;&#x27;, {
-    requires: [&#x27;toolbar-base&#x27;, &#x27;toolbar-position&#x27;, &#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;, &#x27;widget-autohide&#x27;]
+    requires: [&#x27;toolbar-base&#x27;, &#x27;toolbar-position&#x27;, &#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;]
 });
+
     </pre>
 </div>
 

@@ -183,16 +183,24 @@
             debounceHandle;
 
         callFn = function() {
-            var callContext,
-                calArgs;
+            var callArgs,
+                callContext,
+                len,
+                result = [],
+                startIndex = 0;
 
             callContext = context || this;
-            calArgs = args || arguments;
+
+            for (len = arguments.length; startIndex &lt; len; ++startIndex) {
+                result.push(arguments[startIndex]);
+            }
+
+            callArgs = result.concat(args || []);
 
             clearTimeout(debounceHandle);
 
             debounceHandle = setTimeout(function() {
-                callback.apply(callContext, calArgs);
+                callback.apply(callContext, callArgs);
             }, timeout);
         };
 
