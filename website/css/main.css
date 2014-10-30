@@ -800,3 +800,12 @@ pre {
   height: 90px;
 }
 
+/* AlloyEditor */
+.alloy-editor-toolbar {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.alloy-editor-toolbar .link-wrapper .input-wrapper .input-container {
+  margin: 5px;
+}
