@@ -2,7 +2,7 @@
     "project": {
         "name": "AlloyEditor",
         "description": "WYSIWYG editor built on top of CKEditor, with completely rewritten UI",
-        "version": "0.2.2",
+        "version": "0.2.3",
         "url": "https://github.com/ipeychev/alloy-editor/"
     },
     "files": {
