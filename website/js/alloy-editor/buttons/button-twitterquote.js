@@ -1,0 +1,1 @@
+YUI.add("button-twitterquote",function(t){"use strict";var e=(t.Lang,t.Base.create("twitterquote",t.Plugin.Base,[t.ButtonBase],{_handleMedia:function(){},TPL_CONTENT:'<i class="alloy-editor-icon-twitter-sign"></i>'},{NAME:"twitterquote",NS:"twitterquote"}));t.ButtonTwitterquote=e},"",{requires:["button-base"]});

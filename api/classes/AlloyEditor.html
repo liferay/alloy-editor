@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.3</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -159,7 +161,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_ui_yui_src_adapter_yui.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:9</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_adapter_yui.js.html#l13"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:13</code></a>
         </div>
     
 
@@ -211,7 +213,7 @@ CKEditor and passing configuration paramters to it.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:9</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l13"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:13</code></a>
         
         </p>
 
@@ -260,7 +262,56 @@ CKEditor and passing configuration paramters to it.</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
+                                <a href="#method__focusNextToolbar">_focusNextToolbar</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__focusVisibleToolbar">_focusVisibleToolbar</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
                                 <a href="#method__getNativeEditor">_getNativeEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__hideToolbars">_hideToolbars</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__onDocInteract">_onDocInteract</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__onEditorKey">_onEditorKey</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__onToolbarActive">_onToolbarActive</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__onToolbarKey">_onToolbarKey</a>
 
                                 
                                 
@@ -311,6 +362,10 @@ CKEditor and passing configuration paramters to it.</p>
                             </li>
                         
                             <li class="index-item attr">
+                                <a href="#attr_eventsDelay">eventsDelay</a>
+                            </li>
+                        
+                            <li class="index-item attr">
                                 <a href="#attr_extraPlugins">extraPlugins</a>
                             </li>
                         
@@ -344,6 +399,121 @@ CKEditor and passing configuration paramters to it.</p>
         
             <div id="methods" class="api-class-tabpanel tab-pane">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__focusNextToolbar" class="method item protected">
+    <h3 class="name"><code>_focusNextToolbar</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l90"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:90</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Searches among toolbars to find the next toolbar that should be focused.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__focusVisibleToolbar" class="method item protected">
+    <h3 class="name"><code>_focusVisibleToolbar</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l126"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:126</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Focuses the first visible toolbar in editor or if there is not any, focuses the last of the other
+toolbars which accept the request for focusing.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="method__getNativeEditor" class="method item protected">
@@ -384,7 +554,7 @@ CKEditor and passing configuration paramters to it.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l66"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:66</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l143"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:143</code></a>
         
         </p>
 
@@ -415,6 +585,402 @@ CKEditor and passing configuration paramters to it.</p>
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__hideToolbars" class="method item protected">
+    <h3 class="name"><code>_hideToolbars</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l154"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:154</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hide all visible toolbars in editor</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onDocInteract" class="method item protected">
+    <h3 class="name"><code>_onDocInteract</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l166"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:166</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fires <code>toolbarsHide</code> event if none of the toolbars or their child nodes is the element user is
+currently interacting.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>EventFacade object</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onEditorKey" class="method item protected">
+    <h3 class="name"><code>_onEditorKey</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l194"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:194</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handles key events in the editor:</p>
+<ul>
+<li>ALT + F10: focus the toolbar</li>
+<li>ESC: hide visible toolbars</li>
+</ul>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event that triggered when user pressed a key inside the editor.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onToolbarActive" class="method item protected">
+    <h3 class="name"><code>_onToolbarActive</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l212"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:212</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handles activating a toolbar.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onToolbarKey" class="method item protected">
+    <h3 class="name"><code>_onToolbarKey</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l222"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:222</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handles key events in the toolbar:</p>
+<ul>
+<li>TAB: focus next toolbar</li>
+<li>ESC: focus the editor</li>
+</ul>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">Event</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>keyboard event</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
     
 
     
@@ -459,7 +1025,7 @@ CKEditor and passing configuration paramters to it.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l77"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:77</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l244"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:244</code></a>
         
         </p>
 
@@ -470,7 +1036,9 @@ CKEditor and passing configuration paramters to it.</p>
     </div>
 
     <div class="description">
-        <p>Validates the allowed content attribute. Look <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent">here</a> for more information about the supported values.</p>
+        <p>Validates the allowed content attribute. Look
+<a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent">here</a> for more information about the
+supported values.</p>
 
     </div>
 
@@ -544,7 +1112,7 @@ CKEditor and passing configuration paramters to it.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l88"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:88</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l257"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:257</code></a>
         
         </p>
 
@@ -555,8 +1123,8 @@ CKEditor and passing configuration paramters to it.</p>
     </div>
 
     <div class="description">
-        <p>Validates toolbars attribute. May be empty string or null, which means the current instance of AlloyEdtor shouldn&#39;t
-have any toolbars, or Object, which properties are the desired toolbars.</p>
+        <p>Validates toolbars attribute. May be empty string or null, which means the current instance of AlloyEdtor
+shouldn&#39;t have any toolbars, or Object, which properties are the desired toolbars.</p>
 
     </div>
 
@@ -640,7 +1208,7 @@ have any toolbars, or Object, which properties are the desired toolbars.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l45"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:45</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l67"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:67</code></a>
         
         </p>
 
@@ -708,7 +1276,7 @@ instance and destroys all created toolbars.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l18"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:18</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l22"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:22</code></a>
         
         </p>
 
@@ -796,7 +1364,7 @@ instace, passing it the provided configuration attributes.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l102"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:102</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l271"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:271</code></a>
         
         </p>
 
@@ -822,6 +1390,109 @@ for more information about the valid values.</p>
 
             <p>
             Fires when the value for the configuration attribute <code>allowedContent</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_eventsDelay" class="attr item">
+    <a name="config_eventsDelay"></a> 
+    <h3 class="name"><code>eventsDelay</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l287"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:287</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The delay (timeout), in ms, after which events such like key or mouse events will be processed.</p>
+
+    </div>
+
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>eventsDelayChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>eventsDelay</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -903,7 +1574,7 @@ for more information about the valid values.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l130"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:130</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l298"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:298</code></a>
         
         </p>
 
@@ -1011,7 +1682,7 @@ make AlloyEditor to work properly.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l118"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:118</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l313"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:313</code></a>
         
         </p>
 
@@ -1114,7 +1785,7 @@ make AlloyEditor to work properly.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l145"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:145</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l325"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:325</code></a>
         
         </p>
 
@@ -1221,7 +1892,7 @@ when editor is not focused.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l161"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:161</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l341"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:341</code></a>
         
         </p>
 
@@ -1235,10 +1906,11 @@ when editor is not focused.</p>
 These plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor
 comes with its own highly optimized copy of CKEditor (just customized via their official download page).
 This version does not come with the unneeded plugins, so the value of this property won&#39;t be needed.
-However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the plugins
-if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn&#39;t remove them entirely
-from CKEditor. It just removes them from its current instance, in which you will use different UI - those of
-AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same page!</p>
+However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the
+plugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn&#39;t remove them
+entirely from CKEditor. It just removes them from its current instance, in which you will use different
+UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
+page!</p>
 
     </div>
 
@@ -1333,7 +2005,7 @@ AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l182"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:182</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l363"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:363</code></a>
         
         </p>
 
@@ -1436,7 +2108,7 @@ AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on
             
         
         
-        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l194"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:194</code></a>
+        <a href="../files/src_ui_yui_src_adapter_yui.js.html#l375"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;adapter&#x2F;yui.js:375</code></a>
         
         </p>
 
@@ -1467,7 +2139,7 @@ all the other properties will be different configuration parameters of the Toolb
 
     
         <p><strong>Default:</strong> toolbars {
-        add: [&#x27;image&#x27;, &#x27;code&#x27;],
+        add: [&#x27;image&#x27;],
         image: [&#x27;left&#x27;, &#x27;right&#x27;],
         styles: [&#x27;strong&#x27;, &#x27;em&#x27;, &#x27;u&#x27;, &#x27;h1&#x27;, &#x27;h2&#x27;, &#x27;a&#x27;, &#x27;twitter&#x27;]
     }</p>

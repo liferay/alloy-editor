@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.3</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -185,6 +187,14 @@
      * - selectionData - The data, returned from {{#crossLink &quot;CKEDITOR.plugins.selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
      */
 
+     /**
+      * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
+      *
+      * @event ariaUpdate
+      * @param {Object} data An object which contains the following properties:
+      * - message - The provided message from the UI element.
+      */
+
     /**
      * If set to true, the editor will still fire {{#crossLink &quot;CKEDITOR.plugins.uicore/editorInteraction:event&quot;}}{{/crossLink}} event,
      * if user presses Esc key.
@@ -213,10 +223,27 @@
              * @param {Object} editor The current CKEditor instance.
              */
             init: function(editor) {
-                var handleUI;
+                var ariaElement,
+                    ariaState = [],
+                    handleAria,
+                    handleUI,
+                    uiTasksTimeout;
+
+                ariaElement = this._createAriaElement(editor.id);
+
+                uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
+
+                handleAria = CKEDITOR.tools.debounce(
+                    function(event) {
+                        ariaElement.innerHTML = ariaState.join(&#x27;. &#x27;);
+                    },
+                    uiTasksTimeout
+                );
 
                 handleUI = CKEDITOR.tools.debounce(
                     function(event) {
+                        ariaState = [];
+
                         if (event.name !== &#x27;keyup&#x27; || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
                             editor.fire(&#x27;editorInteraction&#x27;, {
                                 nativeEvent: event.data.$,
@@ -224,8 +251,20 @@
                             });
                         }
                     },
-                    editor.config.uicore ? editor.config.uicore.timeout : 50
+                    uiTasksTimeout
                 );
+
+                editor.on(&#x27;ariaUpdate&#x27;, function(event) {
+                    // handleAria is debounced function, so if it is being called multiple times, it will
+                    // be canceled until some time passes.
+                    // For that reason here we explicitly append the current message to the list of messages
+                    // and call handleAria. Since it is debounced, when some timeout passes,
+                    // all the messages will be applied to the live region and not only the last one.
+
+                    ariaState.push(event.data.message);
+
+                    handleAria();
+                });
 
                 editor.on(&#x27;contentDom&#x27;, function() {
                     var editable = editor.editable();
@@ -233,6 +272,30 @@
                     editable.attachListener(editable, &#x27;mouseup&#x27;, handleUI);
                     editable.attachListener(editable, &#x27;keyup&#x27;, handleUI);
                 });
+            },
+
+            /**
+             * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
+             *
+             * @method _createAriaElement
+             * @protected
+             * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
+             * @return {HTMLElement} The created and applied to DOM element.
+             */
+            _createAriaElement: function(id) {
+                var statusElement;
+
+                statusElement = document.createElement(&#x27;div&#x27;);
+
+                statusElement.className = &#x27;sr-only&#x27;;
+
+                statusElement.setAttribute(&#x27;aria-live&#x27;, &#x27;polite&#x27;);
+                statusElement.setAttribute(&#x27;role&#x27;, &#x27;status&#x27;);
+                statusElement.setAttribute(&#x27;id&#x27;, id + &#x27;LiveRegion&#x27;);
+
+                document.body.appendChild(statusElement);
+
+                return statusElement;
             }
         }
     );

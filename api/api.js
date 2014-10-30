@@ -23,9 +23,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "CKEDITOR.tools",
         "LinkTooltip",
         "ToolbarAdd",
-        "ToolbarAddItems",
+        "ToolbarAddTrigger",
         "ToolbarBase",
         "ToolbarImage",
+        "ToolbarPosition",
         "ToolbarStyles"
     ],
     "modules": [],

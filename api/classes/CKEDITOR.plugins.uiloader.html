@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.3</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -202,6 +204,13 @@ configuration of the Toolbars and Buttons.</p>
                         
                             <li class="index-item method protected">
                                 <a href="#method__createToolbars">_createToolbars</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__getButtonName">_getButtonName</a>
 
                                 
                                 
@@ -323,6 +332,116 @@ and another attribute, which specifies its zIndex.</p>
 </div>
 
                 
+                    <div id="method__getButtonName" class="method item protected">
+    <h3 class="name"><code>_getButtonName</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>button</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_plugins_loader.js.html#l100"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:100</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Resolves the name of a button module passed through configuration.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">button</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>A string representing the button or an object
+with a name attribute.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    <p>The name of the button.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method__getModules" class="method item protected">
     <h3 class="name"><code>_getModules</code></h3>
 
@@ -361,7 +480,7 @@ and another attribute, which specifies its zIndex.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_loader.js.html#l100"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:100</code></a>
+        <a href="../files/src_ui_yui_src_plugins_loader.js.html#l119"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:119</code></a>
         
         </p>
 
@@ -451,7 +570,7 @@ the current editor configuration.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_plugins_loader.js.html#l149"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:149</code></a>
+        <a href="../files/src_ui_yui_src_plugins_loader.js.html#l168"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;plugins&#x2F;loader.js:168</code></a>
         
         </p>
 

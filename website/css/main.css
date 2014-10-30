@@ -212,7 +212,7 @@ pre {
   top: 0;
   right: 0;
   border: 0;
-  z-index: 404;
+  z-index: 1031;
 }
 
 
@@ -221,12 +221,20 @@ pre {
 }
 
 /* Nav */
+.nav.nav-tabs {
+  margin-bottom: 20px;
+}
 
 .navbar {
   -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
   -moz-box-shadow: 0 2px 3px rgba(0,0,0,.25);
   box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
   *z-index: 402;
+  padding: 0 120px;
+}
+
+@media only screen and (max-width: 1190px) {
+  .navbar { padding: 0; }
 }
 
 .navbar-fixed-top,
@@ -246,15 +254,22 @@ pre {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3a3a3a', endColorstr='#ff000000', GradientType=0);
 }
 
-.nav a {
+.navbar-nav {
+  list-style: none;
+}
+
+.navbar-nav > li > a {
+  display: block;
+  float: none;
   font-size: 15px;
   line-height: 2em;
   padding-top: 15px !important;
 }
 
 
-.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
   color: #F0F0F0;
+  padding: 10px 20px;
 }
 
 /* Version Dropdown */
@@ -331,13 +346,13 @@ pre {
 
 .home-banner img {
   position: absolute;
-  margin: 40px 0 0 -420px;
+  margin: 40px 0 0 -355px;
   max-width: none;
   z-index: 1;
 }
 
 .home-banner .presentation {
-  margin-left: 500px;
+  margin-left: 655px;
   position: relative;
   z-index: 2;
 }
@@ -489,6 +504,13 @@ pre {
   float: left;
 }
 
+.title h3 em {
+  font-size: 23px;
+  font-style: italic;
+  font-weight: 300;
+  vertical-align: bottom;
+}
+
 .title p {
   color: #12191d;
   font-size: 23px;
@@ -508,7 +530,7 @@ pre {
   position: relative;
 }
 
-.link-to-tutorials {
+.link-to-guides {
   font-size: 26px;
 }
 
@@ -595,11 +617,11 @@ pre {
   width: 940px;
 }
 
-.footer .nav {
+.footer .navbar-nav {
   margin: 10px 10px 0 0;
 }
 
-.footer .nav > li > a {
+.footer .navbar-nav > li > a {
   color: #e7e7e7;
   text-shadow: none;
 }
@@ -608,7 +630,7 @@ pre {
   text-decoration: none;
 }
 
-.footer .nav > li > a:hover {
+.footer .navbar-nav > li > a:hover {
   color: #fff;
 }
 

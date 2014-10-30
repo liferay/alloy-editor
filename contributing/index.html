@@ -20,16 +20,28 @@
   <link rel="shortcut icon" type="image/x-icon" href="//alloyeditor.com/website/img/favicon.ico">
 
   <!-- CSS: Alloy Bootstrap -->
-  <link href="http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="//alloyeditor.com/website/css/bootstrap.min.css" rel="stylesheet"> -->
 
   <!-- CSS: Website style -->
   <link href="//alloyeditor.com/website/css/main.css" rel="stylesheet">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
   <!-- Fonts -->
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
 
   <!-- JS -->
-  <script src="http://cdn.alloyui.com/2.5.0/aui/aui-min.js"></script>
+  <script src="http://cdn.alloyui.com/3.0.0/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -40,24 +52,31 @@
       <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
     </a>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="//alloyeditor.com">
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#siteSections">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="//alloyeditor.com">
             <img src="//alloyeditor.com/website/img/logo.png" alt="AlloyEditor Logo" width="211" height="34">
           </a>
-          <div class="pull-right">
-            <ul class="nav">
-              <li><a href="//alloyeditor.com/examples/">Example</a></li>
-              <li><a href="//alloyeditor.com/tutorials/">Tutorials</a></li>
-              <li><a href="//alloyeditor.com/api/" target="_blank">API Docs</a></li>
-              <li><a href="//alloyeditor.com/contributing/">Contributing</a></li>
-              <li><a href="//alloyeditor.com/about/">About</a></li>
-            </ul>
-          </div>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-right" id="siteSections">
+          <ul class="nav navbar-nav">
+            <li><a href="//alloyeditor.com/examples/">Live Demo</a></li>
+            <li><a href="//alloyeditor.com/guides/">Guides</a></li>
+            <li><a href="//alloyeditor.com/api/" target="_blank">API Docs</a></li>
+            <li><a href="//alloyeditor.com/contributing/">Contributing</a></li>
+            <li><a href="//alloyeditor.com/about/">About</a></li>
+          </ul>
         </div>
       </div>
-    </div>
+    </nav>
 
     <div id="content">
       <div class="banner page-banner">
@@ -73,21 +92,60 @@
 
     <div class="row">
       <div class="title span12">
-        <h3>Want to help?</h3>
-        <p>You may help in many ways</p>
+        <h3>repos <em>\o/</em></h3>
       </div>
-   	</div>
+    </div>
+
+    <p>So you want to help us? That's pretty awesome!<br><br>
+    We are very happy to accept external contributions in the form of feedback, bug reports or pull requests :)</p>
+    <p>You may help in many ways</p>
+    <ul><li>Help us to improve the documentation.</li>
+      <li>Create new buttons.</li>
+      <li>Create new toolbars.</li>
+      <li>Create UI, which is written using different framework than YUI3.</li></ul>
+    <p>Feel free to help on our main repo:</p>
+    <ul>
+      <li><a href="https://github.com/liferay/alloy-editor/">AlloyEditor</a> (JavaScript)</li>
+    </ul>
+
+    <hr>
 
     <div class="row">
       <div class="title span12">
-        <p>
-    		<ul><li>Help us to improve the documentation.</li>
-    		<li>Create new buttons.</li>
-    		<li>Create new toolbars.</li>
-    		<li>Create UI, which is written using different framework than YUI3.</li></ul>
-    	</p>
+        <h3>issues <em>github or jira?</em></h3>
       </div>
     </div>
+
+    <p>Unlike other Liferay projects, we're using <a href="https://github.com/liferay/alloy-editor/issues">GitHub Issues</a>, instead of <a href="http://issues.liferay.com/browse/AUI">Jira</a> to keep track of any problems in AlloyEditor.<br><br>
+    In order for us to help you, please check that you've completed the following steps:</p>
+    <ul>
+      <li><p>Make sure that you're using the latest version.</p></li>
+      <li><p>Look through the list of issues to ensure that the bug hasn't been reported before.</p></li>
+    </ul><br>
+    <p>If you're still facing the problem, go ahead and <a href="https://github.com/liferay/alloy-editor/issues/new">create an issue</a>. Just remember to include as much information about the bug as possible.</p>
+
+    <hr>
+
+    <div class="row">
+      <div class="title span12">
+        <h3>code style <em>tabs or spaces?</em></h3>
+      </div>
+    </div>
+
+    <p>This project uses single-quotes and four space indentation. Please ensure any pull requests follow this closely by using the <a href="https://github.com/liferay/alloyui.com/blob/master/.editorconfig">EditorConfig file</a> and linting your code with our <a href="https://github.com/liferay/alloyui.com/blob/master/.jshintrc">JSHint options</a>. If you notice existing code which doesn't follow these practices, feel free to shout out and we will change it.</p>
+
+    <p><em>See <a href="https://github.com/liferay/alloy-ui/wiki/Code-Style-Guidelines">AlloyUI Code Style Guidelines</a>.</em></p>
+
+    <hr>
+
+    <div class="row">
+      <div class="title span12">
+        <h3>docs <em>must-have</em></h3>
+      </div>
+    </div>
+
+    <p>All code should be properly documented using <a href="http://yui.github.io/yuidoc/syntax/index.html">YUIDoc syntax</a>. Documentation should be considered as part of the code.</p>
+
   </div>
 </div>
     </div>
@@ -97,7 +155,7 @@
   </div>
 
   <div class="footer navbar">
-    <div class="container">
+    <div class="container-fluid">
       <p class="pull-left">
         <a href="http://liferay.com/">
           <img src="//alloyeditor.com/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">

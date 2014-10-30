@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.3</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -159,7 +161,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l9"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:9</code></a>
+            Defined in: <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l14"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:14</code></a>
         </div>
     
 
@@ -209,6 +211,20 @@
                             </li>
                         
                             <li class="index-item method protected">
+                                <a href="#method__afterRender">_afterRender</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__afterVisibleChange">_afterVisibleChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
                                 <a href="#method__applyTransition">_applyTransition</a>
 
                                 
@@ -230,6 +246,13 @@
                             </li>
                         
                             <li class="index-item method protected">
+                                <a href="#method__isCurrentLineEmpty">_isCurrentLineEmpty</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
                                 <a href="#method__moveToPoint">_moveToPoint</a>
 
                                 
@@ -237,7 +260,35 @@
                             </li>
                         
                             <li class="index-item method protected">
+                                <a href="#method__onKeyDown">_onKeyDown</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_blur">blur</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_focus">focus</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
                                 <a href="#method_initializer">initializer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_ownsNode">ownsNode</a>
 
                                 
                                 
@@ -261,6 +312,10 @@
                         
                             <li class="index-item attr">
                                 <a href="#attr_editor">editor</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_strings">strings</a>
                             </li>
                         
                             <li class="index-item attr">
@@ -323,7 +378,7 @@
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l103"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:103</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l209"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:209</code></a>
         
         </p>
 
@@ -356,6 +411,157 @@ an action.</p>
 
                     <div class="param-description">
                         <p>The <a href="../classes/ButtonBase.html#event_actionPerformed" class="crosslink">actionPerformed</a> event.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterRender" class="method item protected">
+    <h3 class="name"><code>_afterRender</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l103"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:103</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>When toolbar has been rendered, initialize the focus manager and attach
+listener for keyboard events</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterVisibleChange" class="method item protected">
+    <h3 class="name"><code>_afterVisibleChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l127"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:127</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handles showing or hiding of the toolbar.
+Fires <a href="../classes/CKEDITOR.plugins.uicore.html#event_ariaUpdate" class="crosslink">ariaUpdate</a> event with the status changes
+of the toolbar.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event that triggered the toolbar has been made visible or hidden.</p>
 
                     </div>
 
@@ -422,7 +628,7 @@ an action.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l50"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:50</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l148"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:148</code></a>
         
         </p>
 
@@ -537,7 +743,7 @@ an action.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l127"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:127</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l233"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:233</code></a>
         
         </p>
 
@@ -638,7 +844,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l116"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:116</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l222"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:222</code></a>
         
         </p>
 
@@ -664,7 +870,82 @@ for more information about the rules for constructing button names.</p>
                     
                         <span class="type">Node</span>:
                     
-                    <p>The container of all buttons attached to the current isntance of Toolbar.</p>
+                    <p>The container of all buttons attached to the current instance of Toolbar.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__isCurrentLineEmpty" class="method item protected">
+    <h3 class="name"><code>_isCurrentLineEmpty</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l247"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:247</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Detects if the current line is empty</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    <p>True if the current line is empty.</p>
 
                 
             </div>
@@ -731,7 +1012,7 @@ for more information about the rules for constructing button names.</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l141"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:141</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l262"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:262</code></a>
         
         </p>
 
@@ -823,6 +1104,226 @@ If not, it will be suppressed and only the new position will be set.</li>
 </div>
 
                 
+                    <div id="method__onKeyDown" class="method item protected">
+    <h3 class="name"><code>_onKeyDown</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l292"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:292</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fires <code>toolbarKey</code> event. Editor should listen this event
+and perform the associated action.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event that triggered when user pressed a key inside the toolbar.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_blur" class="method item">
+    <h3 class="name"><code>blur</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l62"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:62</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns focus to editor.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_focus" class="method item">
+    <h3 class="name"><code>focus</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l71"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:71</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>If toolbar is visible, focuses the first button.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    <p>True if toolbar has been focused, false otherwise.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_initializer" class="method item protected">
     <h3 class="name"><code>initializer</code></h3>
 
@@ -867,7 +1368,7 @@ If not, it will be suppressed and only the new position will be set.</li>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l15"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:15</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l20"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:20</code></a>
         
         </p>
 
@@ -908,6 +1409,113 @@ If not, it will be suppressed and only the new position will be set.</li>
         </div>
     
 
+    
+
+    
+</div>
+
+                
+                    <div id="method_ownsNode" class="method item">
+    <h3 class="name"><code>ownsNode</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>node</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l92"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:92</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns true if the passed node is a child node of the toolbar, false otherwise.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">node</code>
+                        <span class="type">Node | <a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The node which should be checked if it is child node of the current toolbar.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    <p>True if the passed node is child node of the current toolbar.</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -956,7 +1564,7 @@ If not, it will be suppressed and only the new position will be set.</li>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l173"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:173</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l306"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:306</code></a>
         
         </p>
 
@@ -1059,7 +1667,7 @@ If not, it will be suppressed and only the new position will be set.</li>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l185"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:185</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l318"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:318</code></a>
         
         </p>
 
@@ -1083,6 +1691,119 @@ If not, it will be suppressed and only the new position will be set.</li>
 
             <p>
             Fires when the value for the configuration attribute <code>editor</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_strings" class="attr item">
+    <a name="config_strings"></a> 
+    <h3 class="name"><code>strings</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l329"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:329</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Collection of strings used to label elements of the toolbar&#39;s UI.
+ToolbarBase provides string properties to specify the messages for:</p>
+<ul>
+<li>How to focus on the toolbar</li>
+<li>Possible toolbar states (hidden and visible)</li>
+<li>Current toolbar state. This works as a template. It&#39;s possible to
+use the placeholders {name}, {state} and {focus} to inject messages
+into the generated string.</li>
+</ul>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> {focus: &#x27;Press Alt + F10 to focus on the toolbar.&#x27;, hidden: &#x27;hidden&#x27;, state: &#x27;Toolbar {name} is now {state}. {focus}&#x27;, visible: &#x27;visible&#x27;}</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>stringsChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>strings</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -1164,7 +1885,7 @@ If not, it will be suppressed and only the new position will be set.</li>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l196"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:196</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-base.js.html#l352"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-base.js:352</code></a>
         
         </p>
 

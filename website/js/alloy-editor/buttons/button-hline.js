@@ -1,0 +1,1 @@
+YUI.add("button-hline",function(n){"use strict";var e=(n.Lang,n.Base.create("hline",n.Plugin.Base,[n.ButtonBase],{_handleMedia:function(){},TPL_CONTENT:'<i class="alloy-editor-icon-hline-sign"></i>'},{NAME:"hline",NS:"hline"}));n.ButtonHline=e},"",{requires:["button-base"]});

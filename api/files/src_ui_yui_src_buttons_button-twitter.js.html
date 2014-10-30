@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.3</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -184,12 +186,20 @@ YUI.add(&#x27;button-twitter&#x27;, function(Y) {
          * @protected
          */
         _onClick: function() {
-            var editor;
+            var editor,
+                tweetURL;
+
+            tweetURL = this.get(&#x27;tweetURL&#x27;);
 
             editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
 
+            tweetURL = Lang.sub(tweetURL, {
+                text: encodeURIComponent(editor.getSelection().getSelectedText()),
+                url: encodeURIComponent(Y.config.win.location)
+            });
+
             window.open(
-                this.get(&#x27;tweetURL&#x27;) + encodeURIComponent(editor.getSelection().getSelectedText()),
+                tweetURL,
                 this.get(&#x27;windowTitle&#x27;),
                 this.get(&#x27;windowProperties&#x27;)
             );
@@ -202,6 +212,21 @@ YUI.add(&#x27;button-twitter&#x27;, function(Y) {
         NS: &#x27;tweet&#x27;,
 
         ATTRS: {
+            /**
+             * Collection of strings used to label elements of the button&#x27;s UI.
+             * ButtonTwitter provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: &#x27;Tweet&#x27;}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: &#x27;Tweet&#x27;
+                }
+            },
+
             /**
              * Specifies if the button is toggleable, or not. ButtonTwitter will be not toggleable by default.
              *
@@ -220,12 +245,12 @@ YUI.add(&#x27;button-twitter&#x27;, function(Y) {
              * Specifies the URL where user can tweet the selected text.
              *
              * @attribute tweetURL
-             * @default &#x27;https://twitter.com/intent/tweet?text=&#x27;
+             * @default &#x27;https://twitter.com/intent/tweet?text={text}&amp;url={url}&#x27;
              * @type String
              */
             tweetURL: {
                 validator: Lang.isString,
-                value: &#x27;https://twitter.com/intent/tweet?text=&#x27;
+                value: &#x27;https://twitter.com/intent/tweet?text={text}&amp;url={url}&#x27;
             },
 
             /**

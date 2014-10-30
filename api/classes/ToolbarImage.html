@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.3</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -202,13 +204,6 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method protected">
-                                <a href="#method__getToolbarXYPoint">_getToolbarXYPoint</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
                                 <a href="#method__onActionPerformed">_onActionPerformed</a>
 
                                 
@@ -217,6 +212,13 @@
                         
                             <li class="index-item method protected">
                                 <a href="#method__onEditorInteraction">_onEditorInteraction</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method__onToolbarsHide">_onToolbarsHide</a>
 
                                 
                                 
@@ -270,10 +272,6 @@
                                 <a href="#attr_constrain">constrain</a>
                             </li>
                         
-                            <li class="index-item attr">
-                                <a href="#attr_gutter">gutter</a>
-                            </li>
-                        
                     </ul>
                 </div>
             
@@ -284,138 +282,6 @@
         
             <div id="methods" class="api-class-tabpanel tab-pane">
                 <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method__getToolbarXYPoint" class="method item protected">
-    <h3 class="name"><code>_getToolbarXYPoint</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>left</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>top</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l74"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:74</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Calculates the position of the Toolbar, taking in consideration
-the <a href="../classes/ToolbarImage.html#attr_gutter" class="crosslink">gutter</a></p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">left</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The left offset in page coordinates.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">top</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The top offset in page coordinates.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
-                    
-                    <p>An array with left and top offsets of the point in page coordinates.</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
 
                 
                     <div id="method__onActionPerformed" class="method item protected">
@@ -452,7 +318,7 @@ the <a href="../classes/ToolbarImage.html#attr_gutter" class="crosslink">gutter<
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l99"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:99</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l76"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:76</code></a>
         
         </p>
 
@@ -519,7 +385,7 @@ the <a href="../classes/ToolbarImage.html#attr_gutter" class="crosslink">gutter<
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l116"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:116</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l93"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:93</code></a>
         
         </p>
 
@@ -559,6 +425,61 @@ The Toolbar will be hidden if the currently selected element is not an image.</p
             
             </ul>
         </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onToolbarsHide" class="method item">
+    <h3 class="name"><code>_onToolbarsHide</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l119"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:119</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hides the toolbar in case of <code>toolbarsHide</code> event.</p>
+
+    </div>
+
     
 
     
@@ -611,7 +532,7 @@ The Toolbar will be hidden if the currently selected element is not an image.</p
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l142"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:142</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l128"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:128</code></a>
         
         </p>
 
@@ -703,7 +624,7 @@ The Toolbar will be hidden if the currently selected element is not an image.</p
     </div>
 
     <div class="description">
-        <p>Creates and adds Node element - the container where buttons should render.</p>
+        <p>Attaches listeners to <code>actionPerformed</code> and <code>toolbarsHide</code> events.</p>
 
     </div>
 
@@ -826,7 +747,7 @@ The Toolbar will be hidden if the currently selected element is not an image.</p
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l47"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:47</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l49"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:49</code></a>
         
         </p>
 
@@ -949,7 +870,7 @@ The Toolbar will be hidden if the currently selected element is not an image.</p
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l166"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:166</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l158"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:158</code></a>
         
         </p>
 
@@ -968,9 +889,12 @@ with properties, like this:</p>
     or:</p>
 <p><pre class="code prettyprint"><code>
     buttons: [
-        &#39;left&#39;: {
-            zIndex: 1024,
-            property2: 1024
+        {
+            name: &#39;left&#39;,
+            cfg: {
+                zIndex: 1024,
+                property2: 1024
+            }
         }
     ]
 </pre></code></p>
@@ -1068,7 +992,7 @@ with properties, like this:</p>
             
         
         
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l192"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:192</code></a>
+        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l187"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:187</code></a>
         
         </p>
 
@@ -1092,115 +1016,6 @@ with properties, like this:</p>
 
             <p>
             Fires when the value for the configuration attribute <code>constrain</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_gutter" class="attr item">
-    <a name="config_gutter"></a> 
-    <h3 class="name"><code>gutter</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_ui_yui_src_toolbars_toolbar-image.js.html#l204"><code>src&#x2F;ui&#x2F;yui&#x2F;src&#x2F;toolbars&#x2F;toolbar-image.js:204</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Specifies the gutter of the tooltip. The gutter object contains the top and left
-offsets from the point, where the tooltip is supposed to appear.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> {
-  left: 0,
-  top: 0
-}</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>gutterChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>gutter</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the

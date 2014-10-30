@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.3</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -165,7 +167,7 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
          *
          * @class ToolbarImage
          */
-        ToolbarImage = Y.Base.create(&#x27;toolbarimage&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.WidgetAutohide, Y.ToolbarBase], {
+        ToolbarImage = Y.Base.create(&#x27;toolbarimage&#x27;, Y.Widget, [Y.WidgetPosition, Y.WidgetPositionConstrain, Y.ToolbarBase, Y.ToolbarPosition], {
             /**
              * Creates the container where buttons, attached to the instance of Toolbar should render.
              *
@@ -191,13 +193,15 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
             },
 
             /**
-             * Creates and adds Node element - the container where buttons should render.
+             * Attaches listeners to &lt;code&gt;actionPerformed&lt;/code&gt; and &lt;code&gt;toolbarsHide&lt;/code&gt; events.
              *
              * @method bindUI
              * @protected
              */
             bindUI: function() {
                 this.on(&#x27;actionPerformed&#x27;, this._onActionPerformed, this);
+
+                this.get(&#x27;editor&#x27;).on(&#x27;toolbarsHide&#x27;, this._onToolbarsHide, this);
             },
 
             /**
@@ -225,31 +229,6 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
                 this._moveToPoint(this.getConstrainedXY(xy), direction, {
                     visible: visible
                 });
-            },
-
-            /**
-             * Calculates the position of the Toolbar, taking in consideration
-             * the {{#crossLink &quot;ToolbarImage/gutter:attribute&quot;}}{{/crossLink}}
-             *
-             * @method _getToolbarXYPoint
-             * @protected
-             * @param {Number} left The left offset in page coordinates.
-             * @param {Number} top The top offset in page coordinates.
-             * @return {Array} An array with left and top offsets of the point in page coordinates.
-             */
-            _getToolbarXYPoint: function(left, top) {
-                var bbDOMNode,
-                    gutter;
-
-                bbDOMNode = this.get(&#x27;boundingBox&#x27;).getDOMNode();
-
-                left = left - bbDOMNode.offsetWidth / 2;
-
-                gutter = this.get(&#x27;gutter&#x27;);
-
-                top = top - bbDOMNode.offsetHeight - gutter.top;
-
-                return [left, top];
             },
 
             /**
@@ -296,6 +275,15 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
             },
 
             /**
+             * Hides the toolbar in case of &lt;code&gt;toolbarsHide&lt;/code&gt; event.
+             *
+             * @method _onToolbarsHide
+             */
+            _onToolbarsHide: function() {
+                this.hide();
+            },
+
+            /**
              * Moves the Toolbar to specified position.
              *
              * @method _updateUI
@@ -308,11 +296,17 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
                 if (element) {
                     region = Y.DOM.region(element.$);
 
-                    this.showAtPoint(region.left + (region.right - region.left) / 2, region.top);
+                    this.showAtPoint(region.left + (region.right - region.left) / 2, region.top,
+                        CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+
+                    this.fire(&#x27;positionChange&#x27;, this);
+
+                    this.get(&#x27;editor&#x27;).fire(&#x27;toolbarActive&#x27;, this);
                 }
             },
 
-            BOUNDING_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar alloy-editor-toolbar-image alloy-editor-arrow-box alloy-editor-arrow-box-bottom&quot;&gt;&lt;/div&gt;&#x27;,
+            BOUNDING_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar alloy-editor-toolbar-image alloy-editor-arrow-box &#x27; +
+                &#x27;alloy-editor-arrow-box-bottom&quot;&gt;&lt;/div&gt;&#x27;,
 
             CONTENT_TEMPLATE: &#x27;&lt;div class=&quot;alloy-editor-toolbar-content btn-toolbar&quot;&gt;&lt;/div&gt;&#x27;,
 
@@ -329,9 +323,12 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
                  *     or:
                  * &lt;pre&gt;&lt;code&gt;
                  *     buttons: [
-                 *         &#x27;left&#x27;: {
-                 *             zIndex: 1024,
-                 *             property2: 1024
+                 *         {
+                 *             name: &#x27;left&#x27;,
+                 *             cfg: {
+                 *                 zIndex: 1024,
+                 *                 property2: 1024
+                 *             }
                  *         }
                  *     ]
                  * &lt;/pre&gt;&lt;/code&gt;
@@ -355,33 +352,15 @@ YUI.add(&#x27;toolbar-image&#x27;, function(Y) {
                 constrain: {
                     validator: Lang.isBoolean,
                     value: true
-                },
-
-                /**
-                 * Specifies the gutter of the tooltip. The gutter object contains the top and left
-                 * offsets from the point, where the tooltip is supposed to appear.
-                 *
-                 * @attribute gutter
-                 * @default {
-                 *   left: 0,
-                 *   top: 0
-                 * }
-                 * @type Object
-                 */
-                gutter: {
-                    validator: Lang.isObject,
-                    value: {
-                        left: 0,
-                        top: 10
-                    }
                 }
             }
         });
 
     Y.ToolbarImage = ToolbarImage;
 }, &#x27;&#x27;, {
-    requires: [&#x27;dom-screen&#x27;, &#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;, &#x27;widget-autohide&#x27;, &#x27;toolbar-base&#x27;]
+    requires: [&#x27;dom-screen&#x27;, &#x27;widget-base&#x27;, &#x27;widget-position&#x27;, &#x27;widget-position-constrain&#x27;, &#x27;toolbar-base&#x27;, &#x27;toolbar-position&#x27;]
 });
+
     </pre>
 </div>
 

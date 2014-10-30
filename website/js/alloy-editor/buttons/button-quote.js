@@ -1,0 +1,1 @@
+YUI.add("button-quote",function(t){"use strict";var e=(t.Lang,t.Base.create("quote",t.Plugin.Base,[t.ButtonBase],{_handleQuote:function(){},TPL_CONTENT:'<i class="alloy-editor-icon-quote-sign"></i>'},{NAME:"quote",NS:"quote"}));t.ButtonQuote=e},"",{requires:["button-base"]});

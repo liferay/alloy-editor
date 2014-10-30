@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.1</b>
+                        API Docs for Version: <b>0.2.3</b>
                     </p>
                 </li>
             </div>
@@ -101,11 +101,13 @@
             
                 <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
             
-                <li><a href="../classes/ToolbarAddItems.html">ToolbarAddItems</a></li>
+                <li><a href="../classes/ToolbarAddTrigger.html">ToolbarAddTrigger</a></li>
             
                 <li><a href="../classes/ToolbarBase.html">ToolbarBase</a></li>
             
                 <li><a href="../classes/ToolbarImage.html">ToolbarImage</a></li>
+            
+                <li><a href="../classes/ToolbarPosition.html">ToolbarPosition</a></li>
             
                 <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
             
@@ -248,13 +250,28 @@ YUI.add(&#x27;button-image&#x27;, function(Y) {
             inputFile.set(&#x27;value&#x27;, &#x27;&#x27;);
         },
 
-        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-image&quot;&gt;&lt;/i&gt;&#x27;
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-image-sign&quot;&gt;&lt;/i&gt;&#x27;
     }, {
         NAME: &#x27;image&#x27;,
 
         NS: &#x27;image&#x27;,
 
         ATTRS: {
+            /**
+             * Collection of strings used to label elements of the button&#x27;s UI.
+             * ButtonImage provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: &#x27;Image&#x27;}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: &#x27;Image&#x27;
+                }
+            },
+
             /**
              * Specifies if this button will be toggleable, or not.
              * ButtonImage will be not toggleable by default.
