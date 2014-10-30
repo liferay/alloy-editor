@@ -96,7 +96,6 @@ gulp.task('alloy-editor-all', function() {
 });
 
 gulp.task('create-alloy-editor', function(callback) {
-    runSequence('minimize',
-        ['join-alloy-editor-core-ckeditor', 'alloy-editor-all'],
+    runSequence(['join-alloy-editor-core-ckeditor', 'alloy-editor-all'],
         callback);
 });

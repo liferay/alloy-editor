@@ -47,6 +47,14 @@ gulp.task('create-zip', function() {
 
 gulp.task('minimize', ['minimize-css', 'minimize-js']);
 
+gulp.task('create-dist-file', function(callback) {
+    runSequence('create-alloy-editor', 'clean-joined-files', 'create-zip', callback);
+});
+
 gulp.task('release', function(callback) {
-    runSequence('build', 'minimize', 'create-alloy-editor', 'clean-joined-files', 'create-zip', callback);
+    runSequence('build', 'minimize', 'create-dist-file', callback);
+});
+
+gulp.task('release-raw', function(callback) {
+    runSequence('build', 'create-dist-file', callback);
 });
