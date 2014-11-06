@@ -69,6 +69,7 @@ YUI.add('button-image', function(Y) {
         _onInputChange: function() {
             var instance = this,
                 editor,
+                imageData,
                 inputFile,
                 el,
                 reader;
@@ -82,7 +83,12 @@ YUI.add('button-image', function(Y) {
 
                 editor.insertElement(el);
 
-                editor.fire('imageadd', el);
+                imageData = {
+                    el: el,
+                    file: inputFile.getDOMNode().files[0]
+                };
+
+                editor.fire('imageadd', imageData);
             };
 
             inputFile = this._inputFile;

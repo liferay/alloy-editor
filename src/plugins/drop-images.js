@@ -143,7 +143,8 @@
 
                 reader.addEventListener('loadend', function() {
                     var bin,
-                        el;
+                        el,
+                        imageData;
 
                     bin = reader.result;
 
@@ -151,7 +152,12 @@
 
                     editor.insertElement(el);
 
-                    editor.fire('imagedrop', el);
+                    imageData = {
+                        el: el,
+                        file: file
+                    };
+
+                    editor.fire('imagedrop', imageData);
                 });
 
                 reader.readAsDataURL(file);
