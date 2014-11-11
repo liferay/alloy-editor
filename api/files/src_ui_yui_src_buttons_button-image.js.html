@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.3</b>
+                        API Docs for Version: <b>0.2.4</b>
                     </p>
                 </li>
             </div>
@@ -227,6 +227,7 @@ YUI.add(&#x27;button-image&#x27;, function(Y) {
         _onInputChange: function() {
             var instance = this,
                 editor,
+                imageData,
                 inputFile,
                 el,
                 reader;
@@ -240,7 +241,12 @@ YUI.add(&#x27;button-image&#x27;, function(Y) {
 
                 editor.insertElement(el);
 
-                editor.fire(&#x27;imageadd&#x27;, el);
+                imageData = {
+                    el: el,
+                    file: inputFile.getDOMNode().files[0]
+                };
+
+                editor.fire(&#x27;imageadd&#x27;, imageData);
             };
 
             inputFile = this._inputFile;

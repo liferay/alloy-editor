@@ -2,7 +2,7 @@
     "project": {
         "name": "AlloyEditor",
         "description": "WYSIWYG editor built on top of CKEditor, with completely rewritten UI",
-        "version": "0.2.3",
+        "version": "0.2.4",
         "url": "https://github.com/ipeychev/alloy-editor/"
     },
     "files": {
@@ -1050,7 +1050,7 @@
         },
         {
             "file": "src/plugins/drop-images.js",
-            "line": 160,
+            "line": 166,
             "description": "Fired when an image is being added to the editor successfully.",
             "itemtype": "event",
             "name": "imagedrop",
@@ -1964,7 +1964,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
-            "line": 102,
+            "line": 108,
             "description": "Collection of strings used to label elements of the button's UI.\nButtonImage provides string properties to specify the label of the button.",
             "itemtype": "attribute",
             "name": "strings",
@@ -1974,7 +1974,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
-            "line": 117,
+            "line": 123,
             "description": "Specifies if this button will be toggleable, or not.\nButtonImage will be not toggleable by default.",
             "itemtype": "attribute",
             "name": "toggle",

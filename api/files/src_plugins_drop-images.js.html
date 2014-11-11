@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.3</b>
+                        API Docs for Version: <b>0.2.4</b>
                     </p>
                 </li>
             </div>
@@ -301,7 +301,8 @@
 
                 reader.addEventListener(&#x27;loadend&#x27;, function() {
                     var bin,
-                        el;
+                        el,
+                        imageData;
 
                     bin = reader.result;
 
@@ -309,7 +310,12 @@
 
                     editor.insertElement(el);
 
-                    editor.fire(&#x27;imagedrop&#x27;, el);
+                    imageData = {
+                        el: el,
+                        file: file
+                    };
+
+                    editor.fire(&#x27;imagedrop&#x27;, imageData);
                 });
 
                 reader.readAsDataURL(file);
