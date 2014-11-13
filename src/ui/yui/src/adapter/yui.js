@@ -44,6 +44,9 @@ YUI.add('alloy-editor', function(Y) {
             editor.config.extraPlugins = this.get('extraPlugins');
             editor.config.placeholderClass = this.get('placeholderClass');
 
+            editor.config.pasteFromWordRemoveStyles = false;
+            editor.config.pasteFromWordRemoveFontStyles = false;
+
             Y.mix(editor.config, config);
 
             this._editor = editor;
