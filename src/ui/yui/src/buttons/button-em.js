@@ -10,7 +10,21 @@ YUI.add('button-em', function(Y) {
      * @class ButtonEm
      */
     var Em = Y.Base.create('em', Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: '<i class="alloy-editor-icon-italic"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-italic"></i>',
+
+        /**
+         * Applies the style of the button if its current status is pressed
+         * and removes it otherwise.
+         *
+         * @method _onClick
+         * @protected
+         * @param {EventFacade} event Event that triggered when user clicked on the button.
+         */
+        _onClick: function(event) {
+            var editor = this.get('host').get('editor');
+
+            editor.execCommand('italic');
+        }
     }, {
         NAME: 'em',
 

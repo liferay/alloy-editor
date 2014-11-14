@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'alloyeditor';
-	src:url('fonts/alloyeditor.eot?czpkrq');
-	src:url('fonts/alloyeditor.eot?#iefixczpkrq') format('embedded-opentype'),
-		url('fonts/alloyeditor.woff?czpkrq') format('woff'),
-		url('fonts/alloyeditor.ttf?czpkrq') format('truetype'),
-		url('fonts/alloyeditor.svg?czpkrq#alloyeditor') format('svg');
+	src:url('fonts/alloyeditor.eot?-jomcee');
+	src:url('fonts/alloyeditor.eot?#iefix-jomcee') format('embedded-opentype'),
+		url('fonts/alloyeditor.woff?-jomcee') format('woff'),
+		url('fonts/alloyeditor.ttf?-jomcee') format('truetype'),
+		url('fonts/alloyeditor.svg?-jomcee#alloyeditor') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,6 +23,12 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.alloy-editor-icon-subscript:before {
+	content: "\e615";
+}
+.alloy-editor-icon-superscript:before {
+	content: "\e616";
+}
 .alloy-editor-icon-align-left:before {
 	content: "\f036";
 }
@@ -94,4 +100,13 @@
 }
 .alloy-editor-icon-h4:before {
 	content: "\e614";
+}
+.alloy-editor-icon-bulleted-list:before {
+	content: "\e617";
+}
+.alloy-editor-icon-numbered-list:before {
+	content: "\e618";
+}
+.alloy-editor-icon-strike:before {
+	content: "\e619";
 }
