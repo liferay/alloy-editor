@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/yui/src/buttons/button-strong.js - AlloyEditor</title>
+    <title>src/ui/yui/src/buttons/button-ul.js - AlloyEditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -155,27 +155,30 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-  <h1><small>File</small> <code>src/ui/yui/src/buttons/button-strong.js</code></h1>
+  <h1><small>File</small> <code>src/ui/yui/src/buttons/button-ul.js</code></h1>
 </div>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-YUI.add(&#x27;button-strong&#x27;, function(Y) {
+YUI.add(&#x27;button-ul&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
     var Lang = Y.Lang;
 
     /**
-     * The ButtonStrong class provides functionality for applying &quot;strong&quot; (bold) style to a text selection.
+     * The ButtonUl class provides functionality for converting a text selection into a bulleted list.
      *
-     * @class ButtonStrong
+     * @class ButtonUl
      */
-    var Strong = Y.Base.create(&#x27;strong&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-bold&quot;&gt;&lt;/i&gt;&#x27;,
+    var Ul = Y.Base.create(&#x27;ul&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-bulleted-list&quot;&gt;&lt;/i&gt;&#x27;,
 
         /**
-         * Applies the style of this button if its current status is pressed
-         * and removes it otherwise.
+         * Creates a bulleted list block around the current selection with the following exceptions:
+         * - If the selection is already contained inside a bulleted list, it will remove the list
+         * block and transform the list items into individual paragraphs.
+         * - If the selection is contained inside a numbered list, it will switch the &lt;ol&gt; tag for a
+         * &lt;ul&gt; tag preserving all its items.
          *
          * @method _onClick
          * @protected
@@ -184,44 +187,50 @@ YUI.add(&#x27;button-strong&#x27;, function(Y) {
         _onClick: function(event) {
             var editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
 
-            editor.execCommand(&#x27;bold&#x27;);
+            editor.execCommand(&#x27;bulletedlist&#x27;);
+        },
+
+        /**
+         * Updates the toggle status of the button. If the selection is contained inside an &#x27;ul&#x27; block,
+         * its status will be made active and &quot;pressed&quot; attribute of the button will be
+         * set to true, otherwise, it will be set to false.
+         *
+         * @method updateUI
+         */
+        updateUI: function() {
+            var editor,
+                elementPath;
+
+            editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
+
+            elementPath = editor.elementPath();
+
+            this._button.set(&#x27;pressed&#x27;, elementPath.contains(&#x27;ul&#x27;));
         }
     }, {
-        NAME: &#x27;strong&#x27;,
+        NAME: &#x27;ul&#x27;,
 
-        NS: &#x27;strong&#x27;,
+        NS: &#x27;ul&#x27;,
 
         ATTRS: {
             /**
-             * Specifies the element (style) which this button handles.
-             *
-             * @attribute element
-             * @default &#x27;strong&#x27;
-             * @type String
-             */
-            element: {
-                validator: Lang.isString,
-                value: &#x27;strong&#x27;
-            },
-
-            /**
              * Collection of strings used to label elements of the button&#x27;s UI.
-             * ButtonStrong provides string properties to specify the label of the button.
+             * ButtonUl provides string properties to specify the label of the button.
              *
              * @attribute strings
-             * @default {label: &#x27;Bold&#x27;}
+             * @default {label: &#x27;Bulleted List&#x27;}
              * @type Object
              */
             strings: {
                 validator: Lang.isObject,
                 value: {
-                    label: &#x27;Bold&#x27;
+                    label: &#x27;Bulleted List&#x27;
                 }
             }
         }
     });
 
-    Y.ButtonStrong = Strong;
+    Y.ButtonUl = Ul;
 
 }, &#x27;&#x27;, {
     requires: [&#x27;button-base&#x27;]
