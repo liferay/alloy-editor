@@ -25,7 +25,7 @@
             init: function(editor) {
                 var editable;
 
-                editable = new CKEDITOR.editable(editor, editor.element.$);
+                editable = editor.editable(editor.element.$);
 
                 editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
                     editor: editor
