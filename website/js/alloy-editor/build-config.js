@@ -13,10 +13,10 @@
  * (1) http://ckeditor.com/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) http://ckeditor.com/builder/cc2fa73b4fff55ed5ecad948065cb5c5
+ * (2) http://ckeditor.com/builder/82413d23318b236f60047c36f0aca83c
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) http://ckeditor.com/builder/download/cc2fa73b4fff55ed5ecad948065cb5c5
+ * (3) http://ckeditor.com/builder/download/82413d23318b236f60047c36f0aca83c
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -29,15 +29,19 @@ var CKBUILDER_CONFIG = {
 	preset: 'basic',
 	ignore: [
 		'.bender',
-		'.DS_Store',
-		'.gitignore',
-		'.gitattributes',
-		'.idea',
-		'.mailmap',
 		'bender.js',
 		'bender-err.log',
 		'bender-out.log',
 		'dev',
+		'.DS_Store',
+		'.gitattributes',
+		'.gitignore',
+		'Gruntfile.js',
+		'.idea',
+		'.jscsrc',
+		'.jshintignore',
+		'.jshintrc',
+		'.mailmap',
 		'node_modules',
 		'package.json',
 		'README.md',
@@ -45,9 +49,12 @@ var CKBUILDER_CONFIG = {
 	],
 	plugins : {
 		'basicstyles' : 1,
+		'clipboard' : 1,
 		'enterkey' : 1,
-		'entities' : 1,
+		'horizontalrule' : 1,
 		'indentlist' : 1,
+		'list' : 1,
+		'pastefromword' : 1,
 		'undo' : 1
 	},
 	languages : {
