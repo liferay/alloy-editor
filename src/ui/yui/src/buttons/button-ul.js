@@ -4,9 +4,9 @@ YUI.add('button-ul', function(Y) {
     var Lang = Y.Lang;
 
     /**
-     * The ButtonStrong class provides functionality for converting a text selection into a bulleted list.
+     * The ButtonUl class provides functionality for converting a text selection into a bulleted list.
      *
-     * @class ButtonStrong
+     * @class ButtonUl
      */
     var Ul = Y.Base.create('ul', Y.Plugin.Base, [Y.ButtonBase], {
         TPL_CONTENT: '<i class="alloy-editor-icon-bulleted-list"></i>',
@@ -53,7 +53,7 @@ YUI.add('button-ul', function(Y) {
         ATTRS: {
             /**
              * Collection of strings used to label elements of the button's UI.
-             * ButtonStrong provides string properties to specify the label of the button.
+             * ButtonUl provides string properties to specify the label of the button.
              *
              * @attribute strings
              * @default {label: 'Bulleted List'}

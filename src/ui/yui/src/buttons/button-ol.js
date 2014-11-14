@@ -4,9 +4,9 @@ YUI.add('button-ol', function(Y) {
     var Lang = Y.Lang;
 
     /**
-     * The ButtonStrong class provides functionality for converting a text selection into a numbered list.
+     * The ButtonOl class provides functionality for converting a text selection into a numbered list.
      *
-     * @class ButtonStrong
+     * @class ButtonOl
      */
     var Ol = Y.Base.create('ol', Y.Plugin.Base, [Y.ButtonBase], {
         TPL_CONTENT: '<i class="alloy-editor-icon-numbered-list"></i>',
@@ -37,8 +37,7 @@ YUI.add('button-ol', function(Y) {
          */
         updateUI: function() {
             var editor,
-                elementPath,
-                result;
+                elementPath;
 
             editor = this.get('host').get('editor');
 
@@ -54,7 +53,7 @@ YUI.add('button-ol', function(Y) {
         ATTRS: {
             /**
              * Collection of strings used to label elements of the button's UI.
-             * ButtonStrong provides string properties to specify the label of the button.
+             * ButtonOl provides string properties to specify the label of the button.
              *
              * @attribute strings
              * @default {label: 'Numbered List'}
