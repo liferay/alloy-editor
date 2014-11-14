@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/core/debounce.js - AlloyEditor</title>
+    <title>src/ui/yui/src/buttons/button-subscript.js - AlloyEditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -155,66 +155,77 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-  <h1><small>File</small> <code>src/core/debounce.js</code></h1>
+  <h1><small>File</small> <code>src/ui/yui/src/buttons/button-subscript.js</code></h1>
 </div>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-(function() {
+YUI.add(&#x27;button-subscript&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
-    /**
-     * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
-     *
-     * @class CKEDITOR.tools
-     */
+    var Lang = Y.Lang;
 
     /**
-     * Debounce util function. If a function execution is expensive, it might be debounced. This means
-     * that it will be executed after some amount of time after its last call. For example, if we attach a
-     * a function on scroll event, it might be called hundreds times per second. In this case it may be
-     * debounced with, let&#x27;s say 100ms. The real execution of this function will happen 100ms after last
-     * scroll event.
+     * The ButtonStrong class provides functionality for applying subscript style to a text selection.
      *
-     * @method debounce
-     * @param {Function} callback The callback which has to be called after given timeout.
-     * @param {Number} timeout Timeout in milliseconds after which the callback will be called.
-     * @param {Object} context The context in which the callback will be called. This argument is optional.
-     * @param {Array} args An array of arguments which the callback will receive.
+     * @class ButtonStrong
      */
-    CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function(callback, timeout, context, args) {
-        var callFn,
-            debounceHandle;
+    var Subscript = Y.Base.create(&#x27;subscript&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-subscript&quot;&gt;&lt;/i&gt;&#x27;,
 
-        callFn = function() {
-            var callArgs,
-                callContext,
-                len,
-                result = [],
-                startIndex = 0;
+        /**
+         * Applies the style of this button if its current status is pressed
+         * and removes it otherwise.
+         *
+         * @method _onClick
+         * @protected
+         * @param {EventFacade} event Event that triggered when user clicked on the button.
+         */
+        _onClick: function(event) {
+            var editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
 
-            callContext = context || this;
+            editor.execCommand(&#x27;subscript&#x27;);
+        }
+    }, {
+        NAME: &#x27;subscript&#x27;,
 
-            for (len = arguments.length; startIndex &lt; len; ++startIndex) {
-                result.push(arguments[startIndex]);
+        NS: &#x27;subscript&#x27;,
+
+        ATTRS: {
+            /**
+             * Specifies the element (style) which this button handles.
+             *
+             * @attribute element
+             * @default &#x27;sub&#x27;
+             * @type String
+             */
+            element: {
+                validator: Lang.isString,
+                value: &#x27;sub&#x27;
+            },
+
+            /**
+             * Collection of strings used to label elements of the button&#x27;s UI.
+             * ButtonStrong provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: &#x27;Subscript&#x27;}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: &#x27;Subscript&#x27;
+                }
             }
+        }
+    });
 
-            callArgs = result.concat(args || []);
+    Y.ButtonSubscript = Subscript;
 
-            clearTimeout(debounceHandle);
-
-            debounceHandle = setTimeout(function() {
-                callback.apply(callContext, callArgs);
-            }, timeout);
-        };
-
-        callFn.detach = function() {
-            clearTimeout(debounceHandle);
-        };
-
-        return callFn;
-    };
-}());
+}, &#x27;&#x27;, {
+    requires: [&#x27;button-base&#x27;]
+});
     </pre>
 </div>
 

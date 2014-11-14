@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.3</b>
+                        API Docs for Version: <b>0.2.5</b>
                     </p>
                 </li>
             </div>
@@ -73,6 +73,8 @@
             
                 <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
             
+                <li><a href="../classes/ButtonOl.html">ButtonOl</a></li>
+            
                 <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
             
                 <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
@@ -80,6 +82,8 @@
                 <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
             
                 <li><a href="../classes/ButtonU.html">ButtonU</a></li>
+            
+                <li><a href="../classes/ButtonUl.html">ButtonUl</a></li>
             
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
             
@@ -167,7 +171,21 @@ YUI.add(&#x27;button-strong&#x27;, function(Y) {
      * @class ButtonStrong
      */
     var Strong = Y.Base.create(&#x27;strong&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-bold&quot;&gt;&lt;/i&gt;&#x27;
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-bold&quot;&gt;&lt;/i&gt;&#x27;,
+
+        /**
+         * Applies the style of this button if its current status is pressed
+         * and removes it otherwise.
+         *
+         * @method _onClick
+         * @protected
+         * @param {EventFacade} event Event that triggered when user clicked on the button.
+         */
+        _onClick: function(event) {
+            var editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
+
+            editor.execCommand(&#x27;bold&#x27;);
+        }
     }, {
         NAME: &#x27;strong&#x27;,
 

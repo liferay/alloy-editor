@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.3</b>
+                        API Docs for Version: <b>0.2.5</b>
                     </p>
                 </li>
             </div>
@@ -73,6 +73,8 @@
             
                 <li><a href="../classes/ButtonLeft.html">ButtonLeft</a></li>
             
+                <li><a href="../classes/ButtonOl.html">ButtonOl</a></li>
+            
                 <li><a href="../classes/ButtonRight.html">ButtonRight</a></li>
             
                 <li><a href="../classes/ButtonStrong.html">ButtonStrong</a></li>
@@ -80,6 +82,8 @@
                 <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
             
                 <li><a href="../classes/ButtonU.html">ButtonU</a></li>
+            
+                <li><a href="../classes/ButtonUl.html">ButtonUl</a></li>
             
                 <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
             
@@ -186,9 +190,13 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function(config) {
-            var editor,
+            var documentKeyHandle,
+                editor,
+                editorKeyHandle,
                 eventsDelay,
-                node;
+                node,
+                onDocInteractTask,
+                onEditorKeyTask;
 
             node = this.get(&#x27;srcNode&#x27;);
 
@@ -202,17 +210,28 @@ YUI.add(&#x27;alloy-editor&#x27;, function(Y) {
             editor.config.extraPlugins = this.get(&#x27;extraPlugins&#x27;);
             editor.config.placeholderClass = this.get(&#x27;placeholderClass&#x27;);
 
+            editor.config.pasteFromWordRemoveStyles = false;
+            editor.config.pasteFromWordRemoveFontStyles = false;
+
             Y.mix(editor.config, config);
 
             this._editor = editor;
 
             eventsDelay = this.get(&#x27;eventsDelay&#x27;);
 
+            onDocInteractTask = CKEDITOR.tools.debounce(this._onDocInteract, eventsDelay, this);
+
+            onEditorKeyTask = CKEDITOR.tools.debounce(this._onEditorKey, eventsDelay, this);
+
+            editorKeyHandle = Y.one(Y.config.doc).on([&#x27;click&#x27;, &#x27;keydown&#x27;], onDocInteractTask);
+
+            documentKeyHandle = node.on(&#x27;keydown&#x27;, onEditorKeyTask);
+
             this._eventHandles = [
-                Y.one(Y.config.doc).on([&#x27;click&#x27;, &#x27;keydown&#x27;],
-                    CKEDITOR.tools.debounce(this._onDocInteract, eventsDelay, this)),
-                node.on(&#x27;keydown&#x27;,
-                    CKEDITOR.tools.debounce(this._onEditorKey, eventsDelay, this))
+                onDocInteractTask,
+                onEditorKeyTask,
+                editorKeyHandle,
+                documentKeyHandle
             ];
 
             // Custom events will be attached automatically, there is no need to put them in to the list

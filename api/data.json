@@ -2,7 +2,7 @@
     "project": {
         "name": "AlloyEditor",
         "description": "WYSIWYG editor built on top of CKEditor, with completely rewritten UI",
-        "version": "0.2.3",
+        "version": "0.2.5",
         "url": "https://github.com/ipeychev/alloy-editor/"
     },
     "files": {
@@ -121,6 +121,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/ui/yui/src/buttons/button-hline.js": {
+            "name": "src/ui/yui/src/buttons/button-hline.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ui/yui/src/buttons/button-image.js": {
             "name": "src/ui/yui/src/buttons/button-image.js",
             "modules": {},
@@ -139,6 +146,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/ui/yui/src/buttons/button-ol.js": {
+            "name": "src/ui/yui/src/buttons/button-ol.js",
+            "modules": {},
+            "classes": {
+                "ButtonOl": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ui/yui/src/buttons/button-right.js": {
             "name": "src/ui/yui/src/buttons/button-right.js",
             "modules": {},
@@ -148,8 +164,29 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/ui/yui/src/buttons/button-strike.js": {
+            "name": "src/ui/yui/src/buttons/button-strike.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ui/yui/src/buttons/button-strong.js": {
             "name": "src/ui/yui/src/buttons/button-strong.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-subscript.js": {
+            "name": "src/ui/yui/src/buttons/button-subscript.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-superscript.js": {
+            "name": "src/ui/yui/src/buttons/button-superscript.js",
             "modules": {},
             "classes": {
                 "ButtonStrong": 1
@@ -162,6 +199,15 @@
             "modules": {},
             "classes": {
                 "ButtonTwitter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ui/yui/src/buttons/button-ul.js": {
+            "name": "src/ui/yui/src/buttons/button-ul.js",
+            "modules": {},
+            "classes": {
+                "ButtonUl": 1
             },
             "fors": {},
             "namespaces": {}
@@ -421,6 +467,18 @@
             "line": 6,
             "description": "The ButtonLeft class provides functionality for changing the alignment of an image."
         },
+        "ButtonOl": {
+            "name": "ButtonOl",
+            "shortname": "ButtonOl",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-ol.js",
+            "line": 6,
+            "description": "The ButtonOl class provides functionality for converting a text selection into a numbered list."
+        },
         "ButtonRight": {
             "name": "ButtonRight",
             "shortname": "ButtonRight",
@@ -441,9 +499,9 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "src/ui/yui/src/buttons/button-strong.js",
+            "file": "src/ui/yui/src/buttons/button-superscript.js",
             "line": 6,
-            "description": "The ButtonStrong class provides functionality for applying \"strong\" (bold) style to a text selection."
+            "description": "The ButtonStrong class provides functionality for applying superscript style to a text selection."
         },
         "ButtonTwitter": {
             "name": "ButtonTwitter",
@@ -456,6 +514,18 @@
             "file": "src/ui/yui/src/buttons/button-twitter.js",
             "line": 6,
             "description": "The ButtonTwitter class provides functionality for sending tweets based on the selected text."
+        },
+        "ButtonUl": {
+            "name": "ButtonUl",
+            "shortname": "ButtonUl",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ui/yui/src/buttons/button-ul.js",
+            "line": 6,
+            "description": "The ButtonUl class provides functionality for converting a text selection into a bulleted list."
         },
         "ButtonU": {
             "name": "ButtonU",
@@ -1050,7 +1120,7 @@
         },
         {
             "file": "src/plugins/drop-images.js",
-            "line": 160,
+            "line": 166,
             "description": "Fired when an image is being added to the editor successfully.",
             "itemtype": "event",
             "name": "imagedrop",
@@ -1124,7 +1194,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 67,
+            "line": 82,
             "description": "Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor\ninstance and destroys all created toolbars.",
             "itemtype": "method",
             "name": "destructor",
@@ -1134,7 +1204,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 90,
+            "line": 105,
             "description": "Searches among toolbars to find the next toolbar that should be focused.",
             "itemtype": "method",
             "name": "_focusNextToolbar",
@@ -1144,7 +1214,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 126,
+            "line": 141,
             "description": "Focuses the first visible toolbar in editor or if there is not any, focuses the last of the other\ntoolbars which accept the request for focusing.",
             "itemtype": "method",
             "name": "_focusVisibleToolbar",
@@ -1154,7 +1224,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 143,
+            "line": 158,
             "description": "Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.",
             "itemtype": "method",
             "name": "_getNativeEditor",
@@ -1168,7 +1238,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 154,
+            "line": 169,
             "description": "Hide all visible toolbars in editor",
             "itemtype": "method",
             "name": "_hideToolbars",
@@ -1178,7 +1248,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 166,
+            "line": 181,
             "description": "Fires <code>toolbarsHide</code> event if none of the toolbars or their child nodes is the element user is\ncurrently interacting.",
             "itemtype": "method",
             "name": "_onDocInteract",
@@ -1195,7 +1265,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 194,
+            "line": 209,
             "description": "Handles key events in the editor:\n - ALT + F10: focus the toolbar\n - ESC: hide visible toolbars",
             "itemtype": "method",
             "name": "_onEditorKey",
@@ -1212,7 +1282,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 212,
+            "line": 227,
             "description": "Handles activating a toolbar.",
             "itemtype": "method",
             "name": "_onToolbarActive",
@@ -1222,7 +1292,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 222,
+            "line": 237,
             "description": "Handles key events in the toolbar:\n - TAB: focus next toolbar\n - ESC: focus the editor",
             "itemtype": "method",
             "name": "_onToolbarKey",
@@ -1239,7 +1309,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 244,
+            "line": 259,
             "description": "Validates the allowed content attribute. Look\n[here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the\nsupported values.",
             "itemtype": "method",
             "name": "_validateAllowedContent",
@@ -1253,7 +1323,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 257,
+            "line": 272,
             "description": "Validates toolbars attribute. May be empty string or null, which means the current instance of AlloyEdtor\nshouldn't have any toolbars, or Object, which properties are the desired toolbars.",
             "itemtype": "method",
             "name": "_validateToolbars",
@@ -1274,7 +1344,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 271,
+            "line": 286,
             "description": "Configures the allowed content for the current instance of AlloyEditor.\nLook on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)\nfor more information about the valid values.",
             "itemtype": "attribute",
             "name": "allowedContent",
@@ -1285,7 +1355,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 287,
+            "line": 302,
             "description": "The delay (timeout), in ms, after which events such like key or mouse events will be processed.",
             "itemtype": "attribute",
             "name": "eventsDelay",
@@ -1294,7 +1364,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 298,
+            "line": 313,
             "description": "Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to\nmake AlloyEditor to work properly.",
             "itemtype": "attribute",
             "name": "extraPlugins",
@@ -1305,7 +1375,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 313,
+            "line": 328,
             "description": "Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.",
             "itemtype": "attribute",
             "name": "nativeEditor",
@@ -1315,7 +1385,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 325,
+            "line": 340,
             "description": "Specifies the class, which should be added by Placeholder plugin\n{{#crossLink \"CKEDITOR.plugins.placeholder}}{{/crossLink}}\nwhen editor is not focused.",
             "itemtype": "attribute",
             "name": "placeholderClass",
@@ -1326,7 +1396,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 341,
+            "line": 356,
             "description": "Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.\nThese plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor\ncomes with its own highly optimized copy of CKEditor (just customized via their official download page).\nThis version does not come with the unneeded plugins, so the value of this property won't be needed.\nHowever, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the\nplugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them\nentirely from CKEditor. It just removes them from its current instance, in which you will use different\nUI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same\npage!",
             "itemtype": "attribute",
             "name": "removePlugins",
@@ -1337,7 +1407,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 363,
+            "line": 378,
             "description": "The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.",
             "itemtype": "attribute",
             "name": "srcNode",
@@ -1347,7 +1417,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 375,
+            "line": 390,
             "description": "Specifies the Toolbars of the current editor instance. The value should be an object\nwith one or more properties. Each of these will represent a toolbar. The value of these properties\ncan be string or Object. If String, the value of the string should represent the buttons. If object,\none of these properties should be 'buttons', which will represent the buttons of this Toolbar and\nall the other properties will be different configuration parameters of the Toolbar. Example:\n<pre><code>\n    toolbars: {\n        table: { // this would be a toolbar configuration, which specifies both Toolbar attributes and its buttons\n            buttons: ['button1', button2],\n            width: 25\n        },\n        add: ['image', 'code'], // here we specify only the buttons of this toolbar and leave the other options unmodified.\n        image: ['left', 'right'],\n        styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']\n    }\n</pre></code>",
             "default": "toolbars {\n        add: ['image'],\n        image: ['left', 'right'],\n        styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']\n    }",
             "itemtype": "attribute",
@@ -1852,7 +1922,24 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-em.js",
-            "line": 20,
+            "line": 15,
+            "description": "Applies the style of the button if its current status is pressed\nand removes it otherwise.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
+            "class": "ButtonEm"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-em.js",
+            "line": 34,
             "description": "Specifies the element (style) which this button handles.",
             "itemtype": "attribute",
             "name": "element",
@@ -1862,7 +1949,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-em.js",
-            "line": 32,
+            "line": 46,
             "description": "Collection of strings used to label elements of the button's UI.\nButtonEm provides string properties to specify the label of the button.",
             "itemtype": "attribute",
             "name": "strings",
@@ -1909,6 +1996,21 @@
             "default": "{label: 'Heading level 2'}",
             "type": "Object",
             "class": "ButtonH2"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-hline.js",
+            "line": 9,
+            "description": "Inserts a horizontal line after the current selection.",
+            "itemtype": "method",
+            "name": "_onClick\nprotected",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
+            "class": "ButtonImage"
         },
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
@@ -1964,7 +2066,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
-            "line": 102,
+            "line": 108,
             "description": "Collection of strings used to label elements of the button's UI.\nButtonImage provides string properties to specify the label of the button.",
             "itemtype": "attribute",
             "name": "strings",
@@ -1974,7 +2076,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-image.js",
-            "line": 117,
+            "line": 123,
             "description": "Specifies if this button will be toggleable, or not.\nButtonImage will be not toggleable by default.",
             "itemtype": "attribute",
             "name": "toggle",
@@ -2029,6 +2131,41 @@
             "class": "ButtonLeft"
         },
         {
+            "file": "src/ui/yui/src/buttons/button-ol.js",
+            "line": 14,
+            "description": "Creates a numbered list block around the current selection with the following exceptions:\n- If the selection is already contained inside a numbered list, it will remove the list\nblock and transform the list items into individual paragraphs.\n- If the selection is contained inside a bulleted list, it will switch the <ul> tag for an\n<ol> tag preserving all its items.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
+            "class": "ButtonOl"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-ol.js",
+            "line": 31,
+            "description": "Updates the toggle status of the button. If the selection is contained inside an 'ol' block,\nits status will be made active and \"pressed\" attribute of the button will be\nset to true, otherwise, it will be set to false.",
+            "itemtype": "method",
+            "name": "updateUI",
+            "class": "ButtonOl"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-ol.js",
+            "line": 54,
+            "description": "Collection of strings used to label elements of the button's UI.\nButtonOl provides string properties to specify the label of the button.",
+            "itemtype": "attribute",
+            "name": "strings",
+            "default": "{label: 'Numbered List'}",
+            "type": "Object",
+            "class": "ButtonOl"
+        },
+        {
             "file": "src/ui/yui/src/buttons/button-right.js",
             "line": 12,
             "description": "Updates \"pressed\" attribute of the button. If the currently selected element\nis an image and this image is explicitly right aligned,\n\"pressed\" attribute will be set to true, otherwise - to false.",
@@ -2074,8 +2211,62 @@
             "class": "ButtonRight"
         },
         {
+            "file": "src/ui/yui/src/buttons/button-strike.js",
+            "line": 14,
+            "description": "Applies the style of this button if its current status is pressed\nand removes it otherwise.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-strike.js",
+            "line": 33,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'s'",
+            "type": "String",
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-strike.js",
+            "line": 45,
+            "description": "Collection of strings used to label elements of the button's UI.\nButtonStrong provides string properties to specify the label of the button.",
+            "itemtype": "attribute",
+            "name": "strings",
+            "default": "{label: 'Strike'}",
+            "type": "Object",
+            "class": "ButtonStrong"
+        },
+        {
             "file": "src/ui/yui/src/buttons/button-strong.js",
-            "line": 19,
+            "line": 14,
+            "description": "Applies the style of this button if its current status is pressed\nand removes it otherwise.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-strong.js",
+            "line": 33,
             "description": "Specifies the element (style) which this button handles.",
             "itemtype": "attribute",
             "name": "element",
@@ -2085,11 +2276,85 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-strong.js",
-            "line": 31,
+            "line": 45,
             "description": "Collection of strings used to label elements of the button's UI.\nButtonStrong provides string properties to specify the label of the button.",
             "itemtype": "attribute",
             "name": "strings",
             "default": "{label: 'Bold'}",
+            "type": "Object",
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-subscript.js",
+            "line": 14,
+            "description": "Applies the style of this button if its current status is pressed\nand removes it otherwise.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-subscript.js",
+            "line": 33,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'sub'",
+            "type": "String",
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-subscript.js",
+            "line": 45,
+            "description": "Collection of strings used to label elements of the button's UI.\nButtonStrong provides string properties to specify the label of the button.",
+            "itemtype": "attribute",
+            "name": "strings",
+            "default": "{label: 'Subscript'}",
+            "type": "Object",
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-superscript.js",
+            "line": 14,
+            "description": "Applies the style of this button if its current status is pressed\nand removes it otherwise.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-superscript.js",
+            "line": 33,
+            "description": "Specifies the element (style) which this button handles.",
+            "itemtype": "attribute",
+            "name": "element",
+            "default": "'sup'",
+            "type": "String",
+            "class": "ButtonStrong"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-superscript.js",
+            "line": 45,
+            "description": "Collection of strings used to label elements of the button's UI.\nButtonStrong provides string properties to specify the label of the button.",
+            "itemtype": "attribute",
+            "name": "strings",
+            "default": "{label: 'Superscript'}",
             "type": "Object",
             "class": "ButtonStrong"
         },
@@ -2163,9 +2428,61 @@
             "class": "ButtonTwitter"
         },
         {
+            "file": "src/ui/yui/src/buttons/button-ul.js",
+            "line": 14,
+            "description": "Creates a bulleted list block around the current selection with the following exceptions:\n- If the selection is already contained inside a bulleted list, it will remove the list\nblock and transform the list items into individual paragraphs.\n- If the selection is contained inside a numbered list, it will switch the <ol> tag for a\n<ul> tag preserving all its items.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
+            "class": "ButtonUl"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-ul.js",
+            "line": 31,
+            "description": "Updates the toggle status of the button. If the selection is contained inside an 'ul' block,\nits status will be made active and \"pressed\" attribute of the button will be\nset to true, otherwise, it will be set to false.",
+            "itemtype": "method",
+            "name": "updateUI",
+            "class": "ButtonUl"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-ul.js",
+            "line": 54,
+            "description": "Collection of strings used to label elements of the button's UI.\nButtonUl provides string properties to specify the label of the button.",
+            "itemtype": "attribute",
+            "name": "strings",
+            "default": "{label: 'Bulleted List'}",
+            "type": "Object",
+            "class": "ButtonUl"
+        },
+        {
             "file": "src/ui/yui/src/buttons/button-underline.js",
-            "line": 22,
-            "description": "Specifies the style, which should be applied to the current selection in editor.",
+            "line": 16,
+            "description": "Applies the style of this button if its current status is pressed\nand removes it otherwise.",
+            "itemtype": "method",
+            "name": "_onClick",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event that triggered when user clicked on the button.",
+                    "type": "EventFacade"
+                }
+            ],
+            "class": "ButtonU"
+        },
+        {
+            "file": "src/ui/yui/src/buttons/button-underline.js",
+            "line": 35,
+            "description": "Specifies the element (style) which this button handles.",
             "itemtype": "attribute",
             "name": "element",
             "default": "'u'",
@@ -2174,7 +2491,7 @@
         },
         {
             "file": "src/ui/yui/src/buttons/button-underline.js",
-            "line": 34,
+            "line": 47,
             "description": "Collection of strings used to label elements of the button's UI.\nButtonU provides string properties to specify the label of the button.",
             "itemtype": "attribute",
             "name": "strings",

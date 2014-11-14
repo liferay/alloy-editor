@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/core/debounce.js - AlloyEditor</title>
+    <title>src/ui/yui/src/buttons/button-ul.js - AlloyEditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -155,66 +155,86 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-  <h1><small>File</small> <code>src/core/debounce.js</code></h1>
+  <h1><small>File</small> <code>src/ui/yui/src/buttons/button-ul.js</code></h1>
 </div>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-(function() {
+YUI.add(&#x27;button-ul&#x27;, function(Y) {
     &#x27;use strict&#x27;;
 
-    /**
-     * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
-     *
-     * @class CKEDITOR.tools
-     */
+    var Lang = Y.Lang;
 
     /**
-     * Debounce util function. If a function execution is expensive, it might be debounced. This means
-     * that it will be executed after some amount of time after its last call. For example, if we attach a
-     * a function on scroll event, it might be called hundreds times per second. In this case it may be
-     * debounced with, let&#x27;s say 100ms. The real execution of this function will happen 100ms after last
-     * scroll event.
+     * The ButtonUl class provides functionality for converting a text selection into a bulleted list.
      *
-     * @method debounce
-     * @param {Function} callback The callback which has to be called after given timeout.
-     * @param {Number} timeout Timeout in milliseconds after which the callback will be called.
-     * @param {Object} context The context in which the callback will be called. This argument is optional.
-     * @param {Array} args An array of arguments which the callback will receive.
+     * @class ButtonUl
      */
-    CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function(callback, timeout, context, args) {
-        var callFn,
-            debounceHandle;
+    var Ul = Y.Base.create(&#x27;ul&#x27;, Y.Plugin.Base, [Y.ButtonBase], {
+        TPL_CONTENT: &#x27;&lt;i class=&quot;alloy-editor-icon-bulleted-list&quot;&gt;&lt;/i&gt;&#x27;,
 
-        callFn = function() {
-            var callArgs,
-                callContext,
-                len,
-                result = [],
-                startIndex = 0;
+        /**
+         * Creates a bulleted list block around the current selection with the following exceptions:
+         * - If the selection is already contained inside a bulleted list, it will remove the list
+         * block and transform the list items into individual paragraphs.
+         * - If the selection is contained inside a numbered list, it will switch the &lt;ol&gt; tag for a
+         * &lt;ul&gt; tag preserving all its items.
+         *
+         * @method _onClick
+         * @protected
+         * @param {EventFacade} event Event that triggered when user clicked on the button.
+         */
+        _onClick: function(event) {
+            var editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
 
-            callContext = context || this;
+            editor.execCommand(&#x27;bulletedlist&#x27;);
+        },
 
-            for (len = arguments.length; startIndex &lt; len; ++startIndex) {
-                result.push(arguments[startIndex]);
+        /**
+         * Updates the toggle status of the button. If the selection is contained inside an &#x27;ul&#x27; block,
+         * its status will be made active and &quot;pressed&quot; attribute of the button will be
+         * set to true, otherwise, it will be set to false.
+         *
+         * @method updateUI
+         */
+        updateUI: function() {
+            var editor,
+                elementPath;
+
+            editor = this.get(&#x27;host&#x27;).get(&#x27;editor&#x27;);
+
+            elementPath = editor.elementPath();
+
+            this._button.set(&#x27;pressed&#x27;, elementPath.contains(&#x27;ul&#x27;));
+        }
+    }, {
+        NAME: &#x27;ul&#x27;,
+
+        NS: &#x27;ul&#x27;,
+
+        ATTRS: {
+            /**
+             * Collection of strings used to label elements of the button&#x27;s UI.
+             * ButtonUl provides string properties to specify the label of the button.
+             *
+             * @attribute strings
+             * @default {label: &#x27;Bulleted List&#x27;}
+             * @type Object
+             */
+            strings: {
+                validator: Lang.isObject,
+                value: {
+                    label: &#x27;Bulleted List&#x27;
+                }
             }
+        }
+    });
 
-            callArgs = result.concat(args || []);
+    Y.ButtonUl = Ul;
 
-            clearTimeout(debounceHandle);
-
-            debounceHandle = setTimeout(function() {
-                callback.apply(callContext, callArgs);
-            }, timeout);
-        };
-
-        callFn.detach = function() {
-            clearTimeout(debounceHandle);
-        };
-
-        return callFn;
-    };
-}());
+}, &#x27;&#x27;, {
+    requires: [&#x27;button-base&#x27;]
+});
     </pre>
 </div>
 
