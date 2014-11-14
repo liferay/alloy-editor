@@ -1,15 +1,15 @@
-YUI.add('button-strong', function(Y) {
+YUI.add('button-strike', function(Y) {
     'use strict';
 
     var Lang = Y.Lang;
 
     /**
-     * The ButtonStrong class provides functionality for applying "strong" (bold) style to a text selection.
+     * The ButtonStrong class provides functionality for applying strike style to a text selection.
      *
      * @class ButtonStrong
      */
-    var Strong = Y.Base.create('strong', Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: '<i class="alloy-editor-icon-bold"></i>',
+    var Strike = Y.Base.create('strike', Y.Plugin.Base, [Y.ButtonBase], {
+        TPL_CONTENT: '<i class="alloy-editor-icon-strike"></i>',
 
         /**
          * Applies the style for this button if its current status is pressed
@@ -22,24 +22,24 @@ YUI.add('button-strong', function(Y) {
         _onClick: function(event) {
             var editor = this.get('host').get('editor');
 
-            editor.execCommand('bold');
+            editor.execCommand('strike');
         }
     }, {
-        NAME: 'strong',
+        NAME: 'strike',
 
-        NS: 'strong',
+        NS: 'strike',
 
         ATTRS: {
             /**
              * Specifies the element (style) which this button handles.
              *
              * @attribute element
-             * @default 'strong'
+             * @default 's'
              * @type String
              */
             element: {
                 validator: Lang.isString,
-                value: 'strong'
+                value: 's'
             },
 
             /**
@@ -47,19 +47,19 @@ YUI.add('button-strong', function(Y) {
              * ButtonStrong provides string properties to specify the label of the button.
              *
              * @attribute strings
-             * @default {label: 'Bold'}
+             * @default {label: 'Strike'}
              * @type Object
              */
             strings: {
                 validator: Lang.isObject,
                 value: {
-                    label: 'Bold'
+                    label: 'Strike'
                 }
             }
         }
     });
 
-    Y.ButtonStrong = Strong;
+    Y.ButtonStrike = Strike;
 
 }, '', {
     requires: ['button-base']

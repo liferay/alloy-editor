@@ -1,15 +1,15 @@
-YUI.add('button-strong', function(Y) {
+YUI.add('button-superscript', function(Y) {
     'use strict';
 
     var Lang = Y.Lang;
 
     /**
-     * The ButtonStrong class provides functionality for applying "strong" (bold) style to a text selection.
+     * The ButtonStrong class provides functionality for applying superscript style to a text selection.
      *
      * @class ButtonStrong
      */
-    var Strong = Y.Base.create('strong', Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: '<i class="alloy-editor-icon-bold"></i>',
+    var Superscript = Y.Base.create('superscript', Y.Plugin.Base, [Y.ButtonBase], {
+        TPL_CONTENT: '<i class="alloy-editor-icon-superscript"></i>',
 
         /**
          * Applies the style for this button if its current status is pressed
@@ -22,24 +22,24 @@ YUI.add('button-strong', function(Y) {
         _onClick: function(event) {
             var editor = this.get('host').get('editor');
 
-            editor.execCommand('bold');
+            editor.execCommand('superscript');
         }
     }, {
-        NAME: 'strong',
+        NAME: 'superscript',
 
-        NS: 'strong',
+        NS: 'superscript',
 
         ATTRS: {
             /**
              * Specifies the element (style) which this button handles.
              *
              * @attribute element
-             * @default 'strong'
+             * @default 'sup'
              * @type String
              */
             element: {
                 validator: Lang.isString,
-                value: 'strong'
+                value: 'sup'
             },
 
             /**
@@ -47,19 +47,19 @@ YUI.add('button-strong', function(Y) {
              * ButtonStrong provides string properties to specify the label of the button.
              *
              * @attribute strings
-             * @default {label: 'Bold'}
+             * @default {label: 'Superscript'}
              * @type Object
              */
             strings: {
                 validator: Lang.isObject,
                 value: {
-                    label: 'Bold'
+                    label: 'Superscript'
                 }
             }
         }
     });
 
-    Y.ButtonStrong = Strong;
+    Y.ButtonSuperscript = Superscript;
 
 }, '', {
     requires: ['button-base']

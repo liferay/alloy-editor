@@ -11,16 +11,29 @@ YUI.add('button-u', function(Y) {
      * @constructor
      */
     var Underline = Y.Base.create('underline', Y.Plugin.Base, [Y.ButtonBase], {
-        TPL_CONTENT: '<i class="alloy-editor-icon-underline"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-underline"></i>',
+
+        /**
+         * Applies the style for this button if its current status is pressed
+         * and removes it if button is not pressed.
+         *
+         * @method _onClick
+         * protected
+         * @param {EventFacade} event Event that triggered when user clicked on the button.
+         */
+        _onClick: function(event) {
+            var editor = this.get('host').get('editor');
+
+            editor.execCommand('underline');
+        }
     }, {
         NAME: 'underline',
 
         NS: 'underline',
 
         ATTRS: {
-
             /**
-             * @description Specifies the style, which should be applied to the current selection in editor.
+             * Specifies the element (style) which this button handles.
              *
              * @attribute element
              * @default 'u'

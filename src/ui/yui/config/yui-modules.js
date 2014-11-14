@@ -22,6 +22,24 @@
         requires: ['button-base']
     },
 
+    'button-strike': {
+        group: 'AlloyEditor',
+        path: 'buttons/button-strike.js',
+        requires: ['button-base']
+    },
+
+    'button-subscript': {
+        group: 'AlloyEditor',
+        path: 'buttons/button-subscript.js',
+        requires: ['button-base']
+    },
+
+    'button-superscript': {
+        group: 'AlloyEditor',
+        path: 'buttons/button-superscript.js',
+        requires: ['button-base']
+    },
+
     'button-a': {
         group: 'AlloyEditor',
         path: 'buttons/button-a.js',
