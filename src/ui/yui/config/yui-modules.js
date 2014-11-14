@@ -40,6 +40,18 @@
         requires: ['button-base']
     },
 
+    'button-ol': {
+        group: 'AlloyEditor',
+        path: 'buttons/button-ol.js',
+        requires: ['button-base']
+    },
+
+    'button-ul': {
+        group: 'AlloyEditor',
+        path: 'buttons/button-ul.js',
+        requires: ['button-base']
+    },
+
     'button-a': {
         group: 'AlloyEditor',
         path: 'buttons/button-a.js',
