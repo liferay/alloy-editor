@@ -28,9 +28,13 @@ YUI.add('alloy-editor', function(Y) {
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function(config) {
-            var editor,
+            var documentKeyHandle,
+                editor,
+                editorKeyHandle,
                 eventsDelay,
-                node;
+                node,
+                onDocInteractTask,
+                onEditorKeyTask;
 
             node = this.get('srcNode');
 
@@ -53,11 +57,19 @@ YUI.add('alloy-editor', function(Y) {
 
             eventsDelay = this.get('eventsDelay');
 
+            onDocInteractTask = CKEDITOR.tools.debounce(this._onDocInteract, eventsDelay, this);
+
+            onEditorKeyTask = CKEDITOR.tools.debounce(this._onEditorKey, eventsDelay, this);
+
+            editorKeyHandle = Y.one(Y.config.doc).on(['click', 'keydown'], onDocInteractTask);
+
+            documentKeyHandle = node.on('keydown', onEditorKeyTask);
+
             this._eventHandles = [
-                Y.one(Y.config.doc).on(['click', 'keydown'],
-                    CKEDITOR.tools.debounce(this._onDocInteract, eventsDelay, this)),
-                node.on('keydown',
-                    CKEDITOR.tools.debounce(this._onEditorKey, eventsDelay, this))
+                onDocInteractTask,
+                onEditorKeyTask,
+                editorKeyHandle,
+                documentKeyHandle
             ];
 
             // Custom events will be attached automatically, there is no need to put them in to the list

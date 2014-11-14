@@ -46,7 +46,7 @@
             }, timeout);
         };
 
-        callFn.cancel = function() {
+        callFn.detach = function() {
             clearTimeout(debounceHandle);
         };
 
