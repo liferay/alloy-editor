@@ -2,7 +2,7 @@
     "project": {
         "name": "AlloyEditor",
         "description": "WYSIWYG editor built on top of CKEditor, with completely rewritten UI",
-        "version": "0.2.4",
+        "version": "0.2.5",
         "url": "https://github.com/ipeychev/alloy-editor/"
     },
     "files": {
@@ -1194,7 +1194,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 67,
+            "line": 82,
             "description": "Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor\ninstance and destroys all created toolbars.",
             "itemtype": "method",
             "name": "destructor",
@@ -1204,7 +1204,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 90,
+            "line": 105,
             "description": "Searches among toolbars to find the next toolbar that should be focused.",
             "itemtype": "method",
             "name": "_focusNextToolbar",
@@ -1214,7 +1214,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 126,
+            "line": 141,
             "description": "Focuses the first visible toolbar in editor or if there is not any, focuses the last of the other\ntoolbars which accept the request for focusing.",
             "itemtype": "method",
             "name": "_focusVisibleToolbar",
@@ -1224,7 +1224,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 143,
+            "line": 158,
             "description": "Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.",
             "itemtype": "method",
             "name": "_getNativeEditor",
@@ -1238,7 +1238,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 154,
+            "line": 169,
             "description": "Hide all visible toolbars in editor",
             "itemtype": "method",
             "name": "_hideToolbars",
@@ -1248,7 +1248,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 166,
+            "line": 181,
             "description": "Fires <code>toolbarsHide</code> event if none of the toolbars or their child nodes is the element user is\ncurrently interacting.",
             "itemtype": "method",
             "name": "_onDocInteract",
@@ -1265,7 +1265,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 194,
+            "line": 209,
             "description": "Handles key events in the editor:\n - ALT + F10: focus the toolbar\n - ESC: hide visible toolbars",
             "itemtype": "method",
             "name": "_onEditorKey",
@@ -1282,7 +1282,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 212,
+            "line": 227,
             "description": "Handles activating a toolbar.",
             "itemtype": "method",
             "name": "_onToolbarActive",
@@ -1292,7 +1292,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 222,
+            "line": 237,
             "description": "Handles key events in the toolbar:\n - TAB: focus next toolbar\n - ESC: focus the editor",
             "itemtype": "method",
             "name": "_onToolbarKey",
@@ -1309,7 +1309,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 244,
+            "line": 259,
             "description": "Validates the allowed content attribute. Look\n[here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the\nsupported values.",
             "itemtype": "method",
             "name": "_validateAllowedContent",
@@ -1323,7 +1323,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 257,
+            "line": 272,
             "description": "Validates toolbars attribute. May be empty string or null, which means the current instance of AlloyEdtor\nshouldn't have any toolbars, or Object, which properties are the desired toolbars.",
             "itemtype": "method",
             "name": "_validateToolbars",
@@ -1344,7 +1344,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 271,
+            "line": 286,
             "description": "Configures the allowed content for the current instance of AlloyEditor.\nLook on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)\nfor more information about the valid values.",
             "itemtype": "attribute",
             "name": "allowedContent",
@@ -1355,7 +1355,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 287,
+            "line": 302,
             "description": "The delay (timeout), in ms, after which events such like key or mouse events will be processed.",
             "itemtype": "attribute",
             "name": "eventsDelay",
@@ -1364,7 +1364,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 298,
+            "line": 313,
             "description": "Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to\nmake AlloyEditor to work properly.",
             "itemtype": "attribute",
             "name": "extraPlugins",
@@ -1375,7 +1375,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 313,
+            "line": 328,
             "description": "Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.",
             "itemtype": "attribute",
             "name": "nativeEditor",
@@ -1385,7 +1385,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 325,
+            "line": 340,
             "description": "Specifies the class, which should be added by Placeholder plugin\n{{#crossLink \"CKEDITOR.plugins.placeholder}}{{/crossLink}}\nwhen editor is not focused.",
             "itemtype": "attribute",
             "name": "placeholderClass",
@@ -1396,7 +1396,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 341,
+            "line": 356,
             "description": "Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.\nThese plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor\ncomes with its own highly optimized copy of CKEditor (just customized via their official download page).\nThis version does not come with the unneeded plugins, so the value of this property won't be needed.\nHowever, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the\nplugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them\nentirely from CKEditor. It just removes them from its current instance, in which you will use different\nUI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same\npage!",
             "itemtype": "attribute",
             "name": "removePlugins",
@@ -1407,7 +1407,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 363,
+            "line": 378,
             "description": "The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.",
             "itemtype": "attribute",
             "name": "srcNode",
@@ -1417,7 +1417,7 @@
         },
         {
             "file": "src/ui/yui/src/adapter/yui.js",
-            "line": 375,
+            "line": 390,
             "description": "Specifies the Toolbars of the current editor instance. The value should be an object\nwith one or more properties. Each of these will represent a toolbar. The value of these properties\ncan be string or Object. If String, the value of the string should represent the buttons. If object,\none of these properties should be 'buttons', which will represent the buttons of this Toolbar and\nall the other properties will be different configuration parameters of the Toolbar. Example:\n<pre><code>\n    toolbars: {\n        table: { // this would be a toolbar configuration, which specifies both Toolbar attributes and its buttons\n            buttons: ['button1', button2],\n            width: 25\n        },\n        add: ['image', 'code'], // here we specify only the buttons of this toolbar and leave the other options unmodified.\n        image: ['left', 'right'],\n        styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']\n    }\n</pre></code>",
             "default": "toolbars {\n        add: ['image'],\n        image: ['left', 'right'],\n        styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']\n    }",
             "itemtype": "attribute",

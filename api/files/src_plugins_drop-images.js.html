@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.4</b>
+                        API Docs for Version: <b>0.2.5</b>
                     </p>
                 </li>
             </div>
@@ -187,7 +187,7 @@
             init: function(editor) {
                 var editable;
 
-                editable = new CKEDITOR.editable(editor, editor.element.$);
+                editable = editor.editable(editor.element.$);
 
                 editable.attachListener(editable, &#x27;dragenter&#x27;, this._onDragEnter, this, {
                     editor: editor
