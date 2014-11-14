@@ -12,11 +12,11 @@ YUI.add('button-subscript', function(Y) {
         TPL_CONTENT: '<i class="alloy-editor-icon-subscript"></i>',
 
         /**
-         * Applies the style for this button if its current status is pressed
-         * and removes it if button is not pressed.
+         * Applies the style of this button if its current status is pressed
+         * and removes it otherwise.
          *
          * @method _onClick
-         * protected
+         * @protected
          * @param {EventFacade} event Event that triggered when user clicked on the button.
          */
         _onClick: function(event) {
