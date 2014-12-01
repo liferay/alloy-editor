@@ -74,19 +74,28 @@ YUI.add('toolbar-base', function(Y) {
          * @method focus
          * @return {Boolean} True if toolbar has been focused, false otherwise.
          */
-        focus: function() {
+        focus: function(currentButton) {
             var buttonsContainer,
+                index,
                 visible;
 
             buttonsContainer = this.get('buttonsContainer');
 
+            index = currentButton || 0;
+
             visible = this.get('visible');
 
             if (visible) {
-                buttonsContainer.focusManager.focus(0);
+                buttonsContainer.focusManager.focus(index);
             }
 
             return visible;
+        },
+
+        getActiveButton: function() {
+            var buttonsContainer = this.get('buttonsContainer');
+
+            return buttonsContainer.focusManager.get('activeDescendant');
         },
 
         /**

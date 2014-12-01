@@ -77,6 +77,8 @@ YUI.add('alloy-editor', function(Y) {
             editor.on('toolbarKey', this._onToolbarKey, this);
 
             editor.on('toolbarActive', this._onToolbarActive, this);
+
+            editor.on('afterCommandExec', this._returnFocusToToolbar, this);
         },
 
         /**
@@ -133,6 +135,8 @@ YUI.add('alloy-editor', function(Y) {
                 if (toolbar !== activeToolbar && toolbar.focus()) {
                     this._activeToolbar = toolbar;
 
+                    this._focusedToolbar = toolbar;
+
                     return true;
                 }
             }, this);
@@ -145,10 +149,12 @@ YUI.add('alloy-editor', function(Y) {
          * @method _focusVisibleToolbar
          * @protected
          */
-        _focusVisibleToolbar: function() {
+        _focusVisibleToolbar: function(currentButton) {
             Y.Object.some(this._editor.config.toolbars, function(toolbar) {
-                if (toolbar != this._activeToolbar && toolbar.focus()) {
+                if (toolbar != this._activeToolbar && toolbar.focus(currentButton)) {
                     this._activeToolbar = toolbar;
+
+                    this._focusedToolbar = toolbar;
 
                     return toolbar.get('visible');
                 }
@@ -251,8 +257,26 @@ YUI.add('alloy-editor', function(Y) {
             } else if (event.data.keyCode === KEY_ESC) {
                 this._activeToolbar.blur();
                 this._activeToolbar = null;
+                this._focusedToolbar = null;
 
                 this._hideToolbars();
+            }
+        },
+
+        /**
+         * Checks if a toolbar was focused by keyboard,
+         * and returns the focus to it.
+         *
+         * @method _returnFocusToToolbar
+         * @protected
+         */
+        _returnFocusToToolbar: function() {
+            var toolbar = this._focusedToolbar;
+
+            if (toolbar) {
+                var currentButton = toolbar.getActiveButton();
+
+                this._focusVisibleToolbar(currentButton);
             }
         },
 
