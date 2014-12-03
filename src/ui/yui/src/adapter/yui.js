@@ -265,7 +265,7 @@ YUI.add('alloy-editor', function(Y) {
 
         /**
          * Checks if a toolbar was focused by keyboard,
-         * and returns the focus to it.
+         * and if so, returns the focus to it.
          *
          * @method _returnFocusToToolbar
          * @protected

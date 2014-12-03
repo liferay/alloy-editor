@@ -92,6 +92,11 @@ YUI.add('toolbar-base', function(Y) {
             return visible;
         },
 
+        /**
+         * Returns the index of the currently focused (active) button in the toolbar.
+         *
+         * @return {Number} The index of the currently active button
+         */
         getActiveButton: function() {
             var buttonsContainer = this.get('buttonsContainer');
 
