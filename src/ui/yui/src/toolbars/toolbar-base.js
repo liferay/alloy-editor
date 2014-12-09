@@ -183,6 +183,7 @@ YUI.add('toolbar-base', function(Y) {
             boundingBox = this.get('boundingBox');
 
             boundingBox.setStyle('visibility', 'hidden');
+            boundingBox.setStyle('opacity', '0');
             boundingBoxNode = boundingBox.getDOMNode();
 
             height = boundingBoxNode.offsetHeight;
@@ -207,6 +208,7 @@ YUI.add('toolbar-base', function(Y) {
 
             transition.left = xy[0] + 'px';
             transition.top = xy[1] + 'px';
+            transition.opacity = 1;
 
             boundingBox.setStyle('visibility', 'visible');
 
