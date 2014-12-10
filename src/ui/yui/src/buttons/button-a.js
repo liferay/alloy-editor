@@ -72,7 +72,8 @@ YUI.add('button-a', function(Y) {
              * @method updateUI
              */
             updateUI: function() {
-                var editor,
+                var dataType,
+                    editor,
                     elementPath,
                     iconLinkNode,
                     result;
@@ -84,7 +85,9 @@ YUI.add('button-a', function(Y) {
                 if (this._style) {
                     result = this._style.checkActive(elementPath, editor);
 
-                    this._button.set('pressed', !!result);
+                    dataType = elementPath.lastElement.data('type');
+
+                    this._button.set('pressed', !!result && !dataType);
                 }
 
                 iconLinkNode = this._button.get('boundingBox').one('i');
@@ -650,7 +653,7 @@ YUI.add('button-a', function(Y) {
 
                 link = this._ckLink.getFromSelection();
 
-                if (link) {
+                if (link && !link.data('type')) {
                     this._switchToLinkView(link);
                 } else {
                     this._switchToTextView();
