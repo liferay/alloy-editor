@@ -66,9 +66,20 @@
 }
 
 .alloy-editor-placeholder:empty:not(:focus):before {
-    content:attr(data-placeholder);
+    content: attr(data-placeholder);
 }
 
-alloy-editor-toolbar .alloy-editor-button.focus {
+.alloy-editor-toolbar .alloy-editor-button.focus {
     color: #44B6E0;
+}
+
+.tweet {
+    background-color: #F8F8F8;
+    padding: 0 5px;
+
+    .alloy-editor-icon-twitter {
+        display: inline-block;
+        font-size: 12px;
+        margin-left: 5px;
+    }
 }

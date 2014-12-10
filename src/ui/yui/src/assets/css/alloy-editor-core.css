@@ -65,6 +65,18 @@
 }
 
 /* line 72, ../sass/alloy-editor-core.scss */
-alloy-editor-toolbar .alloy-editor-button.focus {
+.alloy-editor-toolbar .alloy-editor-button.focus {
   color: #44B6E0;
+}
+
+/* line 76, ../sass/alloy-editor-core.scss */
+.tweet {
+  background-color: #f8f8f8;
+  padding: 0 5px;
+}
+/* line 80, ../sass/alloy-editor-core.scss */
+.tweet .alloy-editor-icon-twitter {
+  display: inline-block;
+  font-size: 12px;
+  margin-left: 5px;
 }
