@@ -68,6 +68,7 @@ YUI.add('button-twitter', function(Y) {
             var btnInst,
                 editor,
                 iconNode,
+                tweetAuthor,
                 tweetMessage,
                 tweetURL;
 
@@ -81,15 +82,23 @@ YUI.add('button-twitter', function(Y) {
 
             tweetURL = Lang.sub(tweetURL, {
                 text: encodeURIComponent(tweetMessage),
-                url: encodeURIComponent(this.get('tweetLink')),
-                via: encodeURIComponent(this.get('tweetAuthor'))
+                url: encodeURIComponent(this.get('tweetLink'))
             });
+
+            tweetAuthor = this.get('tweetAuthor');
+
+            if (tweetAuthor) {
+                tweetURL += Lang.sub(this.get('tweetURLVia'), {
+                    via: tweetAuthor
+                });
+            }
 
             if (btnInst.get('pressed')) {
                 this._ckLink.create(tweetURL, {
                     'class': 'tweet',
                     'data-cke-default-link': true,
-                    'data-type': this.get('dataType')
+                    'data-type': this.get('dataType'),
+                    'target': '_blank'
                 });
 
                 this._ckLink.getFromSelection().appendHtml(this.TPL_CONTENT);
@@ -178,12 +187,12 @@ YUI.add('button-twitter', function(Y) {
              * Specifies the @via value that will be added to the tweet message
              *
              * @attribute tweetAuthor
-             * @default 'Liferay'
+             * @default ''
              * @type String
              */
             tweetAuthor: {
                 validator: Lang.isString,
-                value: 'Liferay'
+                value: ''
             },
 
             /**
@@ -192,12 +201,12 @@ YUI.add('button-twitter', function(Y) {
              * message, just in 'href' attribute.
              *
              * @attribute tweetLink
-             * @default BLOG_ENTRY_LINK
+             * @default ''
              * @type String
              */
             tweetLink: {
                 validator: Lang.isString,
-                value: 'BLOG_ENTRY_LINK'
+                value: ''
             },
 
             /**
@@ -209,7 +218,20 @@ YUI.add('button-twitter', function(Y) {
              */
             tweetURL: {
                 validator: Lang.isString,
-                value: 'https://twitter.com/intent/tweet?text={text}&url={url}&via={via}'
+                value: 'https://twitter.com/intent/tweet?text={text}&url={url}'
+            },
+
+            /**
+             * Specifies the "via" parameter that can be added to the tweet.
+             * It must be appended to the tweetURL only if it is not empty.
+             *
+             * @attribute tweetURLVia
+             * @default '&via={via}'
+             * @type String
+             */
+            tweetURLVia: {
+                validator: Lang.isString,
+                value: '&via={via}'
             },
 
             /**
