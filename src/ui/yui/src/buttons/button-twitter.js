@@ -25,9 +25,6 @@ YUI.add('button-twitter', function(Y) {
             editor = this.get('host').get('editor');
 
             this._ckLink = new CKEDITOR.Link(editor);
-
-            Y.one(editor.element.$).delegate('click', this._onLinkClick,
-                            'a[href][data-type=' + dataType + ']', this, editor);
         },
 
         /**
@@ -68,7 +65,9 @@ YUI.add('button-twitter', function(Y) {
             var btnInst,
                 editor,
                 iconNode,
+                tooltip,
                 tweetAuthor,
+                tweetLink,
                 tweetMessage,
                 tweetURL;
 
@@ -78,25 +77,39 @@ YUI.add('button-twitter', function(Y) {
 
             tweetMessage = DOUBLE_QUOTE + editor.getSelection().getSelectedText() + DOUBLE_QUOTE;
 
+            tweetLink = this.get('tweetLink');
+
             tweetURL = this.get('tweetURL');
 
-            tweetURL = Lang.sub(tweetURL, {
-                text: encodeURIComponent(tweetMessage),
-                url: encodeURIComponent(this.get('tweetLink'))
-            });
+            tweetURL = Lang.sub(
+                tweetURL, {
+                    text: encodeURIComponent(tweetMessage),
+                    url: encodeURIComponent(tweetLink)
+                }
+            );
 
             tweetAuthor = this.get('tweetAuthor');
 
             if (tweetAuthor) {
-                tweetURL += Lang.sub(this.get('tweetURLVia'), {
-                    via: tweetAuthor
-                });
+                tweetURL += Lang.sub(
+                    this.get('tweetURLVia'), {
+                        via: tweetAuthor
+                    }
+                );
             }
+
+            tooltip =  Lang.sub(
+                this.TPL_TOOLTIP, {
+                    text: tweetMessage,
+                    url: tweetLink,
+                    via: tweetAuthor ? 'via @' + tweetAuthor : ''
+                }
+            );
 
             if (btnInst.get('pressed')) {
                 this._ckLink.create(tweetURL, {
                     'class': 'tweet',
-                    'data-cke-default-link': true,
+                    'data-cke-tooltip': tooltip,
                     'data-type': this.get('dataType'),
                     'target': '_blank'
                 });
@@ -112,35 +125,9 @@ YUI.add('button-twitter', function(Y) {
             }
         },
 
-        /**
-         * Handles the click event on a twitter link. If there is no text selection,
-         * it opens a browser window where the user can tweet directly the text.
-         *
-         * @method _onLinkClick
-         * @param {EventFacade} event An Event Facade object
-         * @protected
-         */
-        _onLinkClick: function(event) {
-            var editor,
-                selectedText,
-                tweetURL;
+        TPL_CONTENT: '<i class="alloy-editor-icon-twitter"></i>',
 
-            editor = this.get('host').get('editor');
-
-            selectedText = editor.getSelection().getSelectedText();
-
-            tweetURL = event.currentTarget.getAttribute('href');
-
-            if (!selectedText) {
-                window.open(
-                    tweetURL,
-                    this.get('windowTitle'),
-                    this.get('windowProperties')
-                );
-            }
-        },
-
-        TPL_CONTENT: '<i class="alloy-editor-icon-twitter"></i>'
+        TPL_TOOLTIP: '{text} {url} {via}'
     }, {
         ATTRS: {
             /**
@@ -232,32 +219,6 @@ YUI.add('button-twitter', function(Y) {
             tweetURLVia: {
                 validator: Lang.isString,
                 value: '&via={via}'
-            },
-
-            /**
-             * Specifies the properties of the browser window where the selected text
-             * will appear.
-             *
-             * @attribute windowProperties
-             * @default 'resizable,status,width=400,height=250'
-             * @type String
-             */
-            windowProperties: {
-                validator: Lang.isString,
-                value: 'resizable,status,width=400,height=250'
-            },
-
-            /**
-             * Specifies the title of the browser window where the selected text
-             * will appear.
-             *
-             * @attribute windowTitle
-             * @default ''
-             * @type String
-             */
-            windowTitle: {
-                validator: Lang.isString,
-                value: ''
             }
         },
 
