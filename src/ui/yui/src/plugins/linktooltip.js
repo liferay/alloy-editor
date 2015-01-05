@@ -221,7 +221,9 @@
                 _onLinkMouseEnter: function(event) {
                     var instance = this,
                         link,
+                        linkHref,
                         linkText,
+                        linkTooltip,
                         xy;
 
                     if (this._editMode) {
@@ -232,9 +234,13 @@
 
                     link = event.currentTarget;
 
-                    linkText = link.getAttribute('href');
+                    linkHref = link.getAttribute('href');
 
-                    this._linkPreview.setAttribute('href', linkText);
+                    linkTooltip = link.getAttribute('data-cke-tooltip');
+
+                    linkText = linkTooltip ? linkTooltip : linkHref;
+
+                    this._linkPreview.setAttribute('href', linkHref);
 
                     this._linkPreview.set('innerHTML', Y.Escape.html(linkText));
 
