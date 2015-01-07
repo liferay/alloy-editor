@@ -152,7 +152,7 @@
   border-radius: 4px;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
   opacity: 0.95;
-  background-color: #2f323d;
+  background-color: #2f323;
   padding: 2px 4px;
 }
 /* line 107, ../../../sass/skin/dark/alloy-editor-skin.scss */
@@ -167,4 +167,14 @@
 /* line 116, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-placeholder:empty:not(:focus) {
   background-color: #ffffe0;
+}
+
+/* line 120, ../../../sass/skin/dark/alloy-editor-skin.scss */
+.alloy-editor-toolbar .alloy-editor-button.focus {
+  color: #44b6e0;
+}
+
+/* line 124, ../../../sass/skin/dark/alloy-editor-skin.scss */
+.alloy-editor-twitter-link {
+  background-color: #f8f8f8;
 }

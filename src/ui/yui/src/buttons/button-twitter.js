@@ -10,14 +10,44 @@ YUI.add('button-twitter', function(Y) {
      */
     var Tweet = Y.Base.create('tweet', Y.Plugin.Base, [Y.ButtonBase], {
         /**
-         * Overwrites the default behaviour of ButtonBase's
-         * {{#crossLink "ButtonBase/updateUI:method"}}{{/crossLink}} method since
-         * this button does is not toggleable.
+         * Initializer lifecycle implementation for the ButtonTwitter class.
+         *
+         * @method initializer
+         * @protected
+         */
+        initializer: function() {
+            var dataType,
+                editor;
+
+            dataType = this.get('dataType');
+
+            editor = this.get('host').get('editor');
+
+            this._ckLink = new CKEDITOR.Link(editor);
+        },
+
+        /**
+         * Overwrites the default implementation from {{#crossLink "ButtonBase/updateUI:method"}}{{/crossLink}}.
+         * The button updates its "pressed" attribute and changes the UI accordingly to the presence or lack of
+         * link style and class of the selection.
          *
          * @method updateUI
          */
         updateUI: function() {
-            // NOP
+            var dataType,
+                editor,
+                elementPath,
+                result;
+
+            editor = this.get('host').get('editor');
+
+            elementPath = editor.elementPath();
+
+            result = this._style.checkActive(elementPath, editor);
+
+            dataType = elementPath.lastElement.data('type');
+
+            this._button.set('pressed', !!result && (dataType === this.get('dataType')));
         },
 
         /**
@@ -25,35 +55,103 @@ YUI.add('button-twitter', function(Y) {
          * user will be able to tweet directly the text.
          *
          * @method _onClick
+         * @param {EventFacade} event An Event Facade object
          * @protected
          */
-        _onClick: function() {
-            var editor,
+        _onClick: function(event) {
+            var btnInst,
+                editor,
+                iconNode,
+                tooltip,
+                tweetAuthor,
+                tweetLink,
+                tweetMessage,
                 tweetURL;
 
-            tweetURL = this.get('tweetURL');
+            btnInst = event.target;
 
             editor = this.get('host').get('editor');
 
-            tweetURL = Lang.sub(tweetURL, {
-                text: encodeURIComponent(editor.getSelection().getSelectedText()),
-                url: encodeURIComponent(Y.config.win.location)
-            });
+            if (btnInst.get('pressed')) {
+                tweetMessage = '"' + editor.getSelection().getSelectedText() + '"';
 
-            window.open(
-                tweetURL,
-                this.get('windowTitle'),
-                this.get('windowProperties')
-            );
+                tweetLink = this.get('tweetLink');
+
+                tweetURL = this.get('tweetURL');
+
+                tweetURL = Lang.sub(
+                    tweetURL, {
+                        text: encodeURIComponent(tweetMessage),
+                        url: encodeURIComponent(tweetLink)
+                    }
+                );
+
+                tweetAuthor = this.get('tweetAuthor');
+
+                if (tweetAuthor) {
+                    tweetURL += Lang.sub(
+                        this.get('tweetURLVia'), {
+                            via: tweetAuthor
+                        }
+                    );
+                }
+
+                tooltip = Lang.sub(
+                    this.TPL_TOOLTIP, {
+                        text: tweetMessage,
+                        url: tweetLink,
+                        via: tweetAuthor ? 'via @' + tweetAuthor : ''
+                    }
+                );
+
+                this._ckLink.create(tweetURL, {
+                    'class': 'alloy-editor-twitter-link',
+                    'data-cke-tooltip': tooltip,
+                    'data-type': this.get('dataType'),
+                    'target': '_blank'
+                });
+
+                this._ckLink.getFromSelection().appendHtml(this.TPL_CONTENT);
+            }
+            else {
+                iconNode = this._ckLink.getFromSelection().findOne('.alloy-editor-icon-twitter');
+
+                iconNode.remove();
+
+                this._ckLink.remove();
+            }
         },
 
-        TPL_CONTENT: '<i class="alloy-editor-icon-twitter"></i>'
+        TPL_CONTENT: '<i class="alloy-editor-icon-twitter"></i>',
+
+        TPL_TOOLTIP: '{text} {url} {via}'
     }, {
-        NAME: 'tweet',
-
-        NS: 'tweet',
-
         ATTRS: {
+            /**
+             * Specifies the value of data-type attribute
+             * that twitter link will have.
+             *
+             * @attribute dataType
+             * @default 'twitter-link'
+             * @type String
+             */
+            dataType: {
+                validator: Lang.isString,
+                value: 'twitter-link'
+            },
+
+            /**
+             * Specifies the element (style) which this button handles.
+             *
+             * @attribute element
+             * @default 'a'
+             * @type String
+             */
+            element: {
+                validator: Lang.isString,
+                value: 'a'
+            },
+
             /**
              * Collection of strings used to label elements of the button's UI.
              * ButtonTwitter provides string properties to specify the label of the button.
@@ -70,17 +168,29 @@ YUI.add('button-twitter', function(Y) {
             },
 
             /**
-             * Specifies if the button is toggleable, or not. ButtonTwitter will be not toggleable by default.
+             * Specifies the @via value that will be added to the tweet message
              *
-             * @attribute toggle
-             * @default false
-             * @type Boolean
-             * @writeOnce 'initOnly'
+             * @attribute tweetAuthor
+             * @default ''
+             * @type String
              */
-            toggle: {
-                validator: Lang.isBoolean,
-                value: false,
-                writeOnce: 'initOnly'
+            tweetAuthor: {
+                validator: Lang.isString,
+                value: ''
+            },
+
+            /**
+             * Specifies the link that will be added to the tweet text.
+             * If it is not a valid url, it will not appear in the tweet
+             * message, just in 'href' attribute.
+             *
+             * @attribute tweetLink
+             * @default ''
+             * @type String
+             */
+            tweetLink: {
+                validator: Lang.isString,
+                value: ''
             },
 
             /**
@@ -96,31 +206,22 @@ YUI.add('button-twitter', function(Y) {
             },
 
             /**
-             * Specifies the properties of the browser window where the selected text
-             * will appear.
+             * Specifies the "via" parameter that can be added to the tweet.
+             * It must be appended to the tweetURL only if it is not empty.
              *
-             * @attribute windowProperties
-             * @default 'resizable,status,width=400,height=250'
+             * @attribute tweetURLVia
+             * @default '&via={via}'
              * @type String
              */
-            windowProperties: {
+            tweetURLVia: {
                 validator: Lang.isString,
-                value: 'resizable,status,width=400,height=250'
-            },
-
-            /**
-             * Specifies the title of the browser window where the selected text
-             * will appear.
-             *
-             * @attribute windowTitle
-             * @default ''
-             * @type String
-             */
-            windowTitle: {
-                validator: Lang.isString,
-                value: ''
+                value: '&via={via}'
             }
-        }
+        },
+
+        NAME: 'tweet',
+
+        NS: 'tweet'
     });
 
     Y.ButtonTwitter = Tweet;
