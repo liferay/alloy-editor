@@ -147,3 +147,11 @@
 .alloy-editor-placeholder:empty:not(:focus) {
     background-color: #ffffe0;
 }
+
+.alloy-editor-toolbar .alloy-editor-button.focus {
+    color: #44b6e0;
+}
+
+.alloy-editor-twitter-link {
+    background-color: #f8f8f8;
+}

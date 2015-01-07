@@ -168,3 +168,13 @@
 .alloy-editor-placeholder:empty:not(:focus) {
   background-color: #ffffe0;
 }
+
+/* line 120, ../../../sass/skin/ocean/alloy-editor-skin.scss */
+.alloy-editor-toolbar .alloy-editor-button.focus {
+  color: #44b6e0;
+}
+
+/* line 124, ../../../sass/skin/ocean/alloy-editor-skin.scss */
+.alloy-editor-twitter-link {
+  background-color: #f8f8f8;
+}

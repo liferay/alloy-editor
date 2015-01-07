@@ -82,13 +82,11 @@ YUI.add('button-a', function(Y) {
 
                 elementPath = editor.elementPath();
 
-                if (this._style) {
-                    result = this._style.checkActive(elementPath, editor);
+                result = this._style.checkActive(elementPath, editor);
 
-                    dataType = elementPath.lastElement.data('type');
+                dataType = elementPath.lastElement.data('type');
 
-                    this._button.set('pressed', !!result && !dataType);
-                }
+                this._button.set('pressed', !!result && !dataType);
 
                 iconLinkNode = this._button.get('boundingBox').one('i');
 
