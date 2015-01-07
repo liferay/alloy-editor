@@ -101,7 +101,7 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
 .alloy-editor-tooltip-link {
     @include border-radius(4px);
     @include opacity(0.95);
-    background-color: #2f323d;
+    background-color: #2f323;
     padding: 2px 4px;
 
     .link-container {
@@ -115,4 +115,12 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
 
 .alloy-editor-placeholder:empty:not(:focus) {
     background-color: #ffffe0;
+}
+
+.alloy-editor-toolbar .alloy-editor-button.focus {
+    color: #44b6e0;
+}
+
+.alloy-editor-twitter-link {
+    background-color: #f8f8f8;
 }

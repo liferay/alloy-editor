@@ -1,8 +1,7 @@
 YUI.add('button-twitter', function(Y) {
     'use strict';
 
-    var DOUBLE_QUOTE = '"',
-        Lang = Y.Lang;
+    var Lang = Y.Lang;
 
     /**
      * The ButtonTwitter class provides functionality for sending tweets based on the selected text.
@@ -44,13 +43,11 @@ YUI.add('button-twitter', function(Y) {
 
             elementPath = editor.elementPath();
 
-            if (this._style) {
-                result = this._style.checkActive(elementPath, editor);
+            result = this._style.checkActive(elementPath, editor);
 
-                dataType = elementPath.lastElement.data('type');
+            dataType = elementPath.lastElement.data('type');
 
-                this._button.set('pressed', !!result && (dataType === this.get('dataType')));
-            }
+            this._button.set('pressed', !!result && (dataType === this.get('dataType')));
         },
 
         /**
@@ -75,40 +72,40 @@ YUI.add('button-twitter', function(Y) {
 
             editor = this.get('host').get('editor');
 
-            tweetMessage = DOUBLE_QUOTE + editor.getSelection().getSelectedText() + DOUBLE_QUOTE;
+            if (btnInst.get('pressed')) {
+                tweetMessage = '"' + editor.getSelection().getSelectedText() + '"';
 
-            tweetLink = this.get('tweetLink');
+                tweetLink = this.get('tweetLink');
 
-            tweetURL = this.get('tweetURL');
+                tweetURL = this.get('tweetURL');
 
-            tweetURL = Lang.sub(
-                tweetURL, {
-                    text: encodeURIComponent(tweetMessage),
-                    url: encodeURIComponent(tweetLink)
-                }
-            );
-
-            tweetAuthor = this.get('tweetAuthor');
-
-            if (tweetAuthor) {
-                tweetURL += Lang.sub(
-                    this.get('tweetURLVia'), {
-                        via: tweetAuthor
+                tweetURL = Lang.sub(
+                    tweetURL, {
+                        text: encodeURIComponent(tweetMessage),
+                        url: encodeURIComponent(tweetLink)
                     }
                 );
-            }
 
-            tooltip =  Lang.sub(
-                this.TPL_TOOLTIP, {
-                    text: tweetMessage,
-                    url: tweetLink,
-                    via: tweetAuthor ? 'via @' + tweetAuthor : ''
+                tweetAuthor = this.get('tweetAuthor');
+
+                if (tweetAuthor) {
+                    tweetURL += Lang.sub(
+                        this.get('tweetURLVia'), {
+                            via: tweetAuthor
+                        }
+                    );
                 }
-            );
 
-            if (btnInst.get('pressed')) {
+                tooltip = Lang.sub(
+                    this.TPL_TOOLTIP, {
+                        text: tweetMessage,
+                        url: tweetLink,
+                        via: tweetAuthor ? 'via @' + tweetAuthor : ''
+                    }
+                );
+
                 this._ckLink.create(tweetURL, {
-                    'class': 'tweet',
+                    'class': 'alloy-editor-twitter-link',
                     'data-cke-tooltip': tooltip,
                     'data-type': this.get('dataType'),
                     'target': '_blank'

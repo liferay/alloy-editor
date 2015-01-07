@@ -164,3 +164,13 @@
 .alloy-editor-placeholder:empty:not(:focus) {
   background-color: #ffffe0;
 }
+
+/* line 151, ../../../sass/skin/light/alloy-editor-skin.scss */
+.alloy-editor-toolbar .alloy-editor-button.focus {
+  color: #44b6e0;
+}
+
+/* line 155, ../../../sass/skin/light/alloy-editor-skin.scss */
+.alloy-editor-twitter-link {
+  background-color: #f8f8f8;
+}
