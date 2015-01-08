@@ -625,11 +625,6 @@ YUI.add('button-a', function(Y) {
 
                 linkInput.set('value', link.$.href);
 
-                setTimeout(function() {
-                    linkInput.select();
-                    linkInput.focus();
-                }, 0);
-
                 this._link = link;
 
                 this._attachToolbarActiveHook();
