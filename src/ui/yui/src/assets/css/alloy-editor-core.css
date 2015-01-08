@@ -69,8 +69,9 @@
   padding: 0 5px;
 }
 /* line 75, ../sass/alloy-editor-core.scss */
-.alloy-editor-twitter-link .alloy-editor-icon-twitter {
-  display: inline-block;
+.alloy-editor-twitter-link:after {
+  content: '\e604';
+  font-family: alloyeditor;
   font-size: 12px;
   margin-left: 5px;
 }

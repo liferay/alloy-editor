@@ -72,8 +72,9 @@
 .alloy-editor-twitter-link {
     padding: 0 5px;
 
-    .alloy-editor-icon-twitter {
-        display: inline-block;
+    &:after {
+        content: '\e604';
+        font-family: alloyeditor;
         font-size: 12px;
         margin-left: 5px;
     }

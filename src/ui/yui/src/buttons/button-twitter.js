@@ -61,7 +61,6 @@ YUI.add('button-twitter', function(Y) {
         _onClick: function(event) {
             var btnInst,
                 editor,
-                iconNode,
                 tooltip,
                 tweetAuthor,
                 tweetLink,
@@ -110,19 +109,13 @@ YUI.add('button-twitter', function(Y) {
                     'data-type': this.get('dataType'),
                     'target': '_blank'
                 });
-
-                this._ckLink.getFromSelection().appendHtml(this.TPL_CONTENT);
             }
             else {
-                iconNode = this._ckLink.getFromSelection().findOne('.alloy-editor-icon-twitter');
-
-                iconNode.remove();
-
                 this._ckLink.remove();
             }
         },
 
-        TPL_CONTENT: '<i class="alloy-editor-icon-twitter"></i>',
+        TPL_CONTENT: '<span class="alloy-editor-icon-twitter"></span>',
 
         TPL_TOOLTIP: '{text} {url} {via}'
     }, {
