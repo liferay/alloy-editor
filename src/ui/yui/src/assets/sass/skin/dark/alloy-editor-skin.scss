@@ -101,7 +101,7 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
 .alloy-editor-tooltip-link {
     @include border-radius(4px);
     @include opacity(0.95);
-    background-color: #2f323;
+    background-color: #2f323d;
     padding: 2px 4px;
 
     .link-container {

@@ -55,12 +55,12 @@
 
 /* line 25, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar .alloy-editor-button {
-  -webkit-box-shadow: none;
   -moz-box-shadow: none;
+  -webkit-box-shadow: none;
   box-shadow: none;
-  -webkit-transition: color 0.1s ease-out;
   -moz-transition: color 0.1s ease-out;
   -o-transition: color 0.1s ease-out;
+  -webkit-transition: color 0.1s ease-out;
   transition: color 0.1s ease-out;
   background-color: #2f323d;
   background-image: none;
@@ -75,8 +75,8 @@
 }
 /* line 39, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar .alloy-editor-button.yui3-button-selected, .alloy-editor-toolbar .alloy-editor-button.yui3-button-active, .alloy-editor-toolbar .alloy-editor-button.yui3-button:active {
-  -webkit-box-shadow: none;
   -moz-box-shadow: none;
+  -webkit-box-shadow: none;
   box-shadow: none;
   background-color: #2f323d;
   color: #44b6e0;
@@ -88,10 +88,8 @@
 
 /* line 54, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-styles .link-wrapper {
-  -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
+  -webkit-border-radius: 4px;
   border-radius: 4px;
   background-color: #2f323d;
   height: 40px;
@@ -118,8 +116,8 @@
 }
 /* line 79, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link.yui3-button[disabled], .alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link.yui3-button-disabled {
-  -webkit-box-shadow: none;
   -moz-box-shadow: none;
+  -webkit-box-shadow: none;
   box-shadow: none;
   color: #fff;
   opacity: 1;
@@ -127,16 +125,14 @@
 
 /* line 89, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-add-trigger {
-  -webkit-box-shadow: none;
   -moz-box-shadow: none;
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 /* line 92, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-add-trigger .alloy-editor-button {
-  -webkit-border-radius: 13px;
   -moz-border-radius: 13px;
-  -ms-border-radius: 13px;
-  -o-border-radius: 13px;
+  -webkit-border-radius: 13px;
   border-radius: 13px;
   height: 26px;
   padding: 6px;
@@ -145,14 +141,12 @@
 
 /* line 101, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-tooltip-link {
-  -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
+  -webkit-border-radius: 4px;
   border-radius: 4px;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
   opacity: 0.95;
-  background-color: #2f323;
+  background-color: #2f323d;
   padding: 2px 4px;
 }
 /* line 107, ../../../sass/skin/dark/alloy-editor-skin.scss */
