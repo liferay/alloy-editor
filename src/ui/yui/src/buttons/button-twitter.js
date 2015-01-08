@@ -115,7 +115,7 @@ YUI.add('button-twitter', function(Y) {
             }
         },
 
-        TPL_CONTENT: '<span class="alloy-editor-icon-twitter"></span>',
+        TPL_CONTENT: '<i class="alloy-editor-icon-twitter"></i>',
 
         TPL_TOOLTIP: '{text} {url} {via}'
     }, {
