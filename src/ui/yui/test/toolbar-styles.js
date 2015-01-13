@@ -3,6 +3,8 @@
 var assert = chai.assert;
 
 describe('ToolbarStyles', function() {
+    this.timeout(35000);
+
     before(function(done) {
         var self = this;
 
