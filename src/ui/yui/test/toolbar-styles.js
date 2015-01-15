@@ -37,46 +37,61 @@ describe('ToolbarStyles', function() {
     });
 
     it('should make a text selection bold', function(done) {
-        testButton.call(this, {
+        testButtonAction.call(this, {
             buttonSelector: '.alloy-editor-button .alloy-editor-icon-bold',
             expected: '<p>There should be <strong>selection</strong> made bold.</p>',
-            html: 'There should be {selection} made bold.'
+            html: 'There should be {selection} made bold.',
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            }
         }, done);
     });
 
     it('should make a text selection italic', function(done) {
-        testButton.call(this, {
+        testButtonAction.call(this, {
             buttonSelector: '.alloy-editor-button .alloy-editor-icon-italic',
             expected: '<p>There should be <em>selection</em> made italic.</p>',
-            html: 'There should be {selection} made italic.'
+            html: 'There should be {selection} made italic.',
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            }
         }, done);
     });
 
     it('should make a text selection underline', function(done) {
-        testButton.call(this, {
+        testButtonAction.call(this, {
             buttonSelector: '.alloy-editor-button .alloy-editor-icon-underline',
             expected: '<p>There should be <u>selection</u> made underline.</p>',
-            html: 'There should be {selection} made underline.'
+            html: 'There should be {selection} made underline.',
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            }
         }, done);
     });
 
     it('should make a text selection h1', function(done) {
-        testButton.call(this, {
+        testButtonAction.call(this, {
             buttonSelector: '.alloy-editor-button .alloy-editor-icon-h1',
             expected: '<h1>There should be selection made h1.</h1>',
-            html: 'There should be {selection} made h1.'
+            html: 'There should be {selection} made h1.',
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            }
         }, done);
     });
 
     it('should make a text selection h2', function(done) {
-        testButton.call(this, {
+        testButtonAction.call(this, {
             buttonSelector: '.alloy-editor-button .alloy-editor-icon-h2',
             expected: '<h2>There should be selection made h2.</h2>',
-            html: 'There should be {selection} made h2.'
+            html: 'There should be {selection} made h2.',
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            }
         }, done);
     });
 
-    function testButton(config, callback) {
+    function testButtonAction(config, callback) {
         var self = this;
 
         bender.tools.selection.setWithHtml(self.nativeEditor, config.html);
@@ -86,9 +101,15 @@ describe('ToolbarStyles', function() {
         setTimeout(function() {
             var button = $(config.buttonSelector);
 
+            if (config.beforeAction) {
+                config.beforeAction.call(self, button);
+            }
+
             happen.click(button[0]);
 
-            assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            if (config.afterAction) {
+                config.afterAction.call(self, button);
+            }
 
             var data = bender.tools.getData(self.nativeEditor, {
                 fixHtml: false,
@@ -96,6 +117,10 @@ describe('ToolbarStyles', function() {
             });
 
             assert.strictEqual(data, config.expected);
+
+            if (config.beforeCallback) {
+                config.beforeCallback.call(self, button);
+            }
 
             callback();
         }, 150);
