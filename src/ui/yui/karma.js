@@ -29,8 +29,8 @@ module.exports = function(config) {
 
         {pattern: 'dist/alloy-editor-*/alloy-editor/styles.js', included: true, watched: false},
         {pattern: 'dist/alloy-editor-*/alloy-editor/config.js', included: true, watched: false},
-        {pattern: 'dist/alloy-editor-*/alloy-editor/skins/moono/editor.css', included: true, watched: false},
-        {pattern: 'dist/alloy-editor-*/alloy-editor/lang/en.js', included: true, watched: false},
+        {pattern: 'dist/alloy-editor-*/alloy-editor/skins/moono/*.css', included: true, watched: false},
+        {pattern: 'dist/alloy-editor-*/alloy-editor/lang/*.js', included: true, watched: false},
         {pattern: 'dist/alloy-editor-*/alloy-editor/yui-config.js', included: true, watched: false},
         {pattern: 'dist/alloy-editor-*/alloy-editor/plugins/*.js', included: true, watched: false},
         {pattern: 'dist/alloy-editor-*/alloy-editor/toolbars/*.js', included: true, watched: false},
