@@ -92,10 +92,14 @@
          * @method remove
          */
         remove: function(link) {
-            var style;
+            var editor,
+                selection,
+                style;
+
+            editor = this._editor;
 
             if (link) {
-                link.remove(this._editor);
+                link.remove(editor);
             } else {
                 style = link || new CKEDITOR.style({
                     alwaysRemoveElement: 1,
@@ -103,7 +107,14 @@
                     type: CKEDITOR.STYLE_INLINE
                 });
 
-                this._editor.removeStyle(style);
+                // 'removeStyle()' removes the style from the editor's current selection.
+                //  We need to force the selection to be the whole link element
+                //  to remove it properly.
+
+                selection = editor.getSelection();
+                selection.selectElement(selection.getStartElement());
+
+                editor.removeStyle(style);
             }
         },
 
