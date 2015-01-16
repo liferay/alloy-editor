@@ -91,6 +91,58 @@ describe('ToolbarStyles', function() {
         }, done);
     });
 
+    it('should remove a link selection', function(done) {
+        testButtonAction.call(this, {
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-unlink',
+            expected: '<p>The link should be selection removed completely.</p>',
+            html: 'The link should be <a>{selection}</a> removed completely.',
+            beforeAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            },
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), false);
+            }
+        }, done);
+
+        testButtonAction.call(this, {
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-unlink',
+            expected: '<p>The link should be selection removed completely.</p>',
+            html: 'The link <a>should be {selection} removed</a> completely.',
+            beforeAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            },
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), false);
+            }
+        }, done);
+    });
+
+    it('should remove a twitter link selection', function(done) {
+        testButtonAction.call(this, {
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-twitter',
+            expected: '<p>The link should be selection removed completely.</p>',
+            html: 'The link should be <a data-type="twitter-link">{selection}</a> removed completely.',
+            beforeAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            },
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), false);
+            }
+        }, done);
+
+        testButtonAction.call(this, {
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-twitter',
+            expected: '<p>The link should be selection removed completely.</p>',
+            html: 'The link <a data-type="twitter-link">should be {selection} removed</a> completely.',
+            beforeAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            },
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), false);
+            }
+        }, done);
+    });
+
     function testButtonAction(config, callback) {
         var self = this;
 
