@@ -47,6 +47,20 @@ describe('ToolbarStyles', function() {
         }, done);
     });
 
+    it('should remove bold style to a text selection', function(done) {
+        testButtonAction.call(this, {
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-bold',
+            expected: '<p>A bold selection should be removed.</p>',
+            html: 'A bold <strong>{selection}</strong> should be removed.',
+            beforeAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            },
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), false);
+            }
+        }, done);
+    });
+
     it('should make a text selection italic', function(done) {
         testButtonAction.call(this, {
             buttonSelector: '.alloy-editor-button .alloy-editor-icon-italic',
@@ -54,6 +68,20 @@ describe('ToolbarStyles', function() {
             html: 'There should be {selection} made italic.',
             afterAction: function(button) {
                 assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            }
+        }, done);
+    });
+
+    it('should remove italic style to a text selection', function(done) {
+        testButtonAction.call(this, {
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-italic',
+            expected: '<p>An italic selection should be removed.</p>',
+            html: 'An italic <em>{selection}</em> should be removed.',
+            beforeAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            },
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), false);
             }
         }, done);
     });
@@ -69,6 +97,20 @@ describe('ToolbarStyles', function() {
         }, done);
     });
 
+    it('should remove underline style to a text selection', function(done) {
+        testButtonAction.call(this, {
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-underline',
+            expected: '<p>An underline selection should be removed.</p>',
+            html: 'An underline <u>{selection}</u> should be removed.',
+            beforeAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            },
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), false);
+            }
+        }, done);
+    });
+
     it('should make a text selection h1', function(done) {
         testButtonAction.call(this, {
             buttonSelector: '.alloy-editor-button .alloy-editor-icon-h1',
@@ -80,6 +122,20 @@ describe('ToolbarStyles', function() {
         }, done);
     });
 
+    it('should remove h1 style to a text selection', function(done) {
+        testButtonAction.call(this, {
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-h1',
+            expected: '<p>A h1 selection should be removed.</p>',
+            html: '<h1>A h1 {selection} should be removed.</h1>',
+            beforeAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            },
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), false);
+            }
+        }, done);
+    });
+
     it('should make a text selection h2', function(done) {
         testButtonAction.call(this, {
             buttonSelector: '.alloy-editor-button .alloy-editor-icon-h2',
@@ -87,6 +143,20 @@ describe('ToolbarStyles', function() {
             html: 'There should be {selection} made h2.',
             afterAction: function(button) {
                 assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            }
+        }, done);
+    });
+
+    it('should remove h2 style to a text selection', function(done) {
+        testButtonAction.call(this, {
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-h2',
+            expected: '<p>A h2 selection should be removed.</p>',
+            html: '<h2>A h2 {selection} should be removed.</h2>',
+            beforeAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), true);
+            },
+            afterAction: function(button) {
+                assert.strictEqual(button.parent().hasClass('yui3-button-selected'), false);
             }
         }, done);
     });
