@@ -10,7 +10,7 @@ var defaultConfig = {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['chai', 'mocha', 'sinon'],
+    frameworks: ['mocha', 'sinon'],
 
     // list of files / patterns to load in the browser
     files: [{
@@ -31,8 +31,11 @@ var defaultConfig = {
             watched: false
         },
 
+        'bower_components/node-assert/assert.js',
+        'bower_components/assertive-chai/assertive-chai.js',
+
         'src/ui/yui/test/vendor/happen.js',
-        'src/ui/yui/test/vendor/zepto.js',
+        'src/ui/yui/test/vendor/jquery-1.11.2.min.js',
         'http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js',
 
         {
