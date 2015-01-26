@@ -36,6 +36,12 @@ describe('ToolbarStyles', function() {
         });
     });
 
+    after(function(done) {
+        this.editor.destroy();
+
+        done();
+    });
+
     it('should make a text selection bold', function(done) {
         testButtonAction.call(this, {
             buttonSelector: '.alloy-editor-button .alloy-editor-icon-bold',
