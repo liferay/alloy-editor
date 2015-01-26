@@ -149,6 +149,26 @@ describe('ToolbarStyles', function() {
         }, done);
     });
 
+    it ('should show the styles toolbar after a text selection', function(done) {
+        var self = this;
+
+        testToolbarVisible.call(this, {
+            expected: true,
+            html: 'The following test should be {selected}',
+            selector: '.alloy-editor-toolbar.alloy-editor-toolbar-styles'
+        }, done);
+    });
+
+    it ('should not show the styles toolbar after an image selection', function(done) {
+        var self = this;
+
+        testToolbarVisible.call(this, {
+            expected: false,
+            html: 'The following image {<img src=""></img>} should be selected',
+            selector: '.alloy-editor-toolbar.alloy-editor-toolbar-styles'
+        }, done);
+    });
+
     function testButtonAction(config, callback) {
         var self = this;
 
@@ -179,6 +199,20 @@ describe('ToolbarStyles', function() {
             if (config.beforeCallback) {
                 config.beforeCallback.call(self, button);
             }
+
+            callback();
+        }, 150);
+    }
+
+    function testToolbarVisible(config, callback) {
+        var self = this;
+
+        bender.tools.selection.setWithHtml(self.nativeEditor, config.html);
+
+        happen.mouseup(document.getElementById('editable'));
+
+        setTimeout(function() {
+            assert.strictEqual($(config.selector).is(':visible'), config.expected);
 
             callback();
         }, 150);
