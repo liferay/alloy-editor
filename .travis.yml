@@ -1,17 +1,13 @@
 language: node_js
 node_js:
-- "0.10"
-- "0.8"
-
+- '0.10'
 before_script:
-  - 'gem update --system'
-  - 'gem install sass'
-  - 'gem install compass'
-
+- gem update --system
+- gem install sass
+- gem install compass
 env:
   global:
-    - secure: HZWsDht46lHKOVo6qX45TZd64thlnjlet6xJ7/4ZKrO4sTLSKxjU2BCaFA51CrLvW0Syy1VFXIleEGN5IBTUKinEayhJXPl9OL2Vc1o/UTPLXXoqtqpO5HeoR1MfxQAr7VV37KhPWEao0NESYBpf3BR5bBQnPAltwellc7SQVtY=
-    - secure: FCb1Vr9+uTsb62dtWA+/gFd3dOWhdoz94+0Y4QqipRAwSU3UydTKdiGZmJ8dzPjMcZmRRuOVcTsFPwQgQfkNOg+lWdwU3kHbhGBCOlD3hIQ7cui72n4KT57AcvsS1d1gCDmtHarbNE/yuYpKB/LeBMaE3NCxswKgTThOrFGKDWs=
-
+  - secure: RYKefsqSJACQJVHcMoA6cz6+lZYbkgoI2wAa+qK5qPFoUQoMRbNVO0tjjBXgc65dLh/r0mnb17ES4xqbsp9yXfknkumHBpDePT6sY4m/rJWdZsW3fs4IFGxyTsYz5TNMmypDyOcL7zgc24e1DaaBiR2kT+UlU25zfUIZo2fzrZs=
+  - secure: m3DoknoFa36DuFarOpXoEwcKidGkYFQfRqeG/CqBHB7l3DOSZUrauvAnOjl8qj+HuEy6vIsWB2Dyk4VtPL2+RJW0Z/wIvfLQJsPtdNyvBBTc3iCj3cXZeXBhG+0LcH8WeJH8PNBNfVmXnGkAyijbcdA5iD2mTcRFHWkK2I8TXCI=
 addons:
   sauce_connect: true
