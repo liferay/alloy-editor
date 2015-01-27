@@ -8,15 +8,27 @@
 }
 
 .alloy-editor-toolbar {
-     .alloy-editor-button {
-        padding: 10px 10px 8px 10px;
+    padding: 10px;
+
+    .alloy-editor-button {
+        height: 24px;
+        margin: 0 10px;
         outline: none;
-        height: 36px;
+        padding: 0;
+        width: 24px;
+
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }
 
 .alloy-editor-toolbar-styles {
     .link-wrapper {
+        .alloy-editor-button {
+            margin-left: 10px;
+        }
+
         .input-container {
             display: inline-block;
             padding: 2px;
@@ -41,6 +53,14 @@
                 }
             }
         }
+    }
+}
+
+.alloy-editor-toolbar-add-trigger {
+    .alloy-editor-button {
+        height: 24px;
+        padding: 5px;
+        width: 24px;
     }
 }
 
