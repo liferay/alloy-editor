@@ -9,3 +9,5 @@ Look for documentation and examples on [http://alloyeditor.com/](http://alloyedi
 
 ### License
 [LGPL License](LICENSE.md)
+
+[![Build Status](https://travis-ci.org/liferay/alloy-editor.svg)](https://travis-ci.org/liferay/alloy-editor)
