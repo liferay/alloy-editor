@@ -11,50 +11,52 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
     .alloyeditor-add-toolbar {
         ::#{$prefix}selection {
             @include text-shadow(none);
-            background: #f3dada !important;
+            /*
+             * background-color: #f3205b
+             * opacity: 0.2
+             */
+            background-color: rgba(243, 32, 91, 0.2) !important;
         }
     }
 }
 
 .alloy-editor-toolbar {
     @include opacity(0.95);
-    border: none;
+    @include border-radius(4px);
+    background-color: #32a8e6;
 }
 
 .alloy-editor-toolbar {
     .alloy-editor-button {
         @include box-shadow(none);
-        @include transition(color 0.1s ease-out);
-        background-color: #215ec0;
+        @include border-radius(0);
+        background-color: transparent;
         background-image: none;
         color: #fff;
-        height: 40px;
-        width: 40px;
 
         &:hover, &:focus {
             background-image: none;
-            color: #41bdea;
+            color: #2b4259;
+            @include opacity(0.4);
         }
 
         &.yui3-button-selected, &.yui3-button-active, &.yui3-button:active {
             @include box-shadow(none);
-            background-color: #215ec0;
-            color: #41bdea;
-        }
-
-        &.yui3-button-selected, &.yui3-button-active, &.yui3-button:active {
-            &:hover {
-                background-color: #215ec0;
-            }
+            /*
+             * background-color: #2b4259
+             * opacity: 0.4
+             *
+             * Child elements inherit parent opacity attribute. We need to convert to rgba
+             * because rgba affects only to the background-color.
+             * In this way we avoid setting opacity on the whole button.
+             */
+            background-color: rgba(43, 66, 89, 0.4);
         }
     }
 }
 
 .alloy-editor-toolbar-styles {
     .link-wrapper {
-        @include border-radius(4px);
-        background-color: #215ec0;
-        height: 40px;
         margin-left: 5px;
 
         input {
@@ -64,11 +66,10 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
         .input-container {
             background-color: #fff;
             color: #2f232d;
-            margin: 4px;
-            padding: 5px;
 
             .input-clear {
-                color: #b1b1b1;
+                color: #2b4259;
+                @include opacity(0.4);
             }
         }
 
@@ -88,20 +89,26 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
 
 .alloy-editor-toolbar-add-trigger {
     @include box-shadow(none);
+    background-color: transparent;
 
     .alloy-editor-button {
         @include border-radius(13px);
+        background-color: #32a8e6;
 
-        height: 26px;
-        padding: 6px;
-        width: 26px;
+        &:hover {
+            /*
+             * background-color: #32a8e6
+             * opacity: 0.7
+             */
+            background-color: rgba(50, 168, 230, 0.7);
+        }
     }
 }
 
 .alloy-editor-tooltip-link {
     @include border-radius(4px);
     @include opacity(0.95);
-    background-color: #215ec0;
+    background-color: #32a8e6;
     padding: 2px 4px;
 
     .link-container {
@@ -115,10 +122,6 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
 
 .alloy-editor-placeholder:empty:not(:focus) {
     background-color: #ffffe0;
-}
-
-.alloy-editor-toolbar .alloy-editor-button.focus {
-    color: #44b6e0;
 }
 
 .alloy-editor-twitter-link {
