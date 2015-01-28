@@ -23,6 +23,11 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
+.alloy-editor-icon-add {
+	font-size: 14px;
+	line-height: 1;
+}
 <% _.each(glyphs, function(glyph) { %>
 .alloy-editor-icon-<%= glyph.name %>:before {
 	content: "\<%= glyph.codepoint.toString(16).toUpperCase() %>";

@@ -50,6 +50,10 @@
 
                 i {
                     cursor: pointer;
+                    font-size: 25px;
+                    line-height: 0.7;
+                    right: 10px;
+                    position: relative;
                 }
             }
         }
@@ -93,7 +97,7 @@
     padding: 0 5px;
 
     &:after {
-        content: '\e604';
+        content: '\E013';
         font-family: alloyeditor;
         font-size: 12px;
         margin-left: 5px;
