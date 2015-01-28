@@ -43,6 +43,10 @@
 }
 .alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear i {
   cursor: pointer;
+  font-size: 25px;
+  line-height: 0.7;
+  right: 10px;
+  position: relative;
 }
 
 .alloy-editor-toolbar-add-trigger .alloy-editor-button {
@@ -73,7 +77,7 @@
   padding: 0 5px;
 }
 .alloy-editor-twitter-link:after {
-  content: '\e604';
+  content: '\E013';
   font-family: alloyeditor;
   font-size: 12px;
   margin-left: 5px;

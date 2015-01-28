@@ -11,25 +11,29 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
     .alloyeditor-add-toolbar {
         ::#{$prefix}selection {
             @include text-shadow(none);
-            background: #f3dada !important;
+            /*
+             * background-color: #f3205b
+             * opacity: 0.2
+             */
+            background-color: rgba(243, 32, 91, 0.2) !important;
         }
     }
 }
 
 .alloy-editor-toolbar {
     @include opacity(0.95);
-    border: none;
+    @include border-radius(4px);
+    background-color: #2f323d;
 }
 
 .alloy-editor-toolbar {
     .alloy-editor-button {
         @include box-shadow(none);
+        @include border-radius(0);
         @include transition(color 0.1s ease-out);
-        background-color: #2f323d;
+        background-color: transparent;
         background-image: none;
         color: #fff;
-        height: 40px;
-        width: 40px;
 
         &:hover, &:focus {
             background-image: none;
@@ -54,7 +58,6 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
     .link-wrapper {
         @include border-radius(4px);
         background-color: #2f323d;
-        height: 40px;
         margin-left: 5px;
 
         input {
@@ -64,8 +67,6 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
         .input-container {
             background-color: #fff;
             color: #2f232d;
-            margin: 4px;
-            padding: 5px;
 
             .input-clear {
                 color: #b1b1b1;
@@ -88,13 +89,11 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
 
 .alloy-editor-toolbar-add-trigger {
     @include box-shadow(none);
+    background-color: transparent;
 
     .alloy-editor-button {
         @include border-radius(13px);
-
-        height: 26px;
-        padding: 6px;
-        width: 26px;
+        background-color: #2f323d;
     }
 }
 
@@ -115,10 +114,6 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
 
 .alloy-editor-placeholder:empty:not(:focus) {
     background-color: #ffffe0;
-}
-
-.alloy-editor-toolbar .alloy-editor-button.focus {
-    color: #44b6e0;
 }
 
 .alloy-editor-twitter-link {

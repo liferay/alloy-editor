@@ -700,7 +700,7 @@ YUI.add('button-a', function(Y) {
                 '</div>' +
                 '<div class="pull-right btn-group show-buttons-container">' +
                 '<button aria-label="{back}" class="alloy-editor-button btn btn-default switch-to-edit">' +
-                '<i class="alloy-editor-icon-remove"></i></button>' +
+                '<i class="alloy-editor-icon-close"></i></button>' +
                 '</div>' +
                 '</div>'
         }, {
