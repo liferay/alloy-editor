@@ -7,7 +7,7 @@ before_script:
 - gem install compass
 env:
   global:
-  - secure: BnZaphWMP4nNVhYa8e40fPtRKoWUh+ScuCCpVy63wYfp2EM9+P+UYGwATgr8SOdHECCNxwrKL0m3excw85JlpCwiAWoVJwUjA48ytavDM/2NvdjZ6QYdNSvLSg0mF5OzX8Rtzjf06l6B+zuXwguFbuaCl6epGEx6gMdzL6nAwRc=
-  - secure: mA/tvHfWb/KyQLHRDeY261DzyJcx8b+o5Esbcvn1AxC6Tc5RpF9Jmn8NrVSslqkF7IHY3gFIGJ2cuXXpk80diIYauUlnJDCDRP8nI6Dnkh09anmErcAI6jDIxhT+FBW+63LLGJEwwjsKdaDvU65Dt6zMVznrPYzRFMtTj+njhqM=
+  - secure: YF40rlP9kLceuS4RVIycVARokIrY5MLdVKpYakbAqwDye+fuExIfYVz4lZp3uGoG0+O/Fe97yAuVHrfFemH0/tEjts2a1/nfl05ueZDXbHzUSBW1/i/9Hu/k2EhdjExaesq0xo6Ap9Loicia7X0qaMoavNa4DT1Py9Exuq6kj80=
+  - secure: bM6iWiz4P1tMG1vphHjIenuB7MuU3VGSPpOFri69ESnxQX+O2bLRzV1nZIpoKOiE9DS+8bGMCcFr3OLaahmhpBMtdhTvZGkcIGVbX0Egm56/QF0g+2gtBSHomEpFicIy+UUTlqkcs8wuth7xmA+AQUEr/IMz3O4pnatrPbjVzwg=
 addons:
   sauce_connect: true
