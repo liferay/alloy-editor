@@ -16,8 +16,6 @@
   -moz-box-shadow: none;
   box-shadow: none;
   background-color: transparent;
-  /*border-left: 1px solid #e1e1e1;
-  border-right: 1px solid #e1e1e1;*/
   color: #999da0;
 }
 .alloy-editor-toolbar .alloy-editor-button:hover, .alloy-editor-toolbar .alloy-editor-button:focus {
@@ -50,20 +48,17 @@
 .alloy-editor-toolbar .alloy-editor-button.yui3-button-selected:hover, .alloy-editor-toolbar .alloy-editor-button.yui3-button-active:hover, .alloy-editor-toolbar .alloy-editor-button.yui3-button:active:hover {
   background-color: #f7f7f7;
 }
+.alloy-editor-toolbar .alloy-editor-button.yui3-button[disabled], .alloy-editor-toolbar .alloy-editor-button.yui3-button-disabled {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+  color: #fff;
+}
 
 .alloy-editor-toolbar-styles .link-wrapper {
   margin-left: 5px;
-}
-.alloy-editor-toolbar-styles .link-wrapper .switch-to-edit {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  -o-border-radius: 0;
-  border-radius: 0;
-  border-right: 1px solid #e1e1e1;
-}
-.alloy-editor-toolbar-styles .link-wrapper .switch-to-edit:last-child:active {
-  border-right: 1px solid #e1e1e1;
 }
 .alloy-editor-toolbar-styles .link-wrapper input {
   border: none;
@@ -76,24 +71,6 @@
 }
 .alloy-editor-toolbar-styles .link-wrapper .input-container {
   background-color: white;
-}
-.alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link {
-  -webkit-border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-  -ms-border-radius: 0 5px 5px 0;
-  -o-border-radius: 0 5px 5px 0;
-  border-radius: 0 5px 5px 0;
-  border-left: 1px solid #e1e1e1;
-}
-.alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link:last-child:active {
-  border-left: 1px solid #e1e1e1;
-}
-.alloy-editor-toolbar-styles .link-wrapper .input-close-container .yui3-button[disabled], .alloy-editor-toolbar-styles .link-wrapper .input-close-container .yui3-button-disabled {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  color: #d3d3d3;
-  opacity: 1;
 }
 
 .alloy-editor-toolbar-add-trigger {

@@ -52,6 +52,12 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
              */
             background-color: rgba(43, 66, 89, 0.4);
         }
+
+        &.yui3-button[disabled], &.yui3-button-disabled {
+            @include box-shadow(none);
+            @include opacity(0.3);
+            color: #fff;
+        }
     }
 }
 
@@ -70,18 +76,6 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
             .input-clear {
                 color: #2b4259;
                 @include opacity(0.4);
-            }
-        }
-
-        .input-close-container {
-            .close-link {
-                color: #41bdea;
-
-                &.yui3-button[disabled], &.yui3-button-disabled {
-                    @include box-shadow(none);
-                    color: #fff;
-                    opacity: 1;
-                }
             }
         }
     }

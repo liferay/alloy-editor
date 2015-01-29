@@ -96,6 +96,14 @@
 .alloy-editor-toolbar .alloy-editor-button.yui3-button-selected:hover, .alloy-editor-toolbar .alloy-editor-button.yui3-button-active:hover, .alloy-editor-toolbar .alloy-editor-button.yui3-button:active:hover {
   background-color: #2f323d;
 }
+.alloy-editor-toolbar .alloy-editor-button.yui3-button[disabled], .alloy-editor-toolbar .alloy-editor-button.yui3-button-disabled {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+  color: #fff;
+}
 
 .alloy-editor-toolbar-styles .link-wrapper {
   -webkit-border-radius: 4px;
@@ -115,16 +123,6 @@
 }
 .alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear {
   color: #b1b1b1;
-}
-.alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link {
-  color: #27be0e;
-}
-.alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link.yui3-button[disabled], .alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link.yui3-button-disabled {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  color: #fff;
-  opacity: 1;
 }
 
 .alloy-editor-toolbar-add-trigger {
