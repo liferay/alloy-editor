@@ -78,7 +78,7 @@
   background-image: none;
   color: #fff;
 }
-.alloy-editor-toolbar .alloy-editor-button:hover, .alloy-editor-toolbar .alloy-editor-button:focus {
+.alloy-editor-toolbar .alloy-editor-button:hover {
   background-image: none;
   color: #2b4259;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
@@ -145,6 +145,8 @@
    * opacity: 0.7
    */
   background-color: rgba(50, 168, 230, 0.7);
+  color: #fff;
+  opacity: 1;
 }
 
 .alloy-editor-tooltip-link {

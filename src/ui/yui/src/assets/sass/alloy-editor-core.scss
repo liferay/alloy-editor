@@ -20,6 +20,10 @@
         &:last-child {
             margin-right: 0;
         }
+
+        &:focus {
+            outline: 2px solid #44b6e0 !important;
+        }
     }
 }
 
