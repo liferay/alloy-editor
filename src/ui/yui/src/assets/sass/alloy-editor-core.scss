@@ -1,4 +1,4 @@
-.yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbaraddtrigger-hidden, .yui3-toolbarimage-hidden, .yui3-linktooltip-hidden {
+.yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbaraddtrigger-hidden, .yui3-linktooltip-hidden {
     display: none;
 }
 
@@ -29,6 +29,14 @@
 }
 
 .alloy-editor-toolbar-styles {
+    .alloy-editor-toolbar-buttons {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
     .link-wrapper {
         .alloy-editor-button {
             margin-left: 10px;

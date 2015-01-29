@@ -55,7 +55,7 @@
     'button-a': {
         group: 'AlloyEditor',
         path: 'buttons/button-a.js',
-        requires: ['button-base', 'event-valuechange', 'node-focusmanager']
+        requires: ['button-base', 'event-valuechange']
     },
 
     'button-h1': {
@@ -133,7 +133,7 @@
     'toolbar-base': {
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-base.js',
-        requires: ['plugin', 'node-base', 'transition']
+        requires: ['plugin', 'node-base', 'node-focusmanager', 'transition']
     },
 
     'toolbar-position': {
@@ -145,19 +145,13 @@
     'toolbar-add': {
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-add.js',
-        requires: ['widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align', 'toolbar-base']
+        requires: ['toolbar-base', 'toolbar-position', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align']
     },
 
     'toolbar-styles': {
         group: 'AlloyEditor',
         path: 'toolbars/toolbar-styles.js',
-        requires: ['toolbar-base', 'widget-base', 'widget-position', 'widget-position-constrain']
-    },
-
-    'toolbar-image': {
-        group: 'AlloyEditor',
-        path: 'toolbars/toolbar-image.js',
-        requires: ['dom-screen', 'widget-base', 'widget-position', 'widget-position-constrain', 'toolbar-base']
+        requires: ['toolbar-base', 'toolbar-position', 'widget-base', 'widget-position', 'widget-position-constrain', 'widget-position-align']
     },
 
     'selector-patch': {

@@ -1,3 +1,4 @@
+/* line 1, ../sass/alloy-editor-core.scss */
 .yui3-toolbarstyles-hidden, .yui3-toolbaradd-hidden, .yui3-toolbaraddtrigger-hidden, .yui3-toolbarimage-hidden, .yui3-linktooltip-hidden {
   display: none;
 }
@@ -7,9 +8,7 @@
   z-index: 1;
 }
 
-.alloy-editor-toolbar {
-  padding: 10px;
-}
+/* line 11, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar .alloy-editor-button {
   height: 24px;
   margin: 0 10px;
@@ -25,9 +24,7 @@
   outline: 2px solid #44b6e0 !important;
 }
 
-.alloy-editor-toolbar-styles .link-wrapper .alloy-editor-button {
-  margin-left: 10px;
-}
+/* line 20, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container {
   display: inline-block;
   padding: 2px;
@@ -54,15 +51,7 @@
   position: relative;
 }
 
-.alloy-editor-toolbar-add-trigger {
-  padding: 0;
-}
-.alloy-editor-toolbar-add-trigger .alloy-editor-button {
-  height: 24px;
-  padding: 5px;
-  width: 24px;
-}
-
+/* line 48, ../sass/alloy-editor-core.scss */
 .alloy-editor-toolbar-add .alloy-editor-button {
   font-size: 20px;
 }

@@ -2,10 +2,15 @@ YUI.add('toolbar-styles', function(Y) {
     'use strict';
 
     var Lang = Y.Lang,
-        YNode = Y.Node,
+        YArray = Y.Array,
+
+        STR_SELECTION_TEXT = 'text',
+        STR_SELECTION_IMAGE = 'image',
+
+        SELECTION_TYPES = {},
 
         /**
-         * The ToolbarStyles class hosts the buttons for styling text selection.
+         * The ToolbarStyles class hosts the buttons for handling editor selection selections.
          *
          * @class ToolbarStyles
          */
@@ -19,13 +24,37 @@ YUI.add('toolbar-styles', function(Y) {
             renderUI: function() {
                 var instance = this,
                     buttonsContainer,
+                    selectionContainer,
                     contentBox;
 
-                buttonsContainer = YNode.create(instance.TPL_BUTTONS_CONTAINER);
+                this.get('boundingBox').addClass('arrow-box arrow-box-bottom');
 
                 contentBox = this.get('contentBox');
 
-                contentBox.appendChild(buttonsContainer);
+                contentBox.addClass('btn-toolbar');
+
+                buttonsContainer = contentBox.one('.selections');
+
+                YArray.each(
+                    instance._getSelectionsConfig(),
+                    function(selection) {
+                        selectionContainer = Y.Node.create(
+                            Y.Lang.sub(
+                                instance.TPL_BUTTONS_CONTAINER,
+                                {
+                                    selectionType: selection.type
+                                }
+                            )
+                        );
+
+                        buttonsContainer.appendChild(selectionContainer);
+
+                        YArray.each(
+                            selection.buttons,
+                            Y.bind('_appendButton', instance, selectionContainer)
+                        );
+                    }
+                );
 
                 instance._buttonsContainer = buttonsContainer;
             },
@@ -41,13 +70,42 @@ YUI.add('toolbar-styles', function(Y) {
             },
 
             /**
+             * Resolves all required modules based on the current toolbar configuration.
+             *
+             * @method getModules
+             * @return {Array} An Array with all the module names required by
+             * the current toolbar configuration.
+             */
+            getModules: function() {
+                var self = this,
+                    modules;
+
+                modules = [];
+
+                YArray.each(
+                    this._getSelectionsConfig(),
+                    function(selection) {
+                        YArray.each(
+                            selection.buttons,
+                            function(button) {
+                                modules.push('button-' + self._getButtonName(button));
+                            }
+                        );
+                    }
+                );
+
+                return modules;
+            },
+
+            /**
              * Calculates and sets the position of the toolbar.
              *
              * @method showAtPoint
-             * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
-             * @param {Number} top The right offset in page coordinates where Toolbar should be shown.
-             * @param {Number} direction The direction of the selection. May be one of the following:
-             * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
+             * @param {Number} left The left offset in page coordinates.
+             * @param {Number} top The top offset in page coordinates.
+             * @param {Number} direction The direction of the selection. Can be one of these:
+             *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
+             *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
              */
             showAtPoint: function(left, top, direction) {
                 var boundingBox,
@@ -76,6 +134,43 @@ YUI.add('toolbar-styles', function(Y) {
             },
 
             /**
+             * Resolves the different shortcuts available for the selections configuration and
+             * produces a final configuration array with all the required options.
+             *
+             * @method  _getSelectionsConfig
+             * @protected
+             * @return {Array} An array with the selections final configuration for the toolbar.
+             */
+            _getSelectionsConfig: function() {
+                var defaultSelection,
+                    selectionConfig,
+                    selectionsConfig = [];
+
+                if (!this._selectionsConfig) {
+                    YArray.each(
+                        this.get('selections'),
+                        function(selection) {
+                            if (Lang.isString(selection)) {
+                                selectionConfig = SELECTION_TYPES[selection];
+                            } else {
+                                defaultSelection = SELECTION_TYPES[selection.type];
+
+                                selectionConfig = defaultSelection ? Y.merge(defaultSelection, selection) : selection;
+                            }
+
+                            if (selectionConfig) {
+                                selectionsConfig.push(selectionConfig);
+                            }
+                        }
+                    );
+
+                    this._selectionsConfig = selectionsConfig;
+                }
+
+                return this._selectionsConfig;
+            },
+
+            /**
              * Calculates the most appropriate position where the Toolbar should be displayed and shows it.
              *
              * @method _onEditorInteraction
@@ -85,32 +180,49 @@ YUI.add('toolbar-styles', function(Y) {
              * information.
              */
             _onEditorInteraction: function(event) {
-                var editor,
+                var self = this,
+                    editor,
+                    contentBox,
+                    nativeEvent,
                     position,
-                    selectionData,
-                    selectionEmpty,
-                    nativeEvent;
+                    matchedSelection,
+                    selectionData;
 
                 editor = this.get('editor');
-
-                selectionEmpty = editor.isSelectionEmpty();
 
                 selectionData = event.data.selectionData;
 
                 nativeEvent = event.data.nativeEvent;
 
-                if (!selectionData.element && selectionData.region && !selectionEmpty) {
-                    position = this._calculatePosition(selectionData, {
-                        x: nativeEvent.pageX,
-                        y: nativeEvent.pageY
-                    });
+                matchedSelection = YArray.some(
+                    this._getSelectionsConfig(),
+                    function(selection) {
+                        if (selection.test(selectionData, editor)) {
+                            contentBox = self.get('contentBox');
 
-                    this.showAtPoint(position.x, position.y, position.direction);
+                            contentBox.all('.alloy-editor-toolbar-buttons').removeClass('active');
 
-                    this.fire('positionChange', this);
+                            contentBox.one('.alloy-editor-toolbar-buttons[data-selection=' + selection.type + ']').addClass('active');
 
-                    editor.fire('toolbarActive', this);
-                } else {
+                            position = self._calculatePosition(selectionData, {
+                                x: nativeEvent.pageX,
+                                y: nativeEvent.pageY
+                            });
+
+                            self.showAtPoint(position.x, position.y, position.direction);
+
+                            self.fire('positionChange');
+
+                            editor.fire('toolbarActive', self);
+
+                            return true;
+                        }
+
+                        return false;
+                    }
+                );
+
+                if (!matchedSelection) {
                     this.hide();
                 }
             },
@@ -124,41 +236,56 @@ YUI.add('toolbar-styles', function(Y) {
                 this.hide();
             },
 
-            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-styles alloy-editor-arrow-box">' +
-                '</div>',
+            BOUNDING_TEMPLATE: '<div class="alloy-editor-toolbar alloy-editor-toolbar-styles alloy-editor-arrow-box"></div>',
 
-            CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"></div>',
+            CONTENT_TEMPLATE: '<div class="alloy-editor-toolbar-content btn-toolbar"><div class="selections"></div></div>',
 
-            TPL_BUTTONS_CONTAINER: '<div class="btn-group alloy-editor-toolbar-buttons"></div>'
+            TPL_BUTTONS_CONTAINER: '<div class="alloy-editor-toolbar-buttons btn-group" data-selection="{selectionType}"></div>'
         }, {
             ATTRS: {
-                /**
-                 * Specifies the buttons, which will be attached to the current instance of the toolbar.
-                 * A button configuration can be simple string with the name of the button, or an object
-                 * with properties, like this:
+                /*
+                 * Specifies the selections that can be handled by the current instance of the toolbar.
+                 * A Selection configuration is an object like
                  * <pre><code>
-                 *     buttons: ['strong']
+                 *     {
+                 *         type: 'text',
+                 *         buttons: ['strong', 'em', 'u', 'h1', 'h2'],
+                 *         test: function(selectionData, editor) { ... }
+                 *     }
                  * </pre></code>
-                 *     or:
+                 *
+                 * A button configuration can be a simple string with the type of the selection. In this case,
+                 * the toolbar will use the default buttons and test given for that type of selection, like this:
                  * <pre><code>
-                 *     buttons: [
+                 *     selections: ['image', 'text']
+                 * </pre></code>
+                 *
+                 * In addition, it's possible to pass only partials of a Selection configuration. In this case,
+                 * the rest of properties will be inherited from the default selection type configuration:
+                 * <pre><code>
+                 *     selections: [
                  *         {
-                 *             name: 'strong',
-                 *             cfg: {
-                 *                 zIndex: 1024,
-                 *                 property2: 1024
-                 *             }
+                 *             type: 'image',
+                 *             buttons: ['left']
+                 *         },
+                 *         {
+                 *             type: 'text',
+                 *             test: function() { // custom logic }
                  *         }
                  *     ]
                  * </pre></code>
                  *
-                 * @attribute buttons
-                 * @default ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
+                 * In the example, when a selection of type 'image' is done, only the 'left' button will be shown, and
+                 * the decission of wether a selection is of type 'text' or not, will be handled by the custom provided
+                 * code, but will show the default selection buttons.
+                 *
+                 * @attribute selections
+                 * @default ['image', 'text']
                  * @type Array
                  */
-                buttons: {
+                selections: {
                     validator: Lang.isArray,
-                    value: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
+                    value: [STR_SELECTION_IMAGE, STR_SELECTION_TEXT]
                 },
 
                 /**
@@ -174,6 +301,22 @@ YUI.add('toolbar-styles', function(Y) {
                 }
             }
         });
+
+    SELECTION_TYPES[STR_SELECTION_IMAGE] = {
+        type: STR_SELECTION_IMAGE,
+        buttons: ['left', 'right'],
+        test: function(selectionData, editor) {
+            return (selectionData.element && selectionData.element.getName() === 'img');
+        }
+    };
+
+    SELECTION_TYPES[STR_SELECTION_TEXT] = {
+        type: STR_SELECTION_TEXT,
+        buttons: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter'],
+        test: function(selectionData, editor) {
+            return (!selectionData.element && selectionData.region && !editor.isSelectionEmpty());
+        }
+    };
 
     Y.ToolbarStyles = ToolbarStyles;
 }, '', {
