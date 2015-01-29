@@ -58,3 +58,7 @@ gulp.task('release', function(callback) {
 gulp.task('release-raw', function(callback) {
     runSequence('build', 'create-dist-file', callback);
 });
+
+gulp.task('watch', ['build'], function () {
+    gulp.watch('src/**/*', ['build']);
+});
