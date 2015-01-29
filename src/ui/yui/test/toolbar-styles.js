@@ -1,8 +1,9 @@
 'use strict';
-
+debugger;
 var assert = chai.assert;
 
 describe('ToolbarStyles', function() {
+    debugger;
     this.timeout(35000);
 
     before(function(done) {
@@ -28,7 +29,7 @@ describe('ToolbarStyles', function() {
 
             self.nativeEditor = self.editor.get('nativeEditor');
 
-            self.nativeEditor.on('toolbarsReady', function() {
+            self.nativeEditor.on('widgetsReady', function() {
                 self.editor.get('nativeEditor').focus();
 
                 done();
@@ -149,23 +150,35 @@ describe('ToolbarStyles', function() {
         }, done);
     });
 
-    it ('should show the styles toolbar after a text selection', function(done) {
+    it ('should show the text section after a text selection', function(done) {
         var self = this;
 
-        testToolbarVisible.call(this, {
+        testSelectionVisible.call(this, {
             expected: true,
             html: 'The following test should be {selected}',
-            selector: '.alloy-editor-toolbar.alloy-editor-toolbar-styles'
+            selector: '.alloy-editor-toolbar-styles .alloy-editor-toolbar-buttons[data-selection="text"]'
+        }, done);
+
+        testSelectionVisible.call(this, {
+            expected: false,
+            html: 'The following test should be {selected}',
+            selector: '.alloy-editor-toolbar-styles .alloy-editor-toolbar-buttons[data-selection="image"]'
         }, done);
     });
 
-    it ('should not show the styles toolbar after an image selection', function(done) {
+    it ('should show the image section after an image selection', function(done) {
         var self = this;
 
-        testToolbarVisible.call(this, {
+        testSelectionVisible.call(this, {
             expected: false,
             html: 'The following image {<img src=""></img>} should be selected',
-            selector: '.alloy-editor-toolbar.alloy-editor-toolbar-styles'
+            selector: '.alloy-editor-toolbar-styles .alloy-editor-toolbar-buttons[data-selection="text"]'
+        }, done);
+
+        testSelectionVisible.call(this, {
+            expected: true,
+            html: 'The following image {<img src=""></img>} should be selected',
+            selector: '.alloy-editor-toolbar-styles .alloy-editor-toolbar-buttons[data-selection="image"]'
         }, done);
     });
 
@@ -204,7 +217,7 @@ describe('ToolbarStyles', function() {
         }, 150);
     }
 
-    function testToolbarVisible(config, callback) {
+    function testSelectionVisible(config, callback) {
         var self = this;
 
         bender.tools.selection.setWithHtml(self.nativeEditor, config.html);
