@@ -1,18 +1,17 @@
 'use strict';
 
 var consolidate = require('gulp-consolidate'),
+	del = require('del'),
 	gulp = require('gulp'),
 	iconfont = require('gulp-iconfont'),
-	rename = require("gulp-rename"),
-	rimraf = require('gulp-rimraf'),
+	rename = require('gulp-rename'),
 
 	fontName = 'alloyeditor',
 	path = require('path'),
 	ROOT = path.join(__dirname, '../src/assets');
 
-gulp.task('clean-fonts', function() {
-	return gulp.src(path.join(ROOT, 'font', 'fonts'), {read: false})
-        .pipe(rimraf({force: true}));
+gulp.task('clean-fonts', function(callback) {
+	del([path.join(ROOT, 'font', 'fonts')], callback);
 });
 
 gulp.task('generate-fonts', function(){

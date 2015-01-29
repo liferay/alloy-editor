@@ -2,11 +2,11 @@
 
 var concat = require('gulp-concat'),
     compass = require('gulp-compass'),
+    del = require('del'),
     es = require('event-stream'),
     fs = require('fs'),
     gulp = require('gulp'),
     path = require('path'),
-    rimraf = require('gulp-rimraf'),
     runSequence = require('run-sequence'),
 
     ROOT = path.join(__dirname, '..');
@@ -37,9 +37,8 @@ gulp.task('copy-fontcss', function() {
         .pipe(gulp.dest(path.join(ROOT, 'tmp', 'assets')));
 });
 
-gulp.task('clean-fontcss', function() {
-    return gulp.src(path.join(ROOT, 'tmp', 'assets', 'font'), {read: false})
-        .pipe(rimraf({force: true}));
+gulp.task('clean-fontcss', function(callback) {
+    del([path.join(ROOT, 'tmp', 'assets', 'font')], callback);
 });
 
 gulp.task('join-css', function() {
