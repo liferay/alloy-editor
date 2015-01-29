@@ -163,7 +163,7 @@ describe('ToolbarStyles', function() {
 
     it('should remove a link selection', function(done) {
         testButtonAction.call(this, {
-            buttonSelector: '.alloy-editor-button .alloy-editor-icon-unlink',
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-link',
             expected: '<p>The link should be selection removed completely.</p>',
             html: 'The link should be <a>{selection}</a> removed completely.',
             beforeAction: function(button) {
@@ -175,7 +175,7 @@ describe('ToolbarStyles', function() {
         }, done);
 
         testButtonAction.call(this, {
-            buttonSelector: '.alloy-editor-button .alloy-editor-icon-unlink',
+            buttonSelector: '.alloy-editor-button .alloy-editor-icon-link',
             expected: '<p>The link should be selection removed completely.</p>',
             html: 'The link <a>should be {selection} removed</a> completely.',
             beforeAction: function(button) {

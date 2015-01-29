@@ -4,15 +4,14 @@
 .alloy-editor-toolbar {
     @include border-radius(3px);
     @include box-shadow(0px 0px 20px 0px rgba(188, 188, 188, 0.8));
+    background-color: #fff;
     border: 1px solid #e1e1e1;
 }
 
 .alloy-editor-toolbar {
     .alloy-editor-button {
         @include box-shadow(none);
-        background-color: #fff;
-        border-left: 1px solid #e1e1e1;
-        border-right: 1px solid #e1e1e1;
+        background-color: transparent;
         color: #999da0;
 
         &:hover, &:focus {
@@ -52,23 +51,18 @@
                 background-color: #f7f7f7;
             }
         }
+
+        &.yui3-button[disabled], &.yui3-button-disabled {
+            @include box-shadow(none);
+            @include opacity(0.3);
+            color: #fff;
+        }
     }
 }
 
 .alloy-editor-toolbar-styles {
     .link-wrapper {
         margin-left: 5px;
-
-        .switch-to-edit {
-            @include border-radius(0);
-            border-right: 1px solid #e1e1e1;
-
-            &:last-child {
-                &:active {
-                    border-right: 1px solid #e1e1e1;
-                }
-            }
-        }
 
         input {
             border: none;
@@ -81,37 +75,19 @@
 
         .input-container {
             background-color: white;
-            padding: 7px;
-        }
-
-        .input-close-container {
-            .close-link {
-                @include border-radius(0 5px 5px 0);
-                border-left: 1px solid #e1e1e1;
-
-                &:last-child {
-                    &:active {
-                        border-left: 1px solid #e1e1e1;
-                    }
-                }
-            }
-
-            .yui3-button[disabled], .yui3-button-disabled {
-                @include box-shadow(none);
-                color: #d3d3d3;
-                opacity: 1;
-            }
         }
     }
 }
 
 .alloy-editor-toolbar-add-trigger {
     @include box-shadow(none);
+    background-color: transparent;
+    border: 0;
 
     .alloy-editor-button {
-        height: 30px;
-        padding: 8px 8px 8px 9px;
-        width: 30px;
+        @include border-radius(13px);
+        background-color: #fff;
+        border: 1px solid #e1e1e1;
     }
 
     .btn-group-vertical {

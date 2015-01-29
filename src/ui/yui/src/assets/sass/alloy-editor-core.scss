@@ -8,15 +8,32 @@
 }
 
 .alloy-editor-toolbar {
-     .alloy-editor-button {
-        padding: 10px 10px 8px 10px;
+    padding: 10px;
+
+    .alloy-editor-button {
+        height: 24px;
+        margin: 0 10px;
         outline: none;
-        height: 36px;
+        padding: 0;
+        width: 24px;
+        filter: none;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:focus {
+            outline: 2px solid #44b6e0 !important;
+        }
     }
 }
 
 .alloy-editor-toolbar-styles {
     .link-wrapper {
+        .alloy-editor-button {
+            margin-left: 10px;
+        }
+
         .input-container {
             display: inline-block;
             padding: 2px;
@@ -24,6 +41,7 @@
             input {
                 outline: none;
                 width: 162px;
+                padding-right: 10px;
             }
 
             input::-ms-clear {
@@ -38,9 +56,21 @@
 
                 i {
                     cursor: pointer;
+                    font-size: 25px;
+                    line-height: 0.7;
+                    right: 10px;
+                    position: relative;
                 }
             }
         }
+    }
+}
+
+.alloy-editor-toolbar-add-trigger {
+    .alloy-editor-button {
+        height: 24px;
+        padding: 5px;
+        width: 24px;
     }
 }
 
@@ -53,14 +83,20 @@
 .alloy-editor-tooltip-link {
     .link-container {
         .icon-link-container {
-            margin: 0 5px 0 5px;
-            vertical-align: text-top;
+            margin: 0 5px;
+            position: relative;
+            top: -2px;
         }
 
         .link-preview {
             display: inline-block;
             padding: 4px;
             outline: none;
+
+            max-width: 25em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     }
 }
@@ -73,9 +109,13 @@
     padding: 0 5px;
 
     &:after {
-        content: '\e604';
+        content: '\E013';
         font-family: alloyeditor;
         font-size: 12px;
         margin-left: 5px;
     }
+}
+
+.cke_editable{
+    outline: none;
 }

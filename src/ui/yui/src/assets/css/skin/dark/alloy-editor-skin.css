@@ -1,79 +1,91 @@
-/* line 6, ../../../sass/skin/dark/alloy-editor-skin.scss */
 ::-webkit-selection {
   text-shadow: none;
   background: #d3effa !important;
 }
 
-/* line 12, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloyeditor-add-toolbar ::-webkit-selection {
   text-shadow: none;
-  background: #f3dada !important;
+  /*
+   * background-color: #f3205b
+   * opacity: 0.2
+   */
+  background-color: rgba(243, 32, 91, 0.2) !important;
 }
 
-/* line 6, ../../../sass/skin/dark/alloy-editor-skin.scss */
 ::-moz-selection {
   text-shadow: none;
   background: #d3effa !important;
 }
 
-/* line 12, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloyeditor-add-toolbar ::-moz-selection {
   text-shadow: none;
-  background: #f3dada !important;
+  /*
+   * background-color: #f3205b
+   * opacity: 0.2
+   */
+  background-color: rgba(243, 32, 91, 0.2) !important;
 }
 
-/* line 6, ../../../sass/skin/dark/alloy-editor-skin.scss */
 ::-o-selection {
   text-shadow: none;
   background: #d3effa !important;
 }
 
-/* line 12, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloyeditor-add-toolbar ::-o-selection {
   text-shadow: none;
-  background: #f3dada !important;
+  /*
+   * background-color: #f3205b
+   * opacity: 0.2
+   */
+  background-color: rgba(243, 32, 91, 0.2) !important;
 }
 
-/* line 6, ../../../sass/skin/dark/alloy-editor-skin.scss */
 ::selection {
   text-shadow: none;
   background: #d3effa !important;
 }
 
-/* line 12, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloyeditor-add-toolbar ::selection {
   text-shadow: none;
-  background: #f3dada !important;
+  /*
+   * background-color: #f3205b
+   * opacity: 0.2
+   */
+  background-color: rgba(243, 32, 91, 0.2) !important;
 }
 
-/* line 19, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
   opacity: 0.95;
-  border: none;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #2f323d;
 }
 
-/* line 25, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar .alloy-editor-button {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
   -webkit-transition: color 0.1s ease-out;
   -moz-transition: color 0.1s ease-out;
   -o-transition: color 0.1s ease-out;
   transition: color 0.1s ease-out;
-  background-color: #2f323d;
+  background-color: transparent;
   background-image: none;
   color: #fff;
-  height: 40px;
-  width: 40px;
 }
-/* line 34, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar .alloy-editor-button:hover, .alloy-editor-toolbar .alloy-editor-button:focus {
   background-image: none;
   color: #44b6e0;
 }
-/* line 39, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar .alloy-editor-button.yui3-button-selected, .alloy-editor-toolbar .alloy-editor-button.yui3-button-active, .alloy-editor-toolbar .alloy-editor-button.yui3-button:active {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -81,12 +93,18 @@
   background-color: #2f323d;
   color: #44b6e0;
 }
-/* line 46, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar .alloy-editor-button.yui3-button-selected:hover, .alloy-editor-toolbar .alloy-editor-button.yui3-button-active:hover, .alloy-editor-toolbar .alloy-editor-button.yui3-button:active:hover {
   background-color: #2f323d;
 }
+.alloy-editor-toolbar .alloy-editor-button.yui3-button[disabled], .alloy-editor-toolbar .alloy-editor-button.yui3-button-disabled {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+  color: #fff;
+}
 
-/* line 54, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-styles .link-wrapper {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -94,56 +112,34 @@
   -o-border-radius: 4px;
   border-radius: 4px;
   background-color: #2f323d;
-  height: 40px;
   margin-left: 5px;
 }
-/* line 60, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-styles .link-wrapper input {
   border: none;
 }
-/* line 64, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container {
   background-color: #fff;
   color: #2f232d;
-  margin: 4px;
-  padding: 5px;
 }
-/* line 70, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear {
   color: #b1b1b1;
 }
-/* line 76, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link {
-  color: #27be0e;
-}
-/* line 79, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link.yui3-button[disabled], .alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link.yui3-button-disabled {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  color: #fff;
-  opacity: 1;
-}
 
-/* line 89, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-add-trigger {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+  background-color: transparent;
 }
-/* line 92, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-toolbar-add-trigger .alloy-editor-button {
   -webkit-border-radius: 13px;
   -moz-border-radius: 13px;
   -ms-border-radius: 13px;
   -o-border-radius: 13px;
   border-radius: 13px;
-  height: 26px;
-  padding: 6px;
-  width: 26px;
+  background-color: #2f323d;
 }
 
-/* line 101, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-tooltip-link {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -155,26 +151,17 @@
   background-color: #2f323d;
   padding: 2px 4px;
 }
-/* line 107, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-tooltip-link .link-container {
   color: #fff;
 }
-/* line 110, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-tooltip-link .link-container .link-preview {
   color: #fff;
 }
 
-/* line 116, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-placeholder:empty:not(:focus) {
   background-color: #ffffe0;
 }
 
-/* line 120, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar .alloy-editor-button.focus {
-  color: #44b6e0;
-}
-
-/* line 124, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-twitter-link {
   background-color: #f8f8f8;
 }

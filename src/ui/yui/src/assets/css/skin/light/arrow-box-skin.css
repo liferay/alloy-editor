@@ -1,36 +1,27 @@
-/* line 2, ../../../sass/skin/light/arrow-box-skin.scss */
 .alloy-editor-arrow-box:after, .alloy-editor-arrow-box:before {
   border: solid transparent;
 }
-/* line 7, ../../../sass/skin/light/arrow-box-skin.scss */
 .alloy-editor-arrow-box.alloy-editor-arrow-box-top:after {
   border-bottom-color: #fff;
 }
-/* line 11, ../../../sass/skin/light/arrow-box-skin.scss */
 .alloy-editor-arrow-box.alloy-editor-arrow-box-top:before {
   border-bottom-color: #e1e1e1;
 }
-/* line 17, ../../../sass/skin/light/arrow-box-skin.scss */
 .alloy-editor-arrow-box.alloy-editor-arrow-box-bottom:after {
   border-top-color: #fff;
 }
-/* line 21, ../../../sass/skin/light/arrow-box-skin.scss */
 .alloy-editor-arrow-box.alloy-editor-arrow-box-bottom:before {
   border-top-color: #e1e1e1;
 }
-/* line 27, ../../../sass/skin/light/arrow-box-skin.scss */
 .alloy-editor-arrow-box.alloy-editor-arrow-box-left:after {
   border-right-color: #fff;
 }
-/* line 31, ../../../sass/skin/light/arrow-box-skin.scss */
 .alloy-editor-arrow-box.alloy-editor-arrow-box-left:before {
   border-right-color: #e1e1e1;
 }
-/* line 37, ../../../sass/skin/light/arrow-box-skin.scss */
 .alloy-editor-arrow-box.alloy-editor-arrow-box-right:after {
   border-left-color: #fff;
 }
-/* line 41, ../../../sass/skin/light/arrow-box-skin.scss */
 .alloy-editor-arrow-box.alloy-editor-arrow-box-right:before {
   border-left-color: #e1e1e1;
 }
