@@ -16,6 +16,7 @@
         outline: none;
         padding: 0;
         width: 24px;
+        filter: none;
 
         &:last-child {
             margin-right: 0;
@@ -40,6 +41,7 @@
             input {
                 outline: none;
                 width: 162px;
+                padding-right: 10px;
             }
 
             input::-ms-clear {
@@ -81,14 +83,20 @@
 .alloy-editor-tooltip-link {
     .link-container {
         .icon-link-container {
-            margin: 0 5px 0 5px;
-            vertical-align: text-top;
+            margin: 0 5px;
+            position: relative;
+            top: -2px;
         }
 
         .link-preview {
             display: inline-block;
             padding: 4px;
             outline: none;
+
+            max-width: 25em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     }
 }
