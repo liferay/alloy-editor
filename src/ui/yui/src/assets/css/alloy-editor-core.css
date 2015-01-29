@@ -20,6 +20,9 @@
 .alloy-editor-toolbar .alloy-editor-button:last-child {
   margin-right: 0;
 }
+.alloy-editor-toolbar .alloy-editor-button:focus {
+  outline: 2px solid #44b6e0 !important;
+}
 
 .alloy-editor-toolbar-styles .link-wrapper .alloy-editor-button {
   margin-left: 10px;
