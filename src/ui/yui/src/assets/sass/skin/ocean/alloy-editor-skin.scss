@@ -35,9 +35,9 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
         color: #fff;
 
         &:hover {
+            @include opacity(0.4);
             background-image: none;
             color: #2b4259;
-            @include opacity(0.4);
         }
 
         &.yui3-button-selected, &.yui3-button-active, &.yui3-button:active {
@@ -74,8 +74,8 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
             color: #2f232d;
 
             .input-clear {
-                color: #2b4259;
                 @include opacity(0.4);
+                color: #2b4259;
             }
         }
     }
