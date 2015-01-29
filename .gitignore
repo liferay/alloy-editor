@@ -5,3 +5,4 @@ node_modules
 test-results.xml
 sauce_connect.log
 coverage
+bower_components

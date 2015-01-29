@@ -204,10 +204,7 @@ YUI.add('button-base', function(Y) {
          */
         _renderButtonUI: function() {
             var btnInst,
-                btnSrcNode,
-                buttonsContainer;
-
-            buttonsContainer = this.get('host').get('buttonsContainer');
+                btnSrcNode;
 
             btnSrcNode = YNode.create(
                 Lang.sub(this.TPL_BUTTON, {
@@ -225,7 +222,7 @@ YUI.add('button-base', function(Y) {
                 on: {
                     click: Y.bind(this._onClick, this)
                 },
-                render: buttonsContainer,
+                render: this.get('container'),
                 srcNode: btnSrcNode
             });
         },
@@ -234,6 +231,20 @@ YUI.add('button-base', function(Y) {
     };
 
     ButtonBase.ATTRS = {
+        /**
+         * Container where the button UI should be rendered.
+         *
+         * @attribute container
+         * @default null
+         * @type Node
+         */
+        container: {
+            getter: function(value) {
+                return value || this.get('host').get('buttonsContainer');
+            },
+            setter: Y.one
+        },
+
         /**
          * Collection of strings used to label elements of the button's UI.
          * ButtonBase provides string properties to specify the label of the button.

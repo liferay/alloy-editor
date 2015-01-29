@@ -32,27 +32,6 @@ YUI.add('toolbar-base', function(Y) {
 
             instance._editorNode = Y.one(editor.element.$);
 
-            YArray.each(
-                instance.get('buttons'),
-                function(item) {
-                    var buttonName,
-                        cfg,
-                        instanceName;
-
-                    buttonName = Lang.isObject(item) ? item.name : item;
-
-                    instanceName = instance._getButtonInstanceName(buttonName);
-
-                    cfg = Lang.isObject(item) ? item.cfg : null;
-
-                    instance.plug(Y[instanceName], cfg);
-
-                    // Each button will fire actionPerformed when user interacts with it. Here we will
-                    // re-fire this event to the other buttons so they will be able to update their UI too.
-                    instance[Y[instanceName].NS].after('actionPerformed', instance._afterActionPerformed, instance);
-                }
-            );
-
             instance.after('render', instance._afterRender, instance);
             instance.after('visibleChange', instance._afterVisibleChange, instance);
 
@@ -86,6 +65,8 @@ YUI.add('toolbar-base', function(Y) {
             visible = this.get('visible');
 
             if (visible) {
+                buttonsContainer.focusManager.refresh();
+
                 buttonsContainer.focusManager.focus(index);
             }
 
@@ -127,7 +108,7 @@ YUI.add('toolbar-base', function(Y) {
             buttonsContainer.plug(Y.Plugin.NodeFocusManager, {
                 activeDescendant: 0,
                 circular: true,
-                descendants: 'button',
+                descendants: 'button:visible',
                 focusClass: 'focus',
                 keys: {
                     next: 'down:' + KEY_ARROW_RIGHT,
@@ -157,6 +138,38 @@ YUI.add('toolbar-base', function(Y) {
                     state: (event.newVal ? strings.visible : strings.hidden)
                 })
             });
+        },
+
+        /**
+         * Adds a button to a given container inside the toolbar.
+         *
+         * @method  _appendButton
+         * @protected
+         * @param  {Node} buttonsContainer Container for the buttons
+         * @param  {String|Object} item String or object describing the button
+         */
+        _appendButton: function(buttonsContainer, item) {
+            var instance = this,
+                buttonName,
+                cfg,
+                defaultCfg,
+                instanceName;
+
+            defaultCfg = {
+                container: buttonsContainer
+            };
+
+            buttonName = Lang.isObject(item) ? item.name : item;
+
+            instanceName = instance._getButtonInstanceName(buttonName);
+
+            cfg = Lang.isObject(item) ? item.cfg : null;
+
+            instance.plug(Y[instanceName], Y.merge(defaultCfg, cfg));
+
+            // Each button will fire actionPerformed when user interacts with it. Here we will
+            // re-fire this event to the other buttons so they will be able to update their UI too.
+            instance[Y[instanceName].NS].after('actionPerformed', instance._afterActionPerformed, instance);
         },
 
         /**
@@ -258,6 +271,25 @@ YUI.add('toolbar-base', function(Y) {
          */
         _getButtonInstanceName: function(buttonName) {
             return 'Button' + buttonName.substring(0, 1).toUpperCase() + buttonName.substring(1);
+        },
+
+        /**
+         * Resolves the name of a button module passed through configuration.
+         *
+         * @method  _getButtonName
+         * @protected
+         * @param  {String|Object} button A string representing the button or an object
+         * with a name attribute.
+         * @return {String} The name of the button.
+         */
+        _getButtonName: function(button) {
+            var buttonName = button;
+
+            if (typeof button !== 'string') {
+                buttonName = button.name;
+            }
+
+            return buttonName
         },
 
         /**
@@ -386,5 +418,5 @@ YUI.add('toolbar-base', function(Y) {
     Y.ToolbarBase = ToolbarBase;
 
 }, '', {
-    requires: ['node-focusmanager', 'node-base', 'plugin']
+    requires: ['node-focusmanager', 'node', 'plugin', 'transition']
 });

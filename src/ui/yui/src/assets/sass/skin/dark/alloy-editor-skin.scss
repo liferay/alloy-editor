@@ -50,7 +50,7 @@ $prefixes: ("-webkit-", "-moz-", "-o-", "");
     }
 }
 
-.alloy-editor-toolbar-styles {
+.alloy-editor-toolbar-context {
     .link-wrapper {
         @include border-radius(4px);
         background-color: #2f323d;

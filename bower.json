@@ -1,0 +1,20 @@
+{
+  "name": "alloy-editor",
+  "version": "0.2.5",
+  "homepage": "https://github.com/liferay/alloy-editor",
+  "authors": [
+    "Iliyan Peychev <iliyan.peichev@liferay.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "assertive-chai": "~1.0.0"
+  }
+}
