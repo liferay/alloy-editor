@@ -85,3 +85,7 @@
   font-size: 12px;
   margin-left: 5px;
 }
+
+.cke_editable {
+  outline: none;
+}
