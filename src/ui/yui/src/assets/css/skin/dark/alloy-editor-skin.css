@@ -66,13 +66,17 @@
 }
 
 .alloy-editor-toolbar .alloy-editor-button {
-  -moz-box-shadow: none;
   -webkit-box-shadow: none;
+  -moz-box-shadow: none;
   box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
   -webkit-transition: color 0.1s ease-out;
   -moz-transition: color 0.1s ease-out;
   -o-transition: color 0.1s ease-out;
-  -webkit-transition: color 0.1s ease-out;
   transition: color 0.1s ease-out;
   background-color: transparent;
   background-image: none;
@@ -83,8 +87,8 @@
   color: #44b6e0;
 }
 .alloy-editor-toolbar .alloy-editor-button.yui3-button-selected, .alloy-editor-toolbar .alloy-editor-button.yui3-button-active, .alloy-editor-toolbar .alloy-editor-button.yui3-button:active {
-  -moz-box-shadow: none;
   -webkit-box-shadow: none;
+  -moz-box-shadow: none;
   box-shadow: none;
   background-color: #2f323d;
   color: #44b6e0;
@@ -101,57 +105,46 @@
   color: #fff;
 }
 
-/* line 54, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar-styles .link-wrapper {
+.alloy-editor-toolbar-context .link-wrapper {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
   border-radius: 4px;
   background-color: #2f323d;
   margin-left: 5px;
 }
-/* line 60, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar-styles .link-wrapper input {
+.alloy-editor-toolbar-context .link-wrapper input {
   border: none;
 }
-/* line 64, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar-styles .link-wrapper .input-container {
+.alloy-editor-toolbar-context .link-wrapper .input-container {
   background-color: #fff;
   color: #2f232d;
 }
-/* line 70, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear {
+.alloy-editor-toolbar-context .link-wrapper .input-container .input-clear {
   color: #b1b1b1;
-}
-/* line 76, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link {
-  color: #27be0e;
-}
-/* line 79, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link.yui3-button[disabled], .alloy-editor-toolbar-styles .link-wrapper .input-close-container .close-link.yui3-button-disabled {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  color: #fff;
-  opacity: 1;
 }
 
 .alloy-editor-toolbar-add-trigger {
-  -moz-box-shadow: none;
   -webkit-box-shadow: none;
+  -moz-box-shadow: none;
   box-shadow: none;
   background-color: transparent;
 }
 .alloy-editor-toolbar-add-trigger .alloy-editor-button {
-  -moz-border-radius: 13px;
   -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  -ms-border-radius: 13px;
+  -o-border-radius: 13px;
   border-radius: 13px;
   background-color: #2f323d;
 }
 
 .alloy-editor-tooltip-link {
-  -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
   border-radius: 4px;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
   opacity: 0.95;
@@ -169,12 +162,6 @@
   background-color: #ffffe0;
 }
 
-/* line 120, ../../../sass/skin/dark/alloy-editor-skin.scss */
-.alloy-editor-toolbar .alloy-editor-button.focus {
-  color: #44b6e0;
-}
-
-/* line 124, ../../../sass/skin/dark/alloy-editor-skin.scss */
 .alloy-editor-twitter-link {
   background-color: #f8f8f8;
 }
