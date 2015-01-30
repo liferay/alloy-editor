@@ -2,6 +2,7 @@ YUI.add('toolbar-add', function(Y) {
     'use strict';
 
     var Lang = Y.Lang,
+        YArray = Y.Array,
         YNode = Y.Node,
 
         ARROW_BOX_CLASSES = [
@@ -33,8 +34,6 @@ YUI.add('toolbar-add', function(Y) {
                 editorNode = Y.one(this.get('editor').element.$);
 
                 this._editorDOMNode = editorNode.getDOMNode();
-
-                this._toolbars = {};
             },
 
             /**
@@ -52,8 +51,8 @@ YUI.add('toolbar-add', function(Y) {
                 this._triggerButton.on('click', this._showToolbarAddContent, this);
 
                 this.on('visibleChange', this._onVisibleChange, this);
-                editor.on('toolbarsReady', this._onToolbarsReady, this);
-                editor.on('toolbarsHide', this._onToolbarsHide, this);
+                editor.on('widgetsReady', this._onWidgetsReady, this);
+                editor.on('widgetsHide', this._onWidgetsHide, this);
             },
 
             /**
@@ -89,12 +88,37 @@ YUI.add('toolbar-add', function(Y) {
                 var buttonsContainer = this.get('buttonsContainer');
 
                 if (this.get('visible')) {
+                    buttonsContainer.focusManager.refresh();
+
                     buttonsContainer.focusManager.focus(0);
                 } else {
                     this._triggerButton.focus();
                 }
 
                 return true;
+            },
+
+            /**
+             * Resolves all required modules based on the current toolbar configuration.
+             *
+             * @method getModules
+             * @return {Array} An Array with all the module names required by
+             * the current toolbar configuration.
+             */
+            getModules: function() {
+                var i,
+                    modules,
+                    buttonsConfig;
+
+                modules = [];
+
+                buttonsConfig = this.get('buttons');
+
+                for (i in buttonsConfig) {
+                    modules.push('button-' + this._getButtonName(buttonsConfig[i]));
+                }
+
+                return modules;
             },
 
             /**
@@ -167,11 +191,12 @@ YUI.add('toolbar-add', function(Y) {
              * @protected
              */
             _hideEditorToolbars: function() {
-                var editorToolbars;
+                var editorWidgets;
 
-                editorToolbars = this._toolbars;
+                editorWidgets = this._widgets;
 
-                Y.Object.each(editorToolbars, function(item) {
+                Y.Array.each(editorWidgets, function(item) {
+                    // TODO Should distinguish if it's actually a Toolbar
                     if (this !== item) {
                         item.hide();
                     }
@@ -219,9 +244,9 @@ YUI.add('toolbar-add', function(Y) {
             /**
              * Hides the toolbar and the trigger in case of <code>toolbarsHide</code> event.
              *
-             * @method _onToolbarsHide
+             * @method _onWidgetsHide
              */
-            _onToolbarsHide: function() {
+            _onWidgetsHide: function() {
                 this.hide();
 
                 this._trigger.hide();
@@ -234,8 +259,8 @@ YUI.add('toolbar-add', function(Y) {
              * @protected
              * @param {EventFacade} event Event that triggered when all editor toolbars are initialized.
              */
-            _onToolbarsReady: function(event) {
-                this._toolbars = event.data.toolbars;
+            _onWidgetsReady: function(event) {
+                this._widgets = event.data.widgets;
             },
 
             /**
@@ -265,6 +290,11 @@ YUI.add('toolbar-add', function(Y) {
                 contentBox = this.get('contentBox');
 
                 contentBox.appendChild(buttonsContainer);
+
+                YArray.each(
+                    instance.get('buttons'),
+                    Y.bind('_appendButton', instance, buttonsContainer)
+                );
 
                 instance._buttonsContainer = buttonsContainer;
             },
@@ -316,8 +346,6 @@ YUI.add('toolbar-add', function(Y) {
                 this.showAtPoint(this._toolbarPosition.x, this._toolbarPosition.y, this._toolbarPosition.direction);
 
                 this._trigger.hide();
-
-                this._editorNode.focus();
 
                 this.focus();
 

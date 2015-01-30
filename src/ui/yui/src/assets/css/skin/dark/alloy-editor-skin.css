@@ -105,7 +105,7 @@
   color: #fff;
 }
 
-.alloy-editor-toolbar-styles .link-wrapper {
+.alloy-editor-toolbar-context .link-wrapper {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -114,14 +114,14 @@
   background-color: #2f323d;
   margin-left: 5px;
 }
-.alloy-editor-toolbar-styles .link-wrapper input {
+.alloy-editor-toolbar-context .link-wrapper input {
   border: none;
 }
-.alloy-editor-toolbar-styles .link-wrapper .input-container {
+.alloy-editor-toolbar-context .link-wrapper .input-container {
   background-color: #fff;
   color: #2f232d;
 }
-.alloy-editor-toolbar-styles .link-wrapper .input-container .input-clear {
+.alloy-editor-toolbar-context .link-wrapper .input-container .input-clear {
   color: #b1b1b1;
 }
 

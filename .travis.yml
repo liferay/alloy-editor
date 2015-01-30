@@ -5,6 +5,8 @@ before_script:
 - gem update --system
 - gem install sass
 - gem install compass
+- npm install -g bower
+- bower install
 env:
   global:
   - secure: YF40rlP9kLceuS4RVIycVARokIrY5MLdVKpYakbAqwDye+fuExIfYVz4lZp3uGoG0+O/Fe97yAuVHrfFemH0/tEjts2a1/nfl05ueZDXbHzUSBW1/i/9Hu/k2EhdjExaesq0xo6Ap9Loicia7X0qaMoavNa4DT1Py9Exuq6kj80=

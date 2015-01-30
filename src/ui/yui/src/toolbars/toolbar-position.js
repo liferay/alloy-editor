@@ -71,6 +71,25 @@ YUI.add('toolbar-position', function(Y) {
             };
         },
 
+        _getModules: function() {
+            var i,
+                j,
+                modules,
+                selectionsConfig;
+
+            modules = [];
+
+            selectionsConfig = this.get('selections');
+
+            for (i in selectionsConfig) {
+                for (j = selectionsConfig[i].buttons.length - 1; j >= 0; j--) { // put button modules
+                    modules.push('button-' + this._getButtonName(selectionsConfig[i].buttons[j]));
+                }
+            }
+
+            return modules;
+        },
+
         /**
          * Returns the position of the Toolbar taking in consideration the
          * {{#crossLink "ToolbarStyles/gutter:attribute"}}{{/crossLink}} attribute.

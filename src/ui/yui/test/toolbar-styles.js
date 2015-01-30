@@ -1,5 +1,5 @@
 'use strict';
-
+debugger;
 var assert = chai.assert;
 
 describe('ToolbarStyles', function() {
@@ -28,12 +28,18 @@ describe('ToolbarStyles', function() {
 
             self.nativeEditor = self.editor.get('nativeEditor');
 
-            self.nativeEditor.on('toolbarsReady', function() {
+            self.nativeEditor.on('widgetsReady', function() {
                 self.editor.get('nativeEditor').focus();
 
                 done();
             });
         });
+    });
+
+    after(function(done) {
+        this.editor.destroy();
+
+        done();
     });
 
     it('should make a text selection bold', function(done) {
@@ -213,6 +219,38 @@ describe('ToolbarStyles', function() {
         }, done);
     });
 
+    it ('should show the text section after a text selection', function(done) {
+        var self = this;
+
+        testSelectionVisible.call(this, {
+            expected: true,
+            html: 'The following test should be {selected}',
+            selector: '.alloy-editor-toolbar-styles .alloy-editor-toolbar-buttons[data-selection="text"]'
+        }, done);
+
+        testSelectionVisible.call(this, {
+            expected: false,
+            html: 'The following test should be {selected}',
+            selector: '.alloy-editor-toolbar-styles .alloy-editor-toolbar-buttons[data-selection="image"]'
+        }, done);
+    });
+
+    it ('should show the image section after an image selection', function(done) {
+        var self = this;
+
+        testSelectionVisible.call(this, {
+            expected: false,
+            html: 'The following image {<img src=""></img>} should be selected',
+            selector: '.alloy-editor-toolbar-styles .alloy-editor-toolbar-buttons[data-selection="text"]'
+        }, done);
+
+        testSelectionVisible.call(this, {
+            expected: true,
+            html: 'The following image {<img src=""></img>} should be selected',
+            selector: '.alloy-editor-toolbar-styles .alloy-editor-toolbar-buttons[data-selection="image"]'
+        }, done);
+    });
+
     function testButtonAction(config, callback) {
         var self = this;
 
@@ -243,6 +281,20 @@ describe('ToolbarStyles', function() {
             if (config.beforeCallback) {
                 config.beforeCallback.call(self, button);
             }
+
+            callback();
+        }, 150);
+    }
+
+    function testSelectionVisible(config, callback) {
+        var self = this;
+
+        bender.tools.selection.setWithHtml(self.nativeEditor, config.html);
+
+        happen.mouseup(document.getElementById('editable'));
+
+        setTimeout(function() {
+            assert.strictEqual($(config.selector).is(':visible'), config.expected);
 
             callback();
         }, 150);
