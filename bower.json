@@ -3,9 +3,9 @@
   "version": "0.2.5",
   "homepage": "https://github.com/liferay/alloy-editor",
   "authors": [
-    "Iliyan Peychev <iliyan.peichev@liferay.com>"
+    "Iliyan Peychev"
   ],
-  "license": "MIT",
+  "license": "LGPL",
   "private": true,
   "ignore": [
     "**/.*",
