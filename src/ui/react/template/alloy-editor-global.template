@@ -1,0 +1,9 @@
+CKEDITOR.disableAutoInline = true;
+
+(function() {
+	var global = {};
+
+	<%= source %>
+
+	window.AlloyEditor = global.AlloyEditor;
+}());

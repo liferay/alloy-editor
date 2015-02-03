@@ -1,0 +1,45 @@
+.alloy-editor-arrow-box {
+	&:after, &:before {
+        border: solid transparent;
+    }
+
+    &.alloy-editor-arrow-box-top {
+        &:after {
+            border-bottom-color: #32a8e6;
+        }
+
+        &:before {
+            border-bottom-color: #32a8e6;
+        }
+    }
+
+    &.alloy-editor-arrow-box-bottom {
+        &:after {
+            border-top-color: #32a8e6;
+        }
+
+        &:before {
+            border-top-color: #32a8e6;
+        }
+    }
+
+    &.alloy-editor-arrow-box-left {
+        &:after {
+            border-right-color: #32a8e6;
+        }
+
+        &:before {
+            border-right-color: #32a8e6;
+        }
+    }
+
+    &.alloy-editor-arrow-box-right {
+        &:after {
+            border-left-color: #32a8e6;
+        }
+
+        &:before {
+            border-left-color: #32a8e6;
+        }
+    }
+}
