@@ -14,6 +14,7 @@
     "gulp-iconfont": "^1.0.0",
     "gulp-karma": "0.0.4",
     "gulp-minify-css": "^0.3.12",
+    "gulp-react": "^2.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "~1.2.4",
     "gulp-template": "^2.0.0",
