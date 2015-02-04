@@ -1,7 +1,13 @@
 'use strict';
 
-var Lang = require('../oop/lang.js');
+var Lang = require('./lang.js');
 
+/**
+ * Attribute implementation
+ *
+ * @class Attribute
+ * @constructor
+*/
 function Attribute(config) {
     this._config = config;
 }
@@ -9,6 +15,12 @@ function Attribute(config) {
 Attribute.prototype = {
     constructor: Attribute,
 
+    /**
+     * Retrieves the value of an attribute
+     *
+     * @param {String} attr The attribute which value should be retrieved
+     * @return {Any} The value of the attribute
+     */
     get: function(attr) {
         var result = null;
 
@@ -31,6 +43,12 @@ Attribute.prototype = {
         return result;
     },
 
+    /**
+     * Sets the value of an argument
+     *
+     * @param {String} attr The argument which value should be set
+     * @param {Any} value The value which should be set to the attribute
+     */
     set: function(attr, value) {
         var currentAttr;
 
@@ -66,6 +84,15 @@ Attribute.prototype = {
         }
     },
 
+    /**
+     * Calls the provided param as function with the supplied arguments.
+     * If param provided as string, a corresponding function in this object will
+     * be called. If provided param is a function, it will be directly called.
+     *
+     * @param  {String|Function} stringOrFunction The function which should be called
+     * @param  {Any|Array} args The arguments which will be provided to the called function
+     * @return {Any} The returned value from the called function
+     */
     _callStringOrFunction: function(stringOrFunction, args) {
         var result = null;
 
@@ -82,5 +109,6 @@ Attribute.prototype = {
         return result;
     }
 };
+
 
 module.exports = Attribute;

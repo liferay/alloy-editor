@@ -2,13 +2,12 @@
 
 var Lang = require('./lang.js');
 
+// unceremoniously lifted from YUI
 var create = Object.create ? function (obj) {
     return Object.create(obj);
 } : (function () {
-    // Reusable constructor function for the Object.create() shim.
     function F() {}
 
-    // The actual shim.
     return function (obj) {
         F.prototype = obj;
         return new F();
@@ -16,7 +15,6 @@ var create = Object.create ? function (obj) {
 }());
 
 var OOP = {
-    // unceremoniously lifted from YUI
     extend: function(r, s, px, sx) {
         if (!s || !r) {
             throw 'extend failed, verify dependencies';

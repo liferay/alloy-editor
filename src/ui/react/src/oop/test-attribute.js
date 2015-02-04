@@ -2,7 +2,7 @@
 
 debugger;
 
-var OOP = require('../oop/oop.js');
+var OOP = require('./oop/oop.js');
 var Attribute = require('./attribute.js');
 
 function Test(config) {
