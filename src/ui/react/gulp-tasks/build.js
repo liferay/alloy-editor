@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 
+var concat = require('gulp-concat');
 var path = require('path');
 var runSequence = require('run-sequence');
 
@@ -28,6 +29,18 @@ gulp.task('copy-ckeditor', function() {
 });
 
 gulp.task('copy-js', function() {
-    return gulp.src(path.join(reactDir, 'src', '/**'))
-        .pipe(gulp.dest(editorDistFolder));
+    return gulp.src([
+        path.join(rootDir, 'src', 'core', 'debounce.js'),
+        path.join(rootDir, 'src', 'core', 'link.js'),
+        path.join(rootDir, 'src', 'core', 'selection-region.js'),
+        path.join(rootDir, 'src', 'core', 'tools.js'),
+        path.join(rootDir, 'src', 'core', 'uicore.js'),
+        path.join(reactDir, 'src', 'oop', 'lang.js'),
+        path.join(reactDir, 'src', 'oop', 'attribute.js'),
+        path.join(reactDir, 'src', 'oop', 'oop.js'),
+        path.join(reactDir, 'src', 'oop', 'base.js'),
+        path.join(reactDir, 'src', 'adapter', 'react.js'),
+    ])
+    .pipe(concat('alloy-editor-core.js'))
+    .pipe(gulp.dest(editorDistFolder));
 });
