@@ -1,5 +1,7 @@
 'use strict';
 
+var Lang = require('../oop/lang.js');
+
 function Attribute(config) {
     this._config = config;
 }
@@ -10,11 +12,15 @@ Attribute.prototype = {
     get: function(attr) {
         var result = null;
 
-        if (this.ATTRS) {
-            var currentAttr = this.ATTRS[attr];
+        if (this.constructor.ATTRS) {
+            var currentAttr = this.constructor.ATTRS[attr];
 
             if (currentAttr) {
-                if (currentAttr.getter) {
+                if (!currentAttr.__initialized__) {
+                    this.set(attr, this._config[attr]);
+                }
+
+                if (Lang.isFunction(currentAttr.getter)) {
                     result = this._callStringOrFunction(currentAttr.getter);
                 } else {
                     result = currentAttr.value;
@@ -26,12 +32,26 @@ Attribute.prototype = {
     },
 
     set: function(attr, value) {
-        this.ATTRS = this.ATTRS || {};
+        var currentAttr;
 
-        var currentAttr = this.ATTRS[attr] || {};
+        if (this.constructor.ATTRS) {
+            currentAttr = this.constructor.ATTRS[attr];
+        }
 
-        if (!currentAttr.readOnly || !currentAttr.writeOnce || !currentAttr.__writtenOnce__) {
-            if (!currentAttr.validator || currentAttr._callStringOrFunction(currentAttr.validator, value)) {
+        if (!currentAttr) {
+            return;
+        }
+
+        if (!currentAttr.__initialized__) {
+            currentAttr.__initialized__ = true;
+        }
+
+        if (currentAttr.readOnly) {
+            return;
+        }
+
+        if (!currentAttr.writeOnce || !currentAttr.__writtenOnce__) {
+            if (!currentAttr.validator || this._callStringOrFunction(currentAttr.validator, value)) {
                 if (currentAttr.valueFn) {
                     this._callStringOrFunction(currentAttr.valueFn, value);
                 }
@@ -49,16 +69,18 @@ Attribute.prototype = {
     _callStringOrFunction: function(stringOrFunction, args) {
         var result = null;
 
-        if (Object.prototype.toString.call(args) !== '[object Array]') {
+        if (!Lang.isArray(args)) {
             args = [args];
         }
 
-        if (typeof stringOrFunction == 'string') {
+        if (Lang.isString(stringOrFunction) && Lang.isFunction(this[stringOrFunction])) {
             result = this[stringOrFunction].apply(this, args);
-        } else {
+        } else if (Lang.isFunction(stringOrFunction)) {
             result = stringOrFunction.apply(this, args);
         }
 
         return result;
     }
 };
+
+module.exports = Attribute;

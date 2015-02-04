@@ -1,20 +1,19 @@
 'use strict';
 
-var Lang = {
-    isString: function(object) {
-        return typeof object === 'string';
-    },
+var Lang = require('./lang.js');
 
-    isNumber: function(object) {
-        return typeof object === 'number' && isFinite(object);
-    },
+var create = Object.create ? function (obj) {
+    return Object.create(obj);
+} : (function () {
+    // Reusable constructor function for the Object.create() shim.
+    function F() {}
 
-    mix: function(receiver, supplier) {
-        for (var key in supplier) {
-            receiver[key] = supplier[key];
-        }
-    }
-};
+    // The actual shim.
+    return function (obj) {
+        F.prototype = obj;
+        return new F();
+    };
+}());
 
 var OOP = {
     // unceremoniously lifted from YUI
@@ -23,7 +22,7 @@ var OOP = {
             throw 'extend failed, verify dependencies';
         }
 
-        var sp = s.prototype, rp = sp;
+        var sp = s.prototype, rp = create(sp);
         r.prototype = rp;
 
         rp.constructor = r;
@@ -36,14 +35,16 @@ var OOP = {
 
         // add prototype overrides
         if (px) {
-            OOP.mix(rp, px);
+            Lang.mix(rp, px);
         }
 
         // add object overrides
         if (sx) {
-            OOP.mix(r, sx);
+            Lang.mix(r, sx);
         }
 
         return r;
     }
 };
+
+module.exports = OOP;
