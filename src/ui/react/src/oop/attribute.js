@@ -1,7 +1,5 @@
 'use strict';
 
-var Lang = require('./lang.js');
-
 /**
  * Attribute implementation
  *
@@ -109,6 +107,3 @@ Attribute.prototype = {
         return result;
     }
 };
-
-
-module.exports = Attribute;

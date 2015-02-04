@@ -23,5 +23,3 @@ var Lang = {
         }
     }
 };
-
-module.exports = Lang;

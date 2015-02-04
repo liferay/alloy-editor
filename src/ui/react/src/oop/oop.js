@@ -1,7 +1,5 @@
 'use strict';
 
-var Lang = require('./lang.js');
-
 // unceremoniously lifted from YUI
 var create = Object.create ? function (obj) {
     return Object.create(obj);
@@ -44,5 +42,3 @@ var OOP = {
         return r;
     }
 };
-
-module.exports = OOP;

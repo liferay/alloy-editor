@@ -1,11 +1,5 @@
 'use strict';
 
-var Attribute = require('./attribute.js');
-var OOP = require('./oop.js');
-var Lang = require('./lang.js');
-
-debugger;
-
 /**
  * Quick and dirty impl of Base class
  *
@@ -19,14 +13,31 @@ function Base(config) {
 }
 
 OOP.extend(Base, Attribute, {
+    /**
+     * Calls the `initializer` method of each class which extends Base starting from the parent to the child
+     * Will pass the configuration object to each initializer method.
+     *
+     * @param {Object} config Configuration object
+     */
     init: function(config) {
         this._callChain('initializer', config);
     },
 
+    /**
+     * Calls the `destructor` method of each class which extends Base starting from the parent to the child
+     * @return {[type]} [description]
+     */
     destroy: function() {
         this._callChain('destructor');
     },
 
+    /**
+     * Calls a method of each class, which is being present in the hierarchy starting from parent to the child.
+     *
+     * @protected
+     * @param {String} wat  The method, which should be invoked
+     * @param {Object|Array} args The arguments with which the method should be invoked
+     */
     _callChain: function(wat, args) {
         var arr = [];
 
@@ -54,6 +65,3 @@ OOP.extend(Base, Attribute, {
         }
     }
 });
-
-
-module.exports = Base;
