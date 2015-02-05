@@ -30,7 +30,7 @@
             editor.config.pasteFromWordRemoveStyles = false;
             editor.config.pasteFromWordRemoveFontStyles = false;
 
-            Lang.mix(editor.config, config);
+            global.Lang.mix(editor.config, config);
 
             this._editor = editor;
 
@@ -79,7 +79,7 @@
          * @return {Boolean} True if the value was accepted, false otherwise.
          */
         _validateAllowedContent: function(value) {
-            return Lang.isString(value) || Lang.isObject(value) || Lang.isBoolean(value);
+            return global.Lang.isString(value) || global.Lang.isObject(value) || global.Lang.isBoolean(value);
         },
     }, {
         ATTRS: {
@@ -106,7 +106,7 @@
              * @type {Number}
              */
             eventsDelay: {
-                validator: Lang.isNumber,
+                validator: global.Lang.isNumber,
                 value: 100
             },
 
@@ -120,7 +120,7 @@
              * @type {String}
              */
             extraPlugins: {
-                validator: Lang.isString,
+                validator: global.Lang.isString,
                 value: 'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader',
                 writeOnce: true
             },
@@ -148,7 +148,7 @@
              * @type {String}
              */
             placeholderClass: {
-                validator: Lang.isString,
+                validator: global.Lang.isString,
                 value: 'alloy-editor-placeholder',
                 writeOnce: true
             },
@@ -170,7 +170,7 @@
              * @type {String}
              */
             removePlugins: {
-                validator: Lang.isString,
+                validator: global.Lang.isString,
                 value: 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link',
                 writeOnce: true
             },
