@@ -1,14 +1,10 @@
 'use strict';
 
-CKEDITOR.disableAutoInline = true;
-
-var Lang = Y.Lang;
-
 function AlloyEditor(config) {
     AlloyEditor.superclass.constructor.call(this, config);
 }
 
-OOP.extend(AlloyEditor, Base, {
+global.OOP.extend(AlloyEditor, global.Base, {
     /**
      * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
      * instace, passing it the provided configuration attributes.
@@ -33,7 +29,7 @@ OOP.extend(AlloyEditor, Base, {
         editor.config.pasteFromWordRemoveStyles = false;
         editor.config.pasteFromWordRemoveFontStyles = false;
 
-        Lang.mix(editor.config, config);
+        global.Lang.mix(editor.config, config);
 
         this._editor = editor;
 
@@ -82,7 +78,7 @@ OOP.extend(AlloyEditor, Base, {
      * @return {Boolean} True if the value was accepted, false otherwise.
      */
     _validateAllowedContent: function(value) {
-        return Lang.isString(value) || Lang.isObject(value) || Lang.isBoolean(value);
+        return global.Lang.isString(value) || global.Lang.isObject(value) || global.Lang.isBoolean(value);
     },
 }, {
     ATTRS: {
@@ -109,7 +105,7 @@ OOP.extend(AlloyEditor, Base, {
          * @type {Number}
          */
         eventsDelay: {
-            validator: Lang.isNumber,
+            validator: global.Lang.isNumber,
             value: 100
         },
 
@@ -123,7 +119,7 @@ OOP.extend(AlloyEditor, Base, {
          * @type {String}
          */
         extraPlugins: {
-            validator: Lang.isString,
+            validator: global.Lang.isString,
             value: 'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader',
             writeOnce: true
         },
@@ -151,7 +147,7 @@ OOP.extend(AlloyEditor, Base, {
          * @type {String}
          */
         placeholderClass: {
-            validator: Lang.isString,
+            validator: global.Lang.isString,
             value: 'alloy-editor-placeholder',
             writeOnce: true
         },
@@ -173,7 +169,7 @@ OOP.extend(AlloyEditor, Base, {
          * @type {String}
          */
         removePlugins: {
-            validator: Lang.isString,
+            validator: global.Lang.isString,
             value: 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link',
             writeOnce: true
         },

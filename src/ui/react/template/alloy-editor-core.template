@@ -1,0 +1,7 @@
+(function() {
+	var global = {};
+
+	<%= source %>
+
+	window.AlloyEditor = global.AlloyEditor;
+}());
