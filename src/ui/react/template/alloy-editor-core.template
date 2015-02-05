@@ -1,7 +1,22 @@
-(function() {
-	var global = {};
+(function (global, factory) {
+    'use strict';
 
-	<%= source %>
+    var built = factory(global);
 
-	window.AlloyEditor = global.AlloyEditor;
-}());
+    /* istanbul ignore else */
+    if (typeof module === 'object' && module) {
+        module.exports = built;
+    }
+
+    /* istanbul ignore next */
+    if (typeof define === 'function' && define.amd) {
+        define(factory);
+    }
+
+    global.AlloyEditor = built;
+}(typeof global !== 'undefined' ? global : /* istanbul ignore next */ this, function (global) {
+
+    <%= source %>
+
+    return AlloyEditor;
+}));

@@ -1,0 +1,10 @@
+var CKEDITOR_BASEPATH = 'alloy-editor/';
+CKEDITOR.disableAutoInline = true;
+
+(function() {
+	var global = {};
+
+	<%= source %>
+
+	window.AlloyEditor = global.AlloyEditor;
+}());

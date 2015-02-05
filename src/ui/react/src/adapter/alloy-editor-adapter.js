@@ -4,7 +4,7 @@ function AlloyEditor(config) {
     AlloyEditor.superclass.constructor.call(this, config);
 }
 
-global.OOP.extend(AlloyEditor, global.Base, {
+OOP.extend(AlloyEditor, Base, {
     /**
      * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
      * instace, passing it the provided configuration attributes.
@@ -29,7 +29,7 @@ global.OOP.extend(AlloyEditor, global.Base, {
         editor.config.pasteFromWordRemoveStyles = false;
         editor.config.pasteFromWordRemoveFontStyles = false;
 
-        global.Lang.mix(editor.config, config);
+        Lang.mix(editor.config, config);
 
         this._editor = editor;
 
@@ -78,7 +78,7 @@ global.OOP.extend(AlloyEditor, global.Base, {
      * @return {Boolean} True if the value was accepted, false otherwise.
      */
     _validateAllowedContent: function(value) {
-        return global.Lang.isString(value) || global.Lang.isObject(value) || global.Lang.isBoolean(value);
+        return Lang.isString(value) || Lang.isObject(value) || Lang.isBoolean(value);
     },
 }, {
     ATTRS: {
@@ -105,7 +105,7 @@ global.OOP.extend(AlloyEditor, global.Base, {
          * @type {Number}
          */
         eventsDelay: {
-            validator: global.Lang.isNumber,
+            validator: Lang.isNumber,
             value: 100
         },
 
@@ -119,7 +119,7 @@ global.OOP.extend(AlloyEditor, global.Base, {
          * @type {String}
          */
         extraPlugins: {
-            validator: global.Lang.isString,
+            validator: Lang.isString,
             value: 'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader',
             writeOnce: true
         },
@@ -147,7 +147,7 @@ global.OOP.extend(AlloyEditor, global.Base, {
          * @type {String}
          */
         placeholderClass: {
-            validator: global.Lang.isString,
+            validator: Lang.isString,
             value: 'alloy-editor-placeholder',
             writeOnce: true
         },
@@ -169,7 +169,7 @@ global.OOP.extend(AlloyEditor, global.Base, {
          * @type {String}
          */
         removePlugins: {
-            validator: global.Lang.isString,
+            validator: Lang.isString,
             value: 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link',
             writeOnce: true
         },
