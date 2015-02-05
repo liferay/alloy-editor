@@ -68,9 +68,9 @@ gulp.task('create-alloy-editor-core', function() {
         path.join(reactDir, 'src/oop/attribute.js'),
         path.join(reactDir, 'src/oop/oop.js'),
         path.join(reactDir, 'src/oop/base.js'),
-        path.join(reactDir, 'src/buttons/*.js'),
-        path.join(reactDir, 'src/toolbars/*.js'),
-        path.join(reactDir, 'src/adapter/alloy-editor-adapter.js')
+        path.join(reactDir, 'src/buttons/*.js*'),
+        path.join(reactDir, 'src/toolbars/*.js*'),
+        path.join(reactDir, 'src/adapter/alloy-editor-adapter.js*')
     ])
     .pipe(react())
     .pipe(concat('alloy-editor-core.js'))
