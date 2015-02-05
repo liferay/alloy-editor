@@ -11,4 +11,8 @@ gulp.task('clean-dist', function(callback) {
 	return del(distFolder, callback);
 });
 
-gulp.task('clean-all', ['clean-dist']);
+gulp.task('clean-umd', function(callback) {
+	return del(path.join(__dirname, '..', 'umd'), callback);
+});
+
+gulp.task('clean-all', ['clean-dist', 'clean-umd']);

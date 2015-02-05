@@ -1,4 +1,22 @@
-'use strict';
+(function (global, factory) {
+    'use strict';
+
+    var built = factory(global);
+
+    /* istanbul ignore else */
+    if (typeof module === 'object' && module) {
+        module.exports = built;
+    }
+
+    /* istanbul ignore next */
+    if (typeof define === 'function' && define.amd) {
+        define(factory);
+    }
+
+    global.Attribute = built;
+}(typeof global !== 'undefined' ? global : /* istanbul ignore next */ this, function (global) {
+
+    'use strict';
 
 /**
  * Attribute implementation
@@ -107,3 +125,6 @@ Attribute.prototype = {
         return result;
     }
 };
+
+    return Attribute;
+}));

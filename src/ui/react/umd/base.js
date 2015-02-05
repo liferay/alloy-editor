@@ -1,4 +1,22 @@
-'use strict';
+(function (global, factory) {
+    'use strict';
+
+    var built = factory(global);
+
+    /* istanbul ignore else */
+    if (typeof module === 'object' && module) {
+        module.exports = built;
+    }
+
+    /* istanbul ignore next */
+    if (typeof define === 'function' && define.amd) {
+        define(factory);
+    }
+
+    global.Base = built;
+}(typeof global !== 'undefined' ? global : /* istanbul ignore next */ this, function (global) {
+
+    'use strict';
 
 /**
  * Quick and dirty impl of Base class
@@ -65,3 +83,6 @@ global.OOP.extend(Base, global.Attribute, {
         }
     }
 });
+
+    return Base;
+}));
