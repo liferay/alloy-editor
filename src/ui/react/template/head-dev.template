@@ -1,0 +1,7 @@
+<link href="bootstrap.css" rel="stylesheet">
+
+<script>
+	var CKEDITOR_BASEPATH = 'alloy-editor/';
+</script>
+
+<script src="alloy-editor/alloy-editor-all.js"></script>

@@ -1,4 +1,3 @@
-var CKEDITOR_BASEPATH = 'alloy-editor/';
 CKEDITOR.disableAutoInline = true;
 
 (function() {

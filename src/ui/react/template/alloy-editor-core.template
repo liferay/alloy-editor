@@ -18,5 +18,5 @@
 
     <%= source %>
 
-    return AlloyEditor;
+    return global.AlloyEditor;
 }));

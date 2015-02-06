@@ -2,11 +2,14 @@
 
 var gulp = require('gulp');
 
+var argv = require('yargs').argv;
 var concat = require('gulp-concat');
+var fs = require('fs');
 var path = require('path');
 var react = require('gulp-react');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
+var template = require('gulp-template');
 var uglify = require('gulp-uglify');
 
 var rootDir = path.join(__dirname, '..', '..', '..', '..');
@@ -21,8 +24,29 @@ gulp.task('build', function(callback) {
         'clean-all', 'build-js', 'minimize-js', [
             'create-alloy-editor', 'create-alloy-editor-min'
         ],
+        'build-demo',
         callback
     );
+});
+
+gulp.task('build-demo', function() {
+    var templateHead;
+
+    if (argv._.indexOf('release') >= 0) {
+        templateHead = 'head-release.template';
+    }
+    else {
+        templateHead = 'head-dev.template';
+    }
+
+    return gulp.src([
+            path.join(reactDir, 'demo', 'index.html'),
+            path.join(reactDir, 'demo', 'bootstrap.css'),
+        ])
+        .pipe(template({
+            resources: fs.readFileSync(path.join(reactDir, 'template', templateHead))
+        }))
+        .pipe(gulp.dest(path.join(distFolder, 'alloy-editor-' + pkg.version)));
 });
 
 gulp.task('build-js', function(callback) {
@@ -64,6 +88,8 @@ gulp.task('create-alloy-editor-core', function() {
         path.join(rootDir, 'src/core/selection-region.js'),
         path.join(rootDir, 'src/core/tools.js'),
         path.join(rootDir, 'src/core/uicore.js'),
+        path.join(rootDir, 'src/plugins/drop-images.js'),
+        path.join(rootDir, 'src/plugins/placeholder.js'),
         path.join(reactDir, 'src/oop/lang.js'),
         path.join(reactDir, 'src/oop/attribute.js'),
         path.join(reactDir, 'src/oop/oop.js'),
@@ -84,4 +110,8 @@ gulp.task('minimize-js', function() {
         .pipe(uglify())
         .pipe(rename('alloy-editor-core-min.js'))
         .pipe(gulp.dest(editorDistFolder));
+});
+
+gulp.task('watch', ['build'], function () {
+    gulp.watch('src/**/*', ['build']);
 });
