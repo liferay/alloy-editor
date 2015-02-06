@@ -19,6 +19,12 @@ var pkg = require(path.join(rootDir, 'package.json'));
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
 
+function errorHandler(error) {
+  console.log(error.toString());
+
+  this.emit('end');
+}
+
 gulp.task('build', function(callback) {
     runSequence(
         'clean-all', 'build-js', 'minimize-js', [
@@ -98,7 +104,7 @@ gulp.task('create-alloy-editor-core', function() {
         path.join(reactDir, 'src/toolbars/*.js*'),
         path.join(reactDir, 'src/adapter/alloy-editor-adapter.js*')
     ])
-    .pipe(react())
+    .pipe(react()).on('error', errorHandler)
     .pipe(concat('alloy-editor-core.js'))
     .pipe(gulp.dest(editorDistFolder));
 });
