@@ -81,30 +81,28 @@
 
             this._toolbars = [];
 
-            for (var toolbar in toolbars) {
-                if (Object.prototype.hasOwnProperty.call(toolbars, toolbar)) {
-                    var ToolbarImpl = global.Toolbars[toolbar] || window[toolbar];
+            Object.keys(toolbars).forEach(function(toolbar) {
+                var ToolbarImpl = global.Toolbars[toolbar] || window[toolbar];
 
-                    if (ToolbarImpl) {
-                        var toolbarContainer = document.createElement('div');
+                if (ToolbarImpl) {
+                    var toolbarContainer = document.createElement('div');
 
-                        document.body.insertBefore(toolbarContainer, document.body.firstChild);
+                    document.body.insertBefore(toolbarContainer, document.body.firstChild);
 
-                        var toolbarInst = React.render(
-                            React.createElement(ToolbarImpl, {
-                                config: toolbars[toolbar],
-                                editor: this
-                            }),
-                            toolbarContainer
-                        );
+                    var toolbarInst = React.render(
+                        React.createElement(ToolbarImpl, {
+                            config: toolbars[toolbar],
+                            editor: this
+                        }),
+                        toolbarContainer
+                    );
 
-                        this._toolbars.push({
-                            container: toolbarContainer,
-                            impl: toolbarInst
-                        });
-                    }
+                    this._toolbars.push({
+                        container: toolbarContainer,
+                        impl: toolbarInst
+                    });
                 }
-            }
+            }.bind(this));
         },
 
         /**
