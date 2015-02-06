@@ -14,6 +14,10 @@
             return typeof(param) === 'function';
         },
 
+        isNull: function(param) {
+            return param === null;
+        },
+
         isNumber: function(param) {
             return typeof param === 'number' && isFinite(param);
         },
