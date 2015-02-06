@@ -1,7 +1,10 @@
 CKEDITOR.disableAutoInline = true;
 
 (function() {
-	var global = {};
+	var global = {
+		Toolbars: {},
+		Buttons: {}
+	};
 
 	<%= source %>
 

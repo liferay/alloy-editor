@@ -35,6 +35,8 @@
             this._editor = editor;
 
             var eventsDelay = this.get('eventsDelay');
+
+            this._renderToolbars();
         },
 
         /**
@@ -70,17 +72,58 @@
         },
 
         /**
+         * Renders the specified from the user toolbars
+         *
+         * @protected
+         */
+        _renderToolbars: function() {
+            var toolbars = this.get('toolbars');
+
+            this._toolbars = [];
+
+            for (var toolbar in toolbars) {
+                var ToolbarImpl = global.Toolbars[toolbar] || window[toolbar];
+
+                if (ToolbarImpl) {
+                    var toolbarContainer = document.createElement('div');
+
+                    document.body.insertBefore(toolbarContainer, document.body.firstChild);
+
+                    var toolbarInst = React.render(
+                        React.createElement(ToolbarImpl, {config: toolbars[toolbar]}),
+                        toolbarContainer
+                    );
+
+                    this._toolbars.push({
+                        container: toolbarContainer,
+                        impl: toolbarInst
+                    });
+                }
+            }
+        },
+
+        /**
          * Validates the allowed content attribute. Look
          * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
          * supported values.
          *
-         * @method _validateAllowedContent
+         * @param {Any} The value to be checked
          * @protected
-         * @return {Boolean} True if the value was accepted, false otherwise.
+         * @return {Boolean} True if the current value is valid configuration, false otherwise
          */
         _validateAllowedContent: function(value) {
             return global.Lang.isString(value) || global.Lang.isObject(value) || global.Lang.isBoolean(value);
         },
+
+        /**
+         * Validates the value of toolbars attribute
+         *
+         * @param {Any} The value to be checked
+         * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
+         */
+        _validateToolbars: function(value) {
+            return global.Lang.isObject(value) || global.Lang.isNull(value);
+        }
     }, {
         ATTRS: {
             /**
@@ -190,6 +233,7 @@
              * TODO: Explain the configuration below
              */
             toolbars: {
+                validator: '_validateToolbars',
                 value: {
                     add: {
                         buttons: ['image']
@@ -198,7 +242,7 @@
                         selections: [
                             {
                                 name: 'text',
-                                buttons: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
+                                buttons: ['bold', 'italic', 'underline', 'h1', 'h2', 'a', 'twitter']
                             },
                             {
                                 name: 'image',

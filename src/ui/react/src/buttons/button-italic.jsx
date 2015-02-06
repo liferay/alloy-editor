@@ -21,5 +21,5 @@
 
     ButtonItalic.key = 'buttonItalic';
 
-    global.ButtonItalic = ButtonItalic;
+    global.Buttons.Italic = global.ButtonItalic = ButtonItalic;
 }());

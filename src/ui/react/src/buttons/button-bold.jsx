@@ -17,5 +17,5 @@
 
     ButtonBold.key = 'buttonBold';
 
-    global.ButtonBold = ButtonBold;
+    global.Buttons.bold = global.ButtonBold = ButtonBold;
 }());

@@ -50,5 +50,5 @@
 
     ButtonLink.key = 'buttonLink';
 
-    global.ButtonLink = ButtonLink;
+    global.Buttons.Link = global.ButtonLink = ButtonLink;
 }());

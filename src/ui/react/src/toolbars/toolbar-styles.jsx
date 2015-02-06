@@ -46,5 +46,5 @@
         }
     });
 
-    global.ToolbarStyles = ToolbarStyles;
+    global.Toolbars.styles = global.ToolbarStyles = ToolbarStyles;
 }());
