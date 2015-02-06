@@ -14,12 +14,18 @@
             var self = this;
 
             this._interval = setInterval(function() {
-                var currentSelection = SelectionTypes[linkSwitch];
+                if (linkSwitch === 1) {
+                    linkSwitch = 0;
+                } else {
+                    ++linkSwitch;
+                }
+
+                var currentSelection = global.SelectionTypes[linkSwitch];
 
                 self.setState({
                     currentSelection: currentSelection
                 });
-            }, 100);
+            }, 1000);
         },
 
         componentDidUnmount: function() {

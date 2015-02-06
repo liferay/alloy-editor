@@ -82,22 +82,27 @@
             this._toolbars = [];
 
             for (var toolbar in toolbars) {
-                var ToolbarImpl = global.Toolbars[toolbar] || window[toolbar];
+                if (Object.prototype.hasOwnProperty.call(toolbars, toolbar)) {
+                    var ToolbarImpl = global.Toolbars[toolbar] || window[toolbar];
 
-                if (ToolbarImpl) {
-                    var toolbarContainer = document.createElement('div');
+                    if (ToolbarImpl) {
+                        var toolbarContainer = document.createElement('div');
 
-                    document.body.insertBefore(toolbarContainer, document.body.firstChild);
+                        document.body.insertBefore(toolbarContainer, document.body.firstChild);
 
-                    var toolbarInst = React.render(
-                        React.createElement(ToolbarImpl, {config: toolbars[toolbar]}),
-                        toolbarContainer
-                    );
+                        var toolbarInst = React.render(
+                            React.createElement(ToolbarImpl, {
+                                config: toolbars[toolbar],
+                                editor: this
+                            }),
+                            toolbarContainer
+                        );
 
-                    this._toolbars.push({
-                        container: toolbarContainer,
-                        impl: toolbarInst
-                    });
+                        this._toolbars.push({
+                            container: toolbarContainer,
+                            impl: toolbarInst
+                        });
+                    }
                 }
             }
         },
