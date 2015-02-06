@@ -46,10 +46,7 @@
 
             while(ctor) {
                 if (global.Lang.isFunction(ctor.prototype[wat])) {
-                    arr.push({
-                        context: ctor,
-                        toCall: ctor.prototype[wat]
-                    });
+                    arr.push(ctor.prototype[wat]);
                 }
 
                 ctor = ctor.superclass ? ctor.superclass.constructor : null;
@@ -62,7 +59,7 @@
             for (var i = 0; i < arr.length; i++) {
                 var item = arr[i];
 
-                item.toCall.apply(item.context, args);
+                item.apply(this, args);
             }
         }
     });
