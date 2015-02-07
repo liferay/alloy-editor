@@ -31,7 +31,7 @@
                         this.set(attr, this._config[attr]);
                     }
 
-                    if (global.Lang.isFunction(currentAttr.getter)) {
+                    if (global.Lang.isFunction(currentAttr.getter) || global.Lang.isString(currentAttr.getter)) {
                         result = this._callStringOrFunction(currentAttr.getter);
                     } else {
                         result = currentAttr.value;
