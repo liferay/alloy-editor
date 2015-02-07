@@ -9,6 +9,7 @@ var fs = require('fs');
 var path = require('path');
 var react = require('gulp-react');
 var rename = require('gulp-rename');
+var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var template = require('gulp-template');
 var uglify = require('gulp-uglify');
@@ -79,6 +80,7 @@ gulp.task('create-alloy-editor', function() {
             path.join(editorDistFolder, 'alloy-editor-core.js'),
         ])
         .pipe(concat('alloy-editor-all.js'))
+        .pipe(replace(/ckeditor(\\?).js/g, 'alloy-editor-all$1.js'))
         .pipe(gulp.dest(editorDistFolder));
 });
 
@@ -89,6 +91,7 @@ gulp.task('create-alloy-editor-min', function() {
             path.join(editorDistFolder, 'alloy-editor-core-min.js'),
         ])
         .pipe(concat('alloy-editor-all-min.js'))
+        .pipe(replace(/ckeditor(\\?).js/g, 'alloy-editor-all-min$1.js'))
         .pipe(gulp.dest(editorDistFolder));
 });
 
