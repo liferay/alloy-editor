@@ -4,6 +4,7 @@ var gulp = require('gulp');
 
 var argv = require('yargs').argv;
 var concat = require('gulp-concat');
+var del = require('del');
 var fs = require('fs');
 var path = require('path');
 var react = require('gulp-react');
@@ -27,7 +28,7 @@ function errorHandler(error) {
 
 gulp.task('build', function(callback) {
     runSequence(
-        'clean-all', 'build-js', 'minimize-js', [
+        'clean-dist', ['build-css', 'build-js'], 'minimize-js', [
             'create-alloy-editor', 'create-alloy-editor-min'
         ],
         'build-demo',
@@ -60,6 +61,10 @@ gulp.task('build-js', function(callback) {
         'copy-ckeditor',
         'create-alloy-editor-core',
     ], 'wrap-alloy-editor-core', 'wrap-alloy-editor-global', callback);
+});
+
+gulp.task('clean-dist', function(callback) {
+    return del(distFolder, callback);
 });
 
 gulp.task('copy-ckeditor', function() {
