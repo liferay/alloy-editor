@@ -20,17 +20,18 @@
                     <div>
                         <span>
                             <input></input>
+                            <span className="alloy-editor-icon-close"></span>
                         </span>
 
                         <span>
-                            <button type="button" className="btn btn-default" ariaLabel="Left Align">
-                                <span className="glyphicon glyphicon-ok" ariaHidden="true"></span>
+                            <button data-type="button-ok" className="alloy-editor-button" onClick={this.handleClick}>
+                                <span className="alloy-editor-icon-ok"></span>
                             </button>
                         </span>
 
                         <span>
-                            <button type="button" className="btn btn-default" ariaLabel="Left Align" onClick={this.getBack}>
-                                <span className="glyphicon glyphicon-remove" ariaHidden="true"></span>
+                            <button data-type="button-close" className="alloy-editor-button" onClick={this.handleClick}>
+                                <span className="alloy-editor-icon-close"></span>
                             </button>
                         </span>
                     </div>
@@ -38,8 +39,8 @@
             }
             else if (this.props.selectionType === 'text') {
                 return (
-                    <button type="button" className="btn btn-default" ariaLabel="Left Align" onClick={this.handleClick}>
-                        <span className="glyphicon glyphicon-link" ariaHidden="true"></span>
+                    <button data-type="button-link" className="alloy-editor-button" onClick={this.handleClick}>
+                        <span className="alloy-editor-icon-link"></span>
                     </button>
                 );
             } else {

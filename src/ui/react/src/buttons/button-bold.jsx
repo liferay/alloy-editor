@@ -8,8 +8,8 @@
 
         render: function() {
             return (
-                <button type="button" className="btn btn-default" ariaLabel="Left Align" onClick={this.handleClick}>
-                    <span className="glyphicon glyphicon-bold" ariaHidden="true"></span>
+                <button data-type="button-bold" className="alloy-editor-button" onClick={this.handleClick}>
+                    <span className="alloy-editor-icon-bold"></span>
                 </button>
             );
         }

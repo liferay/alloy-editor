@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var linkSwitch = 1;
+    var linkSwitch = 0;
 
     var ToolbarStyles = React.createClass({
         getInitialState: function() {
@@ -15,19 +15,11 @@
 
             this.props.editor.get('nativeEditor').on('editorInteraction', this._onEditorInteraction, this);
 
-            this._interval = setInterval(function() {
-                if (linkSwitch === 1) {
-                    linkSwitch = 0;
-                } else {
-                    ++linkSwitch;
-                }
+            var currentSelection = global.SelectionTypes[linkSwitch];
 
-                var currentSelection = global.SelectionTypes[linkSwitch];
-
-                self.setState({
-                    currentSelection: currentSelection
-                });
-            }, 1000);
+            self.setState({
+                currentSelection: currentSelection
+            });
         },
 
         componentDidUnmount: function() {
@@ -48,7 +40,7 @@
 
             return (
                 <div className="alloy-editor-toolbar-styles">
-                    <div className="buttons-container btn-group">
+                    <div className="alloy-editor-buttons-container">
                         {buttons}
                     </div>
                 </div>
