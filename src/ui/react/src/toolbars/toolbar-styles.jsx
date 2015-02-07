@@ -6,7 +6,8 @@
     var ToolbarStyles = React.createClass({
         getInitialState: function() {
             return {
-                currentSelection: global.SelectionTypes[linkSwitch]
+                currentSelection: global.SelectionTypes[linkSwitch],
+                className: 'alloy-editor-toolbar-styles alloy-editor-hide'
             };
         },
 
@@ -39,7 +40,7 @@
             });
 
             return (
-                <div className="alloy-editor-toolbar-styles">
+                <div className={this.state.className}>
                     <div className="alloy-editor-buttons-container">
                         {buttons}
                     </div>
