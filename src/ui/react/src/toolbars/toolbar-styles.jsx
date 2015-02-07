@@ -13,6 +13,8 @@
         componentDidMount: function() {
             var self = this;
 
+            this.props.editor.get('nativeEditor').on('editorInteraction', this._onEditorInteraction, this);
+
             this._interval = setInterval(function() {
                 if (linkSwitch === 1) {
                     linkSwitch = 0;
@@ -30,6 +32,8 @@
 
         componentDidUnmount: function() {
             clearInterval(this._interval);
+
+            this.props.editor.get('nativeEditor').removeListener('editorInteraction', this._onEditorInteraction, this);
         },
 
         render: function() {
@@ -49,6 +53,10 @@
                     </div>
                 </div>
             );
+        },
+
+        _onEditorInteraction: function(event) {
+            console.log(event);
         }
     });
 
