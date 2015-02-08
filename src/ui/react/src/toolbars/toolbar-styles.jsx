@@ -47,10 +47,10 @@
         },
 
         _getToolbarClassName: function() {
-            var className = 'alloy-editor-toolbar-styles alloy-editor-hide';
+            var className = 'alloy-editor-toolbar alloy-editor-toolbar-styles';
 
-            if (this.state.currentSelection) {
-                className = 'alloy-editor-toolbar-styles';
+            if (!this.state.currentSelection) {
+                className += ' alloy-editor-hide';
             }
 
             return className;
