@@ -13,8 +13,14 @@
         {
             buttons: [global.ButtonBold, global.ButtonItalic, global.ButtonLink],
             name: 'text',
-            test: function() {
+            test: function(data, editor) {
+                var nativeEditor = editor.get('nativeEditor');
 
+                var selectionEmpty = nativeEditor.isSelectionEmpty();
+
+                var selectionData = data.selectionData;
+
+                return (!selectionData.element && selectionData.region && !selectionEmpty);
             }
         }
     ];
