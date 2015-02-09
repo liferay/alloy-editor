@@ -4,7 +4,6 @@
     var Selections = [
         {
             buttons: [global.ButtonLink],
-            
             name: 'link',
             test: function() {
 
