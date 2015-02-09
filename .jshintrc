@@ -59,7 +59,7 @@
   "passfail": false,
   "white": true,
   "maxlen": 120,
-  "maxparams" : 1,
+  "maxparams" : 3,
   "maxdepth" : 1,
   "maxerr": 100
 }
