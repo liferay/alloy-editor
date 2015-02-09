@@ -2,8 +2,8 @@
     'use strict';
 
     var ButtonLink = React.createClass({
-        getKey: function() {
-            return 'ButtonLik';
+        statics: {
+            key: 'buttonLink'
         },
 
         handleClick: function(event) {
@@ -48,8 +48,6 @@
             }
         }
     });
-
-    ButtonLink.key = 'buttonLink';
 
     global.Buttons.Link = global.ButtonLink = ButtonLink;
 }());

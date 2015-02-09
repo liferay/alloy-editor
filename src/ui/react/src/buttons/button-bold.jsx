@@ -2,6 +2,10 @@
     'use strict';
 
     var ButtonBold = React.createClass({
+        statics: {
+            key: 'buttonBold'
+        },
+
         handleClick: function(event) {
             console.log('click bold!');
         },
@@ -14,8 +18,6 @@
             );
         }
     });
-
-    ButtonBold.key = 'buttonBold';
 
     global.Buttons.bold = global.ButtonBold = ButtonBold;
 }());

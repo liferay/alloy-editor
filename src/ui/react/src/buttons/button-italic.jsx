@@ -2,8 +2,8 @@
     'use strict';
 
     var ButtonItalic = React.createClass({
-        getKey: function() {
-            return 'ButtonItalic';
+        statics: {
+            key: 'buttonItalic'
         },
 
         handleClick: function(event) {
@@ -18,8 +18,6 @@
             );
         }
     });
-
-    ButtonItalic.key = 'buttonItalic';
 
     global.Buttons.Italic = global.ButtonItalic = ButtonItalic;
 }());
