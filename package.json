@@ -35,6 +35,7 @@
     "karma-sinon": "^1.0.4",
     "lodash": "^3.0.0",
     "mocha": "^2.1.0",
+    "node-bourbon": "^1.2.3",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.2",
     "sinon": "^1.12.2",
