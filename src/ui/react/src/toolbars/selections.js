@@ -1,15 +1,15 @@
 (function () {
     'use strict';
 
-    var SelectionTypes = [
+    var Selections = [
         {
             buttons: [global.ButtonLink],
+            
             name: 'link',
             test: function() {
 
             }
         },
-
         {
             buttons: [global.ButtonBold, global.ButtonItalic, global.ButtonLink],
             name: 'text',
@@ -25,5 +25,5 @@
         }
     ];
 
-    global.SelectionTypes = SelectionTypes;
+    global.Selections = Selections;
 }());

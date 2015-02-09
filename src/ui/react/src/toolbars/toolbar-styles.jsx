@@ -2,6 +2,8 @@
     'use strict';
 
     var ToolbarStyles = React.createClass({
+        mixins: [global.ToolbarPosition],
+
         getInitialState: function() {
             return {
                 currentSelection: null
@@ -60,13 +62,13 @@
             // Check each selection type and if some match, stop cycling and show the toolbar with the
             // respective buttons
 
-            var selectionType;
+            var selection;
 
-            global.SelectionTypes.some(function(item) {
+            global.Selections.some(function(item) {
                 var result = item.test(event.data, this.props.editor);
 
                 if (result) {
-                    selectionType = item;
+                    selection = item;
                 }
 
                 this._eventData = event.data;
@@ -75,7 +77,7 @@
             }, this);
 
             this.setState({
-                currentSelection: selectionType
+                currentSelection: selection
             });
         }
     });
