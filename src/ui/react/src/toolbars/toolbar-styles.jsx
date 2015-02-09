@@ -4,6 +4,19 @@
     var ToolbarStyles = React.createClass({
         mixins: [global.ToolbarPosition],
 
+        getDefaultProps : function() {
+            return {
+                gutter: {
+                    left: 0,
+                    top: 10
+                }
+            };
+        },
+
+        propTypes: {
+            gutter: React.PropTypes.object
+        },
+
         getInitialState: function() {
             return {
                 currentSelection: null
