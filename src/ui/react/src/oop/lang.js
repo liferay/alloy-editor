@@ -2,40 +2,44 @@
     'use strict';
 
     var Lang = {
-        isArray: function(param) {
-            return Object.prototype.toString.call(param) == '[object Array]';
+        isArray: function(value) {
+            return Object.prototype.toString.call(value) == '[object Array]';
         },
 
-        isBoolean: function(param) {
-            return typeof param === 'boolean';
+        isBoolean: function(value) {
+            return typeof value === 'boolean';
         },
 
-        isFunction: function(param) {
-            return typeof(param) === 'function';
+        isFunction: function(value) {
+            return typeof(value) === 'function';
         },
 
-        isNull: function(param) {
-            return param === null;
+        isNull: function(value) {
+            return value === null;
         },
 
-        isNumber: function(param) {
-            return typeof param === 'number' && isFinite(param);
+        isNumber: function(value) {
+            return typeof value === 'number' && isFinite(value);
         },
 
-        isObject: function(param) {
-            var paramType = typeof param;
+        isObject: function(value) {
+            var valueType = typeof value;
 
-            return (param && (paramType === 'object' || Lang.isFunction(param)));
+            return (value && (valueType === 'object' || Lang.isFunction(value)));
         },
 
-        isString: function(param) {
-            return typeof param === 'string';
+        isString: function(value) {
+            return typeof value === 'string';
         },
 
         mix: function(receiver, supplier) {
             for (var key in supplier) {
                 receiver[key] = supplier[key];
             }
+        },
+
+        toInt: function(value) {
+            return parseInt(value, 10);
         }
     };
 
