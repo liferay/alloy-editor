@@ -34,15 +34,48 @@
         },
 
         componentDidUpdate: function(prevProps, prevState) {
-            if (this.state.interationPoint) {
-                var interationPoint = this.state.interationPoint;
+            function applyTransitionClass() {
+                domNode.className += ' alloy-editor-toolbar-transition';
+            }
 
-                var xy = this.getToolbarXYPoint(interationPoint.x, interationPoint.y, interationPoint.direction);
+            function applyTransition() {
+                domNode.style.left = xy[0] + 'px';
+                domNode.style.top = xy[1] + 'px';
+                domNode.style.opacity = 1;
+            }
+
+            if (this.state.currentSelection) {
+                var interationPoint = this.state.interationPoint;
 
                 var domNode = this.getDOMNode();
 
-                domNode.style.left = xy[0] + 'px';
-                domNode.style.top = xy[1] + 'px';
+                var xy = this.getToolbarXYPoint(interationPoint.x, interationPoint.y, interationPoint.direction);
+
+                if (window.requestAnimationFrame) {
+                    var y;
+
+                    if (interationPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                        y = this.state.data.selectionData.region.bottom;
+                    } else {
+                        y = this.state.data.selectionData.region.top;
+                    }
+
+                    var offsetWidth = domNode.offsetWidth;
+
+                    // Actually, do we still need the trick with display: none and then display: block?
+                    domNode.style.display = 'none';
+                    domNode.style.opacity = 0;
+                    domNode.style.left = interationPoint.x - offsetWidth/2 + 'px';
+                    domNode.style.top = y + 'px';
+                    domNode.style.display = 'block';
+
+                    window.requestAnimationFrame(function() {
+                        applyTransitionClass();
+                        applyTransition();
+                    });
+                } else {
+                    applyTransition();
+                }
             }
         },
 
@@ -133,6 +166,7 @@
 
             this.setState({
                 currentSelection: selection,
+                data: event.data,
                 interationPoint: interationPoint
             });
         }

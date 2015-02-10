@@ -6,4 +6,10 @@
 
 .alloy-editor-toolbar {
     position: absolute;
+
+    &.alloy-editor-toolbar-transition {
+        @include transition-property (height, left, opacity, top);
+        @include transition-duration (0.15s);
+        @include transition-timing-function (ease-out);
+    }
 }
