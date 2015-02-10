@@ -4,17 +4,17 @@
     var ToolbarStyles = React.createClass({
         mixins: [global.ToolbarPosition],
 
-        getDefaultProps : function() {
+        propTypes: {
+            gutter: React.PropTypes.object
+        },
+
+        getDefaultProps: function() {
             return {
                 gutter: {
                     left: 0,
                     top: 10
                 }
             };
-        },
-
-        propTypes: {
-            gutter: React.PropTypes.object
         },
 
         getInitialState: function() {
@@ -33,17 +33,36 @@
             this.props.editor.get('nativeEditor').removeListener('editorInteraction', this._onEditorInteraction, this);
         },
 
-        render: function() {
-            var className = this._getToolbarClassName();
-            var buttons = this._getToolbarButtons();
+        componentDidUpdate: function(prevProps, prevState) {
+            if (this.state.interationPoint) {
+                var interationPoint = this.state.interationPoint;
 
-            return (
-                <div className={className}>
-                    <div className="alloy-editor-buttons-container">
-                        {buttons}
+                var xy = this.getToolbarXYPoint(interationPoint.x, interationPoint.y, interationPoint.direction);
+
+                var domNode = this.getDOMNode();
+
+                domNode.style.left = xy[0] + 'px';
+                domNode.style.top = xy[1] + 'px';
+            }
+        },
+
+        render: function() {
+            if (this.state.currentSelection) {
+                var buttons = this._getToolbarButtons();
+                var viewProperties = this._getViewProperties();
+
+                return (
+                    <div className={viewProperties.className}>
+                        <div className="alloy-editor-buttons-container">
+                            {buttons}
+                        </div>
                     </div>
-                </div>
-            );
+                );
+            } else {
+                return (
+                    <div className="alloy-editor-hide" />
+                );
+            }
         },
 
         _getToolbarButtons: function() {
@@ -61,36 +80,60 @@
             return buttons;
         },
 
+        _getStyle: function() {
+            var style = {
+                left: this.state.interationPoint.x,
+                top: this.state.interationPoint.y
+            };
+
+            return style;
+        },
+
         _getToolbarClassName: function() {
             var className = 'alloy-editor-toolbar alloy-editor-toolbar-styles';
 
-            if (!this.state.currentSelection) {
-                className += ' alloy-editor-hide';
+            if (this.state.interationPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                className += ' alloy-editor-arrow-box-top';
+            } else {
+                className += ' alloy-editor-arrow-box-bottom';
             }
 
             return className;
         },
 
-        _onEditorInteraction: function(event) {
-            // Check each selection type and if some match, stop cycling and show the toolbar with the
-            // respective buttons
+        _getViewProperties: function() {
+            var className = this._getToolbarClassName();
+            var style = this._getStyle();
 
+            return {
+                className: className,
+                style: style
+            };
+        },
+
+        _onEditorInteraction: function(event) {
             var selection;
+            var interationPoint;
 
             global.Selections.some(function(item) {
                 var result = item.test(event.data, this.props.editor);
 
                 if (result) {
                     selection = item;
+
+                    interationPoint = this.getInteractionPoint(event.data.selectionData, {
+                        x: event.data.nativeEvent.pageX,
+                        y: event.data.nativeEvent.pageY
+                    });
                 }
 
-                this._eventData = event.data;
 
                 return result;
             }, this);
 
             this.setState({
-                currentSelection: selection
+                currentSelection: selection,
+                interationPoint: interationPoint
             });
         }
     });

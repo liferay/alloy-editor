@@ -3,8 +3,8 @@
 
     var ToolbarPosition = {
         /**
-         * Calculates the position of the toolbar. Depending on the direction of the
-         * selection, ToolbarStyles may appear above on or on bottom of the selection.
+         * Return the position, in page coordinates, according to which the toolbar will appear.
+         * Depending on the direction of the selection, ToolbarStyles may appear above on or on bottom of the selection.
          *
          * @protected
          * @param {Object} selectionData The data about the selection in the editor as
@@ -16,11 +16,12 @@
          * direction, x, y, where x and y are in page coordinates and direction can be one of these:
          * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
          */
-        calculatePosition: function(selectionData, pos) {
+        getInteractionPoint: function(selectionData, pos) {
             var direction = selectionData.region.direction;
 
             var endRect = selectionData.region.endRect;
             var startRect = selectionData.region.startRect;
+
 
             if (endRect && startRect && startRect.top === endRect.top) {
                 direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
@@ -62,7 +63,7 @@
          *
          * @protected
          * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
-         * @param {Number} right The right offset in page coordinates where Toolbar should be shown.
+         * @param {Number} top The top offset in page coordinates where Toolbar should be shown.
          * @param {Number} direction The direction of the selection. May be one of the following:
          * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
          * @return {Array} An Array with left and top offsets in page coordinates.
