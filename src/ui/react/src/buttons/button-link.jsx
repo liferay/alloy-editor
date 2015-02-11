@@ -7,11 +7,7 @@
         },
 
         handleClick: function(event) {
-            linkSwitch = 0;
-        },
-
-        getBack: function() {
-            linkSwitch = 1;
+            console.log('Link button click');
         },
 
         render: function() {
@@ -36,8 +32,7 @@
                         </span>
                     </div>
                 );
-            }
-            else if (this.props.selectionType === 'text') {
+            } else if (this.props.selectionType === 'text') {
                 return (
                     <button data-type="button-link" className="alloy-editor-button" onClick={this.handleClick}>
                         <span className="alloy-editor-icon-link"></span>
