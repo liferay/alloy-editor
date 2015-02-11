@@ -24,7 +24,10 @@
         },
 
         componentDidMount: function() {
-            this.props.editor.get('nativeEditor').on('editorInteraction', this._onEditorInteraction, this);
+            var editor = this.props.editor.get('nativeEditor');
+
+            editor.on('editorInteraction', this._onEditorInteraction, this);
+            editor.on('actionPerformed', this._onActionPerformed, this);
         },
 
         componentDidUnmount: function() {
@@ -34,20 +37,23 @@
         },
 
         componentDidUpdate: function(prevProps, prevState) {
+            var domNode = this.getDOMNode();
+            var domElement = new CKEDITOR.dom.element(domNode);
+
             function applyTransitionClass() {
-                domNode.className += ' alloy-editor-toolbar-transition';
+                domElement.addClass('alloy-editor-toolbar-transition');
             }
 
             function moveToolbar() {
-                domNode.style.left = xy[0] + 'px';
-                domNode.style.top = xy[1] + 'px';
-                domNode.style.opacity = 1;
+                domElement.setStyles({
+                    left: xy[0] + 'px',
+                    top: xy[1] + 'px',
+                    opacity: 1
+                });
             }
 
             if (this.state.currentSelection) {
                 var interationPoint = this.state.interationPoint;
-
-                var domNode = this.getDOMNode();
 
                 var xy = this.getToolbarXYPoint(interationPoint.x, interationPoint.y, interationPoint.direction);
 
@@ -62,12 +68,11 @@
 
                     var offsetWidth = domNode.offsetWidth;
 
-                    // Actually, do we still need the trick with display: none and then display: block?
-                    domNode.style.display = 'none';
-                    domNode.style.opacity = 0;
-                    domNode.style.left = interationPoint.x - offsetWidth/2 + 'px';
-                    domNode.style.top = y + 'px';
-                    domNode.style.display = 'block';
+                    domElement.setStyles({
+                        left: interationPoint.x - offsetWidth/2 + 'px',
+                        opacity: 0,
+                        top: y + 'px'
+                    });
 
                     window.requestAnimationFrame(function() {
                         applyTransitionClass();
@@ -82,10 +87,10 @@
         render: function() {
             if (this.state.currentSelection) {
                 var buttons = this._getToolbarButtons();
-                var viewProperties = this._getViewProperties();
+                var className = this._getToolbarClassName();
 
                 return (
-                    <div className={viewProperties.className}>
+                    <div className={className}>
                         <div className="alloy-editor-buttons-container">
                             {buttons}
                         </div>
@@ -104,6 +109,7 @@
             if (this.state.currentSelection) {
                 buttons = this.state.currentSelection.buttons.map(function(button) {
                     return React.createElement(button, {
+                        editor: this.props.editor,
                         key: button.key,
                         selectionType: this.state.currentSelection.name
                     });
@@ -111,15 +117,6 @@
             }
 
             return buttons;
-        },
-
-        _getStyle: function() {
-            var style = {
-                left: this.state.interationPoint.x,
-                top: this.state.interationPoint.y
-            };
-
-            return style;
         },
 
         _getToolbarClassName: function() {
@@ -134,14 +131,8 @@
             return className;
         },
 
-        _getViewProperties: function() {
-            var className = this._getToolbarClassName();
-            var style = this._getStyle();
-
-            return {
-                className: className,
-                style: style
-            };
+        _onActionPerformed: function(event) {
+            this.forceUpdate();
         },
 
         _onEditorInteraction: function(event) {
