@@ -38,7 +38,7 @@
                 domNode.className += ' alloy-editor-toolbar-transition';
             }
 
-            function applyTransition() {
+            function moveToolbar() {
                 domNode.style.left = xy[0] + 'px';
                 domNode.style.top = xy[1] + 'px';
                 domNode.style.opacity = 1;
@@ -71,10 +71,10 @@
 
                     window.requestAnimationFrame(function() {
                         applyTransitionClass();
-                        applyTransition();
+                        moveToolbar();
                     });
                 } else {
-                    applyTransition();
+                    moveToolbar();
                 }
             }
         },
