@@ -1,6 +1,5 @@
 'use strict';
 
-var bourbon = require('node-bourbon');
 var concat = require('gulp-concat');
 var del = require('del');
 var es = require('event-stream');
@@ -27,7 +26,7 @@ function getFolders(dir) {
 gulp.task('sass2css', function() {
     return gulp.src(path.join(reactDir, 'src/assets/sass/**/*.scss'))
         .pipe(sass({
-			includePaths: bourbon.includePaths
+			includePaths: [path.join(rootDir, 'node_modules/bourbon/app/assets/stylesheets')]
 		}))
 		.pipe(gulp.dest(path.join(editorDistFolder, 'assets/css')));
 });
