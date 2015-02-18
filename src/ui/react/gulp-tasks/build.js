@@ -87,7 +87,7 @@ gulp.task('create-alloy-editor', function() {
 gulp.task('create-alloy-editor-min', function() {
     return gulp.src([
             path.join(editorDistFolder, 'ckeditor.js'),
-            path.join(reactDir, 'vendor', 'react.js'),
+            path.join(reactDir, 'vendor', 'react-min.js'),
             path.join(editorDistFolder, 'alloy-editor-core-min.js'),
         ])
         .pipe(concat('alloy-editor-all-min.js'))
