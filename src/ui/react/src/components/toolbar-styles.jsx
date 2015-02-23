@@ -53,7 +53,7 @@
 
                 return (
                     <div className={className}>
-                        <div className="alloy-editor-buttons-container">
+                        <div className="alloy-editor-container">
                             {buttons}
                         </div>
                     </div>
@@ -92,7 +92,7 @@
         },
 
         _getToolbarClassName: function() {
-            var className = 'alloy-editor-toolbar alloy-editor-toolbar-styles';
+            var className = 'alloy-editor-toolbar-styles alloy-editor-arrow-box';
 
             if (this.state.interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
                 className += ' alloy-editor-arrow-box-top';

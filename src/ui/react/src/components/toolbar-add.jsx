@@ -54,10 +54,11 @@
 
         render: function() {
             var buttons = this._getToolbarButtons();
+            var className = this.props.renderExclusive ? 'alloy-editor-toolbar' : 'alloy-editor-toolbar-add';
 
             return (
-                <div className="alloy-editor-toolbar alloy-editor-toolbar-add">
-                    <div className="alloy-editor-buttons-container">
+                <div className={className}>
+                    <div className="alloy-editor-container">
                         {buttons}
                     </div>
                 </div>
@@ -87,7 +88,7 @@
             } else {
                 if (this.props.selectionData && this.props.selectionData.region) {
                     buttons = (
-                        <button className="alloy-editor-button" onClick={this.handleClick}>
+                        <button className="alloy-editor-button alloy-editor-button-add" onClick={this.handleClick}>
                             <span className="alloy-editor-icon-add"></span>
                         </button>
                     );

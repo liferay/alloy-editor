@@ -37,23 +37,17 @@
         render: function() {
             if (this.props.renderExclusive) {
                 return (
-                    <div>
-                        <span>
-                            <input></input>
+                    <div className="alloy-editor-container">
+                        <div className="alloy-editor-container-input">
+                            <input className="alloy-editor-input" type="text" placeholder="Type or paste link here"></input>
+                            <span className="alloy-editor-button alloy-editor-icon-remove"></span>
+                        </div>
+                        <button aria-label="Confirm" className="alloy-editor-button" onClick={this.handleClick}>
+                            <span className="alloy-editor-icon-ok"></span>
+                        </button>
+                        <button aria-label="Back" className="alloy-editor-button" onClick={this.cancelExclusive}>
                             <span className="alloy-editor-icon-close"></span>
-                        </span>
-
-                        <span>
-                            <button data-type="button-ok" className="alloy-editor-button" onClick={this.handleClick}>
-                                <span className="alloy-editor-icon-ok"></span>
-                            </button>
-                        </span>
-
-                        <span>
-                            <button data-type="button-close" className="alloy-editor-button" onClick={this.cancelExclusive}>
-                                <span className="alloy-editor-icon-close"></span>
-                            </button>
-                        </span>
+                        </button>
                     </div>
                 );
             } else if (this.props.selectionType === 'text') {
