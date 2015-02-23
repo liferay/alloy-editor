@@ -16,6 +16,12 @@ var pkg = require(path.join(rootDir, 'package.json'));
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
 
+function errorHandler(error) {
+    console.error(error.toString());
+
+    this.emit('end');
+}
+
 function getFolders(dir) {
     return fs.readdirSync(dir)
         .filter(function(file) {
@@ -26,9 +32,10 @@ function getFolders(dir) {
 gulp.task('sass2css', function() {
     return gulp.src(path.join(reactDir, 'src/assets/sass/**/*.scss'))
         .pipe(sass({
-			includePaths: [path.join(rootDir, 'node_modules/bourbon/app/assets/stylesheets')]
-		}))
-		.pipe(gulp.dest(path.join(editorDistFolder, 'assets/css')));
+            includePaths: [path.join(rootDir, 'node_modules/bourbon/app/assets/stylesheets')],
+            onError: errorHandler.bind(this)
+        }))
+        .pipe(gulp.dest(path.join(editorDistFolder, 'assets/css')));
 });
 
 gulp.task('join-css', function() {
