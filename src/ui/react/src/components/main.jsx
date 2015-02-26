@@ -4,12 +4,6 @@
     var UI = React.createClass({
         mixins: [global.WidgetExclusive],
 
-        getInitialState: function() {
-            return {
-                itemExclusive: null
-            };
-        },
-
         componentDidMount: function () {
             var editor = this.props.editor.get('nativeEditor');
 

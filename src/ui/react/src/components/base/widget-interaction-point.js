@@ -1,27 +1,40 @@
 (function() {
     'use strict';
 
-    var ToolbarPosition = {
+    var WidgetInteractionPoint = {
         /**
-         * Return the position, in page coordinates, according to which the toolbar will appear.
-         * Depending on the direction of the selection, ToolbarStyles may appear above on or on bottom of the selection.
+         * Return the position, in page coordinates, according to which a widget should appear.
+         * Depending on the direction of the selection, the wdiget may appear above of or on bottom of the selection.
          *
-         * @protected
-         * @param {Object} selectionData The data about the selection in the editor as
-         * returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
-         * @param {Number} pos Contains the coordinates of the position, considered as most appropriate.
+         * It depends on the props editorEvent to analyze the following user-interaction parameters:
+         * - {Object} selectionData The data about the selection in the editor as returned from
+         * {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
+         * - {Number} pos Contains the coordinates of the position, considered as most appropriate.
          * This may be the point where the user released the mouse, or just the beginning or the end of
          * the selection.
+         *
+         * @protected
          * @return {Object} An Object which contains the following properties:
          * direction, x, y, where x and y are in page coordinates and direction can be one of these:
          * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
          */
-        getInteractionPoint: function(selectionData, pos) {
+        getInteractionPoint: function() {
+            var eventPayload = this.props.editorEvent ? this.props.editorEvent.data : null;
+
+            if (!eventPayload) {
+                return;
+            }
+
+            var selectionData = eventPayload.selectionData;
+            var pos = {
+                x: eventPayload.nativeEvent.pageX,
+                y: eventPayload.nativeEvent.pageY
+            };
+
             var direction = selectionData.region.direction;
 
             var endRect = selectionData.region.endRect;
             var startRect = selectionData.region.startRect;
-
 
             if (endRect && startRect && startRect.top === endRect.top) {
                 direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
@@ -58,43 +71,7 @@
         },
 
         /**
-         * Returns the position of the Toolbar taking in consideration the
-         * {{#crossLink "ToolbarStyles/gutter:attribute"}}{{/crossLink}} attribute.
-         *
-         * @protected
-         * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
-         * @param {Number} top The top offset in page coordinates where Toolbar should be shown.
-         * @param {Number} direction The direction of the selection. May be one of the following:
-         * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
-         * @return {Array} An Array with left and top offsets in page coordinates.
-         */
-        getToolbarXYPoint: function(left, top, direction) {
-            var domNode = this.getDOMNode();
-
-            var gutter = this.props.gutter;
-
-            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
-                left = left - gutter.left - (domNode.offsetWidth / 2);
-
-                top = (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) ? (top + gutter.top) :
-                    (top - domNode.offsetHeight - gutter.top);
-
-            } else if (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT ||
-                direction === CKEDITOR.SELECTION_RIGHT_TO_LEFT) {
-
-                left = (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT) ?
-                    (left + gutter.left + domNode.offsetHeight / 2) :
-                    (left - 3 * domNode.offsetHeight / 2 - gutter.left);
-
-                top = top - gutter.top - (domNode.offsetHeight / 2);
-            }
-
-            return [left, top];
-        },
-
-        /**
-         * Returns the position of the Toolbar taking in consideration the
-         * {{#crossLink "ToolbarStyles/gutter:attribute"}}{{/crossLink}} attribute.
+         * Returns the position of the Widget.
          *
          * @method _getXPoint
          * @protected
@@ -128,5 +105,5 @@
         }
     };
 
-    global.ToolbarPosition = ToolbarPosition;
+    global.WidgetInteractionPoint = WidgetInteractionPoint;
 }());

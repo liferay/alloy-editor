@@ -2,6 +2,12 @@
     'use strict';
 
     var WidgetExclusive = {
+        getInitialState: function() {
+            return {
+                itemExclusive: null
+            };
+        },
+
         cancelExclusive: function(itemExclusive) {
             if (this.state.itemExclusive === itemExclusive) {
                 this.setState({
