@@ -2,7 +2,7 @@
     'use strict';
 
     var ButtonItalic = React.createClass({
-        mixins: [global.ButtonElement, global.ButtonActive, global.ButtonAction],
+        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionCommand],
 
         statics: {
             key: 'italic'
@@ -10,15 +10,16 @@
 
         getDefaultProps: function() {
             return {
-                element: 'em'
+                command: 'italic',
+                style: {
+                    element: 'em'
+                }
             };
         },
 
         render: function() {
-            var className = this.getClassName();
-
             return (
-                <button data-type="button-italic" className={className} onClick={this.handleClick}>
+                <button className="alloy-editor-button" data-type="button-italic" onClick={this.handleClick}>
                     <span className="alloy-editor-icon-italic"></span>
                 </button>
             );

@@ -2,7 +2,7 @@
     'use strict';
 
     var ButtonLink = React.createClass({
-        mixins: [global.ButtonElement],
+        mixins: [global.ButtonStyle],
 
         statics: {
             key: 'link'
@@ -14,24 +14,14 @@
 
         getDefaultProps: function() {
             return {
-                element: 'a'
+                style: {
+                    element: 'a'
+                }
             };
         },
 
         handleClick: function(event) {
             this.props.requestExclusive();
-        },
-
-        isActive: function() {
-            var editor = this.props.editor.get('nativeEditor');
-
-            var elementPath = editor.elementPath();
-
-            var result = this._style.checkActive(elementPath, editor);
-
-            var dataType = elementPath.lastElement.data('type');
-
-            return (!!result && !dataType);
         },
 
         render: function() {

@@ -2,7 +2,7 @@
     'use strict';
 
     var ButtonH2 = React.createClass({
-        mixins: [global.ButtonElement, global.ButtonActive, global.ButtonAction],
+        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionStyle],
 
         statics: {
             key: 'h2'
@@ -10,15 +10,15 @@
 
         getDefaultProps: function() {
             return {
-                element: 'h2'
+                style: {
+                    element: 'h2'
+                }
             };
         },
 
         render: function() {
-            var className = this.getClassName();
-
             return (
-                <button data-type="button-h2" className={className} onClick={this.handleClick}>
+                <button className="alloy-editor-button" data-type="button-h2" onClick={this.handleClick}>
                     <span className="alloy-editor-icon-h2"></span>
                 </button>
             );

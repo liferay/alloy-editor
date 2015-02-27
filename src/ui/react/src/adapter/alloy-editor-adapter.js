@@ -16,7 +16,9 @@
             name: 'image',
             buttons: ['imageLeft', 'imageRight'],
             test: function(data, editor) {
-                // body...
+                var selectionData = data.selectionData;
+
+                return (selectionData.element && selectionData.element.getName() === 'img');
             }
         },
         {

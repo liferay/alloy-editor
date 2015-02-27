@@ -2,7 +2,7 @@
     'use strict';
 
     var ButtonUnderline = React.createClass({
-        mixins: [global.ButtonElement, global.ButtonActive, global.ButtonAction],
+        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionCommand],
 
         statics: {
             key: 'underline'
@@ -10,15 +10,16 @@
 
         getDefaultProps: function() {
             return {
-                element: 'u'
+                command: 'underline',
+                style: {
+                    element: 'u'
+                }
             };
         },
 
         render: function() {
-            var className = this.getClassName();
-
             return (
-                <button data-type="button-underline" className={className} onClick={this.handleClick}>
+                <button className="alloy-editor-button" data-type="button-underline" onClick={this.handleClick}>
                     <span className="alloy-editor-icon-underline"></span>
                 </button>
             );

@@ -2,17 +2,15 @@
     'use strict';
 
     var ButtonImage = React.createClass({
-        mixins: [global.ButtonElement, global.ButtonActive, global.ButtonAction],
+        mixins: [global.ButtonAction, global.ButtonStateClasses],
 
         statics: {
             key: 'image'
         },
 
         render: function() {
-            var className = this.getClassName();
-
             return (
-                <button data-type="button-image" className={className} onClick={this.handleClick}>
+                <button className="alloy-editor-button" data-type="button-image" onClick={this.handleClick}>
                     <span className="alloy-editor-icon-image"></span>
                 </button>
             );

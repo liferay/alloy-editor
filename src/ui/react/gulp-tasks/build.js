@@ -110,6 +110,7 @@ gulp.task('create-alloy-editor-core', function() {
         path.join(reactDir, 'src/oop/base.js'),
         path.join(reactDir, 'src/adapter/alloy-editor-adapter.js*'),
         path.join(reactDir, 'src/components/base/*.js*'),
+        path.join(reactDir, 'src/components/buttons/*.js*'),
         path.join(reactDir, 'src/components/*.js*')
     ])
     .pipe(react()).on('error', errorHandler)

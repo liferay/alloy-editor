@@ -2,7 +2,7 @@
     'use strict';
 
     var ButtonBold = React.createClass({
-        mixins: [global.ButtonElement, global.ButtonActive, global.ButtonAction],
+        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionCommand],
 
         statics: {
             key: 'bold'
@@ -10,15 +10,16 @@
 
         getDefaultProps: function() {
             return {
-                element: 'strong'
+                command: 'bold',
+                style: {
+                    element: 'strong'
+                }
             };
         },
 
         render: function() {
-            var className = this.getClassName();
-
             return (
-                <button data-type="button-bold" className={className} onClick={this.handleClick}>
+                <button className="alloy-editor-button" data-type="button-bold" onClick={this.handleClick}>
                     <span className="alloy-editor-icon-bold"></span>
                 </button>
             );
