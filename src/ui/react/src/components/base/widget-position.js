@@ -14,6 +14,9 @@
             gutter: React.PropTypes.object
         },
 
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         */
         getDefaultProps: function() {
             return {
                 gutter: {
