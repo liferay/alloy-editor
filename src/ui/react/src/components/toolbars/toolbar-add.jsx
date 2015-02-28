@@ -41,7 +41,7 @@
 
                     domElement.removeClass('alloy-editor-arrow-box');
 
-                    this._cancelAnimation();
+                    this.cancelAnimation();
                 }
             }
         },
