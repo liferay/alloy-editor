@@ -2,18 +2,22 @@
     'use strict';
 
     /**
-     * ButtonActionCommand is a mixin that provides a handleClick implementation for a
+     * ButtonCommand is a mixin that provides a click implementation for a
      * button based on the available CKEDITOR commands.
      *
+     * @class ButtonCommand
      * The mixin exposes:
      * - {string} command: the command that should be executed
      * - {Function} handleClick: the function to attached to the button
      */
-    var ButtonActionCommand = {
+    var ButtonCommand = {
         propTypes: {
-            command: React.PropTypes.string
+            command: React.PropTypes.string.isRequired
         },
 
+        /**
+         * Executes a CKEditor command and fires `actionPerformed` event.
+         */
         handleClick: function() {
             var editor = this.props.editor.get('nativeEditor');
 
@@ -23,5 +27,5 @@
         }
     };
 
-    global.ButtonActionCommand = ButtonActionCommand;
+    global.ButtonCommand = ButtonCommand;
 }());

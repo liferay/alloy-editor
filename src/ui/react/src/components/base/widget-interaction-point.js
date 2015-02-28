@@ -1,9 +1,14 @@
 (function() {
     'use strict';
 
+    /**
+     * Provides functionality for calculating the point of interaction of the user with the Editor.
+     *
+     * @class WidgetInteractionPoint
+     */
     var WidgetInteractionPoint = {
         /**
-         * Return the position, in page coordinates, according to which a widget should appear.
+         * Returns the position, in page coordinates, according to which a widget should appear.
          * Depending on the direction of the selection, the wdiget may appear above of or on bottom of the selection.
          *
          * It depends on the props editorEvent to analyze the following user-interaction parameters:
@@ -13,7 +18,6 @@
          * This may be the point where the user released the mouse, or just the beginning or the end of
          * the selection.
          *
-         * @protected
          * @return {Object} An Object which contains the following properties:
          * direction, x, y, where x and y are in page coordinates and direction can be one of these:
          * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM

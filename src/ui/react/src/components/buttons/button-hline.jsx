@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var BUttonHline = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionCommand],
+    var ButtonHline = React.createClass({
+        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
 
         statics: {
             key: 'hline'
@@ -26,5 +26,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[BUttonHline.key] = global.AlloyEditor.BUttonHline = BUttonHline;
+    global.AlloyEditor.Buttons[ButtonHline.key] = global.AlloyEditor.ButtonHline = ButtonHline;
 }());

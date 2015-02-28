@@ -2,7 +2,7 @@
     'use strict';
 
     var ButtonSuperscript = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionCommand],
+        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
 
         statics: {
             key: 'superscript'

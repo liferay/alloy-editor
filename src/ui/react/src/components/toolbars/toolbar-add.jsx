@@ -67,7 +67,7 @@
             var buttons;
 
             if (this.props.renderExclusive) {
-                buttons = this._getToolbarButtons(this.props.config.buttons);
+                buttons = this.getToolbarButtons(this.props.config.buttons);
             } else {
                 if (this.props.selectionData && this.props.selectionData.region) {
                     buttons = (

@@ -2,7 +2,7 @@
     'use strict';
 
     var ButtonStrike = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionCommand],
+        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
 
         statics: {
             key: 'strike'

@@ -12,7 +12,7 @@
             var currentSelection = this._getCurrentSelection();
 
             if (currentSelection) {
-                var buttons = this._getToolbarButtons(
+                var buttons = this.getToolbarButtons(
                     currentSelection.buttons,
                     {
                         selectionType: currentSelection.name
