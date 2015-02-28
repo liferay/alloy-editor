@@ -1,13 +1,29 @@
 (function() {
     'use strict';
 
+    /**
+     * Provides functionality for managing exclusive state of an widget.
+     * The exclusive state means that a button may request to be the only rendered
+     * widget in its parent container. WidgetExclusive will manage this state by
+     * filtering and suppressing the other sibling widgets from displaying.
+     *
+     * @class WidgetExclusive
+     */
     var WidgetExclusive = {
+        /**
+         * Lifecycle. Invoked once before the component is mounted.
+         */
         getInitialState: function() {
             return {
                 itemExclusive: null
             };
         },
 
+        /**
+         * Cancels the exclusive state of an widget.
+         *
+         * @param {Object} itemExclusive The widget which exclusive state should be canceled.
+         */
         cancelExclusive: function(itemExclusive) {
             if (this.state.itemExclusive === itemExclusive) {
                 this.setState({
@@ -16,6 +32,12 @@
             }
         },
 
+        /**
+         * Filters the items and returns only those with exclusive state.
+         *
+         * @param {Array} items The widgets to be filtered.
+         * @return {Array|Object} The item with executive state.
+         */
         filterExclusive: function(items) {
             return items.filter(function(item) {
                 if (this.state.itemExclusive) {
@@ -28,6 +50,17 @@
             }.bind(this));
         },
 
+        /**
+         * Merges the provided object with three more properties:
+         * - cancelExclusive - function, which can be used by a widget in order to cancel executive state.
+         * - renderExclusive - boolean flag which indicates if an widget should be rendered exclusively.
+         * - requestExclusive - function, which can be used by a widget in order to obtain exclusive state.
+         *
+         * @param {Object} obj The properties container which should be merged with the properties, related
+         *    to exclusive state.
+         * @param {Object} itemKey They key of an React Widget which should be rendered exclusively.
+         * @return {Object} The merged object.
+         */
         mergeExclusiveProps: function(obj, itemKey) {
             return CKEDITOR.tools.merge(obj, {
                 cancelExclusive: this.cancelExclusive.bind(this, itemKey),
@@ -36,6 +69,11 @@
             });
         },
 
+        /**
+         * Requests and sets exclusive state of an widget.
+         *
+         * @param {Object} itemExclusive The widget which requests exclusive state.
+         */
         requestExclusive: function(itemExclusive) {
             this.setState({
                 itemExclusive: itemExclusive

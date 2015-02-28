@@ -1,6 +1,12 @@
 (function() {
     'use strict';
 
+    /**
+     * Calculates the position where an Widget should be displayed based on the point
+     * where user interacted with the editor.
+     *
+     * @class WidgetPosition
+     */
     var WidgetPosition = {
         mixins: [global.WidgetInteractionPoint],
 
@@ -17,9 +23,22 @@
             };
         },
 
+        /**
+         * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
+         * Updates the position of the widget and shows it using transition.
+         */
         componentDidUpdate: function() {
-            this._udpatePosition();
+            this._updatePosition();
             this._show();
+        },
+
+        /**
+         * Cancels an scheduled animation frame.
+         */
+        cancelAnimation: function() {
+            if (window.cancelAnimationFrame) {
+                window.cancelAnimationFrame(this._animationFrameId);
+            }
         },
 
         /**
@@ -72,18 +91,9 @@
         },
 
         /**
-         * Cancels an scheduled animation frame.
+         * Shows the widget with the default animation transition.
          *
          * @protected
-         */
-        _cancelAnimation: function() {
-            if (window.cancelAnimationFrame) {
-                window.cancelAnimationFrame(this._animationFrameId);
-            }
-        },
-
-        /**
-         * Shows the widget with the default animation transition
          */
         _show: function() {
             var interactionPoint = this.getInteractionPoint(),
@@ -129,8 +139,10 @@
 
         /**
          * Updates the widget position based on the current interaction point.
+         *
+         * @protected
          */
-        _udpatePosition: function() {
+        _updatePosition: function() {
             var interactionPoint = this.getInteractionPoint(),
                 domNode = this.getDOMNode();
 
