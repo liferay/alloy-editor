@@ -1,13 +1,27 @@
 (function () {
     'use strict';
 
+    /**
+     * The ToolbarStyles class hosts the buttons for styling a text selection.
+     *
+     * @class ToolbarStyles
+     */
     var ToolbarStyles = React.createClass({
         mixins: [global.WidgetExclusive, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
 
+        /**
+         * Lifecycle. Provides static properties to the widget.
+         * - key: The name which will be used as an alias of the button in the configuration.
+         */
         statics: {
             key: 'styles'
         },
 
+        /**
+         * Lifecycle. Renders the buttons in the toolbar according to the current selection.
+         *
+         * @return {Object} The content which should be rendered.
+         */
         render: function() {
             var currentSelection = this._getCurrentSelection();
 

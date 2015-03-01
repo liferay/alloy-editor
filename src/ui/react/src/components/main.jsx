@@ -1,9 +1,17 @@
 (function () {
     'use strict';
 
+    /**
+     * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
+     *
+     * @class UI
+     */
     var UI = React.createClass({
         mixins: [global.WidgetExclusive],
 
+        /**
+         * Lifecycle. Called automatically by React when a component is rendered
+         */
         componentDidMount: function () {
             var editor = this.props.editor.get('nativeEditor');
 
@@ -11,6 +19,12 @@
             editor.on('actionPerformed', this._onActionPerformed, this);
         },
 
+        /**
+         * Lifecycle. Renders the UI of the editor. This may include several toolbars and buttons.
+         * The editor's UI also takes care of rendering the items in exclusive mode.
+         *
+         * @return {Object} The content which should be rendered.
+         */
         render: function() {
             var toolbars = Object.keys(this.props.toolbars).map(function(toolbar) {
                 return global.AlloyEditor.Toolbars[toolbar] || window[toolbar];
@@ -36,6 +50,12 @@
             );
         },
 
+        /**
+         * Listener to the editor's `actionPerformed` event. Sets state and redraws the UI of the editor.
+         *
+         * @protected
+         * @param {SynteticEvent} event The provided event
+         */
         _onActionPerformed: function(event) {
             var editor = this.props.editor.get('nativeEditor');
 
@@ -44,6 +64,13 @@
             });
         },
 
+        /**
+         * Listener to the editor's `userInteraction` event. Retrieves the data about the user selection and
+         * provides it via component's state property.
+         *
+         * @protected
+         * @param {SynteticEvent} event The provided event
+         */
         _onEditorInteraction: function(event) {
             this.setState({
                 itemExclusive: null,

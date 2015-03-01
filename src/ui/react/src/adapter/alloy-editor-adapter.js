@@ -1,6 +1,13 @@
 (function () {
     'use strict';
 
+    /**
+     * AlloyEditor main class. Creates instance of the editor and provides the user configuration
+     * to the UI.
+     *
+     * @class AlloyEditor
+     * @constructor
+     */
     function AlloyEditor(config) {
         AlloyEditor.superclass.constructor.call(this, config);
     }
@@ -9,7 +16,6 @@
         {
             name: 'link',
             test: function(data, editor) {
-                // body...
             }
         },
         {
@@ -23,7 +29,7 @@
         },
         {
             name: 'text',
-            buttons: ['bold', 'italic', 'underline', 'h1', 'h2', 'link', 'twitter'],
+            buttons: ['strike', 'bold', 'italic', 'underline', 'h1', 'h2', 'link', 'twitter'],
             test: function(data, editor) {
                 var nativeEditor = editor.get('nativeEditor');
 

@@ -1,17 +1,35 @@
 (function () {
     'use strict';
 
+    /**
+     * The ToolbarAdd class provides functionality for adding content to the editor.
+     *
+     * @class ToolbarAdd
+     */
     var ToolbarAdd = React.createClass({
         mixins: [global.WidgetExclusive, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
 
+        /**
+         * Allows validating props being passed to the component.
+         * @type {Object}
+         */
         propTypes: {
             gutterExclusive: React.PropTypes.object
         },
 
+        /**
+         * Lifecycle. Provides static properties to the widget.
+         * - key: The name which will be used as an alias of the button in the configuration.
+         */
         statics: {
             key: 'add'
         },
 
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @return {Object} The default properties.
+         */
         getDefaultProps: function() {
             return {
                 gutterExclusive: {
@@ -21,6 +39,12 @@
             };
         },
 
+        /**
+         * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
+         *
+         * @param {provProps} prevProps The previous state of the component's properties.
+         * @param {[type]} prevState The previous component's state.
+         */
         componentDidUpdate: function (prevProps, prevState) {
             var region;
 
@@ -46,10 +70,18 @@
             }
         },
 
+        /**
+         * Requests exclusive rendering and displays the buttons for adding content.
+         */
         handleClick: function() {
             this.props.requestExclusive(ToolbarAdd.key);
         },
 
+        /**
+         * Lifecycle. Renders the buttons for adding content.
+         *
+         * @return {Object} The content which should be rendered.
+         */
         render: function() {
             var buttons = this._getButtons();
             var className = this._getToolbarClassName();
@@ -63,6 +95,12 @@
             );
         },
 
+        /**
+         * Returns a list of buttons that will eventually render to HTML.
+         *
+         * @protected
+         * @return {Object} The buttons which have to be rendered.
+         */
         _getButtons: function() {
             var buttons;
 
@@ -85,6 +123,12 @@
             return buttons;
         },
 
+        /**
+         * Returns the class name of the toolbar in case of both exclusive and normal mode.
+         *
+         * @protected
+         * @return {String} The class name which have to be applied to the DOM element.
+         */
         _getToolbarClassName: function() {
             return this.props.renderExclusive ? 'alloy-editor-toolbar' : 'alloy-editor-toolbar-add';
         }
