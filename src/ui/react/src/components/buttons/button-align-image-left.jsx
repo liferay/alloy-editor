@@ -19,6 +19,8 @@
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @return {Object} The default properties.
          */
         getDefaultProps: function() {
             return {
