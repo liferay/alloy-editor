@@ -1,13 +1,27 @@
 (function () {
     'use strict';
 
+    /**
+     * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
+     *
+     * @class ButtonBold
+     */
     var ButtonBold = React.createClass({
         mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
 
+        /**
+         * Lifecycle. Provides static properties to the widget.
+         * - key: The name which will be used as an alias of the button in the configuration.
+         */
         statics: {
             key: 'bold'
         },
 
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @return {Object} The default properties.
+         */
         getDefaultProps: function() {
             return {
                 command: 'bold',
@@ -17,6 +31,11 @@
             };
         },
 
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @return {Object} The content which should be rendered.
+         */
         render: function() {
             return (
                 <button className="alloy-editor-button" data-type="button-bold" onClick={this.handleClick}>
