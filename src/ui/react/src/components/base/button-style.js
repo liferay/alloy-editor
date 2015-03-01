@@ -5,11 +5,12 @@
      * ButtonStyle is a mixin that provides a style prop and some methods to apply the resulting
      * style and checking if it is present in a given path or selection.
      *
-     * @class ButtonStyle
      * The mixin exposes:
      * - {object} style: The style the button should handle as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
      * - {Function} getStyle: Returns the CKEDITOR style associated with the element.
      * - {Function} isActive: Checks wether or not the button is active based on the element.
+     *
+     * @class ButtonStyle
      */
     var ButtonStyle = {
         propTypes: {

@@ -5,10 +5,11 @@
      * ButtonCommand is a mixin that provides a click implementation for a
      * button based on the available CKEDITOR commands.
      *
-     * @class ButtonCommand
      * The mixin exposes:
      * - {string} command: the command that should be executed
      * - {Function} handleClick: the function to attached to the button
+     *
+     * @class ButtonCommand
      */
     var ButtonCommand = {
         propTypes: {

@@ -5,10 +5,11 @@
      * ButtonStateClasses is a mixin that decorates the domElement of a component
      * with different CSS classes based on the current state of the element.
      *
-     * @class ButtonStateClasses
      * To check for state, the component can expose the following methods:
      * - isActive: to check the active state
      * - isDisabled: to check the disabled state
+     *
+     * @class ButtonStateClasses
      */
     var ButtonStateClasses = {
         /**

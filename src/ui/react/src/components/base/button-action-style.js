@@ -5,7 +5,6 @@
      * ButtonActionStyle is a mixin that provides a handleClick implementation for a
      * button based on the `applyStyle` and `removeStyle` API of CKEDITOR.
      *
-     * @class ButtonActionStyle
      * To execute properly, the component has to expose the following methods which can be obtained
      * out of the box using the ButtonStyle mixin:
      * - isActive: to check the active state
@@ -13,11 +12,12 @@
      *
      * The mixin exposes:
      * - {Function} handleClick: the function to attached to the button
+     *
+     * @class ButtonActionStyle
      */
     var ButtonActionStyle = {
         /**
          * Removes or applies style to a selection.
-         *
          */
         handleClick: function() {
             if (global.Lang.isFunction(this.isActive) && global.Lang.isFunction(this.getStyle)) {
