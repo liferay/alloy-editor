@@ -273,7 +273,7 @@
                 validator: '_validateToolbars',
                 value: {
                     add: {
-                        buttons: ['image']
+                        buttons: ['image', 'hline']
                     },
                     styles: {
                         selections: Selections
