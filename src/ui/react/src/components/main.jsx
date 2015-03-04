@@ -7,7 +7,22 @@
      * @class UI
      */
     var UI = React.createClass({
-        mixins: [global.WidgetExclusive],
+        mixins: [global.WidgetExclusive, global.WidgetFocusManager],
+
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function() {
+            return {
+                circular: true,
+                descendants: '[class*=alloy-editor-toolbar-]',
+                keys: {
+                    next: 9
+                }
+            };
+        },
 
         /**
          * Lifecycle. Called automatically by React when a component is rendered
@@ -17,6 +32,7 @@
 
             editor.on('editorInteraction', this._onEditorInteraction, this);
             editor.on('actionPerformed', this._onActionPerformed, this);
+            editor.on('key', this._onEditorKey, this);
         },
 
         /**
@@ -44,7 +60,7 @@
             }.bind(this));
 
             return (
-                <div className="alloy-editor-toolbars">
+                <div className="alloy-editor-toolbars" onKeyDown={this.handleKey}>
                     {toolbars}
                 </div>
             );
@@ -77,6 +93,17 @@
                 selectionData: event.data.selectionData,
                 editorEvent: event
             });
+        },
+
+        /**
+         * Focuses on the active toolbar when the combination ALT+F10 is pressed inside the editor.
+         */
+        _onEditorKey: function(event) {
+            var nativeEvent = event.data.domEvent.$;
+
+            if (nativeEvent.altKey && nativeEvent.keyCode === 121) {
+                this.focus();
+            }
         }
     });
 
