@@ -7,7 +7,7 @@
      * @class ToolbarStyles
      */
     var ToolbarStyles = React.createClass({
-        mixins: [global.WidgetExclusive, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
+        mixins: [global.WidgetExclusive, global.WidgetFocusManager, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -15,6 +15,22 @@
          */
         statics: {
             key: 'styles'
+        },
+
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function() {
+            return {
+                circular: true,
+                descendants: '.alloy-editor-button',
+                keys: {
+                    next: [38, 39],
+                    prev: [37, 40]
+                }
+            };
         },
 
         /**
@@ -34,7 +50,7 @@
                 );
 
                 return (
-                    <div className="alloy-editor-toolbar-styles">
+                    <div className="alloy-editor-toolbar-styles" onFocus={this.focus} onKeyDown={this.handleKey}>
                         <div className="alloy-editor-container">
                             {buttons}
                         </div>
