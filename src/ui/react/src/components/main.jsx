@@ -59,6 +59,8 @@
         _onActionPerformed: function(event) {
             var editor = this.props.editor.get('nativeEditor');
 
+            editor.focus();
+
             this.setState({
                 selectionData: editor.getSelectionData()
             });
