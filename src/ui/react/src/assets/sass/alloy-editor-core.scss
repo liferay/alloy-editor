@@ -55,13 +55,14 @@ $IE9_ONLY: \9;
         width: $base_button_width;
 
         &:hover, &:focus {
-            &.alloy-editor-button-disabled {
+            &:disabled, &.alloy-editor-button-disabled {
                 color: inherit;
             }
         }
 
-        &.alloy-editor-button-disabled {
+        &:disabled, &.alloy-editor-button-disabled {
             cursor: auto;
+            opacity: 0.3;
         }
     }
 }
