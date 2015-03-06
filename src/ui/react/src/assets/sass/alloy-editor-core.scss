@@ -144,3 +144,15 @@ $IE9_ONLY: \9;
 
     }
 }
+
+.alloy-editor-twitter-link {
+    padding: 0 5px;
+
+    &:after {
+        content: '\E018';
+        display: inline-block;
+        font-family: alloyeditor;
+        margin-left: 4px;
+        vertical-align: middle;
+    }
+}
