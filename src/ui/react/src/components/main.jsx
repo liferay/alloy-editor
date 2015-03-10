@@ -97,6 +97,8 @@
 
         /**
          * Focuses on the active toolbar when the combination ALT+F10 is pressed inside the editor.
+         *
+         * @protected
          */
         _onEditorKey: function(event) {
             var nativeEvent = event.data.domEvent.$;

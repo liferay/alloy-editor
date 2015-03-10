@@ -19,9 +19,9 @@
      */
     var WidgetFocusManager = {
         propTypes: {
-            circular: React.PropTypes.bool,
-            descendants: React.PropTypes.string,
-            keys: React.PropTypes.object
+            circular: React.PropTypes.bool.isRequired,
+            descendants: React.PropTypes.string.isRequired,
+            keys: React.PropTypes.object.isRequired
         },
 
         /**
@@ -50,10 +50,9 @@
         },
 
         /**
-         * Handles the key events on a DOM node to execute the appropiate navigation when needed.
+         * Handles the key events on a DOM node to execute the appropriate navigation when needed.
          *
          * @param {Object} event The Keyboard event that was detected on the widget DOM node.
-         *
          * @method handleKey
          */
         handleKey: function(event) {
@@ -130,8 +129,9 @@
          * @method _moveFocus
          */
         _moveFocus: function(direction) {
-            var numDescendants = this._descendants.length,
-                descendant = this._descendants[this._activeDescendant];
+            var numDescendants = this._descendants.length;
+
+            var descendant = this._descendants[this._activeDescendant];
 
             descendant.setAttribute('tabIndex', -1);
 
@@ -153,6 +153,8 @@
 
         /**
          * Refreshes the descendants list by executing the CSS selector again and resets the descendants tabIndex.
+         *
+         * @protected
          */
         _refresh: function() {
             var domNode = this.getDOMNode();
