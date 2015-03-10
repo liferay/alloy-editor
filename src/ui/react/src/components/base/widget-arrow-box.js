@@ -8,29 +8,25 @@
      * @class WidgetArrowBox
      */
     var WidgetArrowBox = {
-        mixins: [global.WidgetInteractionPoint],
-
         /**
-         * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
+         * Returns the list of arrowbox classes associated to the current element's state. It relies
+         * on the getInteractionPoint method to calculate the selection direction.
          *
-         * Adds classes for displaying the arrow box on bottom or on top of the Widget.
+         * @method getArrowBoxClasses
+         * @return {String} A string with the arrowbox css classes.
          */
-        componentDidUpdate: function() {
-            var domNode = this.getDOMNode();
+        getArrowBoxClasses: function() {
+            var arrowBoxClasses = ['alloy-editor-arrow-box'];
 
-            if (domNode) {
-                var domElement = new CKEDITOR.dom.element(domNode);
-
-                domElement.addClass('alloy-editor-arrow-box');
-
+            if (global.Lang.isFunction(this.getInteractionPoint) && this.getInteractionPoint()) {
                 if (this.getInteractionPoint().direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    domElement.removeClass('alloy-editor-arrow-box-bottom');
-                    domElement.addClass('alloy-editor-arrow-box-top');
+                    arrowBoxClasses.push('alloy-editor-arrow-box-top');
                 } else {
-                    domElement.removeClass('alloy-editor-arrow-box-top');
-                    domElement.addClass('alloy-editor-arrow-box-bottom');
+                    arrowBoxClasses.push('alloy-editor-arrow-box-bottom');
                 }
             }
+
+            return arrowBoxClasses.join(' ');
         }
     };
 

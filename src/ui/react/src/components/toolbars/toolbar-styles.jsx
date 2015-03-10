@@ -41,6 +41,8 @@
         render: function() {
             var currentSelection = this._getCurrentSelection();
 
+            var cssClasses = 'alloy-editor-toolbar-styles ' + this.getArrowBoxClasses();
+
             if (currentSelection) {
                 var buttons = this.getToolbarButtons(
                     currentSelection.buttons,
@@ -50,7 +52,7 @@
                 );
 
                 return (
-                    <div className="alloy-editor-toolbar-styles" onFocus={this.focus} onKeyDown={this.handleKey}>
+                    <div className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="-1">
                         <div className="alloy-editor-container">
                             {buttons}
                         </div>

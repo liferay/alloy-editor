@@ -13,50 +13,30 @@
      */
     var ButtonStateClasses = {
         /**
-         * Lifecycle. Invoked once, only on the client (not on the server),
-         * immediately after the initial rendering occurs.
-         */
-        componentDidMount: function() {
-            this._appendClasses();
-        },
-
-        /**
-         * Lifecycle. Invoked immediately after the component's updates are
-         * flushed to the DOM.
-         */
-        componentDidUpdate: function() {
-            this._appendClasses();
-        },
-
-        /**
-         * Adds or removes pressed and disabled classes depending on button state.
+         * Returns the list of state classes associated to the current element's state, according
+         * to the results of the isActive and isDisabled methods.
          *
-         * @protected
+         * @method getStateClasses
+         * @return {String} A string with the state css classes.
          */
-        _appendClasses: function() {
-           var domNode = this.getDOMNode();
+        getStateClasses: function() {
+            var stateClasses = [];
 
-            if (domNode) {
-                var domElement = new CKEDITOR.dom.element(domNode);
-
-                // Check for active state
-                if (global.Lang.isFunction(this.isActive)) {
-                    if (this.isActive()) {
-                        domElement.addClass('alloy-editor-button-pressed');
-                    } else {
-                        domElement.removeClass('alloy-editor-button-pressed');
-                    }
-                }
-
-                // Check for disabled state
-                if (global.Lang.isFunction(this.isDisabled)) {
-                    if (this.isDisabled()) {
-                        domElement.addClass('alloy-editor-button-disabled');
-                    } else {
-                        domElement.removeClass('alloy-editor-button-disabled');
-                    }
+            // Check for active state
+            if (global.Lang.isFunction(this.isActive)) {
+                if (this.isActive()) {
+                    stateClasses.push('alloy-editor-button-pressed');
                 }
             }
+
+            // Check for disabled state
+            if (global.Lang.isFunction(this.isDisabled)) {
+                if (this.isDisabled()) {
+                    stateClasses.push('alloy-editor-button-disabled');
+                }
+            }
+
+            return stateClasses.join(' ');
         }
     };
 

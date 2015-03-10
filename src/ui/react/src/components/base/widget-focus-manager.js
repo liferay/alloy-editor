@@ -160,12 +160,24 @@
             var domNode = this.getDOMNode();
 
             if (domNode) {
-                this._descendants = domNode.querySelectorAll(this.props.descendants);
+                var descendants = domNode.querySelectorAll(this.props.descendants);
+
+                this._descendants = Array.prototype.map.call(descendants, function(item) {
+                    return item;
+                }).sort(function(a, b) {
+                    return (global.Lang.toInt(a.getAttribute('data-tabindex')) > global.Lang.toInt(b.getAttribute('data-tabindex')));
+                });
+
                 this._activeDescendant = 0;
 
-                Array.prototype.forEach.call(this._descendants, function(descendant, descendantIndex) {
-                    descendant.setAttribute('tabIndex', (descendantIndex ? -1 : 0));
-                });
+                if (this.props.trigger && this.props.trigger.isMounted()) {
+                    var triggerDescendant = this._descendants.indexOf(this.props.trigger.getDOMNode());
+
+                    if (triggerDescendant !== -1) {
+                        this._activeDescendant = triggerDescendant;
+                        this.focus();
+                    }
+                }
             }
         }
     };

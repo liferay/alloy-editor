@@ -36,13 +36,15 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
+            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+
             if (this.props.renderExclusive) {
                 return (
                     <global.AlloyEditor.ButtonEditLink {...this.props} />
                 );
             } else {
                 return (
-                    <button data-type="button-link" className="alloy-editor-button" onClick={this.props.requestExclusive}>
+                    <button className={cssClass} data-type="button-link" onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex}>
                         <span className="alloy-editor-icon-link"></span>
                     </button>
                 );
