@@ -93,7 +93,7 @@
             var className = this._getToolbarClassName();
 
             return (
-                <div className={className} onFocus={this.focus} onKeyDown={this.handleKey}>
+                <div className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="-1">
                     <div className="alloy-editor-container">
                         {buttons}
                     </div>
@@ -136,7 +136,13 @@
          * @return {String} The class name which have to be applied to the DOM element.
          */
         _getToolbarClassName: function() {
-            return this.props.renderExclusive ? 'alloy-editor-toolbar' : 'alloy-editor-toolbar-add';
+            var cssClass = 'alloy-editor-toolbar-add';
+
+            if (this.props.renderExclusive) {
+                cssClass = 'alloy-editor-toolbar ' + this.getArrowBoxClasses();
+            }
+
+            return cssClass;
         }
     });
 

@@ -283,10 +283,12 @@
                 validator: '_validateToolbars',
                 value: {
                     add: {
-                        buttons: ['image', 'hline']
+                        buttons: ['image', 'hline'],
+                        tabIndex: 2
                     },
                     styles: {
-                        selections: Selections
+                        selections: Selections,
+                        tabIndex: 1
                     }
                 }
             }

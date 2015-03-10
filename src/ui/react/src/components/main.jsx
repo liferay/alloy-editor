@@ -53,7 +53,8 @@
                     editorEvent: this.state.editorEvent,
                     key: toolbar.key,
                     selectionData: this.state.selectionData,
-                    selections: this.props.selections
+                    selections: this.props.selections,
+                    trigger: this.state.trigger
                 }, toolbar.key);
 
                 return React.createElement(toolbar, props);
@@ -78,7 +79,8 @@
             editor.focus();
 
             this.setState({
-                selectionData: editor.getSelectionData()
+                selectionData: editor.getSelectionData(),
+                trigger: event.data
             });
         },
 
@@ -93,7 +95,8 @@
             this.setState({
                 itemExclusive: null,
                 selectionData: event.data.selectionData,
-                editorEvent: event
+                editorEvent: event,
+                trigger: null
             });
         },
 
