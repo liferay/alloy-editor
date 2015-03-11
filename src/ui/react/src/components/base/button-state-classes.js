@@ -17,26 +17,22 @@
          * to the results of the isActive and isDisabled methods.
          *
          * @method getStateClasses
-         * @return {String} A string with the state css classes.
+         * @return {String} A string with the state CSS classes.
          */
         getStateClasses: function() {
-            var stateClasses = [];
+            var stateClasses = '';
 
             // Check for active state
-            if (global.Lang.isFunction(this.isActive)) {
-                if (this.isActive()) {
-                    stateClasses.push('alloy-editor-button-pressed');
-                }
+            if (global.Lang.isFunction(this.isActive) && this.isActive()) {
+                stateClasses += 'alloy-editor-button-pressed';
             }
 
             // Check for disabled state
-            if (global.Lang.isFunction(this.isDisabled)) {
-                if (this.isDisabled()) {
-                    stateClasses.push('alloy-editor-button-disabled');
-                }
+            if (global.Lang.isFunction(this.isDisabled) && this.isDisabled()) {
+                stateClasses += ' alloy-editor-button-disabled';
             }
 
-            return stateClasses.join(' ');
+            return stateClasses;
         }
     };
 
