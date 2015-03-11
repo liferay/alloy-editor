@@ -99,8 +99,9 @@
          * @protected
          */
         _show: function() {
-            var interactionPoint = this.getInteractionPoint(),
-                domNode = this.getDOMNode();
+            var interactionPoint = this.getInteractionPoint();
+
+            var domNode = this.getDOMNode();
 
             if (interactionPoint && domNode) {
                 var domElement = new CKEDITOR.dom.element(domNode);
@@ -146,8 +147,9 @@
          * @protected
          */
         _updatePosition: function() {
-            var interactionPoint = this.getInteractionPoint(),
-                domNode = this.getDOMNode();
+            var interactionPoint = this.getInteractionPoint();
+
+            var domNode = this.getDOMNode();
 
             if (interactionPoint && domNode) {
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);

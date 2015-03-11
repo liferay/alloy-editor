@@ -55,13 +55,14 @@ $IE9_ONLY: \9;
         width: $base_button_width;
 
         &:hover, &:focus {
-            &.alloy-editor-button-disabled {
+            &:disabled, &.alloy-editor-button-disabled {
                 color: inherit;
             }
         }
 
-        &.alloy-editor-button-disabled {
+        &:disabled, &.alloy-editor-button-disabled {
             cursor: auto;
+            opacity: 0.3;
         }
     }
 }
@@ -141,5 +142,17 @@ $IE9_ONLY: \9;
             vertical-align: middle;
         }
 
+    }
+}
+
+.alloy-editor-twitter-link {
+    padding: 0 5px;
+
+    &:after {
+        content: '\E018';
+        display: inline-block;
+        font-family: alloyeditor;
+        margin-left: 4px;
+        vertical-align: middle;
     }
 }

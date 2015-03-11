@@ -7,7 +7,7 @@
      * @class ToolbarAdd
      */
     var ToolbarAdd = React.createClass({
-        mixins: [global.WidgetExclusive, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
+        mixins: [global.WidgetExclusive, global.WidgetFocusManager, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
 
         /**
          * Allows validating props being passed to the component.
@@ -32,9 +32,15 @@
          */
         getDefaultProps: function() {
             return {
+                circular: true,
+                descendants: '.alloy-editor-button',
                 gutterExclusive: {
                     left: 10,
                     top: 0
+                },
+                keys: {
+                    next: [38, 39],
+                    prev: [37, 40]
                 }
             };
         },
@@ -87,7 +93,7 @@
             var className = this._getToolbarClassName();
 
             return (
-                <div className={className}>
+                <div className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="-1">
                     <div className="alloy-editor-container">
                         {buttons}
                     </div>
@@ -130,7 +136,13 @@
          * @return {String} The class name which have to be applied to the DOM element.
          */
         _getToolbarClassName: function() {
-            return this.props.renderExclusive ? 'alloy-editor-toolbar' : 'alloy-editor-toolbar-add';
+            var cssClass = 'alloy-editor-toolbar-add';
+
+            if (this.props.renderExclusive) {
+                cssClass = 'alloy-editor-toolbar ' + this.getArrowBoxClasses();
+            }
+
+            return cssClass;
         }
     });
 

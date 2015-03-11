@@ -39,8 +39,10 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
+            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+
             return (
-                <button className="alloy-editor-button" data-type="button-align-right" onClick={this.handleClick}>
+                <button className={cssClass} data-type="button-align-right" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
                     <span className="alloy-editor-icon-align-right"></span>
                 </button>
             );

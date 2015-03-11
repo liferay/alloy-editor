@@ -7,7 +7,7 @@
      * @class ToolbarStyles
      */
     var ToolbarStyles = React.createClass({
-        mixins: [global.WidgetExclusive, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
+        mixins: [global.WidgetExclusive, global.WidgetFocusManager, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -18,12 +18,30 @@
         },
 
         /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function() {
+            return {
+                circular: true,
+                descendants: '.alloy-editor-button',
+                keys: {
+                    next: [38, 39],
+                    prev: [37, 40]
+                }
+            };
+        },
+
+        /**
          * Lifecycle. Renders the buttons in the toolbar according to the current selection.
          *
          * @return {Object} The content which should be rendered.
          */
         render: function() {
             var currentSelection = this._getCurrentSelection();
+
+            var cssClasses = 'alloy-editor-toolbar-styles ' + this.getArrowBoxClasses();
 
             if (currentSelection) {
                 var buttons = this.getToolbarButtons(
@@ -34,7 +52,7 @@
                 );
 
                 return (
-                    <div className="alloy-editor-toolbar-styles">
+                    <div className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="-1">
                         <div className="alloy-editor-container">
                             {buttons}
                         </div>

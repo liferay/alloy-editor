@@ -8,8 +8,6 @@
      * @class ToolbarButtons
      */
     var ToolbarButtons = {
-        mixins: [global.WidgetExclusive],
-
         /**
          * Analyzes the current selection and the buttons exclusive mode value to figure out which
          * buttons should be present in a given state.
@@ -30,7 +28,9 @@
             .map(function(button) {
                 var props = this.mergeExclusiveProps({
                     editor: this.props.editor,
-                    key: button.key
+                    key: button.key,
+                    tabKey: button.key,
+                    tabIndex: (this.props.trigger && this.props.trigger.props.tabKey === button.key) ? 0 : -1
                 }, button.key);
 
                 if (additionalProps) {
