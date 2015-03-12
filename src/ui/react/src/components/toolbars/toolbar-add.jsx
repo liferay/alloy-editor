@@ -63,10 +63,11 @@
                     var domNode = this.getDOMNode();
                     var domElement = new CKEDITOR.dom.element(domNode);
 
+                    var startRect = region.startRect || region;
                     var left = this.props.editor.get('nativeEditor').editable().getClientRect().left;
 
                     domNode.style.left = left - domNode.offsetWidth - this.props.gutterExclusive.left + 'px';
-                    domNode.style.top = region.top - domNode.offsetHeight/2 + region.startRect.height/2 + 'px';
+                    domNode.style.top = region.top - domNode.offsetHeight/2 + startRect.height/2 + 'px';
                     domNode.style.opacity = 1;
 
                     domElement.removeClass('alloy-editor-arrow-box');
