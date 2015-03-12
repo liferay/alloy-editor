@@ -17,12 +17,21 @@
          * @return {Array} An Array which contains the buttons that should be rendered.
          */
         getToolbarButtons: function(buttons, additionalProps) {
+            var buttonProps = {};
+
             var toolbarButtons = this.filterExclusive(
                 buttons.filter(function(button) {
-                    return (global.Lang.isString(button) ? global.AlloyEditor.Buttons[button] : button);
+                    return button && (global.AlloyEditor.Buttons[button] || global.AlloyEditor.Buttons[button.name]);
                 })
                 .map(function(button) {
-                    return global.Lang.isString(button) ? global.AlloyEditor.Buttons[button] : button;
+                    if (global.Lang.isString(button)) {
+                        button = global.AlloyEditor.Buttons[button];
+                    } else if (global.Lang.isString(button.name)) {
+                        buttonProps[global.AlloyEditor.Buttons[button.name].key] = button.cfg;
+                        button = global.AlloyEditor.Buttons[button.name];
+                    }
+
+                    return button;
                 })
             )
             .map(function(button) {
@@ -34,7 +43,7 @@
                 }, button.key);
 
                 if (additionalProps) {
-                    props = CKEDITOR.tools.merge(props, additionalProps);
+                    props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
                 }
 
                 return React.createElement(button, props);
