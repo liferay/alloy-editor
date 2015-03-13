@@ -104,6 +104,7 @@ gulp.task('create-alloy-editor-core', function() {
         path.join(rootDir, 'src/core/uicore.js'),
         path.join(rootDir, 'src/plugins/drop-images.js'),
         path.join(rootDir, 'src/plugins/placeholder.js'),
+        path.join(rootDir, 'src/plugins/autolink.js'),
         path.join(reactDir, 'src/oop/lang.js'),
         path.join(reactDir, 'src/oop/attribute.js'),
         path.join(reactDir, 'src/oop/oop.js'),

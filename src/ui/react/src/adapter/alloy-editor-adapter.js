@@ -191,7 +191,7 @@
              */
             extraPlugins: {
                 validator: global.Lang.isString,
-                value: 'uicore,selectionregion,dropimages,placeholder',
+                value: 'uicore,selectionregion,dropimages,placeholder,autolink',
                 writeOnce: true
             },
 
