@@ -99,9 +99,9 @@ gulp.task('create-alloy-editor-min', function() {
 
 gulp.task('create-alloy-editor-core', function() {
     return gulp.src(srcFiles, {cwd : rootDir + '/src'})
-        .pipe(react()).on('error', errorHandler)
-        .pipe(concat('alloy-editor-core.js'))
-        .pipe(gulp.dest(editorDistFolder));
+    .pipe(react()).on('error', errorHandler)
+    .pipe(concat('alloy-editor-core.js'))
+    .pipe(gulp.dest(editorDistFolder));
 });
 
 gulp.task('minimize-js', function() {
