@@ -3,10 +3,10 @@
 
     /**
      * The ButtonLink class provides functionality for creating and editing a link in a document. ButtonLink
-     * renders in two different ways:
+     * renders in two different modes:
      *
      * - Normal: Just a button that allows to switch to the edition mode
-     * - Exclusive: The ButtonEditLink UI with all the link edition controls.
+     * - Exclusive: The ButtonLinkEdit UI with all the link edition controls.
      *
      * @class ButtonLink
      */

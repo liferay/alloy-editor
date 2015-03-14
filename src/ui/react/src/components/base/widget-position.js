@@ -76,17 +76,55 @@
         },
 
         /**
+         * Returns true if the widget is visible, false otherwise
+         *
+         * @return {Boolean} True if the widget is visible, false otherwise
+         */
+        isVisible: function() {
+            var domNode = this.getDOMNode();
+
+            if (domNode) {
+                var domElement = new CKEDITOR.dom.element(domNode);
+
+                return domElement.hasClass('alloy-editor-visible');
+            }
+
+            return false;
+        },
+
+        moveToPoint: function(startPoint, endPoint) {
+            var domElement = new CKEDITOR.dom.element(this.getDOMNode());
+
+            domElement.setStyles({
+                left: startPoint[0] + 'px',
+                top: startPoint[1] + 'px',
+                opacity: 0
+            });
+
+            domElement.removeClass('alloy-editor-invisible');
+
+            this._animate(function() {
+                domElement.addClass('alloy-editor-toolbar-transition alloy-editor-visible');
+                domElement.setStyles({
+                    left: endPoint[0],
+                    top: endPoint[1],
+                    opacity: 1
+                });
+            });
+        },
+
+        /**
          * Shows the widget with the default animation transition.
          */
         show: function() {
-            var interactionPoint = this.getInteractionPoint();
-
             var domNode = React.findDOMNode(this);
 
-            if (interactionPoint && domNode) {
-                var domElement = new CKEDITOR.dom.element(domNode);
+            if (!this.isVisible() && domNode) {
+                var interactionPoint = this.getInteractionPoint();
 
-                if (!domElement.hasClass('alloy-editor-visible')) {
+                if (interactionPoint) {
+                    var domElement = new CKEDITOR.dom.element(domNode);
+
                     var finalX,
                         finalY,
                         initialX,
@@ -101,22 +139,7 @@
                         initialY = this.props.selectionData.region.top;
                     }
 
-                    domElement.setStyles({
-                        left: initialX,
-                        top: initialY + 'px',
-                        opacity: 0
-                    });
-
-                    domElement.removeClass('alloy-editor-invisible');
-
-                    this._animate(function() {
-                        domElement.addClass('alloy-editor-toolbar-transition alloy-editor-visible');
-                        domElement.setStyles({
-                            left: finalX,
-                            top: finalY,
-                            opacity: 1
-                        });
-                    });
+                    this.moveToPoint([initialX, initialY], [finalX, finalY]);
                 }
             }
         },

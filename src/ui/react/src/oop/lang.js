@@ -14,7 +14,7 @@
          * @return {Boolean} True if the passed value is an array, false otherwise.
          */
         isArray: function(value) {
-            return Object.prototype.toString.call(value) == '[object Array]';
+            return Object.prototype.toString.call(value) === '[object Array]';
         },
 
         /**
@@ -88,8 +88,12 @@
          * @return {Object} The modified receiver.
          */
         mix: function(receiver, supplier) {
+            var hasOwnProperty = Object.prototype.hasOwnProperty;
+
             for (var key in supplier) {
-                receiver[key] = supplier[key];
+                if (hasOwnProperty.call(supplier, key)) {
+                    receiver[key] = supplier[key];
+                }
             }
         },
 
