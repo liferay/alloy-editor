@@ -55,7 +55,11 @@
         componentDidUpdate: function (prevProps, prevState) {
             var region;
 
-            if (!this.props.renderExclusive) {
+            if (this.props.renderExclusive) {
+                this.updatePosition();
+                this.show();
+
+            } else {
                 if (this.props.selectionData) {
                     region = this.props.selectionData.region;
                 }

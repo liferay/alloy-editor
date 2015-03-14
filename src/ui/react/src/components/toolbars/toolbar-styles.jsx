@@ -18,6 +18,17 @@
         },
 
         /**
+         * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
+         *
+         * @param {provProps} prevProps The previous state of the component's properties.
+         * @param {[type]} prevState The previous component's state.
+         */
+        componentDidUpdate: function (prevProps, prevState) {
+            this.updatePosition();
+            this.show();
+        },
+
+        /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
          * @return {Object} The default properties.
