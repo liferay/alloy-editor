@@ -24,8 +24,24 @@
          * @param {[type]} prevState The previous component's state.
          */
         componentDidUpdate: function (prevProps, prevState) {
-            this.updatePosition();
-            this.show();
+            var currentSelection = this._getCurrentSelection();
+
+            var result;
+
+            // If current selection has a function called `setPosition`, call it
+            // and check the returned value. If false, fallback to the default positioning logic.
+            if (currentSelection && global.Lang.isFunction(currentSelection.setPosition)) {
+                result = currentSelection.setPosition.call(this, {
+                    editor: this.props.editor,
+                    editorEvent: this.props.editorEvent,
+                    selectionData: this.props.selectionData
+                });
+            }
+
+            if (!result) {
+                this.updatePosition();
+                this.show();
+            }
         },
 
         /**
@@ -52,9 +68,17 @@
         render: function() {
             var currentSelection = this._getCurrentSelection();
 
-            var cssClasses = 'alloy-editor-toolbar-styles ' + this.getArrowBoxClasses();
-
             if (currentSelection) {
+                var arrowBoxClasses;
+
+                if (global.Lang.isFunction(currentSelection.getArrowBoxClasses)) {
+                    arrowBoxClasses = currentSelection.getArrowBoxClasses();
+                } else {
+                    arrowBoxClasses = this.getArrowBoxClasses();
+                }
+
+                var cssClasses = 'alloy-editor-toolbar-styles ' + arrowBoxClasses;
+
                 var buttons = this.getToolbarButtons(
                     currentSelection.buttons,
                     {
@@ -86,7 +110,10 @@
 
             if (eventPayload) {
                 this.props.config.selections.some(function(item) {
-                    var result = item.test(eventPayload, this.props.editor);
+                    var result = item.test({
+                        data: eventPayload,
+                        editor: this.props.editor
+                    });
 
                     if (result) {
                         selection = item;

@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
     /**
@@ -11,40 +11,6 @@
     function AlloyEditor(config) {
         AlloyEditor.superclass.constructor.call(this, config);
     }
-
-    var Selections = [
-        {
-            name: 'link',
-            buttons: ['linkEdit'],
-            test: function(data, editor) {
-                var nativeEditor = editor.get('nativeEditor');
-
-                return !nativeEditor.isSelectionEmpty() && (new CKEDITOR.Link(nativeEditor).getFromSelection());
-            }
-        },
-        {
-            name: 'image',
-            buttons: ['imageLeft', 'imageRight'],
-            test: function(data, editor) {
-                var selectionData = data.selectionData;
-
-                return (selectionData.element && selectionData.element.getName() === 'img');
-            }
-        },
-        {
-            name: 'text',
-            buttons: ['styles', 'bold', 'italic', 'underline', 'link', 'twitter'],
-            test: function(data, editor) {
-                var nativeEditor = editor.get('nativeEditor');
-
-                var selectionEmpty = nativeEditor.isSelectionEmpty();
-
-                var selectionData = data.selectionData;
-
-                return (!selectionData.element && selectionData.region && !selectionEmpty);
-            }
-        }
-    ];
 
     global.OOP.extend(AlloyEditor, global.Base, {
         /**
@@ -191,7 +157,7 @@
              */
             extraPlugins: {
                 validator: global.Lang.isString,
-                value: 'uicore,selectionregion,dropimages,placeholder',
+                value: 'uicore,selectionregion,dropimages,placeholder,table,tabletools,tableresize',
                 writeOnce: true
             },
 
@@ -235,34 +201,24 @@
              * page!
              *
              * @attribute removePlugins
-             * @default 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link'
+             * @default 'contextmenu,toolbar,elementspath,resize,liststyle,link'
              * @writeOnce
              * @type {String}
              */
             removePlugins: {
                 validator: global.Lang.isString,
-                value: 'contextmenu,toolbar,elementspath,resize,liststyle,tabletools,link',
+                value: 'contextmenu,toolbar,elementspath,resize,liststyle,link',
                 writeOnce: true
             },
 
             /**
              * Specifies the type of selections, which will be handled by
              * @attribute selections
-             * @default `[
-             *       {
-             *           name: 'text',
-             *           buttons: ['bold', 'italic', 'underline', 'h1', 'h2', 'link', 'twitter']
-             *       },
-             *       {
-             *           name: 'image',
-             *           buttons: ['imageLeft', 'imageRight']
-             *       }
-             *   ]`
              * @type {Object}
              */
             selections: {
                 validator: global.Lang.isArray,
-                value: Selections
+                value: global.Selections
             },
 
             /**
@@ -283,11 +239,11 @@
                 validator: '_validateToolbars',
                 value: {
                     add: {
-                        buttons: ['image', 'camera', 'hline'],
+                        buttons: ['image', 'camera', 'hline', 'table'],
                         tabIndex: 2
                     },
                     styles: {
-                        selections: Selections,
+                        selections: global.Selections,
                         tabIndex: 1
                     }
                 }
@@ -296,7 +252,7 @@
 
         Buttons: {},
 
-        Selections: Selections,
+        Selections: global.Selections,
 
         Toolbars: {}
     });
