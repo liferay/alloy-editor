@@ -32,15 +32,6 @@
         },
 
         /**
-         * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
-         * Updates the position of the widget and shows it using transition.
-         */
-        componentDidUpdate: function() {
-            this._updatePosition();
-            this._show();
-        },
-
-        /**
          * Cancels an scheduled animation frame.
          */
         cancelAnimation: function() {
@@ -85,25 +76,9 @@
         },
 
         /**
-         * Requests an animation frame, if possible, to simulate an animation.
-         *
-         * @protected
-         * @param {Function} callback The function to be executed on the scheduled frame.
-         */
-        _animate: function(callback) {
-            if (window.requestAnimationFrame) {
-                this._animationFrameId = window.requestAnimationFrame(callback);
-            } else {
-                callback();
-            }
-        },
-
-        /**
          * Shows the widget with the default animation transition.
-         *
-         * @protected
          */
-        _show: function() {
+        show: function() {
             var interactionPoint = this.getInteractionPoint();
 
             var domNode = React.findDOMNode(this);
@@ -148,10 +123,8 @@
 
         /**
          * Updates the widget position based on the current interaction point.
-         *
-         * @protected
          */
-        _updatePosition: function() {
+        updatePosition: function() {
             var interactionPoint = this.getInteractionPoint();
 
             var domNode = React.findDOMNode(this);
@@ -165,6 +138,20 @@
                     left: xy[0] + 'px',
                     top: xy[1] + 'px'
                 });
+            }
+        },
+
+        /**
+         * Requests an animation frame, if possible, to simulate an animation.
+         *
+         * @protected
+         * @param {Function} callback The function to be executed on the scheduled frame.
+         */
+        _animate: function(callback) {
+            if (window.requestAnimationFrame) {
+                this._animationFrameId = window.requestAnimationFrame(callback);
+            } else {
+                callback();
             }
         }
     };
