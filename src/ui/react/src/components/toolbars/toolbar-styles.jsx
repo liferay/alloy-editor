@@ -25,7 +25,7 @@
         getDefaultProps: function() {
             return {
                 circular: true,
-                descendants: '.alloy-editor-button',
+                descendants: '.alloy-editor-button, .alloy-editor-toolbar-element',
                 keys: {
                     next: [38, 39],
                     prev: [37, 40]

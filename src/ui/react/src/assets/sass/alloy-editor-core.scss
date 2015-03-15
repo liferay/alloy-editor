@@ -20,7 +20,7 @@ $IE9_ONLY: \9;
         box-sizing: inherit;
     }
 
-    .alloy-editor-container, [class*=alloy-editor-container-], .alloy-editor-button {
+    .alloy-editor-container, [class*=alloy-editor-container-], .alloy-editor-button, .alloy-editor-toolbar-element {
         font-size: $base_font_size;
         position: relative;
 
@@ -45,14 +45,12 @@ $IE9_ONLY: \9;
         @include transition-timing-function (ease-out);
     }
 
-    .alloy-editor-button {
+    .alloy-editor-button, .alloy-editor-toolbar-element {
         border-width: 0;
         color: inherit;
         cursor: pointer;
-        height: $base_button_height;
         margin: 0;
         padding: 0;
-        width: $base_button_width;
 
         &:hover, &:focus {
             &:disabled, &.alloy-editor-button-disabled {
@@ -64,6 +62,11 @@ $IE9_ONLY: \9;
             cursor: auto;
             opacity: 0.3;
         }
+    }
+
+    .alloy-editor-button {
+        height: $base_button_height;
+        width: $base_button_width;
     }
 }
 
@@ -142,6 +145,47 @@ $IE9_ONLY: \9;
             vertical-align: middle;
         }
 
+    }
+}
+
+.alloy-editor-container-styles {
+    .alloy-editor-toolbar-element {
+        text-align: left;
+        width: 5 * $base_button_width;
+
+        .alloy-editor-icon-arrow {
+            @include transform(rotate(90deg));
+        }
+
+        .alloy-editor-selected-style {
+            @include flex-grow(1);
+        }
+    }
+
+    .alloy-editor-container-styles-list {
+        left: 0;
+        padding: $base_padding;
+        position: absolute;
+        top: $base_button_height + $base_spacing;
+        width: 100%;
+
+        .alloy-editor-styles-list-header {
+            margin: 5px 0;
+        }
+
+        .alloy-editor-toolbar-element {
+            * {
+                display: inline;
+            }
+
+            height: 3em;
+            margin-right: 0;
+            overflow: hidden;
+            padding-left: 10px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+        }
     }
 }
 

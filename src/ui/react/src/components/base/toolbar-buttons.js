@@ -39,7 +39,8 @@
                     editor: this.props.editor,
                     key: button.key,
                     tabKey: button.key,
-                    tabIndex: (this.props.trigger && this.props.trigger.props.tabKey === button.key) ? 0 : -1
+                    tabIndex: (this.props.trigger && this.props.trigger.props.tabKey === button.key) ? 0 : -1,
+                    trigger: this.props.trigger
                 }, button.key);
 
                 if (additionalProps) {
