@@ -17,12 +17,21 @@
          * @return {Array} An Array which contains the buttons that should be rendered.
          */
         getToolbarButtons: function(buttons, additionalProps) {
+            var buttonProps = {};
+
             var toolbarButtons = this.filterExclusive(
                 buttons.filter(function(button) {
-                    return (global.Lang.isString(button) ? global.AlloyEditor.Buttons[button] : button);
+                    return button && (global.AlloyEditor.Buttons[button] || global.AlloyEditor.Buttons[button.name]);
                 })
                 .map(function(button) {
-                    return global.Lang.isString(button) ? global.AlloyEditor.Buttons[button] : button;
+                    if (global.Lang.isString(button)) {
+                        button = global.AlloyEditor.Buttons[button];
+                    } else if (global.Lang.isString(button.name)) {
+                        buttonProps[global.AlloyEditor.Buttons[button.name].key] = button.cfg;
+                        button = global.AlloyEditor.Buttons[button.name];
+                    }
+
+                    return button;
                 })
             )
             .map(function(button) {
@@ -30,11 +39,12 @@
                     editor: this.props.editor,
                     key: button.key,
                     tabKey: button.key,
-                    tabIndex: (this.props.trigger && this.props.trigger.props.tabKey === button.key) ? 0 : -1
+                    tabIndex: (this.props.trigger && this.props.trigger.props.tabKey === button.key) ? 0 : -1,
+                    trigger: this.props.trigger
                 }, button.key);
 
                 if (additionalProps) {
-                    props = CKEDITOR.tools.merge(props, additionalProps);
+                    props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
                 }
 
                 return React.createElement(button, props);

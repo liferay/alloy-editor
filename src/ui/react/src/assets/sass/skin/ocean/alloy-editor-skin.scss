@@ -18,7 +18,7 @@ $button_color: darken($base_color, 12%);
         color: $base_color;
     }
 
-	.alloy-editor-button {
+	.alloy-editor-button, .alloy-editor-toolbar-element {
 		background-color: transparent;
 
         &:hover {
@@ -46,6 +46,19 @@ $button_color: darken($base_color, 12%);
             color: #2b4259;
             opacity: 0.4;
         }
+    }
+}
+
+.alloy-editor-container-styles-list {
+    background-color: #fcfcfc;
+    border: 1px solid rgab(0, 0, 0, .2);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    color: #000;
+
+    .alloy-editor-styles-list-header {
+        color: #999;
+        text-decoration: underline;
     }
 }
 

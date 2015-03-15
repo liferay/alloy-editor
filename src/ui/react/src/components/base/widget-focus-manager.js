@@ -25,6 +25,13 @@
         },
 
         /**
+         * Lifecycle. Called automatically by React when a component is rendered
+         */
+        componentDidMount: function() {
+            this._refresh();
+        },
+
+        /**
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          *
          * Refreshes the descendants list.
@@ -44,6 +51,11 @@
         focus: function(event) {
             if (!event || this._isValidTarget(event.target)) {
                 if (this._descendants) {
+                    if (event) {
+                        event.stopPropagation();
+                        event.preventDefault();
+                    }
+
                     this._descendants[this._activeDescendant].focus();
                 }
             }
