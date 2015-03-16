@@ -75,28 +75,39 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var editor = this.props.editor;
-
-            var trigger = this.props.trigger;
-
             return (
                 <div className="alloy-editor-container-styles-list" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
-                    {this._blockStyles.length ? <small className="alloy-editor-styles-list-header"><em>Block styles</em></small> : undefined}
-                    {this._blockStyles.map(function(item) {
-                        return <global.AlloyEditor.ButtonStylesListItem key={item.name} editor={editor} name={item.name} style={item.style} tabIndex={(trigger && trigger.name === item.name) ? 0 : -1} />
-                    })}
+                    <global.AlloyEditor.ButtonsStylesListHeader name="Block styles" styles={this._blockStyles} />
+                    {this._renderStylesItems(this._blockStyles)}
 
-                    {this._inlineStyles.length ? <small className="alloy-editor-styles-list-header"><em>Inline styles</em></small> : undefined}
-                    {this._inlineStyles.map(function(item) {
-                        return <global.AlloyEditor.ButtonStylesListItem key={item.name} editor={editor} name={item.name} style={item.style} tabIndex={(trigger && trigger.name === item.name) ? 0 : -1} />
-                    })}
+                    <global.AlloyEditor.ButtonsStylesListHeader styles={this._inlineStyles} name="Inline styles" />
+                    {this._renderStylesItems(this._inlineStyles)}
 
-                    {this._objectStyles.length ? <small className="alloy-editor-styles-list-header"><em>Object styles</em></small> : undefined}
-                    {this._objectStyles.map(function(item) {
-                        return <global.AlloyEditor.ButtonStylesListItem key={item.name} editor={editor} name={item.name} style={item.style} tabIndex={(trigger && trigger.name === item.name) ? 0 : -1} />
-                    })}
+                    <global.AlloyEditor.ButtonsStylesListHeader styles={this._objectStyles} name="Object styles" />
+                    {this._renderStylesItems(this._objectStyles)}
                 </div>
             );
+        },
+
+        /**
+         * Renders instances of ButtonStylesListItem with the preview of the correspondent block, inline or object styles.
+         * @param {Array} styles List of styles for which preview should be rendered.
+         *
+         * @protected
+         * @return {Array} Rendered instances of ButtonStylesListItem class
+         */
+        _renderStylesItems: function(styles) {
+            var editor = this.props.editor;
+            var trigger = this.props.trigger;
+            var items;
+
+            if (styles) {
+                items = styles.map(function(item) {
+                    return <global.AlloyEditor.ButtonStylesListItem key={item.name} editor={editor} name={item.name} style={item.style} tabIndex={(trigger && trigger.name === item.name) ? 0 : -1} />
+                });
+            }
+
+            return items;
         }
     });
 
