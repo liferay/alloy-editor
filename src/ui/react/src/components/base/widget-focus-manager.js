@@ -51,12 +51,12 @@
         focus: function(event) {
             if (!event || this._isValidTarget(event.target)) {
                 if (this._descendants) {
+                    this._descendants[this._activeDescendant].focus();
+
                     if (event) {
                         event.stopPropagation();
                         event.preventDefault();
                     }
-
-                    this._descendants[this._activeDescendant].focus();
                 }
             }
         },

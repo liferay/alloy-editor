@@ -2,9 +2,9 @@
     'use strict';
 
     /**
-     * The ButtonHline class provides inserts horizontal line.
+     * The ButtonRemoveFormat class removes style formatting.
      *
-     * @class ButtonHline
+     * @class ButtonRemoveFormat
      */
     var ButtonRemoveFormat = React.createClass({
         mixins: [global.ButtonCommand],
