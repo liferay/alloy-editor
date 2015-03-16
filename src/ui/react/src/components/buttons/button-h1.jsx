@@ -39,7 +39,7 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button className={cssClass} data-type="button-h1" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
+                <button className={cssClass} data-type="button-h1" onClick={this.applyStyle} tabIndex={this.props.tabIndex}>
                     <span className="alloy-editor-icon-h1"></span>
                 </button>
             );

@@ -19,7 +19,7 @@
         /**
          * Removes or applies style to a selection.
          */
-        handleClick: function() {
+        applyStyle: function() {
             if (global.Lang.isFunction(this.isActive) && global.Lang.isFunction(this.getStyle)) {
                 var editor = this.props.editor.get('nativeEditor');
 

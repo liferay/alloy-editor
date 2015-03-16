@@ -19,7 +19,7 @@
         /**
          * Executes a CKEditor command and fires `actionPerformed` event.
          */
-        handleClick: function() {
+        execCommand: function() {
             var editor = this.props.editor.get('nativeEditor');
 
             editor.execCommand(this.props.command);

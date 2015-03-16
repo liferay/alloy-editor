@@ -42,7 +42,7 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button className={cssClass} data-type="button-image-align-left" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
+                <button className={cssClass} data-type="button-image-align-left" onClick={this.applyStyle} tabIndex={this.props.tabIndex}>
                     <span className="alloy-editor-icon-align-left"></span>
                 </button>
             );

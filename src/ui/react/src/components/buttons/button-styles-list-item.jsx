@@ -61,7 +61,7 @@
             // However, this is consistent with other editors implementations of this feature.
             this.props.editor.get('nativeEditor').execCommand('removeFormat');
 
-            this.handleClick();
+            this.applyStyle();
         }
     });
 
