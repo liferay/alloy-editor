@@ -3,7 +3,7 @@
 
     /**
      * The ButtonStyles class provides functionality for styling a selection with a list of
-     * configuratble and customizable styles. The allowed styles follow CKEDITOR.Style configuration
+     * configurable and customizable styles. The allowed styles follow CKEDITOR.Style configuration
      * (http://docs.ckeditor.com/#!/api/CKEDITOR.style)
      *
      * @class ButtonStyles
@@ -75,17 +75,17 @@
          * @protected
          * @method _checkActive
          *
-         * @param  {Object} styleCfg Style definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+         * @param {Object} styleConfig Style definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
          * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
          */
-        _checkActive: function(styleCfg) {
+        _checkActive: function(styleConfig) {
             var nativeEditor = this.props.editor.get('nativeEditor');
 
             // Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
             // to a 'span' element works for most of those cases with no defined element.
-            styleCfg = CKEDITOR.tools.merge({element: 'span'}, styleCfg);
+            styleConfig = CKEDITOR.tools.merge({element: 'span'}, styleConfig);
 
-            var style = new CKEDITOR.style(styleCfg);
+            var style = new CKEDITOR.style(styleConfig);
 
             return style.checkActive(nativeEditor.elementPath(), nativeEditor);
         },
@@ -108,22 +108,23 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var instance = this;
-
             var activeStyle = 'Styles';
 
             this.props.styles.forEach(function(item) {
-                if (instance._checkActive(item.style)) {
+                if (this._checkActive(item.style)) {
                     activeStyle = item.name;
                 }
-            });
+            }.bind(this));
+
+            var buttonStylesList;
+
+            if (this.state.expanded) {
+                buttonStylesList = <global.AlloyEditor.ButtonStylesList editor={this.props.editor} styles={this.props.styles} trigger={this.props.trigger} />
+            }
 
             return (
                 <div className="alloy-editor-container-styles">
-                    {(function() {
-                        return this.state.expanded ? <global.AlloyEditor.ButtonStylesList editor={this.props.editor} styles={this.props.styles} trigger={this.props.trigger} /> : undefined;
-                    }).call(this)}
-
+                    {buttonStylesList}
                     <button className="alloy-editor-container alloy-editor-toolbar-element" onClick={this._toggleList} tabIndex={this.props.tabIndex}>
                         <span className="alloy-editor-selected-style">{activeStyle}</span>
                         <span className="alloy-editor-icon-arrow"></span>
