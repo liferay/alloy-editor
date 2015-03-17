@@ -30,6 +30,10 @@ $IE9_ONLY: \9;
     }
 }
 
+IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
+    height: $base_button_height;
+}
+
 .alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
     line-height: 1;
     padding: $base_spacing;
@@ -146,16 +150,41 @@ $IE9_ONLY: \9;
 }
 
 .alloy-editor-container-styles {
+    display: inline-block;
+    float: left $IE9_ONLY;
+    position: relative;
+    width: 5 * $base_button_width;
+
     .alloy-editor-toolbar-element {
+        float: left $IE9_ONLY;
+        height: $base_button_height;
         text-align: left;
-        width: 5 * $base_button_width;
+        width: 100%;
 
-        .alloy-editor-icon-arrow {
-            @include transform(rotate(90deg));
-        }
+        .alloy-editor-container {
+            height: 100% $IE9_ONLY;
+            width: 100%;
 
-        .alloy-editor-selected-style {
-            @include flex-grow(1);
+            .alloy-editor-icon-arrow {
+                @include transform(rotate(90deg));
+
+                float: right $IE9_ONLY;
+            }
+
+            .alloy-editor-selected-style {
+                @include flex-grow(1);
+
+                display: inline-block;
+
+                position: relative $IE9_ONLY;
+                top: 50% $IE9_ONLY;
+                transform: translateY(-50%) $IE9_ONLY;
+            }
+
+            IE10_PLUS::-ms-reveal, .alloy-editor-selected-style {
+                top: 0;
+                transform: translateY(0);
+            }
         }
     }
 
@@ -164,10 +193,14 @@ $IE9_ONLY: \9;
         padding: $base_padding;
         position: absolute;
         top: $base_button_height + $base_spacing;
-        width: 100%;
+        width: 5 * $base_button_width;
 
         .alloy-editor-styles-list-header {
-            margin: 5px 0;
+            margin: 3 * $base_padding 0 0 0;
+
+            &:first-child {
+                margin-top: $base_padding;
+            }
         }
 
         .alloy-editor-toolbar-element {
@@ -178,10 +211,14 @@ $IE9_ONLY: \9;
             height: 3em;
             margin-right: 0;
             overflow: hidden;
-            padding-left: 10px;
+            padding-left: 2 * $base_padding;
             text-overflow: ellipsis;
             white-space: nowrap;
             width: 100%;
+        }
+
+        * {
+            display: block $IE9_ONLY;
         }
     }
 }

@@ -124,11 +124,13 @@
 
             return (
                 <div className="alloy-editor-container-styles">
-                    {buttonStylesList}
-                    <button className="alloy-editor-container alloy-editor-toolbar-element" onClick={this._toggleList} tabIndex={this.props.tabIndex}>
-                        <span className="alloy-editor-selected-style">{activeStyle}</span>
-                        <span className="alloy-editor-icon-arrow"></span>
+                    <button className="alloy-editor-toolbar-element" onClick={this._toggleList} tabIndex={this.props.tabIndex}>
+                        <div className="alloy-editor-container">
+                            <span className="alloy-editor-selected-style">{activeStyle}</span>
+                            <span className="alloy-editor-icon-arrow"></span>
+                        </div>
                     </button>
+                    {buttonStylesList}
                 </div>
             );
         }
