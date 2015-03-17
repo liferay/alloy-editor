@@ -80,10 +80,10 @@
                     <global.AlloyEditor.ButtonsStylesListHeader name="Block styles" styles={this._blockStyles} />
                     {this._renderStylesItems(this._blockStyles)}
 
-                    <global.AlloyEditor.ButtonsStylesListHeader styles={this._inlineStyles} name="Inline styles" />
+                    <global.AlloyEditor.ButtonsStylesListHeader name="Inline styles" styles={this._inlineStyles} />
                     {this._renderStylesItems(this._inlineStyles)}
 
-                    <global.AlloyEditor.ButtonsStylesListHeader styles={this._objectStyles} name="Object styles" />
+                    <global.AlloyEditor.ButtonsStylesListHeader name="Object styles" styles={this._objectStyles} />
                     {this._renderStylesItems(this._objectStyles)}
                 </div>
             );
@@ -101,7 +101,7 @@
             var trigger = this.props.trigger;
             var items;
 
-            if (styles) {
+            if (styles && styles.length) {
                 items = styles.map(function(item) {
                     return <global.AlloyEditor.ButtonStylesListItem key={item.name} editor={editor} name={item.name} style={item.style} tabIndex={(trigger && trigger.name === item.name) ? 0 : -1} />
                 });
