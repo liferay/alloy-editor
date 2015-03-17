@@ -27,7 +27,7 @@
                 style: {
                     element: 'p',
                     styles: {
-                        float: 'left'
+                        'text-align': 'left'
                     }
                 }
             };
