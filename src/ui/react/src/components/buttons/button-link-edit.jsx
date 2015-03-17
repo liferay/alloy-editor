@@ -151,7 +151,7 @@
             };
 
             return (
-                <div className="alloy-editor-container">
+                <div className="alloy-editor-container-edit-link">
                     <button aria-label="Cancel" className="alloy-editor-button" disabled={!this.state.element} onClick={this._removeLink}>
                         <span className="alloy-editor-icon-unlink"></span>
                     </button>

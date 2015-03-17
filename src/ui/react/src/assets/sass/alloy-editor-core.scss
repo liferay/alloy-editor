@@ -70,10 +70,15 @@ $IE9_ONLY: \9;
     }
 }
 
+.alloy-editor-container-edit-link {
+    * {
+        float: left $IE9_ONLY;
+    }
+}
+
 .alloy-editor-container-input {
     @include flex-wrap(nowrap);
 
-    float: left !important;
     padding-left: 4px;
     width: 188px;
 
@@ -107,14 +112,6 @@ $IE9_ONLY: \9;
 
     .alloy-editor-icon-remove {
         float: right $IE9_ONLY;
-    }
-
-    ~ .alloy-editor-button {
-        float: left !important $IE9_ONLY;
-
-        ~ .alloy-editor-button {
-            float: right !important $IE9_ONLY;
-        }
     }
 }
 
