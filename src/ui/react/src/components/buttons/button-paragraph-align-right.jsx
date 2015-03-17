@@ -2,11 +2,11 @@
     'use strict';
 
     /**
-     * The ButtonAlignImageLeft class provides functionality for aligning an image on left.
+     * The ButtonParagraphAlignRight class provides functionality for aligning a paragraph on right.
      *
-     * @class ButtonAlignImageLeft
+     * @class ButtonParagraphAlignRight
      */
-    var ButtonAlignImageLeft = React.createClass({
+    var ButtonParagraphAlignRight = React.createClass({
         mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionStyle],
 
         /**
@@ -14,7 +14,7 @@
          * - key: The name which will be used as an alias of the button in the configuration.
          */
         statics: {
-            key: 'imageLeft'
+            key: 'paragraphRight'
         },
 
         /**
@@ -25,9 +25,9 @@
         getDefaultProps: function() {
             return {
                 style: {
-                    element: 'img',
+                    element: 'p',
                     styles: {
-                        float: 'left'
+                        float: 'right'
                     }
                 }
             };
@@ -42,12 +42,12 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button className={cssClass} data-type="button-align-left" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
-                    <span className="alloy-editor-icon-align-left"></span>
+                <button className={cssClass} data-type="button-paragraph-align-right" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
+                    <span className="alloy-editor-icon-align-right"></span>
                 </button>
             );
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonAlignImageLeft.key] = global.AlloyEditor.ButtonAlignImageLeft = ButtonAlignImageLeft;
+    global.AlloyEditor.Buttons[ButtonParagraphAlignRight.key] = global.AlloyEditor.ButtonParagraphAlignRight = ButtonParagraphAlignRight;
 }());

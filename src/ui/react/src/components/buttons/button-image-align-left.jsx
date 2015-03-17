@@ -2,11 +2,11 @@
     'use strict';
 
     /**
-     * The ButtonAlignImageRight class provides functionality for aligning an image on right.
+     * The ButtonImageAlignLeft class provides functionality for aligning an image on left.
      *
-     * @class ButtonAlignImageRight
+     * @class ButtonImageAlignLeft
      */
-    var ButtonAlignImageRight = React.createClass({
+    var ButtonImageAlignLeft = React.createClass({
         mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionStyle],
 
         /**
@@ -14,7 +14,7 @@
          * - key: The name which will be used as an alias of the button in the configuration.
          */
         statics: {
-            key: 'imageRight'
+            key: 'imageLeft'
         },
 
         /**
@@ -27,7 +27,7 @@
                 style: {
                     element: 'img',
                     styles: {
-                        float: 'right'
+                        float: 'left'
                     }
                 }
             };
@@ -42,12 +42,12 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button className={cssClass} data-type="button-align-right" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
-                    <span className="alloy-editor-icon-align-right"></span>
+                <button className={cssClass} data-type="button-image-align-left" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
+                    <span className="alloy-editor-icon-align-left"></span>
                 </button>
             );
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonAlignImageRight.key] = global.AlloyEditor.ButtonAlignImageRight = ButtonAlignImageRight;
+    global.AlloyEditor.Buttons[ButtonImageAlignLeft.key] = global.AlloyEditor.ButtonImageAlignLeft = ButtonImageAlignLeft;
 }());
