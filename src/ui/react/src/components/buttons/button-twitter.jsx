@@ -51,6 +51,21 @@
         },
 
         /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @return {Object} The content which should be rendered.
+         */
+        render: function() {
+            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+
+            return (
+                <button className={cssClass} data-type="button-twitter" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
+                    <span className="alloy-editor-icon-twitter"></span>
+                </button>
+            );
+        },
+
+        /**
          * Generates the appropriate twitter url based on the selected text and the configuration
          * options received via props.
          *
@@ -72,21 +87,6 @@
             }
 
             return twitterHref;
-        },
-
-        /**
-         * Lifecycle. Renders the UI of the button.
-         *
-         * @return {Object} The content which should be rendered.
-         */
-        render: function() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
-
-            return (
-                <button className={cssClass} data-type="button-twitter" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
-                    <span className="alloy-editor-icon-twitter"></span>
-                </button>
-            );
         }
     });
 

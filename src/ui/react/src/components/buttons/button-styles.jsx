@@ -70,39 +70,6 @@
         },
 
         /**
-         * Checks if the given style definition is applied to the current selection in the editor.
-         *
-         * @protected
-         * @method _checkActive
-         *
-         * @param {Object} styleConfig Style definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
-         * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
-         */
-        _checkActive: function(styleConfig) {
-            var nativeEditor = this.props.editor.get('nativeEditor');
-
-            // Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
-            // to a 'span' element works for most of those cases with no defined element.
-            styleConfig = CKEDITOR.tools.merge({element: 'span'}, styleConfig);
-
-            var style = new CKEDITOR.style(styleConfig);
-
-            return style.checkActive(nativeEditor.elementPath(), nativeEditor);
-        },
-
-        /**
-         * Toggles the expanded state of the widget showing and hiding the styles list.
-         *
-         * @protected
-         * @method _toggleList
-         */
-        _toggleList: function() {
-            this.setState({
-                expanded: !this.state.expanded
-            });
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @return {Object} The content which should be rendered.
@@ -133,6 +100,39 @@
                     {buttonStylesList}
                 </div>
             );
+        },
+
+        /**
+         * Checks if the given style definition is applied to the current selection in the editor.
+         *
+         * @protected
+         * @method _checkActive
+         *
+         * @param {Object} styleConfig Style definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+         * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
+         */
+        _checkActive: function(styleConfig) {
+            var nativeEditor = this.props.editor.get('nativeEditor');
+
+            // Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
+            // to a 'span' element works for most of those cases with no defined element.
+            styleConfig = CKEDITOR.tools.merge({element: 'span'}, styleConfig);
+
+            var style = new CKEDITOR.style(styleConfig);
+
+            return style.checkActive(nativeEditor.elementPath(), nativeEditor);
+        },
+
+        /**
+         * Toggles the expanded state of the widget showing and hiding the styles list.
+         *
+         * @protected
+         * @method _toggleList
+         */
+        _toggleList: function() {
+            this.setState({
+                expanded: !this.state.expanded
+            });
         }
     });
 

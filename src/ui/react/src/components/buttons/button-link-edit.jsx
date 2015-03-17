@@ -46,6 +46,32 @@
         },
 
         /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @return {Object} The content which should be rendered.
+         */
+        render: function() {
+            var clearLinkStyle = {
+                opacity: this.state.linkHref ? 1 : 0
+            };
+
+            return (
+                <div className="alloy-editor-container-edit-link">
+                    <button aria-label="Cancel" className="alloy-editor-button" disabled={!this.state.element} onClick={this._removeLink}>
+                        <span className="alloy-editor-icon-unlink"></span>
+                    </button>
+                    <div className="alloy-editor-container-input">
+                        <input className="alloy-editor-input" onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder="Type or paste link here" ref="linkInput" type="text" value={this.state.linkHref}></input>
+                        <button className="alloy-editor-button alloy-editor-icon-remove" onClick={this._clearLink} style={clearLinkStyle}></button>
+                    </div>
+                    <button aria-label="Confirm" className="alloy-editor-button" disabled={!this.state.linkHref} onClick={this._updateLink}>
+                        <span className="alloy-editor-icon-ok"></span>
+                    </button>
+                </div>
+            );
+        },
+
+        /**
          * Clears the link input. This only changes the component internal state, but does not
          * affect the link element of the editor. Only the _removeLink and _updateLink methods
          * are translated to the editor element.
@@ -138,32 +164,6 @@
             }
 
             this.props.cancelExclusive();
-        },
-
-        /**
-         * Lifecycle. Renders the UI of the button.
-         *
-         * @return {Object} The content which should be rendered.
-         */
-        render: function() {
-            var clearLinkStyle = {
-                opacity: this.state.linkHref ? 1 : 0
-            };
-
-            return (
-                <div className="alloy-editor-container-edit-link">
-                    <button aria-label="Cancel" className="alloy-editor-button" disabled={!this.state.element} onClick={this._removeLink}>
-                        <span className="alloy-editor-icon-unlink"></span>
-                    </button>
-                    <div className="alloy-editor-container-input">
-                        <input className="alloy-editor-input" onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder="Type or paste link here" ref="linkInput" type="text" value={this.state.linkHref}></input>
-                        <button className="alloy-editor-button alloy-editor-icon-remove" onClick={this._clearLink} style={clearLinkStyle}></button>
-                    </div>
-                    <button aria-label="Confirm" className="alloy-editor-button" disabled={!this.state.linkHref} onClick={this._updateLink}>
-                        <span className="alloy-editor-icon-ok"></span>
-                    </button>
-                </div>
-            );
         }
     });
 
