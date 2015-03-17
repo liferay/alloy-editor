@@ -33,7 +33,7 @@
         },
         {
             name: 'text',
-            buttons: ['strike', 'bold', 'italic', 'underline', 'h1', 'h2', 'link', 'twitter'],
+            buttons: ['styles', 'bold', 'italic', 'underline', 'link', 'twitter'],
             test: function(data, editor) {
                 var nativeEditor = editor.get('nativeEditor');
 
