@@ -16,7 +16,7 @@ var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'all
 var fontName = 'alloyeditor';
 
 gulp.task('generate-fonts', function() {
-    return gulp.src([path.join(reactDir, 'src/assets/svg/*.svg')])
+    return gulp.src([path.join(reactDir, 'src/assets/icons/svg/*.svg')])
         .pipe(iconfont({
             fontName: fontName,
             normalize: true
