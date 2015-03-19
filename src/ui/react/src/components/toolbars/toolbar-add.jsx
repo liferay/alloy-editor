@@ -60,7 +60,7 @@
                 }
 
                 if (region) {
-                    var domNode = this.getDOMNode();
+                    var domNode = React.findDOMNode(this);
                     var domElement = new CKEDITOR.dom.element(domNode);
 
                     var startRect = region.startRect || region;

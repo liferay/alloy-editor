@@ -56,7 +56,7 @@
          * @return {Array} An Array with left and top offsets in page coordinates.
          */
         getWidgetXYPoint: function(left, top, direction) {
-            var domNode = this.getDOMNode();
+            var domNode = React.findDOMNode(this);
 
             var gutter = this.props.gutter;
 
@@ -101,7 +101,7 @@
         _show: function() {
             var interactionPoint = this.getInteractionPoint();
 
-            var domNode = this.getDOMNode();
+            var domNode = React.findDOMNode(this);
 
             if (interactionPoint && domNode) {
                 var domElement = new CKEDITOR.dom.element(domNode);
@@ -149,7 +149,7 @@
         _updatePosition: function() {
             var interactionPoint = this.getInteractionPoint();
 
-            var domNode = this.getDOMNode();
+            var domNode = React.findDOMNode(this);
 
             if (interactionPoint && domNode) {
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);

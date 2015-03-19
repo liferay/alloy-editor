@@ -7,8 +7,6 @@
      * @class ButtonImage
      */
     var ButtonImage = React.createClass({
-        mixins: [global.ButtonStateClasses],
-
         /**
          * Lifecycle. Provides static properties to the widget.
          * - key: The name which will be used as an alias of the button in the configuration.
@@ -92,7 +90,7 @@
         }
 
         /**
-         * Fired when an image file is added as an element in the editor.
+         * Fired when an image file is added as an element to the editor.
          *
          * @event imageadd
          * @param {CKEDITOR.dom.element} el The created img element in editor.

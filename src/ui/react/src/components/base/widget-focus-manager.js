@@ -169,7 +169,7 @@
          * @protected
          */
         _refresh: function() {
-            var domNode = this.getDOMNode();
+            var domNode = React.findDOMNode(this);
 
             if (domNode) {
                 var descendants = domNode.querySelectorAll(this.props.descendants);
@@ -183,7 +183,7 @@
                 this._activeDescendant = 0;
 
                 if (this.props.trigger && this.props.trigger.isMounted()) {
-                    var triggerDescendant = this._descendants.indexOf(this.props.trigger.getDOMNode());
+                    var triggerDescendant = this._descendants.indexOf(React.findDOMNode(this.props.trigger));
 
                     if (triggerDescendant !== -1) {
                         this._activeDescendant = triggerDescendant;

@@ -11,15 +11,6 @@
      */
     var WidgetExclusive = {
         /**
-         * Lifecycle. Invoked once before the component is mounted.
-         */
-        getInitialState: function() {
-            return {
-                itemExclusive: null
-            };
-        },
-
-        /**
          * Cancels the exclusive state of an widget.
          *
          * @param {Object} itemExclusive The widget which exclusive state should be canceled.
@@ -30,6 +21,15 @@
                     itemExclusive: null
                 });
             }
+        },
+
+        /**
+         * Lifecycle. Invoked once before the component is mounted.
+         */
+        getInitialState: function() {
+            return {
+                itemExclusive: null
+            };
         },
 
         /**
