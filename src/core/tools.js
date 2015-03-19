@@ -37,4 +37,16 @@
 
         return result;
     };
+
+    /**
+     * Simulates event on a DOM element.
+     *
+     * @param {DOMElement} element The element on which the event shoud be simualted.
+     * @param {String} event The name of the event which have to be simulated.
+     */
+    CKEDITOR.tools.simulate = function(element, event) {
+        var eventInstance = document.createEvent('Events');
+        eventInstance.initEvent(event, true, false);
+        element.dispatchEvent(eventInstance);
+    };
 }());

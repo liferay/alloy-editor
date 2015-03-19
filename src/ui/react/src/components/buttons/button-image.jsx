@@ -57,9 +57,7 @@
          * @param {SyntheticEvent} event The received click event on the button.
          */
         handleClick: function(event) {
-            var eventInstance = document.createEvent('Events');
-            eventInstance.initEvent('click', true, false);
-            this._inputEl.dispatchEvent(eventInstance);
+            CKEDITOR.tools.simulate(this._inputEl, 'click');
         },
 
         /**
