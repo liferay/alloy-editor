@@ -22,8 +22,7 @@
         },
 
         /**
-         * Lifecycle. Invoked once, only on the client (not on the server),
-         * immediately after the initial rendering occurs.
+         * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
          * Focuses on the link input to immediately allow editing.
          */

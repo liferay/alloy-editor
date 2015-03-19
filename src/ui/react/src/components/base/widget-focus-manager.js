@@ -25,7 +25,7 @@
         },
 
         /**
-         * Lifecycle. Called automatically by React when a component is rendered
+         * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          */
         componentDidMount: function() {
             this._refresh();

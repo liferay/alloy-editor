@@ -9,7 +9,7 @@
      */
     var WidgetClickOutside = {
         /**
-         * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          */
         componentDidMount: function () {
             this.getDOMNode().addEventListener('mousedown', this._handleMouseInside);
