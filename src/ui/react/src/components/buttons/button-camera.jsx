@@ -26,7 +26,7 @@
         render: function() {
             if (this.props.renderExclusive) {
                 return (
-                    <global.ButtonCameraImage {...this.props} />
+                    <global.AlloyEditor.ButtonCameraImage {...this.props} />
                 );
             } else {
                 var disabled = !(navigator.getUserMedia ||
