@@ -20,7 +20,7 @@ $IE9_ONLY: \9;
         box-sizing: inherit;
     }
 
-    .alloy-editor-container, [class*=alloy-editor-container-], .alloy-editor-button, .alloy-editor-toolbar-element {
+    .alloy-editor-container, [class*=alloy-editor-container-], .alloy-editor-button, .alloy-editor-toolbar-element, label {
         font-size: $base_font_size;
         position: relative;
 
@@ -100,6 +100,11 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
             display: inline;
         }
 
+        &[class*=alloy-editor-icon-]:before {
+            padding-right: $base_padding;
+            vertical-align: middle;
+        }
+
         height: 3em;
         margin-right: 0;
         min-width: 100%;
@@ -116,9 +121,22 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     }
 }
 
-.alloy-editor-container-edit-link {
+.alloy-editor-container-edit-link, .alloy-editor-container-edit-table {
+    height: $base_button_height $IE9_ONLY;
+
     * {
         float: left $IE9_ONLY;
+    }
+
+    label {
+        position: relative $IE9_ONLY;
+        top: 50% $IE9_ONLY;
+        transform: translateY(-50%) $IE9_ONLY;
+    }
+
+    IE10_PLUS::-ms-reveal, label {
+        top: 0;
+        transform: translateY(0);
     }
 }
 
@@ -126,7 +144,15 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     @include flex-wrap(nowrap);
 
     padding-left: 4px;
-    width: 188px;
+    width: 13 * $base_font_size;
+
+    &.medium {
+        width: 7 * $base_font_size;
+    }
+
+    &.small {
+        width: 3 * $base_font_size;
+    }
 
     [class*=alloy-editor-icon-] {
         font-size: $base_button_height;
@@ -134,7 +160,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     }
 
     input, .alloy-editor-input {
-        @include flex-grow(1);
+        @include flex(1);
 
         border-width: 0;
         box-shadow: none;
@@ -142,6 +168,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         height: auto;
         line-height: normal;
         margin: 0;
+        max-width: 100%;
         outline: none;
         padding: 0;
 
@@ -153,7 +180,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         margin-left: -$base_padding $IE9_ONLY;
         margin-top: $base_padding $IE9_ONLY;
         padding-left: $base_padding $IE9_ONLY;
-        width: 164px $IE9_ONLY;
+        width: 13 * $base_font_size - $base_button_width $IE9_ONLY;
     }
 
     .alloy-editor-icon-remove {
@@ -212,7 +239,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
             }
 
             .alloy-editor-selected-style {
-                @include flex-grow(1);
+                @include flex(1);
 
                 display: inline-block;
 

@@ -18,7 +18,7 @@
          * - key: The name which will be used as an alias of the button in the configuration.
          */
         statics: {
-            key: 'linkedit'
+            key: 'tableEdit'
         },
 
         /**
@@ -36,12 +36,8 @@
          */
         getInitialState: function() {
             return {
-                border: 1,
-                cellpadding: 1,
-                cellspacing: 1,
-                cols: 2,
-                rows: 2,
-                width: 500
+                cols: 3,
+                rows: 3
             };
         },
 
@@ -52,20 +48,23 @@
          * @method _createTable
          */
         _createTable: function() {
+            var editor = this.props.editor.get('nativeEditor');
             var ckTable = this._getCKTable();
 
             ckTable.create({
                 attrs: {
-                    border: this.state.border,
-                    cellspacing: this.state.cellspacing,
-                    cellpadding: this.state.cellpadding,
-                    style: 'width: ' + this.state.width + 'px'
+                    border: 1,
+                    cellPadding: 0,
+                    cellSpacing: 0,
+                    style: 'width: 100%'
                 },
                 cols: this.state.cols,
                 rows: this.state.rows
             });
 
             this.props.cancelExclusive();
+
+            editor.fire('actionPerformed', this);
         },
 
         /**
@@ -126,32 +125,19 @@
             var time = Date.now();
             var rowsId = time + 'rows';
             var colsId = time + 'cols';
-            var widthId = time + 'width';
-            var borderId = time + 'border';
-            var cellpaddingId = time + 'cellpadding';
-            var cellspacingId = time + 'cellspacing';
 
             return (
-                <div className="alloy-editor-container">
-                    <div className="alloy-editor-container-input">
-                        <label htmlFor={rowsId}>Rows</label>
-                        <input className="alloy-editor-input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} onKeyDown={this._handleKeyDown} placeholder="Rows" ref="rows" type="text" value={this.state.rows}></input>
-
-                        <label htmlFor={colsId}>Rows</label>
-                        <input className="alloy-editor-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} onKeyDown={this._handleKeyDown} placeholder="Colums" ref="cols" type="text" value={this.state.cols}></input>
-
-                        <label htmlFor={borderId}>Border</label>
-                        <input className="alloy-editor-input" id={borderId} onChange={this._handleChange.bind(this, 'border')} onKeyDown={this._handleKeyDown} placeholder="Border" ref="border" type="text" value={this.state.border}></input>
-
-                        <label htmlFor={widthId}>Width</label>
-                        <input className="alloy-editor-input" id={widthId} onChange={this._handleChange.bind(this, 'width')} onKeyDown={this._handleKeyDown} placeholder="Width" ref="width" type="text" value={this.state.width}></input>
-
-                        <label htmlFor={cellspacingId}>Cell spacing</label>
-                        <input className="alloy-editor-input" id={cellspacingId} onChange={this._handleChange.bind(this, 'cellspacing')} onKeyDown={this._handleKeyDown} placeholder="Cell spacing" ref="cellspacing" type="text" value={this.state.cellspacing}></input>
-
-                        <label htmlFor={cellpaddingId}>Cell padding</label>
-                        <input className="alloy-editor-input" id={cellpaddingId} onChange={this._handleChange.bind(this, 'cellpadding')} onKeyDown={this._handleKeyDown} placeholder="Cell padding" ref="cellpadding" type="text" value={this.state.cellpadding}></input>
+                <div className="alloy-editor-container-edit-table">
+                    <label htmlFor={rowsId}>Rows</label>
+                    <div className="alloy-editor-container-input small">
+                        <input className="alloy-editor-input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} min="1" onKeyDown={this._handleKeyDown} placeholder="Rows" ref="rows" type="number" value={this.state.rows}></input>
                     </div>
+
+                    <label htmlFor={colsId}>Cols</label>
+                    <div className="alloy-editor-container-input small">
+                        <input className="alloy-editor-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" onKeyDown={this._handleKeyDown} placeholder="Colums" ref="cols" type="number" value={this.state.cols}></input>
+                    </div>
+
                     <button aria-label="Confirm" className="alloy-editor-button" onClick={this._createTable}>
                         <span className="alloy-editor-icon-ok"></span>
                     </button>
