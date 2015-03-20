@@ -7,7 +7,7 @@
      * @class ToolbarStyles
      */
     var ToolbarStyles = React.createClass({
-        mixins: [global.WidgetExclusive, global.WidgetFocusManager, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
+        mixins: [global.WidgetDropdown, global.WidgetExclusive, global.WidgetFocusManager, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
 
         /**
          * Lifecycle. Provides static properties to the widget.

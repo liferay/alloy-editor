@@ -85,13 +85,13 @@
 
             var buttonStylesList;
 
-            if (this.state.expanded) {
+            if (this.props.expanded) {
                 buttonStylesList = <global.AlloyEditor.ButtonStylesList editor={this.props.editor} styles={this.props.styles} trigger={this.props.trigger} />
             }
 
             return (
-                <div className="alloy-editor-container-styles">
-                    <button className="alloy-editor-toolbar-element" onClick={this._toggleList} tabIndex={this.props.tabIndex}>
+                <div className="alloy-editor-container-styles has-dropdown">
+                    <button className="alloy-editor-toolbar-element" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex}>
                         <div className="alloy-editor-container">
                             <span className="alloy-editor-selected-style">{activeStyle}</span>
                             <span className="alloy-editor-icon-arrow"></span>
@@ -121,18 +121,6 @@
             var style = new CKEDITOR.style(styleConfig);
 
             return style.checkActive(nativeEditor.elementPath(), nativeEditor);
-        },
-
-        /**
-         * Toggles the expanded state of the widget showing and hiding the styles list.
-         *
-         * @protected
-         * @method _toggleList
-         */
-        _toggleList: function() {
-            this.setState({
-                expanded: !this.state.expanded
-            });
         }
     });
 

@@ -7,7 +7,7 @@
      * @class ToolbarAdd
      */
     var ToolbarAdd = React.createClass({
-        mixins: [global.WidgetExclusive, global.WidgetFocusManager, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
+        mixins: [global.WidgetDropdown, global.WidgetExclusive, global.WidgetFocusManager, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
 
         /**
          * Allows validating props being passed to the component.
