@@ -5,12 +5,12 @@
     var KEY_ESC = 27;
 
     /**
-     * The ButtonEditLink class provides functionality for creating and editing a link in a document.
+     * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
      * This is more than a button, and renders all the required UI to CRUD a link.
      *
-     * @class ButtonEditLink
+     * @class ButtonLinkEdit
      */
-    var ButtonEditLink = React.createClass({
+    var ButtonLinkEdit = React.createClass({
         mixins: [global.WidgetClickOutside],
 
         /**
@@ -18,7 +18,7 @@
          * - key: The name which will be used as an alias of the button in the configuration.
          */
         statics: {
-            key: 'editlink'
+            key: 'linkEdit'
         },
 
         /**
@@ -166,5 +166,5 @@
         }
     });
 
-    global.ButtonEditLink = ButtonEditLink;
+    global.AlloyEditor.Buttons[ButtonLinkEdit.key] = global.AlloyEditor.ButtonLinkEdit = ButtonLinkEdit;
 }());

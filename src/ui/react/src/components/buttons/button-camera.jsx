@@ -35,7 +35,7 @@
                     navigator.msGetUserMedia);
 
                 return (
-                    <button className="alloy-editor-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex}>
+                    <button className="alloy-editor-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex}>
                         <span className="alloy-editor-icon-image"></span>
                     </button>
                 );

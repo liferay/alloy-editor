@@ -40,11 +40,11 @@
 
             if (this.props.renderExclusive) {
                 return (
-                    <global.ButtonEditLink {...this.props} />
+                    <global.AlloyEditor.ButtonLinkEdit {...this.props} />
                 );
             } else {
                 return (
-                    <button className={cssClass} data-type="button-link" onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex}>
+                    <button className={cssClass} data-type="button-link" onClick={this.props.requestExclusive.bind(ButtonLink.key)} tabIndex={this.props.tabIndex}>
                         <span className="alloy-editor-icon-link"></span>
                     </button>
                 );

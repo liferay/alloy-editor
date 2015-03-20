@@ -2,12 +2,11 @@
     'use strict';
 
     /**
-     * ButtonCommand is a mixin that provides a click implementation for a
-     * button based on the available CKEDITOR commands.
+     * ButtonCommand is a mixin that executes a command via CKEDITOR's API.
      *
      * The mixin exposes:
-     * - {string} command: the command that should be executed
-     * - {Function} handleClick: the function to attached to the button
+     * - {string} command: the command that should be executed.
+     * - {Function} execCommand: executes the provided command via CKEDITOR's API.
      *
      * @class ButtonCommand
      */

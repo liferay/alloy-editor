@@ -15,7 +15,7 @@
     var Selections = [
         {
             name: 'link',
-            buttons: ['editlink'],
+            buttons: ['linkEdit'],
             test: function(data, editor) {
                 var nativeEditor = editor.get('nativeEditor');
 

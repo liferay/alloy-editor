@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * ButtonActionStyle is a mixin that provides a handleClick implementation for a
+     * ButtonActionStyle is a mixin that provides applying style implementation for a
      * button based on the `applyStyle` and `removeStyle` API of CKEDITOR.
      *
      * To execute properly, the component has to expose the following methods which can be obtained
@@ -11,7 +11,7 @@
      * - getStyle: to return the style that should be applied
      *
      * The mixin exposes:
-     * - {Function} handleClick: the function to attached to the button
+     * - {Function} applyStyle: the function to attached to the button
      *
      * @class ButtonActionStyle
      */

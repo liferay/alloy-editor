@@ -78,13 +78,6 @@
         },
 
         /**
-         * Requests exclusive rendering and displays the buttons for adding content.
-         */
-        handleClick: function() {
-            this.props.requestExclusive(ToolbarAdd.key);
-        },
-
-        /**
          * Lifecycle. Renders the buttons for adding content.
          *
          * @return {Object} The content which should be rendered.
@@ -94,7 +87,7 @@
             var className = this._getToolbarClassName();
 
             return (
-                <div className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="-1">
+                <div className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.props.requestExclusive.bind(ToolbarAdd.key)} tabIndex="-1">
                     <div className="alloy-editor-container">
                         {buttons}
                     </div>
@@ -116,7 +109,7 @@
             } else {
                 if (this.props.selectionData && this.props.selectionData.region) {
                     buttons = (
-                        <button className="alloy-editor-button alloy-editor-button-add" onClick={this.handleClick}>
+                        <button className="alloy-editor-button alloy-editor-button-add" onClick={this.props.requestExclusive.bind(ToolbarAdd.key)}>
                             <span className="alloy-editor-icon-add"></span>
                         </button>
                     );

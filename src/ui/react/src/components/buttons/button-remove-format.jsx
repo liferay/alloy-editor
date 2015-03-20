@@ -35,7 +35,7 @@
          */
         render: function() {
             return (
-                <button className='alloy-editor-button' data-type="button-removeformat" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
+                <button className='alloy-editor-button' data-type="button-removeformat" onClick={this.execCommand} tabIndex={this.props.tabIndex}>
                     <span className="alloy-editor-icon-removeformat"></span>
                 </button>
             );
