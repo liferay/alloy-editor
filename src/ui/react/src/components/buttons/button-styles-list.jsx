@@ -76,6 +76,8 @@
         render: function() {
             return (
                 <div className="alloy-editor-container-styles-list" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
+                    <global.AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />
+
                     <global.AlloyEditor.ButtonsStylesListHeader name="Block styles" styles={this._blockStyles} />
                     {this._renderStylesItems(this._blockStyles)}
 
