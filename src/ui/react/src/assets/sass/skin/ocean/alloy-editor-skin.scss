@@ -49,15 +49,17 @@ $button_color: darken($base_color, 12%);
     }
 }
 
-.alloy-editor-container-styles-list {
+.alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
     background-color: #fcfcfc;
-    border: 1px solid rgab(0, 0, 0, .2);
+    border: 1px solid rgba(0, 0, 0, .1);
     border-radius: 0 0 4px 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
     color: #000;
 
-    .alloy-editor-styles-list-header {
+    .alloy-editor-list-header {
         color: #999;
+        font-size: small;
+        font-style: italic;
     }
 }
 

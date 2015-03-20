@@ -30,6 +30,12 @@ $IE9_ONLY: \9;
     }
 }
 
+.has-dropdown {
+    display: block;
+    float: left $IE9_ONLY;
+    width: $base_button_width;
+}
+
 IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     height: $base_button_height;
 }
@@ -71,6 +77,42 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     .alloy-editor-button {
         height: $base_button_height;
         width: $base_button_width;
+    }
+}
+
+.alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
+    left: 0;
+    padding: $base_padding;
+    position: absolute;
+    top: $base_button_height + $base_spacing;
+
+    .alloy-editor-list-header {
+        display: inline-block;
+        margin: 3 * $base_padding 0 0 0;
+
+        &:first-child {
+            margin-top: $base_padding;
+        }
+    }
+
+    .alloy-editor-toolbar-element {
+        * {
+            display: inline;
+        }
+
+        height: 3em;
+        margin-right: 0;
+        min-width: 100%;
+        overflow: hidden;
+        padding-left: 2 * $base_padding;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: auto;
+    }
+
+    * {
+        display: block $IE9_ONLY;
     }
 }
 
@@ -150,12 +192,10 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
 }
 
 .alloy-editor-container-styles {
-    display: inline-block;
     float: left $IE9_ONLY;
-    position: relative;
     width: 5 * $base_button_width;
 
-    .alloy-editor-toolbar-element {
+    > .alloy-editor-toolbar-element {
         float: left $IE9_ONLY;
         height: $base_button_height;
         text-align: left;
@@ -185,40 +225,6 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
                 top: 0;
                 transform: translateY(0);
             }
-        }
-    }
-
-    .alloy-editor-container-styles-list {
-        left: 0;
-        padding: $base_padding;
-        position: absolute;
-        top: $base_button_height + $base_spacing;
-        width: 5 * $base_button_width;
-
-        .alloy-editor-styles-list-header {
-            margin: 3 * $base_padding 0 0 0;
-
-            &:first-child {
-                margin-top: $base_padding;
-            }
-        }
-
-        .alloy-editor-toolbar-element {
-            * {
-                display: inline;
-            }
-
-            height: 3em;
-            margin-right: 0;
-            overflow: hidden;
-            padding-left: 2 * $base_padding;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 100%;
-        }
-
-        * {
-            display: block $IE9_ONLY;
         }
     }
 }
