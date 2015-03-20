@@ -17,7 +17,7 @@
          * - key: The name which will be used as an alias of the button in the configuration.
          */
         statics: {
-            key: 'buttonstyleslistitemremove'
+            key: 'buttonStylesListItemRemove'
         },
 
         /**
