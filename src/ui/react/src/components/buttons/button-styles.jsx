@@ -75,7 +75,7 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var activeStyle = 'Styles';
+            var activeStyle = 'Normal Text';
 
             this.props.styles.forEach(function(item) {
                 if (this._checkActive(item.style)) {
