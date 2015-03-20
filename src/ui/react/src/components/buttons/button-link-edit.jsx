@@ -27,7 +27,13 @@
          * Focuses on the link input to immediately allow editing.
          */
         componentDidMount: function () {
-            React.findDOMNode(this.refs.linkInput).focus();
+            // We need to wait for the next rendering cycle before focusing to avoid undesired
+            // scrolls on the page
+            if (window.requestAnimationFrame) {
+                window.requestAnimationFrame(this._focusLinkInput);
+            } else {
+                setTimeout(this._focusLinkInput, 0);
+            }
         },
 
         /**
@@ -82,6 +88,16 @@
             this.setState({
                 linkHref: ''
             });
+        },
+
+        /**
+         * Focuses the user cursor on the widget's input.
+         *
+         * @protected
+         * @method _focusLinkInput
+         */
+        _focusLinkInput: function() {
+            React.findDOMNode(this.refs.linkInput).focus();
         },
 
         /**
