@@ -283,7 +283,7 @@
                 validator: '_validateToolbars',
                 value: {
                     add: {
-                        buttons: ['image', 'hline'],
+                        buttons: ['image', 'camera', 'hline'],
                         tabIndex: 2
                     },
                     styles: {

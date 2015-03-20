@@ -12,7 +12,7 @@
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          */
         componentDidMount: function () {
-            React.findDOMNode(this).addEventListener('mousedown', this._handleMouseInside);
+            this.getDOMNode().addEventListener('mousedown', this._handleMouseInside);
             window.addEventListener('mousedown', this._handleMouseOutside);
         },
 
@@ -20,7 +20,7 @@
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          */
         componentWillUnmount: function () {
-            React.findDOMNode(this).removeEventListener('mousedown', this._handleMouseInside);
+            this.getDOMNode().removeEventListener('mousedown', this._handleMouseInside);
             window.removeEventListener('mousedown', this._handleMouseOutside);
         },
 

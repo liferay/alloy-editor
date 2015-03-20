@@ -234,3 +234,20 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         vertical-align: middle;
     }
 }
+
+.alloy-editor-camera {
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+
+    .alloy-editor-camera-canvas {
+        left: -10000px;
+        position: absolute;
+        top: -10000px;
+    }
+
+    .alloy-editor-camera-shoot {
+        margin-top: 10px;
+    }
+}

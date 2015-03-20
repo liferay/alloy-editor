@@ -40,7 +40,7 @@
 
             if (this.props.renderExclusive) {
                 return (
-                    <global.AlloyEditor.ButtonEditLink {...this.props} />
+                    <global.ButtonEditLink {...this.props} />
                 );
             } else {
                 return (
