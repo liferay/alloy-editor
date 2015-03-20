@@ -1,31 +1,6 @@
 (function() {
     'use strict';
 
-    var getTableFromSelection = function(editor) {
-        var table;
-        var nativeEditor = editor.get('nativeEditor');
-        var selection = nativeEditor.getSelection();
-        var selected = selection.getSelectedElement();
-
-        if (selected && selected.is('table')) {
-            table = selected;
-        } else {
-            var ranges = selection.getRanges();
-
-            if (ranges.length > 0) {
-                // Webkit could report the following range on cell selection (#4948):
-                // <table><tr><td>[&nbsp;</td></tr></table>]
-                if (CKEDITOR.env.webkit) {
-                    ranges[0].shrink(CKEDITOR.NODE_ELEMENT);
-                }
-
-                table = nativeEditor.elementPath(ranges[0].getCommonAncestor(true)).contains('table', 1);
-            }
-        }
-
-        return table;
-    };
-
     var Selections = [{
         name: 'link',
         buttons: ['linkEdit'],
@@ -56,18 +31,16 @@
         }
     }, {
         name: 'table',
-        buttons: ['tablerow', 'tablecolumn', 'tablecell', 'tableremove'],
+        buttons: ['tableRow', 'tableColumn', 'tableCell', 'tableRemove'],
         getArrowBoxClasses: function() {
             return 'alloy-editor-arrow-box alloy-editor-arrow-box-bottom';
         },
         setPosition: function(payload) {
-            // Payload is:
-            // editor
-            // editorEvent
-            // selectionData
+            var nativeEditor = payload.editor.get('nativeEditor');
 
-            var ckElement = getTableFromSelection(payload.editor);
-            var clientRect = ckElement.getClientRect();
+            var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+            var clientRect = table.getClientRect();
+
             var toolbarNode = this.getDOMNode();
             var halfToolbarWidth = toolbarNode.offsetWidth/2;
             var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
@@ -85,7 +58,9 @@
             return true;
         },
         test: function(payload) {
-            return !!getTableFromSelection(payload.editor);
+            var nativeEditor = payload.editor.get('nativeEditor');
+
+            return !!(new CKEDITOR.Table(nativeEditor).getFromSelection());
         }
     }];
 
