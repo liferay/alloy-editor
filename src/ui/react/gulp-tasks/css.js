@@ -5,7 +5,9 @@ var del = require('del');
 var es = require('event-stream');
 var fs = require('fs');
 var gulp = require('gulp');
+var minifyCSS = require('gulp-minify-css');
 var path = require('path');
+var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 
@@ -58,6 +60,15 @@ gulp.task('join-css', function() {
 
 gulp.task('build-css', function(callback) {
     runSequence(['sass2css', 'generate-fonts'], 'join-css', 'clean-fonts', callback);
+});
+
+gulp.task('minimize-css', function() {
+    return gulp.src(path.join(editorDistFolder, 'assets/*.css'))
+        .pipe(minifyCSS())
+        .pipe(rename({
+            suffix: '-min'
+        }))
+        .pipe(gulp.dest(path.join(editorDistFolder, 'assets')));
 });
 
 gulp.task('clean-fonts', function(callback) {

@@ -21,6 +21,8 @@ var pkg = require(path.join(rootDir, 'package.json'));
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
 
+var srcFiles = require('../_src.js');
+
 function errorHandler(error) {
   console.log(error.toString());
 
@@ -29,7 +31,7 @@ function errorHandler(error) {
 
 gulp.task('build', function(callback) {
     runSequence(
-        'clean-dist', ['build-css', 'build-js'], 'minimize-js', [
+        'clean-dist', ['build-css', 'build-js'], ['minimize-css', 'minimize-js'], [
             'create-alloy-editor', 'create-alloy-editor-min'
         ],
         'build-demo',
@@ -49,7 +51,7 @@ gulp.task('build-demo', function() {
 
     return gulp.src([
             path.join(reactDir, 'demo', 'index.html'),
-            path.join(reactDir, 'demo', 'bootstrap.css'),
+            path.join(reactDir, 'demo', 'bootstrap.css')
         ])
         .pipe(template({
             resources: fs.readFileSync(path.join(reactDir, 'template', templateHead))
@@ -60,7 +62,7 @@ gulp.task('build-demo', function() {
 gulp.task('build-js', function(callback) {
     runSequence([
         'copy-ckeditor',
-        'create-alloy-editor-core',
+        'create-alloy-editor-core'
     ], 'wrap-alloy-editor-core', 'wrap-alloy-editor-global', callback);
 });
 
@@ -77,7 +79,7 @@ gulp.task('create-alloy-editor', function() {
     return gulp.src([
             path.join(editorDistFolder, 'ckeditor.js'),
             path.join(reactDir, 'vendor', 'react.js'),
-            path.join(editorDistFolder, 'alloy-editor-core.js'),
+            path.join(editorDistFolder, 'alloy-editor-core.js')
         ])
         .pipe(concat('alloy-editor-all.js'))
         .pipe(replace(/ckeditor(\\?).js/g, 'alloy-editor-all$1.js'))
@@ -88,7 +90,7 @@ gulp.task('create-alloy-editor-min', function() {
     return gulp.src([
             path.join(editorDistFolder, 'ckeditor.js'),
             path.join(reactDir, 'vendor', 'react-min.js'),
-            path.join(editorDistFolder, 'alloy-editor-core-min.js'),
+            path.join(editorDistFolder, 'alloy-editor-core-min.js')
         ])
         .pipe(concat('alloy-editor-all-min.js'))
         .pipe(replace(/ckeditor(\\?).js/g, 'alloy-editor-all-min$1.js'))
@@ -96,27 +98,10 @@ gulp.task('create-alloy-editor-min', function() {
 });
 
 gulp.task('create-alloy-editor-core', function() {
-    return gulp.src([
-        path.join(rootDir, 'src/core/debounce.js'),
-        path.join(rootDir, 'src/core/link.js'),
-        path.join(rootDir, 'src/core/selection-region.js'),
-        path.join(rootDir, 'src/core/tools.js'),
-        path.join(rootDir, 'src/core/uicore.js'),
-        path.join(rootDir, 'src/plugins/drop-images.js'),
-        path.join(rootDir, 'src/plugins/placeholder.js'),
-        path.join(reactDir, 'src/oop/lang.js'),
-        path.join(reactDir, 'src/oop/attribute.js'),
-        path.join(reactDir, 'src/oop/oop.js'),
-        path.join(reactDir, 'src/oop/base.js'),
-        path.join(reactDir, 'src/adapter/alloy-editor-adapter.js*'),
-        path.join(reactDir, 'src/components/base/*.js*'),
-        path.join(reactDir, 'src/components/buttons/*.js*'),
-        path.join(reactDir, 'src/components/toolbars/*.js*'),
-        path.join(reactDir, 'src/components/main.jsx')
-    ])
-    .pipe(react()).on('error', errorHandler)
-    .pipe(concat('alloy-editor-core.js'))
-    .pipe(gulp.dest(editorDistFolder));
+    return gulp.src(srcFiles, {cwd : rootDir + '/src'})
+        .pipe(react()).on('error', errorHandler)
+        .pipe(concat('alloy-editor-core.js'))
+        .pipe(gulp.dest(editorDistFolder));
 });
 
 gulp.task('minimize-js', function() {

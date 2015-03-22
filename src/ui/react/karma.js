@@ -2,84 +2,100 @@
 
 'use strict';
 
+var alloyEditorDir = 'dist/alloy-editor-*/alloy-editor/';
+
+var path = require('path');
+var srcFiles = require('./_src.js');
+
+var preprocessors = {};
+preprocessors[path.join(alloyEditorDir, 'test/*.js')] = ['coverage'];
+
+var filesToLoad = [
+    /* AlloyEditor skins */
+    {
+        pattern: path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'assets/fonts/alloyeditor.woff'),
+        included: false,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'assets/fonts/alloyeditor.ttf'),
+        included: false,
+        watched: false
+    },
+
+    'src/ui/react/test/vendor/happen.js',
+    'src/ui/react/test/vendor/zepto.js',
+
+    /* CKEditor JS files */
+    {
+        pattern: path.join(alloyEditorDir, 'ckeditor.js'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'styles.js'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'config.js'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'skins/moono/*.css'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'lang/*.js'),
+        included: true,
+        watched: false
+    },
+
+    /* bender requires CKEDITOR, should be after ckeditor.js */
+    'src/ui/react/test/util/bender.js',
+
+    /* ReactJS */
+    {
+        pattern: path.join(alloyEditorDir, 'react-with-addons.js'),
+        included: true,
+        watched: false
+    },
+
+    /* File which defines the global namespace */
+    {
+        pattern: 'src/ui/react/test/util/global.js',
+        included: true,
+        watched: false
+    }
+];
+
+srcFiles.forEach(function(file) {
+    filesToLoad.push({
+        pattern: path.join(alloyEditorDir, 'test', file),
+        included: true,
+        watched: false
+    });
+});
+
+filesToLoad.push({
+    pattern: 'src/ui/react/test/*.js',
+    included: true,
+    watched: false
+});
+
 var defaultConfig = {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '../../..',
 
-    browsers: ['Chrome', 'Firefox', 'IE9 - Win7', 'IE10 - Win7', 'IE11 - Win7'],
+    browsers: ['Chrome'],
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['chai', 'mocha', 'sinon'],
 
     // list of files / patterns to load in the browser
-    files: [{
-            pattern: 'dist/alloy-editor-*/bootstrap.css',
-            included: true,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/assets/alloy-editor-dark.css',
-            included: true,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/assets/fonts/alloyeditor.woff',
-            included: false,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/assets/fonts/alloyeditor.ttf',
-            included: false,
-            watched: false
-        },
-
-        'src/ui/yui/test/vendor/happen.js',
-        'src/ui/yui/test/vendor/zepto.js',
-        'http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js',
-
-        {
-            pattern: 'dist/alloy-editor-*/alloy-editor/ckeditor.js',
-            included: true,
-            watched: false
-        },
-
-        /* bender requires CKEDITOR, should be after ckeditor.js */
-        'src/ui/yui/test/util/bender.js',
-
-        {
-            pattern: 'dist/alloy-editor-*/alloy-editor/styles.js',
-            included: true,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/config.js',
-            included: true,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/skins/moono/*.css',
-            included: true,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/lang/*.js',
-            included: true,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/yui-config.js',
-            included: true,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/plugins/*.js',
-            included: true,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/toolbars/*.js',
-            included: true,
-            watched: false
-        }, {
-            pattern: 'dist/alloy-editor-*/alloy-editor/buttons/*.js',
-            included: true,
-            watched: false
-        },
-
-        'src/ui/yui/test/*.js'
-    ],
+    files: filesToLoad,
 
 
     // list of files to exclude
@@ -88,12 +104,7 @@ var defaultConfig = {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-        'dist/alloy-editor-*/alloy-editor/yui-config.js': ['coverage'],
-        'dist/alloy-editor-*/alloy-editor/plugins/*.js': ['coverage'],
-        'dist/alloy-editor-*/alloy-editor/toolbars/*.js': ['coverage'],
-        'dist/alloy-editor-*/alloy-editor/buttons/*.js': ['coverage']
-    },
+    preprocessors: preprocessors,
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
