@@ -10,6 +10,11 @@
     var WidgetPosition = {
         mixins: [global.WidgetInteractionPoint],
 
+        /**
+         * Allows validating props being passed to the component.
+         *
+         * @type {Object}
+         */
         propTypes: {
             gutter: React.PropTypes.object
         },

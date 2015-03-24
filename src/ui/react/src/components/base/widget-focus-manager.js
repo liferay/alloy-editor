@@ -18,6 +18,11 @@
      * @class WidgetFocusManager
      */
     var WidgetFocusManager = {
+        /**
+         * Allows validating props being passed to the component.
+         *
+         * @type {Object}
+         */
         propTypes: {
             circular: React.PropTypes.bool.isRequired,
             descendants: React.PropTypes.string.isRequired,

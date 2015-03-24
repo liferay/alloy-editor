@@ -13,6 +13,11 @@
      * @class ButtonStyle
      */
     var ButtonStyle = {
+        /**
+         * Allows validating props being passed to the component.
+         *
+         * @type {Object}
+         */
         propTypes: {
             style: React.PropTypes.object
         },

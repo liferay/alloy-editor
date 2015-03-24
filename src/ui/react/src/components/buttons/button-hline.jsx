@@ -10,6 +10,15 @@
         mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
 
         /**
+         * Allows validating props being passed to the component.
+         *
+         * @type {Object}
+         */
+        propTypes: {
+            editor: React.PropTypes.object.isRequired
+        },
+
+        /**
          * Lifecycle. Provides static properties to the widget.
          * - key: The name which will be used as an alias of the button in the configuration.
          */

@@ -11,6 +11,7 @@
 
         /**
          * Allows validating props being passed to the component.
+         *
          * @type {Object}
          */
         propTypes: {

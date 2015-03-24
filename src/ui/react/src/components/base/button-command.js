@@ -11,6 +11,11 @@
      * @class ButtonCommand
      */
     var ButtonCommand = {
+        /**
+         * Allows validating props being passed to the component.
+         *
+         * @type {Object}
+         */
         propTypes: {
             command: React.PropTypes.string.isRequired
         },
