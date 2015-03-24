@@ -208,7 +208,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         }
 
         &:before {
-            content: '\E00E';
+            content: '\E020';
             display: inline-block;
             font-family: 'alloyeditor';
             margin-right: 4px;
@@ -260,7 +260,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     padding: 0 5px;
 
     &:after {
-        content: '\E018';
+        content: '\E01E';
         display: inline-block;
         font-family: alloyeditor;
         margin-left: 4px;
