@@ -45,7 +45,7 @@
             var actions = [
                 <global.AlloyEditor.ButtonCommandListItem command="columnInsertBefore" description="Insert column left" editor={editor} key="columninsertbefore" />,
                 <global.AlloyEditor.ButtonCommandListItem command="columnInsertAfter" description="Insert column right" editor={editor} key="columninsertafter" />,
-                <global.AlloyEditor.ButtonCommandListItem command="columnDelete" description="Delete column" editor={editor} key="columndelete" />
+                <global.AlloyEditor.ButtonCommandListItem command="columnDelete" description="Delete column" editor={editor} key="columndelete" modifiesSelection={true} />
             ];
 
             return actions;
