@@ -26,7 +26,6 @@ var filesToLoad = [
         watched: false
     },
 
-    'src/ui/react/test/vendor/happen.js',
     'src/ui/react/test/vendor/zepto.js',
 
     /* CKEditor JS files */
