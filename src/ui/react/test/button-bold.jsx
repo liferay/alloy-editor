@@ -26,4 +26,14 @@ describe('ButtonBold', function() {
 
         assert.strictEqual(data, '<p>There should be a <strong>selection</strong> made bold.</p>');
     });
+
+    it('should add class which represents pressed button', function() {
+        bender.tools.selection.setWithHtml(this.nativeEditor, 'A <strong>{selection}</strong> made bold.');
+
+        var buttonBold = React.render(<global.AlloyEditor.ButtonBold editor={this.editor} />, this.container);
+
+        var buttonDOMNode = React.findDOMNode(buttonBold);
+
+        assert.strictEqual($(buttonDOMNode).hasClass('alloy-editor-button-pressed'), true);
+    });
 });
