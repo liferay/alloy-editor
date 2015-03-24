@@ -30,6 +30,16 @@
 
                 done();
             });
+        },
+
+        createContainer: function() {
+            this.container = document.createElement('div');
+
+            document.body.appendChild(this.container);
+        },
+
+        removeContainer: function() {
+            document.body.removeChild(this.container);
         }
     };
 

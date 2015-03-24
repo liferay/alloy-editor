@@ -8,18 +8,12 @@ describe('ButtonBold', function() {
 
     before(Utils.createAlloyEditor);
 
-    beforeEach(function() {
-        this.btnContainer = document.createElement('div');
+    beforeEach(Utils.createContainer);
 
-        document.body.appendChild(this.btnContainer);
-    });
-
-    afterEach(function() {
-        document.body.removeChild(this.btnContainer);
-    });
+    afterEach(Utils.removeContainer);
 
     it('should make a text selection bold', function() {
-        var buttonBold = React.render(<global.AlloyEditor.ButtonBold editor={this.editor} />, this.btnContainer);
+        var buttonBold = React.render(<global.AlloyEditor.ButtonBold editor={this.editor} />, this.container);
 
         bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made bold.');
 
