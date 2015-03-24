@@ -7,8 +7,11 @@ var alloyEditorDir = 'dist/alloy-editor-*/alloy-editor/';
 var path = require('path');
 var srcFiles = require('./_src.js');
 
-var preprocessors = {};
-preprocessors[path.join(alloyEditorDir, 'test/*.js')] = ['coverage'];
+var preprocessors = {
+    '**/*.jsx': ['react-jsx']
+};
+
+preprocessors[path.join(alloyEditorDir, 'test/**/*.js')] = ['coverage'];
 
 var filesToLoad = [
     /* AlloyEditor skins */
@@ -78,7 +81,7 @@ srcFiles.forEach(function(file) {
 });
 
 filesToLoad.push({
-    pattern: 'src/ui/react/test/*.js',
+    pattern: 'src/ui/react/test/*.js*',
     included: true,
     watched: false
 });
@@ -96,10 +99,8 @@ var defaultConfig = {
     // list of files / patterns to load in the browser
     files: filesToLoad,
 
-
     // list of files to exclude
     exclude: [],
-
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
