@@ -57,6 +57,8 @@ var filesToLoad = [
     /* bender requires CKEDITOR, should be after ckeditor.js */
     'src/ui/react/test/util/bender.js',
 
+    'src/ui/react/test/util/utils.js',
+
     /* ReactJS */
     {
         pattern: path.join(alloyEditorDir, 'react-with-addons.js'),

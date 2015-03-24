@@ -1,40 +1,12 @@
 'use strict';
 
 var assert = chai.assert;
-
-var TestUtils = React.addons.TestUtils;
-var Simulate = TestUtils.Simulate;
+var Simulate = React.addons.TestUtils.Simulate;
 
 describe('ButtonBold', function() {
     this.timeout(35000);
 
-    before(function(done) {
-        var self = this;
-
-        var editable = document.createElement('div');
-
-        editable.setAttribute('id', 'editable');
-        editable.setAttribute('contenteditable', true);
-
-        document.getElementsByTagName('body')[0].appendChild(editable);
-
-        assert.ok(bender);
-        assert.ok(CKEDITOR);
-        assert.ok(AlloyEditor);
-
-        self.editor = new AlloyEditor({
-            toolbars: {},
-            srcNode: 'editable'
-        });
-
-        self.nativeEditor = self.editor.get('nativeEditor');
-
-        self.nativeEditor.on('instanceReady', function() {
-            self.nativeEditor.focus();
-
-            done();
-        });
-    });
+    before(Utils.createAlloyEditor);
 
     beforeEach(function() {
         this.btnContainer = document.createElement('div');
