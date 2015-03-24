@@ -1,12 +1,14 @@
 (function() {
     'use strict';
 
-    if (/MSIE ([^;]*)|Trident.*; rv:([0-9.]+)/.test(navigator.userAgent)) {
-        document.execCommand('AutoUrlDetect', false, false);
-    }
-
     if (CKEDITOR.plugins.get('autolink')) {
         return;
+    }
+
+    // Disables the auto URL detection feature in IE, their lacks functionality:
+    // They convert the links only on space. We do on space, dot, comma and Enter.
+    if (/MSIE ([^;]*)|Trident.*; rv:([0-9.]+)/.test(navigator.userAgent)) {
+        document.execCommand('AutoUrlDetect', false, false);
     }
 
     var KEY_BACK = 8;
@@ -26,9 +28,9 @@
     var REGEX_URL = /(https?\:\/\/|www\.)(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?$/i;
 
     /**
-     * LinkTag class utility. Provides methods for build <a> tags.
+     * AutoLink class utility. Provides methods for building link elements.
      *
-     * @class LinkTag
+     * @class AutoLink
      * @constructor
      * @param {Object} config The link configuration:
      * - {String} uri
@@ -37,13 +39,13 @@
      *     - {String} cssClass
      *     - ...
      */
-    function LinkTag(config) {
+    function AutoLink(config) {
         var defaultOptions = {
             cssClass: '',
             newWindow: true
         };
 
-        this._tagName = 'a';
+        this._elementTagName = 'a';
 
         this._uri = (config && config.uri) ? config.uri : '';
 
@@ -52,12 +54,11 @@
         this._attributes = {};
     }
 
-    LinkTag.prototype = {
-        constructor: LinkTag,
+    AutoLink.prototype = {
+        constructor: AutoLink,
 
         /**
-         * Builds the tag by creating the his attributes
-         * from the configuration
+         * Creates the element by creating its attributes from the configuration.
          *
          * @method build
          */
@@ -80,61 +81,28 @@
         },
 
         /**
-         * Returns the html attributes that has the tag.
+         * Returns the HTML attributes that belong to the element.
          *
          * @method getAttributes
-         * @return {Object} Returns object with the html attributes
+         * @return {Object} Returns an object with the HTML attributes of the element.
          */
         getAttributes: function() {
             return this._attributes;
         },
 
         /**
-         * Returns the URI of the tag.
+         * Returns the URI of the element.
          *
          * @method getURI
-         * @return {String} Returns the tag's uri
+         * @return {String} Returns element's URI.
          */
         getURI: function() {
             return this._uri;
-        },
-
-        /**
-         * Returns a string representation of the tag.
-         *
-         * @method toString
-         * @return {String} the string representation of the tag.
-         */
-        toString: function() {
-            var attrsStr = this._getAttrsString();
-            var tagName = this._tagName;
-            var uri = this._uri;
-
-            return '<' + tagName + ' ' + attrsStr + '>' + uri + '</' + tagName + '>';
-        },
-
-        /**
-         * Returns a string representation of the tag attributes
-         *
-         * @method _getAttrsString
-         * @return {String} the string representation of the tag attributes
-         */
-        _getAttrsString: function() {
-            var attributes = this.getAttributes();
-            var attrsArr = [];
-
-            for (var prop in attributes) {
-                if (Object.prototype.hasOwnProperty.call(attributes, prop)) {
-                    attrsArr.push(prop, '="', attributes[prop], '"');
-                }
-            }
-
-            return attrsArr.join(' ');
         }
     };
 
     /**
-     * CKEditor plugin which automatically generate links when user types text which looks like URL
+     * CKEditor plugin which automatically generates links when user types text which looks like URL.
      *
      * @class CKEDITOR.plugins.autolink
      * @constructor
@@ -144,7 +112,7 @@
 
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers the 'editorInteraction' event on the editing area.
+             * The function registers the 'keyup' event on the editing area.
              *
              * @method init
              * @param {Object} editor The current editor instance
@@ -154,15 +122,16 @@
 
                 var editable = editor.editable();
 
-                editable.attachListener(editable, 'keyup', this._onKeyup, this);
+                editable.attachListener(editable, 'keyup', this._onKeyUp, this);
             },
 
             /**
-             * Gets the last word introduced by the user. It reads from the current
-             * caret point backward until it finds the first white space.
+             * Retrieves the last word introduced by the user. Reads from the current
+             * caret position backwards until it finds the first white space.
              *
              * @method _getLastWord
-             * @return {String} last word introduced by user
+             * @return {String} The last word introduced by user.
+             * @protected
              */
             _getLastWord: function() {
                 var range = this._editor.getSelection().getRanges()[0];
@@ -171,55 +140,61 @@
 
                 var previousText = '';
 
+                // The user pressed Enter, so we have to look on the previous node
                 if (this._currentKeyCode === KEY_ENTER) {
                     var previousNode = range.startContainer.getPrevious();
 
-                    //last child node may be a <BR>, ignore it and find the previous text node
+                    // The last child node may be a <BR>, ignore it and find the previous text node
                     var lastChild = previousNode.getLast();
                     while (lastChild && !lastChild.getText()) {
                         lastChild = lastChild.getPrevious();
                     }
 
-                    //check if it is already a link
-                    if (lastChild && lastChild.$.href) {
-                        previousText = '';
-                    } else {
+                    // Check if the lastChild is a link
+                    if (!(lastChild && lastChild.$.href)) {
                         this._startContainer = lastChild;
                         previousText = lastChild ? lastChild.getText() : '';
                         this._offset = previousText.length;
                     }
-                }
-                else {
+                } else {
                     this._startContainer = range.startContainer;
 
-                    //last character is the delimiter, ignore it
+                    // Last character is the delimiter, ignore it
                     previousText = this._startContainer.getText().substring(0, offset - 1);
 
                     this._offset = offset - 1;
                 }
 
-                var lastWord = (previousText.match(REGEX_LAST_WORD)) ? previousText.match(REGEX_LAST_WORD).pop() : '';
+                var lastWord = '';
+
+                var match = previousText.match(REGEX_LAST_WORD);
+
+                if (match) {
+                    lastWord = match.pop();
+                }
 
                 return lastWord;
             },
 
             /**
-             * Checks if the given link is a valid URL
+             * Checks if the given link is a valid URL.
              *
              * @method isValidURL
-             * @param  {String} link The link we want to know if it is a valid URL
+             * @param  {String} link The link we want to know if it is a valid URL.
              * @return {Boolean} Returns true if the link is a valid URL, false otherwise.
+             * @protected
              */
             _isValidURL: function(link) {
                 return REGEX_URL.test(link);
             },
 
             /**
-             * Listens the "BACK" event to check if the previous created
-             * link has to be removed
+             * Listens to the `keydown` event and if the keycode is `Backspace`, removes the previously
+             * create link.
              *
-             * @method  _onKeyDown
-             * @param  {EventFacade} event
+             * @method _onKeyDown
+             * @param {EventFacade} event EventFacade object
+             * @protected
              */
             _onKeyDown: function(event) {
                 var nativeEvent = event.data.$;
@@ -232,73 +207,74 @@
                     event.cancel();
                     event.data.preventDefault();
 
-                    this._undoLink();
+                    this._removeLink();
                 }
 
                 this._ckLink = null;
             },
 
             /**
-             * Listens the "ENTER" and "SPACE" key events to check if the last word
-             * introduced by the user has to be replaced by a link tag.
+             * Listens to the `Enter` and `Space` key events to check if the last word
+             * introduced by the user should be replaced by a link element.
              *
-             * @method _onKeyup
-             * @param  {EventFacade} event
+             * @method _onKeyUp
+             * @param {EventFacade} event EventFacade object
+             * @protected
              */
-            _onKeyup: function(event) {
+            _onKeyUp: function(event) {
                 var nativeEvent = event.data.$;
 
                 this._currentKeyCode = nativeEvent.keyCode;
 
-                if (DELIMITERS.indexOf(nativeEvent.keyCode) !== -1) {
+                if (DELIMITERS.indexOf(this._currentKeyCode) !== -1) {
                     var lastWord = this._getLastWord();
 
                     if (this._isValidURL(lastWord)) {
-                        this._replaceByLink(lastWord);
+                        this._replaceContentByLink(lastWord);
                     }
                 }
             },
 
             /**
-             * Replace a text by a link tag.
+             * Replaces content by a link element.
              *
-             * @method _replaceByLink
-             * @param  {String} link the text that has to be replaced by a tag
+             * @method _replaceContentByLink
+             * @param {String} content The text that has to be replaced by an link element.
+             * @protected
              */
-            _replaceByLink: function(link) {
-                var urlTag = new LinkTag({
-                    uri: link
+            _replaceContentByLink: function(content) {
+                var autoLink = new AutoLink({
+                    uri: content
                 });
 
-                urlTag.build();
+                autoLink.build();
 
                 var range = this._editor.createRange();
                 var node = CKEDITOR.dom.element.get(this._startContainer);
                 var offset = this._offset;
 
-                //select the link, so CKEDITOR.Link can properly replace it
-                range.setStart(node, offset - urlTag.getURI().length);
+                // Select the content, so CKEDITOR.Link can properly replace it
+                range.setStart(node, offset - autoLink.getURI().length);
                 range.setEnd(node, offset);
                 range.select();
 
                 var ckLink = new CKEDITOR.Link(this._editor);
 
-                ckLink.create(urlTag.getURI(), urlTag.getAttributes);
+                ckLink.create(autoLink.getURI(), autoLink.getAttributes());
                 this._ckLink = ckLink;
 
-                this._subscribeKeyEvent();
+                this._subscribeToKeyEvent();
 
-                //now range is on the link and it is selected. We have to
-                //return focus to the caret position
+                // Now range is on the link and it is selected. We have to
+                // return focus to the caret position
                 range = this._editor.getSelection().getRanges()[0];
 
-                //if user pressed "ENTER", get the next editable node at position '0'
-                //else set the cursor at the next character of the link (the white space)
+                // If user pressed `Enter`, get the next editable node at position 0,
+                // otherwise set the cursor at the next character of the link (the white space)
                 if (this._currentKeyCode === KEY_ENTER) {
                     range.setEnd(range.getNextEditableNode(), 0);
                     range.setStart(range.getNextEditableNode(), 0);
-                }
-                else {
+                } else {
                     range.setEnd(range.getNextNode(), 1);
                     range.setStart(range.getNextNode(), 1);
                 }
@@ -307,26 +283,16 @@
             },
 
             /**
-             * Suscribe the editor to a key event.
+             * Removes the created link element, and replaces it by its text.
              *
-             * @method _subscribeKeyEvent
+             * @method _removeLink
+             * @protected
              */
-            _subscribeKeyEvent: function() {
-                var editable = this._editor.editable();
-
-                editable.attachListener(editable, 'keydown', this._onKeyDown, this, {}, 1);
-            },
-
-            /**
-             * Removes the link tag created, and replaces it by his text
-             *
-             * @method _undoLink
-             */
-            _undoLink: function() {
+            _removeLink: function() {
                 var range = this._editor.getSelection().getRanges()[0];
                 var caretOffset = range.startOffset;
 
-                //select the link, so CKEDITOR.Link can properly remove it
+                // Select the link, so CKEDITOR.Link can properly remove it
                 var linkNode = this._startContainer.getNext() || this._startContainer;
 
                 var newRange = this._editor.createRange();
@@ -336,11 +302,26 @@
 
                 this._ckLink.remove();
 
-                //return focus to caret position
+                // Return focus to the caret position
                 range.setEnd(range.startContainer, caretOffset);
                 range.setStart(range.startContainer, caretOffset);
 
                 range.select();
+            },
+
+            /**
+             * Subscribe to a key event of the editable aria.
+             *
+             * @method _subscribeToKeyEvent
+             * @protected
+             */
+            _subscribeToKeyEvent: function() {
+                var editable = this._editor.editable();
+
+                // Change the priority of keydown listener - 1 means the highest priority.
+                // In Chrome on pressing `Enter` the listener is not being invoked.
+                // See http://dev.ckeditor.com/ticket/11861 for more information.
+                editable.attachListener(editable, 'keydown', this._onKeyDown, this, {}, 1);
             }
         }
     );
