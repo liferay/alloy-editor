@@ -88,7 +88,7 @@ var defaultConfig = {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '../../..',
 
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'Firefox', 'IE9 - Win7', 'IE10 - Win7', 'IE11 - Win7'],
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
