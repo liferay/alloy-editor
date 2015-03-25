@@ -30,6 +30,8 @@
 
             document.getElementsByTagName('body')[0].appendChild(editable);
 
+            this._editable = editable;
+
             assert.ok(bender);
             assert.ok(CKEDITOR);
             assert.ok(AlloyEditor);
@@ -63,7 +65,7 @@
                 self.editor.destroy();
             }
 
-            document.body.innerHTML = '';
+            this._editable.parentNode.removeChild(this._editable);
 
             if (done) {
                 done();
@@ -71,7 +73,7 @@
         },
 
         removeContainer: function() {
-            document.body.removeChild(this.container);
+            this.container.parentNode.removeChild(this.container);
         }
     };
 

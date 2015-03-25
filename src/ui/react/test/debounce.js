@@ -6,7 +6,7 @@ describe('debounce', function() {
     this.timeout(35000);
 
     describe('Debounce', function() {
-        it('should debounce function execution', function() {
+        it('should debounce function execution', function(done) {
             var listener = sinon.stub();
             var fn = CKEDITOR.tools.debounce(listener, 0);
 
@@ -16,10 +16,12 @@ describe('debounce', function() {
 
             setTimeout(function() {
                 assert.ok(listener.calledOnce);
+
+                done();
             }, 0);
         });
 
-        it('should debounce function execution with context and params', function() {
+        it('should debounce function execution with context and params', function(done) {
             var ctx = {};
             var listener = sinon.stub();
             var args = ['param1', 'param2'];
@@ -33,10 +35,12 @@ describe('debounce', function() {
                 assert.ok(listener.calledOnce);
                 assert.ok(listener.calledOn(ctx));
                 assert.ok(listener.calledWith('param1', 'param2'));
+
+                done();
             }, 0);
         });
 
-        it('should detach a debounced function execution', function() {
+        it('should detach a debounced function execution', function(done) {
             var listener = sinon.stub();
             var fn = CKEDITOR.tools.debounce(listener, 100);
 
@@ -46,6 +50,8 @@ describe('debounce', function() {
 
             setTimeout(function() {
                 assert.notOk(listener.calledOnce);
+
+                done();
             }, 0);
         });
 
