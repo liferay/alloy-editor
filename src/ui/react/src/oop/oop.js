@@ -1,18 +1,6 @@
 (function () {
     'use strict';
 
-    // unceremoniously lifted from YUI
-    var create = Object.create ? function (obj) {
-        return Object.create(obj);
-    } : (function () {
-        function F() {}
-
-        return function (obj) {
-            F.prototype = obj;
-            return new F();
-        };
-    }());
-
     var OOP = {
         /**
          * Sets the prototype, constructor and superclass properties to support an inheritance strategy
@@ -29,7 +17,7 @@
                 throw 'extend failed, verify dependencies';
             }
 
-            var supplierProto = supplier.prototype, receiverProto = create(supplierProto);
+            var supplierProto = supplier.prototype, receiverProto = Object.create(supplierProto);
             receiver.prototype = receiverProto;
 
             receiverProto.constructor = receiver;
