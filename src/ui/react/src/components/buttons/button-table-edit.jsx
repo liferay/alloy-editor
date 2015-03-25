@@ -14,6 +14,16 @@
         mixins: [global.WidgetClickOutside],
 
         /**
+         * Allows validating props being passed to the component.
+         *
+         * @type {Object}
+         */
+        propTypes: {
+            cancelExclusive: React.PropTypes.func.isRequired,
+            editor: React.PropTypes.object.isRequired
+        },
+
+        /**
          * Lifecycle. Provides static properties to the widget.
          * - key: The name which will be used as an alias of the button in the configuration.
          */
@@ -49,9 +59,9 @@
          */
         _createTable: function() {
             var editor = this.props.editor.get('nativeEditor');
-            var ckTable = this._getCKTable();
+            var tableUtils = new CKEDITOR.Table(editor);
 
-            ckTable.create({
+            tableUtils.create({
                 attrs: {
                     border: 1,
                     cellPadding: 0,
@@ -65,20 +75,6 @@
             this.props.cancelExclusive();
 
             editor.fire('actionPerformed', this);
-        },
-
-        /**
-         * Retrieves a CKEDITOR.Table instance.
-         *
-         * @return {CKEDITOR.Table} Instance of CKEDITOR.Table utility class.
-         */
-        _getCKTable: function() {
-            if (this._ckTable) {
-                return this._ckTable;
-            } else {
-                this._ckTable = new CKEDITOR.Table(this.props.editor.get('nativeEditor'));
-                return this._ckTable;
-            }
         },
 
         /**
