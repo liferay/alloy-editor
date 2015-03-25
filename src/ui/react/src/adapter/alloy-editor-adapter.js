@@ -91,7 +91,7 @@
             editorInstance = CKEDITOR.instances[this.get('srcNode')];
 
             if (editorInstance) {
-                Object.keys(editorInstance.config.toolbars).each(function(value) {
+                Object.keys(editorInstance.config.toolbars).forEach(function(value) {
                     value.destroy();
                 });
 

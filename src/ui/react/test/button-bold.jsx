@@ -8,9 +8,11 @@ describe('ButtonBold', function() {
 
     before(Utils.createAlloyEditor);
 
-    beforeEach(Utils.createContainer);
+    after(Utils.destroyAlloyEditor);
 
-    afterEach(Utils.removeContainer);
+    beforeEach(Utils.beforeEach);
+
+    afterEach(Utils.afterEach);
 
     it('should make a text selection bold', function() {
         var buttonBold = React.render(<global.AlloyEditor.ButtonBold editor={this.editor} />, this.container);

@@ -2,6 +2,24 @@
     'use strict';
 
     var Utils = {
+        afterEach: function(done) {
+            Utils.removeContainer.call(this);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, '');
+
+            if (done) {
+                done();
+            }
+        },
+
+        beforeEach: function(done) {
+            Utils.createContainer.call(this);
+
+            if (done) {
+                done();
+            }
+        },
+
         createAlloyEditor: function(done, config) {
             var self = this;
 
@@ -36,6 +54,20 @@
             this.container = document.createElement('div');
 
             document.body.appendChild(this.container);
+        },
+
+        destroyAlloyEditor: function(done) {
+            var self = this;
+
+            if (self.editor) {
+                self.editor.destroy();
+            }
+
+            document.body.innerHTML = '';
+
+            if (done) {
+                done();
+            }
         },
 
         removeContainer: function() {
