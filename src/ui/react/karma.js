@@ -124,11 +124,7 @@ var defaultConfig = {
     logLevel: 'info',
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    autoWatch: false
 };
 
 var customConfig = defaultConfig;

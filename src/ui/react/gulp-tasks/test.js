@@ -1,5 +1,6 @@
 'use strict';
 
+var argv = require('yargs').argv;
 var gulp = require('gulp');
 var karma = require('karma').server;
 var mkdirp = require('mkdirp');
@@ -39,6 +40,6 @@ gulp.task('copy-react', function() {
 gulp.task('test', ['prepare-files'], function (done) {
     karma.start({
         configFile: path.join(__dirname, '../karma.js'),
-        singleRun: true
+        singleRun: (argv.debug || argv.d) ? false : true
     }, done);
 });
