@@ -21,28 +21,15 @@
      * @param {Array} args An array of arguments which the callback will receive.
      */
     CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function(callback, timeout, context, args) {
-        var callFn,
-            debounceHandle;
+        var debounceHandle;
 
-        callFn = function() {
-            var callArgs,
-                callContext,
-                len,
-                result = [],
-                startIndex = 0;
-
-            callContext = context || this;
-
-            for (len = arguments.length; startIndex < len; ++startIndex) {
-                result.push(arguments[startIndex]);
-            }
-
-            callArgs = result.concat(args || []);
+        var callFn = function() {
+            var callContext = context || this;
 
             clearTimeout(debounceHandle);
 
             debounceHandle = setTimeout(function() {
-                callback.apply(callContext, callArgs);
+                callback.apply(callContext, args);
             }, timeout);
         };
 
