@@ -24,28 +24,22 @@
          * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
          */
         create: function(URI, attrs) {
-            var linkAttrs,
-                range,
-                selection,
-                style,
-                text;
+            var selection = this._editor.getSelection();
 
-            selection = this._editor.getSelection();
-
-            range = selection.getRanges()[0];
+            var range = selection.getRanges()[0];
 
             if (range.collapsed) {
-                text = new CKEDITOR.dom.text(URI, this._editor.document);
+                var text = new CKEDITOR.dom.text(URI, this._editor.document);
                 range.insertNode(text);
                 range.selectNodeContents(text);
             }
 
-            linkAttrs = CKEDITOR.tools.merge({
+            var linkAttrs = CKEDITOR.tools.merge({
                 'data-cke-saved-href': URI,
                 href: URI
             }, attrs);
 
-            style = new CKEDITOR.style({
+            var style = new CKEDITOR.style({
                 attributes: linkAttrs,
                 element: 'a'
             });
@@ -62,19 +56,15 @@
          * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
          */
         getFromSelection: function() {
-            var range,
-                selection,
-                selectedElement;
+            var selection = this._editor.getSelection();
 
-            selection = this._editor.getSelection();
-
-            selectedElement = selection.getSelectedElement();
+            var selectedElement = selection.getSelectedElement();
 
             if (selectedElement && selectedElement.is('a')) {
                 return selectedElement;
             }
 
-            range = selection.getRanges()[0];
+            var range = selection.getRanges()[0];
 
             if (range) {
                 range.shrink(CKEDITOR.SHRINK_TEXT);
@@ -92,16 +82,12 @@
          * @method remove
          */
         remove: function(link) {
-            var editor,
-                selection,
-                style;
-
-            editor = this._editor;
+            var editor = this._editor;
 
             if (link) {
                 link.remove(editor);
             } else {
-                style = link || new CKEDITOR.style({
+                var style = link || new CKEDITOR.style({
                     alwaysRemoveElement: 1,
                     element: 'a',
                     type: CKEDITOR.STYLE_INLINE
@@ -111,7 +97,7 @@
                 //  We need to force the selection to be the whole link element
                 //  to remove it properly.
 
-                selection = editor.getSelection();
+                var selection = editor.getSelection();
                 selection.selectElement(selection.getStartElement());
 
                 editor.removeStyle(style);
@@ -126,9 +112,7 @@
          * @method update
          */
         update: function(URI, link) {
-            var style;
-
-            style = link || this.getFromSelection();
+            var style = link || this.getFromSelection();
 
             style.setAttributes({
                 'data-cke-saved-href': URI,
