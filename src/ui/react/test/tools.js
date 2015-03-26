@@ -7,10 +7,10 @@ describe('Tools', function() {
 
     it('should merge objects and ignore inherited properties', function() {
         var obj1 = {
-            prop1: 'prop1'
+            prop1: 'val1'
         };
 
-        Object.prototype.test123 = 'test123';
+        Object.prototype.prop123 = 'val123';
 
         var obj2 = {};
 
@@ -18,8 +18,8 @@ describe('Tools', function() {
 
         delete Object.prototype.test123;
 
-        assert.strictEqual('prop1', obj3.prop1);
-        assert.isUndefined(obj3.test123);
+        assert.propertyVal(obj3, 'prop1', 'val1');
+        assert.notProperty(obj3, 'test123');
     });
 
     it('should simulate events on DOM elements', function() {

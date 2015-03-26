@@ -87,8 +87,6 @@
 
                 selection.unlock();
 
-                debugger;
-
                 range = document.body.createTextRange();
                 range.moveToPoint(startX, startY);
 
@@ -171,7 +169,7 @@
         getSelectionRegion: function() {
             var region = this.getClientRectsRegion();
 
-            region.direction = this._getSelectionDirection();
+            region.direction = this.getSelectionDirection();
 
             region.height = region.bottom - region.top;
             region.width = region.right - region.left;
@@ -304,13 +302,12 @@
          * Retrieves the direction of the selection. The direction is from top to bottom or from bottom to top.
          * For IE < 9 it is not possible, so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.
          *
-         * @method _getSelectionDirection
-         * @protected
+         * @method getSelectionDirection
          * @return {Number} Returns a number which represents selection direction. It might be one of these:
          * - CKEDITOR.SELECTION_TOP_TO_BOTTOM;
          * - CKEDITOR.SELECTION_BOTTOM_TO_TOP;
          */
-        _getSelectionDirection: function() {
+        getSelectionDirection: function() {
             var selection = this.getSelection();
             var nativeSelection = selection.getNative();
 

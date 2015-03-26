@@ -30,6 +30,7 @@ var filesToLoad = [
     },
 
     'src/ui/react/test/vendor/zepto.js',
+    'src/ui/react/test/vendor/happen.js',
 
     /* CKEditor JS files */
     {
