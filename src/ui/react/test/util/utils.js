@@ -5,7 +5,7 @@
         afterEach: function(done) {
             Utils.removeContainer.call(this);
 
-            this.nativeEditor.setData('');
+            fixture.cleanup();
 
             if (done) {
                 done();
@@ -14,6 +14,10 @@
 
         beforeEach: function(done) {
             Utils.createContainer.call(this);
+
+            // CKEDITOR in Firefox needs to have cursor and at least an empty string
+            // before doing anything ;)
+            bender.tools.selection.setWithHtml(this.nativeEditor, ' {}');
 
             if (done) {
                 done();
@@ -68,8 +72,35 @@
             }
         },
 
+        getFixtures: function(fixtureFile, fixtureName) {
+            var fixtureData = {};
+
+            fixture.setBase('src/ui/react/test/fixtures');
+
+            fixture.load(fixtureFile);
+
+            var htmlFixture = fixture.el.querySelector('#' + fixtureName);
+
+            fixtureData.initial = Utils._prepareFixtureForAssertion(htmlFixture.querySelector('[data-fixture="initial"]'));
+            fixtureData.expected = Utils._prepareFixtureForAssertion(htmlFixture.querySelector('[data-fixture="expected"]'));
+
+            return fixtureData;
+        },
+
         removeContainer: function() {
             this.container.parentNode.removeChild(this.container);
+        },
+
+        _prepareFixtureForAssertion: function(htmlFixture) {
+            var fixtureString;
+
+            if (htmlFixture) {
+                fixtureString = bender.tools.fixHtml(
+                    bender.tools.compatHtml(htmlFixture.innerHTML.replace(/\u00a0/g, '&nbsp;'))
+                );
+            }
+
+            return fixtureString;
         }
     };
 
