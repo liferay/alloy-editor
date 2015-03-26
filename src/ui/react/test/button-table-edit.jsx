@@ -1,135 +1,135 @@
-'use strict';
+(function() {
+    'use strict';
 
-var assert = chai.assert;
-var TestUtils = React.addons.TestUtils;
-var Simulate = TestUtils.Simulate;
+    var assert = chai.assert;
+    var TestUtils = React.addons.TestUtils;
+    var Simulate = TestUtils.Simulate;
 
-var KEY_ENTER = 13;
-var KEY_ESC = 27;
+    var KEY_ENTER = 13;
+    var KEY_ESC = 27;
 
-var FIXTURE_FILE = 'button-table-edit.html';
+    var FIXTURE_FILE = 'button-table-edit.html';
 
-describe('ButtonTableEdit', function() {
-    this.timeout(35000);
+    describe('ButtonTableEdit', function() {
+        this.timeout(35000);
 
-    before(Utils.createAlloyEditor);
+        before(Utils.createAlloyEditor);
 
-    after(Utils.destroyAlloyEditor);
+        after(Utils.destroyAlloyEditor);
 
-    beforeEach(Utils.beforeEach);
+        beforeEach(Utils.beforeEach);
 
-    afterEach(Utils.afterEach);
+        afterEach(Utils.afterEach);
 
-    it('should create a 3x3 table by default when clicking on the confirm button', function() {
-        var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
+        it('should create a 3x3 table by default when clicking on the confirm button', function() {
+            var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
-        var confirmButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableEdit, 'button');
+            var confirmButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableEdit, 'button');
 
-        Simulate.click(React.findDOMNode(confirmButton));
+            Simulate.click(React.findDOMNode(confirmButton));
 
-        var data = bender.tools.getData(this.nativeEditor, {
-            fixHtml: true,
-            compatHtml: true
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            var expected = Utils.getFixtures.call(this, FIXTURE_FILE, 'create_3_3_table').expected;
+
+            assert.strictEqual(data, expected);
         });
 
-        var expected = Utils.getFixtures.call(this, FIXTURE_FILE, 'create_3_3_table').expected;
+        it('should create a 6 x 4 table based on the rows and cols inputs when clicking on the confirm button', function() {
+            var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
+            Simulate.change(React.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
+            Simulate.change(React.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
 
-        debugger;
-        assert.strictEqual(data, expected);
-    });
+            var confirmButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableEdit, 'button');
 
-    it('should create a 6 x 4 table based on the rows and cols inputs when clicking on the confirm button', function() {
-        var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
+            Simulate.click(React.findDOMNode(confirmButton));
 
-        Simulate.change(React.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
-        Simulate.change(React.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
 
-        var confirmButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableEdit, 'button');
+            var expected = Utils.getFixtures.call(this, FIXTURE_FILE, 'create_6_4_table').expected;
 
-        Simulate.click(React.findDOMNode(confirmButton));
-
-        var data = bender.tools.getData(this.nativeEditor, {
-            fixHtml: true,
-            compatHtml: true
+            assert.strictEqual(data, expected);
         });
 
-        var expected = Utils.getFixtures.call(this, FIXTURE_FILE, 'create_6_4_table').expected;
+        it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the rows input', function() {
+            var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
-        assert.strictEqual(data, expected);
-    });
+            Simulate.change(React.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
+            Simulate.change(React.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
 
-    it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the rows input', function() {
-        var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
+            Simulate.keyDown(React.findDOMNode(buttonTableEdit.refs.rows), {keyCode: KEY_ENTER});
 
-        Simulate.change(React.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
-        Simulate.change(React.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
 
-        Simulate.keyDown(React.findDOMNode(buttonTableEdit.refs.rows), {keyCode: KEY_ENTER});
+            var expected = Utils.getFixtures.call(this, FIXTURE_FILE, 'create_6_4_table').expected;
 
-        var data = bender.tools.getData(this.nativeEditor, {
-            fixHtml: true,
-            compatHtml: true
+            assert.strictEqual(data, expected);
         });
 
-        var expected = Utils.getFixtures.call(this, FIXTURE_FILE, 'create_6_4_table').expected;
+        it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the cols input', function() {
+            var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
-        assert.strictEqual(data, expected);
-    });
+            Simulate.change(React.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
+            Simulate.change(React.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
 
-    it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the cols input', function() {
-        var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
+            Simulate.keyDown(React.findDOMNode(buttonTableEdit.refs.cols), {keyCode: KEY_ENTER});
 
-        Simulate.change(React.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
-        Simulate.change(React.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
 
-        Simulate.keyDown(React.findDOMNode(buttonTableEdit.refs.cols), {keyCode: KEY_ENTER});
+            var expected = Utils.getFixtures.call(this, FIXTURE_FILE, 'create_6_4_table').expected;
 
-        var data = bender.tools.getData(this.nativeEditor, {
-            fixHtml: true,
-            compatHtml: true
+            assert.strictEqual(data, expected);
         });
 
-        var expected = Utils.getFixtures.call(this, FIXTURE_FILE, 'create_6_4_table').expected;
+        it('should not create a table and dismiss the ui when pressing escape on the rows input', function() {
+            var cancelExclusive = sinon.stub();
 
-        assert.strictEqual(data, expected);
-    });
+            var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={cancelExclusive} editor={this.editor} />, this.container);
 
-    it('should not create a table and dismiss the ui when pressing escape on the rows input', function() {
-        var cancelExclusive = sinon.stub();
+            bender.tools.selection.setWithHtml(this.nativeEditor, '');
 
-        var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={cancelExclusive} editor={this.editor} />, this.container);
+            Simulate.keyDown(React.findDOMNode(buttonTableEdit.refs.rows), {keyCode: KEY_ESC});
 
-        bender.tools.selection.setWithHtml(this.nativeEditor, '');
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
 
-        Simulate.keyDown(React.findDOMNode(buttonTableEdit.refs.rows), {keyCode: KEY_ESC});
-
-        var data = bender.tools.getData(this.nativeEditor, {
-            fixHtml: true,
-            compatHtml: true
+            assert.strictEqual(data, '');
+            assert.ok(cancelExclusive.called);
+            assert.strictEqual(1, cancelExclusive.callCount);
         });
 
-        assert.strictEqual(data, '');
-        assert.ok(cancelExclusive.called);
-        assert.strictEqual(1, cancelExclusive.callCount);
-    });
+        it('should not create a table and dismiss the ui when pressing escape on the cols input', function() {
+            var cancelExclusive = sinon.stub();
 
-    it('should not create a table and dismiss the ui when pressing escape on the cols input', function() {
-        var cancelExclusive = sinon.stub();
+            var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={cancelExclusive} editor={this.editor} />, this.container);
 
-        var buttonTableEdit = React.render(<global.AlloyEditor.ButtonTableEdit cancelExclusive={cancelExclusive} editor={this.editor} />, this.container);
+            bender.tools.selection.setWithHtml(this.nativeEditor, '');
 
-        bender.tools.selection.setWithHtml(this.nativeEditor, '');
+            Simulate.keyDown(React.findDOMNode(buttonTableEdit.refs.cols), {keyCode: KEY_ESC});
 
-        Simulate.keyDown(React.findDOMNode(buttonTableEdit.refs.cols), {keyCode: KEY_ESC});
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
 
-        var data = bender.tools.getData(this.nativeEditor, {
-            fixHtml: true,
-            compatHtml: true
+            assert.strictEqual(data, '');
+            assert.ok(cancelExclusive.called);
+            assert.strictEqual(1, cancelExclusive.callCount);
         });
-
-        assert.strictEqual(data, '');
-        assert.ok(cancelExclusive.called);
-        assert.strictEqual(1, cancelExclusive.callCount);
     });
-});
+}());
