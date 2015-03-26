@@ -5,8 +5,8 @@
     var KEY_ESC = 27;
 
     /**
-     * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
-     * This is more than a button, and renders all the required UI to CRUD a link.
+     * The ButtonEditLink class provides functionality for creating and editing a link in a document.
+     * Provides UI for creating, editing and removing a link.
      *
      * @class ButtonLinkEdit
      */
@@ -105,7 +105,7 @@
          * - Enter: Creates/updates the link.
          * - Escape: Discards the changes.
          *
-         * @param {Event} event The keyboard event.
+         * @param {SyntheticEvent} event The keyboard event.
          *
          * @protected
          * @method _handleKeyDown
@@ -125,7 +125,7 @@
         /**
          * Updates the component state when the link input changes on user interaction.
          *
-         * @param {Event} event The change event.
+         * @param {SyntheticEvent} event The change event.
          *
          * @protected
          * @method _handleLinkChange
@@ -152,6 +152,8 @@
 
             selection.selectBookmarks(bookmarks);
 
+            // We need to cancelExclusive with the bound parameters in case the button is used
+            // inside another in exclusive mode (such is the case of the link button)
             this.props.cancelExclusive();
 
             editor.fire('actionPerformed', this);
@@ -178,6 +180,8 @@
                 editor.fire('actionPerformed', this);
             }
 
+            // We need to cancelExclusive with the bound parameters in case the button is used
+            // inside another in exclusive mode (such is the case of the link button)
             this.props.cancelExclusive();
         }
     });

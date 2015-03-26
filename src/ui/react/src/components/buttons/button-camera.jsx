@@ -36,7 +36,7 @@
 
                 return (
                     <button className="alloy-editor-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex}>
-                        <span className="alloy-editor-icon-image"></span>
+                        <span className="alloy-editor-icon-camera"></span>
                     </button>
                 );
             }

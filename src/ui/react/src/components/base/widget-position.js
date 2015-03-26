@@ -32,15 +32,6 @@
         },
 
         /**
-         * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
-         * Updates the position of the widget and shows it using transition.
-         */
-        componentDidUpdate: function() {
-            this._updatePosition();
-            this._show();
-        },
-
-        /**
          * Cancels an scheduled animation frame.
          */
         cancelAnimation: function() {
@@ -85,33 +76,55 @@
         },
 
         /**
-         * Requests an animation frame, if possible, to simulate an animation.
+         * Returns true if the widget is visible, false otherwise
          *
-         * @protected
-         * @param {Function} callback The function to be executed on the scheduled frame.
+         * @return {Boolean} True if the widget is visible, false otherwise
          */
-        _animate: function(callback) {
-            if (window.requestAnimationFrame) {
-                this._animationFrameId = window.requestAnimationFrame(callback);
-            } else {
-                callback();
+        isVisible: function() {
+            var domNode = this.getDOMNode();
+
+            if (domNode) {
+                var domElement = new CKEDITOR.dom.element(domNode);
+
+                return domElement.hasClass('alloy-editor-visible');
             }
+
+            return false;
+        },
+
+        moveToPoint: function(startPoint, endPoint) {
+            var domElement = new CKEDITOR.dom.element(this.getDOMNode());
+
+            domElement.setStyles({
+                left: startPoint[0] + 'px',
+                top: startPoint[1] + 'px',
+                opacity: 0
+            });
+
+            domElement.removeClass('alloy-editor-invisible');
+
+            this._animate(function() {
+                domElement.addClass('alloy-editor-toolbar-transition alloy-editor-visible');
+                domElement.setStyles({
+                    left: endPoint[0],
+                    top: endPoint[1],
+                    opacity: 1
+                });
+            });
         },
 
         /**
          * Shows the widget with the default animation transition.
-         *
-         * @protected
          */
-        _show: function() {
-            var interactionPoint = this.getInteractionPoint();
-
+        show: function() {
             var domNode = React.findDOMNode(this);
 
-            if (interactionPoint && domNode) {
-                var domElement = new CKEDITOR.dom.element(domNode);
+            if (!this.isVisible() && domNode) {
+                var interactionPoint = this.getInteractionPoint();
 
-                if (!domElement.hasClass('alloy-editor-visible')) {
+                if (interactionPoint) {
+                    var domElement = new CKEDITOR.dom.element(domNode);
+
                     var finalX,
                         finalY,
                         initialX,
@@ -126,32 +139,15 @@
                         initialY = this.props.selectionData.region.top;
                     }
 
-                    domElement.setStyles({
-                        left: initialX,
-                        top: initialY + 'px',
-                        opacity: 0
-                    });
-
-                    domElement.removeClass('alloy-editor-invisible');
-
-                    this._animate(function() {
-                        domElement.addClass('alloy-editor-toolbar-transition alloy-editor-visible');
-                        domElement.setStyles({
-                            left: finalX,
-                            top: finalY,
-                            opacity: 1
-                        });
-                    });
+                    this.moveToPoint([initialX, initialY], [finalX, finalY]);
                 }
             }
         },
 
         /**
          * Updates the widget position based on the current interaction point.
-         *
-         * @protected
          */
-        _updatePosition: function() {
+        updatePosition: function() {
             var interactionPoint = this.getInteractionPoint();
 
             var domNode = React.findDOMNode(this);
@@ -165,6 +161,20 @@
                     left: xy[0] + 'px',
                     top: xy[1] + 'px'
                 });
+            }
+        },
+
+        /**
+         * Requests an animation frame, if possible, to simulate an animation.
+         *
+         * @protected
+         * @param {Function} callback The function to be executed on the scheduled frame.
+         */
+        _animate: function(callback) {
+            if (window.requestAnimationFrame) {
+                this._animationFrameId = window.requestAnimationFrame(callback);
+            } else {
+                callback();
             }
         }
     };

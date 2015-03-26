@@ -8,12 +8,18 @@ var path = require('path');
 var srcFiles = require('./_src.js');
 
 var preprocessors = {
-    '**/*.jsx': ['react-jsx']
+    '**/*.jsx': ['react-jsx'],
+    '**/*.html': ['html2js']
 };
 
 preprocessors[path.join(alloyEditorDir, 'test/**/*.js')] = ['coverage'];
 
 var filesToLoad = [
+    /* Fixtures */
+    {
+        pattern: 'src/ui/react/test/fixtures/**/*'
+    },
+
     /* AlloyEditor skins */
     {
         pattern: path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
@@ -96,7 +102,7 @@ var defaultConfig = {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['chai', 'mocha', 'sinon'],
+    frameworks: ['chai', 'mocha', 'sinon', 'fixture'],
 
     // list of files / patterns to load in the browser
     files: filesToLoad,

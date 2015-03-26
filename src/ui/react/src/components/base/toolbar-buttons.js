@@ -43,6 +43,8 @@
                     trigger: this.props.trigger
                 }, button.key);
 
+                props = this.mergeDropdownProps(props, button.key);
+
                 if (additionalProps) {
                     props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
                 }

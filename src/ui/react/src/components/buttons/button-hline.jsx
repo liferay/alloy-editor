@@ -7,7 +7,7 @@
      * @class ButtonHline
      */
     var ButtonHline = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
+        mixins: [global.ButtonStyle, global.ButtonCommand],
 
         /**
          * Allows validating props being passed to the component.
@@ -46,10 +46,8 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
-
             return (
-                <button className={cssClass} data-type="button-hline" onClick={this.execCommand} tabIndex={this.props.tabIndex}>
+                <button className="alloy-editor-button" data-type="button-hline" onClick={this.execCommand} tabIndex={this.props.tabIndex}>
                     <span className="alloy-editor-icon-separator"></span>
                 </button>
             );
