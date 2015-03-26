@@ -5,7 +5,7 @@
         afterEach: function(done) {
             Utils.removeContainer.call(this);
 
-            bender.tools.selection.setWithHtml(this.nativeEditor, '');
+            this.nativeEditor.setData('');
 
             if (done) {
                 done();
@@ -21,8 +21,6 @@
         },
 
         createAlloyEditor: function(done, config) {
-            var self = this;
-
             var editable = document.createElement('div');
 
             editable.setAttribute('id', 'editable');
@@ -41,15 +39,15 @@
                 srcNode: 'editable'
             }, config);
 
-            self.editor = new AlloyEditor(config);
+            this.editor = new AlloyEditor(config);
 
-            self.nativeEditor = self.editor.get('nativeEditor');
+            this.nativeEditor = this.editor.get('nativeEditor');
 
-            self.nativeEditor.on('instanceReady', function() {
-                self.nativeEditor.focus();
+            this.nativeEditor.on('instanceReady', function() {
+                this.nativeEditor.focus();
 
                 done();
-            });
+            }.bind(this));
         },
 
         createContainer: function() {
@@ -59,10 +57,8 @@
         },
 
         destroyAlloyEditor: function(done) {
-            var self = this;
-
-            if (self.editor) {
-                self.editor.destroy();
+            if (this.editor) {
+                this.editor.destroy();
             }
 
             this._editable.parentNode.removeChild(this._editable);
