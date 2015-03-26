@@ -1,37 +1,39 @@
-'use strict';
+(function() {
+    'use strict';
 
-var assert = chai.assert;
-var TestUtils = React.addons.TestUtils;
-var Simulate = TestUtils.Simulate;
+    var assert = chai.assert;
+    var TestUtils = React.addons.TestUtils;
+    var Simulate = TestUtils.Simulate;
 
-describe('ButtonTableEdit', function() {
-    this.timeout(35000);
+    describe('ButtonTableEdit', function() {
+        this.timeout(35000);
 
-    before(Utils.createAlloyEditor);
+        before(Utils.createAlloyEditor);
 
-    after(Utils.destroyAlloyEditor);
+        after(Utils.destroyAlloyEditor);
 
-    beforeEach(Utils.beforeEach);
+        beforeEach(Utils.beforeEach);
 
-    afterEach(Utils.afterEach);
+        afterEach(Utils.afterEach);
 
-    it('should render just the table button when not in exclusive mode', function() {
-        var buttonTable = React.render(<global.AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={false} />, this.container);
+        it('should render just the table button when not in exclusive mode', function() {
+            var buttonTable = React.render(<global.AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={false} />, this.container);
 
-        var button = TestUtils.findRenderedDOMComponentWithTag(buttonTable, 'button');
+            var button = TestUtils.findRenderedDOMComponentWithTag(buttonTable, 'button');
 
-        var editTable = TestUtils.scryRenderedDOMComponentsWithClass(buttonTable, 'alloy-editor-container-edit-table');
+            var editTable = TestUtils.scryRenderedDOMComponentsWithClass(buttonTable, 'alloy-editor-container-edit-table');
 
-        assert.ok(button);
-        assert.notOk(editTable.length);
+            assert.ok(button);
+            assert.notOk(editTable.length);
+        });
+
+
+        it('should show the table edit button when in exclusive mode', function() {
+            var buttonTable = React.render(<global.AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
+
+            var editTable = TestUtils.findRenderedDOMComponentWithClass(buttonTable, 'alloy-editor-container-edit-table');
+
+            assert.ok(editTable);
+        });
     });
-
-
-    it('should show the table edit button when in exclusive mode', function() {
-        var buttonTable = React.render(<global.AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
-
-        var editTable = TestUtils.findRenderedDOMComponentWithClass(buttonTable, 'alloy-editor-container-edit-table');
-
-        assert.ok(editTable);
-    });
-});
+}());
