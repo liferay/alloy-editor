@@ -21,6 +21,18 @@ describe('debounce', function() {
             }, 0);
         });
 
+        it('should call debounced function with additional alguments', function(done) {
+            var listener = sinon.stub();
+            var fn = CKEDITOR.tools.debounce(listener, 0);
+
+            fn('param1');
+
+            setTimeout(function() {
+                assert.ok(listener.calledWith('param1'));
+                done();
+            }, 0);
+        });
+
         it('should debounce function execution with context and params', function(done) {
             var ctx = {};
             var listener = sinon.stub();

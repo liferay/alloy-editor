@@ -28,8 +28,16 @@
 
             clearTimeout(debounceHandle);
 
+            var result = [];
+
+            for (var len = arguments.length, startIndex = 0; startIndex < len; ++startIndex) {
+                result.push(arguments[startIndex]);
+            }
+
+            var callArgs = result.concat(args || []);
+
             debounceHandle = setTimeout(function() {
-                callback.apply(callContext, args);
+                callback.apply(callContext, callArgs);
             }, timeout);
         };
 
