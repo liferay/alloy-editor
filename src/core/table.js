@@ -24,17 +24,17 @@
          */
         create: function(config) {
             var editor = this._editor;
-            var table = this._makeElement('table');
+            var table = this._createElement('table');
 
             // Generate the rows and cols.
-            var tbody = table.append(this._makeElement('tbody'));
+            var tbody = table.append(this._createElement('tbody'));
             var rows = config.rows || 1;
             var cols = config.cols || 1;
 
             for (var i = 0; i < rows; i++) {
-                var row = tbody.append(this._makeElement('tr'));
+                var row = tbody.append(this._createElement('tr'));
                 for (var j = 0; j < cols; j++) {
-                    var cell = row.append(this._makeElement('td'));
+                    var cell = row.append(this._createElement('td'));
 
                     cell.appendBogus();
                 }
@@ -88,9 +88,9 @@
         },
 
         /**
-         * Removes a link from the editor.
+         * Removes a table from the editor.
          *
-         * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+         * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
          * @method remove
          */
         remove: function(table) {
@@ -99,7 +99,7 @@
             if (table) {
                 table.remove(editor);
             } else {
-                table = editor.elementPath().contains( 'table', 1 );
+                table = editor.elementPath().contains('table', 1);
 
                 if (table) {
                     // If the table's parent has only one child remove it as well (unless it's a table cell, or the editable element) (#5416, #6289, #12110)
@@ -118,13 +118,26 @@
             }
         },
 
+        /**
+         * Assigns provided attributes to a table.
+         *
+         * @param {Object} table The table to which the attributes should be assigned.
+         * @param {Object} attrs The attributes which have to be assigned to the table.
+         */
         setAttributes: function(table, attrs) {
             Object.keys(attrs).forEach(function(attr) {
                 table.setAttribute(attr, attrs[attr]);
             });
         },
 
-        _makeElement: function(name) {
+        /**
+         * Creates a new CKEDITOR.dom.element using the passed tag name.
+         *
+         * @protected
+         * @param {[type]} name [description]
+         * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class.
+         */
+        _createElement: function(name) {
             return new CKEDITOR.dom.element(name, this._editor.document);
         }
     };

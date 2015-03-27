@@ -18,31 +18,6 @@
 
         afterEach(Utils.afterEach);
 
-        var testCommandButton = function(command, fixtureName) {
-            var buttonTableCell = React.render(<global.AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
-
-            var fixtures = Utils.getFixtures.call(this, FIXTURE_FILE, fixtureName);
-
-            bender.tools.selection.setWithHtml(this.nativeEditor, fixtures.initial);
-
-            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonTableCell, 'alloy-editor-dropdown');
-
-            var commandButtons = TestUtils.findAllInRenderedTree(dropdown, function(component) {
-                return component.props.command === command;
-            });
-
-            assert.ok(commandButtons.length);
-
-            Simulate.click(React.findDOMNode(commandButtons[0]));
-
-            var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: true,
-                compatHtml: true
-            });
-
-            assert.strictEqual(data, fixtures.expected);
-        };
-
         it('should render just the menu button when not expanded', function() {
             var buttonTableCell = React.render(<global.AlloyEditor.ButtonTableCell editor={this.editor} expanded={false} />, this.container);
 
@@ -54,7 +29,6 @@
             assert.equal(0, dropdown.length);
         });
 
-
         it('should show a dropdown with the action buttons when expanded', function() {
             var buttonTableCell = React.render(<global.AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
 
@@ -62,7 +36,7 @@
             var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown, 'button');
 
             assert.ok(dropdown);
-            assert.ok(actionButtons.length)
+            assert.ok(actionButtons.length);
         });
 
         it('should insert a cell before the current one when clicking on the cellInsertBefore button', function() {
@@ -96,5 +70,30 @@
         it('should split the cell vertically when clicking on the cellVerticalSplit button', function() {
             testCommandButton.call(this, 'cellVerticalSplit', 'split_vertical');
         });
+
+        var testCommandButton = function(command, fixtureName) {
+            var buttonTableCell = React.render(<global.AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+
+            var fixtures = Utils.getFixtures.call(this, FIXTURE_FILE, fixtureName);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, fixtures.initial);
+
+            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonTableCell, 'alloy-editor-dropdown');
+
+            var commandButtons = TestUtils.findAllInRenderedTree(dropdown, function(component) {
+                return component.props.command === command;
+            });
+
+            assert.ok(commandButtons.length);
+
+            Simulate.click(React.findDOMNode(commandButtons[0]));
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, fixtures.expected);
+        };
     });
 }());

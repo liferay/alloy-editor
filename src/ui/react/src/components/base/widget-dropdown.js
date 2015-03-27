@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Provides functionality for managing different dropdowns inside a widget
+     * Provides functionality for managing different dropdowns inside a widget.
      *
      * @class WidgetDropdown
      */
@@ -28,7 +28,7 @@
         /**
          * Merges the provided object with two more properties:
          * - expanded - boolean flag which indicates if an widget should be rendered exclusively.
-         * - toggleDropdown - function, which can be used by a widget in order to obtain exclusive state.
+         * - toggleDropdown - function, which can be used by an widget in order to obtain exclusive state.
          *
          * @param {Object} obj The properties container which should be merged with the properties, related
          *    to dropdown state.
@@ -43,7 +43,7 @@
         },
 
         /**
-         * Requests and sets the active dropdown of the widget.
+         * Sets the active dropdown of the widget or discards the toggled item from the state.
          *
          * @param {Object} itemDropdown The widget which requests to toggle its dropdown.
          */

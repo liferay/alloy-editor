@@ -32,12 +32,12 @@
         },
 
         /**
-         * Renders instances of ButtonCommandListItem with the description of the row action that will be executed.
+         * Renders instances of ButtonCommandListItem passing the command which has to be executed and the description
+         * of the command.
          *
-         * @protected
          * @method _renderActions
-         *
-         * @return {Array} Rendered instances of ButtonCommandListItem class
+         * @protected
+         * @return {Array} Rendered instances of ButtonCommandListItem class.
          */
         _renderActions: function() {
             var editor = this.props.editor;
@@ -59,7 +59,9 @@
         /*
          * Renders the button dropdown with the associated command items when the button is expanded.
          *
-         * @return {Element} Returns the dropdown element if the button is expanded, null otherwise
+         * @method _renderDropdown
+         * @protected
+         * @return {Element} Returns the dropdown element if the button is expanded, null otherwise.
          */
         _renderDropdown: function() {
             if (this.props.expanded) {

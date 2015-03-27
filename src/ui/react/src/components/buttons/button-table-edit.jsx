@@ -32,6 +32,20 @@
         },
 
         /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         */
+        getDefaultProps: function () {
+            return {
+                tableAttributes: {
+                    border: 1,
+                    cellPadding: 0,
+                    cellSpacing: 0,
+                    style: 'width: 100%'
+                }
+            };
+        },
+
+        /**
          * Lifecycle. Invoked once, only on the client (not on the server),
          * immediately after the initial rendering occurs.
          *
@@ -62,12 +76,7 @@
             var tableUtils = new CKEDITOR.Table(editor);
 
             tableUtils.create({
-                attrs: {
-                    border: 1,
-                    cellPadding: 0,
-                    cellSpacing: 0,
-                    style: 'width: 100%'
-                },
+                attrs: this.props.tableAttributes,
                 cols: this.state.cols,
                 rows: this.state.rows
             });

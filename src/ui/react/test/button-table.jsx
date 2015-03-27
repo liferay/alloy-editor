@@ -27,7 +27,6 @@
             assert.notOk(editTable.length);
         });
 
-
         it('should show the table edit button when in exclusive mode', function() {
             var buttonTable = React.render(<global.AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
 

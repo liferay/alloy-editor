@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * The ButtonCommandListItem class is a ui class that renders a ButtonCommand that can be used inside
+     * The ButtonCommandListItem class is a UI class that renders a ButtonCommand that can be used inside
      * a list as an item, with a string representation of its behaviour.
      *
      * @class ButtonCommandListItem
@@ -20,7 +20,7 @@
          * - key: The name which will be used as an alias of the button in the configuration.
          */
         statics: {
-            key: 'buttoncommandlistitem'
+            key: 'buttonCommandListItem'
         },
 
         /**
@@ -35,8 +35,9 @@
         },
 
         /**
-         * [_getClassName description]
-         * @return {[type]} [description]
+         * Returns the class name of Widget.
+         *
+         * @return {String} The class name of the Widget.
          */
         _getClassName: function() {
             var className = 'alloy-editor-toolbar-element';

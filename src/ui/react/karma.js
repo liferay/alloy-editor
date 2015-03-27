@@ -15,11 +15,6 @@ var preprocessors = {
 preprocessors[path.join(alloyEditorDir, 'test/**/*.js')] = ['coverage'];
 
 var filesToLoad = [
-    /* Fixtures */
-    {
-        pattern: 'src/ui/react/test/fixtures/**/*'
-    },
-
     /* AlloyEditor skins */
     {
         pattern: path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
@@ -78,6 +73,11 @@ var filesToLoad = [
         pattern: 'src/ui/react/test/util/global.js',
         included: true,
         watched: false
+    },
+
+    /* Fixtures */
+    {
+        pattern: 'src/ui/react/test/fixtures/**/*'
     }
 ];
 
@@ -103,7 +103,7 @@ var defaultConfig = {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['chai', 'mocha', 'sinon', 'fixture'],
+    frameworks: ['chai', 'fixture', 'mocha', 'sinon'],
 
     // list of files / patterns to load in the browser
     files: filesToLoad,

@@ -19,17 +19,13 @@
      * @return {Object} A new merged object.
      */
     CKEDITOR.tools.merge = CKEDITOR.tools.merge || function() {
-        var i = 0,
-            key,
-            len = arguments.length,
-            obj,
-            result = {};
+        var result = {};
 
-        for (; i < len; ++i) {
-            obj = arguments[i];
+        for (var i = 0; i < arguments.length; ++i) {
+            var obj = arguments[i];
 
-            for (key in obj) {
-                if (hasOwnProperty.call(obj, key)) {
+            for (var key in obj) {
+                if (Object.prototype.hasOwnProperty.call(obj, key)) {
                     result[key] = obj[key];
                 }
             }
