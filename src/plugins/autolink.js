@@ -6,7 +6,7 @@
     }
 
     // Disables the auto URL detection feature in IE, their lacks functionality:
-    // They convert the links only on space. We do on space, dot, comma and Enter.
+    // They convert the links only on space. We do on space, comma, semicolon and Enter.
     if (/MSIE ([^;]*)|Trident.*; rv:([0-9.]+)/.test(navigator.userAgent)) {
         document.execCommand('AutoUrlDetect', false, false);
     }
@@ -26,80 +26,6 @@
     var REGEX_LAST_WORD = /[^\s]+/mg;
 
     var REGEX_URL = /(https?\:\/\/|www\.)(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?$/i;
-
-    /**
-     * AutoLink class utility. Provides methods for building link elements.
-     *
-     * @class AutoLink
-     * @constructor
-     * @param {Object} config The link configuration:
-     * - {String} uri
-     * - {Object} options:
-     *     - {Boolean} newWindow
-     *     - {String} cssClass
-     *     - ...
-     */
-    function AutoLink(config) {
-        var defaultOptions = {
-            cssClass: '',
-            newWindow: true
-        };
-
-        this._elementTagName = 'a';
-
-        this._uri = (config && config.uri) ? config.uri : '';
-
-        this._options = CKEDITOR.tools.merge(defaultOptions, config.options);
-
-        this._attributes = {};
-    }
-
-    AutoLink.prototype = {
-        constructor: AutoLink,
-
-        /**
-         * Creates the element by creating its attributes from the configuration.
-         *
-         * @method build
-         */
-        build: function() {
-            var attributes = {
-                'href': this._uri
-            };
-
-            var options = this._options;
-
-            if (options.cssClass) {
-                attributes['class'] = options.cssClass;
-            }
-
-            if (options.newWindow) {
-                attributes.target = '_blank';
-            }
-
-            this._attributes = attributes;
-        },
-
-        /**
-         * Returns the HTML attributes that belong to the element.
-         *
-         * @method getAttributes
-         * @return {Object} Returns an object with the HTML attributes of the element.
-         */
-        getAttributes: function() {
-            return this._attributes;
-        },
-
-        /**
-         * Returns the URI of the element.
-         *
-         * @method getURI
-         * @return {String} Returns element's URI.
-         */
-        getURI: function() {
-            return this._uri;
-        }
-    };
 
     /**
      * CKEditor plugin which automatically generates links when user types text which looks like URL.
@@ -243,24 +169,18 @@
              * @protected
              */
             _replaceContentByLink: function(content) {
-                var autoLink = new AutoLink({
-                    uri: content
-                });
-
-                autoLink.build();
-
                 var range = this._editor.createRange();
                 var node = CKEDITOR.dom.element.get(this._startContainer);
                 var offset = this._offset;
 
                 // Select the content, so CKEDITOR.Link can properly replace it
-                range.setStart(node, offset - autoLink.getURI().length);
+                range.setStart(node, offset - content.length);
                 range.setEnd(node, offset);
                 range.select();
 
                 var ckLink = new CKEDITOR.Link(this._editor);
 
-                ckLink.create(autoLink.getURI(), autoLink.getAttributes());
+                ckLink.create(content, {target: '_blank'});
                 this._ckLink = ckLink;
 
                 this._subscribeToKeyEvent();
