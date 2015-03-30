@@ -72,6 +72,14 @@
                 top = top - gutter.top - (domNode.offsetHeight / 2);
             }
 
+            if (left < 0) {
+                left = 0;
+            }
+
+            if (top < 0) {
+                top = 0;
+            }
+
             return [left, top];
         },
 
