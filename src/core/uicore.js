@@ -114,6 +114,10 @@
                     editable.attachListener(editable, 'mouseup', handleUI);
                     editable.attachListener(editable, 'keyup', handleUI);
                 });
+
+                editor.on('destroy', function(event) {
+                    handleUI.detach();
+                });
             },
 
             /**

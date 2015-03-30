@@ -16,9 +16,9 @@
         afterEach(Utils.afterEach);
 
         it('should make a text selection bold', function() {
-            var buttonBold = React.render(<global.AlloyEditor.ButtonBold editor={this.editor} />, this.container);
-
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made bold.');
+
+            var buttonBold = React.render(<global.AlloyEditor.ButtonBold editor={this.editor} />, this.container);
 
             Simulate.click(React.findDOMNode(buttonBold));
 
