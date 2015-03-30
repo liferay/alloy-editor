@@ -25,8 +25,7 @@
         },
 
         /**
-         * Calls the `destructor` method of each class which extends Base starting from the parent to the child
-         * @return {[type]} [description]
+         * Calls the `destructor` method of each class which extends Base starting from the parent to the child.
          */
         destroy: function() {
             this._callChain('destructor');
