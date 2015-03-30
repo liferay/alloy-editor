@@ -34,18 +34,10 @@
         _checkForTargetOutside: function(target) {
             var domNode = React.findDOMNode(this);
 
-            if (target === domNode) {
+            var nodeEl = new CKEDITOR.dom.element(domNode);
+
+            if (nodeEl.contains(new CKEDITOR.dom.node(target))) {
                 return false;
-            }
-
-            domNode = target.parentNode;
-
-            while (domNode) {
-                if (target === domNode) {
-                    return false;
-                }
-
-                domNode = domNode.parentNode;
             }
 
             return true;
