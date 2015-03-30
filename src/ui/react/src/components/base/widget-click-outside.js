@@ -2,8 +2,8 @@
     'use strict';
 
     /**
-     * Provides functionality for cancelling the exclusive state of a widget when the user clicks
-     * outside of it. This mixin provides a `handleMouseInside` that should be attached
+     * Provides functionality for canceling the exclusive state of an Widget when the user clicks
+     * outside of it.
      *
      * @class WidgetClickOutside
      */
@@ -11,40 +11,59 @@
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          */
-        componentDidMount: function () {
-            this.getDOMNode().addEventListener('mousedown', this._handleMouseInside);
-            window.addEventListener('mousedown', this._handleMouseOutside);
+        componentDidMount: function() {
+            window.addEventListener('mousedown', this._handleClick);
         },
 
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          */
-        componentWillUnmount: function () {
-            this.getDOMNode().removeEventListener('mousedown', this._handleMouseInside);
-            window.removeEventListener('mousedown', this._handleMouseOutside);
+        componentWillUnmount: function() {
+            window.removeEventListener('mousedown', this._handleClick);
         },
 
         /**
-         * Triggered when the mouse event happens inside the widget. It stops the event propagation
-         * going forward so the `_handleMouseOutside` event is not executed. This doesn't prevent
-         * clicks inside the widget since it's attached on the top DOM node of the component.
+         * Check if the event target is outside of the current render tree of the Widget.
          *
+         * @method _checkForTargetOutside
          * @protected
-         * @method _handleMouseInside
+         * @param {DOMElement} target The DOM Element which have to be checked.
+         * @return {Boolean} True if the Widget is was not the targeted element on the click,
+         * false otherwise.
          */
-        _handleMouseInside: function(event) {
-            event.stopImmediatePropagation();
+        _checkForTargetOutside: function(target) {
+            var domNode = React.findDOMNode(this);
+
+            if (target === domNode) {
+                return false;
+            }
+
+            domNode = target.parentNode;
+
+            while (domNode) {
+                if (target === domNode) {
+                    return false;
+                }
+
+                domNode = domNode.parentNode;
+            }
+
+            return true;
         },
 
         /**
-         * Executed when the mouse event happens outside the widget. If we reach this method, it means
-         * that a `mousedown` event happened outside the top DOM node of the widget.
+         * Checks if the user clicked outside of the render tree of the current Widget and if so,
+         * cancels the exclusive rendering.
          *
          * @protected
-         * @method _handleMouseOutside
+         * @method _handleClick
          */
-        _handleMouseOutside: function() {
-            this.props.cancelExclusive();
+        _handleClick: function(event) {
+            var outside = this._checkForTargetOutside(event.target);
+
+            if (outside) {
+                this.props.cancelExclusive();
+            }
         }
     };
 
