@@ -70,10 +70,14 @@
                 if (this._currentKeyCode === KEY_ENTER) {
                     var previousNode = range.startContainer.getPrevious();
 
+                    var lastChild;
+
                     // The last child node may be a <BR>, ignore it and find the previous text node
-                    var lastChild = previousNode.getLast();
-                    while (lastChild && !lastChild.getText()) {
-                        lastChild = lastChild.getPrevious();
+                    if (previousNode) {
+                        lastChild = previousNode.getLast();
+                        while (lastChild && !lastChild.getText()) {
+                            lastChild = lastChild.getPrevious();
+                        }
                     }
 
                     // Check if the lastChild is a link
