@@ -116,7 +116,7 @@
 
             /**
              * Listens to the `keydown` event and if the keycode is `Backspace`, removes the previously
-             * create link.
+             * created link.
              *
              * @method _onKeyDown
              * @param {EventFacade} event EventFacade object
@@ -140,7 +140,7 @@
             },
 
             /**
-             * Listens to the `Enter` and `Space` key events to check if the last word
+             * Listens to the `Enter` and `Space` key events in order to check if the last word
              * introduced by the user should be replaced by a link element.
              *
              * @method _onKeyUp
@@ -179,14 +179,13 @@
                 range.select();
 
                 var ckLink = new CKEDITOR.Link(this._editor);
-
-                ckLink.create(content, {target: '_blank'});
+                ckLink.create(content);
                 this._ckLink = ckLink;
 
                 this._subscribeToKeyEvent();
 
                 // Now range is on the link and it is selected. We have to
-                // return focus to the caret position
+                // return focus to the caret position.
                 range = this._editor.getSelection().getRanges()[0];
 
                 // If user pressed `Enter`, get the next editable node at position 0,
