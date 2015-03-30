@@ -162,9 +162,7 @@ describe('Autolink', function() {
     function testLink(config) {
         bender.tools.selection.setWithHtml(this.nativeEditor, config.html);
 
-        var editable = this.nativeEditor.editable();
-
-        happen.keyup(editable.$, {keyCode: config.keyCode});
+        happen.keyup(this._editable, {keyCode: config.keyCode});
 
         var data = getData.call(this);
 
