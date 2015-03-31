@@ -8,83 +8,81 @@ $button_color: darken($base_color, 12%);
     text-shadow: none;
 }
 
-.alloy-editor-ui {
-    .alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
-    	background-color: $base_color;
-    	border-radius: 4px;
-    	color: #fff;
-        font-family: 'Helvetica Neue';
+.alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
+	background-color: $base_color;
+	border-radius: 4px;
+	color: #fff;
+    font-family: 'Helvetica Neue';
 
-        &.alloy-editor-arrow-box:after {
-            color: $base_color;
+    &.alloy-editor-arrow-box:after {
+        color: $base_color;
+    }
+
+	.alloy-editor-button, .alloy-editor-toolbar-element {
+		background-color: transparent;
+
+        &:hover {
+			color: $button_color;
         }
 
-    	.alloy-editor-button, .alloy-editor-toolbar-element {
-    		background-color: transparent;
+        &.alloy-editor-button-pressed {
+            background-color: $button_color;
 
             &:hover {
-    			color: $button_color;
-            }
-
-            &.alloy-editor-button-pressed {
-                background-color: $button_color;
-
-                &:hover {
-                	background-color: lighten($button_color, 4%);
-                	color: inherit;
-                }
-            }
-
-            &.alloy-editor-button-disabled {
-                opacity: 0.3;
-            }
-    	}
-
-        .alloy-editor-container-input {
-            background-color: #fff;
-
-            [class*=alloy-editor-icon-] {
-                color: #2b4259;
-                opacity: 0.4;
+            	background-color: lighten($button_color, 4%);
+            	color: inherit;
             }
         }
-    }
 
-    .alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
-        background-color: #fcfcfc;
-        border: 1px solid rgba(0, 0, 0, .1);
-        border-radius: 0 0 4px 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
-        color: #000;
+        &.alloy-editor-button-disabled {
+            opacity: 0.3;
+        }
+	}
 
-        .alloy-editor-list-header {
-            color: #999;
-            font-size: small;
-            font-style: italic;
+    .alloy-editor-container-input {
+        background-color: #fff;
+
+        [class*=alloy-editor-icon-] {
+            color: #2b4259;
+            opacity: 0.4;
         }
     }
+}
 
-    .alloy-editor-toolbar-add {
-        border-radius: 24px;
-        padding: 0;
+.alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
+    background-color: #fcfcfc;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+    color: #000;
 
+    .alloy-editor-list-header {
+        color: #999;
+        font-size: small;
+        font-style: italic;
+    }
+}
+
+.alloy-editor-toolbar-add {
+    border-radius: 24px;
+    padding: 0;
+
+    &:hover, &:focus {
+        opacity: 0.7;
+    }
+
+    .alloy-editor-button-add {
         &:hover, &:focus {
-            opacity: 0.7;
+            color: #fff;
         }
 
-        .alloy-editor-button-add {
-            &:hover, &:focus {
-                color: #fff;
-            }
-
-            .alloy-editor-icon-add {
-                font-size: 12px;
-                line-height: 24px;
-            }
+        .alloy-editor-icon-add {
+            font-size: 12px;
+            line-height: 24px;
         }
     }
+}
 
-    .alloy-editor-twitter-link {
-        background-color: #f8f8f8;
-    }
+.alloy-editor-twitter-link {
+    background-color: #f8f8f8;
 }

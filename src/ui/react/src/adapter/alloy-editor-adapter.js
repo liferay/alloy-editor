@@ -41,7 +41,7 @@
 
             this._editor = editor;
 
-            this._renderUI();
+            this._renderToolbars();
         },
 
         /**
@@ -57,9 +57,9 @@
             editorInstance = CKEDITOR.instances[this.get('srcNode')];
 
             if (editorInstance) {
-                React.unmountComponentAtNode(this._editorUIElement);
-
-                this._editorUIElement.parentNode.removeChild(this._editorUIElement);
+                Object.keys(editorInstance.config.toolbars).forEach(function(value) {
+                    value.destroy();
+                });
 
                 editorInstance.destroy();
             }
@@ -77,17 +77,17 @@
         },
 
         /**
-         * Renders the editor's UI
+         * Renders the specified from the user toolbars
          *
          * @protected
          */
-        _renderUI: function() {
+        _renderToolbars: function() {
             var editorUIElement = document.createElement('div');
             editorUIElement.className = 'alloy-editor-ui';
 
             document.body.insertBefore(editorUIElement, document.body.firstChild);
 
-            this._mainUI = React.render(React.createElement(global.AlloyEditor.UI, {
+            React.render(React.createElement(global.AlloyEditor.UI, {
                 toolbars: this.get('toolbars'),
                 editor: this
             }), editorUIElement);
@@ -100,9 +100,9 @@
          * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
          * supported values.
          *
-         * @param {Any} The value to be checked.
+         * @param {Any} The value to be checked
          * @protected
-         * @return {Boolean} True if the current value is valid configuration, false otherwise.
+         * @return {Boolean} True if the current value is valid configuration, false otherwise
          */
         _validateAllowedContent: function(value) {
             return global.Lang.isString(value) || global.Lang.isObject(value) || global.Lang.isBoolean(value);

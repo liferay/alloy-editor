@@ -3,52 +3,50 @@
 $arrow_height: 4px;
 $arrow_width: 10px;
 
-.alloy-editor-ui {
-    .alloy-editor-arrow-box {
+.alloy-editor-arrow-box {
+    &:after {
+        content: '';
+        margin: auto;
+        position: absolute;
+    }
+
+    &.alloy-editor-arrow-box-bottom {
         &:after {
-            content: '';
-            margin: auto;
-            position: absolute;
+            @include triangle($arrow_width $arrow_height, currentColor, down);
+
+            left: 0;
+            right: 0;
+            top: 100%;
         }
+    }
 
-        &.alloy-editor-arrow-box-bottom {
-            &:after {
-                @include triangle($arrow_width $arrow_height, currentColor, down);
+    &.alloy-editor-arrow-box-top {
+        &:after {
+            @include triangle($arrow_width $arrow_height, currentColor, up);
 
-                left: 0;
-                right: 0;
-                top: 100%;
-            }
+            left: 0;
+            right: 0;
+            top: -$arrow_height;
         }
+    }
 
-        &.alloy-editor-arrow-box-top {
-            &:after {
-                @include triangle($arrow_width $arrow_height, currentColor, up);
+    &.alloy-editor-arrow-box-left {
+        &:after {
+            @include triangle($arrow_width $arrow_height, currentColor, left);
 
-                left: 0;
-                right: 0;
-                top: -$arrow_height;
-            }
+            left: -$arrow_height;
+            top: 0;
+            bottom: 0;
         }
+    }
 
-        &.alloy-editor-arrow-box-left {
-            &:after {
-                @include triangle($arrow_width $arrow_height, currentColor, left);
+    &.alloy-editor-arrow-box-right {
+        &:after {
+            @include triangle($arrow_width $arrow_height, currentColor, right);
 
-                left: -$arrow_height;
-                top: 0;
-                bottom: 0;
-            }
-        }
-
-        &.alloy-editor-arrow-box-right {
-            &:after {
-                @include triangle($arrow_width $arrow_height, currentColor, right);
-
-                right: -$arrow_height;
-                top: 0;
-                bottom: 0;
-            }
+            right: -$arrow_height;
+            top: 0;
+            bottom: 0;
         }
     }
 }
