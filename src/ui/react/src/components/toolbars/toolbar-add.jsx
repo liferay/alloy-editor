@@ -47,12 +47,95 @@
         },
 
         /**
+         * Lifecycle. Invoked once, only on the client (not on the server),
+         * immediately after the initial rendering occurs.
+         */
+        componentDidMount: function () {
+            this._updatePosition();
+        },
+
+        /**
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
+         * This method is not called for the initial render.
          *
-         * @param {provProps} prevProps The previous state of the component's properties.
-         * @param {[type]} prevState The previous component's state.
+         * @param {Object} prevProps The previous state of the component's properties.
+         * @param {Object} prevState Component's previous state.
          */
         componentDidUpdate: function (prevProps, prevState) {
+            this._updatePosition();
+
+            // In case of exclusive rendering, focus the first descendant (button)
+            // so the user will be able to start interacting with the buttons immediately.
+            if (this.props.renderExclusive) {
+                this.focus();
+            }
+        },
+
+        /**
+         * Lifecycle. Renders the buttons for adding content.
+         *
+         * @return {Object} The content which should be rendered.
+         */
+        render: function() {
+            var buttons = this._getButtons();
+            var className = this._getToolbarClassName();
+
+            return (
+                <div className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="-1">
+                    <div className="alloy-editor-container">
+                        {buttons}
+                    </div>
+                </div>
+            );
+        },
+
+        /**
+         * Returns a list of buttons that will eventually render to HTML.
+         *
+         * @protected
+         * @return {Object} The buttons which have to be rendered.
+         */
+        _getButtons: function() {
+            var buttons;
+
+            if (this.props.renderExclusive) {
+                buttons = this.getToolbarButtons(this.props.config.buttons);
+            } else {
+                if (this.props.selectionData && this.props.selectionData.region) {
+                    buttons = (
+                        <button className="alloy-editor-button alloy-editor-button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)}>
+                            <span className="alloy-editor-icon-add"></span>
+                        </button>
+                    );
+                }
+            }
+
+            return buttons;
+        },
+
+        /**
+         * Returns the class name of the toolbar in case of both exclusive and normal mode.
+         *
+         * @protected
+         * @return {String} The class name which have to be applied to the DOM element.
+         */
+        _getToolbarClassName: function() {
+            var cssClass = 'alloy-editor-toolbar-add';
+
+            if (this.props.renderExclusive) {
+                cssClass = 'alloy-editor-toolbar ' + this.getArrowBoxClasses();
+            }
+
+            return cssClass;
+        },
+
+        /**
+         * Calculates and sets the position of the toolbar in exclusive or normal mode.
+         *
+         * @protected
+         * @method _updatePosition
+         */
+        _updatePosition: function() {
             var region;
 
             if (this.props.renderExclusive) {
@@ -80,68 +163,6 @@
                     this.cancelAnimation();
                 }
             }
-        },
-
-        /**
-         * Lifecycle. Renders the buttons for adding content.
-         *
-         * @return {Object} The content which should be rendered.
-         */
-        render: function() {
-            var buttons = this._getButtons();
-            var className = this._getToolbarClassName();
-
-            return (
-                <div className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.props.requestExclusive.bind(ToolbarAdd.key)} tabIndex="-1">
-                    <div className="alloy-editor-container">
-                        {buttons}
-                    </div>
-                </div>
-            );
-        },
-
-        /**
-         * Returns a list of buttons that will eventually render to HTML.
-         *
-         * @protected
-         * @return {Object} The buttons which have to be rendered.
-         */
-        _getButtons: function() {
-            var buttons;
-
-            if (this.props.renderExclusive) {
-                buttons = this.getToolbarButtons(this.props.config.buttons);
-            } else {
-                if (this.props.selectionData && this.props.selectionData.region) {
-                    buttons = (
-                        <button className="alloy-editor-button alloy-editor-button-add" onClick={this.props.requestExclusive.bind(ToolbarAdd.key)}>
-                            <span className="alloy-editor-icon-add"></span>
-                        </button>
-                    );
-                } else {
-                    buttons = (
-                        <div className="alloy-editor-hide" />
-                    );
-                }
-            }
-
-            return buttons;
-        },
-
-        /**
-         * Returns the class name of the toolbar in case of both exclusive and normal mode.
-         *
-         * @protected
-         * @return {String} The class name which have to be applied to the DOM element.
-         */
-        _getToolbarClassName: function() {
-            var cssClass = 'alloy-editor-toolbar-add';
-
-            if (this.props.renderExclusive) {
-                cssClass = 'alloy-editor-toolbar ' + this.getArrowBoxClasses();
-            }
-
-            return cssClass;
         }
     });
 

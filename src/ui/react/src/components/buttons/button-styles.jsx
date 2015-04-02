@@ -90,7 +90,7 @@
             }
 
             return (
-                <div className="alloy-editor-container-styles has-dropdown">
+                <div className="alloy-editor-container-styles alloy-editor-has-dropdown">
                     <button className="alloy-editor-toolbar-element" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex}>
                         <div className="alloy-editor-container">
                             <span className="alloy-editor-selected-style">{activeStyle}</span>

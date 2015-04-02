@@ -22,7 +22,7 @@
          */
         render: function() {
             return (
-                <div className="alloy-editor-container has-dropdown">
+                <div className="alloy-editor-container alloy-editor-has-dropdown">
                     <button className="alloy-editor-button" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex}>
                         <span className="alloy-editor-icon-row"></span>
                     </button>

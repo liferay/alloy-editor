@@ -8,7 +8,8 @@
      */
     var WidgetDropdown = {
         /**
-         * Lifecycle. Invoked when a component is receiving new props. This method is not called for the initial render.
+         * Lifecycle. Invoked when a component is receiving new props.
+         * This method is not called for the initial render.
          */
         componentWillReceiveProps: function (nextProps) {
             this.setState({

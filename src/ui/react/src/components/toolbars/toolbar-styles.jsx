@@ -18,30 +18,22 @@
         },
 
         /**
+         * Lifecycle. Invoked once, only on the client (not on the server),
+         * immediately after the initial rendering occurs.
+         */
+        componentDidMount: function () {
+            this._updatePosition();
+        },
+
+        /**
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
+         * This method is not called for the initial render.
          *
-         * @param {provProps} prevProps The previous state of the component's properties.
-         * @param {[type]} prevState The previous component's state.
+         * @param {Object} prevProps The previous state of the component's properties.
+         * @param {Object} prevState Component's previous state.
          */
         componentDidUpdate: function (prevProps, prevState) {
-            var currentSelection = this._getCurrentSelection();
-
-            var result;
-
-            // If current selection has a function called `setPosition`, call it
-            // and check the returned value. If false, fallback to the default positioning logic.
-            if (currentSelection && global.Lang.isFunction(currentSelection.setPosition)) {
-                result = currentSelection.setPosition.call(this, {
-                    editor: this.props.editor,
-                    editorEvent: this.props.editorEvent,
-                    selectionData: this.props.selectionData
-                });
-            }
-
-            if (!result) {
-                this.updatePosition();
-                this.show();
-            }
+            this._updatePosition();
         },
 
         /**
@@ -124,6 +116,33 @@
             }
 
             return selection;
+        },
+
+        /**
+         * Calculates and sets the position of the toolbar.
+         *
+         * @protected
+         * @method _updatePosition
+         */
+        _updatePosition: function() {
+            var currentSelection = this._getCurrentSelection();
+
+            var result;
+
+            // If current selection has a function called `setPosition`, call it
+            // and check the returned value. If false, fallback to the default positioning logic.
+            if (currentSelection && global.Lang.isFunction(currentSelection.setPosition)) {
+                result = currentSelection.setPosition.call(this, {
+                    editor: this.props.editor,
+                    editorEvent: this.props.editorEvent,
+                    selectionData: this.props.selectionData
+                });
+            }
+
+            if (!result) {
+                this.updatePosition();
+                this.show();
+            }
         }
     });
 

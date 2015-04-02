@@ -88,8 +88,9 @@
             document.body.insertBefore(editorUIElement, document.body.firstChild);
 
             React.render(React.createElement(global.AlloyEditor.UI, {
-                toolbars: this.get('toolbars'),
-                editor: this
+                editor: this,
+                eventsDelay: this.get('eventsDelay'),
+                toolbars: this.get('toolbars')
             }), editorUIElement);
 
             this._editorUIElement = editorUIElement;
