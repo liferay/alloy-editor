@@ -59,10 +59,14 @@
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          */
         componentWillUnmount: function() {
-            this._clickListener.detach();
-            this._keyDownListener.detach();
-            document.removeEventListener('click', this._clickListener);
-            document.removeEventListener('keydown', this._keyDownListener);
+            if (this._clickListener) {
+                document.removeEventListener('click', this._clickListener);
+            }
+
+            if (this._keyDownListener) {
+                this._keyDownListener.detach();
+                document.removeEventListener('keydown', this._keyDownListener);
+            }
         },
 
         /**

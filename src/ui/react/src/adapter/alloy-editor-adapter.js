@@ -52,15 +52,13 @@
          * @protected
          */
         destructor: function() {
-            var editorInstance;
+            React.unmountComponentAtNode(this._editorUIElement);
 
-            editorInstance = CKEDITOR.instances[this.get('srcNode')];
+            this._editorUIElement.parentNode.removeChild(this._editorUIElement);
+
+            var editorInstance = CKEDITOR.instances[this.get('srcNode')];
 
             if (editorInstance) {
-                Object.keys(editorInstance.config.toolbars).forEach(function(value) {
-                    value.destroy();
-                });
-
                 editorInstance.destroy();
             }
         },
@@ -87,7 +85,7 @@
 
             document.body.insertBefore(editorUIElement, document.body.firstChild);
 
-            React.render(React.createElement(global.AlloyEditor.UI, {
+            this._mainUI = React.render(React.createElement(global.AlloyEditor.UI, {
                 editor: this,
                 eventsDelay: this.get('eventsDelay'),
                 toolbars: this.get('toolbars')
