@@ -16,36 +16,21 @@
         },
 
         /**
-         * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
-         */
-        componentWillUnmount: function() {
-            if (this._inputEl) {
-                this._inputEl.parentNode.removeChild(this._inputEl);
-
-                this._inputEl = null;
-            }
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            if (!this._inputEl) {
-                var el = document.createElement('input');
-                el.setAttribute('type', 'file');
-                el.setAttribute('style', 'display: none;');
-
-                this._inputEl = document.body.insertBefore(el, document.body.firstChild);
-
-                this._inputEl.addEventListener('change', this._onInputChange);
-            }
+            var inputSyle = {display: 'none'};
 
             return (
-                <button className="alloy-editor-button" data-type="button-image" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
-                    <span className="alloy-editor-icon-image"></span>
-                </button>
+                <div>
+                    <button className="alloy-editor-button" data-type="button-image" onClick={this.handleClick} tabIndex={this.props.tabIndex}>
+                        <span className="alloy-editor-icon-image"></span>
+                    </button>
+
+                    <input onChange={this._onInputChange} ref="fileInput" style={inputSyle} type="file" />
+                </div>
             );
         },
 
@@ -55,7 +40,7 @@
          * @param {SyntheticEvent} event The received click event on the button.
          */
         handleClick: function(event) {
-            CKEDITOR.tools.simulate(this._inputEl, 'click');
+            CKEDITOR.tools.simulate(React.findDOMNode(this.refs.fileInput), 'click');
         },
 
         /**
@@ -68,6 +53,7 @@
          */
         _onInputChange: function() {
             var reader = new FileReader();
+            var inputEl = React.findDOMNode(this.refs.fileInput);
 
             reader.onload = function(event) {
                 var editor = this.props.editor.get('nativeEditor');
@@ -78,15 +64,15 @@
 
                 var imageData = {
                     el: el,
-                    file: this._inputEl.files[0]
+                    file: inputEl.files[0]
                 };
 
                 editor.fire('imageadd', imageData);
             }.bind(this);
 
-            reader.readAsDataURL(this._inputEl.files[0]);
+            reader.readAsDataURL(inputEl.files[0]);
 
-            this._inputEl.value = '';
+            inputEl.value = '';
         }
 
         /**
