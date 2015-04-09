@@ -11,8 +11,6 @@
      * @class ButtonTableEdit
      */
     var ButtonTableEdit = React.createClass({
-        mixins: [global.WidgetClickOutside],
-
         /**
          * Allows validating props being passed to the component.
          *

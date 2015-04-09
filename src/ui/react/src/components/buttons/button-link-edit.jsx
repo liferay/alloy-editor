@@ -11,8 +11,6 @@
      * @class ButtonLinkEdit
      */
     var ButtonLinkEdit = React.createClass({
-        mixins: [global.WidgetClickOutside],
-
         /**
          * Lifecycle. Provides static properties to the widget.
          * - key: The name which will be used as an alias of the button in the configuration.
