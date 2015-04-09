@@ -10,6 +10,15 @@
         mixins: [global.WidgetExclusive, global.WidgetFocusManager],
 
         /**
+         * Lifecycle. Invoked once before the component is mounted.
+         */
+        getInitialState: function() {
+            return {
+                hidden: false
+            };
+        },
+
+        /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
          * @return {Object} The default properties.
@@ -117,6 +126,7 @@
             editor.focus();
 
             this.setState({
+                itemExclusive: null,
                 selectionData: editor.getSelectionData(),
                 trigger: event.data
             });

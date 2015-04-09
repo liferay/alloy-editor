@@ -24,12 +24,19 @@
         },
 
         /**
-         * Lifecycle. Invoked once before the component is mounted.
+         * Lifecycle. Invoked when a component is receiving new props.
+         * This method is not called for the initial render.
+         * Calling this.setState() within this function will not trigger an additional render.
+         *
+         * @param {Object} nextProps Object containing the current set of properties.
          */
-        getInitialState: function() {
-            return {
+        componentWillReceiveProps: function(nextProps) {
+            // Receiving properties means that the component is being re-rendered.
+            // Re-rendering is triggered by editorInteraction, so we have to
+            // reset the exclusive state and render the UI according to the new selection.
+            this.setState({
                 itemExclusive: null
-            };
+            });
         },
 
         /**
