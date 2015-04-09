@@ -26,11 +26,13 @@
 
         /**
          * Executes a CKEditor command and fires `actionPerformed` event.
+         *
+         * @param {Object=} data Optional data to be passed to CKEDITOR's `execCommand` method.
          */
-        execCommand: function() {
+        execCommand: function(data) {
             var editor = this.props.editor.get('nativeEditor');
 
-            editor.execCommand(this.props.command);
+            editor.execCommand(this.props.command, data);
 
             if (this.props.modifiesSelection) {
                 editor.selectionChange(true);
