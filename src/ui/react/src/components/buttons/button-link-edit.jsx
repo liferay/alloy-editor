@@ -119,6 +119,8 @@
                 this._updateLink();
             } else if (event.keyCode === KEY_ESC) {
                 this.props.cancelExclusive();
+
+                this.props.editor.get('nativeEditor').focus();
             }
         },
 
