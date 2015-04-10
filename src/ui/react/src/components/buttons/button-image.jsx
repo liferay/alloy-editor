@@ -62,12 +62,14 @@
 
                 editor.insertElement(el);
 
+                editor.fire('actionPerformed', this);
+
                 var imageData = {
                     el: el,
                     file: inputEl.files[0]
                 };
 
-                editor.fire('imageadd', imageData);
+                editor.fire('imageAdd', imageData);
             }.bind(this);
 
             reader.readAsDataURL(inputEl.files[0]);

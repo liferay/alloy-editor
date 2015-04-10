@@ -96,9 +96,11 @@
 
                 editor.insertElement(el);
 
-                editor.fire('imageCameraAdd', el);
-
                 this.props.cancelExclusive();
+
+                editor.fire('actionPerformed', this);
+
+                editor.fire('imageCameraAdd', el);
             }
         },
 
