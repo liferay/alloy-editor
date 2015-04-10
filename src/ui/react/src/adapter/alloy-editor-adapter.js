@@ -41,7 +41,7 @@
 
             this._editor = editor;
 
-            this._renderToolbars();
+            this._renderUI();
         },
 
         /**
@@ -79,11 +79,17 @@
          *
          * @protected
          */
-        _renderToolbars: function() {
+        _renderUI: function() {
             var editorUIElement = document.createElement('div');
             editorUIElement.className = 'alloy-editor-ui';
 
-            document.body.insertBefore(editorUIElement, document.body.firstChild);
+            var editableArea = this.get('srcNode');
+
+            if (global.Lang.isString(editableArea)) {
+                editableArea = document.getElementById(editableArea);
+            }
+
+            editableArea.parentNode.appendChild(editorUIElement);
 
             this._mainUI = React.render(React.createElement(global.AlloyEditor.UI, {
                 editor: this,

@@ -74,7 +74,7 @@
 
                 defaultConfig = {
                     editor: editor,
-                    render: true,
+                    render: editor.editable().$.parentNode,
                     visible: false
                 };
 
