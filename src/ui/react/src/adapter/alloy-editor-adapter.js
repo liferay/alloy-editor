@@ -83,13 +83,13 @@
             var editorUIElement = document.createElement('div');
             editorUIElement.className = 'alloy-editor-ui';
 
-            var editableArea = this.get('srcNode');
+            var uiNode = this.get('uiNode') || document.body;
 
-            if (global.Lang.isString(editableArea)) {
-                editableArea = document.getElementById(editableArea);
+            if (global.Lang.isString(uiNode)) {
+                uiNode = document.getElementById(uiNode);
             }
 
-            editableArea.parentNode.appendChild(editorUIElement);
+            uiNode.appendChild(editorUIElement);
 
             this._mainUI = React.render(React.createElement(global.AlloyEditor.UI, {
                 editor: this,
@@ -252,6 +252,17 @@
                         tabIndex: 1
                     }
                 }
+            },
+
+            /**
+             * The Node ID or HTMl node, where AlloyEditor's UI should be rendered.
+             *
+             * @attribute uiNode
+             * @type String | Node
+             * @writeOnce
+             */
+            uiNode: {
+                writeOnce: true
             }
         },
 

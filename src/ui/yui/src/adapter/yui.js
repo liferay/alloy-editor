@@ -445,6 +445,17 @@ YUI.add('alloy-editor', function(Y) {
                     image: ['left', 'right'],
                     styles: ['strong', 'em', 'u', 'h1', 'h2', 'a', 'twitter']
                 }
+            },
+
+            /**
+             * The Node ID or HTMl node, where AlloyEditor's UI should be rendered.
+             *
+             * @attribute uiNode
+             * @type String | Node
+             * @writeOnce
+             */
+            uiNode: {
+                setter: Y.one
             }
         }
     });
