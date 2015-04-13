@@ -13,6 +13,7 @@ var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var template = require('gulp-template');
 var uglify = require('gulp-uglify');
+var zip = require('gulp-zip');
 
 var rootDir = path.join(__dirname, '..', '..', '..', '..');
 var reactDir = path.join(rootDir, 'src', 'ui', 'react');
@@ -31,10 +32,42 @@ function errorHandler(error) {
 
 gulp.task('build', function(callback) {
     runSequence(
-        'clean-dist', ['build-css', 'build-js'], ['minimize-css', 'minimize-js'], [
-            'create-alloy-editor', 'create-alloy-editor-min'
+        'clean-dist',
+        [
+            'build-css',
+            'build-js'
+        ],
+        [
+            'create-alloy-editor-all',
+            'create-alloy-editor-no-ckeditor',
+            'create-alloy-editor-no-react'
         ],
         'build-demo',
+        callback
+    );
+});
+
+gulp.task('release', function(callback) {
+    runSequence(
+        'clean-dist',
+        [
+            'build-css',
+            'build-js'
+        ],
+        [
+            'minimize-css',
+            'minimize-alloy-editor-core'
+        ],
+        [
+            'create-alloy-editor-all',
+            'create-alloy-editor-all-min',
+            'create-alloy-editor-no-ckeditor',
+            'create-alloy-editor-no-ckeditor-min',
+            'create-alloy-editor-no-react',
+            'create-alloy-editor-no-react-min'
+        ],
+        'build-demo',
+        'create-zip',
         callback
     );
 });
@@ -75,7 +108,7 @@ gulp.task('copy-ckeditor', function() {
         .pipe(gulp.dest(editorDistFolder));
 });
 
-gulp.task('create-alloy-editor', function() {
+gulp.task('create-alloy-editor-all', function() {
     return gulp.src([
             path.join(editorDistFolder, 'ckeditor.js'),
             path.join(reactDir, 'vendor', 'react.js'),
@@ -86,7 +119,26 @@ gulp.task('create-alloy-editor', function() {
         .pipe(gulp.dest(editorDistFolder));
 });
 
-gulp.task('create-alloy-editor-min', function() {
+gulp.task('create-alloy-editor-no-ckeditor', function() {
+    return gulp.src([
+            path.join(reactDir, 'vendor', 'react.js'),
+            path.join(editorDistFolder, 'alloy-editor-core.js')
+        ])
+        .pipe(concat('alloy-editor-no-ckeditor.js'))
+        .pipe(gulp.dest(editorDistFolder));
+});
+
+gulp.task('create-alloy-editor-no-react', function() {
+    return gulp.src([
+            path.join(editorDistFolder, 'ckeditor.js'),
+            path.join(editorDistFolder, 'alloy-editor-core.js')
+        ])
+        .pipe(concat('alloy-editor-no-react.js'))
+        .pipe(replace(/ckeditor(\\?).js/g, 'alloy-editor-no-react$1.js'))
+        .pipe(gulp.dest(editorDistFolder));
+});
+
+gulp.task('create-alloy-editor-all-min', function() {
     return gulp.src([
             path.join(editorDistFolder, 'ckeditor.js'),
             path.join(reactDir, 'vendor', 'react-min.js'),
@@ -97,6 +149,25 @@ gulp.task('create-alloy-editor-min', function() {
         .pipe(gulp.dest(editorDistFolder));
 });
 
+gulp.task('create-alloy-editor-no-ckeditor-min', function() {
+    return gulp.src([
+            path.join(reactDir, 'vendor', 'react-min.js'),
+            path.join(editorDistFolder, 'alloy-editor-core-min.js')
+        ])
+        .pipe(concat('alloy-editor-no-ckeditor-min.js'))
+        .pipe(gulp.dest(editorDistFolder));
+});
+
+gulp.task('create-alloy-editor-no-react-min', function() {
+    return gulp.src([
+            path.join(editorDistFolder, 'ckeditor.js'),
+            path.join(editorDistFolder, 'alloy-editor-core-min.js')
+        ])
+        .pipe(concat('alloy-editor-no-react-min.js'))
+        .pipe(replace(/ckeditor(\\?).js/g, 'alloy-editor-no-react-min$1.js'))
+        .pipe(gulp.dest(editorDistFolder));
+});
+
 gulp.task('create-alloy-editor-core', function() {
     return gulp.src(srcFiles, {cwd : rootDir + '/src'})
     .pipe(react()).on('error', errorHandler)
@@ -104,7 +175,13 @@ gulp.task('create-alloy-editor-core', function() {
     .pipe(gulp.dest(editorDistFolder));
 });
 
-gulp.task('minimize-js', function() {
+gulp.task('create-zip', function() {
+    return gulp.src(path.join(distFolder, '/**'))
+        .pipe(zip('alloy-editor-' + pkg.version + '.zip'))
+        .pipe(gulp.dest(distFolder));
+});
+
+gulp.task('minimize-alloy-editor-core', function() {
     return gulp.src([
             path.join(editorDistFolder, 'alloy-editor-core.js')
         ])
