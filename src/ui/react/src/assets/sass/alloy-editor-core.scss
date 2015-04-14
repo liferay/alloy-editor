@@ -18,10 +18,16 @@ $IE9_ONLY: \9;
 
     *, *:after, *:before {
         box-sizing: inherit;
+        color: inherit;
+    }
+
+    input, textarea, keygen, select, button {
+        color: initial;
     }
 
     .alloy-editor-container, [class*=alloy-editor-container-], .alloy-editor-button, .alloy-editor-toolbar-element, label {
         font-size: $base_font_size;
+        margin: 0;
         position: relative;
 
         &:not(:last-child) {
@@ -163,7 +169,6 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         @include flex(1);
 
         border-width: 0;
-        box-shadow: none;
         font-family: inherit;
         height: auto;
         line-height: normal;
@@ -181,6 +186,10 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         margin-top: $base_padding $IE9_ONLY;
         padding-left: $base_padding $IE9_ONLY;
         width: 13 * $base_font_size - $base_button_width $IE9_ONLY;
+
+        &:focus {
+            box-shadow: none;
+        }
     }
 
     .alloy-editor-icon-remove {
