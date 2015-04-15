@@ -15,7 +15,12 @@
     Attribute.prototype = {
         constructor: Attribute,
 
-
+        /**
+         * Retrieves the value of an attribute.
+         *
+         * @param {String} attr The attribute which value should be retrieved.
+         * @return {Any} The value of the attribute.
+         */
         get: function(attr) {
             var currentAttr = this.constructor.ATTRS[attr];
 
@@ -36,6 +41,12 @@
             return curValue;
         },
 
+        /**
+         * Sets the value of an attribute.
+         *
+         * @param {String} attr The attribute which value should be set.
+         * @param {Any} value The value which should be set to the attribute.
+         */
         set: function(attr, value) {
             var currentAttr = this.constructor.ATTRS[attr];
 
@@ -91,12 +102,18 @@
             return result;
         },
 
+        /**
+         * Initializes an attribute. Sets its default value depending on the flags of the
+         * attribute and the passed configuration object to the constructor.
+         *
+         * @param {String} attr The name of the attribute which have to be initialized.
+         */
         _init: function(attr) {
             var value;
 
             var currentAttr = this.constructor.ATTRS[attr];
 
-            // Get 
+            // Check if there is default value or passed one via configuration object
             var hasDefaultValue = Object.prototype.hasOwnProperty.call(currentAttr, 'value');
             var hasPassedValueViaConfig = Object.prototype.hasOwnProperty.call(this.__config__, attr);
 
@@ -122,17 +139,18 @@
                     return;
                 }
             }
-            // These two cases below are easy - set the value to be from the passed config or from the
-            // default value, in this order.
+            // These two cases below are easy - set the value to be from the passed config or
+            // from the default value, in this order.
             else if (hasPassedValueViaConfig) {
                 value = this.__config__[attr];
             } else if (hasDefaultValue) {
                 value = currentAttr.value;
             }
 
-            // If there is validator, check the returned value. If it is false, then set as initial value
-            // the default one. However, if there is no default value, just return.
-            if (currentAttr.validator && !this._callStringOrFunction(currentAttr.validator, value)) {
+            // If there is validator, and user passed config object - check the returned value.
+            // If it is false, then set as initial value the default one.
+            // However, if there is no default value, just return.
+            if (currentAttr.validator && hasPassedValueViaConfig && !this._callStringOrFunction(currentAttr.validator, value)) {
                 if (hasDefaultValue) {
                     value = currentAttr.value;
                 } else {
@@ -140,16 +158,24 @@
                 }
             }
 
-            // If there is setter, pass thought it the value. The value might be one from defaultFn, default value or
-            // provided from the config.
-            if (currentAttr.setter) {
+            // If there is setter and user passed config object - pass the value thought the setter.
+            // The value might be one from defaultFn, default value or provided from the config.
+            if (currentAttr.setter && hasPassedValueViaConfig) {
                 value = this._callStringOrFunction(currentAttr.setter, value);
             }
 
-            // Finally, set the value as init value to the storage with values.
+            // Finally, set the value as initial value to the storage with values.
             this.__ATTRS__[attr] = value;
         },
 
+        /**
+         * Checks if an attribute is initialized. An attribute is considered as initialized
+         * when there is an own property with this name in the local collection of attribute values
+         * for the current instance.
+         *
+         * @param {String} attr The attribute which should be checked if it is initialized.
+         * @return {Boolean} Returns true if the attribute has been initialized, false otherwise.
+         */
         _isInitialized: function(attr) {
             return Object.prototype.hasOwnProperty.call(this.__ATTRS__, attr);
         }
