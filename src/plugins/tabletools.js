@@ -4,6 +4,8 @@
  */
 
 ( function() {
+	if (CKEDITOR.plugins.tabletools) return;
+
 	var cellNodeRegex = /^(?:td|th)$/;
 
 	function getSelectedCells( selection ) {
