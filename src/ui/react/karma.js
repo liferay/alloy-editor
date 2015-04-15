@@ -4,6 +4,7 @@
 
 var alloyEditorDir = 'dist/alloy-editor-*/alloy-editor/';
 
+var argv = require('yargs').argv;
 var path = require('path');
 var srcFiles = require('./_src.js');
 
@@ -12,7 +13,9 @@ var preprocessors = {
     '**/*.html': ['html2js']
 };
 
-preprocessors[path.join(alloyEditorDir, 'test/**/*.js')] = ['coverage'];
+if (!(argv.debug || argv.d)) {
+    preprocessors[path.join(alloyEditorDir, 'test/**/*.js')] = ['coverage'];
+}
 
 var filesToLoad = [
     /* AlloyEditor skins */

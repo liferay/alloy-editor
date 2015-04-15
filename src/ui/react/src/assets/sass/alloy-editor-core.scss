@@ -277,6 +277,10 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     }
 }
 
+.alloy-editor-placeholder:empty:not(:focus):before {
+    content: attr(data-placeholder);
+}
+
 .alloy-editor-camera {
     align-items: center;
     display: flex;

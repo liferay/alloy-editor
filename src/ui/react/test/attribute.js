@@ -67,11 +67,13 @@
                 Clazz.superclass.constructor.call(this, config);
             };
 
+            var getter = sinon.spy(function(val) {
+                return val + '-test1';
+            });
+
             Clazz.ATTRS = {
                 attr1: {
-                    getter: function(val) {
-                        return val + '-test1';
-                    },
+                    getter: getter,
                     value: 'val1'
                 }
             };
@@ -80,7 +82,10 @@
 
             var inst = new Clazz();
 
-            assert.strictEqual('val1-test1', inst.get('attr1'));
+            var val = inst.get('attr1');
+
+            assert.ok(getter.calledOnce);
+            assert.strictEqual('val1-test1', val);
         });
 
         it('should invoke the setter of an attribute', function() {
@@ -88,7 +93,9 @@
                 Clazz.superclass.constructor.call(this, config);
             };
 
-            var setter = sinon.spy();
+            var setter = sinon.spy(function(val) {
+                return 'chema: ' + val;
+            });
 
             Clazz.ATTRS = {
                 attr1: {
@@ -105,9 +112,10 @@
             var val = inst.get('attr1');
 
             assert.ok(setter.calledOnce);
+            assert.strictEqual('chema: val1', val);
         });
 
-        it('should invoke the setter of an attribute when there is default value', function() {
+        it('should not invoke the setter of an attribute when there is default value', function() {
             var Clazz = function(config) {
                 Clazz.superclass.constructor.call(this, config);
             };
@@ -126,10 +134,34 @@
             var inst = new Clazz();
 
             inst.get('attr1');
+            assert.ok(setter.notCalled);
+        });
+
+        it('should invoke the setter of an attribute via set method', function() {
+            var Clazz = function(config) {
+                Clazz.superclass.constructor.call(this, config);
+            };
+
+            var setter = sinon.spy(function(val) {
+                return val;
+            });
+
+            Clazz.ATTRS = {
+                attr1: {
+                    setter: setter,
+                    value: 'val1'
+                }
+            };
+
+            Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
+
+            var inst = new Clazz();
+
+            inst.set('attr1', 'val2');
             assert.ok(setter.calledOnce);
         });
 
-        it('should not change the value of a read only attribute', function() {
+        it('should not change the value of a readOnly attribute', function() {
             var Clazz = function(config) {
                 Clazz.superclass.constructor.call(this, config);
             };
@@ -150,7 +182,28 @@
             assert.strictEqual('val1', inst.get('attr1'));
         });
 
-        it('should not change the value of a read only attribute when there is no default value', function() {
+        it('should not change the value of a readOnly attribute via set method', function() {
+            var Clazz = function(config) {
+                Clazz.superclass.constructor.call(this, config);
+            };
+
+            Clazz.ATTRS = {
+                attr1: {
+                    readOnly: true,
+                    value: 'val1'
+                }
+            };
+
+            Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
+
+            var inst = new Clazz();
+
+            inst.set('attr1', 'val2');
+
+            assert.strictEqual('val1', inst.get('attr1'));
+        });
+
+        it('should not change the value of a readOnly attribute when there is no default value', function() {
             var Clazz = function(config) {
                 Clazz.superclass.constructor.call(this, config);
             };
@@ -170,7 +223,7 @@
             assert.isUndefined(inst.get('attr1'));
         });
 
-        it('should not change the value of a read only attribute when writeOnce is set', function() {
+        it('should not change the value of a readOnly attribute when writeOnce is set', function() {
             var Clazz = function(config) {
                 Clazz.superclass.constructor.call(this, config);
             };
@@ -281,6 +334,53 @@
             assert.strictEqual('val1', inst.get('attr1'));
         });
 
+        it('should not set value if validator returns false via set method', function() {
+            var Clazz = function(config) {
+                Clazz.superclass.constructor.call(this, config);
+            };
+
+            Clazz.ATTRS = {
+                attr1: {
+                    validator: function(val) {
+                        return false;
+                    },
+                    value: 'val1'
+                }
+            };
+
+            Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
+
+            var inst = new Clazz();
+
+            inst.set('attr1', 'val2');
+            assert.strictEqual('val1', inst.get('attr1'));
+        });
+
+        it('should not set value if validator returns false via config there is no default value', function() {
+            var Clazz = function(config) {
+                Clazz.superclass.constructor.call(this, config);
+            };
+
+            var validator = sinon.spy(function(val) {
+                return false;
+            });
+
+            Clazz.ATTRS = {
+                attr1: {
+                    validator: validator
+                }
+            };
+
+            Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
+
+            var inst = new Clazz({
+                attr1: 'val2'
+            });
+
+            assert.ok(validator.notCalled);
+            assert.isUndefined(inst.get('attr1'));
+        });
+
         it('should set value if validator returns true', function() {
             var Clazz = function(config) {
                 Clazz.superclass.constructor.call(this, config);
@@ -302,6 +402,29 @@
             });
 
             assert.strictEqual('val2', inst.get('attr1'));
+        });
+
+        it('should not call validator when there is default value', function() {
+            var Clazz = function(config) {
+                Clazz.superclass.constructor.call(this, config);
+            };
+
+            var validator = sinon.spy(function(val) {
+                return true;
+            });
+
+            Clazz.ATTRS = {
+                attr1: {
+                    validator: validator,
+                    value: 'val1'
+                }
+            };
+
+            Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
+
+            var inst = new Clazz();
+
+            assert.ok(validator.notCalled);
         });
 
         it('should not share values from two objects', function() {
@@ -338,6 +461,32 @@
 
             assert.strictEqual('val1.1', inst1.get('attr1'));
             assert.strictEqual('val2.2', inst2.get('attr1'));
+        });
+
+        it('should set value from valueFn', function() {
+            var Clazz = function(config) {
+                Clazz.superclass.constructor.call(this, config);
+            };
+
+            var valueFn = sinon.spy(function() {
+                return 'value from valueFn';
+            });
+
+            Clazz.ATTRS = {
+                attr1: {
+                    valueFn: valueFn,
+                    value: 'val1'
+                }
+            };
+
+            Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
+
+            var inst = new Clazz();
+
+            var val = inst.get('attr1');
+
+            assert.ok(valueFn.calledOnce);
+            assert.strictEqual('value from valueFn', val);
         });
     });
 }());
