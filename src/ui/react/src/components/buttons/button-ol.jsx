@@ -7,7 +7,7 @@
      * @class ButtonOrderedList
      */
     var ButtonOrderedList = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         /**
          * Allows validating props being passed to the component.
@@ -56,5 +56,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonOrderedList.key] = global.AlloyEditor.ButtonOrderedList = ButtonOrderedList;
+    AlloyEditor.Buttons[ButtonOrderedList.key] = AlloyEditor.ButtonOrderedList = ButtonOrderedList;
 }());

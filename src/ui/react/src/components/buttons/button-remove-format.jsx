@@ -7,7 +7,7 @@
      * @class ButtonRemoveFormat
      */
     var ButtonRemoveFormat = React.createClass({
-        mixins: [global.ButtonCommand],
+        mixins: [AlloyEditor.ButtonCommand],
 
         /**
          * Allows validating props being passed to the component.
@@ -51,5 +51,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonRemoveFormat.key] = global.AlloyEditor.ButtonRemoveFormat = ButtonRemoveFormat;
+    AlloyEditor.Buttons[ButtonRemoveFormat.key] = AlloyEditor.ButtonRemoveFormat = ButtonRemoveFormat;
 }());

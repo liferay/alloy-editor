@@ -186,5 +186,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonLinkEdit.key] = global.AlloyEditor.ButtonLinkEdit = ButtonLinkEdit;
+    AlloyEditor.Buttons[ButtonLinkEdit.key] = AlloyEditor.ButtonLinkEdit = ButtonLinkEdit;
 }());

@@ -42,5 +42,5 @@
         }
     };
 
-    global.ButtonCommand = ButtonCommand;
+    AlloyEditor.ButtonCommand = ButtonCommand;
 }());

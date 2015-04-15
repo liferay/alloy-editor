@@ -26,7 +26,7 @@
         render: function() {
             if (this.props.renderExclusive) {
                 return (
-                    <global.AlloyEditor.ButtonCameraImage {...this.props} />
+                    <AlloyEditor.ButtonCameraImage {...this.props} />
                 );
             } else {
                 var disabled = !(navigator.getUserMedia ||
@@ -43,5 +43,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonCamera.key] = global.AlloyEditor.ButtonCamera = ButtonCamera;
+    AlloyEditor.Buttons[ButtonCamera.key] = AlloyEditor.ButtonCamera = ButtonCamera;
 }());

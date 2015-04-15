@@ -109,5 +109,5 @@
         }
     };
 
-    global.WidgetInteractionPoint = WidgetInteractionPoint;
+    AlloyEditor.WidgetInteractionPoint = WidgetInteractionPoint;
 }());

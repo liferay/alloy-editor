@@ -17,7 +17,7 @@
         afterEach(Utils.afterEach);
 
         it('should remove a table if selection is inside one', function() {
-            var buttonTableRemove = React.render(<global.AlloyEditor.ButtonTableRemove editor={this.editor} />, this.container);
+            var buttonTableRemove = React.render(<AlloyEditor.ButtonTableRemove editor={this.editor} />, this.container);
 
             bender.tools.selection.setWithHtml(this.nativeEditor, '<table><tbody><tr><td> {}</td></tr></tbody></table>');
 
@@ -32,7 +32,7 @@
         });
 
         it('should noop if selection is outside a table', function() {
-            var buttonTableRemove = React.render(<global.AlloyEditor.ButtonTableRemove editor={this.editor} />, this.container);
+            var buttonTableRemove = React.render(<AlloyEditor.ButtonTableRemove editor={this.editor} />, this.container);
 
             bender.tools.selection.setWithHtml(this.nativeEditor, 'Content with {no} table');
 

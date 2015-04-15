@@ -7,7 +7,7 @@
      * @class ButtonCode
      */
     var ButtonCode = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -46,5 +46,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonCode.key] = global.AlloyEditor.ButtonCode = ButtonCode;
+    AlloyEditor.Buttons[ButtonCode.key] = AlloyEditor.ButtonCode = ButtonCode;
 }());

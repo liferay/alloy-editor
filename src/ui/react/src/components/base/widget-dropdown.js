@@ -55,5 +55,5 @@
         }
     };
 
-    global.WidgetDropdown = WidgetDropdown;
+    AlloyEditor.WidgetDropdown = WidgetDropdown;
 }());

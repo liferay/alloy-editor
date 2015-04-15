@@ -7,7 +7,7 @@
      * @class ToolbarStyles
      */
     var ToolbarStyles = React.createClass({
-        mixins: [global.WidgetDropdown, global.WidgetExclusive, global.WidgetFocusManager, global.ToolbarButtons, global.WidgetPosition, global.WidgetArrowBox],
+        mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -63,7 +63,7 @@
             if (currentSelection) {
                 var arrowBoxClasses;
 
-                if (global.Lang.isFunction(currentSelection.getArrowBoxClasses)) {
+                if (AlloyEditor.Lang.isFunction(currentSelection.getArrowBoxClasses)) {
                     arrowBoxClasses = currentSelection.getArrowBoxClasses();
                 } else {
                     arrowBoxClasses = this.getArrowBoxClasses();
@@ -131,7 +131,7 @@
 
             // If current selection has a function called `setPosition`, call it
             // and check the returned value. If false, fallback to the default positioning logic.
-            if (currentSelection && global.Lang.isFunction(currentSelection.setPosition)) {
+            if (currentSelection && AlloyEditor.Lang.isFunction(currentSelection.setPosition)) {
                 result = currentSelection.setPosition.call(this, {
                     editor: this.props.editor,
                     editorEvent: this.props.editorEvent,
@@ -146,5 +146,5 @@
         }
     });
 
-    global.AlloyEditor.Toolbars[ToolbarStyles.key] = global.AlloyEditor.ToolbarStyles = ToolbarStyles;
+    AlloyEditor.Toolbars[ToolbarStyles.key] = AlloyEditor.ToolbarStyles = ToolbarStyles;
 }());

@@ -62,5 +62,5 @@
         }
     };
 
-    global.ButtonStyle = ButtonStyle;
+    AlloyEditor.ButtonStyle = ButtonStyle;
 }());

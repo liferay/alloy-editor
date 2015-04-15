@@ -7,7 +7,7 @@
      * @class ButtonParagraphCenter
      */
     var ButtonParagraphCenter = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -49,5 +49,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonParagraphCenter.key] = global.AlloyEditor.ButtonParagraphCenter = ButtonParagraphCenter;
+    AlloyEditor.Buttons[ButtonParagraphCenter.key] = AlloyEditor.ButtonParagraphCenter = ButtonParagraphCenter;
 }());

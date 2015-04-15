@@ -8,7 +8,7 @@
      * @class WidgetPosition
      */
     var WidgetPosition = {
-        mixins: [global.WidgetInteractionPoint],
+        mixins: [AlloyEditor.WidgetInteractionPoint],
 
         /**
          * Allows validating props being passed to the component.
@@ -187,5 +187,5 @@
         }
     };
 
-    global.WidgetPosition = WidgetPosition;
+    AlloyEditor.WidgetPosition = WidgetPosition;
 }());

@@ -96,7 +96,7 @@ gulp.task('build-js', function(callback) {
     runSequence([
         'copy-ckeditor',
         'create-alloy-editor-core'
-    ], 'wrap-alloy-editor-core', 'wrap-alloy-editor-global', callback);
+    ], 'wrap-alloy-editor', callback);
 });
 
 gulp.task('clean-dist', function(callback) {

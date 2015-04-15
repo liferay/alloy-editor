@@ -8,7 +8,7 @@
      * @class ButtonTwitter
      */
     var ButtonTwitter = React.createClass({
-        mixins: [global.ButtonStateClasses],
+        mixins: [AlloyEditor.ButtonStateClasses],
 
         /**
          * Allows validating props being passed to the component.
@@ -102,5 +102,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonTwitter.key] = global.AlloyEditor.ButtonTwitter = ButtonTwitter;
+    AlloyEditor.Buttons[ButtonTwitter.key] = AlloyEditor.ButtonTwitter = ButtonTwitter;
 }());

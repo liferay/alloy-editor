@@ -118,7 +118,7 @@
          * @return {Boolean} A boolean value indicating if the key is valid.
          */
         _isValidKey: function(keyCode, keys) {
-            return global.Lang.isArray(keys) ? (keys.indexOf(keyCode) !== -1) : (keyCode === keys);
+            return AlloyEditor.Lang.isArray(keys) ? (keys.indexOf(keyCode) !== -1) : (keyCode === keys);
         },
 
         /**
@@ -182,7 +182,7 @@
                 this._descendants = Array.prototype.map.call(descendants, function(item) {
                     return item;
                 }).sort(function(a, b) {
-                    return (global.Lang.toInt(a.getAttribute('data-tabindex')) > global.Lang.toInt(b.getAttribute('data-tabindex')));
+                    return (AlloyEditor.Lang.toInt(a.getAttribute('data-tabindex')) > AlloyEditor.Lang.toInt(b.getAttribute('data-tabindex')));
                 });
 
                 this._activeDescendant = 0;
@@ -199,5 +199,5 @@
         }
     };
 
-    global.WidgetFocusManager = WidgetFocusManager;
+    AlloyEditor.WidgetFocusManager = WidgetFocusManager;
 }());

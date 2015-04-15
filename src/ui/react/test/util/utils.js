@@ -39,11 +39,10 @@
             assert.ok(AlloyEditor);
 
             config = CKEDITOR.tools.merge({
-                toolbars: {},
-                srcNode: 'editable'
+                toolbars: {}
             }, config);
 
-            this.editor = new AlloyEditor(config);
+            this.editor = AlloyEditor.editable('editable', config);
 
             this.nativeEditor = this.editor.get('nativeEditor');
 

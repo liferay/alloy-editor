@@ -7,7 +7,7 @@
      * @class ButtonStrike
      */
     var ButtonStrike = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         /**
          * Allows validating props being passed to the component.
@@ -56,5 +56,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonStrike.key] = global.AlloyEditor.ButtonStrike = ButtonStrike;
+    AlloyEditor.Buttons[ButtonStrike.key] = AlloyEditor.ButtonStrike = ButtonStrike;
 }());

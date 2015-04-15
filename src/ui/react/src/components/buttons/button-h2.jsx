@@ -7,7 +7,7 @@
      * @class ButtonH2
      */
     var ButtonH2 = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -46,5 +46,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonH2.key] = global.AlloyEditor.ButtonH2 = ButtonH2;
+    AlloyEditor.Buttons[ButtonH2.key] = AlloyEditor.ButtonH2 = ButtonH2;
 }());

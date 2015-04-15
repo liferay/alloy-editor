@@ -23,5 +23,5 @@
         }
     });
 
-    global.AlloyEditor.ButtonsStylesListHeader = ButtonsStylesListHeader;
+    AlloyEditor.ButtonsStylesListHeader = ButtonsStylesListHeader;
 }());

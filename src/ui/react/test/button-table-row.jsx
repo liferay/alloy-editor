@@ -19,7 +19,7 @@
         afterEach(Utils.afterEach);
 
         it('should render just the menu button when not expanded', function() {
-            var buttonTableRow = React.render(<global.AlloyEditor.ButtonTableRow editor={this.editor} expanded={false} />, this.container);
+            var buttonTableRow = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={false} />, this.container);
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableRow, 'button');
 
@@ -30,7 +30,7 @@
         });
 
         it('should show a dropdown with the action buttons when expanded', function() {
-            var buttonTableRow = React.render(<global.AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
+            var buttonTableRow = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
 
             var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonTableRow, 'alloy-editor-dropdown');
             var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown, 'button');
@@ -52,7 +52,7 @@
         });
 
         var testCommandButton = function(command, fixtureName) {
-            var buttonTableCell = React.render(<global.AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
+            var buttonTableCell = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
 
             var fixtures = Utils.getFixtures.call(this, FIXTURE_FILE, fixtureName);
 

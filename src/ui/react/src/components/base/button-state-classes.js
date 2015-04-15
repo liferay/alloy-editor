@@ -23,12 +23,12 @@
             var stateClasses = '';
 
             // Check for active state
-            if (global.Lang.isFunction(this.isActive) && this.isActive()) {
+            if (AlloyEditor.Lang.isFunction(this.isActive) && this.isActive()) {
                 stateClasses += 'alloy-editor-button-pressed';
             }
 
             // Check for disabled state
-            if (global.Lang.isFunction(this.isDisabled) && this.isDisabled()) {
+            if (AlloyEditor.Lang.isFunction(this.isDisabled) && this.isDisabled()) {
                 stateClasses += ' alloy-editor-button-disabled';
             }
 
@@ -36,5 +36,5 @@
         }
     };
 
-    global.ButtonStateClasses = ButtonStateClasses;
+    AlloyEditor.ButtonStateClasses = ButtonStateClasses;
 }());

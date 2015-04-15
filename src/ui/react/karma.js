@@ -68,13 +68,6 @@ var filesToLoad = [
         watched: false
     },
 
-    /* File which defines the global namespace */
-    {
-        pattern: 'src/ui/react/test/util/global.js',
-        included: true,
-        watched: false
-    },
-
     /* Fixtures */
     {
         pattern: 'src/ui/react/test/fixtures/**/*'

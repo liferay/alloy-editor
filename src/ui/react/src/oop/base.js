@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Quick and dirty impl of Base class
+     * Quick and dirty impl of Base class.
      *
      * @class Base
      * @constructor
@@ -13,9 +13,9 @@
         this.init(config);
     }
 
-    global.OOP.extend(Base, global.Attribute, {
+    AlloyEditor.OOP.extend(Base, AlloyEditor.Attribute, {
         /**
-         * Calls the `initializer` method of each class which extends Base starting from the parent to the child
+         * Calls the `initializer` method of each class which extends Base starting from the parent to the child.
          * Will pass the configuration object to each initializer method.
          *
          * @param {Object} config Configuration object
@@ -25,7 +25,7 @@
         },
 
         /**
-         * Calls the `destructor` method of each class which extends Base starting from the parent to the child
+         * Calls the `destructor` method of each class which extends Base starting from the parent to the child.
          * @return {[type]} [description]
          */
         destroy: function() {
@@ -45,7 +45,7 @@
             var ctor = this.constructor;
 
             while(ctor) {
-                if (global.Lang.isFunction(ctor.prototype[wat])) {
+                if (AlloyEditor.Lang.isFunction(ctor.prototype[wat])) {
                     arr.push(ctor.prototype[wat]);
                 }
 
@@ -54,7 +54,7 @@
 
             arr = arr.reverse();
 
-            args = global.Lang.isArray(args) ? args : [args];
+            args = AlloyEditor.Lang.isArray(args) ? args : [args];
 
             for (var i = 0; i < arr.length; i++) {
                 var item = arr[i];
@@ -64,5 +64,5 @@
         }
     });
 
-    global.Base = Base;
+    AlloyEditor.Base = Base;
 }());

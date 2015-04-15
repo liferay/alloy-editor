@@ -43,9 +43,9 @@
             var editor = this.props.editor;
 
             var actions = [
-                <global.AlloyEditor.ButtonCommandListItem command="rowInsertBefore" description="Insert row above" editor={editor} key="rowinsertbefore" />,
-                <global.AlloyEditor.ButtonCommandListItem command="rowInsertAfter" description="Insert row below" editor={editor} key="rowinsertafter" />,
-                <global.AlloyEditor.ButtonCommandListItem command="rowDelete" description="Delete row" editor={editor} key="rowdelete" modifiesSelection={true} />
+                <AlloyEditor.ButtonCommandListItem command="rowInsertBefore" description="Insert row above" editor={editor} key="rowinsertbefore" />,
+                <AlloyEditor.ButtonCommandListItem command="rowInsertAfter" description="Insert row below" editor={editor} key="rowinsertafter" />,
+                <AlloyEditor.ButtonCommandListItem command="rowDelete" description="Delete row" editor={editor} key="rowdelete" modifiesSelection={true} />
             ];
 
             return actions;
@@ -69,5 +69,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonTableRow.key] = global.AlloyEditor.ButtonTableRow = ButtonTableRow;
+    AlloyEditor.Buttons[ButtonTableRow.key] = AlloyEditor.ButtonTableRow = ButtonTableRow;
 }());

@@ -1,0 +1,9 @@
+CKEDITOR.disableAutoInline = true;
+
+(function() {
+    if (window.AlloyEditor) {
+        return;
+    }
+
+    <%= source %>
+}());

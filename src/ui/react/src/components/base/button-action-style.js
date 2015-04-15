@@ -20,7 +20,7 @@
          * Removes or applies style to a selection.
          */
         applyStyle: function() {
-            if (global.Lang.isFunction(this.isActive) && global.Lang.isFunction(this.getStyle)) {
+            if (AlloyEditor.Lang.isFunction(this.isActive) && AlloyEditor.Lang.isFunction(this.getStyle)) {
                 var editor = this.props.editor.get('nativeEditor');
 
                 editor.getSelection().lock();
@@ -38,5 +38,5 @@
         }
     };
 
-    global.ButtonActionStyle = ButtonActionStyle;
+    AlloyEditor.ButtonActionStyle = ButtonActionStyle;
 }());

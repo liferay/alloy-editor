@@ -43,9 +43,9 @@
             var editor = this.props.editor;
 
             var actions = [
-                <global.AlloyEditor.ButtonCommandListItem command="columnInsertBefore" description="Insert column left" editor={editor} key="columninsertbefore" />,
-                <global.AlloyEditor.ButtonCommandListItem command="columnInsertAfter" description="Insert column right" editor={editor} key="columninsertafter" />,
-                <global.AlloyEditor.ButtonCommandListItem command="columnDelete" description="Delete column" editor={editor} key="columndelete" modifiesSelection={true} />
+                <AlloyEditor.ButtonCommandListItem command="columnInsertBefore" description="Insert column left" editor={editor} key="columninsertbefore" />,
+                <AlloyEditor.ButtonCommandListItem command="columnInsertAfter" description="Insert column right" editor={editor} key="columninsertafter" />,
+                <AlloyEditor.ButtonCommandListItem command="columnDelete" description="Delete column" editor={editor} key="columndelete" modifiesSelection={true} />
             ];
 
             return actions;
@@ -69,5 +69,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonTableColumn.key] = global.AlloyEditor.ButtonTableColumn = ButtonTableColumn;
+    AlloyEditor.Buttons[ButtonTableColumn.key] = AlloyEditor.ButtonTableColumn = ButtonTableColumn;
 }());

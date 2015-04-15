@@ -11,7 +11,7 @@
      * @class ButtonLink
      */
     var ButtonLink = React.createClass({
-        mixins: [global.ButtonStateClasses],
+        mixins: [AlloyEditor.ButtonStateClasses],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -40,7 +40,7 @@
 
             if (this.props.renderExclusive) {
                 return (
-                    <global.AlloyEditor.ButtonLinkEdit {...this.props} />
+                    <AlloyEditor.ButtonLinkEdit {...this.props} />
                 );
             } else {
                 return (
@@ -52,5 +52,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonLink.key] = global.AlloyEditor.ButtonLink = ButtonLink;
+    AlloyEditor.Buttons[ButtonLink.key] = AlloyEditor.ButtonLink = ButtonLink;
 }());

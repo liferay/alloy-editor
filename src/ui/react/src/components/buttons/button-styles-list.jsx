@@ -8,7 +8,7 @@
      * @class ButtonStylesList
      */
     var ButtonStylesList = React.createClass({
-        mixins: [global.WidgetFocusManager],
+        mixins: [AlloyEditor.WidgetFocusManager],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -76,15 +76,15 @@
         render: function() {
             return (
                 <div className="alloy-editor-dropdown" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
-                    <global.AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />
+                    <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />
 
-                    <global.AlloyEditor.ButtonsStylesListHeader name="Block styles" styles={this._blockStyles} />
+                    <AlloyEditor.ButtonsStylesListHeader name="Block styles" styles={this._blockStyles} />
                     {this._renderStylesItems(this._blockStyles)}
 
-                    <global.AlloyEditor.ButtonsStylesListHeader name="Inline styles" styles={this._inlineStyles} />
+                    <AlloyEditor.ButtonsStylesListHeader name="Inline styles" styles={this._inlineStyles} />
                     {this._renderStylesItems(this._inlineStyles)}
 
-                    <global.AlloyEditor.ButtonsStylesListHeader name="Object styles" styles={this._objectStyles} />
+                    <AlloyEditor.ButtonsStylesListHeader name="Object styles" styles={this._objectStyles} />
                     {this._renderStylesItems(this._objectStyles)}
                 </div>
             );
@@ -104,7 +104,7 @@
 
             if (styles && styles.length) {
                 items = styles.map(function(item) {
-                    return <global.AlloyEditor.ButtonStylesListItem key={item.name} editor={editor} name={item.name} style={item.style} tabIndex={(trigger && trigger.name === item.name) ? 0 : -1} />
+                    return <AlloyEditor.ButtonStylesListItem key={item.name} editor={editor} name={item.name} style={item.style} tabIndex={(trigger && trigger.name === item.name) ? 0 : -1} />
                 });
             }
 
@@ -112,5 +112,5 @@
         }
     });
 
-    global.AlloyEditor.ButtonStylesList = ButtonStylesList;
+    AlloyEditor.ButtonStylesList = ButtonStylesList;
 }());

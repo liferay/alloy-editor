@@ -18,7 +18,7 @@
         getArrowBoxClasses: function() {
             var arrowBoxClasses = 'alloy-editor-arrow-box';
 
-            if (global.Lang.isFunction(this.getInteractionPoint) && this.getInteractionPoint()) {
+            if (AlloyEditor.Lang.isFunction(this.getInteractionPoint) && this.getInteractionPoint()) {
                 if (this.getInteractionPoint().direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
                     arrowBoxClasses += ' alloy-editor-arrow-box-top';
                 } else {
@@ -30,5 +30,5 @@
         }
     };
 
-    global.WidgetArrowBox = WidgetArrowBox;
+    AlloyEditor.WidgetArrowBox = WidgetArrowBox;
 }());

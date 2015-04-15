@@ -7,7 +7,7 @@
      * @class UI
      */
     var UI = React.createClass({
-        mixins: [global.WidgetExclusive, global.WidgetFocusManager],
+        mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
 
         /**
          * Lifecycle. Invoked once before the component is mounted.
@@ -90,7 +90,7 @@
             }
 
             var toolbars = Object.keys(this.props.toolbars).map(function(toolbar) {
-                return global.AlloyEditor.Toolbars[toolbar] || window[toolbar];
+                return AlloyEditor.Toolbars[toolbar] || window[toolbar];
             });
 
             toolbars = this.filterExclusive(toolbars).map(function(toolbar) {
@@ -187,5 +187,5 @@
         }
     });
 
-    global.AlloyEditor.UI = UI;
+    AlloyEditor.UI = UI;
 }());

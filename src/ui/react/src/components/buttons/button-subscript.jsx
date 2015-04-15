@@ -7,7 +7,7 @@
      * @class ButtonSubscript
      */
     var ButtonSubscript = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         /**
          * Allows validating props being passed to the component.
@@ -56,5 +56,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonSubscript.key] = global.AlloyEditor.ButtonSubscript = ButtonSubscript;
+    AlloyEditor.Buttons[ButtonSubscript.key] = AlloyEditor.ButtonSubscript = ButtonSubscript;
 }());

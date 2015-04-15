@@ -17,7 +17,7 @@
                 Child.superclass.constructor.call(this, config);
             };
 
-            Child = global.OOP.extend(Child, Parent);
+            Child = AlloyEditor.OOP.extend(Child, Parent);
 
             var child = new Child();
 
@@ -35,7 +35,7 @@
                 Child.superclass.constructor.call(this, config);
             };
 
-            Child = global.OOP.extend(Child, Parent, {
+            Child = AlloyEditor.OOP.extend(Child, Parent, {
                 method1: function() {
                     return 7;
                 }
@@ -54,7 +54,7 @@
         assert.throws(function () {
             var Parent = function() {};
 
-            global.OOP.extend(null, Parent);
+            AlloyEditor.OOP.extend(null, Parent);
         });
     });
 }());

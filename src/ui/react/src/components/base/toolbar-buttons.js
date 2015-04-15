@@ -21,14 +21,14 @@
 
             var toolbarButtons = this.filterExclusive(
                 buttons.filter(function(button) {
-                    return button && (global.AlloyEditor.Buttons[button] || global.AlloyEditor.Buttons[button.name]);
+                    return button && (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
                 })
                 .map(function(button) {
-                    if (global.Lang.isString(button)) {
-                        button = global.AlloyEditor.Buttons[button];
-                    } else if (global.Lang.isString(button.name)) {
-                        buttonProps[global.AlloyEditor.Buttons[button.name].key] = button.cfg;
-                        button = global.AlloyEditor.Buttons[button.name];
+                    if (AlloyEditor.Lang.isString(button)) {
+                        button = AlloyEditor.Buttons[button];
+                    } else if (AlloyEditor.Lang.isString(button.name)) {
+                        buttonProps[AlloyEditor.Buttons[button.name].key] = button.cfg;
+                        button = AlloyEditor.Buttons[button.name];
                     }
 
                     return button;
@@ -56,5 +56,5 @@
         }
     };
 
-    global.ToolbarButtons = ToolbarButtons;
+    AlloyEditor.ToolbarButtons = ToolbarButtons;
 }());

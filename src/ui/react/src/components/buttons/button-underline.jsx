@@ -7,7 +7,7 @@
      * @class ButtonUnderline
      */
     var ButtonUnderline = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         /**
          * Allows validating props being passed to the component.
@@ -56,5 +56,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonUnderline.key] = global.AlloyEditor.ButtonUnderline = ButtonUnderline;
+    AlloyEditor.Buttons[ButtonUnderline.key] = AlloyEditor.ButtonUnderline = ButtonUnderline;
 }());

@@ -64,5 +64,5 @@
         }
     }];
 
-    global.Selections = Selections;
+    AlloyEditor.Selections = Selections;
 }());

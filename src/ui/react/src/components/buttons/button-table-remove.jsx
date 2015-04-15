@@ -44,5 +44,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonTableRemove.key] = global.AlloyEditor.ButtonTableRemove = ButtonTableRemove;
+    AlloyEditor.Buttons[ButtonTableRemove.key] = AlloyEditor.ButtonTableRemove = ButtonTableRemove;
 }());

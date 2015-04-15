@@ -7,7 +7,7 @@
      * @class ButtonParagraphAlignLeft
      */
     var ButtonParagraphAlignLeft = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -49,5 +49,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonParagraphAlignLeft.key] = global.AlloyEditor.ButtonParagraphAlignLeft = ButtonParagraphAlignLeft;
+    AlloyEditor.Buttons[ButtonParagraphAlignLeft.key] = AlloyEditor.ButtonParagraphAlignLeft = ButtonParagraphAlignLeft;
 }());

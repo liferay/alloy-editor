@@ -5,14 +5,14 @@
      * AlloyEditor main class. Creates instance of the editor and provides the user configuration
      * to the UI.
      *
-     * @class AlloyEditor
+     * @class Core
      * @constructor
      */
-    function AlloyEditor(config) {
-        AlloyEditor.superclass.constructor.call(this, config);
+    function Core(config) {
+        Core.superclass.constructor.call(this, config);
     }
 
-    global.OOP.extend(AlloyEditor, global.Base, {
+    AlloyEditor.OOP.extend(Core, AlloyEditor.Base, {
         /**
          * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
          * instace, passing it the provided configuration attributes.
@@ -37,7 +37,7 @@
             editor.config.pasteFromWordRemoveStyles = false;
             editor.config.pasteFromWordRemoveFontStyles = false;
 
-            global.Lang.mix(editor.config, config);
+            AlloyEditor.Lang.mix(editor.config, config);
 
             this._editor = editor;
 
@@ -85,13 +85,13 @@
 
             var uiNode = this.get('uiNode') || document.body;
 
-            if (global.Lang.isString(uiNode)) {
+            if (AlloyEditor.Lang.isString(uiNode)) {
                 uiNode = document.getElementById(uiNode);
             }
 
             uiNode.appendChild(editorUIElement);
 
-            this._mainUI = React.render(React.createElement(global.AlloyEditor.UI, {
+            this._mainUI = React.render(React.createElement(AlloyEditor.UI, {
                 editor: this,
                 eventsDelay: this.get('eventsDelay'),
                 toolbars: this.get('toolbars')
@@ -110,7 +110,7 @@
          * @return {Boolean} True if the current value is valid configuration, false otherwise
          */
         _validateAllowedContent: function(value) {
-            return global.Lang.isString(value) || global.Lang.isObject(value) || global.Lang.isBoolean(value);
+            return AlloyEditor.Lang.isString(value) || AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isBoolean(value);
         },
 
         /**
@@ -120,7 +120,7 @@
          * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
          */
         _validateToolbars: function(value) {
-            return global.Lang.isObject(value) || global.Lang.isNull(value);
+            return AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isNull(value);
         }
     }, {
         ATTRS: {
@@ -147,7 +147,7 @@
              * @type {Number}
              */
             eventsDelay: {
-                validator: global.Lang.isNumber,
+                validator: AlloyEditor.Lang.isNumber,
                 value: 100
             },
 
@@ -161,7 +161,7 @@
              * @type {String}
              */
             extraPlugins: {
-                validator: global.Lang.isString,
+                validator: AlloyEditor.Lang.isString,
                 value: 'uicore,selectionregion,dragresize,dropimages,placeholder,tabletools,tableresize,autolink',
                 writeOnce: true
             },
@@ -189,7 +189,7 @@
              * @type {String}
              */
             placeholderClass: {
-                validator: global.Lang.isString,
+                validator: AlloyEditor.Lang.isString,
                 value: 'alloy-editor-placeholder',
                 writeOnce: true
             },
@@ -211,7 +211,7 @@
              * @type {String}
              */
             removePlugins: {
-                validator: global.Lang.isString,
+                validator: AlloyEditor.Lang.isString,
                 value: 'contextmenu,toolbar,elementspath,resize,liststyle,link',
                 writeOnce: true
             },
@@ -222,8 +222,8 @@
              * @type {Object}
              */
             selections: {
-                validator: global.Lang.isArray,
-                value: global.Selections
+                validator: AlloyEditor.Lang.isArray,
+                value: AlloyEditor.Selections
             },
 
             /**
@@ -248,7 +248,7 @@
                         tabIndex: 2
                     },
                     styles: {
-                        selections: global.Selections,
+                        selections: AlloyEditor.Selections,
                         tabIndex: 1
                     }
                 }
@@ -264,14 +264,8 @@
             uiNode: {
                 writeOnce: true
             }
-        },
-
-        Buttons: {},
-
-        Selections: global.Selections,
-
-        Toolbars: {}
+        }
     });
 
-    global.AlloyEditor = AlloyEditor;
+    AlloyEditor.Core = Core;
 }());

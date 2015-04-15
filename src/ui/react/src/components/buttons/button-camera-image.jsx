@@ -161,5 +161,5 @@
          */
     });
 
-    global.AlloyEditor.ButtonCameraImage = ButtonCameraImage;
+    AlloyEditor.ButtonCameraImage = ButtonCameraImage;
 }());

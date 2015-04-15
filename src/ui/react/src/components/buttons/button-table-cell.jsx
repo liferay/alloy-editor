@@ -43,14 +43,14 @@
             var editor = this.props.editor;
 
             var actions = [
-                <global.AlloyEditor.ButtonCommandListItem command="cellInsertBefore" description="Insert cell left" editor={editor} key="cellinsertbefore" />,
-                <global.AlloyEditor.ButtonCommandListItem command="cellInsertAfter" description="Insert cell right" editor={editor} key="cellinsertafter" />,
-                <global.AlloyEditor.ButtonCommandListItem command="cellDelete" description="Delete cell" editor={editor} key="celldelete" modifiesSelection={true} />,
-                <global.AlloyEditor.ButtonCommandListItem command="cellMerge" description="Merge cells" editor={editor} key="cellmerge" />,
-                <global.AlloyEditor.ButtonCommandListItem command="cellMergeDown" description="Merge cell below" editor={editor} key="cellmergedown" />,
-                <global.AlloyEditor.ButtonCommandListItem command="cellMergeRight" description="Merge cell right" editor={editor} key="cellmergeright" />,
-                <global.AlloyEditor.ButtonCommandListItem command="cellHorizontalSplit" description="Split cells horizontally" editor={editor} key="cellsplithorizontal" />,
-                <global.AlloyEditor.ButtonCommandListItem command="cellVerticalSplit" description="Split cells vertically" editor={editor} key="cellsplitvertical" />
+                <AlloyEditor.ButtonCommandListItem command="cellInsertBefore" description="Insert cell left" editor={editor} key="cellinsertbefore" />,
+                <AlloyEditor.ButtonCommandListItem command="cellInsertAfter" description="Insert cell right" editor={editor} key="cellinsertafter" />,
+                <AlloyEditor.ButtonCommandListItem command="cellDelete" description="Delete cell" editor={editor} key="celldelete" modifiesSelection={true} />,
+                <AlloyEditor.ButtonCommandListItem command="cellMerge" description="Merge cells" editor={editor} key="cellmerge" />,
+                <AlloyEditor.ButtonCommandListItem command="cellMergeDown" description="Merge cell below" editor={editor} key="cellmergedown" />,
+                <AlloyEditor.ButtonCommandListItem command="cellMergeRight" description="Merge cell right" editor={editor} key="cellmergeright" />,
+                <AlloyEditor.ButtonCommandListItem command="cellHorizontalSplit" description="Split cells horizontally" editor={editor} key="cellsplithorizontal" />,
+                <AlloyEditor.ButtonCommandListItem command="cellVerticalSplit" description="Split cells vertically" editor={editor} key="cellsplitvertical" />
             ];
 
             return actions;
@@ -76,5 +76,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonTableCell.key] = global.AlloyEditor.ButtonTableCell = ButtonTableCell;
+    AlloyEditor.Buttons[ButtonTableCell.key] = AlloyEditor.ButtonTableCell = ButtonTableCell;
 }());

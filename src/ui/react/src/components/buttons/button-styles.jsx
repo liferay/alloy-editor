@@ -86,7 +86,7 @@
             var buttonStylesList;
 
             if (this.props.expanded) {
-                buttonStylesList = <global.AlloyEditor.ButtonStylesList editor={this.props.editor} styles={this.props.styles} trigger={this.props.trigger} />
+                buttonStylesList = <AlloyEditor.ButtonStylesList editor={this.props.editor} styles={this.props.styles} trigger={this.props.trigger} />
             }
 
             return (
@@ -124,5 +124,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonStyles.key] = global.AlloyEditor.ButtonStyles = ButtonStyles;
+    AlloyEditor.Buttons[ButtonStyles.key] = AlloyEditor.ButtonStyles = ButtonStyles;
 }());

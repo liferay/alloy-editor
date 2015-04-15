@@ -10,7 +10,7 @@
          * @param {Function} supplier The class which will provide the properties the child class.
          * @param {Object} protoProps Prototype properties to add/override.
          * @param {Object} staticProps Static properties to add/overwrite.
-         * @return {Function} The extended class
+         * @return {Function} The extended class.
          */
         extend: function(receiver, supplier, protoProps, staticProps) {
             if (!supplier || !receiver) {
@@ -30,17 +30,17 @@
 
             // add prototype overrides
             if (protoProps) {
-                global.Lang.mix(receiverProto, protoProps);
+                AlloyEditor.Lang.mix(receiverProto, protoProps);
             }
 
             // add object overrides
             if (staticProps) {
-                global.Lang.mix(receiver, staticProps);
+                AlloyEditor.Lang.mix(receiver, staticProps);
             }
 
             return receiver;
         }
     };
 
-    global.OOP = OOP;
+    AlloyEditor.OOP = OOP;
 }());

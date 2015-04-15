@@ -17,7 +17,7 @@
         afterEach(Utils.afterEach);
 
         it('should render just the table button when not in exclusive mode', function() {
-            var buttonTable = React.render(<global.AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={false} />, this.container);
+            var buttonTable = React.render(<AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={false} />, this.container);
 
             var button = TestUtils.findRenderedDOMComponentWithTag(buttonTable, 'button');
 
@@ -28,7 +28,7 @@
         });
 
         it('should show the table edit button when in exclusive mode', function() {
-            var buttonTable = React.render(<global.AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
+            var buttonTable = React.render(<AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
 
             var editTable = TestUtils.findRenderedDOMComponentWithClass(buttonTable, 'alloy-editor-container-edit-table');
 

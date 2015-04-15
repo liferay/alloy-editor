@@ -7,7 +7,7 @@
      * @class ButtonImageAlignLeft
      */
     var ButtonImageAlignLeft = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonStateClasses, global.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -49,5 +49,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonImageAlignLeft.key] = global.AlloyEditor.ButtonImageAlignLeft = ButtonImageAlignLeft;
+    AlloyEditor.Buttons[ButtonImageAlignLeft.key] = AlloyEditor.ButtonImageAlignLeft = ButtonImageAlignLeft;
 }());

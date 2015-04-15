@@ -68,5 +68,5 @@
         }
     });
 
-    global.AlloyEditor.ButtonStylesListItemRemove = ButtonStylesListItemRemove;
+    AlloyEditor.ButtonStylesListItemRemove = ButtonStylesListItemRemove;
 }());

@@ -88,5 +88,5 @@
         }
     };
 
-    global.WidgetExclusive = WidgetExclusive;
+    AlloyEditor.WidgetExclusive = WidgetExclusive;
 }());

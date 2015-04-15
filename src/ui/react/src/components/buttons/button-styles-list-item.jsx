@@ -8,7 +8,7 @@
      * @class ButtonStylesListItem
      */
     var ButtonStylesListItem = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonActionStyle],
 
         /**
          * Lifecycle. Provides static properties to the widget.
@@ -65,5 +65,5 @@
         }
     });
 
-    global.AlloyEditor.ButtonStylesListItem = ButtonStylesListItem;
+    AlloyEditor.ButtonStylesListItem = ButtonStylesListItem;
 }());

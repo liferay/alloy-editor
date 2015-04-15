@@ -7,7 +7,7 @@
      * @class ButtonHline
      */
     var ButtonHline = React.createClass({
-        mixins: [global.ButtonStyle, global.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonCommand],
 
         /**
          * Allows validating props being passed to the component.
@@ -54,5 +54,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonHline.key] = global.AlloyEditor.ButtonHline = ButtonHline;
+    AlloyEditor.Buttons[ButtonHline.key] = AlloyEditor.ButtonHline = ButtonHline;
 }());

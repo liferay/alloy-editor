@@ -108,5 +108,5 @@
         }
     };
 
-    global.Lang = Lang;
+    AlloyEditor.Lang = Lang;
 }());

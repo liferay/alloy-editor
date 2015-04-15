@@ -27,7 +27,7 @@
         render: function() {
             if (this.props.renderExclusive) {
                 return (
-                    <global.AlloyEditor.ButtonTableEdit {...this.props} />
+                    <AlloyEditor.ButtonTableEdit {...this.props} />
                 );
             } else {
                 return (
@@ -39,5 +39,5 @@
         }
     });
 
-    global.AlloyEditor.Buttons[ButtonTable.key] = global.AlloyEditor.ButtonTable = ButtonTable;
+    AlloyEditor.Buttons[ButtonTable.key] = AlloyEditor.ButtonTable = ButtonTable;
 }());
