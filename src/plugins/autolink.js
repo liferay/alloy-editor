@@ -195,11 +195,15 @@
                 // If user pressed `Enter`, get the next editable node at position 0,
                 // otherwise set the cursor at the next character of the link (the white space)
                 if (this._currentKeyCode === KEY_ENTER) {
-                    range.setEnd(range.getNextEditableNode(), 0);
-                    range.setStart(range.getNextEditableNode(), 0);
+                    var nextEditableNode = range.getNextEditableNode();
+
+                    range.setStart(nextEditableNode, 0);
+                    range.setEnd(nextEditableNode, 0);
                 } else {
-                    range.setEnd(range.getNextNode(), 1);
-                    range.setStart(range.getNextNode(), 1);
+                    var nextNode = range.getNextNode();
+
+                    range.setStart(nextNode, 1);
+                    range.setEnd(nextNode, 1);
                 }
 
                 range.select();

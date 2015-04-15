@@ -172,6 +172,22 @@
             });
         });
 
+        it('should create a link at the end of the content when pressing SPACE', function() {
+            testLinkAtEnd.call(this, KEY_SPACE);
+        });
+
+        it('should create a link at the end of the content when pressing COMMA', function() {
+            testLinkAtEnd.call(this, KEY_COMMA);
+        });
+
+        it('should create a link at the end of the content when pressing SEMICOLON', function() {
+            testLinkAtEnd.call(this, KEY_SEMICOLON);
+        });
+
+        it('should create a link at the end of the content when pressing ENTER', function() {
+            testLinkAtEnd.call(this, KEY_ENTER);
+        });
+
         function testLink(config) {
             bender.tools.selection.setWithHtml(this.nativeEditor, config.html);
 
@@ -182,6 +198,26 @@
             var data = getData.call(this);
 
             assert.equal(data, config.expected);
+        }
+
+        function testLinkAtEnd(keyCode) {
+            var linkText = 'www.liferay.com';
+
+            this.nativeEditor.setData(linkText);
+
+            var container = this.nativeEditor.element.getNextSourceNode().getNextSourceNode();
+
+            var range = this.nativeEditor.createRange();
+            range.setStart(container, linkText.length);
+            range.setEnd(container, linkText.length);
+
+            this.nativeEditor.getSelection().selectRanges([range]);
+
+            assert.doesNotThrow(
+                function() {
+                    happen.keyup(this._editable, {keyCode: keyCode});
+                }.bind(this)
+            );
         }
 
         function getData() {
