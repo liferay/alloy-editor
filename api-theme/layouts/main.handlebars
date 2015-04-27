@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>{{htmlTitle}}</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{{projectAssets}}/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{projectAssets}}/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="{{projectAssets}}/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="{{projectName}}" src="{{projectAssets}}/img/logo-small.png" title="{{projectName}}">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>{{projectVersion}}</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    {{>sidebar}}
+                </div>
+            </div>
+            <div class="span9">
+                {{>options}}
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            {{>layout_content}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{projectAssets}}/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="{{projectAssets}}/js/yui-prettify.js"></script>
+    <script src="{{projectAssets}}/../api.js"></script>
+    <script src="{{projectAssets}}/js/api-filter.js"></script>
+    <script src="{{projectAssets}}/js/api-list.js"></script>
+    <script src="{{projectAssets}}/js/api-search.js"></script>
+    <script src="{{projectAssets}}/js/apidocs.js"></script>
+
+</body>
+</html>

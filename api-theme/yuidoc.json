@@ -1,0 +1,9 @@
+{
+    "name": "AlloyUI - API Docs",
+    "description": "AlloyUI is a framework built on top of YUI3 that provides asimple API for building high scalable applications.",
+    "version": "",
+    "options": {
+        "themedir": "../alloy-apidocs-theme",
+        "paths": [ "yui3/src", "alloy-ui/src" ]
+    }
+}
