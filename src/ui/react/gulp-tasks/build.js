@@ -13,12 +13,14 @@ var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var template = require('gulp-template');
 var uglify = require('gulp-uglify');
+var yuidoc = require('gulp-yuidoc-relative');
 var zip = require('gulp-zip');
 
 var rootDir = path.join(__dirname, '..', '..', '..', '..');
 var reactDir = path.join(rootDir, 'src', 'ui', 'react');
 var pkg = require(path.join(rootDir, 'package.json'));
 
+var apiFolder = path.join(rootDir, 'api');
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
 
@@ -72,6 +74,28 @@ gulp.task('release', function(callback) {
     );
 });
 
+gulp.task('build-api', function() {
+    var parseOpts = {
+        project: {
+            name: pkg.name,
+            description: pkg.description,
+            version: pkg.version,
+            url: pkg.homepage
+        }
+    };
+
+    var renderOpts = {
+        themedir: path.join(rootDir, 'api-theme')
+    };
+
+    gulp.src([
+        path.join(rootDir, 'src/core/**/*.js'),
+        path.join(reactDir, 'src/**/*.js*')
+    ])
+    .pipe(yuidoc(parseOpts, renderOpts))
+    .pipe(gulp.dest(apiFolder));
+});
+
 gulp.task('build-demo', function() {
     var templateHead;
 
@@ -97,6 +121,10 @@ gulp.task('build-js', function(callback) {
         'copy-ckeditor',
         'create-alloy-editor-core'
     ], 'wrap-alloy-editor', callback);
+});
+
+gulp.task('clean-api', function(callback) {
+    return del(apiFolder, callback)
 });
 
 gulp.task('clean-dist', function(callback) {
