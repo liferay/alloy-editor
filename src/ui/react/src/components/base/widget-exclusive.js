@@ -13,6 +13,7 @@
         /**
          * Cancels the exclusive state of an widget.
          *
+         * @method cancelExclusive
          * @param {Object} itemExclusive The widget which exclusive state should be canceled.
          */
         cancelExclusive: function(itemExclusive) {
@@ -28,6 +29,7 @@
          * This method is not called for the initial render.
          * Calling this.setState() within this function will not trigger an additional render.
          *
+         * @method componentWillReceiveProps
          * @param {Object} nextProps Object containing the current set of properties.
          */
         componentWillReceiveProps: function(nextProps) {
@@ -42,6 +44,7 @@
         /**
          * Filters the items and returns only those with exclusive state.
          *
+         * @method filterExclusive
          * @param {Array} items The widgets to be filtered.
          * @return {Array|Object} The item with executive state.
          */
@@ -63,6 +66,7 @@
          * - renderExclusive - boolean flag which indicates if an widget should be rendered exclusively.
          * - requestExclusive - function, which can be used by a widget in order to obtain exclusive state.
          *
+         * @method mergeExclusiveProps
          * @param {Object} obj The properties container which should be merged with the properties, related
          *    to exclusive state.
          * @param {Object} itemKey They key of an React Widget which should be rendered exclusively.
@@ -79,6 +83,7 @@
         /**
          * Requests and sets exclusive state of an widget.
          *
+         * @method requestExclusive
          * @param {Object} itemExclusive The widget which requests exclusive state.
          */
         requestExclusive: function(itemExclusive) {

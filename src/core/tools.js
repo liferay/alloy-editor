@@ -14,6 +14,7 @@
      *
      * Passing in a single object will create a shallow copy of it.
      *
+     * @static
      * @method merge
      * @param {Object} objects* One or more objects to merge.
      * @return {Object} A new merged object.
@@ -37,6 +38,8 @@
     /**
      * Simulates event on a DOM element.
      *
+     * @static
+     * @method simulate
      * @param {DOMElement} element The element on which the event shoud be simualted.
      * @param {String} event The name of the event which have to be simulated.
      */

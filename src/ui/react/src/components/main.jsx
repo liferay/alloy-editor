@@ -4,6 +4,9 @@
     /**
      * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
      *
+     * @uses WidgetExclusive
+     * @uses WidgetFocusManager
+     *
      * @class UI
      */
     var UI = React.createClass({
@@ -11,6 +14,8 @@
 
         /**
          * Lifecycle. Invoked once before the component is mounted.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             return {
@@ -21,6 +26,7 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -36,6 +42,8 @@
 
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             var editor = this.props.editor.get('nativeEditor');
@@ -66,6 +74,8 @@
 
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+         *
+         * @method componentWillUnmount
          */
         componentWillUnmount: function() {
             if (this._clickListener) {
@@ -82,6 +92,7 @@
          * Lifecycle. Renders the UI of the editor. This may include several toolbars and buttons.
          * The editor's UI also takes care of rendering the items in exclusive mode.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -118,6 +129,7 @@
          * Listener to the editor's `actionPerformed` event. Sets state and redraws the UI of the editor.
          *
          * @protected
+         * @method _onActionPerformed
          * @param {SynteticEvent} event The provided event
          */
         _onActionPerformed: function(event) {
@@ -137,6 +149,7 @@
          * provides it via component's state property.
          *
          * @protected
+         * @method _onEditorInteraction
          * @param {SynteticEvent} event The provided event
          */
         _onEditorInteraction: function(event) {
@@ -153,6 +166,7 @@
          * Focuses on the active toolbar when the combination ALT+F10 is pressed inside the editor.
          *
          * @protected
+         * @method _onEditorKey
          */
         _onEditorKey: function(event) {
             var nativeEvent = event.data.domEvent.$;
@@ -166,6 +180,8 @@
          * Checks if the target with which the user interacted is part of editor's UI or it is
          * the editable area. If none of these, sets the state of editor's UI to be hidden.
          *
+         * @protected
+         * @method _setUIHidden
          * @param {DOMElement} target The DOM element with which user interacted lastly.
          */
         _setUIHidden: function(target) {

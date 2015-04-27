@@ -9,17 +9,22 @@
      * @class ButtonStyles
      */
     var ButtonStyles = React.createClass({
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default styles
+             */
             key: 'styles'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function () {
@@ -62,6 +67,8 @@
         /**
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             return {
@@ -72,6 +79,7 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -107,7 +115,6 @@
          *
          * @protected
          * @method _checkActive
-         *
          * @param {Object} styleConfig Style definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
          * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
          */

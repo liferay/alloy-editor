@@ -7,17 +7,22 @@
      * @class ButtonImage
      */
     var ButtonImage = React.createClass({
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default image
+             */
             key: 'image'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -37,6 +42,7 @@
         /**
          * Simulates click on the input element. This will open browser's native file open dialog.
          *
+         * @method handleClick
          * @param {SyntheticEvent} event The received click event on the button.
          */
         handleClick: function(event) {
@@ -48,8 +54,8 @@
          * Then, fires an {{#crossLink "ButtonImage/imageadd:event"}}{{/crossLink}} via CKEditor's
          * message system.
          *
-         * @method _onInputChange
          * @protected
+         * @method _onInputChange
          */
         _onInputChange: function() {
             var reader = new FileReader();

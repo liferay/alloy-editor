@@ -10,6 +10,8 @@
         /**
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
+         *
+         * @method componentWillReceiveProps
          */
         componentWillReceiveProps: function (nextProps) {
             this.setState({
@@ -19,6 +21,8 @@
 
         /**
          * Lifecycle. Invoked once before the component is mounted.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             return {
@@ -31,6 +35,7 @@
          * - expanded - boolean flag which indicates if an widget should be rendered exclusively.
          * - toggleDropdown - function, which can be used by an widget in order to obtain exclusive state.
          *
+         * @method mergeDropdownProps
          * @param {Object} obj The properties container which should be merged with the properties, related
          *    to dropdown state.
          * @param {Object} itemKey They key of an React Widget which contains the dropdown.
@@ -46,6 +51,7 @@
         /**
          * Sets the active dropdown of the widget or discards the toggled item from the state.
          *
+         * @method toggleDropdown
          * @param {Object} itemDropdown The widget which requests to toggle its dropdown.
          */
         toggleDropdown: function(itemDropdown) {

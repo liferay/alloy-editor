@@ -4,22 +4,31 @@
     /**
      * The ButtonH2 class provides wraps a selection in `h2` element.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonH2
      */
     var ButtonH2 = React.createClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default h2
+             */
             key: 'h2'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -33,6 +42,7 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {

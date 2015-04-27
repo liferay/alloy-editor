@@ -5,21 +5,30 @@
      * The ButtonStylesListItem class provides functionality for previewing a style definition
      * inside a list and applying it to the current editor selection.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStyle
+     *
      * @class ButtonStylesListItem
      */
     var ButtonStylesListItem = React.createClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default buttonStylesListItem
+             */
             key: 'buttonStylesListItem'
         },
 
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         *
+         * @method componentWillMount
          */
         componentWillMount: function () {
             // Styles with wildcard element (*) generate an empty tag in their preview < class="custom-class" />.
@@ -39,6 +48,7 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {

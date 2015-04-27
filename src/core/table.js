@@ -19,6 +19,7 @@
         /**
          * Creates a table.
          *
+         * @method create
          * @param {Object} config Table configuration object
          * @return {Object} The created table
          */
@@ -90,8 +91,8 @@
         /**
          * Removes a table from the editor.
          *
-         * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
          * @method remove
+         * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
          */
         remove: function(table) {
             var editor = this._editor;
@@ -121,6 +122,7 @@
         /**
          * Assigns provided attributes to a table.
          *
+         * @method setAttributes
          * @param {Object} table The table to which the attributes should be assigned.
          * @param {Object} attrs The attributes which have to be assigned to the table.
          */
@@ -134,6 +136,7 @@
          * Creates a new CKEDITOR.dom.element using the passed tag name.
          *
          * @protected
+         * @method _createElement
          * @param {[type]} name [description]
          * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class.
          */

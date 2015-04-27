@@ -4,22 +4,35 @@
     /**
      * The ToolbarStyles class hosts the buttons for styling a text selection.
      *
+     * @uses WidgetDropdown
+     * @uses WidgetExclusive
+     * @uses WidgetFocusManager
+     * @uses ToolbarButtons
+     * @uses WidgetPosition
+     * @uses WidgetArrowBox
+     *
      * @class ToolbarStyles
      */
     var ToolbarStyles = React.createClass({
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default styles
+             */
             key: 'styles'
         },
 
         /**
          * Lifecycle. Invoked once, only on the client (not on the server),
          * immediately after the initial rendering occurs.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             this._updatePosition();
@@ -29,6 +42,7 @@
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          * This method is not called for the initial render.
          *
+         * @method componentDidUpdate
          * @param {Object} prevProps The previous state of the component's properties.
          * @param {Object} prevState Component's previous state.
          */
@@ -39,6 +53,7 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -55,6 +70,7 @@
         /**
          * Lifecycle. Renders the buttons in the toolbar according to the current selection.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -95,6 +111,7 @@
          * that matches.
          *
          * @protected
+         * @method _getCurrentSelection
          */
         _getCurrentSelection: function() {
             var eventPayload = this.props.editorEvent ? this.props.editorEvent.data : null,

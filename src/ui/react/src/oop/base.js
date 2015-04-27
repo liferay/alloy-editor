@@ -18,6 +18,7 @@
          * Calls the `initializer` method of each class which extends Base starting from the parent to the child.
          * Will pass the configuration object to each initializer method.
          *
+         * @method init
          * @param {Object} config Configuration object
          */
         init: function(config) {
@@ -26,7 +27,8 @@
 
         /**
          * Calls the `destructor` method of each class which extends Base starting from the parent to the child.
-         * @return {[type]} [description]
+         *
+         * @method destroy
          */
         destroy: function() {
             this._callChain('destructor');
@@ -36,6 +38,7 @@
          * Calls a method of each class, which is being present in the hierarchy starting from parent to the child.
          *
          * @protected
+         * @method _callChain
          * @param {String} wat  The method, which should be invoked
          * @param {Object|Array} args The arguments with which the method should be invoked
          */

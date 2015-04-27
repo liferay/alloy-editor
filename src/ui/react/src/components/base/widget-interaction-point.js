@@ -18,6 +18,7 @@
          * This may be the point where the user released the mouse, or just the beginning or the end of
          * the selection.
          *
+         * @method getInteractionPoint
          * @return {Object} An Object which contains the following properties:
          * direction, x, y, where x and y are in page coordinates and direction can be one of these:
          * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
@@ -77,8 +78,8 @@
         /**
          * Returns the position of the Widget.
          *
-         * @method _getXPoint
          * @protected
+         * @method _getXPoint
          * @param {Object} selectionData The data about the selection in the editor as
          * returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
          * @param {Object} eventX The X coordinate received from the native event (mouseup).

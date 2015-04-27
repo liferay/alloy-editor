@@ -10,6 +10,8 @@
         /**
          * Check if the passed value is an array.
          *
+         * @static
+         * @method isArray
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is an array, false otherwise.
          */
@@ -20,6 +22,8 @@
         /**
          * Check if the passed value is boolean.
          *
+         * @static
+         * @method isBoolean
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is boolean, false otherwise.
          */
@@ -30,6 +34,8 @@
         /**
          * Check if the passed value is a function.
          *
+         * @static
+         * @method isFunction
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is a function, false otherwise.
          */
@@ -40,6 +46,8 @@
         /**
          * Check if the passed value is NULL.
          *
+         * @static
+         * @method isNull
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is NULL, false otherwise.
          */
@@ -50,6 +58,8 @@
         /**
          * Check if the passed value is number.
          *
+         * @static
+         * @method isNumber
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is number, false otherwise.
          */
@@ -60,6 +70,8 @@
         /**
          * Check if the passed value is an object
          *
+         * @static
+         * @method isObject
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is an object, false otherwise.
          */
@@ -72,6 +84,8 @@
         /**
          * Check if the passed value is a string.
          *
+         * @static
+         * @method isString
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is a string, false otherwise.
          */
@@ -83,6 +97,8 @@
          * Adds all properties from the supplier to the receiver.
          * The function will add all properties, not only these owned by the supplier.
          *
+         * @static
+         * @method mix
          * @param {Object} receiver The object which will receive properties.
          * @param {Object} supplier The object which provides properties.
          * @return {Object} The modified receiver.
@@ -100,6 +116,8 @@
         /**
          * Converts value to Integer.
          *
+         * @static
+         * @method toInt
          * @param {Any} value The value which have to be converted to Integer.
          * @return {Integer} The converted value.
          */

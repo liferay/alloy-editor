@@ -11,26 +11,40 @@
      * @class ButtonTableEdit
      */
     var ButtonTableEdit = React.createClass({
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+
+            /**
+             * Method to notify the button abandons the exclusive rendering mode.
+             *
+             * @property {Function} cancelExclusive
+             */
             cancelExclusive: React.PropTypes.func.isRequired,
+
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default tableEdit
+             */
             key: 'tableEdit'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
          */
         getDefaultProps: function () {
             return {
@@ -48,6 +62,8 @@
          * immediately after the initial rendering occurs.
          *
          * Focuses on the link input to immediately allow editing.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             React.findDOMNode(this.refs.rows).focus();
@@ -55,6 +71,8 @@
 
         /**
          * Lifecycle. Invoked once before the component is mounted.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             return {
@@ -88,6 +106,7 @@
          * Handles a change in input value. Sets the provided value from the user back to the input.
          *
          * @protected
+         * @method _handleChange
          * @param {String} inputName The name of the input which value should be updated.
          * @param {SyntheticEvent} event The provided event.
          */
@@ -103,9 +122,9 @@
          * - Enter: Creates the table.
          * - Escape: Discards the changes.
          *
-         * @param {SyntheticEvent} event The keyboard event.
          * @protected
          * @method _handleKeyDown
+         * @param {SyntheticEvent} event The keyboard event.
          */
         _handleKeyDown: function(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
@@ -122,6 +141,7 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {

@@ -17,8 +17,8 @@
          * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
          * instace, passing it the provided configuration attributes.
          *
-         * @method initializer
          * @protected
+         * @method initializer
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function(config) {
@@ -48,8 +48,8 @@
          * Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor
          * instance and destroys all created toolbars.
          *
-         * @method destructor
          * @protected
+         * @method destructor
          */
         destructor: function() {
             React.unmountComponentAtNode(this._editorUIElement);
@@ -66,8 +66,8 @@
         /**
          * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
          *
-         * @method _getNativeEditor
          * @protected
+         * @method _getNativeEditor
          * @return {Object} The current instance of CKEditor.
          */
         _getNativeEditor: function() {
@@ -78,6 +78,7 @@
          * Renders the specified from the user toolbars
          *
          * @protected
+         * @method _renderUI
          */
         _renderUI: function() {
             var editorUIElement = document.createElement('div');
@@ -105,8 +106,9 @@
          * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
          * supported values.
          *
-         * @param {Any} The value to be checked
          * @protected
+         * @method _validateAllowedContent
+         * @param {Any} The value to be checked
          * @return {Boolean} True if the current value is valid configuration, false otherwise
          */
         _validateAllowedContent: function(value) {
@@ -116,6 +118,8 @@
         /**
          * Validates the value of toolbars attribute
          *
+         * @protected
+         * @method _validateToolbars
          * @param {Any} The value to be checked
          * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
          */
@@ -129,7 +133,7 @@
              * Look on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)
              * for more information about the valid values.
              *
-             * @attribute allowedContent
+             * @property allowedContent
              * @default true
              * @writeOnce
              * @type {Boolean, String, Object}
@@ -143,7 +147,7 @@
             /**
              * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
              *
-             * @attribute eventsDelay
+             * @property eventsDelay
              * @type {Number}
              */
             eventsDelay: {
@@ -155,7 +159,7 @@
              * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
              * make AlloyEditor to work properly.
              *
-             * @attribute extraPlugins
+             * @property extraPlugins
              * @default 'uicore,selectionregion,dragresize,dropimages,placeholder,tabletools,tableresize,autolink'
              * @writeOnce
              * @type {String}
@@ -169,7 +173,7 @@
             /**
              * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
              *
-             * @attribute nativeEditor
+             * @property nativeEditor
              * @readOnly
              * @type {Object}
              */
@@ -183,7 +187,7 @@
              * {{#crossLink "CKEDITOR.plugins.placeholder}}{{/crossLink}}
              * when editor is not focused.
              *
-             * @attribute placeholderClass
+             * @property placeholderClass
              * @default 'alloy-editor-placeholder'
              * @writeOnce
              * @type {String}
@@ -205,7 +209,7 @@
              * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
              * page!
              *
-             * @attribute removePlugins
+             * @property removePlugins
              * @default 'contextmenu,toolbar,elementspath,resize,liststyle,link'
              * @writeOnce
              * @type {String}
@@ -218,7 +222,7 @@
 
             /**
              * Specifies the type of selections, which will be handled by
-             * @attribute selections
+             * @property selections
              * @type {Object}
              */
             selections: {
@@ -229,7 +233,7 @@
             /**
              * The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.
              *
-             * @attribute srcNode
+             * @property srcNode
              * @type String | Node
              * @writeOnce
              */
@@ -238,7 +242,9 @@
             },
 
             /**
-             * TODO: Explain the configuration below
+             * The toolbars configuration for this editor instance
+             *
+             * @property {Object} toolbars
              */
             toolbars: {
                 validator: '_validateToolbars',
@@ -257,7 +263,7 @@
             /**
              * The Node ID or HTMl node, where AlloyEditor's UI should be rendered.
              *
-             * @attribute uiNode
+             * @property uiNode
              * @type String | Node
              * @writeOnce
              */

@@ -11,11 +11,15 @@
      * @class ButtonLinkEdit
      */
     var ButtonLinkEdit = React.createClass({
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default linkEdit
+             */
             key: 'linkEdit'
         },
 
@@ -23,6 +27,8 @@
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
          * Focuses on the link input to immediately allow editing.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             // We need to wait for the next rendering cycle before focusing to avoid undesired
@@ -37,6 +43,8 @@
         /**
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             var link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
@@ -51,6 +59,7 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -103,10 +112,9 @@
          * - Enter: Creates/updates the link.
          * - Escape: Discards the changes.
          *
-         * @param {SyntheticEvent} event The keyboard event.
-         *
          * @protected
          * @method _handleKeyDown
+         * @param {SyntheticEvent} event The keyboard event.
          */
         _handleKeyDown: function(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
@@ -125,10 +133,9 @@
         /**
          * Updates the component state when the link input changes on user interaction.
          *
-         * @param {SyntheticEvent} event The change event.
-         *
          * @protected
          * @method _handleLinkChange
+         * @param {SyntheticEvent} event The change event.
          */
         _handleLinkChange: function(event) {
             this.setState({

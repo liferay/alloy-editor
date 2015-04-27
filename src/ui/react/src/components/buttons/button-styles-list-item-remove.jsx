@@ -8,26 +8,33 @@
      * @class ButtonStylesListItemRemove
      */
     var ButtonStylesListItemRemove = React.createClass({
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * Block styles that should be removed in addition to all other inline styles
+             *
+             * @property {Array} removeBlocks
+             * @default ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+             */
             removeBlocks: React.PropTypes.array
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        //Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default buttonStylesListItemRemove
+             */
             key: 'buttonStylesListItemRemove'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -39,6 +46,7 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {

@@ -8,22 +8,29 @@
      * - Normal: Just a button that allows to switch to the edition mode
      * - Exclusive: The ButtonLinkEdit UI with all the link edition controls.
      *
+     * @uses ButtonStateClasses
+     *
      * @class ButtonLink
      */
     var ButtonLink = React.createClass({
         mixins: [AlloyEditor.ButtonStateClasses],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default link
+             */
             key: 'link'
         },
 
         /**
          * Checks if the current selection is contained within a link.
          *
+         * @method isActive
          * @return {Boolean} True if the selection is inside a link, false otherwise.
          */
         isActive: function() {
@@ -33,6 +40,7 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {

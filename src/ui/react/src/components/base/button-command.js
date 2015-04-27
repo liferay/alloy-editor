@@ -4,23 +4,23 @@
     /**
      * ButtonCommand is a mixin that executes a command via CKEDITOR's API.
      *
-     * The mixin exposes:
-     * - {string} command: the command that should be executed.
-     * - {boolean} modifiesSelection: indicates that the command may cause the editor to have a different
-     * selection than at the beginning. This is particularly important for commands that perform removal
-     * operations on dom elements.
-     * - {Function} execCommand: executes the provided command via CKEDITOR's API.
-     *
      * @class ButtonCommand
      */
     var ButtonCommand = {
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The command that should be executed.
+             *
+             * @property {string} command
+             */
             command: React.PropTypes.string.isRequired,
+
+            /**
+             * Indicates that the command may cause the editor to have a different.
+             *
+             * @property {boolean} modifiesSelection
+             */
             modifiesSelection: React.PropTypes.bool
         },
 
@@ -28,6 +28,8 @@
          * Executes a CKEditor command and fires `actionPerformed` event.
          *
          * @param {Object=} data Optional data to be passed to CKEDITOR's `execCommand` method.
+         *
+         * @method execCommand
          */
         execCommand: function(data) {
             var editor = this.props.editor.get('nativeEditor');

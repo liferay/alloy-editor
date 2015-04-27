@@ -8,29 +8,39 @@
      * WidgetFocusManager is a mixin that provides keyboard navigation inside a widget. To do this,
      * it exposes the following props and methods:
      *
-     * - {Boolean} circular: Indicates if focus should be set to the first/last descendant when the limits are reached.
-     * - {String} descendants: String representing the CSS selector used to define the elements that should be handled.
-     * - {Object} keys: Object representing the keys used to navigate between descendants. The format for the prop is:
-     *  {next: value, prev: value} where value can be both a number or an array of numbers with the allowed keyCodes.
-     * - {Function} focus: Focuses the current active descendant. Can be attached to the widget DOM node when nested.
-     * - {Function} handleKey: Should be attached to the widget DOM node that should support navigation.
-     *
      * @class WidgetFocusManager
      */
     var WidgetFocusManager = {
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * Indicates if focus should be set to the first/last descendant when the limits are reached.
+             *
+             * @property {boolean} circular
+             */
             circular: React.PropTypes.bool.isRequired,
+
+            /**
+             * String representing the CSS selector used to define the elements that should be handled.
+             *
+             * @property {string} descendants
+             */
             descendants: React.PropTypes.string.isRequired,
+
+            /**
+             * Object representing the keys used to navigate between descendants. The format for the prop is:
+             * `{next: value, prev: value}` where value can be both a number or an array of numbers with the
+             * allowed keyCodes.
+             *
+             * @property {Object} keys
+             */
             keys: React.PropTypes.object.isRequired
         },
 
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function() {
             this._refresh();
@@ -40,6 +50,8 @@
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          *
          * Refreshes the descendants list.
+         *
+         * @method componentDidUpdate
          */
         componentDidUpdate: function() {
             this._refresh();
@@ -89,10 +101,9 @@
          * Returns the direction, if any, in which the focus should be moved. In presence of the
          * shift key modifier, the direction of the movement is inverted.
          *
-         * @param {object} event The Keyboard event.
-         *
          * @protected
          * @method _getDirection
+         * @param {object} event The Keyboard event.
          */
         _getDirection: function(event) {
             var direction = 0;
@@ -125,10 +136,9 @@
          * Indicates if a given element is valid for focus management. User input elements such as
          * input, select or textarea are excluded.
          *
-         * @param {DOMNode} element A DOM element.
-         *
          * @protected
          * @method _isValidKey
+         * @param {DOMNode} element A DOM element.
          * @return {Boolean} A boolean value indicating if the element is valid.
          */
         _isValidTarget: function(element) {
@@ -140,10 +150,9 @@
         /**
          * Moves the focus among descendants in the especified direction.
          *
-         * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
-         *
          * @protected
          * @method _moveFocus
+         * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
          */
         _moveFocus: function(direction) {
             var numDescendants = this._descendants.length;
@@ -172,6 +181,7 @@
          * Refreshes the descendants list by executing the CSS selector again and resets the descendants tabIndex.
          *
          * @protected
+         * @method _refresh
          */
         _refresh: function() {
             var domNode = React.findDOMNode(this);

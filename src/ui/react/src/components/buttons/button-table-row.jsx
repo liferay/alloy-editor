@@ -7,17 +7,22 @@
      * @class ButtonTableRow
      */
     var ButtonTableRow = React.createClass({
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default tableRow
+             */
             key: 'tableRow'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -36,7 +41,6 @@
          *
          * @protected
          * @method _renderActions
-         *
          * @return {Array} Rendered instances of ButtonCommandListItem class
          */
         _renderActions: function() {
@@ -54,6 +58,7 @@
         /**
          * Renders the button dropdown with the associated command items when the button is expanded.
          *
+         * @method _renderDropdown
          * @return {Element} Returns the dropdown element if the button is expanded, null otherwise
          */
         _renderDropdown: function() {

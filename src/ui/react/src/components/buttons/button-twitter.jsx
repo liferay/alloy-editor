@@ -5,30 +5,39 @@
      * The ButtonTwitter class provides functionality for creating a link which
      * allows people to tweet part of the content in the editor.
      *
+     * @uses ButtonStateClasses
+     *
      * @class ButtonTwitter
      */
     var ButtonTwitter = React.createClass({
         mixins: [AlloyEditor.ButtonStateClasses],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default twitter
+             */
             key: 'twitter'
         },
 
         /**
          * Creates or removes the twitter link on the selection.
+         *
+         * @method handleClick
          */
         handleClick: function() {
             var editor = this.props.editor.get('nativeEditor');
@@ -53,6 +62,7 @@
         /**
          * Checks if the current selection is contained within a link that points to twitter.com/intent/tweet.
          *
+         * @method isActive
          * @return {Boolean} True if the selection is inside a twitter link, false otherwise.
          */
         isActive: function() {
@@ -64,6 +74,7 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -81,6 +92,7 @@
          * options received via props.
          *
          * @protected
+         * @method _getHref
          * @return {String} A valid twitter url with the selected text and given configuration.
          */
         _getHref: function() {

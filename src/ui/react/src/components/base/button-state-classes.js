@@ -6,8 +6,8 @@
      * with different CSS classes based on the current state of the element.
      *
      * To check for state, the component can expose the following methods:
-     * - isActive: to check the active state
-     * - isDisabled: to check the disabled state
+     * - `Function` **isActive** to check the active state
+     * - `Function` **isDisabled** to check the disabled state
      *
      * @class ButtonStateClasses
      */

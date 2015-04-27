@@ -7,16 +7,22 @@
      * @class ButtonCameraImage
      */
     var ButtonCameraImage = React.createClass({
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default cameraImage
+             */
             key: 'cameraImage'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
          */
         getDefaultProps: function () {
             return {
@@ -28,6 +34,8 @@
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
          * Focuses the take photo button.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             React.findDOMNode(this.refs.buttonTakePhoto).focus();
@@ -35,6 +43,8 @@
 
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+         *
+         * @method componentWillUnmount
          */
         componentWillUnmount: function() {
             if (this._stream) {
@@ -46,6 +56,7 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -107,9 +118,9 @@
         /**
          * Displays error message in case of video stream capturing failure.
          *
-         * @param {Event} error The fired event in case of error.
          * @protected
          * @method _handleStreamError
+         * @param {Event} error The fired event in case of error.
          */
         _handleStreamError: function(error) {
             window.alert('An error occurred! ' + error);
@@ -119,6 +130,7 @@
          * Starts streaming video in the video element and sets width/height to the video
          * and canvas elements.
          *
+         * @method _handleStreamSuccess
          * @param {Object} stream The video stream
          */
         _handleStreamSuccess: function(stream) {

@@ -5,16 +5,22 @@
      * The ButtonStylesList class provides functionality for showing a list of styles that can be
      * applied to the current selection..
      *
+     * @uses WidgetFocusManager
+     *
      * @class ButtonStylesList
      */
     var ButtonStylesList = React.createClass({
         mixins: [AlloyEditor.WidgetFocusManager],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {string} key
+             * @default buttonStylesList
+             */
             key: 'buttonStylesList'
         },
 
@@ -22,6 +28,8 @@
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
          * Focuses on the list node to allow keyboard interaction.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             React.findDOMNode(this).focus();
@@ -29,6 +37,8 @@
 
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         *
+         * @method componentWillMount
          */
         componentWillMount: function () {
             var blockStyles = [];
@@ -55,6 +65,7 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -71,6 +82,7 @@
         /**
          * Lifecycle. Renders the UI of the list.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -92,9 +104,10 @@
 
         /**
          * Renders instances of ButtonStylesListItem with the preview of the correspondent block, inline or object styles.
-         * @param {Array} styles List of styles for which preview should be rendered.
          *
          * @protected
+         * @method _renderStylesItems
+         * @param {Array} styles List of styles for which preview should be rendered.
          * @return {Array} Rendered instances of ButtonStylesListItem class
          */
         _renderStylesItems: function(styles) {

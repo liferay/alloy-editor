@@ -5,22 +5,28 @@
      * Calculates the position where an Widget should be displayed based on the point
      * where user interacted with the editor.
      *
+     * @uses WidgetInteractionPoint
+     *
      * @class WidgetPosition
      */
     var WidgetPosition = {
         mixins: [AlloyEditor.WidgetInteractionPoint],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The gutter (vertical and horizontal) between the interaction point and where the widget
+             * should be rendered.
+             *
+             * @property {Object} gutter
+             */
             gutter: React.PropTypes.object
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
          */
         getDefaultProps: function() {
             return {
@@ -33,6 +39,8 @@
 
         /**
          * Cancels an scheduled animation frame.
+         *
+         * @method cancelAnimation
          */
         cancelAnimation: function() {
             if (window.cancelAnimationFrame) {
@@ -45,6 +53,7 @@
          * {{#crossLink "WidgetPosition/gutter:attribute"}}{{/crossLink}} attribute.
          *
          * @protected
+         * @method  getWidgetXYPoint
          * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
          * @param {Number} top The top offset in page coordinates where Toolbar should be shown.
          * @param {Number} direction The direction of the selection. May be one of the following:
@@ -86,6 +95,7 @@
         /**
          * Returns true if the widget is visible, false otherwise
          *
+         * @method isVisible
          * @return {Boolean} True if the widget is visible, false otherwise
          */
         isVisible: function() {
@@ -100,6 +110,13 @@
             return false;
         },
 
+        /**
+         * Moves a widget from a starting point to a destination point.
+         *
+         * @method moveToPoint
+         * @param  {Object} startPoint The starting point for the movement.
+         * @param  {Object} endPoint The destination point for the movement.
+         */
         moveToPoint: function(startPoint, endPoint) {
             var domElement = new CKEDITOR.dom.element(this.getDOMNode());
 
@@ -123,6 +140,8 @@
 
         /**
          * Shows the widget with the default animation transition.
+         *
+         * @method show
          */
         show: function() {
             var domNode = React.findDOMNode(this);
@@ -154,6 +173,8 @@
 
         /**
          * Updates the widget position based on the current interaction point.
+         *
+         * @method updatePosition
          */
         updatePosition: function() {
             var interactionPoint = this.getInteractionPoint();
@@ -176,6 +197,7 @@
          * Requests an animation frame, if possible, to simulate an animation.
          *
          * @protected
+         * @method _animate
          * @param {Function} callback The function to be executed on the scheduled frame.
          */
         _animate: function(callback) {
