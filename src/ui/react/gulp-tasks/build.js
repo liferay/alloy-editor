@@ -51,8 +51,10 @@ gulp.task('build', function(callback) {
 
 gulp.task('release', function(callback) {
     runSequence(
+        'clean-api',
         'clean-dist',
         [
+            'build-api',
             'build-css',
             'build-js'
         ],
