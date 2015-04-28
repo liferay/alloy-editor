@@ -284,8 +284,8 @@
                                      * Assigns provided attributes to a table.
                                      *
                                      * @method setAttributes
-                                     * @param {Object} table The table to which the attributes should be assigned.
-                                     * @param {Object} attrs The attributes which have to be assigned to the table.
+                                     * @param {Object} table The table to which the attributes should be assigned
+                                     * @param {Object} attrs The attributes which have to be assigned to the table
                                      */
                                     setAttributes: function(table, attrs) {
                                         Object.keys(attrs).forEach(function(attr) {
@@ -298,8 +298,8 @@
                                      *
                                      * @protected
                                      * @method _createElement
-                                     * @param {[type]} name [description]
-                                     * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class.
+                                     * @param {String} name The tag name from which an element should be created
+                                     * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class
                                      */
                                     _createElement: function(name) {
                                         return new CKEDITOR.dom.element(name, this._editor.document);
