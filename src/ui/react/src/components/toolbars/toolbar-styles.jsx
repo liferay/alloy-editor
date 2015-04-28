@@ -77,10 +77,11 @@
             var currentSelection = this._getCurrentSelection();
 
             if (currentSelection) {
-                var arrowBoxClasses;
+                var getArrowBoxClassesFn = this._getSelectionFunction(currentSelection.getArrowBoxClasses, AlloyEditor.SelectionGetArrowBoxClasses),
+                    arrowBoxClasses;
 
-                if (AlloyEditor.Lang.isFunction(currentSelection.getArrowBoxClasses)) {
-                    arrowBoxClasses = currentSelection.getArrowBoxClasses();
+                if (getArrowBoxClassesFn) {
+                    arrowBoxClasses = getArrowBoxClassesFn();
                 } else {
                     arrowBoxClasses = this.getArrowBoxClasses();
                 }
@@ -107,6 +108,29 @@
         },
 
         /**
+         * Helper method to retrieve a selection-related function. It converts a function or a string
+         * plus function group input into the mapped function.
+         *
+         * @protected
+         * @method _getSelectionFunction
+         * @param  {Function|String} selectionFunction A function, or a string accessor to the
+         * function inside the functionGroup.
+         * @param  {Object} functionGroup Object containing different related methods.
+         * @return {Function} The selection-related function.
+         */
+        _getSelectionFunction: function(selectionFunction, functionGroup) {
+            var selectionFn;
+
+            if (AlloyEditor.Lang.isFunction(selectionFunction)) {
+                selectionFn = selectionFunction;
+            } else if (AlloyEditor.Lang.isString(selectionFunction) && AlloyEditor.Lang.isObject(functionGroup) && AlloyEditor.Lang.isFunction(functionGroup[selectionFunction])){
+                selectionFn = functionGroup[selectionFunction];
+            }
+
+            return selectionFn;
+        },
+
+        /**
          * Analyzes the current editor selection and returns the selection configuration, if any,
          * that matches.
          *
@@ -119,10 +143,15 @@
 
             if (eventPayload) {
                 this.props.config.selections.some(function(item) {
-                    var result = item.test({
-                        data: eventPayload,
-                        editor: this.props.editor
-                    });
+                    var testFn = this._getSelectionFunction(item.test, AlloyEditor.SelectionTest),
+                        result;
+
+                    if (testFn) {
+                        result = testFn({
+                            data: eventPayload,
+                            editor: this.props.editor
+                        });
+                    }
 
                     if (result) {
                         selection = item;
@@ -148,12 +177,16 @@
 
             // If current selection has a function called `setPosition`, call it
             // and check the returned value. If false, fallback to the default positioning logic.
-            if (currentSelection && AlloyEditor.Lang.isFunction(currentSelection.setPosition)) {
-                result = currentSelection.setPosition.call(this, {
-                    editor: this.props.editor,
-                    editorEvent: this.props.editorEvent,
-                    selectionData: this.props.selectionData
-                });
+            if (currentSelection) {
+                var setPositionFn = this._getSelectionFunction(currentSelection.setPosition, AlloyEditor.SelectionSetPosition);
+
+                if (setPositionFn) {
+                    result = setPositionFn.call(this, {
+                        editor: this.props.editor,
+                        editorEvent: this.props.editorEvent,
+                        selectionData: this.props.selectionData
+                    });
+                }
             }
 
             if (!result) {
