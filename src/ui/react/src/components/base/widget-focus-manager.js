@@ -23,7 +23,7 @@
             /**
              * String representing the CSS selector used to define the elements that should be handled.
              *
-             * @property {string} descendants
+             * @property {String} descendants
              */
             descendants: React.PropTypes.string.isRequired,
 

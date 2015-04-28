@@ -12,7 +12,7 @@
             /**
              * The command that should be executed.
              *
-             * @property {string} command
+             * @property {String} command
              */
             command: React.PropTypes.string.isRequired,
 

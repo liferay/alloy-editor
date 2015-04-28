@@ -27,7 +27,7 @@
              * The name which will be used as an alias of the button in the configuration.
              *
              * @static
-             * @property {string} key
+             * @property {String} key
              * @default removeFormat
              */
             key: 'removeFormat'

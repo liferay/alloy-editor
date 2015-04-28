@@ -16,14 +16,14 @@
             /**
              * The command label or description to render in the list entry.
              *
-             * @property {string} description
+             * @property {String} description
              */
             description: React.PropTypes.string.isRequired,
 
             /**
              * The command icon to render in the list entry.
              *
-             * @property {string} icon
+             * @property {String} icon
              */
             icon: React.PropTypes.string
         },
@@ -34,7 +34,7 @@
              * The name which will be used as an alias of the button in the configuration.
              *
              * @static
-             * @property {string} key
+             * @property {String} key
              * @default buttonCommandListItem
              */
             key: 'buttonCommandListItem'
