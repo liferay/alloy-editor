@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/core/table.js - alloy-editor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloy-editor" src="../assets/img/logo-small.png" title="alloy-editor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>0.2.6</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/core/table.js</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                /**
+                                 * Table class utility. Provides methods for create, delete and update tables.
+                                 *
+                                 * @class CKEDITOR.Table
+                                 * @constructor
+                                 * @param {Object} The CKEditor instance.
+                                 */
+                            
+                                function Table(editor) {
+                                    this._editor = editor;
+                                }
+                            
+                                Table.prototype = {
+                                    constructor: Table,
+                            
+                                    /**
+                                     * Creates a table.
+                                     *
+                                     * @method create
+                                     * @param {Object} config Table configuration object
+                                     * @return {Object} The created table
+                                     */
+                                    create: function(config) {
+                                        var editor = this._editor;
+                                        var table = this._createElement(&#x27;table&#x27;);
+                            
+                                        // Generate the rows and cols.
+                                        var tbody = table.append(this._createElement(&#x27;tbody&#x27;));
+                                        var rows = config.rows || 1;
+                                        var cols = config.cols || 1;
+                            
+                                        for (var i = 0; i &lt; rows; i++) {
+                                            var row = tbody.append(this._createElement(&#x27;tr&#x27;));
+                                            for (var j = 0; j &lt; cols; j++) {
+                                                var cell = row.append(this._createElement(&#x27;td&#x27;));
+                            
+                                                cell.appendBogus();
+                                            }
+                                        }
+                            
+                                        if (!table.getAttribute(&#x27;style&#x27;)) {
+                                            table.removeAttribute(&#x27;style&#x27;);
+                                        }
+                            
+                                        this.setAttributes(table, config.attrs);
+                            
+                                        // Insert the table element if we&#x27;re creating one.
+                                        editor.insertElement(table);
+                            
+                                        var firstCell = new CKEDITOR.dom.element(table.$.rows[0].cells[0]);
+                                        var range = editor.createRange();
+                                        range.moveToPosition(firstCell, CKEDITOR.POSITION_AFTER_START);
+                                        range.select();
+                            
+                                        return table;
+                                    },
+                            
+                                    /**
+                                     * Retrieves a table from the current selection.
+                                     *
+                                     * @method getFromSelection
+                                     * @return {CKEDITOR.dom.element} The retrieved table or null if not found.
+                                     */
+                                    getFromSelection: function() {
+                                        var table;
+                                        var selection = this._editor.getSelection();
+                                        var selected = selection.getSelectedElement();
+                            
+                                        if (selected &amp;&amp; selected.is(&#x27;table&#x27;)) {
+                                            table = selected;
+                                        } else {
+                                            var ranges = selection.getRanges();
+                            
+                                            if (ranges.length &gt; 0) {
+                                                // Webkit could report the following range on cell selection (#4948):
+                                                // &lt;table&gt;&lt;tr&gt;&lt;td&gt;[&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]
+                                                if (CKEDITOR.env.webkit) {
+                                                    ranges[0].shrink(CKEDITOR.NODE_ELEMENT);
+                                                }
+                            
+                                                table = this._editor.elementPath(ranges[0].getCommonAncestor(true)).contains(&#x27;table&#x27;, 1);
+                                            }
+                                        }
+                            
+                                        return table;
+                                    },
+                            
+                                    /**
+                                     * Removes a table from the editor.
+                                     *
+                                     * @method remove
+                                     * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
+                                     */
+                                    remove: function(table) {
+                                        var editor = this._editor;
+                            
+                                        if (table) {
+                                            table.remove(editor);
+                                        } else {
+                                            table = editor.elementPath().contains(&#x27;table&#x27;, 1);
+                            
+                                            if (table) {
+                                                // If the table&#x27;s parent has only one child remove it as well (unless it&#x27;s a table cell, or the editable element) (#5416, #6289, #12110)
+                                                var parent = table.getParent(),
+                                                    editable = editor.editable();
+                            
+                                                if (parent.getChildCount() == 1 &amp;&amp; !parent.is(&#x27;td&#x27;, &#x27;th&#x27;) &amp;&amp; !parent.equals(editable)) {
+                                                    table = parent;
+                                                }
+                            
+                                                var range = editor.createRange();
+                                                range.moveToPosition(table, CKEDITOR.POSITION_BEFORE_START);
+                                                table.remove();
+                                                range.select();
+                                            }
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Assigns provided attributes to a table.
+                                     *
+                                     * @method setAttributes
+                                     * @param {Object} table The table to which the attributes should be assigned.
+                                     * @param {Object} attrs The attributes which have to be assigned to the table.
+                                     */
+                                    setAttributes: function(table, attrs) {
+                                        Object.keys(attrs).forEach(function(attr) {
+                                            table.setAttribute(attr, attrs[attr]);
+                                        });
+                                    },
+                            
+                                    /**
+                                     * Creates a new CKEDITOR.dom.element using the passed tag name.
+                                     *
+                                     * @protected
+                                     * @method _createElement
+                                     * @param {[type]} name [description]
+                                     * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class.
+                                     */
+                                    _createElement: function(name) {
+                                        return new CKEDITOR.dom.element(name, this._editor.document);
+                                    }
+                                };
+                            
+                                CKEDITOR.Table = CKEDITOR.Table || Table;
+                            }());
+                            
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

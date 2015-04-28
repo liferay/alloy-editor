@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/react/src/components/buttons/button-table-cell.jsx - alloy-editor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloy-editor" src="../assets/img/logo-small.png" title="alloy-editor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>0.2.6</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-table-cell.jsx</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function () {
+                                &#x27;use strict&#x27;;
+                            
+                                /**
+                                 * The ButtonTableCell class provides functionality to work with table cells.
+                                 *
+                                 * @class ButtonTableCell
+                                 */
+                                var ButtonTableCell = React.createClass({
+                                    // Lifecycle. Provides static properties to the widget.
+                                    statics: {
+                                        /**
+                                         * The name which will be used as an alias of the button in the configuration.
+                                         *
+                                         * @static
+                                         * @property {string} key
+                                         * @default tableCell
+                                         */
+                                        key: &#x27;tableCell&#x27;
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Renders the UI of the button.
+                                     *
+                                     * @method render
+                                     * @return {Object} The content which should be rendered.
+                                     */
+                                    render: function() {
+                                        return (
+                                            &lt;div className=&quot;alloy-editor-container alloy-editor-has-dropdown&quot;&gt;
+                                                &lt;button className=&quot;alloy-editor-button&quot; onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex}&gt;
+                                                    &lt;span className=&quot;alloy-editor-icon-cell&quot;&gt;&lt;/span&gt;
+                                                &lt;/button&gt;
+                                                {this._renderDropdown()}
+                                            &lt;/div&gt;
+                                        );
+                                    },
+                            
+                                    /**
+                                     * Renders instances of ButtonCommandListItem passing the command which has to be executed and the description
+                                     * of the command.
+                                     *
+                                     * @protected
+                                     * @method _renderActions
+                                     * @return {Array} Rendered instances of ButtonCommandListItem class.
+                                     */
+                                    _renderActions: function() {
+                                        var editor = this.props.editor;
+                            
+                                        var actions = [
+                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellInsertBefore&quot; description=&quot;Insert cell left&quot; editor={editor} key=&quot;cellinsertbefore&quot; /&gt;,
+                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellInsertAfter&quot; description=&quot;Insert cell right&quot; editor={editor} key=&quot;cellinsertafter&quot; /&gt;,
+                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellDelete&quot; description=&quot;Delete cell&quot; editor={editor} key=&quot;celldelete&quot; modifiesSelection={true} /&gt;,
+                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellMerge&quot; description=&quot;Merge cells&quot; editor={editor} key=&quot;cellmerge&quot; /&gt;,
+                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellMergeDown&quot; description=&quot;Merge cell below&quot; editor={editor} key=&quot;cellmergedown&quot; /&gt;,
+                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellMergeRight&quot; description=&quot;Merge cell right&quot; editor={editor} key=&quot;cellmergeright&quot; /&gt;,
+                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellHorizontalSplit&quot; description=&quot;Split cells horizontally&quot; editor={editor} key=&quot;cellsplithorizontal&quot; /&gt;,
+                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellVerticalSplit&quot; description=&quot;Split cells vertically&quot; editor={editor} key=&quot;cellsplitvertical&quot; /&gt;
+                                        ];
+                            
+                                        return actions;
+                                    },
+                            
+                                    /*
+                                     * Renders the button dropdown with the associated command items when the button is expanded.
+                                     *
+                                     * @protected
+                                     * @method _renderDropdown
+                                     * @return {Element} Returns the dropdown element if the button is expanded, null otherwise.
+                                     */
+                                    _renderDropdown: function() {
+                                        if (this.props.expanded) {
+                                            return (
+                                                &lt;div className=&quot;alloy-editor-dropdown&quot;&gt;
+                                                    {this._renderActions()}
+                                                &lt;/div&gt;
+                                            );
+                                        }
+                            
+                                        return null;
+                                    }
+                                });
+                            
+                                AlloyEditor.Buttons[ButtonTableCell.key] = AlloyEditor.ButtonTableCell = ButtonTableCell;
+                            }());
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>
