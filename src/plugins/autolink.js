@@ -44,15 +44,13 @@
              * @param {Object} editor The current editor instance
              */
             init: function(editor) {
-                var instance = this;
-
-                editor.on('contentDom', function() {
+                editor.once('contentDom', function() {
                     var editable = editor.editable();
 
-                    editable.attachListener(editable, 'keyup', instance._onKeyUp, instance);
-                });
+                    editable.attachListener(editable, 'keyup', this._onKeyUp, this);
+                }.bind(this));
 
-                instance._editor = editor;
+                this._editor = editor;
             },
 
             /**
@@ -60,7 +58,7 @@
              * caret position backwards until it finds the first white space.
              *
              * @method _getLastWord
-             * @return {String} The last word introduced by user.
+             * @return {String} The last word introduced by user
              * @protected
              */
             _getLastWord: function() {
@@ -114,8 +112,8 @@
              * Checks if the given link is a valid URL.
              *
              * @method isValidURL
-             * @param  {String} link The link we want to know if it is a valid URL.
-             * @return {Boolean} Returns true if the link is a valid URL, false otherwise.
+             * @param {String} link The link we want to know if it is a valid URL
+             * @return {Boolean} Returns true if the link is a valid URL, false otherwise
              * @protected
              */
             _isValidURL: function(link) {
@@ -173,7 +171,7 @@
              * Replaces content by a link element.
              *
              * @method _replaceContentByLink
-             * @param {String} content The text that has to be replaced by an link element.
+             * @param {String} content The text that has to be replaced by an link element
              * @protected
              */
             _replaceContentByLink: function(content) {
