@@ -44,11 +44,15 @@
              * @param {Object} editor The current editor instance
              */
             init: function(editor) {
-                this._editor = editor;
+                var instance = this;
 
-                var editable = editor.editable();
+                editor.on('contentDom', function() {
+                    var editable = editor.editable();
 
-                editable.attachListener(editable, 'keyup', this._onKeyUp, this);
+                    editable.attachListener(editable, 'keyup', instance._onKeyUp, instance);
+                });
+
+                instance._editor = editor;
             },
 
             /**
