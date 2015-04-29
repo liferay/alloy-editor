@@ -77,8 +77,8 @@
             var currentSelection = this._getCurrentSelection();
 
             if (currentSelection) {
-                var getArrowBoxClassesFn = this._getSelectionFunction(currentSelection.getArrowBoxClasses),
-                    arrowBoxClasses;
+                var getArrowBoxClassesFn = this._getSelectionFunction(currentSelection.getArrowBoxClasses);
+                var arrowBoxClasses;
 
                 if (getArrowBoxClassesFn) {
                     arrowBoxClasses = getArrowBoxClassesFn();
@@ -108,27 +108,27 @@
         },
 
         /**
-         * Helper method to retrieve a selection-related function. It converts a fully qualified string
-         * into the mapped function.
+         * Retrieve a function from String. It converts a fully qualified string into the mapped function.
          *
-         * @protected
          * @method _getSelectionFunction
-         * @param  {Function|String} selectionFn A function, or a fully qualified string pointing to the
+         * @protected
+         * @param {Function|String} selectionFn A function, or a fully qualified string pointing to the
          * desired one (e.g. 'AlloyEditor.SelectionTest.image').
-         * @return {Function} The selection-related function.
+         * @return {Function} The mapped function.
          */
         _getSelectionFunction: function(selectionFn) {
-            var Lang = AlloyEditor.Lang,
-                selectionFunction;
+            var Lang = AlloyEditor.Lang;
+            var selectionFunction;
 
             if (Lang.isFunction(selectionFn)) {
                 selectionFunction = selectionFn;
-            } else if (Lang.isString(selectionFn)) {
-                var parts = selectionFn.split('.'),
-                    currentMember = window,
-                    property = parts.shift();
 
-                while(property && Lang.isObject(currentMember) && Lang.isObject(currentMember[property])) {
+            } else if (Lang.isString(selectionFn)) {
+                var parts = selectionFn.split('.');
+                var currentMember = window;
+                var property = parts.shift();
+
+                while (property && Lang.isObject(currentMember) && Lang.isObject(currentMember[property])) {
                     currentMember = currentMember[property];
                     property = parts.shift();
                 }
@@ -142,20 +142,20 @@
         },
 
         /**
-         * Analyzes the current editor selection and returns the selection configuration, if any,
-         * that matches.
+         * Analyzes the current editor selection and returns the selection configuration that matches.
          *
-         * @protected
          * @method _getCurrentSelection
+         * @protected
+         * @return {Object} The matched selection configuration.
          */
         _getCurrentSelection: function() {
-            var eventPayload = this.props.editorEvent ? this.props.editorEvent.data : null,
-                selection;
+            var eventPayload = this.props.editorEvent ? this.props.editorEvent.data : null;
+            var selection;
 
             if (eventPayload) {
                 this.props.config.selections.some(function(item) {
-                    var testFn = this._getSelectionFunction(item.test),
-                        result;
+                    var testFn = this._getSelectionFunction(item.test);
+                    var result;
 
                     if (testFn) {
                         result = testFn({
@@ -183,7 +183,6 @@
          */
         _updatePosition: function() {
             var currentSelection = this._getCurrentSelection();
-
             var result;
 
             // If current selection has a function called `setPosition`, call it
