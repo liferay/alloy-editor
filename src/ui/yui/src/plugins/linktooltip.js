@@ -115,12 +115,10 @@
                  * @protected
                  */
                 _attachHiddenHandle: function() {
-                    var instance = this;
-
                     this._hideHandle = setTimeout(
                         function() {
-                            instance.hide();
-                        },
+                            this.hide();
+                        }.bind(this),
                         this.get('hideTimeout')
                     );
                 },
