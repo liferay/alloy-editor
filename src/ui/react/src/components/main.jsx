@@ -68,8 +68,10 @@
                 this._setUIHidden(document.activeElement);
             }, this.props.eventsDelay, this);
 
-            document.addEventListener('click', this._clickListener);
-            document.addEventListener('keydown', this._keyDownListener);
+            editor.once('contentDom', function() {
+                document.addEventListener('click', this._clickListener);
+                document.addEventListener('keydown', this._keyDownListener);
+            }.bind(this));
         },
 
         /**
