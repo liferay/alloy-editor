@@ -1,6 +1,10 @@
 (function() {
     'use strict';
 
+    var DEFAULT_PROTOCOL = 'http://';
+
+    var REGEX_URI_HAS_PROTOCOL =/\:\/\/|^mailto\:|^\//;
+
     /**
      * Link class utility. Provides methods for create, delete and update links.
      *
@@ -33,6 +37,8 @@
                 range.insertNode(text);
                 range.selectNodeContents(text);
             }
+
+            URI = this._getCompleteURI(URI);
 
             var linkAttrs = CKEDITOR.tools.merge({
                 'data-cke-saved-href': URI,
@@ -118,6 +124,22 @@
                 'data-cke-saved-href': URI,
                 href: URI
             });
+        },
+
+        /**
+         * Checks if the URI has a protocol. If not, the default
+         * protocol 'http://' is added to it.
+         *
+         * @method _getCompleteURI
+         * @param {String} URI The URI of the link.
+         * @return {String} the new URI with his protocol.
+         */
+        _getCompleteURI: function(URI) {
+            if (!URI.match(REGEX_URI_HAS_PROTOCOL)) {
+                URI = DEFAULT_PROTOCOL + URI;
+            }
+
+            return URI;
         }
     };
 
