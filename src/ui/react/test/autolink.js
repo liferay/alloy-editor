@@ -26,13 +26,13 @@
 
         it('should create a link when pressing SPACE', function() {
             testLink.call(this, {
-                expected: '<p>link <a href="www.liferay.com">www.liferay.com</a></p>',
+                expected: '<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
                 html: '<p>link www.liferay.com { }</p>',
                 keyCode: KEY_SPACE
             });
 
             testLink.call(this, {
-                expected: '<p>link <a href="www.liferay.com">www.liferay.com</a> text</p>',
+                expected: '<p>link <a href="http://www.liferay.com">www.liferay.com</a> text</p>',
                 html: '<p>link www.liferay.com { }text</p>',
                 keyCode: KEY_SPACE
             });
@@ -40,13 +40,13 @@
 
         it('should create a link when pressing COMMA', function() {
             testLink.call(this, {
-                expected: '<p>link <a href="www.liferay.com">www.liferay.com</a></p>',
+                expected: '<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
                 html: '<p>link www.liferay.com { }</p>',
                 keyCode: KEY_COMMA
             });
 
             testLink.call(this, {
-                expected: '<p>link <a href="www.liferay.com">www.liferay.com</a> text</p>',
+                expected: '<p>link <a href="http://www.liferay.com">www.liferay.com</a> text</p>',
                 html: '<p>link www.liferay.com { }text</p>',
                 keyCode: KEY_COMMA
             });
@@ -54,13 +54,13 @@
 
         it('should create a link when pressing SEMICOLON', function() {
             testLink.call(this, {
-                expected: '<p>link <a href="www.liferay.com">www.liferay.com</a></p>',
+                expected: '<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
                 html: '<p>link www.liferay.com { }</p>',
                 keyCode: KEY_SEMICOLON
             });
 
             testLink.call(this, {
-                expected: '<p>link <a href="www.liferay.com">www.liferay.com</a> text</p>',
+                expected: '<p>link <a href="http://www.liferay.com">www.liferay.com</a> text</p>',
                 html: '<p>link www.liferay.com { }text</p>',
                 keyCode: KEY_SEMICOLON
             });
@@ -69,10 +69,10 @@
         it('should create a link when pressing ENTER', function() {
             // FIXME: Is there a way to force CKEDITOR to generate consistent markup in case of pressing ENTER?
             // Bender does not fix the generated markup neither.
-            var expected = '<p>link <a href="www.liferay.com">www.liferay.com</a></p><p>text</p>';
+            var expected = '<p>link <a href="http://www.liferay.com">www.liferay.com</a></p><p>text</p>';
 
             if (CKEDITOR.env.ie && CKEDITOR.env.version < 11) {
-                expected = '<p>link <a href="www.liferay.com">www.liferay.com</a><br />&nbsp;</p><p>text</p>';
+                expected = '<p>link <a href="http://www.liferay.com">www.liferay.com</a><br />&nbsp;</p><p>text</p>';
             }
 
             testLink.call(this, {
@@ -128,15 +128,15 @@
 
         it('should not remove a link that has not just been created', function() {
             testLink.call(this, {
-                expected: '<p>link <a href="www.liferay.com">www.liferay.com</a></p>',
-                html: '<p>link <a href="www.liferay.com">www.liferay.com</a> { }</p>',
+                expected: '<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
+                html: '<p>link <a href="http://www.liferay.com">www.liferay.com</a> { }</p>',
                 keyCode: KEY_BACK
             });
         });
 
         it('should convert only valid urls as links', function() {
             testLink.call(this, {
-                expected: '<p>link <a href="www.liferay.org">www.liferay.org</a></p>',
+                expected: '<p>link <a href="http://www.liferay.org">www.liferay.org</a></p>',
                 html: '<p>link www.liferay.org { }</p>',
                 keyCode: KEY_SPACE
             });
