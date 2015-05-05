@@ -49,6 +49,40 @@
             assert.strictEqual(data, '<p>set a <a href="http://test.com" target="_blank">http://test.com</a> and then convert it to a link.</p>');
         });
 
+        it('should add default protocol when creating a link', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, 'set a {selection} and then convert it to a link.');
+
+            link.create('test.com', {
+                target: '_blank'
+            });
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, '<p>set a <a href="http://test.com" target="_blank">selection</a> and then convert it to a link.</p>');
+        });
+
+        it('should not add default protocol if it already has one', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, 'set a {selection} and then convert it to a link.');
+
+            link.create('//test.com', {
+                target: '_blank'
+            });
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, '<p>set a <a href="//test.com" target="_blank">selection</a> and then convert it to a link.</p>');
+        });
+
         it('should retrieve a link from a selection', function() {
             var link = new CKEDITOR.Link(this.nativeEditor);
 
@@ -147,6 +181,24 @@
             });
 
             assert.strictEqual(data, '<p>update the url of a <a href="http://new.com" target="_blank">link</a>.</p>');
+        });
+
+        it('should not add default protocol when updating a link', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<p>update the URL of a {<a href="http://test.com" target="_blank">link</a>}.</p>');
+
+            var linkEl = link.getFromSelection();
+            assert.ok(linkEl);
+
+            link.update('new.com', linkEl);
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, '<p>update the url of a <a href="new.com" target="_blank">link</a>.</p>');
         });
     });
 }());
