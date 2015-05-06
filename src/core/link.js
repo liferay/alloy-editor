@@ -1,9 +1,7 @@
 (function() {
     'use strict';
 
-    var DEFAULT_PROTOCOL = 'http://';
-
-    var REGEX_URI_HAS_PROTOCOL =/\:\/\/|^mailto\:|^\//;
+    var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
 
     /**
      * Link class utility. Provides methods for create, delete and update links.
@@ -113,9 +111,9 @@
         /**
          * Updates the href of an already existing link.
          *
+         * @method update
          * @param {String} URI The new URI of the link.
          * @param {CKEDITOR.dom.element} link The link element which href should be removed.
-         * @method update
          */
         update: function(URI, link) {
             var style = link || this.getFromSelection();
@@ -127,16 +125,16 @@
         },
 
         /**
-         * Checks if the URI has a protocol. If not, the default
-         * protocol 'http://' is added to it.
+         * Checks if the URI has a scheme. If not, the default 'http' scheme with
+         * hierarchical path '//' is added to it.
          *
          * @method _getCompleteURI
          * @param {String} URI The URI of the link.
-         * @return {String} the new URI with his protocol.
+         * @return {String} The URI updated with the protocol.
          */
         _getCompleteURI: function(URI) {
-            if (!URI.match(REGEX_URI_HAS_PROTOCOL)) {
-                URI = DEFAULT_PROTOCOL + URI;
+            if (!REGEX_URI_SCHEME.test(URI)) {
+                URI = 'http://' + URI;
             }
 
             return URI;
