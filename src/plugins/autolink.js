@@ -74,15 +74,24 @@
 
                     var lastChild;
 
-                    // The last child node may be a <BR>, ignore it and find the previous text node
                     if (previousNode) {
+                        // If previous node is a SPACE, (it does not have 'getLast' method),
+                        // ignore it and find the previous text node
+                        while (!previousNode.getLast) {
+                            previousNode = previousNode.getPrevious();
+                        }
+
                         lastChild = previousNode.getLast();
+
+                        // Depending on the browser, the last child node may be a <BR>
+                        // (which does not have 'getText' method),
+                        // so ignore it and find the previous text node
                         while (lastChild && !lastChild.getText()) {
                             lastChild = lastChild.getPrevious();
                         }
                     }
 
-                    // Check if the lastChild is a link
+                    // Check if the lastChild is already a link
                     if (!(lastChild && lastChild.$.href)) {
                         this._startContainer = lastChild;
                         previousText = lastChild ? lastChild.getText() : '';
