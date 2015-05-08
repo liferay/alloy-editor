@@ -116,7 +116,7 @@
         test: AlloyEditor.SelectionTest.table
 }];</code></pre>
 
-<p>The configuration above represents two toolbars - for adding content (images, code, etc.) and modify content based on the current selection type. You may remove any of those and the toolbar won't be shown.</p>
+<p>The configuration above represents two toolbars - for adding content (images, code, etc.) and modify content based on the current selection type. You may remove any of those and the toolbar won't be shown when user makes the corresponding selection.</p>
 
 <span class="code-header">To remove the toolbar for adding content, just <strong>remove</strong> the property <em>add</em></span>
 <pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> toolbars = {
@@ -144,7 +144,7 @@
     test: AlloyEditor.SelectionTest.text
 }];</code></pre>
 
-In this case a different array of styles is passed to the Styles button, so they will show when selecting a text instead of the default ones.
+In this case a different array of styles is passed to the Styles button, so they will be shown when user selects a text instead of the default ones.
 
 <h4 class="guide-step">Reordering Buttons</h4>
 
@@ -157,11 +157,9 @@ If you are not happy with the order of the buttons, you can just reorder them in
     }
 };</code></pre>
 
-<h4 class="guide-step">Remove Buttons</h4>
+<h4 class="guide-step">Removing Buttons</h4>
 
-If you remove a button from the buttons property of a toolbar, then this button won't be available when the toolbar is visible.
-
-<p class="guide-note"></p>
+If you remove a button from the buttons property of a toolbar, or from the selections in Styles toolbar, then this button won't be available when the toolbar gets visible.
     </section>
 
     <div id="disqus_thread"></div>

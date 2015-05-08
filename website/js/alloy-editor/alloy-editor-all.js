@@ -20278,6 +20278,8 @@ CKEDITOR.disableAutoInline = true;
 (function() {
     'use strict';
 
+    var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
+
     /**
      * Link class utility. Provides methods for create, delete and update links.
      *
@@ -20310,6 +20312,8 @@ CKEDITOR.disableAutoInline = true;
                 range.insertNode(text);
                 range.selectNodeContents(text);
             }
+
+            URI = this._getCompleteURI(URI);
 
             var linkAttrs = CKEDITOR.tools.merge({
                 'data-cke-saved-href': URI,
@@ -20384,9 +20388,9 @@ CKEDITOR.disableAutoInline = true;
         /**
          * Updates the href of an already existing link.
          *
+         * @method update
          * @param {String} URI The new URI of the link.
          * @param {CKEDITOR.dom.element} link The link element which href should be removed.
-         * @method update
          */
         update: function(URI, link) {
             var style = link || this.getFromSelection();
@@ -20395,6 +20399,22 @@ CKEDITOR.disableAutoInline = true;
                 'data-cke-saved-href': URI,
                 href: URI
             });
+        },
+
+        /**
+         * Checks if the URI has a scheme. If not, the default 'http' scheme with
+         * hierarchical path '//' is added to it.
+         *
+         * @method _getCompleteURI
+         * @param {String} URI The URI of the link.
+         * @return {String} The URI updated with the protocol.
+         */
+        _getCompleteURI: function(URI) {
+            if (!REGEX_URI_SCHEME.test(URI)) {
+                URI = 'http://' + URI;
+            }
+
+            return URI;
         }
     };
 
@@ -20774,6 +20794,7 @@ CKEDITOR.disableAutoInline = true;
         /**
          * Creates a table.
          *
+         * @method create
          * @param {Object} config Table configuration object
          * @return {Object} The created table
          */
@@ -20845,8 +20866,8 @@ CKEDITOR.disableAutoInline = true;
         /**
          * Removes a table from the editor.
          *
-         * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
          * @method remove
+         * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
          */
         remove: function(table) {
             var editor = this._editor;
@@ -20876,8 +20897,9 @@ CKEDITOR.disableAutoInline = true;
         /**
          * Assigns provided attributes to a table.
          *
-         * @param {Object} table The table to which the attributes should be assigned.
-         * @param {Object} attrs The attributes which have to be assigned to the table.
+         * @method setAttributes
+         * @param {Object} table The table to which the attributes should be assigned
+         * @param {Object} attrs The attributes which have to be assigned to the table
          */
         setAttributes: function(table, attrs) {
             Object.keys(attrs).forEach(function(attr) {
@@ -20889,8 +20911,9 @@ CKEDITOR.disableAutoInline = true;
          * Creates a new CKEDITOR.dom.element using the passed tag name.
          *
          * @protected
-         * @param {[type]} name [description]
-         * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class.
+         * @method _createElement
+         * @param {String} name The tag name from which an element should be created
+         * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class
          */
         _createElement: function(name) {
             return new CKEDITOR.dom.element(name, this._editor.document);
@@ -20916,6 +20939,7 @@ CKEDITOR.disableAutoInline = true;
      *
      * Passing in a single object will create a shallow copy of it.
      *
+     * @static
      * @method merge
      * @param {Object} objects* One or more objects to merge.
      * @return {Object} A new merged object.
@@ -20939,6 +20963,8 @@ CKEDITOR.disableAutoInline = true;
     /**
      * Simulates event on a DOM element.
      *
+     * @static
+     * @method simulate
      * @param {DOMElement} element The element on which the event shoud be simualted.
      * @param {String} event The name of the event which have to be simulated.
      */
@@ -21142,11 +21168,13 @@ CKEDITOR.disableAutoInline = true;
              * @param {Object} editor The current editor instance
              */
             init: function(editor) {
-                this._editor = editor;
+                editor.once('contentDom', function() {
+                    var editable = editor.editable();
 
-                var editable = editor.editable();
-
-                editable.attachListener(editable, 'keyup', this._onKeyUp, this);
+                    editable.attachListener(editable, 'keyup', this._onKeyUp, this, {
+                        editor: editor
+                    });
+                }.bind(this));
             },
 
             /**
@@ -21154,11 +21182,11 @@ CKEDITOR.disableAutoInline = true;
              * caret position backwards until it finds the first white space.
              *
              * @method _getLastWord
-             * @return {String} The last word introduced by user.
+             * @return {String} The last word introduced by user
              * @protected
              */
-            _getLastWord: function() {
-                var range = this._editor.getSelection().getRanges()[0];
+            _getLastWord: function(editor) {
+                var range = editor.getSelection().getRanges()[0];
 
                 var offset = range.startOffset;
 
@@ -21170,15 +21198,24 @@ CKEDITOR.disableAutoInline = true;
 
                     var lastChild;
 
-                    // The last child node may be a <BR>, ignore it and find the previous text node
                     if (previousNode) {
+                        // If previous node is a SPACE, (it does not have 'getLast' method),
+                        // ignore it and find the previous text node
+                        while (!previousNode.getLast) {
+                            previousNode = previousNode.getPrevious();
+                        }
+
                         lastChild = previousNode.getLast();
+
+                        // Depending on the browser, the last child node may be a <BR>
+                        // (which does not have 'getText' method),
+                        // so ignore it and find the previous text node
                         while (lastChild && !lastChild.getText()) {
                             lastChild = lastChild.getPrevious();
                         }
                     }
 
-                    // Check if the lastChild is a link
+                    // Check if the lastChild is already a link
                     if (!(lastChild && lastChild.$.href)) {
                         this._startContainer = lastChild;
                         previousText = lastChild ? lastChild.getText() : '';
@@ -21208,8 +21245,8 @@ CKEDITOR.disableAutoInline = true;
              * Checks if the given link is a valid URL.
              *
              * @method isValidURL
-             * @param  {String} link The link we want to know if it is a valid URL.
-             * @return {Boolean} Returns true if the link is a valid URL, false otherwise.
+             * @param {String} link The link we want to know if it is a valid URL
+             * @return {Boolean} Returns true if the link is a valid URL, false otherwise
              * @protected
              */
             _isValidURL: function(link) {
@@ -21227,7 +21264,9 @@ CKEDITOR.disableAutoInline = true;
             _onKeyDown: function(event) {
                 var nativeEvent = event.data.$;
 
-                var editable = this._editor.editable();
+                var editor = event.listenerData.editor;
+
+                var editable = editor.editable();
 
                 editable.removeListener('keydown', this._onKeyDown);
 
@@ -21235,7 +21274,7 @@ CKEDITOR.disableAutoInline = true;
                     event.cancel();
                     event.data.preventDefault();
 
-                    this._removeLink();
+                    this._removeLink(editor);
                 }
 
                 this._ckLink = null;
@@ -21255,10 +21294,12 @@ CKEDITOR.disableAutoInline = true;
                 this._currentKeyCode = nativeEvent.keyCode;
 
                 if (DELIMITERS.indexOf(this._currentKeyCode) !== -1) {
-                    var lastWord = this._getLastWord();
+                    var editor = event.listenerData.editor;
+
+                    var lastWord = this._getLastWord(editor);
 
                     if (this._isValidURL(lastWord)) {
-                        this._replaceContentByLink(lastWord);
+                        this._replaceContentByLink(editor, lastWord);
                     }
                 }
             },
@@ -21267,11 +21308,11 @@ CKEDITOR.disableAutoInline = true;
              * Replaces content by a link element.
              *
              * @method _replaceContentByLink
-             * @param {String} content The text that has to be replaced by an link element.
+             * @param {String} content The text that has to be replaced by an link element
              * @protected
              */
-            _replaceContentByLink: function(content) {
-                var range = this._editor.createRange();
+            _replaceContentByLink: function(editor, content) {
+                var range = editor.createRange();
                 var node = CKEDITOR.dom.element.get(this._startContainer);
                 var offset = this._offset;
 
@@ -21280,15 +21321,15 @@ CKEDITOR.disableAutoInline = true;
                 range.setEnd(node, offset);
                 range.select();
 
-                var ckLink = new CKEDITOR.Link(this._editor);
+                var ckLink = new CKEDITOR.Link(editor);
                 ckLink.create(content);
                 this._ckLink = ckLink;
 
-                this._subscribeToKeyEvent();
+                this._subscribeToKeyEvent(editor);
 
                 // Now range is on the link and it is selected. We have to
                 // return focus to the caret position.
-                range = this._editor.getSelection().getRanges()[0];
+                range = editor.getSelection().getRanges()[0];
 
                 // If user pressed `Enter`, get the next editable node at position 0,
                 // otherwise set the cursor at the next character of the link (the white space)
@@ -21313,14 +21354,14 @@ CKEDITOR.disableAutoInline = true;
              * @method _removeLink
              * @protected
              */
-            _removeLink: function() {
-                var range = this._editor.getSelection().getRanges()[0];
+            _removeLink: function(editor) {
+                var range = editor.getSelection().getRanges()[0];
                 var caretOffset = range.startOffset;
 
                 // Select the link, so CKEDITOR.Link can properly remove it
                 var linkNode = this._startContainer.getNext() || this._startContainer;
 
-                var newRange = this._editor.createRange();
+                var newRange = editor.createRange();
                 newRange.setStart(linkNode, 0);
                 newRange.setEndAfter(linkNode);
                 newRange.select();
@@ -21340,13 +21381,15 @@ CKEDITOR.disableAutoInline = true;
              * @method _subscribeToKeyEvent
              * @protected
              */
-            _subscribeToKeyEvent: function() {
-                var editable = this._editor.editable();
+            _subscribeToKeyEvent: function(editor) {
+                var editable = editor.editable();
 
                 // Change the priority of keydown listener - 1 means the highest priority.
                 // In Chrome on pressing `Enter` the listener is not being invoked.
                 // See http://dev.ckeditor.com/ticket/11861 for more information.
-                editable.attachListener(editable, 'keydown', this._onKeyDown, this, {}, 1);
+                editable.attachListener(editable, 'keydown', this._onKeyDown, this, {
+                    editor: editor
+                }, 1);
             }
         }
     );
@@ -23453,6 +23496,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Check if the passed value is an array.
          *
+         * @static
+         * @method isArray
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is an array, false otherwise.
          */
@@ -23463,6 +23508,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Check if the passed value is boolean.
          *
+         * @static
+         * @method isBoolean
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is boolean, false otherwise.
          */
@@ -23473,6 +23520,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Check if the passed value is a function.
          *
+         * @static
+         * @method isFunction
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is a function, false otherwise.
          */
@@ -23483,6 +23532,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Check if the passed value is NULL.
          *
+         * @static
+         * @method isNull
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is NULL, false otherwise.
          */
@@ -23493,6 +23544,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Check if the passed value is number.
          *
+         * @static
+         * @method isNumber
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is number, false otherwise.
          */
@@ -23503,6 +23556,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Check if the passed value is an object
          *
+         * @static
+         * @method isObject
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is an object, false otherwise.
          */
@@ -23515,6 +23570,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Check if the passed value is a string.
          *
+         * @static
+         * @method isString
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is a string, false otherwise.
          */
@@ -23526,6 +23583,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Adds all properties from the supplier to the receiver.
          * The function will add all properties, not only these owned by the supplier.
          *
+         * @static
+         * @method mix
          * @param {Object} receiver The object which will receive properties.
          * @param {Object} supplier The object which provides properties.
          * @return {Object} The modified receiver.
@@ -23543,6 +23602,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Converts value to Integer.
          *
+         * @static
+         * @method toInt
          * @param {Any} value The value which have to be converted to Integer.
          * @return {Integer} The converted value.
          */
@@ -23562,6 +23623,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Sets the prototype, constructor and superclass properties to support an inheritance strategy
          * that can chain constructors and methods. Static members will not be inherited.
          *
+         * @static
+         * @method extend
          * @param {Function} receiver The class which will extend another class.
          * @param {Function} supplier The class which will provide the properties the child class.
          * @param {Object} protoProps Prototype properties to add/override.
@@ -23620,6 +23683,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Retrieves the value of an attribute.
          *
+         * @method get
          * @param {String} attr The attribute which value should be retrieved.
          * @return {Any} The value of the attribute.
          */
@@ -23646,6 +23710,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Sets the value of an attribute.
          *
+         * @method set
          * @param {String} attr The attribute which value should be set.
          * @param {Any} value The value which should be set to the attribute.
          */
@@ -23684,6 +23749,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * If param provided as string, a corresponding function in this object will
          * be called. If provided param is a function, it will be directly called.
          *
+         * @protected
+         * @method _callStringOrFunction
          * @param  {String|Function} stringOrFunction The function which should be called
          * @param  {Any|Array} args The arguments which will be provided to the called function
          * @return {Any} The returned value from the called function
@@ -23708,6 +23775,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Initializes an attribute. Sets its default value depending on the flags of the
          * attribute and the passed configuration object to the constructor.
          *
+         * @protected
+         * @method _init
          * @param {String} attr The name of the attribute which have to be initialized.
          */
         _init: function(attr) {
@@ -23775,6 +23844,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * when there is an own property with this name in the local collection of attribute values
          * for the current instance.
          *
+         * @protected
+         * @method _isInitialized
          * @param {String} attr The attribute which should be checked if it is initialized.
          * @return {Boolean} Returns true if the attribute has been initialized, false otherwise.
          */
@@ -23805,6 +23876,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Calls the `initializer` method of each class which extends Base starting from the parent to the child.
          * Will pass the configuration object to each initializer method.
          *
+         * @method init
          * @param {Object} config Configuration object
          */
         init: function(config) {
@@ -23813,7 +23885,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Calls the `destructor` method of each class which extends Base starting from the parent to the child.
-         * @return {[type]} [description]
+         *
+         * @method destroy
          */
         destroy: function() {
             this._callChain('destructor');
@@ -23823,6 +23896,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Calls a method of each class, which is being present in the hierarchy starting from parent to the child.
          *
          * @protected
+         * @method _callChain
          * @param {String} wat  The method, which should be invoked
          * @param {Object|Array} args The arguments with which the method should be invoked
          */
@@ -23857,67 +23931,104 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 (function() {
     'use strict';
 
+    var tableSelectionGetArrowBoxClasses = function() {
+        return 'alloy-editor-arrow-box alloy-editor-arrow-box-bottom';
+    };
+
+    AlloyEditor.SelectionGetArrowBoxClasses = {
+        table: tableSelectionGetArrowBoxClasses
+    };
+}());
+
+(function() {
+    'use strict';
+
+    var tableSelectionSetPosition = function(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+
+        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var clientRect = table.getClientRect();
+
+        var toolbarNode = this.getDOMNode();
+        var halfToolbarWidth = toolbarNode.offsetWidth / 2;
+        var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
+
+        var widgetXY = this.getWidgetXYPoint(clientRect.left + clientRect.width / 2 - scrollPos.x, clientRect.top + scrollPos.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+
+        this.moveToPoint([
+            widgetXY[0],
+            widgetXY[1]
+        ], [
+            clientRect.left + clientRect.width / 2 - halfToolbarWidth - scrollPos.x,
+            clientRect.top - toolbarNode.offsetHeight + scrollPos.y
+        ]);
+
+        return true;
+    };
+
+    AlloyEditor.SelectionSetPosition = {
+        table: tableSelectionSetPosition
+    };
+}());
+(function() {
+    'use strict';
+
+    var linkSelectionTest = function(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+
+        return !nativeEditor.isSelectionEmpty() && (new CKEDITOR.Link(nativeEditor).getFromSelection());
+    };
+
+    var imageSelectionTest = function(payload) {
+        var selectionData = payload.data.selectionData;
+
+        return (selectionData.element && selectionData.element.getName() === 'img');
+    };
+
+    var textSelectionTest = function(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+
+        var selectionEmpty = nativeEditor.isSelectionEmpty();
+
+        var selectionData = payload.data.selectionData;
+
+        return (!selectionData.element && selectionData.region && !selectionEmpty);
+    };
+
+    var tableSelectionTest = function(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+
+        return !!(new CKEDITOR.Table(nativeEditor).getFromSelection());
+    };
+
+    AlloyEditor.SelectionTest = {
+        image: imageSelectionTest,
+        link: linkSelectionTest,
+        table: tableSelectionTest,
+        text: textSelectionTest
+    };
+}());
+(function() {
+    'use strict';
+
     var Selections = [{
         name: 'link',
         buttons: ['linkEdit'],
-        test: function(payload) {
-            var nativeEditor = payload.editor.get('nativeEditor');
-
-            return !nativeEditor.isSelectionEmpty() && (new CKEDITOR.Link(nativeEditor).getFromSelection());
-        }
+        test: AlloyEditor.SelectionTest.link
     }, {
         name: 'image',
         buttons: ['imageLeft', 'imageRight'],
-        test: function(payload) {
-            var selectionData = payload.data.selectionData;
-
-            return (selectionData.element && selectionData.element.getName() === 'img');
-        }
+        test: AlloyEditor.SelectionTest.image
     }, {
         name: 'text',
         buttons: ['styles', 'bold', 'italic', 'underline', 'link', 'twitter'],
-        test: function(payload) {
-            var nativeEditor = payload.editor.get('nativeEditor');
-
-            var selectionEmpty = nativeEditor.isSelectionEmpty();
-
-            var selectionData = payload.data.selectionData;
-
-            return (!selectionData.element && selectionData.region && !selectionEmpty);
-        }
+        test: AlloyEditor.SelectionTest.text
     }, {
         name: 'table',
         buttons: ['tableRow', 'tableColumn', 'tableCell', 'tableRemove'],
-        getArrowBoxClasses: function() {
-            return 'alloy-editor-arrow-box alloy-editor-arrow-box-bottom';
-        },
-        setPosition: function(payload) {
-            var nativeEditor = payload.editor.get('nativeEditor');
-
-            var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
-            var clientRect = table.getClientRect();
-
-            var toolbarNode = this.getDOMNode();
-            var halfToolbarWidth = toolbarNode.offsetWidth/2;
-            var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
-
-            var widgetXY = this.getWidgetXYPoint(clientRect.left + clientRect.width/2 - scrollPos.x, clientRect.top + scrollPos.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
-
-            this.moveToPoint([
-                widgetXY[0],
-                widgetXY[1]
-            ], [
-                clientRect.left + clientRect.width/2 - halfToolbarWidth - scrollPos.x,
-                clientRect.top - toolbarNode.offsetHeight + scrollPos.y
-            ]);
-
-            return true;
-        },
-        test: function(payload) {
-            var nativeEditor = payload.editor.get('nativeEditor');
-
-            return !!(new CKEDITOR.Table(nativeEditor).getFromSelection());
-        }
+        getArrowBoxClasses: AlloyEditor.SelectionGetArrowBoxClasses.table,
+        setPosition: AlloyEditor.SelectionSetPosition.table,
+        test: AlloyEditor.SelectionTest.table
     }];
 
     AlloyEditor.Selections = Selections;
@@ -23931,18 +24042,17 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * button based on the `applyStyle` and `removeStyle` API of CKEDITOR.
      *
      * To execute properly, the component has to expose the following methods which can be obtained
-     * out of the box using the ButtonStyle mixin:
-     * - isActive: to check the active state
-     * - getStyle: to return the style that should be applied
-     *
-     * The mixin exposes:
-     * - {Function} applyStyle: the function to attached to the button
+     * out of the box using the {{#crossLink "ButtonStyle"}}{{/crossLink}} mixin:
+     * - `Function` {{#crossLink "ButtonStyle/isActive"}}{{/crossLink}} to check the active state
+     * - `Function` {{#crossLink "ButtonStyle/getStyle"}}{{/crossLink}} to return the style that should be applied
      *
      * @class ButtonActionStyle
      */
     var ButtonActionStyle = {
         /**
-         * Removes or applies style to a selection.
+         * Removes or applies the component style to the current selection.
+         *
+         * @method applyStyle
          */
         applyStyle: function() {
             if (AlloyEditor.Lang.isFunction(this.isActive) && AlloyEditor.Lang.isFunction(this.getStyle)) {
@@ -23971,23 +24081,23 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * ButtonCommand is a mixin that executes a command via CKEDITOR's API.
      *
-     * The mixin exposes:
-     * - {string} command: the command that should be executed.
-     * - {boolean} modifiesSelection: indicates that the command may cause the editor to have a different
-     * selection than at the beginning. This is particularly important for commands that perform removal
-     * operations on dom elements.
-     * - {Function} execCommand: executes the provided command via CKEDITOR's API.
-     *
      * @class ButtonCommand
      */
     var ButtonCommand = {
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The command that should be executed.
+             *
+             * @property {String} command
+             */
             command: React.PropTypes.string.isRequired,
+
+            /**
+             * Indicates that the command may cause the editor to have a different.
+             *
+             * @property {boolean} modifiesSelection
+             */
             modifiesSelection: React.PropTypes.bool
         },
 
@@ -23995,6 +24105,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Executes a CKEditor command and fires `actionPerformed` event.
          *
          * @param {Object=} data Optional data to be passed to CKEDITOR's `execCommand` method.
+         *
+         * @method execCommand
          */
         execCommand: function(data) {
             var editor = this.props.editor.get('nativeEditor');
@@ -24019,8 +24131,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * with different CSS classes based on the current state of the element.
      *
      * To check for state, the component can expose the following methods:
-     * - isActive: to check the active state
-     * - isDisabled: to check the disabled state
+     * - `Function` **isActive** to check the active state
+     * - `Function` **isDisabled** to check the disabled state
      *
      * @class ButtonStateClasses
      */
@@ -24058,25 +24170,23 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * ButtonStyle is a mixin that provides a style prop and some methods to apply the resulting
      * style and checking if it is present in a given path or selection.
      *
-     * The mixin exposes:
-     * - {object} style: The style the button should handle as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
-     * - {Function} getStyle: Returns the CKEDITOR style associated with the element.
-     * - {Function} isActive: Checks wether or not the button is active based on the element.
-     *
      * @class ButtonStyle
      */
     var ButtonStyle = {
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The style the button should handle as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style
+             *
+             * @property {Object} style
+             */
             style: React.PropTypes.object
         },
 
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         *
+         * @method componentWillMount
          */
         componentWillMount: function() {
             this._style = new CKEDITOR.style(this.props.style);
@@ -24084,6 +24194,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+         *
+         * @method componentWillUnmount
          */
         componentWillUnmount: function() {
             this._style = null;
@@ -24091,6 +24203,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Returns instance of CKEDITOR.style which represents the current button style.
+         *
+         * @method getStyle
          * @return {CKEDITOR.style} The current style representation.
          */
         getStyle: function() {
@@ -24100,6 +24214,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Checks if style is active in the current selection.
          *
+         * @method isActive
          * @return {Boolean} True if style is active, false otherwise.
          */
         isActive: function() {
@@ -24131,6 +24246,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Analyzes the current selection and the buttons exclusive mode value to figure out which
          * buttons should be present in a given state.
          *
+         * @method getToolbarButtons
          * @param {Array} buttons The buttons could be shown, prior to the state filtering.
          * @param {Object} additionalProps Additional props that should be passed down to the buttons.
          * @return {Array} An Array which contains the buttons that should be rendered.
@@ -24223,6 +24339,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
+         *
+         * @method componentWillReceiveProps
          */
         componentWillReceiveProps: function (nextProps) {
             this.setState({
@@ -24232,6 +24350,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Lifecycle. Invoked once before the component is mounted.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             return {
@@ -24244,6 +24364,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * - expanded - boolean flag which indicates if an widget should be rendered exclusively.
          * - toggleDropdown - function, which can be used by an widget in order to obtain exclusive state.
          *
+         * @method mergeDropdownProps
          * @param {Object} obj The properties container which should be merged with the properties, related
          *    to dropdown state.
          * @param {Object} itemKey They key of an React Widget which contains the dropdown.
@@ -24259,6 +24380,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Sets the active dropdown of the widget or discards the toggled item from the state.
          *
+         * @method toggleDropdown
          * @param {Object} itemDropdown The widget which requests to toggle its dropdown.
          */
         toggleDropdown: function(itemDropdown) {
@@ -24285,6 +24407,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Cancels the exclusive state of an widget.
          *
+         * @method cancelExclusive
          * @param {Object} itemExclusive The widget which exclusive state should be canceled.
          */
         cancelExclusive: function(itemExclusive) {
@@ -24300,6 +24423,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * This method is not called for the initial render.
          * Calling this.setState() within this function will not trigger an additional render.
          *
+         * @method componentWillReceiveProps
          * @param {Object} nextProps Object containing the current set of properties.
          */
         componentWillReceiveProps: function(nextProps) {
@@ -24314,6 +24438,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Filters the items and returns only those with exclusive state.
          *
+         * @method filterExclusive
          * @param {Array} items The widgets to be filtered.
          * @return {Array|Object} The item with executive state.
          */
@@ -24335,6 +24460,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * - renderExclusive - boolean flag which indicates if an widget should be rendered exclusively.
          * - requestExclusive - function, which can be used by a widget in order to obtain exclusive state.
          *
+         * @method mergeExclusiveProps
          * @param {Object} obj The properties container which should be merged with the properties, related
          *    to exclusive state.
          * @param {Object} itemKey They key of an React Widget which should be rendered exclusively.
@@ -24351,6 +24477,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Requests and sets exclusive state of an widget.
          *
+         * @method requestExclusive
          * @param {Object} itemExclusive The widget which requests exclusive state.
          */
         requestExclusive: function(itemExclusive) {
@@ -24372,29 +24499,39 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * WidgetFocusManager is a mixin that provides keyboard navigation inside a widget. To do this,
      * it exposes the following props and methods:
      *
-     * - {Boolean} circular: Indicates if focus should be set to the first/last descendant when the limits are reached.
-     * - {String} descendants: String representing the CSS selector used to define the elements that should be handled.
-     * - {Object} keys: Object representing the keys used to navigate between descendants. The format for the prop is:
-     *  {next: value, prev: value} where value can be both a number or an array of numbers with the allowed keyCodes.
-     * - {Function} focus: Focuses the current active descendant. Can be attached to the widget DOM node when nested.
-     * - {Function} handleKey: Should be attached to the widget DOM node that should support navigation.
-     *
      * @class WidgetFocusManager
      */
     var WidgetFocusManager = {
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * Indicates if focus should be set to the first/last descendant when the limits are reached.
+             *
+             * @property {boolean} circular
+             */
             circular: React.PropTypes.bool.isRequired,
+
+            /**
+             * String representing the CSS selector used to define the elements that should be handled.
+             *
+             * @property {String} descendants
+             */
             descendants: React.PropTypes.string.isRequired,
+
+            /**
+             * Object representing the keys used to navigate between descendants. The format for the prop is:
+             * `{next: value, prev: value}` where value can be both a number or an array of numbers with the
+             * allowed keyCodes.
+             *
+             * @property {Object} keys
+             */
             keys: React.PropTypes.object.isRequired
         },
 
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function() {
             this._refresh();
@@ -24404,6 +24541,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          *
          * Refreshes the descendants list.
+         *
+         * @method componentDidUpdate
          */
         componentDidUpdate: function() {
             this._refresh();
@@ -24453,10 +24592,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Returns the direction, if any, in which the focus should be moved. In presence of the
          * shift key modifier, the direction of the movement is inverted.
          *
-         * @param {object} event The Keyboard event.
-         *
          * @protected
          * @method _getDirection
+         * @param {object} event The Keyboard event.
          */
         _getDirection: function(event) {
             var direction = 0;
@@ -24489,10 +24627,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Indicates if a given element is valid for focus management. User input elements such as
          * input, select or textarea are excluded.
          *
-         * @param {DOMNode} element A DOM element.
-         *
          * @protected
          * @method _isValidKey
+         * @param {DOMNode} element A DOM element.
          * @return {Boolean} A boolean value indicating if the element is valid.
          */
         _isValidTarget: function(element) {
@@ -24504,10 +24641,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Moves the focus among descendants in the especified direction.
          *
-         * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
-         *
          * @protected
          * @method _moveFocus
+         * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
          */
         _moveFocus: function(direction) {
             var numDescendants = this._descendants.length;
@@ -24536,6 +24672,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Refreshes the descendants list by executing the CSS selector again and resets the descendants tabIndex.
          *
          * @protected
+         * @method _refresh
          */
         _refresh: function() {
             var domNode = React.findDOMNode(this);
@@ -24585,6 +24722,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * This may be the point where the user released the mouse, or just the beginning or the end of
          * the selection.
          *
+         * @method getInteractionPoint
          * @return {Object} An Object which contains the following properties:
          * direction, x, y, where x and y are in page coordinates and direction can be one of these:
          * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
@@ -24644,8 +24782,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Returns the position of the Widget.
          *
-         * @method _getXPoint
          * @protected
+         * @method _getXPoint
          * @param {Object} selectionData The data about the selection in the editor as
          * returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
          * @param {Object} eventX The X coordinate received from the native event (mouseup).
@@ -24685,22 +24823,28 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * Calculates the position where an Widget should be displayed based on the point
      * where user interacted with the editor.
      *
+     * @uses WidgetInteractionPoint
+     *
      * @class WidgetPosition
      */
     var WidgetPosition = {
         mixins: [AlloyEditor.WidgetInteractionPoint],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The gutter (vertical and horizontal) between the interaction point and where the widget
+             * should be rendered.
+             *
+             * @property {Object} gutter
+             */
             gutter: React.PropTypes.object
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
          */
         getDefaultProps: function() {
             return {
@@ -24713,6 +24857,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Cancels an scheduled animation frame.
+         *
+         * @method cancelAnimation
          */
         cancelAnimation: function() {
             if (window.cancelAnimationFrame) {
@@ -24725,6 +24871,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * {{#crossLink "WidgetPosition/gutter:attribute"}}{{/crossLink}} attribute.
          *
          * @protected
+         * @method  getWidgetXYPoint
          * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
          * @param {Number} top The top offset in page coordinates where Toolbar should be shown.
          * @param {Number} direction The direction of the selection. May be one of the following:
@@ -24766,6 +24913,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Returns true if the widget is visible, false otherwise
          *
+         * @method isVisible
          * @return {Boolean} True if the widget is visible, false otherwise
          */
         isVisible: function() {
@@ -24780,6 +24928,13 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             return false;
         },
 
+        /**
+         * Moves a widget from a starting point to a destination point.
+         *
+         * @method moveToPoint
+         * @param  {Object} startPoint The starting point for the movement.
+         * @param  {Object} endPoint The destination point for the movement.
+         */
         moveToPoint: function(startPoint, endPoint) {
             var domElement = new CKEDITOR.dom.element(this.getDOMNode());
 
@@ -24803,6 +24958,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Shows the widget with the default animation transition.
+         *
+         * @method show
          */
         show: function() {
             var domNode = React.findDOMNode(this);
@@ -24834,6 +24991,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Updates the widget position based on the current interaction point.
+         *
+         * @method updatePosition
          */
         updatePosition: function() {
             var interactionPoint = this.getInteractionPoint();
@@ -24856,6 +25015,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Requests an animation frame, if possible, to simulate an animation.
          *
          * @protected
+         * @method _animate
          * @param {Function} callback The function to be executed on the scheduled frame.
          */
         _animate: function(callback) {
@@ -24876,31 +25036,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonBold
      */
     var ButtonBold = React.createClass({displayName: "ButtonBold",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default bold
+             */
             key: 'bold'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -24915,6 +25085,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -24939,16 +25110,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonCameraImage
      */
     var ButtonCameraImage = React.createClass({displayName: "ButtonCameraImage",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default cameraImage
+             */
             key: 'cameraImage'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
          */
         getDefaultProps: function () {
             return {
@@ -24960,6 +25137,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
          * Focuses the take photo button.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             React.findDOMNode(this.refs.buttonTakePhoto).focus();
@@ -24967,6 +25146,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+         *
+         * @method componentWillUnmount
          */
         componentWillUnmount: function() {
             if (this._stream) {
@@ -24978,6 +25159,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25039,9 +25221,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Displays error message in case of video stream capturing failure.
          *
-         * @param {Event} error The fired event in case of error.
          * @protected
          * @method _handleStreamError
+         * @param {Event} error The fired event in case of error.
          */
         _handleStreamError: function(error) {
             window.alert('An error occurred! ' + error);
@@ -25051,6 +25233,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Starts streaming video in the video element and sets width/height to the video
          * and canvas elements.
          *
+         * @method _handleStreamSuccess
          * @param {Object} stream The video stream
          */
         _handleStreamSuccess: function(stream) {
@@ -25107,17 +25290,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonCamera
      */
     var ButtonCamera = React.createClass({displayName: "ButtonCamera",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default camera
+             */
             key: 'camera'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25148,22 +25336,31 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonCode class provides wraps a selection in `pre` element.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonCode
      */
     var ButtonCode = React.createClass({displayName: "ButtonCode",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default code
+             */
             key: 'code'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -25177,6 +25374,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25199,27 +25397,45 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * The ButtonCommandListItem class is a UI class that renders a ButtonCommand that can be used inside
      * a list as an item, with a string representation of its behaviour.
      *
+     * @uses ButtonCommand
+     *
      * @class ButtonCommandListItem
      */
     var ButtonCommandListItem = React.createClass({displayName: "ButtonCommandListItem",
         mixins: [AlloyEditor.ButtonCommand],
 
         propTypes: {
+            /**
+             * The command label or description to render in the list entry.
+             *
+             * @property {String} description
+             */
             description: React.PropTypes.string.isRequired,
+
+            /**
+             * The command icon to render in the list entry.
+             *
+             * @property {String} icon
+             */
             icon: React.PropTypes.string
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default buttonCommandListItem
+             */
             key: 'buttonCommandListItem'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25231,6 +25447,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Returns the class name of Widget.
          *
+         * @method _getClassName
          * @return {String} The class name of the Widget.
          */
         _getClassName: function() {
@@ -25252,22 +25469,31 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonH1 class provides wraps a selection in `h1` element.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonH1
      */
     var ButtonH1 = React.createClass({displayName: "ButtonH1",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default h1
+             */
             key: 'h1'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -25281,6 +25507,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25302,22 +25529,31 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonH2 class provides wraps a selection in `h2` element.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonH2
      */
     var ButtonH2 = React.createClass({displayName: "ButtonH2",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default h2
+             */
             key: 'h2'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -25331,6 +25567,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25352,31 +25589,40 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonHline class provides inserts horizontal line.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStyle
+     *
      * @class ButtonHline
      */
     var ButtonHline = React.createClass({displayName: "ButtonHline",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default hline
+             */
             key: 'hline'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -25391,6 +25637,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25410,22 +25657,31 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonImageAlignLeft class provides functionality for aligning an image on left.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonImageAlignLeft
      */
     var ButtonImageAlignLeft = React.createClass({displayName: "ButtonImageAlignLeft",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default imageLeft
+             */
             key: 'imageLeft'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -25442,6 +25698,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25463,22 +25720,31 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonImageAlignRight class provides functionality for aligning an image on right.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonImageAlignRight
      */
     var ButtonImageAlignRight = React.createClass({displayName: "ButtonImageAlignRight",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default imageRight
+             */
             key: 'imageRight'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -25495,6 +25761,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25519,17 +25786,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonImage
      */
     var ButtonImage = React.createClass({displayName: "ButtonImage",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default image
+             */
             key: 'image'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25549,6 +25821,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Simulates click on the input element. This will open browser's native file open dialog.
          *
+         * @method handleClick
          * @param {SyntheticEvent} event The received click event on the button.
          */
         handleClick: function(event) {
@@ -25560,8 +25833,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Then, fires an {{#crossLink "ButtonImage/imageadd:event"}}{{/crossLink}} via CKEditor's
          * message system.
          *
-         * @method _onInputChange
          * @protected
+         * @method _onInputChange
          */
         _onInputChange: function() {
             var reader = new FileReader();
@@ -25605,31 +25878,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonItalic class provides functionality for styling an selection with italic (em) style.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonItalic
      */
     var ButtonItalic = React.createClass({displayName: "ButtonItalic",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default italic
+             */
             key: 'italic'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -25644,6 +25927,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25672,11 +25956,15 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonLinkEdit
      */
     var ButtonLinkEdit = React.createClass({displayName: "ButtonLinkEdit",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default linkEdit
+             */
             key: 'linkEdit'
         },
 
@@ -25684,6 +25972,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
          * Focuses on the link input to immediately allow editing.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             // We need to wait for the next rendering cycle before focusing to avoid undesired
@@ -25698,6 +25988,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             var link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
@@ -25712,6 +26004,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25764,10 +26057,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * - Enter: Creates/updates the link.
          * - Escape: Discards the changes.
          *
-         * @param {SyntheticEvent} event The keyboard event.
-         *
          * @protected
          * @method _handleKeyDown
+         * @param {SyntheticEvent} event The keyboard event.
          */
         _handleKeyDown: function(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
@@ -25786,10 +26078,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Updates the component state when the link input changes on user interaction.
          *
-         * @param {SyntheticEvent} event The change event.
-         *
          * @protected
          * @method _handleLinkChange
+         * @param {SyntheticEvent} event The change event.
          */
         _handleLinkChange: function(event) {
             this.setState({
@@ -25859,22 +26150,29 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * - Normal: Just a button that allows to switch to the edition mode
      * - Exclusive: The ButtonLinkEdit UI with all the link edition controls.
      *
+     * @uses ButtonStateClasses
+     *
      * @class ButtonLink
      */
     var ButtonLink = React.createClass({displayName: "ButtonLink",
         mixins: [AlloyEditor.ButtonStateClasses],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default link
+             */
             key: 'link'
         },
 
         /**
          * Checks if the current selection is contained within a link.
          *
+         * @method isActive
          * @return {Boolean} True if the selection is inside a link, false otherwise.
          */
         isActive: function() {
@@ -25884,6 +26182,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25911,31 +26210,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonOrderedList class provides functionality for creating ordered lists in an editor.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonOrderedList
      */
     var ButtonOrderedList = React.createClass({displayName: "ButtonOrderedList",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default ol
+             */
             key: 'ol'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -25950,6 +26259,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -25971,22 +26281,31 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonParagraphAlignLeft class provides functionality for aligning a paragraph on left.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonParagraphAlignLeft
      */
     var ButtonParagraphAlignLeft = React.createClass({displayName: "ButtonParagraphAlignLeft",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default paragraphLeft
+             */
             key: 'paragraphLeft'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26003,6 +26322,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26024,22 +26344,31 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonParagraphAlignRight class provides functionality for aligning a paragraph on right.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonParagraphAlignRight
      */
     var ButtonParagraphAlignRight = React.createClass({displayName: "ButtonParagraphAlignRight",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default paragraphRight
+             */
             key: 'paragraphRight'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26056,6 +26385,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26077,22 +26407,31 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonParagraphCenter class provides functionality for centering a paragraph.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonParagraphCenter
      */
     var ButtonParagraphCenter = React.createClass({displayName: "ButtonParagraphCenter",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default paragraphCenter
+             */
             key: 'paragraphCenter'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26109,6 +26448,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26130,22 +26470,31 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonParagraphJustify class provides functionality for justfying a paragraph.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonParagraphJustify
      */
     var ButtonParagraphJustify = React.createClass({displayName: "ButtonParagraphJustify",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default paragraphJustify
+             */
             key: 'paragraphJustify'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26162,6 +26511,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26183,31 +26533,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonQuote class wraps a selection in `blockquote` element.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonQuote
      */
     var ButtonQuote = React.createClass({displayName: "ButtonQuote",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default quote
+             */
             key: 'quote'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26222,6 +26582,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26243,31 +26604,39 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonRemoveFormat class removes style formatting.
      *
+     * @uses ButtonCommand
+     *
      * @class ButtonRemoveFormat
      */
     var ButtonRemoveFormat = React.createClass({displayName: "ButtonRemoveFormat",
         mixins: [AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default removeFormat
+             */
             key: 'removeFormat'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26279,6 +26648,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26298,31 +26668,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonStrike class styles a selection with strike style.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonStrike
      */
     var ButtonStrike = React.createClass({displayName: "ButtonStrike",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default strike
+             */
             key: 'strike'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26337,6 +26717,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26364,6 +26745,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26389,26 +26771,33 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonStylesListItemRemove
      */
     var ButtonStylesListItemRemove = React.createClass({displayName: "ButtonStylesListItemRemove",
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * Block styles that should be removed in addition to all other inline styles
+             *
+             * @property {Array} removeBlocks
+             * @default ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+             */
             removeBlocks: React.PropTypes.array
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        //Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default buttonStylesListItemRemove
+             */
             key: 'buttonStylesListItemRemove'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26420,6 +26809,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26458,21 +26848,30 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * The ButtonStylesListItem class provides functionality for previewing a style definition
      * inside a list and applying it to the current editor selection.
      *
+     * @uses ButtonActionStyle
+     * @uses ButtonStyle
+     *
      * @class ButtonStylesListItem
      */
     var ButtonStylesListItem = React.createClass({displayName: "ButtonStylesListItem",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonActionStyle],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default buttonStylesListItem
+             */
             key: 'buttonStylesListItem'
         },
 
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         *
+         * @method componentWillMount
          */
         componentWillMount: function () {
             // Styles with wildcard element (*) generate an empty tag in their preview < class="custom-class" />.
@@ -26492,6 +26891,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26527,16 +26927,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * The ButtonStylesList class provides functionality for showing a list of styles that can be
      * applied to the current selection..
      *
+     * @uses WidgetFocusManager
+     *
      * @class ButtonStylesList
      */
     var ButtonStylesList = React.createClass({displayName: "ButtonStylesList",
         mixins: [AlloyEditor.WidgetFocusManager],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default buttonStylesList
+             */
             key: 'buttonStylesList'
         },
 
@@ -26544,6 +26950,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
          * Focuses on the list node to allow keyboard interaction.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             React.findDOMNode(this).focus();
@@ -26551,6 +26959,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         *
+         * @method componentWillMount
          */
         componentWillMount: function () {
             var blockStyles = [];
@@ -26577,6 +26987,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26593,6 +27004,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the list.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26614,9 +27026,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Renders instances of ButtonStylesListItem with the preview of the correspondent block, inline or object styles.
-         * @param {Array} styles List of styles for which preview should be rendered.
          *
          * @protected
+         * @method _renderStylesItems
+         * @param {Array} styles List of styles for which preview should be rendered.
          * @return {Array} Rendered instances of ButtonStylesListItem class
          */
         _renderStylesItems: function(styles) {
@@ -26647,17 +27060,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonStyles
      */
     var ButtonStyles = React.createClass({displayName: "ButtonStyles",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default styles
+             */
             key: 'styles'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function () {
@@ -26700,6 +27118,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             return {
@@ -26710,6 +27130,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26745,7 +27166,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @protected
          * @method _checkActive
-         *
          * @param {Object} styleConfig Style definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
          * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
          */
@@ -26770,31 +27190,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonSubscript class provides functionality for applying subscript style to a text selection.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonSubscript
      */
     var ButtonSubscript = React.createClass({displayName: "ButtonSubscript",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default subscript
+             */
             key: 'subscript'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26809,6 +27239,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26830,31 +27261,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonSuperscript class provides functionality for applying superscript style to a text selection.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonSuperscript
      */
     var ButtonSuperscript = React.createClass({displayName: "ButtonSuperscript",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default superscript
+             */
             key: 'superscript'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -26869,6 +27310,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26893,17 +27335,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTableCell
      */
     var ButtonTableCell = React.createClass({displayName: "ButtonTableCell",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default tableCell
+             */
             key: 'tableCell'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -26921,8 +27368,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Renders instances of ButtonCommandListItem passing the command which has to be executed and the description
          * of the command.
          *
-         * @method _renderActions
          * @protected
+         * @method _renderActions
          * @return {Array} Rendered instances of ButtonCommandListItem class.
          */
         _renderActions: function() {
@@ -26945,8 +27392,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /*
          * Renders the button dropdown with the associated command items when the button is expanded.
          *
-         * @method _renderDropdown
          * @protected
+         * @method _renderDropdown
          * @return {Element} Returns the dropdown element if the button is expanded, null otherwise.
          */
         _renderDropdown: function() {
@@ -26973,17 +27420,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTableColumn
      */
     var ButtonTableColumn = React.createClass({displayName: "ButtonTableColumn",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default tableColumn
+             */
             key: 'tableColumn'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -27002,7 +27454,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @protected
          * @method _renderActions
-         *
          * @return {Array} Rendered instances of ButtonCommandListItem class
          */
         _renderActions: function() {
@@ -27020,6 +27471,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /*
          * Renders the button dropdown with the associated command items when the button is expanded.
          *
+         * @method _renderDropdown
          * @return {Element} Returns the dropdown element if the button is expanded, null otherwise
          */
         _renderDropdown: function() {
@@ -27050,26 +27502,40 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTableEdit
      */
     var ButtonTableEdit = React.createClass({displayName: "ButtonTableEdit",
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+
+            /**
+             * Method to notify the button abandons the exclusive rendering mode.
+             *
+             * @property {Function} cancelExclusive
+             */
             cancelExclusive: React.PropTypes.func.isRequired,
+
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default tableEdit
+             */
             key: 'tableEdit'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
          */
         getDefaultProps: function () {
             return {
@@ -27087,6 +27553,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * immediately after the initial rendering occurs.
          *
          * Focuses on the link input to immediately allow editing.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             React.findDOMNode(this.refs.rows).focus();
@@ -27094,6 +27562,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Lifecycle. Invoked once before the component is mounted.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             return {
@@ -27127,6 +27597,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Handles a change in input value. Sets the provided value from the user back to the input.
          *
          * @protected
+         * @method _handleChange
          * @param {String} inputName The name of the input which value should be updated.
          * @param {SyntheticEvent} event The provided event.
          */
@@ -27142,9 +27613,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * - Enter: Creates the table.
          * - Escape: Discards the changes.
          *
-         * @param {SyntheticEvent} event The keyboard event.
          * @protected
          * @method _handleKeyDown
+         * @param {SyntheticEvent} event The keyboard event.
          */
         _handleKeyDown: function(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
@@ -27161,6 +27632,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -27199,17 +27671,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTableRemove
      */
     var ButtonTableRemove = React.createClass({displayName: "ButtonTableRemove",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default tableRemove
+             */
             key: 'tableRemove'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -27247,17 +27724,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTableRow
      */
     var ButtonTableRow = React.createClass({displayName: "ButtonTableRow",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default tableRow
+             */
             key: 'tableRow'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -27276,7 +27758,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @protected
          * @method _renderActions
-         *
          * @return {Array} Rendered instances of ButtonCommandListItem class
          */
         _renderActions: function() {
@@ -27294,6 +27775,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Renders the button dropdown with the associated command items when the button is expanded.
          *
+         * @method _renderDropdown
          * @return {Element} Returns the dropdown element if the button is expanded, null otherwise
          */
         _renderDropdown: function() {
@@ -27324,17 +27806,22 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTable
      */
     var ButtonTable = React.createClass({displayName: "ButtonTable",
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default table
+             */
             key: 'table'
         },
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -27361,30 +27848,39 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * The ButtonTwitter class provides functionality for creating a link which
      * allows people to tweet part of the content in the editor.
      *
+     * @uses ButtonStateClasses
+     *
      * @class ButtonTwitter
      */
     var ButtonTwitter = React.createClass({displayName: "ButtonTwitter",
         mixins: [AlloyEditor.ButtonStateClasses],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default twitter
+             */
             key: 'twitter'
         },
 
         /**
          * Creates or removes the twitter link on the selection.
+         *
+         * @method handleClick
          */
         handleClick: function() {
             var editor = this.props.editor.get('nativeEditor');
@@ -27409,6 +27905,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Checks if the current selection is contained within a link that points to twitter.com/intent/tweet.
          *
+         * @method isActive
          * @return {Boolean} True if the selection is inside a twitter link, false otherwise.
          */
         isActive: function() {
@@ -27420,6 +27917,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -27437,6 +27935,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * options received via props.
          *
          * @protected
+         * @method _getHref
          * @return {String} A valid twitter url with the selected text and given configuration.
          */
         _getHref: function() {
@@ -27466,31 +27965,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonUnorderedlist class provides functionality for creating unordered lists in an editor.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonUnorderedlist
      */
     var ButtonUnorderedlist = React.createClass({displayName: "ButtonUnorderedlist",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default ul
+             */
             key: 'ul'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -27505,6 +28014,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -27526,31 +28036,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ButtonUnderline class provides functionality for underlying a text selection.
      *
+     * @uses ButtonCommand
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
      * @class ButtonUnderline
      */
     var ButtonUnderline = React.createClass({displayName: "ButtonUnderline",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
             editor: React.PropTypes.object.isRequired
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default underline
+             */
             key: 'underline'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -27565,6 +28085,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -27586,31 +28107,44 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ToolbarAdd class provides functionality for adding content to the editor.
      *
+     * @uses WidgetDropdown
+     * @uses WidgetExclusive
+     * @uses WidgetFocusManager
+     * @uses ToolbarButtons
+     * @uses WidgetPosition
+     * @uses WidgetArrowBox
+     *
      * @class ToolbarAdd
      */
     var ToolbarAdd = React.createClass({displayName: "ToolbarAdd",
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
-        /**
-         * Allows validating props being passed to the component.
-         *
-         * @type {Object}
-         */
+        // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * The gutter to be applied to the widget when rendered in exclusive mode
+             *
+             * @property {Object} gutterExclusive
+             */
             gutterExclusive: React.PropTypes.object
         },
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default add
+             */
             key: 'add'
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -27631,6 +28165,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Invoked once, only on the client (not on the server),
          * immediately after the initial rendering occurs.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             this._updatePosition();
@@ -27640,6 +28176,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          * This method is not called for the initial render.
          *
+         * @method componentDidUpdate
          * @param {Object} prevProps The previous state of the component's properties.
          * @param {Object} prevState Component's previous state.
          */
@@ -27656,6 +28193,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the buttons for adding content.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -27675,6 +28213,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Returns a list of buttons that will eventually render to HTML.
          *
          * @protected
+         * @method _getButtons
          * @return {Object} The buttons which have to be rendered.
          */
         _getButtons: function() {
@@ -27699,6 +28238,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Returns the class name of the toolbar in case of both exclusive and normal mode.
          *
          * @protected
+         * @method _getToolbarClassName
          * @return {String} The class name which have to be applied to the DOM element.
          */
         _getToolbarClassName: function() {
@@ -27756,22 +28296,35 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The ToolbarStyles class hosts the buttons for styling a text selection.
      *
+     * @uses WidgetDropdown
+     * @uses WidgetExclusive
+     * @uses WidgetFocusManager
+     * @uses ToolbarButtons
+     * @uses WidgetPosition
+     * @uses WidgetArrowBox
+     *
      * @class ToolbarStyles
      */
     var ToolbarStyles = React.createClass({displayName: "ToolbarStyles",
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
-        /**
-         * Lifecycle. Provides static properties to the widget.
-         * - key: The name which will be used as an alias of the button in the configuration.
-         */
+        // Lifecycle. Provides static properties to the widget.
         statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default styles
+             */
             key: 'styles'
         },
 
         /**
          * Lifecycle. Invoked once, only on the client (not on the server),
          * immediately after the initial rendering occurs.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             this._updatePosition();
@@ -27781,6 +28334,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          * This method is not called for the initial render.
          *
+         * @method componentDidUpdate
          * @param {Object} prevProps The previous state of the component's properties.
          * @param {Object} prevState Component's previous state.
          */
@@ -27791,6 +28345,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -27807,16 +28362,18 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Renders the buttons in the toolbar according to the current selection.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
             var currentSelection = this._getCurrentSelection();
 
             if (currentSelection) {
+                var getArrowBoxClassesFn = this._getSelectionFunction(currentSelection.getArrowBoxClasses);
                 var arrowBoxClasses;
 
-                if (AlloyEditor.Lang.isFunction(currentSelection.getArrowBoxClasses)) {
-                    arrowBoxClasses = currentSelection.getArrowBoxClasses();
+                if (getArrowBoxClassesFn) {
+                    arrowBoxClasses = getArrowBoxClassesFn();
                 } else {
                     arrowBoxClasses = this.getArrowBoxClasses();
                 }
@@ -27843,21 +28400,61 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         },
 
         /**
-         * Analyzes the current editor selection and returns the selection configuration, if any,
-         * that matches.
+         * Retrieve a function from String. It converts a fully qualified string into the mapped function.
          *
+         * @method _getSelectionFunction
          * @protected
+         * @param {Function|String} selectionFn A function, or a fully qualified string pointing to the
+         * desired one (e.g. 'AlloyEditor.SelectionTest.image').
+         * @return {Function} The mapped function.
+         */
+        _getSelectionFunction: function(selectionFn) {
+            var Lang = AlloyEditor.Lang;
+            var selectionFunction;
+
+            if (Lang.isFunction(selectionFn)) {
+                selectionFunction = selectionFn;
+
+            } else if (Lang.isString(selectionFn)) {
+                var parts = selectionFn.split('.');
+                var currentMember = window;
+                var property = parts.shift();
+
+                while (property && Lang.isObject(currentMember) && Lang.isObject(currentMember[property])) {
+                    currentMember = currentMember[property];
+                    property = parts.shift();
+                }
+
+                if (Lang.isFunction(currentMember)) {
+                    selectionFunction = currentMember;
+                }
+            }
+
+            return selectionFunction;
+        },
+
+        /**
+         * Analyzes the current editor selection and returns the selection configuration that matches.
+         *
+         * @method _getCurrentSelection
+         * @protected
+         * @return {Object} The matched selection configuration.
          */
         _getCurrentSelection: function() {
-            var eventPayload = this.props.editorEvent ? this.props.editorEvent.data : null,
-                selection;
+            var eventPayload = this.props.editorEvent ? this.props.editorEvent.data : null;
+            var selection;
 
             if (eventPayload) {
                 this.props.config.selections.some(function(item) {
-                    var result = item.test({
-                        data: eventPayload,
-                        editor: this.props.editor
-                    });
+                    var testFn = this._getSelectionFunction(item.test);
+                    var result;
+
+                    if (testFn) {
+                        result = testFn({
+                            data: eventPayload,
+                            editor: this.props.editor
+                        });
+                    }
 
                     if (result) {
                         selection = item;
@@ -27878,17 +28475,20 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         _updatePosition: function() {
             var currentSelection = this._getCurrentSelection();
-
             var result;
 
             // If current selection has a function called `setPosition`, call it
             // and check the returned value. If false, fallback to the default positioning logic.
-            if (currentSelection && AlloyEditor.Lang.isFunction(currentSelection.setPosition)) {
-                result = currentSelection.setPosition.call(this, {
-                    editor: this.props.editor,
-                    editorEvent: this.props.editorEvent,
-                    selectionData: this.props.selectionData
-                });
+            if (currentSelection) {
+                var setPositionFn = this._getSelectionFunction(currentSelection.setPosition);
+
+                if (setPositionFn) {
+                    result = setPositionFn.call(this, {
+                        editor: this.props.editor,
+                        editorEvent: this.props.editorEvent,
+                        selectionData: this.props.selectionData
+                    });
+                }
             }
 
             if (!result) {
@@ -27906,6 +28506,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     /**
      * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
      *
+     * @uses WidgetExclusive
+     * @uses WidgetFocusManager
+     *
      * @class UI
      */
     var UI = React.createClass({displayName: "UI",
@@ -27913,6 +28516,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Lifecycle. Invoked once before the component is mounted.
+         *
+         * @method getInitialState
          */
         getInitialState: function() {
             return {
@@ -27923,6 +28528,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @method getDefaultProps
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
@@ -27938,6 +28544,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+         *
+         * @method componentDidMount
          */
         componentDidMount: function () {
             var editor = this.props.editor.get('nativeEditor');
@@ -27962,12 +28570,16 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 this._setUIHidden(document.activeElement);
             }, this.props.eventsDelay, this);
 
-            document.addEventListener('click', this._clickListener);
-            document.addEventListener('keydown', this._keyDownListener);
+            editor.once('contentDom', function() {
+                document.addEventListener('click', this._clickListener);
+                document.addEventListener('keydown', this._keyDownListener);
+            }.bind(this));
         },
 
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+         *
+         * @method componentWillUnmount
          */
         componentWillUnmount: function() {
             if (this._clickListener) {
@@ -27984,6 +28596,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Lifecycle. Renders the UI of the editor. This may include several toolbars and buttons.
          * The editor's UI also takes care of rendering the items in exclusive mode.
          *
+         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -28020,6 +28633,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Listener to the editor's `actionPerformed` event. Sets state and redraws the UI of the editor.
          *
          * @protected
+         * @method _onActionPerformed
          * @param {SynteticEvent} event The provided event
          */
         _onActionPerformed: function(event) {
@@ -28039,6 +28653,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * provides it via component's state property.
          *
          * @protected
+         * @method _onEditorInteraction
          * @param {SynteticEvent} event The provided event
          */
         _onEditorInteraction: function(event) {
@@ -28055,6 +28670,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Focuses on the active toolbar when the combination ALT+F10 is pressed inside the editor.
          *
          * @protected
+         * @method _onEditorKey
          */
         _onEditorKey: function(event) {
             var nativeEvent = event.data.domEvent.$;
@@ -28068,6 +28684,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Checks if the target with which the user interacted is part of editor's UI or it is
          * the editable area. If none of these, sets the state of editor's UI to be hidden.
          *
+         * @protected
+         * @method _setUIHidden
          * @param {DOMElement} target The DOM element with which user interacted lastly.
          */
         _setUIHidden: function(target) {
@@ -28110,8 +28728,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
          * instace, passing it the provided configuration attributes.
          *
-         * @method initializer
          * @protected
+         * @method initializer
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function(config) {
@@ -28141,8 +28759,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor
          * instance and destroys all created toolbars.
          *
-         * @method destructor
          * @protected
+         * @method destructor
          */
         destructor: function() {
             React.unmountComponentAtNode(this._editorUIElement);
@@ -28159,8 +28777,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
          *
-         * @method _getNativeEditor
          * @protected
+         * @method _getNativeEditor
          * @return {Object} The current instance of CKEditor.
          */
         _getNativeEditor: function() {
@@ -28171,6 +28789,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * Renders the specified from the user toolbars
          *
          * @protected
+         * @method _renderUI
          */
         _renderUI: function() {
             var editorUIElement = document.createElement('div');
@@ -28198,8 +28817,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
          * supported values.
          *
-         * @param {Any} The value to be checked
          * @protected
+         * @method _validateAllowedContent
+         * @param {Any} The value to be checked
          * @return {Boolean} True if the current value is valid configuration, false otherwise
          */
         _validateAllowedContent: function(value) {
@@ -28209,6 +28829,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Validates the value of toolbars attribute
          *
+         * @protected
+         * @method _validateToolbars
          * @param {Any} The value to be checked
          * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
          */
@@ -28222,7 +28844,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * Look on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)
              * for more information about the valid values.
              *
-             * @attribute allowedContent
+             * @property allowedContent
              * @default true
              * @writeOnce
              * @type {Boolean, String, Object}
@@ -28236,7 +28858,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             /**
              * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
              *
-             * @attribute eventsDelay
+             * @property eventsDelay
              * @type {Number}
              */
             eventsDelay: {
@@ -28248,7 +28870,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
              * make AlloyEditor to work properly.
              *
-             * @attribute extraPlugins
+             * @property extraPlugins
              * @default 'uicore,selectionregion,dragresize,dropimages,placeholder,tabletools,tableresize,autolink'
              * @writeOnce
              * @type {String}
@@ -28262,7 +28884,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             /**
              * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
              *
-             * @attribute nativeEditor
+             * @property nativeEditor
              * @readOnly
              * @type {Object}
              */
@@ -28276,7 +28898,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * {{#crossLink "CKEDITOR.plugins.placeholder}}{{/crossLink}}
              * when editor is not focused.
              *
-             * @attribute placeholderClass
+             * @property placeholderClass
              * @default 'alloy-editor-placeholder'
              * @writeOnce
              * @type {String}
@@ -28298,7 +28920,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
              * page!
              *
-             * @attribute removePlugins
+             * @property removePlugins
              * @default 'contextmenu,toolbar,elementspath,resize,liststyle,link'
              * @writeOnce
              * @type {String}
@@ -28311,7 +28933,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
             /**
              * Specifies the type of selections, which will be handled by
-             * @attribute selections
+             * @property selections
              * @type {Object}
              */
             selections: {
@@ -28322,7 +28944,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             /**
              * The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.
              *
-             * @attribute srcNode
+             * @property srcNode
              * @type String | Node
              * @writeOnce
              */
@@ -28331,7 +28953,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             },
 
             /**
-             * TODO: Explain the configuration below
+             * The toolbars configuration for this editor instance
+             *
+             * @property {Object} toolbars
              */
             toolbars: {
                 validator: '_validateToolbars',
@@ -28350,7 +28974,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             /**
              * The Node ID or HTMl node, where AlloyEditor's UI should be rendered.
              *
-             * @attribute uiNode
+             * @property uiNode
              * @type String | Node
              * @writeOnce
              */
