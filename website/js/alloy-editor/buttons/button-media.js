@@ -1,1 +1,0 @@
-YUI.add("button-media",function(a){"use strict";var e=(a.Lang,a.Base.create("media",a.Plugin.Base,[a.ButtonBase],{_handleMedia:function(){},TPL_CONTENT:'<i class="alloy-editor-icon-media-sign"></i>'},{NAME:"media",NS:"media"}));a.ButtonMedia=e},"",{requires:["button-base"]});

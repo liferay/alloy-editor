@@ -1,1 +1,0 @@
-YUI.add("button-h2",function(e){"use strict";var t=e.Lang,a=e.Base.create("h2",e.Plugin.Base,[e.ButtonBase],{TPL_CONTENT:'<i class="alloy-editor-icon-h2"></i>'},{NAME:"h2",NS:"h2",ATTRS:{element:{validator:t.isString,value:"h2"},strings:{validator:t.isObject,value:{label:"Heading level 2"}}}});e.ButtonH2=a},"",{requires:["button-base"]});
