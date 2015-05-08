@@ -47,10 +47,10 @@
                 editor.once('contentDom', function() {
                     var editable = editor.editable();
 
-                    editable.attachListener(editable, 'keyup', this._onKeyUp, this);
+                    editable.attachListener(editable, 'keyup', this._onKeyUp, this, {
+                        editor: editor
+                    });
                 }.bind(this));
-
-                this._editor = editor;
             },
 
             /**
@@ -61,8 +61,8 @@
              * @return {String} The last word introduced by user
              * @protected
              */
-            _getLastWord: function() {
-                var range = this._editor.getSelection().getRanges()[0];
+            _getLastWord: function(editor) {
+                var range = editor.getSelection().getRanges()[0];
 
                 var offset = range.startOffset;
 
@@ -140,7 +140,9 @@
             _onKeyDown: function(event) {
                 var nativeEvent = event.data.$;
 
-                var editable = this._editor.editable();
+                var editor = event.listenerData.editor;
+
+                var editable = editor.editable();
 
                 editable.removeListener('keydown', this._onKeyDown);
 
@@ -148,7 +150,7 @@
                     event.cancel();
                     event.data.preventDefault();
 
-                    this._removeLink();
+                    this._removeLink(editor);
                 }
 
                 this._ckLink = null;
@@ -168,10 +170,12 @@
                 this._currentKeyCode = nativeEvent.keyCode;
 
                 if (DELIMITERS.indexOf(this._currentKeyCode) !== -1) {
-                    var lastWord = this._getLastWord();
+                    var editor = event.listenerData.editor;
+
+                    var lastWord = this._getLastWord(editor);
 
                     if (this._isValidURL(lastWord)) {
-                        this._replaceContentByLink(lastWord);
+                        this._replaceContentByLink(editor, lastWord);
                     }
                 }
             },
@@ -183,8 +187,8 @@
              * @param {String} content The text that has to be replaced by an link element
              * @protected
              */
-            _replaceContentByLink: function(content) {
-                var range = this._editor.createRange();
+            _replaceContentByLink: function(editor, content) {
+                var range = editor.createRange();
                 var node = CKEDITOR.dom.element.get(this._startContainer);
                 var offset = this._offset;
 
@@ -193,15 +197,15 @@
                 range.setEnd(node, offset);
                 range.select();
 
-                var ckLink = new CKEDITOR.Link(this._editor);
+                var ckLink = new CKEDITOR.Link(editor);
                 ckLink.create(content);
                 this._ckLink = ckLink;
 
-                this._subscribeToKeyEvent();
+                this._subscribeToKeyEvent(editor);
 
                 // Now range is on the link and it is selected. We have to
                 // return focus to the caret position.
-                range = this._editor.getSelection().getRanges()[0];
+                range = editor.getSelection().getRanges()[0];
 
                 // If user pressed `Enter`, get the next editable node at position 0,
                 // otherwise set the cursor at the next character of the link (the white space)
@@ -226,14 +230,14 @@
              * @method _removeLink
              * @protected
              */
-            _removeLink: function() {
-                var range = this._editor.getSelection().getRanges()[0];
+            _removeLink: function(editor) {
+                var range = editor.getSelection().getRanges()[0];
                 var caretOffset = range.startOffset;
 
                 // Select the link, so CKEDITOR.Link can properly remove it
                 var linkNode = this._startContainer.getNext() || this._startContainer;
 
-                var newRange = this._editor.createRange();
+                var newRange = editor.createRange();
                 newRange.setStart(linkNode, 0);
                 newRange.setEndAfter(linkNode);
                 newRange.select();
@@ -253,13 +257,15 @@
              * @method _subscribeToKeyEvent
              * @protected
              */
-            _subscribeToKeyEvent: function() {
-                var editable = this._editor.editable();
+            _subscribeToKeyEvent: function(editor) {
+                var editable = editor.editable();
 
                 // Change the priority of keydown listener - 1 means the highest priority.
                 // In Chrome on pressing `Enter` the listener is not being invoked.
                 // See http://dev.ckeditor.com/ticket/11861 for more information.
-                editable.attachListener(editable, 'keydown', this._onKeyDown, this, {}, 1);
+                editable.attachListener(editable, 'keydown', this._onKeyDown, this, {
+                    editor: editor
+                }, 1);
             }
         }
     );
