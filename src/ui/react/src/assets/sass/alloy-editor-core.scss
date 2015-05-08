@@ -44,6 +44,7 @@ $IE9_ONLY: \9;
 
 IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     height: $base_button_height;
+    box-sizing: content-box;
 }
 
 .alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
