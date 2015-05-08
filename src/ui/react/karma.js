@@ -180,7 +180,6 @@ if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
             startConnect: true,
             connectOptions: {
                 port: 5757,
-                'selenium-version': '2.41.0',
                 logfile: 'sauce_connect.log'
             }
         }
