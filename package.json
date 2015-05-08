@@ -1,7 +1,7 @@
 {
   "name": "alloy-editor",
-  "version": "0.2.6",
-  "description": "Alloy Editor",
+  "version": "0.2.7",
+  "description": "Alloy Editor, a modern WYSIWYG editor",
   "dependencies": {},
   "devDependencies": {
     "bourbon": "https://github.com/thoughtbot/bourbon/tarball/master",
