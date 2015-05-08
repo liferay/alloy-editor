@@ -623,10 +623,10 @@ footer .copyright {
   color: #fff;
   display: block;
   font-size: 14px;
-  left: 700px;
+  left: 500px;
   max-width: 400px;
   text-align: center;
-  top: 300px;
+  top: 120px;
   width: 400px;
   z-index: 400;
 }
