@@ -82,6 +82,26 @@
             });
         });
 
+        it('should not trigger any error when pressing ENTER', function() {
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<p></p>');
+
+            var spanElement = CKEDITOR.dom.element.createFromHtml('<span>@test</span>');
+
+            this.nativeEditor.element.findOne('p').append(spanElement);
+
+            var spaceElement = new CKEDITOR.dom.text(' ');
+
+            spaceElement.insertAfter(spanElement);
+
+            happen.keyup(this._editable, {
+                keyCode: KEY_ENTER
+            });
+
+            var data = this.nativeEditor.element.$.innerHTML;
+
+            assert.equal(data, '<p><span>@test</span> </p>');
+        });
+
         it('should not create a link if last word is not a valid URL', function() {
             testLink.call(this, {
                 expected: '<p>invalid link ww.liferay.com</p>',
