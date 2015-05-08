@@ -51,7 +51,8 @@
   width: 24px; }
 
 IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
-  height: 24px; }
+  height: 24px;
+  box-sizing: content-box; }
 
 .alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
   line-height: 1;
@@ -253,6 +254,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   content: '';
   margin: auto;
   position: absolute; }
+
 .alloy-editor-arrow-box.alloy-editor-arrow-box-bottom:after {
   height: 0;
   width: 0;
@@ -262,6 +264,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   left: 0;
   right: 0;
   top: 100%; }
+
 .alloy-editor-arrow-box.alloy-editor-arrow-box-top:after {
   height: 0;
   width: 0;
@@ -271,6 +274,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   left: 0;
   right: 0;
   top: -4px; }
+
 .alloy-editor-arrow-box.alloy-editor-arrow-box-left:after {
   height: 0;
   width: 0;
@@ -280,6 +284,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   left: -4px;
   top: 0;
   bottom: 0; }
+
 .alloy-editor-arrow-box.alloy-editor-arrow-box-right:after {
   height: 0;
   width: 0;
