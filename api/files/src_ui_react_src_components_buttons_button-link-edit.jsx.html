@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/react/src/components/buttons/button-link-edit.jsx - alloy-editor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloy-editor" src="../assets/img/logo-small.png" title="alloy-editor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>0.2.6</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-link-edit.jsx</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function () {
+                                &#x27;use strict&#x27;;
+                            
+                                var KEY_ENTER = 13;
+                                var KEY_ESC = 27;
+                            
+                                /**
+                                 * The ButtonEditLink class provides functionality for creating and editing a link in a document.
+                                 * Provides UI for creating, editing and removing a link.
+                                 *
+                                 * @class ButtonLinkEdit
+                                 */
+                                var ButtonLinkEdit = React.createClass({
+                                    // Lifecycle. Provides static properties to the widget.
+                                    statics: {
+                                        /**
+                                         * The name which will be used as an alias of the button in the configuration.
+                                         *
+                                         * @static
+                                         * @property {String} key
+                                         * @default linkEdit
+                                         */
+                                        key: &#x27;linkEdit&#x27;
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+                                     *
+                                     * Focuses on the link input to immediately allow editing.
+                                     *
+                                     * @method componentDidMount
+                                     */
+                                    componentDidMount: function () {
+                                        // We need to wait for the next rendering cycle before focusing to avoid undesired
+                                        // scrolls on the page
+                                        if (window.requestAnimationFrame) {
+                                            window.requestAnimationFrame(this._focusLinkInput);
+                                        } else {
+                                            setTimeout(this._focusLinkInput, 0);
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked once before the component is mounted.
+                                     * The return value will be used as the initial value of this.state.
+                                     *
+                                     * @method getInitialState
+                                     */
+                                    getInitialState: function() {
+                                        var link = new CKEDITOR.Link(this.props.editor.get(&#x27;nativeEditor&#x27;)).getFromSelection();
+                                        var href = link ? link.getAttribute(&#x27;href&#x27;) : &#x27;&#x27;;
+                            
+                                        return {
+                                            element: link,
+                                            linkHref: href
+                                        };
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Renders the UI of the button.
+                                     *
+                                     * @method render
+                                     * @return {Object} The content which should be rendered.
+                                     */
+                                    render: function() {
+                                        var clearLinkStyle = {
+                                            opacity: this.state.linkHref ? 1 : 0
+                                        };
+                            
+                                        return (
+                                            &lt;div className=&quot;alloy-editor-container-edit-link&quot;&gt;
+                                                &lt;button aria-label=&quot;Cancel&quot; className=&quot;alloy-editor-button&quot; disabled={!this.state.element} onClick={this._removeLink}&gt;
+                                                    &lt;span className=&quot;alloy-editor-icon-unlink&quot;&gt;&lt;/span&gt;
+                                                &lt;/button&gt;
+                                                &lt;div className=&quot;alloy-editor-container-input&quot;&gt;
+                                                    &lt;input className=&quot;alloy-editor-input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder=&quot;Type or paste link here&quot; ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                    &lt;button className=&quot;alloy-editor-button alloy-editor-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle}&gt;&lt;/button&gt;
+                                                &lt;/div&gt;
+                                                &lt;button aria-label=&quot;Confirm&quot; className=&quot;alloy-editor-button&quot; disabled={!this.state.linkHref} onClick={this._updateLink}&gt;
+                                                    &lt;span className=&quot;alloy-editor-icon-ok&quot;&gt;&lt;/span&gt;
+                                                &lt;/button&gt;
+                                            &lt;/div&gt;
+                                        );
+                                    },
+                            
+                                    /**
+                                     * Clears the link input. This only changes the component internal state, but does not
+                                     * affect the link element of the editor. Only the _removeLink and _updateLink methods
+                                     * are translated to the editor element.
+                                     *
+                                     * @protected
+                                     * @method _clearLink
+                                     */
+                                    _clearLink: function() {
+                                        this.setState({
+                                            linkHref: &#x27;&#x27;
+                                        });
+                                    },
+                            
+                                    /**
+                                     * Focuses the user cursor on the widget&#x27;s input.
+                                     *
+                                     * @protected
+                                     * @method _focusLinkInput
+                                     */
+                                    _focusLinkInput: function() {
+                                        React.findDOMNode(this.refs.linkInput).focus();
+                                    },
+                            
+                                    /**
+                                     * Monitors key interaction inside the input element to respond to the keys:
+                                     * - Enter: Creates/updates the link.
+                                     * - Escape: Discards the changes.
+                                     *
+                                     * @protected
+                                     * @method _handleKeyDown
+                                     * @param {SyntheticEvent} event The keyboard event.
+                                     */
+                                    _handleKeyDown: function(event) {
+                                        if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+                                            event.preventDefault();
+                                        }
+                            
+                                        if (event.keyCode === KEY_ENTER) {
+                                            this._updateLink();
+                                        } else if (event.keyCode === KEY_ESC) {
+                                            this.props.cancelExclusive();
+                            
+                                            this.props.editor.get(&#x27;nativeEditor&#x27;).focus();
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Updates the component state when the link input changes on user interaction.
+                                     *
+                                     * @protected
+                                     * @method _handleLinkChange
+                                     * @param {SyntheticEvent} event The change event.
+                                     */
+                                    _handleLinkChange: function(event) {
+                                        this.setState({
+                                            linkHref: event.target.value
+                                        });
+                                    },
+                            
+                                    /**
+                                     * Removes the link in the editor element.
+                                     *
+                                     * @protected
+                                     * @method _removeLink
+                                     */
+                                    _removeLink: function() {
+                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                                        var linkUtils = new CKEDITOR.Link(editor);
+                                        var selection = editor.getSelection();
+                                        var bookmarks = selection.createBookmarks();
+                            
+                                        linkUtils.remove(this.state.element);
+                            
+                                        selection.selectBookmarks(bookmarks);
+                            
+                                        // We need to cancelExclusive with the bound parameters in case the button is used
+                                        // inside another in exclusive mode (such is the case of the link button)
+                                        this.props.cancelExclusive();
+                            
+                                        editor.fire(&#x27;actionPerformed&#x27;, this);
+                                    },
+                            
+                                    /**
+                                     * Updates the link in the editor element. If the element didn&#x27;t exist previously, it will
+                                     * create a new &lt;a&gt; element with the href specified in the link input.
+                                     *
+                                     * @protected
+                                     * @method _updateLink
+                                     */
+                                    _updateLink: function() {
+                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                                        var linkUtils = new CKEDITOR.Link(editor);
+                            
+                                        if (this.state.linkHref) {
+                                            if (this.state.element) {
+                                                linkUtils.update(this.state.linkHref, this.state.element);
+                                            } else {
+                                                linkUtils.create(this.state.linkHref);
+                                            }
+                            
+                                            editor.fire(&#x27;actionPerformed&#x27;, this);
+                                        }
+                            
+                                        // We need to cancelExclusive with the bound parameters in case the button is used
+                                        // inside another in exclusive mode (such is the case of the link button)
+                                        this.props.cancelExclusive();
+                                    }
+                                });
+                            
+                                AlloyEditor.Buttons[ButtonLinkEdit.key] = AlloyEditor.ButtonLinkEdit = ButtonLinkEdit;
+                            }());
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

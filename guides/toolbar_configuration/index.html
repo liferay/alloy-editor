@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+    <title>Guides - Toolbar configuration | Alloy Editor</title>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Iliyan Peychev">
+    <meta name="description" content="AlloyEditor allows you to configure the Toolbars in the way you prefer. You will be able to remove some of the existing Toolbars, to add your own or to reorder the buttons in each Toolbar">
+
+    <!-- Facebook Tags -->
+    <meta property="fb:app_id" content="176947299114210">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="//alloyeditor.com">
+    <meta property="og:image" content="//alloyeditor.com/website/img/facebook-share.jpg">
+    <meta property="og:title" content="Guides - Toolbar configuration | Alloy Editor">
+    <meta property="og:description" content="AlloyEditor allows you to configure the Toolbars in the way you prefer. You will be able to remove some of the existing Toolbars, to add your own or to reorder the buttons in each Toolbar">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="//alloyeditor.com/website/img/favicon.ico">
+
+    <!-- CSS: Alloy Bootstrap -->
+    <!-- <link href="//alloyeditor.com/website/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- CSS: Website style -->
+    <link href="//alloyeditor.com/website/css/main.css" rel="stylesheet">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div id="wrap">
+      <nav class="navbar-fixed-top navbar-main" role="navigation">
+        <div class="container">
+          <div class="col-md-11">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#siteSections">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="//alloyeditor.com">
+                <img src="//alloyeditor.com/website/img/logo.png" alt="AlloyEditor Logo" height="40">
+              </a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right" id="siteSections">
+              <ul class="nav navbar-nav">
+                <li><a href="//alloyeditor.com/demo/">Live Demo</a></li>
+                <li class="active"><a href="//alloyeditor.com/guides/">Guides</a></li>
+                <li><a href="//alloyeditor.com/features/">Features</a></li>
+                <li><a href="//alloyeditor.com/api/" target="_blank">API Docs</a></li>
+                <li><a href="//alloyeditor.com/contributing/">Contributing</a></li>
+                <li><a href="//alloyeditor.com/about/">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div id="content">
+        <div class="container">
+  <div class="col-md-8 col-md-offset-1">
+    <h2 class="guide-header">Toolbar configuration</h2>
+
+    
+      <p class="guide-description">AlloyEditor allows you to configure the Toolbars in the way you prefer. You will be able to remove some of the existing Toolbars, to add your own or to reorder the buttons in each Toolbar</p>
+    
+
+    <section class="guide-content">
+      <h4 class="guide-step">Default configuration</h4>
+
+<span class="code-header">This is the default editor toolbars configuration</span>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> toolbars = {
+    add: {
+        buttons: [<span class="hljs-string">'image'</span>, <span class="hljs-string">'camera'</span>, <span class="hljs-string">'hline'</span>, <span class="hljs-string">'table'</span>],
+        tabIndex: <span class="hljs-number">2</span>
+    },
+    styles: {
+        selections: AlloyEditor.Selections,
+        tabIndex: <span class="hljs-number">1</span>
+    }
+};</code></pre>
+
+<span class="code-header">where <code>AlloyEditor.Selections</code> is</span>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> Selections = [{
+        name: <span class="hljs-string">'link'</span>,
+        buttons: [<span class="hljs-string">'linkEdit'</span>],
+        test: AlloyEditor.SelectionTest.link
+    }, {
+        name: <span class="hljs-string">'image'</span>,
+        buttons: [<span class="hljs-string">'imageLeft'</span>, <span class="hljs-string">'imageRight'</span>],
+        test: AlloyEditor.SelectionTest.image
+    }, {
+        name: <span class="hljs-string">'text'</span>,
+        buttons: [<span class="hljs-string">'styles'</span>, <span class="hljs-string">'bold'</span>, <span class="hljs-string">'italic'</span>, <span class="hljs-string">'underline'</span>, <span class="hljs-string">'link'</span>, <span class="hljs-string">'twitter'</span>],
+        test: AlloyEditor.SelectionTest.text
+    }, {
+        name: <span class="hljs-string">'table'</span>,
+        buttons: [<span class="hljs-string">'tableRow'</span>, <span class="hljs-string">'tableColumn'</span>, <span class="hljs-string">'tableCell'</span>, <span class="hljs-string">'tableRemove'</span>],
+        getArrowBoxClasses: AlloyEditor.SelectionGetArrowBoxClasses.table,
+        setPosition: AlloyEditor.SelectionSetPosition.table,
+        test: AlloyEditor.SelectionTest.table
+}];</code></pre>
+
+<p>The configuration above represents two toolbars - for adding content (images, code, etc.) and modify content based on the current selection type. You may remove any of those and the toolbar won't be shown.</p>
+
+<span class="code-header">To remove the toolbar for adding content, just <strong>remove</strong> the property <em>add</em></span>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> toolbars = {
+    styles: {
+        selections: AlloyEditor.Selections,
+        tabIndex: <span class="hljs-number">1</span>
+    }
+};</code></pre>
+
+<h4 class="guide-step">Configuring Buttons</h4>
+
+<p>In the default UI, which uses React, some of the buttons accept configuration parameters so you can tailor them to suit your needs.</p>
+
+<span class="code-header">Here is an example of a custom configuration for the <em>Styles</em> button ins a text selection</span>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> Selections = [{
+    name: <span class="hljs-string">'text'</span>,
+    buttons: [
+        {
+            name: <span class="hljs-string">'styles'</span>,
+            cfg: {
+                styles: [...]
+            }
+        },
+        <span class="hljs-string">'bold'</span>, <span class="hljs-string">'italic'</span>, <span class="hljs-string">'underline'</span>, <span class="hljs-string">'link'</span>, <span class="hljs-string">'twitter'</span>],
+    test: AlloyEditor.SelectionTest.text
+}];</code></pre>
+
+In this case a different array of styles is passed to the Styles button, so they will show when selecting a text instead of the default ones.
+
+<h4 class="guide-step">Reordering Buttons</h4>
+
+If you are not happy with the order of the buttons, you can just reorder them in the toolbar configuration. They will follow the order in which you specify them. For example, if you want the <em>table</em> button to appear before the <em>hline</em> button in the <em>Add</em> toolbar, you just need to do the following:
+
+<pre class="highlight"><code class="hljs undefined">var toolbars = {
+    add: {
+        buttons: ['table', 'hline', image', 'camera'],
+        tabIndex: 2
+    }
+};</code></pre>
+
+<h4 class="guide-step">Remove Buttons</h4>
+
+If you remove a button from the buttons property of a toolbar, then this button won't be available when the toolbar is visible.
+
+<p class="guide-note"></p>
+    </section>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'alloyeditor'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+  <div class="ae-guides-sidebar col-md-2">
+    <p class="guide-target-header">Use</p>
+    <nav class="ae-docs-sidebar">
+      <ul class="nav ae-docs-sidenav">
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides">Getting Started</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/how_to_use_it">How to use it?</a>
+            </li>
+          
+        
+          
+            <li class="active">
+              <a href="//alloyeditor.com/guides/toolbar_configuration">Toolbar configuration</a>
+            </li>
+          
+        
+      </ul>
+    </nav>
+
+    <p class="guide-target-header">Develop</p>
+    <nav class="ae-docs-sidebar">
+      <ul class="nav ae-docs-sidenav">
+        
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/how_to_build_it">How to build it?</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/architecture">Architecture</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/create_buttons">Create Buttons</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/create_toolbars">Create Toolbars</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/create_ui">Create entirely new UI</a>
+            </li>
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</div>
+      </div>
+
+      <footer class="container">
+        <div class="col-md-10 col-md-offset-1">
+          <span class="fork"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">LGPL License</a></span>
+          <span class="fork pull-right"><a href="https://github.com/liferay/alloy-editor/">Fork me on Github</a></span>
+          <p class="copyright">@ 2015 Liferay, Inc. All Rights Reserved</p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-53538246-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+  </body>
+</html>
