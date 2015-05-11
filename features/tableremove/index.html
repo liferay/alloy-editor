@@ -40,8 +40,10 @@
   </head>
 
   <body>
+    <div id="mobileNavbarShadow"></div>
+
     <div id="wrap">
-      <nav class="navbar-fixed-top navbar-main" role="navigation">
+      <nav class="navbar-fixed-top navbar-main collapsed" role="navigation">
         <div class="container">
           <div class="col-md-11">
             <div class="navbar-header">
@@ -50,18 +52,275 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
+                <span class="glyphicon glyphicon-remove"></span>
               </button>
 
               <a class="navbar-brand" href="//alloyeditor.com">
-                <img src="//alloyeditor.com/website/img/logo.png" alt="AlloyEditor Logo" height="40">
+                <img alt="AlloyEditor Logo" class="hidden-sm" height="40" src="//alloyeditor.com/website/img/logo.png">
+                <img alt="AlloyEditor Logo" class="visible-sm-block" height="40" src="//alloyeditor.com/website/img/logo_small.png">
               </a>
             </div>
 
             <div class="collapse navbar-collapse navbar-right" id="siteSections">
               <ul class="nav navbar-nav">
                 <li><a href="//alloyeditor.com/demo/">Live Demo</a></li>
-                <li><a href="//alloyeditor.com/guides/">Guides</a></li>
-                <li class="active"><a href="//alloyeditor.com/features/">Features</a></li>
+                <li><a href="//alloyeditor.com/guides/">Guides</a>
+                  <ul class="nav navbar-nav visible-xs-block">
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/guides">Getting Started</a>
+                        </li>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/guides/how_to_use_it">How to use it?</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/guides/toolbar_configuration">Toolbar configuration</a>
+                        </li>
+                      
+                    
+                    
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/guides/how_to_build_it">How to build it?</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/guides/architecture">Architecture</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/guides/create_buttons">Create Buttons</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/guides/create_toolbars">Create Toolbars</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/guides/create_ui">Create entirely new UI</a>
+                        </li>
+                      
+                    
+                      
+                    
+                      
+                    
+                  </ul>
+                </li>
+                <li class="active inactive-xs"><a href="//alloyeditor.com/features/">Features</a>
+                  <ul class="nav navbar-nav visible-xs-block">
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/bold">Bold</a>
+                        </li>
+                      
+                    
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/camera">Camera</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/code">Code</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/h1">Heading 1</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/h2">Heading 2</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/hline">Horizontal Line</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/image">Image</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/imagealignleft">Image Alignment - Left</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/imagealignright">Image Alignment - Right</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/italic">Italic</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/link">Link</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/ul">Lists (Bulleted)</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/ol">Lists (Numbered)</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/quote">Quote</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/removeformat">Remove Format</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/strike">Strike</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/styles">Styles</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/subscript">Subscript</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/superscript">Superscript</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/table">Table</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/tablecell">Table - Cells</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/tablecolumn">Table - Columns</a>
+                        </li>
+                      
+                    
+                      
+                        <li class="active">
+                          <a href="//alloyeditor.com/features/tableremove">Table - Remove</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/tablerow">Table - Rows</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/paragraphaligncenter">Text Alignment - Centered</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/paragraphalignjustify">Text Alignment - Justified</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/paragraphalignleft">Text Alignment - Left</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/paragraphalignright">Text Alignment - Right</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/twitter">Twitter</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="//alloyeditor.com/features/underline">Underline</a>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
                 <li><a href="//alloyeditor.com/api/" target="_blank">API Docs</a></li>
                 <li><a href="//alloyeditor.com/contributing/">Contributing</a></li>
                 <li><a href="//alloyeditor.com/about/">About</a></li>
@@ -73,7 +332,7 @@
 
       <div id="content">
         <div class="container">
-  <div class="col-md-8 col-md-offset-1">
+  <div class="col-sm-8 col-sm-offset-1">
     <h1 class="feature-header">Table - Remove</h1>
 
     
@@ -178,10 +437,11 @@
               <img class="center-block feature-demo" src="//alloyeditor.com/website/img/features/button-tableremove.gif"></img>
             </div>
             <div class="zero-clipboard">
-              <span class="btn-clipboard">Copy</span>
+              <span class="btn-clipboard" id="copyToClipboardButton">Copy</span>
             </div>
-            
-              <p><pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> editor = AlloyEditor.editable(<span class="hljs-string">'myContentEditable'</span>, {
+            <div id="featureExample">
+              
+                <p><pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> editor = AlloyEditor.editable(<span class="hljs-string">'myContentEditable'</span>, {
     toolbars: {
         styles: {
             selections: [
@@ -195,7 +455,8 @@
     }
 });</code></pre></p>
 
-            
+              
+            </div>
           
         
       
@@ -242,7 +503,7 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 
-  <div class="col-md-2">
+  <div class="col-sm-2 hidden-xs">
     <nav class="ae-docs-sidebar">
       <ul class="nav ae-docs-sidenav">
         
@@ -432,9 +693,16 @@
     </nav>
   </div>
 </div>
+
+<script src="//alloyeditor.com/website/js/ZeroClipboard.min.js"></script>
+<script>
+  var zeroClipboard = new ZeroClipboard(document.getElementById('copyToClipboardButton'));
+
+  zeroClipboard.setText(document.getElementById('featureExample').innerText);
+</script>
       </div>
 
-      <footer class="container">
+      <footer class="container" id="siteFooter">
         <div class="col-md-10 col-md-offset-1">
           <span class="fork"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">LGPL License</a></span>
           <span class="fork pull-right"><a href="https://github.com/liferay/alloy-editor/">Fork me on Github</a></span>
@@ -442,6 +710,31 @@
         </div>
       </footer>
     </div>
+
+    <script>
+      var mainNavbar = $('.navbar-main');
+      var navbarShadow = $('#mobileNavbarShadow');
+      var siteContent = $('#content');
+      var siteFooter = $('#siteFooter');
+      var siteSections = $('#siteSections');
+
+      siteSections.on('show.bs.collapse', function() {
+        mainNavbar.removeClass('collapsed');
+        navbarShadow.addClass('visible');
+      });
+
+      siteSections.on('shown.bs.collapse', function() {
+        siteContent.addClass('hide');
+        siteFooter.addClass('hide');
+      });
+
+      siteSections.on('hide.bs.collapse', function() {
+        mainNavbar.addClass('collapsed');
+        navbarShadow.removeClass('visible');
+        siteContent.removeClass('hide');
+        siteFooter.removeClass('hide');
+      });
+    </script>
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

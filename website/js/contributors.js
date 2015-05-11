@@ -11,6 +11,7 @@
       contributorTemplate
         .clone()
         .appendTo(contributorsNode)
+        .attr('data-placement', 'top')
         .attr('data-toggle', 'tooltip')
         .attr('title', '@' + contributor.login)
         .attr('href', 'https://github.com/' + contributor.login)
@@ -18,5 +19,7 @@
         .find('img')
         .attr('src', contributor.avatar_url);
     });
+
+    $('[data-toggle="tooltip"]').tooltip();
   });
 }());
