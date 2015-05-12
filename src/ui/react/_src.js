@@ -11,6 +11,7 @@ module.exports = [
     'ui/react/src/oop/oop.js',
     'ui/react/src/oop/attribute.js',
     'ui/react/src/oop/base.js',
+    'lang/_sample_en.js',
     'ui/react/src/selections/selection-arrowbox.js',
     'ui/react/src/selections/selection-position.js',
     'ui/react/src/selections/selection-test.js',

@@ -16,6 +16,37 @@
     var ToolbarStyles = React.createClass({
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The toolbar configuration.
+             *
+             * @property {Object} config
+             */
+            config: React.PropTypes.object,
+
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
+             *
+             * @property {Object} selectionData
+             */
+            selectionData: React.PropTypes.object
+        },
+
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -63,7 +94,8 @@
                 keys: {
                     next: [38, 39],
                     prev: [37, 40]
-                }
+                },
+                label: AlloyEditor.Strings.styles
             };
         },
 
@@ -96,7 +128,7 @@
                 );
 
                 return (
-                    <div className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="-1">
+                    <div aria-label={this.props.label} className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role="toolbar" tabIndex="-1">
                         <div className="alloy-editor-container">
                             {buttons}
                         </div>

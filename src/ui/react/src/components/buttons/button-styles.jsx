@@ -9,6 +9,52 @@
      * @class ButtonStyles
      */
     var ButtonStyles = React.createClass({
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * Indicates whether the styles list is expanded or not.
+             *
+             * @property {Boolean} expanded
+             */
+            expanded: React.PropTypes.bool,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * List of the styles the button is able to handle.
+             *
+             * @property {Array} styles
+             */
+            styles: React.PropTypes.arrayOf(React.PropTypes.object),
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @property {Number} tabIndex
+             */
+            tabIndex: React.PropTypes.number,
+
+            /**
+             * Callback provided by the button host to notify when the styles list has been expanded.
+             *
+             * @property {Function} toggleDropdown
+             */
+            toggleDropdown: React.PropTypes.func
+        },
+
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -29,50 +75,39 @@
          */
         getDefaultProps: function () {
             return {
+                label: AlloyEditor.Strings.styles,
                 styles: [
                     {
-                        name: 'Head 1',
+                        name: AlloyEditor.Strings.h1,
                         style: {
                             element: 'h1'
                         }
                     },
                     {
-                        name: 'Head 2',
+                        name: AlloyEditor.Strings.h2,
                         style: {
                             element: 'h2'
                         }
                     },
                     {
-                        name: 'Big',
+                        name: AlloyEditor.Strings.formatted,
                         style: {
-                            element: 'big'
+                            element: 'pre'
                         }
                     },
                     {
-                        name: 'Small',
+                        name: AlloyEditor.Strings.cite,
                         style: {
-                            element: 'small'
+                            element: 'cite'
                         }
                     },
                     {
-                        name: 'Code',
+                        name: AlloyEditor.Strings.code,
                         style: {
                             element: 'code'
                         }
                     }
                 ]
-            };
-        },
-
-        /**
-         * Lifecycle. Invoked once before the component is mounted.
-         * The return value will be used as the initial value of this.state.
-         *
-         * @method getInitialState
-         */
-        getInitialState: function() {
-            return {
-                expanded: false
             };
         },
 
@@ -83,7 +118,7 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var activeStyle = 'Normal Text';
+            var activeStyle = AlloyEditor.Strings.normal;
 
             this.props.styles.forEach(function(item) {
                 if (this._checkActive(item.style)) {
@@ -94,12 +129,12 @@
             var buttonStylesList;
 
             if (this.props.expanded) {
-                buttonStylesList = <AlloyEditor.ButtonStylesList editor={this.props.editor} styles={this.props.styles} trigger={this.props.trigger} />
+                buttonStylesList = <AlloyEditor.ButtonStylesList editor={this.props.editor} styles={this.props.styles} />
             }
 
             return (
                 <div className="alloy-editor-container-styles alloy-editor-has-dropdown">
-                    <button className="alloy-editor-toolbar-element" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex}>
+                    <button aria-expanded={this.props.expanded} aria-label={this.props.label + ' ' + activeStyle} className="alloy-editor-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={this.props.label + ' ' + activeStyle}>
                         <div className="alloy-editor-container">
                             <span className="alloy-editor-selected-style">{activeStyle}</span>
                             <span className="alloy-editor-icon-arrow"></span>

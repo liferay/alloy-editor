@@ -19,11 +19,39 @@
         // Allows validating props being passed to the component.
         propTypes: {
             /**
+             * The toolbar configuration.
+             *
+             * @property {Object} config
+             */
+            config: React.PropTypes.object,
+
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
              * The gutter to be applied to the widget when rendered in exclusive mode
              *
              * @property {Object} gutterExclusive
              */
-            gutterExclusive: React.PropTypes.object
+            gutterExclusive: React.PropTypes.object,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
+             *
+             * @property {Object} selectionData
+             */
+            selectionData: React.PropTypes.object
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -55,7 +83,8 @@
                 keys: {
                     next: [38, 39],
                     prev: [37, 40]
-                }
+                },
+                label: AlloyEditor.Strings.add
             };
         },
 
@@ -98,7 +127,7 @@
             var className = this._getToolbarClassName();
 
             return (
-                <div className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="-1">
+                <div aria-label={this.props.label} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role="toolbar" tabIndex="-1">
                     <div className="alloy-editor-container">
                         {buttons}
                     </div>
@@ -121,7 +150,7 @@
             } else {
                 if (this.props.selectionData && this.props.selectionData.region) {
                     buttons = (
-                        <button className="alloy-editor-button alloy-editor-button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)}>
+                        <button aria-label={this.props.label} className="alloy-editor-button alloy-editor-button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={this.props.label}>
                             <span className="alloy-editor-icon-add"></span>
                         </button>
                     );

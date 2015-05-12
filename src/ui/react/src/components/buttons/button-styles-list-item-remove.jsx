@@ -11,12 +11,34 @@
         // Allows validating props being passed to the component.
         propTypes: {
             /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
              * Block styles that should be removed in addition to all other inline styles
              *
              * @property {Array} removeBlocks
-             * @default ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+             * @default ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre']
              */
-            removeBlocks: React.PropTypes.array
+            removeBlocks: React.PropTypes.array,
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @property {Number} tabIndex
+             */
+            tabIndex: React.PropTypes.number
         },
 
         //Lifecycle. Provides static properties to the widget.
@@ -39,7 +61,8 @@
          */
         getDefaultProps: function() {
             return {
-                removeBlocks: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+                label: AlloyEditor.Strings.normal,
+                removeBlocks: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre']
             };
         },
 
@@ -51,7 +74,9 @@
          */
         render: function() {
             return (
-                <button className="alloy-editor-toolbar-element" onClick={this._removeStyles} tabIndex={this.props.tabIndex}>Normal Text</button>
+                <li>
+                    <button className="alloy-editor-toolbar-element" onClick={this._removeStyles} role="option" tabIndex={this.props.tabIndex}>{this.props.label}</button>
+                </li>
             );
         },
 

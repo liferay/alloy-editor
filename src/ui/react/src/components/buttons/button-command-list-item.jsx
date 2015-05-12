@@ -48,7 +48,9 @@
          */
         render: function() {
             return (
-                <button className={this._getClassName()} onClick={this.execCommand} tabIndex={this.props.tabIndex}>{this.props.description}</button>
+                <li>
+                    <button aria-label={this.props.description} className={this._getClassName()} onClick={this.execCommand} role="option" tabIndex={this.props.tabIndex}>{this.props.description}</button>
+                </li>
             );
         },
 

@@ -70,8 +70,13 @@
          */
         getDefaultProps: function() {
             return {
-                circular: true,
+                circular: false,
                 descendants: '.alloy-editor-toolbar-element',
+                labels: {
+                    blockStyles: AlloyEditor.Strings.blockStyles,
+                    inlineStyles: AlloyEditor.Strings.inlineStyles,
+                    objectStyles: AlloyEditor.Strings.objectStyles
+                },
                 keys: {
                     next: [39, 40],
                     prev: [37, 38]
@@ -88,16 +93,18 @@
         render: function() {
             return (
                 <div className="alloy-editor-dropdown" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
-                    <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />
+                    <ul className="alloy-editor-listbox" role="listbox">
+                        <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />
 
-                    <AlloyEditor.ButtonsStylesListHeader name="Block styles" styles={this._blockStyles} />
-                    {this._renderStylesItems(this._blockStyles)}
+                        <AlloyEditor.ButtonsStylesListHeader name={this.props.labels.blockStyles} styles={this._blockStyles} />
+                        {this._renderStylesItems(this._blockStyles)}
 
-                    <AlloyEditor.ButtonsStylesListHeader name="Inline styles" styles={this._inlineStyles} />
-                    {this._renderStylesItems(this._inlineStyles)}
+                        <AlloyEditor.ButtonsStylesListHeader name={this.props.labels.inlineStyles} styles={this._inlineStyles} />
+                        {this._renderStylesItems(this._inlineStyles)}
 
-                    <AlloyEditor.ButtonsStylesListHeader name="Object styles" styles={this._objectStyles} />
-                    {this._renderStylesItems(this._objectStyles)}
+                        <AlloyEditor.ButtonsStylesListHeader name={this.props.labels.objectStyles} styles={this._objectStyles} />
+                        {this._renderStylesItems(this._objectStyles)}
+                    </ul>
                 </div>
             );
         },
@@ -112,12 +119,15 @@
          */
         _renderStylesItems: function(styles) {
             var editor = this.props.editor;
-            var trigger = this.props.trigger;
             var items;
 
             if (styles && styles.length) {
                 items = styles.map(function(item) {
-                    return <AlloyEditor.ButtonStylesListItem key={item.name} editor={editor} name={item.name} style={item.style} tabIndex={(trigger && trigger.name === item.name) ? 0 : -1} />
+                    return (
+                        <li key={item.name}>
+                            <AlloyEditor.ButtonStylesListItem editor={editor} name={item.name} style={item.style} />
+                        </li>
+                    );
                 });
             }
 

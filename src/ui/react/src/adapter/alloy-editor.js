@@ -221,16 +221,6 @@
             },
 
             /**
-             * Specifies the type of selections, which will be handled by
-             * @property selections
-             * @type {Object}
-             */
-            selections: {
-                validator: AlloyEditor.Lang.isArray,
-                value: AlloyEditor.Selections
-            },
-
-            /**
              * The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.
              *
              * @property srcNode
