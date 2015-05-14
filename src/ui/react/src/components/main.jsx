@@ -189,6 +189,7 @@
                     editor: this.props.editor,
                     editorEvent: this.state.editorEvent,
                     key: toolbar.key,
+                    onDismiss: this._onDismissToolbarFocus,
                     selectionData: this.state.selectionData,
                     trigger: this.state.trigger
                 }, toolbar.key);
@@ -220,6 +221,18 @@
                 selectionData: editor.getSelectionData(),
                 trigger: event.data
             });
+        },
+
+        /**
+         * Executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+         *
+         * @protected
+         * @method _onDismissToolbarFocus
+         */
+        _onDismissToolbarFocus: function() {
+            var editor = this.props.editor.get('nativeEditor');
+
+            editor.focus();
         },
 
         /**

@@ -44,6 +44,7 @@
         mergeDropdownProps: function(obj, itemKey) {
             return CKEDITOR.tools.merge(obj, {
                 expanded: this.state.itemDropdown === itemKey ? true : false,
+                tabIndex: this.state.dropdownTrigger === itemKey ? 0 : -1,
                 toggleDropdown: this.toggleDropdown.bind(this, itemKey)
             });
         },
@@ -53,10 +54,17 @@
          *
          * @method toggleDropdown
          * @param {Object} itemDropdown The widget which requests to toggle its dropdown.
+         * @param {Number} toggleDirection User movement direction when toggled via keyboard.
          */
-        toggleDropdown: function(itemDropdown) {
+        toggleDropdown: function(itemDropdown, toggleDirection) {
             this.setState({
+                dropdownTrigger: itemDropdown,
                 itemDropdown: itemDropdown !== this.state.itemDropdown ? itemDropdown : null
+            }, function() {
+                if (!this.state.itemDropdown) {
+                    if (this.moveFocus) { this.moveFocus(toggleDirection); }
+                    else React.findDOMNode(this).focus();
+                }
             });
         }
     };

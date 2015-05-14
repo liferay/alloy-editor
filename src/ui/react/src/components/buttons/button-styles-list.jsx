@@ -78,8 +78,11 @@
                     objectStyles: AlloyEditor.Strings.objectStyles
                 },
                 keys: {
-                    next: [39, 40],
-                    prev: [37, 38]
+                    dismiss: [27],
+                    dismissNext: [39],
+                    dismissPrev: [37],
+                    next: [40],
+                    prev: [38]
                 }
             };
         },

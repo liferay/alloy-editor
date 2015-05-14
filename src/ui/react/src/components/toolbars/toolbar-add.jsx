@@ -81,8 +81,9 @@
                     top: 0
                 },
                 keys: {
-                    next: [38, 39],
-                    prev: [37, 40]
+                    dismiss: [27],
+                    next: [39, 40],
+                    prev: [37, 38]
                 },
                 label: AlloyEditor.Strings.add
             };

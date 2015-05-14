@@ -129,7 +129,7 @@
             var buttonStylesList;
 
             if (this.props.expanded) {
-                buttonStylesList = <AlloyEditor.ButtonStylesList editor={this.props.editor} styles={this.props.styles} />
+                buttonStylesList = <AlloyEditor.ButtonStylesList editor={this.props.editor} onDismiss={this.props.toggleDropdown} styles={this.props.styles} />
             }
 
             return (
