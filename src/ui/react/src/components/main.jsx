@@ -190,8 +190,7 @@
                     editorEvent: this.state.editorEvent,
                     key: toolbar.key,
                     onDismiss: this._onDismissToolbarFocus,
-                    selectionData: this.state.selectionData,
-                    trigger: this.state.trigger
+                    selectionData: this.state.selectionData
                 }, toolbar.key);
 
                 return React.createElement(toolbar, props);
@@ -218,8 +217,7 @@
 
             this.setState({
                 itemExclusive: null,
-                selectionData: editor.getSelectionData(),
-                trigger: event.data
+                selectionData: editor.getSelectionData()
             });
         },
 
@@ -248,8 +246,7 @@
                 editorEvent: event,
                 hidden: false,
                 itemExclusive: null,
-                selectionData: event.data.selectionData,
-                trigger: null
+                selectionData: event.data.selectionData
             });
         },
 
