@@ -10,11 +10,11 @@
         // Allows validating props being passed to the component.
         propTypes: {
             /**
-             * The row command labels that should be used for accessibility purposes.
+             * List of the commands the button is able to handle.
              *
-             * @property {Object} commandLabels
+             * @property {Array} commands
              */
-            commandLabels: React.PropTypes.object,
+            commands: React.PropTypes.arrayOf(React.PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
@@ -73,11 +73,20 @@
          */
         getDefaultProps: function () {
             return {
-                commandLabels: {
-                    columnDelete: AlloyEditor.Strings.columnDelete,
-                    columnInsertAfter: AlloyEditor.Strings.columnInsertAfter,
-                    columnInsertBefore: AlloyEditor.Strings.columnInsertBefore
-                },
+                commands: [
+                    {
+                        command: 'columnInsertBefore',
+                        label: AlloyEditor.Strings.columnInsertBefore
+                    },
+                    {
+                        command: 'columnInsertAfter',
+                        label: AlloyEditor.Strings.columnInsertAfter
+                    },
+                    {
+                        command: 'columnDelete',
+                        label: AlloyEditor.Strings.columnDelete
+                    }
+                ],
                 label: AlloyEditor.Strings.column
             };
         },
@@ -89,53 +98,22 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            return (
-                <div className="alloy-editor-container alloy-editor-has-dropdown">
-                    <button aria-expanded={this.props.expanded} aria-label={this.props.label} aria-owns="tableColumnCommands" className="alloy-editor-button" onClick={this.props.toggleDropdown} role="listbox" tabIndex={this.props.tabIndex} title={this.props.label}>
-                        <span className="alloy-editor-icon-column"></span>
-                    </button>
-                    {this._renderDropdown()}
-                </div>
-            );
-        },
+            var buttonCommandsList,
+                buttonCommandsListId;
 
-        /**
-         * Renders instances of ButtonCommandListItem with the description of the row action that will be executed.
-         *
-         * @protected
-         * @method _renderActions
-         * @return {Array} Rendered instances of ButtonCommandListItem class
-         */
-        _renderActions: function() {
-            var editor = this.props.editor;
-
-            var actions = [
-                <AlloyEditor.ButtonCommandListItem command="columnInsertBefore" description={this.props.commandLabels.columnInsertBefore} editor={editor} key="columninsertbefore" />,
-                <AlloyEditor.ButtonCommandListItem command="columnInsertAfter" description={this.props.commandLabels.columnInsertAfter} editor={editor} key="columninsertafter" />,
-                <AlloyEditor.ButtonCommandListItem command="columnDelete" description={this.props.commandLabels.columnDelete} editor={editor} key="columndelete" modifiesSelection={true} />
-            ];
-
-            return actions;
-        },
-
-        /*
-         * Renders the button dropdown with the associated command items when the button is expanded.
-         *
-         * @method _renderDropdown
-         * @return {Element} Returns the dropdown element if the button is expanded, null otherwise
-         */
-        _renderDropdown: function() {
             if (this.props.expanded) {
-                return (
-                    <div className="alloy-editor-dropdown">
-                        <ul className="alloy-editor-listbox" id="tableColumnCommands" role="listbox">
-                            {this._renderActions()}
-                        </ul>
-                    </div>
-                );
+                buttonCommandsListId = ButtonTableColumn.key + 'List';
+                buttonCommandsList = <AlloyEditor.ButtonCommandsList commands={this.props.commands} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} />
             }
 
-            return null;
+            return (
+                <div className="alloy-editor-container alloy-editor-has-dropdown">
+                    <button aria-expanded={this.props.expanded} aria-label={this.props.label} aria-owns={buttonCommandsListId} className="alloy-editor-button" onClick={this.props.toggleDropdown} role="listbox" tabIndex={this.props.tabIndex} title={this.props.label}>
+                        <span className="alloy-editor-icon-column"></span>
+                    </button>
+                    {buttonCommandsList}
+                </div>
+            );
         }
     });
 

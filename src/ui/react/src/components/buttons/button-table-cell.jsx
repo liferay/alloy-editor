@@ -10,11 +10,11 @@
         // Allows validating props being passed to the component.
         propTypes: {
             /**
-             * The row command labels that should be used for accessibility purposes.
+             * List of the commands the button is able to handle.
              *
-             * @property {Object} commandLabels
+             * @property {Array} commands
              */
-            commandLabels: React.PropTypes.object,
+            commands: React.PropTypes.arrayOf(React.PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
@@ -73,16 +73,40 @@
          */
         getDefaultProps: function () {
             return {
-                commandLabels: {
-                    cellDelete: AlloyEditor.Strings.cellDelete,
-                    cellInsertAfter: AlloyEditor.Strings.cellInsertAfter,
-                    cellInsertBefore: AlloyEditor.Strings.cellInsertBefore,
-                    cellMerge: AlloyEditor.Strings.cellMerge,
-                    cellMergeDown: AlloyEditor.Strings.cellMergeDown,
-                    cellMergeRight: AlloyEditor.Strings.cellMergeRight,
-                    cellSplitHorizontal: AlloyEditor.Strings.cellSplitHorizontal,
-                    cellSplitVertical: AlloyEditor.Strings.cellSplitVertical,
-                },
+                commands: [
+                    {
+                        command: 'cellInsertBefore',
+                        label: AlloyEditor.Strings.cellInsertBefore
+                    },
+                    {
+                        command: 'cellInsertAfter',
+                        label: AlloyEditor.Strings.cellInsertAfter
+                    },
+                    {
+                        command: 'cellDelete',
+                        label: AlloyEditor.Strings.cellDelete
+                    },
+                    {
+                        command: 'cellMerge',
+                        label: AlloyEditor.Strings.cellMerge
+                    },
+                    {
+                        command: 'cellMergeDown',
+                        label: AlloyEditor.Strings.cellMergeDown
+                    },
+                    {
+                        command: 'cellMergeRight',
+                        label: AlloyEditor.Strings.cellMergeRight
+                    },
+                    {
+                        command: 'cellHorizontalSplit',
+                        label: AlloyEditor.Strings.cellSplitHorizontal
+                    },
+                    {
+                        command: 'cellVerticalSplit',
+                        label: AlloyEditor.Strings.cellSplitVertical
+                    }
+                ],
                 label: AlloyEditor.Strings.cell
             };
         },
@@ -94,60 +118,22 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            return (
-                <div className="alloy-editor-container alloy-editor-has-dropdown">
-                    <button aria-expanded={this.props.expanded} aria-label={this.props.label} aria-owns="tableCellCommands" className="alloy-editor-button" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={this.props.label}>
-                        <span className="alloy-editor-icon-cell"></span>
-                    </button>
-                    {this._renderDropdown()}
-                </div>
-            );
-        },
+            var buttonCommandsList,
+                buttonCommandsListId;
 
-        /**
-         * Renders instances of ButtonCommandListItem passing the command which has to be executed and the description
-         * of the command.
-         *
-         * @protected
-         * @method _renderActions
-         * @return {Array} Rendered instances of ButtonCommandListItem class.
-         */
-        _renderActions: function() {
-            var editor = this.props.editor;
-
-            var actions = [
-                <AlloyEditor.ButtonCommandListItem command="cellInsertBefore" description={this.props.commandLabels.cellInsertBefore} editor={editor} key="cellinsertbefore" />,
-                <AlloyEditor.ButtonCommandListItem command="cellInsertAfter" description={this.props.commandLabels.cellInsertAfter} editor={editor} key="cellinsertafter" />,
-                <AlloyEditor.ButtonCommandListItem command="cellDelete" description={this.props.commandLabels.cellDelete} editor={editor} key="celldelete" modifiesSelection={true} />,
-                <AlloyEditor.ButtonCommandListItem command="cellMerge" description={this.props.commandLabels.cellMerge} editor={editor} key="cellmerge" />,
-                <AlloyEditor.ButtonCommandListItem command="cellMergeDown" description={this.props.commandLabels.cellMergeDown} editor={editor} key="cellmergedown" />,
-                <AlloyEditor.ButtonCommandListItem command="cellMergeRight" description={this.props.commandLabels.cellMergeRight} editor={editor} key="cellmergeright" />,
-                <AlloyEditor.ButtonCommandListItem command="cellHorizontalSplit" description={this.props.commandLabels.cellSplitHorizontal} editor={editor} key="cellsplithorizontal" />,
-                <AlloyEditor.ButtonCommandListItem command="cellVerticalSplit" description={this.props.commandLabels.cellSplitVertical} editor={editor} key="cellsplitvertical" />
-            ];
-
-            return actions;
-        },
-
-        /*
-         * Renders the button dropdown with the associated command items when the button is expanded.
-         *
-         * @protected
-         * @method _renderDropdown
-         * @return {Element} Returns the dropdown element if the button is expanded, null otherwise.
-         */
-        _renderDropdown: function() {
             if (this.props.expanded) {
-                return (
-                    <div className="alloy-editor-dropdown">
-                        <ul className="alloy-editor-listbox" id="tableCellCommands" role="listbox">
-                            {this._renderActions()}
-                        </ul>
-                    </div>
-                );
+                buttonCommandsListId = ButtonTableCell.key + 'List';
+                buttonCommandsList = <AlloyEditor.ButtonCommandsList commands={this.props.commands} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} />
             }
 
-            return null;
+            return (
+                <div className="alloy-editor-container alloy-editor-has-dropdown">
+                    <button aria-expanded={this.props.expanded} aria-label={this.props.label} aria-owns={buttonCommandsListId} className="alloy-editor-button" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={this.props.label}>
+                        <span className="alloy-editor-icon-cell"></span>
+                    </button>
+                    {buttonCommandsList}
+                </div>
+            );
         }
     });
 
