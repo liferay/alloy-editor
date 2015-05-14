@@ -301,17 +301,9 @@
                 this._descendants.forEach(function(item, index) {
                     if (item.getAttribute('tabindex') === '0') {
                         this._activeDescendant = index;
-                    }
-                }.bind(this));
-
-                if (this.props.trigger && this.props.trigger.isMounted()) {
-                    var triggerDescendant = this._descendants.indexOf(React.findDOMNode(this.props.trigger));
-
-                    if (triggerDescendant !== -1) {
-                        this._activeDescendant = triggerDescendant;
                         this.focus();
                     }
-                }
+                }.bind(this));
             }
         }
     };
