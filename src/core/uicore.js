@@ -65,24 +65,20 @@
              * @param {Object} editor The current CKEditor instance.
              */
             init: function(editor) {
-                var ariaElement,
-                    ariaState = [],
-                    handleAria,
-                    handleUI,
-                    uiTasksTimeout;
+                var ariaState = [];
 
-                ariaElement = this._createAriaElement(editor.id);
+                var ariaElement = this._createAriaElement(editor.id);
 
-                uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
+                var uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
 
-                handleAria = CKEDITOR.tools.debounce(
+                var handleAria = CKEDITOR.tools.debounce(
                     function(event) {
                         ariaElement.innerHTML = ariaState.join('. ');
                     },
                     uiTasksTimeout
                 );
 
-                handleUI = CKEDITOR.tools.debounce(
+                var handleUI = CKEDITOR.tools.debounce(
                     function(event) {
                         ariaState = [];
 
@@ -116,6 +112,8 @@
                 });
 
                 editor.on('destroy', function(event) {
+                    ariaElement.parentNode.removeChild(ariaElement);
+
                     handleUI.detach();
                 });
             },
@@ -129,9 +127,7 @@
              * @return {HTMLElement} The created and applied to DOM element.
              */
             _createAriaElement: function(id) {
-                var statusElement;
-
-                statusElement = document.createElement('div');
+                var statusElement = document.createElement('div');
 
                 statusElement.className = 'sr-only';
 
