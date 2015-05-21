@@ -129,7 +129,7 @@
             _createAriaElement: function(id) {
                 var statusElement = document.createElement('div');
 
-                statusElement.className = 'sr-only';
+                statusElement.className = 'alloy-editor-sr-only';
 
                 statusElement.setAttribute('aria-live', 'polite');
                 statusElement.setAttribute('role', 'status');
