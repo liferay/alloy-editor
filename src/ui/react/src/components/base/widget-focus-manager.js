@@ -314,10 +314,12 @@
 
                 this._activeDescendant = 0;
 
-                this._descendants.forEach(function(item, index) {
+                this._descendants.some(function(item, index) {
                     if (item.getAttribute('tabindex') === '0') {
                         this._activeDescendant = index;
                         this.focus();
+
+                        return true;
                     }
                 }.bind(this));
             }
