@@ -15,19 +15,34 @@ var pkg = require(path.join(rootDir, 'package.json'));
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
 
-var srcFiles = require('../_src.js');
+var coreFiles = require('../_core.js');
+var languageFiles = require('../_languages.js');
+var uiFiles = require('../_ui.js');
 
 gulp.task('prepare-files', function(done) {
     runSequence(
-        'clean-dist', 'create-output-dir', ['build-css', 'copy-ckeditor', 'copy-src-files', 'copy-react'], done);
+        'clean-dist', 'create-output-dir', [
+            'build-css', 'copy-ckeditor', 'copy-core-files', 'copy-ui-files', 'copy-language-files', 'copy-react'
+        ], done);
 });
 
 gulp.task('create-output-dir', function(callback) {
     mkdirp(editorDistFolder, callback);
 });
 
-gulp.task('copy-src-files', function() {
-    return gulp.src(srcFiles, {cwd: 'src', base: 'src'})
+gulp.task('copy-core-files', function() {
+    return gulp.src(coreFiles, {cwd: 'src', base: 'src'})
+        .pipe(react())
+        .pipe(gulp.dest(path.join(editorDistFolder, 'test')));
+});
+
+gulp.task('copy-language-files', function() {
+    return gulp.src(languageFiles, {cwd: 'src', base: 'src'})
+        .pipe(gulp.dest(path.join(editorDistFolder, 'test')));
+});
+
+gulp.task('copy-ui-files', function() {
+    return gulp.src(uiFiles, {cwd: 'src', base: 'src'})
         .pipe(react())
         .pipe(gulp.dest(path.join(editorDistFolder, 'test')));
 });

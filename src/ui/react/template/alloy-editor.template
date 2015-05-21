@@ -5,5 +5,11 @@ CKEDITOR.disableAutoInline = true;
         return;
     }
 
-    <%= source %>
+    CKEDITOR.once('resourcesLoaded', entrance);
+
+    <%= core %>
+
+    function entrance() {
+        <%= ui %>
+    }
 }());

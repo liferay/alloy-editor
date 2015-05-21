@@ -41,7 +41,9 @@
 
             this._editor = editor;
 
-            this._renderUI();
+            CKEDITOR.once('resourcesLoaded', this._renderUI.bind(this));
+
+            this._loadLanguageFile();
         },
 
         /**
@@ -74,6 +76,32 @@
             return this._editor;
         },
 
+        _loadLanguageFile: function() {
+            var onLanguageFileLoad = function() {
+                CKEDITOR.fire('resourcesLoaded');
+            };
+
+            if (!window.AlloyEditor.Strings) {
+                var languages = ['af','ar','bg','bn','bs','ca','cs','cy','da','de','el','en-au','en-ca','en-gb','en','eo','es','et','eu','fa','fi','fo','fr-ca','fr','gl','gu','he','hi','hr','hu','id','is','it','ja','ka','km','ko','ku','lt','lv','mk','mn','ms','nb','nl','no','pl','pt-br','pt','ro','ru','si','sk','sl','sq','sr-latn','sr','sv','th','tr','tt','ug','uk','vi','zh-cn','zh'];
+
+                var userLanguage = navigator.language || navigator.userLanguage || 'en';
+
+                var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
+                var lang = parts[1];
+                var locale = parts[2];
+
+                if (languages[lang + '-' + locale]) {
+                    lang = lang + '-' + locale;
+                } else if (!languages.indexOf(lang)) {
+                    lang = 'en';
+                }
+
+                CKEDITOR.scriptLoader.load(CKEDITOR.getUrl('lang/alloy-editor/' + lang + '.js'), onLanguageFileLoad, this);
+            } else {
+                setTimeout(onLanguageFileLoad.bind(this), 0);
+            }
+        },
+
         /**
          * Renders the specified from the user toolbars
          *
@@ -99,6 +127,8 @@
             }), editorUIElement);
 
             this._editorUIElement = editorUIElement;
+
+            this.get('nativeEditor').fire('ready');
         },
 
         /**
@@ -218,16 +248,6 @@
                 validator: AlloyEditor.Lang.isString,
                 value: 'contextmenu,toolbar,elementspath,resize,liststyle,link',
                 writeOnce: true
-            },
-
-            /**
-             * Specifies the type of selections, which will be handled by
-             * @property selections
-             * @type {Object}
-             */
-            selections: {
-                validator: AlloyEditor.Lang.isArray,
-                value: AlloyEditor.Selections
             },
 
             /**

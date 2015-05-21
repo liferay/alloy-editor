@@ -6,7 +6,9 @@ var alloyEditorDir = 'dist/alloy-editor-*/alloy-editor/';
 
 var argv = require('yargs').argv;
 var path = require('path');
-var srcFiles = require('./_src.js');
+
+var coreFiles = require('./_core.js');
+var uiFiles = require('./_ui.js');
 
 var preprocessors = {
     '**/*.jsx': ['react-jsx'],
@@ -72,12 +74,24 @@ var filesToLoad = [
     },
 
     /* Fixtures */
-    {
-        pattern: 'src/ui/react/test/fixtures/**/*'
-    }
+    'src/ui/react/test/fixtures/**/*'
 ];
 
-srcFiles.forEach(function(file) {
+coreFiles.forEach(function(file) {
+    filesToLoad.push({
+        pattern: path.join(alloyEditorDir, 'test', file),
+        included: true,
+        watched: false
+    });
+});
+
+filesToLoad.push({
+    pattern: path.join(alloyEditorDir, 'test/ui/react/lang/en.js'),
+    included: true,
+    watched: false
+});
+
+uiFiles.forEach(function(file) {
     filesToLoad.push({
         pattern: path.join(alloyEditorDir, 'test', file),
         included: true,

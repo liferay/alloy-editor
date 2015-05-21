@@ -7,6 +7,52 @@
      * @class ButtonTableRow
      */
     var ButtonTableRow = React.createClass({
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * List of the commands the button is able to handle.
+             *
+             * @property {Array} commands
+             */
+            commands: React.PropTypes.arrayOf(React.PropTypes.object),
+
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * Indicates whether the styles list is expanded or not.
+             *
+             * @property {Boolean} expanded
+             */
+            expanded: React.PropTypes.bool,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @property {Number} tabIndex
+             */
+            tabIndex: React.PropTypes.number,
+
+            /**
+             * Callback provided by the button host to notify when the styles list has been expanded.
+             *
+             * @property {Function} toggleDropdown
+             */
+            toggleDropdown: React.PropTypes.func
+        },
+
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -20,57 +66,54 @@
         },
 
         /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function () {
+            return {
+                commands: [
+                    {
+                        command: 'rowInsertBefore',
+                        label: AlloyEditor.Strings.rowInsertBefore
+                    },
+                    {
+                        command: 'rowInsertAfter',
+                        label: AlloyEditor.Strings.rowInsertAfter
+                    },
+                    {
+                        command: 'rowDelete',
+                        label: AlloyEditor.Strings.rowDelete
+                    }
+                ],
+                label: AlloyEditor.Strings.row
+            };
+        },
+
+        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            return (
-                <div className="alloy-editor-container alloy-editor-has-dropdown">
-                    <button className="alloy-editor-button" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex}>
-                        <span className="alloy-editor-icon-row"></span>
-                    </button>
-                    {this._renderDropdown()}
-                </div>
-            );
-        },
+            var buttonCommandsList,
+                buttonCommandsListId;
 
-        /**
-         * Renders instances of ButtonCommandListItem with the description of the row action that will be executed.
-         *
-         * @protected
-         * @method _renderActions
-         * @return {Array} Rendered instances of ButtonCommandListItem class
-         */
-        _renderActions: function() {
-            var editor = this.props.editor;
-
-            var actions = [
-                <AlloyEditor.ButtonCommandListItem command="rowInsertBefore" description="Insert row above" editor={editor} key="rowinsertbefore" />,
-                <AlloyEditor.ButtonCommandListItem command="rowInsertAfter" description="Insert row below" editor={editor} key="rowinsertafter" />,
-                <AlloyEditor.ButtonCommandListItem command="rowDelete" description="Delete row" editor={editor} key="rowdelete" modifiesSelection={true} />
-            ];
-
-            return actions;
-        },
-
-        /**
-         * Renders the button dropdown with the associated command items when the button is expanded.
-         *
-         * @method _renderDropdown
-         * @return {Element} Returns the dropdown element if the button is expanded, null otherwise
-         */
-        _renderDropdown: function() {
             if (this.props.expanded) {
-                return (
-                    <div className="alloy-editor-dropdown">
-                        {this._renderActions()}
-                    </div>
-                );
+                buttonCommandsListId = ButtonTableRow.key + 'List';
+                buttonCommandsList = <AlloyEditor.ButtonCommandsList commands={this.props.commands} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} />
             }
 
-            return null;
+            return (
+                <div className="alloy-editor-container alloy-editor-has-dropdown">
+                    <button aria-expanded={this.props.expanded} aria-label={this.props.label} aria-owns={buttonCommandsListId} className="alloy-editor-button" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={this.props.label}>
+                        <span className="alloy-editor-icon-row"></span>
+                    </button>
+                    {buttonCommandsList}
+                </div>
+            );
         }
     });
 

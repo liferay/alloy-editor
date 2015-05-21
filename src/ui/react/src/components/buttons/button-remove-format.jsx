@@ -18,7 +18,22 @@
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @property {Number} tabIndex
+             */
+            tabIndex: React.PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -41,7 +56,8 @@
          */
         getDefaultProps: function() {
             return {
-                command: 'removeFormat'
+                command: 'removeFormat',
+                label: AlloyEditor.Strings.removeformat
             };
         },
 
@@ -53,7 +69,7 @@
          */
         render: function() {
             return (
-                <button className='alloy-editor-button' data-type="button-removeformat" onClick={this.execCommand} tabIndex={this.props.tabIndex}>
+                <button aria-label={this.props.label} className='alloy-editor-button' data-type="button-removeformat" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}>
                     <span className="alloy-editor-icon-removeformat"></span>
                 </button>
             );

@@ -12,6 +12,40 @@
     var UI = React.createClass({
         mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
 
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * Localized messages for live aria updates. Should include the following messages:
+             * - noToolbar: Notification for no available toolbar in the editor.
+             * - oneToolbar: Notification for just one available toolbar in the editor.
+             * - manyToolbars: Notification for more than one available toolbar in the editor.
+             *
+             * @property {Object} ariaUpdates
+             */
+            ariaUpdates: React.PropTypes.object,
+
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * The delay (ms), after which key or mouse events will be processed.
+             *
+             * @property {Number} eventsDelay
+             */
+            eventsDelay: React.PropTypes.number,
+
+            /**
+             * The toolbars configuration for this editor instance
+             *
+             * @property {Object} toolbars
+             */
+            toolbars: React.PropTypes.object.isRequired
+        },
+
         /**
          * Lifecycle. Invoked once before the component is mounted.
          *
@@ -31,6 +65,11 @@
          */
         getDefaultProps: function() {
             return {
+                ariaUpdates: {
+                    noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
+                    oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
+                    manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
+                },
                 circular: true,
                 descendants: '[class*=alloy-editor-toolbar-]',
                 eventsDelay: 0,
@@ -74,6 +113,44 @@
             }.bind(this));
         },
 
+        componentDidUpdate: function (prevProps, prevState) {
+            var domNode = React.findDOMNode(this);
+
+            if (domNode) {
+                this.props.editor.get('nativeEditor').fire('ariaUpdate', {
+                    message: this._getAvailableToolbarsMessage(domNode)
+                });
+            }
+        },
+
+        _getAriaUpdateTemplate: function(ariaUpdate) {
+            if (!this._ariaUpdateTemplates) this._ariaUpdateTemplates = {};
+
+            if (!this._ariaUpdateTemplates[ariaUpdate]) {
+                this._ariaUpdateTemplates[ariaUpdate] = new CKEDITOR.template(this.props.ariaUpdates[ariaUpdate]);
+            }
+
+            return this._ariaUpdateTemplates[ariaUpdate];
+        },
+
+        _getAvailableToolbarsMessage: function(domNode) {
+            var toolbarsNodeList = domNode.querySelectorAll('[role="toolbar"]');
+
+            if (!toolbarsNodeList.length) {
+                return this.props.ariaUpdates.noToolbar;
+            } else {
+                var toolbarNames = Array.prototype.slice.call(toolbarsNodeList).map(function(toolbar) {
+                    return toolbar.getAttribute('aria-label');
+                });
+
+                var ariaUpdate = toolbarNames.length === 1 ? 'oneToolbar' : 'manyToolbars';
+
+                return this._getAriaUpdateTemplate(ariaUpdate).output({
+                    toolbars: toolbarNames.join(',').replace(/,([^,]*)$/, ' and ' + '$1')
+                });
+            }
+        },
+
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
@@ -112,9 +189,8 @@
                     editor: this.props.editor,
                     editorEvent: this.state.editorEvent,
                     key: toolbar.key,
-                    selectionData: this.state.selectionData,
-                    selections: this.props.selections,
-                    trigger: this.state.trigger
+                    onDismiss: this._onDismissToolbarFocus,
+                    selectionData: this.state.selectionData
                 }, toolbar.key);
 
                 return React.createElement(toolbar, props);
@@ -141,9 +217,20 @@
 
             this.setState({
                 itemExclusive: null,
-                selectionData: editor.getSelectionData(),
-                trigger: event.data
+                selectionData: editor.getSelectionData()
             });
+        },
+
+        /**
+         * Executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+         *
+         * @protected
+         * @method _onDismissToolbarFocus
+         */
+        _onDismissToolbarFocus: function() {
+            var editor = this.props.editor.get('nativeEditor');
+
+            editor.focus();
         },
 
         /**
@@ -159,8 +246,7 @@
                 editorEvent: event,
                 hidden: false,
                 itemExclusive: null,
-                selectionData: event.data.selectionData,
-                trigger: null
+                selectionData: event.data.selectionData
             });
         },
 

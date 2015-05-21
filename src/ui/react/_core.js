@@ -15,9 +15,5 @@ module.exports = [
     'ui/react/src/selections/selection-position.js',
     'ui/react/src/selections/selection-test.js',
     'ui/react/src/selections/selections.js',
-    'ui/react/src/components/base/*.js*',
-    'ui/react/src/components/buttons/*.js*',
-    'ui/react/src/components/toolbars/*.js*',
-    'ui/react/src/components/main.js*',
     'ui/react/src/adapter/alloy-editor.js'
 ];

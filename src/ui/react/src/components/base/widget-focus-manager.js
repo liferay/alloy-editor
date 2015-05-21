@@ -1,8 +1,13 @@
 (function() {
     'use strict';
 
+    var DIRECTION_NONE = 0;
     var DIRECTION_NEXT = 1;
     var DIRECTION_PREV = -1;
+
+    var ACTION_NONE = 0;
+    var ACTION_MOVE_FOCUS = 1;
+    var ACTION_DISMISS_FOCUS = 2;
 
     /**
      * WidgetFocusManager is a mixin that provides keyboard navigation inside a widget. To do this,
@@ -13,6 +18,18 @@
     var WidgetFocusManager = {
         // Allows validating props being passed to the component.
         propTypes: {
+            /**
+             * Callback method to be invoked when the focus manager is to be dismissed. This happens
+             * in the following scenarios if a dismiss callback has been specified:
+             * - A dismiss key has been pressed
+             * - In a non-circular focus manager, when:
+             *     - The active descendant is the first one and a prev key has been pressed.
+             *     - The active descendant is the last one and a next key has been pressed.
+             *
+             * @property {Function} onDismiss
+             */
+            onDismiss: React.PropTypes.func,
+
             /**
              * Indicates if focus should be set to the first/last descendant when the limits are reached.
              *
@@ -29,8 +46,8 @@
 
             /**
              * Object representing the keys used to navigate between descendants. The format for the prop is:
-             * `{next: value, prev: value}` where value can be both a number or an array of numbers with the
-             * allowed keyCodes.
+             * `{dismiss: value, dismissNext: value, dismissPrev: value, next: value, prev: value}` where
+             * value can be both a number or an array of numbers with the allowed keyCodes.
              *
              * @property {Object} keys
              */
@@ -86,15 +103,100 @@
          */
         handleKey: function(event) {
             if (this._isValidTarget(event.target) && this._descendants) {
-                var direction = this._getDirection(event);
+                var action = this._getFocusAction(event);
 
-                if (direction) {
+                if (action.type) {
                     event.stopPropagation();
                     event.preventDefault();
 
-                    this._moveFocus(direction);
+                    if (action.type === ACTION_MOVE_FOCUS) {
+                        this._moveFocus(action.direction);
+                    }
+
+                    if (action.type === ACTION_DISMISS_FOCUS) {
+                        this.props.onDismiss(action.direction);
+                    }
                 }
             }
+        },
+
+        /**
+         * Moves the focus among descendants in the especified direction.
+         *
+         * @method moveFocus
+         * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
+         */
+        moveFocus: function(direction) {
+            direction = AlloyEditor.Lang.isNumber(direction) ? direction : 0;
+
+            this._moveFocus(direction);
+        },
+
+        /**
+         * Returns the action, if any, that a keyboard event in the current focus manager state
+         * should produce.
+         *
+         * @protected
+         * @method _getFocusAction
+         * @param {object} event The Keyboard event.
+         * @return {Object} An action object with type and direction properties.
+         */
+        _getFocusAction: function(event) {
+            var action = { type: ACTION_NONE};
+
+            if (this.props.keys) {
+                var direction = this._getFocusMoveDirection(event);
+
+                if (direction) {
+                    action.direction = direction;
+                    action.type = ACTION_MOVE_FOCUS;
+                }
+
+                var dismissAction = this._getFocusDismissAction(event, direction);
+
+                if (dismissAction.dismiss) {
+                    action.direction = dismissAction.direction;
+                    action.type = ACTION_DISMISS_FOCUS;
+                }
+            }
+
+            return action;
+        },
+
+        /**
+         * Returns the dismiss action, if any, the focus manager should execute to yield the focus. This
+         * will happen in any of these scenarios if a dismiss callback has been specified:
+         * - A dismiss key has been pressed
+         * - In a non-circular focus manager, when:
+         *     - The active descendant is the first one and a prev key has been pressed.
+         *     - The active descendant is the last one and a next key has been pressed.
+         *
+         * @protected
+         * @method _getFocusDismissAction
+         * @param {Object} event The Keyboard event.
+         * @param {Number} focusMoveDirection The focus movement direction (if any).
+         * @return {Object} A dismiss action with dismiss and direction properties.
+         */
+        _getFocusDismissAction: function(event, focusMoveDirection) {
+            var dismissAction = {
+                direction: focusMoveDirection,
+                dismiss: false
+            };
+
+            if (this.props.onDismiss) {
+                if (this._isValidKey(event.keyCode, this.props.keys.dismiss)) { dismissAction.dismiss = true; }
+                if (this._isValidKey(event.keyCode, this.props.keys.dismissNext)) { dismissAction.dismiss = true; dismissAction.direction = DIRECTION_NEXT; }
+                if (this._isValidKey(event.keyCode, this.props.keys.dismissPrev)) { dismissAction.dismiss = true; dismissAction.direction = DIRECTION_PREV; }
+
+                if (!dismissAction.dismiss && !this.props.circular && focusMoveDirection) {
+                    dismissAction.dismiss = (
+                        focusMoveDirection === DIRECTION_PREV && this._activeDescendant === 0 ||
+                        focusMoveDirection === DIRECTION_NEXT && this._activeDescendant === this._descendants.length -1
+                    );
+                }
+            }
+
+            return dismissAction;
         },
 
         /**
@@ -102,18 +204,17 @@
          * shift key modifier, the direction of the movement is inverted.
          *
          * @protected
-         * @method _getDirection
-         * @param {object} event The Keyboard event.
+         * @method _getFocusMoveDirection
+         * @param {Object} event The Keyboard event.
+         * @return {Number} The computed direction of the expected focus movement.
          */
-        _getDirection: function(event) {
-            var direction = 0;
+        _getFocusMoveDirection: function(event) {
+            var direction = DIRECTION_NONE;
 
-            if (this.props.keys) {
-                if (this._isValidKey(event.keyCode, this.props.keys.next)) { direction = DIRECTION_NEXT; }
-                if (this._isValidKey(event.keyCode, this.props.keys.prev)) { direction = DIRECTION_PREV; }
+            if (this._isValidKey(event.keyCode, this.props.keys.next)) { direction = DIRECTION_NEXT; }
+            if (this._isValidKey(event.keyCode, this.props.keys.prev)) { direction = DIRECTION_PREV; }
 
-                if (event.shifKey) { direction *= -1; }
-            }
+            if (event.shifKey) { direction *= -1; }
 
             return direction;
         },
@@ -197,14 +298,12 @@
 
                 this._activeDescendant = 0;
 
-                if (this.props.trigger && this.props.trigger.isMounted()) {
-                    var triggerDescendant = this._descendants.indexOf(React.findDOMNode(this.props.trigger));
-
-                    if (triggerDescendant !== -1) {
-                        this._activeDescendant = triggerDescendant;
+                this._descendants.forEach(function(item, index) {
+                    if (item.getAttribute('tabindex') === '0') {
+                        this._activeDescendant = index;
                         this.focus();
                     }
-                }
+                }.bind(this));
             }
         }
     };
