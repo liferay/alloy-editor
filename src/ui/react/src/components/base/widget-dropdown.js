@@ -13,7 +13,7 @@
          *
          * @method componentWillReceiveProps
          */
-        componentWillReceiveProps: function (nextProps) {
+        componentWillReceiveProps: function(nextProps) {
             this.setState({
                 itemDropdown: null
             });
@@ -62,8 +62,11 @@
                 itemDropdown: itemDropdown !== this.state.itemDropdown ? itemDropdown : null
             }, function() {
                 if (!this.state.itemDropdown) {
-                    if (this.moveFocus) { this.moveFocus(toggleDirection); }
-                    else React.findDOMNode(this).focus();
+                    if (this.moveFocus) {
+                        this.moveFocus(toggleDirection);
+                    } else {
+                        React.findDOMNode(this).focus();
+                    }
                 }
             });
         }

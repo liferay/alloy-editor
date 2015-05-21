@@ -142,7 +142,9 @@
          * @return {Object} An action object with type and direction properties.
          */
         _getFocusAction: function(event) {
-            var action = { type: ACTION_NONE};
+            var action = {
+                type: ACTION_NONE
+            };
 
             if (this.props.keys) {
                 var direction = this._getFocusMoveDirection(event);
@@ -184,14 +186,22 @@
             };
 
             if (this.props.onDismiss) {
-                if (this._isValidKey(event.keyCode, this.props.keys.dismiss)) { dismissAction.dismiss = true; }
-                if (this._isValidKey(event.keyCode, this.props.keys.dismissNext)) { dismissAction.dismiss = true; dismissAction.direction = DIRECTION_NEXT; }
-                if (this._isValidKey(event.keyCode, this.props.keys.dismissPrev)) { dismissAction.dismiss = true; dismissAction.direction = DIRECTION_PREV; }
+                if (this._isValidKey(event.keyCode, this.props.keys.dismiss)) {
+                    dismissAction.dismiss = true;
+                }
+                if (this._isValidKey(event.keyCode, this.props.keys.dismissNext)) {
+                    dismissAction.dismiss = true;
+                    dismissAction.direction = DIRECTION_NEXT;
+                }
+                if (this._isValidKey(event.keyCode, this.props.keys.dismissPrev)) {
+                    dismissAction.dismiss = true;
+                    dismissAction.direction = DIRECTION_PREV;
+                }
 
                 if (!dismissAction.dismiss && !this.props.circular && focusMoveDirection) {
                     dismissAction.dismiss = (
                         focusMoveDirection === DIRECTION_PREV && this._activeDescendant === 0 ||
-                        focusMoveDirection === DIRECTION_NEXT && this._activeDescendant === this._descendants.length -1
+                        focusMoveDirection === DIRECTION_NEXT && this._activeDescendant === this._descendants.length - 1
                     );
                 }
             }
@@ -211,10 +221,16 @@
         _getFocusMoveDirection: function(event) {
             var direction = DIRECTION_NONE;
 
-            if (this._isValidKey(event.keyCode, this.props.keys.next)) { direction = DIRECTION_NEXT; }
-            if (this._isValidKey(event.keyCode, this.props.keys.prev)) { direction = DIRECTION_PREV; }
+            if (this._isValidKey(event.keyCode, this.props.keys.next)) {
+                direction = DIRECTION_NEXT;
+            }
+            if (this._isValidKey(event.keyCode, this.props.keys.prev)) {
+                direction = DIRECTION_PREV;
+            }
 
-            if (event.shifKey) { direction *= -1; }
+            if (event.shifKey) {
+                direction *= -1;
+            }
 
             return direction;
         },
