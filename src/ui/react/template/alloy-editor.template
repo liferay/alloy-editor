@@ -5,5 +5,33 @@ CKEDITOR.disableAutoInline = true;
         return;
     }
 
-    <%= source %>
+    <%= core %>
+
+    (function loadLanguageFile() {
+        if (!window.AlloyEditorStrings) {
+            var languages = ['af','ar','bg','bn','bs','ca','cs','cy','da','de','el','en-au','en-ca','en-gb','en','eo','es','et','eu','fa','fi','fo','fr-ca','fr','gl','gu','he','hi','hr','hu','id','is','it','ja','ka','km','ko','ku','lt','lv','mk','mn','ms','nb','nl','no','pl','pt-br','pt','ro','ru','si','sk','sl','sq','sr-latn','sr','sv','th','tr','tt','ug','uk','vi','zh-cn','zh'];
+
+            var userLanguage = navigator.language || navigator.userLanguage || 'en';
+
+            var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
+            var lang = parts[1];
+            var locale = parts[2];
+
+            if (languages[lang + '-' + locale]) {
+                lang = lang + '-' + locale;
+            } else if (!languages.indexOf(lang)) {
+                lang = 'en';
+            }
+
+            CKEDITOR.scriptLoader.load(CKEDITOR.getUrl('lang/alloy-editor/' + lang + '.js'), entrance, this);
+        } else {
+            entrance();
+        }
+    }());
+
+    function entrance() {
+        <%= ui %>
+
+        CKEDITOR.fire('resourcesLoaded');
+    }
 }());

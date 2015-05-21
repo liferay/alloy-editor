@@ -11,21 +11,21 @@ var walk = require('walk');
 var ckeditorFolder;
 
 function createLang(lang) {
-	fs.readFile(path.join(__dirname, '../../lang/template.js'), {encoding:'utf8'}, function(err, content) {
+	fs.readFile(path.join(__dirname, 'language-template.js'), {encoding:'utf8'}, function(err, content) {
 		if (err) {
 			throw err;
 		}
 
 		content = content.replace(/\{lang\}/g, lang);
 
-		fs.writeFile(path.join(__dirname, '../../lang/') + lang + '.js', content, function(err) {
+		fs.writeFile(path.join(__dirname, 'lang/') + lang + '.js', content, function(err) {
 			if (err) {
 				throw err;
 			}
 
-			require(path.join(__dirname, '../../lang/') + lang + '.js');
+			require(path.join(__dirname, 'lang/') + lang + '.js');
 
-			fs.writeFile(path.join(__dirname, '../../lang/') + lang + '.js', 'AlloyEditor.Strings = ' + JSON.stringify(global.AlloyEditor.Strings) + ';', function(err) {
+			fs.writeFile(path.join(__dirname, 'lang/') + lang + '.js', 'AlloyEditor.Strings = ' + JSON.stringify(global.AlloyEditor.Strings) + ';', function(err) {
 				if (err) {
 					throw err;
 				}

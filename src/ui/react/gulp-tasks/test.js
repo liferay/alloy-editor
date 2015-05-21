@@ -15,7 +15,8 @@ var pkg = require(path.join(rootDir, 'package.json'));
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
 
-var srcFiles = require('../_src.js');
+var coreFiles = require('../_core.js');
+var uiFiles = require('../_ui.js');
 
 gulp.task('prepare-files', function(done) {
     runSequence(
@@ -27,7 +28,10 @@ gulp.task('create-output-dir', function(callback) {
 });
 
 gulp.task('copy-src-files', function() {
-    return gulp.src(srcFiles, {cwd: 'src', base: 'src'})
+    return gulp.src([
+            coreFiles, {cwd: 'src', base: 'src'},
+            uiFiles, {cwd: 'src', base: 'src'}
+        ])
         .pipe(react())
         .pipe(gulp.dest(path.join(editorDistFolder, 'test')));
 });

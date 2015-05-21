@@ -24,7 +24,8 @@ var apiFolder = path.join(rootDir, 'api');
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
 
-var srcFiles = require('../_src.js');
+var coreFiles = require('../_core.js');
+var uiFiles = require('../_ui.js');
 
 function errorHandler(error) {
   console.log(error.toString());
@@ -37,7 +38,8 @@ gulp.task('build', function(callback) {
         'clean-dist',
         [
             'build-css',
-            'build-js'
+            'build-js',
+            'copy-languages'
         ],
         [
             'create-alloy-editor-all',
@@ -56,7 +58,8 @@ gulp.task('release', function(callback) {
         [
             'build-api',
             'build-css',
-            'build-js'
+            'build-js',
+            'copy-languages'
         ],
         [
             'minimize-css',
@@ -121,12 +124,13 @@ gulp.task('build-demo', function() {
 gulp.task('build-js', function(callback) {
     runSequence([
         'copy-ckeditor',
-        'create-alloy-editor-core'
+        'create-alloy-editor-core',
+        'create-alloy-editor-core-ui'
     ], 'wrap-alloy-editor', callback);
 });
 
 gulp.task('clean-api', function(callback) {
-    return del(apiFolder, callback)
+    return del(apiFolder, callback);
 });
 
 gulp.task('clean-dist', function(callback) {
@@ -136,6 +140,11 @@ gulp.task('clean-dist', function(callback) {
 gulp.task('copy-ckeditor', function() {
     return gulp.src(path.join(rootDir, 'lib', 'ckeditor', '/**'))
         .pipe(gulp.dest(editorDistFolder));
+});
+
+gulp.task('copy-languages', function() {
+    return gulp.src(path.join(reactDir, 'lang', '/**'))
+        .pipe(gulp.dest(path.join(editorDistFolder, 'lang', 'alloy-editor')));
 });
 
 gulp.task('create-alloy-editor-all', function() {
@@ -199,9 +208,16 @@ gulp.task('create-alloy-editor-no-react-min', function() {
 });
 
 gulp.task('create-alloy-editor-core', function() {
-    return gulp.src(srcFiles, {cwd : rootDir + '/src'})
+    return gulp.src(coreFiles, {cwd : rootDir + '/src'})
     .pipe(react()).on('error', errorHandler)
     .pipe(concat('alloy-editor-core.js'))
+    .pipe(gulp.dest(editorDistFolder));
+});
+
+gulp.task('create-alloy-editor-core-ui', function() {
+    return gulp.src(uiFiles, {cwd : rootDir + '/src'})
+    .pipe(react()).on('error', errorHandler)
+    .pipe(concat('alloy-editor-core-ui.js'))
     .pipe(gulp.dest(editorDistFolder));
 });
 

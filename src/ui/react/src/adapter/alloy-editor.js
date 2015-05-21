@@ -41,7 +41,7 @@
 
             this._editor = editor;
 
-            this._renderUI();
+            CKEDITOR.once('resourcesLoaded', this._renderUI.bind(this));
         },
 
         /**
