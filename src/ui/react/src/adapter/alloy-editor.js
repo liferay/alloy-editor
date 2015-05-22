@@ -128,7 +128,7 @@
 
             this._editorUIElement = editorUIElement;
 
-            this.get('nativeEditor').fire('ready');
+            this.get('nativeEditor').fire('uiReady');
         },
 
         /**
