@@ -74,8 +74,8 @@
          */
         render: function() {
             return (
-                <li>
-                    <button className="alloy-editor-toolbar-element" onClick={this._removeStyles} role="option" tabIndex={this.props.tabIndex}>{this.props.label}</button>
+                <li role="option">
+                    <button className="alloy-editor-toolbar-element" onClick={this._removeStyles} tabIndex={this.props.tabIndex}>{this.props.label}</button>
                 </li>
             );
         },

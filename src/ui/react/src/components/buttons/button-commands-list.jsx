@@ -109,7 +109,7 @@
             if (commands && commands.length) {
                 items = commands.map(function(item) {
                     return (
-                        <li key={item.command}>
+                        <li key={item.command} role="option">
                             <AlloyEditor.ButtonCommandListItem command={item.command} description={item.label} editor={editor} />
                         </li>
                     );

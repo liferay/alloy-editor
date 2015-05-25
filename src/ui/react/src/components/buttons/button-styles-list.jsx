@@ -127,7 +127,7 @@
             if (styles && styles.length) {
                 items = styles.map(function(item) {
                     return (
-                        <li key={item.name}>
+                        <li key={item.name} role="option">
                             <AlloyEditor.ButtonStylesListItem editor={editor} name={item.name} style={item.style} />
                         </li>
                     );
