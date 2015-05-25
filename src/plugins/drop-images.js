@@ -132,7 +132,7 @@
 
             /**
              * Processes an image file. The function creates an element and sets a source
-             * a Data URI, then fires an event 'imagedrop' via CKEditor event system.
+             * a Data URI, then fires an event 'imageDrop' via CKEditor event system.
              *
              * @method _preventEvent
              * @protected
@@ -157,7 +157,7 @@
                         file: file
                     };
 
-                    editor.fire('imagedrop', imageData);
+                    editor.fire('imageDrop', imageData);
                 });
 
                 reader.readAsDataURL(file);
@@ -166,7 +166,7 @@
             /**
              * Fired when an image is being added to the editor successfully.
              *
-             * @event imagedrop
+             * @event imageDrop
              * @param {CKEDITOR.dom.element} el The created image with src, created as Data URI
              */
         }
