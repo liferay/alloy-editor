@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/buttons/button-styles-list-item.jsx - alloy-editor</title>
+    <title>src/plugins/placeholder.js - alloy-editor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -158,89 +158,76 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-styles-list-item.jsx</code></h1>
+                              <h1><small>File</small> <code>src/plugins/placeholder.js</code></h1>
                             </div>
                             
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            (function () {
+                            (function() {
                                 &#x27;use strict&#x27;;
                             
+                                if (CKEDITOR.plugins.get(&#x27;placeholder&#x27;)) {
+                                    return;
+                                }
+                            
                                 /**
-                                 * The ButtonStylesListItem class provides functionality for previewing a style definition
-                                 * inside a list and applying it to the current editor selection.
+                                 * CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
+                                 * is no content to the editor, there will be hint to the user.
                                  *
-                                 * @uses ButtonActionStyle
-                                 * @uses ButtonStyle
-                                 *
-                                 * @class ButtonStylesListItem
+                                 * @class CKEDITOR.plugins.placeholder
                                  */
-                                var ButtonStylesListItem = React.createClass({
-                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonActionStyle],
                             
-                                    // Lifecycle. Provides static properties to the widget.
-                                    statics: {
+                                /**
+                                 * Specifies the placeholder class which have to be aded to editor when editor is not focuced.
+                                 *
+                                 * @attribute placeholderClass
+                                 * @default alloy-editor-placeholder
+                                 * @type String
+                                 */
+                            
+                                CKEDITOR.plugins.add(
+                                    &#x27;placeholder&#x27;, {
+                            
                                         /**
-                                         * The name which will be used as an alias of the button in the configuration.
+                                         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+                                         * The function registers a &#x27;blur&#x27; listener to CKEditor&#x27;s blur event.
                                          *
-                                         * @static
-                                         * @property {String} key
-                                         * @default buttonStylesListItem
+                                         * @method init
+                                         * @param {Object} editor The current editor instance
                                          */
-                                        key: &#x27;buttonStylesListItem&#x27;
-                                    },
+                                        init: function(editor) {
+                                            editor.on(&#x27;blur&#x27;, this._onBlur, this);
+                                        },
                             
-                                    /**
-                                     * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
-                                     *
-                                     * @method componentWillMount
-                                     */
-                                    componentWillMount: function () {
-                                        // Styles with wildcard element (*) generate an empty tag in their preview &lt; class=&quot;custom-class&quot; /&gt;.
-                                        // We default to element span and remove the margins to obtain a more consistent set of previews.
-                                        var styleCfg = {
-                                            element: &#x27;span&#x27;,
-                                            styles: {
-                                                margin: 0
+                                        /**
+                                         * Handles the fired blur event. The function removes any data from CKEditor, because an
+                                         * empty paragraph may still exist despite for the user the editor looks empty and
+                                         * adds a class, specified via &quot;placeholderClass&quot; config attribute.
+                                         *
+                                         * @protected
+                                         * @method init
+                                         * @param {CKEDITOR.dom.event} editor Blur event, fired from CKEditor
+                                         */
+                                        _onBlur: function(event) {
+                                            var editor,
+                                                editorNode;
+                            
+                                            editor = event.editor;
+                            
+                                            if (editor.getData() === &#x27;&#x27;) {
+                                                editorNode = new CKEDITOR.dom.element(editor.element.$);
+                            
+                                                // Despite getData() returns empty string, the content still may have
+                                                // content - an empty paragrapgh. This prevents :empty selector in
+                                                // placeholder&#x27;s CSS and placeholder does not appear.
+                                                // For that reason we will intentionally remove any content from editorNode.
+                                                editorNode.setHtml(&#x27;&#x27;);
+                            
+                                                editorNode.addClass(editor.config.placeholderClass);
                                             }
-                                        };
-                            
-                                        styleCfg = CKEDITOR.tools.merge(styleCfg, this.props.style);
-                            
-                                        this._preview = new CKEDITOR.style(styleCfg).buildPreview(this.props.name);
-                                    },
-                            
-                                    /**
-                                     * Lifecycle. Renders the UI of the button.
-                                     *
-                                     * @method render
-                                     * @return {Object} The content which should be rendered.
-                                     */
-                                    render: function() {
-                                        // We need to use dangerouselySetInnterHTML since we&#x27;re not in control of the style
-                                        // preview that is generated by CKEditor.
-                                        return (
-                                            &lt;button className=&quot;alloy-editor-toolbar-element&quot; dangerouslySetInnerHTML={{__html: this._preview}} onClick={this._onClick} role=&quot;option&quot; tabIndex={this.props.tabIndex}&gt;&lt;/button&gt;
-                                        );
-                                    },
-                            
-                                    /**
-                                     * Applies the item style to the editor selection.
-                                     *
-                                     * @protected
-                                     * @method _onClick
-                                     */
-                                    _onClick: function() {
-                                        // Typically, we want the style to be the only one applied to the current selection, so
-                                        // we execute the &#x27;removeFormat&#x27; command first. Note that block styles won&#x27;t be cleaned.
-                                        // However, this is consistent with other editors implementations of this feature.
-                                        this.props.editor.get(&#x27;nativeEditor&#x27;).execCommand(&#x27;removeFormat&#x27;);
-                            
-                                        this.applyStyle();
+                                        }
                                     }
-                                });
-                            
-                                AlloyEditor.ButtonStylesListItem = ButtonStylesListItem;
+                                );
                             }());
                                 </pre>
                             </div>

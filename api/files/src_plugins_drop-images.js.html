@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/buttons/button-styles-list-item.jsx - alloy-editor</title>
+    <title>src/plugins/drop-images.js - alloy-editor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -158,89 +158,185 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-styles-list-item.jsx</code></h1>
+                              <h1><small>File</small> <code>src/plugins/drop-images.js</code></h1>
                             </div>
                             
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            (function () {
+                            (function() {
                                 &#x27;use strict&#x27;;
                             
+                                var isIE = CKEDITOR.env.ie;
+                            
+                                if (CKEDITOR.plugins.get(&#x27;dropimages&#x27;)) {
+                                    return;
+                                }
+                            
                                 /**
-                                 * The ButtonStylesListItem class provides functionality for previewing a style definition
-                                 * inside a list and applying it to the current editor selection.
+                                 * CKEditor plugin which allows Drag&amp;Drop of images directly into the edit area. The image will be encoded
+                                 * as Data URI.
                                  *
-                                 * @uses ButtonActionStyle
-                                 * @uses ButtonStyle
-                                 *
-                                 * @class ButtonStylesListItem
+                                 * @class CKEDITOR.plugins.dropimages
                                  */
-                                var ButtonStylesListItem = React.createClass({
-                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonActionStyle],
                             
-                                    // Lifecycle. Provides static properties to the widget.
-                                    statics: {
+                                /**
+                                 * Fired when an image is being added to the editor successfully.
+                                 *
+                                 * @event imageDrop
+                                 * @param {CKEDITOR.dom.element} el The created image with src, created as Data URI
+                                 */
+                            
+                                CKEDITOR.plugins.add(
+                                    &#x27;dropimages&#x27;, {
                                         /**
-                                         * The name which will be used as an alias of the button in the configuration.
+                                         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+                                         * The function registers a &#x27;dragenter&#x27;, &#x27;dragover&#x27; and &#x27;drop&#x27; events on the editing area.
                                          *
-                                         * @static
-                                         * @property {String} key
-                                         * @default buttonStylesListItem
+                                         * @method init
+                                         * @param {Object} editor The current editor instance
                                          */
-                                        key: &#x27;buttonStylesListItem&#x27;
-                                    },
+                                        init: function(editor) {
+                                            var editable;
                             
-                                    /**
-                                     * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
-                                     *
-                                     * @method componentWillMount
-                                     */
-                                    componentWillMount: function () {
-                                        // Styles with wildcard element (*) generate an empty tag in their preview &lt; class=&quot;custom-class&quot; /&gt;.
-                                        // We default to element span and remove the margins to obtain a more consistent set of previews.
-                                        var styleCfg = {
-                                            element: &#x27;span&#x27;,
-                                            styles: {
-                                                margin: 0
+                                            editable = editor.editable(editor.element.$);
+                            
+                                            editable.attachListener(editable, &#x27;dragenter&#x27;, this._onDragEnter, this, {
+                                                editor: editor
+                                            });
+                            
+                                            editable.attachListener(editable, &#x27;dragover&#x27;, this._onDragOver, this, {
+                                                editor: editor
+                                            });
+                            
+                                            editable.attachListener(editable, &#x27;drop&#x27;, this._onDragDrop, this, {
+                                                editor: editor
+                                            });
+                                        },
+                            
+                                        /**
+                                         * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
+                                         * processing to {{#crossLink &quot;CKEDITOR.plugins.dropimages/_processFile:method&quot;}}{{/crossLink}}
+                                         *
+                                         * @protected
+                                         * @method _handleFiles
+                                         * @param {Array} files Array of dropped files. Only the images from this list will be processed.
+                                         * @param {Object} editor The current editor instance
+                                         */
+                                        _handleFiles: function(files, editor) {
+                                            var i,
+                                                imageType,
+                                                file;
+                            
+                                            for (i = 0; i &lt; files.length; i++) {
+                                                file = files[i];
+                                                imageType = /image.*/;
+                            
+                                                if (file.type.match(imageType)) {
+                                                    this._processFile(file, editor);
+                                                }
                                             }
-                                        };
                             
-                                        styleCfg = CKEDITOR.tools.merge(styleCfg, this.props.style);
+                                            return false;
+                                        },
                             
-                                        this._preview = new CKEDITOR.style(styleCfg).buildPreview(this.props.name);
-                                    },
+                                        /**
+                                         * Handles drag enter event. In case of IE, this function will prevent the event.
+                                         *
+                                         * @protected
+                                         * @method _onDragEnter
+                                         * @param {DOM event} event dragenter event, as received natively from CKEditor
+                                         */
+                                        _onDragEnter: function(event) {
+                                            if (isIE) {
+                                                this._preventEvent(event);
+                                            }
+                                        },
                             
-                                    /**
-                                     * Lifecycle. Renders the UI of the button.
-                                     *
-                                     * @method render
-                                     * @return {Object} The content which should be rendered.
-                                     */
-                                    render: function() {
-                                        // We need to use dangerouselySetInnterHTML since we&#x27;re not in control of the style
-                                        // preview that is generated by CKEditor.
-                                        return (
-                                            &lt;button className=&quot;alloy-editor-toolbar-element&quot; dangerouslySetInnerHTML={{__html: this._preview}} onClick={this._onClick} role=&quot;option&quot; tabIndex={this.props.tabIndex}&gt;&lt;/button&gt;
-                                        );
-                                    },
+                                        /**
+                                         * Handles drag over event. In case of IE, this function will prevent the event.
+                                         *
+                                         * @protected
+                                         * @method _onDragOver
+                                         * @param {DOM event} event dragover event, as received natively from CKEditor
+                                         */
+                                        _onDragOver: function(event) {
+                                            if (isIE) {
+                                                this._preventEvent(event);
+                                            }
+                                        },
                             
-                                    /**
-                                     * Applies the item style to the editor selection.
-                                     *
-                                     * @protected
-                                     * @method _onClick
-                                     */
-                                    _onClick: function() {
-                                        // Typically, we want the style to be the only one applied to the current selection, so
-                                        // we execute the &#x27;removeFormat&#x27; command first. Note that block styles won&#x27;t be cleaned.
-                                        // However, this is consistent with other editors implementations of this feature.
-                                        this.props.editor.get(&#x27;nativeEditor&#x27;).execCommand(&#x27;removeFormat&#x27;);
+                                        /**
+                                         * Handles drag drop event. The function will create selection from the current points and
+                                         * will send a list of files to be processed to
+                                         * {{#crossLink &quot;CKEDITOR.plugins.dropimages/_handleFiles:method&quot;}}{{/crossLink}}
+                                         *
+                                         * @protected
+                                         * @method _onDragDrop
+                                         * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
+                                         */
+                                        _onDragDrop: function(event) {
+                                            var editor,
+                                                nativeEvent;
                             
-                                        this.applyStyle();
+                                            nativeEvent = event.data.$;
+                            
+                                            new CKEDITOR.dom.event(nativeEvent).preventDefault();
+                            
+                                            editor = event.listenerData.editor;
+                            
+                                            event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+                            
+                                            this._handleFiles(nativeEvent.dataTransfer.files, editor);
+                                        },
+                            
+                                        /**
+                                         * Prevents a native event.
+                                         *
+                                         * @protected
+                                         * @method _preventEvent
+                                         * @param {DOM event} event The event to be prevented.
+                                         */
+                                        _preventEvent: function(event) {
+                                            event = new CKEDITOR.dom.event(event.data.$);
+                            
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                        },
+                            
+                                        /**
+                                         * Processes an image file. The function creates an element and sets a source
+                                         * a Data URI, then fires an event &#x27;imageDrop&#x27; via CKEditor event system.
+                                         *
+                                         * @protected
+                                         * @method _preventEvent
+                                         * @param {DOM event} event The event to be prevented.
+                                         */
+                                        _processFile: function(file, editor) {
+                                            var reader = new FileReader();
+                            
+                                            reader.addEventListener(&#x27;loadend&#x27;, function() {
+                                                var bin,
+                                                    el,
+                                                    imageData;
+                            
+                                                bin = reader.result;
+                            
+                                                el = CKEDITOR.dom.element.createFromHtml(&#x27;&lt;img src=&quot;&#x27; + bin + &#x27;&quot;&gt;&#x27;);
+                            
+                                                editor.insertElement(el);
+                            
+                                                imageData = {
+                                                    el: el,
+                                                    file: file
+                                                };
+                            
+                                                editor.fire(&#x27;imageDrop&#x27;, imageData);
+                                            });
+                            
+                                            reader.readAsDataURL(file);
+                                        }
                                     }
-                                });
-                            
-                                AlloyEditor.ButtonStylesListItem = ButtonStylesListItem;
+                                );
                             }());
                                 </pre>
                             </div>

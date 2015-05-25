@@ -102,6 +102,9 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
@@ -170,7 +173,7 @@
                                  *
                                  * @class CKEDITOR.Link
                                  * @constructor
-                                 * @param {Object} The CKEditor instance.
+                                 * @param {Object} editor The CKEditor instance.
                                  */
                             
                                 function Link(editor) {
@@ -290,6 +293,7 @@
                                      * Checks if the URI has a scheme. If not, the default &#x27;http&#x27; scheme with
                                      * hierarchical path &#x27;//&#x27; is added to it.
                                      *
+                                     * @protected
                                      * @method _getCompleteURI
                                      * @param {String} URI The URI of the link.
                                      * @return {String} The URI updated with the protocol.

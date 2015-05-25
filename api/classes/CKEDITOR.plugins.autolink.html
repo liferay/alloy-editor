@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonParagraphCenter - alloy-editor</title>
+    <title>CKEDITOR.plugins.autolink - alloy-editor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -158,22 +158,14 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonParagraphCenter <small>Class</small></h1>
+                                <h1>CKEDITOR.plugins.autolink <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
-                                    <div class="uses">
-                                        Uses:
-                                        <ul class="inline commas">
-                                                <li><a href="ButtonActionStyle.html">ButtonActionStyle</a></li>
-                                                <li><a href="ButtonStateClasses.html">ButtonStateClasses</a></li>
-                                                <li><a href="ButtonStyle.html">ButtonStyle</a></li>
-                                        </ul>
-                                    </div>
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-paragraph-center.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-paragraph-center.jsx:4</code></a>
+                                        Defined in: <a href="../files/src_plugins_autolink.js.html#l30"><code>src&#x2F;plugins&#x2F;autolink.js:30</code></a>
                                     </div>
                             
                             
@@ -181,17 +173,48 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>The ButtonParagraphCenter class provides functionality for centering a paragraph.</p>
+                                <p>CKEditor plugin which automatically generates links when user types text which looks like URL.</p>
                             
                             </div>
                             
+                                <div class="constructor">
+                                    <h2>Constructor</h2>
+                                    <div id="method_CKEDITOR.plugins.autolink" class="method item">
+                                        <h3 class="name"><code>CKEDITOR.plugins.autolink</code></h3>
+                                    
+                                            <span class="paren">()</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        <div class="meta">
+                                                    <p>
+                                                    Defined in
+                                            <a href="../files/src_plugins_autolink.js.html#l30"><code>src&#x2F;plugins&#x2F;autolink.js:30</code></a>
+                                            </p>
+                                    
+                                    
+                                    
+                                        </div>
+                                    
+                                        <div class="description">
+                                            
+                                        </div>
+                                    
+                                    
+                                    
+                                    </div>
+                                </div>
                             
                             <div id="classdocs">
                                 <ul class="api-class-tabs nav nav-tabs">
                                     <li class="api-class-tab index"><a href="#index">Index</a></li>
                             
                                         <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-                                        <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
                                 </ul>
                             
                                 <div>
@@ -202,68 +225,41 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_applyStyle">applyStyle</a>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__getLastWord">_getLastWord</a>
                             
                                                         </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_componentWillMount">componentWillMount</a>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__onKeyDown">_onKeyDown</a>
                             
                                                         </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_componentWillUnmount">componentWillUnmount</a>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__onKeyUp">_onKeyUp</a>
                             
                                                         </li>
-                                                        <li class="index-item method">
-                                                            <a href="#method_getDefaultProps">getDefaultProps</a>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__removeLink">_removeLink</a>
                             
                                                         </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_getStateClasses">getStateClasses</a>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__replaceContentByLink">_replaceContentByLink</a>
                             
                                                         </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_getStyle">getStyle</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_isActive">isActive</a>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__subscribeToKeyEvent">_subscribeToKeyEvent</a>
                             
                                                         </li>
                                                         <li class="index-item method">
-                                                            <a href="#method_render">render</a>
+                                                            <a href="#method_init">init</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method_isValidURL">isValidURL</a>
                             
                                                         </li>
                                                 </ul>
                                             </div>
                             
-                                            <div class="index-section properties tab-pane">
-                                                <h3>Properties</h3>
-                            
-                                                <ul class="index-list properties">
-                                                        <li class="index-item property">
-                                                            <a href="#property_editor">editor</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_key">key</a>
-                            
-                                                                <span class="flag static">static</span>
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_label">label</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property inherited">
-                                                            <a href="#property_style">style</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_tabIndex">tabIndex</a>
-                            
-                                                        </li>
-                                                </ul>
-                                            </div>
                             
                             
                                     </div>
@@ -271,140 +267,8 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method_applyStyle" class="method item inherited">
-                                                    <h3 class="name"><code>applyStyle</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonActionStyle.html#method_applyStyle">ButtonActionStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-action-style.js.html#l16"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-action-style.js:16</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Removes or applies the component style to the current selection.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method_componentWillMount" class="method item inherited">
-                                                    <h3 class="name"><code>componentWillMount</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_componentWillMount">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:21</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method_componentWillUnmount" class="method item inherited">
-                                                    <h3 class="name"><code>componentWillUnmount</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_componentWillUnmount">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l30"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:30</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Invoked immediately before a component is unmounted from the DOM.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method_getDefaultProps" class="method item">
-                                                    <h3 class="name"><code>getDefaultProps</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-paragraph-center.jsx.html#l53"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-paragraph-center.jsx:53</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Returns the default values of the properties used in the widget.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The default properties.</p>
-                                                
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
-                                                <div id="method_getStateClasses" class="method item inherited">
-                                                    <h3 class="name"><code>getStateClasses</code></h3>
+                                                <div id="method__getLastWord" class="method item protected">
+                                                    <h3 class="name"><code>_getLastWord</code></h3>
                                                 
                                                         <span class="paren">()</span>
                                                 
@@ -413,15 +277,16 @@
                                                         </span>
                                                 
                                                 
+                                                        <span class="flag protected">protected</span>
                                                 
                                                 
                                                 
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStateClasses.html#method_getStateClasses">ButtonStateClasses</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-state-classes.js.html#l15"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-state-classes.js:15</code></a>
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_plugins_autolink.js.html#l56"><code>src&#x2F;plugins&#x2F;autolink.js:56</code></a>
                                                         </p>
                                                 
                                                 
@@ -429,8 +294,8 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Returns the list of state classes associated to the current element&#39;s state, according
-                                                to the results of the isActive and isDisabled methods.</p>
+                                                        <p>Retrieves the last word introduced by the user. Reads from the current
+                                                caret position backwards until it finds the first white space.</p>
                                                 
                                                     </div>
                                                 
@@ -440,20 +305,249 @@
                                                 
                                                             <div class="returns-description">
                                                                         <span class="type">String</span>:
-                                                                    <p>A string with the state CSS classes.</p>
+                                                                    <p>The last word introduced by user</p>
                                                 
                                                             </div>
                                                         </div>
                                                 
                                                 </div>
-                                                <div id="method_getStyle" class="method item inherited">
-                                                    <h3 class="name"><code>getStyle</code></h3>
+                                                <div id="method__onKeyDown" class="method item protected">
+                                                    <h3 class="name"><code>_onKeyDown</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>event</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_plugins_autolink.js.html#l132"><code>src&#x2F;plugins&#x2F;autolink.js:132</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Listens to the <code>keydown</code> event and if the keycode is <code>Backspace</code>, removes the previously
+                                                created link.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">event</code>
+                                                                        <span class="type">EventFacade</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>EventFacade object</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method__onKeyUp" class="method item protected">
+                                                    <h3 class="name"><code>_onKeyUp</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>event</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_plugins_autolink.js.html#l159"><code>src&#x2F;plugins&#x2F;autolink.js:159</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Listens to the <code>Enter</code> and <code>Space</code> key events in order to check if the last word
+                                                introduced by the user should be replaced by a link element.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">event</code>
+                                                                        <span class="type">EventFacade</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>EventFacade object</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method__removeLink" class="method item protected">
+                                                    <h3 class="name"><code>_removeLink</code></h3>
                                                 
                                                         <span class="paren">()</span>
                                                 
-                                                        <span class="returns-inline">
-                                                            <span class="type">CKEDITOR.style</span>
-                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_plugins_autolink.js.html#l227"><code>src&#x2F;plugins&#x2F;autolink.js:227</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Removes the created link element, and replaces it by its text.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method__replaceContentByLink" class="method item protected">
+                                                    <h3 class="name"><code>_replaceContentByLink</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>content</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_plugins_autolink.js.html#l183"><code>src&#x2F;plugins&#x2F;autolink.js:183</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Replaces content by a link element.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">content</code>
+                                                                        <span class="type">String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The text that has to be replaced by an link element</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method__subscribeToKeyEvent" class="method item protected">
+                                                    <h3 class="name"><code>_subscribeToKeyEvent</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_plugins_autolink.js.html#l254"><code>src&#x2F;plugins&#x2F;autolink.js:254</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Subscribe to a key event of the editable aria.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method_init" class="method item">
+                                                    <h3 class="name"><code>init</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>editor</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
                                                 
                                                 
                                                 
@@ -462,9 +556,9 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_getStyle">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l39"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:39</code></a>
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_plugins_autolink.js.html#l39"><code>src&#x2F;plugins&#x2F;autolink.js:39</code></a>
                                                         </p>
                                                 
                                                 
@@ -472,41 +566,57 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Returns instance of CKEDITOR.style which represents the current button style.</p>
+                                                        <p>Initialization of the plugin, part of CKEditor plugin lifecycle.
+                                                The function registers the <code>keyup</code> event on the editing area.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
                                                 
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">editor</code>
+                                                                        <span class="type">Object</span>
                                                 
-                                                            <div class="returns-description">
-                                                                        <span class="type">CKEDITOR.style</span>:
-                                                                    <p>The current style representation.</p>
                                                 
-                                                            </div>
+                                                                    <div class="param-description">
+                                                                        <p>The current editor instance</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                 
-                                                </div>
-                                                <div id="method_isActive" class="method item inherited">
-                                                    <h3 class="name"><code>isActive</code></h3>
                                                 
-                                                        <span class="paren">()</span>
+                                                </div>
+                                                <div id="method_isValidURL" class="method item protected">
+                                                    <h3 class="name"><code>isValidURL</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>link</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
                                                 
                                                         <span class="returns-inline">
                                                             <span class="type">Boolean</span>
                                                         </span>
                                                 
                                                 
+                                                        <span class="flag protected">protected</span>
                                                 
                                                 
                                                 
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_isActive">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l49"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:49</code></a>
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_plugins_autolink.js.html#l120"><code>src&#x2F;plugins&#x2F;autolink.js:120</code></a>
                                                         </p>
                                                 
                                                 
@@ -514,59 +624,34 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Checks if style is active in the current selection.</p>
+                                                        <p>Checks if the given link is a valid URL.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">link</code>
+                                                                        <span class="type">String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The link we want to know if it is a valid URL</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                 
                                                         <div class="returns">
                                                             <h4>Returns:</h4>
                                                 
                                                             <div class="returns-description">
                                                                         <span class="type">Boolean</span>:
-                                                                    <p>True if style is active, false otherwise.</p>
-                                                
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
-                                                <div id="method_render" class="method item">
-                                                    <h3 class="name"><code>render</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-paragraph-center.jsx.html#l71"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-paragraph-center.jsx:71</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Renders the UI of the button.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The content which should be rendered.</p>
+                                                                    <p>Returns true if the link is a valid URL, false otherwise</p>
                                                 
                                                             </div>
                                                         </div>
@@ -574,138 +659,6 @@
                                                 </div>
                                         </div>
                             
-                                        <div id="properties" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Properties</h2>
-                            
-                                                <div id="property_editor" class="property item">
-                                                    <h3 class="name"><code>editor</code></h3>
-                                                    <span class="type">Object</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-paragraph-center.jsx.html#l18"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-paragraph-center.jsx:18</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The editor instance where the component is being used.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_key" class="property item">
-                                                    <h3 class="name"><code>key</code></h3>
-                                                    <span class="type">String</span>
-                                                
-                                                
-                                                
-                                                
-                                                        <span class="flag static">static</span>
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-paragraph-center.jsx.html#l43"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-paragraph-center.jsx:43</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The name which will be used as an alias of the button in the configuration.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <p><strong>Default:</strong> paragraphCenter</p>
-                                                
-                                                
-                                                </div>
-                                                <div id="property_label" class="property item">
-                                                    <h3 class="name"><code>label</code></h3>
-                                                    <span class="type">String</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-paragraph-center.jsx.html#l25"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-paragraph-center.jsx:25</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The label that should be used for accessibility purposes.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_style" class="property item inherited">
-                                                    <h3 class="name"><code>style</code></h3>
-                                                    <span class="type">Object</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#property_style">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l13"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:13</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The style the button should handle as described by <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.style">http://docs.ckeditor.com/#!/api/CKEDITOR.style</a></p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_tabIndex" class="property item">
-                                                    <h3 class="name"><code>tabIndex</code></h3>
-                                                    <span class="type">Number</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-paragraph-center.jsx.html#l32"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-paragraph-center.jsx:32</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The tabIndex of the button in its toolbar current state. A value other than -1
-                                                means that the button has focus and is the active element.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                        </div>
                             
                             
                                 </div>
