@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -231,11 +232,19 @@
                                      */
                                     getDefaultProps: function() {
                                         return {
-                                            circular: true,
+                                            circular: false,
                                             descendants: &#x27;.alloy-editor-toolbar-element&#x27;,
+                                            labels: {
+                                                blockStyles: AlloyEditor.Strings.blockStyles,
+                                                inlineStyles: AlloyEditor.Strings.inlineStyles,
+                                                objectStyles: AlloyEditor.Strings.objectStyles
+                                            },
                                             keys: {
-                                                next: [39, 40],
-                                                prev: [37, 38]
+                                                dismiss: [27],
+                                                dismissNext: [39],
+                                                dismissPrev: [37],
+                                                next: [40],
+                                                prev: [38]
                                             }
                                         };
                                     },
@@ -249,16 +258,18 @@
                                     render: function() {
                                         return (
                                             &lt;div className=&quot;alloy-editor-dropdown&quot; onFocus={this.focus} onKeyDown={this.handleKey} tabIndex=&quot;0&quot;&gt;
-                                                &lt;AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} /&gt;
+                                                &lt;ul className=&quot;alloy-editor-listbox&quot; role=&quot;listbox&quot;&gt;
+                                                    &lt;AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} /&gt;
                             
-                                                &lt;AlloyEditor.ButtonsStylesListHeader name=&quot;Block styles&quot; styles={this._blockStyles} /&gt;
-                                                {this._renderStylesItems(this._blockStyles)}
+                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={this.props.labels.blockStyles} styles={this._blockStyles} /&gt;
+                                                    {this._renderStylesItems(this._blockStyles)}
                             
-                                                &lt;AlloyEditor.ButtonsStylesListHeader name=&quot;Inline styles&quot; styles={this._inlineStyles} /&gt;
-                                                {this._renderStylesItems(this._inlineStyles)}
+                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={this.props.labels.inlineStyles} styles={this._inlineStyles} /&gt;
+                                                    {this._renderStylesItems(this._inlineStyles)}
                             
-                                                &lt;AlloyEditor.ButtonsStylesListHeader name=&quot;Object styles&quot; styles={this._objectStyles} /&gt;
-                                                {this._renderStylesItems(this._objectStyles)}
+                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={this.props.labels.objectStyles} styles={this._objectStyles} /&gt;
+                                                    {this._renderStylesItems(this._objectStyles)}
+                                                &lt;/ul&gt;
                                             &lt;/div&gt;
                                         );
                                     },
@@ -273,12 +284,15 @@
                                      */
                                     _renderStylesItems: function(styles) {
                                         var editor = this.props.editor;
-                                        var trigger = this.props.trigger;
                                         var items;
                             
                                         if (styles &amp;&amp; styles.length) {
                                             items = styles.map(function(item) {
-                                                return &lt;AlloyEditor.ButtonStylesListItem key={item.name} editor={editor} name={item.name} style={item.style} tabIndex={(trigger &amp;&amp; trigger.name === item.name) ? 0 : -1} /&gt;
+                                                return (
+                                                    &lt;li key={item.name}&gt;
+                                                        &lt;AlloyEditor.ButtonStylesListItem editor={editor} name={item.name} style={item.style} /&gt;
+                                                    &lt;/li&gt;
+                                                );
                                             });
                                         }
                             

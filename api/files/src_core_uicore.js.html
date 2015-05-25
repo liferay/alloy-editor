@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -226,24 +227,20 @@
                                          * @param {Object} editor The current CKEditor instance.
                                          */
                                         init: function(editor) {
-                                            var ariaElement,
-                                                ariaState = [],
-                                                handleAria,
-                                                handleUI,
-                                                uiTasksTimeout;
+                                            var ariaState = [];
                             
-                                            ariaElement = this._createAriaElement(editor.id);
+                                            var ariaElement = this._createAriaElement(editor.id);
                             
-                                            uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
+                                            var uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
                             
-                                            handleAria = CKEDITOR.tools.debounce(
+                                            var handleAria = CKEDITOR.tools.debounce(
                                                 function(event) {
                                                     ariaElement.innerHTML = ariaState.join(&#x27;. &#x27;);
                                                 },
                                                 uiTasksTimeout
                                             );
                             
-                                            handleUI = CKEDITOR.tools.debounce(
+                                            var handleUI = CKEDITOR.tools.debounce(
                                                 function(event) {
                                                     ariaState = [];
                             
@@ -277,6 +274,8 @@
                                             });
                             
                                             editor.on(&#x27;destroy&#x27;, function(event) {
+                                                ariaElement.parentNode.removeChild(ariaElement);
+                            
                                                 handleUI.detach();
                                             });
                                         },
@@ -290,11 +289,9 @@
                                          * @return {HTMLElement} The created and applied to DOM element.
                                          */
                                         _createAriaElement: function(id) {
-                                            var statusElement;
+                                            var statusElement = document.createElement(&#x27;div&#x27;);
                             
-                                            statusElement = document.createElement(&#x27;div&#x27;);
-                            
-                                            statusElement.className = &#x27;sr-only&#x27;;
+                                            statusElement.className = &#x27;alloy-editor-sr-only&#x27;;
                             
                                             statusElement.setAttribute(&#x27;aria-live&#x27;, &#x27;polite&#x27;);
                                             statusElement.setAttribute(&#x27;role&#x27;, &#x27;status&#x27;);

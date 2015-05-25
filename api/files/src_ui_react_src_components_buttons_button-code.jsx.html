@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -174,6 +175,31 @@
                                 var ButtonCode = React.createClass({
                                     mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
                             
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * The editor instance where the component is being used.
+                                         *
+                                         * @property {Object} editor
+                                         */
+                                        editor: React.PropTypes.object.isRequired,
+                            
+                                        /**
+                                         * The label that should be used for accessibility purposes.
+                                         *
+                                         * @property {String} label
+                                         */
+                                        label: React.PropTypes.string,
+                            
+                                        /**
+                                         * The tabIndex of the button in its toolbar current state. A value other than -1
+                                         * means that the button has focus and is the active element.
+                                         *
+                                         * @property {Number} tabIndex
+                                         */
+                                        tabIndex: React.PropTypes.number
+                                    },
+                            
                                     // Lifecycle. Provides static properties to the widget.
                                     statics: {
                                         /**
@@ -194,6 +220,7 @@
                                      */
                                     getDefaultProps: function() {
                                         return {
+                                            label: AlloyEditor.Strings.code,
                                             style: {
                                                 element: &#x27;pre&#x27;
                                             }
@@ -210,7 +237,7 @@
                                         var cssClass = &#x27;alloy-editor-button &#x27; + this.getStateClasses();
                             
                                         return (
-                                            &lt;button className={cssClass} data-type=&quot;button-code&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex}&gt;
+                                            &lt;button aria-label={this.props.label} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-code&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
                                                 &lt;span className=&quot;alloy-editor-icon-code&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );

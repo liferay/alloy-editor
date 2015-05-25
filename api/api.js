@@ -10,6 +10,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonCode",
         "ButtonCommand",
         "ButtonCommandListItem",
+        "ButtonCommandsList",
         "ButtonH1",
         "ButtonH2",
         "ButtonHline",

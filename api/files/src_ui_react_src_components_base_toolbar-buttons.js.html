@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -182,37 +183,37 @@
                                         var buttonProps = {};
                             
                                         var toolbarButtons = this.filterExclusive(
-                                            buttons.filter(function(button) {
-                                                return button &amp;&amp; (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
-                                            })
+                                                buttons.filter(function(button) {
+                                                    return button &amp;&amp; (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
+                                                })
+                                                .map(function(button) {
+                                                    if (AlloyEditor.Lang.isString(button)) {
+                                                        button = AlloyEditor.Buttons[button];
+                                                    } else if (AlloyEditor.Lang.isString(button.name)) {
+                                                        buttonProps[AlloyEditor.Buttons[button.name].key] = button.cfg;
+                                                        button = AlloyEditor.Buttons[button.name];
+                                                    }
+                            
+                                                    return button;
+                                                })
+                                            )
                                             .map(function(button) {
-                                                if (AlloyEditor.Lang.isString(button)) {
-                                                    button = AlloyEditor.Buttons[button];
-                                                } else if (AlloyEditor.Lang.isString(button.name)) {
-                                                    buttonProps[AlloyEditor.Buttons[button.name].key] = button.cfg;
-                                                    button = AlloyEditor.Buttons[button.name];
+                                                var props = this.mergeExclusiveProps({
+                                                    editor: this.props.editor,
+                                                    key: button.key,
+                                                    tabKey: button.key,
+                                                    tabIndex: (this.props.trigger &amp;&amp; this.props.trigger.props.tabKey === button.key) ? 0 : -1,
+                                                    trigger: this.props.trigger
+                                                }, button.key);
+                            
+                                                props = this.mergeDropdownProps(props, button.key);
+                            
+                                                if (additionalProps) {
+                                                    props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
                                                 }
                             
-                                                return button;
-                                            })
-                                        )
-                                        .map(function(button) {
-                                            var props = this.mergeExclusiveProps({
-                                                editor: this.props.editor,
-                                                key: button.key,
-                                                tabKey: button.key,
-                                                tabIndex: (this.props.trigger &amp;&amp; this.props.trigger.props.tabKey === button.key) ? 0 : -1,
-                                                trigger: this.props.trigger
-                                            }, button.key);
-                            
-                                            props = this.mergeDropdownProps(props, button.key);
-                            
-                                            if (additionalProps) {
-                                                props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
-                                            }
-                            
-                                            return React.createElement(button, props);
-                                        }, this);
+                                                return React.createElement(button, props);
+                                            }, this);
                             
                                         return toolbarButtons;
                                     }

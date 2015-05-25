@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/buttons/button-italic.jsx - alloy-editor</title>
+    <title>src/ui/react/src/components/buttons/button-commands-list.jsx - alloy-editor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -155,7 +155,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-italic.jsx</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-commands-list.jsx</code></h1>
                             </div>
                             
                             <div class="file">
@@ -164,19 +164,25 @@
                                 &#x27;use strict&#x27;;
                             
                                 /**
-                                 * The ButtonItalic class provides functionality for styling an selection with italic (em) style.
+                                 * The ButtonCommandsList class provides functionality for showing a list of commands that can be
+                                 * executed to the current selection..
                                  *
-                                 * @uses ButtonCommand
-                                 * @uses ButtonStateClasses
-                                 * @uses ButtonStyle
+                                 * @uses WidgetFocusManager
                                  *
-                                 * @class ButtonItalic
+                                 * @class ButtonCommandsList
                                  */
-                                var ButtonItalic = React.createClass({
-                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
+                                var ButtonCommandsList = React.createClass({
+                                    mixins: [AlloyEditor.WidgetFocusManager],
                             
                                     // Allows validating props being passed to the component.
                                     propTypes: {
+                                        /**
+                                         * List of the commands the button is able to handle.
+                                         *
+                                         * @property {Array} commands
+                                         */
+                                        commands: React.PropTypes.arrayOf(React.PropTypes.object),
+                            
                                         /**
                                          * The editor instance where the component is being used.
                                          *
@@ -185,19 +191,11 @@
                                         editor: React.PropTypes.object.isRequired,
                             
                                         /**
-                                         * The label that should be used for accessibility purposes.
+                                         * List id to be used for accessibility purposes such as aria-owns.
                                          *
-                                         * @property {String} label
+                                         * @property {String} listId
                                          */
-                                        label: React.PropTypes.string,
-                            
-                                        /**
-                                         * The tabIndex of the button in its toolbar current state. A value other than -1
-                                         * means that the button has focus and is the active element.
-                                         *
-                                         * @property {Number} tabIndex
-                                         */
-                                        tabIndex: React.PropTypes.number
+                                        listId: React.PropTypes.string
                                     },
                             
                                     // Lifecycle. Provides static properties to the widget.
@@ -207,9 +205,20 @@
                                          *
                                          * @static
                                          * @property {String} key
-                                         * @default italic
+                                         * @default buttonCommandsList
                                          */
-                                        key: &#x27;italic&#x27;
+                                        key: &#x27;buttonCommandsList&#x27;
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+                                     *
+                                     * Focuses on the list node to allow keyboard interaction.
+                                     *
+                                     * @method componentDidMount
+                                     */
+                                    componentDidMount: function () {
+                                        React.findDOMNode(this).focus();
                                     },
                             
                                     /**
@@ -220,32 +229,60 @@
                                      */
                                     getDefaultProps: function() {
                                         return {
-                                            command: &#x27;italic&#x27;,
-                                            label: AlloyEditor.Strings.italic,
-                                            style: {
-                                                element: &#x27;em&#x27;
+                                            circular: false,
+                                            descendants: &#x27;.alloy-editor-toolbar-element&#x27;,
+                                            keys: {
+                                                dismiss: [27],
+                                                dismissNext: [39],
+                                                dismissPrev: [37],
+                                                next: [40],
+                                                prev: [38]
                                             }
                                         };
                                     },
                             
                                     /**
-                                     * Lifecycle. Renders the UI of the button.
+                                     * Lifecycle. Renders the UI of the list.
                                      *
                                      * @method render
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var cssClass = &#x27;alloy-editor-button &#x27; + this.getStateClasses();
-                            
                                         return (
-                                            &lt;button aria-label={this.props.label} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-italic&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
-                                                &lt;span className=&quot;alloy-editor-icon-italic&quot;&gt;&lt;/span&gt;
-                                            &lt;/button&gt;
+                                            &lt;div className=&quot;alloy-editor-dropdown&quot; onFocus={this.focus} onKeyDown={this.handleKey} tabIndex=&quot;0&quot;&gt;
+                                                &lt;ul className=&quot;alloy-editor-listbox&quot; id={this.props.listId} role=&quot;listbox&quot;&gt;
+                                                    {this._renderActions(this.props.commands)}
+                                                &lt;/ul&gt;
+                                            &lt;/div&gt;
                                         );
+                                    },
+                            
+                                    /**
+                                     * Renders instances of ButtonCommandListItem with the description of the row action that will be executed.
+                                     *
+                                     * @protected
+                                     * @method _renderActions
+                                     * @return {Array} Rendered instances of ButtonCommandListItem class
+                                     */
+                                    _renderActions: function(commands) {
+                                        var editor = this.props.editor;
+                                        var items;
+                            
+                                        if (commands &amp;&amp; commands.length) {
+                                            items = commands.map(function(item) {
+                                                return (
+                                                    &lt;li key={item.command}&gt;
+                                                        &lt;AlloyEditor.ButtonCommandListItem command={item.command} description={item.label} editor={editor} /&gt;
+                                                    &lt;/li&gt;
+                                                );
+                                            });
+                                        }
+                            
+                                        return items;
                                     }
                                 });
                             
-                                AlloyEditor.Buttons[ButtonItalic.key] = AlloyEditor.ButtonItalic = ButtonItalic;
+                                AlloyEditor.ButtonCommandsList = ButtonCommandsList;
                             }());
                                 </pre>
                             </div>

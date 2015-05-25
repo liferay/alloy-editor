@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -168,6 +169,52 @@
                                  * @class ButtonTableCell
                                  */
                                 var ButtonTableCell = React.createClass({
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * List of the commands the button is able to handle.
+                                         *
+                                         * @property {Array} commands
+                                         */
+                                        commands: React.PropTypes.arrayOf(React.PropTypes.object),
+                            
+                                        /**
+                                         * The editor instance where the component is being used.
+                                         *
+                                         * @property {Object} editor
+                                         */
+                                        editor: React.PropTypes.object.isRequired,
+                            
+                                        /**
+                                         * Indicates whether the styles list is expanded or not.
+                                         *
+                                         * @property {Boolean} expanded
+                                         */
+                                        expanded: React.PropTypes.bool,
+                            
+                                        /**
+                                         * The label that should be used for accessibility purposes.
+                                         *
+                                         * @property {String} label
+                                         */
+                                        label: React.PropTypes.string,
+                            
+                                        /**
+                                         * The tabIndex of the button in its toolbar current state. A value other than -1
+                                         * means that the button has focus and is the active element.
+                                         *
+                                         * @property {Number} tabIndex
+                                         */
+                                        tabIndex: React.PropTypes.number,
+                            
+                                        /**
+                                         * Callback provided by the button host to notify when the styles list has been expanded.
+                                         *
+                                         * @property {Function} toggleDropdown
+                                         */
+                                        toggleDropdown: React.PropTypes.func
+                                    },
+                            
                                     // Lifecycle. Provides static properties to the widget.
                                     statics: {
                                         /**
@@ -181,64 +228,74 @@
                                     },
                             
                                     /**
+                                     * Lifecycle. Returns the default values of the properties used in the widget.
+                                     *
+                                     * @method getDefaultProps
+                                     * @return {Object} The default properties.
+                                     */
+                                    getDefaultProps: function () {
+                                        return {
+                                            commands: [
+                                                {
+                                                    command: &#x27;cellInsertBefore&#x27;,
+                                                    label: AlloyEditor.Strings.cellInsertBefore
+                                                },
+                                                {
+                                                    command: &#x27;cellInsertAfter&#x27;,
+                                                    label: AlloyEditor.Strings.cellInsertAfter
+                                                },
+                                                {
+                                                    command: &#x27;cellDelete&#x27;,
+                                                    label: AlloyEditor.Strings.cellDelete
+                                                },
+                                                {
+                                                    command: &#x27;cellMerge&#x27;,
+                                                    label: AlloyEditor.Strings.cellMerge
+                                                },
+                                                {
+                                                    command: &#x27;cellMergeDown&#x27;,
+                                                    label: AlloyEditor.Strings.cellMergeDown
+                                                },
+                                                {
+                                                    command: &#x27;cellMergeRight&#x27;,
+                                                    label: AlloyEditor.Strings.cellMergeRight
+                                                },
+                                                {
+                                                    command: &#x27;cellHorizontalSplit&#x27;,
+                                                    label: AlloyEditor.Strings.cellSplitHorizontal
+                                                },
+                                                {
+                                                    command: &#x27;cellVerticalSplit&#x27;,
+                                                    label: AlloyEditor.Strings.cellSplitVertical
+                                                }
+                                            ],
+                                            label: AlloyEditor.Strings.cell
+                                        };
+                                    },
+                            
+                                    /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
                                      * @method render
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        return (
-                                            &lt;div className=&quot;alloy-editor-container alloy-editor-has-dropdown&quot;&gt;
-                                                &lt;button className=&quot;alloy-editor-button&quot; onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex}&gt;
-                                                    &lt;span className=&quot;alloy-editor-icon-cell&quot;&gt;&lt;/span&gt;
-                                                &lt;/button&gt;
-                                                {this._renderDropdown()}
-                                            &lt;/div&gt;
-                                        );
-                                    },
+                                        var buttonCommandsList,
+                                            buttonCommandsListId;
                             
-                                    /**
-                                     * Renders instances of ButtonCommandListItem passing the command which has to be executed and the description
-                                     * of the command.
-                                     *
-                                     * @protected
-                                     * @method _renderActions
-                                     * @return {Array} Rendered instances of ButtonCommandListItem class.
-                                     */
-                                    _renderActions: function() {
-                                        var editor = this.props.editor;
-                            
-                                        var actions = [
-                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellInsertBefore&quot; description=&quot;Insert cell left&quot; editor={editor} key=&quot;cellinsertbefore&quot; /&gt;,
-                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellInsertAfter&quot; description=&quot;Insert cell right&quot; editor={editor} key=&quot;cellinsertafter&quot; /&gt;,
-                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellDelete&quot; description=&quot;Delete cell&quot; editor={editor} key=&quot;celldelete&quot; modifiesSelection={true} /&gt;,
-                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellMerge&quot; description=&quot;Merge cells&quot; editor={editor} key=&quot;cellmerge&quot; /&gt;,
-                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellMergeDown&quot; description=&quot;Merge cell below&quot; editor={editor} key=&quot;cellmergedown&quot; /&gt;,
-                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellMergeRight&quot; description=&quot;Merge cell right&quot; editor={editor} key=&quot;cellmergeright&quot; /&gt;,
-                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellHorizontalSplit&quot; description=&quot;Split cells horizontally&quot; editor={editor} key=&quot;cellsplithorizontal&quot; /&gt;,
-                                            &lt;AlloyEditor.ButtonCommandListItem command=&quot;cellVerticalSplit&quot; description=&quot;Split cells vertically&quot; editor={editor} key=&quot;cellsplitvertical&quot; /&gt;
-                                        ];
-                            
-                                        return actions;
-                                    },
-                            
-                                    /*
-                                     * Renders the button dropdown with the associated command items when the button is expanded.
-                                     *
-                                     * @protected
-                                     * @method _renderDropdown
-                                     * @return {Element} Returns the dropdown element if the button is expanded, null otherwise.
-                                     */
-                                    _renderDropdown: function() {
                                         if (this.props.expanded) {
-                                            return (
-                                                &lt;div className=&quot;alloy-editor-dropdown&quot;&gt;
-                                                    {this._renderActions()}
-                                                &lt;/div&gt;
-                                            );
+                                            buttonCommandsListId = ButtonTableCell.key + &#x27;List&#x27;;
+                                            buttonCommandsList = &lt;AlloyEditor.ButtonCommandsList commands={this.props.commands} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} /&gt;
                                         }
                             
-                                        return null;
+                                        return (
+                                            &lt;div className=&quot;alloy-editor-container alloy-editor-has-dropdown&quot;&gt;
+                                                &lt;button aria-expanded={this.props.expanded} aria-label={this.props.label} aria-owns={buttonCommandsListId} className=&quot;alloy-editor-button&quot; onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
+                                                    &lt;span className=&quot;alloy-editor-icon-cell&quot;&gt;&lt;/span&gt;
+                                                &lt;/button&gt;
+                                                {buttonCommandsList}
+                                            &lt;/div&gt;
+                                        );
                                     }
                                 });
                             

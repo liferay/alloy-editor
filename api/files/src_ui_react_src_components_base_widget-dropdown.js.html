@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -174,7 +175,7 @@
                                      *
                                      * @method componentWillReceiveProps
                                      */
-                                    componentWillReceiveProps: function (nextProps) {
+                                    componentWillReceiveProps: function(nextProps) {
                                         this.setState({
                                             itemDropdown: null
                                         });
@@ -205,6 +206,7 @@
                                     mergeDropdownProps: function(obj, itemKey) {
                                         return CKEDITOR.tools.merge(obj, {
                                             expanded: this.state.itemDropdown === itemKey ? true : false,
+                                            tabIndex: this.state.dropdownTrigger === itemKey ? 0 : -1,
                                             toggleDropdown: this.toggleDropdown.bind(this, itemKey)
                                         });
                                     },
@@ -214,10 +216,20 @@
                                      *
                                      * @method toggleDropdown
                                      * @param {Object} itemDropdown The widget which requests to toggle its dropdown.
+                                     * @param {Number} toggleDirection User movement direction when toggled via keyboard.
                                      */
-                                    toggleDropdown: function(itemDropdown) {
+                                    toggleDropdown: function(itemDropdown, toggleDirection) {
                                         this.setState({
+                                            dropdownTrigger: itemDropdown,
                                             itemDropdown: itemDropdown !== this.state.itemDropdown ? itemDropdown : null
+                                        }, function() {
+                                            if (!this.state.itemDropdown) {
+                                                if (this.moveFocus) {
+                                                    this.moveFocus(toggleDirection);
+                                                } else {
+                                                    React.findDOMNode(this).focus();
+                                                }
+                                            }
                                         });
                                     }
                                 };

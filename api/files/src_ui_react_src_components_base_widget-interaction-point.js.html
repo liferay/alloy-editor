@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -168,6 +169,16 @@
                                  * @class WidgetInteractionPoint
                                  */
                                 var WidgetInteractionPoint = {
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * The provided editor event.
+                                         *
+                                         * @property {SyntheticEvent} editorEvent
+                                         */
+                                        editorEvent: React.PropTypes.object
+                                    },
+                            
                                     /**
                                      * Returns the position, in page coordinates, according to which a widget should appear.
                                      * Depending on the direction of the selection, the wdiget may appear above of or on bottom of the selection.
