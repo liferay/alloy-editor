@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.7</b>
+                        API Docs for Version: <b>0.2.8</b>
                     </p>
                 </li>
             </div>
@@ -274,7 +274,7 @@
                                         if (commands &amp;&amp; commands.length) {
                                             items = commands.map(function(item) {
                                                 return (
-                                                    &lt;li key={item.command}&gt;
+                                                    &lt;li key={item.command} role=&quot;option&quot;&gt;
                                                         &lt;AlloyEditor.ButtonCommandListItem command={item.command} description={item.label} editor={editor} /&gt;
                                                     &lt;/li&gt;
                                                 );
