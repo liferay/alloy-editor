@@ -29,13 +29,13 @@
      * - selectionData - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
      */
 
-     /**
-      * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
-      *
-      * @event ariaUpdate
-      * @param {Object} data An object which contains the following properties:
-      * - message - The provided message from the UI element.
-      */
+    /**
+     * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
+     *
+     * @event ariaUpdate
+     * @param {Object} data An object which contains the following properties:
+     * - message - The provided message from the UI element.
+     */
 
     /**
      * If set to true, the editor will still fire {{#crossLink "CKEDITOR.plugins.uicore/editorInteraction:event"}}{{/crossLink}} event,
@@ -60,8 +60,8 @@
             /**
              * Initializer lifecycle implementation for the UICore plugin.
              *
-             * @method init
              * @protected
+             * @method init
              * @param {Object} editor The current CKEditor instance.
              */
             init: function(editor) {
@@ -121,8 +121,8 @@
             /**
              * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
              *
-             * @method _createAriaElement
              * @protected
+             * @method _createAriaElement
              * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
              * @return {HTMLElement} The created and applied to DOM element.
              */

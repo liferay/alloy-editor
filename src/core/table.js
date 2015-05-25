@@ -6,7 +6,7 @@
      *
      * @class CKEDITOR.Table
      * @constructor
-     * @param {Object} The CKEditor instance.
+     * @param {Object} editor The CKEditor instance.
      */
 
     function Table(editor) {

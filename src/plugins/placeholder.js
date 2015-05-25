@@ -39,8 +39,8 @@
              * empty paragraph may still exist despite for the user the editor looks empty and
              * adds a class, specified via "placeholderClass" config attribute.
              *
-             * @method init
              * @protected
+             * @method init
              * @param {CKEDITOR.dom.event} editor Blur event, fired from CKEditor
              */
             _onBlur: function(event) {

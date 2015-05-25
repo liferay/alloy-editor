@@ -14,6 +14,7 @@
      * debounced with, let's say 100ms. The real execution of this function will happen 100ms after last
      * scroll event.
      *
+     * @static
      * @method debounce
      * @param {Function} callback The callback which has to be called after given timeout.
      * @param {Number} timeout Timeout in milliseconds after which the callback will be called.

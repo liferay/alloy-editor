@@ -38,7 +38,7 @@
 
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers the 'keyup' event on the editing area.
+             * The function registers the `keyup` event on the editing area.
              *
              * @method init
              * @param {Object} editor The current editor instance
@@ -57,9 +57,9 @@
              * Retrieves the last word introduced by the user. Reads from the current
              * caret position backwards until it finds the first white space.
              *
+             * @protected
              * @method _getLastWord
              * @return {String} The last word introduced by user
-             * @protected
              */
             _getLastWord: function(editor) {
                 var range = editor.getSelection().getRanges()[0];
@@ -120,10 +120,10 @@
             /**
              * Checks if the given link is a valid URL.
              *
+             * @protected
              * @method isValidURL
              * @param {String} link The link we want to know if it is a valid URL
              * @return {Boolean} Returns true if the link is a valid URL, false otherwise
-             * @protected
              */
             _isValidURL: function(link) {
                 return REGEX_URL.test(link);
@@ -133,9 +133,9 @@
              * Listens to the `keydown` event and if the keycode is `Backspace`, removes the previously
              * created link.
              *
+             * @protected
              * @method _onKeyDown
              * @param {EventFacade} event EventFacade object
-             * @protected
              */
             _onKeyDown: function(event) {
                 var nativeEvent = event.data.$;
@@ -160,9 +160,9 @@
              * Listens to the `Enter` and `Space` key events in order to check if the last word
              * introduced by the user should be replaced by a link element.
              *
+             * @protected
              * @method _onKeyUp
              * @param {EventFacade} event EventFacade object
-             * @protected
              */
             _onKeyUp: function(event) {
                 var nativeEvent = event.data.$;
@@ -183,9 +183,9 @@
             /**
              * Replaces content by a link element.
              *
+             * @protected
              * @method _replaceContentByLink
              * @param {String} content The text that has to be replaced by an link element
-             * @protected
              */
             _replaceContentByLink: function(editor, content) {
                 var range = editor.createRange();
@@ -227,8 +227,8 @@
             /**
              * Removes the created link element, and replaces it by its text.
              *
-             * @method _removeLink
              * @protected
+             * @method _removeLink
              */
             _removeLink: function(editor) {
                 var range = editor.getSelection().getRanges()[0];
@@ -254,8 +254,8 @@
             /**
              * Subscribe to a key event of the editable aria.
              *
-             * @method _subscribeToKeyEvent
              * @protected
+             * @method _subscribeToKeyEvent
              */
             _subscribeToKeyEvent: function(editor) {
                 var editable = editor.editable();

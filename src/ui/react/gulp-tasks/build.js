@@ -95,6 +95,9 @@ gulp.task('build-api', function() {
 
     gulp.src([
         path.join(rootDir, 'src/core/**/*.js'),
+        path.join(rootDir, 'src/plugins/autolink.js'),
+        path.join(rootDir, 'src/plugins/drop-images.js'),
+        path.join(rootDir, 'src/plugins/placeholder.js'),
         path.join(reactDir, 'src/**/*.js*')
     ])
     .pipe(yuidoc(parseOpts, renderOpts))

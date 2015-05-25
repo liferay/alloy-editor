@@ -13,6 +13,14 @@
      *
      * @class CKEDITOR.plugins.dropimages
      */
+
+    /**
+     * Fired when an image is being added to the editor successfully.
+     *
+     * @event imageDrop
+     * @param {CKEDITOR.dom.element} el The created image with src, created as Data URI
+     */
+
     CKEDITOR.plugins.add(
         'dropimages', {
             /**
@@ -44,8 +52,8 @@
              * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
              * processing to {{#crossLink "CKEDITOR.plugins.dropimages/_processFile:method"}}{{/crossLink}}
              *
-             * @method _handleFiles
              * @protected
+             * @method _handleFiles
              * @param {Array} files Array of dropped files. Only the images from this list will be processed.
              * @param {Object} editor The current editor instance
              */
@@ -69,8 +77,8 @@
             /**
              * Handles drag enter event. In case of IE, this function will prevent the event.
              *
-             * @method _onDragEnter
              * @protected
+             * @method _onDragEnter
              * @param {DOM event} event dragenter event, as received natively from CKEditor
              */
             _onDragEnter: function(event) {
@@ -82,8 +90,8 @@
             /**
              * Handles drag over event. In case of IE, this function will prevent the event.
              *
-             * @method _onDragOver
              * @protected
+             * @method _onDragOver
              * @param {DOM event} event dragover event, as received natively from CKEditor
              */
             _onDragOver: function(event) {
@@ -97,8 +105,8 @@
              * will send a list of files to be processed to
              * {{#crossLink "CKEDITOR.plugins.dropimages/_handleFiles:method"}}{{/crossLink}}
              *
-             * @method _onDragDrop
              * @protected
+             * @method _onDragDrop
              * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
              */
             _onDragDrop: function(event) {
@@ -119,8 +127,8 @@
             /**
              * Prevents a native event.
              *
-             * @method _preventEvent
              * @protected
+             * @method _preventEvent
              * @param {DOM event} event The event to be prevented.
              */
             _preventEvent: function(event) {
@@ -134,8 +142,8 @@
              * Processes an image file. The function creates an element and sets a source
              * a Data URI, then fires an event 'imageDrop' via CKEditor event system.
              *
-             * @method _preventEvent
              * @protected
+             * @method _preventEvent
              * @param {DOM event} event The event to be prevented.
              */
             _processFile: function(file, editor) {
@@ -162,13 +170,6 @@
 
                 reader.readAsDataURL(file);
             }
-
-            /**
-             * Fired when an image is being added to the editor successfully.
-             *
-             * @event imageDrop
-             * @param {CKEDITOR.dom.element} el The created image with src, created as Data URI
-             */
         }
     );
 }());

@@ -8,7 +8,7 @@
      *
      * @class CKEDITOR.Link
      * @constructor
-     * @param {Object} The CKEditor instance.
+     * @param {Object} editor The CKEditor instance.
      */
 
     function Link(editor) {
@@ -128,6 +128,7 @@
          * Checks if the URI has a scheme. If not, the default 'http' scheme with
          * hierarchical path '//' is added to it.
          *
+         * @protected
          * @method _getCompleteURI
          * @param {String} URI The URI of the link.
          * @return {String} The URI updated with the protocol.
