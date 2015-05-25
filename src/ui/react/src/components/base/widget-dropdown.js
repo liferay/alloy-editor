@@ -15,6 +15,7 @@
          */
         componentWillReceiveProps: function(nextProps) {
             this.setState({
+                dropdownTrigger: null,
                 itemDropdown: null
             });
         },
@@ -26,6 +27,7 @@
          */
         getInitialState: function() {
             return {
+                dropdownTrigger: null,
                 itemDropdown: null
             };
         },
