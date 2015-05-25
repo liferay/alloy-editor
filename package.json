@@ -1,6 +1,6 @@
 {
   "name": "alloy-editor",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Alloy Editor, a modern WYSIWYG editor, build on top of CKEditor",
   "dependencies": {},
   "devDependencies": {
