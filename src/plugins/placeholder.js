@@ -50,7 +50,7 @@
                     var editorNode = new CKEDITOR.dom.element(editor.element.$);
 
                     // Despite getData() returns empty string, the content still may have
-                    // content - an empty paragraph. This breaks the :empty selector in
+                    // data - an empty paragraph. This breaks the :empty selector in
                     // placeholder's CSS and placeholder does not appear.
                     // For that reason, we will intentionally remove any content from editorNode.
                     editorNode.setHtml('');
