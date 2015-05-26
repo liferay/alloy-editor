@@ -25,25 +25,26 @@
 
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers a 'blur' listener to CKEditor's blur event.
+             * The function registers a 'blur' and 'contentDom' event listeners.
              *
              * @method init
              * @param {Object} editor The current editor instance
              */
             init: function(editor) {
-                editor.on('blur', this._onBlur, this);
+                editor.on('blur', this._checkEmptyData, this);
+                editor.on('contentDom', this._checkEmptyData, this);
             },
 
             /**
-             * Handles the fired blur event. The function removes any data from CKEditor, because an
+             * The function removes any data from CKEditor, because an
              * empty paragraph may still exist despite for the user the editor looks empty and
              * adds a class, specified via "placeholderClass" config attribute.
              *
              * @protected
-             * @method init
-             * @param {CKEDITOR.dom.event} editor Blur event, fired from CKEditor
+             * @method _checkEmptyData
+             * @param {CKEDITOR.dom.event} editor event, fired from CKEditor
              */
-            _onBlur: function(event) {
+            _checkEmptyData: function(event) {
                 var editor,
                     editorNode;
 
