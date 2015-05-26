@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.7</b>
+                        API Docs for Version: <b>0.2.8</b>
                     </p>
                 </li>
             </div>
@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -101,6 +102,9 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
@@ -196,6 +200,10 @@
                             
                                                 <ul class="index-list methods">
                                                         <li class="index-item method">
+                                                            <a href="#method_getDefaultProps">getDefaultProps</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
                                                             <a href="#method_render">render</a>
                             
                                                         </li>
@@ -207,9 +215,21 @@
                             
                                                 <ul class="index-list properties">
                                                         <li class="index-item property">
+                                                            <a href="#property_editor">editor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
                                                             <a href="#property_key">key</a>
                             
                                                                 <span class="flag static">static</span>
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_label">label</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_tabIndex">tabIndex</a>
+                            
                                                         </li>
                                                 </ul>
                                             </div>
@@ -220,6 +240,48 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
+                                                <div id="method_getDefaultProps" class="method item">
+                                                    <h3 class="name"><code>getDefaultProps</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Object</span>
+                                                        </span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table.jsx.html#l51"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table.jsx:51</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Lifecycle. Returns the default values of the properties used in the widget.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Object</span>:
+                                                                    <p>The default properties.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
                                                 <div id="method_render" class="method item">
                                                     <h3 class="name"><code>render</code></h3>
                                                 
@@ -238,7 +300,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table.jsx.html#l26"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table.jsx:26</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table.jsx.html#l63"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table.jsx:63</code></a>
                                                         </p>
                                                 
                                                 
@@ -267,6 +329,31 @@
                                         <div id="properties" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Properties</h2>
                             
+                                                <div id="property_editor" class="property item">
+                                                    <h3 class="name"><code>editor</code></h3>
+                                                    <span class="type">Object</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table.jsx.html#l16"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table.jsx:16</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The editor instance where the component is being used.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
                                                 <div id="property_key" class="property item">
                                                     <h3 class="name"><code>key</code></h3>
                                                     <span class="type">String</span>
@@ -279,7 +366,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table.jsx.html#l16"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table.jsx:16</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table.jsx.html#l41"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table.jsx:41</code></a>
                                                         </p>
                                                 
                                                 
@@ -291,6 +378,57 @@
                                                     </div>
                                                 
                                                         <p><strong>Default:</strong> table</p>
+                                                
+                                                
+                                                </div>
+                                                <div id="property_label" class="property item">
+                                                    <h3 class="name"><code>label</code></h3>
+                                                    <span class="type">String</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table.jsx.html#l23"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table.jsx:23</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The label that should be used for accessibility purposes.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_tabIndex" class="property item">
+                                                    <h3 class="name"><code>tabIndex</code></h3>
+                                                    <span class="type">Number</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table.jsx.html#l30"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table.jsx:30</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The tabIndex of the button in its toolbar current state. A value other than -1
+                                                means that the button has focus and is the active element.</p>
+                                                
+                                                    </div>
+                                                
                                                 
                                                 
                                                 </div>

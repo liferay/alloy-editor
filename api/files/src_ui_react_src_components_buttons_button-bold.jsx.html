@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.7</b>
+                        API Docs for Version: <b>0.2.8</b>
                     </p>
                 </li>
             </div>
@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -101,6 +102,9 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
@@ -181,7 +185,22 @@
                                          *
                                          * @property {Object} editor
                                          */
-                                        editor: React.PropTypes.object.isRequired
+                                        editor: React.PropTypes.object.isRequired,
+                            
+                                        /**
+                                         * The label that should be used for accessibility purposes.
+                                         *
+                                         * @property {String} label
+                                         */
+                                        label: React.PropTypes.string,
+                            
+                                        /**
+                                         * The tabIndex of the button in its toolbar current state. A value other than -1
+                                         * means that the button has focus and is the active element.
+                                         *
+                                         * @property {Number} tabIndex
+                                         */
+                                        tabIndex: React.PropTypes.number
                                     },
                             
                                     // Lifecycle. Provides static properties to the widget.
@@ -205,6 +224,7 @@
                                     getDefaultProps: function() {
                                         return {
                                             command: &#x27;bold&#x27;,
+                                            label: AlloyEditor.Strings.bold,
                                             style: {
                                                 element: &#x27;strong&#x27;
                                             }
@@ -221,7 +241,7 @@
                                         var cssClass = &#x27;alloy-editor-button &#x27; + this.getStateClasses();
                             
                                         return (
-                                            &lt;button className={cssClass} data-type=&quot;button-bold&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex}&gt;
+                                            &lt;button aria-label={this.props.label} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-bold&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
                                                 &lt;span className=&quot;alloy-editor-icon-bold&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );
