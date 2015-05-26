@@ -32,31 +32,27 @@
              */
             init: function(editor) {
                 editor.on('blur', this._checkEmptyData, this);
-                editor.on('contentDom', this._checkEmptyData, this);
+                editor.once('contentDom', this._checkEmptyData, this);
             },
 
             /**
-             * The function removes any data from CKEditor, because an
-             * empty paragraph may still exist despite for the user the editor looks empty and
-             * adds a class, specified via "placeholderClass" config attribute.
+             * Removes any data from the content and adds a class,
+             * specified by the "placeholderClass" config attribute.
              *
              * @protected
              * @method _checkEmptyData
              * @param {CKEDITOR.dom.event} editor event, fired from CKEditor
              */
             _checkEmptyData: function(event) {
-                var editor,
-                    editorNode;
-
-                editor = event.editor;
+                var editor = event.editor;
 
                 if (editor.getData() === '') {
-                    editorNode = new CKEDITOR.dom.element(editor.element.$);
+                    var editorNode = new CKEDITOR.dom.element(editor.element.$);
 
                     // Despite getData() returns empty string, the content still may have
-                    // content - an empty paragrapgh. This prevents :empty selector in
+                    // content - an empty paragraph. This breaks the :empty selector in
                     // placeholder's CSS and placeholder does not appear.
-                    // For that reason we will intentionally remove any content from editorNode.
+                    // For that reason, we will intentionally remove any content from editorNode.
                     editorNode.setHtml('');
 
                     editorNode.addClass(editor.config.placeholderClass);
