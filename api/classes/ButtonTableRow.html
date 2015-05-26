@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.8</b>
+                        API Docs for Version: <b>0.2.7</b>
                     </p>
                 </li>
             </div>
@@ -65,7 +65,6 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
-                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -102,9 +101,6 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
@@ -194,8 +190,12 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__renderActions">_renderActions</a>
+                            
+                                                        </li>
                                                         <li class="index-item method">
-                                                            <a href="#method_getDefaultProps">getDefaultProps</a>
+                                                            <a href="#method__renderDropdown">_renderDropdown</a>
                             
                                                         </li>
                                                         <li class="index-item method">
@@ -210,33 +210,9 @@
                             
                                                 <ul class="index-list properties">
                                                         <li class="index-item property">
-                                                            <a href="#property_commands">commands</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_editor">editor</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_expanded">expanded</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
                                                             <a href="#property_key">key</a>
                             
                                                                 <span class="flag static">static</span>
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_label">label</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_tabIndex">tabIndex</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_toggleDropdown">toggleDropdown</a>
-                            
                                                         </li>
                                                 </ul>
                                             </div>
@@ -247,13 +223,56 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method_getDefaultProps" class="method item">
-                                                    <h3 class="name"><code>getDefaultProps</code></h3>
+                                                <div id="method__renderActions" class="method item protected">
+                                                    <h3 class="name"><code>_renderActions</code></h3>
                                                 
                                                         <span class="paren">()</span>
                                                 
                                                         <span class="returns-inline">
-                                                            <span class="type">Object</span>
+                                                            <span class="type">Array</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l39"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:39</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Renders instances of ButtonCommandListItem with the description of the row action that will be executed.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Array</span>:
+                                                                    <p>Rendered instances of ButtonCommandListItem class</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method__renderDropdown" class="method item">
+                                                    <h3 class="name"><code>_renderDropdown</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Element</span>
                                                         </span>
                                                 
                                                 
@@ -265,7 +284,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l68"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:68</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l58"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:58</code></a>
                                                         </p>
                                                 
                                                 
@@ -273,7 +292,7 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Lifecycle. Returns the default values of the properties used in the widget.</p>
+                                                        <p>Renders the button dropdown with the associated command items when the button is expanded.</p>
                                                 
                                                     </div>
                                                 
@@ -282,8 +301,8 @@
                                                             <h4>Returns:</h4>
                                                 
                                                             <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The default properties.</p>
+                                                                        <span class="type">Element</span>:
+                                                                    <p>Returns the dropdown element if the button is expanded, null otherwise</p>
                                                 
                                                             </div>
                                                         </div>
@@ -307,7 +326,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l94"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:94</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l22"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:22</code></a>
                                                         </p>
                                                 
                                                 
@@ -336,81 +355,6 @@
                                         <div id="properties" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Properties</h2>
                             
-                                                <div id="property_commands" class="property item">
-                                                    <h3 class="name"><code>commands</code></h3>
-                                                    <span class="type">Array</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l12"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:12</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>List of the commands the button is able to handle.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_editor" class="property item">
-                                                    <h3 class="name"><code>editor</code></h3>
-                                                    <span class="type">Object</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l19"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:19</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The editor instance where the component is being used.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_expanded" class="property item">
-                                                    <h3 class="name"><code>expanded</code></h3>
-                                                    <span class="type">Boolean</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l26"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:26</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Indicates whether the styles list is expanded or not.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
                                                 <div id="property_key" class="property item">
                                                     <h3 class="name"><code>key</code></h3>
                                                     <span class="type">String</span>
@@ -423,7 +367,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l58"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:58</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l12"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:12</code></a>
                                                         </p>
                                                 
                                                 
@@ -435,82 +379,6 @@
                                                     </div>
                                                 
                                                         <p><strong>Default:</strong> tableRow</p>
-                                                
-                                                
-                                                </div>
-                                                <div id="property_label" class="property item">
-                                                    <h3 class="name"><code>label</code></h3>
-                                                    <span class="type">String</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l33"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:33</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The label that should be used for accessibility purposes.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_tabIndex" class="property item">
-                                                    <h3 class="name"><code>tabIndex</code></h3>
-                                                    <span class="type">Number</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l40"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:40</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The tabIndex of the button in its toolbar current state. A value other than -1
-                                                means that the button has focus and is the active element.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_toggleDropdown" class="property item">
-                                                    <h3 class="name"><code>toggleDropdown</code></h3>
-                                                    <span class="type">Function</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-row.jsx.html#l48"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-row.jsx:48</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Callback provided by the button host to notify when the styles list has been expanded.</p>
-                                                
-                                                    </div>
-                                                
                                                 
                                                 
                                                 </div>

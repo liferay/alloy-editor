@@ -20225,8 +20225,6 @@ CKEDITOR.disableAutoInline = true;
         return;
     }
 
-    CKEDITOR.once('resourcesLoaded', entrance);
-
     (function() {
     'use strict';
 
@@ -20243,7 +20241,6 @@ CKEDITOR.disableAutoInline = true;
      * debounced with, let's say 100ms. The real execution of this function will happen 100ms after last
      * scroll event.
      *
-     * @static
      * @method debounce
      * @param {Function} callback The callback which has to be called after given timeout.
      * @param {Number} timeout Timeout in milliseconds after which the callback will be called.
@@ -20288,7 +20285,7 @@ CKEDITOR.disableAutoInline = true;
      *
      * @class CKEDITOR.Link
      * @constructor
-     * @param {Object} editor The CKEditor instance.
+     * @param {Object} The CKEditor instance.
      */
 
     function Link(editor) {
@@ -20408,7 +20405,6 @@ CKEDITOR.disableAutoInline = true;
          * Checks if the URI has a scheme. If not, the default 'http' scheme with
          * hierarchical path '//' is added to it.
          *
-         * @protected
          * @method _getCompleteURI
          * @param {String} URI The URI of the link.
          * @return {String} The URI updated with the protocol.
@@ -20785,7 +20781,7 @@ CKEDITOR.disableAutoInline = true;
      *
      * @class CKEDITOR.Table
      * @constructor
-     * @param {Object} editor The CKEditor instance.
+     * @param {Object} The CKEditor instance.
      */
 
     function Table(editor) {
@@ -21009,13 +21005,13 @@ CKEDITOR.disableAutoInline = true;
      * - selectionData - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
      */
 
-    /**
-     * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
-     *
-     * @event ariaUpdate
-     * @param {Object} data An object which contains the following properties:
-     * - message - The provided message from the UI element.
-     */
+     /**
+      * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
+      *
+      * @event ariaUpdate
+      * @param {Object} data An object which contains the following properties:
+      * - message - The provided message from the UI element.
+      */
 
     /**
      * If set to true, the editor will still fire {{#crossLink "CKEDITOR.plugins.uicore/editorInteraction:event"}}{{/crossLink}} event,
@@ -21040,25 +21036,29 @@ CKEDITOR.disableAutoInline = true;
             /**
              * Initializer lifecycle implementation for the UICore plugin.
              *
-             * @protected
              * @method init
+             * @protected
              * @param {Object} editor The current CKEditor instance.
              */
             init: function(editor) {
-                var ariaState = [];
+                var ariaElement,
+                    ariaState = [],
+                    handleAria,
+                    handleUI,
+                    uiTasksTimeout;
 
-                var ariaElement = this._createAriaElement(editor.id);
+                ariaElement = this._createAriaElement(editor.id);
 
-                var uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
+                uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
 
-                var handleAria = CKEDITOR.tools.debounce(
+                handleAria = CKEDITOR.tools.debounce(
                     function(event) {
                         ariaElement.innerHTML = ariaState.join('. ');
                     },
                     uiTasksTimeout
                 );
 
-                var handleUI = CKEDITOR.tools.debounce(
+                handleUI = CKEDITOR.tools.debounce(
                     function(event) {
                         ariaState = [];
 
@@ -21092,8 +21092,6 @@ CKEDITOR.disableAutoInline = true;
                 });
 
                 editor.on('destroy', function(event) {
-                    ariaElement.parentNode.removeChild(ariaElement);
-
                     handleUI.detach();
                 });
             },
@@ -21101,15 +21099,17 @@ CKEDITOR.disableAutoInline = true;
             /**
              * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
              *
-             * @protected
              * @method _createAriaElement
+             * @protected
              * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
              * @return {HTMLElement} The created and applied to DOM element.
              */
             _createAriaElement: function(id) {
-                var statusElement = document.createElement('div');
+                var statusElement;
 
-                statusElement.className = 'alloy-editor-sr-only';
+                statusElement = document.createElement('div');
+
+                statusElement.className = 'sr-only';
 
                 statusElement.setAttribute('aria-live', 'polite');
                 statusElement.setAttribute('role', 'status');
@@ -21162,7 +21162,7 @@ CKEDITOR.disableAutoInline = true;
 
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers the `keyup` event on the editing area.
+             * The function registers the 'keyup' event on the editing area.
              *
              * @method init
              * @param {Object} editor The current editor instance
@@ -21181,9 +21181,9 @@ CKEDITOR.disableAutoInline = true;
              * Retrieves the last word introduced by the user. Reads from the current
              * caret position backwards until it finds the first white space.
              *
-             * @protected
              * @method _getLastWord
              * @return {String} The last word introduced by user
+             * @protected
              */
             _getLastWord: function(editor) {
                 var range = editor.getSelection().getRanges()[0];
@@ -21244,10 +21244,10 @@ CKEDITOR.disableAutoInline = true;
             /**
              * Checks if the given link is a valid URL.
              *
-             * @protected
              * @method isValidURL
              * @param {String} link The link we want to know if it is a valid URL
              * @return {Boolean} Returns true if the link is a valid URL, false otherwise
+             * @protected
              */
             _isValidURL: function(link) {
                 return REGEX_URL.test(link);
@@ -21257,9 +21257,9 @@ CKEDITOR.disableAutoInline = true;
              * Listens to the `keydown` event and if the keycode is `Backspace`, removes the previously
              * created link.
              *
-             * @protected
              * @method _onKeyDown
              * @param {EventFacade} event EventFacade object
+             * @protected
              */
             _onKeyDown: function(event) {
                 var nativeEvent = event.data.$;
@@ -21284,9 +21284,9 @@ CKEDITOR.disableAutoInline = true;
              * Listens to the `Enter` and `Space` key events in order to check if the last word
              * introduced by the user should be replaced by a link element.
              *
-             * @protected
              * @method _onKeyUp
              * @param {EventFacade} event EventFacade object
+             * @protected
              */
             _onKeyUp: function(event) {
                 var nativeEvent = event.data.$;
@@ -21307,9 +21307,9 @@ CKEDITOR.disableAutoInline = true;
             /**
              * Replaces content by a link element.
              *
-             * @protected
              * @method _replaceContentByLink
              * @param {String} content The text that has to be replaced by an link element
+             * @protected
              */
             _replaceContentByLink: function(editor, content) {
                 var range = editor.createRange();
@@ -21351,8 +21351,8 @@ CKEDITOR.disableAutoInline = true;
             /**
              * Removes the created link element, and replaces it by its text.
              *
-             * @protected
              * @method _removeLink
+             * @protected
              */
             _removeLink: function(editor) {
                 var range = editor.getSelection().getRanges()[0];
@@ -21378,8 +21378,8 @@ CKEDITOR.disableAutoInline = true;
             /**
              * Subscribe to a key event of the editable aria.
              *
-             * @protected
              * @method _subscribeToKeyEvent
+             * @protected
              */
             _subscribeToKeyEvent: function(editor) {
                 var editable = editor.editable();
@@ -21827,14 +21827,6 @@ CKEDITOR.disableAutoInline = true;
      *
      * @class CKEDITOR.plugins.dropimages
      */
-
-    /**
-     * Fired when an image is being added to the editor successfully.
-     *
-     * @event imageDrop
-     * @param {CKEDITOR.dom.element} el The created image with src, created as Data URI
-     */
-
     CKEDITOR.plugins.add(
         'dropimages', {
             /**
@@ -21866,8 +21858,8 @@ CKEDITOR.disableAutoInline = true;
              * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
              * processing to {{#crossLink "CKEDITOR.plugins.dropimages/_processFile:method"}}{{/crossLink}}
              *
-             * @protected
              * @method _handleFiles
+             * @protected
              * @param {Array} files Array of dropped files. Only the images from this list will be processed.
              * @param {Object} editor The current editor instance
              */
@@ -21891,8 +21883,8 @@ CKEDITOR.disableAutoInline = true;
             /**
              * Handles drag enter event. In case of IE, this function will prevent the event.
              *
-             * @protected
              * @method _onDragEnter
+             * @protected
              * @param {DOM event} event dragenter event, as received natively from CKEditor
              */
             _onDragEnter: function(event) {
@@ -21904,8 +21896,8 @@ CKEDITOR.disableAutoInline = true;
             /**
              * Handles drag over event. In case of IE, this function will prevent the event.
              *
-             * @protected
              * @method _onDragOver
+             * @protected
              * @param {DOM event} event dragover event, as received natively from CKEditor
              */
             _onDragOver: function(event) {
@@ -21919,8 +21911,8 @@ CKEDITOR.disableAutoInline = true;
              * will send a list of files to be processed to
              * {{#crossLink "CKEDITOR.plugins.dropimages/_handleFiles:method"}}{{/crossLink}}
              *
-             * @protected
              * @method _onDragDrop
+             * @protected
              * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
              */
             _onDragDrop: function(event) {
@@ -21941,8 +21933,8 @@ CKEDITOR.disableAutoInline = true;
             /**
              * Prevents a native event.
              *
-             * @protected
              * @method _preventEvent
+             * @protected
              * @param {DOM event} event The event to be prevented.
              */
             _preventEvent: function(event) {
@@ -21954,10 +21946,10 @@ CKEDITOR.disableAutoInline = true;
 
             /**
              * Processes an image file. The function creates an element and sets a source
-             * a Data URI, then fires an event 'imageDrop' via CKEditor event system.
+             * a Data URI, then fires an event 'imagedrop' via CKEditor event system.
              *
-             * @protected
              * @method _preventEvent
+             * @protected
              * @param {DOM event} event The event to be prevented.
              */
             _processFile: function(file, editor) {
@@ -21979,11 +21971,18 @@ CKEDITOR.disableAutoInline = true;
                         file: file
                     };
 
-                    editor.fire('imageDrop', imageData);
+                    editor.fire('imagedrop', imageData);
                 });
 
                 reader.readAsDataURL(file);
             }
+
+            /**
+             * Fired when an image is being added to the editor successfully.
+             *
+             * @event imagedrop
+             * @param {CKEDITOR.dom.element} el The created image with src, created as Data URI
+             */
         }
     );
 }());
@@ -22014,34 +22013,37 @@ CKEDITOR.disableAutoInline = true;
 
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers a 'blur' and 'contentDom' event listeners.
+             * The function registers a 'blur' listener to CKEditor's blur event.
              *
              * @method init
              * @param {Object} editor The current editor instance
              */
             init: function(editor) {
-                editor.on('blur', this._checkEmptyData, this);
-                editor.once('contentDom', this._checkEmptyData, this);
+                editor.on('blur', this._onBlur, this);
             },
 
             /**
-             * Removes any data from the content and adds a class,
-             * specified by the "placeholderClass" config attribute.
+             * Handles the fired blur event. The function removes any data from CKEditor, because an
+             * empty paragraph may still exist despite for the user the editor looks empty and
+             * adds a class, specified via "placeholderClass" config attribute.
              *
+             * @method init
              * @protected
-             * @method _checkEmptyData
-             * @param {CKEDITOR.dom.event} editor event, fired from CKEditor
+             * @param {CKEDITOR.dom.event} editor Blur event, fired from CKEditor
              */
-            _checkEmptyData: function(event) {
-                var editor = event.editor;
+            _onBlur: function(event) {
+                var editor,
+                    editorNode;
+
+                editor = event.editor;
 
                 if (editor.getData() === '') {
-                    var editorNode = new CKEDITOR.dom.element(editor.element.$);
+                    editorNode = new CKEDITOR.dom.element(editor.element.$);
 
                     // Despite getData() returns empty string, the content still may have
-                    // data - an empty paragraph. This breaks the :empty selector in
+                    // content - an empty paragrapgh. This prevents :empty selector in
                     // placeholder's CSS and placeholder does not appear.
-                    // For that reason, we will intentionally remove any content from editorNode.
+                    // For that reason we will intentionally remove any content from editorNode.
                     editorNode.setHtml('');
 
                     editorNode.addClass(editor.config.placeholderClass);
@@ -24032,306 +24034,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     AlloyEditor.Selections = Selections;
 }());
 
-(function() {
-    'use strict';
-
-    /**
-     * AlloyEditor main class. Creates instance of the editor and provides the user configuration
-     * to the UI.
-     *
-     * @class Core
-     * @constructor
-     */
-    function Core(config) {
-        Core.superclass.constructor.call(this, config);
-    }
-
-    AlloyEditor.OOP.extend(Core, AlloyEditor.Base, {
-        /**
-         * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
-         * instace, passing it the provided configuration attributes.
-         *
-         * @protected
-         * @method initializer
-         * @param config {Object} Configuration object literal for the editor.
-         */
-        initializer: function(config) {
-            var node = this.get('srcNode');
-
-            var editor = CKEDITOR.inline(node);
-
-            editor.config.allowedContent = this.get('allowedContent');
-
-            editor.config.toolbars = this.get('toolbars');
-
-            editor.config.removePlugins = this.get('removePlugins');
-            editor.config.extraPlugins = this.get('extraPlugins');
-            editor.config.placeholderClass = this.get('placeholderClass');
-
-            editor.config.pasteFromWordRemoveStyles = false;
-            editor.config.pasteFromWordRemoveFontStyles = false;
-
-            AlloyEditor.Lang.mix(editor.config, config);
-
-            this._editor = editor;
-
-            CKEDITOR.once('resourcesLoaded', this._renderUI.bind(this));
-
-            this._loadLanguageFile();
-        },
-
-        /**
-         * Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor
-         * instance and destroys all created toolbars.
-         *
-         * @protected
-         * @method destructor
-         */
-        destructor: function() {
-            React.unmountComponentAtNode(this._editorUIElement);
-
-            this._editorUIElement.parentNode.removeChild(this._editorUIElement);
-
-            var editorInstance = CKEDITOR.instances[this.get('srcNode')];
-
-            if (editorInstance) {
-                editorInstance.destroy();
-            }
-        },
-
-        /**
-         * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
-         *
-         * @protected
-         * @method _getNativeEditor
-         * @return {Object} The current instance of CKEditor.
-         */
-        _getNativeEditor: function() {
-            return this._editor;
-        },
-
-        _loadLanguageFile: function() {
-            var onLanguageFileLoad = function() {
-                CKEDITOR.fire('resourcesLoaded');
-            };
-
-            if (!window.AlloyEditor.Strings) {
-                var languages = ['af', 'ar', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en-au', 'en-ca', 'en-gb', 'en', 'eo', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca', 'fr', 'gl', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'ku', 'lt', 'lv', 'mk', 'mn', 'ms', 'nb', 'nl', 'no', 'pl', 'pt-br', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr-latn', 'sr', 'sv', 'th', 'tr', 'tt', 'ug', 'uk', 'vi', 'zh-cn', 'zh'];
-
-                var userLanguage = navigator.language || navigator.userLanguage || 'en';
-
-                var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
-                var lang = parts[1];
-                var locale = parts[2];
-
-                if (languages[lang + '-' + locale]) {
-                    lang = lang + '-' + locale;
-                } else if (!languages.indexOf(lang)) {
-                    lang = 'en';
-                }
-
-                CKEDITOR.scriptLoader.load(CKEDITOR.getUrl('lang/alloy-editor/' + lang + '.js'), onLanguageFileLoad, this);
-            } else {
-                setTimeout(onLanguageFileLoad.bind(this), 0);
-            }
-        },
-
-        /**
-         * Renders the specified from the user toolbars
-         *
-         * @protected
-         * @method _renderUI
-         */
-        _renderUI: function() {
-            var editorUIElement = document.createElement('div');
-            editorUIElement.className = 'alloy-editor-ui';
-
-            var uiNode = this.get('uiNode') || document.body;
-
-            if (AlloyEditor.Lang.isString(uiNode)) {
-                uiNode = document.getElementById(uiNode);
-            }
-
-            uiNode.appendChild(editorUIElement);
-
-            this._mainUI = React.render(React.createElement(AlloyEditor.UI, {
-                editor: this,
-                eventsDelay: this.get('eventsDelay'),
-                toolbars: this.get('toolbars')
-            }), editorUIElement);
-
-            this._editorUIElement = editorUIElement;
-
-            this.get('nativeEditor').fire('uiReady');
-        },
-
-        /**
-         * Validates the allowed content attribute. Look
-         * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
-         * supported values.
-         *
-         * @protected
-         * @method _validateAllowedContent
-         * @param {Any} The value to be checked
-         * @return {Boolean} True if the current value is valid configuration, false otherwise
-         */
-        _validateAllowedContent: function(value) {
-            return AlloyEditor.Lang.isString(value) || AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isBoolean(value);
-        },
-
-        /**
-         * Validates the value of toolbars attribute
-         *
-         * @protected
-         * @method _validateToolbars
-         * @param {Any} The value to be checked
-         * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
-         */
-        _validateToolbars: function(value) {
-            return AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isNull(value);
-        }
-    }, {
-        ATTRS: {
-            /**
-             * Configures the allowed content for the current instance of AlloyEditor.
-             * Look on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)
-             * for more information about the valid values.
-             *
-             * @property allowedContent
-             * @default true
-             * @writeOnce
-             * @type {Boolean, String, Object}
-             */
-            allowedContent: {
-                validator: '_validateAllowedContent',
-                value: true,
-                writeOnce: true
-            },
-
-            /**
-             * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
-             *
-             * @property eventsDelay
-             * @type {Number}
-             */
-            eventsDelay: {
-                validator: AlloyEditor.Lang.isNumber,
-                value: 100
-            },
-
-            /**
-             * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
-             * make AlloyEditor to work properly.
-             *
-             * @property extraPlugins
-             * @default 'uicore,selectionregion,dragresize,dropimages,placeholder,tabletools,tableresize,autolink'
-             * @writeOnce
-             * @type {String}
-             */
-            extraPlugins: {
-                validator: AlloyEditor.Lang.isString,
-                value: 'uicore,selectionregion,dragresize,dropimages,placeholder,tabletools,tableresize,autolink',
-                writeOnce: true
-            },
-
-            /**
-             * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
-             *
-             * @property nativeEditor
-             * @readOnly
-             * @type {Object}
-             */
-            nativeEditor: {
-                getter: '_getNativeEditor',
-                readOnly: true
-            },
-
-            /**
-             * Specifies the class, which should be added by Placeholder plugin
-             * {{#crossLink "CKEDITOR.plugins.placeholder}}{{/crossLink}}
-             * when editor is not focused.
-             *
-             * @property placeholderClass
-             * @default 'alloy-editor-placeholder'
-             * @writeOnce
-             * @type {String}
-             */
-            placeholderClass: {
-                validator: AlloyEditor.Lang.isString,
-                value: 'alloy-editor-placeholder',
-                writeOnce: true
-            },
-
-            /**
-             * Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.
-             * These plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor
-             * comes with its own highly optimized copy of CKEditor (just customized via their official download page).
-             * This version does not come with the unneeded plugins, so the value of this property won't be needed.
-             * However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the
-             * plugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them
-             * entirely from CKEditor. It just removes them from its current instance, in which you will use different
-             * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
-             * page!
-             *
-             * @property removePlugins
-             * @default 'contextmenu,toolbar,elementspath,resize,liststyle,link'
-             * @writeOnce
-             * @type {String}
-             */
-            removePlugins: {
-                validator: AlloyEditor.Lang.isString,
-                value: 'contextmenu,toolbar,elementspath,resize,liststyle,link',
-                writeOnce: true
-            },
-
-            /**
-             * The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.
-             *
-             * @property srcNode
-             * @type String | Node
-             * @writeOnce
-             */
-            srcNode: {
-                writeOnce: true
-            },
-
-            /**
-             * The toolbars configuration for this editor instance
-             *
-             * @property {Object} toolbars
-             */
-            toolbars: {
-                validator: '_validateToolbars',
-                value: {
-                    add: {
-                        buttons: ['image', 'camera', 'hline', 'table'],
-                        tabIndex: 2
-                    },
-                    styles: {
-                        selections: AlloyEditor.Selections,
-                        tabIndex: 1
-                    }
-                }
-            },
-
-            /**
-             * The Node ID or HTMl node, where AlloyEditor's UI should be rendered.
-             *
-             * @property uiNode
-             * @type String | Node
-             * @writeOnce
-             */
-            uiNode: {
-                writeOnce: true
-            }
-        }
-    });
-
-    AlloyEditor.Core = Core;
-}());
-
-    function entrance() {
-        (function() {
+(function () {
     'use strict';
 
     /**
@@ -24372,7 +24075,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
     AlloyEditor.ButtonActionStyle = ButtonActionStyle;
 }());
-(function() {
+(function () {
     'use strict';
 
     /**
@@ -24420,7 +24123,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
     AlloyEditor.ButtonCommand = ButtonCommand;
 }());
-(function() {
+(function () {
     'use strict';
 
     /**
@@ -24460,7 +24163,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
     AlloyEditor.ButtonStateClasses = ButtonStateClasses;
 }());
-(function() {
+(function () {
     'use strict';
 
     /**
@@ -24552,37 +24255,37 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var buttonProps = {};
 
             var toolbarButtons = this.filterExclusive(
-                    buttons.filter(function(button) {
-                        return button && (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
-                    })
-                    .map(function(button) {
-                        if (AlloyEditor.Lang.isString(button)) {
-                            button = AlloyEditor.Buttons[button];
-                        } else if (AlloyEditor.Lang.isString(button.name)) {
-                            buttonProps[AlloyEditor.Buttons[button.name].key] = button.cfg;
-                            button = AlloyEditor.Buttons[button.name];
-                        }
-
-                        return button;
-                    })
-                )
+                buttons.filter(function(button) {
+                    return button && (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
+                })
                 .map(function(button) {
-                    var props = this.mergeExclusiveProps({
-                        editor: this.props.editor,
-                        key: button.key,
-                        tabKey: button.key,
-                        tabIndex: (this.props.trigger && this.props.trigger.props.tabKey === button.key) ? 0 : -1,
-                        trigger: this.props.trigger
-                    }, button.key);
-
-                    props = this.mergeDropdownProps(props, button.key);
-
-                    if (additionalProps) {
-                        props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
+                    if (AlloyEditor.Lang.isString(button)) {
+                        button = AlloyEditor.Buttons[button];
+                    } else if (AlloyEditor.Lang.isString(button.name)) {
+                        buttonProps[AlloyEditor.Buttons[button.name].key] = button.cfg;
+                        button = AlloyEditor.Buttons[button.name];
                     }
 
-                    return React.createElement(button, props);
-                }, this);
+                    return button;
+                })
+            )
+            .map(function(button) {
+                var props = this.mergeExclusiveProps({
+                    editor: this.props.editor,
+                    key: button.key,
+                    tabKey: button.key,
+                    tabIndex: (this.props.trigger && this.props.trigger.props.tabKey === button.key) ? 0 : -1,
+                    trigger: this.props.trigger
+                }, button.key);
+
+                props = this.mergeDropdownProps(props, button.key);
+
+                if (additionalProps) {
+                    props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
+                }
+
+                return React.createElement(button, props);
+            }, this);
 
             return toolbarButtons;
         }
@@ -24639,9 +24342,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentWillReceiveProps
          */
-        componentWillReceiveProps: function(nextProps) {
+        componentWillReceiveProps: function (nextProps) {
             this.setState({
-                dropdownTrigger: null,
                 itemDropdown: null
             });
         },
@@ -24653,7 +24355,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getInitialState: function() {
             return {
-                dropdownTrigger: null,
                 itemDropdown: null
             };
         },
@@ -24672,7 +24373,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         mergeDropdownProps: function(obj, itemKey) {
             return CKEDITOR.tools.merge(obj, {
                 expanded: this.state.itemDropdown === itemKey ? true : false,
-                tabIndex: this.state.dropdownTrigger === itemKey ? 0 : -1,
                 toggleDropdown: this.toggleDropdown.bind(this, itemKey)
             });
         },
@@ -24682,20 +24382,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method toggleDropdown
          * @param {Object} itemDropdown The widget which requests to toggle its dropdown.
-         * @param {Number} toggleDirection User movement direction when toggled via keyboard.
          */
-        toggleDropdown: function(itemDropdown, toggleDirection) {
+        toggleDropdown: function(itemDropdown) {
             this.setState({
-                dropdownTrigger: itemDropdown,
                 itemDropdown: itemDropdown !== this.state.itemDropdown ? itemDropdown : null
-            }, function() {
-                if (!this.state.itemDropdown) {
-                    if (this.moveFocus) {
-                        this.moveFocus(toggleDirection);
-                    } else {
-                        React.findDOMNode(this).focus();
-                    }
-                }
             });
         }
     };
@@ -24802,13 +24492,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 (function() {
     'use strict';
 
-    var DIRECTION_NONE = 0;
     var DIRECTION_NEXT = 1;
     var DIRECTION_PREV = -1;
-
-    var ACTION_NONE = 0;
-    var ACTION_MOVE_FOCUS = 1;
-    var ACTION_DISMISS_FOCUS = 2;
 
     /**
      * WidgetFocusManager is a mixin that provides keyboard navigation inside a widget. To do this,
@@ -24819,18 +24504,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var WidgetFocusManager = {
         // Allows validating props being passed to the component.
         propTypes: {
-            /**
-             * Callback method to be invoked when the focus manager is to be dismissed. This happens
-             * in the following scenarios if a dismiss callback has been specified:
-             * - A dismiss key has been pressed
-             * - In a non-circular focus manager, when:
-             *     - The active descendant is the first one and a prev key has been pressed.
-             *     - The active descendant is the last one and a next key has been pressed.
-             *
-             * @property {Function} onDismiss
-             */
-            onDismiss: React.PropTypes.func,
-
             /**
              * Indicates if focus should be set to the first/last descendant when the limits are reached.
              *
@@ -24847,8 +24520,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
             /**
              * Object representing the keys used to navigate between descendants. The format for the prop is:
-             * `{dismiss: value, dismissNext: value, dismissPrev: value, next: value, prev: value}` where
-             * value can be both a number or an array of numbers with the allowed keyCodes.
+             * `{next: value, prev: value}` where value can be both a number or an array of numbers with the
+             * allowed keyCodes.
              *
              * @property {Object} keys
              */
@@ -24904,110 +24577,15 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         handleKey: function(event) {
             if (this._isValidTarget(event.target) && this._descendants) {
-                var action = this._getFocusAction(event);
+                var direction = this._getDirection(event);
 
-                if (action.type) {
+                if (direction) {
                     event.stopPropagation();
                     event.preventDefault();
 
-                    if (action.type === ACTION_MOVE_FOCUS) {
-                        this._moveFocus(action.direction);
-                    }
-
-                    if (action.type === ACTION_DISMISS_FOCUS) {
-                        this.props.onDismiss(action.direction);
-                    }
+                    this._moveFocus(direction);
                 }
             }
-        },
-
-        /**
-         * Moves the focus among descendants in the especified direction.
-         *
-         * @method moveFocus
-         * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
-         */
-        moveFocus: function(direction) {
-            direction = AlloyEditor.Lang.isNumber(direction) ? direction : 0;
-
-            this._moveFocus(direction);
-        },
-
-        /**
-         * Returns the action, if any, that a keyboard event in the current focus manager state
-         * should produce.
-         *
-         * @protected
-         * @method _getFocusAction
-         * @param {object} event The Keyboard event.
-         * @return {Object} An action object with type and direction properties.
-         */
-        _getFocusAction: function(event) {
-            var action = {
-                type: ACTION_NONE
-            };
-
-            if (this.props.keys) {
-                var direction = this._getFocusMoveDirection(event);
-
-                if (direction) {
-                    action.direction = direction;
-                    action.type = ACTION_MOVE_FOCUS;
-                }
-
-                var dismissAction = this._getFocusDismissAction(event, direction);
-
-                if (dismissAction.dismiss) {
-                    action.direction = dismissAction.direction;
-                    action.type = ACTION_DISMISS_FOCUS;
-                }
-            }
-
-            return action;
-        },
-
-        /**
-         * Returns the dismiss action, if any, the focus manager should execute to yield the focus. This
-         * will happen in any of these scenarios if a dismiss callback has been specified:
-         * - A dismiss key has been pressed
-         * - In a non-circular focus manager, when:
-         *     - The active descendant is the first one and a prev key has been pressed.
-         *     - The active descendant is the last one and a next key has been pressed.
-         *
-         * @protected
-         * @method _getFocusDismissAction
-         * @param {Object} event The Keyboard event.
-         * @param {Number} focusMoveDirection The focus movement direction (if any).
-         * @return {Object} A dismiss action with dismiss and direction properties.
-         */
-        _getFocusDismissAction: function(event, focusMoveDirection) {
-            var dismissAction = {
-                direction: focusMoveDirection,
-                dismiss: false
-            };
-
-            if (this.props.onDismiss) {
-                if (this._isValidKey(event.keyCode, this.props.keys.dismiss)) {
-                    dismissAction.dismiss = true;
-                }
-                if (this._isValidKey(event.keyCode, this.props.keys.dismissNext)) {
-                    dismissAction.dismiss = true;
-                    dismissAction.direction = DIRECTION_NEXT;
-                }
-                if (this._isValidKey(event.keyCode, this.props.keys.dismissPrev)) {
-                    dismissAction.dismiss = true;
-                    dismissAction.direction = DIRECTION_PREV;
-                }
-
-                if (!dismissAction.dismiss && !this.props.circular && focusMoveDirection) {
-                    dismissAction.dismiss = (
-                        focusMoveDirection === DIRECTION_PREV && this._activeDescendant === 0 ||
-                        focusMoveDirection === DIRECTION_NEXT && this._activeDescendant === this._descendants.length - 1
-                    );
-                }
-            }
-
-            return dismissAction;
         },
 
         /**
@@ -25015,22 +24593,17 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * shift key modifier, the direction of the movement is inverted.
          *
          * @protected
-         * @method _getFocusMoveDirection
-         * @param {Object} event The Keyboard event.
-         * @return {Number} The computed direction of the expected focus movement.
+         * @method _getDirection
+         * @param {object} event The Keyboard event.
          */
-        _getFocusMoveDirection: function(event) {
-            var direction = DIRECTION_NONE;
+        _getDirection: function(event) {
+            var direction = 0;
 
-            if (this._isValidKey(event.keyCode, this.props.keys.next)) {
-                direction = DIRECTION_NEXT;
-            }
-            if (this._isValidKey(event.keyCode, this.props.keys.prev)) {
-                direction = DIRECTION_PREV;
-            }
+            if (this.props.keys) {
+                if (this._isValidKey(event.keyCode, this.props.keys.next)) { direction = DIRECTION_NEXT; }
+                if (this._isValidKey(event.keyCode, this.props.keys.prev)) { direction = DIRECTION_PREV; }
 
-            if (event.shifKey) {
-                direction *= -1;
+                if (event.shifKey) { direction *= -1; }
             }
 
             return direction;
@@ -25115,14 +24688,14 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
                 this._activeDescendant = 0;
 
-                this._descendants.some(function(item, index) {
-                    if (item.getAttribute('tabindex') === '0') {
-                        this._activeDescendant = index;
-                        this.focus();
+                if (this.props.trigger && this.props.trigger.isMounted()) {
+                    var triggerDescendant = this._descendants.indexOf(React.findDOMNode(this.props.trigger));
 
-                        return true;
+                    if (triggerDescendant !== -1) {
+                        this._activeDescendant = triggerDescendant;
+                        this.focus();
                     }
-                }.bind(this));
+                }
             }
         }
     };
@@ -25138,16 +24711,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class WidgetInteractionPoint
      */
     var WidgetInteractionPoint = {
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The provided editor event.
-             *
-             * @property {SyntheticEvent} editorEvent
-             */
-            editorEvent: React.PropTypes.object
-        },
-
         /**
          * Returns the position, in page coordinates, according to which a widget should appear.
          * Depending on the direction of the selection, the wdiget may appear above of or on bottom of the selection.
@@ -25466,6 +25029,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
     AlloyEditor.WidgetPosition = WidgetPosition;
 }());
+
 (function () {
     'use strict';
 
@@ -25488,22 +25052,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -25527,7 +25076,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'bold',
-                label: AlloyEditor.Strings.bold,
                 style: {
                     element: 'strong'
                 }
@@ -25544,7 +25092,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-bold", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-bold", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-bold"})
                 )
             );
@@ -25742,31 +25290,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonCamera
      */
     var ButtonCamera = React.createClass({displayName: "ButtonCamera",
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -25777,18 +25300,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * @default camera
              */
             key: 'camera'
-        },
-
-        /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                label: AlloyEditor.Strings.camera
-            };
         },
 
         /**
@@ -25809,7 +25320,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                     navigator.msGetUserMedia);
 
                 return (
-                    React.createElement("button", {"aria-label": this.props.label, className: "alloy-editor-button", "data-type": "button-image-camera", disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex, title: this.props.label}, 
+                    React.createElement("button", {className: "alloy-editor-button", "data-type": "button-image-camera", disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex}, 
                         React.createElement("span", {className: "alloy-editor-icon-camera"})
                     )
                 );
@@ -25834,31 +25345,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ButtonCode = React.createClass({displayName: "ButtonCode",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -25879,7 +25365,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.code,
                 style: {
                     element: 'pre'
                 }
@@ -25896,7 +25381,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-code", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-code", onClick: this.applyStyle, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-code"})
                 )
             );
@@ -25955,7 +25440,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         render: function() {
             return (
-                React.createElement("button", {"aria-label": this.props.description, className: this._getClassName(), onClick: this.execCommand, tabIndex: this.props.tabIndex}, this.props.description)
+                React.createElement("button", {className: this._getClassName(), onClick: this.execCommand, tabIndex: this.props.tabIndex}, this.props.description)
             );
         },
 
@@ -25982,130 +25467,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     'use strict';
 
     /**
-     * The ButtonCommandsList class provides functionality for showing a list of commands that can be
-     * executed to the current selection..
-     *
-     * @uses WidgetFocusManager
-     *
-     * @class ButtonCommandsList
-     */
-    var ButtonCommandsList = React.createClass({displayName: "ButtonCommandsList",
-        mixins: [AlloyEditor.WidgetFocusManager],
-
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * List of the commands the button is able to handle.
-             *
-             * @property {Array} commands
-             */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
-
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * List id to be used for accessibility purposes such as aria-owns.
-             *
-             * @property {String} listId
-             */
-            listId: React.PropTypes.string
-        },
-
-        // Lifecycle. Provides static properties to the widget.
-        statics: {
-            /**
-             * The name which will be used as an alias of the button in the configuration.
-             *
-             * @static
-             * @property {String} key
-             * @default buttonCommandsList
-             */
-            key: 'buttonCommandsList'
-        },
-
-        /**
-         * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
-         *
-         * Focuses on the list node to allow keyboard interaction.
-         *
-         * @method componentDidMount
-         */
-        componentDidMount: function () {
-            React.findDOMNode(this).focus();
-        },
-
-        /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                circular: false,
-                descendants: '.alloy-editor-toolbar-element',
-                keys: {
-                    dismiss: [27],
-                    dismissNext: [39],
-                    dismissPrev: [37],
-                    next: [40],
-                    prev: [38]
-                }
-            };
-        },
-
-        /**
-         * Lifecycle. Renders the UI of the list.
-         *
-         * @method render
-         * @return {Object} The content which should be rendered.
-         */
-        render: function() {
-            return (
-                React.createElement("div", {className: "alloy-editor-dropdown", onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: "0"}, 
-                    React.createElement("ul", {className: "alloy-editor-listbox", id: this.props.listId, role: "listbox"}, 
-                        this._renderActions(this.props.commands)
-                    )
-                )
-            );
-        },
-
-        /**
-         * Renders instances of ButtonCommandListItem with the description of the row action that will be executed.
-         *
-         * @protected
-         * @method _renderActions
-         * @return {Array} Rendered instances of ButtonCommandListItem class
-         */
-        _renderActions: function(commands) {
-            var editor = this.props.editor;
-            var items;
-
-            if (commands && commands.length) {
-                items = commands.map(function(item) {
-                    return (
-                        React.createElement("li", {key: item.command, role: "option"}, 
-                            React.createElement(AlloyEditor.ButtonCommandListItem, {command: item.command, description: item.label, editor: editor})
-                        )
-                    );
-                });
-            }
-
-            return items;
-        }
-    });
-
-    AlloyEditor.ButtonCommandsList = ButtonCommandsList;
-}());
-(function () {
-    'use strict';
-
-    /**
      * The ButtonH1 class provides wraps a selection in `h1` element.
      *
      * @uses ButtonActionStyle
@@ -26116,31 +25477,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      */
     var ButtonH1 = React.createClass({displayName: "ButtonH1",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
-
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
 
         // Lifecycle. Provides static properties to the widget.
         statics: {
@@ -26162,7 +25498,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.h1,
                 style: {
                     element: 'h1'
                 }
@@ -26179,7 +25514,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-h1", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-h1", onClick: this.applyStyle, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-h1"})
                 )
             );
@@ -26203,32 +25538,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ButtonH2 = React.createClass({displayName: "ButtonH2",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -26249,7 +25558,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.h2,
                 style: {
                     element: 'h2'
                 }
@@ -26266,7 +25574,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-h2", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-h2", onClick: this.applyStyle, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-h2"})
                 )
             );
@@ -26296,22 +25604,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -26335,7 +25628,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'horizontalrule',
-                label: AlloyEditor.Strings.horizontalrule,
                 style: {
                     element: 'hr'
                 }
@@ -26350,7 +25642,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         render: function() {
             return (
-                React.createElement("button", {"aria-label": this.props.label, className: "alloy-editor-button", "data-type": "button-hline", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: "alloy-editor-button", "data-type": "button-hline", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-separator"})
                 )
             );
@@ -26374,31 +25666,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ButtonImageAlignLeft = React.createClass({displayName: "ButtonImageAlignLeft",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -26419,7 +25686,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.alignLeft,
                 style: {
                     element: 'img',
                     styles: {
@@ -26439,7 +25705,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-image-align-left", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-image-align-left", onClick: this.applyStyle, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-align-left"})
                 )
             );
@@ -26463,31 +25729,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ButtonImageAlignRight = React.createClass({displayName: "ButtonImageAlignRight",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -26508,7 +25749,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.alignRight,
                 style: {
                     element: 'img',
                     styles: {
@@ -26528,7 +25768,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-image-align-right", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-image-align-right", onClick: this.applyStyle, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-align-right"})
                 )
             );
@@ -26546,31 +25786,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonImage
      */
     var ButtonImage = React.createClass({displayName: "ButtonImage",
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -26584,18 +25799,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                label: AlloyEditor.Strings.image
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
@@ -26606,7 +25809,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
             return (
                 React.createElement("div", null, 
-                    React.createElement("button", {"aria-label": this.props.label, className: "alloy-editor-button", "data-type": "button-image", onClick: this.handleClick, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                    React.createElement("button", {className: "alloy-editor-button", "data-type": "button-image", onClick: this.handleClick, tabIndex: this.props.tabIndex}, 
                         React.createElement("span", {className: "alloy-editor-icon-image"})
                     ), 
 
@@ -26691,22 +25894,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -26730,7 +25918,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'italic',
-                label: AlloyEditor.Strings.italic,
                 style: {
                     element: 'em'
                 }
@@ -26747,7 +25934,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-italic", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-italic", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-italic"})
                 )
             );
@@ -26799,23 +25986,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                labels: {
-                    clear: AlloyEditor.Strings.clearInput,
-                    confirm: AlloyEditor.Strings.confirm,
-                    editLink: AlloyEditor.Strings.editLink,
-                    remove: AlloyEditor.Strings.removeLink
-                }
-            };
-        },
-
-        /**
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
          *
@@ -26844,14 +26014,14 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
             return (
                 React.createElement("div", {className: "alloy-editor-container-edit-link"}, 
-                    React.createElement("button", {"aria-label": this.props.labels.remove, className: "alloy-editor-button", disabled: !this.state.element, onClick: this._removeLink, title: this.props.labels.remove}, 
+                    React.createElement("button", {"aria-label": "Cancel", className: "alloy-editor-button", disabled: !this.state.element, onClick: this._removeLink}, 
                         React.createElement("span", {className: "alloy-editor-icon-unlink"})
                     ), 
                     React.createElement("div", {className: "alloy-editor-container-input"}, 
-                        React.createElement("input", {className: "alloy-editor-input", onChange: this._handleLinkChange, onKeyDown: this._handleKeyDown, placeholder: this.props.labels.editLink, ref: "linkInput", type: "text", value: this.state.linkHref}), 
-                        React.createElement("button", {"aria-label": this.props.labels.clear, className: "alloy-editor-button alloy-editor-icon-remove", onClick: this._clearLink, style: clearLinkStyle, title: this.props.labels.clear})
+                        React.createElement("input", {className: "alloy-editor-input", onChange: this._handleLinkChange, onKeyDown: this._handleKeyDown, placeholder: "Type or paste link here", ref: "linkInput", type: "text", value: this.state.linkHref}), 
+                        React.createElement("button", {className: "alloy-editor-button alloy-editor-icon-remove", onClick: this._clearLink, style: clearLinkStyle})
                     ), 
-                    React.createElement("button", {"aria-label": this.props.labels.confirm, className: "alloy-editor-button", disabled: !this.state.linkHref, onClick: this._updateLink, title: this.props.labels.confirm}, 
+                    React.createElement("button", {"aria-label": "Confirm", className: "alloy-editor-button", disabled: !this.state.linkHref, onClick: this._updateLink}, 
                         React.createElement("span", {className: "alloy-editor-icon-ok"})
                     )
                 )
@@ -26987,31 +26157,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ButtonLink = React.createClass({displayName: "ButtonLink",
         mixins: [AlloyEditor.ButtonStateClasses],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -27022,18 +26167,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * @default link
              */
             key: 'link'
-        },
-
-        /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                label: AlloyEditor.Strings.link
-            };
         },
 
         /**
@@ -27061,7 +26194,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 );
             } else {
                 return (
-                    React.createElement("button", {"aria-label": this.props.label, className: cssClass, "data-type": "button-link", onClick: this.props.requestExclusive.bind(ButtonLink.key), tabIndex: this.props.tabIndex, title: this.props.label}, 
+                    React.createElement("button", {className: cssClass, "data-type": "button-link", onClick: this.props.requestExclusive.bind(ButtonLink.key), tabIndex: this.props.tabIndex}, 
                         React.createElement("span", {className: "alloy-editor-icon-link"})
                     )
                 );
@@ -27093,22 +26226,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -27132,7 +26250,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'numberedlist',
-                label: AlloyEditor.Strings.numberedlist,
                 style: {
                     element: 'ol'
                 }
@@ -27149,7 +26266,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-ol", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-ol", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-numbered-list"})
                 )
             );
@@ -27173,31 +26290,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ButtonParagraphAlignLeft = React.createClass({displayName: "ButtonParagraphAlignLeft",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -27218,7 +26310,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.alignLeft,
                 style: {
                     element: 'p',
                     styles: {
@@ -27238,7 +26329,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-paragraph-align-left", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-paragraph-align-left", onClick: this.applyStyle, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-align-left"})
                 )
             );
@@ -27262,31 +26353,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ButtonParagraphAlignRight = React.createClass({displayName: "ButtonParagraphAlignRight",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -27307,7 +26373,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.alignRight,
                 style: {
                     element: 'p',
                     styles: {
@@ -27327,7 +26392,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-paragraph-align-right", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-paragraph-align-right", onClick: this.applyStyle, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-align-right"})
                 )
             );
@@ -27351,31 +26416,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ButtonParagraphCenter = React.createClass({displayName: "ButtonParagraphCenter",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -27396,7 +26436,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.alignCenter,
                 style: {
                     element: 'p',
                     styles: {
@@ -27416,7 +26455,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-paragraph-center", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-paragraph-center", onClick: this.applyStyle, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-align-center"})
                 )
             );
@@ -27440,31 +26479,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ButtonParagraphJustify = React.createClass({displayName: "ButtonParagraphJustify",
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -27485,7 +26499,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.alignJustify,
                 style: {
                     element: 'p',
                     styles: {
@@ -27505,7 +26518,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-paragraph-justify", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-paragraph-justify", onClick: this.applyStyle, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-align-justified"})
                 )
             );
@@ -27536,22 +26549,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -27575,7 +26573,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'blockquote',
-                label: AlloyEditor.Strings.quote,
                 style: {
                     element: 'blockquote'
                 }
@@ -27592,7 +26589,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-quote", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-quote", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-quote"})
                 )
             );
@@ -27621,22 +26618,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -27659,8 +26641,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                command: 'removeFormat',
-                label: AlloyEditor.Strings.removeformat
+                command: 'removeFormat'
             };
         },
 
@@ -27672,7 +26653,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         render: function() {
             return (
-                React.createElement("button", {"aria-label": this.props.label, className: "alloy-editor-button", "data-type": "button-removeformat", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: "alloy-editor-button", "data-type": "button-removeformat", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-removeformat"})
                 )
             );
@@ -27703,22 +26684,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -27742,7 +26708,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'strike',
-                label: AlloyEditor.Strings.strike,
                 style: {
                     element: 's'
                 }
@@ -27759,7 +26724,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-strike", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-strike", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-strike"})
                 )
             );
@@ -27809,34 +26774,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         // Allows validating props being passed to the component.
         propTypes: {
             /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
              * Block styles that should be removed in addition to all other inline styles
              *
              * @property {Array} removeBlocks
-             * @default ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre']
+             * @default ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
              */
-            removeBlocks: React.PropTypes.array,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            removeBlocks: React.PropTypes.array
         },
 
         //Lifecycle. Provides static properties to the widget.
@@ -27859,8 +26802,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.normal,
-                removeBlocks: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre']
+                removeBlocks: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
             };
         },
 
@@ -27872,9 +26814,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         render: function() {
             return (
-                React.createElement("li", {role: "option"}, 
-                    React.createElement("button", {className: "alloy-editor-toolbar-element", onClick: this._removeStyles, tabIndex: this.props.tabIndex}, this.props.label)
-                )
+                React.createElement("button", {className: "alloy-editor-toolbar-element", onClick: this._removeStyles, tabIndex: this.props.tabIndex}, "Normal Text")
             );
         },
 
@@ -28052,19 +26992,11 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                circular: false,
+                circular: true,
                 descendants: '.alloy-editor-toolbar-element',
-                labels: {
-                    blockStyles: AlloyEditor.Strings.blockStyles,
-                    inlineStyles: AlloyEditor.Strings.inlineStyles,
-                    objectStyles: AlloyEditor.Strings.objectStyles
-                },
                 keys: {
-                    dismiss: [27],
-                    dismissNext: [39],
-                    dismissPrev: [37],
-                    next: [40],
-                    prev: [38]
+                    next: [39, 40],
+                    prev: [37, 38]
                 }
             };
         },
@@ -28078,18 +27010,16 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         render: function() {
             return (
                 React.createElement("div", {className: "alloy-editor-dropdown", onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: "0"}, 
-                    React.createElement("ul", {className: "alloy-editor-listbox", role: "listbox"}, 
-                        React.createElement(AlloyEditor.ButtonStylesListItemRemove, {editor: this.props.editor}), 
+                    React.createElement(AlloyEditor.ButtonStylesListItemRemove, {editor: this.props.editor}), 
 
-                        React.createElement(AlloyEditor.ButtonsStylesListHeader, {name: this.props.labels.blockStyles, styles: this._blockStyles}), 
-                        this._renderStylesItems(this._blockStyles), 
+                    React.createElement(AlloyEditor.ButtonsStylesListHeader, {name: "Block styles", styles: this._blockStyles}), 
+                    this._renderStylesItems(this._blockStyles), 
 
-                        React.createElement(AlloyEditor.ButtonsStylesListHeader, {name: this.props.labels.inlineStyles, styles: this._inlineStyles}), 
-                        this._renderStylesItems(this._inlineStyles), 
+                    React.createElement(AlloyEditor.ButtonsStylesListHeader, {name: "Inline styles", styles: this._inlineStyles}), 
+                    this._renderStylesItems(this._inlineStyles), 
 
-                        React.createElement(AlloyEditor.ButtonsStylesListHeader, {name: this.props.labels.objectStyles, styles: this._objectStyles}), 
-                        this._renderStylesItems(this._objectStyles)
-                    )
+                    React.createElement(AlloyEditor.ButtonsStylesListHeader, {name: "Object styles", styles: this._objectStyles}), 
+                    this._renderStylesItems(this._objectStyles)
                 )
             );
         },
@@ -28104,15 +27034,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         _renderStylesItems: function(styles) {
             var editor = this.props.editor;
+            var trigger = this.props.trigger;
             var items;
 
             if (styles && styles.length) {
                 items = styles.map(function(item) {
-                    return (
-                        React.createElement("li", {key: item.name, role: "option"}, 
-                            React.createElement(AlloyEditor.ButtonStylesListItem, {editor: editor, name: item.name, style: item.style})
-                        )
-                    );
+                    return React.createElement(AlloyEditor.ButtonStylesListItem, {key: item.name, editor: editor, name: item.name, style: item.style, tabIndex: (trigger && trigger.name === item.name) ? 0 : -1})
                 });
             }
 
@@ -28133,52 +27060,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonStyles
      */
     var ButtonStyles = React.createClass({displayName: "ButtonStyles",
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * Indicates whether the styles list is expanded or not.
-             *
-             * @property {Boolean} expanded
-             */
-            expanded: React.PropTypes.bool,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * List of the styles the button is able to handle.
-             *
-             * @property {Array} styles
-             */
-            styles: React.PropTypes.arrayOf(React.PropTypes.object),
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number,
-
-            /**
-             * Callback provided by the button host to notify when the styles list has been expanded.
-             *
-             * @property {Function} toggleDropdown
-             */
-            toggleDropdown: React.PropTypes.func
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -28199,39 +27080,50 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function () {
             return {
-                label: AlloyEditor.Strings.styles,
                 styles: [
                     {
-                        name: AlloyEditor.Strings.h1,
+                        name: 'Head 1',
                         style: {
                             element: 'h1'
                         }
                     },
                     {
-                        name: AlloyEditor.Strings.h2,
+                        name: 'Head 2',
                         style: {
                             element: 'h2'
                         }
                     },
                     {
-                        name: AlloyEditor.Strings.formatted,
+                        name: 'Big',
                         style: {
-                            element: 'pre'
+                            element: 'big'
                         }
                     },
                     {
-                        name: AlloyEditor.Strings.cite,
+                        name: 'Small',
                         style: {
-                            element: 'cite'
+                            element: 'small'
                         }
                     },
                     {
-                        name: AlloyEditor.Strings.code,
+                        name: 'Code',
                         style: {
                             element: 'code'
                         }
                     }
                 ]
+            };
+        },
+
+        /**
+         * Lifecycle. Invoked once before the component is mounted.
+         * The return value will be used as the initial value of this.state.
+         *
+         * @method getInitialState
+         */
+        getInitialState: function() {
+            return {
+                expanded: false
             };
         },
 
@@ -28242,7 +27134,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var activeStyle = AlloyEditor.Strings.normal;
+            var activeStyle = 'Normal Text';
 
             this.props.styles.forEach(function(item) {
                 if (this._checkActive(item.style)) {
@@ -28253,12 +27145,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var buttonStylesList;
 
             if (this.props.expanded) {
-                buttonStylesList = React.createElement(AlloyEditor.ButtonStylesList, {editor: this.props.editor, onDismiss: this.props.toggleDropdown, styles: this.props.styles})
+                buttonStylesList = React.createElement(AlloyEditor.ButtonStylesList, {editor: this.props.editor, styles: this.props.styles, trigger: this.props.trigger})
             }
 
             return (
                 React.createElement("div", {className: "alloy-editor-container-styles alloy-editor-has-dropdown"}, 
-                    React.createElement("button", {"aria-expanded": this.props.expanded, "aria-label": this.props.label + ' ' + activeStyle, className: "alloy-editor-toolbar-element", onClick: this.props.toggleDropdown, role: "combobox", tabIndex: this.props.tabIndex, title: this.props.label + ' ' + activeStyle}, 
+                    React.createElement("button", {className: "alloy-editor-toolbar-element", onClick: this.props.toggleDropdown, tabIndex: this.props.tabIndex}, 
                         React.createElement("div", {className: "alloy-editor-container"}, 
                             React.createElement("span", {className: "alloy-editor-selected-style"}, activeStyle), 
                             React.createElement("span", {className: "alloy-editor-icon-arrow"})
@@ -28314,22 +27206,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -28353,7 +27230,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'subscript',
-                label: AlloyEditor.Strings.subscript,
                 style: {
                     element: 'sub'
                 }
@@ -28370,7 +27246,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-subscript", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-subscript", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-subscript"})
                 )
             );
@@ -28401,22 +27277,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -28440,7 +27301,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'superscript',
-                label: AlloyEditor.Strings.superscript,
                 style: {
                     element: 'sup'
                 }
@@ -28457,7 +27317,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-superscript", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-superscript", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-superscript"})
                 )
             );
@@ -28475,52 +27335,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTableCell
      */
     var ButtonTableCell = React.createClass({displayName: "ButtonTableCell",
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * List of the commands the button is able to handle.
-             *
-             * @property {Array} commands
-             */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
-
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * Indicates whether the styles list is expanded or not.
-             *
-             * @property {Boolean} expanded
-             */
-            expanded: React.PropTypes.bool,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number,
-
-            /**
-             * Callback provided by the button host to notify when the styles list has been expanded.
-             *
-             * @property {Function} toggleDropdown
-             */
-            toggleDropdown: React.PropTypes.func
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -28534,74 +27348,64 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function () {
-            return {
-                commands: [
-                    {
-                        command: 'cellInsertBefore',
-                        label: AlloyEditor.Strings.cellInsertBefore
-                    },
-                    {
-                        command: 'cellInsertAfter',
-                        label: AlloyEditor.Strings.cellInsertAfter
-                    },
-                    {
-                        command: 'cellDelete',
-                        label: AlloyEditor.Strings.cellDelete
-                    },
-                    {
-                        command: 'cellMerge',
-                        label: AlloyEditor.Strings.cellMerge
-                    },
-                    {
-                        command: 'cellMergeDown',
-                        label: AlloyEditor.Strings.cellMergeDown
-                    },
-                    {
-                        command: 'cellMergeRight',
-                        label: AlloyEditor.Strings.cellMergeRight
-                    },
-                    {
-                        command: 'cellHorizontalSplit',
-                        label: AlloyEditor.Strings.cellSplitHorizontal
-                    },
-                    {
-                        command: 'cellVerticalSplit',
-                        label: AlloyEditor.Strings.cellSplitVertical
-                    }
-                ],
-                label: AlloyEditor.Strings.cell
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var buttonCommandsList,
-                buttonCommandsListId;
-
-            if (this.props.expanded) {
-                buttonCommandsListId = ButtonTableCell.key + 'List';
-                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, {commands: this.props.commands, editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown})
-            }
-
             return (
                 React.createElement("div", {className: "alloy-editor-container alloy-editor-has-dropdown"}, 
-                    React.createElement("button", {"aria-expanded": this.props.expanded, "aria-label": this.props.label, "aria-owns": buttonCommandsListId, className: "alloy-editor-button", onClick: this.props.toggleDropdown, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                    React.createElement("button", {className: "alloy-editor-button", onClick: this.props.toggleDropdown, tabIndex: this.props.tabIndex}, 
                         React.createElement("span", {className: "alloy-editor-icon-cell"})
                     ), 
-                    buttonCommandsList
+                    this._renderDropdown()
                 )
             );
+        },
+
+        /**
+         * Renders instances of ButtonCommandListItem passing the command which has to be executed and the description
+         * of the command.
+         *
+         * @protected
+         * @method _renderActions
+         * @return {Array} Rendered instances of ButtonCommandListItem class.
+         */
+        _renderActions: function() {
+            var editor = this.props.editor;
+
+            var actions = [
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "cellInsertBefore", description: "Insert cell left", editor: editor, key: "cellinsertbefore"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "cellInsertAfter", description: "Insert cell right", editor: editor, key: "cellinsertafter"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "cellDelete", description: "Delete cell", editor: editor, key: "celldelete", modifiesSelection: true}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "cellMerge", description: "Merge cells", editor: editor, key: "cellmerge"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "cellMergeDown", description: "Merge cell below", editor: editor, key: "cellmergedown"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "cellMergeRight", description: "Merge cell right", editor: editor, key: "cellmergeright"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "cellHorizontalSplit", description: "Split cells horizontally", editor: editor, key: "cellsplithorizontal"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "cellVerticalSplit", description: "Split cells vertically", editor: editor, key: "cellsplitvertical"})
+            ];
+
+            return actions;
+        },
+
+        /*
+         * Renders the button dropdown with the associated command items when the button is expanded.
+         *
+         * @protected
+         * @method _renderDropdown
+         * @return {Element} Returns the dropdown element if the button is expanded, null otherwise.
+         */
+        _renderDropdown: function() {
+            if (this.props.expanded) {
+                return (
+                    React.createElement("div", {className: "alloy-editor-dropdown"}, 
+                        this._renderActions()
+                    )
+                );
+            }
+
+            return null;
         }
     });
 
@@ -28616,52 +27420,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTableColumn
      */
     var ButtonTableColumn = React.createClass({displayName: "ButtonTableColumn",
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * List of the commands the button is able to handle.
-             *
-             * @property {Array} commands
-             */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
-
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * Indicates whether the styles list is expanded or not.
-             *
-             * @property {Boolean} expanded
-             */
-            expanded: React.PropTypes.bool,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number,
-
-            /**
-             * Callback provided by the button host to notify when the styles list has been expanded.
-             *
-             * @property {Function} toggleDropdown
-             */
-            toggleDropdown: React.PropTypes.func
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -28675,54 +27433,57 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function () {
-            return {
-                commands: [
-                    {
-                        command: 'columnInsertBefore',
-                        label: AlloyEditor.Strings.columnInsertBefore
-                    },
-                    {
-                        command: 'columnInsertAfter',
-                        label: AlloyEditor.Strings.columnInsertAfter
-                    },
-                    {
-                        command: 'columnDelete',
-                        label: AlloyEditor.Strings.columnDelete
-                    }
-                ],
-                label: AlloyEditor.Strings.column
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var buttonCommandsList,
-                buttonCommandsListId;
-
-            if (this.props.expanded) {
-                buttonCommandsListId = ButtonTableColumn.key + 'List';
-                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, {commands: this.props.commands, editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown})
-            }
-
             return (
                 React.createElement("div", {className: "alloy-editor-container alloy-editor-has-dropdown"}, 
-                    React.createElement("button", {"aria-expanded": this.props.expanded, "aria-label": this.props.label, "aria-owns": buttonCommandsListId, className: "alloy-editor-button", onClick: this.props.toggleDropdown, role: "listbox", tabIndex: this.props.tabIndex, title: this.props.label}, 
+                    React.createElement("button", {className: "alloy-editor-button", onClick: this.props.toggleDropdown, tabIndex: this.props.tabIndex}, 
                         React.createElement("span", {className: "alloy-editor-icon-column"})
                     ), 
-                    buttonCommandsList
+                    this._renderDropdown()
                 )
             );
+        },
+
+        /**
+         * Renders instances of ButtonCommandListItem with the description of the row action that will be executed.
+         *
+         * @protected
+         * @method _renderActions
+         * @return {Array} Rendered instances of ButtonCommandListItem class
+         */
+        _renderActions: function() {
+            var editor = this.props.editor;
+
+            var actions = [
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "columnInsertBefore", description: "Insert column left", editor: editor, key: "columninsertbefore"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "columnInsertAfter", description: "Insert column right", editor: editor, key: "columninsertafter"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "columnDelete", description: "Delete column", editor: editor, key: "columndelete", modifiesSelection: true})
+            ];
+
+            return actions;
+        },
+
+        /*
+         * Renders the button dropdown with the associated command items when the button is expanded.
+         *
+         * @method _renderDropdown
+         * @return {Element} Returns the dropdown element if the button is expanded, null otherwise
+         */
+        _renderDropdown: function() {
+            if (this.props.expanded) {
+                return (
+                    React.createElement("div", {className: "alloy-editor-dropdown"}, 
+                        this._renderActions()
+                    )
+                );
+            }
+
+            return null;
         }
     });
 
@@ -28910,31 +27671,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTableRemove
      */
     var ButtonTableRemove = React.createClass({displayName: "ButtonTableRemove",
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -28948,18 +27684,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function () {
-            return {
-                label: AlloyEditor.Strings.deleteTable
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
@@ -28967,7 +27691,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         render: function() {
             return (
-                React.createElement("button", {"aria-label": this.props.label, className: "alloy-editor-button", "data-type": "button-table-remove", onClick: this._removeTable, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: "alloy-editor-button", "data-type": "button-table-remove", onClick: this._removeTable, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-close"})
                 )
             );
@@ -29000,52 +27724,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTableRow
      */
     var ButtonTableRow = React.createClass({displayName: "ButtonTableRow",
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * List of the commands the button is able to handle.
-             *
-             * @property {Array} commands
-             */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
-
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * Indicates whether the styles list is expanded or not.
-             *
-             * @property {Boolean} expanded
-             */
-            expanded: React.PropTypes.bool,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number,
-
-            /**
-             * Callback provided by the button host to notify when the styles list has been expanded.
-             *
-             * @property {Function} toggleDropdown
-             */
-            toggleDropdown: React.PropTypes.func
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -29059,54 +27737,57 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function () {
-            return {
-                commands: [
-                    {
-                        command: 'rowInsertBefore',
-                        label: AlloyEditor.Strings.rowInsertBefore
-                    },
-                    {
-                        command: 'rowInsertAfter',
-                        label: AlloyEditor.Strings.rowInsertAfter
-                    },
-                    {
-                        command: 'rowDelete',
-                        label: AlloyEditor.Strings.rowDelete
-                    }
-                ],
-                label: AlloyEditor.Strings.row
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var buttonCommandsList,
-                buttonCommandsListId;
-
-            if (this.props.expanded) {
-                buttonCommandsListId = ButtonTableRow.key + 'List';
-                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, {commands: this.props.commands, editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown})
-            }
-
             return (
                 React.createElement("div", {className: "alloy-editor-container alloy-editor-has-dropdown"}, 
-                    React.createElement("button", {"aria-expanded": this.props.expanded, "aria-label": this.props.label, "aria-owns": buttonCommandsListId, className: "alloy-editor-button", onClick: this.props.toggleDropdown, role: "combobox", tabIndex: this.props.tabIndex, title: this.props.label}, 
+                    React.createElement("button", {className: "alloy-editor-button", onClick: this.props.toggleDropdown, tabIndex: this.props.tabIndex}, 
                         React.createElement("span", {className: "alloy-editor-icon-row"})
                     ), 
-                    buttonCommandsList
+                    this._renderDropdown()
                 )
             );
+        },
+
+        /**
+         * Renders instances of ButtonCommandListItem with the description of the row action that will be executed.
+         *
+         * @protected
+         * @method _renderActions
+         * @return {Array} Rendered instances of ButtonCommandListItem class
+         */
+        _renderActions: function() {
+            var editor = this.props.editor;
+
+            var actions = [
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "rowInsertBefore", description: "Insert row above", editor: editor, key: "rowinsertbefore"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "rowInsertAfter", description: "Insert row below", editor: editor, key: "rowinsertafter"}),
+                React.createElement(AlloyEditor.ButtonCommandListItem, {command: "rowDelete", description: "Delete row", editor: editor, key: "rowdelete", modifiesSelection: true})
+            ];
+
+            return actions;
+        },
+
+        /**
+         * Renders the button dropdown with the associated command items when the button is expanded.
+         *
+         * @method _renderDropdown
+         * @return {Element} Returns the dropdown element if the button is expanded, null otherwise
+         */
+        _renderDropdown: function() {
+            if (this.props.expanded) {
+                return (
+                    React.createElement("div", {className: "alloy-editor-dropdown"}, 
+                        this._renderActions()
+                    )
+                );
+            }
+
+            return null;
         }
     });
 
@@ -29125,31 +27806,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      * @class ButtonTable
      */
     var ButtonTable = React.createClass({displayName: "ButtonTable",
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -29160,18 +27816,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * @default table
              */
             key: 'table'
-        },
-
-        /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                label: AlloyEditor.Strings.table
-            };
         },
 
         /**
@@ -29187,7 +27831,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 );
             } else {
                 return (
-                    React.createElement("button", {"aria-label": this.props.label, className: "alloy-editor-button", "data-type": "button-table", onClick: this.props.requestExclusive, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                    React.createElement("button", {className: "alloy-editor-button", "data-type": "button-table", onClick: this.props.requestExclusive, tabIndex: this.props.tabIndex}, 
                         React.createElement("span", {className: "alloy-editor-icon-table"})
                     )
                 );
@@ -29218,22 +27862,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -29246,18 +27875,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * @default twitter
              */
             key: 'twitter'
-        },
-
-        /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                label: AlloyEditor.Strings.twitter
-            };
         },
 
         /**
@@ -29307,7 +27924,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, className: cssClass, "data-type": "button-twitter", onClick: this.handleClick, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-twitter", onClick: this.handleClick, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-twitter"})
                 )
             );
@@ -29364,22 +27981,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -29403,7 +28005,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'bulletedlist',
-                label: AlloyEditor.Strings.bulletedlist,
                 style: {
                     element: 'ul'
                 }
@@ -29420,7 +28021,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-ul", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-ul", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-bulleted-list"})
                 )
             );
@@ -29451,22 +28052,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The tabIndex of the button in its toolbar current state. A value other than -1
-             * means that the button has focus and is the active element.
-             *
-             * @property {Number} tabIndex
-             */
-            tabIndex: React.PropTypes.number
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -29490,7 +28076,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         getDefaultProps: function() {
             return {
                 command: 'underline',
-                label: AlloyEditor.Strings.underline,
                 style: {
                     element: 'u'
                 }
@@ -29507,7 +28092,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                React.createElement("button", {"aria-label": this.props.label, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-underline", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: this.props.label}, 
+                React.createElement("button", {className: cssClass, "data-type": "button-underline", onClick: this.execCommand, tabIndex: this.props.tabIndex}, 
                     React.createElement("span", {className: "alloy-editor-icon-underline"})
                 )
             );
@@ -29537,39 +28122,11 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         // Allows validating props being passed to the component.
         propTypes: {
             /**
-             * The toolbar configuration.
-             *
-             * @property {Object} config
-             */
-            config: React.PropTypes.object,
-
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
              * The gutter to be applied to the widget when rendered in exclusive mode
              *
              * @property {Object} gutterExclusive
              */
-            gutterExclusive: React.PropTypes.object,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
-             *
-             * @property {Object} selectionData
-             */
-            selectionData: React.PropTypes.object
+            gutterExclusive: React.PropTypes.object
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -29599,11 +28156,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                     top: 0
                 },
                 keys: {
-                    dismiss: [27],
-                    next: [39, 40],
-                    prev: [37, 38]
-                },
-                label: AlloyEditor.Strings.add
+                    next: [38, 39],
+                    prev: [37, 40]
+                }
             };
         },
 
@@ -29646,7 +28201,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             var className = this._getToolbarClassName();
 
             return (
-                React.createElement("div", {"aria-label": this.props.label, className: className, "data-tabindex": this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: "toolbar", tabIndex: "-1"}, 
+                React.createElement("div", {className: className, "data-tabindex": this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: "-1"}, 
                     React.createElement("div", {className: "alloy-editor-container"}, 
                         buttons
                     )
@@ -29669,7 +28224,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             } else {
                 if (this.props.selectionData && this.props.selectionData.region) {
                     buttons = (
-                        React.createElement("button", {"aria-label": this.props.label, className: "alloy-editor-button alloy-editor-button-add", onClick: this.props.requestExclusive.bind(this, ToolbarAdd.key), title: this.props.label}, 
+                        React.createElement("button", {className: "alloy-editor-button alloy-editor-button-add", onClick: this.props.requestExclusive.bind(this, ToolbarAdd.key)}, 
                             React.createElement("span", {className: "alloy-editor-icon-add"})
                         )
                     );
@@ -29753,37 +28308,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var ToolbarStyles = React.createClass({displayName: "ToolbarStyles",
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * The toolbar configuration.
-             *
-             * @property {Object} config
-             */
-            config: React.PropTypes.object,
-
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The label that should be used for accessibility purposes.
-             *
-             * @property {String} label
-             */
-            label: React.PropTypes.string,
-
-            /**
-             * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
-             *
-             * @property {Object} selectionData
-             */
-            selectionData: React.PropTypes.object
-        },
-
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -29829,11 +28353,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 circular: true,
                 descendants: '.alloy-editor-button, .alloy-editor-toolbar-element',
                 keys: {
-                    dismiss: [27],
-                    next: [39, 40],
-                    prev: [37, 38]
-                },
-                label: AlloyEditor.Strings.styles
+                    next: [38, 39],
+                    prev: [37, 40]
+                }
             };
         },
 
@@ -29866,7 +28388,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 );
 
                 return (
-                    React.createElement("div", {"aria-label": this.props.label, className: cssClasses, "data-tabindex": this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: "toolbar", tabIndex: "-1"}, 
+                    React.createElement("div", {className: cssClasses, "data-tabindex": this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: "-1"}, 
                         React.createElement("div", {className: "alloy-editor-container"}, 
                             buttons
                         )
@@ -29992,40 +28514,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     var UI = React.createClass({displayName: "UI",
         mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
 
-        // Allows validating props being passed to the component.
-        propTypes: {
-            /**
-             * Localized messages for live aria updates. Should include the following messages:
-             * - noToolbar: Notification for no available toolbar in the editor.
-             * - oneToolbar: Notification for just one available toolbar in the editor.
-             * - manyToolbars: Notification for more than one available toolbar in the editor.
-             *
-             * @property {Object} ariaUpdates
-             */
-            ariaUpdates: React.PropTypes.object,
-
-            /**
-             * The editor instance where the component is being used.
-             *
-             * @property {Object} editor
-             */
-            editor: React.PropTypes.object.isRequired,
-
-            /**
-             * The delay (ms), after which key or mouse events will be processed.
-             *
-             * @property {Number} eventsDelay
-             */
-            eventsDelay: React.PropTypes.number,
-
-            /**
-             * The toolbars configuration for this editor instance
-             *
-             * @property {Object} toolbars
-             */
-            toolbars: React.PropTypes.object.isRequired
-        },
-
         /**
          * Lifecycle. Invoked once before the component is mounted.
          *
@@ -30045,11 +28533,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         getDefaultProps: function() {
             return {
-                ariaUpdates: {
-                    noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
-                    oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
-                    manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
-                },
                 circular: true,
                 descendants: '[class*=alloy-editor-toolbar-]',
                 eventsDelay: 0,
@@ -30093,44 +28576,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             }.bind(this));
         },
 
-        componentDidUpdate: function (prevProps, prevState) {
-            var domNode = React.findDOMNode(this);
-
-            if (domNode) {
-                this.props.editor.get('nativeEditor').fire('ariaUpdate', {
-                    message: this._getAvailableToolbarsMessage(domNode)
-                });
-            }
-        },
-
-        _getAriaUpdateTemplate: function(ariaUpdate) {
-            if (!this._ariaUpdateTemplates) this._ariaUpdateTemplates = {};
-
-            if (!this._ariaUpdateTemplates[ariaUpdate]) {
-                this._ariaUpdateTemplates[ariaUpdate] = new CKEDITOR.template(this.props.ariaUpdates[ariaUpdate]);
-            }
-
-            return this._ariaUpdateTemplates[ariaUpdate];
-        },
-
-        _getAvailableToolbarsMessage: function(domNode) {
-            var toolbarsNodeList = domNode.querySelectorAll('[role="toolbar"]');
-
-            if (!toolbarsNodeList.length) {
-                return this.props.ariaUpdates.noToolbar;
-            } else {
-                var toolbarNames = Array.prototype.slice.call(toolbarsNodeList).map(function(toolbar) {
-                    return toolbar.getAttribute('aria-label');
-                });
-
-                var ariaUpdate = toolbarNames.length === 1 ? 'oneToolbar' : 'manyToolbars';
-
-                return this._getAriaUpdateTemplate(ariaUpdate).output({
-                    toolbars: toolbarNames.join(',').replace(/,([^,]*)$/, ' and ' + '$1')
-                });
-            }
-        },
-
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
@@ -30169,8 +28614,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                     editor: this.props.editor,
                     editorEvent: this.state.editorEvent,
                     key: toolbar.key,
-                    onDismiss: this._onDismissToolbarFocus,
-                    selectionData: this.state.selectionData
+                    selectionData: this.state.selectionData,
+                    selections: this.props.selections,
+                    trigger: this.state.trigger
                 }, toolbar.key);
 
                 return React.createElement(toolbar, props);
@@ -30197,20 +28643,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
             this.setState({
                 itemExclusive: null,
-                selectionData: editor.getSelectionData()
+                selectionData: editor.getSelectionData(),
+                trigger: event.data
             });
-        },
-
-        /**
-         * Executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
-         *
-         * @protected
-         * @method _onDismissToolbarFocus
-         */
-        _onDismissToolbarFocus: function() {
-            var editor = this.props.editor.get('nativeEditor');
-
-            editor.focus();
         },
 
         /**
@@ -30226,7 +28661,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 editorEvent: event,
                 hidden: false,
                 itemExclusive: null,
-                selectionData: event.data.selectionData
+                selectionData: event.data.selectionData,
+                trigger: null
             });
         },
 
@@ -30273,5 +28709,282 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
     AlloyEditor.UI = UI;
 }());
+(function() {
+    'use strict';
+
+    /**
+     * AlloyEditor main class. Creates instance of the editor and provides the user configuration
+     * to the UI.
+     *
+     * @class Core
+     * @constructor
+     */
+    function Core(config) {
+        Core.superclass.constructor.call(this, config);
     }
+
+    AlloyEditor.OOP.extend(Core, AlloyEditor.Base, {
+        /**
+         * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
+         * instace, passing it the provided configuration attributes.
+         *
+         * @protected
+         * @method initializer
+         * @param config {Object} Configuration object literal for the editor.
+         */
+        initializer: function(config) {
+            var node = this.get('srcNode');
+
+            var editor = CKEDITOR.inline(node);
+
+            editor.config.allowedContent = this.get('allowedContent');
+
+            editor.config.toolbars = this.get('toolbars');
+
+            editor.config.removePlugins = this.get('removePlugins');
+            editor.config.extraPlugins = this.get('extraPlugins');
+            editor.config.placeholderClass = this.get('placeholderClass');
+
+            editor.config.pasteFromWordRemoveStyles = false;
+            editor.config.pasteFromWordRemoveFontStyles = false;
+
+            AlloyEditor.Lang.mix(editor.config, config);
+
+            this._editor = editor;
+
+            this._renderUI();
+        },
+
+        /**
+         * Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor
+         * instance and destroys all created toolbars.
+         *
+         * @protected
+         * @method destructor
+         */
+        destructor: function() {
+            React.unmountComponentAtNode(this._editorUIElement);
+
+            this._editorUIElement.parentNode.removeChild(this._editorUIElement);
+
+            var editorInstance = CKEDITOR.instances[this.get('srcNode')];
+
+            if (editorInstance) {
+                editorInstance.destroy();
+            }
+        },
+
+        /**
+         * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
+         *
+         * @protected
+         * @method _getNativeEditor
+         * @return {Object} The current instance of CKEditor.
+         */
+        _getNativeEditor: function() {
+            return this._editor;
+        },
+
+        /**
+         * Renders the specified from the user toolbars
+         *
+         * @protected
+         * @method _renderUI
+         */
+        _renderUI: function() {
+            var editorUIElement = document.createElement('div');
+            editorUIElement.className = 'alloy-editor-ui';
+
+            var uiNode = this.get('uiNode') || document.body;
+
+            if (AlloyEditor.Lang.isString(uiNode)) {
+                uiNode = document.getElementById(uiNode);
+            }
+
+            uiNode.appendChild(editorUIElement);
+
+            this._mainUI = React.render(React.createElement(AlloyEditor.UI, {
+                editor: this,
+                eventsDelay: this.get('eventsDelay'),
+                toolbars: this.get('toolbars')
+            }), editorUIElement);
+
+            this._editorUIElement = editorUIElement;
+        },
+
+        /**
+         * Validates the allowed content attribute. Look
+         * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
+         * supported values.
+         *
+         * @protected
+         * @method _validateAllowedContent
+         * @param {Any} The value to be checked
+         * @return {Boolean} True if the current value is valid configuration, false otherwise
+         */
+        _validateAllowedContent: function(value) {
+            return AlloyEditor.Lang.isString(value) || AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isBoolean(value);
+        },
+
+        /**
+         * Validates the value of toolbars attribute
+         *
+         * @protected
+         * @method _validateToolbars
+         * @param {Any} The value to be checked
+         * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
+         */
+        _validateToolbars: function(value) {
+            return AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isNull(value);
+        }
+    }, {
+        ATTRS: {
+            /**
+             * Configures the allowed content for the current instance of AlloyEditor.
+             * Look on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)
+             * for more information about the valid values.
+             *
+             * @property allowedContent
+             * @default true
+             * @writeOnce
+             * @type {Boolean, String, Object}
+             */
+            allowedContent: {
+                validator: '_validateAllowedContent',
+                value: true,
+                writeOnce: true
+            },
+
+            /**
+             * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
+             *
+             * @property eventsDelay
+             * @type {Number}
+             */
+            eventsDelay: {
+                validator: AlloyEditor.Lang.isNumber,
+                value: 100
+            },
+
+            /**
+             * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
+             * make AlloyEditor to work properly.
+             *
+             * @property extraPlugins
+             * @default 'uicore,selectionregion,dragresize,dropimages,placeholder,tabletools,tableresize,autolink'
+             * @writeOnce
+             * @type {String}
+             */
+            extraPlugins: {
+                validator: AlloyEditor.Lang.isString,
+                value: 'uicore,selectionregion,dragresize,dropimages,placeholder,tabletools,tableresize,autolink',
+                writeOnce: true
+            },
+
+            /**
+             * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
+             *
+             * @property nativeEditor
+             * @readOnly
+             * @type {Object}
+             */
+            nativeEditor: {
+                getter: '_getNativeEditor',
+                readOnly: true
+            },
+
+            /**
+             * Specifies the class, which should be added by Placeholder plugin
+             * {{#crossLink "CKEDITOR.plugins.placeholder}}{{/crossLink}}
+             * when editor is not focused.
+             *
+             * @property placeholderClass
+             * @default 'alloy-editor-placeholder'
+             * @writeOnce
+             * @type {String}
+             */
+            placeholderClass: {
+                validator: AlloyEditor.Lang.isString,
+                value: 'alloy-editor-placeholder',
+                writeOnce: true
+            },
+
+            /**
+             * Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.
+             * These plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor
+             * comes with its own highly optimized copy of CKEditor (just customized via their official download page).
+             * This version does not come with the unneeded plugins, so the value of this property won't be needed.
+             * However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the
+             * plugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them
+             * entirely from CKEditor. It just removes them from its current instance, in which you will use different
+             * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
+             * page!
+             *
+             * @property removePlugins
+             * @default 'contextmenu,toolbar,elementspath,resize,liststyle,link'
+             * @writeOnce
+             * @type {String}
+             */
+            removePlugins: {
+                validator: AlloyEditor.Lang.isString,
+                value: 'contextmenu,toolbar,elementspath,resize,liststyle,link',
+                writeOnce: true
+            },
+
+            /**
+             * Specifies the type of selections, which will be handled by
+             * @property selections
+             * @type {Object}
+             */
+            selections: {
+                validator: AlloyEditor.Lang.isArray,
+                value: AlloyEditor.Selections
+            },
+
+            /**
+             * The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.
+             *
+             * @property srcNode
+             * @type String | Node
+             * @writeOnce
+             */
+            srcNode: {
+                writeOnce: true
+            },
+
+            /**
+             * The toolbars configuration for this editor instance
+             *
+             * @property {Object} toolbars
+             */
+            toolbars: {
+                validator: '_validateToolbars',
+                value: {
+                    add: {
+                        buttons: ['image', 'camera', 'hline', 'table'],
+                        tabIndex: 2
+                    },
+                    styles: {
+                        selections: AlloyEditor.Selections,
+                        tabIndex: 1
+                    }
+                }
+            },
+
+            /**
+             * The Node ID or HTMl node, where AlloyEditor's UI should be rendered.
+             *
+             * @property uiNode
+             * @type String | Node
+             * @writeOnce
+             */
+            uiNode: {
+                writeOnce: true
+            }
+        }
+    });
+
+    AlloyEditor.Core = Core;
+}());
+
 }());
