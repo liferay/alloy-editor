@@ -84,8 +84,7 @@
                     dismiss: [27],
                     next: [39, 40],
                     prev: [37, 38]
-                },
-                label: AlloyEditor.Strings.add
+                }
             };
         },
 
@@ -128,7 +127,7 @@
             var className = this._getToolbarClassName();
 
             return (
-                <div aria-label={this.props.label} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role="toolbar" tabIndex="-1">
+                <div aria-label={AlloyEditor.Strings.add} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role="toolbar" tabIndex="-1">
                     <div className="alloy-editor-container">
                         {buttons}
                     </div>
@@ -151,7 +150,7 @@
             } else {
                 if (this.props.selectionData && this.props.selectionData.region) {
                     buttons = (
-                        <button aria-label={this.props.label} className="alloy-editor-button alloy-editor-button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={this.props.label}>
+                        <button aria-label={AlloyEditor.Strings.add} className="alloy-editor-button alloy-editor-button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}>
                             <span className="alloy-editor-icon-add"></span>
                         </button>
                     );

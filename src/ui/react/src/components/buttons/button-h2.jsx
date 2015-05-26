@@ -59,7 +59,6 @@
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.h2,
                 style: {
                     element: 'h2'
                 }
@@ -76,7 +75,7 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={this.props.label} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-h2" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.h2} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-h2" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.h2}>
                     <span className="alloy-editor-icon-h2"></span>
                 </button>
             );

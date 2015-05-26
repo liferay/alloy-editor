@@ -48,18 +48,6 @@
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                label: AlloyEditor.Strings.camera
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
@@ -77,7 +65,7 @@
                     navigator.msGetUserMedia);
 
                 return (
-                    <button aria-label={this.props.label} className="alloy-editor-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={this.props.label}>
+                    <button aria-label={AlloyEditor.Strings.camera} className="alloy-editor-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.camera}>
                         <span className="alloy-editor-icon-camera"></span>
                     </button>
                 );

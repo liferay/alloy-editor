@@ -66,32 +66,6 @@
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function () {
-            return {
-                commands: [
-                    {
-                        command: 'columnInsertBefore',
-                        label: AlloyEditor.Strings.columnInsertBefore
-                    },
-                    {
-                        command: 'columnInsertAfter',
-                        label: AlloyEditor.Strings.columnInsertAfter
-                    },
-                    {
-                        command: 'columnDelete',
-                        label: AlloyEditor.Strings.columnDelete
-                    }
-                ],
-                label: AlloyEditor.Strings.column
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
@@ -103,17 +77,41 @@
 
             if (this.props.expanded) {
                 buttonCommandsListId = ButtonTableColumn.key + 'List';
-                buttonCommandsList = <AlloyEditor.ButtonCommandsList commands={this.props.commands} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} />
+                buttonCommandsList = <AlloyEditor.ButtonCommandsList commands={this._getCommands()} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} />
             }
 
             return (
                 <div className="alloy-editor-container alloy-editor-has-dropdown">
-                    <button aria-expanded={this.props.expanded} aria-label={this.props.label} aria-owns={buttonCommandsListId} className="alloy-editor-button" onClick={this.props.toggleDropdown} role="listbox" tabIndex={this.props.tabIndex} title={this.props.label}>
+                    <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.column} aria-owns={buttonCommandsListId} className="alloy-editor-button" onClick={this.props.toggleDropdown} role="listbox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.column}>
                         <span className="alloy-editor-icon-column"></span>
                     </button>
                     {buttonCommandsList}
                 </div>
             );
+        },
+
+        /**
+         * Returns a list of commands. If a list of commands was passed
+         * as property `commands`, it will take a precedence over the default ones.
+         *
+         * @method _getCommands
+         * @return {Array} The list of available commands.
+         */
+        _getCommands: function() {
+            return this.props.commands || [
+                {
+                    command: 'columnInsertBefore',
+                    label: AlloyEditor.Strings.columnInsertBefore
+                },
+                {
+                    command: 'columnInsertAfter',
+                    label: AlloyEditor.Strings.columnInsertAfter
+                },
+                {
+                    command: 'columnDelete',
+                    label: AlloyEditor.Strings.columnDelete
+                }
+            ];
         }
     });
 

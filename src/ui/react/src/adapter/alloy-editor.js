@@ -15,7 +15,7 @@
     AlloyEditor.OOP.extend(Core, AlloyEditor.Base, {
         /**
          * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
-         * instace, passing it the provided configuration attributes.
+         * instance, passing it the provided configuration attributes.
          *
          * @protected
          * @method initializer
@@ -76,6 +76,13 @@
             return this._editor;
         },
 
+        /**
+         * Detects and load the corresponding language file
+         * if AlloyEditor language strings are not already present.
+         *
+         * @protected
+         * @method _loadLanguageFile
+         */
         _loadLanguageFile: function() {
             var onLanguageFileLoad = function() {
                 CKEDITOR.fire('resourcesLoaded');

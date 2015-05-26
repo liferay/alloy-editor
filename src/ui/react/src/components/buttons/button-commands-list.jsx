@@ -110,7 +110,7 @@
                 items = commands.map(function(item) {
                     return (
                         <li key={item.command} role="option">
-                            <AlloyEditor.ButtonCommandListItem command={item.command} description={item.label} editor={editor} />
+                            <AlloyEditor.ButtonCommandListItem command={item.command} description={typeof item.label === 'string' ? item.label : item.label()} editor={editor} />
                         </li>
                     );
                 });

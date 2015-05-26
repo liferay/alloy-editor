@@ -41,23 +41,6 @@
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                labels: {
-                    clear: AlloyEditor.Strings.clearInput,
-                    confirm: AlloyEditor.Strings.confirm,
-                    editLink: AlloyEditor.Strings.editLink,
-                    remove: AlloyEditor.Strings.removeLink
-                }
-            };
-        },
-
-        /**
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
          *
@@ -86,14 +69,14 @@
 
             return (
                 <div className="alloy-editor-container-edit-link">
-                    <button aria-label={this.props.labels.remove} className="alloy-editor-button" disabled={!this.state.element} onClick={this._removeLink} title={this.props.labels.remove}>
+                    <button aria-label={AlloyEditor.Strings.removeLink} className="alloy-editor-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
                         <span className="alloy-editor-icon-unlink"></span>
                     </button>
                     <div className="alloy-editor-container-input">
-                        <input className="alloy-editor-input" onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={this.props.labels.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
-                        <button aria-label={this.props.labels.clear} className="alloy-editor-button alloy-editor-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={this.props.labels.clear}></button>
+                        <input className="alloy-editor-input" onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
+                        <button aria-label={AlloyEditor.Strings.clearInput} className="alloy-editor-button alloy-editor-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
                     </div>
-                    <button aria-label={this.props.labels.confirm} className="alloy-editor-button" disabled={!this.state.linkHref} onClick={this._updateLink} title={this.props.labels.confirm}>
+                    <button aria-label={AlloyEditor.Strings.confirm} className="alloy-editor-button" disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
                         <span className="alloy-editor-icon-ok"></span>
                     </button>
                 </div>

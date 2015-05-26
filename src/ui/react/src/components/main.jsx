@@ -65,11 +65,6 @@
          */
         getDefaultProps: function() {
             return {
-                ariaUpdates: {
-                    noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
-                    oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
-                    manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
-                },
                 circular: true,
                 descendants: '[class*=alloy-editor-toolbar-]',
                 eventsDelay: 0,
@@ -113,6 +108,12 @@
             }.bind(this));
         },
 
+        /**
+         * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
+         * Fires 'ariaUpdate' event passing ARIA related messages.
+         *
+         * @method componentDidUpdate
+         */
         componentDidUpdate: function (prevProps, prevState) {
             var domNode = React.findDOMNode(this);
 
@@ -124,20 +125,50 @@
         },
 
         _getAriaUpdateTemplate: function(ariaUpdate) {
-            if (!this._ariaUpdateTemplates) this._ariaUpdateTemplates = {};
+            if (!this._ariaUpdateTemplates) {
+                this._ariaUpdateTemplates = {};
+            }
 
             if (!this._ariaUpdateTemplates[ariaUpdate]) {
-                this._ariaUpdateTemplates[ariaUpdate] = new CKEDITOR.template(this.props.ariaUpdates[ariaUpdate]);
+                this._ariaUpdateTemplates[ariaUpdate] = new CKEDITOR.template(this._getAriaUpdates()[ariaUpdate]);
             }
 
             return this._ariaUpdateTemplates[ariaUpdate];
         },
 
+        /**
+         * Returns the templates for ARIA messages.
+         *
+         * @protected
+         * @method _getAriaUpdates
+         * @return {Object} ARIA relates messages. Default:
+         * {
+         *      noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
+         *      oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
+         *      manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
+         *  }
+         */
+        _getAriaUpdates: function() {
+            return this.props.ariaUpdates || {
+                noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
+                oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
+                manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
+            };
+        },
+
+        /**
+         * Returns an ARIA message which represents the number of currently available toolbars.
+         *
+         * @method _getAvailableToolbarsMessage
+         * @protected
+         * @param {CKEDITOR.dom.element} domNode The DOM node from which the available toolbars will be retrieved.
+         * @return {String} The ARIA message for the number of available toolbars
+         */
         _getAvailableToolbarsMessage: function(domNode) {
             var toolbarsNodeList = domNode.querySelectorAll('[role="toolbar"]');
 
             if (!toolbarsNodeList.length) {
-                return this.props.ariaUpdates.noToolbar;
+                return this._getAriaUpdates().noToolbar;
             } else {
                 var toolbarNames = Array.prototype.slice.call(toolbarsNodeList).map(function(toolbar) {
                     return toolbar.getAttribute('aria-label');

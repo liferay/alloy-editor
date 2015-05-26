@@ -58,11 +58,10 @@
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.alignRight,
                 style: {
                     element: 'img',
                     styles: {
-                        float: 'right'
+                        'float': 'right'
                     }
                 }
             };
@@ -78,7 +77,7 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={this.props.label} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-image-align-right" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.alignRight} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-image-align-right" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignRight}>
                     <span className="alloy-editor-icon-align-right"></span>
                 </button>
             );

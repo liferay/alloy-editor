@@ -50,18 +50,6 @@
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function() {
-            return {
-                label: AlloyEditor.Strings.twitter
-            };
-        },
-
-        /**
          * Creates or removes the twitter link on the selection.
          *
          * @method handleClick
@@ -108,7 +96,7 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={this.props.label} className={cssClass} data-type="button-twitter" onClick={this.handleClick} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.twitter} className={cssClass} data-type="button-twitter" onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.twitter}>
                     <span className="alloy-editor-icon-twitter"></span>
                 </button>
             );

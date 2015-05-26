@@ -59,7 +59,6 @@
         getDefaultProps: function() {
             return {
                 command: 'blockquote',
-                label: AlloyEditor.Strings.quote,
                 style: {
                     element: 'blockquote'
                 }
@@ -76,7 +75,7 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={this.props.label} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-quote" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.quote} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-quote" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.quote}>
                     <span className="alloy-editor-icon-quote"></span>
                 </button>
             );

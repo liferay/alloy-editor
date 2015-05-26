@@ -59,7 +59,6 @@
         getDefaultProps: function() {
             return {
                 command: 'bold',
-                label: AlloyEditor.Strings.bold,
                 style: {
                     element: 'strong'
                 }
@@ -76,7 +75,7 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={this.props.label} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-bold" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.bold} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-bold" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.bold}>
                     <span className="alloy-editor-icon-bold"></span>
                 </button>
             );

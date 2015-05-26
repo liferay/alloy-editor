@@ -61,7 +61,6 @@
          */
         getDefaultProps: function() {
             return {
-                label: AlloyEditor.Strings.normal,
                 removeBlocks: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre']
             };
         },
@@ -75,7 +74,7 @@
         render: function() {
             return (
                 <li role="option">
-                    <button className="alloy-editor-toolbar-element" onClick={this._removeStyles} tabIndex={this.props.tabIndex}>{this.props.label}</button>
+                    <button className="alloy-editor-toolbar-element" onClick={this._removeStyles} tabIndex={this.props.tabIndex}>{AlloyEditor.Strings.normal}</button>
                 </li>
             );
         },

@@ -2,8 +2,7 @@
   "name": "alloy-editor",
   "version": "0.2.8",
   "description": "Alloy Editor, a modern WYSIWYG editor, build on top of CKEditor",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "bourbon": "https://github.com/thoughtbot/bourbon/tarball/master",
     "chai": "^2.3.0",
     "del": "^1.2.0",

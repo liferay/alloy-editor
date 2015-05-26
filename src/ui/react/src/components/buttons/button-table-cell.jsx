@@ -66,74 +66,72 @@
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function () {
-            return {
-                commands: [
-                    {
-                        command: 'cellInsertBefore',
-                        label: AlloyEditor.Strings.cellInsertBefore
-                    },
-                    {
-                        command: 'cellInsertAfter',
-                        label: AlloyEditor.Strings.cellInsertAfter
-                    },
-                    {
-                        command: 'cellDelete',
-                        label: AlloyEditor.Strings.cellDelete
-                    },
-                    {
-                        command: 'cellMerge',
-                        label: AlloyEditor.Strings.cellMerge
-                    },
-                    {
-                        command: 'cellMergeDown',
-                        label: AlloyEditor.Strings.cellMergeDown
-                    },
-                    {
-                        command: 'cellMergeRight',
-                        label: AlloyEditor.Strings.cellMergeRight
-                    },
-                    {
-                        command: 'cellHorizontalSplit',
-                        label: AlloyEditor.Strings.cellSplitHorizontal
-                    },
-                    {
-                        command: 'cellVerticalSplit',
-                        label: AlloyEditor.Strings.cellSplitVertical
-                    }
-                ],
-                label: AlloyEditor.Strings.cell
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var buttonCommandsList,
-                buttonCommandsListId;
+            var buttonCommandsList;
+            var buttonCommandsListId;
 
             if (this.props.expanded) {
                 buttonCommandsListId = ButtonTableCell.key + 'List';
-                buttonCommandsList = <AlloyEditor.ButtonCommandsList commands={this.props.commands} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} />
+                buttonCommandsList = <AlloyEditor.ButtonCommandsList commands={this._getCommands()} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} />
             }
 
             return (
                 <div className="alloy-editor-container alloy-editor-has-dropdown">
-                    <button aria-expanded={this.props.expanded} aria-label={this.props.label} aria-owns={buttonCommandsListId} className="alloy-editor-button" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={this.props.label}>
+                    <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.cell} aria-owns={buttonCommandsListId} className="alloy-editor-button" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.cell}>
                         <span className="alloy-editor-icon-cell"></span>
                     </button>
                     {buttonCommandsList}
                 </div>
             );
+        },
+
+        /**
+         * Returns a list of commands. If a list of commands was passed
+         * as property `commands`, it will take a precedence over the default ones.
+         *
+         * @method _getCommands
+         * @return {Array} The list of available commands.
+         */
+        _getCommands: function() {
+            return this.props.commands || [
+                {
+                    command: 'cellInsertBefore',
+                    label: AlloyEditor.Strings.cellInsertBefore
+                },
+                {
+                    command: 'cellInsertAfter',
+                    label: AlloyEditor.Strings.cellInsertAfter
+                },
+                {
+                    command: 'cellDelete',
+                    label: AlloyEditor.Strings.cellDelete
+                },
+                {
+                    command: 'cellMerge',
+                    label: AlloyEditor.Strings.cellMerge
+                },
+                {
+                    command: 'cellMergeDown',
+                    label: AlloyEditor.Strings.cellMergeDown
+                },
+                {
+                    command: 'cellMergeRight',
+                    label: AlloyEditor.Strings.cellMergeRight
+                },
+                {
+                    command: 'cellHorizontalSplit',
+                    label: AlloyEditor.Strings.cellSplitHorizontal
+                },
+                {
+                    command: 'cellVerticalSplit',
+                    label: AlloyEditor.Strings.cellSplitVertical
+                }
+            ];
         }
     });
 

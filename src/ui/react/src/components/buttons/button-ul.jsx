@@ -59,7 +59,6 @@
         getDefaultProps: function() {
             return {
                 command: 'bulletedlist',
-                label: AlloyEditor.Strings.bulletedlist,
                 style: {
                     element: 'ul'
                 }
@@ -76,7 +75,7 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={this.props.label} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-ul" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.bulletedlist} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-ul" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.bulletedlist}>
                     <span className="alloy-editor-icon-bulleted-list"></span>
                 </button>
             );

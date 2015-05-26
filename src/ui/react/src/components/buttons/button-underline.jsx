@@ -59,7 +59,6 @@
         getDefaultProps: function() {
             return {
                 command: 'underline',
-                label: AlloyEditor.Strings.underline,
                 style: {
                     element: 'u'
                 }
@@ -76,7 +75,7 @@
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={this.props.label} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-underline" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.underline} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-underline" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.underline}>
                     <span className="alloy-editor-icon-underline"></span>
                 </button>
             );

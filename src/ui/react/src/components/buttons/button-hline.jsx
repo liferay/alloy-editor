@@ -58,7 +58,6 @@
         getDefaultProps: function() {
             return {
                 command: 'horizontalrule',
-                label: AlloyEditor.Strings.horizontalrule,
                 style: {
                     element: 'hr'
                 }
@@ -73,7 +72,7 @@
          */
         render: function() {
             return (
-                <button aria-label={this.props.label} className="alloy-editor-button" data-type="button-hline" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.horizontalrule} className="alloy-editor-button" data-type="button-hline" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.horizontalrule}>
                     <span className="alloy-editor-icon-separator"></span>
                 </button>
             );

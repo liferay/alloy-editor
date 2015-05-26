@@ -45,18 +45,6 @@
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         * @return {Object} The default properties.
-         */
-        getDefaultProps: function () {
-            return {
-                label: AlloyEditor.Strings.deleteTable
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
@@ -64,7 +52,7 @@
          */
         render: function() {
             return (
-                <button aria-label={this.props.label} className="alloy-editor-button" data-type="button-table-remove" onClick={this._removeTable} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.deleteTable} className="alloy-editor-button" data-type="button-table-remove" onClick={this._removeTable} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteTable}>
                     <span className="alloy-editor-icon-close"></span>
                 </button>
             );

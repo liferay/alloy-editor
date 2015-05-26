@@ -56,8 +56,7 @@
          */
         getDefaultProps: function() {
             return {
-                command: 'removeFormat',
-                label: AlloyEditor.Strings.removeformat
+                command: 'removeFormat'
             };
         },
 
@@ -69,7 +68,7 @@
          */
         render: function() {
             return (
-                <button aria-label={this.props.label} className='alloy-editor-button' data-type="button-removeformat" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <button aria-label={AlloyEditor.Strings.removeformat} className='alloy-editor-button' data-type="button-removeformat" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.removeformat}>
                     <span className="alloy-editor-icon-removeformat"></span>
                 </button>
             );

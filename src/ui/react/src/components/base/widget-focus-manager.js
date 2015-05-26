@@ -65,7 +65,6 @@
 
         /**
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
-         *
          * Refreshes the descendants list.
          *
          * @method componentDidUpdate

@@ -72,11 +72,6 @@
             return {
                 circular: false,
                 descendants: '.alloy-editor-toolbar-element',
-                labels: {
-                    blockStyles: AlloyEditor.Strings.blockStyles,
-                    inlineStyles: AlloyEditor.Strings.inlineStyles,
-                    objectStyles: AlloyEditor.Strings.objectStyles
-                },
                 keys: {
                     dismiss: [27],
                     dismissNext: [39],
@@ -99,13 +94,13 @@
                     <ul className="alloy-editor-listbox" role="listbox">
                         <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />
 
-                        <AlloyEditor.ButtonsStylesListHeader name={this.props.labels.blockStyles} styles={this._blockStyles} />
+                        <AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.blockStyles} styles={this._blockStyles} />
                         {this._renderStylesItems(this._blockStyles)}
 
-                        <AlloyEditor.ButtonsStylesListHeader name={this.props.labels.inlineStyles} styles={this._inlineStyles} />
+                        <AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.inlineStyles} styles={this._inlineStyles} />
                         {this._renderStylesItems(this._inlineStyles)}
 
-                        <AlloyEditor.ButtonsStylesListHeader name={this.props.labels.objectStyles} styles={this._objectStyles} />
+                        <AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.objectStyles} styles={this._objectStyles} />
                         {this._renderStylesItems(this._objectStyles)}
                     </ul>
                 </div>
