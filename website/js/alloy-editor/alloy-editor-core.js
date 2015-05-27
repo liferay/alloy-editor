@@ -3835,6 +3835,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         initializer: function(config) {
             var node = this.get('srcNode');
+            document.getElementById(node).setAttribute('contenteditable', 'true');
 
             var editor = CKEDITOR.inline(node);
 

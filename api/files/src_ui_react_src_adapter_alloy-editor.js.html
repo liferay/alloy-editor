@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.8</b>
+                        API Docs for Version: <b>0.2.9</b>
                     </p>
                 </li>
             </div>
@@ -188,6 +188,7 @@
                                      */
                                     initializer: function(config) {
                                         var node = this.get(&#x27;srcNode&#x27;);
+                                        document.getElementById(node).setAttribute(&#x27;contenteditable&#x27;, &#x27;true&#x27;);
                             
                                         var editor = CKEDITOR.inline(node);
                             
