@@ -201,6 +201,14 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__getAriaUpdates">_getAriaUpdates</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__getAvailableToolbarsMessage">_getAvailableToolbarsMessage</a>
+                            
+                                                        </li>
                                                         <li class="index-item method protected inherited">
                                                             <a href="#method__getFocusAction">_getFocusAction</a>
                             
@@ -349,6 +357,120 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
+                                                <div id="method__getAriaUpdates" class="method item protected">
+                                                    <h3 class="name"><code>_getAriaUpdates</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Object</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l139"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:139</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Returns the templates for ARIA messages.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Object</span>:
+                                                                    <p>ARIA relates messages. Default:
+                                                {
+                                                     noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
+                                                     oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
+                                                     manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
+                                                 }</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method__getAvailableToolbarsMessage" class="method item protected">
+                                                    <h3 class="name"><code>_getAvailableToolbarsMessage</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>domNode</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">String</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l159"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:159</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Returns an ARIA message which represents the number of currently available toolbars.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">domNode</code>
+                                                                        <span class="type">CKEDITOR.dom.element</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The DOM node from which the available toolbars will be retrieved.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">String</span>:
+                                                                    <p>The ARIA message for the number of available toolbars</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
                                                 <div id="method__getFocusAction" class="method item protected inherited">
                                                     <h3 class="name"><code>_getFocusAction</code></h3>
                                                 
@@ -374,7 +496,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method__getFocusAction">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l135"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:135</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l134"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:134</code></a>
                                                         </p>
                                                 
                                                 
@@ -444,7 +566,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method__getFocusDismissAction">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l168"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:168</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l167"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:167</code></a>
                                                         </p>
                                                 
                                                 
@@ -530,7 +652,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method__getFocusMoveDirection">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l212"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:212</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l211"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:211</code></a>
                                                         </p>
                                                 
                                                 
@@ -603,7 +725,7 @@
                                                                 WidgetFocusManager
                                                             </a>
                                                             but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l238"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:238</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l237"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:237</code></a>
                                                         </p>
                                                 
                                                 
@@ -677,7 +799,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method__moveFocus">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l267"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:267</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l266"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:266</code></a>
                                                         </p>
                                                 
                                                 
@@ -731,7 +853,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l206"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:206</code></a>
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l237"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:237</code></a>
                                                         </p>
                                                 
                                                 
@@ -779,7 +901,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l224"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:224</code></a>
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l255"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:255</code></a>
                                                         </p>
                                                 
                                                 
@@ -816,7 +938,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l236"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:236</code></a>
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l267"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:267</code></a>
                                                         </p>
                                                 
                                                 
@@ -865,7 +987,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l253"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:253</code></a>
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l284"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:284</code></a>
                                                         </p>
                                                 
                                                 
@@ -896,7 +1018,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method__refresh">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l297"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:297</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l296"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:296</code></a>
                                                         </p>
                                                 
                                                 
@@ -933,7 +1055,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l267"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:267</code></a>
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l298"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:298</code></a>
                                                         </p>
                                                 
                                                 
@@ -1037,7 +1159,7 @@
                                                                 WidgetFocusManager
                                                             </a>
                                                             but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l82"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:82</code></a>
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l77"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:77</code></a>
                                                         </p>
                                                 
                                                 
@@ -1052,7 +1174,7 @@
                                                 
                                                 
                                                 </div>
-                                                <div id="method_componentDidUpdate" class="method item inherited">
+                                                <div id="method_componentDidUpdate" class="method item">
                                                     <h3 class="name"><code>componentDidUpdate</code></h3>
                                                 
                                                         <span class="paren">()</span>
@@ -1065,9 +1187,12 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/WidgetFocusManager.html#method_componentDidUpdate">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l66"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:66</code></a>
+                                                            <p>Inherited from
+                                                            <a href="../classes/WidgetFocusManager.html#method_componentDidUpdate">
+                                                                WidgetFocusManager
+                                                            </a>
+                                                            but overwritten in
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l111"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:111</code></a>
                                                         </p>
                                                 
                                                 
@@ -1075,8 +1200,8 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Lifecycle. Invoked immediately after the component&#39;s updates are flushed to the DOM.</p>
-                                                <p>Refreshes the descendants list.</p>
+                                                        <p>Lifecycle. Invoked immediately after the component&#39;s updates are flushed to the DOM.
+                                                Fires &#39;ariaUpdate&#39; event passing ARIA related messages.</p>
                                                 
                                                     </div>
                                                 
@@ -1153,7 +1278,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l154"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:154</code></a>
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l185"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:185</code></a>
                                                         </p>
                                                 
                                                 
@@ -1248,7 +1373,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method_focus">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l77"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:77</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l76"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:76</code></a>
                                                         </p>
                                                 
                                                 
@@ -1358,7 +1483,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method_handleKey">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l98"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:98</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l97"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:97</code></a>
                                                         </p>
                                                 
                                                 
@@ -1496,7 +1621,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method_moveFocus">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l123"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:123</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l122"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:122</code></a>
                                                         </p>
                                                 
                                                 
@@ -1546,7 +1671,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l170"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:170</code></a>
+                                                        <a href="../files/src_ui_react_src_components_main.jsx.html#l201"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;main.jsx:201</code></a>
                                                         </p>
                                                 
                                                 

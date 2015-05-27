@@ -226,7 +226,6 @@
                                      */
                                     getDefaultProps: function() {
                                         return {
-                                            label: AlloyEditor.Strings.normal,
                                             removeBlocks: [&#x27;h1&#x27;, &#x27;h2&#x27;, &#x27;h3&#x27;, &#x27;h4&#x27;, &#x27;h5&#x27;, &#x27;h6&#x27;, &#x27;pre&#x27;]
                                         };
                                     },
@@ -240,7 +239,7 @@
                                     render: function() {
                                         return (
                                             &lt;li role=&quot;option&quot;&gt;
-                                                &lt;button className=&quot;alloy-editor-toolbar-element&quot; onClick={this._removeStyles} tabIndex={this.props.tabIndex}&gt;{this.props.label}&lt;/button&gt;
+                                                &lt;button className=&quot;alloy-editor-toolbar-element&quot; onClick={this._removeStyles} tabIndex={this.props.tabIndex}&gt;{AlloyEditor.Strings.normal}&lt;/button&gt;
                                             &lt;/li&gt;
                                         );
                                     },

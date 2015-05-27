@@ -218,18 +218,6 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     * @return {Object} The default properties.
-                                     */
-                                    getDefaultProps: function() {
-                                        return {
-                                            label: AlloyEditor.Strings.link
-                                        };
-                                    },
-                            
-                                    /**
                                      * Checks if the current selection is contained within a link.
                                      *
                                      * @method isActive
@@ -254,7 +242,7 @@
                                             );
                                         } else {
                                             return (
-                                                &lt;button aria-label={this.props.label} className={cssClass} data-type=&quot;button-link&quot; onClick={this.props.requestExclusive.bind(ButtonLink.key)} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type=&quot;button-link&quot; onClick={this.props.requestExclusive.bind(ButtonLink.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}&gt;
                                                     &lt;span className=&quot;alloy-editor-icon-link&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             );

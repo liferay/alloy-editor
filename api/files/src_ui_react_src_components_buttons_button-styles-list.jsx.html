@@ -237,11 +237,6 @@
                                         return {
                                             circular: false,
                                             descendants: &#x27;.alloy-editor-toolbar-element&#x27;,
-                                            labels: {
-                                                blockStyles: AlloyEditor.Strings.blockStyles,
-                                                inlineStyles: AlloyEditor.Strings.inlineStyles,
-                                                objectStyles: AlloyEditor.Strings.objectStyles
-                                            },
                                             keys: {
                                                 dismiss: [27],
                                                 dismissNext: [39],
@@ -264,13 +259,13 @@
                                                 &lt;ul className=&quot;alloy-editor-listbox&quot; role=&quot;listbox&quot;&gt;
                                                     &lt;AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} /&gt;
                             
-                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={this.props.labels.blockStyles} styles={this._blockStyles} /&gt;
+                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.blockStyles} styles={this._blockStyles} /&gt;
                                                     {this._renderStylesItems(this._blockStyles)}
                             
-                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={this.props.labels.inlineStyles} styles={this._inlineStyles} /&gt;
+                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.inlineStyles} styles={this._inlineStyles} /&gt;
                                                     {this._renderStylesItems(this._inlineStyles)}
                             
-                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={this.props.labels.objectStyles} styles={this._objectStyles} /&gt;
+                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.objectStyles} styles={this._objectStyles} /&gt;
                                                     {this._renderStylesItems(this._objectStyles)}
                                                 &lt;/ul&gt;
                                             &lt;/div&gt;

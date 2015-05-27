@@ -210,18 +210,6 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     * @return {Object} The default properties.
-                                     */
-                                    getDefaultProps: function() {
-                                        return {
-                                            label: AlloyEditor.Strings.image
-                                        };
-                                    },
-                            
-                                    /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
                                      * @method render
@@ -232,7 +220,7 @@
                             
                                         return (
                                             &lt;div&gt;
-                                                &lt;button aria-label={this.props.label} className=&quot;alloy-editor-button&quot; data-type=&quot;button-image&quot; onClick={this.handleClick} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.image} className=&quot;alloy-editor-button&quot; data-type=&quot;button-image&quot; onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.image}&gt;
                                                     &lt;span className=&quot;alloy-editor-icon-image&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                             

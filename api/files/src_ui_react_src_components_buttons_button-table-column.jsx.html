@@ -231,32 +231,6 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     * @return {Object} The default properties.
-                                     */
-                                    getDefaultProps: function () {
-                                        return {
-                                            commands: [
-                                                {
-                                                    command: &#x27;columnInsertBefore&#x27;,
-                                                    label: AlloyEditor.Strings.columnInsertBefore
-                                                },
-                                                {
-                                                    command: &#x27;columnInsertAfter&#x27;,
-                                                    label: AlloyEditor.Strings.columnInsertAfter
-                                                },
-                                                {
-                                                    command: &#x27;columnDelete&#x27;,
-                                                    label: AlloyEditor.Strings.columnDelete
-                                                }
-                                            ],
-                                            label: AlloyEditor.Strings.column
-                                        };
-                                    },
-                            
-                                    /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
                                      * @method render
@@ -268,17 +242,41 @@
                             
                                         if (this.props.expanded) {
                                             buttonCommandsListId = ButtonTableColumn.key + &#x27;List&#x27;;
-                                            buttonCommandsList = &lt;AlloyEditor.ButtonCommandsList commands={this.props.commands} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} /&gt;
+                                            buttonCommandsList = &lt;AlloyEditor.ButtonCommandsList commands={this._getCommands()} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} /&gt;
                                         }
                             
                                         return (
                                             &lt;div className=&quot;alloy-editor-container alloy-editor-has-dropdown&quot;&gt;
-                                                &lt;button aria-expanded={this.props.expanded} aria-label={this.props.label} aria-owns={buttonCommandsListId} className=&quot;alloy-editor-button&quot; onClick={this.props.toggleDropdown} role=&quot;listbox&quot; tabIndex={this.props.tabIndex} title={this.props.label}&gt;
+                                                &lt;button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.column} aria-owns={buttonCommandsListId} className=&quot;alloy-editor-button&quot; onClick={this.props.toggleDropdown} role=&quot;listbox&quot; tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.column}&gt;
                                                     &lt;span className=&quot;alloy-editor-icon-column&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                                 {buttonCommandsList}
                                             &lt;/div&gt;
                                         );
+                                    },
+                            
+                                    /**
+                                     * Returns a list of commands. If a list of commands was passed
+                                     * as property &#x60;commands&#x60;, it will take a precedence over the default ones.
+                                     *
+                                     * @method _getCommands
+                                     * @return {Array} The list of available commands.
+                                     */
+                                    _getCommands: function() {
+                                        return this.props.commands || [
+                                            {
+                                                command: &#x27;columnInsertBefore&#x27;,
+                                                label: AlloyEditor.Strings.columnInsertBefore
+                                            },
+                                            {
+                                                command: &#x27;columnInsertAfter&#x27;,
+                                                label: AlloyEditor.Strings.columnInsertAfter
+                                            },
+                                            {
+                                                command: &#x27;columnDelete&#x27;,
+                                                label: AlloyEditor.Strings.columnDelete
+                                            }
+                                        ];
                                     }
                                 });
                             

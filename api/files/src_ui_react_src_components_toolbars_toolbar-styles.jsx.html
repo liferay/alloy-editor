@@ -260,8 +260,7 @@
                                                 dismiss: [27],
                                                 next: [39, 40],
                                                 prev: [37, 38]
-                                            },
-                                            label: AlloyEditor.Strings.styles
+                                            }
                                         };
                                     },
                             
@@ -294,7 +293,7 @@
                                             );
                             
                                             return (
-                                                &lt;div aria-label={this.props.label} className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
+                                                &lt;div aria-label={AlloyEditor.Strings.styles} className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
                                                     &lt;div className=&quot;alloy-editor-container&quot;&gt;
                                                         {buttons}
                                                     &lt;/div&gt;

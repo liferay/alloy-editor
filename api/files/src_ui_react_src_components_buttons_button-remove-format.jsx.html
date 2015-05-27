@@ -221,8 +221,7 @@
                                      */
                                     getDefaultProps: function() {
                                         return {
-                                            command: &#x27;removeFormat&#x27;,
-                                            label: AlloyEditor.Strings.removeformat
+                                            command: &#x27;removeFormat&#x27;
                                         };
                                     },
                             
@@ -234,7 +233,7 @@
                                      */
                                     render: function() {
                                         return (
-                                            &lt;button aria-label={this.props.label} className=&#x27;alloy-editor-button&#x27; data-type=&quot;button-removeformat&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
+                                            &lt;button aria-label={AlloyEditor.Strings.removeformat} className=&#x27;alloy-editor-button&#x27; data-type=&quot;button-removeformat&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.removeformat}&gt;
                                                 &lt;span className=&quot;alloy-editor-icon-removeformat&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );

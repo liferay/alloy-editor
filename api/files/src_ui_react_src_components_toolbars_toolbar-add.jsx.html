@@ -249,8 +249,7 @@
                                                 dismiss: [27],
                                                 next: [39, 40],
                                                 prev: [37, 38]
-                                            },
-                                            label: AlloyEditor.Strings.add
+                                            }
                                         };
                                     },
                             
@@ -293,7 +292,7 @@
                                         var className = this._getToolbarClassName();
                             
                                         return (
-                                            &lt;div aria-label={this.props.label} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
+                                            &lt;div aria-label={AlloyEditor.Strings.add} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
                                                 &lt;div className=&quot;alloy-editor-container&quot;&gt;
                                                     {buttons}
                                                 &lt;/div&gt;
@@ -316,7 +315,7 @@
                                         } else {
                                             if (this.props.selectionData &amp;&amp; this.props.selectionData.region) {
                                                 buttons = (
-                                                    &lt;button aria-label={this.props.label} className=&quot;alloy-editor-button alloy-editor-button-add&quot; onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={this.props.label}&gt;
+                                                    &lt;button aria-label={AlloyEditor.Strings.add} className=&quot;alloy-editor-button alloy-editor-button-add&quot; onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}&gt;
                                                         &lt;span className=&quot;alloy-editor-icon-add&quot;&gt;&lt;/span&gt;
                                                     &lt;/button&gt;
                                                 );

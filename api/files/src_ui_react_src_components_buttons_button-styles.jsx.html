@@ -233,50 +233,6 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     * @return {Object} The default properties.
-                                     */
-                                    getDefaultProps: function () {
-                                        return {
-                                            label: AlloyEditor.Strings.styles,
-                                            styles: [
-                                                {
-                                                    name: AlloyEditor.Strings.h1,
-                                                    style: {
-                                                        element: &#x27;h1&#x27;
-                                                    }
-                                                },
-                                                {
-                                                    name: AlloyEditor.Strings.h2,
-                                                    style: {
-                                                        element: &#x27;h2&#x27;
-                                                    }
-                                                },
-                                                {
-                                                    name: AlloyEditor.Strings.formatted,
-                                                    style: {
-                                                        element: &#x27;pre&#x27;
-                                                    }
-                                                },
-                                                {
-                                                    name: AlloyEditor.Strings.cite,
-                                                    style: {
-                                                        element: &#x27;cite&#x27;
-                                                    }
-                                                },
-                                                {
-                                                    name: AlloyEditor.Strings.code,
-                                                    style: {
-                                                        element: &#x27;code&#x27;
-                                                    }
-                                                }
-                                            ]
-                                        };
-                                    },
-                            
-                                    /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
                                      * @method render
@@ -285,7 +241,9 @@
                                     render: function() {
                                         var activeStyle = AlloyEditor.Strings.normal;
                             
-                                        this.props.styles.forEach(function(item) {
+                                        var styles = this._getStyles();
+                            
+                                        styles.forEach(function(item) {
                                             if (this._checkActive(item.style)) {
                                                 activeStyle = item.name;
                                             }
@@ -294,12 +252,12 @@
                                         var buttonStylesList;
                             
                                         if (this.props.expanded) {
-                                            buttonStylesList = &lt;AlloyEditor.ButtonStylesList editor={this.props.editor} onDismiss={this.props.toggleDropdown} styles={this.props.styles} /&gt;
+                                            buttonStylesList = &lt;AlloyEditor.ButtonStylesList editor={this.props.editor} onDismiss={this.props.toggleDropdown} styles={styles} /&gt;
                                         }
                             
                                         return (
                                             &lt;div className=&quot;alloy-editor-container-styles alloy-editor-has-dropdown&quot;&gt;
-                                                &lt;button aria-expanded={this.props.expanded} aria-label={this.props.label + &#x27; &#x27; + activeStyle} className=&quot;alloy-editor-toolbar-element&quot; onClick={this.props.toggleDropdown} role=&quot;combobox&quot; tabIndex={this.props.tabIndex} title={this.props.label + &#x27; &#x27; + activeStyle}&gt;
+                                                &lt;button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.styles + &#x27; &#x27; + activeStyle} className=&quot;alloy-editor-toolbar-element&quot; onClick={this.props.toggleDropdown} role=&quot;combobox&quot; tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.styles + &#x27; &#x27; + activeStyle}&gt;
                                                     &lt;div className=&quot;alloy-editor-container&quot;&gt;
                                                         &lt;span className=&quot;alloy-editor-selected-style&quot;&gt;{activeStyle}&lt;/span&gt;
                                                         &lt;span className=&quot;alloy-editor-icon-arrow&quot;&gt;&lt;/span&gt;
@@ -328,6 +286,51 @@
                                         var style = new CKEDITOR.style(styleConfig);
                             
                                         return style.checkActive(nativeEditor.elementPath(), nativeEditor);
+                                    },
+                            
+                                    /**
+                                     * Returns an array of styles. Each style consists from two properties:
+                                     * - name - the style name, for example &quot;h1&quot;
+                                     * - style - an object with one property, called &#x60;element&#x60; which value
+                                     * represents the style which have to be applied to the element.
+                                     *
+                                     * @method _getStyles
+                                     * @protected
+                                     * @return {Array&lt;object&gt;} An array of objects containing the styles.
+                                     */
+                                    _getStyles: function() {
+                                        return this.props.styles || [
+                                            {
+                                                name: AlloyEditor.Strings.h1,
+                                                style: {
+                                                    element: &#x27;h1&#x27;
+                                                }
+                                            },
+                                            {
+                                                name: AlloyEditor.Strings.h2,
+                                                style: {
+                                                    element: &#x27;h2&#x27;
+                                                }
+                                            },
+                                            {
+                                                name: AlloyEditor.Strings.formatted,
+                                                style: {
+                                                    element: &#x27;pre&#x27;
+                                                }
+                                            },
+                                            {
+                                                name: AlloyEditor.Strings.cite,
+                                                style: {
+                                                    element: &#x27;cite&#x27;
+                                                }
+                                            },
+                                            {
+                                                name: AlloyEditor.Strings.code,
+                                                style: {
+                                                    element: &#x27;code&#x27;
+                                                }
+                                            }
+                                        ];
                                     }
                                 });
                             

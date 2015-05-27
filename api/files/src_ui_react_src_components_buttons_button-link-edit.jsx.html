@@ -206,23 +206,6 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     * @return {Object} The default properties.
-                                     */
-                                    getDefaultProps: function() {
-                                        return {
-                                            labels: {
-                                                clear: AlloyEditor.Strings.clearInput,
-                                                confirm: AlloyEditor.Strings.confirm,
-                                                editLink: AlloyEditor.Strings.editLink,
-                                                remove: AlloyEditor.Strings.removeLink
-                                            }
-                                        };
-                                    },
-                            
-                                    /**
                                      * Lifecycle. Invoked once before the component is mounted.
                                      * The return value will be used as the initial value of this.state.
                                      *
@@ -251,14 +234,14 @@
                             
                                         return (
                                             &lt;div className=&quot;alloy-editor-container-edit-link&quot;&gt;
-                                                &lt;button aria-label={this.props.labels.remove} className=&quot;alloy-editor-button&quot; disabled={!this.state.element} onClick={this._removeLink} title={this.props.labels.remove}&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;alloy-editor-button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
                                                     &lt;span className=&quot;alloy-editor-icon-unlink&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                                 &lt;div className=&quot;alloy-editor-container-input&quot;&gt;
-                                                    &lt;input className=&quot;alloy-editor-input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={this.props.labels.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
-                                                    &lt;button aria-label={this.props.labels.clear} className=&quot;alloy-editor-button alloy-editor-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={this.props.labels.clear}&gt;&lt;/button&gt;
+                                                    &lt;input className=&quot;alloy-editor-input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                    &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;alloy-editor-button alloy-editor-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
                                                 &lt;/div&gt;
-                                                &lt;button aria-label={this.props.labels.confirm} className=&quot;alloy-editor-button&quot; disabled={!this.state.linkHref} onClick={this._updateLink} title={this.props.labels.confirm}&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;alloy-editor-button&quot; disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
                                                     &lt;span className=&quot;alloy-editor-icon-ok&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             &lt;/div&gt;

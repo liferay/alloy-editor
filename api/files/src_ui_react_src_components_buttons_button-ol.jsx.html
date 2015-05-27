@@ -224,7 +224,6 @@
                                     getDefaultProps: function() {
                                         return {
                                             command: &#x27;numberedlist&#x27;,
-                                            label: AlloyEditor.Strings.numberedlist,
                                             style: {
                                                 element: &#x27;ol&#x27;
                                             }
@@ -241,7 +240,7 @@
                                         var cssClass = &#x27;alloy-editor-button &#x27; + this.getStateClasses();
                             
                                         return (
-                                            &lt;button aria-label={this.props.label} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-ol&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
+                                            &lt;button aria-label={AlloyEditor.Strings.numberedlist} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-ol&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.numberedlist}&gt;
                                                 &lt;span className=&quot;alloy-editor-icon-numbered-list&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );

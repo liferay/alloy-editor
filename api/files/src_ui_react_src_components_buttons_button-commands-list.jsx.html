@@ -275,7 +275,7 @@
                                             items = commands.map(function(item) {
                                                 return (
                                                     &lt;li key={item.command} role=&quot;option&quot;&gt;
-                                                        &lt;AlloyEditor.ButtonCommandListItem command={item.command} description={item.label} editor={editor} /&gt;
+                                                        &lt;AlloyEditor.ButtonCommandListItem command={item.command} description={typeof item.label === &#x27;string&#x27; ? item.label : item.label()} editor={editor} /&gt;
                                                     &lt;/li&gt;
                                                 );
                                             });

@@ -214,18 +214,6 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     * @return {Object} The default properties.
-                                     */
-                                    getDefaultProps: function() {
-                                        return {
-                                            label: AlloyEditor.Strings.table
-                                        };
-                                    },
-                            
-                                    /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
                                      * @method render
@@ -238,7 +226,7 @@
                                             );
                                         } else {
                                             return (
-                                                &lt;button aria-label={this.props.label} className=&quot;alloy-editor-button&quot; data-type=&quot;button-table&quot; onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.table} className=&quot;alloy-editor-button&quot; data-type=&quot;button-table&quot; onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.table}&gt;
                                                     &lt;span className=&quot;alloy-editor-icon-table&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             );

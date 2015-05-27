@@ -224,7 +224,6 @@
                                      */
                                     getDefaultProps: function() {
                                         return {
-                                            label: AlloyEditor.Strings.h2,
                                             style: {
                                                 element: &#x27;h2&#x27;
                                             }
@@ -241,7 +240,7 @@
                                         var cssClass = &#x27;alloy-editor-button &#x27; + this.getStateClasses();
                             
                                         return (
-                                            &lt;button aria-label={this.props.label} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-h2&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
+                                            &lt;button aria-label={AlloyEditor.Strings.h2} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-h2&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.h2}&gt;
                                                 &lt;span className=&quot;alloy-editor-icon-h2&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );

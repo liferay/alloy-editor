@@ -213,18 +213,6 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     * @return {Object} The default properties.
-                                     */
-                                    getDefaultProps: function() {
-                                        return {
-                                            label: AlloyEditor.Strings.camera
-                                        };
-                                    },
-                            
-                                    /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
                                      * @method render
@@ -242,7 +230,7 @@
                                                 navigator.msGetUserMedia);
                             
                                             return (
-                                                &lt;button aria-label={this.props.label} className=&quot;alloy-editor-button&quot; data-type=&quot;button-image-camera&quot; disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={this.props.label}&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.camera} className=&quot;alloy-editor-button&quot; data-type=&quot;button-image-camera&quot; disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.camera}&gt;
                                                     &lt;span className=&quot;alloy-editor-icon-camera&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             );
