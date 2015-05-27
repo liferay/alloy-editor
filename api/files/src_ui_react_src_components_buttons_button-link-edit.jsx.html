@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.7</b>
+                        API Docs for Version: <b>0.2.8</b>
                     </p>
                 </li>
             </div>
@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -101,6 +102,9 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
@@ -230,14 +234,14 @@
                             
                                         return (
                                             &lt;div className=&quot;alloy-editor-container-edit-link&quot;&gt;
-                                                &lt;button aria-label=&quot;Cancel&quot; className=&quot;alloy-editor-button&quot; disabled={!this.state.element} onClick={this._removeLink}&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;alloy-editor-button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
                                                     &lt;span className=&quot;alloy-editor-icon-unlink&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                                 &lt;div className=&quot;alloy-editor-container-input&quot;&gt;
-                                                    &lt;input className=&quot;alloy-editor-input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder=&quot;Type or paste link here&quot; ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
-                                                    &lt;button className=&quot;alloy-editor-button alloy-editor-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle}&gt;&lt;/button&gt;
+                                                    &lt;input className=&quot;alloy-editor-input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                    &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;alloy-editor-button alloy-editor-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
                                                 &lt;/div&gt;
-                                                &lt;button aria-label=&quot;Confirm&quot; className=&quot;alloy-editor-button&quot; disabled={!this.state.linkHref} onClick={this._updateLink}&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;alloy-editor-button&quot; disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
                                                     &lt;span className=&quot;alloy-editor-icon-ok&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             &lt;/div&gt;

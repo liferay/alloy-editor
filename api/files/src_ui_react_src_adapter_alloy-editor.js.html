@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.7</b>
+                        API Docs for Version: <b>0.2.8</b>
                     </p>
                 </li>
             </div>
@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -101,6 +102,9 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
@@ -176,7 +180,7 @@
                                 AlloyEditor.OOP.extend(Core, AlloyEditor.Base, {
                                     /**
                                      * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
-                                     * instace, passing it the provided configuration attributes.
+                                     * instance, passing it the provided configuration attributes.
                                      *
                                      * @protected
                                      * @method initializer
@@ -202,7 +206,9 @@
                             
                                         this._editor = editor;
                             
-                                        this._renderUI();
+                                        CKEDITOR.once(&#x27;resourcesLoaded&#x27;, this._renderUI.bind(this));
+                            
+                                        this._loadLanguageFile();
                                     },
                             
                                     /**
@@ -236,6 +242,39 @@
                                     },
                             
                                     /**
+                                     * Detects and load the corresponding language file
+                                     * if AlloyEditor language strings are not already present.
+                                     *
+                                     * @protected
+                                     * @method _loadLanguageFile
+                                     */
+                                    _loadLanguageFile: function() {
+                                        var onLanguageFileLoad = function() {
+                                            CKEDITOR.fire(&#x27;resourcesLoaded&#x27;);
+                                        };
+                            
+                                        if (!window.AlloyEditor.Strings) {
+                                            var languages = [&#x27;af&#x27;, &#x27;ar&#x27;, &#x27;bg&#x27;, &#x27;bn&#x27;, &#x27;bs&#x27;, &#x27;ca&#x27;, &#x27;cs&#x27;, &#x27;cy&#x27;, &#x27;da&#x27;, &#x27;de&#x27;, &#x27;el&#x27;, &#x27;en-au&#x27;, &#x27;en-ca&#x27;, &#x27;en-gb&#x27;, &#x27;en&#x27;, &#x27;eo&#x27;, &#x27;es&#x27;, &#x27;et&#x27;, &#x27;eu&#x27;, &#x27;fa&#x27;, &#x27;fi&#x27;, &#x27;fo&#x27;, &#x27;fr-ca&#x27;, &#x27;fr&#x27;, &#x27;gl&#x27;, &#x27;gu&#x27;, &#x27;he&#x27;, &#x27;hi&#x27;, &#x27;hr&#x27;, &#x27;hu&#x27;, &#x27;id&#x27;, &#x27;is&#x27;, &#x27;it&#x27;, &#x27;ja&#x27;, &#x27;ka&#x27;, &#x27;km&#x27;, &#x27;ko&#x27;, &#x27;ku&#x27;, &#x27;lt&#x27;, &#x27;lv&#x27;, &#x27;mk&#x27;, &#x27;mn&#x27;, &#x27;ms&#x27;, &#x27;nb&#x27;, &#x27;nl&#x27;, &#x27;no&#x27;, &#x27;pl&#x27;, &#x27;pt-br&#x27;, &#x27;pt&#x27;, &#x27;ro&#x27;, &#x27;ru&#x27;, &#x27;si&#x27;, &#x27;sk&#x27;, &#x27;sl&#x27;, &#x27;sq&#x27;, &#x27;sr-latn&#x27;, &#x27;sr&#x27;, &#x27;sv&#x27;, &#x27;th&#x27;, &#x27;tr&#x27;, &#x27;tt&#x27;, &#x27;ug&#x27;, &#x27;uk&#x27;, &#x27;vi&#x27;, &#x27;zh-cn&#x27;, &#x27;zh&#x27;];
+                            
+                                            var userLanguage = navigator.language || navigator.userLanguage || &#x27;en&#x27;;
+                            
+                                            var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
+                                            var lang = parts[1];
+                                            var locale = parts[2];
+                            
+                                            if (languages[lang + &#x27;-&#x27; + locale]) {
+                                                lang = lang + &#x27;-&#x27; + locale;
+                                            } else if (!languages.indexOf(lang)) {
+                                                lang = &#x27;en&#x27;;
+                                            }
+                            
+                                            CKEDITOR.scriptLoader.load(CKEDITOR.getUrl(&#x27;lang/alloy-editor/&#x27; + lang + &#x27;.js&#x27;), onLanguageFileLoad, this);
+                                        } else {
+                                            setTimeout(onLanguageFileLoad.bind(this), 0);
+                                        }
+                                    },
+                            
+                                    /**
                                      * Renders the specified from the user toolbars
                                      *
                                      * @protected
@@ -260,6 +299,8 @@
                                         }), editorUIElement);
                             
                                         this._editorUIElement = editorUIElement;
+                            
+                                        this.get(&#x27;nativeEditor&#x27;).fire(&#x27;uiReady&#x27;);
                                     },
                             
                                     /**
@@ -382,16 +423,6 @@
                                         },
                             
                                         /**
-                                         * Specifies the type of selections, which will be handled by
-                                         * @property selections
-                                         * @type {Object}
-                                         */
-                                        selections: {
-                                            validator: AlloyEditor.Lang.isArray,
-                                            value: AlloyEditor.Selections
-                                        },
-                            
-                                        /**
                                          * The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.
                                          *
                                          * @property srcNode
@@ -436,7 +467,6 @@
                             
                                 AlloyEditor.Core = Core;
                             }());
-                            
                                 </pre>
                             </div>
                         </div>

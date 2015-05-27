@@ -110,6 +110,10 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     .alloy-editor-dropdown .alloy-editor-toolbar-element[class*=alloy-editor-icon-]:before, [class*=alloy-editor-dropdown-] .alloy-editor-toolbar-element[class*=alloy-editor-icon-]:before {
       padding-right: 4px;
       vertical-align: middle; }
+  .alloy-editor-dropdown .alloy-editor-listbox, [class*=alloy-editor-dropdown-] .alloy-editor-listbox {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
   .alloy-editor-dropdown *, [class*=alloy-editor-dropdown-] * {
     display: block \9; }
 
@@ -249,6 +253,16 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     top: -10000px; }
   .alloy-editor-camera .alloy-editor-camera-shoot {
     margin-top: 10px; }
+
+.alloy-editor-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
 
 .alloy-editor-arrow-box:after {
   content: '';

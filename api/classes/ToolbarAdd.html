@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.7</b>
+                        API Docs for Version: <b>0.2.8</b>
                     </p>
                 </li>
             </div>
@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -101,6 +102,9 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
@@ -210,7 +214,15 @@
                             
                                                         </li>
                                                         <li class="index-item method protected inherited">
-                                                            <a href="#method__getDirection">_getDirection</a>
+                                                            <a href="#method__getFocusAction">_getFocusAction</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected inherited">
+                                                            <a href="#method__getFocusDismissAction">_getFocusDismissAction</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected inherited">
+                                                            <a href="#method__getFocusMoveDirection">_getFocusMoveDirection</a>
                             
                                                         </li>
                                                         <li class="index-item method protected">
@@ -298,6 +310,10 @@
                             
                                                         </li>
                                                         <li class="index-item method inherited">
+                                                            <a href="#method_moveFocus">moveFocus</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method inherited">
                                                             <a href="#method_moveToPoint">moveToPoint</a>
                             
                                                         </li>
@@ -332,8 +348,16 @@
                                                             <a href="#property_circular">circular</a>
                             
                                                         </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_config">config</a>
+                            
+                                                        </li>
                                                         <li class="index-item property inherited">
                                                             <a href="#property_descendants">descendants</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_editor">editor</a>
                             
                                                         </li>
                                                         <li class="index-item property inherited">
@@ -351,6 +375,18 @@
                                                         </li>
                                                         <li class="index-item property inherited">
                                                             <a href="#property_keys">keys</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_label">label</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property inherited">
+                                                            <a href="#property_onDismiss">onDismiss</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_selectionData">selectionData</a>
                             
                                                         </li>
                                                 </ul>
@@ -435,7 +471,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l109"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:109</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l138"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:138</code></a>
                                                         </p>
                                                 
                                                 
@@ -459,8 +495,8 @@
                                                         </div>
                                                 
                                                 </div>
-                                                <div id="method__getDirection" class="method item protected inherited">
-                                                    <h3 class="name"><code>_getDirection</code></h3>
+                                                <div id="method__getFocusAction" class="method item protected inherited">
+                                                    <h3 class="name"><code>_getFocusAction</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
@@ -470,6 +506,9 @@
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
+                                                        <span class="returns-inline">
+                                                            <span class="type">Object</span>
+                                                        </span>
                                                 
                                                 
                                                         <span class="flag protected">protected</span>
@@ -480,8 +519,164 @@
                                                 
                                                     <div class="meta">
                                                                 <p>Inherited from
-                                                                <a href="../classes/WidgetFocusManager.html#method__getDirection">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l100"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:100</code></a>
+                                                                <a href="../classes/WidgetFocusManager.html#method__getFocusAction">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l134"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:134</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Returns the action, if any, that a keyboard event in the current focus manager state
+                                                should produce.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">event</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The Keyboard event.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Object</span>:
+                                                                    <p>An action object with type and direction properties.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method__getFocusDismissAction" class="method item protected inherited">
+                                                    <h3 class="name"><code>_getFocusDismissAction</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>event</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>focusMoveDirection</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Object</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method__getFocusDismissAction">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l167"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:167</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p><p>Returns the dismiss action, if any, the focus manager should execute to yield the focus. This
+                                                will happen in any of these scenarios if a dismiss callback has been specified:</p></p>
+                                                <ul>
+                                                <li>A dismiss key has been pressed</li>
+                                                <li>In a non-circular focus manager, when:<ul>
+                                                <li>The active descendant is the first one and a prev key has been pressed.</li>
+                                                <li>The active descendant is the last one and a next key has been pressed.</li>
+                                                </ul>
+                                                </li>
+                                                </ul>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">event</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The Keyboard event.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">focusMoveDirection</code>
+                                                                        <span class="type">Number</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The focus movement direction (if any).</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Object</span>:
+                                                                    <p>A dismiss action with dismiss and direction properties.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method__getFocusMoveDirection" class="method item protected inherited">
+                                                    <h3 class="name"><code>_getFocusMoveDirection</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>event</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Number</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method__getFocusMoveDirection">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l211"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:211</code></a>
                                                         </p>
                                                 
                                                 
@@ -512,6 +707,15 @@
                                                             </ul>
                                                         </div>
                                                 
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Number</span>:
+                                                                    <p>The computed direction of the expected focus movement.</p>
+                                                
+                                                            </div>
+                                                        </div>
                                                 
                                                 </div>
                                                 <div id="method__getToolbarClassName" class="method item protected">
@@ -533,7 +737,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l134"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:134</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l163"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:163</code></a>
                                                         </p>
                                                 
                                                 
@@ -588,7 +792,7 @@
                                                                 WidgetFocusManager
                                                             </a>
                                                             but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l121"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:121</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l237"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:237</code></a>
                                                         </p>
                                                 
                                                 
@@ -662,7 +866,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method__moveFocus">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l150"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:150</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l266"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:266</code></a>
                                                         </p>
                                                 
                                                 
@@ -710,7 +914,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method__refresh">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l180"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:180</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l296"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:296</code></a>
                                                         </p>
                                                 
                                                 
@@ -741,7 +945,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l151"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:151</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l180"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:180</code></a>
                                                         </p>
                                                 
                                                 
@@ -857,7 +1061,7 @@
                                                                 WidgetFocusManager
                                                             </a>
                                                             but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l62"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:62</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l91"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:91</code></a>
                                                         </p>
                                                 
                                                 
@@ -900,7 +1104,7 @@
                                                                 WidgetFocusManager
                                                             </a>
                                                             but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l72"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:72</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l101"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:101</code></a>
                                                         </p>
                                                 
                                                 
@@ -1058,7 +1262,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method_focus">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l60"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:60</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l76"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:76</code></a>
                                                         </p>
                                                 
                                                 
@@ -1139,7 +1343,7 @@
                                                                 WidgetPosition
                                                             </a>
                                                             but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l41"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:41</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l69"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:69</code></a>
                                                         </p>
                                                 
                                                 
@@ -1178,7 +1382,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetDropdown.html#method_getInitialState">WidgetDropdown</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-dropdown.js.html#l22"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-dropdown.js:22</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-dropdown.js.html#l23"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-dropdown.js:23</code></a>
                                                         </p>
                                                 
                                                 
@@ -1390,7 +1594,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#method_handleKey">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l81"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:81</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l97"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:97</code></a>
                                                         </p>
                                                 
                                                 
@@ -1491,7 +1695,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetDropdown.html#method_mergeDropdownProps">WidgetDropdown</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-dropdown.js.html#l33"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-dropdown.js:33</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-dropdown.js.html#l35"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-dropdown.js:35</code></a>
                                                         </p>
                                                 
                                                 
@@ -1633,6 +1837,59 @@
                                                         </div>
                                                 
                                                 </div>
+                                                <div id="method_moveFocus" class="method item inherited">
+                                                    <h3 class="name"><code>moveFocus</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>direction</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method_moveFocus">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l122"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:122</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Moves the focus among descendants in the especified direction.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">direction</code>
+                                                                        <span class="type">Number</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The direction (1 or -1) of the focus movement among descendants.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
                                                 <div id="method_moveToPoint" class="method item inherited">
                                                     <h3 class="name"><code>moveToPoint</code></h3>
                                                 
@@ -1718,7 +1975,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l90"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:90</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l119"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:119</code></a>
                                                         </p>
                                                 
                                                 
@@ -1833,6 +2090,9 @@
                                                                 <li class="arg">
                                                                         <code>itemDropdown</code>
                                                                 </li>
+                                                                <li class="arg">
+                                                                        <code>toggleDirection</code>
+                                                                </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
@@ -1846,7 +2106,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetDropdown.html#method_toggleDropdown">WidgetDropdown</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-dropdown.js.html#l51"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-dropdown.js:51</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-dropdown.js.html#l54"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-dropdown.js:54</code></a>
                                                         </p>
                                                 
                                                 
@@ -1869,6 +2129,17 @@
                                                 
                                                                     <div class="param-description">
                                                                         <p>The widget which requests to toggle its dropdown.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">toggleDirection</code>
+                                                                        <span class="type">Number</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>User movement direction when toggled via keyboard.</p>
                                                 
                                                                     </div>
                                                 
@@ -1924,7 +2195,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#property_circular">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l16"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:16</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l33"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:33</code></a>
                                                         </p>
                                                 
                                                 
@@ -1932,6 +2203,31 @@
                                                 
                                                     <div class="description">
                                                         <p>Indicates if focus should be set to the first/last descendant when the limits are reached.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_config" class="property item">
+                                                    <h3 class="name"><code>config</code></h3>
+                                                    <span class="type">Object</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:21</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The toolbar configuration.</p>
                                                 
                                                     </div>
                                                 
@@ -1949,7 +2245,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#property_descendants">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l23"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:23</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l40"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:40</code></a>
                                                         </p>
                                                 
                                                 
@@ -1957,6 +2253,31 @@
                                                 
                                                     <div class="description">
                                                         <p>String representing the CSS selector used to define the elements that should be handled.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_editor" class="property item">
+                                                    <h3 class="name"><code>editor</code></h3>
+                                                    <span class="type">Object</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l28"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:28</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The editor instance where the component is being used.</p>
                                                 
                                                     </div>
                                                 
@@ -2000,7 +2321,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:21</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l35"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:35</code></a>
                                                         </p>
                                                 
                                                 
@@ -2026,7 +2347,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l31"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:31</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l59"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:59</code></a>
                                                         </p>
                                                 
                                                 
@@ -2052,7 +2373,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetFocusManager.html#property_keys">WidgetFocusManager</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l30"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:30</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l47"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:47</code></a>
                                                         </p>
                                                 
                                                 
@@ -2060,8 +2381,92 @@
                                                 
                                                     <div class="description">
                                                         <p>Object representing the keys used to navigate between descendants. The format for the prop is:
-                                                <code>{next: value, prev: value}</code> where value can be both a number or an array of numbers with the
-                                                allowed keyCodes.</p>
+                                                <code>{dismiss: value, dismissNext: value, dismissPrev: value, next: value, prev: value}</code> where
+                                                value can be both a number or an array of numbers with the allowed keyCodes.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_label" class="property item">
+                                                    <h3 class="name"><code>label</code></h3>
+                                                    <span class="type">String</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l42"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:42</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The label that should be used for accessibility purposes.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_onDismiss" class="property item inherited">
+                                                    <h3 class="name"><code>onDismiss</code></h3>
+                                                    <span class="type">Function</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#property_onDismiss">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:21</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p><p>Callback method to be invoked when the focus manager is to be dismissed. This happens
+                                                in the following scenarios if a dismiss callback has been specified:</p></p>
+                                                <ul>
+                                                <li>A dismiss key has been pressed</li>
+                                                <li>In a non-circular focus manager, when:<ul>
+                                                <li>The active descendant is the first one and a prev key has been pressed.</li>
+                                                <li>The active descendant is the last one and a next key has been pressed.</li>
+                                                </ul>
+                                                </li>
+                                                </ul>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_selectionData" class="property item">
+                                                    <h3 class="name"><code>selectionData</code></h3>
+                                                    <span class="type">Object</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-add.jsx.html#l49"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-add.jsx:49</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The data, returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></p>
                                                 
                                                     </div>
                                                 

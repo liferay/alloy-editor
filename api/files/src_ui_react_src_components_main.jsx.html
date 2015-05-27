@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.7</b>
+                        API Docs for Version: <b>0.2.8</b>
                     </p>
                 </li>
             </div>
@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -101,6 +102,9 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
@@ -173,6 +177,40 @@
                                 var UI = React.createClass({
                                     mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
                             
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * Localized messages for live aria updates. Should include the following messages:
+                                         * - noToolbar: Notification for no available toolbar in the editor.
+                                         * - oneToolbar: Notification for just one available toolbar in the editor.
+                                         * - manyToolbars: Notification for more than one available toolbar in the editor.
+                                         *
+                                         * @property {Object} ariaUpdates
+                                         */
+                                        ariaUpdates: React.PropTypes.object,
+                            
+                                        /**
+                                         * The editor instance where the component is being used.
+                                         *
+                                         * @property {Object} editor
+                                         */
+                                        editor: React.PropTypes.object.isRequired,
+                            
+                                        /**
+                                         * The delay (ms), after which key or mouse events will be processed.
+                                         *
+                                         * @property {Number} eventsDelay
+                                         */
+                                        eventsDelay: React.PropTypes.number,
+                            
+                                        /**
+                                         * The toolbars configuration for this editor instance
+                                         *
+                                         * @property {Object} toolbars
+                                         */
+                                        toolbars: React.PropTypes.object.isRequired
+                                    },
+                            
                                     /**
                                      * Lifecycle. Invoked once before the component is mounted.
                                      *
@@ -236,6 +274,80 @@
                                     },
                             
                                     /**
+                                     * Lifecycle. Invoked immediately after the component&#x27;s updates are flushed to the DOM.
+                                     * Fires &#x27;ariaUpdate&#x27; event passing ARIA related messages.
+                                     *
+                                     * @method componentDidUpdate
+                                     */
+                                    componentDidUpdate: function (prevProps, prevState) {
+                                        var domNode = React.findDOMNode(this);
+                            
+                                        if (domNode) {
+                                            this.props.editor.get(&#x27;nativeEditor&#x27;).fire(&#x27;ariaUpdate&#x27;, {
+                                                message: this._getAvailableToolbarsMessage(domNode)
+                                            });
+                                        }
+                                    },
+                            
+                                    _getAriaUpdateTemplate: function(ariaUpdate) {
+                                        if (!this._ariaUpdateTemplates) {
+                                            this._ariaUpdateTemplates = {};
+                                        }
+                            
+                                        if (!this._ariaUpdateTemplates[ariaUpdate]) {
+                                            this._ariaUpdateTemplates[ariaUpdate] = new CKEDITOR.template(this._getAriaUpdates()[ariaUpdate]);
+                                        }
+                            
+                                        return this._ariaUpdateTemplates[ariaUpdate];
+                                    },
+                            
+                                    /**
+                                     * Returns the templates for ARIA messages.
+                                     *
+                                     * @protected
+                                     * @method _getAriaUpdates
+                                     * @return {Object} ARIA relates messages. Default:
+                                     * {
+                                     *      noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
+                                     *      oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
+                                     *      manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
+                                     *  }
+                                     */
+                                    _getAriaUpdates: function() {
+                                        return this.props.ariaUpdates || {
+                                            noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
+                                            oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
+                                            manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
+                                        };
+                                    },
+                            
+                                    /**
+                                     * Returns an ARIA message which represents the number of currently available toolbars.
+                                     *
+                                     * @method _getAvailableToolbarsMessage
+                                     * @protected
+                                     * @param {CKEDITOR.dom.element} domNode The DOM node from which the available toolbars will be retrieved.
+                                     * @return {String} The ARIA message for the number of available toolbars
+                                     */
+                                    _getAvailableToolbarsMessage: function(domNode) {
+                                        var toolbarsNodeList = domNode.querySelectorAll(&#x27;[role=&quot;toolbar&quot;]&#x27;);
+                            
+                                        if (!toolbarsNodeList.length) {
+                                            return this._getAriaUpdates().noToolbar;
+                                        } else {
+                                            var toolbarNames = Array.prototype.slice.call(toolbarsNodeList).map(function(toolbar) {
+                                                return toolbar.getAttribute(&#x27;aria-label&#x27;);
+                                            });
+                            
+                                            var ariaUpdate = toolbarNames.length === 1 ? &#x27;oneToolbar&#x27; : &#x27;manyToolbars&#x27;;
+                            
+                                            return this._getAriaUpdateTemplate(ariaUpdate).output({
+                                                toolbars: toolbarNames.join(&#x27;,&#x27;).replace(/,([^,]*)$/, &#x27; and &#x27; + &#x27;$1&#x27;)
+                                            });
+                                        }
+                                    },
+                            
+                                    /**
                                      * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
                                      *
                                      * @method componentWillUnmount
@@ -273,9 +385,8 @@
                                                 editor: this.props.editor,
                                                 editorEvent: this.state.editorEvent,
                                                 key: toolbar.key,
-                                                selectionData: this.state.selectionData,
-                                                selections: this.props.selections,
-                                                trigger: this.state.trigger
+                                                onDismiss: this._onDismissToolbarFocus,
+                                                selectionData: this.state.selectionData
                                             }, toolbar.key);
                             
                                             return React.createElement(toolbar, props);
@@ -302,9 +413,20 @@
                             
                                         this.setState({
                                             itemExclusive: null,
-                                            selectionData: editor.getSelectionData(),
-                                            trigger: event.data
+                                            selectionData: editor.getSelectionData()
                                         });
+                                    },
+                            
+                                    /**
+                                     * Executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+                                     *
+                                     * @protected
+                                     * @method _onDismissToolbarFocus
+                                     */
+                                    _onDismissToolbarFocus: function() {
+                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                                        editor.focus();
                                     },
                             
                                     /**
@@ -320,8 +442,7 @@
                                             editorEvent: event,
                                             hidden: false,
                                             itemExclusive: null,
-                                            selectionData: event.data.selectionData,
-                                            trigger: null
+                                            selectionData: event.data.selectionData
                                         });
                                     },
                             
