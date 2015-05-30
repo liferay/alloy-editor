@@ -339,13 +339,13 @@ YUI.add('alloy-editor', function(Y) {
              * make AlloyEditor to work properly.
              *
              * @attribute extraPlugins
-             * @default 'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader'
+             * @default 'uicore,selectionregion,dropimages,pasteimages,placeholder,linktooltip,uiloader'
              * @writeOnce
              * @type {String}
              */
             extraPlugins: {
                 validator: Lang.isString,
-                value: 'uicore,selectionregion,dropimages,placeholder,linktooltip,uiloader',
+                value: 'uicore,selectionregion,dropimages,pasteimages,placeholder,linktooltip,uiloader',
                 writeOnce: true
             },
 
