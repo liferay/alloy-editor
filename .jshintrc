@@ -25,7 +25,7 @@
   "expr": false,
   "predef": ["React", "global", "YUI", "CKEDITOR"],
   "unused": true,
-  "indent": 2,
+  "indent": 4,
   "funcscope": false,
   "globalstrict": false,
   "iterator": false,

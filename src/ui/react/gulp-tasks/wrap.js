@@ -13,7 +13,7 @@ var reactDir = path.join(rootDir, 'src', 'ui', 'react');
 var distFolder = path.join(rootDir, 'dist');
 
 var pkg = require(path.join(rootDir, 'package.json'));
-var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
+var editorDistFolder = path.join(distFolder, 'alloy-editor');
 
 gulp.task('wrap-alloy-editor', function () {
 	return gulp.src(path.join(reactDir, 'template/alloy-editor.template'))

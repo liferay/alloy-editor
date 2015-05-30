@@ -11,7 +11,7 @@ var reactDir = path.join(rootDir, 'src', 'ui', 'react');
 var pkg = require(path.join(rootDir, 'package.json'));
 
 var distFolder = path.join(rootDir, 'dist');
-var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
+var editorDistFolder = path.join(distFolder, 'alloy-editor');
 
 var fontName = 'alloyeditor';
 

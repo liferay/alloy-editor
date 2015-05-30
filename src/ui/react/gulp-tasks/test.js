@@ -10,10 +10,9 @@ var runSequence = require('run-sequence');
 
 var rootDir = path.join(__dirname, '..', '..', '..', '..');
 var reactDir = path.join(rootDir, 'src', 'ui', 'react');
-var pkg = require(path.join(rootDir, 'package.json'));
 
 var distFolder = path.join(rootDir, 'dist');
-var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
+var editorDistFolder = path.join(distFolder, 'alloy-editor');
 
 var srcFiles = require('../_src.js');
 var languageFiles = require('../_languages.js');

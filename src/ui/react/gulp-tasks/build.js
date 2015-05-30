@@ -22,7 +22,7 @@ var pkg = require(path.join(rootDir, 'package.json'));
 
 var apiFolder = path.join(rootDir, 'api');
 var distFolder = path.join(rootDir, 'dist');
-var editorDistFolder = path.join(distFolder, 'alloy-editor-' + pkg.version, 'alloy-editor');
+var editorDistFolder = path.join(distFolder, 'alloy-editor');
 
 var srcFiles = require('../_src.js');
 
@@ -73,7 +73,6 @@ gulp.task('release', function(callback) {
             'create-alloy-editor-no-react-min'
         ],
         'build-demo',
-        'create-zip',
         callback
     );
 });
@@ -120,7 +119,7 @@ gulp.task('build-demo', function() {
         .pipe(template({
             resources: fs.readFileSync(path.join(reactDir, 'template', templateHead))
         }))
-        .pipe(gulp.dest(path.join(distFolder, 'alloy-editor-' + pkg.version)));
+        .pipe(gulp.dest(path.join(distFolder)));
 });
 
 gulp.task('build-js', function(callback) {
@@ -215,7 +214,7 @@ gulp.task('create-alloy-editor-core', function() {
     .pipe(gulp.dest(editorDistFolder));
 });
 
-gulp.task('create-zip', function() {
+gulp.task('release:zip', ['release'], function() {
     return gulp.src(path.join(distFolder, '/**'))
         .pipe(zip('alloy-editor-' + pkg.version + '.zip'))
         .pipe(gulp.dest(distFolder));

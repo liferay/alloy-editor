@@ -2,7 +2,7 @@
 
 'use strict';
 
-var alloyEditorDir = 'dist/alloy-editor-*/alloy-editor/';
+var alloyEditorDir = 'dist/alloy-editor/';
 
 var argv = require('yargs').argv;
 var path = require('path');
