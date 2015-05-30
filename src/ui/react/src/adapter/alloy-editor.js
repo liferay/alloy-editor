@@ -198,13 +198,13 @@
              * make AlloyEditor to work properly.
              *
              * @property extraPlugins
-             * @default 'uicore,selectionregion,dragresize,dropimages,pasteimages,placeholder,tabletools,tableresize,autolink'
+             * @default 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink'
              * @writeOnce
              * @type {String}
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'uicore,selectionregion,dragresize,dropimages,pasteimages,placeholder,tabletools,tableresize,autolink',
+                value: 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink',
                 writeOnce: true
             },
 

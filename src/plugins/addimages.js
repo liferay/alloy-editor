@@ -3,29 +3,29 @@
 
     var isIE = CKEDITOR.env.ie;
 
-    if (CKEDITOR.plugins.get('dropimages')) {
+    if (CKEDITOR.plugins.get('addimages')) {
         return;
     }
 
     /**
      * CKEditor plugin which allows Drag&Drop of images directly into the editable area. The image will be encoded
-     * as Data URI. An event `imageDrop` will be fired with the inserted element into the editable area.
+     * as Data URI. An event `imageAdd` will be fired with the inserted element into the editable area.
      *
-     * @class CKEDITOR.plugins.dropimages
+     * @class CKEDITOR.plugins.addimages
      */
 
     /**
      * Fired when an image is being added to the editor successfully.
      *
-     * @event imageDrop
+     * @event imageAdd
      * @param {CKEDITOR.dom.element} el The created image with src as Data URI
      */
 
     CKEDITOR.plugins.add(
-        'dropimages', {
+        'addimages', {
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers a 'dragenter', 'dragover' and 'drop' events on the editing area.
+             * The function registers a 'dragenter', 'dragover', 'drop' and `paste` events on the editing area.
              *
              * @method init
              * @param {Object} editor The current editor instance
@@ -45,12 +45,16 @@
                     editable.attachListener(editable, 'drop', this._onDragDrop, this, {
                         editor: editor
                     });
+
+                    editable.attachListener(editable, 'paste', this._onPaste, this, {
+                        editor: editor
+                    });
                 }.bind(this));
             },
 
             /**
              * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
-             * processing to {{#crossLink "CKEDITOR.plugins.dropimages/_processFile:method"}}{{/crossLink}}
+             * processing to {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}}
              *
              * @protected
              * @method _handleFiles
@@ -98,7 +102,7 @@
             /**
              * Handles drag drop event. The function will create selection from the current points and
              * will send a list of files to be processed to
-             * {{#crossLink "CKEDITOR.plugins.dropimages/_handleFiles:method"}}{{/crossLink}}
+             * {{#crossLink "CKEDITOR.plugins.addimages/_handleFiles:method"}}{{/crossLink}}
              *
              * @protected
              * @method _onDragDrop
@@ -117,6 +121,26 @@
             },
 
             /**
+             * Checks if the pasted data is image and passes it to
+             * {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}} for processing.
+             *
+             * @method _onPaste
+             * @protected
+             * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
+             */
+            _onPaste: function(event) {
+                if (event.data.$.clipboardData) {
+                    var pastedData = event.data.$.clipboardData.items[0];
+
+                    if (pastedData.type.indexOf('image') === 0) {
+                        var imageFile = pastedData.getAsFile();
+
+                        this._processFile(imageFile, event.listenerData.editor);
+                    }
+                }
+            },
+
+            /**
              * Prevents a native event.
              *
              * @protected
@@ -132,7 +156,7 @@
 
             /**
              * Processes an image file. The function creates an img element and sets as source
-             * a Data URI, then fires an 'imageDrop' event via CKEditor's event system.
+             * a Data URI, then fires an 'imageAdd' event via CKEditor's event system.
              *
              * @protected
              * @method _preventEvent
@@ -153,7 +177,7 @@
                         file: file
                     };
 
-                    editor.fire('imageDrop', imageData);
+                    editor.fire('imageAdd', imageData);
                 });
 
                 reader.readAsDataURL(file);
