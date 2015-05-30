@@ -75,9 +75,11 @@
         },
 
         /**
-         * On input change, reads the chosen file and creates an img element with src as Data URI.
-         * Then, fires an {{#crossLink "ButtonImage/imageadd:event"}}{{/crossLink}} via CKEditor's
-         * message system.
+         * On input change, reads the chosen file and creates an img element with src the image data as Data URI.
+         * Then, fires an {{#crossLink "ButtonImage/imageAdd:event"}}{{/crossLink}} via CKEditor's
+         * message system. The passed params will be:
+         * - `el` - the created img element
+         * - `file` - the original image file from the input element
          *
          * @protected
          * @method _onInputChange
@@ -111,8 +113,8 @@
         /**
          * Fired when an image file is added as an element to the editor.
          *
-         * @event imageadd
-         * @param {CKEDITOR.dom.element} el The created img element in editor.
+         * @event imageAdd
+         * @param {CKEDITOR.dom.element} el The created image with src as Data URI.
          */
     });
 

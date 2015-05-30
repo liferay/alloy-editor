@@ -32,8 +32,8 @@
             if (!isWebkit) {
                 return;
             }
-            //onDomReady handler
-            editor.on('contentDom', function(evt) {
+
+            editor.once('contentDom', function(evt) {
                 init(editor);
             });
         }

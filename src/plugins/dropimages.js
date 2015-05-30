@@ -8,8 +8,8 @@
     }
 
     /**
-     * CKEditor plugin which allows Drag&Drop of images directly into the edit area. The image will be encoded
-     * as Data URI.
+     * CKEditor plugin which allows Drag&Drop of images directly into the editable area. The image will be encoded
+     * as Data URI. An event `imageDrop` will be fired with the inserted element into the editable area.
      *
      * @class CKEDITOR.plugins.dropimages
      */
@@ -18,7 +18,7 @@
      * Fired when an image is being added to the editor successfully.
      *
      * @event imageDrop
-     * @param {CKEDITOR.dom.element} el The created image with src, created as Data URI
+     * @param {CKEDITOR.dom.element} el The created image with src as Data URI
      */
 
     CKEDITOR.plugins.add(
@@ -31,21 +31,21 @@
              * @param {Object} editor The current editor instance
              */
             init: function(editor) {
-                var editable;
+                editor.once('contentDom', function() {
+                    var editable = editor.editable();
 
-                editable = editor.editable(editor.element.$);
+                    editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
+                        editor: editor
+                    });
 
-                editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
-                    editor: editor
-                });
+                    editable.attachListener(editable, 'dragover', this._onDragOver, this, {
+                        editor: editor
+                    });
 
-                editable.attachListener(editable, 'dragover', this._onDragOver, this, {
-                    editor: editor
-                });
-
-                editable.attachListener(editable, 'drop', this._onDragDrop, this, {
-                    editor: editor
-                });
+                    editable.attachListener(editable, 'drop', this._onDragDrop, this, {
+                        editor: editor
+                    });
+                }.bind(this));
             },
 
             /**
@@ -58,15 +58,10 @@
              * @param {Object} editor The current editor instance
              */
             _handleFiles: function(files, editor) {
-                var i,
-                    imageType,
-                    file;
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
 
-                for (i = 0; i < files.length; i++) {
-                    file = files[i];
-                    imageType = /image.*/;
-
-                    if (file.type.match(imageType)) {
+                    if (file.type.indexOf('image') === 0) {
                         this._processFile(file, editor);
                     }
                 }
@@ -110,14 +105,11 @@
              * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
              */
             _onDragDrop: function(event) {
-                var editor,
-                    nativeEvent;
-
-                nativeEvent = event.data.$;
+                var nativeEvent = event.data.$;
 
                 new CKEDITOR.dom.event(nativeEvent).preventDefault();
 
-                editor = event.listenerData.editor;
+                var editor = event.listenerData.editor;
 
                 event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
 
@@ -139,8 +131,8 @@
             },
 
             /**
-             * Processes an image file. The function creates an element and sets a source
-             * a Data URI, then fires an event 'imageDrop' via CKEditor event system.
+             * Processes an image file. The function creates an img element and sets as source
+             * a Data URI, then fires an 'imageDrop' event via CKEditor's event system.
              *
              * @protected
              * @method _preventEvent
@@ -150,17 +142,13 @@
                 var reader = new FileReader();
 
                 reader.addEventListener('loadend', function() {
-                    var bin,
-                        el,
-                        imageData;
+                    var bin = reader.result;
 
-                    bin = reader.result;
-
-                    el = CKEDITOR.dom.element.createFromHtml('<img src="' + bin + '">');
+                    var el = CKEDITOR.dom.element.createFromHtml('<img src="' + bin + '">');
 
                     editor.insertElement(el);
 
-                    imageData = {
+                    var imageData = {
                         el: el,
                         file: file
                     };

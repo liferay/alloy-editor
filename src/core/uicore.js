@@ -104,7 +104,7 @@
                     handleAria();
                 });
 
-                editor.on('contentDom', function() {
+                editor.once('contentDom', function() {
                     var editable = editor.editable();
 
                     editable.attachListener(editable, 'mouseup', handleUI);
