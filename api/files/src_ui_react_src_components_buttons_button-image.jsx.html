@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.2.9</b>
+                        API Docs for Version: <b>0.3.0</b>
                     </p>
                 </li>
             </div>
@@ -103,7 +103,6 @@
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.dropimages.html">CKEDITOR.plugins.dropimages</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
@@ -240,9 +239,11 @@
                                     },
                             
                                     /**
-                                     * On input change, reads the chosen file and creates an img element with src as Data URI.
-                                     * Then, fires an {{#crossLink &quot;ButtonImage/imageadd:event&quot;}}{{/crossLink}} via CKEditor&#x27;s
-                                     * message system.
+                                     * On input change, reads the chosen file and creates an img element with src the image data as Data URI.
+                                     * Then, fires an {{#crossLink &quot;ButtonImage/imageAdd:event&quot;}}{{/crossLink}} via CKEditor&#x27;s
+                                     * message system. The passed params will be:
+                                     * - &#x60;el&#x60; - the created img element
+                                     * - &#x60;file&#x60; - the original image file from the input element
                                      *
                                      * @protected
                                      * @method _onInputChange
@@ -276,8 +277,8 @@
                                     /**
                                      * Fired when an image file is added as an element to the editor.
                                      *
-                                     * @event imageadd
-                                     * @param {CKEDITOR.dom.element} el The created img element in editor.
+                                     * @event imageAdd
+                                     * @param {CKEDITOR.dom.element} el The created image with src as Data URI.
                                      */
                                 });
                             
