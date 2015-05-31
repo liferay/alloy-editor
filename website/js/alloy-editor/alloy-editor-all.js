@@ -20218,6 +20218,14 @@ module.exports = warning;
 
 },{"114":114}]},{},[1])(1)
 });
+/**
+ * AlloyEditor, Copyright 2014-2015, Liferay, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the GNU LGPL-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 CKEDITOR.disableAutoInline = true;
 
 (function() {
@@ -21082,7 +21090,7 @@ CKEDITOR.disableAutoInline = true;
                     handleAria();
                 });
 
-                editor.on('contentDom', function() {
+                editor.once('contentDom', function() {
                     var editable = editor.editable();
 
                     editable.attachListener(editable, 'mouseup', handleUI);
@@ -21116,6 +21124,193 @@ CKEDITOR.disableAutoInline = true;
                 document.body.appendChild(statusElement);
 
                 return statusElement;
+            }
+        }
+    );
+}());
+(function() {
+    'use strict';
+
+    var isIE = CKEDITOR.env.ie;
+
+    if (CKEDITOR.plugins.get('addimages')) {
+        return;
+    }
+
+    /**
+     * CKEditor plugin which allows Drag&Drop of images directly into the editable area. The image will be encoded
+     * as Data URI. An event `imageAdd` will be fired with the inserted element into the editable area.
+     *
+     * @class CKEDITOR.plugins.addimages
+     */
+
+    /**
+     * Fired when an image is being added to the editor successfully.
+     *
+     * @event imageAdd
+     * @param {CKEDITOR.dom.element} el The created image with src as Data URI
+     */
+
+    CKEDITOR.plugins.add(
+        'addimages', {
+            /**
+             * Initialization of the plugin, part of CKEditor plugin lifecycle.
+             * The function registers a 'dragenter', 'dragover', 'drop' and `paste` events on the editing area.
+             *
+             * @method init
+             * @param {Object} editor The current editor instance
+             */
+            init: function(editor) {
+                editor.once('contentDom', function() {
+                    var editable = editor.editable();
+
+                    editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
+                        editor: editor
+                    });
+
+                    editable.attachListener(editable, 'dragover', this._onDragOver, this, {
+                        editor: editor
+                    });
+
+                    editable.attachListener(editable, 'drop', this._onDragDrop, this, {
+                        editor: editor
+                    });
+
+                    editable.attachListener(editable, 'paste', this._onPaste, this, {
+                        editor: editor
+                    });
+                }.bind(this));
+            },
+
+            /**
+             * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
+             * processing to {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}}
+             *
+             * @protected
+             * @method _handleFiles
+             * @param {Array} files Array of dropped files. Only the images from this list will be processed.
+             * @param {Object} editor The current editor instance
+             */
+            _handleFiles: function(files, editor) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+
+                    if (file.type.indexOf('image') === 0) {
+                        this._processFile(file, editor);
+                    }
+                }
+
+                return false;
+            },
+
+            /**
+             * Handles drag enter event. In case of IE, this function will prevent the event.
+             *
+             * @protected
+             * @method _onDragEnter
+             * @param {DOM event} event dragenter event, as received natively from CKEditor
+             */
+            _onDragEnter: function(event) {
+                if (isIE) {
+                    this._preventEvent(event);
+                }
+            },
+
+            /**
+             * Handles drag over event. In case of IE, this function will prevent the event.
+             *
+             * @protected
+             * @method _onDragOver
+             * @param {DOM event} event dragover event, as received natively from CKEditor
+             */
+            _onDragOver: function(event) {
+                if (isIE) {
+                    this._preventEvent(event);
+                }
+            },
+
+            /**
+             * Handles drag drop event. The function will create selection from the current points and
+             * will send a list of files to be processed to
+             * {{#crossLink "CKEDITOR.plugins.addimages/_handleFiles:method"}}{{/crossLink}}
+             *
+             * @protected
+             * @method _onDragDrop
+             * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
+             */
+            _onDragDrop: function(event) {
+                var nativeEvent = event.data.$;
+
+                new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+                var editor = event.listenerData.editor;
+
+                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                this._handleFiles(nativeEvent.dataTransfer.files, editor);
+            },
+
+            /**
+             * Checks if the pasted data is image and passes it to
+             * {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}} for processing.
+             *
+             * @method _onPaste
+             * @protected
+             * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
+             */
+            _onPaste: function(event) {
+                if (event.data.$.clipboardData) {
+                    var pastedData = event.data.$.clipboardData.items[0];
+
+                    if (pastedData.type.indexOf('image') === 0) {
+                        var imageFile = pastedData.getAsFile();
+
+                        this._processFile(imageFile, event.listenerData.editor);
+                    }
+                }
+            },
+
+            /**
+             * Prevents a native event.
+             *
+             * @protected
+             * @method _preventEvent
+             * @param {DOM event} event The event to be prevented.
+             */
+            _preventEvent: function(event) {
+                event = new CKEDITOR.dom.event(event.data.$);
+
+                event.preventDefault();
+                event.stopPropagation();
+            },
+
+            /**
+             * Processes an image file. The function creates an img element and sets as source
+             * a Data URI, then fires an 'imageAdd' event via CKEditor's event system.
+             *
+             * @protected
+             * @method _preventEvent
+             * @param {DOM event} event The event to be prevented.
+             */
+            _processFile: function(file, editor) {
+                var reader = new FileReader();
+
+                reader.addEventListener('loadend', function() {
+                    var bin = reader.result;
+
+                    var el = CKEDITOR.dom.element.createFromHtml('<img src="' + bin + '">');
+
+                    editor.insertElement(el);
+
+                    var imageData = {
+                        el: el,
+                        file: file
+                    };
+
+                    editor.fire('imageAdd', imageData);
+                });
+
+                reader.readAsDataURL(file);
             }
         }
     );
@@ -21427,8 +21622,8 @@ CKEDITOR.disableAutoInline = true;
             if (!isWebkit) {
                 return;
             }
-            //onDomReady handler
-            editor.on('contentDom', function(evt) {
+
+            editor.once('contentDom', function(evt) {
                 init(editor);
             });
         }
@@ -21813,174 +22008,79 @@ CKEDITOR.disableAutoInline = true;
 (function() {
     'use strict';
 
-    var isIE = CKEDITOR.env.ie;
-
-    if (CKEDITOR.plugins.get('dropimages')) {
+    if (CKEDITOR.plugins.get('pasteimages')) {
         return;
     }
 
     /**
-     * CKEditor plugin which allows Drag&Drop of images directly into the edit area. The image will be encoded
-     * as Data URI.
+     * CKEditor plugin which allows pasting images directly into the editable area. The image will be encoded
+     * as Data URI. An event `imageAdd` will be fired with the inserted element into the editable area.
      *
-     * @class CKEDITOR.plugins.dropimages
+     * @class CKEDITOR.plugins.pasteimages
      */
 
     /**
      * Fired when an image is being added to the editor successfully.
      *
-     * @event imageDrop
-     * @param {CKEDITOR.dom.element} el The created image with src, created as Data URI
+     * @event imageAdd
+     * @param {CKEDITOR.dom.element} el The created image with src as Data URI
      */
 
     CKEDITOR.plugins.add(
-        'dropimages', {
+        'pasteimages', {
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers a 'dragenter', 'dragover' and 'drop' events on the editing area.
+             * The function registers a 'paste' event on the editing area.
              *
              * @method init
              * @param {Object} editor The current editor instance
              */
             init: function(editor) {
-                var editable;
+                editor.once('contentDom', function() {
+                    var editable = editor.editable();
 
-                editable = editor.editable(editor.element.$);
-
-                editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
-                    editor: editor
-                });
-
-                editable.attachListener(editable, 'dragover', this._onDragOver, this, {
-                    editor: editor
-                });
-
-                editable.attachListener(editable, 'drop', this._onDragDrop, this, {
-                    editor: editor
-                });
+                    editable.attachListener(editable, 'paste', this._onPaste, this, {
+                        editor: editor
+                    });
+                }.bind(this));
             },
 
             /**
-             * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
-             * processing to {{#crossLink "CKEDITOR.plugins.dropimages/_processFile:method"}}{{/crossLink}}
+             * The function creates an img element with src the image data as Data URI.
+             * Then, it fires an 'imageAdd' event via CKEditor's event system. The passed
+             * params will be:
+             * - `el` - the created img element
+             * - `file` - the original pasted data
              *
+             * @method _onPaste
              * @protected
-             * @method _handleFiles
-             * @param {Array} files Array of dropped files. Only the images from this list will be processed.
-             * @param {Object} editor The current editor instance
+             * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
              */
-            _handleFiles: function(files, editor) {
-                var i,
-                    imageType,
-                    file;
+            _onPaste: function(event) {
+                if (event.data.$.clipboardData) {
+                    var pastedData = event.data.$.clipboardData.items[0];
+                    var editor = event.listenerData.editor;
 
-                for (i = 0; i < files.length; i++) {
-                    file = files[i];
-                    imageType = /image.*/;
+                    if (pastedData.type.indexOf('image') === 0) {
+                        var reader = new FileReader();
+                        var imageFile = pastedData.getAsFile();
 
-                    if (file.type.match(imageType)) {
-                        this._processFile(file, editor);
+                        reader.onload = function(event) {
+                            var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
+
+                            editor.insertElement(el);
+
+                            var imageData = {
+                                el: el,
+                                file: imageFile
+                            };
+
+                            editor.fire('imageAdd', imageData);
+                        }.bind(this);
+
+                        reader.readAsDataURL(imageFile);
                     }
                 }
-
-                return false;
-            },
-
-            /**
-             * Handles drag enter event. In case of IE, this function will prevent the event.
-             *
-             * @protected
-             * @method _onDragEnter
-             * @param {DOM event} event dragenter event, as received natively from CKEditor
-             */
-            _onDragEnter: function(event) {
-                if (isIE) {
-                    this._preventEvent(event);
-                }
-            },
-
-            /**
-             * Handles drag over event. In case of IE, this function will prevent the event.
-             *
-             * @protected
-             * @method _onDragOver
-             * @param {DOM event} event dragover event, as received natively from CKEditor
-             */
-            _onDragOver: function(event) {
-                if (isIE) {
-                    this._preventEvent(event);
-                }
-            },
-
-            /**
-             * Handles drag drop event. The function will create selection from the current points and
-             * will send a list of files to be processed to
-             * {{#crossLink "CKEDITOR.plugins.dropimages/_handleFiles:method"}}{{/crossLink}}
-             *
-             * @protected
-             * @method _onDragDrop
-             * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
-             */
-            _onDragDrop: function(event) {
-                var editor,
-                    nativeEvent;
-
-                nativeEvent = event.data.$;
-
-                new CKEDITOR.dom.event(nativeEvent).preventDefault();
-
-                editor = event.listenerData.editor;
-
-                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
-
-                this._handleFiles(nativeEvent.dataTransfer.files, editor);
-            },
-
-            /**
-             * Prevents a native event.
-             *
-             * @protected
-             * @method _preventEvent
-             * @param {DOM event} event The event to be prevented.
-             */
-            _preventEvent: function(event) {
-                event = new CKEDITOR.dom.event(event.data.$);
-
-                event.preventDefault();
-                event.stopPropagation();
-            },
-
-            /**
-             * Processes an image file. The function creates an element and sets a source
-             * a Data URI, then fires an event 'imageDrop' via CKEditor event system.
-             *
-             * @protected
-             * @method _preventEvent
-             * @param {DOM event} event The event to be prevented.
-             */
-            _processFile: function(file, editor) {
-                var reader = new FileReader();
-
-                reader.addEventListener('loadend', function() {
-                    var bin,
-                        el,
-                        imageData;
-
-                    bin = reader.result;
-
-                    el = CKEDITOR.dom.element.createFromHtml('<img src="' + bin + '">');
-
-                    editor.insertElement(el);
-
-                    imageData = {
-                        el: el,
-                        file: file
-                    };
-
-                    editor.fire('imageDrop', imageData);
-                });
-
-                reader.readAsDataURL(file);
             }
         }
     );
@@ -24230,13 +24330,13 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * make AlloyEditor to work properly.
              *
              * @property extraPlugins
-             * @default 'uicore,selectionregion,dragresize,dropimages,placeholder,tabletools,tableresize,autolink'
+             * @default 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink'
              * @writeOnce
              * @type {String}
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'uicore,selectionregion,dragresize,dropimages,placeholder,tabletools,tableresize,autolink',
+                value: 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink',
                 writeOnce: true
             },
 
@@ -26598,9 +26698,11 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         },
 
         /**
-         * On input change, reads the chosen file and creates an img element with src as Data URI.
-         * Then, fires an {{#crossLink "ButtonImage/imageadd:event"}}{{/crossLink}} via CKEditor's
-         * message system.
+         * On input change, reads the chosen file and creates an img element with src the image data as Data URI.
+         * Then, fires an {{#crossLink "ButtonImage/imageAdd:event"}}{{/crossLink}} via CKEditor's
+         * message system. The passed params will be:
+         * - `el` - the created img element
+         * - `file` - the original image file from the input element
          *
          * @protected
          * @method _onInputChange
@@ -26634,8 +26736,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         /**
          * Fired when an image file is added as an element to the editor.
          *
-         * @event imageadd
-         * @param {CKEDITOR.dom.element} el The created img element in editor.
+         * @event imageAdd
+         * @param {CKEDITOR.dom.element} el The created image with src as Data URI.
          */
     });
 

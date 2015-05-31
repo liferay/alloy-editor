@@ -49,7 +49,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "CKEDITOR.Link",
         "CKEDITOR.Table",
         "CKEDITOR.plugins.autolink",
-        "CKEDITOR.plugins.dropimages",
         "CKEDITOR.plugins.placeholder",
         "CKEDITOR.plugins.selectionregion",
         "CKEDITOR.plugins.uicore",
