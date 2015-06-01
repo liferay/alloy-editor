@@ -12,16 +12,16 @@ Works on IE9+, Chrome, Firefox Safari and Opera.
 
 ## Features
 
-* smart toolbars appear right near the selected text and offer different functions based on context
-* easily add your own buttons (see the "marquee" example in [the demo](http://alloyeditor.com/demo/))
-* paste images from clipboard, or drag&drop them from another app
-* insert images from the device's camera!
-* paste rich text from any web page and preserve its formatting
-* the full styling power of CKEditor...
+* Smart toolbars appear right near the selected text and offer different functionality based on context
+* Easily add your own buttons (see the "marquee" example in [the demo](http://alloyeditor.com/demo/))
+* Paste images from clipboard, or Drag&Drop them from another application
+* Insert images from the device's camera!
+* Paste rich text from any web page and preserve its formatting
+* The full styling power of CKEditor...
 * ...with a much more modern UI
-* core is fully separated from the UI
-* the example UI is built with React
-* plugin architecture
+* The core is fully separated from the UI
+* The example UI is built with React
+* Plugin architecture
 
 ## Documentation
 
