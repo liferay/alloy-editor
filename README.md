@@ -3,7 +3,7 @@ Alloy Editor
 
 Alloy Editor is a modern WYSIWYG editor built on top of CKEditor, designed to create modern and gorgeous web content.
 
-Works on IE9+, Chrome, Firefox Safari and Opera.
+Works on IE9+, Chrome, Firefox and Safari.
 
 ## Demo
 
