@@ -341,16 +341,23 @@
 
     <section class="guide-content">
       <h4 class="guide-step">1 - Download AlloyEditor</h4>
-<p>Download AlloyEditor from <a href="https://github.com/liferay/alloy-editor/releases/download/v0.3.1/alloy-editor-0.3.1.zip" onclick="_gaq.push(['_trackEvent', 'Downloads', 'Top', 'https://github.com/liferay/alloy-editor/releases/download/v0.3.1/alloy-editor-0.3.1.zip']);">here</a>, then unzip it.</p>
+<p>Option 1) Download AlloyEditor from <a href="https://github.com/liferay/alloy-editor/releases/download/v0.3.1/alloy-editor-0.3.1.zip" onclick="_gaq.push(['_trackEvent', 'Downloads', 'Top', 'https://github.com/liferay/alloy-editor/releases/download/v0.3.1/alloy-editor-0.3.1.zip']);">here</a>, then unzip it.</p>
+
+<p>Option 2) Install AlloyEditor via Bower (<code>bower install alloyeditor</code>)</p>
 
 <h4 class="guide-step">2 - Copy and Paste</h4>
+<p>If you downloaded the zip file:</p>
 <pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"alloy-editor/assets/alloy-editor-ocean-min.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"alloy-editor/alloy-editor-all-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+
+<p>If you downloaded it via Bower:</p>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"bower_components/alloyeditor/dist/alloy-editor/assets/alloy-editor-ocean-min.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"bower_components/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
 
 <h4 class="guide-step">3 - Use AlloyEditor</h4>
 
 <span class="code-header">Invoke the <code>editable</code> static method on AlloyEditor passing the ID of the node you want to edit</span>
-<pre class="highlight"><code class="hljs bash">AlloyEditor.editable(<span class="hljs-string">'myContentEditable'</span>);</code></pre>
+<pre class="highlight"><code class="hljs less"><span class="hljs-attribute">AlloyEditor</span>.<span class="hljs-function">editable</span>(<span class="hljs-string">'myContentEditable'</span>);</code></pre>
 
 <p class="guide-note">And that is everything you need to get started!</p>
     </section>
