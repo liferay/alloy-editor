@@ -3956,6 +3956,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
             CKEDITOR.once('resourcesLoaded', this._renderUI.bind(this));
 
+            editor.once('contentDom', function() {
+                editor.editable().addClass('alloy-editor-editable');
+            });
+
             this._loadLanguageFile();
         },
 
@@ -3967,13 +3971,20 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method destructor
          */
         destructor: function() {
-            React.unmountComponentAtNode(this._editorUIElement);
-
-            this._editorUIElement.parentNode.removeChild(this._editorUIElement);
+            if (this._editorUIElement) {
+                React.unmountComponentAtNode(this._editorUIElement);
+                this._editorUIElement.parentNode.removeChild(this._editorUIElement);
+            }
 
             var editorInstance = CKEDITOR.instances[this.get('srcNode')];
 
             if (editorInstance) {
+                var editable = editorInstance.editable();
+                if (editable) {
+                    editable.removeClass('alloy-editor-editable');
+                }
+
+                debugger;
                 editorInstance.destroy();
             }
         },

@@ -208,6 +208,10 @@
                             
                                         CKEDITOR.once(&#x27;resourcesLoaded&#x27;, this._renderUI.bind(this));
                             
+                                        editor.once(&#x27;contentDom&#x27;, function() {
+                                            editor.editable().addClass(&#x27;alloy-editor-editable&#x27;);
+                                        });
+                            
                                         this._loadLanguageFile();
                                     },
                             
@@ -219,13 +223,20 @@
                                      * @method destructor
                                      */
                                     destructor: function() {
-                                        React.unmountComponentAtNode(this._editorUIElement);
-                            
-                                        this._editorUIElement.parentNode.removeChild(this._editorUIElement);
+                                        if (this._editorUIElement) {
+                                            React.unmountComponentAtNode(this._editorUIElement);
+                                            this._editorUIElement.parentNode.removeChild(this._editorUIElement);
+                                        }
                             
                                         var editorInstance = CKEDITOR.instances[this.get(&#x27;srcNode&#x27;)];
                             
                                         if (editorInstance) {
+                                            var editable = editorInstance.editable();
+                                            if (editable) {
+                                                editable.removeClass(&#x27;alloy-editor-editable&#x27;);
+                                            }
+                            
+                                            debugger;
                                             editorInstance.destroy();
                                         }
                                     },
