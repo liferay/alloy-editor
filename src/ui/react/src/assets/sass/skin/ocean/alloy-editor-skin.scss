@@ -3,9 +3,11 @@
 $base_color: #32a8e6;
 $button_color: darken($base_color, 12%);
 
-@include selection {
-    background: #e6f1fa !important;
-    text-shadow: none;
+.alloy-editor-editable {
+    @include selection {
+        background: #e6f1fa !important;
+        text-shadow: none;
+    }
 }
 
 .alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
