@@ -72,7 +72,6 @@
                     editable.removeClass('alloy-editor-editable');
                 }
 
-                debugger;
                 editorInstance.destroy();
             }
         },
