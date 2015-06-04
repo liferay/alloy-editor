@@ -23525,7 +23525,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                     editable.removeClass('alloy-editor-editable');
                 }
 
-                debugger;
                 editorInstance.destroy();
             }
         },
