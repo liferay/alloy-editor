@@ -1,0 +1,22 @@
+$font_family: 'Helvetica Neue';
+
+$base_color: #32a8e6;
+
+$toolbar_color: #fff;
+
+$selection_background_color: #e6f1fa;
+
+$button_color: darken($base_color, 12%);
+$button_pressed_hover_color: lighten($button_color, 4%);
+
+$input_background_color: #fff;
+$input_icon_color: #2b4259;
+
+$dropdown_background_color: #fcfcfc;
+$dropdown_color: #000;
+$dropdown_list_header_color: #999;
+$dropdown_border_color: rgba(0, 0, 0, .1);
+
+$button_add_color: #fff;
+
+$twitter_link_background_color: #f8f8f8;
