@@ -309,7 +309,6 @@ IE10-PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   top: 0;
   bottom: 0; }
 
-
 .alloy-editor-editable ::-moz-selection {
   background: #e6f1fa !important;
   text-shadow: none; }
