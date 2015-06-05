@@ -1,7 +1,7 @@
 @import "bourbon";
 
-$arrow_height: 4px;
-$arrow_width: 10px;
+$arrow-height: 4px;
+$arrow-width: 10px;
 
 .alloy-editor-arrow-box {
     &:after {
@@ -12,7 +12,7 @@ $arrow_width: 10px;
 
     &.alloy-editor-arrow-box-bottom {
         &:after {
-            @include triangle($arrow_width $arrow_height, currentColor, down);
+            @include triangle($arrow-width $arrow-height, currentColor, down);
 
             left: 0;
             right: 0;
@@ -22,19 +22,19 @@ $arrow_width: 10px;
 
     &.alloy-editor-arrow-box-top {
         &:after {
-            @include triangle($arrow_width $arrow_height, currentColor, up);
+            @include triangle($arrow-width $arrow-height, currentColor, up);
 
             left: 0;
             right: 0;
-            top: -$arrow_height;
+            top: -$arrow-height;
         }
     }
 
     &.alloy-editor-arrow-box-left {
         &:after {
-            @include triangle($arrow_width $arrow_height, currentColor, left);
+            @include triangle($arrow-width $arrow-height, currentColor, left);
 
-            left: -$arrow_height;
+            left: -$arrow-height;
             top: 0;
             bottom: 0;
         }
@@ -42,9 +42,9 @@ $arrow_width: 10px;
 
     &.alloy-editor-arrow-box-right {
         &:after {
-            @include triangle($arrow_width $arrow_height, currentColor, right);
+            @include triangle($arrow-width $arrow-height, currentColor, right);
 
-            right: -$arrow_height;
+            right: -$arrow-height;
             top: 0;
             bottom: 0;
         }

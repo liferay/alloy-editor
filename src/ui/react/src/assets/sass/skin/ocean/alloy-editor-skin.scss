@@ -1,35 +1,35 @@
 @import "bourbon";
-@import "variables";
+@import "../../variables";
 
 .alloy-editor-editable {
     @include selection {
-        background: $selection_background_color !important;
+        background: $selection-background-color !important;
         text-shadow: none;
     }
 }
 
 .alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
-    background-color: $base_color;
+    background-color: $base-color;
     border-radius: 4px;
-    color: $toolbar_color;
-    font-family: $font_family;
+    color: $toolbar-color;
+    font-family: $font-family;
 
     &.alloy-editor-arrow-box:after {
-        color: $base_color;
+        color: $base-color;
     }
 
     .alloy-editor-button, .alloy-editor-toolbar-element {
         background-color: transparent;
 
         &:hover {
-            color: $button_color;
+            color: $button-color;
         }
 
         &.alloy-editor-button-pressed {
-            background-color: $button_color;
+            background-color: $button-color;
 
             &:hover {
-                background-color: $button_pressed_hover_color;
+                background-color: $button-pressed-hover-color;
                 color: inherit;
             }
         }
@@ -40,24 +40,24 @@
     }
 
     .alloy-editor-container-input {
-        background-color: $input_background_color;
+        background-color: $input-background-color;
 
         [class*=alloy-editor-icon-] {
-            color: $input_icon_color;
+            color: $input-icon-color;
             opacity: 0.4;
         }
     }
 }
 
 .alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
-    background-color: $dropdown_background_color;
-    border: 1px solid $dropdown_border_color;
+    background-color: $dropdown-background-color;
+    border: 1px solid $dropdown-border-color;
     border-radius: 0 0 4px 4px;
-    box-shadow: 0 2px 4px $dropdown_border_color;
-    color: $dropdown_color;
+    box-shadow: 0 2px 4px $dropdown-border-color;
+    color: $dropdown-color;
 
     .alloy-editor-list-header {
-        color: $dropdown_list_header_color;
+        color: $dropdown-list-header-color;
         font-size: small;
         font-style: italic;
     }
@@ -73,7 +73,7 @@
 
     .alloy-editor-button-add {
         &:hover, &:focus {
-            color: $button_add_color;
+            color: $button-add-color;
         }
 
         .alloy-editor-icon-add {
@@ -84,5 +84,5 @@
 }
 
 .alloy-editor-twitter-link {
-    background-color: $twitter_link_background_color;
+    background-color: $twitter-link-background-color;
 }

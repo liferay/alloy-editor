@@ -1,12 +1,12 @@
 @import "bourbon";
 
-$base_font_size: 14px;
-$base_button_height: 24px;
-$base_button_width: $base_button_height;
-$base_padding: 4px;
-$base_spacing: 10px;
+$base-button-height: 24px;
+$base-button-width: $base-button-height;
+$base-font-size: 14px;
+$base-padding: 4px;
+$base-spacing: 10px;
 
-$IE9_ONLY: \9;
+$IE9-ONLY: \9;
 
 .alloy-editor-container, [class*=alloy-editor-container-] {
     @include align-items(center);
@@ -26,34 +26,34 @@ $IE9_ONLY: \9;
     }
 
     .alloy-editor-container, [class*=alloy-editor-container-], .alloy-editor-button, .alloy-editor-toolbar-element, label {
-        font-size: $base_font_size;
+        font-size: $base-font-size;
         margin: 0;
         position: relative;
 
         &:not(:last-child) {
-            margin-right: $base_spacing;
+            margin-right: $base-spacing;
         }
     }
 }
 
 .alloy-editor-has-dropdown {
     display: block;
-    float: left $IE9_ONLY;
-    width: $base_button_width;
+    float: left $IE9-ONLY;
+    width: $base-button-width;
 }
 
-IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
-    height: $base_button_height;
+IE10-PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
+    height: $base-button-height;
     box-sizing: content-box;
 }
 
 .alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
     line-height: 1;
-    padding: $base_spacing;
+    padding: $base-spacing;
     position: absolute;
 
     input, textarea, keygen, select, button {
-        font-size: $base_font_size;
+        font-size: $base-font-size;
     }
 
     &.alloy-editor-toolbar-transition {
@@ -82,23 +82,23 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     }
 
     .alloy-editor-button {
-        height: $base_button_height;
-        width: $base_button_width;
+        height: $base-button-height;
+        width: $base-button-width;
     }
 }
 
 .alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
     left: 0;
-    padding: $base_padding;
+    padding: $base-padding;
     position: absolute;
-    top: $base_button_height + $base_spacing;
+    top: $base-button-height + $base-spacing;
 
     .alloy-editor-list-header {
         display: inline-block;
-        margin: 3 * $base_padding 0 0 0;
+        margin: 3 * $base-padding 0 0 0;
 
         &:first-child {
-            margin-top: $base_padding;
+            margin-top: $base-padding;
         }
     }
 
@@ -108,7 +108,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         }
 
         &[class*=alloy-editor-icon-]:before {
-            padding-right: $base_padding;
+            padding-right: $base-padding;
             vertical-align: middle;
         }
 
@@ -116,7 +116,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         margin-right: 0;
         min-width: 100%;
         overflow: hidden;
-        padding-left: 2 * $base_padding;
+        padding-left: 2 * $base-padding;
         text-align: left;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -130,24 +130,24 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     }
 
     * {
-        display: block $IE9_ONLY;
+        display: block $IE9-ONLY;
     }
 }
 
 .alloy-editor-container-edit-link, .alloy-editor-container-edit-table {
-    height: $base_button_height $IE9_ONLY;
+    height: $base-button-height $IE9-ONLY;
 
     * {
-        float: left $IE9_ONLY;
+        float: left $IE9-ONLY;
     }
 
     label {
-        position: relative $IE9_ONLY;
-        top: 50% $IE9_ONLY;
-        transform: translateY(-50%) $IE9_ONLY;
+        position: relative $IE9-ONLY;
+        top: 50% $IE9-ONLY;
+        transform: translateY(-50%) $IE9-ONLY;
     }
 
-    IE10_PLUS::-ms-reveal, label {
+    IE10-PLUS::-ms-reveal, label {
         top: 0;
         transform: translateY(0);
     }
@@ -157,19 +157,19 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     @include flex-wrap(nowrap);
 
     padding-left: 4px;
-    width: 13 * $base_font_size;
+    width: 13 * $base-font-size;
 
     &.medium {
-        width: 7 * $base_font_size;
+        width: 7 * $base-font-size;
     }
 
     &.small {
-        width: 3 * $base_font_size;
+        width: 3 * $base-font-size;
     }
 
     [class*=alloy-editor-icon-] {
-        font-size: $base_button_height;
-        line-height: $base_button_height;
+        font-size: $base-button-height;
+        line-height: $base-button-height;
     }
 
     input, .alloy-editor-input {
@@ -188,11 +188,11 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
             display: none;
         }
 
-        display: inline-block $IE9_ONLY;
-        margin-left: -$base_padding $IE9_ONLY;
-        margin-top: $base_padding $IE9_ONLY;
-        padding-left: $base_padding $IE9_ONLY;
-        width: 13 * $base_font_size - $base_button_width $IE9_ONLY;
+        display: inline-block $IE9-ONLY;
+        margin-left: -$base-padding $IE9-ONLY;
+        margin-top: $base-padding $IE9-ONLY;
+        padding-left: $base-padding $IE9-ONLY;
+        width: 13 * $base-font-size - $base-button-width $IE9-ONLY;
 
         &:focus {
             box-shadow: none;
@@ -200,7 +200,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     }
 
     .alloy-editor-icon-remove {
-        float: right $IE9_ONLY;
+        float: right $IE9-ONLY;
     }
 }
 
@@ -210,7 +210,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     a, .alloy-editor-link {
         color: inherit;
         display: inline-block;
-        font-size: $base_font_size;
+        font-size: $base-font-size;
         font-weight: 300;
         overflow: hidden;
         max-width: 500px;
@@ -235,23 +235,23 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
 }
 
 .alloy-editor-container-styles {
-    float: left $IE9_ONLY;
-    width: 5 * $base_button_width;
+    float: left $IE9-ONLY;
+    width: 5 * $base-button-width;
 
     > .alloy-editor-toolbar-element {
-        float: left $IE9_ONLY;
-        height: $base_button_height;
+        float: left $IE9-ONLY;
+        height: $base-button-height;
         text-align: left;
         width: 100%;
 
         .alloy-editor-container {
-            height: 100% $IE9_ONLY;
+            height: 100% $IE9-ONLY;
             width: 100%;
 
             .alloy-editor-icon-arrow {
                 @include transform(rotate(90deg));
 
-                float: right $IE9_ONLY;
+                float: right $IE9-ONLY;
             }
 
             .alloy-editor-selected-style {
@@ -259,12 +259,12 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
 
                 display: inline-block;
 
-                position: relative $IE9_ONLY;
-                top: 50% $IE9_ONLY;
-                transform: translateY(-50%) $IE9_ONLY;
+                position: relative $IE9-ONLY;
+                top: 50% $IE9-ONLY;
+                transform: translateY(-50%) $IE9-ONLY;
             }
 
-            IE10_PLUS::-ms-reveal, .alloy-editor-selected-style {
+            IE10-PLUS::-ms-reveal, .alloy-editor-selected-style {
                 top: 0;
                 transform: translateY(0);
             }
