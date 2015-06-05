@@ -50,7 +50,7 @@
   float: left \9;
   width: 24px; }
 
-IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
+IE10-PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   height: 24px;
   box-sizing: content-box; }
 
@@ -125,7 +125,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     position: relative \9;
     top: 50% \9;
     transform: translateY(-50%) \9; }
-  .alloy-editor-container-edit-link IE10_PLUS::-ms-reveal, .alloy-editor-container-edit-link label, .alloy-editor-container-edit-table IE10_PLUS::-ms-reveal, .alloy-editor-container-edit-table label {
+  .alloy-editor-container-edit-link IE10-PLUS::-ms-reveal, .alloy-editor-container-edit-link label, .alloy-editor-container-edit-table IE10-PLUS::-ms-reveal, .alloy-editor-container-edit-table label {
     top: 0;
     transform: translateY(0); }
 
@@ -226,7 +226,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         position: relative \9;
         top: 50% \9;
         transform: translateY(-50%) \9; }
-      .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container IE10_PLUS::-ms-reveal, .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container .alloy-editor-selected-style {
+      .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container IE10-PLUS::-ms-reveal, .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container .alloy-editor-selected-style {
         top: 0;
         transform: translateY(0); }
 
@@ -309,6 +309,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   top: 0;
   bottom: 0; }
 
+
 .alloy-editor-editable ::-moz-selection {
   background: #e6f1fa !important;
   text-shadow: none; }
@@ -321,7 +322,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   background-color: #32a8e6;
   border-radius: 4px;
   color: #fff;
-  font-family: 'Helvetica Neue'; }
+  font-family: "Helvetica Neue"; }
   .alloy-editor-toolbar.alloy-editor-arrow-box:after, [class*=alloy-editor-toolbar-].alloy-editor-arrow-box:after {
     color: #32a8e6; }
   .alloy-editor-toolbar .alloy-editor-button, .alloy-editor-toolbar .alloy-editor-toolbar-element, [class*=alloy-editor-toolbar-] .alloy-editor-button, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element {
