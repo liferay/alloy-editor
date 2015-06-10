@@ -24155,7 +24155,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          */
         initializer: function(config) {
             var node = this.get('srcNode');
-            document.getElementById(node).setAttribute('contenteditable', 'true');
+            node.setAttribute('contenteditable', 'true');
 
             var editor = CKEDITOR.inline(node);
 
@@ -24196,15 +24196,15 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 this._editorUIElement.parentNode.removeChild(this._editorUIElement);
             }
 
-            var editorInstance = CKEDITOR.instances[this.get('srcNode')];
+            var nativeEditor = this.get('nativeEditor');
 
-            if (editorInstance) {
-                var editable = editorInstance.editable();
+            if (nativeEditor) {
+                var editable = nativeEditor.editable();
                 if (editable) {
                     editable.removeClass('alloy-editor-editable');
                 }
 
-                editorInstance.destroy();
+                nativeEditor.destroy();
             }
         },
 
@@ -24264,10 +24264,6 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
             var uiNode = this.get('uiNode') || document.body;
 
-            if (AlloyEditor.Lang.isString(uiNode)) {
-                uiNode = document.getElementById(uiNode);
-            }
-
             uiNode.appendChild(editorUIElement);
 
             this._mainUI = React.render(React.createElement(AlloyEditor.UI, {
@@ -24279,6 +24275,25 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             this._editorUIElement = editorUIElement;
 
             this.get('nativeEditor').fire('uiReady');
+        },
+
+        /**
+         * The function returns an HTML element from the passed value. If the passed value is a string, it should be 
+         * the Id of the element which have to be retrieved from the DOM.
+         * If an HTML Element is passed, the element itself will be returned.
+         *
+         * @method _toElement
+         * @protected
+         * @param {!(String|HTMLElement)} value String, which have to correspond to an HTML element from the DOM,
+         * or the HTML element itself. If Id is passed, the HTML element will be retrieved from the DOM.
+         * @return {HTMLElement} An HTML element.
+         */
+        _toElement: function(value) {
+            if (AlloyEditor.Lang.isString(value)) {
+                value = document.getElementById(value);
+            }
+
+            return value;
         },
 
         /**
@@ -24408,6 +24423,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * @writeOnce
              */
             srcNode: {
+                setter: '_toElement',
                 writeOnce: true
             },
 
@@ -24438,6 +24454,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
              * @writeOnce
              */
             uiNode: {
+                setter: '_toElement',
                 writeOnce: true
             }
         }

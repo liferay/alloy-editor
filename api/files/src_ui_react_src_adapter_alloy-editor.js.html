@@ -187,7 +187,7 @@
                                      */
                                     initializer: function(config) {
                                         var node = this.get(&#x27;srcNode&#x27;);
-                                        document.getElementById(node).setAttribute(&#x27;contenteditable&#x27;, &#x27;true&#x27;);
+                                        node.setAttribute(&#x27;contenteditable&#x27;, &#x27;true&#x27;);
                             
                                         var editor = CKEDITOR.inline(node);
                             
@@ -228,15 +228,15 @@
                                             this._editorUIElement.parentNode.removeChild(this._editorUIElement);
                                         }
                             
-                                        var editorInstance = CKEDITOR.instances[this.get(&#x27;srcNode&#x27;)];
+                                        var nativeEditor = this.get(&#x27;nativeEditor&#x27;);
                             
-                                        if (editorInstance) {
-                                            var editable = editorInstance.editable();
+                                        if (nativeEditor) {
+                                            var editable = nativeEditor.editable();
                                             if (editable) {
                                                 editable.removeClass(&#x27;alloy-editor-editable&#x27;);
                                             }
                             
-                                            editorInstance.destroy();
+                                            nativeEditor.destroy();
                                         }
                                     },
                             
@@ -296,10 +296,6 @@
                             
                                         var uiNode = this.get(&#x27;uiNode&#x27;) || document.body;
                             
-                                        if (AlloyEditor.Lang.isString(uiNode)) {
-                                            uiNode = document.getElementById(uiNode);
-                                        }
-                            
                                         uiNode.appendChild(editorUIElement);
                             
                                         this._mainUI = React.render(React.createElement(AlloyEditor.UI, {
@@ -311,6 +307,25 @@
                                         this._editorUIElement = editorUIElement;
                             
                                         this.get(&#x27;nativeEditor&#x27;).fire(&#x27;uiReady&#x27;);
+                                    },
+                            
+                                    /**
+                                     * The function returns an HTML element from the passed value. If the passed value is a string, it should be 
+                                     * the Id of the element which have to be retrieved from the DOM.
+                                     * If an HTML Element is passed, the element itself will be returned.
+                                     *
+                                     * @method _toElement
+                                     * @protected
+                                     * @param {!(String|HTMLElement)} value String, which have to correspond to an HTML element from the DOM,
+                                     * or the HTML element itself. If Id is passed, the HTML element will be retrieved from the DOM.
+                                     * @return {HTMLElement} An HTML element.
+                                     */
+                                    _toElement: function(value) {
+                                        if (AlloyEditor.Lang.isString(value)) {
+                                            value = document.getElementById(value);
+                                        }
+                            
+                                        return value;
                                     },
                             
                                     /**
@@ -440,6 +455,7 @@
                                          * @writeOnce
                                          */
                                         srcNode: {
+                                            setter: &#x27;_toElement&#x27;,
                                             writeOnce: true
                                         },
                             
@@ -470,6 +486,7 @@
                                          * @writeOnce
                                          */
                                         uiNode: {
+                                            setter: &#x27;_toElement&#x27;,
                                             writeOnce: true
                                         }
                                     }
