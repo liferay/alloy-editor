@@ -50,7 +50,7 @@
   float: left \9;
   width: 24px; }
 
-IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
+IE10-PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   height: 24px;
   box-sizing: content-box; }
 
@@ -125,7 +125,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     position: relative \9;
     top: 50% \9;
     transform: translateY(-50%) \9; }
-  .alloy-editor-container-edit-link IE10_PLUS::-ms-reveal, .alloy-editor-container-edit-link label, .alloy-editor-container-edit-table IE10_PLUS::-ms-reveal, .alloy-editor-container-edit-table label {
+  .alloy-editor-container-edit-link IE10-PLUS::-ms-reveal, .alloy-editor-container-edit-link label, .alloy-editor-container-edit-table IE10-PLUS::-ms-reveal, .alloy-editor-container-edit-table label {
     top: 0;
     transform: translateY(0); }
 
@@ -226,7 +226,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
         position: relative \9;
         top: 50% \9;
         transform: translateY(-50%) \9; }
-      .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container IE10_PLUS::-ms-reveal, .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container .alloy-editor-selected-style {
+      .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container IE10-PLUS::-ms-reveal, .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container .alloy-editor-selected-style {
         top: 0;
         transform: translateY(0); }
 
@@ -309,11 +309,11 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   top: 0;
   bottom: 0; }
 
-::-moz-selection {
+.alloy-editor-editable ::-moz-selection {
   background: #e6f1fa !important;
   text-shadow: none; }
 
-::selection {
+.alloy-editor-editable ::selection {
   background: #e6f1fa !important;
   text-shadow: none; }
 
@@ -321,7 +321,7 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   background-color: #32a8e6;
   border-radius: 4px;
   color: #fff;
-  font-family: 'Helvetica Neue'; }
+  font-family: "Helvetica Neue"; }
   .alloy-editor-toolbar.alloy-editor-arrow-box:after, [class*=alloy-editor-toolbar-].alloy-editor-arrow-box:after {
     color: #32a8e6; }
   .alloy-editor-toolbar .alloy-editor-button, .alloy-editor-toolbar .alloy-editor-toolbar-element, [class*=alloy-editor-toolbar-] .alloy-editor-button, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element {
@@ -394,129 +394,129 @@ IE10_PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
 
 
 .alloy-editor-icon-add:before {
-	content: "\E001";
+	content: "\";
 }
 
 .alloy-editor-icon-align-center:before {
-	content: "\E002";
+	content: "\";
 }
 
 .alloy-editor-icon-align-justified:before {
-	content: "\E003";
+	content: "\";
 }
 
 .alloy-editor-icon-align-left:before {
-	content: "\E004";
+	content: "\";
 }
 
 .alloy-editor-icon-align-right:before {
-	content: "\E005";
+	content: "\";
 }
 
 .alloy-editor-icon-arrow:before {
-	content: "\E006";
+	content: "\";
 }
 
 .alloy-editor-icon-bold:before {
-	content: "\E007";
+	content: "\";
 }
 
 .alloy-editor-icon-bulleted-list:before {
-	content: "\E008";
+	content: "\";
 }
 
 .alloy-editor-icon-camera:before {
-	content: "\E009";
+	content: "\";
 }
 
 .alloy-editor-icon-cell:before {
-	content: "\E00A";
+	content: "\";
 }
 
 .alloy-editor-icon-close:before {
-	content: "\E00B";
+	content: "\";
 }
 
 .alloy-editor-icon-code:before {
-	content: "\E00C";
+	content: "\";
 }
 
 .alloy-editor-icon-column:before {
-	content: "\E00D";
+	content: "\";
 }
 
 .alloy-editor-icon-h1:before {
-	content: "\E00E";
+	content: "\";
 }
 
 .alloy-editor-icon-h2:before {
-	content: "\E00F";
+	content: "\";
 }
 
 .alloy-editor-icon-image:before {
-	content: "\E010";
+	content: "\";
 }
 
 .alloy-editor-icon-italic:before {
-	content: "\E011";
+	content: "\";
 }
 
 .alloy-editor-icon-link:before {
-	content: "\E012";
+	content: "\";
 }
 
 .alloy-editor-icon-numbered-list:before {
-	content: "\E013";
+	content: "\";
 }
 
 .alloy-editor-icon-ok:before {
-	content: "\E014";
+	content: "\";
 }
 
 .alloy-editor-icon-quote:before {
-	content: "\E015";
+	content: "\";
 }
 
 .alloy-editor-icon-remove:before {
-	content: "\E016";
+	content: "\";
 }
 
 .alloy-editor-icon-removeformat:before {
-	content: "\E017";
+	content: "\";
 }
 
 .alloy-editor-icon-row:before {
-	content: "\E018";
+	content: "\";
 }
 
 .alloy-editor-icon-separator:before {
-	content: "\E019";
+	content: "\";
 }
 
 .alloy-editor-icon-strike:before {
-	content: "\E01A";
+	content: "\";
 }
 
 .alloy-editor-icon-subscript:before {
-	content: "\E01B";
+	content: "\";
 }
 
 .alloy-editor-icon-superscript:before {
-	content: "\E01C";
+	content: "\";
 }
 
 .alloy-editor-icon-table:before {
-	content: "\E01D";
+	content: "\";
 }
 
 .alloy-editor-icon-twitter:before {
-	content: "\E01E";
+	content: "\";
 }
 
 .alloy-editor-icon-underline:before {
-	content: "\E01F";
+	content: "\";
 }
 
 .alloy-editor-icon-unlink:before {
-	content: "\E020";
+	content: "\";
 }
