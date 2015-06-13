@@ -21,12 +21,12 @@ gulp.task('generate-fonts', function() {
             fontName: fontName,
             normalize: true
         }))
-        .on('codepoints', function(codepoints) {
+        .on('glyphs', function(glyphs, options) {
             gulp.src(path.join(reactDir, 'src/assets/font/font-template.css'))
                 .pipe(consolidate('lodash', {
                     fontName: fontName,
                     fontPath: 'fonts/',
-                    glyphs: codepoints
+                    glyphs: glyphs
                 }))
                 .pipe(rename({basename: 'alloyeditor-font'}))
                 .pipe(gulp.dest(path.join(editorDistFolder, 'assets')));

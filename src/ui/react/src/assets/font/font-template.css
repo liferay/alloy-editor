@@ -26,6 +26,6 @@
 
 <% _.each(glyphs, function(glyph) { %>
 .alloy-editor-icon-<%= glyph.name %>:before {
-	content: "\<%= glyph.codepoint.toString(16).toUpperCase() %>";
+	content: "\<%= glyph.unicode %>";
 }
 <% }); %>
