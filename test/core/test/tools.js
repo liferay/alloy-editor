@@ -11,7 +11,7 @@
                 prop1: 'val1'
             };
 
-            Object.prototype.prop123 = 'val123';
+            Object.prototype.test123 = 'val123';
 
             var obj2 = {};
 
