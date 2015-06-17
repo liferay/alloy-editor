@@ -10,7 +10,6 @@ var path = require('path');
 var srcFiles = require('./_src.js');
 
 var preprocessors = {
-    '**/*.jsx': ['react-jsx'],
     '**/*.html': ['html2js']
 };
 
@@ -19,21 +18,6 @@ if (!(argv.debug || argv.d)) {
 }
 
 var filesToLoad = [
-    /* AlloyEditor skins */
-    {
-        pattern: path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
-        included: true,
-        watched: false
-    }, {
-        pattern: path.join(alloyEditorDir, 'assets/fonts/alloyeditor.woff'),
-        included: false,
-        watched: false
-    }, {
-        pattern: path.join(alloyEditorDir, 'assets/fonts/alloyeditor.ttf'),
-        included: false,
-        watched: false
-    },
-
     'test/vendor/zepto.js',
     'test/vendor/happen.js',
 
@@ -63,17 +47,7 @@ var filesToLoad = [
     /* bender requires CKEDITOR, should be after ckeditor.js */
     'test/util/bender.js',
 
-    'src/ui/react/test/util/utils.js',
-
-    /* ReactJS */
-    {
-        pattern: path.join(alloyEditorDir, 'react-with-addons.js'),
-        included: true,
-        watched: false
-    },
-
-    /* Fixtures */
-    'src/ui/react/test/fixtures/**/*'
+    'test/util/utils.js'
 ];
 
 srcFiles.forEach(function(file) {
@@ -90,27 +64,9 @@ filesToLoad.push({
     watched: false
 });
 
-filesToLoad.push({
-    pattern: 'test/plugins/test/*.js*',
-    included: true,
-    watched: false
-});
-
-filesToLoad.push({
-    pattern: 'src/ui/react/test/*.js*',
-    included: true,
-    watched: false
-});
-
-filesToLoad.push({
-    pattern: path.join(alloyEditorDir, 'test/ui/react/lang/en.js'),
-    included: true,
-    watched: false
-});
-
 var defaultConfig = {
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '../../..',
+    basePath: '../../',
 
     browsers: ['Chrome', 'Firefox', 'IE9 - Win7', 'IE10 - Win7', 'IE11 - Win7'],
 

@@ -6,6 +6,7 @@ var argv = require('yargs').argv,
     requireDir = require('require-dir'),
     ui = argv.ui || 'react';
 
+requireDir(path.join(__dirname, 'gulp-tasks'));
 requireDir(path.join(__dirname, 'src', 'ui', ui, 'gulp-tasks'));
 
 gulp.task('default', ['build']);

@@ -53,6 +53,28 @@
             }.bind(this));
         },
 
+        createCKEditor: function(done, config) {
+            var editable = document.createElement('div');
+
+            editable.setAttribute('id', 'editable');
+            editable.setAttribute('contenteditable', true);
+
+            document.getElementsByTagName('body')[0].appendChild(editable);
+
+            this._editable = editable;
+
+            assert.ok(bender);
+            assert.ok(CKEDITOR);
+
+            this.nativeEditor = CKEDITOR.inline('editable', config);
+
+            this.nativeEditor.on('instanceReady', function() {
+                this.nativeEditor.focus();
+
+                done();
+            }.bind(this));
+        },
+
         createContainer: function() {
             this.container = document.createElement('div');
 
@@ -62,6 +84,18 @@
         destroyAlloyEditor: function(done) {
             if (this.editor) {
                 this.editor.destroy();
+            }
+
+            this._editable.parentNode.removeChild(this._editable);
+
+            if (done) {
+                done();
+            }
+        },
+
+        destroyCKEditor: function(done) {
+            if (this.nativeEditor) {
+                this.nativeEditor.destroy();
             }
 
             this._editable.parentNode.removeChild(this._editable);

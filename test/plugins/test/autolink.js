@@ -16,9 +16,11 @@
     describe('AutoLink', function() {
         this.timeout(35000);
 
-        before(Utils.createAlloyEditor);
+        before(function(done) {
+            Utils.createCKEditor.call(this, done, {extraPlugins: 'autolink'});
+        });
 
-        after(Utils.destroyAlloyEditor);
+        after(Utils.destroyCKEditor);
 
         beforeEach(Utils.beforeEach);
 

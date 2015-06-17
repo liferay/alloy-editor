@@ -2,14 +2,13 @@
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
 
     describe('Link', function() {
         this.timeout(35000);
 
-        before(Utils.createAlloyEditor);
+        before(Utils.createCKEditor);
 
-        after(Utils.destroyAlloyEditor);
+        after(Utils.destroyCKEditor);
 
         beforeEach(Utils.beforeEach);
 

@@ -6,9 +6,11 @@
     describe('SelectionRegion', function() {
         this.timeout(35000);
 
-        before(Utils.createAlloyEditor);
+        before(function(done) {
+            Utils.createCKEditor.call(this, done, {extraPlugins: 'selectionregion'});
+        });
 
-        after(Utils.destroyAlloyEditor);
+        after(Utils.destroyCKEditor);
 
         beforeEach(Utils.beforeEach);
 
