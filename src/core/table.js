@@ -27,6 +27,8 @@
             var editor = this._editor;
             var table = this._createElement('table');
 
+            config = config || {};
+
             // Generate the rows and cols.
             var tbody = table.append(this._createElement('tbody'));
             var rows = config.rows || 1;
@@ -45,7 +47,7 @@
                 table.removeAttribute('style');
             }
 
-            this.setAttributes(table, config.attrs);
+            this.setAttributes(table, config.attrs || {});
 
             // Insert the table element if we're creating one.
             editor.insertElement(table);
