@@ -74,6 +74,7 @@ var filesToLoad = [
     },
 
     /* Fixtures */
+    'test/core/test/fixtures/**/*',
     'src/ui/react/test/fixtures/**/*'
 ];
 

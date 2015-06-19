@@ -1,0 +1,172 @@
+<div id="create_no_params">
+	<div data-fixture="initial">
+	</div>
+
+	<div data-fixture="expected">
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>&nbsp;</p>
+	</div>
+</div>
+<div id="create_with_attrs">
+	<div data-fixture="initial">
+	</div>
+
+	<div data-fixture="expected">
+		<table bgcolor="#ff0" border="0" style="width: 100%;">
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>&nbsp;</p>
+	</div>
+</div>
+<div id="create_1_3">
+	<div data-fixture="initial">
+	</div>
+
+	<div data-fixture="expected">
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>&nbsp;</p>
+	</div>
+</div>
+<div id="create_3_1">
+	<div data-fixture="initial">
+	</div>
+
+	<div data-fixture="expected">
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>&nbsp;</p>
+	</div>
+</div>
+<div id="get_table_from_selection_cursor_inside">
+	<div data-fixture="initial">
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;{}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div id="get_table_from_selection">
+	<div data-fixture="initial">
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div id="remove_table_when_cursor_inside">
+	<div data-fixture="initial">
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;{}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>&nbsp;</p>
+	</div>
+
+	<div data-fixture="expected">
+	</div>
+</div>
+<div id="remove_table_when_cursor_outside">
+	<div data-fixture="initial">
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		{}
+	</div>
+
+	<div data-fixture="expected">
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div id="remove_table_parent_when_only_child">
+	<div data-fixture="initial">
+		<div>
+			<table>
+				<tbody>
+					<tr>
+						<td>&nbsp;{}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div data-fixture="expected">
+	</div>
+</div>
+<div id="remove_table_element">
+	<div data-fixture="initial">
+		<table>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		{}
+	</div>
+
+	<div data-fixture="expected">
+	</div>
+</div>
