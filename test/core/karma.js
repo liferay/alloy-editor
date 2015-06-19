@@ -47,7 +47,10 @@ var filesToLoad = [
     /* bender requires CKEDITOR, should be after ckeditor.js */
     'test/util/bender.js',
 
-    'test/util/utils.js'
+    'test/util/utils.js',
+
+    /* Fixtures */
+    'test/core/test/fixtures/**/*'
 ];
 
 srcFiles.forEach(function(file) {
