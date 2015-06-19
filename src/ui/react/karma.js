@@ -63,6 +63,7 @@ var filesToLoad = [
     /* bender requires CKEDITOR, should be after ckeditor.js */
     'test/util/bender.js',
 
+    'test/util/utils.js',
     'src/ui/react/test/util/utils.js',
 
     /* ReactJS */
