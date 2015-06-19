@@ -100,7 +100,7 @@
             var editor = this._editor;
 
             if (table) {
-                table.remove(editor);
+                table.remove();
             } else {
                 table = editor.elementPath().contains('table', 1);
 
