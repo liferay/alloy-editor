@@ -64,8 +64,37 @@
             }
         },
 
+        getFixtures: function(fixtureBase, fixtureFile) {
+            return function(fixtureName) {
+                var fixtureData = {};
+
+                fixture.setBase(fixtureBase);
+
+                fixture.load(fixtureFile);
+
+                var htmlFixture = fixture.el.querySelector('#' + fixtureName);
+
+                fixtureData.initial = Utils._prepareFixtureForAssertion(htmlFixture.querySelector('[data-fixture="initial"]'));
+                fixtureData.expected = Utils._prepareFixtureForAssertion(htmlFixture.querySelector('[data-fixture="expected"]'));
+
+                return fixtureData;
+            };
+        },
+
         removeContainer: function() {
             this.container.parentNode.removeChild(this.container);
+        },
+
+        _prepareFixtureForAssertion: function(htmlFixture) {
+            var fixtureString;
+
+            if (htmlFixture) {
+                fixtureString = bender.tools.fixHtml(
+                    bender.tools.compatHtml(htmlFixture.innerHTML.replace(/\u00a0/g, '&nbsp;'))
+                );
+            }
+
+            return fixtureString;
         }
     };
 

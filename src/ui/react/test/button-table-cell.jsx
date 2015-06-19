@@ -5,7 +5,7 @@
     var TestUtils = React.addons.TestUtils;
     var Simulate = TestUtils.Simulate;
 
-    var FIXTURE_FILE = 'button-table-cell.html';
+    var getFixtures = Utils.getFixtures('src/ui/react/test/fixtures', 'button-table-cell.html');
 
     describe('ButtonTableCell', function() {
         this.timeout(35000);
@@ -74,7 +74,7 @@
         var testCommandButton = function(command, fixtureName) {
             var buttonTableCell = React.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
 
-            var fixtures = Utils.getFixtures.call(this, FIXTURE_FILE, fixtureName);
+            var fixtures = getFixtures(fixtureName);
 
             bender.tools.selection.setWithHtml(this.nativeEditor, fixtures.initial);
 

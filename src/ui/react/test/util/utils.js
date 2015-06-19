@@ -1,141 +1,46 @@
 (function() {
     'use strict';
 
-    var Utils = {
-        afterEach: function(done) {
-            Utils.removeContainer.call(this);
+    if (!window.Utils) window.Utils = {};
 
-            fixture.cleanup();
+    window.Utils.createAlloyEditor = function(done, config) {
+        var editable = document.createElement('div');
 
-            if (done) {
-                done();
-            }
-        },
+        editable.setAttribute('id', 'editable');
+        editable.setAttribute('contenteditable', true);
 
-        beforeEach: function(done) {
-            Utils.createContainer.call(this);
+        document.getElementsByTagName('body')[0].appendChild(editable);
 
-            // CKEDITOR in Firefox needs to have cursor and at least an empty string
-            // before doing anything ;)
-            bender.tools.selection.setWithHtml(this.nativeEditor, ' {}');
+        this._editable = editable;
 
-            if (done) {
-                done();
-            }
-        },
+        assert.ok(bender);
+        assert.ok(CKEDITOR);
+        assert.ok(AlloyEditor);
 
-        createAlloyEditor: function(done, config) {
-            var editable = document.createElement('div');
+        config = CKEDITOR.tools.merge({
+            toolbars: {}
+        }, config);
 
-            editable.setAttribute('id', 'editable');
-            editable.setAttribute('contenteditable', true);
+        this.editor = AlloyEditor.editable('editable', config);
 
-            document.getElementsByTagName('body')[0].appendChild(editable);
+        this.nativeEditor = this.editor.get('nativeEditor');
 
-            this._editable = editable;
+        this.nativeEditor.on('instanceReady', function() {
+            this.nativeEditor.focus();
 
-            assert.ok(bender);
-            assert.ok(CKEDITOR);
-            assert.ok(AlloyEditor);
-
-            config = CKEDITOR.tools.merge({
-                toolbars: {}
-            }, config);
-
-            this.editor = AlloyEditor.editable('editable', config);
-
-            this.nativeEditor = this.editor.get('nativeEditor');
-
-            this.nativeEditor.on('instanceReady', function() {
-                this.nativeEditor.focus();
-
-                done();
-            }.bind(this));
-        },
-
-        createCKEditor: function(done, config) {
-            var editable = document.createElement('div');
-
-            editable.setAttribute('id', 'editable');
-            editable.setAttribute('contenteditable', true);
-
-            document.getElementsByTagName('body')[0].appendChild(editable);
-
-            this._editable = editable;
-
-            assert.ok(bender);
-            assert.ok(CKEDITOR);
-
-            this.nativeEditor = CKEDITOR.inline('editable', config);
-
-            this.nativeEditor.on('instanceReady', function() {
-                this.nativeEditor.focus();
-
-                done();
-            }.bind(this));
-        },
-
-        createContainer: function() {
-            this.container = document.createElement('div');
-
-            document.body.appendChild(this.container);
-        },
-
-        destroyAlloyEditor: function(done) {
-            if (this.editor) {
-                this.editor.destroy();
-            }
-
-            this._editable.parentNode.removeChild(this._editable);
-
-            if (done) {
-                done();
-            }
-        },
-
-        destroyCKEditor: function(done) {
-            if (this.nativeEditor) {
-                this.nativeEditor.destroy();
-            }
-
-            this._editable.parentNode.removeChild(this._editable);
-
-            if (done) {
-                done();
-            }
-        },
-
-        getFixtures: function(fixtureFile, fixtureName) {
-            var fixtureData = {};
-
-            fixture.setBase('src/ui/react/test/fixtures');
-
-            fixture.load(fixtureFile);
-
-            var htmlFixture = fixture.el.querySelector('#' + fixtureName);
-
-            fixtureData.initial = Utils._prepareFixtureForAssertion(htmlFixture.querySelector('[data-fixture="initial"]'));
-            fixtureData.expected = Utils._prepareFixtureForAssertion(htmlFixture.querySelector('[data-fixture="expected"]'));
-
-            return fixtureData;
-        },
-
-        removeContainer: function() {
-            this.container.parentNode.removeChild(this.container);
-        },
-
-        _prepareFixtureForAssertion: function(htmlFixture) {
-            var fixtureString;
-
-            if (htmlFixture) {
-                fixtureString = bender.tools.fixHtml(
-                    bender.tools.compatHtml(htmlFixture.innerHTML.replace(/\u00a0/g, '&nbsp;'))
-                );
-            }
-
-            return fixtureString;
-        }
+            done();
+        }.bind(this));
     };
 
-    window.Utils = Utils;
+    window.Utils.destroyAlloyEditor = function(done) {
+        if (this.editor) {
+            this.editor.destroy();
+        }
+
+        this._editable.parentNode.removeChild(this._editable);
+
+        if (done) {
+            done();
+        }
+    };
 }());
