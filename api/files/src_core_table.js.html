@@ -191,6 +191,8 @@
                                         var editor = this._editor;
                                         var table = this._createElement(&#x27;table&#x27;);
                             
+                                        config = config || {};
+                            
                                         // Generate the rows and cols.
                                         var tbody = table.append(this._createElement(&#x27;tbody&#x27;));
                                         var rows = config.rows || 1;
@@ -209,7 +211,7 @@
                                             table.removeAttribute(&#x27;style&#x27;);
                                         }
                             
-                                        this.setAttributes(table, config.attrs);
+                                        this.setAttributes(table, config.attrs || {});
                             
                                         // Insert the table element if we&#x27;re creating one.
                                         editor.insertElement(table);
@@ -262,7 +264,7 @@
                                         var editor = this._editor;
                             
                                         if (table) {
-                                            table.remove(editor);
+                                            table.remove();
                                         } else {
                                             table = editor.elementPath().contains(&#x27;table&#x27;, 1);
                             
