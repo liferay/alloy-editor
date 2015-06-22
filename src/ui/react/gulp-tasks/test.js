@@ -1,7 +1,7 @@
 'use strict';
 
 var argv = require('yargs').argv;
-var react = require('gulp-react');
+var babel = require('gulp-babel');
 var gulp = require('gulp');
 var karma = require('karma').server;
 var mkdirp = require('mkdirp');
@@ -30,7 +30,7 @@ gulp.task('create-output-dir', function(callback) {
 
 gulp.task('copy-core-files', function() {
     return gulp.src(srcFiles, {cwd: 'src', base: 'src'})
-        .pipe(react())
+        .pipe(babel())
         .pipe(gulp.dest(path.join(editorDistFolder, 'test')));
 });
 

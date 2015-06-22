@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 
 var argv = require('yargs').argv;
-var react = require('gulp-react');
+var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var del = require('del');
 var fs = require('fs');
@@ -209,7 +209,7 @@ gulp.task('create-alloy-editor-no-react-min', function() {
 
 gulp.task('create-alloy-editor-core', function() {
     return gulp.src(srcFiles, {cwd : rootDir + '/src'})
-    .pipe(react()).on('error', errorHandler)
+    .pipe(babel()).on('error', errorHandler)
     .pipe(concat('alloy-editor-core.js'))
     .pipe(gulp.dest(editorDistFolder));
 });
