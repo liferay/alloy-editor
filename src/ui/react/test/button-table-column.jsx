@@ -3,9 +3,6 @@
 
     var assert = chai.assert;
     var TestUtils = React.addons.TestUtils;
-    var Simulate = TestUtils.Simulate;
-
-    var getFixtures = Utils.getFixtures('src/ui/react/test/fixtures', 'button-table-column.html');
 
     describe('ButtonTableColumn', function() {
         this.timeout(35000);
@@ -40,40 +37,36 @@
         });
 
         it('should insert a col before the current one when clicking on the columnInsertBefore button', function() {
-            testCommandButton.call(this, 'columnInsertBefore', 'insert_before');
+            var initialFixture = '3_by_3_table.html';
+            var expectedFixture = '3_by_4_table_second_col_empty.html';
+            var buttonDropdown = React.render(<AlloyEditor.ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
+            var buttonCommand = 'columnInsertBefore';
+
+            Utils.assertDropdownCommandButtonResult.call(this,
+                initialFixture, buttonDropdown, buttonCommand, expectedFixture
+            );
         });
 
         it('should insert a col after the current one when clicking on the columnInsertAfter button', function() {
-            testCommandButton.call(this, 'columnInsertAfter', 'insert_after');
+            var initialFixture = '3_by_3_table.html';
+            var expectedFixture = '3_by_4_table_third_col_empty.html';
+            var buttonDropdown = React.render(<AlloyEditor.ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
+            var buttonCommand = 'columnInsertAfter';
+
+            Utils.assertDropdownCommandButtonResult.call(this,
+                initialFixture, buttonDropdown, buttonCommand, expectedFixture
+            );
         });
 
         it('should delete the current col when clicking on the columnDelete button', function() {
-            testCommandButton.call(this, 'columnDelete', 'delete');
+            var initialFixture = '3_by_3_table.html';
+            var expectedFixture = '3_by_2_table.html';
+            var buttonDropdown = React.render(<AlloyEditor.ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
+            var buttonCommand = 'columnDelete';
+
+            Utils.assertDropdownCommandButtonResult.call(this,
+                initialFixture, buttonDropdown, buttonCommand, expectedFixture
+            );
         });
-
-        var testCommandButton = function(command, fixtureName) {
-            var buttonTableCell = React.render(<AlloyEditor.ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
-
-            var fixtures = getFixtures(fixtureName);
-
-            bender.tools.selection.setWithHtml(this.nativeEditor, fixtures.initial);
-
-            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonTableCell, 'alloy-editor-dropdown');
-
-            var commandButtons = TestUtils.findAllInRenderedTree(dropdown, function(component) {
-                return component.props.command === command;
-            });
-
-            assert.ok(commandButtons.length);
-
-            Simulate.click(React.findDOMNode(commandButtons[0]));
-
-            var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: true,
-                compatHtml: true
-            });
-
-            assert.strictEqual(data, fixtures.expected);
-        };
     });
 }());
