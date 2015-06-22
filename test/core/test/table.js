@@ -194,5 +194,19 @@
             assert.isNotNull(table);
             assert.strictEqual(table.$, tableElement.$);
         });
+
+        it('should not return table when there is no selection', function() {
+            var initialFixture = getFixture('1_by_1_table.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            this.nativeEditor.getSelection().removeAllRanges();
+
+            var table = tableUtils.getFromSelection();
+
+            assert.isUndefined(table);
+        });
     });
 }());
