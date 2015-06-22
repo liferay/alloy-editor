@@ -207,10 +207,6 @@
                                             }
                                         }
                             
-                                        if (!table.getAttribute(&#x27;style&#x27;)) {
-                                            table.removeAttribute(&#x27;style&#x27;);
-                                        }
-                            
                                         this.setAttributes(table, config.attrs || {});
                             
                                         // Insert the table element if we&#x27;re creating one.
@@ -243,6 +239,8 @@
                                             if (ranges.length &gt; 0) {
                                                 // Webkit could report the following range on cell selection (#4948):
                                                 // &lt;table&gt;&lt;tr&gt;&lt;td&gt;[&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]
+                            
+                                                /* istanbul ignore else */
                                                 if (CKEDITOR.env.webkit) {
                                                     ranges[0].shrink(CKEDITOR.NODE_ELEMENT);
                                                 }

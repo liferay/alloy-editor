@@ -612,10 +612,6 @@ CKEDITOR.disableAutoInline = true;
                 }
             }
 
-            if (!table.getAttribute('style')) {
-                table.removeAttribute('style');
-            }
-
             this.setAttributes(table, config.attrs || {});
 
             // Insert the table element if we're creating one.
@@ -648,6 +644,8 @@ CKEDITOR.disableAutoInline = true;
                 if (ranges.length > 0) {
                     // Webkit could report the following range on cell selection (#4948):
                     // <table><tr><td>[&nbsp;</td></tr></table>]
+
+                    /* istanbul ignore else */
                     if (CKEDITOR.env.webkit) {
                         ranges[0].shrink(CKEDITOR.NODE_ELEMENT);
                     }
