@@ -12,6 +12,26 @@
             }
         },
 
+        assertResult: function(fixtureBase) {
+            var getFixture = Utils.getFixture(fixtureBase);
+
+            return function(initialFixture, command, expectedFixture) {
+                var initial = getFixture(initialFixture);
+                var expected = getFixture(expectedFixture);
+
+                bender.tools.selection.setWithHtml(this.nativeEditor, initial);
+
+                command.call(this);
+
+                var data = bender.tools.getData(this.nativeEditor, {
+                    fixHtml: true,
+                    compatHtml: true
+                });
+
+                assert.strictEqual(data, expected);
+            };
+        },
+
         beforeEach: function(done) {
             Utils.createContainer.call(this);
 
@@ -64,20 +84,13 @@
             }
         },
 
-        getFixtures: function(fixtureBase, fixtureFile) {
-            return function(fixtureName) {
-                var fixtureData = {};
-
+        getFixture: function(fixtureBase) {
+            return function(fixtureFile) {
                 fixture.setBase(fixtureBase);
 
                 fixture.load(fixtureFile);
 
-                var htmlFixture = fixture.el.querySelector('#' + fixtureName);
-
-                fixtureData.initial = Utils._prepareFixtureForAssertion(htmlFixture.querySelector('[data-fixture="initial"]'));
-                fixtureData.expected = Utils._prepareFixtureForAssertion(htmlFixture.querySelector('[data-fixture="expected"]'));
-
-                return fixtureData;
+                return Utils._prepareFixtureForAssertion(fixture.el);
             };
         },
 
