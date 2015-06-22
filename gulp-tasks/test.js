@@ -33,14 +33,14 @@ gulp.task('prepare-files', function(done) {
         ], done);
 });
 
-gulp.task('test-core', ['prepare-files'], function (done) {
+gulp.task('test:core', ['prepare-files'], function (done) {
     karma.start({
         configFile: path.join(__dirname, '../test/core/karma.js'),
         singleRun: (argv.debug || argv.d) ? false : true
     }, done);
 });
 
-gulp.task('test-plugins', ['prepare-files'], function (done) {
+gulp.task('test:plugins', ['prepare-files'], function (done) {
     karma.start({
         configFile: path.join(__dirname, '../test/plugins/karma.js'),
         singleRun: (argv.debug || argv.d) ? false : true
