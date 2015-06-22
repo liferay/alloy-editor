@@ -1,7 +1,34 @@
 (function() {
     'use strict';
 
-    if (!window.Utils) window.Utils = {};
+    if (!window.Utils) {
+        window.Utils = {};
+    }
+
+    window.Utils.assertDropdownCommandButtonResult = (function() {
+        var assertResult = window.Utils.assertResult('src/ui/react/test/fixtures');
+
+        return function(initialFixture, buttonDropdown, buttonCommand, expectedFixture) {
+            var TestUtils = React.addons.TestUtils;
+            var Simulate = TestUtils.Simulate;
+
+            var command = function() {
+                var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonDropdown, 'alloy-editor-dropdown');
+
+                var commandButtons = TestUtils.findAllInRenderedTree(dropdown, function(component) {
+                    return component.props.command === buttonCommand;
+                });
+
+                assert.ok(commandButtons.length);
+
+                Simulate.click(React.findDOMNode(commandButtons[0]));
+            };
+
+            assertResult.call(this,
+                initialFixture, command, expectedFixture
+            );
+        };
+    }());
 
     window.Utils.createAlloyEditor = function(done, config) {
         var editable = document.createElement('div');

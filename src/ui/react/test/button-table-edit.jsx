@@ -8,7 +8,7 @@
     var KEY_ENTER = 13;
     var KEY_ESC = 27;
 
-    var getFixtures = Utils.getFixtures('src/ui/react/test/fixtures', 'button-table-edit.html');
+    var getFixture = Utils.getFixture('src/ui/react/test/fixtures');
 
     describe('ButtonTableEdit', function() {
         this.timeout(35000);
@@ -33,7 +33,7 @@
                 compatHtml: true
             });
 
-            var expected = getFixtures('create_3_3_table').expected;
+            var expected = getFixture('3_by_3_empty_table.html');
 
             assert.strictEqual(data, expected);
         });
@@ -53,7 +53,7 @@
                 compatHtml: true
             });
 
-            var expected = getFixtures('create_6_4_table').expected;
+            var expected = getFixture('6_by_4_table.html');
 
             assert.strictEqual(data, expected);
         });
@@ -71,7 +71,7 @@
                 compatHtml: true
             });
 
-            var expected = getFixtures('create_6_4_table').expected;
+            var expected = getFixture('6_by_4_table.html');
 
             assert.strictEqual(data, expected);
         });
@@ -89,7 +89,7 @@
                 compatHtml: true
             });
 
-            var expected = getFixtures('create_6_4_table').expected;
+            var expected = getFixture('6_by_4_table.html');
 
             assert.strictEqual(data, expected);
         });
