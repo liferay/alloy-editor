@@ -10,7 +10,7 @@ var path = require('path');
 var srcFiles = require('./_src.js');
 
 var preprocessors = {
-    '**/*.jsx': ['react-jsx'],
+    '**/*.jsx': ['babel'],
     '**/*.html': ['html2js']
 };
 
