@@ -13,6 +13,11 @@
         this._editor = editor;
     }
 
+    Table.HEADING_BOTH = 'Both';
+    Table.HEADING_COL = 'Column';
+    Table.HEADING_NONE = 'None';
+    Table.HEADING_ROW = 'Row';
+
     Table.prototype = {
         constructor: Table,
 
@@ -43,7 +48,8 @@
                 }
             }
 
-            this.setAttributes(table, config.attrs || {});
+            this.setAttributes(table, config.attrs);
+            this.setHeading(table, config.heading);
 
             // Insert the table element if we're creating one.
             editor.insertElement(table);
@@ -89,6 +95,47 @@
         },
 
         /**
+         * Returns which heading style is set for the given table
+         *
+         * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
+         * @return {String} The heading of the table. Expected values are `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`..
+         */
+        getHeading: function(table) {
+            table = table || this.getFromSelection();
+
+            if (!table) {
+                return null;
+            }
+
+            var rowHeadingSettings = table.$.tHead !== null;
+
+            var colHeadingSettings = true;
+
+            // Check if all the first cells in every row are TH
+            for (var row = 0; row < table.$.rows.length; row++) {
+                // If just one cell isn't a TH then it isn't a header column
+                var cell = table.$.rows[row].cells[0];
+
+                if (cell && cell.nodeName.toLowerCase() !== 'th') {
+                    colHeadingSettings = false;
+                    break;
+                }
+            }
+
+            var headingSettings = Table.HEADING_NONE;
+
+            if (rowHeadingSettings) {
+                headingSettings = Table.HEADING_ROW;
+            }
+
+            if (colHeadingSettings) {
+                headingSettings = (headingSettings === Table.HEADING_ROW ? Table.HEADING_BOTH : Table.HEADING_COL);
+            }
+
+            return headingSettings;
+        },
+
+        /**
          * Removes a table from the editor.
          *
          * @method remove
@@ -127,9 +174,109 @@
          * @param {Object} attrs The attributes which have to be assigned to the table
          */
         setAttributes: function(table, attrs) {
-            Object.keys(attrs).forEach(function(attr) {
-                table.setAttribute(attr, attrs[attr]);
-            });
+            if (attrs) {
+                Object.keys(attrs).forEach(function(attr) {
+                    table.setAttribute(attr, attrs[attr]);
+                });
+            }
+        },
+
+        /**
+         * Sets the appropriate table heading style to a table.
+         *
+         * @method setHeading
+         * @param {CKEDITOR.dom.element} table The table element to which the heading should be set. If null, it will be retrieved from the current selection.
+         * @param {String} heading The table heading to be set. Accepted values are: `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
+         */
+        setHeading: function(table, heading) {
+            table = table || this.getFromSelection();
+
+            var i, newCell;
+            var tableHead;
+            var tableBody = table.getElementsByTag('tbody').getItem(0);
+
+            var tableHeading = this.getHeading(table);
+            var hadColHeading = (tableHeading === Table.HEADING_COL || tableHeading === Table.HEADING_BOTH);
+
+            var needColHeading = heading === Table.HEADING_COL || heading === Table.HEADING_BOTH;
+            var needRowHeading = heading === Table.HEADING_ROW || heading === Table.HEADING_BOTH;
+
+            // If we need row heading and don't have a <thead> element yet, move the
+            // first row of the table to the head and convert the nodes to <th> ones.
+            if (!table.$.tHead && needRowHeading) {
+                var tableFirstRow = tableBody.getElementsByTag('tr').getItem(0);
+                var tableFirstRowChildCount = tableFirstRow.getChildCount();
+
+                // Change TD to TH:
+                for (i = 0; i < tableFirstRowChildCount; i++) {
+                    var cell = tableFirstRow.getChild(i);
+
+                    // Skip bookmark nodes. (#6155)
+                    if (cell.type === CKEDITOR.NODE_ELEMENT && !cell.data('cke-bookmark')) {
+                        cell.renameNode('th');
+                        cell.setAttribute('scope', 'col');
+                    }
+                }
+
+                tableHead = this._createElement(table.$.createTHead());
+                tableHead.append(tableFirstRow.remove());
+            }
+
+            // If we don't need row heading and we have a <thead> element, move the
+            // row out of there and into the <tbody> element.
+            if (table.$.tHead !== null && !needRowHeading) {
+                // Move the row out of the THead and put it in the TBody:
+                tableHead = this._createElement(table.$.tHead);
+
+                var previousFirstRow = tableBody.getFirst();
+
+                while (tableHead.getChildCount() > 0) {
+                    var newFirstRow = tableHead.getFirst();
+                    var newFirstRowChildCount = newFirstRow.getChildCount();
+
+                    for (i = 0; i < newFirstRowChildCount; i++) {
+                        newCell = newFirstRow.getChild(i);
+
+                        if (newCell.type === CKEDITOR.NODE_ELEMENT) {
+                            newCell.renameNode('td');
+                            newCell.removeAttribute('scope');
+                        }
+                    }
+
+                    newFirstRow.insertBefore(previousFirstRow);
+                }
+
+                tableHead.remove();
+            }
+
+            tableHeading = this.getHeading(table);
+            var hasColHeading = (tableHeading === Table.HEADING_COL || tableHeading === Table.HEADING_BOTH);
+
+            // If we need column heading and the table doesn't have it, convert every first cell in
+            // every row into a `<th scope="row">` element.
+            if (!hasColHeading && needColHeading) {
+                for (i = 0; i < table.$.rows.length; i++) {
+                    if (table.$.rows[i].cells[0].nodeName.toLowerCase() !== 'th') {
+                        newCell = new CKEDITOR.dom.element(table.$.rows[i].cells[0]);
+                        newCell.renameNode('th');
+                        newCell.setAttribute('scope', 'row');
+                    }
+                }
+            }
+
+            // If we don't need column heading but the table has it, convert every first cell in every
+            // row back into a `<td>` element.
+            if (hadColHeading && !needColHeading) {
+                for (i = 0; i < table.$.rows.length; i++) {
+                    var row = new CKEDITOR.dom.element(table.$.rows[i]);
+
+                    if (row.getParent().getName() === 'tbody') {
+                        newCell = new CKEDITOR.dom.element(row.$.cells[0]);
+                        newCell.renameNode('td');
+                        newCell.removeAttribute('scope');
+                    }
+                }
+            }
         },
 
         /**
@@ -144,6 +291,20 @@
             return new CKEDITOR.dom.element(name, this._editor.document);
         }
     };
+
+    CKEDITOR.on('instanceReady', function(event) {
+        var headingCommands = [Table.HEADING_NONE, Table.HEADING_ROW, Table.HEADING_COL, Table.HEADING_BOTH];
+
+        var tableUtils = new Table(event.editor);
+
+        headingCommands.forEach(function(heading) {
+            event.editor.addCommand('tableHeading' + heading, {
+                exec: function(editor) {
+                    tableUtils.setHeading(null, heading);
+                }
+            });
+        });
+    });
 
     CKEDITOR.Table = CKEDITOR.Table || Table;
 }());

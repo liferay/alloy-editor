@@ -15,7 +15,7 @@
         assertResult: function(fixtureBase) {
             var getFixture = Utils.getFixture(fixtureBase);
 
-            return function(initialFixture, command, expectedFixture) {
+            return function(initialFixture, command, expectedFixture, message) {
                 var initial = getFixture(initialFixture);
                 var expected = getFixture(expectedFixture);
 
@@ -28,7 +28,7 @@
                     compatHtml: true
                 });
 
-                assert.strictEqual(data, expected);
+                assert.strictEqual(data, expected, message);
             };
         },
 
