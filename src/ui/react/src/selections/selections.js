@@ -15,7 +15,7 @@
         test: AlloyEditor.SelectionTest.text
     }, {
         name: 'table',
-        buttons: ['tableRow', 'tableColumn', 'tableCell', 'tableRemove'],
+        buttons: ['tableHeading', 'tableRow', 'tableColumn', 'tableCell', 'tableRemove'],
         getArrowBoxClasses: AlloyEditor.SelectionGetArrowBoxClasses.table,
         setPosition: AlloyEditor.SelectionSetPosition.table,
         test: AlloyEditor.SelectionTest.table
