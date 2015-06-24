@@ -57,7 +57,7 @@
     "wysiwyg"
   ],
   "author": "Iliyan Peychev",
-  "license": "LGPL",
+  "license": "LGPL-3.0",
   "bugs": {
     "url": "https://github.com/liferay/alloy-editor/issues"
   },
