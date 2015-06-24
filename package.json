@@ -1,6 +1,6 @@
 {
-  "name": "alloy-editor",
-  "version": "0.3.2",
+  "name": "alloyeditor",
+  "version": "0.3.3",
   "description": "AlloyEditor, a modern WYSIWYG editor, build on top of CKEditor",
   "devDependencies": {
     "bourbon": "https://github.com/thoughtbot/bourbon/tarball/master",
