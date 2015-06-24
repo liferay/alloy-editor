@@ -234,7 +234,7 @@ IE10-PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
     }
 }
 
-.alloy-editor-container-styles {
+.alloy-editor-container-dropdown, [class*=alloy-editor-container-dropdown-] {
     float: left $IE9-ONLY;
     width: 5 * $base-button-width;
 
@@ -254,22 +254,29 @@ IE10-PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
                 float: right $IE9-ONLY;
             }
 
-            .alloy-editor-selected-style {
+            .alloy-editor-container-dropdown-selected-item {
                 @include flex(1);
 
                 display: inline-block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
 
                 position: relative $IE9-ONLY;
                 top: 50% $IE9-ONLY;
                 transform: translateY(-50%) $IE9-ONLY;
             }
 
-            IE10-PLUS::-ms-reveal, .alloy-editor-selected-style {
+            IE10-PLUS::-ms-reveal, .alloy-editor-container-dropdown-selected-item {
                 top: 0;
                 transform: translateY(0);
             }
         }
     }
+}
+
+.alloy-editor-container-dropdown-xl {
+    width: 8 * $base-button-width;
 }
 
 .alloy-editor-twitter-link {

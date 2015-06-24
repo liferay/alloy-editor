@@ -8,7 +8,7 @@
     window.Utils.assertDropdownCommandButtonResult = (function() {
         var assertResult = window.Utils.assertResult('src/ui/react/test/fixtures');
 
-        return function(initialFixture, buttonDropdown, buttonCommand, expectedFixture) {
+        return function(initialFixture, buttonDropdown, buttonCommand, expectedFixture, selectionFn, errorMessage) {
             var TestUtils = React.addons.TestUtils;
             var Simulate = TestUtils.Simulate;
 
@@ -21,11 +21,15 @@
 
                 assert.ok(commandButtons.length);
 
+                if (selectionFn) {
+                    selectionFn.call(this);
+                }
+
                 Simulate.click(React.findDOMNode(commandButtons[0]));
             };
 
             assertResult.call(this,
-                initialFixture, command, expectedFixture
+                initialFixture, command, expectedFixture, errorMessage
             );
         };
     }());
