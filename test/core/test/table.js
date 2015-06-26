@@ -77,6 +77,191 @@
             );
         });
 
+        it('should create a 3x3 table with the first row as heading', function() {
+            var initialFixture = 'empty.html';
+            var expectedFixture = '3_by_3_table_row_heading.html';
+            var command = function() {
+                var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+                tableUtils.create({
+                    cols: 3,
+                    heading: CKEDITOR.Table.HEADING_ROW,
+                    rows: 3
+                });
+            };
+
+            assertResult.call(this,
+                initialFixture, command, expectedFixture
+            );
+        });
+
+        it('should create a 3x3 table with the first col as heading', function() {
+            var initialFixture = 'empty.html';
+            var expectedFixture = '3_by_3_table_col_heading.html';
+            var command = function() {
+                var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+                tableUtils.create({
+                    cols: 3,
+                    heading: CKEDITOR.Table.HEADING_COL,
+                    rows: 3
+                });
+            };
+
+            assertResult.call(this,
+                initialFixture, command, expectedFixture
+            );
+        });
+
+        it('should create a 3x3 table with the first row and col as heading', function() {
+            var initialFixture = 'empty.html';
+            var expectedFixture = '3_by_3_table_both_heading.html';
+            var command = function() {
+                var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+                tableUtils.create({
+                    cols: 3,
+                    heading: CKEDITOR.Table.HEADING_BOTH,
+                    rows: 3
+                });
+            };
+
+            assertResult.call(this,
+                initialFixture, command, expectedFixture
+            );
+        });
+
+        it('should say the table has row heading if the table has a thead element', function() {
+            var initialFixture = getFixture('3_by_3_table_row_heading.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableElement = this.nativeEditor.element.find('table').getItem(0);
+
+            this.nativeEditor.getSelection().selectElement(tableElement);
+
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            assert.strictEqual(tableUtils.getHeading(), CKEDITOR.Table.HEADING_ROW);
+        });
+
+        it('should say the table has column heading if every first cell in a table row is a <th> element', function() {
+            var initialFixture = getFixture('3_by_3_table_col_heading.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableElement = this.nativeEditor.element.find('table').getItem(0);
+
+            this.nativeEditor.getSelection().selectElement(tableElement);
+
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            assert.strictEqual(tableUtils.getHeading(), CKEDITOR.Table.HEADING_COL);
+        });
+
+        it('should say the table has both heading if it has both row and column heading', function() {
+            var initialFixture = getFixture('3_by_3_table_both_heading.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableElement = this.nativeEditor.element.find('table').getItem(0);
+
+            this.nativeEditor.getSelection().selectElement(tableElement);
+
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            assert.strictEqual(tableUtils.getHeading(), CKEDITOR.Table.HEADING_BOTH);
+        });
+
+        it('should return null for table heading if table has not been specified and is not in the current selection', function() {
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            assert.isNull(tableUtils.getHeading());
+        });
+
+        it('should switch from any given heading setting to any possible setting properly', function() {
+            var HEADING_NONE = CKEDITOR.Table.HEADING_NONE,
+                HEADING_COL = CKEDITOR.Table.HEADING_COL,
+                HEADING_ROW = CKEDITOR.Table.HEADING_ROW,
+                HEADING_BOTH = CKEDITOR.Table.HEADING_BOTH;
+
+            var headingFixtures = {};
+
+            headingFixtures[HEADING_NONE] = '3_by_3_table_no_heading.html';
+            headingFixtures[HEADING_ROW] = '3_by_3_table_row_heading.html';
+            headingFixtures[HEADING_COL] = '3_by_3_table_col_heading.html';
+            headingFixtures[HEADING_BOTH] = '3_by_3_table_both_heading.html';
+
+            var testMatrix = [
+                {initial: HEADING_NONE, expected: HEADING_ROW},
+                {initial: HEADING_NONE, expected: HEADING_COL},
+                {initial: HEADING_NONE, expected: HEADING_BOTH},
+                {initial: HEADING_ROW, expected: HEADING_NONE},
+                {initial: HEADING_ROW, expected: HEADING_COL},
+                {initial: HEADING_ROW, expected: HEADING_BOTH},
+                {initial: HEADING_COL, expected: HEADING_NONE},
+                {initial: HEADING_COL, expected: HEADING_ROW},
+                {initial: HEADING_COL, expected: HEADING_BOTH},
+                {initial: HEADING_BOTH, expected: HEADING_NONE},
+                {initial: HEADING_BOTH, expected: HEADING_ROW},
+                {initial: HEADING_BOTH, expected: HEADING_COL}
+            ];
+
+            testMatrix.forEach(function(testData) {
+                var errorMessage = 'Changing table heading from ' + testData.initial + ' to ' + testData.expected + ' did not produce the expected result';
+                var initialFixture = headingFixtures[testData.initial];
+                var expectedFixture = headingFixtures[testData.expected];
+                var command = function() {
+                    var tableElement = this.nativeEditor.element.find('table').getItem(0);
+
+                    this.nativeEditor.getSelection().selectElement(tableElement);
+
+                    var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+                    tableUtils.setHeading(null, testData.expected);
+                };
+
+                assertResult.call(this,
+                    initialFixture, command, expectedFixture, errorMessage
+                );
+            }.bind(this));
+        });
+
+        it('should attach commands to the editor for every possible heading setting', function() {
+            var afterCommandExec = sinon.stub();
+
+            var initialFixture = getFixture('3_by_3_table_no_heading.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableElement = this.nativeEditor.element.find('table').getItem(0);
+
+            this.nativeEditor.getSelection().selectElement(tableElement);
+
+            this.nativeEditor.on('afterCommandExec', afterCommandExec);
+
+            this.nativeEditor.execCommand('tableHeadingRow');
+            this.nativeEditor.execCommand('tableHeadingColumn');
+            this.nativeEditor.execCommand('tableHeadingBoth');
+            this.nativeEditor.execCommand('tableHeadingNone');
+
+            assert.strictEqual(afterCommandExec.callCount, 4);
+        });
+
+        it('should say the table has no heading if it does not have neither row nor column heading', function() {
+            var initialFixture = getFixture('3_by_3_table_no_heading.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableElement = this.nativeEditor.element.find('table').getItem(0);
+
+            this.nativeEditor.getSelection().selectElement(tableElement);
+
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            assert.strictEqual(tableUtils.getHeading(), CKEDITOR.Table.HEADING_NONE);
+        });
+
         it('should add all attributes to the created table', function() {
             var initialFixture = 'empty.html';
             var expectedFixture = '1_by_1_table_with_attrs.html';

@@ -13,6 +13,7 @@ var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var template = require('gulp-template');
 var uglify = require('gulp-uglify');
+var walk = require('walk');
 var yuidoc = require('gulp-yuidoc-relative');
 var zip = require('gulp-zip');
 
@@ -140,11 +141,6 @@ gulp.task('clean-dist', function(callback) {
 gulp.task('copy-ckeditor', function() {
     return gulp.src(path.join(rootDir, 'lib', 'ckeditor', '/**'))
         .pipe(gulp.dest(editorDistFolder));
-});
-
-gulp.task('copy-languages', function() {
-    return gulp.src(path.join(reactDir, 'lang', '/**'))
-        .pipe(gulp.dest(path.join(editorDistFolder, 'lang', 'alloy-editor')));
 });
 
 gulp.task('create-alloy-editor-all', function() {
