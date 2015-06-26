@@ -739,6 +739,10 @@ footer .copyright {
   border: solid 1px #e6f1fa;
 }
 
+[class*=alloy-editor-toolbar-] {
+  z-index: 500;
+}
+
 /* About */
 
 .about-header {

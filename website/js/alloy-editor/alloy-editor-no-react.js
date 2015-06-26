@@ -692,7 +692,9 @@ CKEDITOR.disableAutoInline = true;
         return;
     }
 
-    (function() {
+    'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -715,10 +717,10 @@ CKEDITOR.disableAutoInline = true;
      * @param {Object} context The context in which the callback will be called. This argument is optional.
      * @param {Array} args An array of arguments which the callback will receive.
      */
-    CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function(callback, timeout, context, args) {
+    CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function (callback, timeout, context, args) {
         var debounceHandle;
 
-        var callFn = function() {
+        var callFn = function callFn() {
             var callContext = context || this;
 
             clearTimeout(debounceHandle);
@@ -731,19 +733,21 @@ CKEDITOR.disableAutoInline = true;
 
             var callArgs = result.concat(args || []);
 
-            debounceHandle = setTimeout(function() {
+            debounceHandle = setTimeout(function () {
                 callback.apply(callContext, callArgs);
             }, timeout);
         };
 
-        callFn.detach = function() {
+        callFn.detach = function () {
             clearTimeout(debounceHandle);
         };
 
         return callFn;
     };
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
@@ -770,7 +774,7 @@ CKEDITOR.disableAutoInline = true;
          * @param {String} URI The URI of the link.
          * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
          */
-        create: function(URI, attrs) {
+        create: function create(URI, attrs) {
             var selection = this._editor.getSelection();
 
             var range = selection.getRanges()[0];
@@ -804,7 +808,7 @@ CKEDITOR.disableAutoInline = true;
          * @method getFromSelection
          * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
          */
-        getFromSelection: function() {
+        getFromSelection: function getFromSelection() {
             var selection = this._editor.getSelection();
 
             var selectedElement = selection.getSelectedElement();
@@ -830,7 +834,7 @@ CKEDITOR.disableAutoInline = true;
          * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
          * @method remove
          */
-        remove: function(link) {
+        remove: function remove(link) {
             var editor = this._editor;
 
             if (link) {
@@ -860,7 +864,7 @@ CKEDITOR.disableAutoInline = true;
          * @param {String} URI The new URI of the link.
          * @param {CKEDITOR.dom.element} link The link element which href should be removed.
          */
-        update: function(URI, link) {
+        update: function update(URI, link) {
             var style = link || this.getFromSelection();
 
             style.setAttributes({
@@ -878,7 +882,7 @@ CKEDITOR.disableAutoInline = true;
          * @param {String} URI The URI of the link.
          * @return {String} The URI updated with the protocol.
          */
-        _getCompleteURI: function(URI) {
+        _getCompleteURI: function _getCompleteURI(URI) {
             if (!REGEX_URI_SCHEME.test(URI)) {
                 URI = 'http://' + URI;
             }
@@ -888,8 +892,10 @@ CKEDITOR.disableAutoInline = true;
     };
 
     CKEDITOR.Link = CKEDITOR.Link || Link;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     if (CKEDITOR.plugins.get('selectionregion')) {
@@ -922,7 +928,7 @@ CKEDITOR.disableAutoInline = true;
          * @param {Number} x X point in page coordinates.
          * @param {Number} y Y point in page coordinates.
          */
-        createSelectionFromPoint: function(x, y) {
+        createSelectionFromPoint: function createSelectionFromPoint(x, y) {
             this.createSelectionFromRange(x, y, x, y);
         },
 
@@ -935,7 +941,7 @@ CKEDITOR.disableAutoInline = true;
          * @param {Number} endX X coordinate of the second point.
          * @param {Number} endY Y coordinate of the second point.
          */
-        createSelectionFromRange: function(startX, startY, endX, endY) {
+        createSelectionFromRange: function createSelectionFromRange(startX, startY, endX, endY) {
             var end;
             var endContainer;
             var endOffset;
@@ -1001,7 +1007,7 @@ CKEDITOR.disableAutoInline = true;
          * - right
          * - top
          */
-        getCaretRegion: function() {
+        getCaretRegion: function getCaretRegion() {
             var selection = this.getSelection();
 
             var bookmarks = selection.createBookmarks();
@@ -1032,7 +1038,7 @@ CKEDITOR.disableAutoInline = true;
          * - text - The selected text
          * - region - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionRegion:method"}}{{/crossLink}}
          */
-        getSelectionData: function() {
+        getSelectionData: function getSelectionData() {
             var selection = this.getSelection();
 
             var result = {
@@ -1057,7 +1063,7 @@ CKEDITOR.disableAutoInline = true;
          * - height - The height of the selection region
          * - width - The width of the selection region
          */
-        getSelectionRegion: function() {
+        getSelectionRegion: function getSelectionRegion() {
             var region = this.getClientRectsRegion();
 
             region.direction = this.getSelectionDirection();
@@ -1074,13 +1080,12 @@ CKEDITOR.disableAutoInline = true;
          * @method isSelectionEmpty
          * @return {Boolean} Returns true if the current selection is empty, false otherwise.
          */
-        isSelectionEmpty: function() {
+        isSelectionEmpty: function isSelectionEmpty() {
             var ranges;
 
             var selection = this.getSelection();
 
-            return (selection.getType() === CKEDITOR.SELECTION_NONE) ||
-                ((ranges = selection.getRanges()) && ranges.length === 1 && ranges[0].collapsed);
+            return selection.getType() === CKEDITOR.SELECTION_NONE || (ranges = selection.getRanges()) && ranges.length === 1 && ranges[0].collapsed;
         },
 
         /**
@@ -1108,7 +1113,7 @@ CKEDITOR.disableAutoInline = true;
          *     + top - top offset of the selection
          *     + width - the width of the rectangle
          */
-        getClientRectsRegion: function() {
+        getClientRectsRegion: function getClientRectsRegion() {
             var selection = this.getSelection();
             var nativeSelection = selection.getNative();
 
@@ -1120,7 +1125,7 @@ CKEDITOR.disableAutoInline = true;
                 clientRects = range.getClientRects();
             } else {
                 rangeCount = nativeSelection.rangeCount;
-                clientRects = (nativeSelection.rangeCount > 0) ? nativeSelection.getRangeAt(0).getClientRects() : [];
+                clientRects = nativeSelection.rangeCount > 0 ? nativeSelection.getRangeAt(0).getClientRects() : [];
             }
 
             var bottom = 0;
@@ -1198,7 +1203,7 @@ CKEDITOR.disableAutoInline = true;
          * - CKEDITOR.SELECTION_TOP_TO_BOTTOM;
          * - CKEDITOR.SELECTION_BOTTOM_TO_TOP;
          */
-        getSelectionDirection: function() {
+        getSelectionDirection: function getSelectionDirection() {
             var selection = this.getSelection();
             var nativeSelection = selection.getNative();
 
@@ -1218,31 +1223,30 @@ CKEDITOR.disableAutoInline = true;
         }
     };
 
-    CKEDITOR.plugins.add(
-        'selectionregion', {
-            /**
-             * Initializer lifecycle implementation for the SelectionRegion plugin.
-             *
-             * @method init
-             * @protected
-             * @param {Object} editor The current CKEditor instance.
-             */
-            init: function(editor) {
-                var attr,
-                    hasOwnProperty;
+    CKEDITOR.plugins.add('selectionregion', {
+        /**
+         * Initializer lifecycle implementation for the SelectionRegion plugin.
+         *
+         * @method init
+         * @protected
+         * @param {Object} editor The current CKEditor instance.
+         */
+        init: function init(editor) {
+            var attr, hasOwnProperty;
 
-                hasOwnProperty = Object.prototype.hasOwnProperty;
+            hasOwnProperty = Object.prototype.hasOwnProperty;
 
-                for (attr in SelectionRegion.prototype) {
-                    if (hasOwnProperty.call(SelectionRegion.prototype, attr) && typeof editor[attr] === 'undefined') {
-                        editor[attr] = SelectionRegion.prototype[attr];
-                    }
+            for (attr in SelectionRegion.prototype) {
+                if (hasOwnProperty.call(SelectionRegion.prototype, attr) && typeof editor[attr] === 'undefined') {
+                    editor[attr] = SelectionRegion.prototype[attr];
                 }
             }
         }
-    );
-}());
-(function() {
+    });
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -1267,9 +1271,11 @@ CKEDITOR.disableAutoInline = true;
          * @param {Object} config Table configuration object
          * @return {Object} The created table
          */
-        create: function(config) {
+        create: function create(config) {
             var editor = this._editor;
             var table = this._createElement('table');
+
+            config = config || {};
 
             // Generate the rows and cols.
             var tbody = table.append(this._createElement('tbody'));
@@ -1285,11 +1291,7 @@ CKEDITOR.disableAutoInline = true;
                 }
             }
 
-            if (!table.getAttribute('style')) {
-                table.removeAttribute('style');
-            }
-
-            this.setAttributes(table, config.attrs);
+            this.setAttributes(table, config.attrs || {});
 
             // Insert the table element if we're creating one.
             editor.insertElement(table);
@@ -1308,7 +1310,7 @@ CKEDITOR.disableAutoInline = true;
          * @method getFromSelection
          * @return {CKEDITOR.dom.element} The retrieved table or null if not found.
          */
-        getFromSelection: function() {
+        getFromSelection: function getFromSelection() {
             var table;
             var selection = this._editor.getSelection();
             var selected = selection.getSelectedElement();
@@ -1321,6 +1323,8 @@ CKEDITOR.disableAutoInline = true;
                 if (ranges.length > 0) {
                     // Webkit could report the following range on cell selection (#4948):
                     // <table><tr><td>[&nbsp;</td></tr></table>]
+
+                    /* istanbul ignore else */
                     if (CKEDITOR.env.webkit) {
                         ranges[0].shrink(CKEDITOR.NODE_ELEMENT);
                     }
@@ -1338,11 +1342,11 @@ CKEDITOR.disableAutoInline = true;
          * @method remove
          * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
          */
-        remove: function(table) {
+        remove: function remove(table) {
             var editor = this._editor;
 
             if (table) {
-                table.remove(editor);
+                table.remove();
             } else {
                 table = editor.elementPath().contains('table', 1);
 
@@ -1370,8 +1374,8 @@ CKEDITOR.disableAutoInline = true;
          * @param {Object} table The table to which the attributes should be assigned
          * @param {Object} attrs The attributes which have to be assigned to the table
          */
-        setAttributes: function(table, attrs) {
-            Object.keys(attrs).forEach(function(attr) {
+        setAttributes: function setAttributes(table, attrs) {
+            Object.keys(attrs).forEach(function (attr) {
                 table.setAttribute(attr, attrs[attr]);
             });
         },
@@ -1384,15 +1388,16 @@ CKEDITOR.disableAutoInline = true;
          * @param {String} name The tag name from which an element should be created
          * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class
          */
-        _createElement: function(name) {
+        _createElement: function _createElement(name) {
             return new CKEDITOR.dom.element(name, this._editor.document);
         }
     };
 
     CKEDITOR.Table = CKEDITOR.Table || Table;
-}());
+})();
+'use strict';
 
-(function() {
+(function () {
     'use strict';
 
     /**
@@ -1413,7 +1418,7 @@ CKEDITOR.disableAutoInline = true;
      * @param {Object} objects* One or more objects to merge.
      * @return {Object} A new merged object.
      */
-    CKEDITOR.tools.merge = CKEDITOR.tools.merge || function() {
+    CKEDITOR.tools.merge = CKEDITOR.tools.merge || function () {
         var result = {};
 
         for (var i = 0; i < arguments.length; ++i) {
@@ -1437,13 +1442,15 @@ CKEDITOR.disableAutoInline = true;
      * @param {DOMElement} element The element on which the event shoud be simualted.
      * @param {String} event The name of the event which have to be simulated.
      */
-    CKEDITOR.tools.simulate = function(element, event) {
+    CKEDITOR.tools.simulate = function (element, event) {
         var eventInstance = document.createEvent('Events');
         eventInstance.initEvent(event, true, false);
         element.dispatchEvent(eventInstance);
     };
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     if (CKEDITOR.plugins.get('uicore')) {
@@ -1500,94 +1507,88 @@ CKEDITOR.disableAutoInline = true;
      * @type Number
      */
 
-    CKEDITOR.plugins.add(
-        'uicore', {
-            /**
-             * Initializer lifecycle implementation for the UICore plugin.
-             *
-             * @protected
-             * @method init
-             * @param {Object} editor The current CKEditor instance.
-             */
-            init: function(editor) {
-                var ariaState = [];
+    CKEDITOR.plugins.add('uicore', {
+        /**
+         * Initializer lifecycle implementation for the UICore plugin.
+         *
+         * @protected
+         * @method init
+         * @param {Object} editor The current CKEditor instance.
+         */
+        init: function init(editor) {
+            var ariaState = [];
 
-                var ariaElement = this._createAriaElement(editor.id);
+            var ariaElement = this._createAriaElement(editor.id);
 
-                var uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
+            var uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
 
-                var handleAria = CKEDITOR.tools.debounce(
-                    function(event) {
-                        ariaElement.innerHTML = ariaState.join('. ');
-                    },
-                    uiTasksTimeout
-                );
+            var handleAria = CKEDITOR.tools.debounce(function (event) {
+                ariaElement.innerHTML = ariaState.join('. ');
+            }, uiTasksTimeout);
 
-                var handleUI = CKEDITOR.tools.debounce(
-                    function(event) {
-                        ariaState = [];
+            var handleUI = CKEDITOR.tools.debounce(function (event) {
+                ariaState = [];
 
-                        if (event.name !== 'keyup' || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
-                            editor.fire('editorInteraction', {
-                                nativeEvent: event.data.$,
-                                selectionData: editor.getSelectionData()
-                            });
-                        }
-                    },
-                    uiTasksTimeout
-                );
+                if (event.name !== 'keyup' || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
+                    editor.fire('editorInteraction', {
+                        nativeEvent: event.data.$,
+                        selectionData: editor.getSelectionData()
+                    });
+                }
+            }, uiTasksTimeout);
 
-                editor.on('ariaUpdate', function(event) {
-                    // handleAria is debounced function, so if it is being called multiple times, it will
-                    // be canceled until some time passes.
-                    // For that reason here we explicitly append the current message to the list of messages
-                    // and call handleAria. Since it is debounced, when some timeout passes,
-                    // all the messages will be applied to the live region and not only the last one.
+            editor.on('ariaUpdate', function (event) {
+                // handleAria is debounced function, so if it is being called multiple times, it will
+                // be canceled until some time passes.
+                // For that reason here we explicitly append the current message to the list of messages
+                // and call handleAria. Since it is debounced, when some timeout passes,
+                // all the messages will be applied to the live region and not only the last one.
 
-                    ariaState.push(event.data.message);
+                ariaState.push(event.data.message);
 
-                    handleAria();
-                });
+                handleAria();
+            });
 
-                editor.once('contentDom', function() {
-                    var editable = editor.editable();
+            editor.once('contentDom', function () {
+                var editable = editor.editable();
 
-                    editable.attachListener(editable, 'mouseup', handleUI);
-                    editable.attachListener(editable, 'keyup', handleUI);
-                });
+                editable.attachListener(editable, 'mouseup', handleUI);
+                editable.attachListener(editable, 'keyup', handleUI);
+            });
 
-                editor.on('destroy', function(event) {
-                    ariaElement.parentNode.removeChild(ariaElement);
+            editor.on('destroy', function (event) {
+                ariaElement.parentNode.removeChild(ariaElement);
 
-                    handleUI.detach();
-                });
-            },
+                handleUI.detach();
+            });
+        },
 
-            /**
-             * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
-             *
-             * @protected
-             * @method _createAriaElement
-             * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
-             * @return {HTMLElement} The created and applied to DOM element.
-             */
-            _createAriaElement: function(id) {
-                var statusElement = document.createElement('div');
+        /**
+         * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
+         *
+         * @protected
+         * @method _createAriaElement
+         * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
+         * @return {HTMLElement} The created and applied to DOM element.
+         */
+        _createAriaElement: function _createAriaElement(id) {
+            var statusElement = document.createElement('div');
 
-                statusElement.className = 'alloy-editor-sr-only';
+            statusElement.className = 'alloy-editor-sr-only';
 
-                statusElement.setAttribute('aria-live', 'polite');
-                statusElement.setAttribute('role', 'status');
-                statusElement.setAttribute('id', id + 'LiveRegion');
+            statusElement.setAttribute('aria-live', 'polite');
+            statusElement.setAttribute('role', 'status');
+            statusElement.setAttribute('id', id + 'LiveRegion');
 
-                document.body.appendChild(statusElement);
+            document.body.appendChild(statusElement);
 
-                return statusElement;
-            }
+            return statusElement;
         }
-    );
-}());
-(function() {
+    });
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     var isIE = CKEDITOR.env.ie;
@@ -1610,171 +1611,171 @@ CKEDITOR.disableAutoInline = true;
      * @param {CKEDITOR.dom.element} el The created image with src as Data URI
      */
 
-    CKEDITOR.plugins.add(
-        'addimages', {
-            /**
-             * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers a 'dragenter', 'dragover', 'drop' and `paste` events on the editing area.
-             *
-             * @method init
-             * @param {Object} editor The current editor instance
-             */
-            init: function(editor) {
-                editor.once('contentDom', function() {
-                    var editable = editor.editable();
+    CKEDITOR.plugins.add('addimages', {
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         * The function registers a 'dragenter', 'dragover', 'drop' and `paste` events on the editing area.
+         *
+         * @method init
+         * @param {Object} editor The current editor instance
+         */
+        init: function init(editor) {
+            editor.once('contentDom', (function () {
+                var editable = editor.editable();
 
-                    editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
-                        editor: editor
-                    });
-
-                    editable.attachListener(editable, 'dragover', this._onDragOver, this, {
-                        editor: editor
-                    });
-
-                    editable.attachListener(editable, 'drop', this._onDragDrop, this, {
-                        editor: editor
-                    });
-
-                    editable.attachListener(editable, 'paste', this._onPaste, this, {
-                        editor: editor
-                    });
-                }.bind(this));
-            },
-
-            /**
-             * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
-             * processing to {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}}
-             *
-             * @protected
-             * @method _handleFiles
-             * @param {Array} files Array of dropped files. Only the images from this list will be processed.
-             * @param {Object} editor The current editor instance
-             */
-            _handleFiles: function(files, editor) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-
-                    if (file.type.indexOf('image') === 0) {
-                        this._processFile(file, editor);
-                    }
-                }
-
-                return false;
-            },
-
-            /**
-             * Handles drag enter event. In case of IE, this function will prevent the event.
-             *
-             * @protected
-             * @method _onDragEnter
-             * @param {DOM event} event dragenter event, as received natively from CKEditor
-             */
-            _onDragEnter: function(event) {
-                if (isIE) {
-                    this._preventEvent(event);
-                }
-            },
-
-            /**
-             * Handles drag over event. In case of IE, this function will prevent the event.
-             *
-             * @protected
-             * @method _onDragOver
-             * @param {DOM event} event dragover event, as received natively from CKEditor
-             */
-            _onDragOver: function(event) {
-                if (isIE) {
-                    this._preventEvent(event);
-                }
-            },
-
-            /**
-             * Handles drag drop event. The function will create selection from the current points and
-             * will send a list of files to be processed to
-             * {{#crossLink "CKEDITOR.plugins.addimages/_handleFiles:method"}}{{/crossLink}}
-             *
-             * @protected
-             * @method _onDragDrop
-             * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
-             */
-            _onDragDrop: function(event) {
-                var nativeEvent = event.data.$;
-
-                new CKEDITOR.dom.event(nativeEvent).preventDefault();
-
-                var editor = event.listenerData.editor;
-
-                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
-
-                this._handleFiles(nativeEvent.dataTransfer.files, editor);
-            },
-
-            /**
-             * Checks if the pasted data is image and passes it to
-             * {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}} for processing.
-             *
-             * @method _onPaste
-             * @protected
-             * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
-             */
-            _onPaste: function(event) {
-                if (event.data.$.clipboardData) {
-                    var pastedData = event.data.$.clipboardData.items[0];
-
-                    if (pastedData.type.indexOf('image') === 0) {
-                        var imageFile = pastedData.getAsFile();
-
-                        this._processFile(imageFile, event.listenerData.editor);
-                    }
-                }
-            },
-
-            /**
-             * Prevents a native event.
-             *
-             * @protected
-             * @method _preventEvent
-             * @param {DOM event} event The event to be prevented.
-             */
-            _preventEvent: function(event) {
-                event = new CKEDITOR.dom.event(event.data.$);
-
-                event.preventDefault();
-                event.stopPropagation();
-            },
-
-            /**
-             * Processes an image file. The function creates an img element and sets as source
-             * a Data URI, then fires an 'imageAdd' event via CKEditor's event system.
-             *
-             * @protected
-             * @method _preventEvent
-             * @param {DOM event} event The event to be prevented.
-             */
-            _processFile: function(file, editor) {
-                var reader = new FileReader();
-
-                reader.addEventListener('loadend', function() {
-                    var bin = reader.result;
-
-                    var el = CKEDITOR.dom.element.createFromHtml('<img src="' + bin + '">');
-
-                    editor.insertElement(el);
-
-                    var imageData = {
-                        el: el,
-                        file: file
-                    };
-
-                    editor.fire('imageAdd', imageData);
+                editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
+                    editor: editor
                 });
 
-                reader.readAsDataURL(file);
+                editable.attachListener(editable, 'dragover', this._onDragOver, this, {
+                    editor: editor
+                });
+
+                editable.attachListener(editable, 'drop', this._onDragDrop, this, {
+                    editor: editor
+                });
+
+                editable.attachListener(editable, 'paste', this._onPaste, this, {
+                    editor: editor
+                });
+            }).bind(this));
+        },
+
+        /**
+         * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
+         * processing to {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}}
+         *
+         * @protected
+         * @method _handleFiles
+         * @param {Array} files Array of dropped files. Only the images from this list will be processed.
+         * @param {Object} editor The current editor instance
+         */
+        _handleFiles: function _handleFiles(files, editor) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                if (file.type.indexOf('image') === 0) {
+                    this._processFile(file, editor);
+                }
             }
+
+            return false;
+        },
+
+        /**
+         * Handles drag enter event. In case of IE, this function will prevent the event.
+         *
+         * @protected
+         * @method _onDragEnter
+         * @param {DOM event} event dragenter event, as received natively from CKEditor
+         */
+        _onDragEnter: function _onDragEnter(event) {
+            if (isIE) {
+                this._preventEvent(event);
+            }
+        },
+
+        /**
+         * Handles drag over event. In case of IE, this function will prevent the event.
+         *
+         * @protected
+         * @method _onDragOver
+         * @param {DOM event} event dragover event, as received natively from CKEditor
+         */
+        _onDragOver: function _onDragOver(event) {
+            if (isIE) {
+                this._preventEvent(event);
+            }
+        },
+
+        /**
+         * Handles drag drop event. The function will create selection from the current points and
+         * will send a list of files to be processed to
+         * {{#crossLink "CKEDITOR.plugins.addimages/_handleFiles:method"}}{{/crossLink}}
+         *
+         * @protected
+         * @method _onDragDrop
+         * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
+         */
+        _onDragDrop: function _onDragDrop(event) {
+            var nativeEvent = event.data.$;
+
+            new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+            var editor = event.listenerData.editor;
+
+            event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+            this._handleFiles(nativeEvent.dataTransfer.files, editor);
+        },
+
+        /**
+         * Checks if the pasted data is image and passes it to
+         * {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}} for processing.
+         *
+         * @method _onPaste
+         * @protected
+         * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
+         */
+        _onPaste: function _onPaste(event) {
+            if (event.data.$.clipboardData) {
+                var pastedData = event.data.$.clipboardData.items[0];
+
+                if (pastedData.type.indexOf('image') === 0) {
+                    var imageFile = pastedData.getAsFile();
+
+                    this._processFile(imageFile, event.listenerData.editor);
+                }
+            }
+        },
+
+        /**
+         * Prevents a native event.
+         *
+         * @protected
+         * @method _preventEvent
+         * @param {DOM event} event The event to be prevented.
+         */
+        _preventEvent: function _preventEvent(event) {
+            event = new CKEDITOR.dom.event(event.data.$);
+
+            event.preventDefault();
+            event.stopPropagation();
+        },
+
+        /**
+         * Processes an image file. The function creates an img element and sets as source
+         * a Data URI, then fires an 'imageAdd' event via CKEditor's event system.
+         *
+         * @protected
+         * @method _preventEvent
+         * @param {DOM event} event The event to be prevented.
+         */
+        _processFile: function _processFile(file, editor) {
+            var reader = new FileReader();
+
+            reader.addEventListener('loadend', function () {
+                var bin = reader.result;
+
+                var el = CKEDITOR.dom.element.createFromHtml('<img src="' + bin + '">');
+
+                editor.insertElement(el);
+
+                var imageData = {
+                    el: el,
+                    file: file
+                };
+
+                editor.fire('imageAdd', imageData);
+            });
+
+            reader.readAsDataURL(file);
         }
-    );
-}());
-(function() {
+    });
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     if (CKEDITOR.plugins.get('autolink')) {
@@ -1809,244 +1810,241 @@ CKEDITOR.disableAutoInline = true;
      * @class CKEDITOR.plugins.autolink
      * @constructor
      */
-    CKEDITOR.plugins.add(
-        'autolink', {
+    CKEDITOR.plugins.add('autolink', {
 
-            /**
-             * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers the `keyup` event on the editing area.
-             *
-             * @method init
-             * @param {Object} editor The current editor instance
-             */
-            init: function(editor) {
-                editor.once('contentDom', function() {
-                    var editable = editor.editable();
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         * The function registers the `keyup` event on the editing area.
+         *
+         * @method init
+         * @param {Object} editor The current editor instance
+         */
+        init: function init(editor) {
+            editor.once('contentDom', (function () {
+                var editable = editor.editable();
 
-                    editable.attachListener(editable, 'keyup', this._onKeyUp, this, {
-                        editor: editor
-                    });
-                }.bind(this));
-            },
+                editable.attachListener(editable, 'keyup', this._onKeyUp, this, {
+                    editor: editor
+                });
+            }).bind(this));
+        },
 
-            /**
-             * Retrieves the last word introduced by the user. Reads from the current
-             * caret position backwards until it finds the first white space.
-             *
-             * @protected
-             * @method _getLastWord
-             * @return {String} The last word introduced by user
-             */
-            _getLastWord: function(editor) {
-                var range = editor.getSelection().getRanges()[0];
+        /**
+         * Retrieves the last word introduced by the user. Reads from the current
+         * caret position backwards until it finds the first white space.
+         *
+         * @protected
+         * @method _getLastWord
+         * @return {String} The last word introduced by user
+         */
+        _getLastWord: function _getLastWord(editor) {
+            var range = editor.getSelection().getRanges()[0];
 
-                var offset = range.startOffset;
+            var offset = range.startOffset;
 
-                var previousText = '';
+            var previousText = '';
 
-                // The user pressed Enter, so we have to look on the previous node
-                if (this._currentKeyCode === KEY_ENTER) {
-                    var previousNode = range.startContainer.getPrevious();
+            // The user pressed Enter, so we have to look on the previous node
+            if (this._currentKeyCode === KEY_ENTER) {
+                var previousNode = range.startContainer.getPrevious();
 
-                    var lastChild;
+                var lastChild;
 
-                    if (previousNode) {
-                        // If previous node is a SPACE, (it does not have 'getLast' method),
-                        // ignore it and find the previous text node
-                        while (!previousNode.getLast) {
-                            previousNode = previousNode.getPrevious();
-                        }
-
-                        lastChild = previousNode.getLast();
-
-                        // Depending on the browser, the last child node may be a <BR>
-                        // (which does not have 'getText' method),
-                        // so ignore it and find the previous text node
-                        while (lastChild && !lastChild.getText()) {
-                            lastChild = lastChild.getPrevious();
-                        }
+                if (previousNode) {
+                    // If previous node is a SPACE, (it does not have 'getLast' method),
+                    // ignore it and find the previous text node
+                    while (!previousNode.getLast) {
+                        previousNode = previousNode.getPrevious();
                     }
 
-                    // Check if the lastChild is already a link
-                    if (!(lastChild && lastChild.$.href)) {
-                        this._startContainer = lastChild;
-                        previousText = lastChild ? lastChild.getText() : '';
-                        this._offset = previousText.length;
+                    lastChild = previousNode.getLast();
+
+                    // Depending on the browser, the last child node may be a <BR>
+                    // (which does not have 'getText' method),
+                    // so ignore it and find the previous text node
+                    while (lastChild && !lastChild.getText()) {
+                        lastChild = lastChild.getPrevious();
                     }
-                } else {
-                    this._startContainer = range.startContainer;
-
-                    // Last character is the delimiter, ignore it
-                    previousText = this._startContainer.getText().substring(0, offset - 1);
-
-                    this._offset = offset - 1;
                 }
 
-                var lastWord = '';
-
-                var match = previousText.match(REGEX_LAST_WORD);
-
-                if (match) {
-                    lastWord = match.pop();
+                // Check if the lastChild is already a link
+                if (!(lastChild && lastChild.$.href)) {
+                    this._startContainer = lastChild;
+                    previousText = lastChild ? lastChild.getText() : '';
+                    this._offset = previousText.length;
                 }
+            } else {
+                this._startContainer = range.startContainer;
 
-                return lastWord;
-            },
+                // Last character is the delimiter, ignore it
+                previousText = this._startContainer.getText().substring(0, offset - 1);
 
-            /**
-             * Checks if the given link is a valid URL.
-             *
-             * @protected
-             * @method isValidURL
-             * @param {String} link The link we want to know if it is a valid URL
-             * @return {Boolean} Returns true if the link is a valid URL, false otherwise
-             */
-            _isValidURL: function(link) {
-                return REGEX_URL.test(link);
-            },
+                this._offset = offset - 1;
+            }
 
-            /**
-             * Listens to the `keydown` event and if the keycode is `Backspace`, removes the previously
-             * created link.
-             *
-             * @protected
-             * @method _onKeyDown
-             * @param {EventFacade} event EventFacade object
-             */
-            _onKeyDown: function(event) {
-                var nativeEvent = event.data.$;
+            var lastWord = '';
 
+            var match = previousText.match(REGEX_LAST_WORD);
+
+            if (match) {
+                lastWord = match.pop();
+            }
+
+            return lastWord;
+        },
+
+        /**
+         * Checks if the given link is a valid URL.
+         *
+         * @protected
+         * @method isValidURL
+         * @param {String} link The link we want to know if it is a valid URL
+         * @return {Boolean} Returns true if the link is a valid URL, false otherwise
+         */
+        _isValidURL: function _isValidURL(link) {
+            return REGEX_URL.test(link);
+        },
+
+        /**
+         * Listens to the `keydown` event and if the keycode is `Backspace`, removes the previously
+         * created link.
+         *
+         * @protected
+         * @method _onKeyDown
+         * @param {EventFacade} event EventFacade object
+         */
+        _onKeyDown: function _onKeyDown(event) {
+            var nativeEvent = event.data.$;
+
+            var editor = event.listenerData.editor;
+
+            var editable = editor.editable();
+
+            editable.removeListener('keydown', this._onKeyDown);
+
+            if (nativeEvent.keyCode === KEY_BACK) {
+                event.cancel();
+                event.data.preventDefault();
+
+                this._removeLink(editor);
+            }
+
+            this._ckLink = null;
+        },
+
+        /**
+         * Listens to the `Enter` and `Space` key events in order to check if the last word
+         * introduced by the user should be replaced by a link element.
+         *
+         * @protected
+         * @method _onKeyUp
+         * @param {EventFacade} event EventFacade object
+         */
+        _onKeyUp: function _onKeyUp(event) {
+            var nativeEvent = event.data.$;
+
+            this._currentKeyCode = nativeEvent.keyCode;
+
+            if (DELIMITERS.indexOf(this._currentKeyCode) !== -1) {
                 var editor = event.listenerData.editor;
 
-                var editable = editor.editable();
+                var lastWord = this._getLastWord(editor);
 
-                editable.removeListener('keydown', this._onKeyDown);
-
-                if (nativeEvent.keyCode === KEY_BACK) {
-                    event.cancel();
-                    event.data.preventDefault();
-
-                    this._removeLink(editor);
+                if (this._isValidURL(lastWord)) {
+                    this._replaceContentByLink(editor, lastWord);
                 }
-
-                this._ckLink = null;
-            },
-
-            /**
-             * Listens to the `Enter` and `Space` key events in order to check if the last word
-             * introduced by the user should be replaced by a link element.
-             *
-             * @protected
-             * @method _onKeyUp
-             * @param {EventFacade} event EventFacade object
-             */
-            _onKeyUp: function(event) {
-                var nativeEvent = event.data.$;
-
-                this._currentKeyCode = nativeEvent.keyCode;
-
-                if (DELIMITERS.indexOf(this._currentKeyCode) !== -1) {
-                    var editor = event.listenerData.editor;
-
-                    var lastWord = this._getLastWord(editor);
-
-                    if (this._isValidURL(lastWord)) {
-                        this._replaceContentByLink(editor, lastWord);
-                    }
-                }
-            },
-
-            /**
-             * Replaces content by a link element.
-             *
-             * @protected
-             * @method _replaceContentByLink
-             * @param {String} content The text that has to be replaced by an link element
-             */
-            _replaceContentByLink: function(editor, content) {
-                var range = editor.createRange();
-                var node = CKEDITOR.dom.element.get(this._startContainer);
-                var offset = this._offset;
-
-                // Select the content, so CKEDITOR.Link can properly replace it
-                range.setStart(node, offset - content.length);
-                range.setEnd(node, offset);
-                range.select();
-
-                var ckLink = new CKEDITOR.Link(editor);
-                ckLink.create(content);
-                this._ckLink = ckLink;
-
-                this._subscribeToKeyEvent(editor);
-
-                // Now range is on the link and it is selected. We have to
-                // return focus to the caret position.
-                range = editor.getSelection().getRanges()[0];
-
-                // If user pressed `Enter`, get the next editable node at position 0,
-                // otherwise set the cursor at the next character of the link (the white space)
-                if (this._currentKeyCode === KEY_ENTER) {
-                    var nextEditableNode = range.getNextEditableNode();
-
-                    range.setStart(nextEditableNode, 0);
-                    range.setEnd(nextEditableNode, 0);
-                } else {
-                    var nextNode = range.getNextNode();
-
-                    range.setStart(nextNode, 1);
-                    range.setEnd(nextNode, 1);
-                }
-
-                range.select();
-            },
-
-            /**
-             * Removes the created link element, and replaces it by its text.
-             *
-             * @protected
-             * @method _removeLink
-             */
-            _removeLink: function(editor) {
-                var range = editor.getSelection().getRanges()[0];
-                var caretOffset = range.startOffset;
-
-                // Select the link, so CKEDITOR.Link can properly remove it
-                var linkNode = this._startContainer.getNext() || this._startContainer;
-
-                var newRange = editor.createRange();
-                newRange.setStart(linkNode, 0);
-                newRange.setEndAfter(linkNode);
-                newRange.select();
-
-                this._ckLink.remove();
-
-                // Return focus to the caret position
-                range.setEnd(range.startContainer, caretOffset);
-                range.setStart(range.startContainer, caretOffset);
-
-                range.select();
-            },
-
-            /**
-             * Subscribe to a key event of the editable aria.
-             *
-             * @protected
-             * @method _subscribeToKeyEvent
-             */
-            _subscribeToKeyEvent: function(editor) {
-                var editable = editor.editable();
-
-                // Change the priority of keydown listener - 1 means the highest priority.
-                // In Chrome on pressing `Enter` the listener is not being invoked.
-                // See http://dev.ckeditor.com/ticket/11861 for more information.
-                editable.attachListener(editable, 'keydown', this._onKeyDown, this, {
-                    editor: editor
-                }, 1);
             }
-        }
-    );
-}());
+        },
 
+        /**
+         * Replaces content by a link element.
+         *
+         * @protected
+         * @method _replaceContentByLink
+         * @param {String} content The text that has to be replaced by an link element
+         */
+        _replaceContentByLink: function _replaceContentByLink(editor, content) {
+            var range = editor.createRange();
+            var node = CKEDITOR.dom.element.get(this._startContainer);
+            var offset = this._offset;
+
+            // Select the content, so CKEDITOR.Link can properly replace it
+            range.setStart(node, offset - content.length);
+            range.setEnd(node, offset);
+            range.select();
+
+            var ckLink = new CKEDITOR.Link(editor);
+            ckLink.create(content);
+            this._ckLink = ckLink;
+
+            this._subscribeToKeyEvent(editor);
+
+            // Now range is on the link and it is selected. We have to
+            // return focus to the caret position.
+            range = editor.getSelection().getRanges()[0];
+
+            // If user pressed `Enter`, get the next editable node at position 0,
+            // otherwise set the cursor at the next character of the link (the white space)
+            if (this._currentKeyCode === KEY_ENTER) {
+                var nextEditableNode = range.getNextEditableNode();
+
+                range.setStart(nextEditableNode, 0);
+                range.setEnd(nextEditableNode, 0);
+            } else {
+                var nextNode = range.getNextNode();
+
+                range.setStart(nextNode, 1);
+                range.setEnd(nextNode, 1);
+            }
+
+            range.select();
+        },
+
+        /**
+         * Removes the created link element, and replaces it by its text.
+         *
+         * @protected
+         * @method _removeLink
+         */
+        _removeLink: function _removeLink(editor) {
+            var range = editor.getSelection().getRanges()[0];
+            var caretOffset = range.startOffset;
+
+            // Select the link, so CKEDITOR.Link can properly remove it
+            var linkNode = this._startContainer.getNext() || this._startContainer;
+
+            var newRange = editor.createRange();
+            newRange.setStart(linkNode, 0);
+            newRange.setEndAfter(linkNode);
+            newRange.select();
+
+            this._ckLink.remove();
+
+            // Return focus to the caret position
+            range.setEnd(range.startContainer, caretOffset);
+            range.setStart(range.startContainer, caretOffset);
+
+            range.select();
+        },
+
+        /**
+         * Subscribe to a key event of the editable aria.
+         *
+         * @protected
+         * @method _subscribeToKeyEvent
+         */
+        _subscribeToKeyEvent: function _subscribeToKeyEvent(editor) {
+            var editable = editor.editable();
+
+            // Change the priority of keydown listener - 1 means the highest priority.
+            // In Chrome on pressing `Enter` the listener is not being invoked.
+            // See http://dev.ckeditor.com/ticket/11861 for more information.
+            editable.attachListener(editable, 'keydown', this._onKeyDown, this, {
+                editor: editor
+            }, 1);
+        }
+    });
+})();
 /**
  * CKEditor plugin: Dragable image resizing
  * https://github.com/sstur/ck-dragresize
@@ -2055,7 +2053,9 @@ CKEDITOR.disableAutoInline = true;
  * - Snap to size of other images in editor
  * - Escape while dragging cancels resize
  */
-(function() {
+'use strict';
+
+(function () {
     'use strict';
 
     var PLUGIN_NAME = 'dragresize';
@@ -2072,32 +2072,32 @@ CKEDITOR.disableAutoInline = true;
      * Initializes the plugin
      */
     CKEDITOR.plugins.add(PLUGIN_NAME, {
-        onLoad: function() {
+        onLoad: function onLoad() {
             if (!isWebkit) {
                 return;
             }
         },
-        init: function(editor) {
+        init: function init(editor) {
             if (!isWebkit) {
                 return;
             }
 
-            editor.once('contentDom', function(evt) {
-                init(editor);
+            editor.once('contentDom', function (evt) {
+                _init(editor);
             });
         }
     });
 
-    function init(editor) {
+    function _init(editor) {
         var window = editor.window.$,
             document = editor.document.$;
-        var snapToSize = (typeof IMAGE_SNAP_TO_SIZE === 'undefined') ? null : IMAGE_SNAP_TO_SIZE;
+        var snapToSize = typeof IMAGE_SNAP_TO_SIZE === 'undefined' ? null : IMAGE_SNAP_TO_SIZE;
 
         var resizer = new Resizer(editor, {
             snapToSize: snapToSize
         });
 
-        document.addEventListener('mousedown', function(e) {
+        document.addEventListener('mousedown', function (e) {
             if (resizer.isHandle(e.target)) {
                 resizer.initDrag(e);
             }
@@ -2119,24 +2119,24 @@ CKEDITOR.disableAutoInline = true;
 
         editor.on('selectionChange', selectionChange);
 
-        editor.on('getData', function(e) {
+        editor.on('getData', function (e) {
             var html = e.data.dataValue || '';
             html = html.replace(/<div id="ckimgrsz"([\s\S]*?)<\/div>/i, '');
             html = html.replace(/\b(ckimgrsz)\b/g, '');
             e.data.dataValue = html;
         });
 
-        editor.on('beforeUndoImage', function() {
+        editor.on('beforeUndoImage', function () {
             // Remove the handles before undo images are saved
             resizer.hide();
         });
 
-        editor.on('afterUndoImage', function() {
+        editor.on('afterUndoImage', function () {
             // Restore the handles after undo images are saved
             selectionChange();
         });
 
-        editor.on('blur', function() {
+        editor.on('blur', function () {
             // Remove the handles when editor loses focus
             resizer.hide();
         });
@@ -2148,7 +2148,7 @@ CKEDITOR.disableAutoInline = true;
 
         // Update the selection when the browser window is resized
         var resizeTimeout;
-        editor.window.on('resize', function() {
+        editor.window.on('resize', function () {
             // Cancel any resize waiting to happen
             clearTimeout(resizeTimeout);
             // Delay resize to "debounce"
@@ -2165,7 +2165,7 @@ CKEDITOR.disableAutoInline = true;
     }
 
     Resizer.prototype = {
-        init: function() {
+        init: function init() {
             var container = this.container = this.document.createElement('div');
             container.id = 'ckimgrsz';
             this.preview = this.document.createElement('span');
@@ -2184,19 +2184,19 @@ CKEDITOR.disableAutoInline = true;
                 container.appendChild(handles[n]);
             }
         },
-        createHandle: function(name) {
+        createHandle: function createHandle(name) {
             var el = this.document.createElement('i');
             el.classList.add(name);
             return el;
         },
-        isHandle: function(el) {
+        isHandle: function isHandle(el) {
             var handles = this.handles;
             for (var n in handles) {
                 if (handles[n] === el) return true;
             }
             return false;
         },
-        show: function(el) {
+        show: function show(el) {
             this.el = el;
             if (this.cfg.snapToSize) {
                 this.otherImages = toArray(this.document.getElementsByTagName('img'));
@@ -2208,7 +2208,7 @@ CKEDITOR.disableAutoInline = true;
             this.el.classList.add('ckimgrsz');
             this.showHandles();
         },
-        hide: function() {
+        hide: function hide() {
             // Remove class from all img.ckimgrsz
             var elements = this.document.getElementsByClassName('ckimgrsz');
             for (var i = 0; i < elements.length; ++i) {
@@ -2219,25 +2219,25 @@ CKEDITOR.disableAutoInline = true;
                 this.container.parentNode.removeChild(this.container);
             }
         },
-        initDrag: function(e) {
+        initDrag: function initDrag(e) {
             if (e.button !== 0) {
                 //right-click or middle-click
                 return;
             }
             var resizer = this;
             var drag = new DragEvent(this.window, this.document);
-            drag.onStart = function() {
+            drag.onStart = function () {
                 resizer.showPreview();
                 resizer.isDragging = true;
                 resizer.editor.getSelection().lock();
             };
-            drag.onDrag = function() {
+            drag.onDrag = function () {
                 resizer.calculateSize(this);
                 resizer.updatePreview();
                 var box = resizer.previewBox;
                 resizer.updateHandles(box, box.left, box.top);
             };
-            drag.onRelease = function() {
+            drag.onRelease = function () {
                 resizer.isDragging = false;
                 resizer.hidePreview();
                 resizer.hide();
@@ -2245,14 +2245,14 @@ CKEDITOR.disableAutoInline = true;
                 // Save an undo snapshot before the image is permanently changed
                 resizer.editor.fire('saveSnapshot');
             };
-            drag.onComplete = function() {
+            drag.onComplete = function () {
                 resizer.resizeComplete();
                 // Save another snapshot after the image is changed
                 resizer.editor.fire('saveSnapshot');
             };
             drag.start(e);
         },
-        updateHandles: function(box, left, top) {
+        updateHandles: function updateHandles(box, left, top) {
             left = left || 0;
             top = top || 0;
             var handles = this.handles;
@@ -2265,31 +2265,31 @@ CKEDITOR.disableAutoInline = true;
             positionElement(handles.bm, Math.round(box.width / 2) - 3 + left, box.height - 4 + top);
             positionElement(handles.br, box.width - 4 + left, box.height - 4 + top);
         },
-        showHandles: function() {
+        showHandles: function showHandles() {
             var handles = this.handles;
             this.updateHandles(this.box);
             for (var n in handles) {
                 handles[n].style.display = 'block';
             }
         },
-        hideHandles: function() {
+        hideHandles: function hideHandles() {
             var handles = this.handles;
             for (var n in handles) {
                 handles[n].style.display = 'none';
             }
         },
-        showPreview: function() {
+        showPreview: function showPreview() {
             this.preview.style.backgroundImage = 'url("' + this.el.src + '")';
             this.calculateSize();
             this.updatePreview();
             this.preview.style.display = 'block';
         },
-        updatePreview: function() {
+        updatePreview: function updatePreview() {
             var box = this.previewBox;
             positionElement(this.preview, box.left, box.top);
             resizeElement(this.preview, box.width, box.height);
         },
-        hidePreview: function() {
+        hidePreview: function hidePreview() {
             var box = getBoundingBox(this.window, this.preview);
             this.result = {
                 width: box.width,
@@ -2297,7 +2297,7 @@ CKEDITOR.disableAutoInline = true;
             };
             this.preview.style.display = 'none';
         },
-        calculateSize: function(data) {
+        calculateSize: function calculateSize(data) {
             var box = this.previewBox = {
                 top: 0,
                 left: 0,
@@ -2347,7 +2347,7 @@ CKEDITOR.disableAutoInline = true;
                 box.top = this.box.height - box.height;
             }
         },
-        resizeComplete: function() {
+        resizeComplete: function resizeComplete() {
             resizeElement(this.el, this.result.width, this.result.height);
         }
     };
@@ -2363,7 +2363,7 @@ CKEDITOR.disableAutoInline = true;
     }
 
     DragEvent.prototype = {
-        start: function(e) {
+        start: function start(e) {
             e.preventDefault();
             e.stopPropagation();
             this.target = e.target;
@@ -2380,7 +2380,7 @@ CKEDITOR.disableAutoInline = true;
             this.document.body.classList.add('dragging-' + this.attr);
             this.onStart && this.onStart();
         },
-        update: function(e) {
+        update: function update(e) {
             this.currentPos = {
                 x: e.clientX,
                 y: e.clientY
@@ -2395,7 +2395,7 @@ CKEDITOR.disableAutoInline = true;
                 alt: e.altKey
             };
         },
-        mousemove: function(e) {
+        mousemove: function mousemove(e) {
             this.update(e);
             this.onDrag && this.onDrag();
             if (e.which === 0) {
@@ -2403,18 +2403,18 @@ CKEDITOR.disableAutoInline = true;
                 this.mouseup(e);
             }
         },
-        keydown: function(e) {
+        keydown: function keydown(e) {
             //escape key cancels dragging
             if (e.keyCode === 27) {
                 this.release();
             }
         },
-        mouseup: function(e) {
+        mouseup: function mouseup(e) {
             this.update(e);
             this.release();
             this.onComplete && this.onComplete();
         },
-        release: function() {
+        release: function release() {
             this.document.body.classList.remove('dragging-' + this.attr);
             var events = this.events;
             this.document.removeEventListener('mousemove', events.mousemove, false);
@@ -2438,7 +2438,7 @@ CKEDITOR.disableAutoInline = true;
         if (fn.bind) {
             return fn.bind(ctx);
         }
-        return function() {
+        return function () {
             fn.apply(ctx, arguments);
         };
     }
@@ -2462,9 +2462,10 @@ CKEDITOR.disableAutoInline = true;
             height: rect.height
         };
     }
-}());
+})();
+'use strict';
 
-(function() {
+(function () {
     'use strict';
 
     if (CKEDITOR.plugins.get('pasteimages')) {
@@ -2485,66 +2486,66 @@ CKEDITOR.disableAutoInline = true;
      * @param {CKEDITOR.dom.element} el The created image with src as Data URI
      */
 
-    CKEDITOR.plugins.add(
-        'pasteimages', {
-            /**
-             * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers a 'paste' event on the editing area.
-             *
-             * @method init
-             * @param {Object} editor The current editor instance
-             */
-            init: function(editor) {
-                editor.once('contentDom', function() {
-                    var editable = editor.editable();
+    CKEDITOR.plugins.add('pasteimages', {
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         * The function registers a 'paste' event on the editing area.
+         *
+         * @method init
+         * @param {Object} editor The current editor instance
+         */
+        init: function init(editor) {
+            editor.once('contentDom', (function () {
+                var editable = editor.editable();
 
-                    editable.attachListener(editable, 'paste', this._onPaste, this, {
-                        editor: editor
-                    });
-                }.bind(this));
-            },
+                editable.attachListener(editable, 'paste', this._onPaste, this, {
+                    editor: editor
+                });
+            }).bind(this));
+        },
 
-            /**
-             * The function creates an img element with src the image data as Data URI.
-             * Then, it fires an 'imageAdd' event via CKEditor's event system. The passed
-             * params will be:
-             * - `el` - the created img element
-             * - `file` - the original pasted data
-             *
-             * @method _onPaste
-             * @protected
-             * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
-             */
-            _onPaste: function(event) {
-                if (event.data.$.clipboardData) {
-                    var pastedData = event.data.$.clipboardData.items[0];
-                    var editor = event.listenerData.editor;
+        /**
+         * The function creates an img element with src the image data as Data URI.
+         * Then, it fires an 'imageAdd' event via CKEditor's event system. The passed
+         * params will be:
+         * - `el` - the created img element
+         * - `file` - the original pasted data
+         *
+         * @method _onPaste
+         * @protected
+         * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
+         */
+        _onPaste: function _onPaste(event) {
+            if (event.data.$.clipboardData) {
+                var pastedData = event.data.$.clipboardData.items[0];
+                var editor = event.listenerData.editor;
 
-                    if (pastedData.type.indexOf('image') === 0) {
-                        var reader = new FileReader();
-                        var imageFile = pastedData.getAsFile();
+                if (pastedData.type.indexOf('image') === 0) {
+                    var reader = new FileReader();
+                    var imageFile = pastedData.getAsFile();
 
-                        reader.onload = function(event) {
-                            var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
+                    reader.onload = (function (event) {
+                        var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
 
-                            editor.insertElement(el);
+                        editor.insertElement(el);
 
-                            var imageData = {
-                                el: el,
-                                file: imageFile
-                            };
+                        var imageData = {
+                            el: el,
+                            file: imageFile
+                        };
 
-                            editor.fire('imageAdd', imageData);
-                        }.bind(this);
+                        editor.fire('imageAdd', imageData);
+                    }).bind(this);
 
-                        reader.readAsDataURL(imageFile);
-                    }
+                    reader.readAsDataURL(imageFile);
                 }
             }
         }
-    );
-}());
-(function() {
+    });
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     if (CKEDITOR.plugins.get('placeholder')) {
@@ -2566,53 +2567,53 @@ CKEDITOR.disableAutoInline = true;
      * @type String
      */
 
-    CKEDITOR.plugins.add(
-        'placeholder', {
+    CKEDITOR.plugins.add('placeholder', {
 
-            /**
-             * Initialization of the plugin, part of CKEditor plugin lifecycle.
-             * The function registers a 'blur' and 'contentDom' event listeners.
-             *
-             * @method init
-             * @param {Object} editor The current editor instance
-             */
-            init: function(editor) {
-                editor.on('blur', this._checkEmptyData, this);
-                editor.once('contentDom', this._checkEmptyData, this);
-            },
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         * The function registers a 'blur' and 'contentDom' event listeners.
+         *
+         * @method init
+         * @param {Object} editor The current editor instance
+         */
+        init: function init(editor) {
+            editor.on('blur', this._checkEmptyData, this);
+            editor.once('contentDom', this._checkEmptyData, this);
+        },
 
-            /**
-             * Removes any data from the content and adds a class,
-             * specified by the "placeholderClass" config attribute.
-             *
-             * @protected
-             * @method _checkEmptyData
-             * @param {CKEDITOR.dom.event} editor event, fired from CKEditor
-             */
-            _checkEmptyData: function(event) {
-                var editor = event.editor;
+        /**
+         * Removes any data from the content and adds a class,
+         * specified by the "placeholderClass" config attribute.
+         *
+         * @protected
+         * @method _checkEmptyData
+         * @param {CKEDITOR.dom.event} editor event, fired from CKEditor
+         */
+        _checkEmptyData: function _checkEmptyData(event) {
+            var editor = event.editor;
 
-                if (editor.getData() === '') {
-                    var editorNode = new CKEDITOR.dom.element(editor.element.$);
+            if (editor.getData() === '') {
+                var editorNode = new CKEDITOR.dom.element(editor.element.$);
 
-                    // Despite getData() returns empty string, the content still may have
-                    // data - an empty paragraph. This breaks the :empty selector in
-                    // placeholder's CSS and placeholder does not appear.
-                    // For that reason, we will intentionally remove any content from editorNode.
-                    editorNode.setHtml('');
+                // Despite getData() returns empty string, the content still may have
+                // data - an empty paragraph. This breaks the :empty selector in
+                // placeholder's CSS and placeholder does not appear.
+                // For that reason, we will intentionally remove any content from editorNode.
+                editorNode.setHtml('');
 
-                    editorNode.addClass(editor.config.placeholderClass);
-                }
+                editorNode.addClass(editor.config.placeholderClass);
             }
         }
-    );
-}());
+    });
+})();
 /**
  * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
-(function() {
+'use strict';
+
+(function () {
     var pxUnit = CKEDITOR.tools.cssLength;
 
     function getWidth(el) {
@@ -2622,10 +2623,10 @@ CKEDITOR.disableAutoInline = true;
     function getBorderWidth(element, side) {
         var computed = element.getComputedStyle('border-' + side + '-width'),
             borderMap = {
-                thin: '0px',
-                medium: '1px',
-                thick: '2px'
-            };
+            thin: '0px',
+            medium: '1px',
+            thick: '2px'
+        };
 
         if (computed.indexOf('px') < 0) {
             // look up keywords
@@ -2643,7 +2644,9 @@ CKEDITOR.disableAutoInline = true;
     function getMasterPillarRow(table) {
         var $rows = table.$.rows,
             maxCells = 0,
-            cellsCount, $elected, $tr;
+            cellsCount,
+            $elected,
+            $tr;
 
         for (var i = 0, len = $rows.length; i < len; i++) {
             $tr = $rows[i];
@@ -2661,7 +2664,7 @@ CKEDITOR.disableAutoInline = true;
     function buildTableColumnPillars(table) {
         var pillars = [],
             pillarIndex = -1,
-            rtl = (table.getComputedStyle('direction') === 'rtl');
+            rtl = table.getComputedStyle('direction') === 'rtl';
 
         // Get the raw row element that cointains the most columns.
         var $tr = getMasterPillarRow(table);
@@ -2723,7 +2726,7 @@ CKEDITOR.disableAutoInline = true;
         for (var i = 0, len = pillars.length; i < len; i++) {
             var pillar = pillars[i];
 
-            if (positionX >= pillar.x && positionX <= (pillar.x + pillar.width)) {
+            if (positionX >= pillar.x && positionX <= pillar.x + pillar.width) {
                 return pillar;
             }
         }
@@ -2808,7 +2811,7 @@ CKEDITOR.disableAutoInline = true;
             currentShift && resizeColumn();
 
             var table = pillar.table;
-            setTimeout(function() {
+            setTimeout(function () {
                 table.removeCustomData('_cke_table_pillars');
             }, 0);
 
@@ -2826,7 +2829,7 @@ CKEDITOR.disableAutoInline = true;
                     table = pillar.table;
 
                 // Defer the resizing to avoid any interference among cells.
-                CKEDITOR.tools.setTimeout(function(leftCell, leftOldWidth, rightCell, rightOldWidth, tableWidth, sizeShift) {
+                CKEDITOR.tools.setTimeout(function (leftCell, leftOldWidth, rightCell, rightOldWidth, tableWidth, sizeShift) {
                     // 1px is the minimum valid width (#11626).
                     leftCell && leftCell.setStyle('width', pxUnit(Math.max(leftOldWidth + sizeShift, 1)));
                     rightCell && rightCell.setStyle('width', pxUnit(Math.max(rightOldWidth - sizeShift, 1)));
@@ -2835,11 +2838,7 @@ CKEDITOR.disableAutoInline = true;
                     if (tableWidth) {
                         table.setStyle('width', pxUnit(tableWidth + sizeShift * (rtl ? -1 : 1)));
                     }
-                }, 0, this, [
-                    leftCell, leftCell && getWidth(leftCell),
-                    rightCell, rightCell && getWidth(rightCell), (!leftCell || !rightCell) && (getWidth(table) + getBorderWidth(table, 'left') + getBorderWidth(table, 'right')),
-                    currentShift
-                ]);
+                }, 0, this, [leftCell, leftCell && getWidth(leftCell), rightCell, rightCell && getWidth(rightCell), (!leftCell || !rightCell) && getWidth(table) + getBorderWidth(table, 'left') + getBorderWidth(table, 'right'), currentShift]);
             }
         }
 
@@ -2863,12 +2862,10 @@ CKEDITOR.disableAutoInline = true;
 
         document = editor.document;
 
-        resizer = CKEDITOR.dom.element.createFromHtml('<div data-cke-temp=1 contenteditable=false unselectable=on ' +
-            'style="position:absolute;cursor:col-resize;filter:alpha(opacity=0);opacity:0;' +
-            'padding:0;background-color:#004;background-image:none;border:0px none;z-index:10"></div>', document);
+        resizer = CKEDITOR.dom.element.createFromHtml('<div data-cke-temp=1 contenteditable=false unselectable=on ' + 'style="position:absolute;cursor:col-resize;filter:alpha(opacity=0);opacity:0;' + 'padding:0;background-color:#004;background-image:none;border:0px none;z-index:10"></div>', document);
 
         // Clean DOM when editor is destroyed.
-        editor.on('destroy', function() {
+        editor.on('destroy', function () {
             resizer.remove();
         });
 
@@ -2876,7 +2873,7 @@ CKEDITOR.disableAutoInline = true;
         // from being editable.
         document.getDocumentElement().append(resizer);
 
-        this.attachTo = function(targetPillar) {
+        this.attachTo = function (targetPillar) {
             // Accept only one pillar at a time.
             if (isResizing) {
                 return;
@@ -2900,12 +2897,12 @@ CKEDITOR.disableAutoInline = true;
             resizer.show();
         };
 
-        var move = this.move = function(posX) {
-            if (!pillar){
+        var move = this.move = function (posX) {
+            if (!pillar) {
                 return 0;
             }
 
-            if (!isResizing && (posX < pillar.x || posX > (pillar.x + pillar.width))) {
+            if (!isResizing && (posX < pillar.x || posX > pillar.x + pillar.width)) {
                 detach();
                 return 0;
             }
@@ -2954,14 +2951,14 @@ CKEDITOR.disableAutoInline = true;
     CKEDITOR.plugins.add('tableresize', {
         requires: 'tabletools',
 
-        init: function(editor) {
-            editor.on('contentDom', function() {
+        init: function init(editor) {
+            editor.on('contentDom', function () {
                 var resizer,
                     editable = editor.editable();
 
                 // In Classic editor it is better to use document
                 // instead of editable so event will work below body.
-                editable.attachListener(editable.isInline() ? editable : editor.document, 'mousemove', function(evt) {
+                editable.attachListener(editable.isInline() ? editable : editor.document, 'mousemove', function (evt) {
                     evt = evt.data;
 
                     var target = evt.getTarget();
@@ -2998,7 +2995,7 @@ CKEDITOR.disableAutoInline = true;
 
                     if (!(pillars = table.getCustomData('_cke_table_pillars'))) {
                         // Cache table pillars calculation result.
-                        table.setCustomData('_cke_table_pillars', (pillars = buildTableColumnPillars(table)));
+                        table.setCustomData('_cke_table_pillars', pillars = buildTableColumnPillars(table));
                         table.on('mouseout', clearPillarsCache);
                         table.on('mousedown', clearPillarsCache);
                     }
@@ -3012,52 +3009,50 @@ CKEDITOR.disableAutoInline = true;
             });
         }
     });
-
 })();
-
 /**
  * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
-( function() {
+'use strict';
+
+(function () {
 	if (CKEDITOR.plugins.tabletools) return;
 
 	var cellNodeRegex = /^(?:td|th)$/;
 
-	function getSelectedCells( selection ) {
+	function getSelectedCells(selection) {
 		var ranges = selection.getRanges();
 		var retval = [];
 		var database = {};
 
-		function moveOutOfCellGuard( node ) {
+		function moveOutOfCellGuard(node) {
 			// Apply to the first cell only.
-			if ( retval.length > 0 )
-				return;
+			if (retval.length > 0) return;
 
 			// If we are exiting from the first </td>, then the td should definitely be
 			// included.
-			if ( node.type == CKEDITOR.NODE_ELEMENT && cellNodeRegex.test( node.getName() ) && !node.getCustomData( 'selected_cell' ) ) {
-				CKEDITOR.dom.element.setMarker( database, node, 'selected_cell', true );
-				retval.push( node );
+			if (node.type == CKEDITOR.NODE_ELEMENT && cellNodeRegex.test(node.getName()) && !node.getCustomData('selected_cell')) {
+				CKEDITOR.dom.element.setMarker(database, node, 'selected_cell', true);
+				retval.push(node);
 			}
 		}
 
-		for ( var i = 0; i < ranges.length; i++ ) {
-			var range = ranges[ i ];
+		for (var i = 0; i < ranges.length; i++) {
+			var range = ranges[i];
 
-			if ( range.collapsed ) {
+			if (range.collapsed) {
 				// Walker does not handle collapsed ranges yet - fall back to old API.
 				var startNode = range.getCommonAncestor();
-				var nearestCell = startNode.getAscendant( 'td', true ) || startNode.getAscendant( 'th', true );
-				if ( nearestCell )
-					retval.push( nearestCell );
+				var nearestCell = startNode.getAscendant('td', true) || startNode.getAscendant('th', true);
+				if (nearestCell) retval.push(nearestCell);
 			} else {
-				var walker = new CKEDITOR.dom.walker( range );
+				var walker = new CKEDITOR.dom.walker(range);
 				var node;
 				walker.guard = moveOutOfCellGuard;
 
-				while ( ( node = walker.next() ) ) {
+				while (node = walker.next()) {
 					// If may be possible for us to have a range like this:
 					// <td>^1</td><td>^2</td>
 					// The 2nd td shouldn't be included.
@@ -3065,132 +3060,130 @@ CKEDITOR.disableAutoInline = true;
 					// So we have to take care to include a td we've entered only when we've
 					// walked into its children.
 
-					if ( node.type != CKEDITOR.NODE_ELEMENT || !node.is( CKEDITOR.dtd.table ) ) {
-						var parent = node.getAscendant( 'td', true ) || node.getAscendant( 'th', true );
-						if ( parent && !parent.getCustomData( 'selected_cell' ) ) {
-							CKEDITOR.dom.element.setMarker( database, parent, 'selected_cell', true );
-							retval.push( parent );
+					if (node.type != CKEDITOR.NODE_ELEMENT || !node.is(CKEDITOR.dtd.table)) {
+						var parent = node.getAscendant('td', true) || node.getAscendant('th', true);
+						if (parent && !parent.getCustomData('selected_cell')) {
+							CKEDITOR.dom.element.setMarker(database, parent, 'selected_cell', true);
+							retval.push(parent);
 						}
 					}
 				}
 			}
 		}
 
-		CKEDITOR.dom.element.clearAllMarkers( database );
+		CKEDITOR.dom.element.clearAllMarkers(database);
 
 		return retval;
 	}
 
-	function getFocusElementAfterDelCells( cellsToDelete ) {
+	function getFocusElementAfterDelCells(cellsToDelete) {
 		var i = 0,
-			last = cellsToDelete.length - 1,
-			database = {},
-			cell, focusedCell, tr;
+		    last = cellsToDelete.length - 1,
+		    database = {},
+		    cell,
+		    focusedCell,
+		    tr;
 
-		while ( ( cell = cellsToDelete[ i++ ] ) )
-			CKEDITOR.dom.element.setMarker( database, cell, 'delete_cell', true );
+		while (cell = cellsToDelete[i++]) CKEDITOR.dom.element.setMarker(database, cell, 'delete_cell', true);
 
 		// 1.first we check left or right side focusable cell row by row;
 		i = 0;
-		while ( ( cell = cellsToDelete[ i++ ] ) ) {
-			if ( ( focusedCell = cell.getPrevious() ) && !focusedCell.getCustomData( 'delete_cell' ) || ( focusedCell = cell.getNext() ) && !focusedCell.getCustomData( 'delete_cell' ) ) {
-				CKEDITOR.dom.element.clearAllMarkers( database );
+		while (cell = cellsToDelete[i++]) {
+			if ((focusedCell = cell.getPrevious()) && !focusedCell.getCustomData('delete_cell') || (focusedCell = cell.getNext()) && !focusedCell.getCustomData('delete_cell')) {
+				CKEDITOR.dom.element.clearAllMarkers(database);
 				return focusedCell;
 			}
 		}
 
-		CKEDITOR.dom.element.clearAllMarkers( database );
+		CKEDITOR.dom.element.clearAllMarkers(database);
 
 		// 2. then we check the toppest row (outside the selection area square) focusable cell
-		tr = cellsToDelete[ 0 ].getParent();
-		if ( ( tr = tr.getPrevious() ) )
-			return tr.getLast();
+		tr = cellsToDelete[0].getParent();
+		if (tr = tr.getPrevious()) return tr.getLast();
 
 		// 3. last we check the lowerest  row focusable cell
-		tr = cellsToDelete[ last ].getParent();
-		if ( ( tr = tr.getNext() ) )
-			return tr.getChild( 0 );
+		tr = cellsToDelete[last].getParent();
+		if (tr = tr.getNext()) return tr.getChild(0);
 
 		return null;
 	}
 
-	function insertRow( selection, insertBefore ) {
-		var cells = getSelectedCells( selection ),
-			firstCell = cells[ 0 ],
-			table = firstCell.getAscendant( 'table' ),
-			doc = firstCell.getDocument(),
-			startRow = cells[ 0 ].getParent(),
-			startRowIndex = startRow.$.rowIndex,
-			lastCell = cells[ cells.length - 1 ],
-			endRowIndex = lastCell.getParent().$.rowIndex + lastCell.$.rowSpan - 1,
-			endRow = new CKEDITOR.dom.element( table.$.rows[ endRowIndex ] ),
-			rowIndex = insertBefore ? startRowIndex : endRowIndex,
-			row = insertBefore ? startRow : endRow;
+	function insertRow(selection, insertBefore) {
+		var cells = getSelectedCells(selection),
+		    firstCell = cells[0],
+		    table = firstCell.getAscendant('table'),
+		    doc = firstCell.getDocument(),
+		    startRow = cells[0].getParent(),
+		    startRowIndex = startRow.$.rowIndex,
+		    lastCell = cells[cells.length - 1],
+		    endRowIndex = lastCell.getParent().$.rowIndex + lastCell.$.rowSpan - 1,
+		    endRow = new CKEDITOR.dom.element(table.$.rows[endRowIndex]),
+		    rowIndex = insertBefore ? startRowIndex : endRowIndex,
+		    row = insertBefore ? startRow : endRow;
 
-		var map = CKEDITOR.tools.buildTableMap( table ),
-			cloneRow = map[ rowIndex ],
-			nextRow = insertBefore ? map[ rowIndex - 1 ] : map[ rowIndex + 1 ],
-			width = map[ 0 ].length;
+		var map = CKEDITOR.tools.buildTableMap(table),
+		    cloneRow = map[rowIndex],
+		    nextRow = insertBefore ? map[rowIndex - 1] : map[rowIndex + 1],
+		    width = map[0].length;
 
-		var newRow = doc.createElement( 'tr' );
-		for ( var i = 0; cloneRow[ i ] && i < width; i++ ) {
+		var newRow = doc.createElement('tr');
+		for (var i = 0; cloneRow[i] && i < width; i++) {
 			var cell;
 			// Check whether there's a spanning row here, do not break it.
-			if ( cloneRow[ i ].rowSpan > 1 && nextRow && cloneRow[ i ] == nextRow[ i ] ) {
-				cell = cloneRow[ i ];
+			if (cloneRow[i].rowSpan > 1 && nextRow && cloneRow[i] == nextRow[i]) {
+				cell = cloneRow[i];
 				cell.rowSpan += 1;
 			} else {
-				cell = new CKEDITOR.dom.element( cloneRow[ i ] ).clone();
-				cell.removeAttribute( 'rowSpan' );
+				cell = new CKEDITOR.dom.element(cloneRow[i]).clone();
+				cell.removeAttribute('rowSpan');
 				cell.appendBogus();
-				newRow.append( cell );
+				newRow.append(cell);
 				cell = cell.$;
 			}
 
 			i += cell.colSpan - 1;
 		}
 
-		insertBefore ? newRow.insertBefore( row ) : newRow.insertAfter( row );
+		insertBefore ? newRow.insertBefore(row) : newRow.insertAfter(row);
 	}
 
-	function deleteRows( selectionOrRow ) {
-		if ( selectionOrRow instanceof CKEDITOR.dom.selection ) {
-			var cells = getSelectedCells( selectionOrRow ),
-				firstCell = cells[ 0 ],
-				table = firstCell.getAscendant( 'table' ),
-				map = CKEDITOR.tools.buildTableMap( table ),
-				startRow = cells[ 0 ].getParent(),
-				startRowIndex = startRow.$.rowIndex,
-				lastCell = cells[ cells.length - 1 ],
-				endRowIndex = lastCell.getParent().$.rowIndex + lastCell.$.rowSpan - 1,
-				rowsToDelete = [];
+	function deleteRows(selectionOrRow) {
+		if (selectionOrRow instanceof CKEDITOR.dom.selection) {
+			var cells = getSelectedCells(selectionOrRow),
+			    firstCell = cells[0],
+			    table = firstCell.getAscendant('table'),
+			    map = CKEDITOR.tools.buildTableMap(table),
+			    startRow = cells[0].getParent(),
+			    startRowIndex = startRow.$.rowIndex,
+			    lastCell = cells[cells.length - 1],
+			    endRowIndex = lastCell.getParent().$.rowIndex + lastCell.$.rowSpan - 1,
+			    rowsToDelete = [];
 
 			// Delete cell or reduce cell spans by checking through the table map.
-			for ( var i = startRowIndex; i <= endRowIndex; i++ ) {
-				var mapRow = map[ i ],
-					row = new CKEDITOR.dom.element( table.$.rows[ i ] );
+			for (var i = startRowIndex; i <= endRowIndex; i++) {
+				var mapRow = map[i],
+				    row = new CKEDITOR.dom.element(table.$.rows[i]);
 
-				for ( var j = 0; j < mapRow.length; j++ ) {
-					var cell = new CKEDITOR.dom.element( mapRow[ j ] ),
-						cellRowIndex = cell.getParent().$.rowIndex;
+				for (var j = 0; j < mapRow.length; j++) {
+					var cell = new CKEDITOR.dom.element(mapRow[j]),
+					    cellRowIndex = cell.getParent().$.rowIndex;
 
-					if ( cell.$.rowSpan == 1 )
-						cell.remove();
+					if (cell.$.rowSpan == 1) cell.remove();
 					// Row spanned cell.
 					else {
 						// Span row of the cell, reduce spanning.
 						cell.$.rowSpan -= 1;
 						// Root row of the cell, root cell to next row.
-						if ( cellRowIndex == i ) {
-							var nextMapRow = map[ i + 1 ];
-							nextMapRow[ j - 1 ] ? cell.insertAfter( new CKEDITOR.dom.element( nextMapRow[ j - 1 ] ) ) : new CKEDITOR.dom.element( table.$.rows[ i + 1 ] ).append( cell, 1 );
+						if (cellRowIndex == i) {
+							var nextMapRow = map[i + 1];
+							nextMapRow[j - 1] ? cell.insertAfter(new CKEDITOR.dom.element(nextMapRow[j - 1])) : new CKEDITOR.dom.element(table.$.rows[i + 1]).append(cell, 1);
 						}
 					}
 
 					j += cell.$.colSpan - 1;
 				}
 
-				rowsToDelete.push( row );
+				rowsToDelete.push(row);
 			}
 
 			var rows = table.$.rows;
@@ -3199,83 +3192,76 @@ CKEDITOR.disableAutoInline = true;
 			// 1. Into next sibling row if any;
 			// 2. Into previous sibling row if any;
 			// 3. Into table's parent element if it's the very last row.
-			var cursorPosition = new CKEDITOR.dom.element( rows[ endRowIndex + 1 ] || ( startRowIndex > 0 ? rows[ startRowIndex - 1 ] : null ) || table.$.parentNode );
+			var cursorPosition = new CKEDITOR.dom.element(rows[endRowIndex + 1] || (startRowIndex > 0 ? rows[startRowIndex - 1] : null) || table.$.parentNode);
 
-			for ( i = rowsToDelete.length; i >= 0; i-- )
-				deleteRows( rowsToDelete[ i ] );
+			for (i = rowsToDelete.length; i >= 0; i--) deleteRows(rowsToDelete[i]);
 
 			return cursorPosition;
-		} else if ( selectionOrRow instanceof CKEDITOR.dom.element ) {
-			table = selectionOrRow.getAscendant( 'table' );
+		} else if (selectionOrRow instanceof CKEDITOR.dom.element) {
+			table = selectionOrRow.getAscendant('table');
 
-			if ( table.$.rows.length == 1 )
-				table.remove();
-			else
-				selectionOrRow.remove();
+			if (table.$.rows.length == 1) table.remove();else selectionOrRow.remove();
 		}
 
 		return null;
 	}
 
-	function getCellColIndex( cell, isStart ) {
+	function getCellColIndex(cell, isStart) {
 		var row = cell.getParent(),
-			rowCells = row.$.cells;
+		    rowCells = row.$.cells;
 
 		var colIndex = 0;
-		for ( var i = 0; i < rowCells.length; i++ ) {
-			var mapCell = rowCells[ i ];
+		for (var i = 0; i < rowCells.length; i++) {
+			var mapCell = rowCells[i];
 			colIndex += isStart ? 1 : mapCell.colSpan;
-			if ( mapCell == cell.$ )
-				break;
+			if (mapCell == cell.$) break;
 		}
 
 		return colIndex - 1;
 	}
 
-	function getColumnsIndices( cells, isStart ) {
+	function getColumnsIndices(cells, isStart) {
 		var retval = isStart ? Infinity : 0;
-		for ( var i = 0; i < cells.length; i++ ) {
-			var colIndex = getCellColIndex( cells[ i ], isStart );
-			if ( isStart ? colIndex < retval : colIndex > retval )
-				retval = colIndex;
+		for (var i = 0; i < cells.length; i++) {
+			var colIndex = getCellColIndex(cells[i], isStart);
+			if (isStart ? colIndex < retval : colIndex > retval) retval = colIndex;
 		}
 		return retval;
 	}
 
-	function insertColumn( selection, insertBefore ) {
-		var cells = getSelectedCells( selection ),
-			firstCell = cells[ 0 ],
-			table = firstCell.getAscendant( 'table' ),
-			startCol = getColumnsIndices( cells, 1 ),
-			lastCol = getColumnsIndices( cells ),
-			colIndex = insertBefore ? startCol : lastCol;
+	function insertColumn(selection, insertBefore) {
+		var cells = getSelectedCells(selection),
+		    firstCell = cells[0],
+		    table = firstCell.getAscendant('table'),
+		    startCol = getColumnsIndices(cells, 1),
+		    lastCol = getColumnsIndices(cells),
+		    colIndex = insertBefore ? startCol : lastCol;
 
-		var map = CKEDITOR.tools.buildTableMap( table ),
-			cloneCol = [],
-			nextCol = [],
-			height = map.length;
+		var map = CKEDITOR.tools.buildTableMap(table),
+		    cloneCol = [],
+		    nextCol = [],
+		    height = map.length;
 
-		for ( var i = 0; i < height; i++ ) {
-			cloneCol.push( map[ i ][ colIndex ] );
-			var nextCell = insertBefore ? map[ i ][ colIndex - 1 ] : map[ i ][ colIndex + 1 ];
-			nextCol.push( nextCell );
+		for (var i = 0; i < height; i++) {
+			cloneCol.push(map[i][colIndex]);
+			var nextCell = insertBefore ? map[i][colIndex - 1] : map[i][colIndex + 1];
+			nextCol.push(nextCell);
 		}
 
-		for ( i = 0; i < height; i++ ) {
+		for (i = 0; i < height; i++) {
 			var cell;
 
-			if ( !cloneCol[ i ] )
-				continue;
+			if (!cloneCol[i]) continue;
 
 			// Check whether there's a spanning column here, do not break it.
-			if ( cloneCol[ i ].colSpan > 1 && nextCol[ i ] == cloneCol[ i ] ) {
-				cell = cloneCol[ i ];
+			if (cloneCol[i].colSpan > 1 && nextCol[i] == cloneCol[i]) {
+				cell = cloneCol[i];
 				cell.colSpan += 1;
 			} else {
-				cell = new CKEDITOR.dom.element( cloneCol[ i ] ).clone();
-				cell.removeAttribute( 'colSpan' );
+				cell = new CKEDITOR.dom.element(cloneCol[i]).clone();
+				cell.removeAttribute('colSpan');
 				cell.appendBogus();
-				cell[ insertBefore ? 'insertBefore' : 'insertAfter' ].call( cell, new CKEDITOR.dom.element( cloneCol[ i ] ) );
+				cell[insertBefore ? 'insertBefore' : 'insertAfter'].call(cell, new CKEDITOR.dom.element(cloneCol[i]));
 				cell = cell.$;
 			}
 
@@ -3283,264 +3269,231 @@ CKEDITOR.disableAutoInline = true;
 		}
 	}
 
-	function deleteColumns( selectionOrCell ) {
-		var cells = getSelectedCells( selectionOrCell ),
-			firstCell = cells[ 0 ],
-			lastCell = cells[ cells.length - 1 ],
-			table = firstCell.getAscendant( 'table' ),
-			map = CKEDITOR.tools.buildTableMap( table ),
-			startColIndex, endColIndex,
-			rowsToDelete = [];
+	function deleteColumns(selectionOrCell) {
+		var cells = getSelectedCells(selectionOrCell),
+		    firstCell = cells[0],
+		    lastCell = cells[cells.length - 1],
+		    table = firstCell.getAscendant('table'),
+		    map = CKEDITOR.tools.buildTableMap(table),
+		    startColIndex,
+		    endColIndex,
+		    rowsToDelete = [];
 
 		// Figure out selected cells' column indices.
-		for ( var i = 0, rows = map.length; i < rows; i++ ) {
-			for ( var j = 0, cols = map[ i ].length; j < cols; j++ ) {
-				if ( map[ i ][ j ] == firstCell.$ )
-					startColIndex = j;
-				if ( map[ i ][ j ] == lastCell.$ )
-					endColIndex = j;
+		for (var i = 0, rows = map.length; i < rows; i++) {
+			for (var j = 0, cols = map[i].length; j < cols; j++) {
+				if (map[i][j] == firstCell.$) startColIndex = j;
+				if (map[i][j] == lastCell.$) endColIndex = j;
 			}
 		}
 
 		// Delete cell or reduce cell spans by checking through the table map.
-		for ( i = startColIndex; i <= endColIndex; i++ ) {
-			for ( j = 0; j < map.length; j++ ) {
-				var mapRow = map[ j ],
-					row = new CKEDITOR.dom.element( table.$.rows[ j ] ),
-					cell = new CKEDITOR.dom.element( mapRow[ i ] );
+		for (i = startColIndex; i <= endColIndex; i++) {
+			for (j = 0; j < map.length; j++) {
+				var mapRow = map[j],
+				    row = new CKEDITOR.dom.element(table.$.rows[j]),
+				    cell = new CKEDITOR.dom.element(mapRow[i]);
 
-				if ( cell.$ ) {
-					if ( cell.$.colSpan == 1 )
-						cell.remove();
+				if (cell.$) {
+					if (cell.$.colSpan == 1) cell.remove();
 					// Reduce the col spans.
-					else
-						cell.$.colSpan -= 1;
+					else cell.$.colSpan -= 1;
 
 					j += cell.$.rowSpan - 1;
 
-					if ( !row.$.cells.length )
-						rowsToDelete.push( row );
+					if (!row.$.cells.length) rowsToDelete.push(row);
 				}
 			}
 		}
 
-		var firstRowCells = table.$.rows[ 0 ] && table.$.rows[ 0 ].cells;
+		var firstRowCells = table.$.rows[0] && table.$.rows[0].cells;
 
 		// Where to put the cursor after columns been deleted?
 		// 1. Into next cell of the first row if any;
 		// 2. Into previous cell of the first row if any;
 		// 3. Into table's parent element;
-		var cursorPosition = new CKEDITOR.dom.element( firstRowCells[ startColIndex ] || ( startColIndex ? firstRowCells[ startColIndex - 1 ] : table.$.parentNode ) );
+		var cursorPosition = new CKEDITOR.dom.element(firstRowCells[startColIndex] || (startColIndex ? firstRowCells[startColIndex - 1] : table.$.parentNode));
 
 		// Delete table rows only if all columns are gone (do not remove empty row).
-		if ( rowsToDelete.length == rows )
-			table.remove();
+		if (rowsToDelete.length == rows) table.remove();
 
 		return cursorPosition;
 	}
 
-	function insertCell( selection, insertBefore ) {
+	function insertCell(selection, insertBefore) {
 		var startElement = selection.getStartElement();
-		var cell = startElement.getAscendant( 'td', 1 ) || startElement.getAscendant( 'th', 1 );
+		var cell = startElement.getAscendant('td', 1) || startElement.getAscendant('th', 1);
 
-		if ( !cell )
-			return;
+		if (!cell) return;
 
 		// Create the new cell element to be added.
 		var newCell = cell.clone();
 		newCell.appendBogus();
 
-		if ( insertBefore )
-			newCell.insertBefore( cell );
-		else
-			newCell.insertAfter( cell );
+		if (insertBefore) newCell.insertBefore(cell);else newCell.insertAfter(cell);
 	}
 
-	function deleteCells( selectionOrCell ) {
-		if ( selectionOrCell instanceof CKEDITOR.dom.selection ) {
-			var cellsToDelete = getSelectedCells( selectionOrCell );
-			var table = cellsToDelete[ 0 ] && cellsToDelete[ 0 ].getAscendant( 'table' );
-			var cellToFocus = getFocusElementAfterDelCells( cellsToDelete );
+	function deleteCells(selectionOrCell) {
+		if (selectionOrCell instanceof CKEDITOR.dom.selection) {
+			var cellsToDelete = getSelectedCells(selectionOrCell);
+			var table = cellsToDelete[0] && cellsToDelete[0].getAscendant('table');
+			var cellToFocus = getFocusElementAfterDelCells(cellsToDelete);
 
-			for ( var i = cellsToDelete.length - 1; i >= 0; i-- )
-				deleteCells( cellsToDelete[ i ] );
+			for (var i = cellsToDelete.length - 1; i >= 0; i--) deleteCells(cellsToDelete[i]);
 
-			if ( cellToFocus )
-				placeCursorInCell( cellToFocus, true );
-			else if ( table )
-				table.remove();
-		} else if ( selectionOrCell instanceof CKEDITOR.dom.element ) {
+			if (cellToFocus) placeCursorInCell(cellToFocus, true);else if (table) table.remove();
+		} else if (selectionOrCell instanceof CKEDITOR.dom.element) {
 			var tr = selectionOrCell.getParent();
-			if ( tr.getChildCount() == 1 )
-				tr.remove();
-			else
-				selectionOrCell.remove();
+			if (tr.getChildCount() == 1) tr.remove();else selectionOrCell.remove();
 		}
 	}
 
 	// Remove filler at end and empty spaces around the cell content.
-	function trimCell( cell ) {
+	function trimCell(cell) {
 		var bogus = cell.getBogus();
 		bogus && bogus.remove();
 		cell.trim();
 	}
 
-	function placeCursorInCell( cell, placeAtEnd ) {
+	function placeCursorInCell(cell, placeAtEnd) {
 		var docInner = cell.getDocument(),
-			docOuter = CKEDITOR.document;
+		    docOuter = CKEDITOR.document;
 
 		// Fixing "Unspecified error" thrown in IE10 by resetting
 		// selection the dirty and shameful way (#10308).
 		// We can not apply this hack to IE8 because
 		// it causes error (#11058).
-		if ( CKEDITOR.env.ie && CKEDITOR.env.version == 10 ) {
+		if (CKEDITOR.env.ie && CKEDITOR.env.version == 10) {
 			docOuter.focus();
 			docInner.focus();
 		}
 
-		var range = new CKEDITOR.dom.range( docInner );
-		if ( !range[ 'moveToElementEdit' + ( placeAtEnd ? 'End' : 'Start' ) ]( cell ) ) {
-			range.selectNodeContents( cell );
-			range.collapse( placeAtEnd ? false : true );
+		var range = new CKEDITOR.dom.range(docInner);
+		if (!range['moveToElementEdit' + (placeAtEnd ? 'End' : 'Start')](cell)) {
+			range.selectNodeContents(cell);
+			range.collapse(placeAtEnd ? false : true);
 		}
-		range.select( true );
+		range.select(true);
 	}
 
-	function cellInRow( tableMap, rowIndex, cell ) {
-		var oRow = tableMap[ rowIndex ];
-		if ( typeof cell == 'undefined' )
-			return oRow;
+	function cellInRow(tableMap, rowIndex, cell) {
+		var oRow = tableMap[rowIndex];
+		if (typeof cell == 'undefined') return oRow;
 
-		for ( var c = 0; oRow && c < oRow.length; c++ ) {
-			if ( cell.is && oRow[ c ] == cell.$ )
-				return c;
-			else if ( c == cell )
-				return new CKEDITOR.dom.element( oRow[ c ] );
+		for (var c = 0; oRow && c < oRow.length; c++) {
+			if (cell.is && oRow[c] == cell.$) return c;else if (c == cell) return new CKEDITOR.dom.element(oRow[c]);
 		}
 		return cell.is ? -1 : null;
 	}
 
-	function cellInCol( tableMap, colIndex ) {
+	function cellInCol(tableMap, colIndex) {
 		var oCol = [];
-		for ( var r = 0; r < tableMap.length; r++ ) {
-			var row = tableMap[ r ];
-			oCol.push( row[ colIndex ] );
+		for (var r = 0; r < tableMap.length; r++) {
+			var row = tableMap[r];
+			oCol.push(row[colIndex]);
 
 			// Avoid adding duplicate cells.
-			if ( row[ colIndex ].rowSpan > 1 )
-				r += row[ colIndex ].rowSpan - 1;
+			if (row[colIndex].rowSpan > 1) r += row[colIndex].rowSpan - 1;
 		}
 		return oCol;
 	}
 
-	function mergeCells( selection, mergeDirection, isDetect ) {
-		var cells = getSelectedCells( selection );
+	function mergeCells(selection, mergeDirection, isDetect) {
+		var cells = getSelectedCells(selection);
 
 		// Invalid merge request if:
 		// 1. In batch mode despite that less than two selected.
 		// 2. In solo mode while not exactly only one selected.
 		// 3. Cells distributed in different table groups (e.g. from both thead and tbody).
 		var commonAncestor;
-		if ( ( mergeDirection ? cells.length != 1 : cells.length < 2 ) || ( commonAncestor = selection.getCommonAncestor() ) && commonAncestor.type == CKEDITOR.NODE_ELEMENT && commonAncestor.is( 'table' ) )
-			return false;
+		if ((mergeDirection ? cells.length != 1 : cells.length < 2) || (commonAncestor = selection.getCommonAncestor()) && commonAncestor.type == CKEDITOR.NODE_ELEMENT && commonAncestor.is('table')) return false;
 
 		var cell,
-			firstCell = cells[ 0 ],
-			table = firstCell.getAscendant( 'table' ),
-			map = CKEDITOR.tools.buildTableMap( table ),
-			mapHeight = map.length,
-			mapWidth = map[ 0 ].length,
-			startRow = firstCell.getParent().$.rowIndex,
-			startColumn = cellInRow( map, startRow, firstCell );
+		    firstCell = cells[0],
+		    table = firstCell.getAscendant('table'),
+		    map = CKEDITOR.tools.buildTableMap(table),
+		    mapHeight = map.length,
+		    mapWidth = map[0].length,
+		    startRow = firstCell.getParent().$.rowIndex,
+		    startColumn = cellInRow(map, startRow, firstCell);
 
-		if ( mergeDirection ) {
+		if (mergeDirection) {
 			var targetCell;
 			try {
-				var rowspan = parseInt( firstCell.getAttribute( 'rowspan' ), 10 ) || 1;
-				var colspan = parseInt( firstCell.getAttribute( 'colspan' ), 10 ) || 1;
+				var rowspan = parseInt(firstCell.getAttribute('rowspan'), 10) || 1;
+				var colspan = parseInt(firstCell.getAttribute('colspan'), 10) || 1;
 
-				targetCell = map[ mergeDirection == 'up' ? ( startRow - rowspan ) : mergeDirection == 'down' ? ( startRow + rowspan ) : startRow ][
-					mergeDirection == 'left' ?
-						( startColumn - colspan ) :
-					mergeDirection == 'right' ? ( startColumn + colspan ) : startColumn ];
-
-			} catch ( er ) {
+				targetCell = map[mergeDirection == 'up' ? startRow - rowspan : mergeDirection == 'down' ? startRow + rowspan : startRow][mergeDirection == 'left' ? startColumn - colspan : mergeDirection == 'right' ? startColumn + colspan : startColumn];
+			} catch (er) {
 				return false;
 			}
 
 			// 1. No cell could be merged.
 			// 2. Same cell actually.
-			if ( !targetCell || firstCell.$ == targetCell )
-				return false;
+			if (!targetCell || firstCell.$ == targetCell) return false;
 
 			// Sort in map order regardless of the DOM sequence.
-			cells[ ( mergeDirection == 'up' || mergeDirection == 'left' ) ? 'unshift' : 'push' ]( new CKEDITOR.dom.element( targetCell ) );
+			cells[mergeDirection == 'up' || mergeDirection == 'left' ? 'unshift' : 'push'](new CKEDITOR.dom.element(targetCell));
 		}
 
 		// Start from here are merging way ignorance (merge up/right, batch merge).
 		var doc = firstCell.getDocument(),
-			lastRowIndex = startRow,
-			totalRowSpan = 0,
-			totalColSpan = 0,
-			// Use a documentFragment as buffer when appending cell contents.
-			frag = !isDetect && new CKEDITOR.dom.documentFragment( doc ),
-			dimension = 0;
+		    lastRowIndex = startRow,
+		    totalRowSpan = 0,
+		    totalColSpan = 0,
+		   
+		// Use a documentFragment as buffer when appending cell contents.
+		frag = !isDetect && new CKEDITOR.dom.documentFragment(doc),
+		    dimension = 0;
 
-		for ( var i = 0; i < cells.length; i++ ) {
-			cell = cells[ i ];
+		for (var i = 0; i < cells.length; i++) {
+			cell = cells[i];
 
 			var tr = cell.getParent(),
-				cellFirstChild = cell.getFirst(),
-				colSpan = cell.$.colSpan,
-				rowSpan = cell.$.rowSpan,
-				rowIndex = tr.$.rowIndex,
-				colIndex = cellInRow( map, rowIndex, cell );
+			    cellFirstChild = cell.getFirst(),
+			    colSpan = cell.$.colSpan,
+			    rowSpan = cell.$.rowSpan,
+			    rowIndex = tr.$.rowIndex,
+			    colIndex = cellInRow(map, rowIndex, cell);
 
 			// Accumulated the actual places taken by all selected cells.
 			dimension += colSpan * rowSpan;
 			// Accumulated the maximum virtual spans from column and row.
-			totalColSpan = Math.max( totalColSpan, colIndex - startColumn + colSpan );
-			totalRowSpan = Math.max( totalRowSpan, rowIndex - startRow + rowSpan );
+			totalColSpan = Math.max(totalColSpan, colIndex - startColumn + colSpan);
+			totalRowSpan = Math.max(totalRowSpan, rowIndex - startRow + rowSpan);
 
-			if ( !isDetect ) {
+			if (!isDetect) {
 				// Trim all cell fillers and check to remove empty cells.
-				if ( trimCell( cell ), cell.getChildren().count() ) {
+				if ((trimCell(cell), cell.getChildren().count())) {
 					// Merge vertically cells as two separated paragraphs.
-					if ( rowIndex != lastRowIndex && cellFirstChild && !( cellFirstChild.isBlockBoundary && cellFirstChild.isBlockBoundary( { br: 1 } ) ) ) {
-						var last = frag.getLast( CKEDITOR.dom.walker.whitespaces( true ) );
-						if ( last && !( last.is && last.is( 'br' ) ) )
-							frag.append( 'br' );
+					if (rowIndex != lastRowIndex && cellFirstChild && !(cellFirstChild.isBlockBoundary && cellFirstChild.isBlockBoundary({ br: 1 }))) {
+						var last = frag.getLast(CKEDITOR.dom.walker.whitespaces(true));
+						if (last && !(last.is && last.is('br'))) frag.append('br');
 					}
 
-					cell.moveChildren( frag );
+					cell.moveChildren(frag);
 				}
-				i ? cell.remove() : cell.setHtml( '' );
+				i ? cell.remove() : cell.setHtml('');
 			}
 			lastRowIndex = rowIndex;
 		}
 
-		if ( !isDetect ) {
-			frag.moveChildren( firstCell );
+		if (!isDetect) {
+			frag.moveChildren(firstCell);
 
 			firstCell.appendBogus();
 
-			if ( totalColSpan >= mapWidth )
-				firstCell.removeAttribute( 'rowSpan' );
-			else
-				firstCell.$.rowSpan = totalRowSpan;
+			if (totalColSpan >= mapWidth) firstCell.removeAttribute('rowSpan');else firstCell.$.rowSpan = totalRowSpan;
 
-			if ( totalRowSpan >= mapHeight )
-				firstCell.removeAttribute( 'colSpan' );
-			else
-				firstCell.$.colSpan = totalColSpan;
+			if (totalRowSpan >= mapHeight) firstCell.removeAttribute('colSpan');else firstCell.$.colSpan = totalColSpan;
 
 			// Swip empty <tr> left at the end of table due to the merging.
-			var trs = new CKEDITOR.dom.nodeList( table.$.rows ),
-				count = trs.count();
+			var trs = new CKEDITOR.dom.nodeList(table.$.rows),
+			    count = trs.count();
 
-			for ( i = count - 1; i >= 0; i-- ) {
-				var tailTr = trs.getItem( i );
-				if ( !tailTr.$.cells.length ) {
+			for (i = count - 1; i >= 0; i--) {
+				var tailTr = trs.getItem(i);
+				if (!tailTr.$.cells.length) {
 					tailTr.remove();
 					count++;
 					continue;
@@ -3552,42 +3505,42 @@ CKEDITOR.disableAutoInline = true;
 		// Be able to merge cells only if actual dimension of selected
 		// cells equals to the caculated rectangle.
 		else {
-			return ( totalRowSpan * totalColSpan ) == dimension;
+			return totalRowSpan * totalColSpan == dimension;
 		}
 	}
 
-	function verticalSplitCell( selection, isDetect ) {
-		var cells = getSelectedCells( selection );
-		if ( cells.length > 1 )
-			return false;
-		else if ( isDetect )
-			return true;
+	function verticalSplitCell(selection, isDetect) {
+		var cells = getSelectedCells(selection);
+		if (cells.length > 1) return false;else if (isDetect) return true;
 
-		var cell = cells[ 0 ],
-			tr = cell.getParent(),
-			table = tr.getAscendant( 'table' ),
-			map = CKEDITOR.tools.buildTableMap( table ),
-			rowIndex = tr.$.rowIndex,
-			colIndex = cellInRow( map, rowIndex, cell ),
-			rowSpan = cell.$.rowSpan,
-			newCell, newRowSpan, newCellRowSpan, newRowIndex;
+		var cell = cells[0],
+		    tr = cell.getParent(),
+		    table = tr.getAscendant('table'),
+		    map = CKEDITOR.tools.buildTableMap(table),
+		    rowIndex = tr.$.rowIndex,
+		    colIndex = cellInRow(map, rowIndex, cell),
+		    rowSpan = cell.$.rowSpan,
+		    newCell,
+		    newRowSpan,
+		    newCellRowSpan,
+		    newRowIndex;
 
-		if ( rowSpan > 1 ) {
-			newRowSpan = Math.ceil( rowSpan / 2 );
-			newCellRowSpan = Math.floor( rowSpan / 2 );
+		if (rowSpan > 1) {
+			newRowSpan = Math.ceil(rowSpan / 2);
+			newCellRowSpan = Math.floor(rowSpan / 2);
 			newRowIndex = rowIndex + newRowSpan;
-			var newCellTr = new CKEDITOR.dom.element( table.$.rows[ newRowIndex ] ),
-				newCellRow = cellInRow( map, newRowIndex ),
-				candidateCell;
+			var newCellTr = new CKEDITOR.dom.element(table.$.rows[newRowIndex]),
+			    newCellRow = cellInRow(map, newRowIndex),
+			    candidateCell;
 
 			newCell = cell.clone();
 
 			// Figure out where to insert the new cell by checking the vitual row.
-			for ( var c = 0; c < newCellRow.length; c++ ) {
-				candidateCell = newCellRow[ c ];
+			for (var c = 0; c < newCellRow.length; c++) {
+				candidateCell = newCellRow[c];
 				// Catch first cell actually following the column.
-				if ( candidateCell.parentNode == newCellTr.$ && c > colIndex ) {
-					newCell.insertBefore( new CKEDITOR.dom.element( candidateCell ) );
+				if (candidateCell.parentNode == newCellTr.$ && c > colIndex) {
+					newCell.insertBefore(new CKEDITOR.dom.element(candidateCell));
 					break;
 				} else {
 					candidateCell = null;
@@ -3595,226 +3548,218 @@ CKEDITOR.disableAutoInline = true;
 			}
 
 			// The destination row is empty, append at will.
-			if ( !candidateCell )
-				newCellTr.append( newCell );
+			if (!candidateCell) newCellTr.append(newCell);
 		} else {
 			newCellRowSpan = newRowSpan = 1;
 
 			newCellTr = tr.clone();
-			newCellTr.insertAfter( tr );
-			newCellTr.append( newCell = cell.clone() );
+			newCellTr.insertAfter(tr);
+			newCellTr.append(newCell = cell.clone());
 
-			var cellsInSameRow = cellInRow( map, rowIndex );
-			for ( var i = 0; i < cellsInSameRow.length; i++ )
-				cellsInSameRow[ i ].rowSpan++;
+			var cellsInSameRow = cellInRow(map, rowIndex);
+			for (var i = 0; i < cellsInSameRow.length; i++) cellsInSameRow[i].rowSpan++;
 		}
 
 		newCell.appendBogus();
 
 		cell.$.rowSpan = newRowSpan;
 		newCell.$.rowSpan = newCellRowSpan;
-		if ( newRowSpan == 1 )
-			cell.removeAttribute( 'rowSpan' );
-		if ( newCellRowSpan == 1 )
-			newCell.removeAttribute( 'rowSpan' );
+		if (newRowSpan == 1) cell.removeAttribute('rowSpan');
+		if (newCellRowSpan == 1) newCell.removeAttribute('rowSpan');
 
 		return newCell;
 	}
 
-	function horizontalSplitCell( selection, isDetect ) {
-		var cells = getSelectedCells( selection );
-		if ( cells.length > 1 )
-			return false;
-		else if ( isDetect )
-			return true;
+	function horizontalSplitCell(selection, isDetect) {
+		var cells = getSelectedCells(selection);
+		if (cells.length > 1) return false;else if (isDetect) return true;
 
-		var cell = cells[ 0 ],
-			tr = cell.getParent(),
-			table = tr.getAscendant( 'table' ),
-			map = CKEDITOR.tools.buildTableMap( table ),
-			rowIndex = tr.$.rowIndex,
-			colIndex = cellInRow( map, rowIndex, cell ),
-			colSpan = cell.$.colSpan,
-			newCell, newColSpan, newCellColSpan;
+		var cell = cells[0],
+		    tr = cell.getParent(),
+		    table = tr.getAscendant('table'),
+		    map = CKEDITOR.tools.buildTableMap(table),
+		    rowIndex = tr.$.rowIndex,
+		    colIndex = cellInRow(map, rowIndex, cell),
+		    colSpan = cell.$.colSpan,
+		    newCell,
+		    newColSpan,
+		    newCellColSpan;
 
-		if ( colSpan > 1 ) {
-			newColSpan = Math.ceil( colSpan / 2 );
-			newCellColSpan = Math.floor( colSpan / 2 );
+		if (colSpan > 1) {
+			newColSpan = Math.ceil(colSpan / 2);
+			newCellColSpan = Math.floor(colSpan / 2);
 		} else {
 			newCellColSpan = newColSpan = 1;
-			var cellsInSameCol = cellInCol( map, colIndex );
-			for ( var i = 0; i < cellsInSameCol.length; i++ )
-				cellsInSameCol[ i ].colSpan++;
+			var cellsInSameCol = cellInCol(map, colIndex);
+			for (var i = 0; i < cellsInSameCol.length; i++) cellsInSameCol[i].colSpan++;
 		}
 		newCell = cell.clone();
-		newCell.insertAfter( cell );
+		newCell.insertAfter(cell);
 		newCell.appendBogus();
 
 		cell.$.colSpan = newColSpan;
 		newCell.$.colSpan = newCellColSpan;
-		if ( newColSpan == 1 )
-			cell.removeAttribute( 'colSpan' );
-		if ( newCellColSpan == 1 )
-			newCell.removeAttribute( 'colSpan' );
+		if (newColSpan == 1) cell.removeAttribute('colSpan');
+		if (newCellColSpan == 1) newCell.removeAttribute('colSpan');
 
 		return newCell;
 	}
 
 	CKEDITOR.plugins.tabletools = {
-		init: function( editor ) {
+		init: function init(editor) {
 			var lang = editor.lang.table;
 
-			function createDef( def ) {
-				return CKEDITOR.tools.extend( def || {}, {
+			function createDef(def) {
+				return CKEDITOR.tools.extend(def || {}, {
 					contextSensitive: 1,
-					refresh: function( editor, path ) {
-						this.setState( path.contains( { td: 1, th: 1 }, 1 ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED );
+					refresh: function refresh(editor, path) {
+						this.setState(path.contains({ td: 1, th: 1 }, 1) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED);
 					}
-				} );
+				});
 			}
-			function addCmd( name, def ) {
-				var cmd = editor.addCommand( name, def );
-				editor.addFeature( cmd );
+			function addCmd(name, def) {
+				var cmd = editor.addCommand(name, def);
+				editor.addFeature(cmd);
 			}
 
-			addCmd( 'cellProperties', new CKEDITOR.dialogCommand( 'cellProperties', createDef( {
+			addCmd('cellProperties', new CKEDITOR.dialogCommand('cellProperties', createDef({
 				allowedContent: 'td th{width,height,border-color,background-color,white-space,vertical-align,text-align}[colspan,rowspan]',
 				requiredContent: 'table'
-			} ) ) );
-			CKEDITOR.dialog.add( 'cellProperties', this.path + 'dialogs/tableCell.js' );
+			})));
+			CKEDITOR.dialog.add('cellProperties', this.path + 'dialogs/tableCell.js');
 
-			addCmd( 'rowDelete', createDef( {
+			addCmd('rowDelete', createDef({
 				requiredContent: 'table',
-				exec: function( editor ) {
+				exec: function exec(editor) {
 					var selection = editor.getSelection();
-					placeCursorInCell( deleteRows( selection ) );
+					placeCursorInCell(deleteRows(selection));
 				}
-			} ) );
+			}));
 
-			addCmd( 'rowInsertBefore', createDef( {
+			addCmd('rowInsertBefore', createDef({
 				requiredContent: 'table',
-				exec: function( editor ) {
+				exec: function exec(editor) {
 					var selection = editor.getSelection();
-					insertRow( selection, true );
+					insertRow(selection, true);
 				}
-			} ) );
+			}));
 
-			addCmd( 'rowInsertAfter', createDef( {
+			addCmd('rowInsertAfter', createDef({
 				requiredContent: 'table',
-				exec: function( editor ) {
+				exec: function exec(editor) {
 					var selection = editor.getSelection();
-					insertRow( selection );
+					insertRow(selection);
 				}
-			} ) );
+			}));
 
-			addCmd( 'columnDelete', createDef( {
+			addCmd('columnDelete', createDef({
 				requiredContent: 'table',
-				exec: function( editor ) {
+				exec: function exec(editor) {
 					var selection = editor.getSelection();
-					var element = deleteColumns( selection );
-					element && placeCursorInCell( element, true );
+					var element = deleteColumns(selection);
+					element && placeCursorInCell(element, true);
 				}
-			} ) );
+			}));
 
-			addCmd( 'columnInsertBefore', createDef( {
+			addCmd('columnInsertBefore', createDef({
 				requiredContent: 'table',
-				exec: function( editor ) {
+				exec: function exec(editor) {
 					var selection = editor.getSelection();
-					insertColumn( selection, true );
+					insertColumn(selection, true);
 				}
-			} ) );
+			}));
 
-			addCmd( 'columnInsertAfter', createDef( {
+			addCmd('columnInsertAfter', createDef({
 				requiredContent: 'table',
-				exec: function( editor ) {
+				exec: function exec(editor) {
 					var selection = editor.getSelection();
-					insertColumn( selection );
+					insertColumn(selection);
 				}
-			} ) );
+			}));
 
-			addCmd( 'cellDelete', createDef( {
+			addCmd('cellDelete', createDef({
 				requiredContent: 'table',
-				exec: function( editor ) {
+				exec: function exec(editor) {
 					var selection = editor.getSelection();
-					deleteCells( selection );
+					deleteCells(selection);
 				}
-			} ) );
+			}));
 
-			addCmd( 'cellMerge', createDef( {
+			addCmd('cellMerge', createDef({
 				allowedContent: 'td[colspan,rowspan]',
 				requiredContent: 'td[colspan,rowspan]',
-				exec: function( editor ) {
-					placeCursorInCell( mergeCells( editor.getSelection() ), true );
+				exec: function exec(editor) {
+					placeCursorInCell(mergeCells(editor.getSelection()), true);
 				}
-			} ) );
+			}));
 
-			addCmd( 'cellMergeRight', createDef( {
+			addCmd('cellMergeRight', createDef({
 				allowedContent: 'td[colspan]',
 				requiredContent: 'td[colspan]',
-				exec: function( editor ) {
-					placeCursorInCell( mergeCells( editor.getSelection(), 'right' ), true );
+				exec: function exec(editor) {
+					placeCursorInCell(mergeCells(editor.getSelection(), 'right'), true);
 				}
-			} ) );
+			}));
 
-			addCmd( 'cellMergeDown', createDef( {
+			addCmd('cellMergeDown', createDef({
 				allowedContent: 'td[rowspan]',
 				requiredContent: 'td[rowspan]',
-				exec: function( editor ) {
-					placeCursorInCell( mergeCells( editor.getSelection(), 'down' ), true );
+				exec: function exec(editor) {
+					placeCursorInCell(mergeCells(editor.getSelection(), 'down'), true);
 				}
-			} ) );
+			}));
 
-			addCmd( 'cellVerticalSplit', createDef( {
+			addCmd('cellVerticalSplit', createDef({
 				allowedContent: 'td[rowspan]',
 				requiredContent: 'td[rowspan]',
-				exec: function( editor ) {
-					placeCursorInCell( verticalSplitCell( editor.getSelection() ) );
+				exec: function exec(editor) {
+					placeCursorInCell(verticalSplitCell(editor.getSelection()));
 				}
-			} ) );
+			}));
 
-			addCmd( 'cellHorizontalSplit', createDef( {
+			addCmd('cellHorizontalSplit', createDef({
 				allowedContent: 'td[colspan]',
 				requiredContent: 'td[colspan]',
-				exec: function( editor ) {
-					placeCursorInCell( horizontalSplitCell( editor.getSelection() ) );
+				exec: function exec(editor) {
+					placeCursorInCell(horizontalSplitCell(editor.getSelection()));
 				}
-			} ) );
+			}));
 
-			addCmd( 'cellInsertBefore', createDef( {
+			addCmd('cellInsertBefore', createDef({
 				requiredContent: 'table',
-				exec: function( editor ) {
+				exec: function exec(editor) {
 					var selection = editor.getSelection();
-					insertCell( selection, true );
+					insertCell(selection, true);
 				}
-			} ) );
+			}));
 
-			addCmd( 'cellInsertAfter', createDef( {
+			addCmd('cellInsertAfter', createDef({
 				requiredContent: 'table',
-				exec: function( editor ) {
+				exec: function exec(editor) {
 					var selection = editor.getSelection();
-					insertCell( selection );
+					insertCell(selection);
 				}
-			} ) );
+			}));
 
 			// If the "menu" plugin is loaded, register the menu items.
-			if ( editor.addMenuItems ) {
-				editor.addMenuItems( {
+			if (editor.addMenuItems) {
+				editor.addMenuItems({
 					tablecell: {
 						label: lang.cell.menu,
 						group: 'tablecell',
 						order: 1,
-						getItems: function() {
+						getItems: function getItems() {
 							var selection = editor.getSelection(),
-								cells = getSelectedCells( selection );
+							    cells = getSelectedCells(selection);
 							return {
 								tablecell_insertBefore: CKEDITOR.TRISTATE_OFF,
 								tablecell_insertAfter: CKEDITOR.TRISTATE_OFF,
 								tablecell_delete: CKEDITOR.TRISTATE_OFF,
-								tablecell_merge: mergeCells( selection, null, true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_merge_right: mergeCells( selection, 'right', true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_merge_down: mergeCells( selection, 'down', true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_split_vertical: verticalSplitCell( selection, true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_split_horizontal: horizontalSplitCell( selection, true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+								tablecell_merge: mergeCells(selection, null, true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+								tablecell_merge_right: mergeCells(selection, 'right', true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+								tablecell_merge_down: mergeCells(selection, 'down', true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+								tablecell_split_vertical: verticalSplitCell(selection, true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+								tablecell_split_horizontal: horizontalSplitCell(selection, true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
 								tablecell_properties: cells.length > 0 ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED
 							};
 						}
@@ -3887,7 +3832,7 @@ CKEDITOR.disableAutoInline = true;
 						label: lang.row.menu,
 						group: 'tablerow',
 						order: 1,
-						getItems: function() {
+						getItems: function getItems() {
 							return {
 								tablerow_insertBefore: CKEDITOR.TRISTATE_OFF,
 								tablerow_insertAfter: CKEDITOR.TRISTATE_OFF,
@@ -3921,7 +3866,7 @@ CKEDITOR.disableAutoInline = true;
 						label: lang.column.menu,
 						group: 'tablecolumn',
 						order: 1,
-						getItems: function() {
+						getItems: function getItems() {
 							return {
 								tablecolumn_insertBefore: CKEDITOR.TRISTATE_OFF,
 								tablecolumn_insertAfter: CKEDITOR.TRISTATE_OFF,
@@ -3950,14 +3895,14 @@ CKEDITOR.disableAutoInline = true;
 						command: 'columnDelete',
 						order: 15
 					}
-				} );
+				});
 			}
 
 			// If the "contextmenu" plugin is laoded, register the listeners.
-			if ( editor.contextMenu ) {
-				editor.contextMenu.addListener( function( element, selection, path ) {
-					var cell = path.contains( { 'td': 1, 'th': 1 }, 1 );
-					if ( cell && !cell.isReadOnly() ) {
+			if (editor.contextMenu) {
+				editor.contextMenu.addListener(function (element, selection, path) {
+					var cell = path.contains({ 'td': 1, 'th': 1 }, 1);
+					if (cell && !cell.isReadOnly()) {
 						return {
 							tablecell: CKEDITOR.TRISTATE_OFF,
 							tablerow: CKEDITOR.TRISTATE_OFF,
@@ -3966,15 +3911,15 @@ CKEDITOR.disableAutoInline = true;
 					}
 
 					return null;
-				} );
+				});
 			}
 		},
 
 		getSelectedCells: getSelectedCells
 
 	};
-	CKEDITOR.plugins.add( 'tabletools', CKEDITOR.plugins.tabletools );
-} )();
+	CKEDITOR.plugins.add('tabletools', CKEDITOR.plugins.tabletools);
+})();
 
 /**
  * Create a two-dimension array that reflects the actual layout of table cells,
@@ -3983,7 +3928,7 @@ CKEDITOR.disableAutoInline = true;
  * @param {CKEDITOR.dom.element} table
  * @member CKEDITOR.tools
  */
-CKEDITOR.tools.buildTableMap = function( table ) {
+CKEDITOR.tools.buildTableMap = function (table) {
 	var aRows = table.$.rows;
 
 	// Row and Column counters.
@@ -3991,28 +3936,26 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
 	var aMap = [];
 
-	for ( var i = 0; i < aRows.length; i++ ) {
+	for (var i = 0; i < aRows.length; i++) {
 		r++;
-		!aMap[ r ] && ( aMap[ r ] = [] );
+		!aMap[r] && (aMap[r] = []);
 
 		var c = -1;
 
-		for ( var j = 0; j < aRows[ i ].cells.length; j++ ) {
-			var oCell = aRows[ i ].cells[ j ];
+		for (var j = 0; j < aRows[i].cells.length; j++) {
+			var oCell = aRows[i].cells[j];
 
 			c++;
-			while ( aMap[ r ][ c ] )
-				c++;
+			while (aMap[r][c]) c++;
 
-			var iColSpan = isNaN( oCell.colSpan ) ? 1 : oCell.colSpan;
-			var iRowSpan = isNaN( oCell.rowSpan ) ? 1 : oCell.rowSpan;
+			var iColSpan = isNaN(oCell.colSpan) ? 1 : oCell.colSpan;
+			var iRowSpan = isNaN(oCell.rowSpan) ? 1 : oCell.rowSpan;
 
-			for ( var rs = 0; rs < iRowSpan; rs++ ) {
-				if ( !aMap[ r + rs ] )
-					aMap[ r + rs ] = [];
+			for (var rs = 0; rs < iRowSpan; rs++) {
+				if (!aMap[r + rs]) aMap[r + rs] = [];
 
-				for ( var cs = 0; cs < iColSpan; cs++ ) {
-					aMap[ r + rs ][ c + cs ] = aRows[ i ].cells[ j ];
+				for (var cs = 0; cs < iColSpan; cs++) {
+					aMap[r + rs][c + cs] = aRows[i].cells[j];
 				}
 			}
 
@@ -4021,12 +3964,13 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 	}
 	return aMap;
 };
+'use strict';
 
-(function() {
+(function () {
     'use strict';
 
     window.AlloyEditor = {
-        editable: function(node, config) {
+        editable: function editable(node, config) {
             config = config || {};
 
             config.srcNode = node;
@@ -4038,7 +3982,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         Toolbars: {}
     };
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -4056,7 +4002,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is an array, false otherwise.
          */
-        isArray: function(value) {
+        isArray: function isArray(value) {
             return Object.prototype.toString.call(value) === '[object Array]';
         },
 
@@ -4068,7 +4014,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is boolean, false otherwise.
          */
-        isBoolean: function(value) {
+        isBoolean: function isBoolean(value) {
             return typeof value === 'boolean';
         },
 
@@ -4080,8 +4026,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is a function, false otherwise.
          */
-        isFunction: function(value) {
-            return typeof(value) === 'function';
+        isFunction: function isFunction(value) {
+            return typeof value === 'function';
         },
 
         /**
@@ -4092,7 +4038,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is NULL, false otherwise.
          */
-        isNull: function(value) {
+        isNull: function isNull(value) {
             return value === null;
         },
 
@@ -4104,7 +4050,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is number, false otherwise.
          */
-        isNumber: function(value) {
+        isNumber: function isNumber(value) {
             return typeof value === 'number' && isFinite(value);
         },
 
@@ -4116,10 +4062,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is an object, false otherwise.
          */
-        isObject: function(value) {
+        isObject: function isObject(value) {
             var valueType = typeof value;
 
-            return (value && (valueType === 'object' || Lang.isFunction(value)));
+            return value && (valueType === 'object' || Lang.isFunction(value));
         },
 
         /**
@@ -4130,7 +4076,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is a string, false otherwise.
          */
-        isString: function(value) {
+        isString: function isString(value) {
             return typeof value === 'string';
         },
 
@@ -4144,7 +4090,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} supplier The object which provides properties.
          * @return {Object} The modified receiver.
          */
-        mix: function(receiver, supplier) {
+        mix: function mix(receiver, supplier) {
             var hasOwnProperty = Object.prototype.hasOwnProperty;
 
             for (var key in supplier) {
@@ -4162,13 +4108,14 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} value The value which have to be converted to Integer.
          * @return {Integer} The converted value.
          */
-        toInt: function(value) {
+        toInt: function toInt(value) {
             return parseInt(value, 10);
         }
     };
 
     AlloyEditor.Lang = Lang;
-}());
+})();
+'use strict';
 
 (function () {
     'use strict';
@@ -4186,12 +4133,13 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} staticProps Static properties to add/overwrite.
          * @return {Function} The extended class.
          */
-        extend: function(receiver, supplier, protoProps, staticProps) {
+        extend: function extend(receiver, supplier, protoProps, staticProps) {
             if (!supplier || !receiver) {
                 throw 'extend failed, verify dependencies';
             }
 
-            var supplierProto = supplier.prototype, receiverProto = Object.create(supplierProto);
+            var supplierProto = supplier.prototype,
+                receiverProto = Object.create(supplierProto);
             receiver.prototype = receiverProto;
 
             receiverProto.constructor = receiver;
@@ -4217,8 +4165,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.OOP = OOP;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -4242,7 +4192,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {String} attr The attribute which value should be retrieved.
          * @return {Any} The value of the attribute.
          */
-        get: function(attr) {
+        get: function get(attr) {
             var currentAttr = this.constructor.ATTRS[attr];
 
             if (!currentAttr) {
@@ -4269,7 +4219,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {String} attr The attribute which value should be set.
          * @param {Any} value The value which should be set to the attribute.
          */
-        set: function(attr, value) {
+        set: function set(attr, value) {
             var currentAttr = this.constructor.ATTRS[attr];
 
             if (!currentAttr) {
@@ -4310,7 +4260,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param  {Any|Array} args The arguments which will be provided to the called function
          * @return {Any} The returned value from the called function
          */
-        _callStringOrFunction: function(stringOrFunction, args) {
+        _callStringOrFunction: function _callStringOrFunction(stringOrFunction, args) {
             var result = null;
 
             if (!AlloyEditor.Lang.isArray(args)) {
@@ -4334,7 +4284,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _init
          * @param {String} attr The name of the attribute which have to be initialized.
          */
-        _init: function(attr) {
+        _init: function _init(attr) {
             var value;
 
             var currentAttr = this.constructor.ATTRS[attr];
@@ -4404,14 +4354,16 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {String} attr The attribute which should be checked if it is initialized.
          * @return {Boolean} Returns true if the attribute has been initialized, false otherwise.
          */
-        _isInitialized: function(attr) {
+        _isInitialized: function _isInitialized(attr) {
             return Object.prototype.hasOwnProperty.call(this.__ATTRS__, attr);
         }
     };
 
     AlloyEditor.Attribute = Attribute;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -4434,7 +4386,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method init
          * @param {Object} config Configuration object
          */
-        init: function(config) {
+        init: function init(config) {
             this._callChain('initializer', config);
         },
 
@@ -4443,7 +4395,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method destroy
          */
-        destroy: function() {
+        destroy: function destroy() {
             this._callChain('destructor');
         },
 
@@ -4455,12 +4407,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {String} wat  The method, which should be invoked
          * @param {Object|Array} args The arguments with which the method should be invoked
          */
-        _callChain: function(wat, args) {
+        _callChain: function _callChain(wat, args) {
             var arr = [];
 
             var ctor = this.constructor;
 
-            while(ctor) {
+            while (ctor) {
                 if (AlloyEditor.Lang.isFunction(ctor.prototype[wat])) {
                     arr.push(ctor.prototype[wat]);
                 }
@@ -4481,24 +4433,26 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.Base = Base;
-}());
+})();
+'use strict';
 
-(function() {
+(function () {
     'use strict';
 
-    var tableSelectionGetArrowBoxClasses = function() {
+    var tableSelectionGetArrowBoxClasses = function tableSelectionGetArrowBoxClasses() {
         return 'alloy-editor-arrow-box alloy-editor-arrow-box-bottom';
     };
 
     AlloyEditor.SelectionGetArrowBoxClasses = {
         table: tableSelectionGetArrowBoxClasses
     };
-}());
+})();
+'use strict';
 
-(function() {
+(function () {
     'use strict';
 
-    var tableSelectionSetPosition = function(payload) {
+    var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
@@ -4510,13 +4464,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
         var widgetXY = this.getWidgetXYPoint(clientRect.left + clientRect.width / 2 - scrollPos.x, clientRect.top + scrollPos.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
 
-        this.moveToPoint([
-            widgetXY[0],
-            widgetXY[1]
-        ], [
-            clientRect.left + clientRect.width / 2 - halfToolbarWidth - scrollPos.x,
-            clientRect.top - toolbarNode.offsetHeight + scrollPos.y
-        ]);
+        this.moveToPoint([widgetXY[0], widgetXY[1]], [clientRect.left + clientRect.width / 2 - halfToolbarWidth - scrollPos.x, clientRect.top - toolbarNode.offsetHeight + scrollPos.y]);
 
         return true;
     };
@@ -4524,36 +4472,38 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     AlloyEditor.SelectionSetPosition = {
         table: tableSelectionSetPosition
     };
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
-    var linkSelectionTest = function(payload) {
+    var linkSelectionTest = function linkSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
-        return !nativeEditor.isSelectionEmpty() && (new CKEDITOR.Link(nativeEditor).getFromSelection());
+        return !nativeEditor.isSelectionEmpty() && new CKEDITOR.Link(nativeEditor).getFromSelection();
     };
 
-    var imageSelectionTest = function(payload) {
+    var imageSelectionTest = function imageSelectionTest(payload) {
         var selectionData = payload.data.selectionData;
 
-        return (selectionData.element && selectionData.element.getName() === 'img');
+        return selectionData.element && selectionData.element.getName() === 'img';
     };
 
-    var textSelectionTest = function(payload) {
+    var textSelectionTest = function textSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
         var selectionEmpty = nativeEditor.isSelectionEmpty();
 
         var selectionData = payload.data.selectionData;
 
-        return (!selectionData.element && selectionData.region && !selectionEmpty);
+        return !selectionData.element && selectionData.region && !selectionEmpty;
     };
 
-    var tableSelectionTest = function(payload) {
+    var tableSelectionTest = function tableSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
-        return !!(new CKEDITOR.Table(nativeEditor).getFromSelection());
+        return !!new CKEDITOR.Table(nativeEditor).getFromSelection();
     };
 
     AlloyEditor.SelectionTest = {
@@ -4562,8 +4512,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
         table: tableSelectionTest,
         text: textSelectionTest
     };
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     var Selections = [{
@@ -4587,9 +4539,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     }];
 
     AlloyEditor.Selections = Selections;
-}());
+})();
+'use strict';
 
-(function() {
+(function () {
     'use strict';
 
     /**
@@ -4612,7 +4565,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method initializer
          * @param config {Object} Configuration object literal for the editor.
          */
-        initializer: function(config) {
+        initializer: function initializer(config) {
             var node = this.get('srcNode');
             node.setAttribute('contenteditable', 'true');
 
@@ -4635,7 +4588,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
             CKEDITOR.once('resourcesLoaded', this._renderUI.bind(this));
 
-            editor.once('contentDom', function() {
+            editor.once('contentDom', function () {
                 editor.editable().addClass('alloy-editor-editable');
             });
 
@@ -4649,7 +4602,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method destructor
          */
-        destructor: function() {
+        destructor: function destructor() {
             if (this._editorUIElement) {
                 React.unmountComponentAtNode(this._editorUIElement);
                 this._editorUIElement.parentNode.removeChild(this._editorUIElement);
@@ -4674,7 +4627,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _getNativeEditor
          * @return {Object} The current instance of CKEditor.
          */
-        _getNativeEditor: function() {
+        _getNativeEditor: function _getNativeEditor() {
             return this._editor;
         },
 
@@ -4685,8 +4638,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _loadLanguageFile
          */
-        _loadLanguageFile: function() {
-            var onLanguageFileLoad = function() {
+        _loadLanguageFile: function _loadLanguageFile() {
+            var onLanguageFileLoad = function onLanguageFileLoad() {
                 CKEDITOR.fire('resourcesLoaded');
             };
 
@@ -4717,7 +4670,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _renderUI
          */
-        _renderUI: function() {
+        _renderUI: function _renderUI() {
             var editorUIElement = document.createElement('div');
             editorUIElement.className = 'alloy-editor-ui';
 
@@ -4747,7 +4700,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * or the HTML element itself. If Id is passed, the HTML element will be retrieved from the DOM.
          * @return {HTMLElement} An HTML element.
          */
-        _toElement: function(value) {
+        _toElement: function _toElement(value) {
             if (AlloyEditor.Lang.isString(value)) {
                 value = document.getElementById(value);
             }
@@ -4765,7 +4718,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} The value to be checked
          * @return {Boolean} True if the current value is valid configuration, false otherwise
          */
-        _validateAllowedContent: function(value) {
+        _validateAllowedContent: function _validateAllowedContent(value) {
             return AlloyEditor.Lang.isString(value) || AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isBoolean(value);
         },
 
@@ -4777,7 +4730,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Any} The value to be checked
          * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
          */
-        _validateToolbars: function(value) {
+        _validateToolbars: function _validateToolbars(value) {
             return AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isNull(value);
         }
     }, {
@@ -4920,8 +4873,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.Core = Core;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -4941,7 +4896,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method applyStyle
          */
-        applyStyle: function() {
+        applyStyle: function applyStyle() {
             if (AlloyEditor.Lang.isFunction(this.isActive) && AlloyEditor.Lang.isFunction(this.getStyle)) {
                 var editor = this.props.editor.get('nativeEditor');
 
@@ -4961,8 +4916,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.ButtonActionStyle = ButtonActionStyle;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -4995,7 +4952,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method execCommand
          */
-        execCommand: function(data) {
+        execCommand: function execCommand(data) {
             var editor = this.props.editor.get('nativeEditor');
 
             editor.execCommand(this.props.command, data);
@@ -5009,8 +4966,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.ButtonCommand = ButtonCommand;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -5031,7 +4990,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getStateClasses
          * @return {String} A string with the state CSS classes.
          */
-        getStateClasses: function() {
+        getStateClasses: function getStateClasses() {
             var stateClasses = '';
 
             // Check for active state
@@ -5049,8 +5008,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.ButtonStateClasses = ButtonStateClasses;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -5075,7 +5036,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentWillMount
          */
-        componentWillMount: function() {
+        componentWillMount: function componentWillMount() {
             this._style = new CKEDITOR.style(this.props.style);
         },
 
@@ -5084,7 +5045,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentWillUnmount
          */
-        componentWillUnmount: function() {
+        componentWillUnmount: function componentWillUnmount() {
             this._style = null;
         },
 
@@ -5094,7 +5055,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getStyle
          * @return {CKEDITOR.style} The current style representation.
          */
-        getStyle: function() {
+        getStyle: function getStyle() {
             return this._style;
         },
 
@@ -5104,7 +5065,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method isActive
          * @return {Boolean} True if style is active, false otherwise.
          */
-        isActive: function() {
+        isActive: function isActive() {
             var result;
 
             var editor = this.props.editor.get('nativeEditor');
@@ -5118,8 +5079,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.ButtonStyle = ButtonStyle;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -5138,49 +5101,47 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} additionalProps Additional props that should be passed down to the buttons.
          * @return {Array} An Array which contains the buttons that should be rendered.
          */
-        getToolbarButtons: function(buttons, additionalProps) {
+        getToolbarButtons: function getToolbarButtons(buttons, additionalProps) {
             var buttonProps = {};
 
-            var toolbarButtons = this.filterExclusive(
-                    buttons.filter(function(button) {
-                        return button && (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
-                    })
-                    .map(function(button) {
-                        if (AlloyEditor.Lang.isString(button)) {
-                            button = AlloyEditor.Buttons[button];
-                        } else if (AlloyEditor.Lang.isString(button.name)) {
-                            buttonProps[AlloyEditor.Buttons[button.name].key] = button.cfg;
-                            button = AlloyEditor.Buttons[button.name];
-                        }
+            var toolbarButtons = this.filterExclusive(buttons.filter(function (button) {
+                return button && (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
+            }).map(function (button) {
+                if (AlloyEditor.Lang.isString(button)) {
+                    button = AlloyEditor.Buttons[button];
+                } else if (AlloyEditor.Lang.isString(button.name)) {
+                    buttonProps[AlloyEditor.Buttons[button.name].key] = button.cfg;
+                    button = AlloyEditor.Buttons[button.name];
+                }
 
-                        return button;
-                    })
-                )
-                .map(function(button) {
-                    var props = this.mergeExclusiveProps({
-                        editor: this.props.editor,
-                        key: button.key,
-                        tabKey: button.key,
-                        tabIndex: (this.props.trigger && this.props.trigger.props.tabKey === button.key) ? 0 : -1,
-                        trigger: this.props.trigger
-                    }, button.key);
+                return button;
+            })).map(function (button) {
+                var props = this.mergeExclusiveProps({
+                    editor: this.props.editor,
+                    key: button.key,
+                    tabKey: button.key,
+                    tabIndex: this.props.trigger && this.props.trigger.props.tabKey === button.key ? 0 : -1,
+                    trigger: this.props.trigger
+                }, button.key);
 
-                    props = this.mergeDropdownProps(props, button.key);
+                props = this.mergeDropdownProps(props, button.key);
 
-                    if (additionalProps) {
-                        props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
-                    }
+                if (additionalProps) {
+                    props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
+                }
 
-                    return React.createElement(button, props);
-                }, this);
+                return React.createElement(button, props);
+            }, this);
 
             return toolbarButtons;
         }
     };
 
     AlloyEditor.ToolbarButtons = ToolbarButtons;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -5197,7 +5158,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getArrowBoxClasses
          * @return {String} A string with the arrow box CSS classes.
          */
-        getArrowBoxClasses: function() {
+        getArrowBoxClasses: function getArrowBoxClasses() {
             var arrowBoxClasses = 'alloy-editor-arrow-box';
 
             if (AlloyEditor.Lang.isFunction(this.getInteractionPoint) && this.getInteractionPoint()) {
@@ -5213,8 +5174,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.WidgetArrowBox = WidgetArrowBox;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -5229,7 +5192,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentWillReceiveProps
          */
-        componentWillReceiveProps: function(nextProps) {
+        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
             this.setState({
                 dropdownTrigger: null,
                 itemDropdown: null
@@ -5241,7 +5204,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method getInitialState
          */
-        getInitialState: function() {
+        getInitialState: function getInitialState() {
             return {
                 dropdownTrigger: null,
                 itemDropdown: null
@@ -5259,7 +5222,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} itemKey They key of an React Widget which contains the dropdown.
          * @return {Object} The merged object.
          */
-        mergeDropdownProps: function(obj, itemKey) {
+        mergeDropdownProps: function mergeDropdownProps(obj, itemKey) {
             return CKEDITOR.tools.merge(obj, {
                 expanded: this.state.itemDropdown === itemKey ? true : false,
                 tabIndex: this.state.dropdownTrigger === itemKey ? 0 : -1,
@@ -5274,11 +5237,11 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} itemDropdown The widget which requests to toggle its dropdown.
          * @param {Number} toggleDirection User movement direction when toggled via keyboard.
          */
-        toggleDropdown: function(itemDropdown, toggleDirection) {
+        toggleDropdown: function toggleDropdown(itemDropdown, toggleDirection) {
             this.setState({
                 dropdownTrigger: itemDropdown,
                 itemDropdown: itemDropdown !== this.state.itemDropdown ? itemDropdown : null
-            }, function() {
+            }, function () {
                 if (!this.state.itemDropdown) {
                     if (this.moveFocus) {
                         this.moveFocus(toggleDirection);
@@ -5291,8 +5254,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.WidgetDropdown = WidgetDropdown;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -5310,7 +5275,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method cancelExclusive
          * @param {Object} itemExclusive The widget which exclusive state should be canceled.
          */
-        cancelExclusive: function(itemExclusive) {
+        cancelExclusive: function cancelExclusive(itemExclusive) {
             if (this.state.itemExclusive === itemExclusive) {
                 this.setState({
                     itemExclusive: null
@@ -5326,7 +5291,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method componentWillReceiveProps
          * @param {Object} nextProps Object containing the current set of properties.
          */
-        componentWillReceiveProps: function(nextProps) {
+        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
             // Receiving properties means that the component is being re-rendered.
             // Re-rendering is triggered by editorInteraction, so we have to
             // reset the exclusive state and render the UI according to the new selection.
@@ -5342,8 +5307,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Array} items The widgets to be filtered.
          * @return {Array|Object} The item with executive state.
          */
-        filterExclusive: function(items) {
-            return items.filter(function(item) {
+        filterExclusive: function filterExclusive(items) {
+            return items.filter((function (item) {
                 if (this.state.itemExclusive) {
                     if (this.state.itemExclusive === item.key) {
                         return item;
@@ -5351,7 +5316,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 } else {
                     return item;
                 }
-            }.bind(this));
+            }).bind(this));
         },
 
         /**
@@ -5366,10 +5331,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} itemKey They key of an React Widget which should be rendered exclusively.
          * @return {Object} The merged object.
          */
-        mergeExclusiveProps: function(obj, itemKey) {
+        mergeExclusiveProps: function mergeExclusiveProps(obj, itemKey) {
             return CKEDITOR.tools.merge(obj, {
                 cancelExclusive: this.cancelExclusive.bind(this, itemKey),
-                renderExclusive: (this.state.itemExclusive === itemKey),
+                renderExclusive: this.state.itemExclusive === itemKey,
                 requestExclusive: this.requestExclusive.bind(this, itemKey)
             });
         },
@@ -5380,7 +5345,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method requestExclusive
          * @param {Object} itemExclusive The widget which requests exclusive state.
          */
-        requestExclusive: function(itemExclusive) {
+        requestExclusive: function requestExclusive(itemExclusive) {
             this.setState({
                 itemExclusive: itemExclusive
             });
@@ -5388,8 +5353,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.WidgetExclusive = WidgetExclusive;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     var DIRECTION_NONE = 0;
@@ -5450,7 +5417,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidMount
          */
-        componentDidMount: function() {
+        componentDidMount: function componentDidMount() {
             this._refresh();
         },
 
@@ -5460,7 +5427,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidUpdate
          */
-        componentDidUpdate: function() {
+        componentDidUpdate: function componentDidUpdate() {
             this._refresh();
         },
 
@@ -5472,7 +5439,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method focus
          */
-        focus: function(event) {
+        focus: function focus(event) {
             if (!event || this._isValidTarget(event.target)) {
                 if (this._descendants) {
                     this._descendants[this._activeDescendant].focus();
@@ -5491,7 +5458,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} event The Keyboard event that was detected on the widget DOM node.
          * @method handleKey
          */
-        handleKey: function(event) {
+        handleKey: function handleKey(event) {
             if (this._isValidTarget(event.target) && this._descendants) {
                 var action = this._getFocusAction(event);
 
@@ -5516,7 +5483,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method moveFocus
          * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
          */
-        moveFocus: function(direction) {
+        moveFocus: function moveFocus(direction) {
             direction = AlloyEditor.Lang.isNumber(direction) ? direction : 0;
 
             this._moveFocus(direction);
@@ -5531,7 +5498,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {object} event The Keyboard event.
          * @return {Object} An action object with type and direction properties.
          */
-        _getFocusAction: function(event) {
+        _getFocusAction: function _getFocusAction(event) {
             var action = {
                 type: ACTION_NONE
             };
@@ -5569,7 +5536,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Number} focusMoveDirection The focus movement direction (if any).
          * @return {Object} A dismiss action with dismiss and direction properties.
          */
-        _getFocusDismissAction: function(event, focusMoveDirection) {
+        _getFocusDismissAction: function _getFocusDismissAction(event, focusMoveDirection) {
             var dismissAction = {
                 direction: focusMoveDirection,
                 dismiss: false
@@ -5589,10 +5556,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 }
 
                 if (!dismissAction.dismiss && !this.props.circular && focusMoveDirection) {
-                    dismissAction.dismiss = (
-                        focusMoveDirection === DIRECTION_PREV && this._activeDescendant === 0 ||
-                        focusMoveDirection === DIRECTION_NEXT && this._activeDescendant === this._descendants.length - 1
-                    );
+                    dismissAction.dismiss = focusMoveDirection === DIRECTION_PREV && this._activeDescendant === 0 || focusMoveDirection === DIRECTION_NEXT && this._activeDescendant === this._descendants.length - 1;
                 }
             }
 
@@ -5608,7 +5572,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} event The Keyboard event.
          * @return {Number} The computed direction of the expected focus movement.
          */
-        _getFocusMoveDirection: function(event) {
+        _getFocusMoveDirection: function _getFocusMoveDirection(event) {
             var direction = DIRECTION_NONE;
 
             if (this._isValidKey(event.keyCode, this.props.keys.next)) {
@@ -5635,8 +5599,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _isValidKey
          * @return {Boolean} A boolean value indicating if the key is valid.
          */
-        _isValidKey: function(keyCode, keys) {
-            return AlloyEditor.Lang.isArray(keys) ? (keys.indexOf(keyCode) !== -1) : (keyCode === keys);
+        _isValidKey: function _isValidKey(keyCode, keys) {
+            return AlloyEditor.Lang.isArray(keys) ? keys.indexOf(keyCode) !== -1 : keyCode === keys;
         },
 
         /**
@@ -5648,10 +5612,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {DOMNode} element A DOM element.
          * @return {Boolean} A boolean value indicating if the element is valid.
          */
-        _isValidTarget: function(element) {
+        _isValidTarget: function _isValidTarget(element) {
             var tagName = element.tagName.toLowerCase();
 
-            return (tagName !== 'input' && tagName !== 'select' && tagName !== 'textarea');
+            return tagName !== 'input' && tagName !== 'select' && tagName !== 'textarea';
         },
 
         /**
@@ -5661,7 +5625,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _moveFocus
          * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
          */
-        _moveFocus: function(direction) {
+        _moveFocus: function _moveFocus(direction) {
             var numDescendants = this._descendants.length;
 
             var descendant = this._descendants[this._activeDescendant];
@@ -5673,7 +5637,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             if (this.props.circular) {
                 // Calculate proper modulo result since remainder operator doesn't behave in the
                 // same way for negative numbers
-                this._activeDescendant = ((this._activeDescendant % numDescendants) + numDescendants) % numDescendants;
+                this._activeDescendant = (this._activeDescendant % numDescendants + numDescendants) % numDescendants;
             } else {
                 this._activeDescendant = Math.max(Math.min(this._activeDescendant, numDescendants - 1), 0);
             }
@@ -5690,35 +5654,37 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _refresh
          */
-        _refresh: function() {
+        _refresh: function _refresh() {
             var domNode = React.findDOMNode(this);
 
             if (domNode) {
                 var descendants = domNode.querySelectorAll(this.props.descendants);
 
-                this._descendants = Array.prototype.map.call(descendants, function(item) {
+                this._descendants = Array.prototype.map.call(descendants, function (item) {
                     return item;
-                }).sort(function(a, b) {
-                    return (AlloyEditor.Lang.toInt(a.getAttribute('data-tabindex')) > AlloyEditor.Lang.toInt(b.getAttribute('data-tabindex')));
+                }).sort(function (a, b) {
+                    return AlloyEditor.Lang.toInt(a.getAttribute('data-tabindex')) > AlloyEditor.Lang.toInt(b.getAttribute('data-tabindex'));
                 });
 
                 this._activeDescendant = 0;
 
-                this._descendants.some(function(item, index) {
+                this._descendants.some((function (item, index) {
                     if (item.getAttribute('tabindex') === '0') {
                         this._activeDescendant = index;
                         this.focus();
 
                         return true;
                     }
-                }.bind(this));
+                }).bind(this));
             }
         }
     };
 
     AlloyEditor.WidgetFocusManager = WidgetFocusManager;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -5753,7 +5719,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * direction, x, y, where x and y are in page coordinates and direction can be one of these:
          * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
          */
-        getInteractionPoint: function() {
+        getInteractionPoint: function getInteractionPoint() {
             var eventPayload = this.props.editorEvent ? this.props.editorEvent.data : null;
 
             if (!eventPayload) {
@@ -5815,7 +5781,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} eventX The X coordinate received from the native event (mouseup).
          * @return {Number} The calculated X point in page coordinates.
          */
-        _getXPoint: function(selectionData, eventX) {
+        _getXPoint: function _getXPoint(selectionData, eventX) {
             var region = selectionData.region;
 
             var left = region.startRect ? region.startRect.left : region.left;
@@ -5829,7 +5795,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 var leftDist = Math.abs(left - eventX);
                 var rightDist = Math.abs(right - eventX);
 
-                if (leftDist < rightDist) { // user raised the mouse on left on the selection
+                if (leftDist < rightDist) {
+                    // user raised the mouse on left on the selection
                     x = left;
                 } else {
                     x = right;
@@ -5841,8 +5808,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.WidgetInteractionPoint = WidgetInteractionPoint;
-}());
-(function() {
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -5872,7 +5841,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method getDefaultProps
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 gutter: {
                     left: 0,
@@ -5886,7 +5855,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method cancelAnimation
          */
-        cancelAnimation: function() {
+        cancelAnimation: function cancelAnimation() {
             if (window.cancelAnimationFrame) {
                 window.cancelAnimationFrame(this._animationFrameId);
             }
@@ -5904,25 +5873,20 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
          * @return {Array} An Array with left and top offsets in page coordinates.
          */
-        getWidgetXYPoint: function(left, top, direction) {
+        getWidgetXYPoint: function getWidgetXYPoint(left, top, direction) {
             var domNode = React.findDOMNode(this);
 
             var gutter = this.props.gutter;
 
             if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
-                left = left - gutter.left - (domNode.offsetWidth / 2);
+                left = left - gutter.left - domNode.offsetWidth / 2;
 
-                top = (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) ? (top + gutter.top) :
-                    (top - domNode.offsetHeight - gutter.top);
+                top = direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM ? top + gutter.top : top - domNode.offsetHeight - gutter.top;
+            } else if (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT || direction === CKEDITOR.SELECTION_RIGHT_TO_LEFT) {
 
-            } else if (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT ||
-                direction === CKEDITOR.SELECTION_RIGHT_TO_LEFT) {
+                left = direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT ? left + gutter.left + domNode.offsetHeight / 2 : left - 3 * domNode.offsetHeight / 2 - gutter.left;
 
-                left = (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT) ?
-                    (left + gutter.left + domNode.offsetHeight / 2) :
-                    (left - 3 * domNode.offsetHeight / 2 - gutter.left);
-
-                top = top - gutter.top - (domNode.offsetHeight / 2);
+                top = top - gutter.top - domNode.offsetHeight / 2;
             }
 
             if (left < 0) {
@@ -5942,7 +5906,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method isVisible
          * @return {Boolean} True if the widget is visible, false otherwise
          */
-        isVisible: function() {
+        isVisible: function isVisible() {
             var domNode = this.getDOMNode();
 
             if (domNode) {
@@ -5961,7 +5925,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param  {Object} startPoint The starting point for the movement.
          * @param  {Object} endPoint The destination point for the movement.
          */
-        moveToPoint: function(startPoint, endPoint) {
+        moveToPoint: function moveToPoint(startPoint, endPoint) {
             var domElement = new CKEDITOR.dom.element(this.getDOMNode());
 
             domElement.setStyles({
@@ -5972,7 +5936,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
             domElement.removeClass('alloy-editor-invisible');
 
-            this._animate(function() {
+            this._animate(function () {
                 domElement.addClass('alloy-editor-toolbar-transition alloy-editor-visible');
                 domElement.setStyles({
                     left: endPoint[0],
@@ -5987,7 +5951,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method show
          */
-        show: function() {
+        show: function show() {
             var domNode = React.findDOMNode(this);
 
             if (!this.isVisible() && domNode) {
@@ -5996,10 +5960,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 if (interactionPoint) {
                     var domElement = new CKEDITOR.dom.element(domNode);
 
-                    var finalX,
-                        finalY,
-                        initialX,
-                        initialY;
+                    var finalX, finalY, initialX, initialY;
 
                     finalX = initialX = domElement.getStyle('left');
                     finalY = initialY = domElement.getStyle('top');
@@ -6020,7 +5981,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method updatePosition
          */
-        updatePosition: function() {
+        updatePosition: function updatePosition() {
             var interactionPoint = this.getInteractionPoint();
 
             var domNode = React.findDOMNode(this);
@@ -6044,7 +6005,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _animate
          * @param {Function} callback The function to be executed on the scheduled frame.
          */
-        _animate: function(callback) {
+        _animate: function _animate(callback) {
             if (window.requestAnimationFrame) {
                 this._animationFrameId = window.requestAnimationFrame(callback);
             } else {
@@ -6054,7 +6015,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     };
 
     AlloyEditor.WidgetPosition = WidgetPosition;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6067,7 +6030,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonBold
      */
-    var ButtonBold = React.createClass({displayName: "ButtonBold",
+    var ButtonBold = React.createClass({
+        displayName: 'ButtonBold',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -6113,7 +6078,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'bold',
                 style: {
@@ -6128,19 +6093,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.bold, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-bold", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.bold}, 
-                    React.createElement("span", {className: "alloy-editor-icon-bold"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.bold, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-bold', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.bold },
+                React.createElement('span', { className: 'alloy-editor-icon-bold' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonBold.key] = AlloyEditor.ButtonBold = ButtonBold;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6149,7 +6116,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonCameraImage
      */
-    var ButtonCameraImage = React.createClass({displayName: "ButtonCameraImage",
+    var ButtonCameraImage = React.createClass({
+        displayName: 'ButtonCameraImage',
+
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -6167,7 +6136,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method getDefaultProps
          */
-        getDefaultProps: function () {
+        getDefaultProps: function getDefaultProps() {
             return {
                 videoWidth: 320
             };
@@ -6180,7 +6149,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidMount
          */
-        componentDidMount: function () {
+        componentDidMount: function componentDidMount() {
             React.findDOMNode(this.refs.buttonTakePhoto).focus();
         },
 
@@ -6189,7 +6158,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentWillUnmount
          */
-        componentWillUnmount: function() {
+        componentWillUnmount: function componentWillUnmount() {
             if (this._stream) {
                 this._stream.stop();
                 this._stream = null;
@@ -6202,23 +6171,28 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            var getUserMedia = navigator.getUserMedia ||
-                navigator.webkitGetUserMedia ||
-                navigator.mozGetUserMedia ||
-                navigator.msGetUserMedia;
+        render: function render() {
+            var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
             getUserMedia.call(navigator, {
                 video: true,
                 audio: false
             }, this._handleStreamSuccess, this._handleStreamError);
 
-            return (
-                React.createElement("div", {className: "alloy-editor-camera"}, 
-                    React.createElement("video", {ref: "videoContainer"}, "Video stream not available."), 
-                    React.createElement("button", {className: "alloy-editor-camera-shoot", onClick: this.takePhoto, ref: "buttonTakePhoto"}, "Take photo"), 
-                    React.createElement("canvas", {className: "alloy-editor-camera-canvas", ref: "canvasContainer"})
-                )
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-camera' },
+                React.createElement(
+                    'video',
+                    { ref: 'videoContainer' },
+                    'Video stream not available.'
+                ),
+                React.createElement(
+                    'button',
+                    { className: 'alloy-editor-camera-shoot', onClick: this.takePhoto, ref: 'buttonTakePhoto' },
+                    'Take photo'
+                ),
+                React.createElement('canvas', { className: 'alloy-editor-camera-canvas', ref: 'canvasContainer' })
             );
         },
 
@@ -6227,7 +6201,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method takePhoto
          */
-        takePhoto: function() {
+        takePhoto: function takePhoto() {
             var videoEl = React.findDOMNode(this.refs.videoContainer);
             var canvasEl = React.findDOMNode(this.refs.canvasContainer);
 
@@ -6265,7 +6239,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _handleStreamError
          * @param {Event} error The fired event in case of error.
          */
-        _handleStreamError: function(error) {
+        _handleStreamError: function _handleStreamError(error) {
             window.alert('An error occurred! ' + error);
         },
 
@@ -6276,15 +6250,15 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _handleStreamSuccess
          * @param {Object} stream The video stream
          */
-        _handleStreamSuccess: function(stream) {
+        _handleStreamSuccess: function _handleStreamSuccess(stream) {
             var videoEl = React.findDOMNode(this.refs.videoContainer);
             var canvasEl = React.findDOMNode(this.refs.canvasContainer);
 
-            videoEl.addEventListener('canplay', function(event) {
-                var height = videoEl.videoHeight / (videoEl.videoWidth/this.props.videoWidth);
+            videoEl.addEventListener('canplay', (function (event) {
+                var height = videoEl.videoHeight / (videoEl.videoWidth / this.props.videoWidth);
 
                 if (isNaN(height)) {
-                    height = this.props.videoWidth / (4/3);
+                    height = this.props.videoWidth / (4 / 3);
                 }
 
                 videoEl.setAttribute('width', this.props.videoWidth);
@@ -6293,7 +6267,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 canvasEl.setAttribute('height', height);
 
                 this._videoHeight = height;
-            }.bind(this), false);
+            }).bind(this), false);
 
             this._stream = stream;
 
@@ -6317,7 +6291,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.ButtonCameraImage = ButtonCameraImage;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6329,7 +6305,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonCamera
      */
-    var ButtonCamera = React.createClass({displayName: "ButtonCamera",
+    var ButtonCamera = React.createClass({
+        displayName: 'ButtonCamera',
+
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -6373,28 +6351,25 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             if (this.props.renderExclusive) {
-                return (
-                    React.createElement(AlloyEditor.ButtonCameraImage, React.__spread({},  this.props))
-                );
+                return React.createElement(AlloyEditor.ButtonCameraImage, this.props);
             } else {
-                var disabled = !(navigator.getUserMedia ||
-                    navigator.webkitGetUserMedia ||
-                    navigator.mozGetUserMedia ||
-                    navigator.msGetUserMedia);
+                var disabled = !(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
-                return (
-                    React.createElement("button", {"aria-label": AlloyEditor.Strings.camera, className: "alloy-editor-button", "data-type": "button-image-camera", disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.camera}, 
-                        React.createElement("span", {className: "alloy-editor-icon-camera"})
-                    )
+                return React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.camera, className: 'alloy-editor-button', 'data-type': 'button-image-camera', disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.camera },
+                    React.createElement('span', { className: 'alloy-editor-icon-camera' })
                 );
             }
         }
     });
 
     AlloyEditor.Buttons[ButtonCamera.key] = AlloyEditor.ButtonCamera = ButtonCamera;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6407,7 +6382,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonCode
      */
-    var ButtonCode = React.createClass({displayName: "ButtonCode",
+    var ButtonCode = React.createClass({
+        displayName: 'ButtonCode',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         // Allows validating props being passed to the component.
@@ -6453,7 +6430,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 style: {
                     element: 'pre'
@@ -6467,19 +6444,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.code, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-code", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.code}, 
-                    React.createElement("span", {className: "alloy-editor-icon-code"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.code, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-code', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.code },
+                React.createElement('span', { className: 'alloy-editor-icon-code' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonCode.key] = AlloyEditor.ButtonCode = ButtonCode;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6491,7 +6470,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonCommandListItem
      */
-    var ButtonCommandListItem = React.createClass({displayName: "ButtonCommandListItem",
+    var ButtonCommandListItem = React.createClass({
+        displayName: 'ButtonCommandListItem',
+
         mixins: [AlloyEditor.ButtonCommand],
 
         propTypes: {
@@ -6528,9 +6509,11 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            return (
-                React.createElement("button", {"aria-label": this.props.description, className: this._getClassName(), onClick: this.execCommand, tabIndex: this.props.tabIndex}, this.props.description)
+        render: function render() {
+            return React.createElement(
+                'button',
+                { 'aria-label': this.props.description, className: this._getClassName(), onClick: this.execCommand, tabIndex: this.props.tabIndex },
+                this.props.description
             );
         },
 
@@ -6540,7 +6523,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _getClassName
          * @return {String} The class name of the Widget.
          */
-        _getClassName: function() {
+        _getClassName: function _getClassName() {
             var className = 'alloy-editor-toolbar-element';
 
             if (this.props.icon) {
@@ -6552,7 +6535,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.ButtonCommandListItem = ButtonCommandListItem;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6564,7 +6549,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonCommandsList
      */
-    var ButtonCommandsList = React.createClass({displayName: "ButtonCommandsList",
+    var ButtonCommandsList = React.createClass({
+        displayName: 'ButtonCommandsList',
+
         mixins: [AlloyEditor.WidgetFocusManager],
 
         // Allows validating props being passed to the component.
@@ -6610,7 +6597,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidMount
          */
-        componentDidMount: function () {
+        componentDidMount: function componentDidMount() {
             React.findDOMNode(this).focus();
         },
 
@@ -6620,7 +6607,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 circular: false,
                 descendants: '.alloy-editor-toolbar-element',
@@ -6640,12 +6627,14 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            return (
-                React.createElement("div", {className: "alloy-editor-dropdown", onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: "0"}, 
-                    React.createElement("ul", {className: "alloy-editor-listbox", id: this.props.listId, role: "listbox"}, 
-                        this._renderActions(this.props.commands)
-                    )
+        render: function render() {
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-dropdown', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
+                React.createElement(
+                    'ul',
+                    { className: 'alloy-editor-listbox', id: this.props.listId, role: 'listbox' },
+                    this._renderActions(this.props.commands)
                 )
             );
         },
@@ -6657,16 +6646,16 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _renderActions
          * @return {Array} Rendered instances of ButtonCommandListItem class
          */
-        _renderActions: function(commands) {
+        _renderActions: function _renderActions(commands) {
             var editor = this.props.editor;
             var items;
 
             if (commands && commands.length) {
-                items = commands.map(function(item) {
-                    return (
-                        React.createElement("li", {key: item.command, role: "option"}, 
-                            React.createElement(AlloyEditor.ButtonCommandListItem, {command: item.command, description: typeof item.label === 'string' ? item.label : item.label(), editor: editor})
-                        )
+                items = commands.map(function (item) {
+                    return React.createElement(
+                        'li',
+                        { key: item.command, role: 'option' },
+                        React.createElement(AlloyEditor.ButtonCommandListItem, { command: item.command, description: typeof item.label === 'string' ? item.label : item.label(), editor: editor })
                     );
                 });
             }
@@ -6676,7 +6665,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.ButtonCommandsList = ButtonCommandsList;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6689,7 +6680,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonH1
      */
-    var ButtonH1 = React.createClass({displayName: "ButtonH1",
+    var ButtonH1 = React.createClass({
+        displayName: 'ButtonH1',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         // Allows validating props being passed to the component.
@@ -6735,7 +6728,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 style: {
                     element: 'h1'
@@ -6749,19 +6742,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.h1, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-h1", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.h1}, 
-                    React.createElement("span", {className: "alloy-editor-icon-h1"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.h1, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-h1', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.h1 },
+                React.createElement('span', { className: 'alloy-editor-icon-h1' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonH1.key] = AlloyEditor.ButtonH1 = ButtonH1;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6774,9 +6769,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonH2
      */
-    var ButtonH2 = React.createClass({displayName: "ButtonH2",
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+    var ButtonH2 = React.createClass({
+        displayName: 'ButtonH2',
 
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -6821,7 +6817,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 style: {
                     element: 'h2'
@@ -6835,19 +6831,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.h2, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-h2", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.h2}, 
-                    React.createElement("span", {className: "alloy-editor-icon-h2"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.h2, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-h2', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.h2 },
+                React.createElement('span', { className: 'alloy-editor-icon-h2' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonH2.key] = AlloyEditor.ButtonH2 = ButtonH2;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6859,7 +6857,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonHline
      */
-    var ButtonHline = React.createClass({displayName: "ButtonHline",
+    var ButtonHline = React.createClass({
+        displayName: 'ButtonHline',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -6905,7 +6905,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'horizontalrule',
                 style: {
@@ -6920,17 +6920,19 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.horizontalrule, className: "alloy-editor-button", "data-type": "button-hline", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.horizontalrule}, 
-                    React.createElement("span", {className: "alloy-editor-icon-separator"})
-                )
+        render: function render() {
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.horizontalrule, className: 'alloy-editor-button', 'data-type': 'button-hline', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.horizontalrule },
+                React.createElement('span', { className: 'alloy-editor-icon-separator' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonHline.key] = AlloyEditor.ButtonHline = ButtonHline;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -6943,7 +6945,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonImageAlignLeft
      */
-    var ButtonImageAlignLeft = React.createClass({displayName: "ButtonImageAlignLeft",
+    var ButtonImageAlignLeft = React.createClass({
+        displayName: 'ButtonImageAlignLeft',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         // Allows validating props being passed to the component.
@@ -6989,7 +6993,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 style: {
                     element: 'img',
@@ -7006,19 +7010,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.alignLeft, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-image-align-left", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft}, 
-                    React.createElement("span", {className: "alloy-editor-icon-align-left"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-left', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
+                React.createElement('span', { className: 'alloy-editor-icon-align-left' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonImageAlignLeft.key] = AlloyEditor.ButtonImageAlignLeft = ButtonImageAlignLeft;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7031,7 +7037,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonImageAlignRight
      */
-    var ButtonImageAlignRight = React.createClass({displayName: "ButtonImageAlignRight",
+    var ButtonImageAlignRight = React.createClass({
+        displayName: 'ButtonImageAlignRight',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         // Allows validating props being passed to the component.
@@ -7077,7 +7085,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 style: {
                     element: 'img',
@@ -7094,19 +7102,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.alignRight, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-image-align-right", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight}, 
-                    React.createElement("span", {className: "alloy-editor-icon-align-right"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-right', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
+                React.createElement('span', { className: 'alloy-editor-icon-align-right' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonImageAlignRight.key] = AlloyEditor.ButtonImageAlignRight = ButtonImageAlignRight;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7115,7 +7125,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonImage
      */
-    var ButtonImage = React.createClass({displayName: "ButtonImage",
+    var ButtonImage = React.createClass({
+        displayName: 'ButtonImage',
+
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -7159,17 +7171,18 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            var inputSyle = {display: 'none'};
+        render: function render() {
+            var inputSyle = { display: 'none' };
 
-            return (
-                React.createElement("div", null, 
-                    React.createElement("button", {"aria-label": AlloyEditor.Strings.image, className: "alloy-editor-button", "data-type": "button-image", onClick: this.handleClick, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.image}, 
-                        React.createElement("span", {className: "alloy-editor-icon-image"})
-                    ), 
-
-                    React.createElement("input", {onChange: this._onInputChange, ref: "fileInput", style: inputSyle, type: "file"})
-                )
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.image, className: 'alloy-editor-button', 'data-type': 'button-image', onClick: this.handleClick, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.image },
+                    React.createElement('span', { className: 'alloy-editor-icon-image' })
+                ),
+                React.createElement('input', { onChange: this._onInputChange, ref: 'fileInput', style: inputSyle, type: 'file' })
             );
         },
 
@@ -7179,7 +7192,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method handleClick
          * @param {SyntheticEvent} event The received click event on the button.
          */
-        handleClick: function(event) {
+        handleClick: function handleClick(event) {
             CKEDITOR.tools.simulate(React.findDOMNode(this.refs.fileInput), 'click');
         },
 
@@ -7193,11 +7206,11 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _onInputChange
          */
-        _onInputChange: function() {
+        _onInputChange: function _onInputChange() {
             var reader = new FileReader();
             var inputEl = React.findDOMNode(this.refs.fileInput);
 
-            reader.onload = function(event) {
+            reader.onload = (function (event) {
                 var editor = this.props.editor.get('nativeEditor');
 
                 var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
@@ -7212,7 +7225,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 };
 
                 editor.fire('imageAdd', imageData);
-            }.bind(this);
+            }).bind(this);
 
             reader.readAsDataURL(inputEl.files[0]);
 
@@ -7228,7 +7241,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.Buttons[ButtonImage.key] = AlloyEditor.ButtonImage = ButtonImage;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7241,7 +7256,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonItalic
      */
-    var ButtonItalic = React.createClass({displayName: "ButtonItalic",
+    var ButtonItalic = React.createClass({
+        displayName: 'ButtonItalic',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -7287,7 +7304,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'italic',
                 style: {
@@ -7302,19 +7319,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.italic, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-italic", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.italic}, 
-                    React.createElement("span", {className: "alloy-editor-icon-italic"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.italic, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-italic', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.italic },
+                React.createElement('span', { className: 'alloy-editor-icon-italic' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonItalic.key] = AlloyEditor.ButtonItalic = ButtonItalic;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7327,7 +7346,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonLinkEdit
      */
-    var ButtonLinkEdit = React.createClass({displayName: "ButtonLinkEdit",
+    var ButtonLinkEdit = React.createClass({
+        displayName: 'ButtonLinkEdit',
+
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
@@ -7347,7 +7368,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidMount
          */
-        componentDidMount: function () {
+        componentDidMount: function componentDidMount() {
             // We need to wait for the next rendering cycle before focusing to avoid undesired
             // scrolls on the page
             if (window.requestAnimationFrame) {
@@ -7363,7 +7384,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method getInitialState
          */
-        getInitialState: function() {
+        getInitialState: function getInitialState() {
             var link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
             var href = link ? link.getAttribute('href') : '';
 
@@ -7379,23 +7400,29 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var clearLinkStyle = {
                 opacity: this.state.linkHref ? 1 : 0
             };
 
-            return (
-                React.createElement("div", {className: "alloy-editor-container-edit-link"}, 
-                    React.createElement("button", {"aria-label": AlloyEditor.Strings.removeLink, className: "alloy-editor-button", disabled: !this.state.element, onClick: this._removeLink, title: AlloyEditor.Strings.remove}, 
-                        React.createElement("span", {className: "alloy-editor-icon-unlink"})
-                    ), 
-                    React.createElement("div", {className: "alloy-editor-container-input"}, 
-                        React.createElement("input", {className: "alloy-editor-input", onChange: this._handleLinkChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: "linkInput", type: "text", value: this.state.linkHref}), 
-                        React.createElement("button", {"aria-label": AlloyEditor.Strings.clearInput, className: "alloy-editor-button alloy-editor-icon-remove", onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear})
-                    ), 
-                    React.createElement("button", {"aria-label": AlloyEditor.Strings.confirm, className: "alloy-editor-button", disabled: !this.state.linkHref, onClick: this._updateLink, title: AlloyEditor.Strings.confirm}, 
-                        React.createElement("span", {className: "alloy-editor-icon-ok"})
-                    )
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-container-edit-link' },
+                React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.removeLink, className: 'alloy-editor-button', disabled: !this.state.element, onClick: this._removeLink, title: AlloyEditor.Strings.remove },
+                    React.createElement('span', { className: 'alloy-editor-icon-unlink' })
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'alloy-editor-container-input' },
+                    React.createElement('input', { className: 'alloy-editor-input', onChange: this._handleLinkChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                    React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'alloy-editor-button alloy-editor-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
+                ),
+                React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.confirm, className: 'alloy-editor-button', disabled: !this.state.linkHref, onClick: this._updateLink, title: AlloyEditor.Strings.confirm },
+                    React.createElement('span', { className: 'alloy-editor-icon-ok' })
                 )
             );
         },
@@ -7408,7 +7435,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _clearLink
          */
-        _clearLink: function() {
+        _clearLink: function _clearLink() {
             this.setState({
                 linkHref: ''
             });
@@ -7420,7 +7447,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _focusLinkInput
          */
-        _focusLinkInput: function() {
+        _focusLinkInput: function _focusLinkInput() {
             React.findDOMNode(this.refs.linkInput).focus();
         },
 
@@ -7433,8 +7460,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
          */
-        _handleKeyDown: function(event) {
-            if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+        _handleKeyDown: function _handleKeyDown(event) {
+            if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
                 event.preventDefault();
             }
 
@@ -7454,7 +7481,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _handleLinkChange
          * @param {SyntheticEvent} event The change event.
          */
-        _handleLinkChange: function(event) {
+        _handleLinkChange: function _handleLinkChange(event) {
             this.setState({
                 linkHref: event.target.value
             });
@@ -7466,7 +7493,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _removeLink
          */
-        _removeLink: function() {
+        _removeLink: function _removeLink() {
             var editor = this.props.editor.get('nativeEditor');
             var linkUtils = new CKEDITOR.Link(editor);
             var selection = editor.getSelection();
@@ -7490,12 +7517,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _updateLink
          */
-        _updateLink: function() {
+        _updateLink: function _updateLink() {
             var editor = this.props.editor.get('nativeEditor');
             var linkUtils = new CKEDITOR.Link(editor);
 
             if (this.state.linkHref) {
-                if (this.state.element) {
+                if (this.state.element) {
                     linkUtils.update(this.state.linkHref, this.state.element);
                 } else {
                     linkUtils.create(this.state.linkHref);
@@ -7511,7 +7538,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.Buttons[ButtonLinkEdit.key] = AlloyEditor.ButtonLinkEdit = ButtonLinkEdit;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7526,7 +7555,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonLink
      */
-    var ButtonLink = React.createClass({displayName: "ButtonLink",
+    var ButtonLink = React.createClass({
+        displayName: 'ButtonLink',
+
         mixins: [AlloyEditor.ButtonStateClasses],
 
         // Allows validating props being passed to the component.
@@ -7572,8 +7603,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method isActive
          * @return {Boolean} True if the selection is inside a link, false otherwise.
          */
-        isActive: function() {
-            return (new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection() !== null);
+        isActive: function isActive() {
+            return new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection() !== null;
         },
 
         /**
@@ -7582,25 +7613,25 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             if (this.props.renderExclusive) {
-                return (
-                    React.createElement(AlloyEditor.ButtonLinkEdit, React.__spread({},  this.props))
-                );
+                return React.createElement(AlloyEditor.ButtonLinkEdit, this.props);
             } else {
-                return (
-                    React.createElement("button", {"aria-label": AlloyEditor.Strings.link, className: cssClass, "data-type": "button-link", onClick: this.props.requestExclusive.bind(ButtonLink.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link}, 
-                        React.createElement("span", {className: "alloy-editor-icon-link"})
-                    )
+                return React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.link, className: cssClass, 'data-type': 'button-link', onClick: this.props.requestExclusive.bind(ButtonLink.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
+                    React.createElement('span', { className: 'alloy-editor-icon-link' })
                 );
             }
         }
     });
 
     AlloyEditor.Buttons[ButtonLink.key] = AlloyEditor.ButtonLink = ButtonLink;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7613,7 +7644,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonOrderedList
      */
-    var ButtonOrderedList = React.createClass({displayName: "ButtonOrderedList",
+    var ButtonOrderedList = React.createClass({
+        displayName: 'ButtonOrderedList',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -7659,7 +7692,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'numberedlist',
                 style: {
@@ -7674,19 +7707,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.numberedlist, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-ol", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.numberedlist}, 
-                    React.createElement("span", {className: "alloy-editor-icon-numbered-list"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.numberedlist, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-ol', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.numberedlist },
+                React.createElement('span', { className: 'alloy-editor-icon-numbered-list' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonOrderedList.key] = AlloyEditor.ButtonOrderedList = ButtonOrderedList;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7699,7 +7734,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonParagraphAlignLeft
      */
-    var ButtonParagraphAlignLeft = React.createClass({displayName: "ButtonParagraphAlignLeft",
+    var ButtonParagraphAlignLeft = React.createClass({
+        displayName: 'ButtonParagraphAlignLeft',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         // Allows validating props being passed to the component.
@@ -7745,7 +7782,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 style: {
                     element: 'p',
@@ -7762,19 +7799,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.alignLeft, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-paragraph-align-left", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft}, 
-                    React.createElement("span", {className: "alloy-editor-icon-align-left"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-left', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
+                React.createElement('span', { className: 'alloy-editor-icon-align-left' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonParagraphAlignLeft.key] = AlloyEditor.ButtonParagraphAlignLeft = ButtonParagraphAlignLeft;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7787,7 +7826,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonParagraphAlignRight
      */
-    var ButtonParagraphAlignRight = React.createClass({displayName: "ButtonParagraphAlignRight",
+    var ButtonParagraphAlignRight = React.createClass({
+        displayName: 'ButtonParagraphAlignRight',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         // Allows validating props being passed to the component.
@@ -7833,7 +7874,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 style: {
                     element: 'p',
@@ -7850,19 +7891,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.alignRight, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-paragraph-align-right", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight}, 
-                    React.createElement("span", {className: "alloy-editor-icon-align-right"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-right', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
+                React.createElement('span', { className: 'alloy-editor-icon-align-right' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonParagraphAlignRight.key] = AlloyEditor.ButtonParagraphAlignRight = ButtonParagraphAlignRight;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7875,7 +7918,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonParagraphCenter
      */
-    var ButtonParagraphCenter = React.createClass({displayName: "ButtonParagraphCenter",
+    var ButtonParagraphCenter = React.createClass({
+        displayName: 'ButtonParagraphCenter',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         // Allows validating props being passed to the component.
@@ -7921,7 +7966,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 style: {
                     element: 'p',
@@ -7938,19 +7983,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.alignCenter, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-paragraph-center", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter}, 
-                    React.createElement("span", {className: "alloy-editor-icon-align-center"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-center', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
+                React.createElement('span', { className: 'alloy-editor-icon-align-center' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonParagraphCenter.key] = AlloyEditor.ButtonParagraphCenter = ButtonParagraphCenter;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -7963,7 +8010,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonParagraphJustify
      */
-    var ButtonParagraphJustify = React.createClass({displayName: "ButtonParagraphJustify",
+    var ButtonParagraphJustify = React.createClass({
+        displayName: 'ButtonParagraphJustify',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
         // Allows validating props being passed to the component.
@@ -8009,7 +8058,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 style: {
                     element: 'p',
@@ -8026,19 +8075,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.alignJustify, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-paragraph-justify", onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignJustify}, 
-                    React.createElement("span", {className: "alloy-editor-icon-align-justified"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.alignJustify, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-justify', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignJustify },
+                React.createElement('span', { className: 'alloy-editor-icon-align-justified' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonParagraphJustify.key] = AlloyEditor.ButtonParagraphJustify = ButtonParagraphJustify;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8051,7 +8102,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonQuote
      */
-    var ButtonQuote = React.createClass({displayName: "ButtonQuote",
+    var ButtonQuote = React.createClass({
+        displayName: 'ButtonQuote',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -8097,7 +8150,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'blockquote',
                 style: {
@@ -8112,19 +8165,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.quote, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-quote", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.quote}, 
-                    React.createElement("span", {className: "alloy-editor-icon-quote"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.quote, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-quote', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.quote },
+                React.createElement('span', { className: 'alloy-editor-icon-quote' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonQuote.key] = AlloyEditor.ButtonQuote = ButtonQuote;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8135,7 +8190,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonRemoveFormat
      */
-    var ButtonRemoveFormat = React.createClass({displayName: "ButtonRemoveFormat",
+    var ButtonRemoveFormat = React.createClass({
+        displayName: 'ButtonRemoveFormat',
+
         mixins: [AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -8181,7 +8238,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'removeFormat'
             };
@@ -8193,17 +8250,19 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.removeformat, className: "alloy-editor-button", "data-type": "button-removeformat", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.removeformat}, 
-                    React.createElement("span", {className: "alloy-editor-icon-removeformat"})
-                )
+        render: function render() {
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.removeformat, className: 'alloy-editor-button', 'data-type': 'button-removeformat', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.removeformat },
+                React.createElement('span', { className: 'alloy-editor-icon-removeformat' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonRemoveFormat.key] = AlloyEditor.ButtonRemoveFormat = ButtonRemoveFormat;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8216,7 +8275,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonStrike
      */
-    var ButtonStrike = React.createClass({displayName: "ButtonStrike",
+    var ButtonStrike = React.createClass({
+        displayName: 'ButtonStrike',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -8262,7 +8323,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'strike',
                 style: {
@@ -8277,38 +8338,44 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.strike, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-strike", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.strike}, 
-                    React.createElement("span", {className: "alloy-editor-icon-strike"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.strike, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-strike', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.strike },
+                React.createElement('span', { className: 'alloy-editor-icon-strike' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonStrike.key] = AlloyEditor.ButtonStrike = ButtonStrike;
-}());
+})();
+"use strict";
+
 (function () {
-    'use strict';
+    "use strict";
 
     /**
      * The ButtonsStylesListHeader class provides the header of an list of style items.
      *
      * @class ButtonsStylesListHeader
      */
-    var ButtonsStylesListHeader = React.createClass({displayName: "ButtonsStylesListHeader",
+    var ButtonsStylesListHeader = React.createClass({
+        displayName: "ButtonsStylesListHeader",
+
         /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             if (this.props.styles && this.props.styles.length) {
-                return (
-                    React.createElement("span", {className: "alloy-editor-list-header"}, this.props.name)
+                return React.createElement(
+                    "span",
+                    { className: "alloy-editor-list-header" },
+                    this.props.name
                 );
             } else {
                 return null;
@@ -8317,7 +8384,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.ButtonsStylesListHeader = ButtonsStylesListHeader;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8327,7 +8396,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonStylesListItemRemove
      */
-    var ButtonStylesListItemRemove = React.createClass({displayName: "ButtonStylesListItemRemove",
+    var ButtonStylesListItemRemove = React.createClass({
+        displayName: 'ButtonStylesListItemRemove',
+
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -8379,7 +8450,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 removeBlocks: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre']
             };
@@ -8391,10 +8462,14 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            return (
-                React.createElement("li", {role: "option"}, 
-                    React.createElement("button", {className: "alloy-editor-toolbar-element", onClick: this._removeStyles, tabIndex: this.props.tabIndex}, AlloyEditor.Strings.normal)
+        render: function render() {
+            return React.createElement(
+                'li',
+                { role: 'option' },
+                React.createElement(
+                    'button',
+                    { className: 'alloy-editor-toolbar-element', onClick: this._removeStyles, tabIndex: this.props.tabIndex },
+                    AlloyEditor.Strings.normal
                 )
             );
         },
@@ -8405,13 +8480,13 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _removeStyles
          */
-        _removeStyles: function() {
+        _removeStyles: function _removeStyles() {
             var editor = this.props.editor.get('nativeEditor');
 
             editor.execCommand('removeFormat');
 
-            this.props.removeBlocks.forEach(function(blockItem) {
-                var blockStyle = new CKEDITOR.style({element: blockItem});
+            this.props.removeBlocks.forEach(function (blockItem) {
+                var blockStyle = new CKEDITOR.style({ element: blockItem });
 
                 editor.removeStyle(blockStyle);
             });
@@ -8421,7 +8496,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.ButtonStylesListItemRemove = ButtonStylesListItemRemove;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8434,7 +8511,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonStylesListItem
      */
-    var ButtonStylesListItem = React.createClass({displayName: "ButtonStylesListItem",
+    var ButtonStylesListItem = React.createClass({
+        displayName: 'ButtonStylesListItem',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonActionStyle],
 
         // Lifecycle. Provides static properties to the widget.
@@ -8454,7 +8533,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentWillMount
          */
-        componentWillMount: function () {
+        componentWillMount: function componentWillMount() {
             // Styles with wildcard element (*) generate an empty tag in their preview < class="custom-class" />.
             // We default to element span and remove the margins to obtain a more consistent set of previews.
             var styleCfg = {
@@ -8475,12 +8554,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             // We need to use dangerouselySetInnterHTML since we're not in control of the style
             // preview that is generated by CKEditor.
-            return (
-                React.createElement("button", {className: "alloy-editor-toolbar-element", dangerouslySetInnerHTML: {__html: this._preview}, onClick: this._onClick, tabIndex: this.props.tabIndex})
-            );
+            return React.createElement('button', { className: 'alloy-editor-toolbar-element', dangerouslySetInnerHTML: { __html: this._preview }, onClick: this._onClick, tabIndex: this.props.tabIndex });
         },
 
         /**
@@ -8489,7 +8566,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _onClick
          */
-        _onClick: function() {
+        _onClick: function _onClick() {
             // Typically, we want the style to be the only one applied to the current selection, so
             // we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
             // However, this is consistent with other editors implementations of this feature.
@@ -8500,7 +8577,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.ButtonStylesListItem = ButtonStylesListItem;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8512,7 +8591,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonStylesList
      */
-    var ButtonStylesList = React.createClass({displayName: "ButtonStylesList",
+    var ButtonStylesList = React.createClass({
+        displayName: 'ButtonStylesList',
+
         mixins: [AlloyEditor.WidgetFocusManager],
 
         // Lifecycle. Provides static properties to the widget.
@@ -8534,7 +8615,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidMount
          */
-        componentDidMount: function () {
+        componentDidMount: function componentDidMount() {
             React.findDOMNode(this).focus();
         },
 
@@ -8543,12 +8624,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentWillMount
          */
-        componentWillMount: function () {
+        componentWillMount: function componentWillMount() {
             var blockStyles = [];
             var inlineStyles = [];
             var objectStyles = [];
 
-            this.props.styles.forEach(function(item) {
+            this.props.styles.forEach(function (item) {
                 var style = new CKEDITOR.style(item.style);
 
                 if (style.type === CKEDITOR.STYLE_BLOCK) {
@@ -8571,7 +8652,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 circular: false,
                 descendants: '.alloy-editor-toolbar-element',
@@ -8591,21 +8672,20 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            return (
-                React.createElement("div", {className: "alloy-editor-dropdown", onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: "0"}, 
-                    React.createElement("ul", {className: "alloy-editor-listbox", role: "listbox"}, 
-                        React.createElement(AlloyEditor.ButtonStylesListItemRemove, {editor: this.props.editor}), 
-
-                        React.createElement(AlloyEditor.ButtonsStylesListHeader, {name: AlloyEditor.Strings.blockStyles, styles: this._blockStyles}), 
-                        this._renderStylesItems(this._blockStyles), 
-
-                        React.createElement(AlloyEditor.ButtonsStylesListHeader, {name: AlloyEditor.Strings.inlineStyles, styles: this._inlineStyles}), 
-                        this._renderStylesItems(this._inlineStyles), 
-
-                        React.createElement(AlloyEditor.ButtonsStylesListHeader, {name: AlloyEditor.Strings.objectStyles, styles: this._objectStyles}), 
-                        this._renderStylesItems(this._objectStyles)
-                    )
+        render: function render() {
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-dropdown', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
+                React.createElement(
+                    'ul',
+                    { className: 'alloy-editor-listbox', role: 'listbox' },
+                    React.createElement(AlloyEditor.ButtonStylesListItemRemove, { editor: this.props.editor }),
+                    React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.blockStyles, styles: this._blockStyles }),
+                    this._renderStylesItems(this._blockStyles),
+                    React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.inlineStyles, styles: this._inlineStyles }),
+                    this._renderStylesItems(this._inlineStyles),
+                    React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.objectStyles, styles: this._objectStyles }),
+                    this._renderStylesItems(this._objectStyles)
                 )
             );
         },
@@ -8618,16 +8698,16 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Array} styles List of styles for which preview should be rendered.
          * @return {Array} Rendered instances of ButtonStylesListItem class
          */
-        _renderStylesItems: function(styles) {
+        _renderStylesItems: function _renderStylesItems(styles) {
             var editor = this.props.editor;
             var items;
 
             if (styles && styles.length) {
-                items = styles.map(function(item) {
-                    return (
-                        React.createElement("li", {key: item.name, role: "option"}, 
-                            React.createElement(AlloyEditor.ButtonStylesListItem, {editor: editor, name: item.name, style: item.style})
-                        )
+                items = styles.map(function (item) {
+                    return React.createElement(
+                        'li',
+                        { key: item.name, role: 'option' },
+                        React.createElement(AlloyEditor.ButtonStylesListItem, { editor: editor, name: item.name, style: item.style })
                     );
                 });
             }
@@ -8637,7 +8717,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.ButtonStylesList = ButtonStylesList;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8648,7 +8730,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonStyles
      */
-    var ButtonStyles = React.createClass({displayName: "ButtonStyles",
+    var ButtonStyles = React.createClass({
+        displayName: 'ButtonStyles',
+
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -8713,33 +8797,41 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var activeStyle = AlloyEditor.Strings.normal;
 
             var styles = this._getStyles();
 
-            styles.forEach(function(item) {
+            styles.forEach((function (item) {
                 if (this._checkActive(item.style)) {
                     activeStyle = item.name;
                 }
-            }.bind(this));
+            }).bind(this));
 
             var buttonStylesList;
 
             if (this.props.expanded) {
-                buttonStylesList = React.createElement(AlloyEditor.ButtonStylesList, {editor: this.props.editor, onDismiss: this.props.toggleDropdown, styles: styles})
+                buttonStylesList = React.createElement(AlloyEditor.ButtonStylesList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, styles: styles });
             }
 
-            return (
-                React.createElement("div", {className: "alloy-editor-container-styles alloy-editor-has-dropdown"}, 
-                    React.createElement("button", {"aria-expanded": this.props.expanded, "aria-label": AlloyEditor.Strings.styles + ' ' + activeStyle, className: "alloy-editor-toolbar-element", onClick: this.props.toggleDropdown, role: "combobox", tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.styles + ' ' + activeStyle}, 
-                        React.createElement("div", {className: "alloy-editor-container"}, 
-                            React.createElement("span", {className: "alloy-editor-selected-style"}, activeStyle), 
-                            React.createElement("span", {className: "alloy-editor-icon-arrow"})
-                        )
-                    ), 
-                    buttonStylesList
-                )
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-container-styles alloy-editor-has-dropdown' },
+                React.createElement(
+                    'button',
+                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.styles + ' ' + activeStyle, className: 'alloy-editor-toolbar-element', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.styles + ' ' + activeStyle },
+                    React.createElement(
+                        'div',
+                        { className: 'alloy-editor-container' },
+                        React.createElement(
+                            'span',
+                            { className: 'alloy-editor-selected-style' },
+                            activeStyle
+                        ),
+                        React.createElement('span', { className: 'alloy-editor-icon-arrow' })
+                    )
+                ),
+                buttonStylesList
             );
         },
 
@@ -8751,12 +8843,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} styleConfig Style definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
          * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
          */
-        _checkActive: function(styleConfig) {
+        _checkActive: function _checkActive(styleConfig) {
             var nativeEditor = this.props.editor.get('nativeEditor');
 
             // Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
             // to a 'span' element works for most of those cases with no defined element.
-            styleConfig = CKEDITOR.tools.merge({element: 'span'}, styleConfig);
+            styleConfig = CKEDITOR.tools.merge({ element: 'span' }, styleConfig);
 
             var style = new CKEDITOR.style(styleConfig);
 
@@ -8773,44 +8865,40 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @return {Array<object>} An array of objects containing the styles.
          */
-        _getStyles: function() {
-            return this.props.styles || [
-                {
-                    name: AlloyEditor.Strings.h1,
-                    style: {
-                        element: 'h1'
-                    }
-                },
-                {
-                    name: AlloyEditor.Strings.h2,
-                    style: {
-                        element: 'h2'
-                    }
-                },
-                {
-                    name: AlloyEditor.Strings.formatted,
-                    style: {
-                        element: 'pre'
-                    }
-                },
-                {
-                    name: AlloyEditor.Strings.cite,
-                    style: {
-                        element: 'cite'
-                    }
-                },
-                {
-                    name: AlloyEditor.Strings.code,
-                    style: {
-                        element: 'code'
-                    }
+        _getStyles: function _getStyles() {
+            return this.props.styles || [{
+                name: AlloyEditor.Strings.h1,
+                style: {
+                    element: 'h1'
                 }
-            ];
+            }, {
+                name: AlloyEditor.Strings.h2,
+                style: {
+                    element: 'h2'
+                }
+            }, {
+                name: AlloyEditor.Strings.formatted,
+                style: {
+                    element: 'pre'
+                }
+            }, {
+                name: AlloyEditor.Strings.cite,
+                style: {
+                    element: 'cite'
+                }
+            }, {
+                name: AlloyEditor.Strings.code,
+                style: {
+                    element: 'code'
+                }
+            }];
         }
     });
 
     AlloyEditor.Buttons[ButtonStyles.key] = AlloyEditor.ButtonStyles = ButtonStyles;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8823,7 +8911,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonSubscript
      */
-    var ButtonSubscript = React.createClass({displayName: "ButtonSubscript",
+    var ButtonSubscript = React.createClass({
+        displayName: 'ButtonSubscript',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -8869,7 +8959,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'subscript',
                 style: {
@@ -8884,19 +8974,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.subscript, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-subscript", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.subscript}, 
-                    React.createElement("span", {className: "alloy-editor-icon-subscript"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.subscript, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-subscript', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.subscript },
+                React.createElement('span', { className: 'alloy-editor-icon-subscript' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonSubscript.key] = AlloyEditor.ButtonSubscript = ButtonSubscript;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8909,7 +9001,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonSuperscript
      */
-    var ButtonSuperscript = React.createClass({displayName: "ButtonSuperscript",
+    var ButtonSuperscript = React.createClass({
+        displayName: 'ButtonSuperscript',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -8955,7 +9049,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'superscript',
                 style: {
@@ -8970,19 +9064,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.superscript, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-superscript", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.superscript}, 
-                    React.createElement("span", {className: "alloy-editor-icon-superscript"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.superscript, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-superscript', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.superscript },
+                React.createElement('span', { className: 'alloy-editor-icon-superscript' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonSuperscript.key] = AlloyEditor.ButtonSuperscript = ButtonSuperscript;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -8991,7 +9087,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonTableCell
      */
-    var ButtonTableCell = React.createClass({displayName: "ButtonTableCell",
+    var ButtonTableCell = React.createClass({
+        displayName: 'ButtonTableCell',
+
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -9056,22 +9154,24 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var buttonCommandsList;
             var buttonCommandsListId;
 
             if (this.props.expanded) {
                 buttonCommandsListId = ButtonTableCell.key + 'List';
-                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, {commands: this._getCommands(), editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown})
+                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, { commands: this._getCommands(), editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown });
             }
 
-            return (
-                React.createElement("div", {className: "alloy-editor-container alloy-editor-has-dropdown"}, 
-                    React.createElement("button", {"aria-expanded": this.props.expanded, "aria-label": AlloyEditor.Strings.cell, "aria-owns": buttonCommandsListId, className: "alloy-editor-button", onClick: this.props.toggleDropdown, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.cell}, 
-                        React.createElement("span", {className: "alloy-editor-icon-cell"})
-                    ), 
-                    buttonCommandsList
-                )
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-container alloy-editor-has-dropdown' },
+                React.createElement(
+                    'button',
+                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.cell, 'aria-owns': buttonCommandsListId, className: 'alloy-editor-button', onClick: this.props.toggleDropdown, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.cell },
+                    React.createElement('span', { className: 'alloy-editor-icon-cell' })
+                ),
+                buttonCommandsList
             );
         },
 
@@ -9082,46 +9182,39 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _getCommands
          * @return {Array} The list of available commands.
          */
-        _getCommands: function() {
-            return this.props.commands || [
-                {
-                    command: 'cellInsertBefore',
-                    label: AlloyEditor.Strings.cellInsertBefore
-                },
-                {
-                    command: 'cellInsertAfter',
-                    label: AlloyEditor.Strings.cellInsertAfter
-                },
-                {
-                    command: 'cellDelete',
-                    label: AlloyEditor.Strings.cellDelete
-                },
-                {
-                    command: 'cellMerge',
-                    label: AlloyEditor.Strings.cellMerge
-                },
-                {
-                    command: 'cellMergeDown',
-                    label: AlloyEditor.Strings.cellMergeDown
-                },
-                {
-                    command: 'cellMergeRight',
-                    label: AlloyEditor.Strings.cellMergeRight
-                },
-                {
-                    command: 'cellHorizontalSplit',
-                    label: AlloyEditor.Strings.cellSplitHorizontal
-                },
-                {
-                    command: 'cellVerticalSplit',
-                    label: AlloyEditor.Strings.cellSplitVertical
-                }
-            ];
+        _getCommands: function _getCommands() {
+            return this.props.commands || [{
+                command: 'cellInsertBefore',
+                label: AlloyEditor.Strings.cellInsertBefore
+            }, {
+                command: 'cellInsertAfter',
+                label: AlloyEditor.Strings.cellInsertAfter
+            }, {
+                command: 'cellDelete',
+                label: AlloyEditor.Strings.cellDelete
+            }, {
+                command: 'cellMerge',
+                label: AlloyEditor.Strings.cellMerge
+            }, {
+                command: 'cellMergeDown',
+                label: AlloyEditor.Strings.cellMergeDown
+            }, {
+                command: 'cellMergeRight',
+                label: AlloyEditor.Strings.cellMergeRight
+            }, {
+                command: 'cellHorizontalSplit',
+                label: AlloyEditor.Strings.cellSplitHorizontal
+            }, {
+                command: 'cellVerticalSplit',
+                label: AlloyEditor.Strings.cellSplitVertical
+            }];
         }
     });
 
     AlloyEditor.Buttons[ButtonTableCell.key] = AlloyEditor.ButtonTableCell = ButtonTableCell;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -9130,7 +9223,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonTableColumn
      */
-    var ButtonTableColumn = React.createClass({displayName: "ButtonTableColumn",
+    var ButtonTableColumn = React.createClass({
+        displayName: 'ButtonTableColumn',
+
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -9195,22 +9290,23 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            var buttonCommandsList,
-                buttonCommandsListId;
+        render: function render() {
+            var buttonCommandsList, buttonCommandsListId;
 
             if (this.props.expanded) {
                 buttonCommandsListId = ButtonTableColumn.key + 'List';
-                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, {commands: this._getCommands(), editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown})
+                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, { commands: this._getCommands(), editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown });
             }
 
-            return (
-                React.createElement("div", {className: "alloy-editor-container alloy-editor-has-dropdown"}, 
-                    React.createElement("button", {"aria-expanded": this.props.expanded, "aria-label": AlloyEditor.Strings.column, "aria-owns": buttonCommandsListId, className: "alloy-editor-button", onClick: this.props.toggleDropdown, role: "listbox", tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.column}, 
-                        React.createElement("span", {className: "alloy-editor-icon-column"})
-                    ), 
-                    buttonCommandsList
-                )
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-container alloy-editor-has-dropdown' },
+                React.createElement(
+                    'button',
+                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.column, 'aria-owns': buttonCommandsListId, className: 'alloy-editor-button', onClick: this.props.toggleDropdown, role: 'listbox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.column },
+                    React.createElement('span', { className: 'alloy-editor-icon-column' })
+                ),
+                buttonCommandsList
             );
         },
 
@@ -9221,26 +9317,24 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _getCommands
          * @return {Array} The list of available commands.
          */
-        _getCommands: function() {
-            return this.props.commands || [
-                {
-                    command: 'columnInsertBefore',
-                    label: AlloyEditor.Strings.columnInsertBefore
-                },
-                {
-                    command: 'columnInsertAfter',
-                    label: AlloyEditor.Strings.columnInsertAfter
-                },
-                {
-                    command: 'columnDelete',
-                    label: AlloyEditor.Strings.columnDelete
-                }
-            ];
+        _getCommands: function _getCommands() {
+            return this.props.commands || [{
+                command: 'columnInsertBefore',
+                label: AlloyEditor.Strings.columnInsertBefore
+            }, {
+                command: 'columnInsertAfter',
+                label: AlloyEditor.Strings.columnInsertAfter
+            }, {
+                command: 'columnDelete',
+                label: AlloyEditor.Strings.columnDelete
+            }];
         }
     });
 
     AlloyEditor.Buttons[ButtonTableColumn.key] = AlloyEditor.ButtonTableColumn = ButtonTableColumn;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -9253,7 +9347,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonTableEdit
      */
-    var ButtonTableEdit = React.createClass({displayName: "ButtonTableEdit",
+    var ButtonTableEdit = React.createClass({
+        displayName: 'ButtonTableEdit',
+
         // Allows validating props being passed to the component.
         propTypes: {
 
@@ -9289,7 +9385,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method getDefaultProps
          */
-        getDefaultProps: function () {
+        getDefaultProps: function getDefaultProps() {
             return {
                 tableAttributes: {
                     border: 1,
@@ -9308,7 +9404,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidMount
          */
-        componentDidMount: function () {
+        componentDidMount: function componentDidMount() {
             React.findDOMNode(this.refs.rows).focus();
         },
 
@@ -9317,7 +9413,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method getInitialState
          */
-        getInitialState: function() {
+        getInitialState: function getInitialState() {
             return {
                 cols: 3,
                 rows: 3
@@ -9330,7 +9426,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _createTable
          */
-        _createTable: function() {
+        _createTable: function _createTable() {
             var editor = this.props.editor.get('nativeEditor');
             var tableUtils = new CKEDITOR.Table(editor);
 
@@ -9353,7 +9449,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {String} inputName The name of the input which value should be updated.
          * @param {SyntheticEvent} event The provided event.
          */
-        _handleChange: function(inputName, event) {
+        _handleChange: function _handleChange(inputName, event) {
             var state = {};
             state[inputName] = event.target.value;
 
@@ -9369,8 +9465,8 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
          */
-        _handleKeyDown: function(event) {
-            if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+        _handleKeyDown: function _handleKeyDown(event) {
+            if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
                 event.preventDefault();
             }
 
@@ -9387,33 +9483,47 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var time = Date.now();
             var rowsId = time + 'rows';
             var colsId = time + 'cols';
 
-            return (
-                React.createElement("div", {className: "alloy-editor-container-edit-table"}, 
-                    React.createElement("label", {htmlFor: rowsId}, "Rows"), 
-                    React.createElement("div", {className: "alloy-editor-container-input small"}, 
-                        React.createElement("input", {className: "alloy-editor-input", id: rowsId, onChange: this._handleChange.bind(this, 'rows'), min: "1", onKeyDown: this._handleKeyDown, placeholder: "Rows", ref: "rows", type: "number", value: this.state.rows})
-                    ), 
-
-                    React.createElement("label", {htmlFor: colsId}, "Cols"), 
-                    React.createElement("div", {className: "alloy-editor-container-input small"}, 
-                        React.createElement("input", {className: "alloy-editor-input", id: colsId, onChange: this._handleChange.bind(this, 'cols'), min: "1", onKeyDown: this._handleKeyDown, placeholder: "Colums", ref: "cols", type: "number", value: this.state.cols})
-                    ), 
-
-                    React.createElement("button", {"aria-label": "Confirm", className: "alloy-editor-button", onClick: this._createTable}, 
-                        React.createElement("span", {className: "alloy-editor-icon-ok"})
-                    )
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-container-edit-table' },
+                React.createElement(
+                    'label',
+                    { htmlFor: rowsId },
+                    'Rows'
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'alloy-editor-container-input small' },
+                    React.createElement('input', { className: 'alloy-editor-input', id: rowsId, onChange: this._handleChange.bind(this, 'rows'), min: '1', onKeyDown: this._handleKeyDown, placeholder: 'Rows', ref: 'rows', type: 'number', value: this.state.rows })
+                ),
+                React.createElement(
+                    'label',
+                    { htmlFor: colsId },
+                    'Cols'
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'alloy-editor-container-input small' },
+                    React.createElement('input', { className: 'alloy-editor-input', id: colsId, onChange: this._handleChange.bind(this, 'cols'), min: '1', onKeyDown: this._handleKeyDown, placeholder: 'Colums', ref: 'cols', type: 'number', value: this.state.cols })
+                ),
+                React.createElement(
+                    'button',
+                    { 'aria-label': 'Confirm', className: 'alloy-editor-button', onClick: this._createTable },
+                    React.createElement('span', { className: 'alloy-editor-icon-ok' })
                 )
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonTableEdit.key] = AlloyEditor.ButtonTableEdit = ButtonTableEdit;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -9422,7 +9532,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonTableRemove
      */
-    var ButtonTableRemove = React.createClass({displayName: "ButtonTableRemove",
+    var ButtonTableRemove = React.createClass({
+        displayName: 'ButtonTableRemove',
+
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -9466,11 +9578,11 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.deleteTable, className: "alloy-editor-button", "data-type": "button-table-remove", onClick: this._removeTable, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.deleteTable}, 
-                    React.createElement("span", {className: "alloy-editor-icon-close"})
-                )
+        render: function render() {
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.deleteTable, className: 'alloy-editor-button', 'data-type': 'button-table-remove', onClick: this._removeTable, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.deleteTable },
+                React.createElement('span', { className: 'alloy-editor-icon-close' })
             );
         },
 
@@ -9480,7 +9592,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _removeTable
          */
-        _removeTable: function() {
+        _removeTable: function _removeTable() {
             var editor = this.props.editor.get('nativeEditor');
             var tableUtils = new CKEDITOR.Table(editor);
 
@@ -9491,7 +9603,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.Buttons[ButtonTableRemove.key] = AlloyEditor.ButtonTableRemove = ButtonTableRemove;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -9500,7 +9614,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonTableRow
      */
-    var ButtonTableRow = React.createClass({displayName: "ButtonTableRow",
+    var ButtonTableRow = React.createClass({
+        displayName: 'ButtonTableRow',
+
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -9565,22 +9681,24 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var buttonCommandsList;
             var buttonCommandsListId;
 
             if (this.props.expanded) {
                 buttonCommandsListId = ButtonTableRow.key + 'List';
-                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, {commands: this._getCommands(), editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown})
+                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, { commands: this._getCommands(), editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown });
             }
 
-            return (
-                React.createElement("div", {className: "alloy-editor-container alloy-editor-has-dropdown"}, 
-                    React.createElement("button", {"aria-expanded": this.props.expanded, "aria-label": AlloyEditor.Strings.row, "aria-owns": buttonCommandsListId, className: "alloy-editor-button", onClick: this.props.toggleDropdown, role: "combobox", tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.row}, 
-                        React.createElement("span", {className: "alloy-editor-icon-row"})
-                    ), 
-                    buttonCommandsList
-                )
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-container alloy-editor-has-dropdown' },
+                React.createElement(
+                    'button',
+                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.row, 'aria-owns': buttonCommandsListId, className: 'alloy-editor-button', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.row },
+                    React.createElement('span', { className: 'alloy-editor-icon-row' })
+                ),
+                buttonCommandsList
             );
         },
 
@@ -9591,26 +9709,24 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _getCommands
          * @return {Array} The list of available commands.
          */
-        _getCommands: function () {
-            return this.props.commands || [
-                {
-                    command: 'rowInsertBefore',
-                    label: AlloyEditor.Strings.rowInsertBefore
-                },
-                {
-                    command: 'rowInsertAfter',
-                    label: AlloyEditor.Strings.rowInsertAfter
-                },
-                {
-                    command: 'rowDelete',
-                    label: AlloyEditor.Strings.rowDelete
-                }
-            ];
+        _getCommands: function _getCommands() {
+            return this.props.commands || [{
+                command: 'rowInsertBefore',
+                label: AlloyEditor.Strings.rowInsertBefore
+            }, {
+                command: 'rowInsertAfter',
+                label: AlloyEditor.Strings.rowInsertAfter
+            }, {
+                command: 'rowDelete',
+                label: AlloyEditor.Strings.rowDelete
+            }];
         }
     });
 
     AlloyEditor.Buttons[ButtonTableRow.key] = AlloyEditor.ButtonTableRow = ButtonTableRow;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -9623,7 +9739,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonTable
      */
-    var ButtonTable = React.createClass({displayName: "ButtonTable",
+    var ButtonTable = React.createClass({
+        displayName: 'ButtonTable',
+
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -9667,23 +9785,23 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             if (this.props.renderExclusive) {
-                return (
-                    React.createElement(AlloyEditor.ButtonTableEdit, React.__spread({},  this.props))
-                );
+                return React.createElement(AlloyEditor.ButtonTableEdit, this.props);
             } else {
-                return (
-                    React.createElement("button", {"aria-label": AlloyEditor.Strings.table, className: "alloy-editor-button", "data-type": "button-table", onClick: this.props.requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.table}, 
-                        React.createElement("span", {className: "alloy-editor-icon-table"})
-                    )
+                return React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.table, className: 'alloy-editor-button', 'data-type': 'button-table', onClick: this.props.requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.table },
+                    React.createElement('span', { className: 'alloy-editor-icon-table' })
                 );
             }
         }
     });
 
     AlloyEditor.Buttons[ButtonTable.key] = AlloyEditor.ButtonTable = ButtonTable;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -9695,7 +9813,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonTwitter
      */
-    var ButtonTwitter = React.createClass({displayName: "ButtonTwitter",
+    var ButtonTwitter = React.createClass({
+        displayName: 'ButtonTwitter',
+
         mixins: [AlloyEditor.ButtonStateClasses],
 
         // Allows validating props being passed to the component.
@@ -9740,7 +9860,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method handleClick
          */
-        handleClick: function() {
+        handleClick: function handleClick() {
             var editor = this.props.editor.get('nativeEditor');
 
             var linkUtils = new CKEDITOR.Link(editor);
@@ -9748,13 +9868,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             if (this.isActive()) {
                 linkUtils.remove(linkUtils.getFromSelection());
             } else {
-                linkUtils.create(
-                    this._getHref(),
-                    {
-                        'class': 'alloy-editor-twitter-link',
-                        'target': '_blank'
-                    }
-                );
+                linkUtils.create(this._getHref(), {
+                    'class': 'alloy-editor-twitter-link',
+                    'target': '_blank'
+                });
             }
 
             editor.fire('actionPerformed', this);
@@ -9766,10 +9883,10 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method isActive
          * @return {Boolean} True if the selection is inside a twitter link, false otherwise.
          */
-        isActive: function() {
+        isActive: function isActive() {
             var link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
 
-            return (link && (link.getAttribute('href').indexOf('twitter.com/intent/tweet') !== -1));
+            return link && link.getAttribute('href').indexOf('twitter.com/intent/tweet') !== -1;
         },
 
         /**
@@ -9778,13 +9895,13 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.twitter, className: cssClass, "data-type": "button-twitter", onClick: this.handleClick, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.twitter}, 
-                    React.createElement("span", {className: "alloy-editor-icon-twitter"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.twitter, className: cssClass, 'data-type': 'button-twitter', onClick: this.handleClick, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.twitter },
+                React.createElement('span', { className: 'alloy-editor-icon-twitter' })
             );
         },
 
@@ -9796,7 +9913,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _getHref
          * @return {String} A valid twitter url with the selected text and given configuration.
          */
-        _getHref: function() {
+        _getHref: function _getHref() {
             var nativeEditor = this.props.editor.get('nativeEditor');
             var selectedText = nativeEditor.getSelection().getSelectedText();
             var url = this.props.url;
@@ -9816,7 +9933,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.Buttons[ButtonTwitter.key] = AlloyEditor.ButtonTwitter = ButtonTwitter;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -9829,7 +9948,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonUnorderedlist
      */
-    var ButtonUnorderedlist = React.createClass({displayName: "ButtonUnorderedlist",
+    var ButtonUnorderedlist = React.createClass({
+        displayName: 'ButtonUnorderedlist',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -9875,7 +9996,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'bulletedlist',
                 style: {
@@ -9890,19 +10011,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.bulletedlist, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-ul", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.bulletedlist}, 
-                    React.createElement("span", {className: "alloy-editor-icon-bulleted-list"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.bulletedlist, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-ul', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.bulletedlist },
+                React.createElement('span', { className: 'alloy-editor-icon-bulleted-list' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonUnorderedlist.key] = AlloyEditor.ButtonUnorderedlist = ButtonUnorderedlist;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -9915,7 +10038,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ButtonUnderline
      */
-    var ButtonUnderline = React.createClass({displayName: "ButtonUnderline",
+    var ButtonUnderline = React.createClass({
+        displayName: 'ButtonUnderline',
+
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.
@@ -9961,7 +10086,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 command: 'underline',
                 style: {
@@ -9976,19 +10101,21 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
-            return (
-                React.createElement("button", {"aria-label": AlloyEditor.Strings.underline, "aria-pressed": cssClass.indexOf('pressed') !== -1, className: cssClass, "data-type": "button-underline", onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.underline}, 
-                    React.createElement("span", {className: "alloy-editor-icon-underline"})
-                )
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.underline, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-underline', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.underline },
+                React.createElement('span', { className: 'alloy-editor-icon-underline' })
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonUnderline.key] = AlloyEditor.ButtonUnderline = ButtonUnderline;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -10004,7 +10131,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ToolbarAdd
      */
-    var ToolbarAdd = React.createClass({displayName: "ToolbarAdd",
+    var ToolbarAdd = React.createClass({
+        displayName: 'ToolbarAdd',
+
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
         // Allows validating props being passed to the component.
@@ -10063,7 +10192,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 circular: true,
                 descendants: '.alloy-editor-button',
@@ -10085,7 +10214,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidMount
          */
-        componentDidMount: function () {
+        componentDidMount: function componentDidMount() {
             this._updatePosition();
         },
 
@@ -10097,7 +10226,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} prevProps The previous state of the component's properties.
          * @param {Object} prevState Component's previous state.
          */
-        componentDidUpdate: function (prevProps, prevState) {
+        componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
             this._updatePosition();
 
             // In case of exclusive rendering, focus the first descendant (button)
@@ -10113,15 +10242,17 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var buttons = this._getButtons();
             var className = this._getToolbarClassName();
 
-            return (
-                React.createElement("div", {"aria-label": AlloyEditor.Strings.add, className: className, "data-tabindex": this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: "toolbar", tabIndex: "-1"}, 
-                    React.createElement("div", {className: "alloy-editor-container"}, 
-                        buttons
-                    )
+            return React.createElement(
+                'div',
+                { 'aria-label': AlloyEditor.Strings.add, className: className, 'data-tabindex': this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: 'toolbar', tabIndex: '-1' },
+                React.createElement(
+                    'div',
+                    { className: 'alloy-editor-container' },
+                    buttons
                 )
             );
         },
@@ -10133,17 +10264,17 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _getButtons
          * @return {Object} The buttons which have to be rendered.
          */
-        _getButtons: function() {
+        _getButtons: function _getButtons() {
             var buttons;
 
             if (this.props.renderExclusive) {
                 buttons = this.getToolbarButtons(this.props.config.buttons);
             } else {
                 if (this.props.selectionData && this.props.selectionData.region) {
-                    buttons = (
-                        React.createElement("button", {"aria-label": AlloyEditor.Strings.add, className: "alloy-editor-button alloy-editor-button-add", onClick: this.props.requestExclusive.bind(this, ToolbarAdd.key), title: AlloyEditor.Strings.add}, 
-                            React.createElement("span", {className: "alloy-editor-icon-add"})
-                        )
+                    buttons = React.createElement(
+                        'button',
+                        { 'aria-label': AlloyEditor.Strings.add, className: 'alloy-editor-button alloy-editor-button-add', onClick: this.props.requestExclusive.bind(this, ToolbarAdd.key), title: AlloyEditor.Strings.add },
+                        React.createElement('span', { className: 'alloy-editor-icon-add' })
                     );
                 }
             }
@@ -10158,7 +10289,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _getToolbarClassName
          * @return {String} The class name which have to be applied to the DOM element.
          */
-        _getToolbarClassName: function() {
+        _getToolbarClassName: function _getToolbarClassName() {
             var cssClass = 'alloy-editor-toolbar-add';
 
             if (this.props.renderExclusive) {
@@ -10174,13 +10305,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _updatePosition
          */
-        _updatePosition: function() {
+        _updatePosition: function _updatePosition() {
             var region;
 
             if (this.props.renderExclusive) {
                 this.updatePosition();
                 this.show();
-
             } else {
                 if (this.props.selectionData) {
                     region = this.props.selectionData.region;
@@ -10194,7 +10324,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                     var left = this.props.editor.get('nativeEditor').editable().getClientRect().left;
 
                     domNode.style.left = left - domNode.offsetWidth - this.props.gutterExclusive.left + 'px';
-                    domNode.style.top = region.top - domNode.offsetHeight/2 + startRect.height/2 + 'px';
+                    domNode.style.top = region.top - domNode.offsetHeight / 2 + startRect.height / 2 + 'px';
                     domNode.style.opacity = 1;
 
                     domElement.removeClass('alloy-editor-arrow-box');
@@ -10206,7 +10336,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.Toolbars[ToolbarAdd.key] = AlloyEditor.ToolbarAdd = ToolbarAdd;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -10222,7 +10354,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class ToolbarStyles
      */
-    var ToolbarStyles = React.createClass({displayName: "ToolbarStyles",
+    var ToolbarStyles = React.createClass({
+        displayName: 'ToolbarStyles',
+
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
         // Allows validating props being passed to the component.
@@ -10274,7 +10408,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidMount
          */
-        componentDidMount: function () {
+        componentDidMount: function componentDidMount() {
             this._updatePosition();
         },
 
@@ -10286,7 +10420,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {Object} prevProps The previous state of the component's properties.
          * @param {Object} prevState Component's previous state.
          */
-        componentDidUpdate: function (prevProps, prevState) {
+        componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
             this._updatePosition();
         },
 
@@ -10296,7 +10430,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 circular: true,
                 descendants: '.alloy-editor-button, .alloy-editor-toolbar-element',
@@ -10314,7 +10448,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             var currentSelection = this._getCurrentSelection();
 
             if (currentSelection) {
@@ -10329,18 +10463,17 @@ CKEDITOR.tools.buildTableMap = function( table ) {
 
                 var cssClasses = 'alloy-editor-toolbar-styles ' + arrowBoxClasses;
 
-                var buttons = this.getToolbarButtons(
-                    currentSelection.buttons,
-                    {
-                        selectionType: currentSelection.name
-                    }
-                );
+                var buttons = this.getToolbarButtons(currentSelection.buttons, {
+                    selectionType: currentSelection.name
+                });
 
-                return (
-                    React.createElement("div", {"aria-label": AlloyEditor.Strings.styles, className: cssClasses, "data-tabindex": this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: "toolbar", tabIndex: "-1"}, 
-                        React.createElement("div", {className: "alloy-editor-container"}, 
-                            buttons
-                        )
+                return React.createElement(
+                    'div',
+                    { 'aria-label': AlloyEditor.Strings.styles, className: cssClasses, 'data-tabindex': this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: 'toolbar', tabIndex: '-1' },
+                    React.createElement(
+                        'div',
+                        { className: 'alloy-editor-container' },
+                        buttons
                     )
                 );
             } else {
@@ -10357,13 +10490,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * desired one (e.g. 'AlloyEditor.SelectionTest.image').
          * @return {Function} The mapped function.
          */
-        _getSelectionFunction: function(selectionFn) {
+        _getSelectionFunction: function _getSelectionFunction(selectionFn) {
             var Lang = AlloyEditor.Lang;
             var selectionFunction;
 
             if (Lang.isFunction(selectionFn)) {
                 selectionFunction = selectionFn;
-
             } else if (Lang.isString(selectionFn)) {
                 var parts = selectionFn.split('.');
                 var currentMember = window;
@@ -10389,12 +10521,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @return {Object} The matched selection configuration.
          */
-        _getCurrentSelection: function() {
+        _getCurrentSelection: function _getCurrentSelection() {
             var eventPayload = this.props.editorEvent ? this.props.editorEvent.data : null;
             var selection;
 
             if (eventPayload) {
-                this.props.config.selections.some(function(item) {
+                this.props.config.selections.some(function (item) {
                     var testFn = this._getSelectionFunction(item.test);
                     var result;
 
@@ -10422,7 +10554,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _updatePosition
          */
-        _updatePosition: function() {
+        _updatePosition: function _updatePosition() {
             var currentSelection = this._getCurrentSelection();
             var result;
 
@@ -10448,7 +10580,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.Toolbars[ToolbarStyles.key] = AlloyEditor.ToolbarStyles = ToolbarStyles;
-}());
+})();
+'use strict';
+
 (function () {
     'use strict';
 
@@ -10460,7 +10594,9 @@ CKEDITOR.tools.buildTableMap = function( table ) {
      *
      * @class UI
      */
-    var UI = React.createClass({displayName: "UI",
+    var UI = React.createClass({
+        displayName: 'UI',
+
         mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
 
         // Allows validating props being passed to the component.
@@ -10502,7 +10638,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method getInitialState
          */
-        getInitialState: function() {
+        getInitialState: function getInitialState() {
             return {
                 hidden: false
             };
@@ -10514,7 +10650,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
-        getDefaultProps: function() {
+        getDefaultProps: function getDefaultProps() {
             return {
                 circular: true,
                 descendants: '[class*=alloy-editor-toolbar-]',
@@ -10530,7 +10666,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidMount
          */
-        componentDidMount: function () {
+        componentDidMount: function componentDidMount() {
             var editor = this.props.editor.get('nativeEditor');
 
             editor.on('editorInteraction', this._onEditorInteraction, this);
@@ -10545,18 +10681,18 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             // It is not easy to debounce _setUIHidden on click, because if we
             // debounce it, when the handler is being invoked, the target may be no more part
             // of the editor's UI - onActionPerformed causes re-render.
-            this._clickListener = function (event) {
+            this._clickListener = (function (event) {
                 this._setUIHidden(event.target);
-            }.bind(this);
+            }).bind(this);
 
-            this._keyDownListener = CKEDITOR.tools.debounce(function(event) {
+            this._keyDownListener = CKEDITOR.tools.debounce(function (event) {
                 this._setUIHidden(document.activeElement);
             }, this.props.eventsDelay, this);
 
-            editor.once('contentDom', function() {
+            editor.once('contentDom', (function () {
                 document.addEventListener('click', this._clickListener);
                 document.addEventListener('keydown', this._keyDownListener);
-            }.bind(this));
+            }).bind(this));
         },
 
         /**
@@ -10565,7 +10701,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentDidUpdate
          */
-        componentDidUpdate: function (prevProps, prevState) {
+        componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
             var domNode = React.findDOMNode(this);
 
             if (domNode) {
@@ -10575,7 +10711,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
             }
         },
 
-        _getAriaUpdateTemplate: function(ariaUpdate) {
+        _getAriaUpdateTemplate: function _getAriaUpdateTemplate(ariaUpdate) {
             if (!this._ariaUpdateTemplates) {
                 this._ariaUpdateTemplates = {};
             }
@@ -10599,7 +10735,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *      manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
          *  }
          */
-        _getAriaUpdates: function() {
+        _getAriaUpdates: function _getAriaUpdates() {
             return this.props.ariaUpdates || {
                 noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
                 oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
@@ -10615,13 +10751,13 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @param {CKEDITOR.dom.element} domNode The DOM node from which the available toolbars will be retrieved.
          * @return {String} The ARIA message for the number of available toolbars
          */
-        _getAvailableToolbarsMessage: function(domNode) {
+        _getAvailableToolbarsMessage: function _getAvailableToolbarsMessage(domNode) {
             var toolbarsNodeList = domNode.querySelectorAll('[role="toolbar"]');
 
             if (!toolbarsNodeList.length) {
                 return this._getAriaUpdates().noToolbar;
             } else {
-                var toolbarNames = Array.prototype.slice.call(toolbarsNodeList).map(function(toolbar) {
+                var toolbarNames = Array.prototype.slice.call(toolbarsNodeList).map(function (toolbar) {
                     return toolbar.getAttribute('aria-label');
                 });
 
@@ -10638,7 +10774,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          *
          * @method componentWillUnmount
          */
-        componentWillUnmount: function() {
+        componentWillUnmount: function componentWillUnmount() {
             if (this._clickListener) {
                 document.removeEventListener('click', this._clickListener);
             }
@@ -10656,16 +10792,16 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
-        render: function() {
+        render: function render() {
             if (this.state.hidden) {
                 return null;
             }
 
-            var toolbars = Object.keys(this.props.toolbars).map(function(toolbar) {
+            var toolbars = Object.keys(this.props.toolbars).map(function (toolbar) {
                 return AlloyEditor.Toolbars[toolbar] || window[toolbar];
             });
 
-            toolbars = this.filterExclusive(toolbars).map(function(toolbar) {
+            toolbars = this.filterExclusive(toolbars).map((function (toolbar) {
                 var props = this.mergeExclusiveProps({
                     config: this.props.toolbars[toolbar.key],
                     editor: this.props.editor,
@@ -10676,12 +10812,12 @@ CKEDITOR.tools.buildTableMap = function( table ) {
                 }, toolbar.key);
 
                 return React.createElement(toolbar, props);
-            }.bind(this));
+            }).bind(this));
 
-            return (
-                React.createElement("div", {className: "alloy-editor-toolbars", onKeyDown: this.handleKey}, 
-                    toolbars
-                )
+            return React.createElement(
+                'div',
+                { className: 'alloy-editor-toolbars', onKeyDown: this.handleKey },
+                toolbars
             );
         },
 
@@ -10692,7 +10828,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _onActionPerformed
          * @param {SynteticEvent} event The provided event
          */
-        _onActionPerformed: function(event) {
+        _onActionPerformed: function _onActionPerformed(event) {
             var editor = this.props.editor.get('nativeEditor');
 
             editor.focus();
@@ -10709,7 +10845,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _onDismissToolbarFocus
          */
-        _onDismissToolbarFocus: function() {
+        _onDismissToolbarFocus: function _onDismissToolbarFocus() {
             var editor = this.props.editor.get('nativeEditor');
 
             editor.focus();
@@ -10723,7 +10859,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _onEditorInteraction
          * @param {SynteticEvent} event The provided event
          */
-        _onEditorInteraction: function(event) {
+        _onEditorInteraction: function _onEditorInteraction(event) {
             this.setState({
                 editorEvent: event,
                 hidden: false,
@@ -10738,7 +10874,7 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @protected
          * @method _onEditorKey
          */
-        _onEditorKey: function(event) {
+        _onEditorKey: function _onEditorKey(event) {
             var nativeEvent = event.data.domEvent.$;
 
             if (nativeEvent.altKey && nativeEvent.keyCode === 121) {
@@ -10754,15 +10890,14 @@ CKEDITOR.tools.buildTableMap = function( table ) {
          * @method _setUIHidden
          * @param {DOMElement} target The DOM element with which user interacted lastly.
          */
-        _setUIHidden: function(target) {
+        _setUIHidden: function _setUIHidden(target) {
             var domNode = React.findDOMNode(this);
 
             if (domNode) {
                 var editable = this.props.editor.get('nativeEditor').editable();
                 var targetNode = new CKEDITOR.dom.node(target);
 
-                var res = (editable.$ === target) || editable.contains(targetNode) ||
-                    (new CKEDITOR.dom.element(domNode)).contains(targetNode);
+                var res = editable.$ === target || editable.contains(targetNode) || new CKEDITOR.dom.element(domNode).contains(targetNode);
 
                 if (!res) {
                     this.setState({
@@ -10774,5 +10909,5 @@ CKEDITOR.tools.buildTableMap = function( table ) {
     });
 
     AlloyEditor.UI = UI;
-}());
+})();
 }());

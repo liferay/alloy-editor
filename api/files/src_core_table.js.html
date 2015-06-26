@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/core/table.js - alloy-editor</title>
+    <title>src/core/table.js - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -24,14 +24,14 @@
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
-                    <img alt="alloy-editor" src="../assets/img/logo-small.png" title="alloy-editor">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
                 </a>
             </h1>
             <div class="nav">
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.2</b>
+                        API Docs for Version: <b>0.3.4</b>
                     </p>
                 </li>
             </div>
@@ -191,6 +191,8 @@
                                         var editor = this._editor;
                                         var table = this._createElement(&#x27;table&#x27;);
                             
+                                        config = config || {};
+                            
                                         // Generate the rows and cols.
                                         var tbody = table.append(this._createElement(&#x27;tbody&#x27;));
                                         var rows = config.rows || 1;
@@ -205,11 +207,7 @@
                                             }
                                         }
                             
-                                        if (!table.getAttribute(&#x27;style&#x27;)) {
-                                            table.removeAttribute(&#x27;style&#x27;);
-                                        }
-                            
-                                        this.setAttributes(table, config.attrs);
+                                        this.setAttributes(table, config.attrs || {});
                             
                                         // Insert the table element if we&#x27;re creating one.
                                         editor.insertElement(table);
@@ -241,6 +239,8 @@
                                             if (ranges.length &gt; 0) {
                                                 // Webkit could report the following range on cell selection (#4948):
                                                 // &lt;table&gt;&lt;tr&gt;&lt;td&gt;[&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]
+                            
+                                                /* istanbul ignore else */
                                                 if (CKEDITOR.env.webkit) {
                                                     ranges[0].shrink(CKEDITOR.NODE_ELEMENT);
                                                 }
@@ -262,7 +262,7 @@
                                         var editor = this._editor;
                             
                                         if (table) {
-                                            table.remove(editor);
+                                            table.remove();
                                         } else {
                                             table = editor.elementPath().contains(&#x27;table&#x27;, 1);
                             
