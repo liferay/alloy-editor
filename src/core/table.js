@@ -95,10 +95,11 @@
         },
 
         /**
-         * Returns which heading style is set for the given table
+         * Returns which heading style is set for the given table.
          *
+         * @method getHeading
          * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
-         * @return {String} The heading of the table. Expected values are `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`..
+         * @return {String} The heading of the table. Expected values are `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
          */
         getHeading: function(table) {
             table = table || this.getFromSelection();
@@ -111,7 +112,7 @@
 
             var colHeadingSettings = true;
 
-            // Check if all the first cells in every row are TH
+            // Check if all of the first cells in every row are TH
             for (var row = 0; row < table.$.rows.length; row++) {
                 // If just one cell isn't a TH then it isn't a header column
                 var cell = table.$.rows[row].cells[0];
@@ -151,10 +152,10 @@
 
                 if (table) {
                     // If the table's parent has only one child remove it as well (unless it's a table cell, or the editable element) (#5416, #6289, #12110)
-                    var parent = table.getParent(),
-                        editable = editor.editable();
+                    var parent = table.getParent();
+                    var editable = editor.editable();
 
-                    if (parent.getChildCount() == 1 && !parent.is('td', 'th') && !parent.equals(editable)) {
+                    if (parent.getChildCount() === 1 && !parent.is('td', 'th') && !parent.equals(editable)) {
                         table = parent;
                     }
 
