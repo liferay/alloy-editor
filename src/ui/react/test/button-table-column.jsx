@@ -20,7 +20,7 @@
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableCol, 'button');
 
-            var dropdown = TestUtils.scryRenderedDOMComponentsWithClass(buttonTableCol, 'alloy-editor-dropdown');
+            var dropdown = TestUtils.scryRenderedDOMComponentsWithClass(buttonTableCol, 'dropdown');
 
             assert.ok(menuButton);
             assert.equal(0, dropdown.length);
@@ -29,7 +29,7 @@
         it('should show a dropdown with the action buttons when expanded', function() {
             var buttonTableCol = React.render(<AlloyEditor.ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
 
-            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonTableCol, 'alloy-editor-dropdown');
+            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonTableCol, 'dropdown');
             var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown, 'button');
 
             assert.ok(dropdown);

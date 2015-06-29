@@ -65,8 +65,8 @@
                     navigator.msGetUserMedia);
 
                 return (
-                    <button aria-label={AlloyEditor.Strings.camera} className="alloy-editor-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.camera}>
-                        <span className="alloy-editor-icon-camera"></span>
+                    <button aria-label={AlloyEditor.Strings.camera} className="button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.camera}>
+                        <span className="icon-camera"></span>
                     </button>
                 );
             }

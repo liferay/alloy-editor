@@ -74,11 +74,11 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return (
                 <button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-center" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}>
-                    <span className="alloy-editor-icon-align-center"></span>
+                    <span className="icon-align-center"></span>
                 </button>
             );
         }

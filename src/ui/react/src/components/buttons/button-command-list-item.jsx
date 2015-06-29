@@ -59,10 +59,10 @@
          * @return {String} The class name of the Widget.
          */
         _getClassName: function() {
-            var className = 'alloy-editor-toolbar-element';
+            var className = 'toolbar-element';
 
             if (this.props.icon) {
-                className += ' alloy-editor-icon-' + this.props.icon;
+                className += ' icon-' + this.props.icon;
             }
 
             return className;

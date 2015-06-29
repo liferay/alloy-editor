@@ -9,7 +9,7 @@
 	font-style: normal;
 }
 
-[class^="alloy-editor-icon-"], [class*=" alloy-editor-icon-"] {
+[class^="icon-"], [class*=" icon-"] {
 	font-family: '<%= fontName %>';
 	speak: none;
 	font-size: 20px;
@@ -25,7 +25,7 @@
 }
 
 <% _.each(glyphs, function(glyph) { %>
-.alloy-editor-icon-<%= glyph.name %>:before {
+.icon-<%= glyph.name %>:before {
 	content: "\<%= glyph.unicode %>";
 }
 <% }); %>

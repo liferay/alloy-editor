@@ -8,81 +8,83 @@
     }
 }
 
-.alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
-    background-color: $base-color;
-    border-radius: 4px;
-    color: $toolbar-color;
-    font-family: $font-family;
+.alloy-editor-ui {
+    .toolbar, [class^=toolbar-] {
+        background-color: $base-color;
+        border-radius: 4px;
+        color: $toolbar-color;
+        font-family: $font-family;
 
-    &.alloy-editor-arrow-box:after {
-        color: $base-color;
-    }
-
-    .alloy-editor-button, .alloy-editor-toolbar-element {
-        background-color: transparent;
-
-        &:hover {
-            color: $button-color;
+        &.alloy-editor-arrow-box:after {
+            color: $base-color;
         }
 
-        &.alloy-editor-button-pressed {
-            background-color: $button-color;
+        .button, .toolbar-element {
+            background-color: transparent;
 
             &:hover {
-                background-color: $button-pressed-hover-color;
-                color: inherit;
+                color: $button-color;
+            }
+
+            &.button-pressed {
+                background-color: $button-color;
+
+                &:hover {
+                    background-color: $button-pressed-hover-color;
+                    color: inherit;
+                }
+            }
+
+            &.button-disabled {
+                opacity: 0.3;
             }
         }
 
-        &.alloy-editor-button-disabled {
-            opacity: 0.3;
+        .container-input {
+            background-color: $input-background-color;
+
+            [class^=icon-] {
+                color: $input-icon-color;
+                opacity: 0.4;
+            }
         }
     }
 
-    .alloy-editor-container-input {
-        background-color: $input-background-color;
+    .dropdown, [class^=dropdown-] {
+        background-color: $dropdown-background-color;
+        border: 1px solid $dropdown-border-color;
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 2px 4px $dropdown-border-color;
+        color: $dropdown-color;
 
-        [class*=alloy-editor-icon-] {
-            color: $input-icon-color;
-            opacity: 0.4;
+        .list-header {
+            color: $dropdown-list-header-color;
+            font-size: small;
+            font-style: italic;
         }
     }
-}
 
-.alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
-    background-color: $dropdown-background-color;
-    border: 1px solid $dropdown-border-color;
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 2px 4px $dropdown-border-color;
-    color: $dropdown-color;
+    .toolbar-add {
+        border-radius: 24px;
+        padding: 0;
 
-    .alloy-editor-list-header {
-        color: $dropdown-list-header-color;
-        font-size: small;
-        font-style: italic;
-    }
-}
-
-.alloy-editor-toolbar-add {
-    border-radius: 24px;
-    padding: 0;
-
-    &:hover, &:focus {
-        opacity: 0.7;
-    }
-
-    .alloy-editor-button-add {
         &:hover, &:focus {
-            color: $button-add-color;
+            opacity: 0.7;
         }
 
-        .alloy-editor-icon-add {
-            font-size: 12px;
-            line-height: 24px;
+        .button-add {
+            &:hover, &:focus {
+                color: $button-add-color;
+            }
+
+            .icon-add {
+                font-size: 12px;
+                line-height: 24px;
+            }
         }
     }
-}
 
-.alloy-editor-twitter-link {
-    background-color: $twitter-link-background-color;
+    .twitter-link {
+        background-color: $twitter-link-background-color;
+    }
 }

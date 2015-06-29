@@ -81,9 +81,9 @@
             }
 
             return (
-                <div className="alloy-editor-container alloy-editor-has-dropdown">
-                    <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.cell} aria-owns={buttonCommandsListId} className="alloy-editor-button" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.cell}>
-                        <span className="alloy-editor-icon-cell"></span>
+                <div className="container has-dropdown">
+                    <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.cell} aria-owns={buttonCommandsListId} className="button" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.cell}>
+                        <span className="icon-cell"></span>
                     </button>
                     {buttonCommandsList}
                 </div>

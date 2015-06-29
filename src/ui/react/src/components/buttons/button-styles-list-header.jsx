@@ -16,7 +16,7 @@
         render: function() {
             if (this.props.styles && this.props.styles.length) {
                 return (
-                    <span className="alloy-editor-list-header">{this.props.name}</span>
+                    <span className="list-header">{this.props.name}</span>
                 );
             } else {
                 return null;

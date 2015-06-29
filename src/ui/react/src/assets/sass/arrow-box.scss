@@ -3,50 +3,52 @@
 $arrow-height: 4px;
 $arrow-width: 10px;
 
-.alloy-editor-arrow-box {
-    &:after {
-        content: '';
-        margin: auto;
-        position: absolute;
-    }
-
-    &.alloy-editor-arrow-box-bottom {
+.alloy-editor-ui {
+    .alloy-editor-arrow-box {
         &:after {
-            @include triangle($arrow-width $arrow-height, currentColor, down);
-
-            left: 0;
-            right: 0;
-            top: 100%;
+            content: '';
+            margin: auto;
+            position: absolute;
         }
-    }
 
-    &.alloy-editor-arrow-box-top {
-        &:after {
-            @include triangle($arrow-width $arrow-height, currentColor, up);
+        &.alloy-editor-arrow-box-bottom {
+            &:after {
+                @include triangle($arrow-width $arrow-height, currentColor, down);
 
-            left: 0;
-            right: 0;
-            top: -$arrow-height;
+                left: 0;
+                right: 0;
+                top: 100%;
+            }
         }
-    }
 
-    &.alloy-editor-arrow-box-left {
-        &:after {
-            @include triangle($arrow-width $arrow-height, currentColor, left);
+        &.alloy-editor-arrow-box-top {
+            &:after {
+                @include triangle($arrow-width $arrow-height, currentColor, up);
 
-            left: -$arrow-height;
-            top: 0;
-            bottom: 0;
+                left: 0;
+                right: 0;
+                top: -$arrow-height;
+            }
         }
-    }
 
-    &.alloy-editor-arrow-box-right {
-        &:after {
-            @include triangle($arrow-width $arrow-height, currentColor, right);
+        &.alloy-editor-arrow-box-left {
+            &:after {
+                @include triangle($arrow-width $arrow-height, currentColor, left);
 
-            right: -$arrow-height;
-            top: 0;
-            bottom: 0;
+                left: -$arrow-height;
+                top: 0;
+                bottom: 0;
+            }
+        }
+
+        &.alloy-editor-arrow-box-right {
+            &:after {
+                @include triangle($arrow-width $arrow-height, currentColor, right);
+
+                right: -$arrow-height;
+                top: 0;
+                bottom: 0;
+            }
         }
     }
 }

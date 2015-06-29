@@ -129,7 +129,7 @@
             domElement.removeClass('alloy-editor-invisible');
 
             this._animate(function() {
-                domElement.addClass('alloy-editor-toolbar-transition alloy-editor-visible');
+                domElement.addClass('toolbar-transition alloy-editor-visible');
                 domElement.setStyles({
                     left: endPoint[0],
                     top: endPoint[1],
