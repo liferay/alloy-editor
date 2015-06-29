@@ -42,9 +42,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'rowInsertBefore';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should insert a row after the current one when clicking on the rowInsertAfter button', function() {
@@ -53,9 +56,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'rowInsertAfter';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should delete the current row when clicking on the rowDelete button', function() {
@@ -64,9 +70,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'rowDelete';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
     });
 }());

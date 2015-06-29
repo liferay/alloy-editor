@@ -78,7 +78,14 @@
                 var buttonCommand = 'tableHeading' + testData.expected;
 
                 Utils.assertDropdownCommandButtonResult.call(this,
-                    initialFixture, buttonDropdown, buttonCommand, expectedFixture, selectTable, errorMessage
+                    {
+                        buttonCommand: buttonCommand,
+                        buttonDropdown: buttonDropdown,
+                        errorMessage: errorMessage,
+                        expectedFixture: expectedFixture,
+                        initialFixture: initialFixture,
+                        selectionFn: selectTable
+                    }
                 );
             }.bind(this));
         });

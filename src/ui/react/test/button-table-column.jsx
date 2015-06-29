@@ -42,9 +42,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'columnInsertBefore';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should insert a col after the current one when clicking on the columnInsertAfter button', function() {
@@ -53,9 +56,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'columnInsertAfter';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should delete the current col when clicking on the columnDelete button', function() {
@@ -64,9 +70,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'columnDelete';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
     });
 }());

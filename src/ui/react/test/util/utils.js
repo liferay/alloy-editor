@@ -8,28 +8,28 @@
     window.Utils.assertDropdownCommandButtonResult = (function() {
         var assertResult = window.Utils.assertResult('src/ui/react/test/fixtures');
 
-        return function(initialFixture, buttonDropdown, buttonCommand, expectedFixture, selectionFn, errorMessage) {
+        return function(config) {
             var TestUtils = React.addons.TestUtils;
             var Simulate = TestUtils.Simulate;
 
             var command = function() {
-                var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonDropdown, 'alloy-editor-dropdown');
+                var dropdown = TestUtils.findRenderedDOMComponentWithClass(config.buttonDropdown, 'alloy-editor-dropdown');
 
                 var commandButtons = TestUtils.findAllInRenderedTree(dropdown, function(component) {
-                    return component.props.command === buttonCommand;
+                    return component.props.command === config.buttonCommand;
                 });
 
                 assert.ok(commandButtons.length);
 
-                if (selectionFn) {
-                    selectionFn.call(this);
+                if (config.selectionFn) {
+                    config.selectionFn.call(this);
                 }
 
                 Simulate.click(React.findDOMNode(commandButtons[0]));
             };
 
             assertResult.call(this,
-                initialFixture, command, expectedFixture, errorMessage
+                config.initialFixture, command, config.expectedFixture, config.errorMessage
             );
         };
     }());

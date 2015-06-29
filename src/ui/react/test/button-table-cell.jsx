@@ -42,9 +42,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellInsertBefore';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should insert a cell after the current one when clicking on the cellInsertAfter button', function() {
@@ -53,9 +56,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellInsertAfter';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should delete a cell after the current one when clicking on the cellDelete button', function() {
@@ -64,9 +70,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellDelete';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should merge the selected cells when clicking on the cellMerge button', function() {
@@ -75,9 +84,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellMerge';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should merge the cell below the current one when clicking on the cellMergeDown button', function() {
@@ -86,9 +98,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellMergeDown';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should merge the cell right to the current one when clicking on the cellMergeRight button', function() {
@@ -97,9 +112,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellMergeRight';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should split the cell horizontally when clicking on the cellHorizontalSplit button', function() {
@@ -108,9 +126,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellHorizontalSplit';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
 
         it('should split the cell vertically when clicking on the cellVerticalSplit button', function() {
@@ -119,9 +140,12 @@
             var buttonDropdown = React.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellVerticalSplit';
 
-            Utils.assertDropdownCommandButtonResult.call(this,
-                initialFixture, buttonDropdown, buttonCommand, expectedFixture
-            );
+            Utils.assertDropdownCommandButtonResult.call(this, {
+                buttonCommand: buttonCommand,
+                buttonDropdown: buttonDropdown,
+                expectedFixture: expectedFixture,
+                initialFixture: initialFixture
+            });
         });
     });
 }());
