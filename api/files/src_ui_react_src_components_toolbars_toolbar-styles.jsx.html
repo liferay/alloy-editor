@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -254,7 +255,7 @@
                                     getDefaultProps: function() {
                                         return {
                                             circular: true,
-                                            descendants: &#x27;.alloy-editor-button, .alloy-editor-toolbar-element&#x27;,
+                                            descendants: &#x27;.button, .toolbar-element&#x27;,
                                             keys: {
                                                 dismiss: [27],
                                                 next: [39, 40],
@@ -282,7 +283,7 @@
                                                 arrowBoxClasses = this.getArrowBoxClasses();
                                             }
                             
-                                            var cssClasses = &#x27;alloy-editor-toolbar-styles &#x27; + arrowBoxClasses;
+                                            var cssClasses = &#x27;toolbar-styles &#x27; + arrowBoxClasses;
                             
                                             var buttons = this.getToolbarButtons(
                                                 currentSelection.buttons,
@@ -293,7 +294,7 @@
                             
                                             return (
                                                 &lt;div aria-label={AlloyEditor.Strings.styles} className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
-                                                    &lt;div className=&quot;alloy-editor-container&quot;&gt;
+                                                    &lt;div className=&quot;container&quot;&gt;
                                                         {buttons}
                                                     &lt;/div&gt;
                                                 &lt;/div&gt;

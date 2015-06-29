@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonUnorderedlist - alloyeditor</title>
+    <title>ButtonTableHeading - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -158,22 +158,14 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonUnorderedlist <small>Class</small></h1>
+                                <h1>ButtonTableHeading <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
-                                    <div class="uses">
-                                        Uses:
-                                        <ul class="inline commas">
-                                                <li><a href="ButtonCommand.html">ButtonCommand</a></li>
-                                                <li><a href="ButtonStateClasses.html">ButtonStateClasses</a></li>
-                                                <li><a href="ButtonStyle.html">ButtonStyle</a></li>
-                                        </ul>
-                                    </div>
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-ul.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-ul.jsx:4</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:4</code></a>
                                     </div>
                             
                             
@@ -181,7 +173,7 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>The ButtonUnorderedlist class provides functionality for creating unordered lists in an editor.</p>
+                                <p>The ButtonTableHeading class provides functionality to work with table heading.</p>
                             
                             </div>
                             
@@ -202,32 +194,8 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_componentWillMount">componentWillMount</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_componentWillUnmount">componentWillUnmount</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_execCommand">execCommand</a>
-                            
-                                                        </li>
                                                         <li class="index-item method">
-                                                            <a href="#method_getDefaultProps">getDefaultProps</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_getStateClasses">getStateClasses</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_getStyle">getStyle</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_isActive">isActive</a>
+                                                            <a href="#method__getCommands">_getCommands</a>
                             
                                                         </li>
                                                         <li class="index-item method">
@@ -241,12 +209,16 @@
                                                 <h3>Properties</h3>
                             
                                                 <ul class="index-list properties">
-                                                        <li class="index-item property inherited">
-                                                            <a href="#property_command">command</a>
+                                                        <li class="index-item property">
+                                                            <a href="#property_commands">commands</a>
                             
                                                         </li>
                                                         <li class="index-item property">
                                                             <a href="#property_editor">editor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_expanded">expanded</a>
                             
                                                         </li>
                                                         <li class="index-item property">
@@ -258,16 +230,12 @@
                                                             <a href="#property_label">label</a>
                             
                                                         </li>
-                                                        <li class="index-item property inherited">
-                                                            <a href="#property_modifiesSelection">modifiesSelection</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property inherited">
-                                                            <a href="#property_style">style</a>
+                                                        <li class="index-item property">
+                                                            <a href="#property_tabIndex">tabIndex</a>
                             
                                                         </li>
                                                         <li class="index-item property">
-                                                            <a href="#property_tabIndex">tabIndex</a>
+                                                            <a href="#property_toggleDropdown">toggleDropdown</a>
                             
                                                         </li>
                                                 </ul>
@@ -279,126 +247,13 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method_componentWillMount" class="method item inherited">
-                                                    <h3 class="name"><code>componentWillMount</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_componentWillMount">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:21</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method_componentWillUnmount" class="method item inherited">
-                                                    <h3 class="name"><code>componentWillUnmount</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_componentWillUnmount">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l30"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:30</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Invoked immediately before a component is unmounted from the DOM.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method_execCommand" class="method item inherited">
-                                                    <h3 class="name"><code>execCommand</code></h3>
-                                                
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
-                                                                <li class="arg">
-                                                                        <code>data</code>
-                                                                </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonCommand.html#method_execCommand">ButtonCommand</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-command.js.html#l27"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-command.js:27</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Executes a CKEditor command and fires <code>actionPerformed</code> event.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">data</code>
-                                                                        <span class="type">Object=</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>Optional data to be passed to CKEDITOR&#39;s <code>execCommand</code> method.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                
-                                                </div>
-                                                <div id="method_getDefaultProps" class="method item">
-                                                    <h3 class="name"><code>getDefaultProps</code></h3>
+                                                <div id="method__getCommands" class="method item">
+                                                    <h3 class="name"><code>_getCommands</code></h3>
                                                 
                                                         <span class="paren">()</span>
                                                 
                                                         <span class="returns-inline">
-                                                            <span class="type">Object</span>
+                                                            <span class="type">Array</span>
                                                         </span>
                                                 
                                                 
@@ -410,7 +265,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-ul.jsx.html#l53"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-ul.jsx:53</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l100"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:100</code></a>
                                                         </p>
                                                 
                                                 
@@ -418,7 +273,8 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Lifecycle. Returns the default values of the properties used in the widget.</p>
+                                                        <p>Returns a list of commands. If a list of commands was passed
+                                                as property <code>commands</code>, it will take a precedence over the default ones.</p>
                                                 
                                                     </div>
                                                 
@@ -427,135 +283,8 @@
                                                             <h4>Returns:</h4>
                                                 
                                                             <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The default properties.</p>
-                                                
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
-                                                <div id="method_getStateClasses" class="method item inherited">
-                                                    <h3 class="name"><code>getStateClasses</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">String</span>
-                                                        </span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStateClasses.html#method_getStateClasses">ButtonStateClasses</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-state-classes.js.html#l15"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-state-classes.js:15</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Returns the list of state classes associated to the current element&#39;s state, according
-                                                to the results of the isActive and isDisabled methods.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">String</span>:
-                                                                    <p>A string with the state CSS classes.</p>
-                                                
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
-                                                <div id="method_getStyle" class="method item inherited">
-                                                    <h3 class="name"><code>getStyle</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">CKEDITOR.style</span>
-                                                        </span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_getStyle">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l39"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:39</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Returns instance of CKEDITOR.style which represents the current button style.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">CKEDITOR.style</span>:
-                                                                    <p>The current style representation.</p>
-                                                
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
-                                                <div id="method_isActive" class="method item inherited">
-                                                    <h3 class="name"><code>isActive</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">Boolean</span>
-                                                        </span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_isActive">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l49"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:49</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Checks if style is active in the current selection.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Boolean</span>:
-                                                                    <p>True if style is active, false otherwise.</p>
+                                                                        <span class="type">Array</span>:
+                                                                    <p>The list of available commands.</p>
                                                 
                                                             </div>
                                                         </div>
@@ -579,7 +308,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-ul.jsx.html#l68"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-ul.jsx:68</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l68"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:68</code></a>
                                                         </p>
                                                 
                                                 
@@ -608,25 +337,25 @@
                                         <div id="properties" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Properties</h2>
                             
-                                                <div id="property_command" class="property item inherited">
-                                                    <h3 class="name"><code>command</code></h3>
-                                                    <span class="type">String</span>
+                                                <div id="property_commands" class="property item">
+                                                    <h3 class="name"><code>commands</code></h3>
+                                                    <span class="type">Array</span>
                                                 
                                                 
                                                 
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonCommand.html#property_command">ButtonCommand</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-command.js.html#l12"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-command.js:12</code></a>
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l12"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:12</code></a>
                                                         </p>
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>The command that should be executed.</p>
+                                                        <p>List of the commands the button is able to handle.</p>
                                                 
                                                     </div>
                                                 
@@ -644,7 +373,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-ul.jsx.html#l18"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-ul.jsx:18</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l19"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:19</code></a>
                                                         </p>
                                                 
                                                 
@@ -652,6 +381,31 @@
                                                 
                                                     <div class="description">
                                                         <p>The editor instance where the component is being used.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_expanded" class="property item">
+                                                    <h3 class="name"><code>expanded</code></h3>
+                                                    <span class="type">Boolean</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l26"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:26</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Indicates whether the styles list is expanded or not.</p>
                                                 
                                                     </div>
                                                 
@@ -670,7 +424,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-ul.jsx.html#l43"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-ul.jsx:43</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l58"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:58</code></a>
                                                         </p>
                                                 
                                                 
@@ -681,7 +435,7 @@
                                                 
                                                     </div>
                                                 
-                                                        <p><strong>Default:</strong> ul</p>
+                                                        <p><strong>Default:</strong> tableRow</p>
                                                 
                                                 
                                                 </div>
@@ -696,7 +450,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-ul.jsx.html#l25"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-ul.jsx:25</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l33"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:33</code></a>
                                                         </p>
                                                 
                                                 
@@ -704,56 +458,6 @@
                                                 
                                                     <div class="description">
                                                         <p>The label that should be used for accessibility purposes.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_modifiesSelection" class="property item inherited">
-                                                    <h3 class="name"><code>modifiesSelection</code></h3>
-                                                    <span class="type">Boolean</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonCommand.html#property_modifiesSelection">ButtonCommand</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-command.js.html#l19"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-command.js:19</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Indicates that the command may cause the editor to have a different.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_style" class="property item inherited">
-                                                    <h3 class="name"><code>style</code></h3>
-                                                    <span class="type">Object</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#property_style">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l13"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:13</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The style the button should handle as described by <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.style">http://docs.ckeditor.com/#!/api/CKEDITOR.style</a></p>
                                                 
                                                     </div>
                                                 
@@ -771,7 +475,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-ul.jsx.html#l32"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-ul.jsx:32</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l40"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:40</code></a>
                                                         </p>
                                                 
                                                 
@@ -780,6 +484,31 @@
                                                     <div class="description">
                                                         <p>The tabIndex of the button in its toolbar current state. A value other than -1
                                                 means that the button has focus and is the active element.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_toggleDropdown" class="property item">
+                                                    <h3 class="name"><code>toggleDropdown</code></h3>
+                                                    <span class="type">Function</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l48"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:48</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Callback provided by the button host to notify when the styles list has been expanded.</p>
                                                 
                                                     </div>
                                                 

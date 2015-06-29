@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/oop/lang.js - alloyeditor</title>
+    <title>src/ui/react/src/components/buttons/button-table-heading.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -158,7 +158,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/oop/lang.js</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-table-heading.jsx</code></h1>
                             </div>
                             
                             <div class="file">
@@ -167,133 +167,132 @@
                                 &#x27;use strict&#x27;;
                             
                                 /**
-                                 * Provides core language utilities.
+                                 * The ButtonTableHeading class provides functionality to work with table heading.
                                  *
-                                 * @class Lang
+                                 * @class ButtonTableHeading
                                  */
-                                var Lang = {
-                                    /**
-                                     * Check if the passed value is an array.
-                                     *
-                                     * @static
-                                     * @method isArray
-                                     * @param {Any} value The value which have to be checked.
-                                     * @return {Boolean} True if the passed value is an array, false otherwise.
-                                     */
-                                    isArray: function(value) {
-                                        return Object.prototype.toString.call(value) === &#x27;[object Array]&#x27;;
+                                var ButtonTableHeading = React.createClass({
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * List of the commands the button is able to handle.
+                                         *
+                                         * @property {Array} commands
+                                         */
+                                        commands: React.PropTypes.arrayOf(React.PropTypes.object),
+                            
+                                        /**
+                                         * The editor instance where the component is being used.
+                                         *
+                                         * @property {Object} editor
+                                         */
+                                        editor: React.PropTypes.object.isRequired,
+                            
+                                        /**
+                                         * Indicates whether the styles list is expanded or not.
+                                         *
+                                         * @property {Boolean} expanded
+                                         */
+                                        expanded: React.PropTypes.bool,
+                            
+                                        /**
+                                         * The label that should be used for accessibility purposes.
+                                         *
+                                         * @property {String} label
+                                         */
+                                        label: React.PropTypes.string,
+                            
+                                        /**
+                                         * The tabIndex of the button in its toolbar current state. A value other than -1
+                                         * means that the button has focus and is the active element.
+                                         *
+                                         * @property {Number} tabIndex
+                                         */
+                                        tabIndex: React.PropTypes.number,
+                            
+                                        /**
+                                         * Callback provided by the button host to notify when the styles list has been expanded.
+                                         *
+                                         * @property {Function} toggleDropdown
+                                         */
+                                        toggleDropdown: React.PropTypes.func
+                                    },
+                            
+                                    // Lifecycle. Provides static properties to the widget.
+                                    statics: {
+                                        /**
+                                         * The name which will be used as an alias of the button in the configuration.
+                                         *
+                                         * @static
+                                         * @property {String} key
+                                         * @default tableRow
+                                         */
+                                        key: &#x27;tableHeading&#x27;
                                     },
                             
                                     /**
-                                     * Check if the passed value is boolean.
+                                     * Lifecycle. Renders the UI of the button.
                                      *
-                                     * @static
-                                     * @method isBoolean
-                                     * @param {Any} value The value which have to be checked.
-                                     * @return {Boolean} True if the passed value is boolean, false otherwise.
+                                     * @method render
+                                     * @return {Object} The content which should be rendered.
                                      */
-                                    isBoolean: function(value) {
-                                        return typeof value === &#x27;boolean&#x27;;
-                                    },
+                                    render: function() {
+                                        var buttonCommandsList;
+                                        var buttonCommandsListId;
                             
-                                    /**
-                                     * Check if the passed value is a function.
-                                     *
-                                     * @static
-                                     * @method isFunction
-                                     * @param {Any} value The value which have to be checked.
-                                     * @return {Boolean} True if the passed value is a function, false otherwise.
-                                     */
-                                    isFunction: function(value) {
-                                        return typeof(value) === &#x27;function&#x27;;
-                                    },
-                            
-                                    /**
-                                     * Check if the passed value is NULL.
-                                     *
-                                     * @static
-                                     * @method isNull
-                                     * @param {Any} value The value which have to be checked.
-                                     * @return {Boolean} True if the passed value is NULL, false otherwise.
-                                     */
-                                    isNull: function(value) {
-                                        return value === null;
-                                    },
-                            
-                                    /**
-                                     * Check if the passed value is number.
-                                     *
-                                     * @static
-                                     * @method isNumber
-                                     * @param {Any} value The value which have to be checked.
-                                     * @return {Boolean} True if the passed value is number, false otherwise.
-                                     */
-                                    isNumber: function(value) {
-                                        return typeof value === &#x27;number&#x27; &amp;&amp; isFinite(value);
-                                    },
-                            
-                                    /**
-                                     * Check if the passed value is an object
-                                     *
-                                     * @static
-                                     * @method isObject
-                                     * @param {Any} value The value which have to be checked.
-                                     * @return {Boolean} True if the passed value is an object, false otherwise.
-                                     */
-                                    isObject: function(value) {
-                                        var valueType = typeof value;
-                            
-                                        return (value &amp;&amp; (valueType === &#x27;object&#x27; || Lang.isFunction(value)));
-                                    },
-                            
-                                    /**
-                                     * Check if the passed value is a string.
-                                     *
-                                     * @static
-                                     * @method isString
-                                     * @param {Any} value The value which have to be checked.
-                                     * @return {Boolean} True if the passed value is a string, false otherwise.
-                                     */
-                                    isString: function(value) {
-                                        return typeof value === &#x27;string&#x27;;
-                                    },
-                            
-                                    /**
-                                     * Adds all properties from the supplier to the receiver.
-                                     * The function will add all properties, not only these owned by the supplier.
-                                     *
-                                     * @static
-                                     * @method mix
-                                     * @param {Object} receiver The object which will receive properties.
-                                     * @param {Object} supplier The object which provides properties.
-                                     * @return {Object} The modified receiver.
-                                     */
-                                    mix: function(receiver, supplier) {
-                                        var hasOwnProperty = Object.prototype.hasOwnProperty;
-                            
-                                        for (var key in supplier) {
-                                            if (hasOwnProperty.call(supplier, key)) {
-                                                receiver[key] = supplier[key];
-                                            }
+                                        if (this.props.expanded) {
+                                            buttonCommandsListId = ButtonTableHeading.key + &#x27;List&#x27;;
+                                            buttonCommandsList = &lt;AlloyEditor.ButtonCommandsList commands={this._getCommands()} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} /&gt;
                                         }
+                            
+                                        var activeHeading = new CKEDITOR.Table(this.props.editor.get(&#x27;nativeEditor&#x27;)).getHeading();
+                                        var activeHeadingIntro = AlloyEditor.Strings.headers + &#x27;:&#x27;;
+                                        var activeHeadingLabel = AlloyEditor.Strings[&#x27;headers&#x27; + activeHeading];
+                            
+                                        return (
+                                            &lt;div className=&quot;container-dropdown-xl has-dropdown&quot;&gt;
+                                                &lt;button aria-expanded={this.props.expanded} aria-label=&quot;&quot; className=&quot;toolbar-element&quot; onClick={this.props.toggleDropdown} role=&quot;combobox&quot; tabIndex={this.props.tabIndex} title=&quot;&quot;&gt;
+                                                    &lt;div className=&quot;container&quot;&gt;
+                                                        &lt;span className=&quot;container-dropdown-selected-item&quot;&gt;{activeHeadingIntro} &lt;strong&gt;{activeHeadingLabel}&lt;/strong&gt;&lt;/span&gt;
+                                                        &lt;span className=&quot;icon-arrow&quot;&gt;&lt;/span&gt;
+                                                    &lt;/div&gt;
+                                                &lt;/button&gt;
+                                                {buttonCommandsList}
+                                            &lt;/div&gt;
+                                        );
                                     },
                             
                                     /**
-                                     * Converts value to Integer.
+                                     * Returns a list of commands. If a list of commands was passed
+                                     * as property &#x60;commands&#x60;, it will take a precedence over the default ones.
                                      *
-                                     * @static
-                                     * @method toInt
-                                     * @param {Any} value The value which have to be converted to Integer.
-                                     * @return {Integer} The converted value.
+                                     * @method _getCommands
+                                     * @return {Array} The list of available commands.
                                      */
-                                    toInt: function(value) {
-                                        return parseInt(value, 10);
+                                    _getCommands: function () {
+                                        return this.props.commands || [
+                                            {
+                                                command: &#x27;tableHeadingNone&#x27;,
+                                                label: AlloyEditor.Strings.headersNone
+                                            },
+                                            {
+                                                command: &#x27;tableHeadingRow&#x27;,
+                                                label: AlloyEditor.Strings.headersRow
+                                            },
+                                            {
+                                                command: &#x27;tableHeadingColumn&#x27;,
+                                                label: AlloyEditor.Strings.headersColumn
+                                            },
+                                            {
+                                                command: &#x27;tableHeadingBoth&#x27;,
+                                                label: AlloyEditor.Strings.headersBoth
+                                            }
+                                        ];
                                     }
-                                };
+                                });
                             
-                                AlloyEditor.Lang = Lang;
+                                AlloyEditor.Buttons[ButtonTableHeading.key] = AlloyEditor.ButtonTableHeading = ButtonTableHeading;
                             }());
-                            
                                 </pre>
                             </div>
                         </div>

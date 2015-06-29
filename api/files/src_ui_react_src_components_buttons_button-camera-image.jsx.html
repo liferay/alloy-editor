@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -235,10 +236,10 @@
                                         }, this._handleStreamSuccess, this._handleStreamError);
                             
                                         return (
-                                            &lt;div className=&quot;alloy-editor-camera&quot;&gt;
+                                            &lt;div className=&quot;camera&quot;&gt;
                                                 &lt;video ref=&quot;videoContainer&quot;&gt;Video stream not available.&lt;/video&gt;
-                                                &lt;button className=&quot;alloy-editor-camera-shoot&quot; onClick={this.takePhoto} ref=&quot;buttonTakePhoto&quot;&gt;Take photo&lt;/button&gt;
-                                                &lt;canvas className=&quot;alloy-editor-camera-canvas&quot; ref=&quot;canvasContainer&quot;&gt;&lt;/canvas&gt;
+                                                &lt;button className=&quot;camera-shoot&quot; onClick={this.takePhoto} ref=&quot;buttonTakePhoto&quot;&gt;Take photo&lt;/button&gt;
+                                                &lt;canvas className=&quot;camera-canvas&quot; ref=&quot;canvasContainer&quot;&gt;&lt;/canvas&gt;
                                             &lt;/div&gt;
                                         );
                                     },

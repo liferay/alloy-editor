@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -216,8 +217,8 @@
                                      */
                                     render: function() {
                                         return (
-                                            &lt;button aria-label={AlloyEditor.Strings.deleteTable} className=&quot;alloy-editor-button&quot; data-type=&quot;button-table-remove&quot; onClick={this._removeTable} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteTable}&gt;
-                                                &lt;span className=&quot;alloy-editor-icon-close&quot;&gt;&lt;/span&gt;
+                                            &lt;button aria-label={AlloyEditor.Strings.deleteTable} className=&quot;button&quot; data-type=&quot;button-table-remove&quot; onClick={this._removeTable} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteTable}&gt;
+                                                &lt;span className=&quot;icon-close&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );
                                     },

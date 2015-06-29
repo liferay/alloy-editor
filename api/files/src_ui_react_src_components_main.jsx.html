@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -230,7 +231,7 @@
                                     getDefaultProps: function() {
                                         return {
                                             circular: true,
-                                            descendants: &#x27;[class*=alloy-editor-toolbar-]&#x27;,
+                                            descendants: &#x27;[class*=toolbar-]&#x27;,
                                             eventsDelay: 0,
                                             keys: {
                                                 next: 9
@@ -392,7 +393,7 @@
                                         }.bind(this));
                             
                                         return (
-                                            &lt;div className=&quot;alloy-editor-toolbars&quot; onKeyDown={this.handleKey}&gt;
+                                            &lt;div className=&quot;toolbars&quot; onKeyDown={this.handleKey}&gt;
                                                 {toolbars}
                                             &lt;/div&gt;
                                         );

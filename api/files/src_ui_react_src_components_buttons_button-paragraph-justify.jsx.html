@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -238,11 +239,11 @@
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var cssClass = &#x27;alloy-editor-button &#x27; + this.getStateClasses();
+                                        var cssClass = &#x27;button &#x27; + this.getStateClasses();
                             
                                         return (
                                             &lt;button aria-label={AlloyEditor.Strings.alignJustify} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-paragraph-justify&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignJustify}&gt;
-                                                &lt;span className=&quot;alloy-editor-icon-align-justified&quot;&gt;&lt;/span&gt;
+                                                &lt;span className=&quot;icon-align-justified&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );
                                     }
