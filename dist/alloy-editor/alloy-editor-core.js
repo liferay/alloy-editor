@@ -1,5 +1,7 @@
 /**
- * AlloyEditor, Copyright 2014-2015, Liferay, Inc.
+ * AlloyEditor v0.3.4.
+ *
+ * Copyright 2014-2015, Liferay, Inc.
  * All rights reserved.
  *
  * This source code is licensed under the GNU LGPL-style license found in the
