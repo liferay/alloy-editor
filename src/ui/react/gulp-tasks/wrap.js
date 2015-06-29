@@ -18,7 +18,8 @@ var editorDistFolder = path.join(distFolder, 'alloy-editor');
 gulp.task('wrap-alloy-editor', function () {
 	return gulp.src(path.join(reactDir, 'template/alloy-editor.template'))
         .pipe(template({
-            core: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-core.js'))
+            core: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-core.js')),
+            version: pkg.version
         }))
         .pipe(rename('alloy-editor-core.js'))
         .pipe(gulp.dest(editorDistFolder));
