@@ -25,8 +25,8 @@ function errorHandler(error) {
 /**
  * Compares a couple of string sets to find differences between them.
  *
- * @param  {Object} oldStrings Old set of strings
- * @param  {Object} newStrings New set of strings
+ * @param {Object} oldStrings Old set of strings
+ * @param {Object} newStrings New set of strings
  * @return {Object} An object with `added`, `deleted` and `updated` arrays of the strings that differ from
  * one set to the other.
  */
@@ -39,7 +39,7 @@ var compareStringSets = function(oldStrings, newStrings) {
     // Iterate over every old string tuple
     Object.keys(oldStrings).forEach(function(key) {
         // If it's not in the new set, it was deleted
-        if (!newStrings[key]) {
+        if (!Object.prototype.hasOwnProperty.call(newStrings, key)) {
             deleted.push({
                 key: key,
                 value: oldStrings[key]
@@ -53,7 +53,7 @@ var compareStringSets = function(oldStrings, newStrings) {
                 });
             }
 
-            // In any case, its not a newly added string
+            // In any case, it is not a newly added string
             delete newStrings[key];
         }
     });
@@ -79,13 +79,14 @@ var compareStringSets = function(oldStrings, newStrings) {
 
 /**
  * Extract the strings from the contents of a language template.
- * @param  {String} langTemplateContent The language template content
+ *
+ * @param {String} langTemplateContent The language template content.
  * @return {Object} An object with all the template strings.
  */
 var extractStrings = function(langTemplateContent) {
     var match;
     var langStrings = {};
-    var langStringRegex = /\s*(.*):\s*([^,\n]*)/g;
+    var langStringRegex = /\s*(.+):\s*(.+(?=(?:,|\s*})))/g;
 
     while ((match = langStringRegex.exec(langTemplateContent)) !== null) {
         langStrings[match[1]] = match[2];
@@ -121,8 +122,10 @@ var updateLangFiles = function(langDiff, callback) {
         lang: {}
     };
 
-    var key;
-    var value;
+    // Mock AlloyEditor
+    global.AlloyEditor = {
+        Strings: {}
+    };
 
     var langWalker = walk.walk(reactLangDir);
     langWalker.on('end', callback);
@@ -134,58 +137,31 @@ var updateLangFiles = function(langDiff, callback) {
         // Load the matching CKEDITOR lang file with all the strings
         require(path.join(rootDir, 'lib', 'lang', fileStats.name));
 
-        // Load the current processed lang file
-        fs.readFile(path.join(reactDir, 'lang', fileStats.name), {encoding:'utf8'}, function(err, langFileContent) {
-            if (err) errorHandler(err);
+        // Load the corresponding AlloyEditor lang file
+        require(path.join(reactDir, 'lang', fileStats.name));
 
-            // Remove deleted strings
-            langDiff.deleted.forEach(function(deletedString) {
-                key = deletedString.key;
-                value = getStringLangValue(deletedString.value, lang);
+        // Update deleted strings
+        langDiff.deleted.forEach(function(deletedString) {
+            delete AlloyEditor.Strings[deletedString.key];
+        });
 
-                langFileContent = langFileContent.replace(
-                    new RegExp('"' + key + '":"' + value + '",?'),
-                    ''
-                );
-            });
+        // Update added strings
+        langDiff.added.forEach(function(newString) {
+            AlloyEditor.Strings[newString.key] = getStringLangValue(newString.value, lang);
+        });
 
-            // Make sure we don't leave any trailing commas
-            langFileContent = langFileContent.replace(',};', '};');
+        // Update changed strings
+        langDiff.updated.forEach(function(updatedString) {
+            AlloyEditor.Strings[updatedString.key] = getStringLangValue(updatedString.value, lang);
+        });
 
-            // Add new strings
-            var newLangStringsData = '';
+        // Update the contents of the current lang file
+        fs.writeFile(path.join(reactDir, 'lang', fileStats.name), 'AlloyEditor.Strings = ' + JSON.stringify(AlloyEditor.Strings) + ';', function(err) {
+            if (err) {
+                errorHandler(err);
+            }
 
-            langDiff.added.forEach(function(newString) {
-                key = newString.key;
-                value = getStringLangValue(newString.value, lang);
-
-                newLangStringsData += ',"' + key + '":"' + value + '"';
-            });
-
-            // Append new strings at the end of the lang file
-            langFileContent = langFileContent.replace(
-                '};',
-                newLangStringsData + '};'
-            );
-
-            // Update changed strings
-            langDiff.updated.forEach(function(updatedString) {
-                key = updatedString.key;
-                value = getStringLangValue(updatedString.value, lang);
-
-                // Replace the old entry with the new value
-                langFileContent = langFileContent.replace(
-                    new RegExp('"' + key + '":"' + '[^"]*'),
-                    '"' + key + '":"' + value
-                );
-            });
-
-            // Update the contents of the current lang file
-            fs.writeFile(path.join(reactDir, 'lang', fileStats.name), langFileContent, function(err) {
-                if (err) errorHandler(err);
-
-                next();
-            });
+            next();
         });
     });
 };
@@ -193,10 +169,14 @@ var updateLangFiles = function(langDiff, callback) {
 gulp.task('build-languages', function(callback) {
     // Load already processed strings
     fs.readFile(processedLangTemplate, {encoding:'utf8'}, function(err, processedLangTemplateContent) {
-        if (err) errorHandler(err);
+        if (err) {
+            errorHandler(err);
+        }
 
         fs.readFile(currentLangTemplate, {encoding:'utf8'}, function(err, currentLangTemplateContent) {
-            if (err) errorHandler(err);
+            if (err) {
+                errorHandler(err);
+            }
 
             // Extract the lang files string sets and compare one against the other
             var diff = compareStringSets(
@@ -205,14 +185,16 @@ gulp.task('build-languages', function(callback) {
             );
 
             if (!diff) {
-                // Nothing changed, move on witht the build
+                // Nothing changed, move on with the build
                 callback();
             } else {
                 // Update all lang files and overwrite the old lang template to mark all the updated strings
                 // as valid and prevent further modifications once we're done with the updates.
                 updateLangFiles(diff, function() {
                     fs.writeFile(processedLangTemplate, currentLangTemplateContent , function(err) {
-                        if (err) errorHandler(err);
+                        if (err) {
+                            errorHandler(err);
+                        }
 
                         callback();
                     });
