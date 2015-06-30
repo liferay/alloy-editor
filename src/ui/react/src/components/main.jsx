@@ -91,10 +91,10 @@
             // this does not include a situation when he clicks on some button, part of
             // editor's UI.
 
-            // It is not easy to debounce _setUIHidden on click, because if we
-            // debounce it, when the handler is being invoked, the target may be no more part
+            // It is not easy to debounce _setUIHidden on mousedown, because if we
+            // debounce it, when the handler is being invoked, the target might be no more part
             // of the editor's UI - onActionPerformed causes re-render.
-            this._clickListener = function (event) {
+            this._mousedownListener = function (event) {
                 this._setUIHidden(event.target);
             }.bind(this);
 
@@ -103,7 +103,7 @@
             }, this.props.eventsDelay, this);
 
             editor.once('contentDom', function() {
-                document.addEventListener('click', this._clickListener);
+                document.addEventListener('mousedown', this._mousedownListener);
                 document.addEventListener('keydown', this._keyDownListener);
             }.bind(this));
         },
@@ -188,8 +188,8 @@
          * @method componentWillUnmount
          */
         componentWillUnmount: function() {
-            if (this._clickListener) {
-                document.removeEventListener('click', this._clickListener);
+            if (this._mousedownListener) {
+                document.removeEventListener('mousedown', this._mousedownListener);
             }
 
             if (this._keyDownListener) {
