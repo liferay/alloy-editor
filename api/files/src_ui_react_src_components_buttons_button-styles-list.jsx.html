@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.4</b>
+                        API Docs for Version: <b>0.3.5</b>
                     </p>
                 </li>
             </div>
@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -235,7 +236,7 @@
                                     getDefaultProps: function() {
                                         return {
                                             circular: false,
-                                            descendants: &#x27;.alloy-editor-toolbar-element&#x27;,
+                                            descendants: &#x27;.toolbar-element&#x27;,
                                             keys: {
                                                 dismiss: [27],
                                                 dismissNext: [39],
@@ -254,8 +255,8 @@
                                      */
                                     render: function() {
                                         return (
-                                            &lt;div className=&quot;alloy-editor-dropdown&quot; onFocus={this.focus} onKeyDown={this.handleKey} tabIndex=&quot;0&quot;&gt;
-                                                &lt;ul className=&quot;alloy-editor-listbox&quot; role=&quot;listbox&quot;&gt;
+                                            &lt;div className=&quot;dropdown&quot; onFocus={this.focus} onKeyDown={this.handleKey} tabIndex=&quot;0&quot;&gt;
+                                                &lt;ul className=&quot;listbox&quot; role=&quot;listbox&quot;&gt;
                                                     &lt;AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} /&gt;
                             
                                                     &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.blockStyles} styles={this._blockStyles} /&gt;

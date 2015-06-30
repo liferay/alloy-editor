@@ -1,5 +1,7 @@
 /**
- * AlloyEditor, Copyright 2014-2015, Liferay, Inc.
+ * AlloyEditor v0.3.5.
+ *
+ * Copyright 2014-2015, Liferay, Inc.
  * All rights reserved.
  *
  * This source code is licensed under the GNU LGPL-style license found in the
@@ -582,6 +584,11 @@ CKEDITOR.disableAutoInline = true;
         this._editor = editor;
     }
 
+    Table.HEADING_BOTH = 'Both';
+    Table.HEADING_COL = 'Column';
+    Table.HEADING_NONE = 'None';
+    Table.HEADING_ROW = 'Row';
+
     Table.prototype = {
         constructor: Table,
 
@@ -612,7 +619,8 @@ CKEDITOR.disableAutoInline = true;
                 }
             }
 
-            this.setAttributes(table, config.attrs || {});
+            this.setAttributes(table, config.attrs);
+            this.setHeading(table, config.heading);
 
             // Insert the table element if we're creating one.
             editor.insertElement(table);
@@ -658,6 +666,48 @@ CKEDITOR.disableAutoInline = true;
         },
 
         /**
+         * Returns which heading style is set for the given table.
+         *
+         * @method getHeading
+         * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
+         * @return {String} The heading of the table. Expected values are `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
+         */
+        getHeading: function getHeading(table) {
+            table = table || this.getFromSelection();
+
+            if (!table) {
+                return null;
+            }
+
+            var rowHeadingSettings = table.$.tHead !== null;
+
+            var colHeadingSettings = true;
+
+            // Check if all of the first cells in every row are TH
+            for (var row = 0; row < table.$.rows.length; row++) {
+                // If just one cell isn't a TH then it isn't a header column
+                var cell = table.$.rows[row].cells[0];
+
+                if (cell && cell.nodeName.toLowerCase() !== 'th') {
+                    colHeadingSettings = false;
+                    break;
+                }
+            }
+
+            var headingSettings = Table.HEADING_NONE;
+
+            if (rowHeadingSettings) {
+                headingSettings = Table.HEADING_ROW;
+            }
+
+            if (colHeadingSettings) {
+                headingSettings = headingSettings === Table.HEADING_ROW ? Table.HEADING_BOTH : Table.HEADING_COL;
+            }
+
+            return headingSettings;
+        },
+
+        /**
          * Removes a table from the editor.
          *
          * @method remove
@@ -673,10 +723,10 @@ CKEDITOR.disableAutoInline = true;
 
                 if (table) {
                     // If the table's parent has only one child remove it as well (unless it's a table cell, or the editable element) (#5416, #6289, #12110)
-                    var parent = table.getParent(),
-                        editable = editor.editable();
+                    var parent = table.getParent();
+                    var editable = editor.editable();
 
-                    if (parent.getChildCount() == 1 && !parent.is('td', 'th') && !parent.equals(editable)) {
+                    if (parent.getChildCount() === 1 && !parent.is('td', 'th') && !parent.equals(editable)) {
                         table = parent;
                     }
 
@@ -696,9 +746,109 @@ CKEDITOR.disableAutoInline = true;
          * @param {Object} attrs The attributes which have to be assigned to the table
          */
         setAttributes: function setAttributes(table, attrs) {
-            Object.keys(attrs).forEach(function (attr) {
-                table.setAttribute(attr, attrs[attr]);
-            });
+            if (attrs) {
+                Object.keys(attrs).forEach(function (attr) {
+                    table.setAttribute(attr, attrs[attr]);
+                });
+            }
+        },
+
+        /**
+         * Sets the appropriate table heading style to a table.
+         *
+         * @method setHeading
+         * @param {CKEDITOR.dom.element} table The table element to which the heading should be set. If null, it will be retrieved from the current selection.
+         * @param {String} heading The table heading to be set. Accepted values are: `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
+         */
+        setHeading: function setHeading(table, heading) {
+            table = table || this.getFromSelection();
+
+            var i, newCell;
+            var tableHead;
+            var tableBody = table.getElementsByTag('tbody').getItem(0);
+
+            var tableHeading = this.getHeading(table);
+            var hadColHeading = tableHeading === Table.HEADING_COL || tableHeading === Table.HEADING_BOTH;
+
+            var needColHeading = heading === Table.HEADING_COL || heading === Table.HEADING_BOTH;
+            var needRowHeading = heading === Table.HEADING_ROW || heading === Table.HEADING_BOTH;
+
+            // If we need row heading and don't have a <thead> element yet, move the
+            // first row of the table to the head and convert the nodes to <th> ones.
+            if (!table.$.tHead && needRowHeading) {
+                var tableFirstRow = tableBody.getElementsByTag('tr').getItem(0);
+                var tableFirstRowChildCount = tableFirstRow.getChildCount();
+
+                // Change TD to TH:
+                for (i = 0; i < tableFirstRowChildCount; i++) {
+                    var cell = tableFirstRow.getChild(i);
+
+                    // Skip bookmark nodes. (#6155)
+                    if (cell.type === CKEDITOR.NODE_ELEMENT && !cell.data('cke-bookmark')) {
+                        cell.renameNode('th');
+                        cell.setAttribute('scope', 'col');
+                    }
+                }
+
+                tableHead = this._createElement(table.$.createTHead());
+                tableHead.append(tableFirstRow.remove());
+            }
+
+            // If we don't need row heading and we have a <thead> element, move the
+            // row out of there and into the <tbody> element.
+            if (table.$.tHead !== null && !needRowHeading) {
+                // Move the row out of the THead and put it in the TBody:
+                tableHead = this._createElement(table.$.tHead);
+
+                var previousFirstRow = tableBody.getFirst();
+
+                while (tableHead.getChildCount() > 0) {
+                    var newFirstRow = tableHead.getFirst();
+                    var newFirstRowChildCount = newFirstRow.getChildCount();
+
+                    for (i = 0; i < newFirstRowChildCount; i++) {
+                        newCell = newFirstRow.getChild(i);
+
+                        if (newCell.type === CKEDITOR.NODE_ELEMENT) {
+                            newCell.renameNode('td');
+                            newCell.removeAttribute('scope');
+                        }
+                    }
+
+                    newFirstRow.insertBefore(previousFirstRow);
+                }
+
+                tableHead.remove();
+            }
+
+            tableHeading = this.getHeading(table);
+            var hasColHeading = tableHeading === Table.HEADING_COL || tableHeading === Table.HEADING_BOTH;
+
+            // If we need column heading and the table doesn't have it, convert every first cell in
+            // every row into a `<th scope="row">` element.
+            if (!hasColHeading && needColHeading) {
+                for (i = 0; i < table.$.rows.length; i++) {
+                    if (table.$.rows[i].cells[0].nodeName.toLowerCase() !== 'th') {
+                        newCell = new CKEDITOR.dom.element(table.$.rows[i].cells[0]);
+                        newCell.renameNode('th');
+                        newCell.setAttribute('scope', 'row');
+                    }
+                }
+            }
+
+            // If we don't need column heading but the table has it, convert every first cell in every
+            // row back into a `<td>` element.
+            if (hadColHeading && !needColHeading) {
+                for (i = 0; i < table.$.rows.length; i++) {
+                    var row = new CKEDITOR.dom.element(table.$.rows[i]);
+
+                    if (row.getParent().getName() === 'tbody') {
+                        newCell = new CKEDITOR.dom.element(row.$.cells[0]);
+                        newCell.renameNode('td');
+                        newCell.removeAttribute('scope');
+                    }
+                }
+            }
         },
 
         /**
@@ -713,6 +863,20 @@ CKEDITOR.disableAutoInline = true;
             return new CKEDITOR.dom.element(name, this._editor.document);
         }
     };
+
+    CKEDITOR.on('instanceReady', function (event) {
+        var headingCommands = [Table.HEADING_NONE, Table.HEADING_ROW, Table.HEADING_COL, Table.HEADING_BOTH];
+
+        var tableUtils = new Table(event.editor);
+
+        headingCommands.forEach(function (heading) {
+            event.editor.addCommand('tableHeading' + heading, {
+                exec: function exec(editor) {
+                    tableUtils.setHeading(null, heading);
+                }
+            });
+        });
+    });
 
     CKEDITOR.Table = CKEDITOR.Table || Table;
 })();
@@ -3853,7 +4017,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         test: AlloyEditor.SelectionTest.text
     }, {
         name: 'table',
-        buttons: ['tableRow', 'tableColumn', 'tableCell', 'tableRemove'],
+        buttons: ['tableHeading', 'tableRow', 'tableColumn', 'tableCell', 'tableRemove'],
         getArrowBoxClasses: AlloyEditor.SelectionGetArrowBoxClasses.table,
         setPosition: AlloyEditor.SelectionSetPosition.table,
         test: AlloyEditor.SelectionTest.table
@@ -4316,12 +4480,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             // Check for active state
             if (AlloyEditor.Lang.isFunction(this.isActive) && this.isActive()) {
-                stateClasses += 'alloy-editor-button-pressed';
+                stateClasses += 'button-pressed';
             }
 
             // Check for disabled state
             if (AlloyEditor.Lang.isFunction(this.isDisabled) && this.isDisabled()) {
-                stateClasses += ' alloy-editor-button-disabled';
+                stateClasses += ' button-disabled';
             }
 
             return stateClasses;
@@ -5258,7 +5422,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             domElement.removeClass('alloy-editor-invisible');
 
             this._animate(function () {
-                domElement.addClass('alloy-editor-toolbar-transition alloy-editor-visible');
+                domElement.addClass('toolbar-transition alloy-editor-visible');
                 domElement.setStyles({
                     left: endPoint[0],
                     top: endPoint[1],
@@ -5415,12 +5579,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.bold, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-bold', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.bold },
-                React.createElement('span', { className: 'alloy-editor-icon-bold' })
+                React.createElement('span', { className: 'icon-bold' })
             );
         }
     });
@@ -5502,7 +5666,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-camera' },
+                { className: 'camera' },
                 React.createElement(
                     'video',
                     { ref: 'videoContainer' },
@@ -5510,10 +5674,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 ),
                 React.createElement(
                     'button',
-                    { className: 'alloy-editor-camera-shoot', onClick: this.takePhoto, ref: 'buttonTakePhoto' },
+                    { className: 'camera-shoot', onClick: this.takePhoto, ref: 'buttonTakePhoto' },
                     'Take photo'
                 ),
-                React.createElement('canvas', { className: 'alloy-editor-camera-canvas', ref: 'canvasContainer' })
+                React.createElement('canvas', { className: 'camera-canvas', ref: 'canvasContainer' })
             );
         },
 
@@ -5680,8 +5844,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
                 return React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.camera, className: 'alloy-editor-button', 'data-type': 'button-image-camera', disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.camera },
-                    React.createElement('span', { className: 'alloy-editor-icon-camera' })
+                    { 'aria-label': AlloyEditor.Strings.camera, className: 'button', 'data-type': 'button-image-camera', disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.camera },
+                    React.createElement('span', { className: 'icon-camera' })
                 );
             }
         }
@@ -5766,12 +5930,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.code, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-code', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.code },
-                React.createElement('span', { className: 'alloy-editor-icon-code' })
+                React.createElement('span', { className: 'icon-code' })
             );
         }
     });
@@ -5845,10 +6009,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {String} The class name of the Widget.
          */
         _getClassName: function _getClassName() {
-            var className = 'alloy-editor-toolbar-element';
+            var className = 'toolbar-element';
 
             if (this.props.icon) {
-                className += ' alloy-editor-icon-' + this.props.icon;
+                className += ' icon-' + this.props.icon;
             }
 
             return className;
@@ -5931,7 +6095,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         getDefaultProps: function getDefaultProps() {
             return {
                 circular: false,
-                descendants: '.alloy-editor-toolbar-element',
+                descendants: '.toolbar-element',
                 keys: {
                     dismiss: [27],
                     dismissNext: [39],
@@ -5951,10 +6115,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
         render: function render() {
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-dropdown', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
+                { className: 'dropdown', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
                 React.createElement(
                     'ul',
-                    { className: 'alloy-editor-listbox', id: this.props.listId, role: 'listbox' },
+                    { className: 'listbox', id: this.props.listId, role: 'listbox' },
                     this._renderActions(this.props.commands)
                 )
             );
@@ -6064,12 +6228,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.h1, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-h1', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.h1 },
-                React.createElement('span', { className: 'alloy-editor-icon-h1' })
+                React.createElement('span', { className: 'icon-h1' })
             );
         }
     });
@@ -6153,12 +6317,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.h2, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-h2', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.h2 },
-                React.createElement('span', { className: 'alloy-editor-icon-h2' })
+                React.createElement('span', { className: 'icon-h2' })
             );
         }
     });
@@ -6244,8 +6408,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
         render: function render() {
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.horizontalrule, className: 'alloy-editor-button', 'data-type': 'button-hline', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.horizontalrule },
-                React.createElement('span', { className: 'alloy-editor-icon-separator' })
+                { 'aria-label': AlloyEditor.Strings.horizontalrule, className: 'button', 'data-type': 'button-hline', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.horizontalrule },
+                React.createElement('span', { className: 'icon-separator' })
             );
         }
     });
@@ -6332,12 +6496,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-left', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
-                React.createElement('span', { className: 'alloy-editor-icon-align-left' })
+                React.createElement('span', { className: 'icon-align-left' })
             );
         }
     });
@@ -6424,12 +6588,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-right', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
-                React.createElement('span', { className: 'alloy-editor-icon-align-right' })
+                React.createElement('span', { className: 'icon-align-right' })
             );
         }
     });
@@ -6500,8 +6664,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 null,
                 React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.image, className: 'alloy-editor-button', 'data-type': 'button-image', onClick: this.handleClick, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.image },
-                    React.createElement('span', { className: 'alloy-editor-icon-image' })
+                    { 'aria-label': AlloyEditor.Strings.image, className: 'button', 'data-type': 'button-image', onClick: this.handleClick, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.image },
+                    React.createElement('span', { className: 'icon-image' })
                 ),
                 React.createElement('input', { onChange: this._onInputChange, ref: 'fileInput', style: inputSyle, type: 'file' })
             );
@@ -6641,12 +6805,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.italic, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-italic', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.italic },
-                React.createElement('span', { className: 'alloy-editor-icon-italic' })
+                React.createElement('span', { className: 'icon-italic' })
             );
         }
     });
@@ -6728,22 +6892,22 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-container-edit-link' },
+                { className: 'container-edit-link' },
                 React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.removeLink, className: 'alloy-editor-button', disabled: !this.state.element, onClick: this._removeLink, title: AlloyEditor.Strings.remove },
-                    React.createElement('span', { className: 'alloy-editor-icon-unlink' })
+                    { 'aria-label': AlloyEditor.Strings.removeLink, className: 'button', disabled: !this.state.element, onClick: this._removeLink, title: AlloyEditor.Strings.remove },
+                    React.createElement('span', { className: 'icon-unlink' })
                 ),
                 React.createElement(
                     'div',
-                    { className: 'alloy-editor-container-input' },
-                    React.createElement('input', { className: 'alloy-editor-input', onChange: this._handleLinkChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
-                    React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'alloy-editor-button alloy-editor-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
+                    { className: 'container-input' },
+                    React.createElement('input', { className: 'input', onChange: this._handleLinkChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                    React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'button icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
                 ),
                 React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.confirm, className: 'alloy-editor-button', disabled: !this.state.linkHref, onClick: this._updateLink, title: AlloyEditor.Strings.confirm },
-                    React.createElement('span', { className: 'alloy-editor-icon-ok' })
+                    { 'aria-label': AlloyEditor.Strings.confirm, className: 'button', disabled: !this.state.linkHref, onClick: this._updateLink, title: AlloyEditor.Strings.confirm },
+                    React.createElement('span', { className: 'icon-ok' })
                 )
             );
         },
@@ -6935,7 +7099,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             if (this.props.renderExclusive) {
                 return React.createElement(AlloyEditor.ButtonLinkEdit, this.props);
@@ -6943,7 +7107,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 return React.createElement(
                     'button',
                     { 'aria-label': AlloyEditor.Strings.link, className: cssClass, 'data-type': 'button-link', onClick: this.props.requestExclusive.bind(ButtonLink.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
-                    React.createElement('span', { className: 'alloy-editor-icon-link' })
+                    React.createElement('span', { className: 'icon-link' })
                 );
             }
         }
@@ -7029,12 +7193,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.numberedlist, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-ol', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.numberedlist },
-                React.createElement('span', { className: 'alloy-editor-icon-numbered-list' })
+                React.createElement('span', { className: 'icon-numbered-list' })
             );
         }
     });
@@ -7121,12 +7285,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-left', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
-                React.createElement('span', { className: 'alloy-editor-icon-align-left' })
+                React.createElement('span', { className: 'icon-align-left' })
             );
         }
     });
@@ -7213,12 +7377,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-right', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
-                React.createElement('span', { className: 'alloy-editor-icon-align-right' })
+                React.createElement('span', { className: 'icon-align-right' })
             );
         }
     });
@@ -7305,12 +7469,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-center', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
-                React.createElement('span', { className: 'alloy-editor-icon-align-center' })
+                React.createElement('span', { className: 'icon-align-center' })
             );
         }
     });
@@ -7397,12 +7561,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.alignJustify, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-justify', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignJustify },
-                React.createElement('span', { className: 'alloy-editor-icon-align-justified' })
+                React.createElement('span', { className: 'icon-align-justified' })
             );
         }
     });
@@ -7487,12 +7651,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.quote, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-quote', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.quote },
-                React.createElement('span', { className: 'alloy-editor-icon-quote' })
+                React.createElement('span', { className: 'icon-quote' })
             );
         }
     });
@@ -7574,8 +7738,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
         render: function render() {
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.removeformat, className: 'alloy-editor-button', 'data-type': 'button-removeformat', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.removeformat },
-                React.createElement('span', { className: 'alloy-editor-icon-removeformat' })
+                { 'aria-label': AlloyEditor.Strings.removeformat, className: 'button', 'data-type': 'button-removeformat', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.removeformat },
+                React.createElement('span', { className: 'icon-removeformat' })
             );
         }
     });
@@ -7660,12 +7824,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.strike, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-strike', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.strike },
-                React.createElement('span', { className: 'alloy-editor-icon-strike' })
+                React.createElement('span', { className: 'icon-strike' })
             );
         }
     });
@@ -7695,7 +7859,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             if (this.props.styles && this.props.styles.length) {
                 return React.createElement(
                     "span",
-                    { className: "alloy-editor-list-header" },
+                    { className: "list-header" },
                     this.props.name
                 );
             } else {
@@ -7789,7 +7953,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 { role: 'option' },
                 React.createElement(
                     'button',
-                    { className: 'alloy-editor-toolbar-element', onClick: this._removeStyles, tabIndex: this.props.tabIndex },
+                    { className: 'toolbar-element', onClick: this._removeStyles, tabIndex: this.props.tabIndex },
                     AlloyEditor.Strings.normal
                 )
             );
@@ -7878,7 +8042,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         render: function render() {
             // We need to use dangerouselySetInnterHTML since we're not in control of the style
             // preview that is generated by CKEditor.
-            return React.createElement('button', { className: 'alloy-editor-toolbar-element', dangerouslySetInnerHTML: { __html: this._preview }, onClick: this._onClick, tabIndex: this.props.tabIndex });
+            return React.createElement('button', { className: 'toolbar-element', dangerouslySetInnerHTML: { __html: this._preview }, onClick: this._onClick, tabIndex: this.props.tabIndex });
         },
 
         /**
@@ -7976,7 +8140,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         getDefaultProps: function getDefaultProps() {
             return {
                 circular: false,
-                descendants: '.alloy-editor-toolbar-element',
+                descendants: '.toolbar-element',
                 keys: {
                     dismiss: [27],
                     dismissNext: [39],
@@ -7996,10 +8160,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
         render: function render() {
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-dropdown', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
+                { className: 'dropdown', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
                 React.createElement(
                     'ul',
-                    { className: 'alloy-editor-listbox', role: 'listbox' },
+                    { className: 'listbox', role: 'listbox' },
                     React.createElement(AlloyEditor.ButtonStylesListItemRemove, { editor: this.props.editor }),
                     React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.blockStyles, styles: this._blockStyles }),
                     this._renderStylesItems(this._blockStyles),
@@ -8137,19 +8301,19 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-container-styles alloy-editor-has-dropdown' },
+                { className: 'container-dropdown has-dropdown' },
                 React.createElement(
                     'button',
-                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.styles + ' ' + activeStyle, className: 'alloy-editor-toolbar-element', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.styles + ' ' + activeStyle },
+                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.styles + ' ' + activeStyle, className: 'toolbar-element', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.styles + ' ' + activeStyle },
                     React.createElement(
                         'div',
-                        { className: 'alloy-editor-container' },
+                        { className: 'container' },
                         React.createElement(
                             'span',
-                            { className: 'alloy-editor-selected-style' },
+                            { className: 'container-dropdown-selected-item' },
                             activeStyle
                         ),
-                        React.createElement('span', { className: 'alloy-editor-icon-arrow' })
+                        React.createElement('span', { className: 'icon-arrow' })
                     )
                 ),
                 buttonStylesList
@@ -8296,12 +8460,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.subscript, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-subscript', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.subscript },
-                React.createElement('span', { className: 'alloy-editor-icon-subscript' })
+                React.createElement('span', { className: 'icon-subscript' })
             );
         }
     });
@@ -8386,12 +8550,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.superscript, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-superscript', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.superscript },
-                React.createElement('span', { className: 'alloy-editor-icon-superscript' })
+                React.createElement('span', { className: 'icon-superscript' })
             );
         }
     });
@@ -8486,11 +8650,11 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-container alloy-editor-has-dropdown' },
+                { className: 'container has-dropdown' },
                 React.createElement(
                     'button',
-                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.cell, 'aria-owns': buttonCommandsListId, className: 'alloy-editor-button', onClick: this.props.toggleDropdown, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.cell },
-                    React.createElement('span', { className: 'alloy-editor-icon-cell' })
+                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.cell, 'aria-owns': buttonCommandsListId, className: 'button', onClick: this.props.toggleDropdown, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.cell },
+                    React.createElement('span', { className: 'icon-cell' })
                 ),
                 buttonCommandsList
             );
@@ -8621,11 +8785,11 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-container alloy-editor-has-dropdown' },
+                { className: 'container has-dropdown' },
                 React.createElement(
                     'button',
-                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.column, 'aria-owns': buttonCommandsListId, className: 'alloy-editor-button', onClick: this.props.toggleDropdown, role: 'listbox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.column },
-                    React.createElement('span', { className: 'alloy-editor-icon-column' })
+                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.column, 'aria-owns': buttonCommandsListId, className: 'button', onClick: this.props.toggleDropdown, role: 'listbox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.column },
+                    React.createElement('span', { className: 'icon-column' })
                 ),
                 buttonCommandsList
             );
@@ -8811,7 +8975,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-container-edit-table' },
+                { className: 'container-edit-table' },
                 React.createElement(
                     'label',
                     { htmlFor: rowsId },
@@ -8819,8 +8983,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 ),
                 React.createElement(
                     'div',
-                    { className: 'alloy-editor-container-input small' },
-                    React.createElement('input', { className: 'alloy-editor-input', id: rowsId, onChange: this._handleChange.bind(this, 'rows'), min: '1', onKeyDown: this._handleKeyDown, placeholder: 'Rows', ref: 'rows', type: 'number', value: this.state.rows })
+                    { className: 'container-input small' },
+                    React.createElement('input', { className: 'input', id: rowsId, onChange: this._handleChange.bind(this, 'rows'), min: '1', onKeyDown: this._handleKeyDown, placeholder: 'Rows', ref: 'rows', type: 'number', value: this.state.rows })
                 ),
                 React.createElement(
                     'label',
@@ -8829,19 +8993,162 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 ),
                 React.createElement(
                     'div',
-                    { className: 'alloy-editor-container-input small' },
-                    React.createElement('input', { className: 'alloy-editor-input', id: colsId, onChange: this._handleChange.bind(this, 'cols'), min: '1', onKeyDown: this._handleKeyDown, placeholder: 'Colums', ref: 'cols', type: 'number', value: this.state.cols })
+                    { className: 'container-input small' },
+                    React.createElement('input', { className: 'input', id: colsId, onChange: this._handleChange.bind(this, 'cols'), min: '1', onKeyDown: this._handleKeyDown, placeholder: 'Colums', ref: 'cols', type: 'number', value: this.state.cols })
                 ),
                 React.createElement(
                     'button',
-                    { 'aria-label': 'Confirm', className: 'alloy-editor-button', onClick: this._createTable },
-                    React.createElement('span', { className: 'alloy-editor-icon-ok' })
+                    { 'aria-label': 'Confirm', className: 'button', onClick: this._createTable },
+                    React.createElement('span', { className: 'icon-ok' })
                 )
             );
         }
     });
 
     AlloyEditor.Buttons[ButtonTableEdit.key] = AlloyEditor.ButtonTableEdit = ButtonTableEdit;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * The ButtonTableHeading class provides functionality to work with table heading.
+     *
+     * @class ButtonTableHeading
+     */
+    var ButtonTableHeading = React.createClass({
+        displayName: 'ButtonTableHeading',
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * List of the commands the button is able to handle.
+             *
+             * @property {Array} commands
+             */
+            commands: React.PropTypes.arrayOf(React.PropTypes.object),
+
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * Indicates whether the styles list is expanded or not.
+             *
+             * @property {Boolean} expanded
+             */
+            expanded: React.PropTypes.bool,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @property {Number} tabIndex
+             */
+            tabIndex: React.PropTypes.number,
+
+            /**
+             * Callback provided by the button host to notify when the styles list has been expanded.
+             *
+             * @property {Function} toggleDropdown
+             */
+            toggleDropdown: React.PropTypes.func
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default tableRow
+             */
+            key: 'tableHeading'
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            var buttonCommandsList;
+            var buttonCommandsListId;
+
+            if (this.props.expanded) {
+                buttonCommandsListId = ButtonTableHeading.key + 'List';
+                buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, { commands: this._getCommands(), editor: this.props.editor, listId: buttonCommandsListId, onDismiss: this.props.toggleDropdown });
+            }
+
+            var activeHeading = new CKEDITOR.Table(this.props.editor.get('nativeEditor')).getHeading();
+            var activeHeadingIntro = AlloyEditor.Strings.headers + ':';
+            var activeHeadingLabel = AlloyEditor.Strings['headers' + activeHeading];
+
+            return React.createElement(
+                'div',
+                { className: 'container-dropdown-xl has-dropdown' },
+                React.createElement(
+                    'button',
+                    { 'aria-expanded': this.props.expanded, 'aria-label': '', className: 'toolbar-element', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: '' },
+                    React.createElement(
+                        'div',
+                        { className: 'container' },
+                        React.createElement(
+                            'span',
+                            { className: 'container-dropdown-selected-item' },
+                            activeHeadingIntro,
+                            ' ',
+                            React.createElement(
+                                'strong',
+                                null,
+                                activeHeadingLabel
+                            )
+                        ),
+                        React.createElement('span', { className: 'icon-arrow' })
+                    )
+                ),
+                buttonCommandsList
+            );
+        },
+
+        /**
+         * Returns a list of commands. If a list of commands was passed
+         * as property `commands`, it will take a precedence over the default ones.
+         *
+         * @method _getCommands
+         * @return {Array} The list of available commands.
+         */
+        _getCommands: function _getCommands() {
+            return this.props.commands || [{
+                command: 'tableHeadingNone',
+                label: AlloyEditor.Strings.headersNone
+            }, {
+                command: 'tableHeadingRow',
+                label: AlloyEditor.Strings.headersRow
+            }, {
+                command: 'tableHeadingColumn',
+                label: AlloyEditor.Strings.headersColumn
+            }, {
+                command: 'tableHeadingBoth',
+                label: AlloyEditor.Strings.headersBoth
+            }];
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonTableHeading.key] = AlloyEditor.ButtonTableHeading = ButtonTableHeading;
 })();
 'use strict';
 
@@ -8902,8 +9209,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
         render: function render() {
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.deleteTable, className: 'alloy-editor-button', 'data-type': 'button-table-remove', onClick: this._removeTable, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.deleteTable },
-                React.createElement('span', { className: 'alloy-editor-icon-close' })
+                { 'aria-label': AlloyEditor.Strings.deleteTable, className: 'button', 'data-type': 'button-table-remove', onClick: this._removeTable, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.deleteTable },
+                React.createElement('span', { className: 'icon-close' })
             );
         },
 
@@ -9013,11 +9320,11 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-container alloy-editor-has-dropdown' },
+                { className: 'container has-dropdown' },
                 React.createElement(
                     'button',
-                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.row, 'aria-owns': buttonCommandsListId, className: 'alloy-editor-button', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.row },
-                    React.createElement('span', { className: 'alloy-editor-icon-row' })
+                    { 'aria-expanded': this.props.expanded, 'aria-label': AlloyEditor.Strings.row, 'aria-owns': buttonCommandsListId, className: 'button', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.row },
+                    React.createElement('span', { className: 'icon-row' })
                 ),
                 buttonCommandsList
             );
@@ -9112,8 +9419,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
             } else {
                 return React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.table, className: 'alloy-editor-button', 'data-type': 'button-table', onClick: this.props.requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.table },
-                    React.createElement('span', { className: 'alloy-editor-icon-table' })
+                    { 'aria-label': AlloyEditor.Strings.table, className: 'button', 'data-type': 'button-table', onClick: this.props.requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.table },
+                    React.createElement('span', { className: 'icon-table' })
                 );
             }
         }
@@ -9190,7 +9497,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 linkUtils.remove(linkUtils.getFromSelection());
             } else {
                 linkUtils.create(this._getHref(), {
-                    'class': 'alloy-editor-twitter-link',
+                    'class': 'twitter-link',
                     'target': '_blank'
                 });
             }
@@ -9217,12 +9524,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.twitter, className: cssClass, 'data-type': 'button-twitter', onClick: this.handleClick, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.twitter },
-                React.createElement('span', { className: 'alloy-editor-icon-twitter' })
+                React.createElement('span', { className: 'icon-twitter' })
             );
         },
 
@@ -9333,12 +9640,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.bulletedlist, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-ul', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.bulletedlist },
-                React.createElement('span', { className: 'alloy-editor-icon-bulleted-list' })
+                React.createElement('span', { className: 'icon-bulleted-list' })
             );
         }
     });
@@ -9423,12 +9730,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'button ' + this.getStateClasses();
 
             return React.createElement(
                 'button',
                 { 'aria-label': AlloyEditor.Strings.underline, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-underline', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.underline },
-                React.createElement('span', { className: 'alloy-editor-icon-underline' })
+                React.createElement('span', { className: 'icon-underline' })
             );
         }
     });
@@ -9516,7 +9823,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         getDefaultProps: function getDefaultProps() {
             return {
                 circular: true,
-                descendants: '.alloy-editor-button',
+                descendants: '.button',
                 gutterExclusive: {
                     left: 10,
                     top: 0
@@ -9572,7 +9879,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 { 'aria-label': AlloyEditor.Strings.add, className: className, 'data-tabindex': this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: 'toolbar', tabIndex: '-1' },
                 React.createElement(
                     'div',
-                    { className: 'alloy-editor-container' },
+                    { className: 'container' },
                     buttons
                 )
             );
@@ -9594,8 +9901,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 if (this.props.selectionData && this.props.selectionData.region) {
                     buttons = React.createElement(
                         'button',
-                        { 'aria-label': AlloyEditor.Strings.add, className: 'alloy-editor-button alloy-editor-button-add', onClick: this.props.requestExclusive.bind(this, ToolbarAdd.key), title: AlloyEditor.Strings.add },
-                        React.createElement('span', { className: 'alloy-editor-icon-add' })
+                        { 'aria-label': AlloyEditor.Strings.add, className: 'button button-add', onClick: this.props.requestExclusive.bind(this, ToolbarAdd.key), title: AlloyEditor.Strings.add },
+                        React.createElement('span', { className: 'icon-add' })
                     );
                 }
             }
@@ -9611,10 +9918,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {String} The class name which have to be applied to the DOM element.
          */
         _getToolbarClassName: function _getToolbarClassName() {
-            var cssClass = 'alloy-editor-toolbar-add';
+            var cssClass = 'toolbar-add';
 
             if (this.props.renderExclusive) {
-                cssClass = 'alloy-editor-toolbar ' + this.getArrowBoxClasses();
+                cssClass = 'toolbar ' + this.getArrowBoxClasses();
             }
 
             return cssClass;
@@ -9754,7 +10061,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         getDefaultProps: function getDefaultProps() {
             return {
                 circular: true,
-                descendants: '.alloy-editor-button, .alloy-editor-toolbar-element',
+                descendants: '.button, .toolbar-element',
                 keys: {
                     dismiss: [27],
                     next: [39, 40],
@@ -9782,7 +10089,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                     arrowBoxClasses = this.getArrowBoxClasses();
                 }
 
-                var cssClasses = 'alloy-editor-toolbar-styles ' + arrowBoxClasses;
+                var cssClasses = 'toolbar-styles ' + arrowBoxClasses;
 
                 var buttons = this.getToolbarButtons(currentSelection.buttons, {
                     selectionType: currentSelection.name
@@ -9793,7 +10100,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                     { 'aria-label': AlloyEditor.Strings.styles, className: cssClasses, 'data-tabindex': this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: 'toolbar', tabIndex: '-1' },
                     React.createElement(
                         'div',
-                        { className: 'alloy-editor-container' },
+                        { className: 'container' },
                         buttons
                     )
                 );
@@ -9974,7 +10281,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         getDefaultProps: function getDefaultProps() {
             return {
                 circular: true,
-                descendants: '[class*=alloy-editor-toolbar-]',
+                descendants: '[class*=toolbar-]',
                 eventsDelay: 0,
                 keys: {
                     next: 9
@@ -9999,10 +10306,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
             // this does not include a situation when he clicks on some button, part of
             // editor's UI.
 
-            // It is not easy to debounce _setUIHidden on click, because if we
-            // debounce it, when the handler is being invoked, the target may be no more part
+            // It is not easy to debounce _setUIHidden on mousedown, because if we
+            // debounce it, when the handler is being invoked, the target might be no more part
             // of the editor's UI - onActionPerformed causes re-render.
-            this._clickListener = (function (event) {
+            this._mousedownListener = (function (event) {
                 this._setUIHidden(event.target);
             }).bind(this);
 
@@ -10011,7 +10318,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             }, this.props.eventsDelay, this);
 
             editor.once('contentDom', (function () {
-                document.addEventListener('click', this._clickListener);
+                document.addEventListener('mousedown', this._mousedownListener);
                 document.addEventListener('keydown', this._keyDownListener);
             }).bind(this));
         },
@@ -10096,8 +10403,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method componentWillUnmount
          */
         componentWillUnmount: function componentWillUnmount() {
-            if (this._clickListener) {
-                document.removeEventListener('click', this._clickListener);
+            if (this._mousedownListener) {
+                document.removeEventListener('mousedown', this._mousedownListener);
             }
 
             if (this._keyDownListener) {
@@ -10137,7 +10444,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             return React.createElement(
                 'div',
-                { className: 'alloy-editor-toolbars', onKeyDown: this.handleKey },
+                { className: 'toolbars', onKeyDown: this.handleKey },
                 toolbars
             );
         },

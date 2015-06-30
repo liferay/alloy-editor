@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.4</b>
+                        API Docs for Version: <b>0.3.5</b>
                     </p>
                 </li>
             </div>
@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -245,9 +246,9 @@
                                         }
                             
                                         return (
-                                            &lt;div className=&quot;alloy-editor-container alloy-editor-has-dropdown&quot;&gt;
-                                                &lt;button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.cell} aria-owns={buttonCommandsListId} className=&quot;alloy-editor-button&quot; onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.cell}&gt;
-                                                    &lt;span className=&quot;alloy-editor-icon-cell&quot;&gt;&lt;/span&gt;
+                                            &lt;div className=&quot;container has-dropdown&quot;&gt;
+                                                &lt;button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.cell} aria-owns={buttonCommandsListId} className=&quot;button&quot; onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.cell}&gt;
+                                                    &lt;span className=&quot;icon-cell&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                                 {buttonCommandsList}
                                             &lt;/div&gt;
