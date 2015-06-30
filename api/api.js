@@ -40,6 +40,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonTableCell",
         "ButtonTableColumn",
         "ButtonTableEdit",
+        "ButtonTableHeading",
         "ButtonTableRemove",
         "ButtonTableRow",
         "ButtonTwitter",

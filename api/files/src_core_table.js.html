@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.4</b>
+                        API Docs for Version: <b>0.3.6</b>
                     </p>
                 </li>
             </div>
@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -177,6 +178,11 @@
                                     this._editor = editor;
                                 }
                             
+                                Table.HEADING_BOTH = &#x27;Both&#x27;;
+                                Table.HEADING_COL = &#x27;Column&#x27;;
+                                Table.HEADING_NONE = &#x27;None&#x27;;
+                                Table.HEADING_ROW = &#x27;Row&#x27;;
+                            
                                 Table.prototype = {
                                     constructor: Table,
                             
@@ -207,7 +213,8 @@
                                             }
                                         }
                             
-                                        this.setAttributes(table, config.attrs || {});
+                                        this.setAttributes(table, config.attrs);
+                                        this.setHeading(table, config.heading);
                             
                                         // Insert the table element if we&#x27;re creating one.
                                         editor.insertElement(table);
@@ -253,6 +260,48 @@
                                     },
                             
                                     /**
+                                     * Returns which heading style is set for the given table.
+                                     *
+                                     * @method getHeading
+                                     * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
+                                     * @return {String} The heading of the table. Expected values are &#x60;CKEDITOR.Table.NONE&#x60;, &#x60;CKEDITOR.Table.ROW&#x60;, &#x60;CKEDITOR.Table.COL&#x60; and &#x60;CKEDITOR.Table.BOTH&#x60;.
+                                     */
+                                    getHeading: function(table) {
+                                        table = table || this.getFromSelection();
+                            
+                                        if (!table) {
+                                            return null;
+                                        }
+                            
+                                        var rowHeadingSettings = table.$.tHead !== null;
+                            
+                                        var colHeadingSettings = true;
+                            
+                                        // Check if all of the first cells in every row are TH
+                                        for (var row = 0; row &lt; table.$.rows.length; row++) {
+                                            // If just one cell isn&#x27;t a TH then it isn&#x27;t a header column
+                                            var cell = table.$.rows[row].cells[0];
+                            
+                                            if (cell &amp;&amp; cell.nodeName.toLowerCase() !== &#x27;th&#x27;) {
+                                                colHeadingSettings = false;
+                                                break;
+                                            }
+                                        }
+                            
+                                        var headingSettings = Table.HEADING_NONE;
+                            
+                                        if (rowHeadingSettings) {
+                                            headingSettings = Table.HEADING_ROW;
+                                        }
+                            
+                                        if (colHeadingSettings) {
+                                            headingSettings = (headingSettings === Table.HEADING_ROW ? Table.HEADING_BOTH : Table.HEADING_COL);
+                                        }
+                            
+                                        return headingSettings;
+                                    },
+                            
+                                    /**
                                      * Removes a table from the editor.
                                      *
                                      * @method remove
@@ -268,10 +317,10 @@
                             
                                             if (table) {
                                                 // If the table&#x27;s parent has only one child remove it as well (unless it&#x27;s a table cell, or the editable element) (#5416, #6289, #12110)
-                                                var parent = table.getParent(),
-                                                    editable = editor.editable();
+                                                var parent = table.getParent();
+                                                var editable = editor.editable();
                             
-                                                if (parent.getChildCount() == 1 &amp;&amp; !parent.is(&#x27;td&#x27;, &#x27;th&#x27;) &amp;&amp; !parent.equals(editable)) {
+                                                if (parent.getChildCount() === 1 &amp;&amp; !parent.is(&#x27;td&#x27;, &#x27;th&#x27;) &amp;&amp; !parent.equals(editable)) {
                                                     table = parent;
                                                 }
                             
@@ -291,9 +340,109 @@
                                      * @param {Object} attrs The attributes which have to be assigned to the table
                                      */
                                     setAttributes: function(table, attrs) {
-                                        Object.keys(attrs).forEach(function(attr) {
-                                            table.setAttribute(attr, attrs[attr]);
-                                        });
+                                        if (attrs) {
+                                            Object.keys(attrs).forEach(function(attr) {
+                                                table.setAttribute(attr, attrs[attr]);
+                                            });
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Sets the appropriate table heading style to a table.
+                                     *
+                                     * @method setHeading
+                                     * @param {CKEDITOR.dom.element} table The table element to which the heading should be set. If null, it will be retrieved from the current selection.
+                                     * @param {String} heading The table heading to be set. Accepted values are: &#x60;CKEDITOR.Table.NONE&#x60;, &#x60;CKEDITOR.Table.ROW&#x60;, &#x60;CKEDITOR.Table.COL&#x60; and &#x60;CKEDITOR.Table.BOTH&#x60;.
+                                     */
+                                    setHeading: function(table, heading) {
+                                        table = table || this.getFromSelection();
+                            
+                                        var i, newCell;
+                                        var tableHead;
+                                        var tableBody = table.getElementsByTag(&#x27;tbody&#x27;).getItem(0);
+                            
+                                        var tableHeading = this.getHeading(table);
+                                        var hadColHeading = (tableHeading === Table.HEADING_COL || tableHeading === Table.HEADING_BOTH);
+                            
+                                        var needColHeading = heading === Table.HEADING_COL || heading === Table.HEADING_BOTH;
+                                        var needRowHeading = heading === Table.HEADING_ROW || heading === Table.HEADING_BOTH;
+                            
+                                        // If we need row heading and don&#x27;t have a &lt;thead&gt; element yet, move the
+                                        // first row of the table to the head and convert the nodes to &lt;th&gt; ones.
+                                        if (!table.$.tHead &amp;&amp; needRowHeading) {
+                                            var tableFirstRow = tableBody.getElementsByTag(&#x27;tr&#x27;).getItem(0);
+                                            var tableFirstRowChildCount = tableFirstRow.getChildCount();
+                            
+                                            // Change TD to TH:
+                                            for (i = 0; i &lt; tableFirstRowChildCount; i++) {
+                                                var cell = tableFirstRow.getChild(i);
+                            
+                                                // Skip bookmark nodes. (#6155)
+                                                if (cell.type === CKEDITOR.NODE_ELEMENT &amp;&amp; !cell.data(&#x27;cke-bookmark&#x27;)) {
+                                                    cell.renameNode(&#x27;th&#x27;);
+                                                    cell.setAttribute(&#x27;scope&#x27;, &#x27;col&#x27;);
+                                                }
+                                            }
+                            
+                                            tableHead = this._createElement(table.$.createTHead());
+                                            tableHead.append(tableFirstRow.remove());
+                                        }
+                            
+                                        // If we don&#x27;t need row heading and we have a &lt;thead&gt; element, move the
+                                        // row out of there and into the &lt;tbody&gt; element.
+                                        if (table.$.tHead !== null &amp;&amp; !needRowHeading) {
+                                            // Move the row out of the THead and put it in the TBody:
+                                            tableHead = this._createElement(table.$.tHead);
+                            
+                                            var previousFirstRow = tableBody.getFirst();
+                            
+                                            while (tableHead.getChildCount() &gt; 0) {
+                                                var newFirstRow = tableHead.getFirst();
+                                                var newFirstRowChildCount = newFirstRow.getChildCount();
+                            
+                                                for (i = 0; i &lt; newFirstRowChildCount; i++) {
+                                                    newCell = newFirstRow.getChild(i);
+                            
+                                                    if (newCell.type === CKEDITOR.NODE_ELEMENT) {
+                                                        newCell.renameNode(&#x27;td&#x27;);
+                                                        newCell.removeAttribute(&#x27;scope&#x27;);
+                                                    }
+                                                }
+                            
+                                                newFirstRow.insertBefore(previousFirstRow);
+                                            }
+                            
+                                            tableHead.remove();
+                                        }
+                            
+                                        tableHeading = this.getHeading(table);
+                                        var hasColHeading = (tableHeading === Table.HEADING_COL || tableHeading === Table.HEADING_BOTH);
+                            
+                                        // If we need column heading and the table doesn&#x27;t have it, convert every first cell in
+                                        // every row into a &#x60;&lt;th scope=&quot;row&quot;&gt;&#x60; element.
+                                        if (!hasColHeading &amp;&amp; needColHeading) {
+                                            for (i = 0; i &lt; table.$.rows.length; i++) {
+                                                if (table.$.rows[i].cells[0].nodeName.toLowerCase() !== &#x27;th&#x27;) {
+                                                    newCell = new CKEDITOR.dom.element(table.$.rows[i].cells[0]);
+                                                    newCell.renameNode(&#x27;th&#x27;);
+                                                    newCell.setAttribute(&#x27;scope&#x27;, &#x27;row&#x27;);
+                                                }
+                                            }
+                                        }
+                            
+                                        // If we don&#x27;t need column heading but the table has it, convert every first cell in every
+                                        // row back into a &#x60;&lt;td&gt;&#x60; element.
+                                        if (hadColHeading &amp;&amp; !needColHeading) {
+                                            for (i = 0; i &lt; table.$.rows.length; i++) {
+                                                var row = new CKEDITOR.dom.element(table.$.rows[i]);
+                            
+                                                if (row.getParent().getName() === &#x27;tbody&#x27;) {
+                                                    newCell = new CKEDITOR.dom.element(row.$.cells[0]);
+                                                    newCell.renameNode(&#x27;td&#x27;);
+                                                    newCell.removeAttribute(&#x27;scope&#x27;);
+                                                }
+                                            }
+                                        }
                                     },
                             
                                     /**
@@ -308,6 +457,20 @@
                                         return new CKEDITOR.dom.element(name, this._editor.document);
                                     }
                                 };
+                            
+                                CKEDITOR.on(&#x27;instanceReady&#x27;, function(event) {
+                                    var headingCommands = [Table.HEADING_NONE, Table.HEADING_ROW, Table.HEADING_COL, Table.HEADING_BOTH];
+                            
+                                    var tableUtils = new Table(event.editor);
+                            
+                                    headingCommands.forEach(function(heading) {
+                                        event.editor.addCommand(&#x27;tableHeading&#x27; + heading, {
+                                            exec: function(editor) {
+                                                tableUtils.setHeading(null, heading);
+                                            }
+                                        });
+                                    });
+                                });
                             
                                 CKEDITOR.Table = CKEDITOR.Table || Table;
                             }());

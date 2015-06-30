@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.4</b>
+                        API Docs for Version: <b>0.3.6</b>
                     </p>
                 </li>
             </div>
@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -180,13 +181,13 @@
                                      * @return {String} A string with the arrow box CSS classes.
                                      */
                                     getArrowBoxClasses: function() {
-                                        var arrowBoxClasses = &#x27;alloy-editor-arrow-box&#x27;;
+                                        var arrowBoxClasses = &#x27;ae-arrow-box&#x27;;
                             
                                         if (AlloyEditor.Lang.isFunction(this.getInteractionPoint) &amp;&amp; this.getInteractionPoint()) {
                                             if (this.getInteractionPoint().direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                                                arrowBoxClasses += &#x27; alloy-editor-arrow-box-top&#x27;;
+                                                arrowBoxClasses += &#x27; ae-arrow-box-top&#x27;;
                                             } else {
-                                                arrowBoxClasses += &#x27; alloy-editor-arrow-box-bottom&#x27;;
+                                                arrowBoxClasses += &#x27; ae-arrow-box-bottom&#x27;;
                                             }
                                         }
                             

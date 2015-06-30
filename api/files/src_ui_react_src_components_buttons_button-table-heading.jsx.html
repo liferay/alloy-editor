@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/buttons/button-link-edit.jsx - alloyeditor</title>
+    <title>src/ui/react/src/components/buttons/button-table-heading.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -158,7 +158,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-link-edit.jsx</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-table-heading.jsx</code></h1>
                             </div>
                             
                             <div class="file">
@@ -166,16 +166,58 @@
                             (function () {
                                 &#x27;use strict&#x27;;
                             
-                                var KEY_ENTER = 13;
-                                var KEY_ESC = 27;
-                            
                                 /**
-                                 * The ButtonEditLink class provides functionality for creating and editing a link in a document.
-                                 * Provides UI for creating, editing and removing a link.
+                                 * The ButtonTableHeading class provides functionality to work with table heading.
                                  *
-                                 * @class ButtonLinkEdit
+                                 * @class ButtonTableHeading
                                  */
-                                var ButtonLinkEdit = React.createClass({
+                                var ButtonTableHeading = React.createClass({
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * List of the commands the button is able to handle.
+                                         *
+                                         * @property {Array} commands
+                                         */
+                                        commands: React.PropTypes.arrayOf(React.PropTypes.object),
+                            
+                                        /**
+                                         * The editor instance where the component is being used.
+                                         *
+                                         * @property {Object} editor
+                                         */
+                                        editor: React.PropTypes.object.isRequired,
+                            
+                                        /**
+                                         * Indicates whether the styles list is expanded or not.
+                                         *
+                                         * @property {Boolean} expanded
+                                         */
+                                        expanded: React.PropTypes.bool,
+                            
+                                        /**
+                                         * The label that should be used for accessibility purposes.
+                                         *
+                                         * @property {String} label
+                                         */
+                                        label: React.PropTypes.string,
+                            
+                                        /**
+                                         * The tabIndex of the button in its toolbar current state. A value other than -1
+                                         * means that the button has focus and is the active element.
+                                         *
+                                         * @property {Number} tabIndex
+                                         */
+                                        tabIndex: React.PropTypes.number,
+                            
+                                        /**
+                                         * Callback provided by the button host to notify when the styles list has been expanded.
+                                         *
+                                         * @property {Function} toggleDropdown
+                                         */
+                                        toggleDropdown: React.PropTypes.func
+                                    },
+                            
                                     // Lifecycle. Provides static properties to the widget.
                                     statics: {
                                         /**
@@ -183,42 +225,9 @@
                                          *
                                          * @static
                                          * @property {String} key
-                                         * @default linkEdit
+                                         * @default tableRow
                                          */
-                                        key: &#x27;linkEdit&#x27;
-                                    },
-                            
-                                    /**
-                                     * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
-                                     *
-                                     * Focuses on the link input to immediately allow editing.
-                                     *
-                                     * @method componentDidMount
-                                     */
-                                    componentDidMount: function () {
-                                        // We need to wait for the next rendering cycle before focusing to avoid undesired
-                                        // scrolls on the page
-                                        if (window.requestAnimationFrame) {
-                                            window.requestAnimationFrame(this._focusLinkInput);
-                                        } else {
-                                            setTimeout(this._focusLinkInput, 0);
-                                        }
-                                    },
-                            
-                                    /**
-                                     * Lifecycle. Invoked once before the component is mounted.
-                                     * The return value will be used as the initial value of this.state.
-                                     *
-                                     * @method getInitialState
-                                     */
-                                    getInitialState: function() {
-                                        var link = new CKEDITOR.Link(this.props.editor.get(&#x27;nativeEditor&#x27;)).getFromSelection();
-                                        var href = link ? link.getAttribute(&#x27;href&#x27;) : &#x27;&#x27;;
-                            
-                                        return {
-                                            element: link,
-                                            linkHref: href
-                                        };
+                                        key: &#x27;tableHeading&#x27;
                                     },
                             
                                     /**
@@ -228,137 +237,61 @@
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var clearLinkStyle = {
-                                            opacity: this.state.linkHref ? 1 : 0
-                                        };
+                                        var buttonCommandsList;
+                                        var buttonCommandsListId;
+                            
+                                        if (this.props.expanded) {
+                                            buttonCommandsListId = ButtonTableHeading.key + &#x27;List&#x27;;
+                                            buttonCommandsList = &lt;AlloyEditor.ButtonCommandsList commands={this._getCommands()} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} /&gt;
+                                        }
+                            
+                                        var activeHeading = new CKEDITOR.Table(this.props.editor.get(&#x27;nativeEditor&#x27;)).getHeading();
+                                        var activeHeadingIntro = AlloyEditor.Strings.headers + &#x27;:&#x27;;
+                                        var activeHeadingLabel = AlloyEditor.Strings[&#x27;headers&#x27; + activeHeading];
                             
                                         return (
-                                            &lt;div className=&quot;ae-container-edit-link&quot;&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;ae-button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
-                                                    &lt;span className=&quot;ae-icon-unlink&quot;&gt;&lt;/span&gt;
+                                            &lt;div className=&quot;ae-container-dropdown-xl ae-has-dropdown&quot;&gt;
+                                                &lt;button aria-expanded={this.props.expanded} aria-label=&quot;&quot; className=&quot;ae-toolbar-element&quot; onClick={this.props.toggleDropdown} role=&quot;combobox&quot; tabIndex={this.props.tabIndex} title=&quot;&quot;&gt;
+                                                    &lt;div className=&quot;ae-container&quot;&gt;
+                                                        &lt;span className=&quot;ae-container-dropdown-selected-item&quot;&gt;{activeHeadingIntro} &lt;strong&gt;{activeHeadingLabel}&lt;/strong&gt;&lt;/span&gt;
+                                                        &lt;span className=&quot;ae-icon-arrow&quot;&gt;&lt;/span&gt;
+                                                    &lt;/div&gt;
                                                 &lt;/button&gt;
-                                                &lt;div className=&quot;ae-container-input&quot;&gt;
-                                                    &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
-                                                    &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;ae-button ae-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
-                                                &lt;/div&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;ae-button&quot; disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
-                                                    &lt;span className=&quot;ae-icon-ok&quot;&gt;&lt;/span&gt;
-                                                &lt;/button&gt;
+                                                {buttonCommandsList}
                                             &lt;/div&gt;
                                         );
                                     },
                             
                                     /**
-                                     * Clears the link input. This only changes the component internal state, but does not
-                                     * affect the link element of the editor. Only the _removeLink and _updateLink methods
-                                     * are translated to the editor element.
+                                     * Returns a list of commands. If a list of commands was passed
+                                     * as property &#x60;commands&#x60;, it will take a precedence over the default ones.
                                      *
-                                     * @protected
-                                     * @method _clearLink
+                                     * @method _getCommands
+                                     * @return {Array} The list of available commands.
                                      */
-                                    _clearLink: function() {
-                                        this.setState({
-                                            linkHref: &#x27;&#x27;
-                                        });
-                                    },
-                            
-                                    /**
-                                     * Focuses the user cursor on the widget&#x27;s input.
-                                     *
-                                     * @protected
-                                     * @method _focusLinkInput
-                                     */
-                                    _focusLinkInput: function() {
-                                        React.findDOMNode(this.refs.linkInput).focus();
-                                    },
-                            
-                                    /**
-                                     * Monitors key interaction inside the input element to respond to the keys:
-                                     * - Enter: Creates/updates the link.
-                                     * - Escape: Discards the changes.
-                                     *
-                                     * @protected
-                                     * @method _handleKeyDown
-                                     * @param {SyntheticEvent} event The keyboard event.
-                                     */
-                                    _handleKeyDown: function(event) {
-                                        if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
-                                            event.preventDefault();
-                                        }
-                            
-                                        if (event.keyCode === KEY_ENTER) {
-                                            this._updateLink();
-                                        } else if (event.keyCode === KEY_ESC) {
-                                            this.props.cancelExclusive();
-                            
-                                            this.props.editor.get(&#x27;nativeEditor&#x27;).focus();
-                                        }
-                                    },
-                            
-                                    /**
-                                     * Updates the component state when the link input changes on user interaction.
-                                     *
-                                     * @protected
-                                     * @method _handleLinkChange
-                                     * @param {SyntheticEvent} event The change event.
-                                     */
-                                    _handleLinkChange: function(event) {
-                                        this.setState({
-                                            linkHref: event.target.value
-                                        });
-                                    },
-                            
-                                    /**
-                                     * Removes the link in the editor element.
-                                     *
-                                     * @protected
-                                     * @method _removeLink
-                                     */
-                                    _removeLink: function() {
-                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                                        var linkUtils = new CKEDITOR.Link(editor);
-                                        var selection = editor.getSelection();
-                                        var bookmarks = selection.createBookmarks();
-                            
-                                        linkUtils.remove(this.state.element);
-                            
-                                        selection.selectBookmarks(bookmarks);
-                            
-                                        // We need to cancelExclusive with the bound parameters in case the button is used
-                                        // inside another in exclusive mode (such is the case of the link button)
-                                        this.props.cancelExclusive();
-                            
-                                        editor.fire(&#x27;actionPerformed&#x27;, this);
-                                    },
-                            
-                                    /**
-                                     * Updates the link in the editor element. If the element didn&#x27;t exist previously, it will
-                                     * create a new &lt;a&gt; element with the href specified in the link input.
-                                     *
-                                     * @protected
-                                     * @method _updateLink
-                                     */
-                                    _updateLink: function() {
-                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                                        var linkUtils = new CKEDITOR.Link(editor);
-                            
-                                        if (this.state.linkHref) {
-                                            if (this.state.element) {
-                                                linkUtils.update(this.state.linkHref, this.state.element);
-                                            } else {
-                                                linkUtils.create(this.state.linkHref);
+                                    _getCommands: function () {
+                                        return this.props.commands || [
+                                            {
+                                                command: &#x27;tableHeadingNone&#x27;,
+                                                label: AlloyEditor.Strings.headersNone
+                                            },
+                                            {
+                                                command: &#x27;tableHeadingRow&#x27;,
+                                                label: AlloyEditor.Strings.headersRow
+                                            },
+                                            {
+                                                command: &#x27;tableHeadingColumn&#x27;,
+                                                label: AlloyEditor.Strings.headersColumn
+                                            },
+                                            {
+                                                command: &#x27;tableHeadingBoth&#x27;,
+                                                label: AlloyEditor.Strings.headersBoth
                                             }
-                            
-                                            editor.fire(&#x27;actionPerformed&#x27;, this);
-                                        }
-                            
-                                        // We need to cancelExclusive with the bound parameters in case the button is used
-                                        // inside another in exclusive mode (such is the case of the link button)
-                                        this.props.cancelExclusive();
+                                        ];
                                     }
                                 });
                             
-                                AlloyEditor.Buttons[ButtonLinkEdit.key] = AlloyEditor.ButtonLinkEdit = ButtonLinkEdit;
+                                AlloyEditor.Buttons[ButtonTableHeading.key] = AlloyEditor.ButtonTableHeading = ButtonTableHeading;
                             }());
                                 </pre>
                             </div>

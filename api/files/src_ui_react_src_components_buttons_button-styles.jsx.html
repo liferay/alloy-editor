@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.4</b>
+                        API Docs for Version: <b>0.3.6</b>
                     </p>
                 </li>
             </div>
@@ -96,6 +96,7 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -255,11 +256,11 @@
                                         }
                             
                                         return (
-                                            &lt;div className=&quot;alloy-editor-container-styles alloy-editor-has-dropdown&quot;&gt;
-                                                &lt;button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.styles + &#x27; &#x27; + activeStyle} className=&quot;alloy-editor-toolbar-element&quot; onClick={this.props.toggleDropdown} role=&quot;combobox&quot; tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.styles + &#x27; &#x27; + activeStyle}&gt;
-                                                    &lt;div className=&quot;alloy-editor-container&quot;&gt;
-                                                        &lt;span className=&quot;alloy-editor-selected-style&quot;&gt;{activeStyle}&lt;/span&gt;
-                                                        &lt;span className=&quot;alloy-editor-icon-arrow&quot;&gt;&lt;/span&gt;
+                                            &lt;div className=&quot;ae-container-dropdown ae-has-dropdown&quot;&gt;
+                                                &lt;button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.styles + &#x27; &#x27; + activeStyle} className=&quot;ae-toolbar-element&quot; onClick={this.props.toggleDropdown} role=&quot;combobox&quot; tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.styles + &#x27; &#x27; + activeStyle}&gt;
+                                                    &lt;div className=&quot;ae-container&quot;&gt;
+                                                        &lt;span className=&quot;ae-container-dropdown-selected-item&quot;&gt;{activeStyle}&lt;/span&gt;
+                                                        &lt;span className=&quot;ae-icon-arrow&quot;&gt;&lt;/span&gt;
                                                     &lt;/div&gt;
                                                 &lt;/button&gt;
                                                 {buttonStylesList}
