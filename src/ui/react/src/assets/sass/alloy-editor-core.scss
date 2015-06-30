@@ -8,310 +8,308 @@ $base-spacing: 10px;
 
 $IE9-ONLY: \9;
 
-.alloy-editor-ui {
-    .container, [class^=container-] {
-        @include align-items(center);
-        @include display(inline-flex);
-        @include flex-direction(row);
-        @include flex-wrap(wrap);
+.alloy-editor-container, [class*=alloy-editor-container-] {
+    @include align-items(center);
+    @include display(inline-flex);
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
 
-        box-sizing: border-box;
+    box-sizing: border-box;
 
-        *, *:after, *:before {
-            box-sizing: inherit;
-            color: inherit;
+    *, *:after, *:before {
+        box-sizing: inherit;
+        color: inherit;
+    }
+
+    input, textarea, keygen, select, button {
+        color: initial;
+    }
+
+    .alloy-editor-container, [class*=alloy-editor-container-], .alloy-editor-button, .alloy-editor-toolbar-element, label {
+        font-size: $base-font-size;
+        margin: 0;
+        position: relative;
+
+        &:not(:last-child) {
+            margin-right: $base-spacing;
         }
+    }
+}
 
-        input, textarea, keygen, select, button {
-            color: initial;
-        }
+.alloy-editor-has-dropdown {
+    display: block;
+    float: left $IE9-ONLY;
+    width: $base-button-width;
+}
 
-        .container, [class^=container-], .button, .toolbar-element, label {
-            font-size: $base-font-size;
-            margin: 0;
-            position: relative;
+IE10-PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
+    height: $base-button-height;
+    box-sizing: content-box;
+}
 
-            &:not(:last-child) {
-                margin-right: $base-spacing;
+.alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
+    line-height: 1;
+    padding: $base-spacing;
+    position: absolute;
+
+    input, textarea, keygen, select, button {
+        font-size: $base-font-size;
+    }
+
+    &.alloy-editor-toolbar-transition {
+        @include transition-property (height, left, opacity, top);
+        @include transition-duration (0.15s);
+        @include transition-timing-function (ease-out);
+    }
+
+    .alloy-editor-button, .alloy-editor-toolbar-element {
+        border-width: 0;
+        color: inherit;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+
+        &:hover, &:focus {
+            &:disabled, &.alloy-editor-button-disabled {
+                color: inherit;
             }
+        }
+
+        &:disabled, &.alloy-editor-button-disabled {
+            cursor: auto;
+            opacity: 0.3;
         }
     }
 
-    .has-dropdown {
-        display: block;
-        float: left $IE9-ONLY;
+    .alloy-editor-button {
+        height: $base-button-height;
         width: $base-button-width;
     }
+}
 
-    IE10-PLUS::-ms-reveal, [class^=toolbar] {
-        height: $base-button-height;
-        box-sizing: content-box;
-    }
+.alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
+    left: 0;
+    padding: $base-padding;
+    position: absolute;
+    top: $base-button-height + $base-spacing;
 
-    .toolbar, [class^=toolbar-] {
-        line-height: 1;
-        padding: $base-spacing;
-        position: absolute;
+    .alloy-editor-list-header {
+        display: inline-block;
+        margin: 3 * $base-padding 0 0 0;
 
-        input, textarea, keygen, select, button {
-            font-size: $base-font-size;
-        }
-
-        &.toolbar-transition {
-            @include transition-property (height, left, opacity, top);
-            @include transition-duration (0.15s);
-            @include transition-timing-function (ease-out);
-        }
-
-        .button, .toolbar-element {
-            border-width: 0;
-            color: inherit;
-            cursor: pointer;
-            margin: 0;
-            padding: 0;
-
-            &:hover, &:focus {
-                &:disabled, &.button-disabled {
-                    color: inherit;
-                }
-            }
-
-            &:disabled, &.button-disabled {
-                cursor: auto;
-                opacity: 0.3;
-            }
-        }
-
-        .button {
-            height: $base-button-height;
-            width: $base-button-width;
+        &:first-child {
+            margin-top: $base-padding;
         }
     }
 
-    .dropdown, [class^=dropdown-] {
-        left: 0;
-        padding: $base-padding;
-        position: absolute;
-        top: $base-button-height + $base-spacing;
-
-        .list-header {
-            display: inline-block;
-            margin: 3 * $base-padding 0 0 0;
-
-            &:first-child {
-                margin-top: $base-padding;
-            }
-        }
-
-        .toolbar-element {
-            * {
-                display: inline;
-            }
-
-            &[class^=icon-]:before {
-                padding-right: $base-padding;
-                vertical-align: middle;
-            }
-
-            height: 3em;
-            margin-right: 0;
-            min-width: 100%;
-            overflow: hidden;
-            padding-left: 2 * $base-padding;
-            text-align: left;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: auto;
-        }
-
-        .listbox {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
+    .alloy-editor-toolbar-element {
         * {
-            display: block $IE9-ONLY;
-        }
-    }
-
-    .container-edit-link, .container-edit-table {
-        height: $base-button-height $IE9-ONLY;
-
-        * {
-            float: left $IE9-ONLY;
+            display: inline;
         }
 
-        label {
-            position: relative $IE9-ONLY;
-            top: 50% $IE9-ONLY;
-            transform: translateY(-50%) $IE9-ONLY;
-        }
-
-        IE10-PLUS::-ms-reveal, label {
-            top: 0;
-            transform: translateY(0);
-        }
-    }
-
-    .container-input {
-        @include flex-wrap(nowrap);
-
-        padding-left: 4px;
-        width: 13 * $base-font-size;
-
-        &.medium {
-            width: 7 * $base-font-size;
-        }
-
-        &.small {
-            width: 3 * $base-font-size;
-        }
-
-        [class^=icon-] {
-            font-size: $base-button-height;
-            line-height: $base-button-height;
-        }
-
-        input, .input {
-            @include flex(1);
-
-            border-width: 0;
-            font-family: inherit;
-            height: auto;
-            line-height: normal;
-            margin: 0;
-            max-width: 100%;
-            outline: none;
-            padding: 0;
-
-            &::-ms-clear {
-                display: none;
-            }
-
-            display: inline-block $IE9-ONLY;
-            margin-left: -$base-padding $IE9-ONLY;
-            margin-top: $base-padding $IE9-ONLY;
-            padding-left: $base-padding $IE9-ONLY;
-            width: 13 * $base-font-size - $base-button-width $IE9-ONLY;
-
-            &:focus {
-                box-shadow: none;
-            }
-        }
-
-        .icon-remove {
-            float: right $IE9-ONLY;
-        }
-    }
-
-    .container-link {
-        padding: 2px 4px;
-
-        a, .link {
-            color: inherit;
-            display: inline-block;
-            font-size: $base-font-size;
-            font-weight: 300;
-            overflow: hidden;
-            max-width: 500px;
-            text-decoration: none;
-            text-overflow: ellipsis;
+        &[class*=alloy-editor-icon-]:before {
+            padding-right: $base-padding;
             vertical-align: middle;
-            white-space: nowrap;
+        }
 
-            &:hover, &:focus {
-                text-decoration: underline;
-            }
+        height: 3em;
+        margin-right: 0;
+        min-width: 100%;
+        overflow: hidden;
+        padding-left: 2 * $base-padding;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: auto;
+    }
 
-            &:before {
-                content: '\E020';
-                display: inline-block;
-                font-family: 'alloyeditor';
-                margin-right: 4px;
-                vertical-align: middle;
-            }
+    .alloy-editor-listbox {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
 
+    * {
+        display: block $IE9-ONLY;
+    }
+}
+
+.alloy-editor-container-edit-link, .alloy-editor-container-edit-table {
+    height: $base-button-height $IE9-ONLY;
+
+    * {
+        float: left $IE9-ONLY;
+    }
+
+    label {
+        position: relative $IE9-ONLY;
+        top: 50% $IE9-ONLY;
+        transform: translateY(-50%) $IE9-ONLY;
+    }
+
+    IE10-PLUS::-ms-reveal, label {
+        top: 0;
+        transform: translateY(0);
+    }
+}
+
+.alloy-editor-container-input {
+    @include flex-wrap(nowrap);
+
+    padding-left: 4px;
+    width: 13 * $base-font-size;
+
+    &.medium {
+        width: 7 * $base-font-size;
+    }
+
+    &.small {
+        width: 3 * $base-font-size;
+    }
+
+    [class*=alloy-editor-icon-] {
+        font-size: $base-button-height;
+        line-height: $base-button-height;
+    }
+
+    input, .alloy-editor-input {
+        @include flex(1);
+
+        border-width: 0;
+        font-family: inherit;
+        height: auto;
+        line-height: normal;
+        margin: 0;
+        max-width: 100%;
+        outline: none;
+        padding: 0;
+
+        &::-ms-clear {
+            display: none;
+        }
+
+        display: inline-block $IE9-ONLY;
+        margin-left: -$base-padding $IE9-ONLY;
+        margin-top: $base-padding $IE9-ONLY;
+        padding-left: $base-padding $IE9-ONLY;
+        width: 13 * $base-font-size - $base-button-width $IE9-ONLY;
+
+        &:focus {
+            box-shadow: none;
         }
     }
 
-    .container-dropdown, [class^=container-dropdown-] {
-        float: left $IE9-ONLY;
-        width: 5 * $base-button-width;
+    .alloy-editor-icon-remove {
+        float: right $IE9-ONLY;
+    }
+}
 
-        > .toolbar-element {
-            float: left $IE9-ONLY;
-            height: $base-button-height;
-            text-align: left;
+.alloy-editor-container-link {
+    padding: 2px 4px;
+
+    a, .alloy-editor-link {
+        color: inherit;
+        display: inline-block;
+        font-size: $base-font-size;
+        font-weight: 300;
+        overflow: hidden;
+        max-width: 500px;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        white-space: nowrap;
+
+        &:hover, &:focus {
+            text-decoration: underline;
+        }
+
+        &:before {
+            content: '\E020';
+            display: inline-block;
+            font-family: 'alloyeditor';
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+
+    }
+}
+
+.alloy-editor-container-dropdown, [class*=alloy-editor-container-dropdown-] {
+    float: left $IE9-ONLY;
+    width: 5 * $base-button-width;
+
+    > .alloy-editor-toolbar-element {
+        float: left $IE9-ONLY;
+        height: $base-button-height;
+        text-align: left;
+        width: 100%;
+
+        .alloy-editor-container {
+            height: 100% $IE9-ONLY;
             width: 100%;
 
-            .container {
-                height: 100% $IE9-ONLY;
-                width: 100%;
+            .alloy-editor-icon-arrow {
+                @include transform(rotate(90deg));
 
-                .icon-arrow {
-                    @include transform(rotate(90deg));
+                float: right $IE9-ONLY;
+            }
 
-                    float: right $IE9-ONLY;
-                }
+            .alloy-editor-container-dropdown-selected-item {
+                @include flex(1);
 
-                .container-dropdown-selected-item {
-                    @include flex(1);
+                display: inline-block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
 
-                    display: inline-block;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
+                position: relative $IE9-ONLY;
+                top: 50% $IE9-ONLY;
+                transform: translateY(-50%) $IE9-ONLY;
+            }
 
-                    position: relative $IE9-ONLY;
-                    top: 50% $IE9-ONLY;
-                    transform: translateY(-50%) $IE9-ONLY;
-                }
-
-                IE10-PLUS::-ms-reveal, .container-dropdown-selected-item {
-                    top: 0;
-                    transform: translateY(0);
-                }
+            IE10-PLUS::-ms-reveal, .alloy-editor-container-dropdown-selected-item {
+                top: 0;
+                transform: translateY(0);
             }
         }
     }
+}
 
-    .container-dropdown-xl {
-        width: 8 * $base-button-width;
-    }
+.alloy-editor-container-dropdown-xl {
+    width: 8 * $base-button-width;
+}
 
-    .twitter-link {
-        padding: 0 5px;
+.alloy-editor-twitter-link {
+    padding: 0 5px;
 
-        &:after {
-            content: '\E01E';
-            display: inline-block;
-            font-family: alloyeditor;
-            margin-left: 4px;
-            vertical-align: middle;
-        }
-    }
-
-    .camera {
-        align-items: center;
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-
-        .camera-canvas {
-            left: -10000px;
-            position: absolute;
-            top: -10000px;
-        }
-
-        .camera-shoot {
-            margin-top: 10px;
-        }
+    &:after {
+        content: '\E01E';
+        display: inline-block;
+        font-family: alloyeditor;
+        margin-left: 4px;
+        vertical-align: middle;
     }
 }
 
 .alloy-editor-placeholder:empty:not(:focus):before {
     content: attr(data-placeholder);
+}
+
+.alloy-editor-camera {
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+
+    .alloy-editor-camera-canvas {
+        left: -10000px;
+        position: absolute;
+        top: -10000px;
+    }
+
+    .alloy-editor-camera-shoot {
+        margin-top: 10px;
+    }
 }
 
 .alloy-editor-sr-only {

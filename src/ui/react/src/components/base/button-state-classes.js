@@ -24,12 +24,12 @@
 
             // Check for active state
             if (AlloyEditor.Lang.isFunction(this.isActive) && this.isActive()) {
-                stateClasses += 'button-pressed';
+                stateClasses += 'alloy-editor-button-pressed';
             }
 
             // Check for disabled state
             if (AlloyEditor.Lang.isFunction(this.isDisabled) && this.isDisabled()) {
-                stateClasses += ' button-disabled';
+                stateClasses += ' alloy-editor-button-disabled';
             }
 
             return stateClasses;

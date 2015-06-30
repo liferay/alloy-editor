@@ -37,7 +37,7 @@
 
             var buttonDOMNode = React.findDOMNode(buttonBold);
 
-            assert.strictEqual($(buttonDOMNode).hasClass('button-pressed'), true);
+            assert.strictEqual($(buttonDOMNode).hasClass('alloy-editor-button-pressed'), true);
         });
     });
 }());

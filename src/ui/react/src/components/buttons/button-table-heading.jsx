@@ -85,11 +85,11 @@
             var activeHeadingLabel = AlloyEditor.Strings['headers' + activeHeading];
 
             return (
-                <div className="container-dropdown-xl has-dropdown">
-                    <button aria-expanded={this.props.expanded} aria-label="" className="toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title="">
-                        <div className="container">
-                            <span className="container-dropdown-selected-item">{activeHeadingIntro} <strong>{activeHeadingLabel}</strong></span>
-                            <span className="icon-arrow"></span>
+                <div className="alloy-editor-container-dropdown-xl alloy-editor-has-dropdown">
+                    <button aria-expanded={this.props.expanded} aria-label="" className="alloy-editor-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title="">
+                        <div className="alloy-editor-container">
+                            <span className="alloy-editor-container-dropdown-selected-item">{activeHeadingIntro} <strong>{activeHeadingLabel}</strong></span>
+                            <span className="alloy-editor-icon-arrow"></span>
                         </div>
                     </button>
                     {buttonCommandsList}

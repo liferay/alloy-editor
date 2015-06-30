@@ -72,11 +72,11 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var cssClass = 'button ' + this.getStateClasses();
+            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
 
             return (
                 <button aria-label={AlloyEditor.Strings.bold} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-bold" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.bold}>
-                    <span className="icon-bold"></span>
+                    <span className="alloy-editor-icon-bold"></span>
                 </button>
             );
         }

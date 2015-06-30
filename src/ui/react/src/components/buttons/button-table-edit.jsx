@@ -150,19 +150,19 @@
             var colsId = time + 'cols';
 
             return (
-                <div className="container-edit-table">
+                <div className="alloy-editor-container-edit-table">
                     <label htmlFor={rowsId}>Rows</label>
-                    <div className="container-input small">
-                        <input className="input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} min="1" onKeyDown={this._handleKeyDown} placeholder="Rows" ref="rows" type="number" value={this.state.rows}></input>
+                    <div className="alloy-editor-container-input small">
+                        <input className="alloy-editor-input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} min="1" onKeyDown={this._handleKeyDown} placeholder="Rows" ref="rows" type="number" value={this.state.rows}></input>
                     </div>
 
                     <label htmlFor={colsId}>Cols</label>
-                    <div className="container-input small">
-                        <input className="input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" onKeyDown={this._handleKeyDown} placeholder="Colums" ref="cols" type="number" value={this.state.cols}></input>
+                    <div className="alloy-editor-container-input small">
+                        <input className="alloy-editor-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" onKeyDown={this._handleKeyDown} placeholder="Colums" ref="cols" type="number" value={this.state.cols}></input>
                     </div>
 
-                    <button aria-label="Confirm" className="button" onClick={this._createTable}>
-                        <span className="icon-ok"></span>
+                    <button aria-label="Confirm" className="alloy-editor-button" onClick={this._createTable}>
+                        <span className="alloy-editor-icon-ok"></span>
                     </button>
                 </div>
             );

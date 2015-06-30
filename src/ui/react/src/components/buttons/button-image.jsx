@@ -55,8 +55,8 @@
 
             return (
                 <div>
-                    <button aria-label={AlloyEditor.Strings.image} className="button" data-type="button-image" onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.image}>
-                        <span className="icon-image"></span>
+                    <button aria-label={AlloyEditor.Strings.image} className="alloy-editor-button" data-type="button-image" onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.image}>
+                        <span className="alloy-editor-icon-image"></span>
                     </button>
 
                     <input onChange={this._onInputChange} ref="fileInput" style={inputSyle} type="file" />

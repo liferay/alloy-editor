@@ -75,7 +75,7 @@
         getDefaultProps: function() {
             return {
                 circular: true,
-                descendants: '.button',
+                descendants: '.alloy-editor-button',
                 gutterExclusive: {
                     left: 10,
                     top: 0
@@ -128,7 +128,7 @@
 
             return (
                 <div aria-label={AlloyEditor.Strings.add} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role="toolbar" tabIndex="-1">
-                    <div className="container">
+                    <div className="alloy-editor-container">
                         {buttons}
                     </div>
                 </div>
@@ -150,8 +150,8 @@
             } else {
                 if (this.props.selectionData && this.props.selectionData.region) {
                     buttons = (
-                        <button aria-label={AlloyEditor.Strings.add} className="button button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}>
-                            <span className="icon-add"></span>
+                        <button aria-label={AlloyEditor.Strings.add} className="alloy-editor-button alloy-editor-button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}>
+                            <span className="alloy-editor-icon-add"></span>
                         </button>
                     );
                 }
@@ -168,10 +168,10 @@
          * @return {String} The class name which have to be applied to the DOM element.
          */
         _getToolbarClassName: function() {
-            var cssClass = 'toolbar-add';
+            var cssClass = 'alloy-editor-toolbar-add';
 
             if (this.props.renderExclusive) {
-                cssClass = 'toolbar ' + this.getArrowBoxClasses();
+                cssClass = 'alloy-editor-toolbar ' + this.getArrowBoxClasses();
             }
 
             return cssClass;

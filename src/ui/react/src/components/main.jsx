@@ -66,7 +66,7 @@
         getDefaultProps: function() {
             return {
                 circular: true,
-                descendants: '[class*=toolbar-]',
+                descendants: '[class*=alloy-editor-toolbar-]',
                 eventsDelay: 0,
                 keys: {
                     next: 9
@@ -228,7 +228,7 @@
             }.bind(this));
 
             return (
-                <div className="toolbars" onKeyDown={this.handleKey}>
+                <div className="alloy-editor-toolbars" onKeyDown={this.handleKey}>
                     {toolbars}
                 </div>
             );

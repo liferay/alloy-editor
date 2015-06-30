@@ -68,7 +68,7 @@
         getDefaultProps: function() {
             return {
                 circular: false,
-                descendants: '.toolbar-element',
+                descendants: '.alloy-editor-toolbar-element',
                 keys: {
                     dismiss: [27],
                     dismissNext: [39],
@@ -87,8 +87,8 @@
          */
         render: function() {
             return (
-                <div className="dropdown" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
-                    <ul className="listbox" id={this.props.listId} role="listbox">
+                <div className="alloy-editor-dropdown" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
+                    <ul className="alloy-editor-listbox" id={this.props.listId} role="listbox">
                         {this._renderActions(this.props.commands)}
                     </ul>
                 </div>

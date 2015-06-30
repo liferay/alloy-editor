@@ -90,7 +90,7 @@
         getDefaultProps: function() {
             return {
                 circular: true,
-                descendants: '.button, .toolbar-element',
+                descendants: '.alloy-editor-button, .alloy-editor-toolbar-element',
                 keys: {
                     dismiss: [27],
                     next: [39, 40],
@@ -118,7 +118,7 @@
                     arrowBoxClasses = this.getArrowBoxClasses();
                 }
 
-                var cssClasses = 'toolbar-styles ' + arrowBoxClasses;
+                var cssClasses = 'alloy-editor-toolbar-styles ' + arrowBoxClasses;
 
                 var buttons = this.getToolbarButtons(
                     currentSelection.buttons,
@@ -129,7 +129,7 @@
 
                 return (
                     <div aria-label={AlloyEditor.Strings.styles} className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role="toolbar" tabIndex="-1">
-                        <div className="container">
+                        <div className="alloy-editor-container">
                             {buttons}
                         </div>
                     </div>
