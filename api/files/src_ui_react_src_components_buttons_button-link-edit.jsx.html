@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.5</b>
+                        API Docs for Version: <b>0.3.4</b>
                     </p>
                 </li>
             </div>
@@ -96,7 +96,6 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
-                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -233,16 +232,16 @@
                                         };
                             
                                         return (
-                                            &lt;div className=&quot;container-edit-link&quot;&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
-                                                    &lt;span className=&quot;icon-unlink&quot;&gt;&lt;/span&gt;
+                                            &lt;div className=&quot;alloy-editor-container-edit-link&quot;&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;alloy-editor-button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
+                                                    &lt;span className=&quot;alloy-editor-icon-unlink&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
-                                                &lt;div className=&quot;container-input&quot;&gt;
-                                                    &lt;input className=&quot;input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
-                                                    &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;button icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
+                                                &lt;div className=&quot;alloy-editor-container-input&quot;&gt;
+                                                    &lt;input className=&quot;alloy-editor-input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                    &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;alloy-editor-button alloy-editor-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
                                                 &lt;/div&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;button&quot; disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
-                                                    &lt;span className=&quot;icon-ok&quot;&gt;&lt;/span&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;alloy-editor-button&quot; disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
+                                                    &lt;span className=&quot;alloy-editor-icon-ok&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             &lt;/div&gt;
                                         );

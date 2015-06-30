@@ -1,4 +1,4 @@
-.alloy-editor-ui .container, .alloy-editor-ui [class^=container-] {
+.alloy-editor-container, [class*=alloy-editor-container-] {
   -webkit-box-align: center;
   -moz-box-align: center;
   box-align: center;
@@ -33,34 +33,34 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   box-sizing: border-box; }
-  .alloy-editor-ui .container *, .alloy-editor-ui .container *:after, .alloy-editor-ui .container *:before, .alloy-editor-ui [class^=container-] *, .alloy-editor-ui [class^=container-] *:after, .alloy-editor-ui [class^=container-] *:before {
+  .alloy-editor-container *, .alloy-editor-container *:after, .alloy-editor-container *:before, [class*=alloy-editor-container-] *, [class*=alloy-editor-container-] *:after, [class*=alloy-editor-container-] *:before {
     box-sizing: inherit;
     color: inherit; }
-  .alloy-editor-ui .container input, .alloy-editor-ui .container textarea, .alloy-editor-ui .container keygen, .alloy-editor-ui .container select, .alloy-editor-ui .container button, .alloy-editor-ui [class^=container-] input, .alloy-editor-ui [class^=container-] textarea, .alloy-editor-ui [class^=container-] keygen, .alloy-editor-ui [class^=container-] select, .alloy-editor-ui [class^=container-] button {
+  .alloy-editor-container input, .alloy-editor-container textarea, .alloy-editor-container keygen, .alloy-editor-container select, .alloy-editor-container button, [class*=alloy-editor-container-] input, [class*=alloy-editor-container-] textarea, [class*=alloy-editor-container-] keygen, [class*=alloy-editor-container-] select, [class*=alloy-editor-container-] button {
     color: initial; }
-  .alloy-editor-ui .container .container, .alloy-editor-ui .container [class^=container-], .alloy-editor-ui .container .button, .alloy-editor-ui .container .toolbar-element, .alloy-editor-ui .container label, .alloy-editor-ui [class^=container-] .container, .alloy-editor-ui [class^=container-] [class^=container-], .alloy-editor-ui [class^=container-] .button, .alloy-editor-ui [class^=container-] .toolbar-element, .alloy-editor-ui [class^=container-] label {
+  .alloy-editor-container .alloy-editor-container, .alloy-editor-container [class*=alloy-editor-container-], .alloy-editor-container .alloy-editor-button, .alloy-editor-container .alloy-editor-toolbar-element, .alloy-editor-container label, [class*=alloy-editor-container-] .alloy-editor-container, [class*=alloy-editor-container-] [class*=alloy-editor-container-], [class*=alloy-editor-container-] .alloy-editor-button, [class*=alloy-editor-container-] .alloy-editor-toolbar-element, [class*=alloy-editor-container-] label {
     font-size: 14px;
     margin: 0;
     position: relative; }
-    .alloy-editor-ui .container .container:not(:last-child), .alloy-editor-ui .container [class^=container-]:not(:last-child), .alloy-editor-ui .container .button:not(:last-child), .alloy-editor-ui .container .toolbar-element:not(:last-child), .alloy-editor-ui .container label:not(:last-child), .alloy-editor-ui [class^=container-] .container:not(:last-child), .alloy-editor-ui [class^=container-] [class^=container-]:not(:last-child), .alloy-editor-ui [class^=container-] .button:not(:last-child), .alloy-editor-ui [class^=container-] .toolbar-element:not(:last-child), .alloy-editor-ui [class^=container-] label:not(:last-child) {
+    .alloy-editor-container .alloy-editor-container:not(:last-child), .alloy-editor-container [class*=alloy-editor-container-]:not(:last-child), .alloy-editor-container .alloy-editor-button:not(:last-child), .alloy-editor-container .alloy-editor-toolbar-element:not(:last-child), .alloy-editor-container label:not(:last-child), [class*=alloy-editor-container-] .alloy-editor-container:not(:last-child), [class*=alloy-editor-container-] [class*=alloy-editor-container-]:not(:last-child), [class*=alloy-editor-container-] .alloy-editor-button:not(:last-child), [class*=alloy-editor-container-] .alloy-editor-toolbar-element:not(:last-child), [class*=alloy-editor-container-] label:not(:last-child) {
       margin-right: 10px; }
 
-.alloy-editor-ui .has-dropdown {
+.alloy-editor-has-dropdown {
   display: block;
   float: left \9;
   width: 24px; }
 
-.alloy-editor-ui IE10-PLUS::-ms-reveal, .alloy-editor-ui [class^=toolbar] {
+IE10-PLUS::-ms-reveal, [class*=alloy-editor-toolbar] {
   height: 24px;
   box-sizing: content-box; }
 
-.alloy-editor-ui .toolbar, .alloy-editor-ui [class^=toolbar-] {
+.alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
   line-height: 1;
   padding: 10px;
   position: absolute; }
-  .alloy-editor-ui .toolbar input, .alloy-editor-ui .toolbar textarea, .alloy-editor-ui .toolbar keygen, .alloy-editor-ui .toolbar select, .alloy-editor-ui .toolbar button, .alloy-editor-ui [class^=toolbar-] input, .alloy-editor-ui [class^=toolbar-] textarea, .alloy-editor-ui [class^=toolbar-] keygen, .alloy-editor-ui [class^=toolbar-] select, .alloy-editor-ui [class^=toolbar-] button {
+  .alloy-editor-toolbar input, .alloy-editor-toolbar textarea, .alloy-editor-toolbar keygen, .alloy-editor-toolbar select, .alloy-editor-toolbar button, [class*=alloy-editor-toolbar-] input, [class*=alloy-editor-toolbar-] textarea, [class*=alloy-editor-toolbar-] keygen, [class*=alloy-editor-toolbar-] select, [class*=alloy-editor-toolbar-] button {
     font-size: 14px; }
-  .alloy-editor-ui .toolbar.toolbar-transition, .alloy-editor-ui [class^=toolbar-].toolbar-transition {
+  .alloy-editor-toolbar.alloy-editor-toolbar-transition, [class*=alloy-editor-toolbar-].alloy-editor-toolbar-transition {
     -webkit-transition-property: height, left, opacity, top;
     -moz-transition-property: height, left, opacity, top;
     transition-property: height, left, opacity, top;
@@ -70,32 +70,32 @@
     -webkit-transition-timing-function: ease-out;
     -moz-transition-timing-function: ease-out;
     transition-timing-function: ease-out; }
-  .alloy-editor-ui .toolbar .button, .alloy-editor-ui .toolbar .toolbar-element, .alloy-editor-ui [class^=toolbar-] .button, .alloy-editor-ui [class^=toolbar-] .toolbar-element {
+  .alloy-editor-toolbar .alloy-editor-button, .alloy-editor-toolbar .alloy-editor-toolbar-element, [class*=alloy-editor-toolbar-] .alloy-editor-button, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element {
     border-width: 0;
     color: inherit;
     cursor: pointer;
     margin: 0;
     padding: 0; }
-    .alloy-editor-ui .toolbar .button:hover:disabled, .alloy-editor-ui .toolbar .button:hover.button-disabled, .alloy-editor-ui .toolbar .button:focus:disabled, .alloy-editor-ui .toolbar .button:focus.button-disabled, .alloy-editor-ui .toolbar .toolbar-element:hover:disabled, .alloy-editor-ui .toolbar .toolbar-element:hover.button-disabled, .alloy-editor-ui .toolbar .toolbar-element:focus:disabled, .alloy-editor-ui .toolbar .toolbar-element:focus.button-disabled, .alloy-editor-ui [class^=toolbar-] .button:hover:disabled, .alloy-editor-ui [class^=toolbar-] .button:hover.button-disabled, .alloy-editor-ui [class^=toolbar-] .button:focus:disabled, .alloy-editor-ui [class^=toolbar-] .button:focus.button-disabled, .alloy-editor-ui [class^=toolbar-] .toolbar-element:hover:disabled, .alloy-editor-ui [class^=toolbar-] .toolbar-element:hover.button-disabled, .alloy-editor-ui [class^=toolbar-] .toolbar-element:focus:disabled, .alloy-editor-ui [class^=toolbar-] .toolbar-element:focus.button-disabled {
+    .alloy-editor-toolbar .alloy-editor-button:hover:disabled, .alloy-editor-toolbar .alloy-editor-button:hover.alloy-editor-button-disabled, .alloy-editor-toolbar .alloy-editor-button:focus:disabled, .alloy-editor-toolbar .alloy-editor-button:focus.alloy-editor-button-disabled, .alloy-editor-toolbar .alloy-editor-toolbar-element:hover:disabled, .alloy-editor-toolbar .alloy-editor-toolbar-element:hover.alloy-editor-button-disabled, .alloy-editor-toolbar .alloy-editor-toolbar-element:focus:disabled, .alloy-editor-toolbar .alloy-editor-toolbar-element:focus.alloy-editor-button-disabled, [class*=alloy-editor-toolbar-] .alloy-editor-button:hover:disabled, [class*=alloy-editor-toolbar-] .alloy-editor-button:hover.alloy-editor-button-disabled, [class*=alloy-editor-toolbar-] .alloy-editor-button:focus:disabled, [class*=alloy-editor-toolbar-] .alloy-editor-button:focus.alloy-editor-button-disabled, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element:hover:disabled, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element:hover.alloy-editor-button-disabled, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element:focus:disabled, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element:focus.alloy-editor-button-disabled {
       color: inherit; }
-    .alloy-editor-ui .toolbar .button:disabled, .alloy-editor-ui .toolbar .button.button-disabled, .alloy-editor-ui .toolbar .toolbar-element:disabled, .alloy-editor-ui .toolbar .toolbar-element.button-disabled, .alloy-editor-ui [class^=toolbar-] .button:disabled, .alloy-editor-ui [class^=toolbar-] .button.button-disabled, .alloy-editor-ui [class^=toolbar-] .toolbar-element:disabled, .alloy-editor-ui [class^=toolbar-] .toolbar-element.button-disabled {
+    .alloy-editor-toolbar .alloy-editor-button:disabled, .alloy-editor-toolbar .alloy-editor-button.alloy-editor-button-disabled, .alloy-editor-toolbar .alloy-editor-toolbar-element:disabled, .alloy-editor-toolbar .alloy-editor-toolbar-element.alloy-editor-button-disabled, [class*=alloy-editor-toolbar-] .alloy-editor-button:disabled, [class*=alloy-editor-toolbar-] .alloy-editor-button.alloy-editor-button-disabled, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element:disabled, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element.alloy-editor-button-disabled {
       cursor: auto;
       opacity: 0.3; }
-  .alloy-editor-ui .toolbar .button, .alloy-editor-ui [class^=toolbar-] .button {
+  .alloy-editor-toolbar .alloy-editor-button, [class*=alloy-editor-toolbar-] .alloy-editor-button {
     height: 24px;
     width: 24px; }
 
-.alloy-editor-ui .dropdown, .alloy-editor-ui [class^=dropdown-] {
+.alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
   left: 0;
   padding: 4px;
   position: absolute;
   top: 34px; }
-  .alloy-editor-ui .dropdown .list-header, .alloy-editor-ui [class^=dropdown-] .list-header {
+  .alloy-editor-dropdown .alloy-editor-list-header, [class*=alloy-editor-dropdown-] .alloy-editor-list-header {
     display: inline-block;
     margin: 12px 0 0 0; }
-    .alloy-editor-ui .dropdown .list-header:first-child, .alloy-editor-ui [class^=dropdown-] .list-header:first-child {
+    .alloy-editor-dropdown .alloy-editor-list-header:first-child, [class*=alloy-editor-dropdown-] .alloy-editor-list-header:first-child {
       margin-top: 4px; }
-  .alloy-editor-ui .dropdown .toolbar-element, .alloy-editor-ui [class^=dropdown-] .toolbar-element {
+  .alloy-editor-dropdown .alloy-editor-toolbar-element, [class*=alloy-editor-dropdown-] .alloy-editor-toolbar-element {
     height: 3em;
     margin-right: 0;
     min-width: 100%;
@@ -105,31 +105,31 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     width: auto; }
-    .alloy-editor-ui .dropdown .toolbar-element *, .alloy-editor-ui [class^=dropdown-] .toolbar-element * {
+    .alloy-editor-dropdown .alloy-editor-toolbar-element *, [class*=alloy-editor-dropdown-] .alloy-editor-toolbar-element * {
       display: inline; }
-    .alloy-editor-ui .dropdown .toolbar-element[class^=icon-]:before, .alloy-editor-ui [class^=dropdown-] .toolbar-element[class^=icon-]:before {
+    .alloy-editor-dropdown .alloy-editor-toolbar-element[class*=alloy-editor-icon-]:before, [class*=alloy-editor-dropdown-] .alloy-editor-toolbar-element[class*=alloy-editor-icon-]:before {
       padding-right: 4px;
       vertical-align: middle; }
-  .alloy-editor-ui .dropdown .listbox, .alloy-editor-ui [class^=dropdown-] .listbox {
+  .alloy-editor-dropdown .alloy-editor-listbox, [class*=alloy-editor-dropdown-] .alloy-editor-listbox {
     list-style: none;
     margin: 0;
     padding: 0; }
-  .alloy-editor-ui .dropdown *, .alloy-editor-ui [class^=dropdown-] * {
+  .alloy-editor-dropdown *, [class*=alloy-editor-dropdown-] * {
     display: block \9; }
 
-.alloy-editor-ui .container-edit-link, .alloy-editor-ui .container-edit-table {
+.alloy-editor-container-edit-link, .alloy-editor-container-edit-table {
   height: 24px \9; }
-  .alloy-editor-ui .container-edit-link *, .alloy-editor-ui .container-edit-table * {
+  .alloy-editor-container-edit-link *, .alloy-editor-container-edit-table * {
     float: left \9; }
-  .alloy-editor-ui .container-edit-link label, .alloy-editor-ui .container-edit-table label {
+  .alloy-editor-container-edit-link label, .alloy-editor-container-edit-table label {
     position: relative \9;
     top: 50% \9;
     transform: translateY(-50%) \9; }
-  .alloy-editor-ui .container-edit-link IE10-PLUS::-ms-reveal, .alloy-editor-ui .container-edit-link label, .alloy-editor-ui .container-edit-table IE10-PLUS::-ms-reveal, .alloy-editor-ui .container-edit-table label {
+  .alloy-editor-container-edit-link IE10-PLUS::-ms-reveal, .alloy-editor-container-edit-link label, .alloy-editor-container-edit-table IE10-PLUS::-ms-reveal, .alloy-editor-container-edit-table label {
     top: 0;
     transform: translateY(0); }
 
-.alloy-editor-ui .container-input {
+.alloy-editor-container-input {
   -webkit-box-lines: single;
   -moz-box-lines: single;
   box-lines: single;
@@ -139,14 +139,14 @@
   flex-wrap: nowrap;
   padding-left: 4px;
   width: 182px; }
-  .alloy-editor-ui .container-input.medium {
+  .alloy-editor-container-input.medium {
     width: 98px; }
-  .alloy-editor-ui .container-input.small {
+  .alloy-editor-container-input.small {
     width: 42px; }
-  .alloy-editor-ui .container-input [class^=icon-] {
+  .alloy-editor-container-input [class*=alloy-editor-icon-] {
     font-size: 24px;
     line-height: 24px; }
-  .alloy-editor-ui .container-input input, .alloy-editor-ui .container-input .input {
+  .alloy-editor-container-input input, .alloy-editor-container-input .alloy-editor-input {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     box-flex: 1;
@@ -167,16 +167,16 @@
     margin-top: 4px \9;
     padding-left: 4px \9;
     width: 158px \9; }
-    .alloy-editor-ui .container-input input::-ms-clear, .alloy-editor-ui .container-input .input::-ms-clear {
+    .alloy-editor-container-input input::-ms-clear, .alloy-editor-container-input .alloy-editor-input::-ms-clear {
       display: none; }
-    .alloy-editor-ui .container-input input:focus, .alloy-editor-ui .container-input .input:focus {
+    .alloy-editor-container-input input:focus, .alloy-editor-container-input .alloy-editor-input:focus {
       box-shadow: none; }
-  .alloy-editor-ui .container-input .icon-remove {
+  .alloy-editor-container-input .alloy-editor-icon-remove {
     float: right \9; }
 
-.alloy-editor-ui .container-link {
+.alloy-editor-container-link {
   padding: 2px 4px; }
-  .alloy-editor-ui .container-link a, .alloy-editor-ui .container-link .link {
+  .alloy-editor-container-link a, .alloy-editor-container-link .alloy-editor-link {
     color: inherit;
     display: inline-block;
     font-size: 14px;
@@ -187,34 +187,34 @@
     text-overflow: ellipsis;
     vertical-align: middle;
     white-space: nowrap; }
-    .alloy-editor-ui .container-link a:hover, .alloy-editor-ui .container-link a:focus, .alloy-editor-ui .container-link .link:hover, .alloy-editor-ui .container-link .link:focus {
+    .alloy-editor-container-link a:hover, .alloy-editor-container-link a:focus, .alloy-editor-container-link .alloy-editor-link:hover, .alloy-editor-container-link .alloy-editor-link:focus {
       text-decoration: underline; }
-    .alloy-editor-ui .container-link a:before, .alloy-editor-ui .container-link .link:before {
+    .alloy-editor-container-link a:before, .alloy-editor-container-link .alloy-editor-link:before {
       content: '\E020';
       display: inline-block;
       font-family: 'alloyeditor';
       margin-right: 4px;
       vertical-align: middle; }
 
-.alloy-editor-ui .container-dropdown, .alloy-editor-ui [class^=container-dropdown-] {
+.alloy-editor-container-styles {
   float: left \9;
   width: 120px; }
-  .alloy-editor-ui .container-dropdown > .toolbar-element, .alloy-editor-ui [class^=container-dropdown-] > .toolbar-element {
+  .alloy-editor-container-styles > .alloy-editor-toolbar-element {
     float: left \9;
     height: 24px;
     text-align: left;
     width: 100%; }
-    .alloy-editor-ui .container-dropdown > .toolbar-element .container, .alloy-editor-ui [class^=container-dropdown-] > .toolbar-element .container {
+    .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container {
       height: 100% \9;
       width: 100%; }
-      .alloy-editor-ui .container-dropdown > .toolbar-element .container .icon-arrow, .alloy-editor-ui [class^=container-dropdown-] > .toolbar-element .container .icon-arrow {
+      .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container .alloy-editor-icon-arrow {
         -webkit-transform: rotate(90deg);
         -moz-transform: rotate(90deg);
         -ms-transform: rotate(90deg);
         -o-transform: rotate(90deg);
         transform: rotate(90deg);
         float: right \9; }
-      .alloy-editor-ui .container-dropdown > .toolbar-element .container .container-dropdown-selected-item, .alloy-editor-ui [class^=container-dropdown-] > .toolbar-element .container .container-dropdown-selected-item {
+      .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container .alloy-editor-selected-style {
         -webkit-box-flex: 1;
         -moz-box-flex: 1;
         box-flex: 1;
@@ -223,42 +223,36 @@
         -ms-flex: 1;
         flex: 1;
         display: inline-block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
         position: relative \9;
         top: 50% \9;
         transform: translateY(-50%) \9; }
-      .alloy-editor-ui .container-dropdown > .toolbar-element .container IE10-PLUS::-ms-reveal, .alloy-editor-ui .container-dropdown > .toolbar-element .container .container-dropdown-selected-item, .alloy-editor-ui [class^=container-dropdown-] > .toolbar-element .container IE10-PLUS::-ms-reveal, .alloy-editor-ui [class^=container-dropdown-] > .toolbar-element .container .container-dropdown-selected-item {
+      .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container IE10-PLUS::-ms-reveal, .alloy-editor-container-styles > .alloy-editor-toolbar-element .alloy-editor-container .alloy-editor-selected-style {
         top: 0;
         transform: translateY(0); }
 
-.alloy-editor-ui .container-dropdown-xl {
-  width: 192px; }
-
-.alloy-editor-ui .twitter-link {
+.alloy-editor-twitter-link {
   padding: 0 5px; }
-  .alloy-editor-ui .twitter-link:after {
+  .alloy-editor-twitter-link:after {
     content: '\E01E';
     display: inline-block;
     font-family: alloyeditor;
     margin-left: 4px;
     vertical-align: middle; }
 
-.alloy-editor-ui .camera {
+.alloy-editor-placeholder:empty:not(:focus):before {
+  content: attr(data-placeholder); }
+
+.alloy-editor-camera {
   align-items: center;
   display: flex;
   flex-flow: column;
   justify-content: center; }
-  .alloy-editor-ui .camera .camera-canvas {
+  .alloy-editor-camera .alloy-editor-camera-canvas {
     left: -10000px;
     position: absolute;
     top: -10000px; }
-  .alloy-editor-ui .camera .camera-shoot {
+  .alloy-editor-camera .alloy-editor-camera-shoot {
     margin-top: 10px; }
-
-.alloy-editor-placeholder:empty:not(:focus):before {
-  content: attr(data-placeholder); }
 
 .alloy-editor-sr-only {
   position: absolute;
@@ -270,12 +264,12 @@
   clip: rect(0, 0, 0, 0);
   border: 0; }
 
-.alloy-editor-ui .alloy-editor-arrow-box:after {
+.alloy-editor-arrow-box:after {
   content: '';
   margin: auto;
   position: absolute; }
 
-.alloy-editor-ui .alloy-editor-arrow-box.alloy-editor-arrow-box-bottom:after {
+.alloy-editor-arrow-box.alloy-editor-arrow-box-bottom:after {
   height: 0;
   width: 0;
   border-left: 5px solid transparent;
@@ -285,7 +279,7 @@
   right: 0;
   top: 100%; }
 
-.alloy-editor-ui .alloy-editor-arrow-box.alloy-editor-arrow-box-top:after {
+.alloy-editor-arrow-box.alloy-editor-arrow-box-top:after {
   height: 0;
   width: 0;
   border-bottom: 4px solid currentColor;
@@ -295,7 +289,7 @@
   right: 0;
   top: -4px; }
 
-.alloy-editor-ui .alloy-editor-arrow-box.alloy-editor-arrow-box-left:after {
+.alloy-editor-arrow-box.alloy-editor-arrow-box-left:after {
   height: 0;
   width: 0;
   border-bottom: 5px solid transparent;
@@ -305,7 +299,7 @@
   top: 0;
   bottom: 0; }
 
-.alloy-editor-ui .alloy-editor-arrow-box.alloy-editor-arrow-box-right:after {
+.alloy-editor-arrow-box.alloy-editor-arrow-box-right:after {
   height: 0;
   width: 0;
   border-bottom: 5px solid transparent;
@@ -323,53 +317,53 @@
   background: #e6f1fa !important;
   text-shadow: none; }
 
-.alloy-editor-ui .toolbar, .alloy-editor-ui [class^=toolbar-] {
+.alloy-editor-toolbar, [class*=alloy-editor-toolbar-] {
   background-color: #32a8e6;
   border-radius: 4px;
   color: #fff;
   font-family: "Helvetica Neue"; }
-  .alloy-editor-ui .toolbar.alloy-editor-arrow-box:after, .alloy-editor-ui [class^=toolbar-].alloy-editor-arrow-box:after {
+  .alloy-editor-toolbar.alloy-editor-arrow-box:after, [class*=alloy-editor-toolbar-].alloy-editor-arrow-box:after {
     color: #32a8e6; }
-  .alloy-editor-ui .toolbar .button, .alloy-editor-ui .toolbar .toolbar-element, .alloy-editor-ui [class^=toolbar-] .button, .alloy-editor-ui [class^=toolbar-] .toolbar-element {
+  .alloy-editor-toolbar .alloy-editor-button, .alloy-editor-toolbar .alloy-editor-toolbar-element, [class*=alloy-editor-toolbar-] .alloy-editor-button, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element {
     background-color: transparent; }
-    .alloy-editor-ui .toolbar .button:hover, .alloy-editor-ui .toolbar .toolbar-element:hover, .alloy-editor-ui [class^=toolbar-] .button:hover, .alloy-editor-ui [class^=toolbar-] .toolbar-element:hover {
+    .alloy-editor-toolbar .alloy-editor-button:hover, .alloy-editor-toolbar .alloy-editor-toolbar-element:hover, [class*=alloy-editor-toolbar-] .alloy-editor-button:hover, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element:hover {
       color: #1888c3; }
-    .alloy-editor-ui .toolbar .button.button-pressed, .alloy-editor-ui .toolbar .toolbar-element.button-pressed, .alloy-editor-ui [class^=toolbar-] .button.button-pressed, .alloy-editor-ui [class^=toolbar-] .toolbar-element.button-pressed {
+    .alloy-editor-toolbar .alloy-editor-button.alloy-editor-button-pressed, .alloy-editor-toolbar .alloy-editor-toolbar-element.alloy-editor-button-pressed, [class*=alloy-editor-toolbar-] .alloy-editor-button.alloy-editor-button-pressed, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element.alloy-editor-button-pressed {
       background-color: #1888c3; }
-      .alloy-editor-ui .toolbar .button.button-pressed:hover, .alloy-editor-ui .toolbar .toolbar-element.button-pressed:hover, .alloy-editor-ui [class^=toolbar-] .button.button-pressed:hover, .alloy-editor-ui [class^=toolbar-] .toolbar-element.button-pressed:hover {
+      .alloy-editor-toolbar .alloy-editor-button.alloy-editor-button-pressed:hover, .alloy-editor-toolbar .alloy-editor-toolbar-element.alloy-editor-button-pressed:hover, [class*=alloy-editor-toolbar-] .alloy-editor-button.alloy-editor-button-pressed:hover, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element.alloy-editor-button-pressed:hover {
         background-color: #1a95d5;
         color: inherit; }
-    .alloy-editor-ui .toolbar .button.button-disabled, .alloy-editor-ui .toolbar .toolbar-element.button-disabled, .alloy-editor-ui [class^=toolbar-] .button.button-disabled, .alloy-editor-ui [class^=toolbar-] .toolbar-element.button-disabled {
+    .alloy-editor-toolbar .alloy-editor-button.alloy-editor-button-disabled, .alloy-editor-toolbar .alloy-editor-toolbar-element.alloy-editor-button-disabled, [class*=alloy-editor-toolbar-] .alloy-editor-button.alloy-editor-button-disabled, [class*=alloy-editor-toolbar-] .alloy-editor-toolbar-element.alloy-editor-button-disabled {
       opacity: 0.3; }
-  .alloy-editor-ui .toolbar .container-input, .alloy-editor-ui [class^=toolbar-] .container-input {
+  .alloy-editor-toolbar .alloy-editor-container-input, [class*=alloy-editor-toolbar-] .alloy-editor-container-input {
     background-color: #fff; }
-    .alloy-editor-ui .toolbar .container-input [class^=icon-], .alloy-editor-ui [class^=toolbar-] .container-input [class^=icon-] {
+    .alloy-editor-toolbar .alloy-editor-container-input [class*=alloy-editor-icon-], [class*=alloy-editor-toolbar-] .alloy-editor-container-input [class*=alloy-editor-icon-] {
       color: #2b4259;
       opacity: 0.4; }
 
-.alloy-editor-ui .dropdown, .alloy-editor-ui [class^=dropdown-] {
+.alloy-editor-dropdown, [class*=alloy-editor-dropdown-] {
   background-color: #fcfcfc;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0 0 4px 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: #000; }
-  .alloy-editor-ui .dropdown .list-header, .alloy-editor-ui [class^=dropdown-] .list-header {
+  .alloy-editor-dropdown .alloy-editor-list-header, [class*=alloy-editor-dropdown-] .alloy-editor-list-header {
     color: #999;
     font-size: small;
     font-style: italic; }
 
-.alloy-editor-ui .toolbar-add {
+.alloy-editor-toolbar-add {
   border-radius: 24px;
   padding: 0; }
-  .alloy-editor-ui .toolbar-add:hover, .alloy-editor-ui .toolbar-add:focus {
+  .alloy-editor-toolbar-add:hover, .alloy-editor-toolbar-add:focus {
     opacity: 0.7; }
-  .alloy-editor-ui .toolbar-add .button-add:hover, .alloy-editor-ui .toolbar-add .button-add:focus {
+  .alloy-editor-toolbar-add .alloy-editor-button-add:hover, .alloy-editor-toolbar-add .alloy-editor-button-add:focus {
     color: #fff; }
-  .alloy-editor-ui .toolbar-add .button-add .icon-add {
+  .alloy-editor-toolbar-add .alloy-editor-button-add .alloy-editor-icon-add {
     font-size: 12px;
     line-height: 24px; }
 
-.alloy-editor-ui .twitter-link {
+.alloy-editor-twitter-link {
   background-color: #f8f8f8; }
 
 @font-face {
@@ -383,7 +377,7 @@
 	font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="alloy-editor-icon-"], [class*=" alloy-editor-icon-"] {
 	font-family: 'alloyeditor';
 	speak: none;
 	font-size: 20px;
@@ -399,130 +393,130 @@
 }
 
 
-.icon-add:before {
+.alloy-editor-icon-add:before {
 	content: "\";
 }
 
-.icon-align-center:before {
+.alloy-editor-icon-align-center:before {
 	content: "\";
 }
 
-.icon-align-justified:before {
+.alloy-editor-icon-align-justified:before {
 	content: "\";
 }
 
-.icon-align-left:before {
+.alloy-editor-icon-align-left:before {
 	content: "\";
 }
 
-.icon-align-right:before {
+.alloy-editor-icon-align-right:before {
 	content: "\";
 }
 
-.icon-arrow:before {
+.alloy-editor-icon-arrow:before {
 	content: "\";
 }
 
-.icon-bold:before {
+.alloy-editor-icon-bold:before {
 	content: "\";
 }
 
-.icon-bulleted-list:before {
+.alloy-editor-icon-bulleted-list:before {
 	content: "\";
 }
 
-.icon-camera:before {
+.alloy-editor-icon-camera:before {
 	content: "\";
 }
 
-.icon-cell:before {
+.alloy-editor-icon-cell:before {
 	content: "\";
 }
 
-.icon-close:before {
+.alloy-editor-icon-close:before {
 	content: "\";
 }
 
-.icon-code:before {
+.alloy-editor-icon-code:before {
 	content: "\";
 }
 
-.icon-column:before {
+.alloy-editor-icon-column:before {
 	content: "\";
 }
 
-.icon-h1:before {
+.alloy-editor-icon-h1:before {
 	content: "\";
 }
 
-.icon-h2:before {
+.alloy-editor-icon-h2:before {
 	content: "\";
 }
 
-.icon-image:before {
+.alloy-editor-icon-image:before {
 	content: "\";
 }
 
-.icon-italic:before {
+.alloy-editor-icon-italic:before {
 	content: "\";
 }
 
-.icon-link:before {
+.alloy-editor-icon-link:before {
 	content: "\";
 }
 
-.icon-numbered-list:before {
+.alloy-editor-icon-numbered-list:before {
 	content: "\";
 }
 
-.icon-ok:before {
+.alloy-editor-icon-ok:before {
 	content: "\";
 }
 
-.icon-quote:before {
+.alloy-editor-icon-quote:before {
 	content: "\";
 }
 
-.icon-remove:before {
+.alloy-editor-icon-remove:before {
 	content: "\";
 }
 
-.icon-removeformat:before {
+.alloy-editor-icon-removeformat:before {
 	content: "\";
 }
 
-.icon-row:before {
+.alloy-editor-icon-row:before {
 	content: "\";
 }
 
-.icon-separator:before {
+.alloy-editor-icon-separator:before {
 	content: "\";
 }
 
-.icon-strike:before {
+.alloy-editor-icon-strike:before {
 	content: "\";
 }
 
-.icon-subscript:before {
+.alloy-editor-icon-subscript:before {
 	content: "\";
 }
 
-.icon-superscript:before {
+.alloy-editor-icon-superscript:before {
 	content: "\";
 }
 
-.icon-table:before {
+.alloy-editor-icon-table:before {
 	content: "\";
 }
 
-.icon-twitter:before {
+.alloy-editor-icon-twitter:before {
 	content: "\";
 }
 
-.icon-underline:before {
+.alloy-editor-icon-underline:before {
 	content: "\";
 }
 
-.icon-unlink:before {
+.alloy-editor-icon-unlink:before {
 	content: "\";
 }

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.5</b>
+                        API Docs for Version: <b>0.3.4</b>
                     </p>
                 </li>
             </div>
@@ -96,7 +96,6 @@
                                     <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
                                     <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
                                     <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
-                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
@@ -237,11 +236,11 @@
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var cssClass = &#x27;button &#x27; + this.getStateClasses();
+                                        var cssClass = &#x27;alloy-editor-button &#x27; + this.getStateClasses();
                             
                                         return (
                                             &lt;button aria-label={AlloyEditor.Strings.subscript} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-subscript&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.subscript}&gt;
-                                                &lt;span className=&quot;icon-subscript&quot;&gt;&lt;/span&gt;
+                                                &lt;span className=&quot;alloy-editor-icon-subscript&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );
                                     }
