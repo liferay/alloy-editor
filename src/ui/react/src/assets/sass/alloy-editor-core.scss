@@ -8,7 +8,7 @@ $base-spacing: 10px;
 
 $IE9-ONLY: \9;
 
-.alloy-editor-ui {
+.ae-ui {
     .ae-container, [class^=ae-container-] {
         @include align-items(center);
         @include display(inline-flex);

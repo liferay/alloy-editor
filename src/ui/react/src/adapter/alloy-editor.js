@@ -128,7 +128,7 @@
          */
         _renderUI: function() {
             var editorUIElement = document.createElement('div');
-            editorUIElement.className = 'alloy-editor-ui';
+            editorUIElement.className = 'ae-ui';
 
             var uiNode = this.get('uiNode') || document.body;
 
