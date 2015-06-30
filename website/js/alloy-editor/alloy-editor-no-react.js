@@ -4836,7 +4836,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          */
         _renderUI: function _renderUI() {
             var editorUIElement = document.createElement('div');
-            editorUIElement.className = 'alloy-editor-ui';
+            editorUIElement.className = 'ae-ui';
 
             var uiNode = this.get('uiNode') || document.body;
 

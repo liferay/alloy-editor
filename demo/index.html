@@ -459,11 +459,11 @@
     },
 
     render: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-        <span class="hljs-keyword">var</span> cssClass = <span class="hljs-string">'alloy-editor-button '</span> + <span class="hljs-keyword">this</span>.getStateClasses();
+        <span class="hljs-keyword">var</span> cssClass = <span class="hljs-string">'ae-button '</span> + <span class="hljs-keyword">this</span>.getStateClasses();
 
         <span class="hljs-keyword">return</span> (
             &lt;button className={cssClass} data-type=<span class="hljs-string">"button-marquee"</span> onClick={<span class="hljs-keyword">this</span>.applyStyle} tabIndex={<span class="hljs-keyword">this</span>.props.tabIndex}&gt;
-                &lt;span className=<span class="hljs-string">"alloy-editor-icon-separator"</span>&gt;&lt;/span&gt;
+                &lt;span className=<span class="hljs-string">"ae-icon-separator"</span>&gt;&lt;/span&gt;
             &lt;/button&gt;
         );
     }
@@ -525,7 +525,7 @@ AlloyEditor.editable(<span class="hljs-string">'contentEditable'</span>);</code>
         },
 
         render: function() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'ae-button ' + this.getStateClasses();
 
             return (
                 React.createElement(
@@ -539,7 +539,7 @@ AlloyEditor.editable(<span class="hljs-string">'contentEditable'</span>);</code>
                     React.createElement(
                         'span',
                         {
-                            className: 'alloy-editor-icon-separator'
+                            className: 'ae-icon-separator'
                         }
                     )
                 )

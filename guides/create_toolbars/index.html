@@ -371,7 +371,7 @@
     getDefaultProps: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
         <span class="hljs-keyword">return</span> {
             circular: <span class="hljs-literal">true</span>,
-            descendants: <span class="hljs-string">'.alloy-editor-button, .alloy-editor-toolbar-element'</span>,
+            descendants: <span class="hljs-string">'.ae-button, .ae-toolbar-element'</span>,
             keys: {
                 next: [<span class="hljs-number">38</span>, <span class="hljs-number">39</span>],
                 prev: [<span class="hljs-number">37</span>, <span class="hljs-number">40</span>]
@@ -383,10 +383,10 @@
      * Returns the class name of the toolbar in case of both exclusive and normal mode.
      */</span>
     _getToolbarClassName: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-        <span class="hljs-keyword">var</span> cssClass = <span class="hljs-string">'alloy-editor-toolbar-versions'</span>;
+        <span class="hljs-keyword">var</span> cssClass = <span class="hljs-string">'ae-toolbar-versions'</span>;
 
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.renderExclusive) {
-            cssClass = <span class="hljs-string">'alloy-editor-toolbar '</span> + <span class="hljs-keyword">this</span>.getArrowBoxClasses();
+            cssClass = <span class="hljs-string">'ae-toolbar '</span> + <span class="hljs-keyword">this</span>.getArrowBoxClasses();
         }
 
         <span class="hljs-keyword">return</span> cssClass;
@@ -413,7 +413,7 @@
             domNode.style.top = region.top - domNode.offsetHeight/<span class="hljs-number">2</span> + startRect.height/<span class="hljs-number">2</span> + <span class="hljs-string">'px'</span>;
             domNode.style.opacity = <span class="hljs-number">1</span>;
 
-            domElement.removeClass(<span class="hljs-string">'alloy-editor-arrow-box'</span>);
+            domElement.removeClass(<span class="hljs-string">'ae-arrow-box'</span>);
 
             <span class="hljs-keyword">this</span>.cancelAnimation();
         }
@@ -428,7 +428,7 @@
 
         <span class="hljs-keyword">return</span> (
             <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">{className}</span> <span class="hljs-attribute">data-tabindex</span>=<span class="hljs-value">{this.props.config.tabIndex</span> || <span class="hljs-attribute">0</span>} <span class="hljs-attribute">onFocus</span>=<span class="hljs-value">{this.focus}</span> <span class="hljs-attribute">onKeyDown</span>=<span class="hljs-value">{this.handleKey}</span> <span class="hljs-attribute">tabIndex</span>=<span class="hljs-value">"-1"</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"alloy-editor-container"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"ae-container"</span>&gt;</span>
                     {buttons}
                 <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
