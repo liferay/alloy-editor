@@ -1,0 +1,32 @@
+/* Colors */
+
+$color_anchor_navy: #29353d;
+$color_anchor_active: lighten($color_anchor_navy, 8%);
+$color_primary: #65b6f0;
+$color_secondary: #869cad;
+
+/* Arrow Box */
+
+$arrow-height: 8px;
+$arrow-width: 18px;
+
+/* Structure */
+
+$base-button-height: 40px;
+$base-button-width: 40px;
+$base-font-size: 16px;
+$base-padding: 4px;
+$base-spacing: 8px;
+
+/* Skin */
+
+$base-color: $color_anchor_navy;
+$button-color: $color_secondary;
+$button-pressed-hover-color: $button-color;
+
+$dropdown-background-color: #f7fafa;
+$dropdown-color: $color_secondary;
+$dropdown-list-header-color: #999;
+$dropdown-border-color: #dce0e3;
+
+$toolbar-border-radius: 2px;

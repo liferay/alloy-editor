@@ -32,7 +32,7 @@ function getFolders(dir) {
 }
 
 gulp.task('sass2css', function() {
-    return gulp.src(path.join(reactDir, 'src/assets/sass/**/*.scss'))
+    return gulp.src(path.join(reactDir, 'src/assets/sass/**/main.scss'))
         .pipe(sass({
             includePaths: [path.join(rootDir, 'node_modules/bourbon/app/assets/stylesheets')],
             onError: errorHandler.bind(this)
