@@ -68,8 +68,8 @@
          */
         render: function() {
             return (
-                <button aria-label={AlloyEditor.Strings.removeformat} className='alloy-editor-button' data-type="button-removeformat" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.removeformat}>
-                    <span className="alloy-editor-icon-removeformat"></span>
+                <button aria-label={AlloyEditor.Strings.removeformat} className='ae-button' data-type="button-removeformat" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.removeformat}>
+                    <span className="ae-icon-removeformat"></span>
                 </button>
             );
         }

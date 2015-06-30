@@ -68,16 +68,16 @@
             };
 
             return (
-                <div className="alloy-editor-container-edit-link">
-                    <button aria-label={AlloyEditor.Strings.removeLink} className="alloy-editor-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
-                        <span className="alloy-editor-icon-unlink"></span>
+                <div className="ae-container-edit-link">
+                    <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
+                        <span className="ae-icon-unlink"></span>
                     </button>
-                    <div className="alloy-editor-container-input">
-                        <input className="alloy-editor-input" onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
-                        <button aria-label={AlloyEditor.Strings.clearInput} className="alloy-editor-button alloy-editor-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
+                    <div className="ae-container-input">
+                        <input className="ae-input" onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
+                        <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
                     </div>
-                    <button aria-label={AlloyEditor.Strings.confirm} className="alloy-editor-button" disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
-                        <span className="alloy-editor-icon-ok"></span>
+                    <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
+                        <span className="ae-icon-ok"></span>
                     </button>
                 </div>
             );

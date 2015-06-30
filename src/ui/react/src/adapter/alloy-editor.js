@@ -45,7 +45,7 @@
             CKEDITOR.once('resourcesLoaded', this._renderUI.bind(this));
 
             editor.once('contentDom', function() {
-                editor.editable().addClass('alloy-editor-editable');
+                editor.editable().addClass('ae-editable');
             });
 
             this._loadLanguageFile();
@@ -69,7 +69,7 @@
             if (nativeEditor) {
                 var editable = nativeEditor.editable();
                 if (editable) {
-                    editable.removeClass('alloy-editor-editable');
+                    editable.removeClass('ae-editable');
                 }
 
                 nativeEditor.destroy();
@@ -251,13 +251,13 @@
              * when editor is not focused.
              *
              * @property placeholderClass
-             * @default 'alloy-editor-placeholder'
+             * @default 'ae-placeholder'
              * @writeOnce
              * @type {String}
              */
             placeholderClass: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'alloy-editor-placeholder',
+                value: 'ae-placeholder',
                 writeOnce: true
             },
 

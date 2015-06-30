@@ -230,7 +230,7 @@
                                             linkUtils.create(
                                                 this._getHref(),
                                                 {
-                                                    &#x27;class&#x27;: &#x27;twitter-link&#x27;,
+                                                    &#x27;class&#x27;: &#x27;ae-twitter-link&#x27;,
                                                     &#x27;target&#x27;: &#x27;_blank&#x27;
                                                 }
                                             );
@@ -258,11 +258,11 @@
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var cssClass = &#x27;button &#x27; + this.getStateClasses();
+                                        var cssClass = &#x27;ae-button &#x27; + this.getStateClasses();
                             
                                         return (
                                             &lt;button aria-label={AlloyEditor.Strings.twitter} className={cssClass} data-type=&quot;button-twitter&quot; onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.twitter}&gt;
-                                                &lt;span className=&quot;icon-twitter&quot;&gt;&lt;/span&gt;
+                                                &lt;span className=&quot;ae-icon-twitter&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );
                                     },

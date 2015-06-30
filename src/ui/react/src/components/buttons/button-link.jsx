@@ -69,7 +69,7 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'ae-button ' + this.getStateClasses();
 
             if (this.props.renderExclusive) {
                 return (
@@ -78,7 +78,7 @@
             } else {
                 return (
                     <button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type="button-link" onClick={this.props.requestExclusive.bind(ButtonLink.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
-                        <span className="alloy-editor-icon-link"></span>
+                        <span className="ae-icon-link"></span>
                     </button>
                 );
             }

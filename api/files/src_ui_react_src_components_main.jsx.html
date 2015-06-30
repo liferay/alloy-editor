@@ -231,7 +231,7 @@
                                     getDefaultProps: function() {
                                         return {
                                             circular: true,
-                                            descendants: &#x27;[class*=toolbar-]&#x27;,
+                                            descendants: &#x27;[class^=ae-toolbar-]&#x27;,
                                             eventsDelay: 0,
                                             keys: {
                                                 next: 9
@@ -393,7 +393,7 @@
                                         }.bind(this));
                             
                                         return (
-                                            &lt;div className=&quot;toolbars&quot; onKeyDown={this.handleKey}&gt;
+                                            &lt;div className=&quot;ae-toolbars&quot; onKeyDown={this.handleKey}&gt;
                                                 {toolbars}
                                             &lt;/div&gt;
                                         );

@@ -72,8 +72,8 @@
          */
         render: function() {
             return (
-                <button aria-label={AlloyEditor.Strings.horizontalrule} className="alloy-editor-button" data-type="button-hline" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.horizontalrule}>
-                    <span className="alloy-editor-icon-separator"></span>
+                <button aria-label={AlloyEditor.Strings.horizontalrule} className="ae-button" data-type="button-hline" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.horizontalrule}>
+                    <span className="ae-icon-separator"></span>
                 </button>
             );
         }

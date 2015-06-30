@@ -61,8 +61,8 @@
                 );
             } else {
                 return (
-                    <button aria-label={AlloyEditor.Strings.table} className="alloy-editor-button" data-type="button-table" onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.table}>
-                        <span className="alloy-editor-icon-table"></span>
+                    <button aria-label={AlloyEditor.Strings.table} className="ae-button" data-type="button-table" onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.table}>
+                        <span className="ae-icon-table"></span>
                     </button>
                 );
             }

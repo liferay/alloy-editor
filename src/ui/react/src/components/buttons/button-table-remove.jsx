@@ -52,8 +52,8 @@
          */
         render: function() {
             return (
-                <button aria-label={AlloyEditor.Strings.deleteTable} className="alloy-editor-button" data-type="button-table-remove" onClick={this._removeTable} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteTable}>
-                    <span className="alloy-editor-icon-close"></span>
+                <button aria-label={AlloyEditor.Strings.deleteTable} className="ae-button" data-type="button-table-remove" onClick={this._removeTable} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteTable}>
+                    <span className="ae-icon-close"></span>
                 </button>
             );
         },

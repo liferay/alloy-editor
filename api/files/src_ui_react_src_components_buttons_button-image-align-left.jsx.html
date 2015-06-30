@@ -239,11 +239,11 @@
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var cssClass = &#x27;button &#x27; + this.getStateClasses();
+                                        var cssClass = &#x27;ae-button &#x27; + this.getStateClasses();
                             
                                         return (
                                             &lt;button aria-label={AlloyEditor.Strings.alignLeft} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-image-align-left&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignLeft}&gt;
-                                                &lt;span className=&quot;icon-align-left&quot;&gt;&lt;/span&gt;
+                                                &lt;span className=&quot;ae-icon-align-left&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );
                                     }

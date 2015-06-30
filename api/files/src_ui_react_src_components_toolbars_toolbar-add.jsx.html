@@ -240,7 +240,7 @@
                                     getDefaultProps: function() {
                                         return {
                                             circular: true,
-                                            descendants: &#x27;.button&#x27;,
+                                            descendants: &#x27;.ae-button&#x27;,
                                             gutterExclusive: {
                                                 left: 10,
                                                 top: 0
@@ -293,7 +293,7 @@
                             
                                         return (
                                             &lt;div aria-label={AlloyEditor.Strings.add} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
-                                                &lt;div className=&quot;container&quot;&gt;
+                                                &lt;div className=&quot;ae-container&quot;&gt;
                                                     {buttons}
                                                 &lt;/div&gt;
                                             &lt;/div&gt;
@@ -315,8 +315,8 @@
                                         } else {
                                             if (this.props.selectionData &amp;&amp; this.props.selectionData.region) {
                                                 buttons = (
-                                                    &lt;button aria-label={AlloyEditor.Strings.add} className=&quot;button button-add&quot; onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}&gt;
-                                                        &lt;span className=&quot;icon-add&quot;&gt;&lt;/span&gt;
+                                                    &lt;button aria-label={AlloyEditor.Strings.add} className=&quot;ae-button ae-button-add&quot; onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}&gt;
+                                                        &lt;span className=&quot;ae-icon-add&quot;&gt;&lt;/span&gt;
                                                     &lt;/button&gt;
                                                 );
                                             }
@@ -333,10 +333,10 @@
                                      * @return {String} The class name which have to be applied to the DOM element.
                                      */
                                     _getToolbarClassName: function() {
-                                        var cssClass = &#x27;toolbar-add&#x27;;
+                                        var cssClass = &#x27;ae-toolbar-add&#x27;;
                             
                                         if (this.props.renderExclusive) {
-                                            cssClass = &#x27;toolbar &#x27; + this.getArrowBoxClasses();
+                                            cssClass = &#x27;ae-toolbar &#x27; + this.getArrowBoxClasses();
                                         }
                             
                                         return cssClass;
@@ -371,7 +371,7 @@
                                                 domNode.style.top = region.top - domNode.offsetHeight/2 + startRect.height/2 + &#x27;px&#x27;;
                                                 domNode.style.opacity = 1;
                             
-                                                domElement.removeClass(&#x27;alloy-editor-arrow-box&#x27;);
+                                                domElement.removeClass(&#x27;ae-arrow-box&#x27;);
                             
                                                 this.cancelAnimation();
                                             }

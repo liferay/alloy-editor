@@ -16,13 +16,13 @@
          * @return {String} A string with the arrow box CSS classes.
          */
         getArrowBoxClasses: function() {
-            var arrowBoxClasses = 'alloy-editor-arrow-box';
+            var arrowBoxClasses = 'ae-arrow-box';
 
             if (AlloyEditor.Lang.isFunction(this.getInteractionPoint) && this.getInteractionPoint()) {
                 if (this.getInteractionPoint().direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    arrowBoxClasses += ' alloy-editor-arrow-box-top';
+                    arrowBoxClasses += ' ae-arrow-box-top';
                 } else {
-                    arrowBoxClasses += ' alloy-editor-arrow-box-bottom';
+                    arrowBoxClasses += ' ae-arrow-box-bottom';
                 }
             }
 

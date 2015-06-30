@@ -65,7 +65,7 @@
                 linkUtils.create(
                     this._getHref(),
                     {
-                        'class': 'alloy-editor-twitter-link',
+                        'class': 'ae-twitter-link',
                         'target': '_blank'
                     }
                 );
@@ -93,11 +93,11 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'ae-button ' + this.getStateClasses();
 
             return (
                 <button aria-label={AlloyEditor.Strings.twitter} className={cssClass} data-type="button-twitter" onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.twitter}>
-                    <span className="alloy-editor-icon-twitter"></span>
+                    <span className="ae-icon-twitter"></span>
                 </button>
             );
         },

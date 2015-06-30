@@ -74,11 +74,11 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var cssClass = 'alloy-editor-button ' + this.getStateClasses();
+            var cssClass = 'ae-button ' + this.getStateClasses();
 
             return (
                 <button aria-label={AlloyEditor.Strings.alignJustify} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-justify" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignJustify}>
-                    <span className="alloy-editor-icon-align-justified"></span>
+                    <span className="ae-icon-align-justified"></span>
                 </button>
             );
         }

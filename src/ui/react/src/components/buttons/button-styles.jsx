@@ -91,11 +91,11 @@
             }
 
             return (
-                <div className="alloy-editor-container-dropdown alloy-editor-has-dropdown">
-                    <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.styles + ' ' + activeStyle} className="alloy-editor-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.styles + ' ' + activeStyle}>
-                        <div className="alloy-editor-container">
-                            <span className="alloy-editor-container-dropdown-selected-item">{activeStyle}</span>
-                            <span className="alloy-editor-icon-arrow"></span>
+                <div className="ae-container-dropdown ae-has-dropdown">
+                    <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.styles + ' ' + activeStyle} className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.styles + ' ' + activeStyle}>
+                        <div className="ae-container">
+                            <span className="ae-container-dropdown-selected-item">{activeStyle}</span>
+                            <span className="ae-icon-arrow"></span>
                         </div>
                     </button>
                     {buttonStylesList}

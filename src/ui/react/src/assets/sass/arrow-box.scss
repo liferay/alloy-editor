@@ -3,14 +3,14 @@
 $arrow-height: 4px;
 $arrow-width: 10px;
 
-.alloy-editor-arrow-box {
+.ae-arrow-box {
     &:after {
         content: '';
         margin: auto;
         position: absolute;
     }
 
-    &.alloy-editor-arrow-box-bottom {
+    &.ae-arrow-box-bottom {
         &:after {
             @include triangle($arrow-width $arrow-height, currentColor, down);
 
@@ -20,7 +20,7 @@ $arrow-width: 10px;
         }
     }
 
-    &.alloy-editor-arrow-box-top {
+    &.ae-arrow-box-top {
         &:after {
             @include triangle($arrow-width $arrow-height, currentColor, up);
 
@@ -30,7 +30,7 @@ $arrow-width: 10px;
         }
     }
 
-    &.alloy-editor-arrow-box-left {
+    &.ae-arrow-box-left {
         &:after {
             @include triangle($arrow-width $arrow-height, currentColor, left);
 
@@ -40,7 +40,7 @@ $arrow-width: 10px;
         }
     }
 
-    &.alloy-editor-arrow-box-right {
+    &.ae-arrow-box-right {
         &:after {
             @include triangle($arrow-width $arrow-height, currentColor, right);
 

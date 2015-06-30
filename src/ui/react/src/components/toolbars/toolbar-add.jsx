@@ -75,7 +75,7 @@
         getDefaultProps: function() {
             return {
                 circular: true,
-                descendants: '.alloy-editor-button',
+                descendants: '.ae-button',
                 gutterExclusive: {
                     left: 10,
                     top: 0
@@ -128,7 +128,7 @@
 
             return (
                 <div aria-label={AlloyEditor.Strings.add} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role="toolbar" tabIndex="-1">
-                    <div className="alloy-editor-container">
+                    <div className="ae-container">
                         {buttons}
                     </div>
                 </div>
@@ -150,8 +150,8 @@
             } else {
                 if (this.props.selectionData && this.props.selectionData.region) {
                     buttons = (
-                        <button aria-label={AlloyEditor.Strings.add} className="alloy-editor-button alloy-editor-button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}>
-                            <span className="alloy-editor-icon-add"></span>
+                        <button aria-label={AlloyEditor.Strings.add} className="ae-button ae-button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}>
+                            <span className="ae-icon-add"></span>
                         </button>
                     );
                 }
@@ -168,10 +168,10 @@
          * @return {String} The class name which have to be applied to the DOM element.
          */
         _getToolbarClassName: function() {
-            var cssClass = 'alloy-editor-toolbar-add';
+            var cssClass = 'ae-toolbar-add';
 
             if (this.props.renderExclusive) {
-                cssClass = 'alloy-editor-toolbar ' + this.getArrowBoxClasses();
+                cssClass = 'ae-toolbar ' + this.getArrowBoxClasses();
             }
 
             return cssClass;
@@ -206,7 +206,7 @@
                     domNode.style.top = region.top - domNode.offsetHeight/2 + startRect.height/2 + 'px';
                     domNode.style.opacity = 1;
 
-                    domElement.removeClass('alloy-editor-arrow-box');
+                    domElement.removeClass('ae-arrow-box');
 
                     this.cancelAnimation();
                 }

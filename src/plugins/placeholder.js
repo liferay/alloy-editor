@@ -16,7 +16,7 @@
      * Specifies the placeholder class which have to be aded to editor when editor is not focuced.
      *
      * @attribute placeholderClass
-     * @default alloy-editor-placeholder
+     * @default ae-placeholder
      * @type String
      */
 

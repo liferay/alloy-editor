@@ -71,7 +71,7 @@
         getDefaultProps: function() {
             return {
                 circular: false,
-                descendants: '.alloy-editor-toolbar-element',
+                descendants: '.ae-toolbar-element',
                 keys: {
                     dismiss: [27],
                     dismissNext: [39],
@@ -90,8 +90,8 @@
          */
         render: function() {
             return (
-                <div className="alloy-editor-dropdown" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
-                    <ul className="alloy-editor-listbox" role="listbox">
+                <div className="ae-dropdown" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
+                    <ul className="ae-listbox" role="listbox">
                         <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />
 
                         <AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.blockStyles} styles={this._blockStyles} />

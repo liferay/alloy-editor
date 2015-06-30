@@ -2,7 +2,7 @@
     'use strict';
 
     var tableSelectionGetArrowBoxClasses = function() {
-        return 'alloy-editor-arrow-box alloy-editor-arrow-box-bottom';
+        return 'ae-arrow-box ae-arrow-box-bottom';
     };
 
     AlloyEditor.SelectionGetArrowBoxClasses = {

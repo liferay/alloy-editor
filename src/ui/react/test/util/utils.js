@@ -13,7 +13,7 @@
             var Simulate = TestUtils.Simulate;
 
             var command = function() {
-                var dropdown = TestUtils.findRenderedDOMComponentWithClass(config.buttonDropdown, 'alloy-editor-dropdown');
+                var dropdown = TestUtils.findRenderedDOMComponentWithClass(config.buttonDropdown, 'ae-dropdown');
 
                 var commandButtons = TestUtils.findAllInRenderedTree(dropdown, function(component) {
                     return component.props.command === config.buttonCommand;

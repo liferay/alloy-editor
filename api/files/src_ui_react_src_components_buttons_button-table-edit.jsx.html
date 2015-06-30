@@ -315,19 +315,19 @@
                                         var colsId = time + &#x27;cols&#x27;;
                             
                                         return (
-                                            &lt;div className=&quot;container-edit-table&quot;&gt;
+                                            &lt;div className=&quot;ae-container-edit-table&quot;&gt;
                                                 &lt;label htmlFor={rowsId}&gt;Rows&lt;/label&gt;
-                                                &lt;div className=&quot;container-input small&quot;&gt;
-                                                    &lt;input className=&quot;input&quot; id={rowsId} onChange={this._handleChange.bind(this, &#x27;rows&#x27;)} min=&quot;1&quot; onKeyDown={this._handleKeyDown} placeholder=&quot;Rows&quot; ref=&quot;rows&quot; type=&quot;number&quot; value={this.state.rows}&gt;&lt;/input&gt;
+                                                &lt;div className=&quot;ae-container-input small&quot;&gt;
+                                                    &lt;input className=&quot;ae-input&quot; id={rowsId} onChange={this._handleChange.bind(this, &#x27;rows&#x27;)} min=&quot;1&quot; onKeyDown={this._handleKeyDown} placeholder=&quot;Rows&quot; ref=&quot;rows&quot; type=&quot;number&quot; value={this.state.rows}&gt;&lt;/input&gt;
                                                 &lt;/div&gt;
                             
                                                 &lt;label htmlFor={colsId}&gt;Cols&lt;/label&gt;
-                                                &lt;div className=&quot;container-input small&quot;&gt;
-                                                    &lt;input className=&quot;input&quot; id={colsId} onChange={this._handleChange.bind(this, &#x27;cols&#x27;)} min=&quot;1&quot; onKeyDown={this._handleKeyDown} placeholder=&quot;Colums&quot; ref=&quot;cols&quot; type=&quot;number&quot; value={this.state.cols}&gt;&lt;/input&gt;
+                                                &lt;div className=&quot;ae-container-input small&quot;&gt;
+                                                    &lt;input className=&quot;ae-input&quot; id={colsId} onChange={this._handleChange.bind(this, &#x27;cols&#x27;)} min=&quot;1&quot; onKeyDown={this._handleKeyDown} placeholder=&quot;Colums&quot; ref=&quot;cols&quot; type=&quot;number&quot; value={this.state.cols}&gt;&lt;/input&gt;
                                                 &lt;/div&gt;
                             
-                                                &lt;button aria-label=&quot;Confirm&quot; className=&quot;button&quot; onClick={this._createTable}&gt;
-                                                    &lt;span className=&quot;icon-ok&quot;&gt;&lt;/span&gt;
+                                                &lt;button aria-label=&quot;Confirm&quot; className=&quot;ae-button&quot; onClick={this._createTable}&gt;
+                                                    &lt;span className=&quot;ae-icon-ok&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             &lt;/div&gt;
                                         );

@@ -233,7 +233,7 @@
                                     getDefaultProps: function() {
                                         return {
                                             circular: false,
-                                            descendants: &#x27;.toolbar-element&#x27;,
+                                            descendants: &#x27;.ae-toolbar-element&#x27;,
                                             keys: {
                                                 dismiss: [27],
                                                 dismissNext: [39],
@@ -252,8 +252,8 @@
                                      */
                                     render: function() {
                                         return (
-                                            &lt;div className=&quot;dropdown&quot; onFocus={this.focus} onKeyDown={this.handleKey} tabIndex=&quot;0&quot;&gt;
-                                                &lt;ul className=&quot;listbox&quot; id={this.props.listId} role=&quot;listbox&quot;&gt;
+                                            &lt;div className=&quot;ae-dropdown&quot; onFocus={this.focus} onKeyDown={this.handleKey} tabIndex=&quot;0&quot;&gt;
+                                                &lt;ul className=&quot;ae-listbox&quot; id={this.props.listId} role=&quot;listbox&quot;&gt;
                                                     {this._renderActions(this.props.commands)}
                                                 &lt;/ul&gt;
                                             &lt;/div&gt;

@@ -74,7 +74,7 @@
         render: function() {
             return (
                 <li role="option">
-                    <button className="alloy-editor-toolbar-element" onClick={this._removeStyles} tabIndex={this.props.tabIndex}>{AlloyEditor.Strings.normal}</button>
+                    <button className="ae-toolbar-element" onClick={this._removeStyles} tabIndex={this.props.tabIndex}>{AlloyEditor.Strings.normal}</button>
                 </li>
             );
         },

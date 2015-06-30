@@ -210,7 +210,7 @@
                                         CKEDITOR.once(&#x27;resourcesLoaded&#x27;, this._renderUI.bind(this));
                             
                                         editor.once(&#x27;contentDom&#x27;, function() {
-                                            editor.editable().addClass(&#x27;alloy-editor-editable&#x27;);
+                                            editor.editable().addClass(&#x27;ae-editable&#x27;);
                                         });
                             
                                         this._loadLanguageFile();
@@ -234,7 +234,7 @@
                                         if (nativeEditor) {
                                             var editable = nativeEditor.editable();
                                             if (editable) {
-                                                editable.removeClass(&#x27;alloy-editor-editable&#x27;);
+                                                editable.removeClass(&#x27;ae-editable&#x27;);
                                             }
                             
                                             nativeEditor.destroy();
@@ -416,13 +416,13 @@
                                          * when editor is not focused.
                                          *
                                          * @property placeholderClass
-                                         * @default &#x27;alloy-editor-placeholder&#x27;
+                                         * @default &#x27;ae-placeholder&#x27;
                                          * @writeOnce
                                          * @type {String}
                                          */
                                         placeholderClass: {
                                             validator: AlloyEditor.Lang.isString,
-                                            value: &#x27;alloy-editor-placeholder&#x27;,
+                                            value: &#x27;ae-placeholder&#x27;,
                                             writeOnce: true
                                         },
                             

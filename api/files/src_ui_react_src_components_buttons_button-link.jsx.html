@@ -234,7 +234,7 @@
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var cssClass = &#x27;button &#x27; + this.getStateClasses();
+                                        var cssClass = &#x27;ae-button &#x27; + this.getStateClasses();
                             
                                         if (this.props.renderExclusive) {
                                             return (
@@ -243,7 +243,7 @@
                                         } else {
                                             return (
                                                 &lt;button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type=&quot;button-link&quot; onClick={this.props.requestExclusive.bind(ButtonLink.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}&gt;
-                                                    &lt;span className=&quot;icon-link&quot;&gt;&lt;/span&gt;
+                                                    &lt;span className=&quot;ae-icon-link&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             );
                                         }

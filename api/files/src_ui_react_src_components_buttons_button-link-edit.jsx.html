@@ -233,16 +233,16 @@
                                         };
                             
                                         return (
-                                            &lt;div className=&quot;container-edit-link&quot;&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
-                                                    &lt;span className=&quot;icon-unlink&quot;&gt;&lt;/span&gt;
+                                            &lt;div className=&quot;ae-container-edit-link&quot;&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;ae-button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
+                                                    &lt;span className=&quot;ae-icon-unlink&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
-                                                &lt;div className=&quot;container-input&quot;&gt;
-                                                    &lt;input className=&quot;input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
-                                                    &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;button icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
+                                                &lt;div className=&quot;ae-container-input&quot;&gt;
+                                                    &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                    &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;ae-button ae-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
                                                 &lt;/div&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;button&quot; disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
-                                                    &lt;span className=&quot;icon-ok&quot;&gt;&lt;/span&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;ae-button&quot; disabled={!this.state.linkHref} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
+                                                    &lt;span className=&quot;ae-icon-ok&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             &lt;/div&gt;
                                         );

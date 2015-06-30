@@ -71,10 +71,10 @@
             }, this._handleStreamSuccess, this._handleStreamError);
 
             return (
-                <div className="alloy-editor-camera">
+                <div className="ae-camera">
                     <video ref="videoContainer">Video stream not available.</video>
-                    <button className="alloy-editor-camera-shoot" onClick={this.takePhoto} ref="buttonTakePhoto">Take photo</button>
-                    <canvas className="alloy-editor-camera-canvas" ref="canvasContainer"></canvas>
+                    <button className="ae-camera-shoot" onClick={this.takePhoto} ref="buttonTakePhoto">Take photo</button>
+                    <canvas className="ae-camera-canvas" ref="canvasContainer"></canvas>
                 </div>
             );
         },

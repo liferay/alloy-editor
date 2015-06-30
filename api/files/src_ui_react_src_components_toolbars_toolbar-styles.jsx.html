@@ -255,7 +255,7 @@
                                     getDefaultProps: function() {
                                         return {
                                             circular: true,
-                                            descendants: &#x27;.button, .toolbar-element&#x27;,
+                                            descendants: &#x27;.ae-button, .ae-toolbar-element&#x27;,
                                             keys: {
                                                 dismiss: [27],
                                                 next: [39, 40],
@@ -283,7 +283,7 @@
                                                 arrowBoxClasses = this.getArrowBoxClasses();
                                             }
                             
-                                            var cssClasses = &#x27;toolbar-styles &#x27; + arrowBoxClasses;
+                                            var cssClasses = &#x27;ae-toolbar-styles &#x27; + arrowBoxClasses;
                             
                                             var buttons = this.getToolbarButtons(
                                                 currentSelection.buttons,
@@ -294,7 +294,7 @@
                             
                                             return (
                                                 &lt;div aria-label={AlloyEditor.Strings.styles} className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
-                                                    &lt;div className=&quot;container&quot;&gt;
+                                                    &lt;div className=&quot;ae-container&quot;&gt;
                                                         {buttons}
                                                     &lt;/div&gt;
                                                 &lt;/div&gt;

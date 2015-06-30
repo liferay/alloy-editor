@@ -31,15 +31,15 @@
             assert.strictEqual('true', this.el.getAttribute('contenteditable'));
         });
 
-        it('should add alloy-editor-editable class to the editable element', function() {
-            assert.isTrue(this.alloyEditor.get('nativeEditor').editable().hasClass('alloy-editor-editable'));
+        it('should add ae-editable class to the editable element', function() {
+            assert.isTrue(this.alloyEditor.get('nativeEditor').editable().hasClass('ae-editable'));
         });
 
-        it('should remove alloy-editor-editable class from the editable element on editor destroying', function() {
+        it('should remove ae-editable class from the editable element on editor destroying', function() {
             var editable = this.alloyEditor.get('nativeEditor').editable();
             this.alloyEditor.destroy();
             this.alloyEditor = null;
-            assert.isFalse(editable.hasClass('alloy-editor-editable'));
+            assert.isFalse(editable.hasClass('ae-editable'));
         });
 
         it('should create an instance when the passed srcNode is a DOM element', function(done) {
