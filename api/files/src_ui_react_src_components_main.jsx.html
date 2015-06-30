@@ -256,10 +256,10 @@
                                         // this does not include a situation when he clicks on some button, part of
                                         // editor&#x27;s UI.
                             
-                                        // It is not easy to debounce _setUIHidden on click, because if we
-                                        // debounce it, when the handler is being invoked, the target may be no more part
+                                        // It is not easy to debounce _setUIHidden on mousedown, because if we
+                                        // debounce it, when the handler is being invoked, the target might be no more part
                                         // of the editor&#x27;s UI - onActionPerformed causes re-render.
-                                        this._clickListener = function (event) {
+                                        this._mousedownListener = function (event) {
                                             this._setUIHidden(event.target);
                                         }.bind(this);
                             
@@ -268,7 +268,7 @@
                                         }, this.props.eventsDelay, this);
                             
                                         editor.once(&#x27;contentDom&#x27;, function() {
-                                            document.addEventListener(&#x27;click&#x27;, this._clickListener);
+                                            document.addEventListener(&#x27;mousedown&#x27;, this._mousedownListener);
                                             document.addEventListener(&#x27;keydown&#x27;, this._keyDownListener);
                                         }.bind(this));
                                     },
@@ -353,8 +353,8 @@
                                      * @method componentWillUnmount
                                      */
                                     componentWillUnmount: function() {
-                                        if (this._clickListener) {
-                                            document.removeEventListener(&#x27;click&#x27;, this._clickListener);
+                                        if (this._mousedownListener) {
+                                            document.removeEventListener(&#x27;mousedown&#x27;, this._mousedownListener);
                                         }
                             
                                         if (this._keyDownListener) {
