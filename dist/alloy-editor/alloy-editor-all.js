@@ -26898,7 +26898,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @param {SyntheticEvent} event The received click event on the button.
          */
         handleClick: function handleClick(event) {
-            CKEDITOR.tools.simulate(React.findDOMNode(this.refs.fileInput), 'click');
+            React.findDOMNode(this.refs.fileInput).click();
         },
 
         /**

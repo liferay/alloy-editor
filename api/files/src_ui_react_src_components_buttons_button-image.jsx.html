@@ -236,7 +236,7 @@
                                      * @param {SyntheticEvent} event The received click event on the button.
                                      */
                                     handleClick: function(event) {
-                                        CKEDITOR.tools.simulate(React.findDOMNode(this.refs.fileInput), &#x27;click&#x27;);
+                                        React.findDOMNode(this.refs.fileInput).click();
                                     },
                             
                                     /**
