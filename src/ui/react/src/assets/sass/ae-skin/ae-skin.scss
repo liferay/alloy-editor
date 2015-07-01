@@ -1,5 +1,4 @@
 @import "bourbon";
-@import "../variables";
 
 .ae-editable {
     @include selection {
@@ -11,7 +10,7 @@
 .ae-ui {
     .ae-toolbar, [class^=ae-toolbar-] {
         background-color: $base-color;
-        border-radius: 4px;
+        border-radius: $toolbar-border-radius;
         color: $toolbar-color;
         font-family: $font-family;
 
