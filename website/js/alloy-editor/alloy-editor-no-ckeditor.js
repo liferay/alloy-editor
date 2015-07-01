@@ -19540,7 +19540,7 @@ module.exports = warning;
 },{"114":114}]},{},[1])(1)
 });
 /**
- * AlloyEditor v0.3.6.
+ * AlloyEditor v0.3.7.
  *
  * Copyright 2014-2015, Liferay, Inc.
  * All rights reserved.
@@ -26219,7 +26219,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @param {SyntheticEvent} event The received click event on the button.
          */
         handleClick: function handleClick(event) {
-            CKEDITOR.tools.simulate(React.findDOMNode(this.refs.fileInput), 'click');
+            React.findDOMNode(this.refs.fileInput).click();
         },
 
         /**

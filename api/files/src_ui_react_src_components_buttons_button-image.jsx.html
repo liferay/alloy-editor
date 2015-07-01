@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.6</b>
+                        API Docs for Version: <b>0.3.7</b>
                     </p>
                 </li>
             </div>
@@ -236,7 +236,7 @@
                                      * @param {SyntheticEvent} event The received click event on the button.
                                      */
                                     handleClick: function(event) {
-                                        CKEDITOR.tools.simulate(React.findDOMNode(this.refs.fileInput), &#x27;click&#x27;);
+                                        React.findDOMNode(this.refs.fileInput).click();
                                     },
                             
                                     /**
