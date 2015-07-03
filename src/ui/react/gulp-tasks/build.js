@@ -13,7 +13,6 @@ var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var template = require('gulp-template');
 var uglify = require('gulp-uglify');
-var walk = require('walk');
 var yuidoc = require('gulp-yuidoc-relative');
 var zip = require('gulp-zip');
 
@@ -39,7 +38,8 @@ gulp.task('build', function(callback) {
         [
             'build-css',
             'build-js',
-            'copy-languages'
+            'copy-languages',
+            'copy-md'
         ],
         [
             'create-alloy-editor-all',
@@ -59,7 +59,8 @@ gulp.task('release', function(callback) {
             'build-api',
             'build-css',
             'build-js',
-            'copy-languages'
+            'copy-languages',
+            'copy-md'
         ],
         [
             'minimize-css',
@@ -140,6 +141,12 @@ gulp.task('clean-dist', function(callback) {
 
 gulp.task('copy-ckeditor', function() {
     return gulp.src(path.join(rootDir, 'lib', 'ckeditor', '/**'))
+        .pipe(gulp.dest(editorDistFolder));
+});
+
+gulp.task('copy-md', function() {
+    return gulp.src(path.join(rootDir, '*.md'))
+        .pipe(zip('alloy-editor-' + pkg.version + '.zip'))
         .pipe(gulp.dest(editorDistFolder));
 });
 
