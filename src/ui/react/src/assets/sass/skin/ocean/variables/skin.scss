@@ -1,0 +1,14 @@
+/** GENERAL VARIABLES **/
+
+@import "font/font-icon-map";
+@import "components/variables/skin";
+
+/** COLOR PALETTE **/
+
+$color-primary: #32a8e6;
+
+/** COMPONENT VARIABLES **/
+
+@import "skin/default/variables/skin";
+
+$arrow-box-color: $color-primary;

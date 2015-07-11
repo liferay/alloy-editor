@@ -1,0 +1,54 @@
+IE10-PLUS::-ms-reveal, [class^=ae-toolbar] {
+    height: $toolbar-button-height;
+    box-sizing: content-box;
+}
+
+.ae-toolbar, [class^=ae-toolbar-] {
+    line-height: 1;
+    padding: $toolbar-padding;
+    position: absolute;
+
+    input, textarea, keygen, select, button {
+        font-size: $toolbar-font-size;
+    }
+
+    &.ae-toolbar-transition {
+        @include transition-property (height, left, opacity, top);
+        @include transition-duration (0.15s);
+        @include transition-timing-function (ease-out);
+    }
+
+    .ae-button, .ae-toolbar-element {
+        border-width: 0;
+        color: inherit;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+
+        &:hover, &:focus {
+            &:disabled, &.ae-button-disabled {
+                color: inherit;
+            }
+        }
+
+        &:disabled, &.ae-button-disabled {
+            cursor: auto;
+            opacity: 0.3;
+        }
+    }
+
+    .ae-button {
+        height: $toolbar-button-height;
+        width: $toolbar-button-width;
+    }
+}
+
+.ae-toolbar-add {
+    border: solid $toolbar-add-border-width transparent;
+    padding: $toolbar-add-padding;
+
+    .ae-button {
+        height: $toolbar-add-height;
+        width: $toolbar-add-width;
+    }
+}

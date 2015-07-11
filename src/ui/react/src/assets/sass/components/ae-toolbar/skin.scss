@@ -1,0 +1,48 @@
+.ae-toolbar, [class^=ae-toolbar-] {
+    background-color: $toolbar-bg-color;
+    border-radius: $toolbar-border-radius;
+    color: $toolbar-font-color;
+    font-family: $toolbar-font-family;
+
+    .ae-button, .ae-toolbar-element {
+        background-color: transparent;
+
+        &:hover {
+            color: $toolbar-button-hover-color;
+        }
+
+        &.ae-button-pressed {
+            background-color: $toolbar-button-active-bg-color;
+
+            &:hover {
+                color: $toolbar-button-hover-color;
+            }
+        }
+
+        &.ae-button-disabled {
+            opacity: 0.3;
+        }
+    }
+}
+
+.ae-toolbar-add {
+    background-color: $toolbar-add-bg-color;
+    border-color: $toolbar-add-border-color;
+    border-radius: $toolbar-add-border-radius;
+    color: $toolbar-add-font-color;
+
+    &:hover, &:focus {
+        opacity: 0.7;
+    }
+
+    .ae-button-add {
+        &:hover, &:focus {
+            color: inherit;
+        }
+
+        .ae-icon-add {
+            font-size: $toolbar-add-icon-size;
+            line-height: $toolbar-add-icon-size;
+        }
+    }
+}

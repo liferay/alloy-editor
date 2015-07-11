@@ -1,0 +1,15 @@
+$toolbar-base-color: #32a8e6;
+$toolbar-button-color: darken($toolbar-base-color, 12%);
+
+$toolbar-bg-color: $toolbar-base-color;
+$toolbar-border-radius: 4px;
+$toolbar-button-active-bg-color: lighten($toolbar-button-color, 4%);
+$toolbar-button-hover-color: $toolbar-button-color;
+$toolbar-font-color: #fff;
+$toolbar-font-family: $base-font-family;
+
+$toolbar-add-bg-color: $toolbar-bg-color;
+$toolbar-add-border-color: transparent;
+$toolbar-add-border-radius: $toolbar-button-height / 2;
+$toolbar-add-font-color: $toolbar-font-color;
+$toolbar-add-icon-size: 12px;

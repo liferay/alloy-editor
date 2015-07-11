@@ -1,0 +1,3 @@
+.ae-placeholder:empty:not(:focus):before {
+    content: attr(data-placeholder);
+}
