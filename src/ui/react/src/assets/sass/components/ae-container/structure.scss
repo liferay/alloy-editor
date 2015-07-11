@@ -1,0 +1,47 @@
+.ae-container, [class^=ae-container-] {
+    @include align-items(center);
+    @include display(inline-flex);
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+
+    box-sizing: border-box;
+
+    *, *:after, *:before {
+        box-sizing: inherit;
+        color: inherit;
+    }
+
+    input, textarea, keygen, select, button {
+        color: initial;
+    }
+
+    .ae-container, [class^=ae-container-], .ae-button, .ae-toolbar-element, label {
+        font-size: $container-font-size;
+        margin: 0;
+        position: relative;
+
+        &:not(:last-child) {
+            margin-right: $container-element-margin;
+        }
+    }
+}
+
+.ae-container-edit-link, .ae-container-edit-table {
+    height: $base-height $IE9-ONLY;
+
+    * {
+        float: left $IE9-ONLY;
+    }
+
+    label {
+        padding: $container-edit-label-padding;
+        position: relative $IE9-ONLY;
+        top: 50% $IE9-ONLY;
+        transform: translateY(-50%) $IE9-ONLY;
+    }
+
+    IE10-PLUS::-ms-reveal, label {
+        top: 0;
+        transform: translateY(0);
+    }
+}

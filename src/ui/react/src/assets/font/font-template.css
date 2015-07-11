@@ -9,7 +9,7 @@
 	font-style: normal;
 }
 
-[class^="ae-icon-"], [class^=" ae-icon-"] {
+[class*="ae-icon-"], [class*=" ae-icon-"] {
 	font-family: '<%= fontName %>';
 	speak: none;
 	font-size: 20px;

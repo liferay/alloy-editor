@@ -1,0 +1,9 @@
+.ae-twitter-link {
+    padding: $twitter-link-padding;
+
+    &:after {
+        display: inline-block;
+        margin: $twitter-link-icon-margin;
+        vertical-align: middle;
+    }
+}

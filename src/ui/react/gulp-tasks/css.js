@@ -32,9 +32,12 @@ function getFolders(dir) {
 }
 
 gulp.task('sass2css', function() {
-    return gulp.src(path.join(reactDir, 'src/assets/sass/**/*.scss'))
+    return gulp.src(path.join(reactDir, 'src/assets/sass/**/main.scss'))
         .pipe(sass({
-            includePaths: [path.join(rootDir, 'node_modules/bourbon/app/assets/stylesheets')],
+            includePaths: [
+                path.join(rootDir, 'node_modules/bourbon/app/assets/stylesheets'),
+                path.join(reactDir, 'src/assets/sass')
+            ],
             onError: errorHandler.bind(this)
         }))
         .pipe(gulp.dest(path.join(editorDistFolder, 'assets/css')));
@@ -47,8 +50,7 @@ gulp.task('join-css', function() {
     var tasks = skins.map(function(skin) {
         return gulp.src(
             [
-                path.join(cssDir, '*.css'),
-                path.join(cssDir, 'skin', skin, '*.css'),
+                path.join(cssDir, 'skin', skin, 'main.css'),
                 path.join(editorDistFolder, 'assets/alloyeditor-font.css')
             ])
             .pipe(concat('alloy-editor-' + skin + '.css'))

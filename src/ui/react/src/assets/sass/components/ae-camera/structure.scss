@@ -1,0 +1,16 @@
+.ae-camera {
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+
+    .ae-camera-canvas {
+        left: -10000px;
+        position: absolute;
+        top: -10000px;
+    }
+
+    .ae-camera-shoot {
+        margin-top: 10px;
+    }
+}
