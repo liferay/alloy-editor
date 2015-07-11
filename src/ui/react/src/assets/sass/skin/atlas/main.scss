@@ -1,0 +1,10 @@
+@import "variables/structure";
+@import "skin/default/structure";
+
+@import "variables/skin";
+@import "skin/default/skin";
+
+[class*="ae-icon-"], [class*=" ae-icon-"] {
+	font-size: 14px;
+	line-height: 1;
+}
