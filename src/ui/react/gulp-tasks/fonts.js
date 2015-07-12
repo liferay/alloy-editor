@@ -22,6 +22,12 @@ gulp.task('generate-fonts', function() {
             normalize: true
         }))
         .on('glyphs', function(glyphs, options) {
+            gulp.src(path.join(reactDir, 'src/assets/font/font-icon-map-template.scss'))
+                .pipe(consolidate('lodash', {
+                    glyphs: glyphs
+                }))
+                .pipe(rename({basename: 'font-icon-map'}))
+                .pipe(gulp.dest(path.join(reactDir, 'src/assets/sass/font')));
             gulp.src(path.join(reactDir, 'src/assets/font/font-template.css'))
                 .pipe(consolidate('lodash', {
                     fontName: fontName,

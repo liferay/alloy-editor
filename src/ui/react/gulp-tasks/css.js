@@ -61,7 +61,7 @@ gulp.task('join-css', function() {
 });
 
 gulp.task('build-css', function(callback) {
-    runSequence(['sass2css', 'generate-fonts'], 'join-css', 'clean-fonts', callback);
+    runSequence('generate-fonts', 'sass2css', 'join-css', 'clean-fonts', callback);
 });
 
 gulp.task('minimize-css', function() {
