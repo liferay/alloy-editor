@@ -1,5 +1,6 @@
 dist
 node_modules
+.font-cache
 .sass-cache
 *sublime*
 test-results.xml

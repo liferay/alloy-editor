@@ -48,12 +48,15 @@ gulp.task('join-css', function() {
     var skins = getFolders(path.join(editorDistFolder, 'assets/css/skin'));
 
     var tasks = skins.map(function(skin) {
+        var skinFileName = 'alloy-editor-' + skin + '.css';
+        var skinFontFileName = 'alloyeditor-font-' + skin + '.css';
+
         return gulp.src(
             [
-                path.join(cssDir, 'skin', skin, 'main.css'),
-                path.join(editorDistFolder, 'assets/alloyeditor-font.css')
+                path.join(reactDir, 'src', 'assets', 'sass', 'skin', skin, '.font-cache', skinFontFileName),
+                path.join(cssDir, 'skin', skin, 'main.css')
             ])
-            .pipe(concat('alloy-editor-' + skin + '.css'))
+            .pipe(concat(skinFileName))
             .pipe(gulp.dest(path.join(editorDistFolder, 'assets')));
     });
 
@@ -75,7 +78,6 @@ gulp.task('minimize-css', function() {
 
 gulp.task('clean-fonts', function(callback) {
     del([
-        path.join(editorDistFolder, 'assets/alloyeditor-font.css'),
         path.join(editorDistFolder, 'assets/css')
     ], callback);
 });
