@@ -5,6 +5,11 @@
     box-shadow: $dropdown-shadow $dropdown-shadow-color;
     color: $dropdown-font-color;
 
+    &.ae-arrow-box:after {
+        color: $dropdown-bg-color;
+        display: $dropdown-arrow-display;
+    }
+
     .ae-list-header {
         color: $dropdown-listbox-header-color;
         font-size: $dropdown-listbox-header-font-size;

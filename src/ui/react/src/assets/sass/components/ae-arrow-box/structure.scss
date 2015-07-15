@@ -27,6 +27,24 @@
         }
     }
 
+    &.ae-arrow-box-top-left {
+        &:after {
+            @include triangle($arrow-box-width $arrow-box-height, currentColor, up);
+
+            left: 3 * $base-padding / 2;
+            top: -$arrow-box-height;
+        }
+    }
+
+    &.ae-arrow-box-top-right {
+        &:after {
+            @include triangle($arrow-box-width $arrow-box-height, currentColor, up);
+
+            right: 3 * $base-padding / 2;
+            top: -$arrow-box-height;
+        }
+    }
+
     &.ae-arrow-box-left {
         &:after {
             @include triangle($arrow-box-width $arrow-box-height, currentColor, left);
