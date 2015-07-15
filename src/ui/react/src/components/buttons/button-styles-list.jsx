@@ -90,7 +90,7 @@
          */
         render: function() {
             return (
-                <div className="ae-dropdown" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
+                <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
                     <ul className="ae-listbox" role="listbox">
                         <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />
 
