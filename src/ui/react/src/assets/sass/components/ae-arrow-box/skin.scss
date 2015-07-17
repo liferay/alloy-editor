@@ -1,0 +1,27 @@
+@import "bourbon";
+
+.ae-arrow-box {
+    &.ae-arrow-box-bottom:after {
+        color: $arrow-box-color;
+    }
+
+    &.ae-arrow-box-top:after {
+        color: $arrow-box-color;
+    }
+
+    &.ae-arrow-box-top-left:after {
+        color: $arrow-box-color;
+    }
+
+    &.ae-arrow-box-top-right:after {
+        color: $arrow-box-color;
+    }
+
+    &.ae-arrow-box-left:after {
+        color: $arrow-box-color;
+    }
+
+    &.ae-arrow-box-right:after {
+        color: $arrow-box-color;
+    }
+}

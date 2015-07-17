@@ -1,0 +1,8 @@
+.ae-twitter-link {
+    background-color: $twitter-link-background-color;
+
+    &:after {
+        content: map-get($font-icon-map, $twitter-link-icon);
+        font-family: $base-font-icon-family;
+    }
+}

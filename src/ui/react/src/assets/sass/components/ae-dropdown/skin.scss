@@ -1,0 +1,26 @@
+.ae-dropdown, [class^=ae-dropdown-] {
+    background-color: $dropdown-bg-color;
+    border: 1px solid $dropdown-border-color;
+    border-radius: $dropdown-border-radius;
+    box-shadow: $dropdown-shadow $dropdown-shadow-color;
+    color: $dropdown-font-color;
+
+    &.ae-arrow-box:after {
+        color: $dropdown-bg-color;
+        display: $dropdown-arrow-display;
+    }
+
+    .ae-list-header {
+        color: $dropdown-listbox-header-color;
+        font-size: $dropdown-listbox-header-font-size;
+        font-style: $dropdown-listbox-header-font-style;
+    }
+
+    .ae-listbox {
+        .ae-toolbar-element {
+            &:hover {
+                background-color: $dropdown-hover-bg-color;
+            }
+        }
+    }
+}

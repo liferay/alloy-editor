@@ -1,0 +1,67 @@
+@import "bourbon";
+
+.ae-arrow-box {
+    &:after {
+        content: '';
+        margin: auto;
+        position: absolute;
+    }
+
+    &.ae-arrow-box-bottom {
+        &:after {
+            @include triangle($arrow-box-width $arrow-box-height, currentColor, down);
+
+            left: 0;
+            right: 0;
+            top: 100%;
+        }
+    }
+
+    &.ae-arrow-box-top {
+        &:after {
+            @include triangle($arrow-box-width $arrow-box-height, currentColor, up);
+
+            left: 0;
+            right: 0;
+            top: -$arrow-box-height;
+        }
+    }
+
+    &.ae-arrow-box-top-left {
+        &:after {
+            @include triangle($arrow-box-width $arrow-box-height, currentColor, up);
+
+            left: 3 * $base-padding / 2;
+            top: -$arrow-box-height;
+        }
+    }
+
+    &.ae-arrow-box-top-right {
+        &:after {
+            @include triangle($arrow-box-width $arrow-box-height, currentColor, up);
+
+            right: 3 * $base-padding / 2;
+            top: -$arrow-box-height;
+        }
+    }
+
+    &.ae-arrow-box-left {
+        &:after {
+            @include triangle($arrow-box-width $arrow-box-height, currentColor, left);
+
+            left: -$arrow-box-height;
+            top: 0;
+            bottom: 0;
+        }
+    }
+
+    &.ae-arrow-box-right {
+        &:after {
+            @include triangle($arrow-box-width $arrow-box-height, currentColor, right);
+
+            right: -$arrow-box-height;
+            top: 0;
+            bottom: 0;
+        }
+    }
+}

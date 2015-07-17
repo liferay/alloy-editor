@@ -1,0 +1,65 @@
+/** GENERAL VARIABLES **/
+
+@import ".font-cache/font-icon-map";
+@import "components/variables/skin";
+
+$base-font-icon-family: alloyeditor-atlas;
+
+/** COLOR PALETTE **/
+
+$color-anchor-navy: #29353D;
+$color-anchor-active: lighten($color-anchor-navy, 8%);
+$color-primary: #65B6F0;
+$color-secondary: #869CAD;
+$color-secondary-light: lighten($color-secondary, 13%);
+$color-secondary-extra-light: lighten($color-secondary, 37%);
+
+/** COMPONENT VARIABLES **/
+
+@import "skin/default/variables/skin";
+
+$color-dropdown-border: #dce0e3;
+$color-dropdown-shadow: #e4ebf0;
+
+/** ARROW-BOX **/
+$arrow-box-color: $color-anchor-navy;
+
+/** CONTAINER-DROPDOWN **/
+$container-dropdown-icon-arrow-rotation: 0deg;
+
+/** CONTAINER-INPUT **/
+$container-input-border-radius: 2px;
+$container-input-color: $color-secondary;
+$container-input-clear-color: $color-secondary;
+$container-input-font-size: 14px;
+$container-input-icon-remove-height: 20px;
+$container-input-placeholder-color: $color-secondary-light;
+
+/** DROPDOWN **/
+$dropdown-arrow-display: block;
+$dropdown-border-color: $color-dropdown-border;
+$dropdown-border-radius: 4px;
+$dropdown-font-color: $color-secondary;
+$dropdown-hover-bg-color: $color-secondary-extra-light;
+$dropdown-shadow: 0 2px 4px 0;
+$dropdown-shadow-color: $color-dropdown-shadow;
+
+/** DROPDOWN-LISTBOX HEADER **/
+$dropdown-listbox-header-color: #b0b4bb;
+$dropdown-listbox-header-font-size: 14px;
+
+/** SELECTION **/
+$selection-bg-color: $color-secondary-light;
+$selection-color: #fff;
+
+/** TOOLBAR **/
+$toolbar-bg-color: $color-anchor-navy;
+$toolbar-border-radius: 2px;
+$toolbar-button-active-bg-color: $color-anchor-active;
+$toolbar-button-hover-color: $color-primary;
+
+$toolbar-add-bg-color: #fff;
+$toolbar-add-border-color: $color-secondary-light;
+$toolbar-add-border-radius: 4px;
+$toolbar-add-font-color: $color-secondary;
+$toolbar-add-icon-size: 22px;

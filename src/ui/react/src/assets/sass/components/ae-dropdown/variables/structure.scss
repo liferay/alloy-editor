@@ -1,0 +1,21 @@
+$dropdown-toggle-min-width: $base-width;
+
+$dropdown-padding: 4px;
+$dropdown-top: $base-height + $base-padding;
+$dropdown-zindex: 0;
+
+/** DROPDOWN-LISTBOX **/
+$dropdown-listbox-margin: 0;
+$dropdown-listbox-min-height: 44px;
+$dropdown-listbox-min-width: 132px;
+$dropdown-listbox-padding: 0;
+
+/** DROPDOWN-LISTBOX HEADER **/
+$dropdown-listbox-header-font-size: inherit;
+$dropdown-listbox-header-margin: $base-padding 0 0 0;
+
+/** DROPDOWN-LISTBOX ITEM */
+$dropdown-listbox-item-font-size: inherit;
+$dropdown-listbox-item-line-height: inherit;
+$dropdown-listbox-item-max-height: inherit;
+$dropdown-listbox-item-padding: 0 0 0 8px;

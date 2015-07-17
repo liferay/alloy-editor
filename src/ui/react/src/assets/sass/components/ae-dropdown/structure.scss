@@ -1,0 +1,60 @@
+.ae-has-dropdown {
+    display: block;
+    float: left $IE9-ONLY;
+
+    /* Set width here (not min-width) to prevent the dropdown container from moving when expanding/collapsing the it */
+    width: $dropdown-toggle-min-width;
+}
+
+.ae-dropdown, [class^=ae-dropdown-] {
+    left: 0;
+    padding: $dropdown-padding;
+    position: absolute;
+    z-index: $dropdown-zindex;
+    top: $dropdown-top;
+
+    .ae-list-header {
+        display: inline-block;
+        margin: $dropdown-listbox-header-margin;
+
+        &:first-child {
+            margin-top: $base-padding;
+        }
+    }
+
+    .ae-listbox {
+        list-style: none;
+        margin: $dropdown-listbox-margin;
+        min-height: $dropdown-listbox-min-height;
+        min-width: $dropdown-listbox-min-width;
+        padding: $dropdown-listbox-padding;
+
+        .ae-toolbar-element {
+            * {
+                display: inline;
+            }
+
+            &[class^=ae-icon-]:before {
+                padding-right: $base-padding;
+                vertical-align: middle;
+            }
+
+            font-size: $dropdown-listbox-item-font-size;
+            height: 3em;
+            line-height: $dropdown-listbox-item-line-height;
+            margin-right: 0;
+            max-height: $dropdown-listbox-item-max-height;
+            min-width: 100%;
+            padding: $dropdown-listbox-item-padding;
+            overflow: hidden;
+            text-align: left;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: auto;
+        }
+    }
+
+    * {
+        display: block $IE9-ONLY;
+    }
+}

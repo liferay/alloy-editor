@@ -1,0 +1,9 @@
+.ae-container-dropdown, [class^=ae-container-dropdown-] {
+    > .ae-toolbar-element {
+        .ae-container {
+            .ae-icon-arrow {
+                @include transform(rotate($container-dropdown-icon-arrow-rotation));
+            }
+        }
+    }
+}

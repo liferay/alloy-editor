@@ -1,0 +1,32 @@
+.ae-container-input {
+    @include flex-wrap(nowrap);
+
+    width: $container-input-xl-width-multiplier * $container-input-base-width;
+
+    &.medium {
+        width: $container-input-width-multiplier * $container-input-base-width;
+    }
+
+    &.small {
+        width: $container-input-small-width-multiplier * $container-input-base-width;
+    }
+
+    input, .ae-input {
+        @include flex(1);
+
+        height: $base-height;
+        margin: $container-input-text-margin;
+        max-width: 100%;
+        padding: $container-input-text-padding;
+
+        display: inline-block $IE9-ONLY;
+        margin-left: -$base-padding $IE9-ONLY;
+        margin-top: $base-padding $IE9-ONLY;
+        padding-left: $base-padding $IE9-ONLY;
+        width: $container-input-xl-width-multiplier * $container-input-base-width - $base-width $IE9-ONLY;
+    }
+
+    .ae-icon-remove {
+        float: right $IE9-ONLY;
+    }
+}

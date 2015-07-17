@@ -32,9 +32,12 @@ function getFolders(dir) {
 }
 
 gulp.task('sass2css', function() {
-    return gulp.src(path.join(reactDir, 'src/assets/sass/**/*.scss'))
+    return gulp.src(path.join(reactDir, 'src/assets/sass/**/main.scss'))
         .pipe(sass({
-            includePaths: [path.join(rootDir, 'node_modules/bourbon/app/assets/stylesheets')],
+            includePaths: [
+                path.join(rootDir, 'node_modules/bourbon/app/assets/stylesheets'),
+                path.join(reactDir, 'src/assets/sass')
+            ],
             onError: errorHandler.bind(this)
         }))
         .pipe(gulp.dest(path.join(editorDistFolder, 'assets/css')));
@@ -45,13 +48,15 @@ gulp.task('join-css', function() {
     var skins = getFolders(path.join(editorDistFolder, 'assets/css/skin'));
 
     var tasks = skins.map(function(skin) {
+        var skinFileName = 'alloy-editor-' + skin + '.css';
+        var skinFontFileName = 'alloyeditor-font-' + skin + '.css';
+
         return gulp.src(
             [
-                path.join(cssDir, '*.css'),
-                path.join(cssDir, 'skin', skin, '*.css'),
-                path.join(editorDistFolder, 'assets/alloyeditor-font.css')
+                path.join(reactDir, 'src', 'assets', 'sass', 'skin', skin, '.font-cache', skinFontFileName),
+                path.join(cssDir, 'skin', skin, 'main.css')
             ])
-            .pipe(concat('alloy-editor-' + skin + '.css'))
+            .pipe(concat(skinFileName))
             .pipe(gulp.dest(path.join(editorDistFolder, 'assets')));
     });
 
@@ -59,7 +64,7 @@ gulp.task('join-css', function() {
 });
 
 gulp.task('build-css', function(callback) {
-    runSequence(['sass2css', 'generate-fonts'], 'join-css', 'clean-fonts', callback);
+    runSequence('generate-fonts', 'sass2css', 'join-css', 'clean-fonts', callback);
 });
 
 gulp.task('minimize-css', function() {
@@ -73,7 +78,6 @@ gulp.task('minimize-css', function() {
 
 gulp.task('clean-fonts', function(callback) {
     del([
-        path.join(editorDistFolder, 'assets/alloyeditor-font.css'),
         path.join(editorDistFolder, 'assets/css')
     ], callback);
 });

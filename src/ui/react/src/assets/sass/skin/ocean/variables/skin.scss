@@ -1,0 +1,16 @@
+/** GENERAL VARIABLES **/
+
+@import ".font-cache/font-icon-map";
+@import "components/variables/skin";
+
+$base-font-icon-family: alloyeditor-ocean;
+
+/** COLOR PALETTE **/
+
+$color-primary: #32a8e6;
+
+/** COMPONENT VARIABLES **/
+
+@import "skin/default/variables/skin";
+
+$arrow-box-color: $color-primary;
