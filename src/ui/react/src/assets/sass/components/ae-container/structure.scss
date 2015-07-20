@@ -40,7 +40,7 @@
         transform: translateY(-50%) $IE9-ONLY;
     }
 
-    IE10-PLUS::-ms-reveal, label {
+    #{$IE10-PLUS}::-ms-reveal, label {
         top: 0;
         transform: translateY(0);
     }

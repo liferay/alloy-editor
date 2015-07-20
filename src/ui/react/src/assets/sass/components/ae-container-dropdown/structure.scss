@@ -33,7 +33,7 @@
                 transform: translateY(-50%) $IE9-ONLY;
             }
 
-            IE10-PLUS::-ms-reveal, .ae-container-dropdown-selected-item {
+            #{$IE10-PLUS}::-ms-reveal, .ae-container-dropdown-selected-item {
                 top: 0;
                 transform: translateY(0);
             }

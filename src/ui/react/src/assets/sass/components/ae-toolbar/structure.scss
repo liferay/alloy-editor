@@ -1,4 +1,4 @@
-IE10-PLUS::-ms-reveal, [class^=ae-toolbar] {
+#{$IE10-PLUS}::-ms-reveal, [class^=ae-toolbar] {
     height: $toolbar-button-height;
     box-sizing: content-box;
 }
