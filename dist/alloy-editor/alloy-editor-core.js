@@ -6116,7 +6116,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         render: function render() {
             return React.createElement(
                 'div',
-                { className: 'ae-dropdown', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
+                { className: 'ae-dropdown ae-arrow-box ae-arrow-box-top-left', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
                 React.createElement(
                     'ul',
                     { className: 'ae-listbox', id: this.props.listId, role: 'listbox' },
@@ -8161,7 +8161,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         render: function render() {
             return React.createElement(
                 'div',
-                { className: 'ae-dropdown', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
+                { className: 'ae-dropdown ae-arrow-box ae-arrow-box-top-left', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
                 React.createElement(
                     'ul',
                     { className: 'ae-listbox', role: 'listbox' },
