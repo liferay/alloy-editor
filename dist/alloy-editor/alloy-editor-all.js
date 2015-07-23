@@ -24056,10 +24056,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
             // else if the attribute has writeOnce value, set it from the passed configuration or from the
             // default value, in this order. Otherwise, return miserable.
             else if (currentAttr.writeOnce) {
-                if (hasDefaultValue) {
-                    value = currentAttr.value;
-                } else if (hasPassedValueViaConfig) {
+                if (hasPassedValueViaConfig) {
                     value = this.__config__[attr];
+                } else if (hasDefaultValue) {
+                    value = currentAttr.value;
                 } else {
                     return;
                 }
