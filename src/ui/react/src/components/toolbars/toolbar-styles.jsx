@@ -54,7 +54,7 @@
             onDismiss: React.PropTypes.func,
 
             /**
-             * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
+             * The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
              *
              * @property {Object} selectionData
              */

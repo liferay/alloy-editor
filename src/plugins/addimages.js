@@ -3,7 +3,7 @@
 
     var isIE = CKEDITOR.env.ie;
 
-    if (CKEDITOR.plugins.get('addimages')) {
+    if (CKEDITOR.plugins.get('ae_addimages')) {
         return;
     }
 
@@ -11,7 +11,7 @@
      * CKEditor plugin which allows Drag&Drop of images directly into the editable area. The image will be encoded
      * as Data URI. An event `imageAdd` will be fired with the inserted element into the editable area.
      *
-     * @class CKEDITOR.plugins.addimages
+     * @class CKEDITOR.plugins.ae_addimages
      */
 
     /**
@@ -22,7 +22,7 @@
      */
 
     CKEDITOR.plugins.add(
-        'addimages', {
+        'ae_addimages', {
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
              * The function registers a 'dragenter', 'dragover', 'drop' and `paste` events on the editing area.
@@ -54,7 +54,7 @@
 
             /**
              * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
-             * processing to {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}}
+             * processing to {{#crossLink "CKEDITOR.plugins.ae_addimages/_processFile:method"}}{{/crossLink}}
              *
              * @protected
              * @method _handleFiles
@@ -102,7 +102,7 @@
             /**
              * Handles drag drop event. The function will create selection from the current points and
              * will send a list of files to be processed to
-             * {{#crossLink "CKEDITOR.plugins.addimages/_handleFiles:method"}}{{/crossLink}}
+             * {{#crossLink "CKEDITOR.plugins.ae_addimages/_handleFiles:method"}}{{/crossLink}}
              *
              * @protected
              * @method _onDragDrop
@@ -122,7 +122,7 @@
 
             /**
              * Checks if the pasted data is image and passes it to
-             * {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}} for processing.
+             * {{#crossLink "CKEDITOR.plugins.ae_addimages/_processFile:method"}}{{/crossLink}} for processing.
              *
              * @method _onPaste
              * @protected

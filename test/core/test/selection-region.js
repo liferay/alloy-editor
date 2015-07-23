@@ -7,7 +7,7 @@
         this.timeout(35000);
 
         before(function(done) {
-            Utils.createCKEditor.call(this, done, {extraPlugins: 'selectionregion'});
+            Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_selectionregion'});
         });
 
         after(Utils.destroyCKEditor);
