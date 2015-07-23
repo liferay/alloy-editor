@@ -4052,7 +4052,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
          */
         initializer: function initializer(config) {
             var node = this.get('srcNode');
-            node.setAttribute('contenteditable', 'true');
+
+            if (this.get('enableContentEditable')) {
+                node.setAttribute('contenteditable', 'true');
+            }
 
             var editor = CKEDITOR.inline(node);
 
@@ -4232,6 +4235,21 @@ CKEDITOR.tools.buildTableMap = function (table) {
              */
             allowedContent: {
                 validator: '_validateAllowedContent',
+                value: true,
+                writeOnce: true
+            },
+
+            /**
+             * Specifies whether AlloyEditor set the contenteditable attribute
+             * to "true" on its srcNode.
+             *
+             * @property enableContentEditable
+             * @type Boolean
+             * @default true
+             * @writeOnce
+             */
+            enableContentEditable: {
+                validator: AlloyEditor.Lang.isBoolean,
                 value: true,
                 writeOnce: true
             },

@@ -188,7 +188,10 @@
                                      */
                                     initializer: function(config) {
                                         var node = this.get(&#x27;srcNode&#x27;);
-                                        node.setAttribute(&#x27;contenteditable&#x27;, &#x27;true&#x27;);
+                            
+                                        if (this.get(&#x27;enableContentEditable&#x27;)) {
+                                            node.setAttribute(&#x27;contenteditable&#x27;, &#x27;true&#x27;);
+                                        }
                             
                                         var editor = CKEDITOR.inline(node);
                             
@@ -368,6 +371,21 @@
                                          */
                                         allowedContent: {
                                             validator: &#x27;_validateAllowedContent&#x27;,
+                                            value: true,
+                                            writeOnce: true
+                                        },
+                            
+                                        /**
+                                         * Specifies whether AlloyEditor set the contenteditable attribute
+                                         * to &quot;true&quot; on its srcNode.
+                                         *
+                                         * @property enableContentEditable
+                                         * @type Boolean
+                                         * @default true
+                                         * @writeOnce
+                                         */
+                                        enableContentEditable: {
+                                            validator: AlloyEditor.Lang.isBoolean,
                                             value: true,
                                             writeOnce: true
                                         },
