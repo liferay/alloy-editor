@@ -252,17 +252,16 @@
             Clazz.ATTRS = {
                 attr1: {
                     writeOnce: true,
-                    value: 'val1'
                 }
             };
 
             Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
             var inst = new Clazz({
-                attr1: 'val2'
+                attr1: 'val1'
             });
 
-            inst.set('attr1', 'val3');
+            inst.set('attr1', 'val2');
 
             assert.strictEqual('val1', inst.get('attr1'));
         });
@@ -274,7 +273,8 @@
 
             Clazz.ATTRS = {
                 attr1: {
-                    writeOnce: true
+                    writeOnce: true,
+                    value: 'val1'
                 }
             };
 
