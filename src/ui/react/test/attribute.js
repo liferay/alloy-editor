@@ -244,14 +244,14 @@
             assert.isUndefined(inst.get('attr1'));
         });
 
-        it('should set the value only once if it is set with writeOnce', function() {
+        it('should set the value only once if it is set with writeOnce and there is no default value', function() {
             var Clazz = function(config) {
                 Clazz.superclass.constructor.call(this, config);
             };
 
             Clazz.ATTRS = {
                 attr1: {
-                    writeOnce: true,
+                    writeOnce: true
                 }
             };
 
@@ -266,7 +266,7 @@
             assert.strictEqual('val1', inst.get('attr1'));
         });
 
-        it('should set the value only once if it is set with writeOnce via config', function() {
+        it('should set the value only once if it is set with writeOnce via config and there is a default value', function() {
             var Clazz = function(config) {
                 Clazz.superclass.constructor.call(this, config);
             };
