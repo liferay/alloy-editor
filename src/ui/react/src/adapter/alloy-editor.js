@@ -24,7 +24,7 @@
         initializer: function(config) {
             var node = this.get('srcNode');
 
-            if ( this.get('enableContentEditable') ) {
+            if (this.get('enableContentEditable')) {
                 node.setAttribute('contenteditable', 'true');
             }
 
@@ -211,6 +211,21 @@
             },
 
             /**
+             * Specifies whether AlloyEditor set the contenteditable attribute
+             * to "true" on its srcNode.
+             *
+             * @property enableContentEditable
+             * @type Boolean
+             * @default true
+             * @writeOnce
+             */
+            enableContentEditable: {
+                validator: AlloyEditor.Lang.isBoolean,
+                value: true,
+                writeOnce: true
+            },
+
+            /**
              * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
              *
              * @property eventsDelay
@@ -295,21 +310,6 @@
              */
             srcNode: {
                 setter: '_toElement',
-                writeOnce: true
-            },
-
-            /**
-             * Specifies whether AlloyEditor set the contenteditable attribute
-             * to "true" on its srcNode.
-             *
-             * @property enableContentEditable
-             * @type Boolean
-             * @default true
-             * @writeOnce
-             */
-            enableContentEditable: {
-                validator: AlloyEditor.Lang.isBoolean,
-                value: true,
                 writeOnce: true
             },
 

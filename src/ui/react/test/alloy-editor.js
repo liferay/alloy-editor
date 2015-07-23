@@ -1,25 +1,28 @@
 (function() {
     'use strict';
 
-    var assert = chai.assert,
-        initEditor = function(done, config) {
-            this.el = document.createElement('div');
-            this.el.setAttribute('id', 'editable');
-            document.body.appendChild(this.el);
+    var assert = chai.assert;
 
-            this.alloyEditor = AlloyEditor.editable('editable', config);
+    var cleanUpEditor = function() {
+        if (this.alloyEditor) {
+            this.alloyEditor.destroy();
+            this.alloyEditor = null;
+        }
 
-            this.alloyEditor.get('nativeEditor').once('instanceReady', function() {
-                done();
-            });
-        },
-        cleanUpEditor = function () {
-            if ( this.alloyEditor ) {
-                this.alloyEditor.destroy();
-                this.alloyEditor = null;
-            }
-            document.body.removeChild(this.el);
-        };
+        document.body.removeChild(this.el);
+    };
+
+    var initEditor = function(done, config) {
+        this.el = document.createElement('div');
+        this.el.setAttribute('id', 'editable');
+        document.body.appendChild(this.el);
+
+        this.alloyEditor = AlloyEditor.editable('editable', config);
+
+        this.alloyEditor.get('nativeEditor').once('instanceReady', function() {
+            done();
+        });
+    };
 
     describe('AlloyEditor', function() {
         this.timeout(35000);
@@ -29,7 +32,7 @@
                 initEditor.call(this, done);
             });
 
-            afterEach(function () {
+            afterEach(function() {
                 cleanUpEditor.call(this);
             });
 
@@ -40,10 +43,12 @@
 
         describe('with enableContentEditable set to true', function() {
             beforeEach(function(done) {
-                initEditor.call(this, done, {enableContentEditable: true});
+                initEditor.call(this, done, {
+                    enableContentEditable: true
+                });
             });
 
-            afterEach(function () {
+            afterEach(function() {
                 cleanUpEditor.call(this);
             });
 
@@ -54,10 +59,12 @@
 
         describe('with enableContentEditable set to false', function() {
             beforeEach(function(done) {
-                initEditor.call(this, done, {enableContentEditable: false});
+                initEditor.call(this, done, {
+                    enableContentEditable: false
+                });
             });
 
-            afterEach(function () {
+            afterEach(function() {
                 cleanUpEditor.call(this);
             });
 
@@ -66,12 +73,12 @@
             });
         });
 
-        describe('ae-editable handling', function () {
+        describe('ae-editable class handling', function() {
             beforeEach(function(done) {
                 initEditor.call(this, done);
             });
 
-            afterEach(function () {
+            afterEach(function() {
                 cleanUpEditor.call(this);
             });
 
