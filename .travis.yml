@@ -11,3 +11,4 @@ env:
   - secure: bM6iWiz4P1tMG1vphHjIenuB7MuU3VGSPpOFri69ESnxQX+O2bLRzV1nZIpoKOiE9DS+8bGMCcFr3OLaahmhpBMtdhTvZGkcIGVbX0Egm56/QF0g+2gtBSHomEpFicIy+UUTlqkcs8wuth7xmA+AQUEr/IMz3O4pnatrPbjVzwg=
 addons:
   sauce_connect: true
+sudo: false
