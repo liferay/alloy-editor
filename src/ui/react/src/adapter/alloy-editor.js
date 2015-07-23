@@ -114,7 +114,7 @@
         },
 
         /**
-         * The function returns an HTML element from the passed value. If the passed value is a string, it should be 
+         * The function returns an HTML element from the passed value. If the passed value is a string, it should be
          * the Id of the element which have to be retrieved from the DOM.
          * If an HTML Element is passed, the element itself will be returned.
          *
@@ -212,7 +212,7 @@
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink',
+                value: 'ae_uicore,ae_selectionregion,ae_dragresize,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
                 writeOnce: true
             },
 
@@ -230,7 +230,7 @@
 
             /**
              * Specifies the class, which should be added by Placeholder plugin
-             * {{#crossLink "CKEDITOR.plugins.placeholder}}{{/crossLink}}
+             * {{#crossLink "CKEDITOR.plugins.ae_placeholder}}{{/crossLink}}
              * when editor is not focused.
              *
              * @property placeholderClass

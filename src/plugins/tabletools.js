@@ -4,7 +4,15 @@
  */
 
 ( function() {
-	if (CKEDITOR.plugins.tabletools) return;
+	'use strict';
+
+    if (CKEDITOR.plugins.get('tabletools') || CKEDITOR.plugins.get('ae_tabletools')){
+       if (!CKEDITOR.plugins.get('ae_tabletools')) {
+            CKEDITOR.plugins.add('ae_tabletools', {});
+
+            return;
+        }
+    }
 
 	var cellNodeRegex = /^(?:td|th)$/;
 
@@ -643,7 +651,7 @@
 		return newCell;
 	}
 
-	CKEDITOR.plugins.tabletools = {
+	CKEDITOR.plugins.add('ae_tabletools', {
 		init: function( editor ) {
 			var lang = editor.lang.table;
 
@@ -656,8 +664,14 @@
 				} );
 			}
 			function addCmd( name, def ) {
-				var cmd = editor.addCommand( name, def );
-				editor.addFeature( cmd );
+				var cmd = editor.getCommand(name);
+
+				if (cmd) {
+					return;
+				}
+
+				cmd = editor.addCommand(name, def);
+				editor.addFeature(cmd);
 			}
 
 			addCmd( 'cellProperties', new CKEDITOR.dialogCommand( 'cellProperties', createDef( {
@@ -955,8 +969,7 @@
 
 		getSelectedCells: getSelectedCells
 
-	};
-	CKEDITOR.plugins.add( 'tabletools', CKEDITOR.plugins.tabletools );
+	});
 } )();
 
 /**

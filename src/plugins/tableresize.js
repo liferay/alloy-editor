@@ -4,6 +4,12 @@
  */
 
 (function() {
+    'use strict';
+
+    if (CKEDITOR.plugins.get('tableresize') || CKEDITOR.plugins.get('ae_tableresize')) {
+        return;
+    }
+
     var pxUnit = CKEDITOR.tools.cssLength;
 
     function getWidth(el) {
@@ -342,8 +348,8 @@
         evt.removeListener();
     }
 
-    CKEDITOR.plugins.add('tableresize', {
-        requires: 'tabletools',
+    CKEDITOR.plugins.add('ae_tableresize', {
+        requires: 'ae_tabletools',
 
         init: function(editor) {
             editor.on('contentDom', function() {

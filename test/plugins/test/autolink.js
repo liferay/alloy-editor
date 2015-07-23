@@ -17,7 +17,7 @@
         this.timeout(35000);
 
         before(function(done) {
-            Utils.createCKEditor.call(this, done, {extraPlugins: 'autolink'});
+            Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_autolink'});
         });
 
         after(Utils.destroyCKEditor);

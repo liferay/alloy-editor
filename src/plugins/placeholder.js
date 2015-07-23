@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    if (CKEDITOR.plugins.get('placeholder')) {
+    if (CKEDITOR.plugins.get('ae_placeholder')) {
         return;
     }
 
@@ -9,19 +9,19 @@
      * CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
      * is no content to the editor, there will be hint to the user.
      *
-     * @class CKEDITOR.plugins.placeholder
+     * @class CKEDITOR.plugins.ae_placeholder
      */
 
     /**
      * Specifies the placeholder class which have to be aded to editor when editor is not focuced.
      *
      * @attribute placeholderClass
-     * @default ae-placeholder
+     * @default ae_placeholder
      * @type String
      */
 
     CKEDITOR.plugins.add(
-        'placeholder', {
+        'ae_placeholder', {
 
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
