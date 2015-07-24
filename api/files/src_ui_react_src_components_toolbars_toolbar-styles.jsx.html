@@ -198,11 +198,25 @@
                                         editor: React.PropTypes.object.isRequired,
                             
                                         /**
+                                         * The paiload from &quot;editorInteraction&quot; event
+                                         *
+                                         * @property {Object} editorEvent
+                                         */
+                                        editorEvent: React.PropTypes.object,
+                            
+                                        /**
                                          * The label that should be used for accessibility purposes.
                                          *
                                          * @property {String} label
                                          */
                                         label: React.PropTypes.string,
+                            
+                                        /**
+                                         * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+                                         *
+                                         * @property {Function} onDismiss
+                                         */
+                                        onDismiss: React.PropTypes.func,
                             
                                         /**
                                          * The data, returned from {{#crossLink &quot;CKEDITOR.plugins.selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
@@ -265,12 +279,17 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Renders the buttons in the toolbar according to the current selection.
+                                     * Lifecycle. Renders the buttons for adding content or hides the toolbar
+                                     * if user interacted with a non-editable element.
                                      *
                                      * @method render
-                                     * @return {Object} The content which should be rendered.
+                                     * @return {Object|null} The content which should be rendered.
                                      */
                                     render: function() {
+                                        if (this.props.editorEvent &amp;&amp; !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+                                            return null;
+                                        }
+                            
                                         var currentSelection = this._getCurrentSelection();
                             
                                         if (currentSelection) {
@@ -299,9 +318,9 @@
                                                     &lt;/div&gt;
                                                 &lt;/div&gt;
                                             );
-                                        } else {
-                                            return false;
                                         }
+                            
+                                        return null;
                                     },
                             
                                     /**
@@ -379,6 +398,11 @@
                                      * @method _updatePosition
                                      */
                                     _updatePosition: function() {
+                                        // If component is not mounted, there is nothing to do
+                                        if (!React.findDOMNode(this)) {
+                                            return;
+                                        }
+                            
                                         var currentSelection = this._getCurrentSelection();
                                         var result;
                             

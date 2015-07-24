@@ -30064,6 +30064,13 @@ CKEDITOR.tools.buildTableMap = function (table) {
             editor: React.PropTypes.object.isRequired,
 
             /**
+             * The paiload from "editorInteraction" event
+             *
+             * @property {Object} editorEvent
+             */
+            editorEvent: React.PropTypes.object,
+
+            /**
              * The gutter to be applied to the widget when rendered in exclusive mode
              *
              * @property {Object} gutterExclusive
@@ -30076,6 +30083,13 @@ CKEDITOR.tools.buildTableMap = function (table) {
              * @property {String} label
              */
             label: React.PropTypes.string,
+
+            /**
+             * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+             *
+             * @property {Function} onDismiss
+             */
+            onDismiss: React.PropTypes.func,
 
             /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
@@ -30148,12 +30162,17 @@ CKEDITOR.tools.buildTableMap = function (table) {
         },
 
         /**
-         * Lifecycle. Renders the buttons for adding content.
+         * Lifecycle. Renders the buttons for adding content or hides the toolbar
+         * if user interacted with a non-editable element.
          *
          * @method render
-         * @return {Object} The content which should be rendered.
+         * @return {Object|null} The content which should be rendered.
          */
         render: function render() {
+            if (this.props.editorEvent && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+                return null;
+            }
+
             var buttons = this._getButtons();
             var className = this._getToolbarClassName();
 
@@ -30217,11 +30236,16 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method _updatePosition
          */
         _updatePosition: function _updatePosition() {
-            var region;
+            // If component is not mounted, there is nothing to do
+            if (!React.findDOMNode(this)) {
+                return;
+            }
 
             if (this.props.renderExclusive) {
                 this.updatePosition();
                 this.show();
+
+                var region;
             } else {
                 if (this.props.selectionData) {
                     region = this.props.selectionData.region;
@@ -30287,11 +30311,25 @@ CKEDITOR.tools.buildTableMap = function (table) {
             editor: React.PropTypes.object.isRequired,
 
             /**
+             * The paiload from "editorInteraction" event
+             *
+             * @property {Object} editorEvent
+             */
+            editorEvent: React.PropTypes.object,
+
+            /**
              * The label that should be used for accessibility purposes.
              *
              * @property {String} label
              */
             label: React.PropTypes.string,
+
+            /**
+             * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+             *
+             * @property {Function} onDismiss
+             */
+            onDismiss: React.PropTypes.func,
 
             /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
@@ -30354,12 +30392,17 @@ CKEDITOR.tools.buildTableMap = function (table) {
         },
 
         /**
-         * Lifecycle. Renders the buttons in the toolbar according to the current selection.
+         * Lifecycle. Renders the buttons for adding content or hides the toolbar
+         * if user interacted with a non-editable element.
          *
          * @method render
-         * @return {Object} The content which should be rendered.
+         * @return {Object|null} The content which should be rendered.
          */
         render: function render() {
+            if (this.props.editorEvent && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+                return null;
+            }
+
             var currentSelection = this._getCurrentSelection();
 
             if (currentSelection) {
@@ -30387,9 +30430,9 @@ CKEDITOR.tools.buildTableMap = function (table) {
                         buttons
                     )
                 );
-            } else {
-                return false;
             }
+
+            return null;
         },
 
         /**
@@ -30466,6 +30509,11 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method _updatePosition
          */
         _updatePosition: function _updatePosition() {
+            // If component is not mounted, there is nothing to do
+            if (!React.findDOMNode(this)) {
+                return;
+            }
+
             var currentSelection = this._getCurrentSelection();
             var result;
 
