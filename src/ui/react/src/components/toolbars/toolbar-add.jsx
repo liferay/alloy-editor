@@ -33,6 +33,13 @@
             editor: React.PropTypes.object.isRequired,
 
             /**
+             * The paiload from "editorInteraction" event
+             *
+             * @property {Object} editorEvent
+             */
+            editorEvent: React.PropTypes.object,
+
+            /**
              * The gutter to be applied to the widget when rendered in exclusive mode
              *
              * @property {Object} gutterExclusive
@@ -45,6 +52,13 @@
              * @property {String} label
              */
             label: React.PropTypes.string,
+
+            /**
+             * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+             *
+             * @property {Function} onDismiss
+             */
+            onDismiss: React.PropTypes.func,
 
             /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
@@ -117,12 +131,17 @@
         },
 
         /**
-         * Lifecycle. Renders the buttons for adding content.
+         * Lifecycle. Renders the buttons for adding content or hides the toolbar
+         * if user interacted with a non-editable element.
          *
          * @method render
-         * @return {Object} The content which should be rendered.
+         * @return {Object|null} The content which should be rendered.
          */
         render: function() {
+            if (this.props.editorEvent && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+                return null;
+            }
+
             var buttons = this._getButtons();
             var className = this._getToolbarClassName();
 
@@ -184,11 +203,16 @@
          * @method _updatePosition
          */
         _updatePosition: function() {
-            var region;
+            // If component is not mounted, there is nothing to do
+            if (!React.findDOMNode(this)) {
+                return;
+            }
 
             if (this.props.renderExclusive) {
                 this.updatePosition();
                 this.show();
+
+            var region;
 
             } else {
                 if (this.props.selectionData) {
