@@ -191,7 +191,7 @@ if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
         captureTimeout: 240000,
         customLaunchers: customLaunchers,
 
-        reporters: ['coverage', 'junit', 'progress', 'saucelabs'],
+        reporters: ['coverage', 'progress', 'saucelabs'],
 
         sauceLabs: {
             testName: 'AlloyEditor tests',
