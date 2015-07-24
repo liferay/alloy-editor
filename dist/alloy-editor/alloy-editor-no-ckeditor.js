@@ -29341,7 +29341,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             editor: React.PropTypes.object.isRequired,
 
             /**
-             * The paiload from "editorInteraction" event
+             * The payload from "editorInteraction" event
              *
              * @property {Object} editorEvent
              */
@@ -29588,7 +29588,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             editor: React.PropTypes.object.isRequired,
 
             /**
-             * The paiload from "editorInteraction" event
+             * The payload from "editorInteraction" event
              *
              * @property {Object} editorEvent
              */
