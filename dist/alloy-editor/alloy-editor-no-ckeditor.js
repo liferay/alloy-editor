@@ -30042,27 +30042,18 @@ CKEDITOR.tools.buildTableMap = function (table) {
         /**
          * Listener to the editor's `userInteraction` event. Retrieves the data about the user selection and
          * provides it via component's state property.
-         * If the element with which the user interacted is not editable, sets the "hidden" property in the state to true.
          *
          * @protected
          * @method _onEditorInteraction
          * @param {SynteticEvent} event The provided event
          */
         _onEditorInteraction: function _onEditorInteraction(event) {
-            var target = event.data.nativeEvent.target;
-
-            if (target.isContentEditable) {
-                this.setState({
-                    editorEvent: event,
-                    hidden: false,
-                    itemExclusive: null,
-                    selectionData: event.data.selectionData
-                });
-            } else {
-                this.setState({
-                    hidden: true
-                });
-            }
+            this.setState({
+                editorEvent: event,
+                hidden: false,
+                itemExclusive: null,
+                selectionData: event.data.selectionData
+            });
         },
 
         /**
