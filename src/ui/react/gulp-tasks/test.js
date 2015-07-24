@@ -3,7 +3,7 @@
 var argv = require('yargs').argv;
 var babel = require('gulp-babel');
 var gulp = require('gulp');
-var karma = require('karma').server;
+var KarmaServer = require('karma').Server;
 var mkdirp = require('mkdirp');
 var path = require('path');
 var runSequence = require('run-sequence');
@@ -45,8 +45,8 @@ gulp.task('copy-react', function() {
 });
 
 gulp.task('test', ['prepare-files'], function (done) {
-    karma.start({
+    new KarmaServer({
         configFile: path.join(__dirname, '../karma.js'),
         singleRun: (argv.debug || argv.d) ? false : true
-    }, done);
+    }, done).start();
 });
