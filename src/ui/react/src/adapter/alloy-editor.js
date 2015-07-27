@@ -43,15 +43,13 @@
 
             AlloyEditor.Lang.mix(editor.config, config);
 
-            this._editor = editor;
-
-            CKEDITOR.once('resourcesLoaded', this._renderUI.bind(this));
-
             editor.once('contentDom', function() {
                 editor.editable().addClass('ae-editable');
             });
 
-            this._loadLanguageFile();
+            AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
+
+            this._editor = editor;
         },
 
         /**
@@ -88,39 +86,6 @@
          */
         _getNativeEditor: function() {
             return this._editor;
-        },
-
-        /**
-         * Detects and load the corresponding language file
-         * if AlloyEditor language strings are not already present.
-         *
-         * @protected
-         * @method _loadLanguageFile
-         */
-        _loadLanguageFile: function() {
-            var onLanguageFileLoad = function() {
-                CKEDITOR.fire('resourcesLoaded');
-            };
-
-            if (!window.AlloyEditor.Strings) {
-                var languages = ['af', 'ar', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en-au', 'en-ca', 'en-gb', 'en', 'eo', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca', 'fr', 'gl', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'ku', 'lt', 'lv', 'mk', 'mn', 'ms', 'nb', 'nl', 'no', 'pl', 'pt-br', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr-latn', 'sr', 'sv', 'th', 'tr', 'tt', 'ug', 'uk', 'vi', 'zh-cn', 'zh'];
-
-                var userLanguage = navigator.language || navigator.userLanguage || 'en';
-
-                var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
-                var lang = parts[1];
-                var locale = parts[2];
-
-                if (languages[lang + '-' + locale]) {
-                    lang = lang + '-' + locale;
-                } else if (!languages.indexOf(lang)) {
-                    lang = 'en';
-                }
-
-                CKEDITOR.scriptLoader.load(CKEDITOR.getUrl('lang/alloy-editor/' + lang + '.js'), onLanguageFileLoad, this);
-            } else {
-                setTimeout(onLanguageFileLoad.bind(this), 0);
-            }
         },
 
         /**
@@ -302,7 +267,7 @@
             },
 
             /**
-             * The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.
+             * The Node ID or HTMl node, which AlloyEditor should use as an editable area.
              *
              * @property srcNode
              * @type String | Node
@@ -345,6 +310,8 @@
             }
         }
     });
+
+    CKEDITOR.event.implementOn(Core);
 
     AlloyEditor.Core = Core;
 }());

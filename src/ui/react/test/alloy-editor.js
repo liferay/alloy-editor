@@ -131,5 +131,17 @@
                 }
             });
         });
+
+        it('should load language files when requested explicitly', function(done) {
+            var langResourcesLoaded = sinon.stub();
+
+            AlloyEditor.loadLanguageResources(langResourcesLoaded);
+
+            setTimeout(function() {
+                assert(langResourcesLoaded.calledOnce);
+                assert.property(AlloyEditor, 'Strings');
+                done();
+            }, 50);
+        });
     });
 }());
