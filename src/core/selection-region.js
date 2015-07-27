@@ -144,6 +144,10 @@
         getSelectionData: function() {
             var selection = this.getSelection();
 
+            if ( !selection.getNative() ) {
+                return;
+            }
+
             var result = {
                 element: selection.getSelectedElement(),
                 text: selection.getSelectedText()
