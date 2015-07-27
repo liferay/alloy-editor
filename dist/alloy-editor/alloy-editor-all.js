@@ -20620,7 +20620,7 @@ CKEDITOR.disableAutoInline = true;
          * Returns data for the current selection.
          *
          * @method getSelectionData
-         * @return {Object} Returns object with the following data:
+         * @return {Object} Returns an object with the following data:
          * - element - The currently selected element, if any
          * - text - The selected text
          * - region - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionRegion:method"}}{{/crossLink}}
@@ -20699,28 +20699,48 @@ CKEDITOR.disableAutoInline = true;
          *     + right - right offset of the selection
          *     + top - top offset of the selection
          *     + width - the width of the rectangle
+         *
+         * If there is no native selection, the objects will be filled with 0.
          */
         getClientRectsRegion: function getClientRectsRegion() {
             var selection = this.getSelection();
             var nativeSelection = selection.getNative();
 
-            var rangeCount;
+            var defaultRect = {
+                bottom: 0,
+                height: 0,
+                left: 0,
+                right: 0,
+                top: 0,
+                width: 0
+            };
+
+            var region = {
+                bottom: 0,
+                endRect: defaultRect,
+                left: 0,
+                right: 0,
+                top: 0,
+                startRect: defaultRect
+            };
+
+            if (!nativeSelection) {
+                return region;
+            }
+
+            var bottom = 0;
             var clientRects;
+            var left = Infinity;
+            var rangeCount;
+            var right = -Infinity;
+            var top = Infinity;
 
             if (nativeSelection.createRange) {
-                var range = nativeSelection.createRange();
-                clientRects = range.getClientRects();
+                clientRects = nativeSelection.createRange().getClientRects();
             } else {
                 rangeCount = nativeSelection.rangeCount;
                 clientRects = nativeSelection.rangeCount > 0 ? nativeSelection.getRangeAt(0).getClientRects() : [];
             }
-
-            var bottom = 0;
-            var left = Infinity;
-            var right = -Infinity;
-            var top = Infinity;
-
-            var region;
 
             if (clientRects.length === 0) {
                 region = this.getCaretRegion();
@@ -20747,12 +20767,10 @@ CKEDITOR.disableAutoInline = true;
 
                 var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
 
-                region = {
-                    bottom: scrollPos.y + bottom,
-                    left: scrollPos.x + left,
-                    right: scrollPos.x + right,
-                    top: scrollPos.y + top
-                };
+                region.bottom = scrollPos.y + bottom;
+                region.left = scrollPos.x + left;
+                region.right = scrollPos.x + right;
+                region.top = scrollPos.y + top;
 
                 if (clientRects.length) {
                     var endRect = clientRects[clientRects.length - 1];
@@ -20791,10 +20809,13 @@ CKEDITOR.disableAutoInline = true;
          * - CKEDITOR.SELECTION_BOTTOM_TO_TOP;
          */
         getSelectionDirection: function getSelectionDirection() {
+            var direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
             var selection = this.getSelection();
             var nativeSelection = selection.getNative();
 
-            var direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
+            if (!nativeSelection) {
+                return direction;
+            }
 
             var anchorNode;
 
