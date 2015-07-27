@@ -83,10 +83,13 @@
                         ariaState = [];
 
                         if (event.name !== 'keyup' || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
-                            editor.fire('editorInteraction', {
-                                nativeEvent: event.data.$,
-                                selectionData: editor.getSelectionData()
-                            });
+                            var selectionData = editor.getSelectionData();
+                            if ( selectionData ) {
+                                editor.fire('editorInteraction', {
+                                    nativeEvent: event.data.$,
+                                    selectionData: selectionData
+                                });
+                            }
                         }
                     },
                     uiTasksTimeout
