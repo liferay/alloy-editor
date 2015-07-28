@@ -305,11 +305,25 @@
             if (domNode) {
                 var descendants = domNode.querySelectorAll(this.props.descendants);
 
-                this._descendants = Array.prototype.map.call(descendants, function(item) {
-                    return item;
-                }).sort(function(a, b) {
+                var priorityDescendants = [];
+
+                this._descendants = [];
+
+                Array.prototype.slice.call(descendants).forEach(function(item) {
+                    var dataTabIndex = item.getAttribute('data-tabindex');
+
+                    if (dataTabIndex) {
+                        priorityDescendants.push(item);
+                    } else {
+                        this._descendants.push(item);
+                    }
+                }.bind(this));
+
+                priorityDescendants = priorityDescendants.sort(function(a, b) {
                     return (AlloyEditor.Lang.toInt(a.getAttribute('data-tabindex')) > AlloyEditor.Lang.toInt(b.getAttribute('data-tabindex')));
                 });
+
+                this._descendants = priorityDescendants.concat(this._descendants);
 
                 this._activeDescendant = 0;
 
