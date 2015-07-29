@@ -1,0 +1,9 @@
+.ae-button-bridge {
+	[class*="ae-icon-"], [class*=" ae-icon-"] {
+		@include filter($button-bridge-icon-filter);
+
+		&:hover {
+			@include filter($button-bridge-icon-hover-filter);
+		}
+	}
+}

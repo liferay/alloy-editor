@@ -6,6 +6,7 @@ module.exports = [
     'core/tools.js',
     'core/uicore.js',
     'plugins/*.js',
+    'ui/react/src/uibridge/*.js*',
     'ui/react/src/adapter/main.js',
     'ui/react/src/oop/lang.js',
     'ui/react/src/oop/oop.js',
