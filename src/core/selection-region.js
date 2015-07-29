@@ -136,7 +136,7 @@
          * Returns data for the current selection.
          *
          * @method getSelectionData
-         * @return {Object} Returns an object with the following data:
+         * @return {Object|null} Returns an object with the following data:
          * - element - The currently selected element, if any
          * - text - The selected text
          * - region - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionRegion:method"}}{{/crossLink}}
@@ -144,8 +144,8 @@
         getSelectionData: function() {
             var selection = this.getSelection();
 
-            if ( !selection.getNative() ) {
-                return;
+            if (!selection.getNative()) {
+                return null;
             }
 
             var result = {

@@ -84,7 +84,8 @@
 
                         if (event.name !== 'keyup' || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
                             var selectionData = editor.getSelectionData();
-                            if ( selectionData ) {
+
+                            if (selectionData) {
                                 editor.fire('editorInteraction', {
                                     nativeEvent: event.data.$,
                                     selectionData: selectionData
