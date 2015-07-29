@@ -23041,6 +23041,53 @@ CKEDITOR.tools.buildTableMap = function (table) {
         },
 
         /**
+         * The full URL for the AlloyEditor installation directory.
+         * It is possible to manually provide the base path by setting a
+         * global variable named `ALLOYEDITOR_BASEPATH`. This global variable
+         * must be set **before** the editor script loading.
+         *
+         * @method getBasePath
+         * @static
+         * @return {String} The found base path
+         */
+        getBasePath: function getBasePath() {
+            // Find out the editor directory path, based on its <script> tag.
+            var path = window.ALLOYEDITOR_BASEPATH || '';
+
+            if (!path) {
+                var scripts = document.getElementsByTagName('script');
+
+                for (var i = 0; i < scripts.length; i++) {
+                    var match = scripts[i].src.match(AlloyEditor.regexBasePath);
+
+                    if (match) {
+                        path = match[1];
+                        break;
+                    }
+                }
+            }
+
+            // In IE (only) the script.src string is the raw value entered in the
+            // HTML source. Other browsers return the full resolved URL instead.
+            if (path.indexOf(':/') === -1 && path.slice(0, 2) !== '//') {
+                // Absolute path.
+                if (path.indexOf('/') === 0) {
+                    path = location.href.match(/^.*?:\/\/[^\/]*/)[0] + path;
+                }
+                // Relative path.
+                else {
+                    path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
+                }
+            }
+
+            if (!path) {
+                throw 'The AlloyEditor installation path could not be automatically detected. Please set the global variable "ALLOYEDITOR_BASEPATH" before creating editor instances.';
+            }
+
+            return path;
+        },
+
+        /**
          * Detects and load the corresponding language file if AlloyEditor language strings are not already present.
          * The function fires a {{#crossLink "AlloyEditor/languageResourcesLoaded:event"}}{{/crossLink}} event
          *
@@ -23074,13 +23121,49 @@ CKEDITOR.tools.buildTableMap = function (table) {
                     lang = 'en';
                 }
 
-                CKEDITOR.scriptLoader.load(CKEDITOR.getUrl('lang/alloy-editor/' + lang + '.js'), function (loaded) {
+                CKEDITOR.scriptLoader.load(AlloyEditor.getUrl('lang/alloy-editor/' + lang + '.js'), function (loaded) {
                     if (loaded) {
                         AlloyEditor.fire('languageResourcesLoaded');
                     }
                 }, this);
             }
         },
+
+        /**
+         * Gets the full URL for AlloyEditor resources. By default, URLs
+         * returned by this function contain a querystring parameter ("t")
+         * set to the {@link CKEDITOR#timestamp} value.
+         *
+         * @method getUrl
+         * @static
+         * @param {String} resource The resource whose full URL we want to get.
+         * It may be a full, absolute, or relative URL.
+         * @return {String} The full URL.
+         */
+        getUrl: function getUrl(resource) {
+            var basePath = AlloyEditor.getBasePath();
+
+            // If this is not a full or absolute path.
+            if (resource.indexOf(':/') === -1 && resource.indexOf('/') !== 0) {
+                resource = basePath + resource;
+            }
+
+            // Add the timestamp, except for directories.
+            if (CKEDITOR.timestamp && resource.charAt(resource.length - 1) !== '/' && !/[&?]t=/.test(resource)) {
+                resource += (resource.indexOf('?') >= 0 ? '&' : '?') + 't=' + CKEDITOR.timestamp;
+            }
+
+            return resource;
+        },
+
+        /**
+         * Regular expression which should match the script which have been used to load AlloyEditor.
+         *
+         * @property
+         * @type {RegExp}
+         * @static
+         */
+        regexBasePath: /(^|.*[\\\/])(?:alloy-editor[^/]+|alloy-editor)\.js(?:\?.*|;.*)?$/i,
 
         /**
          * And object, containing all currently registered buttons in AlloyEditor.
