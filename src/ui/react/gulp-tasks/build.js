@@ -77,7 +77,8 @@ gulp.task('release', function(callback) {
         ],
         [
             'minimize-css',
-            'minimize-alloy-editor-core'
+            'minimize-alloy-editor-core',
+            'minimize-react'
         ],
         [
             'create-alloy-editor-all',
@@ -250,6 +251,23 @@ gulp.task('minimize-alloy-editor-core', function() {
         .pipe(uglify())
         .pipe(rename('alloy-editor-core-min.js'))
         .pipe(gulp.dest(editorDistFolder));
+});
+
+gulp.task('minimize-react', function() {
+    if (!fs.existsSync(path.join(reactDir, 'vendor', 'react-min.js'))) {
+        return gulp.src([
+                path.join(reactDir, 'vendor', 'react.js')
+            ])
+            .pipe(replace(regexReact.CommonJS.regex, regexReact.CommonJS.replace))
+            .pipe(replace(regexReact.AMD.regex, regexReact.AMD.replace))
+            .pipe(uglify())
+            .pipe(rename('react-min.js'))
+            .pipe(gulp.dest(path.join(reactDir, 'vendor')));
+    } else {
+        return gulp.src([
+            path.join(reactDir, 'vendor', 'react-min.js')
+        ]);
+    }
 });
 
 gulp.task('watch', ['build'], function () {
