@@ -1,0 +1,48 @@
+.box,
+.quotebox {
+	padding: 8px;
+	margin: 10px auto;
+	background: #eee;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	box-shadow: 0 1px 1px #fff inset, 0 -1px 0px #ccc inset;
+}
+.box .box-title,
+.box .box-content,
+.quotebox .quote,
+.quotebox .byline {
+	box-shadow: 0 1px 1px #ddd inset;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	background: #fff;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 2px 5px;
+}
+
+.box .box-content,
+.quotebox .quote {
+	min-height: 3em;
+}
+
+.box .box-title p,
+.quotebox .byline p {
+	margin-bottom: 0;
+}
+
+
+.box .box-title {
+	background: #ddd;
+}
+.box .row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.quotebox {
+	background: #eee url(icons/widgetcommonQuotebox.png) 5px 2px no-repeat;
+}
+.quotebox .quote {
+	margin-left: 20px;
+	margin-bottom: 5px;
+}
