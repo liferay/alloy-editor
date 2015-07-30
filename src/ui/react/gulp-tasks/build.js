@@ -216,8 +216,6 @@ gulp.task('create-alloy-editor-no-ckeditor-min', function() {
             path.join(editorDistFolder, 'alloy-editor-core-min.js')
         ])
         .pipe(concat('alloy-editor-no-ckeditor-min.js'))
-        .pipe(replace(regexReact.CommonJS.regex, regexReact.CommonJS.replace))
-        .pipe(replace(regexReact.AMD.regex, regexReact.AMD.replace))
         .pipe(gulp.dest(editorDistFolder));
 });
 
