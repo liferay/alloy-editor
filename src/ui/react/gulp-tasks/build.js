@@ -36,6 +36,10 @@ var regexReact = {
     CommonJS: {
         regex: /if\(typeof\ exports==="object"&&typeof\ module!=="undefined"\)/,
         replace: 'if(false)'
+    },
+    production: {
+        regex: '"production"\ !==\ "development"',
+        replace: '"production"\ !==\ "production"'
     }
 };
 
@@ -256,6 +260,7 @@ gulp.task('minimize-react', function() {
         return gulp.src([
                 path.join(reactDir, 'vendor', 'react.js')
             ])
+            .pipe(replace(regexReact.production.regex, regexReact.production.replace))
             .pipe(replace(regexReact.CommonJS.regex, regexReact.CommonJS.replace))
             .pipe(replace(regexReact.AMD.regex, regexReact.AMD.replace))
             .pipe(uglify())
