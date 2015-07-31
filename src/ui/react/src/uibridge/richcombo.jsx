@@ -7,7 +7,7 @@
     }
 
     /* istanbul ignore next */
-    function noop() {};
+    function noop() {}
 
     // API not yet implemented inside the richcombo bridge. By mocking the unsupported methods, we
     // prevent plugins from crashing if they make use of them.
@@ -33,8 +33,8 @@
      * Generates a RichComboBridge React class for a given richcombo definition if it has not been
      * already created based on the richcombo name and definition.
      *
-     * @private
      * @method generateRichComboBridge
+     * @private
      * @param {String} richComboName The rich combo name
      * @param {Object} richComboDefinition The rich combo definition
      * @return {Object} The generated or already existing React RichCombo Class
@@ -204,7 +204,7 @@
             editor.ui.addHandler(CKEDITOR.UI_RICHCOMBO, {
                 add: generateRichComboBridge,
                 create: function(richComboDefinition) {
-                    var richComboName = Math.random().toString(16).substring(5);
+                    var richComboName = 'richComboBridge' + ((Math.random() * 1e9) >>> 0);
                     var RichComboBridge = generateRichComboBridge(richComboName, richComboDefinition);
 
                     return new RichComboBridge();

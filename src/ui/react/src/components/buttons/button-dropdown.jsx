@@ -10,6 +10,11 @@
     var ButtonDropdown = React.createClass({
         mixins: [AlloyEditor.WidgetFocusManager],
 
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         */
         getDefaultProps: function() {
             return {
                 circular: false,
@@ -36,6 +41,12 @@
             key: 'dropdown'
         },
 
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
         render: function() {
             return (
                 <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">

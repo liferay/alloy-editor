@@ -10,6 +10,12 @@
      * @constructor
      */
     CKEDITOR.plugins.add('ae_uibridge', {
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         *
+         * @method beforeInit
+         * @param {Object} editor The current editor instance
+         */
         beforeInit: function(editor) {
             var originalUIAddFn = editor.ui.add;
 

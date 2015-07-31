@@ -7,7 +7,7 @@
     }
 
     /* istanbul ignore next */
-    function noop() {};
+    function noop() {}
 
     // API not yet implemented inside the panel menu button bridge. By mocking the unsupported methods, we
     // prevent plugins from crashing if they make use of them.
@@ -146,7 +146,7 @@
             editor.ui.addHandler(CKEDITOR.UI_PANELBUTTON, {
                 add: generatePanelMenuButtonBridge,
                 create: function(panelMenuButtonDefinition) {
-                    var panelMenuButtonName = Math.random().toString(16).substring(5);
+                    var panelMenuButtonName = 'panelMenuButtonBridge' + ((Math.random() * 1e9) >>> 0);
                     var PanelMenuButtonBridge = generatePanelMenuButtonBridge(panelMenuButtonName, panelMenuButtonDefinition);
 
                     return new PanelMenuButtonBridge();

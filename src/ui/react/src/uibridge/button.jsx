@@ -7,7 +7,7 @@
     }
 
     /* istanbul ignore next */
-    function noop() {};
+    function noop() {}
 
     // API not yet implemented inside the button bridge. By mocking the unsupported methods, we
     // prevent plugins from crashing if they make use of them.
@@ -116,7 +116,7 @@
 
         /**
          * Set the add handler for UI_BUTTON to our own. We do this in the init phase to override
-         * the one in the native plugin in case it's present
+         * the one in the native plugin in case it's present.
          *
          * @method init
          * @param {Object} editor The CKEditor instance being initialized
@@ -129,7 +129,7 @@
             editor.ui.addHandler(CKEDITOR.UI_BUTTON, {
                 add: generateButtonBridge,
                 create: function(buttonDefinition) {
-                    var buttonName = Math.random().toString(16).substring(5);
+                    var buttonName = 'buttonBridge' + ((Math.random() * 1e9) >>> 0);
                     var ButtonBridge = generateButtonBridge(buttonName, buttonDefinition);
 
                     return new ButtonBridge();
