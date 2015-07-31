@@ -398,7 +398,7 @@
                                                 var left = this.props.editor.get(&#x27;nativeEditor&#x27;).editable().getClientRect().left;
                             
                                                 domNode.style.left = left - domNode.offsetWidth - this.props.gutterExclusive.left + &#x27;px&#x27;;
-                                                domNode.style.top = region.top - domNode.offsetHeight/2 + startRect.height/2 + &#x27;px&#x27;;
+                                                domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + &#x27;px&#x27;;
                                                 domNode.style.opacity = 1;
                             
                                                 domElement.removeClass(&#x27;ae-arrow-box&#x27;);

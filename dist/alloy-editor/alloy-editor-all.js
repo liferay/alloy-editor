@@ -30900,7 +30900,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                     var left = this.props.editor.get('nativeEditor').editable().getClientRect().left;
 
                     domNode.style.left = left - domNode.offsetWidth - this.props.gutterExclusive.left + 'px';
-                    domNode.style.top = region.top - domNode.offsetHeight / 2 + startRect.height / 2 + 'px';
+                    domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2) + 'px';
                     domNode.style.opacity = 1;
 
                     domElement.removeClass('ae-arrow-box');
