@@ -20,9 +20,6 @@
         padding: $container-input-text-padding;
 
         display: inline-block $IE9-ONLY;
-        margin-left: -$container-input-base-padding $IE9-ONLY;
-        margin-top: $container-input-base-padding $IE9-ONLY;
-        padding-left: $container-input-base-padding $IE9-ONLY;
         width: $container-input-xl-width-multiplier * $container-input-base-width - $container-input-base-width $IE9-ONLY;
     }
 
