@@ -1,0 +1,41 @@
+/** GENERAL VARIABLES */
+
+@import "components/variables/structure";
+
+$base-font-size: 15px;
+
+$base-height: 28px;
+$base-width: 26px;
+
+$base-padding: 8px;
+
+/** COMPONENT VARIABLES **/
+
+@import "skin/default/variables/structure";
+
+/** CONTAINER **/
+$container-element-margin: 0;
+
+/** CONTAINER-DROPDOWN **/
+$container-dropdown-padding: 0 10px;
+
+/** DROPDOWN **/
+$dropdown-padding: 0;
+$dropdown-zindex: 1;
+
+/** DROPDOWN-LISTBOX HEADER **/
+$dropdown-listbox-header-margin: 0;
+
+/** DROPDOWN-LISTBOX ITEM **/
+$dropdown-listbox-item-font-size: 11px;
+$dropdown-listbox-item-line-height: 28px;
+$dropdown-listbox-item-max-height: 44px;
+$dropdown-listbox-item-padding: 4px 6px;
+
+/** TOOLBAR **/
+$toolbar-add-border-width: 2px;
+$toolbar-add-height: $base-height;
+$toolbar-add-width: $base-width;
+
+/** TOOLBAR-ADD **/
+$toolbar-add-border-width: 0;

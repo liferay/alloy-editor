@@ -1,0 +1,43 @@
+/** GENERAL VARIABLES **/
+
+@import ".font-cache/font-icon-map";
+@import "components/variables/skin";
+
+$base-font-icon-family: alloyeditor-mono;
+
+/** COLOR PALETTE **/
+
+$CKEDITOR_base_color: #cfd1cf;
+$CKEDITOR_font_base_color: #393939;
+
+$CKEDITOR_button_bg_image_gradient: linear-gradient(to bottom,#aaa,#cacaca);
+$CKEDITOR_container_bg_image_gradient: linear-gradient(to bottom, #f5f5f5, $CKEDITOR_base_color);
+
+/** COMPONENT VARIABLES **/
+
+@import "skin/default/variables/skin";
+
+/** ARROW-BOX **/
+$arrow-box-color: $CKEDITOR_base_color;
+
+/** BUTTON-BRIDGE **/
+$button-bridge-icon-filter: none;
+$button-bridge-icon-hover-filter: none;
+
+/** DROPDOWN-LISTBOX HEADER **/
+$dropdown-listbox-header-bg: $CKEDITOR_base_color;
+$dropdown-listbox-header-bg_image_gradient: $CKEDITOR_container_bg_image_gradient;
+$dropdown-listbox-header-color: #474747;
+$dropdown-listbox-header-font-size: 11px;
+
+/** TOOLBAR **/
+$toolbar-bg-color: $CKEDITOR_base_color;
+$toolbar-border-radius: 0;
+$toolbar-button-active-bg-color: #b5b5b5;
+$toolbar-button-hover-color: $CKEDITOR_font_base_color;
+$toolbar-font-color: $CKEDITOR_font_base_color;
+
+$toolbar-add-bg-color: $CKEDITOR_base_color;
+$toolbar-add-border-radius: 0;
+$toolbar-add-font-color: $CKEDITOR_font_base_color;
+$toolbar-add-icon-size: 22px;

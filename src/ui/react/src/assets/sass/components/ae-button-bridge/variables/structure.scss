@@ -1,0 +1,10 @@
+$CKEDITOR-icon-height: 16px;
+$CKEDITOR-icon-width: 16px;
+
+$button-bridge-base-height: $base-height;
+$button-bridge-base-width: $base-width;
+
+$button-bridge-icon-margin-left: ($button-bridge-base-width - $CKEDITOR-icon-width) / 2;
+
+$button-bridge-icon-height: $CKEDITOR-icon-height;
+$button-bridge-icon-width: $CKEDITOR-icon-width;

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    if (CKEDITOR.plugins.get('autolink')) {
+    if (CKEDITOR.plugins.get('ae_autolink')) {
         return;
     }
 
@@ -30,11 +30,11 @@
     /**
      * CKEditor plugin which automatically generates links when user types text which looks like URL.
      *
-     * @class CKEDITOR.plugins.autolink
+     * @class CKEDITOR.plugins.ae_autolink
      * @constructor
      */
     CKEDITOR.plugins.add(
-        'autolink', {
+        'ae_autolink', {
 
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.

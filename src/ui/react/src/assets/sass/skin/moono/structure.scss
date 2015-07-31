@@ -1,0 +1,23 @@
+.ae-ui {
+    .ae-toolbars {
+        > .ae-toolbar, > [class^=ae-toolbar-] {
+            border-color: solid 1px transparent;
+
+            > .ae-container {
+                border: solid 1px transparent;
+            }
+
+            .ae-button, .ae-toolbar-element {
+                border-width: 0;
+            }
+
+            .ae-dropdown {
+                .ae-list-header {
+                    display: block;
+                    padding: 4px 6px;
+                    border-bottom: solid 1px transparent;
+                }
+            }
+        }
+    }
+}

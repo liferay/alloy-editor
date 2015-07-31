@@ -83,7 +83,37 @@
 
         <script>
             var editor1 = AlloyEditor.editable('description');
-            var editor2 = AlloyEditor.editable('editable');
+            var editor2 = AlloyEditor.editable('editable', {
+                extraPlugins: AlloyEditor.Core.ATTRS.extraPlugins.value + ',ae_panelmenubuttonbridge,ae_buttonbridge,ae_richcombobridge,find,pastefromword,showblocks,colorbutton,widgetcommon,font',
+                toolbars: {
+                    add: {
+                        buttons: ['image', 'camera', 'hline', 'table', 'PasteFromWord', 'WidgetcommonBox', 'WidgetcommonQuotebox'],
+                        tabIndex: 2
+                    },
+                    styles: {
+                        selections: [{
+                            name: 'link',
+                            buttons: ['linkEdit'],
+                            test: AlloyEditor.SelectionTest.link
+                        }, {
+                            name: 'image',
+                            buttons: ['imageLeft', 'imageRight'],
+                            test: AlloyEditor.SelectionTest.image
+                        }, {
+                            name: 'text',
+                            buttons: ['styles', 'TextColor', 'BGColor', 'Font', 'FontSize', 'Find', 'Replace', 'ShowBlocks', 'bold', 'italic', 'underline', 'link', 'twitter'],
+                            test: AlloyEditor.SelectionTest.text
+                        }, {
+                            name: 'table',
+                            buttons: ['tableHeading', 'tableRow', 'tableColumn', 'tableCell', 'tableRemove'],
+                            getArrowBoxClasses: AlloyEditor.SelectionGetArrowBoxClasses.table,
+                            setPosition: AlloyEditor.SelectionSetPosition.table,
+                            test: AlloyEditor.SelectionTest.table
+                        }],
+                        tabIndex: 1
+                    }
+                }
+            });
             var editor3 = AlloyEditor.editable('headline');
         </script>
 

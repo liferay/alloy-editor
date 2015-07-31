@@ -4,7 +4,15 @@
  */
 
 ( function() {
-	if (CKEDITOR.plugins.tabletools) return;
+	'use strict';
+
+    if (CKEDITOR.plugins.get('tabletools') || CKEDITOR.plugins.get('ae_tabletools')){
+       if (!CKEDITOR.plugins.get('ae_tabletools')) {
+            CKEDITOR.plugins.add('ae_tabletools', {});
+
+            return;
+        }
+    }
 
 	var cellNodeRegex = /^(?:td|th)$/;
 
@@ -643,7 +651,7 @@
 		return newCell;
 	}
 
-	CKEDITOR.plugins.tabletools = {
+	CKEDITOR.plugins.add('ae_tabletools', {
 		init: function( editor ) {
 			var lang = editor.lang.table;
 
@@ -656,15 +664,15 @@
 				} );
 			}
 			function addCmd( name, def ) {
-				var cmd = editor.addCommand( name, def );
-				editor.addFeature( cmd );
-			}
+				var cmd = editor.getCommand(name);
 
-			addCmd( 'cellProperties', new CKEDITOR.dialogCommand( 'cellProperties', createDef( {
-				allowedContent: 'td th{width,height,border-color,background-color,white-space,vertical-align,text-align}[colspan,rowspan]',
-				requiredContent: 'table'
-			} ) ) );
-			CKEDITOR.dialog.add( 'cellProperties', this.path + 'dialogs/tableCell.js' );
+				if (cmd) {
+					return;
+				}
+
+				cmd = editor.addCommand(name, def);
+				editor.addFeature(cmd);
+			}
 
 			addCmd( 'rowDelete', createDef( {
 				requiredContent: 'table',
@@ -778,185 +786,11 @@
 					insertCell( selection );
 				}
 			} ) );
-
-			// If the "menu" plugin is loaded, register the menu items.
-			if ( editor.addMenuItems ) {
-				editor.addMenuItems( {
-					tablecell: {
-						label: lang.cell.menu,
-						group: 'tablecell',
-						order: 1,
-						getItems: function() {
-							var selection = editor.getSelection(),
-								cells = getSelectedCells( selection );
-							return {
-								tablecell_insertBefore: CKEDITOR.TRISTATE_OFF,
-								tablecell_insertAfter: CKEDITOR.TRISTATE_OFF,
-								tablecell_delete: CKEDITOR.TRISTATE_OFF,
-								tablecell_merge: mergeCells( selection, null, true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_merge_right: mergeCells( selection, 'right', true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_merge_down: mergeCells( selection, 'down', true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_split_vertical: verticalSplitCell( selection, true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_split_horizontal: horizontalSplitCell( selection, true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_properties: cells.length > 0 ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED
-							};
-						}
-					},
-
-					tablecell_insertBefore: {
-						label: lang.cell.insertBefore,
-						group: 'tablecell',
-						command: 'cellInsertBefore',
-						order: 5
-					},
-
-					tablecell_insertAfter: {
-						label: lang.cell.insertAfter,
-						group: 'tablecell',
-						command: 'cellInsertAfter',
-						order: 10
-					},
-
-					tablecell_delete: {
-						label: lang.cell.deleteCell,
-						group: 'tablecell',
-						command: 'cellDelete',
-						order: 15
-					},
-
-					tablecell_merge: {
-						label: lang.cell.merge,
-						group: 'tablecell',
-						command: 'cellMerge',
-						order: 16
-					},
-
-					tablecell_merge_right: {
-						label: lang.cell.mergeRight,
-						group: 'tablecell',
-						command: 'cellMergeRight',
-						order: 17
-					},
-
-					tablecell_merge_down: {
-						label: lang.cell.mergeDown,
-						group: 'tablecell',
-						command: 'cellMergeDown',
-						order: 18
-					},
-
-					tablecell_split_horizontal: {
-						label: lang.cell.splitHorizontal,
-						group: 'tablecell',
-						command: 'cellHorizontalSplit',
-						order: 19
-					},
-
-					tablecell_split_vertical: {
-						label: lang.cell.splitVertical,
-						group: 'tablecell',
-						command: 'cellVerticalSplit',
-						order: 20
-					},
-
-					tablecell_properties: {
-						label: lang.cell.title,
-						group: 'tablecellproperties',
-						command: 'cellProperties',
-						order: 21
-					},
-
-					tablerow: {
-						label: lang.row.menu,
-						group: 'tablerow',
-						order: 1,
-						getItems: function() {
-							return {
-								tablerow_insertBefore: CKEDITOR.TRISTATE_OFF,
-								tablerow_insertAfter: CKEDITOR.TRISTATE_OFF,
-								tablerow_delete: CKEDITOR.TRISTATE_OFF
-							};
-						}
-					},
-
-					tablerow_insertBefore: {
-						label: lang.row.insertBefore,
-						group: 'tablerow',
-						command: 'rowInsertBefore',
-						order: 5
-					},
-
-					tablerow_insertAfter: {
-						label: lang.row.insertAfter,
-						group: 'tablerow',
-						command: 'rowInsertAfter',
-						order: 10
-					},
-
-					tablerow_delete: {
-						label: lang.row.deleteRow,
-						group: 'tablerow',
-						command: 'rowDelete',
-						order: 15
-					},
-
-					tablecolumn: {
-						label: lang.column.menu,
-						group: 'tablecolumn',
-						order: 1,
-						getItems: function() {
-							return {
-								tablecolumn_insertBefore: CKEDITOR.TRISTATE_OFF,
-								tablecolumn_insertAfter: CKEDITOR.TRISTATE_OFF,
-								tablecolumn_delete: CKEDITOR.TRISTATE_OFF
-							};
-						}
-					},
-
-					tablecolumn_insertBefore: {
-						label: lang.column.insertBefore,
-						group: 'tablecolumn',
-						command: 'columnInsertBefore',
-						order: 5
-					},
-
-					tablecolumn_insertAfter: {
-						label: lang.column.insertAfter,
-						group: 'tablecolumn',
-						command: 'columnInsertAfter',
-						order: 10
-					},
-
-					tablecolumn_delete: {
-						label: lang.column.deleteColumn,
-						group: 'tablecolumn',
-						command: 'columnDelete',
-						order: 15
-					}
-				} );
-			}
-
-			// If the "contextmenu" plugin is laoded, register the listeners.
-			if ( editor.contextMenu ) {
-				editor.contextMenu.addListener( function( element, selection, path ) {
-					var cell = path.contains( { 'td': 1, 'th': 1 }, 1 );
-					if ( cell && !cell.isReadOnly() ) {
-						return {
-							tablecell: CKEDITOR.TRISTATE_OFF,
-							tablerow: CKEDITOR.TRISTATE_OFF,
-							tablecolumn: CKEDITOR.TRISTATE_OFF
-						};
-					}
-
-					return null;
-				} );
-			}
 		},
 
 		getSelectedCells: getSelectedCells
 
-	};
-	CKEDITOR.plugins.add( 'tabletools', CKEDITOR.plugins.tabletools );
+	});
 } )();
 
 /**

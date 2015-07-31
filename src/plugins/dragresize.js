@@ -9,7 +9,10 @@
 (function() {
     'use strict';
 
-    var PLUGIN_NAME = 'dragresize';
+    if (CKEDITOR.plugins.get('dragresize') || CKEDITOR.plugins.get('ae_dragresize')) {
+        return;
+    }
+
     var IMAGE_SNAP_TO_SIZE = 7;
 
     var isWebkit = ('WebkitAppearance' in document.documentElement.style);
@@ -22,7 +25,7 @@
     /**
      * Initializes the plugin
      */
-    CKEDITOR.plugins.add(PLUGIN_NAME, {
+    CKEDITOR.plugins.add('ae_dragresize', {
         onLoad: function() {
             if (!isWebkit) {
                 return;
