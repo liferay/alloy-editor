@@ -19762,7 +19762,7 @@ CKEDITOR.disableAutoInline = true;
 (function () {
     'use strict';
 
-    if (CKEDITOR.plugins.get('selectionregion')) {
+    if (CKEDITOR.plugins.get('ae_selectionregion')) {
         return;
     }
 
@@ -19777,7 +19777,7 @@ CKEDITOR.disableAutoInline = true;
      * be merged into each editor instance, so the developer may use them directly via the editor, without making
      * an instance of this class**.
      *
-     * @class CKEDITOR.plugins.selectionregion
+     * @class CKEDITOR.plugins.ae_selectionregion
      * @constructor
      */
     function SelectionRegion() {}
@@ -19900,7 +19900,7 @@ CKEDITOR.disableAutoInline = true;
          * @return {Object|null} Returns an object with the following data:
          * - element - The currently selected element, if any
          * - text - The selected text
-         * - region - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionRegion:method"}}{{/crossLink}}
+         * - region - The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionRegion:method"}}{{/crossLink}}
          */
         getSelectionData: function getSelectionData() {
             var selection = this.getSelection();
@@ -19924,7 +19924,7 @@ CKEDITOR.disableAutoInline = true;
          *
          * @method getSelectionRegion
          * @return {Object} Returns object which is being returned from
-         * {{#crossLink "CKEDITOR.plugins.selectionregion/getClientRectsRegion:method"}}{{/crossLink}} with three more properties:
+         * {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getClientRectsRegion:method"}}{{/crossLink}} with three more properties:
          * - direction - the direction of the selection. Can be one of these:
          *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
          *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
@@ -20112,7 +20112,7 @@ CKEDITOR.disableAutoInline = true;
         }
     };
 
-    CKEDITOR.plugins.add('selectionregion', {
+    CKEDITOR.plugins.add('ae_selectionregion', {
         /**
          * Initializer lifecycle implementation for the SelectionRegion plugin.
          *
@@ -20504,7 +20504,7 @@ CKEDITOR.disableAutoInline = true;
 (function () {
     'use strict';
 
-    if (CKEDITOR.plugins.get('uicore')) {
+    if (CKEDITOR.plugins.get('ae_uicore')) {
         return;
     }
 
@@ -20515,21 +20515,21 @@ CKEDITOR.disableAutoInline = true;
      * execute some actions - for example to show/hide toolbars.
      *
      * By default if user presses the Esc key, 'editorInteraction' event won't be fired. However, this behaviour can be changed
-     * by setting {{#crossLink "CKEDITOR.plugins.uicore/allowEsc:attribute"}}{{/crossLink}} config property in editor's configuration to true.
+     * by setting {{#crossLink "CKEDITOR.plugins.ae_uicore/allowEsc:attribute"}}{{/crossLink}} config property in editor's configuration to true.
      *
-     * @class CKEDITOR.plugins.uicore
+     * @class CKEDITOR.plugins.ae_uicore
      */
 
     /**
      * Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,
      * or touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout
-     * is 50ms. This value can be overwritten via {{#crossLink "CKEDITOR.plugins.uicore/timeout:attribute"}}{{/crossLink}}
+     * is 50ms. This value can be overwritten via {{#crossLink "CKEDITOR.plugins.ae_uicore/timeout:attribute"}}{{/crossLink}}
      * property of editor's configuration, like: editor.config.uicore.timeout = 100
      *
      * @event editorInteraction
      * @param {Object} data An object which contains the following properties:
      * - nativeEvent - The event as received from CKEditor.
-     * - selectionData - The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
+     * - selectionData - The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
      */
 
     /**
@@ -20541,7 +20541,7 @@ CKEDITOR.disableAutoInline = true;
      */
 
     /**
-     * If set to true, the editor will still fire {{#crossLink "CKEDITOR.plugins.uicore/editorInteraction:event"}}{{/crossLink}} event,
+     * If set to true, the editor will still fire {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event,
      * if user presses Esc key.
      *
      * @attribute allowEsc
@@ -20550,7 +20550,7 @@ CKEDITOR.disableAutoInline = true;
      */
 
     /**
-     * Specifies the default timeout after which the {{#crossLink "CKEDITOR.plugins.uicore/editorInteraction:event"}}{{/crossLink}} event
+     * Specifies the default timeout after which the {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event
      * will be fired.
      *
      * @attribute timeout
@@ -20558,7 +20558,7 @@ CKEDITOR.disableAutoInline = true;
      * @type Number
      */
 
-    CKEDITOR.plugins.add('uicore', {
+    CKEDITOR.plugins.add('ae_uicore', {
         /**
          * Initializer lifecycle implementation for the UICore plugin.
          *
@@ -20648,7 +20648,7 @@ CKEDITOR.disableAutoInline = true;
 
     var isIE = CKEDITOR.env.ie;
 
-    if (CKEDITOR.plugins.get('addimages')) {
+    if (CKEDITOR.plugins.get('ae_addimages')) {
         return;
     }
 
@@ -20656,7 +20656,7 @@ CKEDITOR.disableAutoInline = true;
      * CKEditor plugin which allows Drag&Drop of images directly into the editable area. The image will be encoded
      * as Data URI. An event `imageAdd` will be fired with the inserted element into the editable area.
      *
-     * @class CKEDITOR.plugins.addimages
+     * @class CKEDITOR.plugins.ae_addimages
      */
 
     /**
@@ -20666,7 +20666,7 @@ CKEDITOR.disableAutoInline = true;
      * @param {CKEDITOR.dom.element} el The created image with src as Data URI
      */
 
-    CKEDITOR.plugins.add('addimages', {
+    CKEDITOR.plugins.add('ae_addimages', {
         /**
          * Initialization of the plugin, part of CKEditor plugin lifecycle.
          * The function registers a 'dragenter', 'dragover', 'drop' and `paste` events on the editing area.
@@ -20698,7 +20698,7 @@ CKEDITOR.disableAutoInline = true;
 
         /**
          * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
-         * processing to {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}}
+         * processing to {{#crossLink "CKEDITOR.plugins.ae_addimages/_processFile:method"}}{{/crossLink}}
          *
          * @protected
          * @method _handleFiles
@@ -20746,7 +20746,7 @@ CKEDITOR.disableAutoInline = true;
         /**
          * Handles drag drop event. The function will create selection from the current points and
          * will send a list of files to be processed to
-         * {{#crossLink "CKEDITOR.plugins.addimages/_handleFiles:method"}}{{/crossLink}}
+         * {{#crossLink "CKEDITOR.plugins.ae_addimages/_handleFiles:method"}}{{/crossLink}}
          *
          * @protected
          * @method _onDragDrop
@@ -20766,7 +20766,7 @@ CKEDITOR.disableAutoInline = true;
 
         /**
          * Checks if the pasted data is image and passes it to
-         * {{#crossLink "CKEDITOR.plugins.addimages/_processFile:method"}}{{/crossLink}} for processing.
+         * {{#crossLink "CKEDITOR.plugins.ae_addimages/_processFile:method"}}{{/crossLink}} for processing.
          *
          * @method _onPaste
          * @protected
@@ -20833,7 +20833,7 @@ CKEDITOR.disableAutoInline = true;
 (function () {
     'use strict';
 
-    if (CKEDITOR.plugins.get('autolink')) {
+    if (CKEDITOR.plugins.get('ae_autolink')) {
         return;
     }
 
@@ -20862,10 +20862,10 @@ CKEDITOR.disableAutoInline = true;
     /**
      * CKEditor plugin which automatically generates links when user types text which looks like URL.
      *
-     * @class CKEDITOR.plugins.autolink
+     * @class CKEDITOR.plugins.ae_autolink
      * @constructor
      */
-    CKEDITOR.plugins.add('autolink', {
+    CKEDITOR.plugins.add('ae_autolink', {
 
         /**
          * Initialization of the plugin, part of CKEditor plugin lifecycle.
@@ -21113,7 +21113,10 @@ CKEDITOR.disableAutoInline = true;
 (function () {
     'use strict';
 
-    var PLUGIN_NAME = 'dragresize';
+    if (CKEDITOR.plugins.get('dragresize') || CKEDITOR.plugins.get('ae_dragresize')) {
+        return;
+    }
+
     var IMAGE_SNAP_TO_SIZE = 7;
 
     var isWebkit = ('WebkitAppearance' in document.documentElement.style);
@@ -21126,7 +21129,7 @@ CKEDITOR.disableAutoInline = true;
     /**
      * Initializes the plugin
      */
-    CKEDITOR.plugins.add(PLUGIN_NAME, {
+    CKEDITOR.plugins.add('ae_dragresize', {
         onLoad: function onLoad() {
             if (!isWebkit) {
                 return;
@@ -21523,7 +21526,7 @@ CKEDITOR.disableAutoInline = true;
 (function () {
     'use strict';
 
-    if (CKEDITOR.plugins.get('pasteimages')) {
+    if (CKEDITOR.plugins.get('ae_pasteimages')) {
         return;
     }
 
@@ -21531,7 +21534,7 @@ CKEDITOR.disableAutoInline = true;
      * CKEditor plugin which allows pasting images directly into the editable area. The image will be encoded
      * as Data URI. An event `imageAdd` will be fired with the inserted element into the editable area.
      *
-     * @class CKEDITOR.plugins.pasteimages
+     * @class CKEDITOR.plugins.ae_pasteimages
      */
 
     /**
@@ -21541,7 +21544,7 @@ CKEDITOR.disableAutoInline = true;
      * @param {CKEDITOR.dom.element} el The created image with src as Data URI
      */
 
-    CKEDITOR.plugins.add('pasteimages', {
+    CKEDITOR.plugins.add('ae_pasteimages', {
         /**
          * Initialization of the plugin, part of CKEditor plugin lifecycle.
          * The function registers a 'paste' event on the editing area.
@@ -21603,7 +21606,7 @@ CKEDITOR.disableAutoInline = true;
 (function () {
     'use strict';
 
-    if (CKEDITOR.plugins.get('placeholder')) {
+    if (CKEDITOR.plugins.get('ae_placeholder')) {
         return;
     }
 
@@ -21611,18 +21614,18 @@ CKEDITOR.disableAutoInline = true;
      * CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
      * is no content to the editor, there will be hint to the user.
      *
-     * @class CKEDITOR.plugins.placeholder
+     * @class CKEDITOR.plugins.ae_placeholder
      */
 
     /**
      * Specifies the placeholder class which have to be aded to editor when editor is not focuced.
      *
      * @attribute placeholderClass
-     * @default ae-placeholder
+     * @default ae_placeholder
      * @type String
      */
 
-    CKEDITOR.plugins.add('placeholder', {
+    CKEDITOR.plugins.add('ae_placeholder', {
 
         /**
          * Initialization of the plugin, part of CKEditor plugin lifecycle.
@@ -21669,6 +21672,12 @@ CKEDITOR.disableAutoInline = true;
 'use strict';
 
 (function () {
+    'use strict';
+
+    if (CKEDITOR.plugins.get('tableresize') || CKEDITOR.plugins.get('ae_tableresize')) {
+        return;
+    }
+
     var pxUnit = CKEDITOR.tools.cssLength;
 
     function getWidth(el) {
@@ -22003,8 +22012,8 @@ CKEDITOR.disableAutoInline = true;
         evt.removeListener();
     }
 
-    CKEDITOR.plugins.add('tableresize', {
-        requires: 'tabletools',
+    CKEDITOR.plugins.add('ae_tableresize', {
+        requires: 'ae_tabletools',
 
         init: function init(editor) {
             editor.on('contentDom', function () {
@@ -22073,7 +22082,15 @@ CKEDITOR.disableAutoInline = true;
 'use strict';
 
 (function () {
-	if (CKEDITOR.plugins.tabletools) return;
+	'use strict';
+
+	if (CKEDITOR.plugins.get('tabletools') || CKEDITOR.plugins.get('ae_tabletools')) {
+		if (!CKEDITOR.plugins.get('ae_tabletools')) {
+			CKEDITOR.plugins.add('ae_tabletools', {});
+
+			return;
+		}
+	}
 
 	var cellNodeRegex = /^(?:td|th)$/;
 
@@ -22660,7 +22677,7 @@ CKEDITOR.disableAutoInline = true;
 		return newCell;
 	}
 
-	CKEDITOR.plugins.tabletools = {
+	CKEDITOR.plugins.add('ae_tabletools', {
 		init: function init(editor) {
 			var lang = editor.lang.table;
 
@@ -22673,15 +22690,15 @@ CKEDITOR.disableAutoInline = true;
 				});
 			}
 			function addCmd(name, def) {
-				var cmd = editor.addCommand(name, def);
+				var cmd = editor.getCommand(name);
+
+				if (cmd) {
+					return;
+				}
+
+				cmd = editor.addCommand(name, def);
 				editor.addFeature(cmd);
 			}
-
-			addCmd('cellProperties', new CKEDITOR.dialogCommand('cellProperties', createDef({
-				allowedContent: 'td th{width,height,border-color,background-color,white-space,vertical-align,text-align}[colspan,rowspan]',
-				requiredContent: 'table'
-			})));
-			CKEDITOR.dialog.add('cellProperties', this.path + 'dialogs/tableCell.js');
 
 			addCmd('rowDelete', createDef({
 				requiredContent: 'table',
@@ -22795,185 +22812,11 @@ CKEDITOR.disableAutoInline = true;
 					insertCell(selection);
 				}
 			}));
-
-			// If the "menu" plugin is loaded, register the menu items.
-			if (editor.addMenuItems) {
-				editor.addMenuItems({
-					tablecell: {
-						label: lang.cell.menu,
-						group: 'tablecell',
-						order: 1,
-						getItems: function getItems() {
-							var selection = editor.getSelection(),
-							    cells = getSelectedCells(selection);
-							return {
-								tablecell_insertBefore: CKEDITOR.TRISTATE_OFF,
-								tablecell_insertAfter: CKEDITOR.TRISTATE_OFF,
-								tablecell_delete: CKEDITOR.TRISTATE_OFF,
-								tablecell_merge: mergeCells(selection, null, true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_merge_right: mergeCells(selection, 'right', true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_merge_down: mergeCells(selection, 'down', true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_split_vertical: verticalSplitCell(selection, true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_split_horizontal: horizontalSplitCell(selection, true) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
-								tablecell_properties: cells.length > 0 ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED
-							};
-						}
-					},
-
-					tablecell_insertBefore: {
-						label: lang.cell.insertBefore,
-						group: 'tablecell',
-						command: 'cellInsertBefore',
-						order: 5
-					},
-
-					tablecell_insertAfter: {
-						label: lang.cell.insertAfter,
-						group: 'tablecell',
-						command: 'cellInsertAfter',
-						order: 10
-					},
-
-					tablecell_delete: {
-						label: lang.cell.deleteCell,
-						group: 'tablecell',
-						command: 'cellDelete',
-						order: 15
-					},
-
-					tablecell_merge: {
-						label: lang.cell.merge,
-						group: 'tablecell',
-						command: 'cellMerge',
-						order: 16
-					},
-
-					tablecell_merge_right: {
-						label: lang.cell.mergeRight,
-						group: 'tablecell',
-						command: 'cellMergeRight',
-						order: 17
-					},
-
-					tablecell_merge_down: {
-						label: lang.cell.mergeDown,
-						group: 'tablecell',
-						command: 'cellMergeDown',
-						order: 18
-					},
-
-					tablecell_split_horizontal: {
-						label: lang.cell.splitHorizontal,
-						group: 'tablecell',
-						command: 'cellHorizontalSplit',
-						order: 19
-					},
-
-					tablecell_split_vertical: {
-						label: lang.cell.splitVertical,
-						group: 'tablecell',
-						command: 'cellVerticalSplit',
-						order: 20
-					},
-
-					tablecell_properties: {
-						label: lang.cell.title,
-						group: 'tablecellproperties',
-						command: 'cellProperties',
-						order: 21
-					},
-
-					tablerow: {
-						label: lang.row.menu,
-						group: 'tablerow',
-						order: 1,
-						getItems: function getItems() {
-							return {
-								tablerow_insertBefore: CKEDITOR.TRISTATE_OFF,
-								tablerow_insertAfter: CKEDITOR.TRISTATE_OFF,
-								tablerow_delete: CKEDITOR.TRISTATE_OFF
-							};
-						}
-					},
-
-					tablerow_insertBefore: {
-						label: lang.row.insertBefore,
-						group: 'tablerow',
-						command: 'rowInsertBefore',
-						order: 5
-					},
-
-					tablerow_insertAfter: {
-						label: lang.row.insertAfter,
-						group: 'tablerow',
-						command: 'rowInsertAfter',
-						order: 10
-					},
-
-					tablerow_delete: {
-						label: lang.row.deleteRow,
-						group: 'tablerow',
-						command: 'rowDelete',
-						order: 15
-					},
-
-					tablecolumn: {
-						label: lang.column.menu,
-						group: 'tablecolumn',
-						order: 1,
-						getItems: function getItems() {
-							return {
-								tablecolumn_insertBefore: CKEDITOR.TRISTATE_OFF,
-								tablecolumn_insertAfter: CKEDITOR.TRISTATE_OFF,
-								tablecolumn_delete: CKEDITOR.TRISTATE_OFF
-							};
-						}
-					},
-
-					tablecolumn_insertBefore: {
-						label: lang.column.insertBefore,
-						group: 'tablecolumn',
-						command: 'columnInsertBefore',
-						order: 5
-					},
-
-					tablecolumn_insertAfter: {
-						label: lang.column.insertAfter,
-						group: 'tablecolumn',
-						command: 'columnInsertAfter',
-						order: 10
-					},
-
-					tablecolumn_delete: {
-						label: lang.column.deleteColumn,
-						group: 'tablecolumn',
-						command: 'columnDelete',
-						order: 15
-					}
-				});
-			}
-
-			// If the "contextmenu" plugin is laoded, register the listeners.
-			if (editor.contextMenu) {
-				editor.contextMenu.addListener(function (element, selection, path) {
-					var cell = path.contains({ 'td': 1, 'th': 1 }, 1);
-					if (cell && !cell.isReadOnly()) {
-						return {
-							tablecell: CKEDITOR.TRISTATE_OFF,
-							tablerow: CKEDITOR.TRISTATE_OFF,
-							tablecolumn: CKEDITOR.TRISTATE_OFF
-						};
-					}
-
-					return null;
-				});
-			}
 		},
 
 		getSelectedCells: getSelectedCells
 
-	};
-	CKEDITOR.plugins.add('tabletools', CKEDITOR.plugins.tabletools);
+	});
 })();
 
 /**
@@ -23019,6 +22862,563 @@ CKEDITOR.tools.buildTableMap = function (table) {
 	}
 	return aMap;
 };
+'use strict';
+
+(function () {
+    'use strict';
+
+    /* istanbul ignore if */
+    if (CKEDITOR.plugins.get('ae_buttonbridge')) {
+        return;
+    }
+
+    /* istanbul ignore next */
+    function noop() {}
+
+    // API not yet implemented inside the button bridge. By mocking the unsupported methods, we
+    // prevent plugins from crashing if they make use of them.
+    //
+    // Some methods like `getState` and `setState` clash with React's own state methods. For them,
+    // unsupported means that we don't account for the different meaning in the passed or returned
+    // arguments.
+    var UNSUPPORTED_BUTTON_API = {
+        //getState: function() {},
+        //setState: function(state) {},
+        toFeature: noop
+    };
+
+    /**
+     * Generates a ButtonBridge React class for a given button definition if it has not been
+     * already created based on the button name and definition.
+     *
+     * @private
+     * @method generateButtonBridge
+     * @param {String} buttonName The button's name
+     * @param {Object} buttonDefinition The button's definition
+     * @return {Object} The generated or already existing React Button Class
+     */
+    function generateButtonBridge(buttonName, buttonDefinition) {
+        var ButtonBridge = AlloyEditor.Buttons[buttonName];
+
+        if (!ButtonBridge) {
+            var buttonDisplayName = buttonDefinition.name || buttonDefinition.command || buttonName;
+
+            ButtonBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_BUTTON_API, {
+                displayName: buttonName,
+
+                propTypes: {
+                    editor: React.PropTypes.object.isRequired,
+                    tabIndex: React.PropTypes.number
+                },
+
+                statics: {
+                    key: buttonName
+                },
+
+                render: function render() {
+                    var buttonClassName = 'ae-button ae-button-bridge';
+                    var buttonType = 'button-' + buttonDisplayName;
+                    var iconClassName = 'ae-icon-' + buttonDisplayName;
+
+                    var iconStyle = {};
+
+                    var cssStyle = CKEDITOR.skin.getIconStyle(buttonDisplayName);
+
+                    if (cssStyle) {
+                        var cssStyleParts = cssStyle.split(';');
+
+                        iconStyle.backgroundImage = cssStyleParts[0].substring(cssStyleParts[0].indexOf(':') + 1);
+                        iconStyle.backgroundPosition = cssStyleParts[1].substring(cssStyleParts[1].indexOf(':') + 1);
+                        iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(':') + 1);
+                    }
+
+                    return React.createElement(
+                        'button',
+                        { 'aria-label': buttonDefinition.label, className: buttonClassName, 'data-type': buttonType, onClick: this._handleClick, tabIndex: this.props.tabIndex, title: buttonDefinition.label },
+                        React.createElement('span', { className: iconClassName, style: iconStyle })
+                    );
+                },
+
+                _handleClick: function _handleClick(event) {
+                    var editor = this.props.editor.get('nativeEditor');
+
+                    if (buttonDefinition.onClick) {
+                        buttonDefinition.onClick.call(this);
+                    } else {
+                        editor.execCommand(buttonDefinition.command);
+                    }
+
+                    editor.fire('actionPerformed', this);
+                }
+            }));
+
+            AlloyEditor.Buttons[buttonName] = ButtonBridge;
+        }
+
+        return ButtonBridge;
+    }
+
+    /* istanbul ignore else */
+    if (!CKEDITOR.plugins.get('button')) {
+        CKEDITOR.UI_BUTTON = 'button';
+
+        CKEDITOR.plugins.add('button', {});
+    }
+
+    /**
+     * CKEditor plugin that bridges the support offered by CKEditor Button plugin. It takes over the
+     * responsibility of registering and creating buttons via:
+     * - editor.ui.addButton(name, definition)
+     * - editor.ui.add(name, CKEDITOR.UI_BUTTON, definition)
+     *
+     * @class CKEDITOR.plugins.ae_buttonbridge
+     * @requires CKEDITOR.plugins.ae_uibridge
+     * @constructor
+     */
+    CKEDITOR.plugins.add('ae_buttonbridge', {
+        requires: ['ae_uibridge'],
+
+        /**
+         * Set the add handler for UI_BUTTON to our own. We do this in the init phase to override
+         * the one in the native plugin in case it's present.
+         *
+         * @method init
+         * @param {Object} editor The CKEditor instance being initialized
+         */
+        init: function init(editor) {
+            editor.ui.addButton = function (buttonName, buttonDefinition) {
+                this.add(buttonName, CKEDITOR.UI_BUTTON, buttonDefinition);
+            };
+
+            editor.ui.addHandler(CKEDITOR.UI_BUTTON, {
+                add: generateButtonBridge,
+                create: function create(buttonDefinition) {
+                    var buttonName = 'buttonBridge' + (Math.random() * 1e9 >>> 0);
+                    var ButtonBridge = generateButtonBridge(buttonName, buttonDefinition);
+
+                    return new ButtonBridge();
+                }
+            });
+        }
+    });
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /* istanbul ignore if */
+    if (CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
+        return;
+    }
+
+    /* istanbul ignore next */
+    function noop() {}
+
+    // API not yet implemented inside the panel menu button bridge. By mocking the unsupported methods, we
+    // prevent plugins from crashing if they make use of them.
+    var UNSUPPORTED_PANEL_MENU_BUTTON_API = {
+        createPanel: noop
+    };
+
+    /**
+     * Generates a PanelMenuButtonBridge React class for a given panelmenubutton definition if it has not been
+     * already created based on the panelmenubutton name and definition.
+     *
+     * @private
+     * @method generatePanelMenuButtonBridge
+     * @param {String} panelMenuButtonName The panel button name
+     * @param {Object} panelMenuButtonDefinition The panel button definition
+     * @return {Object} The generated or already existing React PanelMenuButton Class
+     */
+    var generatePanelMenuButtonBridge = function generatePanelMenuButtonBridge(panelMenuButtonName, panelMenuButtonDefinition) {
+        var PanelMenuButtonBridge = AlloyEditor.Buttons[panelMenuButtonName];
+
+        if (!PanelMenuButtonBridge) {
+            var panelMenuButtonDisplayName = panelMenuButtonDefinition.name || panelMenuButtonDefinition.command || buttonName;
+
+            PanelMenuButtonBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_PANEL_MENU_BUTTON_API, {
+                displayName: panelMenuButtonName,
+
+                propTypes: {
+                    editor: React.PropTypes.object.isRequired
+                },
+
+                statics: {
+                    key: panelMenuButtonName
+                },
+
+                render: function render() {
+                    var buttonClassName = 'ae-button ae-button-bridge';
+                    var iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
+
+                    var iconStyle = {};
+
+                    var cssStyle = CKEDITOR.skin.getIconStyle(panelMenuButtonDisplayName);
+
+                    if (cssStyle) {
+                        var cssStyleParts = cssStyle.split(';');
+
+                        iconStyle.backgroundImage = cssStyleParts[0].substring(cssStyleParts[0].indexOf(':') + 1);
+                        iconStyle.backgroundPosition = cssStyleParts[1].substring(cssStyleParts[1].indexOf(':') + 1);
+                        iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(':') + 1);
+                    }
+
+                    var panel;
+
+                    if (this.props.expanded) {
+                        panel = this._getPanel();
+                    }
+
+                    return React.createElement(
+                        'div',
+                        { className: 'ae-container ae-has-dropdown' },
+                        React.createElement(
+                            'button',
+                            { 'aria-expanded': this.props.expanded, 'aria-label': panelMenuButtonDefinition.label, className: buttonClassName, onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: panelMenuButtonDefinition.label },
+                            React.createElement('span', { className: iconClassName, style: iconStyle })
+                        ),
+                        panel
+                    );
+                },
+
+                _getPanel: function _getPanel() {
+                    var panel = {
+                        hide: this.props.toggleDropdown,
+                        show: this.props.toggleDropdown
+                    };
+
+                    var blockElement = new CKEDITOR.dom.element('div');
+
+                    var block = {
+                        element: blockElement,
+                        keys: {}
+                    };
+
+                    /* istanbul ignore else */
+                    if (panelMenuButtonDefinition.onBlock) {
+                        panelMenuButtonDefinition.onBlock.call(this, panel, block);
+                    }
+
+                    // TODO
+                    // Use block.keys to configure the panel keyboard navigation
+
+                    return React.createElement(
+                        AlloyEditor.ButtonDropdown,
+                        { onDismiss: this.props.toggleDropdown },
+                        React.createElement('div', { className: blockElement.getAttribute('class'), dangerouslySetInnerHTML: { __html: blockElement.getHtml() } })
+                    );
+                }
+            }));
+
+            AlloyEditor.Buttons[panelMenuButtonName] = PanelMenuButtonBridge;
+        }
+
+        return PanelMenuButtonBridge;
+    };
+
+    /* istanbul ignore else */
+    if (!CKEDITOR.plugins.get('panelmenubutton')) {
+        CKEDITOR.UI_PANELBUTTON = 'panelmenubutton';
+
+        CKEDITOR.plugins.add('panelmenubutton', {});
+    }
+
+    /**
+     * CKEditor plugin that bridges the support offered by CKEditor PanelButton plugin. It takes over the
+     * responsibility of registering and creating buttons via:
+     * - editor.ui.addPanelMenuButton(name, definition)
+     * - editor.ui.add(name, CKEDITOR.UI_PANELBUTTON, definition)
+     *
+     * @class CKEDITOR.plugins.ae_panelmenubuttonbridge
+     * @requires CKEDITOR.plugins.ae_uibridge
+     * @constructor
+     */
+    CKEDITOR.plugins.add('ae_panelmenubuttonbridge', {
+        requires: ['ae_uibridge'],
+
+        /**
+         * Set the add handler for UI_PANELBUTTON to our own. We do this in the init phase to override
+         * the one in the native plugin in case it's present
+         *
+         * @method init
+         * @param {Object} editor The CKEditor instance being initialized
+         */
+        init: function init(editor) {
+            editor.ui.addPanelMenuButton = function (panelMenuButtonName, panelMenuButtonDefinition) {
+                this.add(panelMenuButtonName, CKEDITOR.UI_PANELBUTTON, panelMenuButtonDefinition);
+            };
+
+            editor.ui.addHandler(CKEDITOR.UI_PANELBUTTON, {
+                add: generatePanelMenuButtonBridge,
+                create: function create(panelMenuButtonDefinition) {
+                    var panelMenuButtonName = 'panelMenuButtonBridge' + (Math.random() * 1e9 >>> 0);
+                    var PanelMenuButtonBridge = generatePanelMenuButtonBridge(panelMenuButtonName, panelMenuButtonDefinition);
+
+                    return new PanelMenuButtonBridge();
+                }
+            });
+        }
+    });
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /* istanbul ignore if */
+    if (CKEDITOR.plugins.get('ae_richcombobridge')) {
+        return;
+    }
+
+    /* istanbul ignore next */
+    function noop() {}
+
+    // API not yet implemented inside the richcombo bridge. By mocking the unsupported methods, we
+    // prevent plugins from crashing if they make use of them.
+    //
+    // Some methods like `setState` clash with React's own state methods. For them, unsupported means
+    // that we don't account for the different meaning in the passed or returned arguments.
+    var UNSUPPORTED_RICHCOMBO_API = {
+        commit: noop,
+        createPanel: noop,
+        disable: noop,
+        enable: noop,
+        getState: noop,
+        hideGroup: noop,
+        hideItem: noop,
+        mark: noop,
+        //setState: noop,
+        showAll: noop,
+        startGroup: noop,
+        unmarkAll: noop
+    };
+
+    /**
+     * Generates a RichComboBridge React class for a given richcombo definition if it has not been
+     * already created based on the richcombo name and definition.
+     *
+     * @method generateRichComboBridge
+     * @private
+     * @param {String} richComboName The rich combo name
+     * @param {Object} richComboDefinition The rich combo definition
+     * @return {Object} The generated or already existing React RichCombo Class
+     */
+    var generateRichComboBridge = function generateRichComboBridge(richComboName, richComboDefinition) {
+        var RichComboBridge = AlloyEditor.Buttons[richComboName];
+
+        if (!RichComboBridge) {
+            var richComboState = {
+                value: undefined
+            };
+
+            RichComboBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_RICHCOMBO_API, {
+                displayName: richComboName,
+
+                propTypes: {
+                    editor: React.PropTypes.object.isRequired
+                },
+
+                statics: {
+                    key: richComboName
+                },
+
+                add: function add(value, preview, title) {
+                    this._items.push({
+                        preview: preview,
+                        title: title,
+                        value: value
+                    });
+                },
+
+                componentWillMount: function componentWillMount() {
+                    this._items = [];
+
+                    this.setValue = this._setValue;
+
+                    if (richComboDefinition.init) {
+                        richComboDefinition.init.call(this);
+                    }
+
+                    if (richComboDefinition.onRender) {
+                        richComboDefinition.onRender.call(this);
+                    }
+                },
+
+                componentWillUnmount: function componentWillUnmount() {
+                    this._cacheValue(this.state.value);
+
+                    this.setValue = this._cacheValue;
+                },
+
+                getInitialState: function getInitialState() {
+                    return {
+                        value: richComboState.value
+                    };
+                },
+
+                getValue: function getValue() {
+                    return this.state.value;
+                },
+
+                render: function render() {
+                    var richComboLabel = this.state.value || richComboDefinition.label;
+
+                    var itemsList;
+
+                    if (this.props.expanded) {
+                        itemsList = this._getItemsList();
+                    }
+
+                    return React.createElement(
+                        'div',
+                        { className: 'ae-container-dropdown ae-has-dropdown' },
+                        React.createElement(
+                            'button',
+                            { 'aria-expanded': this.props.expanded, 'aria-label': richComboLabel, className: 'ae-toolbar-element', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: richComboLabel },
+                            React.createElement(
+                                'div',
+                                { className: 'ae-container' },
+                                React.createElement(
+                                    'span',
+                                    { className: 'ae-container-dropdown-selected-item' },
+                                    richComboLabel
+                                ),
+                                React.createElement('span', { className: 'ae-icon-arrow' })
+                            )
+                        ),
+                        itemsList
+                    );
+                },
+
+                _cacheValue: function _cacheValue(value) {
+                    richComboState.value = value;
+                },
+
+                _getItems: function _getItems() {
+                    var richCombo = this;
+
+                    var items = this._items.map(function (item) {
+                        return React.createElement(
+                            'li',
+                            { key: item.title, role: 'option' },
+                            React.createElement('button', { className: 'ae-toolbar-element', dangerouslySetInnerHTML: { __html: item.preview }, 'data-value': item.value, onClick: richCombo._onClick })
+                        );
+                    });
+
+                    return items;
+                },
+
+                _getItemsList: function _getItemsList() {
+                    return React.createElement(
+                        AlloyEditor.ButtonDropdown,
+                        { onDismiss: this.props.toggleDropdown },
+                        this._getItems()
+                    );
+                },
+
+                _onClick: function _onClick(event) {
+                    var editor = this.props.editor.get('nativeEditor');
+
+                    if (richComboDefinition.onClick) {
+                        richComboDefinition.onClick.call(this, event.currentTarget.getAttribute('data-value'));
+
+                        editor.fire('actionPerformed', this);
+                    }
+                },
+
+                _setValue: function _setValue(value) {
+                    this.setState({
+                        value: value
+                    });
+                }
+            }));
+
+            AlloyEditor.Buttons[richComboName] = RichComboBridge;
+        }
+
+        return RichComboBridge;
+    };
+
+    /* istanbul ignore else */
+    if (!CKEDITOR.plugins.get('richcombo')) {
+        CKEDITOR.UI_RICHCOMBO = 'richcombo';
+
+        CKEDITOR.plugins.add('richcombo', {});
+    }
+
+    /**
+     * CKEditor plugin that bridges the support offered by CKEditor RichCombo plugin. It takes over the
+     * responsibility of registering and creating rich combo elements via:
+     * - editor.ui.addRichCombo(name, definition)
+     * - editor.ui.add(name, CKEDITOR.UI_RICHCOMBO, definition)
+     *
+     * @class CKEDITOR.plugins.ae_richcombobridge
+     * @requires CKEDITOR.plugins.ae_uibridge
+     * @constructor
+     */
+    CKEDITOR.plugins.add('ae_richcombobridge', {
+        requires: ['ae_uibridge'],
+
+        /**
+         * Set the add handler for UI_RICHCOMBO to our own. We do this in the init phase to override
+         * the one in the original plugin in case it's present
+         *
+         * @method init
+         * @param {Object} editor The CKEditor instance being initialized
+         */
+        init: function init(editor) {
+            editor.ui.addRichCombo = function (richComboName, richComboDefinition) {
+                this.add(richComboName, CKEDITOR.UI_RICHCOMBO, richComboDefinition);
+            };
+
+            editor.ui.addHandler(CKEDITOR.UI_RICHCOMBO, {
+                add: generateRichComboBridge,
+                create: function create(richComboDefinition) {
+                    var richComboName = 'richComboBridge' + (Math.random() * 1e9 >>> 0);
+                    var RichComboBridge = generateRichComboBridge(richComboName, richComboDefinition);
+
+                    return new RichComboBridge();
+                }
+            });
+        }
+    });
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * CKEditor plugin that extends CKEDITOR.ui.add function so an add handler can be specified
+     * on top of the original ones. It bridges the calls to add components via:
+     * - editor.ui.add(name, type, definition)
+     *
+     * @class CKEDITOR.plugins.ae_uibridge
+     * @constructor
+     */
+    CKEDITOR.plugins.add('ae_uibridge', {
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         *
+         * @method beforeInit
+         * @param {Object} editor The current editor instance
+         */
+        beforeInit: function beforeInit(editor) {
+            var originalUIAddFn = editor.ui.add;
+
+            editor.ui.add = function (name, type, definition) {
+                originalUIAddFn.apply(this, arguments);
+
+                var typeHandler = this._.handlers[type];
+
+                if (typeHandler && typeHandler.add) {
+                    typeHandler.add(name, definition);
+                }
+            };
+        }
+    });
+})();
 'use strict';
 
 (function () {
@@ -23876,7 +24276,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         },
 
         /**
-         * The function returns an HTML element from the passed value. If the passed value is a string, it should be 
+         * The function returns an HTML element from the passed value. If the passed value is a string, it should be
          * the Id of the element which have to be retrieved from the DOM.
          * If an HTML Element is passed, the element itself will be returned.
          *
@@ -23974,7 +24374,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink',
+                value: 'ae_uicore,ae_selectionregion,ae_dragresize,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
                 writeOnce: true
             },
 
@@ -23992,7 +24392,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             /**
              * Specifies the class, which should be added by Placeholder plugin
-             * {{#crossLink "CKEDITOR.plugins.placeholder}}{{/crossLink}}
+             * {{#crossLink "CKEDITOR.plugins.ae_placeholder}}{{/crossLink}}
              * when editor is not focused.
              *
              * @property placeholderClass
@@ -24863,11 +25263,25 @@ CKEDITOR.tools.buildTableMap = function (table) {
             if (domNode) {
                 var descendants = domNode.querySelectorAll(this.props.descendants);
 
-                this._descendants = Array.prototype.map.call(descendants, function (item) {
-                    return item;
-                }).sort(function (a, b) {
+                var priorityDescendants = [];
+
+                this._descendants = [];
+
+                Array.prototype.slice.call(descendants).forEach((function (item) {
+                    var dataTabIndex = item.getAttribute('data-tabindex');
+
+                    if (dataTabIndex) {
+                        priorityDescendants.push(item);
+                    } else {
+                        this._descendants.push(item);
+                    }
+                }).bind(this));
+
+                priorityDescendants = priorityDescendants.sort(function (a, b) {
                     return AlloyEditor.Lang.toInt(a.getAttribute('data-tabindex')) > AlloyEditor.Lang.toInt(b.getAttribute('data-tabindex'));
                 });
+
+                this._descendants = priorityDescendants.concat(this._descendants);
 
                 this._activeDescendant = 0;
 
@@ -24912,7 +25326,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          *
          * It depends on the props editorEvent to analyze the following user-interaction parameters:
          * - {Object} selectionData The data about the selection in the editor as returned from
-         * {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
+         * {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
          * - {Number} pos Contains the coordinates of the position, considered as most appropriate.
          * This may be the point where the user released the mouse, or just the beginning or the end of
          * the selection.
@@ -24980,7 +25394,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @protected
          * @method _getXPoint
          * @param {Object} selectionData The data about the selection in the editor as
-         * returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
+         * returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
          * @param {Object} eventX The X coordinate received from the native event (mouseup).
          * @return {Number} The calculated X point in page coordinates.
          */
@@ -25869,6 +26283,74 @@ CKEDITOR.tools.buildTableMap = function (table) {
     });
 
     AlloyEditor.ButtonCommandsList = ButtonCommandsList;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * The ButtonDropdown class provides markup and keyboard navigation behaviour to a dropdown
+     * opened from a button.
+     *
+     * @class ButtonDropdown
+     */
+    var ButtonDropdown = React.createClass({
+        displayName: 'ButtonDropdown',
+
+        mixins: [AlloyEditor.WidgetFocusManager],
+
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         */
+        getDefaultProps: function getDefaultProps() {
+            return {
+                circular: false,
+                descendants: '.ae-toolbar-element',
+                keys: {
+                    dismiss: [27],
+                    dismissNext: [39],
+                    dismissPrev: [37],
+                    next: [40],
+                    prev: [38]
+                }
+            };
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the dropdown in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default dropdown
+             */
+            key: 'dropdown'
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            return React.createElement(
+                'div',
+                { className: 'ae-dropdown ae-arrow-box ae-arrow-box-top-left', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
+                React.createElement(
+                    'ul',
+                    { className: 'ae-listbox', role: 'listbox' },
+                    this.props.children
+                )
+            );
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonDropdown.key] = AlloyEditor.ButtonDropdown = ButtonDropdown;
 })();
 'use strict';
 
@@ -29768,7 +30250,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             onDismiss: React.PropTypes.func,
 
             /**
-             * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
+             * The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
              *
              * @property {Object} selectionData
              */

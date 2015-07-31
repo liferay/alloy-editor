@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>CKEDITOR.plugins.placeholder - alloyeditor</title>
+    <title>ButtonDropdown - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -67,6 +67,7 @@
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -104,10 +105,14 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
@@ -159,14 +164,14 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>CKEDITOR.plugins.placeholder <small>Class</small></h1>
+                                <h1>ButtonDropdown <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_plugins_placeholder.js.html#l8"><code>src&#x2F;plugins&#x2F;placeholder.js:8</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-dropdown.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-dropdown.jsx:4</code></a>
                                     </div>
                             
                             
@@ -174,8 +179,8 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
-                            is no content to the editor, there will be hint to the user.</p>
+                                <p>The ButtonDropdown class provides markup and keyboard navigation behaviour to a dropdown
+                            opened from a button.</p>
                             
                             </div>
                             
@@ -185,7 +190,7 @@
                                     <li class="api-class-tab index"><a href="#index">Index</a></li>
                             
                                         <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-                                        <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+                                        <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
                                 </ul>
                             
                                 <div>
@@ -196,47 +201,42 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__checkEmptyData">_checkEmptyData</a>
+                                                        <li class="index-item method">
+                                                            <a href="#method_getDefaultProps">getDefaultProps</a>
                             
                                                         </li>
                                                         <li class="index-item method">
-                                                            <a href="#method_init">init</a>
+                                                            <a href="#method_render">render</a>
                             
                                                         </li>
                                                 </ul>
                                             </div>
                             
+                                            <div class="index-section properties tab-pane">
+                                                <h3>Properties</h3>
                             
-                                            <div class="index-section attrs tab-pane">
-                                                <h3>Attributes</h3>
+                                                <ul class="index-list properties">
+                                                        <li class="index-item property">
+                                                            <a href="#property_key">key</a>
                             
-                                                <ul class="index-list attrs">
-                                                        <li class="index-item attr">
-                                                            <a href="#attr_placeholderClass">placeholderClass</a>
+                                                                <span class="flag static">static</span>
                                                         </li>
                                                 </ul>
                                             </div>
+                            
                             
                                     </div>
                             
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method__checkEmptyData" class="method item protected">
-                                                    <h3 class="name"><code>_checkEmptyData</code></h3>
+                                                <div id="method_getDefaultProps" class="method item">
+                                                    <h3 class="name"><code>getDefaultProps</code></h3>
                                                 
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
-                                                                <li class="arg">
-                                                                        <code>editor</code>
-                                                                </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
+                                                        <span class="paren">()</span>
                                                 
                                                 
                                                 
-                                                        <span class="flag protected">protected</span>
                                                 
                                                 
                                                 
@@ -245,7 +245,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_plugins_placeholder.js.html#l38"><code>src&#x2F;plugins&#x2F;placeholder.js:38</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-dropdown.jsx.html#l13"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-dropdown.jsx:13</code></a>
                                                         </p>
                                                 
                                                 
@@ -253,42 +253,21 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Removes any data from the content and adds a class,
-                                                specified by the &quot;placeholderClass&quot; config attribute.</p>
+                                                        <p>Lifecycle. Returns the default values of the properties used in the widget.</p>
                                                 
                                                     </div>
                                                 
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">editor</code>
-                                                                        <span class="type">CKEDITOR.dom.event</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>event, fired from CKEditor</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
                                                 
                                                 
                                                 </div>
-                                                <div id="method_init" class="method item">
-                                                    <h3 class="name"><code>init</code></h3>
+                                                <div id="method_render" class="method item">
+                                                    <h3 class="name"><code>render</code></h3>
                                                 
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
-                                                                <li class="arg">
-                                                                        <code>editor</code>
-                                                                </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
+                                                        <span class="paren">()</span>
                                                 
+                                                        <span class="returns-inline">
+                                                            <span class="type">Object</span>
+                                                        </span>
                                                 
                                                 
                                                 
@@ -299,7 +278,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_plugins_placeholder.js.html#l26"><code>src&#x2F;plugins&#x2F;placeholder.js:26</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-dropdown.jsx.html#l44"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-dropdown.jsx:44</code></a>
                                                         </p>
                                                 
                                                 
@@ -307,68 +286,56 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Initialization of the plugin, part of CKEditor plugin lifecycle.
-                                                The function registers a &#39;blur&#39; and &#39;contentDom&#39; event listeners.</p>
+                                                        <p>Lifecycle. Renders the UI of the button.</p>
                                                 
                                                     </div>
                                                 
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
                                                 
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">editor</code>
-                                                                        <span class="type">Object</span>
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
                                                 
+                                                            <div class="returns-description">
+                                                                        <span class="type">Object</span>:
+                                                                    <p>The content which should be rendered.</p>
                                                 
-                                                                    <div class="param-description">
-                                                                        <p>The current editor instance</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
+                                                            </div>
                                                         </div>
-                                                
                                                 
                                                 </div>
                                         </div>
                             
+                                        <div id="properties" class="api-class-tabpanel tab-pane">
+                                            <h2 class="off-left">Properties</h2>
                             
-                                        <div id="attrs" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Attributes</h2>
-                            
-                                                <div id="attr_placeholderClass" class="attr item">
-                                                    <a name="config_placeholderClass"></a> 
-                                                    <h3 class="name"><code>placeholderClass</code></h3>
+                                                <div id="property_key" class="property item">
+                                                    <h3 class="name"><code>key</code></h3>
                                                     <span class="type">String</span>
                                                 
                                                 
                                                 
                                                 
-                                                
-                                                
-                                                
+                                                        <span class="flag static">static</span>
                                                 
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_plugins_placeholder.js.html#l15"><code>src&#x2F;plugins&#x2F;placeholder.js:15</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-dropdown.jsx.html#l34"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-dropdown.jsx:34</code></a>
                                                         </p>
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Specifies the placeholder class which have to be aded to editor when editor is not focuced.</p>
+                                                        <p>The name which will be used as an alias of the dropdown in the configuration.</p>
                                                 
                                                     </div>
                                                 
-                                                        <p><strong>Default:</strong> ae-placeholder</p>
+                                                        <p><strong>Default:</strong> dropdown</p>
                                                 
                                                 
                                                 </div>
                                         </div>
+                            
                             
                                 </div>
                             </div>

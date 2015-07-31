@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>CKEDITOR.plugins.uicore - alloyeditor</title>
+    <title>CKEDITOR.plugins.ae_richcombobridge - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -67,6 +67,7 @@
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -104,10 +105,14 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
@@ -159,14 +164,14 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>CKEDITOR.plugins.uicore <small>Class</small></h1>
+                                <h1>CKEDITOR.plugins.ae_richcombobridge <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_core_uicore.js.html#l8"><code>src&#x2F;core&#x2F;uicore.js:8</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_uibridge_richcombo.jsx.html#l179"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;richcombo.jsx:179</code></a>
                                     </div>
                             
                             
@@ -174,23 +179,53 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>UICore class which will handle user interactions with the editor. These interactions
-                            might be triggered via mouse, keyboard or touch devices. The class fill fire an event via
-                            CKEditor&#39;s event system - "editorInteraction". The UI may listen to this event and
-                            execute some actions - for example to show/hide toolbars.</p>
-                            <p>By default if user presses the Esc key, &#39;editorInteraction&#39; event won&#39;t be fired. However, this behaviour can be changed
-                            by setting <a href="../classes/CKEDITOR.plugins.uicore.html#attr_allowEsc" class="crosslink">allowEsc</a> config property in editor&#39;s configuration to true.</p>
+                                <p>CKEditor plugin that bridges the support offered by CKEditor RichCombo plugin. It takes over the
+                            responsibility of registering and creating rich combo elements via:</p>
+                            <ul>
+                            <li>editor.ui.addRichCombo(name, definition)</li>
+                            <li>editor.ui.add(name, CKEDITOR.UI_RICHCOMBO, definition)</li>
+                            </ul>
                             
                             </div>
                             
+                                <div class="constructor">
+                                    <h2>Constructor</h2>
+                                    <div id="method_CKEDITOR.plugins.ae_richcombobridge" class="method item">
+                                        <h3 class="name"><code>CKEDITOR.plugins.ae_richcombobridge</code></h3>
+                                    
+                                            <span class="paren">()</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        <div class="meta">
+                                                    <p>
+                                                    Defined in
+                                            <a href="../files/src_ui_react_src_uibridge_richcombo.jsx.html#l179"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;richcombo.jsx:179</code></a>
+                                            </p>
+                                    
+                                    
+                                    
+                                        </div>
+                                    
+                                        <div class="description">
+                                            
+                                        </div>
+                                    
+                                    
+                                    
+                                    </div>
+                                </div>
                             
                             <div id="classdocs">
                                 <ul class="api-class-tabs nav nav-tabs">
                                     <li class="api-class-tab index"><a href="#index">Index</a></li>
                             
                                         <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-                                        <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
-                                        <li class="api-class-tab events"><a href="#events">Events</a></li>
                                 </ul>
                             
                                 <div>
@@ -201,11 +236,11 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__createAriaElement">_createAriaElement</a>
+                                                        <li class="index-item method private">
+                                                            <a href="#method_generateRichComboBridge">generateRichComboBridge</a>
                             
                                                         </li>
-                                                        <li class="index-item method protected">
+                                                        <li class="index-item method">
                                                             <a href="#method_init">init</a>
                             
                                                         </li>
@@ -213,55 +248,32 @@
                                             </div>
                             
                             
-                                            <div class="index-section attrs tab-pane">
-                                                <h3>Attributes</h3>
                             
-                                                <ul class="index-list attrs">
-                                                        <li class="index-item attr">
-                                                            <a href="#attr_allowEsc">allowEsc</a>
-                                                        </li>
-                                                        <li class="index-item attr">
-                                                            <a href="#attr_timeout">timeout</a>
-                                                        </li>
-                                                </ul>
-                                            </div>
-                            
-                                            <div class="index-section events tab-pane">
-                                                <h3>Events</h3>
-                            
-                                                <ul class="index-list events">
-                                                        <li class="index-item event">
-                                                            <a href="#event_ariaUpdate">ariaUpdate</a>
-                            
-                                                        </li>
-                                                        <li class="index-item event">
-                                                            <a href="#event_editorInteraction">editorInteraction</a>
-                            
-                                                        </li>
-                                                </ul>
-                                            </div>
                                     </div>
                             
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method__createAriaElement" class="method item protected">
-                                                    <h3 class="name"><code>_createAriaElement</code></h3>
+                                                <div id="method_generateRichComboBridge" class="method item private">
+                                                    <h3 class="name"><code>generateRichComboBridge</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>id</code>
+                                                                        <code>richComboName</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>richComboDefinition</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
                                                         <span class="returns-inline">
-                                                            <span class="type">HTMLElement</span>
+                                                            <span class="type">Object</span>
                                                         </span>
                                                 
                                                 
-                                                        <span class="flag protected">protected</span>
+                                                        <span class="flag private">private</span>
                                                 
                                                 
                                                 
@@ -270,7 +282,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l125"><code>src&#x2F;core&#x2F;uicore.js:125</code></a>
+                                                        <a href="../files/src_ui_react_src_uibridge_richcombo.jsx.html#l32"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;richcombo.jsx:32</code></a>
                                                         </p>
                                                 
                                                 
@@ -278,7 +290,8 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Creates and applies an HTML element to the body of the document which will contain ARIA messages.</p>
+                                                        <p>Generates a RichComboBridge React class for a given richcombo definition if it has not been
+                                                already created based on the richcombo name and definition.</p>
                                                 
                                                     </div>
                                                 
@@ -287,12 +300,23 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">id</code>
+                                                                        <code class="param-name">richComboName</code>
                                                                         <span class="type">String</span>
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The provided id of the element. It will be used as prefix for the final element Id.</p>
+                                                                        <p>The rich combo name</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">richComboDefinition</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The rich combo definition</p>
                                                 
                                                                     </div>
                                                 
@@ -304,14 +328,14 @@
                                                             <h4>Returns:</h4>
                                                 
                                                             <div class="returns-description">
-                                                                        <span class="type">HTMLElement</span>:
-                                                                    <p>The created and applied to DOM element.</p>
+                                                                        <span class="type">Object</span>:
+                                                                    <p>The generated or already existing React RichCombo Class</p>
                                                 
                                                             </div>
                                                         </div>
                                                 
                                                 </div>
-                                                <div id="method_init" class="method item protected">
+                                                <div id="method_init" class="method item">
                                                     <h3 class="name"><code>init</code></h3>
                                                 
                                                         <div class="args">
@@ -324,7 +348,6 @@
                                                 
                                                 
                                                 
-                                                        <span class="flag protected">protected</span>
                                                 
                                                 
                                                 
@@ -333,7 +356,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l60"><code>src&#x2F;core&#x2F;uicore.js:60</code></a>
+                                                        <a href="../files/src_ui_react_src_uibridge_richcombo.jsx.html#l192"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;richcombo.jsx:192</code></a>
                                                         </p>
                                                 
                                                 
@@ -341,7 +364,8 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Initializer lifecycle implementation for the UICore plugin.</p>
+                                                        <p>Set the add handler for UI_RICHCOMBO to our own. We do this in the init phase to override
+                                                the one in the original plugin in case it&#39;s present</p>
                                                 
                                                     </div>
                                                 
@@ -355,7 +379,7 @@
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The current CKEditor instance.</p>
+                                                                        <p>The CKEditor instance being initialized</p>
                                                 
                                                                     </div>
                                                 
@@ -368,171 +392,7 @@
                                         </div>
                             
                             
-                                        <div id="attrs" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Attributes</h2>
                             
-                                                <div id="attr_allowEsc" class="attr item">
-                                                    <a name="config_allowEsc"></a> 
-                                                    <h3 class="name"><code>allowEsc</code></h3>
-                                                    <span class="type">Boolean</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l40"><code>src&#x2F;core&#x2F;uicore.js:40</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>If set to true, the editor will still fire <a href="../classes/CKEDITOR.plugins.uicore.html#event_editorInteraction" class="crosslink">editorInteraction</a> event,
-                                                if user presses Esc key.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <p><strong>Default:</strong> false</p>
-                                                
-                                                
-                                                </div>
-                                                <div id="attr_timeout" class="attr item">
-                                                    <a name="config_timeout"></a> 
-                                                    <h3 class="name"><code>timeout</code></h3>
-                                                    <span class="type">Number</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l49"><code>src&#x2F;core&#x2F;uicore.js:49</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Specifies the default timeout after which the <a href="../classes/CKEDITOR.plugins.uicore.html#event_editorInteraction" class="crosslink">editorInteraction</a> event
-                                                will be fired.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <p><strong>Default:</strong> 50 (ms)</p>
-                                                
-                                                
-                                                </div>
-                                        </div>
-                            
-                                        <div id="events" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Events</h2>
-                            
-                                                <div id="event_ariaUpdate" class="events item">
-                                                    <h3 class="name"><code>ariaUpdate</code></h3>
-                                                    <span class="type"></span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l32"><code>src&#x2F;core&#x2F;uicore.js:32</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Event Payload:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">data</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>An object which contains the following properties:</p>
-                                                <ul>
-                                                <li>message - The provided message from the UI element.</li>
-                                                </ul>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                
-                                                </div>
-                                                <div id="event_editorInteraction" class="events item">
-                                                    <h3 class="name"><code>editorInteraction</code></h3>
-                                                    <span class="type"></span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l20"><code>src&#x2F;core&#x2F;uicore.js:20</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,
-                                                or touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout
-                                                is 50ms. This value can be overwritten via <a href="../classes/CKEDITOR.plugins.uicore.html#attr_timeout" class="crosslink">timeout</a>
-                                                property of editor&#39;s configuration, like: editor.config.uicore.timeout = 100</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Event Payload:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">data</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>An object which contains the following properties:</p>
-                                                <ul>
-                                                <li>nativeEvent - The event as received from CKEditor.</li>
-                                                <li>selectionData - The data, returned from <a href="../classes/CKEDITOR.plugins.selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></li>
-                                                </ul>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                
-                                                </div>
-                                        </div>
                                 </div>
                             </div>
                         </div>

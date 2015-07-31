@@ -424,6 +424,13 @@
 .ae-ui .ae-container-dropdown-xl {
   width: 192px !important; }
 
+.ae-ui .ae-button-bridge [class*="ae-icon-"], .ae-ui .ae-button-bridge [class*=" ae-icon-"] {
+  background-repeat: no-repeat;
+  display: block;
+  height: 16px;
+  width: 16px;
+  margin-left: 4px; }
+
 .ae-ui .ae-has-dropdown {
   display: block;
   float: left \9;
@@ -565,6 +572,13 @@
       box-shadow: none; }
     .ae-ui .ae-container-input input::-ms-clear, .ae-ui .ae-container-input .ae-input::-ms-clear {
       display: none; }
+
+.ae-ui .ae-button-bridge [class*="ae-icon-"], .ae-ui .ae-button-bridge [class*=" ae-icon-"] {
+  -webkit-filter: brightness(0) invert(100%);
+  filter: brightness(0) invert(100%); }
+  .ae-ui .ae-button-bridge [class*="ae-icon-"]:hover, .ae-ui .ae-button-bridge [class*=" ae-icon-"]:hover {
+    -webkit-filter: sepia(80%) hue-rotate(-20deg) invert(90%) saturate(8);
+    filter: sepia(80%) hue-rotate(-20deg) invert(90%) saturate(8); }
 
 .ae-ui .ae-dropdown, .ae-ui [class^=ae-dropdown-] {
   background-color: #fcfcfc;
