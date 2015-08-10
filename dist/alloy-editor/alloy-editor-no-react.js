@@ -722,7 +722,7 @@ b=a.editable(),c=this;b.attachListener(b,"keydown",function(a){c.onKeydown(a);if
 null,null,999);b.attachListener(this.undoManager.editor,"blur",function(){c.keyEventsStack.remove(9)},null,null,999)}};var k=CKEDITOR.plugins.undo.KeyEventsStack=function(){this.stack=[]};k.prototype={push:function(a){return this.stack[this.stack.push({keyCode:a,inputs:0})-1]},getLastIndex:function(a){if("number"!=typeof a)return this.stack.length-1;for(var b=this.stack.length;b--;)if(this.stack[b].keyCode==a)return b;return-1},getLast:function(a){a=this.getLastIndex(a);return-1!=a?this.stack[a]:
 null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.getLastIndex(a);-1!=a&&this.stack.splice(a,1)},resetInputs:function(a){if("number"==typeof a)this.getLast(a).inputs=0;else for(a=this.stack.length;a--;)this.stack[a].inputs=0},getTotalInputs:function(){for(var a=this.stack.length,b=0;a--;)b+=this.stack[a].inputs;return b},cleanUp:function(a){a=a.data.$;!a.ctrlKey&&!a.metaKey&&this.remove(17);a.shiftKey||this.remove(16);a.altKey||this.remove(18)}}})();CKEDITOR.config.plugins='basicstyles,blockquote,dialogui,dialog,clipboard,enterkey,horizontalrule,indent,indentlist,list,pastefromword,removeformat,tab,undo';CKEDITOR.config.skin='moono';(function() {var setIcons = function(icons, strip) {var path = CKEDITOR.getUrl( 'plugins/' + strip );icons = icons.split( ',' );for ( var i = 0; i < icons.length; i++ )CKEDITOR.skin.icons[ icons[ i ] ] = { path: path, offset: -icons[ ++i ], bgsize : icons[ ++i ] };};if (CKEDITOR.env.hidpi) setIcons('bold,0,,italic,24,,strike,48,,subscript,72,,superscript,96,,underline,120,,blockquote,144,,copy-rtl,168,,copy,192,,cut-rtl,216,,cut,240,,paste-rtl,264,,paste,288,,horizontalrule,312,,indent-rtl,336,,indent,360,,outdent-rtl,384,,outdent,408,,bulletedlist-rtl,432,,bulletedlist,456,,numberedlist-rtl,480,,numberedlist,504,,pastefromword-rtl,528,,pastefromword,552,,removeformat,576,,redo-rtl,600,,redo,624,,undo-rtl,648,,undo,672,','icons_hidpi.png');else setIcons('bold,0,auto,italic,24,auto,strike,48,auto,subscript,72,auto,superscript,96,auto,underline,120,auto,blockquote,144,auto,copy-rtl,168,auto,copy,192,auto,cut-rtl,216,auto,cut,240,auto,paste-rtl,264,auto,paste,288,auto,horizontalrule,312,auto,indent-rtl,336,auto,indent,360,auto,outdent-rtl,384,auto,outdent,408,auto,bulletedlist-rtl,432,auto,bulletedlist,456,auto,numberedlist-rtl,480,auto,numberedlist,504,auto,pastefromword-rtl,528,auto,pastefromword,552,auto,removeformat,576,auto,redo-rtl,600,auto,redo,624,auto,undo-rtl,648,auto,undo,672,auto','icons.png');})();CKEDITOR.lang.languages={"af":1,"ar":1,"bg":1,"bn":1,"bs":1,"ca":1,"cs":1,"cy":1,"da":1,"de":1,"el":1,"en":1,"en-au":1,"en-ca":1,"en-gb":1,"eo":1,"es":1,"et":1,"eu":1,"fa":1,"fi":1,"fo":1,"fr":1,"fr-ca":1,"gl":1,"gu":1,"he":1,"hi":1,"hr":1,"hu":1,"id":1,"is":1,"it":1,"ja":1,"ka":1,"km":1,"ko":1,"ku":1,"lt":1,"lv":1,"mk":1,"mn":1,"ms":1,"nb":1,"nl":1,"no":1,"pl":1,"pt":1,"pt-br":1,"ro":1,"ru":1,"si":1,"sk":1,"sl":1,"sq":1,"sr":1,"sr-latn":1,"sv":1,"th":1,"tr":1,"tt":1,"ug":1,"uk":1,"vi":1,"zh":1,"zh-cn":1};}());
 /**
- * AlloyEditor v0.4.0-alpha.1.
+ * AlloyEditor v0.4.0.
  *
  * Copyright 2014-2015, Liferay, Inc.
  * All rights reserved.
@@ -2945,10 +2945,10 @@ CKEDITOR.disableAutoInline = true;
             }
             // Otherwise calculate positions based on the table (for last cell).
             else {
-                x = table.getDocumentPosition().x;
+                    x = table.getDocumentPosition().x;
 
-                rtl ? pillarLeft = x : pillarRight = x + table.$.offsetWidth;
-            }
+                    rtl ? pillarLeft = x : pillarRight = x + table.$.offsetWidth;
+                }
 
             pillarWidth = Math.max(pillarRight - pillarLeft, 4);
 
@@ -3425,14 +3425,14 @@ CKEDITOR.disableAutoInline = true;
 					if (cell.$.rowSpan == 1) cell.remove();
 					// Row spanned cell.
 					else {
-						// Span row of the cell, reduce spanning.
-						cell.$.rowSpan -= 1;
-						// Root row of the cell, root cell to next row.
-						if (cellRowIndex == i) {
-							var nextMapRow = map[i + 1];
-							nextMapRow[j - 1] ? cell.insertAfter(new CKEDITOR.dom.element(nextMapRow[j - 1])) : new CKEDITOR.dom.element(table.$.rows[i + 1]).append(cell, 1);
+							// Span row of the cell, reduce spanning.
+							cell.$.rowSpan -= 1;
+							// Root row of the cell, root cell to next row.
+							if (cellRowIndex == i) {
+								var nextMapRow = map[i + 1];
+								nextMapRow[j - 1] ? cell.insertAfter(new CKEDITOR.dom.element(nextMapRow[j - 1])) : new CKEDITOR.dom.element(table.$.rows[i + 1]).append(cell, 1);
+							}
 						}
-					}
 
 					j += cell.$.colSpan - 1;
 				}
@@ -3759,8 +3759,8 @@ CKEDITOR.disableAutoInline = true;
 		// Be able to merge cells only if actual dimension of selected
 		// cells equals to the caculated rectangle.
 		else {
-			return totalRowSpan * totalColSpan == dimension;
-		}
+				return totalRowSpan * totalColSpan == dimension;
+			}
 	}
 
 	function verticalSplitCell(selection, isDetect) {
@@ -4666,8 +4666,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 }
                 // Relative path.
                 else {
-                    path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
-                }
+                        path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
+                    }
             }
 
             if (!path) {
@@ -5102,26 +5102,26 @@ CKEDITOR.tools.buildTableMap = function (table) {
             // else if the attribute has readOnly flag, set the default value from the attribute,
             // regardless if there is value or not
             else if (currentAttr.readOnly) {
-                value = currentAttr.value;
-            }
-            // else if the attribute has writeOnce value, set it from the passed configuration or from the
-            // default value, in this order. Otherwise, return miserable.
-            else if (currentAttr.writeOnce) {
-                if (hasPassedValueViaConfig) {
-                    value = this.__config__[attr];
-                } else if (hasDefaultValue) {
                     value = currentAttr.value;
-                } else {
-                    return;
                 }
-            }
-            // These two cases below are easy - set the value to be from the passed config or
-            // from the default value, in this order.
-            else if (hasPassedValueViaConfig) {
-                value = this.__config__[attr];
-            } else if (hasDefaultValue) {
-                value = currentAttr.value;
-            }
+                // else if the attribute has writeOnce value, set it from the passed configuration or from the
+                // default value, in this order. Otherwise, return miserable.
+                else if (currentAttr.writeOnce) {
+                        if (hasPassedValueViaConfig) {
+                            value = this.__config__[attr];
+                        } else if (hasDefaultValue) {
+                            value = currentAttr.value;
+                        } else {
+                            return;
+                        }
+                    }
+                    // These two cases below are easy - set the value to be from the passed config or
+                    // from the default value, in this order.
+                    else if (hasPassedValueViaConfig) {
+                            value = this.__config__[attr];
+                        } else if (hasDefaultValue) {
+                            value = currentAttr.value;
+                        }
 
             // If there is validator, and user passed config object - check the returned value.
             // If it is false, then set as initial value the default one.
@@ -9222,7 +9222,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 "use strict";
 
 (function () {
-    "use strict";
+    'use strict';
 
     /**
      * The ButtonsStylesListHeader class provides the header of an list of style items.
