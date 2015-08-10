@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.7</b>
+                        API Docs for Version: <b>0.4.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
                                     <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
@@ -66,6 +67,7 @@
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -103,10 +105,14 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
@@ -188,7 +194,10 @@
                                      */
                                     initializer: function(config) {
                                         var node = this.get(&#x27;srcNode&#x27;);
-                                        node.setAttribute(&#x27;contenteditable&#x27;, &#x27;true&#x27;);
+                            
+                                        if (this.get(&#x27;enableContentEditable&#x27;)) {
+                                            node.setAttribute(&#x27;contenteditable&#x27;, &#x27;true&#x27;);
+                                        }
                             
                                         var editor = CKEDITOR.inline(node);
                             
@@ -205,15 +214,13 @@
                             
                                         AlloyEditor.Lang.mix(editor.config, config);
                             
-                                        this._editor = editor;
-                            
-                                        CKEDITOR.once(&#x27;resourcesLoaded&#x27;, this._renderUI.bind(this));
-                            
                                         editor.once(&#x27;contentDom&#x27;, function() {
                                             editor.editable().addClass(&#x27;ae-editable&#x27;);
                                         });
                             
-                                        this._loadLanguageFile();
+                                        AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
+                            
+                                        this._editor = editor;
                                     },
                             
                                     /**
@@ -253,39 +260,6 @@
                                     },
                             
                                     /**
-                                     * Detects and load the corresponding language file
-                                     * if AlloyEditor language strings are not already present.
-                                     *
-                                     * @protected
-                                     * @method _loadLanguageFile
-                                     */
-                                    _loadLanguageFile: function() {
-                                        var onLanguageFileLoad = function() {
-                                            CKEDITOR.fire(&#x27;resourcesLoaded&#x27;);
-                                        };
-                            
-                                        if (!window.AlloyEditor.Strings) {
-                                            var languages = [&#x27;af&#x27;, &#x27;ar&#x27;, &#x27;bg&#x27;, &#x27;bn&#x27;, &#x27;bs&#x27;, &#x27;ca&#x27;, &#x27;cs&#x27;, &#x27;cy&#x27;, &#x27;da&#x27;, &#x27;de&#x27;, &#x27;el&#x27;, &#x27;en-au&#x27;, &#x27;en-ca&#x27;, &#x27;en-gb&#x27;, &#x27;en&#x27;, &#x27;eo&#x27;, &#x27;es&#x27;, &#x27;et&#x27;, &#x27;eu&#x27;, &#x27;fa&#x27;, &#x27;fi&#x27;, &#x27;fo&#x27;, &#x27;fr-ca&#x27;, &#x27;fr&#x27;, &#x27;gl&#x27;, &#x27;gu&#x27;, &#x27;he&#x27;, &#x27;hi&#x27;, &#x27;hr&#x27;, &#x27;hu&#x27;, &#x27;id&#x27;, &#x27;is&#x27;, &#x27;it&#x27;, &#x27;ja&#x27;, &#x27;ka&#x27;, &#x27;km&#x27;, &#x27;ko&#x27;, &#x27;ku&#x27;, &#x27;lt&#x27;, &#x27;lv&#x27;, &#x27;mk&#x27;, &#x27;mn&#x27;, &#x27;ms&#x27;, &#x27;nb&#x27;, &#x27;nl&#x27;, &#x27;no&#x27;, &#x27;pl&#x27;, &#x27;pt-br&#x27;, &#x27;pt&#x27;, &#x27;ro&#x27;, &#x27;ru&#x27;, &#x27;si&#x27;, &#x27;sk&#x27;, &#x27;sl&#x27;, &#x27;sq&#x27;, &#x27;sr-latn&#x27;, &#x27;sr&#x27;, &#x27;sv&#x27;, &#x27;th&#x27;, &#x27;tr&#x27;, &#x27;tt&#x27;, &#x27;ug&#x27;, &#x27;uk&#x27;, &#x27;vi&#x27;, &#x27;zh-cn&#x27;, &#x27;zh&#x27;];
-                            
-                                            var userLanguage = navigator.language || navigator.userLanguage || &#x27;en&#x27;;
-                            
-                                            var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
-                                            var lang = parts[1];
-                                            var locale = parts[2];
-                            
-                                            if (languages[lang + &#x27;-&#x27; + locale]) {
-                                                lang = lang + &#x27;-&#x27; + locale;
-                                            } else if (!languages.indexOf(lang)) {
-                                                lang = &#x27;en&#x27;;
-                                            }
-                            
-                                            CKEDITOR.scriptLoader.load(CKEDITOR.getUrl(&#x27;lang/alloy-editor/&#x27; + lang + &#x27;.js&#x27;), onLanguageFileLoad, this);
-                                        } else {
-                                            setTimeout(onLanguageFileLoad.bind(this), 0);
-                                        }
-                                    },
-                            
-                                    /**
                                      * Renders the specified from the user toolbars
                                      *
                                      * @protected
@@ -311,7 +285,7 @@
                                     },
                             
                                     /**
-                                     * The function returns an HTML element from the passed value. If the passed value is a string, it should be 
+                                     * The function returns an HTML element from the passed value. If the passed value is a string, it should be
                                      * the Id of the element which have to be retrieved from the DOM.
                                      * If an HTML Element is passed, the element itself will be returned.
                                      *
@@ -373,6 +347,21 @@
                                         },
                             
                                         /**
+                                         * Specifies whether AlloyEditor set the contenteditable attribute
+                                         * to &quot;true&quot; on its srcNode.
+                                         *
+                                         * @property enableContentEditable
+                                         * @type Boolean
+                                         * @default true
+                                         * @writeOnce
+                                         */
+                                        enableContentEditable: {
+                                            validator: AlloyEditor.Lang.isBoolean,
+                                            value: true,
+                                            writeOnce: true
+                                        },
+                            
+                                        /**
                                          * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
                                          *
                                          * @property eventsDelay
@@ -394,7 +383,7 @@
                                          */
                                         extraPlugins: {
                                             validator: AlloyEditor.Lang.isString,
-                                            value: &#x27;uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink&#x27;,
+                                            value: &#x27;ae_uicore,ae_selectionregion,ae_dragresize,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink&#x27;,
                                             writeOnce: true
                                         },
                             
@@ -412,7 +401,7 @@
                             
                                         /**
                                          * Specifies the class, which should be added by Placeholder plugin
-                                         * {{#crossLink &quot;CKEDITOR.plugins.placeholder}}{{/crossLink}}
+                                         * {{#crossLink &quot;CKEDITOR.plugins.ae_placeholder}}{{/crossLink}}
                                          * when editor is not focused.
                                          *
                                          * @property placeholderClass
@@ -449,7 +438,7 @@
                                         },
                             
                                         /**
-                                         * The Node ID or HTMl node, which should be turned to an instance of AlloyEditor.
+                                         * The Node ID or HTMl node, which AlloyEditor should use as an editable area.
                                          *
                                          * @property srcNode
                                          * @type String | Node
@@ -492,6 +481,8 @@
                                         }
                                     }
                                 });
+                            
+                                CKEDITOR.event.implementOn(Core);
                             
                                 AlloyEditor.Core = Core;
                             }());

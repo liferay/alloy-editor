@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.7</b>
+                        API Docs for Version: <b>0.4.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
                                     <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
@@ -66,6 +67,7 @@
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -103,10 +105,14 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
@@ -166,7 +172,7 @@
                             (function() {
                                 &#x27;use strict&#x27;;
                             
-                                if (CKEDITOR.plugins.get(&#x27;selectionregion&#x27;)) {
+                                if (CKEDITOR.plugins.get(&#x27;ae_selectionregion&#x27;)) {
                                     return;
                                 }
                             
@@ -181,7 +187,7 @@
                                  * be merged into each editor instance, so the developer may use them directly via the editor, without making
                                  * an instance of this class**.
                                  *
-                                 * @class CKEDITOR.plugins.selectionregion
+                                 * @class CKEDITOR.plugins.ae_selectionregion
                                  * @constructor
                                  */
                                 function SelectionRegion() {}
@@ -301,13 +307,17 @@
                                      * Returns data for the current selection.
                                      *
                                      * @method getSelectionData
-                                     * @return {Object} Returns object with the following data:
+                                     * @return {Object|null} Returns an object with the following data:
                                      * - element - The currently selected element, if any
                                      * - text - The selected text
-                                     * - region - The data, returned from {{#crossLink &quot;CKEDITOR.plugins.selectionregion/getSelectionRegion:method&quot;}}{{/crossLink}}
+                                     * - region - The data, returned from {{#crossLink &quot;CKEDITOR.plugins.ae_selectionregion/getSelectionRegion:method&quot;}}{{/crossLink}}
                                      */
                                     getSelectionData: function() {
                                         var selection = this.getSelection();
+                            
+                                        if (!selection.getNative()) {
+                                            return null;
+                                        }
                             
                                         var result = {
                                             element: selection.getSelectedElement(),
@@ -324,7 +334,7 @@
                                      *
                                      * @method getSelectionRegion
                                      * @return {Object} Returns object which is being returned from
-                                     * {{#crossLink &quot;CKEDITOR.plugins.selectionregion/getClientRectsRegion:method&quot;}}{{/crossLink}} with three more properties:
+                                     * {{#crossLink &quot;CKEDITOR.plugins.ae_selectionregion/getClientRectsRegion:method&quot;}}{{/crossLink}} with three more properties:
                                      * - direction - the direction of the selection. Can be one of these:
                                      *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
                                      *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
@@ -381,28 +391,48 @@
                                      *     + right - right offset of the selection
                                      *     + top - top offset of the selection
                                      *     + width - the width of the rectangle
+                                     *
+                                     * If there is no native selection, the objects will be filled with 0.
                                      */
                                     getClientRectsRegion: function() {
                                         var selection = this.getSelection();
                                         var nativeSelection = selection.getNative();
                             
-                                        var rangeCount;
+                                        var defaultRect = {
+                                            bottom: 0,
+                                            height: 0,
+                                            left: 0,
+                                            right: 0,
+                                            top: 0,
+                                            width: 0
+                                        };
+                            
+                                        var region = {
+                                            bottom: 0,
+                                            endRect: defaultRect,
+                                            left: 0,
+                                            right: 0,
+                                            top: 0,
+                                            startRect: defaultRect
+                                        };
+                            
+                                        if (!nativeSelection) {
+                                            return region;
+                                        }
+                            
+                                        var bottom = 0;
                                         var clientRects;
+                                        var left = Infinity;
+                                        var rangeCount;
+                                        var right = -Infinity;
+                                        var top = Infinity;
                             
                                         if (nativeSelection.createRange) {
-                                            var range = nativeSelection.createRange();
-                                            clientRects = range.getClientRects();
+                                            clientRects = nativeSelection.createRange().getClientRects();
                                         } else {
                                             rangeCount = nativeSelection.rangeCount;
                                             clientRects = (nativeSelection.rangeCount &gt; 0) ? nativeSelection.getRangeAt(0).getClientRects() : [];
                                         }
-                            
-                                        var bottom = 0;
-                                        var left = Infinity;
-                                        var right = -Infinity;
-                                        var top = Infinity;
-                            
-                                        var region;
                             
                                         if (clientRects.length === 0) {
                                             region = this.getCaretRegion();
@@ -429,12 +459,10 @@
                             
                                             var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
                             
-                                            region = {
-                                                bottom: scrollPos.y + bottom,
-                                                left: scrollPos.x + left,
-                                                right: scrollPos.x + right,
-                                                top: scrollPos.y + top
-                                            };
+                                            region.bottom = scrollPos.y + bottom;
+                                            region.left = scrollPos.x + left;
+                                            region.right = scrollPos.x + right;
+                                            region.top = scrollPos.y + top;
                             
                                             if (clientRects.length) {
                                                 var endRect = clientRects[clientRects.length - 1];
@@ -473,10 +501,13 @@
                                      * - CKEDITOR.SELECTION_BOTTOM_TO_TOP;
                                      */
                                     getSelectionDirection: function() {
+                                        var direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
                                         var selection = this.getSelection();
                                         var nativeSelection = selection.getNative();
                             
-                                        var direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
+                                        if (!nativeSelection) {
+                                            return direction;
+                                        }
                             
                                         var anchorNode;
                             
@@ -493,7 +524,7 @@
                                 };
                             
                                 CKEDITOR.plugins.add(
-                                    &#x27;selectionregion&#x27;, {
+                                    &#x27;ae_selectionregion&#x27;, {
                                         /**
                                          * Initializer lifecycle implementation for the SelectionRegion plugin.
                                          *

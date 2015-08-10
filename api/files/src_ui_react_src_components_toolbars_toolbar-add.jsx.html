@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.3.7</b>
+                        API Docs for Version: <b>0.4.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
                                     <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
@@ -66,6 +67,7 @@
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -103,10 +105,14 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.autolink.html">CKEDITOR.plugins.autolink</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.placeholder.html">CKEDITOR.plugins.placeholder</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.selectionregion.html">CKEDITOR.plugins.selectionregion</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.uicore.html">CKEDITOR.plugins.uicore</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
@@ -198,6 +204,13 @@
                                         editor: React.PropTypes.object.isRequired,
                             
                                         /**
+                                         * The payload from &quot;editorInteraction&quot; event
+                                         *
+                                         * @property {Object} editorEvent
+                                         */
+                                        editorEvent: React.PropTypes.object,
+                            
+                                        /**
                                          * The gutter to be applied to the widget when rendered in exclusive mode
                                          *
                                          * @property {Object} gutterExclusive
@@ -210,6 +223,13 @@
                                          * @property {String} label
                                          */
                                         label: React.PropTypes.string,
+                            
+                                        /**
+                                         * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+                                         *
+                                         * @property {Function} onDismiss
+                                         */
+                                        onDismiss: React.PropTypes.func,
                             
                                         /**
                                          * The data, returned from {{#crossLink &quot;CKEDITOR.plugins.selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
@@ -282,12 +302,17 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Renders the buttons for adding content.
+                                     * Lifecycle. Renders the buttons for adding content or hides the toolbar
+                                     * if user interacted with a non-editable element.
                                      *
                                      * @method render
-                                     * @return {Object} The content which should be rendered.
+                                     * @return {Object|null} The content which should be rendered.
                                      */
                                     render: function() {
+                                        if (this.props.editorEvent &amp;&amp; !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+                                            return null;
+                                        }
+                            
                                         var buttons = this._getButtons();
                                         var className = this._getToolbarClassName();
                             
@@ -349,11 +374,16 @@
                                      * @method _updatePosition
                                      */
                                     _updatePosition: function() {
-                                        var region;
+                                        // If component is not mounted, there is nothing to do
+                                        if (!React.findDOMNode(this)) {
+                                            return;
+                                        }
                             
                                         if (this.props.renderExclusive) {
                                             this.updatePosition();
                                             this.show();
+                            
+                                        var region;
                             
                                         } else {
                                             if (this.props.selectionData) {
@@ -368,7 +398,7 @@
                                                 var left = this.props.editor.get(&#x27;nativeEditor&#x27;).editable().getClientRect().left;
                             
                                                 domNode.style.left = left - domNode.offsetWidth - this.props.gutterExclusive.left + &#x27;px&#x27;;
-                                                domNode.style.top = region.top - domNode.offsetHeight/2 + startRect.height/2 + &#x27;px&#x27;;
+                                                domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + &#x27;px&#x27;;
                                                 domNode.style.opacity = 1;
                             
                                                 domElement.removeClass(&#x27;ae-arrow-box&#x27;);
