@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v0.4.0.
+ * AlloyEditor v0.4.1.
  *
  * Copyright 2014-2015, Liferay, Inc.
  * All rights reserved.
