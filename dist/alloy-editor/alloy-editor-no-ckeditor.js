@@ -19540,7 +19540,7 @@ module.exports = warning;
 },{"114":114}]},{},[1])(1)
 });
 /**
- * AlloyEditor v0.4.1.
+ * AlloyEditor v0.4.2.
  *
  * Copyright 2014-2015, Liferay, Inc.
  * All rights reserved.
