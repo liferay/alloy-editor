@@ -55,15 +55,16 @@ gulp.task('build', function(callback) {
         [
             'build-css',
             'build-js',
-            'copy-languages',
-            'copy-md'
+            'copy-languages'
         ],
         [
+            'copy-md',
             'create-alloy-editor-all',
             'create-alloy-editor-no-ckeditor',
             'create-alloy-editor-no-react'
         ],
         'build-demo',
+        'post-cleanup',
         callback
     );
 });
@@ -76,12 +77,12 @@ gulp.task('release', function(callback) {
             'build-api',
             'build-css',
             'build-js',
-            'copy-languages',
-            'copy-md'
+            'copy-languages'
         ],
         [
-            'minimize-css',
+            'copy-md',
             'minimize-alloy-editor-core',
+            'minimize-css',
             'minimize-react'
         ],
         [
@@ -93,6 +94,7 @@ gulp.task('release', function(callback) {
             'create-alloy-editor-no-react-min'
         ],
         'build-demo',
+        'post-cleanup',
         callback
     );
 });
@@ -271,6 +273,14 @@ gulp.task('minimize-react', function() {
             path.join(reactDir, 'vendor', 'react-min.js')
         ]);
     }
+});
+
+gulp.task('post-cleanup', function(callback) {
+    del([
+        path.join(editorDistFolder, 'CHANGES.md'),
+        path.join(editorDistFolder, 'adapters'),
+        path.join(editorDistFolder, 'samples')
+    ], callback);
 });
 
 gulp.task('watch', ['build'], function () {
