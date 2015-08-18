@@ -7,7 +7,7 @@
      * @class AlloyEditor
      * @type {Object}
      */
-    window.AlloyEditor = {
+    var AlloyEditor = {
         /**
          * Creates an instance of AlloyEditor.
          *
@@ -19,8 +19,9 @@
          */
         editable: function(node, config) {
             config = config || {};
-
             config.srcNode = node;
+
+            AlloyEditor.implementEventTarget();
 
             return new AlloyEditor.Core(config);
         },
@@ -82,6 +83,8 @@
          * @param {Function} callback Optional callback to be called when AlloyEditor loads the language resource.
          */
         loadLanguageResources: function(callback) {
+            AlloyEditor.implementEventTarget();
+
             if (AlloyEditor.Lang.isFunction(callback)) {
                 if (AlloyEditor.Strings) {
                     setTimeout(callback, 0);
@@ -143,6 +146,18 @@
         },
 
         /**
+         * Implements event firing and subscribing via CKEDITOR.event.
+         *
+         * @method implementEventTarget
+         * @static
+         */
+        implementEventTarget: function() {
+            if (!AlloyEditor.fire && !AlloyEditor.on) {
+                CKEDITOR.event.implementOn(AlloyEditor);
+            }
+        },
+
+        /**
          * Regular expression which should match the script which have been used to load AlloyEditor.
          *
          * @property
@@ -177,5 +192,15 @@
          */
     };
 
-    CKEDITOR.event.implementOn(AlloyEditor);
+    if (typeof module !== 'undefined' && typeof module.exports === 'object') {
+        module.exports = AlloyEditor;
+    } else if (typeof window !== 'undefined') {
+        window.AlloyEditor = AlloyEditor;
+    } else if(typeof global !== 'undefined') {
+        global.AlloyEditor = AlloyEditor;
+    } else if (typeof self !== 'undefined') {
+        self.AlloyEditor = AlloyEditor;
+    } else {
+        this.AlloyEditor = AlloyEditor;
+    }
 }());

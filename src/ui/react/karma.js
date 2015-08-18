@@ -8,6 +8,7 @@ var argv = require('yargs').argv;
 var path = require('path');
 
 var srcFiles = require('./_src.js');
+srcFiles = srcFiles.main.concat(srcFiles.ui);
 
 var preprocessors = {
     '**/*.jsx': ['babel'],
