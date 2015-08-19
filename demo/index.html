@@ -505,170 +505,174 @@ AlloyEditor.editable(<span class="hljs-string">'contentEditable'</span>);</code>
 <script src="//alloyeditor.com/website/js/alloy-editor/alloy-editor-all-min.js"></script>
 
 <script>
-    var React = AlloyEditor.React; // Use the built-in version of React if your site does not use React
+    (function() {
+        var React = AlloyEditor.React; // Use the built-in version of React if your site does not use React
 
-    var ButtonMarquee = React.createClass({
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        var ButtonMarquee = React.createClass({
+            mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
-        displayName: 'ButtonMarquee',
+            displayName: 'ButtonMarquee',
 
-        propTypes: {
-            editor: React.PropTypes.object.isRequired
-        },
+            propTypes: {
+                editor: React.PropTypes.object.isRequired
+            },
 
-        getDefaultProps: function() {
-            return {
-                style: {
-                    element: 'marquee'
-                }
-            };
-        },
+            getDefaultProps: function() {
+                return {
+                    style: {
+                        element: 'marquee'
+                    }
+                };
+            },
 
-        statics: {
-            key: 'marquee'
-        },
+            statics: {
+                key: 'marquee'
+            },
 
-        render: function() {
-            var cssClass = 'ae-button ' + this.getStateClasses();
+            render: function() {
+                var cssClass = 'ae-button ' + this.getStateClasses();
 
-            return (
-                React.createElement(
-                    'button',
-                    {
-                        className: cssClass,
-                        'data-type': 'button-marquee',
-                        onClick: this.applyStyle,
-                        tabIndex: this.props.tabIndex
-                    },
+                return (
                     React.createElement(
-                        'span',
+                        'button',
                         {
-                            className: 'ae-icon-separator'
-                        }
+                            className: cssClass,
+                            'data-type': 'button-marquee',
+                            onClick: this.applyStyle,
+                            tabIndex: this.props.tabIndex
+                        },
+                        React.createElement(
+                            'span',
+                            {
+                                className: 'ae-icon-separator'
+                            }
+                        )
                     )
-                )
-            );
-        }
-    });
+                );
+            }
+        });
 
-    AlloyEditor.Buttons[ButtonMarquee.key] = AlloyEditor.ButtonMarquee = ButtonMarquee;
+        AlloyEditor.Buttons[ButtonMarquee.key] = AlloyEditor.ButtonMarquee = ButtonMarquee;
+    }());
 </script>
 
 <script>
-    var contentEditable = document.getElementById('contentEditable');
+    (function() {
+        var contentEditable = document.getElementById('contentEditable');
 
-    var destroyPopover = function() {
-        $('#sampleHint').remove();
-        contentEditable.removeEventListener('focus', destroyPopover);
-    };
+        var destroyPopover = function() {
+            $('#sampleHint').remove();
+            contentEditable.removeEventListener('focus', destroyPopover);
+        };
 
-    contentEditable.addEventListener('focus', destroyPopover);
+        contentEditable.addEventListener('focus', destroyPopover);
 
-    AlloyEditor.Selections[2].buttons.push('marquee');
+        AlloyEditor.Selections[2].buttons.push('marquee');
 
-    var filters = [
-        {
-            name: 'X-PRO 2',
-            filter: 'contrast(1.3) brightness(0.8) sepia(0.3) saturate(1.5) hue-rotate(-20deg)'
-        },
-        {
-            name: 'Willow',
-            filter: 'saturate(0.02) contrast(0.85) brightness(1.2) sepia(0.02)'
-        },
-        {
-            name: 'Valencia',
-            filter: 'sepia(0.15) saturate(1.5) contrast(0.9)'
-        },
-        {
-            name: 'Nashville',
-            filter: 'sepia(0.4) saturate(1.5) contrast(0.9) brightness(1.1) hue-rotate(-15deg)'
-        },
-        {
-            name: 'Kelvin',
-            filter: 'sepia(0.4) saturate(2.4) brightness(1.3) contrast(1)'
-        },
-        {
-            name: 'Inkwell',
-            filter: 'grayscale(1) brightness(1.2) contrast(1.05)'
-        },
-        {
-            name: 'Earlybird',
-            filter: 'sepia(0.4) saturate(1.6) contrast(1.1) brightness(0.9) hue-rotate(-10deg)'
-        },
-        {
-            name: 'Brannan',
-            filter: 'sepia(0.5) contrast(1.4)'
-        },
-        {
-            name: '1977',
-            filter: 'sepia(0.5) hue-rotate(-30deg) saturate(1.2) contrast(0.8)'
-        }
-    ];
-
-    var imageFilters = filters.map(function(filterDefinition) {
-        return {
-            name: filterDefinition.name,
-            style: {
-                element: 'img',
-                styles: {
-                    filter: filterDefinition.filter,
-                    '-webkit-filter': filterDefinition.filter
-                },
-                type: CKEDITOR.STYLE_OBJECT
+        var filters = [
+            {
+                name: 'X-PRO 2',
+                filter: 'contrast(1.3) brightness(0.8) sepia(0.3) saturate(1.5) hue-rotate(-20deg)'
+            },
+            {
+                name: 'Willow',
+                filter: 'saturate(0.02) contrast(0.85) brightness(1.2) sepia(0.02)'
+            },
+            {
+                name: 'Valencia',
+                filter: 'sepia(0.15) saturate(1.5) contrast(0.9)'
+            },
+            {
+                name: 'Nashville',
+                filter: 'sepia(0.4) saturate(1.5) contrast(0.9) brightness(1.1) hue-rotate(-15deg)'
+            },
+            {
+                name: 'Kelvin',
+                filter: 'sepia(0.4) saturate(2.4) brightness(1.3) contrast(1)'
+            },
+            {
+                name: 'Inkwell',
+                filter: 'grayscale(1) brightness(1.2) contrast(1.05)'
+            },
+            {
+                name: 'Earlybird',
+                filter: 'sepia(0.4) saturate(1.6) contrast(1.1) brightness(0.9) hue-rotate(-10deg)'
+            },
+            {
+                name: 'Brannan',
+                filter: 'sepia(0.5) contrast(1.4)'
+            },
+            {
+                name: '1977',
+                filter: 'sepia(0.5) hue-rotate(-30deg) saturate(1.2) contrast(0.8)'
             }
-        }
-    });
+        ];
 
-    AlloyEditor.Selections[1].buttons.unshift({
-        name: 'styles',
-        cfg: {
-            styles: imageFilters
-        }
-    });
-
-    var tableClasses = [
-        {
-            name: 'Normal Table',
-            cssClass: 'table'
-        },
-        {
-            name: 'Striped Rows',
-            cssClass: 'table table-striped'
-        },
-        {
-            name: 'Bordered Table',
-            cssClass: 'table table-bordered'
-        },
-        {
-            name: 'Hover Rows',
-            cssClass: 'table table-hover'
-        },
-        {
-            name: 'Condensed Table',
-            cssClass: 'table table-condensed'
-        }
-    ];
-
-    var tableStyles = tableClasses.map(function(styleDefinition) {
-        return {
-            name: styleDefinition.name,
-            style: {
-                element: 'table',
-                attributes: {
-                    'class': styleDefinition.cssClass
+        var imageFilters = filters.map(function(filterDefinition) {
+            return {
+                name: filterDefinition.name,
+                style: {
+                    element: 'img',
+                    styles: {
+                        filter: filterDefinition.filter,
+                        '-webkit-filter': filterDefinition.filter
+                    },
+                    type: CKEDITOR.STYLE_OBJECT
                 }
             }
-        }
-    });
+        });
 
-    AlloyEditor.Selections[3].buttons.unshift({
-        name: 'styles',
-        cfg: {
-            styles: tableStyles
-        }
-    });
+        AlloyEditor.Selections[1].buttons.unshift({
+            name: 'styles',
+            cfg: {
+                styles: imageFilters
+            }
+        });
 
-    AlloyEditor.editable('contentEditable');
+        var tableClasses = [
+            {
+                name: 'Normal Table',
+                cssClass: 'table'
+            },
+            {
+                name: 'Striped Rows',
+                cssClass: 'table table-striped'
+            },
+            {
+                name: 'Bordered Table',
+                cssClass: 'table table-bordered'
+            },
+            {
+                name: 'Hover Rows',
+                cssClass: 'table table-hover'
+            },
+            {
+                name: 'Condensed Table',
+                cssClass: 'table table-condensed'
+            }
+        ];
+
+        var tableStyles = tableClasses.map(function(styleDefinition) {
+            return {
+                name: styleDefinition.name,
+                style: {
+                    element: 'table',
+                    attributes: {
+                        'class': styleDefinition.cssClass
+                    }
+                }
+            }
+        });
+
+        AlloyEditor.Selections[3].buttons.unshift({
+            name: 'styles',
+            cfg: {
+                styles: tableStyles
+            }
+        });
+
+        AlloyEditor.editable('contentEditable');
+    }());
 </script>
       </div>
 
