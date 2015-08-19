@@ -1,4 +1,6 @@
-/*
+(function() {
+    function deployCKEditor() {
+        /*
 Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 */
@@ -721,24 +723,230 @@ a=a.data.getKey(),c=this.keyEventsStack.getTotalInputs();this.keyEventsStack.rem
 b=a.editable(),c=this;b.attachListener(b,"keydown",function(a){c.onKeydown(a);if(e.ieFunctionalKeysBug(a.data.getKey()))c.onInput()},null,null,999);b.attachListener(b,CKEDITOR.env.ie?"keypress":"input",c.onInput,c,null,999);b.attachListener(b,"keyup",c.onKeyup,c,null,999);b.attachListener(b,"paste",c.ignoreInputEventListener,c,null,999);b.attachListener(b,"drop",c.ignoreInputEventListener,c,null,999);b.attachListener(b.isInline()?b:a.document.getDocumentElement(),"click",function(){c.onNavigationKey()},
 null,null,999);b.attachListener(this.undoManager.editor,"blur",function(){c.keyEventsStack.remove(9)},null,null,999)}};var k=CKEDITOR.plugins.undo.KeyEventsStack=function(){this.stack=[]};k.prototype={push:function(a){return this.stack[this.stack.push({keyCode:a,inputs:0})-1]},getLastIndex:function(a){if("number"!=typeof a)return this.stack.length-1;for(var b=this.stack.length;b--;)if(this.stack[b].keyCode==a)return b;return-1},getLast:function(a){a=this.getLastIndex(a);return-1!=a?this.stack[a]:
 null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.getLastIndex(a);-1!=a&&this.stack.splice(a,1)},resetInputs:function(a){if("number"==typeof a)this.getLast(a).inputs=0;else for(a=this.stack.length;a--;)this.stack[a].inputs=0},getTotalInputs:function(){for(var a=this.stack.length,b=0;a--;)b+=this.stack[a].inputs;return b},cleanUp:function(a){a=a.data.$;!a.ctrlKey&&!a.metaKey&&this.remove(17);a.shiftKey||this.remove(16);a.altKey||this.remove(18)}}})();CKEDITOR.config.plugins='basicstyles,blockquote,dialogui,dialog,clipboard,enterkey,horizontalrule,indent,indentlist,list,pastefromword,removeformat,tab,undo';CKEDITOR.config.skin='moono';(function() {var setIcons = function(icons, strip) {var path = CKEDITOR.getUrl( 'plugins/' + strip );icons = icons.split( ',' );for ( var i = 0; i < icons.length; i++ )CKEDITOR.skin.icons[ icons[ i ] ] = { path: path, offset: -icons[ ++i ], bgsize : icons[ ++i ] };};if (CKEDITOR.env.hidpi) setIcons('bold,0,,italic,24,,strike,48,,subscript,72,,superscript,96,,underline,120,,blockquote,144,,copy-rtl,168,,copy,192,,cut-rtl,216,,cut,240,,paste-rtl,264,,paste,288,,horizontalrule,312,,indent-rtl,336,,indent,360,,outdent-rtl,384,,outdent,408,,bulletedlist-rtl,432,,bulletedlist,456,,numberedlist-rtl,480,,numberedlist,504,,pastefromword-rtl,528,,pastefromword,552,,removeformat,576,,redo-rtl,600,,redo,624,,undo-rtl,648,,undo,672,','icons_hidpi.png');else setIcons('bold,0,auto,italic,24,auto,strike,48,auto,subscript,72,auto,superscript,96,auto,underline,120,auto,blockquote,144,auto,copy-rtl,168,auto,copy,192,auto,cut-rtl,216,auto,cut,240,auto,paste-rtl,264,auto,paste,288,auto,horizontalrule,312,auto,indent-rtl,336,auto,indent,360,auto,outdent-rtl,384,auto,outdent,408,auto,bulletedlist-rtl,432,auto,bulletedlist,456,auto,numberedlist-rtl,480,auto,numberedlist,504,auto,pastefromword-rtl,528,auto,pastefromword,552,auto,removeformat,576,auto,redo-rtl,600,auto,redo,624,auto,undo-rtl,648,auto,undo,672,auto','icons.png');})();CKEDITOR.lang.languages={"af":1,"ar":1,"bg":1,"bn":1,"bs":1,"ca":1,"cs":1,"cy":1,"da":1,"de":1,"el":1,"en":1,"en-au":1,"en-ca":1,"en-gb":1,"eo":1,"es":1,"et":1,"eu":1,"fa":1,"fi":1,"fo":1,"fr":1,"fr-ca":1,"gl":1,"gu":1,"he":1,"hi":1,"hr":1,"hu":1,"id":1,"is":1,"it":1,"ja":1,"ka":1,"km":1,"ko":1,"ku":1,"lt":1,"lv":1,"mk":1,"mn":1,"ms":1,"nb":1,"nl":1,"no":1,"pl":1,"pt":1,"pt-br":1,"ro":1,"ru":1,"si":1,"sk":1,"sl":1,"sq":1,"sr":1,"sr-latn":1,"sv":1,"th":1,"tr":1,"tt":1,"ug":1,"uk":1,"vi":1,"zh":1,"zh-cn":1};}());
-/**
- * AlloyEditor v0.4.0.
- *
- * Copyright 2014-2015, Liferay, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the GNU LGPL-style license found in the
- * LICENSE file in the root directory of this source tree.
- */
 
-CKEDITOR.disableAutoInline = true;
-
-(function() {
-    if (window.AlloyEditor) {
-        return;
+        if (typeof CKEDITOR !== 'undefined') {
+            CKEDITOR.disableAutoInline = true;
+        }
     }
 
     'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * AlloyEditor static object.
+     *
+     * @class AlloyEditor
+     * @type {Object}
+     */
+    var AlloyEditor = {
+        /**
+         * Creates an instance of AlloyEditor.
+         *
+         * @method editable
+         * @static
+         * @param {String|Node} node The Node ID or HTMl node, which AlloyEditor should use as an editable area.
+         * @param {Object} config Configuration attributes for the current instance of AlloyEditor.
+         * @return {Object} An instance of {{#crossLink "Core"}}{{/crossLink}}
+         */
+        editable: function editable(node, config) {
+            config = config || {};
+            config.srcNode = node;
+
+            AlloyEditor.implementEventTarget();
+
+            return new AlloyEditor.Core(config);
+        },
+
+        /**
+         * The full URL for the AlloyEditor installation directory.
+         * It is possible to manually provide the base path by setting a
+         * global variable named `ALLOYEDITOR_BASEPATH`. This global variable
+         * must be set **before** the editor script loading.
+         *
+         * @method getBasePath
+         * @static
+         * @return {String} The found base path
+         */
+        getBasePath: function getBasePath() {
+            // Find out the editor directory path, based on its <script> tag.
+            var path = window.ALLOYEDITOR_BASEPATH || '';
+
+            if (!path) {
+                var scripts = document.getElementsByTagName('script');
+
+                for (var i = 0; i < scripts.length; i++) {
+                    var match = scripts[i].src.match(AlloyEditor.regexBasePath);
+
+                    if (match) {
+                        path = match[1];
+                        break;
+                    }
+                }
+            }
+
+            // In IE (only) the script.src string is the raw value entered in the
+            // HTML source. Other browsers return the full resolved URL instead.
+            if (path.indexOf(':/') === -1 && path.slice(0, 2) !== '//') {
+                // Absolute path.
+                if (path.indexOf('/') === 0) {
+                    path = location.href.match(/^.*?:\/\/[^\/]*/)[0] + path;
+                }
+                // Relative path.
+                else {
+                        path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
+                    }
+            }
+
+            if (!path) {
+                throw 'The AlloyEditor installation path could not be automatically detected. Please set the global variable "ALLOYEDITOR_BASEPATH" before creating editor instances.';
+            }
+
+            return path;
+        },
+
+        /**
+         * Detects and load the corresponding language file if AlloyEditor language strings are not already present.
+         * The function fires a {{#crossLink "AlloyEditor/languageResourcesLoaded:event"}}{{/crossLink}} event
+         *
+         * @method loadLanguageResources
+         * @static
+         * @param {Function} callback Optional callback to be called when AlloyEditor loads the language resource.
+         */
+        loadLanguageResources: function loadLanguageResources(callback) {
+            AlloyEditor.implementEventTarget();
+
+            if (AlloyEditor.Lang.isFunction(callback)) {
+                if (AlloyEditor.Strings) {
+                    setTimeout(callback, 0);
+                } else {
+                    AlloyEditor.once('languageResourcesLoaded', callback);
+                }
+            }
+
+            if (!AlloyEditor._langResourceRequested) {
+                AlloyEditor._langResourceRequested = true;
+
+                var languages = ['af', 'ar', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en-au', 'en-ca', 'en-gb', 'en', 'eo', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca', 'fr', 'gl', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'ku', 'lt', 'lv', 'mk', 'mn', 'ms', 'nb', 'nl', 'no', 'pl', 'pt-br', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr-latn', 'sr', 'sv', 'th', 'tr', 'tt', 'ug', 'uk', 'vi', 'zh-cn', 'zh'];
+
+                var userLanguage = navigator.language || navigator.userLanguage || 'en';
+
+                var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
+                var lang = parts[1];
+                var locale = parts[2];
+
+                if (languages[lang + '-' + locale]) {
+                    lang = lang + '-' + locale;
+                } else if (!languages.indexOf(lang)) {
+                    lang = 'en';
+                }
+
+                CKEDITOR.scriptLoader.load(AlloyEditor.getUrl('lang/alloy-editor/' + lang + '.js'), function (loaded) {
+                    if (loaded) {
+                        AlloyEditor.fire('languageResourcesLoaded');
+                    }
+                }, this);
+            }
+        },
+
+        /**
+         * Gets the full URL for AlloyEditor resources. By default, URLs
+         * returned by this function contain a querystring parameter ("t")
+         * set to the {@link CKEDITOR#timestamp} value.
+         *
+         * @method getUrl
+         * @static
+         * @param {String} resource The resource whose full URL we want to get.
+         * It may be a full, absolute, or relative URL.
+         * @return {String} The full URL.
+         */
+        getUrl: function getUrl(resource) {
+            var basePath = AlloyEditor.getBasePath();
+
+            // If this is not a full or absolute path.
+            if (resource.indexOf(':/') === -1 && resource.indexOf('/') !== 0) {
+                resource = basePath + resource;
+            }
+
+            // Add the timestamp, except for directories.
+            if (CKEDITOR.timestamp && resource.charAt(resource.length - 1) !== '/' && !/[&?]t=/.test(resource)) {
+                resource += (resource.indexOf('?') >= 0 ? '&' : '?') + 't=' + CKEDITOR.timestamp;
+            }
+
+            return resource;
+        },
+
+        /**
+         * Implements event firing and subscribing via CKEDITOR.event.
+         *
+         * @method implementEventTarget
+         * @static
+         */
+        implementEventTarget: function implementEventTarget() {
+            if (!AlloyEditor.fire && !AlloyEditor.on) {
+                CKEDITOR.event.implementOn(AlloyEditor);
+            }
+        },
+
+        /**
+         * Regular expression which should match the script which have been used to load AlloyEditor.
+         *
+         * @property
+         * @type {RegExp}
+         * @static
+         */
+        regexBasePath: /(^|.*[\\\/])(?:alloy-editor[^/]+|alloy-editor)\.js(?:\?.*|;.*)?$/i,
+
+        /**
+         * And object, containing all currently registered buttons in AlloyEditor.
+         *
+         * @property Buttons
+         * @type {Object}
+         * @static
+         */
+        Buttons: {},
+
+        /**
+         * And object, containing all currently registered toolbars in AlloyEditor.
+         *
+         * @property Toolbars
+         * @type {Object}
+         * @static
+         */
+        Toolbars: {}
+
+        /**
+         * Fired when AlloyEditor detects the browser language and loads the corresponding language file. Once this event
+         * is fired, AlloyEditor.Strings will be populated with data.
+         *
+         * @event languageResourcesLoaded
+         */
+    };
+
+    if (typeof module !== 'undefined' && typeof module.exports === 'object') {
+        module.exports = AlloyEditor;
+    } else if (typeof window !== 'undefined') {
+        window.AlloyEditor = AlloyEditor;
+    } else if (typeof global !== 'undefined') {
+        global.AlloyEditor = AlloyEditor;
+    } else if (typeof self !== 'undefined') {
+        self.AlloyEditor = AlloyEditor;
+    } else {
+        this.AlloyEditor = AlloyEditor;
+    }
+})();
+
+    
+
+    if (typeof React === 'undefined' && typeof AlloyEditor !== 'undefined') {
+        var React = AlloyEditor.React;
+    }
+
+    if (typeof window !== 'undefined') {
+       deployCKEditor();
+
+        'use strict';
 
 (function () {
     'use strict';
@@ -4600,188 +4808,6 @@ CKEDITOR.tools.buildTableMap = function (table) {
             };
         }
     });
-})();
-'use strict';
-
-(function () {
-    'use strict';
-
-    /**
-     * AlloyEditor static object.
-     *
-     * @class AlloyEditor
-     * @type {Object}
-     */
-    window.AlloyEditor = {
-        /**
-         * Creates an instance of AlloyEditor.
-         *
-         * @method editable
-         * @static
-         * @param {String|Node} node The Node ID or HTMl node, which AlloyEditor should use as an editable area.
-         * @param {Object} config Configuration attributes for the current instance of AlloyEditor.
-         * @return {Object} An instance of {{#crossLink "Core"}}{{/crossLink}}
-         */
-        editable: function editable(node, config) {
-            config = config || {};
-
-            config.srcNode = node;
-
-            return new AlloyEditor.Core(config);
-        },
-
-        /**
-         * The full URL for the AlloyEditor installation directory.
-         * It is possible to manually provide the base path by setting a
-         * global variable named `ALLOYEDITOR_BASEPATH`. This global variable
-         * must be set **before** the editor script loading.
-         *
-         * @method getBasePath
-         * @static
-         * @return {String} The found base path
-         */
-        getBasePath: function getBasePath() {
-            // Find out the editor directory path, based on its <script> tag.
-            var path = window.ALLOYEDITOR_BASEPATH || '';
-
-            if (!path) {
-                var scripts = document.getElementsByTagName('script');
-
-                for (var i = 0; i < scripts.length; i++) {
-                    var match = scripts[i].src.match(AlloyEditor.regexBasePath);
-
-                    if (match) {
-                        path = match[1];
-                        break;
-                    }
-                }
-            }
-
-            // In IE (only) the script.src string is the raw value entered in the
-            // HTML source. Other browsers return the full resolved URL instead.
-            if (path.indexOf(':/') === -1 && path.slice(0, 2) !== '//') {
-                // Absolute path.
-                if (path.indexOf('/') === 0) {
-                    path = location.href.match(/^.*?:\/\/[^\/]*/)[0] + path;
-                }
-                // Relative path.
-                else {
-                        path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
-                    }
-            }
-
-            if (!path) {
-                throw 'The AlloyEditor installation path could not be automatically detected. Please set the global variable "ALLOYEDITOR_BASEPATH" before creating editor instances.';
-            }
-
-            return path;
-        },
-
-        /**
-         * Detects and load the corresponding language file if AlloyEditor language strings are not already present.
-         * The function fires a {{#crossLink "AlloyEditor/languageResourcesLoaded:event"}}{{/crossLink}} event
-         *
-         * @method loadLanguageResources
-         * @static
-         * @param {Function} callback Optional callback to be called when AlloyEditor loads the language resource.
-         */
-        loadLanguageResources: function loadLanguageResources(callback) {
-            if (AlloyEditor.Lang.isFunction(callback)) {
-                if (AlloyEditor.Strings) {
-                    setTimeout(callback, 0);
-                } else {
-                    AlloyEditor.once('languageResourcesLoaded', callback);
-                }
-            }
-
-            if (!AlloyEditor._langResourceRequested) {
-                AlloyEditor._langResourceRequested = true;
-
-                var languages = ['af', 'ar', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en-au', 'en-ca', 'en-gb', 'en', 'eo', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca', 'fr', 'gl', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'ku', 'lt', 'lv', 'mk', 'mn', 'ms', 'nb', 'nl', 'no', 'pl', 'pt-br', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr-latn', 'sr', 'sv', 'th', 'tr', 'tt', 'ug', 'uk', 'vi', 'zh-cn', 'zh'];
-
-                var userLanguage = navigator.language || navigator.userLanguage || 'en';
-
-                var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
-                var lang = parts[1];
-                var locale = parts[2];
-
-                if (languages[lang + '-' + locale]) {
-                    lang = lang + '-' + locale;
-                } else if (!languages.indexOf(lang)) {
-                    lang = 'en';
-                }
-
-                CKEDITOR.scriptLoader.load(AlloyEditor.getUrl('lang/alloy-editor/' + lang + '.js'), function (loaded) {
-                    if (loaded) {
-                        AlloyEditor.fire('languageResourcesLoaded');
-                    }
-                }, this);
-            }
-        },
-
-        /**
-         * Gets the full URL for AlloyEditor resources. By default, URLs
-         * returned by this function contain a querystring parameter ("t")
-         * set to the {@link CKEDITOR#timestamp} value.
-         *
-         * @method getUrl
-         * @static
-         * @param {String} resource The resource whose full URL we want to get.
-         * It may be a full, absolute, or relative URL.
-         * @return {String} The full URL.
-         */
-        getUrl: function getUrl(resource) {
-            var basePath = AlloyEditor.getBasePath();
-
-            // If this is not a full or absolute path.
-            if (resource.indexOf(':/') === -1 && resource.indexOf('/') !== 0) {
-                resource = basePath + resource;
-            }
-
-            // Add the timestamp, except for directories.
-            if (CKEDITOR.timestamp && resource.charAt(resource.length - 1) !== '/' && !/[&?]t=/.test(resource)) {
-                resource += (resource.indexOf('?') >= 0 ? '&' : '?') + 't=' + CKEDITOR.timestamp;
-            }
-
-            return resource;
-        },
-
-        /**
-         * Regular expression which should match the script which have been used to load AlloyEditor.
-         *
-         * @property
-         * @type {RegExp}
-         * @static
-         */
-        regexBasePath: /(^|.*[\\\/])(?:alloy-editor[^/]+|alloy-editor)\.js(?:\?.*|;.*)?$/i,
-
-        /**
-         * And object, containing all currently registered buttons in AlloyEditor.
-         *
-         * @property Buttons
-         * @type {Object}
-         * @static
-         */
-        Buttons: {},
-
-        /**
-         * And object, containing all currently registered toolbars in AlloyEditor.
-         *
-         * @property Toolbars
-         * @type {Object}
-         * @static
-         */
-        Toolbars: {}
-
-        /**
-         * Fired when AlloyEditor detects the browser language and loads the corresponding language file. Once this event
-         * is fired, AlloyEditor.Strings will be populated with data.
-         *
-         * @event languageResourcesLoaded
-         */
-    };
-
-    CKEDITOR.event.implementOn(AlloyEditor);
 })();
 'use strict';
 
@@ -11969,4 +11995,5 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
     AlloyEditor.UI = UI;
 })();
+    }
 }());

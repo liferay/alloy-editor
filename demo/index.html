@@ -439,7 +439,9 @@
     <div class="container">
         <span class="code-header" id="addNewButton">P.S. Do you know that the Marquee button, which you probably used to have fun with the demo was especially added for this page? It does not exist as a default button in AlloyEditor. However, adding a new button is extremely easy. Here is the code for it:</span>
 
-        <pre class="highlight"><code class="hljs actionscript"><span class="hljs-keyword">var</span> ButtonMarquee = React.createClass({
+        <pre class="highlight"><code class="hljs actionscript"><span class="hljs-keyword">var</span> React = AlloyEditor.React; <span class="hljs-comment">// Use the built-in version of React if your site does not use React</span>
+
+<span class="hljs-keyword">var</span> ButtonMarquee = React.createClass({
     mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
     propTypes: {
@@ -503,6 +505,8 @@ AlloyEditor.editable(<span class="hljs-string">'contentEditable'</span>);</code>
 <script src="//alloyeditor.com/website/js/alloy-editor/alloy-editor-all-min.js"></script>
 
 <script>
+    var React = AlloyEditor.React; // Use the built-in version of React if your site does not use React
+
     var ButtonMarquee = React.createClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 

@@ -353,7 +353,10 @@
 </p>
 
 <span class="code-header">Example of the barebones for a Toolbar to control document version changes:</span>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> ToolbarVersions = React.createClass({
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">// Use the built-in version of React if your site does not use React</span>
+<span class="hljs-keyword">var</span> React = AlloyEditor.React;
+
+<span class="hljs-keyword">var</span> ToolbarVersions = React.createClass({
     mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
     statics: {
