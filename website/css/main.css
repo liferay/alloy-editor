@@ -355,6 +355,17 @@ h1 {
   padding-top: 15px !important;
 }
 
+@media only screen and (max-width: 599px) {
+  .navbar-header {
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+
+  .navbar-nav > li > a {
+    font-weight: 500;
+  }
+}
+
 .navbar-brand img {
   margin-top: -8px;
 }
@@ -596,7 +607,27 @@ h1 {
 }
 
 .features .carousel .carousel-inner {
-  height: 400px;
+  height: 440px;
+}
+
+@media only screen and (max-width: 600px) {
+  .features .carousel .carousel-inner {
+    height: 720px;
+  }
+
+  .features .carousel .carousel-inner .feature-image {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .features .carousel .carousel-inner .feature-image .media-object {
+    display: block;
+    left: 0;
+    margin: auto;
+    padding: 0;
+    right: 0;
+  }
 }
 
 .features .carousel-indicators {
@@ -865,6 +896,173 @@ footer .copyright {
   position: absolute;
   text-transform: uppercase;
   top: 15px;
+}
+
+/* What's new */
+
+.update-header {
+  left: 0;
+  margin: 70px auto 50px auto;
+  right: 0;
+  text-align: center;
+  width: 70%;
+}
+
+.update .row {
+  text-align: center;
+}
+
+.update .row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.update .read-more {
+  margin: 2em 0 -1em -15px;
+}
+
+.update .update-features .read-more {
+  margin: 0.5em 0 0 -15px;
+}
+
+.update .read-more a {
+  color: #282828;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1024px) {
+  .update {
+      padding: 0;
+  }
+
+  .update .row {
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .update {
+      padding: 0;
+  }
+
+  .update .row {
+    display: block;
+  }
+}
+
+.update .update-timeline {
+  background: transparent url(../img/updates/bg.png) repeat-y top left;
+  padding: 2em 0 3em 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .update .update-timeline {
+      background: none;
+      padding: 0;
+  }
+}
+
+.update .update-features {
+  border-bottom: 1px #ccc solid;
+  padding: 2em 0 3em 1em;
+}
+
+@media screen and (max-width: 599px) {
+  .update .update-features {
+      padding: 0 0 2em 0;
+  }
+}
+
+.minor-update .update-point {
+  background-color: #fff;
+  border: solid 1px #404040;
+  border-radius: 100px;
+  color: #404040;
+  height: 32px;
+  margin-left: 20px;
+  margin-top: 20px;
+  padding-top: 2px;
+  text-indent: -3em;
+  width: 32px;
+}
+
+@media screen and (max-width: 1023px) {
+  .minor-update {
+    margin-top: 25px;
+  }
+
+  .minor-update .update-point {
+      border-width: 0;
+      text-indent: 3em;
+      text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .minor-update .update-point {
+      text-indent:0;
+      background-color: transparent;
+      margin: 0 auto;
+      width: auto;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600
+  }
+}
+
+.major-update .update-point {
+  background-color: #fff;
+  border: solid 1px #404040;
+  border-radius: 100px;
+  color: #404040;
+  font-size: 26px;
+  height: 72px;
+  line-height: 44px;
+  padding-top: 13px;
+  text-align: center;
+  width: 72px;
+}
+
+@media screen and (max-width: 1023px) {
+  .major-update .update-point {
+      border-width: 0;
+      margin: 0 auto;
+      text-decoration: underline;
+  }
+}
+
+.minor-update + div, .major-update + div {
+  padding-top: 44px !important;
+}
+
+.update-feature {
+  margin-bottom: 3em;
+}
+
+.update-feature img {
+  height: 48px;
+  width: 48px;
+}
+
+.update-feature .feature-header {
+  border-width: 0;
+  font-size: 19px;
+  margin: 0;
+  margin-left: 10px;
+  padding: 0;
+  padding-right: 15px;
+  padding-top: 13px;
+}
+
+.update-feature .feature-lead {
+  color: #777;
+  font-size: 18px;
+  margin: 0;
+  margin-top: 20px;
+  padding-right: 15px;
 }
 
 /* Code */

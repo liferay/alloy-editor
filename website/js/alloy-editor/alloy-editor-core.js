@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v0.5.0-alpha
+ * AlloyEditor v0.5.0
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -540,7 +540,19 @@
         getCaretRegion: function getCaretRegion() {
             var selection = this.getSelection();
 
+            var region = {
+                bottom: 0,
+                left: 0,
+                right: 0,
+                top: 0
+            };
+
             var bookmarks = selection.createBookmarks();
+
+            if (!bookmarks.length) {
+                return region;
+            }
+
             var bookmarkNodeEl = bookmarks[0].startNode.$;
 
             bookmarkNodeEl.style.display = 'inline-block';
@@ -551,12 +563,9 @@
 
             var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
 
-            return {
-                bottom: scrollPos.y + region.bottom,
-                left: scrollPos.x + region.left,
-                right: scrollPos.x + region.right,
-                top: scrollPos.y + region.top
-            };
+            region.bottom = scrollPos.y + region.bottom, region.left = scrollPos.x + region.left, region.right = scrollPos.x + region.right, region.top = scrollPos.y + region.top;
+
+            return region;
         },
 
         /**
