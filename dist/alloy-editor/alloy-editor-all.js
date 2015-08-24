@@ -902,7 +902,7 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
         /**
          * Regular expression which should match the script which have been used to load AlloyEditor.
          *
-         * @property
+         * @property regexBasePath
          * @type {RegExp}
          * @static
          */

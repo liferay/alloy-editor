@@ -172,7 +172,7 @@
         /**
          * Regular expression which should match the script which have been used to load AlloyEditor.
          *
-         * @property
+         * @property regexBasePath
          * @type {RegExp}
          * @static
          */
