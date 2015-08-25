@@ -2,11 +2,11 @@
 <html>
   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 
-    <title>About | Alloy Editor</title>
+    <title>Guides - Create Skins | Alloy Editor</title>
 
     <meta charset="utf-8">
     <meta name="author" content="Iliyan Peychev">
-    <meta name="description" content="Alloy Editor is a modern WYSIWYG editor built on top of CKEditor, designed to create modern and gorgeous web content.">
+    <meta name="description" content="AlloyEditor bundles a couple of gorgeus skins that you can use out of the box. However, if you need a better integration with your app's look and feel, you can easily create your own skin.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Facebook Tags -->
@@ -14,8 +14,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="//alloyeditor.com">
     <meta property="og:image" content="//alloyeditor.com/website/img/facebook-share.jpg">
-    <meta property="og:title" content="About | Alloy Editor">
-    <meta property="og:description" content="Alloy Editor is a modern WYSIWYG editor built on top of CKEditor, designed to create modern and gorgeous web content.">
+    <meta property="og:title" content="Guides - Create Skins | Alloy Editor">
+    <meta property="og:description" content="AlloyEditor bundles a couple of gorgeus skins that you can use out of the box. However, if you need a better integration with your app's look and feel, you can easily create your own skin.">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="//alloyeditor.com/website/img/favicon.ico">
@@ -63,7 +63,7 @@
               <ul class="nav navbar-nav">
                 <li><a href="//alloyeditor.com/demo/">Live Demo</a></li>
                 <li><a href="//alloyeditor.com/updates/">What's New</a></li>
-                <li><a href="//alloyeditor.com/guides/">Guides</a>
+                <li class="active inactive-xs"><a href="//alloyeditor.com/guides/">Guides</a>
                   <ul class="nav navbar-nav visible-xs-block">
                     
                       
@@ -126,7 +126,7 @@
                       
                     
                       
-                        <li>
+                        <li class="active">
                           <a href="//alloyeditor.com/guides/create_skin">Create Skins</a>
                         </li>
                       
@@ -361,46 +361,166 @@
 
       <div id="content">
         <div class="container">
-  <div class="col-md-10 col-md-offset-1">
+  <div class="col-sm-8 col-sm-offset-1">
+    <h2 class="guide-header">Create Skins</h2>
 
-    <h3 class="about-header">AlloyEditor is a WYSIWYG Editor</h3>
+    
+      <p class="guide-description">AlloyEditor bundles a couple of gorgeus skins that you can use out of the box. However, if you need a better integration with your app's look and feel, you can easily create your own skin.</p>
+    
 
-    <p>Built with modern, extensible and configurable UI</p>
+    <section class="guide-content">
+      <h4 class="guide-step">1 - Get ready to build AlloyEditor</h4>
 
-    <hr>
+<p>Follow the instructions in our <a href="how_to_build_it.html">How to build it</a> guide to know how to change and build AlloyEditor.</p>
 
-    <p>Editing Web Content without using iframe is not something new these days. However, the toolbar of the most editors appears on top or on bottom of the container, where user is writing. Wouldn't it be better if were able to use the full power of CKEditor, but to provide a modern UI? A UI, which provides context toolbars, which change their appearance depending on the selected element - image or text. A UI, which allows developer to add or remove buttons to these toolbars from a simple configuration or even on the fly? </p>
+<h4 class="guide-step">2 - Create skin folders</h4>
 
-    <p>Well, thats what we did. We removed the default UI of CKEditor. As any modern editor, AlloyEditor places the toolbar just next to the selection. AlloyEditor actually goes a step forward in this direction and it shows the toolbars in the most appropriate position. That might be where user releases the mouse after he finishes the selection, or just where selection begins or ends.</p>
+<p>Create a new directory under <code>src/ui/react/assets/icons/</code> with the name of your skin <small>(e.g <code>zebra</code>)</small>. This directory will contain all the required icons of your skin.</p>
 
-    <p>AlloyEditor supports multiple toolbars, and super easy toolbar configuration. Adding buttons is also very easy and not only that, but you can add them on the fly! The core is fully separated from the UI, so you can create and add your own UI if you want. The default UI is built using <a href="https://facebook.github.io/react/index.html">React</a>, but you can create one using your favorite UI framework or just using vanilla JavaScript.</p>
+<p>Create a new directory under <code>src/ui/react/assets/sass/skin</code> with the name of your skin <small>(e.g <code>zebra</code>)</small>. This directory will contain the styling of the skin.</p>
 
-    <p>On top of that, AlloyEditor also offers some plugins. One of them is a plugin, which allows Drag&Drop of images directly in the editor. Another one is placeholder plugin, which works just as the standard placeholder HTML5 attribute, but it also allows specifying a class to be added when there is no value in the editor's area.</p>
+<div class="alert alert-info" role="alert"><i class="glyphicon glyphicon-info-sign"></i> You can reuse our own <a href="/guides/skins.html">Skin Architecture</a> to simplify the process of creating your own skin!</div>
 
-    <hr>
+<h4 class="guide-step">3 - Create your Skin</h4>
 
-    <h3 class="about-header">Questions? <small><em>don't be shy</em></small></h3>
+<p>Place all the icons you need inside an <code>svg</code> folder in your skin's icon folder. These icons will be merged with the default ones, and the resulting set will be used to generate your skin icon font</p>
 
-    <p>We care about our users, so if you are having any trouble or perhaps want to discuss a certain feature, you can write us a comment right here, on the site, or to fill an <a href="https://github.com/liferay/alloy-editor/issues">issue</a>.</p>
+<p>Create a file called <code>main.scss</code> inside your skin folder. This will be the entry point of your skin and should contain all the styling of your look and feel.</p>
 
-    <hr>
+<h4 class="guide-step">4 - Build the editor</h4>
 
-    <h3 class="about-header">Contributors <small><em>who?</em></small></h3>
+<span class="code-header">Your skin will be automatically picked up when building AlloyEditor:</span>
+<pre class="highlight"><code class="hljs bash">gulp [build]</code></pre>
 
-    <p>This project has been created by <a href="https://twitter.com/ipeychev">Iliyan Peychev</a> in 2014 and people are already contributing to it. Join them by sending us a <a href="https://github.com/liferay/alloy-editor/">pull request</a>!</p>
+<h4 class="guide-step">5 - Use your Skin</h4>
 
-    <div id="contributors">
-      <a class="contributor hide" rel="nofollow">
-        <img class="img img-thumbnail" />
-      </a>
-    </div>
+<span class="code-header">Include your skin to the page instead any of the default ones:</span>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"alloy-editor/assets/alloy-editor-zebra-min.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
+</code></pre>
 
-    <hr>
-    <p class="call">Wanna be part of it, but you are not a developer? That's fine, pull requests are not the only way to <a class="bt" id="bt-contribute" href="//alloyeditor.com/contributing/">help</a>.</p>
+<p>That is everything! Now AlloyEditor will appear with a new beautiful look and feel!</p>
+    </section>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'alloyeditor'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+  <div class="ae-guides-sidebar col-sm-2 hidden-xs">
+    <p class="guide-target-header">Use</p>
+    <nav class="ae-docs-sidebar">
+      <ul class="nav ae-docs-sidenav">
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides">Getting Started</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/how_to_use_ckeditor_plugins">How to use CKEditor Plugins?</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/how_to_use_it">How to use it?</a>
+            </li>
+          
+        
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/toolbar_configuration">Toolbar configuration</a>
+            </li>
+          
+        
+      </ul>
+    </nav>
+
+    <p class="guide-target-header">Develop</p>
+    <nav class="ae-docs-sidebar">
+      <ul class="nav ae-docs-sidenav">
+        
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/how_to_build_it">How to build it?</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/architecture">Architecture</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/create_buttons">Create Buttons</a>
+            </li>
+          
+        
+          
+            <li class="active">
+              <a href="//alloyeditor.com/guides/create_skin">Create Skins</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/create_toolbars">Create Toolbars</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/create_ui">Create entirely new UI</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+            <li>
+              <a href="//alloyeditor.com/guides/skins">Skins</a>
+            </li>
+          
+        
+          
+        
+      </ul>
+    </nav>
   </div>
 </div>
-
-<script src="//alloyeditor.com/website/js/contributors.js"></script>
       </div>
 
       <footer class="container" id="siteFooter">
