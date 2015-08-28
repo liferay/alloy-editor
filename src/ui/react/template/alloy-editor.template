@@ -22,7 +22,7 @@
     <%= react %>
 
     if (typeof React === 'undefined' && typeof AlloyEditor !== 'undefined') {
-        var React = AlloyEditor.React;
+        React = AlloyEditor.React;
     }
 
     if (typeof window !== 'undefined') {
