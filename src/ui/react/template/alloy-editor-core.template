@@ -12,7 +12,7 @@
     <%= main %>
 
     if (typeof React === 'undefined') {
-    	var React = AlloyEditor.React;
+        React = AlloyEditor.React;
     }
 
     if (typeof window !== 'undefined') {
