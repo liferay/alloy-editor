@@ -11,6 +11,10 @@
 (function() {
     <%= main %>
 
+    var React = (function() {
+    	return (0, eval)('this').React;
+    }());
+
     if (typeof React === 'undefined') {
         React = AlloyEditor.React;
     }
