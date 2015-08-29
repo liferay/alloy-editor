@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v0.5.1
+ * AlloyEditor v0.5.2
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -805,8 +805,8 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
                 }
                 // Relative path.
                 else {
-                    path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
-                }
+                        path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
+                    }
             }
 
             if (!path) {
@@ -949,8 +949,12 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
 
     
 
+    var React = (function() {
+        return (0, eval)('this').React;
+    }());
+
     if (typeof React === 'undefined' && typeof AlloyEditor !== 'undefined') {
-        var React = AlloyEditor.React;
+        React = AlloyEditor.React;
     }
 
     if (typeof window !== 'undefined') {
@@ -3172,10 +3176,10 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
             }
             // Otherwise calculate positions based on the table (for last cell).
             else {
-                x = table.getDocumentPosition().x;
+                    x = table.getDocumentPosition().x;
 
-                rtl ? pillarLeft = x : pillarRight = x + table.$.offsetWidth;
-            }
+                    rtl ? pillarLeft = x : pillarRight = x + table.$.offsetWidth;
+                }
 
             pillarWidth = Math.max(pillarRight - pillarLeft, 4);
 
@@ -3652,14 +3656,14 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
 					if (cell.$.rowSpan == 1) cell.remove();
 					// Row spanned cell.
 					else {
-						// Span row of the cell, reduce spanning.
-						cell.$.rowSpan -= 1;
-						// Root row of the cell, root cell to next row.
-						if (cellRowIndex == i) {
-							var nextMapRow = map[i + 1];
-							nextMapRow[j - 1] ? cell.insertAfter(new CKEDITOR.dom.element(nextMapRow[j - 1])) : new CKEDITOR.dom.element(table.$.rows[i + 1]).append(cell, 1);
+							// Span row of the cell, reduce spanning.
+							cell.$.rowSpan -= 1;
+							// Root row of the cell, root cell to next row.
+							if (cellRowIndex == i) {
+								var nextMapRow = map[i + 1];
+								nextMapRow[j - 1] ? cell.insertAfter(new CKEDITOR.dom.element(nextMapRow[j - 1])) : new CKEDITOR.dom.element(table.$.rows[i + 1]).append(cell, 1);
+							}
 						}
-					}
 
 					j += cell.$.colSpan - 1;
 				}
@@ -3986,8 +3990,8 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
 		// Be able to merge cells only if actual dimension of selected
 		// cells equals to the caculated rectangle.
 		else {
-			return totalRowSpan * totalColSpan == dimension;
-		}
+				return totalRowSpan * totalColSpan == dimension;
+			}
 	}
 
 	function verticalSplitCell(selection, isDetect) {
@@ -5147,26 +5151,26 @@ CKEDITOR.tools.buildTableMap = function (table) {
             // else if the attribute has readOnly flag, set the default value from the attribute,
             // regardless if there is value or not
             else if (currentAttr.readOnly) {
-                value = currentAttr.value;
-            }
-            // else if the attribute has writeOnce value, set it from the passed configuration or from the
-            // default value, in this order. Otherwise, return miserable.
-            else if (currentAttr.writeOnce) {
-                if (hasPassedValueViaConfig) {
-                    value = this.__config__[attr];
-                } else if (hasDefaultValue) {
                     value = currentAttr.value;
-                } else {
-                    return;
                 }
-            }
-            // These two cases below are easy - set the value to be from the passed config or
-            // from the default value, in this order.
-            else if (hasPassedValueViaConfig) {
-                value = this.__config__[attr];
-            } else if (hasDefaultValue) {
-                value = currentAttr.value;
-            }
+                // else if the attribute has writeOnce value, set it from the passed configuration or from the
+                // default value, in this order. Otherwise, return miserable.
+                else if (currentAttr.writeOnce) {
+                        if (hasPassedValueViaConfig) {
+                            value = this.__config__[attr];
+                        } else if (hasDefaultValue) {
+                            value = currentAttr.value;
+                        } else {
+                            return;
+                        }
+                    }
+                    // These two cases below are easy - set the value to be from the passed config or
+                    // from the default value, in this order.
+                    else if (hasPassedValueViaConfig) {
+                            value = this.__config__[attr];
+                        } else if (hasDefaultValue) {
+                            value = currentAttr.value;
+                        }
 
             // If there is validator, and user passed config object - check the returned value.
             // If it is false, then set as initial value the default one.
@@ -9267,7 +9271,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 "use strict";
 
 (function () {
-    "use strict";
+    'use strict';
 
     /**
      * The ButtonsStylesListHeader class provides the header of an list of style items.
