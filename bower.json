@@ -1,6 +1,6 @@
 {
   "name": "alloyeditor",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "http://alloyeditor.com",
   "authors": [
     "Iliyan Peychev <iliyan.peychev@gmail.com>"
@@ -15,7 +15,7 @@
     "editor",
     "React"
   ],
-  "license": "GNU LGPL",
+  "license": "LGPL-3.0",
   "ignore": [
     "**/.*",
     "node_modules",
