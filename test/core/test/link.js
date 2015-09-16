@@ -182,6 +182,86 @@
             assert.strictEqual(data, '<p>update the url of a <a href="http://new.com" target="_blank">link</a>.</p>');
         });
 
+        it('should update a set of attributes of a passed link element', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<p>update the URL of a {<a href="http://test.com" target="_blank">link</a>}.</p>');
+
+            var linkEl = link.getFromSelection();
+            assert.ok(linkEl);
+
+            link.update({
+                href: 'http://new.com',
+                target: '_self'
+            }, linkEl);
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, '<p>update the url of a <a href="http://new.com" target="_self">link</a>.</p>');
+        });
+
+        it('should update a set of attributes of a link from selection', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<p>update the URL of a {<a href="http://test.com" target="_blank">link</a>}.</p>');
+
+            link.update({
+                href: 'http://new.com',
+                target: '_self'
+            });
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, '<p>update the url of a <a href="http://new.com" target="_self">link</a>.</p>');
+        });
+
+        it('should remove a set of attributes from a passed link element', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<p>update the URL of a {<a href="http://test.com" rel="external" target="_blank">link</a>}.</p>');
+
+            var linkEl = link.getFromSelection();
+            assert.ok(linkEl);
+
+            link.update({
+                href: null,
+                rel: null,
+                target: ''
+            }, linkEl);
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, '<p>update the url of a <a target="">link</a>.</p>');
+        });
+
+        it('should remove a set of attributes from a link from selection', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<p>update the URL of a {<a href="http://test.com" rel="external" target="_blank">link</a>}.</p>');
+
+            link.update({
+                href: null,
+                rel: null,
+                target: ''
+            });
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, '<p>update the url of a <a target="">link</a>.</p>');
+        });
+
         it('should not add default protocol when updating a link', function() {
             var link = new CKEDITOR.Link(this.nativeEditor);
 
