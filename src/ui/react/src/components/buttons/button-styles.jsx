@@ -33,6 +33,13 @@
             label: React.PropTypes.string,
 
             /**
+             * Indicates whether the remove styles item should appear in the styles list.
+             *
+             * @property {Boolean} expanded
+             */
+            showRemoveStylesItem: React.PropTypes.bool,
+
+            /**
              * List of the styles the button is able to handle.
              *
              * @property {Array} styles
@@ -87,7 +94,7 @@
             var buttonStylesList;
 
             if (this.props.expanded) {
-                buttonStylesList = <AlloyEditor.ButtonStylesList editor={this.props.editor} onDismiss={this.props.toggleDropdown} styles={styles} />
+                buttonStylesList = <AlloyEditor.ButtonStylesList editor={this.props.editor} onDismiss={this.props.toggleDropdown} showRemoveStylesItem={this.props.showRemoveStylesItem} styles={styles} />
             }
 
             return (

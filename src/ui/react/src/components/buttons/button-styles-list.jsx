@@ -78,7 +78,8 @@
                     dismissPrev: [37],
                     next: [40],
                     prev: [38]
-                }
+                },
+                showRemoveStylesItem: true
             };
         },
 
@@ -89,10 +90,16 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
+            var removeStylesItem;
+
+            if (this.props.showRemoveStylesItem) {
+                removeStylesItem = <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />;
+            }
+
             return (
                 <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
                     <ul className="ae-listbox" role="listbox">
-                        <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />
+                        {removeStylesItem}
 
                         <AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.blockStyles} styles={this._blockStyles} />
                         {this._renderStylesItems(this._blockStyles)}
