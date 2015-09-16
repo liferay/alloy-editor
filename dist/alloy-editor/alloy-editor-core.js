@@ -8845,7 +8845,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                     dismissPrev: [37],
                     next: [40],
                     prev: [38]
-                }
+                },
+                showRemoveStylesItem: true
             };
         },
 
@@ -8856,13 +8857,19 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
+            var removeStylesItem;
+
+            if (this.props.showRemoveStylesItem) {
+                removeStylesItem = React.createElement(AlloyEditor.ButtonStylesListItemRemove, { editor: this.props.editor });
+            }
+
             return React.createElement(
                 'div',
                 { className: 'ae-dropdown ae-arrow-box ae-arrow-box-top-left', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
                 React.createElement(
                     'ul',
                     { className: 'ae-listbox', role: 'listbox' },
-                    React.createElement(AlloyEditor.ButtonStylesListItemRemove, { editor: this.props.editor }),
+                    removeStylesItem,
                     React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.blockStyles, styles: this._blockStyles }),
                     this._renderStylesItems(this._blockStyles),
                     React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.inlineStyles, styles: this._inlineStyles }),
@@ -8940,6 +8947,13 @@ CKEDITOR.tools.buildTableMap = function (table) {
             label: React.PropTypes.string,
 
             /**
+             * Indicates whether the remove styles item should appear in the styles list.
+             *
+             * @property {Boolean} expanded
+             */
+            showRemoveStylesItem: React.PropTypes.bool,
+
+            /**
              * List of the styles the button is able to handle.
              *
              * @property {Array} styles
@@ -8994,7 +9008,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             var buttonStylesList;
 
             if (this.props.expanded) {
-                buttonStylesList = React.createElement(AlloyEditor.ButtonStylesList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, styles: styles });
+                buttonStylesList = React.createElement(AlloyEditor.ButtonStylesList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, showRemoveStylesItem: this.props.showRemoveStylesItem, styles: styles });
             }
 
             return React.createElement(
