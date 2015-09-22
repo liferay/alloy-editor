@@ -5942,10 +5942,22 @@ CKEDITOR.tools.buildTableMap = function (table) {
         // Allows validating props being passed to the component.
         propTypes: {
             /**
+             * Should the widget to be restricted to the viewport, or not.
+             *
+             * @property {Boolean} constrainToViewport
+             * @default true
+             */
+            constrainToViewport: React.PropTypes.bool,
+
+            /**
              * The gutter (vertical and horizontal) between the interaction point and where the widget
              * should be rendered.
              *
              * @property {Object} gutter
+             * @default {
+             *     left: 0,
+             *     top: 10
+             * }
              */
             gutter: React.PropTypes.object
         },
@@ -5960,7 +5972,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 gutter: {
                     left: 0,
                     top: 10
-                }
+                },
+                constrainToViewport: true
             };
         },
 
@@ -5973,6 +5986,41 @@ CKEDITOR.tools.buildTableMap = function (table) {
             if (window.cancelAnimationFrame) {
                 window.cancelAnimationFrame(this._animationFrameId);
             }
+        },
+
+        /**
+         * Returns an object which contains the position of the element in page coordinates,
+         * restricted to fit to given viewport.
+         *
+         * @method getConstrainedPosition
+         * @param {Object} attrs The following properties, provided as numbers:
+         * - height
+         * - left
+         * - top
+         * - width
+         * @param {Object} viewPaneSize Optional. If not provided, the current viewport will be used. Should contain at least these properties:
+         * - width
+         * @return {Object} An object with `x` and `y` properties, which represent the constrained position of the
+         * element.
+         */
+        getConstrainedPosition: function getConstrainedPosition(attrs, viewPaneSize) {
+            viewPaneSize = viewPaneSize || new CKEDITOR.dom.window(window).getViewPaneSize();
+
+            var x = attrs.left;
+            var y = attrs.top;
+
+            if (attrs.left + attrs.width > viewPaneSize.width) {
+                x -= attrs.left + attrs.width - viewPaneSize.width;
+            }
+
+            if (y < 0) {
+                y = 0;
+            }
+
+            return {
+                x: x,
+                y: y
+            };
         },
 
         /**
@@ -6054,8 +6102,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 domElement.addClass('ae-toolbar-transition');
                 domElement.addClass('alloy-editor-visible');
                 domElement.setStyles({
-                    left: endPoint[0],
-                    top: endPoint[1],
+                    left: endPoint[0] + 'px',
+                    top: endPoint[1] + 'px',
                     opacity: 1
                 });
             });
@@ -6077,8 +6125,20 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
                     var finalX, finalY, initialX, initialY;
 
-                    finalX = initialX = domElement.getStyle('left');
-                    finalY = initialY = domElement.getStyle('top');
+                    finalX = initialX = parseFloat(domElement.getStyle('left'));
+                    finalY = initialY = parseFloat(domElement.getStyle('top'));
+
+                    if (this.props.constrainToViewport) {
+                        var res = this.getConstrainedPosition({
+                            height: parseFloat(domNode.offsetHeight),
+                            left: finalX,
+                            top: finalY,
+                            width: parseFloat(domNode.offsetWidth)
+                        });
+
+                        finalX = res.x;
+                        finalY = res.y;
+                    }
 
                     if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
                         initialY = this.props.selectionData.region.bottom;
@@ -6104,9 +6164,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             if (interactionPoint && domNode) {
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
 
-                var domElement = new CKEDITOR.dom.element(domNode);
-
-                domElement.setStyles({
+                new CKEDITOR.dom.element(domNode).setStyles({
                     left: xy[0] + 'px',
                     top: xy[1] + 'px'
                 });
