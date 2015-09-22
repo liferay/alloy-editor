@@ -25,9 +25,34 @@
                 }
             };
 
-            var mainUI = React.render(<AlloyEditor.ToolbarStyles editor={this.editor} editorEvent={editorEvent}/>, this.container);
+            var toolbarStyles = React.render(<AlloyEditor.ToolbarStyles editor={this.editor} editorEvent={editorEvent}/>, this.container);
 
-            assert.isNull(React.findDOMNode(mainUI));
+            assert.isNull(React.findDOMNode(toolbarStyles));
+        });
+
+        it('should constrain the toolbar\'s position', function() {
+            var toolbarStyles = React.render(<AlloyEditor.ToolbarStyles editor={this.editor}/>, this.container);
+
+            var res = toolbarStyles.getConstrainedPosition({
+                height: 50,
+                left: 0,
+                top: -20,
+                width: 300
+            }, {
+                width: 200
+            });
+
+            assert.strictEqual(-100, res.x);
+            assert.strictEqual(0, res.y);
+
+            res = toolbarStyles.getConstrainedPosition({
+                height: 50,
+                left: 0,
+                top: -20,
+                width: 300
+            });
+
+            assert.strictEqual(0, res.y);
         });
     });
 }());
