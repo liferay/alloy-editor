@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonStylesListItemRemove - alloyeditor</title>
+    <title>ButtonImageAlignCenter - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -165,14 +165,22 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonStylesListItemRemove <small>Class</small></h1>
+                                <h1>ButtonImageAlignCenter <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
+                                    <div class="uses">
+                                        Uses:
+                                        <ul class="inline commas">
+                                                <li><a href="ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                                <li><a href="ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                                <li><a href="ButtonStyle.html">ButtonStyle</a></li>
+                                        </ul>
+                                    </div>
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-styles-list-item-remove.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-item-remove.jsx:4</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-image-align-center.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-image-align-center.jsx:4</code></a>
                                     </div>
                             
                             
@@ -180,8 +188,7 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>The ButtonStylesListItemRemove class provides functionality for previewing a style definition
-                            inside a list and applying it to the current editor selection.</p>
+                                <p>The ButtonImageAlignCenter class provides functionality for aligning an image in the center.</p>
                             
                             </div>
                             
@@ -202,12 +209,32 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__removeStyles">_removeStyles</a>
+                                                        <li class="index-item method inherited">
+                                                            <a href="#method_applyStyle">applyStyle</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method inherited">
+                                                            <a href="#method_componentWillMount">componentWillMount</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method inherited">
+                                                            <a href="#method_componentWillUnmount">componentWillUnmount</a>
                             
                                                         </li>
                                                         <li class="index-item method">
                                                             <a href="#method_getDefaultProps">getDefaultProps</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method inherited">
+                                                            <a href="#method_getStateClasses">getStateClasses</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method inherited">
+                                                            <a href="#method_getStyle">getStyle</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method inherited">
+                                                            <a href="#method_isActive">isActive</a>
                             
                                                         </li>
                                                         <li class="index-item method">
@@ -234,8 +261,8 @@
                                                             <a href="#property_label">label</a>
                             
                                                         </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_removeBlocks">removeBlocks</a>
+                                                        <li class="index-item property inherited">
+                                                            <a href="#property_style">style</a>
                             
                                                         </li>
                                                         <li class="index-item property">
@@ -251,23 +278,22 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method__removeStyles" class="method item protected">
-                                                    <h3 class="name"><code>_removeStyles</code></h3>
+                                                <div id="method_applyStyle" class="method item inherited">
+                                                    <h3 class="name"><code>applyStyle</code></h3>
                                                 
                                                         <span class="paren">()</span>
                                                 
                                                 
                                                 
-                                                        <span class="flag protected">protected</span>
                                                 
                                                 
                                                 
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-item-remove.jsx.html#l82"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-item-remove.jsx:82</code></a>
+                                                                <p>Inherited from
+                                                                <a href="../classes/ButtonActionStyle.html#method_applyStyle">ButtonActionStyle</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-action-style.js.html#l16"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-action-style.js:16</code></a>
                                                         </p>
                                                 
                                                 
@@ -275,7 +301,67 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Removes all inline styles and configured block elements applied to the current selection.</p>
+                                                        <p>Removes or applies the component style to the current selection.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method_componentWillMount" class="method item inherited">
+                                                    <h3 class="name"><code>componentWillMount</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/ButtonStyle.html#method_componentWillMount">ButtonStyle</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:21</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method_componentWillUnmount" class="method item inherited">
+                                                    <h3 class="name"><code>componentWillUnmount</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/ButtonStyle.html#method_componentWillUnmount">ButtonStyle</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l30"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:30</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Lifecycle. Invoked immediately before a component is unmounted from the DOM.</p>
                                                 
                                                     </div>
                                                 
@@ -300,7 +386,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-item-remove.jsx.html#l56"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-item-remove.jsx:56</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-image-align-center.jsx.html#l53"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-image-align-center.jsx:53</code></a>
                                                         </p>
                                                 
                                                 
@@ -324,6 +410,133 @@
                                                         </div>
                                                 
                                                 </div>
+                                                <div id="method_getStateClasses" class="method item inherited">
+                                                    <h3 class="name"><code>getStateClasses</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">String</span>
+                                                        </span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/ButtonStateClasses.html#method_getStateClasses">ButtonStateClasses</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-state-classes.js.html#l15"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-state-classes.js:15</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Returns the list of state classes associated to the current element&#39;s state, according
+                                                to the results of the isActive and isDisabled methods.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">String</span>:
+                                                                    <p>A string with the state CSS classes.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method_getStyle" class="method item inherited">
+                                                    <h3 class="name"><code>getStyle</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">CKEDITOR.style</span>
+                                                        </span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/ButtonStyle.html#method_getStyle">ButtonStyle</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l39"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:39</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Returns instance of CKEDITOR.style which represents the current button style.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">CKEDITOR.style</span>:
+                                                                    <p>The current style representation.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method_isActive" class="method item inherited">
+                                                    <h3 class="name"><code>isActive</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Boolean</span>
+                                                        </span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/ButtonStyle.html#method_isActive">ButtonStyle</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l49"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:49</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Checks if style is active in the current selection.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Boolean</span>:
+                                                                    <p>True if style is active, false otherwise.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
                                                 <div id="method_render" class="method item">
                                                     <h3 class="name"><code>render</code></h3>
                                                 
@@ -342,7 +555,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-item-remove.jsx.html#l68"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-item-remove.jsx:68</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-image-align-center.jsx.html#l73"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-image-align-center.jsx:73</code></a>
                                                         </p>
                                                 
                                                 
@@ -382,7 +595,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-item-remove.jsx.html#l13"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-item-remove.jsx:13</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-image-align-center.jsx.html#l18"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-image-align-center.jsx:18</code></a>
                                                         </p>
                                                 
                                                 
@@ -408,7 +621,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-item-remove.jsx.html#l46"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-item-remove.jsx:46</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-image-align-center.jsx.html#l43"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-image-align-center.jsx:43</code></a>
                                                         </p>
                                                 
                                                 
@@ -419,7 +632,7 @@
                                                 
                                                     </div>
                                                 
-                                                        <p><strong>Default:</strong> buttonStylesListItemRemove</p>
+                                                        <p><strong>Default:</strong> imageCenter</p>
                                                 
                                                 
                                                 </div>
@@ -434,7 +647,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-item-remove.jsx.html#l20"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-item-remove.jsx:20</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-image-align-center.jsx.html#l25"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-image-align-center.jsx:25</code></a>
                                                         </p>
                                                 
                                                 
@@ -448,29 +661,28 @@
                                                 
                                                 
                                                 </div>
-                                                <div id="property_removeBlocks" class="property item">
-                                                    <h3 class="name"><code>removeBlocks</code></h3>
-                                                    <span class="type">Array</span>
+                                                <div id="property_style" class="property item inherited">
+                                                    <h3 class="name"><code>style</code></h3>
+                                                    <span class="type">Object</span>
                                                 
                                                 
                                                 
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-item-remove.jsx.html#l27"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-item-remove.jsx:27</code></a>
+                                                                <p>Inherited from
+                                                                <a href="../classes/ButtonStyle.html#property_style">ButtonStyle</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l13"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:13</code></a>
                                                         </p>
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Block styles that should be removed in addition to all other inline styles</p>
+                                                        <p>The style the button should handle as described by <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.style">http://docs.ckeditor.com/#!/api/CKEDITOR.style</a></p>
                                                 
                                                     </div>
                                                 
-                                                        <p><strong>Default:</strong> [&#x27;h1&#x27;, &#x27;h2&#x27;, &#x27;h3&#x27;, &#x27;h4&#x27;, &#x27;h5&#x27;, &#x27;h6&#x27;, &#x27;pre&#x27;]</p>
                                                 
                                                 
                                                 </div>
@@ -485,7 +697,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-item-remove.jsx.html#l35"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-item-remove.jsx:35</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-image-align-center.jsx.html#l32"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-image-align-center.jsx:32</code></a>
                                                         </p>
                                                 
                                                 

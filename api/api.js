@@ -17,6 +17,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonH2",
         "ButtonHline",
         "ButtonImage",
+        "ButtonImageAlignCenter",
         "ButtonImageAlignLeft",
         "ButtonImageAlignRight",
         "ButtonItalic",

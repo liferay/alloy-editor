@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/buttons/button-image.jsx - alloyeditor</title>
+    <title>src/ui/react/src/components/buttons/button-image-align-center.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -165,7 +165,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-image.jsx</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-image-align-center.jsx</code></h1>
                             </div>
                             
                             <div class="file">
@@ -174,11 +174,17 @@
                                 &#x27;use strict&#x27;;
                             
                                 /**
-                                 * The ButtonImage class inserts an image to the content.
+                                 * The ButtonImageAlignCenter class provides functionality for aligning an image in the center.
                                  *
-                                 * @class ButtonImage
+                                 * @uses ButtonActionStyle
+                                 * @uses ButtonStateClasses
+                                 * @uses ButtonStyle
+                                 *
+                                 * @class ButtonImageAlignCenter
                                  */
-                                var ButtonImage = React.createClass({
+                                var ButtonImageAlignCenter = React.createClass({
+                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+                            
                                     // Allows validating props being passed to the component.
                                     propTypes: {
                                         /**
@@ -211,9 +217,29 @@
                                          *
                                          * @static
                                          * @property {String} key
-                                         * @default image
+                                         * @default imageCenter
                                          */
-                                        key: &#x27;image&#x27;
+                                        key: &#x27;imageCenter&#x27;
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Returns the default values of the properties used in the widget.
+                                     *
+                                     * @method getDefaultProps
+                                     * @return {Object} The default properties.
+                                     */
+                                    getDefaultProps: function() {
+                                        return {
+                                            style: {
+                                                element: &#x27;img&#x27;,
+                                                styles: {
+                                                    &#x27;display&#x27;: &#x27;block&#x27;,
+                                                    &#x27;margin-left&#x27;: &#x27;50%&#x27;,
+                                                    &#x27;transform&#x27;: &#x27;translateX(-50%)&#x27;,
+                                                    &#x27;-ms-transform&#x27;: &#x27;translateX(-50%)&#x27;
+                                                }
+                                            }
+                                        };
                                     },
                             
                                     /**
@@ -223,74 +249,17 @@
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var inputSyle = {display: &#x27;none&#x27;};
+                                        var cssClass = &#x27;ae-button &#x27; + this.getStateClasses();
                             
                                         return (
-                                            &lt;div&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.image} className=&quot;ae-button&quot; data-type=&quot;button-image&quot; onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.image}&gt;
-                                                    &lt;span className=&quot;ae-icon-image&quot;&gt;&lt;/span&gt;
-                                                &lt;/button&gt;
-                            
-                                                &lt;input onChange={this._onInputChange} ref=&quot;fileInput&quot; style={inputSyle} type=&quot;file&quot; /&gt;
-                                            &lt;/div&gt;
+                                            &lt;button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-image-align-center&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}&gt;
+                                                &lt;span className=&quot;ae-icon-align-center&quot;&gt;&lt;/span&gt;
+                                            &lt;/button&gt;
                                         );
-                                    },
-                            
-                                    /**
-                                     * Simulates click on the input element. This will open browser&#x27;s native file open dialog.
-                                     *
-                                     * @method handleClick
-                                     * @param {SyntheticEvent} event The received click event on the button.
-                                     */
-                                    handleClick: function(event) {
-                                        React.findDOMNode(this.refs.fileInput).click();
-                                    },
-                            
-                                    /**
-                                     * On input change, reads the chosen file and creates an img element with src the image data as Data URI.
-                                     * Then, fires an {{#crossLink &quot;ButtonImage/imageAdd:event&quot;}}{{/crossLink}} via CKEditor&#x27;s
-                                     * message system. The passed params will be:
-                                     * - &#x60;el&#x60; - the created img element
-                                     * - &#x60;file&#x60; - the original image file from the input element
-                                     *
-                                     * @protected
-                                     * @method _onInputChange
-                                     */
-                                    _onInputChange: function() {
-                                        var reader = new FileReader();
-                                        var inputEl = React.findDOMNode(this.refs.fileInput);
-                            
-                                        reader.onload = function(event) {
-                                            var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                            
-                                            var el = CKEDITOR.dom.element.createFromHtml(&#x27;&lt;img src=&quot;&#x27; + event.target.result + &#x27;&quot;&gt;&#x27;);
-                            
-                                            editor.insertElement(el);
-                            
-                                            editor.fire(&#x27;actionPerformed&#x27;, this);
-                            
-                                            var imageData = {
-                                                el: el,
-                                                file: inputEl.files[0]
-                                            };
-                            
-                                            editor.fire(&#x27;imageAdd&#x27;, imageData);
-                                        }.bind(this);
-                            
-                                        reader.readAsDataURL(inputEl.files[0]);
-                            
-                                        inputEl.value = &#x27;&#x27;;
                                     }
-                            
-                                    /**
-                                     * Fired when an image file is added as an element to the editor.
-                                     *
-                                     * @event imageAdd
-                                     * @param {CKEDITOR.dom.element} el The created image with src as Data URI.
-                                     */
                                 });
                             
-                                AlloyEditor.Buttons[ButtonImage.key] = AlloyEditor.ButtonImage = ButtonImage;
+                                AlloyEditor.Buttons[ButtonImageAlignCenter.key] = AlloyEditor.ButtonImageAlignCenter = ButtonImageAlignCenter;
                             }());
                                 </pre>
                             </div>
