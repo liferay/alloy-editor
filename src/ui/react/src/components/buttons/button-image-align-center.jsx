@@ -8,7 +8,7 @@
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      *
-     * @class ButtonImageAlignLeft
+     * @class ButtonImageAlignCenter
      */
     var ButtonImageAlignCenter = React.createClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
@@ -80,7 +80,7 @@
             var cssClass = 'ae-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-image-align-left" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}>
+                <button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-image-align-center" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}>
                     <span className="ae-icon-align-center"></span>
                 </button>
             );
