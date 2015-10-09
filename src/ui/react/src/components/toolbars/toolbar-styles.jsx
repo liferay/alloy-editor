@@ -121,10 +121,6 @@
          * @return {Object|null} The content which should be rendered.
          */
         render: function() {
-            if (this.props.editorEvent && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
-                return null;
-            }
-
             var currentSelection = this._getCurrentSelection();
 
             if (currentSelection) {
