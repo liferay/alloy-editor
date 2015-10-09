@@ -464,6 +464,10 @@ h1 {
   color: #7CC3E1;
 }
 
+.home-banner .action-buttons .btn-get-started, .home-banner .action-buttons .btn-download {
+  padding: 22px;
+}
+
 .home-banner .action-buttons .btn-fork {
   border-width: 0;
   padding-left: 40px;
