@@ -3,11 +3,11 @@
 
     var linkSelectionTest = function(payload) {
         var nativeEditor = payload.editor.get('nativeEditor'),
-            element = (new CKEDITOR.Link(nativeEditor)).getFromSelection();
+            element;
 
         return !!(
             !nativeEditor.isSelectionEmpty() &&
-            element &&
+            (element = (new CKEDITOR.Link(nativeEditor)).getFromSelection()) &&
             !element.isReadOnly()
         );
     };
@@ -26,14 +26,14 @@
         var nativeEditor = payload.editor.get('nativeEditor');
 
         var selectionEmpty = nativeEditor.isSelectionEmpty();
-        var selectionElement = nativeEditor.getSelection().getCommonAncestor();
+
         var selectionData = payload.data.selectionData;
 
         return !!(
             !selectionData.element &&
             selectionData.region &&
             !selectionEmpty &&
-            !selectionElement.isReadOnly()
+            !nativeEditor.getSelection().getCommonAncestor().isReadOnly()
         );
     };
 
