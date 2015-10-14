@@ -243,6 +243,10 @@
                                             var editable = nativeEditor.editable();
                                             if (editable) {
                                                 editable.removeClass(&#x27;ae-editable&#x27;);
+                            
+                                                if (this.get(&#x27;enableContentEditable&#x27;)) {
+                                                    this.get(&#x27;srcNode&#x27;).setAttribute(&#x27;contenteditable&#x27;, &#x27;false&#x27;);
+                                                }
                                             }
                             
                                             nativeEditor.destroy();
