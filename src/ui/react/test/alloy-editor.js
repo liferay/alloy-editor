@@ -39,6 +39,14 @@
             it('should set contenteditable to true', function() {
                 assert.isTrue(this.el.isContentEditable);
             });
+
+            it('should set contenteditable attribute to false on editor destroying', function() {
+                var editable = this.alloyEditor.get('nativeEditor').editable();
+
+                this.alloyEditor.destroy();
+                this.alloyEditor = null;
+                assert.strictEqual('false', editable.getAttribute('contenteditable'));
+            });
         });
 
         describe('with enableContentEditable set to true', function() {
@@ -55,6 +63,14 @@
             it('should set contenteditable to true', function() {
                 assert.isTrue(this.el.isContentEditable);
             });
+
+            it('should set contenteditable attribute to false on editor destroying', function() {
+                var editable = this.alloyEditor.get('nativeEditor').editable();
+
+                this.alloyEditor.destroy();
+                this.alloyEditor = null;
+                assert.strictEqual('false', editable.getAttribute('contenteditable'));
+            });
         });
 
         describe('with enableContentEditable set to false', function() {
@@ -70,6 +86,14 @@
 
             it('should not force the srcNode to be contenteditable', function() {
                 assert.isFalse(this.el.isContentEditable);
+            });
+
+            it('should leave contenteditable attribute to false on editor destroying', function() {
+                var editable = this.alloyEditor.get('nativeEditor').editable();
+
+                this.alloyEditor.destroy();
+                this.alloyEditor = null;
+                assert.strictEqual('false', editable.getAttribute('contenteditable'));
             });
         });
 
