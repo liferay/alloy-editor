@@ -71,6 +71,7 @@
                 var editable = nativeEditor.editable();
                 if (editable) {
                     editable.removeClass('ae-editable');
+
                     if (this.get('enableContentEditable')) {
                         this.get('srcNode').setAttribute('contenteditable', 'false');
                     }
