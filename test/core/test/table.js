@@ -393,5 +393,47 @@
 
             assert.isUndefined(table);
         });
+
+
+        it('should consider the table as editable', function() {
+            var initialFixture = getFixture('editable_by_parent_table.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            assert.isTrue(tableUtils.isEditable(this.nativeEditor.element.findOne('table')));
+        });
+
+        it('should take parent contenteditable into account', function() {
+            var initialFixture = getFixture('not_editable_by_parent_table.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            assert.isFalse(tableUtils.isEditable(this.nativeEditor.element.findOne('table')));
+        });
+
+        it('should take table contenteditable attribute into account', function () {
+            var initialFixture = getFixture('not_editable_attribute_table.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            assert.isFalse(tableUtils.isEditable(this.nativeEditor.element.findOne('#not-editable')));
+            assert.isTrue(tableUtils.isEditable(this.nativeEditor.element.findOne('#editable')));
+        });
+
+        it('should handle nested table', function() {
+            var initialFixture = getFixture('editable_by_parent_nested_tables.html');
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+
+            var tableUtils = new CKEDITOR.Table(this.nativeEditor);
+
+            assert.isTrue(tableUtils.isEditable(this.nativeEditor.element.findOne('#deep')));
+        });
     });
 }());
