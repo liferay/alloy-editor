@@ -164,8 +164,8 @@
 
                 nativeEditor = this.editor.get('nativeEditor');
                 content = '<table id="editable"><tr><td>Editable</td></tr><table>';
-                content += '<table id="not-editable" contenteditable="false"><tr><td>Editable</td></tr><table>';
-                content += '<p id="not-table">Not an image</p>';
+                content += '<table id="not-editable" contenteditable="false"><tr><td>Not editable</td></tr><table>';
+                content += '<p id="not-table">Not a table</p>';
                 nativeEditor.setData(content);
             });
 

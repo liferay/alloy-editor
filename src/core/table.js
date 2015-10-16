@@ -1,6 +1,18 @@
 (function() {
     'use strict';
 
+    var IE_BUGGY_EDITABLE_ELEMENT = {
+        "table": 1,
+        "col": 1,
+        "colgroup": 1,
+        "tbody": 1,
+        "td": 1,
+        "tfoot": 1,
+        "th": 1,
+        "thead": 1,
+        "tr": 1
+    };
+
     /**
      * Table class utility. Provides methods for create, delete and update tables.
      *
@@ -92,6 +104,29 @@
             }
 
             return table;
+        },
+
+        /**
+         * Checks if the given table can be considered as editable. This method
+         * method is there to workaround a limitation of IE where for some
+         * elements (like table), `isContentEditable` is always false because IE
+         * does not support contenteditable on such elements but that does not
+         * really mean the content of such elements can not be edited.
+         *
+         * See https://msdn.microsoft.com/en-us/library/ms537837%28v=VS.85%29.aspx
+         *
+         * @method isEditable
+         * @param {CKEDITOR.dom.element} el the table element to test
+         * @return {Boolean}
+         */
+        isEditable: function (el) {
+            if ( !CKEDITOR.env.ie || !el.is(IE_BUGGY_EDITABLE_ELEMENT) ) {
+                return !el.isReadOnly();
+            }
+            if ( el.hasAttribute('contenteditable') ) {
+                return (el.getAttribute('contenteditable') !== 'false');
+            }
+            return this.isEditable(el.getParent());
         },
 
         /**

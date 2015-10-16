@@ -39,9 +39,10 @@
 
     var tableSelectionTest = function(payload) {
         var nativeEditor = payload.editor.get('nativeEditor'),
-            element = (new CKEDITOR.Table(nativeEditor)).getFromSelection();
+            table = new CKEDITOR.Table(nativeEditor),
+            element = table.getFromSelection();
 
-        return !!(element && !element.isReadOnly());
+        return !!(element && table.isEditable(element));
     };
 
     AlloyEditor.SelectionTest = {
