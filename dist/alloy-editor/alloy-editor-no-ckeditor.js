@@ -21733,6 +21733,18 @@
 (function () {
     'use strict';
 
+    var IE_NON_DIRECTLY_EDITABLE_ELEMENT = {
+        'table': 1,
+        'col': 1,
+        'colgroup': 1,
+        'tbody': 1,
+        'td': 1,
+        'tfoot': 1,
+        'th': 1,
+        'thead': 1,
+        'tr': 1
+    };
+
     /**
      * Table class utility. Provides methods for create, delete and update tables.
      *
@@ -21824,6 +21836,31 @@
             }
 
             return table;
+        },
+
+        /**
+         * Checks if a given table can be considered as editable. This method
+         * workarounds a limitation of IE where for some elements (like table),
+         * `isContentEditable` returns always false. This is because IE does not support
+         * `contenteditable` on such elements. However, despite such elements
+         * cannot be set as content editable directly, a content editable SPAN,
+         * or DIV element can be placed inside the individual table cells.
+         * See https://msdn.microsoft.com/en-us/library/ms537837%28v=VS.85%29.aspx
+         *
+         * @method isEditable
+         * @param {CKEDITOR.dom.element} el The table element to test if editable
+         * @return {Boolean}
+         */
+        isEditable: function isEditable(el) {
+            if (!CKEDITOR.env.ie || !el.is(IE_NON_DIRECTLY_EDITABLE_ELEMENT)) {
+                return !el.isReadOnly();
+            }
+
+            if (el.hasAttribute('contenteditable')) {
+                return el.getAttribute('contenteditable') !== 'false';
+            }
+
+            return this.isEditable(el.getParent());
         },
 
         /**
@@ -25512,13 +25549,15 @@ CKEDITOR.tools.buildTableMap = function (table) {
     var linkSelectionTest = function linkSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
-        return !nativeEditor.isSelectionEmpty() && new CKEDITOR.Link(nativeEditor).getFromSelection();
+        var element;
+
+        return !!(!nativeEditor.isSelectionEmpty() && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && !element.isReadOnly());
     };
 
     var imageSelectionTest = function imageSelectionTest(payload) {
         var selectionData = payload.data.selectionData;
 
-        return selectionData.element && selectionData.element.getName() === 'img';
+        return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionData.element.isReadOnly());
     };
 
     var textSelectionTest = function textSelectionTest(payload) {
@@ -25528,13 +25567,16 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
         var selectionData = payload.data.selectionData;
 
-        return !selectionData.element && selectionData.region && !selectionEmpty;
+        return !!(!selectionData.element && selectionData.region && !selectionEmpty && !nativeEditor.getSelection().getCommonAncestor().isReadOnly());
     };
 
     var tableSelectionTest = function tableSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
-        return !!new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var table = new CKEDITOR.Table(nativeEditor);
+        var element = table.getFromSelection();
+
+        return !!(element && table.isEditable(element));
     };
 
     AlloyEditor.SelectionTest = {
@@ -31901,10 +31943,6 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object|null} The content which should be rendered.
          */
         render: function render() {
-            if (this.props.editorEvent && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
-                return null;
-            }
-
             var currentSelection = this._getCurrentSelection();
 
             if (currentSelection) {
