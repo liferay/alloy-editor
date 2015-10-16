@@ -2,8 +2,9 @@
     'use strict';
 
     var linkSelectionTest = function(payload) {
-        var nativeEditor = payload.editor.get('nativeEditor'),
-            element;
+        var nativeEditor = payload.editor.get('nativeEditor');
+
+        var element;
 
         return !!(
             !nativeEditor.isSelectionEmpty() &&
@@ -38,9 +39,10 @@
     };
 
     var tableSelectionTest = function(payload) {
-        var nativeEditor = payload.editor.get('nativeEditor'),
-            table = new CKEDITOR.Table(nativeEditor),
-            element = table.getFromSelection();
+        var nativeEditor = payload.editor.get('nativeEditor');
+
+        var table = new CKEDITOR.Table(nativeEditor);
+        var element = table.getFromSelection();
 
         return !!(element && table.isEditable(element));
     };
