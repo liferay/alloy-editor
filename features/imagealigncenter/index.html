@@ -2,7 +2,7 @@
 <html>
   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 
-    <title>Features - Image | Alloy Editor</title>
+    <title>Features - Image Alignment - Center | Alloy Editor</title>
 
     <meta charset="utf-8">
     <meta name="author" content="Iliyan Peychev">
@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="//alloyeditor.com">
     <meta property="og:image" content="//alloyeditor.com/website/img/facebook-share.jpg">
-    <meta property="og:title" content="Features - Image | Alloy Editor">
+    <meta property="og:title" content="Features - Image Alignment - Center | Alloy Editor">
     <meta property="og:description" content="Alloy Editor is a modern WYSIWYG editor built on top of CKEditor, designed to create modern and gorgeous web content.">
 
     <!-- Favicon -->
@@ -199,13 +199,13 @@
                       
                     
                       
-                        <li class="active">
+                        <li>
                           <a href="//alloyeditor.com/features/image">Image</a>
                         </li>
                       
                     
                       
-                        <li>
+                        <li class="active">
                           <a href="//alloyeditor.com/features/imagealigncenter">Image Alignment - Center</a>
                         </li>
                       
@@ -368,8 +368,12 @@
       <div id="content">
         <div class="container">
   <div class="col-sm-8 col-sm-offset-1">
-    <h1 class="feature-header">Image</h1>
+    <h1 class="feature-header">Image Alignment - Center</h1>
 
+    
+      
+        
+      
     
       
         
@@ -402,10 +406,10 @@
       
         
           
-            <p class="feature-lead">Got pictures to share? Use this button to browse your device and attach awesome images to your document.</p>
+            <p class="feature-lead">Use this button if you need to center an image.</p>
 
             <div class="feature-example">
-              <img class="center-block feature-demo" src="//alloyeditor.com/website/img/features/button-image.gif"></img>
+              <img class="center-block feature-demo" src="//alloyeditor.com/website/img/features/button-imagealigncenter.gif"></img>
             </div>
             <div class="zero-clipboard">
               <span class="btn-clipboard" id="copyToClipboardButton">Copy</span>
@@ -414,18 +418,20 @@
               
                 <pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> editor = AlloyEditor.editable(<span class="hljs-string">'myContentEditable'</span>, {
     toolbars: {
-        add: {
-            buttons: [<span class="hljs-string">'image'</span>]
+        styles: {
+            selections: [
+                {
+                    name: <span class="hljs-string">'image'</span>,
+                    buttons: [<span class="hljs-string">'imageCenter'</span>],
+                    test: AlloyEditor.SelectionTest.image
+                }
+            ]
         }
     }
 });</code></pre>
               
             </div>
           
-        
-      
-    
-      
         
       
     
@@ -582,13 +588,13 @@
           
         
           
-            <li class="active">
+            <li>
               <a href="//alloyeditor.com/features/image">Image</a>
             </li>
           
         
           
-            <li>
+            <li class="active">
               <a href="//alloyeditor.com/features/imagealigncenter">Image Alignment - Center</a>
             </li>
           
