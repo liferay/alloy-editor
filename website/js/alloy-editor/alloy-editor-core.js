@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v0.5.2
+ * AlloyEditor v0.6.0
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -817,6 +817,18 @@
 (function () {
     'use strict';
 
+    var IE_NON_DIRECTLY_EDITABLE_ELEMENT = {
+        'table': 1,
+        'col': 1,
+        'colgroup': 1,
+        'tbody': 1,
+        'td': 1,
+        'tfoot': 1,
+        'th': 1,
+        'thead': 1,
+        'tr': 1
+    };
+
     /**
      * Table class utility. Provides methods for create, delete and update tables.
      *
@@ -908,6 +920,31 @@
             }
 
             return table;
+        },
+
+        /**
+         * Checks if a given table can be considered as editable. This method
+         * workarounds a limitation of IE where for some elements (like table),
+         * `isContentEditable` returns always false. This is because IE does not support
+         * `contenteditable` on such elements. However, despite such elements
+         * cannot be set as content editable directly, a content editable SPAN,
+         * or DIV element can be placed inside the individual table cells.
+         * See https://msdn.microsoft.com/en-us/library/ms537837%28v=VS.85%29.aspx
+         *
+         * @method isEditable
+         * @param {CKEDITOR.dom.element} el The table element to test if editable
+         * @return {Boolean}
+         */
+        isEditable: function isEditable(el) {
+            if (!CKEDITOR.env.ie || !el.is(IE_NON_DIRECTLY_EDITABLE_ELEMENT)) {
+                return !el.isReadOnly();
+            }
+
+            if (el.hasAttribute('contenteditable')) {
+                return el.getAttribute('contenteditable') !== 'false';
+            }
+
+            return this.isEditable(el.getParent());
         },
 
         /**
@@ -4596,13 +4633,15 @@ CKEDITOR.tools.buildTableMap = function (table) {
     var linkSelectionTest = function linkSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
-        return !nativeEditor.isSelectionEmpty() && new CKEDITOR.Link(nativeEditor).getFromSelection();
+        var element;
+
+        return !!(!nativeEditor.isSelectionEmpty() && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && !element.isReadOnly());
     };
 
     var imageSelectionTest = function imageSelectionTest(payload) {
         var selectionData = payload.data.selectionData;
 
-        return selectionData.element && selectionData.element.getName() === 'img';
+        return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionData.element.isReadOnly());
     };
 
     var textSelectionTest = function textSelectionTest(payload) {
@@ -4612,13 +4651,16 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
         var selectionData = payload.data.selectionData;
 
-        return !selectionData.element && selectionData.region && !selectionEmpty;
+        return !!(!selectionData.element && selectionData.region && !selectionEmpty && !nativeEditor.getSelection().getCommonAncestor().isReadOnly());
     };
 
     var tableSelectionTest = function tableSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
-        return !!new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var table = new CKEDITOR.Table(nativeEditor);
+        var element = table.getFromSelection();
+
+        return !!(element && table.isEditable(element));
     };
 
     AlloyEditor.SelectionTest = {
@@ -4639,7 +4681,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         test: AlloyEditor.SelectionTest.link
     }, {
         name: 'image',
-        buttons: ['imageLeft', 'imageRight'],
+        buttons: ['imageLeft', 'imageCenter', 'imageRight'],
         test: AlloyEditor.SelectionTest.image
     }, {
         name: 'text',
@@ -4730,6 +4772,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 var editable = nativeEditor.editable();
                 if (editable) {
                     editable.removeClass('ae-editable');
+
+                    if (this.get('enableContentEditable')) {
+                        this.get('srcNode').setAttribute('contenteditable', 'false');
+                    }
                 }
 
                 nativeEditor.destroy();
@@ -5942,10 +5988,22 @@ CKEDITOR.tools.buildTableMap = function (table) {
         // Allows validating props being passed to the component.
         propTypes: {
             /**
+             * Should the widget to be restricted to the viewport, or not.
+             *
+             * @property {Boolean} constrainToViewport
+             * @default true
+             */
+            constrainToViewport: React.PropTypes.bool,
+
+            /**
              * The gutter (vertical and horizontal) between the interaction point and where the widget
              * should be rendered.
              *
              * @property {Object} gutter
+             * @default {
+             *     left: 0,
+             *     top: 10
+             * }
              */
             gutter: React.PropTypes.object
         },
@@ -5960,7 +6018,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 gutter: {
                     left: 0,
                     top: 10
-                }
+                },
+                constrainToViewport: true
             };
         },
 
@@ -5973,6 +6032,41 @@ CKEDITOR.tools.buildTableMap = function (table) {
             if (window.cancelAnimationFrame) {
                 window.cancelAnimationFrame(this._animationFrameId);
             }
+        },
+
+        /**
+         * Returns an object which contains the position of the element in page coordinates,
+         * restricted to fit to given viewport.
+         *
+         * @method getConstrainedPosition
+         * @param {Object} attrs The following properties, provided as numbers:
+         * - height
+         * - left
+         * - top
+         * - width
+         * @param {Object} viewPaneSize Optional. If not provided, the current viewport will be used. Should contain at least these properties:
+         * - width
+         * @return {Object} An object with `x` and `y` properties, which represent the constrained position of the
+         * element.
+         */
+        getConstrainedPosition: function getConstrainedPosition(attrs, viewPaneSize) {
+            viewPaneSize = viewPaneSize || new CKEDITOR.dom.window(window).getViewPaneSize();
+
+            var x = attrs.left;
+            var y = attrs.top;
+
+            if (attrs.left + attrs.width > viewPaneSize.width) {
+                x -= attrs.left + attrs.width - viewPaneSize.width;
+            }
+
+            if (y < 0) {
+                y = 0;
+            }
+
+            return {
+                x: x,
+                y: y
+            };
         },
 
         /**
@@ -6054,8 +6148,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 domElement.addClass('ae-toolbar-transition');
                 domElement.addClass('alloy-editor-visible');
                 domElement.setStyles({
-                    left: endPoint[0],
-                    top: endPoint[1],
+                    left: endPoint[0] + 'px',
+                    top: endPoint[1] + 'px',
                     opacity: 1
                 });
             });
@@ -6077,8 +6171,20 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
                     var finalX, finalY, initialX, initialY;
 
-                    finalX = initialX = domElement.getStyle('left');
-                    finalY = initialY = domElement.getStyle('top');
+                    finalX = initialX = parseFloat(domElement.getStyle('left'));
+                    finalY = initialY = parseFloat(domElement.getStyle('top'));
+
+                    if (this.props.constrainToViewport) {
+                        var res = this.getConstrainedPosition({
+                            height: parseFloat(domNode.offsetHeight),
+                            left: finalX,
+                            top: finalY,
+                            width: parseFloat(domNode.offsetWidth)
+                        });
+
+                        finalX = res.x;
+                        finalY = res.y;
+                    }
 
                     if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
                         initialY = this.props.selectionData.region.bottom;
@@ -6104,9 +6210,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             if (interactionPoint && domNode) {
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
 
-                var domElement = new CKEDITOR.dom.element(domNode);
-
-                domElement.setStyles({
+                new CKEDITOR.dom.element(domNode).setStyles({
                     left: xy[0] + 'px',
                     top: xy[1] + 'px'
                 });
@@ -7113,6 +7217,101 @@ CKEDITOR.tools.buildTableMap = function (table) {
     });
 
     AlloyEditor.Buttons[ButtonHline.key] = AlloyEditor.ButtonHline = ButtonHline;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * The ButtonImageAlignCenter class provides functionality for aligning an image in the center.
+     *
+     * @uses ButtonActionStyle
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     *
+     * @class ButtonImageAlignCenter
+     */
+    var ButtonImageAlignCenter = React.createClass({
+        displayName: 'ButtonImageAlignCenter',
+
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @property {Number} tabIndex
+             */
+            tabIndex: React.PropTypes.number
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default imageCenter
+             */
+            key: 'imageCenter'
+        },
+
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function getDefaultProps() {
+            return {
+                style: {
+                    element: 'img',
+                    styles: {
+                        'display': 'block',
+                        'margin-left': '50%',
+                        'transform': 'translateX(-50%)',
+                        '-ms-transform': 'translateX(-50%)'
+                    }
+                }
+            };
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            var cssClass = 'ae-button ' + this.getStateClasses();
+
+            return React.createElement(
+                'button',
+                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-center', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
+                React.createElement('span', { className: 'ae-icon-align-center' })
+            );
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonImageAlignCenter.key] = AlloyEditor.ButtonImageAlignCenter = ButtonImageAlignCenter;
 })();
 'use strict';
 
@@ -8845,7 +9044,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                     dismissPrev: [37],
                     next: [40],
                     prev: [38]
-                }
+                },
+                showRemoveStylesItem: true
             };
         },
 
@@ -8856,13 +9056,19 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
+            var removeStylesItem;
+
+            if (this.props.showRemoveStylesItem) {
+                removeStylesItem = React.createElement(AlloyEditor.ButtonStylesListItemRemove, { editor: this.props.editor });
+            }
+
             return React.createElement(
                 'div',
                 { className: 'ae-dropdown ae-arrow-box ae-arrow-box-top-left', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
                 React.createElement(
                     'ul',
                     { className: 'ae-listbox', role: 'listbox' },
-                    React.createElement(AlloyEditor.ButtonStylesListItemRemove, { editor: this.props.editor }),
+                    removeStylesItem,
                     React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.blockStyles, styles: this._blockStyles }),
                     this._renderStylesItems(this._blockStyles),
                     React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.inlineStyles, styles: this._inlineStyles }),
@@ -8940,6 +9146,13 @@ CKEDITOR.tools.buildTableMap = function (table) {
             label: React.PropTypes.string,
 
             /**
+             * Indicates whether the remove styles item should appear in the styles list.
+             *
+             * @property {Boolean} expanded
+             */
+            showRemoveStylesItem: React.PropTypes.bool,
+
+            /**
              * List of the styles the button is able to handle.
              *
              * @property {Array} styles
@@ -8994,7 +9207,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             var buttonStylesList;
 
             if (this.props.expanded) {
-                buttonStylesList = React.createElement(AlloyEditor.ButtonStylesList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, styles: styles });
+                buttonStylesList = React.createElement(AlloyEditor.ButtonStylesList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, showRemoveStylesItem: this.props.showRemoveStylesItem, styles: styles });
             }
 
             return React.createElement(
@@ -10814,10 +11027,6 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Object|null} The content which should be rendered.
          */
         render: function render() {
-            if (this.props.editorEvent && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
-                return null;
-            }
-
             var currentSelection = this._getCurrentSelection();
 
             if (currentSelection) {

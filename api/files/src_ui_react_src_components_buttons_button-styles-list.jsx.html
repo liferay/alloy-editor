@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.5.2</b>
+                        API Docs for Version: <b>0.6.0</b>
                     </p>
                 </li>
             </div>
@@ -72,6 +72,7 @@
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
                                     <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
                                     <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
                                     <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
@@ -249,7 +250,8 @@
                                                 dismissPrev: [37],
                                                 next: [40],
                                                 prev: [38]
-                                            }
+                                            },
+                                            showRemoveStylesItem: true
                                         };
                                     },
                             
@@ -260,10 +262,16 @@
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
+                                        var removeStylesItem;
+                            
+                                        if (this.props.showRemoveStylesItem) {
+                                            removeStylesItem = &lt;AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} /&gt;;
+                                        }
+                            
                                         return (
                                             &lt;div className=&quot;ae-dropdown ae-arrow-box ae-arrow-box-top-left&quot; onFocus={this.focus} onKeyDown={this.handleKey} tabIndex=&quot;0&quot;&gt;
                                                 &lt;ul className=&quot;ae-listbox&quot; role=&quot;listbox&quot;&gt;
-                                                    &lt;AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} /&gt;
+                                                    {removeStylesItem}
                             
                                                     &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.blockStyles} styles={this._blockStyles} /&gt;
                                                     {this._renderStylesItems(this._blockStyles)}

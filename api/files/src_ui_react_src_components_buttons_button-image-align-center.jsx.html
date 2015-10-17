@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/core/uicore.js - alloyeditor</title>
+    <title>src/ui/react/src/components/buttons/button-image-align-center.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -165,158 +165,101 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/core/uicore.js</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-image-align-center.jsx</code></h1>
                             </div>
                             
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            (function() {
+                            (function () {
                                 &#x27;use strict&#x27;;
                             
-                                if (CKEDITOR.plugins.get(&#x27;ae_uicore&#x27;)) {
-                                    return;
-                                }
-                            
                                 /**
-                                 * UICore class which will handle user interactions with the editor. These interactions
-                                 * might be triggered via mouse, keyboard or touch devices. The class fill fire an event via
-                                 * CKEditor&#x27;s event system - &quot;editorInteraction&quot;. The UI may listen to this event and
-                                 * execute some actions - for example to show/hide toolbars.
+                                 * The ButtonImageAlignCenter class provides functionality for aligning an image in the center.
                                  *
-                                 * By default if user presses the Esc key, &#x27;editorInteraction&#x27; event won&#x27;t be fired. However, this behaviour can be changed
-                                 * by setting {{#crossLink &quot;CKEDITOR.plugins.ae_uicore/allowEsc:attribute&quot;}}{{/crossLink}} config property in editor&#x27;s configuration to true.
+                                 * @uses ButtonActionStyle
+                                 * @uses ButtonStateClasses
+                                 * @uses ButtonStyle
                                  *
-                                 * @class CKEDITOR.plugins.ae_uicore
+                                 * @class ButtonImageAlignCenter
                                  */
+                                var ButtonImageAlignCenter = React.createClass({
+                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
                             
-                                /**
-                                 * Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,
-                                 * or touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout
-                                 * is 50ms. This value can be overwritten via {{#crossLink &quot;CKEDITOR.plugins.ae_uicore/timeout:attribute&quot;}}{{/crossLink}}
-                                 * property of editor&#x27;s configuration, like: editor.config.uicore.timeout = 100
-                                 *
-                                 * @event editorInteraction
-                                 * @param {Object} data An object which contains the following properties:
-                                 * - nativeEvent - The event as received from CKEditor.
-                                 * - selectionData - The data, returned from {{#crossLink &quot;CKEDITOR.plugins.ae_selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
-                                 */
-                            
-                                /**
-                                 * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
-                                 *
-                                 * @event ariaUpdate
-                                 * @param {Object} data An object which contains the following properties:
-                                 * - message - The provided message from the UI element.
-                                 */
-                            
-                                /**
-                                 * If set to true, the editor will still fire {{#crossLink &quot;CKEDITOR.plugins.ae_uicore/editorInteraction:event&quot;}}{{/crossLink}} event,
-                                 * if user presses Esc key.
-                                 *
-                                 * @attribute allowEsc
-                                 * @default false
-                                 * @type Boolean
-                                 */
-                            
-                                /**
-                                 * Specifies the default timeout after which the {{#crossLink &quot;CKEDITOR.plugins.ae_uicore/editorInteraction:event&quot;}}{{/crossLink}} event
-                                 * will be fired.
-                                 *
-                                 * @attribute timeout
-                                 * @default 50 (ms)
-                                 * @type Number
-                                 */
-                            
-                                CKEDITOR.plugins.add(
-                                    &#x27;ae_uicore&#x27;, {
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
                                         /**
-                                         * Initializer lifecycle implementation for the UICore plugin.
+                                         * The editor instance where the component is being used.
                                          *
-                                         * @protected
-                                         * @method init
-                                         * @param {Object} editor The current CKEditor instance.
+                                         * @property {Object} editor
                                          */
-                                        init: function(editor) {
-                                            var ariaState = [];
-                            
-                                            var ariaElement = this._createAriaElement(editor.id);
-                            
-                                            var uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
-                            
-                                            var handleAria = CKEDITOR.tools.debounce(
-                                                function(event) {
-                                                    ariaElement.innerHTML = ariaState.join(&#x27;. &#x27;);
-                                                },
-                                                uiTasksTimeout
-                                            );
-                            
-                                            var handleUI = CKEDITOR.tools.debounce(
-                                                function(event) {
-                                                    ariaState = [];
-                            
-                                                    if (event.name !== &#x27;keyup&#x27; || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
-                                                        var selectionData = editor.getSelectionData();
-                            
-                                                        if (selectionData) {
-                                                            editor.fire(&#x27;editorInteraction&#x27;, {
-                                                                nativeEvent: event.data.$,
-                                                                selectionData: selectionData
-                                                            });
-                                                        }
-                                                    }
-                                                },
-                                                uiTasksTimeout
-                                            );
-                            
-                                            editor.on(&#x27;ariaUpdate&#x27;, function(event) {
-                                                // handleAria is debounced function, so if it is being called multiple times, it will
-                                                // be canceled until some time passes.
-                                                // For that reason here we explicitly append the current message to the list of messages
-                                                // and call handleAria. Since it is debounced, when some timeout passes,
-                                                // all the messages will be applied to the live region and not only the last one.
-                            
-                                                ariaState.push(event.data.message);
-                            
-                                                handleAria();
-                                            });
-                            
-                                            editor.once(&#x27;contentDom&#x27;, function() {
-                                                var editable = editor.editable();
-                            
-                                                editable.attachListener(editable, &#x27;mouseup&#x27;, handleUI);
-                                                editable.attachListener(editable, &#x27;keyup&#x27;, handleUI);
-                                            });
-                            
-                                            editor.on(&#x27;destroy&#x27;, function(event) {
-                                                ariaElement.parentNode.removeChild(ariaElement);
-                            
-                                                handleUI.detach();
-                                            });
-                                        },
+                                        editor: React.PropTypes.object.isRequired,
                             
                                         /**
-                                         * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
+                                         * The label that should be used for accessibility purposes.
                                          *
-                                         * @protected
-                                         * @method _createAriaElement
-                                         * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
-                                         * @return {HTMLElement} The created and applied to DOM element.
+                                         * @property {String} label
                                          */
-                                        _createAriaElement: function(id) {
-                                            var statusElement = document.createElement(&#x27;div&#x27;);
+                                        label: React.PropTypes.string,
                             
-                                            statusElement.className = &#x27;ae-sr-only&#x27;;
+                                        /**
+                                         * The tabIndex of the button in its toolbar current state. A value other than -1
+                                         * means that the button has focus and is the active element.
+                                         *
+                                         * @property {Number} tabIndex
+                                         */
+                                        tabIndex: React.PropTypes.number
+                                    },
                             
-                                            statusElement.setAttribute(&#x27;aria-live&#x27;, &#x27;polite&#x27;);
-                                            statusElement.setAttribute(&#x27;role&#x27;, &#x27;status&#x27;);
-                                            statusElement.setAttribute(&#x27;id&#x27;, id + &#x27;LiveRegion&#x27;);
+                                    // Lifecycle. Provides static properties to the widget.
+                                    statics: {
+                                        /**
+                                         * The name which will be used as an alias of the button in the configuration.
+                                         *
+                                         * @static
+                                         * @property {String} key
+                                         * @default imageCenter
+                                         */
+                                        key: &#x27;imageCenter&#x27;
+                                    },
                             
-                                            document.body.appendChild(statusElement);
+                                    /**
+                                     * Lifecycle. Returns the default values of the properties used in the widget.
+                                     *
+                                     * @method getDefaultProps
+                                     * @return {Object} The default properties.
+                                     */
+                                    getDefaultProps: function() {
+                                        return {
+                                            style: {
+                                                element: &#x27;img&#x27;,
+                                                styles: {
+                                                    &#x27;display&#x27;: &#x27;block&#x27;,
+                                                    &#x27;margin-left&#x27;: &#x27;50%&#x27;,
+                                                    &#x27;transform&#x27;: &#x27;translateX(-50%)&#x27;,
+                                                    &#x27;-ms-transform&#x27;: &#x27;translateX(-50%)&#x27;
+                                                }
+                                            }
+                                        };
+                                    },
                             
-                                            return statusElement;
-                                        }
+                                    /**
+                                     * Lifecycle. Renders the UI of the button.
+                                     *
+                                     * @method render
+                                     * @return {Object} The content which should be rendered.
+                                     */
+                                    render: function() {
+                                        var cssClass = &#x27;ae-button &#x27; + this.getStateClasses();
+                            
+                                        return (
+                                            &lt;button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-image-align-center&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}&gt;
+                                                &lt;span className=&quot;ae-icon-align-center&quot;&gt;&lt;/span&gt;
+                                            &lt;/button&gt;
+                                        );
                                     }
-                                );
+                                });
+                            
+                                AlloyEditor.Buttons[ButtonImageAlignCenter.key] = AlloyEditor.ButtonImageAlignCenter = ButtonImageAlignCenter;
                             }());
                                 </pre>
                             </div>
