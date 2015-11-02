@@ -119,6 +119,34 @@
             });
         });
 
+        describe('UI component integration', function() {
+            beforeEach(function(done) {
+                initEditor.call(this, done);
+            });
+
+            afterEach(function() {
+                cleanUpEditor.call(this);
+            });
+
+            it('should fire an editorUpdate event when the component state changes', function(done) {
+                var onEditorUpdate = sinon.stub();
+
+                var alloyEditor = this.alloyEditor;
+
+                var nativeEditor = alloyEditor.get('nativeEditor');
+
+                nativeEditor.on('editorUpdate', onEditorUpdate);
+
+                nativeEditor.on('uiReady', function() {
+                    alloyEditor._mainUI.setState({hidden: true});
+
+                    assert.ok(onEditorUpdate.calledOnce);
+
+                    done();
+                });
+            });
+        });
+
         it('should create an instance when the passed srcNode is a DOM element', function(done) {
             var el = document.createElement('div');
             el.setAttribute('id', 'editable1');

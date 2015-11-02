@@ -117,11 +117,20 @@
         componentDidUpdate: function (prevProps, prevState) {
             var domNode = React.findDOMNode(this);
 
+            var editor = this.props.editor.get('nativeEditor');
+
             if (domNode) {
-                this.props.editor.get('nativeEditor').fire('ariaUpdate', {
+                editor.fire('ariaUpdate', {
                     message: this._getAvailableToolbarsMessage(domNode)
                 });
             }
+
+            editor.fire('editorUpdate', {
+                prevProps: prevProps,
+                prevState: prevState,
+                props: this.props,
+                state: this.state
+            });
         },
 
         _getAriaUpdateTemplate: function(ariaUpdate) {
