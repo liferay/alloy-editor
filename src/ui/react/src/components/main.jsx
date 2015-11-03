@@ -110,7 +110,8 @@
 
         /**
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
-         * Fires 'ariaUpdate' event passing ARIA related messages.
+         * Fires `ariaUpdate` event passing ARIA related messages.
+         * Fires `editorUpdate` event passing the previous and current properties and state.
          *
          * @method componentDidUpdate
          */
@@ -330,6 +331,24 @@
             }
         }
     });
+
+    /**
+     * Fired when component updates and when it is rendered in the DOM.
+     * The payload consists from a `message` property containing the ARIA message.
+     *
+     * @event ariaUpdate
+     */
+
+    /**
+     * Fired when component updates. The payload consists from an object with the following
+     * properties:
+     * - prevProps - The previous properties of the component
+     * - prevState - The previous state of the component
+     * - props - The current properties of the component
+     * - state - The current state of the component
+     *
+     * @event ariaUpdate
+     */
 
     AlloyEditor.UI = UI;
 }());
