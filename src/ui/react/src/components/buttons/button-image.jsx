@@ -71,7 +71,7 @@
          * @param {SyntheticEvent} event The received click event on the button.
          */
         handleClick: function(event) {
-            React.findDOMNode(this.refs.fileInput).click();
+            ReactDOM.findDOMNode(this.refs.fileInput).click();
         },
 
         /**
@@ -86,7 +86,7 @@
          */
         _onInputChange: function() {
             var reader = new FileReader();
-            var inputEl = React.findDOMNode(this.refs.fileInput);
+            var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
 
             reader.onload = function(event) {
                 var editor = this.props.editor.get('nativeEditor');

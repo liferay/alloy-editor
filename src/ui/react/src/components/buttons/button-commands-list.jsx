@@ -56,7 +56,7 @@
          * @method componentDidMount
          */
         componentDidMount: function () {
-            React.findDOMNode(this).focus();
+            ReactDOM.findDOMNode(this).focus();
         },
 
         /**

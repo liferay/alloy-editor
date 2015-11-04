@@ -7,7 +7,7 @@
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
         var clientRect = table.getClientRect();
 
-        var toolbarNode = this.getDOMNode();
+        var toolbarNode = ReactDOM.findDOMNode(this);
         var halfToolbarWidth = toolbarNode.offsetWidth / 2;
         var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
 

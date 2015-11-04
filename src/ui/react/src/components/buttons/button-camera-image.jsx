@@ -38,7 +38,7 @@
          * @method componentDidMount
          */
         componentDidMount: function () {
-            React.findDOMNode(this.refs.buttonTakePhoto).focus();
+            ReactDOM.findDOMNode(this.refs.buttonTakePhoto).focus();
         },
 
         /**
@@ -85,8 +85,8 @@
          * @method takePhoto
          */
         takePhoto: function() {
-            var videoEl = React.findDOMNode(this.refs.videoContainer);
-            var canvasEl = React.findDOMNode(this.refs.canvasContainer);
+            var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
+            var canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
 
             var context = canvasEl.getContext('2d');
 
@@ -134,8 +134,8 @@
          * @param {Object} stream The video stream
          */
         _handleStreamSuccess: function(stream) {
-            var videoEl = React.findDOMNode(this.refs.videoContainer);
-            var canvasEl = React.findDOMNode(this.refs.canvasContainer);
+            var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
+            var canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
 
             videoEl.addEventListener('canplay', function(event) {
                 var height = videoEl.videoHeight / (videoEl.videoWidth/this.props.videoWidth);
@@ -162,7 +162,7 @@
 
             videoEl.play();
 
-            React.findDOMNode(this.refs.buttonTakePhoto).disabled = false;
+            ReactDOM.findDOMNode(this.refs.buttonTakePhoto).disabled = false;
         }
 
         /**

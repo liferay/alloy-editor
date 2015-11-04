@@ -23,7 +23,7 @@
   "esnext": true,
   "evil": false,
   "expr": false,
-  "predef": ["React", "global", "YUI", "CKEDITOR", "AlloyEditor", "bender", "chai", "it", "describe", "before", "after", "beforeEach", "afterEach", "fixture", "assert", "Utils", "TestUtils", "Simulate"],
+  "predef": ["React", "ReactDOM", "global", "YUI", "CKEDITOR", "AlloyEditor", "bender", "chai", "it", "describe", "before", "after", "beforeEach", "afterEach", "fixture", "assert", "Utils", "TestUtils", "Simulate"],
   "unused": true,
   "indent": 4,
   "funcscope": false,
