@@ -61,7 +61,7 @@
          */
         destructor: function() {
             if (this._editorUIElement) {
-                React.unmountComponentAtNode(this._editorUIElement);
+                ReactDOM.unmountComponentAtNode(this._editorUIElement);
                 this._editorUIElement.parentNode.removeChild(this._editorUIElement);
             }
 
@@ -106,7 +106,7 @@
 
             uiNode.appendChild(editorUIElement);
 
-            this._mainUI = React.render(React.createElement(AlloyEditor.UI, {
+            this._mainUI = ReactDOM.render(React.createElement(AlloyEditor.UI, {
                 editor: this,
                 eventsDelay: this.get('eventsDelay'),
                 toolbars: this.get('toolbars')

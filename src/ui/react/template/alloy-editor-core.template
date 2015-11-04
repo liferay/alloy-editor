@@ -19,6 +19,14 @@
         React = AlloyEditor.React;
     }
 
+    var ReactDOM = (function() {
+        return (0, eval)('this').ReactDOM;
+    }());
+
+    if (typeof React === 'undefined') {
+        ReactDOM = AlloyEditor.ReactDOM;
+    }
+
     if (typeof window !== 'undefined') {
         <%= ui %>
     }

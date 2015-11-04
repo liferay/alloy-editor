@@ -116,7 +116,7 @@
          * @method componentDidUpdate
          */
         componentDidUpdate: function (prevProps, prevState) {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             var editor = this.props.editor.get('nativeEditor');
 
@@ -314,7 +314,7 @@
          * @param {DOMElement} target The DOM element with which user interacted lastly.
          */
         _setUIHidden: function(target) {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (domNode) {
                 var editable = this.props.editor.get('nativeEditor').editable();

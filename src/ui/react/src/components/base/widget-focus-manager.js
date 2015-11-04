@@ -300,7 +300,7 @@
          * @method _refresh
          */
         _refresh: function() {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (domNode) {
                 var descendants = domNode.querySelectorAll(this.props.descendants);
