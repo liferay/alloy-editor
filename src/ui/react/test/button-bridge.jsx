@@ -31,9 +31,9 @@
 
             this.nativeEditor.once('buttonCommand', clickListener);
 
-            var button = React.render(<AlloyEditor.Buttons.ButtonCommand editor={this.editor} />, this.container);
+            var button = ReactDOM.render(<AlloyEditor.Buttons.ButtonCommand editor={this.editor} />, this.container);
 
-            Simulate.click(React.findDOMNode(button));
+            Simulate.click(ReactDOM.findDOMNode(button));
 
             assert.isTrue(clickListener.calledOnce);
         });
@@ -43,9 +43,9 @@
 
             this.nativeEditor.once('buttonClick', clickListener);
 
-            var button = React.render(<AlloyEditor.Buttons.ButtonClick editor={this.editor} />, this.container);
+            var button = ReactDOM.render(<AlloyEditor.Buttons.ButtonClick editor={this.editor} />, this.container);
 
-            Simulate.click(React.findDOMNode(button));
+            Simulate.click(ReactDOM.findDOMNode(button));
 
             assert.isTrue(clickListener.calledOnce);
         });
@@ -57,21 +57,21 @@
             this.nativeEditor.once('buttonClick', clickListener1);
             this.nativeEditor.once('buttonClick2', clickListener2);
 
-            var button = React.render(<AlloyEditor.Buttons.ButtonClick editor={this.editor} />, this.container);
+            var button = ReactDOM.render(<AlloyEditor.Buttons.ButtonClick editor={this.editor} />, this.container);
 
-            Simulate.click(React.findDOMNode(button));
+            Simulate.click(ReactDOM.findDOMNode(button));
 
             assert.isTrue(clickListener1.calledOnce);
             assert.equal(0, clickListener2.callCount);
         });
 
         it('should render the button icon with css class or style if it exists in ckeditor', function() {
-            var button = React.render(<AlloyEditor.Buttons.PasteFromWord editor={this.editor} />, this.container);
+            var button = ReactDOM.render(<AlloyEditor.Buttons.PasteFromWord editor={this.editor} />, this.container);
 
             var icon = TestUtils.findRenderedDOMComponentWithClass(button, 'ae-icon-pastefromword');
 
             assert.ok(icon);
-            assert.ok(icon.getDOMNode().getAttribute('style'));
+            assert.ok(icon.getAttribute('style'));
         });
     });
 }());

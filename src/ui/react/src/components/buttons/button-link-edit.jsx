@@ -104,7 +104,7 @@
          * @method _focusLinkInput
          */
         _focusLinkInput: function() {
-            React.findDOMNode(this.refs.linkInput).focus();
+            ReactDOM.findDOMNode(this.refs.linkInput).focus();
         },
 
         /**

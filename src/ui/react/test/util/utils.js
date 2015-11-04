@@ -13,10 +13,15 @@
             var Simulate = TestUtils.Simulate;
 
             var command = function() {
-                var dropdown = TestUtils.findRenderedDOMComponentWithClass(config.buttonDropdown, 'ae-dropdown');
+                var dropdown = TestUtils.findAllInRenderedTree(config.buttonDropdown, function(component) {
+                    return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonCommandsList);
+                });
 
-                var commandButtons = TestUtils.findAllInRenderedTree(dropdown, function(component) {
-                    return component.props.command === config.buttonCommand;
+                assert.ok(dropdown);
+                assert.equal(1, dropdown.length);
+
+                var commandButtons = TestUtils.findAllInRenderedTree(dropdown[0], function(component) {
+                    return !TestUtils.isDOMComponent(component) && component.props.command === config.buttonCommand;
                 });
 
                 assert.ok(commandButtons.length);
@@ -25,7 +30,7 @@
                     config.selectionFn.call(this);
                 }
 
-                Simulate.click(React.findDOMNode(commandButtons[0]));
+                Simulate.click(ReactDOM.findDOMNode(commandButtons[0]));
             };
 
             assertResult.call(this,

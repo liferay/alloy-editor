@@ -29,6 +29,14 @@
         React = AlloyEditor.React;
     }
 
+    var ReactDOM = (function() {
+        return (0, eval)('this').ReactDOM;
+    }());
+
+    if (typeof ReactDOM === 'undefined' && typeof AlloyEditor !== 'undefined') {
+        ReactDOM = AlloyEditor.ReactDOM;
+    }
+
     if (typeof window !== 'undefined') {
        deployCKEditor();
 

@@ -230,7 +230,7 @@
          */
         _updatePosition: function() {
             // If component is not mounted, there is nothing to do
-            if (!React.findDOMNode(this)) {
+            if (!ReactDOM.findDOMNode(this)) {
                 return;
             }
 

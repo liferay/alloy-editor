@@ -67,7 +67,7 @@
                     if (this.moveFocus) {
                         this.moveFocus(toggleDirection);
                     } else {
-                        React.findDOMNode(this).focus();
+                        ReactDOM.findDOMNode(this).focus();
                     }
                 }
             });

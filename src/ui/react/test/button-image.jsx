@@ -15,13 +15,13 @@
         afterEach(Utils.afterEach);
 
         it('should call a click listener of the file input', function() {
-            var buttonImage = React.render(<AlloyEditor.ButtonImage editor={this.editor} />, this.container);
+            var buttonImage = ReactDOM.render(<AlloyEditor.ButtonImage editor={this.editor} />, this.container);
 
             var fileInputStub = sinon.spy(function(event) {
                 event.preventDefault();
             });
 
-            React.findDOMNode(buttonImage.refs.fileInput).addEventListener('click', fileInputStub);
+            ReactDOM.findDOMNode(buttonImage.refs.fileInput).addEventListener('click', fileInputStub);
 
             buttonImage.handleClick();
 

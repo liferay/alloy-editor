@@ -109,7 +109,7 @@
          * @return {Array} An Array with left and top offsets in page coordinates.
          */
         getWidgetXYPoint: function(left, top, direction) {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             var gutter = this.props.gutter;
 
@@ -147,7 +147,7 @@
          * @return {Boolean} True if the widget is visible, false otherwise
          */
         isVisible: function() {
-            var domNode = this.getDOMNode();
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (domNode) {
                 var domElement = new CKEDITOR.dom.element(domNode);
@@ -166,7 +166,7 @@
          * @param  {Object} endPoint The destination point for the movement.
          */
         moveToPoint: function(startPoint, endPoint) {
-            var domElement = new CKEDITOR.dom.element(this.getDOMNode());
+            var domElement = new CKEDITOR.dom.element(ReactDOM.findDOMNode(this));
 
             domElement.setStyles({
                 left: startPoint[0] + 'px',
@@ -193,7 +193,7 @@
          * @method show
          */
         show: function() {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (!this.isVisible() && domNode) {
                 var interactionPoint = this.getInteractionPoint();
@@ -240,7 +240,7 @@
         updatePosition: function() {
             var interactionPoint = this.getInteractionPoint();
 
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (interactionPoint && domNode) {
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);

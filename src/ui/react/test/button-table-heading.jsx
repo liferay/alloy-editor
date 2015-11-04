@@ -22,7 +22,7 @@
         afterEach(Utils.afterEach);
 
         it('should render just the menu button when not expanded', function() {
-            var buttonTableHeading = React.render(<AlloyEditor.ButtonTableHeading editor={this.editor} expanded={false} />, this.container);
+            var buttonTableHeading = ReactDOM.render(<AlloyEditor.ButtonTableHeading editor={this.editor} expanded={false} />, this.container);
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableHeading, 'button');
 
@@ -33,12 +33,17 @@
         });
 
         it('should show a dropdown with the action buttons when expanded', function() {
-            var buttonTableHeading = React.render(<AlloyEditor.ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
+            var buttonTableHeading = ReactDOM.render(<AlloyEditor.ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
 
-            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonTableHeading, 'ae-dropdown');
-            var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown, 'button');
+            var dropdown = TestUtils.findAllInRenderedTree(buttonTableHeading, function(component) {
+                return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonCommandsList);
+            });
 
             assert.ok(dropdown);
+            assert.equal(1, dropdown.length);
+
+            var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown[0], 'button');
+
             assert.ok(actionButtons.length);
         });
 
@@ -74,7 +79,7 @@
                 var errorMessage = 'Changing table heading from ' + testData.initial + ' to ' + testData.expected + ' did not produce the expected result';
                 var initialFixture = headingFixtures[testData.initial];
                 var expectedFixture = headingFixtures[testData.expected];
-                var buttonDropdown = React.render(<AlloyEditor.ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
+                var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
                 var buttonCommand = 'tableHeading' + testData.expected;
 
                 Utils.assertDropdownCommandButtonResult.call(this,

@@ -25,7 +25,7 @@
         });
 
         it('should render just the menu button when not expanded', function() {
-            var panelMenuButton = React.render(<AlloyEditor.Buttons.ButtonPanelMenuButton editor={this.editor} expanded={false} />, this.container);
+            var panelMenuButton = ReactDOM.render(<AlloyEditor.Buttons.ButtonPanelMenuButton editor={this.editor} expanded={false} />, this.container);
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(panelMenuButton, 'button');
 
@@ -36,16 +36,19 @@
         });
 
         it('should show a dropdown with the panel css class and panel contents when expanded', function() {
-            var panelMenuButton = React.render(<AlloyEditor.Buttons.ButtonPanelMenuButton editor={this.editor} expanded={true} />, this.container);
+            var panelMenuButton = ReactDOM.render(<AlloyEditor.Buttons.ButtonPanelMenuButton editor={this.editor} expanded={true} />, this.container);
 
-            var dropdown = TestUtils.findRenderedDOMComponentWithClass(panelMenuButton, 'ae-dropdown');
+            var dropdown = TestUtils.findAllInRenderedTree(panelMenuButton, function(component) {
+                return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonDropdown);
+            });
 
             assert.ok(dropdown);
+            assert.equal(1, dropdown.length);
 
-            var panelContent = TestUtils.scryRenderedDOMComponentsWithClass(dropdown, 'test_panelmenubuttonbridge')[0];
+            var panelContent = TestUtils.scryRenderedDOMComponentsWithClass(dropdown[0], 'test_panelmenubuttonbridge')[0];
 
             assert.ok(panelContent);
-            assert.equal(panelContent.getDOMNode().innerHTML, '<span>panelMenuContent</span>');
+            assert.equal(panelContent.innerHTML, '<span>panelMenuContent</span>');
         });
     });
 }());
