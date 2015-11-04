@@ -18,9 +18,9 @@
         it('should make a text selection bold', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made bold.');
 
-            var buttonBold = React.render(<AlloyEditor.ButtonBold editor={this.editor} />, this.container);
+            var buttonBold = ReactDOM.render(<AlloyEditor.ButtonBold editor={this.editor} />, this.container);
 
-            Simulate.click(React.findDOMNode(buttonBold));
+            Simulate.click(ReactDOM.findDOMNode(buttonBold));
 
             var data = bender.tools.getData(this.nativeEditor, {
                 fixHtml: false,
@@ -33,9 +33,9 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'A <strong>{selection}</strong> made bold.');
 
-            var buttonBold = React.render(<AlloyEditor.ButtonBold editor={this.editor} />, this.container);
+            var buttonBold = ReactDOM.render(<AlloyEditor.ButtonBold editor={this.editor} />, this.container);
 
-            var buttonDOMNode = React.findDOMNode(buttonBold);
+            var buttonDOMNode = ReactDOM.findDOMNode(buttonBold);
 
             assert.strictEqual($(buttonDOMNode).hasClass('ae-button-pressed'), true);
         });

@@ -25,9 +25,9 @@
                 }
             };
 
-            var mainUI = React.render(<AlloyEditor.ToolbarAdd editor={this.editor} editorEvent={editorEvent}/>, this.container);
+            var mainUI = ReactDOM.render(<AlloyEditor.ToolbarAdd editor={this.editor} editorEvent={editorEvent}/>, this.container);
 
-            assert.isNull(React.findDOMNode(mainUI));
+            assert.isNull(ReactDOM.findDOMNode(mainUI));
         });
     });
 }());

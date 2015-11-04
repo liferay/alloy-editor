@@ -73,7 +73,7 @@ var filesToLoad = [
 
     /* ReactJS */
     {
-        pattern: path.join(alloyEditorDir, 'react-with-addons.js'),
+        pattern: path.join(alloyEditorDir, 'react-with-addons-all.js'),
         included: true,
         watched: false
     },

@@ -31,14 +31,14 @@
 
             this.nativeEditor.once('richComboRender', renderListener);
 
-            React.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} />, this.container);
+            ReactDOM.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} />, this.container);
 
             assert.isTrue(initListener.calledOnce);
             assert.isTrue(renderListener.calledOnce);
         });
 
         it('should render just the menu button when not expanded', function() {
-            var buttonRichCombo = React.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} expanded={false} />, this.container);
+            var buttonRichCombo = ReactDOM.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} expanded={false} />, this.container);
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(buttonRichCombo, 'button');
 
@@ -49,22 +49,32 @@
         });
 
         it('should show a dropdown with the action buttons when expanded', function() {
-            var buttonRichCombo = React.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} expanded={true} />, this.container);
+            var buttonRichCombo = ReactDOM.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} expanded={true} />, this.container);
 
-            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonRichCombo, 'ae-dropdown');
-            var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown, 'button');
+            var dropdown = TestUtils.findAllInRenderedTree(buttonRichCombo, function(component) {
+                return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonDropdown);
+            });
 
             assert.ok(dropdown);
+            assert.equal(1, dropdown.length);
+
+            var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown[0], 'button');
+
             assert.ok(actionButtons.length);
         });
 
         it('should show a dropdown with the action buttons when expanded', function() {
-            var buttonRichCombo = React.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} expanded={true} />, this.container);
+            var buttonRichCombo = ReactDOM.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} expanded={true} />, this.container);
 
-            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonRichCombo, 'ae-dropdown');
-            var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown, 'button');
+            var dropdown = TestUtils.findAllInRenderedTree(buttonRichCombo, function(component) {
+                return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonDropdown);
+            });
 
             assert.ok(dropdown);
+            assert.equal(1, dropdown.length);
+
+            var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown[0], 'button');
+
             assert.ok(actionButtons.length);
         });
 
@@ -77,15 +87,20 @@
 
             this.nativeEditor.once('richComboClick', clickListenerProxy);
 
-            var buttonRichCombo = React.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} expanded={true} />, this.container);
+            var buttonRichCombo = ReactDOM.render(<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} expanded={true} />, this.container);
 
-            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonRichCombo, 'ae-dropdown');
-
-            var richComboItem = TestUtils.findAllInRenderedTree(dropdown, function(component) {
-                return component.props['data-value'] === 'entry2';
+            var dropdown = TestUtils.findAllInRenderedTree(buttonRichCombo, function(component) {
+                return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonDropdown);
             });
 
-            Simulate.click(React.findDOMNode(richComboItem[0]));
+            assert.ok(dropdown);
+            assert.equal(1, dropdown.length);
+
+            var richComboItem = TestUtils.findAllInRenderedTree(dropdown[0], function(component) {
+                return TestUtils.isDOMComponent(component) && component.getAttribute('data-value') === 'entry2';
+            });
+
+            Simulate.click(ReactDOM.findDOMNode(richComboItem[0]));
 
             assert.isTrue(clickListener.calledOnce);
             assert.isTrue(clickListener.calledWith('entry2'));
