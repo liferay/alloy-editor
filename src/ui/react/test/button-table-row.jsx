@@ -16,7 +16,7 @@
         afterEach(Utils.afterEach);
 
         it('should render just the menu button when not expanded', function() {
-            var buttonTableRow = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={false} />, this.container);
+            var buttonTableRow = ReactDOM.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={false} />, this.container);
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableRow, 'button');
 
@@ -27,19 +27,24 @@
         });
 
         it('should show a dropdown with the action buttons when expanded', function() {
-            var buttonTableRow = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
+            var buttonTableRow = ReactDOM.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
 
-            var dropdown = TestUtils.findRenderedDOMComponentWithClass(buttonTableRow, 'ae-dropdown');
-            var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown, 'button');
+            var dropdown = TestUtils.findAllInRenderedTree(buttonTableRow, function(component) {
+                return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonCommandsList);
+            });
 
             assert.ok(dropdown);
+            assert.equal(1, dropdown.length);
+
+            var actionButtons = TestUtils.scryRenderedDOMComponentsWithTag(dropdown[0], 'button');
+
             assert.ok(actionButtons.length);
         });
 
         it('should insert a row before the current one when clicking on the rowInsertBefore button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '4_by_3_table_second_row_empty.html';
-            var buttonDropdown = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'rowInsertBefore';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
@@ -53,7 +58,7 @@
         it('should insert a row after the current one when clicking on the rowInsertAfter button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '4_by_3_table_third_row_empty.html';
-            var buttonDropdown = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'rowInsertAfter';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
@@ -67,7 +72,7 @@
         it('should delete the current row when clicking on the rowDelete button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '2_by_3_table.html';
-            var buttonDropdown = React.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableRow editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'rowDelete';
 
             Utils.assertDropdownCommandButtonResult.call(this, {

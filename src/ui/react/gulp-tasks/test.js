@@ -40,7 +40,7 @@ gulp.task('copy-language-files', function() {
 });
 
 gulp.task('copy-react', function() {
-    return gulp.src(path.join(reactDir, 'vendor', 'react-with-addons.js'))
+    return gulp.src(path.join(reactDir, 'vendor', 'react-with-addons-all.js'))
         .pipe(gulp.dest(editorDistFolder));
 });
 

@@ -15,7 +15,7 @@
         afterEach(Utils.afterEach);
 
         it('should constrain the toolbar\'s position', function() {
-            var toolbarStyles = React.render(<AlloyEditor.ToolbarStyles editor={this.editor}/>, this.container);
+            var toolbarStyles = ReactDOM.render(<AlloyEditor.ToolbarStyles editor={this.editor}/>, this.container);
 
             var res = toolbarStyles.getConstrainedPosition({
                 height: 50,

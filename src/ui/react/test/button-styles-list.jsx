@@ -25,7 +25,7 @@
                 }
             ];
 
-            var buttonStylesList = React.render(<AlloyEditor.ButtonStylesList editor={this.editor} styles={styles} />, this.container);
+            var buttonStylesList = ReactDOM.render(<AlloyEditor.ButtonStylesList editor={this.editor} styles={styles} />, this.container);
 
             assert.isObject(TestUtils.findRenderedComponentWithType(buttonStylesList, AlloyEditor.ButtonStylesListItemRemove));
         });
@@ -40,7 +40,7 @@
                 }
             ];
 
-            var buttonStylesList = React.render(<AlloyEditor.ButtonStylesList editor={this.editor} showRemoveStylesItem={false} styles={styles} />, this.container);
+            var buttonStylesList = ReactDOM.render(<AlloyEditor.ButtonStylesList editor={this.editor} showRemoveStylesItem={false} styles={styles} />, this.container);
 
             assert.throws(function() {
                 TestUtils.findRenderedComponentWithType(buttonStylesList, AlloyEditor.ButtonStylesListItemRemove)
