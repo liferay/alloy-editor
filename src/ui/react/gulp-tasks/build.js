@@ -65,6 +65,8 @@ gulp.task('release', function(callback) {
     runSequence(
         'clean-api',
         'clean-dist',
+        'create-react-all',
+        'create-react-with-addons-all',
         [
             'build-api',
             'build-css',
@@ -170,7 +172,7 @@ gulp.task('create-alloy-editor-all', function() {
             alloyeditorMain: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-main.js')).toString(),
             alloyeditorUI: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-ui.js')).toString(),
             ckeditor: fs.readFileSync(path.join(editorDistFolder, 'ckeditor.js')).toString(),
-            react: fs.readFileSync(path.join(reactDir, 'vendor', 'react.js')).toString(),
+            react: fs.readFileSync(path.join(reactDir, 'vendor', 'react-all.js')).toString(),
             version: pkg.version
         }))
         .pipe(replace(regexCKEditor, 'alloy-editor-all$1.js'))
@@ -184,7 +186,7 @@ gulp.task('create-alloy-editor-no-ckeditor', function() {
             alloyeditorMain: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-main.js')).toString(),
             alloyeditorUI: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-ui.js')).toString(),
             ckeditor: '',
-            react: fs.readFileSync(path.join(reactDir, 'vendor', 'react.js')).toString(),
+            react: fs.readFileSync(path.join(reactDir, 'vendor', 'react-all.js')).toString(),
             version: pkg.version
         }))
         .pipe(rename('alloy-editor-no-ckeditor.js'))
@@ -260,6 +262,36 @@ gulp.task('create-alloy-editor-main', function() {
     .pipe(gulp.dest(editorDistFolder));
 });
 
+gulp.task('create-react-all', function() {
+    if (!fs.existsSync(path.join(reactDir, 'vendor', 'react-all.js'))) {
+        return gulp.src([
+                path.join(reactDir, 'vendor', 'react.js'),
+                path.join(reactDir, 'vendor', 'react-dom.js')
+            ])
+            .pipe(concat('react-all.js'))
+            .pipe(gulp.dest(path.join(reactDir, 'vendor')));
+    } else {
+        return gulp.src([
+            path.join(reactDir, 'vendor', 'react-all.js')
+        ]);
+    }
+});
+
+gulp.task('create-react-with-addons-all', function() {
+    if (!fs.existsSync(path.join(reactDir, 'vendor', 'react-with-addons-all.js'))) {
+        return gulp.src([
+                path.join(reactDir, 'vendor', 'react-with-addons.js'),
+                path.join(reactDir, 'vendor', 'react-dom.js')
+            ])
+            .pipe(concat('react-with-addons-all.js'))
+            .pipe(gulp.dest(path.join(reactDir, 'vendor')));
+    } else {
+        return gulp.src([
+            path.join(reactDir, 'vendor', 'react-with-addons-all.js')
+        ]);
+    }
+});
+
 gulp.task('release:zip', ['release'], function() {
     return gulp.src(path.join(distFolder, '/**'))
         .pipe(zip('alloy-editor-' + pkg.version + '.zip'))
@@ -292,7 +324,7 @@ gulp.task('minimize-alloy-editor-ui', function() {
 gulp.task('minimize-react', function() {
     if (!fs.existsSync(path.join(reactDir, 'vendor', 'react-min.js'))) {
         return gulp.src([
-                path.join(reactDir, 'vendor', 'react.js')
+                path.join(reactDir, 'vendor', 'react-all.js')
             ])
             .pipe(replace(regexReact.production.regex, regexReact.production.replace))
             .pipe(uglify())
