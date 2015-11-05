@@ -11,30 +11,18 @@
  */
 // Based off https://github.com/ForbesLindesay/umd/blob/master/template.js
 ;(function(f) {
-  // CommonJS
-  if (typeof exports === "object" && typeof module !== "undefined") {
-    module.exports = f(require('react'));
-
-  // RequireJS
-  } else if (typeof define === "function" && define.amd) {
-    define(['react'], f);
-
-  // <script>
+  if (typeof module !== "undefined" && typeof module.exports === "object") {
+    module.exports.ReactDOM = f(module.exports.React);
+  } else if (typeof AlloyEditor === "object") {
+    AlloyEditor.ReactDOM = f(AlloyEditor.React);
+  } else if (typeof window !== "undefined") {
+    window.ReactDOM = f(window.React);
+  } else if (typeof self !== "undefined") {
+    self.ReactDOM = f(self.React);
+  } else if (typeof global !== "undefined") {
+    global.ReactDOM = f(global.React);
   } else {
-    var g
-    if (typeof window !== "undefined") {
-      g = window;
-    } else if (typeof global !== "undefined") {
-      g = global;
-    } else if (typeof self !== "undefined") {
-      g = self;
-    } else {
-      // works providing we're not in "use strict";
-      // needed for Java 8 Nashorn
-      // see https://github.com/facebook/react/issues/3037
-      g = this;
-    }
-    g.ReactDOM = f(g.React);
+    this.ReactDOM = f(this.React);
   }
 
 })(function(React) {
