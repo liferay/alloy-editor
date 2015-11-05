@@ -8,6 +8,7 @@
     }, {
         name: 'image',
         buttons: ['imageLeft', 'imageCenter', 'imageRight'],
+        setPosition: AlloyEditor.SelectionSetPosition.image,
         test: AlloyEditor.SelectionTest.image
     }, {
         name: 'text',
