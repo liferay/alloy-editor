@@ -30,7 +30,7 @@ var regexCKEditor = /ckeditor(\\?).js/;
 
 var regexReact = {
     production: {
-        regex: '"production"\ !==\ "development"',
+        regex: '"development"\ !==\ \'production\'',
         replace: '"production"\ !==\ "production"'
     }
 };
