@@ -31530,10 +31530,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 this._setUIHidden(document.activeElement);
             }, this.props.eventsDelay, this);
 
-            editor.once('contentDom', (function () {
-                document.addEventListener('mousedown', this._mousedownListener);
-                document.addEventListener('keydown', this._keyDownListener);
-            }).bind(this));
+            document.addEventListener('mousedown', this._mousedownListener);
+            document.addEventListener('keydown', this._keyDownListener);
         },
 
         /**

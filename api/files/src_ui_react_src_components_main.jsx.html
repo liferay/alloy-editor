@@ -274,10 +274,8 @@
                                             this._setUIHidden(document.activeElement);
                                         }, this.props.eventsDelay, this);
                             
-                                        editor.once(&#x27;contentDom&#x27;, function() {
-                                            document.addEventListener(&#x27;mousedown&#x27;, this._mousedownListener);
-                                            document.addEventListener(&#x27;keydown&#x27;, this._keyDownListener);
-                                        }.bind(this));
+                                        document.addEventListener(&#x27;mousedown&#x27;, this._mousedownListener);
+                                        document.addEventListener(&#x27;keydown&#x27;, this._keyDownListener);
                                     },
                             
                                     /**
