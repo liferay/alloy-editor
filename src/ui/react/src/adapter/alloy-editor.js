@@ -43,7 +43,7 @@
 
             AlloyEditor.Lang.mix(editor.config, config);
 
-            editor.once('focus', function() {
+            editor.once('contentDom', function() {
                 editor.editable().addClass('ae-editable');
             });
 
