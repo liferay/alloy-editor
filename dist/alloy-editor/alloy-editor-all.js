@@ -25584,24 +25584,66 @@ CKEDITOR.tools.buildTableMap = function (table) {
 (function () {
     'use strict';
 
+    // Default gutter value for toolbar positioning
+    var DEFAULT_GUTTER = {
+        left: 0,
+        top: 0
+    };
+
+    /**
+     * Centers a Toolbar according to given rectangle
+     *
+     * @method centerToolbar
+     * @param {Object} toolbar The toolbar to be centered
+     * @param {Object} rect The rectangle according to which the Toolbar will be centered
+     */
+    var centerToolbar = function centerToolbar(toolbar, rect) {
+        var toolbarNode = ReactDOM.findDOMNode(toolbar);
+
+        var halfNodeWidth = toolbarNode.offsetWidth / 2;
+        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+
+        var gutter = toolbar.props.gutter || DEFAULT_GUTTER;
+
+        var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+
+        toolbar.moveToPoint([widgetXY[0], widgetXY[1]], [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top]);
+    };
+
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method imageSelectionSetPosition
+     * @param {Object} payload Payload, should contain the selection data for retrieving the
+     * client rectangle of the selected image
+     * @return {Boolean} True, in all cases
+     */
+    var imageSelectionSetPosition = function imageSelectionSetPosition(payload) {
+        centerToolbar(this, payload.selectionData.element.getClientRect());
+
+        return true;
+    };
+
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method tableSelectionSetPosition
+     * @param {Object} payload Object, which contains the selection data for retrieving the
+     * client rectangle of the selected table
+     * @return {Boolean} True, in all cases
+     */
     var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
-        var clientRect = table.getClientRect();
 
-        var toolbarNode = ReactDOM.findDOMNode(this);
-        var halfToolbarWidth = toolbarNode.offsetWidth / 2;
-        var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
-
-        var widgetXY = this.getWidgetXYPoint(clientRect.left + clientRect.width / 2 - scrollPos.x, clientRect.top + scrollPos.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
-
-        this.moveToPoint([widgetXY[0], widgetXY[1]], [clientRect.left + clientRect.width / 2 - halfToolbarWidth - scrollPos.x, clientRect.top - toolbarNode.offsetHeight + scrollPos.y]);
+        centerToolbar(this, table.getClientRect());
 
         return true;
     };
 
     AlloyEditor.SelectionSetPosition = {
+        image: imageSelectionSetPosition,
         table: tableSelectionSetPosition
     };
 })();
@@ -25662,6 +25704,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
     }, {
         name: 'image',
         buttons: ['imageLeft', 'imageCenter', 'imageRight'],
+        setPosition: AlloyEditor.SelectionSetPosition.image,
         test: AlloyEditor.SelectionTest.image
     }, {
         name: 'text',
