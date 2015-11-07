@@ -366,7 +366,9 @@
                             
                                 if (typeof module !== &#x27;undefined&#x27; &amp;&amp; typeof module.exports === &#x27;object&#x27;) {
                                     module.exports = AlloyEditor;
-                                } else if (typeof window !== &#x27;undefined&#x27;) {
+                                }
+                            
+                                if (typeof window !== &#x27;undefined&#x27;) {
                                     window.AlloyEditor = AlloyEditor;
                                 } else if(typeof global !== &#x27;undefined&#x27;) {
                                     global.AlloyEditor = AlloyEditor;

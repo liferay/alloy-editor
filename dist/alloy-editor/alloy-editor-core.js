@@ -204,14 +204,10 @@
          */
     };
 
-    /**
-     * The first condition provides compliance with CommonJS exports. All the subsequent
-     * conditions make sure that a global AlloyEditor is available at runtime, as that is
-     * required further down in the code.
-     */
     if (typeof module !== 'undefined' && typeof module.exports === 'object') {
         module.exports = AlloyEditor;
     }
+
     if (typeof window !== 'undefined') {
         window.AlloyEditor = AlloyEditor;
     } else if (typeof global !== 'undefined') {
