@@ -194,7 +194,9 @@
 
     if (typeof module !== 'undefined' && typeof module.exports === 'object') {
         module.exports = AlloyEditor;
-    } else if (typeof window !== 'undefined') {
+    }
+
+    if (typeof window !== 'undefined') {
         window.AlloyEditor = AlloyEditor;
     } else if(typeof global !== 'undefined') {
         global.AlloyEditor = AlloyEditor;
