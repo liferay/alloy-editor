@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.6.0</b>
+                        API Docs for Version: <b>0.7.0</b>
                     </p>
                 </li>
             </div>
@@ -274,26 +274,34 @@
                                             this._setUIHidden(document.activeElement);
                                         }, this.props.eventsDelay, this);
                             
-                                        editor.once(&#x27;contentDom&#x27;, function() {
-                                            document.addEventListener(&#x27;mousedown&#x27;, this._mousedownListener);
-                                            document.addEventListener(&#x27;keydown&#x27;, this._keyDownListener);
-                                        }.bind(this));
+                                        document.addEventListener(&#x27;mousedown&#x27;, this._mousedownListener);
+                                        document.addEventListener(&#x27;keydown&#x27;, this._keyDownListener);
                                     },
                             
                                     /**
                                      * Lifecycle. Invoked immediately after the component&#x27;s updates are flushed to the DOM.
-                                     * Fires &#x27;ariaUpdate&#x27; event passing ARIA related messages.
+                                     * Fires &#x60;ariaUpdate&#x60; event passing ARIA related messages.
+                                     * Fires &#x60;editorUpdate&#x60; event passing the previous and current properties and state.
                                      *
                                      * @method componentDidUpdate
                                      */
                                     componentDidUpdate: function (prevProps, prevState) {
-                                        var domNode = React.findDOMNode(this);
+                                        var domNode = ReactDOM.findDOMNode(this);
+                            
+                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
                             
                                         if (domNode) {
-                                            this.props.editor.get(&#x27;nativeEditor&#x27;).fire(&#x27;ariaUpdate&#x27;, {
+                                            editor.fire(&#x27;ariaUpdate&#x27;, {
                                                 message: this._getAvailableToolbarsMessage(domNode)
                                             });
                                         }
+                            
+                                        editor.fire(&#x27;editorUpdate&#x27;, {
+                                            prevProps: prevProps,
+                                            prevState: prevState,
+                                            props: this.props,
+                                            state: this.state
+                                        });
                                     },
                             
                                     _getAriaUpdateTemplate: function(ariaUpdate) {
@@ -476,7 +484,7 @@
                                      * @param {DOMElement} target The DOM element with which user interacted lastly.
                                      */
                                     _setUIHidden: function(target) {
-                                        var domNode = React.findDOMNode(this);
+                                        var domNode = ReactDOM.findDOMNode(this);
                             
                                         if (domNode) {
                                             var editable = this.props.editor.get(&#x27;nativeEditor&#x27;).editable();
@@ -493,6 +501,24 @@
                                         }
                                     }
                                 });
+                            
+                                /**
+                                 * Fired when component updates and when it is rendered in the DOM.
+                                 * The payload consists from a &#x60;message&#x60; property containing the ARIA message.
+                                 *
+                                 * @event ariaUpdate
+                                 */
+                            
+                                /**
+                                 * Fired when component updates. The payload consists from an object with the following
+                                 * properties:
+                                 * - prevProps - The previous properties of the component
+                                 * - prevState - The previous state of the component
+                                 * - props - The current properties of the component
+                                 * - state - The current state of the component
+                                 *
+                                 * @event ariaUpdate
+                                 */
                             
                                 AlloyEditor.UI = UI;
                             }());

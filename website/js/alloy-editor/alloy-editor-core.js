@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v0.6.0
+ * AlloyEditor v0.7.0
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -206,7 +206,9 @@
 
     if (typeof module !== 'undefined' && typeof module.exports === 'object') {
         module.exports = AlloyEditor;
-    } else if (typeof window !== 'undefined') {
+    }
+
+    if (typeof window !== 'undefined') {
         window.AlloyEditor = AlloyEditor;
     } else if (typeof global !== 'undefined') {
         global.AlloyEditor = AlloyEditor;
@@ -223,6 +225,14 @@
 
     if (typeof React === 'undefined') {
         React = AlloyEditor.React;
+    }
+
+    var ReactDOM = (function() {
+        return (0, eval)('this').ReactDOM;
+    }());
+
+    if (typeof React === 'undefined') {
+        ReactDOM = AlloyEditor.ReactDOM;
     }
 
     if (typeof window !== 'undefined') {
@@ -4604,24 +4614,66 @@ CKEDITOR.tools.buildTableMap = function (table) {
 (function () {
     'use strict';
 
+    // Default gutter value for toolbar positioning
+    var DEFAULT_GUTTER = {
+        left: 0,
+        top: 0
+    };
+
+    /**
+     * Centers a Toolbar according to given rectangle
+     *
+     * @method centerToolbar
+     * @param {Object} toolbar The toolbar to be centered
+     * @param {Object} rect The rectangle according to which the Toolbar will be centered
+     */
+    var centerToolbar = function centerToolbar(toolbar, rect) {
+        var toolbarNode = ReactDOM.findDOMNode(toolbar);
+
+        var halfNodeWidth = toolbarNode.offsetWidth / 2;
+        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+
+        var gutter = toolbar.props.gutter || DEFAULT_GUTTER;
+
+        var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+
+        toolbar.moveToPoint([widgetXY[0], widgetXY[1]], [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top]);
+    };
+
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method imageSelectionSetPosition
+     * @param {Object} payload Payload, should contain the selection data for retrieving the
+     * client rectangle of the selected image
+     * @return {Boolean} True, in all cases
+     */
+    var imageSelectionSetPosition = function imageSelectionSetPosition(payload) {
+        centerToolbar(this, payload.selectionData.element.getClientRect());
+
+        return true;
+    };
+
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method tableSelectionSetPosition
+     * @param {Object} payload Object, which contains the selection data for retrieving the
+     * client rectangle of the selected table
+     * @return {Boolean} True, in all cases
+     */
     var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
-        var clientRect = table.getClientRect();
 
-        var toolbarNode = this.getDOMNode();
-        var halfToolbarWidth = toolbarNode.offsetWidth / 2;
-        var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
-
-        var widgetXY = this.getWidgetXYPoint(clientRect.left + clientRect.width / 2 - scrollPos.x, clientRect.top + scrollPos.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
-
-        this.moveToPoint([widgetXY[0], widgetXY[1]], [clientRect.left + clientRect.width / 2 - halfToolbarWidth - scrollPos.x, clientRect.top - toolbarNode.offsetHeight + scrollPos.y]);
+        centerToolbar(this, table.getClientRect());
 
         return true;
     };
 
     AlloyEditor.SelectionSetPosition = {
+        image: imageSelectionSetPosition,
         table: tableSelectionSetPosition
     };
 })();
@@ -4682,6 +4734,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
     }, {
         name: 'image',
         buttons: ['imageLeft', 'imageCenter', 'imageRight'],
+        setPosition: AlloyEditor.SelectionSetPosition.image,
         test: AlloyEditor.SelectionTest.image
     }, {
         name: 'text',
@@ -4762,7 +4815,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          */
         destructor: function destructor() {
             if (this._editorUIElement) {
-                React.unmountComponentAtNode(this._editorUIElement);
+                ReactDOM.unmountComponentAtNode(this._editorUIElement);
                 this._editorUIElement.parentNode.removeChild(this._editorUIElement);
             }
 
@@ -4807,7 +4860,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             uiNode.appendChild(editorUIElement);
 
-            this._mainUI = React.render(React.createElement(AlloyEditor.UI, {
+            this._mainUI = ReactDOM.render(React.createElement(AlloyEditor.UI, {
                 editor: this,
                 eventsDelay: this.get('eventsDelay'),
                 toolbars: this.get('toolbars')
@@ -5392,7 +5445,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                     if (this.moveFocus) {
                         this.moveFocus(toggleDirection);
                     } else {
-                        React.findDOMNode(this).focus();
+                        ReactDOM.findDOMNode(this).focus();
                     }
                 }
             });
@@ -5801,7 +5854,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method _refresh
          */
         _refresh: function _refresh() {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (domNode) {
                 var descendants = domNode.querySelectorAll(this.props.descendants);
@@ -6082,7 +6135,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Array} An Array with left and top offsets in page coordinates.
          */
         getWidgetXYPoint: function getWidgetXYPoint(left, top, direction) {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             var gutter = this.props.gutter;
 
@@ -6115,7 +6168,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Boolean} True if the widget is visible, false otherwise
          */
         isVisible: function isVisible() {
-            var domNode = this.getDOMNode();
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (domNode) {
                 var domElement = new CKEDITOR.dom.element(domNode);
@@ -6134,7 +6187,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @param  {Object} endPoint The destination point for the movement.
          */
         moveToPoint: function moveToPoint(startPoint, endPoint) {
-            var domElement = new CKEDITOR.dom.element(this.getDOMNode());
+            var domElement = new CKEDITOR.dom.element(ReactDOM.findDOMNode(this));
 
             domElement.setStyles({
                 left: startPoint[0] + 'px',
@@ -6161,7 +6214,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method show
          */
         show: function show() {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (!this.isVisible() && domNode) {
                 var interactionPoint = this.getInteractionPoint();
@@ -6205,7 +6258,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
         updatePosition: function updatePosition() {
             var interactionPoint = this.getInteractionPoint();
 
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (interactionPoint && domNode) {
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
@@ -6369,7 +6422,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
-            React.findDOMNode(this.refs.buttonTakePhoto).focus();
+            ReactDOM.findDOMNode(this.refs.buttonTakePhoto).focus();
         },
 
         /**
@@ -6421,8 +6474,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method takePhoto
          */
         takePhoto: function takePhoto() {
-            var videoEl = React.findDOMNode(this.refs.videoContainer);
-            var canvasEl = React.findDOMNode(this.refs.canvasContainer);
+            var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
+            var canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
 
             var context = canvasEl.getContext('2d');
 
@@ -6470,8 +6523,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @param {Object} stream The video stream
          */
         _handleStreamSuccess: function _handleStreamSuccess(stream) {
-            var videoEl = React.findDOMNode(this.refs.videoContainer);
-            var canvasEl = React.findDOMNode(this.refs.canvasContainer);
+            var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
+            var canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
 
             videoEl.addEventListener('canplay', (function (event) {
                 var height = videoEl.videoHeight / (videoEl.videoWidth / this.props.videoWidth);
@@ -6498,7 +6551,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
             videoEl.play();
 
-            React.findDOMNode(this.refs.buttonTakePhoto).disabled = false;
+            ReactDOM.findDOMNode(this.refs.buttonTakePhoto).disabled = false;
         }
 
         /**
@@ -6817,7 +6870,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
-            React.findDOMNode(this).focus();
+            ReactDOM.findDOMNode(this).focus();
         },
 
         /**
@@ -7575,7 +7628,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @param {SyntheticEvent} event The received click event on the button.
          */
         handleClick: function handleClick(event) {
-            React.findDOMNode(this.refs.fileInput).click();
+            ReactDOM.findDOMNode(this.refs.fileInput).click();
         },
 
         /**
@@ -7590,7 +7643,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          */
         _onInputChange: function _onInputChange() {
             var reader = new FileReader();
-            var inputEl = React.findDOMNode(this.refs.fileInput);
+            var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
 
             reader.onload = (function (event) {
                 var editor = this.props.editor.get('nativeEditor');
@@ -7830,7 +7883,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method _focusLinkInput
          */
         _focusLinkInput: function _focusLinkInput() {
-            React.findDOMNode(this.refs.linkInput).focus();
+            ReactDOM.findDOMNode(this.refs.linkInput).focus();
         },
 
         /**
@@ -8998,7 +9051,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
-            React.findDOMNode(this).focus();
+            ReactDOM.findDOMNode(this).focus();
         },
 
         /**
@@ -9801,7 +9854,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
-            React.findDOMNode(this.refs.rows).focus();
+            ReactDOM.findDOMNode(this.refs.rows).focus();
         },
 
         /**
@@ -10865,7 +10918,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          */
         _updatePosition: function _updatePosition() {
             // If component is not mounted, there is nothing to do
-            if (!React.findDOMNode(this)) {
+            if (!ReactDOM.findDOMNode(this)) {
                 return;
             }
 
@@ -10880,7 +10933,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 }
 
                 if (region) {
-                    var domNode = React.findDOMNode(this);
+                    var domNode = ReactDOM.findDOMNode(this);
                     var domElement = new CKEDITOR.dom.element(domNode);
 
                     var startRect = region.startRect || region;
@@ -11134,7 +11187,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          */
         _updatePosition: function _updatePosition() {
             // If component is not mounted, there is nothing to do
-            if (!React.findDOMNode(this)) {
+            if (!ReactDOM.findDOMNode(this)) {
                 return;
             }
 
@@ -11272,26 +11325,34 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 this._setUIHidden(document.activeElement);
             }, this.props.eventsDelay, this);
 
-            editor.once('contentDom', (function () {
-                document.addEventListener('mousedown', this._mousedownListener);
-                document.addEventListener('keydown', this._keyDownListener);
-            }).bind(this));
+            document.addEventListener('mousedown', this._mousedownListener);
+            document.addEventListener('keydown', this._keyDownListener);
         },
 
         /**
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
-         * Fires 'ariaUpdate' event passing ARIA related messages.
+         * Fires `ariaUpdate` event passing ARIA related messages.
+         * Fires `editorUpdate` event passing the previous and current properties and state.
          *
          * @method componentDidUpdate
          */
         componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
+
+            var editor = this.props.editor.get('nativeEditor');
 
             if (domNode) {
-                this.props.editor.get('nativeEditor').fire('ariaUpdate', {
+                editor.fire('ariaUpdate', {
                     message: this._getAvailableToolbarsMessage(domNode)
                 });
             }
+
+            editor.fire('editorUpdate', {
+                prevProps: prevProps,
+                prevState: prevState,
+                props: this.props,
+                state: this.state
+            });
         },
 
         _getAriaUpdateTemplate: function _getAriaUpdateTemplate(ariaUpdate) {
@@ -11474,7 +11535,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @param {DOMElement} target The DOM element with which user interacted lastly.
          */
         _setUIHidden: function _setUIHidden(target) {
-            var domNode = React.findDOMNode(this);
+            var domNode = ReactDOM.findDOMNode(this);
 
             if (domNode) {
                 var editable = this.props.editor.get('nativeEditor').editable();
@@ -11490,6 +11551,24 @@ CKEDITOR.tools.buildTableMap = function (table) {
             }
         }
     });
+
+    /**
+     * Fired when component updates and when it is rendered in the DOM.
+     * The payload consists from a `message` property containing the ARIA message.
+     *
+     * @event ariaUpdate
+     */
+
+    /**
+     * Fired when component updates. The payload consists from an object with the following
+     * properties:
+     * - prevProps - The previous properties of the component
+     * - prevState - The previous state of the component
+     * - props - The current properties of the component
+     * - state - The current state of the component
+     *
+     * @event ariaUpdate
+     */
 
     AlloyEditor.UI = UI;
 })();

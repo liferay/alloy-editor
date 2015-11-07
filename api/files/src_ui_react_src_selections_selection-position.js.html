@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/buttons/button-code.jsx - alloyeditor</title>
+    <title>src/ui/react/src/selections/selection-position.js - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -165,95 +165,82 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-code.jsx</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/selections/selection-position.js</code></h1>
                             </div>
                             
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            (function () {
+                            (function() {
                                 &#x27;use strict&#x27;;
                             
+                                // Default gutter value for toolbar positioning
+                                var DEFAULT_GUTTER = {
+                                    left: 0,
+                                    top: 0
+                                };
+                            
                                 /**
-                                 * The ButtonCode class provides wraps a selection in &#x60;pre&#x60; element.
+                                 * Centers a Toolbar according to given rectangle
                                  *
-                                 * @uses ButtonActionStyle
-                                 * @uses ButtonStateClasses
-                                 * @uses ButtonStyle
-                                 *
-                                 * @class ButtonCode
+                                 * @method centerToolbar
+                                 * @param {Object} toolbar The toolbar to be centered
+                                 * @param {Object} rect The rectangle according to which the Toolbar will be centered
                                  */
-                                var ButtonCode = React.createClass({
-                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+                                var centerToolbar = function(toolbar, rect) {
+                                    var toolbarNode = ReactDOM.findDOMNode(toolbar);
                             
-                                    // Allows validating props being passed to the component.
-                                    propTypes: {
-                                        /**
-                                         * The editor instance where the component is being used.
-                                         *
-                                         * @property {Object} editor
-                                         */
-                                        editor: React.PropTypes.object.isRequired,
+                                    var halfNodeWidth = toolbarNode.offsetWidth / 2;
+                                    var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
                             
-                                        /**
-                                         * The label that should be used for accessibility purposes.
-                                         *
-                                         * @property {String} label
-                                         */
-                                        label: React.PropTypes.string,
+                                    var gutter = toolbar.props.gutter || DEFAULT_GUTTER;
                             
-                                        /**
-                                         * The tabIndex of the button in its toolbar current state. A value other than -1
-                                         * means that the button has focus and is the active element.
-                                         *
-                                         * @property {Number} tabIndex
-                                         */
-                                        tabIndex: React.PropTypes.number
-                                    },
+                                    var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
                             
-                                    // Lifecycle. Provides static properties to the widget.
-                                    statics: {
-                                        /**
-                                         * The name which will be used as an alias of the button in the configuration.
-                                         *
-                                         * @static
-                                         * @property {String} key
-                                         * @default code
-                                         */
-                                        key: &#x27;code&#x27;
-                                    },
+                                    toolbar.moveToPoint([
+                                        widgetXY[0],
+                                        widgetXY[1]
+                                    ], [
+                                        rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
+                                        rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top
+                                    ]);
+                                };
                             
-                                    /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     * @return {Object} The default properties.
-                                     */
-                                    getDefaultProps: function() {
-                                        return {
-                                            style: {
-                                                element: &#x27;pre&#x27;
-                                            }
-                                        };
-                                    },
+                                /**
+                                 * Sets the position of a toolbar according to the position of the selected image
+                                 *
+                                 * @method imageSelectionSetPosition
+                                 * @param {Object} payload Payload, should contain the selection data for retrieving the
+                                 * client rectangle of the selected image
+                                 * @return {Boolean} True, in all cases
+                                 */
+                                var imageSelectionSetPosition = function(payload) {
+                                    centerToolbar(this, payload.selectionData.element.getClientRect());
                             
-                                    /**
-                                     * Lifecycle. Renders the UI of the button.
-                                     *
-                                     * @method render
-                                     * @return {Object} The content which should be rendered.
-                                     */
-                                    render: function() {
-                                        var cssClass = &#x27;ae-button &#x27; + this.getStateClasses();
+                                    return true;
+                                };
                             
-                                        return (
-                                            &lt;button aria-label={AlloyEditor.Strings.code} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-code&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.code}&gt;
-                                                &lt;span className=&quot;ae-icon-code&quot;&gt;&lt;/span&gt;
-                                            &lt;/button&gt;
-                                        );
-                                    }
-                                });
+                                /**
+                                 * Sets the position of a toolbar according to the position of the selected image
+                                 *
+                                 * @method tableSelectionSetPosition
+                                 * @param {Object} payload Object, which contains the selection data for retrieving the
+                                 * client rectangle of the selected table
+                                 * @return {Boolean} True, in all cases
+                                 */
+                                var tableSelectionSetPosition = function(payload) {
+                                    var nativeEditor = payload.editor.get(&#x27;nativeEditor&#x27;);
                             
-                                AlloyEditor.Buttons[ButtonCode.key] = AlloyEditor.ButtonCode = ButtonCode;
+                                    var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+                            
+                                    centerToolbar(this, table.getClientRect());
+                            
+                                    return true;
+                                };
+                            
+                                AlloyEditor.SelectionSetPosition = {
+                                    image: imageSelectionSetPosition,
+                                    table: tableSelectionSetPosition
+                                };
                             }());
                                 </pre>
                             </div>

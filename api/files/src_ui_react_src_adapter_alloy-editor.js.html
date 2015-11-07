@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.6.0</b>
+                        API Docs for Version: <b>0.7.0</b>
                     </p>
                 </li>
             </div>
@@ -233,7 +233,7 @@
                                      */
                                     destructor: function() {
                                         if (this._editorUIElement) {
-                                            React.unmountComponentAtNode(this._editorUIElement);
+                                            ReactDOM.unmountComponentAtNode(this._editorUIElement);
                                             this._editorUIElement.parentNode.removeChild(this._editorUIElement);
                                         }
                             
@@ -278,7 +278,7 @@
                             
                                         uiNode.appendChild(editorUIElement);
                             
-                                        this._mainUI = React.render(React.createElement(AlloyEditor.UI, {
+                                        this._mainUI = ReactDOM.render(React.createElement(AlloyEditor.UI, {
                                             editor: this,
                                             eventsDelay: this.get(&#x27;eventsDelay&#x27;),
                                             toolbars: this.get(&#x27;toolbars&#x27;)

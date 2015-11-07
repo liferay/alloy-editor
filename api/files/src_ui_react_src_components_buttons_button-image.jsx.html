@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.6.0</b>
+                        API Docs for Version: <b>0.7.0</b>
                     </p>
                 </li>
             </div>
@@ -243,7 +243,7 @@
                                      * @param {SyntheticEvent} event The received click event on the button.
                                      */
                                     handleClick: function(event) {
-                                        React.findDOMNode(this.refs.fileInput).click();
+                                        ReactDOM.findDOMNode(this.refs.fileInput).click();
                                     },
                             
                                     /**
@@ -258,7 +258,7 @@
                                      */
                                     _onInputChange: function() {
                                         var reader = new FileReader();
-                                        var inputEl = React.findDOMNode(this.refs.fileInput);
+                                        var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
                             
                                         reader.onload = function(event) {
                                             var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
