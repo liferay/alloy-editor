@@ -6,7 +6,7 @@
 (function() {
     'use strict';
 
-    if (CKEDITOR.plugins.get('tableresize') || CKEDITOR.plugins.get('ae_tableresize')) {
+    if (CKEDITOR.plugins.get('ae_tableresize')) {
         return;
     }
 

@@ -6,12 +6,8 @@
 ( function() {
 	'use strict';
 
-    if (CKEDITOR.plugins.get('tabletools') || CKEDITOR.plugins.get('ae_tabletools')){
-       if (!CKEDITOR.plugins.get('ae_tabletools')) {
-            CKEDITOR.plugins.add('ae_tabletools', {});
-
-            return;
-        }
+    if (CKEDITOR.plugins.get('ae_tabletools')){
+		return;
     }
 
 	var cellNodeRegex = /^(?:td|th)$/;

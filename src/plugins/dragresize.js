@@ -9,7 +9,7 @@
 (function() {
     'use strict';
 
-    if (CKEDITOR.plugins.get('dragresize') || CKEDITOR.plugins.get('ae_dragresize')) {
+    if (CKEDITOR.plugins.get('ae_dragresize')) {
         return;
     }
 
