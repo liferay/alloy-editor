@@ -60,6 +60,8 @@
          * @method destructor
          */
         destructor: function() {
+            this._destroyed = true;
+
             if (this._editorUIElement) {
                 ReactDOM.unmountComponentAtNode(this._editorUIElement);
                 this._editorUIElement.parentNode.removeChild(this._editorUIElement);
@@ -99,22 +101,24 @@
          * @method _renderUI
          */
         _renderUI: function() {
-            var editorUIElement = document.createElement('div');
-            editorUIElement.className = 'ae-ui';
+            if (!this._destroyed) {
+                var editorUIElement = document.createElement('div');
+                editorUIElement.className = 'ae-ui';
 
-            var uiNode = this.get('uiNode') || document.body;
+                var uiNode = this.get('uiNode') || document.body;
 
-            uiNode.appendChild(editorUIElement);
+                uiNode.appendChild(editorUIElement);
 
-            this._mainUI = ReactDOM.render(React.createElement(AlloyEditor.UI, {
-                editor: this,
-                eventsDelay: this.get('eventsDelay'),
-                toolbars: this.get('toolbars')
-            }), editorUIElement);
+                this._mainUI = ReactDOM.render(React.createElement(AlloyEditor.UI, {
+                    editor: this,
+                    eventsDelay: this.get('eventsDelay'),
+                    toolbars: this.get('toolbars')
+                }), editorUIElement);
 
-            this._editorUIElement = editorUIElement;
+                this._editorUIElement = editorUIElement;
 
-            this.get('nativeEditor').fire('uiReady');
+                this.get('nativeEditor').fire('uiReady');
+            }
         },
 
         /**
