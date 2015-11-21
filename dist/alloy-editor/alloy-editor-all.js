@@ -22811,7 +22811,7 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
 (function () {
     'use strict';
 
-    if (CKEDITOR.plugins.get('dragresize') || CKEDITOR.plugins.get('ae_dragresize')) {
+    if (CKEDITOR.plugins.get('ae_dragresize')) {
         return;
     }
 
@@ -23372,7 +23372,7 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
 (function () {
     'use strict';
 
-    if (CKEDITOR.plugins.get('tableresize') || CKEDITOR.plugins.get('ae_tableresize')) {
+    if (CKEDITOR.plugins.get('ae_tableresize')) {
         return;
     }
 
@@ -23782,12 +23782,8 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
 (function () {
 	'use strict';
 
-	if (CKEDITOR.plugins.get('tabletools') || CKEDITOR.plugins.get('ae_tabletools')) {
-		if (!CKEDITOR.plugins.get('ae_tabletools')) {
-			CKEDITOR.plugins.add('ae_tabletools', {});
-
-			return;
-		}
+	if (CKEDITOR.plugins.get('ae_tabletools')) {
+		return;
 	}
 
 	var cellNodeRegex = /^(?:td|th)$/;
