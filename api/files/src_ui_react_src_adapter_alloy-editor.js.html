@@ -232,6 +232,8 @@
                                      * @method destructor
                                      */
                                     destructor: function() {
+                                        this._destroyed = true;
+                            
                                         if (this._editorUIElement) {
                                             ReactDOM.unmountComponentAtNode(this._editorUIElement);
                                             this._editorUIElement.parentNode.removeChild(this._editorUIElement);
@@ -271,22 +273,24 @@
                                      * @method _renderUI
                                      */
                                     _renderUI: function() {
-                                        var editorUIElement = document.createElement(&#x27;div&#x27;);
-                                        editorUIElement.className = &#x27;ae-ui&#x27;;
+                                        if (!this._destroyed) {
+                                            var editorUIElement = document.createElement(&#x27;div&#x27;);
+                                            editorUIElement.className = &#x27;ae-ui&#x27;;
                             
-                                        var uiNode = this.get(&#x27;uiNode&#x27;) || document.body;
+                                            var uiNode = this.get(&#x27;uiNode&#x27;) || document.body;
                             
-                                        uiNode.appendChild(editorUIElement);
+                                            uiNode.appendChild(editorUIElement);
                             
-                                        this._mainUI = ReactDOM.render(React.createElement(AlloyEditor.UI, {
-                                            editor: this,
-                                            eventsDelay: this.get(&#x27;eventsDelay&#x27;),
-                                            toolbars: this.get(&#x27;toolbars&#x27;)
-                                        }), editorUIElement);
+                                            this._mainUI = ReactDOM.render(React.createElement(AlloyEditor.UI, {
+                                                editor: this,
+                                                eventsDelay: this.get(&#x27;eventsDelay&#x27;),
+                                                toolbars: this.get(&#x27;toolbars&#x27;)
+                                            }), editorUIElement);
                             
-                                        this._editorUIElement = editorUIElement;
+                                            this._editorUIElement = editorUIElement;
                             
-                                        this.get(&#x27;nativeEditor&#x27;).fire(&#x27;uiReady&#x27;);
+                                            this.get(&#x27;nativeEditor&#x27;).fire(&#x27;uiReady&#x27;);
+                                        }
                                     },
                             
                                     /**
