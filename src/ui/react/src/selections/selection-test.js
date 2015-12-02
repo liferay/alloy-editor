@@ -7,7 +7,7 @@
         var element;
 
         return !!(
-            !nativeEditor.isSelectionEmpty() &&
+            nativeEditor.isSelectionEmpty() &&
             (element = (new CKEDITOR.Link(nativeEditor)).getFromSelection()) &&
             !element.isReadOnly()
         );
