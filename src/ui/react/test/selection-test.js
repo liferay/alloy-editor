@@ -35,10 +35,13 @@
                 this.editor.get('nativeEditor').setData(content);
             });
 
-            it('should handle empty selection', function() {
+            it('should not handle an element selection', function() {
                 var nativeEditor = this.editor.get('nativeEditor');
 
-                var payload = getPayload.call(this, nativeEditor.element.findOne('#editable'));
+                var editable = nativeEditor.element.findOne('#editable');
+                var payload = getPayload.call(this, editable);
+
+                nativeEditor.getSelection().selectElement(editable);
 
                 assert.isFalse(linkTest(payload));
             });
@@ -56,10 +59,8 @@
             it('should detect the link', function() {
                 var nativeEditor = this.editor.get('nativeEditor');
 
-                var editable = nativeEditor.element.findOne('#editable');
-                var payload = getPayload.call(this, editable);
+                var payload = getPayload.call(this, nativeEditor.element.findOne('#editable'));
 
-                nativeEditor.getSelection().selectElement(editable);
                 assert.isTrue(linkTest(payload));
             });
 
