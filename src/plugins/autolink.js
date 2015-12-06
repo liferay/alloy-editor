@@ -200,9 +200,10 @@
                 var ckLink = new CKEDITOR.Link(editor);
                 ckLink.create(content);
                 this._ckLink = ckLink;
+
                 var linkNode = this._startContainer.getNext() || this._startContainer;
                 editor.fire('autolinkAdd', linkNode.getParent());
-	      
+
                 this._subscribeToKeyEvent(editor);
 
                 // Now range is on the link and it is selected. We have to
