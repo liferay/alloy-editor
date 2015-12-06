@@ -22008,6 +22008,9 @@
             ckLink.create(content);
             this._ckLink = ckLink;
 
+            var linkNode = this._startContainer.getNext() || this._startContainer;
+            editor.fire('autolinkAdd', linkNode.getParent());
+
             this._subscribeToKeyEvent(editor);
 
             // Now range is on the link and it is selected. We have to
@@ -22030,6 +22033,13 @@
 
             range.select();
         },
+
+        /**
+         * Fired when a URL is detected in text and converted to a link.
+         *
+         * @event autolinkAdd
+         * @param {CKEDITOR.dom.element} el Node of the created link.
+         */
 
         /**
          * Removes the created link element, and replaces it by its text.
