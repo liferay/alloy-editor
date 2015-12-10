@@ -63,6 +63,11 @@ AlloyEditor.Strings = {
 	editLink: 'Type or paste link here',
 	image: 'Insert Image',
 	link: 'Link',
+	linkTargetBlank: '_blank (new tab)',
+	linkTargetDefault: 'default',
+	linkTargetParent: '_parent',
+	linkTargetSelf: '_self (same tab)',
+	linkTargetTop: '_top',
 	removeLink: 'Remove link',
 	table: 'Insert Table',
 	twitter: 'Twitter'

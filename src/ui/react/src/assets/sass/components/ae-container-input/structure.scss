@@ -3,6 +3,10 @@
 
     width: $container-input-xl-width-multiplier * $container-input-base-width;
 
+    &.xxl {
+        width: $container-input-xxl-width-multiplier * $container-input-base-width;
+    }
+
     &.medium {
         width: $container-input-width-multiplier * $container-input-base-width;
     }
@@ -21,6 +25,10 @@
 
         display: inline-block $IE9-ONLY;
         width: $container-input-xl-width-multiplier * $container-input-base-width - $container-input-base-width $IE9-ONLY;
+    }
+
+    .ae-container-dropdown {
+        padding-left: $container-input-dropdown-padding;
     }
 
     .ae-icon-remove {

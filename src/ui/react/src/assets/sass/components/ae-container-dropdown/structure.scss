@@ -42,6 +42,14 @@
     }
 }
 
+.ae-container-dropdown-small {
+    width: $container-dropdown-small-width-multiplier * $container-dropdown-base-width !important;
+}
+
+.ae-container-dropdown-medium {
+    width: $container-dropdown-medium-width-multiplier * $container-dropdown-base-width !important;
+}
+
 .ae-container-dropdown-xl {
     width: $container-dropdown-xl-width-multiplier * $container-dropdown-base-width !important;
 }
