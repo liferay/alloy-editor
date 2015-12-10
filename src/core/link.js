@@ -91,7 +91,7 @@
             if (link) {
                 link.remove(editor);
             } else {
-                var style = link || new CKEDITOR.style({
+                var style = new CKEDITOR.style({
                     alwaysRemoveElement: 1,
                     element: 'a',
                     type: CKEDITOR.STYLE_INLINE
@@ -112,16 +112,40 @@
          * Updates the href of an already existing link.
          *
          * @method update
-         * @param {String} URI The new URI of the link.
+         * @param {Object} attrs The attributes to update or remove. Attributes with null values will be removed.
          * @param {CKEDITOR.dom.element} link The link element which href should be removed.
          */
-        update: function(URI, link) {
-            var style = link || this.getFromSelection();
+        update: function(attrs, link) {
+            link = link || this.getFromSelection();
 
-            style.setAttributes({
-                'data-cke-saved-href': URI,
-                href: URI
-            });
+            if (typeof attrs === 'string') {
+                link.setAttributes({
+                    'data-cke-saved-href': attrs,
+                    href: attrs
+                });
+            } else if (typeof attrs === 'object') {
+                var removeAttrs = [];
+                var setAttrs = {};
+
+                Object.keys(attrs).forEach(function(key) {
+                    if (attrs[key] === null) {
+                        if (key === 'href') {
+                            removeAttrs.push('data-cke-saved-href');
+                        }
+
+                        removeAttrs.push(key);
+                    } else {
+                        if (key === 'href') {
+                            setAttrs['data-cke-saved-href'] = attrs[key];
+                        }
+
+                        setAttrs[key] = attrs[key];
+                    }
+                });
+
+                link.removeAttributes(removeAttrs);
+                link.setAttributes(setAttrs);
+            }
         },
 
         /**

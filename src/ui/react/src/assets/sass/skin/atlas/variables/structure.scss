@@ -24,6 +24,7 @@ $container-element-margin: 0;
 
 /** CONTAINER-DROPDOWN **/
 $container-dropdown-padding: 0 10px;
+$container-dropdown-medium-width-multiplier: 2.5;
 $container-dropdown-width-multiplier: 3;
 $container-dropdown-xl-width-multiplier: 5;
 $container-dropdown-arrow-top-ie9: 25%;
@@ -34,6 +35,9 @@ $container-edit-label-padding: 0 10px;
 /** CONTAINER-INPUT */
 $container-input-text-padding: 10px 6px 10px 12px;
 $container-input-xl-width-multiplier: 6;
+$container-input-xxl-width-multiplier: 10;
+
+$container-input-dropdown-padding: 4px;
 
 /** DROPDOWN **/
 $dropdown-padding: 0;
