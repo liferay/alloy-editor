@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonStylesList - alloyeditor</title>
+    <title>ButtonLinkTargetEdit - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -166,7 +166,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonStylesList <small>Class</small></h1>
+                                <h1>ButtonLinkTargetEdit <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
@@ -179,7 +179,7 @@
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-styles-list.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list.jsx:4</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-link-target-edit.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-target-edit.jsx:4</code></a>
                                     </div>
                             
                             
@@ -187,8 +187,8 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>The ButtonStylesList class provides functionality for showing a list of styles that can be
-                            applied to the current selection..</p>
+                                <p>The ButtonLinkTargetEdit class provides functionality for changing the target of a link
+                            in the document.</p>
                             
                             </div>
                             
@@ -209,6 +209,14 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__getAllowedTargetsList">_getAllowedTargetsList</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__getAllowedTargetsListItems">_getAllowedTargetsListItems</a>
+                            
+                                                        </li>
                                                         <li class="index-item method protected inherited">
                                                             <a href="#method__getFocusAction">_getFocusAction</a>
                             
@@ -233,20 +241,12 @@
                                                             <a href="#method__refresh">_refresh</a>
                             
                                                         </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__renderStylesItems">_renderStylesItems</a>
-                            
-                                                        </li>
                                                         <li class="index-item method inherited">
                                                             <a href="#method_componentDidMount">componentDidMount</a>
                             
                                                         </li>
                                                         <li class="index-item method inherited">
                                                             <a href="#method_componentDidUpdate">componentDidUpdate</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method">
-                                                            <a href="#method_componentWillMount">componentWillMount</a>
                             
                                                         </li>
                                                         <li class="index-item method inherited">
@@ -276,12 +276,20 @@
                                                 <h3>Properties</h3>
                             
                                                 <ul class="index-list properties">
+                                                        <li class="index-item property">
+                                                            <a href="#property_allowedTargets">allowedTargets</a>
+                            
+                                                        </li>
                                                         <li class="index-item property inherited">
                                                             <a href="#property_circular">circular</a>
                             
                                                         </li>
                                                         <li class="index-item property inherited">
                                                             <a href="#property_descendants">descendants</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_editor">editor</a>
                             
                                                         </li>
                                                         <li class="index-item property">
@@ -297,6 +305,10 @@
                                                             <a href="#property_onDismiss">onDismiss</a>
                             
                                                         </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_selectedTarget">selectedTarget</a>
+                            
+                                                        </li>
                                                 </ul>
                                             </div>
                             
@@ -306,6 +318,92 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
+                                                <div id="method__getAllowedTargetsList" class="method item protected">
+                                                    <h3 class="name"><code>_getAllowedTargetsList</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Object</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-target-edit.jsx.html#l98"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-target-edit.jsx:98</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Creates the dropdown list of allowed link targets.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Object</span>:
+                                                                    <p>The allowed targets dropdown.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method__getAllowedTargetsListItems" class="method item protected">
+                                                    <h3 class="name"><code>_getAllowedTargetsListItems</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Array</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-target-edit.jsx.html#l114"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-target-edit.jsx:114</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Creates the allowed link target items.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Array</span>:
+                                                                    <p>The allowed target items.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
                                                 <div id="method__getFocusAction" class="method item protected inherited">
                                                     <h3 class="name"><code>_getFocusAction</code></h3>
                                                 
@@ -697,73 +795,7 @@
                                                 
                                                 
                                                 </div>
-                                                <div id="method__renderStylesItems" class="method item protected">
-                                                    <h3 class="name"><code>_renderStylesItems</code></h3>
-                                                
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
-                                                                <li class="arg">
-                                                                        <code>styles</code>
-                                                                </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">Array</span>
-                                                        </span>
-                                                
-                                                
-                                                        <span class="flag protected">protected</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list.jsx.html#l117"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list.jsx:117</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Renders instances of ButtonStylesListItem with the preview of the correspondent block, inline or object styles.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">styles</code>
-                                                                        <span class="type">Array</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>List of styles for which preview should be rendered.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Array</span>:
-                                                                    <p>Rendered instances of ButtonStylesListItem class</p>
-                                                
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
-                                                <div id="method_componentDidMount" class="method item">
+                                                <div id="method_componentDidMount" class="method item inherited">
                                                     <h3 class="name"><code>componentDidMount</code></h3>
                                                 
                                                         <span class="paren">()</span>
@@ -776,12 +808,9 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                            <p>Inherited from
-                                                            <a href="../classes/WidgetFocusManager.html#method_componentDidMount">
-                                                                WidgetFocusManager
-                                                            </a>
-                                                            but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list.jsx.html#l27"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list.jsx:27</code></a>
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method_componentDidMount">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l57"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:57</code></a>
                                                         </p>
                                                 
                                                 
@@ -790,7 +819,6 @@
                                                 
                                                     <div class="description">
                                                         <p>Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.</p>
-                                                <p>Focuses on the list node to allow keyboard interaction.</p>
                                                 
                                                     </div>
                                                 
@@ -822,36 +850,6 @@
                                                     <div class="description">
                                                         <p>Lifecycle. Invoked immediately after the component&#39;s updates are flushed to the DOM.
                                                 Refreshes the descendants list.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method_componentWillMount" class="method item">
-                                                    <h3 class="name"><code>componentWillMount</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list.jsx.html#l38"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list.jsx:38</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.</p>
                                                 
                                                     </div>
                                                 
@@ -895,9 +893,6 @@
                                                 
                                                         <span class="paren">()</span>
                                                 
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
                                                 
                                                 
                                                 
@@ -908,7 +903,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list.jsx.html#l65"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list.jsx:65</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-target-edit.jsx.html#l53"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-target-edit.jsx:53</code></a>
                                                         </p>
                                                 
                                                 
@@ -921,15 +916,6 @@
                                                     </div>
                                                 
                                                 
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The default properties.</p>
-                                                
-                                                            </div>
-                                                        </div>
                                                 
                                                 </div>
                                                 <div id="method_handleKey" class="method item inherited">
@@ -1056,7 +1042,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list.jsx.html#l86"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list.jsx:86</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-target-edit.jsx.html#l72"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-target-edit.jsx:72</code></a>
                                                         </p>
                                                 
                                                 
@@ -1064,7 +1050,7 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Lifecycle. Renders the UI of the list.</p>
+                                                        <p>Lifecycle. Renders the UI of the button.</p>
                                                 
                                                     </div>
                                                 
@@ -1085,6 +1071,33 @@
                                         <div id="properties" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Properties</h2>
                             
+                                                <div id="property_allowedTargets" class="property item">
+                                                    <h3 class="name"><code>allowedTargets</code></h3>
+                                                    <span class="type">Array<object></span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-target-edit.jsx.html#l17"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-target-edit.jsx:17</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>List of the allowed items for the target attribute. Every allowed target is an object
+                                                with a <code>label</code> attribute that will be shown in the dropdown and a <code>value</code> attribute
+                                                that will get set as the link target attribute.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
                                                 <div id="property_circular" class="property item inherited">
                                                     <h3 class="name"><code>circular</code></h3>
                                                     <span class="type">Boolean</span>
@@ -1135,6 +1148,31 @@
                                                 
                                                 
                                                 </div>
+                                                <div id="property_editor" class="property item">
+                                                    <h3 class="name"><code>editor</code></h3>
+                                                    <span class="type">Object</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-target-edit.jsx.html#l26"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-target-edit.jsx:26</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The editor instance where the component is being used.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
                                                 <div id="property_key" class="property item">
                                                     <h3 class="name"><code>key</code></h3>
                                                     <span class="type">String</span>
@@ -1147,7 +1185,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list.jsx.html#l17"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list.jsx:17</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-target-edit.jsx.html#l43"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-target-edit.jsx:43</code></a>
                                                         </p>
                                                 
                                                 
@@ -1158,7 +1196,7 @@
                                                 
                                                     </div>
                                                 
-                                                        <p><strong>Default:</strong> buttonStylesList</p>
+                                                        <p><strong>Default:</strong> linkTargetEdit</p>
                                                 
                                                 
                                                 </div>
@@ -1217,6 +1255,31 @@
                                                 </ul>
                                                 </li>
                                                 </ul>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_selectedTarget" class="property item">
+                                                    <h3 class="name"><code>selectedTarget</code></h3>
+                                                    <span class="type">String</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-target-edit.jsx.html#l33"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-target-edit.jsx:33</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Label of the current target value.</p>
                                                 
                                                     </div>
                                                 

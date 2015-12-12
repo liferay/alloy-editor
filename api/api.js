@@ -23,6 +23,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonItalic",
         "ButtonLink",
         "ButtonLinkEdit",
+        "ButtonLinkTargetEdit",
         "ButtonOrderedList",
         "ButtonParagraphAlignLeft",
         "ButtonParagraphAlignRight",

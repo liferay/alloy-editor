@@ -78,6 +78,7 @@
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
@@ -310,7 +311,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l127"><code>src&#x2F;core&#x2F;link.js:127</code></a>
+                                                        <a href="../files/src_core_link.js.html#l151"><code>src&#x2F;core&#x2F;link.js:151</code></a>
                                                         </p>
                                                 
                                                 
@@ -520,7 +521,7 @@
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>URI</code>
+                                                                        <code>attrs</code>
                                                                 </li>
                                                                 <li class="arg">
                                                                         <code>link</code>
@@ -555,12 +556,12 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">URI</code>
-                                                                        <span class="type">String</span>
+                                                                        <code class="param-name">attrs</code>
+                                                                        <span class="type">Object | String</span>
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The new URI of the link.</p>
+                                                                        <p>The attributes to update or remove. Attributes with null values will be removed.</p>
                                                 
                                                                     </div>
                                                 

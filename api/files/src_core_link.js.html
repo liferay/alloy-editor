@@ -78,6 +78,7 @@
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
@@ -263,7 +264,7 @@
                                         if (link) {
                                             link.remove(editor);
                                         } else {
-                                            var style = link || new CKEDITOR.style({
+                                            var style = new CKEDITOR.style({
                                                 alwaysRemoveElement: 1,
                                                 element: &#x27;a&#x27;,
                                                 type: CKEDITOR.STYLE_INLINE
@@ -284,16 +285,40 @@
                                      * Updates the href of an already existing link.
                                      *
                                      * @method update
-                                     * @param {String} URI The new URI of the link.
+                                     * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
                                      * @param {CKEDITOR.dom.element} link The link element which href should be removed.
                                      */
-                                    update: function(URI, link) {
-                                        var style = link || this.getFromSelection();
+                                    update: function(attrs, link) {
+                                        link = link || this.getFromSelection();
                             
-                                        style.setAttributes({
-                                            &#x27;data-cke-saved-href&#x27;: URI,
-                                            href: URI
-                                        });
+                                        if (typeof attrs === &#x27;string&#x27;) {
+                                            link.setAttributes({
+                                                &#x27;data-cke-saved-href&#x27;: attrs,
+                                                href: attrs
+                                            });
+                                        } else if (typeof attrs === &#x27;object&#x27;) {
+                                            var removeAttrs = [];
+                                            var setAttrs = {};
+                            
+                                            Object.keys(attrs).forEach(function(key) {
+                                                if (attrs[key] === null) {
+                                                    if (key === &#x27;href&#x27;) {
+                                                        removeAttrs.push(&#x27;data-cke-saved-href&#x27;);
+                                                    }
+                            
+                                                    removeAttrs.push(key);
+                                                } else {
+                                                    if (key === &#x27;href&#x27;) {
+                                                        setAttrs[&#x27;data-cke-saved-href&#x27;] = attrs[key];
+                                                    }
+                            
+                                                    setAttrs[key] = attrs[key];
+                                                }
+                                            });
+                            
+                                            link.removeAttributes(removeAttrs);
+                                            link.setAttributes(setAttrs);
+                                        }
                                     },
                             
                                     /**
