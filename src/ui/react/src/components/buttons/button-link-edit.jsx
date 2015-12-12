@@ -53,7 +53,7 @@
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
          * Focuses on the link input to immediately allow editing. This should only happen if the component
-         * is rendered in exclusive mode to prevent aggresive focus stealing.
+         * is rendered in exclusive mode to prevent aggressive focus stealing.
          *
          * @method componentDidMount
          */
@@ -129,8 +129,8 @@
             if (this.props.showTargetSelector) {
                 var targetSelectorProps = {
                     allowedTargets: this._getAllowedTargetItems(),
-                    handleLinkTargetChange: this._handleLinkTargetChange,
                     editor: this.props.editor,
+                    handleLinkTargetChange: this._handleLinkTargetChange,
                     onDismiss: this.props.toggleDropdown,
                     selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
                 };

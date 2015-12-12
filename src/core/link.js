@@ -112,7 +112,7 @@
          * Updates the href of an already existing link.
          *
          * @method update
-         * @param {Object} attrs The attributes to update or remove. Attributes with null values will be removed.
+         * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
          * @param {CKEDITOR.dom.element} link The link element which href should be removed.
          */
         update: function(attrs, link) {
