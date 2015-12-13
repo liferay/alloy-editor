@@ -19,8 +19,10 @@
 
     'use strict';
 
+function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * AlloyEditor static object.
@@ -28,6 +30,7 @@
      * @class AlloyEditor
      * @type {Object}
      */
+    ;
     var AlloyEditor = {
         /**
          * Creates an instance of AlloyEditor.
@@ -212,7 +215,7 @@
          */
     };
 
-    if (typeof module !== 'undefined' && typeof module.exports === 'object') {
+    if (typeof module !== 'undefined' && _typeof(module.exports) === 'object') {
         module.exports = AlloyEditor;
     }
 
@@ -20489,7 +20492,7 @@
         'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
@@ -20511,6 +20514,7 @@
      * @param {Object} context The context in which the callback will be called. This argument is optional.
      * @param {Array} args An array of arguments which the callback will receive.
      */
+    ;
     CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function (callback, timeout, context, args) {
         var debounceHandle;
 
@@ -20540,6 +20544,8 @@
     };
 })();
 'use strict';
+
+function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
 (function () {
     'use strict';
@@ -20666,7 +20672,7 @@
                     'data-cke-saved-href': attrs,
                     href: attrs
                 });
-            } else if (typeof attrs === 'object') {
+            } else if ((typeof attrs === 'undefined' ? 'undefined' : _typeof(attrs)) === 'object') {
                 var removeAttrs = [];
                 var setAttrs = {};
 
@@ -21449,7 +21455,7 @@
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
@@ -21469,6 +21475,7 @@
      * @param {Object} objects* One or more objects to merge.
      * @return {Object} A new merged object.
      */
+    ;
     CKEDITOR.tools.merge = CKEDITOR.tools.merge || function () {
         var result = {};
 
@@ -22110,6 +22117,8 @@
         }
     });
 })();
+'use strict';
+
 /**
  * CKEditor plugin: Dragable image resizing
  * https://github.com/sstur/ck-dragresize
@@ -22118,8 +22127,6 @@
  * - Snap to size of other images in editor
  * - Escape while dragging cancels resize
  */
-'use strict';
-
 (function () {
     'use strict';
 
@@ -22129,7 +22136,7 @@
 
     var IMAGE_SNAP_TO_SIZE = 7;
 
-    var isWebkit = ('WebkitAppearance' in document.documentElement.style);
+    var isWebkit = 'WebkitAppearance' in document.documentElement.style;
 
     if (isWebkit) {
         // CSS is added in a compressed form
@@ -22674,12 +22681,12 @@
         }
     });
 })();
+'use strict';
+
 /**
  * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
-
-'use strict';
 
 (function () {
     'use strict';
@@ -23084,12 +23091,12 @@
         }
     });
 })();
+'use strict';
+
 /**
  * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
-
-'use strict';
 
 (function () {
 	'use strict';
@@ -23162,9 +23169,9 @@
 		    focusedCell,
 		    tr;
 
-		while (cell = cellsToDelete[i++]) CKEDITOR.dom.element.setMarker(database, cell, 'delete_cell', true);
-
-		// 1.first we check left or right side focusable cell row by row;
+		while (cell = cellsToDelete[i++]) {
+			CKEDITOR.dom.element.setMarker(database, cell, 'delete_cell', true);
+		} // 1.first we check left or right side focusable cell row by row;
 		i = 0;
 		while (cell = cellsToDelete[i++]) {
 			if ((focusedCell = cell.getPrevious()) && !focusedCell.getCustomData('delete_cell') || (focusedCell = cell.getNext()) && !focusedCell.getCustomData('delete_cell')) {
@@ -23272,9 +23279,9 @@
 			// 3. Into table's parent element if it's the very last row.
 			var cursorPosition = new CKEDITOR.dom.element(rows[endRowIndex + 1] || (startRowIndex > 0 ? rows[startRowIndex - 1] : null) || table.$.parentNode);
 
-			for (i = rowsToDelete.length; i >= 0; i--) deleteRows(rowsToDelete[i]);
-
-			return cursorPosition;
+			for (i = rowsToDelete.length; i >= 0; i--) {
+				deleteRows(rowsToDelete[i]);
+			}return cursorPosition;
 		} else if (selectionOrRow instanceof CKEDITOR.dom.element) {
 			table = selectionOrRow.getAscendant('table');
 
@@ -23417,9 +23424,9 @@
 			var table = cellsToDelete[0] && cellsToDelete[0].getAscendant('table');
 			var cellToFocus = getFocusElementAfterDelCells(cellsToDelete);
 
-			for (var i = cellsToDelete.length - 1; i >= 0; i--) deleteCells(cellsToDelete[i]);
-
-			if (cellToFocus) placeCursorInCell(cellToFocus, true);else if (table) table.remove();
+			for (var i = cellsToDelete.length - 1; i >= 0; i--) {
+				deleteCells(cellsToDelete[i]);
+			}if (cellToFocus) placeCursorInCell(cellToFocus, true);else if (table) table.remove();
 		} else if (selectionOrCell instanceof CKEDITOR.dom.element) {
 			var tr = selectionOrCell.getParent();
 			if (tr.getChildCount() == 1) tr.remove();else selectionOrCell.remove();
@@ -23635,7 +23642,9 @@
 			newCellTr.append(newCell = cell.clone());
 
 			var cellsInSameRow = cellInRow(map, rowIndex);
-			for (var i = 0; i < cellsInSameRow.length; i++) cellsInSameRow[i].rowSpan++;
+			for (var i = 0; i < cellsInSameRow.length; i++) {
+				cellsInSameRow[i].rowSpan++;
+			}
 		}
 
 		newCell.appendBogus();
@@ -23669,7 +23678,9 @@
 		} else {
 			newCellColSpan = newColSpan = 1;
 			var cellsInSameCol = cellInCol(map, colIndex);
-			for (var i = 0; i < cellsInSameCol.length; i++) cellsInSameCol[i].colSpan++;
+			for (var i = 0; i < cellsInSameCol.length; i++) {
+				cellsInSameCol[i].colSpan++;
+			}
 		}
 		newCell = cell.clone();
 		newCell.insertAfter(cell);
@@ -23850,9 +23861,9 @@ CKEDITOR.tools.buildTableMap = function (table) {
 			var oCell = aRows[i].cells[j];
 
 			c++;
-			while (aMap[r][c]) c++;
-
-			var iColSpan = isNaN(oCell.colSpan) ? 1 : oCell.colSpan;
+			while (aMap[r][c]) {
+				c++;
+			}var iColSpan = isNaN(oCell.colSpan) ? 1 : oCell.colSpan;
 			var iRowSpan = isNaN(oCell.rowSpan) ? 1 : oCell.rowSpan;
 
 			for (var rs = 0; rs < iRowSpan; rs++) {
@@ -23871,9 +23882,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /* istanbul ignore if */
+    ;
     if (CKEDITOR.plugins.get('ae_buttonbridge')) {
         return;
     }
@@ -24011,9 +24023,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /* istanbul ignore if */
+    ;
     if (CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
         return;
     }
@@ -24170,9 +24183,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /* istanbul ignore if */
+    ;
     if (CKEDITOR.plugins.get('ae_richcombobridge')) {
         return;
     }
@@ -24393,7 +24407,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * CKEditor plugin that extends CKEDITOR.ui.add function so an add handler can be specified
@@ -24403,6 +24417,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      * @class CKEDITOR.plugins.ae_uibridge
      * @constructor
      */
+    ;
     CKEDITOR.plugins.add('ae_uibridge', {
         /**
          * Initialization of the plugin, part of CKEditor plugin lifecycle.
@@ -24427,14 +24442,17 @@ CKEDITOR.tools.buildTableMap = function (table) {
 })();
 'use strict';
 
+function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * Provides core language utilities.
      *
      * @class Lang
      */
+    ;
     var Lang = {
         /**
          * Check if the passed value is an array.
@@ -24505,7 +24523,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
          * @return {Boolean} True if the passed value is an object, false otherwise.
          */
         isObject: function isObject(value) {
-            var valueType = typeof value;
+            var valueType = typeof value === 'undefined' ? 'undefined' : _typeof(value);
 
             return value && (valueType === 'object' || Lang.isFunction(value));
         },
@@ -24611,7 +24629,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * Attribute implementation.
@@ -24619,6 +24637,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      * @class Attribute
      * @constructor
     */
+    ;
     function Attribute(config) {
         this.__config__ = config || {};
         this.__ATTRS__ = {};
@@ -24806,7 +24825,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * Quick and dirty impl of Base class.
@@ -24814,6 +24833,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      * @class Base
      * @constructor
      */
+    ;
     function Base(config) {
         Base.superclass.constructor.call(this, config);
 
@@ -24892,9 +24912,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     // Default gutter value for toolbar positioning
+    ;
     var DEFAULT_GUTTER = {
         left: 0,
         top: 0
@@ -25033,7 +25054,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * AlloyEditor main class. Creates instance of the editor and provides the user configuration
@@ -25042,6 +25063,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      * @class Core
      * @constructor
      */
+    ;
     function Core(config) {
         Core.superclass.constructor.call(this, config);
     }
@@ -25360,7 +25382,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * ButtonActionStyle is a mixin that provides applying style implementation for a
@@ -25373,6 +25395,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonActionStyle
      */
+    ;
     var ButtonActionStyle = {
         /**
          * Removes or applies the component style to the current selection.
@@ -25403,13 +25426,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * ButtonCommand is a mixin that executes a command via CKEDITOR's API.
      *
      * @class ButtonCommand
      */
+    ;
     var ButtonCommand = {
         // Allows validating props being passed to the component.
         propTypes: {
@@ -25453,7 +25477,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * ButtonStateClasses is a mixin that decorates the domElement of a component
@@ -25465,6 +25489,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonStateClasses
      */
+    ;
     var ButtonStateClasses = {
         /**
          * Returns the list of state classes associated to the current element's state, according
@@ -25495,7 +25520,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * ButtonStyle is a mixin that provides a style prop and some methods to apply the resulting
@@ -25503,6 +25528,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonStyle
      */
+    ;
     var ButtonStyle = {
         // Allows validating props being passed to the component.
         propTypes: {
@@ -25566,7 +25592,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * ToolbarButtons is a mixin which provides a list of buttons which have to be
@@ -25574,6 +25600,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ToolbarButtons
      */
+    ;
     var ToolbarButtons = {
         /**
          * Analyzes the current selection and the buttons exclusive mode value to figure out which
@@ -25625,7 +25652,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * Provides functionality for displaying Widget Arrow box on top or on bottom of the widget
@@ -25633,6 +25660,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class WidgetArrowBox
      */
+    ;
     var WidgetArrowBox = {
         /**
          * Returns the list of arrow box classes associated to the current element's state. It relies
@@ -25661,13 +25689,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * Provides functionality for managing different dropdowns inside a widget.
      *
      * @class WidgetDropdown
      */
+    ;
     var WidgetDropdown = {
         /**
          * Lifecycle. Invoked when a component is receiving new props.
@@ -25741,7 +25770,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * Provides functionality for managing exclusive state of an widget.
@@ -25751,6 +25780,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class WidgetExclusive
      */
+    ;
     var WidgetExclusive = {
         /**
          * Cancels the exclusive state of an widget.
@@ -26182,13 +26212,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * Provides functionality for calculating the point of interaction of the user with the Editor.
      *
      * @class WidgetInteractionPoint
      */
+    ;
     var WidgetInteractionPoint = {
         // Allows validating props being passed to the component.
         propTypes: {
@@ -26309,7 +26340,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * Calculates the position where an Widget should be displayed based on the point
@@ -26319,6 +26350,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class WidgetPosition
      */
+    ;
     var WidgetPosition = {
         mixins: [AlloyEditor.WidgetInteractionPoint],
 
@@ -26575,7 +26607,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
@@ -26586,6 +26618,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonBold
      */
+    ;
     var ButtonBold = React.createClass({
         displayName: 'ButtonBold',
 
@@ -26665,13 +26698,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonCameraImage class takes photo from camera and inserts it to the content.
      *
      * @class ButtonCameraImage
      */
+    ;
     var ButtonCameraImage = React.createClass({
         displayName: 'ButtonCameraImage',
 
@@ -26851,7 +26885,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonCamera class renders in two different ways:
@@ -26861,6 +26895,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonCamera
      */
+    ;
     var ButtonCamera = React.createClass({
         displayName: 'ButtonCamera',
 
@@ -26927,7 +26962,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonCode class provides wraps a selection in `pre` element.
@@ -26938,6 +26973,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonCode
      */
+    ;
     var ButtonCode = React.createClass({
         displayName: 'ButtonCode',
 
@@ -27016,7 +27052,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonCommandListItem class is a UI class that renders a ButtonCommand that can be used inside
@@ -27026,6 +27062,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonCommandListItem
      */
+    ;
     var ButtonCommandListItem = React.createClass({
         displayName: 'ButtonCommandListItem',
 
@@ -27095,7 +27132,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonCommandsList class provides functionality for showing a list of commands that can be
@@ -27105,6 +27142,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonCommandsList
      */
+    ;
     var ButtonCommandsList = React.createClass({
         displayName: 'ButtonCommandsList',
 
@@ -27225,7 +27263,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonDropdown class provides markup and keyboard navigation behaviour to a dropdown
@@ -27233,6 +27271,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonDropdown
      */
+    ;
     var ButtonDropdown = React.createClass({
         displayName: 'ButtonDropdown',
 
@@ -27293,7 +27332,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonH1 class provides wraps a selection in `h1` element.
@@ -27304,6 +27343,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonH1
      */
+    ;
     var ButtonH1 = React.createClass({
         displayName: 'ButtonH1',
 
@@ -27382,7 +27422,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonH2 class provides wraps a selection in `h2` element.
@@ -27393,6 +27433,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonH2
      */
+    ;
     var ButtonH2 = React.createClass({
         displayName: 'ButtonH2',
 
@@ -27471,7 +27512,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonHline class provides inserts horizontal line.
@@ -27481,6 +27522,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonHline
      */
+    ;
     var ButtonHline = React.createClass({
         displayName: 'ButtonHline',
 
@@ -27558,7 +27600,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonImageAlignCenter class provides functionality for aligning an image in the center.
@@ -27569,6 +27611,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonImageAlignCenter
      */
+    ;
     var ButtonImageAlignCenter = React.createClass({
         displayName: 'ButtonImageAlignCenter',
 
@@ -27653,7 +27696,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonImageAlignLeft class provides functionality for aligning an image on left.
@@ -27664,6 +27707,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonImageAlignLeft
      */
+    ;
     var ButtonImageAlignLeft = React.createClass({
         displayName: 'ButtonImageAlignLeft',
 
@@ -27745,7 +27789,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonImageAlignRight class provides functionality for aligning an image on right.
@@ -27756,6 +27800,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonImageAlignRight
      */
+    ;
     var ButtonImageAlignRight = React.createClass({
         displayName: 'ButtonImageAlignRight',
 
@@ -27837,13 +27882,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonImage class inserts an image to the content.
      *
      * @class ButtonImage
      */
+    ;
     var ButtonImage = React.createClass({
         displayName: 'ButtonImage',
 
@@ -27964,7 +28010,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonItalic class provides functionality for styling an selection with italic (em) style.
@@ -27975,6 +28021,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonItalic
      */
+    ;
     var ButtonItalic = React.createClass({
         displayName: 'ButtonItalic',
 
@@ -28394,7 +28441,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonLinkTargetEdit class provides functionality for changing the target of a link
@@ -28404,6 +28451,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonLinkTargetEdit
      */
+    ;
     var ButtonLinkTargetEdit = React.createClass({
         displayName: 'ButtonLinkTargetEdit',
 
@@ -28548,7 +28596,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonLink class provides functionality for creating and editing a link in a document. ButtonLink
@@ -28561,6 +28609,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonLink
      */
+    ;
     var ButtonLink = React.createClass({
         displayName: 'ButtonLink',
 
@@ -28639,7 +28688,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonOrderedList class provides functionality for creating ordered lists in an editor.
@@ -28650,6 +28699,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonOrderedList
      */
+    ;
     var ButtonOrderedList = React.createClass({
         displayName: 'ButtonOrderedList',
 
@@ -28729,7 +28779,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonParagraphAlignLeft class provides functionality for aligning a paragraph on left.
@@ -28740,6 +28790,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonParagraphAlignLeft
      */
+    ;
     var ButtonParagraphAlignLeft = React.createClass({
         displayName: 'ButtonParagraphAlignLeft',
 
@@ -28821,7 +28872,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonParagraphAlignRight class provides functionality for aligning a paragraph on right.
@@ -28832,6 +28883,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonParagraphAlignRight
      */
+    ;
     var ButtonParagraphAlignRight = React.createClass({
         displayName: 'ButtonParagraphAlignRight',
 
@@ -28913,7 +28965,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonParagraphCenter class provides functionality for centering a paragraph.
@@ -28924,6 +28976,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonParagraphCenter
      */
+    ;
     var ButtonParagraphCenter = React.createClass({
         displayName: 'ButtonParagraphCenter',
 
@@ -29005,7 +29058,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonParagraphJustify class provides functionality for justfying a paragraph.
@@ -29016,6 +29069,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonParagraphJustify
      */
+    ;
     var ButtonParagraphJustify = React.createClass({
         displayName: 'ButtonParagraphJustify',
 
@@ -29097,7 +29151,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonQuote class wraps a selection in `blockquote` element.
@@ -29108,6 +29162,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonQuote
      */
+    ;
     var ButtonQuote = React.createClass({
         displayName: 'ButtonQuote',
 
@@ -29187,7 +29242,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonRemoveFormat class removes style formatting.
@@ -29196,6 +29251,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonRemoveFormat
      */
+    ;
     var ButtonRemoveFormat = React.createClass({
         displayName: 'ButtonRemoveFormat',
 
@@ -29270,7 +29326,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonStrike class styles a selection with strike style.
@@ -29281,6 +29337,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonStrike
      */
+    ;
     var ButtonStrike = React.createClass({
         displayName: 'ButtonStrike',
 
@@ -29360,13 +29417,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 "use strict";
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonsStylesListHeader class provides the header of an list of style items.
      *
      * @class ButtonsStylesListHeader
      */
+    ;
     var ButtonsStylesListHeader = React.createClass({
         displayName: "ButtonsStylesListHeader",
 
@@ -29394,7 +29452,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonStylesListItemRemove class provides functionality for previewing a style definition
@@ -29402,6 +29460,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonStylesListItemRemove
      */
+    ;
     var ButtonStylesListItemRemove = React.createClass({
         displayName: 'ButtonStylesListItemRemove',
 
@@ -29506,7 +29565,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonStylesListItem class provides functionality for previewing a style definition
@@ -29517,6 +29576,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonStylesListItem
      */
+    ;
     var ButtonStylesListItem = React.createClass({
         displayName: 'ButtonStylesListItem',
 
@@ -29587,7 +29647,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonStylesList class provides functionality for showing a list of styles that can be
@@ -29597,6 +29657,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonStylesList
      */
+    ;
     var ButtonStylesList = React.createClass({
         displayName: 'ButtonStylesList',
 
@@ -29734,7 +29795,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonStyles class provides functionality for styling a selection with a list of
@@ -29743,6 +29804,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonStyles
      */
+    ;
     var ButtonStyles = React.createClass({
         displayName: 'ButtonStyles',
 
@@ -29920,7 +29982,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonSubscript class provides functionality for applying subscript style to a text selection.
@@ -29931,6 +29993,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonSubscript
      */
+    ;
     var ButtonSubscript = React.createClass({
         displayName: 'ButtonSubscript',
 
@@ -30010,7 +30073,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonSuperscript class provides functionality for applying superscript style to a text selection.
@@ -30021,6 +30084,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonSuperscript
      */
+    ;
     var ButtonSuperscript = React.createClass({
         displayName: 'ButtonSuperscript',
 
@@ -30100,13 +30164,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonTableCell class provides functionality to work with table cells.
      *
      * @class ButtonTableCell
      */
+    ;
     var ButtonTableCell = React.createClass({
         displayName: 'ButtonTableCell',
 
@@ -30236,13 +30301,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonTableColumn class provides functionality to work with table columns.
      *
      * @class ButtonTableColumn
      */
+    ;
     var ButtonTableColumn = React.createClass({
         displayName: 'ButtonTableColumn',
 
@@ -30545,13 +30611,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonTableHeading class provides functionality to work with table heading.
      *
      * @class ButtonTableHeading
      */
+    ;
     var ButtonTableHeading = React.createClass({
         displayName: 'ButtonTableHeading',
 
@@ -30688,13 +30755,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonTableRemove class provides functionality for removing a table
      *
      * @class ButtonTableRemove
      */
+    ;
     var ButtonTableRemove = React.createClass({
         displayName: 'ButtonTableRemove',
 
@@ -30770,13 +30838,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonTableRow class provides functionality to work with table rows.
      *
      * @class ButtonTableRow
      */
+    ;
     var ButtonTableRow = React.createClass({
         displayName: 'ButtonTableRow',
 
@@ -30891,7 +30960,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonTable class provides functionality for creating and editing a table in a document. ButtonTable
@@ -30902,6 +30971,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonTable
      */
+    ;
     var ButtonTable = React.createClass({
         displayName: 'ButtonTable',
 
@@ -30966,7 +31036,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonTwitter class provides functionality for creating a link which
@@ -30976,6 +31046,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonTwitter
      */
+    ;
     var ButtonTwitter = React.createClass({
         displayName: 'ButtonTwitter',
 
@@ -31100,7 +31171,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonUnorderedlist class provides functionality for creating unordered lists in an editor.
@@ -31111,6 +31182,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonUnorderedlist
      */
+    ;
     var ButtonUnorderedlist = React.createClass({
         displayName: 'ButtonUnorderedlist',
 
@@ -31190,7 +31262,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ButtonUnderline class provides functionality for underlying a text selection.
@@ -31201,6 +31273,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ButtonUnderline
      */
+    ;
     var ButtonUnderline = React.createClass({
         displayName: 'ButtonUnderline',
 
@@ -31280,7 +31353,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ToolbarAdd class provides functionality for adding content to the editor.
@@ -31294,6 +31367,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ToolbarAdd
      */
+    ;
     var ToolbarAdd = React.createClass({
         displayName: 'ToolbarAdd',
 
@@ -31527,7 +31601,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The ToolbarStyles class hosts the buttons for styling a text selection.
@@ -31541,6 +31615,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class ToolbarStyles
      */
+    ;
     var ToolbarStyles = React.createClass({
         displayName: 'ToolbarStyles',
 
@@ -31791,7 +31866,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict';
+    'use strict'
 
     /**
      * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
@@ -31801,6 +31876,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      *
      * @class UI
      */
+    ;
     var UI = React.createClass({
         displayName: 'UI',
 
