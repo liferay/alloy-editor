@@ -56,7 +56,22 @@
                 assert.isFalse(linkTest(payload));
             });
 
-            it('should detect the link', function() {
+            it('should detect the link at the edit start position', function() {
+                var nativeEditor = this.editor.get('nativeEditor');
+
+                var link = nativeEditor.element.findOne('#editable');
+
+                var range = nativeEditor.createRange();
+                range.moveToElementEditStart(link);
+
+                nativeEditor.getSelection().selectRanges([range]);
+
+                var payload = getPayload.call(this, link);
+
+                assert.isTrue(linkTest(payload));
+            });
+
+            it('should not detect the link at the edit end position', function() {
                 var nativeEditor = this.editor.get('nativeEditor');
 
                 var link = nativeEditor.element.findOne('#editable');
@@ -68,7 +83,7 @@
 
                 var payload = getPayload.call(this, link);
 
-                assert.isTrue(linkTest(payload));
+                assert.isFalse(linkTest(payload));
             });
 
             it('should handle non editable link', function() {

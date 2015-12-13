@@ -223,9 +223,11 @@
             if (event.keyCode === KEY_ENTER) {
                 this._updateLink();
             } else if (event.keyCode === KEY_ESC) {
-                this.props.cancelExclusive();
+                var editor = this.props.editor.get('nativeEditor');
 
-                this.props.editor.get('nativeEditor').focus();
+                new CKEDITOR.Link(editor).advanceSelection();
+
+                this.props.editor.get('nativeEditor').fire('actionPerformed', this);
             }
         },
 
@@ -268,7 +270,7 @@
             var selection = editor.getSelection();
             var bookmarks = selection.createBookmarks();
 
-            linkUtils.remove(this.state.element);
+            linkUtils.remove(this.state.element, { advance: true });
 
             selection.selectBookmarks(bookmarks);
 
@@ -292,14 +294,15 @@
             var linkAttrs = {
                 target: this.state.linkTarget
             };
+            var modifySelection = { advance: true };
 
             if (this.state.linkHref) {
                 if (this.state.element) {
                     linkAttrs.href = this.state.linkHref;
 
-                    linkUtils.update(linkAttrs, this.state.element);
+                    linkUtils.update(linkAttrs, this.state.element, modifySelection);
                 } else {
-                    linkUtils.create(this.state.linkHref, linkAttrs);
+                    linkUtils.create(this.state.linkHref, linkAttrs, modifySelection);
                 }
 
                 editor.fire('actionPerformed', this);
