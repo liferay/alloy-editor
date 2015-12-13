@@ -30,7 +30,9 @@ gulp.task('create-output-dir', function(callback) {
 
 gulp.task('copy-core-files', function() {
     return gulp.src(srcFiles.main.concat(srcFiles.ui), {cwd: 'src', base: 'src'})
-        .pipe(babel())
+        .pipe(babel({
+            presets: ['es2015', 'react']
+        }))
         .pipe(gulp.dest(path.join(editorDistFolder, 'test')));
 });
 

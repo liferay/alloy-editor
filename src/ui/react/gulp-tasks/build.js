@@ -149,11 +149,15 @@ gulp.task('build-js', function(callback) {
 });
 
 gulp.task('clean-api', function(callback) {
-    return del(apiFolder, callback);
+    del(apiFolder).then(function() {
+        callback();
+    });
 });
 
 gulp.task('clean-dist', function(callback) {
-    return del(distFolder, callback);
+    del(distFolder).then(function() {
+        callback();
+    });
 });
 
 gulp.task('copy-ckeditor', function() {
@@ -250,14 +254,18 @@ gulp.task('create-alloy-editor-no-react-min', function() {
 
 gulp.task('create-alloy-editor-ui', function() {
     return gulp.src(srcFiles.ui, {cwd : rootDir + '/src'})
-    .pipe(babel()).on('error', errorHandler)
+    .pipe(babel({
+        presets: ['es2015', 'react']
+    })).on('error', errorHandler)
     .pipe(concat('alloy-editor-ui.js'))
     .pipe(gulp.dest(editorDistFolder));
 });
 
 gulp.task('create-alloy-editor-main', function() {
     return gulp.src(srcFiles.main, {cwd : rootDir + '/src'})
-    .pipe(babel()).on('error', errorHandler)
+    .pipe(babel({
+        presets: ['es2015', 'react']
+    })).on('error', errorHandler)
     .pipe(concat('alloy-editor-main.js'))
     .pipe(gulp.dest(editorDistFolder));
 });
@@ -344,7 +352,9 @@ gulp.task('post-cleanup', function(callback) {
         path.join(editorDistFolder, 'alloy-editor-ui*.js'),
         path.join(editorDistFolder, 'CHANGES.md'),
         path.join(editorDistFolder, 'samples')
-    ], callback);
+    ]).then(function() {
+        callback();
+    });
 });
 
 gulp.task('watch', ['build'], function () {

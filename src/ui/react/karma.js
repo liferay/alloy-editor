@@ -135,6 +135,12 @@ var defaultConfig = {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: preprocessors,
 
+    babelPreprocessor: {
+      options: {
+        presets: ['es2015', 'react']
+      }
+    },
+
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter

@@ -79,5 +79,7 @@ gulp.task('minimize-css', function() {
 gulp.task('clean-fonts', function(callback) {
     del([
         path.join(editorDistFolder, 'assets/css')
-    ], callback);
+    ]).then(function() {
+        callback();
+    });
 });
