@@ -59,7 +59,14 @@
             it('should detect the link', function() {
                 var nativeEditor = this.editor.get('nativeEditor');
 
-                var payload = getPayload.call(this, nativeEditor.element.findOne('#editable'));
+                var link = nativeEditor.element.findOne('#editable');
+
+                var range = nativeEditor.createRange();
+                range.moveToElementEditEnd(link);
+
+                nativeEditor.getSelection().selectRanges([range]);
+
+                var payload = getPayload.call(this, link);
 
                 assert.isTrue(linkTest(payload));
             });
