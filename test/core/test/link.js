@@ -279,5 +279,52 @@
 
             assert.strictEqual(data, '<p>update the url of a <a href="new.com" target="_blank">link</a>.</p>');
         });
+
+        it('should position the cursor before the next word if modifySelection.advance is set to true', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<p>set a {selection} and then convert it to a link.</p>');
+
+            link.create('http://test.com', {
+                target: '_blank'
+            }, {
+                advance: true
+            });
+
+            var linkEl = this.nativeEditor.element.findOne('a');
+
+            assert.ok(linkEl);
+
+            var range = this.nativeEditor.getSelection().getRanges()[0];
+            var nextContainer = linkEl.getNext();
+
+            assert.isTrue(range.startContainer.equals(nextContainer));
+            assert.strictEqual(range.startOffset, 1);
+            assert.isTrue(range.endContainer.equals(nextContainer));
+            assert.strictEqual(range.endOffset, 1);
+        });
+
+        it('should position the cursor after the link if it is the last word and if modifySelection.advance is set to true', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<p>set a {selection}</p>');
+
+            link.create('http://test.com', {
+                target: '_blank'
+            }, {
+                advance: true
+            });
+
+            var linkEl = this.nativeEditor.element.findOne('a');
+
+            assert.ok(linkEl);
+
+            var range = this.nativeEditor.getSelection().getRanges()[0];
+
+            assert.isTrue(range.startContainer.equals(linkEl));
+            assert.strictEqual(range.startOffset, 1);
+            assert.isTrue(range.endContainer.equals(linkEl));
+            assert.strictEqual(range.endOffset, 1);
+        });
     });
 }());
