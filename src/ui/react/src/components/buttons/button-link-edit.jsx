@@ -58,7 +58,7 @@
          * @method componentDidMount
          */
         componentDidMount: function () {
-            if (this.state.requestExclusive) {
+            if (this.props.renderExclusive) {
                 // We need to wait for the next rendering cycle before focusing to avoid undesired
                 // scrolls on the page
                 if (window.requestAnimationFrame) {
