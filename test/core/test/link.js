@@ -295,8 +295,11 @@
 
             assert.ok(linkEl);
 
-            var range = this.nativeEditor.getSelection().getRanges()[0];
-            var nextContainer = linkEl.getNext();
+            var selection = this.nativeEditor.getSelection();
+            var range = selection.getRanges()[0];
+            range.optimize();
+
+            var nextContainer = range.endContainer;
 
             assert.isTrue(range.startContainer.equals(nextContainer));
             assert.strictEqual(range.startOffset, 1);
@@ -319,11 +322,13 @@
 
             assert.ok(linkEl);
 
-            var range = this.nativeEditor.getSelection().getRanges()[0];
+            var selection = this.nativeEditor.getSelection();
+            var range = selection.getRanges()[0];
+            range.optimize();
 
-            assert.isTrue(range.startContainer.equals(linkEl));
+            assert.isTrue(range.startContainer.equals(range.endContainer));
             assert.strictEqual(range.startOffset, 1);
-            assert.isTrue(range.endContainer.equals(linkEl));
+            assert.isTrue(range.endContainer.equals(range.endContainer));
             assert.strictEqual(range.endOffset, 1);
         });
     });

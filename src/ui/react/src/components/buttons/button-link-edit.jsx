@@ -147,7 +147,7 @@
                     </button>
                     <div className="ae-container-input xxl">
                         {targetSelector}
-                        <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
+                        <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyUp={this._handleKeyUp} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
                         <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
                     </div>
                     <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
@@ -212,10 +212,10 @@
          * - Escape: Discards the changes.
          *
          * @protected
-         * @method _handleKeyDown
+         * @method _handleKeyUp
          * @param {SyntheticEvent} event The keyboard event.
          */
-        _handleKeyDown: function(event) {
+        _handleKeyUp: function(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
                 event.preventDefault();
             }
