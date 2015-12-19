@@ -318,13 +318,44 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         constructor: Link,
 
         /**
+         * Advances the editor selection to the next available position after a
+         * given link or the one in the current selection.
+         *
+         * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+         * @method advanceSelection
+         */
+        advanceSelection: function advanceSelection(link) {
+            link = link || this.getFromSelection();
+
+            var range = this._editor.getSelection().getRanges()[0];
+
+            if (link) {
+                range.moveToElementEditEnd(link);
+
+                var nextNode = range.getNextEditableNode();
+
+                if (nextNode && !this._editor.element.equals(nextNode.getCommonAncestor(link))) {
+                    var whitespace = /\s/.exec(nextNode.getText());
+
+                    var offset = whitespace ? whitespace.index + 1 : 0;
+
+                    range.setStart(nextNode, offset);
+                    range.setEnd(nextNode, offset);
+                }
+            }
+
+            this._editor.getSelection().selectRanges([range]);
+        },
+
+        /**
          * Create a link with given URI as href.
          *
          * @method create
          * @param {String} URI The URI of the link.
          * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
+         * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
          */
-        create: function create(URI, attrs) {
+        create: function create(URI, attrs, modifySelection) {
             var selection = this._editor.getSelection();
 
             var range = selection.getRanges()[0];
@@ -349,7 +380,12 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             style.type = CKEDITOR.STYLE_INLINE;
             style.applyToRange(range, this._editor);
-            range.select();
+
+            if (modifySelection && modifySelection.advance) {
+                this.advanceSelection();
+            } else {
+                range.select();
+            }
         },
 
         /**
@@ -382,12 +418,17 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * Removes a link from the editor.
          *
          * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+         * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
          * @method remove
          */
-        remove: function remove(link) {
+        remove: function remove(link, modifySelection) {
             var editor = this._editor;
 
             if (link) {
+                if (modifySelection && modifySelection.advance) {
+                    this.advanceSelection();
+                }
+
                 link.remove(editor);
             } else {
                 var style = new CKEDITOR.style({
@@ -413,8 +454,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @method update
          * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
          * @param {CKEDITOR.dom.element} link The link element which href should be removed.
+         * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
          */
-        update: function update(attrs, link) {
+        update: function update(attrs, link, modifySelection) {
             link = link || this.getFromSelection();
 
             if (typeof attrs === 'string') {
@@ -444,6 +486,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
                 link.removeAttributes(removeAttrs);
                 link.setAttributes(setAttrs);
+            }
+
+            if (modifySelection && modifySelection.advance) {
+                this.advanceSelection(link);
             }
         },
 
@@ -4733,12 +4779,24 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 (function () {
     'use strict';
 
+    var _isRangeAtElementEnd = function _isRangeAtElementEnd(range, element) {
+        // Finding if a range is at the end of an element is somewhat tricky due to how CKEditor handles
+        // ranges. It might depend on wether a source node inside the element is selected or not. For now,
+        // we need to cover the following cases:
+        //
+        // - The text length of the element is the same as the endOffset of the range
+        // - Both start and end containers match the element and the start and end offsets are 1
+
+        return element.getText().length === range.endOffset || element.equals(range.startContainer) && element.equals(range.endContainer) && range.startOffset === range.endOffset && range.endOffset === 1;
+    };
+
     var linkSelectionTest = function linkSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
+        var range = nativeEditor.getSelection().getRanges()[0];
 
         var element;
 
-        return !!(nativeEditor.isSelectionEmpty() && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && !element.isReadOnly());
+        return !!(nativeEditor.isSelectionEmpty() && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
     };
 
     var imageSelectionTest = function imageSelectionTest(payload) {
@@ -7912,7 +7970,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
-            if (this.state.requestExclusive) {
+            if (this.props.renderExclusive) {
                 // We need to wait for the next rendering cycle before focusing to avoid undesired
                 // scrolls on the page
                 if (window.requestAnimationFrame) {
@@ -8006,7 +8064,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     'div',
                     { className: 'ae-container-input xxl' },
                     targetSelector,
-                    React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                    React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyUp: this._handleKeyUp, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
                     React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
                 ),
                 React.createElement(
@@ -8072,10 +8130,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * - Escape: Discards the changes.
          *
          * @protected
-         * @method _handleKeyDown
+         * @method _handleKeyUp
          * @param {SyntheticEvent} event The keyboard event.
          */
-        _handleKeyDown: function _handleKeyDown(event) {
+        _handleKeyUp: function _handleKeyUp(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
                 event.preventDefault();
             }
@@ -8083,9 +8141,11 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             if (event.keyCode === KEY_ENTER) {
                 this._updateLink();
             } else if (event.keyCode === KEY_ESC) {
-                this.props.cancelExclusive();
+                var editor = this.props.editor.get('nativeEditor');
 
-                this.props.editor.get('nativeEditor').focus();
+                new CKEDITOR.Link(editor).advanceSelection();
+
+                this.props.editor.get('nativeEditor').fire('actionPerformed', this);
             }
         },
 
@@ -8128,7 +8188,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             var selection = editor.getSelection();
             var bookmarks = selection.createBookmarks();
 
-            linkUtils.remove(this.state.element);
+            linkUtils.remove(this.state.element, { advance: true });
 
             selection.selectBookmarks(bookmarks);
 
@@ -8152,14 +8212,15 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             var linkAttrs = {
                 target: this.state.linkTarget
             };
+            var modifySelection = { advance: true };
 
             if (this.state.linkHref) {
                 if (this.state.element) {
                     linkAttrs.href = this.state.linkHref;
 
-                    linkUtils.update(linkAttrs, this.state.element);
+                    linkUtils.update(linkAttrs, this.state.element, modifySelection);
                 } else {
-                    linkUtils.create(this.state.linkHref, linkAttrs);
+                    linkUtils.create(this.state.linkHref, linkAttrs, modifySelection);
                 }
 
                 editor.fire('actionPerformed', this);

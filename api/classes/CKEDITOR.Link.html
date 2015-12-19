@@ -261,6 +261,10 @@
                             
                                                         </li>
                                                         <li class="index-item method">
+                                                            <a href="#method_advanceSelection">advanceSelection</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
                                                             <a href="#method_create">create</a>
                             
                                                         </li>
@@ -311,7 +315,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l151"><code>src&#x2F;core&#x2F;link.js:151</code></a>
+                                                        <a href="../files/src_core_link.js.html#l197"><code>src&#x2F;core&#x2F;link.js:197</code></a>
                                                         </p>
                                                 
                                                 
@@ -353,16 +357,13 @@
                                                         </div>
                                                 
                                                 </div>
-                                                <div id="method_create" class="method item">
-                                                    <h3 class="name"><code>create</code></h3>
+                                                <div id="method_advanceSelection" class="method item">
+                                                    <h3 class="name"><code>advanceSelection</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>URI</code>
-                                                                </li>
-                                                                <li class="arg">
-                                                                        <code>attrs</code>
+                                                                        <code>link</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
@@ -378,6 +379,66 @@
                                                                 <p>
                                                                 Defined in
                                                         <a href="../files/src_core_link.js.html#l21"><code>src&#x2F;core&#x2F;link.js:21</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Advances the editor selection to the next available position after a
+                                                given link or the one in the current selection.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">link</code>
+                                                                        <span class="type">CKEDITOR.dom.element</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The link element which link style should be removed.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method_create" class="method item">
+                                                    <h3 class="name"><code>create</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>URI</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>attrs</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>modifySelection</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_core_link.js.html#l51"><code>src&#x2F;core&#x2F;link.js:51</code></a>
                                                         </p>
                                                 
                                                 
@@ -415,6 +476,17 @@
                                                                     </div>
                                                 
                                                                 </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">modifySelection</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>A config object with an advance attribute to indicate if the selection should be moved after the link creation.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                 
@@ -438,7 +510,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l56"><code>src&#x2F;core&#x2F;link.js:56</code></a>
+                                                        <a href="../files/src_core_link.js.html#l92"><code>src&#x2F;core&#x2F;link.js:92</code></a>
                                                         </p>
                                                 
                                                 
@@ -470,6 +542,9 @@
                                                                 <li class="arg">
                                                                         <code>link</code>
                                                                 </li>
+                                                                <li class="arg">
+                                                                        <code>modifySelection</code>
+                                                                </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
@@ -483,7 +558,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l82"><code>src&#x2F;core&#x2F;link.js:82</code></a>
+                                                        <a href="../files/src_core_link.js.html#l118"><code>src&#x2F;core&#x2F;link.js:118</code></a>
                                                         </p>
                                                 
                                                 
@@ -510,6 +585,17 @@
                                                                     </div>
                                                 
                                                                 </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">modifySelection</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>A config object with an advance attribute to indicate if the selection should be moved after the link creation.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                 
@@ -526,6 +612,9 @@
                                                                 <li class="arg">
                                                                         <code>link</code>
                                                                 </li>
+                                                                <li class="arg">
+                                                                        <code>modifySelection</code>
+                                                                </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
@@ -539,7 +628,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l111"><code>src&#x2F;core&#x2F;link.js:111</code></a>
+                                                        <a href="../files/src_core_link.js.html#l152"><code>src&#x2F;core&#x2F;link.js:152</code></a>
                                                         </p>
                                                 
                                                 
@@ -573,6 +662,17 @@
                                                 
                                                                     <div class="param-description">
                                                                         <p>The link element which href should be removed.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">modifySelection</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>A config object with an advance attribute to indicate if the selection should be moved after the link creation.</p>
                                                 
                                                                     </div>
                                                 

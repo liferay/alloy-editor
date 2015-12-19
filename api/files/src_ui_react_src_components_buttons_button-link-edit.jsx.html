@@ -231,7 +231,7 @@
                                      * @method componentDidMount
                                      */
                                     componentDidMount: function () {
-                                        if (this.state.requestExclusive) {
+                                        if (this.props.renderExclusive) {
                                             // We need to wait for the next rendering cycle before focusing to avoid undesired
                                             // scrolls on the page
                                             if (window.requestAnimationFrame) {
@@ -320,7 +320,7 @@
                                                 &lt;/button&gt;
                                                 &lt;div className=&quot;ae-container-input xxl&quot;&gt;
                                                     {targetSelector}
-                                                    &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                    &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyUp={this._handleKeyUp} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
                                                     &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;ae-button ae-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
                                                 &lt;/div&gt;
                                                 &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;ae-button&quot; disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
@@ -385,10 +385,10 @@
                                      * - Escape: Discards the changes.
                                      *
                                      * @protected
-                                     * @method _handleKeyDown
+                                     * @method _handleKeyUp
                                      * @param {SyntheticEvent} event The keyboard event.
                                      */
-                                    _handleKeyDown: function(event) {
+                                    _handleKeyUp: function(event) {
                                         if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
                                             event.preventDefault();
                                         }
@@ -396,9 +396,11 @@
                                         if (event.keyCode === KEY_ENTER) {
                                             this._updateLink();
                                         } else if (event.keyCode === KEY_ESC) {
-                                            this.props.cancelExclusive();
+                                            var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
                             
-                                            this.props.editor.get(&#x27;nativeEditor&#x27;).focus();
+                                            new CKEDITOR.Link(editor).advanceSelection();
+                            
+                                            this.props.editor.get(&#x27;nativeEditor&#x27;).fire(&#x27;actionPerformed&#x27;, this);
                                         }
                                     },
                             
@@ -441,7 +443,7 @@
                                         var selection = editor.getSelection();
                                         var bookmarks = selection.createBookmarks();
                             
-                                        linkUtils.remove(this.state.element);
+                                        linkUtils.remove(this.state.element, { advance: true });
                             
                                         selection.selectBookmarks(bookmarks);
                             
@@ -465,14 +467,15 @@
                                         var linkAttrs = {
                                             target: this.state.linkTarget
                                         };
+                                        var modifySelection = { advance: true };
                             
                                         if (this.state.linkHref) {
                                             if (this.state.element) {
                                                 linkAttrs.href = this.state.linkHref;
                             
-                                                linkUtils.update(linkAttrs, this.state.element);
+                                                linkUtils.update(linkAttrs, this.state.element, modifySelection);
                                             } else {
-                                                linkUtils.create(this.state.linkHref, linkAttrs);
+                                                linkUtils.create(this.state.linkHref, linkAttrs, modifySelection);
                                             }
                             
                                             editor.fire(&#x27;actionPerformed&#x27;, this);
