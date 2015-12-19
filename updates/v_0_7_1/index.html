@@ -1,0 +1,37 @@
+---
+category: Updates
+index: false
+
+version: 0.7.1
+
+features:
+-
+	icon: buttons
+	title: Link creating button is now able to set link target
+	description: When user creates or edits a link, now there is a possibility to set link's target (blank, self, etc)
+	url: https://github.com/liferay/alloy-editor/issues/344
+-
+	icon: buttons
+	title: Link creating button advances the cursor after the created link
+	description: After creating a link, the cursor will be advanced after the link. This provides better UX.
+	url: https://github.com/liferay/alloy-editor/issues/128
+-
+	icon: ckeditor
+	title: Updated to CKEditor's engine 4.5.5
+	description: CKEDIOR's engine has been updated to 4.5.5, which fixes an issue with destroying CKEDITOR's instance immediately after creation.
+	url: https://github.com/liferay/alloy-editor/issues/375
+-
+	icon: bugs
+	title: Bug Fixes
+	description: Fixed an <a href="https://github.com/liferay/alloy-editor/issues/375">issue</a> with destroying the instance of the editor too early, fixed an <a href="https://github.com/liferay/alloy-editor/issues/379">issue</a> with initializing AlloyEditor's plugins when CKEditor's are present
+-
+	icon: api
+	title: New <i>autolinkAdd</i> event
+	description: A new event, called <i>autolinkAdd</i> will be fired when AlloyEditor creates a link automatically
+	url: https://github.com/liferay/alloy-editor/issues/388
+-
+	icon: api
+	title: YUI's UI removed
+	description: In this version the old YUI UI has been completely removed.
+	url: https://github.com/liferay/alloy-editor/issues/247
+---

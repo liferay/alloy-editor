@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.7.0</b>
+                        API Docs for Version: <b>0.7.1</b>
                     </p>
                 </li>
             </div>
@@ -78,6 +78,7 @@
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
@@ -191,13 +192,44 @@
                                     constructor: Link,
                             
                                     /**
+                                     * Advances the editor selection to the next available position after a
+                                     * given link or the one in the current selection.
+                                     *
+                                     * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+                                     * @method advanceSelection
+                                     */
+                                    advanceSelection: function(link) {
+                                        link = link || this.getFromSelection();
+                            
+                                        var range = this._editor.getSelection().getRanges()[0];
+                            
+                                        if (link) {
+                                            range.moveToElementEditEnd(link);
+                            
+                                            var nextNode = range.getNextEditableNode();
+                            
+                                            if (nextNode &amp;&amp; !this._editor.element.equals(nextNode.getCommonAncestor(link))) {
+                                                var whitespace = /\s/.exec(nextNode.getText());
+                            
+                                                var offset = whitespace ? whitespace.index + 1 : 0;
+                            
+                                                range.setStart(nextNode, offset);
+                                                range.setEnd(nextNode, offset);
+                                            }
+                                        }
+                            
+                                        this._editor.getSelection().selectRanges([range]);
+                                    },
+                            
+                                    /**
                                      * Create a link with given URI as href.
                                      *
                                      * @method create
                                      * @param {String} URI The URI of the link.
                                      * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
+                                     * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
                                      */
-                                    create: function(URI, attrs) {
+                                    create: function(URI, attrs, modifySelection) {
                                         var selection = this._editor.getSelection();
                             
                                         var range = selection.getRanges()[0];
@@ -222,7 +254,12 @@
                             
                                         style.type = CKEDITOR.STYLE_INLINE;
                                         style.applyToRange(range, this._editor);
-                                        range.select();
+                            
+                                        if (modifySelection &amp;&amp; modifySelection.advance) {
+                                            this.advanceSelection();
+                                        } else {
+                                            range.select();
+                                        }
                                     },
                             
                                     /**
@@ -255,15 +292,20 @@
                                      * Removes a link from the editor.
                                      *
                                      * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+                                     * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
                                      * @method remove
                                      */
-                                    remove: function(link) {
+                                    remove: function(link, modifySelection) {
                                         var editor = this._editor;
                             
                                         if (link) {
+                                            if (modifySelection &amp;&amp; modifySelection.advance) {
+                                                this.advanceSelection();
+                                            }
+                            
                                             link.remove(editor);
                                         } else {
-                                            var style = link || new CKEDITOR.style({
+                                            var style = new CKEDITOR.style({
                                                 alwaysRemoveElement: 1,
                                                 element: &#x27;a&#x27;,
                                                 type: CKEDITOR.STYLE_INLINE
@@ -284,16 +326,45 @@
                                      * Updates the href of an already existing link.
                                      *
                                      * @method update
-                                     * @param {String} URI The new URI of the link.
+                                     * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
                                      * @param {CKEDITOR.dom.element} link The link element which href should be removed.
+                                     * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
                                      */
-                                    update: function(URI, link) {
-                                        var style = link || this.getFromSelection();
+                                    update: function(attrs, link, modifySelection) {
+                                        link = link || this.getFromSelection();
                             
-                                        style.setAttributes({
-                                            &#x27;data-cke-saved-href&#x27;: URI,
-                                            href: URI
-                                        });
+                                        if (typeof attrs === &#x27;string&#x27;) {
+                                            link.setAttributes({
+                                                &#x27;data-cke-saved-href&#x27;: attrs,
+                                                href: attrs
+                                            });
+                                        } else if (typeof attrs === &#x27;object&#x27;) {
+                                            var removeAttrs = [];
+                                            var setAttrs = {};
+                            
+                                            Object.keys(attrs).forEach(function(key) {
+                                                if (attrs[key] === null) {
+                                                    if (key === &#x27;href&#x27;) {
+                                                        removeAttrs.push(&#x27;data-cke-saved-href&#x27;);
+                                                    }
+                            
+                                                    removeAttrs.push(key);
+                                                } else {
+                                                    if (key === &#x27;href&#x27;) {
+                                                        setAttrs[&#x27;data-cke-saved-href&#x27;] = attrs[key];
+                                                    }
+                            
+                                                    setAttrs[key] = attrs[key];
+                                                }
+                                            });
+                            
+                                            link.removeAttributes(removeAttrs);
+                                            link.setAttributes(setAttrs);
+                                        }
+                            
+                                        if (modifySelection &amp;&amp; modifySelection.advance) {
+                                            this.advanceSelection(link);
+                                        }
                                     },
                             
                                     /**

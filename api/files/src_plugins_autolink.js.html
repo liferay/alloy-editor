@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.7.0</b>
+                        API Docs for Version: <b>0.7.1</b>
                     </p>
                 </li>
             </div>
@@ -78,6 +78,7 @@
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
@@ -373,6 +374,9 @@
                                             ckLink.create(content);
                                             this._ckLink = ckLink;
                             
+                                            var linkNode = this._startContainer.getNext() || this._startContainer;
+                                            editor.fire(&#x27;autolinkAdd&#x27;, linkNode.getParent());
+                            
                                             this._subscribeToKeyEvent(editor);
                             
                                             // Now range is on the link and it is selected. We have to
@@ -396,6 +400,13 @@
                                             range.select();
                                         },
                             
+                                        /**
+                                         * Fired when a URL is detected in text and converted to a link.
+                                         *
+                                         * @event autolinkAdd
+                                         * @param {CKEDITOR.dom.element} el Node of the created link.
+                                         */
+                            	  
                                         /**
                                          * Removes the created link element, and replaces it by its text.
                                          *
