@@ -201,8 +201,8 @@
                 ckLink.create(content);
                 this._ckLink = ckLink;
 
-                var linkNode = this._startContainer.getNext() || this._startContainer;
-                editor.fire('autolinkAdd', linkNode.getParent());
+                var linkNode = ckLink.getFromSelection();
+                editor.fire('autolinkAdd', linkNode);
 
                 this._subscribeToKeyEvent(editor);
 
