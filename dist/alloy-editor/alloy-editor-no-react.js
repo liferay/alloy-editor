@@ -746,7 +746,7 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
 function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * AlloyEditor static object.
@@ -754,7 +754,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * @class AlloyEditor
      * @type {Object}
      */
-    ;
+
     var AlloyEditor = {
         /**
          * Creates an instance of AlloyEditor.
@@ -978,7 +978,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
@@ -1000,7 +1000,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * @param {Object} context The context in which the callback will be called. This argument is optional.
      * @param {Array} args An array of arguments which the callback will receive.
      */
-    ;
+
     CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function (callback, timeout, context, args) {
         var debounceHandle;
 
@@ -1987,7 +1987,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
@@ -2007,7 +2007,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * @param {Object} objects* One or more objects to merge.
      * @return {Object} A new merged object.
      */
-    ;
+
     CKEDITOR.tools.merge = CKEDITOR.tools.merge || function () {
         var result = {};
 
@@ -2571,8 +2571,8 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             ckLink.create(content);
             this._ckLink = ckLink;
 
-            var linkNode = this._startContainer.getNext() || this._startContainer;
-            editor.fire('autolinkAdd', linkNode.getParent());
+            var linkNode = ckLink.getFromSelection();
+            editor.fire('autolinkAdd', linkNode);
 
             this._subscribeToKeyEvent(editor);
 
@@ -4414,10 +4414,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /* istanbul ignore if */
-    ;
+
     if (CKEDITOR.plugins.get('ae_buttonbridge')) {
         return;
     }
@@ -4555,10 +4555,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /* istanbul ignore if */
-    ;
+
     if (CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
         return;
     }
@@ -4715,10 +4715,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /* istanbul ignore if */
-    ;
+
     if (CKEDITOR.plugins.get('ae_richcombobridge')) {
         return;
     }
@@ -4939,7 +4939,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * CKEditor plugin that extends CKEDITOR.ui.add function so an add handler can be specified
@@ -4949,7 +4949,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
      * @class CKEDITOR.plugins.ae_uibridge
      * @constructor
      */
-    ;
+
     CKEDITOR.plugins.add('ae_uibridge', {
         /**
          * Initialization of the plugin, part of CKEditor plugin lifecycle.
@@ -4977,14 +4977,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
 function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * Provides core language utilities.
      *
      * @class Lang
      */
-    ;
+
     var Lang = {
         /**
          * Check if the passed value is an array.
@@ -5161,7 +5161,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * Attribute implementation.
@@ -5169,7 +5169,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * @class Attribute
      * @constructor
     */
-    ;
+
     function Attribute(config) {
         this.__config__ = config || {};
         this.__ATTRS__ = {};
@@ -5357,7 +5357,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * Quick and dirty impl of Base class.
@@ -5365,7 +5365,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * @class Base
      * @constructor
      */
-    ;
+
     function Base(config) {
         Base.superclass.constructor.call(this, config);
 
@@ -5444,10 +5444,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     // Default gutter value for toolbar positioning
-    ;
+
     var DEFAULT_GUTTER = {
         left: 0,
         top: 0
@@ -5598,7 +5598,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * AlloyEditor main class. Creates instance of the editor and provides the user configuration
@@ -5607,7 +5607,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * @class Core
      * @constructor
      */
-    ;
+
     function Core(config) {
         Core.superclass.constructor.call(this, config);
     }
@@ -5926,7 +5926,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * ButtonActionStyle is a mixin that provides applying style implementation for a
@@ -5939,7 +5939,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonActionStyle
      */
-    ;
+
     var ButtonActionStyle = {
         /**
          * Removes or applies the component style to the current selection.
@@ -5970,14 +5970,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * ButtonCommand is a mixin that executes a command via CKEDITOR's API.
      *
      * @class ButtonCommand
      */
-    ;
+
     var ButtonCommand = {
         // Allows validating props being passed to the component.
         propTypes: {
@@ -6021,7 +6021,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * ButtonStateClasses is a mixin that decorates the domElement of a component
@@ -6033,7 +6033,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonStateClasses
      */
-    ;
+
     var ButtonStateClasses = {
         /**
          * Returns the list of state classes associated to the current element's state, according
@@ -6064,7 +6064,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * ButtonStyle is a mixin that provides a style prop and some methods to apply the resulting
@@ -6072,7 +6072,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonStyle
      */
-    ;
+
     var ButtonStyle = {
         // Allows validating props being passed to the component.
         propTypes: {
@@ -6136,7 +6136,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * ToolbarButtons is a mixin which provides a list of buttons which have to be
@@ -6144,7 +6144,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ToolbarButtons
      */
-    ;
+
     var ToolbarButtons = {
         /**
          * Analyzes the current selection and the buttons exclusive mode value to figure out which
@@ -6196,7 +6196,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * Provides functionality for displaying Widget Arrow box on top or on bottom of the widget
@@ -6204,7 +6204,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class WidgetArrowBox
      */
-    ;
+
     var WidgetArrowBox = {
         /**
          * Returns the list of arrow box classes associated to the current element's state. It relies
@@ -6233,14 +6233,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * Provides functionality for managing different dropdowns inside a widget.
      *
      * @class WidgetDropdown
      */
-    ;
+
     var WidgetDropdown = {
         /**
          * Lifecycle. Invoked when a component is receiving new props.
@@ -6314,7 +6314,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * Provides functionality for managing exclusive state of an widget.
@@ -6324,7 +6324,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class WidgetExclusive
      */
-    ;
+
     var WidgetExclusive = {
         /**
          * Cancels the exclusive state of an widget.
@@ -6756,14 +6756,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * Provides functionality for calculating the point of interaction of the user with the Editor.
      *
      * @class WidgetInteractionPoint
      */
-    ;
+
     var WidgetInteractionPoint = {
         // Allows validating props being passed to the component.
         propTypes: {
@@ -6884,7 +6884,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * Calculates the position where an Widget should be displayed based on the point
@@ -6894,7 +6894,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class WidgetPosition
      */
-    ;
+
     var WidgetPosition = {
         mixins: [AlloyEditor.WidgetInteractionPoint],
 
@@ -7151,7 +7151,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
@@ -7162,7 +7162,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonBold
      */
-    ;
+
     var ButtonBold = React.createClass({
         displayName: 'ButtonBold',
 
@@ -7242,14 +7242,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonCameraImage class takes photo from camera and inserts it to the content.
      *
      * @class ButtonCameraImage
      */
-    ;
+
     var ButtonCameraImage = React.createClass({
         displayName: 'ButtonCameraImage',
 
@@ -7429,7 +7429,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonCamera class renders in two different ways:
@@ -7439,7 +7439,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonCamera
      */
-    ;
+
     var ButtonCamera = React.createClass({
         displayName: 'ButtonCamera',
 
@@ -7506,7 +7506,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonCode class provides wraps a selection in `pre` element.
@@ -7517,7 +7517,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonCode
      */
-    ;
+
     var ButtonCode = React.createClass({
         displayName: 'ButtonCode',
 
@@ -7596,7 +7596,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonCommandListItem class is a UI class that renders a ButtonCommand that can be used inside
@@ -7606,7 +7606,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonCommandListItem
      */
-    ;
+
     var ButtonCommandListItem = React.createClass({
         displayName: 'ButtonCommandListItem',
 
@@ -7676,7 +7676,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonCommandsList class provides functionality for showing a list of commands that can be
@@ -7686,7 +7686,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonCommandsList
      */
-    ;
+
     var ButtonCommandsList = React.createClass({
         displayName: 'ButtonCommandsList',
 
@@ -7807,7 +7807,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonDropdown class provides markup and keyboard navigation behaviour to a dropdown
@@ -7815,7 +7815,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonDropdown
      */
-    ;
+
     var ButtonDropdown = React.createClass({
         displayName: 'ButtonDropdown',
 
@@ -7876,7 +7876,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonH1 class provides wraps a selection in `h1` element.
@@ -7887,7 +7887,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonH1
      */
-    ;
+
     var ButtonH1 = React.createClass({
         displayName: 'ButtonH1',
 
@@ -7966,7 +7966,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonH2 class provides wraps a selection in `h2` element.
@@ -7977,7 +7977,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonH2
      */
-    ;
+
     var ButtonH2 = React.createClass({
         displayName: 'ButtonH2',
 
@@ -8056,7 +8056,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonHline class provides inserts horizontal line.
@@ -8066,7 +8066,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonHline
      */
-    ;
+
     var ButtonHline = React.createClass({
         displayName: 'ButtonHline',
 
@@ -8144,7 +8144,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonImageAlignCenter class provides functionality for aligning an image in the center.
@@ -8155,7 +8155,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonImageAlignCenter
      */
-    ;
+
     var ButtonImageAlignCenter = React.createClass({
         displayName: 'ButtonImageAlignCenter',
 
@@ -8240,7 +8240,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonImageAlignLeft class provides functionality for aligning an image on left.
@@ -8251,7 +8251,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonImageAlignLeft
      */
-    ;
+
     var ButtonImageAlignLeft = React.createClass({
         displayName: 'ButtonImageAlignLeft',
 
@@ -8333,7 +8333,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonImageAlignRight class provides functionality for aligning an image on right.
@@ -8344,7 +8344,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonImageAlignRight
      */
-    ;
+
     var ButtonImageAlignRight = React.createClass({
         displayName: 'ButtonImageAlignRight',
 
@@ -8426,14 +8426,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonImage class inserts an image to the content.
      *
      * @class ButtonImage
      */
-    ;
+
     var ButtonImage = React.createClass({
         displayName: 'ButtonImage',
 
@@ -8554,7 +8554,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonItalic class provides functionality for styling an selection with italic (em) style.
@@ -8565,7 +8565,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonItalic
      */
-    ;
+
     var ButtonItalic = React.createClass({
         displayName: 'ButtonItalic',
 
@@ -8988,7 +8988,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonLinkTargetEdit class provides functionality for changing the target of a link
@@ -8998,7 +8998,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonLinkTargetEdit
      */
-    ;
+
     var ButtonLinkTargetEdit = React.createClass({
         displayName: 'ButtonLinkTargetEdit',
 
@@ -9143,7 +9143,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonLink class provides functionality for creating and editing a link in a document. ButtonLink
@@ -9156,7 +9156,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonLink
      */
-    ;
+
     var ButtonLink = React.createClass({
         displayName: 'ButtonLink',
 
@@ -9235,7 +9235,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonOrderedList class provides functionality for creating ordered lists in an editor.
@@ -9246,7 +9246,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonOrderedList
      */
-    ;
+
     var ButtonOrderedList = React.createClass({
         displayName: 'ButtonOrderedList',
 
@@ -9326,7 +9326,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonParagraphAlignLeft class provides functionality for aligning a paragraph on left.
@@ -9337,7 +9337,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonParagraphAlignLeft
      */
-    ;
+
     var ButtonParagraphAlignLeft = React.createClass({
         displayName: 'ButtonParagraphAlignLeft',
 
@@ -9419,7 +9419,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonParagraphAlignRight class provides functionality for aligning a paragraph on right.
@@ -9430,7 +9430,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonParagraphAlignRight
      */
-    ;
+
     var ButtonParagraphAlignRight = React.createClass({
         displayName: 'ButtonParagraphAlignRight',
 
@@ -9512,7 +9512,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonParagraphCenter class provides functionality for centering a paragraph.
@@ -9523,7 +9523,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonParagraphCenter
      */
-    ;
+
     var ButtonParagraphCenter = React.createClass({
         displayName: 'ButtonParagraphCenter',
 
@@ -9605,7 +9605,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonParagraphJustify class provides functionality for justfying a paragraph.
@@ -9616,7 +9616,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonParagraphJustify
      */
-    ;
+
     var ButtonParagraphJustify = React.createClass({
         displayName: 'ButtonParagraphJustify',
 
@@ -9698,7 +9698,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonQuote class wraps a selection in `blockquote` element.
@@ -9709,7 +9709,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonQuote
      */
-    ;
+
     var ButtonQuote = React.createClass({
         displayName: 'ButtonQuote',
 
@@ -9789,7 +9789,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonRemoveFormat class removes style formatting.
@@ -9798,7 +9798,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonRemoveFormat
      */
-    ;
+
     var ButtonRemoveFormat = React.createClass({
         displayName: 'ButtonRemoveFormat',
 
@@ -9873,7 +9873,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonStrike class styles a selection with strike style.
@@ -9884,7 +9884,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonStrike
      */
-    ;
+
     var ButtonStrike = React.createClass({
         displayName: 'ButtonStrike',
 
@@ -9964,14 +9964,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 "use strict";
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonsStylesListHeader class provides the header of an list of style items.
      *
      * @class ButtonsStylesListHeader
      */
-    ;
+
     var ButtonsStylesListHeader = React.createClass({
         displayName: "ButtonsStylesListHeader",
 
@@ -9999,7 +9999,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonStylesListItemRemove class provides functionality for previewing a style definition
@@ -10007,7 +10007,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonStylesListItemRemove
      */
-    ;
+
     var ButtonStylesListItemRemove = React.createClass({
         displayName: 'ButtonStylesListItemRemove',
 
@@ -10112,7 +10112,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonStylesListItem class provides functionality for previewing a style definition
@@ -10123,7 +10123,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonStylesListItem
      */
-    ;
+
     var ButtonStylesListItem = React.createClass({
         displayName: 'ButtonStylesListItem',
 
@@ -10194,7 +10194,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonStylesList class provides functionality for showing a list of styles that can be
@@ -10204,7 +10204,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonStylesList
      */
-    ;
+
     var ButtonStylesList = React.createClass({
         displayName: 'ButtonStylesList',
 
@@ -10342,7 +10342,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonStyles class provides functionality for styling a selection with a list of
@@ -10351,7 +10351,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonStyles
      */
-    ;
+
     var ButtonStyles = React.createClass({
         displayName: 'ButtonStyles',
 
@@ -10529,7 +10529,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonSubscript class provides functionality for applying subscript style to a text selection.
@@ -10540,7 +10540,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonSubscript
      */
-    ;
+
     var ButtonSubscript = React.createClass({
         displayName: 'ButtonSubscript',
 
@@ -10620,7 +10620,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonSuperscript class provides functionality for applying superscript style to a text selection.
@@ -10631,7 +10631,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonSuperscript
      */
-    ;
+
     var ButtonSuperscript = React.createClass({
         displayName: 'ButtonSuperscript',
 
@@ -10711,14 +10711,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonTableCell class provides functionality to work with table cells.
      *
      * @class ButtonTableCell
      */
-    ;
+
     var ButtonTableCell = React.createClass({
         displayName: 'ButtonTableCell',
 
@@ -10848,14 +10848,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonTableColumn class provides functionality to work with table columns.
      *
      * @class ButtonTableColumn
      */
-    ;
+
     var ButtonTableColumn = React.createClass({
         displayName: 'ButtonTableColumn',
 
@@ -11158,14 +11158,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonTableHeading class provides functionality to work with table heading.
      *
      * @class ButtonTableHeading
      */
-    ;
+
     var ButtonTableHeading = React.createClass({
         displayName: 'ButtonTableHeading',
 
@@ -11302,14 +11302,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonTableRemove class provides functionality for removing a table
      *
      * @class ButtonTableRemove
      */
-    ;
+
     var ButtonTableRemove = React.createClass({
         displayName: 'ButtonTableRemove',
 
@@ -11385,14 +11385,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonTableRow class provides functionality to work with table rows.
      *
      * @class ButtonTableRow
      */
-    ;
+
     var ButtonTableRow = React.createClass({
         displayName: 'ButtonTableRow',
 
@@ -11507,7 +11507,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonTable class provides functionality for creating and editing a table in a document. ButtonTable
@@ -11518,7 +11518,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonTable
      */
-    ;
+
     var ButtonTable = React.createClass({
         displayName: 'ButtonTable',
 
@@ -11583,7 +11583,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonTwitter class provides functionality for creating a link which
@@ -11593,7 +11593,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonTwitter
      */
-    ;
+
     var ButtonTwitter = React.createClass({
         displayName: 'ButtonTwitter',
 
@@ -11718,7 +11718,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonUnorderedlist class provides functionality for creating unordered lists in an editor.
@@ -11729,7 +11729,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonUnorderedlist
      */
-    ;
+
     var ButtonUnorderedlist = React.createClass({
         displayName: 'ButtonUnorderedlist',
 
@@ -11809,7 +11809,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ButtonUnderline class provides functionality for underlying a text selection.
@@ -11820,7 +11820,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ButtonUnderline
      */
-    ;
+
     var ButtonUnderline = React.createClass({
         displayName: 'ButtonUnderline',
 
@@ -11900,7 +11900,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ToolbarAdd class provides functionality for adding content to the editor.
@@ -11914,7 +11914,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ToolbarAdd
      */
-    ;
+
     var ToolbarAdd = React.createClass({
         displayName: 'ToolbarAdd',
 
@@ -12148,7 +12148,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The ToolbarStyles class hosts the buttons for styling a text selection.
@@ -12162,7 +12162,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class ToolbarStyles
      */
-    ;
+
     var ToolbarStyles = React.createClass({
         displayName: 'ToolbarStyles',
 
@@ -12413,7 +12413,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 'use strict';
 
 (function () {
-    'use strict'
+    'use strict';
 
     /**
      * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
@@ -12423,7 +12423,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      *
      * @class UI
      */
-    ;
+
     var UI = React.createClass({
         displayName: 'UI',
 

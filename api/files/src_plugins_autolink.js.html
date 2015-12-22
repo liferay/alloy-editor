@@ -374,8 +374,8 @@
                                             ckLink.create(content);
                                             this._ckLink = ckLink;
                             
-                                            var linkNode = this._startContainer.getNext() || this._startContainer;
-                                            editor.fire(&#x27;autolinkAdd&#x27;, linkNode.getParent());
+                                            var linkNode = ckLink.getFromSelection();
+                                            editor.fire(&#x27;autolinkAdd&#x27;, linkNode);
                             
                                             this._subscribeToKeyEvent(editor);
                             
