@@ -757,12 +757,20 @@ e._wrapperState.initialValue=void 0;var n=e._wrapperState.wasMultiple;e._wrapper
         React = AlloyEditor.React;
     }
 
+    if (typeof React === 'undefined' && typeof require === 'function') {
+        React = require('react');
+    }
+
     var ReactDOM = (function() {
         return (0, eval)('this').ReactDOM;
     }());
 
     if (typeof ReactDOM === 'undefined' && typeof AlloyEditor !== 'undefined') {
         ReactDOM = AlloyEditor.ReactDOM;
+    }
+
+    if (typeof ReactDOM === 'undefined' && typeof require === 'function') {
+        ReactDOM = require('react-dom');
     }
 
     if (typeof window !== 'undefined') {
