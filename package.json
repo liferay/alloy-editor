@@ -49,7 +49,7 @@
     "walk": "^2.3.9",
     "yargs": "^3.15.0"
   },
-  "main": "dist/alloy-editor/alloy-editor-core.js",
+  "main": "dist/alloy-editor/alloy-editor-no-react.js",
   "scripts": {
     "test": "gulp test"
   },
