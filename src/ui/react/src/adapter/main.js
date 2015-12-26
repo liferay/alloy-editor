@@ -104,9 +104,9 @@
                 var lang = parts[1];
                 var locale = parts[2];
 
-                if (languages[lang + '-' + locale]) {
+                if (languages.indexOf(lang + '-' + locale) >= 0) {
                     lang = lang + '-' + locale;
-                } else if (!languages.indexOf(lang)) {
+                } else if (languages.indexOf(lang) === -1) {
                     lang = 'en';
                 }
 
