@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v0.7.3
+ * AlloyEditor v0.7.5
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -851,9 +851,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 var lang = parts[1];
                 var locale = parts[2];
 
-                if (languages[lang + '-' + locale]) {
+                if (languages.indexOf(lang + '-' + locale) >= 0) {
                     lang = lang + '-' + locale;
-                } else if (!languages.indexOf(lang)) {
+                } else if (languages.indexOf(lang) === -1) {
                     lang = 'en';
                 }
 
