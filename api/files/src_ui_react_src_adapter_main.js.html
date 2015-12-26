@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.7.3</b>
+                        API Docs for Version: <b>0.7.4</b>
                     </p>
                 </li>
             </div>
@@ -277,9 +277,9 @@
                                             var lang = parts[1];
                                             var locale = parts[2];
                             
-                                            if (languages[lang + &#x27;-&#x27; + locale]) {
+                                            if (languages.indexOf(lang + &#x27;-&#x27; + locale) &gt;= 0) {
                                                 lang = lang + &#x27;-&#x27; + locale;
-                                            } else if (!languages.indexOf(lang)) {
+                                            } else if (languages.indexOf(lang) === -1) {
                                                 lang = &#x27;en&#x27;;
                                             }
                             
