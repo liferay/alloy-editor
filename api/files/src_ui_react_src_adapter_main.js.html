@@ -201,9 +201,8 @@
                             
                                     /**
                                      * The full URL for the AlloyEditor installation directory.
-                                     * It is possible to manually provide the base path by doing one of these:
-                                     * 1. Setting AlloyEditor.basePath variable
-                                     * 2. Setting a global variable named &#x60;ALLOYEDITOR_BASEPATH&#x60;. This global variable
+                                     * It is possible to manually provide the base path by setting a
+                                     * global variable named &#x60;ALLOYEDITOR_BASEPATH&#x60;. This global variable
                                      * must be set **before** the editor script loading.
                                      *
                                      * @method getBasePath
@@ -211,12 +210,8 @@
                                      * @return {String} The found base path
                                      */
                                     getBasePath: function() {
-                                        if (AlloyEditor.basePath) {
-                                            window.CKEDITOR_BASEPATH = AlloyEditor.BASEPATH;
-                                        }
-                            
                                         // Find out the editor directory path, based on its &lt;script&gt; tag.
-                                        var path = AlloyEditor.basePath || window.ALLOYEDITOR_BASEPATH || &#x27;&#x27;;
+                                        var path = window.ALLOYEDITOR_BASEPATH || &#x27;&#x27;;
                             
                                         if (!path) {
                                             var scripts = document.getElementsByTagName(&#x27;script&#x27;);
@@ -246,7 +241,7 @@
                                         }
                             
                                         if (!path){
-                                            throw &#x27;The AlloyEditor installation path could not be automatically detected. Please set &quot;AlloyEditor.basePath&quot; variable or the global variable &quot;ALLOYEDITOR_BASEPATH&quot; before creating editor instances.&#x27;;
+                                            throw &#x27;The AlloyEditor installation path could not be automatically detected. Please set the global variable &quot;ALLOYEDITOR_BASEPATH&quot; before creating editor instances.&#x27;;
                                         }
                             
                                         return path;
