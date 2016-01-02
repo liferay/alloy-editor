@@ -320,7 +320,7 @@
                                                 &lt;/button&gt;
                                                 &lt;div className=&quot;ae-container-input xxl&quot;&gt;
                                                     {targetSelector}
-                                                    &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyUp={this._handleKeyUp} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                    &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
                                                     &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;ae-button ae-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
                                                 &lt;/div&gt;
                                                 &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;ae-button&quot; disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
@@ -385,10 +385,10 @@
                                      * - Escape: Discards the changes.
                                      *
                                      * @protected
-                                     * @method _handleKeyUp
+                                     * @method _handleKeyDown
                                      * @param {SyntheticEvent} event The keyboard event.
                                      */
-                                    _handleKeyUp: function(event) {
+                                    _handleKeyDown: function(event) {
                                         if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
                                             event.preventDefault();
                                         }

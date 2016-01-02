@@ -29046,7 +29046,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     'div',
                     { className: 'ae-container-input xxl' },
                     targetSelector,
-                    React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyUp: this._handleKeyUp, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                    React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
                     React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
                 ),
                 React.createElement(
@@ -29112,10 +29112,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * - Escape: Discards the changes.
          *
          * @protected
-         * @method _handleKeyUp
+         * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
          */
-        _handleKeyUp: function _handleKeyUp(event) {
+        _handleKeyDown: function _handleKeyDown(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
                 event.preventDefault();
             }
