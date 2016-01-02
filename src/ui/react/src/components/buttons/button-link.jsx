@@ -8,12 +8,13 @@
      * - Normal: Just a button that allows to switch to the edition mode
      * - Exclusive: The ButtonLinkEdit UI with all the link edition controls.
      *
+     * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      *
      * @class ButtonLink
      */
     var ButtonLink = React.createClass({
-        mixins: [AlloyEditor.ButtonStateClasses],
+        mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -53,6 +54,21 @@
         },
 
         /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function() {
+            return {
+                keystroke: {
+                    fn: '_requestExclusive',
+                    keys: CKEDITOR.CTRL + 76 /*L*/
+                }
+            };
+        },
+
+        /**
          * Checks if the current selection is contained within a link.
          *
          * @method isActive
@@ -77,11 +93,21 @@
                 );
             } else {
                 return (
-                    <button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type="button-link" onClick={this.props.requestExclusive.bind(ButtonLink.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
+                    <button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type="button-link" onClick={this._requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
                         <span className="ae-icon-link"></span>
                     </button>
                 );
             }
+        },
+
+        /**
+         * Requests the link button to be rendered in exclusive mode to allow the creation of a link.
+         *
+         * @protected
+         * @method _requestExclusive
+         */
+        _requestExclusive: function() {
+            this.props.requestExclusive(ButtonLink.key);
         }
     });
 
