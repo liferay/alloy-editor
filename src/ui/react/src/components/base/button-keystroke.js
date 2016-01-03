@@ -16,8 +16,7 @@
              * - keys: The keystroke definition, as expected by http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke
              * - name: The name for the CKEditor command that will be created. If empty,
              * a random name will be created on the fly
-             *
-             * @type {Object}
+             * @property {Object} keystroke
              */
             keystroke: React.PropTypes.object.isRequired
         },
