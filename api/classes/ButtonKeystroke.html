@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonCamera - alloyeditor</title>
+    <title>ButtonKeystroke - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -167,14 +167,14 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonCamera <small>Class</small></h1>
+                                <h1>ButtonKeystroke <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-camera.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-camera.jsx:4</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_components_base_button-keystroke.js.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-keystroke.js:4</code></a>
                                     </div>
                             
                             
@@ -182,11 +182,8 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>The ButtonCamera class renders in two different ways:</p>
-                            <ul>
-                            <li>Normal: Just a button that allows to switch to the edition mode.</li>
-                            <li>Exclusive: Renders ButtonCameraImage in order to take photo from the camera.</li>
-                            </ul>
+                                <p>ButtonKeystroke is a mixin that provides a <code>keystroke</code> prop that allows configuring
+                            a function of the instance to be invoked upon the keystroke activation.</p>
                             
                             </div>
                             
@@ -208,7 +205,11 @@
                             
                                                 <ul class="index-list methods">
                                                         <li class="index-item method">
-                                                            <a href="#method_render">render</a>
+                                                            <a href="#method_componentWillMount">componentWillMount</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
+                                                            <a href="#method_componentWillUnmount">componentWillUnmount</a>
                             
                                                         </li>
                                                 </ul>
@@ -219,20 +220,7 @@
                             
                                                 <ul class="index-list properties">
                                                         <li class="index-item property">
-                                                            <a href="#property_editor">editor</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_key">key</a>
-                            
-                                                                <span class="flag static">static</span>
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_label">label</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_tabIndex">tabIndex</a>
+                                                            <a href="#property_keystroke">keystroke</a>
                             
                                                         </li>
                                                 </ul>
@@ -244,14 +232,11 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method_render" class="method item">
-                                                    <h3 class="name"><code>render</code></h3>
+                                                <div id="method_componentWillMount" class="method item">
+                                                    <h3 class="name"><code>componentWillMount</code></h3>
                                                 
                                                         <span class="paren">()</span>
                                                 
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
                                                 
                                                 
                                                 
@@ -262,7 +247,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-camera.jsx.html#l50"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-camera.jsx:50</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_button-keystroke.js.html#l24"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-keystroke.js:24</code></a>
                                                         </p>
                                                 
                                                 
@@ -270,20 +255,41 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Lifecycle. Renders the UI of the button.</p>
+                                                        <p>Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.</p>
                                                 
                                                     </div>
                                                 
                                                 
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
                                                 
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The content which should be rendered.</p>
+                                                </div>
+                                                <div id="method_componentWillUnmount" class="method item">
+                                                    <h3 class="name"><code>componentWillUnmount</code></h3>
                                                 
-                                                            </div>
-                                                        </div>
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_base_button-keystroke.js.html#l57"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-keystroke.js:57</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Lifecycle. Invoked immediately before a component is unmounted from the DOM.</p>
+                                                
+                                                    </div>
+                                                
+                                                
                                                 
                                                 </div>
                                         </div>
@@ -291,8 +297,8 @@
                                         <div id="properties" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Properties</h2>
                             
-                                                <div id="property_editor" class="property item">
-                                                    <h3 class="name"><code>editor</code></h3>
+                                                <div id="property_keystroke" class="property item">
+                                                    <h3 class="name"><code>keystroke</code></h3>
                                                     <span class="type">Object</span>
                                                 
                                                 
@@ -302,92 +308,20 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-camera.jsx.html#l15"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-camera.jsx:15</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_button-keystroke.js.html#l13"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-keystroke.js:13</code></a>
                                                         </p>
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>The editor instance where the component is being used.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_key" class="property item">
-                                                    <h3 class="name"><code>key</code></h3>
-                                                    <span class="type">String</span>
-                                                
-                                                
-                                                
-                                                
-                                                        <span class="flag static">static</span>
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-camera.jsx.html#l40"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-camera.jsx:40</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The name which will be used as an alias of the button in the configuration.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <p><strong>Default:</strong> camera</p>
-                                                
-                                                
-                                                </div>
-                                                <div id="property_label" class="property item">
-                                                    <h3 class="name"><code>label</code></h3>
-                                                    <span class="type">String</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-camera.jsx.html#l22"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-camera.jsx:22</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The label that should be used for accessibility purposes.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_tabIndex" class="property item">
-                                                    <h3 class="name"><code>tabIndex</code></h3>
-                                                    <span class="type">Number</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-camera.jsx.html#l29"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-camera.jsx:29</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The tabIndex of the button in its toolbar current state. A value other than -1
-                                                means that the button has focus and is the active element.</p>
+                                                        <p>The keystroke definition. An object with the following properties:</p>
+                                                <ul>
+                                                <li>fn: The function to be executed</li>
+                                                <li>keys: The keystroke definition, as expected by <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke">http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke</a></li>
+                                                <li>name: The name for the CKEditor command that will be created. If empty,
+                                                a random name will be created on the fly</li>
+                                                </ul>
                                                 
                                                     </div>
                                                 

@@ -21,6 +21,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonImageAlignLeft",
         "ButtonImageAlignRight",
         "ButtonItalic",
+        "ButtonKeystroke",
         "ButtonLink",
         "ButtonLinkEdit",
         "ButtonLinkTargetEdit",

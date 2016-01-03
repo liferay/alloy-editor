@@ -76,6 +76,7 @@
                                     <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
                                     <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
@@ -178,13 +179,14 @@
                                  * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
                                  *
                                  * @uses ButtonCommand
+                                 * @uses ButtonKeystroke
                                  * @uses ButtonStateClasses
                                  * @uses ButtonStyle
                                  *
                                  * @class ButtonBold
                                  */
                                 var ButtonBold = React.createClass({
-                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
+                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
                             
                                     // Allows validating props being passed to the component.
                                     propTypes: {
@@ -232,6 +234,10 @@
                                     getDefaultProps: function() {
                                         return {
                                             command: &#x27;bold&#x27;,
+                                            keystroke: {
+                                                fn: &#x27;execCommand&#x27;,
+                                                keys: CKEDITOR.CTRL + 66 /*B*/
+                                            },
                                             style: {
                                                 element: &#x27;strong&#x27;
                                             }

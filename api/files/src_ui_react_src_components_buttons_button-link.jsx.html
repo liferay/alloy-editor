@@ -76,6 +76,7 @@
                                     <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
                                     <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
@@ -181,12 +182,13 @@
                                  * - Normal: Just a button that allows to switch to the edition mode
                                  * - Exclusive: The ButtonLinkEdit UI with all the link edition controls.
                                  *
+                                 * @uses ButtonKeystroke
                                  * @uses ButtonStateClasses
                                  *
                                  * @class ButtonLink
                                  */
                                 var ButtonLink = React.createClass({
-                                    mixins: [AlloyEditor.ButtonStateClasses],
+                                    mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses],
                             
                                     // Allows validating props being passed to the component.
                                     propTypes: {
@@ -226,6 +228,21 @@
                                     },
                             
                                     /**
+                                     * Lifecycle. Returns the default values of the properties used in the widget.
+                                     *
+                                     * @method getDefaultProps
+                                     * @return {Object} The default properties.
+                                     */
+                                    getDefaultProps: function() {
+                                        return {
+                                            keystroke: {
+                                                fn: &#x27;_requestExclusive&#x27;,
+                                                keys: CKEDITOR.CTRL + 76 /*L*/
+                                            }
+                                        };
+                                    },
+                            
+                                    /**
                                      * Checks if the current selection is contained within a link.
                                      *
                                      * @method isActive
@@ -250,11 +267,21 @@
                                             );
                                         } else {
                                             return (
-                                                &lt;button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type=&quot;button-link&quot; onClick={this.props.requestExclusive.bind(ButtonLink.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type=&quot;button-link&quot; onClick={this._requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}&gt;
                                                     &lt;span className=&quot;ae-icon-link&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             );
                                         }
+                                    },
+                            
+                                    /**
+                                     * Requests the link button to be rendered in exclusive mode to allow the creation of a link.
+                                     *
+                                     * @protected
+                                     * @method _requestExclusive
+                                     */
+                                    _requestExclusive: function() {
+                                        this.props.requestExclusive(ButtonLink.key);
                                     }
                                 });
                             

@@ -26270,6 +26270,76 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     'use strict';
 
     /**
+     * ButtonKeystroke is a mixin that provides a `keystroke` prop that allows configuring
+     * a function of the instance to be invoked upon the keystroke activation.
+     *
+     * @class ButtonKeystroke
+     */
+
+    var ButtonKeystroke = {
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The keystroke definition. An object with the following properties:
+             * - fn: The function to be executed
+             * - keys: The keystroke definition, as expected by http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke
+             * - name: The name for the CKEditor command that will be created. If empty,
+             * a random name will be created on the fly
+             * @property {Object} keystroke
+             */
+            keystroke: React.PropTypes.object.isRequired
+        },
+
+        /**
+         * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         *
+         * @method componentWillMount
+         */
+        componentWillMount: function componentWillMount() {
+            var nativeEditor = this.props.editor.get('nativeEditor');
+            var keystroke = this.props.keystroke;
+
+            var commandName = keystroke.name || (Math.random() * 1e9 >>> 0).toString();
+
+            var command = nativeEditor.getCommand(commandName);
+
+            if (!command) {
+                command = new CKEDITOR.command(nativeEditor, {
+                    exec: (function (editor) {
+                        var keystrokeFn = keystroke.fn;
+
+                        if (AlloyEditor.Lang.isString(keystrokeFn)) {
+                            this[keystrokeFn].call(this, editor);
+                        } else if (AlloyEditor.Lang.isFunction(keystrokeFn)) {
+                            keystrokeFn.call(this, editor);
+                        }
+                    }).bind(this)
+                });
+
+                nativeEditor.addCommand(commandName, command);
+            }
+
+            nativeEditor.setKeystroke(keystroke.keys, commandName);
+        },
+
+        /**
+         * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+         *
+         * @method componentWillUnmount
+         */
+        componentWillUnmount: function componentWillUnmount() {
+            this.props.editor.get('nativeEditor').setKeystroke(this.props.keystroke.keys);
+        }
+    };
+
+    AlloyEditor.ButtonKeystroke = ButtonKeystroke;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
      * ButtonStateClasses is a mixin that decorates the domElement of a component
      * with different CSS classes based on the current state of the element.
      *
@@ -27403,6 +27473,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
      *
      * @uses ButtonCommand
+     * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      *
@@ -27412,7 +27483,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonBold = React.createClass({
         displayName: 'ButtonBold',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -27460,6 +27531,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'bold',
+                keystroke: {
+                    fn: 'execCommand',
+                    keys: CKEDITOR.CTRL + 66 /*B*/
+                },
                 style: {
                     element: 'strong'
                 }
@@ -28806,6 +28881,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * The ButtonItalic class provides functionality for styling an selection with italic (em) style.
      *
      * @uses ButtonCommand
+     * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      *
@@ -28815,7 +28891,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonItalic = React.createClass({
         displayName: 'ButtonItalic',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -28863,6 +28939,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'italic',
+                keystroke: {
+                    fn: 'execCommand',
+                    keys: CKEDITOR.CTRL + 73 /*I*/
+                },
                 style: {
                     element: 'em'
                 }
@@ -29398,6 +29478,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * - Normal: Just a button that allows to switch to the edition mode
      * - Exclusive: The ButtonLinkEdit UI with all the link edition controls.
      *
+     * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      *
      * @class ButtonLink
@@ -29406,7 +29487,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonLink = React.createClass({
         displayName: 'ButtonLink',
 
-        mixins: [AlloyEditor.ButtonStateClasses],
+        mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -29446,6 +29527,21 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         },
 
         /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function getDefaultProps() {
+            return {
+                keystroke: {
+                    fn: '_requestExclusive',
+                    keys: CKEDITOR.CTRL + 76 /*L*/
+                }
+            };
+        },
+
+        /**
          * Checks if the current selection is contained within a link.
          *
          * @method isActive
@@ -29469,10 +29565,20 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             } else {
                 return React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.link, className: cssClass, 'data-type': 'button-link', onClick: this.props.requestExclusive.bind(ButtonLink.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
+                    { 'aria-label': AlloyEditor.Strings.link, className: cssClass, 'data-type': 'button-link', onClick: this._requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
                     React.createElement('span', { className: 'ae-icon-link' })
                 );
             }
+        },
+
+        /**
+         * Requests the link button to be rendered in exclusive mode to allow the creation of a link.
+         *
+         * @protected
+         * @method _requestExclusive
+         */
+        _requestExclusive: function _requestExclusive() {
+            this.props.requestExclusive(ButtonLink.key);
         }
     });
 
@@ -32061,6 +32167,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * The ButtonUnderline class provides functionality for underlying a text selection.
      *
      * @uses ButtonCommand
+     * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      *
@@ -32070,7 +32177,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonUnderline = React.createClass({
         displayName: 'ButtonUnderline',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -32118,6 +32225,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'underline',
+                keystroke: {
+                    fn: 'execCommand',
+                    keys: CKEDITOR.CTRL + 85 /*U*/
+                },
                 style: {
                     element: 'u'
                 }

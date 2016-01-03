@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/base/button-state-classes.js - alloyeditor</title>
+    <title>src/ui/react/src/components/base/button-keystroke.js - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -167,7 +167,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/base/button-state-classes.js</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/base/button-keystroke.js</code></h1>
                             </div>
                             
                             <div class="file">
@@ -176,41 +176,69 @@
                                 &#x27;use strict&#x27;;
                             
                                 /**
-                                 * ButtonStateClasses is a mixin that decorates the domElement of a component
-                                 * with different CSS classes based on the current state of the element.
+                                 * ButtonKeystroke is a mixin that provides a &#x60;keystroke&#x60; prop that allows configuring
+                                 * a function of the instance to be invoked upon the keystroke activation.
                                  *
-                                 * To check for state, the component can expose the following methods:
-                                 * - &#x60;Function&#x60; **isActive** to check the active state
-                                 * - &#x60;Function&#x60; **isDisabled** to check the disabled state
-                                 *
-                                 * @class ButtonStateClasses
+                                 * @class ButtonKeystroke
                                  */
-                                var ButtonStateClasses = {
+                                var ButtonKeystroke = {
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * The keystroke definition. An object with the following properties:
+                                         * - fn: The function to be executed
+                                         * - keys: The keystroke definition, as expected by http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke
+                                         * - name: The name for the CKEditor command that will be created. If empty,
+                                         * a random name will be created on the fly
+                                         * @property {Object} keystroke
+                                         */
+                                        keystroke: React.PropTypes.object.isRequired
+                                    },
+                            
                                     /**
-                                     * Returns the list of state classes associated to the current element&#x27;s state, according
-                                     * to the results of the isActive and isDisabled methods.
+                                     * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
                                      *
-                                     * @method getStateClasses
-                                     * @return {String} A string with the state CSS classes.
+                                     * @method componentWillMount
                                      */
-                                    getStateClasses: function() {
-                                        var stateClasses = &#x27;&#x27;;
+                                    componentWillMount: function() {
+                                        var nativeEditor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                                        var keystroke = this.props.keystroke;
                             
-                                        // Check for active state
-                                        if (AlloyEditor.Lang.isFunction(this.isActive) &amp;&amp; this.isActive()) {
-                                            stateClasses += &#x27;ae-button-pressed&#x27;;
+                                        var commandName = keystroke.name || ((Math.random() * 1e9) &gt;&gt;&gt; 0).toString();
+                            
+                                        var command = nativeEditor.getCommand(commandName);
+                            
+                                        if (!command) {
+                                            command = new CKEDITOR.command(nativeEditor, {
+                                                exec: function(editor) {
+                                                        var keystrokeFn = keystroke.fn;
+                            
+                                                        if (AlloyEditor.Lang.isString(keystrokeFn)) {
+                                                            this[keystrokeFn].call(this, editor);
+                                                        } else if (AlloyEditor.Lang.isFunction(keystrokeFn)) {
+                                                            keystrokeFn.call(this, editor);
+                                                        }
+                                                    }.bind(this)
+                                                }
+                                            );
+                            
+                                            nativeEditor.addCommand(commandName, command);
                                         }
                             
-                                        // Check for disabled state
-                                        if (AlloyEditor.Lang.isFunction(this.isDisabled) &amp;&amp; this.isDisabled()) {
-                                            stateClasses += &#x27; ae-button-disabled&#x27;;
-                                        }
+                                        nativeEditor.setKeystroke(keystroke.keys, commandName);
+                                    },
                             
-                                        return stateClasses;
+                                    /**
+                                     * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+                                     *
+                                     * @method componentWillUnmount
+                                     */
+                                    componentWillUnmount: function() {
+                                        this.props.editor.get(&#x27;nativeEditor&#x27;).setKeystroke(this.props.keystroke.keys);
                                     }
                                 };
                             
-                                AlloyEditor.ButtonStateClasses = ButtonStateClasses;
+                                AlloyEditor.ButtonKeystroke = ButtonKeystroke;
                             }());
                                 </pre>
                             </div>
