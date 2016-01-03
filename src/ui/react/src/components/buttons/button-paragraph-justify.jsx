@@ -4,14 +4,14 @@
     /**
      * The ButtonParagraphJustify class provides functionality for justfying a paragraph.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphJustify
      */
     var ButtonParagraphJustify = React.createClass({
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -58,12 +58,7 @@
          */
         getDefaultProps: function() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'justify'
-                    }
-                }
+                command: 'justifyblock'
             };
         },
 
@@ -77,7 +72,7 @@
             var cssClass = 'ae-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={AlloyEditor.Strings.alignJustify} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-justify" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignJustify}>
+                <button aria-label={AlloyEditor.Strings.alignJustify} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-justify" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignJustify}>
                     <span className="ae-icon-align-justified"></span>
                 </button>
             );

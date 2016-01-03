@@ -4,14 +4,14 @@
     /**
      * The ButtonParagraphAlignRight class provides functionality for aligning a paragraph on right.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphAlignRight
      */
     var ButtonParagraphAlignRight = React.createClass({
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -58,12 +58,7 @@
          */
         getDefaultProps: function() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'right'
-                    }
-                }
+                command: 'justifyright'
             };
         },
 
@@ -77,7 +72,7 @@
             var cssClass = 'ae-button ' + this.getStateClasses();
 
             return (
-                <button aria-label={AlloyEditor.Strings.alignRight} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-align-right" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignRight}>
+                <button aria-label={AlloyEditor.Strings.alignRight} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-align-right" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignRight}>
                     <span className="ae-icon-align-right"></span>
                 </button>
             );
