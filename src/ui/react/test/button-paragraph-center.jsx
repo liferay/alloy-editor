@@ -23,26 +23,26 @@
             Simulate.click(ReactDOM.findDOMNode(buttonParagraphCenter));
 
             var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: false,
+                fixHtml: true,
                 compatHtml: true
             });
 
-            assert.strictEqual(data, '<p style="text-align: center;">There should be a paragraph centered.</p>');
+            assert.strictEqual('<p style="text-align:center;">there should be a paragraph centered.</p>', data);
         });
 
         it('should preserve tags ad attributes of the selection', function() {
-            bender.tools.selection.setWithHtml(this.nativeEditor, '<h1 style="color:red;">{There should be a paragraph centered.}</h1>');
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<h1 style="color: red;">{There should be a paragraph centered.}</h1>');
 
             var buttonParagraphCenter = ReactDOM.render(<AlloyEditor.ButtonParagraphCenter editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonParagraphCenter));
 
             var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: false,
+                fixHtml: true,
                 compatHtml: true
             });
 
-            assert.strictEqual(data, '<h1 style="color: red; text-align: center;">There should be a paragraph centered.</h1>');
+            assert.strictEqual('<h1 style="color:red;text-align:center;">there should be a paragraph centered.</h1>', data);
         });
 
         it('should add class which represents pressed button', function() {
@@ -52,7 +52,7 @@
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonParagraphCenter);
 
-            assert.strictEqual($(buttonDOMNode).hasClass('ae-button-pressed'), true);
+            assert.isTrue($(buttonDOMNode).hasClass('ae-button-pressed'));
         });
     });
 }());

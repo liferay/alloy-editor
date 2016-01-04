@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * ButtonCommandActive is a mixin that provides an ìsActive` method to determine if
+     * ButtonCommandActive is a mixin that provides an `isActive` method to determine if
      * a context-aware command is currently in an active state.
      *
      * @class ButtonCommandActive

@@ -53,7 +53,12 @@
 
             assert.notOk(testImageEl.getStyle('display'));
             assert.notOk(testImageEl.getStyle('marginLeft'));
-            assert.notOk(testImageEl.getStyle('transform'));
+
+            if (CKEDITOR.env.ie && CKEDITOR.env.version === 9) {
+                assert.strictEqual('translateX(-50%)', testImageEl.getStyle('transform'));
+            } else {
+                assert.notOk(testImageEl.getStyle('transform'));
+            }
         });
 
         it('should add class which represents pressed button', function() {
