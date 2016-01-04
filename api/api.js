@@ -10,6 +10,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonCameraImage",
         "ButtonCode",
         "ButtonCommand",
+        "ButtonCommandActive",
         "ButtonCommandListItem",
         "ButtonCommandsList",
         "ButtonDropdown",

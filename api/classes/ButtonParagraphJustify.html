@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
@@ -174,9 +175,9 @@
                                     <div class="uses">
                                         Uses:
                                         <ul class="inline commas">
-                                                <li><a href="ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                                <li><a href="ButtonCommand.html">ButtonCommand</a></li>
+                                                <li><a href="ButtonCommandActive.html">ButtonCommandActive</a></li>
                                                 <li><a href="ButtonStateClasses.html">ButtonStateClasses</a></li>
-                                                <li><a href="ButtonStyle.html">ButtonStyle</a></li>
                                         </ul>
                                     </div>
                             
@@ -212,15 +213,7 @@
                             
                                                 <ul class="index-list methods">
                                                         <li class="index-item method inherited">
-                                                            <a href="#method_applyStyle">applyStyle</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_componentWillMount">componentWillMount</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_componentWillUnmount">componentWillUnmount</a>
+                                                            <a href="#method_execCommand">execCommand</a>
                             
                                                         </li>
                                                         <li class="index-item method">
@@ -229,10 +222,6 @@
                                                         </li>
                                                         <li class="index-item method inherited">
                                                             <a href="#method_getStateClasses">getStateClasses</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_getStyle">getStyle</a>
                             
                                                         </li>
                                                         <li class="index-item method inherited">
@@ -250,6 +239,10 @@
                                                 <h3>Properties</h3>
                             
                                                 <ul class="index-list properties">
+                                                        <li class="index-item property inherited">
+                                                            <a href="#property_command">command</a>
+                            
+                                                        </li>
                                                         <li class="index-item property">
                                                             <a href="#property_editor">editor</a>
                             
@@ -264,7 +257,7 @@
                             
                                                         </li>
                                                         <li class="index-item property inherited">
-                                                            <a href="#property_style">style</a>
+                                                            <a href="#property_modifiesSelection">modifiesSelection</a>
                             
                                                         </li>
                                                         <li class="index-item property">
@@ -280,40 +273,16 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method_applyStyle" class="method item inherited">
-                                                    <h3 class="name"><code>applyStyle</code></h3>
+                                                <div id="method_execCommand" class="method item inherited">
+                                                    <h3 class="name"><code>execCommand</code></h3>
                                                 
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonActionStyle.html#method_applyStyle">ButtonActionStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-action-style.js.html#l16"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-action-style.js:16</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Removes or applies the component style to the current selection.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method_componentWillMount" class="method item inherited">
-                                                    <h3 class="name"><code>componentWillMount</code></h3>
-                                                
-                                                        <span class="paren">()</span>
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>data</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
                                                 
                                                 
                                                 
@@ -324,8 +293,8 @@
                                                 
                                                     <div class="meta">
                                                                 <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_componentWillMount">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:21</code></a>
+                                                                <a href="../classes/ButtonCommand.html#method_execCommand">ButtonCommand</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-command.js.html#l27"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-command.js:27</code></a>
                                                         </p>
                                                 
                                                 
@@ -333,40 +302,27 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.</p>
+                                                        <p>Executes a CKEditor command and fires <code>actionPerformed</code> event.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">data</code>
+                                                                        <span class="type">Object=</span>
                                                 
                                                 
-                                                </div>
-                                                <div id="method_componentWillUnmount" class="method item inherited">
-                                                    <h3 class="name"><code>componentWillUnmount</code></h3>
+                                                                    <div class="param-description">
+                                                                        <p>Optional data to be passed to CKEDITOR&#39;s <code>execCommand</code> method.</p>
                                                 
-                                                        <span class="paren">()</span>
+                                                                    </div>
                                                 
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_componentWillUnmount">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l30"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:30</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Invoked immediately before a component is unmounted from the DOM.</p>
-                                                
-                                                    </div>
-                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                 
                                                 
                                                 </div>
@@ -455,48 +411,6 @@
                                                         </div>
                                                 
                                                 </div>
-                                                <div id="method_getStyle" class="method item inherited">
-                                                    <h3 class="name"><code>getStyle</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">CKEDITOR.style</span>
-                                                        </span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_getStyle">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l39"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:39</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Returns instance of CKEDITOR.style which represents the current button style.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">CKEDITOR.style</span>:
-                                                                    <p>The current style representation.</p>
-                                                
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
                                                 <div id="method_isActive" class="method item inherited">
                                                     <h3 class="name"><code>isActive</code></h3>
                                                 
@@ -514,8 +428,8 @@
                                                 
                                                     <div class="meta">
                                                                 <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#method_isActive">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l49"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:49</code></a>
+                                                                <a href="../classes/ButtonCommandActive.html#method_isActive">ButtonCommandActive</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-command-active.js.html#l11"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-command-active.js:11</code></a>
                                                         </p>
                                                 
                                                 
@@ -523,7 +437,7 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Checks if style is active in the current selection.</p>
+                                                        <p>Checks if the command is active in the current selection.</p>
                                                 
                                                     </div>
                                                 
@@ -533,7 +447,7 @@
                                                 
                                                             <div class="returns-description">
                                                                         <span class="type">Boolean</span>:
-                                                                    <p>True if style is active, false otherwise.</p>
+                                                                    <p>True if the command is active, false otherwise.</p>
                                                 
                                                             </div>
                                                         </div>
@@ -557,7 +471,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-paragraph-justify.jsx.html#l70"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-paragraph-justify.jsx:70</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-paragraph-justify.jsx.html#l65"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-paragraph-justify.jsx:65</code></a>
                                                         </p>
                                                 
                                                 
@@ -586,6 +500,31 @@
                                         <div id="properties" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Properties</h2>
                             
+                                                <div id="property_command" class="property item inherited">
+                                                    <h3 class="name"><code>command</code></h3>
+                                                    <span class="type">String</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/ButtonCommand.html#property_command">ButtonCommand</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-command.js.html#l12"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-command.js:12</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The command that should be executed.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
                                                 <div id="property_editor" class="property item">
                                                     <h3 class="name"><code>editor</code></h3>
                                                     <span class="type">Object</span>
@@ -663,9 +602,9 @@
                                                 
                                                 
                                                 </div>
-                                                <div id="property_style" class="property item inherited">
-                                                    <h3 class="name"><code>style</code></h3>
-                                                    <span class="type">Object</span>
+                                                <div id="property_modifiesSelection" class="property item inherited">
+                                                    <h3 class="name"><code>modifiesSelection</code></h3>
+                                                    <span class="type">Boolean</span>
                                                 
                                                 
                                                 
@@ -673,15 +612,15 @@
                                                 
                                                     <div class="meta">
                                                                 <p>Inherited from
-                                                                <a href="../classes/ButtonStyle.html#property_style">ButtonStyle</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-style.js.html#l13"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-style.js:13</code></a>
+                                                                <a href="../classes/ButtonCommand.html#property_modifiesSelection">ButtonCommand</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_button-command.js.html#l19"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-command.js:19</code></a>
                                                         </p>
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>The style the button should handle as described by <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.style">http://docs.ckeditor.com/#!/api/CKEDITOR.style</a></p>
+                                                        <p>Indicates that the command may cause the editor to have a different.</p>
                                                 
                                                     </div>
                                                 

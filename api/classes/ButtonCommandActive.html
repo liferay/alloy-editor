@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/buttons/button-table-edit.jsx - alloyeditor</title>
+    <title>ButtonCommandActive - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -168,185 +168,103 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-table-edit.jsx</code></h1>
+                                <h1>ButtonCommandActive <small>Class</small></h1>
                             </div>
                             
-                            <div class="file">
-                                <pre class="code prettyprint linenums">
-                            (function () {
-                                &#x27;use strict&#x27;;
+                            <div class="well well-small">
                             
-                                var KEY_ENTER = 13;
-                                var KEY_ESC = 27;
                             
-                                /**
-                                 * The ButtonTableEdit class provides functionality for creating and editing a table in a document.
-                                 * Provides UI for creating a table.
-                                 *
-                                 * @class ButtonTableEdit
-                                 */
-                                var ButtonTableEdit = React.createClass({
-                                    // Allows validating props being passed to the component.
-                                    propTypes: {
+                                    <div class="foundat">
+                                        Defined in: <a href="../files/src_ui_react_src_components_base_button-command-active.js.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-command-active.js:4</code></a>
+                                    </div>
                             
-                                        /**
-                                         * Method to notify the button abandons the exclusive rendering mode.
-                                         *
-                                         * @property {Function} cancelExclusive
-                                         */
-                                        cancelExclusive: React.PropTypes.func.isRequired,
                             
-                                        /**
-                                         * The editor instance where the component is being used.
-                                         *
-                                         * @property {Object} editor
-                                         */
-                                        editor: React.PropTypes.object.isRequired
-                                    },
+                            </div>
                             
-                                    // Lifecycle. Provides static properties to the widget.
-                                    statics: {
-                                        /**
-                                         * The name which will be used as an alias of the button in the configuration.
-                                         *
-                                         * @static
-                                         * @property {String} key
-                                         * @default tableEdit
-                                         */
-                                        key: &#x27;tableEdit&#x27;
-                                    },
                             
-                                    /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     */
-                                    getDefaultProps: function () {
-                                        return {
-                                            tableAttributes: {
-                                                border: 1,
-                                                cellPadding: 0,
-                                                cellSpacing: 0,
-                                                style: &#x27;width: 100%&#x27;
-                                            }
-                                        };
-                                    },
+                            <div class="well well-small intro">
+                                <p>ButtonCommandActive is a mixin that provides an <code>isActive</code> method to determine if
+                            a context-aware command is currently in an active state.</p>
                             
-                                    /**
-                                     * Lifecycle. Invoked once, only on the client (not on the server),
-                                     * immediately after the initial rendering occurs.
-                                     *
-                                     * Focuses on the link input to immediately allow editing.
-                                     *
-                                     * @method componentDidMount
-                                     */
-                                    componentDidMount: function () {
-                                        ReactDOM.findDOMNode(this.refs.rows).focus();
-                                    },
+                            </div>
                             
-                                    /**
-                                     * Lifecycle. Invoked once before the component is mounted.
-                                     *
-                                     * @method getInitialState
-                                     */
-                                    getInitialState: function() {
-                                        return {
-                                            cols: 3,
-                                            rows: 3
-                                        };
-                                    },
                             
-                                    /**
-                                     * Creates a table.
-                                     *
-                                     * @protected
-                                     * @method _createTable
-                                     */
-                                    _createTable: function() {
-                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                                        var tableUtils = new CKEDITOR.Table(editor);
+                            <div id="classdocs">
+                                <ul class="api-class-tabs nav nav-tabs">
+                                    <li class="api-class-tab index"><a href="#index">Index</a></li>
                             
-                                        tableUtils.create({
-                                            attrs: this.props.tableAttributes,
-                                            cols: this.state.cols,
-                                            rows: this.state.rows
-                                        });
+                                        <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+                                </ul>
                             
-                                        this.props.cancelExclusive();
+                                <div>
+                                    <div id="index" class="api-class-tabpanel index tab-pane">
+                                        <h2 class="off-left">Index</h2>
                             
-                                        editor.fire(&#x27;actionPerformed&#x27;, this);
-                                    },
+                                            <div class="index-section methods">
+                                                <h3>Methods</h3>
                             
-                                    /**
-                                     * Handles a change in input value. Sets the provided value from the user back to the input.
-                                     *
-                                     * @protected
-                                     * @method _handleChange
-                                     * @param {String} inputName The name of the input which value should be updated.
-                                     * @param {SyntheticEvent} event The provided event.
-                                     */
-                                    _handleChange: function(inputName, event) {
-                                        var state = {};
-                                        state[inputName] = event.target.value;
+                                                <ul class="index-list methods">
+                                                        <li class="index-item method">
+                                                            <a href="#method_isActive">isActive</a>
                             
-                                        this.setState(state);
-                                    },
+                                                        </li>
+                                                </ul>
+                                            </div>
                             
-                                    /**
-                                     * Monitors key interaction inside the input element to respond to the keys:
-                                     * - Enter: Creates the table.
-                                     * - Escape: Discards the changes.
-                                     *
-                                     * @protected
-                                     * @method _handleKeyDown
-                                     * @param {SyntheticEvent} event The keyboard event.
-                                     */
-                                    _handleKeyDown: function(event) {
-                                        if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
-                                            event.preventDefault();
-                                        }
                             
-                                        if (event.keyCode === KEY_ENTER) {
-                                            this._createTable();
-                                        } else if (event.keyCode === KEY_ESC) {
-                                            this.props.cancelExclusive();
-                                        }
-                                    },
                             
-                                    /**
-                                     * Lifecycle. Renders the UI of the button.
-                                     *
-                                     * @method render
-                                     * @return {Object} The content which should be rendered.
-                                     */
-                                    render: function() {
-                                        var time = Date.now();
-                                        var rowsId = time + &#x27;rows&#x27;;
-                                        var colsId = time + &#x27;cols&#x27;;
+                                    </div>
                             
-                                        return (
-                                            &lt;div className=&quot;ae-container-edit-table&quot;&gt;
-                                                &lt;label htmlFor={rowsId}&gt;Rows&lt;/label&gt;
-                                                &lt;div className=&quot;ae-container-input small&quot;&gt;
-                                                    &lt;input className=&quot;ae-input&quot; id={rowsId} onChange={this._handleChange.bind(this, &#x27;rows&#x27;)} min=&quot;1&quot; onKeyDown={this._handleKeyDown} placeholder=&quot;Rows&quot; ref=&quot;rows&quot; type=&quot;number&quot; value={this.state.rows}&gt;&lt;/input&gt;
-                                                &lt;/div&gt;
+                                        <div id="methods" class="api-class-tabpanel tab-pane">
+                                            <h2 class="off-left">Methods</h2>
                             
-                                                &lt;label htmlFor={colsId}&gt;Cols&lt;/label&gt;
-                                                &lt;div className=&quot;ae-container-input small&quot;&gt;
-                                                    &lt;input className=&quot;ae-input&quot; id={colsId} onChange={this._handleChange.bind(this, &#x27;cols&#x27;)} min=&quot;1&quot; onKeyDown={this._handleKeyDown} placeholder=&quot;Colums&quot; ref=&quot;cols&quot; type=&quot;number&quot; value={this.state.cols}&gt;&lt;/input&gt;
-                                                &lt;/div&gt;
+                                                <div id="method_isActive" class="method item">
+                                                    <h3 class="name"><code>isActive</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Boolean</span>
+                                                        </span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_base_button-command-active.js.html#l11"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-command-active.js:11</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Checks if the command is active in the current selection.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Boolean</span>:
+                                                                    <p>True if the command is active, false otherwise.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                        </div>
                             
-                                                &lt;button aria-label=&quot;Confirm&quot; className=&quot;ae-button&quot; onClick={this._createTable}&gt;
-                                                    &lt;span className=&quot;ae-icon-ok&quot;&gt;&lt;/span&gt;
-                                                &lt;/button&gt;
-                                            &lt;/div&gt;
-                                        );
-                                    }
-                                });
                             
-                                AlloyEditor.Buttons[ButtonTableEdit.key] = AlloyEditor.ButtonTableEdit = ButtonTableEdit;
-                            }());
-                                </pre>
+                            
+                                </div>
                             </div>
                         </div>
                     </div>

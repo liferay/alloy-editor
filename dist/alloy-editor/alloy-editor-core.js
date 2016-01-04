@@ -2339,6 +2339,205 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 (function () {
     'use strict';
 
+    if (CKEDITOR.plugins.get('ae_imagealignment')) {
+        return;
+    }
+
+    /**
+     * Enum for supported image alignments
+     * @type {Object}
+     */
+    var IMAGE_ALIGNMENT = {
+        CENTER: 'center',
+        LEFT: 'left',
+        RIGHT: 'right'
+    };
+
+    /**
+     * Enum values for supported image alignments
+     * @type {Array}
+     */
+    var ALIGN_VALUES = [IMAGE_ALIGNMENT.LEFT, IMAGE_ALIGNMENT.RIGHT, IMAGE_ALIGNMENT.CENTER];
+
+    /**
+     * Necessary styles for the center alignment
+     * @type {Array.<Object>}
+     */
+    var CENTERED_IMAGE_STYLE = [{
+        name: 'display',
+        value: 'block'
+    }, {
+        name: 'margin-left',
+        value: '50%'
+    }, {
+        name: 'transform',
+        value: 'translateX(-50%)',
+        vendorPrefixes: ['-ms-']
+    }];
+
+    /**
+     * Retrieves the alignment value of an image.
+     *
+     * @param {CKEDITOR.dom.element} image The image element
+     * @return {String} The alignment value
+     */
+    var getImageAlignment = function getImageAlignment(image) {
+        var imageAlignment = image.getStyle('float');
+
+        if (!imageAlignment || imageAlignment === 'inherit' || imageAlignment === 'none') {
+            imageAlignment = image.getAttribute('align');
+        }
+
+        if (!imageAlignment) {
+            var centeredImage = CENTERED_IMAGE_STYLE.every(function (style) {
+                var styleCheck = image.getStyle(style.name) === style.value;
+
+                if (!styleCheck && style.vendorPrefixes) {
+                    styleCheck = style.vendorPrefixes.some(function (vendorPrefix) {
+                        return image.getStyle(vendorPrefix + style.name) === style.value;
+                    });
+                }
+
+                return styleCheck;
+            });
+
+            imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
+        }
+
+        return imageAlignment;
+    };
+
+    /**
+     * Removes the alignment value of an image
+     *
+     * @param {CKEDITOR.dom.element} image The image element
+     * @param {String} imageAlignment The image alignment value to be removed
+     */
+    var removeImageAlignment = function removeImageAlignment(image, imageAlignment) {
+        if (imageAlignment === IMAGE_ALIGNMENT.LEFT || imageAlignment === IMAGE_ALIGNMENT.RIGHT) {
+            image.removeStyle('float');
+
+            if (imageAlignment === getImageAlignment(image)) {
+                image.removeAttribute('align');
+            }
+        } else if (imageAlignment === IMAGE_ALIGNMENT.CENTER) {
+            CENTERED_IMAGE_STYLE.forEach(function (style) {
+                image.removeStyle(style.name);
+
+                if (style.vendorPrefixes) {
+                    style.vendorPrefixes.forEach(function (vendorPrefix) {
+                        image.removeStyle(vendorPrefix + style.name);
+                    });
+                }
+            });
+        }
+    };
+
+    /**
+     * Sets the alignment value of an image
+     *
+     * @param {CKEDITOR.dom.element} image The image element
+     * @param {String} imageAlignment The image alignment value to be set
+     */
+    var setImageAlignment = function setImageAlignment(image, imageAlignment) {
+        removeImageAlignment(image, getImageAlignment(image));
+
+        if (imageAlignment === IMAGE_ALIGNMENT.LEFT || imageAlignment === IMAGE_ALIGNMENT.RIGHT) {
+            image.setStyle('float', imageAlignment);
+        } else if (imageAlignment === IMAGE_ALIGNMENT.CENTER) {
+            CENTERED_IMAGE_STYLE.forEach(function (style) {
+                image.setStyle(style.name, style.value);
+
+                if (style.vendorPrefixes) {
+                    style.vendorPrefixes.forEach(function (vendorPrefix) {
+                        image.setStyle(vendorPrefix + style.name, style.value);
+                    });
+                }
+            });
+        }
+    };
+
+    /**
+     * CKEditor plugin which modifies the justify commands to properly align images. This
+     * plugin is an excerpt of CKEditor's original image one that can be found at
+     * https://github.com/ckeditor/ckeditor-dev/blob/master/plugins/image/plugin.js
+     *
+     * @class CKEDITOR.plugins.ae_imagealignment
+     */
+    CKEDITOR.plugins.add('ae_imagealignment', {
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         * The function registers a 'paste' event on the editing area.
+         *
+         * @method afterInit
+         * @param {Object} editor The current editor instance
+         */
+        afterInit: function afterInit(editor) {
+            var self = this;
+
+            ALIGN_VALUES.forEach(function (value) {
+                var command = editor.getCommand('justify' + value);
+
+                if (command) {
+                    command.on('exec', function (event) {
+                        var selectionData = editor.getSelectionData();
+
+                        if (selectionData && AlloyEditor.SelectionTest.image({ data: { selectionData: selectionData } })) {
+                            var image = selectionData.element;
+
+                            var imageAlignment = getImageAlignment(image);
+
+                            if (imageAlignment === value) {
+                                removeImageAlignment(image, value);
+                            } else {
+                                setImageAlignment(image, value);
+                            }
+
+                            event.cancel();
+
+                            self.refreshCommands(editor, new CKEDITOR.dom.elementPath(image));
+                        }
+                    });
+
+                    command.on('refresh', function (event) {
+                        var selectionData = editor.getSelectionData();
+
+                        if (selectionData && AlloyEditor.SelectionTest.image({ data: { selectionData: selectionData } })) {
+                            var imageAlignment = getImageAlignment(selectionData.element);
+
+                            this.setState(imageAlignment === value ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF);
+
+                            event.cancel();
+                        }
+                    });
+                }
+            });
+        },
+
+        /**
+         * Forces a refresh of the modified justify commands. This is needed because the applied changes
+         * do not modify the selection, so the refresh is never triggered and the UI does not update
+         * properly until the next selectionChange event.
+         *
+         * @param {CKEDITOR.editor} editor The editor instance
+         * @param {CKEDITOR.dom.elementPath} elementPath The path of the selected image
+         */
+        refreshCommands: function refreshCommands(editor, elementPath) {
+            ALIGN_VALUES.forEach(function (value) {
+                var command = editor.getCommand('justify' + value);
+
+                if (command) {
+                    command.refresh(editor, elementPath);
+                }
+            });
+        }
+    });
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
     if (CKEDITOR.plugins.get('ae_pasteimages')) {
         return;
     }
@@ -5084,7 +5283,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'ae_uicore,ae_selectionregion,ae_dragresize,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
+                value: 'ae_uicore,ae_selectionregion,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
                 writeOnce: true
             },
 
@@ -5230,6 +5429,36 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     };
 
     AlloyEditor.ButtonActionStyle = ButtonActionStyle;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * ButtonCommandActive is a mixin that provides an `isActive` method to determine if
+     * a context-aware command is currently in an active state.
+     *
+     * @class ButtonCommandActive
+     */
+
+    var ButtonCommandActive = {
+        /**
+         * Checks if the command is active in the current selection.
+         *
+         * @method isActive
+         * @return {Boolean} True if the command is active, false otherwise.
+         */
+        isActive: function isActive() {
+            var editor = this.props.editor.get('nativeEditor');
+
+            var command = editor.getCommand(this.props.command);
+
+            return command ? command.state === CKEDITOR.TRISTATE_ON : false;
+        }
+    };
+
+    AlloyEditor.ButtonCommandActive = ButtonCommandActive;
 })();
 'use strict';
 
@@ -7488,9 +7717,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonImageAlignCenter class provides functionality for aligning an image in the center.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonImageAlignCenter
      */
@@ -7498,7 +7727,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonImageAlignCenter = React.createClass({
         displayName: 'ButtonImageAlignCenter',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -7545,15 +7774,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'img',
-                    styles: {
-                        'display': 'block',
-                        'margin-left': '50%',
-                        'transform': 'translateX(-50%)',
-                        '-ms-transform': 'translateX(-50%)'
-                    }
-                }
+                command: 'justifycenter'
             };
         },
 
@@ -7568,7 +7789,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-center', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
+                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-center', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
                 React.createElement('span', { className: 'ae-icon-align-center' })
             );
         }
@@ -7584,9 +7805,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonImageAlignLeft class provides functionality for aligning an image on left.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonImageAlignLeft
      */
@@ -7594,7 +7815,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonImageAlignLeft = React.createClass({
         displayName: 'ButtonImageAlignLeft',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -7641,12 +7862,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'img',
-                    styles: {
-                        'float': 'left'
-                    }
-                }
+                command: 'justifyleft'
             };
         },
 
@@ -7661,7 +7877,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-left', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
+                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-left', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
                 React.createElement('span', { className: 'ae-icon-align-left' })
             );
         }
@@ -7677,9 +7893,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonImageAlignRight class provides functionality for aligning an image on right.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonImageAlignRight
      */
@@ -7687,7 +7903,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonImageAlignRight = React.createClass({
         displayName: 'ButtonImageAlignRight',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -7734,12 +7950,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'img',
-                    styles: {
-                        'float': 'right'
-                    }
-                }
+                command: 'justifyright'
             };
         },
 
@@ -7754,7 +7965,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-right', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
+                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-right', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
                 React.createElement('span', { className: 'ae-icon-align-right' })
             );
         }
@@ -8701,9 +8912,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonParagraphAlignLeft class provides functionality for aligning a paragraph on left.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphAlignLeft
      */
@@ -8711,7 +8922,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonParagraphAlignLeft = React.createClass({
         displayName: 'ButtonParagraphAlignLeft',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -8758,12 +8969,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'left'
-                    }
-                }
+                command: 'justifyleft'
             };
         },
 
@@ -8778,7 +8984,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-left', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
+                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-left', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
                 React.createElement('span', { className: 'ae-icon-align-left' })
             );
         }
@@ -8794,9 +9000,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonParagraphAlignRight class provides functionality for aligning a paragraph on right.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphAlignRight
      */
@@ -8804,7 +9010,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonParagraphAlignRight = React.createClass({
         displayName: 'ButtonParagraphAlignRight',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -8851,12 +9057,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'right'
-                    }
-                }
+                command: 'justifyright'
             };
         },
 
@@ -8871,7 +9072,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-right', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
+                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-right', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
                 React.createElement('span', { className: 'ae-icon-align-right' })
             );
         }
@@ -8887,9 +9088,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonParagraphCenter class provides functionality for centering a paragraph.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphCenter
      */
@@ -8897,7 +9098,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonParagraphCenter = React.createClass({
         displayName: 'ButtonParagraphCenter',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -8944,12 +9145,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'center'
-                    }
-                }
+                command: 'justifycenter'
             };
         },
 
@@ -8964,7 +9160,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-center', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
+                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-center', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
                 React.createElement('span', { className: 'ae-icon-align-center' })
             );
         }
@@ -8980,9 +9176,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonParagraphJustify class provides functionality for justfying a paragraph.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphJustify
      */
@@ -8990,7 +9186,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonParagraphJustify = React.createClass({
         displayName: 'ButtonParagraphJustify',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -9037,12 +9233,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'justify'
-                    }
-                }
+                command: 'justifyblock'
             };
         },
 
@@ -9057,7 +9248,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignJustify, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-justify', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignJustify },
+                { 'aria-label': AlloyEditor.Strings.alignJustify, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-justify', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignJustify },
                 React.createElement('span', { className: 'ae-icon-align-justified' })
             );
         }

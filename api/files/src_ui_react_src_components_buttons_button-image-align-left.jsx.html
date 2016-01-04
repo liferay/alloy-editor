@@ -65,6 +65,7 @@
                                     <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
@@ -178,14 +179,14 @@
                                 /**
                                  * The ButtonImageAlignLeft class provides functionality for aligning an image on left.
                                  *
-                                 * @uses ButtonActionStyle
+                                 * @uses ButtonCommand
+                                 * @uses ButtonCommandActive
                                  * @uses ButtonStateClasses
-                                 * @uses ButtonStyle
                                  *
                                  * @class ButtonImageAlignLeft
                                  */
                                 var ButtonImageAlignLeft = React.createClass({
-                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+                                    mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
                             
                                     // Allows validating props being passed to the component.
                                     propTypes: {
@@ -232,12 +233,7 @@
                                      */
                                     getDefaultProps: function() {
                                         return {
-                                            style: {
-                                                element: &#x27;img&#x27;,
-                                                styles: {
-                                                    &#x27;float&#x27;: &#x27;left&#x27;
-                                                }
-                                            }
+                                            command: &#x27;justifyleft&#x27;
                                         };
                                     },
                             
@@ -251,7 +247,7 @@
                                         var cssClass = &#x27;ae-button &#x27; + this.getStateClasses();
                             
                                         return (
-                                            &lt;button aria-label={AlloyEditor.Strings.alignLeft} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-image-align-left&quot; onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignLeft}&gt;
+                                            &lt;button aria-label={AlloyEditor.Strings.alignLeft} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-image-align-left&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignLeft}&gt;
                                                 &lt;span className=&quot;ae-icon-align-left&quot;&gt;&lt;/span&gt;
                                             &lt;/button&gt;
                                         );
