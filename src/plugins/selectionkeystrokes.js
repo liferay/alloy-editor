@@ -13,6 +13,8 @@
      */
     CKEDITOR.plugins.add(
         'ae_selectionkeystrokes', {
+            requires: 'ae_selectionregion',
+
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
              * The function adds a command to the editor for every defined selectionKeystroke
