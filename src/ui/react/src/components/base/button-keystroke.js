@@ -51,6 +51,8 @@
                 nativeEditor.addCommand(commandName, command);
             }
 
+            this._defaultKeystrokeCommand = nativeEditor.keystrokeHandler.keystrokes[keystroke.keys];
+
             nativeEditor.setKeystroke(keystroke.keys, commandName);
         },
 
@@ -60,7 +62,7 @@
          * @method componentWillUnmount
          */
         componentWillUnmount: function() {
-            this.props.editor.get('nativeEditor').setKeystroke(this.props.keystroke.keys);
+            this.props.editor.get('nativeEditor').setKeystroke(this.props.keystroke.keys, this._defaultKeystrokeCommand);
         }
     };
 
