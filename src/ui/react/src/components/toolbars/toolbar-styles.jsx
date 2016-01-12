@@ -138,6 +138,7 @@
                 var buttons = this.getToolbarButtons(
                     currentSelection.buttons,
                     {
+                        manualSelection: this.props.editorEvent ? this.props.editorEvent.data.manualSelection : null,
                         selectionType: currentSelection.name
                     }
                 );
@@ -205,7 +206,7 @@
                     var result;
 
                     if (testFn) {
-                        result = testFn({
+                        result = eventPayload.manualSelection === item.name || testFn({
                             data: eventPayload,
                             editor: this.props.editor
                         });
