@@ -176,6 +176,11 @@
                             (function() {
                                 &#x27;use strict&#x27;;
                             
+                                /* istanbul ignore if */
+                                if(CKEDITOR.plugins.get(&#x27;ae_uibridge&#x27;)) {
+                                    return;
+                                }
+                            
                                 /**
                                  * CKEditor plugin that extends CKEDITOR.ui.add function so an add handler can be specified
                                  * on top of the original ones. It bridges the calls to add components via:
