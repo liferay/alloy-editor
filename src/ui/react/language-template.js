@@ -56,6 +56,7 @@ AlloyEditor.Strings = {
 	ariaUpdateOneToolbar: '{toolbars} toolbar is available. Press ALT+F10 to focus.',
 	ariaUpdateManyToolbars: '{toolbars} toolbars are available. Press ALT+F10 to focus.',
 	camera: 'Insert Image from Camera',
+	cameraDisabled: 'Browser or Browser´s protocol does not support this action',
 	cite: 'Cite',
 	code: 'Code',
 	clearInput: 'Clear Input Field',

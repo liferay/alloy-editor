@@ -60,12 +60,14 @@
                 );
             } else {
                 var disabled = !(navigator.getUserMedia ||
-                    navigator.webkitGetUserMedia ||
+                    (navigator.webkitGetUserMedia && location.protocol === 'https') ||
                     navigator.mozGetUserMedia ||
                     navigator.msGetUserMedia);
 
+                var label = disabled ? AlloyEditor.Strings.cameraDisabled : AlloyEditor.Strings.camera;
+
                 return (
-                    <button aria-label={AlloyEditor.Strings.camera} className="ae-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.camera}>
+                    <button aria-label={label} className="ae-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={label}>
                         <span className="ae-icon-camera"></span>
                     </button>
                 );
