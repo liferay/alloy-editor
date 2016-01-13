@@ -269,6 +269,7 @@
                                         }
                             
                                         var reader = new FileReader();
+                                        var file = inputEl.files[0];
                             
                                         reader.onload = function(event) {
                                             var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
@@ -281,13 +282,13 @@
                             
                                             var imageData = {
                                                 el: el,
-                                                file: inputEl.files[0]
+                                                file: file
                                             };
                             
                                             editor.fire(&#x27;imageAdd&#x27;, imageData);
                                         }.bind(this);
                             
-                                        reader.readAsDataURL(inputEl.files[0]);
+                                        reader.readAsDataURL(file);
                             
                                         inputEl.value = &#x27;&#x27;;
                                     }
