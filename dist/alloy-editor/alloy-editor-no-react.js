@@ -3430,6 +3430,54 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 })();
 'use strict';
 
+(function () {
+    'use strict';
+
+    if (CKEDITOR.plugins.get('ae_selectionkeystrokes')) {
+        return;
+    }
+
+    /**
+     * CKEditor plugin that simulates editor interaction events based on manual keystrokes. This
+     * can be used to trigger different reactions in the editor.
+     *
+     * @class CKEDITOR.plugins.ae_selectionkeystrokes
+     */
+    CKEDITOR.plugins.add('ae_selectionkeystrokes', {
+        requires: 'ae_selectionregion',
+
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         * The function adds a command to the editor for every defined selectionKeystroke
+         * in the configuration and maps it to the specified keystroke.
+         *
+         * @method init
+         * @param {Object} editor The current editor instance
+         */
+        init: function init(editor) {
+            if (editor.config.selectionKeystrokes) {
+                editor.config.selectionKeystrokes.forEach(function (selectionKeystroke) {
+                    var command = new CKEDITOR.command(editor, {
+                        exec: function exec(editor) {
+                            editor.fire('editorInteraction', {
+                                manualSelection: selectionKeystroke.selection,
+                                nativeEvent: {},
+                                selectionData: editor.getSelectionData()
+                            });
+                        }
+                    });
+
+                    var commandName = 'selectionKeystroke' + selectionKeystroke.selection;
+
+                    editor.addCommand(commandName, command);
+                    editor.setKeystroke(selectionKeystroke.keys, commandName);
+                });
+            }
+        }
+    });
+})();
+'use strict';
+
 /**
  * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
@@ -5856,6 +5904,8 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             editor.config.pasteFromWordRemoveStyles = false;
             editor.config.pasteFromWordRemoveFontStyles = false;
 
+            editor.config.selectionKeystrokes = this.get('selectionKeystrokes');
+
             AlloyEditor.Lang.mix(editor.config, config);
 
             editor.once('contentDom', function () {
@@ -6035,7 +6085,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'ae_uicore,ae_selectionregion,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
+                value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
                 writeOnce: true
             },
 
@@ -6087,6 +6137,23 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 validator: AlloyEditor.Lang.isString,
                 value: 'contextmenu,toolbar,elementspath,resize,liststyle,link',
                 writeOnce: true
+            },
+
+            /**
+             * Array of manual selection triggers. They can be configured to manually show a specific selection toolbar
+             * by forcing the selection type. A selectionKeystroke item consists of a keys property with a [CKEditor keystroke
+             * definition](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-keystrokes) and a selection property with
+             * the selection name to trigger.
+             *
+             * @property selectionKeystrokes
+             * @type {Array}
+             */
+            selectionKeystrokes: {
+                validator: AlloyEditor.Lang.isArray,
+                value: [{
+                    keys: CKEDITOR.CTRL + 76 /*L*/
+                    , selection: 'link'
+                }]
             },
 
             /**
@@ -6318,6 +6385,8 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 nativeEditor.addCommand(commandName, command);
             }
 
+            this._defaultKeystrokeCommand = nativeEditor.keystrokeHandler.keystrokes[keystroke.keys];
+
             nativeEditor.setKeystroke(keystroke.keys, commandName);
         },
 
@@ -6327,7 +6396,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @method componentWillUnmount
          */
         componentWillUnmount: function componentWillUnmount() {
-            this.props.editor.get('nativeEditor').setKeystroke(this.props.keystroke.keys);
+            this.props.editor.get('nativeEditor').setKeystroke(this.props.keystroke.keys, this._defaultKeystrokeCommand);
         }
     };
 
@@ -8820,6 +8889,8 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         _onInputChange: function _onInputChange() {
             var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
 
+            // On IE11 the function might be called with an empty array of
+            // files. In such a case, no actions will be taken.
             if (!inputEl.files.length) {
                 return;
             }
@@ -9018,7 +9089,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
-            if (this.props.renderExclusive) {
+            if (this.props.renderExclusive || this.props.manualSelection) {
                 // We need to wait for the next rendering cycle before focusing to avoid undesired
                 // scrolls on the page
                 if (window.requestAnimationFrame) {
@@ -12365,7 +12436,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @return {Object|null} The content which should be rendered.
          */
         render: function render() {
-            if (this.props.editorEvent && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+            if (this.props.editorEvent && this.props.editorEvent.data.nativeEvent.target && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
                 return null;
             }
 
@@ -12611,6 +12682,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 var cssClasses = 'ae-toolbar-styles ' + arrowBoxClasses;
 
                 var buttons = this.getToolbarButtons(currentSelection.buttons, {
+                    manualSelection: this.props.editorEvent ? this.props.editorEvent.data.manualSelection : null,
                     selectionType: currentSelection.name
                 });
 
@@ -12678,7 +12750,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     var result;
 
                     if (testFn) {
-                        result = testFn({
+                        result = eventPayload.manualSelection === item.name || testFn({
                             data: eventPayload,
                             editor: this.props.editor
                         });

@@ -216,6 +216,8 @@
                                         editor.config.pasteFromWordRemoveStyles = false;
                                         editor.config.pasteFromWordRemoveFontStyles = false;
                             
+                                        editor.config.selectionKeystrokes = this.get(&#x27;selectionKeystrokes&#x27;);
+                            
                                         AlloyEditor.Lang.mix(editor.config, config);
                             
                                         editor.once(&#x27;contentDom&#x27;, function() {
@@ -395,7 +397,7 @@
                                          */
                                         extraPlugins: {
                                             validator: AlloyEditor.Lang.isString,
-                                            value: &#x27;ae_uicore,ae_selectionregion,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink&#x27;,
+                                            value: &#x27;ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink&#x27;,
                                             writeOnce: true
                                         },
                             
@@ -447,6 +449,23 @@
                                             validator: AlloyEditor.Lang.isString,
                                             value: &#x27;contextmenu,toolbar,elementspath,resize,liststyle,link&#x27;,
                                             writeOnce: true
+                                        },
+                            
+                                        /**
+                                         * Array of manual selection triggers. They can be configured to manually show a specific selection toolbar
+                                         * by forcing the selection type. A selectionKeystroke item consists of a keys property with a [CKEditor keystroke
+                                         * definition](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-keystrokes) and a selection property with
+                                         * the selection name to trigger.
+                                         *
+                                         * @property selectionKeystrokes
+                                         * @type {Array}
+                                         */
+                                        selectionKeystrokes: {
+                                            validator: AlloyEditor.Lang.isArray,
+                                            value: [{
+                                                keys: CKEDITOR.CTRL + 76 /*L*/,
+                                                selection: &#x27;link&#x27;
+                                            }]
                                         },
                             
                                         /**

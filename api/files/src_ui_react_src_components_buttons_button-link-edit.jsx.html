@@ -233,7 +233,7 @@
                                      * @method componentDidMount
                                      */
                                     componentDidMount: function () {
-                                        if (this.props.renderExclusive) {
+                                        if (this.props.renderExclusive || this.props.manualSelection) {
                                             // We need to wait for the next rendering cycle before focusing to avoid undesired
                                             // scrolls on the page
                                             if (window.requestAnimationFrame) {
