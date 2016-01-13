@@ -85,8 +85,15 @@
          * @method _onInputChange
          */
         _onInputChange: function() {
-            var reader = new FileReader();
             var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
+
+            // On IE11 the function might be called with an empty array of
+            // files. In such a case, no actions will be taken.
+            if (!inputEl.files.length) {
+                return;
+            }
+
+            var reader = new FileReader();
 
             reader.onload = function(event) {
                 var editor = this.props.editor.get('nativeEditor');
