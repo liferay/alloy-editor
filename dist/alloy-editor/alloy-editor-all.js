@@ -28122,11 +28122,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             if (this.props.renderExclusive) {
                 return React.createElement(AlloyEditor.ButtonCameraImage, this.props);
             } else {
-                var disabled = !(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+                var disabled = !(navigator.getUserMedia || navigator.webkitGetUserMedia && location.protocol === 'https' || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+
+                var label = disabled ? AlloyEditor.Strings.cameraDisabled : AlloyEditor.Strings.camera;
 
                 return React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.camera, className: 'ae-button', 'data-type': 'button-image-camera', disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.camera },
+                    { 'aria-label': label, className: 'ae-button', 'data-type': 'button-image-camera', disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex, title: label },
                     React.createElement('span', { className: 'ae-icon-camera' })
                 );
             }

@@ -235,12 +235,14 @@
                                             );
                                         } else {
                                             var disabled = !(navigator.getUserMedia ||
-                                                navigator.webkitGetUserMedia ||
+                                                (navigator.webkitGetUserMedia &amp;&amp; location.protocol === &#x27;https&#x27;) ||
                                                 navigator.mozGetUserMedia ||
                                                 navigator.msGetUserMedia);
                             
+                                            var label = disabled ? AlloyEditor.Strings.cameraDisabled : AlloyEditor.Strings.camera;
+                            
                                             return (
-                                                &lt;button aria-label={AlloyEditor.Strings.camera} className=&quot;ae-button&quot; data-type=&quot;button-image-camera&quot; disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.camera}&gt;
+                                                &lt;button aria-label={label} className=&quot;ae-button&quot; data-type=&quot;button-image-camera&quot; disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={label}&gt;
                                                     &lt;span className=&quot;ae-icon-camera&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                             );
