@@ -43,7 +43,7 @@
             var selectionData = eventPayload.selectionData;
 
             var pos = {
-                x: selectionData.region.left,
+                x: eventPayload.nativeEvent.pageX,
                 y: selectionData.region.top
             };
 
