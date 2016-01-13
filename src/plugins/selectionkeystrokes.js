@@ -25,10 +25,8 @@
              */
             init: function(editor) {
                 if (editor.config.selectionKeystrokes) {
-                    var command, commandName;
-
                     editor.config.selectionKeystrokes.forEach(function(selectionKeystroke) {
-                        command = new CKEDITOR.command(editor, {
+                        var command = new CKEDITOR.command(editor, {
                             exec: function(editor) {
                                 editor.fire('editorInteraction', {
                                     manualSelection: selectionKeystroke.selection,
@@ -38,7 +36,7 @@
                             }
                         });
 
-                        commandName = 'selectionKeystroke' + selectionKeystroke.selection;
+                        var commandName = 'selectionKeystroke' + selectionKeystroke.selection;
 
                         editor.addCommand(commandName, command);
                         editor.setKeystroke(selectionKeystroke.keys, commandName);
