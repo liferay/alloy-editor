@@ -260,8 +260,13 @@
                                      * @method _onInputChange
                                      */
                                     _onInputChange: function() {
-                                        var reader = new FileReader();
                                         var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
+                            
+                                        if (!inputEl.files.length) {
+                                            return;
+                                        }
+                            
+                                        var reader = new FileReader();
                             
                                         reader.onload = function(event) {
                                             var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);

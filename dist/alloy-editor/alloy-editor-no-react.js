@@ -8818,8 +8818,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @method _onInputChange
          */
         _onInputChange: function _onInputChange() {
-            var reader = new FileReader();
             var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
+
+            if (!inputEl.files.length) {
+                return;
+            }
+
+            var reader = new FileReader();
 
             reader.onload = (function (event) {
                 var editor = this.props.editor.get('nativeEditor');
