@@ -7188,9 +7188,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             }
 
             var selectionData = eventPayload.selectionData;
+
             var pos = {
                 x: eventPayload.nativeEvent.pageX,
-                y: eventPayload.nativeEvent.pageY
+                y: selectionData.region.top
             };
 
             var direction = selectionData.region.direction;
