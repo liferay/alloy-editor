@@ -76,6 +76,7 @@ gulp.task('generate-icon-fonts', function() {
             return gulp.src(path.join(skinFontDir, 'tmp', 'icons', '*.svg'))
                 .pipe(gulp.dest(path.join(skinFontDir, 'icons')))
                 .pipe(iconfont({
+                    formats: ['ttf', 'eot', 'woff', 'svg'],
                     fontName: fontName,
                     normalize: true
                 }))
