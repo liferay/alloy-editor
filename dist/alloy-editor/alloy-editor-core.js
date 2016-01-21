@@ -6940,7 +6940,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 if (this._stream.stop) {
                     this._stream.stop();
                 } else if (this._stream.getVideoTracks) {
-                    this._stream.getVideoTracks().forEach(function (track, index) {
+                    this._stream.getVideoTracks().forEach(function (track) {
                         track.stop();
                     });
                 }
