@@ -223,7 +223,13 @@
                                      */
                                     componentWillUnmount: function() {
                                         if (this._stream) {
-                                            this._stream.stop();
+                                            if (this._stream.stop) {
+                                                this._stream.stop();
+                                            } else if (this._stream.getVideoTracks) {
+                                                this._stream.getVideoTracks().forEach(function (track, index) {
+                                                    track.stop();
+                                                });
+                                            }
                                             this._stream = null;
                                         }
                                     },

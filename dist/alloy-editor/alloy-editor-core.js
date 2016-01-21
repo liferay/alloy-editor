@@ -11,7 +11,7 @@
 (function() {
     'use strict';
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -295,7 +295,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 })();
 'use strict';
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -1478,7 +1478,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @param {Object} editor The current editor instance
          */
         init: function init(editor) {
-            editor.once('contentDom', (function () {
+            editor.once('contentDom', function () {
                 var editable = editor.editable();
 
                 editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
@@ -1496,7 +1496,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 editable.attachListener(editable, 'paste', this._onPaste, this, {
                     editor: editor
                 });
-            }).bind(this));
+            }.bind(this));
         },
 
         /**
@@ -1678,13 +1678,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @param {Object} editor The current editor instance
          */
         init: function init(editor) {
-            editor.once('contentDom', (function () {
+            editor.once('contentDom', function () {
                 var editable = editor.editable();
 
                 editable.attachListener(editable, 'keyup', this._onKeyUp, this, {
                     editor: editor
                 });
-            }).bind(this));
+            }.bind(this));
         },
 
         /**
@@ -2565,13 +2565,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @param {Object} editor The current editor instance
          */
         init: function init(editor) {
-            editor.once('contentDom', (function () {
+            editor.once('contentDom', function () {
                 var editable = editor.editable();
 
                 editable.attachListener(editable, 'paste', this._onPaste, this, {
                     editor: editor
                 });
-            }).bind(this));
+            }.bind(this));
         },
 
         /**
@@ -2594,7 +2594,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     var reader = new FileReader();
                     var imageFile = pastedData.getAsFile();
 
-                    reader.onload = (function (event) {
+                    reader.onload = function (event) {
                         var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
 
                         editor.insertElement(el);
@@ -2605,7 +2605,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                         };
 
                         editor.fire('imageAdd', imageData);
-                    }).bind(this);
+                    }.bind(this);
 
                     reader.readAsDataURL(imageFile);
                 }
@@ -3592,7 +3592,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
 			if (!isDetect) {
 				// Trim all cell fillers and check to remove empty cells.
-				if ((trimCell(cell), cell.getChildren().count())) {
+				if (trimCell(cell), cell.getChildren().count()) {
 					// Merge vertically cells as two separated paragraphs.
 					if (rowIndex != lastRowIndex && cellFirstChild && !(cellFirstChild.isBlockBoundary && cellFirstChild.isBlockBoundary({ br: 1 }))) {
 						var last = frag.getLast(CKEDITOR.dom.walker.whitespaces(true));
@@ -4490,7 +4490,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 })();
 'use strict';
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -5624,7 +5624,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             if (!command) {
                 command = new CKEDITOR.command(nativeEditor, {
-                    exec: (function (editor) {
+                    exec: function (editor) {
                         var keystrokeFn = keystroke.fn;
 
                         if (AlloyEditor.Lang.isString(keystrokeFn)) {
@@ -5632,7 +5632,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                         } else if (AlloyEditor.Lang.isFunction(keystrokeFn)) {
                             keystrokeFn.call(this, editor);
                         }
-                    }).bind(this)
+                    }.bind(this)
                 });
 
                 nativeEditor.addCommand(commandName, command);
@@ -6002,7 +6002,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @return {Array|Object} The item with executive state.
          */
         filterExclusive: function filterExclusive(items) {
-            return items.filter((function (item) {
+            return items.filter(function (item) {
                 if (this.state.itemExclusive) {
                     if (this.state.itemExclusive === item.key) {
                         return item;
@@ -6010,7 +6010,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 } else {
                     return item;
                 }
-            }).bind(this));
+            }.bind(this));
         },
 
         /**
@@ -6358,7 +6358,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
                 this._descendants = [];
 
-                Array.prototype.slice.call(descendants).forEach((function (item) {
+                Array.prototype.slice.call(descendants).forEach(function (item) {
                     var dataTabIndex = item.getAttribute('data-tabindex');
 
                     if (dataTabIndex) {
@@ -6366,7 +6366,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     } else {
                         this._descendants.push(item);
                     }
-                }).bind(this));
+                }.bind(this));
 
                 priorityDescendants = priorityDescendants.sort(function (a, b) {
                     return AlloyEditor.Lang.toInt(a.getAttribute('data-tabindex')) > AlloyEditor.Lang.toInt(b.getAttribute('data-tabindex'));
@@ -6376,14 +6376,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
                 this._activeDescendant = 0;
 
-                this._descendants.some((function (item, index) {
+                this._descendants.some(function (item, index) {
                     if (item.getAttribute('tabindex') === '0') {
                         this._activeDescendant = index;
                         this.focus();
 
                         return true;
                     }
-                }).bind(this));
+                }.bind(this));
             }
         }
     };
@@ -6937,7 +6937,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         componentWillUnmount: function componentWillUnmount() {
             if (this._stream) {
-                this._stream.stop();
+                if (this._stream.stop) {
+                    this._stream.stop();
+                } else if (this._stream.getVideoTracks) {
+                    this._stream.getVideoTracks().forEach(function (track, index) {
+                        track.stop();
+                    });
+                }
                 this._stream = null;
             }
         },
@@ -7031,7 +7037,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
             var canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
 
-            videoEl.addEventListener('canplay', (function (event) {
+            videoEl.addEventListener('canplay', function (event) {
                 var height = videoEl.videoHeight / (videoEl.videoWidth / this.props.videoWidth);
 
                 if (isNaN(height)) {
@@ -7044,7 +7050,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 canvasEl.setAttribute('height', height);
 
                 this._videoHeight = height;
-            }).bind(this), false);
+            }.bind(this), false);
 
             this._stream = stream;
 
@@ -8154,7 +8160,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             var reader = new FileReader();
             var file = inputEl.files[0];
 
-            reader.onload = (function (event) {
+            reader.onload = function (event) {
                 var editor = this.props.editor.get('nativeEditor');
 
                 var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
@@ -8169,7 +8175,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 };
 
                 editor.fire('imageAdd', imageData);
-            }).bind(this);
+            }.bind(this);
 
             reader.readAsDataURL(file);
 
@@ -10077,11 +10083,11 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             var styles = this._getStyles();
 
-            styles.forEach((function (item) {
+            styles.forEach(function (item) {
                 if (this._checkActive(item.style)) {
                     activeStyle = item.name;
                 }
-            }).bind(this));
+            }.bind(this));
 
             var buttonStylesList;
 
@@ -12163,9 +12169,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             // It is not easy to debounce _setUIHidden on mousedown, because if we
             // debounce it, when the handler is being invoked, the target might be no more part
             // of the editor's UI - onActionPerformed causes re-render.
-            this._mousedownListener = (function (event) {
+            this._mousedownListener = function (event) {
                 this._setUIHidden(event.target);
-            }).bind(this);
+            }.bind(this);
 
             this._keyDownListener = CKEDITOR.tools.debounce(function (event) {
                 this._setUIHidden(document.activeElement);
@@ -12291,7 +12297,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 return AlloyEditor.Toolbars[toolbar] || window[toolbar];
             });
 
-            toolbars = this.filterExclusive(toolbars).map((function (toolbar) {
+            toolbars = this.filterExclusive(toolbars).map(function (toolbar) {
                 var props = this.mergeExclusiveProps({
                     config: this.props.toolbars[toolbar.key],
                     editor: this.props.editor,
@@ -12302,7 +12308,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 }, toolbar.key);
 
                 return React.createElement(toolbar, props);
-            }).bind(this));
+            }.bind(this));
 
             return React.createElement(
                 'div',
