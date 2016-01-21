@@ -39,7 +39,7 @@
                                         left: 10,
                                         right: 60,
                                         top: 600
-                                    } 
+                                    }
                                 }
                             }
                         }
@@ -53,12 +53,10 @@
         afterEach(Utils.afterEach);
 
         describe('When selection is done by mouse', function () {
-            it('Should return undefined when toolbar doesnt have editorEvent prop', function () {
+            it('Should return undefined when toolbar doesn\'t have editorEvent prop', function () {
                 this.objProps.props.editorEvent = null;
 
-                var result = undefined;
-
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.isUndefined(AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
             });
 
             it('Should appear over selection when select only one line although you set direction as CKEDITOR.SELECTION_TOP_TO_BOTTOM', function () {
@@ -67,7 +65,7 @@
                 var result = {
                     direction: 1,
                     x: 20,
-                    y: 600,
+                    y: 600
                 };
 
                 assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
@@ -81,7 +79,7 @@
                 var result = {
                     direction: 0,
                     x: 20,
-                    y: 700,
+                    y: 700
                 };
 
                 assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
@@ -91,13 +89,13 @@
                 this.objProps.props.editorEvent.data.selectionData.region.direction = 0;
                 this.objProps.props.editorEvent.data.selectionData.region.top = 400;
                 this.objProps.props.editorEvent.data.selectionData.region.endRect.top = 400;
-                this.objProps.props.editorEvent.data.selectionData.region.startRect.top = 700;            
+                this.objProps.props.editorEvent.data.selectionData.region.startRect.top = 700;
                 this.objProps.props.editorEvent.data.selectionData.region.bottom = 700;
 
                 var result = {
                     direction: 0,
                     x: 20,
-                    y: 700,
+                    y: 700
                 };
 
                 assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
@@ -108,7 +106,7 @@
                 var result = {
                     direction: 1,
                     x: 20,
-                    y: 600,
+                    y: 600
                 };
 
                 assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
@@ -120,7 +118,7 @@
                 var result = {
                     direction: 1,
                     x: 30,
-                    y: 600,
+                    y: 600
                 };
 
                 assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
@@ -131,12 +129,12 @@
                 this.objProps.props.editorEvent.data.selectionData.region.bottom = 10;
                 this.objProps.props.editorEvent.data.selectionData.region.startRect.top = 10;
                 this.objProps.props.editorEvent.data.selectionData.region.endRect.right = 400;
-                this.objProps.props.editorEvent.data.selectionData.region.endRect.top = 500;        
+                this.objProps.props.editorEvent.data.selectionData.region.endRect.top = 500;
 
                 var result = {
                     direction: 1,
                     x: 300,
-                    y: 500,
+                    y: 500
                 };
                 assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
             });
@@ -152,22 +150,22 @@
                 var result = {
                     direction: 1,
                     x: 300,
-                    y: 500,
+                    y: 500
                 };
 
                 assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
             });
         });
 
-        describe('When selection is done by keyboard', function() {  
+        describe('When selection is done by keyboard', function() {
             it('Should appear over selection and it is in the middle of the selection', function() {
                 this.objProps.props.editorEvent.data.nativeEvent.pageX = null;
                 this.objProps.props.editorEvent.data.selectionData.region.direction = 1;
-                
+
                 var result = {
                     direction: 1,
                     x: 35,
-                    y: 600,
+                    y: 600
                 };
 
                 assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
@@ -177,16 +175,16 @@
                 this.objProps.props.editorEvent.data.nativeEvent.pageX = null;
                 this.objProps.props.editorEvent.data.selectionData.region.direction = 0;
                 this.objProps.props.editorEvent.data.selectionData.region.startRect.top = 500;
-                
+
                 var result = {
                     direction: 0,
                     x: 35,
-                    y: 5,
+                    y: 5
                 };
 
                 assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
             });
         });
-        
+
     });
 }());
