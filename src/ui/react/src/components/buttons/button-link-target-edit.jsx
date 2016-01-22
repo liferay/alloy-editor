@@ -96,6 +96,18 @@
         },
 
         /**
+         * Lifecycle. Invoked before rendering when new props or state are being received.
+         * This method is not called for the initial render or when forceUpdate is used.
+         *
+         * @method  shouldComponentUpdate
+         * @return {Boolean} Returns false when the transition to the new props and state will not
+         * require a component update.
+         */
+        shouldComponentUpdate: function(nextProps, nextState) {
+            return nextProps.expanded !== this.props.expanded || nextProps.selectedTarget !== this.props.selectedTarget;
+        },
+
+        /**
          * Creates the dropdown list of allowed link targets.
          *
          * @protected
