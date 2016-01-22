@@ -30,6 +30,13 @@
             editor: React.PropTypes.object.isRequired,
 
             /**
+             * Default value of the link target attribute
+             *
+             * @property {String} defaultLinkTarget
+             */
+            defaultLinkTarget: React.PropTypes.string,
+
+            /**
              * Indicates whether the link target selector should appear.
              *
              * @property {Boolean} showTargetSelector
@@ -87,6 +94,7 @@
          */
         getDefaultProps: function() {
             return {
+                defaultLinkTarget: '',
                 showTargetSelector: true
             };
         },
@@ -100,7 +108,7 @@
         getInitialState: function() {
             var link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
             var href = link ? link.getAttribute('href') : '';
-            var target = link ? link.getAttribute('target') : '';
+            var target = link ? link.getAttribute('target') : this.props.defaultLinkTarget;
 
             return {
                 element: link,
