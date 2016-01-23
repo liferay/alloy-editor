@@ -29314,6 +29314,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             editor: React.PropTypes.object.isRequired,
 
             /**
+             * Default value of the link target attribute.
+             *
+             * @property {String} defaultLinkTarget
+             */
+            defaultLinkTarget: React.PropTypes.string,
+
+            /**
              * Indicates whether the link target selector should appear.
              *
              * @property {Boolean} showTargetSelector
@@ -29371,6 +29378,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         getDefaultProps: function getDefaultProps() {
             return {
+                defaultLinkTarget: '',
                 showTargetSelector: true
             };
         },
@@ -29384,7 +29392,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         getInitialState: function getInitialState() {
             var link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
             var href = link ? link.getAttribute('href') : '';
-            var target = link ? link.getAttribute('target') : '';
+            var target = link ? link.getAttribute('target') : this.props.defaultLinkTarget;
 
             return {
                 element: link,
@@ -29729,6 +29737,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 ),
                 allowedTargetsList
             );
+        },
+
+        /**
+         * Lifecycle. Invoked before rendering when new props or state are being received.
+         * This method is not called for the initial render or when forceUpdate is used.
+         *
+         * @method  shouldComponentUpdate
+         * @return {Boolean} Returns false when the transition to the new props and state will not
+         * require a component update.
+         */
+        shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+            return nextProps.expanded !== this.props.expanded || nextProps.selectedTarget !== this.props.selectedTarget;
         },
 
         /**
