@@ -30,7 +30,7 @@
             editor: React.PropTypes.object.isRequired,
 
             /**
-             * Default value of the link target attribute
+             * Default value of the link target attribute.
              *
              * @property {String} defaultLinkTarget
              */
