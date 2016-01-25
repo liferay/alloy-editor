@@ -22,12 +22,13 @@
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function(config) {
+
             var node = this.get('srcNode');
 
             if (this.get('enableContentEditable')) {
                 node.setAttribute('contenteditable', 'true');
             }
-
+            
             var editor = CKEDITOR.inline(node);
 
             editor.config.allowedContent = this.get('allowedContent');
@@ -44,10 +45,14 @@
             editor.config.selectionKeystrokes = this.get('selectionKeystrokes');
 
             AlloyEditor.Lang.mix(editor.config, config);
-
+            
             editor.once('contentDom', function() {
-                editor.editable().addClass('ae-editable');
-            });
+                var editable = editor.editable();
+
+                editable.addClass('ae-editable');
+                
+                editable.editor.on('readOnly', this._onReadOnlyChangeFn.bind(this));
+            }.bind(this));
 
             AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
 
@@ -86,6 +91,32 @@
         },
 
         /**
+         * Fired when AlloyEditor detects mouse is clicked and the content is readOnly. Set link tag´s behavior. 
+         *
+         * @event readOnlyClick
+         * @protected
+         * @method _defaultReadOnlyClickFn
+         * @param {Object} Fired event
+         */
+        _defaultReadOnlyClickFn: function (evt) {
+            if (editor.editable().editor.fire('readOnlyClick', evt.data) !== false) {
+                evt = evt.data;
+                var ckElement = new CKEDITOR.dom.elementPath( evt.getTarget(), this );
+                var tagName = ckElement.lastElement.$.tagName.toLowerCase();
+                var link = ckElement.lastElement;
+                if (link) {
+                    var href = link.$.attributes.href ? link.$.attributes.href.value : null;
+                    var target = link.$.attributes.target ? link.$.attributes.target.value : null;
+                    if (target && href) {
+                        window.open(href, target);
+                    } else if (href) {
+                        window.location.href = href;
+                    }
+                }
+            }
+        },
+
+        /**
          * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
          *
          * @protected
@@ -94,6 +125,21 @@
          */
         _getNativeEditor: function() {
             return this._editor;
+        },
+
+        /**
+         * Fired when readonly value is changed. Add click event listener to handle links as readonly mode.
+         *
+         * @protected
+         * @method _onReadOnlyChange
+         * @param {Object} Fired event
+         */
+        _onReadOnlyChangeFn: function _onReadOnlyChange(event) {
+            if (event.editor.readOnly) {
+                event.editor.editable().on('click', this._defaultReadOnlyClickFn.bind(this));
+            } else {
+                event.editor.editable().removeListener('click', this._defaultReadOnlyClickFn);
+            }
         },
 
         /**
