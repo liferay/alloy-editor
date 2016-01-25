@@ -23,6 +23,12 @@
 
             AlloyEditor.implementEventTarget();
 
+            // var editor = new AlloyEditor.Core(config);
+
+            // CKEDITOR.event.implementOn(editor);
+
+            // return editor;
+
             return new AlloyEditor.Core(config);
         },
 
