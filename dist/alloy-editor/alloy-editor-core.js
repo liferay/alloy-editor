@@ -5138,6 +5138,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function initializer(config) {
+
             var node = this.get('srcNode');
 
             if (this.get('enableContentEditable')) {
@@ -5162,8 +5163,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             AlloyEditor.Lang.mix(editor.config, config);
 
             editor.once('contentDom', function () {
-                editor.editable().addClass('ae-editable');
-            });
+                var editable = editor.editable();
+
+                editable.addClass('ae-editable');
+
+                editable.editor.on('readOnly', this._onReadOnlyChangeFn.bind(this));
+            }.bind(this));
 
             AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
 
@@ -5202,6 +5207,33 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
         /**
+         * Called on `click` event when the editor is in read only mode. Navigates to link's URL or opens
+         * the link in a new window.
+         *
+         * @event readOnlyClick
+         * @protected
+         * @method _defaultReadOnlyClickFn
+         * @param {Object} event The fired `click` event payload
+         */
+        _defaultReadOnlyClickFn: function _defaultReadOnlyClickFn(event) {
+            if (event.listenerData.editor.editable().editor.fire('readOnlyClick', event.data) !== false) {
+                var ckElement = new CKEDITOR.dom.elementPath(event.data.getTarget(), this);
+                var link = ckElement.lastElement;
+
+                if (link) {
+                    var href = link.$.attributes.href ? link.$.attributes.href.value : null;
+                    var target = link.$.attributes.target ? link.$.attributes.target.value : null;
+
+                    if (target && href) {
+                        window.open(href, target);
+                    } else if (href) {
+                        window.location.href = href;
+                    }
+                }
+            }
+        },
+
+        /**
          * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
          *
          * @protected
@@ -5213,7 +5245,24 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
         /**
-         * Renders the specified from the user toolbars
+         * Fired when readonly value is changed. Adds click event listener to handle links in readonly mode.
+         *
+         * @protected
+         * @method _onReadOnlyChange
+         * @param {Object} event The fired event
+         */
+        _onReadOnlyChangeFn: function _onReadOnlyChangeFn(event) {
+            if (event.editor.readOnly) {
+                event.editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
+                    editor: event.editor
+                });
+            } else {
+                event.editor.editable().removeListener('click', this._defaultReadOnlyClickFn);
+            }
+        },
+
+        /**
+         * Renders the specified from the user toolbars.
          *
          * @protected
          * @method _renderUI
