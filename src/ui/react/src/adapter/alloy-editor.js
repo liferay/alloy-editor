@@ -28,7 +28,7 @@
             if (this.get('enableContentEditable')) {
                 node.setAttribute('contenteditable', 'true');
             }
-            
+
             var editor = CKEDITOR.inline(node);
 
             editor.config.allowedContent = this.get('allowedContent');
@@ -45,12 +45,12 @@
             editor.config.selectionKeystrokes = this.get('selectionKeystrokes');
 
             AlloyEditor.Lang.mix(editor.config, config);
-            
+
             editor.once('contentDom', function() {
                 var editable = editor.editable();
 
                 editable.addClass('ae-editable');
-                
+
                 editable.editor.on('readOnly', this._onReadOnlyChangeFn.bind(this));
             }.bind(this));
 
@@ -91,22 +91,23 @@
         },
 
         /**
-         * Fired when AlloyEditor detects mouse is clicked and the content is readOnly. Set link tag´s behavior. 
+         * Called on `click` event when the editor is in read only mode. Navigates to link's URL or opens
+         * the link in a new window.
          *
          * @event readOnlyClick
          * @protected
          * @method _defaultReadOnlyClickFn
-         * @param {Object} Fired event
+         * @param {Object} event The fired `click` event payload
          */
-        _defaultReadOnlyClickFn: function (evt) {
-            if (editor.editable().editor.fire('readOnlyClick', evt.data) !== false) {
-                evt = evt.data;
-                var ckElement = new CKEDITOR.dom.elementPath( evt.getTarget(), this );
-                var tagName = ckElement.lastElement.$.tagName.toLowerCase();
+        _defaultReadOnlyClickFn: function(event) {
+            if (event.listenerData.editor.editable().editor.fire('readOnlyClick', event.data) !== false) {
+                var ckElement = new CKEDITOR.dom.elementPath(event.data.getTarget(), this);
                 var link = ckElement.lastElement;
+
                 if (link) {
                     var href = link.$.attributes.href ? link.$.attributes.href.value : null;
                     var target = link.$.attributes.target ? link.$.attributes.target.value : null;
+
                     if (target && href) {
                         window.open(href, target);
                     } else if (href) {
@@ -128,22 +129,24 @@
         },
 
         /**
-         * Fired when readonly value is changed. Add click event listener to handle links as readonly mode.
+         * Fired when readonly value is changed. Adds click event listener to handle links in readonly mode.
          *
          * @protected
          * @method _onReadOnlyChange
-         * @param {Object} Fired event
+         * @param {Object} event The fired event
          */
-        _onReadOnlyChangeFn: function _onReadOnlyChange(event) {
+        _onReadOnlyChangeFn: function(event) {
             if (event.editor.readOnly) {
-                event.editor.editable().on('click', this._defaultReadOnlyClickFn.bind(this));
+                event.editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
+                    editor: event.editor
+                });
             } else {
                 event.editor.editable().removeListener('click', this._defaultReadOnlyClickFn);
             }
         },
 
         /**
-         * Renders the specified from the user toolbars
+         * Renders the specified from the user toolbars.
          *
          * @protected
          * @method _renderUI
