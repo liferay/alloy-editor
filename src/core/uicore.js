@@ -110,8 +110,8 @@
 
                 editor.once('contentDom', function() {
                     var editable = editor.editable();
-
-                    editable.attachListener(editable, 'mouseup', handleUI);
+                    editable.attachListener(editable, 'focus', handleUI, null, null, 1);
+                    editable.attachListener(editable, 'mouseup', handleUI, null, null, 2);
                     editable.attachListener(editable, 'keyup', handleUI);
                 });
 
