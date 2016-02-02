@@ -6,18 +6,19 @@
 ( function() {
 	'use strict';
 
-	CKEDITOR.plugins.add( 'embed', {
-		icons: 'embed', // %REMOVE_LINE_CORE%
-		hidpi: true, // %REMOVE_LINE_CORE%
-		requires: 'embedbase',
+    /* istanbul ignore if */
+    if(CKEDITOR.plugins.get('ae_embed')) {
+        return;
+    }
+
+	CKEDITOR.plugins.add( 'ae_embed', {
+		requires: 'ae_embedbase',
 
 		init: function( editor ) {
 			var widgetDefinition = CKEDITOR.plugins.embedBase.createWidgetBaseDefinition( editor );
 
 			// Extend the base definition with additional properties.
 			CKEDITOR.tools.extend( widgetDefinition, {
-				// Use a dialog exposed by the embedbase plugin.
-				dialog: 'embedBase',
 				button: editor.lang.embedbase.button,
 				allowedContent: 'div[!data-oembed-url]',
 				requiredContent: 'div[data-oembed-url]',
@@ -56,8 +57,8 @@
 				}
 			}, true );
 
-			// Register the definition as 'embed' widget.
-			editor.widgets.add( 'embed', widgetDefinition );
+			// Register the definition as 'ae_embed' widget.
+			editor.widgets.add( 'ae_embed', widgetDefinition );
 
 			// Do not filter contents of the div[data-oembed-url] at all.
 			editor.filter.addElementCallback( function( el ) {

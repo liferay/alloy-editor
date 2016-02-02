@@ -6,16 +6,16 @@
 ( function() {
 	'use strict';
 
-	CKEDITOR.plugins.add( 'embedbase', {
-		lang: 'cs,da,de,en,eo,eu,fr,gl,id,it,ko,ku,nb,nl,pl,pt-br,ru,sv,tr,ug,uk,zh,zh-cn', // %REMOVE_LINE_CORE%
-		requires: 'widget,notificationaggregator',
+    /* istanbul ignore if */
+    if(CKEDITOR.plugins.get('ae_embedbase')) {
+        return;
+    }
+
+	CKEDITOR.plugins.add( 'ae_embedbase', {
+		requires: 'widget',
 
 		onLoad: function() {
 			CKEDITOR._.jsonpCallbacks = {};
-		},
-
-		init: function() {
-			CKEDITOR.dialog.add( 'embedBase', this.path + 'dialogs/embedbase.js' );
 		}
 	} );
 
@@ -120,11 +120,6 @@
 					this._sendRequest( evt.data );
 				}, this, null, 999 );
 
-				// Expose the widget in the dialog - needed to trigger loadContent() and do error handling.
-				this.on( 'dialog', function( evt ) {
-					evt.data.widget = this;
-				}, this );
-
 				this.on( 'handleResponse', function( evt ) {
 					if ( evt.data.html ) {
 						return;
@@ -186,7 +181,6 @@
 				var that = this,
 					cachedResponse = this._getCachedResponse( url ),
 					request = {
-						noNotifications: opts.noNotifications,
 						url: url,
 						callback: finishLoading,
 						errorCallback: function( msg ) {
@@ -204,10 +198,6 @@
 						finishLoading( cachedResponse );
 					} );
 					return;
-				}
-
-				if ( !opts.noNotifications ) {
-					request.task = this._createTask();
 				}
 
 				// The execution will be followed by #sendRequest's listener.
@@ -375,10 +365,6 @@
 			_handleError: function( request, messageTypeOrMessage ) {
 				if ( request.task ) {
 					request.task.cancel();
-
-					if ( !request.noNotifications ) {
-						editor.showNotification( this.getErrorMessage( messageTypeOrMessage, request.url ), 'warning' );
-					}
 				}
 			},
 
@@ -411,24 +397,6 @@
 			_setContent: function( url, content ) {
 				this.setData( 'url', url );
 				this.element.setHtml( content );
-			},
-
-			/**
-			 * Creates a notification aggregator task.
-			 *
-			 * @private
-			 * @returns {CKEDITOR.plugins.notificationAggregator.task}
-			 */
-			_createTask: function() {
-				if ( !aggregator || aggregator.isFinished() ) {
-					aggregator = new CKEDITOR.plugins.notificationAggregator( editor, lang.fetchingMany, lang.fetchingOne );
-
-					aggregator.on( 'finished', function() {
-						aggregator.notification.hide();
-					} );
-				}
-
-				return aggregator.createTask();
 			},
 
 			/**

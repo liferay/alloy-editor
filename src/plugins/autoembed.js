@@ -3,14 +3,18 @@
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
-'use strict';
-
 ( function() {
+	'use strict';
+
+    /* istanbul ignore if */
+    if(CKEDITOR.plugins.get('ae_autoembed')) {
+        return;
+    }
+
 	var validLinkRegExp = /^<a[^>]+href="([^"]+)"[^>]*>([^<]+)<\/a>$/i;
 
-	CKEDITOR.plugins.add( 'autoembed', {
+	CKEDITOR.plugins.add( 'ae_autoembed', {
 		requires: 'autolink,undo',
-		lang: 'cs,de,en,eo,eu,fr,it,ko,ku,nb,pl,pt-br,ru,tr,ug,uk,zh,zh-cn', // %REMOVE_LINE_CORE%
 		init: function( editor ) {
 			var currentId = 1,
 				embedCandidatePasted;
