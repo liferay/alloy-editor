@@ -44,9 +44,6 @@
 	 * @member CKEDITOR.plugins.embedBase
 	 */
 	function createWidgetBaseDefinition( editor ) {
-		var aggregator,
-			lang = editor.lang.embedbase;
-
 		/**
 		 * An embed widget base definition. It predefines a few {@link CKEDITOR.plugins.widget.definition widget definition}
 		 * properties such as {@link #mask}, {@link #template} and {@link #pathName} and adds methods related to
@@ -64,7 +61,7 @@
 		return {
 			mask: true,
 			template: '<div></div>',
-			pathName: lang.pathName,
+
 
 			/**
 			 * Response cache. This cache object will be shared between all instances of this widget.
@@ -238,61 +235,6 @@
 			 */
 			isUrlValid: function( url ) {
 				return this.urlRegExp.test( url ) && this.fire( 'validateUrl', url ) !== false;
-			},
-
-			/**
-			 * Generates an error message based on the message type (with a possible suffix) or
-			 * the custom message template.
-			 *
-			 * This method is used when showing a notification or an alert (in a dialog) about an error.
-			 * Usually it is used with an error type which is a string from the `editor.lang.embedbase` object.
-			 *
-			 * There are two error types available at the moment: `'unsupportedUrl'` and `'fetchingFailed'`.
-			 * Additionally, both can be suffixed with `'Given'`. See the language entries to see the difference.
-			 * Inside the dialog this method is used with a suffix and to generate a notification message it is
-			 * used without a suffix.
-			 *
-			 * Additionally, a custom message may be passed and just like language entries, it can use the `{url}`
-			 * placeholder.
-			 *
-			 * While {@link #handleResponse handling the response} you can set an error message or its type. It will
-			 * be passed to this method later.
-			 *
-			 *		widget.on( 'handleResponse', function( evt ) {
-			 *			if ( evt.data.response.type != 'rich' ) {
-			 *				evt.data.errorMessage = '{url} cannot be embedded. Only rich type is supported.';
-			 *				evt.cancel();
-			 *
-			 *				// Or:
-			 *				evt.data.errorMessage = 'unsupportedUrl.';
-			 *				evt.cancel();
-			 *			}
-			 *		} );
-			 *
-			 * If you need to display your own error:
-			 *
-			 *		editor.showNotification(
-			 *			widget.getErrorMessage( '{url} cannot be embedded. Only rich type is supported.', wrongUrl )
-			 *		);
-			 *
-			 * Or with a message type:
-			 *
-			 *		editor.showNotification(
-			 *			widget.getErrorMessage( 'unsupportedUrl', wrongUrl )
-			 *		);
-			 *
-			 * @param {String} messageTypeOrMessage
-			 * @param {String} [url]
-			 * @param {String} [suffix]
-			 * @returns {String}
-			 */
-			getErrorMessage: function( messageTypeOrMessage, url, suffix ) {
-				var message = editor.lang.embedbase[ messageTypeOrMessage + ( suffix || '' ) ];
-				if ( !message ) {
-					message = messageTypeOrMessage;
-				}
-
-				return new CKEDITOR.template( message ).output( { url: url || '' } );
 			},
 
 			/**

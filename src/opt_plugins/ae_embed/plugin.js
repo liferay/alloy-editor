@@ -19,7 +19,6 @@
 
 			// Extend the base definition with additional properties.
 			CKEDITOR.tools.extend( widgetDefinition, {
-				button: editor.lang.embedbase.button,
 				allowedContent: 'div[!data-oembed-url]',
 				requiredContent: 'div[data-oembed-url]',
 				providerUrl: new CKEDITOR.template(

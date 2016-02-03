@@ -143,6 +143,7 @@ gulp.task('build-demo', function() {
 gulp.task('build-js', function(callback) {
     runSequence([
         'copy-ckeditor',
+        'copy-ckeditor-opt-plugins',
         'create-alloy-editor-ui',
         'create-alloy-editor-main'
     ], 'wrap-alloy-editor-core', callback);
@@ -163,6 +164,11 @@ gulp.task('clean-dist', function(callback) {
 gulp.task('copy-ckeditor', function() {
     return gulp.src(path.join(rootDir, 'lib', 'ckeditor', '/**'))
         .pipe(gulp.dest(editorDistFolder));
+});
+
+gulp.task('copy-ckeditor-opt-plugins', function() {
+    return gulp.src(path.join(rootDir, 'src', 'opt_plugins', '/**'))
+        .pipe(gulp.dest(path.join(editorDistFolder, 'plugins')));
 });
 
 gulp.task('copy-md', function() {

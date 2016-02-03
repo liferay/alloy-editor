@@ -14,7 +14,7 @@
 	var validLinkRegExp = /^<a[^>]+href="([^"]+)"[^>]*>([^<]+)<\/a>$/i;
 
 	CKEDITOR.plugins.add( 'ae_autoembed', {
-		requires: 'autolink,undo',
+		requires: 'autolink,undo,ae_embed',
 		init: function( editor ) {
 			var currentId = 1,
 				embedCandidatePasted;
@@ -49,9 +49,7 @@
 	} );
 
 	function autoEmbedLink( editor, id ) {
-		var anchor = editor.editable().findOne( 'a[data-cke-autoembed="' + id + '"]' ),
-			lang = editor.lang.autoembed,
-			notification;
+		var anchor = editor.editable().findOne( 'a[data-cke-autoembed="' + id + '"]' );
 
 		if ( !anchor || !anchor.data( 'cke-saved-href' ) ) {
 			return;
@@ -80,9 +78,7 @@
 			return;
 		}
 
-		notification = editor.showNotification( lang.embeddingInProgress, 'info' );
 		instance.loadContent( href, {
-			noNotifications: true,
 			callback: function() {
 					// DOM might be invalidated in the meantime, so find the anchor again.
 				var anchor = editor.editable().findOne( 'a[data-cke-autoembed="' + id + '"]' );
@@ -134,14 +130,11 @@
 					editor.fire( 'unlockSnapshot' );
 				}
 
-				notification.hide();
 				finalizeCreation();
 			},
 
 			errorCallback: function() {
-				notification.hide();
 				editor.widgets.destroy( instance, true );
-				editor.showNotification( lang.embeddingFailed, 'info' );
 			}
 		} );
 
@@ -163,7 +156,7 @@
 		 * @returns {CKEDITOR.plugins.widget.definition/null} The definition of the widget to be used to embed the link.
 		 */
 		getWidgetDefinition: function( editor, url ) {
-			var opt = editor.config.autoEmbed_widget || 'embed,embedSemantic',
+			var opt = editor.config.autoEmbed_widget || 'ae_embed,embedSemantic',
 				name,
 				widgets = editor.widgets.registered;
 
