@@ -2,21 +2,23 @@
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
     var TestUtils = React.addons.TestUtils;
-    var buttons;
+
+    var editorConfig = {
+        eventsDelay: 0,
+        toolbars: {
+            add: {}
+        },
+        uicore: {
+            timeout: 0
+        }
+    };
+
     describe('ToolbarAdd', function() {
         this.timeout(35000);
 
         before(function (done) {
-            Utils.createAlloyEditor.call(this, done, {
-                toolbars: {
-                    add: {
-                        buttons: ['image', 'video'],
-                        tabIndex: 2
-                    }
-                }
-            });
+            Utils.createAlloyEditor.call(this, done, editorConfig);
         });
 
         after(Utils.destroyAlloyEditor);
@@ -41,76 +43,63 @@
             assert.isNull(ReactDOM.findDOMNode(mainUI));
         });
 
-        it('Should toolbaradd toggle between content editables', function (done) {
+        it('should render in the focused editor', function (done) {
+            var blurDelay = CKEDITOR.focusManager._.blurDelay;
+
+            CKEDITOR.focusManager._.blurDelay = false;
+
             var empty = document.createElement('div');
 
-
             var editable2 = document.createElement('div');
-
-            editable2.setAttribute('id', 'editable2');
-
-            editable2.setAttribute('contenteditable', true);
 
             document.getElementsByTagName('body')[0].appendChild(editable2);
 
             document.getElementsByTagName('body')[0].appendChild(empty);
 
-            var editor2 = AlloyEditor.editable('editable2', {
-                toolbars: {
-                    add: {
-                        buttons: ['image', 'video'],
-                        tabIndex: 2
-                    }
-                }
-            });
-
+            var editor2 = AlloyEditor.editable(editable2, editorConfig);
             var nativeEditor2 = editor2.get('nativeEditor');
 
-            buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
+            nativeEditor2.on('instanceReady', function() {
+                var buttons;
 
-
-            happen.mousedown(this._editable);
-
-            setTimeout(function () {
+                // Editor1 is focused and should show the add toolbar. Editor2 should not.
                 buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
 
-                assert.equal(buttons.length, 1, 'ae-button-add found into this.editor mousedown editable');
+                assert.equal(buttons.length, 1, 'Editor1 is focused. It should show the add toolbar');
 
                 buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
 
-                assert.equal(buttons.length, 0, 'ae-button-add didnt found into editor2 mousedown editable');
+                assert.equal(buttons.length, 0, 'Editor2 is not focused. It should not show the add toolbar');
 
                 happen.mousedown(editable2);
+                nativeEditor2.focus();
 
+                // Editor2 is focused and should show the add toolbar. Editor1 should not.
                 setTimeout(function () {
-
                     buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
 
-                    assert.equal(buttons.length, 0, 'ae-button-add didnt found into this.editor mousedown editable2');
+                    assert.equal(buttons.length, 0, 'Editor1 is not focused. It should not show the add toolbar');
 
                     buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
 
-                    assert.equal(buttons.length, 1, 'ae-button-add found into editor2 mousedown editable2');
+                    assert.equal(buttons.length, 1, 'Editor2 is focused. It should show the add toolbar');
 
                     happen.mousedown(empty);
 
-                    setTimeout(function () {
-                        buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
+                    // None of the editors is focused. None of them should show the add toolbar.
+                    buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
 
-                        assert.equal(buttons.length, 0, 'ae-button-add didnt found into this.editor mousedown outside div');
+                    assert.equal(buttons.length, 0, 'Editor1 is not focused. It should not show the add toolbar');
 
-                        buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
+                    buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
 
-                        assert.equal(buttons.length, 0, 'ae-button-add didnt found into editor 2 mousedown outside div');
+                    assert.equal(buttons.length, 0, 'Editor1 is not focused. It should not show the add toolbar');
 
-                        done();
+                    CKEDITOR.focusManager._.blurDelay = blurDelay;
 
-                    }.bind(this), 500);
-
-                }.bind(this), 500);
-
-            }.bind(this), 500);
+                    done();
+                }.bind(this), 0);
+            }.bind(this));
         });
-
     });
 }());
