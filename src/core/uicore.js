@@ -96,26 +96,12 @@
                     uiTasksTimeout
                 );
 
+                var handleBlur = function(event) {
+                    event.removeListener('blur', handleBlur);
+                    event.removeListener('keyup', handleUI);
+                    event.removeListener('mouseup', handleUI);
 
-                var attachListeners = function (editable, events) {
-                    events.forEach(function (attachEvent, index) {
-                        editable.attachListener(editable, attachEvent, function (event) {
-                            handleUI(event);
-
-                            if (!editable.editor.hasListeners('blur')) {
-                                editable.attachListener(editable, 'blur', handleUI);
-                            }
-
-                            if (!editable.editor.hasListeners('mouseup')) {
-                                editable.attachListener(editable, 'mouseup', handleUI);
-                            }
-
-                            if (!editable.editor.hasListeners('keyp')) {
-                                editable.attachListener(editable, 'keyup', handleUI);
-                            }
-
-                        });
-                    });
+                    handleUI(event);
                 };
 
                 editor.on('ariaUpdate', function(event) {
@@ -132,7 +118,14 @@
 
                 editor.once('contentDom', function() {
                     var editable = editor.editable();
-                    attachListeners(editable, ['mousedown', 'focus']);
+
+                    editable.attachListener(editable, 'focus', function (event) {
+                        editable.attachListener(editable, 'blur', handleBlur);
+                        editable.attachListener(editable, 'keyup', handleUI);
+                        editable.attachListener(editable, 'mouseup', handleUI);
+
+                        handleUI(event);
+                    });
                 });
 
                 editor.on('destroy', function(event) {
