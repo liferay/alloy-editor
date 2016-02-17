@@ -59,7 +59,7 @@
                         <span className="ae-icon-image"></span>
                     </button>
 
-                    <input onChange={this._onInputChange} ref="fileInput" style={inputSyle} type="file" accept="image/*"/>
+                    <input accept="image/*" onChange={this._onInputChange} ref="fileInput" style={inputSyle} type="file"/>
                 </div>
             );
         },
