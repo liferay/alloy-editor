@@ -37,8 +37,8 @@
 
             editor.config.removePlugins = this.get('removePlugins');
             editor.config.extraPlugins = this.get('extraPlugins');
+            editor.config.linkSchema = this.get('linkSchema');
             editor.config.placeholderClass = this.get('placeholderClass');
-
             editor.config.pasteFromWordRemoveStyles = false;
             editor.config.pasteFromWordRemoveFontStyles = false;
 
@@ -273,6 +273,18 @@
                 validator: AlloyEditor.Lang.isString,
                 value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
                 writeOnce: true
+            },
+
+            /**
+             * Specifies the default protocol when link is created and it does not have protocol
+             *
+             * @property linkSchema
+             * @default http://
+             * @type {String}
+             */
+            linkSchema: {
+                validator: AlloyEditor.Lang.isString,
+                value: 'http://'
             },
 
             /**
