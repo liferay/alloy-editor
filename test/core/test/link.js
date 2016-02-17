@@ -349,5 +349,40 @@
             assert.isTrue(range.endContainer.equals(range.endContainer));
             assert.strictEqual(range.endOffset, 1);
         });
+
+        it('should create a link from a selection by default', function(done) {
+
+            var editable2 = document.createElement('div');
+
+            editable2.setAttribute('id', 'editable2');
+            editable2.setAttribute('contenteditable', true);
+
+            document.getElementsByTagName('body')[0].appendChild(editable2);
+
+            var nativeEditor2 = CKEDITOR.inline('editable2', {linkSchema: 'foo/'});
+
+            nativeEditor2.on('instanceReady', function() {
+                nativeEditor2.focus();
+                var link = new CKEDITOR.Link(nativeEditor2);
+
+                bender.tools.selection.setWithHtml(nativeEditor2, 'set a {selection} and then convert it to a link.');
+
+                link.create('test.com', {
+                    target: '_blank'
+                });
+
+                var data = bender.tools.getData(nativeEditor2, {
+                    fixHtml: true,
+                    compatHtml: true
+                });
+
+                assert.strictEqual(data, '<p>set a <a href="foo/test.com" target="_blank">selection</a> and then convert it to a link.</p>');
+                done();
+            }.bind(this));
+
+        });
+
+
+
     });
 }());

@@ -195,7 +195,7 @@
         },
 
         /**
-         * Checks if the URI has a scheme. If not, the default 'http' scheme with
+         * Checks if the URI has a scheme. If not, the value of linkSchema configuration scheme with
          * hierarchical path '//' is added to it.
          *
          * @protected
@@ -205,7 +205,7 @@
          */
         _getCompleteURI: function(URI) {
             if (!REGEX_URI_SCHEME.test(URI)) {
-                URI = 'http://' + URI;
+                URI = this._editor.config.linkSchema + URI;
             }
 
             return URI;
