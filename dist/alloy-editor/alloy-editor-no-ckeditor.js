@@ -20568,8 +20568,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} editor The CKEditor instance.
      */
 
-    function Link(editor) {
+    function Link(editor, config) {
         this._editor = editor;
+        this.appendProtocol = config && config.appendProtocol === false ? false : true;
     }
 
     Link.prototype = {
@@ -20762,7 +20763,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         _getCompleteURI: function _getCompleteURI(URI) {
             if (!REGEX_URI_SCHEME.test(URI)) {
-                URI = 'http://' + URI;
+                URI = this.appendProtocol ? 'http://' + URI : URI;
             }
 
             return URI;
@@ -29194,6 +29195,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
 
             /**
+             * Indicate if we add http:// protocol to link or not
+             *
+             * @property {Boolean} appendProtocol
+             */
+            appendProtocol: React.PropTypes.bool,
+
+            /**
              * The editor instance where the component is being used.
              *
              * @property {Object} editor
@@ -29213,6 +29221,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * @property {Boolean} showTargetSelector
              */
             showTargetSelector: React.PropTypes.bool
+
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -29266,7 +29275,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         getDefaultProps: function getDefaultProps() {
             return {
                 defaultLinkTarget: '',
-                showTargetSelector: true
+                showTargetSelector: true,
+                appendProtocol: true
             };
         },
 
@@ -29475,7 +29485,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         _updateLink: function _updateLink() {
             var editor = this.props.editor.get('nativeEditor');
-            var linkUtils = new CKEDITOR.Link(editor);
+            var linkUtils = new CKEDITOR.Link(editor, { appendProtocol: this.props.appendProtocol });
             var linkAttrs = {
                 target: this.state.linkTarget
             };
