@@ -138,15 +138,9 @@
          * @return {Object|null} The content which should be rendered.
          */
         render: function() {
-            var isNotElementContentEditable = this.props.editorEvent && this.props.editorEvent.data.nativeEvent.target
-                && !this.props.editorEvent.data.nativeEvent.target.isContentEditable;
-
-            // Some plugins like ae_placeholder doesnt keep editorEvent updated
-            if ( isNotElementContentEditable && document.contains(this.props.editorEvent.data.nativeEvent.target)) {
+            if (this.props.editorEvent && this.props.editorEvent.data.nativeEvent.target && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
                 return null;
             }
-
-
 
             var buttons = this._getButtons();
             var className = this._getToolbarClassName();
