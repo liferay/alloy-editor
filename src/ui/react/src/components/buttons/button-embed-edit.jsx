@@ -212,9 +212,9 @@
          * Verifies that the current link state is valid so the user can save the link. A valid state
          * means that we have a non-empty href that's different from the original one.
          *
-         * @protected
          * @method _isValidState
-         * @return {Boolean} [description]
+         * @protected
+         * @return {Boolean} True if the state is valid, false otherwise
          */
         _isValidState: function() {
             var validState =

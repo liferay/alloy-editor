@@ -10,12 +10,16 @@
     /**
      * Sends a request using the JSONP technique.
      *
+     * @method CKEDITOR.tools.jsonp
+     * @static
      * @param {CKEDITOR.template} urlTemplate The template of the URL to be requested. All properties
      * passed in `urlParams` can be used, plus a `{callback}`, which represent a JSONP callback, must be defined.
      * @param {Object} urlParams Parameters to be passed to the `urlTemplate`.
-     * @param {Function} callback
-     * @param {Function} errorCallback
-     * @returns {Object} The request object with a `cancel()` method.
+     * @param {Function} callback A function to be called in case of success.
+     * @param {Function} errorCallback A function to be called in case of failure.
+     * @return {Object} An object with the following properties:
+     * - id: the transaction ID
+     * - a `cancel()` method
      */
     CKEDITOR.tools.jsonp = function(urlTemplate, urlParams, callback, errorCallback) {
         var callbackKey = CKEDITOR.tools.getNextNumber();
@@ -46,9 +50,9 @@
         });
 
         function cleanUp() {
-            if ( scriptElement ) {
+            if (scriptElement) {
                 scriptElement.remove();
-                delete CKEDITOR._.jsonpCallbacks[ callbackKey ];
+                delete CKEDITOR._.jsonpCallbacks[callbackKey];
                 scriptElement = null;
             }
         }
@@ -56,7 +60,8 @@
         CKEDITOR.document.getBody().append(scriptElement);
 
         return {
-            cancel: cleanUp
+            cancel: cleanUp,
+            id: callbackKey
         };
     };
 
