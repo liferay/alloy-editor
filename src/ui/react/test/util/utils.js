@@ -62,7 +62,7 @@
         this.nativeEditor = this.editor.get('nativeEditor');
 
         this.nativeEditor.on('instanceReady', function() {
-            this.nativeEditor.focus();
+            window.Utils.focusEditor(this.nativeEditor);
 
             done();
         }.bind(this));
