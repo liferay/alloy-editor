@@ -84,6 +84,13 @@
             }
         },
 
+        focusEditor: function(editor) {
+            editor.focus();
+
+            // Firefox needs a stronger focus simulation
+            editor.editable().fire('focus', {$: {}});
+        },
+
         getFixture: function(fixtureBase) {
             return function(fixtureFile) {
                 fixture.setBase(fixtureBase);
