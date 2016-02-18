@@ -11,8 +11,9 @@
      * @param {Object} editor The CKEditor instance.
      */
 
-    function Link(editor) {
+    function Link(editor, config) {
         this._editor = editor;
+        this.appendProtocol = config && config.appendProtocol === false ? false : true;
     }
 
     Link.prototype = {
@@ -205,7 +206,7 @@
          */
         _getCompleteURI: function(URI) {
             if (!REGEX_URI_SCHEME.test(URI)) {
-                URI = 'http://' + URI;
+                URI = this.appendProtocol ? 'http://' + URI : URI;
             }
 
             return URI;

@@ -23,6 +23,13 @@
             allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
 
             /**
+             * Indicate if we add http:// protocol to link or not
+             *
+             * @property {Boolean} appendProtocol
+             */
+             appendProtocol: React.PropTypes.bool,
+
+            /**
              * The editor instance where the component is being used.
              *
              * @property {Object} editor
@@ -42,6 +49,7 @@
              * @property {Boolean} showTargetSelector
              */
             showTargetSelector: React.PropTypes.bool
+
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -95,7 +103,8 @@
         getDefaultProps: function() {
             return {
                 defaultLinkTarget: '',
-                showTargetSelector: true
+                showTargetSelector: true,
+                appendProtocol: true
             };
         },
 
@@ -298,7 +307,7 @@
          */
         _updateLink: function() {
             var editor = this.props.editor.get('nativeEditor');
-            var linkUtils = new CKEDITOR.Link(editor);
+            var linkUtils = new CKEDITOR.Link(editor, {appendProtocol: this.props.appendProtocol});
             var linkAttrs = {
                 target: this.state.linkTarget
             };
