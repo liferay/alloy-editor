@@ -14,6 +14,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonCommandListItem",
         "ButtonCommandsList",
         "ButtonDropdown",
+        "ButtonEmbed",
+        "ButtonEmbedEdit",
         "ButtonH1",
         "ButtonH2",
         "ButtonHline",

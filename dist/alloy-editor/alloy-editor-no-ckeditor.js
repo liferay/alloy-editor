@@ -21518,6 +21518,65 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
 
     /**
+     * Sends a request using the JSONP technique.
+     *
+     * @method CKEDITOR.tools.jsonp
+     * @static
+     * @param {CKEDITOR.template} urlTemplate The template of the URL to be requested. All properties
+     * passed in `urlParams` can be used, plus a `{callback}`, which represent a JSONP callback, must be defined.
+     * @param {Object} urlParams Parameters to be passed to the `urlTemplate`.
+     * @param {Function} callback A function to be called in case of success.
+     * @param {Function} errorCallback A function to be called in case of failure.
+     * @return {Object} An object with the following properties:
+     * - id: the transaction ID
+     * - a `cancel()` method
+     */
+
+    CKEDITOR.tools.jsonp = function (urlTemplate, urlParams, callback, errorCallback) {
+        var callbackKey = CKEDITOR.tools.getNextNumber();
+
+        urlParams = urlParams || {};
+        urlParams.callback = 'CKEDITOR._.jsonpCallbacks[' + callbackKey + ']';
+
+        if (!CKEDITOR._.jsonpCallbacks) {
+            CKEDITOR._.jsonpCallbacks = {};
+        }
+
+        CKEDITOR._.jsonpCallbacks[callbackKey] = function (response) {
+            setTimeout(function () {
+                cleanUp();
+
+                callback(response);
+            });
+        };
+
+        var scriptElement = new CKEDITOR.dom.element('script');
+        scriptElement.setAttribute('src', urlTemplate.output(urlParams));
+        scriptElement.on('error', function () {
+            cleanUp();
+
+            if (errorCallback) {
+                errorCallback();
+            }
+        });
+
+        function cleanUp() {
+            if (scriptElement) {
+                scriptElement.remove();
+                delete CKEDITOR._.jsonpCallbacks[callbackKey];
+                scriptElement = null;
+            }
+        }
+
+        CKEDITOR.document.getBody().append(scriptElement);
+
+        return {
+            cancel: cleanUp,
+            id: callbackKey
+        };
+    };
+
+    /**
      * Returns a new object containing all of the properties of all the supplied
      * objects. The properties from later objects will overwrite those in earlier
      * objects.
@@ -21529,7 +21588,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} objects* One or more objects to merge.
      * @return {Object} A new merged object.
      */
-
     CKEDITOR.tools.merge = CKEDITOR.tools.merge || function () {
         var result = {};
 
@@ -22604,6 +22662,137 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             height: rect.height
         };
     }
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /* istanbul ignore if */
+
+    if (CKEDITOR.plugins.get('ae_embed')) {
+        return;
+    }
+
+    CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = '//alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
+    CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL = '<div data-ae-embed-url="{url}"></div>';
+
+    /**
+     * CKEditor plugin which adds the infrastructure to embed urls as media objects using an oembed
+     * service. By default, and for demoing purposes only, the oembed service is hosted in iframe.ly
+     * at //alloy.iframe.ly/api/oembed?url={url}&callback={callback}. Note this should be changed to
+     * a self-hosted or paid service in production environments. Access to the alloy.iframe.ly endpoint
+     * may be restricted per domain due to significant traffic.
+     *
+     * This plugin adds an `embedUrl` command that can be used to easily embed a URL and transform it
+     * to an embedded content.
+     *
+     * @class CKEDITOR.plugins.ae_embed
+     */
+    CKEDITOR.plugins.add('ae_embed', {
+        requires: 'widget',
+        init: function init(editor) {
+            var AE_EMBED_URL_TPL = new CKEDITOR.template(editor.config.embedUrlTemplate || CKEDITOR.DEFAULT_AE_EMBED_URL_TPL);
+            var AE_EMBED_WIDGET_TPL = new CKEDITOR.template(editor.config.embedWidgetTpl || CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL);
+
+            // Default function to upcast DOM elements to embed widgets.
+            // It matches CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
+            var defaultEmbedWidgetUpcastFn = function defaultEmbedWidgetUpcastFn(element, data) {
+                if (element.name === 'div' && element.attributes['data-ae-embed-url']) {
+                    data.url = element.attributes['data-ae-embed-url'];
+
+                    return true;
+                }
+            };
+
+            // Create a embedUrl command that can be invoked to easily embed media URLs
+            editor.addCommand('embedUrl', {
+                exec: function exec(editor, data) {
+                    editor.insertHtml(AE_EMBED_WIDGET_TPL.output({
+                        url: data.url
+                    }));
+                }
+            });
+
+            // Create a widget to properly handle embed operations
+            editor.widgets.add('ae_embed', {
+                allowedContent: 'div[!data-ae-embed-url]',
+                mask: true,
+                requiredContent: 'div[data-ae-embed-url]',
+
+                /**
+                 * Listener to be executed every time the widget's data changes. It takes care of
+                 * requesting the embed object to the configured oembed service and render it in
+                 * the editor
+                 *
+                 * @param {event} event The Event
+                 */
+                data: function data(event) {
+                    var widget = this;
+                    var url = event.data.url;
+
+                    if (url) {
+                        CKEDITOR.tools.jsonp(AE_EMBED_URL_TPL, {
+                            url: encodeURIComponent(url)
+                        }, function (response) {
+                            if (response.html) {
+                                widget.element.setHtml(response.html);
+                            } else {
+                                widget.element.setHtml(url);
+                            }
+                        }, function (msg) {
+                            widget.element.setHtml(url);
+                        });
+                    }
+                },
+
+                /**
+                 * Function used to upcast an element to ae_embed widgets.
+                 *
+                 * @param {CKEDITOR.htmlParser.element} element The element to be checked
+                 * @param {Object} data The object that will be passed to the widget
+                 */
+                upcast: function upcast(element, data) {
+                    var embedWidgetUpcastFn = editor.config.embedWidgetUpcastFn || defaultEmbedWidgetUpcastFn;
+
+                    return embedWidgetUpcastFn(element, data);
+                },
+
+                /**
+                 * Changes the widget's select state.
+                 *
+                 * @param {Boolean} selected Whether to select or deselect the widget
+                 */
+                setSelected: function setSelected(selected) {
+                    if (selected) {
+                        editor.getSelection().selectElement(this.element);
+                    }
+                }
+            });
+
+            // Add a listener to handle paste events and turn links into embed objects
+            editor.once('contentDom', function () {
+                editor.on('paste', function (event) {
+                    var link = event.data.dataValue;
+
+                    if (/https?/.test(link)) {
+                        event.stop();
+
+                        editor.execCommand('embedUrl', {
+                            url: event.data.dataValue
+                        });
+                    }
+                });
+            });
+
+            // Add a filter to skip filtering widget elements
+            editor.filter.addElementCallback(function (element) {
+                if ('data-ae-embed-url' in element.attributes) {
+                    return CKEDITOR.FILTER_SKIP_TREE;
+                }
+            });
+        }
+    });
 })();
 'use strict';
 
@@ -25313,6 +25502,27 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return element.getText().length === range.endOffset || element.equals(range.startContainer) && element.equals(range.endContainer) && range.startOffset === range.endOffset && range.endOffset === 1;
     };
 
+    var embedSelectionTest = function embedSelectionTest(payload) {
+        var editor = payload.editor.get('nativeEditor');
+        var embedElement;
+
+        var selection = editor.getSelection();
+
+        if (selection) {
+            var range = selection.getRanges()[0];
+
+            if (range) {
+                range.shrink(CKEDITOR.SHRINK_TEXT);
+
+                embedElement = editor.elementPath(range.getCommonAncestor()).contains(function (element) {
+                    return element.getAttribute('data-widget') === 'ae_embed' || element.getAttribute('data-cke-widget-wrapper') && element.find('[data-widget="ae_embed"]');
+                }, 1);
+            }
+        }
+
+        return !!embedElement;
+    };
+
     var linkSelectionTest = function linkSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
         var range = nativeEditor.getSelection().getRanges()[0];
@@ -25348,6 +25558,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     AlloyEditor.SelectionTest = {
+        embed: embedSelectionTest,
         image: imageSelectionTest,
         link: linkSelectionTest,
         table: tableSelectionTest,
@@ -25360,6 +25571,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     'use strict';
 
     var Selections = [{
+        name: 'embed',
+        buttons: ['embedEdit'],
+        test: AlloyEditor.SelectionTest.embed
+    }, {
         name: 'link',
         buttons: ['linkEdit'],
         test: AlloyEditor.SelectionTest.link
@@ -25658,7 +25873,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
+                value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink,ae_embed',
                 writeOnce: true
             },
 
@@ -25726,6 +25941,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 value: [{
                     keys: CKEDITOR.CTRL + 76 /*L*/
                     , selection: 'link'
+                }, {
+                    keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/
+                    , selection: 'embed'
                 }]
             },
 
@@ -25750,7 +25968,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 validator: '_validateToolbars',
                 value: {
                     add: {
-                        buttons: ['image', 'camera', 'hline', 'table'],
+                        buttons: ['image', 'embed', 'camera', 'hline', 'table'],
                         tabIndex: 2
                     },
                     styles: {
@@ -27843,6 +28061,345 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     });
 
     AlloyEditor.Buttons[ButtonDropdown.key] = AlloyEditor.ButtonDropdown = ButtonDropdown;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    var KEY_ENTER = 13;
+    var KEY_ESC = 27;
+
+    /**
+     * The ButtonEmbedEdit class provides functionality for creating and editing an embed link in a document.
+     * Provides UI for creating and editing an embed link.
+     *
+     * @class ButtonEmbedEdit
+     */
+    var ButtonEmbedEdit = React.createClass({
+        displayName: 'ButtonEmbedEdit',
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default embedEdit
+             */
+            key: 'embedEdit'
+        },
+
+        /**
+         * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+         *
+         * Focuses on the link input to immediately allow editing. This should only happen if the component
+         * is rendered in exclusive mode to prevent aggressive focus stealing.
+         *
+         * @method componentDidMount
+         */
+        componentDidMount: function componentDidMount() {
+            if (this.props.renderExclusive || this.props.manualSelection) {
+                // We need to wait for the next rendering cycle before focusing to avoid undesired
+                // scrolls on the page
+                if (window.requestAnimationFrame) {
+                    window.requestAnimationFrame(this._focusLinkInput);
+                } else {
+                    setTimeout(this._focusLinkInput, 0);
+                }
+            }
+        },
+
+        /**
+         * Lifecycle. Invoked when a component is receiving new props.
+         * This method is not called for the initial render.
+         *
+         * @method componentWillReceiveProps
+         */
+        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+            this.replaceState(this.getInitialState());
+        },
+
+        /**
+         * Lifecycle. Invoked once before the component is mounted.
+         * The return value will be used as the initial value of this.state.
+         *
+         * @method getInitialState
+         */
+        getInitialState: function getInitialState() {
+            var editor = this.props.editor.get('nativeEditor');
+            var embed;
+
+            var selection = editor.getSelection();
+
+            if (selection) {
+                var range = selection.getRanges()[0];
+
+                if (range) {
+                    range.shrink(CKEDITOR.SHRINK_TEXT);
+
+                    embed = editor.elementPath(range.getCommonAncestor()).contains(function (element) {
+                        return element.getAttribute('data-widget') === 'ae_embed' || element.getAttribute('data-cke-widget-wrapper') && element.find('[data-widget="ae_embed"]');
+                    }, 1);
+
+                    if (embed && embed.getAttribute('data-widget') !== 'ae_embed') {
+                        embed = embed.find('[data-widget="ae_embed"]').getItem(0);
+                    }
+                }
+            }
+
+            var href = embed ? embed.getAttribute('data-ae-embed-url') : '';
+
+            return {
+                initialLink: {
+                    href: href
+                },
+                linkHref: href
+            };
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            var clearLinkStyle = {
+                opacity: this.state.linkHref ? 1 : 0
+            };
+
+            return React.createElement(
+                'div',
+                { className: 'ae-container-edit-link' },
+                React.createElement(
+                    'div',
+                    { className: 'ae-container-input xxl' },
+                    React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                    React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
+                ),
+                React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.confirm, className: 'ae-button', disabled: !this._isValidState(), onClick: this._embedLink, title: AlloyEditor.Strings.confirm },
+                    React.createElement('span', { className: 'ae-icon-ok' })
+                )
+            );
+        },
+
+        /**
+         * Clears the link input. This only changes the component internal state, but does not
+         * affect the link element of the editor. Only the _removeLink and _updateLink methods
+         * are translated to the editor element.
+         *
+         * @protected
+         * @method _clearLink
+         */
+        _clearLink: function _clearLink() {
+            this.setState({
+                linkHref: ''
+            });
+        },
+
+        /**
+         * Triggers the embedUrl command to transform the link into an embed media object
+         *
+         * @protected
+         * @method _embedLink
+         */
+        _embedLink: function _embedLink() {
+            var nativeEditor = this.props.editor.get('nativeEditor');
+
+            nativeEditor.execCommand('embedUrl', {
+                url: this.state.linkHref
+            });
+
+            // We need to cancelExclusive with the bound parameters in case the button is used
+            // inside another in exclusive mode (such is the case of the link button)
+            this.props.cancelExclusive();
+        },
+
+        /**
+         * Focuses the user cursor on the widget's input.
+         *
+         * @protected
+         * @method _focusLinkInput
+         */
+        _focusLinkInput: function _focusLinkInput() {
+            ReactDOM.findDOMNode(this.refs.linkInput).focus();
+        },
+
+        /**
+         * Monitors key interaction inside the input element to respond to the keys:
+         * - Enter: Creates/updates the link.
+         * - Escape: Discards the changes.
+         *
+         * @protected
+         * @method _handleKeyDown
+         * @param {SyntheticEvent} event The keyboard event.
+         */
+        _handleKeyDown: function _handleKeyDown(event) {
+            if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+                event.preventDefault();
+            }
+
+            if (event.keyCode === KEY_ENTER) {
+                this._embedLink();
+            } else if (event.keyCode === KEY_ESC) {
+                var editor = this.props.editor.get('nativeEditor');
+
+                // We need to cancelExclusive with the bound parameters in case the button is used
+                // inside another in exclusive mode (such is the case of the link button)
+                this.props.cancelExclusive();
+
+                editor.fire('actionPerformed', this);
+            }
+        },
+
+        /**
+         * Updates the component state when the link input changes on user interaction.
+         *
+         * @protected
+         * @method _handleLinkHrefChange
+         * @param {SyntheticEvent} event The change event.
+         */
+        _handleLinkHrefChange: function _handleLinkHrefChange(event) {
+            this.setState({
+                linkHref: event.target.value
+            });
+        },
+
+        /**
+         * Verifies that the current link state is valid so the user can save the link. A valid state
+         * means that we have a non-empty href that's different from the original one.
+         *
+         * @method _isValidState
+         * @protected
+         * @return {Boolean} True if the state is valid, false otherwise
+         */
+        _isValidState: function _isValidState() {
+            var validState = this.state.linkHref && this.state.linkHref !== this.state.initialLink.href;
+
+            return validState;
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonEmbedEdit.key] = AlloyEditor.ButtonEmbedEdit = ButtonEmbedEdit;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * The ButtonEmbed class provides functionality for creating and editing an embed link in a document.
+     * ButtonEmbed renders in two different modes:
+     *
+     * - Normal: Just a button that allows to switch to the edition mode
+     * - Exclusive: The ButtonEmbedEdit UI with all the link edition controls.
+     *
+     * @uses ButtonKeystroke
+     *
+     * @class ButtonEmbed
+     */
+
+    var ButtonEmbed = React.createClass({
+        displayName: 'ButtonEmbed',
+
+        mixins: [AlloyEditor.ButtonKeystroke],
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @property {Number} tabIndex
+             */
+            tabIndex: React.PropTypes.number
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default embed
+             */
+            key: 'embed'
+        },
+
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function getDefaultProps() {
+            return {
+                keystroke: {
+                    fn: '_requestExclusive',
+                    keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/
+                }
+            };
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            if (this.props.renderExclusive) {
+                return React.createElement(AlloyEditor.ButtonEmbedEdit, this.props);
+            } else {
+                return React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.link, className: 'ae-button', 'data-type': 'button-embed', onClick: this._requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
+                    React.createElement('span', { className: 'ae-icon-add' })
+                );
+            }
+        },
+
+        /**
+         * Requests the link button to be rendered in exclusive mode to allow the embedding of a link.
+         *
+         * @protected
+         * @method _requestExclusive
+         */
+        _requestExclusive: function _requestExclusive() {
+            this.props.requestExclusive(ButtonEmbed.key);
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonEmbed.key] = AlloyEditor.ButtonEmbed = ButtonEmbed;
 })();
 'use strict';
 
