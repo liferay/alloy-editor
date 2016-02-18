@@ -18,6 +18,28 @@
             );
     };
 
+    var embedSelectionTest = function(payload) {
+        var editor = payload.editor.get('nativeEditor');
+        var embedElement;
+
+        var selection = editor.getSelection();
+
+        if (selection) {
+            var range = selection.getRanges()[0];
+
+            if (range) {
+                range.shrink(CKEDITOR.SHRINK_TEXT);
+
+                embedElement = editor.elementPath(range.getCommonAncestor()).contains(function(element) {
+                    return element.getAttribute('data-widget') === 'ae_embed' ||
+                        (element.getAttribute('data-cke-widget-wrapper') && element.find('[data-widget="ae_embed"]'));
+                }, 1);
+            }
+        }
+
+        return !!(embedElement);
+    };
+
     var linkSelectionTest = function(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
         var range = nativeEditor.getSelection().getRanges()[0];
@@ -68,6 +90,7 @@
     };
 
     AlloyEditor.SelectionTest = {
+        embed: embedSelectionTest,
         image: imageSelectionTest,
         link: linkSelectionTest,
         table: tableSelectionTest,
