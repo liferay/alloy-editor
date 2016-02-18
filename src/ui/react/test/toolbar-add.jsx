@@ -72,7 +72,7 @@
                 assert.equal(buttons.length, 0, 'Editor2 is not focused. It should not show the add toolbar');
 
                 happen.mousedown(editable2);
-                nativeEditor2.focus();
+                Utils.focusEditor(nativeEditor2);
 
                 // Editor2 is focused and should show the add toolbar. Editor1 should not.
                 setTimeout(function () {
