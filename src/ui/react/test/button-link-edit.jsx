@@ -5,8 +5,6 @@
      var Simulate = React.addons.TestUtils.Simulate;
      var TestUtils = React.addons.TestUtils;
 
-     var KEY_L = 76;
-
      describe('ButtonLink', function() {
          this.timeout(35000);
 
@@ -29,7 +27,7 @@
 
              var inputLink = TestUtils.findRenderedDOMComponentWithTag(buttonLink, 'input');
 
-             TestUtils.Simulate.change(inputLink, { target: { value: 'link.com' } });
+             TestUtils.Simulate.change(inputLink, {target: {value: 'link.com'}});
 
              var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-ok');
 
@@ -54,7 +52,7 @@
 
              var inputLink = TestUtils.findRenderedDOMComponentWithTag(buttonLink, 'input');
 
-             TestUtils.Simulate.change(inputLink, { target: { value: 'link.com' } });
+             TestUtils.Simulate.change(inputLink, {target: {value: 'link.com'}});
 
              var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-ok');
 
@@ -67,6 +65,5 @@
 
              assert.strictEqual('<p><a href="link.com" target="">selection</a></p>', data);
          });
-
      });
  }());
