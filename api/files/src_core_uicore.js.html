@@ -271,6 +271,14 @@
                                                 uiTasksTimeout
                                             );
                             
+                                            var handleBlur = function(event) {
+                                                event.removeListener(&#x27;blur&#x27;, handleBlur);
+                                                event.removeListener(&#x27;keyup&#x27;, handleUI);
+                                                event.removeListener(&#x27;mouseup&#x27;, handleUI);
+                            
+                                                handleUI(event);
+                                            };
+                            
                                             editor.on(&#x27;ariaUpdate&#x27;, function(event) {
                                                 // handleAria is debounced function, so if it is being called multiple times, it will
                                                 // be canceled until some time passes.
@@ -286,8 +294,13 @@
                                             editor.once(&#x27;contentDom&#x27;, function() {
                                                 var editable = editor.editable();
                             
-                                                editable.attachListener(editable, &#x27;mouseup&#x27;, handleUI);
-                                                editable.attachListener(editable, &#x27;keyup&#x27;, handleUI);
+                                                editable.attachListener(editable, &#x27;focus&#x27;, function (event) {
+                                                    editable.attachListener(editable, &#x27;blur&#x27;, handleBlur);
+                                                    editable.attachListener(editable, &#x27;keyup&#x27;, handleUI);
+                                                    editable.attachListener(editable, &#x27;mouseup&#x27;, handleUI);
+                            
+                                                    handleUI(event);
+                                                });
                                             });
                             
                                             editor.on(&#x27;destroy&#x27;, function(event) {
