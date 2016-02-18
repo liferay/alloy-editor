@@ -107,6 +107,21 @@
                     }
                 });
 
+                // Add a listener to handle paste events and turn links into embed objects
+                editor.once('contentDom', function() {
+                    editor.on('paste', function(event) {
+                        var link = event.data.dataValue;
+
+                        if (/https?/.test(link)) {
+                            event.stop();
+
+                            editor.execCommand('embedUrl', {
+                                url: event.data.dataValue
+                            });
+                        }
+                    });
+                });
+
                 // Add a filter to skip filtering widget elements
                 editor.filter.addElementCallback(function(element) {
                     if ('data-ae-embed-url' in element.attributes) {
