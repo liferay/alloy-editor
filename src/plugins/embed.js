@@ -1,0 +1,119 @@
+(function() {
+    'use strict';
+
+    /* istanbul ignore if */
+    if (CKEDITOR.plugins.get('ae_embed')) {
+        return;
+    }
+
+    CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = '//alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
+    CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL = '<div data-ae-embed-url="{url}"></div>';
+
+    /**
+     * CKEditor plugin which adds the infrastructure to embed urls as media objects using an oembed
+     * service. By default, and for testing purposes only, the oembed service is hosted in iframe.ly
+     * at //alloy.iframe.ly/api/oembed?url={url}&callback={callback}. Note this should be changed to
+     * a self-hosted or paid service in production environments. Access to the alloy.iframe.ly endpoint
+     * may be restricted per domain due to high traffic.
+     *
+     * This plugin adds an `embedUrl` command that can be used to easily embed a url and transform it
+     * into a
+     *
+     * @class CKEDITOR.plugins.ae_embed
+     */
+    CKEDITOR.plugins.add(
+        'ae_embed', {
+            requires: 'widget',
+            init: function(editor) {
+                var linkUtils = new CKEDITOR.Link(editor);
+
+                var AE_EMBED_URL_TPL = new CKEDITOR.template(editor.config.embedUrlTemplate || CKEDITOR.DEFAULT_AE_EMBED_URL_TPL);
+                var AE_EMBED_WIDGET_TPL = new CKEDITOR.template(editor.config.embedWidgetTpl || CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL);
+
+                // Default function to upcast dom elements to embed widgets.
+                // It matches CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
+                var defaultEmbedWidgetUpcastFn = function(element, data) {
+                    if (element.name === 'div' && element.attributes['data-ae-embed-url']) {
+                        data.url = element.attributes['data-ae-embed-url'];
+
+                        return true;
+                    }
+                };
+
+                // Create a embedUrl command that can be invoked to easily embed media urls
+                editor.addCommand('embedUrl', {
+                    exec: function(editor, data) {
+                        editor.insertHtml(
+                            AE_EMBED_WIDGET_TPL.output({
+                                url: data.url
+                            })
+                        );
+                    }
+                });
+
+                // Create a widget to properly handle embed operations
+                editor.widgets.add('ae_embed', {
+                    mask: true,
+                    allowedContent: 'div[!data-ae-embed-url]',
+                    requiredContent: 'div[data-ae-embed-url]',
+
+                    /**
+                     * Listener to be executed every time the widget data changes. It takes care of
+                     * requesting the embed object to the configured oembed service and render it in
+                     * the editor
+                     *
+                     * @param  {event} event The Event
+                     */
+                    data: function(event) {
+                        var widget = this;
+                        var url = event.data.url;
+
+                        if (url) {
+                            CKEDITOR.tools.jsonp(AE_EMBED_URL_TPL, {
+                                    url: encodeURIComponent(url)
+                                }, function(response) {
+                                    if (response.html) {
+                                        widget.element.setHtml(response.html);
+                                    } else {
+                                        widget.element.setHtml(url);
+                                    }
+                                }, function(msg) {
+                                    widget.element.setHtml(url);
+                                }
+                            );
+                        }
+                    },
+
+                    /**
+                     * Function used to upcast an element to ae_embed widgets.
+                     *
+                     * @param  {CKEDITOR.htmlParser.element} element The element to be checked
+                     * @param  {Object} data The object that will be passed to the widget
+                     */
+                    upcast: function(element, data) {
+                        var embedWidgetUpcastFn = editor.config.embedWidgetUpcastFn || defaultEmbedWidgetUpcastFn;
+
+                        return embedWidgetUpcastFn(element, data);
+                    },
+
+                    /**
+                     * [setSelected description]
+                     * @param {[type]} selected [description]
+                     */
+                    setSelected: function(selected) {
+                        if (selected) {
+                            editor.getSelection().selectElement(this.element);
+                        }
+                    }
+                });
+
+                // Add a filter to skip filtering widget elements
+                editor.filter.addElementCallback(function(element) {
+                    if ('data-ae-embed-url' in element.attributes) {
+                        return CKEDITOR.FILTER_SKIP_TREE;
+                    }
+                });
+            }
+        }
+    );
+}());
