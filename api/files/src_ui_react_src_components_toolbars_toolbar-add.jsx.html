@@ -313,7 +313,17 @@
                                      * @return {Object|null} The content which should be rendered.
                                      */
                                     render: function() {
-                                        if (this.props.editorEvent &amp;&amp; this.props.editorEvent.data.nativeEvent.target &amp;&amp; !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+                                        // Some operations such as &#x60;requestExclusive&#x60; may force editor to blur which will
+                                        // invalidate the &#x60;props.editorEvent&#x60; stored value, without causing a &#x60;props&#x60; change.
+                                        // For example, if the editor is empty, &#x60;ae_placeholder&#x60; plugin will remove
+                                        // the target from the DOM and will prevent &#x60;add&#x60; toolbar from rendering.
+                                        //
+                                        // It should be safe to assume that if you have been able to render the toolbar
+                                        // and request the exclusive mode, then rendering might be kept until the exclusive mode is left.
+                                        if (!this.state.itemExclusive &amp;&amp;
+                                                this.props.editorEvent &amp;&amp;
+                                                this.props.editorEvent.data.nativeEvent.target &amp;&amp;
+                                                !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
                                             return null;
                                         }
                             

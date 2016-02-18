@@ -32771,7 +32771,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @return {Object|null} The content which should be rendered.
          */
         render: function render() {
-            if (this.props.editorEvent && this.props.editorEvent.data.nativeEvent.target && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+            // Some operations such as `requestExclusive` may force editor to blur which will
+            // invalidate the `props.editorEvent` stored value, without causing a `props` change.
+            // For example, if the editor is empty, `ae_placeholder` plugin will remove
+            // the target from the DOM and will prevent `add` toolbar from rendering.
+            //
+            // It should be safe to assume that if you have been able to render the toolbar
+            // and request the exclusive mode, then rendering might be kept until the exclusive mode is left.
+            if (!this.state.itemExclusive && this.props.editorEvent && this.props.editorEvent.data.nativeEvent.target && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
                 return null;
             }
 
