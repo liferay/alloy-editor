@@ -271,7 +271,7 @@
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
+                value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink,ae_embed',
                 writeOnce: true
             },
 
@@ -339,6 +339,9 @@
                 value: [{
                     keys: CKEDITOR.CTRL + 76 /*L*/,
                     selection: 'link'
+                }, {
+                    keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/,
+                    selection: 'embed'
                 }]
             },
 
@@ -363,7 +366,7 @@
                 validator: '_validateToolbars',
                 value: {
                     add: {
-                        buttons: ['image', 'camera', 'hline', 'table'],
+                        buttons: ['image', 'embed', 'camera', 'hline', 'table'],
                         tabIndex: 2
                     },
                     styles: {
