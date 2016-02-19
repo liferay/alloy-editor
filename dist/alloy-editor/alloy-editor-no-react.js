@@ -6922,8 +6922,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 props = this.mergeDropdownProps(props, button.key);
 
                 if (additionalProps) {
-                    props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
+                    props = CKEDITOR.tools.merge(props, additionalProps);
                 }
+
+                props = CKEDITOR.tools.merge(props, buttonProps[button.key]);
 
                 return React.createElement(button, props);
             }, this);
@@ -13245,6 +13247,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @method _updatePosition
          */
         _updatePosition: function _updatePosition() {
+            var region;
+
             // If component is not mounted, there is nothing to do
             if (!ReactDOM.findDOMNode(this)) {
                 return;
@@ -13253,8 +13257,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (this.props.renderExclusive) {
                 this.updatePosition();
                 this.show();
-
-                var region;
             } else {
                 if (this.props.selectionData) {
                     region = this.props.selectionData.region;
