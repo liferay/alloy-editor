@@ -213,6 +213,8 @@
          * @method _updatePosition
          */
         _updatePosition: function() {
+            var region;
+
             // If component is not mounted, there is nothing to do
             if (!ReactDOM.findDOMNode(this)) {
                 return;
@@ -221,9 +223,6 @@
             if (this.props.renderExclusive) {
                 this.updatePosition();
                 this.show();
-
-            var region;
-
             } else {
                 if (this.props.selectionData) {
                     region = this.props.selectionData.region;

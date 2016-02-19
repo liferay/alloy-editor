@@ -49,7 +49,7 @@
                     if (additionalProps) {
                         props = CKEDITOR.tools.merge(props, additionalProps);
                     }
-                    
+
                     props = CKEDITOR.tools.merge(props, buttonProps[button.key]);
 
                     return React.createElement(button, props);
