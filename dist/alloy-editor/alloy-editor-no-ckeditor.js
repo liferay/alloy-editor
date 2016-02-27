@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v0.7.5
+ * AlloyEditor v1.0.0
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -24030,7 +24030,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		    lastRowIndex = startRow,
 		    totalRowSpan = 0,
 		    totalColSpan = 0,
-		   
+
 		// Use a documentFragment as buffer when appending cell contents.
 		frag = !isDetect && new CKEDITOR.dom.documentFragment(doc),
 		    dimension = 0;
