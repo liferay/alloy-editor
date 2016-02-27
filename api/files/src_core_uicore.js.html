@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.7.5</b>
+                        API Docs for Version: <b>1.0.0</b>
                     </p>
                 </li>
             </div>
@@ -65,9 +65,12 @@
                                     <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -76,6 +79,7 @@
                                     <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
                                     <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
@@ -269,6 +273,14 @@
                                                 uiTasksTimeout
                                             );
                             
+                                            var handleBlur = function(event) {
+                                                event.removeListener(&#x27;blur&#x27;, handleBlur);
+                                                event.removeListener(&#x27;keyup&#x27;, handleUI);
+                                                event.removeListener(&#x27;mouseup&#x27;, handleUI);
+                            
+                                                handleUI(event);
+                                            };
+                            
                                             editor.on(&#x27;ariaUpdate&#x27;, function(event) {
                                                 // handleAria is debounced function, so if it is being called multiple times, it will
                                                 // be canceled until some time passes.
@@ -284,8 +296,13 @@
                                             editor.once(&#x27;contentDom&#x27;, function() {
                                                 var editable = editor.editable();
                             
-                                                editable.attachListener(editable, &#x27;mouseup&#x27;, handleUI);
-                                                editable.attachListener(editable, &#x27;keyup&#x27;, handleUI);
+                                                editable.attachListener(editable, &#x27;focus&#x27;, function (event) {
+                                                    editable.attachListener(editable, &#x27;blur&#x27;, handleBlur);
+                                                    editable.attachListener(editable, &#x27;keyup&#x27;, handleUI);
+                                                    editable.attachListener(editable, &#x27;mouseup&#x27;, handleUI);
+                            
+                                                    handleUI(event);
+                                                });
                                             });
                             
                                             editor.on(&#x27;destroy&#x27;, function(event) {

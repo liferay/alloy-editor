@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.7.5</b>
+                        API Docs for Version: <b>1.0.0</b>
                     </p>
                 </li>
             </div>
@@ -65,9 +65,12 @@
                                     <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -76,6 +79,7 @@
                                     <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
                                     <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
@@ -236,7 +240,15 @@
                             
                                                 <ul class="index-list methods">
                                                         <li class="index-item method protected">
+                                                            <a href="#method__defaultReadOnlyClickFn">_defaultReadOnlyClickFn</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
                                                             <a href="#method__getNativeEditor">_getNativeEditor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__onReadOnlyChange">_onReadOnlyChange</a>
                             
                                                         </li>
                                                         <li class="index-item method protected">
@@ -299,6 +311,10 @@
                             
                                                         </li>
                                                         <li class="index-item property">
+                                                            <a href="#property_selectionKeystrokes">selectionKeystrokes</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
                                                             <a href="#property_srcNode">srcNode</a>
                             
                                                         </li>
@@ -319,6 +335,61 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
+                                                <div id="method__defaultReadOnlyClickFn" class="method item protected">
+                                                    <h3 class="name"><code>_defaultReadOnlyClickFn</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>event</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l93"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:93</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Called on <code>click</code> event when the editor is in read only mode. Navigates to link&#39;s URL or opens
+                                                the link in a new window.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">event</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The fired <code>click</code> event payload</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
                                                 <div id="method__getNativeEditor" class="method item protected">
                                                     <h3 class="name"><code>_getNativeEditor</code></h3>
                                                 
@@ -338,7 +409,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l86"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:86</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l120"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:120</code></a>
                                                         </p>
                                                 
                                                 
@@ -362,6 +433,60 @@
                                                         </div>
                                                 
                                                 </div>
+                                                <div id="method__onReadOnlyChange" class="method item protected">
+                                                    <h3 class="name"><code>_onReadOnlyChange</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>event</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l131"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:131</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Fired when readonly value is changed. Adds click event listener to handle links in readonly mode.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">event</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The fired event</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
                                                 <div id="method__renderUI" class="method item protected">
                                                     <h3 class="name"><code>_renderUI</code></h3>
                                                 
@@ -378,7 +503,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l97"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:97</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l148"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:148</code></a>
                                                         </p>
                                                 
                                                 
@@ -386,7 +511,7 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Renders the specified from the user toolbars</p>
+                                                        <p>Renders the specified from the user toolbars.</p>
                                                 
                                                     </div>
                                                 
@@ -418,7 +543,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l124"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:124</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l175"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:175</code></a>
                                                         </p>
                                                 
                                                 
@@ -487,7 +612,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l143"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:143</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l194"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:194</code></a>
                                                         </p>
                                                 
                                                 
@@ -555,7 +680,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l157"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:157</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l208"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:208</code></a>
                                                         </p>
                                                 
                                                 
@@ -612,7 +737,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l55"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:55</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l62"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:62</code></a>
                                                         </p>
                                                 
                                                 
@@ -699,7 +824,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l170"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:170</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l221"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:221</code></a>
                                                         </p>
                                                 
                                                 
@@ -727,7 +852,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l186"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:186</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l237"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:237</code></a>
                                                         </p>
                                                 
                                                 
@@ -754,7 +879,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l201"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:201</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l252"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:252</code></a>
                                                         </p>
                                                 
                                                 
@@ -779,7 +904,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l212"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:212</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l263"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:263</code></a>
                                                         </p>
                                                 
                                                 
@@ -806,7 +931,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l227"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:227</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l278"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:278</code></a>
                                                         </p>
                                                 
                                                 
@@ -831,7 +956,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l239"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:239</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l290"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:290</code></a>
                                                         </p>
                                                 
                                                 
@@ -859,7 +984,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l255"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:255</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l306"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:306</code></a>
                                                         </p>
                                                 
                                                 
@@ -882,6 +1007,34 @@
                                                 
                                                 
                                                 </div>
+                                                <div id="property_selectionKeystrokes" class="property item">
+                                                    <h3 class="name"><code>selectionKeystrokes</code></h3>
+                                                    <span class="type">Array</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l328"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:328</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Array of manual selection triggers. They can be configured to manually show a specific selection toolbar
+                                                by forcing the selection type. A selectionKeystroke item consists of a keys property with a <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-keystrokes">CKEditor keystroke
+                                                definition</a> and a selection property with
+                                                the selection name to trigger.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
                                                 <div id="property_srcNode" class="property item">
                                                     <h3 class="name"><code>srcNode</code></h3>
                                                     <span class="type">String | Node</span>
@@ -893,7 +1046,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l277"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:277</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l348"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:348</code></a>
                                                         </p>
                                                 
                                                 
@@ -918,7 +1071,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l289"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:289</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l360"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:360</code></a>
                                                         </p>
                                                 
                                                 
@@ -943,7 +1096,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l308"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:308</code></a>
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l379"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:379</code></a>
                                                         </p>
                                                 
                                                 

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.7.5</b>
+                        API Docs for Version: <b>1.0.0</b>
                     </p>
                 </li>
             </div>
@@ -65,9 +65,12 @@
                                     <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -76,6 +79,7 @@
                                     <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
                                     <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
@@ -232,7 +236,7 @@
                                                     &lt;span className=&quot;ae-icon-image&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                             
-                                                &lt;input onChange={this._onInputChange} ref=&quot;fileInput&quot; style={inputSyle} type=&quot;file&quot; /&gt;
+                                                &lt;input accept=&quot;image/*&quot; onChange={this._onInputChange} ref=&quot;fileInput&quot; style={inputSyle} type=&quot;file&quot;/&gt;
                                             &lt;/div&gt;
                                         );
                                     },
@@ -258,8 +262,16 @@
                                      * @method _onInputChange
                                      */
                                     _onInputChange: function() {
-                                        var reader = new FileReader();
                                         var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
+                            
+                                        // On IE11 the function might be called with an empty array of
+                                        // files. In such a case, no actions will be taken.
+                                        if (!inputEl.files.length) {
+                                            return;
+                                        }
+                            
+                                        var reader = new FileReader();
+                                        var file = inputEl.files[0];
                             
                                         reader.onload = function(event) {
                                             var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
@@ -272,13 +284,13 @@
                             
                                             var imageData = {
                                                 el: el,
-                                                file: inputEl.files[0]
+                                                file: file
                                             };
                             
                                             editor.fire(&#x27;imageAdd&#x27;, imageData);
                                         }.bind(this);
                             
-                                        reader.readAsDataURL(inputEl.files[0]);
+                                        reader.readAsDataURL(file);
                             
                                         inputEl.value = &#x27;&#x27;;
                                     }

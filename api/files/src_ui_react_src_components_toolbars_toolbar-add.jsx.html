@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.7.5</b>
+                        API Docs for Version: <b>1.0.0</b>
                     </p>
                 </li>
             </div>
@@ -65,9 +65,12 @@
                                     <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -76,6 +79,7 @@
                                     <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
                                     <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
@@ -311,7 +315,17 @@
                                      * @return {Object|null} The content which should be rendered.
                                      */
                                     render: function() {
-                                        if (this.props.editorEvent &amp;&amp; !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+                                        // Some operations such as &#x60;requestExclusive&#x60; may force editor to blur which will
+                                        // invalidate the &#x60;props.editorEvent&#x60; stored value, without causing a &#x60;props&#x60; change.
+                                        // For example, if the editor is empty, &#x60;ae_placeholder&#x60; plugin will remove
+                                        // the target from the DOM and will prevent &#x60;add&#x60; toolbar from rendering.
+                                        //
+                                        // It should be safe to assume that if you have been able to render the toolbar
+                                        // and request the exclusive mode, then rendering might be kept until the exclusive mode is left.
+                                        if (!this.state.itemExclusive &amp;&amp;
+                                                this.props.editorEvent &amp;&amp;
+                                                this.props.editorEvent.data.nativeEvent.target &amp;&amp;
+                                                !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
                                             return null;
                                         }
                             
@@ -376,6 +390,8 @@
                                      * @method _updatePosition
                                      */
                                     _updatePosition: function() {
+                                        var region;
+                            
                                         // If component is not mounted, there is nothing to do
                                         if (!ReactDOM.findDOMNode(this)) {
                                             return;
@@ -384,9 +400,6 @@
                                         if (this.props.renderExclusive) {
                                             this.updatePosition();
                                             this.show();
-                            
-                                        var region;
-                            
                                         } else {
                                             if (this.props.selectionData) {
                                                 region = this.props.selectionData.region;

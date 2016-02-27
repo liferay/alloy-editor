@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v0.7.5
+ * AlloyEditor v1.0.0
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -11,7 +11,7 @@
 (function() {
     'use strict';
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -295,7 +295,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 })();
 'use strict';
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -310,8 +310,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * @param {Object} editor The CKEditor instance.
      */
 
-    function Link(editor) {
+    function Link(editor, config) {
         this._editor = editor;
+        this.appendProtocol = config && config.appendProtocol === false ? false : true;
     }
 
     Link.prototype = {
@@ -504,7 +505,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         _getCompleteURI: function _getCompleteURI(URI) {
             if (!REGEX_URI_SCHEME.test(URI)) {
-                URI = 'http://' + URI;
+                URI = this.appendProtocol ? 'http://' + URI : URI;
             }
 
             return URI;
@@ -1260,6 +1261,65 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      */
 
     /**
+     * Sends a request using the JSONP technique.
+     *
+     * @method CKEDITOR.tools.jsonp
+     * @static
+     * @param {CKEDITOR.template} urlTemplate The template of the URL to be requested. All properties
+     * passed in `urlParams` can be used, plus a `{callback}`, which represent a JSONP callback, must be defined.
+     * @param {Object} urlParams Parameters to be passed to the `urlTemplate`.
+     * @param {Function} callback A function to be called in case of success.
+     * @param {Function} errorCallback A function to be called in case of failure.
+     * @return {Object} An object with the following properties:
+     * - id: the transaction ID
+     * - a `cancel()` method
+     */
+
+    CKEDITOR.tools.jsonp = function (urlTemplate, urlParams, callback, errorCallback) {
+        var callbackKey = CKEDITOR.tools.getNextNumber();
+
+        urlParams = urlParams || {};
+        urlParams.callback = 'CKEDITOR._.jsonpCallbacks[' + callbackKey + ']';
+
+        if (!CKEDITOR._.jsonpCallbacks) {
+            CKEDITOR._.jsonpCallbacks = {};
+        }
+
+        CKEDITOR._.jsonpCallbacks[callbackKey] = function (response) {
+            setTimeout(function () {
+                cleanUp();
+
+                callback(response);
+            });
+        };
+
+        var scriptElement = new CKEDITOR.dom.element('script');
+        scriptElement.setAttribute('src', urlTemplate.output(urlParams));
+        scriptElement.on('error', function () {
+            cleanUp();
+
+            if (errorCallback) {
+                errorCallback();
+            }
+        });
+
+        function cleanUp() {
+            if (scriptElement) {
+                scriptElement.remove();
+                delete CKEDITOR._.jsonpCallbacks[callbackKey];
+                scriptElement = null;
+            }
+        }
+
+        CKEDITOR.document.getBody().append(scriptElement);
+
+        return {
+            cancel: cleanUp,
+            id: callbackKey
+        };
+    };
+
+    /**
      * Returns a new object containing all of the properties of all the supplied
      * objects. The properties from later objects will overwrite those in earlier
      * objects.
@@ -1271,7 +1331,6 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * @param {Object} objects* One or more objects to merge.
      * @return {Object} A new merged object.
      */
-
     CKEDITOR.tools.merge = CKEDITOR.tools.merge || function () {
         var result = {};
 
@@ -1395,6 +1454,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 }
             }, uiTasksTimeout);
 
+            var handleBlur = function handleBlur(event) {
+                event.removeListener('blur', handleBlur);
+                event.removeListener('keyup', handleUI);
+                event.removeListener('mouseup', handleUI);
+
+                handleUI(event);
+            };
+
             editor.on('ariaUpdate', function (event) {
                 // handleAria is debounced function, so if it is being called multiple times, it will
                 // be canceled until some time passes.
@@ -1410,8 +1477,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             editor.once('contentDom', function () {
                 var editable = editor.editable();
 
-                editable.attachListener(editable, 'mouseup', handleUI);
-                editable.attachListener(editable, 'keyup', handleUI);
+                editable.attachListener(editable, 'focus', function (event) {
+                    editable.attachListener(editable, 'blur', handleBlur);
+                    editable.attachListener(editable, 'keyup', handleUI);
+                    editable.attachListener(editable, 'mouseup', handleUI);
+
+                    handleUI(event);
+                });
             });
 
             editor.on('destroy', function (event) {
@@ -1478,7 +1550,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @param {Object} editor The current editor instance
          */
         init: function init(editor) {
-            editor.once('contentDom', (function () {
+            editor.once('contentDom', function () {
                 var editable = editor.editable();
 
                 editable.attachListener(editable, 'dragenter', this._onDragEnter, this, {
@@ -1496,7 +1568,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 editable.attachListener(editable, 'paste', this._onPaste, this, {
                     editor: editor
                 });
-            }).bind(this));
+            }.bind(this));
         },
 
         /**
@@ -1678,13 +1750,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @param {Object} editor The current editor instance
          */
         init: function init(editor) {
-            editor.once('contentDom', (function () {
+            editor.once('contentDom', function () {
                 var editable = editor.editable();
 
                 editable.attachListener(editable, 'keyup', this._onKeyUp, this, {
                     editor: editor
                 });
-            }).bind(this));
+            }.bind(this));
         },
 
         /**
@@ -2339,6 +2411,336 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 (function () {
     'use strict';
 
+    /* istanbul ignore if */
+
+    if (CKEDITOR.plugins.get('ae_embed')) {
+        return;
+    }
+
+    CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = '//alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
+    CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL = '<div data-ae-embed-url="{url}"></div>';
+
+    /**
+     * CKEditor plugin which adds the infrastructure to embed urls as media objects using an oembed
+     * service. By default, and for demoing purposes only, the oembed service is hosted in iframe.ly
+     * at //alloy.iframe.ly/api/oembed?url={url}&callback={callback}. Note this should be changed to
+     * a self-hosted or paid service in production environments. Access to the alloy.iframe.ly endpoint
+     * may be restricted per domain due to significant traffic.
+     *
+     * This plugin adds an `embedUrl` command that can be used to easily embed a URL and transform it
+     * to an embedded content.
+     *
+     * @class CKEDITOR.plugins.ae_embed
+     */
+    CKEDITOR.plugins.add('ae_embed', {
+        requires: 'widget',
+        init: function init(editor) {
+            var AE_EMBED_URL_TPL = new CKEDITOR.template(editor.config.embedUrlTemplate || CKEDITOR.DEFAULT_AE_EMBED_URL_TPL);
+            var AE_EMBED_WIDGET_TPL = new CKEDITOR.template(editor.config.embedWidgetTpl || CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL);
+
+            // Default function to upcast DOM elements to embed widgets.
+            // It matches CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
+            var defaultEmbedWidgetUpcastFn = function defaultEmbedWidgetUpcastFn(element, data) {
+                if (element.name === 'div' && element.attributes['data-ae-embed-url']) {
+                    data.url = element.attributes['data-ae-embed-url'];
+
+                    return true;
+                }
+            };
+
+            // Create a embedUrl command that can be invoked to easily embed media URLs
+            editor.addCommand('embedUrl', {
+                exec: function exec(editor, data) {
+                    editor.insertHtml(AE_EMBED_WIDGET_TPL.output({
+                        url: data.url
+                    }));
+                }
+            });
+
+            // Create a widget to properly handle embed operations
+            editor.widgets.add('ae_embed', {
+                allowedContent: 'div[!data-ae-embed-url]',
+                mask: true,
+                requiredContent: 'div[data-ae-embed-url]',
+
+                /**
+                 * Listener to be executed every time the widget's data changes. It takes care of
+                 * requesting the embed object to the configured oembed service and render it in
+                 * the editor
+                 *
+                 * @param {event} event The Event
+                 */
+                data: function data(event) {
+                    var widget = this;
+                    var url = event.data.url;
+
+                    if (url) {
+                        CKEDITOR.tools.jsonp(AE_EMBED_URL_TPL, {
+                            url: encodeURIComponent(url)
+                        }, function (response) {
+                            if (response.html) {
+                                widget.element.setHtml(response.html);
+                            } else {
+                                widget.element.setHtml(url);
+                            }
+                        }, function (msg) {
+                            widget.element.setHtml(url);
+                        });
+                    }
+                },
+
+                /**
+                 * Function used to upcast an element to ae_embed widgets.
+                 *
+                 * @param {CKEDITOR.htmlParser.element} element The element to be checked
+                 * @param {Object} data The object that will be passed to the widget
+                 */
+                upcast: function upcast(element, data) {
+                    var embedWidgetUpcastFn = editor.config.embedWidgetUpcastFn || defaultEmbedWidgetUpcastFn;
+
+                    return embedWidgetUpcastFn(element, data);
+                },
+
+                /**
+                 * Changes the widget's select state.
+                 *
+                 * @param {Boolean} selected Whether to select or deselect the widget
+                 */
+                setSelected: function setSelected(selected) {
+                    if (selected) {
+                        editor.getSelection().selectElement(this.element);
+                    }
+                }
+            });
+
+            // Add a listener to handle paste events and turn links into embed objects
+            editor.once('contentDom', function () {
+                editor.on('paste', function (event) {
+                    var link = event.data.dataValue;
+
+                    if (/https?/.test(link)) {
+                        event.stop();
+
+                        editor.execCommand('embedUrl', {
+                            url: event.data.dataValue
+                        });
+                    }
+                });
+            });
+
+            // Add a filter to skip filtering widget elements
+            editor.filter.addElementCallback(function (element) {
+                if ('data-ae-embed-url' in element.attributes) {
+                    return CKEDITOR.FILTER_SKIP_TREE;
+                }
+            });
+        }
+    });
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    if (CKEDITOR.plugins.get('ae_imagealignment')) {
+        return;
+    }
+
+    /**
+     * Enum for supported image alignments
+     * @type {Object}
+     */
+    var IMAGE_ALIGNMENT = {
+        CENTER: 'center',
+        LEFT: 'left',
+        RIGHT: 'right'
+    };
+
+    /**
+     * Enum values for supported image alignments
+     * @type {Array}
+     */
+    var ALIGN_VALUES = [IMAGE_ALIGNMENT.LEFT, IMAGE_ALIGNMENT.RIGHT, IMAGE_ALIGNMENT.CENTER];
+
+    /**
+     * Necessary styles for the center alignment
+     * @type {Array.<Object>}
+     */
+    var CENTERED_IMAGE_STYLE = [{
+        name: 'display',
+        value: 'block'
+    }, {
+        name: 'margin-left',
+        value: '50%'
+    }, {
+        name: 'transform',
+        value: 'translateX(-50%)',
+        vendorPrefixes: ['-ms-']
+    }];
+
+    /**
+     * Retrieves the alignment value of an image.
+     *
+     * @param {CKEDITOR.dom.element} image The image element
+     * @return {String} The alignment value
+     */
+    var getImageAlignment = function getImageAlignment(image) {
+        var imageAlignment = image.getStyle('float');
+
+        if (!imageAlignment || imageAlignment === 'inherit' || imageAlignment === 'none') {
+            imageAlignment = image.getAttribute('align');
+        }
+
+        if (!imageAlignment) {
+            var centeredImage = CENTERED_IMAGE_STYLE.every(function (style) {
+                var styleCheck = image.getStyle(style.name) === style.value;
+
+                if (!styleCheck && style.vendorPrefixes) {
+                    styleCheck = style.vendorPrefixes.some(function (vendorPrefix) {
+                        return image.getStyle(vendorPrefix + style.name) === style.value;
+                    });
+                }
+
+                return styleCheck;
+            });
+
+            imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
+        }
+
+        return imageAlignment;
+    };
+
+    /**
+     * Removes the alignment value of an image
+     *
+     * @param {CKEDITOR.dom.element} image The image element
+     * @param {String} imageAlignment The image alignment value to be removed
+     */
+    var removeImageAlignment = function removeImageAlignment(image, imageAlignment) {
+        if (imageAlignment === IMAGE_ALIGNMENT.LEFT || imageAlignment === IMAGE_ALIGNMENT.RIGHT) {
+            image.removeStyle('float');
+
+            if (imageAlignment === getImageAlignment(image)) {
+                image.removeAttribute('align');
+            }
+        } else if (imageAlignment === IMAGE_ALIGNMENT.CENTER) {
+            CENTERED_IMAGE_STYLE.forEach(function (style) {
+                image.removeStyle(style.name);
+
+                if (style.vendorPrefixes) {
+                    style.vendorPrefixes.forEach(function (vendorPrefix) {
+                        image.removeStyle(vendorPrefix + style.name);
+                    });
+                }
+            });
+        }
+    };
+
+    /**
+     * Sets the alignment value of an image
+     *
+     * @param {CKEDITOR.dom.element} image The image element
+     * @param {String} imageAlignment The image alignment value to be set
+     */
+    var setImageAlignment = function setImageAlignment(image, imageAlignment) {
+        removeImageAlignment(image, getImageAlignment(image));
+
+        if (imageAlignment === IMAGE_ALIGNMENT.LEFT || imageAlignment === IMAGE_ALIGNMENT.RIGHT) {
+            image.setStyle('float', imageAlignment);
+        } else if (imageAlignment === IMAGE_ALIGNMENT.CENTER) {
+            CENTERED_IMAGE_STYLE.forEach(function (style) {
+                image.setStyle(style.name, style.value);
+
+                if (style.vendorPrefixes) {
+                    style.vendorPrefixes.forEach(function (vendorPrefix) {
+                        image.setStyle(vendorPrefix + style.name, style.value);
+                    });
+                }
+            });
+        }
+    };
+
+    /**
+     * CKEditor plugin which modifies the justify commands to properly align images. This
+     * plugin is an excerpt of CKEditor's original image one that can be found at
+     * https://github.com/ckeditor/ckeditor-dev/blob/master/plugins/image/plugin.js
+     *
+     * @class CKEDITOR.plugins.ae_imagealignment
+     */
+    CKEDITOR.plugins.add('ae_imagealignment', {
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         * The function registers a 'paste' event on the editing area.
+         *
+         * @method afterInit
+         * @param {Object} editor The current editor instance
+         */
+        afterInit: function afterInit(editor) {
+            var self = this;
+
+            ALIGN_VALUES.forEach(function (value) {
+                var command = editor.getCommand('justify' + value);
+
+                if (command) {
+                    command.on('exec', function (event) {
+                        var selectionData = editor.getSelectionData();
+
+                        if (selectionData && AlloyEditor.SelectionTest.image({ data: { selectionData: selectionData } })) {
+                            var image = selectionData.element;
+
+                            var imageAlignment = getImageAlignment(image);
+
+                            if (imageAlignment === value) {
+                                removeImageAlignment(image, value);
+                            } else {
+                                setImageAlignment(image, value);
+                            }
+
+                            event.cancel();
+
+                            self.refreshCommands(editor, new CKEDITOR.dom.elementPath(image));
+                        }
+                    });
+
+                    command.on('refresh', function (event) {
+                        var selectionData = editor.getSelectionData();
+
+                        if (selectionData && AlloyEditor.SelectionTest.image({ data: { selectionData: selectionData } })) {
+                            var imageAlignment = getImageAlignment(selectionData.element);
+
+                            this.setState(imageAlignment === value ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF);
+
+                            event.cancel();
+                        }
+                    });
+                }
+            });
+        },
+
+        /**
+         * Forces a refresh of the modified justify commands. This is needed because the applied changes
+         * do not modify the selection, so the refresh is never triggered and the UI does not update
+         * properly until the next selectionChange event.
+         *
+         * @param {CKEDITOR.editor} editor The editor instance
+         * @param {CKEDITOR.dom.elementPath} elementPath The path of the selected image
+         */
+        refreshCommands: function refreshCommands(editor, elementPath) {
+            ALIGN_VALUES.forEach(function (value) {
+                var command = editor.getCommand('justify' + value);
+
+                if (command) {
+                    command.refresh(editor, elementPath);
+                }
+            });
+        }
+    });
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
     if (CKEDITOR.plugins.get('ae_pasteimages')) {
         return;
     }
@@ -2366,13 +2768,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @param {Object} editor The current editor instance
          */
         init: function init(editor) {
-            editor.once('contentDom', (function () {
+            editor.once('contentDom', function () {
                 var editable = editor.editable();
 
                 editable.attachListener(editable, 'paste', this._onPaste, this, {
                     editor: editor
                 });
-            }).bind(this));
+            }.bind(this));
         },
 
         /**
@@ -2395,7 +2797,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     var reader = new FileReader();
                     var imageFile = pastedData.getAsFile();
 
-                    reader.onload = (function (event) {
+                    reader.onload = function (event) {
                         var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
 
                         editor.insertElement(el);
@@ -2406,7 +2808,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                         };
 
                         editor.fire('imageAdd', imageData);
-                    }).bind(this);
+                    }.bind(this);
 
                     reader.readAsDataURL(imageFile);
                 }
@@ -2473,6 +2875,54 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 editorNode.setHtml('');
 
                 editorNode.addClass(editor.config.placeholderClass);
+            }
+        }
+    });
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    if (CKEDITOR.plugins.get('ae_selectionkeystrokes')) {
+        return;
+    }
+
+    /**
+     * CKEditor plugin that simulates editor interaction events based on manual keystrokes. This
+     * can be used to trigger different reactions in the editor.
+     *
+     * @class CKEDITOR.plugins.ae_selectionkeystrokes
+     */
+    CKEDITOR.plugins.add('ae_selectionkeystrokes', {
+        requires: 'ae_selectionregion',
+
+        /**
+         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+         * The function adds a command to the editor for every defined selectionKeystroke
+         * in the configuration and maps it to the specified keystroke.
+         *
+         * @method init
+         * @param {Object} editor The current editor instance
+         */
+        init: function init(editor) {
+            if (editor.config.selectionKeystrokes) {
+                editor.config.selectionKeystrokes.forEach(function (selectionKeystroke) {
+                    var command = new CKEDITOR.command(editor, {
+                        exec: function exec(editor) {
+                            editor.fire('editorInteraction', {
+                                manualSelection: selectionKeystroke.selection,
+                                nativeEvent: {},
+                                selectionData: editor.getSelectionData()
+                            });
+                        }
+                    });
+
+                    var commandName = 'selectionKeystroke' + selectionKeystroke.selection;
+
+                    editor.addCommand(commandName, command);
+                    editor.setKeystroke(selectionKeystroke.keys, commandName);
+                });
             }
         }
     });
@@ -3322,7 +3772,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 		    lastRowIndex = startRow,
 		    totalRowSpan = 0,
 		    totalColSpan = 0,
-		   
+
 		// Use a documentFragment as buffer when appending cell contents.
 		frag = !isDetect && new CKEDITOR.dom.documentFragment(doc),
 		    dimension = 0;
@@ -3345,7 +3795,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
 			if (!isDetect) {
 				// Trim all cell fillers and check to remove empty cells.
-				if ((trimCell(cell), cell.getChildren().count())) {
+				if (trimCell(cell), cell.getChildren().count()) {
 					// Merge vertically cells as two separated paragraphs.
 					if (rowIndex != lastRowIndex && cellFirstChild && !(cellFirstChild.isBlockBoundary && cellFirstChild.isBlockBoundary({ br: 1 }))) {
 						var last = frag.getLast(CKEDITOR.dom.walker.whitespaces(true));
@@ -4205,6 +4655,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
 (function () {
     'use strict';
 
+    /* istanbul ignore if */
+
+    if (CKEDITOR.plugins.get('ae_uibridge')) {
+        return;
+    }
+
     /**
      * CKEditor plugin that extends CKEDITOR.ui.add function so an add handler can be specified
      * on top of the original ones. It bridges the calls to add components via:
@@ -4213,7 +4669,6 @@ CKEDITOR.tools.buildTableMap = function (table) {
      * @class CKEDITOR.plugins.ae_uibridge
      * @constructor
      */
-
     CKEDITOR.plugins.add('ae_uibridge', {
         /**
          * Initialization of the plugin, part of CKEditor plugin lifecycle.
@@ -4238,7 +4693,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 })();
 'use strict';
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -4790,6 +5245,27 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         return element.getText().length === range.endOffset || element.equals(range.startContainer) && element.equals(range.endContainer) && range.startOffset === range.endOffset && range.endOffset === 1;
     };
 
+    var embedSelectionTest = function embedSelectionTest(payload) {
+        var editor = payload.editor.get('nativeEditor');
+        var embedElement;
+
+        var selection = editor.getSelection();
+
+        if (selection) {
+            var range = selection.getRanges()[0];
+
+            if (range) {
+                range.shrink(CKEDITOR.SHRINK_TEXT);
+
+                embedElement = editor.elementPath(range.getCommonAncestor()).contains(function (element) {
+                    return element.getAttribute('data-widget') === 'ae_embed' || element.getAttribute('data-cke-widget-wrapper') && element.find('[data-widget="ae_embed"]');
+                }, 1);
+            }
+        }
+
+        return !!embedElement;
+    };
+
     var linkSelectionTest = function linkSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
         var range = nativeEditor.getSelection().getRanges()[0];
@@ -4825,6 +5301,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     };
 
     AlloyEditor.SelectionTest = {
+        embed: embedSelectionTest,
         image: imageSelectionTest,
         link: linkSelectionTest,
         table: tableSelectionTest,
@@ -4837,6 +5314,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     'use strict';
 
     var Selections = [{
+        name: 'embed',
+        buttons: ['embedEdit'],
+        test: AlloyEditor.SelectionTest.embed
+    }, {
         name: 'link',
         buttons: ['linkEdit'],
         test: AlloyEditor.SelectionTest.link
@@ -4886,6 +5367,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function initializer(config) {
+
             var node = this.get('srcNode');
 
             if (this.get('enableContentEditable')) {
@@ -4905,11 +5387,17 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             editor.config.pasteFromWordRemoveStyles = false;
             editor.config.pasteFromWordRemoveFontStyles = false;
 
+            editor.config.selectionKeystrokes = this.get('selectionKeystrokes');
+
             AlloyEditor.Lang.mix(editor.config, config);
 
             editor.once('contentDom', function () {
-                editor.editable().addClass('ae-editable');
-            });
+                var editable = editor.editable();
+
+                editable.addClass('ae-editable');
+
+                editable.editor.on('readOnly', this._onReadOnlyChangeFn.bind(this));
+            }.bind(this));
 
             AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
 
@@ -4948,6 +5436,33 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         },
 
         /**
+         * Called on `click` event when the editor is in read only mode. Navigates to link's URL or opens
+         * the link in a new window.
+         *
+         * @event readOnlyClick
+         * @protected
+         * @method _defaultReadOnlyClickFn
+         * @param {Object} event The fired `click` event payload
+         */
+        _defaultReadOnlyClickFn: function _defaultReadOnlyClickFn(event) {
+            if (event.listenerData.editor.editable().editor.fire('readOnlyClick', event.data) !== false) {
+                var ckElement = new CKEDITOR.dom.elementPath(event.data.getTarget(), this);
+                var link = ckElement.lastElement;
+
+                if (link) {
+                    var href = link.$.attributes.href ? link.$.attributes.href.value : null;
+                    var target = link.$.attributes.target ? link.$.attributes.target.value : null;
+
+                    if (target && href) {
+                        window.open(href, target);
+                    } else if (href) {
+                        window.location.href = href;
+                    }
+                }
+            }
+        },
+
+        /**
          * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
          *
          * @protected
@@ -4959,7 +5474,24 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         },
 
         /**
-         * Renders the specified from the user toolbars
+         * Fired when readonly value is changed. Adds click event listener to handle links in readonly mode.
+         *
+         * @protected
+         * @method _onReadOnlyChange
+         * @param {Object} event The fired event
+         */
+        _onReadOnlyChangeFn: function _onReadOnlyChangeFn(event) {
+            if (event.editor.readOnly) {
+                event.editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
+                    editor: event.editor
+                });
+            } else {
+                event.editor.editable().removeListener('click', this._defaultReadOnlyClickFn);
+            }
+        },
+
+        /**
+         * Renders the specified from the user toolbars.
          *
          * @protected
          * @method _renderUI
@@ -5084,7 +5616,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'ae_uicore,ae_selectionregion,ae_dragresize,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink',
+                value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink,ae_embed',
                 writeOnce: true
             },
 
@@ -5139,6 +5671,26 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             },
 
             /**
+             * Array of manual selection triggers. They can be configured to manually show a specific selection toolbar
+             * by forcing the selection type. A selectionKeystroke item consists of a keys property with a [CKEditor keystroke
+             * definition](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-keystrokes) and a selection property with
+             * the selection name to trigger.
+             *
+             * @property selectionKeystrokes
+             * @type {Array}
+             */
+            selectionKeystrokes: {
+                validator: AlloyEditor.Lang.isArray,
+                value: [{
+                    keys: CKEDITOR.CTRL + 76 /*L*/
+                    , selection: 'link'
+                }, {
+                    keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/
+                    , selection: 'embed'
+                }]
+            },
+
+            /**
              * The Node ID or HTMl node, which AlloyEditor should use as an editable area.
              *
              * @property srcNode
@@ -5159,7 +5711,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 validator: '_validateToolbars',
                 value: {
                     add: {
-                        buttons: ['image', 'camera', 'hline', 'table'],
+                        buttons: ['image', 'embed', 'camera', 'hline', 'table'],
                         tabIndex: 2
                     },
                     styles: {
@@ -5237,6 +5789,36 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     'use strict';
 
     /**
+     * ButtonCommandActive is a mixin that provides an `isActive` method to determine if
+     * a context-aware command is currently in an active state.
+     *
+     * @class ButtonCommandActive
+     */
+
+    var ButtonCommandActive = {
+        /**
+         * Checks if the command is active in the current selection.
+         *
+         * @method isActive
+         * @return {Boolean} True if the command is active, false otherwise.
+         */
+        isActive: function isActive() {
+            var editor = this.props.editor.get('nativeEditor');
+
+            var command = editor.getCommand(this.props.command);
+
+            return command ? command.state === CKEDITOR.TRISTATE_ON : false;
+        }
+    };
+
+    AlloyEditor.ButtonCommandActive = ButtonCommandActive;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
      * ButtonCommand is a mixin that executes a command via CKEDITOR's API.
      *
      * @class ButtonCommand
@@ -5281,6 +5863,78 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     };
 
     AlloyEditor.ButtonCommand = ButtonCommand;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * ButtonKeystroke is a mixin that provides a `keystroke` prop that allows configuring
+     * a function of the instance to be invoked upon the keystroke activation.
+     *
+     * @class ButtonKeystroke
+     */
+
+    var ButtonKeystroke = {
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The keystroke definition. An object with the following properties:
+             * - fn: The function to be executed
+             * - keys: The keystroke definition, as expected by http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke
+             * - name: The name for the CKEditor command that will be created. If empty,
+             * a random name will be created on the fly
+             * @property {Object} keystroke
+             */
+            keystroke: React.PropTypes.object.isRequired
+        },
+
+        /**
+         * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         *
+         * @method componentWillMount
+         */
+        componentWillMount: function componentWillMount() {
+            var nativeEditor = this.props.editor.get('nativeEditor');
+            var keystroke = this.props.keystroke;
+
+            var commandName = keystroke.name || (Math.random() * 1e9 >>> 0).toString();
+
+            var command = nativeEditor.getCommand(commandName);
+
+            if (!command) {
+                command = new CKEDITOR.command(nativeEditor, {
+                    exec: function (editor) {
+                        var keystrokeFn = keystroke.fn;
+
+                        if (AlloyEditor.Lang.isString(keystrokeFn)) {
+                            this[keystrokeFn].call(this, editor);
+                        } else if (AlloyEditor.Lang.isFunction(keystrokeFn)) {
+                            keystrokeFn.call(this, editor);
+                        }
+                    }.bind(this)
+                });
+
+                nativeEditor.addCommand(commandName, command);
+            }
+
+            this._defaultKeystrokeCommand = nativeEditor.keystrokeHandler.keystrokes[keystroke.keys];
+
+            nativeEditor.setKeystroke(keystroke.keys, commandName);
+        },
+
+        /**
+         * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+         *
+         * @method componentWillUnmount
+         */
+        componentWillUnmount: function componentWillUnmount() {
+            this.props.editor.get('nativeEditor').setKeystroke(this.props.keystroke.keys, this._defaultKeystrokeCommand);
+        }
+    };
+
+    AlloyEditor.ButtonKeystroke = ButtonKeystroke;
 })();
 'use strict';
 
@@ -5445,8 +6099,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 props = this.mergeDropdownProps(props, button.key);
 
                 if (additionalProps) {
-                    props = CKEDITOR.tools.merge(props, additionalProps, buttonProps[button.key]);
+                    props = CKEDITOR.tools.merge(props, additionalProps);
                 }
+
+                props = CKEDITOR.tools.merge(props, buttonProps[button.key]);
 
                 return React.createElement(button, props);
             }, this);
@@ -5629,7 +6285,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @return {Array|Object} The item with executive state.
          */
         filterExclusive: function filterExclusive(items) {
-            return items.filter((function (item) {
+            return items.filter(function (item) {
                 if (this.state.itemExclusive) {
                     if (this.state.itemExclusive === item.key) {
                         return item;
@@ -5637,7 +6293,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 } else {
                     return item;
                 }
-            }).bind(this));
+            }.bind(this));
         },
 
         /**
@@ -5985,7 +6641,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
                 this._descendants = [];
 
-                Array.prototype.slice.call(descendants).forEach((function (item) {
+                Array.prototype.slice.call(descendants).forEach(function (item) {
                     var dataTabIndex = item.getAttribute('data-tabindex');
 
                     if (dataTabIndex) {
@@ -5993,7 +6649,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     } else {
                         this._descendants.push(item);
                     }
-                }).bind(this));
+                }.bind(this));
 
                 priorityDescendants = priorityDescendants.sort(function (a, b) {
                     return AlloyEditor.Lang.toInt(a.getAttribute('data-tabindex')) > AlloyEditor.Lang.toInt(b.getAttribute('data-tabindex'));
@@ -6003,14 +6659,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
                 this._activeDescendant = 0;
 
-                this._descendants.some((function (item, index) {
+                this._descendants.some(function (item, index) {
                     if (item.getAttribute('tabindex') === '0') {
                         this._activeDescendant = index;
                         this.focus();
 
                         return true;
                     }
-                }).bind(this));
+                }.bind(this));
             }
         }
     };
@@ -6063,9 +6719,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             }
 
             var selectionData = eventPayload.selectionData;
+
             var pos = {
                 x: eventPayload.nativeEvent.pageX,
-                y: eventPayload.nativeEvent.pageY
+                y: selectionData.region.top
             };
 
             var direction = selectionData.region.direction;
@@ -6421,6 +7078,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
      *
      * @uses ButtonCommand
+     * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      *
@@ -6430,7 +7088,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonBold = React.createClass({
         displayName: 'ButtonBold',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -6478,6 +7136,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'bold',
+                keystroke: {
+                    fn: 'execCommand',
+                    keys: CKEDITOR.CTRL + 66 /*B*/
+                },
                 style: {
                     element: 'strong'
                 }
@@ -6558,7 +7220,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         componentWillUnmount: function componentWillUnmount() {
             if (this._stream) {
-                this._stream.stop();
+                if (this._stream.stop) {
+                    this._stream.stop();
+                } else if (this._stream.getVideoTracks) {
+                    this._stream.getVideoTracks().forEach(function (track) {
+                        track.stop();
+                    });
+                }
                 this._stream = null;
             }
         },
@@ -6652,7 +7320,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
             var canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
 
-            videoEl.addEventListener('canplay', (function (event) {
+            videoEl.addEventListener('canplay', function (event) {
                 var height = videoEl.videoHeight / (videoEl.videoWidth / this.props.videoWidth);
 
                 if (isNaN(height)) {
@@ -6665,7 +7333,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 canvasEl.setAttribute('height', height);
 
                 this._videoHeight = height;
-            }).bind(this), false);
+            }.bind(this), false);
 
             this._stream = stream;
 
@@ -6754,11 +7422,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             if (this.props.renderExclusive) {
                 return React.createElement(AlloyEditor.ButtonCameraImage, this.props);
             } else {
-                var disabled = !(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+                var disabled = !(navigator.getUserMedia || navigator.webkitGetUserMedia && location.protocol === 'https' || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+
+                var label = disabled ? AlloyEditor.Strings.cameraDisabled : AlloyEditor.Strings.camera;
 
                 return React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.camera, className: 'ae-button', 'data-type': 'button-image-camera', disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.camera },
+                    { 'aria-label': label, className: 'ae-button', 'data-type': 'button-image-camera', disabled: disabled, onClick: this.props.requestExclusive.bind(ButtonCamera.key), tabIndex: this.props.tabIndex, title: label },
                     React.createElement('span', { className: 'ae-icon-camera' })
                 );
             }
@@ -7142,6 +7812,345 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 (function () {
     'use strict';
 
+    var KEY_ENTER = 13;
+    var KEY_ESC = 27;
+
+    /**
+     * The ButtonEmbedEdit class provides functionality for creating and editing an embed link in a document.
+     * Provides UI for creating and editing an embed link.
+     *
+     * @class ButtonEmbedEdit
+     */
+    var ButtonEmbedEdit = React.createClass({
+        displayName: 'ButtonEmbedEdit',
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default embedEdit
+             */
+            key: 'embedEdit'
+        },
+
+        /**
+         * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+         *
+         * Focuses on the link input to immediately allow editing. This should only happen if the component
+         * is rendered in exclusive mode to prevent aggressive focus stealing.
+         *
+         * @method componentDidMount
+         */
+        componentDidMount: function componentDidMount() {
+            if (this.props.renderExclusive || this.props.manualSelection) {
+                // We need to wait for the next rendering cycle before focusing to avoid undesired
+                // scrolls on the page
+                if (window.requestAnimationFrame) {
+                    window.requestAnimationFrame(this._focusLinkInput);
+                } else {
+                    setTimeout(this._focusLinkInput, 0);
+                }
+            }
+        },
+
+        /**
+         * Lifecycle. Invoked when a component is receiving new props.
+         * This method is not called for the initial render.
+         *
+         * @method componentWillReceiveProps
+         */
+        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+            this.replaceState(this.getInitialState());
+        },
+
+        /**
+         * Lifecycle. Invoked once before the component is mounted.
+         * The return value will be used as the initial value of this.state.
+         *
+         * @method getInitialState
+         */
+        getInitialState: function getInitialState() {
+            var editor = this.props.editor.get('nativeEditor');
+            var embed;
+
+            var selection = editor.getSelection();
+
+            if (selection) {
+                var range = selection.getRanges()[0];
+
+                if (range) {
+                    range.shrink(CKEDITOR.SHRINK_TEXT);
+
+                    embed = editor.elementPath(range.getCommonAncestor()).contains(function (element) {
+                        return element.getAttribute('data-widget') === 'ae_embed' || element.getAttribute('data-cke-widget-wrapper') && element.find('[data-widget="ae_embed"]');
+                    }, 1);
+
+                    if (embed && embed.getAttribute('data-widget') !== 'ae_embed') {
+                        embed = embed.find('[data-widget="ae_embed"]').getItem(0);
+                    }
+                }
+            }
+
+            var href = embed ? embed.getAttribute('data-ae-embed-url') : '';
+
+            return {
+                initialLink: {
+                    href: href
+                },
+                linkHref: href
+            };
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            var clearLinkStyle = {
+                opacity: this.state.linkHref ? 1 : 0
+            };
+
+            return React.createElement(
+                'div',
+                { className: 'ae-container-edit-link' },
+                React.createElement(
+                    'div',
+                    { className: 'ae-container-input xxl' },
+                    React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                    React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
+                ),
+                React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.confirm, className: 'ae-button', disabled: !this._isValidState(), onClick: this._embedLink, title: AlloyEditor.Strings.confirm },
+                    React.createElement('span', { className: 'ae-icon-ok' })
+                )
+            );
+        },
+
+        /**
+         * Clears the link input. This only changes the component internal state, but does not
+         * affect the link element of the editor. Only the _removeLink and _updateLink methods
+         * are translated to the editor element.
+         *
+         * @protected
+         * @method _clearLink
+         */
+        _clearLink: function _clearLink() {
+            this.setState({
+                linkHref: ''
+            });
+        },
+
+        /**
+         * Triggers the embedUrl command to transform the link into an embed media object
+         *
+         * @protected
+         * @method _embedLink
+         */
+        _embedLink: function _embedLink() {
+            var nativeEditor = this.props.editor.get('nativeEditor');
+
+            nativeEditor.execCommand('embedUrl', {
+                url: this.state.linkHref
+            });
+
+            // We need to cancelExclusive with the bound parameters in case the button is used
+            // inside another in exclusive mode (such is the case of the link button)
+            this.props.cancelExclusive();
+        },
+
+        /**
+         * Focuses the user cursor on the widget's input.
+         *
+         * @protected
+         * @method _focusLinkInput
+         */
+        _focusLinkInput: function _focusLinkInput() {
+            ReactDOM.findDOMNode(this.refs.linkInput).focus();
+        },
+
+        /**
+         * Monitors key interaction inside the input element to respond to the keys:
+         * - Enter: Creates/updates the link.
+         * - Escape: Discards the changes.
+         *
+         * @protected
+         * @method _handleKeyDown
+         * @param {SyntheticEvent} event The keyboard event.
+         */
+        _handleKeyDown: function _handleKeyDown(event) {
+            if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+                event.preventDefault();
+            }
+
+            if (event.keyCode === KEY_ENTER) {
+                this._embedLink();
+            } else if (event.keyCode === KEY_ESC) {
+                var editor = this.props.editor.get('nativeEditor');
+
+                // We need to cancelExclusive with the bound parameters in case the button is used
+                // inside another in exclusive mode (such is the case of the link button)
+                this.props.cancelExclusive();
+
+                editor.fire('actionPerformed', this);
+            }
+        },
+
+        /**
+         * Updates the component state when the link input changes on user interaction.
+         *
+         * @protected
+         * @method _handleLinkHrefChange
+         * @param {SyntheticEvent} event The change event.
+         */
+        _handleLinkHrefChange: function _handleLinkHrefChange(event) {
+            this.setState({
+                linkHref: event.target.value
+            });
+        },
+
+        /**
+         * Verifies that the current link state is valid so the user can save the link. A valid state
+         * means that we have a non-empty href that's different from the original one.
+         *
+         * @method _isValidState
+         * @protected
+         * @return {Boolean} True if the state is valid, false otherwise
+         */
+        _isValidState: function _isValidState() {
+            var validState = this.state.linkHref && this.state.linkHref !== this.state.initialLink.href;
+
+            return validState;
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonEmbedEdit.key] = AlloyEditor.ButtonEmbedEdit = ButtonEmbedEdit;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * The ButtonEmbed class provides functionality for creating and editing an embed link in a document.
+     * ButtonEmbed renders in two different modes:
+     *
+     * - Normal: Just a button that allows to switch to the edition mode
+     * - Exclusive: The ButtonEmbedEdit UI with all the link edition controls.
+     *
+     * @uses ButtonKeystroke
+     *
+     * @class ButtonEmbed
+     */
+
+    var ButtonEmbed = React.createClass({
+        displayName: 'ButtonEmbed',
+
+        mixins: [AlloyEditor.ButtonKeystroke],
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @property {Number} tabIndex
+             */
+            tabIndex: React.PropTypes.number
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default embed
+             */
+            key: 'embed'
+        },
+
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function getDefaultProps() {
+            return {
+                keystroke: {
+                    fn: '_requestExclusive',
+                    keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/
+                }
+            };
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            if (this.props.renderExclusive) {
+                return React.createElement(AlloyEditor.ButtonEmbedEdit, this.props);
+            } else {
+                return React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.link, className: 'ae-button', 'data-type': 'button-embed', onClick: this._requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
+                    React.createElement('span', { className: 'ae-icon-add' })
+                );
+            }
+        },
+
+        /**
+         * Requests the link button to be rendered in exclusive mode to allow the embedding of a link.
+         *
+         * @protected
+         * @method _requestExclusive
+         */
+        _requestExclusive: function _requestExclusive() {
+            this.props.requestExclusive(ButtonEmbed.key);
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonEmbed.key] = AlloyEditor.ButtonEmbed = ButtonEmbed;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
     /**
      * The ButtonH1 class provides wraps a selection in `h1` element.
      *
@@ -7413,9 +8422,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonImageAlignCenter class provides functionality for aligning an image in the center.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonImageAlignCenter
      */
@@ -7423,7 +8432,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonImageAlignCenter = React.createClass({
         displayName: 'ButtonImageAlignCenter',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -7470,15 +8479,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'img',
-                    styles: {
-                        'display': 'block',
-                        'margin-left': '50%',
-                        'transform': 'translateX(-50%)',
-                        '-ms-transform': 'translateX(-50%)'
-                    }
-                }
+                command: 'justifycenter'
             };
         },
 
@@ -7493,7 +8494,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-center', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
+                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-center', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
                 React.createElement('span', { className: 'ae-icon-align-center' })
             );
         }
@@ -7509,9 +8510,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonImageAlignLeft class provides functionality for aligning an image on left.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonImageAlignLeft
      */
@@ -7519,7 +8520,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonImageAlignLeft = React.createClass({
         displayName: 'ButtonImageAlignLeft',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -7566,12 +8567,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'img',
-                    styles: {
-                        'float': 'left'
-                    }
-                }
+                command: 'justifyleft'
             };
         },
 
@@ -7586,7 +8582,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-left', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
+                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-left', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
                 React.createElement('span', { className: 'ae-icon-align-left' })
             );
         }
@@ -7602,9 +8598,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonImageAlignRight class provides functionality for aligning an image on right.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonImageAlignRight
      */
@@ -7612,7 +8608,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonImageAlignRight = React.createClass({
         displayName: 'ButtonImageAlignRight',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -7659,12 +8655,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'img',
-                    styles: {
-                        'float': 'right'
-                    }
-                }
+                command: 'justifyright'
             };
         },
 
@@ -7679,7 +8670,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-right', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
+                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-image-align-right', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
                 React.createElement('span', { className: 'ae-icon-align-right' })
             );
         }
@@ -7755,7 +8746,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     { 'aria-label': AlloyEditor.Strings.image, className: 'ae-button', 'data-type': 'button-image', onClick: this.handleClick, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.image },
                     React.createElement('span', { className: 'ae-icon-image' })
                 ),
-                React.createElement('input', { onChange: this._onInputChange, ref: 'fileInput', style: inputSyle, type: 'file' })
+                React.createElement('input', { accept: 'image/*', onChange: this._onInputChange, ref: 'fileInput', style: inputSyle, type: 'file' })
             );
         },
 
@@ -7780,10 +8771,18 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @method _onInputChange
          */
         _onInputChange: function _onInputChange() {
-            var reader = new FileReader();
             var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
 
-            reader.onload = (function (event) {
+            // On IE11 the function might be called with an empty array of
+            // files. In such a case, no actions will be taken.
+            if (!inputEl.files.length) {
+                return;
+            }
+
+            var reader = new FileReader();
+            var file = inputEl.files[0];
+
+            reader.onload = function (event) {
                 var editor = this.props.editor.get('nativeEditor');
 
                 var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
@@ -7794,13 +8793,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
                 var imageData = {
                     el: el,
-                    file: inputEl.files[0]
+                    file: file
                 };
 
                 editor.fire('imageAdd', imageData);
-            }).bind(this);
+            }.bind(this);
 
-            reader.readAsDataURL(inputEl.files[0]);
+            reader.readAsDataURL(file);
 
             inputEl.value = '';
         }
@@ -7824,6 +8823,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * The ButtonItalic class provides functionality for styling an selection with italic (em) style.
      *
      * @uses ButtonCommand
+     * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      *
@@ -7833,7 +8833,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonItalic = React.createClass({
         displayName: 'ButtonItalic',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -7881,6 +8881,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'italic',
+                keystroke: {
+                    fn: 'execCommand',
+                    keys: CKEDITOR.CTRL + 73 /*I*/
+                },
                 style: {
                     element: 'em'
                 }
@@ -7935,6 +8939,13 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
 
             /**
+             * Indicate if we add http:// protocol to link or not
+             *
+             * @property {Boolean} appendProtocol
+             */
+            appendProtocol: React.PropTypes.bool,
+
+            /**
              * The editor instance where the component is being used.
              *
              * @property {Object} editor
@@ -7942,11 +8953,19 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             editor: React.PropTypes.object.isRequired,
 
             /**
+             * Default value of the link target attribute.
+             *
+             * @property {String} defaultLinkTarget
+             */
+            defaultLinkTarget: React.PropTypes.string,
+
+            /**
              * Indicates whether the link target selector should appear.
              *
              * @property {Boolean} showTargetSelector
              */
             showTargetSelector: React.PropTypes.bool
+
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -7970,7 +8989,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
-            if (this.props.renderExclusive) {
+            if (this.props.renderExclusive || this.props.manualSelection) {
                 // We need to wait for the next rendering cycle before focusing to avoid undesired
                 // scrolls on the page
                 if (window.requestAnimationFrame) {
@@ -7999,7 +9018,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                showTargetSelector: true
+                defaultLinkTarget: '',
+                showTargetSelector: true,
+                appendProtocol: true
             };
         },
 
@@ -8012,7 +9033,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         getInitialState: function getInitialState() {
             var link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
             var href = link ? link.getAttribute('href') : '';
-            var target = link ? link.getAttribute('target') : '';
+            var target = link ? link.getAttribute('target') : this.props.defaultLinkTarget;
 
             return {
                 element: link,
@@ -8064,7 +9085,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     'div',
                     { className: 'ae-container-input xxl' },
                     targetSelector,
-                    React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyUp: this._handleKeyUp, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                    React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
                     React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
                 ),
                 React.createElement(
@@ -8130,10 +9151,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * - Escape: Discards the changes.
          *
          * @protected
-         * @method _handleKeyUp
+         * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
          */
-        _handleKeyUp: function _handleKeyUp(event) {
+        _handleKeyDown: function _handleKeyDown(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
                 event.preventDefault();
             }
@@ -8208,7 +9229,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         _updateLink: function _updateLink() {
             var editor = this.props.editor.get('nativeEditor');
-            var linkUtils = new CKEDITOR.Link(editor);
+            var linkUtils = new CKEDITOR.Link(editor, { appendProtocol: this.props.appendProtocol });
             var linkAttrs = {
                 target: this.state.linkTarget
             };
@@ -8360,6 +9381,18 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         },
 
         /**
+         * Lifecycle. Invoked before rendering when new props or state are being received.
+         * This method is not called for the initial render or when forceUpdate is used.
+         *
+         * @method  shouldComponentUpdate
+         * @return {Boolean} Returns false when the transition to the new props and state will not
+         * require a component update.
+         */
+        shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+            return nextProps.expanded !== this.props.expanded || nextProps.selectedTarget !== this.props.selectedTarget;
+        },
+
+        /**
          * Creates the dropdown list of allowed link targets.
          *
          * @protected
@@ -8416,6 +9449,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * - Normal: Just a button that allows to switch to the edition mode
      * - Exclusive: The ButtonLinkEdit UI with all the link edition controls.
      *
+     * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      *
      * @class ButtonLink
@@ -8424,7 +9458,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonLink = React.createClass({
         displayName: 'ButtonLink',
 
-        mixins: [AlloyEditor.ButtonStateClasses],
+        mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -8464,6 +9498,21 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         },
 
         /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function getDefaultProps() {
+            return {
+                keystroke: {
+                    fn: '_requestExclusive',
+                    keys: CKEDITOR.CTRL + 76 /*L*/
+                }
+            };
+        },
+
+        /**
          * Checks if the current selection is contained within a link.
          *
          * @method isActive
@@ -8487,10 +9536,20 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             } else {
                 return React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.link, className: cssClass, 'data-type': 'button-link', onClick: this.props.requestExclusive.bind(ButtonLink.key), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
+                    { 'aria-label': AlloyEditor.Strings.link, className: cssClass, 'data-type': 'button-link', onClick: this._requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
                     React.createElement('span', { className: 'ae-icon-link' })
                 );
             }
+        },
+
+        /**
+         * Requests the link button to be rendered in exclusive mode to allow the creation of a link.
+         *
+         * @protected
+         * @method _requestExclusive
+         */
+        _requestExclusive: function _requestExclusive() {
+            this.props.requestExclusive(ButtonLink.key);
         }
     });
 
@@ -8595,9 +9654,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonParagraphAlignLeft class provides functionality for aligning a paragraph on left.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphAlignLeft
      */
@@ -8605,7 +9664,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonParagraphAlignLeft = React.createClass({
         displayName: 'ButtonParagraphAlignLeft',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -8652,12 +9711,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'left'
-                    }
-                }
+                command: 'justifyleft'
             };
         },
 
@@ -8672,7 +9726,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-left', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
+                { 'aria-label': AlloyEditor.Strings.alignLeft, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-left', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignLeft },
                 React.createElement('span', { className: 'ae-icon-align-left' })
             );
         }
@@ -8688,9 +9742,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonParagraphAlignRight class provides functionality for aligning a paragraph on right.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphAlignRight
      */
@@ -8698,7 +9752,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonParagraphAlignRight = React.createClass({
         displayName: 'ButtonParagraphAlignRight',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -8745,12 +9799,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'right'
-                    }
-                }
+                command: 'justifyright'
             };
         },
 
@@ -8765,7 +9814,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-right', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
+                { 'aria-label': AlloyEditor.Strings.alignRight, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-align-right', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignRight },
                 React.createElement('span', { className: 'ae-icon-align-right' })
             );
         }
@@ -8781,9 +9830,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonParagraphCenter class provides functionality for centering a paragraph.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphCenter
      */
@@ -8791,7 +9840,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonParagraphCenter = React.createClass({
         displayName: 'ButtonParagraphCenter',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -8838,12 +9887,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'center'
-                    }
-                }
+                command: 'justifycenter'
             };
         },
 
@@ -8858,7 +9902,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-center', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
+                { 'aria-label': AlloyEditor.Strings.alignCenter, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-center', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignCenter },
                 React.createElement('span', { className: 'ae-icon-align-center' })
             );
         }
@@ -8874,9 +9918,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     /**
      * The ButtonParagraphJustify class provides functionality for justfying a paragraph.
      *
-     * @uses ButtonActionStyle
+     * @uses ButtonCommand
+     * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     * @uses ButtonStyle
      *
      * @class ButtonParagraphJustify
      */
@@ -8884,7 +9928,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonParagraphJustify = React.createClass({
         displayName: 'ButtonParagraphJustify',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
+        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -8931,12 +9975,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                style: {
-                    element: 'p',
-                    styles: {
-                        'text-align': 'justify'
-                    }
-                }
+                command: 'justifyblock'
             };
         },
 
@@ -8951,7 +9990,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             return React.createElement(
                 'button',
-                { 'aria-label': AlloyEditor.Strings.alignJustify, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-justify', onClick: this.applyStyle, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignJustify },
+                { 'aria-label': AlloyEditor.Strings.alignJustify, 'aria-pressed': cssClass.indexOf('pressed') !== -1, className: cssClass, 'data-type': 'button-paragraph-justify', onClick: this.execCommand, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.alignJustify },
                 React.createElement('span', { className: 'ae-icon-align-justified' })
             );
         }
@@ -9695,11 +10734,11 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
             var styles = this._getStyles();
 
-            styles.forEach((function (item) {
+            styles.forEach(function (item) {
                 if (this._checkActive(item.style)) {
                     activeStyle = item.name;
                 }
-            }).bind(this));
+            }.bind(this));
 
             var buttonStylesList;
 
@@ -11079,6 +12118,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
      * The ButtonUnderline class provides functionality for underlying a text selection.
      *
      * @uses ButtonCommand
+     * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      *
@@ -11088,7 +12128,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
     var ButtonUnderline = React.createClass({
         displayName: 'ButtonUnderline',
 
-        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -11136,6 +12176,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'underline',
+                keystroke: {
+                    fn: 'execCommand',
+                    keys: CKEDITOR.CTRL + 85 /*U*/
+                },
                 style: {
                     element: 'u'
                 }
@@ -11306,7 +12350,14 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @return {Object|null} The content which should be rendered.
          */
         render: function render() {
-            if (this.props.editorEvent && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+            // Some operations such as `requestExclusive` may force editor to blur which will
+            // invalidate the `props.editorEvent` stored value, without causing a `props` change.
+            // For example, if the editor is empty, `ae_placeholder` plugin will remove
+            // the target from the DOM and will prevent `add` toolbar from rendering.
+            //
+            // It should be safe to assume that if you have been able to render the toolbar
+            // and request the exclusive mode, then rendering might be kept until the exclusive mode is left.
+            if (!this.state.itemExclusive && this.props.editorEvent && this.props.editorEvent.data.nativeEvent.target && !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
                 return null;
             }
 
@@ -11373,6 +12424,8 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          * @method _updatePosition
          */
         _updatePosition: function _updatePosition() {
+            var region;
+
             // If component is not mounted, there is nothing to do
             if (!ReactDOM.findDOMNode(this)) {
                 return;
@@ -11381,8 +12434,6 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             if (this.props.renderExclusive) {
                 this.updatePosition();
                 this.show();
-
-                var region;
             } else {
                 if (this.props.selectionData) {
                     region = this.props.selectionData.region;
@@ -11552,6 +12603,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 var cssClasses = 'ae-toolbar-styles ' + arrowBoxClasses;
 
                 var buttons = this.getToolbarButtons(currentSelection.buttons, {
+                    manualSelection: this.props.editorEvent ? this.props.editorEvent.data.manualSelection : null,
                     selectionType: currentSelection.name
                 });
 
@@ -11619,7 +12671,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                     var result;
 
                     if (testFn) {
-                        result = testFn({
+                        result = eventPayload.manualSelection === item.name || testFn({
                             data: eventPayload,
                             editor: this.props.editor
                         });
@@ -11775,9 +12827,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
             // It is not easy to debounce _setUIHidden on mousedown, because if we
             // debounce it, when the handler is being invoked, the target might be no more part
             // of the editor's UI - onActionPerformed causes re-render.
-            this._mousedownListener = (function (event) {
+            this._mousedownListener = function (event) {
                 this._setUIHidden(event.target);
-            }).bind(this);
+            }.bind(this);
 
             this._keyDownListener = CKEDITOR.tools.debounce(function (event) {
                 this._setUIHidden(document.activeElement);
@@ -11903,7 +12955,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 return AlloyEditor.Toolbars[toolbar] || window[toolbar];
             });
 
-            toolbars = this.filterExclusive(toolbars).map((function (toolbar) {
+            toolbars = this.filterExclusive(toolbars).map(function (toolbar) {
                 var props = this.mergeExclusiveProps({
                     config: this.props.toolbars[toolbar.key],
                     editor: this.props.editor,
@@ -11914,7 +12966,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
                 }, toolbar.key);
 
                 return React.createElement(toolbar, props);
-            }).bind(this));
+            }.bind(this));
 
             return React.createElement(
                 'div',

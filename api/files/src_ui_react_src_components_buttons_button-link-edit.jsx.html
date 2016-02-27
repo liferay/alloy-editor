@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>0.7.5</b>
+                        API Docs for Version: <b>1.0.0</b>
                     </p>
                 </li>
             </div>
@@ -65,9 +65,12 @@
                                     <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
                                     <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
                                     <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
                                     <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
                                     <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
                                     <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
                                     <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
@@ -76,6 +79,7 @@
                                     <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
                                     <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
@@ -196,6 +200,13 @@
                                         allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
                             
                                         /**
+                                         * Indicate if we add http:// protocol to link or not
+                                         *
+                                         * @property {Boolean} appendProtocol
+                                         */
+                                         appendProtocol: React.PropTypes.bool,
+                            
+                                        /**
                                          * The editor instance where the component is being used.
                                          *
                                          * @property {Object} editor
@@ -203,11 +214,19 @@
                                         editor: React.PropTypes.object.isRequired,
                             
                                         /**
+                                         * Default value of the link target attribute.
+                                         *
+                                         * @property {String} defaultLinkTarget
+                                         */
+                                        defaultLinkTarget: React.PropTypes.string,
+                            
+                                        /**
                                          * Indicates whether the link target selector should appear.
                                          *
                                          * @property {Boolean} showTargetSelector
                                          */
                                         showTargetSelector: React.PropTypes.bool
+                            
                                     },
                             
                                     // Lifecycle. Provides static properties to the widget.
@@ -231,7 +250,7 @@
                                      * @method componentDidMount
                                      */
                                     componentDidMount: function () {
-                                        if (this.props.renderExclusive) {
+                                        if (this.props.renderExclusive || this.props.manualSelection) {
                                             // We need to wait for the next rendering cycle before focusing to avoid undesired
                                             // scrolls on the page
                                             if (window.requestAnimationFrame) {
@@ -260,7 +279,9 @@
                                      */
                                     getDefaultProps: function() {
                                         return {
-                                            showTargetSelector: true
+                                            defaultLinkTarget: &#x27;&#x27;,
+                                            showTargetSelector: true,
+                                            appendProtocol: true
                                         };
                                     },
                             
@@ -273,7 +294,7 @@
                                     getInitialState: function() {
                                         var link = new CKEDITOR.Link(this.props.editor.get(&#x27;nativeEditor&#x27;)).getFromSelection();
                                         var href = link ? link.getAttribute(&#x27;href&#x27;) : &#x27;&#x27;;
-                                        var target = link ? link.getAttribute(&#x27;target&#x27;) : &#x27;&#x27;;
+                                        var target = link ? link.getAttribute(&#x27;target&#x27;) : this.props.defaultLinkTarget;
                             
                                         return {
                                             element: link,
@@ -320,7 +341,7 @@
                                                 &lt;/button&gt;
                                                 &lt;div className=&quot;ae-container-input xxl&quot;&gt;
                                                     {targetSelector}
-                                                    &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyUp={this._handleKeyUp} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                    &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
                                                     &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;ae-button ae-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
                                                 &lt;/div&gt;
                                                 &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;ae-button&quot; disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
@@ -385,10 +406,10 @@
                                      * - Escape: Discards the changes.
                                      *
                                      * @protected
-                                     * @method _handleKeyUp
+                                     * @method _handleKeyDown
                                      * @param {SyntheticEvent} event The keyboard event.
                                      */
-                                    _handleKeyUp: function(event) {
+                                    _handleKeyDown: function(event) {
                                         if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
                                             event.preventDefault();
                                         }
@@ -463,7 +484,7 @@
                                      */
                                     _updateLink: function() {
                                         var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                                        var linkUtils = new CKEDITOR.Link(editor);
+                                        var linkUtils = new CKEDITOR.Link(editor, {appendProtocol: this.props.appendProtocol});
                                         var linkAttrs = {
                                             target: this.state.linkTarget
                                         };

@@ -549,7 +549,7 @@
         editor: React.PropTypes.object.isRequired
     },
 
-    getDefaultProps: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    getDefaultProps: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-keyword">return</span> {
             style: {
                 element: <span class="hljs-string">'marquee'</span>
@@ -561,7 +561,7 @@
         key: <span class="hljs-string">'marquee'</span>
     },
 
-    render: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    render: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-keyword">var</span> cssClass = <span class="hljs-string">'ae-button '</span> + <span class="hljs-keyword">this</span>.getStateClasses();
 
         <span class="hljs-keyword">return</span> (
@@ -576,9 +576,9 @@ AlloyEditor.Buttons[ButtonMarquee.key] = AlloyEditor.ButtonMarquee = ButtonMarqu
 
     <span class="code-header">And then we add it to the text selection just like this:</span>
 
-    <pre class="highlight"><code class="hljs perl">AlloyEditor.Selections[<span class="hljs-number">2</span>].buttons.<span class="hljs-keyword">push</span>(<span class="hljs-string">'marquee'</span>);
+    <pre class="highlight"><code class="hljs less"><span class="hljs-attribute">AlloyEditor</span>.Selections[<span class="hljs-number">2</span>].buttons.<span class="hljs-function">push</span>(<span class="hljs-string">'marquee'</span>);
 
-AlloyEditor.editable(<span class="hljs-string">'contentEditable'</span>);</code></pre>
+<span class="hljs-attribute">AlloyEditor</span>.<span class="hljs-function">editable</span>(<span class="hljs-string">'contentEditable'</span>);</code></pre>
     </pre>
 </section>
 

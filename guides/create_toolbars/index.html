@@ -406,15 +406,15 @@
         key: <span class="hljs-string">'versions'</span>
     },
 
-    componentDidMount: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+    componentDidMount: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
         <span class="hljs-keyword">this</span>._updatePosition();
     },
 
-    componentDidUpdate: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(prevProps, prevState)</span> {</span>
+    componentDidUpdate: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(prevProps, prevState)</span> </span>{
         <span class="hljs-keyword">this</span>._updatePosition();
     },
 
-    getDefaultProps: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    getDefaultProps: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-keyword">return</span> {
             circular: <span class="hljs-literal">true</span>,
             descendants: <span class="hljs-string">'.ae-button, .ae-toolbar-element'</span>,
@@ -428,7 +428,7 @@
     <span class="hljs-comment">/**
      * Returns the class name of the toolbar in case of both exclusive and normal mode.
      */</span>
-    _getToolbarClassName: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    _getToolbarClassName: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-keyword">var</span> cssClass = <span class="hljs-string">'ae-toolbar-versions'</span>;
 
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.renderExclusive) {
@@ -441,7 +441,7 @@
     <span class="hljs-comment">/**
      * Calculates and sets the position of the toolbar in exclusive or normal mode.
      */</span>
-    _updatePosition: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    _updatePosition: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-keyword">var</span> region;
 
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.selectionData) {
@@ -468,7 +468,7 @@
     <span class="hljs-comment">/**
      * Lifecycle. Renders the buttons for managing version changes.
      */</span>
-    render: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    render: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-keyword">var</span> buttons = <span class="hljs-keyword">this</span>.getToolbarButtons(<span class="hljs-keyword">this</span>.props.config.buttons);
         <span class="hljs-keyword">var</span> className = <span class="hljs-keyword">this</span>._getToolbarClassName();
 
