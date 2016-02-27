@@ -704,12 +704,22 @@ AlloyEditor.Buttons[ButtonMarquee.key] = AlloyEditor.ButtonMarquee = ButtonMarqu
             }
         });
 
-        AlloyEditor.Selections[1].buttons.unshift({
-            name: 'styles',
-            cfg: {
-                styles: imageFilters
+        var imageSelection;
+
+        for (var i = 0; i < AlloyEditor.Selections.length; i++) {
+            imageSelection = AlloyEditor.Selections[i];
+
+            if (imageSelection.name === 'image') {
+                imageSelection.buttons.unshift({
+                    name: 'styles',
+                    cfg: {
+                        styles: imageFilters
+                    }
+                });
+
+                break;
             }
-        });
+        }
 
         var tableClasses = [
             {
@@ -746,12 +756,22 @@ AlloyEditor.Buttons[ButtonMarquee.key] = AlloyEditor.ButtonMarquee = ButtonMarqu
             }
         });
 
-        AlloyEditor.Selections[3].buttons.unshift({
-            name: 'styles',
-            cfg: {
-                styles: tableStyles
+        var tableSelection;
+
+        for (var i = 0; i < AlloyEditor.Selections.length; i++) {
+            tableSelection = AlloyEditor.Selections[i];
+
+            if (tableSelection.name === 'table') {
+                tableSelection.buttons.unshift({
+                    name: 'styles',
+                    cfg: {
+                        styles: tableStyles
+                    }
+                });
+
+                break;
             }
-        });
+        }
 
         AlloyEditor.editable('contentEditable');
     }());
