@@ -19,7 +19,7 @@
                 dataValue: 'this a <a href="http://test"></a> test'
             });
 
-            assert.isTrue(this.nativeEditor.execCommand.notCalled)
+            assert.isTrue(this.nativeEditor.execCommand.notCalled);
         });
     });
 }());
