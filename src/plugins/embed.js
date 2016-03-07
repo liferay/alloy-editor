@@ -111,7 +111,7 @@
                     editor.on('paste', function(event) {
                         var link = event.data.dataValue;
 
-                        if (/https?/.test(link)) {
+                        if (/^https?/.test(link)) {
                             event.stop();
 
                             editor.execCommand('embedUrl', {
