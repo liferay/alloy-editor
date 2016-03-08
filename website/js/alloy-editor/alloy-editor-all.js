@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.0.0
+ * AlloyEditor v1.0.1
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -23579,7 +23579,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 editor.on('paste', function (event) {
                     var link = event.data.dataValue;
 
-                    if (/https?/.test(link)) {
+                    if (/^https?/.test(link)) {
                         event.stop();
 
                         editor.execCommand('embedUrl', {
