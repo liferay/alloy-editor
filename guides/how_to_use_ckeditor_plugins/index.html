@@ -404,7 +404,17 @@ AlloyEditor.editable(<span class="hljs-string">'contentEditable'</span>, {
 <p>AlloyEditor provides a set of plugins that work as an adapter for CKEditor UI features generating compatible buttons, richcombos, panels and more that can be reused. All you need to do is use the appropriate ui-bridge plugin and add the buttons to an existing or new selection.</p>
 
 <span class="code-header">For example, you can reuse the <a href="http://ckeditor.com/addon/font">Font Size and Family Plugin</a> like this:.</span>
-<pre class="highlight"><code class="hljs javascript">AlloyEditor.Selections[<span class="hljs-number">2</span>].buttons = [<span class="hljs-string">'Font'</span>, <span class="hljs-string">'FontSize'</span>].concat(AlloyEditor.Selections[<span class="hljs-number">2</span>].buttons);
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> textSelection;
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; AlloyEditor.Selections.length; i++) {
+    textSelection = AlloyEditor.Selections[i];
+
+    <span class="hljs-keyword">if</span> (textSelection.name === <span class="hljs-string">'text'</span>) {
+      <span class="hljs-keyword">break</span>;
+    }
+}
+
+textSelection.buttons = [<span class="hljs-string">'Font'</span>, <span class="hljs-string">'FontSize'</span>].concat(textSelection.buttons);
 
 AlloyEditor.editable(<span class="hljs-string">'contentEditable'</span>, {
     extraPlugins: AlloyEditor.Core.ATTRS.extraPlugins.value + <span class="hljs-string">',ae_richcombobridge,font'</span>
@@ -568,7 +578,7 @@ AlloyEditor.editable(<span class="hljs-string">'contentEditable'</span>, {
         <div class="col-md-10 col-md-offset-1">
           <span class="fork"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">LGPL License</a></span>
           <span class="fork pull-right"><a href="https://github.com/liferay/alloy-editor/">Fork me on Github</a></span>
-          <p class="copyright">@ 2015 Liferay, Inc. All Rights Reserved</p>
+          <p class="copyright">@ 2015-2016 Liferay, Inc. All Rights Reserved</p>
         </div>
       </footer>
     </div>

@@ -576,9 +576,19 @@ AlloyEditor.Buttons[ButtonMarquee.key] = AlloyEditor.ButtonMarquee = ButtonMarqu
 
     <span class="code-header">And then we add it to the text selection just like this:</span>
 
-    <pre class="highlight"><code class="hljs less"><span class="hljs-attribute">AlloyEditor</span>.Selections[<span class="hljs-number">2</span>].buttons.<span class="hljs-function">push</span>(<span class="hljs-string">'marquee'</span>);
+    <pre class="highlight"><code class="hljs actionscript"><span class="hljs-keyword">var</span> textSelection;
 
-<span class="hljs-attribute">AlloyEditor</span>.<span class="hljs-function">editable</span>(<span class="hljs-string">'contentEditable'</span>);</code></pre>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; AlloyEditor.Selections.length; i++) {
+    textSelection = AlloyEditor.Selections[i];
+
+    <span class="hljs-keyword">if</span> (textSelection.name === <span class="hljs-string">'text'</span>) {
+      <span class="hljs-keyword">break</span>;
+    }
+}
+
+textSelection.buttons.push(<span class="hljs-string">'marquee'</span>);
+
+AlloyEditor.editable(<span class="hljs-string">'contentEditable'</span>);</code></pre>
     </pre>
 </section>
 
@@ -649,7 +659,17 @@ AlloyEditor.Buttons[ButtonMarquee.key] = AlloyEditor.ButtonMarquee = ButtonMarqu
 
         contentEditable.addEventListener('focus', destroyPopover);
 
-        AlloyEditor.Selections[2].buttons.push('marquee');
+        var textSelection;
+
+        for (var i = 0; i < AlloyEditor.Selections.length; i++) {
+            textSelection = AlloyEditor.Selections[i];
+
+            if (textSelection.name === 'text') {
+              break;
+            }
+        }
+
+        textSelection.buttons.push('marquee');
 
         var filters = [
             {
@@ -782,7 +802,7 @@ AlloyEditor.Buttons[ButtonMarquee.key] = AlloyEditor.ButtonMarquee = ButtonMarqu
         <div class="col-md-10 col-md-offset-1">
           <span class="fork"><a href="https://github.com/liferay/alloy-editor/blob/master/LICENSE.md">LGPL License</a></span>
           <span class="fork pull-right"><a href="https://github.com/liferay/alloy-editor/">Fork me on Github</a></span>
-          <p class="copyright">@ 2015 Liferay, Inc. All Rights Reserved</p>
+          <p class="copyright">@ 2015-2016 Liferay, Inc. All Rights Reserved</p>
         </div>
       </footer>
     </div>
