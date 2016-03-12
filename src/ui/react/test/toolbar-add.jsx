@@ -4,109 +4,146 @@
     var assert = chai.assert;
     var TestUtils = React.addons.TestUtils;
 
-    var editorConfig = {
-        eventsDelay: 0,
-        toolbars: {
-            add: {}
-        },
-        uicore: {
-            timeout: 0
-        }
-    };
-
     describe('ToolbarAdd', function() {
         this.timeout(35000);
 
-        before(function (done) {
-            Utils.createAlloyEditor.call(this, done, editorConfig);
-        });
-
-        after(Utils.destroyAlloyEditor);
-
-        beforeEach(Utils.beforeEach);
-
-        afterEach(Utils.afterEach);
-
-        it('should not render when user interacts with a non-editable node', function() {
-            var editorEvent = {
-                data: {
-                    nativeEvent: {
-                        target: {
-                            isContentEditable: false
-                        }
-                    }
+        describe('test focusing', function() {
+            var editorConfig = {
+                eventsDelay: 0,
+                toolbars: {
+                    add: {}
+                },
+                uicore: {
+                    timeout: 0
                 }
             };
 
-            var mainUI = ReactDOM.render(<AlloyEditor.ToolbarAdd editor={this.editor} editorEvent={editorEvent}/>, this.container);
+            before(function (done) {
+                Utils.createAlloyEditor.call(this, done, editorConfig);
+            });
 
-            assert.isNull(ReactDOM.findDOMNode(mainUI));
+            after(Utils.destroyAlloyEditor);
+
+            beforeEach(Utils.beforeEach);
+
+            afterEach(Utils.afterEach);
+
+            it('should not render when user interacts with a non-editable node', function() {
+                var editorEvent = {
+                    data: {
+                        nativeEvent: {
+                            target: {
+                                isContentEditable: false
+                            }
+                        }
+                    }
+                };
+
+                var mainUI = ReactDOM.render(<AlloyEditor.ToolbarAdd editor={this.editor} editorEvent={editorEvent}/>, this.container);
+
+                assert.isNull(ReactDOM.findDOMNode(mainUI));
+            });
+
+            it('should render in the focused editor', function (done) {
+                // Test passes on IE11 and Windows 7, fails when executed by
+                // Travis on Windows 8.1, so it will be disabled
+                if (CKEDITOR.env.ie && CKEDITOR.env.version === 11) {
+                    done();
+                    return;
+                }
+
+                var blurDelay = CKEDITOR.focusManager._.blurDelay;
+
+                CKEDITOR.focusManager._.blurDelay = false;
+
+                var empty = document.createElement('div');
+
+                var editable2 = document.createElement('div');
+
+                document.getElementsByTagName('body')[0].appendChild(editable2);
+
+                document.getElementsByTagName('body')[0].appendChild(empty);
+
+                var editor2 = AlloyEditor.editable(editable2, editorConfig);
+                var nativeEditor2 = editor2.get('nativeEditor');
+
+                nativeEditor2.on('instanceReady', function() {
+                    var buttons;
+
+                    // Editor1 is focused and should show the add toolbar. Editor2 should not.
+                    buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
+
+                    assert.equal(buttons.length, 1, 'Editor1 is focused. It should show the add toolbar');
+
+                    buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
+
+                    assert.equal(buttons.length, 0, 'Editor2 is not focused. It should not show the add toolbar');
+
+                    happen.mousedown(editable2);
+                    Utils.focusEditor(nativeEditor2);
+
+                    // Editor2 is focused and should show the add toolbar. Editor1 should not.
+                    setTimeout(function () {
+                        buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
+
+                        assert.equal(buttons.length, 0, 'Editor1 is not focused. It should not show the add toolbar');
+
+                        buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
+
+                        assert.equal(buttons.length, 1, 'Editor2 is focused. It should show the add toolbar');
+
+                        happen.mousedown(empty);
+
+                        // None of the editors is focused. None of them should show the add toolbar.
+                        buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
+
+                        assert.equal(buttons.length, 0, 'Editor1 is not focused. It should not show the add toolbar');
+
+                        buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
+
+                        assert.equal(buttons.length, 0, 'Editor1 is not focused. It should not show the add toolbar');
+
+                        CKEDITOR.focusManager._.blurDelay = blurDelay;
+
+                        done();
+                    }.bind(this), 0);
+                }.bind(this));
+            });
         });
 
-        it('should render in the focused editor', function (done) {
-            // Test passes on IE11 and Windows 7, fails when executed by
-            // Travis on Windows 8.1, so it will be disabled
-            if (CKEDITOR.env.ie && CKEDITOR.env.version === 11) {
-                done();
-                return;
-            }
+        describe('test rendering', function() {
+            var editorConfig = {
+                eventsDelay: 0,
+                toolbars: {
+                    add: {
+                        position: AlloyEditor.ToolbarAdd.right
+                    }
+                },
+                uicore: {
+                    timeout: 0
+                }
+            };
 
-            var blurDelay = CKEDITOR.focusManager._.blurDelay;
+            before(function (done) {
+                Utils.createAlloyEditor.call(this, done, editorConfig);
+            });
 
-            CKEDITOR.focusManager._.blurDelay = false;
+            after(Utils.destroyAlloyEditor);
 
-            var empty = document.createElement('div');
+            beforeEach(Utils.beforeEach);
 
-            var editable2 = document.createElement('div');
+            afterEach(Utils.afterEach);
 
-            document.getElementsByTagName('body')[0].appendChild(editable2);
+            it('should render the toolbar on right', function() {
+                var editable = this.nativeEditor.editable();
+                happen.mousedown(editable);
 
-            document.getElementsByTagName('body')[0].appendChild(empty);
+                var toolbarAdd = TestUtils.findRenderedDOMComponentWithClass(this.editor._mainUI, 'ae-toolbar-add');
 
-            var editor2 = AlloyEditor.editable(editable2, editorConfig);
-            var nativeEditor2 = editor2.get('nativeEditor');
+                var domNode = ReactDOM.findDOMNode(toolbarAdd);
 
-            nativeEditor2.on('instanceReady', function() {
-                var buttons;
-
-                // Editor1 is focused and should show the add toolbar. Editor2 should not.
-                buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
-
-                assert.equal(buttons.length, 1, 'Editor1 is focused. It should show the add toolbar');
-
-                buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
-
-                assert.equal(buttons.length, 0, 'Editor2 is not focused. It should not show the add toolbar');
-
-                happen.mousedown(editable2);
-                Utils.focusEditor(nativeEditor2);
-
-                // Editor2 is focused and should show the add toolbar. Editor1 should not.
-                setTimeout(function () {
-                    buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
-
-                    assert.equal(buttons.length, 0, 'Editor1 is not focused. It should not show the add toolbar');
-
-                    buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
-
-                    assert.equal(buttons.length, 1, 'Editor2 is focused. It should show the add toolbar');
-
-                    happen.mousedown(empty);
-
-                    // None of the editors is focused. None of them should show the add toolbar.
-                    buttons = TestUtils.scryRenderedDOMComponentsWithClass(this.editor._mainUI, 'ae-button-add');
-
-                    assert.equal(buttons.length, 0, 'Editor1 is not focused. It should not show the add toolbar');
-
-                    buttons = TestUtils.scryRenderedDOMComponentsWithClass(editor2._mainUI, 'ae-button-add');
-
-                    assert.equal(buttons.length, 0, 'Editor1 is not focused. It should not show the add toolbar');
-
-                    CKEDITOR.focusManager._.blurDelay = blurDelay;
-
-                    done();
-                }.bind(this), 0);
-            }.bind(this));
+                assert.isTrue(domNode.offsetLeft > editable.$.offsetLeft);
+            });
         });
     });
 }());
