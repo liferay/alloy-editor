@@ -33271,6 +33271,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
     'use strict';
 
+    var POSITION_LEFT = 1;
+    var POSITION_RIGHT = 2;
+
     /**
      * The ToolbarAdd class provides functionality for adding content to the editor.
      *
@@ -33283,7 +33286,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      *
      * @class ToolbarAdd
      */
-
     var ToolbarAdd = React.createClass({
         displayName: 'ToolbarAdd',
 
@@ -33334,6 +33336,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             onDismiss: React.PropTypes.func,
 
             /**
+             * Whether the Toolbar should be shown on left or on right of the editable area. Could be one of these:
+             * - ToolbarAdd.left
+             * - ToolbarAdd.right
+             *
+             * @property {Enum} position
+             */
+            position: React.PropTypes.oneOf([POSITION_LEFT, POSITION_RIGHT]),
+
+            /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
              *
              * @property {Object} selectionData
@@ -33350,7 +33361,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * @property {String} key
              * @default add
              */
-            key: 'add'
+            key: 'add',
+
+            /**
+             * Defines the constant for positioning the Toolbar on left of the editable area.
+             *
+             * @static
+             * @property {String} left
+             * @default 1
+             */
+            left: POSITION_LEFT,
+
+            /**
+             * Defines the constant for positioning the Toolbar on right of the editable area.
+             *
+             * @static
+             * @property {String} right
+             * @default 2
+             */
+            right: POSITION_RIGHT
         },
 
         /**
@@ -33371,7 +33400,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     dismiss: [27],
                     next: [39, 40],
                     prev: [37, 38]
-                }
+                },
+                position: POSITION_LEFT
             };
         },
 
@@ -33505,9 +33535,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     var domElement = new CKEDITOR.dom.element(domNode);
 
                     var startRect = region.startRect || region;
-                    var left = this.props.editor.get('nativeEditor').editable().getClientRect().left;
+                    var clientRect = this.props.editor.get('nativeEditor').editable().getClientRect();
 
-                    domNode.style.left = left - domNode.offsetWidth - this.props.gutterExclusive.left + 'px';
+                    var offsetLeft;
+
+                    if (this.props.config.position === POSITION_LEFT) {
+                        offsetLeft = clientRect.left - domNode.offsetWidth - this.props.gutterExclusive.left + 'px';
+                    } else {
+                        offsetLeft = clientRect.right + this.props.gutterExclusive.left + 'px';
+                    }
+
+                    domNode.style.left = offsetLeft;
                     domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2) + 'px';
                     domNode.style.opacity = 1;
 

@@ -178,6 +178,9 @@
                             (function () {
                                 &#x27;use strict&#x27;;
                             
+                                var POSITION_LEFT = 1;
+                                var POSITION_RIGHT = 2;
+                            
                                 /**
                                  * The ToolbarAdd class provides functionality for adding content to the editor.
                                  *
@@ -238,6 +241,15 @@
                                         onDismiss: React.PropTypes.func,
                             
                                         /**
+                                         * Whether the Toolbar should be shown on left or on right of the editable area. Could be one of these:
+                                         * - ToolbarAdd.left
+                                         * - ToolbarAdd.right
+                                         *
+                                         * @property {Enum} position
+                                         */
+                                        position: React.PropTypes.oneOf([POSITION_LEFT, POSITION_RIGHT]),
+                            
+                                        /**
                                          * The data, returned from {{#crossLink &quot;CKEDITOR.plugins.selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
                                          *
                                          * @property {Object} selectionData
@@ -254,7 +266,25 @@
                                          * @property {String} key
                                          * @default add
                                          */
-                                        key: &#x27;add&#x27;
+                                        key: &#x27;add&#x27;,
+                            
+                                        /**
+                                         * Defines the constant for positioning the Toolbar on left of the editable area.
+                                         *
+                                         * @static
+                                         * @property {String} left
+                                         * @default 1
+                                         */
+                                        left: POSITION_LEFT,
+                            
+                                        /**
+                                         * Defines the constant for positioning the Toolbar on right of the editable area.
+                                         *
+                                         * @static
+                                         * @property {String} right
+                                         * @default 2
+                                         */
+                                        right: POSITION_RIGHT
                                     },
                             
                                     /**
@@ -275,7 +305,8 @@
                                                 dismiss: [27],
                                                 next: [39, 40],
                                                 prev: [37, 38]
-                                            }
+                                            },
+                                            position: POSITION_LEFT
                                         };
                                     },
                             
@@ -410,9 +441,17 @@
                                                 var domElement = new CKEDITOR.dom.element(domNode);
                             
                                                 var startRect = region.startRect || region;
-                                                var left = this.props.editor.get(&#x27;nativeEditor&#x27;).editable().getClientRect().left;
+                                                var clientRect = this.props.editor.get(&#x27;nativeEditor&#x27;).editable().getClientRect();
                             
-                                                domNode.style.left = left - domNode.offsetWidth - this.props.gutterExclusive.left + &#x27;px&#x27;;
+                                                var offsetLeft;
+                            
+                                                if (this.props.config.position === POSITION_LEFT) {
+                                                    offsetLeft = clientRect.left - domNode.offsetWidth - this.props.gutterExclusive.left + &#x27;px&#x27;;
+                                                } else {
+                                                    offsetLeft = clientRect.right + this.props.gutterExclusive.left + &#x27;px&#x27;;
+                                                }
+                            
+                                                domNode.style.left = offsetLeft;
                                                 domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + &#x27;px&#x27;;
                                                 domNode.style.opacity = 1;
                             
