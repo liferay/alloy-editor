@@ -187,7 +187,7 @@ if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
         sl_ie_11: {
             base: 'SauceLabs',
             browserName: 'internet explorer',
-            platform: 'Windows 7',
+            platform: 'Windows 8.1',
             version: '11'
         }
     };
