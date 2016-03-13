@@ -268,7 +268,9 @@
 
                     var offsetLeft;
 
-                    if (this.props.config.position === POSITION_LEFT) {
+                    var position = this.props.config.position || this.props.position;
+
+                    if (position === POSITION_LEFT) {
                         offsetLeft = clientRect.left - domNode.offsetWidth - this.props.gutterExclusive.left + 'px';
                     } else {
                         offsetLeft = clientRect.right + this.props.gutterExclusive.left + 'px';
