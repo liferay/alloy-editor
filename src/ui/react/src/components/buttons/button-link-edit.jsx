@@ -48,7 +48,14 @@
              *
              * @property {Boolean} showTargetSelector
              */
-            showTargetSelector: React.PropTypes.bool
+            showTargetSelector: React.PropTypes.bool,
+
+            /**
+             * Autocomplete url including {term} placeholder
+             *
+             * @property {String} autocompleteUrl
+             */
+            autocompleteUrl: React.PropTypes.string
 
         },
 
@@ -104,7 +111,8 @@
             return {
                 defaultLinkTarget: '',
                 showTargetSelector: true,
-                appendProtocol: true
+                appendProtocol: true,
+                autocompleteUrl: ''
             };
         },
 
@@ -156,6 +164,22 @@
 
                 targetSelector = <AlloyEditor.ButtonLinkTargetEdit {...targetSelectorProps} />;
             }
+            
+            var autocompleteDropdown;
+            
+            if (this.props.autocompleteUrl) {
+	            var autocompleteDropdownProps = {
+		            autocompleteUrl: this.props.autocompleteUrl,
+		            term: this.state.linkHref,
+                    handleLinkAutocompleteClick: this._handleLinkAutocompleteClick,
+                    editor: this.props.editor,
+                    onDismiss: this.props.toggleDropdown,
+	            };
+
+                autocompleteDropdownProps = this.mergeDropdownProps(autocompleteDropdownProps, AlloyEditor.ButtonLinkAutocompleteList.key);
+
+	            autocompleteDropdown = <AlloyEditor.ButtonLinkAutocompleteList {...autocompleteDropdownProps} />;
+            }
 
             return (
                 <div className="ae-container-edit-link">
@@ -164,7 +188,10 @@
                     </button>
                     <div className="ae-container-input xxl">
                         {targetSelector}
-                        <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
+                        <div className="ae-container-input xxl">
+	                        <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
+	                        {autocompleteDropdown}
+                        </div>
                         <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
                     </div>
                     <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
@@ -272,6 +299,20 @@
             this.setState({
                 itemDropdown: null,
                 linkTarget: event.target.getAttribute('data-value')
+            });
+        },
+
+        /**
+         * Updates the component state when an autocomplete link result is selected by user interaction.
+         *
+         * @protected
+         * @method _handleLinkAutocompleteClick
+         * @param {SyntheticEvent} event The click event.
+         */
+        _handleLinkAutocompleteClick: function(event) {
+            this.setState({
+                itemDropdown: null,
+                linkHref: event.target.getAttribute('data-value')
             });
         },
 
