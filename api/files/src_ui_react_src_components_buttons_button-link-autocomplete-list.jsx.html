@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/buttons/button-ul.jsx - alloyeditor</title>
+    <title>src/ui/react/src/components/buttons/button-link-autocomplete-list.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -171,7 +171,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-ul.jsx</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-link-autocomplete-list.jsx</code></h1>
                             </div>
                             
                             <div class="file">
@@ -180,40 +180,33 @@
                                 &#x27;use strict&#x27;;
                             
                                 /**
-                                 * The ButtonUnorderedlist class provides functionality for creating unordered lists in an editor.
+                                 * The ButtonLinkAutocompleteList class provides functionality for showing a list of
+                                 * autocomplete urls that can be selected for the link.
                                  *
-                                 * @uses ButtonCommand
-                                 * @uses ButtonStateClasses
-                                 * @uses ButtonStyle
+                                 * @uses WidgetFocusManager
                                  *
-                                 * @class ButtonUnorderedlist
+                                 * @class ButtonLinkAutocompleteList
                                  */
-                                var ButtonUnorderedlist = React.createClass({
-                                    mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
+                                var ButtonLinkAutocompleteList = React.createClass({
+                                    mixins: [AlloyEditor.WidgetFocusManager],
                             
                                     // Allows validating props being passed to the component.
                                     propTypes: {
                                         /**
-                                         * The editor instance where the component is being used.
+                                         * Autocomplete url including {term} placeholder, for example:
+                                         * /api/autocomplete?term={term}
                                          *
-                                         * @property {Object} editor
+                                         * @property {String} autocompleteUrl
                                          */
-                                        editor: React.PropTypes.object.isRequired,
+                                        autocompleteUrl: React.PropTypes.string,
                             
                                         /**
-                                         * The label that should be used for accessibility purposes.
+                                         * The current term to autocomplete for
                                          *
-                                         * @property {String} label
+                                         * @property {String} term
                                          */
-                                        label: React.PropTypes.string,
+                                        term: React.PropTypes.string,
                             
-                                        /**
-                                         * The tabIndex of the button in its toolbar current state. A value other than -1
-                                         * means that the button has focus and is the active element.
-                                         *
-                                         * @property {Number} tabIndex
-                                         */
-                                        tabIndex: React.PropTypes.number
                                     },
                             
                                     // Lifecycle. Provides static properties to the widget.
@@ -223,9 +216,48 @@
                                          *
                                          * @static
                                          * @property {String} key
-                                         * @default ul
+                                         * @default buttonLinkAutocompleteList
                                          */
-                                        key: &#x27;ul&#x27;
+                                        key: &#x27;buttonLinkAutocompleteList&#x27;
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+                                     *
+                                     * @method componentWillMount
+                                     */
+                                    componentWillMount: function () {
+                                        this._timeout = null;
+                                        this._xhr = null;
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked when a component is receiving new props.
+                                     * This method is not called for the initial render.
+                                     *
+                                     * @method componentWillReceiveProps
+                                     */
+                                    componentWillReceiveProps: function(nextProps) {
+                                        if (!nextProps.term || nextProps.term !== this.props.term) {
+                                            this._timeout &amp;&amp; clearTimeout( this._timeout );
+                                            this._xhr &amp;&amp; this._xhr.abort();
+                                            this.setState({
+                                                items: []
+                                            });
+                                            if (nextProps.term) {
+                                                this._timeout = setTimeout( this._updateItems, 250 );
+                                            }
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+                                     *
+                                     * @method componentWillUnmount
+                                     */
+                                    componentWillUnmount: function() {
+                                        this._timeout &amp;&amp; clearTimeout( this._timeout );
+                                        this._xhr &amp;&amp; this._xhr.abort();
                                     },
                             
                                     /**
@@ -236,31 +268,122 @@
                                      */
                                     getDefaultProps: function() {
                                         return {
-                                            command: &#x27;bulletedlist&#x27;,
-                                            style: {
-                                                element: &#x27;ul&#x27;
+                                            circular: false,
+                                            descendants: &#x27;.ae-toolbar-element&#x27;,
+                                            keys: {
+                                                dismiss: [27],
+                                                dismissNext: [39],
+                                                dismissPrev: [37],
+                                                next: [40],
+                                                prev: [38]
                                             }
                                         };
                                     },
                             
                                     /**
-                                     * Lifecycle. Renders the UI of the button.
+                                     * Lifecycle. Invoked once before the component is mounted.
+                                     * The return value will be used as the initial value of this.state.
+                                     *
+                                     * @method getInitialState
+                                     */
+                                    getInitialState: function() {
+                                        return {
+                                            items: []
+                                        };
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Renders the UI of the list.
                                      *
                                      * @method render
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var cssClass = &#x27;ae-button &#x27; + this.getStateClasses();
-                            
+                                        if (! this.state.items.length) {
+                                            return null;
+                                        }
                                         return (
-                                            &lt;button aria-label={AlloyEditor.Strings.bulletedlist} aria-pressed={cssClass.indexOf(&#x27;pressed&#x27;) !== -1} className={cssClass} data-type=&quot;button-ul&quot; onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.bulletedlist}&gt;
-                                                &lt;span className=&quot;ae-icon-bulleted-list&quot;&gt;&lt;/span&gt;
-                                            &lt;/button&gt;
+                                            &lt;AlloyEditor.ButtonDropdown&gt;
+                                                {this._renderAutocompleteItems(this.state.items)}
+                                            &lt;/AlloyEditor.ButtonDropdown&gt;
                                         );
+                                    },
+                            
+                                    /**
+                                     * Renders a set of list items for the provided items
+                                     *
+                                     * @protected
+                                     * @method _renderAutocompleteItems
+                                     * @param {Array} items List of autocomplete items to render.
+                                     * @return {Array} Rendered list item instances
+                                     */
+                                    _renderAutocompleteItems: function(items) {
+                                        items = items || [];
+                                        
+                                        var handleLinkAutocompleteClick = this.props.handleLinkAutocompleteClick;
+                                        
+                                        return items.map(function(item) {
+                                            return (
+                                                &lt;li key={item.Url} role=&quot;option&quot;&gt;
+                                                    &lt;button className=&quot;ae-toolbar-element&quot; onClick={handleLinkAutocompleteClick} data-value={item.Url}&gt;{item.Title}&lt;/button&gt;
+                                                &lt;/li&gt;
+                                            );
+                                        });
+                                    },
+                            
+                                    /**
+                                     * Conditionally makes request to autocomplete endpoint for 
+                                     * matching items and then calls setState().
+                                     *
+                                     * @protected
+                                     * @method _updateItems
+                                     */
+                                    _updateItems: function() {
+                                        if (!this.props.term) {
+                                            return;
+                                        }
+                                        var that = this, url = this.props.autocompleteUrl.replace(&quot;{term}&quot;, this.props.term);
+                                        this._makeRequest( url, function( data ) {
+                                            that.setState({
+                                                items: JSON.parse(data).links
+                                            });
+                                        } );
+                                    },
+                            
+                                    _makeRequest: function(url, callback) {
+                                        var xhr = this._xhr = this._getXHR();
+                            
+                                        if ( !xhr )
+                                            return null;
+                            
+                                        xhr.open( &#x27;GET&#x27;, url, true );
+                            
+                                        xhr.onreadystatechange = function() {
+                                            if ( xhr.readyState == 4 &amp;&amp; ( ( xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300 ) || xhr.status == 304 || xhr.status == 1223 ) ) {
+                                                callback( xhr.responseText );
+                                                this._xhr = xhr = null;
+                                            }
+                                        };
+                                        xhr.send( null );
+                                    },
+                            
+                                    _getXHR: function() {
+                                        if ( !CKEDITOR.env.ie || location.protocol != &#x27;file:&#x27; ) {
+                                            try {
+                                                return new XMLHttpRequest();
+                                            } catch ( e ) {}
+                                        }
+                            
+                                        try {
+                                            return new ActiveXObject( &#x27;Msxml2.XMLHTTP&#x27; );
+                                        } catch ( e ) {}
+                                        try {
+                                            return new ActiveXObject( &#x27;Microsoft.XMLHTTP&#x27; );
+                                        } catch ( e ) {}
                                     }
                                 });
                             
-                                AlloyEditor.Buttons[ButtonUnorderedlist.key] = AlloyEditor.ButtonUnorderedlist = ButtonUnorderedlist;
+                                AlloyEditor.ButtonLinkAutocompleteList = ButtonLinkAutocompleteList;
                             }());
                                 </pre>
                             </div>
