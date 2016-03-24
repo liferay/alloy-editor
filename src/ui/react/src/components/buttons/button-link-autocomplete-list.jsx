@@ -15,12 +15,11 @@
         // Allows validating props being passed to the component.
         propTypes: {
             /**
-             * Autocomplete url including {term} placeholder, for example:
-             * /api/autocomplete?term={term}
+             * Autocomplete function
              *
-             * @property {String} autocompleteUrl
+             * @property {Function} data
              */
-            autocompleteUrl: React.PropTypes.string,
+            data: React.PropTypes.func,
 
             /**
              * The current term to autocomplete for
@@ -121,7 +120,7 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            if (! this.state.items.length) {
+            if (! this.props.expanded || ! this.state.items.length) {
                 return null;
             }
             return (
@@ -129,6 +128,18 @@
                     {this._renderAutocompleteItems(this.state.items)}
                 </AlloyEditor.ButtonDropdown>
             );
+        },
+
+        /**
+         * Lifecycle. Invoked before rendering when new props or state are being received.
+         * This method is not called for the initial render or when forceUpdate is used.
+         *
+         * @method  shouldComponentUpdate
+         * @return {Boolean} Returns false when the transition to the new props and state will not
+         * require a component update.
+         */
+        shouldComponentUpdate: function(nextProps, nextState) {
+            return nextProps.expanded !== this.props.expanded || nextProps.term !== this.props.term || nextState.items !== this.state.items;
         },
 
         /**
@@ -146,16 +157,15 @@
             
             return items.map(function(item) {
                 return (
-                    <li key={item.Url} role="option">
-                        <button className="ae-toolbar-element" onClick={handleLinkAutocompleteClick} data-value={item.Url}>{item.Title}</button>
+                    <li key={item.url} role="option">
+                        <button className="ae-toolbar-element" onClick={handleLinkAutocompleteClick} data-value={item.url}>{item.title}</button>
                     </li>
                 );
             });
         },
 
         /**
-         * Conditionally makes request to autocomplete endpoint for 
-         * matching items and then calls setState().
+         * Conditionally resolves data Promise and then calls setState().
          *
          * @protected
          * @method _updateItems
@@ -164,44 +174,19 @@
             if (!this.props.term) {
                 return;
             }
-            var that = this, url = this.props.autocompleteUrl.replace("{term}", this.props.term);
-            this._makeRequest( url, function( data ) {
-                that.setState({
-                    items: JSON.parse(data).links
-                });
-            } );
-        },
-
-        _makeRequest: function(url, callback) {
-            var xhr = this._xhr = this._getXHR();
-
-            if ( !xhr )
-                return null;
-
-            xhr.open( 'GET', url, true );
-
-            xhr.onreadystatechange = function() {
-                if ( xhr.readyState == 4 && ( ( xhr.status >= 200 && xhr.status < 300 ) || xhr.status == 304 || xhr.status == 1223 ) ) {
-                    callback( xhr.responseText );
-                    this._xhr = xhr = null;
-                }
-            };
-            xhr.send( null );
-        },
-
-        _getXHR: function() {
-            if ( !CKEDITOR.env.ie || location.protocol != 'file:' ) {
-                try {
-                    return new XMLHttpRequest();
-                } catch ( e ) {}
+            var promise = this.props.data(this.props.term);
+            if (typeof promise.then !== 'function') {
+            	promise = Promise.resolve(promise);
             }
-
-            try {
-                return new ActiveXObject( 'Msxml2.XMLHTTP' );
-            } catch ( e ) {}
-            try {
-                return new ActiveXObject( 'Microsoft.XMLHTTP' );
-            } catch ( e ) {}
+            var that = this;
+            promise.then(function(items) {
+	            if (items.length) {
+		            ! that.props.expanded && that.props.toggleDropdown();
+	            }
+	            that.setState({
+                    items: items
+                });
+            });
         }
     });
 

@@ -51,11 +51,14 @@
             showTargetSelector: React.PropTypes.bool,
 
             /**
-             * Autocomplete url including {term} placeholder
+             * Autocomplete array or function. Autocomplete object must have title and url keys.
              *
-             * @property {String} autocompleteUrl
+             * @property {Function} data
              */
-            autocompleteUrl: React.PropTypes.string
+            data: React.PropTypes.oneOfType([
+				React.PropTypes.func,
+				React.PropTypes.arrayOf(React.PropTypes.object)
+			])
 
         },
 
@@ -167,9 +170,16 @@
             
             var autocompleteDropdown;
             
-            if (this.props.autocompleteUrl) {
+            if (this.props.data) {
+	            var dataFunction = this.props.data;
+	            if (AlloyEditor.Lang.isArray(this.props.data)) {
+		            var dataArray = this.props.data;
+		            dataFunction = function(term) {
+			            return dataArray;
+		            };
+	            }
 	            var autocompleteDropdownProps = {
-		            autocompleteUrl: this.props.autocompleteUrl,
+		            data: dataFunction,
 		            term: this.state.linkHref,
                     handleLinkAutocompleteClick: this._handleLinkAutocompleteClick,
                     editor: this.props.editor,
