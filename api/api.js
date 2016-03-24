@@ -26,6 +26,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonItalic",
         "ButtonKeystroke",
         "ButtonLink",
+        "ButtonLinkAutocompleteList",
         "ButtonLinkEdit",
         "ButtonLinkTargetEdit",
         "ButtonOrderedList",
