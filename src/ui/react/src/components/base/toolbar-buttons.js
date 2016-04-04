@@ -20,15 +20,19 @@
         getToolbarButtons: function(buttons, additionalProps) {
             var buttonProps = {};
 
+            var nativeEditor = this.props.editor.get('nativeEditor');
+            var buttonCfg = nativeEditor.config.buttonCfg || {};
+
             var toolbarButtons = this.filterExclusive(
                     buttons.filter(function(button) {
                         return button && (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
                     })
                     .map(function(button) {
                         if (AlloyEditor.Lang.isString(button)) {
+                            buttonProps[button]= buttonCfg[button];
                             button = AlloyEditor.Buttons[button];
                         } else if (AlloyEditor.Lang.isString(button.name)) {
-                            buttonProps[AlloyEditor.Buttons[button.name].key] = button.cfg;
+                            buttonProps[AlloyEditor.Buttons[button.name].key] = CKEDITOR.tools.merge(buttonCfg[button], button.cfg);
                             button = AlloyEditor.Buttons[button.name];
                         }
 
