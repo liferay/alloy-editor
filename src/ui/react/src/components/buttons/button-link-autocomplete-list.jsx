@@ -3,7 +3,7 @@
 
     /**
      * The ButtonLinkAutocompleteList class provides functionality for showing a list of
-     * autocomplete urls that can be selected for the link.
+     * items that can be selected for the link.
      *
      * @uses WidgetFocusManager
      *
@@ -43,16 +43,6 @@
         },
 
         /**
-         * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
-         *
-         * @method componentWillMount
-         */
-        componentWillMount: function () {
-            this._timeout = null;
-            this._xhr = null;
-        },
-
-        /**
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
          *
@@ -60,13 +50,14 @@
          */
         componentWillReceiveProps: function(nextProps) {
             if (!nextProps.term || nextProps.term !== this.props.term) {
-                this._timeout && clearTimeout( this._timeout );
-                this._xhr && this._xhr.abort();
-                this.setState({
-                    items: []
-                });
+                clearTimeout(this._timeout);
+
                 if (nextProps.term) {
-                    this._timeout = setTimeout( this._updateItems, 250 );
+                    this._timeout = setTimeout(this._updateItems, this.props.delay);
+                } else {
+                    this.setState({
+                        items: []
+                    });
                 }
             }
         },
@@ -77,8 +68,7 @@
          * @method componentWillUnmount
          */
         componentWillUnmount: function() {
-            this._timeout && clearTimeout( this._timeout );
-            this._xhr && this._xhr.abort();
+            clearTimeout(this._timeout);
         },
 
         /**
@@ -90,6 +80,8 @@
         getDefaultProps: function() {
             return {
                 circular: false,
+                data: [],
+                delay: 100,
                 descendants: '.ae-toolbar-element',
                 keys: {
                     dismiss: [27],
@@ -120,9 +112,10 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            if (! this.props.expanded || ! this.state.items.length) {
+            if (!this.props.expanded || !this.state.items.length) {
                 return null;
             }
+
             return (
                 <AlloyEditor.ButtonDropdown>
                     {this._renderAutocompleteItems(this.state.items)}
@@ -147,14 +140,14 @@
          *
          * @protected
          * @method _renderAutocompleteItems
-         * @param {Array} items List of autocomplete items to render.
+         * @param {Array} items List of autocomplete items to render
          * @return {Array} Rendered list item instances
          */
         _renderAutocompleteItems: function(items) {
             items = items || [];
-            
+
             var handleLinkAutocompleteClick = this.props.handleLinkAutocompleteClick;
-            
+
             return items.map(function(item) {
                 return (
                     <li key={item.url} role="option">
@@ -165,25 +158,26 @@
         },
 
         /**
-         * Conditionally resolves data Promise and then calls setState().
+         * Retrieves the data according to {this.props.term} and calls setState() with the returned data
          *
          * @protected
          * @method _updateItems
          */
         _updateItems: function() {
+            var instance = this;
+
             if (!this.props.term) {
                 return;
             }
-            var promise = this.props.data(this.props.term);
-            if (typeof promise.then !== 'function') {
-            	promise = Promise.resolve(promise);
-            }
-            var that = this;
+
+            var promise = Promise.resolve(this.props.data(this.props.term));
+
             promise.then(function(items) {
 	            if (items.length) {
-		            ! that.props.expanded && that.props.toggleDropdown();
+		            !instance.props.expanded && instance.props.toggleDropdown();
 	            }
-	            that.setState({
+
+	            instance.setState({
                     items: items
                 });
             });
