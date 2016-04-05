@@ -10,11 +10,12 @@
      *
      * @uses ButtonKeystroke
      * @uses ButtonStateClasses
+     * @uses ButtonCfgProps
      *
      * @class ButtonLink
      */
     var ButtonLink = React.createClass({
-        mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses],
+        mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCfgProps],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -88,8 +89,10 @@
             var cssClass = 'ae-button ' + this.getStateClasses();
 
             if (this.props.renderExclusive) {
+                var props = this.mergeButtonCfgProps();
+
                 return (
-                    <AlloyEditor.ButtonLinkEdit {...this.props} />
+                    <AlloyEditor.ButtonLinkEdit {...props} />
                 );
             } else {
                 return (

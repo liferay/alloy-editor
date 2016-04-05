@@ -8,10 +8,13 @@
      * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
      * Provides UI for creating, editing and removing a link.
      *
+     * @uses WidgetDropdown
+     * @uses ButtonCfgProps
+     *
      * @class ButtonLinkEdit
      */
     var ButtonLinkEdit = React.createClass({
-        mixins: [AlloyEditor.WidgetDropdown],
+        mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.ButtonCfgProps],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -165,7 +168,9 @@
 
                 targetSelectorProps = this.mergeDropdownProps(targetSelectorProps, AlloyEditor.ButtonLinkTargetEdit.key);
 
-                targetSelector = <AlloyEditor.ButtonLinkTargetEdit {...targetSelectorProps} />;
+                var props = this.mergeButtonCfgProps(targetSelectorProps);
+
+                targetSelector = <AlloyEditor.ButtonLinkTargetEdit {...props} />;
             }
 
             var autocompleteDropdown;
@@ -177,15 +182,7 @@
                     var items = this.props.data;
 
                     dataFn = function(term) {
-                        var result = [];
-
-                        items.forEach(function(item) {
-                            if (item.title.toLowerCase().indexOf(term) === 0) {
-                                result.push(item);
-                            }
-                        });
-
-                        return result;
+                        return items;
                     };
                 }
 
