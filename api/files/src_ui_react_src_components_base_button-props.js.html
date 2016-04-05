@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonsStylesListHeader - alloyeditor</title>
+    <title>src/ui/react/src/components/base/button-props.js - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -172,102 +172,54 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonsStylesListHeader <small>Class</small></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/base/button-props.js</code></h1>
                             </div>
                             
-                            <div class="well well-small">
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
                             
+                                /**
+                                 * ButtonCfgProps is a mixin that provides a style prop and some methods to apply the resulting
+                                 * style and checking if it is present in a given path or selection.
+                                 *
+                                 * @class ButtonCfgProps
+                                 */
+                                var ButtonCfgProps = {
+                                	// Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * The editor instance where the component is being used.
+                                         *
+                                         * @property {Object} editor
+                                         */
+                                        editor: React.PropTypes.object.isRequired
+                                    },
                             
-                                    <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-styles-list-header.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-header.jsx:4</code></a>
-                                    </div>
+                                    /**
+                                     * Merges the properties, passed to the current component with user&#x27;s configuration
+                                     * via &#x60;buttonCfg&#x60; property.
+                                     *
+                                     * @method mergeButtonCfgProps
+                                     * @param {Object} props The properties to be merged with the provided configuration for this
+                                     * button. If not passed, the user configuration will be merged with &#x60;this.props&#x60;
+                                     * @return {Object} The merged properties
+                                     */
+                                    mergeButtonCfgProps: function(props) {
+                                    	props = props || this.props;
                             
+                                    	var nativeEditor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            			var buttonCfg = nativeEditor.config.buttonCfg || {};
+                            			var result = CKEDITOR.tools.merge(props, buttonCfg[AlloyEditor.ButtonLinkEdit.key]);
                             
-                            </div>
+                            			return result;
+                                    }
+                                };
                             
-                            
-                            <div class="well well-small intro">
-                                <p>The ButtonsStylesListHeader class provides the header of an list of style items.</p>
-                            
-                            </div>
-                            
-                            
-                            <div id="classdocs">
-                                <ul class="api-class-tabs nav nav-tabs">
-                                    <li class="api-class-tab index"><a href="#index">Index</a></li>
-                            
-                                        <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-                                </ul>
-                            
-                                <div>
-                                    <div id="index" class="api-class-tabpanel index tab-pane">
-                                        <h2 class="off-left">Index</h2>
-                            
-                                            <div class="index-section methods">
-                                                <h3>Methods</h3>
-                            
-                                                <ul class="index-list methods">
-                                                        <li class="index-item method">
-                                                            <a href="#method_render">render</a>
-                            
-                                                        </li>
-                                                </ul>
-                                            </div>
-                            
-                            
-                            
-                                    </div>
-                            
-                                        <div id="methods" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Methods</h2>
-                            
-                                                <div id="method_render" class="method item">
-                                                    <h3 class="name"><code>render</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-header.jsx.html#l10"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-header.jsx:10</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Renders the UI of the button.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The content which should be rendered.</p>
-                                                
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
-                                        </div>
-                            
-                            
-                            
-                                </div>
+                                AlloyEditor.ButtonCfgProps = ButtonCfgProps;
+                            }());
+                                </pre>
                             </div>
                         </div>
                     </div>

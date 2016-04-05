@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonsStylesListHeader - alloyeditor</title>
+    <title>src/ui/react/src/components/buttons/button-link-autocomplete-list.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -172,102 +172,200 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonsStylesListHeader <small>Class</small></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-link-autocomplete-list.jsx</code></h1>
                             </div>
                             
-                            <div class="well well-small">
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function () {
+                                &#x27;use strict&#x27;;
                             
+                                /**
+                                 * The ButtonLinkAutocompleteList class provides functionality for showing a list of
+                                 * items that can be selected for the link.
+                                 *
+                                 * @uses WidgetFocusManager
+                                 *
+                                 * @class ButtonLinkAutocompleteList
+                                 */
+                                var ButtonLinkAutocompleteList = React.createClass({
+                                    mixins: [AlloyEditor.WidgetFocusManager],
                             
-                                    <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-styles-list-header.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-header.jsx:4</code></a>
-                                    </div>
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * Autocomplete function
+                                         *
+                                         * @property {Function} data
+                                         */
+                                        data: React.PropTypes.func,
                             
+                                        /**
+                                         * The current term to autocomplete for
+                                         *
+                                         * @property {String} term
+                                         */
+                                        term: React.PropTypes.string,
                             
-                            </div>
+                                    },
                             
+                                    // Lifecycle. Provides static properties to the widget.
+                                    statics: {
+                                        /**
+                                         * The name which will be used as an alias of the button in the configuration.
+                                         *
+                                         * @static
+                                         * @property {String} key
+                                         * @default buttonLinkAutocompleteList
+                                         */
+                                        key: &#x27;buttonLinkAutocompleteList&#x27;
+                                    },
                             
-                            <div class="well well-small intro">
-                                <p>The ButtonsStylesListHeader class provides the header of an list of style items.</p>
+                                    /**
+                                     * Lifecycle. Invoked when a component is receiving new props.
+                                     * This method is not called for the initial render.
+                                     *
+                                     * @method componentWillReceiveProps
+                                     */
+                                    componentWillReceiveProps: function(nextProps) {
+                                        if (!nextProps.term || nextProps.term !== this.props.term) {
+                                            clearTimeout(this._timeout);
                             
-                            </div>
+                                            if (nextProps.term) {
+                                                this._timeout = setTimeout(this._updateItems, this.props.delay);
+                                            } else {
+                                                this.setState({
+                                                    items: []
+                                                });
+                                            }
+                                        }
+                                    },
                             
+                                    /**
+                                     * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+                                     *
+                                     * @method componentWillUnmount
+                                     */
+                                    componentWillUnmount: function() {
+                                        clearTimeout(this._timeout);
+                                    },
                             
-                            <div id="classdocs">
-                                <ul class="api-class-tabs nav nav-tabs">
-                                    <li class="api-class-tab index"><a href="#index">Index</a></li>
+                                    /**
+                                     * Lifecycle. Returns the default values of the properties used in the widget.
+                                     *
+                                     * @method getDefaultProps
+                                     * @return {Object} The default properties.
+                                     */
+                                    getDefaultProps: function() {
+                                        return {
+                                            circular: false,
+                                            data: [],
+                                            delay: 100,
+                                            descendants: &#x27;.ae-toolbar-element&#x27;,
+                                            keys: {
+                                                dismiss: [27],
+                                                dismissNext: [39],
+                                                dismissPrev: [37],
+                                                next: [40],
+                                                prev: [38]
+                                            }
+                                        };
+                                    },
                             
-                                        <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-                                </ul>
+                                    /**
+                                     * Lifecycle. Invoked once before the component is mounted.
+                                     * The return value will be used as the initial value of this.state.
+                                     *
+                                     * @method getInitialState
+                                     */
+                                    getInitialState: function() {
+                                        return {
+                                            items: []
+                                        };
+                                    },
                             
-                                <div>
-                                    <div id="index" class="api-class-tabpanel index tab-pane">
-                                        <h2 class="off-left">Index</h2>
+                                    /**
+                                     * Lifecycle. Renders the UI of the list.
+                                     *
+                                     * @method render
+                                     * @return {Object} The content which should be rendered.
+                                     */
+                                    render: function() {
+                                        if (!this.props.expanded || !this.state.items.length) {
+                                            return null;
+                                        }
                             
-                                            <div class="index-section methods">
-                                                <h3>Methods</h3>
+                                        return (
+                                            &lt;AlloyEditor.ButtonDropdown&gt;
+                                                {this._renderAutocompleteItems(this.state.items)}
+                                            &lt;/AlloyEditor.ButtonDropdown&gt;
+                                        );
+                                    },
                             
-                                                <ul class="index-list methods">
-                                                        <li class="index-item method">
-                                                            <a href="#method_render">render</a>
+                                    /**
+                                     * Lifecycle. Invoked before rendering when new props or state are being received.
+                                     * This method is not called for the initial render or when forceUpdate is used.
+                                     *
+                                     * @method  shouldComponentUpdate
+                                     * @return {Boolean} Returns false when the transition to the new props and state will not
+                                     * require a component update.
+                                     */
+                                    shouldComponentUpdate: function(nextProps, nextState) {
+                                        return nextProps.expanded !== this.props.expanded || nextProps.term !== this.props.term || nextState.items !== this.state.items;
+                                    },
                             
-                                                        </li>
-                                                </ul>
-                                            </div>
+                                    /**
+                                     * Renders a set of list items for the provided items
+                                     *
+                                     * @protected
+                                     * @method _renderAutocompleteItems
+                                     * @param {Array} items List of autocomplete items to render
+                                     * @return {Array} Rendered list item instances
+                                     */
+                                    _renderAutocompleteItems: function(items) {
+                                        items = items || [];
                             
+                                        var handleLinkAutocompleteClick = this.props.handleLinkAutocompleteClick;
                             
+                                        return items.map(function(item) {
+                                            return (
+                                                &lt;li key={item.url} role=&quot;option&quot;&gt;
+                                                    &lt;button className=&quot;ae-toolbar-element&quot; onClick={handleLinkAutocompleteClick} data-value={item.url}&gt;{item.title}&lt;/button&gt;
+                                                &lt;/li&gt;
+                                            );
+                                        });
+                                    },
                             
-                                    </div>
+                                    /**
+                                     * Retrieves the data according to {this.props.term} and calls setState() with the returned data
+                                     *
+                                     * @protected
+                                     * @method _updateItems
+                                     */
+                                    _updateItems: function() {
+                                        var instance = this;
                             
-                                        <div id="methods" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Methods</h2>
+                                        if (!this.props.term) {
+                                            return;
+                                        }
                             
-                                                <div id="method_render" class="method item">
-                                                    <h3 class="name"><code>render</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-styles-list-header.jsx.html#l10"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-styles-list-header.jsx:10</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Lifecycle. Renders the UI of the button.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The content which should be rendered.</p>
-                                                
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
-                                        </div>
+                                        var promise = Promise.resolve(this.props.data(this.props.term));
                             
+                                        promise.then(function(items) {
+                            	            if (items.length) {
+                            		            !instance.props.expanded &amp;&amp; instance.props.toggleDropdown();
+                            	            }
                             
+                            	            instance.setState({
+                                                items: items
+                                            });
+                                        });
+                                    }
+                                });
                             
-                                </div>
+                                AlloyEditor.ButtonLinkAutocompleteList = ButtonLinkAutocompleteList;
+                            }());
+                                </pre>
                             </div>
                         </div>
                     </div>

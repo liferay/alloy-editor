@@ -63,6 +63,7 @@
                                     <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
                                     <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
                                     <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
                                     <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
                                     <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
                                     <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
@@ -81,6 +82,7 @@
                                     <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
                                     <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
                                     <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
                                     <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
@@ -187,11 +189,12 @@
                                  *
                                  * @uses ButtonKeystroke
                                  * @uses ButtonStateClasses
+                                 * @uses ButtonCfgProps
                                  *
                                  * @class ButtonLink
                                  */
                                 var ButtonLink = React.createClass({
-                                    mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses],
+                                    mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCfgProps],
                             
                                     // Allows validating props being passed to the component.
                                     propTypes: {
@@ -265,8 +268,10 @@
                                         var cssClass = &#x27;ae-button &#x27; + this.getStateClasses();
                             
                                         if (this.props.renderExclusive) {
+                                            var props = this.mergeButtonCfgProps();
+                            
                                             return (
-                                                &lt;AlloyEditor.ButtonLinkEdit {...this.props} /&gt;
+                                                &lt;AlloyEditor.ButtonLinkEdit {...props} /&gt;
                                             );
                                         } else {
                                             return (

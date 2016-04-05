@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonLinkEdit - alloyeditor</title>
+    <title>ButtonLinkAutocompleteList - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -172,21 +172,20 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonLinkEdit <small>Class</small></h1>
+                                <h1>ButtonLinkAutocompleteList <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
                                     <div class="uses">
                                         Uses:
                                         <ul class="inline commas">
-                                                <li><a href="WidgetDropdown.html">WidgetDropdown</a></li>
-                                                <li><a href="ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                                <li><a href="WidgetFocusManager.html">WidgetFocusManager</a></li>
                                         </ul>
                                     </div>
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l7"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:7</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:4</code></a>
                                     </div>
                             
                             
@@ -194,8 +193,8 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
-                            Provides UI for creating, editing and removing a link.</p>
+                                <p>The ButtonLinkAutocompleteList class provides functionality for showing a list of
+                            items that can be selected for the link.</p>
                             
                             </div>
                             
@@ -216,76 +215,80 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__clearLink">_clearLink</a>
+                                                        <li class="index-item method protected inherited">
+                                                            <a href="#method__getFocusAction">_getFocusAction</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected inherited">
+                                                            <a href="#method__getFocusDismissAction">_getFocusDismissAction</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected inherited">
+                                                            <a href="#method__getFocusMoveDirection">_getFocusMoveDirection</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected inherited inherited">
+                                                            <a href="#method__isValidKey">_isValidKey</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected inherited">
+                                                            <a href="#method__moveFocus">_moveFocus</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected inherited">
+                                                            <a href="#method__refresh">_refresh</a>
                             
                                                         </li>
                                                         <li class="index-item method protected">
-                                                            <a href="#method__focusLinkInput">_focusLinkInput</a>
+                                                            <a href="#method__renderAutocompleteItems">_renderAutocompleteItems</a>
                             
                                                         </li>
                                                         <li class="index-item method protected">
-                                                            <a href="#method__getALlowedTargetItems">_getALlowedTargetItems</a>
+                                                            <a href="#method__updateItems">_updateItems</a>
                             
                                                         </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__handleKeyDown">_handleKeyDown</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__handleLinkAutocompleteClick">_handleLinkAutocompleteClick</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__handleLinkHrefChange">_handleLinkHrefChange</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__handleLinkTargetChange">_handleLinkTargetChange</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__isValidState">_isValidState</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__removeLink">_removeLink</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__updateLink">_updateLink</a>
-                            
-                                                        </li>
-                                                        <li class="index-item method">
+                                                        <li class="index-item method inherited">
                                                             <a href="#method_componentDidMount">componentDidMount</a>
                             
                                                         </li>
                                                         <li class="index-item method inherited">
+                                                            <a href="#method_componentDidUpdate">componentDidUpdate</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
                                                             <a href="#method_componentWillReceiveProps">componentWillReceiveProps</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
+                                                            <a href="#method_componentWillUnmount">componentWillUnmount</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method inherited">
+                                                            <a href="#method_focus">focus</a>
                             
                                                         </li>
                                                         <li class="index-item method">
                                                             <a href="#method_getDefaultProps">getDefaultProps</a>
                             
                                                         </li>
-                                                        <li class="index-item method inherited">
+                                                        <li class="index-item method">
                                                             <a href="#method_getInitialState">getInitialState</a>
                             
                                                         </li>
                                                         <li class="index-item method inherited">
-                                                            <a href="#method_mergeButtonCfgProps">mergeButtonCfgProps</a>
+                                                            <a href="#method_handleKey">handleKey</a>
                             
                                                         </li>
                                                         <li class="index-item method inherited">
-                                                            <a href="#method_mergeDropdownProps">mergeDropdownProps</a>
+                                                            <a href="#method_moveFocus">moveFocus</a>
                             
                                                         </li>
                                                         <li class="index-item method">
                                                             <a href="#method_render">render</a>
                             
                                                         </li>
-                                                        <li class="index-item method inherited">
-                                                            <a href="#method_toggleDropdown">toggleDropdown</a>
+                                                        <li class="index-item method">
+                                                            <a href="#method_shouldComponentUpdate">shouldComponentUpdate</a>
                             
                                                         </li>
                                                 </ul>
@@ -295,24 +298,16 @@
                                                 <h3>Properties</h3>
                             
                                                 <ul class="index-list properties">
-                                                        <li class="index-item property">
-                                                            <a href="#property_allowedTargets">allowedTargets</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_appendProtocol">appendProtocol</a>
+                                                        <li class="index-item property inherited">
+                                                            <a href="#property_circular">circular</a>
                             
                                                         </li>
                                                         <li class="index-item property">
                                                             <a href="#property_data">data</a>
                             
                                                         </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_defaultLinkTarget">defaultLinkTarget</a>
-                            
-                                                        </li>
                                                         <li class="index-item property inherited">
-                                                            <a href="#property_editor">editor</a>
+                                                            <a href="#property_descendants">descendants</a>
                             
                                                         </li>
                                                         <li class="index-item property">
@@ -320,8 +315,16 @@
                             
                                                                 <span class="flag static">static</span>
                                                         </li>
+                                                        <li class="index-item property inherited">
+                                                            <a href="#property_keys">keys</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property inherited">
+                                                            <a href="#property_onDismiss">onDismiss</a>
+                            
+                                                        </li>
                                                         <li class="index-item property">
-                                                            <a href="#property_showTargetSelector">showTargetSelector</a>
+                                                            <a href="#property_term">term</a>
                             
                                                         </li>
                                                 </ul>
@@ -333,77 +336,19 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method__clearLink" class="method item protected">
-                                                    <h3 class="name"><code>_clearLink</code></h3>
+                                                <div id="method__getFocusAction" class="method item protected inherited">
+                                                    <h3 class="name"><code>_getFocusAction</code></h3>
                                                 
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                        <span class="flag protected">protected</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l222"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:222</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Clears the link input. This only changes the component internal state, but does not
-                                                affect the link element of the editor. Only the _removeLink and _updateLink methods
-                                                are translated to the editor element.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method__focusLinkInput" class="method item protected">
-                                                    <h3 class="name"><code>_focusLinkInput</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                        <span class="flag protected">protected</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l236"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:236</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Focuses the user cursor on the widget&#39;s input.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method__getALlowedTargetItems" class="method item protected">
-                                                    <h3 class="name"><code>_getALlowedTargetItems</code></h3>
-                                                
-                                                        <span class="paren">()</span>
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>event</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
                                                 
                                                         <span class="returns-inline">
-                                                            <span class="type">Array<object></span>
+                                                            <span class="type">Object</span>
                                                         </span>
                                                 
                                                 
@@ -414,9 +359,9 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l257"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:257</code></a>
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method__getFocusAction">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l134"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:134</code></a>
                                                         </p>
                                                 
                                                 
@@ -424,37 +369,57 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Returns an array of allowed target items. Each item consists of two properties:</p>
-                                                <ul>
-                                                <li>label - the label for the item, for example &quot;_self (same tab)&quot;</li>
-                                                <li>value - the value that will be set for the link target attribute</li>
-                                                </ul>
+                                                        <p>Returns the action, if any, that a keyboard event in the current focus manager state
+                                                should produce.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">event</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The Keyboard event.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                 
                                                         <div class="returns">
                                                             <h4>Returns:</h4>
                                                 
                                                             <div class="returns-description">
-                                                                        <span class="type">Array<object></span>:
-                                                                    <p>An array of objects containing the allowed items.</p>
+                                                                        <span class="type">Object</span>:
+                                                                    <p>An action object with type and direction properties.</p>
                                                 
                                                             </div>
                                                         </div>
                                                 
                                                 </div>
-                                                <div id="method__handleKeyDown" class="method item protected">
-                                                    <h3 class="name"><code>_handleKeyDown</code></h3>
+                                                <div id="method__getFocusDismissAction" class="method item protected inherited">
+                                                    <h3 class="name"><code>_getFocusDismissAction</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
                                                                         <code>event</code>
                                                                 </li>
+                                                                <li class="arg">
+                                                                        <code>focusMoveDirection</code>
+                                                                </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
+                                                        <span class="returns-inline">
+                                                            <span class="type">Object</span>
+                                                        </span>
                                                 
                                                 
                                                         <span class="flag protected">protected</span>
@@ -464,9 +429,9 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l282"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:282</code></a>
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method__getFocusDismissAction">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l167"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:167</code></a>
                                                         </p>
                                                 
                                                 
@@ -474,10 +439,15 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Monitors key interaction inside the input element to respond to the keys:</p>
+                                                        <p><p>Returns the dismiss action, if any, the focus manager should execute to yield the focus. This
+                                                will happen in any of these scenarios if a dismiss callback has been specified:</p></p>
                                                 <ul>
-                                                <li>Enter: Creates/updates the link.</li>
-                                                <li>Escape: Discards the changes.</li>
+                                                <li>A dismiss key has been pressed</li>
+                                                <li>In a non-circular focus manager, when:<ul>
+                                                <li>The active descendant is the first one and a prev key has been pressed.</li>
+                                                <li>The active descendant is the last one and a next key has been pressed.</li>
+                                                </ul>
+                                                </li>
                                                 </ul>
                                                 
                                                     </div>
@@ -488,11 +458,22 @@
                                                             <ul class="params-list">
                                                                 <li class="param">
                                                                         <code class="param-name">event</code>
-                                                                        <span class="type">SyntheticEvent</span>
+                                                                        <span class="type">Object</span>
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The keyboard event.</p>
+                                                                        <p>The Keyboard event.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">focusMoveDirection</code>
+                                                                        <span class="type">Number</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The focus movement direction (if any).</p>
                                                 
                                                                     </div>
                                                 
@@ -500,10 +481,19 @@
                                                             </ul>
                                                         </div>
                                                 
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Object</span>:
+                                                                    <p>A dismiss action with dismiss and direction properties.</p>
+                                                
+                                                            </div>
+                                                        </div>
                                                 
                                                 </div>
-                                                <div id="method__handleLinkAutocompleteClick" class="method item protected">
-                                                    <h3 class="name"><code>_handleLinkAutocompleteClick</code></h3>
+                                                <div id="method__getFocusMoveDirection" class="method item protected inherited">
+                                                    <h3 class="name"><code>_getFocusMoveDirection</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
@@ -513,6 +503,9 @@
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
+                                                        <span class="returns-inline">
+                                                            <span class="type">Number</span>
+                                                        </span>
                                                 
                                                 
                                                         <span class="flag protected">protected</span>
@@ -522,9 +515,9 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l338"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:338</code></a>
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method__getFocusMoveDirection">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l211"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:211</code></a>
                                                         </p>
                                                 
                                                 
@@ -532,7 +525,8 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Updates the component state when an autocomplete link result is selected by user interaction.</p>
+                                                        <p>Returns the direction, if any, in which the focus should be moved. In presence of the
+                                                shift key modifier, the direction of the movement is inverted.</p>
                                                 
                                                     </div>
                                                 
@@ -542,11 +536,11 @@
                                                             <ul class="params-list">
                                                                 <li class="param">
                                                                         <code class="param-name">event</code>
-                                                                        <span class="type">SyntheticEvent</span>
+                                                                        <span class="type">Object</span>
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The click event.</p>
+                                                                        <p>The Keyboard event.</p>
                                                 
                                                                     </div>
                                                 
@@ -554,120 +548,30 @@
                                                             </ul>
                                                         </div>
                                                 
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Number</span>:
+                                                                    <p>The computed direction of the expected focus movement.</p>
+                                                
+                                                            </div>
+                                                        </div>
                                                 
                                                 </div>
-                                                <div id="method__handleLinkHrefChange" class="method item protected">
-                                                    <h3 class="name"><code>_handleLinkHrefChange</code></h3>
+                                                <div id="method__isValidKey" class="method item protected inherited">
+                                                    <h3 class="name"><code>_isValidKey</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>event</code>
+                                                                        <code>keyCode</code>
                                                                 </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
-                                                
-                                                
-                                                
-                                                        <span class="flag protected">protected</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l307"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:307</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Updates the component state when the link input changes on user interaction.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">event</code>
-                                                                        <span class="type">SyntheticEvent</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The change event.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                
-                                                </div>
-                                                <div id="method__handleLinkTargetChange" class="method item protected">
-                                                    <h3 class="name"><code>_handleLinkTargetChange</code></h3>
-                                                
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>event</code>
+                                                                        <code>keys</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
-                                                
-                                                
-                                                
-                                                        <span class="flag protected">protected</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l322"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:322</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Updates the component state when the link target changes on user interaction.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">event</code>
-                                                                        <span class="type">SyntheticEvent</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The click event.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                
-                                                </div>
-                                                <div id="method__isValidState" class="method item protected">
-                                                    <h3 class="name"><code>_isValidState</code></h3>
-                                                
-                                                        <span class="paren">()</span>
                                                 
                                                         <span class="returns-inline">
                                                             <span class="type">Boolean</span>
@@ -681,9 +585,12 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l409"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:409</code></a>
+                                                            <p>Inherited from
+                                                            <a href="../classes/WidgetFocusManager.html#method__isValidKey">
+                                                                WidgetFocusManager
+                                                            </a>
+                                                            but overwritten in
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l237"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:237</code></a>
                                                         </p>
                                                 
                                                 
@@ -691,26 +598,203 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Verifies that the current link state is valid so the user can save the link. A valid state
-                                                means that we have a non-empty href and that either that or the link target are different
-                                                from the original link.</p>
+                                                        <p>Indicates if a given keyCode is valid for the given set of keys.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">keyCode</code>
+                                                                        <span class="type">Number</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>An event keyCode.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">keys</code>
+                                                                        <span class="type">Array | Number</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>A key set. Can be a number an array of numbers representing the allowed keyCodes.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                 
                                                         <div class="returns">
                                                             <h4>Returns:</h4>
                                                 
                                                             <div class="returns-description">
                                                                         <span class="type">Boolean</span>:
-                                                                    <p>[description]</p>
+                                                                    <p>A boolean value indicating if the key is valid.</p>
                                                 
                                                             </div>
                                                         </div>
                                                 
                                                 </div>
-                                                <div id="method__removeLink" class="method item protected">
-                                                    <h3 class="name"><code>_removeLink</code></h3>
+                                                <div id="method__moveFocus" class="method item protected inherited">
+                                                    <h3 class="name"><code>_moveFocus</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>direction</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method__moveFocus">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l266"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:266</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Moves the focus among descendants in the especified direction.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">direction</code>
+                                                                        <span class="type">Number</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The direction (1 or -1) of the focus movement among descendants.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method__refresh" class="method item protected inherited">
+                                                    <h3 class="name"><code>_refresh</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method__refresh">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l296"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:296</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Refreshes the descendants list by executing the CSS selector again and resets the descendants tabIndex.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method__renderAutocompleteItems" class="method item protected">
+                                                    <h3 class="name"><code>_renderAutocompleteItems</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>items</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Array</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l138"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:138</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Renders a set of list items for the provided items</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">items</code>
+                                                                        <span class="type">Array</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>List of autocomplete items to render</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Array</span>:
+                                                                    <p>Rendered list item instances</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method__updateItems" class="method item protected">
+                                                    <h3 class="name"><code>_updateItems</code></h3>
                                                 
                                                         <span class="paren">()</span>
                                                 
@@ -725,7 +809,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l354"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:354</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l160"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:160</code></a>
                                                         </p>
                                                 
                                                 
@@ -733,46 +817,14 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Removes the link in the editor element.</p>
+                                                        <p>Retrieves the data according to {this.props.term} and calls setState() with the returned data</p>
                                                 
                                                     </div>
                                                 
                                                 
                                                 
                                                 </div>
-                                                <div id="method__updateLink" class="method item protected">
-                                                    <h3 class="name"><code>_updateLink</code></h3>
-                                                
-                                                        <span class="paren">()</span>
-                                                
-                                                
-                                                
-                                                        <span class="flag protected">protected</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l377"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:377</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Updates the link in the editor element. If the element didn&#39;t exist previously, it will
-                                                create a new <a> element with the href specified in the link input.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="method_componentDidMount" class="method item">
+                                                <div id="method_componentDidMount" class="method item inherited">
                                                     <h3 class="name"><code>componentDidMount</code></h3>
                                                 
                                                         <span class="paren">()</span>
@@ -785,9 +837,9 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l84"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:84</code></a>
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method_componentDidMount">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l57"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:57</code></a>
                                                         </p>
                                                 
                                                 
@@ -796,8 +848,37 @@
                                                 
                                                     <div class="description">
                                                         <p>Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.</p>
-                                                <p>Focuses on the link input to immediately allow editing. This should only happen if the component
-                                                is rendered in exclusive mode to prevent aggressive focus stealing.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method_componentDidUpdate" class="method item inherited">
+                                                    <h3 class="name"><code>componentDidUpdate</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method_componentDidUpdate">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l66"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:66</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Lifecycle. Invoked immediately after the component&#39;s updates are flushed to the DOM.
+                                                Refreshes the descendants list.</p>
                                                 
                                                     </div>
                                                 
@@ -817,12 +898,9 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                            <p>Inherited from
-                                                            <a href="../classes/WidgetDropdown.html#method_componentWillReceiveProps">
-                                                                WidgetDropdown
-                                                            </a>
-                                                            but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l100"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:100</code></a>
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l45"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:45</code></a>
                                                         </p>
                                                 
                                                 
@@ -832,6 +910,68 @@
                                                     <div class="description">
                                                         <p>Lifecycle. Invoked when a component is receiving new props.
                                                 This method is not called for the initial render.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method_componentWillUnmount" class="method item">
+                                                    <h3 class="name"><code>componentWillUnmount</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l65"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:65</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Lifecycle. Invoked immediately before a component is unmounted from the DOM.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method_focus" class="method item inherited">
+                                                    <h3 class="name"><code>focus</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#method_focus">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l76"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:76</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Focuses the current active descendant.</p>
+                                                <p>Several Widgets can be nested in a component hierarchy by attaching this focus method to
+                                                the widget DOM node, transferring the DOM focus control to the inner FocusManager.</p>
                                                 
                                                     </div>
                                                 
@@ -856,7 +996,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l110"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:110</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l74"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:74</code></a>
                                                         </p>
                                                 
                                                 
@@ -893,12 +1033,9 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                            <p>Inherited from
-                                                            <a href="../classes/WidgetDropdown.html#method_getInitialState">
-                                                                WidgetDropdown
-                                                            </a>
-                                                            but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l125"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:125</code></a>
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l96"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:96</code></a>
                                                         </p>
                                                 
                                                 
@@ -914,20 +1051,17 @@
                                                 
                                                 
                                                 </div>
-                                                <div id="method_mergeButtonCfgProps" class="method item inherited">
-                                                    <h3 class="name"><code>mergeButtonCfgProps</code></h3>
+                                                <div id="method_handleKey" class="method item inherited">
+                                                    <h3 class="name"><code>handleKey</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>props</code>
+                                                                        <code>event</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
                                                 
                                                 
                                                 
@@ -937,8 +1071,8 @@
                                                 
                                                     <div class="meta">
                                                                 <p>Inherited from
-                                                                <a href="../classes/ButtonCfgProps.html#method_mergeButtonCfgProps">ButtonCfgProps</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_button-props.js.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-props.js:21</code></a>
+                                                                <a href="../classes/WidgetFocusManager.html#method_handleKey">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l97"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:97</code></a>
                                                         </p>
                                                 
                                                 
@@ -946,8 +1080,7 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Merges the properties, passed to the current component with user&#39;s configuration
-                                                via <code>buttonCfg</code> property.</p>
+                                                        <p>Handles the key events on a DOM node to execute the appropriate navigation when needed.</p>
                                                 
                                                     </div>
                                                 
@@ -956,13 +1089,12 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">props</code>
+                                                                        <code class="param-name">event</code>
                                                                         <span class="type">Object</span>
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The properties to be merged with the provided configuration for this
-                                                button. If not passed, the user configuration will be merged with <code>this.props</code></p>
+                                                                        <p>The Keyboard event that was detected on the widget DOM node.</p>
                                                 
                                                                     </div>
                                                 
@@ -970,34 +1102,19 @@
                                                             </ul>
                                                         </div>
                                                 
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The merged properties</p>
-                                                
-                                                            </div>
-                                                        </div>
                                                 
                                                 </div>
-                                                <div id="method_mergeDropdownProps" class="method item inherited">
-                                                    <h3 class="name"><code>mergeDropdownProps</code></h3>
+                                                <div id="method_moveFocus" class="method item inherited">
+                                                    <h3 class="name"><code>moveFocus</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>obj</code>
-                                                                </li>
-                                                                <li class="arg">
-                                                                        <code>itemKey</code>
+                                                                        <code>direction</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
                                                 
                                                 
                                                 
@@ -1007,8 +1124,8 @@
                                                 
                                                     <div class="meta">
                                                                 <p>Inherited from
-                                                                <a href="../classes/WidgetDropdown.html#method_mergeDropdownProps">WidgetDropdown</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-dropdown.js.html#l35"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-dropdown.js:35</code></a>
+                                                                <a href="../classes/WidgetFocusManager.html#method_moveFocus">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l122"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:122</code></a>
                                                         </p>
                                                 
                                                 
@@ -1016,11 +1133,7 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p><p>Merges the provided object with two more properties:</p></p>
-                                                <ul>
-                                                <li>expanded - boolean flag which indicates if an widget should be rendered exclusively.</li>
-                                                <li>toggleDropdown - function, which can be used by an widget in order to obtain exclusive state.</li>
-                                                </ul>
+                                                        <p>Moves the focus among descendants in the especified direction.</p>
                                                 
                                                     </div>
                                                 
@@ -1029,24 +1142,12 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">obj</code>
-                                                                        <span class="type">Object</span>
+                                                                        <code class="param-name">direction</code>
+                                                                        <span class="type">Number</span>
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The properties container which should be merged with the properties, related
-                                                   to dropdown state.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
-                                                                        <code class="param-name">itemKey</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>They key of an React Widget which contains the dropdown.</p>
+                                                                        <p>The direction (1 or -1) of the focus movement among descendants.</p>
                                                 
                                                                     </div>
                                                 
@@ -1054,15 +1155,6 @@
                                                             </ul>
                                                         </div>
                                                 
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The merged object.</p>
-                                                
-                                                            </div>
-                                                        </div>
                                                 
                                                 </div>
                                                 <div id="method_render" class="method item">
@@ -1083,7 +1175,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l147"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:147</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l108"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:108</code></a>
                                                         </p>
                                                 
                                                 
@@ -1091,7 +1183,7 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Lifecycle. Renders the UI of the button.</p>
+                                                        <p>Lifecycle. Renders the UI of the list.</p>
                                                 
                                                     </div>
                                                 
@@ -1107,20 +1199,14 @@
                                                         </div>
                                                 
                                                 </div>
-                                                <div id="method_toggleDropdown" class="method item inherited">
-                                                    <h3 class="name"><code>toggleDropdown</code></h3>
+                                                <div id="method_shouldComponentUpdate" class="method item">
+                                                    <h3 class="name"><code>shouldComponentUpdate</code></h3>
                                                 
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
-                                                                <li class="arg">
-                                                                        <code>itemDropdown</code>
-                                                                </li>
-                                                                <li class="arg">
-                                                                        <code>toggleDirection</code>
-                                                                </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
+                                                        <span class="paren">()</span>
                                                 
+                                                        <span class="returns-inline">
+                                                            <span class="type">Boolean</span>
+                                                        </span>
                                                 
                                                 
                                                 
@@ -1129,9 +1215,9 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>Inherited from
-                                                                <a href="../classes/WidgetDropdown.html#method_toggleDropdown">WidgetDropdown</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-dropdown.js.html#l54"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-dropdown.js:54</code></a>
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l126"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:126</code></a>
                                                         </p>
                                                 
                                                 
@@ -1139,39 +1225,22 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Sets the active dropdown of the widget or discards the toggled item from the state.</p>
+                                                        <p>Lifecycle. Invoked before rendering when new props or state are being received.
+                                                This method is not called for the initial render or when forceUpdate is used.</p>
                                                 
                                                     </div>
                                                 
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
                                                 
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">itemDropdown</code>
-                                                                        <span class="type">Object</span>
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
                                                 
+                                                            <div class="returns-description">
+                                                                        <span class="type">Boolean</span>:
+                                                                    <p>Returns false when the transition to the new props and state will not
+                                                require a component update.</p>
                                                 
-                                                                    <div class="param-description">
-                                                                        <p>The widget which requests to toggle its dropdown.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
-                                                                        <code class="param-name">toggleDirection</code>
-                                                                        <span class="type">Number</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>User movement direction when toggled via keyboard.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
+                                                            </div>
                                                         </div>
-                                                
                                                 
                                                 </div>
                                         </div>
@@ -1179,33 +1248,8 @@
                                         <div id="properties" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Properties</h2>
                             
-                                                <div id="property_allowedTargets" class="property item">
-                                                    <h3 class="name"><code>allowedTargets</code></h3>
-                                                    <span class="type">Array</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:21</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>List of the allowed values for the target attribute.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_appendProtocol" class="property item">
-                                                    <h3 class="name"><code>appendProtocol</code></h3>
+                                                <div id="property_circular" class="property item inherited">
+                                                    <h3 class="name"><code>circular</code></h3>
                                                     <span class="type">Boolean</span>
                                                 
                                                 
@@ -1213,16 +1257,16 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l28"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:28</code></a>
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#property_circular">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l33"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:33</code></a>
                                                         </p>
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Indicate if we add http:// protocol to link or not</p>
+                                                        <p>Indicates if focus should be set to the first/last descendant when the limits are reached.</p>
                                                 
                                                     </div>
                                                 
@@ -1231,7 +1275,7 @@
                                                 </div>
                                                 <div id="property_data" class="property item">
                                                     <h3 class="name"><code>data</code></h3>
-                                                    <span class="type">Function | Array</span>
+                                                    <span class="type">Function</span>
                                                 
                                                 
                                                 
@@ -1240,28 +1284,22 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l56"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:56</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l17"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:17</code></a>
                                                         </p>
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>List of items to be rendered as possible values for the link or a function, which is
-                                                supposed to retrieve the data. The function should return a Promise.
-                                                The returned items must be objects with at least two properties:</p>
-                                                <ul>
-                                                <li>title</li>
-                                                <li>url</li>
-                                                </ul>
+                                                        <p>Autocomplete function</p>
                                                 
                                                     </div>
                                                 
                                                 
                                                 
                                                 </div>
-                                                <div id="property_defaultLinkTarget" class="property item">
-                                                    <h3 class="name"><code>defaultLinkTarget</code></h3>
+                                                <div id="property_descendants" class="property item inherited">
+                                                    <h3 class="name"><code>descendants</code></h3>
                                                     <span class="type">String</span>
                                                 
                                                 
@@ -1269,44 +1307,16 @@
                                                 
                                                 
                                                     <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l42"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:42</code></a>
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#property_descendants">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l40"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:40</code></a>
                                                         </p>
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Default value of the link target attribute.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_editor" class="property item">
-                                                    <h3 class="name"><code>editor</code></h3>
-                                                    <span class="type">Object</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                            <p>Inherited from
-                                                            <a href="../classes/ButtonCfgProps.html#property_editor">
-                                                                ButtonCfgProps
-                                                            </a>
-                                                            but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l35"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:35</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The editor instance where the component is being used.</p>
+                                                        <p>String representing the CSS selector used to define the elements that should be handled.</p>
                                                 
                                                     </div>
                                                 
@@ -1325,7 +1335,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l74"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:74</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l35"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:35</code></a>
                                                         </p>
                                                 
                                                 
@@ -1336,13 +1346,74 @@
                                                 
                                                     </div>
                                                 
-                                                        <p><strong>Default:</strong> linkEdit</p>
+                                                        <p><strong>Default:</strong> buttonLinkAutocompleteList</p>
                                                 
                                                 
                                                 </div>
-                                                <div id="property_showTargetSelector" class="property item">
-                                                    <h3 class="name"><code>showTargetSelector</code></h3>
-                                                    <span class="type">Boolean</span>
+                                                <div id="property_keys" class="property item inherited">
+                                                    <h3 class="name"><code>keys</code></h3>
+                                                    <span class="type">Object</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#property_keys">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l47"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:47</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Object representing the keys used to navigate between descendants. The format for the prop is:
+                                                <code>{dismiss: value, dismissNext: value, dismissPrev: value, next: value, prev: value}</code> where
+                                                value can be both a number or an array of numbers with the allowed keyCodes.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_onDismiss" class="property item inherited">
+                                                    <h3 class="name"><code>onDismiss</code></h3>
+                                                    <span class="type">Function</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/WidgetFocusManager.html#property_onDismiss">WidgetFocusManager</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:21</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p><p>Callback method to be invoked when the focus manager is to be dismissed. This happens
+                                                in the following scenarios if a dismiss callback has been specified:</p></p>
+                                                <ul>
+                                                <li>A dismiss key has been pressed</li>
+                                                <li>In a non-circular focus manager, when:<ul>
+                                                <li>The active descendant is the first one and a prev key has been pressed.</li>
+                                                <li>The active descendant is the last one and a next key has been pressed.</li>
+                                                </ul>
+                                                </li>
+                                                </ul>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_term" class="property item">
+                                                    <h3 class="name"><code>term</code></h3>
+                                                    <span class="type">String</span>
                                                 
                                                 
                                                 
@@ -1351,14 +1422,14 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-edit.jsx.html#l49"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-edit.jsx:49</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-link-autocomplete-list.jsx.html#l24"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-link-autocomplete-list.jsx:24</code></a>
                                                         </p>
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Indicates whether the link target selector should appear.</p>
+                                                        <p>The current term to autocomplete for</p>
                                                 
                                                     </div>
                                                 

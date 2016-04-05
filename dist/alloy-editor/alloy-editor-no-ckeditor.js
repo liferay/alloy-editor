@@ -26197,6 +26197,51 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 'use strict';
 
 (function () {
+  'use strict';
+
+  /**
+   * ButtonCfgProps is a mixin that provides a style prop and some methods to apply the resulting
+   * style and checking if it is present in a given path or selection.
+   *
+   * @class ButtonCfgProps
+   */
+
+  var ButtonCfgProps = {
+    // Allows validating props being passed to the component.
+    propTypes: {
+      /**
+       * The editor instance where the component is being used.
+       *
+       * @property {Object} editor
+       */
+      editor: React.PropTypes.object.isRequired
+    },
+
+    /**
+     * Merges the properties, passed to the current component with user's configuration
+     * via `buttonCfg` property.
+     *
+     * @method mergeButtonCfgProps
+     * @param {Object} props The properties to be merged with the provided configuration for this
+     * button. If not passed, the user configuration will be merged with `this.props`
+     * @return {Object} The merged properties
+     */
+    mergeButtonCfgProps: function mergeButtonCfgProps(props) {
+      props = props || this.props;
+
+      var nativeEditor = this.props.editor.get('nativeEditor');
+      var buttonCfg = nativeEditor.config.buttonCfg || {};
+      var result = CKEDITOR.tools.merge(props, buttonCfg[AlloyEditor.ButtonLinkEdit.key]);
+
+      return result;
+    }
+  };
+
+  AlloyEditor.ButtonCfgProps = ButtonCfgProps;
+})();
+'use strict';
+
+(function () {
     'use strict';
 
     /**
@@ -29177,6 +29222,203 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
     'use strict';
 
+    /**
+     * The ButtonLinkAutocompleteList class provides functionality for showing a list of
+     * items that can be selected for the link.
+     *
+     * @uses WidgetFocusManager
+     *
+     * @class ButtonLinkAutocompleteList
+     */
+
+    var ButtonLinkAutocompleteList = React.createClass({
+        displayName: 'ButtonLinkAutocompleteList',
+
+        mixins: [AlloyEditor.WidgetFocusManager],
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * Autocomplete function
+             *
+             * @property {Function} data
+             */
+            data: React.PropTypes.func,
+
+            /**
+             * The current term to autocomplete for
+             *
+             * @property {String} term
+             */
+            term: React.PropTypes.string
+
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default buttonLinkAutocompleteList
+             */
+            key: 'buttonLinkAutocompleteList'
+        },
+
+        /**
+         * Lifecycle. Invoked when a component is receiving new props.
+         * This method is not called for the initial render.
+         *
+         * @method componentWillReceiveProps
+         */
+        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+            if (!nextProps.term || nextProps.term !== this.props.term) {
+                clearTimeout(this._timeout);
+
+                if (nextProps.term) {
+                    this._timeout = setTimeout(this._updateItems, this.props.delay);
+                } else {
+                    this.setState({
+                        items: []
+                    });
+                }
+            }
+        },
+
+        /**
+         * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+         *
+         * @method componentWillUnmount
+         */
+        componentWillUnmount: function componentWillUnmount() {
+            clearTimeout(this._timeout);
+        },
+
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function getDefaultProps() {
+            return {
+                circular: false,
+                data: [],
+                delay: 100,
+                descendants: '.ae-toolbar-element',
+                keys: {
+                    dismiss: [27],
+                    dismissNext: [39],
+                    dismissPrev: [37],
+                    next: [40],
+                    prev: [38]
+                }
+            };
+        },
+
+        /**
+         * Lifecycle. Invoked once before the component is mounted.
+         * The return value will be used as the initial value of this.state.
+         *
+         * @method getInitialState
+         */
+        getInitialState: function getInitialState() {
+            return {
+                items: []
+            };
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the list.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            if (!this.props.expanded || !this.state.items.length) {
+                return null;
+            }
+
+            return React.createElement(
+                AlloyEditor.ButtonDropdown,
+                null,
+                this._renderAutocompleteItems(this.state.items)
+            );
+        },
+
+        /**
+         * Lifecycle. Invoked before rendering when new props or state are being received.
+         * This method is not called for the initial render or when forceUpdate is used.
+         *
+         * @method  shouldComponentUpdate
+         * @return {Boolean} Returns false when the transition to the new props and state will not
+         * require a component update.
+         */
+        shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+            return nextProps.expanded !== this.props.expanded || nextProps.term !== this.props.term || nextState.items !== this.state.items;
+        },
+
+        /**
+         * Renders a set of list items for the provided items
+         *
+         * @protected
+         * @method _renderAutocompleteItems
+         * @param {Array} items List of autocomplete items to render
+         * @return {Array} Rendered list item instances
+         */
+        _renderAutocompleteItems: function _renderAutocompleteItems(items) {
+            items = items || [];
+
+            var handleLinkAutocompleteClick = this.props.handleLinkAutocompleteClick;
+
+            return items.map(function (item) {
+                return React.createElement(
+                    'li',
+                    { key: item.url, role: 'option' },
+                    React.createElement(
+                        'button',
+                        { className: 'ae-toolbar-element', onClick: handleLinkAutocompleteClick, 'data-value': item.url },
+                        item.title
+                    )
+                );
+            });
+        },
+
+        /**
+         * Retrieves the data according to {this.props.term} and calls setState() with the returned data
+         *
+         * @protected
+         * @method _updateItems
+         */
+        _updateItems: function _updateItems() {
+            var instance = this;
+
+            if (!this.props.term) {
+                return;
+            }
+
+            var promise = Promise.resolve(this.props.data(this.props.term));
+
+            promise.then(function (items) {
+                if (items.length) {
+                    !instance.props.expanded && instance.props.toggleDropdown();
+                }
+
+                instance.setState({
+                    items: items
+                });
+            });
+        }
+    });
+
+    AlloyEditor.ButtonLinkAutocompleteList = ButtonLinkAutocompleteList;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
     var KEY_ENTER = 13;
     var KEY_ESC = 27;
 
@@ -29184,12 +29426,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
      * Provides UI for creating, editing and removing a link.
      *
+     * @uses WidgetDropdown
+     * @uses ButtonCfgProps
+     *
      * @class ButtonLinkEdit
      */
     var ButtonLinkEdit = React.createClass({
         displayName: 'ButtonLinkEdit',
 
-        mixins: [AlloyEditor.WidgetDropdown],
+        mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.ButtonCfgProps],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -29226,7 +29471,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              *
              * @property {Boolean} showTargetSelector
              */
-            showTargetSelector: React.PropTypes.bool
+            showTargetSelector: React.PropTypes.bool,
+
+            /**
+             * List of items to be rendered as possible values for the link or a function, which is
+             * supposed to retrieve the data. The function should return a Promise.
+             * The returned items must be objects with at least two properties:
+             * - title
+             * - url
+             *
+             * @property {Function|Array} data
+             */
+            data: React.PropTypes.oneOfType([React.PropTypes.func, React.PropTypes.arrayOf(React.PropTypes.object)])
 
         },
 
@@ -29254,11 +29510,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (this.props.renderExclusive || this.props.manualSelection) {
                 // We need to wait for the next rendering cycle before focusing to avoid undesired
                 // scrolls on the page
-                if (window.requestAnimationFrame) {
-                    window.requestAnimationFrame(this._focusLinkInput);
-                } else {
-                    setTimeout(this._focusLinkInput, 0);
-                }
+                this._focusLinkInput();
             }
         },
 
@@ -29282,7 +29534,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             return {
                 defaultLinkTarget: '',
                 showTargetSelector: true,
-                appendProtocol: true
+                appendProtocol: true,
+                autocompleteUrl: ''
             };
         },
 
@@ -29332,7 +29585,35 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 targetSelectorProps = this.mergeDropdownProps(targetSelectorProps, AlloyEditor.ButtonLinkTargetEdit.key);
 
-                targetSelector = React.createElement(AlloyEditor.ButtonLinkTargetEdit, targetSelectorProps);
+                var props = this.mergeButtonCfgProps(targetSelectorProps);
+
+                targetSelector = React.createElement(AlloyEditor.ButtonLinkTargetEdit, props);
+            }
+
+            var autocompleteDropdown;
+
+            if (this.props.data) {
+                var dataFn = this.props.data;
+
+                if (!AlloyEditor.Lang.isFunction(dataFn)) {
+                    var items = this.props.data;
+
+                    dataFn = function dataFn(term) {
+                        return items;
+                    };
+                }
+
+                var autocompleteDropdownProps = {
+                    data: dataFn,
+                    editor: this.props.editor,
+                    handleLinkAutocompleteClick: this._handleLinkAutocompleteClick,
+                    onDismiss: this.props.toggleDropdown,
+                    term: this.state.linkHref
+                };
+
+                autocompleteDropdownProps = this.mergeDropdownProps(autocompleteDropdownProps, AlloyEditor.ButtonLinkAutocompleteList.key);
+
+                autocompleteDropdown = React.createElement(AlloyEditor.ButtonLinkAutocompleteList, autocompleteDropdownProps);
             }
 
             return React.createElement(
@@ -29347,7 +29628,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     'div',
                     { className: 'ae-container-input xxl' },
                     targetSelector,
-                    React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                    React.createElement(
+                        'div',
+                        { className: 'ae-container-input xxl' },
+                        React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                        autocompleteDropdown
+                    ),
                     React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
                 ),
                 React.createElement(
@@ -29379,7 +29665,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @method _focusLinkInput
          */
         _focusLinkInput: function _focusLinkInput() {
-            ReactDOM.findDOMNode(this.refs.linkInput).focus();
+            var instance = this;
+
+            var focusLinkEl = function focusLinkEl() {
+                ReactDOM.findDOMNode(instance.refs.linkInput).focus();
+            };
+
+            if (window.requestAnimationFrame) {
+                window.requestAnimationFrame(focusLinkEl);
+            } else {
+                setTimeout(focusLinkEl, 0);
+            }
         },
 
         /**
@@ -29443,6 +29739,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             this.setState({
                 linkHref: event.target.value
             });
+
+            this._focusLinkInput();
         },
 
         /**
@@ -29457,6 +29755,24 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 itemDropdown: null,
                 linkTarget: event.target.getAttribute('data-value')
             });
+
+            this._focusLinkInput();
+        },
+
+        /**
+         * Updates the component state when an autocomplete link result is selected by user interaction.
+         *
+         * @protected
+         * @method _handleLinkAutocompleteClick
+         * @param {SyntheticEvent} event The click event.
+         */
+        _handleLinkAutocompleteClick: function _handleLinkAutocompleteClick(event) {
+            this.setState({
+                itemDropdown: null,
+                linkHref: event.target.getAttribute('data-value')
+            });
+
+            this._focusLinkInput();
         },
 
         /**
@@ -29713,6 +30029,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      *
      * @uses ButtonKeystroke
      * @uses ButtonStateClasses
+     * @uses ButtonCfgProps
      *
      * @class ButtonLink
      */
@@ -29720,7 +30037,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     var ButtonLink = React.createClass({
         displayName: 'ButtonLink',
 
-        mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses],
+        mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCfgProps],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -29794,7 +30111,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var cssClass = 'ae-button ' + this.getStateClasses();
 
             if (this.props.renderExclusive) {
-                return React.createElement(AlloyEditor.ButtonLinkEdit, this.props);
+                var props = this.mergeButtonCfgProps();
+
+                return React.createElement(AlloyEditor.ButtonLinkEdit, props);
             } else {
                 return React.createElement(
                     'button',
