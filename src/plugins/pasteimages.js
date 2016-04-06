@@ -50,7 +50,7 @@
              * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
              */
             _onPaste: function(event) {
-                if (event.data.$.clipboardData) {
+                if (event.data.$.clipboardData && event.data.$.clipboardData.items) {
                     var pastedData = event.data.$.clipboardData.items[0];
                     var editor = event.listenerData.editor;
 
