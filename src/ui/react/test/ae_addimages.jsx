@@ -14,8 +14,8 @@
 
 		afterEach(Utils.afterEach);
 
-		it('Paste checks that it does not produce JS error', function () {
-   			assert.doesNotThrow(this.nativeEditor.plugins.ae_addimages._onPaste.bind(null, {}, 'It does not produce JS error'));
+		it.only('should not throw error in case of missing `clipboardData.items` property', function () {
+			assert.doesNotThrow(this.nativeEditor.plugins.ae_addimages._onPaste.bind(null, {}));
 		});
 	});
 }());

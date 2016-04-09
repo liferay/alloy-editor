@@ -74,9 +74,9 @@
             },
 
             /**
-             * Handles drag drop event. The function will create selection from the current points and
-             * will send a list of files to be processed to
-             * {{#crossLink "CKEDITOR.plugins.ae_addimages/_handleFiles:method"}}{{/crossLink}}
+             * Handles drag drop event. The function will create a selection from the current
+             * point and will send a list of files to be processed to
+             * {{#crossLink "CKEDITOR.plugins.ae_addimages/_handleFiles:method"}}{{/crossLink}} method.
              *
              * @protected
              * @method _onDragDrop
