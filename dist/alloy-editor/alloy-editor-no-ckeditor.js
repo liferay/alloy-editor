@@ -21851,6 +21851,27 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
         /**
+         * Handles drag drop event. The function will create a selection from the current
+         * point and will send a list of files to be processed to
+         * {{#crossLink "CKEDITOR.plugins.ae_addimages/_handleFiles:method"}}{{/crossLink}} method.
+         *
+         * @protected
+         * @method _onDragDrop
+         * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
+         */
+        _onDragDrop: function _onDragDrop(event) {
+            var nativeEvent = event.data.$;
+
+            new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+            var editor = event.listenerData.editor;
+
+            event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+            this._handleFiles(nativeEvent.dataTransfer.files, editor);
+        },
+
+        /**
          * Handles drag enter event. In case of IE, this function will prevent the event.
          *
          * @protected
@@ -21877,27 +21898,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
         /**
-         * Handles drag drop event. The function will create selection from the current points and
-         * will send a list of files to be processed to
-         * {{#crossLink "CKEDITOR.plugins.ae_addimages/_handleFiles:method"}}{{/crossLink}}
-         *
-         * @protected
-         * @method _onDragDrop
-         * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
-         */
-        _onDragDrop: function _onDragDrop(event) {
-            var nativeEvent = event.data.$;
-
-            new CKEDITOR.dom.event(nativeEvent).preventDefault();
-
-            var editor = event.listenerData.editor;
-
-            event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
-
-            this._handleFiles(nativeEvent.dataTransfer.files, editor);
-        },
-
-        /**
          * Checks if the pasted data is image and passes it to
          * {{#crossLink "CKEDITOR.plugins.ae_addimages/_processFile:method"}}{{/crossLink}} for processing.
          *
@@ -21906,7 +21906,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
          */
         _onPaste: function _onPaste(event) {
-            if (event.data.$.clipboardData) {
+            if (event.data && event.data.$ && event.data.$.clipboardData && event.data.$.clipboardData.items && event.data.$.clipboardData.items.length > 0) {
                 var pastedData = event.data.$.clipboardData.items[0];
 
                 if (pastedData.type.indexOf('image') === 0) {
