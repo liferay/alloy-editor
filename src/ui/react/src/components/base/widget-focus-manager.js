@@ -84,7 +84,13 @@
         focus: function(event) {
             if (!event || this._isValidTarget(event.target)) {
                 if (this._descendants) {
-                    this._descendants[this._activeDescendant].focus();
+                    var activeDescendantEl = this._descendants[this._activeDescendant];
+
+                    if (document.activeElement !== activeDescendantEl) {
+                        if (this._descendants.indexOf(document.activeElement) === -1) {
+                            activeDescendantEl.focus();
+                        }
+                    }
 
                     if (event) {
                         event.stopPropagation();
