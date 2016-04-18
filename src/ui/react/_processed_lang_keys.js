@@ -21,6 +21,9 @@ AlloyEditor.Strings = {
 	h2: CKEDITOR.lang['{lang}'].format.tag_h2,
 	normal: CKEDITOR.lang['{lang}'].format.tag_p,
 
+	indent: CKEDITOR.lang['{lang}'].indent.indent,
+	outdent: CKEDITOR.lang['{lang}'].indent.outdent,
+
 	blockStyles: CKEDITOR.lang['{lang}'].stylescombo.panelTitle1,
 	inlineStyles: CKEDITOR.lang['{lang}'].stylescombo.panelTitle2,
 	objectStyles: CKEDITOR.lang['{lang}'].stylescombo.panelTitle3,
