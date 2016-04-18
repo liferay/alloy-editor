@@ -73,7 +73,7 @@
 
             return (
                 <button aria-label={AlloyEditor.Strings.indent} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-indent-block" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.indent}>
-                    <span className="ae-icon-align-left"></span>
+                    <span className="ae-icon-indent-block"></span>
                 </button>
             );
         }
