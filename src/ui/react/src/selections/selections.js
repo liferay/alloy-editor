@@ -16,7 +16,7 @@
         test: AlloyEditor.SelectionTest.image
     }, {
         name: 'text',
-        buttons: ['styles', 'bold', 'italic', 'underline', 'link', 'twitter'],
+        buttons: ['styles', 'bold', 'italic', 'underline', 'indentBlock', 'outdentBlock', 'link', 'twitter'],
         test: AlloyEditor.SelectionTest.text
     }, {
         name: 'table',
@@ -25,6 +25,5 @@
         setPosition: AlloyEditor.SelectionSetPosition.table,
         test: AlloyEditor.SelectionTest.table
     }];
-
     AlloyEditor.Selections = Selections;
 }());
