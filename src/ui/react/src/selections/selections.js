@@ -16,7 +16,7 @@
         test: AlloyEditor.SelectionTest.image
     }, {
         name: 'text',
-        buttons: ['indentBlock'],
+        buttons: ['styles', 'bold', 'italic', 'underline', 'indentBlock', 'outdentBlock', 'link', 'twitter'],
         test: AlloyEditor.SelectionTest.text
     }, {
         name: 'table',
