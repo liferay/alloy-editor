@@ -73,7 +73,7 @@
 
             return (
                 <button aria-label={AlloyEditor.Strings.outdent} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-outdent-block" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.outdent}>
-                    <span className="ae-icon-align-right"></span>
+                    <span className="ae-icon-outdent-block"></span>
                 </button>
             );
         }
