@@ -15,7 +15,7 @@
 
 		afterEach(Utils.afterEach);
 
-		it('should make outdent when outdent button is clicked', function () {
+		it('should outdent the content when the outdent button is clicked', function () {
 			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100px">This text will be outdent {selection}.</p>');
 
             var buttonOutdent = ReactDOM.render(<AlloyEditor.ButtonOutdentBlock editor={this.editor} />, this.container);
@@ -31,7 +31,7 @@
 
 		});
 
-		it('Should make outdent with customizable indentation', function () {
+		it('should outdent the content with a customizable indentation', function () {
 			this.nativeEditor.config.indentOffset = 25;
 			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100px">This text will be outdent {selection}.</p>');
 
@@ -47,9 +47,9 @@
             assert.strictEqual(data, '<p style="margin-left: 75px;">This text will be outdent selection.</p>');
 		});
 
-		it('Should make outdent with customizable indentation unit', function () {
+		it('should outdent the content with a customizable indentation unit', function () {
 			this.nativeEditor.config.indentOffset = 25;
-			this.nativeEditor.config.indentUnit = "em";
+			this.nativeEditor.config.indentUnit = 'em';
 
 			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100em">This text will be outdent {selection}.</p>');
 

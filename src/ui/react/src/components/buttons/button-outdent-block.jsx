@@ -2,7 +2,7 @@
 	'use strict';
 
 	/**
-     * The ButtonOutdentBlock class provides functionality for indent blocks.
+     * The ButtonOutdentBlock class provides functionality for outdenting blocks.
      *
      * @uses ButtonCommand
      * @uses ButtonCommandActive
@@ -29,6 +29,7 @@
              * @property {String} label
              */
             label: React.PropTypes.string,
+
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
@@ -38,7 +39,7 @@
             tabIndex: React.PropTypes.number
      	},
 
-     	//Lifecycle. Provides static properties to the widget.
+     	// Lifecycle. Provides static properties to the widget.
      	statics: {
      		/**
              * The name which will be used as an alias of the button in the configuration.
