@@ -33,7 +33,7 @@
         it('should create a numbered list when pressing SPACE although the line has text', function() {
             testList.call(this, {
                 expected: '<ol><li>first line</li></ol>',
-                html: '<p>1.{ }first line</p>',
+                html: '<p>1.{}first line</p>',
                 keyCode: KEY_SPACE
             });
         });
@@ -41,7 +41,7 @@
         it('should create an empty bulleted list when pressing SPACE', function() {
             testList.call(this, {
                 expected: '<ul><li>&nbsp;</li></ul>',
-                html: '<p>*{ }</p>',
+                html: '<p>*{}</p>',
                 keyCode: KEY_SPACE
             });
         });
@@ -49,7 +49,7 @@
         it('should create a bulleted list when pressing SPACE although the line has text', function() {
             testList.call(this, {
                 expected: '<ul><li>first line</li></ul>',
-                html: '<p>*{ }first line</p>',
+                html: '<p>*{}first line</p>',
                 keyCode: KEY_SPACE
             });
         });
@@ -57,7 +57,7 @@
         it('Should not create numbered list when pressing SPACE in other position', function() {
         	testList.call(this, {
         		expected: '<p>1. no list</p>',
-        		html: '<p>1. { }no list</p>',
+        		html: '<p>1. {}no list</p>',
         		keyCode: KEY_SPACE
         	});
         });
@@ -65,7 +65,7 @@
         it('Should not create bulleted list when pressing SPACE in other position', function() {
         	testList.call(this, {
         		expected: '<p>* not create list</p>',
-        		html: '<p>* not create{ }list</p>',
+        		html: '<p>* not create{} list</p>',
         		keyCode: KEY_SPACE
         	});
         });
