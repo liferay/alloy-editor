@@ -54,7 +54,7 @@
             });
         });
 
-        it('Should not create numbered list when pressing SPACE in other position', function() {
+        it('should not create numbered list when pressing SPACE in other position', function() {
         	testList.call(this, {
         		expected: '<p>1. no list</p>',
         		html: '<p>1. {}no list</p>',
@@ -62,7 +62,7 @@
         	});
         });
 
-        it('Should not create bulleted list when pressing SPACE in other position', function() {
+        it('should not create bulleted list when pressing SPACE in other position', function() {
         	testList.call(this, {
         		expected: '<p>* not create list</p>',
         		html: '<p>* not create{} list</p>',
@@ -70,10 +70,10 @@
         	});
         });
 
-        it('Should remove list and keep bullet when pressing BACK after creating list', function() {
-        	testList.call(this, {
-        		expected: '<ul><li>create list</li></ul>',
-        		html: '<p>*{}create list</p>',
+        it('should remove list and keep bullet when pressing BACK after creating list', function() {
+            testList.call(this, {
+        		expected: '<ul><li>&nbsp;</li></ul>',
+        		html: '<p>*{}</p>',
         		keyCode: KEY_SPACE
         	});
 
@@ -83,8 +83,7 @@
 
         	var data = getData.call(this);
 
-        	assert.equal(data, '<p>*&nbsp;create list</p>');
-
+        	assert.oneOf(data, ['<p>*</p>', '<p>*&nbsp;</p>']);
         });
 
         function testList(config) {
@@ -95,7 +94,7 @@
         	});
 
         	var data = getData.call(this);
-        	assert.equal(data, config.expected);
+        	assert.strictEqual(data, config.expected);
         }
 
         function getData() {

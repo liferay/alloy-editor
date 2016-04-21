@@ -21,7 +21,7 @@
 	];
 
 	/**
-     * CKEditor plugin which automatically generates ordered/unordered list when user types text which looks like list.
+     * CKEditor plugin which automatically generates ordered/unordered list when user types text which looks like a list.
      *
      * @class CKEDITOR.plugins.ae_autolist
      * @constructor
@@ -31,7 +31,7 @@
 
 			/**
 			* Initialization of the plugin, part of CKeditor plugin lifecycle.
-			* The function registers the `keydown` event on the edition area.
+			* The function registers the `keydown` event on the content editing area.
 			*
 			* @method init
 			* @param {Object} editor The current editor instance
@@ -47,77 +47,39 @@
 				}.bind(this));
 			},
 
-			/**
-			* Create list with different types: bulletedlist or numberedlist
-			*
-			* @protectec
-			* @method _createList
-			* @param {Object} listConfig Object that contains bullet, text and type for creating the list
-			*/
-			_createList: function(listConfig) {
-				var editor = listConfig.editor;
-
-				var range = editor.getSelection().getRanges()[0];
-
-				range.endContainer.setText(listConfig.text);
-				editor.execCommand(listConfig.type);
-
-				this._subscribeToKeyDownEvent(editor, listConfig.bullet);
-			},
-
-			/**
-             * Listens to the `Space` key events to check if the last word
-             * introduced by the user should be replaced by a list (OL or UL)
-             *
-             * @protected
-             * @method _onKeyPress
-             * @param {Event} event Eventobject
-             */
-            _onKeyDown: function(event) {
-            	var nativeEvent = event.data.$;
-
-				if (nativeEvent.keyCode === KEY_SPACE) {
-                    var listConfig = this._shouldAutolist(event.listenerData.editor);
-
-					if (listConfig) {
-						event.data.preventDefault();
-						this._createList(listConfig);
-					}
-				}
-            },
-
             /**
-            * Listens to the 'Key Back', to check if after list is created, key back is clicked
-        	* to undo the list
-        	*
-        	* @protected
-        	* @method _onKeyDownCheckToDelete
-        	* @param {Event} event Eventobject
+            * Checks for pressing the `Backspace` key in order to undo the list creation.
+            *
+            * @protected
+            * @method _checkForBackspaceAndUndo
+            * @param {Event} event Event object
             */
-            _onKeyDownCheckToDelete: function(event) {
-				var editor = event.listenerData.editor;
+            _checkForBackspaceAndUndo: function(event) {
+                var editor = event.listenerData.editor;
 
                 var nativeEvent = event.data.$;
 
                 var editable = editor.editable();
 
-                editable.removeListener('keydown', this._onKeyDownCheckToDelete);
+                editable.removeListener('keydown', this._checkForBackspaceAndUndo);
 
                 if (nativeEvent.keyCode === KEY_BACK) {
-					editor.execCommand('undo');
-					editor.insertHtml(event.listenerData.bullet + '&nbsp;');
-					event.data.preventDefault();
-				}
+                    debugger;
+                    editor.execCommand('undo');
+                    editor.insertHtml(event.listenerData.bullet + '&nbsp;');
+                    event.data.preventDefault();
+                }
             },
 
             /**
-            * Check current line to find match with MATCHES object to create OL or UL
+            * Checks current line to find match with MATCHES object to create OL or UL.
             *
             * @protected
             * @method _checkLine
             * @param {editor} Editor object
+            * @return {Object|null} Returns an object which contains the detected list config if any
             */
-            _shouldAutolist: function(editor) {
+            _getListConfig: function(editor) {
                 var configRegex = editor.config.autolist || DEFAULT_CONFIG;
 
                 var range = editor.getSelection().getRanges()[0];
@@ -144,6 +106,8 @@
                             text: text,
                             type: regexItem.type
                         };
+
+                        break;
                     }
 
                     index++;
@@ -152,22 +116,51 @@
                 return autolistCfg;
             },
 
-            /**
-            * Add attachlistener after autolist is created.
-            *
-            * @protected
-            * @method _subscribeToKeyDownEvent
-            * @param {Editor} editor Editor object
-            * @param {String} bullet Bullet to add at beginning of container when key back is clicked
-            */
-            _subscribeToKeyDownEvent: function(editor, bullet) {
-				var editable = editor.editable();
+			/**
+			* Create list with different types: Bulleted or Numbered list
+			*
+			* @protected
+			* @method _createList
+			* @param {Object} listConfig Object that contains bullet, text and type for creating the list
+			*/
+			_createList: function(listConfig) {
+				var editor = listConfig.editor;
 
-				editable.attachListener(editable, 'keydown', this._onKeyDownCheckToDelete, this, {
-					editor: editor,
-					bullet: bullet
-				}, 1);
-			}
+				var range = editor.getSelection().getRanges()[0];
+
+				range.endContainer.setText(listConfig.text);
+				editor.execCommand(listConfig.type);
+
+                var editable = editor.editable();
+
+                // Subscribe to keydown in order to check if the next key press is `Backspace`.
+                // If so, the creation of the list will be discarded.
+                editable.attachListener(editable, 'keydown', this._checkForBackspaceAndUndo, this, {
+                    editor: editor,
+                    bullet: listConfig.bullet
+                }, 1);
+			},
+
+			/**
+             * Listens to the `Space` key events to check if the last word
+             * introduced by the user should be replaced by a list (OL or UL)
+             *
+             * @protected
+             * @method _onKeyDown
+             * @param {Event} event Event object
+             */
+            _onKeyDown: function(event) {
+            	var nativeEvent = event.data.$;
+
+				if (nativeEvent.keyCode === KEY_SPACE) {
+                    var listConfig = this._getListConfig(event.listenerData.editor);
+
+					if (listConfig) {
+						event.data.preventDefault();
+						this._createList(listConfig);
+					}
+				}
+            }
         }
 	);
 }());
