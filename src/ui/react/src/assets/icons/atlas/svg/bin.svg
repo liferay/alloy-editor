@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="trash" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 384 513" style="enable-background:new 0 0 384 513;" xml:space="preserve">
+<path class="lexicon-icon-body" fill="none" d="M0,441.6C0,481,32,513,71.4,513h241.1c39.4,0,71.4-32,71.4-71.4V129H0V441.6z"/>
+<path class="lexicon-icon-outline" d="M0,441.6C0,481,32,513,71.4,513h241.1c39.4,0,71.4-32,71.4-71.4V129H0V441.6z M64,193h256v232.2c0,13.1-10.7,23.8-23.8,23.8
+	H87.8C74.7,449,64,438.3,64,425.2V193z"/>
+<polygon class="lexicon-icon-outline" points="288,33 288,0 96,0 96,33 0,33 0,96.3 384,96.3 384,33 "/>
+<rect class="lexicon-icon-outline" x="224" y="224" width="64" height="192"/>
+<rect class="lexicon-icon-outline" x="96" y="224" width="64" height="192"/>
+</svg>
