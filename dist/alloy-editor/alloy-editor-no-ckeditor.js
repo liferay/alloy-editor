@@ -24191,7 +24191,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		    lastRowIndex = startRow,
 		    totalRowSpan = 0,
 		    totalColSpan = 0,
-		   
+
 		// Use a documentFragment as buffer when appending cell contents.
 		frag = !isDetect && new CKEDITOR.dom.documentFragment(doc),
 		    dimension = 0;
