@@ -64,7 +64,6 @@
                 editable.removeListener('keydown', this._checkForBackspaceAndUndo);
 
                 if (nativeEvent.keyCode === KEY_BACK) {
-                    debugger;
                     editor.execCommand('undo');
                     editor.insertHtml(event.listenerData.bullet + '&nbsp;');
                     event.data.preventDefault();
