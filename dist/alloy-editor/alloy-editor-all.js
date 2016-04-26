@@ -23114,7 +23114,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       editable.removeListener('keydown', this._checkForBackspaceAndUndo);
 
       if (nativeEvent.keyCode === KEY_BACK) {
-        debugger;
         editor.execCommand('undo');
         editor.insertHtml(event.listenerData.bullet + '&nbsp;');
         event.data.preventDefault();
@@ -25000,7 +24999,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		    lastRowIndex = startRow,
 		    totalRowSpan = 0,
 		    totalColSpan = 0,
-
+		   
 		// Use a documentFragment as buffer when appending cell contents.
 		frag = !isDetect && new CKEDITOR.dom.documentFragment(doc),
 		    dimension = 0;
