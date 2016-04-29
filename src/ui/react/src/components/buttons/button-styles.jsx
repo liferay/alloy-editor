@@ -91,6 +91,7 @@
                 }
             }.bind(this));
 
+
             var buttonStylesList;
 
             if (this.props.expanded) {
