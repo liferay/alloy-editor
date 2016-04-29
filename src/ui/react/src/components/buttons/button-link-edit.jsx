@@ -14,7 +14,7 @@
      * @class ButtonLinkEdit
      */
     var ButtonLinkEdit = React.createClass({
-        mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.ButtonCfgProps],
+        mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetFocusManager, AlloyEditor.ButtonCfgProps],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -45,6 +45,7 @@
              * @property {String} defaultLinkTarget
              */
             defaultLinkTarget: React.PropTypes.string,
+
 
             /**
              * Indicates whether the link target selector should appear.
@@ -118,9 +119,20 @@
                 defaultLinkTarget: '',
                 showTargetSelector: true,
                 appendProtocol: true,
-                autocompleteUrl: ''
+                autocompleteUrl: '',
+                circular: true,
+                descendants: '.ae-toolbar-element',
+                keys: {
+                    dismiss: [27],
+                    dismissNext: [39],
+                    dismissPrev: [37],
+                    next: [40],
+                    prev: [38]
+                },
+                customIndexStart: true
             };
         },
+
 
         /**
          * Lifecycle. Invoked once before the component is mounted.
@@ -140,7 +152,8 @@
                     target: target
                 },
                 linkHref: href,
-                linkTarget: target
+                linkTarget: target,
+                selectAutocomplete: false
             };
         },
 
@@ -155,23 +168,13 @@
                 opacity: this.state.linkHref ? 1 : 0
             };
 
-            var targetSelector;
+            var targetSelector = {
+                editor: this.props.editor,
+                handleLinkTargetChange: this._handleLinkTargetChange,
+                selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
+            };
 
-            if (this.props.showTargetSelector) {
-                var targetSelectorProps = {
-                    allowedTargets: this._getAllowedTargetItems(),
-                    editor: this.props.editor,
-                    handleLinkTargetChange: this._handleLinkTargetChange,
-                    onDismiss: this.props.toggleDropdown,
-                    selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
-                };
-
-                targetSelectorProps = this.mergeDropdownProps(targetSelectorProps, AlloyEditor.ButtonLinkTargetEdit.key);
-
-                var props = this.mergeButtonCfgProps(targetSelectorProps);
-
-                targetSelector = <AlloyEditor.ButtonLinkTargetEdit {...props} />;
-            }
+            targetSelector = this.mergeDropdownProps(targetSelector, AlloyEditor.ButtonLinkTargetEdit.key);
 
             var autocompleteDropdown;
 
@@ -191,7 +194,9 @@
                     editor: this.props.editor,
                     handleLinkAutocompleteClick: this._handleLinkAutocompleteClick,
                     onDismiss: this.props.toggleDropdown,
-                    term: this.state.linkHref
+                    term: this.state.linkHref,
+                    selectAutocomplete: this.state.selectAutocomplete,
+                    updateSelectAutocomplete: this._updateSelectAutocomplete
                 };
 
                 autocompleteDropdownProps = this.mergeDropdownProps(autocompleteDropdownProps, AlloyEditor.ButtonLinkAutocompleteList.key);
@@ -199,13 +204,13 @@
                 autocompleteDropdown = <AlloyEditor.ButtonLinkAutocompleteList {...autocompleteDropdownProps} />;
             }
 
-            return (
+            return(
                 <div className="ae-container-edit-link">
                     <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
                         <span className="ae-icon-unlink"></span>
                     </button>
                     <div className="ae-container-input xxl">
-                        {targetSelector}
+                        <AlloyEditor.ButtonLinkTargetEdit {...targetSelector} />
                         <div className="ae-container-input xxl">
                             <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
                             {autocompleteDropdown}
@@ -216,7 +221,7 @@
                         <span className="ae-icon-ok"></span>
                     </button>
                 </div>
-            );
+            )
         },
 
         /**
@@ -255,31 +260,6 @@
         },
 
         /**
-         * Returns an array of allowed target items. Each item consists of two properties:
-         * - label - the label for the item, for example "_self (same tab)"
-         * - value - the value that will be set for the link target attribute
-         *
-         * @method _getALlowedTargetItems
-         * @protected
-         * @return {Array<object>} An array of objects containing the allowed items.
-         */
-        _getAllowedTargetItems: function() {
-            return this.props.allowedLinkTargets || [{
-                label: AlloyEditor.Strings.linkTargetSelf,
-                value: '_self'
-            }, {
-                label: AlloyEditor.Strings.linkTargetBlank,
-                value: '_blank'
-            }, {
-                label: AlloyEditor.Strings.linkTargetParent,
-                value: '_parent'
-            }, {
-                label: AlloyEditor.Strings.linkTargetTop,
-                value: '_top'
-            }];
-        },
-
-        /**
          * Monitors key interaction inside the input element to respond to the keys:
          * - Enter: Creates/updates the link.
          * - Escape: Discards the changes.
@@ -295,7 +275,13 @@
 
             if (event.keyCode === KEY_ENTER) {
                 this._updateLink();
-            } else if (event.keyCode === KEY_ESC) {
+            }
+            else if (event.keyCode === 40) {
+                this.setState({
+                    selectAutocomplete: true
+                });
+            }
+            else if (event.keyCode === KEY_ESC) {
                 var editor = this.props.editor.get('nativeEditor');
 
                 new CKEDITOR.Link(editor).advanceSelection();
@@ -372,6 +358,18 @@
             this.props.cancelExclusive();
 
             editor.fire('actionPerformed', this);
+        },
+
+        /**
+         * Update selectAutocomplete state to focus and select autocomplete´s dropdown
+         *
+         * @protected
+         * @method _updateSelectAutocomplete
+         */
+        _updateSelectAutocomplete: function(value) {
+            this.setState({
+                selectAutocomplete: value
+            });
         },
 
         /**

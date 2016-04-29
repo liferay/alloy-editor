@@ -10,7 +10,6 @@
      * @class ButtonLinkTargetEdit
      */
     var ButtonLinkTargetEdit = React.createClass({
-        mixins: [AlloyEditor.WidgetFocusManager],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -18,8 +17,7 @@
              * List of the allowed items for the target attribute. Every allowed target is an object
              * with a `label` attribute that will be shown in the dropdown and a `value` attribute
              * that will get set as the link target attribute.
-             *
-             * @property {Array<object>} allowedTargets
+             * * @property {Array<object>} allowedTargets
              */
             allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
 
@@ -35,7 +33,7 @@
              *
              * @property {String} selectedTarget
              */
-            selectedTarget: React.PropTypes.string.isRequired
+            selectedTarget: React.PropTypes.string
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -51,46 +49,30 @@
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         */
-        getDefaultProps: function() {
-            return {
-                circular: false,
-                descendants: '.ae-toolbar-element',
-                keys: {
-                    dismiss: [27],
-                    dismissNext: [39],
-                    dismissPrev: [37],
-                    next: [40],
-                    prev: [38]
-                }
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @method render
          * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var allowedTargetsList;
+            var buttonTargetsList;
+
+             var handleLinkTargetChange = this.props.handleLinkTargetChange;
 
             if (this.props.expanded) {
-                allowedTargetsList = this._getAllowedTargetsList();
+                buttonTargetsList= <AlloyEditor.ButtonTargetList editor={this.props.editor} onDismiss={this.props.toggleDropdown} handleLinkTargetChange={handleLinkTargetChange}/>
             }
 
             return (
-                <div className="ae-container-edit-link-target ae-container-dropdown ae-container-dropdown-medium ae-has-dropdown" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
+                <div className="ae-container-edit-link-target ae-container-dropdown ae-container-dropdown-medium ae-has-dropdown" tabIndex="0">
                     <button aria-expanded={this.props.expanded} aria-label={this.props.selectedTarget} className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={this.props.selectedTarget}>
                         <div className="ae-container">
                             <span className="ae-container-dropdown-selected-item">{this.props.selectedTarget}</span>
                             <span className="ae-icon-arrow"></span>
                         </div>
                     </button>
-                    {allowedTargetsList}
+                   {buttonTargetsList}
                 </div>
             );
         },
@@ -105,44 +87,6 @@
          */
         shouldComponentUpdate: function(nextProps, nextState) {
             return nextProps.expanded !== this.props.expanded || nextProps.selectedTarget !== this.props.selectedTarget;
-        },
-
-        /**
-         * Creates the dropdown list of allowed link targets.
-         *
-         * @protected
-         * @method _getAllowedTargetsList
-         *
-         * @return {Object} The allowed targets dropdown.
-         */
-        _getAllowedTargetsList: function() {
-            return(
-                <AlloyEditor.ButtonDropdown>
-                    {this._getAllowedTargetsListItems()}
-                </AlloyEditor.ButtonDropdown>
-            );
-        },
-
-        /**
-         * Creates the allowed link target items.
-         *
-         * @protected
-         * @method _getAllowedTargetsListItems
-         *
-         * @return {Array} The allowed target items.
-         */
-        _getAllowedTargetsListItems: function() {
-            var handleLinkTargetChange = this.props.handleLinkTargetChange;
-
-            var items = this.props.allowedTargets.map(function(item) {
-                return (
-                    <li key={item.value} role="option">
-                        <button className="ae-toolbar-element" data-value={item.value} onClick={handleLinkTargetChange}>{item.label}</button>
-                    </li>
-                );
-            });
-
-            return items;
         }
     });
 
