@@ -93,7 +93,7 @@
             var removeStylesItem;
 
             if (this.props.showRemoveStylesItem) {
-                removeStylesItem = <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} />;
+                removeStylesItem = <AlloyEditor.ButtonStylesListItemRemove editor={this.props.editor} onDismiss={this.props.toggleDropdown} />;
             }
 
             return (

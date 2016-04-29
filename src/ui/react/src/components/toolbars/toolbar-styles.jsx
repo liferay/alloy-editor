@@ -104,7 +104,7 @@
         getDefaultProps: function() {
             return {
                 circular: true,
-                descendants: '.ae-button, .ae-toolbar-element',
+                descendants: '.ae-input, .ae-button:not([disabled]), .ae-toolbar-element',
                 keys: {
                     dismiss: [27],
                     next: [39, 40],
