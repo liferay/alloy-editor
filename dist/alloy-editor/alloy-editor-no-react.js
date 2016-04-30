@@ -7391,6 +7391,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     var WidgetFocusManager = {
         // Allows validating props being passed to the component.
         propTypes: {
+
             /**
              * Callback method to be invoked when the focus manager is to be dismissed. This happens
              * in the following scenarios if a dismiss callback has been specified:
@@ -7409,6 +7410,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * @property {boolean} circular
              */
             circular: React.PropTypes.bool.isRequired,
+
+            /**
+            * Indicate if should focus the first child of a container
+            * @property {Boolean} focusFirstChild
+            */
+            focusFirstChild: React.PropTypes.bool,
 
             /**
              * String representing the CSS selector used to define the elements that should be handled.
@@ -7458,12 +7465,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (!event || this._isValidTarget(event.target)) {
                 if (this._descendants) {
                     var activeDescendantEl = this._descendants[this._activeDescendant];
-
                     // When user clicks with the mouse, the activeElement is already set and there
                     // is no need to focus it. Focusing of the active descendant (usually some button) is required
                     // in case of keyboard navigation, because the focused element might be not the first button,
                     // but the div element, which contains the button.
-                    if (document.activeElement !== activeDescendantEl) {
+                    if (document.activeElement !== activeDescendantEl && !this.props.focusFirstChild) {
                         if (this._descendants.indexOf(document.activeElement) === -1) {
                             activeDescendantEl.focus();
                         }
@@ -10076,11 +10082,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             data: React.PropTypes.func,
 
             /**
+             * Indicates if this is focused when this component is updated
+             *
+             * @property {Boolean} autocompleteSelected
+             */
+            autocompleteSelected: React.PropTypes.bool,
+
+            /**
              * The current term to autocomplete for
              *
              * @property {String} term
              */
-            term: React.PropTypes.string
+            term: React.PropTypes.string,
+
+            /**
+            * Method to update parent selectautocomplete state
+            *
+            * @property {Function} setAutocompleteState
+            */
+            setAutocompleteState: React.PropTypes.func
 
         },
 
@@ -10113,6 +10133,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         items: []
                     });
                 }
+            }
+
+            if (nextProps.autocompleteSelected) {
+                setTimeout(this.focus, 0);
+                this.props.setAutocompleteState({
+                    selected: false
+                });
             }
         },
 
@@ -10249,22 +10276,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
     'use strict';
 
-    var KEY_ENTER = 13;
-    var KEY_ESC = 27;
-
     /**
      * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
      * Provides UI for creating, editing and removing a link.
      *
      * @uses WidgetDropdown
+     * @uses WidgetFocusManager
      * @uses ButtonCfgProps
      *
      * @class ButtonLinkEdit
      */
+
     var ButtonLinkEdit = React.createClass({
         displayName: 'ButtonLinkEdit',
 
-        mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.ButtonCfgProps],
+        mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetFocusManager, AlloyEditor.ButtonCfgProps],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -10313,7 +10339,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * @property {Function|Array} data
              */
             data: React.PropTypes.oneOfType([React.PropTypes.func, React.PropTypes.arrayOf(React.PropTypes.object)])
-
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -10365,7 +10390,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 defaultLinkTarget: '',
                 showTargetSelector: true,
                 appendProtocol: true,
-                autocompleteUrl: ''
+                autocompleteUrl: '',
+                circular: true,
+                descendants: '.ae-toolbar-element',
+                keys: {
+                    dismiss: [27],
+                    dismissNext: [39],
+                    dismissPrev: [37],
+                    next: [40],
+                    prev: [38]
+                },
+                customIndexStart: true
             };
         },
 
@@ -10381,6 +10416,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var target = link ? link.getAttribute('target') : this.props.defaultLinkTarget;
 
             return {
+                autocompleteSelected: false,
                 element: link,
                 initialLink: {
                     href: href,
@@ -10402,23 +10438,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 opacity: this.state.linkHref ? 1 : 0
             };
 
-            var targetSelector;
+            var targetSelector = {
+                editor: this.props.editor,
+                handleLinkTargetChange: this._handleLinkTargetChange,
+                selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
+            };
 
-            if (this.props.showTargetSelector) {
-                var targetSelectorProps = {
-                    allowedTargets: this._getAllowedTargetItems(),
-                    editor: this.props.editor,
-                    handleLinkTargetChange: this._handleLinkTargetChange,
-                    onDismiss: this.props.toggleDropdown,
-                    selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
-                };
-
-                targetSelectorProps = this.mergeDropdownProps(targetSelectorProps, AlloyEditor.ButtonLinkTargetEdit.key);
-
-                var props = this.mergeButtonCfgProps(targetSelectorProps);
-
-                targetSelector = React.createElement(AlloyEditor.ButtonLinkTargetEdit, props);
-            }
+            targetSelector = this.mergeDropdownProps(targetSelector, AlloyEditor.ButtonLinkTargetEdit.key);
 
             var autocompleteDropdown;
 
@@ -10438,7 +10464,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     editor: this.props.editor,
                     handleLinkAutocompleteClick: this._handleLinkAutocompleteClick,
                     onDismiss: this.props.toggleDropdown,
-                    term: this.state.linkHref
+                    term: this.state.linkHref,
+                    autocompleteSelected: this.state.autocompleteSelected,
+                    setAutocompleteState: this._setAutocompleteState
                 };
 
                 autocompleteDropdownProps = this.mergeDropdownProps(autocompleteDropdownProps, AlloyEditor.ButtonLinkAutocompleteList.key);
@@ -10457,7 +10485,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 React.createElement(
                     'div',
                     { className: 'ae-container-input xxl' },
-                    targetSelector,
+                    React.createElement(AlloyEditor.ButtonLinkTargetEdit, targetSelector),
                     React.createElement(
                         'div',
                         { className: 'ae-container-input xxl' },
@@ -10509,31 +10537,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
         /**
-         * Returns an array of allowed target items. Each item consists of two properties:
-         * - label - the label for the item, for example "_self (same tab)"
-         * - value - the value that will be set for the link target attribute
-         *
-         * @method _getALlowedTargetItems
-         * @protected
-         * @return {Array<object>} An array of objects containing the allowed items.
-         */
-        _getAllowedTargetItems: function _getAllowedTargetItems() {
-            return this.props.allowedLinkTargets || [{
-                label: AlloyEditor.Strings.linkTargetSelf,
-                value: '_self'
-            }, {
-                label: AlloyEditor.Strings.linkTargetBlank,
-                value: '_blank'
-            }, {
-                label: AlloyEditor.Strings.linkTargetParent,
-                value: '_parent'
-            }, {
-                label: AlloyEditor.Strings.linkTargetTop,
-                value: '_top'
-            }];
-        },
-
-        /**
          * Monitors key interaction inside the input element to respond to the keys:
          * - Enter: Creates/updates the link.
          * - Escape: Discards the changes.
@@ -10543,13 +10546,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @param {SyntheticEvent} event The keyboard event.
          */
         _handleKeyDown: function _handleKeyDown(event) {
-            if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+            if (event.keyCode === 13 || event.keyCode === 27) {
                 event.preventDefault();
             }
 
-            if (event.keyCode === KEY_ENTER) {
+            if (event.keyCode === 13) {
                 this._updateLink();
-            } else if (event.keyCode === KEY_ESC) {
+            } else if (event.keyCode === 40) {
+                this.setState({
+                    autocompleteSelected: true
+                });
+            } else if (event.keyCode === 27) {
                 var editor = this.props.editor.get('nativeEditor');
 
                 new CKEDITOR.Link(editor).advanceSelection();
@@ -10606,6 +10613,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
         /**
+         * Verifies that the current link state is valid so the user can save the link. A valid state
+         * means that we have a non-empty href and that either that or the link target are different
+         * from the original link.
+         *
+         * @protected
+         * @method _isValidState
+         * @return {Boolean} [description]
+         */
+        _isValidState: function _isValidState() {
+            var validState = this.state.linkHref && (this.state.linkHref !== this.state.initialLink.href || this.state.linkTarget !== this.state.initialLink.target);
+
+            return validState;
+        },
+
+        /**
          * Removes the link in the editor element.
          *
          * @protected
@@ -10626,6 +10648,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             this.props.cancelExclusive();
 
             editor.fire('actionPerformed', this);
+        },
+
+        /**
+         * Update autocompleteSelected state to focus and select autocomplete´s dropdown
+         *
+         * @protected
+         * @method _setAutocompleteState
+         */
+        _setAutocompleteState: function _setAutocompleteState(state) {
+            this.setState({
+                autocompleteSelected: state.selected
+            });
         },
 
         /**
@@ -10658,21 +10692,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             // We need to cancelExclusive with the bound parameters in case the button is used
             // inside another in exclusive mode (such is the case of the link button)
             this.props.cancelExclusive();
-        },
-
-        /**
-         * Verifies that the current link state is valid so the user can save the link. A valid state
-         * means that we have a non-empty href and that either that or the link target are different
-         * from the original link.
-         *
-         * @protected
-         * @method _isValidState
-         * @return {Boolean} [description]
-         */
-        _isValidState: function _isValidState() {
-            var validState = this.state.linkHref && (this.state.linkHref !== this.state.initialLink.href || this.state.linkTarget !== this.state.initialLink.target);
-
-            return validState;
         }
     });
 
@@ -10687,15 +10706,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * The ButtonLinkTargetEdit class provides functionality for changing the target of a link
      * in the document.
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonLinkTargetEdit
      */
 
     var ButtonLinkTargetEdit = React.createClass({
         displayName: 'ButtonLinkTargetEdit',
-
-        mixins: [AlloyEditor.WidgetFocusManager],
 
         // Allows validating props being passed to the component.
         propTypes: {
@@ -10703,7 +10718,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * List of the allowed items for the target attribute. Every allowed target is an object
              * with a `label` attribute that will be shown in the dropdown and a `value` attribute
              * that will get set as the link target attribute.
-             *
              * @property {Array<object>} allowedTargets
              */
             allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
@@ -10720,7 +10734,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              *
              * @property {String} selectedTarget
              */
-            selectedTarget: React.PropTypes.string.isRequired
+            selectedTarget: React.PropTypes.string
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -10736,40 +10750,23 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
         /**
-         * Lifecycle. Returns the default values of the properties used in the widget.
-         *
-         * @method getDefaultProps
-         */
-        getDefaultProps: function getDefaultProps() {
-            return {
-                circular: false,
-                descendants: '.ae-toolbar-element',
-                keys: {
-                    dismiss: [27],
-                    dismissNext: [39],
-                    dismissPrev: [37],
-                    next: [40],
-                    prev: [38]
-                }
-            };
-        },
-
-        /**
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var allowedTargetsList;
+            var buttonTargetsList;
+
+            var handleLinkTargetChange = this.props.handleLinkTargetChange;
 
             if (this.props.expanded) {
-                allowedTargetsList = this._getAllowedTargetsList();
+                buttonTargetsList = React.createElement(AlloyEditor.ButtonTargetList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, handleLinkTargetChange: handleLinkTargetChange });
             }
 
             return React.createElement(
                 'div',
-                { className: 'ae-container-edit-link-target ae-container-dropdown ae-container-dropdown-medium ae-has-dropdown', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
+                { className: 'ae-container-edit-link-target ae-container-dropdown ae-container-dropdown-medium ae-has-dropdown', tabIndex: '0' },
                 React.createElement(
                     'button',
                     { 'aria-expanded': this.props.expanded, 'aria-label': this.props.selectedTarget, className: 'ae-toolbar-element', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: this.props.selectedTarget },
@@ -10784,7 +10781,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         React.createElement('span', { className: 'ae-icon-arrow' })
                     )
                 ),
-                allowedTargetsList
+                buttonTargetsList
             );
         },
 
@@ -10798,48 +10795,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
             return nextProps.expanded !== this.props.expanded || nextProps.selectedTarget !== this.props.selectedTarget;
-        },
-
-        /**
-         * Creates the dropdown list of allowed link targets.
-         *
-         * @protected
-         * @method _getAllowedTargetsList
-         *
-         * @return {Object} The allowed targets dropdown.
-         */
-        _getAllowedTargetsList: function _getAllowedTargetsList() {
-            return React.createElement(
-                AlloyEditor.ButtonDropdown,
-                null,
-                this._getAllowedTargetsListItems()
-            );
-        },
-
-        /**
-         * Creates the allowed link target items.
-         *
-         * @protected
-         * @method _getAllowedTargetsListItems
-         *
-         * @return {Array} The allowed target items.
-         */
-        _getAllowedTargetsListItems: function _getAllowedTargetsListItems() {
-            var handleLinkTargetChange = this.props.handleLinkTargetChange;
-
-            var items = this.props.allowedTargets.map(function (item) {
-                return React.createElement(
-                    'li',
-                    { key: item.value, role: 'option' },
-                    React.createElement(
-                        'button',
-                        { className: 'ae-toolbar-element', 'data-value': item.value, onClick: handleLinkTargetChange },
-                        item.label
-                    )
-                );
-            });
-
-            return items;
         }
     });
 
@@ -12094,7 +12049,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var removeStylesItem;
 
             if (this.props.showRemoveStylesItem) {
-                removeStylesItem = React.createElement(AlloyEditor.ButtonStylesListItemRemove, { editor: this.props.editor });
+                removeStylesItem = React.createElement(AlloyEditor.ButtonStylesListItemRemove, { editor: this.props.editor, onDismiss: this.props.toggleDropdown });
             }
 
             return React.createElement(
@@ -13389,6 +13344,147 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     'use strict';
 
     /**
+     * The ButtonTargetList class provides functionality for changing the target of a link
+     * in the document.
+     *
+     * @uses WidgetFocusManager
+     *
+     * @class ButtonTargetList
+     */
+
+    var ButtonTargetList = React.createClass({
+        displayName: 'ButtonTargetList',
+
+        mixins: [AlloyEditor.WidgetFocusManager],
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default linkTargetEdit
+             */
+            key: 'targetList'
+        },
+
+        /**
+         * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+         *
+         * @method componentDidMount
+         */
+        componentDidMount: function componentDidMount() {
+            ReactDOM.findDOMNode(this).focus();
+        },
+
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @method getDefaultProps
+         */
+        getDefaultProps: function getDefaultProps() {
+            return {
+                circular: true,
+                descendants: '.ae-toolbar-element',
+                keys: {
+                    dismiss: [27],
+                    dismissNext: [39],
+                    dismissPrev: [37],
+                    next: [40],
+                    prev: [38]
+                }
+            };
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            var listTargets = this._renderListTargets();
+
+            return React.createElement(
+                AlloyEditor.ButtonDropdown,
+                this.props,
+                listTargets
+            );
+        },
+
+        /**
+         * Returns the the allowed link target items.
+         *
+         * @protected
+         * @method _getAllowedTargetItems
+         *
+         * @return {Array} The allowed target items.
+         */
+        _getAllowedTargetItems: function _getAllowedTargetItems() {
+            return this.props.allowedLinkTargets || [{
+                label: AlloyEditor.Strings.linkTargetDefault,
+                value: ''
+            }, {
+                label: AlloyEditor.Strings.linkTargetSelf,
+                value: '_self'
+            }, {
+                label: AlloyEditor.Strings.linkTargetBlank,
+                value: '_blank'
+            }, {
+                label: AlloyEditor.Strings.linkTargetParent,
+                value: '_parent'
+            }, {
+                label: AlloyEditor.Strings.linkTargetTop,
+                value: '_top'
+            }];
+        },
+
+        /**
+         * Renders the allowed link target items.
+         *
+         * @method _renderListTargets
+         * @return {Object} Returns the rendered link items
+         */
+        _renderListTargets: function _renderListTargets() {
+            var targets = this._getAllowedTargetItems();
+
+            var handleLinkTargetChange = this.props.handleLinkTargetChange;
+
+            targets = targets.map(function (target) {
+                return React.createElement(
+                    'li',
+                    { key: target.value, role: 'option' },
+                    React.createElement(
+                        'button',
+                        { className: 'ae-toolbar-element', 'data-value': target.value, onClick: handleLinkTargetChange },
+                        target.label
+                    )
+                );
+            });
+
+            return targets;
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonTargetList.key] = AlloyEditor.ButtonTargetList = ButtonTargetList;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
      * The ButtonTwitter class provides functionality for creating a link which
      * allows people to tweet part of the content in the editor.
      *
@@ -14111,7 +14207,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         getDefaultProps: function getDefaultProps() {
             return {
                 circular: true,
-                descendants: '.ae-button, .ae-toolbar-element',
+                descendants: '.ae-input, .ae-button:not([disabled]), .ae-toolbar-element',
                 keys: {
                     dismiss: [27],
                     next: [39, 40],

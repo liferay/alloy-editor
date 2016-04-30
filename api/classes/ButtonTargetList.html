@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonCommandsList - alloyeditor</title>
+    <title>ButtonTargetList - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -175,7 +175,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonCommandsList <small>Class</small></h1>
+                                <h1>ButtonTargetList <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
@@ -188,7 +188,7 @@
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-commands-list.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-commands-list.jsx:4</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-target-list.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-target-list.jsx:4</code></a>
                                     </div>
                             
                             
@@ -196,8 +196,8 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>The ButtonCommandsList class provides functionality for showing a list of commands that can be
-                            executed to the current selection..</p>
+                                <p>The ButtonTargetList class provides functionality for changing the target of a link
+                            in the document.</p>
                             
                             </div>
                             
@@ -218,6 +218,10 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__getAllowedTargetItems">_getAllowedTargetItems</a>
+                            
+                                                        </li>
                                                         <li class="index-item method protected inherited">
                                                             <a href="#method__getFocusAction">_getFocusAction</a>
                             
@@ -242,8 +246,8 @@
                                                             <a href="#method__refresh">_refresh</a>
                             
                                                         </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__renderActions">_renderActions</a>
+                                                        <li class="index-item method">
+                                                            <a href="#method__renderListTargets">_renderListTargets</a>
                             
                                                         </li>
                                                         <li class="index-item method inherited">
@@ -285,10 +289,6 @@
                                                             <a href="#property_circular">circular</a>
                             
                                                         </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_commands">commands</a>
-                            
-                                                        </li>
                                                         <li class="index-item property inherited">
                                                             <a href="#property_descendants">descendants</a>
                             
@@ -310,10 +310,6 @@
                                                             <a href="#property_keys">keys</a>
                             
                                                         </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_listId">listId</a>
-                            
-                                                        </li>
                                                         <li class="index-item property inherited">
                                                             <a href="#property_onDismiss">onDismiss</a>
                             
@@ -327,6 +323,49 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
+                                                <div id="method__getAllowedTargetItems" class="method item protected">
+                                                    <h3 class="name"><code>_getAllowedTargetItems</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Array</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-target-list.jsx.html#l81"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-target-list.jsx:81</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Returns the the allowed link target items.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Array</span>:
+                                                                    <p>The allowed target items.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
                                                 <div id="method__getFocusAction" class="method item protected inherited">
                                                     <h3 class="name"><code>_getFocusAction</code></h3>
                                                 
@@ -718,17 +757,16 @@
                                                 
                                                 
                                                 </div>
-                                                <div id="method__renderActions" class="method item protected">
-                                                    <h3 class="name"><code>_renderActions</code></h3>
+                                                <div id="method__renderListTargets" class="method item">
+                                                    <h3 class="name"><code>_renderListTargets</code></h3>
                                                 
                                                         <span class="paren">()</span>
                                                 
                                                         <span class="returns-inline">
-                                                            <span class="type">Array</span>
+                                                            <span class="type">Object</span>
                                                         </span>
                                                 
                                                 
-                                                        <span class="flag protected">protected</span>
                                                 
                                                 
                                                 
@@ -737,7 +775,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-commands-list.jsx.html#l98"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-commands-list.jsx:98</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-target-list.jsx.html#l109"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-target-list.jsx:109</code></a>
                                                         </p>
                                                 
                                                 
@@ -745,7 +783,7 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Renders instances of ButtonCommandListItem with the description of the row action that will be executed.</p>
+                                                        <p>Renders the allowed link target items.</p>
                                                 
                                                     </div>
                                                 
@@ -754,8 +792,8 @@
                                                             <h4>Returns:</h4>
                                                 
                                                             <div class="returns-description">
-                                                                        <span class="type">Array</span>:
-                                                                    <p>Rendered instances of ButtonCommandListItem class</p>
+                                                                        <span class="type">Object</span>:
+                                                                    <p>Returns the rendered link items</p>
                                                 
                                                             </div>
                                                         </div>
@@ -779,7 +817,7 @@
                                                                 WidgetFocusManager
                                                             </a>
                                                             but overwritten in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-commands-list.jsx.html#l51"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-commands-list.jsx:51</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-target-list.jsx.html#l37"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-target-list.jsx:37</code></a>
                                                         </p>
                                                 
                                                 
@@ -788,7 +826,6 @@
                                                 
                                                     <div class="description">
                                                         <p>Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.</p>
-                                                <p>Focuses on the list node to allow keyboard interaction.</p>
                                                 
                                                     </div>
                                                 
@@ -863,9 +900,6 @@
                                                 
                                                         <span class="paren">()</span>
                                                 
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
                                                 
                                                 
                                                 
@@ -876,7 +910,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-commands-list.jsx.html#l62"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-commands-list.jsx:62</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-target-list.jsx.html#l46"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-target-list.jsx:46</code></a>
                                                         </p>
                                                 
                                                 
@@ -889,15 +923,6 @@
                                                     </div>
                                                 
                                                 
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                                    <p>The default properties.</p>
-                                                
-                                                            </div>
-                                                        </div>
                                                 
                                                 </div>
                                                 <div id="method_handleKey" class="method item inherited">
@@ -1024,7 +1049,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-commands-list.jsx.html#l82"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-commands-list.jsx:82</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-target-list.jsx.html#l65"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-target-list.jsx:65</code></a>
                                                         </p>
                                                 
                                                 
@@ -1032,7 +1057,7 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Lifecycle. Renders the UI of the list.</p>
+                                                        <p>Lifecycle. Renders the UI of the button.</p>
                                                 
                                                     </div>
                                                 
@@ -1078,31 +1103,6 @@
                                                 
                                                 
                                                 </div>
-                                                <div id="property_commands" class="property item">
-                                                    <h3 class="name"><code>commands</code></h3>
-                                                    <span class="type">Array</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-commands-list.jsx.html#l17"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-commands-list.jsx:17</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>List of the commands the button is able to handle.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
                                                 <div id="property_descendants" class="property item inherited">
                                                     <h3 class="name"><code>descendants</code></h3>
                                                     <span class="type">String</span>
@@ -1139,7 +1139,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-commands-list.jsx.html#l24"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-commands-list.jsx:24</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-target-list.jsx.html#l17"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-target-list.jsx:17</code></a>
                                                         </p>
                                                 
                                                 
@@ -1190,7 +1190,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-commands-list.jsx.html#l41"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-commands-list.jsx:41</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-target-list.jsx.html#l27"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-target-list.jsx:27</code></a>
                                                         </p>
                                                 
                                                 
@@ -1201,7 +1201,7 @@
                                                 
                                                     </div>
                                                 
-                                                        <p><strong>Default:</strong> buttonCommandsList</p>
+                                                        <p><strong>Default:</strong> linkTargetEdit</p>
                                                 
                                                 
                                                 </div>
@@ -1226,31 +1226,6 @@
                                                         <p>Object representing the keys used to navigate between descendants. The format for the prop is:
                                                 <code>{dismiss: value, dismissNext: value, dismissPrev: value, next: value, prev: value}</code> where
                                                 value can be both a number or an array of numbers with the allowed keyCodes.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_listId" class="property item">
-                                                    <h3 class="name"><code>listId</code></h3>
-                                                    <span class="type">String</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-commands-list.jsx.html#l31"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-commands-list.jsx:31</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>List id to be used for accessibility purposes such as aria-owns.</p>
                                                 
                                                     </div>
                                                 

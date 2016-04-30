@@ -111,6 +111,7 @@
                                     <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
                                     <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
                                     <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
                                     <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
@@ -186,20 +187,15 @@
                                  * The ButtonLinkTargetEdit class provides functionality for changing the target of a link
                                  * in the document.
                                  *
-                                 * @uses WidgetFocusManager
-                                 *
                                  * @class ButtonLinkTargetEdit
                                  */
                                 var ButtonLinkTargetEdit = React.createClass({
-                                    mixins: [AlloyEditor.WidgetFocusManager],
-                            
                                     // Allows validating props being passed to the component.
                                     propTypes: {
                                         /**
                                          * List of the allowed items for the target attribute. Every allowed target is an object
                                          * with a &#x60;label&#x60; attribute that will be shown in the dropdown and a &#x60;value&#x60; attribute
                                          * that will get set as the link target attribute.
-                                         *
                                          * @property {Array&lt;object&gt;} allowedTargets
                                          */
                                         allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
@@ -216,7 +212,7 @@
                                          *
                                          * @property {String} selectedTarget
                                          */
-                                        selectedTarget: React.PropTypes.string.isRequired
+                                        selectedTarget: React.PropTypes.string
                                     },
                             
                                     // Lifecycle. Provides static properties to the widget.
@@ -232,46 +228,29 @@
                                     },
                             
                                     /**
-                                     * Lifecycle. Returns the default values of the properties used in the widget.
-                                     *
-                                     * @method getDefaultProps
-                                     */
-                                    getDefaultProps: function() {
-                                        return {
-                                            circular: false,
-                                            descendants: &#x27;.ae-toolbar-element&#x27;,
-                                            keys: {
-                                                dismiss: [27],
-                                                dismissNext: [39],
-                                                dismissPrev: [37],
-                                                next: [40],
-                                                prev: [38]
-                                            }
-                                        };
-                                    },
-                            
-                                    /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
                                      * @method render
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
-                                        var allowedTargetsList;
+                                        var buttonTargetsList;
+                            
+                                         var handleLinkTargetChange = this.props.handleLinkTargetChange;
                             
                                         if (this.props.expanded) {
-                                            allowedTargetsList = this._getAllowedTargetsList();
+                                            buttonTargetsList= &lt;AlloyEditor.ButtonTargetList editor={this.props.editor} onDismiss={this.props.toggleDropdown} handleLinkTargetChange={handleLinkTargetChange}/&gt;;
                                         }
                             
                                         return (
-                                            &lt;div className=&quot;ae-container-edit-link-target ae-container-dropdown ae-container-dropdown-medium ae-has-dropdown&quot; onFocus={this.focus} onKeyDown={this.handleKey} tabIndex=&quot;0&quot;&gt;
+                                            &lt;div className=&quot;ae-container-edit-link-target ae-container-dropdown ae-container-dropdown-medium ae-has-dropdown&quot; tabIndex=&quot;0&quot;&gt;
                                                 &lt;button aria-expanded={this.props.expanded} aria-label={this.props.selectedTarget} className=&quot;ae-toolbar-element&quot; onClick={this.props.toggleDropdown} role=&quot;combobox&quot; tabIndex={this.props.tabIndex} title={this.props.selectedTarget}&gt;
                                                     &lt;div className=&quot;ae-container&quot;&gt;
                                                         &lt;span className=&quot;ae-container-dropdown-selected-item&quot;&gt;{this.props.selectedTarget}&lt;/span&gt;
                                                         &lt;span className=&quot;ae-icon-arrow&quot;&gt;&lt;/span&gt;
                                                     &lt;/div&gt;
                                                 &lt;/button&gt;
-                                                {allowedTargetsList}
+                                               {buttonTargetsList}
                                             &lt;/div&gt;
                                         );
                                     },
@@ -286,44 +265,6 @@
                                      */
                                     shouldComponentUpdate: function(nextProps, nextState) {
                                         return nextProps.expanded !== this.props.expanded || nextProps.selectedTarget !== this.props.selectedTarget;
-                                    },
-                            
-                                    /**
-                                     * Creates the dropdown list of allowed link targets.
-                                     *
-                                     * @protected
-                                     * @method _getAllowedTargetsList
-                                     *
-                                     * @return {Object} The allowed targets dropdown.
-                                     */
-                                    _getAllowedTargetsList: function() {
-                                        return(
-                                            &lt;AlloyEditor.ButtonDropdown&gt;
-                                                {this._getAllowedTargetsListItems()}
-                                            &lt;/AlloyEditor.ButtonDropdown&gt;
-                                        );
-                                    },
-                            
-                                    /**
-                                     * Creates the allowed link target items.
-                                     *
-                                     * @protected
-                                     * @method _getAllowedTargetsListItems
-                                     *
-                                     * @return {Array} The allowed target items.
-                                     */
-                                    _getAllowedTargetsListItems: function() {
-                                        var handleLinkTargetChange = this.props.handleLinkTargetChange;
-                            
-                                        var items = this.props.allowedTargets.map(function(item) {
-                                            return (
-                                                &lt;li key={item.value} role=&quot;option&quot;&gt;
-                                                    &lt;button className=&quot;ae-toolbar-element&quot; data-value={item.value} onClick={handleLinkTargetChange}&gt;{item.label}&lt;/button&gt;
-                                                &lt;/li&gt;
-                                            );
-                                        });
-                            
-                                        return items;
                                     }
                                 });
                             

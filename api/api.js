@@ -55,6 +55,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonTableHeading",
         "ButtonTableRemove",
         "ButtonTableRow",
+        "ButtonTargetList",
         "ButtonTwitter",
         "ButtonUnderline",
         "ButtonUnorderedlist",
