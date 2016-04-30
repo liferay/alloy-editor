@@ -270,6 +270,8 @@
                             
                                             nativeEditor.destroy();
                                         }
+                            
+                                        window.removeEventListener(&#x27;resize&#x27;, this._resizeEventListener);
                                     },
                             
                                     /**
@@ -342,15 +344,23 @@
                             
                                             uiNode.appendChild(editorUIElement);
                             
+                                            var eventsDelay = this.get(&#x27;eventsDelay&#x27;);
+                            
                                             this._mainUI = ReactDOM.render(React.createElement(AlloyEditor.UI, {
                                                 editor: this,
-                                                eventsDelay: this.get(&#x27;eventsDelay&#x27;),
+                                                eventsDelay: eventsDelay,
                                                 toolbars: this.get(&#x27;toolbars&#x27;)
                                             }), editorUIElement);
                             
                                             this._editorUIElement = editorUIElement;
                             
                                             this.get(&#x27;nativeEditor&#x27;).fire(&#x27;uiReady&#x27;);
+                            
+                                            this._resizeEventListener = CKEDITOR.tools.debounce(function() {
+                                                this._mainUI.forceUpdate();
+                                            }, eventsDelay, this);
+                            
+                                            window.addEventListener(&#x27;resize&#x27;, this._resizeEventListener);
                                         }
                                     },
                             
