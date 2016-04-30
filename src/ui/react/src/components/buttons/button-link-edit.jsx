@@ -1,14 +1,12 @@
 (function () {
     'use strict';
 
-    var KEY_ENTER = 13;
-    var KEY_ESC = 27;
-
     /**
      * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
      * Provides UI for creating, editing and removing a link.
      *
      * @uses WidgetDropdown
+     * @uses WidgetFocusManager
      * @uses ButtonCfgProps
      *
      * @class ButtonLinkEdit
@@ -46,7 +44,6 @@
              */
             defaultLinkTarget: React.PropTypes.string,
 
-
             /**
              * Indicates whether the link target selector should appear.
              *
@@ -67,7 +64,6 @@
                 React.PropTypes.func,
                 React.PropTypes.arrayOf(React.PropTypes.object)
             ])
-
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -133,7 +129,6 @@
             };
         },
 
-
         /**
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
@@ -146,14 +141,14 @@
             var target = link ? link.getAttribute('target') : this.props.defaultLinkTarget;
 
             return {
+                autocompleteSelected: false,
                 element: link,
                 initialLink: {
                     href: href,
                     target: target
                 },
                 linkHref: href,
-                linkTarget: target,
-                selectAutocomplete: false
+                linkTarget: target
             };
         },
 
@@ -195,8 +190,8 @@
                     handleLinkAutocompleteClick: this._handleLinkAutocompleteClick,
                     onDismiss: this.props.toggleDropdown,
                     term: this.state.linkHref,
-                    selectAutocomplete: this.state.selectAutocomplete,
-                    updateSelectAutocomplete: this._updateSelectAutocomplete
+                    autocompleteSelected: this.state.autocompleteSelected,
+                    setAutocompleteState: this._setAutocompleteState
                 };
 
                 autocompleteDropdownProps = this.mergeDropdownProps(autocompleteDropdownProps, AlloyEditor.ButtonLinkAutocompleteList.key);
@@ -204,7 +199,7 @@
                 autocompleteDropdown = <AlloyEditor.ButtonLinkAutocompleteList {...autocompleteDropdownProps} />;
             }
 
-            return(
+            return (
                 <div className="ae-container-edit-link">
                     <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
                         <span className="ae-icon-unlink"></span>
@@ -221,7 +216,7 @@
                         <span className="ae-icon-ok"></span>
                     </button>
                 </div>
-            )
+            );
         },
 
         /**
@@ -269,19 +264,17 @@
          * @param {SyntheticEvent} event The keyboard event.
          */
         _handleKeyDown: function(event) {
-            if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+            if (event.keyCode === 13 || event.keyCode === 27) {
                 event.preventDefault();
             }
 
-            if (event.keyCode === KEY_ENTER) {
+            if (event.keyCode === 13) {
                 this._updateLink();
-            }
-            else if (event.keyCode === 40) {
+            } else if (event.keyCode === 40) {
                 this.setState({
-                    selectAutocomplete: true
+                    autocompleteSelected: true
                 });
-            }
-            else if (event.keyCode === KEY_ESC) {
+            } else if (event.keyCode === 27) {
                 var editor = this.props.editor.get('nativeEditor');
 
                 new CKEDITOR.Link(editor).advanceSelection();
@@ -338,6 +331,25 @@
         },
 
         /**
+         * Verifies that the current link state is valid so the user can save the link. A valid state
+         * means that we have a non-empty href and that either that or the link target are different
+         * from the original link.
+         *
+         * @protected
+         * @method _isValidState
+         * @return {Boolean} [description]
+         */
+        _isValidState: function() {
+            var validState =
+                this.state.linkHref && (
+                    this.state.linkHref !== this.state.initialLink.href ||
+                    this.state.linkTarget !== this.state.initialLink.target
+                );
+
+            return validState;
+        },
+
+        /**
          * Removes the link in the editor element.
          *
          * @protected
@@ -361,14 +373,14 @@
         },
 
         /**
-         * Update selectAutocomplete state to focus and select autocomplete´s dropdown
+         * Update autocompleteSelected state to focus and select autocomplete´s dropdown
          *
          * @protected
-         * @method _updateSelectAutocomplete
+         * @method _setAutocompleteState
          */
-        _updateSelectAutocomplete: function(value) {
+        _setAutocompleteState: function(state) {
             this.setState({
-                selectAutocomplete: value
+                autocompleteSelected: state.selected
             });
         },
 
@@ -402,25 +414,6 @@
             // We need to cancelExclusive with the bound parameters in case the button is used
             // inside another in exclusive mode (such is the case of the link button)
             this.props.cancelExclusive();
-        },
-
-        /**
-         * Verifies that the current link state is valid so the user can save the link. A valid state
-         * means that we have a non-empty href and that either that or the link target are different
-         * from the original link.
-         *
-         * @protected
-         * @method _isValidState
-         * @return {Boolean} [description]
-         */
-        _isValidState: function() {
-            var validState =
-                this.state.linkHref && (
-                    this.state.linkHref !== this.state.initialLink.href ||
-                    this.state.linkTarget !== this.state.initialLink.target
-                );
-
-            return validState;
         }
     });
 

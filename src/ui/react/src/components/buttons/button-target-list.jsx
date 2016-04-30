@@ -19,7 +19,7 @@
              *
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: React.PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -34,14 +34,17 @@
             key: 'targetList'
         },
 
-
+        /**
+         * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+         *
+         * @method componentDidMount
+         */
         componentDidMount: function() {
             ReactDOM.findDOMNode(this).focus();
         },
 
         /**
-         * Life
-         cycle. Returns the default values of the properties used in the widget.
+         * Lifecycle. Returns the default values of the properties used in the widget.
          *
          * @method getDefaultProps
          */
@@ -59,7 +62,6 @@
             };
         },
 
-
         /**
          * Lifecycle. Renders the UI of the button.
          *
@@ -67,15 +69,23 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var listTargets = this._listTargets();
+            var listTargets = this._renderListTargets();
 
             return (
                 <AlloyEditor.ButtonDropdown {...this.props}>
-                        {listTargets}
+                    {listTargets}
                 </AlloyEditor.ButtonDropdown>
             );
         },
 
+        /**
+         * Returns the the allowed link target items.
+         *
+         * @protected
+         * @method _getAllowedTargetItems
+         *
+         * @return {Array} The allowed target items.
+         */
         _getAllowedTargetItems: function() {
             return this.props.allowedLinkTargets || [{
                 label: AlloyEditor.Strings.linkTargetDefault,
@@ -96,7 +106,13 @@
             }];
         },
 
-        _listTargets: function() {
+        /**
+         * Renders the allowed link target items.
+         *
+         * @method _renderListTargets
+         * @return {Object} Returns the rendered link items
+         */
+        _renderListTargets: function() {
             var targets = this._getAllowedTargetItems();
 
             var handleLinkTargetChange = this.props.handleLinkTargetChange;

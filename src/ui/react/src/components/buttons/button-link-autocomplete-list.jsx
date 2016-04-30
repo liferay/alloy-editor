@@ -22,11 +22,11 @@
             data: React.PropTypes.func,
 
             /**
-            * Indicate if this is focused when this component is updated
-            *
-            * @property {Boolean} selectAutocomplete
-            */
-            selectAutocomplete: React.PropTypes.bool,
+             * Indicates if this is focused when this component is updated
+             *
+             * @property {Boolean} autocompleteSelected
+             */
+            autocompleteSelected: React.PropTypes.bool,
 
             /**
              * The current term to autocomplete for
@@ -38,9 +38,9 @@
             /**
             * Method to update parent selectautocomplete state
             *
-            * @property {Function} updateSelectAutocomplete
+            * @property {Function} setAutocompleteState
             */
-            updateSelectAutocomplete: React.PropTypes.func
+            setAutocompleteState: React.PropTypes.func
 
         },
 
@@ -55,6 +55,7 @@
              */
             key: 'buttonLinkAutocompleteList'
         },
+
         /**
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
@@ -74,9 +75,11 @@
                 }
             }
 
-            if (nextProps.selectAutocomplete) {
+            if (nextProps.autocompleteSelected) {
                 setTimeout(this.focus, 0);
-                this.props.updateSelectAutocomplete(false);
+                this.props.setAutocompleteState({
+                    selected: false
+                });
             }
         },
 

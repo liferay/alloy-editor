@@ -5,19 +5,16 @@
      * The ButtonLinkTargetEdit class provides functionality for changing the target of a link
      * in the document.
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonLinkTargetEdit
      */
     var ButtonLinkTargetEdit = React.createClass({
-
         // Allows validating props being passed to the component.
         propTypes: {
             /**
              * List of the allowed items for the target attribute. Every allowed target is an object
              * with a `label` attribute that will be shown in the dropdown and a `value` attribute
              * that will get set as the link target attribute.
-             * * @property {Array<object>} allowedTargets
+             * @property {Array<object>} allowedTargets
              */
             allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
 
@@ -52,7 +49,6 @@
          * Lifecycle. Renders the UI of the button.
          *
          * @method render
-         * @method render
          * @return {Object} The content which should be rendered.
          */
         render: function() {
@@ -61,7 +57,7 @@
              var handleLinkTargetChange = this.props.handleLinkTargetChange;
 
             if (this.props.expanded) {
-                buttonTargetsList= <AlloyEditor.ButtonTargetList editor={this.props.editor} onDismiss={this.props.toggleDropdown} handleLinkTargetChange={handleLinkTargetChange}/>
+                buttonTargetsList= <AlloyEditor.ButtonTargetList editor={this.props.editor} onDismiss={this.props.toggleDropdown} handleLinkTargetChange={handleLinkTargetChange}/>;
             }
 
             return (

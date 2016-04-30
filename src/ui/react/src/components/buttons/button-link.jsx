@@ -87,6 +87,7 @@
          */
         render: function() {
             var cssClass = 'ae-button ' + this.getStateClasses();
+
             if (this.props.renderExclusive) {
                 var props = this.mergeButtonCfgProps();
 
