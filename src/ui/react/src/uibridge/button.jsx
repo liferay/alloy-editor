@@ -21,6 +21,8 @@
         toFeature: noop
     };
 
+    var BUTTON_DEFS = {};
+
     /**
      * Generates a ButtonBridge React class for a given button definition if it has not been
      * already created based on the button name and definition.
@@ -31,12 +33,14 @@
      * @param {Object} buttonDefinition The button's definition
      * @return {Object} The generated or already existing React Button Class
      */
-    function generateButtonBridge(buttonName, buttonDefinition) {
+
+    function generateButtonBridge(buttonName, buttonDefinition, editor) {
         var ButtonBridge = AlloyEditor.Buttons[buttonName];
 
-        if (!ButtonBridge) {
-            var buttonDisplayName = buttonDefinition.name || buttonDefinition.command || buttonName;
+        BUTTON_DEFS[editor.name] = BUTTON_DEFS[editor.name] || {};
+        BUTTON_DEFS[editor.name][buttonName] = BUTTON_DEFS[editor.name][buttonName] || buttonDefinition;
 
+        if (!ButtonBridge) {
             ButtonBridge = React.createClass(
                 CKEDITOR.tools.merge(UNSUPPORTED_BUTTON_API, {
                     displayName: buttonName,
@@ -51,8 +55,16 @@
                     },
 
                     render: function() {
+                        var editor = this.props.editor.get('nativeEditor');
+
                         var buttonClassName = 'ae-button ae-button-bridge';
+
+                        var buttonDisplayName = BUTTON_DEFS[editor.name][buttonName].name || BUTTON_DEFS[editor.name][buttonName].command || buttonName;
+
+                        var buttonLabel = BUTTON_DEFS[editor.name][buttonName].label;
+
                         var buttonType = 'button-' + buttonDisplayName;
+
                         var iconClassName = 'ae-icon-' + buttonDisplayName;
 
                         var iconStyle = {};
@@ -68,7 +80,7 @@
                         }
 
                         return (
-                            <button aria-label={buttonDefinition.label} className={buttonClassName} data-type={buttonType} onClick={this._handleClick} tabIndex={this.props.tabIndex} title={buttonDefinition.label}>
+                            <button aria-label={buttonLabel} className={buttonClassName} data-type={buttonType} onClick={this._handleClick} tabIndex={this.props.tabIndex} title={buttonLabel}>
                                 <span className={iconClassName} style={iconStyle}></span>
                             </button>
                         );
@@ -77,10 +89,14 @@
                     _handleClick: function(event) {
                         var editor = this.props.editor.get('nativeEditor');
 
-                        if (buttonDefinition.onClick) {
-                            buttonDefinition.onClick.call(this);
+                        var buttonCommand = BUTTON_DEFS[editor.name][buttonName].command;
+
+                        var buttonOnClick = BUTTON_DEFS[editor.name][buttonName].onClick;
+
+                        if (buttonOnClick) {
+                            buttonOnClick.call(this);
                         } else {
-                            editor.execCommand(buttonDefinition.command);
+                            editor.execCommand(buttonCommand);
                         }
 
                         editor.fire('actionPerformed', this);
