@@ -30,7 +30,7 @@
                 var typeHandler = this._.handlers[type];
 
                 if (typeHandler && typeHandler.add) {
-                    typeHandler.add(name, definition);
+                    typeHandler.add(name, definition, editor);
                 }
             };
         }
