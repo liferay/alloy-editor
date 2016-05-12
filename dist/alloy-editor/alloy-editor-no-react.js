@@ -5140,6 +5140,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
         toFeature: noop
     };
 
+    var BUTTON_DEFS = {};
+
     /**
      * Generates a ButtonBridge React class for a given button definition if it has not been
      * already created based on the button name and definition.
@@ -5150,12 +5152,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
      * @param {Object} buttonDefinition The button's definition
      * @return {Object} The generated or already existing React Button Class
      */
-    function generateButtonBridge(buttonName, buttonDefinition) {
+
+    function generateButtonBridge(buttonName, buttonDefinition, editor) {
         var ButtonBridge = AlloyEditor.Buttons[buttonName];
 
-        if (!ButtonBridge) {
-            var buttonDisplayName = buttonDefinition.name || buttonDefinition.command || buttonName;
+        BUTTON_DEFS[editor.name] = BUTTON_DEFS[editor.name] || {};
+        BUTTON_DEFS[editor.name][buttonName] = BUTTON_DEFS[editor.name][buttonName] || buttonDefinition;
 
+        if (!ButtonBridge) {
             ButtonBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_BUTTON_API, {
                 displayName: buttonName,
 
@@ -5169,8 +5173,16 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 },
 
                 render: function render() {
+                    var editor = this.props.editor.get('nativeEditor');
+
                     var buttonClassName = 'ae-button ae-button-bridge';
+
+                    var buttonDisplayName = BUTTON_DEFS[editor.name][buttonName].name || BUTTON_DEFS[editor.name][buttonName].command || buttonName;
+
+                    var buttonLabel = BUTTON_DEFS[editor.name][buttonName].label;
+
                     var buttonType = 'button-' + buttonDisplayName;
+
                     var iconClassName = 'ae-icon-' + buttonDisplayName;
 
                     var iconStyle = {};
@@ -5187,7 +5199,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
                     return React.createElement(
                         'button',
-                        { 'aria-label': buttonDefinition.label, className: buttonClassName, 'data-type': buttonType, onClick: this._handleClick, tabIndex: this.props.tabIndex, title: buttonDefinition.label },
+                        { 'aria-label': buttonLabel, className: buttonClassName, 'data-type': buttonType, onClick: this._handleClick, tabIndex: this.props.tabIndex, title: buttonLabel },
                         React.createElement('span', { className: iconClassName, style: iconStyle })
                     );
                 },
@@ -5195,10 +5207,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 _handleClick: function _handleClick(event) {
                     var editor = this.props.editor.get('nativeEditor');
 
-                    if (buttonDefinition.onClick) {
-                        buttonDefinition.onClick.call(this);
+                    var buttonCommand = BUTTON_DEFS[editor.name][buttonName].command;
+
+                    var buttonOnClick = BUTTON_DEFS[editor.name][buttonName].onClick;
+
+                    if (buttonOnClick) {
+                        buttonOnClick.call(this);
                     } else {
-                        editor.execCommand(buttonDefinition.command);
+                        editor.execCommand(buttonCommand);
                     }
 
                     editor.fire('actionPerformed', this);
@@ -5275,6 +5291,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
         createPanel: noop
     };
 
+    var PANEL_MENU_DEFS = {};
+
     /**
      * Generates a PanelMenuButtonBridge React class for a given panelmenubutton definition if it has not been
      * already created based on the panelmenubutton name and definition.
@@ -5285,12 +5303,13 @@ CKEDITOR.tools.buildTableMap = function (table) {
      * @param {Object} panelMenuButtonDefinition The panel button definition
      * @return {Object} The generated or already existing React PanelMenuButton Class
      */
-    var generatePanelMenuButtonBridge = function generatePanelMenuButtonBridge(panelMenuButtonName, panelMenuButtonDefinition) {
+    var generatePanelMenuButtonBridge = function generatePanelMenuButtonBridge(panelMenuButtonName, panelMenuButtonDefinition, editor) {
         var PanelMenuButtonBridge = AlloyEditor.Buttons[panelMenuButtonName];
 
-        if (!PanelMenuButtonBridge) {
-            var panelMenuButtonDisplayName = panelMenuButtonDefinition.name || panelMenuButtonDefinition.command || buttonName;
+        PANEL_MENU_DEFS[editor.name] = PANEL_MENU_DEFS[editor.name] || {};
+        PANEL_MENU_DEFS[editor.name][panelMenuButtonName] = PANEL_MENU_DEFS[editor.name][panelMenuButtonName] || panelMenuButtonDefinition;
 
+        if (!PanelMenuButtonBridge) {
             PanelMenuButtonBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_PANEL_MENU_BUTTON_API, {
                 displayName: panelMenuButtonName,
 
@@ -5303,7 +5322,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 },
 
                 render: function render() {
+                    var editor = this.props.editor.get('nativeEditor');
+
+                    var panelMenuButtonDisplayName = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].name || PANEL_MENU_DEFS[editor.name][panelMenuButtonName].command || panelMenuButtonName;
+
                     var buttonClassName = 'ae-button ae-button-bridge';
+
                     var iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
 
                     var iconStyle = {};
@@ -5329,7 +5353,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                         { className: 'ae-container ae-has-dropdown' },
                         React.createElement(
                             'button',
-                            { 'aria-expanded': this.props.expanded, 'aria-label': panelMenuButtonDefinition.label, className: buttonClassName, onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: panelMenuButtonDefinition.label },
+                            { 'aria-expanded': this.props.expanded, 'aria-label': PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label, className: buttonClassName, onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label },
                             React.createElement('span', { className: iconClassName, style: iconStyle })
                         ),
                         panel
@@ -5337,6 +5361,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 },
 
                 _getPanel: function _getPanel() {
+                    var editor = this.props.editor.get('nativeEditor');
+
+                    var panelMenuButtonOnBlock = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].onBlock;
+
                     var panel = {
                         hide: this.props.toggleDropdown,
                         show: this.props.toggleDropdown
@@ -5350,8 +5378,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                     };
 
                     /* istanbul ignore else */
-                    if (panelMenuButtonDefinition.onBlock) {
-                        panelMenuButtonDefinition.onBlock.call(this, panel, block);
+                    if (panelMenuButtonOnBlock) {
+                        panelMenuButtonOnBlock.call(this, panel, block);
                     }
 
                     // TODO
@@ -5449,6 +5477,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
         unmarkAll: noop
     };
 
+    var RICH_COMBO_DEFS = {};
+
     /**
      * Generates a RichComboBridge React class for a given richcombo definition if it has not been
      * already created based on the richcombo name and definition.
@@ -5459,14 +5489,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
      * @param {Object} richComboDefinition The rich combo definition
      * @return {Object} The generated or already existing React RichCombo Class
      */
-    var generateRichComboBridge = function generateRichComboBridge(richComboName, richComboDefinition) {
+    var generateRichComboBridge = function generateRichComboBridge(richComboName, richComboDefinition, editor) {
         var RichComboBridge = AlloyEditor.Buttons[richComboName];
 
-        if (!RichComboBridge) {
-            var richComboState = {
-                value: undefined
-            };
+        RICH_COMBO_DEFS[editor.name] = RICH_COMBO_DEFS[editor.name] || {};
+        RICH_COMBO_DEFS[editor.name][richComboName] = RICH_COMBO_DEFS[editor.name][richComboName] || richComboDefinition;
+        RICH_COMBO_DEFS[editor.name][richComboName].currentValue = undefined;
 
+        if (!RichComboBridge) {
             RichComboBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_RICHCOMBO_API, {
                 displayName: richComboName,
 
@@ -5487,16 +5517,20 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 },
 
                 componentWillMount: function componentWillMount() {
+                    var editor = this.props.editor.get('nativeEditor');
+
+                    var editorCombo = RICH_COMBO_DEFS[editor.name][richComboName];
+
                     this._items = [];
 
                     this.setValue = this._setValue;
 
-                    if (richComboDefinition.init) {
-                        richComboDefinition.init.call(this);
+                    if (editorCombo.init) {
+                        editorCombo.init.call(this);
                     }
 
-                    if (richComboDefinition.onRender) {
-                        richComboDefinition.onRender.call(this);
+                    if (editorCombo.onRender) {
+                        editorCombo.onRender.call(this);
                     }
                 },
 
@@ -5508,7 +5542,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
                 getInitialState: function getInitialState() {
                     return {
-                        value: richComboState.value
+                        value: RICH_COMBO_DEFS[editor.name][richComboName].currentValue
                     };
                 },
 
@@ -5517,7 +5551,9 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 },
 
                 render: function render() {
-                    var richComboLabel = this.state.value || richComboDefinition.label;
+                    var editor = this.props.editor.get('nativeEditor');
+
+                    var richComboLabel = RICH_COMBO_DEFS[editor.name][richComboName].currentValue || richComboDefinition.label;
 
                     var itemsList;
 
@@ -5547,7 +5583,9 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 },
 
                 _cacheValue: function _cacheValue(value) {
-                    richComboState.value = value;
+                    var editor = this.props.editor.get('nativeEditor');
+
+                    RICH_COMBO_DEFS[editor.name][richComboName].currentValue = value;
                 },
 
                 _getItems: function _getItems() {
@@ -5575,8 +5613,14 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 _onClick: function _onClick(event) {
                     var editor = this.props.editor.get('nativeEditor');
 
-                    if (richComboDefinition.onClick) {
-                        richComboDefinition.onClick.call(this, event.currentTarget.getAttribute('data-value'));
+                    var editorCombo = RICH_COMBO_DEFS[editor.name][richComboName];
+
+                    if (editorCombo.onClick) {
+                        var newValue = event.currentTarget.getAttribute('data-value');
+
+                        editorCombo.onClick.call(this, newValue);
+
+                        RICH_COMBO_DEFS[editor.name][richComboName].currentValue = newValue;
 
                         editor.fire('actionPerformed', this);
                     }
@@ -5674,7 +5718,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 var typeHandler = this._.handlers[type];
 
                 if (typeHandler && typeHandler.add) {
-                    typeHandler.add(name, definition);
+                    typeHandler.add(name, definition, editor);
                 }
             };
         }
