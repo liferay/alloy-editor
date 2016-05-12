@@ -29,6 +29,8 @@
         unmarkAll: noop
     };
 
+    var RICH_COMBO_DEFS = {};
+
     /**
      * Generates a RichComboBridge React class for a given richcombo definition if it has not been
      * already created based on the richcombo name and definition.
@@ -39,14 +41,14 @@
      * @param {Object} richComboDefinition The rich combo definition
      * @return {Object} The generated or already existing React RichCombo Class
      */
-    var generateRichComboBridge = function(richComboName, richComboDefinition) {
+    var generateRichComboBridge = function(richComboName, richComboDefinition, editor) {
         var RichComboBridge = AlloyEditor.Buttons[richComboName];
 
-        if (!RichComboBridge) {
-            var richComboState = {
-                value: undefined
-            };
+        RICH_COMBO_DEFS[editor.name] =  RICH_COMBO_DEFS[editor.name] || {};
+        RICH_COMBO_DEFS[editor.name][richComboName] = RICH_COMBO_DEFS[editor.name][richComboName] || richComboDefinition;
+        RICH_COMBO_DEFS[editor.name][richComboName].currentValue = undefined;
 
+        if (!RichComboBridge) {
             RichComboBridge = React.createClass(
                 CKEDITOR.tools.merge(UNSUPPORTED_RICHCOMBO_API, {
                     displayName: richComboName,
@@ -68,16 +70,20 @@
                     },
 
                     componentWillMount: function () {
+                        var editor = this.props.editor.get('nativeEditor');
+
+                        var editorCombo = RICH_COMBO_DEFS[editor.name][richComboName];
+
                         this._items = [];
 
                         this.setValue = this._setValue;
 
-                        if (richComboDefinition.init) {
-                            richComboDefinition.init.call(this);
+                        if (editorCombo.init) {
+                            editorCombo.init.call(this);
                         }
 
-                        if (richComboDefinition.onRender) {
-                            richComboDefinition.onRender.call(this);
+                        if (editorCombo.onRender) {
+                            editorCombo.onRender.call(this);
                         }
                     },
 
@@ -89,7 +95,7 @@
 
                     getInitialState: function() {
                         return {
-                            value: richComboState.value
+                            value: RICH_COMBO_DEFS[editor.name][richComboName].currentValue
                         };
                     },
 
@@ -98,7 +104,9 @@
                     },
 
                     render: function() {
-                        var richComboLabel = this.state.value || richComboDefinition.label;
+                        var editor = this.props.editor.get('nativeEditor');
+
+                        var richComboLabel = RICH_COMBO_DEFS[editor.name][richComboName].currentValue || richComboDefinition.label;
 
                         var itemsList;
 
@@ -120,7 +128,9 @@
                     },
 
                     _cacheValue: function(value) {
-                        richComboState.value = value;
+                        var editor = this.props.editor.get('nativeEditor');
+
+                        RICH_COMBO_DEFS[editor.name][richComboName].currentValue = value;
                     },
 
                     _getItems: function() {
@@ -148,8 +158,14 @@
                     _onClick: function(event) {
                         var editor = this.props.editor.get('nativeEditor');
 
-                        if (richComboDefinition.onClick) {
-                            richComboDefinition.onClick.call(this, event.currentTarget.getAttribute('data-value'));
+                        var editorCombo = RICH_COMBO_DEFS[editor.name][richComboName];
+
+                        if (editorCombo.onClick) {
+                            var newValue = event.currentTarget.getAttribute('data-value');
+
+                            editorCombo.onClick.call(this, newValue);
+
+                            RICH_COMBO_DEFS[editor.name][richComboName].currentValue = newValue;
 
                             editor.fire('actionPerformed', this);
                         }
