@@ -15,6 +15,8 @@
         createPanel: noop
     };
 
+    var PANEL_MENU_DEFS = {};
+
     /**
      * Generates a PanelMenuButtonBridge React class for a given panelmenubutton definition if it has not been
      * already created based on the panelmenubutton name and definition.
@@ -25,12 +27,13 @@
      * @param {Object} panelMenuButtonDefinition The panel button definition
      * @return {Object} The generated or already existing React PanelMenuButton Class
      */
-    var generatePanelMenuButtonBridge = function(panelMenuButtonName, panelMenuButtonDefinition) {
+    var generatePanelMenuButtonBridge = function(panelMenuButtonName, panelMenuButtonDefinition, editor) {
         var PanelMenuButtonBridge = AlloyEditor.Buttons[panelMenuButtonName];
 
-        if (!PanelMenuButtonBridge) {
-            var panelMenuButtonDisplayName = panelMenuButtonDefinition.name || panelMenuButtonDefinition.command || buttonName;
+        PANEL_MENU_DEFS[editor.name] = PANEL_MENU_DEFS[editor.name] || {};
+        PANEL_MENU_DEFS[editor.name][panelMenuButtonName] = PANEL_MENU_DEFS[editor.name][panelMenuButtonName] || panelMenuButtonDefinition;
 
+        if (!PanelMenuButtonBridge) {
             PanelMenuButtonBridge = React.createClass(
                 CKEDITOR.tools.merge(UNSUPPORTED_PANEL_MENU_BUTTON_API, {
                     displayName: panelMenuButtonName,
@@ -44,7 +47,12 @@
                     },
 
                     render: function() {
+                        var editor = this.props.editor.get('nativeEditor');
+
+                        var panelMenuButtonDisplayName = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].name || PANEL_MENU_DEFS[editor.name][panelMenuButtonName].command || panelMenuButtonName;
+
                         var buttonClassName = 'ae-button ae-button-bridge';
+
                         var iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
 
                         var iconStyle = {};
@@ -67,7 +75,7 @@
 
                         return (
                             <div className="ae-container ae-has-dropdown">
-                                <button aria-expanded={this.props.expanded} aria-label={panelMenuButtonDefinition.label} className={buttonClassName} onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={panelMenuButtonDefinition.label}>
+                                <button aria-expanded={this.props.expanded} aria-label={PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label} className={buttonClassName} onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label}>
                                     <span className={iconClassName} style={iconStyle}></span>
                                 </button>
                                 {panel}
@@ -76,6 +84,10 @@
                     },
 
                     _getPanel: function() {
+                        var editor = this.props.editor.get('nativeEditor');
+
+                        var panelMenuButtonOnBlock = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].onBlock;
+
                         var panel = {
                             hide: this.props.toggleDropdown,
                             show: this.props.toggleDropdown
@@ -89,8 +101,8 @@
                         };
 
                         /* istanbul ignore else */
-                        if (panelMenuButtonDefinition.onBlock) {
-                            panelMenuButtonDefinition.onBlock.call(this, panel, block);
+                        if (panelMenuButtonOnBlock) {
+                            panelMenuButtonOnBlock.call(this, panel, block);
                         }
 
                         // TODO
