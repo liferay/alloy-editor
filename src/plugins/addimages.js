@@ -9,9 +9,17 @@
 
     /**
      * CKEditor plugin which allows Drag&Drop of images directly into the editable area. The image will be encoded
-     * as Data URI. An event `imageAdd` will be fired with the inserted element into the editable area.
+     * as Data URI. An event `beforeImageAdd` will be fired with the list of dropped images. If any of the listeners
+     * returns `false` or cancels the event, the images won't be added to the content. Otherwise,
+     * an event `imageAdd` will be fired with the inserted element into the editable area.
      *
      * @class CKEDITOR.plugins.ae_addimages
+     */
+
+    /**
+     * Fired before adding images to the editor.
+     * @event beforeImageAdd
+     * @param {Array} imageFiles Array of image files
      */
 
     /**
@@ -19,6 +27,7 @@
      *
      * @event imageAdd
      * @param {CKEDITOR.dom.element} el The created image with src as Data URI
+     * @param {File} file The image file
      */
 
     CKEDITOR.plugins.add(
@@ -62,10 +71,27 @@
              * @param {Object} editor The current editor instance
              */
             _handleFiles: function(files, editor) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
+                var file;
+                var i;
+
+                var imageFiles = [];
+
+                for (i = 0; i < files.length; i++) {
+                    file = files[i];
 
                     if (file.type.indexOf('image') === 0) {
+                        imageFiles.push(file);
+                    }
+                }
+
+                var result = editor.fire('beforeImageAdd', {
+                    imageFiles: imageFiles
+                });
+
+                if (!!result) {
+                    for (i = 0; i < files.length; i++) {
+                        file = files[i];
+
                         this._processFile(file, editor);
                     }
                 }
