@@ -22595,9 +22595,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * CKEditor plugin which allows Drag&Drop of images directly into the editable area. The image will be encoded
-     * as Data URI. An event `imageAdd` will be fired with the inserted element into the editable area.
+     * as Data URI. An event `beforeImageAdd` will be fired with the list of dropped images. If any of the listeners
+     * returns `false` or cancels the event, the images won't be added to the content. Otherwise,
+     * an event `imageAdd` will be fired with the inserted element into the editable area.
      *
      * @class CKEDITOR.plugins.ae_addimages
+     */
+
+    /**
+     * Fired before adding images to the editor.
+     * @event beforeImageAdd
+     * @param {Array} imageFiles Array of image files
      */
 
     /**
@@ -22605,6 +22613,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      *
      * @event imageAdd
      * @param {CKEDITOR.dom.element} el The created image with src as Data URI
+     * @param {File} file The image file
      */
 
     CKEDITOR.plugins.add('ae_addimages', {
@@ -22647,10 +22656,27 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @param {Object} editor The current editor instance
          */
         _handleFiles: function _handleFiles(files, editor) {
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
+            var file;
+            var i;
+
+            var imageFiles = [];
+
+            for (i = 0; i < files.length; i++) {
+                file = files[i];
 
                 if (file.type.indexOf('image') === 0) {
+                    imageFiles.push(file);
+                }
+            }
+
+            var result = editor.fire('beforeImageAdd', {
+                imageFiles: imageFiles
+            });
+
+            if (!!result) {
+                for (i = 0; i < files.length; i++) {
+                    file = files[i];
+
                     this._processFile(file, editor);
                 }
             }
@@ -23974,9 +24000,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * CKEditor plugin which allows pasting images directly into the editable area. The image will be encoded
-     * as Data URI. An event `imageAdd` will be fired with the inserted element into the editable area.
+     * as Data URI. An event `beforeImageAdd` will be fired with the list of pasted images. If any of the listeners
+     * returns `false` or cancels the event, the images won't be added to the content. Otherwise,
+     * an event `imageAdd` will be fired with the inserted element into the editable area.
      *
      * @class CKEDITOR.plugins.ae_pasteimages
+     */
+
+    /**
+     * Fired before adding images to the editor.
+     * @event beforeImageAdd
+     * @param {Array} imageFiles Array of image files
      */
 
     /**
@@ -23984,6 +24018,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      *
      * @event imageAdd
      * @param {CKEDITOR.dom.element} el The created image with src as Data URI
+     * @param {File} file The image file
      */
 
     CKEDITOR.plugins.add('ae_pasteimages', {
@@ -24025,16 +24060,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     var imageFile = pastedData.getAsFile();
 
                     reader.onload = function (event) {
-                        var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
+                        var result = editor.fire('beforeImageAdd', {
+                            imageFiles: imageFile
+                        });
 
-                        editor.insertElement(el);
+                        if (!!result) {
+                            var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
 
-                        var imageData = {
-                            el: el,
-                            file: imageFile
-                        };
+                            editor.insertElement(el);
 
-                        editor.fire('imageAdd', imageData);
+                            var imageData = {
+                                el: el,
+                                file: imageFile
+                            };
+
+                            editor.fire('imageAdd', imageData);
+                        }
                     }.bind(this);
 
                     reader.readAsDataURL(imageFile);
