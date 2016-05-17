@@ -367,12 +367,18 @@
                             
                                         var buttons = this._getButtons();
                                         var className = this._getToolbarClassName();
+                                        var containerClassName = &quot;ae-container&quot;;
+                                        if(this.props.renderExclusive &amp;&amp; buttons.length &gt; 1) {
+                            	            className += &quot; su_bootstrap_safe popover bottom in pane-grid-popover small&quot;;
+                            	            containerClassName += &quot; pane-grid small&quot;;
+                                        }
                             
                                         return (
                                             &lt;div aria-label={AlloyEditor.Strings.add} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
-                                                &lt;div className=&quot;ae-container&quot;&gt;
+                                                &lt;div className={containerClassName}&gt;
                                                     {buttons}
                                                 &lt;/div&gt;
+                                                &lt;div className=&quot;arrow&quot;&gt;&lt;/div&gt;
                                             &lt;/div&gt;
                                         );
                                     },

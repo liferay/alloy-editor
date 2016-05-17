@@ -14074,15 +14074,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var buttons = this._getButtons();
             var className = this._getToolbarClassName();
+            var containerClassName = "ae-container";
+            if (this.props.renderExclusive && buttons.length > 1) {
+                className += " su_bootstrap_safe popover bottom in pane-grid-popover small";
+                containerClassName += " pane-grid small";
+            }
 
             return React.createElement(
                 'div',
                 { 'aria-label': AlloyEditor.Strings.add, className: className, 'data-tabindex': this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: 'toolbar', tabIndex: '-1' },
                 React.createElement(
                     'div',
-                    { className: 'ae-container' },
+                    { className: containerClassName },
                     buttons
-                )
+                ),
+                React.createElement('div', { className: 'arrow' })
             );
         },
 
