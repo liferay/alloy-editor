@@ -70,12 +70,12 @@
             var selection = editor.getSelection();
 
             if (selection) {
-                var range = selection.getRanges()[0];
+                var embedWrapper = editor.getSelection().getSelectedElement();
 
-                range.endContainer.remove();
+                embedWrapper.remove();
+
+                editor.fire('actionPerformed', this);
             }
-
-            editor.fire('actionPerformed', this);
         }
     });
 
