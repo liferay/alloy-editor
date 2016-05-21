@@ -92,17 +92,6 @@
                         var embedWidgetUpcastFn = editor.config.embedWidgetUpcastFn || defaultEmbedWidgetUpcastFn;
 
                         return embedWidgetUpcastFn(element, data);
-                    },
-
-                    /**
-                     * Changes the widget's select state.
-                     *
-                     * @param {Boolean} selected Whether to select or deselect the widget
-                     */
-                    setSelected: function(selected) {
-                        if (selected) {
-                            editor.getSelection().selectElement(this.element);
-                        }
                     }
                 });
 
@@ -119,6 +108,33 @@
                             });
                         }
                     });
+                });
+
+                // Add a listener to handle selection change events an properly detect editor
+                // interactions on the widgets without messing with widget native selection
+                editor.on('selectionChange', function(event) {
+                    var selection = editor.getSelection();
+
+                    if (selection){
+                        var element = selection.getSelectedElement();
+
+                        if (element) {
+                            var widgetElement = element.findOne('[data-widget="ae_embed"]');
+
+                            if (widgetElement) {
+                                var region = element.getClientRect();
+                                region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                                editor.fire('editorInteraction', {
+                                    nativeEvent: {},
+                                    selectionData: {
+                                        element: widgetElement,
+                                        region: region
+                                    }
+                                });
+                            }
+                        }
+                    }
                 });
 
                 // Add a filter to skip filtering widget elements
