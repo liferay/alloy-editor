@@ -71,27 +71,8 @@
          */
         getInitialState: function() {
             var editor = this.props.editor.get('nativeEditor');
-            var embed;
-
-            var selection = editor.getSelection();
-
-            if (selection) {
-                var range = selection.getRanges()[0];
-
-                if (range) {
-                    range.shrink(CKEDITOR.SHRINK_TEXT);
-
-                    embed = editor.elementPath(range.getCommonAncestor()).contains(function(element) {
-                        return element.getAttribute('data-widget') === 'ae_embed' ||
-                            (element.getAttribute('data-cke-widget-wrapper') && element.find('[data-widget="ae_embed"]'));
-                    }, 1);
-
-                    if (embed && embed.getAttribute('data-widget') !== 'ae_embed') {
-                        embed = embed.find('[data-widget="ae_embed"]').getItem(0);
-                    }
-                }
-            }
-
+            var embedWrapper = editor.getSelection().getSelectedElement();
+            var embed = embedWrapper.findOne('[data-widget="ae_embed"]');
             var href = embed ? embed.getAttribute('data-ae-embed-url') : '';
 
             return {

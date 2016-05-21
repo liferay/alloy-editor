@@ -19,25 +19,12 @@
     };
 
     var embedSelectionTest = function(payload) {
-        var editor = payload.editor.get('nativeEditor');
-        var embedElement;
+        var selectionData = payload.data.selectionData;
 
-        var selection = editor.getSelection();
-
-        if (selection) {
-            var range = selection.getRanges()[0];
-
-            if (range) {
-                range.shrink(CKEDITOR.SHRINK_TEXT);
-
-                embedElement = editor.elementPath(range.getCommonAncestor()).contains(function(element) {
-                    return element.getAttribute('data-widget') === 'ae_embed' ||
-                        (element.getAttribute('data-cke-widget-wrapper') && element.find('[data-widget="ae_embed"]'));
-                }, 1);
-            }
-        }
-
-        return !!(embedElement);
+        return !!(
+            selectionData.element &&
+            selectionData.element.getAttribute('data-widget') === 'ae_embed'
+        );
     };
 
     var linkSelectionTest = function(payload) {
