@@ -2604,6 +2604,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return;
     }
 
+    var REGEX_HTTP = /^https?/;
+
     CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = '//alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
     CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL = '<div data-ae-embed-url="{url}"></div>';
 
@@ -2655,7 +2657,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                  * requesting the embed object to the configured oembed service and render it in
                  * the editor
                  *
-                 * @param {event} event The Event
+                 * @method data
+                 * @param {event} event Data change event
                  */
                 data: function data(event) {
                     var widget = this;
@@ -2679,6 +2682,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 /**
                  * Function used to upcast an element to ae_embed widgets.
                  *
+                 * @method upcast
                  * @param {CKEDITOR.htmlParser.element} element The element to be checked
                  * @param {Object} data The object that will be passed to the widget
                  */
@@ -2686,17 +2690,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     var embedWidgetUpcastFn = editor.config.embedWidgetUpcastFn || defaultEmbedWidgetUpcastFn;
 
                     return embedWidgetUpcastFn(element, data);
-                },
-
-                /**
-                 * Changes the widget's select state.
-                 *
-                 * @param {Boolean} selected Whether to select or deselect the widget
-                 */
-                setSelected: function setSelected(selected) {
-                    if (selected) {
-                        editor.getSelection().selectElement(this.element);
-                    }
                 }
             });
 
@@ -2705,7 +2698,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 editor.on('paste', function (event) {
                     var link = event.data.dataValue;
 
-                    if (/^https?/.test(link)) {
+                    if (REGEX_HTTP.test(link)) {
                         event.stop();
 
                         editor.execCommand('embedUrl', {
@@ -2713,6 +2706,33 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         });
                     }
                 });
+            });
+
+            // Add a listener to handle selection change events an properly detect editor
+            // interactions on the widgets without messing with widget native selection
+            editor.on('selectionChange', function (event) {
+                var selection = editor.getSelection();
+
+                if (selection) {
+                    var element = selection.getSelectedElement();
+
+                    if (element) {
+                        var widgetElement = element.findOne('[data-widget="ae_embed"]');
+
+                        if (widgetElement) {
+                            var region = element.getClientRect();
+                            region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                            editor.fire('editorInteraction', {
+                                nativeEvent: {},
+                                selectionData: {
+                                    element: widgetElement,
+                                    region: region
+                                }
+                            });
+                        }
+                    }
+                }
             });
 
             // Add a filter to skip filtering widget elements
@@ -5492,24 +5512,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     var embedSelectionTest = function embedSelectionTest(payload) {
-        var editor = payload.editor.get('nativeEditor');
-        var embedElement;
+        var selectionData = payload.data.selectionData;
 
-        var selection = editor.getSelection();
-
-        if (selection) {
-            var range = selection.getRanges()[0];
-
-            if (range) {
-                range.shrink(CKEDITOR.SHRINK_TEXT);
-
-                embedElement = editor.elementPath(range.getCommonAncestor()).contains(function (element) {
-                    return element.getAttribute('data-widget') === 'ae_embed' || element.getAttribute('data-cke-widget-wrapper') && element.find('[data-widget="ae_embed"]');
-                }, 1);
-            }
-        }
-
-        return !!embedElement;
+        return !!(selectionData.element && selectionData.element.getAttribute('data-widget') === 'ae_embed');
     };
 
     var linkSelectionTest = function linkSelectionTest(payload) {
@@ -5561,7 +5566,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     var Selections = [{
         name: 'embed',
-        buttons: ['embedEdit'],
+        buttons: ['embedRemove', 'embedEdit'],
         test: AlloyEditor.SelectionTest.embed
     }, {
         name: 'link',
@@ -8200,24 +8205,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var selection = editor.getSelection();
 
             if (selection) {
-                var range = selection.getRanges()[0];
+                var selectedElement = selection.getSelectedElement();
 
-                if (range) {
-                    range.shrink(CKEDITOR.SHRINK_TEXT);
-
-                    embed = editor.elementPath(range.getCommonAncestor()).contains(function (element) {
-                        return element.getAttribute('data-widget') === 'ae_embed' || element.getAttribute('data-cke-widget-wrapper') && element.find('[data-widget="ae_embed"]');
-                    }, 1);
-
-                    if (embed && embed.getAttribute('data-widget') !== 'ae_embed') {
-                        embed = embed.find('[data-widget="ae_embed"]').getItem(0);
-                    }
+                if (selectedElement) {
+                    embed = selectedElement.findOne('[data-widget="ae_embed"]');
                 }
             }
 
             var href = embed ? embed.getAttribute('data-ae-embed-url') : '';
 
             return {
+                element: embed,
                 initialLink: {
                     href: href
                 },
@@ -8239,6 +8237,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             return React.createElement(
                 'div',
                 { className: 'ae-container-edit-link' },
+                React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.deleteEmbed, className: 'ae-button', 'data-type': 'button-embed-remove', disabled: !this.state.element, onClick: this._removeEmbed, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.deleteEmbed },
+                    React.createElement('span', { className: 'ae-icon-bin' })
+                ),
                 React.createElement(
                     'div',
                     { className: 'ae-container-input xxl' },
@@ -8347,6 +8350,24 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var validState = this.state.linkHref && this.state.linkHref !== this.state.initialLink.href;
 
             return validState;
+        },
+
+        /**
+         * Removes the embed in the editor element.
+         *
+         * @protected
+         * @method _removeEmbed
+         */
+        _removeEmbed: function _removeEmbed() {
+            var editor = this.props.editor.get('nativeEditor');
+
+            var embedWrapper = this.state.element.getAscendant(function (element) {
+                return element.hasClass('cke_widget_wrapper');
+            });
+
+            embedWrapper.remove();
+
+            editor.fire('actionPerformed', this);
         }
     });
 
