@@ -6,6 +6,8 @@
         return;
     }
 
+    var REGEX_HTTP = /^https?/;
+
     CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = '//alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
     CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL = '<div data-ae-embed-url="{url}"></div>';
 
@@ -60,7 +62,8 @@
                      * requesting the embed object to the configured oembed service and render it in
                      * the editor
                      *
-                     * @param {event} event The Event
+                     * @method data
+                     * @param {event} event Data change event
                      */
                     data: function(event) {
                         var widget = this;
@@ -85,6 +88,7 @@
                     /**
                      * Function used to upcast an element to ae_embed widgets.
                      *
+                     * @method upcast
                      * @param {CKEDITOR.htmlParser.element} element The element to be checked
                      * @param {Object} data The object that will be passed to the widget
                      */
@@ -100,7 +104,7 @@
                     editor.on('paste', function(event) {
                         var link = event.data.dataValue;
 
-                        if (/^https?/.test(link)) {
+                        if (REGEX_HTTP.test(link)) {
                             event.stop();
 
                             editor.execCommand('embedUrl', {
