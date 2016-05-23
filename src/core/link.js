@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    var REGEX_URI_EMAIL = /[^\/]+@/;
     var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
 
     /**
@@ -196,8 +197,10 @@
         },
 
         /**
-         * Checks if the URI has a scheme. If not, the default 'http' scheme with
-         * hierarchical path '//' is added to it.
+         * Checks if the URI has an '@' symbol. If it does and the URI looks like an email 
+         * and doesn't have 'mailto:', 'mailto:' is added to the URI.
+         * If it doesn't and the URI doesn't have a scheme, the default 'http' scheme with
+         * hierarchical path '//' is added to the URI.
          *
          * @protected
          * @method _getCompleteURI
@@ -205,7 +208,9 @@
          * @return {String} The URI updated with the protocol.
          */
         _getCompleteURI: function(URI) {
-            if (!REGEX_URI_SCHEME.test(URI)) {
+            if (URI.indexOf('@') && REGEX_URI_EMAIL.test(URI) && URI.indexOf('mailto:') == -1) {
+                URI = 'mailto:' + URI;
+            } else if (!REGEX_URI_SCHEME.test(URI)) {
                 URI = this.appendProtocol ? 'http://' + URI : URI;
             }
 
