@@ -114,7 +114,7 @@
                     });
                 });
 
-                // Add a listener to handle selection change events an properly detect editor
+                // Add a listener to handle selection change events and properly detect editor
                 // interactions on the widgets without messing with widget native selection
                 editor.on('selectionChange', function(event) {
                     var selection = editor.getSelection();
@@ -127,6 +127,11 @@
 
                             if (widgetElement) {
                                 var region = element.getClientRect();
+
+                                var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+                                region.left -= scrollPosition.x;
+                                region.top += scrollPosition.y;
+
                                 region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
 
                                 editor.fire('editorInteraction', {
