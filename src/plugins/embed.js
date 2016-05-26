@@ -6,6 +6,8 @@
         return;
     }
 
+    var REGEX_HTTP = /^https?/;
+
     CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = '//alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
     CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL = '<div data-ae-embed-url="{url}"></div>';
 
@@ -60,7 +62,8 @@
                      * requesting the embed object to the configured oembed service and render it in
                      * the editor
                      *
-                     * @param {event} event The Event
+                     * @method data
+                     * @param {event} event Data change event
                      */
                     data: function(event) {
                         var widget = this;
@@ -85,6 +88,7 @@
                     /**
                      * Function used to upcast an element to ae_embed widgets.
                      *
+                     * @method upcast
                      * @param {CKEDITOR.htmlParser.element} element The element to be checked
                      * @param {Object} data The object that will be passed to the widget
                      */
@@ -92,17 +96,6 @@
                         var embedWidgetUpcastFn = editor.config.embedWidgetUpcastFn || defaultEmbedWidgetUpcastFn;
 
                         return embedWidgetUpcastFn(element, data);
-                    },
-
-                    /**
-                     * Changes the widget's select state.
-                     *
-                     * @param {Boolean} selected Whether to select or deselect the widget
-                     */
-                    setSelected: function(selected) {
-                        if (selected) {
-                            editor.getSelection().selectElement(this.element);
-                        }
                     }
                 });
 
@@ -111,7 +104,7 @@
                     editor.on('paste', function(event) {
                         var link = event.data.dataValue;
 
-                        if (/^https?/.test(link)) {
+                        if (REGEX_HTTP.test(link)) {
                             event.stop();
 
                             editor.execCommand('embedUrl', {
@@ -119,6 +112,38 @@
                             });
                         }
                     });
+                });
+
+                // Add a listener to handle selection change events and properly detect editor
+                // interactions on the widgets without messing with widget native selection
+                editor.on('selectionChange', function(event) {
+                    var selection = editor.getSelection();
+
+                    if (selection){
+                        var element = selection.getSelectedElement();
+
+                        if (element) {
+                            var widgetElement = element.findOne('[data-widget="ae_embed"]');
+
+                            if (widgetElement) {
+                                var region = element.getClientRect();
+
+                                var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+                                region.left -= scrollPosition.x;
+                                region.top += scrollPosition.y;
+
+                                region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                                editor.fire('editorInteraction', {
+                                    nativeEvent: {},
+                                    selectionData: {
+                                        element: widgetElement,
+                                        region: region
+                                    }
+                                });
+                            }
+                        }
+                    }
                 });
 
                 // Add a filter to skip filtering widget elements

@@ -3,7 +3,7 @@
 
     var Selections = [{
         name: 'embed',
-        buttons: ['embedEdit'],
+        buttons: ['embedRemove','embedEdit'],
         test: AlloyEditor.SelectionTest.embed
     }, {
         name: 'link',

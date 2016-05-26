@@ -64,6 +64,7 @@ AlloyEditor.Strings = {
 	code: 'Code',
 	clearInput: 'Clear Input Field',
 	confirm: 'Confirm',
+	deleteEmbed: 'Delete embed',
 	editLink: 'Type or paste link here',
 	image: 'Insert Image',
 	link: 'Link',
