@@ -118,11 +118,17 @@
 
                 editor.once('contentDom', function() {
                     var editable = editor.editable();
+                    var aeUi = document.querySelector(".ae-ui");
 
                     editable.attachListener(editable, 'focus', function (event) {
                         editable.attachListener(editable, 'blur', handleBlur);
                         editable.attachListener(editable, 'keyup', handleUI);
                         editable.attachListener(editable, 'mouseup', handleUI);
+                        editable.attachListener(editable, 'mouseleave', function(event) {
+                            if ( ! aeUi.contains(event.data.$.toElement) ) {
+                                handleUI(event);
+                            }
+                        });
 
                         handleUI(event);
                     });
