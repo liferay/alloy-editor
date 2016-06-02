@@ -253,13 +253,6 @@
                             
                                             var uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
                             
-                                            var handleAria = CKEDITOR.tools.debounce(
-                                                function(event) {
-                                                    ariaElement.innerHTML = ariaState.join(&#x27;. &#x27;);
-                                                },
-                                                uiTasksTimeout
-                                            );
-                            
                                             var handleUI = CKEDITOR.tools.debounce(
                                                 function(event) {
                                                     ariaState = [];
@@ -278,9 +271,37 @@
                                                 uiTasksTimeout
                                             );
                             
+                                            var handleAria = CKEDITOR.tools.debounce(
+                                                function(event) {
+                                                    ariaElement.innerHTML = ariaState.join(&#x27;. &#x27;);
+                                                },
+                                                uiTasksTimeout
+                                            );
+                            
+                                            var handleMouseLeave = CKEDITOR.tools.debounce(
+                                                function(event) {
+                                                    var aeUINodes = document.querySelectorAll(&#x27;.ae-ui&#x27;);
+                            
+                                                    var found;
+                            
+                                                    for (var i = 0; i &lt; aeUINodes.length; i++) {
+                                                        if (aeUINodes[i].contains(event.data.$.relatedTarget)) {
+                                                            found = true;
+                                                            break;
+                                                        }
+                                                    }
+                            
+                                                    if (!found) {
+                                                        handleUI(event);
+                                                    }
+                                                },
+                                                uiTasksTimeout
+                                            );
+                            
                                             var handleBlur = function(event) {
                                                 event.removeListener(&#x27;blur&#x27;, handleBlur);
                                                 event.removeListener(&#x27;keyup&#x27;, handleUI);
+                                                event.removeListener(&#x27;mouseleave&#x27;, handleMouseLeave);
                                                 event.removeListener(&#x27;mouseup&#x27;, handleUI);
                             
                                                 handleUI(event);
@@ -305,6 +326,7 @@
                                                     editable.attachListener(editable, &#x27;blur&#x27;, handleBlur);
                                                     editable.attachListener(editable, &#x27;keyup&#x27;, handleUI);
                                                     editable.attachListener(editable, &#x27;mouseup&#x27;, handleUI);
+                                                    editable.attachListener(editable, &#x27;mouseleave&#x27;, handleMouseLeave);
                             
                                                     handleUI(event);
                                                 });
