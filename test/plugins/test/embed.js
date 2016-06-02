@@ -14,7 +14,13 @@
 
         beforeEach(Utils.beforeEach);
 
-        afterEach(Utils.afterEach);
+        afterEach(function(done) {
+            if (CKEDITOR.tools.jsonp.restore) {
+                CKEDITOR.tools.jsonp.restore();
+            }
+
+            Utils.afterEach.call(this, done);
+        });
 
         it('should not convert links inside content', function() {
             var nativeEditor = this.nativeEditor;
@@ -49,7 +55,6 @@
 
             setTimeout(function() {
                 assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + tweetReturnHtml + '</div>');
-                CKEDITOR.tools.jsonp.restore();
                 done();
             }, 500);
 
@@ -72,7 +77,6 @@
 
             setTimeout(function() {
                 assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + url + '</div>');
-                CKEDITOR.tools.jsonp.restore();
                 done();
             }, 500);
 
@@ -95,7 +99,6 @@
 
             setTimeout(function() {
                 assert.strictEqual('<p>' + url + '</p>', nativeEditor.getData());
-                CKEDITOR.tools.jsonp.restore();
                 done();
             }, 500);
 
