@@ -3,7 +3,7 @@
 
     var assert = chai.assert;
 
-    describe.only('Embed', function() {
+    describe('Embed', function() {
         this.timeout(35000);
 
         before(function(done) {
@@ -74,11 +74,11 @@
             assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + url + '</div>');
         });
 
-        it('should dont create embed content when wrong url (ie: without http protocol) is added', function() {
-            var url = "foo.com";
+        it('should create embed content only with url when url is pasted and there is a connection error', function() {
+            var url = "http://foo.com";
 
             sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-                fail({});
+                fail();
             });
 
             var nativeEditor = this.nativeEditor;
@@ -89,7 +89,7 @@
                 dataValue: url
             });
 
-            assert.strictEqual('<p>' + url + '</p>', nativeEditor.getData());
+            assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + url + '</div>');
         });
     });
 }());
