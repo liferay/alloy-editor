@@ -3,7 +3,7 @@
 
     var assert = chai.assert;
 
-    describe('Embed', function() {
+    describe.only('Embed', function() {
         this.timeout(35000);
 
         before(function(done) {
@@ -19,15 +19,15 @@
         it('should not convert links inside content', function() {
             var nativeEditor = this.nativeEditor;
 
-            bender.tools.selection.setWithHtml(nativeEditor, 'There should be a {selection} here.');
+            var spy = sinon.spy(nativeEditor, 'execCommand');
 
-            nativeEditor.execCommand = sinon.stub();
+            bender.tools.selection.setWithHtml(nativeEditor, 'There should be a {selection} here.');
 
             nativeEditor.fire('paste', {
                 dataValue: 'this a <a href="http://test"></a> test'
             });
 
-            assert.isTrue(nativeEditor.execCommand.notCalled);
+            assert.isTrue(spy.notCalled);
         });
 
         it('should create embed content when url is pasted', function(done) {
