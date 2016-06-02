@@ -2,44 +2,22 @@
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
 
     describe('Embed', function() {
         this.timeout(35000);
 
-        var cleanUpEditor = function() {
-            if (this.alloyEditor) {
-                this.alloyEditor.destroy();
-                this.alloyEditor = null;
-            }
-
-            this.el.parentNode.removeChild(this.el);
-        };
-
-        var initEditor = function(done, config) {
-            this.el = document.createElement('div');
-            this.el.setAttribute('id', 'editable');
-            document.body.appendChild(this.el);
-
-            this.alloyEditor = AlloyEditor.editable('editable', config);
-
-            this.alloyEditor.get('nativeEditor').once('instanceReady', function() {
-                done();
-            });
-        };
-
-        beforeEach(function(done) {
-            initEditor.call(this, done, {
-                allowedContent: true
-            });
+        before(function(done) {
+            Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_embed'});
         });
 
-        afterEach(function() {
-            cleanUpEditor.call(this);
-        });
+        after(Utils.destroyCKEditor);
+
+        beforeEach(Utils.beforeEach);
+
+        afterEach(Utils.afterEach);
 
         it('should not convert links inside content', function() {
-            var nativeEditor = this.alloyEditor.get('nativeEditor');
+            var nativeEditor = this.nativeEditor;
 
             bender.tools.selection.setWithHtml(nativeEditor, 'There should be a {selection} here.');
 
@@ -61,7 +39,7 @@
                 success({html: tweetReturnHtml});
             });
 
-            var nativeEditor = this.alloyEditor.get('nativeEditor');
+            var nativeEditor = this.nativeEditor;
 
             bender.tools.selection.setWithHtml(nativeEditor, '{selection}');
 
@@ -84,7 +62,7 @@
                 success({});
             });
 
-            var nativeEditor = this.alloyEditor.get('nativeEditor');
+            var nativeEditor = this.nativeEditor;
 
             bender.tools.selection.setWithHtml(nativeEditor, '{selection}');
 
@@ -107,7 +85,7 @@
                 fail({});
             });
 
-            var nativeEditor = this.alloyEditor.get('nativeEditor');
+            var nativeEditor = this.nativeEditor;
 
             bender.tools.selection.setWithHtml(nativeEditor, '{selection}');
 
