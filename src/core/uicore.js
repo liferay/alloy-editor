@@ -71,13 +71,6 @@
 
                 var uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
 
-                var handleAria = CKEDITOR.tools.debounce(
-                    function(event) {
-                        ariaElement.innerHTML = ariaState.join('. ');
-                    },
-                    uiTasksTimeout
-                );
-
                 var handleUI = CKEDITOR.tools.debounce(
                     function(event) {
                         ariaState = [];
@@ -96,9 +89,37 @@
                     uiTasksTimeout
                 );
 
+                var handleAria = CKEDITOR.tools.debounce(
+                    function(event) {
+                        ariaElement.innerHTML = ariaState.join('. ');
+                    },
+                    uiTasksTimeout
+                );
+
+                var handleMouseLeave = CKEDITOR.tools.debounce(
+                    function(event) {
+                        var aeUINodes = document.querySelectorAll('.ae-ui');
+
+                        var found;
+
+                        for (var i = 0; i < aeUINodes.length; i++) {
+                            if (aeUINodes[i].contains(event.data.$.relatedTarget)) {
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found) {
+                            handleUI(event);
+                        }
+                    },
+                    uiTasksTimeout
+                );
+
                 var handleBlur = function(event) {
                     event.removeListener('blur', handleBlur);
                     event.removeListener('keyup', handleUI);
+                    event.removeListener('mouseleave', handleMouseLeave);
                     event.removeListener('mouseup', handleUI);
 
                     handleUI(event);
@@ -118,17 +139,12 @@
 
                 editor.once('contentDom', function() {
                     var editable = editor.editable();
-                    var aeUi = document.querySelector(".ae-ui");
 
                     editable.attachListener(editable, 'focus', function (event) {
                         editable.attachListener(editable, 'blur', handleBlur);
                         editable.attachListener(editable, 'keyup', handleUI);
                         editable.attachListener(editable, 'mouseup', handleUI);
-                        editable.attachListener(editable, 'mouseleave', function(event) {
-                            if ( ! aeUi.contains(event.data.$.toElement) ) {
-                                handleUI(event);
-                            }
-                        });
+                        editable.attachListener(editable, 'mouseleave', handleMouseLeave);
 
                         handleUI(event);
                     });
