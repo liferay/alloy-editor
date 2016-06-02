@@ -36,7 +36,7 @@
             assert.isTrue(spy.notCalled);
         });
 
-        it('should create embed content when url is pasted', function(done) {
+        it('should create embed content when url is pasted', function() {
             var url = 'https://foo.com';
 
             var tweetReturnHtml = '<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
@@ -53,14 +53,10 @@
                 dataValue: url
             });
 
-            setTimeout(function() {
-                assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + tweetReturnHtml + '</div>');
-                done();
-            }, 500);
-
+            assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + tweetReturnHtml + '</div>');
         });
 
-        it('should create embed content only with url when url is pasted and it does not retrieve content', function(done) {
+        it('should create embed content only with url when url is pasted and it does not retrieve content', function() {
             var url = "http://bar.com";
 
             sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
@@ -75,14 +71,10 @@
                 dataValue: url
             });
 
-            setTimeout(function() {
-                assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + url + '</div>');
-                done();
-            }, 500);
-
+            assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + url + '</div>');
         });
 
-        it('should dont create embed content when wrong url (ie: without http protocol) is added', function(done) {
+        it('should dont create embed content when wrong url (ie: without http protocol) is added', function() {
             var url = "foo.com";
 
             sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
@@ -97,11 +89,7 @@
                 dataValue: url
             });
 
-            setTimeout(function() {
-                assert.strictEqual('<p>' + url + '</p>', nativeEditor.getData());
-                done();
-            }, 500);
-
+            assert.strictEqual('<p>' + url + '</p>', nativeEditor.getData());
         });
     });
 }());
