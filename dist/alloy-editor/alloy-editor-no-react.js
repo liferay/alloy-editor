@@ -10002,10 +10002,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }
 
         /**
-         * Fired when an image file is added as an element to the editor.
+         * Fired before adding images to the editor.
+         *
+         * @event beforeImageAdd
+         * @param {Array} imageFiles Array of image files
+         */
+
+        /**
+         * Fired when an image is being added to the editor successfully.
          *
          * @event imageAdd
-         * @param {CKEDITOR.dom.element} el The created image with src as Data URI.
+         * @param {CKEDITOR.dom.element} el The created image with src as Data URI
+         * @param {File} file The image file
          */
     });
 
