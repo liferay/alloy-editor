@@ -291,9 +291,11 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>On input change, reads the chosen file and creates an img element with src the image data as Data URI.
-                                                Then, fires an <a href="../classes/ButtonImage.html#event_imageAdd" class="crosslink">imageAdd</a> via CKEditor&#39;s
-                                                message system. The passed params will be:</p>
+                                                        <p>On input change, reads the chosen file and fires an event <code>beforeImageAdd</code> with the image which will be added
+                                                to the content. The image file will be passed in the <code>imageFiles</code> property.
+                                                If any of the listeners returns <code>false</code> or cancels the event, the image won&#39;t be added to the content.
+                                                Otherwise, an event <code>imageAdd</code> will be fired with the inserted element into the editable area.
+                                                The passed params will be:</p>
                                                 <ul>
                                                 <li><code>el</code> - the created img element</li>
                                                 <li><code>file</code> - the original image file from the input element</li>
@@ -524,7 +526,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-image.jsx.html#l121"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-image.jsx:121</code></a>
+                                                        <a href="../files/src_ui_react_src_components_buttons_button-image.jsx.html#l130"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-image.jsx:130</code></a>
                                                         </p>
                                                 
                                                 
