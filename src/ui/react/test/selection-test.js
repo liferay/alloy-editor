@@ -228,5 +228,51 @@
                 assert.isFalse(tableTest(payload));
             });
         });
+
+        describe('embed', function() {
+            var embedTest = AlloyEditor.SelectionTest.embed;
+
+            beforeEach(function() {
+                var content = '<div id="embed" data-ae-embed-url="#" data-cke-widget-upcasted="1" data-widget="ae_embed" class="cke_widget_element">http//alloyeditor.com/demo/</div>';
+
+                content += '<div id="not_ae_embed" data-ae-embed-url="#" data-cke-widget-upcasted="1" data-widget="not_ae_embed" class="cke_widget_element">http//alloyeditor.com/demo/</div>';
+                content += '<p id="not-embed">Not a embed</p>';
+
+                this.editor.get('nativeEditor').setData(content);
+            });
+
+            it('should detect a embed', function() {
+                var nativeEditor = this.editor.get('nativeEditor');
+
+                var embed = nativeEditor.element.findOne('#embed');
+
+                var payload = getPayload.call(this, embed);
+
+                nativeEditor.getSelection().selectElement(embed);
+                assert.isTrue(embedTest(payload));
+            });
+
+            it('should handle non data-widget embed', function() {
+                var nativeEditor = this.editor.get('nativeEditor');
+
+                var notEmbed = nativeEditor.element.findOne('#not_ae_embed');
+
+                var payload = getPayload.call(this, notEmbed);
+
+                nativeEditor.getSelection().selectElement(notEmbed);
+                assert.isFalse(embedTest(payload));
+            });
+
+            it('should handle not embed selection', function() {
+                var nativeEditor = this.editor.get('nativeEditor');
+
+                var notEmbed = nativeEditor.element.findOne('#not-embed');
+
+                var payload = getPayload.call(this, notEmbed);
+
+                nativeEditor.getSelection().selectElement(notEmbed);
+                assert.isFalse(embedTest(payload));
+            });
+        });
     });
 }());
