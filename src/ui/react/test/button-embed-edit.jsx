@@ -13,9 +13,7 @@
 
     var KEY_ESC = 27;
 
-    var auxRequestAnimationFrame = window.requestAnimationFrame;
-
-    describe('ButtonEmbedEdit', function() {
+    describe.only('ButtonEmbedEdit', function() {
         this.timeout(35000);
 
         before(Utils.createAlloyEditor);
@@ -34,34 +32,32 @@
             Utils.afterEach.call(this, done);
         });
 
+        it('should focus on the link input as soon as the component gets rendered', function() {
+            var stub = sinon.stub(window, 'requestAnimationFrame', function(callback) {
+                callback();
+            });
 
-        it('should focusInput is called when window.requestAnimationFrame does not exist', function(done) {
-            var spy = sinon.spy(AlloyEditor.ButtonEmbedEdit.prototype.__reactAutoBindMap, '_focusLinkInput');
+            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} renderExclusive={true}/>, this.container);
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor}  renderExclusive={true}/>, this.container);
+            stub.restore();
 
-
-            setTimeout(function(){
-                assert.isTrue(spy.calledOnce);
-                AlloyEditor.ButtonEmbedEdit.prototype.__reactAutoBindMap._focusLinkInput.restore();
-                done();
-            }, 1000);
-
+            assert.strictEqual(document.activeElement, buttonEmbedEdit.refs.linkInput);
         });
 
-        it('should focusInput is called when window.requestAnimationFrame exists', function(done) {
-            var spy = sinon.spy(AlloyEditor.ButtonEmbedEdit.prototype.__reactAutoBindMap, '_focusLinkInput');
+        it('should focus on the link input as soon as the component gets rendered in older browsers', function() {
+            var requestAnimationFrame = window.requestAnimationFrame;
+            var stub = sinon.stub(window, 'setTimeout', function(callback) {
+                callback();
+            });
 
             window.requestAnimationFrame = null;
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor}  renderExclusive={true}/>, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} renderExclusive={true}/>, this.container);
 
-            setTimeout(function(){
-                assert.isTrue(spy.calledOnce);
-                AlloyEditor.ButtonEmbedEdit.prototype.__reactAutoBindMap._focusLinkInput.restore();
-                window.requestAnimationFrame = auxRequestAnimationFrame;
-                done();
-            }, 1000);
+            window.requestAnimationFrame = requestAnimationFrame;
+            stub.restore();
+
+            assert.strictEqual(document.activeElement, buttonEmbedEdit.refs.linkInput);
         });
 
         it('should have input value equal to embed selection url', function() {
