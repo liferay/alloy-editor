@@ -147,6 +147,84 @@
             });
         });
 
+        describe('with readOnly set to false', function() {
+            beforeEach(function(done) {
+                initEditor.call(this, done);
+            });
+
+            afterEach(function() {
+                cleanUpEditor.call(this);
+            });
+
+            it('should not redirect when navigate links', function() {
+                var stub = sinon.stub(this.alloyEditor, '_redirectUrlLink');
+
+                bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
+
+                var link = document.getElementById('link_foo');
+
+                happen.click(link);
+
+                assert.strictEqual(0, stub.callCount);
+            });
+
+            it('should redirect when navigate links and readonly is activated', function() {
+                this.alloyEditor._editor.setReadOnly(true);
+
+                var stub = sinon.stub(this.alloyEditor, '_redirectUrlLink');
+
+                bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
+
+                var link = document.getElementById('link_foo');
+
+                happen.click(link);
+
+                assert.isTrue(stub.calledOnce);
+            });
+        });
+
+        describe('with readonly set to true', function() {
+            beforeEach(function(done) {
+                initEditor.call(this, done, {
+                    readOnly: true
+                });
+            });
+
+            afterEach(function() {
+                cleanUpEditor.call(this);
+            });
+
+            it('should be readonly mode is activated', function() {
+                assert.isTrue(this.alloyEditor._editor.readOnly);
+            });
+
+            it('should redirect when navigate links', function() {
+                var stub = sinon.stub(this.alloyEditor, '_redirectUrlLink');
+
+                bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
+
+                var link = document.getElementById('link_foo');
+
+                happen.click(link);
+
+                assert.isTrue(stub.calledOnce);
+            });
+
+            it('should not redirect when navigate links and editable mode is activated', function() {
+                this.alloyEditor._editor.setReadOnly(false);
+
+                var stub = sinon.stub(this.alloyEditor, '_redirectUrlLink');
+
+                bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
+
+                var link = document.getElementById('link_foo');
+
+                happen.click(link);
+
+                assert.strictEqual(0, stub.callCount);
+            });
+        });
+
         it('should create an instance when the passed srcNode is a DOM element', function(done) {
             var el = document.createElement('div');
             el.setAttribute('id', 'editable1');
