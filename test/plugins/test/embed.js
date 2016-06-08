@@ -3,7 +3,7 @@
 
     var assert = chai.assert;
 
-    describe('Embed', function() {
+    describe('Embed plugin', function() {
         this.timeout(35000);
 
         before(function(done) {
