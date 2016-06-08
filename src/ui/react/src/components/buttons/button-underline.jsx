@@ -64,9 +64,7 @@
                     fn: 'execCommand',
                     keys: CKEDITOR.CTRL + 85 /*U*/
                 },
-                style: {
-                    element: 'u'
-                }
+                style: 'coreStyles_underline'
             };
         },
 

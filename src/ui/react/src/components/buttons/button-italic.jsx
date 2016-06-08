@@ -64,9 +64,7 @@
                     fn: 'execCommand',
                     keys: CKEDITOR.CTRL + 73 /*I*/
                 },
-                style: {
-                    element: 'em'
-                }
+                style: 'coreStyles_italic'
             };
         },
 

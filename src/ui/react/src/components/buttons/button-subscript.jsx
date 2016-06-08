@@ -59,9 +59,7 @@
         getDefaultProps: function() {
             return {
                 command: 'subscript',
-                style: {
-                    element: 'sub'
-                }
+                style: 'coreStyles_subscript'
             };
         },
 

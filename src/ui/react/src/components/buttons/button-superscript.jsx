@@ -59,9 +59,7 @@
         getDefaultProps: function() {
             return {
                 command: 'superscript',
-                style: {
-                    element: 'sup'
-                }
+                style: 'coreStyles_superscript'
             };
         },
 
