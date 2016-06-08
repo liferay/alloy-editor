@@ -13,7 +13,7 @@
 
     var getFixture = Utils.getFixture('src/ui/react/test/fixtures');
 
-    describe('ButtonEmbedEdit', function() {
+    describe('ButtonEmbedEdit Component', function() {
         this.timeout(35000);
 
         before(Utils.createAlloyEditor);

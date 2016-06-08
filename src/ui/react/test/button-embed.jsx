@@ -5,7 +5,7 @@
     var Simulate = React.addons.TestUtils.Simulate;
     var TestUtils = React.addons.TestUtils;
 
-    describe('ButtonEmbed', function() {
+    describe('ButtonEmbed Component', function() {
         this.timeout(35000);
 
         before(Utils.createAlloyEditor);
