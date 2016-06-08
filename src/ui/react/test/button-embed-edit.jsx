@@ -30,7 +30,12 @@
             Utils.afterEach.call(this, done);
         });
 
-        it('should focus on the link input as soon as the component gets rendered', function() {
+        it('should focus on the link input as soon as the component gets rendered', function(done) {
+            // On IE9 window.requestAnimationFrame does not exist. Avoid this test on IE9
+            if (CKEDITOR.env.ie && CKEDITOR.env.version === 9) {
+                done();
+                return;
+            }
             // Make requestAnimationFrame synchronous to avoid unnecessary test delays
             var stub = sinon.stub(window, 'requestAnimationFrame', function(callback) {
                 callback();
@@ -41,6 +46,8 @@
             stub.restore();
 
             assert.strictEqual(document.activeElement, buttonEmbedEdit.refs.linkInput);
+
+            done();
         });
 
         it('should focus on the link input as soon as the component gets rendered in older browsers', function() {
