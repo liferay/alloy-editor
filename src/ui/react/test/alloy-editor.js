@@ -156,28 +156,27 @@
                 cleanUpEditor.call(this);
             });
 
-            it('should not redirect when navigate links', function() {
-                var stub = sinon.stub(this.alloyEditor, '_redirectLink');
+            it('should not redirect when clicking on links', function() {
+                var spy = sinon.spy(this.alloyEditor, '_redirectLink');
 
-                bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
+                bender.tools.selection.setWithHtml(this.alloyEditor.get('nativeEditor'), '<a id="link_foo" href="foo.com">Foo</a>');
 
-                var link = document.getElementById('link_foo');
+                happen.click(document.getElementById('link_foo'));
 
-                happen.click(link);
-
-                assert.strictEqual(0, stub.callCount);
+                assert.isFalse(spy.called);
             });
 
-            it('should redirect when navigate links and readonly is activated', function() {
-                this.alloyEditor._editor.setReadOnly(true);
+            it('should redirect when clicking on links and readonly has been changed to true', function() {
+                var nativeEditor = this.alloyEditor.get('nativeEditor');
 
+                nativeEditor.setReadOnly(true);
+
+                // Stub `_redirectLink` method to avoid page refreshes during the test
                 var stub = sinon.stub(this.alloyEditor, '_redirectLink');
 
-                bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
+                bender.tools.selection.setWithHtml(nativeEditor, '<a id="link_foo" href="foo.com">Foo</a>');
 
-                var link = document.getElementById('link_foo');
-
-                happen.click(link);
+                happen.click(document.getElementById('link_foo'));
 
                 assert.isTrue(stub.calledOnce);
             });
@@ -194,28 +193,36 @@
                 cleanUpEditor.call(this);
             });
 
-            it('should be readonly mode is activated', function() {
-                assert.isTrue(this.alloyEditor._editor.readOnly);
-            });
+            it('should open a new window when clicking in links with a target attribute', function() {
+                var stub = sinon.stub(window, 'open');
 
-            it('should redirect when navigate links', function() {
-                var stub = sinon.stub(this.alloyEditor, '_redirectLink');
+                bender.tools.selection.setWithHtml(this.alloyEditor.get('nativeEditor'), '<a id="link_foo" href="foo.com" target="_blank">Foo</a>');
 
-                bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
+                happen.click(document.getElementById('link_foo'));
 
-                var link = document.getElementById('link_foo');
-
-                happen.click(link);
+                stub.restore();
 
                 assert.isTrue(stub.calledOnce);
             });
 
-            it('should not redirect when navigate links and editable mode is activated', function() {
-                this.alloyEditor._editor.setReadOnly(false);
+            it('should update the current window url when clicking in links without a target attribute', function() {
+                var locationHref = window.location.href;
+
+                bender.tools.selection.setWithHtml(this.alloyEditor.get('nativeEditor'), '<a id="link_foo" href="#foo">Foo</a>');
+
+                happen.click(document.getElementById('link_foo'));
+
+                assert.strictEqual(window.location.href, locationHref + '#foo');
+            });
+
+            it('should not redirect when clicking on links and readonly has been set to', function() {
+                var nativeEditor = this.alloyEditor.get('nativeEditor');
+
+                nativeEditor.setReadOnly(false);
 
                 var stub = sinon.stub(this.alloyEditor, '_redirectLink');
 
-                bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
+                bender.tools.selection.setWithHtml(nativeEditor, '<a id="link_foo" href="foo.com">Foo</a>');
 
                 var link = document.getElementById('link_foo');
 
