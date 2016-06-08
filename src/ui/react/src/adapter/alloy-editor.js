@@ -48,8 +48,9 @@
 
             editor.once('contentDom', function() {
                 if (editor.config.readOnly) {
-                    this._addEventClickReadOnlyListener(editor);
+                    this._addReadOnlyLinkClickListener(editor);
                 }
+
                 var editable = editor.editable();
 
                 editable.addClass('ae-editable');
@@ -98,18 +99,13 @@
          * Method to set default link behavior
          *
          * @protected
-         * @method _addEventClickReadOnlyListener
+         * @method _addReadOnlyLinkClickListener
          * @param {Object} editor
          */
-        _addEventClickReadOnlyListener: function(editor) {
-            editor.editable().on(
-                'click',
-                this._defaultReadOnlyClickFn,
-                this,
-                {
-                    editor: editor
-                }
-            );
+        _addReadOnlyLinkClickListener: function(editor) {
+            editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
+                editor: editor
+            });
         },
 
         /**
@@ -131,7 +127,7 @@
 
                     var target = link.$.attributes.target ? link.$.attributes.target.value : null;
 
-                    this._redirectUrlLink(href, target);
+                    this._redirectLink(href, target);
                 }
             }
         },
@@ -156,14 +152,22 @@
          */
         _onReadOnlyChangeFn: function(event) {
             if (event.editor.readOnly) {
-                this._addEventClickReadOnlyListener(event.editor);
+                this._addReadOnlyLinkClickListener(event.editor);
             }
             else {
                 event.editor.editable().removeListener('click', this._defaultReadOnlyClickFn);
             }
         },
 
-        _redirectUrlLink: function(href, target) {
+        /**
+         * Redirects the browser to a given link
+         *
+         * @protected
+         * @method _redirectLink
+         * @param {string} href The href to take the browser to
+         * @param {string=} target Specifies where to display the link
+         */
+        _redirectLink: function(href, target) {
             if (target && href) {
                 window.open(href, target);
             }

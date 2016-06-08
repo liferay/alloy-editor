@@ -157,7 +157,7 @@
             });
 
             it('should not redirect when navigate links', function() {
-                var stub = sinon.stub(this.alloyEditor, '_redirectUrlLink');
+                var stub = sinon.stub(this.alloyEditor, '_redirectLink');
 
                 bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
 
@@ -171,7 +171,7 @@
             it('should redirect when navigate links and readonly is activated', function() {
                 this.alloyEditor._editor.setReadOnly(true);
 
-                var stub = sinon.stub(this.alloyEditor, '_redirectUrlLink');
+                var stub = sinon.stub(this.alloyEditor, '_redirectLink');
 
                 bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
 
@@ -199,7 +199,7 @@
             });
 
             it('should redirect when navigate links', function() {
-                var stub = sinon.stub(this.alloyEditor, '_redirectUrlLink');
+                var stub = sinon.stub(this.alloyEditor, '_redirectLink');
 
                 bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
 
@@ -213,7 +213,7 @@
             it('should not redirect when navigate links and editable mode is activated', function() {
                 this.alloyEditor._editor.setReadOnly(false);
 
-                var stub = sinon.stub(this.alloyEditor, '_redirectUrlLink');
+                var stub = sinon.stub(this.alloyEditor, '_redirectLink');
 
                 bender.tools.selection.setWithHtml(this.alloyEditor._editor, '{<a id="link_foo" href="foo.com">Foo</a>}');
 
