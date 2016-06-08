@@ -60,7 +60,7 @@
             assert.strictEqual(document.activeElement, buttonEmbedEdit.refs.linkInput);
         });
 
-        it('should have input value equal to embed selection url', function() {
+        it('should show the selected embed url in the link input', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, getFixture('embed.html'));
 
             this.nativeEditor.getSelection().selectElement(this.nativeEditor.element.findOne('#embedfoo'));
@@ -70,7 +70,7 @@
             assert.strictEqual(buttonEmbedEdit.refs.linkInput.value, 'https://foo.com');
         });
 
-        it('should embed area is removed when embed remove button is clicked', function() {
+        it('should remove the embed element when the remove button is clicked', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, getFixture('embed.html'));
 
             this.nativeEditor.getSelection().selectElement(this.nativeEditor.element.findOne('#embedfoo'));
@@ -89,7 +89,7 @@
             assert.strictEqual(data, '');
         });
 
-        it('should input will change when selection is changed between embed contents', function () {
+        it('should update the link input value when a different embed element is selected', function () {
             var buttonEmbedEdit;
 
             bender.tools.selection.setWithHtml(this.nativeEditor, getFixture('embed_multiple.html'));
@@ -107,7 +107,7 @@
             assert.strictEqual(buttonEmbedEdit.refs.linkInput.value, 'https://bar.com');
         });
 
-        it('should be disable ok button when url is empty', function() {
+        it('should not allow to update the embed link if the link input is empty', function() {
             var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} />, this.container);
 
             var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-ok');
@@ -115,7 +115,7 @@
             assert.isTrue(buttonOk.parentNode.hasAttribute('disabled'));
         });
 
-        it('should clear input when remove button into input is clicked', function() {
+        it('should clear the link input when the remove button inside the link input is clicked', function() {
             var cancelExclusive = sinon.stub();
 
             var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit cancelExclusive={cancelExclusive} editor={this.editor} renderExclusive={true} />, this.container);
@@ -135,7 +135,7 @@
             assert.strictEqual(linkInput.value, '');
         });
 
-        it('should change embed content when url is changed', function() {
+        it('should update the embed content when the embed url is changed', function() {
             sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
                 success({
                     html: getFixture('embed_content.html')
@@ -162,7 +162,7 @@
             assert.strictEqual(data, getFixture('embed_content_expected.html'));
         });
 
-        it('should change embed content when KEY_ENTER is pushed in embed input', function() {
+        it('should change the embed content when the KEY_ENTER is pressed inside the link input', function() {
             sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
                 success({
                     html: getFixture('embed_content.html')
@@ -187,7 +187,7 @@
             assert.strictEqual(data, getFixture('embed_content_expected.html'));
         });
 
-        it('should close toolbar when KEY_ESC is pushed in embed input', function() {
+        it('should close the toolbar when KEY_ESC is pressed inside the link input', function() {
             var spy = sinon.spy();
 
             var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit cancelExclusive={spy} editor={this.editor} renderExclusive={true} />, this.container);
