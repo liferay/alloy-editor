@@ -105,24 +105,13 @@
          * @method _clearSelections
          */
         _clearSelections: function() {
-            var selection = null;
+            var nativeEditor = this.get('nativeEditor');
+            var isMSSelection = typeof window.getSelection != 'function';
 
-            if(window.getSelection) {
-                selection = window.getSelection();
-
-            }
-            else if(document.selection) {
-                selection = document.selection;
-
-            }
-            if(selection) {
-                if(selection.empty){
-                    selection.empty();
-                }
-
-                if(selection.removeAllRanges) {
-                    selection.removeAllRanges();
-                }
+            if (isMSSelection) {
+                nativeEditor.document.$.selection.empty();
+            } else {
+               nativeEditor.document.getWindow().$.getSelection().removeAllRanges();
             }
         },
 
