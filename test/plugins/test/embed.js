@@ -47,7 +47,7 @@
 
             var nativeEditor = this.nativeEditor;
 
-            bender.tools.selection.setWithHtml(nativeEditor, '{selection}');
+            bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
             nativeEditor.fire('paste', {
                 dataValue: url
@@ -65,7 +65,7 @@
 
             var nativeEditor = this.nativeEditor;
 
-            bender.tools.selection.setWithHtml(nativeEditor, '{selection}');
+            bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
             nativeEditor.fire('paste', {
                 dataValue: url
@@ -83,7 +83,7 @@
 
             var nativeEditor = this.nativeEditor;
 
-            bender.tools.selection.setWithHtml(nativeEditor, '{selection}');
+            bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
             nativeEditor.fire('paste', {
                 dataValue: url
