@@ -47,6 +47,9 @@
             AlloyEditor.Lang.mix(editor.config, config);
 
             editor.once('contentDom', function() {
+                if (editor.config.readOnly) {
+                    this._addEventClickReadOnlyListener(editor);
+                }
                 var editable = editor.editable();
 
                 editable.addClass('ae-editable');
@@ -78,6 +81,7 @@
 
             if (nativeEditor) {
                 var editable = nativeEditor.editable();
+
                 if (editable) {
                     editable.removeClass('ae-editable');
 
@@ -88,6 +92,24 @@
 
                 nativeEditor.destroy();
             }
+        },
+
+        /**
+         * Method to set default link behavior
+         *
+         * @protected
+         * @method _addEventClickReadOnlyListener
+         * @param {Object} editor
+         */
+        _addEventClickReadOnlyListener: function(editor) {
+            editor.editable().on(
+                'click',
+                this._defaultReadOnlyClickFn,
+                this,
+                {
+                    editor: editor
+                }
+            );
         },
 
         /**
@@ -106,13 +128,10 @@
 
                 if (link) {
                     var href = link.$.attributes.href ? link.$.attributes.href.value : null;
+
                     var target = link.$.attributes.target ? link.$.attributes.target.value : null;
 
-                    if (target && href) {
-                        window.open(href, target);
-                    } else if (href) {
-                        window.location.href = href;
-                    }
+                    this._redirectUrlLink(href, target);
                 }
             }
         },
@@ -137,11 +156,19 @@
          */
         _onReadOnlyChangeFn: function(event) {
             if (event.editor.readOnly) {
-                event.editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
-                    editor: event.editor
-                });
-            } else {
+                this._addEventClickReadOnlyListener(event.editor);
+            }
+            else {
                 event.editor.editable().removeListener('click', this._defaultReadOnlyClickFn);
+            }
+        },
+
+        _redirectUrlLink: function(href, target) {
+            if (target && href) {
+                window.open(href, target);
+            }
+            else if (href) {
+                window.location.href = href;
             }
         },
 
