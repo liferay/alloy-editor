@@ -191,7 +191,8 @@
                 compatHtml: true
             });
 
-            assert.strictEqual(data, getFixture('embed_content_expected.html'));
+            /*IE9 and IE10 generate <p>&nbsp;</p> tag*/
+            assert.oneOf(data, [getFixture('embed_content_ie_expected.html'), getFixture('embed_content_expected.html')]);
         });
 
         it('should close the toolbar when KEY_ESC is pressed inside the link input', function() {
