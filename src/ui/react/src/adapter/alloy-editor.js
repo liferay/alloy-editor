@@ -91,7 +91,27 @@
                     }
                 }
 
+                this._clearSelections();
+
                 nativeEditor.destroy();
+            }
+        },
+
+
+        /**
+         * Clear selections from window object
+         *
+         * @protected
+         * @method _clearSelections
+         */
+        _clearSelections: function() {
+            var nativeEditor = this.get('nativeEditor');
+            var isMSSelection = typeof window.getSelection != 'function';
+
+            if (isMSSelection) {
+                nativeEditor.document.$.selection.empty();
+            } else {
+               nativeEditor.document.getWindow().$.getSelection().removeAllRanges();
             }
         },
 
