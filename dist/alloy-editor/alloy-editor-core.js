@@ -2259,6 +2259,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         function selectionChange() {
             var selection = editor.getSelection();
+
             if (!selection) return;
             // If an element is selected and that element is an IMG
             if (selection.getType() !== CKEDITOR.SELECTION_NONE && selection.getStartElement().is('img')) {
@@ -2298,6 +2299,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         editor.on('beforeModeUnload', function self() {
             editor.removeListener('beforeModeUnload', self);
             resizer.hide();
+        });
+
+        editor.on('destroy', function () {
+            var resizeElement = document.getElementById('ckimgrsz');
+
+            if (resizeElement) {
+                resizeElement.remove();
+            }
         });
 
         // Update the selection when the browser window is resized
@@ -2346,7 +2355,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         isHandle: function isHandle(el) {
             var handles = this.handles;
             for (var n in handles) {
-                if (handles[n] === el) return true;
+                if (handles[n] === el) {
+                    return true;
+                }
             }
             return false;
         },
@@ -5672,6 +5683,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             AlloyEditor.Lang.mix(editor.config, config);
 
             editor.once('contentDom', function () {
+                if (editor.config.readOnly) {
+                    this._addReadOnlyLinkClickListener(editor);
+                }
+
                 var editable = editor.editable();
 
                 editable.addClass('ae-editable');
@@ -5703,6 +5718,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             if (nativeEditor) {
                 var editable = nativeEditor.editable();
+
                 if (editable) {
                     editable.removeClass('ae-editable');
 
@@ -5711,8 +5727,40 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     }
                 }
 
+                this._clearSelections();
+
                 nativeEditor.destroy();
             }
+        },
+
+        /**
+         * Clear selections from window object
+         *
+         * @protected
+         * @method _clearSelections
+         */
+        _clearSelections: function _clearSelections() {
+            var nativeEditor = this.get('nativeEditor');
+            var isMSSelection = typeof window.getSelection != 'function';
+
+            if (isMSSelection) {
+                nativeEditor.document.$.selection.empty();
+            } else {
+                nativeEditor.document.getWindow().$.getSelection().removeAllRanges();
+            }
+        },
+
+        /**
+         * Method to set default link behavior
+         *
+         * @protected
+         * @method _addReadOnlyLinkClickListener
+         * @param {Object} editor
+         */
+        _addReadOnlyLinkClickListener: function _addReadOnlyLinkClickListener(editor) {
+            editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
+                editor: editor
+            });
         },
 
         /**
@@ -5731,13 +5779,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 if (link) {
                     var href = link.$.attributes.href ? link.$.attributes.href.value : null;
+
                     var target = link.$.attributes.target ? link.$.attributes.target.value : null;
 
-                    if (target && href) {
-                        window.open(href, target);
-                    } else if (href) {
-                        window.location.href = href;
-                    }
+                    this._redirectLink(href, target);
                 }
             }
         },
@@ -5762,11 +5807,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         _onReadOnlyChangeFn: function _onReadOnlyChangeFn(event) {
             if (event.editor.readOnly) {
-                event.editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
-                    editor: event.editor
-                });
+                this._addReadOnlyLinkClickListener(event.editor);
             } else {
                 event.editor.editable().removeListener('click', this._defaultReadOnlyClickFn);
+            }
+        },
+
+        /**
+         * Redirects the browser to a given link
+         *
+         * @protected
+         * @method _redirectLink
+         * @param {string} href The href to take the browser to
+         * @param {string=} target Specifies where to display the link
+         */
+        _redirectLink: function _redirectLink(href, target) {
+            if (target && href) {
+                window.open(href, target);
+            } else if (href) {
+                window.location.href = href;
             }
         },
 
@@ -6320,11 +6379,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         // Allows validating props being passed to the component.
         propTypes: {
             /**
-             * The style the button should handle as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style
+             * The style the button should handle. Allowed values are:
+             * - Object as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+             * - String pointing to an object inside the editor instance configuration. For example, `style = 'coreStyles_bold'` will try to
+             * retrieve the style object from `editor.config.coreStyles_bold`. Nested properties such as `style = 'myplugin.myConfig.myStyle'`
+             * are also supported and will try to retrieve the style object from the editor configuration as well.
              *
-             * @property {Object} style
+             * @property {Object|String} style
              */
-            style: React.PropTypes.object
+            style: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.string])
         },
 
         /**
@@ -6333,7 +6396,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @method componentWillMount
          */
         componentWillMount: function componentWillMount() {
-            this._style = new CKEDITOR.style(this.props.style);
+            var Lang = AlloyEditor.Lang;
+            var style = this.props.style;
+
+            if (Lang.isString(style)) {
+                var parts = style.split('.');
+                var currentMember = this.props.editor.get('nativeEditor').config;
+                var property = parts.shift();
+
+                while (property && Lang.isObject(currentMember) && Lang.isObject(currentMember[property])) {
+                    currentMember = currentMember[property];
+                    property = parts.shift();
+                }
+
+                if (Lang.isObject(currentMember)) {
+                    style = currentMember;
+                }
+            }
+
+            this._style = new CKEDITOR.style(style);
         },
 
         /**
@@ -7485,9 +7566,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     fn: 'execCommand',
                     keys: CKEDITOR.CTRL + 66 /*B*/
                 },
-                style: {
-                    element: 'strong'
-                }
+                style: 'coreStyles_bold'
             };
         },
 
@@ -9351,9 +9430,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     fn: 'execCommand',
                     keys: CKEDITOR.CTRL + 73 /*I*/
                 },
-                style: {
-                    element: 'em'
-                }
+                style: 'coreStyles_italic'
             };
         },
 
@@ -11017,9 +11094,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'strike',
-                style: {
-                    element: 's'
-                }
+                style: 'coreStyles_strike'
             };
         },
 
@@ -11673,9 +11748,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'subscript',
-                style: {
-                    element: 'sub'
-                }
+                style: 'coreStyles_subscript'
             };
         },
 
@@ -11764,9 +11837,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'superscript',
-                style: {
-                    element: 'sup'
-                }
+                style: 'coreStyles_superscript'
             };
         },
 
@@ -13099,9 +13170,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     fn: 'execCommand',
                     keys: CKEDITOR.CTRL + 85 /*U*/
                 },
-                style: {
-                    element: 'u'
-                }
+                style: 'coreStyles_underline'
             };
         },
 

@@ -193,11 +193,18 @@
                                     // Allows validating props being passed to the component.
                                     propTypes: {
                                         /**
-                                         * The style the button should handle as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style
+                                         * The style the button should handle. Allowed values are:
+                                         * - Object as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+                                         * - String pointing to an object inside the editor instance configuration. For example, &#x60;style = &#x27;coreStyles_bold&#x27;&#x60; will try to
+                                         * retrieve the style object from &#x60;editor.config.coreStyles_bold&#x60;. Nested properties such as &#x60;style = &#x27;myplugin.myConfig.myStyle&#x27;&#x60;
+                                         * are also supported and will try to retrieve the style object from the editor configuration as well.
                                          *
-                                         * @property {Object} style
+                                         * @property {Object|String} style
                                          */
-                                        style: React.PropTypes.object
+                                        style: React.PropTypes.oneOfType([
+                                            React.PropTypes.object,
+                                            React.PropTypes.string
+                                        ])
                                     },
                             
                                     /**
@@ -206,7 +213,25 @@
                                      * @method componentWillMount
                                      */
                                     componentWillMount: function() {
-                                        this._style = new CKEDITOR.style(this.props.style);
+                                        var Lang = AlloyEditor.Lang;
+                                        var style = this.props.style;
+                            
+                                        if (Lang.isString(style)) {
+                                            var parts = style.split(&#x27;.&#x27;);
+                                            var currentMember = this.props.editor.get(&#x27;nativeEditor&#x27;).config;
+                                            var property = parts.shift();
+                            
+                                            while (property &amp;&amp; Lang.isObject(currentMember) &amp;&amp; Lang.isObject(currentMember[property])) {
+                                                currentMember = currentMember[property];
+                                                property = parts.shift();
+                                            }
+                            
+                                            if (Lang.isObject(currentMember)) {
+                                                style = currentMember;
+                                            }
+                                        }
+                            
+                                        this._style = new CKEDITOR.style(style);
                                     },
                             
                                     /**
