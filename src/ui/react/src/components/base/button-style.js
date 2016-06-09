@@ -11,8 +11,11 @@
         // Allows validating props being passed to the component.
         propTypes: {
             /**
-             * The style the button should handle. It can be a style object as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style
-             * or a string pointing to an object inside the editor instance configuration
+             * The style the button should handle. Allowed values are:
+             * - Object as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+             * - String pointing to an object inside the editor instance configuration. For example, `style = 'coreStyles_bold'` will try to
+             * retrieve the style object from `editor.config.coreStyles_bold`. Nested properties such as `style = 'myplugin.myConfig.myStyle'`
+             * are also supported and will try to retrieve the style object from the editor configuration as well.
              *
              * @property {Object|String} style
              */
