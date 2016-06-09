@@ -166,7 +166,8 @@
                 compatHtml: true
             });
 
-            assert.strictEqual(data, getFixture('embed_content_expected.html'));
+            /*IE9 generates <p>&nbsp;</p> tag*/
+            assert.oneOf(data, [getFixture('embed_content_ie_expected.html'), getFixture('embed_content_expected.html')]);
         });
 
         it('should change the embed content when the KEY_ENTER is pressed inside the link input', function() {
