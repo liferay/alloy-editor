@@ -1481,13 +1481,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             bookmarkNodeEl.style.display = 'inline-block';
 
-            var region = new CKEDITOR.dom.element(bookmarkNodeEl).getClientRect();
+            region = new CKEDITOR.dom.element(bookmarkNodeEl).getClientRect();
 
             bookmarkNodeEl.parentNode.removeChild(bookmarkNodeEl);
 
             var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
 
-            region.bottom = scrollPos.y + region.bottom, region.left = scrollPos.x + region.left, region.right = scrollPos.x + region.right, region.top = scrollPos.y + region.top;
+            region.bottom = scrollPos.y + region.bottom;
+            region.left = scrollPos.x + region.left;
+            region.right = scrollPos.x + region.right;
+            region.top = scrollPos.y + region.top;
 
             return region;
         },
