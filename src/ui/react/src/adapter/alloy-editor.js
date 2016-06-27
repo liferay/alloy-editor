@@ -47,6 +47,10 @@
             AlloyEditor.Lang.mix(editor.config, config);
 
             editor.once('contentDom', function() {
+                if (editor.config.readOnly) {
+                    this._addReadOnlyLinkClickListener(editor);
+                }
+
                 var editable = editor.editable();
 
                 editable.addClass('ae-editable');
@@ -78,6 +82,7 @@
 
             if (nativeEditor) {
                 var editable = nativeEditor.editable();
+
                 if (editable) {
                     editable.removeClass('ae-editable');
 
@@ -86,8 +91,41 @@
                     }
                 }
 
+                this._clearSelections();
+
                 nativeEditor.destroy();
             }
+        },
+
+
+        /**
+         * Clear selections from window object
+         *
+         * @protected
+         * @method _clearSelections
+         */
+        _clearSelections: function() {
+            var nativeEditor = this.get('nativeEditor');
+            var isMSSelection = typeof window.getSelection != 'function';
+
+            if (isMSSelection) {
+                nativeEditor.document.$.selection.empty();
+            } else {
+               nativeEditor.document.getWindow().$.getSelection().removeAllRanges();
+            }
+        },
+
+        /**
+         * Method to set default link behavior
+         *
+         * @protected
+         * @method _addReadOnlyLinkClickListener
+         * @param {Object} editor
+         */
+        _addReadOnlyLinkClickListener: function(editor) {
+            editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
+                editor: editor
+            });
         },
 
         /**
@@ -106,13 +144,10 @@
 
                 if (link) {
                     var href = link.$.attributes.href ? link.$.attributes.href.value : null;
+
                     var target = link.$.attributes.target ? link.$.attributes.target.value : null;
 
-                    if (target && href) {
-                        window.open(href, target);
-                    } else if (href) {
-                        window.location.href = href;
-                    }
+                    this._redirectLink(href, target);
                 }
             }
         },
@@ -137,11 +172,27 @@
          */
         _onReadOnlyChangeFn: function(event) {
             if (event.editor.readOnly) {
-                event.editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
-                    editor: event.editor
-                });
-            } else {
+                this._addReadOnlyLinkClickListener(event.editor);
+            }
+            else {
                 event.editor.editable().removeListener('click', this._defaultReadOnlyClickFn);
+            }
+        },
+
+        /**
+         * Redirects the browser to a given link
+         *
+         * @protected
+         * @method _redirectLink
+         * @param {string} href The href to take the browser to
+         * @param {string=} target Specifies where to display the link
+         */
+        _redirectLink: function(href, target) {
+            if (target && href) {
+                window.open(href, target);
+            }
+            else if (href) {
+                window.location.href = href;
             }
         },
 

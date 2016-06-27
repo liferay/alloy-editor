@@ -257,9 +257,11 @@
                                     },
                             
                                     /**
-                                     * On input change, reads the chosen file and creates an img element with src the image data as Data URI.
-                                     * Then, fires an {{#crossLink &quot;ButtonImage/imageAdd:event&quot;}}{{/crossLink}} via CKEditor&#x27;s
-                                     * message system. The passed params will be:
+                                     * On input change, reads the chosen file and fires an event &#x60;beforeImageAdd&#x60; with the image which will be added
+                                     * to the content. The image file will be passed in the &#x60;imageFiles&#x60; property.
+                                     * If any of the listeners returns &#x60;false&#x60; or cancels the event, the image won&#x27;t be added to the content.
+                                     * Otherwise, an event &#x60;imageAdd&#x60; will be fired with the inserted element into the editable area.
+                                     * The passed params will be:
                                      * - &#x60;el&#x60; - the created img element
                                      * - &#x60;file&#x60; - the original image file from the input element
                                      *
@@ -281,18 +283,25 @@
                                         reader.onload = function(event) {
                                             var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
                             
-                                            var el = CKEDITOR.dom.element.createFromHtml(&#x27;&lt;img src=&quot;&#x27; + event.target.result + &#x27;&quot;&gt;&#x27;);
+                                            var result = editor.fire(&#x27;beforeImageAdd&#x27;, {
+                                                imageFiles: file
+                                            });
                             
-                                            editor.insertElement(el);
+                                            if (!!result) {
+                                                var el = CKEDITOR.dom.element.createFromHtml(&#x27;&lt;img src=&quot;&#x27; + event.target.result + &#x27;&quot;&gt;&#x27;);
                             
-                                            editor.fire(&#x27;actionPerformed&#x27;, this);
+                                                editor.insertElement(el);
                             
-                                            var imageData = {
-                                                el: el,
-                                                file: file
-                                            };
+                                                editor.fire(&#x27;actionPerformed&#x27;, this);
                             
-                                            editor.fire(&#x27;imageAdd&#x27;, imageData);
+                                                var imageData = {
+                                                    el: el,
+                                                    file: file
+                                                };
+                            
+                            
+                                                editor.fire(&#x27;imageAdd&#x27;, imageData);
+                                            }
                                         }.bind(this);
                             
                                         reader.readAsDataURL(file);
@@ -301,10 +310,18 @@
                                     }
                             
                                     /**
-                                     * Fired when an image file is added as an element to the editor.
+                                     * Fired before adding images to the editor.
+                                     *
+                                     * @event beforeImageAdd
+                                     * @param {Array} imageFiles Array of image files
+                                     */
+                            
+                                    /**
+                                     * Fired when an image is being added to the editor successfully.
                                      *
                                      * @event imageAdd
-                                     * @param {CKEDITOR.dom.element} el The created image with src as Data URI.
+                                     * @param {CKEDITOR.dom.element} el The created image with src as Data URI
+                                     * @param {File} file The image file
                                      */
                                 });
                             

@@ -59,9 +59,7 @@
         getDefaultProps: function() {
             return {
                 command: 'strike',
-                style: {
-                    element: 's'
-                }
+                style: 'coreStyles_strike'
             };
         },
 

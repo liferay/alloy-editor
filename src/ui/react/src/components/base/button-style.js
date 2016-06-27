@@ -11,11 +11,18 @@
         // Allows validating props being passed to the component.
         propTypes: {
             /**
-             * The style the button should handle as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style
+             * The style the button should handle. Allowed values are:
+             * - Object as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+             * - String pointing to an object inside the editor instance configuration. For example, `style = 'coreStyles_bold'` will try to
+             * retrieve the style object from `editor.config.coreStyles_bold`. Nested properties such as `style = 'myplugin.myConfig.myStyle'`
+             * are also supported and will try to retrieve the style object from the editor configuration as well.
              *
-             * @property {Object} style
+             * @property {Object|String} style
              */
-            style: React.PropTypes.object
+            style: React.PropTypes.oneOfType([
+                React.PropTypes.object,
+                React.PropTypes.string
+            ])
         },
 
         /**
@@ -24,7 +31,25 @@
          * @method componentWillMount
          */
         componentWillMount: function() {
-            this._style = new CKEDITOR.style(this.props.style);
+            var Lang = AlloyEditor.Lang;
+            var style = this.props.style;
+
+            if (Lang.isString(style)) {
+                var parts = style.split('.');
+                var currentMember = this.props.editor.get('nativeEditor').config;
+                var property = parts.shift();
+
+                while (property && Lang.isObject(currentMember) && Lang.isObject(currentMember[property])) {
+                    currentMember = currentMember[property];
+                    property = parts.shift();
+                }
+
+                if (Lang.isObject(currentMember)) {
+                    style = currentMember;
+                }
+            }
+
+            this._style = new CKEDITOR.style(style);
         },
 
         /**

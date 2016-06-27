@@ -147,6 +147,91 @@
             });
         });
 
+        describe('with readOnly set to false', function() {
+            beforeEach(function(done) {
+                initEditor.call(this, done);
+            });
+
+            afterEach(function() {
+                cleanUpEditor.call(this);
+            });
+
+            it('should not redirect when clicking on links', function() {
+                var spy = sinon.spy(this.alloyEditor, '_redirectLink');
+
+                bender.tools.selection.setWithHtml(this.alloyEditor.get('nativeEditor'), '<a id="link_foo" href="foo.com">Foo</a>');
+
+                happen.click(document.getElementById('link_foo'));
+
+                assert.isFalse(spy.called);
+            });
+
+            it('should redirect when clicking on links and readonly has been changed to true', function() {
+                var nativeEditor = this.alloyEditor.get('nativeEditor');
+
+                nativeEditor.setReadOnly(true);
+
+                // Stub `_redirectLink` method to avoid page refreshes during the test
+                var stub = sinon.stub(this.alloyEditor, '_redirectLink');
+
+                bender.tools.selection.setWithHtml(nativeEditor, '<a id="link_foo" href="foo.com">Foo</a>');
+
+                happen.click(document.getElementById('link_foo'));
+
+                assert.isTrue(stub.calledOnce);
+            });
+        });
+
+        describe('with readonly set to true', function() {
+            beforeEach(function(done) {
+                initEditor.call(this, done, {
+                    readOnly: true
+                });
+            });
+
+            afterEach(function() {
+                cleanUpEditor.call(this);
+            });
+
+            it('should open a new window when clicking in links with a target attribute', function() {
+                var stub = sinon.stub(window, 'open');
+
+                bender.tools.selection.setWithHtml(this.alloyEditor.get('nativeEditor'), '<a id="link_foo" href="foo.com" target="_blank">Foo</a>');
+
+                happen.click(document.getElementById('link_foo'));
+
+                stub.restore();
+
+                assert.isTrue(stub.calledOnce);
+            });
+
+            it('should update the current window url when clicking in links without a target attribute', function() {
+                var locationHref = window.location.href;
+
+                bender.tools.selection.setWithHtml(this.alloyEditor.get('nativeEditor'), '<a id="link_foo" href="#foo">Foo</a>');
+
+                happen.click(document.getElementById('link_foo'));
+
+                assert.strictEqual(window.location.href, locationHref + '#foo');
+            });
+
+            it('should not redirect when clicking on links and readonly has been set to', function() {
+                var nativeEditor = this.alloyEditor.get('nativeEditor');
+
+                nativeEditor.setReadOnly(false);
+
+                var stub = sinon.stub(this.alloyEditor, '_redirectLink');
+
+                bender.tools.selection.setWithHtml(nativeEditor, '<a id="link_foo" href="foo.com">Foo</a>');
+
+                var link = document.getElementById('link_foo');
+
+                happen.click(link);
+
+                assert.strictEqual(0, stub.callCount);
+            });
+        });
+
         it('should create an instance when the passed srcNode is a DOM element', function(done) {
             var el = document.createElement('div');
             el.setAttribute('id', 'editable1');
