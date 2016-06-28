@@ -21738,10 +21738,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }, uiTasksTimeout);
 
             var handleBlur = function handleBlur(event) {
-                event.removeListener('blur', handleBlur);
-                event.removeListener('keyup', handleUI);
-                event.removeListener('mouseleave', handleMouseLeave);
-                event.removeListener('mouseup', handleUI);
+                var editable = editor.editable();
+
+                editable.removeListener('blur', handleBlur);
+                editable.removeListener('keyup', handleUI);
+                editable.removeListener('mouseleave', handleMouseLeave);
+                editable.removeListener('mouseup', handleUI);
 
                 handleUI(event);
             };
