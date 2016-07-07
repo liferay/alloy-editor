@@ -15,6 +15,7 @@
 
             this.objProps = {
                 _getXPoint: AlloyEditor.WidgetInteractionPoint._getXPoint,
+                _getYPoint: AlloyEditor.WidgetInteractionPoint._getYPoint,
                 props: {
                     editorEvent: {
                         data: {

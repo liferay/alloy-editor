@@ -260,11 +260,16 @@
                 }
 
                 if (region) {
+
                     var domNode = ReactDOM.findDOMNode(this);
+
                     var domElement = new CKEDITOR.dom.element(domNode);
 
                     var startRect = region.startRect || region;
-                    var clientRect = this.props.editor.get('nativeEditor').editable().getClientRect();
+
+                    var nativeEditor = this.props.editor.get('nativeEditor');
+
+                    var clientRect = nativeEditor.editable().getClientRect();
 
                     var offsetLeft;
 
@@ -277,7 +282,15 @@
                     }
 
                     domNode.style.left = offsetLeft;
-                    domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + 'px';
+
+                    domNode.style.top = Math.floor((region.bottom + region.top) / 2) + 'px';
+
+                    if (nativeEditor.element.getStyle('overflow') !== 'auto') {
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + 'px';
+                    } else {
+                        domNode.style.top = Math.floor( nativeEditor.element.$.offsetTop + (startRect.height / 2) - (domNode.offsetHeight / 2) ) + 'px';
+                    }
+
                     domNode.style.opacity = 1;
 
                     domElement.removeClass('ae-arrow-box');

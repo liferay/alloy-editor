@@ -42,6 +42,8 @@
 
             var selectionData = eventPayload.selectionData;
 
+            var nativeEvent = eventPayload.nativeEvent;
+
             var pos = {
                 x: eventPayload.nativeEvent.pageX,
                 y: selectionData.region.top
@@ -50,6 +52,7 @@
             var direction = selectionData.region.direction;
 
             var endRect = selectionData.region.endRect;
+
             var startRect = selectionData.region.startRect;
 
             if (endRect && startRect && startRect.top === endRect.top) {
@@ -61,19 +64,22 @@
 
             // If we have the point where user released the mouse, show Toolbar at this point
             // otherwise show it on the middle of the selection.
+
             if (pos.x && pos.y) {
                 x = this._getXPoint(selectionData, pos.x);
 
                 if (direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
                     y = Math.min(pos.y, selectionData.region.top);
                 } else {
-                    y = Math.max(pos.y, selectionData.region.bottom);
+                    y = Math.max(pos.y, this._getYPoint(selectionData, nativeEvent));
                 }
             } else {
                 x = selectionData.region.left + selectionData.region.width / 2;
 
                 if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    y = selectionData.region.bottom;
+
+                    y = this._getYPoint(selectionData, nativeEvent);
+
                 } else {
                     y = selectionData.region.top;
                 }
@@ -118,6 +124,35 @@
             }
 
             return x;
+        },
+
+        /**
+         * Returns the position of the Widget.
+         *
+         * @protected
+         * @method _getYPoint
+         * @param {Object} selectionData The data about the selection in the editor as
+         * @param {Object} nativeEvent The data about event is fired
+         * @return {Number} The calculated Y point in page coordinates.
+         */
+        _getYPoint: function(selectionData, nativeEvent) {
+            var y = 0;
+
+            var diff;
+
+            if (selectionData && nativeEvent) {
+
+                var elementTarget = new CKEDITOR.dom.element(nativeEvent.target);
+
+                if (elementTarget.$ && elementTarget.getStyle('overflow') === 'auto') {
+                    y = nativeEvent.target.offsetTop + nativeEvent.target.offsetHeight;
+                } else {
+                    y = selectionData.region.bottom;
+                }
+
+            }
+
+            return y;
         }
     };
 
