@@ -12284,19 +12284,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
 
             return React.createElement(
-                'div',
-                { className: 'ae-dropdown ae-arrow-box ae-arrow-box-top-left', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
-                React.createElement(
-                    'ul',
-                    { className: 'ae-listbox', role: 'listbox' },
-                    removeStylesItem,
-                    React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.blockStyles, styles: this._blockStyles }),
-                    this._renderStylesItems(this._blockStyles),
-                    React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.inlineStyles, styles: this._inlineStyles }),
-                    this._renderStylesItems(this._inlineStyles),
-                    React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.objectStyles, styles: this._objectStyles }),
-                    this._renderStylesItems(this._objectStyles)
-                )
+                AlloyEditor.ButtonDropdown,
+                this.props,
+                removeStylesItem,
+                React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.blockStyles, styles: this._blockStyles }),
+                this._renderStylesItems(this._blockStyles),
+                React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.inlineStyles, styles: this._inlineStyles }),
+                this._renderStylesItems(this._inlineStyles),
+                React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.objectStyles, styles: this._objectStyles }),
+                this._renderStylesItems(this._objectStyles)
             );
         },
 

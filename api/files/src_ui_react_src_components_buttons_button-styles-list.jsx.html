@@ -279,20 +279,18 @@
                                         }
                             
                                         return (
-                                            &lt;div className=&quot;ae-dropdown ae-arrow-box ae-arrow-box-top-left&quot; onFocus={this.focus} onKeyDown={this.handleKey} tabIndex=&quot;0&quot;&gt;
-                                                &lt;ul className=&quot;ae-listbox&quot; role=&quot;listbox&quot;&gt;
-                                                    {removeStylesItem}
+                                            &lt;AlloyEditor.ButtonDropdown {...this.props}&gt;
+                                                {removeStylesItem}
                             
-                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.blockStyles} styles={this._blockStyles} /&gt;
-                                                    {this._renderStylesItems(this._blockStyles)}
+                                                &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.blockStyles} styles={this._blockStyles} /&gt;
+                                                {this._renderStylesItems(this._blockStyles)}
                             
-                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.inlineStyles} styles={this._inlineStyles} /&gt;
-                                                    {this._renderStylesItems(this._inlineStyles)}
+                                                &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.inlineStyles} styles={this._inlineStyles} /&gt;
+                                                {this._renderStylesItems(this._inlineStyles)}
                             
-                                                    &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.objectStyles} styles={this._objectStyles} /&gt;
-                                                    {this._renderStylesItems(this._objectStyles)}
-                                                &lt;/ul&gt;
-                                            &lt;/div&gt;
+                                                &lt;AlloyEditor.ButtonsStylesListHeader name={AlloyEditor.Strings.objectStyles} styles={this._objectStyles} /&gt;
+                                                {this._renderStylesItems(this._objectStyles)}
+                                            &lt;/AlloyEditor.ButtonDropdown&gt;
                                         );
                                     },
                             
