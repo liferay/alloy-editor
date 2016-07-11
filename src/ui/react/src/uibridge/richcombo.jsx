@@ -104,6 +104,7 @@
                     },
 
                     render: function() {
+
                         var editor = this.props.editor.get('nativeEditor');
 
                         var richComboLabel = RICH_COMBO_DEFS[editor.name][richComboName].currentValue || richComboDefinition.label;
@@ -172,6 +173,8 @@
                     },
 
                     _setValue: function(value) {
+                        this._cacheValue(value);
+
                         this.setState({
                             value: value
                         });
