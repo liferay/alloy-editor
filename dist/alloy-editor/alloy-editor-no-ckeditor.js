@@ -25163,6 +25163,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 },
 
                 _setValue: function _setValue(value) {
+                    this._cacheValue(value);
+
                     this.setState({
                         value: value
                     });
