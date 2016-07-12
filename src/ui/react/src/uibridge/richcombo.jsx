@@ -104,7 +104,6 @@
                     },
 
                     render: function() {
-
                         var editor = this.props.editor.get('nativeEditor');
 
                         var richComboLabel = RICH_COMBO_DEFS[editor.name][richComboName].currentValue || richComboDefinition.label;
