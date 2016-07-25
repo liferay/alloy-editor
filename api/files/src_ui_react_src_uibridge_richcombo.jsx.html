@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.2.2</b>
+                        API Docs for Version: <b>1.2.3</b>
                     </p>
                 </li>
             </div>
@@ -354,6 +354,8 @@
                                                 },
                             
                                                 _setValue: function(value) {
+                                                    this._cacheValue(value);
+                            
                                                     this.setState({
                                                         value: value
                                                     });

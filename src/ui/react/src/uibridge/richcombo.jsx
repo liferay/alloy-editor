@@ -172,6 +172,8 @@
                     },
 
                     _setValue: function(value) {
+                        this._cacheValue(value);
+
                         this.setState({
                             value: value
                         });

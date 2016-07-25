@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.2.2
+ * AlloyEditor v1.2.3
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -22546,10 +22546,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }, uiTasksTimeout);
 
             var handleBlur = function handleBlur(event) {
-                event.removeListener('blur', handleBlur);
-                event.removeListener('keyup', handleUI);
-                event.removeListener('mouseleave', handleMouseLeave);
-                event.removeListener('mouseup', handleUI);
+                var editable = editor.editable();
+
+                editable.removeListener('blur', handleBlur);
+                editable.removeListener('keyup', handleUI);
+                editable.removeListener('mouseleave', handleMouseLeave);
+                editable.removeListener('mouseup', handleUI);
 
                 handleUI(event);
             };
@@ -25969,6 +25971,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
                 },
 
                 _setValue: function _setValue(value) {
+                    this._cacheValue(value);
+
                     this.setState({
                         value: value
                     });
@@ -32520,19 +32524,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
 
             return React.createElement(
-                'div',
-                { className: 'ae-dropdown ae-arrow-box ae-arrow-box-top-left', onFocus: this.focus, onKeyDown: this.handleKey, tabIndex: '0' },
-                React.createElement(
-                    'ul',
-                    { className: 'ae-listbox', role: 'listbox' },
-                    removeStylesItem,
-                    React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.blockStyles, styles: this._blockStyles }),
-                    this._renderStylesItems(this._blockStyles),
-                    React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.inlineStyles, styles: this._inlineStyles }),
-                    this._renderStylesItems(this._inlineStyles),
-                    React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.objectStyles, styles: this._objectStyles }),
-                    this._renderStylesItems(this._objectStyles)
-                )
+                AlloyEditor.ButtonDropdown,
+                this.props,
+                removeStylesItem,
+                React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.blockStyles, styles: this._blockStyles }),
+                this._renderStylesItems(this._blockStyles),
+                React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.inlineStyles, styles: this._inlineStyles }),
+                this._renderStylesItems(this._inlineStyles),
+                React.createElement(AlloyEditor.ButtonsStylesListHeader, { name: AlloyEditor.Strings.objectStyles, styles: this._objectStyles }),
+                this._renderStylesItems(this._objectStyles)
             );
         },
 

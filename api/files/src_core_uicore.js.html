@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.2.2</b>
+                        API Docs for Version: <b>1.2.3</b>
                     </p>
                 </li>
             </div>
@@ -299,10 +299,12 @@
                                             );
                             
                                             var handleBlur = function(event) {
-                                                event.removeListener(&#x27;blur&#x27;, handleBlur);
-                                                event.removeListener(&#x27;keyup&#x27;, handleUI);
-                                                event.removeListener(&#x27;mouseleave&#x27;, handleMouseLeave);
-                                                event.removeListener(&#x27;mouseup&#x27;, handleUI);
+                                                var editable = editor.editable();
+                            
+                                                editable.removeListener(&#x27;blur&#x27;, handleBlur);
+                                                editable.removeListener(&#x27;keyup&#x27;, handleUI);
+                                                editable.removeListener(&#x27;mouseleave&#x27;, handleMouseLeave);
+                                                editable.removeListener(&#x27;mouseup&#x27;, handleUI);
                             
                                                 handleUI(event);
                                             };
