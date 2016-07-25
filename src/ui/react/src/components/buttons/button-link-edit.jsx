@@ -165,6 +165,7 @@
 
             var targetSelector = {
                 editor: this.props.editor,
+                allowedTargets: this.props.allowedTargets,
                 handleLinkTargetChange: this._handleLinkTargetChange,
                 selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
             };
