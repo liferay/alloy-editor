@@ -10675,6 +10675,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var targetSelector = {
                 editor: this.props.editor,
+                allowedTargets: this.props.allowedTargets,
                 handleLinkTargetChange: this._handleLinkTargetChange,
                 selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
             };
@@ -10994,9 +10995,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var buttonTargetsList;
 
             var handleLinkTargetChange = this.props.handleLinkTargetChange;
+            var allowedLinkTargets = this.props.allowedTargets;
 
             if (this.props.expanded) {
-                buttonTargetsList = React.createElement(AlloyEditor.ButtonTargetList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, handleLinkTargetChange: handleLinkTargetChange });
+                buttonTargetsList = React.createElement(AlloyEditor.ButtonTargetList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, allowedLinkTargets: allowedLinkTargets, handleLinkTargetChange: handleLinkTargetChange });
             }
 
             return React.createElement(
