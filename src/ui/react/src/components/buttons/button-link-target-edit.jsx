@@ -55,9 +55,10 @@
             var buttonTargetsList;
 
              var handleLinkTargetChange = this.props.handleLinkTargetChange;
+             var allowedLinkTargets = this.props.allowedTargets;
 
             if (this.props.expanded) {
-                buttonTargetsList= <AlloyEditor.ButtonTargetList editor={this.props.editor} onDismiss={this.props.toggleDropdown} handleLinkTargetChange={handleLinkTargetChange}/>;
+                buttonTargetsList= <AlloyEditor.ButtonTargetList editor={this.props.editor} onDismiss={this.props.toggleDropdown} allowedLinkTargets={allowedLinkTargets} handleLinkTargetChange={handleLinkTargetChange}/>;
             }
 
             return (
