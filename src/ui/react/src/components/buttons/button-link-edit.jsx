@@ -28,7 +28,7 @@
              *
              * @property {Boolean} appendProtocol
              */
-             appendProtocol: React.PropTypes.bool,
+            appendProtocol: React.PropTypes.bool,
 
             /**
              * The editor instance where the component is being used.
@@ -112,11 +112,11 @@
          */
         getDefaultProps: function() {
             return {
-                defaultLinkTarget: '',
-                showTargetSelector: true,
                 appendProtocol: true,
                 autocompleteUrl: '',
                 circular: true,
+                customIndexStart: true,
+                defaultLinkTarget: '',
                 descendants: '.ae-toolbar-element',
                 keys: {
                     dismiss: [27],
@@ -125,7 +125,7 @@
                     next: [40],
                     prev: [38]
                 },
-                customIndexStart: true
+                showTargetSelector: true
             };
         },
 
@@ -164,8 +164,8 @@
             };
 
             var targetSelector = {
-                editor: this.props.editor,
                 allowedTargets: this.props.allowedTargets,
+                editor: this.props.editor,
                 handleLinkTargetChange: this._handleLinkTargetChange,
                 selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
             };
@@ -186,13 +186,13 @@
                 }
 
                 var autocompleteDropdownProps = {
+                    autocompleteSelected: this.state.autocompleteSelected,
                     data: dataFn,
                     editor: this.props.editor,
                     handleLinkAutocompleteClick: this._handleLinkAutocompleteClick,
                     onDismiss: this.props.toggleDropdown,
-                    term: this.state.linkHref,
-                    autocompleteSelected: this.state.autocompleteSelected,
-                    setAutocompleteState: this._setAutocompleteState
+                    setAutocompleteState: this._setAutocompleteState,
+                    term: this.state.linkHref
                 };
 
                 autocompleteDropdownProps = this.mergeDropdownProps(autocompleteDropdownProps, AlloyEditor.ButtonLinkAutocompleteList.key);
@@ -265,7 +265,7 @@
          * @param {SyntheticEvent} event The keyboard event.
          */
         _handleKeyDown: function(event) {
-            if (event.keyCode === 13 || event.keyCode === 27) {
+            if (event.keyCode === 13 || event.keyCode === 27) {
                 event.preventDefault();
             }
 
@@ -401,7 +401,7 @@
             var modifySelection = { advance: true };
 
             if (this.state.linkHref) {
-                if (this.state.element) {
+                if (this.state.element) {
                     linkAttrs.href = this.state.linkHref;
 
                     linkUtils.update(linkAttrs, this.state.element, modifySelection);
