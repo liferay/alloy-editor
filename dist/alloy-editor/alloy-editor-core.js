@@ -9794,11 +9794,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         getDefaultProps: function getDefaultProps() {
             return {
-                defaultLinkTarget: '',
-                showTargetSelector: true,
                 appendProtocol: true,
                 autocompleteUrl: '',
                 circular: true,
+                customIndexStart: true,
+                defaultLinkTarget: '',
                 descendants: '.ae-toolbar-element',
                 keys: {
                     dismiss: [27],
@@ -9807,7 +9807,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     next: [40],
                     prev: [38]
                 },
-                customIndexStart: true
+                showTargetSelector: true
             };
         },
 
@@ -9846,6 +9846,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             };
 
             var targetSelector = {
+                allowedTargets: this.props.allowedTargets,
                 editor: this.props.editor,
                 handleLinkTargetChange: this._handleLinkTargetChange,
                 selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
@@ -9867,13 +9868,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 }
 
                 var autocompleteDropdownProps = {
+                    autocompleteSelected: this.state.autocompleteSelected,
                     data: dataFn,
                     editor: this.props.editor,
                     handleLinkAutocompleteClick: this._handleLinkAutocompleteClick,
                     onDismiss: this.props.toggleDropdown,
-                    term: this.state.linkHref,
-                    autocompleteSelected: this.state.autocompleteSelected,
-                    setAutocompleteState: this._setAutocompleteState
+                    setAutocompleteState: this._setAutocompleteState,
+                    term: this.state.linkHref
                 };
 
                 autocompleteDropdownProps = this.mergeDropdownProps(autocompleteDropdownProps, AlloyEditor.ButtonLinkAutocompleteList.key);
@@ -10166,9 +10167,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var buttonTargetsList;
 
             var handleLinkTargetChange = this.props.handleLinkTargetChange;
+            var allowedLinkTargets = this.props.allowedTargets;
 
             if (this.props.expanded) {
-                buttonTargetsList = React.createElement(AlloyEditor.ButtonTargetList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, handleLinkTargetChange: handleLinkTargetChange });
+                buttonTargetsList = React.createElement(AlloyEditor.ButtonTargetList, { editor: this.props.editor, onDismiss: this.props.toggleDropdown, allowedLinkTargets: allowedLinkTargets, handleLinkTargetChange: handleLinkTargetChange });
             }
 
             return React.createElement(
