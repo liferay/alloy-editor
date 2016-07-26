@@ -1,69 +1,87 @@
 (function() {
-     'use strict';
+    'use strict';
 
-     var assert = chai.assert;
-     var Simulate = React.addons.TestUtils.Simulate;
-     var TestUtils = React.addons.TestUtils;
+    var assert = chai.assert;
+    var Simulate = React.addons.TestUtils.Simulate;
+    var TestUtils = React.addons.TestUtils;
 
-     describe('ButtonLink', function() {
-         this.timeout(35000);
+    describe('ButtonLink', function() {
+        this.timeout(35000);
 
-         before(Utils.createAlloyEditor);
+        before(Utils.createAlloyEditor);
 
-         after(Utils.destroyAlloyEditor);
+        after(Utils.destroyAlloyEditor);
 
-         beforeEach(Utils.beforeEach);
+        beforeEach(Utils.beforeEach);
 
-         afterEach(Utils.afterEach);
+        afterEach(Utils.afterEach);
 
-         it('should create link with default http protocol', function() {
-             bender.tools.selection.setWithHtml(this.nativeEditor, '{selection}');
+        it('should create link with default http protocol', function() {
+            bender.tools.selection.setWithHtml(this.nativeEditor, '{selection}');
 
-             var requestExclusiveListener = sinon.stub();
+            var requestExclusiveListener = sinon.stub();
 
-             var cancelExclusive = sinon.stub();
+            var cancelExclusive = sinon.stub();
 
-             var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} cancelExclusive={cancelExclusive} requestExclusive={requestExclusiveListener} />, this.container);
+            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} cancelExclusive={cancelExclusive} requestExclusive={requestExclusiveListener} />, this.container);
 
-             var inputLink = TestUtils.findRenderedDOMComponentWithTag(buttonLink, 'input');
+            var inputLink = TestUtils.findRenderedDOMComponentWithTag(buttonLink, 'input');
 
-             TestUtils.Simulate.change(inputLink, {target: {value: 'link.com'}});
+            TestUtils.Simulate.change(inputLink, {target: {value: 'link.com'}});
 
-             var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-ok');
+            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-ok');
 
-             Simulate.click(buttonOk.parentNode);
+            Simulate.click(buttonOk.parentNode);
 
-             var data = bender.tools.getData(this.nativeEditor, {
-                 fixHtml: true,
-                 compatHtml: true
-             });
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
 
-             assert.strictEqual('<p><a href="http://link.com" target="">selection</a></p>', data);
-         });
+            assert.strictEqual('<p><a href="http://link.com" target="">selection</a></p>', data);
+        });
 
-         it('should create link without protocol', function() {
-             bender.tools.selection.setWithHtml(this.nativeEditor, '{selection}');
+        it('should create link without protocol', function() {
+            bender.tools.selection.setWithHtml(this.nativeEditor, '{selection}');
 
-             var requestExclusiveListener = sinon.stub();
+            var requestExclusiveListener = sinon.stub();
 
-             var cancelExclusive = sinon.stub();
+            var cancelExclusive = sinon.stub();
 
-             var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} appendProtocol={false} cancelExclusive={cancelExclusive} requestExclusive={requestExclusiveListener} />, this.container);
+            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} appendProtocol={false} cancelExclusive={cancelExclusive} requestExclusive={requestExclusiveListener} />, this.container);
 
-             var inputLink = TestUtils.findRenderedDOMComponentWithTag(buttonLink, 'input');
+            var inputLink = TestUtils.findRenderedDOMComponentWithTag(buttonLink, 'input');
 
-             TestUtils.Simulate.change(inputLink, {target: {value: 'link.com'}});
+            TestUtils.Simulate.change(inputLink, {target: {value: 'link.com'}});
 
-             var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-ok');
+            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-ok');
 
-             Simulate.click(buttonOk.parentNode);
+            Simulate.click(buttonOk.parentNode);
 
-             var data = bender.tools.getData(this.nativeEditor, {
-                 fixHtml: true,
-                 compatHtml: true
-             });
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
 
-             assert.strictEqual('<p><a href="link.com" target="">selection</a></p>', data);
-         });
-     });
- }());
+            assert.strictEqual('<p><a href="link.com" target="">selection</a></p>', data);
+        });
+
+        it.only('should propagate `allowedTargets` property to `ButtonLinkTargetEdit`', function() {
+            var allowedTargets = [
+                {
+                    label: AlloyEditor.Strings.linkTargetDefault,
+                    value: ''
+                }, {
+                    label: AlloyEditor.Strings.linkTargetBlank,
+                    value: '_blank'
+                }
+            ];
+
+            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} allowedTargets={allowedTargets} />, this.container);
+
+            var buttonLinkTargetEdit = TestUtils.findRenderedComponentWithType(buttonLink, AlloyEditor.ButtonLinkTargetEdit);
+
+            assert.strictEqual(allowedTargets, buttonLinkTargetEdit.props.allowedTargets);
+        });
+    });
+}());
