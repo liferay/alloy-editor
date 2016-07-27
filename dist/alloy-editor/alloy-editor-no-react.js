@@ -10676,7 +10676,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var targetSelector = {
                 allowedTargets: this.props.allowedTargets,
                 editor: this.props.editor,
-                allowedTargets: this.props.allowedTargets,
                 handleLinkTargetChange: this._handleLinkTargetChange,
                 selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
             };
