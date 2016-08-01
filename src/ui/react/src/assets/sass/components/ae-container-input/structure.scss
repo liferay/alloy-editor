@@ -15,6 +15,11 @@
         width: $container-input-small-width-multiplier * $container-input-base-width;
     }
 
+    &.flexible {
+        width: auto;
+        flex-grow: 1;
+    }
+
     input, .ae-input {
         @include flex(1);
 
