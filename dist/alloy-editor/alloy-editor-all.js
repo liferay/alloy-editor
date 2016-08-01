@@ -30962,7 +30962,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     React.createElement(AlloyEditor.ButtonLinkTargetEdit, targetSelector),
                     React.createElement(
                         'div',
-                        { className: 'ae-container-input xxl' },
+                        { className: 'ae-container-input flexible' },
                         React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
                         autocompleteDropdown
                     ),
