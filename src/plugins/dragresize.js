@@ -15,13 +15,14 @@
 
     var IMAGE_SNAP_TO_SIZE = 7;
 
-    var isWebKit = ('WebkitAppearance' in document.documentElement.style);
     var isFirefox = ('MozAppearance' in document.documentElement.style);
+    var isWebKit = ('WebkitAppearance' in document.documentElement.style);
+
     var enablePlugin = isWebKit || isFirefox;
 
     if (isFirefox) {
-        // Disable default behaviour of editting in designMode
-        document.execCommand("enableObjectResizing", false, false);
+        // Disable the native image resizing
+        document.execCommand('enableObjectResizing', false, false);
     }
 
     if (enablePlugin) {
@@ -113,6 +114,10 @@
 
             if (resizeElement) {
                 resizeElement.remove();
+            }
+
+            if (isFirefox) {
+                document.execCommand('enableObjectResizing', false, true);
             }
         });
 
