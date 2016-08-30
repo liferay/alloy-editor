@@ -11554,7 +11554,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * Indicates whether the remove styles item should appear in the styles list.
              *
-             * @property {Boolean} expanded
+             * @property {Boolean} showRemoveStylesItem
              */
             showRemoveStylesItem: React.PropTypes.bool,
 
