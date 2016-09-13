@@ -54,6 +54,8 @@
                     // placeholder's CSS and placeholder does not appear.
                     // For that reason, we will intentionally remove any content from editorNode.
                     editorNode.setHtml('');
+					
+					event.resetDirty();
 
                     editorNode.addClass(editor.config.placeholderClass);
                 }
