@@ -205,6 +205,9 @@
                     <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
                         <span className="ae-icon-unlink"></span>
                     </button>
+                    <button aria-label="Upload" className="ae-button" onClick={this._uploadFile} title="Upload">
+                        <span className="glyphicons glyphicons-file"></span>
+                    </button>
                     <div className="ae-container-input xxl">
                         <AlloyEditor.ButtonLinkTargetEdit {...targetSelector} />
                         <div className="ae-container-input flexible">
@@ -415,6 +418,17 @@
             // We need to cancelExclusive with the bound parameters in case the button is used
             // inside another in exclusive mode (such is the case of the link button)
             this.props.cancelExclusive();
+        },
+        
+        _uploadFile: function() {
+            var that = this;
+            parent.uploadFile(function(fileUrl) {
+                that._handleLinkHrefChange( {
+                    target: {
+                        value: fileUrl
+                    }
+                });
+            });
         }
     });
 
