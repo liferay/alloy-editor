@@ -30957,6 +30957,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     React.createElement('span', { className: 'ae-icon-unlink' })
                 ),
                 React.createElement(
+                    'button',
+                    { 'aria-label': 'Upload', className: 'ae-button', onClick: this._uploadFile, title: 'Upload' },
+                    React.createElement('span', { className: 'glyphicons glyphicons-file' })
+                ),
+                React.createElement(
                     'div',
                     { className: 'ae-container-input xxl' },
                     React.createElement(AlloyEditor.ButtonLinkTargetEdit, targetSelector),
@@ -31166,6 +31171,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             // We need to cancelExclusive with the bound parameters in case the button is used
             // inside another in exclusive mode (such is the case of the link button)
             this.props.cancelExclusive();
+        },
+
+        _uploadFile: function _uploadFile() {
+            var that = this;
+            parent.uploadFile(function (fileUrl) {
+                that._handleLinkHrefChange({
+                    target: {
+                        value: fileUrl
+                    }
+                });
+            });
         }
     });
 

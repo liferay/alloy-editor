@@ -387,6 +387,9 @@
                                                 &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;ae-button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
                                                     &lt;span className=&quot;ae-icon-unlink&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
+                                                &lt;button aria-label=&quot;Upload&quot; className=&quot;ae-button&quot; onClick={this._uploadFile} title=&quot;Upload&quot;&gt;
+                                                    &lt;span className=&quot;glyphicons glyphicons-file&quot;&gt;&lt;/span&gt;
+                                                &lt;/button&gt;
                                                 &lt;div className=&quot;ae-container-input xxl&quot;&gt;
                                                     &lt;AlloyEditor.ButtonLinkTargetEdit {...targetSelector} /&gt;
                                                     &lt;div className=&quot;ae-container-input flexible&quot;&gt;
@@ -597,6 +600,17 @@
                                         // We need to cancelExclusive with the bound parameters in case the button is used
                                         // inside another in exclusive mode (such is the case of the link button)
                                         this.props.cancelExclusive();
+                                    },
+                                    
+                                    _uploadFile: function() {
+                                        var that = this;
+                                        parent.uploadFile(function(fileUrl) {
+                                            that._handleLinkHrefChange( {
+                                                target: {
+                                                    value: fileUrl
+                                                }
+                                            });
+                                        });
                                     }
                                 });
                             
