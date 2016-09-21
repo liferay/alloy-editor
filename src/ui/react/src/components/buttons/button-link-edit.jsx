@@ -202,20 +202,22 @@
 
             return (
                 <div className="ae-container-edit-link">
-                    <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
-                        <span className="ae-icon-unlink"></span>
-                    </button>
                     <button aria-label="Upload" className="ae-button" onClick={this._uploadFile} title="Upload">
-                        <span className="glyphicons glyphicons-file"></span>
+                        <span className="icon-cloud-upload"></span>
                     </button>
                     <div className="ae-container-input xxl">
-                        <AlloyEditor.ButtonLinkTargetEdit {...targetSelector} />
                         <div className="ae-container-input flexible">
-                            <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
+                            <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder="Search for page, file, or link" ref="linkInput" type="text" value={this.state.linkHref}></input>
                             {autocompleteDropdown}
                         </div>
                         <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
                     </div>
+                    <button aria-label="Preview" className="ae-button" onClick={this._previewLink} title="Preview">
+                        <span className="glyphicons glyphicons-eye-open"></span>
+                    </button>
+                    <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
+                        <span className="icon-unlink"></span>
+                    </button>
                     <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
                         <span className="ae-icon-ok"></span>
                     </button>
@@ -328,7 +330,8 @@
         _handleLinkAutocompleteClick: function(event) {
             this.setState({
                 itemDropdown: null,
-                linkHref: event.target.getAttribute('data-value')
+                linkHref: event.target.getAttribute('data-value'),
+                linkTarget: event.target.getAttribute('data-target')
             });
 
             this._focusLinkInput();
@@ -418,6 +421,10 @@
             // We need to cancelExclusive with the bound parameters in case the button is used
             // inside another in exclusive mode (such is the case of the link button)
             this.props.cancelExclusive();
+        },
+        
+        _previewLink: function() {
+	        window.open(this.state.linkHref);
         },
         
         _uploadFile: function() {

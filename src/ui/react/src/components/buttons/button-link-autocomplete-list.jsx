@@ -172,7 +172,7 @@
             return items.map(function(item) {
                 return (
                     <li key={item.url} role="option">
-                        <button className="ae-toolbar-element" onClick={handleLinkAutocompleteClick} data-value={item.url}>{item.title}</button>
+                        <button className="ae-toolbar-element" onClick={handleLinkAutocompleteClick} data-value={item.url} data-target={item.target} dangerouslySetInnerHTML={{__html: item.title}}></button>
                     </li>
                 );
             });
