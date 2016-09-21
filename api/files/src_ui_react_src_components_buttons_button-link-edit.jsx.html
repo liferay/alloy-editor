@@ -384,20 +384,22 @@
                             
                                         return (
                                             &lt;div className=&quot;ae-container-edit-link&quot;&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;ae-button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
-                                                    &lt;span className=&quot;ae-icon-unlink&quot;&gt;&lt;/span&gt;
-                                                &lt;/button&gt;
                                                 &lt;button aria-label=&quot;Upload&quot; className=&quot;ae-button&quot; onClick={this._uploadFile} title=&quot;Upload&quot;&gt;
-                                                    &lt;span className=&quot;glyphicons glyphicons-file&quot;&gt;&lt;/span&gt;
+                                                    &lt;span className=&quot;icon-cloud-upload&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
                                                 &lt;div className=&quot;ae-container-input xxl&quot;&gt;
-                                                    &lt;AlloyEditor.ButtonLinkTargetEdit {...targetSelector} /&gt;
                                                     &lt;div className=&quot;ae-container-input flexible&quot;&gt;
-                                                        &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                        &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder=&quot;Search for page, file, or link&quot; ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
                                                         {autocompleteDropdown}
                                                     &lt;/div&gt;
                                                     &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;ae-button ae-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;
                                                 &lt;/div&gt;
+                                                &lt;button aria-label=&quot;Preview&quot; className=&quot;ae-button&quot; onClick={this._previewLink} title=&quot;Preview&quot;&gt;
+                                                    &lt;span className=&quot;glyphicons glyphicons-eye-open&quot;&gt;&lt;/span&gt;
+                                                &lt;/button&gt;
+                                                &lt;button aria-label={AlloyEditor.Strings.removeLink} className=&quot;ae-button&quot; disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}&gt;
+                                                    &lt;span className=&quot;icon-unlink&quot;&gt;&lt;/span&gt;
+                                                &lt;/button&gt;
                                                 &lt;button aria-label={AlloyEditor.Strings.confirm} className=&quot;ae-button&quot; disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}&gt;
                                                     &lt;span className=&quot;ae-icon-ok&quot;&gt;&lt;/span&gt;
                                                 &lt;/button&gt;
@@ -510,7 +512,8 @@
                                     _handleLinkAutocompleteClick: function(event) {
                                         this.setState({
                                             itemDropdown: null,
-                                            linkHref: event.target.getAttribute(&#x27;data-value&#x27;)
+                                            linkHref: event.target.getAttribute(&#x27;data-value&#x27;),
+                                            linkTarget: event.target.getAttribute(&#x27;data-target&#x27;)
                                         });
                             
                                         this._focusLinkInput();
@@ -600,6 +603,10 @@
                                         // We need to cancelExclusive with the bound parameters in case the button is used
                                         // inside another in exclusive mode (such is the case of the link button)
                                         this.props.cancelExclusive();
+                                    },
+                                    
+                                    _previewLink: function() {
+                            	        window.open(this.state.linkHref);
                                     },
                                     
                                     _uploadFile: function() {

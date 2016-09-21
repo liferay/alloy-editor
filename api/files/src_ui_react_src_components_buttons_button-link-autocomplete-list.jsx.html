@@ -354,7 +354,7 @@
                                         return items.map(function(item) {
                                             return (
                                                 &lt;li key={item.url} role=&quot;option&quot;&gt;
-                                                    &lt;button className=&quot;ae-toolbar-element&quot; onClick={handleLinkAutocompleteClick} data-value={item.url}&gt;{item.title}&lt;/button&gt;
+                                                    &lt;button className=&quot;ae-toolbar-element&quot; onClick={handleLinkAutocompleteClick} data-value={item.url} data-target={item.target} dangerouslySetInnerHTML={{__html: item.title}}&gt;&lt;/button&gt;
                                                 &lt;/li&gt;
                                             );
                                         });

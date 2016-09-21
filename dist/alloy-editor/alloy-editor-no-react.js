@@ -10468,11 +10468,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 return React.createElement(
                     'li',
                     { key: item.url, role: 'option' },
-                    React.createElement(
-                        'button',
-                        { className: 'ae-toolbar-element', onClick: handleLinkAutocompleteClick, 'data-value': item.url },
-                        item.title
-                    )
+                    React.createElement('button', { className: 'ae-toolbar-element', onClick: handleLinkAutocompleteClick, 'data-value': item.url, 'data-target': item.target, dangerouslySetInnerHTML: { __html: item.title } })
                 );
             });
         },
@@ -10715,25 +10711,29 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 { className: 'ae-container-edit-link' },
                 React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.removeLink, className: 'ae-button', disabled: !this.state.element, onClick: this._removeLink, title: AlloyEditor.Strings.remove },
-                    React.createElement('span', { className: 'ae-icon-unlink' })
-                ),
-                React.createElement(
-                    'button',
                     { 'aria-label': 'Upload', className: 'ae-button', onClick: this._uploadFile, title: 'Upload' },
-                    React.createElement('span', { className: 'glyphicons glyphicons-file' })
+                    React.createElement('span', { className: 'icon-cloud-upload' })
                 ),
                 React.createElement(
                     'div',
                     { className: 'ae-container-input xxl' },
-                    React.createElement(AlloyEditor.ButtonLinkTargetEdit, targetSelector),
                     React.createElement(
                         'div',
                         { className: 'ae-container-input flexible' },
-                        React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                        React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: 'Search for page, file, or link', ref: 'linkInput', type: 'text', value: this.state.linkHref }),
                         autocompleteDropdown
                     ),
                     React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
+                ),
+                React.createElement(
+                    'button',
+                    { 'aria-label': 'Preview', className: 'ae-button', onClick: this._previewLink, title: 'Preview' },
+                    React.createElement('span', { className: 'glyphicons glyphicons-eye-open' })
+                ),
+                React.createElement(
+                    'button',
+                    { 'aria-label': AlloyEditor.Strings.removeLink, className: 'ae-button', disabled: !this.state.element, onClick: this._removeLink, title: AlloyEditor.Strings.remove },
+                    React.createElement('span', { className: 'icon-unlink' })
                 ),
                 React.createElement(
                     'button',
@@ -10847,7 +10847,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         _handleLinkAutocompleteClick: function _handleLinkAutocompleteClick(event) {
             this.setState({
                 itemDropdown: null,
-                linkHref: event.target.getAttribute('data-value')
+                linkHref: event.target.getAttribute('data-value'),
+                linkTarget: event.target.getAttribute('data-target')
             });
 
             this._focusLinkInput();
@@ -10933,6 +10934,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             // We need to cancelExclusive with the bound parameters in case the button is used
             // inside another in exclusive mode (such is the case of the link button)
             this.props.cancelExclusive();
+        },
+
+        _previewLink: function _previewLink() {
+            window.open(this.state.linkHref);
         },
 
         _uploadFile: function _uploadFile() {
