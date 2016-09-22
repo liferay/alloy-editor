@@ -66,7 +66,7 @@
             assert.strictEqual('<p><a href="link.com" target="">selection</a></p>', data);
         });
 
-        it.only('should propagate `allowedTargets` property to `ButtonLinkTargetEdit`', function() {
+        it('should propagate `allowedTargets` property to `ButtonLinkTargetEdit`', function() {
             var allowedTargets = [
                 {
                     label: AlloyEditor.Strings.linkTargetDefault,
