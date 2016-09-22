@@ -3144,8 +3144,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         _checkEmptyData: function _checkEmptyData(event) {
             var editor = event.editor;
 
+            var editorNode = new CKEDITOR.dom.element(editor.element.$);
+
             if (editor.getData() === '') {
-                var editorNode = new CKEDITOR.dom.element(editor.element.$);
 
                 // Despite getData() returns empty string, the content still may have
                 // data - an empty paragraph. This breaks the :empty selector in
@@ -3155,6 +3156,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 editorNode.addClass(editor.config.placeholderClass);
             }
+            // else {
+            //     editorNode.removeClass(editor.config.placeholderClass);
+            // }
         }
     });
 })();

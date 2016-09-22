@@ -46,8 +46,9 @@
             _checkEmptyData: function(event) {
                 var editor = event.editor;
 
+                var editorNode = new CKEDITOR.dom.element(editor.element.$);
+
                 if (editor.getData() === '') {
-                    var editorNode = new CKEDITOR.dom.element(editor.element.$);
 
                     // Despite getData() returns empty string, the content still may have
                     // data - an empty paragraph. This breaks the :empty selector in
@@ -55,10 +56,11 @@
                     // For that reason, we will intentionally remove any content from editorNode.
                     editorNode.setHtml('');
 
-                    event.resetDirty();
-
                     editorNode.addClass(editor.config.placeholderClass);
                 }
+                // else {
+                //     editorNode.removeClass(editor.config.placeholderClass);
+                // }
             }
         }
     );
