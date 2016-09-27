@@ -16,12 +16,12 @@
 
         afterEach(Utils.afterEach);
 
-        it('should html value of content editor is the value when instance is created', function() {
+        it('should assert the html value of the editor is the same as passed value on creating the instance', function() {
             assert.strictEqual(this.nativeEditor.editable().getHtml(), '<p><br></p>');
             assert.isTrue(this.nativeEditor.element.hasClass('ae-placeholder'));
         });
 
-        it('should html value of content editor is not changed after it is blur when its value is empty', function() {
+        it('should not change the html value after the editor is blurred when its value is empty', function() {
             this.nativeEditor.fire('blur');
 
             assert.strictEqual(this.nativeEditor.editable().getHtml(), '<p><br></p>');
@@ -29,7 +29,7 @@
 
         });
 
-        it('should keep value when input is blur and input has content', function() {
+        it('should keep the value when input is blurred and input has content', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'This input has content');
 
             this.nativeEditor.fire('blur');

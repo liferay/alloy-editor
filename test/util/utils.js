@@ -1,4 +1,4 @@
-(function() {
+w(function() {
     'use strict';
 
     var Utils = {
@@ -52,7 +52,9 @@
 
             if (attributes) {
                 for (var attribute in attributes) {
-                    editable.setAttribute(attribute, attributes[attribute]);
+                    if (Object.prototype.hasOwnProperty.call(attributes, attribute)) {
+                        editable.setAttribute(attribute, attributes[attribute]);
+                    }
                 }
             }
 
