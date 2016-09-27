@@ -31186,6 +31186,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         value: fileUrl
                     }
                 });
+                that.setState({
+                    linkTarget: "_blank"
+                });
             });
         }
     });
