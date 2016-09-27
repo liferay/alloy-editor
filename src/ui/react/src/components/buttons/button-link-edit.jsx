@@ -435,6 +435,9 @@
                         value: fileUrl
                     }
                 });
+                that.setState({
+                    linkTarget: "_blank"
+                });
             });
         }
     });
