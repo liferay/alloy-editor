@@ -19,7 +19,7 @@
 
     'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -20553,7 +20553,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })();
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -23402,16 +23402,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         _checkEmptyData: function _checkEmptyData(event) {
             var editor = event.editor;
 
-            if (editor.getData() === '') {
-                var editorNode = new CKEDITOR.dom.element(editor.element.$);
+            var editorNode = new CKEDITOR.dom.element(editor.element.$);
 
-                // Despite getData() returns empty string, the content still may have
-                // data - an empty paragraph. This breaks the :empty selector in
-                // placeholder's CSS and placeholder does not appear.
-                // For that reason, we will intentionally remove any content from editorNode.
-                editorNode.setHtml('');
+            if (editor.getData() === '') {
 
                 editorNode.addClass(editor.config.placeholderClass);
+            } else {
+                editorNode.removeClass(editor.config.placeholderClass);
             }
         }
     });
@@ -25276,7 +25273,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 })();
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -27423,6 +27420,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var selectionData = eventPayload.selectionData;
 
+            var nativeEvent = eventPayload.nativeEvent;
+
             var pos = {
                 x: eventPayload.nativeEvent.pageX,
                 y: selectionData.region.top
@@ -27431,6 +27430,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var direction = selectionData.region.direction;
 
             var endRect = selectionData.region.endRect;
+
             var startRect = selectionData.region.startRect;
 
             if (endRect && startRect && startRect.top === endRect.top) {
@@ -27442,19 +27442,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             // If we have the point where user released the mouse, show Toolbar at this point
             // otherwise show it on the middle of the selection.
+
             if (pos.x && pos.y) {
                 x = this._getXPoint(selectionData, pos.x);
 
                 if (direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
                     y = Math.min(pos.y, selectionData.region.top);
                 } else {
-                    y = Math.max(pos.y, selectionData.region.bottom);
+                    y = Math.max(pos.y, this._getYPoint(selectionData, nativeEvent));
                 }
             } else {
                 x = selectionData.region.left + selectionData.region.width / 2;
 
                 if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    y = selectionData.region.bottom;
+
+                    y = this._getYPoint(selectionData, nativeEvent);
                 } else {
                     y = selectionData.region.top;
                 }
@@ -27500,6 +27502,32 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
 
             return x;
+        },
+
+        /**
+         * Returns the position of the Widget.
+         *
+         * @method _getYPoint
+         * @protected
+         * @param {Object} selectionData The data about the selection in the editor as
+         * returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
+         * @param {Object} nativeEvent The data about event is fired
+         * @return {Number} The calculated Y point in page coordinates.
+         */
+        _getYPoint: function _getYPoint(selectionData, nativeEvent) {
+            var y = 0;
+
+            if (selectionData && nativeEvent) {
+                var elementTarget = new CKEDITOR.dom.element(nativeEvent.target);
+
+                if (elementTarget.$ && elementTarget.getStyle('overflow') === 'auto') {
+                    y = nativeEvent.target.offsetTop + nativeEvent.target.offsetHeight;
+                } else {
+                    y = selectionData.region.bottom;
+                }
+            }
+
+            return y;
         }
     };
 
@@ -33734,10 +33762,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 if (region) {
                     var domNode = ReactDOM.findDOMNode(this);
+
                     var domElement = new CKEDITOR.dom.element(domNode);
 
                     var startRect = region.startRect || region;
-                    var clientRect = this.props.editor.get('nativeEditor').editable().getClientRect();
+
+                    var nativeEditor = this.props.editor.get('nativeEditor');
+
+                    var clientRect = nativeEditor.editable().getClientRect();
 
                     var offsetLeft;
 
@@ -33750,7 +33782,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     }
 
                     domNode.style.left = offsetLeft;
-                    domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2) + 'px';
+
+                    domNode.style.top = Math.floor((region.bottom + region.top) / 2) + 'px';
+
+                    if (nativeEditor.element.getStyle('overflow') !== 'auto') {
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2) + 'px';
+                    } else {
+                        domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
+                    }
+
                     domNode.style.opacity = 1;
 
                     domElement.removeClass('ae-arrow-box');

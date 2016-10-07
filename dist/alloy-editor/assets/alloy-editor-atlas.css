@@ -198,7 +198,7 @@
  * the CSS of nested components or components which
  * stay on the same level in the hierarchy.
  */
-.ae-placeholder:empty:not(:focus):before {
+.ae-placeholder:not(:focus):before {
   content: attr(data-placeholder); }
 
 .ae-twitter-link {

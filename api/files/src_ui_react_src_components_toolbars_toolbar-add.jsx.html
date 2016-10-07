@@ -443,10 +443,14 @@
                             
                                             if (region) {
                                                 var domNode = ReactDOM.findDOMNode(this);
+                            
                                                 var domElement = new CKEDITOR.dom.element(domNode);
                             
                                                 var startRect = region.startRect || region;
-                                                var clientRect = this.props.editor.get(&#x27;nativeEditor&#x27;).editable().getClientRect();
+                            
+                                                var nativeEditor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                                                var clientRect = nativeEditor.editable().getClientRect();
                             
                                                 var offsetLeft;
                             
@@ -459,7 +463,15 @@
                                                 }
                             
                                                 domNode.style.left = offsetLeft;
-                                                domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + &#x27;px&#x27;;
+                            
+                                                domNode.style.top = Math.floor((region.bottom + region.top) / 2) + &#x27;px&#x27;;
+                            
+                                                if (nativeEditor.element.getStyle(&#x27;overflow&#x27;) !== &#x27;auto&#x27;) {
+                                                    domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + &#x27;px&#x27;;
+                                                } else {
+                                                    domNode.style.top = Math.floor( nativeEditor.element.$.offsetTop + (startRect.height / 2) - (domNode.offsetHeight / 2) ) + &#x27;px&#x27;;
+                                                }
+                            
                                                 domNode.style.opacity = 1;
                             
                                                 domElement.removeClass(&#x27;ae-arrow-box&#x27;);
