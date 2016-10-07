@@ -200,13 +200,19 @@
                 autocompleteDropdown = <AlloyEditor.ButtonLinkAutocompleteList {...autocompleteDropdownProps} />;
             }
 
+            var targetButtonEdit;
+
+            if (this.props.showTargetSelector) {
+                targetButtonEdit = <AlloyEditor.ButtonLinkTargetEdit {...targetSelector} />;
+            }
+
             return (
                 <div className="ae-container-edit-link">
                     <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
                         <span className="ae-icon-unlink"></span>
                     </button>
                     <div className="ae-container-input xxl">
-                        <AlloyEditor.ButtonLinkTargetEdit {...targetSelector} />
+                       {targetButtonEdit}
                         <div className="ae-container-input flexible">
                             <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
                             {autocompleteDropdown}
