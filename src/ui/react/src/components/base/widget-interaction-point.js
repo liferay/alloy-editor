@@ -129,19 +129,17 @@
         /**
          * Returns the position of the Widget.
          *
-         * @protected
          * @method _getYPoint
+         * @protected
          * @param {Object} selectionData The data about the selection in the editor as
+         * returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
          * @param {Object} nativeEvent The data about event is fired
          * @return {Number} The calculated Y point in page coordinates.
          */
         _getYPoint: function(selectionData, nativeEvent) {
             var y = 0;
 
-            var diff;
-
             if (selectionData && nativeEvent) {
-
                 var elementTarget = new CKEDITOR.dom.element(nativeEvent.target);
 
                 if (elementTarget.$ && elementTarget.getStyle('overflow') === 'auto') {
@@ -149,7 +147,6 @@
                 } else {
                     y = selectionData.region.bottom;
                 }
-
             }
 
             return y;

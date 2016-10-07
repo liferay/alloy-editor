@@ -260,7 +260,6 @@
                 }
 
                 if (region) {
-
                     var domNode = ReactDOM.findDOMNode(this);
 
                     var domElement = new CKEDITOR.dom.element(domNode);
