@@ -1,4 +1,4 @@
-w(function() {
+(function() {
     'use strict';
 
     var Utils = {

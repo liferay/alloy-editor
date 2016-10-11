@@ -18,7 +18,6 @@
 
         it('should assert the html value of the editor is the same as passed value on creating the instance', function() {
             assert.strictEqual(this.nativeEditor.editable().getHtml(), '<p><br></p>');
-            assert.isTrue(this.nativeEditor.element.hasClass('ae-placeholder'));
         });
 
         it('should not change the html value after the editor is blurred when its value is empty', function() {
@@ -34,7 +33,18 @@
 
             this.nativeEditor.fire('blur');
             assert.strictEqual(this.nativeEditor.editable().getHtml(), 'This input has content');
+        });
+
+        it('should ae-placeholder class is removed when nativeEditor is focused', function() {
+            bender.tools.selection.setWithHtml(this.nativeEditor, 'This input has content');
+
+            this.nativeEditor.fire('focus');
             assert.isTrue(!this.nativeEditor.element.hasClass('ae-placeholder'));
+        });
+
+        it('should ae-placeholder class is added when nativeEditor is empty and it is blurred', function() {
+            this.nativeEditor.fire('blur');
+            assert.isTrue(this.nativeEditor.element.hasClass('ae-placeholder'));
         });
 	});
 
