@@ -1,3 +1,4 @@
 .ae-placeholder:not(:focus):before {
     content: attr(data-placeholder);
+    position: absolute;
 }
