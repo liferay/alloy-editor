@@ -5,3 +5,6 @@ node_modules
 test-results.xml
 sauce_connect.log
 coverage
+jsconfig.json
+.vscode
+yarn.lock
