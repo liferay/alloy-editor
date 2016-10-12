@@ -212,7 +212,7 @@
                         <span className="ae-icon-unlink"></span>
                     </button>
                     <div className="ae-container-input xxl">
-                       {targetButtonEdit}
+                        {targetButtonEdit}
                         <div className="ae-container-input flexible">
                             <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
                             {autocompleteDropdown}
