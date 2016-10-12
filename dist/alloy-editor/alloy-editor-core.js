@@ -3130,6 +3130,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         init: function init(editor) {
             editor.on('blur', this._checkEmptyData, this);
+            editor.on('focus', this._removePlaceholderClass, this);
             editor.once('contentDom', this._checkEmptyData, this);
         },
 
@@ -3149,9 +3150,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (editor.getData() === '') {
 
                 editorNode.addClass(editor.config.placeholderClass);
-            } else {
-                editorNode.removeClass(editor.config.placeholderClass);
             }
+        },
+
+        /**
+         * Remove placeholder class when input is focused
+         *
+         * @protected
+         * @method _removePlaceholderClass
+         + @param {CKEDITOR.dom.event} editor event, fired from CKEditor
+         */
+        _removePlaceholderClass: function _removePlaceholderClass(event) {
+            var editor = event.editor;
+
+            var editorNode = new CKEDITOR.dom.element(editor.element.$);
+
+            editorNode.removeClass(editor.config.placeholderClass);
         }
     });
 })();

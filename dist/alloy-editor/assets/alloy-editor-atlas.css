@@ -199,7 +199,8 @@
  * stay on the same level in the hierarchy.
  */
 .ae-placeholder:not(:focus):before {
-  content: attr(data-placeholder); }
+  content: attr(data-placeholder);
+  position: absolute; }
 
 .ae-twitter-link {
   padding: 0 5px; }

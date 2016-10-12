@@ -214,6 +214,7 @@
                                          */
                                         init: function(editor) {
                                             editor.on(&#x27;blur&#x27;, this._checkEmptyData, this);
+                                            editor.on(&#x27;focus&#x27;, this._removePlaceholderClass, this);
                                             editor.once(&#x27;contentDom&#x27;, this._checkEmptyData, this);
                                         },
                             
@@ -234,9 +235,21 @@
                             
                                                 editorNode.addClass(editor.config.placeholderClass);
                                             }
-                                            else {
-                                                editorNode.removeClass(editor.config.placeholderClass);
-                                            }
+                                        },
+                            
+                                        /**
+                                         * Remove placeholder class when input is focused
+                                         *
+                                         * @protected
+                                         * @method _removePlaceholderClass
+                                         + @param {CKEDITOR.dom.event} editor event, fired from CKEditor
+                                         */
+                                        _removePlaceholderClass: function(event) {
+                                            var editor = event.editor;
+                            
+                                            var editorNode = new CKEDITOR.dom.element(editor.element.$);
+                            
+                                            editorNode.removeClass(editor.config.placeholderClass);
                                         }
                                     }
                                 );
