@@ -7,6 +7,7 @@ module.exports = {
         }
     },
     "globals": {
+        "happen": true,
         "AlloyEditor": true,
         "CKEDITOR": true,
         "React": true,
