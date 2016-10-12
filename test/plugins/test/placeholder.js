@@ -1,12 +1,12 @@
 (function() {
-	'use strict';
+    'use strict';
 
-	var assert = chai.assert;
+    var assert = chai.assert;
 
-	describe('Placeholder', function() {
-		this.timeout(35000);
+    describe('Placeholder', function() {
+        this.timeout(35000);
 
-		before(function(done) {
+        before(function(done) {
             Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_placeholder', placeholderClass: 'ae-placeholder'}, {'data-placeholder': 'This is placeholder'});
         });
 
@@ -35,17 +35,16 @@
             assert.strictEqual(this.nativeEditor.editable().getHtml(), 'This input has content');
         });
 
-        it('should ae-placeholder class is removed when nativeEditor is focused', function() {
+        it('should remove ae-placeholder class when nativeEditor is focused', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'This input has content');
 
             this.nativeEditor.fire('focus');
             assert.isTrue(!this.nativeEditor.element.hasClass('ae-placeholder'));
         });
 
-        it('should ae-placeholder class is added when nativeEditor is empty and it is blurred', function() {
+        it('should add ae-placeholder class nativeEditor is empty and it is blurred', function() {
             this.nativeEditor.fire('blur');
             assert.isTrue(this.nativeEditor.element.hasClass('ae-placeholder'));
         });
-	});
-
+    });
 }());
