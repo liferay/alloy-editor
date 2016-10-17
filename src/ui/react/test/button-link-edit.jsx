@@ -83,5 +83,34 @@
 
             assert.strictEqual(allowedTargets, buttonLinkTargetEdit.props.allowedTargets);
         });
+
+        it('should render target selector on link edit button', function() {
+            var allowedTargets = [
+                {
+                    label: AlloyEditor.Strings.linkTargetDefault,
+                    value: ''
+                }, {
+                    label: AlloyEditor.Strings.linkTargetBlank,
+                    value: '_blank'
+                }
+            ];
+
+            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} allowedTargets={allowedTargets} />, this.container);
+
+            var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, AlloyEditor.ButtonLinkTargetEdit);
+
+            assert.strictEqual(buttonLinkTargetEditRendered.length, 1);
+        });
+
+        it('should not render target selector on link edit button when passing showTargetSelector property as false', function() {
+
+            var showTargetSelector = false;
+
+            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} showTargetSelector={showTargetSelector} />, this.container);
+
+            var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, AlloyEditor.ButtonLinkTargetEdit);
+
+            assert.strictEqual(buttonLinkTargetEditRendered.length, 0);
+        });
     });
 }());
