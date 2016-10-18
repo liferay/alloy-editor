@@ -31002,6 +31002,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 autocompleteDropdown = React.createElement(AlloyEditor.ButtonLinkAutocompleteList, autocompleteDropdownProps);
             }
 
+            var targetButtonEdit;
+
+            if (this.props.showTargetSelector) {
+                targetButtonEdit = React.createElement(AlloyEditor.ButtonLinkTargetEdit, targetSelector);
+            }
+
             return React.createElement(
                 'div',
                 { className: 'ae-container-edit-link' },
@@ -31013,7 +31019,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 React.createElement(
                     'div',
                     { className: 'ae-container-input xxl' },
-                    React.createElement(AlloyEditor.ButtonLinkTargetEdit, targetSelector),
+                    targetButtonEdit,
                     React.createElement(
                         'div',
                         { className: 'ae-container-input flexible' },
