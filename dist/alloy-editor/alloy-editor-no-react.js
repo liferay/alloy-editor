@@ -10914,12 +10914,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         _updateLink: function _updateLink() {
             var editor = this.props.editor.get('nativeEditor');
             var linkUtils = new CKEDITOR.Link(editor, { appendProtocol: this.props.appendProtocol });
-            var linkAttrs = {
-                target: this.state.linkTarget
-            };
-            var modifySelection = { advance: true };
-
             if (this.state.linkHref) {
+                var RELATIVE_URI = /^\/[^\/]/;
+                var linkAttrs = {
+                    target: RELATIVE_URI.test(this.state.linkHref) ? "" : "_blank"
+                };
+                var modifySelection = { advance: true };
                 if (this.state.element) {
                     linkAttrs.href = this.state.linkHref;
 

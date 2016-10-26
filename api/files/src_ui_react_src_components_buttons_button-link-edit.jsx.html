@@ -583,12 +583,12 @@
                                     _updateLink: function() {
                                         var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
                                         var linkUtils = new CKEDITOR.Link(editor, {appendProtocol: this.props.appendProtocol});
-                                        var linkAttrs = {
-                                            target: this.state.linkTarget
-                                        };
-                                        var modifySelection = { advance: true };
-                            
                                         if (this.state.linkHref) {
+                            	            var RELATIVE_URI = /^\/[^\/]/;
+                            	            var linkAttrs = {
+                            	                target: RELATIVE_URI.test(this.state.linkHref) ? &quot;&quot; : &quot;_blank&quot;
+                            	            };
+                            	            var modifySelection = { advance: true };
                                             if (this.state.element) {
                                                 linkAttrs.href = this.state.linkHref;
                             
