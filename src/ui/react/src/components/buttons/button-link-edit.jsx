@@ -203,7 +203,7 @@
             return (
                 <div className="ae-container-edit-link">
                     <button aria-label="Upload" className="ae-button" onClick={this._uploadFile} title="Upload">
-                        <span className="icon-cloud-upload"></span>
+                        <span className="fa fa-cloud-upload"></span>
                     </button>
                     <div className="ae-container-input xxl">
                         <div className="ae-container-input flexible">
@@ -216,7 +216,7 @@
                         <span className="glyphicons glyphicons-eye-open"></span>
                     </button>
                     <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
-                        <span className="icon-unlink"></span>
+                        <span className="fa fa-unlink"></span>
                     </button>
                     <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
                         <span className="ae-icon-ok"></span>
