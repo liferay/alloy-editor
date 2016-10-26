@@ -10712,7 +10712,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 React.createElement(
                     'button',
                     { 'aria-label': 'Upload', className: 'ae-button', onClick: this._uploadFile, title: 'Upload' },
-                    React.createElement('span', { className: 'icon-cloud-upload' })
+                    React.createElement('span', { className: 'fa fa-cloud-upload' })
                 ),
                 React.createElement(
                     'div',
@@ -10733,7 +10733,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 React.createElement(
                     'button',
                     { 'aria-label': AlloyEditor.Strings.removeLink, className: 'ae-button', disabled: !this.state.element, onClick: this._removeLink, title: AlloyEditor.Strings.remove },
-                    React.createElement('span', { className: 'icon-unlink' })
+                    React.createElement('span', { className: 'fa fa-unlink' })
                 ),
                 React.createElement(
                     'button',
