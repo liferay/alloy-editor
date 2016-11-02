@@ -13,9 +13,44 @@
         return;
     }
 
+    var IMAGE_HANDLES = {
+        both: ['tl', 'tm', 'tr', 'lm', 'rm', 'bl', 'bm', 'br'],
+        height: ['tl', 'tm', 'tr', 'bl', 'bm', 'br'],
+        scale: ['tl', 'tr', 'bl', 'br'],
+        width: ['tl', 'tr', 'lm', 'rm', 'bl', 'br'],
+    };
+
+    var POSITION_ELEMENT_FN = {
+        bl: function(handle, left, top, box) {
+            positionElement(handle, -3 + left, box.height - 4 + top);
+        },
+        bm: function(handle, left, top, box) {
+            positionElement(handle, Math.round(box.width / 2) - 3 + left, box.height - 4 + top);
+        },
+        br: function(handle, left, top, box) {
+            positionElement(handle, box.width - 4 + left, box.height - 4 + top);
+        },
+        lm: function(handle, left, top, box) {
+            positionElement(handle, -3 + left, Math.round(box.height / 2) - 3 + top);
+        },
+        tl: function(handle, left, top, box) {
+            positionElement(handle, left - 3, top - 3);
+        },
+        tm: function(handle, left, top, box) {
+            positionElement(handle, Math.round(box.width / 2) - 3 + left, -3 + top);
+        },
+        tr: function(handle, left, top, box) {
+            positionElement(handle, box.width - 4 + left, -3 + top);
+        },
+        rm: function(handle, left, top, box) {
+            positionElement(handle, box.width - 4 + left, Math.round(box.height / 2) - 3 + top);
+        }
+    };
+
     var IMAGE_SNAP_TO_SIZE = 7;
 
     var isFirefox = ('MozAppearance' in document.documentElement.style);
+
     var isWebKit = ('WebkitAppearance' in document.documentElement.style);
 
     var enablePlugin = isWebKit || isFirefox;
@@ -55,9 +90,13 @@
             document = editor.document.$;
         var snapToSize = (typeof IMAGE_SNAP_TO_SIZE === 'undefined') ? null : IMAGE_SNAP_TO_SIZE;
 
+        editor.config.imageScaleResize = editor.config.imageScaleResize || 'both';
+
         var resizer = new Resizer(editor, {
+            imageScaleResize: editor.config.imageScaleResize,
             snapToSize: snapToSize
         });
+
 
         document.addEventListener('mousedown', function(e) {
             if (resizer.isHandle(e.target)) {
@@ -141,20 +180,20 @@
 
     Resizer.prototype = {
         init: function() {
+            var instance = this;
+
             var container = this.container = this.document.createElement('div');
+
             container.id = 'ckimgrsz';
             this.preview = this.document.createElement('span');
             container.appendChild(this.preview);
-            var handles = this.handles = {
-                tl: this.createHandle('tl'),
-                tm: this.createHandle('tm'),
-                tr: this.createHandle('tr'),
-                lm: this.createHandle('lm'),
-                rm: this.createHandle('rm'),
-                bl: this.createHandle('bl'),
-                bm: this.createHandle('bm'),
-                br: this.createHandle('br')
-            };
+
+            var handles = this.handles = {};
+
+            IMAGE_HANDLES[this.cfg.imageScaleResize].forEach(function (handleName, index) {
+                handles[handleName] = instance.handles[handleName] = instance.createHandle(handleName);
+            });
+
             for (var n in handles) {
                 container.appendChild(handles[n]);
             }
@@ -233,14 +272,10 @@
             left = left || 0;
             top = top || 0;
             var handles = this.handles;
-            positionElement(handles.tl, -3 + left, -3 + top);
-            positionElement(handles.tm, Math.round(box.width / 2) - 3 + left, -3 + top);
-            positionElement(handles.tr, box.width - 4 + left, -3 + top);
-            positionElement(handles.lm, -3 + left, Math.round(box.height / 2) - 3 + top);
-            positionElement(handles.rm, box.width - 4 + left, Math.round(box.height / 2) - 3 + top);
-            positionElement(handles.bl, -3 + left, box.height - 4 + top);
-            positionElement(handles.bm, Math.round(box.width / 2) - 3 + left, box.height - 4 + top);
-            positionElement(handles.br, box.width - 4 + left, box.height - 4 + top);
+
+            for (var handle in handles) {
+                POSITION_ELEMENT_FN[handle](handles[handle], left, top, box);
+            }
         },
         showHandles: function() {
             var handles = this.handles;
@@ -264,7 +299,8 @@
         updatePreview: function() {
             var box = this.previewBox;
             positionElement(this.preview, box.left, box.top);
-            resizeElement(this.preview, box.width, box.height);
+            this.preview.style.width = this.previewBox.width + 'px';
+            this.preview.style.height = this.previewBox.height + 'px';
         },
         hidePreview: function() {
             var box = getBoundingBox(this.window, this.preview);
@@ -281,8 +317,11 @@
                 width: this.box.width,
                 height: this.box.height
             };
+
             if (!data) return;
+
             var attr = data.target.className;
+
             if (~attr.indexOf('r')) {
                 box.width = Math.max(32, this.box.width + data.delta.x);
             }
@@ -304,7 +343,9 @@
                     box.width = Math.round(box.height * ratio);
                 }
             }
+
             var snapToSize = this.cfg.snapToSize;
+
             if (snapToSize) {
                 var others = this.otherImages;
                 for (var i = 0; i < others.length; i++) {
@@ -316,6 +357,7 @@
                     }
                 }
             }
+
             //recalculate left or top position
             if (~attr.indexOf('l')) {
                 box.left = this.box.width - box.width;
@@ -325,7 +367,7 @@
             }
         },
         resizeComplete: function() {
-            resizeElement(this.el, this.result.width, this.result.height);
+            resizeElement.call(this, this.el, this.result.width, this.result.height);
         }
     };
 
@@ -426,8 +468,19 @@
     }
 
     function resizeElement(el, width, height) {
-        el.style.width = String(width) + 'px';
-        el.style.height = String(height) + 'px';
+        var imageScaleResize = this.editor.config.imageScaleResize;
+        if (imageScaleResize === 'both') {
+            el.style.width = String(width) + 'px';
+            el.style.height = String(height) + 'px';
+        }
+        else if (imageScaleResize === 'width' || imageScaleResize === 'scale') {
+            el.style.height = 'auto';
+            el.style.width = String(width) + 'px';
+        }
+        else if (imageScaleResize === 'height') {
+            el.style.height = String(height) + 'px';
+            el.style.width = 'auto';
+        }
     }
 
     function getBoundingBox(window, el) {
