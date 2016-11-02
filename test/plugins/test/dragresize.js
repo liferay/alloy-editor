@@ -3,6 +3,12 @@
 
     var assert = chai.assert;
 
+    var skipTestIE = function() {
+        if (window.navigator.userAgent.indexOf('Windows') >= 0) {
+            this.skip();
+        }
+    };
+
     describe('imageScaleResize', function() {
 
         var url = 'http://localhost/url_test';
@@ -21,6 +27,8 @@
             afterEach(Utils.afterEach);
 
             it('The image, that is selected, has all resize handlers', function() {
+                skipTestIE.call(this);
+
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="url_test" />} here.');
 
                 var handlers = document.getElementsByTagName('i');
@@ -29,6 +37,8 @@
             });
 
             it('Preview is created, where backgroundImage is equal to src of the image, when mousedown is fired by some handle', function(done) {
+                skipTestIE.call(this);
+
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="' + url + '" />} here.');
 
                 var handlers = document.getElementsByTagName('i');
@@ -59,6 +69,8 @@
             afterEach(Utils.afterEach);
 
             it('The image, that is selected, has 4 handlers', function() {
+                skipTestIE.call(this);
+
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="' + url + '" />} here.');
 
                 var handlers = document.getElementsByTagName('i');
@@ -81,6 +93,8 @@
             afterEach(Utils.afterEach);
 
             it('The image, that is selected, has 6 handlers', function() {
+                skipTestIE.call(this);
+
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="' + url + '" />} here.');
 
                 var handlers = document.getElementsByTagName('i');
@@ -103,6 +117,8 @@
             afterEach(Utils.afterEach);
 
             it('The image, that is selected, has 6 handlers', function() {
+                skipTestIE.call(this);
+
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="' + url + '" />} here.');
 
                 var handlers = document.getElementsByTagName('i');
@@ -110,7 +126,5 @@
                 assert.strictEqual(handlers.length, 6);
             });
         });
-
     });
-
 }());
