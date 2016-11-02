@@ -4,7 +4,7 @@
     var assert = chai.assert;
 
     var skipTestIE = function() {
-        if (window.navigator.userAgent.indexOf('Windows') >= 0) {
+        if (CKEDITOR.env.ie) {
             this.skip();
         }
     };
@@ -13,7 +13,7 @@
 
         var url = 'http://localhost/url_test';
 
-        describe('default imageScaleResize "both"', function() {
+        describe('default value "both"', function() {
             this.timeout(35000);
 
             before(function(done) {
@@ -26,7 +26,7 @@
 
             afterEach(Utils.afterEach);
 
-            it('The image, that is selected, has all resize handlers', function() {
+            it('should have all resize handlers', function() {
                 skipTestIE.call(this);
 
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="url_test" />} here.');
@@ -36,7 +36,7 @@
                 assert.strictEqual(handlers.length, 8);
             });
 
-            it('Preview is created, where backgroundImage is equal to src of the image, when mousedown is fired by some handle', function(done) {
+            it('should have backgroundImage equal than src of the img when mousedown is fired by some handle', function(done) {
                 skipTestIE.call(this);
 
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="' + url + '" />} here.');
@@ -55,7 +55,7 @@
             });
         });
 
-        describe('"scale" as imageScaleResize value', function() {
+        describe('value "scale', function() {
             this.timeout(35000);
 
             before(function(done) {
@@ -68,7 +68,7 @@
 
             afterEach(Utils.afterEach);
 
-            it('The image, that is selected, has 4 handlers', function() {
+            it('Should have 4 handlers', function() {
                 skipTestIE.call(this);
 
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="' + url + '" />} here.');
@@ -79,7 +79,7 @@
             });
         });
 
-        describe('width" as imageScaleResize value', function() {
+        describe('value "width"', function() {
             this.timeout(35000);
 
             before(function(done) {
@@ -92,7 +92,7 @@
 
             afterEach(Utils.afterEach);
 
-            it('The image, that is selected, has 6 handlers', function() {
+            it('Should have 6 handlers', function() {
                 skipTestIE.call(this);
 
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="' + url + '" />} here.');
@@ -103,7 +103,7 @@
             });
         });
 
-        describe('"height" as imageScaleResize value', function() {
+        describe('"height" value', function() {
             this.timeout(35000);
 
             before(function(done) {
@@ -116,7 +116,7 @@
 
             afterEach(Utils.afterEach);
 
-            it('The image, that is selected, has 6 handlers', function() {
+            it('Should have 6 handlers', function() {
                 skipTestIE.call(this);
 
                 bender.tools.selection.setWithHtml(this.nativeEditor, 'Test image dragresize plugin {<img src="' + url + '" />} here.');
