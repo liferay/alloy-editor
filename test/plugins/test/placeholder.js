@@ -2,6 +2,7 @@
     'use strict';
 
     var assert = chai.assert;
+    var expectedEmptyValue = CKEDITOR.env.needsBrFiller ? '<p><br></p>' : '<p></p>';
 
     describe('Placeholder', function() {
         this.timeout(35000);
@@ -17,13 +18,13 @@
         afterEach(Utils.afterEach);
 
         it('should assert the html value of the editor is the same as passed value on creating the instance', function() {
-            assert.strictEqual(this.nativeEditor.editable().getHtml(), '<p><br></p>');
+            assert.strictEqual(this.nativeEditor.editable().getHtml(), expectedEmptyValue);
         });
 
         it('should not change the html value after the editor is blurred when its value is empty', function() {
             this.nativeEditor.fire('blur');
 
-            assert.strictEqual(this.nativeEditor.editable().getHtml(), '<p><br></p>');
+            assert.strictEqual(this.nativeEditor.editable().getHtml(), expectedEmptyValue);
             assert.isTrue(this.nativeEditor.element.hasClass('ae-placeholder'));
 
         });
