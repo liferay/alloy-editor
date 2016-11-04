@@ -289,9 +289,6 @@
                             
                                         return (
                                             &lt;div className=&quot;ae-container-edit-link&quot;&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.deleteEmbed} className=&quot;ae-button&quot; data-type=&quot;button-embed-remove&quot; disabled={!this.state.element} onClick={this._removeEmbed} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteEmbed}&gt;
-                                                    &lt;span className=&quot;ae-icon-bin&quot;&gt;&lt;/span&gt;
-                                                &lt;/button&gt;
                                                 &lt;div className=&quot;ae-container-input xxl&quot;&gt;
                                                     &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
                                                     &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;ae-button ae-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;

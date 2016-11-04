@@ -827,7 +827,7 @@ e={};if(!a)return null;if(a.styleableElements){b=this.getClassesArray();if(!b)re
 
     'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -21361,7 +21361,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })();
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -26072,7 +26072,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 })();
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function () {
     'use strict';
@@ -29419,11 +29419,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 'div',
                 { className: 'ae-container-edit-link' },
                 React.createElement(
-                    'button',
-                    { 'aria-label': AlloyEditor.Strings.deleteEmbed, className: 'ae-button', 'data-type': 'button-embed-remove', disabled: !this.state.element, onClick: this._removeEmbed, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.deleteEmbed },
-                    React.createElement('span', { className: 'ae-icon-bin' })
-                ),
-                React.createElement(
                     'div',
                     { className: 'ae-container-input xxl' },
                     React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
@@ -29640,8 +29635,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             } else {
                 return React.createElement(
                     'button',
-                    { 'aria-label': AlloyEditor.Strings.link, className: 'ae-button', 'data-type': 'button-embed', onClick: this._requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
-                    React.createElement('span', { className: 'ae-icon-add' })
+                    { 'aria-label': 'Embed', className: 'ae-button', 'data-type': 'button-embed', onClick: this._requestExclusive, tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
+                    React.createElement('span', { className: 'glyphicons glyphicons-cloud-download' })
                 );
             }
         },
