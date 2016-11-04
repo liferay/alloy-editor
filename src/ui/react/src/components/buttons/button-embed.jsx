@@ -80,8 +80,8 @@
                 );
             } else {
                 return (
-                    <button aria-label={AlloyEditor.Strings.link} className="ae-button" data-type="button-embed" onClick={this._requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
-                        <span className="ae-icon-add"></span>
+                    <button aria-label="Embed" className="ae-button" data-type="button-embed" onClick={this._requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
+                        <span className="glyphicons glyphicons-cloud-download"></span>
                     </button>
                 );
             }
