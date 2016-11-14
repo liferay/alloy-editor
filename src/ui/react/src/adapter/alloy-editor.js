@@ -322,7 +322,17 @@
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_dragresize,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist',
+                valueFn: function() {
+                    var plugins = 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist';
+
+                    if (CKEDITOR.env.ie) {
+                        plugins += ',ae_dragresize_ie';
+                    } else {
+                        plugins += ',ae_dragresize';
+                    }
+
+                    return plugins;
+                },
                 writeOnce: true
             },
 
