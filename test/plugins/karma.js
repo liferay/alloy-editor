@@ -77,7 +77,7 @@ var defaultConfig = {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '../../',
 
-    browsers: ['Chrome', 'Firefox', 'IE9 - Win7', 'IE10 - Win7', 'IE11 - Win7'],
+    browsers: ['Chrome', 'Firefox', 'IE9 - Win7', 'IE10 - Win7', 'IE11 - Win7', 'MSEdge - Win10'],
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -141,6 +141,12 @@ if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
             browserName: 'internet explorer',
             platform: 'Windows 8.1',
             version: '11'
+        },
+        sl_edge: {
+            base: 'SauceLabs',
+            browserName: 'edge',
+            platform: 'Windows 10',
+            version: '14'
         }
     };
 
