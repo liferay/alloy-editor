@@ -10,7 +10,7 @@
 
         before(function(done) {
             Utils.createAlloyEditor.call(this, done, {
-                extraPlugins: AlloyEditor.Core.ATTRS.extraPlugins.value + ',ae_buttonbridge,test_buttonbridge'
+                extraPlugins: AlloyEditor.Core.ATTRS.extraPlugins.valueFn() + ',ae_buttonbridge,test_buttonbridge'
             });
         });
 
