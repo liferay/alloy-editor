@@ -61,8 +61,9 @@ AlloyEditor.Strings = {
 	camera: 'Insert Image from Camera',
 	cameraDisabled: 'The browser does not support this action, or it is available on https only (Chrome).',
 	cite: 'Cite',
-	code: 'Code',
 	clearInput: 'Clear Input Field',
+	code: 'Code',
+	columns: 'Cols',
 	confirm: 'Confirm',
 	deleteEmbed: 'Delete embed',
 	editLink: 'Type or paste link here',
@@ -74,6 +75,7 @@ AlloyEditor.Strings = {
 	linkTargetSelf: '_self (same tab)',
 	linkTargetTop: '_top',
 	removeLink: 'Remove link',
+	rows: 'Rows',
 	table: 'Insert Table',
 	twitter: 'Twitter'
 };
