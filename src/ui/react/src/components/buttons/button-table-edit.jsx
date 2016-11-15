@@ -151,12 +151,12 @@
 
             return (
                 <div className="ae-container-edit-table">
-                    <label htmlFor={rowsId}>Rows</label>
+                    <label htmlFor={rowsId}>{AlloyEditor.Strings.rows}</label>
                     <div className="ae-container-input small">
                         <input className="ae-input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} min="1" onKeyDown={this._handleKeyDown} placeholder="Rows" ref="rows" type="number" value={this.state.rows}></input>
                     </div>
 
-                    <label htmlFor={colsId}>Cols</label>
+                    <label htmlFor={colsId}>{AlloyEditor.Strings.columns}</label>
                     <div className="ae-container-input small">
                         <input className="ae-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" onKeyDown={this._handleKeyDown} placeholder="Colums" ref="cols" type="number" value={this.state.cols}></input>
                     </div>
