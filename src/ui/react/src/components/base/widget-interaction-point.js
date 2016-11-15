@@ -51,9 +51,24 @@
 
             var endRect = selectionData.region.endRect;
             var startRect = selectionData.region.startRect;
+            var scrollTop = jQuery(window).scrollTop();
 
             if (endRect && startRect && startRect.top === endRect.top) {
-                direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+	            if( ! startRect.width ) {
+		            // The add toolbar
+		            direction = Math.round( ( startRect.top - scrollTop ) / window.innerHeight );
+	            } else {
+		            // Normal text selection
+	                direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+	            }
+            } else {
+	            // Widget selection
+	            var selectionTop = selectionData.region.top;
+	            if( eventPayload.nativeEvent.name !== "widgetselect" ) {
+		            // Column selection
+		            selectionTop -= scrollTop;
+	            }
+                direction = selectionTop < 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
             }
 
             var x;

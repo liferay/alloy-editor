@@ -187,7 +187,7 @@
             var className = this._getToolbarClassName();
             var containerClassName = "ae-container";
             if(this.props.renderExclusive && buttons.length > 1) {
-	            className += " su_bootstrap_safe popover bottom in pane-grid-popover small";
+	            className += " su_bootstrap_safe popover in pane-grid-popover small";
 	            containerClassName += " pane-grid small";
             }
 
