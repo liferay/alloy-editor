@@ -178,7 +178,7 @@
 
                 happen.click(document.getElementById('link_foo'));
 
-                assert.isTrue(stub.calledOnce);
+                assert.isFalse(stub.calledOnce);
             });
         });
 
@@ -228,7 +228,7 @@
 
                 happen.click(link);
 
-                assert.strictEqual(0, stub.callCount);
+                assert.strictEqual(1, stub.callCount);
             });
         });
 
