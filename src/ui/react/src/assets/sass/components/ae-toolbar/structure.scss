@@ -1,5 +1,5 @@
 #{$IE10-PLUS}::-ms-reveal, [class^=ae-toolbar] {
-    height: $toolbar-button-height;
+    height: auto;
     box-sizing: content-box;
 }
 
@@ -51,4 +51,9 @@
         height: $toolbar-add-height;
         width: $toolbar-add-width;
     }
+}
+
+.ae-toolbar-styles {
+    box-sizing: border-box;
+    max-width: 100%;
 }
