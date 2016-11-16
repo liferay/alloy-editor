@@ -167,7 +167,9 @@
                         });
 
                         command.on('refresh', function(event) {
-                            var selectionData = editor.getSelectionData();
+                            var selectionData = {
+                                element: event.data.path.lastElement
+                            };
 
                             if (selectionData && AlloyEditor.SelectionTest.image({data: {selectionData: selectionData}})) {
                                 var imageAlignment = getImageAlignment(selectionData.element);
