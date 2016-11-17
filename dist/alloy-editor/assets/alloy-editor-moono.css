@@ -218,7 +218,7 @@
   border: 0; }
 
 .ae-ui IE10-PLUS::-ms-reveal, .ae-ui [class^=ae-toolbar] {
-  height: 28px;
+  height: auto;
   box-sizing: content-box; }
 
 .ae-ui .ae-toolbar, .ae-ui [class^=ae-toolbar-] {
@@ -258,6 +258,10 @@
   .ae-ui .ae-toolbar-add .ae-button {
     height: 28px;
     width: 26px; }
+
+.ae-ui .ae-toolbar-styles {
+  box-sizing: border-box;
+  max-width: 100%; }
 
 .ae-ui .ae-arrow-box:after {
   content: '';
