@@ -6692,7 +6692,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function initializer(config) {
-
             var node = this.get('srcNode');
 
             if (this.get('enableContentEditable')) {
@@ -6717,15 +6716,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             AlloyEditor.Lang.mix(editor.config, config);
 
             editor.once('contentDom', function () {
-                if (editor.config.readOnly) {
-                    this._addReadOnlyLinkClickListener(editor);
-                }
+
+                this._addReadOnlyLinkClickListener(editor);
 
                 var editable = editor.editable();
 
                 editable.addClass('ae-editable');
-
-                editable.editor.on('readOnly', this._onReadOnlyChangeFn.bind(this));
             }.bind(this));
 
             AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
@@ -6807,15 +6803,23 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @param {Object} event The fired `click` event payload
          */
         _defaultReadOnlyClickFn: function _defaultReadOnlyClickFn(event) {
+            var mouseEvent = event.data.$;
+            var hasCtrlKey = mouseEvent.ctrlKey || mouseEvent.metaKey;
+            var shouldOpen = this._editor.config.readOnly || hasCtrlKey;
+
+            mouseEvent.preventDefault();
+
+            if (!shouldOpen) {
+                return;
+            }
+
             if (event.listenerData.editor.editable().editor.fire('readOnlyClick', event.data) !== false) {
                 var ckElement = new CKEDITOR.dom.elementPath(event.data.getTarget(), this);
                 var link = ckElement.lastElement;
 
                 if (link) {
                     var href = link.$.attributes.href ? link.$.attributes.href.value : null;
-
-                    var target = link.$.attributes.target ? link.$.attributes.target.value : null;
-
+                    var target = hasCtrlKey ? '_blank' : link.$.attributes.target ? link.$.attributes.target.value : null;
                     this._redirectLink(href, target);
                 }
             }
@@ -6830,21 +6834,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         _getNativeEditor: function _getNativeEditor() {
             return this._editor;
-        },
-
-        /**
-         * Fired when readonly value is changed. Adds click event listener to handle links in readonly mode.
-         *
-         * @protected
-         * @method _onReadOnlyChange
-         * @param {Object} event The fired event
-         */
-        _onReadOnlyChangeFn: function _onReadOnlyChangeFn(event) {
-            if (event.editor.readOnly) {
-                this._addReadOnlyLinkClickListener(event.editor);
-            } else {
-                event.editor.editable().removeListener('click', this._defaultReadOnlyClickFn);
-            }
         },
 
         /**
