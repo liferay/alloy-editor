@@ -14192,7 +14192,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 React.createElement(
                     'label',
                     { htmlFor: rowsId },
-                    'Rows'
+                    AlloyEditor.Strings.rows
                 ),
                 React.createElement(
                     'div',
@@ -14202,7 +14202,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 React.createElement(
                     'label',
                     { htmlFor: colsId },
-                    'Cols'
+                    AlloyEditor.Strings.columns
                 ),
                 React.createElement(
                     'div',
