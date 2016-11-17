@@ -22,7 +22,6 @@
          * @param config {Object} Configuration object literal for the editor.
          */
         initializer: function(config) {
-
             var node = this.get('srcNode');
 
             if (this.get('enableContentEditable')) {
@@ -109,7 +108,7 @@
             if (isMSSelection) {
                 nativeEditor.document.$.selection.empty();
             } else {
-               nativeEditor.document.getWindow().$.getSelection().removeAllRanges();
+                nativeEditor.document.getWindow().$.getSelection().removeAllRanges();
             }
         },
 
@@ -136,10 +135,10 @@
          * @param {Object} event The fired `click` event payload
          */
         _defaultReadOnlyClickFn: function(event) {
-
             var mouseEvent = event.data.$;
             var hasCtrlKey = mouseEvent.ctrlKey || mouseEvent.metaKey;
             var shouldOpen = this._editor.config.readOnly || hasCtrlKey;
+
             mouseEvent.preventDefault();
 
             if (!shouldOpen) {
