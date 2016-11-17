@@ -1446,11 +1446,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var handleUI = CKEDITOR.tools.debounce(function (event) {
                 ariaState = [];
 
-                console.log(event);
                 if (event.name !== 'keyup' || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
                     var selectionData = editor.getSelectionData();
 
-                    console.log(selectionData);
                     if (selectionData) {
                         editor.fire('editorInteraction', {
                             nativeEvent: event.data.$,
