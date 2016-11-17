@@ -25043,9 +25043,11 @@ CKEDITOR.config.image2_captionedClass = 'image';
                     });
 
                     command.on('refresh', function (event) {
-                        var selectionData = editor.getSelectionData();
+                        var selectionData = {
+                            element: event.data.path.lastElement
+                        };
 
-                        if (selectionData && AlloyEditor.SelectionTest.image({ data: { selectionData: selectionData } })) {
+                        if (AlloyEditor.SelectionTest.image({ data: { selectionData: selectionData } })) {
                             var imageAlignment = getImageAlignment(selectionData.element);
 
                             this.setState(imageAlignment === value ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF);
