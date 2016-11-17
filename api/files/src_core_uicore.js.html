@@ -257,9 +257,11 @@
                                                 function(event) {
                                                     ariaState = [];
                             
+                                                    console.log(event);
                                                     if (event.name !== &#x27;keyup&#x27; || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
                                                         var selectionData = editor.getSelectionData();
                             
+                                                        console.log(selectionData);
                                                         if (selectionData) {
                                                             editor.fire(&#x27;editorInteraction&#x27;, {
                                                                 nativeEvent: event.data.$,

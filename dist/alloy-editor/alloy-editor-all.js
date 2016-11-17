@@ -22512,9 +22512,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var handleUI = CKEDITOR.tools.debounce(function (event) {
                 ariaState = [];
 
+                console.log(event);
                 if (event.name !== 'keyup' || event.data.$.keyCode !== 27 || editor.config.allowEsc) {
                     var selectionData = editor.getSelectionData();
 
+                    console.log(selectionData);
                     if (selectionData) {
                         editor.fire('editorInteraction', {
                             nativeEvent: event.data.$,
@@ -28172,7 +28174,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     AlloyEditor.WidgetFocusManager = WidgetFocusManager;
 })();
-'use strict';
+"use strict";
 
 (function () {
     'use strict';
@@ -28228,9 +28230,28 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var endRect = selectionData.region.endRect;
             var startRect = selectionData.region.startRect;
+            var scrollTop = jQuery(window).scrollTop();
 
+            var textDirection = function textDirection() {
+                // Normal text selection, whether in columns or not
+                var selectionTop = selectionData.region.top;
+                if (eventPayload.nativeEvent.name !== "widgetselect") {
+                    // Column selection
+                    selectionTop -= scrollTop;
+                }
+                return selectionTop < 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+            };
             if (endRect && startRect && startRect.top === endRect.top) {
-                direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+                if (!startRect.width) {
+                    // The add toolbar
+                    direction = Math.round((startRect.top - scrollTop) / window.innerHeight);
+                } else {
+                    // Normal text selection, sometimes in column
+                    direction = textDirection();
+                }
+            } else {
+                // Normal text selection, in column
+                direction = textDirection();
             }
 
             var x;
@@ -34473,7 +34494,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var className = this._getToolbarClassName();
             var containerClassName = "ae-container";
             if (this.props.renderExclusive && buttons.length > 1) {
-                className += " su_bootstrap_safe popover bottom in pane-grid-popover small";
+                className += " su_bootstrap_safe popover in pane-grid-popover small";
                 containerClassName += " pane-grid small";
             }
 
