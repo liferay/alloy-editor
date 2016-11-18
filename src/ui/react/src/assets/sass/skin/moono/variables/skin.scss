@@ -30,6 +30,9 @@ $dropdown-listbox-header-bg_image_gradient: $CKEDITOR_container_bg_image_gradien
 $dropdown-listbox-header-color: #474747;
 $dropdown-listbox-header-font-size: 11px;
 
+/** DROPDOWN-LIST **/
+$dropdown-active-element: $CKEDITOR_base_color;
+
 /** TOOLBAR **/
 $toolbar-bg-color: $CKEDITOR_base_color;
 $toolbar-border-radius: 0;
