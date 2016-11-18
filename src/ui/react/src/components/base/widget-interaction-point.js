@@ -53,27 +53,23 @@
             var startRect = selectionData.region.startRect;
             var scrollTop = jQuery(window).scrollTop();
 
-			var textDirection = function() {
-				// Normal text selection, whether in columns or not
-		            var selectionTop = selectionData.region.top;
-		            if( eventPayload.nativeEvent.name !== "widgetselect" ) {
-			            // Column selection
-			            selectionTop -= scrollTop;
-		            }
-	                return selectionTop < 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
-			};
-            if (endRect && startRect && startRect.top === endRect.top) {
-	            if( ! startRect.width ) {
-		            // The add toolbar
-		            direction = Math.round( ( startRect.top - scrollTop ) / window.innerHeight );
-	            } else {
-		            // Normal text selection, sometimes in column
-	                direction = textDirection();
+			if( eventPayload.nativeEvent.name == "widgetselect" ) {
+				// Fake widget (not columns) selection
+				// Fake selection positions are relative to viewport not document!
+				var selectionTop = selectionData.region.top;
+                direction = selectionTop < 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+			} else if ( ! eventPayload.fromColumn && ( selectionData.text == null || selectionData.text == "" ) ) {
+				// The add toolbar
+				direction = Math.round( ( selectionData.region.top - scrollTop ) / window.innerHeight );
+			} else {
+				// Everything else
+		        var selectionTop = selectionData.region.top;
+	            if( eventPayload.nativeEvent.name !== "widgetselect" ) {
+		            // Column selection
+		            selectionTop -= scrollTop;
 	            }
-            } else {
-	            // Normal text selection, in column
-                direction = textDirection();
-            }
+				direction = selectionTop < 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+	        }
 
             var x;
             var y;
