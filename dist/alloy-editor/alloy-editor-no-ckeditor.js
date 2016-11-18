@@ -27422,26 +27422,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var startRect = selectionData.region.startRect;
             var scrollTop = jQuery(window).scrollTop();
 
-            var textDirection = function textDirection() {
-                // Normal text selection, whether in columns or not
+            if (eventPayload.nativeEvent.name == "widgetselect") {
+                // Fake widget (not columns) selection
+                // Fake selection positions are relative to viewport not document!
+                var selectionTop = selectionData.region.top;
+                direction = selectionTop < 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+            } else if (!eventPayload.fromColumn && (selectionData.text == null || selectionData.text == "")) {
+                // The add toolbar
+                direction = Math.round((selectionData.region.top - scrollTop) / window.innerHeight);
+            } else {
+                // Everything else
                 var selectionTop = selectionData.region.top;
                 if (eventPayload.nativeEvent.name !== "widgetselect") {
                     // Column selection
                     selectionTop -= scrollTop;
                 }
-                return selectionTop < 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
-            };
-            if (endRect && startRect && startRect.top === endRect.top) {
-                if (!startRect.width) {
-                    // The add toolbar
-                    direction = Math.round((startRect.top - scrollTop) / window.innerHeight);
-                } else {
-                    // Normal text selection, sometimes in column
-                    direction = textDirection();
-                }
-            } else {
-                // Normal text selection, in column
-                direction = textDirection();
+                direction = selectionTop < 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
             }
 
             var x;
@@ -28234,6 +28230,222 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     });
 
     AlloyEditor.Buttons[ButtonCode.key] = AlloyEditor.ButtonCode = ButtonCode;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    var KEY_ENTER = 13;
+    var KEY_ESC = 27;
+
+    var ButtonColumnsEdit = React.createClass({
+        displayName: 'ButtonColumnsEdit',
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+
+            /**
+             * Method to notify the button abandons the exclusive rendering mode.
+             *
+             * @property {Function} cancelExclusive
+             */
+            cancelExclusive: React.PropTypes.func.isRequired,
+
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default tableEdit
+             */
+            key: 'columnsEdit'
+        },
+
+        /**
+         * Lifecycle. Invoked once, only on the client (not on the server),
+         * immediately after the initial rendering occurs.
+         *
+         * Focuses on the link input to immediately allow editing.
+         *
+         * @method componentDidMount
+         */
+        componentDidMount: function componentDidMount() {
+            ReactDOM.findDOMNode(this.refs.cols).focus();
+        },
+
+        /**
+         * Lifecycle. Invoked once before the component is mounted.
+         *
+         * @method getInitialState
+         */
+        getInitialState: function getInitialState() {
+            return {
+                cols: 3
+            };
+        },
+
+        /**
+         * Creates a table.
+         *
+         * @protected
+         * @method _createTable
+         */
+        _createColumns: function _createColumns() {
+            var nativeEditor = this.props.editor.get('nativeEditor');
+
+            nativeEditor.execCommand('addColumns', {
+                how_many: this.state.cols
+            });
+
+            this.props.cancelExclusive();
+        },
+
+        /**
+         * Handles a change in input value. Sets the provided value from the user back to the input.
+         *
+         * @protected
+         * @method _handleChange
+         * @param {String} inputName The name of the input which value should be updated.
+         * @param {SyntheticEvent} event The provided event.
+         */
+        _handleChange: function _handleChange(inputName, event) {
+            var state = {};
+            state[inputName] = event.target.value;
+
+            this.setState(state);
+        },
+
+        /**
+         * Monitors key interaction inside the input element to respond to the keys:
+         * - Enter: Creates the table.
+         * - Escape: Discards the changes.
+         *
+         * @protected
+         * @method _handleKeyDown
+         * @param {SyntheticEvent} event The keyboard event.
+         */
+        _handleKeyDown: function _handleKeyDown(event) {
+            if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+                event.preventDefault();
+            }
+
+            if (event.keyCode === KEY_ENTER) {
+                this._createTable();
+            } else if (event.keyCode === KEY_ESC) {
+                this.props.cancelExclusive();
+            }
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            var time = Date.now();
+            var colsId = time + 'cols';
+
+            return React.createElement(
+                'div',
+                { className: 'ae-container-edit-table' },
+                React.createElement(
+                    'label',
+                    { htmlFor: colsId },
+                    'Columns'
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'ae-container-input small' },
+                    React.createElement('input', { className: 'ae-input', id: colsId, onChange: this._handleChange.bind(this, 'cols'), min: '2', max: '4', onKeyDown: this._handleKeyDown, placeholder: 'Colums', ref: 'cols', type: 'number', value: this.state.cols })
+                ),
+                React.createElement(
+                    'button',
+                    { 'aria-label': 'Confirm', className: 'ae-button', onClick: this._createColumns },
+                    React.createElement('span', { className: 'ae-icon-ok' })
+                )
+            );
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonColumnsEdit.key] = AlloyEditor.ButtonColumnsEdit = ButtonColumnsEdit;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    var ButtonColumns = React.createClass({
+        displayName: 'ButtonColumns',
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @property {Object} editor
+             */
+            editor: React.PropTypes.object.isRequired,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @property {String} label
+             */
+            label: React.PropTypes.string,
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @property {Number} tabIndex
+             */
+            tabIndex: React.PropTypes.number
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @static
+             * @property {String} key
+             * @default columns
+             */
+            key: 'columns'
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            if (this.props.renderExclusive) {
+                return React.createElement(AlloyEditor.ButtonColumnsEdit, this.props);
+            } else {
+                return React.createElement(
+                    'button',
+                    { 'aria-label': 'Columns', className: 'ae-button', 'data-type': 'button-columns', onClick: this.props.requestExclusive, tabIndex: this.props.tabIndex, title: 'Columns' },
+                    React.createElement('span', { className: 'flaticon-four-columns-layout-interface-symbol' })
+                );
+            }
+        }
+    });
+
+    AlloyEditor.Buttons[ButtonColumns.key] = AlloyEditor.ButtonColumns = ButtonColumns;
 })();
 'use strict';
 

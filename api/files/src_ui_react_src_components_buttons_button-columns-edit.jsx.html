@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/base/widget-interaction-point.js - alloyeditor</title>
+    <title>src/ui/react/src/components/buttons/button-columns-edit.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -175,152 +175,150 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/base/widget-interaction-point.js</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-columns-edit.jsx</code></h1>
                             </div>
                             
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            (function() {
+                            (function () {
                                 &#x27;use strict&#x27;;
                             
-                                /**
-                                 * Provides functionality for calculating the point of interaction of the user with the Editor.
-                                 *
-                                 * @class WidgetInteractionPoint
-                                 */
-                                var WidgetInteractionPoint = {
+                                var KEY_ENTER = 13;
+                                var KEY_ESC = 27;
+                            
+                                var ButtonColumnsEdit = React.createClass({
                                     // Allows validating props being passed to the component.
                                     propTypes: {
+                            
                                         /**
-                                         * The provided editor event.
+                                         * Method to notify the button abandons the exclusive rendering mode.
                                          *
-                                         * @property {SyntheticEvent} editorEvent
+                                         * @property {Function} cancelExclusive
                                          */
-                                        editorEvent: React.PropTypes.object
+                                        cancelExclusive: React.PropTypes.func.isRequired,
+                            
+                                        /**
+                                         * The editor instance where the component is being used.
+                                         *
+                                         * @property {Object} editor
+                                         */
+                                        editor: React.PropTypes.object.isRequired
+                                    },
+                            
+                                    // Lifecycle. Provides static properties to the widget.
+                                    statics: {
+                                        /**
+                                         * The name which will be used as an alias of the button in the configuration.
+                                         *
+                                         * @static
+                                         * @property {String} key
+                                         * @default tableEdit
+                                         */
+                                        key: &#x27;columnsEdit&#x27;
                                     },
                             
                                     /**
-                                     * Returns the position, in page coordinates, according to which a widget should appear.
-                                     * Depending on the direction of the selection, the wdiget may appear above of or on bottom of the selection.
+                                     * Lifecycle. Invoked once, only on the client (not on the server),
+                                     * immediately after the initial rendering occurs.
                                      *
-                                     * It depends on the props editorEvent to analyze the following user-interaction parameters:
-                                     * - {Object} selectionData The data about the selection in the editor as returned from
-                                     * {{#crossLink &quot;CKEDITOR.plugins.ae_selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
-                                     * - {Number} pos Contains the coordinates of the position, considered as most appropriate.
-                                     * This may be the point where the user released the mouse, or just the beginning or the end of
-                                     * the selection.
+                                     * Focuses on the link input to immediately allow editing.
                                      *
-                                     * @method getInteractionPoint
-                                     * @return {Object} An Object which contains the following properties:
-                                     * direction, x, y, where x and y are in page coordinates and direction can be one of these:
-                                     * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
+                                     * @method componentDidMount
                                      */
-                                    getInteractionPoint: function() {
-                                        var eventPayload = this.props.editorEvent ? this.props.editorEvent.data : null;
+                                    componentDidMount: function () {
+                                        ReactDOM.findDOMNode(this.refs.cols).focus();
+                                    },
                             
-                                        if (!eventPayload) {
-                                            return;
-                                        }
-                            
-                                        var selectionData = eventPayload.selectionData;
-                            
-                                        var pos = {
-                                            x: eventPayload.nativeEvent.pageX,
-                                            y: selectionData.region.top
-                                        };
-                            
-                                        var direction = selectionData.region.direction;
-                            
-                                        var endRect = selectionData.region.endRect;
-                                        var startRect = selectionData.region.startRect;
-                                        var scrollTop = jQuery(window).scrollTop();
-                            
-                            			if( eventPayload.nativeEvent.name == &quot;widgetselect&quot; ) {
-                            				// Fake widget (not columns) selection
-                            				// Fake selection positions are relative to viewport not document!
-                            				var selectionTop = selectionData.region.top;
-                                            direction = selectionTop &lt; 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
-                            			} else if ( ! eventPayload.fromColumn &amp;&amp; ( selectionData.text == null || selectionData.text == &quot;&quot; ) ) {
-                            				// The add toolbar
-                            				direction = Math.round( ( selectionData.region.top - scrollTop ) / window.innerHeight );
-                            			} else {
-                            				// Everything else
-                            		        var selectionTop = selectionData.region.top;
-                            	            if( eventPayload.nativeEvent.name !== &quot;widgetselect&quot; ) {
-                            		            // Column selection
-                            		            selectionTop -= scrollTop;
-                            	            }
-                            				direction = selectionTop &lt; 60 ? CKEDITOR.SELECTION_TOP_TO_BOTTOM : CKEDITOR.SELECTION_BOTTOM_TO_TOP;
-                            	        }
-                            
-                                        var x;
-                                        var y;
-                            
-                                        // If we have the point where user released the mouse, show Toolbar at this point
-                                        // otherwise show it on the middle of the selection.
-                                        if (pos.x &amp;&amp; pos.y) {
-                                            x = this._getXPoint(selectionData, pos.x);
-                            
-                                            if (direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
-                                                y = Math.min(pos.y, selectionData.region.top);
-                                            } else {
-                                                y = Math.max(pos.y, selectionData.region.bottom);
-                                            }
-                                        } else {
-                                            x = selectionData.region.left + selectionData.region.width / 2;
-                            
-                                            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                                                y = selectionData.region.bottom;
-                                            } else {
-                                                y = selectionData.region.top;
-                                            }
-                                        }
-                            
+                                    /**
+                                     * Lifecycle. Invoked once before the component is mounted.
+                                     *
+                                     * @method getInitialState
+                                     */
+                                    getInitialState: function() {
                                         return {
-                                            direction: direction,
-                                            x: x,
-                                            y: y
+                                            cols: 3
                                         };
                                     },
                             
                                     /**
-                                     * Returns the position of the Widget.
+                                     * Creates a table.
                                      *
                                      * @protected
-                                     * @method _getXPoint
-                                     * @param {Object} selectionData The data about the selection in the editor as
-                                     * returned from {{#crossLink &quot;CKEDITOR.plugins.ae_selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
-                                     * @param {Object} eventX The X coordinate received from the native event (mouseup).
-                                     * @return {Number} The calculated X point in page coordinates.
+                                     * @method _createTable
                                      */
-                                    _getXPoint: function(selectionData, eventX) {
-                                        var region = selectionData.region;
+                                    _createColumns: function() {
+                                        var nativeEditor = this.props.editor.get(&#x27;nativeEditor&#x27;);
                             
-                                        var left = region.startRect ? region.startRect.left : region.left;
-                                        var right = region.endRect ? region.endRect.right : region.right;
+                                        nativeEditor.execCommand(&#x27;addColumns&#x27;, {
+                                            how_many: this.state.cols
+                                        });
+                            			
+                                        this.props.cancelExclusive();
+                                    },
                             
-                                        var x;
+                                    /**
+                                     * Handles a change in input value. Sets the provided value from the user back to the input.
+                                     *
+                                     * @protected
+                                     * @method _handleChange
+                                     * @param {String} inputName The name of the input which value should be updated.
+                                     * @param {SyntheticEvent} event The provided event.
+                                     */
+                                    _handleChange: function(inputName, event) {
+                                        var state = {};
+                                        state[inputName] = event.target.value;
                             
-                                        if (left &lt; eventX &amp;&amp; right &gt; eventX) {
-                                            x = eventX;
-                                        } else {
-                                            var leftDist = Math.abs(left - eventX);
-                                            var rightDist = Math.abs(right - eventX);
+                                        this.setState(state);
+                                    },
                             
-                                            if (leftDist &lt; rightDist) { // user raised the mouse on left on the selection
-                                                x = left;
-                                            } else {
-                                                x = right;
-                                            }
+                                    /**
+                                     * Monitors key interaction inside the input element to respond to the keys:
+                                     * - Enter: Creates the table.
+                                     * - Escape: Discards the changes.
+                                     *
+                                     * @protected
+                                     * @method _handleKeyDown
+                                     * @param {SyntheticEvent} event The keyboard event.
+                                     */
+                                    _handleKeyDown: function(event) {
+                                        if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+                                            event.preventDefault();
                                         }
                             
-                                        return x;
+                                        if (event.keyCode === KEY_ENTER) {
+                                            this._createTable();
+                                        } else if (event.keyCode === KEY_ESC) {
+                                            this.props.cancelExclusive();
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Renders the UI of the button.
+                                     *
+                                     * @method render
+                                     * @return {Object} The content which should be rendered.
+                                     */
+                                    render: function() {
+                                        var time = Date.now();
+                                        var colsId = time + &#x27;cols&#x27;;
+                            
+                                        return (
+                                            &lt;div className=&quot;ae-container-edit-table&quot;&gt;
+                                                &lt;label htmlFor={colsId}&gt;Columns&lt;/label&gt;
+                                                &lt;div className=&quot;ae-container-input small&quot;&gt;
+                                                    &lt;input className=&quot;ae-input&quot; id={colsId} onChange={this._handleChange.bind(this, &#x27;cols&#x27;)} min=&quot;2&quot; max=&quot;4&quot; onKeyDown={this._handleKeyDown} placeholder=&quot;Colums&quot; ref=&quot;cols&quot; type=&quot;number&quot; value={this.state.cols}&gt;&lt;/input&gt;
+                                                &lt;/div&gt;
+                            
+                                                &lt;button aria-label=&quot;Confirm&quot; className=&quot;ae-button&quot; onClick={this._createColumns}&gt;
+                                                    &lt;span className=&quot;ae-icon-ok&quot;&gt;&lt;/span&gt;
+                                                &lt;/button&gt;
+                                            &lt;/div&gt;
+                                        );
                                     }
-                                };
+                                });
                             
-                                AlloyEditor.WidgetInteractionPoint = WidgetInteractionPoint;
+                                AlloyEditor.Buttons[ButtonColumnsEdit.key] = AlloyEditor.ButtonColumnsEdit = ButtonColumnsEdit;
                             }());
-                            
                                 </pre>
                             </div>
                         </div>
