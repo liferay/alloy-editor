@@ -94,7 +94,7 @@
             var buttonStylesList;
 
             if (this.props.expanded) {
-                buttonStylesList = <AlloyEditor.ButtonStylesList editor={this.props.editor} onDismiss={this.props.toggleDropdown} showRemoveStylesItem={this.props.showRemoveStylesItem} styles={styles} />;
+                buttonStylesList = <AlloyEditor.ButtonStylesList activeStyle={activeStyle} editor={this.props.editor} onDismiss={this.props.toggleDropdown} showRemoveStylesItem={this.props.showRemoveStylesItem} styles={styles} />;
             }
 
             return (

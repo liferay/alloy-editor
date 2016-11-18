@@ -137,12 +137,15 @@
                         var richCombo = this;
 
                         var items = this._items.map(function(item) {
+
+                            var className = 'ae-toolbar-element ' + (item.value === this.state.value ? 'active' : '');
+
                             return (
                                 <li key={item.title} role="option">
-                                    <button className="ae-toolbar-element" dangerouslySetInnerHTML={{__html: item.preview}} data-value={item.value} onClick={richCombo._onClick}></button>
+                                    <button className={className} dangerouslySetInnerHTML={{__html: item.preview}} data-value={item.value} onClick={richCombo._onClick}></button>
                                 </li>
                             );
-                        });
+                        }.bind(this));
 
                         return items;
                     },
