@@ -28309,6 +28309,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             });
 
             this.props.cancelExclusive();
+
+            nativeEditor.fire('actionPerformed', this);
         },
 
         /**
