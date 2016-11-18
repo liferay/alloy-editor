@@ -128,10 +128,10 @@
                 items = styles.map(function(item) {
                     return (
                         <li key={item.name} role="option">
-                            <AlloyEditor.ButtonStylesListItem editor={editor} name={item.name} style={item.style} />
+                            <AlloyEditor.ButtonStylesListItem activeStyle={this.props.activeStyle} editor={editor} name={item.name} style={item.style} />
                         </li>
                     );
-                });
+                }.bind(this));
             }
 
             return items;

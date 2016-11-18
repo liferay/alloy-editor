@@ -118,12 +118,14 @@
             var handleLinkTargetChange = this.props.handleLinkTargetChange;
 
             targets = targets.map(function(target) {
+                var className = this.props.selectedTarget === target.value ? 'ae-toolbar-element active' : 'ae-toolbar-element';
+
                 return (
                     <li key={target.value} role="option">
-                        <button className="ae-toolbar-element" data-value={target.value} onClick={handleLinkTargetChange}>{target.label}</button>
+                        <button className={className} data-value={target.value} onClick={handleLinkTargetChange}>{target.label}</button>
                     </li>
                 );
-            });
+            }.bind(this));
 
             return targets;
         }
