@@ -72,6 +72,8 @@
             });
 			
             this.props.cancelExclusive();
+
+            nativeEditor.fire('actionPerformed', this);
         },
 
         /**
