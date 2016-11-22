@@ -402,17 +402,26 @@
             var editor = this.props.editor.get('nativeEditor');
             var linkUtils = new CKEDITOR.Link(editor, {appendProtocol: this.props.appendProtocol});
             if (this.state.linkHref) {
-	            var RELATIVE_URI = /^\/[^\/]/;
-	            var linkAttrs = {
-	                target: RELATIVE_URI.test(this.state.linkHref) ? "" : "_blank"
-	            };
-	            var modifySelection = { advance: true };
+                var url = this.state.linkHref;
+                var DOMAIN_TEST = new RegExp( "^(?:https?:)?(?:\/\/)?" + window.location.hostname );
+                var matches = url.match( DOMAIN_TEST );
+                if( matches ) {
+                    url = url.substr( matches[0].length );
+                }
+                if( ! url ) {
+                    url = "/";
+                }
+                var RELATIVE_URI = /^(?:\/[^\/\.]+|[^\/\.:]+(?:\/|$))/;
+                var linkAttrs = {
+                    target: RELATIVE_URI.test(url) ? "" : "_blank"
+                };
+                var modifySelection = { advance: true };
                 if (this.state.element) {
-                    linkAttrs.href = this.state.linkHref;
+                    linkAttrs.href = url;
 
                     linkUtils.update(linkAttrs, this.state.element, modifySelection);
                 } else {
-                    linkUtils.create(this.state.linkHref, linkAttrs, modifySelection);
+                    linkUtils.create(url, linkAttrs, modifySelection);
                 }
 
                 editor.fire('actionPerformed', this);
@@ -424,7 +433,7 @@
         },
         
         _previewLink: function() {
-	        window.open(this.state.linkHref);
+            window.open(this.state.linkHref);
         },
         
         _uploadFile: function() {

@@ -198,9 +198,11 @@
 		            !instance.props.expanded && instance.props.toggleDropdown();
 	            }
 
-	            instance.setState({
-                    items: items
-                });
+	            if( instance.isMounted() ) {
+		            instance.setState({
+	                    items: items
+	                });
+                }
             });
         }
     });

@@ -2,7 +2,7 @@
     'use strict';
 
     var REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F\._-]+@/i;
-    var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
+    var REGEX_URI_SCHEME = /^(?:(?:[a-z][a-z0-9+\-.]*)\:|\/?[^\/\.]+(?:\/|$)|\/$)/i;
 
     /**
      * Link class utility. Provides methods for create, delete and update links.
@@ -165,12 +165,13 @@
             if (typeof attrs === 'string') {
                 link.setAttributes({
                     'data-cke-saved-href': attrs,
-                    href: attrs
+                    href: this._getCompleteURI(attrs)
                 });
             } else if (typeof attrs === 'object') {
                 var removeAttrs = [];
                 var setAttrs = {};
 
+                var that = this;
                 Object.keys(attrs).forEach(function(key) {
                     if (attrs[key] === null) {
                         if (key === 'href') {
@@ -180,10 +181,11 @@
                         removeAttrs.push(key);
                     } else {
                         if (key === 'href') {
-                            setAttrs['data-cke-saved-href'] = attrs[key];
+                            setAttrs['data-cke-saved-href'] = setAttrs[key] = that._getCompleteURI(attrs[key]);
+                        } else {
+                            setAttrs[key] = attrs[key];
                         }
 
-                        setAttrs[key] = attrs[key];
                     }
                 });
 
