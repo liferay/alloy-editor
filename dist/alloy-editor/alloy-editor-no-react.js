@@ -1129,7 +1129,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     'use strict';
 
     var REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F\._-]+@/i;
-    var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
+    var REGEX_URI_SCHEME = /^(?:(?:[a-z][a-z0-9+\-.]*)\:|\/?[^\/\.]+(?:\/|$)|\/$)/i;
 
     /**
      * Link class utility. Provides methods for create, delete and update links.
@@ -1292,12 +1292,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (typeof attrs === 'string') {
                 link.setAttributes({
                     'data-cke-saved-href': attrs,
-                    href: attrs
+                    href: this._getCompleteURI(attrs)
                 });
             } else if ((typeof attrs === 'undefined' ? 'undefined' : _typeof(attrs)) === 'object') {
                 var removeAttrs = [];
                 var setAttrs = {};
 
+                var that = this;
                 Object.keys(attrs).forEach(function (key) {
                     if (attrs[key] === null) {
                         if (key === 'href') {
@@ -1307,10 +1308,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         removeAttrs.push(key);
                     } else {
                         if (key === 'href') {
-                            setAttrs['data-cke-saved-href'] = attrs[key];
+                            setAttrs['data-cke-saved-href'] = setAttrs[key] = that._getCompleteURI(attrs[key]);
+                        } else {
+                            setAttrs[key] = attrs[key];
                         }
-
-                        setAttrs[key] = attrs[key];
                     }
                 });
 
@@ -10721,9 +10722,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     !instance.props.expanded && instance.props.toggleDropdown();
                 }
 
-                instance.setState({
-                    items: items
-                });
+                if (instance.isMounted()) {
+                    instance.setState({
+                        items: items
+                    });
+                }
             });
         }
     });
@@ -11143,17 +11146,26 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var editor = this.props.editor.get('nativeEditor');
             var linkUtils = new CKEDITOR.Link(editor, { appendProtocol: this.props.appendProtocol });
             if (this.state.linkHref) {
-                var RELATIVE_URI = /^\/[^\/]/;
+                var url = this.state.linkHref;
+                var DOMAIN_TEST = new RegExp("^(?:https?:)?(?:\/\/)?" + window.location.hostname);
+                var matches = url.match(DOMAIN_TEST);
+                if (matches) {
+                    url = url.substr(matches[0].length);
+                }
+                if (!url) {
+                    url = "/";
+                }
+                var RELATIVE_URI = /^(?:\/[^\/\.]+|[^\/\.:]+(?:\/|$))/;
                 var linkAttrs = {
-                    target: RELATIVE_URI.test(this.state.linkHref) ? "" : "_blank"
+                    target: RELATIVE_URI.test(url) ? "" : "_blank"
                 };
                 var modifySelection = { advance: true };
                 if (this.state.element) {
-                    linkAttrs.href = this.state.linkHref;
+                    linkAttrs.href = url;
 
                     linkUtils.update(linkAttrs, this.state.element, modifySelection);
                 } else {
-                    linkUtils.create(this.state.linkHref, linkAttrs, modifySelection);
+                    linkUtils.create(url, linkAttrs, modifySelection);
                 }
 
                 editor.fire('actionPerformed', this);

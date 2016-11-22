@@ -380,9 +380,11 @@
                             		            !instance.props.expanded &amp;&amp; instance.props.toggleDropdown();
                             	            }
                             
-                            	            instance.setState({
-                                                items: items
-                                            });
+                            	            if( instance.isMounted() ) {
+                            		            instance.setState({
+                            	                    items: items
+                            	                });
+                                            }
                                         });
                                     }
                                 });

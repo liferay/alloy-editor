@@ -184,7 +184,7 @@
                                 &#x27;use strict&#x27;;
                             
                                 var REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F\._-]+@/i;
-                                var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
+                                var REGEX_URI_SCHEME = /^(?:(?:[a-z][a-z0-9+\-.]*)\:|\/?[^\/\.]+(?:\/|$)|\/$)/i;
                             
                                 /**
                                  * Link class utility. Provides methods for create, delete and update links.
@@ -347,12 +347,13 @@
                                         if (typeof attrs === &#x27;string&#x27;) {
                                             link.setAttributes({
                                                 &#x27;data-cke-saved-href&#x27;: attrs,
-                                                href: attrs
+                                                href: this._getCompleteURI(attrs)
                                             });
                                         } else if (typeof attrs === &#x27;object&#x27;) {
                                             var removeAttrs = [];
                                             var setAttrs = {};
                             
+                                            var that = this;
                                             Object.keys(attrs).forEach(function(key) {
                                                 if (attrs[key] === null) {
                                                     if (key === &#x27;href&#x27;) {
@@ -362,10 +363,11 @@
                                                     removeAttrs.push(key);
                                                 } else {
                                                     if (key === &#x27;href&#x27;) {
-                                                        setAttrs[&#x27;data-cke-saved-href&#x27;] = attrs[key];
+                                                        setAttrs[&#x27;data-cke-saved-href&#x27;] = setAttrs[key] = that._getCompleteURI(attrs[key]);
+                                                    } else {
+                                                        setAttrs[key] = attrs[key];
                                                     }
                             
-                                                    setAttrs[key] = attrs[key];
                                                 }
                                             });
                             
