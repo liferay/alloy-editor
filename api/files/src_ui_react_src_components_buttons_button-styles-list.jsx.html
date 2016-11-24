@@ -310,10 +310,10 @@
                                             items = styles.map(function(item) {
                                                 return (
                                                     &lt;li key={item.name} role=&quot;option&quot;&gt;
-                                                        &lt;AlloyEditor.ButtonStylesListItem editor={editor} name={item.name} style={item.style} /&gt;
+                                                        &lt;AlloyEditor.ButtonStylesListItem activeStyle={this.props.activeStyle} editor={editor} name={item.name} style={item.style} /&gt;
                                                     &lt;/li&gt;
                                                 );
-                                            });
+                                            }.bind(this));
                                         }
                             
                                         return items;

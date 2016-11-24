@@ -319,12 +319,15 @@
                                                     var richCombo = this;
                             
                                                     var items = this._items.map(function(item) {
+                            
+                                                        var className = &#x27;ae-toolbar-element &#x27; + (item.value === this.state.value ? &#x27;active&#x27; : &#x27;&#x27;);
+                            
                                                         return (
                                                             &lt;li key={item.title} role=&quot;option&quot;&gt;
-                                                                &lt;button className=&quot;ae-toolbar-element&quot; dangerouslySetInnerHTML={{__html: item.preview}} data-value={item.value} onClick={richCombo._onClick}&gt;&lt;/button&gt;
+                                                                &lt;button className={className} dangerouslySetInnerHTML={{__html: item.preview}} data-value={item.value} onClick={richCombo._onClick}&gt;&lt;/button&gt;
                                                             &lt;/li&gt;
                                                         );
-                                                    });
+                                                    }.bind(this));
                             
                                                     return items;
                                                 },

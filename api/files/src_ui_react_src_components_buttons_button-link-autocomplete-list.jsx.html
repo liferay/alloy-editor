@@ -352,12 +352,14 @@
                                         var handleLinkAutocompleteClick = this.props.handleLinkAutocompleteClick;
                             
                                         return items.map(function(item) {
+                                            var className = this.props.term === item.url ? &#x27;ae-toolbar-element active&#x27; : &#x27;ae-toolbar-element&#x27;;
+                            
                                             return (
                                                 &lt;li key={item.url} role=&quot;option&quot;&gt;
-                                                    &lt;button className=&quot;ae-toolbar-element&quot; onClick={handleLinkAutocompleteClick} data-value={item.url}&gt;{item.title}&lt;/button&gt;
+                                                    &lt;button className={className} onClick={handleLinkAutocompleteClick} data-value={item.url}&gt;{item.title}&lt;/button&gt;
                                                 &lt;/li&gt;
                                             );
-                                        });
+                                        }.bind(this));
                                     },
                             
                                     /**

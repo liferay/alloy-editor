@@ -545,6 +545,7 @@
  */
 /** COLOR PALETTE **/
 /** COMPONENT VARIABLES **/
+/** DROPDOWN-LIST **/
 .ae-editable ::-moz-selection {
   background: #e6f1fa !important;
   color: inherit;
@@ -639,6 +640,8 @@
     font-style: italic; }
   .ae-ui .ae-dropdown .ae-listbox .ae-toolbar-element:hover, .ae-ui [class^=ae-dropdown-] .ae-listbox .ae-toolbar-element:hover {
     background-color: #fcfcfc; }
+  .ae-ui .ae-dropdown .ae-listbox .ae-toolbar-element.active, .ae-ui [class^=ae-dropdown-] .ae-listbox .ae-toolbar-element.active {
+    color: #32a8e6; }
 
 .ae-ui .ae-toolbar, .ae-ui [class^=ae-toolbar-] {
   background-color: #32a8e6;
