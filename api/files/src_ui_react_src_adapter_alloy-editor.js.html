@@ -225,6 +225,11 @@
                             
                                         editor.config.selectionKeystrokes = this.get(&#x27;selectionKeystrokes&#x27;);
                             
+                                        if (CKEDITOR.env.ie) {
+                                            editor.config.extraPlugins = editor.config.extraPlugins.replace(&#x27;ae_dragresize&#x27;, &#x27;ae_dragresize_ie&#x27;);
+                                            editor.config.removePlugins = editor.config.removePlugins.replace(&#x27;ae_dragresize&#x27;, &#x27;ae_dragresize_ie&#x27;);
+                                        }
+                            
                                         AlloyEditor.Lang.mix(editor.config, config);
                             
                                         editor.once(&#x27;contentDom&#x27;, function() {
@@ -493,17 +498,7 @@
                                          */
                                         extraPlugins: {
                                             validator: AlloyEditor.Lang.isString,
-                                            valueFn: function() {
-                                                var plugins = &#x27;ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist&#x27;;
-                            
-                                                if (CKEDITOR.env.ie) {
-                                                    plugins += &#x27;,ae_dragresize_ie&#x27;;
-                                                } else {
-                                                    plugins += &#x27;,ae_dragresize&#x27;;
-                                                }
-                            
-                                                return plugins;
-                                            },
+                                            value: &#x27;ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize&#x27;,
                                             writeOnce: true
                                         },
                             

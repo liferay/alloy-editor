@@ -6718,6 +6718,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             editor.config.selectionKeystrokes = this.get('selectionKeystrokes');
 
+            if (CKEDITOR.env.ie) {
+                editor.config.extraPlugins = editor.config.extraPlugins.replace('ae_dragresize', 'ae_dragresize_ie');
+                editor.config.removePlugins = editor.config.removePlugins.replace('ae_dragresize', 'ae_dragresize_ie');
+            }
+
             AlloyEditor.Lang.mix(editor.config, config);
 
             editor.once('contentDom', function () {
@@ -6983,17 +6988,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              */
             extraPlugins: {
                 validator: AlloyEditor.Lang.isString,
-                valueFn: function valueFn() {
-                    var plugins = 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist';
-
-                    if (CKEDITOR.env.ie) {
-                        plugins += ',ae_dragresize_ie';
-                    } else {
-                        plugins += ',ae_dragresize';
-                    }
-
-                    return plugins;
-                },
+                value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize',
                 writeOnce: true
             },
 
