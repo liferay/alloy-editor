@@ -10,7 +10,7 @@
 
         before(function(done) {
             Utils.createAlloyEditor.call(this, done, {
-                extraPlugins: AlloyEditor.Core.ATTRS.extraPlugins.valueFn() + ',ae_richcombobridge,test_richcombobridge'
+                extraPlugins: AlloyEditor.Core.ATTRS.extraPlugins.value + ',ae_richcombobridge,test_richcombobridge'
             });
         });
 
