@@ -32,6 +32,7 @@
              */
             init: function(editor) {
                 editor.on('blur', this._checkEmptyData, this);
+                editor.on('change', this._checkEmptyData, this);
                 editor.on('focus', this._removePlaceholderClass, this);
                 editor.once('contentDom', this._checkEmptyData, this);
             },
@@ -50,8 +51,9 @@
                 var editorNode = new CKEDITOR.dom.element(editor.element.$);
 
                 if (editor.getData() === '') {
-
                     editorNode.addClass(editor.config.placeholderClass);
+                } else {
+                    editorNode.removeClass(editor.config.placeholderClass);
                 }
             },
 
