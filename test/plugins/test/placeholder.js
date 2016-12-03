@@ -47,5 +47,15 @@
             this.nativeEditor.fire('blur');
             assert.isTrue(this.nativeEditor.element.hasClass('ae-placeholder'));
         });
+
+        it('should remove placeholder class when editor is changed by setData', function() {
+            this.nativeEditor.fire('blur');
+
+            assert.isTrue(this.nativeEditor.element.hasClass('ae-placeholder'));
+
+            this.nativeEditor.setData('new data');
+
+            assert.isFalse(this.nativeEditor.element.hasClass('ae-placeholder'));
+        });
     });
 }());
