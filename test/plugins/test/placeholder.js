@@ -55,7 +55,11 @@
 
             this.nativeEditor.setData('new data');
 
-            assert.isFalse(this.nativeEditor.element.hasClass('ae-placeholder'));
+            setTimeout(function() {
+                assert.isFalse(this.nativeEditor.element.hasClass('ae-placeholder'));
+
+                done();
+            }.bind(this), 100);
         });
     });
 }());
