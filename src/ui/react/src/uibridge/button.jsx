@@ -2,7 +2,7 @@
     'use strict';
 
     /* istanbul ignore if */
-    if(CKEDITOR.plugins.get('ae_buttonbridge')) {
+    if (CKEDITOR.plugins.get('ae_buttonbridge')) {
         return;
     }
 
