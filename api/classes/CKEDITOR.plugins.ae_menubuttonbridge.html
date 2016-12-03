@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonCfgProps - alloyeditor</title>
+    <title>CKEDITOR.plugins.ae_menubuttonbridge - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -177,14 +177,14 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonCfgProps <small>Class</small></h1>
+                                <h1>CKEDITOR.plugins.ae_menubuttonbridge <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_base_button-props.js.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-props.js:4</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_uibridge_menu-button.jsx.html#l149"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu-button.jsx:149</code></a>
                                     </div>
                             
                             
@@ -192,18 +192,53 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>ButtonCfgProps is a mixin that provides a style prop and some methods to apply the resulting
-                            style and checking if it is present in a given path or selection.</p>
+                                <p>CKEditor plugin that bridges the support offered by CKEditor MenuButton plugin. It takes over the
+                            responsibility of registering and creating menuButtons via:</p>
+                            <ul>
+                            <li>editor.ui.addMenuButton(name, definition)</li>
+                            <li>editor.ui.add(name, CKEDITOR.UI_MENUBUTTON, definition)</li>
+                            </ul>
                             
                             </div>
                             
+                                <div class="constructor">
+                                    <h2>Constructor</h2>
+                                    <div id="method_CKEDITOR.plugins.ae_menubuttonbridge" class="method item">
+                                        <h3 class="name"><code>CKEDITOR.plugins.ae_menubuttonbridge</code></h3>
+                                    
+                                            <span class="paren">()</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        <div class="meta">
+                                                    <p>
+                                                    Defined in
+                                            <a href="../files/src_ui_react_src_uibridge_menu-button.jsx.html#l149"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu-button.jsx:149</code></a>
+                                            </p>
+                                    
+                                    
+                                    
+                                        </div>
+                                    
+                                        <div class="description">
+                                            
+                                        </div>
+                                    
+                                    
+                                    
+                                    </div>
+                                </div>
                             
                             <div id="classdocs">
                                 <ul class="api-class-tabs nav nav-tabs">
                                     <li class="api-class-tab index"><a href="#index">Index</a></li>
                             
                                         <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-                                        <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
                                 </ul>
                             
                                 <div>
@@ -214,23 +249,17 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
+                                                        <li class="index-item method private">
+                                                            <a href="#method_generateMenuButtonBridge">generateMenuButtonBridge</a>
+                            
+                                                        </li>
                                                         <li class="index-item method">
-                                                            <a href="#method_mergeButtonCfgProps">mergeButtonCfgProps</a>
+                                                            <a href="#method_init">init</a>
                             
                                                         </li>
                                                 </ul>
                                             </div>
                             
-                                            <div class="index-section properties tab-pane">
-                                                <h3>Properties</h3>
-                            
-                                                <ul class="index-list properties">
-                                                        <li class="index-item property">
-                                                            <a href="#property_editor">editor</a>
-                            
-                                                        </li>
-                                                </ul>
-                                            </div>
                             
                             
                                     </div>
@@ -238,13 +267,16 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method_mergeButtonCfgProps" class="method item">
-                                                    <h3 class="name"><code>mergeButtonCfgProps</code></h3>
+                                                <div id="method_generateMenuButtonBridge" class="method item private">
+                                                    <h3 class="name"><code>generateMenuButtonBridge</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>props</code>
+                                                                        <code>menuButtonName</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>menuButtonDefinition</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
@@ -254,6 +286,7 @@
                                                         </span>
                                                 
                                                 
+                                                        <span class="flag private">private</span>
                                                 
                                                 
                                                 
@@ -262,7 +295,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_button-props.js.html#l21"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-props.js:21</code></a>
+                                                        <a href="../files/src_ui_react_src_uibridge_menu-button.jsx.html#l26"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu-button.jsx:26</code></a>
                                                         </p>
                                                 
                                                 
@@ -270,8 +303,8 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Merges the properties, passed to the current component with user&#39;s configuration
-                                                via <code>buttonCfg</code> property.</p>
+                                                        <p>Generates a MenuButtonBridge React class for a given menuButton definition if it has not been
+                                                already created based on the button name and definition.</p>
                                                 
                                                     </div>
                                                 
@@ -280,13 +313,23 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">props</code>
+                                                                        <code class="param-name">menuButtonName</code>
+                                                                        <span class="type">String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The menuButton&#39;s name</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">menuButtonDefinition</code>
                                                                         <span class="type">Object</span>
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The properties to be merged with the provided configuration for this
-                                                button. If not passed, the user configuration will be merged with <code>this.props</code></p>
+                                                                        <p>The menuButton&#39;s definition</p>
                                                 
                                                                     </div>
                                                 
@@ -299,20 +342,25 @@
                                                 
                                                             <div class="returns-description">
                                                                         <span class="type">Object</span>:
-                                                                    <p>The merged properties</p>
+                                                                    <p>The generated or already existing React MenuButton Class</p>
                                                 
                                                             </div>
                                                         </div>
                                                 
                                                 </div>
-                                        </div>
-                            
-                                        <div id="properties" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Properties</h2>
-                            
-                                                <div id="property_editor" class="property item">
-                                                    <h3 class="name"><code>editor</code></h3>
-                                                    <span class="type">Object</span>
+                                                <div id="method_init" class="method item">
+                                                    <h3 class="name"><code>init</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>editor</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
                                                 
                                                 
                                                 
@@ -321,21 +369,41 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_button-props.js.html#l13"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;button-props.js:13</code></a>
+                                                        <a href="../files/src_ui_react_src_uibridge_menu-button.jsx.html#l163"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu-button.jsx:163</code></a>
                                                         </p>
+                                                
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>The editor instance where the component is being used.</p>
+                                                        <p>Set the add handler for UI_MENUBUTTON to our own. We do this in the init phase to override
+                                                the one in the native plugin in case it&#39;s present.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">editor</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The CKEditor instance being initialized</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                 
                                                 
                                                 </div>
                                         </div>
+                            
                             
                             
                                 </div>

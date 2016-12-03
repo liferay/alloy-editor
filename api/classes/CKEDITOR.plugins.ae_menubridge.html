@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>ButtonTableHeading - alloyeditor</title>
+    <title>CKEDITOR.plugins.ae_menubridge - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -177,14 +177,14 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>ButtonTableHeading <small>Class</small></h1>
+                                <h1>CKEDITOR.plugins.ae_menubridge <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:4</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l9"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:9</code></a>
                                     </div>
                             
                             
@@ -192,17 +192,56 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>The ButtonTableHeading class provides functionality to work with table heading.</p>
+                                <p>CKEditor plugin that bridges the support offered by CKEditor Menu plugin. It takes over the
+                            responsibility of adding, removing and retrieving menu groups and items</p>
+                            <ul>
+                            <li>editor.addMenuGroup(name, order)</li>
+                            <li>editor.addMenuItem(name, definition)</li>
+                            <li>editor.addMenuItems(definitions)</li>
+                            <li>editor.getMenuItem(name)</li>
+                            <li>editor.removeMenuItem(name)</li>
+                            </ul>
                             
                             </div>
                             
+                                <div class="constructor">
+                                    <h2>Constructor</h2>
+                                    <div id="method_CKEDITOR.plugins.ae_menubridge" class="method item">
+                                        <h3 class="name"><code>CKEDITOR.plugins.ae_menubridge</code></h3>
+                                    
+                                            <span class="paren">()</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        <div class="meta">
+                                                    <p>
+                                                    Defined in
+                                            <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l9"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:9</code></a>
+                                            </p>
+                                    
+                                    
+                                    
+                                        </div>
+                                    
+                                        <div class="description">
+                                            
+                                        </div>
+                                    
+                                    
+                                    
+                                    </div>
+                                </div>
                             
                             <div id="classdocs">
                                 <ul class="api-class-tabs nav nav-tabs">
                                     <li class="api-class-tab index"><a href="#index">Index</a></li>
                             
                                         <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-                                        <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
                                 </ul>
                             
                                 <div>
@@ -214,51 +253,32 @@
                             
                                                 <ul class="index-list methods">
                                                         <li class="index-item method">
-                                                            <a href="#method__getCommands">_getCommands</a>
+                                                            <a href="#method_CKEDITOR.editor">CKEDITOR.editor</a>
                             
                                                         </li>
                                                         <li class="index-item method">
-                                                            <a href="#method_render">render</a>
+                                                            <a href="#method_CKEDITOR.editor">CKEDITOR.editor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
+                                                            <a href="#method_CKEDITOR.editor">CKEDITOR.editor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
+                                                            <a href="#method_CKEDITOR.editor">CKEDITOR.editor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
+                                                            <a href="#method_CKEDITOR.editor">CKEDITOR.editor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
+                                                            <a href="#method_init">init</a>
                             
                                                         </li>
                                                 </ul>
                                             </div>
                             
-                                            <div class="index-section properties tab-pane">
-                                                <h3>Properties</h3>
-                            
-                                                <ul class="index-list properties">
-                                                        <li class="index-item property">
-                                                            <a href="#property_commands">commands</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_editor">editor</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_expanded">expanded</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_key">key</a>
-                            
-                                                                <span class="flag static">static</span>
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_label">label</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_tabIndex">tabIndex</a>
-                            
-                                                        </li>
-                                                        <li class="index-item property">
-                                                            <a href="#property_toggleDropdown">toggleDropdown</a>
-                            
-                                                        </li>
-                                                </ul>
-                                            </div>
                             
                             
                                     </div>
@@ -266,14 +286,20 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method__getCommands" class="method item">
-                                                    <h3 class="name"><code>_getCommands</code></h3>
+                                                <div id="method_CKEDITOR.editor" class="method item">
+                                                    <h3 class="name"><code>CKEDITOR.editor</code></h3>
                                                 
-                                                        <span class="paren">()</span>
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>name</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code class="optional">[order=100]</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
                                                 
-                                                        <span class="returns-inline">
-                                                            <span class="type">Array</span>
-                                                        </span>
                                                 
                                                 
                                                 
@@ -284,7 +310,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l100"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:100</code></a>
+                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l43"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:43</code></a>
                                                         </p>
                                                 
                                                 
@@ -292,27 +318,174 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Returns a list of commands. If a list of commands was passed
-                                                as property <code>commands</code>, it will take a precedence over the default ones.</p>
+                                                        <p>Registers an item group to the editor context menu in order to make it
+                                                possible to associate it with menu items later.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
                                                 
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">name</code>
+                                                                        <span class="type">String</span>
                                                 
-                                                            <div class="returns-description">
-                                                                        <span class="type">Array</span>:
-                                                                    <p>The list of available commands.</p>
                                                 
-                                                            </div>
+                                                                    <div class="param-description">
+                                                                        <p>Specify a group name.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name optional">[order=100]</code>
+                                                                        <span class="type">Number</span>
+                                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Define the display sequence of this group
+                                                inside the menu. A smaller value gets displayed first.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                 
-                                                </div>
-                                                <div id="method_render" class="method item">
-                                                    <h3 class="name"><code>render</code></h3>
                                                 
-                                                        <span class="paren">()</span>
+                                                </div>
+                                                <div id="method_CKEDITOR.editor" class="method item">
+                                                    <h3 class="name"><code>CKEDITOR.editor</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>name</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>definition</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l56"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:56</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Adds an item from the specified definition to the editor context menu.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">name</code>
+                                                                        <span class="type">String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The menu item name.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">definition</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The menu item definition.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method_CKEDITOR.editor" class="method item">
+                                                    <h3 class="name"><code>CKEDITOR.editor</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>definitions</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l73"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:73</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Adds one or more items from the specified definition object to the editor context menu.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">definitions</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Object where keys are used as itemName and corresponding values as definition for a {@link #addMenuItem} call.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method_CKEDITOR.editor" class="method item">
+                                                    <h3 class="name"><code>CKEDITOR.editor</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>name</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
                                                 
                                                         <span class="returns-inline">
                                                             <span class="type">Object</span>
@@ -327,7 +500,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l68"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:68</code></a>
+                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l86"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:86</code></a>
                                                         </p>
                                                 
                                                 
@@ -335,30 +508,50 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Lifecycle. Renders the UI of the button.</p>
+                                                        <p>Retrieves a particular menu item definition from the editor context menu.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">name</code>
+                                                                        <span class="type">String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The name of the desired menu item.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                 
                                                         <div class="returns">
                                                             <h4>Returns:</h4>
                                                 
                                                             <div class="returns-description">
                                                                         <span class="type">Object</span>:
-                                                                    <p>The content which should be rendered.</p>
-                                                
                                                             </div>
                                                         </div>
                                                 
                                                 </div>
-                                        </div>
-                            
-                                        <div id="properties" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Properties</h2>
-                            
-                                                <div id="property_commands" class="property item">
-                                                    <h3 class="name"><code>commands</code></h3>
-                                                    <span class="type">Array</span>
+                                                <div id="method_CKEDITOR.editor" class="method item">
+                                                    <h3 class="name"><code>CKEDITOR.editor</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>name</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
                                                 
                                                 
                                                 
@@ -367,48 +560,51 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l12"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:12</code></a>
+                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l98"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:98</code></a>
                                                         </p>
+                                                
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>List of the commands the button is able to handle.</p>
+                                                        <p>Removes a particular menu item added before from the editor context menu.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">name</code>
+                                                                        <span class="type">String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The name of the desired menu item.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                 
                                                 
                                                 </div>
-                                                <div id="property_editor" class="property item">
-                                                    <h3 class="name"><code>editor</code></h3>
-                                                    <span class="type">Object</span>
+                                                <div id="method_init" class="method item">
+                                                    <h3 class="name"><code>init</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>editor</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
                                                 
                                                 
                                                 
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l19"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:19</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The editor instance where the component is being used.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_expanded" class="property item">
-                                                    <h3 class="name"><code>expanded</code></h3>
-                                                    <span class="type">Boolean</span>
                                                 
                                                 
                                                 
@@ -417,124 +613,41 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l26"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:26</code></a>
+                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l22"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:22</code></a>
                                                         </p>
+                                                
                                                 
                                                 
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Indicates whether the styles list is expanded or not.</p>
+                                                        <p>Set the add handler for UI_BUTTON to our own. We do this in the init phase to override
+                                                the one in the native plugin in case it&#39;s present.</p>
                                                 
                                                     </div>
                                                 
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">editor</code>
+                                                                        <span class="type">Object</span>
                                                 
                                                 
-                                                </div>
-                                                <div id="property_key" class="property item">
-                                                    <h3 class="name"><code>key</code></h3>
-                                                    <span class="type">String</span>
+                                                                    <div class="param-description">
+                                                                        <p>The CKEditor instance being initialized</p>
                                                 
+                                                                    </div>
                                                 
-                                                
-                                                
-                                                        <span class="flag static">static</span>
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l58"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:58</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The name which will be used as an alias of the button in the configuration.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <p><strong>Default:</strong> tableRow</p>
-                                                
-                                                
-                                                </div>
-                                                <div id="property_label" class="property item">
-                                                    <h3 class="name"><code>label</code></h3>
-                                                    <span class="type">String</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l33"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:33</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The label that should be used for accessibility purposes.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_tabIndex" class="property item">
-                                                    <h3 class="name"><code>tabIndex</code></h3>
-                                                    <span class="type">Number</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l40"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:40</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>The tabIndex of the button in its toolbar current state. A value other than -1
-                                                means that the button has focus and is the active element.</p>
-                                                
-                                                    </div>
-                                                
-                                                
-                                                
-                                                </div>
-                                                <div id="property_toggleDropdown" class="property item">
-                                                    <h3 class="name"><code>toggleDropdown</code></h3>
-                                                    <span class="type">Function</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_components_buttons_button-table-heading.jsx.html#l48"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;buttons&#x2F;button-table-heading.jsx:48</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Callback provided by the button host to notify when the styles list has been expanded.</p>
-                                                
-                                                    </div>
-                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                 
                                                 
                                                 </div>
                                         </div>
+                            
                             
                             
                                 </div>

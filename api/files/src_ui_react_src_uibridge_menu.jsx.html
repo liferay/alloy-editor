@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/base/button-command.js - alloyeditor</title>
+    <title>src/ui/react/src/uibridge/menu.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -177,7 +177,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/base/button-command.js</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/uibridge/menu.jsx</code></h1>
                             </div>
                             
                             <div class="file">
@@ -185,50 +185,112 @@
                             (function() {
                                 &#x27;use strict&#x27;;
                             
+                                /* istanbul ignore if */
+                                if(CKEDITOR.plugins.get(&#x27;ae_menubridge&#x27;)) {
+                                    return;
+                                }
+                            
                                 /**
-                                 * ButtonCommand is a mixin that executes a command via CKEDITOR&#x27;s API.
+                                 * CKEditor plugin that bridges the support offered by CKEditor Menu plugin. It takes over the
+                                 * responsibility of adding, removing and retrieving menu groups and items
+                                 * - editor.addMenuGroup(name, order)
+                                 * - editor.addMenuItem(name, definition)
+                                 * - editor.addMenuItems(definitions)
+                                 * - editor.getMenuItem(name)
+                                 * - editor.removeMenuItem(name)
                                  *
-                                 * @class ButtonCommand
+                                 * @class CKEDITOR.plugins.ae_menubridge
+                                 * @constructor
                                  */
-                                var ButtonCommand = {
-                                    // Allows validating props being passed to the component.
-                                    propTypes: {
-                                        /**
-                                         * The command that should be executed.
-                                         *
-                                         * @property {String} command
-                                         */
-                                        command: React.PropTypes.string.isRequired,
-                            
-                                        /**
-                                         * Indicates that the command may cause the editor to have a different.
-                                         *
-                                         * @property {boolean} modifiesSelection
-                                         */
-                                        modifiesSelection: React.PropTypes.bool
-                                    },
-                            
+                                CKEDITOR.plugins.add(&#x27;ae_menubridge&#x27;, {
                                     /**
-                                     * Executes a CKEditor command and fires &#x60;actionPerformed&#x60; event.
+                                     * Set the add handler for UI_BUTTON to our own. We do this in the init phase to override
+                                     * the one in the native plugin in case it&#x27;s present.
                                      *
-                                     * @param {Object=} data Optional data to be passed to CKEDITOR&#x27;s &#x60;execCommand&#x60; method.
-                                     *
-                                     * @method execCommand
+                                     * @method init
+                                     * @param {Object} editor The CKEditor instance being initialized
                                      */
-                                    execCommand: function(data) {
-                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                                    init: function(editor) {
+                                    	// Do nothing if the real menu plugin is present
+                                    	if (CKEDITOR.plugins.get(&#x27;menu&#x27;)) {
+                                    		return;
+                                    	}
                             
-                                        editor.execCommand(this.props.command, data);
+                            			var groups = [];
+                            			var groupsOrder = editor._.menuGroups = {};
+                            			var menuItems = editor._.menuItems = {};
                             
-                                        if (this.props.modifiesSelection) {
-                                            editor.selectionChange(true);
-                                        }
+                            			for (var i = 0; i &lt; groups.length; i++) {
+                            				groupsOrder[groups[i]] = i + 1;
+                            			}
                             
-                                        editor.fire(&#x27;actionPerformed&#x27;, this);
+                            			/**
+                            			 * Registers an item group to the editor context menu in order to make it
+                            			 * possible to associate it with menu items later.
+                            			 *
+                            			 * @param {String} name Specify a group name.
+                            			 * @param {Number} [order=100] Define the display sequence of this group
+                            			 * inside the menu. A smaller value gets displayed first.
+                            			 * @member CKEDITOR.editor
+                            			 */
+                            			editor.addMenuGroup = function(name, order) {
+                            				groupsOrder[name] = order || 100;
+                            			};
+                            
+                            			/**
+                            			 * Adds an item from the specified definition to the editor context menu.
+                            			 *
+                            			 * @method
+                            			 * @param {String} name The menu item name.
+                            			 * @param {Object} definition The menu item definition.
+                            			 * @member CKEDITOR.editor
+                            			 */
+                            			editor.addMenuItem = function(name, definition) {
+                            				if (groupsOrder[definition.group]) {
+                            					menuItems[name] = {
+                            						name: name,
+                            						definition: definition
+                            					};
+                            				}
+                            			};
+                            
+                            			/**
+                            			 * Adds one or more items from the specified definition object to the editor context menu.
+                            			 *
+                            			 * @method
+                            			 * @param {Object} definitions Object where keys are used as itemName and corresponding values as definition for a {@link #addMenuItem} call.
+                            			 * @member CKEDITOR.editor
+                            			 */
+                            			editor.addMenuItems = function(definitions) {
+                            				for (var itemName in definitions) {
+                            					this.addMenuItem(itemName, definitions[itemName]);
+                            				}
+                            			};
+                            
+                            			/**
+                            			 * Retrieves a particular menu item definition from the editor context menu.
+                            			 *
+                            			 * @method
+                            			 * @param {String} name The name of the desired menu item.
+                            			 * @returns {Object}
+                            			 * @member CKEDITOR.editor
+                            			 */
+                            			editor.getMenuItem = function(name) {
+                            				return menuItems[name];
+                            			};
+                            
+                            			/**
+                            			 * Removes a particular menu item added before from the editor context menu.
+                            			 *
+                            			 * @method
+                            			 * @param {String} name The name of the desired menu item.
+                            			 * @member CKEDITOR.editor
+                            			 */
+                            			editor.removeMenuItem = function(name) {
+                            				delete menuItems[name];
+                            			};
                                     }
-                                };
-                            
-                                AlloyEditor.ButtonCommand = ButtonCommand;
+                                });
                             }());
                                 </pre>
                             </div>

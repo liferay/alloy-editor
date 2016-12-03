@@ -64,6 +64,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "CKEDITOR.Table",
         "CKEDITOR.plugins.ae_autolink",
         "CKEDITOR.plugins.ae_buttonbridge",
+        "CKEDITOR.plugins.ae_menubridge",
+        "CKEDITOR.plugins.ae_menubuttonbridge",
         "CKEDITOR.plugins.ae_panelmenubuttonbridge",
         "CKEDITOR.plugins.ae_placeholder",
         "CKEDITOR.plugins.ae_richcombobridge",
