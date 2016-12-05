@@ -14577,7 +14577,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         offsetLeft = clientRect.right + this.props.gutterExclusive.left + 'px';
                     }
 
-                    domNode.style.left = offsetLeft;
+                    var neededWidth = domNode.offsetWidth + this.props.gutterExclusive.left;
+                    if (clientRect.left < neededWidth) {
+                        var margin = neededWidth - clientRect.left + 'px';
+                        this.props.editor.get('nativeEditor').editable().setStyle('margin-left', margin);
+                    } else {
+                        domNode.style.left = offsetLeft;
+                    }
                     domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2) + 'px';
                     domNode.style.opacity = 1;
 

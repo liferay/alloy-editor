@@ -464,7 +464,13 @@
                                                     offsetLeft = clientRect.right + this.props.gutterExclusive.left + &#x27;px&#x27;;
                                                 }
                             
-                                                domNode.style.left = offsetLeft;
+                                                var neededWidth = domNode.offsetWidth + this.props.gutterExclusive.left;
+                                                if( clientRect.left &lt; neededWidth ) {
+                            	                    var margin = neededWidth - clientRect.left + &#x27;px&#x27;;
+                            	                    this.props.editor.get(&#x27;nativeEditor&#x27;).editable().setStyle( &#x27;margin-left&#x27;, margin );
+                            	                } else {
+                            		                domNode.style.left = offsetLeft;
+                            	                }
                                                 domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + &#x27;px&#x27;;
                                                 domNode.style.opacity = 1;
                             
