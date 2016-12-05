@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.2.5
+ * AlloyEditor v1.3.0
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -5822,10 +5822,10 @@ CKEDITOR.tools.buildTableMap = function (table) {
              * Registers an item group to the editor context menu in order to make it
              * possible to associate it with menu items later.
              *
+             * @method addMenuGroup
              * @param {String} name Specify a group name.
              * @param {Number} [order=100] Define the display sequence of this group
              * inside the menu. A smaller value gets displayed first.
-             * @member CKEDITOR.editor
              */
             editor.addMenuGroup = function (name, order) {
                 groupsOrder[name] = order || 100;
@@ -5834,10 +5834,9 @@ CKEDITOR.tools.buildTableMap = function (table) {
             /**
              * Adds an item from the specified definition to the editor context menu.
              *
-             * @method
+             * @method addMenuItem
              * @param {String} name The menu item name.
              * @param {Object} definition The menu item definition.
-             * @member CKEDITOR.editor
              */
             editor.addMenuItem = function (name, definition) {
                 if (groupsOrder[definition.group]) {
@@ -5851,8 +5850,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             /**
              * Adds one or more items from the specified definition object to the editor context menu.
              *
-             * @member CKEDITOR.editor
-             * @method
+             * @method addMenuItems
              * @param {Object} definitions Object where keys are used as itemName and corresponding values as definition for a {@link #addMenuItem} call.
              */
             editor.addMenuItems = function (definitions) {
@@ -5864,8 +5862,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
             /**
              * Retrieves a particular menu item definition from the editor context menu.
              *
-             * @member CKEDITOR.editor
-             * @method
+             * @method getMenuItem
              * @param {String} name The name of the desired menu item.
              * @return {Object}
              */
@@ -5876,9 +5873,8 @@ CKEDITOR.tools.buildTableMap = function (table) {
             /**
              * Removes a particular menu item added before from the editor context menu.
              *
-             * @method
+             * @method  removeMenuItem
              * @param {String} name The name of the desired menu item.
-             * @member CKEDITOR.editor
              */
             editor.removeMenuItem = function (name) {
                 delete menuItems[name];

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.2.5</b>
+                        API Docs for Version: <b>1.3.0</b>
                     </p>
                 </li>
             </div>
@@ -253,11 +253,19 @@
                             
                                                 <ul class="index-list methods">
                                                         <li class="index-item method">
-                                                            <a href="#method_CKEDITOR.editor">CKEDITOR.editor</a>
+                                                            <a href="#method_addMenuGroup">addMenuGroup</a>
                             
                                                         </li>
                                                         <li class="index-item method">
-                                                            <a href="#method_CKEDITOR.editor">CKEDITOR.editor</a>
+                                                            <a href="#method_addMenuItem">addMenuItem</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
+                                                            <a href="#method_addMenuItems">addMenuItems</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method">
+                                                            <a href="#method_getMenuItem">getMenuItem</a>
                             
                                                         </li>
                                                         <li class="index-item method">
@@ -265,15 +273,7 @@
                             
                                                         </li>
                                                         <li class="index-item method">
-                                                            <a href="#method_"></a>
-                            
-                                                        </li>
-                                                        <li class="index-item method">
-                                                            <a href="#method_"></a>
-                            
-                                                        </li>
-                                                        <li class="index-item method">
-                                                            <a href="#method_CKEDITOR.editor">CKEDITOR.editor</a>
+                                                            <a href="#method_removeMenuItem">removeMenuItem</a>
                             
                                                         </li>
                                                 </ul>
@@ -286,8 +286,8 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method_CKEDITOR.editor" class="method item">
-                                                    <h3 class="name"><code>CKEDITOR.editor</code></h3>
+                                                <div id="method_addMenuGroup" class="method item">
+                                                    <h3 class="name"><code>addMenuGroup</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
@@ -356,8 +356,8 @@
                                                 
                                                 
                                                 </div>
-                                                <div id="method_CKEDITOR.editor" class="method item">
-                                                    <h3 class="name"><code>CKEDITOR.editor</code></h3>
+                                                <div id="method_addMenuItem" class="method item">
+                                                    <h3 class="name"><code>addMenuItem</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
@@ -423,6 +423,122 @@
                                                 
                                                 
                                                 </div>
+                                                <div id="method_addMenuItems" class="method item">
+                                                    <h3 class="name"><code>addMenuItems</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>definitions</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l72"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:72</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Adds one or more items from the specified definition object to the editor context menu.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">definitions</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Object where keys are used as itemName and corresponding values as definition for a {@link #addMenuItem} call.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method_getMenuItem" class="method item">
+                                                    <h3 class="name"><code>getMenuItem</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>name</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Object</span>
+                                                        </span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l84"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:84</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Retrieves a particular menu item definition from the editor context menu.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">name</code>
+                                                                        <span class="type">String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The name of the desired menu item.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Object</span>:
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
                                                 <div id="method_init" class="method item">
                                                     <h3 class="name"><code>init</code></h3>
                                                 
@@ -477,124 +593,8 @@
                                                 
                                                 
                                                 </div>
-                                                <div id="method_" class="method item">
-                                                    <h3 class="name"><code></code></h3>
-                                                
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
-                                                                <li class="arg">
-                                                                        <code>definitions</code>
-                                                                </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l73"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:73</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Adds one or more items from the specified definition object to the editor context menu.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">definitions</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>Object where keys are used as itemName and corresponding values as definition for a {@link #addMenuItem} call.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                
-                                                </div>
-                                                <div id="method_" class="method item">
-                                                    <h3 class="name"><code></code></h3>
-                                                
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
-                                                                <li class="arg">
-                                                                        <code>name</code>
-                                                                </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
-                                                
-                                                        <span class="returns-inline">
-                                                            <span class="type">Object</span>
-                                                        </span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l86"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:86</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Retrieves a particular menu item definition from the editor context menu.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">name</code>
-                                                                        <span class="type">String</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The name of the desired menu item.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                        <div class="returns">
-                                                            <h4>Returns:</h4>
-                                                
-                                                            <div class="returns-description">
-                                                                        <span class="type">Object</span>:
-                                                            </div>
-                                                        </div>
-                                                
-                                                </div>
-                                                <div id="method_CKEDITOR.editor" class="method item">
-                                                    <h3 class="name"><code>CKEDITOR.editor</code></h3>
+                                                <div id="method_removeMenuItem" class="method item">
+                                                    <h3 class="name"><code>removeMenuItem</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
@@ -614,7 +614,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l98"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:98</code></a>
+                                                        <a href="../files/src_ui_react_src_uibridge_menu.jsx.html#l95"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;uibridge&#x2F;menu.jsx:95</code></a>
                                                         </p>
                                                 
                                                 
