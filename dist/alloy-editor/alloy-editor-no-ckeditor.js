@@ -24410,12 +24410,12 @@ CKEDITOR.config.image2_captionedClass = 'image';
         _checkEmptyData: function _checkEmptyData(event) {
             var editor = event.editor;
 
-            var editorNode = new CKEDITOR.dom.element(editor.element.$);
+            var editableNode = editor.editable();
 
-            if (editor.getData() === '') {
-                editorNode.addClass(editor.config.placeholderClass);
+            if (editableNode.$.innerText.trim() === '') {
+                editableNode.addClass(editor.config.placeholderClass);
             } else {
-                editorNode.removeClass(editor.config.placeholderClass);
+                editableNode.removeClass(editor.config.placeholderClass);
             }
         },
 
