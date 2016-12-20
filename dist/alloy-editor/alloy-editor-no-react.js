@@ -11156,8 +11156,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     url = "/";
                 }
                 var RELATIVE_URI = /^(?:\/[^\/\.]+|[^\/\.:]+(?:\/|$))/;
+                var is_file = url.match(/^\/file\//) !== null;
                 var linkAttrs = {
-                    target: RELATIVE_URI.test(url) ? "" : "_blank"
+                    target: !is_file && RELATIVE_URI.test(url) ? "" : "_blank"
                 };
                 var modifySelection = { advance: true };
                 if (this.state.element) {

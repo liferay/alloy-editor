@@ -594,8 +594,9 @@
                                                 url = &quot;/&quot;;
                                             }
                                             var RELATIVE_URI = /^(?:\/[^\/\.]+|[^\/\.:]+(?:\/|$))/;
+                                            var is_file = url.match(/^\/file\//) !== null;
                                             var linkAttrs = {
-                                                target: RELATIVE_URI.test(url) ? &quot;&quot; : &quot;_blank&quot;
+                                                target: ! is_file &amp;&amp; RELATIVE_URI.test(url) ? &quot;&quot; : &quot;_blank&quot;
                                             };
                                             var modifySelection = { advance: true };
                                             if (this.state.element) {
