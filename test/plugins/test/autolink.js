@@ -182,6 +182,12 @@
             });
 
             testLink.call(this, {
+                expected: '<p>link <a href="http://www.alloy-editor.com">http://www.alloy-editor.com</a></p>',
+                html: '<p>link http://www.alloy-editor.com { }</p>',
+                keyCode: KEY_SPACE
+            });
+
+            testLink.call(this, {
                 expected: '<p>invalid link ww.liferay.com</p>',
                 html: '<p>invalid link ww.liferay.com { }</p>',
                 keyCode: KEY_SPACE
@@ -192,6 +198,8 @@
                 html: '<p>invalid link liferay.com { }</p>',
                 keyCode: KEY_SPACE
             });
+
+
         });
 
         it('should create a link at the end of the content when pressing SPACE', function() {
