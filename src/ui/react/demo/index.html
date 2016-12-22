@@ -82,9 +82,21 @@
         </div>
 
         <script>
-            var editor1 = AlloyEditor.editable('description');
-            var editor2 = AlloyEditor.editable('editable');
-            var editor3 = AlloyEditor.editable('headline');
+            var editor1 = AlloyEditor.editable('headline');
+            var editor2 = AlloyEditor.editable('description', {
+                buttonCfg: {
+                    'linkEdit': {
+                        showTargetSelector: true
+                    }
+                }
+            });
+            var editor3 = AlloyEditor.editable('editable', {
+                buttonCfg: {
+                    'linkEdit': {
+                        showTargetSelector: false
+                    }
+                }
+            });
         </script>
 
         <div id="footer">
