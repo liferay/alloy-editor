@@ -22866,7 +22866,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     var REGEX_LAST_WORD = /[^\s]+/mg;
 
-    var REGEX_URL = /(https?\:\/\/|www\.)(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?$/i;
+    var REGEX_URL = /(https?\:\/\/|www\.)(-\.)?([^(\s/?\.#-)]+\.?)+(\b\/[^\s]*)?$/i;
 
     /**
      * CKEditor plugin which automatically generates links when user types text which looks like URL.
