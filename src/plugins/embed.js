@@ -8,9 +8,11 @@
 
     var REGEX_HTTP = /^https?/;
 
+    var PROVIDERS = ['youtube', 'twitter'];
+
     CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = '//alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
     CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL = '<div data-ae-embed-url="{url}"></div>';
-
+    CKEDITOR.DEFAULT_AE_EMBED_DEFAULT_LINK_TPL = '<a href="{url}">{url}</a>';
     /**
      * CKEditor plugin which adds the infrastructure to embed urls as media objects using an oembed
      * service. By default, and for demoing purposes only, the oembed service is hosted in iframe.ly
@@ -29,6 +31,7 @@
             init: function(editor) {
                 var AE_EMBED_URL_TPL = new CKEDITOR.template(editor.config.embedUrlTemplate || CKEDITOR.DEFAULT_AE_EMBED_URL_TPL);
                 var AE_EMBED_WIDGET_TPL = new CKEDITOR.template(editor.config.embedWidgetTpl || CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL);
+                var AE_EMBED_DEFAULT_LINK_TPL = new CKEDITOR.template(editor.config.embedLinkDefaultTpl || CKEDITOR.DEFAULT_AE_EMBED_DEFAULT_LINK_TPL);
 
                 // Default function to upcast DOM elements to embed widgets.
                 // It matches CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
@@ -53,7 +56,8 @@
 
                 // Create a widget to properly handle embed operations
                 editor.widgets.add('ae_embed', {
-                    allowedContent: 'div[!data-ae-embed-url]',
+
+
                     mask: true,
                     requiredContent: 'div[data-ae-embed-url]',
 
@@ -67,22 +71,34 @@
                      */
                     data: function(event) {
                         var widget = this;
+
                         var url = event.data.url;
 
                         if (url) {
                             CKEDITOR.tools.jsonp(AE_EMBED_URL_TPL, {
-                                    url: encodeURIComponent(url)
-                                }, function(response) {
+                                url: encodeURIComponent(url)
+                            }, function(response) {
+                                if (response.provider_name && PROVIDERS.indexOf(response.provider_name.toLowerCase()) >= 0) {
                                     if (response.html) {
                                         widget.element.setHtml(response.html);
                                     } else {
                                         widget.element.setHtml(url);
                                     }
-                                }, function(msg) {
-                                    widget.element.setHtml(url);
+                                } else {
+                                    widget.createATag(url);
                                 }
-                            );
+                            }, function(msg) {
+                                widget.createATag(url);
+                            });
                         }
+                    },
+
+                    createATag: function(url) {
+                        this.editor.insertHtml(
+                            AE_EMBED_DEFAULT_LINK_TPL.output({
+                                url: url
+                            })
+                        );
                     },
 
                     /**
