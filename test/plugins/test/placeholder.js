@@ -48,7 +48,7 @@
             assert.isTrue(this.nativeEditor.element.hasClass('ae-placeholder'));
         });
 
-        it('should remove placeholder class when editor is changed by setData', function() {
+        it('should remove placeholder class when editor is changed by setData', function(done) {
             this.nativeEditor.fire('blur');
 
             assert.isTrue(this.nativeEditor.element.hasClass('ae-placeholder'));
