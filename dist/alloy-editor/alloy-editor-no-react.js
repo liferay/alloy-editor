@@ -4503,9 +4503,13 @@ CKEDITOR.config.image2_captionedClass = 'image';
 
     var REGEX_HTTP = /^https?/;
 
+    var REGEX_DEFAULT_LINK = /<a href=/;
+
+    var PROVIDERS = ['youtube', 'twitter'];
+
     CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = '//alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
     CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL = '<div data-ae-embed-url="{url}"></div>';
-
+    CKEDITOR.DEFAULT_AE_EMBED_DEFAULT_LINK_TPL = '<a href="{url}">{url}</a>';
     /**
      * CKEditor plugin which adds the infrastructure to embed urls as media objects using an oembed
      * service. By default, and for demoing purposes only, the oembed service is hosted in iframe.ly
@@ -4523,6 +4527,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
         init: function init(editor) {
             var AE_EMBED_URL_TPL = new CKEDITOR.template(editor.config.embedUrlTemplate || CKEDITOR.DEFAULT_AE_EMBED_URL_TPL);
             var AE_EMBED_WIDGET_TPL = new CKEDITOR.template(editor.config.embedWidgetTpl || CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL);
+            var AE_EMBED_DEFAULT_LINK_TPL = new CKEDITOR.template(editor.config.embedLinkDefaultTpl || CKEDITOR.DEFAULT_AE_EMBED_DEFAULT_LINK_TPL);
 
             // Default function to upcast DOM elements to embed widgets.
             // It matches CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
@@ -4545,7 +4550,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
 
             // Create a widget to properly handle embed operations
             editor.widgets.add('ae_embed', {
-                allowedContent: 'div[!data-ae-embed-url]',
+
                 mask: true,
                 requiredContent: 'div[data-ae-embed-url]',
 
@@ -4559,6 +4564,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
                  */
                 data: function data(event) {
                     var widget = this;
+
                     var url = event.data.url;
 
                     if (url) {
@@ -4566,14 +4572,31 @@ CKEDITOR.config.image2_captionedClass = 'image';
                             url: encodeURIComponent(url)
                         }, function (response) {
                             if (response.html) {
-                                widget.element.setHtml(response.html);
+                                if (REGEX_DEFAULT_LINK.test(response.html)) {
+                                    widget.createATag(url);
+                                } else {
+                                    widget.element.setHtml(response.html);
+                                }
                             } else {
-                                widget.element.setHtml(url);
+                                widget.createATag(url, currentSelection);
                             }
                         }, function (msg) {
-                            widget.element.setHtml(url);
+                            widget.createATag(url, currentSelection);
                         });
                     }
+                },
+
+                createATag: function createATag(url) {
+                    this.editor.execCommand('undo');
+
+                    var currentSelection = this.editor.getSelection().getSelectedElement();
+
+                    var aTagHtml = AE_EMBED_DEFAULT_LINK_TPL.output({
+                        url: url
+                    });
+
+                    this.editor.insertHtml(aTagHtml);
+                    this.editor.fire('actionPerformed', this);
                 },
 
                 /**
