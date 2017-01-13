@@ -166,10 +166,6 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
-            var clearLinkStyle = {
-                opacity: this.state.linkHref ? 1 : 0
-            };
-
             var targetSelector = {
                 allowedTargets: this.props.allowedTargets,
                 editor: this.props.editor,
@@ -213,6 +209,12 @@
                 targetButtonEdit = <AlloyEditor.ButtonLinkTargetEdit {...targetSelector} />;
             }
 
+            var buttonClearLink;
+
+            if (this.state.linkHref) {
+                buttonClearLink = <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} title={AlloyEditor.Strings.clear}></button>
+            }
+
             return (
                 <div className="ae-container-edit-link">
                     <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
@@ -224,7 +226,7 @@
                             <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} ref="linkInput" type="text" value={this.state.linkHref} {...this.props.inputProps}></input>
                             {autocompleteDropdown}
                         </div>
-                        <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
+                        {buttonClearLink}
                     </div>
                     <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
                         <span className="ae-icon-ok"></span>
@@ -245,6 +247,8 @@
             this.setState({
                 linkHref: ''
             });
+
+            this._focusLinkInput();
         },
 
         /**
