@@ -295,6 +295,12 @@
                                      * @return {Object} The default properties.
                                      */
                                     getDefaultProps: function() {
+                                        var inputProps = {};
+                            
+                                        if (!CKEDITOR.env.ie &amp;&amp; AlloyEditor.Strings) {
+                                            inputProps.placeholder = AlloyEditor.Strings.editLink;
+                                        }
+                            
                                         return {
                                             appendProtocol: true,
                                             autocompleteUrl: &#x27;&#x27;,
@@ -302,6 +308,7 @@
                                             customIndexStart: true,
                                             defaultLinkTarget: &#x27;&#x27;,
                                             descendants: &#x27;.ae-toolbar-element&#x27;,
+                                            inputProps: inputProps,
                                             keys: {
                                                 dismiss: [27],
                                                 dismissNext: [39],
@@ -398,7 +405,7 @@
                                                 &lt;div className=&quot;ae-container-input xxl&quot;&gt;
                                                     {targetButtonEdit}
                                                     &lt;div className=&quot;ae-container-input flexible&quot;&gt;
-                                                        &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref}&gt;&lt;/input&gt;
+                                                        &lt;input className=&quot;ae-input&quot; onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} ref=&quot;linkInput&quot; type=&quot;text&quot; value={this.state.linkHref} {...this.props.inputProps}&gt;&lt;/input&gt;
                                                         {autocompleteDropdown}
                                                     &lt;/div&gt;
                                                     &lt;button aria-label={AlloyEditor.Strings.clearInput} className=&quot;ae-button ae-icon-remove&quot; onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}&gt;&lt;/button&gt;

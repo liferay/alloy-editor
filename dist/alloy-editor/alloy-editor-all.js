@@ -32145,6 +32145,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })();
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 (function () {
     'use strict';
 
@@ -32258,6 +32260,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @return {Object} The default properties.
          */
         getDefaultProps: function getDefaultProps() {
+            var inputProps = {};
+
+            if (!CKEDITOR.env.ie && AlloyEditor.Strings) {
+                inputProps.placeholder = AlloyEditor.Strings.editLink;
+            }
+
             return {
                 appendProtocol: true,
                 autocompleteUrl: '',
@@ -32265,6 +32273,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 customIndexStart: true,
                 defaultLinkTarget: '',
                 descendants: '.ae-toolbar-element',
+                inputProps: inputProps,
                 keys: {
                     dismiss: [27],
                     dismissNext: [39],
@@ -32368,7 +32377,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     React.createElement(
                         'div',
                         { className: 'ae-container-input flexible' },
-                        React.createElement('input', { className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, placeholder: AlloyEditor.Strings.editLink, ref: 'linkInput', type: 'text', value: this.state.linkHref }),
+                        React.createElement('input', _extends({ className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, ref: 'linkInput', type: 'text', value: this.state.linkHref }, this.props.inputProps)),
                         autocompleteDropdown
                     ),
                     React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
