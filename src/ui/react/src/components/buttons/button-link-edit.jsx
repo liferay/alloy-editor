@@ -208,6 +208,12 @@
                 buttonClearLink = <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} title={AlloyEditor.Strings.clear}></button>
             }
 
+            var placeholderProp = {};
+
+            if (!CKEDITOR.env.ie && AlloyEditor.Strings) {
+                placeholderProp.placeholder = AlloyEditor.Strings.editLink;
+            }
+
             return (
                 <div className="ae-container-edit-link">
                     <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
@@ -216,7 +222,7 @@
                     <div className="ae-container-input xxl">
                         {targetButtonEdit}
                         <div className="ae-container-input flexible">
-                            <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
+                            <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} { ...placeholderProp } ref="linkInput" type="text" value={this.state.linkHref}></input>
                             {autocompleteDropdown}
                         </div>
                         {buttonClearLink}
