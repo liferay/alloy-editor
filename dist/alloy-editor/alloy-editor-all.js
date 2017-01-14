@@ -32260,12 +32260,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * @return {Object} The default properties.
          */
         getDefaultProps: function getDefaultProps() {
-            var inputProps = {};
-
-            if (!CKEDITOR.env.ie && AlloyEditor.Strings) {
-                inputProps.placeholder = AlloyEditor.Strings.editLink;
-            }
-
             return {
                 appendProtocol: true,
                 autocompleteUrl: '',
@@ -32273,7 +32267,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 customIndexStart: true,
                 defaultLinkTarget: '',
                 descendants: '.ae-toolbar-element',
-                inputProps: inputProps,
                 keys: {
                     dismiss: [27],
                     dismissNext: [39],
@@ -32315,10 +32308,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * @return {Object} The content which should be rendered.
          */
         render: function render() {
-            var clearLinkStyle = {
-                opacity: this.state.linkHref ? 1 : 0
-            };
-
             var targetSelector = {
                 allowedTargets: this.props.allowedTargets,
                 editor: this.props.editor,
@@ -32362,6 +32351,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 targetButtonEdit = React.createElement(AlloyEditor.ButtonLinkTargetEdit, targetSelector);
             }
 
+            var buttonClearLink;
+
+            if (this.state.linkHref) {
+                buttonClearLink = React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, title: AlloyEditor.Strings.clear });
+            }
+
+            var placeholderProp = {};
+
+            if (!CKEDITOR.env.ie && AlloyEditor.Strings) {
+                placeholderProp.placeholder = AlloyEditor.Strings.editLink;
+            }
+
             return React.createElement(
                 'div',
                 { className: 'ae-container-edit-link' },
@@ -32377,10 +32378,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     React.createElement(
                         'div',
                         { className: 'ae-container-input flexible' },
-                        React.createElement('input', _extends({ className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown, ref: 'linkInput', type: 'text', value: this.state.linkHref }, this.props.inputProps)),
+                        React.createElement('input', _extends({ className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown }, placeholderProp, { ref: 'linkInput', type: 'text', value: this.state.linkHref })),
                         autocompleteDropdown
                     ),
-                    React.createElement('button', { 'aria-label': AlloyEditor.Strings.clearInput, className: 'ae-button ae-icon-remove', onClick: this._clearLink, style: clearLinkStyle, title: AlloyEditor.Strings.clear })
+                    buttonClearLink
                 ),
                 React.createElement(
                     'button',
@@ -32402,6 +32403,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.setState({
                 linkHref: ''
             });
+
+            this._focusLinkInput();
         },
 
         /**
