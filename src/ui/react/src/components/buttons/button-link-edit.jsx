@@ -111,12 +111,6 @@
          * @return {Object} The default properties.
          */
         getDefaultProps: function() {
-            var inputProps = {};
-
-            if (!CKEDITOR.env.ie && AlloyEditor.Strings) {
-                inputProps.placeholder = AlloyEditor.Strings.editLink;
-            }
-
             return {
                 appendProtocol: true,
                 autocompleteUrl: '',
@@ -131,8 +125,7 @@
                     next: [40],
                     prev: [38]
                 },
-                showTargetSelector: true,
-                inputProps: inputProps
+                showTargetSelector: true
             };
         },
 
@@ -223,7 +216,7 @@
                     <div className="ae-container-input xxl">
                         {targetButtonEdit}
                         <div className="ae-container-input flexible">
-                            <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} ref="linkInput" type="text" value={this.state.linkHref} {...this.props.inputProps}></input>
+                            <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
                             {autocompleteDropdown}
                         </div>
                         {buttonClearLink}
