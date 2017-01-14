@@ -124,7 +124,6 @@
                 customIndexStart: true,
                 defaultLinkTarget: '',
                 descendants: '.ae-toolbar-element',
-                inputProps: inputProps,
                 keys: {
                     dismiss: [27],
                     dismissNext: [39],
@@ -132,7 +131,8 @@
                     next: [40],
                     prev: [38]
                 },
-                showTargetSelector: true
+                showTargetSelector: true,
+                inputProps: inputProps
             };
         },
 
