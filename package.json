@@ -6,7 +6,7 @@
     "babel-preset-es2015": "6.3.13",
     "babel-preset-react": "6.3.13",
     "bourbon": "https://github.com/thoughtbot/bourbon.git#v4.2.6",
-    "chai": "3.2.0",
+    "chai": "^3.5.0",
     "del": "2.2.0",
     "dir-compare": "1.3.0",
     "eslint": "3.1.1",
