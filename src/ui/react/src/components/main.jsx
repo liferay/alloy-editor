@@ -318,13 +318,19 @@
                 var editable = this.props.editor.get('nativeEditor').editable();
                 var targetNode = new CKEDITOR.dom.node(target);
 
-                var res = (editable.$ === target) || editable.contains(targetNode) ||
-                    (new CKEDITOR.dom.element(domNode)).contains(targetNode);
-
-                if (!res) {
+                if (!editable) {
                     this.setState({
                         hidden: true
                     });
+                } else {
+                    var res = (editable.$ === target) || editable.contains(targetNode) ||
+                        (new CKEDITOR.dom.element(domNode)).contains(targetNode);
+
+                    if (!res) {
+                        this.setState({
+                            hidden: true
+                        });
+                    }
                 }
             }
         }
