@@ -502,13 +502,19 @@
                                             var editable = this.props.editor.get(&#x27;nativeEditor&#x27;).editable();
                                             var targetNode = new CKEDITOR.dom.node(target);
                             
-                                            var res = (editable.$ === target) || editable.contains(targetNode) ||
-                                                (new CKEDITOR.dom.element(domNode)).contains(targetNode);
-                            
-                                            if (!res) {
+                                            if (!editable) {
                                                 this.setState({
                                                     hidden: true
                                                 });
+                                            } else {
+                                                var res = (editable.$ === target) || editable.contains(targetNode) ||
+                                                    (new CKEDITOR.dom.element(domNode)).contains(targetNode);
+                            
+                                                if (!res) {
+                                                    this.setState({
+                                                        hidden: true
+                                                    });
+                                                }
                                             }
                                         }
                                     }
@@ -534,6 +540,7 @@
                             
                                 AlloyEditor.UI = UI;
                             }());
+                            
                                 </pre>
                             </div>
                         </div>
