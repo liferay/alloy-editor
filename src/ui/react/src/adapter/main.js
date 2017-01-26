@@ -182,7 +182,7 @@
          * @type {Object}
          * @static
          */
-        Toolbars: {}
+        Toolbars: {},
 
         /**
          * Fired when AlloyEditor detects the browser language and loads the corresponding language file. Once this event
@@ -190,6 +190,28 @@
          *
          * @event languageResourcesLoaded
          */
+
+        /**
+         * An object containing all currently registered plugins in AlloyEditor.
+         *
+         * @property BRIDGE_BUTTONS
+         * @type {Object}
+         * @static
+         */
+        BRIDGE_BUTTONS: {},
+
+        /**
+         * Returns the required plugin names needed for a given plugin
+         * if it is already registered or an empty array.
+         *
+         * @method getButtonFor
+         * @param {String} pluginName The name of the plugin.
+         * @return {Array} The names of the required plugins for the given plugin.
+         * @static
+         */
+        getButtonFor: function(pluginName) {
+            return AlloyEditor.BRIDGE_BUTTONS[pluginName] || [];
+        }
     };
 
     if (typeof module !== 'undefined' && typeof module.exports === 'object') {

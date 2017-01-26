@@ -219,7 +219,20 @@
          */
         init: function(editor) {
             editor.ui.addRichCombo = function(richComboName, richComboDefinition) {
-               this.add(richComboName, CKEDITOR.UI_RICHCOMBO, richComboDefinition);
+                this.add(richComboName, CKEDITOR.UI_RICHCOMBO, richComboDefinition);
+
+                var e = new Error();
+                // In IE 9 - IE 11, e = {number: 0, description: ''};
+                // so check the "stak" property
+                if (!e.stack) {
+                    return;
+                }
+
+                var pluginName = /plugins\/(.*)\/plugin.js/.exec(e.stack)[1];
+                if (!AlloyEditor.BRIDGE_BUTTONS[pluginName]) {
+                    AlloyEditor.BRIDGE_BUTTONS[pluginName] = [];
+                }
+                AlloyEditor.BRIDGE_BUTTONS[pluginName].push(richComboName);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_RICHCOMBO, {
