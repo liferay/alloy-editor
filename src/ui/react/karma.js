@@ -190,9 +190,15 @@ if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
             platform: 'Windows 8.1',
             version: '11'
         },
-        sl_edge: {
+        sl_edge_20: {
             base: 'SauceLabs',
-            browserName: 'edge',
+            browserName: 'microsoftedge',
+            platform: 'Windows 10',
+            version: '13'
+        },
+        sl_edge_21: {
+            base: 'SauceLabs',
+            browserName: 'microsoftedge',
             platform: 'Windows 10',
             version: '14'
         }
