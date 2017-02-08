@@ -11298,7 +11298,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     targetButtonEdit,
                     React.createElement(
                         'div',
-                        { className: 'ae-container-input flexible' },
+                        { className: 'ae-container-input' },
                         React.createElement('input', _extends({ className: 'ae-input', onChange: this._handleLinkHrefChange, onKeyDown: this._handleKeyDown }, placeholderProp, { ref: 'linkInput', type: 'text', value: this.state.linkHref })),
                         autocompleteDropdown
                     ),

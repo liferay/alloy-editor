@@ -394,9 +394,6 @@
     width: 72px; }
   .ae-ui .ae-container-input.small {
     width: 36px; }
-  .ae-ui .ae-container-input.flexible {
-    width: auto;
-    flex-grow: 1; }
   .ae-ui .ae-container-input input, .ae-ui .ae-container-input .ae-input {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
