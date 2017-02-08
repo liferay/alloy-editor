@@ -221,7 +221,7 @@
                     </button>
                     <div className="ae-container-input xxl">
                         {targetButtonEdit}
-                        <div className="ae-container-input flexible">
+                        <div className="ae-container-input">
                             <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} { ...placeholderProp } ref="linkInput" type="text" value={this.state.linkHref}></input>
                             {autocompleteDropdown}
                         </div>
