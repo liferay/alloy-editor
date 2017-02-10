@@ -585,18 +585,8 @@
                                         var linkUtils = new CKEDITOR.Link(editor, {appendProtocol: this.props.appendProtocol});
                                         if (this.state.linkHref) {
                                             var url = this.state.linkHref;
-                                            var DOMAIN_TEST = new RegExp( &quot;^(?:https?:)?(?:\/\/)?&quot; + window.location.hostname );
-                                            var matches = url.match( DOMAIN_TEST );
-                                            if( matches ) {
-                                                url = url.substr( matches[0].length );
-                                            }
-                                            if( ! url ) {
-                                                url = &quot;/&quot;;
-                                            }
-                                            var RELATIVE_URI = /^(?:\/[^\/\.]+|[^\/\.:]+(?:\/|$))/;
-                                            var is_file = url.match(/^\/file\//) !== null;
                                             var linkAttrs = {
-                                                target: ! is_file &amp;&amp; RELATIVE_URI.test(url) ? &quot;&quot; : &quot;_blank&quot;
+                                                target: SF.link.targetForUrl(url)
                                             };
                                             var modifySelection = { advance: true };
                                             if (this.state.element) {

@@ -10319,18 +10319,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var linkUtils = new CKEDITOR.Link(editor, { appendProtocol: this.props.appendProtocol });
             if (this.state.linkHref) {
                 var url = this.state.linkHref;
-                var DOMAIN_TEST = new RegExp("^(?:https?:)?(?:\/\/)?" + window.location.hostname);
-                var matches = url.match(DOMAIN_TEST);
-                if (matches) {
-                    url = url.substr(matches[0].length);
-                }
-                if (!url) {
-                    url = "/";
-                }
-                var RELATIVE_URI = /^(?:\/[^\/\.]+|[^\/\.:]+(?:\/|$))/;
-                var is_file = url.match(/^\/file\//) !== null;
                 var linkAttrs = {
-                    target: !is_file && RELATIVE_URI.test(url) ? "" : "_blank"
+                    target: SF.link.targetForUrl(url)
                 };
                 var modifySelection = { advance: true };
                 if (this.state.element) {
