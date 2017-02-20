@@ -153,6 +153,7 @@
         init: function(editor) {
             editor.ui.addPanelMenuButton = function(panelMenuButtonName, panelMenuButtonDefinition) {
                 this.add(panelMenuButtonName, CKEDITOR.UI_PANELBUTTON, panelMenuButtonDefinition);
+                AlloyEditor.registerBridgeButton(panelMenuButtonName);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_PANELBUTTON, {
