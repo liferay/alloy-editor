@@ -219,7 +219,8 @@
          */
         init: function(editor) {
             editor.ui.addRichCombo = function(richComboName, richComboDefinition) {
-               this.add(richComboName, CKEDITOR.UI_RICHCOMBO, richComboDefinition);
+                this.add(richComboName, CKEDITOR.UI_RICHCOMBO, richComboDefinition);
+                AlloyEditor.registerBridgeButton(richComboName);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_RICHCOMBO, {

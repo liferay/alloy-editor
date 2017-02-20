@@ -140,6 +140,7 @@
         init: function(editor) {
             editor.ui.addButton = function(buttonName, buttonDefinition) {
                 this.add(buttonName, CKEDITOR.UI_BUTTON, buttonDefinition);
+                AlloyEditor.registerBridgeButton(buttonName);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_BUTTON, {
