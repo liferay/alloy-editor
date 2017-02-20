@@ -140,6 +140,19 @@
         init: function(editor) {
             editor.ui.addButton = function(buttonName, buttonDefinition) {
                 this.add(buttonName, CKEDITOR.UI_BUTTON, buttonDefinition);
+
+                var e = new Error();
+                // In IE 9 - IE 11, e = {number: 0, description: ''};
+                // so check the "stack" property
+                if (!e.stack) {
+                    return;
+                }
+
+                var pluginName = /plugins\/(.*)\/plugin.js/.exec(e.stack)[1];
+                if (!AlloyEditor.BRIDGE_BUTTONS[pluginName]) {
+                    AlloyEditor.BRIDGE_BUTTONS[pluginName] = [];
+                }
+                AlloyEditor.BRIDGE_BUTTONS[pluginName].push(buttonName);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_BUTTON, {

@@ -170,6 +170,17 @@
         init: function(editor) {
             editor.ui.addMenuButton = function(menuButtonName, menuButtonDefinition) {
                 this.add(menuButtonName, CKEDITOR.UI_MENUBUTTON, menuButtonDefinition);
+
+                var e = new Error();
+                if (!e.stack) {
+                    return;
+                }
+
+                var pluginName = /plugins\/(.*)\/plugin.js/.exec(e.stack)[1];
+                if (!AlloyEditor.BRIDGE_BUTTONS[pluginName]) {
+                    AlloyEditor.BRIDGE_BUTTONS[pluginName] = [];
+                }
+                AlloyEditor.BRIDGE_BUTTONS[pluginName].push(menuButtonName);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_MENUBUTTON, {

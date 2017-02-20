@@ -223,7 +223,7 @@
 
                 var e = new Error();
                 // In IE 9 - IE 11, e = {number: 0, description: ''};
-                // so check the "stak" property
+                // so check the "stack" property
                 if (!e.stack) {
                     return;
                 }
