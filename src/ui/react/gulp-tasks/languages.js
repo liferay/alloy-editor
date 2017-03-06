@@ -1,20 +1,27 @@
 'use strict';
 
-var gulp = require('gulp');
-
 var fs = require('fs');
+var gulp = require('gulp');
 var path = require('path');
 var walk = require('walk');
+var hashFiles = require('hash-files');
 
 var rootDir = path.join(__dirname, '..', '..', '..', '..');
 var reactDir = path.join(rootDir, 'src', 'ui', 'react');
-
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor');
-
-var currentLangTemplate = path.join(reactDir, 'language-template.js');
-var processedLangTemplate = path.join(reactDir, '_processed_lang_keys.js');
+var currentLangTemplate = path.join(reactDir, 'language-template.json');
+var currentLangTemplateContent = require(currentLangTemplate);
 var reactLangDir = path.join(reactDir, 'lang');
+var langDir = path.join(reactDir, 'src', 'assets', 'lang');
+
+var hashSources = [
+    path.join(rootDir, 'lib', 'lang/*.js'),
+    currentLangTemplate,
+    path.join(langDir + '/*.json')
+];
+
+var hashFile = path.join(reactDir, '_hash');
 
 function errorHandler(error) {
   console.log(error.toString());
@@ -23,87 +30,14 @@ function errorHandler(error) {
 }
 
 /**
- * Compares a couple of string sets to find differences between them.
- *
- * @param {Object} oldStrings Old set of strings
- * @param {Object} newStrings New set of strings
- * @return {Object} An object with `added`, `deleted` and `updated` arrays of the strings that differ from
- * one set to the other.
- */
-var compareStringSets = function(oldStrings, newStrings) {
-    var diff;
-    var added = [];
-    var deleted = [];
-    var updated = [];
-
-    // Iterate over every old string tuple
-    Object.keys(oldStrings).forEach(function(key) {
-        // If it's not in the new set, it was deleted
-        if (!Object.prototype.hasOwnProperty.call(newStrings, key)) {
-            deleted.push({
-                key: key,
-                value: oldStrings[key]
-            });
-        } else {
-            // If its value is different it was updated
-            if (oldStrings[key] !== newStrings[key]) {
-                updated.push({
-                    key: key,
-                    value: newStrings[key]
-                });
-            }
-
-            // In any case, it is not a newly added string
-            delete newStrings[key];
-        }
-    });
-
-    // All remaining keys in newStrings have just been added
-    Object.keys(newStrings).forEach(function(key) {
-        added.push({
-            key: key,
-            value: newStrings[key]
-        });
-    });
-
-    if (added.length || deleted.length || updated.length) {
-        diff = {
-            added: added,
-            deleted: deleted,
-            updated: updated
-        };
-    }
-
-    return diff;
-};
-
-/**
- * Extract the strings from the contents of a language template.
- *
- * @param {String} langTemplateContent The language template content.
- * @return {Object} An object with all the template strings.
- */
-var extractStrings = function(langTemplateContent) {
-    var match;
-    var langStrings = {};
-    var langStringRegex = /\s*(.+):\s*(.+(?=(?:,|\s*})))/g;
-
-    while ((match = langStringRegex.exec(langTemplateContent)) !== null) {
-        langStrings[match[1]] = match[2];
-    }
-
-    return langStrings;
-};
-
-/**
  * Normalizes the different string values that can be stored in a language template.
  * @param  {String} value The stored value
  * @param  {String} lang  The language in which we want the value to be resolved
  * @return {String} The normalized string
  */
 var getStringLangValue = function(value, lang) {
-    if (value.indexOf("CKEDITOR.lang['{lang}']") === 0) {
-        value = value.replace(/\{lang\}/, lang);
+    if (value.indexOf('.') !== -1) {
+        value = 'CKEDITOR.lang["' + lang + '"].' + value.replace(/"/g, '');
     }
 
     // Value can be at this point a string 'value' or a reference to a CKEDITOR lang property
@@ -111,12 +45,8 @@ var getStringLangValue = function(value, lang) {
     return eval(value);
 };
 
-/**
- * Walks over every existing lang file in the ui, applying the changes defined by the lang diff object.
- * @param  {Object}   langDiff A diff object as the one returned from the `compareStringSets` method.
- * @param  {Function} callback Callback to give the logic control back
- */
-var updateLangFiles = function(langDiff, callback) {
+var updateLangFiles = function(callback) {
+
     // Mock the CKEDITOR.lang object to walk the ckeditor js lang files
     global.CKEDITOR = {
         lang: {}
@@ -137,70 +67,90 @@ var updateLangFiles = function(langDiff, callback) {
         // Load the matching CKEDITOR lang file with all the strings
         require(path.join(rootDir, 'lib', 'lang', fileStats.name));
 
-        // Load the corresponding AlloyEditor lang file
-        require(path.join(reactDir, 'lang', fileStats.name));
-
-        // Update deleted strings
-        langDiff.deleted.forEach(function(deletedString) {
-            delete AlloyEditor.Strings[deletedString.key];
+        Object.keys(currentLangTemplateContent).forEach(function (key) {
+            AlloyEditor.Strings[key] = getStringLangValue(currentLangTemplateContent[key], lang);
         });
 
-        // Update added strings
-        langDiff.added.forEach(function(newString) {
-            AlloyEditor.Strings[newString.key] = getStringLangValue(newString.value, lang);
-        });
-
-        // Update changed strings
-        langDiff.updated.forEach(function(updatedString) {
-            AlloyEditor.Strings[updatedString.key] = getStringLangValue(updatedString.value, lang);
-        });
-
-        // Update the contents of the current lang file
-        fs.writeFile(path.join(reactDir, 'lang', fileStats.name), 'AlloyEditor.Strings = ' + JSON.stringify(AlloyEditor.Strings) + ';', function(err) {
-            if (err) {
-                errorHandler(err);
-            }
-
-            next();
-        });
-    });
-};
-
-gulp.task('build-languages', function(callback) {
-    // Load already processed strings
-    fs.readFile(processedLangTemplate, {encoding:'utf8'}, function(err, processedLangTemplateContent) {
-        if (err) {
-            errorHandler(err);
+        // Try to load translations for "lang"
+        var translations;
+        try {
+            translations = require(path.join(langDir, lang + '.json'));
+        } catch (err) {
+            console.log('translations not found for:', lang);
         }
 
-        fs.readFile(currentLangTemplate, {encoding:'utf8'}, function(err, currentLangTemplateContent) {
+        if (translations) {
+            Object.keys(translations).forEach(function (key) {
+                AlloyEditor.Strings[key] = translations[key];
+            });
+        }
+
+        // Update the contents of the current lang file
+        fs.writeFile(path.join(reactDir, 'lang', fileStats.name),
+            'AlloyEditor.Strings = ' + JSON.stringify(AlloyEditor.Strings) + ';',
+            function(err) {
+                if (err) {
+                    errorHandler(err);
+                }
+
+                next();
+            });
+    });
+
+};
+
+function createHash(callback) {
+    hashFiles({files: hashSources}, function (err, hash) {
+        if (err) {
+            return callback(err, null);
+        }
+
+        fs.writeFile(hashFile, hash, function (err) {
             if (err) {
-                errorHandler(err);
+                return callback(err, null);
             }
-
-            // Extract the lang files string sets and compare one against the other
-            var diff = compareStringSets(
-                extractStrings(processedLangTemplateContent),
-                extractStrings(currentLangTemplateContent)
-            );
-
-            if (!diff) {
-                // Nothing changed, move on with the build
-                callback();
-            } else {
-                // Update all lang files and overwrite the old lang template to mark all the updated strings
-                // as valid and prevent further modifications once we're done with the updates.
-                updateLangFiles(diff, function() {
-                    fs.writeFile(processedLangTemplate, currentLangTemplateContent , function(err) {
-                        if (err) {
-                            errorHandler(err);
-                        }
-
-                        callback();
-                    });
-                });
-            }
+            callback(null, hash);
         });
+    });
+}
+
+function compareHash(originalHash, callback) {
+    hashFiles({files: hashSources}, function (err, hash) {
+        if (err) {
+            return callback(err, false);
+        }
+
+        var changed = originalHash !== hash;
+        callback(changed);
+    });
+}
+
+gulp.task('build-languages', function(callback) {
+    var self = this;
+    fs.exists(hashFile, function (exists) {
+        if (!exists) {
+            updateLangFiles(function () {
+                createHash(callback);
+            });
+        } else {
+            fs.readFile(hashFile, function (err, data) {
+                if (err) {
+                    console.error(err);
+                    self.emit('end');
+                    return;
+                }
+
+                compareHash(data.toString(), function (changed) {
+                    if (changed) {
+                        updateLangFiles(function () {
+                            createHash(callback);
+                        });
+                    } else {
+                        callback();
+                    }
+                });
+            });
+        }
     });
 });
 
