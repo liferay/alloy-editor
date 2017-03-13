@@ -203,7 +203,7 @@
             return (
                 <div className="ae-container-edit-link">
                     <button aria-label="Upload" className="ae-button" onClick={this._uploadFile} title="Upload">
-                        <span className="fa fa-cloud-upload"></span>
+                    	<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1792 1792" className="icon" data-identifier="fa-cloud-upload"><path d="M1216 864q0-14-9-23L855 489q-9-9-23-9t-23 9L458 840q-10 12-10 24 0 14 9 23t23 9h224v352q0 13 9.5 22.5t22.5 9.5h192q13 0 22.5-9.5t9.5-22.5V896h224q13 0 22.5-9.5t9.5-22.5zm640 288q0 159-112.5 271.5T1472 1536H384q-185 0-316.5-131.5T-64 1088q0-130 70-240t188-165q-2-30-2-43 0-212 150-362t362-150q156 0 285.5 87T1178 446q71-62 166-62 106 0 181 75t75 181q0 76-41 138 130 31 213.5 135.5T1856 1152z"/></svg>
                     </button>
                     <div className="ae-container-input xxl">
                         <div className="ae-container-input flexible">
@@ -213,10 +213,10 @@
                         <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
                     </div>
                     <button aria-label="Preview" className="ae-button" onClick={this._previewLink} title="Preview">
-                        <span className="glyphicons glyphicons-eye-open"></span>
+                    	<svg xmlns="http://www.w3.org/2000/svg" viewBox="9.479 15.573 29.73 16.376" data-trimmed="trimmed" width="1em" height="1em" className="icon" data-identifier="glyphicons-eye-open"><path d="M24.347 15.583c-9.844 0-14.868 8.906-14.868 8.906s7.065 7.469 14.868 7.469 14.868-7.469 14.868-7.469-5.025-8.906-14.868-8.906zm-.87 9.271l-.734.734a3.032 3.032 0 0 1-1.178-1.459l.813-.812a2 2 0 0 0 1.099 1.537zm-3.137-1.802c0 2.212 1.794 4.009 4.007 4.009s4.007-1.797 4.007-4.009c0-1.37-.691-2.579-1.742-3.302 1.092.167 2.15.441 3.154.782a5.95 5.95 0 0 1 .562 2.52 5.982 5.982 0 0 1-11.963 0c0-.88.195-1.714.537-2.466.997-.36 2.059-.656 3.175-.832a4.001 4.001 0 0 0-1.737 3.298zm-3.896-1.394a8.092 8.092 0 0 0-.129 1.394 8 8 0 0 0 2.28 5.601c-2.918-1.272-5.216-3.159-6.312-4.164.809-.744 2.276-1.852 4.161-2.831zm13.553 7.101a8.004 8.004 0 0 0 2.235-7.218c2.108 1.006 3.771 2.176 4.615 2.949-1.124 1.032-3.691 2.996-6.85 4.269z"/></svg>
                     </button>
                     <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
-                        <span className="fa fa-unlink"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1792 1792" className="icon" data-identifier="fa-unlink"><path d="M503 1271l-256 256q-10 9-23 9-12 0-23-9-9-10-9-23t9-23l256-256q10-9 23-9t23 9q9 10 9 23t-9 23zm169 41v320q0 14-9 23t-23 9-23-9-9-23v-320q0-14 9-23t23-9 23 9 9 23zm-224-224q0 14-9 23t-23 9H96q-14 0-23-9t-9-23 9-23 23-9h320q14 0 23 9t9 23zm1264 128q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-334-335q-21-21-42-56l239-18 273 274q27 27 68 27.5t68-26.5l147-146q28-28 28-67 0-40-28-68l-274-275 18-239q35 21 56 42l336 336q84 86 84 204zm-617-724l-239 18-273-274q-28-28-68-28-39 0-68 27L300 381q-28 28-28 67 0 40 28 68l274 274-18 240q-35-21-56-42L164 652q-84-86-84-204 0-120 85-203L312 99q83-83 203-83 121 0 204 85l334 335q21 21 42 56zm633 84q0 14-9 23t-23 9h-320q-14 0-23-9t-9-23 9-23 23-9h320q14 0 23 9t9 23zM1184 32v320q0 14-9 23t-23 9-23-9-9-23V32q0-14 9-23t23-9 23 9 9 23zm407 151l-256 256q-11 9-23 9t-23-9q-9-10-9-23t9-23l256-256q10-9 23-9t23 9q9 10 9 23t-9 23z"/></svg>
                     </button>
                     <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
                         <span className="ae-icon-ok"></span>

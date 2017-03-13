@@ -56,7 +56,7 @@
             return (
                 <div>
                     <button aria-label={AlloyEditor.Strings.image} className="ae-button" data-type="button-image" onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.image}>
-                        <span className="ae-icon-image"></span>
+                    	<svg xmlns="http://www.w3.org/2000/svg" viewBox="12 14 24 20" data-trimmed="trimmed" width="1em" height="1em" className="icon" data-identifier="glyphicons-picture"><path d="M35.125 14h-22.25a.875.875 0 0 0-.875.875v18.25c0 .483.392.875.875.875h22.25a.875.875 0 0 0 .875-.875v-18.25a.875.875 0 0 0-.875-.875zM34 25.578L30.474 22s-.974-1-1.942-1c-.969 0-1.91 1-1.91 1s-2.637 3.011-3.631 4.004c1.604.684 4.03 4.635 2.176 3.456-1.854-1.179-5.104-2.459-5.104-2.459L14 31V16h20v9.578zM15.813 20c0-1.205.98-2.187 2.187-2.187a2.188 2.188 0 0 1 0 4.374A2.19 2.19 0 0 1 15.813 20z"/></svg>
                     </button>
 
                     <input accept="image/*" onChange={this._onInputChange} ref="fileInput" style={inputSyle} type="file"/>

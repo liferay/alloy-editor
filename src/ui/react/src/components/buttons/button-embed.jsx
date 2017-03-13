@@ -81,7 +81,7 @@
             } else {
                 return (
                     <button aria-label="Embed" className="ae-button" data-type="button-embed" onClick={this._requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
-                        <span className="glyphicons glyphicons-cloud-download"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="12.156 15.15 24.656 21.85" data-trimmed="trimmed" width="1em" height="1em" className="icon" data-identifier="glyphicons-cloud-download"><path d="M36.812 25.094C36.812 28.315 34.21 31 31 31h-.717a1.435 1.435 0 0 0-.13-.497 1.44 1.44 0 0 0-1.305-.803h-1.551s-.008-3.188-.008-4.319c0-1.131-.695-1.681-1.694-1.681l-3.194-.013c-1.004.003-1.653.718-1.651 1.705v4.312l-1.587.007a1.44 1.44 0 0 0-1.306.801c-.076.155-.111.32-.127.487H16c-2.123 0-3.844-1.8-3.844-3.922 0-1.84 1.295-3.452 3.022-3.829a7.358 7.358 0 0 1 7.321-8.108 7.356 7.356 0 0 1 6.704 4.334 5.769 5.769 0 0 1 1.796-.287c3.211.001 5.813 2.688 5.813 5.907zm-17.754 6.169l4.784 5.654c.04.053.091.083.143.083a.223.223 0 0 0 .185-.089l4.783-5.651c.091-.117.044-.26-.105-.26h-2.849l-.01-5.617c-.001-.275-.116-.384-.391-.383h-3.192c-.275.001-.407.109-.406.385V31l-2.837.012c-.148 0-.196.134-.105.251z"/></svg>
                     </button>
                 );
             }
