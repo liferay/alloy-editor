@@ -10,14 +10,14 @@ var rootDir = path.join(__dirname, '..', '..', '..', '..');
 var reactDir = path.join(rootDir, 'src', 'ui', 'react');
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor');
-var currentLangTemplate = path.join(reactDir, 'language-template.json');
-var currentLangTemplateContent = require(currentLangTemplate);
 var reactLangDir = path.join(reactDir, 'lang');
 var langDir = path.join(reactDir, 'src', 'assets', 'lang');
+var ckeditorLangKeys = path.join(langDir, 'vendor', 'ckeditor.json');
+var ckeditorLangContent = require(ckeditorLangKeys);
 
 var hashSources = [
     path.join(rootDir, 'lib', 'lang/*.js'),
-    currentLangTemplate,
+    ckeditorLangKeys,
     path.join(langDir + '/*.json')
 ];
 
@@ -67,8 +67,8 @@ var updateLangFiles = function(callback) {
         // Load the matching CKEDITOR lang file with all the strings
         require(path.join(rootDir, 'lib', 'lang', fileStats.name));
 
-        Object.keys(currentLangTemplateContent).forEach(function (key) {
-            AlloyEditor.Strings[key] = getStringLangValue(currentLangTemplateContent[key], lang);
+        Object.keys(ckeditorLangContent).forEach(function (key) {
+            AlloyEditor.Strings[key] = getStringLangValue(ckeditorLangContent[key], lang);
         });
 
         // Try to load translations for "lang"
