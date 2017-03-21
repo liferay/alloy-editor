@@ -1,0 +1,3 @@
+files:
+  - source: /src/ui/react/src/assets/lang/template.json
+    translation: /src/ui/react/src/assets/lang/%locale%.json
