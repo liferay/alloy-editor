@@ -5,6 +5,20 @@
         return;
     }
 
+
+    /**
+     * CKEDITOR enterMode config set the behaviour of paragrahps
+     * When the content is empty CKEDITOR keeps the enterMode string
+     * into the content
+     */
+
+    var needsBrFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
+
+    var enterModeString = {
+        1: '<p>' + needsBrFiller + '</p>',
+        2: '<br>',
+        3: '<div>' + needsBrFiller + '</div>'
+    };
     /**
      * CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
      * is no content to the editor, there will be hint to the user.
@@ -50,7 +64,9 @@
 
                 var editableNode = editor.editable();
 
-                if (editableNode.$.innerText.trim() === '') {
+                var enterMode = editor.config.enterMode;
+
+                if (editableNode.$.innerHTML === enterModeString[enterMode]) {
                     editableNode.addClass(editor.config.placeholderClass);
                 } else {
                     editableNode.removeClass(editor.config.placeholderClass);
