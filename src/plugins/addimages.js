@@ -89,8 +89,8 @@
                 });
 
                 if (!!result) {
-                    for (i = 0; i < files.length; i++) {
-                        file = files[i];
+                    for (i = 0; i < imageFiles.length; i++) {
+                        file = imageFiles[i];
 
                         this._processFile(file, editor);
                     }
