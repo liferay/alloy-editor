@@ -313,7 +313,7 @@
             assert.strictEqual(data, '<p>update the url of a <a target="">link</a>.</p>');
         });
 
-        it('should not add default protocol when updating a link', function() {
+        it('should add default protocol when updating a link with string parameter', function() {
             if (CKEDITOR.env.ie) {
                 // FIXME: the functionality works, but we were unable to make these tests working on IE.
                 // Please help.
@@ -334,7 +334,35 @@
                 compatHtml: true
             });
 
-            assert.strictEqual(data, '<p>update the url of a <a href="new.com" target="_blank">link</a>.</p>');
+            assert.strictEqual(data, '<p>update the url of a <a href="http://new.com" target="_blank">link</a>.</p>');
+        });
+
+        it('should use the default protocol when editing an existing link with object parameter', function() {
+            if (CKEDITOR.env.ie) {
+                // FIXME: the functionality works, but we were unable to make these tests working on IE.
+                // Please help.
+                return;
+            }
+
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, '<p>update the url of a {<a href="http://test.com" target="_blank">link</a>}.</p>');
+
+            var linkEl = link.getFromSelection();
+
+            link.update(
+              {
+                href: 'test.com'
+              },
+              linkEl
+            );
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, '<p>update the url of a <a href="http://test.com" target="_blank">link</a>.</p>');
         });
 
         it('should position the cursor before the next word if modifySelection.advance is set to true', function() {
