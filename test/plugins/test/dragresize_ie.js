@@ -15,14 +15,34 @@
     describe('imageScaleResize on IE', function() {
         var url = 'http://localhost/url_test';
 
+        describe('Plugin', function() {
+            this.timeout(35000);
+
+            before(function(done) {
+                Utils.createAlloyEditor.call(this, done, {extraPlugins: 'ae_dragresize', imageScaleResize: 'width'});
+            });
+
+            after(Utils.destroyAlloyEditor);
+
+            beforeEach(Utils.beforeEach);
+
+            afterEach(Utils.afterEach);
+
+            it('should use ae_dragresize_ie when ae_dragresize is passed as config', function() {
+                doTestIE.call(this);
+
+                assert.isTrue(this.nativeEditor.config.extraPlugins.indexOf('ae_dragresize_ie') >= 0);
+            });
+        });
+
         describe('with the default value "both"', function() {
             this.timeout(35000);
 
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_dragresize_ie'});
+                Utils.createAlloyEditor.call(this, done, {extraPlugins: 'ae_dragresize'});
             });
 
-            after(Utils.destroyCKEditor);
+            after(Utils.destroyAlloyEditor);
 
             beforeEach(Utils.beforeEach);
 
@@ -65,10 +85,10 @@
             this.timeout(35000);
 
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_dragresize_ie', imageScaleResize: 'height'});
+                Utils.createAlloyEditor.call(this, done, {extraPlugins: 'ae_dragresize', imageScaleResize: 'height'});
             });
 
-            after(Utils.destroyCKEditor);
+            after(Utils.destroyAlloyEditor);
 
             beforeEach(Utils.beforeEach);
 
@@ -93,10 +113,10 @@
             this.timeout(35000);
 
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_dragresize_ie', imageScaleResize: 'scale'});
+                Utils.createAlloyEditor.call(this, done, {extraPlugins: 'ae_dragresize', imageScaleResize: 'scale'});
             });
 
-            after(Utils.destroyCKEditor);
+            after(Utils.destroyAlloyEditor);
 
             beforeEach(Utils.beforeEach);
 
@@ -121,10 +141,10 @@
             this.timeout(35000);
 
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_dragresize_ie', imageScaleResize: 'width'});
+                Utils.createAlloyEditor.call(this, done, {extraPlugins: 'ae_dragresize', imageScaleResize: 'width'});
             });
 
-            after(Utils.destroyCKEditor);
+            after(Utils.destroyAlloyEditor);
 
             beforeEach(Utils.beforeEach);
 
