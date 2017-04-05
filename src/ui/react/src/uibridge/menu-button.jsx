@@ -167,7 +167,7 @@
          * @method init
          * @param {Object} editor The CKEditor instance being initialized
          */
-        init: function(editor) {
+        beforeInit: function(editor) {
             editor.ui.addMenuButton = function(menuButtonName, menuButtonDefinition) {
                 this.add(menuButtonName, CKEDITOR.UI_MENUBUTTON, menuButtonDefinition);
                 AlloyEditor.registerBridgeButton(menuButtonName, editor.__processingPlugin__.plugin.name);
