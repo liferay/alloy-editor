@@ -200,12 +200,12 @@
          * Returns the required plugin names needed for a given plugin
          * if it is already registered or an empty array.
          *
-         * @method getButtonFor
+         * @method getButtonsFrom
          * @param {String} pluginName The name of the plugin.
          * @return {Array} The names of the required plugins for the given plugin.
          * @static
          */
-        getButtonFor: function(pluginName) {
+        getButtonsFrom: function(pluginName) {
             return BRIDGE_BUTTONS[pluginName] || [];
         },
 
