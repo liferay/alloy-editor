@@ -214,20 +214,14 @@
          *
          * @method registerBridgeButton
          * @param {String} buttonName The name of the button.
+         * @param {String} pluginName The name of the plugin that registers the button.
          * @static
          */
-        registerBridgeButton: function(buttonName) {
-            var e = new Error();
-            // In IE 9 - IE 11, e = {number: 0, description: ''};
-            // so check the "stack" property
-            if (!e.stack) {
-                return;
-            }
-
-            var pluginName = /plugins\/(.*)\/plugin.js/.exec(e.stack)[1];
+        registerBridgeButton: function(buttonName, pluginName) {
             if (!BRIDGE_BUTTONS[pluginName]) {
                 BRIDGE_BUTTONS[pluginName] = [];
             }
+
             BRIDGE_BUTTONS[pluginName].push(buttonName);
         }
     };
