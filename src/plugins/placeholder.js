@@ -22,7 +22,6 @@
 
     CKEDITOR.plugins.add(
         'ae_placeholder', {
-
             /**
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
              * The function registers a 'blur' and 'contentDom' event listeners.
@@ -31,6 +30,7 @@
              * @param {Object} editor The current editor instance
              */
             init: function(editor) {
+                CKEDITOR.addCss('.' + editor.config.placeholderClass + '{min-height:1.5em;}.' + editor.config.placeholderClass + ':not(:focus):before { content: attr(data-placeholder); position: absolute;}');
                 editor.on('blur', this._checkEmptyData, this);
                 editor.on('change', this._checkEmptyData, this);
                 editor.on('focus', this._removePlaceholderClass, this);
