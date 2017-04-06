@@ -27,7 +27,7 @@
 
                         originalPluginMethod.call(this, editor);
 
-                        delete editor.__processingPlugin__;
+                        editor.__processingPlugin__ = null;
                     };
                 });
             }
