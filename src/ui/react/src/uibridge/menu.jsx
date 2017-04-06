@@ -26,7 +26,7 @@
          * @method init
          * @param {Object} editor The CKEditor instance being initialized
          */
-        init: function (editor) {
+        beforeInit: function (editor) {
             // Do nothing if the real menu plugin is present
             if (CKEDITOR.plugins.get('menu')) {
                 return;

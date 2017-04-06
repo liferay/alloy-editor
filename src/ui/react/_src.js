@@ -2,6 +2,7 @@ module.exports = {
     ui: [
         'core/debounce.js',
         'core/link.js',
+        'core/plugins.js',
         'core/selection-region.js',
         'core/table.js',
         'core/tools.js',
