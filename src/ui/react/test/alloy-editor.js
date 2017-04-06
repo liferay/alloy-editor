@@ -24,6 +24,13 @@
         });
     };
 
+    var doTestIE = function() {
+        if (!CKEDITOR.env.ie) {
+            this.skip();
+        }
+        return;
+    };
+
     describe('AlloyEditor', function() {
         this.timeout(35000);
 
@@ -279,6 +286,26 @@
                 assert.property(AlloyEditor, 'Strings');
                 done();
             }, 50);
+        });
+
+        describe('Plugin ae_addimages_ie', function (done) {
+            this.timeout(35000);
+
+            beforeEach(function(done) {
+                initEditor.call(this, done, {
+                    extraPlugins: 'ae_dragresize'
+                });
+            });
+
+            afterEach(function() {
+                cleanUpEditor.call(this);
+            });
+
+            it('should use it instead of ae_dragresize when browsers are IE', function() {
+                doTestIE.call(this);
+
+                assert.isTrue(this.alloyEditor.get('nativeEditor').config.extraPlugins.indexOf('ae_dragresize_ie') >= 0);
+            });
         });
     });
 }());
