@@ -200,13 +200,18 @@
          * Returns the required plugin names needed for a given plugin
          * if it is already registered or an empty array.
          *
-         * @method getButtonsFrom
-         * @param {String} pluginName The name of the plugin.
-         * @return {Array} The names of the required plugins for the given plugin.
+         * @method getButtons
+         * @param {Array} buttons An array of buttons or plugin names.
+         * @return {Function} A function that can be invoked to resolve the requested button names.
          * @static
          */
-        getButtonsFrom: function(pluginName) {
-            return BRIDGE_BUTTONS[pluginName] || [];
+        getButtons: function(buttons) {
+            return function() {
+                return buttons.reduce(function(acc, val) {
+                    val = BRIDGE_BUTTONS[val] || [val];
+                    return acc.concat(val);
+                }, []);
+            };
         },
 
         /**
