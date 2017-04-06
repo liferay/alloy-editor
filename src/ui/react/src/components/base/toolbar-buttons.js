@@ -23,6 +23,10 @@
             var nativeEditor = this.props.editor.get('nativeEditor');
             var buttonCfg = nativeEditor.config.buttonCfg || {};
 
+            if (AlloyEditor.Lang.isFunction(buttons)) {
+                buttons = buttons.call(this) || [];
+            }
+
             var toolbarButtons = this.filterExclusive(
                     buttons.filter(function(button) {
                         return button && (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
