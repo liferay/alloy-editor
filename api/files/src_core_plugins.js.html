@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/base/toolbar-buttons.js - alloyeditor</title>
+    <title>src/core/plugins.js - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -177,7 +177,7 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/base/toolbar-buttons.js</code></h1>
+                              <h1><small>File</small> <code>src/core/plugins.js</code></h1>
                             </div>
                             
                             <div class="file">
@@ -186,74 +186,66 @@
                                 &#x27;use strict&#x27;;
                             
                                 /**
-                                 * ToolbarButtons is a mixin which provides a list of buttons which have to be
-                                 * displayed on the current toolbar depending on user preferences and given state.
+                                 * Wraps each of the plugin lifecycle methods in a closure that will
+                                 * set up the editor.__processingPlugin__ variable so it can be globally
+                                 * accessed exposing the plugin being processed and the lifecycle phase
+                                 * in which it is happening
                                  *
-                                 * @class ToolbarButtons
+                                 * @private
+                                 * @method wrapPluginLifecycle
+                                 * @param {Object} plugin The plugin to wrap lifecycle methods
                                  */
-                                var ToolbarButtons = {
-                                    /**
-                                     * Analyzes the current selection and the buttons exclusive mode value to figure out which
-                                     * buttons should be present in a given state.
-                                     *
-                                     * @method getToolbarButtons
-                                     * @param {Array} buttons The buttons could be shown, prior to the state filtering.
-                                     * @param {Object} additionalProps Additional props that should be passed down to the buttons.
-                                     * @return {Array} An Array which contains the buttons that should be rendered.
-                                     */
-                                    getToolbarButtons: function(buttons, additionalProps) {
-                                        var buttonProps = {};
+                                var wrapPluginLifecycle = function(plugin) {
+                                    var methods = [&#x27;beforeInit&#x27;, &#x27;init&#x27;, &#x27;afterInit&#x27;];
                             
-                                        var nativeEditor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                                        var buttonCfg = nativeEditor.config.buttonCfg || {};
+                                    methods.forEach(function(methodName) {
+                                        if (plugin[methodName]) {
+                                            plugin[methodName] = CKEDITOR.tools.override(plugin[methodName], function(originalPluginMethod) {
+                                                var payload = {
+                                                    phase: methodName,
+                                                    plugin: plugin
+                                                };
                             
-                                        if (AlloyEditor.Lang.isFunction(buttons)) {
-                                            buttons = buttons.call(this) || [];
+                                                return function(editor) {
+                                                    editor.__processingPlugin__ = payload;
+                            
+                                                    originalPluginMethod.call(this, editor);
+                            
+                                                    editor.__processingPlugin__ = null;
+                                                };
+                                            });
                                         }
-                            
-                                        var toolbarButtons = this.filterExclusive(
-                                                buttons.filter(function(button) {
-                                                    return button &amp;&amp; (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
-                                                })
-                                                .map(function(button) {
-                                                    if (AlloyEditor.Lang.isString(button)) {
-                                                        buttonProps[button]= buttonCfg[button];
-                                                        button = AlloyEditor.Buttons[button];
-                                                    } else if (AlloyEditor.Lang.isString(button.name)) {
-                                                        buttonProps[AlloyEditor.Buttons[button.name].key] = CKEDITOR.tools.merge(buttonCfg[button], button.cfg);
-                                                        button = AlloyEditor.Buttons[button.name];
-                                                    }
-                            
-                                                    return button;
-                                                })
-                                            )
-                                            .map(function(button) {
-                                                var props = this.mergeExclusiveProps({
-                                                    editor: this.props.editor,
-                                                    key: button.key,
-                                                    tabKey: button.key,
-                                                    tabIndex: (this.props.trigger &amp;&amp; this.props.trigger.props.tabKey === button.key) ? 0 : -1,
-                                                    trigger: this.props.trigger
-                                                }, button.key);
-                            
-                                                props = this.mergeDropdownProps(props, button.key);
-                            
-                                                if (additionalProps) {
-                                                    props = CKEDITOR.tools.merge(props, additionalProps);
-                                                }
-                            
-                                                props = CKEDITOR.tools.merge(props, buttonProps[button.key]);
-                            
-                                                return React.createElement(button, props);
-                                            }, this);
-                            
-                                        return toolbarButtons;
-                                    }
+                                    });
                                 };
                             
-                                AlloyEditor.ToolbarButtons = ToolbarButtons;
-                            }());
+                                /**
+                                 * Overrides CKEDITOR.plugins.load method so we can extend the lifecycle methods of
+                                 * the loaded plugins to add some metainformation about the plugin being processed
+                                 *
+                                 * @static
+                                 * @method load
+                            	 * @param {String/Array} names The name of the resource to load. It may be a
+                            	 * string with a single resource name, or an array with several names.
+                            	 * @param {Function} callback A function to be called when all resources
+                            	 * are loaded. The callback will receive an array containing all loaded names.
+                            	 * @param {Object} [scope] The scope object to be used for the callback call.
+                                 */
+                                CKEDITOR.plugins.load = CKEDITOR.tools.override(CKEDITOR.plugins.load, function(pluginsLoad){
+                                    // Wrap original load function so we can transform the plugin input parameter
+                                    // before passing it down to the original callback
+                                    return function(names, callback, scope) {
+                                        pluginsLoad.call(this, names, function(plugins) {
+                                            if (callback) {
+                                                Object.keys(plugins).forEach(function(pluginName) {
+                                                    wrapPluginLifecycle(plugins[pluginName]);
+                                                });
                             
+                                                callback.call(scope, plugins);
+                                            }
+                                        });
+                                    };
+                                });
+                            }());
                                 </pre>
                             </div>
                         </div>

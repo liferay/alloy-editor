@@ -283,6 +283,15 @@
                                                             <a href="#method_isSelectionEmpty">isSelectionEmpty</a>
                             
                                                         </li>
+                                                        <li class="index-item method">
+                                                            <a href="#method_load">load</a>
+                            
+                                                                <span class="flag static">static</span>
+                                                        </li>
+                                                        <li class="index-item method private">
+                                                            <a href="#method_wrapPluginLifecycle">wrapPluginLifecycle</a>
+                            
+                                                        </li>
                                                 </ul>
                                             </div>
                             
@@ -811,6 +820,149 @@
                                                 
                                                             </div>
                                                         </div>
+                                                
+                                                </div>
+                                                <div id="method_load" class="method item">
+                                                    <h3 class="name"><code>load</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>names</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>callback</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code class="optional">[scope]</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                        <span class="flag static">static</span>
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_core_plugins.js.html#l37"><code>src&#x2F;core&#x2F;plugins.js:37</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Overrides CKEDITOR.plugins.load method so we can extend the lifecycle methods of
+                                                the loaded plugins to add some metainformation about the plugin being processed</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">names</code>
+                                                                        <span class="type">String/Array</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The name of the resource to load. It may be a
+                                                string with a single resource name, or an array with several names.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">callback</code>
+                                                                        <span class="type">Function</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>A function to be called when all resources
+                                                are loaded. The callback will receive an array containing all loaded names.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name optional">[scope]</code>
+                                                                        <span class="type">Object</span>
+                                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The scope object to be used for the callback call.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method_wrapPluginLifecycle" class="method item private">
+                                                    <h3 class="name"><code>wrapPluginLifecycle</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>plugin</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag private">private</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_core_plugins.js.html#l4"><code>src&#x2F;core&#x2F;plugins.js:4</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Wraps each of the plugin lifecycle methods in a closure that will
+                                                set up the editor.<strong>processingPlugin</strong> variable so it can be globally
+                                                accessed exposing the plugin being processed and the lifecycle phase
+                                                in which it is happening</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">plugin</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The plugin to wrap lifecycle methods</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
                                                 
                                                 </div>
                                         </div>
