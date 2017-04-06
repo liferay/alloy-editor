@@ -3,6 +3,9 @@
 
     /**
      * An object containing all currently registered plugins in AlloyEditor.
+     *
+     * @property
+     * @type {Object}
      */
     var BRIDGE_BUTTONS = {};
 
@@ -10,7 +13,6 @@
      * AlloyEditor static object.
      *
      * @class AlloyEditor
-     * @type {Object}
      */
     var AlloyEditor = {
         /**
@@ -237,7 +239,7 @@
 
     if (typeof window !== 'undefined') {
         window.AlloyEditor = AlloyEditor;
-    } else if(typeof global !== 'undefined') {
+    } else if (typeof global !== 'undefined') {
         global.AlloyEditor = AlloyEditor;
     } else if (typeof self !== 'undefined') {
         self.AlloyEditor = AlloyEditor;
