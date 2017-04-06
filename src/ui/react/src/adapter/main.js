@@ -2,6 +2,11 @@
     'use strict';
 
     /**
+     * An object containing all currently registered plugins in AlloyEditor.
+     */
+    var BRIDGE_BUTTONS = {};
+
+    /**
      * AlloyEditor static object.
      *
      * @class AlloyEditor
@@ -182,7 +187,7 @@
          * @type {Object}
          * @static
          */
-        Toolbars: {}
+        Toolbars: {},
 
         /**
          * Fired when AlloyEditor detects the browser language and loads the corresponding language file. Once this event
@@ -190,6 +195,40 @@
          *
          * @event languageResourcesLoaded
          */
+
+        /**
+         * Returns the required plugin names needed for a given plugin
+         * if it is already registered or an empty array.
+         *
+         * @method getButtons
+         * @param {Array} buttons An array of buttons or plugin names.
+         * @return {Function} A function that can be invoked to resolve the requested button names.
+         * @static
+         */
+        getButtons: function(buttons) {
+            return function() {
+                return buttons.reduce(function(acc, val) {
+                    val = BRIDGE_BUTTONS[val] || [val];
+                    return acc.concat(val);
+                }, []);
+            };
+        },
+
+        /**
+         * Register a button and try to get its required plugins.
+         *
+         * @method registerBridgeButton
+         * @param {String} buttonName The name of the button.
+         * @param {String} pluginName The name of the plugin that registers the button.
+         * @static
+         */
+        registerBridgeButton: function(buttonName, pluginName) {
+            if (!BRIDGE_BUTTONS[pluginName]) {
+                BRIDGE_BUTTONS[pluginName] = [];
+            }
+
+            BRIDGE_BUTTONS[pluginName].push(buttonName);
+        }
     };
 
     if (typeof module !== 'undefined' && typeof module.exports === 'object') {

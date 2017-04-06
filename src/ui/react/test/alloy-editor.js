@@ -280,5 +280,40 @@
                 done();
             }, 50);
         });
+
+        describe('getButtons API', function() {
+            beforeEach(function(done) {
+                initEditor.call(this, done);
+            });
+
+            afterEach(function() {
+                cleanUpEditor.call(this);
+            });
+
+            it('should return a function that returns a buttons array when invoked', function() {
+                var buttonsFn = AlloyEditor.getButtons([]);
+                var buttons = buttonsFn.call(this);
+
+                assert.isFunction(buttonsFn);
+                assert.isArray(buttons);
+            });
+
+            it('should expand registered bridged plugin buttons', function() {
+                AlloyEditor.registerBridgeButton('bar', 'foo');
+                AlloyEditor.registerBridgeButton('baz', 'foo');
+
+                var buttons = AlloyEditor.getButtons(['foo']).call(this);
+
+                assert.isArray(buttons);
+                assert.sameMembers(['bar', 'baz'], buttons);
+            });
+
+            it('should not modify the elements that are not bridged', function() {
+                var buttons = AlloyEditor.getButtons(['foo2', 'bar2']).call(this);
+
+                assert.isArray(buttons);
+                assert.sameMembers(['foo2', 'bar2'], buttons);
+            });
+        });
     });
 }());
