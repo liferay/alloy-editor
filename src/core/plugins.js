@@ -52,11 +52,9 @@
         return function(names, callback, scope) {
             pluginsLoad.call(this, names, function(plugins) {
                 if (callback) {
-                    // Iterate over plugins in the same way the callback will do, for consistency,
-                    // and wrap all plugins lifecycles
-                    for (var pluginName in plugins) {
+                    Object.keys(plugins).forEach(function(pluginName) {
                         wrapPluginLifecycle(plugins[pluginName]);
-                    }
+                    });
 
                     callback.call(scope, plugins);
                 }
