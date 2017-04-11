@@ -96,7 +96,9 @@
                 if (AlloyEditor.Strings) {
                     setTimeout(callback, 0);
                 } else {
-                    AlloyEditor.once('languageResourcesLoaded', callback);
+                    AlloyEditor.once('languageResourcesLoaded', function() {
+                        setTimeout(callback, 0);
+                    });
                 }
             }
 
