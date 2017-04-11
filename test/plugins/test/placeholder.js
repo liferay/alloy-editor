@@ -2,12 +2,12 @@
     'use strict';
 
     var assert = chai.assert;
-    var needsBrFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
+    var brFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
 
     var expectedEmptyValue = {
-        1: ['<p>' + needsBrFiller + '</p>'],
-        2: ['', ' ', needsBrFiller],
-        3: ['<div>' + needsBrFiller + '</div>']
+        1: ['<p>' + brFiller + '</p>'],
+        2: ['', ' ', brFiller],
+        3: ['<div>' + brFiller + '</div>']
     };
 
     var placeholderClass = 'ae-placeholder';
@@ -18,7 +18,13 @@
         describe('when CKEditor enterMode is CKEDITOR_ENTER_P (1)', function() {
 
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {enterMode: CKEDITOR.ENTER_P, extraPlugins: 'ae_placeholder', placeholderClass: placeholderClass}, {'data-placeholder': 'This is placeholder'});
+                Utils.createCKEditor.call(this, done, {
+                    enterMode: CKEDITOR.ENTER_P,
+                    extraPlugins: 'ae_placeholder',
+                    placeholderClass: placeholderClass
+                }, {
+                    'data-placeholder': 'This is placeholder'
+                });
             });
 
             after(Utils.destroyCKEditor);
@@ -40,7 +46,6 @@
 
                 assert.isTrue(expectedEmptyValue[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
                 assert.isTrue(this.nativeEditor.element.hasClass(placeholderClass));
-
             });
 
             it('should keep the value when input is blurred and input has content', function() {
@@ -93,9 +98,14 @@
         });
 
         describe('when CKEditor enterMode is CKEDITOR_ENTER_BR (2)', function() {
-
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {enterMode: CKEDITOR.ENTER_BR, extraPlugins: 'ae_placeholder', placeholderClass: 'ae-placeholder'}, {'data-placeholder': 'This is placeholder'});
+                Utils.createCKEditor.call(this, done, {
+                    enterMode: CKEDITOR.ENTER_BR,
+                    extraPlugins: 'ae_placeholder',
+                    placeholderClass: 'ae-placeholder'
+                }, {
+                    'data-placeholder': 'This is placeholder'
+                });
             });
 
             after(Utils.destroyCKEditor);
@@ -174,9 +184,14 @@
         });
 
         describe('when CKEditor enterMode is CKEDITOR_ENTER_DIV (3)', function() {
-
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {enterMode: CKEDITOR.ENTER_DIV, extraPlugins: 'ae_placeholder', placeholderClass: 'ae-placeholder'}, {'data-placeholder': 'This is placeholder'});
+                Utils.createCKEditor.call(this, done, {
+                    enterMode: CKEDITOR.ENTER_DIV,
+                    extraPlugins: 'ae_placeholder',
+                    placeholderClass: 'ae-placeholder'
+                }, {
+                    'data-placeholder': 'This is placeholder'
+                });
             });
 
             after(Utils.destroyCKEditor);
@@ -251,7 +266,6 @@
                 this.nativeEditor.fire('blur');
                 assert.isFalse(this.nativeEditor.element.hasClass(placeholderClass));
             });
-
         });
     });
 }());

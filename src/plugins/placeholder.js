@@ -5,19 +5,19 @@
         return;
     }
 
-
     /**
-     * CKEDITOR enterMode config set the behaviour of paragrahps
+     * CKEDITOR enterMode config set the behavior of paragraphs
      * When the content is empty CKEDITOR keeps the enterMode string
      * into the content
+     * @property
+     * @type {string}
      */
-
-    var needsBrFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
+    var brFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
 
     var enterModeEmptyValue = {
-        1: ['<p>' + needsBrFiller + '</p>'],
-        2: ['', ' ', needsBrFiller],
-        3: ['<div>' + needsBrFiller + '</div>']
+        1: ['<p>' + brFiller + '</p>'],
+        2: ['', ' ', brFiller],
+        3: ['<div>' + brFiller + '</div>']
     };
 
     /**
@@ -28,7 +28,7 @@
      */
 
     /**
-     * Specifies the placeholder class which have to be aded to editor when editor is not focuced.
+     * Specifies the placeholder class which have to be aded to editor when editor is not focused.
      *
      * @attribute placeholderClass
      * @default ae_placeholder
