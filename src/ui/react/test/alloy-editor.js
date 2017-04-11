@@ -288,23 +288,33 @@
             }, 50);
         });
 
-        describe('Plugin ae_addimages_ie', function (done) {
+        describe('in IE browsers', function () {
             this.timeout(35000);
 
-            beforeEach(function(done) {
-                initEditor.call(this, done, {
-                    extraPlugins: 'ae_dragresize'
-                });
+            beforeEach(function() {
+                doTestIE.call(this);
             });
 
             afterEach(function() {
                 cleanUpEditor.call(this);
             });
 
-            it('should use it instead of ae_dragresize when browsers are IE', function() {
+            it('should use the ae_dragresize_ie plugin instead of ae_dragresize by default', function(done) {
                 doTestIE.call(this);
 
-                assert.isTrue(this.alloyEditor.get('nativeEditor').config.extraPlugins.indexOf('ae_dragresize_ie') >= 0);
+                initEditor.call(this, function() {
+                    assert.isTrue(this.alloyEditor.get('nativeEditor').config.extraPlugins.indexOf('ae_dragresize_ie') >= 0);
+                    done();
+                }.bind(this));
+            });
+
+            it('should use the ae_dragresize_ie plugin even if the ae_dragresize is passed in the editor configuration', function(done) {
+                initEditor.call(this, function() {
+                    assert.isTrue(this.alloyEditor.get('nativeEditor').config.extraPlugins.indexOf('ae_dragresize_ie') >= 0);
+                    done();
+                }.bind(this), {
+                    extraPlugins: 'ae_dragresize'
+                });
             });
         });
     });
