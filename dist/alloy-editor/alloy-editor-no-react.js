@@ -5085,6 +5085,21 @@ CKEDITOR.config.image2_captionedClass = 'image';
     }
 
     /**
+     * CKEDITOR enterMode config set the behavior of paragraphs
+     * When the content is empty CKEDITOR keeps the enterMode string
+     * into the content
+     * @property
+     * @type {string}
+     */
+    var brFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
+
+    var enterModeEmptyValue = {
+        1: ['<p>' + brFiller + '</p>'],
+        2: ['', ' ', brFiller],
+        3: ['<div>' + brFiller + '</div>']
+    };
+
+    /**
      * CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
      * is no content to the editor, there will be hint to the user.
      *
@@ -5092,7 +5107,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
      */
 
     /**
-     * Specifies the placeholder class which have to be aded to editor when editor is not focuced.
+     * Specifies the placeholder class which have to be aded to editor when editor is not focused.
      *
      * @attribute placeholderClass
      * @default ae_placeholder
@@ -5128,7 +5143,13 @@ CKEDITOR.config.image2_captionedClass = 'image';
 
             var editableNode = editor.editable();
 
-            if (editableNode.$.innerText.trim() === '') {
+            var innerHtml = editableNode.$.innerHTML.trim();
+
+            var isEmpty = enterModeEmptyValue[editor.config.enterMode].some(function (element) {
+                return innerHtml === element;
+            });
+
+            if (isEmpty) {
                 editableNode.addClass(editor.config.placeholderClass);
             } else {
                 editableNode.removeClass(editor.config.placeholderClass);

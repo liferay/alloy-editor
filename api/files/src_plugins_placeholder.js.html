@@ -190,6 +190,21 @@
                                 }
                             
                                 /**
+                                 * CKEDITOR enterMode config set the behavior of paragraphs
+                                 * When the content is empty CKEDITOR keeps the enterMode string
+                                 * into the content
+                                 * @property
+                                 * @type {string}
+                                 */
+                                var brFiller = CKEDITOR.env.needsBrFiller ? &#x27;&lt;br&gt;&#x27; : &#x27;&#x27;;
+                            
+                                var enterModeEmptyValue = {
+                                    1: [&#x27;&lt;p&gt;&#x27; + brFiller + &#x27;&lt;/p&gt;&#x27;],
+                                    2: [&#x27;&#x27;, &#x27; &#x27;, brFiller],
+                                    3: [&#x27;&lt;div&gt;&#x27; + brFiller + &#x27;&lt;/div&gt;&#x27;]
+                                };
+                            
+                                /**
                                  * CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
                                  * is no content to the editor, there will be hint to the user.
                                  *
@@ -197,7 +212,7 @@
                                  */
                             
                                 /**
-                                 * Specifies the placeholder class which have to be aded to editor when editor is not focuced.
+                                 * Specifies the placeholder class which have to be aded to editor when editor is not focused.
                                  *
                                  * @attribute placeholderClass
                                  * @default ae_placeholder
@@ -234,7 +249,13 @@
                             
                                             var editableNode = editor.editable();
                             
-                                            if (editableNode.$.innerText.trim() === &#x27;&#x27;) {
+                                            var innerHtml = editableNode.$.innerHTML.trim();
+                            
+                                            var isEmpty = enterModeEmptyValue[editor.config.enterMode].some(function(element) {
+                                                return innerHtml === element;
+                                            });
+                            
+                                            if (isEmpty) {
                                                 editableNode.addClass(editor.config.placeholderClass);
                                             } else {
                                                 editableNode.removeClass(editor.config.placeholderClass);
