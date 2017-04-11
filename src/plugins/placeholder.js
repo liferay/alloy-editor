@@ -14,7 +14,7 @@
 
     var needsBrFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
 
-    var enterModeString = {
+    var enterModeEmptyValue = {
         1: ['<p>' + needsBrFiller + '</p>'],
         2: ['', ' ', needsBrFiller],
         3: ['<div>' + needsBrFiller + '</div>']
@@ -65,22 +65,13 @@
 
                 var editableNode = editor.editable();
 
-                var enterMode = editor.config.enterMode;
-
                 var innerHtml = editableNode.$.innerHTML.trim();
 
-                var enterModeStrings = enterModeString[enterMode];
+                var isEmpty = enterModeEmptyValue[editor.config.enterMode].some(function(element) {
+                    return innerHtml === element;
+                });
 
-                var empty = false;
-
-                var count = 0;
-
-                while (!empty && count < enterModeStrings.length) {
-                    empty = innerHtml === enterModeStrings[count];
-                    count++;
-                }
-
-                if (empty) {
+                if (isEmpty) {
                     editableNode.addClass(editor.config.placeholderClass);
                 } else {
                     editableNode.removeClass(editor.config.placeholderClass);
