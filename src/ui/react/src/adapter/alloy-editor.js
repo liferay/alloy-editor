@@ -60,9 +60,9 @@
 
             }.bind(this));
 
-            AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
-
             this._editor = editor;
+
+            AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
         },
 
         /**
