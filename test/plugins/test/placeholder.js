@@ -4,7 +4,7 @@
     var assert = chai.assert;
     var needsBrFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
 
-    var enterModeString = {
+    var expectedEmptyValue = {
         1: ['<p>' + needsBrFiller + '</p>'],
         2: ['', ' ', needsBrFiller],
         3: ['<div>' + needsBrFiller + '</div>']
@@ -15,11 +15,10 @@
     describe('Placeholder', function() {
         this.timeout(35000);
 
-
-        describe('EnterMode 1 CKEDITOR config', function() {
+        describe('when CKEditor enterMode is CKEDITOR_ENTER_P (1)', function() {
 
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {enterMode: 1, extraPlugins: 'ae_placeholder', placeholderClass: placeholderClass}, {'data-placeholder': 'This is placeholder'});
+                Utils.createCKEditor.call(this, done, {enterMode: CKEDITOR.ENTER_P, extraPlugins: 'ae_placeholder', placeholderClass: placeholderClass}, {'data-placeholder': 'This is placeholder'});
             });
 
             after(Utils.destroyCKEditor);
@@ -31,7 +30,7 @@
             it('should assert the html value of the editor is the same as passed value on creating the instance', function() {
                 var html = this.nativeEditor.editable().getHtml().trim();
 
-                assert.isTrue(enterModeString[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
+                assert.isTrue(expectedEmptyValue[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
             });
 
             it('should not change the html value after the editor is blurred when its value is empty', function() {
@@ -39,7 +38,7 @@
 
                 this.nativeEditor.fire('blur');
 
-                assert.isTrue(enterModeString[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
+                assert.isTrue(expectedEmptyValue[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
                 assert.isTrue(this.nativeEditor.element.hasClass(placeholderClass));
 
             });
@@ -93,10 +92,10 @@
 
         });
 
-        describe('EnterMode 2 CKEDITOR config', function() {
+        describe('when CKEditor enterMode is CKEDITOR_ENTER_BR (2)', function() {
 
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {enterMode: 2, extraPlugins: 'ae_placeholder', placeholderClass: 'ae-placeholder'}, {'data-placeholder': 'This is placeholder'});
+                Utils.createCKEditor.call(this, done, {enterMode: CKEDITOR.ENTER_BR, extraPlugins: 'ae_placeholder', placeholderClass: 'ae-placeholder'}, {'data-placeholder': 'This is placeholder'});
             });
 
             after(Utils.destroyCKEditor);
@@ -108,7 +107,7 @@
             it('should assert the html value of the editor is the same as passed value on creating the instance', function() {
                 var html = this.nativeEditor.editable().getHtml().trim();
 
-                assert.isTrue(enterModeString[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
+                assert.isTrue(expectedEmptyValue[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
             });
 
             it('should not change the html value after the editor is blurred when its value is empty', function() {
@@ -116,7 +115,7 @@
 
                 this.nativeEditor.fire('blur');
 
-                assert.isTrue(enterModeString[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
+                assert.isTrue(expectedEmptyValue[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
                 assert.isTrue(this.nativeEditor.element.hasClass(placeholderClass));
 
             });
@@ -174,10 +173,10 @@
 
         });
 
-        describe('EnterMode 3 CKEDITOR config', function() {
+        describe('when CKEditor enterMode is CKEDITOR_ENTER_DIV (3)', function() {
 
             before(function(done) {
-                Utils.createCKEditor.call(this, done, {enterMode: 3, extraPlugins: 'ae_placeholder', placeholderClass: 'ae-placeholder'}, {'data-placeholder': 'This is placeholder'});
+                Utils.createCKEditor.call(this, done, {enterMode: CKEDITOR.ENTER_DIV, extraPlugins: 'ae_placeholder', placeholderClass: 'ae-placeholder'}, {'data-placeholder': 'This is placeholder'});
             });
 
             after(Utils.destroyCKEditor);
@@ -189,7 +188,7 @@
             it('should assert the html value of the editor is the same as passed value on creating the instance', function() {
                 var html = this.nativeEditor.editable().getHtml().trim();
 
-                assert.isTrue(enterModeString[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
+                assert.isTrue(expectedEmptyValue[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
             });
 
             it('should not change the html value after the editor is blurred when its value is empty', function() {
@@ -197,7 +196,7 @@
 
                 this.nativeEditor.fire('blur');
 
-                assert.isTrue(enterModeString[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
+                assert.isTrue(expectedEmptyValue[this.nativeEditor.config.enterMode].indexOf(html) >= 0);
                 assert.isTrue(this.nativeEditor.element.hasClass(placeholderClass));
 
             });
