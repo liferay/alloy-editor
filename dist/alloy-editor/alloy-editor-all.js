@@ -940,7 +940,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 if (AlloyEditor.Strings) {
                     setTimeout(callback, 0);
                 } else {
-                    AlloyEditor.once('languageResourcesLoaded', callback);
+                    AlloyEditor.once('languageResourcesLoaded', function () {
+                        setTimeout(callback, 0);
+                    });
                 }
             }
 
@@ -28252,9 +28254,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 editable.addClass('ae-editable');
             }.bind(this));
 
-            AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
-
             this._editor = editor;
+
+            AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
         },
 
         /**

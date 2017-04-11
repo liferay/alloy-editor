@@ -280,7 +280,9 @@
                                             if (AlloyEditor.Strings) {
                                                 setTimeout(callback, 0);
                                             } else {
-                                                AlloyEditor.once(&#x27;languageResourcesLoaded&#x27;, callback);
+                                                AlloyEditor.once(&#x27;languageResourcesLoaded&#x27;, function() {
+                                                    setTimeout(callback, 0);
+                                                });
                                             }
                                         }
                             
