@@ -227,12 +227,12 @@
                             
                                         editor.config.selectionKeystrokes = this.get(&#x27;selectionKeystrokes&#x27;);
                             
+                                        AlloyEditor.Lang.mix(editor.config, config);
+                            
                                         if (CKEDITOR.env.ie) {
                                             editor.config.extraPlugins = editor.config.extraPlugins.replace(&#x27;ae_dragresize&#x27;, &#x27;ae_dragresize_ie&#x27;);
                                             editor.config.removePlugins = editor.config.removePlugins.replace(&#x27;ae_dragresize&#x27;, &#x27;ae_dragresize_ie&#x27;);
                                         }
-                            
-                                        AlloyEditor.Lang.mix(editor.config, config);
                             
                                         editor.once(&#x27;contentDom&#x27;, function() {
                             

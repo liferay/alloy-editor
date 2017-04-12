@@ -27438,12 +27438,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             editor.config.selectionKeystrokes = this.get('selectionKeystrokes');
 
+            AlloyEditor.Lang.mix(editor.config, config);
+
             if (CKEDITOR.env.ie) {
                 editor.config.extraPlugins = editor.config.extraPlugins.replace('ae_dragresize', 'ae_dragresize_ie');
                 editor.config.removePlugins = editor.config.removePlugins.replace('ae_dragresize', 'ae_dragresize_ie');
             }
-
-            AlloyEditor.Lang.mix(editor.config, config);
 
             editor.once('contentDom', function () {
 
