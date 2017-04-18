@@ -313,7 +313,7 @@
             assert.strictEqual(data, '<p>update the url of a <a target="">link</a>.</p>');
         });
 
-        it('should not add default protocol when updating a link', function() {
+        it('should add default protocol when updating a link', function() {
             if (CKEDITOR.env.ie) {
                 // FIXME: the functionality works, but we were unable to make these tests working on IE.
                 // Please help.
@@ -334,7 +334,7 @@
                 compatHtml: true
             });
 
-            assert.strictEqual(data, '<p>update the url of a <a href="new.com" target="_blank">link</a>.</p>');
+            assert.strictEqual(data, '<p>update the url of a <a href="http://new.com" target="_blank">link</a>.</p>');
         });
 
         it('should position the cursor before the next word if modifySelection.advance is set to true', function() {
