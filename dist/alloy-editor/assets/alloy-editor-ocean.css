@@ -90,92 +90,104 @@
 	content: "\";
 }
 
-.ae-icon-h1:before {
+.ae-icon-folder:before {
 	content: "\";
 }
 
-.ae-icon-h2:before {
+.ae-icon-h1:before {
 	content: "\";
 }
 
-.ae-icon-image:before {
+.ae-icon-h2:before {
 	content: "\";
 }
 
-.ae-icon-indent-block:before {
+.ae-icon-image:before {
 	content: "\";
 }
 
-.ae-icon-italic:before {
+.ae-icon-indent-block:before {
 	content: "\";
 }
 
-.ae-icon-link:before {
+.ae-icon-italic:before {
 	content: "\";
 }
 
-.ae-icon-numbered-list:before {
+.ae-icon-link:before {
 	content: "\";
 }
 
-.ae-icon-ok:before {
+.ae-icon-numbered-list:before {
 	content: "\";
 }
 
-.ae-icon-outdent-block:before {
+.ae-icon-ok:before {
 	content: "\";
 }
 
-.ae-icon-quote:before {
+.ae-icon-outdent-block:before {
 	content: "\";
 }
 
-.ae-icon-remove:before {
+.ae-icon-quote:before {
 	content: "\";
 }
 
-.ae-icon-removeformat:before {
+.ae-icon-redo:before {
 	content: "\";
 }
 
-.ae-icon-row:before {
+.ae-icon-remove:before {
 	content: "\";
 }
 
-.ae-icon-separator:before {
+.ae-icon-removeformat:before {
 	content: "\";
 }
 
-.ae-icon-strike:before {
+.ae-icon-row:before {
 	content: "\";
 }
 
-.ae-icon-subscript:before {
+.ae-icon-separator:before {
 	content: "\";
 }
 
-.ae-icon-superscript:before {
+.ae-icon-strike:before {
 	content: "\";
 }
 
-.ae-icon-table:before {
+.ae-icon-subscript:before {
 	content: "\";
 }
 
-.ae-icon-twitter:before {
+.ae-icon-superscript:before {
 	content: "\";
 }
 
-.ae-icon-underline:before {
+.ae-icon-table:before {
 	content: "\";
 }
 
-.ae-icon-unlink:before {
+.ae-icon-twitter:before {
 	content: "\";
 }
 
-.ae-icon-video:before {
+.ae-icon-underline:before {
 	content: "\";
+}
+
+.ae-icon-undo:before {
+	content: "\";
+}
+
+.ae-icon-unlink:before {
+	content: "\";
+}
+
+.ae-icon-video:before {
+	content: "\";
 }
 @charset "UTF-8";
 /** GENERAL VARIABLES */
@@ -556,7 +568,7 @@
 .ae-twitter-link {
   background-color: #f8f8f8; }
   .ae-twitter-link:after {
-    content: "";
+    content: "";
     font-family: alloyeditor-ocean; }
 
 .ae-ui .ae-arrow-box.ae-arrow-box-bottom:after {
