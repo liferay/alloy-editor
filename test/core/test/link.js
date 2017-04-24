@@ -396,7 +396,6 @@
         });
 
         describe('when appendProtocol is false', function() {
-
             it('should not add default protocol when creating a link', function() {
                 var link = new CKEDITOR.Link(
                     this.nativeEditor,
@@ -452,12 +451,9 @@
 
                 var linkEl = link.getFromSelection();
 
-                link.update(
-                  {
+                link.update({
                     href: 'test.com'
-                  },
-                  linkEl
-                );
+                }, linkEl);
 
                 var data = bender.tools.getData(this.nativeEditor, {
                     fixHtml: true,
