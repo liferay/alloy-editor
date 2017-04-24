@@ -21581,15 +21581,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
          */
         update: function update(attrs, link, modifySelection) {
+            var instance = this;
+
             link = link || this.getFromSelection();
 
             if (typeof attrs === 'string') {
+                var uri = instance._getCompleteURI(attrs);
+
                 link.setAttributes({
-                    'data-cke-saved-href': attrs,
-                    href: attrs
+                    'data-cke-saved-href': uri,
+                    href: uri
                 });
             } else if ((typeof attrs === 'undefined' ? 'undefined' : _typeof(attrs)) === 'object') {
                 var removeAttrs = [];
+
                 var setAttrs = {};
 
                 Object.keys(attrs).forEach(function (key) {
@@ -21601,10 +21606,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         removeAttrs.push(key);
                     } else {
                         if (key === 'href') {
-                            setAttrs['data-cke-saved-href'] = attrs[key];
-                        }
+                            var uri = instance._getCompleteURI(attrs[key]);
 
-                        setAttrs[key] = attrs[key];
+                            setAttrs['data-cke-saved-href'] = uri;
+                            setAttrs[key] = uri;
+                        } else {
+                            setAttrs[key] = attrs[key];
+                        }
                     }
                 });
 
