@@ -60,6 +60,8 @@ var updateLangFiles = function(callback) {
     var langWalker = walk.walk(reactLangDir);
     langWalker.on('end', callback);
 
+    var defaultTranslations = require(path.join(langDir, 'en.json'));
+
     // Iterate over every existing lang file inside src/ui/react/lang/
     langWalker.on('file', function(root, fileStats, next) {
         var lang = path.basename(fileStats.name, '.js');
@@ -80,6 +82,10 @@ var updateLangFiles = function(callback) {
         }
 
         if (translations) {
+            Object.keys(defaultTranslations).forEach(function (key) {
+                AlloyEditor.Strings[key] = defaultTranslations[key];
+            });
+
             Object.keys(translations).forEach(function (key) {
                 AlloyEditor.Strings[key] = translations[key];
             });
