@@ -2420,11 +2420,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             snapToSize: snapToSize
         });
 
-        document.addEventListener('mousedown', function (e) {
+        var mouseDownListener = function mouseDownListener(e) {
             if (resizer.isHandle(e.target)) {
                 resizer.initDrag(e);
             }
-        }, false);
+        };
+
+        document.addEventListener('mousedown', mouseDownListener, false);
 
         function selectionChange() {
             var selection = editor.getSelection();
@@ -2480,6 +2482,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (isFirefox) {
                 document.execCommand('enableObjectResizing', false, true);
             }
+
+            document.removeEventListener('mousedown', mouseDownListener);
         });
 
         // Update the selection when the browser window is resized
