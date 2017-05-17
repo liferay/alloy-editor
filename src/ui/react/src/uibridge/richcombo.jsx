@@ -2,7 +2,7 @@
     'use strict';
 
     /* istanbul ignore if */
-    if(CKEDITOR.plugins.get('ae_richcombobridge')) {
+    if (CKEDITOR.plugins.get('ae_richcombobridge')) {
         return;
     }
 
@@ -44,8 +44,8 @@
     var generateRichComboBridge = function(richComboName, richComboDefinition, editor) {
         var RichComboBridge = AlloyEditor.Buttons[richComboName];
 
-        RICH_COMBO_DEFS[editor.name] =  RICH_COMBO_DEFS[editor.name] || {};
-        RICH_COMBO_DEFS[editor.name][richComboName] = RICH_COMBO_DEFS[editor.name][richComboName] || richComboDefinition;
+        RICH_COMBO_DEFS[editor.name] = RICH_COMBO_DEFS[editor.name] || {};
+        RICH_COMBO_DEFS[editor.name][richComboName] = RICH_COMBO_DEFS[editor.name][richComboName] || richComboDefinition;
         RICH_COMBO_DEFS[editor.name][richComboName].currentValue = undefined;
 
         if (!RichComboBridge) {

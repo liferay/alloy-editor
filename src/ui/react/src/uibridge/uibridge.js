@@ -2,7 +2,7 @@
     'use strict';
 
     /* istanbul ignore if */
-    if(CKEDITOR.plugins.get('ae_uibridge')) {
+    if (CKEDITOR.plugins.get('ae_uibridge')) {
         return;
     }
 
@@ -29,7 +29,7 @@
 
                 var typeHandler = this._.handlers[type];
 
-                if (typeHandler && typeHandler.add) {
+                if (typeHandler && typeHandler.add) {
                     typeHandler.add(name, definition, editor);
                 }
             };

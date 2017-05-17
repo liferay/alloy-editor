@@ -2,7 +2,7 @@
     'use strict';
 
     /* istanbul ignore if */
-    if(CKEDITOR.plugins.get('ae_menubuttonbridge')) {
+    if (CKEDITOR.plugins.get('ae_menubuttonbridge')) {
         return;
     }
 
@@ -108,7 +108,7 @@
                                 return null;
                             }
 
-                            var menuItemDefinition = menuItem.definition || menuItem;
+                            var menuItemDefinition = menuItem.definition || menuItem;
                             var menuItemState = items[key];
 
                             var className = 'ae-toolbar-element ' + (menuItemState === CKEDITOR.TRISTATE_ON ? 'active' : '');

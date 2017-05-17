@@ -2,7 +2,7 @@
     'use strict';
 
     /* istanbul ignore if */
-    if(CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
+    if (CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
         return;
     }
 
@@ -124,7 +124,7 @@
     };
 
     /* istanbul ignore else */
-    if (!CKEDITOR.plugins.get('panelmenubutton')) {
+    if (!CKEDITOR.plugins.get('panelmenubutton')) {
         CKEDITOR.UI_PANELBUTTON = 'panelmenubutton';
 
         CKEDITOR.plugins.add('panelmenubutton', {});
