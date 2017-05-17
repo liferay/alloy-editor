@@ -4629,7 +4629,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
 
     var PROVIDERS = ['youtube', 'twitter'];
 
-    CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = '//alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
+    CKEDITOR.DEFAULT_AE_EMBED_URL_TPL = 'http://alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
     CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL = '<div data-ae-embed-url="{url}"></div>';
     CKEDITOR.DEFAULT_AE_EMBED_DEFAULT_LINK_TPL = '<a href="{url}">{url}</a>';
     /**
