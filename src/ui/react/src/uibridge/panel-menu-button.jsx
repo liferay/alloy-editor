@@ -130,6 +130,13 @@
         CKEDITOR.plugins.add('panelmenubutton', {});
     }
 
+    /* istanbul ignore else */
+    if (!CKEDITOR.plugins.get('panelbutton')) {
+        CKEDITOR.UI_PANELBUTTON = 'panelbutton';
+
+        CKEDITOR.plugins.add('panelbutton', {});
+    }
+
     /**
      * CKEditor plugin that bridges the support offered by CKEditor PanelButton plugin. It takes over the
      * responsibility of registering and creating buttons via:
