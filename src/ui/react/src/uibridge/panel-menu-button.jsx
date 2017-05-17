@@ -117,6 +117,8 @@
                 })
             );
 
+            AlloyEditor.registerBridgeButton(panelMenuButtonName, editor.__processingPlugin__.plugin.name);
+
             AlloyEditor.Buttons[panelMenuButtonName] = PanelMenuButtonBridge;
         }
 
@@ -160,7 +162,6 @@
         beforeInit: function(editor) {
             editor.ui.addPanelMenuButton = function(panelMenuButtonName, panelMenuButtonDefinition) {
                 this.add(panelMenuButtonName, CKEDITOR.UI_PANELBUTTON, panelMenuButtonDefinition);
-                AlloyEditor.registerBridgeButton(panelMenuButtonName, editor.__processingPlugin__.plugin.name);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_PANELBUTTON, {
