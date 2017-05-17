@@ -31,6 +31,7 @@
 
                 if (typeHandler && typeHandler.add) {
                     typeHandler.add(name, definition, editor);
+                    AlloyEditor.registerBridgeButton(name, editor.__processingPlugin__.plugin.name);
                 }
             };
         }
