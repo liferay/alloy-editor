@@ -186,7 +186,7 @@
                                 &#x27;use strict&#x27;;
                             
                                 /* istanbul ignore if */
-                                if(CKEDITOR.plugins.get(&#x27;ae_richcombobridge&#x27;)) {
+                                if (CKEDITOR.plugins.get(&#x27;ae_richcombobridge&#x27;)) {
                                     return;
                                 }
                             
@@ -228,8 +228,8 @@
                                 var generateRichComboBridge = function(richComboName, richComboDefinition, editor) {
                                     var RichComboBridge = AlloyEditor.Buttons[richComboName];
                             
-                                    RICH_COMBO_DEFS[editor.name] =  RICH_COMBO_DEFS[editor.name] || {};
-                                    RICH_COMBO_DEFS[editor.name][richComboName] = RICH_COMBO_DEFS[editor.name][richComboName] || richComboDefinition;
+                                    RICH_COMBO_DEFS[editor.name] = RICH_COMBO_DEFS[editor.name] || {};
+                                    RICH_COMBO_DEFS[editor.name][richComboName] = RICH_COMBO_DEFS[editor.name][richComboName] || richComboDefinition;
                                     RICH_COMBO_DEFS[editor.name][richComboName].currentValue = undefined;
                             
                                     if (!RichComboBridge) {
