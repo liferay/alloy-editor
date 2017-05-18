@@ -314,6 +314,13 @@
                                     CKEDITOR.plugins.add(&#x27;panelmenubutton&#x27;, {});
                                 }
                             
+                                /* istanbul ignore else */
+                                if (!CKEDITOR.plugins.get(&#x27;panelbutton&#x27;)) {
+                                    CKEDITOR.UI_PANELBUTTON = &#x27;panelbutton&#x27;;
+                            
+                                    CKEDITOR.plugins.add(&#x27;panelbutton&#x27;, {});
+                                }
+                            
                                 /**
                                  * CKEditor plugin that bridges the support offered by CKEditor PanelButton plugin. It takes over the
                                  * responsibility of registering and creating buttons via:
@@ -337,7 +344,6 @@
                                     beforeInit: function(editor) {
                                         editor.ui.addPanelMenuButton = function(panelMenuButtonName, panelMenuButtonDefinition) {
                                             this.add(panelMenuButtonName, CKEDITOR.UI_PANELBUTTON, panelMenuButtonDefinition);
-                                            AlloyEditor.registerBridgeButton(panelMenuButtonName, editor.__processingPlugin__.plugin.name);
                                         };
                             
                                         editor.ui.addHandler(CKEDITOR.UI_PANELBUTTON, {

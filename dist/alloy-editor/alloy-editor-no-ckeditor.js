@@ -25990,7 +25990,6 @@ CKEDITOR.tools.buildTableMap = function (table) {
         beforeInit: function beforeInit(editor) {
             editor.ui.addButton = function (buttonName, buttonDefinition) {
                 this.add(buttonName, CKEDITOR.UI_BUTTON, buttonDefinition);
-                AlloyEditor.registerBridgeButton(buttonName, editor.__processingPlugin__.plugin.name);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_BUTTON, {
@@ -26184,7 +26183,6 @@ CKEDITOR.tools.buildTableMap = function (table) {
         beforeInit: function beforeInit(editor) {
             editor.ui.addMenuButton = function (menuButtonName, menuButtonDefinition) {
                 this.add(menuButtonName, CKEDITOR.UI_MENUBUTTON, menuButtonDefinition);
-                AlloyEditor.registerBridgeButton(menuButtonName, editor.__processingPlugin__.plugin.name);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_MENUBUTTON, {
@@ -26443,6 +26441,13 @@ CKEDITOR.tools.buildTableMap = function (table) {
         CKEDITOR.plugins.add('panelmenubutton', {});
     }
 
+    /* istanbul ignore else */
+    if (!CKEDITOR.plugins.get('panelbutton')) {
+        CKEDITOR.UI_PANELBUTTON = 'panelbutton';
+
+        CKEDITOR.plugins.add('panelbutton', {});
+    }
+
     /**
      * CKEditor plugin that bridges the support offered by CKEditor PanelButton plugin. It takes over the
      * responsibility of registering and creating buttons via:
@@ -26466,7 +26471,6 @@ CKEDITOR.tools.buildTableMap = function (table) {
         beforeInit: function beforeInit(editor) {
             editor.ui.addPanelMenuButton = function (panelMenuButtonName, panelMenuButtonDefinition) {
                 this.add(panelMenuButtonName, CKEDITOR.UI_PANELBUTTON, panelMenuButtonDefinition);
-                AlloyEditor.registerBridgeButton(panelMenuButtonName, editor.__processingPlugin__.plugin.name);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_PANELBUTTON, {
@@ -26712,7 +26716,6 @@ CKEDITOR.tools.buildTableMap = function (table) {
         beforeInit: function beforeInit(editor) {
             editor.ui.addRichCombo = function (richComboName, richComboDefinition) {
                 this.add(richComboName, CKEDITOR.UI_RICHCOMBO, richComboDefinition);
-                AlloyEditor.registerBridgeButton(richComboName, editor.__processingPlugin__.plugin.name);
             };
 
             editor.ui.addHandler(CKEDITOR.UI_RICHCOMBO, {
@@ -26763,6 +26766,7 @@ CKEDITOR.tools.buildTableMap = function (table) {
 
                 if (typeHandler && typeHandler.add) {
                     typeHandler.add(name, definition, editor);
+                    AlloyEditor.registerBridgeButton(name, editor.__processingPlugin__.plugin.name);
                 }
             };
         }
