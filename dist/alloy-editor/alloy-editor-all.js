@@ -29429,7 +29429,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         focus: function focus(event) {
             if (!event || this._isValidTarget(event.target)) {
-                if (this._descendants) {
+                if (this._descendants && this._descendants.length) {
                     var activeDescendantEl = this._descendants[this._activeDescendant];
                     // When user clicks with the mouse, the activeElement is already set and there
                     // is no need to focus it. Focusing of the active descendant (usually some button) is required
