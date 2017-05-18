@@ -97,7 +97,7 @@
                     // in case of keyboard navigation, because the focused element might be not the first button,
                     // but the div element, which contains the button.
                     if (document.activeElement !== activeDescendantEl && !this.props.focusFirstChild) {
-                        if (this._descendants.indexOf(document.activeElement) === -1) {
+                        if (activeDescendantEl && this._descendants.indexOf(document.activeElement) === -1) {
                             activeDescendantEl.focus();
                         }
                     }
