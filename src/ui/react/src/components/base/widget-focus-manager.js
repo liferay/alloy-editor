@@ -96,7 +96,7 @@
                     // is no need to focus it. Focusing of the active descendant (usually some button) is required
                     // in case of keyboard navigation, because the focused element might be not the first button,
                     // but the div element, which contains the button.
-                    if (document.activeElement !== activeDescendantEl && !this.props.focusFirstChild) {
+                    if (activeDescendantEl && document.activeElement !== activeDescendantEl && !this.props.focusFirstChild) {
                         if (this._descendants.indexOf(document.activeElement) === -1) {
                             activeDescendantEl.focus();
                         }
