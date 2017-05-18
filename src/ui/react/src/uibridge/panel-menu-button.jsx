@@ -117,6 +117,8 @@
                 })
             );
 
+            AlloyEditor.registerBridgeButton(panelMenuButtonName, editor.__processingPlugin__.plugin.name);
+
             AlloyEditor.Buttons[panelMenuButtonName] = PanelMenuButtonBridge;
         }
 
