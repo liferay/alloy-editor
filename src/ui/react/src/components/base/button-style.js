@@ -83,6 +83,9 @@
             var editor = this.props.editor.get('nativeEditor');
 
             var elementPath = editor.elementPath();
+            if (!elementPath) {
+                return false;
+            }
 
             result = this.getStyle().checkActive(elementPath, editor);
 

@@ -121,13 +121,18 @@
         _checkActive: function(styleConfig) {
             var nativeEditor = this.props.editor.get('nativeEditor');
 
+            var elementPath = nativeEditor.elementPath();
+            if (!elementPath) {
+                return false;
+            }
+
             // Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
             // to a 'span' element works for most of those cases with no defined element.
             styleConfig = CKEDITOR.tools.merge({element: 'span'}, styleConfig);
 
             var style = new CKEDITOR.style(styleConfig);
 
-            return style.checkActive(nativeEditor.elementPath(), nativeEditor);
+            return style.checkActive(elementPath, nativeEditor);
         },
 
         /**
