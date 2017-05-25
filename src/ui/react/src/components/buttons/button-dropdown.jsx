@@ -17,6 +17,7 @@
          */
         getDefaultProps: function() {
             return {
+                height: 0,
                 circular: false,
                 descendants: '.ae-toolbar-element',
                 keys: {
@@ -48,8 +49,17 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
+            var style = {},
+                onFocus = this.focus;
+            if (!!this.props.height && !isNaN(this.props.height)) {
+                style = {
+                    overflowY: 'scroll',
+                    height: this.props.height
+                }
+                onFocus = false;
+            }
             return (
-                <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
+                <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={onFocus} style={style} onKeyDown={this.handleKey} tabIndex="0">
                     <ul className="ae-listbox" role="listbox">
                         {this.props.children}
                     </ul>
