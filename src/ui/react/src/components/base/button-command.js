@@ -12,6 +12,8 @@
             /**
              * The command that should be executed.
              *
+             * @instance
+             * @memberof ButtonCommand
              * @property {String} command
              */
             command: React.PropTypes.string.isRequired,
@@ -19,6 +21,8 @@
             /**
              * Indicates that the command may cause the editor to have a different.
              *
+             * @instance
+             * @memberof ButtonCommand
              * @property {boolean} modifiesSelection
              */
             modifiesSelection: React.PropTypes.bool
@@ -27,8 +31,9 @@
         /**
          * Executes a CKEditor command and fires `actionPerformed` event.
          *
+         * @instance
+         * @memberof ButtonCommand
          * @param {Object=} data Optional data to be passed to CKEDITOR's `execCommand` method.
-         *
          * @method execCommand
          */
         execCommand: function(data) {

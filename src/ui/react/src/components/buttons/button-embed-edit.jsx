@@ -16,6 +16,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonEmbedEdit
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired
@@ -26,9 +28,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default embedEdit
+             * @memberof ButtonEmbedEdit
+             * @property {String} key
+             * @static
              */
             key: 'embedEdit'
         },
@@ -39,6 +42,8 @@
          * Focuses on the link input to immediately allow editing. This should only happen if the component
          * is rendered in exclusive mode to prevent aggressive focus stealing.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method componentDidMount
          */
         componentDidMount: function () {
@@ -57,6 +62,8 @@
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method componentWillReceiveProps
          */
         componentWillReceiveProps: function(nextProps) {
@@ -67,6 +74,8 @@
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method getInitialState
          */
         getInitialState: function() {
@@ -97,6 +106,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -126,8 +137,10 @@
          * affect the link element of the editor. Only the _removeLink and _updateLink methods
          * are translated to the editor element.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _clearLink
+         * @protected
          */
         _clearLink: function() {
             this.setState({
@@ -138,8 +151,10 @@
         /**
          * Triggers the embedUrl command to transform the link into an embed media object
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _embedLink
+         * @protected
          */
         _embedLink: function() {
             var nativeEditor = this.props.editor.get('nativeEditor');
@@ -156,8 +171,10 @@
         /**
          * Focuses the user cursor on the widget's input.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _focusLinkInput
+         * @protected
          */
         _focusLinkInput: function() {
             ReactDOM.findDOMNode(this.refs.linkInput).focus();
@@ -168,9 +185,11 @@
          * - Enter: Creates/updates the link.
          * - Escape: Discards the changes.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
+         * @protected
          */
         _handleKeyDown: function(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
@@ -193,9 +212,11 @@
         /**
          * Updates the component state when the link input changes on user interaction.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _handleLinkHrefChange
          * @param {SyntheticEvent} event The change event.
+         * @protected
          */
         _handleLinkHrefChange: function(event) {
             this.setState({
@@ -207,6 +228,8 @@
          * Verifies that the current link state is valid so the user can save the link. A valid state
          * means that we have a non-empty href that's different from the original one.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _isValidState
          * @protected
          * @return {Boolean} True if the state is valid, false otherwise
@@ -223,8 +246,10 @@
         /**
          * Removes the embed in the editor element.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _removeEmbed
+         * @protected
          */
         _removeEmbed: function() {
             var editor = this.props.editor.get('nativeEditor');

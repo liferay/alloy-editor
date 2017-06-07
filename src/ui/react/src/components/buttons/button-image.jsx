@@ -12,6 +12,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonImage
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -19,6 +21,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonImage
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -27,6 +31,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonImage
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
@@ -37,9 +43,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default image
+             * @memberof ButtonImage
+             * @property {String} key
+             * @static
              */
             key: 'image'
         },
@@ -47,6 +54,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonImage
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -67,6 +76,8 @@
         /**
          * Simulates click on the input element. This will open browser's native file open dialog.
          *
+         * @instance
+         * @memberof ButtonImage
          * @method handleClick
          * @param {SyntheticEvent} event The received click event on the button.
          */
@@ -83,8 +94,12 @@
          * - `el` - the created img element
          * - `file` - the original image file from the input element
          *
-         * @protected
+         * @fires ButtonImage#beforeImageAdd
+         * @fires ButtonImage#imageAdd
+         * @instance
+         * @memberof ButtonImage
          * @method _onInputChange
+         * @protected
          */
         _onInputChange: function() {
             var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
@@ -130,14 +145,18 @@
         /**
          * Fired before adding images to the editor.
          *
-         * @event beforeImageAdd
+         * @event ButtonImage#beforeImageAdd
+         * @instance
+         * @memberof ButtonImage
          * @param {Array} imageFiles Array of image files
          */
 
         /**
          * Fired when an image is being added to the editor successfully.
          *
-         * @event imageAdd
+         * @event ButtonImage#imageAdd
+         * @instance
+         * @memberof ButtonImage
          * @param {CKEDITOR.dom.element} el The created image with src as Data URI
          * @param {File} file The image file
          */

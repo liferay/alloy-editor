@@ -10,18 +10,18 @@
     /**
      * Sends a request using the JSONP technique.
      *
-     * @method CKEDITOR.tools.jsonp
-     * @static
-     * @param {CKEDITOR.template} urlTemplate The template of the URL to be requested. All properties
-     * passed in `urlParams` can be used, plus a `{callback}`, which represent a JSONP callback, must be defined.
-     * @param {Object} urlParams Parameters to be passed to the `urlTemplate`.
+     * @memberof CKEDITOR.tools
+     * @method jsonp
+     * @param {CKEDITOR.template} urlTemplate The template of the URL to be requested. All properties passed in `urlParams` can be used, plus a `{callback}`, which represent a JSONP callback, must be defined.
      * @param {Function} callback A function to be called in case of success.
      * @param {Function} errorCallback A function to be called in case of failure.
+     * @param {Object} urlParams Parameters to be passed to the `urlTemplate`.
      * @return {Object} An object with the following properties:
-     * - id: the transaction ID
-     * - a `cancel()` method
+     *  - id: the transaction ID
+     *  - a `cancel()` method
+     * @static
      */
-    CKEDITOR.tools.jsonp = function(urlTemplate, urlParams, callback, errorCallback) {
+    CKEDITOR.tools.jsonp = function(urlTemplate, urlParams, callback, errorCallback) {
         var callbackKey = CKEDITOR.tools.getNextNumber();
 
         urlParams = urlParams || {};
@@ -72,10 +72,11 @@
      *
      * Passing in a single object will create a shallow copy of it.
      *
-     * @static
+     * @memberof CKEDITOR.tools
      * @method merge
      * @param {Object} objects* One or more objects to merge.
      * @return {Object} A new merged object.
+     * @static
      */
     CKEDITOR.tools.merge = CKEDITOR.tools.merge || function() {
         var result = {};
@@ -96,10 +97,11 @@
     /**
      * Simulates event on a DOM element.
      *
-     * @static
+     * @memberof CKEDITOR.tools
      * @method simulate
      * @param {DOMElement} element The element on which the event shoud be simualted.
      * @param {String} event The name of the event which have to be simulated.
+     * @static
      */
     CKEDITOR.tools.simulate = function(element, event) {
         var eventInstance = document.createEvent('Events');

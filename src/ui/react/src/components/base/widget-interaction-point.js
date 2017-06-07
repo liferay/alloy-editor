@@ -12,6 +12,8 @@
             /**
              * The provided editor event.
              *
+             * @instance
+             * @memberof WidgetInteractionPoint
              * @property {SyntheticEvent} editorEvent
              */
             editorEvent: React.PropTypes.object
@@ -28,6 +30,8 @@
          * This may be the point where the user released the mouse, or just the beginning or the end of
          * the selection.
          *
+         * @instance
+         * @memberof WidgetInteractionPoint
          * @method getInteractionPoint
          * @return {Object} An Object which contains the following properties:
          * direction, x, y, where x and y are in page coordinates and direction can be one of these:
@@ -95,11 +99,12 @@
         /**
          * Returns the position of the Widget.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetInteractionPoint
          * @method _getXPoint
-         * @param {Object} selectionData The data about the selection in the editor as
-         * returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
          * @param {Object} eventX The X coordinate received from the native event (mouseup).
+         * @param {Object} selectionData The data about the selection in the editor as returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
+         * @protected
          * @return {Number} The calculated X point in page coordinates.
          */
         _getXPoint: function(selectionData, eventX) {
@@ -129,11 +134,12 @@
         /**
          * Returns the position of the Widget.
          *
+         * @instance
+         * @memberof WidgetInteractionPoint
          * @method _getYPoint
-         * @protected
-         * @param {Object} selectionData The data about the selection in the editor as
-         * returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
          * @param {Object} nativeEvent The data about event is fired
+         * @param {Object} selectionData The data about the selection in the editor as returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
+         * @protected
          * @return {Number} The calculated Y point in page coordinates.
          */
         _getYPoint: function(selectionData, nativeEvent) {

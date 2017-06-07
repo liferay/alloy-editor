@@ -4,14 +4,13 @@
     /**
      * The ToolbarStyles class hosts the buttons for styling a text selection.
      *
+     * @class ToolbarStyles
+     * @uses ToolbarButtons
+     * @uses WidgetArrowBox
      * @uses WidgetDropdown
      * @uses WidgetExclusive
      * @uses WidgetFocusManager
-     * @uses ToolbarButtons
      * @uses WidgetPosition
-     * @uses WidgetArrowBox
-     *
-     * @class ToolbarStyles
      */
     var ToolbarStyles = React.createClass({
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
@@ -21,6 +20,8 @@
             /**
              * The toolbar configuration.
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Object} config
              */
             config: React.PropTypes.object,
@@ -28,6 +29,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -35,6 +38,8 @@
             /**
              * The payload from "editorInteraction" event
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Object} editorEvent
              */
             editorEvent: React.PropTypes.object,
@@ -42,6 +47,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -49,6 +56,8 @@
             /**
              * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Function} onDismiss
              */
             onDismiss: React.PropTypes.func,
@@ -56,6 +65,8 @@
             /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Object} selectionData
              */
             selectionData: React.PropTypes.object
@@ -66,9 +77,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default styles
+             * @memberof ToolbarStyles
+             * @property {String} key
+             * @static
              */
             key: 'styles'
         },
@@ -77,6 +89,8 @@
          * Lifecycle. Invoked once, only on the client (not on the server),
          * immediately after the initial rendering occurs.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method componentDidMount
          */
         componentDidMount: function () {
@@ -87,6 +101,8 @@
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method componentDidUpdate
          * @param {Object} prevProps The previous state of the component's properties.
          * @param {Object} prevState Component's previous state.
@@ -98,6 +114,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -117,6 +135,8 @@
          * Lifecycle. Renders the buttons for adding content or hides the toolbar
          * if user interacted with a non-editable element.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method render
          * @return {Object|null} The content which should be rendered.
          */
@@ -158,10 +178,11 @@
         /**
          * Retrieve a function from String. It converts a fully qualified string into the mapped function.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method _getSelectionFunction
+         * @param {Function|String} selectionFn A function, or a fully qualified string pointing to the desired one (e.g. 'AlloyEditor.SelectionTest.image').
          * @protected
-         * @param {Function|String} selectionFn A function, or a fully qualified string pointing to the
-         * desired one (e.g. 'AlloyEditor.SelectionTest.image').
          * @return {Function} The mapped function.
          */
         _getSelectionFunction: function(selectionFn) {
@@ -192,6 +213,8 @@
         /**
          * Analyzes the current editor selection and returns the selection configuration that matches.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method _getCurrentSelection
          * @protected
          * @return {Object} The matched selection configuration.
@@ -226,8 +249,10 @@
         /**
          * Calculates and sets the position of the toolbar.
          *
-         * @protected
+         * @instance
+         * @memberof ToolbarStyles
          * @method _updatePosition
+         * @protected
          */
         _updatePosition: function() {
             // If component is not mounted, there is nothing to do

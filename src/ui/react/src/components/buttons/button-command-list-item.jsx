@@ -5,9 +5,8 @@
      * The ButtonCommandListItem class is a UI class that renders a ButtonCommand that can be used inside
      * a list as an item, with a string representation of its behaviour.
      *
-     * @uses ButtonCommand
-     *
      * @class ButtonCommandListItem
+     * @uses ButtonCommand
      */
     var ButtonCommandListItem = React.createClass({
         mixins: [AlloyEditor.ButtonCommand],
@@ -16,6 +15,8 @@
             /**
              * The command label or description to render in the list entry.
              *
+             * @instance
+             * @memberof ButtonCommandListItem
              * @property {String} description
              */
             description: React.PropTypes.string.isRequired,
@@ -23,6 +24,8 @@
             /**
              * The command icon to render in the list entry.
              *
+             * @instance
+             * @memberof ButtonCommandListItem
              * @property {String} icon
              */
             icon: React.PropTypes.string
@@ -33,9 +36,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default buttonCommandListItem
+             * @memberof ButtonCommandListItem
+             * @property {String} key
+             * @static
              */
             key: 'buttonCommandListItem'
         },
@@ -43,6 +47,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonCommandListItem
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -55,7 +61,10 @@
         /**
          * Returns the class name of Widget.
          *
+         * @instance
+         * @memberof ButtonCommandListItem
          * @method _getClassName
+         * @protected
          * @return {String} The class name of the Widget.
          */
         _getClassName: function() {

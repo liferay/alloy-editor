@@ -8,9 +8,8 @@
      * - Normal: Just a button that allows to switch to the edition mode
      * - Exclusive: The ButtonEmbedEdit UI with all the link edition controls.
      *
-     * @uses ButtonKeystroke
-     *
      * @class ButtonEmbed
+     * @uses ButtonKeystroke
      */
     var ButtonEmbed = React.createClass({
         mixins: [AlloyEditor.ButtonKeystroke],
@@ -20,6 +19,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonEmbed
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -27,6 +28,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonEmbed
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -35,6 +38,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonEmbed
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
@@ -45,9 +50,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default embed
+             * @memberof ButtonEmbed
+             * @property {String} key
+             * @static
              */
             key: 'embed'
         },
@@ -55,6 +61,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonEmbed
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -70,6 +78,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonEmbed
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -90,8 +100,10 @@
         /**
          * Requests the link button to be rendered in exclusive mode to allow the embedding of a link.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbed
          * @method _requestExclusive
+         * @protected
          */
         _requestExclusive: function() {
             this.props.requestExclusive(ButtonEmbed.key);

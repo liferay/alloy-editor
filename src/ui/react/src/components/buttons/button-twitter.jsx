@@ -5,9 +5,8 @@
      * The ButtonTwitter class provides functionality for creating a link which
      * allows people to tweet part of the content in the editor.
      *
-     * @uses ButtonStateClasses
-     *
      * @class ButtonTwitter
+     * @uses ButtonStateClasses
      */
     var ButtonTwitter = React.createClass({
         mixins: [AlloyEditor.ButtonStateClasses],
@@ -17,6 +16,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTwitter
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -24,6 +25,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTwitter
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -32,6 +35,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTwitter
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
@@ -42,9 +47,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default twitter
+             * @memberof ButtonTwitter
+             * @property {String} key
+             * @static
              */
             key: 'twitter'
         },
@@ -52,6 +58,8 @@
         /**
          * Creates or removes the twitter link on the selection.
          *
+         * @instance
+         * @memberof ButtonTwitter
          * @method handleClick
          */
         handleClick: function() {
@@ -77,6 +85,8 @@
         /**
          * Checks if the current selection is contained within a link that points to twitter.com/intent/tweet.
          *
+         * @instance
+         * @memberof ButtonTwitter
          * @method isActive
          * @return {Boolean} True if the selection is inside a twitter link, false otherwise.
          */
@@ -89,6 +99,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTwitter
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -106,8 +118,10 @@
          * Generates the appropriate twitter url based on the selected text and the configuration
          * options received via props.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTwitter
          * @method _getHref
+         * @protected
          * @return {String} A valid twitter url with the selected text and given configuration.
          */
         _getHref: function() {

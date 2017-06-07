@@ -4,11 +4,10 @@
     /**
      * The ButtonOrderedList class provides functionality for creating ordered lists in an editor.
      *
+     * @class ButtonOrderedList
      * @uses ButtonCommand
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonOrderedList
      */
     var ButtonOrderedList = React.createClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
@@ -18,6 +17,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonOrderedList
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -25,6 +26,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonOrderedList
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -33,6 +36,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonOrderedList
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
@@ -43,9 +48,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default ol
+             * @memberof ButtonOrderedList
+             * @property {String} key
+             * @static
              */
             key: 'ol'
         },
@@ -53,6 +59,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonOrderedList
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -68,6 +76,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonOrderedList
          * @method render
          * @return {Object} The content which should be rendered.
          */

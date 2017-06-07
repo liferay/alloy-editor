@@ -1,18 +1,24 @@
 (function () {
     'use strict';
 
+    /**
+     * Provides OOP utilities.
+     *
+     * @class OOP
+     */
     var OOP = {
         /**
          * Sets the prototype, constructor and superclass properties to support an inheritance strategy
          * that can chain constructors and methods. Static members will not be inherited.
          *
-         * @static
+         * @memberof OOP
          * @method extend
          * @param {Function} receiver The class which will extend another class.
          * @param {Function} supplier The class which will provide the properties the child class.
          * @param {Object} protoProps Prototype properties to add/override.
          * @param {Object} staticProps Static properties to add/overwrite.
          * @return {Function} The extended class.
+         * @static
          */
         extend: function(receiver, supplier, protoProps, staticProps) {
             if (!supplier || !receiver) {

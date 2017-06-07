@@ -12,6 +12,8 @@
          * Analyzes the current selection and the buttons exclusive mode value to figure out which
          * buttons should be present in a given state.
          *
+         * @instance
+         * @memberof ToolbarButtons
          * @method getToolbarButtons
          * @param {Array} buttons The buttons could be shown, prior to the state filtering.
          * @param {Object} additionalProps Additional props that should be passed down to the buttons.

@@ -4,11 +4,10 @@
     /**
      * The ButtonH1 class provides wraps a selection in `h1` element.
      *
+     * @class ButtonH1
      * @uses ButtonActionStyle
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonH1
      */
     var ButtonH1 = React.createClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
@@ -18,6 +17,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonH1
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -25,6 +26,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonH1
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -33,6 +36,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonH1
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
@@ -43,9 +48,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default h1
+             * @memberof ButtonH1
+             * @property {String} key
+             * @static
              */
             key: 'h1'
         },
@@ -53,6 +59,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonH1
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -67,6 +75,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonH1
          * @method render
          * @return {Object} The content which should be rendered.
          */

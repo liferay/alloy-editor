@@ -5,9 +5,8 @@
      * The ButtonCommandsList class provides functionality for showing a list of commands that can be
      * executed to the current selection..
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonCommandsList
+     * @uses WidgetFocusManager
      */
     var ButtonCommandsList = React.createClass({
         mixins: [AlloyEditor.WidgetFocusManager],
@@ -17,6 +16,8 @@
             /**
              * List of the commands the button is able to handle.
              *
+             * @instance
+             * @memberof ButtonCommandsList
              * @property {Array} commands
              */
             commands: React.PropTypes.arrayOf(React.PropTypes.object),
@@ -24,6 +25,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonCommandsList
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -31,6 +34,8 @@
             /**
              * List id to be used for accessibility purposes such as aria-owns.
              *
+             * @instance
+             * @memberof ButtonCommandsList
              * @property {String} listId
              */
             listId: React.PropTypes.string
@@ -41,9 +46,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default buttonCommandsList
+             * @memberof ButtonCommandsList
+             * @property {String} key
+             * @static
              */
             key: 'buttonCommandsList'
         },
@@ -53,6 +59,8 @@
          *
          * Focuses on the list node to allow keyboard interaction.
          *
+         * @instance
+         * @memberof ButtonCommandsList
          * @method componentDidMount
          */
         componentDidMount: function () {
@@ -62,6 +70,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonCommandsList
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -82,6 +92,8 @@
         /**
          * Lifecycle. Renders the UI of the list.
          *
+         * @instance
+         * @memberof ButtonCommandsList
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -98,8 +110,10 @@
         /**
          * Renders instances of ButtonCommandListItem with the description of the row action that will be executed.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonCommandsList
          * @method _renderActions
+         * @protected
          * @return {Array} Rendered instances of ButtonCommandListItem class
          */
         _renderActions: function(commands) {

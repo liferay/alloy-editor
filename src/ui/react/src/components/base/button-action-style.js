@@ -16,6 +16,8 @@
         /**
          * Removes or applies the component style to the current selection.
          *
+         * @instance
+         * @memberof ButtonActionStyle
          * @method applyStyle
          */
         applyStyle: function() {

@@ -18,6 +18,8 @@
         /**
          * Retrieves the value of an attribute.
          *
+         * @instance
+         * @memberof Attribute
          * @method get
          * @param {String} attr The attribute which value should be retrieved.
          * @return {Any} The value of the attribute.
@@ -45,6 +47,8 @@
         /**
          * Sets the value of an attribute.
          *
+         * @instance
+         * @memberof Attribute
          * @method set
          * @param {String} attr The attribute which value should be set.
          * @param {Any} value The value which should be set to the attribute.
@@ -84,10 +88,12 @@
          * If param provided as string, a corresponding function in this object will
          * be called. If provided param is a function, it will be directly called.
          *
-         * @protected
+         * @instance
+         * @memberof Attribute
          * @method _callStringOrFunction
-         * @param  {String|Function} stringOrFunction The function which should be called
          * @param  {Any|Array} args The arguments which will be provided to the called function
+         * @param  {String|Function} stringOrFunction The function which should be called
+         * @protected
          * @return {Any} The returned value from the called function
          */
         _callStringOrFunction: function(stringOrFunction, args) {
@@ -110,9 +116,11 @@
          * Initializes an attribute. Sets its default value depending on the flags of the
          * attribute and the passed configuration object to the constructor.
          *
-         * @protected
+         * @instance
+         * @memberof Attribute
          * @method _init
          * @param {String} attr The name of the attribute which have to be initialized.
+         * @protected
          */
         _init: function(attr) {
             var value;
@@ -179,9 +187,11 @@
          * when there is an own property with this name in the local collection of attribute values
          * for the current instance.
          *
-         * @protected
+         * @instance
+         * @memberof Attribute
          * @method _isInitialized
          * @param {String} attr The attribute which should be checked if it is initialized.
+         * @protected
          * @return {Boolean} Returns true if the attribute has been initialized, false otherwise.
          */
         _isInitialized: function(attr) {

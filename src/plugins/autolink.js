@@ -40,6 +40,8 @@
              * Initialization of the plugin, part of CKEditor plugin lifecycle.
              * The function registers the `keyup` event on the editing area.
              *
+             * @instance
+             * @memberof CKEDITOR.plugins.ae_autolink
              * @method init
              * @param {Object} editor The current editor instance
              */
@@ -57,8 +59,10 @@
              * Retrieves the last word introduced by the user. Reads from the current
              * caret position backwards until it finds the first white space.
              *
-             * @protected
+             * @instance
+             * @memberof CKEDITOR.plugins.ae_autolink
              * @method _getLastWord
+             * @protected
              * @return {String} The last word introduced by user
              */
             _getLastWord: function(editor) {
@@ -120,9 +124,11 @@
             /**
              * Checks if the given link is a valid URL.
              *
-             * @protected
+             * @instance
+             * @memberof CKEDITOR.plugins.ae_autolink
              * @method isValidURL
              * @param {String} link The link we want to know if it is a valid URL
+             * @protected
              * @return {Boolean} Returns true if the link is a valid URL, false otherwise
              */
             _isValidURL: function(link) {
@@ -133,9 +139,11 @@
              * Listens to the `keydown` event and if the keycode is `Backspace`, removes the previously
              * created link.
              *
-             * @protected
+             * @instance
+             * @memberof CKEDITOR.plugins.ae_autolink
              * @method _onKeyDown
              * @param {EventFacade} event EventFacade object
+             * @protected
              */
             _onKeyDown: function(event) {
                 var nativeEvent = event.data.$;
@@ -160,9 +168,11 @@
              * Listens to the `Enter` and `Space` key events in order to check if the last word
              * introduced by the user should be replaced by a link element.
              *
-             * @protected
+             * @instance
+             * @memberof CKEDITOR.plugins.ae_autolink
              * @method _onKeyUp
              * @param {EventFacade} event EventFacade object
+             * @protected
              */
             _onKeyUp: function(event) {
                 var nativeEvent = event.data.$;
@@ -183,9 +193,12 @@
             /**
              * Replaces content by a link element.
              *
-             * @protected
+             * @fires CKEDITOR.plugins.ae_autolink#autolinkAdd
+             * @instance
+             * @memberof CKEDITOR.plugins.ae_autolink
              * @method _replaceContentByLink
              * @param {String} content The text that has to be replaced by an link element
+             * @protected
              */
             _replaceContentByLink: function(editor, content) {
                 var range = editor.createRange();
@@ -230,15 +243,18 @@
             /**
              * Fired when a URL is detected in text and converted to a link.
              *
-             * @event autolinkAdd
+             * @event CKEDITOR.plugins.ae_autolink#autolinkAdd
+             * @memberof CKEDITOR.plugins.ae_autolink
              * @param {CKEDITOR.dom.element} el Node of the created link.
              */
 
             /**
              * Removes the created link element, and replaces it by its text.
              *
-             * @protected
+             * @instance
+             * @memberof CKEDITOR.plugins.ae_autolink
              * @method _removeLink
+             * @protected
              */
             _removeLink: function(editor) {
                 var range = editor.getSelection().getRanges()[0];
@@ -264,8 +280,10 @@
             /**
              * Subscribe to a key event of the editable aria.
              *
-             * @protected
+             * @instance
+             * @memberof CKEDITOR.plugins.ae_autolink
              * @method _subscribeToKeyEvent
+             * @protected
              */
             _subscribeToKeyEvent: function(editor) {
                 var editable = editor.editable();

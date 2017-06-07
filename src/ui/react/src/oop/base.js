@@ -18,6 +18,8 @@
          * Calls the `initializer` method of each class which extends Base starting from the parent to the child.
          * Will pass the configuration object to each initializer method.
          *
+         * @instance
+         * @memberof Base
          * @method init
          * @param {Object} config Configuration object
          */
@@ -28,6 +30,8 @@
         /**
          * Calls the `destructor` method of each class which extends Base starting from the parent to the child.
          *
+         * @instance
+         * @memberof Base
          * @method destroy
          */
         destroy: function() {
@@ -37,17 +41,19 @@
         /**
          * Calls a method of each class, which is being present in the hierarchy starting from parent to the child.
          *
-         * @protected
+         * @instance
+         * @memberof Base
          * @method _callChain
-         * @param {String} wat  The method, which should be invoked
          * @param {Object|Array} args The arguments with which the method should be invoked
+         * @param {String} wat  The method, which should be invoked
+         * @protected
          */
         _callChain: function(wat, args) {
             var arr = [];
 
             var ctor = this.constructor;
 
-            while(ctor) {
+            while (ctor) {
                 if (AlloyEditor.Lang.isFunction(ctor.prototype[wat])) {
                     arr.push(ctor.prototype[wat]);
                 }

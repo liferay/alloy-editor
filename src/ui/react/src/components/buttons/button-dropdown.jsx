@@ -13,6 +13,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonDropdown
          * @method getDefaultProps
          */
         getDefaultProps: function() {
@@ -34,9 +36,10 @@
             /**
              * The name which will be used as an alias of the dropdown in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default dropdown
+             * @memberof ButtonDropdown
+             * @property {String} key
+             * @static
              */
             key: 'dropdown'
         },
@@ -44,6 +47,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonDropdown
          * @method render
          * @return {Object} The content which should be rendered.
          */

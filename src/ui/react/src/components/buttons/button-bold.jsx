@@ -4,12 +4,11 @@
     /**
      * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
      *
+     * @class ButtonBold
      * @uses ButtonCommand
      * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonBold
      */
     var ButtonBold = React.createClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
@@ -19,6 +18,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonBold
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -26,6 +27,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonBold
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -34,6 +37,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonBold
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
@@ -44,9 +49,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default bold
+             * @memberof ButtonBold
+             * @property {String} key
+             * @static
              */
             key: 'bold'
         },
@@ -54,6 +60,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonBold
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -71,6 +79,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonBold
          * @method render
          * @return {Object} The content which should be rendered.
          */

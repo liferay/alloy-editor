@@ -16,6 +16,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTable
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -23,6 +25,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTable
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -31,6 +35,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTable
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
@@ -41,9 +47,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default table
+             * @memberof ButtonTable
+             * @property {String} key
+             * @static
              */
             key: 'table'
         },
@@ -51,6 +58,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTable
          * @method render
          * @return {Object} The content which should be rendered.
          */

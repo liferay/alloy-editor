@@ -4,10 +4,9 @@
     /**
      * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
      *
+     * @class UI
      * @uses WidgetExclusive
      * @uses WidgetFocusManager
-     *
-     * @class UI
      */
     var UI = React.createClass({
         mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
@@ -20,6 +19,8 @@
              * - oneToolbar: Notification for just one available toolbar in the editor.
              * - manyToolbars: Notification for more than one available toolbar in the editor.
              *
+             * @instance
+             * @memberof UI
              * @property {Object} ariaUpdates
              */
             ariaUpdates: React.PropTypes.object,
@@ -27,6 +28,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof UI
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -34,6 +37,8 @@
             /**
              * The delay (ms), after which key or mouse events will be processed.
              *
+             * @instance
+             * @memberof UI
              * @property {Number} eventsDelay
              */
             eventsDelay: React.PropTypes.number,
@@ -41,6 +46,8 @@
             /**
              * The toolbars configuration for this editor instance
              *
+             * @instance
+             * @memberof UI
              * @property {Object} toolbars
              */
             toolbars: React.PropTypes.object.isRequired
@@ -49,6 +56,8 @@
         /**
          * Lifecycle. Invoked once before the component is mounted.
          *
+         * @instance
+         * @memberof UI
          * @method getInitialState
          */
         getInitialState: function() {
@@ -60,6 +69,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof UI
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -77,6 +88,8 @@
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
+         * @instance
+         * @memberof UI
          * @method componentDidMount
          */
         componentDidMount: function () {
@@ -111,6 +124,8 @@
          * Fires `ariaUpdate` event passing ARIA related messages.
          * Fires `editorUpdate` event passing the previous and current properties and state.
          *
+         * @instance
+         * @memberof UI
          * @method componentDidUpdate
          */
         componentDidUpdate: function (prevProps, prevState) {
@@ -147,6 +162,8 @@
         /**
          * Returns the templates for ARIA messages.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _getAriaUpdates
          * @return {Object} ARIA relates messages. Default:
@@ -167,6 +184,8 @@
         /**
          * Returns an ARIA message which represents the number of currently available toolbars.
          *
+         * @instance
+         * @memberof UI
          * @method _getAvailableToolbarsMessage
          * @protected
          * @param {CKEDITOR.dom.element} domNode The DOM node from which the available toolbars will be retrieved.
@@ -193,6 +212,8 @@
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
+         * @instance
+         * @memberof UI
          * @method componentWillUnmount
          */
         componentWillUnmount: function() {
@@ -210,6 +231,8 @@
          * Lifecycle. Renders the UI of the editor. This may include several toolbars and buttons.
          * The editor's UI also takes care of rendering the items in exclusive mode.
          *
+         * @instance
+         * @memberof UI
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -245,6 +268,8 @@
         /**
          * Listener to the editor's `actionPerformed` event. Sets state and redraws the UI of the editor.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _onActionPerformed
          * @param {SynteticEvent} event The provided event
@@ -263,6 +288,8 @@
         /**
          * Executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _onDismissToolbarFocus
          */
@@ -276,6 +303,8 @@
          * Listener to the editor's `userInteraction` event. Retrieves the data about the user selection and
          * provides it via component's state property.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _onEditorInteraction
          * @param {SynteticEvent} event The provided event
@@ -292,6 +321,8 @@
         /**
          * Focuses on the active toolbar when the combination ALT+F10 is pressed inside the editor.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _onEditorKey
          */
@@ -307,6 +338,8 @@
          * Checks if the target with which the user interacted is part of editor's UI or it is
          * the editable area. If none of these, sets the state of editor's UI to be hidden.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _setUIHidden
          * @param {DOMElement} target The DOM element with which user interacted lastly.

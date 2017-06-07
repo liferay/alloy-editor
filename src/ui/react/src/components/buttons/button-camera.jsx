@@ -16,6 +16,8 @@
              * The editor instance where the component is being used.
              *
              * @property {Object} editor
+             * @instance
+             * @memberof ButtonCamera
              */
             editor: React.PropTypes.object.isRequired,
 
@@ -23,6 +25,8 @@
              * The label that should be used for accessibility purposes.
              *
              * @property {String} label
+             * @instance
+             * @memberof ButtonCamera
              */
             label: React.PropTypes.string,
 
@@ -31,6 +35,8 @@
              * means that the button has focus and is the active element.
              *
              * @property {Number} tabIndex
+             * @instance
+             * @memberof ButtonCamera
              */
             tabIndex: React.PropTypes.number
         },
@@ -40,9 +46,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default camera
+             * @memberof ButtonCamera
+             * @property {String} key
+             * @static
              */
             key: 'camera'
         },
@@ -50,6 +57,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonCamera
          * @method render
          * @return {Object} The content which should be rendered.
          */

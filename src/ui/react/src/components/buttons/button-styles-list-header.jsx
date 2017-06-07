@@ -10,6 +10,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonsStylesListHeader
          * @method render
          * @return {Object} The content which should be rendered.
          */

@@ -5,9 +5,8 @@
      * Calculates the position where an Widget should be displayed based on the point
      * where user interacted with the editor.
      *
-     * @uses WidgetInteractionPoint
-     *
      * @class WidgetPosition
+     * @uses WidgetInteractionPoint
      */
     var WidgetPosition = {
         mixins: [AlloyEditor.WidgetInteractionPoint],
@@ -17,6 +16,8 @@
             /**
              * Should the widget to be restricted to the viewport, or not.
              *
+             * @instance
+             * @memberof WidgetPosition
              * @property {Boolean} constrainToViewport
              * @default true
              */
@@ -26,6 +27,8 @@
              * The gutter (vertical and horizontal) between the interaction point and where the widget
              * should be rendered.
              *
+             * @instance
+             * @memberof WidgetPosition
              * @property {Object} gutter
              * @default {
              *     left: 0,
@@ -38,6 +41,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method getDefaultProps
          */
         getDefaultProps: function() {
@@ -53,6 +58,8 @@
         /**
          * Cancels an scheduled animation frame.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method cancelAnimation
          */
         cancelAnimation: function() {
@@ -65,6 +72,8 @@
          * Returns an object which contains the position of the element in page coordinates,
          * restricted to fit to given viewport.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method getConstrainedPosition
          * @param {Object} attrs The following properties, provided as numbers:
          * - height
@@ -100,6 +109,8 @@
          * Returns the position of the Widget taking in consideration the
          * {{#crossLink "WidgetPosition/gutter:attribute"}}{{/crossLink}} attribute.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @protected
          * @method  getWidgetXYPoint
          * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
@@ -143,6 +154,8 @@
         /**
          * Returns true if the widget is visible, false otherwise
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method isVisible
          * @return {Boolean} True if the widget is visible, false otherwise
          */
@@ -161,6 +174,8 @@
         /**
          * Moves a widget from a starting point to a destination point.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method moveToPoint
          * @param  {Object} startPoint The starting point for the movement.
          * @param  {Object} endPoint The destination point for the movement.
@@ -190,6 +205,8 @@
         /**
          * Shows the widget with the default animation transition.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method show
          */
         show: function() {
@@ -235,6 +252,8 @@
         /**
          * Updates the widget position based on the current interaction point.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method updatePosition
          */
         updatePosition: function() {
@@ -255,9 +274,11 @@
         /**
          * Requests an animation frame, if possible, to simulate an animation.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetPosition
          * @method _animate
          * @param {Function} callback The function to be executed on the scheduled frame.
+         * @protected
          */
         _animate: function(callback) {
             if (window.requestAnimationFrame) {

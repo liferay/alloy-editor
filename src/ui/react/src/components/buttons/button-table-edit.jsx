@@ -17,6 +17,8 @@
             /**
              * Method to notify the button abandons the exclusive rendering mode.
              *
+             * @instance
+             * @memberof ButtonTableEdit
              * @property {Function} cancelExclusive
              */
             cancelExclusive: React.PropTypes.func.isRequired,
@@ -24,6 +26,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTableEdit
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired
@@ -34,9 +38,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default tableEdit
+             * @memberof ButtonTableEdit
+             * @property {String} key
+             * @static
              */
             key: 'tableEdit'
         },
@@ -44,6 +49,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonTableEdit
          * @method getDefaultProps
          */
         getDefaultProps: function () {
@@ -63,6 +70,8 @@
          *
          * Focuses on the link input to immediately allow editing.
          *
+         * @instance
+         * @memberof ButtonTableEdit
          * @method componentDidMount
          */
         componentDidMount: function () {
@@ -72,6 +81,8 @@
         /**
          * Lifecycle. Invoked once before the component is mounted.
          *
+         * @instance
+         * @memberof ButtonTableEdit
          * @method getInitialState
          */
         getInitialState: function() {
@@ -84,8 +95,10 @@
         /**
          * Creates a table.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTableEdit
          * @method _createTable
+         * @protected
          */
         _createTable: function() {
             var editor = this.props.editor.get('nativeEditor');
@@ -105,10 +118,12 @@
         /**
          * Handles a change in input value. Sets the provided value from the user back to the input.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTableEdit
          * @method _handleChange
          * @param {String} inputName The name of the input which value should be updated.
          * @param {SyntheticEvent} event The provided event.
+         * @protected
          */
         _handleChange: function(inputName, event) {
             var state = {};
@@ -122,9 +137,11 @@
          * - Enter: Creates the table.
          * - Escape: Discards the changes.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTableEdit
          * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
+         * @protected
          */
         _handleKeyDown: function(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
@@ -141,6 +158,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTableEdit
          * @method render
          * @return {Object} The content which should be rendered.
          */

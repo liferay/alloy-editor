@@ -11,7 +11,6 @@
      * @constructor
      * @param {Object} editor The CKEditor instance.
      */
-
     function Link(editor, config) {
         this._editor = editor;
         this.appendProtocol = config && config.appendProtocol === false ? false : true;
@@ -24,8 +23,10 @@
          * Advances the editor selection to the next available position after a
          * given link or the one in the current selection.
          *
-         * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method advanceSelection
+         * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
          */
         advanceSelection: function(link) {
             link = link || this.getFromSelection();
@@ -53,10 +54,12 @@
         /**
          * Create a link with given URI as href.
          *
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method create
-         * @param {String} URI The URI of the link.
          * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
          * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
+         * @param {String} URI The URI of the link.
          */
         create: function(URI, attrs, modifySelection) {
             var selection = this._editor.getSelection();
@@ -94,6 +97,8 @@
         /**
          * Retrieves a link from the current selection.
          *
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method getFromSelection
          * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
          */
@@ -120,9 +125,11 @@
         /**
          * Removes a link from the editor.
          *
+         * @instance
+         * @memberof CKEDITOR.Link
+         * @method remove
          * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
          * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
-         * @method remove
          */
         remove: function(link, modifySelection) {
             var editor = this._editor;
@@ -154,9 +161,11 @@
         /**
          * Updates the href of an already existing link.
          *
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method update
-         * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
          * @param {CKEDITOR.dom.element} link The link element which href should be removed.
+         * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
          * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
          */
         update: function(attrs, link, modifySelection) {
@@ -210,9 +219,11 @@
          * If it doesn't and the URI doesn't have a scheme, the default 'http' scheme with
          * hierarchical path '//' is added to the URI.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method _getCompleteURI
          * @param {String} URI The URI of the link.
+         * @protected
          * @return {String} The URI updated with the protocol.
          */
         _getCompleteURI: function(URI) {

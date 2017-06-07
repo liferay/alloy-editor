@@ -16,7 +16,7 @@
      * be merged into each editor instance, so the developer may use them directly via the editor, without making
      * an instance of this class**.
      *
-     * @class CKEDITOR.plugins.ae_selectionregion
+     * @class SelectionRegion
      * @constructor
      */
     function SelectionRegion() {}
@@ -27,6 +27,8 @@
         /**
          * Creates selection from two points in page coordinates.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method createSelectionFromPoint
          * @param {Number} x X point in page coordinates.
          * @param {Number} y Y point in page coordinates.
@@ -38,6 +40,8 @@
         /**
          * Creates selection from range. A range consists from two points in page coordinates.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method createSelectionFromRange
          * @param {Number} startX X coordinate of the first point.
          * @param {Number} startY Y coordinate of the first point.
@@ -103,6 +107,8 @@
         /**
          * Returns the region of the current position of the caret. The points are in page coordinates.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getCaretRegion
          * @return {Object} Returns object with the following properties:
          * - bottom
@@ -147,6 +153,8 @@
         /**
          * Returns data for the current selection.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getSelectionData
          * @return {Object|null} Returns an object with the following data:
          * - element - The currently selected element, if any
@@ -173,6 +181,8 @@
         /**
          * Returns the region of the current selection.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getSelectionRegion
          * @return {Object} Returns object which is being returned from
          * {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getClientRectsRegion:method"}}{{/crossLink}} with three more properties:
@@ -196,6 +206,8 @@
         /**
          * Returns true if the current selection is empty, false otherwise.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method isSelectionEmpty
          * @return {Boolean} Returns true if the current selection is empty, false otherwise.
          */
@@ -212,6 +224,8 @@
          * Returns object with data about the [client rectangles](https://developer.mozilla.org/en-US/docs/Web/API/Element.getClientRects) of the selection,
          * normalized across browses. All offsets below are in page coordinates.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getClientRectsRegion
          * @return {Object} Returns object with the following data:
          * - bottom - bottom offset of all client rectangles
@@ -336,6 +350,8 @@
          * Retrieves the direction of the selection. The direction is from top to bottom or from bottom to top.
          * For IE < 9 it is not possible, so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getSelectionDirection
          * @return {Number} Returns a number which represents selection direction. It might be one of these:
          * - CKEDITOR.SELECTION_TOP_TO_BOTTOM;
@@ -366,13 +382,6 @@
 
     CKEDITOR.plugins.add(
         'ae_selectionregion', {
-            /**
-             * Initializer lifecycle implementation for the SelectionRegion plugin.
-             *
-             * @method init
-             * @protected
-             * @param {Object} editor The current CKEditor instance.
-             */
             init: function(editor) {
                 var attr,
                     hasOwnProperty;

@@ -14,7 +14,7 @@
      * By default if user presses the Esc key, 'editorInteraction' event won't be fired. However, this behaviour can be changed
      * by setting {{#crossLink "CKEDITOR.plugins.ae_uicore/allowEsc:attribute"}}{{/crossLink}} config property in editor's configuration to true.
      *
-     * @class CKEDITOR.plugins.ae_uicore
+     * @class ae_uicore
      */
 
     /**
@@ -23,7 +23,8 @@
      * is 50ms. This value can be overwritten via {{#crossLink "CKEDITOR.plugins.ae_uicore/timeout:attribute"}}{{/crossLink}}
      * property of editor's configuration, like: editor.config.uicore.timeout = 100
      *
-     * @event editorInteraction
+     * @memberof ae_uicore
+     * @event ae_uicore#editorInteraction
      * @param {Object} data An object which contains the following properties:
      * - nativeEvent - The event as received from CKEditor.
      * - selectionData - The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
@@ -32,7 +33,8 @@
     /**
      * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
      *
-     * @event ariaUpdate
+     * @memberof ae_uicore
+     * @event ae_uicore#ariaUpdate
      * @param {Object} data An object which contains the following properties:
      * - message - The provided message from the UI element.
      */
@@ -41,6 +43,7 @@
      * If set to true, the editor will still fire {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event,
      * if user presses Esc key.
      *
+     * @memberof ae_uicore
      * @attribute allowEsc
      * @default false
      * @type Boolean
@@ -50,6 +53,7 @@
      * Specifies the default timeout after which the {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event
      * will be fired.
      *
+     * @memberof ae_uicore
      * @attribute timeout
      * @default 50 (ms)
      * @type Number
@@ -60,9 +64,10 @@
             /**
              * Initializer lifecycle implementation for the UICore plugin.
              *
-             * @protected
+             * @memberof ae_uicore
              * @method init
              * @param {Object} editor The current CKEditor instance.
+             * @protected
              */
             init: function(editor) {
                 var ariaState = [];
@@ -152,9 +157,10 @@
             /**
              * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
              *
-             * @protected
+             * @memberof ae_uicore
              * @method _createAriaElement
              * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
+             * @protected
              * @return {HTMLElement} The created and applied to DOM element.
              */
             _createAriaElement: function(id) {

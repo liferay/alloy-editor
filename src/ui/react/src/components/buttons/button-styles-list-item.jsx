@@ -5,10 +5,9 @@
      * The ButtonStylesListItem class provides functionality for previewing a style definition
      * inside a list and applying it to the current editor selection.
      *
+     * @class ButtonStylesListItem
      * @uses ButtonActionStyle
      * @uses ButtonStyle
-     *
-     * @class ButtonStylesListItem
      */
     var ButtonStylesListItem = React.createClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonActionStyle],
@@ -18,9 +17,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default buttonStylesListItem
+             * @memberof ButtonStylesListItem
+             * @property {String} key
+             * @static
              */
             key: 'buttonStylesListItem'
         },
@@ -28,6 +28,8 @@
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
          *
+         * @instance
+         * @memberof ButtonStylesListItem
          * @method componentWillMount
          */
         componentWillMount: function () {
@@ -48,6 +50,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonStylesListItem
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -64,8 +68,10 @@
         /**
          * Applies the item style to the editor selection.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonStylesListItem
          * @method _onClick
+         * @protected
          */
         _onClick: function() {
             // Typically, we want the style to be the only one applied to the current selection, so

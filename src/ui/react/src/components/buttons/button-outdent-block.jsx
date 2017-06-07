@@ -4,21 +4,21 @@
 	/**
      * The ButtonOutdentBlock class provides functionality for outdenting blocks.
      *
+     * @class ButtonOutdentBlock
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonOutdentBlock
      */
-
-     var ButtonOutdentBlock = React.createClass({
+    var ButtonOutdentBlock = React.createClass({
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
-     	//Allows validating props being passed to the component
-     	propTypes: {
-     		/**
+        //Allows validating props being passed to the component
+        propTypes: {
+            /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonOutdentBlock
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -26,6 +26,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonOutdentBlock
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -34,26 +36,31 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonOutdentBlock
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
-     	},
+        },
 
-     	// Lifecycle. Provides static properties to the widget.
-     	statics: {
-     		/**
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default indentBlock
+             * @memberof ButtonOutdentBlock
+             * @property {String} key
+             * @static
              */
             key: 'outdentBlock'
-     	},
+        },
 
-     	/**
+        /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonOutdentBlock
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -66,6 +73,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonOutdentBlock
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -79,7 +88,7 @@
             );
         }
 
-     });
+    });
 
-     AlloyEditor.Buttons[ButtonOutdentBlock.key] = AlloyEditor.ButtonOutdentBlock = ButtonOutdentBlock;
+    AlloyEditor.Buttons[ButtonOutdentBlock.key] = AlloyEditor.ButtonOutdentBlock = ButtonOutdentBlock;
 }());

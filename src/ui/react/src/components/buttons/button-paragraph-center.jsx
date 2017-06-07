@@ -4,11 +4,10 @@
     /**
      * The ButtonParagraphCenter class provides functionality for centering a paragraph.
      *
+     * @class ButtonParagraphCenter
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonParagraphCenter
      */
     var ButtonParagraphCenter = React.createClass({
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -18,6 +17,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonParagraphCenter
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -25,6 +26,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonParagraphCenter
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -33,6 +36,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonParagraphCenter
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
@@ -43,9 +48,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default paragraphCenter
+             * @memberof ButtonParagraphCenter
+             * @property {String} key
+             * @static
              */
             key: 'paragraphCenter'
         },
@@ -53,6 +59,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonParagraphCenter
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -65,6 +73,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonParagraphCenter
          * @method render
          * @return {Object} The content which should be rendered.
          */

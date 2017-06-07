@@ -36,6 +36,8 @@
         /**
          * Creates a table.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method create
          * @param {Object} config Table configuration object
          * @return {Object} The created table
@@ -77,6 +79,8 @@
         /**
          * Retrieves a table from the current selection.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method getFromSelection
          * @return {CKEDITOR.dom.element} The retrieved table or null if not found.
          */
@@ -115,6 +119,8 @@
          * or DIV element can be placed inside the individual table cells.
          * See https://msdn.microsoft.com/en-us/library/ms537837%28v=VS.85%29.aspx
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method isEditable
          * @param {CKEDITOR.dom.element} el The table element to test if editable
          * @return {Boolean}
@@ -134,8 +140,10 @@
         /**
          * Returns which heading style is set for the given table.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method getHeading
-         * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
+         * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
          * @return {String} The heading of the table. Expected values are `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
          */
         getHeading: function(table) {
@@ -176,6 +184,8 @@
         /**
          * Removes a table from the editor.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method remove
          * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
          */
@@ -207,6 +217,8 @@
         /**
          * Assigns provided attributes to a table.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method setAttributes
          * @param {Object} table The table to which the attributes should be assigned
          * @param {Object} attrs The attributes which have to be assigned to the table
@@ -222,6 +234,8 @@
         /**
          * Sets the appropriate table heading style to a table.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method setHeading
          * @param {CKEDITOR.dom.element} table The table element to which the heading should be set. If null, it will be retrieved from the current selection.
          * @param {String} heading The table heading to be set. Accepted values are: `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
@@ -320,6 +334,8 @@
         /**
          * Creates a new CKEDITOR.dom.element using the passed tag name.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @protected
          * @method _createElement
          * @param {String} name The tag name from which an element should be created

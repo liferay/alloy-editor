@@ -12,6 +12,8 @@
             /**
              * List of the commands the button is able to handle.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Array} commands
              */
             commands: React.PropTypes.arrayOf(React.PropTypes.object),
@@ -19,6 +21,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -26,6 +30,8 @@
             /**
              * Indicates whether the styles list is expanded or not.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Boolean} expanded
              */
             expanded: React.PropTypes.bool,
@@ -33,6 +39,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -41,6 +49,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number,
@@ -48,6 +58,8 @@
             /**
              * Callback provided by the button host to notify when the styles list has been expanded.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Function} toggleDropdown
              */
             toggleDropdown: React.PropTypes.func
@@ -58,9 +70,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default tableRow
+             * @memberof ButtonTableHeading
+             * @property {String} key
+             * @static
              */
             key: 'tableHeading'
         },
@@ -68,6 +81,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTableHeading
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -101,7 +116,10 @@
          * Returns a list of commands. If a list of commands was passed
          * as property `commands`, it will take a precedence over the default ones.
          *
+         * @instance
+         * @memberof ButtonTableHeading
          * @method _getCommands
+         * @protected
          * @return {Array} The list of available commands.
          */
         _getCommands: function () {

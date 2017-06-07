@@ -5,11 +5,10 @@
      * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
      * Provides UI for creating, editing and removing a link.
      *
+     * @class ButtonLinkEdit
+     * @uses ButtonCfgProps
      * @uses WidgetDropdown
      * @uses WidgetFocusManager
-     * @uses ButtonCfgProps
-     *
-     * @class ButtonLinkEdit
      */
     var ButtonLinkEdit = React.createClass({
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetFocusManager, AlloyEditor.ButtonCfgProps],
@@ -19,6 +18,8 @@
             /**
              * List of the allowed values for the target attribute.
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Array} allowedTargets
              */
             allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
@@ -26,6 +27,8 @@
             /**
              * Indicate if we add http:// protocol to link or not
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Boolean} appendProtocol
              */
             appendProtocol: React.PropTypes.bool,
@@ -33,6 +36,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -40,6 +45,8 @@
             /**
              * Default value of the link target attribute.
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {String} defaultLinkTarget
              */
             defaultLinkTarget: React.PropTypes.string,
@@ -47,6 +54,8 @@
             /**
              * Indicates whether the link target selector should appear.
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Boolean} showTargetSelector
              */
             showTargetSelector: React.PropTypes.bool,
@@ -58,6 +67,8 @@
              * - title
              * - url
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Function|Array} data
              */
             data: React.PropTypes.oneOfType([
@@ -71,9 +82,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default linkEdit
+             * @memberof ButtonLinkEdit
+             * @property {String} key
+             * @static
              */
             key: 'linkEdit'
         },
@@ -84,6 +96,8 @@
          * Focuses on the link input to immediately allow editing. This should only happen if the component
          * is rendered in exclusive mode to prevent aggressive focus stealing.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method componentDidMount
          */
         componentDidMount: function () {
@@ -98,6 +112,8 @@
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method componentWillReceiveProps
          */
         componentWillReceiveProps: function(nextProps) {
@@ -107,6 +123,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -133,6 +151,8 @@
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method getInitialState
          */
         getInitialState: function() {
@@ -155,6 +175,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -239,8 +261,10 @@
          * affect the link element of the editor. Only the _removeLink and _updateLink methods
          * are translated to the editor element.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _clearLink
+         * @protected
          */
         _clearLink: function() {
             this.setState({
@@ -253,8 +277,10 @@
         /**
          * Focuses the user cursor on the widget's input.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _focusLinkInput
+         * @protected
          */
         _focusLinkInput: function() {
             var instance = this;
@@ -276,9 +302,11 @@
          * - Enter: Creates/updates the link.
          * - Escape: Discards the changes.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
+         * @protected
          */
         _handleKeyDown: function(event) {
             if (event.keyCode === 13 || event.keyCode === 27) {
@@ -303,9 +331,11 @@
         /**
          * Updates the component state when the link input changes on user interaction.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _handleLinkHrefChange
          * @param {SyntheticEvent} event The change event.
+         * @protected
          */
         _handleLinkHrefChange: function(event) {
             this.setState({
@@ -318,9 +348,11 @@
         /**
          * Updates the component state when the link target changes on user interaction.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _handleLinkTargetChange
          * @param {SyntheticEvent} event The click event.
+         * @protected
          */
         _handleLinkTargetChange: function(event) {
             this.setState({
@@ -334,9 +366,11 @@
         /**
          * Updates the component state when an autocomplete link result is selected by user interaction.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _handleLinkAutocompleteClick
          * @param {SyntheticEvent} event The click event.
+         * @protected
          */
         _handleLinkAutocompleteClick: function(event) {
             this.setState({
@@ -352,8 +386,10 @@
          * means that we have a non-empty href and that either that or the link target are different
          * from the original link.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _isValidState
+         * @protected
          * @return {Boolean} [description]
          */
         _isValidState: function() {
@@ -369,8 +405,10 @@
         /**
          * Removes the link in the editor element.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _removeLink
+         * @protected
          */
         _removeLink: function() {
             var editor = this.props.editor.get('nativeEditor');
@@ -392,8 +430,10 @@
         /**
          * Update autocompleteSelected state to focus and select autocomplete´s dropdown
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _setAutocompleteState
+         * @protected
          */
         _setAutocompleteState: function(state) {
             this.setState({
@@ -405,8 +445,10 @@
          * Updates the link in the editor element. If the element didn't exist previously, it will
          * create a new <a> element with the href specified in the link input.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _updateLink
+         * @protected
          */
         _updateLink: function() {
             var editor = this.props.editor.get('nativeEditor');

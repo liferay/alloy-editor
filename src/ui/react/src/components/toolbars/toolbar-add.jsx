@@ -7,14 +7,13 @@
     /**
      * The ToolbarAdd class provides functionality for adding content to the editor.
      *
+     * @class ToolbarAdd
+     * @uses ToolbarButtons
+     * @uses WidgetArrowBox
      * @uses WidgetDropdown
      * @uses WidgetExclusive
      * @uses WidgetFocusManager
-     * @uses ToolbarButtons
      * @uses WidgetPosition
-     * @uses WidgetArrowBox
-     *
-     * @class ToolbarAdd
      */
     var ToolbarAdd = React.createClass({
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
@@ -24,6 +23,8 @@
             /**
              * The toolbar configuration.
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} config
              */
             config: React.PropTypes.object,
@@ -31,6 +32,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -38,6 +41,8 @@
             /**
              * The payload from "editorInteraction" event
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} editorEvent
              */
             editorEvent: React.PropTypes.object,
@@ -45,6 +50,8 @@
             /**
              * The gutter to be applied to the widget when rendered in exclusive mode
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} gutterExclusive
              */
             gutterExclusive: React.PropTypes.object,
@@ -52,6 +59,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -59,6 +68,8 @@
             /**
              * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Function} onDismiss
              */
             onDismiss: React.PropTypes.func,
@@ -68,6 +79,8 @@
              * - ToolbarAdd.left
              * - ToolbarAdd.right
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Enum} position
              */
             position: React.PropTypes.oneOf([POSITION_LEFT, POSITION_RIGHT]),
@@ -75,6 +88,8 @@
             /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} selectionData
              */
             selectionData: React.PropTypes.object
@@ -85,27 +100,30 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default add
+             * @memberof ToolbarAdd
+             * @property {String} key
+             * @static
              */
             key: 'add',
 
             /**
              * Defines the constant for positioning the Toolbar on left of the editable area.
              *
-             * @static
-             * @property {String} left
              * @default 1
+             * @memberof ToolbarAdd
+             * @property {String} left
+             * @static
              */
             left: POSITION_LEFT,
 
             /**
              * Defines the constant for positioning the Toolbar on right of the editable area.
              *
-             * @static
-             * @property {String} right
              * @default 2
+             * @memberof ToolbarAdd
+             * @property {String} right
+             * @static
              */
             right: POSITION_RIGHT
         },
@@ -113,6 +131,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ToolbarAdd
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -137,6 +157,8 @@
          * Lifecycle. Invoked once, only on the client (not on the server),
          * immediately after the initial rendering occurs.
          *
+         * @instance
+         * @memberof ToolbarAdd
          * @method componentDidMount
          */
         componentDidMount: function () {
@@ -147,6 +169,8 @@
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ToolbarAdd
          * @method componentDidUpdate
          * @param {Object} prevProps The previous state of the component's properties.
          * @param {Object} prevState Component's previous state.
@@ -165,6 +189,8 @@
          * Lifecycle. Renders the buttons for adding content or hides the toolbar
          * if user interacted with a non-editable element.
          *
+         * @instance
+         * @memberof ToolbarAdd
          * @method render
          * @return {Object|null} The content which should be rendered.
          */
@@ -198,8 +224,10 @@
         /**
          * Returns a list of buttons that will eventually render to HTML.
          *
-         * @protected
+         * @instance
+         * @memberof ToolbarAdd
          * @method _getButtons
+         * @protected
          * @return {Object} The buttons which have to be rendered.
          */
         _getButtons: function() {
@@ -223,8 +251,10 @@
         /**
          * Returns the class name of the toolbar in case of both exclusive and normal mode.
          *
-         * @protected
+         * @instance
+         * @memberof ToolbarAdd
          * @method _getToolbarClassName
+         * @protected
          * @return {String} The class name which have to be applied to the DOM element.
          */
         _getToolbarClassName: function() {
@@ -240,8 +270,10 @@
         /**
          * Calculates and sets the position of the toolbar in exclusive or normal mode.
          *
-         * @protected
+         * @instance
+         * @memberof ToolbarAdd
          * @method _updatePosition
+         * @protected
          */
         _updatePosition: function() {
             var region;

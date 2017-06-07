@@ -5,9 +5,8 @@
      * The ButtonLinkAutocompleteList class provides functionality for showing a list of
      * items that can be selected for the link.
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonLinkAutocompleteList
+     * @uses WidgetFocusManager
      */
     var ButtonLinkAutocompleteList = React.createClass({
         mixins: [AlloyEditor.WidgetFocusManager],
@@ -17,6 +16,8 @@
             /**
              * Autocomplete function
              *
+             * @instance
+             * @memberof ButtonLinkAutocompleteList
              * @property {Function} data
              */
             data: React.PropTypes.func,
@@ -24,6 +25,8 @@
             /**
              * Indicates if this is focused when this component is updated
              *
+             * @instance
+             * @memberof ButtonLinkAutocompleteList
              * @property {Boolean} autocompleteSelected
              */
             autocompleteSelected: React.PropTypes.bool,
@@ -31,6 +34,8 @@
             /**
              * The current term to autocomplete for
              *
+             * @instance
+             * @memberof ButtonLinkAutocompleteList
              * @property {String} term
              */
             term: React.PropTypes.string,
@@ -38,6 +43,8 @@
             /**
             * Method to update parent selectautocomplete state
             *
+             * @instance
+             * @memberof ButtonLinkAutocompleteList
             * @property {Function} setAutocompleteState
             */
             setAutocompleteState: React.PropTypes.func
@@ -49,9 +56,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default buttonLinkAutocompleteList
+             * @memberof ButtonLinkAutocompleteList
+             * @property {String} key
+             * @static
              */
             key: 'buttonLinkAutocompleteList'
         },
@@ -60,6 +68,8 @@
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method componentWillReceiveProps
          */
         componentWillReceiveProps: function(nextProps) {
@@ -86,6 +96,8 @@
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method componentWillUnmount
          */
         componentWillUnmount: function() {
@@ -95,6 +107,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -118,6 +132,8 @@
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method getInitialState
          */
         getInitialState: function() {
@@ -129,6 +145,8 @@
         /**
          * Lifecycle. Renders the UI of the list.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -148,6 +166,8 @@
          * Lifecycle. Invoked before rendering when new props or state are being received.
          * This method is not called for the initial render or when forceUpdate is used.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method  shouldComponentUpdate
          * @return {Boolean} Returns false when the transition to the new props and state will not
          * require a component update.
@@ -159,9 +179,11 @@
         /**
          * Renders a set of list items for the provided items
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method _renderAutocompleteItems
          * @param {Array} items List of autocomplete items to render
+         * @protected
          * @return {Array} Rendered list item instances
          */
         _renderAutocompleteItems: function(items) {
@@ -183,8 +205,10 @@
         /**
          * Retrieves the data according to {this.props.term} and calls setState() with the returned data
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method _updateItems
+         * @protected
          */
         _updateItems: function() {
             var instance = this;
@@ -196,11 +220,11 @@
             var promise = Promise.resolve(this.props.data(this.props.term));
 
             promise.then(function(items) {
-	            if (items.length) {
-		            !instance.props.expanded && instance.props.toggleDropdown();
-	            }
+                if (items.length) {
+                    !instance.props.expanded && instance.props.toggleDropdown();
+                }
 
-	            instance.setState({
+                instance.setState({
                     items: items
                 });
             });

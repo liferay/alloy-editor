@@ -16,6 +16,8 @@
          * Returns the list of state classes associated to the current element's state, according
          * to the results of the isActive and isDisabled methods.
          *
+         * @instance
+         * @memberof ButtonStateClasses
          * @method getStateClasses
          * @return {String} A string with the state CSS classes.
          */

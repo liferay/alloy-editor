@@ -5,9 +5,8 @@
      * The ButtonTargetList class provides functionality for changing the target of a link
      * in the document.
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonTargetList
+     * @uses WidgetFocusManager
      */
     var ButtonTargetList = React.createClass({
         mixins: [AlloyEditor.WidgetFocusManager],
@@ -17,6 +16,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTargetList
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired
@@ -27,9 +28,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default linkTargetEdit
+             * @memberof ButtonTargetList
+             * @property {String} key
+             * @static
              */
             key: 'targetList'
         },
@@ -37,6 +39,8 @@
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
+         * @instance
+         * @memberof ButtonTargetList
          * @method componentDidMount
          */
         componentDidMount: function() {
@@ -46,6 +50,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonTargetList
          * @method getDefaultProps
          */
         getDefaultProps: function() {
@@ -65,6 +71,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTargetList
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -81,17 +89,17 @@
         /**
          * Returns the the allowed link target items.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTargetList
          * @method _getAllowedTargetItems
-         *
+         * @protected
          * @return {Array} The allowed target items.
          */
         _getAllowedTargetItems: function() {
             return this.props.allowedLinkTargets || [{
                 label: AlloyEditor.Strings.linkTargetDefault,
                 value: ''
-            },
-            {
+            }, {
                 label: AlloyEditor.Strings.linkTargetSelf,
                 value: '_self'
             }, {
@@ -109,7 +117,10 @@
         /**
          * Renders the allowed link target items.
          *
+         * @instance
+         * @memberof ButtonTargetList
          * @method _renderListTargets
+         * @protected
          * @return {Object} Returns the rendered link items
          */
         _renderListTargets: function() {

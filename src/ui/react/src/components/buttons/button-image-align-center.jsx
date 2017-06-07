@@ -4,11 +4,10 @@
     /**
      * The ButtonImageAlignCenter class provides functionality for aligning an image in the center.
      *
+     * @class ButtonImageAlignCenter
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonImageAlignCenter
      */
     var ButtonImageAlignCenter = React.createClass({
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -18,6 +17,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonImageAlignCenter
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -25,6 +26,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonImageAlignCenter
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -33,6 +36,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonImageAlignCenter
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
@@ -43,9 +48,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default imageCenter
+             * @memberof ButtonImageAlignCenter
+             * @property {String} key
+             * @static
              */
             key: 'imageCenter'
         },
@@ -53,6 +59,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonImageAlignCenter
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -65,6 +73,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonImageAlignCenter
          * @method render
          * @return {Object} The content which should be rendered.
          */

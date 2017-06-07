@@ -4,21 +4,21 @@
 	/**
      * The ButtonIndentBlock class provides functionality for indenting the selected blocks.
      *
+     * @class ButtonIndentBlock
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonIndentBlock
      */
-
-     var ButtonIndentBlock = React.createClass({
+    var ButtonIndentBlock = React.createClass({
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
-     	//Allows validating props being passed to the component
-     	propTypes: {
-     		/**
+        //Allows validating props being passed to the component
+        propTypes: {
+            /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonIndentBlock
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -26,6 +26,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonIndentBlock
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -34,26 +36,31 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonIndentBlock
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number
-     	},
+        },
 
-     	// Lifecycle. Provides static properties to the widget.
-     	statics: {
-     		/**
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default indentBlock
+             * @memberof ButtonIndentBlock
+             * @property {String} key
+             * @static
              */
             key: 'indentBlock'
-     	},
+        },
 
-     	/**
+        /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonIndentBlock
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -66,6 +73,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonIndentBlock
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -78,8 +87,7 @@
                 </button>
             );
         }
+    });
 
-     });
-
-     AlloyEditor.Buttons[ButtonIndentBlock.key] = AlloyEditor.ButtonIndentBlock = ButtonIndentBlock;
+    AlloyEditor.Buttons[ButtonIndentBlock.key] = AlloyEditor.ButtonIndentBlock = ButtonIndentBlock;
 }());

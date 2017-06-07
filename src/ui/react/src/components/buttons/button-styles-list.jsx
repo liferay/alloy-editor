@@ -5,9 +5,8 @@
      * The ButtonStylesList class provides functionality for showing a list of styles that can be
      * applied to the current selection..
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonStylesList
+     * @uses WidgetFocusManager
      */
     var ButtonStylesList = React.createClass({
         mixins: [AlloyEditor.WidgetFocusManager],
@@ -17,6 +16,7 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
+             * @memberof ButtonStylesList
              * @static
              * @property {String} key
              * @default buttonStylesList
@@ -29,6 +29,8 @@
          *
          * Focuses on the list node to allow keyboard interaction.
          *
+         * @instance
+         * @memberof ButtonStylesList
          * @method componentDidMount
          */
         componentDidMount: function () {
@@ -38,6 +40,8 @@
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
          *
+         * @instance
+         * @memberof ButtonStylesList
          * @method componentWillMount
          */
         componentWillMount: function () {
@@ -65,6 +69,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonStylesList
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -86,6 +92,8 @@
         /**
          * Lifecycle. Renders the UI of the list.
          *
+         * @instance
+         * @memberof ButtonStylesList
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -115,9 +123,11 @@
         /**
          * Renders instances of ButtonStylesListItem with the preview of the correspondent block, inline or object styles.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonStylesList
          * @method _renderStylesItems
          * @param {Array} styles List of styles for which preview should be rendered.
+         * @protected
          * @return {Array} Rendered instances of ButtonStylesListItem class
          */
         _renderStylesItems: function(styles) {

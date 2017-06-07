@@ -14,6 +14,8 @@
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Object} editor
              */
             editor: React.PropTypes.object.isRequired,
@@ -21,6 +23,8 @@
             /**
              * Indicates whether the styles list is expanded or not.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Boolean} expanded
              */
             expanded: React.PropTypes.bool,
@@ -28,6 +32,8 @@
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {String} label
              */
             label: React.PropTypes.string,
@@ -35,6 +41,8 @@
             /**
              * Indicates whether the remove styles item should appear in the styles list.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Boolean} showRemoveStylesItem
              */
             showRemoveStylesItem: React.PropTypes.bool,
@@ -42,6 +50,8 @@
             /**
              * List of the styles the button is able to handle.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Array} styles
              */
             styles: React.PropTypes.arrayOf(React.PropTypes.object),
@@ -50,6 +60,8 @@
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Number} tabIndex
              */
             tabIndex: React.PropTypes.number,
@@ -57,6 +69,8 @@
             /**
              * Callback provided by the button host to notify when the styles list has been expanded.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Function} toggleDropdown
              */
             toggleDropdown: React.PropTypes.func
@@ -67,9 +81,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default styles
+             * @memberof ButtonStyles
+             * @property {String} key
+             * @static
              */
             key: 'styles'
         },
@@ -77,6 +92,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonStyles
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -113,9 +130,11 @@
         /**
          * Checks if the given style definition is applied to the current selection in the editor.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonStyles
          * @method _checkActive
          * @param {Object} styleConfig Style definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+         * @protected
          * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
          */
         _checkActive: function(styleConfig) {
@@ -136,6 +155,8 @@
          * - style - an object with one property, called `element` which value
          * represents the style which have to be applied to the element.
          *
+         * @instance
+         * @memberof ButtonStyles
          * @method _getStyles
          * @protected
          * @return {Array<object>} An array of objects containing the styles.

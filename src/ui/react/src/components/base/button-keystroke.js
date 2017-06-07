@@ -16,6 +16,9 @@
              * - keys: The keystroke definition, as expected by http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke
              * - name: The name for the CKEditor command that will be created. If empty,
              * a random name will be created on the fly
+             *
+             * @instance
+             * @memberof ButtonKeystroke
              * @property {Object} keystroke
              */
             keystroke: React.PropTypes.object.isRequired
@@ -24,6 +27,8 @@
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
          *
+         * @instance
+         * @memberof ButtonKeystroke
          * @method componentWillMount
          */
         componentWillMount: function() {
@@ -59,6 +64,8 @@
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
+         * @instance
+         * @memberof ButtonKeystroke
          * @method componentWillUnmount
          */
         componentWillUnmount: function() {

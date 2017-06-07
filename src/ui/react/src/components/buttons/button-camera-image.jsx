@@ -12,9 +12,10 @@
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default cameraImage
+             * @memberof ButtonCameraImage
+             * @property {String} key
+             * @static
              */
             key: 'cameraImage'
         },
@@ -22,6 +23,8 @@
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method getDefaultProps
          */
         getDefaultProps: function () {
@@ -35,6 +38,8 @@
          *
          * Focuses the take photo button.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method componentDidMount
          */
         componentDidMount: function () {
@@ -44,6 +49,8 @@
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method componentWillUnmount
          */
         componentWillUnmount: function() {
@@ -62,6 +69,8 @@
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -88,6 +97,9 @@
         /**
          * Takes photo from the video stream and inserts in into editor's content.
          *
+         * @fires ButtonCameraImage#imageCameraAdd
+         * @instance
+         * @memberof ButtonCameraImage
          * @method takePhoto
          */
         takePhoto: function() {
@@ -124,9 +136,11 @@
         /**
          * Displays error message in case of video stream capturing failure.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonCameraImage
          * @method _handleStreamError
          * @param {Event} error The fired event in case of error.
+         * @protected
          */
         _handleStreamError: function(error) {
             window.alert('An error occurred! ' + error);
@@ -136,8 +150,11 @@
          * Starts streaming video in the video element and sets width/height to the video
          * and canvas elements.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method _handleStreamSuccess
          * @param {Object} stream The video stream
+         * @protected
          */
         _handleStreamSuccess: function(stream) {
             var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
@@ -174,7 +191,8 @@
         /**
          * Fired when an image is being taken from the camera and added as an element to the editor.
          *
-         * @event imageCameraAdd
+         * @event ButtonCameraImage#imageCameraAdd
+         * @memberof ButtonCameraImage
          * @param {CKEDITOR.dom.element} el The created img element in editor.
          */
     });
