@@ -300,17 +300,6 @@
                                                 uiTasksTimeout
                                             );
                             
-                                            var handleBlur = function(event) {
-                                                var editable = editor.editable();
-                            
-                                                editable.removeListener(&#x27;blur&#x27;, handleBlur);
-                                                editable.removeListener(&#x27;keyup&#x27;, handleUI);
-                                                editable.removeListener(&#x27;mouseleave&#x27;, handleMouseLeave);
-                                                editable.removeListener(&#x27;mouseup&#x27;, handleUI);
-                            
-                                                handleUI(event);
-                                            };
-                            
                                             editor.on(&#x27;ariaUpdate&#x27;, function(event) {
                                                 // handleAria is debounced function, so if it is being called multiple times, it will
                                                 // be canceled until some time passes.
@@ -326,8 +315,9 @@
                                             editor.once(&#x27;contentDom&#x27;, function() {
                                                 var editable = editor.editable();
                             
-                                                editable.attachListener(editable, &#x27;focus&#x27;, function (event) {
-                                                    editable.attachListener(editable, &#x27;blur&#x27;, handleBlur);
+                                                var focusHandler = editable.attachListener(editable, &#x27;focus&#x27;, function (event) {
+                                                    focusHandler.removeListener();
+                            
                                                     editable.attachListener(editable, &#x27;keyup&#x27;, handleUI);
                                                     editable.attachListener(editable, &#x27;mouseup&#x27;, handleUI);
                                                     editable.attachListener(editable, &#x27;mouseleave&#x27;, handleMouseLeave);

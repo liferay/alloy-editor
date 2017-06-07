@@ -21855,17 +21855,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 }
             }, uiTasksTimeout);
 
-            var handleBlur = function handleBlur(event) {
-                var editable = editor.editable();
-
-                editable.removeListener('blur', handleBlur);
-                editable.removeListener('keyup', handleUI);
-                editable.removeListener('mouseleave', handleMouseLeave);
-                editable.removeListener('mouseup', handleUI);
-
-                handleUI(event);
-            };
-
             editor.on('ariaUpdate', function (event) {
                 // handleAria is debounced function, so if it is being called multiple times, it will
                 // be canceled until some time passes.
@@ -21881,8 +21870,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             editor.once('contentDom', function () {
                 var editable = editor.editable();
 
-                editable.attachListener(editable, 'focus', function (event) {
-                    editable.attachListener(editable, 'blur', handleBlur);
+                var focusHandler = editable.attachListener(editable, 'focus', function (event) {
+                    focusHandler.removeListener();
+
                     editable.attachListener(editable, 'keyup', handleUI);
                     editable.attachListener(editable, 'mouseup', handleUI);
                     editable.attachListener(editable, 'mouseleave', handleMouseLeave);
