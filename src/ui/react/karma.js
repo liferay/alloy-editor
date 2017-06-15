@@ -201,6 +201,12 @@ if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
             browserName: 'microsoftedge',
             platform: 'Windows 10',
             version: '14'
+        },
+        sl_edge_22: {
+            base: 'SauceLabs',
+            browserName: 'microsoftedge',
+            platform: 'Windows 10',
+            version: '15'
         }
     };
 
