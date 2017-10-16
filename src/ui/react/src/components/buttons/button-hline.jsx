@@ -8,7 +8,7 @@
      * @uses ButtonCommand
      * @uses ButtonStyle
      */
-    var ButtonHline = React.createClass({
+    var ButtonHline = createReactClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.

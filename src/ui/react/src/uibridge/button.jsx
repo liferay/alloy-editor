@@ -41,7 +41,7 @@
         BUTTON_DEFS[editor.name][buttonName] = BUTTON_DEFS[editor.name][buttonName] || buttonDefinition;
 
         if (!ButtonBridge) {
-            ButtonBridge = React.createClass(
+            ButtonBridge = createReactClass(
                 CKEDITOR.tools.merge(UNSUPPORTED_BUTTON_API, {
                     displayName: buttonName,
 

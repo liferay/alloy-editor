@@ -6,7 +6,7 @@
      *
      * @class ButtonTableRemove
      */
-    var ButtonTableRemove = React.createClass({
+    var ButtonTableRemove = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**

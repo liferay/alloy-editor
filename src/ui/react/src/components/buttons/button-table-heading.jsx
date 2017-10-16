@@ -6,7 +6,7 @@
      *
      * @class ButtonTableHeading
      */
-    var ButtonTableHeading = React.createClass({
+    var ButtonTableHeading = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**

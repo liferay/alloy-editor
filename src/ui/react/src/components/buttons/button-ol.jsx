@@ -9,7 +9,7 @@
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      */
-    var ButtonOrderedList = React.createClass({
+    var ButtonOrderedList = createReactClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
 
         // Allows validating props being passed to the component.

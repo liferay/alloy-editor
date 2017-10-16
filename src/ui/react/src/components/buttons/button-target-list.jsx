@@ -8,7 +8,7 @@
      * @class ButtonTargetList
      * @uses WidgetFocusManager
      */
-    var ButtonTargetList = React.createClass({
+    var ButtonTargetList = createReactClass({
         mixins: [AlloyEditor.WidgetFocusManager],
 
         // Allows validating props being passed to the component.

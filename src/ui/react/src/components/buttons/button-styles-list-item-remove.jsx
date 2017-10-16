@@ -7,7 +7,7 @@
      *
      * @class ButtonStylesListItemRemove
      */
-    var ButtonStylesListItemRemove = React.createClass({
+    var ButtonStylesListItemRemove = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**

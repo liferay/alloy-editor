@@ -11,7 +11,7 @@
      * @class ButtonEmbed
      * @uses ButtonKeystroke
      */
-    var ButtonEmbed = React.createClass({
+    var ButtonEmbed = createReactClass({
         mixins: [AlloyEditor.ButtonKeystroke],
 
         // Allows validating props being passed to the component.

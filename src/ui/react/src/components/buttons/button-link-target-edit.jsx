@@ -7,7 +7,7 @@
      *
      * @class ButtonLinkTargetEdit
      */
-    var ButtonLinkTargetEdit = React.createClass({
+    var ButtonLinkTargetEdit = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**

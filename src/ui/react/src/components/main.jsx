@@ -8,7 +8,7 @@
      * @uses WidgetExclusive
      * @uses WidgetFocusManager
      */
-    var UI = React.createClass({
+    var UI = createReactClass({
         mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
 
         // Allows validating props being passed to the component.

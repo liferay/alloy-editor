@@ -6,7 +6,7 @@
      *
      * @class ButtonTableRow
      */
-    var ButtonTableRow = React.createClass({
+    var ButtonTableRow = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**

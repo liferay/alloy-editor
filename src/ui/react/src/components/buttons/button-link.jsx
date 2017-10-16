@@ -13,7 +13,7 @@
      * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      */
-    var ButtonLink = React.createClass({
+    var ButtonLink = createReactClass({
         mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCfgProps],
 
         // Allows validating props being passed to the component.

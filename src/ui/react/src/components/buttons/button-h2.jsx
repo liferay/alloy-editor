@@ -9,7 +9,7 @@
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      */
-    var ButtonH2 = React.createClass({
+    var ButtonH2 = createReactClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
 
 

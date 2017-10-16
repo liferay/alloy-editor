@@ -9,7 +9,7 @@
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
      */
-    var ButtonParagraphCenter = React.createClass({
+    var ButtonParagraphCenter = createReactClass({
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
 
         // Allows validating props being passed to the component.

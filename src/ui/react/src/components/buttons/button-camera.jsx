@@ -9,7 +9,7 @@
      *
      * @class ButtonCamera
      */
-    var ButtonCamera = React.createClass({
+    var ButtonCamera = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**

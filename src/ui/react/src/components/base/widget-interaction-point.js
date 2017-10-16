@@ -16,7 +16,7 @@
              * @memberof WidgetInteractionPoint
              * @property {SyntheticEvent} editorEvent
              */
-            editorEvent: React.PropTypes.object
+            editorEvent: PropTypes.object
         },
 
         /**

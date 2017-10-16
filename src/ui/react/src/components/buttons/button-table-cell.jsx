@@ -6,7 +6,7 @@
      *
      * @class ButtonTableCell
      */
-    var ButtonTableCell = React.createClass({
+    var ButtonTableCell = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**

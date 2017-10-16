@@ -6,7 +6,7 @@
      *
      * @class ButtonImage
      */
-    var ButtonImage = React.createClass({
+    var ButtonImage = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**

@@ -8,7 +8,7 @@
      *
      * @class ButtonStyles
      */
-    var ButtonStyles = React.createClass({
+    var ButtonStyles = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**
