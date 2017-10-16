@@ -40,7 +40,7 @@
         MENUBUTTON_DEFS[editor.name][menuButtonName] = MENUBUTTON_DEFS[editor.name][menuButtonName] || menuButtonDefinition;
 
         if (!MenuButtonBridge) {
-            MenuButtonBridge = React.createClass(
+            MenuButtonBridge = createReactClass(
                 CKEDITOR.tools.merge(UNSUPPORTED_MENUBUTTON_API, {
                     displayName: menuButtonName,
 

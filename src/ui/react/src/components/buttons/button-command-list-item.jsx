@@ -8,7 +8,7 @@
      * @class ButtonCommandListItem
      * @uses ButtonCommand
      */
-    var ButtonCommandListItem = React.createClass({
+    var ButtonCommandListItem = createReactClass({
         mixins: [AlloyEditor.ButtonCommand],
 
         propTypes: {

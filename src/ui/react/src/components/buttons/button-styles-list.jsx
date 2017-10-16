@@ -8,7 +8,7 @@
      * @class ButtonStylesList
      * @uses WidgetFocusManager
      */
-    var ButtonStylesList = React.createClass({
+    var ButtonStylesList = createReactClass({
         mixins: [AlloyEditor.WidgetFocusManager],
 
         // Lifecycle. Provides static properties to the widget.

@@ -10,7 +10,7 @@
      * @uses WidgetDropdown
      * @uses WidgetFocusManager
      */
-    var ButtonLinkEdit = React.createClass({
+    var ButtonLinkEdit = createReactClass({
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetFocusManager, AlloyEditor.ButtonCfgProps],
 
         // Allows validating props being passed to the component.

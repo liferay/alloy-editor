@@ -10,7 +10,7 @@
      * @uses ButtonStateClasses
      * @uses ButtonStyle
      */
-    var ButtonItalic = React.createClass({
+    var ButtonItalic = createReactClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
 
         // Allows validating props being passed to the component.

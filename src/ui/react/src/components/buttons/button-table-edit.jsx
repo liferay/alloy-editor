@@ -10,7 +10,7 @@
      *
      * @class ButtonTableEdit
      */
-    var ButtonTableEdit = React.createClass({
+    var ButtonTableEdit = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
 

@@ -8,7 +8,7 @@
      * @class ButtonTwitter
      * @uses ButtonStateClasses
      */
-    var ButtonTwitter = React.createClass({
+    var ButtonTwitter = createReactClass({
         mixins: [AlloyEditor.ButtonStateClasses],
 
         // Allows validating props being passed to the component.

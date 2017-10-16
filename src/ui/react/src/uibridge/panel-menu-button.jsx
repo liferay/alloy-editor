@@ -34,7 +34,7 @@
         PANEL_MENU_DEFS[editor.name][panelMenuButtonName] = PANEL_MENU_DEFS[editor.name][panelMenuButtonName] || panelMenuButtonDefinition;
 
         if (!PanelMenuButtonBridge) {
-            PanelMenuButtonBridge = React.createClass(
+            PanelMenuButtonBridge = createReactClass(
                 CKEDITOR.tools.merge(UNSUPPORTED_PANEL_MENU_BUTTON_API, {
                     displayName: panelMenuButtonName,
 

@@ -10,7 +10,7 @@
      *
      * @class ButtonEmbedEdit
      */
-    var ButtonEmbedEdit = React.createClass({
+    var ButtonEmbedEdit = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**

@@ -12,7 +12,7 @@
      * @uses WidgetFocusManager
      * @uses WidgetPosition
      */
-    var ToolbarStyles = React.createClass({
+    var ToolbarStyles = createReactClass({
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
         // Allows validating props being passed to the component.
