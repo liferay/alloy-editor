@@ -19,7 +19,7 @@
              * @memberof ButtonRemoveFormat
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
@@ -28,7 +28,7 @@
              * @memberof ButtonRemoveFormat
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
@@ -38,7 +38,7 @@
              * @memberof ButtonRemoveFormat
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.

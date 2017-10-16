@@ -39,7 +39,7 @@
                     displayName: panelMenuButtonName,
 
                     propTypes: {
-                        editor: React.PropTypes.object.isRequired
+                        editor: PropTypes.object.isRequired
                     },
 
                     statics: {

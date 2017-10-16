@@ -45,8 +45,8 @@
                     displayName: menuButtonName,
 
                     propTypes: {
-                        editor: React.PropTypes.object.isRequired,
-                        tabIndex: React.PropTypes.number
+                        editor: PropTypes.object.isRequired,
+                        tabIndex: PropTypes.number
                     },
 
                     statics: {

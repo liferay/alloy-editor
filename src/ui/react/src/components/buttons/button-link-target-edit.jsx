@@ -19,7 +19,7 @@
              * @memberof ButtonLinkTargetEdit
              * @property {Array<object>} allowedTargets
              */
-            allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
+            allowedTargets: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
@@ -28,7 +28,7 @@
              * @memberof ButtonLinkTargetEdit
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Label of the current target value.
@@ -37,7 +37,7 @@
              * @memberof ButtonLinkTargetEdit
              * @property {String} selectedTarget
              */
-            selectedTarget: React.PropTypes.string
+            selectedTarget: PropTypes.string
         },
 
         // Lifecycle. Provides static properties to the widget.

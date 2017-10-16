@@ -18,7 +18,7 @@
              * @memberof ButtonStyles
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Indicates whether the styles list is expanded or not.
@@ -27,7 +27,7 @@
              * @memberof ButtonStyles
              * @property {Boolean} expanded
              */
-            expanded: React.PropTypes.bool,
+            expanded: PropTypes.bool,
 
             /**
              * The label that should be used for accessibility purposes.
@@ -36,7 +36,7 @@
              * @memberof ButtonStyles
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * Indicates whether the remove styles item should appear in the styles list.
@@ -45,7 +45,7 @@
              * @memberof ButtonStyles
              * @property {Boolean} showRemoveStylesItem
              */
-            showRemoveStylesItem: React.PropTypes.bool,
+            showRemoveStylesItem: PropTypes.bool,
 
             /**
              * List of the styles the button is able to handle.
@@ -54,7 +54,7 @@
              * @memberof ButtonStyles
              * @property {Array} styles
              */
-            styles: React.PropTypes.arrayOf(React.PropTypes.object),
+            styles: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
@@ -64,7 +64,7 @@
              * @memberof ButtonStyles
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number,
+            tabIndex: PropTypes.number,
 
             /**
              * Callback provided by the button host to notify when the styles list has been expanded.
@@ -73,7 +73,7 @@
              * @memberof ButtonStyles
              * @property {Function} toggleDropdown
              */
-            toggleDropdown: React.PropTypes.func
+            toggleDropdown: PropTypes.func
         },
 
         // Lifecycle. Provides static properties to the widget.

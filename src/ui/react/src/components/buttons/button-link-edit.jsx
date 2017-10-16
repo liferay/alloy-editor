@@ -22,7 +22,7 @@
              * @memberof ButtonLinkEdit
              * @property {Array} allowedTargets
              */
-            allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
+            allowedTargets: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * Indicate if we add http:// protocol to link or not
@@ -31,7 +31,7 @@
              * @memberof ButtonLinkEdit
              * @property {Boolean} appendProtocol
              */
-            appendProtocol: React.PropTypes.bool,
+            appendProtocol: PropTypes.bool,
 
             /**
              * The editor instance where the component is being used.
@@ -40,7 +40,7 @@
              * @memberof ButtonLinkEdit
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Default value of the link target attribute.
@@ -49,7 +49,7 @@
              * @memberof ButtonLinkEdit
              * @property {String} defaultLinkTarget
              */
-            defaultLinkTarget: React.PropTypes.string,
+            defaultLinkTarget: PropTypes.string,
 
             /**
              * Indicates whether the link target selector should appear.
@@ -58,7 +58,7 @@
              * @memberof ButtonLinkEdit
              * @property {Boolean} showTargetSelector
              */
-            showTargetSelector: React.PropTypes.bool,
+            showTargetSelector: PropTypes.bool,
 
             /**
              * List of items to be rendered as possible values for the link or a function, which is
@@ -71,9 +71,9 @@
              * @memberof ButtonLinkEdit
              * @property {Function|Array} data
              */
-            data: React.PropTypes.oneOfType([
-                React.PropTypes.func,
-                React.PropTypes.arrayOf(React.PropTypes.object)
+            data: PropTypes.oneOfType([
+                PropTypes.func,
+                PropTypes.arrayOf(PropTypes.object)
             ])
         },
 
