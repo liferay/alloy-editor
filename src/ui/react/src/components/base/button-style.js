@@ -21,9 +21,9 @@
              * @memberof ButtonStyle
              * @property {Object|String} style
              */
-            style: React.PropTypes.oneOfType([
-                React.PropTypes.object,
-                React.PropTypes.string
+            style: PropTypes.oneOfType([
+                PropTypes.object,
+                PropTypes.string
             ])
         },
 

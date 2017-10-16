@@ -19,7 +19,7 @@
              * @memberof ButtonCommandListItem
              * @property {String} description
              */
-            description: React.PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
 
             /**
              * The command icon to render in the list entry.
@@ -28,7 +28,7 @@
              * @memberof ButtonCommandListItem
              * @property {String} icon
              */
-            icon: React.PropTypes.string
+            icon: PropTypes.string
         },
 
         // Lifecycle. Provides static properties to the widget.
