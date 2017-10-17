@@ -974,7 +974,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
 
 
-var React = __webpack_require__(1);
+var React = __webpack_require__(1) || AlloyEditor.React;
 var factory = __webpack_require__(0);
 
 if (typeof React === 'undefined') {
