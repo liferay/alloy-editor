@@ -17,7 +17,7 @@
              * @memberof ButtonCfgProps
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired
+            editor: PropTypes.object.isRequired
         },
 
         /**

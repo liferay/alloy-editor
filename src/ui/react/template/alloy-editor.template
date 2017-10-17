@@ -45,6 +45,9 @@
         ReactDOM = require('react-dom');
     }
 
+    <%= propTypes %>
+    <%= createReactClass %>
+
     if (typeof window !== 'undefined') {
        deployCKEditor();
 

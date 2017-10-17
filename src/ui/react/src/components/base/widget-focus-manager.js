@@ -31,7 +31,7 @@
              * @memberof WidgetFocusManager
              * @property {Function} onDismiss
              */
-            onDismiss: React.PropTypes.func,
+            onDismiss: PropTypes.func,
 
             /**
              * Indicates if focus should be set to the first/last descendant when the limits are reached.
@@ -40,7 +40,7 @@
              * @memberof WidgetFocusManager
              * @property {boolean} circular
              */
-            circular: React.PropTypes.bool.isRequired,
+            circular: PropTypes.bool.isRequired,
 
             /**
              * Indicate if should focus the first child of a container
@@ -48,7 +48,7 @@
              * @memberof WidgetFocusManager
              * @property {Boolean} focusFirstChild
              */
-            focusFirstChild: React.PropTypes.bool,
+            focusFirstChild: PropTypes.bool,
 
             /**
              * String representing the CSS selector used to define the elements that should be handled.
@@ -57,7 +57,7 @@
              * @memberof WidgetFocusManager
              * @property {String} descendants
              */
-            descendants: React.PropTypes.string.isRequired,
+            descendants: PropTypes.string.isRequired,
 
             /**
              * Object representing the keys used to navigate between descendants. The format for the prop is:
@@ -68,7 +68,7 @@
              * @memberof WidgetFocusManager
              * @property {Object} keys
              */
-            keys: React.PropTypes.object.isRequired
+            keys: PropTypes.object.isRequired
         },
 
         /**
