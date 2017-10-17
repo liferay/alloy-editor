@@ -21,7 +21,7 @@
              * @memberof ButtonKeystroke
              * @property {Object} keystroke
              */
-            keystroke: React.PropTypes.object.isRequired
+            keystroke: PropTypes.object.isRequired
         },
 
         /**

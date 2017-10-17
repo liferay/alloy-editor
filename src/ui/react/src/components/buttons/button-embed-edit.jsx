@@ -10,7 +10,7 @@
      *
      * @class ButtonEmbedEdit
      */
-    var ButtonEmbedEdit = React.createClass({
+    var ButtonEmbedEdit = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -20,7 +20,7 @@
              * @memberof ButtonEmbedEdit
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired
+            editor: PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
