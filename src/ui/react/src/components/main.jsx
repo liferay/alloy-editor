@@ -8,7 +8,7 @@
      * @uses WidgetExclusive
      * @uses WidgetFocusManager
      */
-    var UI = React.createClass({
+    var UI = createReactClass({
         mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
 
         // Allows validating props being passed to the component.
@@ -23,7 +23,7 @@
              * @memberof UI
              * @property {Object} ariaUpdates
              */
-            ariaUpdates: React.PropTypes.object,
+            ariaUpdates: PropTypes.object,
 
             /**
              * The editor instance where the component is being used.
@@ -32,7 +32,7 @@
              * @memberof UI
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The delay (ms), after which key or mouse events will be processed.
@@ -41,7 +41,7 @@
              * @memberof UI
              * @property {Number} eventsDelay
              */
-            eventsDelay: React.PropTypes.number,
+            eventsDelay: PropTypes.number,
 
             /**
              * The toolbars configuration for this editor instance
@@ -50,7 +50,7 @@
              * @memberof UI
              * @property {Object} toolbars
              */
-            toolbars: React.PropTypes.object.isRequired
+            toolbars: PropTypes.object.isRequired
         },
 
         /**

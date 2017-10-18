@@ -71,9 +71,9 @@ var filesToLoad = [
     'test/util/utils.js',
     'src/ui/react/test/util/utils.js',
 
-    /* ReactJS */
+    /* React + test utils */
     {
-        pattern: path.join(alloyEditorDir, 'react-with-addons-all.js'),
+        pattern: path.join(alloyEditorDir, 'react-test-utils.js'),
         included: true,
         watched: false
     },
@@ -154,7 +154,7 @@ var defaultConfig = {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: 'info',
+    logLevel: 'debug',
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false

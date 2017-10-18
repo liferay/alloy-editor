@@ -3,7 +3,7 @@
 
     var assert = chai.assert;
 
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     var doTestIE = function() {
         if (!CKEDITOR.env.ie) {

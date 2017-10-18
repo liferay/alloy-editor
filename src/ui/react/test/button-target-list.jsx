@@ -2,8 +2,8 @@
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
-    var TestUtils = React.addons.TestUtils;
+    var Simulate = ReactTestUtils.Simulate;
+    var TestUtils = ReactTestUtils;
 
     describe('ButtonTargetList', function() {
         this.timeout(35000);

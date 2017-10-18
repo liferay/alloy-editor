@@ -7,7 +7,7 @@
      *
      * @class ButtonDropdown
      */
-    var ButtonDropdown = React.createClass({
+    var ButtonDropdown = createReactClass({
         mixins: [AlloyEditor.WidgetFocusManager],
 
         /**

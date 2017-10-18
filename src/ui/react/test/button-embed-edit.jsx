@@ -3,7 +3,7 @@
 
     var assert = chai.assert;
 
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     var Simulate = TestUtils.Simulate;
 

@@ -2,7 +2,7 @@
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
     var Simulate = TestUtils.Simulate;
 
     var KEY_ENTER = 13;

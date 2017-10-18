@@ -20,7 +20,12 @@ var languageFiles = require('../_languages.js');
 gulp.task('prepare-files', function(done) {
     runSequence(
         'clean-dist', 'create-output-dir', [
-            'build-css', 'copy-ckeditor', 'copy-core-files', 'copy-language-files', 'copy-react', 'copy-test-plugins'
+            'build-css', 
+            'copy-ckeditor', 
+            'copy-core-files', 
+            'copy-language-files', 
+            'copy-react-test-utils',
+            'copy-test-plugins'
         ], done);
 });
 
@@ -41,8 +46,8 @@ gulp.task('copy-language-files', function() {
         .pipe(gulp.dest(path.join(editorDistFolder, 'test')));
 });
 
-gulp.task('copy-react', function() {
-    return gulp.src(path.join(reactDir, 'vendor', 'react-with-addons-all.js'))
+gulp.task('copy-react-test-utils', function() {
+    return gulp.src(path.join(reactDir, 'vendor', 'react-test-utils.js'))
         .pipe(gulp.dest(editorDistFolder));
 });
 

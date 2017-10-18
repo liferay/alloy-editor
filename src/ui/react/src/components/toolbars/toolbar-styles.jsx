@@ -12,7 +12,7 @@
      * @uses WidgetFocusManager
      * @uses WidgetPosition
      */
-    var ToolbarStyles = React.createClass({
+    var ToolbarStyles = createReactClass({
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
         // Allows validating props being passed to the component.
@@ -24,7 +24,7 @@
              * @memberof ToolbarStyles
              * @property {Object} config
              */
-            config: React.PropTypes.object,
+            config: PropTypes.object,
 
             /**
              * The editor instance where the component is being used.
@@ -33,7 +33,7 @@
              * @memberof ToolbarStyles
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The payload from "editorInteraction" event
@@ -42,7 +42,7 @@
              * @memberof ToolbarStyles
              * @property {Object} editorEvent
              */
-            editorEvent: React.PropTypes.object,
+            editorEvent: PropTypes.object,
 
             /**
              * The label that should be used for accessibility purposes.
@@ -51,7 +51,7 @@
              * @memberof ToolbarStyles
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
@@ -60,7 +60,7 @@
              * @memberof ToolbarStyles
              * @property {Function} onDismiss
              */
-            onDismiss: React.PropTypes.func,
+            onDismiss: PropTypes.func,
 
             /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
@@ -69,7 +69,7 @@
              * @memberof ToolbarStyles
              * @property {Object} selectionData
              */
-            selectionData: React.PropTypes.object
+            selectionData: PropTypes.object
         },
 
         // Lifecycle. Provides static properties to the widget.

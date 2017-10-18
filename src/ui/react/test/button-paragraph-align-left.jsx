@@ -2,7 +2,7 @@
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonParagraphAlignLeft', function() {
         this.timeout(35000);

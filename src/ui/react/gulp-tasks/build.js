@@ -66,7 +66,6 @@ gulp.task('release', function(callback) {
         'clean-api',
         'clean-dist',
         'create-react-all',
-        'create-react-with-addons-all',
         [
             'build-api',
             'build-css',
@@ -274,28 +273,15 @@ gulp.task('create-react-all', function() {
     if (!fs.existsSync(path.join(reactDir, 'vendor', 'react-all.js'))) {
         return gulp.src([
                 path.join(reactDir, 'vendor', 'react.js'),
-                path.join(reactDir, 'vendor', 'react-dom.js')
+                path.join(reactDir, 'vendor', 'react-dom.js'),
+                path.join(reactDir, 'vendor', 'prop-types.js'),
+                path.join(reactDir, 'vendor', 'create-react-class.js')
             ])
             .pipe(concat('react-all.js'))
             .pipe(gulp.dest(path.join(reactDir, 'vendor')));
     } else {
         return gulp.src([
             path.join(reactDir, 'vendor', 'react-all.js')
-        ]);
-    }
-});
-
-gulp.task('create-react-with-addons-all', function() {
-    if (!fs.existsSync(path.join(reactDir, 'vendor', 'react-with-addons-all.js'))) {
-        return gulp.src([
-                path.join(reactDir, 'vendor', 'react-with-addons.js'),
-                path.join(reactDir, 'vendor', 'react-dom.js')
-            ])
-            .pipe(concat('react-with-addons-all.js'))
-            .pipe(gulp.dest(path.join(reactDir, 'vendor')));
-    } else {
-        return gulp.src([
-            path.join(reactDir, 'vendor', 'react-with-addons-all.js')
         ]);
     }
 });

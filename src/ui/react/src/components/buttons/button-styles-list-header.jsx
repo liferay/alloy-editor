@@ -6,7 +6,7 @@
      *
      * @class ButtonsStylesListHeader
      */
-    var ButtonsStylesListHeader = React.createClass({
+    var ButtonsStylesListHeader = createReactClass({
         /**
          * Lifecycle. Renders the UI of the button.
          *
