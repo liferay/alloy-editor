@@ -10,7 +10,7 @@
      *
      * @class ButtonTableEdit
      */
-    var ButtonTableEdit = React.createClass({
+    var ButtonTableEdit = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
 
@@ -21,7 +21,7 @@
              * @memberof ButtonTableEdit
              * @property {Function} cancelExclusive
              */
-            cancelExclusive: React.PropTypes.func.isRequired,
+            cancelExclusive: PropTypes.func.isRequired,
 
             /**
              * The editor instance where the component is being used.
@@ -30,7 +30,7 @@
              * @memberof ButtonTableEdit
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired
+            editor: PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.

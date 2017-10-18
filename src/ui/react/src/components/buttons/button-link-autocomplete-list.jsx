@@ -8,7 +8,7 @@
      * @class ButtonLinkAutocompleteList
      * @uses WidgetFocusManager
      */
-    var ButtonLinkAutocompleteList = React.createClass({
+    var ButtonLinkAutocompleteList = createReactClass({
         mixins: [AlloyEditor.WidgetFocusManager],
 
         // Allows validating props being passed to the component.
@@ -20,7 +20,7 @@
              * @memberof ButtonLinkAutocompleteList
              * @property {Function} data
              */
-            data: React.PropTypes.func,
+            data: PropTypes.func,
 
             /**
              * Indicates if this is focused when this component is updated
@@ -29,7 +29,7 @@
              * @memberof ButtonLinkAutocompleteList
              * @property {Boolean} autocompleteSelected
              */
-            autocompleteSelected: React.PropTypes.bool,
+            autocompleteSelected: PropTypes.bool,
 
             /**
              * The current term to autocomplete for
@@ -38,7 +38,7 @@
              * @memberof ButtonLinkAutocompleteList
              * @property {String} term
              */
-            term: React.PropTypes.string,
+            term: PropTypes.string,
 
             /**
             * Method to update parent selectautocomplete state
@@ -47,7 +47,7 @@
              * @memberof ButtonLinkAutocompleteList
             * @property {Function} setAutocompleteState
             */
-            setAutocompleteState: React.PropTypes.func
+            setAutocompleteState: PropTypes.func
 
         },
 

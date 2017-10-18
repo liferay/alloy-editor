@@ -9,7 +9,7 @@
      *
      * @class ButtonCamera
      */
-    var ButtonCamera = React.createClass({
+    var ButtonCamera = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -19,7 +19,7 @@
              * @instance
              * @memberof ButtonCamera
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
@@ -28,7 +28,7 @@
              * @instance
              * @memberof ButtonCamera
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
@@ -38,7 +38,7 @@
              * @instance
              * @memberof ButtonCamera
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.

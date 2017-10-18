@@ -15,7 +15,7 @@
      * @uses WidgetFocusManager
      * @uses WidgetPosition
      */
-    var ToolbarAdd = React.createClass({
+    var ToolbarAdd = createReactClass({
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
 
         // Allows validating props being passed to the component.
@@ -27,7 +27,7 @@
              * @memberof ToolbarAdd
              * @property {Object} config
              */
-            config: React.PropTypes.object,
+            config: PropTypes.object,
 
             /**
              * The editor instance where the component is being used.
@@ -36,7 +36,7 @@
              * @memberof ToolbarAdd
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The payload from "editorInteraction" event
@@ -45,7 +45,7 @@
              * @memberof ToolbarAdd
              * @property {Object} editorEvent
              */
-            editorEvent: React.PropTypes.object,
+            editorEvent: PropTypes.object,
 
             /**
              * The gutter to be applied to the widget when rendered in exclusive mode
@@ -54,7 +54,7 @@
              * @memberof ToolbarAdd
              * @property {Object} gutterExclusive
              */
-            gutterExclusive: React.PropTypes.object,
+            gutterExclusive: PropTypes.object,
 
             /**
              * The label that should be used for accessibility purposes.
@@ -63,7 +63,7 @@
              * @memberof ToolbarAdd
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
@@ -72,7 +72,7 @@
              * @memberof ToolbarAdd
              * @property {Function} onDismiss
              */
-            onDismiss: React.PropTypes.func,
+            onDismiss: PropTypes.func,
 
             /**
              * Whether the Toolbar should be shown on left or on right of the editable area. Could be one of these:
@@ -83,7 +83,7 @@
              * @memberof ToolbarAdd
              * @property {Enum} position
              */
-            position: React.PropTypes.oneOf([POSITION_LEFT, POSITION_RIGHT]),
+            position: PropTypes.oneOf([POSITION_LEFT, POSITION_RIGHT]),
 
             /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
@@ -92,7 +92,7 @@
              * @memberof ToolbarAdd
              * @property {Object} selectionData
              */
-            selectionData: React.PropTypes.object
+            selectionData: PropTypes.object
         },
 
         // Lifecycle. Provides static properties to the widget.
