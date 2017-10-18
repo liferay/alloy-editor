@@ -45,6 +45,8 @@
         ReactDOM = require('react-dom');
     }
 
+    <%= reactBridge %>
+
     if (typeof window !== 'undefined') {
        deployCKEditor();
 

@@ -16,7 +16,7 @@
              * @memberof ButtonCommand
              * @property {String} command
              */
-            command: React.PropTypes.string.isRequired,
+            command: PropTypes.string.isRequired,
 
             /**
              * Indicates that the command may cause the editor to have a different.
@@ -25,7 +25,7 @@
              * @memberof ButtonCommand
              * @property {boolean} modifiesSelection
              */
-            modifiesSelection: React.PropTypes.bool
+            modifiesSelection: PropTypes.bool
         },
 
         /**
