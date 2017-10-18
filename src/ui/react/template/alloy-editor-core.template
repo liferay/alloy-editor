@@ -27,6 +27,14 @@
         ReactDOM = AlloyEditor.ReactDOM;
     }
 
+    var PropTypes = (function() {
+        return (0, eval)('this').PropTypes;
+    }());
+
+    var createReactClass = (function() {
+        return (0, eval)('this').createReactClass;
+    }());
+
     if (typeof window !== 'undefined') {
         <%= ui %>
     }

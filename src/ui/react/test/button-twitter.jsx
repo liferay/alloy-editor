@@ -2,7 +2,7 @@
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonTwitter', function() {
         this.timeout(35000);

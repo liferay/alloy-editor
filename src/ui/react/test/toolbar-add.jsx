@@ -2,7 +2,7 @@
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     describe('ToolbarAdd', function() {
         this.timeout(35000);

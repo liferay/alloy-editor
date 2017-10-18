@@ -71,9 +71,9 @@ var filesToLoad = [
     'test/util/utils.js',
     'src/ui/react/test/util/utils.js',
 
-    /* ReactJS */
+    /* React + test utils */
     {
-        pattern: path.join(alloyEditorDir, 'react-with-addons-all.js'),
+        pattern: path.join(alloyEditorDir, 'react-test-utils.js'),
         included: true,
         watched: false
     },

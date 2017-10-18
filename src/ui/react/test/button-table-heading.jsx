@@ -2,7 +2,7 @@
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     var selectTable = function() {
         var tableElement = this.nativeEditor.element.find('table').getItem(0);
