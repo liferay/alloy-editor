@@ -45,13 +45,7 @@
         ReactDOM = require('react-dom');
     }
 
-    var PropTypes = (function() {
-        return (0, eval)('this').PropTypes || React.PropTypes;
-    }());
-
-    var createReactClass = (function() {
-        return (0, eval)('this').createReactClass || React.createClass;
-    }());    
+    <%= reactBridge %>
 
     if (typeof window !== 'undefined') {
        deployCKEditor();
