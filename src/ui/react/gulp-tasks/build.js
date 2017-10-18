@@ -177,6 +177,7 @@ gulp.task('create-alloy-editor-all', function() {
             alloyeditorUI: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-ui.js')).toString(),
             ckeditor: fs.readFileSync(path.join(editorDistFolder, 'ckeditor.js')).toString(),
             react: fs.readFileSync(path.join(reactDir, 'vendor', 'react-all.js')).toString(),
+            reactBridge: fs.readFileSync(path.join(reactDir, 'vendor', 'react-bridge.js')).toString(),
             version: pkg.version
         }))
         .pipe(replace(regexCKEditor, 'alloy-editor-all$1.js'))
@@ -191,6 +192,7 @@ gulp.task('create-alloy-editor-no-ckeditor', function() {
             alloyeditorUI: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-ui.js')).toString(),
             ckeditor: '',
             react: fs.readFileSync(path.join(reactDir, 'vendor', 'react-all.js')).toString(),
+            reactBridge: fs.readFileSync(path.join(reactDir, 'vendor', 'react-bridge.js')).toString(),
             version: pkg.version
         }))
         .pipe(rename('alloy-editor-no-ckeditor.js'))
@@ -204,6 +206,7 @@ gulp.task('create-alloy-editor-no-react', function() {
             alloyeditorUI: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-ui.js')).toString(),
             ckeditor: fs.readFileSync(path.join(editorDistFolder, 'ckeditor.js')).toString(),
             react: '',
+            reactBridge: fs.readFileSync(path.join(reactDir, 'vendor', 'react-bridge.js')).toString(),
             version: pkg.version
         }))
         .pipe(replace(regexCKEditor, 'alloy-editor-no-react$1.js'))
@@ -218,6 +221,7 @@ gulp.task('create-alloy-editor-all-min', function() {
             alloyeditorUI: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-ui-min.js')).toString(),
             ckeditor: fs.readFileSync(path.join(editorDistFolder, 'ckeditor.js')).toString(),
             react: fs.readFileSync(path.join(reactDir, 'vendor', 'react-min.js')).toString(),
+            reactBridge: fs.readFileSync(path.join(reactDir, 'vendor', 'react-bridge.js')).toString(),
             version: pkg.version
         }))
         .pipe(replace(regexCKEditor, 'alloy-editor-all-min$1.js'))
@@ -232,6 +236,7 @@ gulp.task('create-alloy-editor-no-ckeditor-min', function() {
             alloyeditorUI: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-ui-min.js')).toString(),
             ckeditor: '',
             react: fs.readFileSync(path.join(reactDir, 'vendor', 'react-min.js')).toString(),
+            reactBridge: fs.readFileSync(path.join(reactDir, 'vendor', 'react-bridge.js')).toString(),
             version: pkg.version
         }))
         .pipe(rename('alloy-editor-no-ckeditor-min.js'))
@@ -245,6 +250,7 @@ gulp.task('create-alloy-editor-no-react-min', function() {
             alloyeditorUI: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-ui-min.js')).toString(),
             ckeditor: fs.readFileSync(path.join(editorDistFolder, 'ckeditor.js')).toString(),
             react: '',
+            reactBridge: fs.readFileSync(path.join(reactDir, 'vendor', 'react-bridge.js')).toString(),
             version: pkg.version
         }))
         .pipe(replace(regexCKEditor, 'alloy-editor-no-react-min$1.js'))
@@ -366,6 +372,7 @@ gulp.task('wrap-alloy-editor-core', function () {
         .pipe(template({
             ui: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-ui.js')).toString(),
             main: fs.readFileSync(path.join(editorDistFolder, 'alloy-editor-main.js')).toString(),
+            reactBridge: fs.readFileSync(path.join(reactDir, 'vendor', 'react-bridge.js')).toString(),
             version: pkg.version
         }))
         .pipe(rename('alloy-editor-core.js'))
