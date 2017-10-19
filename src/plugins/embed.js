@@ -87,10 +87,10 @@
                                         widget.element.setHtml(response.html);
                                     }
                                 } else {
-                                    widget.createATag(url, currentSelection);
+                                    widget.createATag(url);
                                 }
                             }, function(msg) {
-                                widget.createATag(url, currentSelection);
+                                widget.createATag(url);
                             });
                         }
                     },
