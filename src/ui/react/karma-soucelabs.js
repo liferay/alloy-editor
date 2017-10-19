@@ -78,13 +78,6 @@ var filesToLoad = [
         watched: false
     },
 
-    /* React Bridge */
-    {
-        pattern: path.join(alloyEditorDir, 'react-bridge.js'),
-        included: true,
-        watched: false
-    },
-
     /* Fixtures */
     'test/core/test/fixtures/**/*',
     'src/ui/react/test/fixtures/**/*'
@@ -122,11 +115,66 @@ filesToLoad.push({
     watched: false
 });
 
+var customLaunchers = {
+    sl_chrome: {
+        base: 'SauceLabs',
+        browserName: 'chrome'
+    },
+    sl_firefox: {
+        base: 'SauceLabs',
+        browserName: 'firefox'
+    },
+    sl_ie_9: {
+        base: 'SauceLabs',
+        browserName: 'internet explorer',
+        platform: 'Windows 7',
+        version: '9'
+    },
+    sl_ie_10: {
+        base: 'SauceLabs',
+        browserName: 'internet explorer',
+        platform: 'Windows 7',
+        version: '10'
+    },
+    sl_ie_11: {
+        base: 'SauceLabs',
+        browserName: 'internet explorer',
+        platform: 'Windows 8.1',
+        version: '11'
+    },
+    sl_edge_20: {
+        base: 'SauceLabs',
+        browserName: 'microsoftedge',
+        platform: 'Windows 10',
+        version: '13'
+    },
+    sl_edge_21: {
+        base: 'SauceLabs',
+        browserName: 'microsoftedge',
+        platform: 'Windows 10',
+        version: '14'
+    },
+    sl_edge_22: {
+        base: 'SauceLabs',
+        browserName: 'microsoftedge',
+        platform: 'Windows 10',
+        version: '15'
+    }
+};
+
 var defaultConfig = {
+
+		browsers: Object.keys(customLaunchers),
+
+    browserDisconnectTimeout: 10000,
+    browserDisconnectTolerance: 2,
+    browserNoActivityTimeout: 240000,
+
+    captureTimeout: 240000,
+    customLaunchers: customLaunchers,
+
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '../../..',
-
-    browsers: ['Chrome', 'Firefox', 'IE9 - Win7', 'IE10 - Win7', 'IE11 - Win7', 'MSEdge - Win10'],
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -151,7 +199,7 @@ var defaultConfig = {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['coverage', 'progress'],
+    reporters: ['progress', 'saucelabs'],
 
     // web server port
     port: 9876,
@@ -164,7 +212,19 @@ var defaultConfig = {
     logLevel: 'info',
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false
+    autoWatch: false,
+
+    // soucelabs specific configuration
+    sauceLabs: {
+        testName: 'AlloyEditor tests',
+        recordScreenshots: false,
+        startConnect: true,
+        connectOptions: {
+            port: 5757,
+            logfile: 'sauce_connect.log'
+        }
+    }
+
 };
 
 module.exports = function(config) {
