@@ -53,7 +53,7 @@
   },
   "main": "dist/alloy-editor/alloy-editor-no-react.js",
   "scripts": {
-    "test": "gulp test:saucelab"
+    "test": "gulp test:saucelabs"
   },
   "repository": {
     "type": "git",
