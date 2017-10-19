@@ -68,3 +68,10 @@ gulp.task('test', ['prepare-files'], function (done) {
         singleRun: (argv.debug || argv.d) ? false : true
     }, done).start();
 });
+
+gulp.task('test:saucelabs', ['prepare-files'], function (done) {
+    new KarmaServer({
+        configFile: path.join(__dirname, '../karma-soucelabs.js'),
+        singleRun: (argv.debug || argv.d) ? false : true
+    }, done).start();
+});
