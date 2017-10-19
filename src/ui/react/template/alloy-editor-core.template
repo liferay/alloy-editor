@@ -27,6 +27,8 @@
         ReactDOM = AlloyEditor.ReactDOM;
     }
 
+    <%= reactBridge %>
+
     if (typeof window !== 'undefined') {
         <%= ui %>
     }

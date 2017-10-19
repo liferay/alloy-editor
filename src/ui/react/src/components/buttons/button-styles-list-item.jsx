@@ -9,7 +9,7 @@
      * @uses ButtonActionStyle
      * @uses ButtonStyle
      */
-    var ButtonStylesListItem = React.createClass({
+    var ButtonStylesListItem = createReactClass({
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonActionStyle],
 
         // Lifecycle. Provides static properties to the widget.

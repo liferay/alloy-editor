@@ -21,7 +21,7 @@
              * @property {Boolean} constrainToViewport
              * @default true
              */
-            constrainToViewport: React.PropTypes.bool,
+            constrainToViewport: PropTypes.bool,
 
             /**
              * The gutter (vertical and horizontal) between the interaction point and where the widget
@@ -35,7 +35,7 @@
              *     top: 10
              * }
              */
-            gutter: React.PropTypes.object
+            gutter: PropTypes.object
         },
 
         /**

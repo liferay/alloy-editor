@@ -6,7 +6,7 @@
      *
      * @class ButtonTableCell
      */
-    var ButtonTableCell = React.createClass({
+    var ButtonTableCell = createReactClass({
         // Allows validating props being passed to the component.
         propTypes: {
             /**
@@ -16,7 +16,7 @@
              * @memberof ButtonTableCell
              * @property {Array} commands
              */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
+            commands: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
@@ -25,7 +25,7 @@
              * @memberof ButtonTableCell
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Indicates whether the styles list is expanded or not.
@@ -34,7 +34,7 @@
              * @memberof ButtonTableCell
              * @property {Boolean} expanded
              */
-            expanded: React.PropTypes.bool,
+            expanded: PropTypes.bool,
 
             /**
              * The label that should be used for accessibility purposes.
@@ -43,7 +43,7 @@
              * @memberof ButtonTableCell
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
@@ -53,7 +53,7 @@
              * @memberof ButtonTableCell
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number,
+            tabIndex: PropTypes.number,
 
             /**
              * Callback provided by the button host to notify when the styles list has been expanded.
@@ -62,7 +62,7 @@
              * @memberof ButtonTableCell
              * @property {Function} toggleDropdown
              */
-            toggleDropdown: React.PropTypes.func
+            toggleDropdown: PropTypes.func
         },
 
         // Lifecycle. Provides static properties to the widget.

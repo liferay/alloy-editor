@@ -49,12 +49,12 @@
         RICH_COMBO_DEFS[editor.name][richComboName].currentValue = undefined;
 
         if (!RichComboBridge) {
-            RichComboBridge = React.createClass(
+            RichComboBridge = createReactClass(
                 CKEDITOR.tools.merge(UNSUPPORTED_RICHCOMBO_API, {
                     displayName: richComboName,
 
                     propTypes: {
-                        editor: React.PropTypes.object.isRequired
+                        editor: PropTypes.object.isRequired
                     },
 
                     statics: {
