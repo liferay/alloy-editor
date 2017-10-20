@@ -10,6 +10,11 @@ var path = require('path');
 var srcFiles = require('./_src.js');
 srcFiles = srcFiles.main.concat(srcFiles.ui);
 
+var souceLabsAccessKey = process.env.SAUCE_ACCESS_KEY_ENC;
+if (souceLabsAccessKey) {
+    souceLabsAccessKey = new Buffer(souceLabsAccessKey, 'base64').toString('binary');
+}
+
 var preprocessors = {
     '**/*.jsx': ['babel'],
     '**/*.html': ['html2js']
@@ -164,7 +169,7 @@ var customLaunchers = {
 
 var defaultConfig = {
 
-		browsers: Object.keys(customLaunchers),
+	browsers: Object.keys(customLaunchers),
 
     browserDisconnectTimeout: 10000,
     browserDisconnectTolerance: 2,
@@ -216,6 +221,7 @@ var defaultConfig = {
 
     // soucelabs specific configuration
     sauceLabs: {
+        accessKey: souceLabsAccessKey,
         testName: 'AlloyEditor tests',
         recordScreenshots: false,
         startConnect: true,
