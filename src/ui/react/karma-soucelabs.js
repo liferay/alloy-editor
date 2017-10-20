@@ -3,6 +3,7 @@
 'use strict';
 
 var alloyEditorDir = 'dist/alloy-editor/';
+var karmaSauceLauncher = require('karma-sauce-launcher');
 
 var argv = require('yargs').argv;
 var path = require('path');
@@ -10,9 +11,9 @@ var path = require('path');
 var srcFiles = require('./_src.js');
 srcFiles = srcFiles.main.concat(srcFiles.ui);
 
-var souceLabsAccessKey = process.env.SAUCE_ACCESS_KEY_ENC;
-if (souceLabsAccessKey) {
-    souceLabsAccessKey = new Buffer(souceLabsAccessKey, 'base64').toString('binary');
+var sauceLabsAccessKey = process.env.SAUCE_ACCESS_KEY_ENC;
+if (sauceLabsAccessKey) {
+    sauceLabsAccessKey = new Buffer(sauceLabsAccessKey, 'base64').toString('binary');
 }
 
 var preprocessors = {
@@ -191,6 +192,17 @@ var defaultConfig = {
     // list of files to exclude
     exclude: [],
 
+    plugins: [
+        'karma-babel-preprocessor',
+        'karma-coverage',
+        'karma-html2js-preprocessor',
+        'karma-chai',
+        'karma-fixture',
+        'karma-mocha',
+        'karma-sinon',
+        karmaSauceLauncher
+    ],
+
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: preprocessors,
@@ -221,8 +233,9 @@ var defaultConfig = {
 
     // soucelabs specific configuration
     sauceLabs: {
-        accessKey: souceLabsAccessKey,
+        accessKey: sauceLabsAccessKey,
         testName: 'AlloyEditor tests',
+        recordVideo: false,
         recordScreenshots: false,
         startConnect: true,
         connectOptions: {
