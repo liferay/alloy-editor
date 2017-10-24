@@ -215,9 +215,9 @@
         },
 
         /**
-         * Checks if the URI begins with an '#' to decide if it is an on page bookmark.
-         * Checks if the URI has an '@' symbol. If it does and the URI looks like an email
-         * and doesn't have 'mailto:', 'mailto:' is added to the URI.
+         * Checks if the URI begins with a '#' symbol to determine if it's an on page bookmark.
+         * If it doesn't, it then checks if the URI has an '@' symbol. If it does and the URI
+         * looks like an email and doesn't have 'mailto:', 'mailto:' is added to the URI.
          * If it doesn't and the URI doesn't have a scheme, the default 'http' scheme with
          * hierarchical path '//' is added to the URI.
          *
