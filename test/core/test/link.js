@@ -82,6 +82,23 @@
             assert.strictEqual(data, '<p>set a <a href="//test.com" target="_blank">selection</a> and then convert it to a link.</p>');
         });
 
+        it('should not add default protocol if link is an on page bookmark', function() {
+            var link = new CKEDITOR.Link(this.nativeEditor);
+
+            bender.tools.selection.setWithHtml(this.nativeEditor, 'set a {selection} and then convert it to a link.');
+
+            link.create('#bookmark', {
+                target: '_blank'
+            });
+
+            var data = bender.tools.getData(this.nativeEditor, {
+                fixHtml: true,
+                compatHtml: true
+            });
+
+            assert.strictEqual(data, '<p>set a <a href="#bookmark" target="_blank">selection</a> and then convert it to a link.</p>');
+        });
+
         it('should add mailto: when creating an email link', function() {
             var link = new CKEDITOR.Link(this.nativeEditor);
 
