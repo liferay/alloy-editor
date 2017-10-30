@@ -84,6 +84,13 @@ var filesToLoad = [
         watched: false
     },
 
+    /* React Bridge */
+    {
+        pattern: path.join(alloyEditorDir, 'react-bridge.js'),
+        included: true,
+        watched: false
+    },    
+
     /* Fixtures */
     'test/core/test/fixtures/**/*',
     'src/ui/react/test/fixtures/**/*'
