@@ -34,11 +34,10 @@
         value: 'block'
     }, {
         name: 'margin-left',
-        value: '50%'
+        value: 'auto'
     }, {
-        name: 'transform',
-        value: 'translateX(-50%)',
-        vendorPrefixes: ['-ms-']
+        name: 'margin-right',
+        value: 'auto'
     }];
 
     /**
