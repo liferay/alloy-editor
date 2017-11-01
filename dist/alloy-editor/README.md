@@ -1,35 +1,39 @@
-Alloy Editor
-==================
+CKEditor 4
+==========
 
-Alloy Editor is a modern WYSIWYG editor built on top of CKEditor, designed to create modern and gorgeous web content.
+Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
+http://ckeditor.com - See LICENSE.md for license information.
 
-Works on IE9+, Chrome, Firefox and Safari.
-
-## Demo
-
-* [All-in-one self-guided demo](http://alloyeditor.com/demo/)
-* [Screencasts and code samples for specific features](http://alloyeditor.com/features/)
-
-## Features
-
-* Smart toolbars appear right near the selected text and offer different functionality based on context
-* Easily add your own buttons (see the "marquee" example in [the demo](http://alloyeditor.com/demo/))
-* Paste images from clipboard, or Drag&Drop them from another application
-* Insert images from the device's camera!
-* Paste rich text from any web page and preserve its formatting
-* The full styling power of CKEditor...
-* ...with a much more modern UI
-* The core is fully separated from the UI
-* The example UI is built with React
-* Plugin architecture
+CKEditor is a text editor to be used inside web pages. It's not a replacement
+for desktop text editors like Word or OpenOffice, but a component to be used as
+part of web applications and websites.
 
 ## Documentation
 
-Look for documentation and examples on [http://alloyeditor.com/](http://alloyeditor.com/)
+The full editor documentation is available online at the following address:
+http://docs.ckeditor.com
 
-### License
-[LGPL License](LICENSE.md)
+## Installation
 
-[![Build Status](https://travis-ci.org/liferay/alloy-editor.svg)](https://travis-ci.org/liferay/alloy-editor)
+Installing CKEditor is an easy task. Just follow these simple steps:
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/alloyui.svg)](https://saucelabs.com/u/alloyui)
+ 1. **Download** the latest version from the CKEditor website:
+    http://ckeditor.com. You should have already completed this step, but be
+    sure you have the very latest version.
+ 2. **Extract** (decompress) the downloaded file into the root of your website.
+
+**Note:** CKEditor is by default installed in the `ckeditor` folder. You can
+place the files in whichever you want though.
+
+## Checking Your Installation
+
+The editor comes with a few sample pages that can be used to verify that
+installation proceeded properly. Take a look at the `samples` directory.
+
+To test your installation, just call the following page at your website:
+
+	http://<your site>/<CKEditor installation path>/samples/index.html
+
+For example:
+
+	http://www.example.com/ckeditor/samples/index.html
