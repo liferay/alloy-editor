@@ -20,12 +20,12 @@ var languageFiles = require('../_languages.js');
 gulp.task('prepare-files', function(done) {
     runSequence(
         'clean-dist', 'create-output-dir', [
-            'build-css', 
-            'copy-ckeditor', 
-            'copy-core-files', 
-            'copy-language-files', 
+            'build-css',
+            'copy-ckeditor',
+            'copy-core-files',
+            'copy-language-files',
             'copy-react',
-            'copy-react-bridge', 
+            'copy-react-bridge',
             'copy-test-plugins'
         ], done);
 });
@@ -71,7 +71,7 @@ gulp.task('test', ['prepare-files'], function (done) {
 
 gulp.task('test:saucelabs', ['prepare-files'], function (done) {
     new KarmaServer({
-        configFile: path.join(__dirname, '../karma-soucelabs.js'),
+        configFile: path.join(__dirname, '../karma-saucelabs.js'),
         singleRun: (argv.debug || argv.d) ? false : true
     }, done).start();
 });
