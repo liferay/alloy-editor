@@ -11,9 +11,7 @@
             '<h2>' + brFiller + '</h2>'
         ],
         2: ['', ' ', brFiller],
-        3: ['<div>' + brFiller + '</div>'],
-        4: ['<h1>' + brFiller + '</h1>'],
-        5: ['<h2>' + brFiller + '</h2>'],
+        3: ['<div>' + brFiller + '</div>']
     };
 
     var placeholderClass = 'ae-placeholder';
