@@ -1,5 +1,5 @@
 ## Prelude
-Preliminary history of the issue. Share any information that could ease the understanding of why this issue exists. Try to line up the major concerns that affects the project up until this issue is not implemented.
+Preliminary history of the issue. Share any information that could ease the understanding of why this issue exists. Try to line up the major concerns that might affect the project up until this issue is not implemented.
 
 ## User story
 Provide the Connextra styled explanation of the issue.
