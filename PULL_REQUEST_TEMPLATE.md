@@ -1,7 +1,7 @@
-Please employ to following template as the base structure of Pull Requests for **Alloy-Editor** project. Pull Requests not incorporating the sections below will be reqarded as unsatisfying and rejected. 
+Please employ to following template as the base structure of Pull Requests for **AlloyEditor** (liferay/alloy-editor) project. Pull Requests not incorporating the sections below will be regarded as unsatisfying and rejected. 
 
 ## Prelude
-Preliminary history of the issue related this very Pull Request. Share any information that could ease the understanding of why this issue exists and what measures have been administered to address it.
+Preliminary history of the issue related to this very Pull Request. Share any information that could ease the understanding of why this issue exists and what measures have been administered to address it.
 
 ## Issue
 Link the issue from the issues list with any complementary explanation that is required to have a solid understanding of it.
