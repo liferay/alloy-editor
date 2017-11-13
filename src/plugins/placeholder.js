@@ -15,7 +15,11 @@
     var brFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
 
     var enterModeEmptyValue = {
-        1: ['<p>' + brFiller + '</p>'],
+        1: [
+            '<p>' + brFiller + '</p>',
+            '<h1>' + brFiller + '</h1>',
+            '<h2>' + brFiller + '</h2>'
+        ],
         2: ['', ' ', brFiller],
         3: ['<div>' + brFiller + '</div>']
     };
