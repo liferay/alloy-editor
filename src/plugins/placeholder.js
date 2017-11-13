@@ -6,6 +6,18 @@
     }
 
     /**
+     * List of visual elements that must cause the placeholder text to disapper
+     * @property
+     * @type {array}
+     */
+    var noPlaceHolderElements = [
+        'img',
+        'hr',
+        'pre',
+        'table'
+    ];
+
+    /**
      * CKEDITOR enterMode config set the behavior of paragraphs
      * When the content is empty CKEDITOR keeps the enterMode string
      * into the content
@@ -13,12 +25,6 @@
      * @type {string}
      */
     var brFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
-
-    var enterModeEmptyValue = {
-        1: ['<p>' + brFiller + '</p>'],
-        2: ['', ' ', brFiller],
-        3: ['<div>' + brFiller + '</div>']
-    };
 
     /**
      * CKEditor plugin which allows adding a placeholder to the editor. In this case, if there
@@ -64,18 +70,54 @@
                 var editor = event.editor;
 
                 var editableNode = editor.editable();
-
-                var innerHtml = editableNode.$.innerHTML.trim();
-
-                var isEmpty = enterModeEmptyValue[editor.config.enterMode].some(function(element) {
-                    return innerHtml === element;
-                });
+                var editableElm = editableNode.$;
+                var isEmpty = this._isElementEmpty(editableElm);
 
                 if (isEmpty) {
                     editableNode.addClass(editor.config.placeholderClass);
                 } else {
                     editableNode.removeClass(editor.config.placeholderClass);
                 }
+            },
+
+            /**
+             * Checks whether the given element is empty. 
+             * The defenition of empty is if the element does not contain any non-visual 
+             * element with non whitespace inner content
+             * @param {DOMElement} elm
+             * @return {boolean}
+             */
+            _isElementEmpty: function _isElementEmpty(elm) {
+                var children;
+                var innerHTML;
+                
+                if (!elm) return true;
+                
+                if (3 === elm.nodeType) {
+                    innerHTML = elm.textContent;
+                } else if (-1 !== noPlaceHolderElements.indexOf(elm.nodeName.toLowerCase())) {
+                    return false;
+                } else if (elm.innerHTML) {
+                    innerHTML = elm.innerHTML.trim();
+                }
+
+                if (!innerHTML) return true;
+
+                children = [].slice.call(elm.childNodes);
+
+                if (0 === children.length) {
+                    return 0 === innerHTML
+                        .replace(/\s/g, '')
+                        .replace(/\<br(\s)*\/?>/, '')
+                        .length;
+                }
+
+                return children.map(function(child) {
+                    return _isElementEmpty(child);
+                })
+                .every(function(isEmpty) { 
+                    return isEmpty;
+                });
             },
 
             /**
