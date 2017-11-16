@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -213,12 +215,7 @@
                             
                                                 <ul class="index-list methods">
                                                         <li class="index-item method">
-                                                            <a href="#method_CKEDITOR.tools.jsonp">CKEDITOR.tools.jsonp</a>
-                            
-                                                                <span class="flag static">static</span>
-                                                        </li>
-                                                        <li class="index-item method">
-                                                            <a href="#method_debounce">debounce</a>
+                                                            <a href="#method_jsonp">jsonp</a>
                             
                                                                 <span class="flag static">static</span>
                                                         </li>
@@ -242,8 +239,8 @@
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method_CKEDITOR.tools.jsonp" class="method item">
-                                                    <h3 class="name"><code>CKEDITOR.tools.jsonp</code></h3>
+                                                <div id="method_jsonp" class="method item">
+                                                    <h3 class="name"><code>jsonp</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
@@ -251,13 +248,13 @@
                                                                         <code>urlTemplate</code>
                                                                 </li>
                                                                 <li class="arg">
-                                                                        <code>urlParams</code>
-                                                                </li>
-                                                                <li class="arg">
                                                                         <code>callback</code>
                                                                 </li>
                                                                 <li class="arg">
                                                                         <code>errorCallback</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>urlParams</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
@@ -298,19 +295,7 @@
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The template of the URL to be requested. All properties
-                                                passed in <code>urlParams</code> can be used, plus a <code>{callback}</code>, which represent a JSONP callback, must be defined.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
-                                                                        <code class="param-name">urlParams</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>Parameters to be passed to the <code>urlTemplate</code>.</p>
+                                                                        <p>The template of the URL to be requested. All properties passed in <code>urlParams</code> can be used, plus a <code>{callback}</code>, which represent a JSONP callback, must be defined.</p>
                                                 
                                                                     </div>
                                                 
@@ -337,6 +322,17 @@
                                                                     </div>
                                                 
                                                                 </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">urlParams</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Parameters to be passed to the <code>urlTemplate</code>.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                 
@@ -353,106 +349,6 @@
                                                 
                                                             </div>
                                                         </div>
-                                                
-                                                </div>
-                                                <div id="method_debounce" class="method item">
-                                                    <h3 class="name"><code>debounce</code></h3>
-                                                
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
-                                                                <li class="arg">
-                                                                        <code>callback</code>
-                                                                </li>
-                                                                <li class="arg">
-                                                                        <code>timeout</code>
-                                                                </li>
-                                                                <li class="arg">
-                                                                        <code>context</code>
-                                                                </li>
-                                                                <li class="arg">
-                                                                        <code>args</code>
-                                                                </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                        <span class="flag static">static</span>
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_debounce.js.html#l10"><code>src&#x2F;core&#x2F;debounce.js:10</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Debounce util function. If a function execution is expensive, it might be debounced. This means
-                                                that it will be executed after some amount of time after its last call. For example, if we attach a
-                                                a function on scroll event, it might be called hundreds times per second. In this case it may be
-                                                debounced with, let&#39;s say 100ms. The real execution of this function will happen 100ms after last
-                                                scroll event.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">callback</code>
-                                                                        <span class="type">Function</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The callback which has to be called after given timeout.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
-                                                                        <code class="param-name">timeout</code>
-                                                                        <span class="type">Number</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>Timeout in milliseconds after which the callback will be called.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
-                                                                        <code class="param-name">context</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The context in which the callback will be called. This argument is optional.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
-                                                                        <code class="param-name">args</code>
-                                                                        <span class="type">Array</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>An array of arguments which the callback will receive.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
                                                 
                                                 </div>
                                                 <div id="method_merge" class="method item">
@@ -550,7 +446,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_tools.js.html#l96"><code>src&#x2F;core&#x2F;tools.js:96</code></a>
+                                                        <a href="../files/src_core_tools.js.html#l97"><code>src&#x2F;core&#x2F;tools.js:97</code></a>
                                                         </p>
                                                 
                                                 

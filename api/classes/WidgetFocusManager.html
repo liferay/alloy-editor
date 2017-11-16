@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -323,7 +325,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l150"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:150</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l170"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:170</code></a>
                                                         </p>
                                                 
                                                 
@@ -371,10 +373,10 @@
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>event</code>
+                                                                        <code>focusMoveDirection</code>
                                                                 </li>
                                                                 <li class="arg">
-                                                                        <code>focusMoveDirection</code>
+                                                                        <code>event</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
@@ -393,7 +395,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l183"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:183</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l205"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:205</code></a>
                                                         </p>
                                                 
                                                 
@@ -419,23 +421,23 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">event</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The Keyboard event.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
                                                                         <code class="param-name">focusMoveDirection</code>
                                                                         <span class="type">Number</span>
                                                 
                                                 
                                                                     <div class="param-description">
                                                                         <p>The focus movement direction (if any).</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">event</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The Keyboard event.</p>
                                                 
                                                                     </div>
                                                 
@@ -479,7 +481,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l227"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:227</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l251"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:251</code></a>
                                                         </p>
                                                 
                                                 
@@ -546,7 +548,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l267"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:267</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l294"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:294</code></a>
                                                         </p>
                                                 
                                                 
@@ -594,10 +596,10 @@
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>keyCode</code>
+                                                                        <code>keys</code>
                                                                 </li>
                                                                 <li class="arg">
-                                                                        <code>keys</code>
+                                                                        <code>keyCode</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
@@ -616,7 +618,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l253"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:253</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l279"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:279</code></a>
                                                         </p>
                                                 
                                                 
@@ -633,23 +635,23 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">keyCode</code>
-                                                                        <span class="type">Number</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>An event keyCode.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
                                                                         <code class="param-name">keys</code>
                                                                         <span class="type">Array | Number</span>
                                                 
                                                 
                                                                     <div class="param-description">
                                                                         <p>A key set. Can be a number an array of numbers representing the allowed keyCodes.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">keyCode</code>
+                                                                        <span class="type">Number</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>An event keyCode.</p>
                                                 
                                                                     </div>
                                                 
@@ -690,7 +692,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l282"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:282</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l311"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:311</code></a>
                                                         </p>
                                                 
                                                 
@@ -738,7 +740,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l312"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:312</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l343"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:343</code></a>
                                                         </p>
                                                 
                                                 
@@ -768,7 +770,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l64"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:64</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l74"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:74</code></a>
                                                         </p>
                                                 
                                                 
@@ -798,7 +800,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l73"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:73</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l85"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:85</code></a>
                                                         </p>
                                                 
                                                 
@@ -829,7 +831,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l83"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:83</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l97"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:97</code></a>
                                                         </p>
                                                 
                                                 
@@ -867,7 +869,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l113"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:113</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l129"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:129</code></a>
                                                         </p>
                                                 
                                                 
@@ -920,7 +922,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l138"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:138</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l156"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:156</code></a>
                                                         </p>
                                                 
                                                 
@@ -968,7 +970,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l34"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:34</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l36"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:36</code></a>
                                                         </p>
                                                 
                                                 
@@ -993,7 +995,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l47"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:47</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l53"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:53</code></a>
                                                         </p>
                                                 
                                                 
@@ -1018,7 +1020,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l41"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:41</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l45"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:45</code></a>
                                                         </p>
                                                 
                                                 
@@ -1043,7 +1045,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l54"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:54</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-focus-manager.js.html#l62"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-focus-manager.js:62</code></a>
                                                         </p>
                                                 
                                                 

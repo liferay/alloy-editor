@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -185,12 +187,7 @@
                             (function() {
                                 &#x27;use strict&#x27;;
                             
-                                /**
-                                 * An object containing all currently registered plugins in AlloyEditor.
-                                 *
-                                 * @property
-                                 * @type {Object}
-                                 */
+                                // An object containing all currently registered plugins in AlloyEditor.
                                 var BRIDGE_BUTTONS = {};
                             
                                 /**
@@ -202,6 +199,7 @@
                                     /**
                                      * Creates an instance of AlloyEditor.
                                      *
+                                     * @memberof AlloyEditor
                                      * @method editable
                                      * @static
                                      * @param {String|Node} node The Node ID or HTMl node, which AlloyEditor should use as an editable area.
@@ -223,6 +221,7 @@
                                      * global variable named &#x60;ALLOYEDITOR_BASEPATH&#x60;. This global variable
                                      * must be set **before** the editor script loading.
                                      *
+                                     * @memberof AlloyEditor
                                      * @method getBasePath
                                      * @static
                                      * @return {String} The found base path
@@ -269,6 +268,7 @@
                                      * Detects and load the corresponding language file if AlloyEditor language strings are not already present.
                                      * The function fires a {{#crossLink &quot;AlloyEditor/languageResourcesLoaded:event&quot;}}{{/crossLink}} event
                                      *
+                                     * @memberof AlloyEditor
                                      * @method loadLanguageResources
                                      * @static
                                      * @param {Function} callback Optional callback to be called when AlloyEditor loads the language resource.
@@ -316,6 +316,7 @@
                                      * returned by this function contain a querystring parameter (&quot;t&quot;)
                                      * set to the {@link CKEDITOR#timestamp} value.
                                      *
+                                     * @memberof AlloyEditor
                                      * @method getUrl
                                      * @static
                                      * @param {String} resource The resource whose full URL we want to get.
@@ -341,6 +342,7 @@
                                     /**
                                      * Implements event firing and subscribing via CKEDITOR.event.
                                      *
+                                     * @memberof AlloyEditor
                                      * @method implementEventTarget
                                      * @static
                                      */
@@ -353,6 +355,7 @@
                                     /**
                                      * Regular expression which should match the script which have been used to load AlloyEditor.
                                      *
+                                     * @memberof AlloyEditor
                                      * @property regexBasePath
                                      * @type {RegExp}
                                      * @static
@@ -362,6 +365,7 @@
                                     /**
                                      * And object, containing all currently registered buttons in AlloyEditor.
                                      *
+                                     * @memberof AlloyEditor
                                      * @property Buttons
                                      * @type {Object}
                                      * @static
@@ -371,6 +375,7 @@
                                     /**
                                      * And object, containing all currently registered toolbars in AlloyEditor.
                                      *
+                                     * @memberof AlloyEditor
                                      * @property Toolbars
                                      * @type {Object}
                                      * @static
@@ -388,6 +393,7 @@
                                      * Returns the required plugin names needed for a given plugin
                                      * if it is already registered or an empty array.
                                      *
+                                     * @memberof AlloyEditor
                                      * @method getButtons
                                      * @param {Array} buttons An array of buttons or plugin names.
                                      * @return {Function} A function that can be invoked to resolve the requested button names.
@@ -405,6 +411,7 @@
                                     /**
                                      * Register a button and try to get its required plugins.
                                      *
+                                     * @memberof AlloyEditor
                                      * @method registerBridgeButton
                                      * @param {String} buttonName The name of the button.
                                      * @param {String} pluginName The name of the plugin that registers the button.

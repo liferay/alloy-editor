@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -184,7 +186,7 @@
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_core_link.js.html#l7"><code>src&#x2F;core&#x2F;link.js:7</code></a>
+                                        Defined in: <a href="../files/src_core_link.js.html#l8"><code>src&#x2F;core&#x2F;link.js:8</code></a>
                                     </div>
                             
                             
@@ -219,7 +221,7 @@
                                         <div class="meta">
                                                     <p>
                                                     Defined in
-                                            <a href="../files/src_core_link.js.html#l7"><code>src&#x2F;core&#x2F;link.js:7</code></a>
+                                            <a href="../files/src_core_link.js.html#l8"><code>src&#x2F;core&#x2F;link.js:8</code></a>
                                             </p>
                                     
                                     
@@ -280,6 +282,11 @@
                             
                                                         </li>
                                                         <li class="index-item method">
+                                                            <a href="#method_debounce">debounce</a>
+                            
+                                                                <span class="flag static">static</span>
+                                                        </li>
+                                                        <li class="index-item method">
                                                             <a href="#method_getFromSelection">getFromSelection</a>
                             
                                                         </li>
@@ -326,7 +333,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l207"><code>src&#x2F;core&#x2F;link.js:207</code></a>
+                                                        <a href="../files/src_core_link.js.html#l217"><code>src&#x2F;core&#x2F;link.js:217</code></a>
                                                         </p>
                                                 
                                                 
@@ -334,8 +341,9 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Checks if the URI has an &#39;@&#39; symbol. If it does and the URI looks like an email
-                                                and doesn&#39;t have &#39;mailto:&#39;, &#39;mailto:&#39; is added to the URI.
+                                                        <p>Checks if the URI begins with a &#39;#&#39; symbol to determine if it&#39;s an on page bookmark.
+                                                If it doesn&#39;t, it then checks if the URI has an &#39;@&#39; symbol. If it does and the URI
+                                                looks like an email and doesn&#39;t have &#39;mailto:&#39;, &#39;mailto:&#39; is added to the URI.
                                                 If it doesn&#39;t and the URI doesn&#39;t have a scheme, the default &#39;http&#39; scheme with
                                                 hierarchical path &#39;//&#39; is added to the URI.</p>
                                                 
@@ -430,13 +438,13 @@
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>URI</code>
-                                                                </li>
-                                                                <li class="arg">
                                                                         <code>attrs</code>
                                                                 </li>
                                                                 <li class="arg">
                                                                         <code>modifySelection</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>URI</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
@@ -451,7 +459,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l53"><code>src&#x2F;core&#x2F;link.js:53</code></a>
+                                                        <a href="../files/src_core_link.js.html#l55"><code>src&#x2F;core&#x2F;link.js:55</code></a>
                                                         </p>
                                                 
                                                 
@@ -467,17 +475,6 @@
                                                             <h4>Parameters:</h4>
                                                 
                                                             <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">URI</code>
-                                                                        <span class="type">String</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The URI of the link.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
                                                                 <li class="param">
                                                                         <code class="param-name">attrs</code>
                                                                         <span class="type">Object</span>
@@ -496,6 +493,117 @@
                                                 
                                                                     <div class="param-description">
                                                                         <p>A config object with an advance attribute to indicate if the selection should be moved after the link creation.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">URI</code>
+                                                                        <span class="type">String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The URI of the link.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method_debounce" class="method item">
+                                                    <h3 class="name"><code>debounce</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>args</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>callback</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>timeout</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>context</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                        <span class="flag static">static</span>
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_core_debounce.js.html#l4"><code>src&#x2F;core&#x2F;debounce.js:4</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Debounce util function. If a function execution is expensive, it might be debounced. This means
+                                                that it will be executed after some amount of time after its last call. For example, if we attach a
+                                                a function on scroll event, it might be called hundreds times per second. In this case it may be
+                                                debounced with, let&#39;s say 100ms. The real execution of this function will happen 100ms after last
+                                                scroll event.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">args</code>
+                                                                        <span class="type">Array</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>An array of arguments which the callback will receive.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">callback</code>
+                                                                        <span class="type">Function</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The callback which has to be called after given timeout.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">timeout</code>
+                                                                        <span class="type">Number</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Timeout in milliseconds after which the callback will be called.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">context</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The context in which the callback will be called. This argument is optional.</p>
                                                 
                                                                     </div>
                                                 
@@ -523,7 +631,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l94"><code>src&#x2F;core&#x2F;link.js:94</code></a>
+                                                        <a href="../files/src_core_link.js.html#l98"><code>src&#x2F;core&#x2F;link.js:98</code></a>
                                                         </p>
                                                 
                                                 
@@ -571,7 +679,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l120"><code>src&#x2F;core&#x2F;link.js:120</code></a>
+                                                        <a href="../files/src_core_link.js.html#l126"><code>src&#x2F;core&#x2F;link.js:126</code></a>
                                                         </p>
                                                 
                                                 
@@ -620,10 +728,10 @@
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>attrs</code>
+                                                                        <code>link</code>
                                                                 </li>
                                                                 <li class="arg">
-                                                                        <code>link</code>
+                                                                        <code>attrs</code>
                                                                 </li>
                                                                 <li class="arg">
                                                                         <code>modifySelection</code>
@@ -641,7 +749,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_link.js.html#l154"><code>src&#x2F;core&#x2F;link.js:154</code></a>
+                                                        <a href="../files/src_core_link.js.html#l162"><code>src&#x2F;core&#x2F;link.js:162</code></a>
                                                         </p>
                                                 
                                                 
@@ -658,23 +766,23 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">attrs</code>
-                                                                        <span class="type">Object | String</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The attributes to update or remove. Attributes with null values will be removed.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
                                                                         <code class="param-name">link</code>
                                                                         <span class="type">CKEDITOR.dom.element</span>
                                                 
                                                 
                                                                     <div class="param-description">
                                                                         <p>The link element which href should be removed.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">attrs</code>
+                                                                        <span class="type">Object | String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The attributes to update or remove. Attributes with null values will be removed.</p>
                                                 
                                                                     </div>
                                                 

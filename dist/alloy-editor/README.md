@@ -7,8 +7,8 @@ Works on IE9+, Chrome, Firefox and Safari.
 
 ## Demo
 
-* [All-in-one self-guided demo](http://alloyeditor.com/demo/)
-* [Screencasts and code samples for specific features](http://alloyeditor.com/features/)
+* [Embedded self-guided demo](http://alloyeditor.com)
+* [Screencasts and code samples for specific features](https://alloyeditor.com/docs/features/)
 
 ## Features
 

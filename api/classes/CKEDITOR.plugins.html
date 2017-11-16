@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/buttons/button-image.jsx - alloyeditor</title>
+    <title>CKEDITOR.plugins - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -179,178 +179,147 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-image.jsx</code></h1>
+                                <h1>CKEDITOR.plugins <small>Class</small></h1>
                             </div>
                             
-                            <div class="file">
-                                <pre class="code prettyprint linenums">
-                            (function () {
-                                &#x27;use strict&#x27;;
-                            
-                                /**
-                                 * The ButtonImage class inserts an image to the content.
-                                 *
-                                 * @class ButtonImage
-                                 */
-                                var ButtonImage = createReactClass({
-                                    // Allows validating props being passed to the component.
-                                    propTypes: {
-                                        /**
-                                         * The editor instance where the component is being used.
-                                         *
-                                         * @instance
-                                         * @memberof ButtonImage
-                                         * @property {Object} editor
-                                         */
-                                        editor: PropTypes.object.isRequired,
-                            
-                                        /**
-                                         * The label that should be used for accessibility purposes.
-                                         *
-                                         * @instance
-                                         * @memberof ButtonImage
-                                         * @property {String} label
-                                         */
-                                        label: PropTypes.string,
-                            
-                                        /**
-                                         * The tabIndex of the button in its toolbar current state. A value other than -1
-                                         * means that the button has focus and is the active element.
-                                         *
-                                         * @instance
-                                         * @memberof ButtonImage
-                                         * @property {Number} tabIndex
-                                         */
-                                        tabIndex: PropTypes.number
-                                    },
-                            
-                                    // Lifecycle. Provides static properties to the widget.
-                                    statics: {
-                                        /**
-                                         * The name which will be used as an alias of the button in the configuration.
-                                         *
-                                         * @default image
-                                         * @memberof ButtonImage
-                                         * @property {String} key
-                                         * @static
-                                         */
-                                        key: &#x27;image&#x27;
-                                    },
-                            
-                                    /**
-                                     * Lifecycle. Renders the UI of the button.
-                                     *
-                                     * @instance
-                                     * @memberof ButtonImage
-                                     * @method render
-                                     * @return {Object} The content which should be rendered.
-                                     */
-                                    render: function() {
-                                        var inputSyle = {display: &#x27;none&#x27;};
-                            
-                                        return (
-                                            &lt;div&gt;
-                                                &lt;button aria-label={AlloyEditor.Strings.image} className=&quot;ae-button&quot; data-type=&quot;button-image&quot; onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.image}&gt;
-                                                    &lt;span className=&quot;ae-icon-image&quot;&gt;&lt;/span&gt;
-                                                &lt;/button&gt;
-                            
-                                                &lt;input accept=&quot;image/*&quot; onChange={this._onInputChange} ref=&quot;fileInput&quot; style={inputSyle} type=&quot;file&quot;/&gt;
-                                            &lt;/div&gt;
-                                        );
-                                    },
-                            
-                                    /**
-                                     * Simulates click on the input element. This will open browser&#x27;s native file open dialog.
-                                     *
-                                     * @instance
-                                     * @memberof ButtonImage
-                                     * @method handleClick
-                                     * @param {SyntheticEvent} event The received click event on the button.
-                                     */
-                                    handleClick: function(event) {
-                                        ReactDOM.findDOMNode(this.refs.fileInput).click();
-                                    },
-                            
-                                    /**
-                                     * On input change, reads the chosen file and fires an event &#x60;beforeImageAdd&#x60; with the image which will be added
-                                     * to the content. The image file will be passed in the &#x60;imageFiles&#x60; property.
-                                     * If any of the listeners returns &#x60;false&#x60; or cancels the event, the image won&#x27;t be added to the content.
-                                     * Otherwise, an event &#x60;imageAdd&#x60; will be fired with the inserted element into the editable area.
-                                     * The passed params will be:
-                                     * - &#x60;el&#x60; - the created img element
-                                     * - &#x60;file&#x60; - the original image file from the input element
-                                     *
-                                     * @fires ButtonImage#beforeImageAdd
-                                     * @fires ButtonImage#imageAdd
-                                     * @instance
-                                     * @memberof ButtonImage
-                                     * @method _onInputChange
-                                     * @protected
-                                     */
-                                    _onInputChange: function() {
-                                        var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
-                            
-                                        // On IE11 the function might be called with an empty array of
-                                        // files. In such a case, no actions will be taken.
-                                        if (!inputEl.files.length) {
-                                            return;
-                                        }
-                            
-                                        var reader = new FileReader();
-                                        var file = inputEl.files[0];
-                            
-                                        reader.onload = function(event) {
-                                            var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                            
-                                            var result = editor.fire(&#x27;beforeImageAdd&#x27;, {
-                                                imageFiles: file
-                                            });
-                            
-                                            if (!!result) {
-                                                var el = CKEDITOR.dom.element.createFromHtml(&#x27;&lt;img src=&quot;&#x27; + event.target.result + &#x27;&quot;&gt;&#x27;);
-                            
-                                                editor.insertElement(el);
-                            
-                                                editor.fire(&#x27;actionPerformed&#x27;, this);
-                            
-                                                var imageData = {
-                                                    el: el,
-                                                    file: file
-                                                };
+                            <div class="well well-small">
                             
                             
-                                                editor.fire(&#x27;imageAdd&#x27;, imageData);
-                                            }
-                                        }.bind(this);
+                                    <div class="foundat">
+                                        Defined in: <a href="../files/src_core_plugins.js.html#l33"><code>src&#x2F;core&#x2F;plugins.js:33</code></a>
+                                    </div>
                             
-                                        reader.readAsDataURL(file);
                             
-                                        inputEl.value = &#x27;&#x27;;
-                                    }
+                            </div>
                             
-                                    /**
-                                     * Fired before adding images to the editor.
-                                     *
-                                     * @event ButtonImage#beforeImageAdd
-                                     * @instance
-                                     * @memberof ButtonImage
-                                     * @param {Array} imageFiles Array of image files
-                                     */
                             
-                                    /**
-                                     * Fired when an image is being added to the editor successfully.
-                                     *
-                                     * @event ButtonImage#imageAdd
-                                     * @instance
-                                     * @memberof ButtonImage
-                                     * @param {CKEDITOR.dom.element} el The created image with src as Data URI
-                                     * @param {File} file The image file
-                                     */
-                                });
+                            <div class="well well-small intro">
+                                <p>CKEDITOR.plugins class utility which adds additional methods to those of CKEditor.</p>
                             
-                                AlloyEditor.Buttons[ButtonImage.key] = AlloyEditor.ButtonImage = ButtonImage;
-                            }());
-                                </pre>
+                            </div>
+                            
+                            
+                            <div id="classdocs">
+                                <ul class="api-class-tabs nav nav-tabs">
+                                    <li class="api-class-tab index"><a href="#index">Index</a></li>
+                            
+                                        <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+                                </ul>
+                            
+                                <div>
+                                    <div id="index" class="api-class-tabpanel index tab-pane">
+                                        <h2 class="off-left">Index</h2>
+                            
+                                            <div class="index-section methods">
+                                                <h3>Methods</h3>
+                            
+                                                <ul class="index-list methods">
+                                                        <li class="index-item method">
+                                                            <a href="#method_load">load</a>
+                            
+                                                                <span class="flag static">static</span>
+                                                        </li>
+                                                </ul>
+                                            </div>
+                            
+                            
+                            
+                                    </div>
+                            
+                                        <div id="methods" class="api-class-tabpanel tab-pane">
+                                            <h2 class="off-left">Methods</h2>
+                            
+                                                <div id="method_load" class="method item">
+                                                    <h3 class="name"><code>load</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>names</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>callback</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code class="optional">[scope]</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                        <span class="flag static">static</span>
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_core_plugins.js.html#l39"><code>src&#x2F;core&#x2F;plugins.js:39</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Overrides CKEDITOR.plugins.load method so we can extend the lifecycle methods of
+                                                the loaded plugins to add some metainformation about the plugin being processed</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">names</code>
+                                                                        <span class="type">String/Array</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The name of the resource to load. It may be a
+                                                string with a single resource name, or an array with several names.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">callback</code>
+                                                                        <span class="type">Function</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>A function to be called when all resources
+                                                are loaded. The callback will receive an array containing all loaded names.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name optional">[scope]</code>
+                                                                        <span class="type">Object</span>
+                                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The scope object to be used for the callback call.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                        </div>
+                            
+                            
+                            
+                                </div>
                             </div>
                         </div>
                     </div>

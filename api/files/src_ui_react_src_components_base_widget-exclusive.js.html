@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -197,6 +199,8 @@
                                     /**
                                      * Cancels the exclusive state of an widget.
                                      *
+                                     * @instance
+                                     * @memberof WidgetExclusive
                                      * @method cancelExclusive
                                      * @param {Object} itemExclusive The widget which exclusive state should be canceled.
                                      */
@@ -213,6 +217,8 @@
                                      * This method is not called for the initial render.
                                      * Calling this.setState() within this function will not trigger an additional render.
                                      *
+                                     * @instance
+                                     * @memberof WidgetExclusive
                                      * @method componentWillReceiveProps
                                      * @param {Object} nextProps Object containing the current set of properties.
                                      */
@@ -228,6 +234,8 @@
                                     /**
                                      * Filters the items and returns only those with exclusive state.
                                      *
+                                     * @instance
+                                     * @memberof WidgetExclusive
                                      * @method filterExclusive
                                      * @param {Array} items The widgets to be filtered.
                                      * @return {Array|Object} The item with executive state.
@@ -250,6 +258,8 @@
                                      * - renderExclusive - boolean flag which indicates if an widget should be rendered exclusively.
                                      * - requestExclusive - function, which can be used by a widget in order to obtain exclusive state.
                                      *
+                                     * @instance
+                                     * @memberof WidgetExclusive
                                      * @method mergeExclusiveProps
                                      * @param {Object} obj The properties container which should be merged with the properties, related
                                      *    to exclusive state.
@@ -267,6 +277,8 @@
                                     /**
                                      * Requests and sets exclusive state of an widget.
                                      *
+                                     * @instance
+                                     * @memberof WidgetExclusive
                                      * @method requestExclusive
                                      * @param {Object} itemExclusive The widget which requests exclusive state.
                                      */

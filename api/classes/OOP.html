@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>CKEDITOR.plugins.ae_uicore - alloyeditor</title>
+    <title>OOP - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -177,14 +179,14 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                                <h1>CKEDITOR.plugins.ae_uicore <small>Class</small></h1>
+                                <h1>OOP <small>Class</small></h1>
                             </div>
                             
                             <div class="well well-small">
                             
                             
                                     <div class="foundat">
-                                        Defined in: <a href="../files/src_core_uicore.js.html#l8"><code>src&#x2F;core&#x2F;uicore.js:8</code></a>
+                                        Defined in: <a href="../files/src_ui_react_src_oop_oop.js.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;oop&#x2F;oop.js:4</code></a>
                                     </div>
                             
                             
@@ -192,12 +194,7 @@
                             
                             
                             <div class="well well-small intro">
-                                <p>UICore class which will handle user interactions with the editor. These interactions
-                            might be triggered via mouse, keyboard or touch devices. The class fill fire an event via
-                            CKEditor&#39;s event system - "editorInteraction". The UI may listen to this event and
-                            execute some actions - for example to show/hide toolbars.</p>
-                            <p>By default if user presses the Esc key, &#39;editorInteraction&#39; event won&#39;t be fired. However, this behaviour can be changed
-                            by setting <a href="../classes/CKEDITOR.plugins.ae_uicore.html#attr_allowEsc" class="crosslink">allowEsc</a> config property in editor&#39;s configuration to true.</p>
+                                <p>Provides OOP utilities.</p>
                             
                             </div>
                             
@@ -207,8 +204,6 @@
                                     <li class="api-class-tab index"><a href="#index">Index</a></li>
                             
                                         <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-                                        <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
-                                        <li class="api-class-tab events"><a href="#events">Events</a></li>
                                 </ul>
                             
                                 <div>
@@ -219,76 +214,56 @@
                                                 <h3>Methods</h3>
                             
                                                 <ul class="index-list methods">
-                                                        <li class="index-item method protected">
-                                                            <a href="#method__createAriaElement">_createAriaElement</a>
+                                                        <li class="index-item method">
+                                                            <a href="#method_extend">extend</a>
                             
-                                                        </li>
-                                                        <li class="index-item method protected">
-                                                            <a href="#method_init">init</a>
-                            
+                                                                <span class="flag static">static</span>
                                                         </li>
                                                 </ul>
                                             </div>
                             
                             
-                                            <div class="index-section attrs tab-pane">
-                                                <h3>Attributes</h3>
                             
-                                                <ul class="index-list attrs">
-                                                        <li class="index-item attr">
-                                                            <a href="#attr_allowEsc">allowEsc</a>
-                                                        </li>
-                                                        <li class="index-item attr">
-                                                            <a href="#attr_timeout">timeout</a>
-                                                        </li>
-                                                </ul>
-                                            </div>
-                            
-                                            <div class="index-section events tab-pane">
-                                                <h3>Events</h3>
-                            
-                                                <ul class="index-list events">
-                                                        <li class="index-item event">
-                                                            <a href="#event_ariaUpdate">ariaUpdate</a>
-                            
-                                                        </li>
-                                                        <li class="index-item event">
-                                                            <a href="#event_editorInteraction">editorInteraction</a>
-                            
-                                                        </li>
-                                                </ul>
-                                            </div>
                                     </div>
                             
                                         <div id="methods" class="api-class-tabpanel tab-pane">
                                             <h2 class="off-left">Methods</h2>
                             
-                                                <div id="method__createAriaElement" class="method item protected">
-                                                    <h3 class="name"><code>_createAriaElement</code></h3>
+                                                <div id="method_extend" class="method item">
+                                                    <h3 class="name"><code>extend</code></h3>
                                                 
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>id</code>
+                                                                        <code>receiver</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>supplier</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>protoProps</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>staticProps</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
                                                 
                                                         <span class="returns-inline">
-                                                            <span class="type">HTMLElement</span>
+                                                            <span class="type">Function</span>
                                                         </span>
                                                 
                                                 
-                                                        <span class="flag protected">protected</span>
                                                 
                                                 
+                                                        <span class="flag static">static</span>
                                                 
                                                 
                                                 
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l152"><code>src&#x2F;core&#x2F;uicore.js:152</code></a>
+                                                        <a href="../files/src_ui_react_src_oop_oop.js.html#l10"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;oop&#x2F;oop.js:10</code></a>
                                                         </p>
                                                 
                                                 
@@ -296,7 +271,8 @@
                                                     </div>
                                                 
                                                     <div class="description">
-                                                        <p>Creates and applies an HTML element to the body of the document which will contain ARIA messages.</p>
+                                                        <p>Sets the prototype, constructor and superclass properties to support an inheritance strategy
+                                                that can chain constructors and methods. Static members will not be inherited.</p>
                                                 
                                                     </div>
                                                 
@@ -305,12 +281,45 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">id</code>
-                                                                        <span class="type">String</span>
+                                                                        <code class="param-name">receiver</code>
+                                                                        <span class="type">Function</span>
                                                 
                                                 
                                                                     <div class="param-description">
-                                                                        <p>The provided id of the element. It will be used as prefix for the final element Id.</p>
+                                                                        <p>The class which will extend another class.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">supplier</code>
+                                                                        <span class="type">Function</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The class which will provide the properties the child class.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">protoProps</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Prototype properties to add/override.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">staticProps</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Static properties to add/overwrite.</p>
                                                 
                                                                     </div>
                                                 
@@ -322,235 +331,17 @@
                                                             <h4>Returns:</h4>
                                                 
                                                             <div class="returns-description">
-                                                                        <span class="type">HTMLElement</span>:
-                                                                    <p>The created and applied to DOM element.</p>
+                                                                        <span class="type">Function</span>:
+                                                                    <p>The extended class.</p>
                                                 
                                                             </div>
                                                         </div>
                                                 
                                                 </div>
-                                                <div id="method_init" class="method item protected">
-                                                    <h3 class="name"><code>init</code></h3>
-                                                
-                                                        <div class="args">
-                                                            <span class="paren">(</span><ul class="args-list inline commas">
-                                                                <li class="arg">
-                                                                        <code>editor</code>
-                                                                </li>
-                                                            </ul><span class="paren">)</span>
-                                                        </div>
-                                                
-                                                
-                                                
-                                                        <span class="flag protected">protected</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l60"><code>src&#x2F;core&#x2F;uicore.js:60</code></a>
-                                                        </p>
-                                                
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Initializer lifecycle implementation for the UICore plugin.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Parameters:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">editor</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The current CKEditor instance.</p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                
-                                                </div>
                                         </div>
                             
                             
-                                        <div id="attrs" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Attributes</h2>
                             
-                                                <div id="attr_allowEsc" class="attr item">
-                                                    <a name="config_allowEsc"></a> 
-                                                    <h3 class="name"><code>allowEsc</code></h3>
-                                                    <span class="type">Boolean</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l40"><code>src&#x2F;core&#x2F;uicore.js:40</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>If set to true, the editor will still fire <a href="../classes/CKEDITOR.plugins.ae_uicore.html#event_editorInteraction" class="crosslink">editorInteraction</a> event,
-                                                if user presses Esc key.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <p><strong>Default:</strong> false</p>
-                                                
-                                                
-                                                </div>
-                                                <div id="attr_timeout" class="attr item">
-                                                    <a name="config_timeout"></a> 
-                                                    <h3 class="name"><code>timeout</code></h3>
-                                                    <span class="type">Number</span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l49"><code>src&#x2F;core&#x2F;uicore.js:49</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Specifies the default timeout after which the <a href="../classes/CKEDITOR.plugins.ae_uicore.html#event_editorInteraction" class="crosslink">editorInteraction</a> event
-                                                will be fired.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <p><strong>Default:</strong> 50 (ms)</p>
-                                                
-                                                
-                                                </div>
-                                        </div>
-                            
-                                        <div id="events" class="api-class-tabpanel tab-pane">
-                                            <h2 class="off-left">Events</h2>
-                            
-                                                <div id="event_ariaUpdate" class="events item">
-                                                    <h3 class="name"><code>ariaUpdate</code></h3>
-                                                    <span class="type"></span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l32"><code>src&#x2F;core&#x2F;uicore.js:32</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Event Payload:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">data</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>An object which contains the following properties:</p>
-                                                <ul>
-                                                <li>message - The provided message from the UI element.</li>
-                                                </ul>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                
-                                                </div>
-                                                <div id="event_editorInteraction" class="events item">
-                                                    <h3 class="name"><code>editorInteraction</code></h3>
-                                                    <span class="type"></span>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                    <div class="meta">
-                                                                <p>
-                                                                Defined in
-                                                        <a href="../files/src_core_uicore.js.html#l20"><code>src&#x2F;core&#x2F;uicore.js:20</code></a>
-                                                        </p>
-                                                
-                                                
-                                                    </div>
-                                                
-                                                    <div class="description">
-                                                        <p>Fired when user interacts somehow with the browser. This may be clicking with the mouse, pressing keyboard button,
-                                                or touching screen. This even will be not fired after each interaction. It will be debounced. By default the timeout
-                                                is 50ms. This value can be overwritten via <a href="../classes/CKEDITOR.plugins.ae_uicore.html#attr_timeout" class="crosslink">timeout</a>
-                                                property of editor&#39;s configuration, like: editor.config.uicore.timeout = 100</p>
-                                                
-                                                    </div>
-                                                
-                                                        <div class="params">
-                                                            <h4>Event Payload:</h4>
-                                                
-                                                            <ul class="params-list">
-                                                                <li class="param">
-                                                                        <code class="param-name">data</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>An object which contains the following properties:</p>
-                                                <ul>
-                                                <li>nativeEvent - The event as received from CKEditor.</li>
-                                                <li>selectionData - The data, returned from <a href="../classes/CKEDITOR.plugins.ae_selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></li>
-                                                </ul>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                
-                                                
-                                                </div>
-                                        </div>
                                 </div>
                             </div>
                         </div>

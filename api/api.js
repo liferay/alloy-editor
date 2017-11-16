@@ -62,6 +62,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonsStylesListHeader",
         "CKEDITOR.Link",
         "CKEDITOR.Table",
+        "CKEDITOR.plugins",
         "CKEDITOR.plugins.ae_autolink",
         "CKEDITOR.plugins.ae_buttonbridge",
         "CKEDITOR.plugins.ae_menubridge",
@@ -69,12 +70,12 @@ YUI.add("yuidoc-meta", function(Y) {
         "CKEDITOR.plugins.ae_panelmenubuttonbridge",
         "CKEDITOR.plugins.ae_placeholder",
         "CKEDITOR.plugins.ae_richcombobridge",
-        "CKEDITOR.plugins.ae_selectionregion",
         "CKEDITOR.plugins.ae_uibridge",
-        "CKEDITOR.plugins.ae_uicore",
         "CKEDITOR.tools",
         "Core",
         "Lang",
+        "OOP",
+        "SelectionRegion",
         "ToolbarAdd",
         "ToolbarButtons",
         "ToolbarStyles",
@@ -84,7 +85,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "WidgetExclusive",
         "WidgetFocusManager",
         "WidgetInteractionPoint",
-        "WidgetPosition"
+        "WidgetPosition",
+        "ae_uicore"
     ],
     "modules": [],
     "allModules": []

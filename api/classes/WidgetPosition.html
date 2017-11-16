@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -318,7 +320,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l255"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:255</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l274"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:274</code></a>
                                                         </p>
                                                 
                                                 
@@ -356,10 +358,10 @@
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>selectionData</code>
+                                                                        <code>eventX</code>
                                                                 </li>
                                                                 <li class="arg">
-                                                                        <code>eventX</code>
+                                                                        <code>selectionData</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
@@ -378,7 +380,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetInteractionPoint.html#method__getXPoint">WidgetInteractionPoint</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-interaction-point.js.html#l95"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-interaction-point.js:95</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-interaction-point.js.html#l99"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-interaction-point.js:99</code></a>
                                                         </p>
                                                 
                                                 
@@ -395,24 +397,23 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">selectionData</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The data about the selection in the editor as
-                                                returned from <a href="../classes/CKEDITOR.plugins.ae_selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
                                                                         <code class="param-name">eventX</code>
                                                                         <span class="type">Object</span>
                                                 
                                                 
                                                                     <div class="param-description">
                                                                         <p>The X coordinate received from the native event (mouseup).</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">selectionData</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The data about the selection in the editor as returned from CKEDITOR.plugins.ae_selectionregion/getSelectionData:method</p>
                                                 
                                                                     </div>
                                                 
@@ -437,10 +438,10 @@
                                                         <div class="args">
                                                             <span class="paren">(</span><ul class="args-list inline commas">
                                                                 <li class="arg">
-                                                                        <code>selectionData</code>
+                                                                        <code>nativeEvent</code>
                                                                 </li>
                                                                 <li class="arg">
-                                                                        <code>nativeEvent</code>
+                                                                        <code>selectionData</code>
                                                                 </li>
                                                             </ul><span class="paren">)</span>
                                                         </div>
@@ -459,7 +460,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetInteractionPoint.html#method__getYPoint">WidgetInteractionPoint</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-interaction-point.js.html#l129"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-interaction-point.js:129</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-interaction-point.js.html#l134"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-interaction-point.js:134</code></a>
                                                         </p>
                                                 
                                                 
@@ -476,24 +477,23 @@
                                                 
                                                             <ul class="params-list">
                                                                 <li class="param">
-                                                                        <code class="param-name">selectionData</code>
-                                                                        <span class="type">Object</span>
-                                                
-                                                
-                                                                    <div class="param-description">
-                                                                        <p>The data about the selection in the editor as
-                                                returned from <a href="../classes/CKEDITOR.plugins.ae_selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></p>
-                                                
-                                                                    </div>
-                                                
-                                                                </li>
-                                                                <li class="param">
                                                                         <code class="param-name">nativeEvent</code>
                                                                         <span class="type">Object</span>
                                                 
                                                 
                                                                     <div class="param-description">
                                                                         <p>The data about event is fired</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">selectionData</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The data about the selection in the editor as returned from CKEDITOR.plugins.ae_selectionregion/getSelectionData:method</p>
                                                 
                                                                     </div>
                                                 
@@ -527,7 +527,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l53"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:53</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l58"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:58</code></a>
                                                         </p>
                                                 
                                                 
@@ -569,7 +569,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l64"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:64</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l71"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:71</code></a>
                                                         </p>
                                                 
                                                 
@@ -647,7 +647,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l38"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:38</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l41"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:41</code></a>
                                                         </p>
                                                 
                                                 
@@ -680,7 +680,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/WidgetInteractionPoint.html#method_getInteractionPoint">WidgetInteractionPoint</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_widget-interaction-point.js.html#l20"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-interaction-point.js:20</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-interaction-point.js.html#l22"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-interaction-point.js:22</code></a>
                                                         </p>
                                                 
                                                 
@@ -693,7 +693,7 @@
                                                 <p><p>It depends on the props editorEvent to analyze the following user-interaction parameters:</p></p>
                                                 <ul>
                                                 <li>{Object} selectionData The data about the selection in the editor as returned from
-                                                <a href="../classes/CKEDITOR.plugins.ae_selectionregion.html#method_getSelectionData" class="crosslink">getSelectionData</a></li>
+                                                CKEDITOR.plugins.ae_selectionregion/getSelectionData:method</li>
                                                 <li>{Number} pos Contains the coordinates of the position, considered as most appropriate.
                                                 This may be the point where the user released the mouse, or just the beginning or the end of
                                                 the selection.</li>
@@ -746,7 +746,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l99"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:99</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l108"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:108</code></a>
                                                         </p>
                                                 
                                                 
@@ -829,7 +829,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l143"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:143</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l154"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:154</code></a>
                                                         </p>
                                                 
                                                 
@@ -877,7 +877,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l161"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:161</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l174"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:174</code></a>
                                                         </p>
                                                 
                                                 
@@ -935,7 +935,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l190"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:190</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l205"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:205</code></a>
                                                         </p>
                                                 
                                                 
@@ -965,7 +965,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l235"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:235</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l252"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:252</code></a>
                                                         </p>
                                                 
                                                 
@@ -996,7 +996,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l17"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:17</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l16"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:16</code></a>
                                                         </p>
                                                 
                                                 
@@ -1047,7 +1047,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l25"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:25</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_widget-position.js.html#l26"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;widget-position.js:26</code></a>
                                                         </p>
                                                 
                                                 

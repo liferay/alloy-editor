@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -190,51 +192,63 @@
                                  *
                                  * @class ButtonTableHeading
                                  */
-                                var ButtonTableHeading = React.createClass({
+                                var ButtonTableHeading = createReactClass({
                                     // Allows validating props being passed to the component.
                                     propTypes: {
                                         /**
                                          * List of the commands the button is able to handle.
                                          *
+                                         * @instance
+                                         * @memberof ButtonTableHeading
                                          * @property {Array} commands
                                          */
-                                        commands: React.PropTypes.arrayOf(React.PropTypes.object),
+                                        commands: PropTypes.arrayOf(PropTypes.object),
                             
                                         /**
                                          * The editor instance where the component is being used.
                                          *
+                                         * @instance
+                                         * @memberof ButtonTableHeading
                                          * @property {Object} editor
                                          */
-                                        editor: React.PropTypes.object.isRequired,
+                                        editor: PropTypes.object.isRequired,
                             
                                         /**
                                          * Indicates whether the styles list is expanded or not.
                                          *
+                                         * @instance
+                                         * @memberof ButtonTableHeading
                                          * @property {Boolean} expanded
                                          */
-                                        expanded: React.PropTypes.bool,
+                                        expanded: PropTypes.bool,
                             
                                         /**
                                          * The label that should be used for accessibility purposes.
                                          *
+                                         * @instance
+                                         * @memberof ButtonTableHeading
                                          * @property {String} label
                                          */
-                                        label: React.PropTypes.string,
+                                        label: PropTypes.string,
                             
                                         /**
                                          * The tabIndex of the button in its toolbar current state. A value other than -1
                                          * means that the button has focus and is the active element.
                                          *
+                                         * @instance
+                                         * @memberof ButtonTableHeading
                                          * @property {Number} tabIndex
                                          */
-                                        tabIndex: React.PropTypes.number,
+                                        tabIndex: PropTypes.number,
                             
                                         /**
                                          * Callback provided by the button host to notify when the styles list has been expanded.
                                          *
+                                         * @instance
+                                         * @memberof ButtonTableHeading
                                          * @property {Function} toggleDropdown
                                          */
-                                        toggleDropdown: React.PropTypes.func
+                                        toggleDropdown: PropTypes.func
                                     },
                             
                                     // Lifecycle. Provides static properties to the widget.
@@ -242,9 +256,10 @@
                                         /**
                                          * The name which will be used as an alias of the button in the configuration.
                                          *
-                                         * @static
-                                         * @property {String} key
                                          * @default tableRow
+                                         * @memberof ButtonTableHeading
+                                         * @property {String} key
+                                         * @static
                                          */
                                         key: &#x27;tableHeading&#x27;
                                     },
@@ -252,6 +267,8 @@
                                     /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
+                                     * @instance
+                                     * @memberof ButtonTableHeading
                                      * @method render
                                      * @return {Object} The content which should be rendered.
                                      */
@@ -285,7 +302,10 @@
                                      * Returns a list of commands. If a list of commands was passed
                                      * as property &#x60;commands&#x60;, it will take a precedence over the default ones.
                                      *
+                                     * @instance
+                                     * @memberof ButtonTableHeading
                                      * @method _getCommands
+                                     * @protected
                                      * @return {Array} The list of available commands.
                                      */
                                     _getCommands: function () {

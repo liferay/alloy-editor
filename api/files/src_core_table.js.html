@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -220,6 +222,8 @@
                                     /**
                                      * Creates a table.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
                                      * @method create
                                      * @param {Object} config Table configuration object
                                      * @return {Object} The created table
@@ -261,6 +265,8 @@
                                     /**
                                      * Retrieves a table from the current selection.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
                                      * @method getFromSelection
                                      * @return {CKEDITOR.dom.element} The retrieved table or null if not found.
                                      */
@@ -299,6 +305,8 @@
                                      * or DIV element can be placed inside the individual table cells.
                                      * See https://msdn.microsoft.com/en-us/library/ms537837%28v=VS.85%29.aspx
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
                                      * @method isEditable
                                      * @param {CKEDITOR.dom.element} el The table element to test if editable
                                      * @return {Boolean}
@@ -318,8 +326,10 @@
                                     /**
                                      * Returns which heading style is set for the given table.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
                                      * @method getHeading
-                                     * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
+                                     * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
                                      * @return {String} The heading of the table. Expected values are &#x60;CKEDITOR.Table.NONE&#x60;, &#x60;CKEDITOR.Table.ROW&#x60;, &#x60;CKEDITOR.Table.COL&#x60; and &#x60;CKEDITOR.Table.BOTH&#x60;.
                                      */
                                     getHeading: function(table) {
@@ -360,6 +370,8 @@
                                     /**
                                      * Removes a table from the editor.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
                                      * @method remove
                                      * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
                                      */
@@ -391,6 +403,8 @@
                                     /**
                                      * Assigns provided attributes to a table.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
                                      * @method setAttributes
                                      * @param {Object} table The table to which the attributes should be assigned
                                      * @param {Object} attrs The attributes which have to be assigned to the table
@@ -406,6 +420,8 @@
                                     /**
                                      * Sets the appropriate table heading style to a table.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
                                      * @method setHeading
                                      * @param {CKEDITOR.dom.element} table The table element to which the heading should be set. If null, it will be retrieved from the current selection.
                                      * @param {String} heading The table heading to be set. Accepted values are: &#x60;CKEDITOR.Table.NONE&#x60;, &#x60;CKEDITOR.Table.ROW&#x60;, &#x60;CKEDITOR.Table.COL&#x60; and &#x60;CKEDITOR.Table.BOTH&#x60;.
@@ -504,6 +520,8 @@
                                     /**
                                      * Creates a new CKEDITOR.dom.element using the passed tag name.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
                                      * @protected
                                      * @method _createElement
                                      * @param {String} name The tag name from which an element should be created

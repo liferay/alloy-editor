@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.4.1
+ * AlloyEditor v1.5.0
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -845,12 +845,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
     'use strict';
 
-    /**
-     * An object containing all currently registered plugins in AlloyEditor.
-     *
-     * @property
-     * @type {Object}
-     */
+    // An object containing all currently registered plugins in AlloyEditor.
 
     var BRIDGE_BUTTONS = {};
 
@@ -863,6 +858,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Creates an instance of AlloyEditor.
          *
+         * @memberof AlloyEditor
          * @method editable
          * @static
          * @param {String|Node} node The Node ID or HTMl node, which AlloyEditor should use as an editable area.
@@ -884,6 +880,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * global variable named `ALLOYEDITOR_BASEPATH`. This global variable
          * must be set **before** the editor script loading.
          *
+         * @memberof AlloyEditor
          * @method getBasePath
          * @static
          * @return {String} The found base path
@@ -929,6 +926,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Detects and load the corresponding language file if AlloyEditor language strings are not already present.
          * The function fires a {{#crossLink "AlloyEditor/languageResourcesLoaded:event"}}{{/crossLink}} event
          *
+         * @memberof AlloyEditor
          * @method loadLanguageResources
          * @static
          * @param {Function} callback Optional callback to be called when AlloyEditor loads the language resource.
@@ -976,6 +974,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * returned by this function contain a querystring parameter ("t")
          * set to the {@link CKEDITOR#timestamp} value.
          *
+         * @memberof AlloyEditor
          * @method getUrl
          * @static
          * @param {String} resource The resource whose full URL we want to get.
@@ -1001,6 +1000,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Implements event firing and subscribing via CKEDITOR.event.
          *
+         * @memberof AlloyEditor
          * @method implementEventTarget
          * @static
          */
@@ -1013,6 +1013,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Regular expression which should match the script which have been used to load AlloyEditor.
          *
+         * @memberof AlloyEditor
          * @property regexBasePath
          * @type {RegExp}
          * @static
@@ -1022,6 +1023,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * And object, containing all currently registered buttons in AlloyEditor.
          *
+         * @memberof AlloyEditor
          * @property Buttons
          * @type {Object}
          * @static
@@ -1031,6 +1033,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * And object, containing all currently registered toolbars in AlloyEditor.
          *
+         * @memberof AlloyEditor
          * @property Toolbars
          * @type {Object}
          * @static
@@ -1048,6 +1051,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Returns the required plugin names needed for a given plugin
          * if it is already registered or an empty array.
          *
+         * @memberof AlloyEditor
          * @method getButtons
          * @param {Array} buttons An array of buttons or plugin names.
          * @return {Function} A function that can be invoked to resolve the requested button names.
@@ -1065,6 +1069,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Register a button and try to get its required plugins.
          *
+         * @memberof AlloyEditor
          * @method registerBridgeButton
          * @param {String} buttonName The name of the button.
          * @param {String} pluginName The name of the plugin that registers the button.
@@ -1120,6 +1125,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         ReactDOM = require('react-dom');
     }
 
+     /**
+  * React bridge between v16 and older version
+  */
+var PropTypes = (function() {
+    return (0, eval)('this').PropTypes || React.PropTypes;
+}());
+
+var createReactClass = (function() {
+    return (0, eval)('this').createReactClass || React.createClass;
+}());    
+
+
     if (typeof window !== 'undefined') {
        deployCKEditor();
 
@@ -1129,24 +1146,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     'use strict';
 
     /**
-     * CKEDITOR.tools class utility which adds additional methods to those of CKEditor.
-     *
-     * @class CKEDITOR.tools
-     */
-
-    /**
      * Debounce util function. If a function execution is expensive, it might be debounced. This means
      * that it will be executed after some amount of time after its last call. For example, if we attach a
      * a function on scroll event, it might be called hundreds times per second. In this case it may be
      * debounced with, let's say 100ms. The real execution of this function will happen 100ms after last
      * scroll event.
      *
-     * @static
+     * @memberof CKEDITOR.tools
      * @method debounce
+     * @param {Array} args An array of arguments which the callback will receive.
      * @param {Function} callback The callback which has to be called after given timeout.
      * @param {Number} timeout Timeout in milliseconds after which the callback will be called.
      * @param {Object} context The context in which the callback will be called. This argument is optional.
-     * @param {Array} args An array of arguments which the callback will receive.
+     * @static
      */
 
     CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || function (callback, timeout, context, args) {
@@ -1184,6 +1196,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
     'use strict';
 
+    var REGEX_BOOKMARK_SCHEME = /^#.*/i;
     var REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F\._-]+@/i;
     var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
 
@@ -1194,7 +1207,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @constructor
      * @param {Object} editor The CKEditor instance.
      */
-
     function Link(editor, config) {
         this._editor = editor;
         this.appendProtocol = config && config.appendProtocol === false ? false : true;
@@ -1207,8 +1219,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Advances the editor selection to the next available position after a
          * given link or the one in the current selection.
          *
-         * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method advanceSelection
+         * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
          */
         advanceSelection: function advanceSelection(link) {
             link = link || this.getFromSelection();
@@ -1236,10 +1250,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Create a link with given URI as href.
          *
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method create
-         * @param {String} URI The URI of the link.
          * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
          * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
+         * @param {String} URI The URI of the link.
          */
         create: function create(URI, attrs, modifySelection) {
             var selection = this._editor.getSelection();
@@ -1277,6 +1293,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Retrieves a link from the current selection.
          *
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method getFromSelection
          * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
          */
@@ -1303,9 +1321,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Removes a link from the editor.
          *
+         * @instance
+         * @memberof CKEDITOR.Link
+         * @method remove
          * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
          * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
-         * @method remove
          */
         remove: function remove(link, modifySelection) {
             var editor = this._editor;
@@ -1337,9 +1357,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Updates the href of an already existing link.
          *
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method update
-         * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
          * @param {CKEDITOR.dom.element} link The link element which href should be removed.
+         * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
          * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
          */
         update: function update(attrs, link, modifySelection) {
@@ -1388,18 +1410,23 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
         /**
-         * Checks if the URI has an '@' symbol. If it does and the URI looks like an email
-         * and doesn't have 'mailto:', 'mailto:' is added to the URI.
+         * Checks if the URI begins with a '#' symbol to determine if it's an on page bookmark.
+         * If it doesn't, it then checks if the URI has an '@' symbol. If it does and the URI
+         * looks like an email and doesn't have 'mailto:', 'mailto:' is added to the URI.
          * If it doesn't and the URI doesn't have a scheme, the default 'http' scheme with
          * hierarchical path '//' is added to the URI.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.Link
          * @method _getCompleteURI
          * @param {String} URI The URI of the link.
+         * @protected
          * @return {String} The URI updated with the protocol.
          */
         _getCompleteURI: function _getCompleteURI(URI) {
-            if (REGEX_EMAIL_SCHEME.test(URI)) {
+            if (REGEX_BOOKMARK_SCHEME.test(URI)) {
+                return URI;
+            } else if (REGEX_EMAIL_SCHEME.test(URI)) {
                 URI = 'mailto:' + URI;
             } else if (!REGEX_URI_SCHEME.test(URI)) {
                 URI = this.appendProtocol ? 'http://' + URI : URI;
@@ -1416,16 +1443,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
     'use strict';
 
-    /**
-     * Wraps each of the plugin lifecycle methods in a closure that will
-     * set up the editor.__processingPlugin__ variable so it can be globally
-     * accessed exposing the plugin being processed and the lifecycle phase
-     * in which it is happening
-     *
-     * @private
-     * @method wrapPluginLifecycle
-     * @param {Object} plugin The plugin to wrap lifecycle methods
-     */
+    // Wraps each of the plugin lifecycle methods in a closure that will
+    // set up the editor.__processingPlugin__ variable so it can be globally
+    // accessed exposing the plugin being processed and the lifecycle phase
+    // in which it is happening
+    //
+    // @param {Object} plugin The plugin to wrap lifecycle methods
 
     var wrapPluginLifecycle = function wrapPluginLifecycle(plugin) {
         var methods = ['beforeInit', 'init', 'afterInit'];
@@ -1451,16 +1474,23 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
+     * CKEDITOR.plugins class utility which adds additional methods to those of CKEditor.
+     *
+     * @class CKEDITOR.plugins
+     */
+
+    /**
      * Overrides CKEDITOR.plugins.load method so we can extend the lifecycle methods of
      * the loaded plugins to add some metainformation about the plugin being processed
      *
-     * @static
-     * @method load
     * @param {String/Array} names The name of the resource to load. It may be a
     * string with a single resource name, or an array with several names.
     * @param {Function} callback A function to be called when all resources
     * are loaded. The callback will receive an array containing all loaded names.
     * @param {Object} [scope] The scope object to be used for the callback call.
+     * @memberof CKEDITOR.plugins
+     * @method load
+     * @static
      */
     CKEDITOR.plugins.load = CKEDITOR.tools.override(CKEDITOR.plugins.load, function (pluginsLoad) {
         // Wrap original load function so we can transform the plugin input parameter
@@ -1498,7 +1528,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * be merged into each editor instance, so the developer may use them directly via the editor, without making
      * an instance of this class**.
      *
-     * @class CKEDITOR.plugins.ae_selectionregion
+     * @class SelectionRegion
      * @constructor
      */
     function SelectionRegion() {}
@@ -1509,6 +1539,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Creates selection from two points in page coordinates.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method createSelectionFromPoint
          * @param {Number} x X point in page coordinates.
          * @param {Number} y Y point in page coordinates.
@@ -1520,6 +1552,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Creates selection from range. A range consists from two points in page coordinates.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method createSelectionFromRange
          * @param {Number} startX X coordinate of the first point.
          * @param {Number} startY Y coordinate of the first point.
@@ -1585,6 +1619,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns the region of the current position of the caret. The points are in page coordinates.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getCaretRegion
          * @return {Object} Returns object with the following properties:
          * - bottom
@@ -1629,6 +1665,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns data for the current selection.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getSelectionData
          * @return {Object|null} Returns an object with the following data:
          * - element - The currently selected element, if any
@@ -1655,6 +1693,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns the region of the current selection.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getSelectionRegion
          * @return {Object} Returns object which is being returned from
          * {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getClientRectsRegion:method"}}{{/crossLink}} with three more properties:
@@ -1678,6 +1718,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns true if the current selection is empty, false otherwise.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method isSelectionEmpty
          * @return {Boolean} Returns true if the current selection is empty, false otherwise.
          */
@@ -1693,6 +1735,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Returns object with data about the [client rectangles](https://developer.mozilla.org/en-US/docs/Web/API/Element.getClientRects) of the selection,
          * normalized across browses. All offsets below are in page coordinates.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getClientRectsRegion
          * @return {Object} Returns object with the following data:
          * - bottom - bottom offset of all client rectangles
@@ -1817,6 +1861,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Retrieves the direction of the selection. The direction is from top to bottom or from bottom to top.
          * For IE < 9 it is not possible, so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.
          *
+         * @instance
+         * @memberof SelectionRegion
          * @method getSelectionDirection
          * @return {Number} Returns a number which represents selection direction. It might be one of these:
          * - CKEDITOR.SELECTION_TOP_TO_BOTTOM;
@@ -1846,13 +1892,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     CKEDITOR.plugins.add('ae_selectionregion', {
-        /**
-         * Initializer lifecycle implementation for the SelectionRegion plugin.
-         *
-         * @method init
-         * @protected
-         * @param {Object} editor The current CKEditor instance.
-         */
         init: function init(editor) {
             var attr, hasOwnProperty;
 
@@ -1906,6 +1945,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Creates a table.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method create
          * @param {Object} config Table configuration object
          * @return {Object} The created table
@@ -1947,6 +1988,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Retrieves a table from the current selection.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method getFromSelection
          * @return {CKEDITOR.dom.element} The retrieved table or null if not found.
          */
@@ -1985,6 +2028,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * or DIV element can be placed inside the individual table cells.
          * See https://msdn.microsoft.com/en-us/library/ms537837%28v=VS.85%29.aspx
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method isEditable
          * @param {CKEDITOR.dom.element} el The table element to test if editable
          * @return {Boolean}
@@ -2004,8 +2049,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns which heading style is set for the given table.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method getHeading
-         * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
+         * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
          * @return {String} The heading of the table. Expected values are `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
          */
         getHeading: function getHeading(table) {
@@ -2046,6 +2093,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Removes a table from the editor.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method remove
          * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
          */
@@ -2077,6 +2126,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Assigns provided attributes to a table.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method setAttributes
          * @param {Object} table The table to which the attributes should be assigned
          * @param {Object} attrs The attributes which have to be assigned to the table
@@ -2092,6 +2143,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Sets the appropriate table heading style to a table.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @method setHeading
          * @param {CKEDITOR.dom.element} table The table element to which the heading should be set. If null, it will be retrieved from the current selection.
          * @param {String} heading The table heading to be set. Accepted values are: `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
@@ -2190,6 +2243,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Creates a new CKEDITOR.dom.element using the passed tag name.
          *
+         * @instance
+         * @memberof CKEDITOR.Table
          * @protected
          * @method _createElement
          * @param {String} name The tag name from which an element should be created
@@ -2230,16 +2285,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Sends a request using the JSONP technique.
      *
-     * @method CKEDITOR.tools.jsonp
-     * @static
-     * @param {CKEDITOR.template} urlTemplate The template of the URL to be requested. All properties
-     * passed in `urlParams` can be used, plus a `{callback}`, which represent a JSONP callback, must be defined.
-     * @param {Object} urlParams Parameters to be passed to the `urlTemplate`.
+     * @memberof CKEDITOR.tools
+     * @method jsonp
+     * @param {CKEDITOR.template} urlTemplate The template of the URL to be requested. All properties passed in `urlParams` can be used, plus a `{callback}`, which represent a JSONP callback, must be defined.
      * @param {Function} callback A function to be called in case of success.
      * @param {Function} errorCallback A function to be called in case of failure.
+     * @param {Object} urlParams Parameters to be passed to the `urlTemplate`.
      * @return {Object} An object with the following properties:
-     * - id: the transaction ID
-     * - a `cancel()` method
+     *  - id: the transaction ID
+     *  - a `cancel()` method
+     * @static
      */
 
     CKEDITOR.tools.jsonp = function (urlTemplate, urlParams, callback, errorCallback) {
@@ -2293,10 +2348,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      *
      * Passing in a single object will create a shallow copy of it.
      *
-     * @static
+     * @memberof CKEDITOR.tools
      * @method merge
      * @param {Object} objects* One or more objects to merge.
      * @return {Object} A new merged object.
+     * @static
      */
     CKEDITOR.tools.merge = CKEDITOR.tools.merge || function () {
         var result = {};
@@ -2317,10 +2373,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Simulates event on a DOM element.
      *
-     * @static
+     * @memberof CKEDITOR.tools
      * @method simulate
      * @param {DOMElement} element The element on which the event shoud be simualted.
      * @param {String} event The name of the event which have to be simulated.
+     * @static
      */
     CKEDITOR.tools.simulate = function (element, event) {
         var eventInstance = document.createEvent('Events');
@@ -2346,7 +2403,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * By default if user presses the Esc key, 'editorInteraction' event won't be fired. However, this behaviour can be changed
      * by setting {{#crossLink "CKEDITOR.plugins.ae_uicore/allowEsc:attribute"}}{{/crossLink}} config property in editor's configuration to true.
      *
-     * @class CKEDITOR.plugins.ae_uicore
+     * @class ae_uicore
      */
 
     /**
@@ -2355,7 +2412,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * is 50ms. This value can be overwritten via {{#crossLink "CKEDITOR.plugins.ae_uicore/timeout:attribute"}}{{/crossLink}}
      * property of editor's configuration, like: editor.config.uicore.timeout = 100
      *
-     * @event editorInteraction
+     * @memberof ae_uicore
+     * @event ae_uicore#editorInteraction
      * @param {Object} data An object which contains the following properties:
      * - nativeEvent - The event as received from CKEditor.
      * - selectionData - The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
@@ -2364,7 +2422,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
      *
-     * @event ariaUpdate
+     * @memberof ae_uicore
+     * @event ae_uicore#ariaUpdate
      * @param {Object} data An object which contains the following properties:
      * - message - The provided message from the UI element.
      */
@@ -2373,6 +2432,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * If set to true, the editor will still fire {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event,
      * if user presses Esc key.
      *
+     * @memberof ae_uicore
      * @attribute allowEsc
      * @default false
      * @type Boolean
@@ -2382,6 +2442,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Specifies the default timeout after which the {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event
      * will be fired.
      *
+     * @memberof ae_uicore
      * @attribute timeout
      * @default 50 (ms)
      * @type Number
@@ -2391,9 +2452,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Initializer lifecycle implementation for the UICore plugin.
          *
-         * @protected
+         * @memberof ae_uicore
          * @method init
          * @param {Object} editor The current CKEditor instance.
+         * @protected
          */
         init: function init(editor) {
             var ariaState = [];
@@ -2474,9 +2536,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
          *
-         * @protected
+         * @memberof ae_uicore
          * @method _createAriaElement
          * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
+         * @protected
          * @return {HTMLElement} The created and applied to DOM element.
          */
         _createAriaElement: function _createAriaElement(id) {
@@ -2516,14 +2579,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Fired before adding images to the editor.
-     * @event beforeImageAdd
+     *
+     * @event CKEDITOR.plugins.ae_addimages#beforeImageAdd
+     * @instance
+     * @memberof CKEDITOR.plugins.ae_addimages
      * @param {Array} imageFiles Array of image files
      */
 
     /**
      * Fired when an image is being added to the editor successfully.
      *
-     * @event imageAdd
+     * @event CKEDITOR.plugins.ae_addimages#imageAdd
+     * @instance
+     * @memberof CKEDITOR.plugins.ae_addimages
      * @param {CKEDITOR.dom.element} el The created image with src as Data URI
      * @param {File} file The image file
      */
@@ -2533,6 +2601,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Initialization of the plugin, part of CKEditor plugin lifecycle.
          * The function registers a 'dragenter', 'dragover', 'drop' and `paste` events on the editing area.
          *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_addimages
          * @method init
          * @param {Object} editor The current editor instance
          */
@@ -2562,10 +2632,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Accepts an array of dropped files to the editor. Then, it filters the images and sends them for further
          * processing to {{#crossLink "CKEDITOR.plugins.ae_addimages/_processFile:method"}}{{/crossLink}}
          *
-         * @protected
+         * @fires CKEDITOR.plugins.ae_addimages#beforeImageAdd
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_addimages
          * @method _handleFiles
          * @param {Array} files Array of dropped files. Only the images from this list will be processed.
          * @param {Object} editor The current editor instance
+         * @protected
          */
         _handleFiles: function _handleFiles(files, editor) {
             var file;
@@ -2601,9 +2674,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * point and will send a list of files to be processed to
          * {{#crossLink "CKEDITOR.plugins.ae_addimages/_handleFiles:method"}}{{/crossLink}} method.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_addimages
          * @method _onDragDrop
          * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
+         * @protected
          */
         _onDragDrop: function _onDragDrop(event) {
             var nativeEvent = event.data.$;
@@ -2620,9 +2695,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Handles drag enter event. In case of IE, this function will prevent the event.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_addimages
          * @method _onDragEnter
          * @param {DOM event} event dragenter event, as received natively from CKEditor
+         * @protected
          */
         _onDragEnter: function _onDragEnter(event) {
             if (isIE) {
@@ -2633,9 +2710,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Handles drag over event. In case of IE, this function will prevent the event.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_addimages
          * @method _onDragOver
          * @param {DOM event} event dragover event, as received natively from CKEditor
+         * @protected
          */
         _onDragOver: function _onDragOver(event) {
             if (isIE) {
@@ -2647,9 +2726,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Checks if the pasted data is image and passes it to
          * {{#crossLink "CKEDITOR.plugins.ae_addimages/_processFile:method"}}{{/crossLink}} for processing.
          *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_addimages
          * @method _onPaste
-         * @protected
          * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
+         * @protected
          */
         _onPaste: function _onPaste(event) {
             if (event.data && event.data.$ && event.data.$.clipboardData && event.data.$.clipboardData.items && event.data.$.clipboardData.items.length > 0) {
@@ -2666,9 +2747,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Prevents a native event.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_addimages
          * @method _preventEvent
          * @param {DOM event} event The event to be prevented.
+         * @protected
          */
         _preventEvent: function _preventEvent(event) {
             event = new CKEDITOR.dom.event(event.data.$);
@@ -2681,9 +2764,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Processes an image file. The function creates an img element and sets as source
          * a Data URI, then fires an 'imageAdd' event via CKEditor's event system.
          *
-         * @protected
+         * @fires CKEDITOR.plugins.ae_addimages#imageAdd
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_addimages
          * @method _preventEvent
          * @param {DOM event} event The event to be prevented.
+         * @protected
          */
         _processFile: function _processFile(file, editor) {
             var reader = new FileReader();
@@ -2750,6 +2836,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Initialization of the plugin, part of CKEditor plugin lifecycle.
          * The function registers the `keyup` event on the editing area.
          *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
          * @method init
          * @param {Object} editor The current editor instance
          */
@@ -2767,8 +2855,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Retrieves the last word introduced by the user. Reads from the current
          * caret position backwards until it finds the first white space.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
          * @method _getLastWord
+         * @protected
          * @return {String} The last word introduced by user
          */
         _getLastWord: function _getLastWord(editor) {
@@ -2830,9 +2920,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Checks if the given link is a valid URL.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
          * @method isValidURL
          * @param {String} link The link we want to know if it is a valid URL
+         * @protected
          * @return {Boolean} Returns true if the link is a valid URL, false otherwise
          */
         _isValidURL: function _isValidURL(link) {
@@ -2843,9 +2935,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Listens to the `keydown` event and if the keycode is `Backspace`, removes the previously
          * created link.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
          * @method _onKeyDown
          * @param {EventFacade} event EventFacade object
+         * @protected
          */
         _onKeyDown: function _onKeyDown(event) {
             var nativeEvent = event.data.$;
@@ -2870,9 +2964,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Listens to the `Enter` and `Space` key events in order to check if the last word
          * introduced by the user should be replaced by a link element.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
          * @method _onKeyUp
          * @param {EventFacade} event EventFacade object
+         * @protected
          */
         _onKeyUp: function _onKeyUp(event) {
             var nativeEvent = event.data.$;
@@ -2893,9 +2989,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Replaces content by a link element.
          *
-         * @protected
+         * @fires CKEDITOR.plugins.ae_autolink#autolinkAdd
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
          * @method _replaceContentByLink
          * @param {String} content The text that has to be replaced by an link element
+         * @protected
          */
         _replaceContentByLink: function _replaceContentByLink(editor, content) {
             var range = editor.createRange();
@@ -2940,15 +3039,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Fired when a URL is detected in text and converted to a link.
          *
-         * @event autolinkAdd
+         * @event CKEDITOR.plugins.ae_autolink#autolinkAdd
+         * @memberof CKEDITOR.plugins.ae_autolink
          * @param {CKEDITOR.dom.element} el Node of the created link.
          */
 
         /**
          * Removes the created link element, and replaces it by its text.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
          * @method _removeLink
+         * @protected
          */
         _removeLink: function _removeLink(editor) {
             var range = editor.getSelection().getRanges()[0];
@@ -2974,8 +3076,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Subscribe to a key event of the editable aria.
          *
-         * @protected
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
          * @method _subscribeToKeyEvent
+         * @protected
          */
         _subscribeToKeyEvent: function _subscribeToKeyEvent(editor) {
             var editable = editor.editable();
@@ -2992,163 +3096,173 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 'use strict';
 
 (function () {
-  'use strict';
+    'use strict';
 
-  if (CKEDITOR.plugins.get('ae_autolist')) {
-    return;
-  }
-
-  var KEY_BACK = 8;
-
-  var KEY_SPACE = 32;
-
-  var DEFAULT_CONFIG = [{
-    regex: /^\*$/,
-    type: 'bulletedlist'
-  }, {
-    regex: /^1\.$/,
-    type: 'numberedlist'
-  }];
-
-  /**
-      * CKEditor plugin which automatically generates ordered/unordered list when user types text which looks like a list.
-      *
-      * @class CKEDITOR.plugins.ae_autolist
-      * @constructor
-      */
-  CKEDITOR.plugins.add('ae_autolist', {
-
-    /**
-    * Initialization of the plugin, part of CKeditor plugin lifecycle.
-    * The function registers the `keydown` event on the content editing area.
-    *
-    * @method init
-    * @param {Object} editor The current editor instance
-    */
-    init: function init(editor) {
-      editor.once('contentDom', function () {
-        var editable = editor.editable();
-
-        editable.attachListener(editable, 'keydown', this._onKeyDown, this, {
-          editor: editor
-        });
-      }.bind(this));
-    },
-
-    /**
-    * Checks for pressing the `Backspace` key in order to undo the list creation.
-    *
-    * @protected
-    * @method _checkForBackspaceAndUndo
-    * @param {Event} event Event object
-    */
-    _checkForBackspaceAndUndo: function _checkForBackspaceAndUndo(event) {
-      var editor = event.listenerData.editor;
-
-      var nativeEvent = event.data.$;
-
-      var editable = editor.editable();
-
-      editable.removeListener('keydown', this._checkForBackspaceAndUndo);
-
-      if (nativeEvent.keyCode === KEY_BACK) {
-        editor.execCommand('undo');
-        editor.insertHtml(event.listenerData.bullet + '&nbsp;');
-        event.data.preventDefault();
-      }
-    },
-
-    /**
-    * Checks current line to find match with MATCHES object to create OL or UL.
-    *
-    * @protected
-    * @method _checkLine
-    * @param {editor} Editor object
-    * @return {Object|null} Returns an object which contains the detected list config if any
-    */
-    _getListConfig: function _getListConfig(editor) {
-      var configRegex = editor.config.autolist || DEFAULT_CONFIG;
-
-      var range = editor.getSelection().getRanges()[0];
-
-      var textContainer = range.endContainer.getText();
-
-      var bullet = textContainer.substring(0, range.startOffset);
-
-      var text = textContainer.substring(range.startOffset, textContainer.length);
-
-      var index = 0;
-
-      var regexLen = configRegex.length;
-
-      var autolistCfg = null;
-
-      while (!autolistCfg && regexLen > index) {
-        var regexItem = configRegex[index];
-
-        if (regexItem.regex.test(bullet)) {
-          autolistCfg = {
-            bullet: bullet,
-            editor: editor,
-            text: text,
-            type: regexItem.type
-          };
-
-          break;
-        }
-
-        index++;
-      }
-
-      return autolistCfg;
-    },
-
-    /**
-    * Create list with different types: Bulleted or Numbered list
-    *
-    * @protected
-    * @method _createList
-    * @param {Object} listConfig Object that contains bullet, text and type for creating the list
-    */
-    _createList: function _createList(listConfig) {
-      var editor = listConfig.editor;
-
-      var range = editor.getSelection().getRanges()[0];
-
-      range.endContainer.setText(listConfig.text);
-      editor.execCommand(listConfig.type);
-
-      var editable = editor.editable();
-
-      // Subscribe to keydown in order to check if the next key press is `Backspace`.
-      // If so, the creation of the list will be discarded.
-      editable.attachListener(editable, 'keydown', this._checkForBackspaceAndUndo, this, {
-        editor: editor,
-        bullet: listConfig.bullet
-      }, 1);
-    },
-
-    /**
-              * Listens to the `Space` key events to check if the last word
-              * introduced by the user should be replaced by a list (OL or UL)
-              *
-              * @protected
-              * @method _onKeyDown
-              * @param {Event} event Event object
-              */
-    _onKeyDown: function _onKeyDown(event) {
-      var nativeEvent = event.data.$;
-
-      if (nativeEvent.keyCode === KEY_SPACE) {
-        var listConfig = this._getListConfig(event.listenerData.editor);
-
-        if (listConfig) {
-          event.data.preventDefault();
-          this._createList(listConfig);
-        }
-      }
+    if (CKEDITOR.plugins.get('ae_autolist')) {
+        return;
     }
-  });
+
+    var KEY_BACK = 8;
+
+    var KEY_SPACE = 32;
+
+    var DEFAULT_CONFIG = [{
+        regex: /^\*$/,
+        type: 'bulletedlist'
+    }, {
+        regex: /^1\.$/,
+        type: 'numberedlist'
+    }];
+
+    /**
+        * CKEditor plugin which automatically generates ordered/unordered list when user types text which looks like a list.
+        *
+        * @class CKEDITOR.plugins.ae_autolist
+        * @constructor
+        */
+    CKEDITOR.plugins.add('ae_autolist', {
+
+        /**
+         * Initialization of the plugin, part of CKeditor plugin lifecycle.
+         * The function registers the `keydown` event on the content editing area.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolist
+         * @method init
+         * @param {Object} editor The current editor instance
+         */
+        init: function init(editor) {
+            editor.once('contentDom', function () {
+                var editable = editor.editable();
+
+                editable.attachListener(editable, 'keydown', this._onKeyDown, this, {
+                    editor: editor
+                });
+            }.bind(this));
+        },
+
+        /**
+         * Checks for pressing the `Backspace` key in order to undo the list creation.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolist
+         * @method _checkForBackspaceAndUndo
+         * @param {Event} event Event object
+         * @protected
+         */
+        _checkForBackspaceAndUndo: function _checkForBackspaceAndUndo(event) {
+            var editor = event.listenerData.editor;
+
+            var nativeEvent = event.data.$;
+
+            var editable = editor.editable();
+
+            editable.removeListener('keydown', this._checkForBackspaceAndUndo);
+
+            if (nativeEvent.keyCode === KEY_BACK) {
+                editor.execCommand('undo');
+                editor.insertHtml(event.listenerData.bullet + '&nbsp;');
+                event.data.preventDefault();
+            }
+        },
+
+        /**
+         * Checks current line to find match with MATCHES object to create OL or UL.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolist
+         * @method _checkLine
+         * @param {editor} Editor object
+         * @protected
+         * @return {Object|null} Returns an object which contains the detected list config if any
+         */
+        _getListConfig: function _getListConfig(editor) {
+            var configRegex = editor.config.autolist || DEFAULT_CONFIG;
+
+            var range = editor.getSelection().getRanges()[0];
+
+            var textContainer = range.endContainer.getText();
+
+            var bullet = textContainer.substring(0, range.startOffset);
+
+            var text = textContainer.substring(range.startOffset, textContainer.length);
+
+            var index = 0;
+
+            var regexLen = configRegex.length;
+
+            var autolistCfg = null;
+
+            while (!autolistCfg && regexLen > index) {
+                var regexItem = configRegex[index];
+
+                if (regexItem.regex.test(bullet)) {
+                    autolistCfg = {
+                        bullet: bullet,
+                        editor: editor,
+                        text: text,
+                        type: regexItem.type
+                    };
+
+                    break;
+                }
+
+                index++;
+            }
+
+            return autolistCfg;
+        },
+
+        /**
+                  * Create list with different types: Bulleted or Numbered list
+                  *
+                  * @instance
+                  * @memberof CKEDITOR.plugins.ae_autolist
+                  * @method _createList
+                  * @param {Object} listConfig Object that contains bullet, text and type for creating the list
+                  * @protected
+         */
+        _createList: function _createList(listConfig) {
+            var editor = listConfig.editor;
+
+            var range = editor.getSelection().getRanges()[0];
+
+            range.endContainer.setText(listConfig.text);
+            editor.execCommand(listConfig.type);
+
+            var editable = editor.editable();
+
+            // Subscribe to keydown in order to check if the next key press is `Backspace`.
+            // If so, the creation of the list will be discarded.
+            editable.attachListener(editable, 'keydown', this._checkForBackspaceAndUndo, this, {
+                editor: editor,
+                bullet: listConfig.bullet
+            }, 1);
+        },
+
+        /**
+                  * Listens to the `Space` key events to check if the last word
+                  * introduced by the user should be replaced by a list (OL or UL)
+                  *
+                  * @instance
+                  * @memberof CKEDITOR.plugins.ae_autolist
+                  * @method _onKeyDown
+                  * @param {Event} event Event object
+                  * @protected
+                  */
+        _onKeyDown: function _onKeyDown(event) {
+            var nativeEvent = event.data.$;
+
+            if (nativeEvent.keyCode === KEY_SPACE) {
+                var listConfig = this._getListConfig(event.listenerData.editor);
+
+                if (listConfig) {
+                    event.data.preventDefault();
+                    this._createList(listConfig);
+                }
+            }
+        }
+    });
 })();
 'use strict';
 
@@ -4691,10 +4805,10 @@ CKEDITOR.config.image2_captionedClass = 'image';
                                     widget.element.setHtml(response.html);
                                 }
                             } else {
-                                widget.createATag(url, currentSelection);
+                                widget.createATag(url);
                             }
                         }, function (msg) {
-                            widget.createATag(url, currentSelection);
+                            widget.createATag(url);
                         });
                     }
                 },
@@ -4816,11 +4930,10 @@ CKEDITOR.config.image2_captionedClass = 'image';
         value: 'block'
     }, {
         name: 'margin-left',
-        value: '50%'
+        value: 'auto'
     }, {
-        name: 'transform',
-        value: 'translateX(-50%)',
-        vendorPrefixes: ['-ms-']
+        name: 'margin-right',
+        value: 'auto'
     }];
 
     /**
@@ -6467,12 +6580,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
         BUTTON_DEFS[editor.name][buttonName] = BUTTON_DEFS[editor.name][buttonName] || buttonDefinition;
 
         if (!ButtonBridge) {
-            ButtonBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_BUTTON_API, {
+            ButtonBridge = createReactClass(CKEDITOR.tools.merge(UNSUPPORTED_BUTTON_API, {
                 displayName: buttonName,
 
                 propTypes: {
-                    editor: React.PropTypes.object.isRequired,
-                    tabIndex: React.PropTypes.number
+                    editor: PropTypes.object.isRequired,
+                    tabIndex: PropTypes.number
                 },
 
                 statics: {
@@ -6623,12 +6736,12 @@ CKEDITOR.tools.buildTableMap = function (table) {
         MENUBUTTON_DEFS[editor.name][menuButtonName] = MENUBUTTON_DEFS[editor.name][menuButtonName] || menuButtonDefinition;
 
         if (!MenuButtonBridge) {
-            MenuButtonBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_MENUBUTTON_API, {
+            MenuButtonBridge = createReactClass(CKEDITOR.tools.merge(UNSUPPORTED_MENUBUTTON_API, {
                 displayName: menuButtonName,
 
                 propTypes: {
-                    editor: React.PropTypes.object.isRequired,
-                    tabIndex: React.PropTypes.number
+                    editor: PropTypes.object.isRequired,
+                    tabIndex: PropTypes.number
                 },
 
                 statics: {
@@ -6919,11 +7032,11 @@ CKEDITOR.tools.buildTableMap = function (table) {
         PANEL_MENU_DEFS[editor.name][panelMenuButtonName] = PANEL_MENU_DEFS[editor.name][panelMenuButtonName] || panelMenuButtonDefinition;
 
         if (!PanelMenuButtonBridge) {
-            PanelMenuButtonBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_PANEL_MENU_BUTTON_API, {
+            PanelMenuButtonBridge = createReactClass(CKEDITOR.tools.merge(UNSUPPORTED_PANEL_MENU_BUTTON_API, {
                 displayName: panelMenuButtonName,
 
                 propTypes: {
-                    editor: React.PropTypes.object.isRequired
+                    editor: PropTypes.object.isRequired
                 },
 
                 statics: {
@@ -7113,11 +7226,11 @@ CKEDITOR.tools.buildTableMap = function (table) {
         RICH_COMBO_DEFS[editor.name][richComboName].currentValue = undefined;
 
         if (!RichComboBridge) {
-            RichComboBridge = React.createClass(CKEDITOR.tools.merge(UNSUPPORTED_RICHCOMBO_API, {
+            RichComboBridge = createReactClass(CKEDITOR.tools.merge(UNSUPPORTED_RICHCOMBO_API, {
                 displayName: richComboName,
 
                 propTypes: {
-                    editor: React.PropTypes.object.isRequired
+                    editor: PropTypes.object.isRequired
                 },
 
                 statics: {
@@ -7363,10 +7476,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Check if the passed value is an array.
          *
-         * @static
+         * @memberof Lang
          * @method isArray
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is an array, false otherwise.
+         * @static
          */
         isArray: function isArray(value) {
             return Object.prototype.toString.call(value) === '[object Array]';
@@ -7375,10 +7489,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Check if the passed value is boolean.
          *
-         * @static
+         * @memberof Lang
          * @method isBoolean
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is boolean, false otherwise.
+         * @static
          */
         isBoolean: function isBoolean(value) {
             return typeof value === 'boolean';
@@ -7387,10 +7502,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Check if the passed value is a function.
          *
-         * @static
+         * @memberof Lang
          * @method isFunction
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is a function, false otherwise.
+         * @static
          */
         isFunction: function isFunction(value) {
             return typeof value === 'function';
@@ -7399,10 +7515,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Check if the passed value is NULL.
          *
-         * @static
+         * @memberof Lang
          * @method isNull
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is NULL, false otherwise.
+         * @static
          */
         isNull: function isNull(value) {
             return value === null;
@@ -7411,10 +7528,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Check if the passed value is number.
          *
-         * @static
+         * @memberof Lang
          * @method isNumber
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is number, false otherwise.
+         * @static
          */
         isNumber: function isNumber(value) {
             return typeof value === 'number' && isFinite(value);
@@ -7423,10 +7541,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Check if the passed value is an object
          *
-         * @static
+         * @memberof Lang
          * @method isObject
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is an object, false otherwise.
+         * @static
          */
         isObject: function isObject(value) {
             var valueType = typeof value === 'undefined' ? 'undefined' : _typeof(value);
@@ -7437,10 +7556,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Check if the passed value is a string.
          *
-         * @static
+         * @memberof Lang
          * @method isString
          * @param {Any} value The value which have to be checked.
          * @return {Boolean} True if the passed value is a string, false otherwise.
+         * @static
          */
         isString: function isString(value) {
             return typeof value === 'string';
@@ -7450,11 +7570,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Adds all properties from the supplier to the receiver.
          * The function will add all properties, not only these owned by the supplier.
          *
-         * @static
+         * @memberof Lang
          * @method mix
          * @param {Object} receiver The object which will receive properties.
          * @param {Object} supplier The object which provides properties.
          * @return {Object} The modified receiver.
+         * @static
          */
         mix: function mix(receiver, supplier) {
             var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -7469,10 +7590,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Converts value to Integer.
          *
-         * @static
+         * @memberof Lang
          * @method toInt
          * @param {Any} value The value which have to be converted to Integer.
          * @return {Integer} The converted value.
+         * @static
          */
         toInt: function toInt(value) {
             return parseInt(value, 10);
@@ -7486,18 +7608,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
     'use strict';
 
+    /**
+     * Provides OOP utilities.
+     *
+     * @class OOP
+     */
+
     var OOP = {
         /**
          * Sets the prototype, constructor and superclass properties to support an inheritance strategy
          * that can chain constructors and methods. Static members will not be inherited.
          *
-         * @static
+         * @memberof OOP
          * @method extend
          * @param {Function} receiver The class which will extend another class.
          * @param {Function} supplier The class which will provide the properties the child class.
          * @param {Object} protoProps Prototype properties to add/override.
          * @param {Object} staticProps Static properties to add/overwrite.
          * @return {Function} The extended class.
+         * @static
          */
         extend: function extend(receiver, supplier, protoProps, staticProps) {
             if (!supplier || !receiver) {
@@ -7555,6 +7684,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Retrieves the value of an attribute.
          *
+         * @instance
+         * @memberof Attribute
          * @method get
          * @param {String} attr The attribute which value should be retrieved.
          * @return {Any} The value of the attribute.
@@ -7582,6 +7713,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Sets the value of an attribute.
          *
+         * @instance
+         * @memberof Attribute
          * @method set
          * @param {String} attr The attribute which value should be set.
          * @param {Any} value The value which should be set to the attribute.
@@ -7621,10 +7754,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * If param provided as string, a corresponding function in this object will
          * be called. If provided param is a function, it will be directly called.
          *
-         * @protected
+         * @instance
+         * @memberof Attribute
          * @method _callStringOrFunction
-         * @param  {String|Function} stringOrFunction The function which should be called
          * @param  {Any|Array} args The arguments which will be provided to the called function
+         * @param  {String|Function} stringOrFunction The function which should be called
+         * @protected
          * @return {Any} The returned value from the called function
          */
         _callStringOrFunction: function _callStringOrFunction(stringOrFunction, args) {
@@ -7647,9 +7782,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Initializes an attribute. Sets its default value depending on the flags of the
          * attribute and the passed configuration object to the constructor.
          *
-         * @protected
+         * @instance
+         * @memberof Attribute
          * @method _init
          * @param {String} attr The name of the attribute which have to be initialized.
+         * @protected
          */
         _init: function _init(attr) {
             var value;
@@ -7716,9 +7853,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * when there is an own property with this name in the local collection of attribute values
          * for the current instance.
          *
-         * @protected
+         * @instance
+         * @memberof Attribute
          * @method _isInitialized
          * @param {String} attr The attribute which should be checked if it is initialized.
+         * @protected
          * @return {Boolean} Returns true if the attribute has been initialized, false otherwise.
          */
         _isInitialized: function _isInitialized(attr) {
@@ -7751,6 +7890,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Calls the `initializer` method of each class which extends Base starting from the parent to the child.
          * Will pass the configuration object to each initializer method.
          *
+         * @instance
+         * @memberof Base
          * @method init
          * @param {Object} config Configuration object
          */
@@ -7761,6 +7902,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Calls the `destructor` method of each class which extends Base starting from the parent to the child.
          *
+         * @instance
+         * @memberof Base
          * @method destroy
          */
         destroy: function destroy() {
@@ -7770,10 +7913,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Calls a method of each class, which is being present in the hierarchy starting from parent to the child.
          *
-         * @protected
+         * @instance
+         * @memberof Base
          * @method _callChain
-         * @param {String} wat  The method, which should be invoked
          * @param {Object|Array} args The arguments with which the method should be invoked
+         * @param {String} wat  The method, which should be invoked
+         * @protected
          */
         _callChain: function _callChain(wat, args) {
             var arr = [];
@@ -8002,6 +8147,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
          * instance, passing it the provided configuration attributes.
          *
+         * @memberof Core
+         * @instance
          * @protected
          * @method initializer
          * @param config {Object} Configuration object literal for the editor.
@@ -8053,6 +8200,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor
          * instance and destroys all created toolbars.
          *
+         * @memberof Core
+         * @instance
          * @protected
          * @method destructor
          */
@@ -8086,6 +8235,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Clear selections from window object
          *
+         * @memberof Core
+         * @instance
          * @protected
          * @method _clearSelections
          */
@@ -8103,6 +8254,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Method to set default link behavior
          *
+         * @memberof Core
+         * @instance
          * @protected
          * @method _addReadOnlyLinkClickListener
          * @param {Object} editor
@@ -8117,6 +8270,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Called on `click` event when the editor is in read only mode. Navigates to link's URL or opens
          * the link in a new window.
          *
+         * @memberof Core
+         * @instance
          * @event readOnlyClick
          * @protected
          * @method _defaultReadOnlyClickFn
@@ -8148,6 +8303,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
          *
+         * @memberof Core
+         * @instance
          * @protected
          * @method _getNativeEditor
          * @return {Object} The current instance of CKEditor.
@@ -8159,6 +8316,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Redirects the browser to a given link
          *
+         * @memberof Core
+         * @instance
          * @protected
          * @method _redirectLink
          * @param {string} href The href to take the browser to
@@ -8175,6 +8334,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Renders the specified from the user toolbars.
          *
+         * @memberof Core
+         * @instance
          * @protected
          * @method _renderUI
          */
@@ -8204,6 +8365,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * the Id of the element which have to be retrieved from the DOM.
          * If an HTML Element is passed, the element itself will be returned.
          *
+         * @memberof Core
+         * @instance
          * @method _toElement
          * @protected
          * @param {!(String|HTMLElement)} value String, which have to correspond to an HTML element from the DOM,
@@ -8223,6 +8386,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
          * supported values.
          *
+         * @memberof Core
+         * @instance
          * @protected
          * @method _validateAllowedContent
          * @param {Any} The value to be checked
@@ -8235,6 +8400,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Validates the value of toolbars attribute
          *
+         * @memberof Core
+         * @instance
          * @protected
          * @method _validateToolbars
          * @param {Any} The value to be checked
@@ -8250,6 +8417,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * Look on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)
              * for more information about the valid values.
              *
+             * @memberof Core
+             * @instance
              * @property allowedContent
              * @default true
              * @writeOnce
@@ -8265,6 +8434,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * Specifies whether AlloyEditor set the contenteditable attribute
              * to "true" on its srcNode.
              *
+             * @memberof Core
+             * @instance
              * @property enableContentEditable
              * @type Boolean
              * @default true
@@ -8279,6 +8450,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
              *
+             * @memberof Core
+             * @instance
              * @property eventsDelay
              * @type {Number}
              */
@@ -8291,6 +8464,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
              * make AlloyEditor to work properly.
              *
+             * @memberof Core
+             * @instance
              * @property extraPlugins
              * @default 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink'
              * @writeOnce
@@ -8305,6 +8480,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
              *
+             * @memberof Core
+             * @instance
              * @property nativeEditor
              * @readOnly
              * @type {Object}
@@ -8319,6 +8496,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * {{#crossLink "CKEDITOR.plugins.ae_placeholder}}{{/crossLink}}
              * when editor is not focused.
              *
+             * @memberof Core
+             * @instance
              * @property placeholderClass
              * @default 'ae-placeholder'
              * @writeOnce
@@ -8341,6 +8520,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
              * page!
              *
+             * @memberof Core
+             * @instance
              * @property removePlugins
              * @default 'contextmenu,toolbar,elementspath,resize,liststyle,link'
              * @writeOnce
@@ -8358,6 +8539,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * definition](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-keystrokes) and a selection property with
              * the selection name to trigger.
              *
+             * @memberof Core
+             * @instance
              * @property selectionKeystrokes
              * @type {Array}
              */
@@ -8375,6 +8558,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The Node ID or HTMl node, which AlloyEditor should use as an editable area.
              *
+             * @memberof Core
+             * @instance
              * @property srcNode
              * @type String | Node
              * @writeOnce
@@ -8387,6 +8572,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The toolbars configuration for this editor instance
              *
+             * @memberof Core
+             * @instance
              * @property {Object} toolbars
              */
             toolbars: {
@@ -8406,6 +8593,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The Node ID or HTMl node, where AlloyEditor's UI should be rendered.
              *
+             * @memberof Core
+             * @instance
              * @property uiNode
              * @type String | Node
              * @writeOnce
@@ -8442,6 +8631,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Removes or applies the component style to the current selection.
          *
+         * @instance
+         * @memberof ButtonActionStyle
          * @method applyStyle
          */
         applyStyle: function applyStyle() {
@@ -8481,6 +8672,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Checks if the command is active in the current selection.
          *
+         * @instance
+         * @memberof ButtonCommandActive
          * @method isActive
          * @return {Boolean} True if the command is active, false otherwise.
          */
@@ -8512,23 +8705,28 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The command that should be executed.
              *
+             * @instance
+             * @memberof ButtonCommand
              * @property {String} command
              */
-            command: React.PropTypes.string.isRequired,
+            command: PropTypes.string.isRequired,
 
             /**
              * Indicates that the command may cause the editor to have a different.
              *
+             * @instance
+             * @memberof ButtonCommand
              * @property {boolean} modifiesSelection
              */
-            modifiesSelection: React.PropTypes.bool
+            modifiesSelection: PropTypes.bool
         },
 
         /**
          * Executes a CKEditor command and fires `actionPerformed` event.
          *
+         * @instance
+         * @memberof ButtonCommand
          * @param {Object=} data Optional data to be passed to CKEDITOR's `execCommand` method.
-         *
          * @method execCommand
          */
         execCommand: function execCommand(data) {
@@ -8567,14 +8765,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * - keys: The keystroke definition, as expected by http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke
              * - name: The name for the CKEditor command that will be created. If empty,
              * a random name will be created on the fly
+             *
+             * @instance
+             * @memberof ButtonKeystroke
              * @property {Object} keystroke
              */
-            keystroke: React.PropTypes.object.isRequired
+            keystroke: PropTypes.object.isRequired
         },
 
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
          *
+         * @instance
+         * @memberof ButtonKeystroke
          * @method componentWillMount
          */
         componentWillMount: function componentWillMount() {
@@ -8609,6 +8812,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
+         * @instance
+         * @memberof ButtonKeystroke
          * @method componentWillUnmount
          */
         componentWillUnmount: function componentWillUnmount() {
@@ -8621,47 +8826,51 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 'use strict';
 
 (function () {
-  'use strict';
-
-  /**
-   * ButtonCfgProps is a mixin that provides a style prop and some methods to apply the resulting
-   * style and checking if it is present in a given path or selection.
-   *
-   * @class ButtonCfgProps
-   */
-
-  var ButtonCfgProps = {
-    // Allows validating props being passed to the component.
-    propTypes: {
-      /**
-       * The editor instance where the component is being used.
-       *
-       * @property {Object} editor
-       */
-      editor: React.PropTypes.object.isRequired
-    },
+    'use strict';
 
     /**
-     * Merges the properties, passed to the current component with user's configuration
-     * via `buttonCfg` property.
+     * ButtonCfgProps is a mixin that provides a style prop and some methods to apply the resulting
+     * style and checking if it is present in a given path or selection.
      *
-     * @method mergeButtonCfgProps
-     * @param {Object} props The properties to be merged with the provided configuration for this
-     * button. If not passed, the user configuration will be merged with `this.props`
-     * @return {Object} The merged properties
+     * @class ButtonCfgProps
      */
-    mergeButtonCfgProps: function mergeButtonCfgProps(props) {
-      props = props || this.props;
 
-      var nativeEditor = this.props.editor.get('nativeEditor');
-      var buttonCfg = nativeEditor.config.buttonCfg || {};
-      var result = CKEDITOR.tools.merge(props, buttonCfg[AlloyEditor.ButtonLinkEdit.key]);
+    var ButtonCfgProps = {
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @instance
+             * @memberof ButtonCfgProps
+             * @property {Object} editor
+             */
+            editor: PropTypes.object.isRequired
+        },
 
-      return result;
-    }
-  };
+        /**
+         * Merges the properties, passed to the current component with user's configuration
+         * via `buttonCfg` property.
+         *
+         * @instance
+         * @memberof ButtonCfgProps
+         * @method mergeButtonCfgProps
+         * @param {Object} props The properties to be merged with the provided configuration for this
+         * button. If not passed, the user configuration will be merged with `this.props`
+         * @return {Object} The merged properties
+         */
+        mergeButtonCfgProps: function mergeButtonCfgProps(props) {
+            props = props || this.props;
 
-  AlloyEditor.ButtonCfgProps = ButtonCfgProps;
+            var nativeEditor = this.props.editor.get('nativeEditor');
+            var buttonCfg = nativeEditor.config.buttonCfg || {};
+            var result = CKEDITOR.tools.merge(props, buttonCfg[AlloyEditor.ButtonLinkEdit.key]);
+
+            return result;
+        }
+    };
+
+    AlloyEditor.ButtonCfgProps = ButtonCfgProps;
 })();
 'use strict';
 
@@ -8684,6 +8893,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Returns the list of state classes associated to the current element's state, according
          * to the results of the isActive and isDisabled methods.
          *
+         * @instance
+         * @memberof ButtonStateClasses
          * @method getStateClasses
          * @return {String} A string with the state CSS classes.
          */
@@ -8728,14 +8939,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * retrieve the style object from `editor.config.coreStyles_bold`. Nested properties such as `style = 'myplugin.myConfig.myStyle'`
              * are also supported and will try to retrieve the style object from the editor configuration as well.
              *
+             * @instance
+             * @memberof ButtonStyle
              * @property {Object|String} style
              */
-            style: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.string])
+            style: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
         },
 
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
          *
+         * @instance
+         * @memberof ButtonStyle
          * @method componentWillMount
          */
         componentWillMount: function componentWillMount() {
@@ -8763,6 +8978,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
+         * @instance
+         * @memberof ButtonStyle
          * @method componentWillUnmount
          */
         componentWillUnmount: function componentWillUnmount() {
@@ -8772,6 +8989,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns instance of CKEDITOR.style which represents the current button style.
          *
+         * @instance
+         * @memberof ButtonStyle
          * @method getStyle
          * @return {CKEDITOR.style} The current style representation.
          */
@@ -8782,6 +9001,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Checks if style is active in the current selection.
          *
+         * @instance
+         * @memberof ButtonStyle
          * @method isActive
          * @return {Boolean} True if style is active, false otherwise.
          */
@@ -8817,6 +9038,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Analyzes the current selection and the buttons exclusive mode value to figure out which
          * buttons should be present in a given state.
          *
+         * @instance
+         * @memberof ToolbarButtons
          * @method getToolbarButtons
          * @param {Array} buttons The buttons could be shown, prior to the state filtering.
          * @param {Object} additionalProps Additional props that should be passed down to the buttons.
@@ -8887,6 +9110,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Returns the list of arrow box classes associated to the current element's state. It relies
          * on the getInteractionPoint method to calculate the selection direction.
          *
+         * @instance
+         * @memberof WidgetArrowBox
          * @method getArrowBoxClasses
          * @return {String} A string with the arrow box CSS classes.
          */
@@ -8923,6 +9148,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof WidgetDropdown
          * @method componentWillReceiveProps
          */
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -8935,6 +9162,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Invoked once before the component is mounted.
          *
+         * @instance
+         * @memberof WidgetDropdown
          * @method getInitialState
          */
         getInitialState: function getInitialState() {
@@ -8949,6 +9178,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * - expanded - boolean flag which indicates if an widget should be rendered exclusively.
          * - toggleDropdown - function, which can be used by an widget in order to obtain exclusive state.
          *
+         * @instance
+         * @memberof WidgetDropdown
          * @method mergeDropdownProps
          * @param {Object} obj The properties container which should be merged with the properties, related
          *    to dropdown state.
@@ -8966,6 +9197,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Sets the active dropdown of the widget or discards the toggled item from the state.
          *
+         * @instance
+         * @memberof WidgetDropdown
          * @method toggleDropdown
          * @param {Object} itemDropdown The widget which requests to toggle its dropdown.
          * @param {Number} toggleDirection User movement direction when toggled via keyboard.
@@ -9006,6 +9239,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Cancels the exclusive state of an widget.
          *
+         * @instance
+         * @memberof WidgetExclusive
          * @method cancelExclusive
          * @param {Object} itemExclusive The widget which exclusive state should be canceled.
          */
@@ -9022,6 +9257,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * This method is not called for the initial render.
          * Calling this.setState() within this function will not trigger an additional render.
          *
+         * @instance
+         * @memberof WidgetExclusive
          * @method componentWillReceiveProps
          * @param {Object} nextProps Object containing the current set of properties.
          */
@@ -9037,6 +9274,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Filters the items and returns only those with exclusive state.
          *
+         * @instance
+         * @memberof WidgetExclusive
          * @method filterExclusive
          * @param {Array} items The widgets to be filtered.
          * @return {Array|Object} The item with executive state.
@@ -9059,6 +9298,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * - renderExclusive - boolean flag which indicates if an widget should be rendered exclusively.
          * - requestExclusive - function, which can be used by a widget in order to obtain exclusive state.
          *
+         * @instance
+         * @memberof WidgetExclusive
          * @method mergeExclusiveProps
          * @param {Object} obj The properties container which should be merged with the properties, related
          *    to exclusive state.
@@ -9076,6 +9317,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Requests and sets exclusive state of an widget.
          *
+         * @instance
+         * @memberof WidgetExclusive
          * @method requestExclusive
          * @param {Object} itemExclusive The widget which requests exclusive state.
          */
@@ -9119,43 +9362,55 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              *     - The active descendant is the first one and a prev key has been pressed.
              *     - The active descendant is the last one and a next key has been pressed.
              *
+             * @instance
+             * @memberof WidgetFocusManager
              * @property {Function} onDismiss
              */
-            onDismiss: React.PropTypes.func,
+            onDismiss: PropTypes.func,
 
             /**
              * Indicates if focus should be set to the first/last descendant when the limits are reached.
              *
+             * @instance
+             * @memberof WidgetFocusManager
              * @property {boolean} circular
              */
-            circular: React.PropTypes.bool.isRequired,
+            circular: PropTypes.bool.isRequired,
 
             /**
-            * Indicate if should focus the first child of a container
-            * @property {Boolean} focusFirstChild
-            */
-            focusFirstChild: React.PropTypes.bool,
+             * Indicate if should focus the first child of a container
+             * @instance
+             * @memberof WidgetFocusManager
+             * @property {Boolean} focusFirstChild
+             */
+            focusFirstChild: PropTypes.bool,
 
             /**
              * String representing the CSS selector used to define the elements that should be handled.
              *
+             * @instance
+             * @memberof WidgetFocusManager
              * @property {String} descendants
              */
-            descendants: React.PropTypes.string.isRequired,
+            descendants: PropTypes.string.isRequired,
 
             /**
              * Object representing the keys used to navigate between descendants. The format for the prop is:
              * `{dismiss: value, dismissNext: value, dismissPrev: value, next: value, prev: value}` where
              * value can be both a number or an array of numbers with the allowed keyCodes.
              *
+             * @instance
+             * @memberof WidgetFocusManager
              * @property {Object} keys
              */
-            keys: React.PropTypes.object.isRequired
+            keys: PropTypes.object.isRequired
         },
 
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
+         * @instance
+         * @memberof WidgetFocusManager
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -9166,6 +9421,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          * Refreshes the descendants list.
          *
+         * @instance
+         * @memberof WidgetFocusManager
          * @method componentDidUpdate
          */
         componentDidUpdate: function componentDidUpdate() {
@@ -9178,6 +9435,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Several Widgets can be nested in a component hierarchy by attaching this focus method to
          * the widget DOM node, transferring the DOM focus control to the inner FocusManager.
          *
+         * @instance
+         * @memberof WidgetFocusManager
          * @method focus
          */
         focus: function focus(event) {
@@ -9205,6 +9464,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Handles the key events on a DOM node to execute the appropriate navigation when needed.
          *
+         * @instance
+         * @memberof WidgetFocusManager
          * @param {Object} event The Keyboard event that was detected on the widget DOM node.
          * @method handleKey
          */
@@ -9230,6 +9491,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Moves the focus among descendants in the especified direction.
          *
+         * @instance
+         * @memberof WidgetFocusManager
          * @method moveFocus
          * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
          */
@@ -9243,9 +9506,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Returns the action, if any, that a keyboard event in the current focus manager state
          * should produce.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetFocusManager
          * @method _getFocusAction
          * @param {object} event The Keyboard event.
+         * @protected
          * @return {Object} An action object with type and direction properties.
          */
         _getFocusAction: function _getFocusAction(event) {
@@ -9280,10 +9545,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          *     - The active descendant is the first one and a prev key has been pressed.
          *     - The active descendant is the last one and a next key has been pressed.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetFocusManager
          * @method _getFocusDismissAction
-         * @param {Object} event The Keyboard event.
          * @param {Number} focusMoveDirection The focus movement direction (if any).
+         * @param {Object} event The Keyboard event.
+         * @protected
          * @return {Object} A dismiss action with dismiss and direction properties.
          */
         _getFocusDismissAction: function _getFocusDismissAction(event, focusMoveDirection) {
@@ -9317,9 +9584,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Returns the direction, if any, in which the focus should be moved. In presence of the
          * shift key modifier, the direction of the movement is inverted.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetFocusManager
          * @method _getFocusMoveDirection
          * @param {Object} event The Keyboard event.
+         * @protected
          * @return {Number} The computed direction of the expected focus movement.
          */
         _getFocusMoveDirection: function _getFocusMoveDirection(event) {
@@ -9342,11 +9611,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Indicates if a given keyCode is valid for the given set of keys.
          *
-         * @param {Number} keyCode An event keyCode.
-         * @param {Array|Number} keys A key set. Can be a number an array of numbers representing the allowed keyCodes.
-         *
-         * @protected
+         * @instance
+         * @memberof WidgetFocusManager
          * @method _isValidKey
+         * @param {Array|Number} keys A key set. Can be a number an array of numbers representing the allowed keyCodes.
+         * @param {Number} keyCode An event keyCode.
+         * @protected
          * @return {Boolean} A boolean value indicating if the key is valid.
          */
         _isValidKey: function _isValidKey(keyCode, keys) {
@@ -9357,9 +9627,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Indicates if a given element is valid for focus management. User input elements such as
          * input, select or textarea are excluded.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetFocusManager
          * @method _isValidKey
          * @param {DOMNode} element A DOM element.
+         * @protected
          * @return {Boolean} A boolean value indicating if the element is valid.
          */
         _isValidTarget: function _isValidTarget(element) {
@@ -9371,9 +9643,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Moves the focus among descendants in the especified direction.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetFocusManager
          * @method _moveFocus
          * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
+         * @protected
          */
         _moveFocus: function _moveFocus(direction) {
             var numDescendants = this._descendants.length;
@@ -9401,8 +9675,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Refreshes the descendants list by executing the CSS selector again and resets the descendants tabIndex.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetFocusManager
          * @method _refresh
+         * @protected
          */
         _refresh: function _refresh() {
             var domNode = ReactDOM.findDOMNode(this);
@@ -9463,9 +9739,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The provided editor event.
              *
+             * @instance
+             * @memberof WidgetInteractionPoint
              * @property {SyntheticEvent} editorEvent
              */
-            editorEvent: React.PropTypes.object
+            editorEvent: PropTypes.object
         },
 
         /**
@@ -9479,6 +9757,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * This may be the point where the user released the mouse, or just the beginning or the end of
          * the selection.
          *
+         * @instance
+         * @memberof WidgetInteractionPoint
          * @method getInteractionPoint
          * @return {Object} An Object which contains the following properties:
          * direction, x, y, where x and y are in page coordinates and direction can be one of these:
@@ -9545,11 +9825,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns the position of the Widget.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetInteractionPoint
          * @method _getXPoint
-         * @param {Object} selectionData The data about the selection in the editor as
-         * returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
          * @param {Object} eventX The X coordinate received from the native event (mouseup).
+         * @param {Object} selectionData The data about the selection in the editor as returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
+         * @protected
          * @return {Number} The calculated X point in page coordinates.
          */
         _getXPoint: function _getXPoint(selectionData, eventX) {
@@ -9580,11 +9861,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns the position of the Widget.
          *
+         * @instance
+         * @memberof WidgetInteractionPoint
          * @method _getYPoint
-         * @protected
-         * @param {Object} selectionData The data about the selection in the editor as
-         * returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
          * @param {Object} nativeEvent The data about event is fired
+         * @param {Object} selectionData The data about the selection in the editor as returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
+         * @protected
          * @return {Number} The calculated Y point in page coordinates.
          */
         _getYPoint: function _getYPoint(selectionData, nativeEvent) {
@@ -9615,9 +9897,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Calculates the position where an Widget should be displayed based on the point
      * where user interacted with the editor.
      *
-     * @uses WidgetInteractionPoint
-     *
      * @class WidgetPosition
+     * @uses WidgetInteractionPoint
      */
 
     var WidgetPosition = {
@@ -9628,27 +9909,33 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * Should the widget to be restricted to the viewport, or not.
              *
+             * @instance
+             * @memberof WidgetPosition
              * @property {Boolean} constrainToViewport
              * @default true
              */
-            constrainToViewport: React.PropTypes.bool,
+            constrainToViewport: PropTypes.bool,
 
             /**
              * The gutter (vertical and horizontal) between the interaction point and where the widget
              * should be rendered.
              *
+             * @instance
+             * @memberof WidgetPosition
              * @property {Object} gutter
              * @default {
              *     left: 0,
              *     top: 10
              * }
              */
-            gutter: React.PropTypes.object
+            gutter: PropTypes.object
         },
 
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method getDefaultProps
          */
         getDefaultProps: function getDefaultProps() {
@@ -9664,6 +9951,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Cancels an scheduled animation frame.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method cancelAnimation
          */
         cancelAnimation: function cancelAnimation() {
@@ -9676,6 +9965,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Returns an object which contains the position of the element in page coordinates,
          * restricted to fit to given viewport.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method getConstrainedPosition
          * @param {Object} attrs The following properties, provided as numbers:
          * - height
@@ -9711,6 +10002,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Returns the position of the Widget taking in consideration the
          * {{#crossLink "WidgetPosition/gutter:attribute"}}{{/crossLink}} attribute.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @protected
          * @method  getWidgetXYPoint
          * @param {Number} left The left offset in page coordinates where Toolbar should be shown.
@@ -9749,6 +10042,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns true if the widget is visible, false otherwise
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method isVisible
          * @return {Boolean} True if the widget is visible, false otherwise
          */
@@ -9767,6 +10062,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Moves a widget from a starting point to a destination point.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method moveToPoint
          * @param  {Object} startPoint The starting point for the movement.
          * @param  {Object} endPoint The destination point for the movement.
@@ -9796,6 +10093,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Shows the widget with the default animation transition.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method show
          */
         show: function show() {
@@ -9838,6 +10137,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Updates the widget position based on the current interaction point.
          *
+         * @instance
+         * @memberof WidgetPosition
          * @method updatePosition
          */
         updatePosition: function updatePosition() {
@@ -9858,9 +10159,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Requests an animation frame, if possible, to simulate an animation.
          *
-         * @protected
+         * @instance
+         * @memberof WidgetPosition
          * @method _animate
          * @param {Function} callback The function to be executed on the scheduled frame.
+         * @protected
          */
         _animate: function _animate(callback) {
             if (window.requestAnimationFrame) {
@@ -9881,15 +10184,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
      *
+     * @class ButtonBold
      * @uses ButtonCommand
      * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonBold
      */
 
-    var ButtonBold = React.createClass({
+    var ButtonBold = createReactClass({
         displayName: 'ButtonBold',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
@@ -9899,24 +10201,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonBold
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonBold
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonBold
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -9924,9 +10232,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default bold
+             * @memberof ButtonBold
+             * @property {String} key
+             * @static
              */
             key: 'bold'
         },
@@ -9934,6 +10243,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonBold
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -9951,6 +10262,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonBold
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -9978,7 +10291,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @class ButtonCameraImage
      */
 
-    var ButtonCameraImage = React.createClass({
+    var ButtonCameraImage = createReactClass({
         displayName: 'ButtonCameraImage',
 
         // Lifecycle. Provides static properties to the widget.
@@ -9986,9 +10299,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default cameraImage
+             * @memberof ButtonCameraImage
+             * @property {String} key
+             * @static
              */
             key: 'cameraImage'
         },
@@ -9996,6 +10310,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method getDefaultProps
          */
         getDefaultProps: function getDefaultProps() {
@@ -10009,6 +10325,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          *
          * Focuses the take photo button.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -10018,6 +10336,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method componentWillUnmount
          */
         componentWillUnmount: function componentWillUnmount() {
@@ -10036,6 +10356,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -10067,6 +10389,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Takes photo from the video stream and inserts in into editor's content.
          *
+         * @fires ButtonCameraImage#imageCameraAdd
+         * @instance
+         * @memberof ButtonCameraImage
          * @method takePhoto
          */
         takePhoto: function takePhoto() {
@@ -10103,9 +10428,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Displays error message in case of video stream capturing failure.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonCameraImage
          * @method _handleStreamError
          * @param {Event} error The fired event in case of error.
+         * @protected
          */
         _handleStreamError: function _handleStreamError(error) {
             window.alert('An error occurred! ' + error);
@@ -10115,8 +10442,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Starts streaming video in the video element and sets width/height to the video
          * and canvas elements.
          *
+         * @instance
+         * @memberof ButtonCameraImage
          * @method _handleStreamSuccess
          * @param {Object} stream The video stream
+         * @protected
          */
         _handleStreamSuccess: function _handleStreamSuccess(stream) {
             var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
@@ -10153,7 +10483,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Fired when an image is being taken from the camera and added as an element to the editor.
          *
-         * @event imageCameraAdd
+         * @event ButtonCameraImage#imageCameraAdd
+         * @memberof ButtonCameraImage
          * @param {CKEDITOR.dom.element} el The created img element in editor.
          */
     });
@@ -10174,7 +10505,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @class ButtonCamera
      */
 
-    var ButtonCamera = React.createClass({
+    var ButtonCamera = createReactClass({
         displayName: 'ButtonCamera',
 
         // Allows validating props being passed to the component.
@@ -10183,23 +10514,29 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * The editor instance where the component is being used.
              *
              * @property {Object} editor
+             * @instance
+             * @memberof ButtonCamera
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
              * @property {String} label
+             * @instance
+             * @memberof ButtonCamera
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
              * @property {Number} tabIndex
+             * @instance
+             * @memberof ButtonCamera
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -10207,9 +10544,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default camera
+             * @memberof ButtonCamera
+             * @property {String} key
+             * @static
              */
             key: 'camera'
         },
@@ -10217,6 +10555,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonCamera
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -10247,14 +10587,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * The ButtonCode class provides wraps a selection in `pre` element.
      *
+     * @class ButtonCode
      * @uses ButtonActionStyle
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonCode
      */
 
-    var ButtonCode = React.createClass({
+    var ButtonCode = createReactClass({
         displayName: 'ButtonCode',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
@@ -10264,24 +10603,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonCode
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonCode
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonCode
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -10289,9 +10634,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default code
+             * @memberof ButtonCode
+             * @property {String} key
+             * @static
              */
             key: 'code'
         },
@@ -10299,6 +10645,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonCode
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -10313,6 +10661,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonCode
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -10338,12 +10688,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * The ButtonCommandListItem class is a UI class that renders a ButtonCommand that can be used inside
      * a list as an item, with a string representation of its behaviour.
      *
-     * @uses ButtonCommand
-     *
      * @class ButtonCommandListItem
+     * @uses ButtonCommand
      */
 
-    var ButtonCommandListItem = React.createClass({
+    var ButtonCommandListItem = createReactClass({
         displayName: 'ButtonCommandListItem',
 
         mixins: [AlloyEditor.ButtonCommand],
@@ -10352,16 +10701,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The command label or description to render in the list entry.
              *
+             * @instance
+             * @memberof ButtonCommandListItem
              * @property {String} description
              */
-            description: React.PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
 
             /**
              * The command icon to render in the list entry.
              *
+             * @instance
+             * @memberof ButtonCommandListItem
              * @property {String} icon
              */
-            icon: React.PropTypes.string
+            icon: PropTypes.string
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -10369,9 +10722,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default buttonCommandListItem
+             * @memberof ButtonCommandListItem
+             * @property {String} key
+             * @static
              */
             key: 'buttonCommandListItem'
         },
@@ -10379,6 +10733,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonCommandListItem
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -10393,7 +10749,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Returns the class name of Widget.
          *
+         * @instance
+         * @memberof ButtonCommandListItem
          * @method _getClassName
+         * @protected
          * @return {String} The class name of the Widget.
          */
         _getClassName: function _getClassName() {
@@ -10418,12 +10777,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * The ButtonCommandsList class provides functionality for showing a list of commands that can be
      * executed to the current selection..
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonCommandsList
+     * @uses WidgetFocusManager
      */
 
-    var ButtonCommandsList = React.createClass({
+    var ButtonCommandsList = createReactClass({
         displayName: 'ButtonCommandsList',
 
         mixins: [AlloyEditor.WidgetFocusManager],
@@ -10433,23 +10791,29 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * List of the commands the button is able to handle.
              *
+             * @instance
+             * @memberof ButtonCommandsList
              * @property {Array} commands
              */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
+            commands: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonCommandsList
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * List id to be used for accessibility purposes such as aria-owns.
              *
+             * @instance
+             * @memberof ButtonCommandsList
              * @property {String} listId
              */
-            listId: React.PropTypes.string
+            listId: PropTypes.string
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -10457,9 +10821,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default buttonCommandsList
+             * @memberof ButtonCommandsList
+             * @property {String} key
+             * @static
              */
             key: 'buttonCommandsList'
         },
@@ -10469,6 +10834,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          *
          * Focuses on the list node to allow keyboard interaction.
          *
+         * @instance
+         * @memberof ButtonCommandsList
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -10478,6 +10845,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonCommandsList
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -10498,6 +10867,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the list.
          *
+         * @instance
+         * @memberof ButtonCommandsList
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -10516,8 +10887,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Renders instances of ButtonCommandListItem with the description of the row action that will be executed.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonCommandsList
          * @method _renderActions
+         * @protected
          * @return {Array} Rendered instances of ButtonCommandListItem class
          */
         _renderActions: function _renderActions(commands) {
@@ -10552,7 +10925,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @class ButtonDropdown
      */
 
-    var ButtonDropdown = React.createClass({
+    var ButtonDropdown = createReactClass({
         displayName: 'ButtonDropdown',
 
         mixins: [AlloyEditor.WidgetFocusManager],
@@ -10560,6 +10933,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonDropdown
          * @method getDefaultProps
          */
         getDefaultProps: function getDefaultProps() {
@@ -10581,9 +10956,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the dropdown in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default dropdown
+             * @memberof ButtonDropdown
+             * @property {String} key
+             * @static
              */
             key: 'dropdown'
         },
@@ -10591,6 +10967,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonDropdown
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -10623,7 +11001,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      *
      * @class ButtonEmbedEdit
      */
-    var ButtonEmbedEdit = React.createClass({
+    var ButtonEmbedEdit = createReactClass({
         displayName: 'ButtonEmbedEdit',
 
         // Allows validating props being passed to the component.
@@ -10631,9 +11009,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonEmbedEdit
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired
+            editor: PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -10641,9 +11021,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default embedEdit
+             * @memberof ButtonEmbedEdit
+             * @property {String} key
+             * @static
              */
             key: 'embedEdit'
         },
@@ -10654,6 +11035,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Focuses on the link input to immediately allow editing. This should only happen if the component
          * is rendered in exclusive mode to prevent aggressive focus stealing.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -10672,6 +11055,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method componentWillReceiveProps
          */
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -10682,6 +11067,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method getInitialState
          */
         getInitialState: function getInitialState() {
@@ -10712,6 +11099,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -10747,8 +11136,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * affect the link element of the editor. Only the _removeLink and _updateLink methods
          * are translated to the editor element.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _clearLink
+         * @protected
          */
         _clearLink: function _clearLink() {
             this.setState({
@@ -10759,8 +11150,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Triggers the embedUrl command to transform the link into an embed media object
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _embedLink
+         * @protected
          */
         _embedLink: function _embedLink() {
             var nativeEditor = this.props.editor.get('nativeEditor');
@@ -10777,8 +11170,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Focuses the user cursor on the widget's input.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _focusLinkInput
+         * @protected
          */
         _focusLinkInput: function _focusLinkInput() {
             ReactDOM.findDOMNode(this.refs.linkInput).focus();
@@ -10789,9 +11184,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * - Enter: Creates/updates the link.
          * - Escape: Discards the changes.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
+         * @protected
          */
         _handleKeyDown: function _handleKeyDown(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
@@ -10814,9 +11211,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Updates the component state when the link input changes on user interaction.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _handleLinkHrefChange
          * @param {SyntheticEvent} event The change event.
+         * @protected
          */
         _handleLinkHrefChange: function _handleLinkHrefChange(event) {
             this.setState({
@@ -10828,6 +11227,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Verifies that the current link state is valid so the user can save the link. A valid state
          * means that we have a non-empty href that's different from the original one.
          *
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _isValidState
          * @protected
          * @return {Boolean} True if the state is valid, false otherwise
@@ -10841,8 +11242,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Removes the embed in the editor element.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbedEdit
          * @method _removeEmbed
+         * @protected
          */
         _removeEmbed: function _removeEmbed() {
             var editor = this.props.editor.get('nativeEditor');
@@ -10871,12 +11274,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * - Normal: Just a button that allows to switch to the edition mode
      * - Exclusive: The ButtonEmbedEdit UI with all the link edition controls.
      *
-     * @uses ButtonKeystroke
-     *
      * @class ButtonEmbed
+     * @uses ButtonKeystroke
      */
 
-    var ButtonEmbed = React.createClass({
+    var ButtonEmbed = createReactClass({
         displayName: 'ButtonEmbed',
 
         mixins: [AlloyEditor.ButtonKeystroke],
@@ -10886,24 +11288,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonEmbed
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonEmbed
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonEmbed
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -10911,9 +11319,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default embed
+             * @memberof ButtonEmbed
+             * @property {String} key
+             * @static
              */
             key: 'embed'
         },
@@ -10921,6 +11330,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonEmbed
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -10936,6 +11347,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonEmbed
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -10954,8 +11367,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Requests the link button to be rendered in exclusive mode to allow the embedding of a link.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonEmbed
          * @method _requestExclusive
+         * @protected
          */
         _requestExclusive: function _requestExclusive() {
             this.props.requestExclusive(ButtonEmbed.key);
@@ -10972,14 +11387,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * The ButtonH1 class provides wraps a selection in `h1` element.
      *
+     * @class ButtonH1
      * @uses ButtonActionStyle
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonH1
      */
 
-    var ButtonH1 = React.createClass({
+    var ButtonH1 = createReactClass({
         displayName: 'ButtonH1',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
@@ -10989,24 +11403,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonH1
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonH1
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonH1
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -11014,9 +11434,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default h1
+             * @memberof ButtonH1
+             * @property {String} key
+             * @static
              */
             key: 'h1'
         },
@@ -11024,6 +11445,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonH1
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -11038,6 +11461,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonH1
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11062,14 +11487,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * The ButtonH2 class provides wraps a selection in `h2` element.
      *
+     * @class ButtonH2
      * @uses ButtonActionStyle
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonH2
      */
 
-    var ButtonH2 = React.createClass({
+    var ButtonH2 = createReactClass({
         displayName: 'ButtonH2',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonActionStyle],
@@ -11079,24 +11503,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonH2
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonH2
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonH2
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -11104,9 +11534,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default h2
+             * @memberof ButtonH2
+             * @property {String} key
+             * @static
              */
             key: 'h2'
         },
@@ -11114,6 +11545,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonH2
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -11128,6 +11561,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonH2
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11152,13 +11587,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * The ButtonHline class provides inserts horizontal line.
      *
+     * @class ButtonHline
      * @uses ButtonCommand
      * @uses ButtonStyle
-     *
-     * @class ButtonHline
      */
 
-    var ButtonHline = React.createClass({
+    var ButtonHline = createReactClass({
         displayName: 'ButtonHline',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonCommand],
@@ -11168,24 +11602,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonHline
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonHline
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonHline
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -11193,9 +11633,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default hline
+             * @memberof ButtonHline
+             * @property {String} key
+             * @static
              */
             key: 'hline'
         },
@@ -11203,6 +11644,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonHline
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -11218,6 +11661,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonHline
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11240,14 +11685,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * The ButtonImageAlignCenter class provides functionality for aligning an image in the center.
      *
+     * @class ButtonImageAlignCenter
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonImageAlignCenter
      */
 
-    var ButtonImageAlignCenter = React.createClass({
+    var ButtonImageAlignCenter = createReactClass({
         displayName: 'ButtonImageAlignCenter',
 
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -11257,24 +11701,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonImageAlignCenter
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonImageAlignCenter
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonImageAlignCenter
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -11282,9 +11732,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default imageCenter
+             * @memberof ButtonImageAlignCenter
+             * @property {String} key
+             * @static
              */
             key: 'imageCenter'
         },
@@ -11292,6 +11743,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonImageAlignCenter
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -11304,6 +11757,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonImageAlignCenter
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11328,14 +11783,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * The ButtonImageAlignLeft class provides functionality for aligning an image on left.
      *
+     * @class ButtonImageAlignLeft
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonImageAlignLeft
      */
 
-    var ButtonImageAlignLeft = React.createClass({
+    var ButtonImageAlignLeft = createReactClass({
         displayName: 'ButtonImageAlignLeft',
 
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -11345,24 +11799,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonImageAlignLeft
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonImageAlignLeft
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonImageAlignLeft
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -11370,9 +11830,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default imageLeft
+             * @memberof ButtonImageAlignLeft
+             * @property {String} key
+             * @static
              */
             key: 'imageLeft'
         },
@@ -11380,6 +11841,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonImageAlignLeft
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -11392,6 +11855,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonImageAlignLeft
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11416,14 +11881,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * The ButtonImageAlignRight class provides functionality for aligning an image on right.
      *
+     * @class ButtonImageAlignRight
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonImageAlignRight
      */
 
-    var ButtonImageAlignRight = React.createClass({
+    var ButtonImageAlignRight = createReactClass({
         displayName: 'ButtonImageAlignRight',
 
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -11433,24 +11897,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonImageAlignRight
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonImageAlignRight
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonImageAlignRight
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -11458,9 +11928,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default imageRight
+             * @memberof ButtonImageAlignRight
+             * @property {String} key
+             * @static
              */
             key: 'imageRight'
         },
@@ -11468,6 +11939,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonImageAlignRight
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -11480,6 +11953,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonImageAlignRight
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11507,7 +11982,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @class ButtonImage
      */
 
-    var ButtonImage = React.createClass({
+    var ButtonImage = createReactClass({
         displayName: 'ButtonImage',
 
         // Allows validating props being passed to the component.
@@ -11515,24 +11990,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonImage
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonImage
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonImage
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -11540,9 +12021,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default image
+             * @memberof ButtonImage
+             * @property {String} key
+             * @static
              */
             key: 'image'
         },
@@ -11550,6 +12032,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonImage
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11571,6 +12055,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Simulates click on the input element. This will open browser's native file open dialog.
          *
+         * @instance
+         * @memberof ButtonImage
          * @method handleClick
          * @param {SyntheticEvent} event The received click event on the button.
          */
@@ -11587,8 +12073,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * - `el` - the created img element
          * - `file` - the original image file from the input element
          *
-         * @protected
+         * @fires ButtonImage#beforeImageAdd
+         * @fires ButtonImage#imageAdd
+         * @instance
+         * @memberof ButtonImage
          * @method _onInputChange
+         * @protected
          */
         _onInputChange: function _onInputChange() {
             var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
@@ -11633,14 +12123,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Fired before adding images to the editor.
          *
-         * @event beforeImageAdd
+         * @event ButtonImage#beforeImageAdd
+         * @instance
+         * @memberof ButtonImage
          * @param {Array} imageFiles Array of image files
          */
 
         /**
          * Fired when an image is being added to the editor successfully.
          *
-         * @event imageAdd
+         * @event ButtonImage#imageAdd
+         * @instance
+         * @memberof ButtonImage
          * @param {CKEDITOR.dom.element} el The created image with src as Data URI
          * @param {File} file The image file
          */
@@ -11656,14 +12150,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
         * The ButtonIndentBlock class provides functionality for indenting the selected blocks.
         *
+        * @class ButtonIndentBlock
         * @uses ButtonCommand
         * @uses ButtonCommandActive
         * @uses ButtonStateClasses
-        *
-        * @class ButtonIndentBlock
         */
 
-    var ButtonIndentBlock = React.createClass({
+    var ButtonIndentBlock = createReactClass({
         displayName: 'ButtonIndentBlock',
 
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -11671,46 +12164,55 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         //Allows validating props being passed to the component
         propTypes: {
             /**
-                  * The editor instance where the component is being used.
-                  *
-                  * @property {Object} editor
-                  */
-            editor: React.PropTypes.object.isRequired,
+             * The editor instance where the component is being used.
+             *
+             * @instance
+             * @memberof ButtonIndentBlock
+             * @property {Object} editor
+             */
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonIndentBlock
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonIndentBlock
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
-                  * The name which will be used as an alias of the button in the configuration.
-                  *
-                  * @static
-                  * @property {String} key
-                  * @default indentBlock
-                  */
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @default indentBlock
+             * @memberof ButtonIndentBlock
+             * @property {String} key
+             * @static
+             */
             key: 'indentBlock'
         },
 
         /**
-           * Lifecycle. Returns the default values of the properties used in the widget.
-           *
-           * @method getDefaultProps
-           * @return {Object} The default properties.
-           */
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @instance
+         * @memberof ButtonIndentBlock
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'indent'
@@ -11720,6 +12222,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonIndentBlock
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11732,7 +12236,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 React.createElement('span', { className: 'ae-icon-indent-block' })
             );
         }
-
     });
 
     AlloyEditor.Buttons[ButtonIndentBlock.key] = AlloyEditor.ButtonIndentBlock = ButtonIndentBlock;
@@ -11745,15 +12248,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * The ButtonItalic class provides functionality for styling an selection with italic (em) style.
      *
+     * @class ButtonItalic
      * @uses ButtonCommand
      * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonItalic
      */
 
-    var ButtonItalic = React.createClass({
+    var ButtonItalic = createReactClass({
         displayName: 'ButtonItalic',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
@@ -11763,24 +12265,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonItalic
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonItalic
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonItalic
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -11788,9 +12296,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default italic
+             * @memberof ButtonItalic
+             * @property {String} key
+             * @static
              */
             key: 'italic'
         },
@@ -11798,6 +12307,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonItalic
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -11815,6 +12326,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonItalic
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11840,12 +12353,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * The ButtonLinkAutocompleteList class provides functionality for showing a list of
      * items that can be selected for the link.
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonLinkAutocompleteList
+     * @uses WidgetFocusManager
      */
 
-    var ButtonLinkAutocompleteList = React.createClass({
+    var ButtonLinkAutocompleteList = createReactClass({
         displayName: 'ButtonLinkAutocompleteList',
 
         mixins: [AlloyEditor.WidgetFocusManager],
@@ -11855,30 +12367,38 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * Autocomplete function
              *
+             * @instance
+             * @memberof ButtonLinkAutocompleteList
              * @property {Function} data
              */
-            data: React.PropTypes.func,
+            data: PropTypes.func,
 
             /**
              * Indicates if this is focused when this component is updated
              *
+             * @instance
+             * @memberof ButtonLinkAutocompleteList
              * @property {Boolean} autocompleteSelected
              */
-            autocompleteSelected: React.PropTypes.bool,
+            autocompleteSelected: PropTypes.bool,
 
             /**
              * The current term to autocomplete for
              *
+             * @instance
+             * @memberof ButtonLinkAutocompleteList
              * @property {String} term
              */
-            term: React.PropTypes.string,
+            term: PropTypes.string,
 
             /**
             * Method to update parent selectautocomplete state
             *
+             * @instance
+             * @memberof ButtonLinkAutocompleteList
             * @property {Function} setAutocompleteState
             */
-            setAutocompleteState: React.PropTypes.func
+            setAutocompleteState: PropTypes.func
 
         },
 
@@ -11887,9 +12407,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default buttonLinkAutocompleteList
+             * @memberof ButtonLinkAutocompleteList
+             * @property {String} key
+             * @static
              */
             key: 'buttonLinkAutocompleteList'
         },
@@ -11898,6 +12419,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method componentWillReceiveProps
          */
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -11924,6 +12447,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method componentWillUnmount
          */
         componentWillUnmount: function componentWillUnmount() {
@@ -11933,6 +12458,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -11956,6 +12483,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method getInitialState
          */
         getInitialState: function getInitialState() {
@@ -11967,6 +12496,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Lifecycle. Renders the UI of the list.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -11986,6 +12517,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Lifecycle. Invoked before rendering when new props or state are being received.
          * This method is not called for the initial render or when forceUpdate is used.
          *
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method  shouldComponentUpdate
          * @return {Boolean} Returns false when the transition to the new props and state will not
          * require a component update.
@@ -11997,9 +12530,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Renders a set of list items for the provided items
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method _renderAutocompleteItems
          * @param {Array} items List of autocomplete items to render
+         * @protected
          * @return {Array} Rendered list item instances
          */
         _renderAutocompleteItems: function _renderAutocompleteItems(items) {
@@ -12025,8 +12560,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /**
          * Retrieves the data according to {this.props.term} and calls setState() with the returned data
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkAutocompleteList
          * @method _updateItems
+         * @protected
          */
         _updateItems: function _updateItems() {
             var instance = this;
@@ -12062,14 +12599,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
      * Provides UI for creating, editing and removing a link.
      *
+     * @class ButtonLinkEdit
+     * @uses ButtonCfgProps
      * @uses WidgetDropdown
      * @uses WidgetFocusManager
-     * @uses ButtonCfgProps
-     *
-     * @class ButtonLinkEdit
      */
 
-    var ButtonLinkEdit = React.createClass({
+    var ButtonLinkEdit = createReactClass({
         displayName: 'ButtonLinkEdit',
 
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetFocusManager, AlloyEditor.ButtonCfgProps],
@@ -12079,37 +12615,47 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * List of the allowed values for the target attribute.
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Array} allowedTargets
              */
-            allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
+            allowedTargets: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * Indicate if we add http:// protocol to link or not
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Boolean} appendProtocol
              */
-            appendProtocol: React.PropTypes.bool,
+            appendProtocol: PropTypes.bool,
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Default value of the link target attribute.
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {String} defaultLinkTarget
              */
-            defaultLinkTarget: React.PropTypes.string,
+            defaultLinkTarget: PropTypes.string,
 
             /**
              * Indicates whether the link target selector should appear.
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Boolean} showTargetSelector
              */
-            showTargetSelector: React.PropTypes.bool,
+            showTargetSelector: PropTypes.bool,
 
             /**
              * List of items to be rendered as possible values for the link or a function, which is
@@ -12118,9 +12664,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
              * - title
              * - url
              *
+             * @instance
+             * @memberof ButtonLinkEdit
              * @property {Function|Array} data
              */
-            data: React.PropTypes.oneOfType([React.PropTypes.func, React.PropTypes.arrayOf(React.PropTypes.object)])
+            data: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.object)])
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -12128,9 +12676,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default linkEdit
+             * @memberof ButtonLinkEdit
+             * @property {String} key
+             * @static
              */
             key: 'linkEdit'
         },
@@ -12141,6 +12690,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Focuses on the link input to immediately allow editing. This should only happen if the component
          * is rendered in exclusive mode to prevent aggressive focus stealing.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -12155,6 +12706,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Invoked when a component is receiving new props.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method componentWillReceiveProps
          */
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -12164,6 +12717,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -12190,6 +12745,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Invoked once before the component is mounted.
          * The return value will be used as the initial value of this.state.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method getInitialState
          */
         getInitialState: function getInitialState() {
@@ -12212,6 +12769,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -12304,8 +12863,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * affect the link element of the editor. Only the _removeLink and _updateLink methods
          * are translated to the editor element.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _clearLink
+         * @protected
          */
         _clearLink: function _clearLink() {
             this.setState({
@@ -12318,8 +12879,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Focuses the user cursor on the widget's input.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _focusLinkInput
+         * @protected
          */
         _focusLinkInput: function _focusLinkInput() {
             var instance = this;
@@ -12340,9 +12903,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * - Enter: Creates/updates the link.
          * - Escape: Discards the changes.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
+         * @protected
          */
         _handleKeyDown: function _handleKeyDown(event) {
             if (event.keyCode === 13 || event.keyCode === 27) {
@@ -12367,9 +12932,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Updates the component state when the link input changes on user interaction.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _handleLinkHrefChange
          * @param {SyntheticEvent} event The change event.
+         * @protected
          */
         _handleLinkHrefChange: function _handleLinkHrefChange(event) {
             this.setState({
@@ -12382,9 +12949,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Updates the component state when the link target changes on user interaction.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _handleLinkTargetChange
          * @param {SyntheticEvent} event The click event.
+         * @protected
          */
         _handleLinkTargetChange: function _handleLinkTargetChange(event) {
             this.setState({
@@ -12398,9 +12967,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Updates the component state when an autocomplete link result is selected by user interaction.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _handleLinkAutocompleteClick
          * @param {SyntheticEvent} event The click event.
+         * @protected
          */
         _handleLinkAutocompleteClick: function _handleLinkAutocompleteClick(event) {
             this.setState({
@@ -12416,8 +12987,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * means that we have a non-empty href and that either that or the link target are different
          * from the original link.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _isValidState
+         * @protected
          * @return {Boolean} [description]
          */
         _isValidState: function _isValidState() {
@@ -12429,8 +13002,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Removes the link in the editor element.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _removeLink
+         * @protected
          */
         _removeLink: function _removeLink() {
             var editor = this.props.editor.get('nativeEditor');
@@ -12452,8 +13027,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Update autocompleteSelected state to focus and select autocomplete´s dropdown
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _setAutocompleteState
+         * @protected
          */
         _setAutocompleteState: function _setAutocompleteState(state) {
             this.setState({
@@ -12465,8 +13042,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Updates the link in the editor element. If the element didn't exist previously, it will
          * create a new <a> element with the href specified in the link input.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLinkEdit
          * @method _updateLink
+         * @protected
          */
         _updateLink: function _updateLink() {
             var editor = this.props.editor.get('nativeEditor');
@@ -12508,7 +13087,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonLinkTargetEdit
      */
 
-    var ButtonLinkTargetEdit = React.createClass({
+    var ButtonLinkTargetEdit = createReactClass({
         displayName: 'ButtonLinkTargetEdit',
 
         // Allows validating props being passed to the component.
@@ -12517,23 +13096,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
              * List of the allowed items for the target attribute. Every allowed target is an object
              * with a `label` attribute that will be shown in the dropdown and a `value` attribute
              * that will get set as the link target attribute.
+             *
+             * @instance
+             * @memberof ButtonLinkTargetEdit
              * @property {Array<object>} allowedTargets
              */
-            allowedTargets: React.PropTypes.arrayOf(React.PropTypes.object),
+            allowedTargets: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonLinkTargetEdit
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Label of the current target value.
              *
+             * @instance
+             * @memberof ButtonLinkTargetEdit
              * @property {String} selectedTarget
              */
-            selectedTarget: React.PropTypes.string
+            selectedTarget: PropTypes.string
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -12541,9 +13127,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default linkTargetEdit
+             * @memberof ButtonLinkTargetEdit
+             * @property {String} key
+             * @static
              */
             key: 'linkTargetEdit'
         },
@@ -12551,6 +13138,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonLinkTargetEdit
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -12589,6 +13178,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Invoked before rendering when new props or state are being received.
          * This method is not called for the initial render or when forceUpdate is used.
          *
+         * @instance
+         * @memberof ButtonLinkTargetEdit
          * @method  shouldComponentUpdate
          * @return {Boolean} Returns false when the transition to the new props and state will not
          * require a component update.
@@ -12612,14 +13203,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * - Normal: Just a button that allows to switch to the edition mode
      * - Exclusive: The ButtonLinkEdit UI with all the link edition controls.
      *
+     * @class ButtonLink
+     * @uses ButtonCfgProps
      * @uses ButtonKeystroke
      * @uses ButtonStateClasses
-     * @uses ButtonCfgProps
-     *
-     * @class ButtonLink
      */
 
-    var ButtonLink = React.createClass({
+    var ButtonLink = createReactClass({
         displayName: 'ButtonLink',
 
         mixins: [AlloyEditor.ButtonKeystroke, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCfgProps],
@@ -12629,24 +13219,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonLink
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonLink
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonLink
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -12654,9 +13250,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default link
+             * @memberof ButtonLink
+             * @property {String} key
+             * @static
              */
             key: 'link'
         },
@@ -12664,6 +13261,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonLink
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -12679,6 +13278,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Checks if the current selection is contained within a link.
          *
+         * @instance
+         * @memberof ButtonLink
          * @method isActive
          * @return {Boolean} True if the selection is inside a link, false otherwise.
          */
@@ -12689,6 +13290,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonLink
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -12711,8 +13314,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Requests the link button to be rendered in exclusive mode to allow the creation of a link.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonLink
          * @method _requestExclusive
+         * @protected
          */
         _requestExclusive: function _requestExclusive() {
             this.props.requestExclusive(ButtonLink.key);
@@ -12729,14 +13334,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonOrderedList class provides functionality for creating ordered lists in an editor.
      *
+     * @class ButtonOrderedList
      * @uses ButtonCommand
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonOrderedList
      */
 
-    var ButtonOrderedList = React.createClass({
+    var ButtonOrderedList = createReactClass({
         displayName: 'ButtonOrderedList',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
@@ -12746,24 +13350,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonOrderedList
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonOrderedList
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonOrderedList
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -12771,9 +13381,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default ol
+             * @memberof ButtonOrderedList
+             * @property {String} key
+             * @static
              */
             key: 'ol'
         },
@@ -12781,6 +13392,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonOrderedList
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -12796,6 +13409,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonOrderedList
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -12820,14 +13435,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
         * The ButtonOutdentBlock class provides functionality for outdenting blocks.
         *
+        * @class ButtonOutdentBlock
         * @uses ButtonCommand
         * @uses ButtonCommandActive
         * @uses ButtonStateClasses
-        *
-        * @class ButtonOutdentBlock
         */
 
-    var ButtonOutdentBlock = React.createClass({
+    var ButtonOutdentBlock = createReactClass({
         displayName: 'ButtonOutdentBlock',
 
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -12835,46 +13449,55 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         //Allows validating props being passed to the component
         propTypes: {
             /**
-                  * The editor instance where the component is being used.
-                  *
-                  * @property {Object} editor
-                  */
-            editor: React.PropTypes.object.isRequired,
+             * The editor instance where the component is being used.
+             *
+             * @instance
+             * @memberof ButtonOutdentBlock
+             * @property {Object} editor
+             */
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonOutdentBlock
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonOutdentBlock
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
         statics: {
             /**
-                  * The name which will be used as an alias of the button in the configuration.
-                  *
-                  * @static
-                  * @property {String} key
-                  * @default indentBlock
-                  */
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @default indentBlock
+             * @memberof ButtonOutdentBlock
+             * @property {String} key
+             * @static
+             */
             key: 'outdentBlock'
         },
 
         /**
-           * Lifecycle. Returns the default values of the properties used in the widget.
-           *
-           * @method getDefaultProps
-           * @return {Object} The default properties.
-           */
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @instance
+         * @memberof ButtonOutdentBlock
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
         getDefaultProps: function getDefaultProps() {
             return {
                 command: 'outdent'
@@ -12884,6 +13507,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonOutdentBlock
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -12909,14 +13534,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonParagraphAlignLeft class provides functionality for aligning a paragraph on left.
      *
+     * @class ButtonParagraphAlignLeft
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonParagraphAlignLeft
      */
 
-    var ButtonParagraphAlignLeft = React.createClass({
+    var ButtonParagraphAlignLeft = createReactClass({
         displayName: 'ButtonParagraphAlignLeft',
 
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -12926,24 +13550,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonParagraphAlignLeft
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonParagraphAlignLeft
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonParagraphAlignLeft
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -12951,9 +13581,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default paragraphLeft
+             * @memberof ButtonParagraphAlignLeft
+             * @property {String} key
+             * @static
              */
             key: 'paragraphLeft'
         },
@@ -12961,6 +13592,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonParagraphAlignLeft
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -12973,6 +13606,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonParagraphAlignLeft
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -12997,14 +13632,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonParagraphAlignRight class provides functionality for aligning a paragraph on right.
      *
+     * @class ButtonParagraphAlignRight
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonParagraphAlignRight
      */
 
-    var ButtonParagraphAlignRight = React.createClass({
+    var ButtonParagraphAlignRight = createReactClass({
         displayName: 'ButtonParagraphAlignRight',
 
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -13014,24 +13648,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonParagraphAlignRight
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonParagraphAlignRight
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonParagraphAlignRight
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -13039,9 +13679,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default paragraphRight
+             * @memberof ButtonParagraphAlignRight
+             * @property {String} key
+             * @static
              */
             key: 'paragraphRight'
         },
@@ -13049,6 +13690,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonParagraphAlignRight
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -13061,6 +13704,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonParagraphAlignRight
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13085,14 +13730,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonParagraphCenter class provides functionality for centering a paragraph.
      *
+     * @class ButtonParagraphCenter
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonParagraphCenter
      */
 
-    var ButtonParagraphCenter = React.createClass({
+    var ButtonParagraphCenter = createReactClass({
         displayName: 'ButtonParagraphCenter',
 
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -13102,24 +13746,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonParagraphCenter
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonParagraphCenter
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonParagraphCenter
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -13127,9 +13777,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default paragraphCenter
+             * @memberof ButtonParagraphCenter
+             * @property {String} key
+             * @static
              */
             key: 'paragraphCenter'
         },
@@ -13137,6 +13788,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonParagraphCenter
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -13149,6 +13802,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonParagraphCenter
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13173,14 +13828,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonParagraphJustify class provides functionality for justfying a paragraph.
      *
+     * @class ButtonParagraphJustify
      * @uses ButtonCommand
      * @uses ButtonCommandActive
      * @uses ButtonStateClasses
-     *
-     * @class ButtonParagraphJustify
      */
 
-    var ButtonParagraphJustify = React.createClass({
+    var ButtonParagraphJustify = createReactClass({
         displayName: 'ButtonParagraphJustify',
 
         mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonCommandActive],
@@ -13190,24 +13844,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonParagraphJustify
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonParagraphJustify
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonParagraphJustify
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -13215,9 +13875,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default paragraphJustify
+             * @memberof ButtonParagraphJustify
+             * @property {String} key
+             * @static
              */
             key: 'paragraphJustify'
         },
@@ -13225,6 +13886,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonParagraphJustify
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -13237,6 +13900,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonParagraphJustify
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13261,14 +13926,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonQuote class wraps a selection in `blockquote` element.
      *
+     * @class ButtonQuote
      * @uses ButtonCommand
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonQuote
      */
 
-    var ButtonQuote = React.createClass({
+    var ButtonQuote = createReactClass({
         displayName: 'ButtonQuote',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
@@ -13278,24 +13942,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonQuote
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonQuote
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonQuote
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -13303,9 +13973,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default quote
+             * @memberof ButtonQuote
+             * @property {String} key
+             * @static
              */
             key: 'quote'
         },
@@ -13313,6 +13984,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonQuote
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -13328,6 +14001,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonQuote
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13352,12 +14027,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonRemoveFormat class removes style formatting.
      *
-     * @uses ButtonCommand
-     *
      * @class ButtonRemoveFormat
+     * @uses ButtonCommand
      */
 
-    var ButtonRemoveFormat = React.createClass({
+    var ButtonRemoveFormat = createReactClass({
         displayName: 'ButtonRemoveFormat',
 
         mixins: [AlloyEditor.ButtonCommand],
@@ -13367,24 +14041,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonRemoveFormat
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonRemoveFormat
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonRemoveFormat
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -13392,9 +14072,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default removeFormat
+             * @memberof ButtonRemoveFormat
+             * @property {String} key
+             * @static
              */
             key: 'removeFormat'
         },
@@ -13402,6 +14083,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonRemoveFormat
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -13414,6 +14097,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonRemoveFormat
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13436,14 +14121,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonStrike class styles a selection with strike style.
      *
+     * @class ButtonStrike
      * @uses ButtonCommand
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonStrike
      */
 
-    var ButtonStrike = React.createClass({
+    var ButtonStrike = createReactClass({
         displayName: 'ButtonStrike',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
@@ -13453,24 +14137,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonStrike
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonStrike
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonStrike
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -13478,9 +14168,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default strike
+             * @memberof ButtonStrike
+             * @property {String} key
+             * @static
              */
             key: 'strike'
         },
@@ -13488,6 +14179,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonStrike
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -13500,7 +14193,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
         /**
          * Lifecycle. Renders the UI of the button.
-         *
+         * @instance
+         * @memberof ButtonStrike
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13528,12 +14222,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonsStylesListHeader
      */
 
-    var ButtonsStylesListHeader = React.createClass({
+    var ButtonsStylesListHeader = createReactClass({
         displayName: "ButtonsStylesListHeader",
 
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonsStylesListHeader
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13564,7 +14260,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonStylesListItemRemove
      */
 
-    var ButtonStylesListItemRemove = React.createClass({
+    var ButtonStylesListItemRemove = createReactClass({
         displayName: 'ButtonStylesListItemRemove',
 
         // Allows validating props being passed to the component.
@@ -13572,32 +14268,40 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonStylesListItemRemove
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonStylesListItemRemove
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * Block styles that should be removed in addition to all other inline styles
              *
-             * @property {Array} removeBlocks
              * @default ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre']
+             * @instance
+             * @memberof ButtonStylesListItemRemove
+             * @property {Array} removeBlocks
              */
-            removeBlocks: React.PropTypes.array,
+            removeBlocks: PropTypes.array,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonStylesListItemRemove
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         //Lifecycle. Provides static properties to the widget.
@@ -13605,9 +14309,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default buttonStylesListItemRemove
+             * @memberof ButtonStylesListItemRemove
+             * @property {String} key
+             * @static
              */
             key: 'buttonStylesListItemRemove'
         },
@@ -13615,6 +14320,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonStylesListItemRemove
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -13627,6 +14334,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonStylesListItemRemove
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13645,8 +14354,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Removes all inline styles and configured block elements applied to the current selection.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonStylesListItemRemove
          * @method _removeStyles
+         * @protected
          */
         _removeStyles: function _removeStyles() {
             var editor = this.props.editor.get('nativeEditor');
@@ -13674,13 +14385,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * The ButtonStylesListItem class provides functionality for previewing a style definition
      * inside a list and applying it to the current editor selection.
      *
+     * @class ButtonStylesListItem
      * @uses ButtonActionStyle
      * @uses ButtonStyle
-     *
-     * @class ButtonStylesListItem
      */
 
-    var ButtonStylesListItem = React.createClass({
+    var ButtonStylesListItem = createReactClass({
         displayName: 'ButtonStylesListItem',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonActionStyle],
@@ -13690,9 +14400,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default buttonStylesListItem
+             * @memberof ButtonStylesListItem
+             * @property {String} key
+             * @static
              */
             key: 'buttonStylesListItem'
         },
@@ -13700,6 +14411,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
          *
+         * @instance
+         * @memberof ButtonStylesListItem
          * @method componentWillMount
          */
         componentWillMount: function componentWillMount() {
@@ -13720,6 +14433,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonStylesListItem
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13734,8 +14449,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Applies the item style to the editor selection.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonStylesListItem
          * @method _onClick
+         * @protected
          */
         _onClick: function _onClick() {
             // Typically, we want the style to be the only one applied to the current selection, so
@@ -13758,12 +14475,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * The ButtonStylesList class provides functionality for showing a list of styles that can be
      * applied to the current selection..
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonStylesList
+     * @uses WidgetFocusManager
      */
 
-    var ButtonStylesList = React.createClass({
+    var ButtonStylesList = createReactClass({
         displayName: 'ButtonStylesList',
 
         mixins: [AlloyEditor.WidgetFocusManager],
@@ -13773,6 +14489,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
+             * @memberof ButtonStylesList
              * @static
              * @property {String} key
              * @default buttonStylesList
@@ -13785,6 +14502,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          *
          * Focuses on the list node to allow keyboard interaction.
          *
+         * @instance
+         * @memberof ButtonStylesList
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -13794,6 +14513,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
          *
+         * @instance
+         * @memberof ButtonStylesList
          * @method componentWillMount
          */
         componentWillMount: function componentWillMount() {
@@ -13821,6 +14542,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonStylesList
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -13842,6 +14565,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the list.
          *
+         * @instance
+         * @memberof ButtonStylesList
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -13868,9 +14593,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Renders instances of ButtonStylesListItem with the preview of the correspondent block, inline or object styles.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonStylesList
          * @method _renderStylesItems
          * @param {Array} styles List of styles for which preview should be rendered.
+         * @protected
          * @return {Array} Rendered instances of ButtonStylesListItem class
          */
         _renderStylesItems: function _renderStylesItems(styles) {
@@ -13906,7 +14633,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonStyles
      */
 
-    var ButtonStyles = React.createClass({
+    var ButtonStyles = createReactClass({
         displayName: 'ButtonStyles',
 
         // Allows validating props being passed to the component.
@@ -13914,52 +14641,66 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Indicates whether the styles list is expanded or not.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Boolean} expanded
              */
-            expanded: React.PropTypes.bool,
+            expanded: PropTypes.bool,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * Indicates whether the remove styles item should appear in the styles list.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Boolean} showRemoveStylesItem
              */
-            showRemoveStylesItem: React.PropTypes.bool,
+            showRemoveStylesItem: PropTypes.bool,
 
             /**
              * List of the styles the button is able to handle.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Array} styles
              */
-            styles: React.PropTypes.arrayOf(React.PropTypes.object),
+            styles: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number,
+            tabIndex: PropTypes.number,
 
             /**
              * Callback provided by the button host to notify when the styles list has been expanded.
              *
+             * @instance
+             * @memberof ButtonStyles
              * @property {Function} toggleDropdown
              */
-            toggleDropdown: React.PropTypes.func
+            toggleDropdown: PropTypes.func
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -13967,9 +14708,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default styles
+             * @memberof ButtonStyles
+             * @property {String} key
+             * @static
              */
             key: 'styles'
         },
@@ -13977,6 +14719,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonStyles
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -14021,9 +14765,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Checks if the given style definition is applied to the current selection in the editor.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonStyles
          * @method _checkActive
          * @param {Object} styleConfig Style definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+         * @protected
          * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
          */
         _checkActive: function _checkActive(styleConfig) {
@@ -14044,6 +14790,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * - style - an object with one property, called `element` which value
          * represents the style which have to be applied to the element.
          *
+         * @instance
+         * @memberof ButtonStyles
          * @method _getStyles
          * @protected
          * @return {Array<object>} An array of objects containing the styles.
@@ -14088,14 +14836,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonSubscript class provides functionality for applying subscript style to a text selection.
      *
+     * @class ButtonSubscript
      * @uses ButtonCommand
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonSubscript
      */
 
-    var ButtonSubscript = React.createClass({
+    var ButtonSubscript = createReactClass({
         displayName: 'ButtonSubscript',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
@@ -14105,24 +14852,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonSubscript
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonSubscript
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonSubscript
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -14130,9 +14883,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default subscript
+             * @memberof ButtonSubscript
+             * @property {String} key
+             * @static
              */
             key: 'subscript'
         },
@@ -14140,6 +14894,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonSubscript
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -14153,6 +14909,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonSubscript
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -14177,14 +14935,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonSuperscript class provides functionality for applying superscript style to a text selection.
      *
+     * @class ButtonSuperscript
      * @uses ButtonCommand
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonSuperscript
      */
 
-    var ButtonSuperscript = React.createClass({
+    var ButtonSuperscript = createReactClass({
         displayName: 'ButtonSuperscript',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
@@ -14194,24 +14951,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonSuperscript
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonSuperscript
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonSuperscript
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -14219,9 +14982,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default superscript
+             * @memberof ButtonSuperscript
+             * @property {String} key
+             * @static
              */
             key: 'superscript'
         },
@@ -14229,6 +14993,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonSuperscript
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -14242,6 +15008,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonSuperscript
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -14269,7 +15037,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonTableCell
      */
 
-    var ButtonTableCell = React.createClass({
+    var ButtonTableCell = createReactClass({
         displayName: 'ButtonTableCell',
 
         // Allows validating props being passed to the component.
@@ -14277,45 +15045,57 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * List of the commands the button is able to handle.
              *
+             * @instance
+             * @memberof ButtonTableCell
              * @property {Array} commands
              */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
+            commands: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTableCell
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Indicates whether the styles list is expanded or not.
              *
+             * @instance
+             * @memberof ButtonTableCell
              * @property {Boolean} expanded
              */
-            expanded: React.PropTypes.bool,
+            expanded: PropTypes.bool,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTableCell
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTableCell
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number,
+            tabIndex: PropTypes.number,
 
             /**
              * Callback provided by the button host to notify when the styles list has been expanded.
              *
+             * @instance
+             * @memberof ButtonTableCell
              * @property {Function} toggleDropdown
              */
-            toggleDropdown: React.PropTypes.func
+            toggleDropdown: PropTypes.func
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -14323,9 +15103,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default tableCell
+             * @memberof ButtonTableCell
+             * @property {String} key
+             * @static
              */
             key: 'tableCell'
         },
@@ -14333,6 +15114,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTableCell
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -14361,7 +15144,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Returns a list of commands. If a list of commands was passed
          * as property `commands`, it will take a precedence over the default ones.
          *
+         * @instance
+         * @memberof ButtonTableCell
          * @method _getCommands
+         * @protected
          * @return {Array} The list of available commands.
          */
         _getCommands: function _getCommands() {
@@ -14406,7 +15192,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonTableColumn
      */
 
-    var ButtonTableColumn = React.createClass({
+    var ButtonTableColumn = createReactClass({
         displayName: 'ButtonTableColumn',
 
         // Allows validating props being passed to the component.
@@ -14414,45 +15200,57 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * List of the commands the button is able to handle.
              *
+             * @instance
+             * @memberof ButtonTableColumn
              * @property {Array} commands
              */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
+            commands: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTableColumn
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Indicates whether the styles list is expanded or not.
              *
+             * @instance
+             * @memberof ButtonTableColumn
              * @property {Boolean} expanded
              */
-            expanded: React.PropTypes.bool,
+            expanded: PropTypes.bool,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTableColumn
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTableColumn
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number,
+            tabIndex: PropTypes.number,
 
             /**
              * Callback provided by the button host to notify when the styles list has been expanded.
              *
+             * @instance
+             * @memberof ButtonTableColumn
              * @property {Function} toggleDropdown
              */
-            toggleDropdown: React.PropTypes.func
+            toggleDropdown: PropTypes.func
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -14460,9 +15258,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default tableColumn
+             * @memberof ButtonTableColumn
+             * @property {String} key
+             * @static
              */
             key: 'tableColumn'
         },
@@ -14470,6 +15269,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTableColumn
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -14497,7 +15298,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Returns a list of commands. If a list of commands was passed
          * as property `commands`, it will take a precedence over the default ones.
          *
+         * @instance
+         * @memberof ButtonTableColumn
          * @method _getCommands
+         * @protected
          * @return {Array} The list of available commands.
          */
         _getCommands: function _getCommands() {
@@ -14530,7 +15334,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      *
      * @class ButtonTableEdit
      */
-    var ButtonTableEdit = React.createClass({
+    var ButtonTableEdit = createReactClass({
         displayName: 'ButtonTableEdit',
 
         // Allows validating props being passed to the component.
@@ -14539,16 +15343,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * Method to notify the button abandons the exclusive rendering mode.
              *
+             * @instance
+             * @memberof ButtonTableEdit
              * @property {Function} cancelExclusive
              */
-            cancelExclusive: React.PropTypes.func.isRequired,
+            cancelExclusive: PropTypes.func.isRequired,
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTableEdit
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired
+            editor: PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -14556,9 +15364,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default tableEdit
+             * @memberof ButtonTableEdit
+             * @property {String} key
+             * @static
              */
             key: 'tableEdit'
         },
@@ -14566,6 +15375,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonTableEdit
          * @method getDefaultProps
          */
         getDefaultProps: function getDefaultProps() {
@@ -14585,6 +15396,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          *
          * Focuses on the link input to immediately allow editing.
          *
+         * @instance
+         * @memberof ButtonTableEdit
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -14594,6 +15407,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Invoked once before the component is mounted.
          *
+         * @instance
+         * @memberof ButtonTableEdit
          * @method getInitialState
          */
         getInitialState: function getInitialState() {
@@ -14606,8 +15421,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Creates a table.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTableEdit
          * @method _createTable
+         * @protected
          */
         _createTable: function _createTable() {
             var editor = this.props.editor.get('nativeEditor');
@@ -14627,10 +15444,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Handles a change in input value. Sets the provided value from the user back to the input.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTableEdit
          * @method _handleChange
          * @param {String} inputName The name of the input which value should be updated.
          * @param {SyntheticEvent} event The provided event.
+         * @protected
          */
         _handleChange: function _handleChange(inputName, event) {
             var state = {};
@@ -14644,9 +15463,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * - Enter: Creates the table.
          * - Escape: Discards the changes.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTableEdit
          * @method _handleKeyDown
          * @param {SyntheticEvent} event The keyboard event.
+         * @protected
          */
         _handleKeyDown: function _handleKeyDown(event) {
             if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
@@ -14663,6 +15484,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTableEdit
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -14716,7 +15539,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonTableHeading
      */
 
-    var ButtonTableHeading = React.createClass({
+    var ButtonTableHeading = createReactClass({
         displayName: 'ButtonTableHeading',
 
         // Allows validating props being passed to the component.
@@ -14724,45 +15547,57 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * List of the commands the button is able to handle.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Array} commands
              */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
+            commands: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Indicates whether the styles list is expanded or not.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Boolean} expanded
              */
-            expanded: React.PropTypes.bool,
+            expanded: PropTypes.bool,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number,
+            tabIndex: PropTypes.number,
 
             /**
              * Callback provided by the button host to notify when the styles list has been expanded.
              *
+             * @instance
+             * @memberof ButtonTableHeading
              * @property {Function} toggleDropdown
              */
-            toggleDropdown: React.PropTypes.func
+            toggleDropdown: PropTypes.func
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -14770,9 +15605,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default tableRow
+             * @memberof ButtonTableHeading
+             * @property {String} key
+             * @static
              */
             key: 'tableHeading'
         },
@@ -14780,6 +15616,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTableHeading
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -14827,7 +15665,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Returns a list of commands. If a list of commands was passed
          * as property `commands`, it will take a precedence over the default ones.
          *
+         * @instance
+         * @memberof ButtonTableHeading
          * @method _getCommands
+         * @protected
          * @return {Array} The list of available commands.
          */
         _getCommands: function _getCommands() {
@@ -14860,7 +15701,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonTableRemove
      */
 
-    var ButtonTableRemove = React.createClass({
+    var ButtonTableRemove = createReactClass({
         displayName: 'ButtonTableRemove',
 
         // Allows validating props being passed to the component.
@@ -14868,24 +15709,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTableRemove
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTableRemove
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTableRemove
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -14893,9 +15740,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default tableRemove
+             * @memberof ButtonTableRemove
+             * @property {String} key
+             * @static
              */
             key: 'tableRemove'
         },
@@ -14903,6 +15751,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTableRemove
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -14917,8 +15767,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Removes the table in the editor element.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTableRemove
          * @method _removeTable
+         * @protected
          */
         _removeTable: function _removeTable() {
             var editor = this.props.editor.get('nativeEditor');
@@ -14943,7 +15795,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonTableRow
      */
 
-    var ButtonTableRow = React.createClass({
+    var ButtonTableRow = createReactClass({
         displayName: 'ButtonTableRow',
 
         // Allows validating props being passed to the component.
@@ -14951,45 +15803,57 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * List of the commands the button is able to handle.
              *
+             * @instance
+             * @memberof ButtonTableRow
              * @property {Array} commands
              */
-            commands: React.PropTypes.arrayOf(React.PropTypes.object),
+            commands: PropTypes.arrayOf(PropTypes.object),
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTableRow
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * Indicates whether the styles list is expanded or not.
              *
+             * @instance
+             * @memberof ButtonTableRow
              * @property {Boolean} expanded
              */
-            expanded: React.PropTypes.bool,
+            expanded: PropTypes.bool,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTableRow
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTableRow
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number,
+            tabIndex: PropTypes.number,
 
             /**
              * Callback provided by the button host to notify when the styles list has been expanded.
              *
+             * @instance
+             * @memberof ButtonTableRow
              * @property {Function} toggleDropdown
              */
-            toggleDropdown: React.PropTypes.func
+            toggleDropdown: PropTypes.func
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -14997,9 +15861,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default tableRow
+             * @memberof ButtonTableRow
+             * @property {String} key
+             * @static
              */
             key: 'tableRow'
         },
@@ -15007,6 +15872,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTableRow
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -15035,7 +15902,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Returns a list of commands. If a list of commands was passed
          * as property `commands`, it will take a precedence over the default ones.
          *
+         * @instance
+         * @memberof ButtonTableRow
          * @method _getCommands
+         * @protected
          * @return {Array} The list of available commands.
          */
         _getCommands: function _getCommands() {
@@ -15069,7 +15939,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * @class ButtonTable
      */
 
-    var ButtonTable = React.createClass({
+    var ButtonTable = createReactClass({
         displayName: 'ButtonTable',
 
         // Allows validating props being passed to the component.
@@ -15077,24 +15947,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTable
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTable
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTable
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -15102,9 +15978,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default table
+             * @memberof ButtonTable
+             * @property {String} key
+             * @static
              */
             key: 'table'
         },
@@ -15112,6 +15989,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTable
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -15139,12 +16018,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * The ButtonTargetList class provides functionality for changing the target of a link
      * in the document.
      *
-     * @uses WidgetFocusManager
-     *
      * @class ButtonTargetList
+     * @uses WidgetFocusManager
      */
 
-    var ButtonTargetList = React.createClass({
+    var ButtonTargetList = createReactClass({
         displayName: 'ButtonTargetList',
 
         mixins: [AlloyEditor.WidgetFocusManager],
@@ -15154,9 +16032,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTargetList
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired
+            editor: PropTypes.object.isRequired
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -15164,9 +16044,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default linkTargetEdit
+             * @memberof ButtonTargetList
+             * @property {String} key
+             * @static
              */
             key: 'targetList'
         },
@@ -15174,6 +16055,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
+         * @instance
+         * @memberof ButtonTargetList
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -15183,6 +16066,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonTargetList
          * @method getDefaultProps
          */
         getDefaultProps: function getDefaultProps() {
@@ -15202,6 +16087,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTargetList
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -15218,9 +16105,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Returns the the allowed link target items.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTargetList
          * @method _getAllowedTargetItems
-         *
+         * @protected
          * @return {Array} The allowed target items.
          */
         _getAllowedTargetItems: function _getAllowedTargetItems() {
@@ -15245,7 +16133,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Renders the allowed link target items.
          *
+         * @instance
+         * @memberof ButtonTargetList
          * @method _renderListTargets
+         * @protected
          * @return {Object} Returns the rendered link items
          */
         _renderListTargets: function _renderListTargets() {
@@ -15282,12 +16173,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * The ButtonTwitter class provides functionality for creating a link which
      * allows people to tweet part of the content in the editor.
      *
-     * @uses ButtonStateClasses
-     *
      * @class ButtonTwitter
+     * @uses ButtonStateClasses
      */
 
-    var ButtonTwitter = React.createClass({
+    var ButtonTwitter = createReactClass({
         displayName: 'ButtonTwitter',
 
         mixins: [AlloyEditor.ButtonStateClasses],
@@ -15297,24 +16187,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonTwitter
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonTwitter
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonTwitter
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -15322,9 +16218,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default twitter
+             * @memberof ButtonTwitter
+             * @property {String} key
+             * @static
              */
             key: 'twitter'
         },
@@ -15332,6 +16229,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Creates or removes the twitter link on the selection.
          *
+         * @instance
+         * @memberof ButtonTwitter
          * @method handleClick
          */
         handleClick: function handleClick() {
@@ -15354,6 +16253,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Checks if the current selection is contained within a link that points to twitter.com/intent/tweet.
          *
+         * @instance
+         * @memberof ButtonTwitter
          * @method isActive
          * @return {Boolean} True if the selection is inside a twitter link, false otherwise.
          */
@@ -15366,6 +16267,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonTwitter
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -15383,8 +16286,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Generates the appropriate twitter url based on the selected text and the configuration
          * options received via props.
          *
-         * @protected
+         * @instance
+         * @memberof ButtonTwitter
          * @method _getHref
+         * @protected
          * @return {String} A valid twitter url with the selected text and given configuration.
          */
         _getHref: function _getHref() {
@@ -15416,14 +16321,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonUnorderedlist class provides functionality for creating unordered lists in an editor.
      *
+     * @class ButtonUnorderedlist
      * @uses ButtonCommand
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonUnorderedlist
      */
 
-    var ButtonUnorderedlist = React.createClass({
+    var ButtonUnorderedlist = createReactClass({
         displayName: 'ButtonUnorderedlist',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand],
@@ -15433,24 +16337,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonUnorderedlist
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonUnorderedlist
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonUnorderedlist
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -15458,9 +16368,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default ul
+             * @memberof ButtonUnorderedlist
+             * @property {String} key
+             * @static
              */
             key: 'ul'
         },
@@ -15468,6 +16379,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonUnorderedlist
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -15483,6 +16396,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonUnorderedlist
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -15507,15 +16422,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ButtonUnderline class provides functionality for underlying a text selection.
      *
+     * @class ButtonUnderline
      * @uses ButtonCommand
      * @uses ButtonKeystroke
      * @uses ButtonStateClasses
      * @uses ButtonStyle
-     *
-     * @class ButtonUnderline
      */
 
-    var ButtonUnderline = React.createClass({
+    var ButtonUnderline = createReactClass({
         displayName: 'ButtonUnderline',
 
         mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
@@ -15525,24 +16439,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ButtonUnderline
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ButtonUnderline
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * The tabIndex of the button in its toolbar current state. A value other than -1
              * means that the button has focus and is the active element.
              *
+             * @instance
+             * @memberof ButtonUnderline
              * @property {Number} tabIndex
              */
-            tabIndex: React.PropTypes.number
+            tabIndex: PropTypes.number
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -15550,9 +16470,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default underline
+             * @memberof ButtonUnderline
+             * @property {String} key
+             * @static
              */
             key: 'underline'
         },
@@ -15560,6 +16481,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ButtonUnderline
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -15577,6 +16500,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Renders the UI of the button.
          *
+         * @instance
+         * @memberof ButtonUnderline
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -15604,16 +16529,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ToolbarAdd class provides functionality for adding content to the editor.
      *
+     * @class ToolbarAdd
+     * @uses ToolbarButtons
+     * @uses WidgetArrowBox
      * @uses WidgetDropdown
      * @uses WidgetExclusive
      * @uses WidgetFocusManager
-     * @uses ToolbarButtons
      * @uses WidgetPosition
-     * @uses WidgetArrowBox
-     *
-     * @class ToolbarAdd
      */
-    var ToolbarAdd = React.createClass({
+    var ToolbarAdd = createReactClass({
         displayName: 'ToolbarAdd',
 
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
@@ -15623,60 +16547,76 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The toolbar configuration.
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} config
              */
-            config: React.PropTypes.object,
+            config: PropTypes.object,
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The payload from "editorInteraction" event
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} editorEvent
              */
-            editorEvent: React.PropTypes.object,
+            editorEvent: PropTypes.object,
 
             /**
              * The gutter to be applied to the widget when rendered in exclusive mode
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} gutterExclusive
              */
-            gutterExclusive: React.PropTypes.object,
+            gutterExclusive: PropTypes.object,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Function} onDismiss
              */
-            onDismiss: React.PropTypes.func,
+            onDismiss: PropTypes.func,
 
             /**
              * Whether the Toolbar should be shown on left or on right of the editable area. Could be one of these:
              * - ToolbarAdd.left
              * - ToolbarAdd.right
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Enum} position
              */
-            position: React.PropTypes.oneOf([POSITION_LEFT, POSITION_RIGHT]),
+            position: PropTypes.oneOf([POSITION_LEFT, POSITION_RIGHT]),
 
             /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.selectionregion/getSelectionData:method"}}{{/crossLink}}
              *
+             * @instance
+             * @memberof ToolbarAdd
              * @property {Object} selectionData
              */
-            selectionData: React.PropTypes.object
+            selectionData: PropTypes.object
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -15684,27 +16624,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default add
+             * @memberof ToolbarAdd
+             * @property {String} key
+             * @static
              */
             key: 'add',
 
             /**
              * Defines the constant for positioning the Toolbar on left of the editable area.
              *
-             * @static
-             * @property {String} left
              * @default 1
+             * @memberof ToolbarAdd
+             * @property {String} left
+             * @static
              */
             left: POSITION_LEFT,
 
             /**
              * Defines the constant for positioning the Toolbar on right of the editable area.
              *
-             * @static
-             * @property {String} right
              * @default 2
+             * @memberof ToolbarAdd
+             * @property {String} right
+             * @static
              */
             right: POSITION_RIGHT
         },
@@ -15712,6 +16655,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ToolbarAdd
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -15736,6 +16681,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Invoked once, only on the client (not on the server),
          * immediately after the initial rendering occurs.
          *
+         * @instance
+         * @memberof ToolbarAdd
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -15746,6 +16693,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ToolbarAdd
          * @method componentDidUpdate
          * @param {Object} prevProps The previous state of the component's properties.
          * @param {Object} prevState Component's previous state.
@@ -15764,6 +16713,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Renders the buttons for adding content or hides the toolbar
          * if user interacted with a non-editable element.
          *
+         * @instance
+         * @memberof ToolbarAdd
          * @method render
          * @return {Object|null} The content which should be rendered.
          */
@@ -15796,8 +16747,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Returns a list of buttons that will eventually render to HTML.
          *
-         * @protected
+         * @instance
+         * @memberof ToolbarAdd
          * @method _getButtons
+         * @protected
          * @return {Object} The buttons which have to be rendered.
          */
         _getButtons: function _getButtons() {
@@ -15821,8 +16774,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Returns the class name of the toolbar in case of both exclusive and normal mode.
          *
-         * @protected
+         * @instance
+         * @memberof ToolbarAdd
          * @method _getToolbarClassName
+         * @protected
          * @return {String} The class name which have to be applied to the DOM element.
          */
         _getToolbarClassName: function _getToolbarClassName() {
@@ -15838,8 +16793,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Calculates and sets the position of the toolbar in exclusive or normal mode.
          *
-         * @protected
+         * @instance
+         * @memberof ToolbarAdd
          * @method _updatePosition
+         * @protected
          */
         _updatePosition: function _updatePosition() {
             var region;
@@ -15908,17 +16865,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The ToolbarStyles class hosts the buttons for styling a text selection.
      *
+     * @class ToolbarStyles
+     * @uses ToolbarButtons
+     * @uses WidgetArrowBox
      * @uses WidgetDropdown
      * @uses WidgetExclusive
      * @uses WidgetFocusManager
-     * @uses ToolbarButtons
      * @uses WidgetPosition
-     * @uses WidgetArrowBox
-     *
-     * @class ToolbarStyles
      */
 
-    var ToolbarStyles = React.createClass({
+    var ToolbarStyles = createReactClass({
         displayName: 'ToolbarStyles',
 
         mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
@@ -15928,44 +16884,56 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The toolbar configuration.
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Object} config
              */
-            config: React.PropTypes.object,
+            config: PropTypes.object,
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The payload from "editorInteraction" event
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Object} editorEvent
              */
-            editorEvent: React.PropTypes.object,
+            editorEvent: PropTypes.object,
 
             /**
              * The label that should be used for accessibility purposes.
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {String} label
              */
-            label: React.PropTypes.string,
+            label: PropTypes.string,
 
             /**
              * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Function} onDismiss
              */
-            onDismiss: React.PropTypes.func,
+            onDismiss: PropTypes.func,
 
             /**
              * The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionData:method"}}{{/crossLink}}
              *
+             * @instance
+             * @memberof ToolbarStyles
              * @property {Object} selectionData
              */
-            selectionData: React.PropTypes.object
+            selectionData: PropTypes.object
         },
 
         // Lifecycle. Provides static properties to the widget.
@@ -15973,9 +16941,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             /**
              * The name which will be used as an alias of the button in the configuration.
              *
-             * @static
-             * @property {String} key
              * @default styles
+             * @memberof ToolbarStyles
+             * @property {String} key
+             * @static
              */
             key: 'styles'
         },
@@ -15984,6 +16953,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Invoked once, only on the client (not on the server),
          * immediately after the initial rendering occurs.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -15994,6 +16965,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Invoked immediately after the component's updates are flushed to the DOM.
          * This method is not called for the initial render.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method componentDidUpdate
          * @param {Object} prevProps The previous state of the component's properties.
          * @param {Object} prevState Component's previous state.
@@ -16005,6 +16978,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -16024,6 +16999,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Renders the buttons for adding content or hides the toolbar
          * if user interacted with a non-editable element.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method render
          * @return {Object|null} The content which should be rendered.
          */
@@ -16064,10 +17041,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Retrieve a function from String. It converts a fully qualified string into the mapped function.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method _getSelectionFunction
+         * @param {Function|String} selectionFn A function, or a fully qualified string pointing to the desired one (e.g. 'AlloyEditor.SelectionTest.image').
          * @protected
-         * @param {Function|String} selectionFn A function, or a fully qualified string pointing to the
-         * desired one (e.g. 'AlloyEditor.SelectionTest.image').
          * @return {Function} The mapped function.
          */
         _getSelectionFunction: function _getSelectionFunction(selectionFn) {
@@ -16097,6 +17075,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Analyzes the current editor selection and returns the selection configuration that matches.
          *
+         * @instance
+         * @memberof ToolbarStyles
          * @method _getCurrentSelection
          * @protected
          * @return {Object} The matched selection configuration.
@@ -16131,8 +17111,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Calculates and sets the position of the toolbar.
          *
-         * @protected
+         * @instance
+         * @memberof ToolbarStyles
          * @method _updatePosition
+         * @protected
          */
         _updatePosition: function _updatePosition() {
             // If component is not mounted, there is nothing to do
@@ -16174,13 +17156,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
      *
+     * @class UI
      * @uses WidgetExclusive
      * @uses WidgetFocusManager
-     *
-     * @class UI
      */
 
-    var UI = React.createClass({
+    var UI = createReactClass({
         displayName: 'UI',
 
         mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
@@ -16193,35 +17174,45 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
              * - oneToolbar: Notification for just one available toolbar in the editor.
              * - manyToolbars: Notification for more than one available toolbar in the editor.
              *
+             * @instance
+             * @memberof UI
              * @property {Object} ariaUpdates
              */
-            ariaUpdates: React.PropTypes.object,
+            ariaUpdates: PropTypes.object,
 
             /**
              * The editor instance where the component is being used.
              *
+             * @instance
+             * @memberof UI
              * @property {Object} editor
              */
-            editor: React.PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
 
             /**
              * The delay (ms), after which key or mouse events will be processed.
              *
+             * @instance
+             * @memberof UI
              * @property {Number} eventsDelay
              */
-            eventsDelay: React.PropTypes.number,
+            eventsDelay: PropTypes.number,
 
             /**
              * The toolbars configuration for this editor instance
              *
+             * @instance
+             * @memberof UI
              * @property {Object} toolbars
              */
-            toolbars: React.PropTypes.object.isRequired
+            toolbars: PropTypes.object.isRequired
         },
 
         /**
          * Lifecycle. Invoked once before the component is mounted.
          *
+         * @instance
+         * @memberof UI
          * @method getInitialState
          */
         getInitialState: function getInitialState() {
@@ -16233,6 +17224,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Returns the default values of the properties used in the widget.
          *
+         * @instance
+         * @memberof UI
          * @method getDefaultProps
          * @return {Object} The default properties.
          */
@@ -16250,6 +17243,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
          *
+         * @instance
+         * @memberof UI
          * @method componentDidMount
          */
         componentDidMount: function componentDidMount() {
@@ -16284,6 +17279,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Fires `ariaUpdate` event passing ARIA related messages.
          * Fires `editorUpdate` event passing the previous and current properties and state.
          *
+         * @instance
+         * @memberof UI
          * @method componentDidUpdate
          */
         componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
@@ -16320,6 +17317,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Returns the templates for ARIA messages.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _getAriaUpdates
          * @return {Object} ARIA relates messages. Default:
@@ -16340,6 +17339,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Returns an ARIA message which represents the number of currently available toolbars.
          *
+         * @instance
+         * @memberof UI
          * @method _getAvailableToolbarsMessage
          * @protected
          * @param {CKEDITOR.dom.element} domNode The DOM node from which the available toolbars will be retrieved.
@@ -16366,6 +17367,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
          *
+         * @instance
+         * @memberof UI
          * @method componentWillUnmount
          */
         componentWillUnmount: function componentWillUnmount() {
@@ -16383,6 +17386,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Lifecycle. Renders the UI of the editor. This may include several toolbars and buttons.
          * The editor's UI also takes care of rendering the items in exclusive mode.
          *
+         * @instance
+         * @memberof UI
          * @method render
          * @return {Object} The content which should be rendered.
          */
@@ -16418,6 +17423,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Listener to the editor's `actionPerformed` event. Sets state and redraws the UI of the editor.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _onActionPerformed
          * @param {SynteticEvent} event The provided event
@@ -16436,6 +17443,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _onDismissToolbarFocus
          */
@@ -16449,6 +17458,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Listener to the editor's `userInteraction` event. Retrieves the data about the user selection and
          * provides it via component's state property.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _onEditorInteraction
          * @param {SynteticEvent} event The provided event
@@ -16465,6 +17476,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         /**
          * Focuses on the active toolbar when the combination ALT+F10 is pressed inside the editor.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _onEditorKey
          */
@@ -16480,6 +17493,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * Checks if the target with which the user interacted is part of editor's UI or it is
          * the editable area. If none of these, sets the state of editor's UI to be hidden.
          *
+         * @instance
+         * @memberof UI
          * @protected
          * @method _setUIHidden
          * @param {DOMElement} target The DOM element with which user interacted lastly.

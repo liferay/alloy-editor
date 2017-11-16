@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -198,7 +200,7 @@
                                  * By default if user presses the Esc key, &#x27;editorInteraction&#x27; event won&#x27;t be fired. However, this behaviour can be changed
                                  * by setting {{#crossLink &quot;CKEDITOR.plugins.ae_uicore/allowEsc:attribute&quot;}}{{/crossLink}} config property in editor&#x27;s configuration to true.
                                  *
-                                 * @class CKEDITOR.plugins.ae_uicore
+                                 * @class ae_uicore
                                  */
                             
                                 /**
@@ -207,7 +209,8 @@
                                  * is 50ms. This value can be overwritten via {{#crossLink &quot;CKEDITOR.plugins.ae_uicore/timeout:attribute&quot;}}{{/crossLink}}
                                  * property of editor&#x27;s configuration, like: editor.config.uicore.timeout = 100
                                  *
-                                 * @event editorInteraction
+                                 * @memberof ae_uicore
+                                 * @event ae_uicore#editorInteraction
                                  * @param {Object} data An object which contains the following properties:
                                  * - nativeEvent - The event as received from CKEditor.
                                  * - selectionData - The data, returned from {{#crossLink &quot;CKEDITOR.plugins.ae_selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
@@ -216,7 +219,8 @@
                                 /**
                                  * Fired by UI elements like Toolbars or Buttons when their state changes. The listener updates the live region with the provided data.
                                  *
-                                 * @event ariaUpdate
+                                 * @memberof ae_uicore
+                                 * @event ae_uicore#ariaUpdate
                                  * @param {Object} data An object which contains the following properties:
                                  * - message - The provided message from the UI element.
                                  */
@@ -225,6 +229,7 @@
                                  * If set to true, the editor will still fire {{#crossLink &quot;CKEDITOR.plugins.ae_uicore/editorInteraction:event&quot;}}{{/crossLink}} event,
                                  * if user presses Esc key.
                                  *
+                                 * @memberof ae_uicore
                                  * @attribute allowEsc
                                  * @default false
                                  * @type Boolean
@@ -234,6 +239,7 @@
                                  * Specifies the default timeout after which the {{#crossLink &quot;CKEDITOR.plugins.ae_uicore/editorInteraction:event&quot;}}{{/crossLink}} event
                                  * will be fired.
                                  *
+                                 * @memberof ae_uicore
                                  * @attribute timeout
                                  * @default 50 (ms)
                                  * @type Number
@@ -244,9 +250,10 @@
                                         /**
                                          * Initializer lifecycle implementation for the UICore plugin.
                                          *
-                                         * @protected
+                                         * @memberof ae_uicore
                                          * @method init
                                          * @param {Object} editor The current CKEditor instance.
+                                         * @protected
                                          */
                                         init: function(editor) {
                                             var ariaState = [];
@@ -336,9 +343,10 @@
                                         /**
                                          * Creates and applies an HTML element to the body of the document which will contain ARIA messages.
                                          *
-                                         * @protected
+                                         * @memberof ae_uicore
                                          * @method _createAriaElement
                                          * @param {String} id The provided id of the element. It will be used as prefix for the final element Id.
+                                         * @protected
                                          * @return {HTMLElement} The created and applied to DOM element.
                                          */
                                         _createAriaElement: function(id) {

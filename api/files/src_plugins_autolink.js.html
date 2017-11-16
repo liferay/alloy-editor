@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -224,6 +226,8 @@
                                          * Initialization of the plugin, part of CKEditor plugin lifecycle.
                                          * The function registers the &#x60;keyup&#x60; event on the editing area.
                                          *
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
                                          * @method init
                                          * @param {Object} editor The current editor instance
                                          */
@@ -241,8 +245,10 @@
                                          * Retrieves the last word introduced by the user. Reads from the current
                                          * caret position backwards until it finds the first white space.
                                          *
-                                         * @protected
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
                                          * @method _getLastWord
+                                         * @protected
                                          * @return {String} The last word introduced by user
                                          */
                                         _getLastWord: function(editor) {
@@ -304,9 +310,11 @@
                                         /**
                                          * Checks if the given link is a valid URL.
                                          *
-                                         * @protected
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
                                          * @method isValidURL
                                          * @param {String} link The link we want to know if it is a valid URL
+                                         * @protected
                                          * @return {Boolean} Returns true if the link is a valid URL, false otherwise
                                          */
                                         _isValidURL: function(link) {
@@ -317,9 +325,11 @@
                                          * Listens to the &#x60;keydown&#x60; event and if the keycode is &#x60;Backspace&#x60;, removes the previously
                                          * created link.
                                          *
-                                         * @protected
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
                                          * @method _onKeyDown
                                          * @param {EventFacade} event EventFacade object
+                                         * @protected
                                          */
                                         _onKeyDown: function(event) {
                                             var nativeEvent = event.data.$;
@@ -344,9 +354,11 @@
                                          * Listens to the &#x60;Enter&#x60; and &#x60;Space&#x60; key events in order to check if the last word
                                          * introduced by the user should be replaced by a link element.
                                          *
-                                         * @protected
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
                                          * @method _onKeyUp
                                          * @param {EventFacade} event EventFacade object
+                                         * @protected
                                          */
                                         _onKeyUp: function(event) {
                                             var nativeEvent = event.data.$;
@@ -367,9 +379,12 @@
                                         /**
                                          * Replaces content by a link element.
                                          *
-                                         * @protected
+                                         * @fires CKEDITOR.plugins.ae_autolink#autolinkAdd
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
                                          * @method _replaceContentByLink
                                          * @param {String} content The text that has to be replaced by an link element
+                                         * @protected
                                          */
                                         _replaceContentByLink: function(editor, content) {
                                             var range = editor.createRange();
@@ -414,15 +429,18 @@
                                         /**
                                          * Fired when a URL is detected in text and converted to a link.
                                          *
-                                         * @event autolinkAdd
+                                         * @event CKEDITOR.plugins.ae_autolink#autolinkAdd
+                                         * @memberof CKEDITOR.plugins.ae_autolink
                                          * @param {CKEDITOR.dom.element} el Node of the created link.
                                          */
                             
                                         /**
                                          * Removes the created link element, and replaces it by its text.
                                          *
-                                         * @protected
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
                                          * @method _removeLink
+                                         * @protected
                                          */
                                         _removeLink: function(editor) {
                                             var range = editor.getSelection().getRanges()[0];
@@ -448,8 +466,10 @@
                                         /**
                                          * Subscribe to a key event of the editable aria.
                                          *
-                                         * @protected
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
                                          * @method _subscribeToKeyEvent
+                                         * @protected
                                          */
                                         _subscribeToKeyEvent: function(editor) {
                                             var editable = editor.editable();

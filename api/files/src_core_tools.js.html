@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -194,18 +196,18 @@
                                 /**
                                  * Sends a request using the JSONP technique.
                                  *
-                                 * @method CKEDITOR.tools.jsonp
-                                 * @static
-                                 * @param {CKEDITOR.template} urlTemplate The template of the URL to be requested. All properties
-                                 * passed in &#x60;urlParams&#x60; can be used, plus a &#x60;{callback}&#x60;, which represent a JSONP callback, must be defined.
-                                 * @param {Object} urlParams Parameters to be passed to the &#x60;urlTemplate&#x60;.
+                                 * @memberof CKEDITOR.tools
+                                 * @method jsonp
+                                 * @param {CKEDITOR.template} urlTemplate The template of the URL to be requested. All properties passed in &#x60;urlParams&#x60; can be used, plus a &#x60;{callback}&#x60;, which represent a JSONP callback, must be defined.
                                  * @param {Function} callback A function to be called in case of success.
                                  * @param {Function} errorCallback A function to be called in case of failure.
+                                 * @param {Object} urlParams Parameters to be passed to the &#x60;urlTemplate&#x60;.
                                  * @return {Object} An object with the following properties:
-                                 * - id: the transaction ID
-                                 * - a &#x60;cancel()&#x60; method
+                                 *  - id: the transaction ID
+                                 *  - a &#x60;cancel()&#x60; method
+                                 * @static
                                  */
-                                CKEDITOR.tools.jsonp = function(urlTemplate, urlParams, callback, errorCallback) {
+                                CKEDITOR.tools.jsonp = function(urlTemplate, urlParams, callback, errorCallback) {
                                     var callbackKey = CKEDITOR.tools.getNextNumber();
                             
                                     urlParams = urlParams || {};
@@ -256,10 +258,11 @@
                                  *
                                  * Passing in a single object will create a shallow copy of it.
                                  *
-                                 * @static
+                                 * @memberof CKEDITOR.tools
                                  * @method merge
                                  * @param {Object} objects* One or more objects to merge.
                                  * @return {Object} A new merged object.
+                                 * @static
                                  */
                                 CKEDITOR.tools.merge = CKEDITOR.tools.merge || function() {
                                     var result = {};
@@ -280,10 +283,11 @@
                                 /**
                                  * Simulates event on a DOM element.
                                  *
-                                 * @static
+                                 * @memberof CKEDITOR.tools
                                  * @method simulate
                                  * @param {DOMElement} element The element on which the event shoud be simualted.
                                  * @param {String} event The name of the event which have to be simulated.
+                                 * @static
                                  */
                                 CKEDITOR.tools.simulate = function(element, event) {
                                     var eventInstance = document.createEvent(&#x27;Events&#x27;);

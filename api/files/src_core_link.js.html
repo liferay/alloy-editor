@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -185,6 +187,7 @@
                             (function() {
                                 &#x27;use strict&#x27;;
                             
+                                var REGEX_BOOKMARK_SCHEME = /^#.*/i;
                                 var REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F\._-]+@/i;
                                 var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
                             
@@ -195,7 +198,6 @@
                                  * @constructor
                                  * @param {Object} editor The CKEditor instance.
                                  */
-                            
                                 function Link(editor, config) {
                                     this._editor = editor;
                                     this.appendProtocol = config &amp;&amp; config.appendProtocol === false ? false : true;
@@ -208,8 +210,10 @@
                                      * Advances the editor selection to the next available position after a
                                      * given link or the one in the current selection.
                                      *
-                                     * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
                                      * @method advanceSelection
+                                     * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
                                      */
                                     advanceSelection: function(link) {
                                         link = link || this.getFromSelection();
@@ -237,10 +241,12 @@
                                     /**
                                      * Create a link with given URI as href.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
                                      * @method create
-                                     * @param {String} URI The URI of the link.
                                      * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
                                      * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
+                                     * @param {String} URI The URI of the link.
                                      */
                                     create: function(URI, attrs, modifySelection) {
                                         var selection = this._editor.getSelection();
@@ -278,6 +284,8 @@
                                     /**
                                      * Retrieves a link from the current selection.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
                                      * @method getFromSelection
                                      * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
                                      */
@@ -304,9 +312,11 @@
                                     /**
                                      * Removes a link from the editor.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
+                                     * @method remove
                                      * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
                                      * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
-                                     * @method remove
                                      */
                                     remove: function(link, modifySelection) {
                                         var editor = this._editor;
@@ -338,9 +348,11 @@
                                     /**
                                      * Updates the href of an already existing link.
                                      *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
                                      * @method update
-                                     * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
                                      * @param {CKEDITOR.dom.element} link The link element which href should be removed.
+                                     * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
                                      * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
                                      */
                                     update: function(attrs, link, modifySelection) {
@@ -389,18 +401,23 @@
                                     },
                             
                                     /**
-                                     * Checks if the URI has an &#x27;@&#x27; symbol. If it does and the URI looks like an email
-                                     * and doesn&#x27;t have &#x27;mailto:&#x27;, &#x27;mailto:&#x27; is added to the URI.
+                                     * Checks if the URI begins with a &#x27;#&#x27; symbol to determine if it&#x27;s an on page bookmark.
+                                     * If it doesn&#x27;t, it then checks if the URI has an &#x27;@&#x27; symbol. If it does and the URI
+                                     * looks like an email and doesn&#x27;t have &#x27;mailto:&#x27;, &#x27;mailto:&#x27; is added to the URI.
                                      * If it doesn&#x27;t and the URI doesn&#x27;t have a scheme, the default &#x27;http&#x27; scheme with
                                      * hierarchical path &#x27;//&#x27; is added to the URI.
                                      *
-                                     * @protected
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
                                      * @method _getCompleteURI
                                      * @param {String} URI The URI of the link.
+                                     * @protected
                                      * @return {String} The URI updated with the protocol.
                                      */
                                     _getCompleteURI: function(URI) {
-                                        if (REGEX_EMAIL_SCHEME.test(URI)) {
+                                        if (REGEX_BOOKMARK_SCHEME.test(URI)) {
+                                            return URI;
+                                        } else if (REGEX_EMAIL_SCHEME.test(URI)) {
                                             URI = &#x27;mailto:&#x27; + URI;
                                         } else if (!REGEX_URI_SCHEME.test(URI)) {
                                             URI = this.appendProtocol ? &#x27;http://&#x27; + URI : URI;

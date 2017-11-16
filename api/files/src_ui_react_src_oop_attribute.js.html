@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -202,6 +204,8 @@
                                     /**
                                      * Retrieves the value of an attribute.
                                      *
+                                     * @instance
+                                     * @memberof Attribute
                                      * @method get
                                      * @param {String} attr The attribute which value should be retrieved.
                                      * @return {Any} The value of the attribute.
@@ -229,6 +233,8 @@
                                     /**
                                      * Sets the value of an attribute.
                                      *
+                                     * @instance
+                                     * @memberof Attribute
                                      * @method set
                                      * @param {String} attr The attribute which value should be set.
                                      * @param {Any} value The value which should be set to the attribute.
@@ -268,10 +274,12 @@
                                      * If param provided as string, a corresponding function in this object will
                                      * be called. If provided param is a function, it will be directly called.
                                      *
-                                     * @protected
+                                     * @instance
+                                     * @memberof Attribute
                                      * @method _callStringOrFunction
-                                     * @param  {String|Function} stringOrFunction The function which should be called
                                      * @param  {Any|Array} args The arguments which will be provided to the called function
+                                     * @param  {String|Function} stringOrFunction The function which should be called
+                                     * @protected
                                      * @return {Any} The returned value from the called function
                                      */
                                     _callStringOrFunction: function(stringOrFunction, args) {
@@ -294,9 +302,11 @@
                                      * Initializes an attribute. Sets its default value depending on the flags of the
                                      * attribute and the passed configuration object to the constructor.
                                      *
-                                     * @protected
+                                     * @instance
+                                     * @memberof Attribute
                                      * @method _init
                                      * @param {String} attr The name of the attribute which have to be initialized.
+                                     * @protected
                                      */
                                     _init: function(attr) {
                                         var value;
@@ -363,9 +373,11 @@
                                      * when there is an own property with this name in the local collection of attribute values
                                      * for the current instance.
                                      *
-                                     * @protected
+                                     * @instance
+                                     * @memberof Attribute
                                      * @method _isInitialized
                                      * @param {String} attr The attribute which should be checked if it is initialized.
+                                     * @protected
                                      * @return {Boolean} Returns true if the attribute has been initialized, false otherwise.
                                      */
                                     _isInitialized: function(attr) {

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -192,11 +194,10 @@
                                  * - Normal: Just a button that allows to switch to the edition mode
                                  * - Exclusive: The ButtonEmbedEdit UI with all the link edition controls.
                                  *
-                                 * @uses ButtonKeystroke
-                                 *
                                  * @class ButtonEmbed
+                                 * @uses ButtonKeystroke
                                  */
-                                var ButtonEmbed = React.createClass({
+                                var ButtonEmbed = createReactClass({
                                     mixins: [AlloyEditor.ButtonKeystroke],
                             
                                     // Allows validating props being passed to the component.
@@ -204,24 +205,30 @@
                                         /**
                                          * The editor instance where the component is being used.
                                          *
+                                         * @instance
+                                         * @memberof ButtonEmbed
                                          * @property {Object} editor
                                          */
-                                        editor: React.PropTypes.object.isRequired,
+                                        editor: PropTypes.object.isRequired,
                             
                                         /**
                                          * The label that should be used for accessibility purposes.
                                          *
+                                         * @instance
+                                         * @memberof ButtonEmbed
                                          * @property {String} label
                                          */
-                                        label: React.PropTypes.string,
+                                        label: PropTypes.string,
                             
                                         /**
                                          * The tabIndex of the button in its toolbar current state. A value other than -1
                                          * means that the button has focus and is the active element.
                                          *
+                                         * @instance
+                                         * @memberof ButtonEmbed
                                          * @property {Number} tabIndex
                                          */
-                                        tabIndex: React.PropTypes.number
+                                        tabIndex: PropTypes.number
                                     },
                             
                                     // Lifecycle. Provides static properties to the widget.
@@ -229,9 +236,10 @@
                                         /**
                                          * The name which will be used as an alias of the button in the configuration.
                                          *
-                                         * @static
-                                         * @property {String} key
                                          * @default embed
+                                         * @memberof ButtonEmbed
+                                         * @property {String} key
+                                         * @static
                                          */
                                         key: &#x27;embed&#x27;
                                     },
@@ -239,6 +247,8 @@
                                     /**
                                      * Lifecycle. Returns the default values of the properties used in the widget.
                                      *
+                                     * @instance
+                                     * @memberof ButtonEmbed
                                      * @method getDefaultProps
                                      * @return {Object} The default properties.
                                      */
@@ -254,6 +264,8 @@
                                     /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
+                                     * @instance
+                                     * @memberof ButtonEmbed
                                      * @method render
                                      * @return {Object} The content which should be rendered.
                                      */
@@ -274,8 +286,10 @@
                                     /**
                                      * Requests the link button to be rendered in exclusive mode to allow the embedding of a link.
                                      *
-                                     * @protected
+                                     * @instance
+                                     * @memberof ButtonEmbed
                                      * @method _requestExclusive
+                                     * @protected
                                      */
                                     _requestExclusive: function() {
                                         this.props.requestExclusive(ButtonEmbed.key);

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -190,15 +192,16 @@
                                  *
                                  * @class ButtonCameraImage
                                  */
-                                var ButtonCameraImage = React.createClass({
+                                var ButtonCameraImage = createReactClass({
                                     // Lifecycle. Provides static properties to the widget.
                                     statics: {
                                         /**
                                          * The name which will be used as an alias of the button in the configuration.
                                          *
-                                         * @static
-                                         * @property {String} key
                                          * @default cameraImage
+                                         * @memberof ButtonCameraImage
+                                         * @property {String} key
+                                         * @static
                                          */
                                         key: &#x27;cameraImage&#x27;
                                     },
@@ -206,6 +209,8 @@
                                     /**
                                      * Lifecycle. Returns the default values of the properties used in the widget.
                                      *
+                                     * @instance
+                                     * @memberof ButtonCameraImage
                                      * @method getDefaultProps
                                      */
                                     getDefaultProps: function () {
@@ -219,6 +224,8 @@
                                      *
                                      * Focuses the take photo button.
                                      *
+                                     * @instance
+                                     * @memberof ButtonCameraImage
                                      * @method componentDidMount
                                      */
                                     componentDidMount: function () {
@@ -228,6 +235,8 @@
                                     /**
                                      * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
                                      *
+                                     * @instance
+                                     * @memberof ButtonCameraImage
                                      * @method componentWillUnmount
                                      */
                                     componentWillUnmount: function() {
@@ -246,6 +255,8 @@
                                     /**
                                      * Lifecycle. Renders the UI of the button.
                                      *
+                                     * @instance
+                                     * @memberof ButtonCameraImage
                                      * @method render
                                      * @return {Object} The content which should be rendered.
                                      */
@@ -272,6 +283,9 @@
                                     /**
                                      * Takes photo from the video stream and inserts in into editor&#x27;s content.
                                      *
+                                     * @fires ButtonCameraImage#imageCameraAdd
+                                     * @instance
+                                     * @memberof ButtonCameraImage
                                      * @method takePhoto
                                      */
                                     takePhoto: function() {
@@ -308,9 +322,11 @@
                                     /**
                                      * Displays error message in case of video stream capturing failure.
                                      *
-                                     * @protected
+                                     * @instance
+                                     * @memberof ButtonCameraImage
                                      * @method _handleStreamError
                                      * @param {Event} error The fired event in case of error.
+                                     * @protected
                                      */
                                     _handleStreamError: function(error) {
                                         window.alert(&#x27;An error occurred! &#x27; + error);
@@ -320,8 +336,11 @@
                                      * Starts streaming video in the video element and sets width/height to the video
                                      * and canvas elements.
                                      *
+                                     * @instance
+                                     * @memberof ButtonCameraImage
                                      * @method _handleStreamSuccess
                                      * @param {Object} stream The video stream
+                                     * @protected
                                      */
                                     _handleStreamSuccess: function(stream) {
                                         var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
@@ -358,7 +377,8 @@
                                     /**
                                      * Fired when an image is being taken from the camera and added as an element to the editor.
                                      *
-                                     * @event imageCameraAdd
+                                     * @event ButtonCameraImage#imageCameraAdd
+                                     * @memberof ButtonCameraImage
                                      * @param {CKEDITOR.dom.element} el The created img element in editor.
                                      */
                                 });

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.4.1</b>
+                        API Docs for Version: <b>1.5.0</b>
                     </p>
                 </li>
             </div>
@@ -56,6 +56,7 @@
                     
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
                                     <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
                                     <li><a href="../classes/Attribute.html">Attribute</a></li>
                                     <li><a href="../classes/Base.html">Base</a></li>
@@ -116,6 +117,7 @@
                                     <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
                                     <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
                                     <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
@@ -123,13 +125,13 @@
                                     <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_selectionregion.html">CKEDITOR.plugins.ae_selectionregion</a></li>
                                     <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
-                                    <li><a href="../classes/CKEDITOR.plugins.ae_uicore.html">CKEDITOR.plugins.ae_uicore</a></li>
                                     <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
                                     <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
                                     <li><a href="../classes/Core.html">Core</a></li>
                                     <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
                                     <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
                                     <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
                                     <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
@@ -200,7 +202,7 @@
                                  * be merged into each editor instance, so the developer may use them directly via the editor, without making
                                  * an instance of this class**.
                                  *
-                                 * @class CKEDITOR.plugins.ae_selectionregion
+                                 * @class SelectionRegion
                                  * @constructor
                                  */
                                 function SelectionRegion() {}
@@ -211,6 +213,8 @@
                                     /**
                                      * Creates selection from two points in page coordinates.
                                      *
+                                     * @instance
+                                     * @memberof SelectionRegion
                                      * @method createSelectionFromPoint
                                      * @param {Number} x X point in page coordinates.
                                      * @param {Number} y Y point in page coordinates.
@@ -222,6 +226,8 @@
                                     /**
                                      * Creates selection from range. A range consists from two points in page coordinates.
                                      *
+                                     * @instance
+                                     * @memberof SelectionRegion
                                      * @method createSelectionFromRange
                                      * @param {Number} startX X coordinate of the first point.
                                      * @param {Number} startY Y coordinate of the first point.
@@ -287,6 +293,8 @@
                                     /**
                                      * Returns the region of the current position of the caret. The points are in page coordinates.
                                      *
+                                     * @instance
+                                     * @memberof SelectionRegion
                                      * @method getCaretRegion
                                      * @return {Object} Returns object with the following properties:
                                      * - bottom
@@ -331,6 +339,8 @@
                                     /**
                                      * Returns data for the current selection.
                                      *
+                                     * @instance
+                                     * @memberof SelectionRegion
                                      * @method getSelectionData
                                      * @return {Object|null} Returns an object with the following data:
                                      * - element - The currently selected element, if any
@@ -357,6 +367,8 @@
                                     /**
                                      * Returns the region of the current selection.
                                      *
+                                     * @instance
+                                     * @memberof SelectionRegion
                                      * @method getSelectionRegion
                                      * @return {Object} Returns object which is being returned from
                                      * {{#crossLink &quot;CKEDITOR.plugins.ae_selectionregion/getClientRectsRegion:method&quot;}}{{/crossLink}} with three more properties:
@@ -380,6 +392,8 @@
                                     /**
                                      * Returns true if the current selection is empty, false otherwise.
                                      *
+                                     * @instance
+                                     * @memberof SelectionRegion
                                      * @method isSelectionEmpty
                                      * @return {Boolean} Returns true if the current selection is empty, false otherwise.
                                      */
@@ -396,6 +410,8 @@
                                      * Returns object with data about the [client rectangles](https://developer.mozilla.org/en-US/docs/Web/API/Element.getClientRects) of the selection,
                                      * normalized across browses. All offsets below are in page coordinates.
                                      *
+                                     * @instance
+                                     * @memberof SelectionRegion
                                      * @method getClientRectsRegion
                                      * @return {Object} Returns object with the following data:
                                      * - bottom - bottom offset of all client rectangles
@@ -520,6 +536,8 @@
                                      * Retrieves the direction of the selection. The direction is from top to bottom or from bottom to top.
                                      * For IE &lt; 9 it is not possible, so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.
                                      *
+                                     * @instance
+                                     * @memberof SelectionRegion
                                      * @method getSelectionDirection
                                      * @return {Number} Returns a number which represents selection direction. It might be one of these:
                                      * - CKEDITOR.SELECTION_TOP_TO_BOTTOM;
@@ -550,13 +568,6 @@
                             
                                 CKEDITOR.plugins.add(
                                     &#x27;ae_selectionregion&#x27;, {
-                                        /**
-                                         * Initializer lifecycle implementation for the SelectionRegion plugin.
-                                         *
-                                         * @method init
-                                         * @protected
-                                         * @param {Object} editor The current CKEditor instance.
-                                         */
                                         init: function(editor) {
                                             var attr,
                                                 hasOwnProperty;
