@@ -31,5 +31,9 @@ Look for documentation and examples on [http://alloyeditor.com/](http://alloyedi
 [LGPL License](LICENSE.md)
 
 [![Build Status](https://travis-ci.org/liferay/alloy-editor.svg)](https://travis-ci.org/liferay/alloy-editor)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fliferay%2Falloy-editor.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fliferay%2Falloy-editor?ref=badge_shield)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/alloyui.svg)](https://saucelabs.com/u/alloyui)
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fliferay%2Falloy-editor.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fliferay%2Falloy-editor?ref=badge_large)
