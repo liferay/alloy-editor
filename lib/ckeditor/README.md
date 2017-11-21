@@ -1,5 +1,5 @@
-CKEditor 4
-==========
+CKEditor 4.7.3
+==============
 
 Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
 http://ckeditor.com - See LICENSE.md for license information.
