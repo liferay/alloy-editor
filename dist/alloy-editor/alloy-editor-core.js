@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.0
+ * AlloyEditor v1.5.1
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -7336,7 +7336,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             AlloyEditor.Lang.mix(editor.config, config);
 
-            if (CKEDITOR.env.ie) {
+            if (CKEDITOR.env.ie && !CKEDITOR.env.edge) {
                 editor.config.extraPlugins = editor.config.extraPlugins.replace('ae_dragresize', 'ae_dragresize_ie');
                 editor.config.removePlugins = editor.config.removePlugins.replace('ae_dragresize', 'ae_dragresize_ie');
             }

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.0</b>
+                        API Docs for Version: <b>1.5.1</b>
                     </p>
                 </li>
             </div>
@@ -233,7 +233,7 @@
                             
                                         AlloyEditor.Lang.mix(editor.config, config);
                             
-                                        if (CKEDITOR.env.ie) {
+                                        if (CKEDITOR.env.ie &amp;&amp; !CKEDITOR.env.edge) {
                                             editor.config.extraPlugins = editor.config.extraPlugins.replace(&#x27;ae_dragresize&#x27;, &#x27;ae_dragresize_ie&#x27;);
                                             editor.config.removePlugins = editor.config.removePlugins.replace(&#x27;ae_dragresize&#x27;, &#x27;ae_dragresize_ie&#x27;);
                                         }
