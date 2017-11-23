@@ -13,7 +13,7 @@
     };
 
     var doTestIE = function() {
-        if (!CKEDITOR.env.ie) {
+        if (!CKEDITOR.env.ie || CKEDITOR.env.edge) {
             this.skip();
         }
         return;
