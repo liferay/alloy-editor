@@ -30,6 +30,24 @@
         });
     };
 
+    // Filters the requires object to remove unwanted dependencies. At this point
+    // only 'toolbar' has been identified, but more can appear. An unwanted plugin
+    // dependency is one that prevents a necessary plugin from being removed
+    //
+    // @param {string|Array<string>} requires The requires object
+    // @return {string} The filtered requires object
+    var filterUnwantedDependencies = function(requires) {
+        if (typeof requires === 'string') {
+            requires = requires.replace('toolbar', '');
+        } else if (Object.prototype.toString.call(requires) === '[object Array]') {
+            requires = requires.filter(function(require) {
+                return require === 'toolbar';
+            });
+        }
+
+        return requires;
+    };
+
     /**
      * CKEDITOR.plugins class utility which adds additional methods to those of CKEditor.
      *
@@ -56,7 +74,13 @@
             pluginsLoad.call(this, names, function(plugins) {
                 if (callback) {
                     Object.keys(plugins).forEach(function(pluginName) {
-                        wrapPluginLifecycle(plugins[pluginName]);
+                        var plugin = plugins[pluginName];
+
+                        if (plugin.requires) {
+                            plugin.requires = filterUnwantedDependencies(plugin.requires);
+                        }
+
+                        wrapPluginLifecycle(plugin);
                     });
 
                     callback.call(scope, plugins);
