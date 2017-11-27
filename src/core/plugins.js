@@ -38,14 +38,12 @@
     // @return {string} The filtered requires object
     var filterUnwantedDependencies = function(requires) {
         if (typeof requires === 'string') {
-            requires = requires.replace('toolbar', '');
-        } else if (Object.prototype.toString.call(requires) === '[object Array]') {
-            requires = requires.filter(function(require) {
-                return require === 'toolbar';
-            });
+            requires = requires.split(',');
         }
 
-        return requires;
+        return requires.filter(function(require) {
+            return require !== 'toolbar';
+        });
     };
 
     /**
