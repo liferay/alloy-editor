@@ -62,13 +62,19 @@
          * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
          * @param {String} URI The URI of the link.
          */
-        create: function(URI, attrs, modifySelection) {
+        create: function(URI, attrs, modifySelection, elementText) {
             var selection = this._editor.getSelection();
 
             var range = selection.getRanges()[0];
+            var text;
 
             if (range.collapsed) {
-                var text = new CKEDITOR.dom.text(URI, this._editor.document);
+                if (elementText) {
+                    text = new CKEDITOR.dom.text(elementText, this._editor.document);
+                } else {
+                    text = new CKEDITOR.dom.text(URI, this._editor.document);
+                }
+
                 range.insertNode(text);
                 range.selectNodeContents(text);
             }
@@ -169,10 +175,14 @@
          * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
          * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
          */
-        update: function(attrs, link, modifySelection) {
+        update: function(attrs, link, modifySelection, elementText) {
             var instance =  this;
 
             link = link || this.getFromSelection();
+
+            if (elementText) {
+                link.$.innerText = elementText;
+            }
 
             if (typeof attrs === 'string') {
                 var uri = instance._getCompleteURI(attrs);

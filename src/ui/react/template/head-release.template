@@ -1,3 +1,6 @@
-<link href="alloy-editor/assets/alloy-editor-ocean-min.css" rel="stylesheet">
+<link href="alloy-editor/assets/alloy-editor-pario-min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 <script src="alloy-editor/alloy-editor-all-min.js"></script>

@@ -29,6 +29,16 @@
                 outline: none;
                 overflow: auto;
             }
+
+            .pario-editor-button {
+                position: relative;
+            }
+
+            .render-above-bar {
+                position: absolute;
+                bottom: 35px;
+                background: #FAFAFA;
+            }
         </style>
     </head>
     <body>
@@ -72,7 +82,7 @@
                         fixed: {
                             selections: [
                                 {
-                                    buttons: ['bold', 'italic', 'image', 'link'],
+                                    buttons: ['bold', 'italic', 'image', 'parioLink'],
                                     name: 'fixed',
                                     test: function(payload) { return true; },
                                     getArrowBoxClasses: function() { return ''; },
@@ -91,8 +101,15 @@
                             selections: [
                                 {
                                     name: 'link',
-                                    buttons: ['linkEdit'],
-                                    test: AlloyEditor.SelectionTest.link
+                                    buttons: ['parioLinkEdit'],
+                                    test: AlloyEditor.SelectionTest.link,
+                                    setPosition: function(payload) {
+                                        var toolbarPosition = [payload.selectionData.region.left, payload.selectionData.region.top + 15];
+
+                                        this.moveToPoint(toolbarPosition, toolbarPosition);
+
+                                        return true;
+                                    }
                                 }
                             ]
                         }
