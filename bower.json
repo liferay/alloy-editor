@@ -7,7 +7,7 @@
   ],
   "description": "AlloyEditor, a modern WYSIWYG editor, build on top of CKEditor",
   "main": [
-    "dist/alloy-editor/assets/alloy-editor-ocean-min.css",
+    "dist/alloy-editor/assets/alloy-editor-pario-min.css",
     "dist/alloy-editor/alloy-editor-all-min.js"
   ],
   "keywords": [

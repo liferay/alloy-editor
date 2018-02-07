@@ -1,0 +1,19 @@
+/** GENERAL VARIABLES **/
+
+@import ".font-cache/font-icon-map";
+@import "components/variables/skin";
+
+$base-font-icon-family: alloyeditor-ocean;
+
+/** COLOR PALETTE **/
+
+$color-primary: #FAFAFA;
+
+/** COMPONENT VARIABLES **/
+
+@import "skin/default/variables/skin";
+
+$arrow-box-color: $color-primary;
+
+/** DROPDOWN-LIST **/
+$dropdown-active-element: $color-primary;
