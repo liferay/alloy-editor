@@ -126,7 +126,7 @@
                 <div className="ae-container-edit-table">
                     <label htmlFor={colsId}>Columns</label>
                     <div className="ae-container-input small">
-                        <input className="ae-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" max="4" onKeyDown={this._handleKeyDown} placeholder="Colums" ref="cols" type="number" value={this.state.cols}></input>
+                        <input className="ae-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" max="5" onKeyDown={this._handleKeyDown} placeholder="Colums" ref="cols" type="number" value={this.state.cols}></input>
                     </div>
 
                     <button aria-label="Confirm" className="ae-button" onClick={this._createColumns}>
