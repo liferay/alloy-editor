@@ -7,19 +7,18 @@ const common = require('./webpack.common.js');
 module.exports = merge(
 	common.config,
 	{
+		mode: 'development',
 		devServer: {
 			contentBase: '.',
 			port: 8080
 		},
 		devtool: 'inline-source-map',
 		plugins: [
-			new webpack.DefinePlugin(
-				{
-					'process.env': {
-						NODE_ENV: '"development"'
-					}
-				}
-			)
+			new webpack.DefinePlugin({
+				"process.env": {
+					NODE_ENV: JSON.stringify("development"),
+				},
+			}),
 		]
 	}
 );
