@@ -78,7 +78,7 @@ class ButtonLinkEdit extends React.Component {
         var targetSelector = {
             allowedTargets: this.props.allowedTargets,
             editor: this.props.editor,
-            handleLinkTargetChange: this._handleLinkTargetChange,
+            handleLinkTargetChange: this._handleLinkTargetChange.bind(this),
             selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
         };
 
