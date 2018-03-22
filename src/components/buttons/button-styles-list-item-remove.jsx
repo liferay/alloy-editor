@@ -18,7 +18,7 @@ class ButtonStylesListItemRemove extends React.Component {
     render() {
         return (
             <li role="option">
-                <button className="ae-toolbar-element" onClick={this._removeStyles} tabIndex={this.props.tabIndex}>{AlloyEditor.Strings.normal}</button>
+                <button className="ae-toolbar-element" onClick={this._removeStyles.bind(this)} tabIndex={this.props.tabIndex}>{AlloyEditor.Strings.normal}</button>
             </li>
         );
     }
