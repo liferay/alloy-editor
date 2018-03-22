@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 var KEY_ENTER = 13;
 var KEY_ESC = 27;
@@ -10,6 +11,12 @@ var KEY_ESC = 27;
  * @class ButtonEmbedEdit
  */
 class ButtonEmbedEdit extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = this.getInitialState();
+    }
+
     /**
      * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
      *
@@ -25,9 +32,9 @@ class ButtonEmbedEdit extends React.Component {
             // We need to wait for the next rendering cycle before focusing to avoid undesired
             // scrolls on the page
             if (window.requestAnimationFrame) {
-                window.requestAnimationFrame(this._focusLinkInput);
+                window.requestAnimationFrame(this._focusLinkInput.bind(this));
             } else {
-                setTimeout(this._focusLinkInput, 0);
+                setTimeout(this._focusLinkInput.bind(this), 0);
             }
         }
     }
@@ -41,7 +48,7 @@ class ButtonEmbedEdit extends React.Component {
      * @method componentWillReceiveProps
      */
     componentWillReceiveProps() {
-        this.replaceState(this.getInitialState());
+        this.setState(this.getInitialState());
     }
 
     /**
