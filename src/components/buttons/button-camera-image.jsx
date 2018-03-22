@@ -57,12 +57,12 @@ class ButtonCameraImage extends React.Component {
         getUserMedia.call(navigator, {
             video: true,
             audio: false
-        }, this._handleStreamSuccess, this._handleStreamError);
+        }, this._handleStreamSuccess.bind(this), this._handleStreamError.bind(this));
 
         return (
             <div className="ae-camera">
                 <video ref="videoContainer">Video stream not available.</video>
-                <button className="ae-camera-shoot" onClick={this.takePhoto} ref="buttonTakePhoto">Take photo</button>
+                <button className="ae-camera-shoot" onClick={this.takePhoto.bind(this)} ref="buttonTakePhoto">Take photo</button>
                 <canvas className="ae-camera-canvas" ref="canvasContainer"></canvas>
             </div>
         );

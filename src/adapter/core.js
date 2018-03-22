@@ -237,11 +237,10 @@ extend(Core, Base, {
 
             uiNode.appendChild(editorUIElement);
 
-            this._mainUI = ReactDOM.render(React.createElement(UI, {
-                editor: this,
-                eventsDelay: this.get('eventsDelay'),
-                toolbars: this.get('toolbars')
-            }), editorUIElement);
+            this._mainUI = ReactDOM.render(<UI
+                editor={this}
+                eventsDelay={this.get('eventsDelay')}
+                toolbars={this.get('toolbars')} />, editorUIElement);
 
             this._editorUIElement = editorUIElement;
 

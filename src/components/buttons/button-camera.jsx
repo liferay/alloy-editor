@@ -1,4 +1,4 @@
-import ButtonCameraImage from './button-camera.jsx';
+import ButtonCameraImage from './button-camera-image.jsx';
 import React from 'react';
 
 /**

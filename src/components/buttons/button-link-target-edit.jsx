@@ -1,3 +1,4 @@
+import ButtonTargetList from './button-target-list.jsx';
 import React from 'react';
 
 /**
@@ -16,14 +17,8 @@ class ButtonLinkTargetEdit extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var buttonTargetsList;
-
         var handleLinkTargetChange = this.props.handleLinkTargetChange;
         var allowedLinkTargets = this.props.allowedTargets;
-
-        if (this.props.expanded) {
-            buttonTargetsList= <AlloyEditor.ButtonTargetList editor={this.props.editor} onDismiss={this.props.toggleDropdown} allowedLinkTargets={allowedLinkTargets} handleLinkTargetChange={handleLinkTargetChange} selectedTarget={this.props.selectedTarget}/>;
-        }
 
         return (
             <div className="ae-container-edit-link-target ae-container-dropdown ae-container-dropdown-medium ae-has-dropdown" tabIndex="0">
@@ -33,7 +28,9 @@ class ButtonLinkTargetEdit extends React.Component {
                         <span className="ae-icon-arrow"></span>
                     </div>
                 </button>
-                {buttonTargetsList}
+                {this.props.expanded && (
+                    <ButtonTargetList editor={this.props.editor} onDismiss={this.props.toggleDropdown} allowedLinkTargets={allowedLinkTargets} handleLinkTargetChange={handleLinkTargetChange} selectedTarget={this.props.selectedTarget}/>
+                )}
             </div>
         );
     }
