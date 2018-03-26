@@ -4,6 +4,8 @@ import Lang from '../oop/lang.js';
 import Buttons from '../components/buttons';
 import Toolbars from '../components/toolbars';
 
+import SelectionTest from '../selections/selection-test.js';
+
 // An object containing all currently registered plugins in AlloyEditor.
 var BRIDGE_BUTTONS = {};
 
@@ -218,12 +220,13 @@ const registerBridgeButton = function(buttonName, pluginName) {
 
 export {
     Buttons,
-    Toolbars,
     editable,
     getBasePath,
     getButtons,
     getUrl,
     implementEventTarget,
     loadLanguageResources,
-    registerBridgeButton
+    registerBridgeButton,
+    SelectionTest,
+    Toolbars
 };
