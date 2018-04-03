@@ -13,7 +13,7 @@ import React from 'react';
  * @uses ButtonStateClasses
  * @uses ButtonStyle
  */
-class ButtonBold extends React.Component{
+class ButtonBold extends React.Component {
     /**
      * Lifecycle. Renders the UI of the button.
      *
