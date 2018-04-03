@@ -1,8 +1,10 @@
+import ButtonOrderedList from '../../../src/components/buttons/button-ol.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonOrderedList', function() {
         this.timeout(35000);
@@ -18,7 +20,7 @@
         it('should make a text selection an ordered list on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<p>There should be a {selection made...</p><p>An ordereed} list.</p>');
 
-            var buttonOrderedlist = ReactDOM.render(<AlloyEditor.ButtonOrderedList editor={this.editor} />, this.container);
+            var buttonOrderedlist = ReactDOM.render(<ButtonOrderedList editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonOrderedlist));
 
@@ -33,7 +35,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<ol><li>A {selection made...</li><li>An ordereed} list.</li></ol>');
 
-            var buttonOrderedlist = ReactDOM.render(<AlloyEditor.ButtonOrderedList editor={this.editor} />, this.container);
+            var buttonOrderedlist = ReactDOM.render(<ButtonOrderedList editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonOrderedlist);
 

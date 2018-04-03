@@ -1,8 +1,10 @@
+import ButtonStylesList from '../../../src/components/buttons/button-styles-list.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     describe('ButtonStylesList', function() {
         this.timeout(35000);
@@ -25,7 +27,7 @@
                 }
             ];
 
-            var buttonStylesList = ReactDOM.render(<AlloyEditor.ButtonStylesList editor={this.editor} styles={styles} />, this.container);
+            var buttonStylesList = ReactDOM.render(<ButtonStylesList editor={this.editor} styles={styles} />, this.container);
 
             assert.isObject(TestUtils.findRenderedComponentWithType(buttonStylesList, AlloyEditor.ButtonStylesListItemRemove));
         });
@@ -40,7 +42,7 @@
                 }
             ];
 
-            var buttonStylesList = ReactDOM.render(<AlloyEditor.ButtonStylesList editor={this.editor} showRemoveStylesItem={false} styles={styles} />, this.container);
+            var buttonStylesList = ReactDOM.render(<ButtonStylesList editor={this.editor} showRemoveStylesItem={false} styles={styles} />, this.container);
 
             assert.throws(function() {
                 TestUtils.findRenderedComponentWithType(buttonStylesList, AlloyEditor.ButtonStylesListItemRemove)

@@ -1,8 +1,10 @@
+import ButtonStrike from '../../../src/components/buttons/button-strike.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonStrike', function() {
         this.timeout(35000);
@@ -18,7 +20,7 @@
         it('should make a text selection strike on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made strike.');
 
-            var buttonStrike = ReactDOM.render(<AlloyEditor.ButtonStrike editor={this.editor} />, this.container);
+            var buttonStrike = ReactDOM.render(<ButtonStrike editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonStrike));
 
@@ -33,7 +35,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'A <s>{selection}</s> made strike.');
 
-            var buttonStrike = ReactDOM.render(<AlloyEditor.ButtonStrike editor={this.editor} />, this.container);
+            var buttonStrike = ReactDOM.render(<ButtonStrike editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonStrike);
 

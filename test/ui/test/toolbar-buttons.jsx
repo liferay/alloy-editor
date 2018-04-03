@@ -1,8 +1,10 @@
+import ToolbarAdd from '../../../src/components/toolbars/toolbar-add.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     describe('ToolbarButtons', function() {
         this.timeout(35000);
@@ -35,7 +37,7 @@
                 tabIndex: 2
             };
 
-            var toolbarAdd = TestUtils.renderIntoDocument(<AlloyEditor.ToolbarAdd editor={this.editor} config={toolbarAddConfig} />);
+            var toolbarAdd = TestUtils.renderIntoDocument(<ToolbarAdd editor={this.editor} config={toolbarAddConfig} />);
 
             var buttons = toolbarAdd.getToolbarButtons(toolbarAddConfig.buttons);
 

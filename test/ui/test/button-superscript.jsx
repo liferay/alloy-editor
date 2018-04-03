@@ -1,8 +1,10 @@
+import ButtonSuperscript from '../../../src/components/buttons/button-superscript.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonSuperscript', function() {
         this.timeout(35000);
@@ -18,7 +20,7 @@
         it('should make a text selection superscript on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made superscript.');
 
-            var buttonSuperscript = ReactDOM.render(<AlloyEditor.ButtonSuperscript editor={this.editor} />, this.container);
+            var buttonSuperscript = ReactDOM.render(<ButtonSuperscript editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonSuperscript));
 
@@ -33,7 +35,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'A <sup>{selection}</sup> made superscript.');
 
-            var buttonSuperscript = ReactDOM.render(<AlloyEditor.ButtonSuperscript editor={this.editor} />, this.container);
+            var buttonSuperscript = ReactDOM.render(<ButtonSuperscript editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonSuperscript);
 

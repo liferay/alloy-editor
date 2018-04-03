@@ -1,8 +1,10 @@
+import ButtonIndentBlock from '../../../src/components/buttons/button-indent-block.jsx';
+
 (function () {
 	'use strict';
 
 	var assert = chai.assert;
-	var Simulate = React.addons.TestUtils.Simulate;
+	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonIndent', function () {
 		this.timeout(35000);
@@ -18,7 +20,7 @@
 		it('should indent the content when the indent button is clicked', function () {
 			bender.tools.selection.setWithHtml(this.nativeEditor, 'This text will be indented {selection}.');
 
-            var buttonIndent = ReactDOM.render(<AlloyEditor.ButtonIndentBlock editor={this.editor} />, this.container);
+            var buttonIndent = ReactDOM.render(<ButtonIndentBlock editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonIndent));
 
@@ -34,7 +36,7 @@
 			this.nativeEditor.config.indentOffset = 25;
 			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100px">This text will be indent {selection}.</p>');
 
-            var buttonIndent = ReactDOM.render(<AlloyEditor.ButtonIndentBlock editor={this.editor} />, this.container);
+            var buttonIndent = ReactDOM.render(<ButtonIndentBlock editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonIndent));
 
@@ -52,7 +54,7 @@
 
 			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100em">This text will be indent {selection}.</p>');
 
-            var buttonIndent = ReactDOM.render(<AlloyEditor.ButtonIndentBlock editor={this.editor} />, this.container);
+            var buttonIndent = ReactDOM.render(<ButtonIndentBlock editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonIndent));
 

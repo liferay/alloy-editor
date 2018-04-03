@@ -1,8 +1,10 @@
+import ButtonTableHeading from '../../../src/components/buttons/button-table-heading.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     var selectTable = function() {
         var tableElement = this.nativeEditor.element.find('table').getItem(0);
@@ -22,7 +24,7 @@
         afterEach(Utils.afterEach);
 
         it('should render just the menu button when not expanded', function() {
-            var buttonTableHeading = ReactDOM.render(<AlloyEditor.ButtonTableHeading editor={this.editor} expanded={false} />, this.container);
+            var buttonTableHeading = ReactDOM.render(<ButtonTableHeading editor={this.editor} expanded={false} />, this.container);
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableHeading, 'button');
 
@@ -33,7 +35,7 @@
         });
 
         it('should show a dropdown with the action buttons when expanded', function() {
-            var buttonTableHeading = ReactDOM.render(<AlloyEditor.ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
+            var buttonTableHeading = ReactDOM.render(<ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
 
             var dropdown = TestUtils.findAllInRenderedTree(buttonTableHeading, function(component) {
                 return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonCommandsList);
@@ -79,7 +81,7 @@
                 var errorMessage = 'Changing table heading from ' + testData.initial + ' to ' + testData.expected + ' did not produce the expected result';
                 var initialFixture = headingFixtures[testData.initial];
                 var expectedFixture = headingFixtures[testData.expected];
-                var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
+                var buttonDropdown = ReactDOM.render(<ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
                 var buttonCommand = 'tableHeading' + testData.expected;
 
                 Utils.assertDropdownCommandButtonResult.call(this,

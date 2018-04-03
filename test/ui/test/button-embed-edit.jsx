@@ -1,9 +1,11 @@
+import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
 
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     var Simulate = TestUtils.Simulate;
 
@@ -41,7 +43,7 @@
                 callback();
             });
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} renderExclusive={true}/>, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} renderExclusive={true}/>, this.container);
 
             stub.restore();
 
@@ -59,7 +61,7 @@
 
             window.requestAnimationFrame = null;
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} renderExclusive={true}/>, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} renderExclusive={true}/>, this.container);
 
             window.requestAnimationFrame = requestAnimationFrame;
             stub.restore();
@@ -72,7 +74,7 @@
 
             this.nativeEditor.getSelection().selectElement(this.nativeEditor.element.findOne('#embedfoo'));
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} />, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
             assert.strictEqual(buttonEmbedEdit.refs.linkInput.value, 'https://foo.com');
         });
@@ -82,7 +84,7 @@
 
             this.nativeEditor.getSelection().selectElement(this.nativeEditor.element.findOne('#embedfoo'));
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} />, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
             var buttonRemove = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-bin');
 
@@ -103,19 +105,19 @@
 
             this.nativeEditor.getSelection().selectElement(this.nativeEditor.element.findOne('#embedfoo'));
 
-            buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} />, this.container);
+            buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
             assert.strictEqual(buttonEmbedEdit.refs.linkInput.value, 'https://foo.com');
 
             this.nativeEditor.getSelection().selectElement(this.nativeEditor.element.findOne('#embedbar'));
 
-            buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} />, this.container);
+            buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
             assert.strictEqual(buttonEmbedEdit.refs.linkInput.value, 'https://bar.com');
         });
 
         it('should not allow to update the embed link if the link input is empty', function() {
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit editor={this.editor} />, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
             var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-ok');
 
@@ -125,7 +127,7 @@
         it('should clear the link input when the remove button inside the link input is clicked', function() {
             var cancelExclusive = sinon.stub();
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit cancelExclusive={cancelExclusive} editor={this.editor} renderExclusive={true} />, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit cancelExclusive={cancelExclusive} editor={this.editor} renderExclusive={true} />, this.container);
 
             var clearButton = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-remove');
 
@@ -149,7 +151,7 @@
                 });
             });
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
 
             TestUtils.Simulate.change(buttonEmbedEdit.refs.linkInput, {
                 target: {
@@ -177,7 +179,7 @@
                 });
             });
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
 
             Simulate.change(buttonEmbedEdit.refs.linkInput, {
                 target: {
@@ -199,7 +201,7 @@
         it('should close the toolbar when KEY_ESC is pressed inside the link input', function() {
             var spy = sinon.spy();
 
-            var buttonEmbedEdit = ReactDOM.render(<AlloyEditor.ButtonEmbedEdit cancelExclusive={spy} editor={this.editor} renderExclusive={true} />, this.container);
+            var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit cancelExclusive={spy} editor={this.editor} renderExclusive={true} />, this.container);
 
             Simulate.keyDown(buttonEmbedEdit.refs.linkInput, {key: "Escape", keyCode: KEY_ESC, which: KEY_ESC});
 

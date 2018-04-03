@@ -1,8 +1,10 @@
+import ButtonUnderline from '../../../src/components/buttons/button-underline.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     var KEY_U = 85;
 
@@ -20,7 +22,7 @@
         it('should make a text selection underline on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made underline.');
 
-            var buttonUnderline = ReactDOM.render(<AlloyEditor.ButtonUnderline editor={this.editor} />, this.container);
+            var buttonUnderline = ReactDOM.render(<ButtonUnderline editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonUnderline));
 
@@ -35,7 +37,7 @@
         it('should make a text selection underline on [Ctrl|Cmd] + I', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made underline.');
 
-            var buttonUnderline = ReactDOM.render(<AlloyEditor.ButtonUnderline editor={this.editor} />, this.container);
+            var buttonUnderline = ReactDOM.render(<ButtonUnderline editor={this.editor} />, this.container);
 
             happen.keydown(this._editable, {
                 ctrlKey: true,
@@ -53,7 +55,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'A <u>{selection}</u> made underline.');
 
-            var buttonUnderline = ReactDOM.render(<AlloyEditor.ButtonUnderline editor={this.editor} />, this.container);
+            var buttonUnderline = ReactDOM.render(<ButtonUnderline editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonUnderline);
 
