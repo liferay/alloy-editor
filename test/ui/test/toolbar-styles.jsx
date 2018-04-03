@@ -1,8 +1,10 @@
+import ToolbarStyles from '../../../src/components/toolbars/toolbar-styles.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     describe('ToolbarStyles', function() {
         this.timeout(35000);
@@ -54,7 +56,7 @@
             });
 
             it('should render buttons with properties from buttonCfg', function() {
-                var toolbarStyles = ReactDOM.render(<AlloyEditor.ToolbarStyles editor={this.alloyEditor}/>, this.container);
+                var toolbarStyles = ReactDOM.render(<ToolbarStyles editor={this.alloyEditor}/>, this.container);
 
                 var buttons = toolbarStyles.getToolbarButtons(
                     ['bold', 'italic'],
@@ -88,7 +90,7 @@
             afterEach(Utils.afterEach);
 
             it('should constrain the toolbar\'s position', function() {
-                var toolbarStyles = ReactDOM.render(<AlloyEditor.ToolbarStyles editor={this.editor}/>, this.container);
+                var toolbarStyles = ReactDOM.render(<ToolbarStyles editor={this.editor}/>, this.container);
 
                 var res = toolbarStyles.getConstrainedPosition({
                     height: 50,

@@ -1,8 +1,10 @@
+import ToolbarAdd from '../../../src/components/toolbars/toolbar-add.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     describe('ToolbarAdd', function() {
         this.timeout(35000);
@@ -39,7 +41,7 @@
                     }
                 };
 
-                var mainUI = ReactDOM.render(<AlloyEditor.ToolbarAdd editor={this.editor} editorEvent={editorEvent}/>, this.container);
+                var mainUI = ReactDOM.render(<ToolbarAdd editor={this.editor} editorEvent={editorEvent}/>, this.container);
 
                 assert.isNull(ReactDOM.findDOMNode(mainUI));
             });
@@ -116,7 +118,7 @@
                 eventsDelay: 0,
                 toolbars: {
                     add: {
-                        position: AlloyEditor.ToolbarAdd.right
+                        position: ToolbarAdd.right
                     }
                 },
                 uicore: {

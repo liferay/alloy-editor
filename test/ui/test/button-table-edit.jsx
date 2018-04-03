@@ -1,9 +1,11 @@
+import ButtonTableEdit from '../../../src/components/buttons/button-table-edit.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
-    var Simulate = TestUtils.Simulate;
+    var TestUtils = ReactTestUtils;
+    var Simulate = ReactTestUtils.Simulate;
 
     var KEY_ENTER = 13;
     var KEY_ESC = 27;
@@ -22,7 +24,7 @@
         afterEach(Utils.afterEach);
 
         it('should create a 3x3 table by default when clicking on the confirm button', function() {
-            var buttonTableEdit = ReactDOM.render(<AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
+            var buttonTableEdit = ReactDOM.render(<ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
             var confirmButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableEdit, 'button');
 
@@ -39,7 +41,7 @@
         });
 
         it('should create a 6 x 4 table based on the rows and cols inputs when clicking on the confirm button', function() {
-            var buttonTableEdit = ReactDOM.render(<AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
+            var buttonTableEdit = ReactDOM.render(<ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
             Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
             Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
@@ -59,7 +61,7 @@
         });
 
         it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the rows input', function() {
-            var buttonTableEdit = ReactDOM.render(<AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
+            var buttonTableEdit = ReactDOM.render(<ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
             Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
             Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
@@ -77,7 +79,7 @@
         });
 
         it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the cols input', function() {
-            var buttonTableEdit = ReactDOM.render(<AlloyEditor.ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
+            var buttonTableEdit = ReactDOM.render(<ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
             Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
             Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
@@ -97,7 +99,7 @@
         it('should not create a table and dismiss the ui when pressing escape on the rows input', function() {
             var cancelExclusive = sinon.stub();
 
-            var buttonTableEdit = ReactDOM.render(<AlloyEditor.ButtonTableEdit cancelExclusive={cancelExclusive} editor={this.editor} />, this.container);
+            var buttonTableEdit = ReactDOM.render(<ButtonTableEdit cancelExclusive={cancelExclusive} editor={this.editor} />, this.container);
 
             bender.tools.selection.setWithHtml(this.nativeEditor, '');
 
@@ -116,7 +118,7 @@
         it('should not create a table and dismiss the ui when pressing escape on the cols input', function() {
             var cancelExclusive = sinon.stub();
 
-            var buttonTableEdit = ReactDOM.render(<AlloyEditor.ButtonTableEdit cancelExclusive={cancelExclusive} editor={this.editor} />, this.container);
+            var buttonTableEdit = ReactDOM.render(<ButtonTableEdit cancelExclusive={cancelExclusive} editor={this.editor} />, this.container);
 
             bender.tools.selection.setWithHtml(this.nativeEditor, '');
 

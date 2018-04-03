@@ -1,8 +1,10 @@
+import ButtonParagraphJustify from '../../../src/components/buttons/button-paragraph-justify.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonParagraphJustify', function() {
         this.timeout(35000);
@@ -18,7 +20,7 @@
         it('should justify the selection on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '{There should be a paragraph justified.}');
 
-            var buttonParagraphJustify = ReactDOM.render(<AlloyEditor.ButtonParagraphJustify editor={this.editor} />, this.container);
+            var buttonParagraphJustify = ReactDOM.render(<ButtonParagraphJustify editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonParagraphJustify));
 
@@ -33,7 +35,7 @@
         it('should preserve tags ad attributes of the selection', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<h1 style="color: red;">{There should be a paragraph justified.}</h1>');
 
-            var buttonParagraphJustify = ReactDOM.render(<AlloyEditor.ButtonParagraphJustify editor={this.editor} />, this.container);
+            var buttonParagraphJustify = ReactDOM.render(<ButtonParagraphJustify editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonParagraphJustify));
 
@@ -48,7 +50,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="text-align: justify;">{A paragraph justified.}</p>');
 
-            var buttonParagraphJustify = ReactDOM.render(<AlloyEditor.ButtonParagraphJustify editor={this.editor} />, this.container);
+            var buttonParagraphJustify = ReactDOM.render(<ButtonParagraphJustify editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonParagraphJustify);
 

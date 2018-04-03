@@ -1,3 +1,5 @@
+import ToolbarStyles from '../../../src/components/toolbars/toolbar-styles.jsx';
+
 (function() {
     'use strict';
 
@@ -55,7 +57,7 @@
 
                 var editorEvent = getPayload.call(this, nativeEditor.element.findOne('#testImage'));
 
-                var toolbarStyles = ReactDOM.render(<AlloyEditor.ToolbarStyles config={config} editor={this.editor} editorEvent={editorEvent} selectionData={editorEvent.data.selectionData} />, this.container);
+                var toolbarStyles = ReactDOM.render(<ToolbarStyles config={config} editor={this.editor} editorEvent={editorEvent} selectionData={editorEvent.data.selectionData} />, this.container);
 
                 var spy = sinon.spy(toolbarStyles, 'moveToPoint');
 
@@ -80,7 +82,7 @@
 
                 var editorEvent = getPayload.call(this, nativeEditor.element.findOne('#testTable'));
 
-                var toolbarStyles = ReactDOM.render(<AlloyEditor.ToolbarStyles config={config} editor={this.editor} editorEvent={editorEvent} selectionData={editorEvent.data.selectionData} />, this.container);
+                var toolbarStyles = ReactDOM.render(<ToolbarStyles config={config} editor={this.editor} editorEvent={editorEvent} selectionData={editorEvent.data.selectionData} />, this.container);
 
                 var spy = sinon.spy(toolbarStyles, 'moveToPoint');
 

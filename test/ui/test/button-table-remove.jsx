@@ -1,8 +1,10 @@
+import ButtonTableRemove from '../../../src/components/buttons/button-table-remove.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
     var Simulate = TestUtils.Simulate;
 
     describe('ButtonTableRemove', function() {
@@ -17,7 +19,7 @@
         afterEach(Utils.afterEach);
 
         it('should remove a table if selection is inside one', function() {
-            var buttonTableRemove = ReactDOM.render(<AlloyEditor.ButtonTableRemove editor={this.editor} />, this.container);
+            var buttonTableRemove = ReactDOM.render(<ButtonTableRemove editor={this.editor} />, this.container);
 
             bender.tools.selection.setWithHtml(this.nativeEditor, '<table><tbody><tr><td> {}</td></tr></tbody></table>');
 
@@ -32,7 +34,7 @@
         });
 
         it('should noop if selection is outside a table', function() {
-            var buttonTableRemove = ReactDOM.render(<AlloyEditor.ButtonTableRemove editor={this.editor} />, this.container);
+            var buttonTableRemove = ReactDOM.render(<ButtonTableRemove editor={this.editor} />, this.container);
 
             bender.tools.selection.setWithHtml(this.nativeEditor, 'Content with {no} table');
 

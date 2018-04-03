@@ -1,9 +1,11 @@
+import ButtonLinkEdit from '../../../src/components/buttons/button-link-edit.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
-    var TestUtils = React.addons.TestUtils;
+    var Simulate = ReactTestUtils.Simulate;
+    var TestUtils = ReactTestUtils;
 
     describe('ButtonLink', function() {
         this.timeout(35000);
@@ -23,7 +25,7 @@
 
             var cancelExclusive = sinon.stub();
 
-            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} cancelExclusive={cancelExclusive} requestExclusive={requestExclusiveListener} />, this.container);
+            var buttonLink = ReactDOM.render(<ButtonLinkEdit editor={this.editor} cancelExclusive={cancelExclusive} requestExclusive={requestExclusiveListener} />, this.container);
 
             var inputLink = TestUtils.findRenderedDOMComponentWithTag(buttonLink, 'input');
 
@@ -48,7 +50,7 @@
 
             var cancelExclusive = sinon.stub();
 
-            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} appendProtocol={false} cancelExclusive={cancelExclusive} requestExclusive={requestExclusiveListener} />, this.container);
+            var buttonLink = ReactDOM.render(<ButtonLinkEdit editor={this.editor} appendProtocol={false} cancelExclusive={cancelExclusive} requestExclusive={requestExclusiveListener} />, this.container);
 
             var inputLink = TestUtils.findRenderedDOMComponentWithTag(buttonLink, 'input');
 
@@ -77,7 +79,7 @@
                 }
             ];
 
-            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} allowedTargets={allowedTargets} />, this.container);
+            var buttonLink = ReactDOM.render(<ButtonLinkEdit editor={this.editor} allowedTargets={allowedTargets} />, this.container);
 
             var buttonLinkTargetEdit = TestUtils.findRenderedComponentWithType(buttonLink, AlloyEditor.ButtonLinkTargetEdit);
 
@@ -95,7 +97,7 @@
                 }
             ];
 
-            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} allowedTargets={allowedTargets} />, this.container);
+            var buttonLink = ReactDOM.render(<ButtonLinkEdit editor={this.editor} allowedTargets={allowedTargets} />, this.container);
 
             var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, AlloyEditor.ButtonLinkTargetEdit);
 
@@ -106,7 +108,7 @@
 
             var showTargetSelector = false;
 
-            var buttonLink = ReactDOM.render(<AlloyEditor.ButtonLinkEdit editor={this.editor} showTargetSelector={showTargetSelector} />, this.container);
+            var buttonLink = ReactDOM.render(<ButtonLinkEdit editor={this.editor} showTargetSelector={showTargetSelector} />, this.container);
 
             var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, AlloyEditor.ButtonLinkTargetEdit);
 

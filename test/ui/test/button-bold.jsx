@@ -1,8 +1,10 @@
+import ButtonBold from '../../../src/components/buttons/button-bold.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     var KEY_B = 66;
 
@@ -20,9 +22,9 @@
         it('should make a text selection bold on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made bold.');
 
-            var buttonBold = ReactDOM.render(<AlloyEditor.ButtonBold editor={this.editor} />, this.container);
+            var buttonBold = ReactDOM.render(<ButtonBold editor={this.editor} />, this.container);
 
-            Simulate.click(ReactDOM.findDOMNode(buttonBold));
+            ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(buttonBold));
 
             var data = bender.tools.getData(this.nativeEditor, {
                 fixHtml: false,
@@ -35,7 +37,7 @@
         it('should make a text selection bold on [Ctrl|Cmd] + B', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made bold.');
 
-            var buttonBold = ReactDOM.render(<AlloyEditor.ButtonBold editor={this.editor} />, this.container);
+            var buttonBold = ReactDOM.render(<ButtonBold editor={this.editor} />, this.container);
 
             happen.keydown(this._editable, {
                 ctrlKey: true,
@@ -53,7 +55,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'A <strong>{selection}</strong> made bold.');
 
-            var buttonBold = ReactDOM.render(<AlloyEditor.ButtonBold editor={this.editor} />, this.container);
+            var buttonBold = ReactDOM.render(<ButtonBold editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonBold);
 

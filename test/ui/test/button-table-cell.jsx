@@ -1,8 +1,10 @@
+import ButtonTableCell from '../../../src/components/buttons/button-table-cell.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
 
     describe('ButtonTableCell', function() {
         this.timeout(35000);
@@ -16,7 +18,7 @@
         afterEach(Utils.afterEach);
 
         it('should render just the menu button when not expanded', function() {
-            var buttonTableCell = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={false} />, this.container);
+            var buttonTableCell = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={false} />, this.container);
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableCell, 'button');
 
@@ -27,7 +29,7 @@
         });
 
         it('should show a dropdown with the action buttons when expanded', function() {
-            var buttonTableCell = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+            var buttonTableCell = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={true} />, this.container);
 
             var dropdown = TestUtils.findAllInRenderedTree(buttonTableCell, function(component) {
                 return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonCommandsList);
@@ -44,7 +46,7 @@
         it('should insert a cell before the current one when clicking on the cellInsertBefore button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_3_table_extra_cell_second_col.html';
-            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellInsertBefore';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
@@ -58,7 +60,7 @@
         it('should insert a cell after the current one when clicking on the cellInsertAfter button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_3_table_extra_cell_third_col.html';
-            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellInsertAfter';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
@@ -72,7 +74,7 @@
         it('should delete a cell after the current one when clicking on the cellDelete button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_3_table_missing_cell_second_col.html';
-            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellDelete';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
@@ -86,7 +88,7 @@
         it('should merge the selected cells when clicking on the cellMerge button', function() {
             var initialFixture = '3_by_3_table_selected_second_row.html';
             var expectedFixture = '3_by_3_table_merged_second_row.html';
-            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellMerge';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
@@ -100,7 +102,7 @@
         it('should merge the cell below the current one when clicking on the cellMergeDown button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_3_table_merged_second_cell_down.html';
-            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellMergeDown';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
@@ -114,7 +116,7 @@
         it('should merge the cell right to the current one when clicking on the cellMergeRight button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_3_table_merged_second_cell_right.html';
-            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellMergeRight';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
@@ -128,7 +130,7 @@
         it('should split the cell horizontally when clicking on the cellHorizontalSplit button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_3_table_split_second_col.html';
-            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellHorizontalSplit';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
@@ -142,7 +144,7 @@
         it('should split the cell vertically when clicking on the cellVerticalSplit button', function() {
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_3_table_split_second_row.html';
-            var buttonDropdown = ReactDOM.render(<AlloyEditor.ButtonTableCell editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableCell editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'cellVerticalSplit';
 
             Utils.assertDropdownCommandButtonResult.call(this, {

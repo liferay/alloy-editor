@@ -1,8 +1,10 @@
+import ButtonOutdentBlock from '../../../src/components/buttons/button-outdent-block.jsx';
+
 (function () {
 	'use strict';
 
 	var assert = chai.assert;
-	var Simulate = React.addons.TestUtils.Simulate;
+	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonOutdent', function () {
 		this.timeout(35000);
@@ -18,7 +20,7 @@
 		it('should outdent the content when the outdent button is clicked', function () {
 			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100px">This text will be outdent {selection}.</p>');
 
-            var buttonOutdent = ReactDOM.render(<AlloyEditor.ButtonOutdentBlock editor={this.editor} />, this.container);
+            var buttonOutdent = ReactDOM.render(<ButtonOutdentBlock editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
 
@@ -35,7 +37,7 @@
 			this.nativeEditor.config.indentOffset = 25;
 			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100px">This text will be outdent {selection}.</p>');
 
-            var buttonOutdent = ReactDOM.render(<AlloyEditor.ButtonOutdentBlock editor={this.editor} />, this.container);
+            var buttonOutdent = ReactDOM.render(<ButtonOutdentBlock editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
 
@@ -53,7 +55,7 @@
 
 			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100em">This text will be outdent {selection}.</p>');
 
-            var buttonOutdent = ReactDOM.render(<AlloyEditor.ButtonOutdentBlock editor={this.editor} />, this.container);
+            var buttonOutdent = ReactDOM.render(<ButtonOutdentBlock editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
 

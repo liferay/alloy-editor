@@ -1,8 +1,10 @@
+import ButtonParagraphAlignRight from '../../../src/components/buttons/button-paragraph-align-right.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonParagraphAlignRight', function() {
         this.timeout(35000);
@@ -18,7 +20,7 @@
         it('should align the selection to the right on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '{There should be a paragraph aligned to the right.}');
 
-            var buttonParagraphAlignRight = ReactDOM.render(<AlloyEditor.ButtonParagraphAlignRight editor={this.editor} />, this.container);
+            var buttonParagraphAlignRight = ReactDOM.render(<ButtonParagraphAlignRight editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonParagraphAlignRight));
 
@@ -33,7 +35,7 @@
         it('should preserve tags add attributes of the selection', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<h1 style="color: red;">{There should be a paragraph aligned to the right.}</h1>');
 
-            var buttonParagraphAlignRight = ReactDOM.render(<AlloyEditor.ButtonParagraphAlignRight editor={this.editor} />, this.container);
+            var buttonParagraphAlignRight = ReactDOM.render(<ButtonParagraphAlignRight editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonParagraphAlignRight));
 
@@ -48,7 +50,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="text-align: right;">{A paragraph aligned to the right.}</p>');
 
-            var buttonParagraphAlignRight = ReactDOM.render(<AlloyEditor.ButtonParagraphAlignRight editor={this.editor} />, this.container);
+            var buttonParagraphAlignRight = ReactDOM.render(<ButtonParagraphAlignRight editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonParagraphAlignRight);
 

@@ -1,8 +1,10 @@
+import ButtonUnorderedlist from '../../../src/components/buttons/button-ul.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonUnorderedlist', function() {
         this.timeout(35000);
@@ -18,7 +20,7 @@
         it('should make a text selection an unordered list on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<p>There should be a {selection made...</p><p>An unordered} list.</p>');
 
-            var buttonUnorderedlist = ReactDOM.render(<AlloyEditor.ButtonUnorderedlist editor={this.editor} />, this.container);
+            var buttonUnorderedlist = ReactDOM.render(<ButtonUnorderedlist editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonUnorderedlist));
 
@@ -33,7 +35,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<ul><li>A {selection made...</li><li>An unordered} list.</li></ul>');
 
-            var buttonUnorderedlist = ReactDOM.render(<AlloyEditor.ButtonUnorderedlist editor={this.editor} />, this.container);
+            var buttonUnorderedlist = ReactDOM.render(<ButtonUnorderedlist editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonUnorderedlist);
 

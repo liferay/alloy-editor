@@ -1,8 +1,10 @@
+import ButtonTable from '../../../src/components/buttons/button-table.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var TestUtils = React.addons.TestUtils;
+    var TestUtils = ReactTestUtils;
     var Simulate = TestUtils.Simulate;
 
     describe('ButtonTableEdit', function() {
@@ -17,7 +19,7 @@
         afterEach(Utils.afterEach);
 
         it('should render just the table button when not in exclusive mode', function() {
-            var buttonTable = ReactDOM.render(<AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={false} />, this.container);
+            var buttonTable = ReactDOM.render(<ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={false} />, this.container);
 
             var button = TestUtils.findRenderedDOMComponentWithTag(buttonTable, 'button');
 
@@ -28,7 +30,7 @@
         });
 
         it('should show the table edit button when in exclusive mode', function() {
-            var buttonTable = ReactDOM.render(<AlloyEditor.ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
+            var buttonTable = ReactDOM.render(<ButtonTable cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
 
             var editTable = TestUtils.findRenderedDOMComponentWithClass(buttonTable, 'ae-container-edit-table');
 

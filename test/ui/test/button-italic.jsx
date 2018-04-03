@@ -1,8 +1,10 @@
+import ButtonItalic from '../../../src/components/buttons/button-italic.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     var KEY_I = 73;
 
@@ -20,7 +22,7 @@
         it('should make a text selection italic on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made italic.');
 
-            var buttonItalic = ReactDOM.render(<AlloyEditor.ButtonItalic editor={this.editor} />, this.container);
+            var buttonItalic = ReactDOM.render(<ButtonItalic editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonItalic));
 
@@ -35,7 +37,7 @@
         it('should make a text selection italic on [Ctrl|Cmd] + I', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made italic.');
 
-            var buttonItalic = ReactDOM.render(<AlloyEditor.ButtonItalic editor={this.editor} />, this.container);
+            var buttonItalic = ReactDOM.render(<ButtonItalic editor={this.editor} />, this.container);
 
             happen.keydown(this._editable, {
                 ctrlKey: true,
@@ -53,7 +55,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'A <em>{selection}</em> made italic.');
 
-            var buttonItalic = ReactDOM.render(<AlloyEditor.ButtonItalic editor={this.editor} />, this.container);
+            var buttonItalic = ReactDOM.render(<ButtonItalic editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonItalic);
 

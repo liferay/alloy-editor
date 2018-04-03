@@ -1,8 +1,10 @@
+import ButtonH2 from '../../../src/components/buttons/button-h2.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonH2', function() {
         this.timeout(35000);
@@ -18,7 +20,7 @@
         it('should make a text selection h2 on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made h2.');
 
-            var buttonH2 = ReactDOM.render(<AlloyEditor.ButtonH2 editor={this.editor} />, this.container);
+            var buttonH2 = ReactDOM.render(<ButtonH2 editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonH2));
 
@@ -33,7 +35,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<h2>A {selection} made h2.</h2>');
 
-            var buttonH2 = ReactDOM.render(<AlloyEditor.ButtonH2 editor={this.editor} />, this.container);
+            var buttonH2 = ReactDOM.render(<ButtonH2 editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonH2);
 

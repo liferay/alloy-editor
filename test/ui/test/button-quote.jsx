@@ -1,8 +1,10 @@
+import ButtonQuote from '../../../src/components/buttons/button-quote.jsx';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     describe('ButtonQuote', function() {
         this.timeout(35000);
@@ -18,7 +20,7 @@
         it('should make a text selection quote on click', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made quote.');
 
-            var buttonQuote = ReactDOM.render(<AlloyEditor.ButtonQuote editor={this.editor} />, this.container);
+            var buttonQuote = ReactDOM.render(<ButtonQuote editor={this.editor} />, this.container);
 
             Simulate.click(ReactDOM.findDOMNode(buttonQuote));
 
@@ -33,7 +35,7 @@
         it('should add class which represents pressed button', function() {
             bender.tools.selection.setWithHtml(this.nativeEditor, '<blockquote>A {selection} made quote.</blockquote>');
 
-            var buttonQuote = ReactDOM.render(<AlloyEditor.ButtonQuote editor={this.editor} />, this.container);
+            var buttonQuote = ReactDOM.render(<ButtonQuote editor={this.editor} />, this.container);
 
             var buttonDOMNode = ReactDOM.findDOMNode(buttonQuote);
 

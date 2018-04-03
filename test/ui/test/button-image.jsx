@@ -1,3 +1,5 @@
+import ButtonImage from '../../../src/components/buttons/button-image.jsx';
+
 (function() {
     'use strict';
 
@@ -15,7 +17,7 @@
         afterEach(Utils.afterEach);
 
         it('should call a click listener of the file input', function() {
-            var buttonImage = ReactDOM.render(<AlloyEditor.ButtonImage editor={this.editor} />, this.container);
+            var buttonImage = ReactDOM.render(<ButtonImage editor={this.editor} />, this.container);
 
             var fileInputStub = sinon.spy(function(event) {
                 event.preventDefault();
