@@ -1,24 +1,55 @@
 const merge = require('webpack-merge');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const common = require('./webpack.common.js');
 
-module.exports = merge(
+const config = {
+	mode: 'development',
+	devtool: 'inline-source-map'
+};
+
+const All = merge(
 	common.config,
+	config,
 	{
-		mode: 'development',
-		devServer: {
-			contentBase: '.',
-			port: 8080
+		output: {
+			filename: 'alloy-editor-all.js',
 		},
-		devtool: 'inline-source-map',
-		plugins: [
-			new webpack.DefinePlugin({
-				"process.env": {
-					NODE_ENV: JSON.stringify("development"),
-				},
-			}),
-		]
+		devServer: {
+			contentBase: './dist',
+			port: 8080,
+		}
 	}
 );
+
+const Core = merge(
+	common.core,
+	config,
+	{
+		output: {
+			filename: 'alloy-editor-core.js',
+		}
+	}
+);
+
+const NoCKEditor = merge(
+	common.noCkeditor,
+	config,
+	{
+		output: {
+			filename: 'alloy-editor-no-ckeditor.js',
+		}
+	}
+);
+
+const NoReact = merge(
+	common.noReact,
+	config,
+	{
+		output: {
+			filename: 'alloy-editor-no-react.js',
+		}
+	}
+);
+
+module.exports = [All, Core, NoCKEditor, NoReact];
