@@ -46,6 +46,7 @@
     "karma-safari-launcher": "1.0.0",
     "karma-sauce-launcher": "1.1.0",
     "karma-sinon": "1.0.4",
+    "karma-webpack": "^3.0.0",
     "lodash": "4.17.4",
     "mkdirp": "0.5.1",
     "mocha": "3.2.0",
@@ -63,9 +64,11 @@
   "main": "dist/alloy-editor/alloy-editor-no-react.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js --open",
-    "test": "gulp test:saucelabs",
-    "webpack": "webpack --config webpack.prod.js",
-    "webpack:dev": "webpack --config webpack.dev.js"
+    "test:sourcelabs": "gulp test:saucelabs",
+    "test": "gulp test",
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack --config webpack.dev.js",
+    "prepublish": "npm run dev && npm run build"
   },
   "repository": {
     "type": "git",
