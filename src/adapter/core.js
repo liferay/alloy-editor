@@ -2,11 +2,6 @@ import '../core';
 import '../plugins';
 
 import '../components/uibridge/uibridge.js';
-//import '../../../../ui/react/src/uibridge/button.jsx';
-//import '../../../../ui/react/src/uibridge/menu-button.jsx';
-//import '../../../../ui/react/src/uibridge/menu.jsx';
-//import '../../../../ui/react/src/uibridge/panel-menu-button.jsx';
-//import '../../../../ui/react/src/uibridge/richcombo.jsx';
 
 import extend from '../oop/oop';
 import Lang from '../oop/lang';
