@@ -1,3 +1,5 @@
+import createReactClass from 'create-react-class';
+
 (function() {
     'use strict';
 
@@ -45,10 +47,10 @@
                 CKEDITOR.tools.merge(UNSUPPORTED_BUTTON_API, {
                     displayName: buttonName,
 
-                    propTypes: {
-                        editor: PropTypes.object.isRequired,
-                        tabIndex: PropTypes.number
-                    },
+                    // propTypes: {
+                    //     editor: PropTypes.object.isRequired,
+                    //     tabIndex: PropTypes.number
+                    // },
 
                     statics: {
                         key: buttonName

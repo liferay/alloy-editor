@@ -10,7 +10,6 @@
     "babel-preset-react": "^6.24.1",
     "bourbon": "https://github.com/thoughtbot/bourbon.git#v4.2.6",
     "chai": "^3.5.0",
-    "clean-webpack-plugin": "^0.1.18",
     "eslint": "3.1.1",
     "event-stream": "3.3.1",
     "gulp": "~3.9.0",
@@ -64,6 +63,7 @@
   },
   "homepage": "http://alloyeditor.com",
   "dependencies": {
+    "create-react-class": "^15.6.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }
