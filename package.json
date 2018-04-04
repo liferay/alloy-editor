@@ -12,7 +12,6 @@
     "chai": "^3.5.0",
     "eslint": "3.1.1",
     "event-stream": "3.3.1",
-    "gulp": "~3.9.0",
     "karma": "1.4.0",
     "karma-babel-preprocessor": "6.0.1",
     "karma-chai": "0.1.0",
@@ -42,8 +41,8 @@
   "main": "dist/alloy-editor/alloy-editor-no-react.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js --open",
-    "test:sourcelabs": "gulp test:saucelabs",
-    "test": "gulp test",
+    "test:sourcelabs": "karma start karma-saucelabs.js",
+    "test": "karma start karma.js",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
     "prepublish": "npm run dev && npm run build"
