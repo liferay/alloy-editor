@@ -94,7 +94,7 @@ filesToLoad.push({
 });
 
 filesToLoad.push({
-    pattern: 'test/ui/test/*.js*',
+    pattern: 'test/ui/test/!(button-embed-edit|button-embed|button-image|button-link-edit|button-link-target-edit|button-table-cell|button-table-column|button-table-edit|button-styles-list|button-table-heading|button-table-row|button-table-edit|button-table|button-target-list|menubutton-bridge|panel-menu-button-bridge|richcombo-bridge|selection-position|lang|widget-interaction-point).js*',
     included: true,
     watched: false
 });
