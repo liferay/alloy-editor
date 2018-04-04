@@ -40,12 +40,14 @@
   },
   "main": "dist/alloy-editor/alloy-editor-no-react.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js --open",
-    "test:sourcelabs": "karma start karma-saucelabs.js",
-    "test": "karma start karma.js",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
-    "prepublish": "npm run dev && npm run build"
+    "prepublish": "npm run dev && npm run build",
+    "start": "webpack-dev-server --config webpack.dev.js --open",
+    "test:core": "karma start ./test/core/karma.js",
+    "test:plugins": "karma start ./test/plugins/karma.js",
+    "test:sourcelabs": "karma start karma-saucelabs.js",
+    "test": "karma start karma.js"
   },
   "repository": {
     "type": "git",
