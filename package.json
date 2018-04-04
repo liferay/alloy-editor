@@ -42,7 +42,6 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
-    "prepublish": "npm run dev && npm run build",
     "start": "webpack-dev-server --config webpack.dev.js --open",
     "test:core": "karma start ./test/core/karma.js",
     "test:plugins": "karma start ./test/plugins/karma.js",
