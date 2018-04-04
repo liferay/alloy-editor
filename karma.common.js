@@ -147,5 +147,7 @@ module.exports = {
     logLevel: 'info',
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false
+    autoWatch: false,
+
+    singleRun: true,
 };
