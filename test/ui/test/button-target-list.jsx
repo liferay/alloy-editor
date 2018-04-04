@@ -1,4 +1,4 @@
-import ButtonTargetList from '../../../src/components/buttons/button-target-list.jsx';
+import ButtonLinkEdit from '../../../src/components/buttons/button-link-edit.jsx';
 
 (function() {
     'use strict';
