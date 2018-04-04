@@ -1,9 +1,12 @@
+import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
 
-    var Simulate = React.addons.TestUtils.Simulate;
+    var Simulate = ReactTestUtils.Simulate;
 
     var doTestIE = function() {
         if (!CKEDITOR.env.ie) {
