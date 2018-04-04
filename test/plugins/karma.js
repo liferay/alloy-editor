@@ -2,23 +2,24 @@
 
 'use strict';
 
-var alloyEditorDir = 'dist/alloy-editor/';
+const alloyEditorDir = 'dist/alloy-editor/';
 
-var argv = require('yargs').argv;
-var path = require('path');
+const argv = require('yargs').argv;
+const path = require('path');
 
-var coreSrcFiles = require('../core/_src.js');
-var pluginsSrcFiles = require('./_src.js');
+const coreSrcFiles = require('../core/_src.js');
+const pluginsSrcFiles = require('./_src.js');
 
-var preprocessors = {
-    '**/*.html': ['html2js']
+const preprocessors = {
+    '**/*.html': ['html2js'],
+    '+(test|src)/**/*.js': ['webpack']
 };
 
 if (!(argv.debug || argv.d)) {
     preprocessors[path.join(alloyEditorDir, 'test/**/*.js')] = ['coverage'];
 }
 
-var filesToLoad = [
+const filesToLoad = [
     'test/vendor/zepto.js',
     'test/vendor/happen.js',
 
@@ -46,14 +47,14 @@ var filesToLoad = [
     },
 
     /* bender requires CKEDITOR, should be after ckeditor.js */
-    'test/util/bender.js',
+    'scripts/test/bender.js',
 
-    'test/util/utils.js'
+    'scripts/test/utils-ckeditor.js',
 ];
 
 coreSrcFiles.forEach(function(file) {
     filesToLoad.push({
-        pattern: path.join(alloyEditorDir, 'test', file),
+        pattern: path.join('src', file),
         included: true,
         watched: false
     });
@@ -61,7 +62,7 @@ coreSrcFiles.forEach(function(file) {
 
 pluginsSrcFiles.forEach(function(file) {
     filesToLoad.push({
-        pattern: path.join(alloyEditorDir, 'test', file),
+        pattern: path.join('src', file),
         included: true,
         watched: false
     });
@@ -73,7 +74,7 @@ filesToLoad.push({
     watched: false
 });
 
-var defaultConfig = {
+const defaultConfig = {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '../../',
 
@@ -93,6 +94,19 @@ var defaultConfig = {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: preprocessors,
 
+    webpack: {
+        mode: 'development',
+		module: {
+			rules: [{
+                test: /\.(js|jsx)$/,
+				exclude: /(node_modules)/,
+				use: {
+					loader: 'babel-loader'
+				}
+			}]
+		}
+	},
+
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -109,13 +123,15 @@ var defaultConfig = {
     logLevel: 'info',
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false
+    autoWatch: false,
+
+    singleRun: true,
 };
 
-var customConfig = defaultConfig;
+const customConfig = defaultConfig;
 
 if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
-    var customLaunchers = {
+    const customLaunchers = {
         sl_chrome: {
             base: 'SauceLabs',
             browserName: 'chrome'
@@ -150,7 +166,7 @@ if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
         }
     };
 
-    var sauceConfig = {
+    const sauceConfig = {
         browsers: Object.keys(customLaunchers),
 
         browserDisconnectTimeout: 10000,
