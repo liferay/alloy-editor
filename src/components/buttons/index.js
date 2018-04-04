@@ -12,7 +12,7 @@ import ButtonH2 from './button-h2.jsx';
 import ButtonHline from './button-hline.jsx';
 import ButtonImageAlignCenter from './button-image-align-center.jsx';
 import ButtonImageAlignLeft from './button-image-align-left.jsx';
-import ButtonImageAlignRight from './button-image-Align-right.jsx';
+import ButtonImageAlignRight from './button-image-align-right.jsx';
 import ButtonImage from './button-image.jsx';
 import ButtonIndentBlock from './button-indent-block.jsx';
 import ButtonItalic from './button-italic.jsx';
