@@ -6,7 +6,7 @@ import '../components/uibridge/uibridge.js';
 import extend from '../oop/oop';
 import Lang from '../oop/lang';
 import Base from '../oop/base';
-import Selections from '../selections/Selections';
+import Selections from '../selections/selections';
 import UI from '../components/main.jsx';
 
 import React from 'react';
