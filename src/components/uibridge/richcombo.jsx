@@ -55,10 +55,6 @@ import createReactClass from 'create-react-class';
                 CKEDITOR.tools.merge(UNSUPPORTED_RICHCOMBO_API, {
                     displayName: richComboName,
 
-                    // propTypes: {
-                    //     editor: PropTypes.object.isRequired
-                    // },
-
                     statics: {
                         key: richComboName
                     },

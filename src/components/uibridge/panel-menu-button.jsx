@@ -40,10 +40,6 @@ import createReactClass from 'create-react-class';
                 CKEDITOR.tools.merge(UNSUPPORTED_PANEL_MENU_BUTTON_API, {
                     displayName: panelMenuButtonName,
 
-                    // propTypes: {
-                    //     editor: PropTypes.object.isRequired
-                    // },
-
                     statics: {
                         key: panelMenuButtonName
                     },
