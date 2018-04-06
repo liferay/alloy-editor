@@ -46,11 +46,6 @@ import createReactClass from 'create-react-class';
                 CKEDITOR.tools.merge(UNSUPPORTED_MENUBUTTON_API, {
                     displayName: menuButtonName,
 
-                    // propTypes: {
-                    //     editor: PropTypes.object.isRequired,
-                    //     tabIndex: PropTypes.number
-                    // },
-
                     statics: {
                         key: menuButtonName
                     },
