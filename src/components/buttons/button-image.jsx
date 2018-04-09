@@ -7,6 +7,11 @@ import ReactDOM from 'react-dom';
  * @class ButtonImage
  */
 class ButtonImage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.fileInput = React.createRef();
+    }
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -24,7 +29,7 @@ class ButtonImage extends React.Component {
                     <span className="ae-icon-image"></span>
                 </button>
 
-                <input accept="image/*" onChange={this._onInputChange.bind(this)} ref="fileInput" style={inputSyle} type="file"/>
+                <input accept="image/*" onChange={this._onInputChange.bind(this)} ref={this.fileInput} style={inputSyle} type="file"/>
             </div>
         );
     }
@@ -38,7 +43,7 @@ class ButtonImage extends React.Component {
      * @param {SyntheticEvent} event The received click event on the button.
      */
     handleClick() {
-        ReactDOM.findDOMNode(this.refs.fileInput).click();
+        this.fileInput.current.click();
     }
 
     /**
@@ -58,7 +63,7 @@ class ButtonImage extends React.Component {
      * @protected
      */
     _onInputChange() {
-        var inputEl = ReactDOM.findDOMNode(this.refs.fileInput);
+        var inputEl = this.fileInput.current;
 
         // On IE11 the function might be called with an empty array of
         // files. In such a case, no actions will be taken.
@@ -97,25 +102,6 @@ class ButtonImage extends React.Component {
 
         inputEl.value = '';
     }
-
-    /**
-     * Fired before adding images to the editor.
-     *
-     * @event ButtonImage#beforeImageAdd
-     * @instance
-     * @memberof ButtonImage
-     * @param {Array} imageFiles Array of image files
-     */
-
-    /**
-     * Fired when an image is being added to the editor successfully.
-     *
-     * @event ButtonImage#imageAdd
-     * @instance
-     * @memberof ButtonImage
-     * @param {CKEDITOR.dom.element} el The created image with src as Data URI
-     * @param {File} file The image file
-     */
 }
 
 /**

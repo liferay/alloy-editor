@@ -23,7 +23,7 @@ import ButtonImage from '../../../src/components/buttons/button-image.jsx';
                 event.preventDefault();
             });
 
-            ReactDOM.findDOMNode(buttonImage.refs.fileInput).addEventListener('click', fileInputStub);
+            ReactDOM.findDOMNode(buttonImage.fileInput.current).addEventListener('click', fileInputStub);
 
             buttonImage.handleClick();
 
