@@ -13,7 +13,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 
     var KEY_ESC = 27;
 
-    var getFixture = Utils.getFixture('src/ui/react/test/fixtures');
+    var getFixture = Utils.getFixture('test/ui/test/fixtures');
 
     describe('ButtonEmbedEdit Component', function() {
         this.timeout(35000);
@@ -47,7 +47,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 
             stub.restore();
 
-            assert.strictEqual(document.activeElement, buttonEmbedEdit.refs.linkInput);
+            assert.strictEqual(document.activeElement, buttonEmbedEdit.linkInput.current);
 
             done();
         });
@@ -66,7 +66,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
             window.requestAnimationFrame = requestAnimationFrame;
             stub.restore();
 
-            assert.strictEqual(document.activeElement, buttonEmbedEdit.refs.linkInput);
+            assert.strictEqual(document.activeElement, buttonEmbedEdit.linkInput.current);
         });
 
         it('should show the selected embed url in the link input', function() {
@@ -76,7 +76,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 
             var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
-            assert.strictEqual(buttonEmbedEdit.refs.linkInput.value, 'https://foo.com');
+            assert.strictEqual(buttonEmbedEdit.linkInput.current.value, 'https://foo.com');
         });
 
         it('should remove the embed element when the remove button is clicked', function() {
@@ -107,13 +107,13 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 
             buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
-            assert.strictEqual(buttonEmbedEdit.refs.linkInput.value, 'https://foo.com');
+            assert.strictEqual(buttonEmbedEdit.linkInput.current.value, 'https://foo.com');
 
             this.nativeEditor.getSelection().selectElement(this.nativeEditor.element.findOne('#embedbar'));
 
             buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
-            assert.strictEqual(buttonEmbedEdit.refs.linkInput.value, 'https://bar.com');
+            assert.strictEqual(buttonEmbedEdit.linkInput.current.value, 'https://bar.com');
         });
 
         it('should not allow to update the embed link if the link input is empty', function() {
@@ -131,7 +131,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 
             var clearButton = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-remove');
 
-            var linkInput = buttonEmbedEdit.refs.linkInput;
+            var linkInput = buttonEmbedEdit.linkInput.current;
 
             TestUtils.Simulate.change(linkInput, {
                 target: {
@@ -153,7 +153,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 
             var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
 
-            TestUtils.Simulate.change(buttonEmbedEdit.refs.linkInput, {
+            TestUtils.Simulate.change(buttonEmbedEdit.linkInput.current, {
                 target: {
                     value: 'https://foo.com'
                 }
@@ -181,13 +181,13 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 
             var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
 
-            Simulate.change(buttonEmbedEdit.refs.linkInput, {
+            Simulate.change(buttonEmbedEdit.linkInput.current, {
                 target: {
                     value: 'https://foo.com'
                 }
             });
 
-            Simulate.keyDown(buttonEmbedEdit.refs.linkInput, {key: "Enter", keyCode: KEY_ENTER, which: KEY_ENTER});
+            Simulate.keyDown(buttonEmbedEdit.linkInput.current, {key: "Enter", keyCode: KEY_ENTER, which: KEY_ENTER});
 
             var data = bender.tools.getData(this.nativeEditor, {
                 fixHtml: true,
@@ -203,7 +203,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 
             var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit cancelExclusive={spy} editor={this.editor} renderExclusive={true} />, this.container);
 
-            Simulate.keyDown(buttonEmbedEdit.refs.linkInput, {key: "Escape", keyCode: KEY_ESC, which: KEY_ESC});
+            Simulate.keyDown(buttonEmbedEdit.linkInput.current, {key: "Escape", keyCode: KEY_ESC, which: KEY_ESC});
 
             assert.isTrue(spy.calledOnce);
         });
