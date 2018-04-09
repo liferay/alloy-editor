@@ -14,6 +14,7 @@ class ButtonEmbedEdit extends React.Component {
     constructor(props) {
         super(props);
 
+        this.linkInput = React.createRef();
         this.state = this.getInitialState();
     }
 
@@ -103,7 +104,7 @@ class ButtonEmbedEdit extends React.Component {
                     <span className="ae-icon-bin"></span>
                 </button>
                 <div className="ae-container-input xxl">
-                    <input className="ae-input" onChange={this._handleLinkHrefChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} placeholder={AlloyEditor.Strings.editLink} ref="linkInput" type="text" value={this.state.linkHref}></input>
+                    <input className="ae-input" onChange={this._handleLinkHrefChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} placeholder={AlloyEditor.Strings.editLink} ref={this.linkInput} type="text" value={this.state.linkHref}></input>
                     <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink.bind(this)} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
                 </div>
                 <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._embedLink.bind(this)} title={AlloyEditor.Strings.confirm}>
@@ -158,7 +159,7 @@ class ButtonEmbedEdit extends React.Component {
      * @protected
      */
     _focusLinkInput() {
-        ReactDOM.findDOMNode(this.refs.linkInput).focus();
+        this.linkInput.current.focus();
     }
 
     /**
