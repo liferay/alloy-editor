@@ -24,6 +24,7 @@ class ButtonLinkEdit extends React.Component {
         var href = link ? link.getAttribute('href') : '';
         var target = link ? link.getAttribute('target') : props.defaultLinkTarget;
 
+        this.linkInput = React.createRef();
         this.state = {
             autocompleteSelected: false,
             element: link,
@@ -136,7 +137,7 @@ class ButtonLinkEdit extends React.Component {
                 <div className="ae-container-input xxl">
                     {targetButtonEdit}
                     <div className="ae-container-input">
-                        <input className="ae-input" onChange={this._handleLinkHrefChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} { ...placeholderProp } ref="linkInput" type="text" value={this.state.linkHref}></input>
+                        <input className="ae-input" onChange={this._handleLinkHrefChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} { ...placeholderProp } ref={this.linkInput} type="text" value={this.state.linkHref}></input>
                         {autocompleteDropdown}
                     </div>
                     {buttonClearLink}
@@ -178,7 +179,7 @@ class ButtonLinkEdit extends React.Component {
         var instance = this;
 
         var focusLinkEl = function() {
-            ReactDOM.findDOMNode(instance.refs.linkInput).focus();
+            instance.linkInput.current.focus();
         };
 
         if (window.requestAnimationFrame) {
