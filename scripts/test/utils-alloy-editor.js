@@ -9,7 +9,7 @@
         var assertResult = window.Utils.assertResult('src/ui/react/test/fixtures');
 
         return function(config) {
-            var TestUtils = React.addons.TestUtils;
+            var TestUtils = ReactTestUtils;
             var Simulate = TestUtils.Simulate;
 
             var command = function() {
