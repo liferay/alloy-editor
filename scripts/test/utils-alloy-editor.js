@@ -6,7 +6,7 @@
     }
 
     window.Utils.assertDropdownCommandButtonResult = (function() {
-        var assertResult = window.Utils.assertResult('src/ui/react/test/fixtures');
+        var assertResult = window.Utils.assertResult('test/ui/test/fixtures');
 
         return function(config) {
             var TestUtils = ReactTestUtils;
@@ -14,7 +14,7 @@
 
             var command = function() {
                 var dropdown = TestUtils.findAllInRenderedTree(config.buttonDropdown, function(component) {
-                    return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonCommandsList);
+                    return TestUtils.isCompositeComponentWithType(component, config.buttonCommandsList);
                 });
 
                 assert.ok(dropdown);
