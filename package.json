@@ -65,7 +65,7 @@
   "homepage": "http://alloyeditor.com",
   "dependencies": {
     "create-react-class": "^15.6.3",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1"
   }
 }
