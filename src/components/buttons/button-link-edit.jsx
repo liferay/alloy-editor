@@ -20,21 +20,8 @@ class ButtonLinkEdit extends React.Component {
     constructor(props) {
         super(props);
 
-        var link = new CKEDITOR.Link(props.editor.get('nativeEditor')).getFromSelection();
-        var href = link ? link.getAttribute('href') : '';
-        var target = link ? link.getAttribute('target') : props.defaultLinkTarget;
-
         this.linkInput = React.createRef();
-        this.state = {
-            autocompleteSelected: false,
-            element: link,
-            initialLink: {
-                href: href,
-                target: target
-            },
-            linkHref: href,
-            linkTarget: target
-        };
+        this.state = this._getInitialState();
     }
 
     /**
@@ -64,7 +51,7 @@ class ButtonLinkEdit extends React.Component {
      * @method componentWillReceiveProps
      */
     componentWillReceiveProps() {
-        this.replaceState(this.getInitialState());
+        this.setState(this._getInitialState());
     }
 
     /**
@@ -111,12 +98,6 @@ class ButtonLinkEdit extends React.Component {
             autocompleteDropdown = <ButtonLinkAutocompleteList {...autocompleteDropdownProps} />;
         }
 
-        var targetButtonEdit;
-
-        if (this.props.showTargetSelector) {
-            targetButtonEdit = <ButtonLinkTargetEdit {...targetSelector} />;
-        }
-
         var buttonClearLink;
 
         if (this.state.linkHref) {
@@ -135,7 +116,7 @@ class ButtonLinkEdit extends React.Component {
                     <span className="ae-icon-unlink"></span>
                 </button>
                 <div className="ae-container-input xxl">
-                    {targetButtonEdit}
+                    {this.props.showTargetSelector && <ButtonLinkTargetEdit {...targetSelector} />}
                     <div className="ae-container-input">
                         <input className="ae-input" onChange={this._handleLinkHrefChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} { ...placeholderProp } ref={this.linkInput} type="text" value={this.state.linkHref}></input>
                         {autocompleteDropdown}
@@ -147,6 +128,34 @@ class ButtonLinkEdit extends React.Component {
                 </button>
             </div>
         );
+    }
+
+    /**
+     * The return value will be used as the initial value of this.state.
+     *
+     * @instance
+     * @memberof ButtonLinkEdit
+     * @method _getInitialState
+     * @protected
+     * @return {Object}
+     */
+    _getInitialState() {
+        const {editor, defaultLinkTarget} = this.props;
+
+        const link = new CKEDITOR.Link(editor.get('nativeEditor')).getFromSelection();
+        const href = link ? link.getAttribute('href') : '';
+        const target = link ? link.getAttribute('target') : defaultLinkTarget;
+
+        return {
+            autocompleteSelected: false,
+            element: link,
+            initialLink: {
+                href: href,
+                target: target
+            },
+            linkHref: href,
+            linkTarget: target
+        };
     }
 
     /**
