@@ -1,4 +1,5 @@
 import ButtonStylesList from '../../../src/components/buttons/button-styles-list.jsx';
+import ButtonStylesListItemRemove from '../../../src/components/buttons/button-styles-list-item-remove.jsx';
 
 (function() {
     'use strict';
@@ -27,9 +28,9 @@ import ButtonStylesList from '../../../src/components/buttons/button-styles-list
                 }
             ];
 
-            var buttonStylesList = ReactDOM.render(<ButtonStylesList editor={this.editor} styles={styles} />, this.container);
+            var buttonStylesList = ReactDOM.render(<ButtonStylesList toggleDropdown={sinon.stub()} editor={this.editor} styles={styles} />, this.container);
 
-            assert.isObject(TestUtils.findRenderedComponentWithType(buttonStylesList, AlloyEditor.ButtonStylesListItemRemove));
+            assert.isObject(TestUtils.findRenderedComponentWithType(buttonStylesList, ButtonStylesListItemRemove));
         });
 
         it('should prevent rendering of remove styles button', function() {
@@ -45,7 +46,7 @@ import ButtonStylesList from '../../../src/components/buttons/button-styles-list
             var buttonStylesList = ReactDOM.render(<ButtonStylesList editor={this.editor} showRemoveStylesItem={false} styles={styles} />, this.container);
 
             assert.throws(function() {
-                TestUtils.findRenderedComponentWithType(buttonStylesList, AlloyEditor.ButtonStylesListItemRemove)
+                TestUtils.findRenderedComponentWithType(buttonStylesList, ButtonStylesListItemRemove)
             });
         });
     });
