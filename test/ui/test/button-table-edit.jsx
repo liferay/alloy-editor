@@ -10,7 +10,7 @@ import ButtonTableEdit from '../../../src/components/buttons/button-table-edit.j
     var KEY_ENTER = 13;
     var KEY_ESC = 27;
 
-    var getFixture = Utils.getFixture('src/ui/react/test/fixtures');
+    var getFixture = Utils.getFixture('test/ui/test/fixtures');
 
     describe('ButtonTableEdit', function() {
         this.timeout(35000);
@@ -43,8 +43,8 @@ import ButtonTableEdit from '../../../src/components/buttons/button-table-edit.j
         it('should create a 6 x 4 table based on the rows and cols inputs when clicking on the confirm button', function() {
             var buttonTableEdit = ReactDOM.render(<ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
-            Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
-            Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
+            Simulate.change(buttonTableEdit.rowsRef.current, {target: {value: 6}});
+            Simulate.change(buttonTableEdit.colsRef.current, {target: {value: 4}});
 
             var confirmButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableEdit, 'button');
 
@@ -63,10 +63,10 @@ import ButtonTableEdit from '../../../src/components/buttons/button-table-edit.j
         it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the rows input', function() {
             var buttonTableEdit = ReactDOM.render(<ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
-            Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
-            Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
+            Simulate.change(buttonTableEdit.rowsRef.current, {target: {value: 6}});
+            Simulate.change(buttonTableEdit.colsRef.current, {target: {value: 4}});
 
-            Simulate.keyDown(ReactDOM.findDOMNode(buttonTableEdit.refs.rows), {keyCode: KEY_ENTER});
+            Simulate.keyDown(buttonTableEdit.rowsRef.current, {keyCode: KEY_ENTER});
 
             var data = bender.tools.getData(this.nativeEditor, {
                 fixHtml: true,
@@ -81,10 +81,10 @@ import ButtonTableEdit from '../../../src/components/buttons/button-table-edit.j
         it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the cols input', function() {
             var buttonTableEdit = ReactDOM.render(<ButtonTableEdit cancelExclusive={sinon.stub()} editor={this.editor} />, this.container);
 
-            Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.rows), {target: {value: 6}});
-            Simulate.change(ReactDOM.findDOMNode(buttonTableEdit.refs.cols), {target: {value: 4}});
+            Simulate.change(buttonTableEdit.rowsRef.current, {target: {value: 6}});
+            Simulate.change(buttonTableEdit.colsRef.current, {target: {value: 4}});
 
-            Simulate.keyDown(ReactDOM.findDOMNode(buttonTableEdit.refs.cols), {keyCode: KEY_ENTER});
+            Simulate.keyDown(buttonTableEdit.rowsRef.current, {keyCode: KEY_ENTER});
 
             var data = bender.tools.getData(this.nativeEditor, {
                 fixHtml: true,
@@ -103,7 +103,7 @@ import ButtonTableEdit from '../../../src/components/buttons/button-table-edit.j
 
             bender.tools.selection.setWithHtml(this.nativeEditor, '');
 
-            Simulate.keyDown(ReactDOM.findDOMNode(buttonTableEdit.refs.rows), {keyCode: KEY_ESC});
+            Simulate.keyDown(buttonTableEdit.rowsRef.current, {keyCode: KEY_ESC});
 
             var data = bender.tools.getData(this.nativeEditor, {
                 fixHtml: true,
@@ -122,7 +122,7 @@ import ButtonTableEdit from '../../../src/components/buttons/button-table-edit.j
 
             bender.tools.selection.setWithHtml(this.nativeEditor, '');
 
-            Simulate.keyDown(ReactDOM.findDOMNode(buttonTableEdit.refs.cols), {keyCode: KEY_ESC});
+            Simulate.keyDown(buttonTableEdit.colsRef.current, {keyCode: KEY_ESC});
 
             var data = bender.tools.getData(this.nativeEditor, {
                 fixHtml: true,
