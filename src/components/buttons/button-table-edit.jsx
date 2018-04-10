@@ -21,6 +21,8 @@ class ButtonTableEdit extends React.Component {
     constructor(props) {
         super(props);
 
+        this.rowsRef = React.createRef();
+        this.colsRef = React.createRef();
         this.state = {
             cols: 3,
             rows: 3
@@ -38,7 +40,7 @@ class ButtonTableEdit extends React.Component {
      * @method componentDidMount
      */
     componentDidMount() {
-        ReactDOM.findDOMNode(this.refs.rows).focus();
+        this.rowsRef.current.focus();
     }
 
     /**
@@ -121,12 +123,12 @@ class ButtonTableEdit extends React.Component {
             <div className="ae-container-edit-table">
                 <label htmlFor={rowsId}>{AlloyEditor.Strings.rows}</label>
                 <div className="ae-container-input small">
-                    <input className="ae-input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} min="1" onKeyDown={this._handleKeyDown.bind(this)} placeholder="Rows" ref="rows" type="number" value={this.state.rows}></input>
+                    <input className="ae-input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} min="1" onKeyDown={this._handleKeyDown.bind(this)} placeholder="Rows" ref={this.rowsRef} type="number" value={this.state.rows}></input>
                 </div>
 
                 <label htmlFor={colsId}>{AlloyEditor.Strings.columns}</label>
                 <div className="ae-container-input small">
-                    <input className="ae-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" onKeyDown={this._handleKeyDown.bind(this)} placeholder="Colums" ref="cols" type="number" value={this.state.cols}></input>
+                    <input className="ae-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" onKeyDown={this._handleKeyDown.bind(this)} placeholder="Colums" ref={this.colsRef} type="number" value={this.state.cols}></input>
                 </div>
 
                 <button aria-label="Confirm" className="ae-button" onClick={this._createTable.bind(this)}>
