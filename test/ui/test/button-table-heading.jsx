@@ -1,4 +1,5 @@
 import ButtonTableHeading from '../../../src/components/buttons/button-table-heading.jsx';
+import ButtonCommandsList from '../../../src/components/buttons/button-commands-list.jsx';
 
 (function() {
     'use strict';
@@ -24,7 +25,7 @@ import ButtonTableHeading from '../../../src/components/buttons/button-table-hea
         afterEach(Utils.afterEach);
 
         it('should render just the menu button when not expanded', function() {
-            var buttonTableHeading = ReactDOM.render(<ButtonTableHeading editor={this.editor} expanded={false} />, this.container);
+            var buttonTableHeading = ReactDOM.render(<ButtonTableHeading toggleDropdown={sinon.stub()} editor={this.editor} expanded={false} />, this.container);
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableHeading, 'button');
 
@@ -35,10 +36,10 @@ import ButtonTableHeading from '../../../src/components/buttons/button-table-hea
         });
 
         it('should show a dropdown with the action buttons when expanded', function() {
-            var buttonTableHeading = ReactDOM.render(<ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
+            var buttonTableHeading = ReactDOM.render(<ButtonTableHeading toggleDropdown={sinon.stub()} editor={this.editor} expanded={true} />, this.container);
 
             var dropdown = TestUtils.findAllInRenderedTree(buttonTableHeading, function(component) {
-                return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonCommandsList);
+                return TestUtils.isCompositeComponentWithType(component, ButtonCommandsList);
             });
 
             assert.ok(dropdown);
@@ -81,7 +82,7 @@ import ButtonTableHeading from '../../../src/components/buttons/button-table-hea
                 var errorMessage = 'Changing table heading from ' + testData.initial + ' to ' + testData.expected + ' did not produce the expected result';
                 var initialFixture = headingFixtures[testData.initial];
                 var expectedFixture = headingFixtures[testData.expected];
-                var buttonDropdown = ReactDOM.render(<ButtonTableHeading editor={this.editor} expanded={true} />, this.container);
+                var buttonDropdown = ReactDOM.render(<ButtonTableHeading toggleDropdown={sinon.stub()} editor={this.editor} expanded={true} />, this.container);
                 var buttonCommand = 'tableHeading' + testData.expected;
 
                 Utils.assertDropdownCommandButtonResult.call(this,
@@ -91,7 +92,8 @@ import ButtonTableHeading from '../../../src/components/buttons/button-table-hea
                         errorMessage: errorMessage,
                         expectedFixture: expectedFixture,
                         initialFixture: initialFixture,
-                        selectionFn: selectTable
+                        selectionFn: selectTable,
+                        buttonCommandsList: ButtonCommandsList
                     }
                 );
             }.bind(this));
