@@ -1,4 +1,5 @@
 import ButtonTableColumn from '../../../src/components/buttons/button-table-column.jsx';
+import ButtonCommandsList from '../../../src/components/buttons/button-commands-list.jsx';
 
 (function() {
     'use strict';
@@ -18,7 +19,9 @@ import ButtonTableColumn from '../../../src/components/buttons/button-table-colu
         afterEach(Utils.afterEach);
 
         it('should render just the menu button when not expanded', function() {
-            var buttonTableCol = ReactDOM.render(<ButtonTableColumn editor={this.editor} expanded={false} />, this.container);
+            var toggleDropdown = sinon.stub();
+
+            var buttonTableCol = ReactDOM.render(<ButtonTableColumn toggleDropdown={toggleDropdown} editor={this.editor} expanded={false} />, this.container);
 
             var menuButton = TestUtils.findRenderedDOMComponentWithTag(buttonTableCol, 'button');
 
@@ -29,10 +32,12 @@ import ButtonTableColumn from '../../../src/components/buttons/button-table-colu
         });
 
         it('should show a dropdown with the action buttons when expanded', function() {
-            var buttonTableCol = ReactDOM.render(<ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
+            var toggleDropdown = sinon.stub();
+
+            var buttonTableCol = ReactDOM.render(<ButtonTableColumn toggleDropdown={toggleDropdown} editor={this.editor} expanded={true} />, this.container);
 
             var dropdown = TestUtils.findAllInRenderedTree(buttonTableCol, function(component) {
-                return TestUtils.isCompositeComponentWithType(component, AlloyEditor.ButtonCommandsList);
+                return TestUtils.isCompositeComponentWithType(component, ButtonCommandsList);
             });
 
             assert.ok(dropdown);
@@ -44,44 +49,50 @@ import ButtonTableColumn from '../../../src/components/buttons/button-table-colu
         });
 
         it('should insert a col before the current one when clicking on the columnInsertBefore button', function() {
+            var toggleDropdown = sinon.stub();
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_4_table_second_col_empty.html';
-            var buttonDropdown = ReactDOM.render(<ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableColumn toggleDropdown={toggleDropdown} editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'columnInsertBefore';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
                 buttonCommand: buttonCommand,
                 buttonDropdown: buttonDropdown,
                 expectedFixture: expectedFixture,
-                initialFixture: initialFixture
+                initialFixture: initialFixture,
+                buttonCommandsList: ButtonCommandsList
             });
         });
 
         it('should insert a col after the current one when clicking on the columnInsertAfter button', function() {
+            var toggleDropdown = sinon.stub();
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_4_table_third_col_empty.html';
-            var buttonDropdown = ReactDOM.render(<ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableColumn toggleDropdown={toggleDropdown} editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'columnInsertAfter';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
                 buttonCommand: buttonCommand,
                 buttonDropdown: buttonDropdown,
                 expectedFixture: expectedFixture,
-                initialFixture: initialFixture
+                initialFixture: initialFixture,
+                buttonCommandsList: ButtonCommandsList
             });
         });
 
         it('should delete the current col when clicking on the columnDelete button', function() {
+            var toggleDropdown = sinon.stub();
             var initialFixture = '3_by_3_table.html';
             var expectedFixture = '3_by_2_table.html';
-            var buttonDropdown = ReactDOM.render(<ButtonTableColumn editor={this.editor} expanded={true} />, this.container);
+            var buttonDropdown = ReactDOM.render(<ButtonTableColumn toggleDropdown={toggleDropdown} editor={this.editor} expanded={true} />, this.container);
             var buttonCommand = 'columnDelete';
 
             Utils.assertDropdownCommandButtonResult.call(this, {
                 buttonCommand: buttonCommand,
                 buttonDropdown: buttonDropdown,
                 expectedFixture: expectedFixture,
-                initialFixture: initialFixture
+                initialFixture: initialFixture,
+                buttonCommandsList: ButtonCommandsList
             });
         });
     });
