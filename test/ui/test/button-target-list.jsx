@@ -1,4 +1,7 @@
+import ButtonDropdown from '../../../src/components/buttons/button-dropdown.jsx';
 import ButtonLinkEdit from '../../../src/components/buttons/button-link-edit.jsx';
+import ButtonLinkTargetEdit from '../../../src/components/buttons/button-link-target-edit.jsx';
+import ButtonTargetList from '../../../src/components/buttons/button-target-list.jsx';
 
 (function() {
     'use strict';
@@ -23,19 +26,19 @@ import ButtonLinkEdit from '../../../src/components/buttons/button-link-edit.jsx
 
             var buttonLink = ReactDOM.render(<ButtonLinkEdit editor={this.editor} />, this.container);
 
-            var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, AlloyEditor.Buttons.ButtonLinkTargetEdit);
+            var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, ButtonLinkTargetEdit);
 
             var button = ReactDOM.findDOMNode(buttonLinkTargetEditRendered[0]).getElementsByTagName('button')[0];
 
             Simulate.click(button);
 
-            var ButtonDropdown = TestUtils.scryRenderedComponentsWithType(buttonLink, AlloyEditor.Buttons.ButtonDropdown);
+            var buttonDropdown = TestUtils.scryRenderedComponentsWithType(buttonLink, ButtonDropdown);
 
-            var ButtonTargetList = TestUtils.scryRenderedComponentsWithType(buttonLink, AlloyEditor.Buttons.ButtonTargetList);
+            var buttonTargetList = TestUtils.scryRenderedComponentsWithType(buttonLink, ButtonTargetList);
 
-            assert.strictEqual(ButtonTargetList.length, 1);
+            assert.strictEqual(buttonTargetList.length, 1);
 
-            assert.strictEqual(ButtonDropdown.length, 1);
+            assert.strictEqual(buttonDropdown.length, 1);
         });
     });
 }());
