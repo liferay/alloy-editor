@@ -1,4 +1,5 @@
-import ButtonLinkEdit from '../../../src/components/buttons/button-link.jsx';
+import ButtonLinkEdit from '../../../src/components/buttons/button-link-edit.jsx';
+import ButtonLinkTargetEdit from '../../../src/components/buttons/button-link-target-edit.jsx';
 
 (function() {
     'use strict';
@@ -22,7 +23,7 @@ import ButtonLinkEdit from '../../../src/components/buttons/button-link.jsx';
 
             var buttonLink = ReactDOM.render(<ButtonLinkEdit editor={this.editor} />, this.container);
 
-            var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, AlloyEditor.Buttons.ButtonLinkTargetEdit);
+            var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, ButtonLinkTargetEdit);
 
             assert.strictEqual(buttonLinkTargetEditRendered.length, 1);
         });
@@ -32,7 +33,7 @@ import ButtonLinkEdit from '../../../src/components/buttons/button-link.jsx';
 
             var buttonLink = ReactDOM.render(<ButtonLinkEdit editor={this.editor} showTargetSelector={false}/>, this.container);
 
-            var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, AlloyEditor.Buttons.ButtonLinkTargetEdit);
+            var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(buttonLink, ButtonLinkTargetEdit);
 
             assert.strictEqual(buttonLinkTargetEditRendered.length, 0);
         });
