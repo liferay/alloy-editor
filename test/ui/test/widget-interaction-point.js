@@ -1,7 +1,10 @@
+import WidgetPosition from './mock/widget-position';
+
 (function() {
     'use strict';
 
     var assert = chai.assert;
+    var WidgetPositionComponent = new WidgetPosition();
 
     describe('widget interaction point', function() {
         this.timeout(35000);
@@ -14,8 +17,8 @@
             Utils.beforeEach.call(this);
 
             this.objProps = {
-                _getXPoint: AlloyEditor.WidgetInteractionPoint._getXPoint,
-                _getYPoint: AlloyEditor.WidgetInteractionPoint._getYPoint,
+                _getXPoint: WidgetPositionComponent._getXPoint,
+                _getYPoint: WidgetPositionComponent._getYPoint,
                 props: {
                     editorEvent: {
                         data: {
@@ -57,7 +60,7 @@
             it('Should return undefined when toolbar doesn\'t have editorEvent prop', function () {
                 this.objProps.props.editorEvent = null;
 
-                assert.isUndefined(AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.isUndefined(WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
 
             it('Should appear over selection when select only one line although you set direction as CKEDITOR.SELECTION_TOP_TO_BOTTOM', function () {
@@ -69,7 +72,7 @@
                     y: 600
                 };
 
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.deepEqual(result, WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
 
             it('Should appear under selection when select more than one line and direction is 0 and you select top to bottom', function () {
@@ -83,7 +86,7 @@
                     y: 700
                 };
 
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.deepEqual(result, WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
 
             it('Should appear under selection when select more than one line and direction is 0 and you select bottom to top', function () {
@@ -99,7 +102,7 @@
                     y: 700
                 };
 
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.deepEqual(result, WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
 
             it('Should appear over first character of the selection when you select right to left ', function() {
@@ -110,7 +113,7 @@
                     y: 600
                 };
 
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.deepEqual(result, WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
 
             it('Should appear over last character of the selection', function() {
@@ -122,7 +125,7 @@
                     y: 600
                 };
 
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.deepEqual(result, WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
 
             it('Should appear under selection when you select more than one lines top to bottom', function() {
@@ -137,7 +140,7 @@
                     x: 300,
                     y: 500
                 };
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.deepEqual(result, WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
 
 
@@ -154,7 +157,7 @@
                     y: 500
                 };
 
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.deepEqual(result, WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
         });
 
@@ -169,7 +172,7 @@
                     y: 600
                 };
 
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.deepEqual(result, WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
 
             it('Should appear under selection (more than one line top to bottom) and it is in the middle of the selection', function() {
@@ -183,7 +186,7 @@
                     y: 5
                 };
 
-                assert.deepEqual(result, AlloyEditor.WidgetInteractionPoint.getInteractionPoint.call(this.objProps));
+                assert.deepEqual(result, WidgetPositionComponent.getInteractionPoint.call(this.objProps));
             });
         });
 
