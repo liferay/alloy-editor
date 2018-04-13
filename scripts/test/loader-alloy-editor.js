@@ -25,7 +25,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 
     if (!window.AlloyEditor) {
         window.AlloyEditor = AlloyEditor;
-        window.ALLOYEDITOR_BASEPATH = 'dist/alloy-editor';
+        window.ALLOYEDITOR_BASEPATH = 'dist/alloy-editor/';
 
         window.AlloyEditor.Core = Core;
         window.AlloyEditor.Attribute = Attribute;
