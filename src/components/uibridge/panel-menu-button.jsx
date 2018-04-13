@@ -1,3 +1,4 @@
+import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import createReactClass from 'create-react-class';
 
 (function() {
@@ -107,9 +108,9 @@ import createReactClass from 'create-react-class';
                         // Use block.keys to configure the panel keyboard navigation
 
                         return (
-                            <AlloyEditor.ButtonDropdown onDismiss={this.props.toggleDropdown}>
+                            <ButtonDropdown onDismiss={this.props.toggleDropdown}>
                                 <div className={blockElement.getAttribute('class')} dangerouslySetInnerHTML={{__html: blockElement.getHtml()}} />
-                            </AlloyEditor.ButtonDropdown>
+                            </ButtonDropdown>
                         );
                     }
                 })
