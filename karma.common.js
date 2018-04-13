@@ -136,6 +136,11 @@ module.exports = {
 		}
 	},
 
+    webpackMiddleware: {
+        logLevel: 'error',
+        stats: 'errors-only'
+    },
+
     // web server port
     port: 9876,
 
