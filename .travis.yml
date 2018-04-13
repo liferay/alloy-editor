@@ -14,5 +14,4 @@ node_js:
 - '8'
 
 script:
-    - npm run dev
     - npm run test:saucelabs
