@@ -1,3 +1,4 @@
+import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import createReactClass from 'create-react-class';
 
 (function() {
@@ -71,27 +72,17 @@ import createReactClass from 'create-react-class';
                             iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(':') + 1);
                         }
 
-                        var menu;
-
-                        if (this.props.expanded) {
-                            menu = this._getMenu();
-                        }
-
                         return (
                             <div className="ae-container ae-has-dropdown">
                                 <button aria-expanded={this.props.expanded} aria-label={MENUBUTTON_DEFS[editor.name][menuButtonName].label} className={buttonClassName} onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={MENUBUTTON_DEFS[editor.name][menuButtonName].label}>
                                     <span className={iconClassName} style={iconStyle}></span>
                                 </button>
-                                {menu}
+                                {this.props.expanded && (
+                                    <ButtonDropdown onDismiss={this.props.toggleDropdown}>
+                                        {this._getMenuItems()}
+                                    </ButtonDropdown>
+                                )}
                             </div>
-                        );
-                    },
-
-                    _getMenu: function() {
-                        return (
-                            <AlloyEditor.ButtonDropdown onDismiss={this.props.toggleDropdown}>
-                                {this._getMenuItems()}
-                            </AlloyEditor.ButtonDropdown>
                         );
                     },
 

@@ -1,3 +1,4 @@
+import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import createReactClass from 'create-react-class';
 
 (function() {
@@ -106,12 +107,6 @@ import createReactClass from 'create-react-class';
 
                         var richComboLabel = RICH_COMBO_DEFS[editor.name][richComboName].currentValue || richComboDefinition.label;
 
-                        var itemsList;
-
-                        if (this.props.expanded) {
-                            itemsList = this._getItemsList();
-                        }
-
                         return (
                             <div className="ae-container-dropdown ae-has-dropdown">
                                 <button aria-expanded={this.props.expanded} aria-label={richComboLabel} className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={richComboLabel}>
@@ -120,7 +115,11 @@ import createReactClass from 'create-react-class';
                                         <span className="ae-icon-arrow"></span>
                                     </div>
                                 </button>
-                                {itemsList}
+                                {this.props.expanded && (
+                                    <ButtonDropdown onDismiss={this.props.toggleDropdown}>
+                                        {this._getItems()}
+                                    </ButtonDropdown>
+                                )}
                             </div>
                         );
                     },
@@ -146,14 +145,6 @@ import createReactClass from 'create-react-class';
                         }.bind(this));
 
                         return items;
-                    },
-
-                    _getItemsList: function() {
-                        return (
-                            <AlloyEditor.ButtonDropdown onDismiss={this.props.toggleDropdown}>
-                                {this._getItems()}
-                            </AlloyEditor.ButtonDropdown>
-                        );
                     },
 
                     _onClick: function(event) {
