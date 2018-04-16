@@ -11,7 +11,8 @@
                         "last 1 Opera versions",
                         "last 2 Safari versions",
                         "last 1 ChromeAndroid versions",
-                        "last 2 iOS versions", "IE >= 9"
+                        "last 2 iOS versions",
+                        "IE 11"
                     ]
                 }
             }
