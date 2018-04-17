@@ -17,7 +17,7 @@ const All = merge(
 		},
 		devServer: {
 			contentBase: './dist',
-			port: 8080,
+			port: 9000,
 		}
 	}
 );
