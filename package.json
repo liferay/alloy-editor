@@ -56,7 +56,7 @@
   "main": "dist/alloy-editor/alloy-editor-no-react.js",
   "scripts": {
     "build:assets": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
-    "build": "npm run build:assets release && webpack --config webpack.prod.js",
+    "build": "npm run build:assets -- --release && webpack --config webpack.prod.js",
     "dev": "npm run build:assets && webpack --config webpack.dev.js",
     "start": "npm run build:assets && webpack-dev-server --config webpack.dev.js --open",
     "test:saucelabs": "karma start karma-saucelabs.js",

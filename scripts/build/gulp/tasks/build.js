@@ -31,10 +31,9 @@ gulp.task('clean-dist', function(callback) {
 gulp.task('build-demo', function() {
     var templateHead;
 
-    if (argv._.indexOf('release') >= 0) {
+    if (argv.release) {
         templateHead = 'head-release.template';
-    }
-    else {
+    } else {
         templateHead = 'head-dev.template';
     }
 
