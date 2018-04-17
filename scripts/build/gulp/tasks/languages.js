@@ -153,6 +153,6 @@ gulp.task('build-languages', function(callback) {
 });
 
 gulp.task('copy-languages', ['build-languages'], function() {
-    return gulp.src(path.join(Constants.rootDir, 'lang', '/**'))
+    return gulp.src(path.join(Constants.rootDir, 'src', 'lang', '/**'))
         .pipe(gulp.dest(path.join(Constants.editorDistFolder, 'lang', 'alloy-editor')));
 });
