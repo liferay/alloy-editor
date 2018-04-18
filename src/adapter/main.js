@@ -6,6 +6,7 @@ import Toolbars from '../components/toolbars';
 
 import SelectionTest from '../selections/selection-test';
 import Selections from '../selections/selections';
+import SelectionGetArrowBoxClasses from '../selections/selection-arrowbox';
 
 // An object containing all currently registered plugins in AlloyEditor.
 var BRIDGE_BUTTONS = {};
@@ -229,6 +230,7 @@ export {
     implementEventTarget,
     loadLanguageResources,
     registerBridgeButton,
+    SelectionGetArrowBoxClasses,
     Selections,
     SelectionTest,
     Toolbars
