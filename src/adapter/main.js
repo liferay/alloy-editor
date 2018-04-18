@@ -220,6 +220,7 @@ const registerBridgeButton = function(buttonName, pluginName) {
 
 export {
     Buttons,
+    Core,
     editable,
     getBasePath,
     getButtons,
