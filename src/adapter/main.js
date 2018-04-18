@@ -4,7 +4,8 @@ import Lang from '../oop/lang.js';
 import Buttons from '../components/buttons';
 import Toolbars from '../components/toolbars';
 
-import SelectionTest from '../selections/selection-test.js';
+import SelectionTest from '../selections/selection-test';
+import Selections from '../selections/selections';
 
 // An object containing all currently registered plugins in AlloyEditor.
 var BRIDGE_BUTTONS = {};
@@ -228,6 +229,7 @@ export {
     implementEventTarget,
     loadLanguageResources,
     registerBridgeButton,
+    Selections,
     SelectionTest,
     Toolbars
 };
