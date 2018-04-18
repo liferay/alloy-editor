@@ -4,9 +4,10 @@ import Lang from '../oop/lang.js';
 import Buttons from '../components/buttons';
 import Toolbars from '../components/toolbars';
 
-import SelectionTest from '../selections/selection-test';
-import Selections from '../selections/selections';
 import SelectionGetArrowBoxClasses from '../selections/selection-arrowbox';
+import Selections from '../selections/selections';
+import SelectionSetPosition from '../selections/selection-position';
+import SelectionTest from '../selections/selection-test';
 
 // An object containing all currently registered plugins in AlloyEditor.
 var BRIDGE_BUTTONS = {};
@@ -232,6 +233,7 @@ export {
     registerBridgeButton,
     SelectionGetArrowBoxClasses,
     Selections,
+    SelectionSetPosition,
     SelectionTest,
     Toolbars
 };
