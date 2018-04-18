@@ -9,10 +9,10 @@ const runSequence = require('run-sequence');
 const template = require('gulp-template');
 
 gulp.task('build', function(callback) {
-    const release = [];
+    const task = ['build-demo', 'post-cleanup'];
 
     if (argv.release) {
-        release.push('minimize-css');
+        task.push('minimize-css');
     }
 
     runSequence(
@@ -22,9 +22,7 @@ gulp.task('build', function(callback) {
             'copy-ckeditor',
             'copy-languages'
         ],
-        release,
-        'build-demo',
-        'post-cleanup',
+        task,
         callback
     );
 });
