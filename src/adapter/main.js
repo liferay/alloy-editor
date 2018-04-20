@@ -9,6 +9,9 @@ import Selections from '../selections/selections';
 import SelectionSetPosition from '../selections/selection-position';
 import SelectionTest from '../selections/selection-test';
 
+import Attribute from '../oop/attribute';
+import extend from '../oop/oop';
+
 // An object containing all currently registered plugins in AlloyEditor.
 var BRIDGE_BUTTONS = {};
 
@@ -221,7 +224,16 @@ const registerBridgeButton = function(buttonName, pluginName) {
     BRIDGE_BUTTONS[pluginName].push(buttonName);
 };
 
+/**
+ * @method OOP
+ * @memberof AlloyEditor
+ */
+const OOP = {
+    extend
+};
+
 export {
+    Attribute,
     Buttons,
     Core,
     editable,
@@ -229,7 +241,9 @@ export {
     getButtons,
     getUrl,
     implementEventTarget,
+    Lang,
     loadLanguageResources,
+    OOP,
     registerBridgeButton,
     SelectionGetArrowBoxClasses,
     Selections,
