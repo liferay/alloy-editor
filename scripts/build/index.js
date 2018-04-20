@@ -6,3 +6,6 @@ if (typeof window !== 'undefined') {
     window.CKEDITOR.disableAutoInline = true;
     window.AlloyEditor = AlloyEditor;
 }
+
+export { AlloyEditor };
+export default AlloyEditor;

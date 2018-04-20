@@ -26,8 +26,20 @@ module.exports = {
 			path: path.resolve('dist/alloy-editor')
 		},
 		externals: {
-			react: 'React',
-			'react-dom': 'ReactDOM'
+			react: {
+				root: 'React',
+				commonjs2: 'react',
+				commonjs: 'react',
+				amd: 'react',
+				umd: 'react'
+			},
+			'react-dom': {
+		        root: 'ReactDOM',
+		        commonjs2: 'react-dom',
+		        commonjs: 'react-dom',
+		        amd: 'react-dom',
+				umd: 'react-dom',
+			}
 		},
 		module: modules
 	},
@@ -43,11 +55,25 @@ module.exports = {
 	noReact: {
 		entry: './scripts/build/index.js',
 		output: {
+			library: 'AlloyEditor',
+			libraryTarget: 'umd',
 			path: path.resolve('dist/alloy-editor')
 		},
 		externals: {
-			react: 'React',
-			'react-dom': 'ReactDOM'
+			react: {
+				root: 'React',
+				commonjs2: 'react',
+				commonjs: 'react',
+				amd: 'react',
+				umd: 'react'
+			},
+			'react-dom': {
+		        root: 'ReactDOM',
+		        commonjs2: 'react-dom',
+		        commonjs: 'react-dom',
+		        amd: 'react-dom',
+				umd: 'react-dom',
+			}
 		},
 		module: modules
 	}
