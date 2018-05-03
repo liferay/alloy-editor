@@ -1,0 +1,23 @@
+{
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "browsers": [
+                        "last 2 Chrome versions",
+                        "last 4 Edge versions",
+                        "last 2 Firefox versions",
+                        "last 1 Opera versions",
+                        "last 2 Safari versions",
+                        "last 1 ChromeAndroid versions",
+                        "last 2 iOS versions",
+                        "IE 11"
+                    ]
+                }
+            }
+        ],
+        "react"
+    ],
+    "plugins": ["transform-class-properties", "transform-object-rest-spread"]
+}
