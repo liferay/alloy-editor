@@ -125,17 +125,15 @@
 
                 var transferFiles = nativeEvent.dataTransfer.files;
 
-                if (transferFiles.length <= 0) {
-                    return;
+                if (transferFiles.length > 0) {
+                    new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+                    var editor = event.listenerData.editor;
+
+                    event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                    this._handleFiles(transferFiles, editor);
                 }
-
-                new CKEDITOR.dom.event(nativeEvent).preventDefault();
-
-                var editor = event.listenerData.editor;
-
-                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
-
-                this._handleFiles(transferFiles, editor);
             },
 
             /**
