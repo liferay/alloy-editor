@@ -4485,6 +4485,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 /**
  * The ButtonCommandsList class provides functionality for showing a list of commands that can be
  * executed to the current selection..
@@ -4499,6 +4500,37 @@ var ButtonCommandsList = function (_React$Component) {
         _classCallCheck(this, ButtonCommandsList);
 
         return _possibleConstructorReturn(this, (ButtonCommandsList.__proto__ || Object.getPrototypeOf(ButtonCommandsList)).apply(this, arguments));
+=======
+        widget.parts.image.on('click', function () {
+            var selection = editor.getSelection();
+
+            if (selection) {
+                var element = selection.getStartElement();
+
+                if (element) {
+                    var widgetElement = element.findOne('img');
+
+                    if (widgetElement) {
+                        var region = element.getClientRect();
+
+                        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+                        region.left -= scrollPosition.x;
+                        region.top += scrollPosition.y;
+
+                        region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                        editor.fire('editorInteraction', {
+                            nativeEvent: event,
+                            selectionData: {
+                                element: widgetElement,
+                                region: region
+                            }
+                        });
+                    }
+                }
+            }
+        });
+>>>>>>> 126f2ec4... Build files (auto-generated)
     }
 
     _createClass(ButtonCommandsList, [{

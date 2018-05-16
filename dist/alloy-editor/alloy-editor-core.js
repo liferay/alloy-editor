@@ -8712,12 +8712,45 @@ exports.default = ButtonTableColumn;
 
 "use strict";
 
+<<<<<<< HEAD
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+=======
+        widget.parts.image.on('click', function () {
+            var selection = editor.getSelection();
+
+            if (selection) {
+                var element = selection.getStartElement();
+
+                if (element) {
+                    var widgetElement = element.findOne('img');
+
+                    if (widgetElement) {
+                        var region = element.getClientRect();
+
+                        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+                        region.left -= scrollPosition.x;
+                        region.top += scrollPosition.y;
+
+                        region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                        editor.fire('editorInteraction', {
+                            nativeEvent: event,
+                            selectionData: {
+                                element: widgetElement,
+                                region: region
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+>>>>>>> 126f2ec4... Build files (auto-generated)
 
 var _react = __webpack_require__(/*! react */ "react");
 

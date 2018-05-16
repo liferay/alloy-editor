@@ -27754,6 +27754,7 @@ var ButtonTableEdit = function (_React$Component) {
             var editor = this.props.editor.get('nativeEditor');
             var tableUtils = new CKEDITOR.Table(editor);
 
+<<<<<<< HEAD
             tableUtils.create({
                 attrs: this.props.tableAttributes,
                 cols: this.state.cols,
@@ -27796,6 +27797,38 @@ var ButtonTableEdit = function (_React$Component) {
 
             editor.fire('actionPerformed', this);
         }
+=======
+        widget.parts.image.on('click', function () {
+            var selection = editor.getSelection();
+
+            if (selection) {
+                var element = selection.getStartElement();
+
+                if (element) {
+                    var widgetElement = element.findOne('img');
+
+                    if (widgetElement) {
+                        var region = element.getClientRect();
+
+                        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+                        region.left -= scrollPosition.x;
+                        region.top += scrollPosition.y;
+
+                        region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                        editor.fire('editorInteraction', {
+                            nativeEvent: event,
+                            selectionData: {
+                                element: widgetElement,
+                                region: region
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+>>>>>>> 126f2ec4... Build files (auto-generated)
 
         /**
          * Handles a change in input value. Sets the provided value from the user back to the input.
