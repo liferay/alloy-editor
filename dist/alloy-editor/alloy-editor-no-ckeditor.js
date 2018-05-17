@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.1
+ * AlloyEditor v1.5.2
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -20890,6 +20890,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         });
     };
 
+    // Filters the requires object to remove unwanted dependencies. At this point
+    // only 'toolbar' has been identified, but more can appear. An unwanted plugin
+    // dependency is one that prevents a necessary plugin from being removed
+    //
+    // @param {string|Array<string>} requires The requires object
+    // @return {string} The filtered requires object
+    var filterUnwantedDependencies = function filterUnwantedDependencies(requires) {
+        if (typeof requires === 'string') {
+            requires = requires.split(',');
+        }
+
+        return requires.filter(function (require) {
+            return require !== 'toolbar';
+        });
+    };
+
     /**
      * CKEDITOR.plugins class utility which adds additional methods to those of CKEditor.
      *
@@ -20916,7 +20932,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             pluginsLoad.call(this, names, function (plugins) {
                 if (callback) {
                     Object.keys(plugins).forEach(function (pluginName) {
-                        wrapPluginLifecycle(plugins[pluginName]);
+                        var plugin = plugins[pluginName];
+
+                        if (plugin.requires) {
+                            plugin.requires = filterUnwantedDependencies(plugin.requires);
+                        }
+
+                        wrapPluginLifecycle(plugin);
                     });
 
                     callback.call(scope, plugins);
@@ -22100,13 +22122,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         _onDragDrop: function _onDragDrop(event) {
             var nativeEvent = event.data.$;
 
-            new CKEDITOR.dom.event(nativeEvent).preventDefault();
+            var transferFiles = nativeEvent.dataTransfer.files;
 
-            var editor = event.listenerData.editor;
+            if (transferFiles.length > 0) {
+                new CKEDITOR.dom.event(nativeEvent).preventDefault();
 
-            event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+                var editor = event.listenerData.editor;
 
-            this._handleFiles(nativeEvent.dataTransfer.files, editor);
+                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                this._handleFiles(transferFiles, editor);
+            }
         },
 
         /**
