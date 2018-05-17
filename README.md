@@ -13,7 +13,7 @@ Works on IE9+, Chrome, Firefox and Safari.
 ## Features
 
 * Smart toolbars appear right near the selected text and offer different functionality based on context
-* Easily add your own buttons (see the "marquee" example in [the demo](http://alloyeditor.com/demo/))
+* Easily add your own buttons (see the "marquee" example in [the docs](https://alloyeditor.com/docs/develop/create/create_buttons.html))
 * Paste images from clipboard, or Drag&Drop them from another application
 * Insert images from the device's camera!
 * Paste rich text from any web page and preserve its formatting
