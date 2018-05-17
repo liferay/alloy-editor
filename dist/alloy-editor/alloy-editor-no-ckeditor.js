@@ -82,10 +82,14 @@ window["AlloyEditor"] =
 "use strict";
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
 >>>>>>> cad4c7a0... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.3
+>>>>>>> 1658a122... Build files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
