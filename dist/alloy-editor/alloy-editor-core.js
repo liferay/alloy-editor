@@ -123,8 +123,15 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
+=======
+ * AlloyEditor v1.5.2
+ *
+ * Copyright 2014-present, Liferay, Inc.
+ * All rights reserved.
+>>>>>>> cad4c7a0... Build files (auto-generated)
  *
  * @class Core
  * @constructor
@@ -962,6 +969,7 @@ exports.default = function (WrappedComponent) {
                 if (_lang2.default.isFunction(this.isActive) && _lang2.default.isFunction(this.getStyle)) {
                     var editor = this.props.editor.get('nativeEditor');
 
+<<<<<<< HEAD
                     editor.getSelection().lock();
 
                     if (this.isActive()) {
@@ -969,6 +977,58 @@ exports.default = function (WrappedComponent) {
                     } else {
                         editor.applyStyle(this.getStyle());
                     }
+=======
+    // Filters the requires object to remove unwanted dependencies. At this point
+    // only 'toolbar' has been identified, but more can appear. An unwanted plugin
+    // dependency is one that prevents a necessary plugin from being removed
+    //
+    // @param {string|Array<string>} requires The requires object
+    // @return {string} The filtered requires object
+    var filterUnwantedDependencies = function filterUnwantedDependencies(requires) {
+        if (typeof requires === 'string') {
+            requires = requires.split(',');
+        }
+
+        return requires.filter(function (require) {
+            return require !== 'toolbar';
+        });
+    };
+
+    /**
+     * CKEDITOR.plugins class utility which adds additional methods to those of CKEditor.
+     *
+     * @class CKEDITOR.plugins
+     */
+
+    /**
+     * Overrides CKEDITOR.plugins.load method so we can extend the lifecycle methods of
+     * the loaded plugins to add some metainformation about the plugin being processed
+     *
+    * @param {String/Array} names The name of the resource to load. It may be a
+    * string with a single resource name, or an array with several names.
+    * @param {Function} callback A function to be called when all resources
+    * are loaded. The callback will receive an array containing all loaded names.
+    * @param {Object} [scope] The scope object to be used for the callback call.
+     * @memberof CKEDITOR.plugins
+     * @method load
+     * @static
+     */
+    CKEDITOR.plugins.load = CKEDITOR.tools.override(CKEDITOR.plugins.load, function (pluginsLoad) {
+        // Wrap original load function so we can transform the plugin input parameter
+        // before passing it down to the original callback
+        return function (names, callback, scope) {
+            pluginsLoad.call(this, names, function (plugins) {
+                if (callback) {
+                    Object.keys(plugins).forEach(function (pluginName) {
+                        var plugin = plugins[pluginName];
+
+                        if (plugin.requires) {
+                            plugin.requires = filterUnwantedDependencies(plugin.requires);
+                        }
+
+                        wrapPluginLifecycle(plugin);
+                    });
+>>>>>>> cad4c7a0... Build files (auto-generated)
 
                     editor.getSelection().unlock();
 
@@ -1873,6 +1933,7 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 
 var _lang = __webpack_require__(/*! ../../oop/lang.js */ "./src/oop/lang.js");
 
+<<<<<<< HEAD
 var _lang2 = _interopRequireDefault(_lang);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1880,6 +1941,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+=======
+            var transferFiles = nativeEvent.dataTransfer.files;
+
+            if (transferFiles.length > 0) {
+                new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+                var editor = event.listenerData.editor;
+
+                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                this._handleFiles(transferFiles, editor);
+            }
+        },
+>>>>>>> cad4c7a0... Build files (auto-generated)
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 

@@ -81,7 +81,11 @@ window["AlloyEditor"] =
 
 "use strict";
 /**
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
+=======
+ * AlloyEditor v1.5.2
+>>>>>>> cad4c7a0... Build files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -6238,6 +6242,7 @@ function createHostRootFiber(isAsync) {
   return createFiber(HostRoot, null, null, mode);
 }
 
+<<<<<<< HEAD
 function createFiberFromElement(element, mode, expirationTime) {
   var owner = null;
   {
@@ -6248,6 +6253,58 @@ function createFiberFromElement(element, mode, expirationTime) {
   var type = element.type;
   var key = element.key;
   var pendingProps = element.props;
+=======
+    // Filters the requires object to remove unwanted dependencies. At this point
+    // only 'toolbar' has been identified, but more can appear. An unwanted plugin
+    // dependency is one that prevents a necessary plugin from being removed
+    //
+    // @param {string|Array<string>} requires The requires object
+    // @return {string} The filtered requires object
+    var filterUnwantedDependencies = function filterUnwantedDependencies(requires) {
+        if (typeof requires === 'string') {
+            requires = requires.split(',');
+        }
+
+        return requires.filter(function (require) {
+            return require !== 'toolbar';
+        });
+    };
+
+    /**
+     * CKEDITOR.plugins class utility which adds additional methods to those of CKEditor.
+     *
+     * @class CKEDITOR.plugins
+     */
+
+    /**
+     * Overrides CKEDITOR.plugins.load method so we can extend the lifecycle methods of
+     * the loaded plugins to add some metainformation about the plugin being processed
+     *
+    * @param {String/Array} names The name of the resource to load. It may be a
+    * string with a single resource name, or an array with several names.
+    * @param {Function} callback A function to be called when all resources
+    * are loaded. The callback will receive an array containing all loaded names.
+    * @param {Object} [scope] The scope object to be used for the callback call.
+     * @memberof CKEDITOR.plugins
+     * @method load
+     * @static
+     */
+    CKEDITOR.plugins.load = CKEDITOR.tools.override(CKEDITOR.plugins.load, function (pluginsLoad) {
+        // Wrap original load function so we can transform the plugin input parameter
+        // before passing it down to the original callback
+        return function (names, callback, scope) {
+            pluginsLoad.call(this, names, function (plugins) {
+                if (callback) {
+                    Object.keys(plugins).forEach(function (pluginName) {
+                        var plugin = plugins[pluginName];
+
+                        if (plugin.requires) {
+                            plugin.requires = filterUnwantedDependencies(plugin.requires);
+                        }
+
+                        wrapPluginLifecycle(plugin);
+                    });
+>>>>>>> cad4c7a0... Build files (auto-generated)
 
   var fiberTag = void 0;
   if (typeof type === 'function') {
@@ -9037,6 +9094,7 @@ function ChildReconciler(shouldTrackSideEffects) {
       newChild = newChild.props.children;
     }
 
+<<<<<<< HEAD
     // Handle object types
     var isObject = typeof newChild === 'object' && newChild !== null;
 
@@ -9056,6 +9114,20 @@ function ChildReconciler(shouldTrackSideEffects) {
     if (isArray$1(newChild)) {
       return reconcileChildrenArray(returnFiber, currentFirstChild, newChild, expirationTime);
     }
+=======
+            var transferFiles = nativeEvent.dataTransfer.files;
+
+            if (transferFiles.length > 0) {
+                new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+                var editor = event.listenerData.editor;
+
+                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                this._handleFiles(transferFiles, editor);
+            }
+        },
+>>>>>>> cad4c7a0... Build files (auto-generated)
 
     if (getIteratorFn(newChild)) {
       return reconcileChildrenIterator(returnFiber, currentFirstChild, newChild, expirationTime);
