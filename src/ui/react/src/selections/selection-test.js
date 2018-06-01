@@ -45,9 +45,18 @@
     var imageSelectionTest = function(payload) {
         var selectionData = payload.data.selectionData;
 
+        var selectionEmpty = false;
+
+        if (payload.editor) {
+            var nativeEditor = payload.editor._getNativeEditor();
+
+            selectionEmpty = nativeEditor.isSelectionEmpty();
+        }
+
         return !!(
             selectionData.element &&
             selectionData.element.getName() === 'img' &&
+            !selectionEmpty &&
             !selectionData.element.isReadOnly()
         );
     };
