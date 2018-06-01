@@ -25,7 +25,7 @@
 
     var REGEX_LAST_WORD = /[^\s]+/mg;
 
-    var REGEX_URL = /(https?\:\/\/|www\.)(-\.)?([^(\s/?\.#-)]+\.?)+(\b\/[^\s]*)?$/i;
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/i;
 
     /**
      * CKEditor plugin which automatically generates links when user types text which looks like URL.
