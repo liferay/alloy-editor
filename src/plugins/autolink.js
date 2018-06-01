@@ -53,6 +53,22 @@
                         editor: editor
                     });
                 }.bind(this));
+
+                editor.on('paste', function (event) {
+                    var data = event.data.dataValue;
+
+                    var match = data.match(REGEX_URL);
+
+                    if (match && match.length) {
+                        match = match[0];
+
+                        var remainder = data.replace(match, '');
+
+                        if (this._isValidURL(match)) {
+                            event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                        }
+                    }
+                }.bind(this));
             },
 
             /**
