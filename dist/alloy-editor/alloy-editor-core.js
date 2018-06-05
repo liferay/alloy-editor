@@ -126,6 +126,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -136,6 +137,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.3
 >>>>>>> caf17dec5790097eb405b57e816e3bfb5c7c1034
+=======
+ * AlloyEditor v1.5.4
+>>>>>>> 77c835ae... Build files (auto-generated)
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2171,9 +2175,13 @@ var DIRECTION_NONE = 0;
 var DIRECTION_NEXT = 1;
 var DIRECTION_PREV = -1;
 
+<<<<<<< HEAD
 var ACTION_NONE = 0;
 var ACTION_MOVE_FOCUS = 1;
 var ACTION_DISMISS_FOCUS = 2;
+=======
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+>>>>>>> 77c835ae... Build files (auto-generated)
 
 /**
  * WidgetFocusManager is a mixin that provides keyboard navigation inside a widget. To do this,
@@ -2186,8 +2194,32 @@ exports.default = function (WrappedComponent) {
     return function (_WrappedComponent) {
         _inherits(_class, _WrappedComponent);
 
+<<<<<<< HEAD
         function _class() {
             _classCallCheck(this, _class);
+=======
+                editable.attachListener(editable, 'keyup', this._onKeyUp, this, {
+                    editor: editor
+                });
+            }.bind(this));
+
+            editor.on('paste', function (event) {
+                var data = event.data.dataValue;
+
+                var match = data.match(REGEX_URL);
+
+                if (match && match.length) {
+                    match = match[0];
+
+                    var remainder = data.replace(match, '');
+
+                    if (this._isValidURL(match)) {
+                        event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                    }
+                }
+            }.bind(this));
+        },
+>>>>>>> 77c835ae... Build files (auto-generated)
 
             return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
         }

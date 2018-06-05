@@ -96,7 +96,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
 =======
 /**
- * AlloyEditor v1.5.3
+ * AlloyEditor v1.5.4
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2996,6 +2996,10 @@ exports.default = function (WrappedComponent) {
 
 "use strict";
 
+<<<<<<< HEAD
+=======
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+>>>>>>> 77c835ae... Build files (auto-generated)
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -3003,7 +3007,31 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+=======
+                editable.attachListener(editable, 'keyup', this._onKeyUp, this, {
+                    editor: editor
+                });
+            }.bind(this));
+
+            editor.on('paste', function (event) {
+                var data = event.data.dataValue;
+
+                var match = data.match(REGEX_URL);
+
+                if (match && match.length) {
+                    match = match[0];
+
+                    var remainder = data.replace(match, '');
+
+                    if (this._isValidURL(match)) {
+                        event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                    }
+                }
+            }.bind(this));
+        },
+>>>>>>> 77c835ae... Build files (auto-generated)
 
 var _lang = __webpack_require__(/*! ../../oop/lang.js */ "./src/oop/lang.js");
 
