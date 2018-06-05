@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.3
+ * AlloyEditor v1.5.4
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2810,7 +2810,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     var REGEX_LAST_WORD = /[^\s]+/mg;
 
-    var REGEX_URL = /(https?\:\/\/|www\.)(-\.)?([^(\s/?\.#-)]+\.?)+(\b\/[^\s]*)?$/i;
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
 
     /**
      * CKEditor plugin which automatically generates links when user types text which looks like URL.
@@ -2836,6 +2836,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 editable.attachListener(editable, 'keyup', this._onKeyUp, this, {
                     editor: editor
                 });
+            }.bind(this));
+
+            editor.on('paste', function (event) {
+                var data = event.data.dataValue;
+
+                var match = data.match(REGEX_URL);
+
+                if (match && match.length) {
+                    match = match[0];
+
+                    var remainder = data.replace(match, '');
+
+                    if (this._isValidURL(match)) {
+                        event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                    }
+                }
             }.bind(this));
         },
 
