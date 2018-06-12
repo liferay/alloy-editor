@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.5
+ * AlloyEditor v1.5.6
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -1267,6 +1267,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             if (selectedElement && selectedElement.is('a')) {
                 return selectedElement;
+            }
+
+            if (selectedElement && CKEDITOR.env.ie) {
+                return selectedElement.getChildren('a').getItem(0);
             }
 
             var range = selection.getRanges()[0];
