@@ -108,12 +108,12 @@
 
             var selectedElement = selection.getSelectedElement();
 
-            if (selectedElement && CKEDITOR.env.ie) {
-                return selectedElement.getChildren('a').getItem(0);
-            }
-
             if (selectedElement && selectedElement.is('a')) {
                 return selectedElement;
+            }
+
+            if (selectedElement && CKEDITOR.env.ie) {
+                return selectedElement.getChildren('a').getItem(0);
             }
 
             var range = selection.getRanges()[0];
