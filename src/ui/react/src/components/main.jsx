@@ -349,6 +349,7 @@
 
             if (domNode) {
                 var editable = this.props.editor.get('nativeEditor').editable();
+                var parentNode = target.parentNode;
                 var targetNode = new CKEDITOR.dom.node(target);
 
                 if (!editable) {
@@ -357,7 +358,11 @@
                     });
                 } else {
                     var res = (editable.$ === target) || editable.contains(targetNode) ||
-                        (new CKEDITOR.dom.element(domNode)).contains(targetNode) || (target.parentNode.id === "ckimgrsz");
+                        (new CKEDITOR.dom.element(domNode)).contains(targetNode);
+
+                    if (parentNode) {
+                        res = res || parentNode.id === "ckimgrsz";
+                    }
 
                     if (!res) {
                         this.setState({
