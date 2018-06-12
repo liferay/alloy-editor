@@ -86,6 +86,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -102,6 +103,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.4
 >>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
+=======
+ * AlloyEditor v1.5.5
+>>>>>>> c1d36639... Build files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30657,15 +30661,44 @@ var _link2 = _interopRequireDefault(_link);
 
 var _plugins = __webpack_require__(/*! ./plugins */ "./src/core/plugins.js");
 
+<<<<<<< HEAD
 var _plugins2 = _interopRequireDefault(_plugins);
+=======
+    var linkSelectionTest = function linkSelectionTest(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var range = nativeEditor.getSelection().getRanges()[0];
+        var selectionData = payload.data.selectionData;
+
+        var selectionDataName;
+>>>>>>> c1d36639... Build files (auto-generated)
 
 var _selectionRegion = __webpack_require__(/*! ./selection-region */ "./src/core/selection-region.js");
 
+<<<<<<< HEAD
 var _selectionRegion2 = _interopRequireDefault(_selectionRegion);
+=======
+        if (selectionData.element) selectionDataName = selectionData.element.getName();
+
+        return !!(nativeEditor.isSelectionEmpty() && selectionDataName !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+    };
+>>>>>>> c1d36639... Build files (auto-generated)
 
 var _table = __webpack_require__(/*! ./table */ "./src/core/table.js");
 
+<<<<<<< HEAD
 var _table2 = _interopRequireDefault(_table);
+=======
+        var selectionEmpty = false;
+
+        if (payload.editor) {
+            var nativeEditor = payload.editor._getNativeEditor();
+
+            selectionEmpty = nativeEditor.isSelectionEmpty();
+        }
+
+        return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionEmpty && !selectionData.element.isReadOnly());
+    };
+>>>>>>> c1d36639... Build files (auto-generated)
 
 var _tools = __webpack_require__(/*! ./tools */ "./src/core/tools.js");
 
@@ -37091,11 +37124,34 @@ var _selectionArrowbox = __webpack_require__(/*! ./selection-arrowbox.js */ "./s
 
 var _selectionArrowbox2 = _interopRequireDefault(_selectionArrowbox);
 
+<<<<<<< HEAD
 var _selectionPosition = __webpack_require__(/*! ./selection-position.js */ "./src/selections/selection-position.js");
+=======
+            if (domNode) {
+                var editable = this.props.editor.get('nativeEditor').editable();
+                var parentNode = target.parentNode;
+                var targetNode = new CKEDITOR.dom.node(target);
+>>>>>>> c1d36639... Build files (auto-generated)
 
 var _selectionPosition2 = _interopRequireDefault(_selectionPosition);
 
+<<<<<<< HEAD
 var _selectionTest = __webpack_require__(/*! ./selection-test.js */ "./src/selections/selection-test.js");
+=======
+                    if (parentNode) {
+                        res = res || parentNode.id === "ckimgrsz";
+                    }
+
+                    if (!res) {
+                        this.setState({
+                            hidden: true
+                        });
+                    }
+                }
+            }
+        }
+    });
+>>>>>>> c1d36639... Build files (auto-generated)
 
 var _selectionTest2 = _interopRequireDefault(_selectionTest);
 

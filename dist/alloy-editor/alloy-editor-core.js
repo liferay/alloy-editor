@@ -128,6 +128,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -144,6 +145,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.4
 >>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
+=======
+ * AlloyEditor v1.5.5
+>>>>>>> c1d36639... Build files (auto-generated)
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -11688,15 +11692,44 @@ var _link2 = _interopRequireDefault(_link);
 
 var _plugins = __webpack_require__(/*! ./plugins */ "./src/core/plugins.js");
 
+<<<<<<< HEAD
 var _plugins2 = _interopRequireDefault(_plugins);
+=======
+    var linkSelectionTest = function linkSelectionTest(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var range = nativeEditor.getSelection().getRanges()[0];
+        var selectionData = payload.data.selectionData;
+
+        var selectionDataName;
+>>>>>>> c1d36639... Build files (auto-generated)
 
 var _selectionRegion = __webpack_require__(/*! ./selection-region */ "./src/core/selection-region.js");
 
+<<<<<<< HEAD
 var _selectionRegion2 = _interopRequireDefault(_selectionRegion);
+=======
+        if (selectionData.element) selectionDataName = selectionData.element.getName();
+
+        return !!(nativeEditor.isSelectionEmpty() && selectionDataName !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+    };
+>>>>>>> c1d36639... Build files (auto-generated)
 
 var _table = __webpack_require__(/*! ./table */ "./src/core/table.js");
 
+<<<<<<< HEAD
 var _table2 = _interopRequireDefault(_table);
+=======
+        var selectionEmpty = false;
+
+        if (payload.editor) {
+            var nativeEditor = payload.editor._getNativeEditor();
+
+            selectionEmpty = nativeEditor.isSelectionEmpty();
+        }
+
+        return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionEmpty && !selectionData.element.isReadOnly());
+    };
+>>>>>>> c1d36639... Build files (auto-generated)
 
 var _tools = __webpack_require__(/*! ./tools */ "./src/core/tools.js");
 
@@ -18168,16 +18201,39 @@ exports.default = Selections;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 (function() { module.exports = window[undefined]; }());
+=======
+            if (domNode) {
+                var editable = this.props.editor.get('nativeEditor').editable();
+                var parentNode = target.parentNode;
+                var targetNode = new CKEDITOR.dom.node(target);
+>>>>>>> c1d36639... Build files (auto-generated)
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "react-dom":
 /*!***********************************************************************************************************************!*\
   !*** external {"root":"ReactDOM","commonjs2":"react-dom","commonjs":"react-dom","amd":"react-dom","umd":"react-dom"} ***!
   \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
+=======
+                    if (parentNode) {
+                        res = res || parentNode.id === "ckimgrsz";
+                    }
+
+                    if (!res) {
+                        this.setState({
+                            hidden: true
+                        });
+                    }
+                }
+            }
+        }
+    });
+>>>>>>> c1d36639... Build files (auto-generated)
 
 (function() { module.exports = window[undefined]; }());
 

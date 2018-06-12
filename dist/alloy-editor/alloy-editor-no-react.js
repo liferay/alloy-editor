@@ -96,7 +96,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
 =======
 /**
- * AlloyEditor v1.5.4
+ * AlloyEditor v1.5.5
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -12317,6 +12317,7 @@ var ToolbarStyles = function (_React$Component) {
             return selection;
         }
 
+<<<<<<< HEAD
         /**
          * Calculates and sets the position of the toolbar.
          *
@@ -12325,6 +12326,14 @@ var ToolbarStyles = function (_React$Component) {
          * @method _updatePosition
          * @protected
          */
+=======
+    var linkSelectionTest = function linkSelectionTest(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var range = nativeEditor.getSelection().getRanges()[0];
+        var selectionData = payload.data.selectionData;
+
+        var selectionDataName;
+>>>>>>> c1d36639... Build files (auto-generated)
 
     }, {
         key: '_updatePosition',
@@ -12334,14 +12343,22 @@ var ToolbarStyles = function (_React$Component) {
                 return;
             }
 
+<<<<<<< HEAD
             var currentSelection = this._getCurrentSelection();
             var result;
+=======
+        if (selectionData.element) selectionDataName = selectionData.element.getName();
+
+        return !!(nativeEditor.isSelectionEmpty() && selectionDataName !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+    };
+>>>>>>> c1d36639... Build files (auto-generated)
 
             // If current selection has a function called `setPosition`, call it
             // and check the returned value. If false, fallback to the default positioning logic.
             if (currentSelection) {
                 var setPositionFn = this._getSelectionFunction(currentSelection.setPosition);
 
+<<<<<<< HEAD
                 if (setPositionFn) {
                     result = setPositionFn.call(this, {
                         editor: this.props.editor,
@@ -12350,6 +12367,18 @@ var ToolbarStyles = function (_React$Component) {
                     });
                 }
             }
+=======
+        var selectionEmpty = false;
+
+        if (payload.editor) {
+            var nativeEditor = payload.editor._getNativeEditor();
+
+            selectionEmpty = nativeEditor.isSelectionEmpty();
+        }
+
+        return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionEmpty && !selectionData.element.isReadOnly());
+    };
+>>>>>>> c1d36639... Build files (auto-generated)
 
             if (!result) {
                 this.updatePosition();
@@ -19013,16 +19042,39 @@ exports.default = Selections;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = __WEBPACK_EXTERNAL_MODULE_react__;
+=======
+            if (domNode) {
+                var editable = this.props.editor.get('nativeEditor').editable();
+                var parentNode = target.parentNode;
+                var targetNode = new CKEDITOR.dom.node(target);
+>>>>>>> c1d36639... Build files (auto-generated)
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "react-dom":
 /*!***********************************************************************************************************************!*\
   !*** external {"root":"ReactDOM","commonjs2":"react-dom","commonjs":"react-dom","amd":"react-dom","umd":"react-dom"} ***!
   \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
+=======
+                    if (parentNode) {
+                        res = res || parentNode.id === "ckimgrsz";
+                    }
+
+                    if (!res) {
+                        this.setState({
+                            hidden: true
+                        });
+                    }
+                }
+            }
+        }
+    });
+>>>>>>> c1d36639... Build files (auto-generated)
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_react_dom__;
 
