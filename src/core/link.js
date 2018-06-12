@@ -112,6 +112,10 @@
                 return selectedElement;
             }
 
+            if (selectedElement && CKEDITOR.env.ie) {
+                return selectedElement.getChildren('a').getItem(0);
+            }
+
             var range = selection.getRanges()[0];
 
             if (range) {
