@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.4
+ * AlloyEditor v1.5.5
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -28313,16 +28313,29 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     var linkSelectionTest = function linkSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
         var range = nativeEditor.getSelection().getRanges()[0];
+        var selectionData = payload.data.selectionData;
+
+        var selectionDataName;
 
         var element;
 
-        return !!(nativeEditor.isSelectionEmpty() && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+        if (selectionData.element) selectionDataName = selectionData.element.getName();
+
+        return !!(nativeEditor.isSelectionEmpty() && selectionDataName !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
     };
 
     var imageSelectionTest = function imageSelectionTest(payload) {
         var selectionData = payload.data.selectionData;
 
-        return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionData.element.isReadOnly());
+        var selectionEmpty = false;
+
+        if (payload.editor) {
+            var nativeEditor = payload.editor._getNativeEditor();
+
+            selectionEmpty = nativeEditor.isSelectionEmpty();
+        }
+
+        return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionEmpty && !selectionData.element.isReadOnly());
     };
 
     var textSelectionTest = function textSelectionTest(payload) {
@@ -37763,6 +37776,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             if (domNode) {
                 var editable = this.props.editor.get('nativeEditor').editable();
+                var parentNode = target.parentNode;
                 var targetNode = new CKEDITOR.dom.node(target);
 
                 if (!editable) {
@@ -37771,6 +37785,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     });
                 } else {
                     var res = editable.$ === target || editable.contains(targetNode) || new CKEDITOR.dom.element(domNode).contains(targetNode);
+
+                    if (parentNode) {
+                        res = res || parentNode.id === "ckimgrsz";
+                    }
 
                     if (!res) {
                         this.setState({
