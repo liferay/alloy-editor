@@ -88,6 +88,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -110,6 +111,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.5
 >>>>>>> 044ae5d4b4217bbf7f6d2cfdce575e8db6192a43
+=======
+ * AlloyEditor v1.5.6
+>>>>>>> 02f02748... Build files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -6013,7 +6017,15 @@ var SelectEventPlugin = {
       return null;
     }
 
+<<<<<<< HEAD
     var targetNode = targetInst ? getNodeFromInstance$1(targetInst) : window;
+=======
+            if (selectedElement && CKEDITOR.env.ie) {
+                return selectedElement.getChildren('a').getItem(0);
+            }
+
+            var range = selection.getRanges()[0];
+>>>>>>> 02f02748... Build files (auto-generated)
 
     switch (topLevelType) {
       // Track the input node that has focus.
