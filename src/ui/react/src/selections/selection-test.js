@@ -30,11 +30,17 @@
     var linkSelectionTest = function(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
         var range = nativeEditor.getSelection().getRanges()[0];
+        var selectionData = payload.data.selectionData;
+
+        var selectionDataName;
 
         var element;
 
+        if (selectionData.element) selectionDataName = selectionData.element.getName();
+
         return !!(
             nativeEditor.isSelectionEmpty() &&
+            selectionDataName !== 'img' &&
             (element = (new CKEDITOR.Link(nativeEditor)).getFromSelection()) &&
             element.getText().length !== range.endOffset &&
             !element.isReadOnly() &&
@@ -45,9 +51,18 @@
     var imageSelectionTest = function(payload) {
         var selectionData = payload.data.selectionData;
 
+        var selectionEmpty = false;
+
+        if (payload.editor) {
+            var nativeEditor = payload.editor._getNativeEditor();
+
+            selectionEmpty = nativeEditor.isSelectionEmpty();
+        }
+
         return !!(
             selectionData.element &&
             selectionData.element.getName() === 'img' &&
+            !selectionEmpty &&
             !selectionData.element.isReadOnly()
         );
     };
