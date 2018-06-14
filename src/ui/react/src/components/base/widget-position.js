@@ -211,6 +211,7 @@
          */
         show: function() {
             var domNode = ReactDOM.findDOMNode(this);
+            var uiNode = this.props.editor.get('uiNode') || document.body;
 
             if (!this.isVisible() && domNode) {
                 var interactionPoint = this.getInteractionPoint();
@@ -239,9 +240,9 @@
                     }
 
                     if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                        initialY = this.props.selectionData.region.bottom;
+                        initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
                     } else {
-                        initialY = this.props.selectionData.region.top;
+                        initialY = this.props.selectionData.region.top + uiNode.scrollTop;
                     }
 
                     this.moveToPoint([initialX, initialY], [finalX, finalY]);
@@ -262,7 +263,11 @@
             var domNode = ReactDOM.findDOMNode(this);
 
             if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+
+
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += uiNode.scrollTop;
 
                 new CKEDITOR.dom.element(domNode).setStyles({
                     left: xy[0] + 'px',
