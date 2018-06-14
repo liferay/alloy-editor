@@ -132,6 +132,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -160,6 +161,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.6
 >>>>>>> e8d0cc5551764d8ac67f65bcdf607aa0a7be0f46
+=======
+ * AlloyEditor v1.5.7
+>>>>>>> f1d775e5... Build files (auto-generated)
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -11689,6 +11693,7 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
     };
 })();
 
+<<<<<<< HEAD
 /***/ }),
 
 /***/ "./src/core/index.js":
@@ -11699,6 +11704,25 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+=======
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method tableSelectionSetPosition
+     * @param {Object} payload Object, which contains the selection data for retrieving the
+     * client rectangle of the selected table
+     * @return {Boolean} True, in all cases
+     */
+    var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+
+        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += uiNode.scrollTop;
+
+        centerToolbar(this, rect);
+>>>>>>> f1d775e5... Build files (auto-generated)
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -13152,8 +13176,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * @param {Object} editor The current CKEditor instance.
          * @protected
          */
+<<<<<<< HEAD
         init: function init(editor) {
             var ariaState = [];
+=======
+        show: function show() {
+            var domNode = ReactDOM.findDOMNode(this);
+            var uiNode = this.props.editor.get('uiNode') || document.body;
+>>>>>>> f1d775e5... Build files (auto-generated)
 
             var ariaElement = this._createAriaElement(editor.id);
 
@@ -13170,6 +13200,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                             nativeEvent: event.data.$,
                             selectionData: selectionData
                         });
+<<<<<<< HEAD
+=======
+
+                        finalX = res.x;
+                        finalY = res.y;
+                    }
+
+                    if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                        initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
+                    } else {
+                        initialY = this.props.selectionData.region.top + uiNode.scrollTop;
+>>>>>>> f1d775e5... Build files (auto-generated)
                     }
                 }
             }, uiTasksTimeout);
@@ -13181,7 +13223,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var handleMouseLeave = CKEDITOR.tools.debounce(function (event) {
                 var aeUINodes = document.querySelectorAll('.ae-ui');
 
+<<<<<<< HEAD
                 var found;
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+
+                var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += uiNode.scrollTop;
+>>>>>>> f1d775e5... Build files (auto-generated)
 
                 for (var i = 0; i < aeUINodes.length; i++) {
                     if (aeUINodes[i].contains(event.data.$.relatedTarget)) {
@@ -17832,6 +17882,7 @@ exports.tabletools = _tabletools2.default;
 				editor.addFeature(cmd);
 			}
 
+<<<<<<< HEAD
 			addCmd('rowDelete', createDef({
 				requiredContent: 'table',
 				exec: function exec(editor) {
@@ -17839,6 +17890,15 @@ exports.tabletools = _tabletools2.default;
 					placeCursorInCell(deleteRows(selection));
 				}
 			}));
+=======
+                    var uiNode = this.props.editor.get('uiNode') || document.body;
+
+                    if (nativeEditor.element.getStyle('overflow') !== 'auto') {
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + uiNode.scrollTop) + 'px';
+                    } else {
+                        domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
+                    }
+>>>>>>> f1d775e5... Build files (auto-generated)
 
 			addCmd('rowInsertBefore', createDef({
 				requiredContent: 'table',

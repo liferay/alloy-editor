@@ -90,6 +90,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -118,6 +119,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.6
 >>>>>>> e8d0cc5551764d8ac67f65bcdf607aa0a7be0f46
+=======
+ * AlloyEditor v1.5.7
+>>>>>>> f1d775e5... Build files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30653,6 +30657,7 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
     };
 >>>>>>> 044ae5d4b4217bbf7f6d2cfdce575e8db6192a43
 
+<<<<<<< HEAD
             var result = [];
 
 <<<<<<< HEAD
@@ -30664,6 +30669,25 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
 
         if (payload.editor) {
             var nativeEditor = payload.editor._getNativeEditor();
+=======
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method tableSelectionSetPosition
+     * @param {Object} payload Object, which contains the selection data for retrieving the
+     * client rectangle of the selected table
+     * @return {Boolean} True, in all cases
+     */
+    var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+
+        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += uiNode.scrollTop;
+
+        centerToolbar(this, rect);
+>>>>>>> f1d775e5... Build files (auto-generated)
 
             selectionEmpty = nativeEditor.isSelectionEmpty();
         }
@@ -32025,8 +32049,55 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
         }
 
+<<<<<<< HEAD
         return result;
     };
+=======
+            return false;
+        },
+
+        /**
+         * Moves a widget from a starting point to a destination point.
+         *
+         * @instance
+         * @memberof WidgetPosition
+         * @method moveToPoint
+         * @param  {Object} startPoint The starting point for the movement.
+         * @param  {Object} endPoint The destination point for the movement.
+         */
+        moveToPoint: function moveToPoint(startPoint, endPoint) {
+            var domElement = new CKEDITOR.dom.element(ReactDOM.findDOMNode(this));
+
+            domElement.setStyles({
+                left: startPoint[0] + 'px',
+                top: startPoint[1] + 'px',
+                opacity: 0
+            });
+
+            domElement.removeClass('alloy-editor-invisible');
+
+            this._animate(function () {
+                domElement.addClass('ae-toolbar-transition');
+                domElement.addClass('alloy-editor-visible');
+                domElement.setStyles({
+                    left: endPoint[0] + 'px',
+                    top: endPoint[1] + 'px',
+                    opacity: 1
+                });
+            });
+        },
+
+        /**
+         * Shows the widget with the default animation transition.
+         *
+         * @instance
+         * @memberof WidgetPosition
+         * @method show
+         */
+        show: function show() {
+            var domNode = ReactDOM.findDOMNode(this);
+            var uiNode = this.props.editor.get('uiNode') || document.body;
+>>>>>>> f1d775e5... Build files (auto-generated)
 
     /**
      * Simulates event on a DOM element.
@@ -32059,9 +32130,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
     'use strict';
 
+<<<<<<< HEAD
     if (CKEDITOR.plugins.get('ae_uicore')) {
         return;
     }
+=======
+                    if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                        initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
+                    } else {
+                        initialY = this.props.selectionData.region.top + uiNode.scrollTop;
+                    }
+>>>>>>> f1d775e5... Build files (auto-generated)
 
     /**
      * UICore class which will handle user interactions with the editor. These interactions
@@ -32097,6 +32176,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * - message - The provided message from the UI element.
      */
 
+<<<<<<< HEAD
     /**
      * If set to true, the editor will still fire {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event,
      * if user presses Esc key.
@@ -32106,6 +32186,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @default false
      * @type Boolean
      */
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+
+                var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += uiNode.scrollTop;
+>>>>>>> f1d775e5... Build files (auto-generated)
 
     /**
      * Specifies the default timeout after which the {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event
@@ -36750,6 +36837,7 @@ exports.tabletools = _tabletools2.default;
 		var cells = getSelectedCells(selection);
 		if (cells.length > 1) return false;else if (isDetect) return true;
 
+<<<<<<< HEAD
 		var cell = cells[0],
 		    tr = cell.getParent(),
 		    table = tr.getAscendant('table'),
@@ -36760,6 +36848,15 @@ exports.tabletools = _tabletools2.default;
 		    newCell,
 		    newColSpan,
 		    newCellColSpan;
+=======
+                    var uiNode = this.props.editor.get('uiNode') || document.body;
+
+                    if (nativeEditor.element.getStyle('overflow') !== 'auto') {
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + uiNode.scrollTop) + 'px';
+                    } else {
+                        domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
+                    }
+>>>>>>> f1d775e5... Build files (auto-generated)
 
 		if (colSpan > 1) {
 			newColSpan = Math.ceil(colSpan / 2);

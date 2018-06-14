@@ -96,7 +96,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
 =======
 /**
- * AlloyEditor v1.5.6
+ * AlloyEditor v1.5.7
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -12341,11 +12341,42 @@ var ToolbarStyles = function (_React$Component) {
 =======
     var linkSelectionTest = function linkSelectionTest(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
+<<<<<<< HEAD
         var range = nativeEditor.getSelection().getRanges()[0];
         var selectionData = payload.data.selectionData;
 
         var selectionDataName;
 >>>>>>> c1d36639... Build files (auto-generated)
+=======
+        var uiNode = nativeEditor.config.uiNode || document.body;
+
+        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += uiNode.scrollTop;
+
+        centerToolbar(this, rect);
+
+        return true;
+    };
+
+    AlloyEditor.SelectionSetPosition = {
+        image: imageSelectionSetPosition,
+        table: tableSelectionSetPosition
+    };
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    var _isRangeAtElementEnd = function _isRangeAtElementEnd(range, element) {
+        // Finding if a range is at the end of an element is somewhat tricky due to how CKEditor handles
+        // ranges. It might depend on wether a source node inside the element is selected or not. For now,
+        // we need to cover the following cases:
+        //
+        // - The text length of the element is the same as the endOffset of the range
+        // - Both start and end containers match the element and the start and end offsets are 1
+>>>>>>> f1d775e5... Build files (auto-generated)
 
     }, {
         key: '_updatePosition',
@@ -13989,7 +14020,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var ariaElement = this._createAriaElement(editor.id);
 
+<<<<<<< HEAD
             var uiTasksTimeout = editor.config.uicore ? editor.config.uicore.timeout : 50;
+=======
+        /**
+         * Shows the widget with the default animation transition.
+         *
+         * @instance
+         * @memberof WidgetPosition
+         * @method show
+         */
+        show: function show() {
+            var domNode = ReactDOM.findDOMNode(this);
+            var uiNode = this.props.editor.get('uiNode') || document.body;
+>>>>>>> f1d775e5... Build files (auto-generated)
 
             var handleUI = CKEDITOR.tools.debounce(function (event) {
                 ariaState = [];
@@ -14015,10 +14059,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 var found;
 
+<<<<<<< HEAD
                 for (var i = 0; i < aeUINodes.length; i++) {
                     if (aeUINodes[i].contains(event.data.$.relatedTarget)) {
                         found = true;
                         break;
+=======
+                    if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                        initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
+                    } else {
+                        initialY = this.props.selectionData.region.top + uiNode.scrollTop;
+>>>>>>> f1d775e5... Build files (auto-generated)
                     }
                 }
 
@@ -14045,9 +14096,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 var focusHandler = editable.attachListener(editable, 'focus', function (event) {
                     focusHandler.removeListener();
 
+<<<<<<< HEAD
                     editable.attachListener(editable, 'keyup', handleUI);
                     editable.attachListener(editable, 'mouseup', handleUI);
                     editable.attachListener(editable, 'mouseleave', handleMouseLeave);
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+
+                var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += uiNode.scrollTop;
+>>>>>>> f1d775e5... Build files (auto-generated)
 
                     handleUI(event);
                 });
@@ -18664,6 +18723,7 @@ exports.tabletools = _tabletools2.default;
 				editor.addFeature(cmd);
 			}
 
+<<<<<<< HEAD
 			addCmd('rowDelete', createDef({
 				requiredContent: 'table',
 				exec: function exec(editor) {
@@ -18671,6 +18731,15 @@ exports.tabletools = _tabletools2.default;
 					placeCursorInCell(deleteRows(selection));
 				}
 			}));
+=======
+                    var uiNode = this.props.editor.get('uiNode') || document.body;
+
+                    if (nativeEditor.element.getStyle('overflow') !== 'auto') {
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + uiNode.scrollTop) + 'px';
+                    } else {
+                        domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
+                    }
+>>>>>>> f1d775e5... Build files (auto-generated)
 
 			addCmd('rowInsertBefore', createDef({
 				requiredContent: 'table',
