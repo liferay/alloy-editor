@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.6
+ * AlloyEditor v1.5.7
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -28279,10 +28279,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
     var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += uiNode.scrollTop;
 
-        centerToolbar(this, table.getClientRect());
+        centerToolbar(this, rect);
 
         return true;
     };
@@ -30375,6 +30378,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         show: function show() {
             var domNode = ReactDOM.findDOMNode(this);
+            var uiNode = this.props.editor.get('uiNode') || document.body;
 
             if (!this.isVisible() && domNode) {
                 var interactionPoint = this.getInteractionPoint();
@@ -30400,9 +30404,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     }
 
                     if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                        initialY = this.props.selectionData.region.bottom;
+                        initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
                     } else {
-                        initialY = this.props.selectionData.region.top;
+                        initialY = this.props.selectionData.region.top + uiNode.scrollTop;
                     }
 
                     this.moveToPoint([initialX, initialY], [finalX, finalY]);
@@ -30423,7 +30427,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var domNode = ReactDOM.findDOMNode(this);
 
             if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += uiNode.scrollTop;
 
                 new CKEDITOR.dom.element(domNode).setStyles({
                     left: xy[0] + 'px',
@@ -37115,8 +37122,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
                     domNode.style.top = Math.floor((region.bottom + region.top) / 2) + 'px';
 
+                    var uiNode = this.props.editor.get('uiNode') || document.body;
+
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {
-                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2) + 'px';
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + uiNode.scrollTop) + 'px';
                     } else {
                         domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
                     }
