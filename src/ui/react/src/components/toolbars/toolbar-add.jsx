@@ -316,6 +316,8 @@
 
                     domNode.style.top = Math.floor((region.bottom + region.top) / 2) + 'px';
 
+                    const uiNode = this.props.editor.get('uiNode') || document.body;
+
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {
                         domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + (startRect.height/2) + uiNode.scrollTop) + 'px';
                     } else {
