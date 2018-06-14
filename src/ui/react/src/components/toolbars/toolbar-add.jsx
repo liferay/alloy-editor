@@ -317,9 +317,9 @@
                     domNode.style.top = Math.floor((region.bottom + region.top) / 2) + 'px';
 
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {
-                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + 'px';
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + (startRect.height/2) + uiNode.scrollTop) + 'px';
                     } else {
-                        domNode.style.top = Math.floor( nativeEditor.element.$.offsetTop + (startRect.height / 2) - (domNode.offsetHeight / 2) ) + 'px';
+                        domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + (startRect.height / 2) - (domNode.offsetHeight / 2)) + 'px';
                     }
 
                     domNode.style.opacity = 1;

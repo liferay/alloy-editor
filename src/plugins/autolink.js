@@ -97,11 +97,15 @@
                     if (previousNode) {
                         // If previous node is a SPACE, (it does not have 'getLast' method),
                         // ignore it and find the previous text node
-                        while (!previousNode.getLast) {
+                        while (previousNode && previousNode.getLast) {
                             previousNode = previousNode.getPrevious();
                         }
 
-                        lastChild = previousNode.getLast();
+                        // Sometimes when getting out of the previous loop
+                        // the value of "previousNode" is null
+                        if (previousNode) {
+                            lastChild = previousNode.getLast();
+                        }
 
                         // Depending on the browser, the last child node may be a <BR>
                         // (which does not have 'getText' method),
