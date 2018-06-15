@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.7
+ * AlloyEditor v1.5.8
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -23731,14 +23731,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             return false;
         },
         show: function show(el) {
+            var uiNode = this.editor.config.uiNode;
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
             this.el = el;
             if (this.cfg.snapToSize) {
                 this.otherImages = toArray(this.document.getElementsByTagName('img'));
                 this.otherImages.splice(this.otherImages.indexOf(el), 1);
             }
             var box = this.box = getBoundingBox(this.window, el);
-            positionElement(this.container, box.left, box.top);
-            this.document.body.appendChild(this.container);
+            positionElement(this.container, box.left, box.top + scrollTop);
+
+            uiNode = uiNode || document.body;
+
+            uiNode.appendChild(this.container);
+
             this.el.classList.add('ckimgrsz');
             this.showHandles();
         },
@@ -28279,11 +28287,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
     var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
-        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNode = nativeEditor.config.uiNode;
+
+        var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
         var rect = table.getClientRect();
-        rect.top += uiNode.scrollTop;
+        rect.top += scrollTop;
 
         centerToolbar(this, rect);
 
@@ -30378,7 +30388,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         show: function show() {
             var domNode = ReactDOM.findDOMNode(this);
-            var uiNode = this.props.editor.get('uiNode') || document.body;
+            var uiNode = this.props.editor.get('uiNode');
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
             if (!this.isVisible() && domNode) {
                 var interactionPoint = this.getInteractionPoint();
@@ -30404,9 +30416,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     }
 
                     if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                        initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
+                        initialY = this.props.selectionData.region.bottom + scrollTop;
                     } else {
-                        initialY = this.props.selectionData.region.top + uiNode.scrollTop;
+                        initialY = this.props.selectionData.region.top + scrollTop;
                     }
 
                     this.moveToPoint([initialX, initialY], [finalX, finalY]);
@@ -30427,10 +30439,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var domNode = ReactDOM.findDOMNode(this);
 
             if (interactionPoint && domNode) {
-                var uiNode = this.props.editor.get('uiNode') || document.body;
+                var uiNode = this.props.editor.get('uiNode');
+
+                var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
-                xy[1] += uiNode.scrollTop;
+                xy[1] += scrollTop;
 
                 new CKEDITOR.dom.element(domNode).setStyles({
                     left: xy[0] + 'px',
@@ -37122,10 +37136,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
                     domNode.style.top = Math.floor((region.bottom + region.top) / 2) + 'px';
 
-                    var uiNode = this.props.editor.get('uiNode') || document.body;
+                    var uiNode = this.props.editor.get('uiNode');
+
+                    var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {
-                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + uiNode.scrollTop) + 'px';
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + scrollTop) + 'px';
                     } else {
                         domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
                     }

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.7</b>
+                        API Docs for Version: <b>1.5.8</b>
                     </p>
                 </li>
             </div>
@@ -397,7 +397,9 @@
                                      */
                                     show: function() {
                                         var domNode = ReactDOM.findDOMNode(this);
-                                        var uiNode = this.props.editor.get(&#x27;uiNode&#x27;) || document.body;
+                                        var uiNode = this.props.editor.get(&#x27;uiNode&#x27;);
+                            
+                                        var scrollTop = uiNode ? uiNode.scrollTop : 0;
                             
                                         if (!this.isVisible() &amp;&amp; domNode) {
                                             var interactionPoint = this.getInteractionPoint();
@@ -426,9 +428,9 @@
                                                 }
                             
                                                 if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                                                    initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
+                                                    initialY = this.props.selectionData.region.bottom + scrollTop;
                                                 } else {
-                                                    initialY = this.props.selectionData.region.top + uiNode.scrollTop;
+                                                    initialY = this.props.selectionData.region.top + scrollTop;
                                                 }
                             
                                                 this.moveToPoint([initialX, initialY], [finalX, finalY]);
@@ -449,11 +451,12 @@
                                         var domNode = ReactDOM.findDOMNode(this);
                             
                                         if (interactionPoint &amp;&amp; domNode) {
-                                            var uiNode = this.props.editor.get(&#x27;uiNode&#x27;) || document.body;
+                                            var uiNode = this.props.editor.get(&#x27;uiNode&#x27;);
                             
+                                            var scrollTop = uiNode ? uiNode.scrollTop : 0;
                             
                                             var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
-                                            xy[1] += uiNode.scrollTop;
+                                            xy[1] += scrollTop;
                             
                                             new CKEDITOR.dom.element(domNode).setStyles({
                                                 left: xy[0] + &#x27;px&#x27;,
