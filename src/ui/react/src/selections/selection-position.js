@@ -57,11 +57,13 @@
      */
     var tableSelectionSetPosition = function(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
-        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNode = nativeEditor.config.uiNode;
+
+        var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
         var rect = table.getClientRect();
-        rect.top += uiNode.scrollTop;
+        rect.top += scrollTop;
 
         centerToolbar(this, rect);
 
