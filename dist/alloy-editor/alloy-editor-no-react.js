@@ -96,7 +96,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
 =======
 /**
- * AlloyEditor v1.5.7
+ * AlloyEditor v1.5.8
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -3811,6 +3811,80 @@ exports.default = function (WrappedComponent) {
 
                     return domElement.hasClass('alloy-editor-visible');
                 }
+<<<<<<< HEAD
+=======
+            }
+            return false;
+        },
+        show: function show(el) {
+            var uiNode = this.editor.config.uiNode;
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+            this.el = el;
+            if (this.cfg.snapToSize) {
+                this.otherImages = toArray(this.document.getElementsByTagName('img'));
+                this.otherImages.splice(this.otherImages.indexOf(el), 1);
+            }
+            var box = this.box = getBoundingBox(this.window, el);
+            positionElement(this.container, box.left, box.top + scrollTop);
+
+            uiNode = uiNode || document.body;
+
+            uiNode.appendChild(this.container);
+
+            this.el.classList.add('ckimgrsz');
+            this.showHandles();
+        },
+        hide: function hide() {
+            // Remove class from all img.ckimgrsz
+            var elements = this.document.getElementsByClassName('ckimgrsz');
+            for (var i = 0; i < elements.length; ++i) {
+                elements[i].classList.remove('ckimgrsz');
+            }
+            this.hideHandles();
+            if (this.container.parentNode) {
+                this.container.parentNode.removeChild(this.container);
+            }
+        },
+        initDrag: function initDrag(e) {
+            if (e.button !== 0) {
+                //right-click or middle-click
+                return;
+            }
+            var resizer = this;
+            var drag = new DragEvent(this.window, this.document);
+            drag.onStart = function () {
+                resizer.showPreview();
+                resizer.isDragging = true;
+                resizer.editor.getSelection().lock();
+            };
+            drag.onDrag = function () {
+                resizer.calculateSize(this);
+                resizer.updatePreview();
+                var box = resizer.previewBox;
+                resizer.updateHandles(box, box.left, box.top);
+            };
+            drag.onRelease = function () {
+                resizer.isDragging = false;
+                resizer.hidePreview();
+                resizer.hide();
+                resizer.editor.getSelection().unlock();
+                // Save an undo snapshot before the image is permanently changed
+                resizer.editor.fire('saveSnapshot');
+            };
+            drag.onComplete = function () {
+                resizer.resizeComplete();
+                // Save another snapshot after the image is changed
+                resizer.editor.fire('saveSnapshot');
+            };
+            drag.start(e);
+        },
+        updateHandles: function updateHandles(box, left, top) {
+            left = left || 0;
+            top = top || 0;
+            var handles = this.handles;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
 
                 return false;
             }
@@ -12608,11 +12682,13 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
      */
     var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
-        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNode = nativeEditor.config.uiNode;
+
+        var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
         var rect = table.getClientRect();
-        rect.top += uiNode.scrollTop;
+        rect.top += scrollTop;
 
         centerToolbar(this, rect);
 >>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
@@ -14052,11 +14128,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         show: function show() {
             var domNode = ReactDOM.findDOMNode(this);
+<<<<<<< HEAD
             var uiNode = this.props.editor.get('uiNode') || document.body;
 <<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
 =======
 >>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
+=======
+            var uiNode = this.props.editor.get('uiNode');
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
 
             var handleUI = CKEDITOR.tools.debounce(function (event) {
                 ariaState = [];
@@ -14089,13 +14171,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         break;
 =======
                     if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                        initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
+                        initialY = this.props.selectionData.region.bottom + scrollTop;
                     } else {
+<<<<<<< HEAD
                         initialY = this.props.selectionData.region.top + uiNode.scrollTop;
 <<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
 =======
 >>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
+=======
+                        initialY = this.props.selectionData.region.top + scrollTop;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
                     }
                 }
 
@@ -14106,10 +14192,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }, uiTasksTimeout);
 =======
             if (interactionPoint && domNode) {
-                var uiNode = this.props.editor.get('uiNode') || document.body;
+                var uiNode = this.props.editor.get('uiNode');
+
+                var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
-                xy[1] += uiNode.scrollTop;
+                xy[1] += scrollTop;
 
                 new CKEDITOR.dom.element(domNode).setStyles({
                     left: xy[0] + 'px',
@@ -18775,10 +18863,12 @@ exports.tabletools = _tabletools2.default;
 =======
                     var uiNode = this.props.editor.get('uiNode') || document.body;
 
-                    var uiNode = this.props.editor.get('uiNode') || document.body;
+                    var uiNode = this.props.editor.get('uiNode');
+
+                    var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {
-                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + uiNode.scrollTop) + 'px';
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + scrollTop) + 'px';
                     } else {
                         domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
                     }

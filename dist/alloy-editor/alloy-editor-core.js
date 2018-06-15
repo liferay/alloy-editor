@@ -134,6 +134,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -168,6 +169,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.7
 >>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
+=======
+ * AlloyEditor v1.5.8
+>>>>>>> 4e8e54e6... Build files (auto-generated)
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2969,6 +2973,79 @@ exports.default = function (WrappedComponent) {
 
                 return [left, top];
             }
+<<<<<<< HEAD
+=======
+            return false;
+        },
+        show: function show(el) {
+            var uiNode = this.editor.config.uiNode;
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+            this.el = el;
+            if (this.cfg.snapToSize) {
+                this.otherImages = toArray(this.document.getElementsByTagName('img'));
+                this.otherImages.splice(this.otherImages.indexOf(el), 1);
+            }
+            var box = this.box = getBoundingBox(this.window, el);
+            positionElement(this.container, box.left, box.top + scrollTop);
+
+            uiNode = uiNode || document.body;
+
+            uiNode.appendChild(this.container);
+
+            this.el.classList.add('ckimgrsz');
+            this.showHandles();
+        },
+        hide: function hide() {
+            // Remove class from all img.ckimgrsz
+            var elements = this.document.getElementsByClassName('ckimgrsz');
+            for (var i = 0; i < elements.length; ++i) {
+                elements[i].classList.remove('ckimgrsz');
+            }
+            this.hideHandles();
+            if (this.container.parentNode) {
+                this.container.parentNode.removeChild(this.container);
+            }
+        },
+        initDrag: function initDrag(e) {
+            if (e.button !== 0) {
+                //right-click or middle-click
+                return;
+            }
+            var resizer = this;
+            var drag = new DragEvent(this.window, this.document);
+            drag.onStart = function () {
+                resizer.showPreview();
+                resizer.isDragging = true;
+                resizer.editor.getSelection().lock();
+            };
+            drag.onDrag = function () {
+                resizer.calculateSize(this);
+                resizer.updatePreview();
+                var box = resizer.previewBox;
+                resizer.updateHandles(box, box.left, box.top);
+            };
+            drag.onRelease = function () {
+                resizer.isDragging = false;
+                resizer.hidePreview();
+                resizer.hide();
+                resizer.editor.getSelection().unlock();
+                // Save an undo snapshot before the image is permanently changed
+                resizer.editor.fire('saveSnapshot');
+            };
+            drag.onComplete = function () {
+                resizer.resizeComplete();
+                // Save another snapshot after the image is changed
+                resizer.editor.fire('saveSnapshot');
+            };
+            drag.start(e);
+        },
+        updateHandles: function updateHandles(box, left, top) {
+            left = left || 0;
+            top = top || 0;
+            var handles = this.handles;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
 
             /**
              * Returns true if the widget is visible, false otherwise
@@ -10957,9 +11034,29 @@ var _toolbarButtons = __webpack_require__(/*! ../base/toolbar-buttons.js */ "./s
 
 var _toolbarButtons2 = _interopRequireDefault(_toolbarButtons);
 
+<<<<<<< HEAD
 var _widgetArrowBox = __webpack_require__(/*! ../base/widget-arrow-box.js */ "./src/components/base/widget-arrow-box.js");
 
 var _widgetArrowBox2 = _interopRequireDefault(_widgetArrowBox);
+=======
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method tableSelectionSetPosition
+     * @param {Object} payload Object, which contains the selection data for retrieving the
+     * client rectangle of the selected table
+     * @return {Boolean} True, in all cases
+     */
+    var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode;
+
+        var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += scrollTop;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
 
 var _widgetDropdown = __webpack_require__(/*! ../base/widget-dropdown.js */ "./src/components/base/widget-dropdown.js");
 
@@ -12453,9 +12550,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          *
          * If there is no native selection, the objects will be filled with 0.
          */
+<<<<<<< HEAD
         getClientRectsRegion: function getClientRectsRegion() {
             var selection = this.getSelection();
             var nativeSelection = selection.getNative();
+=======
+        show: function show() {
+            var domNode = ReactDOM.findDOMNode(this);
+            var uiNode = this.props.editor.get('uiNode');
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
 
             var defaultRect = {
                 bottom: 0,
@@ -12503,12 +12608,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         left = item.left;
                     }
 
+<<<<<<< HEAD
                     if (item.right > right) {
                         right = item.right;
                     }
 
                     if (item.top < top) {
                         top = item.top;
+=======
+                    if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                        initialY = this.props.selectionData.region.bottom + scrollTop;
+                    } else {
+                        initialY = this.props.selectionData.region.top + scrollTop;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
                     }
 
                     if (item.bottom > bottom) {
@@ -12570,10 +12682,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 return direction;
             }
 
+<<<<<<< HEAD
             var anchorNode;
 
             if ((anchorNode = nativeSelection.anchorNode) && anchorNode.compareDocumentPosition) {
                 var position = anchorNode.compareDocumentPosition(nativeSelection.focusNode);
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode');
+
+                var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+                var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += scrollTop;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
 
                 if (!position && nativeSelection.anchorOffset > nativeSelection.focusOffset || position === Node.DOCUMENT_POSITION_PRECEDING) {
                     direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
@@ -18033,10 +18155,12 @@ exports.tabletools = _tabletools2.default;
 =======
                     var uiNode = this.props.editor.get('uiNode') || document.body;
 
-                    var uiNode = this.props.editor.get('uiNode') || document.body;
+                    var uiNode = this.props.editor.get('uiNode');
+
+                    var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {
-                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + uiNode.scrollTop) + 'px';
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + scrollTop) + 'px';
                     } else {
                         domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
                     }

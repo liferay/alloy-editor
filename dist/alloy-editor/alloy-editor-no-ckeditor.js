@@ -92,6 +92,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -126,6 +127,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.7
 >>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
+=======
+ * AlloyEditor v1.5.8
+>>>>>>> 4e8e54e6... Build files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11734,6 +11738,7 @@ var ReactFiberHydrationContext = function (config) {
                 didNotFindHydratableContainerTextInstance(parentContainer, text);
                 break;
             }
+<<<<<<< HEAD
             break;
           }
         case HostComponent:
@@ -11751,6 +11756,48 @@ var ReactFiberHydrationContext = function (config) {
                 var _text = fiber.pendingProps;
                 didNotFindHydratableTextInstance(parentType, parentProps, parentInstance, _text);
                 break;
+=======
+        },
+        createHandle: function createHandle(name) {
+            var el = this.document.createElement('i');
+            el.classList.add(name);
+            return el;
+        },
+        isHandle: function isHandle(el) {
+            var handles = this.handles;
+            for (var n in handles) {
+                if (handles[n] === el) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        show: function show(el) {
+            var uiNode = this.editor.config.uiNode;
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+            this.el = el;
+            if (this.cfg.snapToSize) {
+                this.otherImages = toArray(this.document.getElementsByTagName('img'));
+                this.otherImages.splice(this.otherImages.indexOf(el), 1);
+            }
+            var box = this.box = getBoundingBox(this.window, el);
+            positionElement(this.container, box.left, box.top + scrollTop);
+
+            uiNode = uiNode || document.body;
+
+            uiNode.appendChild(this.container);
+
+            this.el.classList.add('ckimgrsz');
+            this.showHandles();
+        },
+        hide: function hide() {
+            // Remove class from all img.ckimgrsz
+            var elements = this.document.getElementsByClassName('ckimgrsz');
+            for (var i = 0; i < elements.length; ++i) {
+                elements[i].classList.remove('ckimgrsz');
+>>>>>>> 4e8e54e6... Build files (auto-generated)
             }
             break;
           }
@@ -30743,11 +30790,13 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
      */
     var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
-        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNode = nativeEditor.config.uiNode;
+
+        var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
         var rect = table.getClientRect();
-        rect.top += uiNode.scrollTop;
+        rect.top += scrollTop;
 
         centerToolbar(this, rect);
 >>>>>>> f1d775e5... Build files (auto-generated)
@@ -32159,11 +32208,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          */
         show: function show() {
             var domNode = ReactDOM.findDOMNode(this);
+<<<<<<< HEAD
             var uiNode = this.props.editor.get('uiNode') || document.body;
 <<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
 =======
 >>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
+=======
+            var uiNode = this.props.editor.get('uiNode');
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
 
     /**
      * Simulates event on a DOM element.
@@ -32202,9 +32257,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }
 =======
                     if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                        initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
+                        initialY = this.props.selectionData.region.bottom + scrollTop;
                     } else {
-                        initialY = this.props.selectionData.region.top + uiNode.scrollTop;
+                        initialY = this.props.selectionData.region.top + scrollTop;
                     }
 >>>>>>> f1d775e5... Build files (auto-generated)
 
@@ -32254,14 +32309,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
 =======
             if (interactionPoint && domNode) {
-                var uiNode = this.props.editor.get('uiNode') || document.body;
+                var uiNode = this.props.editor.get('uiNode');
+
+                var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+<<<<<<< HEAD
                 xy[1] += uiNode.scrollTop;
 <<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
 =======
 >>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
+=======
+                xy[1] += scrollTop;
+>>>>>>> 4e8e54e6... Build files (auto-generated)
 
     /**
      * Specifies the default timeout after which the {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event
@@ -36920,10 +36981,12 @@ exports.tabletools = _tabletools2.default;
 =======
                     var uiNode = this.props.editor.get('uiNode') || document.body;
 
-                    var uiNode = this.props.editor.get('uiNode') || document.body;
+                    var uiNode = this.props.editor.get('uiNode');
+
+                    var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {
-                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + uiNode.scrollTop) + 'px';
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + scrollTop) + 'px';
                     } else {
                         domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
                     }
