@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.8</b>
+                        API Docs for Version: <b>1.5.9</b>
                     </p>
                 </li>
             </div>
@@ -299,7 +299,17 @@
                                         }
                             
                                         if (selectedElement &amp;&amp; CKEDITOR.env.ie) {
-                                            return selectedElement.getChildren(&#x27;a&#x27;).getItem(0);
+                                            var children = selectedElement.getChildren();
+                            
+                                            var count = children.count();
+                            
+                                            for (var i = 0 ; i &lt; count ; i++) {
+                                                var node = children.getItem(i);
+                            
+                                                if (node.is(&#x27;a&#x27;)) {
+                                                    return node;
+                                                }
+                                            }
                                         }
                             
                                         var range = selection.getRanges()[0];
