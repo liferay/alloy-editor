@@ -94,6 +94,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -134,6 +135,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.8
 >>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
+=======
+ * AlloyEditor v1.5.9
+>>>>>>> b2e3a7e2... Build files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -6045,7 +6049,17 @@ var SelectEventPlugin = {
             }
 
             if (selectedElement && CKEDITOR.env.ie) {
-                return selectedElement.getChildren('a').getItem(0);
+                var children = selectedElement.getChildren();
+
+                var count = children.count();
+
+                for (var i = 0; i < count; i++) {
+                    var node = children.getItem(i);
+
+                    if (node.is('a')) {
+                        return node;
+                    }
+                }
             }
 
             var range = selection.getRanges()[0];
