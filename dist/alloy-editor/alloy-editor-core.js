@@ -137,6 +137,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -180,6 +181,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.9
 >>>>>>> b2e3a7e2... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.10
+>>>>>>> 6aa8bc0d... Build files (auto-generated)
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -3525,6 +3529,7 @@ var ButtonCameraImage = function (_React$Component) {
             window.alert('An error occurred! ' + error);
         }
 
+<<<<<<< HEAD
         /**
          * Starts streaming video in the video element and sets width/height to the video
          * and canvas elements.
@@ -3535,6 +3540,24 @@ var ButtonCameraImage = function (_React$Component) {
          * @param {Object} stream The video stream
          * @protected
          */
+=======
+    // Returns a function which transforms the widget to the external format
+    // according to the current configuration.
+    //
+    // @param {CKEDITOR.editor}
+    function downcastWidgetElement(editor) {
+        var alignClasses = editor.config.image2_alignClasses;
+
+        // @param {CKEDITOR.htmlParser.element} el
+        return function (el) {
+            // In case of <a><img/></a>, <img/> is the element to hold
+            // inline styles or classes (image2_alignClasses).
+            var attrsHolder = el.name == 'a' ? el.getFirst() : el;
+
+            delete attrsHolder.attributes.contenteditable;
+
+            var attrs = attrsHolder.attributes;
+>>>>>>> 6aa8bc0d... Build files (auto-generated)
 
     }, {
         key: '_handleStreamSuccess',

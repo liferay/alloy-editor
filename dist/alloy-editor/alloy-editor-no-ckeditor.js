@@ -95,6 +95,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -138,6 +139,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.9
 >>>>>>> b2e3a7e2... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.10
+>>>>>>> 6aa8bc0d... Build files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12957,6 +12961,7 @@ var ReactFiberScheduler = function (config) {
           ReactDebugCurrentFiber.resetCurrentFiber();
         }
 
+<<<<<<< HEAD
         if (_next !== null) {
           stopWorkTimer(workInProgress);
           if (true && ReactFiberInstrumentation_1.debugTool) {
@@ -12969,6 +12974,11 @@ var ReactFiberScheduler = function (config) {
           _next.effectTag &= HostEffectMask;
           return _next;
         }
+=======
+            delete attrsHolder.attributes.contenteditable;
+
+            var attrs = attrsHolder.attributes;
+>>>>>>> 6aa8bc0d... Build files (auto-generated)
 
         if (returnFiber !== null) {
           // Mark the parent fiber as incomplete and clear its effect list.
