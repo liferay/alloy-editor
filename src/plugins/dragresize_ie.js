@@ -546,6 +546,8 @@
             // inline styles or classes (image2_alignClasses).
             var attrsHolder = el.name == 'a' ? el.getFirst() : el;
 
+            delete attrsHolder.attributes.contenteditable;
+
             var attrs = attrsHolder.attributes;
 
             var align = this.data.align;
@@ -944,7 +946,7 @@
                                 region: region
                             }
                         });
-                    }    
+                    }
                 }
             }
         });
