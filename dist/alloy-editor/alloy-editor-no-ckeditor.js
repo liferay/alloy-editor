@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.9
+ * AlloyEditor v1.5.10
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -23755,6 +23755,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             // In case of <a><img/></a>, <img/> is the element to hold
             // inline styles or classes (image2_alignClasses).
             var attrsHolder = el.name == 'a' ? el.getFirst() : el;
+
+            delete attrsHolder.attributes.contenteditable;
 
             var attrs = attrsHolder.attributes;
 
