@@ -123,9 +123,12 @@
             var domNode = ReactDOM.findDOMNode(this);
 
             var gutter = this.props.gutter;
+            var offsetWidth = domNode.offsetWidth;
+            var halfWidth = offsetWidth / 2;
+
 
             if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
-                left = left - gutter.left - (domNode.offsetWidth / 2);
+                left = left - gutter.left - halfWidth;
 
                 top = (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) ? (top + gutter.top) :
                     (top - domNode.offsetHeight - gutter.top);
@@ -144,9 +147,16 @@
                 left = 0;
             }
 
+
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
+            }
+
             if (top < 0) {
                 top = 0;
             }
+
+
 
             return [left, top];
         },
