@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.10
+ * AlloyEditor v1.5.11
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -10079,9 +10079,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var domNode = ReactDOM.findDOMNode(this);
 
             var gutter = this.props.gutter;
+            var offsetWidth = domNode.offsetWidth;
+            var halfWidth = offsetWidth / 2;
 
             if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
-                left = left - gutter.left - domNode.offsetWidth / 2;
+                left = left - gutter.left - halfWidth;
 
                 top = direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM ? top + gutter.top : top - domNode.offsetHeight - gutter.top;
             } else if (direction === CKEDITOR.SELECTION_LEFT_TO_RIGHT || direction === CKEDITOR.SELECTION_RIGHT_TO_LEFT) {
@@ -10093,6 +10095,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             if (left < 0) {
                 left = 0;
+            }
+
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
             }
 
             if (top < 0) {
