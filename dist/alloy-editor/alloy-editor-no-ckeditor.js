@@ -97,6 +97,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -146,6 +147,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.10
 >>>>>>> f10103176800c497f0e01c5c6f70a98a500cd832
+=======
+ * AlloyEditor v1.5.11
+>>>>>>> 031ae200... Build files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32145,6 +32149,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         urlParams = urlParams || {};
         urlParams.callback = 'CKEDITOR._.jsonpCallbacks[' + callbackKey + ']';
 
+<<<<<<< HEAD
         if (!CKEDITOR._.jsonpCallbacks) {
             CKEDITOR._.jsonpCallbacks = {};
         }
@@ -32152,6 +32157,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         CKEDITOR._.jsonpCallbacks[callbackKey] = function (response) {
             setTimeout(function () {
                 cleanUp();
+=======
+            var gutter = this.props.gutter;
+            var offsetWidth = domNode.offsetWidth;
+            var halfWidth = offsetWidth / 2;
+
+            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
+                left = left - gutter.left - halfWidth;
+>>>>>>> 031ae200... Build files (auto-generated)
 
                 callback(response);
             });
@@ -32175,7 +32188,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
         }
 
+<<<<<<< HEAD
         CKEDITOR.document.getBody().append(scriptElement);
+=======
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
+            }
+
+            if (top < 0) {
+                top = 0;
+            }
+>>>>>>> 031ae200... Build files (auto-generated)
 
         return {
             cancel: cleanUp,

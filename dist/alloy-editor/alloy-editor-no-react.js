@@ -96,7 +96,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
 =======
 /**
- * AlloyEditor v1.5.10
+ * AlloyEditor v1.5.11
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -8438,6 +8438,7 @@ ButtonQuote.defaultProps = {
 
 exports.default = (0, _buttonCommand2.default)((0, _buttonStateClasses2.default)((0, _buttonStyle2.default)(ButtonQuote)));
 
+<<<<<<< HEAD
 /***/ }),
 
 /***/ "./src/components/buttons/button-remove-format.jsx":
@@ -8446,6 +8447,14 @@ exports.default = (0, _buttonCommand2.default)((0, _buttonStateClasses2.default)
   \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
+=======
+            var gutter = this.props.gutter;
+            var offsetWidth = domNode.offsetWidth;
+            var halfWidth = offsetWidth / 2;
+
+            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
+                left = left - gutter.left - halfWidth;
+>>>>>>> 031ae200... Build files (auto-generated)
 
 "use strict";
 
@@ -8456,7 +8465,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _buttonCommand = __webpack_require__(/*! ../base/button-command.js */ "./src/components/base/button-command.js");
+=======
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
+            }
+
+            if (top < 0) {
+                top = 0;
+            }
+>>>>>>> 031ae200... Build files (auto-generated)
 
 var _buttonCommand2 = _interopRequireDefault(_buttonCommand);
 
