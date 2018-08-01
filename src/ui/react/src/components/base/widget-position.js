@@ -148,8 +148,8 @@
             }
 
 
-            if (left > document.body.offsetWidth - halfWidth) {
-                left = document.body.offsetWidth - halfWidth;
+            if (left > document.body.offsetWidth - offsetWidth) {
+                left = document.body.offsetWidth - offsetWidth;
             }
 
             if (top < 0) {
