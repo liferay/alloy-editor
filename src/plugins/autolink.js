@@ -55,17 +55,19 @@
                 }.bind(this));
 
                 editor.on('paste', function (event) {
-                    var data = event.data.dataValue;
+                    if (event.data.method === 'paste') {
+                        var data = event.data.dataValue;
 
-                    var match = data.match(REGEX_URL);
+                        var match = data.match(REGEX_URL);
 
-                    if (match && match.length) {
-                        match = match[0];
+                        if (match && match.length) {
+                            match = match[0];
 
-                        var remainder = data.replace(match, '');
+                            var remainder = data.replace(match, '');
 
-                        if (this._isValidURL(match)) {
-                            event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                            if (this._isValidURL(match)) {
+                                event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                            }
                         }
                     }
                 }.bind(this));
