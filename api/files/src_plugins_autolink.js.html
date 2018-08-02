@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.11</b>
+                        API Docs for Version: <b>1.5.12</b>
                     </p>
                 </li>
             </div>
@@ -241,17 +241,19 @@
                                             }.bind(this));
                             
                                             editor.on(&#x27;paste&#x27;, function (event) {
-                                                var data = event.data.dataValue;
+                                                if (event.data.method === &#x27;paste&#x27;) {
+                                                    var data = event.data.dataValue;
                             
-                                                var match = data.match(REGEX_URL);
+                                                    var match = data.match(REGEX_URL);
                             
-                                                if (match &amp;&amp; match.length) {
-                                                    match = match[0];
+                                                    if (match &amp;&amp; match.length) {
+                                                        match = match[0];
                             
-                                                    var remainder = data.replace(match, &#x27;&#x27;);
+                                                        var remainder = data.replace(match, &#x27;&#x27;);
                             
-                                                    if (this._isValidURL(match)) {
-                                                        event.data.dataValue = &#x27;&lt;a href=\&quot;&#x27; + match + &#x27;\&quot;&gt;&#x27; + match + &#x27;&lt;/a&gt;&#x27; + remainder;
+                                                        if (this._isValidURL(match)) {
+                                                            event.data.dataValue = &#x27;&lt;a href=\&quot;&#x27; + match + &#x27;\&quot;&gt;&#x27; + match + &#x27;&lt;/a&gt;&#x27; + remainder;
+                                                        }
                                                     }
                                                 }
                                             }.bind(this));
