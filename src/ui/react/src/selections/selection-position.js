@@ -42,9 +42,11 @@
      * @return {Boolean} True, in all cases
      */
     var imageSelectionSetPosition = function(payload) {
-        centerToolbar(this, payload.selectionData.element.getClientRect());
+        if (payload.selectionData && payload.selectionData.element) {
+            centerToolbar(this, payload.selectionData.element.getClientRect());
 
-        return true;
+            return true;
+        }
     };
 
     /**

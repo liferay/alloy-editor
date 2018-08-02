@@ -59,11 +59,18 @@
             selectionEmpty = nativeEditor.isSelectionEmpty();
         }
 
+        var isImageWidget = function(element) {
+            return element.getAttribute('data-widget') === 'image' ||
+                element.getAscendant(
+                    el => el.getAttribute('data-widget') === 'image'
+                );
+        };
+
         return !!(
             selectionData.element &&
             selectionData.element.getName() === 'img' &&
             !selectionEmpty &&
-            !selectionData.element.isReadOnly()
+            (!selectionData.element.isReadOnly() || isImageWidget(selectionData.element))
         );
     };
 
