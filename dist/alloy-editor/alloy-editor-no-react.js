@@ -96,7 +96,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
 =======
 /**
- * AlloyEditor v1.5.11
+ * AlloyEditor v1.5.12
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -3054,17 +3054,19 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 =======
 
             editor.on('paste', function (event) {
-                var data = event.data.dataValue;
+                if (event.data.method === 'paste') {
+                    var data = event.data.dataValue;
 
-                var match = data.match(REGEX_URL);
+                    var match = data.match(REGEX_URL);
 
-                if (match && match.length) {
-                    match = match[0];
+                    if (match && match.length) {
+                        match = match[0];
 
-                    var remainder = data.replace(match, '');
+                        var remainder = data.replace(match, '');
 
-                    if (this._isValidURL(match)) {
-                        event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                        if (this._isValidURL(match)) {
+                            event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                        }
                     }
                 }
             }.bind(this));
@@ -4511,6 +4513,7 @@ var ButtonCamera = function (_React$Component) {
     return ButtonCamera;
 }(_react2.default.Component);
 
+<<<<<<< HEAD
 /**
  * The name which will be used as an alias of the button in the configuration.
  *
@@ -4532,27 +4535,1417 @@ ButtonCamera.key = 'camera';
 >>>>>>> 6aa8bc0d... Build files (auto-generated)
 
 exports.default = ButtonCamera;
+=======
+    // Returns a function which transforms the widget to the external format
+    // according to the current configuration.
+    //
+    // @param {CKEDITOR.editor}
+    function downcastWidgetElement(editor) {
+        var alignClasses = editor.config.image2_alignClasses;
+
+        // @param {CKEDITOR.htmlParser.element} el
+        return function (el) {
+            // In case of <a><img/></a>, <img/> is the element to hold
+            // inline styles or classes (image2_alignClasses).
+            var attrsHolder = el.name == 'a' ? el.getFirst() : el;
+
+            delete attrsHolder.attributes.contenteditable;
+
+            var attrs = attrsHolder.attributes;
+
+            var align = this.data.align;
+
+            // De-wrap the image from resize handle wrapper.
+            // Only block widgets have one.
+            if (!this.inline) {
+                var resizeWrapper = el.getFirst('span');
+
+                if (resizeWrapper) {
+                    resizeWrapper.replaceWith(resizeWrapper.getFirst({
+                        a: 1,
+                        img: 1
+                    }));
+                }
+            }
+
+            if (align && align != 'none') {
+                var styles = CKEDITOR.tools.parseCssText(attrs.style || '');
+
+                // When the widget is captioned (<figure>) and internally centering is done
+                // with widget's wrapper style/class, in the external data representation,
+                // <figure> must be wrapped with an element holding an style/class:
+                //
+                // 	<div style="text-align:center">
+                // 		<figure class="image" style="display:inline-block">...</figure>
+                // 	</div>
+                // or
+                // 	<div class="some-center-class">
+                // 		<figure class="image">...</figure>
+                // 	</div>
+                //
+                if (align == 'center' && el.name == 'figure') {
+                    el = el.wrapWith(new CKEDITOR.htmlParser.element('div', alignClasses ? {
+                        'class': alignClasses[1]
+                    } : {
+                        style: 'text-align:center'
+                    }));
+                }
+
+                // If left/right, add float style to the downcasted element.
+                else if (align in {
+                        left: 1,
+                        right: 1
+                    }) {
+                        if (alignClasses) {
+                            attrsHolder.addClass(alignClasses[alignmentsObj[align]]);
+                        } else {
+                            styles['float'] = align;
+                        }
+                    }
+
+                // Update element styles.
+                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) {
+                    attrs.style = CKEDITOR.tools.writeCssText(styles);
+                }
+            }
+
+            return el;
+        };
+    }
+
+    // Returns a function that checks if an element is a centering wrapper.
+    //
+    // @param {CKEDITOR.editor} editor
+    // @returns {Function}
+    function centerWrapperChecker(editor) {
+        var captionedClass = editor.config.image2_captionedClass;
+
+        var alignClasses = editor.config.image2_alignClasses;
+
+        var validChildren = {
+            a: 1,
+            figure: 1,
+            img: 1
+        };
+
+        return function (el) {
+            // Wrapper must be either <div> or <p>.
+            if (!(el.name in {
+                div: 1,
+                p: 1
+            })) {
+                return false;
+            }
+
+            var children = el.children;
+
+            // Centering wrapper can have only one child.
+            if (children.length !== 1) {
+                return false;
+            }
+
+            var child = children[0];
+
+            // Only <figure> or <img /> can be first (only) child of centering wrapper,
+            // regardless of its type.
+            if (!(child.name in validChildren)) {
+                return false;
+            }
+
+            // If centering wrapper is <p>, only <img /> can be the child.
+            //   <p style="text-align:center"><img /></p>
+            if (el.name == 'p') {
+                if (!isLinkedOrStandaloneImage(child)) {
+                    return false;
+                }
+            }
+            // Centering <div> can hold <img/> or <figure>, depending on enterMode.
+            else {
+                    // If a <figure> is the first (only) child, it must have a class.
+                    //   <div style="text-align:center"><figure>...</figure><div>
+                    if (child.name == 'figure') {
+                        if (!child.hasClass(captionedClass)) {
+                            return false;
+                        }
+                    } else {
+                        // Centering <div> can hold <img/> or <a><img/></a> only when enterMode
+                        // is ENTER_(BR|DIV).
+                        //   <div style="text-align:center"><img /></div>
+                        //   <div style="text-align:center"><a><img /></a></div>
+                        if (editor.enterMode == CKEDITOR.ENTER_P) {
+                            return false;
+                        }
+
+                        // Regardless of enterMode, a child which is not <figure> must be
+                        // either <img/> or <a><img/></a>.
+                        if (!isLinkedOrStandaloneImage(child)) {
+                            return false;
+                        }
+                    }
+                }
+
+            // Centering wrapper got to be... centering. If image2_alignClasses are defined,
+            // check for centering class. Otherwise, check the style.
+            if (alignClasses ? el.hasClass(alignClasses[1]) : CKEDITOR.tools.parseCssText(el.attributes.style || '', true)['text-align'] == 'center') {
+                return true;
+            }
+
+            return false;
+        };
+    }
+
+    // Checks whether element is <img/> or <a><img/></a>.
+    //
+    // @param {CKEDITOR.htmlParser.element}
+    function isLinkedOrStandaloneImage(el) {
+        if (el.name == 'img') {
+            return true;
+        } else if (el.name == 'a') {
+            return el.children.length == 1 && el.getFirst('img');
+        }
+
+        return false;
+    }
+
+    // Sets width and height of the widget image according to current widget data.
+    //
+    // @param {CKEDITOR.plugins.widget} widget
+    function setDimensions(widget) {
+        var data = widget.data;
+
+        var dimensions = {
+            height: data.height,
+            width: data.width
+        };
+
+        var image = widget.parts.image;
+
+        for (var d in dimensions) {
+            if (dimensions[d]) {
+                image.setAttribute(d, dimensions[d]);
+            } else {
+                image.removeAttribute(d);
+            }
+        }
+    }
+
+    // Defines all features related to drag-driven image resizing.
+    //
+    // @param {CKEDITOR.plugins.widget} widget
+    function setupResizer(widget) {
+        var editor = widget.editor;
+
+        var editable = editor.editable();
+
+        var doc = editor.document;
+
+        // Store the resizer in a widget for testing (#11004).
+        var resizer = widget.resizer = doc.createElement('span');
+
+        resizer.addClass('cke_image_resizer');
+        resizer.addClass('cke_image_resizer_' + cursor[editor.config.imageScaleResize]);
+        resizer.append(new CKEDITOR.dom.text('\u200B', doc));
+
+        // Inline widgets don't need a resizer wrapper as an image spans the entire widget.
+        if (!widget.inline) {
+            var imageOrLink = widget.parts.link || widget.parts.image;
+
+            var oldResizeWrapper = imageOrLink.getParent();
+
+            var resizeWrapper = doc.createElement('span');
+
+            resizeWrapper.addClass('cke_image_resizer_wrapper');
+            resizeWrapper.append(imageOrLink);
+            resizeWrapper.append(resizer);
+            widget.element.append(resizeWrapper, true);
+
+            // Remove the old wrapper which could came from e.g. pasted HTML
+            // and which could be corrupted (e.g. resizer span has been lost).
+            if (oldResizeWrapper.is('span')) {
+                oldResizeWrapper.remove();
+            }
+        } else {
+            widget.wrapper.append(resizer);
+        }
+
+        // Calculate values of size variables and mouse offsets.
+        resizer.on('mousedown', function (evt) {
+            var image = widget.parts.image;
+
+            // "factor" can be either 1 or -1. I.e.: For right-aligned images, we need to
+            // subtract the difference to get proper width, etc. Without "factor",
+            // resizer starts working the opposite way.
+            var factor = widget.data.align == 'right' ? -1 : 1;
+
+            // The x-coordinate of the mouse relative to the screen
+            // when button gets pressed.
+            var startX = evt.data.$.screenX;
+
+            var startY = evt.data.$.screenY;
+
+            // The initial dimensions and aspect ratio of the image.
+            var startWidth = image.$.clientWidth;
+
+            var startHeight = image.$.clientHeight;
+
+            var listeners = [];
+
+            // A class applied to editable during resizing.
+            var cursorClass = 'cke_image_s' + (!~factor ? 'w' : 'e');
+
+            var nativeEvt, newWidth, newHeight, updateData;
+
+            var moveDiffX, moveDiffY, moveRatio;
+
+            // Save the undo snapshot first: before resizing.
+            editor.fire('saveSnapshot');
+
+            // Mousemove listeners are removed on mouseup.
+            attachToDocuments('mousemove', onMouseMove, listeners);
+
+            // Clean up the mousemove listener. Update widget data if valid.
+            attachToDocuments('mouseup', onMouseUp, listeners);
+
+            // The entire editable will have the special cursor while resizing goes on.
+            editable.addClass(cursorClass);
+
+            // This is to always keep the resizer element visible while resizing.
+            resizer.addClass('cke_image_resizing');
+
+            // Attaches an event to a global document if inline editor.
+            // Additionally, if classic (`iframe`-based) editor, also attaches the same event to `iframe`'s document.
+            function attachToDocuments(name, callback, collection) {
+                var globalDoc = CKEDITOR.document;
+
+                var listeners = [];
+
+                if (!doc.equals(globalDoc)) {
+                    listeners.push(globalDoc.on(name, callback));
+                }
+
+                listeners.push(doc.on(name, callback));
+
+                if (collection) {
+                    for (var i = listeners.length; i--;) {
+                        collection.push(listeners.pop());
+                    }
+                }
+            }
+
+            // This is how variables refer to the geometry.
+            // Note: x corresponds to moveOffset, this is the position of mouse
+            // Note: o corresponds to [startX, startY].
+            //
+            // 	+--------------+--------------+
+            // 	|              |              |
+            // 	|      I       |      II      |
+            // 	|              |              |
+            // 	+------------- o -------------+ _ _ _
+            // 	|              |              |      ^
+
+            // 	|      VI      |     III      |      | moveDiffY
+            // 	|              |         x _ _ _ _ _ v
+            // 	+--------------+---------|----+
+            // 	               |         |
+            // 	                <------->
+            // 	                moveDiffX
+            function onMouseMove(evt) {
+                var imageScaleResize = editor.config.imageScaleResize;
+
+                nativeEvt = evt.data.$;
+
+                // This is how far the mouse is from the point the button was pressed.
+                moveDiffX = nativeEvt.screenX - startX;
+                moveDiffY = startY - nativeEvt.screenY;
+
+                // This is the aspect ratio of the move difference.
+                moveRatio = Math.abs(moveDiffX / moveDiffY);
+
+                if (imageScaleResize === 'width' || imageScaleResize === 'both' || imageScaleResize === 'scale') {
+                    newWidth = startWidth + factor * moveDiffX;
+                }
+
+                if (imageScaleResize === 'height' || imageScaleResize === 'both') {
+                    newHeight = startHeight - moveDiffY;
+                }
+
+                if (imageScaleResize === 'scale') {
+                    newHeight = 'auto';
+                }
+
+                newWidth = newWidth || startWidth;
+                newHeight = newHeight || startHeight;
+
+                // Don't update attributes if less than 10.
+                // This is to prevent images to visually disappear.
+                if (newWidth >= 15 && (newHeight >= 15 || newHeight === 'auto')) {
+                    image.setAttributes({
+                        width: newWidth,
+                        height: newHeight
+                    });
+                    updateData = true;
+                } else {
+                    updateData = false;
+                }
+            }
+
+            function onMouseUp() {
+                var l;
+
+                while (l = listeners.pop()) {
+                    l.removeListener();
+                }
+
+                // Restore default cursor by removing special class.
+                editable.removeClass(cursorClass);
+
+                // This is to bring back the regular behaviour of the resizer.
+                resizer.removeClass('cke_image_resizing');
+
+                if (updateData) {
+                    widget.setData({
+                        height: newHeight,
+                        width: newWidth
+                    });
+
+                    // Save another undo snapshot: after resizing.
+                    editor.fire('saveSnapshot');
+                }
+
+                // Don't update data twice or more.
+                updateData = false;
+            }
+        });
+
+        // Change the position of the widget resizer when data changes.
+        widget.on('data', function () {
+            resizer[widget.data.align == 'right' ? 'addClass' : 'removeClass']('cke_image_resizer_left');
+        });
+
+        widget.parts.image.on('click', function () {
+            var selection = editor.getSelection();
+
+            if (selection) {
+                var element = selection.getStartElement();
+
+                if (element) {
+                    var widgetElement = element.findOne('img');
+
+                    if (widgetElement) {
+                        var region = element.getClientRect();
+
+                        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+                        region.left -= scrollPosition.x;
+                        region.top += scrollPosition.y;
+
+                        region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                        editor.fire('editorInteraction', {
+                            nativeEvent: event,
+                            selectionData: {
+                                element: widgetElement,
+                                region: region
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    // Returns a set of widget allowedContent rules, depending
+    // on configurations like config#image2_alignClasses or
+    // config#image2_captionedClass.
+    //
+    // @param {CKEDITOR.editor}
+    // @returns {Object}
+    function getWidgetAllowedContent(editor) {
+        var rules = {
+            figcaption: true,
+            figure: {
+                classes: '!' + editor.config.image2_captionedClass
+            },
+            img: {
+                attributes: '!src,alt,width,height'
+            }
+        };
+
+        return rules;
+    }
+
+    // Returns a set of widget feature rules, depending
+    // on editor configuration. Note that the following may not cover
+    // all the possible cases since requiredContent supports a single
+    // tag only.
+    //
+    // @param {CKEDITOR.editor}
+    // @returns {Object}
+    function getWidgetFeatures(editor) {
+        var alignClasses = editor.config.image2_alignClasses;
+
+        var features = {
+            align: {
+                requiredContent: 'img' + (alignClasses ? '(' + alignClasses[0] + ')' : '{float}')
+            },
+            caption: {
+                requiredContent: 'figcaption'
+            },
+            dimension: {
+                requiredContent: 'img[width,height]'
+            }
+        };
+
+        return features;
+    }
+
+    // Returns element which is styled, considering current
+    // state of the widget.
+    //
+    // @see CKEDITOR.plugins.widget#applyStyle
+    // @param {CKEDITOR.plugins.widget} widget
+    // @returns {CKEDITOR.dom.element}
+    function getStyleableElement(widget) {
+        return widget.data.hasCaption ? widget.element : widget.parts.image;
+    }
+})();
+
+CKEDITOR.config.image2_captionedClass = 'image';
+'use strict';
+
+/**
+ * @license Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
+ */
+
+(function () {
+
+    if (CKEDITOR.plugins.get('ae_dragresize_ie11')) {
+        return;
+    }
+
+    var template = '<img alt="" src="" />',
+        templateBlock = new CKEDITOR.template('<figure class="{captionedClass}">' + template + '<figcaption>{captionPlaceholder}</figcaption>' + '</figure>'),
+        alignmentsObj = { left: 0, center: 1, right: 2 },
+        regexPercent = /^\s*(\d+\%)\s*$/i;
+
+    CKEDITOR.plugins.add('ae_dragresize_ie11', {
+        requires: 'widget',
+        onLoad: function onLoad() {
+            CKEDITOR.addCss('.cke_image_nocaption{' +
+            // This is to remove unwanted space so resize
+            // wrapper is displayed property.
+            'line-height:0' + '}' + '.cke_editable.cke_image_sw, .cke_editable.cke_image_sw *{cursor:sw-resize !important}' + '.cke_editable.cke_image_se, .cke_editable.cke_image_se *{cursor:se-resize !important}' + '.cke_image_resizer{' + 'display:none;' + 'position:absolute;' + 'width:10px;' + 'height:10px;' + 'bottom:-5px;' + 'right:-5px;' + 'background:#000;' + 'outline:1px solid #fff;' +
+            // Prevent drag handler from being misplaced (#11207).
+            'line-height:0;' + 'cursor:se-resize;' + '}' + '.cke_image_resizer_wrapper{' + 'position:relative;' + 'display:inline-block;' + 'line-height:0;' + '}' +
+            // Bottom-left corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-5px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
+            // Expand widget wrapper when linked inline image.
+            '.cke_widget_wrapper>a{' + 'display:inline-block' + '}');
+        },
+
+        init: function init(editor) {
+            // Adapts configuration from original image plugin. Should be removed
+            // when we'll rename ae_dragresize_ie11 to image.
+            var config = editor.config,
+                image = widgetDef(editor);
+
+            // Register the widget.
+            editor.widgets.add('image', image);
+
+            // Add a listener to handle selection change events and properly detect editor
+            // interactions on the widgets without messing with widget native selection
+            editor.on('selectionChange', function (event) {
+                var selection = editor.getSelection();
+
+                if (selection) {
+                    var element = selection.getSelectedElement();
+
+                    if (element) {
+                        var widgetElement = element.findOne('img');
+
+                        if (widgetElement) {
+                            var region = element.getClientRect();
+
+                            var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+                            region.left -= scrollPosition.x;
+                            region.top += scrollPosition.y;
+
+                            region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                            editor.fire('editorInteraction', {
+                                nativeEvent: {},
+                                selectionData: {
+                                    element: widgetElement,
+                                    region: region
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        },
+
+        afterInit: function afterInit(editor) {
+            // Integrate with align commands (justify plugin).
+            var align = { left: 1, right: 1, center: 1, block: 1 },
+                integrate = alignCommandIntegrator(editor);
+
+            for (var value in align) {
+                integrate(value);
+            }
+        }
+    });
+
+    // Wiget states (forms) depending on alignment and configuration.
+    //
+    // Non-captioned widget (inline styles)
+    // 		┌──────┬───────────────────────────────┬─────────────────────────────┐
+    // 		│Align │Internal form                  │Data                         │
+    // 		├──────┼───────────────────────────────┼─────────────────────────────┤
+    // 		│none  │<wrapper>                      │<img />                      │
+    // 		│      │ <img />                       │                             │
+    // 		│      │</wrapper>                     │                             │
+    // 		├──────┼───────────────────────────────┼─────────────────────────────┤
+    // 		│left  │<wrapper style=”float:left”>   │<img style=”float:left” />   │
+    // 		│      │ <img />                       │                             │
+    // 		│      │</wrapper>                     │                             │
+    // 		├──────┼───────────────────────────────┼─────────────────────────────┤
+    // 		│center│<wrapper>                      │<p style=”text-align:center”>│
+    // 		│      │ <p style=”text-align:center”> │  <img />                    │
+    // 		│      │   <img />                     │</p>                         │
+    // 		│      │ </p>                          │                             │
+    // 		│      │</wrapper>                     │                             │
+    // 		├──────┼───────────────────────────────┼─────────────────────────────┤
+    // 		│right │<wrapper style=”float:right”>  │<img style=”float:right” />  │
+    // 		│      │ <img />                       │                             │
+    // 		│      │</wrapper>                     │                             │
+    // 		└──────┴───────────────────────────────┴─────────────────────────────┘
+    //
+    // Non-captioned widget (config.ae_dragresize_ie11_alignClasses defined)
+    // 		┌──────┬───────────────────────────────┬─────────────────────────────┐
+    // 		│Align │Internal form                  │Data                         │
+    // 		├──────┼───────────────────────────────┼─────────────────────────────┤
+    // 		│none  │<wrapper>                      │<img />                      │
+    // 		│      │ <img />                       │                             │
+    // 		│      │</wrapper>                     │                             │
+    // 		├──────┼───────────────────────────────┼─────────────────────────────┤
+    // 		│left  │<wrapper class=”left”>         │<img class=”left” />         │
+    // 		│      │ <img />                       │                             │
+    // 		│      │</wrapper>                     │                             │
+    // 		├──────┼───────────────────────────────┼─────────────────────────────┤
+    // 		│center│<wrapper>                      │<p class=”center”>           │
+    // 		│      │ <p class=”center”>            │ <img />                     │
+    // 		│      │   <img />                     │</p>                         │
+    // 		│      │ </p>                          │                             │
+    // 		│      │</wrapper>                     │                             │
+    // 		├──────┼───────────────────────────────┼─────────────────────────────┤
+    // 		│right │<wrapper class=”right”>        │<img class=”right” />        │
+    // 		│      │ <img />                       │                             │
+    // 		│      │</wrapper>                     │                             │
+    // 		└──────┴───────────────────────────────┴─────────────────────────────┘
+    //
+    // Captioned widget (inline styles)
+    // 		┌──────┬────────────────────────────────────────┬────────────────────────────────────────┐
+    // 		│Align │Internal form                           │Data                                    │
+    // 		├──────┼────────────────────────────────────────┼────────────────────────────────────────┤
+    // 		│none  │<wrapper>                               │<figure />                              │
+    // 		│      │ <figure />                             │                                        │
+    // 		│      │</wrapper>                              │                                        │
+    // 		├──────┼────────────────────────────────────────┼────────────────────────────────────────┤
+    // 		│left  │<wrapper style=”float:left”>            │<figure style=”float:left” />           │
+    // 		│      │ <figure />                             │                                        │
+    // 		│      │</wrapper>                              │                                        │
+    // 		├──────┼────────────────────────────────────────┼────────────────────────────────────────┤
+    // 		│center│<wrapper style=”text-align:center”>     │<div style=”text-align:center”>         │
+    // 		│      │ <figure style=”display:inline-block” />│ <figure style=”display:inline-block” />│
+    // 		│      │</wrapper>                              │</p>                                    │
+    // 		├──────┼────────────────────────────────────────┼────────────────────────────────────────┤
+    // 		│right │<wrapper style=”float:right”>           │<figure style=”float:right” />          │
+    // 		│      │ <figure />                             │                                        │
+    // 		│      │</wrapper>                              │                                        │
+    // 		└──────┴────────────────────────────────────────┴────────────────────────────────────────┘
+    //
+    // Captioned widget (config.ae_dragresize_ie11_alignClasses defined)
+    // 		┌──────┬────────────────────────────────────────┬────────────────────────────────────────┐
+    // 		│Align │Internal form                           │Data                                    │
+    // 		├──────┼────────────────────────────────────────┼────────────────────────────────────────┤
+    // 		│none  │<wrapper>                               │<figure />                              │
+    // 		│      │ <figure />                             │                                        │
+    // 		│      │</wrapper>                              │                                        │
+    // 		├──────┼────────────────────────────────────────┼────────────────────────────────────────┤
+    // 		│left  │<wrapper class=”left”>                  │<figure class=”left” />                 │
+    // 		│      │ <figure />                             │                                        │
+    // 		│      │</wrapper>                              │                                        │
+    // 		├──────┼────────────────────────────────────────┼────────────────────────────────────────┤
+    // 		│center│<wrapper class=”center”>                │<div class=”center”>                    │
+    // 		│      │ <figure />                             │ <figure />                             │
+    // 		│      │</wrapper>                              │</p>                                    │
+    // 		├──────┼────────────────────────────────────────┼────────────────────────────────────────┤
+    // 		│right │<wrapper class=”right”>                 │<figure class=”right” />                │
+    // 		│      │ <figure />                             │                                        │
+    // 		│      │</wrapper>                              │                                        │
+    // 		└──────┴────────────────────────────────────────┴────────────────────────────────────────┘
+    //
+    // @param {CKEDITOR.editor}
+    // @returns {Object}
+    function widgetDef(editor) {
+        var alignClasses = editor.config.ae_dragresize_ie11_alignClasses,
+            captionedClass = editor.config.ae_dragresize_ie11_captionedClass;
+
+        function deflate() {
+            if (this.deflated) return;
+
+            // Remember whether widget was focused before destroyed.
+            if (editor.widgets.focused == this.widget) this.focused = true;
+
+            editor.widgets.destroy(this.widget);
+
+            // Mark widget was destroyed.
+            this.deflated = true;
+        }
+
+        function inflate() {
+            var editable = editor.editable(),
+                doc = editor.document;
+
+            // Create a new widget. This widget will be either captioned
+            // non-captioned, block or inline according to what is the
+            // new state of the widget.
+            if (this.deflated) {
+                this.widget = editor.widgets.initOn(this.element, 'image', this.widget.data);
+
+                // Once widget was re-created, it may become an inline element without
+                // block wrapper (i.e. when unaligned, end not captioned). Let's do some
+                // sort of autoparagraphing here (#10853).
+                if (this.widget.inline && !new CKEDITOR.dom.elementPath(this.widget.wrapper, editable).block) {
+                    var block = doc.createElement(editor.activeEnterMode == CKEDITOR.ENTER_P ? 'p' : 'div');
+                    block.replace(this.widget.wrapper);
+                    this.widget.wrapper.move(block);
+                }
+
+                // The focus must be transferred from the old one (destroyed)
+                // to the new one (just created).
+                if (this.focused) {
+                    this.widget.focus();
+                    delete this.focused;
+                }
+
+                delete this.deflated;
+            }
+
+            // If now widget was destroyed just update wrapper's alignment.
+            // According to the new state.
+            else {
+                    setWrapperAlign(this.widget, alignClasses);
+                }
+        }
+
+        return {
+            allowedContent: getWidgetAllowedContent(editor),
+
+            requiredContent: 'img[src,alt]',
+
+            features: getWidgetFeatures(editor),
+
+            styleableElements: 'img figure',
+
+            // This widget converts style-driven dimensions to attributes.
+            contentTransformations: [['img[width]: sizeToAttribute']],
+
+            // This widget has an editable caption.
+            editables: {
+                caption: {
+                    selector: 'figcaption',
+                    allowedContent: 'br em strong sub sup u s; a[!href,target]'
+                }
+            },
+
+            parts: {
+                image: 'img',
+                caption: 'figcaption'
+                // parts#link defined in widget#init
+            },
+
+            // Template of the widget: plain image.
+            template: template,
+
+            data: function data() {
+                var features = this.features;
+
+                // Image can't be captioned when figcaption is disallowed (#11004).
+                if (this.data.hasCaption && !editor.filter.checkFeature(features.caption)) this.data.hasCaption = false;
+
+                // Image can't be aligned when floating is disallowed (#11004).
+                if (this.data.align != 'none' && !editor.filter.checkFeature(features.align)) this.data.align = 'none';
+
+                // Convert the internal form of the widget from the old state to the new one.
+                this.shiftState({
+                    widget: this,
+                    element: this.element,
+                    oldData: this.oldData,
+                    newData: this.data,
+                    deflate: deflate,
+                    inflate: inflate
+                });
+
+                // Update widget.parts.link since it will not auto-update unless widget
+                // is destroyed and re-inited.
+                if (!this.data.link) {
+                    if (this.parts.link) delete this.parts.link;
+                } else {
+                    if (!this.parts.link) this.parts.link = this.parts.image.getParent();
+                }
+
+                this.parts.image.setAttributes({
+                    src: this.data.src,
+
+                    // This internal is required by the editor.
+                    'data-cke-saved-src': this.data.src,
+
+                    alt: this.data.alt
+                });
+
+                // If shifting non-captioned -> captioned, remove classes
+                // related to styles from <img/>.
+                if (this.oldData && !this.oldData.hasCaption && this.data.hasCaption) {
+                    for (var c in this.data.classes) {
+                        this.parts.image.removeClass(c);
+                    }
+                }
+
+                // Set dimensions of the image according to gathered data.
+                // Do it only when the attributes are allowed (#11004).
+                if (editor.filter.checkFeature(features.dimension)) setDimensions(this);
+
+                // Cache current data.
+                this.oldData = CKEDITOR.tools.extend({}, this.data);
+            },
+
+            init: function init() {
+                var helpers = CKEDITOR.plugins.ae_dragresize_ie11,
+                    image = this.parts.image,
+                    data = {
+                    hasCaption: !!this.parts.caption,
+                    src: image.getAttribute('src'),
+                    alt: image.getAttribute('alt') || '',
+                    width: image.getAttribute('width') || '',
+                    height: image.getAttribute('height') || '',
+
+                    // Lock ratio is on by default (#10833).
+                    lock: this.ready ? helpers.checkHasNaturalRatio(image) : true
+                };
+
+                // If we used 'a' in widget#parts definition, it could happen that
+                // selected element is a child of widget.parts#caption. Since there's no clever
+                // way to solve it with CSS selectors, it's done like that. (#11783).
+                var link = image.getAscendant('a');
+
+                if (link && this.wrapper.contains(link)) this.parts.link = link;
+
+                // Depending on configuration, read style/class from element and
+                // then remove it. Removed style/class will be set on wrapper in #data listener.
+                // Note: Center alignment is detected during upcast, so only left/right cases
+                // are checked below.
+                if (!data.align) {
+                    var alignElement = data.hasCaption ? this.element : image;
+
+                    // Read the initial left/right alignment from the class set on element.
+                    if (alignClasses) {
+                        if (alignElement.hasClass(alignClasses[0])) {
+                            data.align = 'left';
+                        } else if (alignElement.hasClass(alignClasses[2])) {
+                            data.align = 'right';
+                        }
+
+                        if (data.align) {
+                            alignElement.removeClass(alignClasses[alignmentsObj[data.align]]);
+                        } else {
+                            data.align = 'none';
+                        }
+                    }
+                    // Read initial float style from figure/image and then remove it.
+                    else {
+                            data.align = alignElement.getStyle('float') || 'none';
+                            alignElement.removeStyle('float');
+                        }
+                }
+
+                // Update data.link object with attributes if the link has been discovered.
+                if (editor.plugins.link && this.parts.link) {
+                    data.link = helpers.getLinkAttributesParser()(editor, this.parts.link);
+
+                    // Get rid of cke_widget_* classes in data. Otherwise
+                    // they might appear in link dialog.
+                    var advanced = data.link.advanced;
+                    if (advanced && advanced.advCSSClasses) {
+                        advanced.advCSSClasses = CKEDITOR.tools.trim(advanced.advCSSClasses.replace(/cke_\S+/, ''));
+                    }
+                }
+
+                // Get rid of extra vertical space when there's no caption.
+                // It will improve the look of the resizer.
+                this.wrapper[(data.hasCaption ? 'remove' : 'add') + 'Class']('cke_image_nocaption');
+
+                this.setData(data);
+
+                // Setup dynamic image resizing with mouse.
+                // Don't initialize resizer when dimensions are disallowed (#11004).
+                if (editor.filter.checkFeature(this.features.dimension) && editor.config.ae_dragresize_ie11_disableResizer !== true) setupResizer(this);
+
+                this.shiftState = helpers.stateShifter(this.editor);
+
+                // Add widget editing option to its context menu.
+                this.on('contextMenu', function (evt) {
+                    evt.data.image = CKEDITOR.TRISTATE_OFF;
+
+                    // Integrate context menu items for link.
+                    // Note that widget may be wrapped in a link, which
+                    // does not belong to that widget (#11814).
+                    if (this.parts.link || this.wrapper.getAscendant('a')) evt.data.link = evt.data.unlink = CKEDITOR.TRISTATE_OFF;
+                });
+            },
+
+            // Overrides default method to handle internal mutability of ae_dragresize_ie11.
+            // @see CKEDITOR.plugins.widget#addClass
+            addClass: function addClass(className) {
+                getStyleableElement(this).addClass(className);
+            },
+
+            // Overrides default method to handle internal mutability of ae_dragresize_ie11.
+            // @see CKEDITOR.plugins.widget#hasClass
+            hasClass: function hasClass(className) {
+                return getStyleableElement(this).hasClass(className);
+            },
+
+            // Overrides default method to handle internal mutability of ae_dragresize_ie11.
+            // @see CKEDITOR.plugins.widget#removeClass
+            removeClass: function removeClass(className) {
+                getStyleableElement(this).removeClass(className);
+            },
+
+            // Overrides default method to handle internal mutability of ae_dragresize_ie11.
+            // @see CKEDITOR.plugins.widget#getClasses
+            getClasses: function () {
+                var classRegex = new RegExp('^(' + [].concat(captionedClass, alignClasses).join('|') + ')$');
+
+                return function () {
+                    var classes = this.repository.parseElementClasses(getStyleableElement(this).getAttribute('class'));
+
+                    // Neither config.ae_dragresize_ie11_captionedClass nor config.ae_dragresize_ie11_alignClasses
+                    // do not belong to style classes.
+                    for (var c in classes) {
+                        if (classRegex.test(c)) delete classes[c];
+                    }
+
+                    return classes;
+                };
+            }(),
+
+            upcast: upcastWidgetElement(editor),
+            downcast: downcastWidgetElement(editor),
+
+            getLabel: function getLabel() {
+                var label = (this.data.alt || '') + ' ' + this.pathName;
+
+                return this.editor.lang.widget.label.replace(/%1/, label);
+            }
+        };
+    }
+
+    /**
+     * A set of Enhanced Image (ae_dragresize_ie11) plugin helpers.
+     *
+     * @class
+     * @singleton
+     */
+    CKEDITOR.plugins.ae_dragresize_ie11 = {
+        stateShifter: function stateShifter(editor) {
+            // Tag name used for centering non-captioned widgets.
+            var doc = editor.document,
+                alignClasses = editor.config.ae_dragresize_ie11_alignClasses,
+                captionedClass = editor.config.ae_dragresize_ie11_captionedClass,
+                editable = editor.editable(),
+
+
+            // The order that stateActions get executed. It matters!
+            shiftables = ['hasCaption', 'align', 'link'];
+
+            // Atomic procedures, one per state variable.
+            var stateActions = {
+                align: function align(shift, oldValue, newValue) {
+                    var el = shift.element;
+
+                    // Alignment changed.
+                    if (shift.changed.align) {
+                        // No caption in the new state.
+                        if (!shift.newData.hasCaption) {
+                            // Changed to "center" (non-captioned).
+                            if (newValue == 'center') {
+                                shift.deflate();
+                                shift.element = wrapInCentering(editor, el);
+                            }
+
+                            // Changed to "non-center" from "center" while caption removed.
+                            if (!shift.changed.hasCaption && oldValue == 'center' && newValue != 'center') {
+                                shift.deflate();
+                                shift.element = unwrapFromCentering(el);
+                            }
+                        }
+                    }
+
+                    // Alignment remains and "center" removed caption.
+                    else if (newValue == 'center' && shift.changed.hasCaption && !shift.newData.hasCaption) {
+                            shift.deflate();
+                            shift.element = wrapInCentering(editor, el);
+                        }
+
+                    // Finally set display for figure.
+                    if (!alignClasses && el.is('figure')) {
+                        if (newValue == 'center') el.setStyle('display', 'inline-block');else el.removeStyle('display');
+                    }
+                },
+
+                hasCaption: function hasCaption(shift, oldValue, newValue) {
+                    // This action is for real state change only.
+                    if (!shift.changed.hasCaption) return;
+
+                    // Get <img/> or <a><img/></a> from widget. Note that widget element might itself
+                    // be what we're looking for. Also element can be <p style="text-align:center"><a>...</a></p>.
+                    var imageOrLink;
+                    if (shift.element.is({ img: 1, a: 1 })) imageOrLink = shift.element;else imageOrLink = shift.element.findOne('a,img');
+
+                    // Switching hasCaption always destroys the widget.
+                    shift.deflate();
+
+                    // There was no caption, but the caption is to be added.
+                    if (newValue) {
+                        // Create new <figure> from widget template.
+                        var figure = CKEDITOR.dom.element.createFromHtml(templateBlock.output({
+                            captionedClass: captionedClass,
+                            captionPlaceholder: editor.lang.ae_dragresize_ie11.captionPlaceholder
+                        }), doc);
+
+                        // Replace element with <figure>.
+                        replaceSafely(figure, shift.element);
+
+                        // Use old <img/> or <a><img/></a> instead of the one from the template,
+                        // so we won't lose additional attributes.
+                        imageOrLink.replace(figure.findOne('img'));
+
+                        // Update widget's element.
+                        shift.element = figure;
+                    }
+
+                    // The caption was present, but now it's to be removed.
+                    else {
+                            // Unwrap <img/> or <a><img/></a> from figure.
+                            imageOrLink.replace(shift.element);
+
+                            // Update widget's element.
+                            shift.element = imageOrLink;
+                        }
+                },
+
+                link: function link(shift, oldValue, newValue) {
+                    if (shift.changed.link) {
+                        var img = shift.element.is('img') ? shift.element : shift.element.findOne('img'),
+                            link = shift.element.is('a') ? shift.element : shift.element.findOne('a'),
+
+                        // Why deflate:
+                        // If element is <img/>, it will be wrapped into <a>,
+                        // which becomes a new widget.element.
+                        // If element is <a><img/></a>, it will be unlinked
+                        // so <img/> becomes a new widget.element.
+                        needsDeflate = shift.element.is('a') && !newValue || shift.element.is('img') && newValue,
+                            newEl;
+
+                        if (needsDeflate) shift.deflate();
+
+                        // If unlinked the image, returned element is <img>.
+                        if (!newValue) newEl = unwrapFromLink(link);else {
+                            // If linked the image, returned element is <a>.
+                            if (!oldValue) newEl = wrapInLink(img, shift.newData.link);
+
+                            // Set and remove all attributes associated with this state.
+                            var attributes = CKEDITOR.plugins.ae_dragresize_ie11.getLinkAttributesGetter()(editor, newValue);
+
+                            if (!CKEDITOR.tools.isEmpty(attributes.set)) (newEl || link).setAttributes(attributes.set);
+
+                            if (attributes.removed.length) (newEl || link).removeAttributes(attributes.removed);
+                        }
+
+                        if (needsDeflate) shift.element = newEl;
+                    }
+                }
+            };
+
+            function wrapInCentering(editor, element) {
+                var attribsAndStyles = {};
+
+                if (alignClasses) attribsAndStyles.attributes = { 'class': alignClasses[1] };else attribsAndStyles.styles = { 'text-align': 'center' };
+
+                // There's no gentle way to center inline element with CSS, so create p/div
+                // that wraps widget contents and does the trick either with style or class.
+                var center = doc.createElement(editor.activeEnterMode == CKEDITOR.ENTER_P ? 'p' : 'div', attribsAndStyles);
+
+                // Replace element with centering wrapper.
+                replaceSafely(center, element);
+                element.move(center);
+
+                return center;
+            }
+
+            function unwrapFromCentering(element) {
+                var imageOrLink = element.findOne('a,img');
+
+                imageOrLink.replace(element);
+
+                return imageOrLink;
+            }
+
+            // Wraps <img/> -> <a><img/></a>.
+            // Returns reference to <a>.
+            //
+            // @param {CKEDITOR.dom.element} img
+            // @param {Object} linkData
+            // @returns {CKEDITOR.dom.element}
+            function wrapInLink(img, linkData) {
+                var link = doc.createElement('a', {
+                    attributes: {
+                        href: linkData.url
+                    }
+                });
+
+                link.replace(img);
+                img.move(link);
+
+                return link;
+            }
+
+            // De-wraps <a><img/></a> -> <img/>.
+            // Returns the reference to <img/>
+            //
+            // @param {CKEDITOR.dom.element} link
+            // @returns {CKEDITOR.dom.element}
+            function unwrapFromLink(link) {
+                var img = link.findOne('img');
+
+                img.replace(link);
+
+                return img;
+            }
+
+            function replaceSafely(replacing, replaced) {
+                if (replaced.getParent()) {
+                    var range = editor.createRange();
+
+                    range.moveToPosition(replaced, CKEDITOR.POSITION_BEFORE_START);
+
+                    // Remove old element. Do it before insertion to avoid a case when
+                    // element is moved from 'replaced' element before it, what creates
+                    // a tricky case which insertElementIntorRange does not handle.
+                    replaced.remove();
+
+                    editable.insertElementIntoRange(replacing, range);
+                } else {
+                    replacing.replace(replaced);
+                }
+            }
+
+            return function (shift) {
+                var name, i;
+
+                shift.changed = {};
+
+                for (i = 0; i < shiftables.length; i++) {
+                    name = shiftables[i];
+
+                    shift.changed[name] = shift.oldData ? shift.oldData[name] !== shift.newData[name] : false;
+                }
+
+                // Iterate over possible state variables.
+                for (i = 0; i < shiftables.length; i++) {
+                    name = shiftables[i];
+
+                    stateActions[name](shift, shift.oldData ? shift.oldData[name] : null, shift.newData[name]);
+                }
+
+                shift.inflate();
+            };
+        },
+
+        /**
+         * Checks whether the current image ratio matches the natural one
+         * by comparing dimensions.
+         *
+         * @param {CKEDITOR.dom.element} image
+         * @returns {Boolean}
+         */
+        checkHasNaturalRatio: function checkHasNaturalRatio(image) {
+            var $ = image.$,
+                natural = this.getNatural(image);
+
+            // The reason for two alternative comparisons is that the rounding can come from
+            // both dimensions, e.g. there are two cases:
+            // 	1. height is computed as a rounded relation of the real height and the value of width,
+            //	2. width is computed as a rounded relation of the real width and the value of heigh.
+            return Math.round($.clientWidth / natural.width * natural.height) == $.clientHeight || Math.round($.clientHeight / natural.height * natural.width) == $.clientWidth;
+        },
+
+        /**
+         * Returns natural dimensions of the image. For modern browsers
+         * it uses natural(Width|Height). For old ones (IE8) it creates
+         * a new image and reads the dimensions.
+         *
+         * @param {CKEDITOR.dom.element} image
+         * @returns {Object}
+         */
+        getNatural: function getNatural(image) {
+            var dimensions;
+
+            if (image.$.naturalWidth) {
+                dimensions = {
+                    width: image.$.naturalWidth,
+                    height: image.$.naturalHeight
+                };
+            } else {
+                var img = new Image();
+                img.src = image.getAttribute('src');
+
+                dimensions = {
+                    width: img.width,
+                    height: img.height
+                };
+            }
+
+            return dimensions;
+        },
+
+        /**
+         * Returns an attribute getter function. Default getter comes from the Link plugin
+         * and is documented by {@link CKEDITOR.plugins.link#getLinkAttributes}.
+         *
+         * **Note:** It is possible to override this method and use a custom getter e.g.
+         * in the absence of the Link plugin.
+         *
+         * **Note:** If a custom getter is used, a data model format it produces
+         * must be compatible with {@link CKEDITOR.plugins.link#getLinkAttributes}.
+         *
+         * **Note:** A custom getter must understand the data model format produced by
+         * {@link #getLinkAttributesParser} to work correctly.
+         *
+         * @returns {Function} A function that gets (composes) link attributes.
+         * @since 4.5.5
+         */
+        getLinkAttributesGetter: function getLinkAttributesGetter() {
+            // #13885
+            return CKEDITOR.plugins.link.getLinkAttributes;
+        },
+
+        /**
+         * Returns an attribute parser function. Default parser comes from the Link plugin
+         * and is documented by {@link CKEDITOR.plugins.link#parseLinkAttributes}.
+         *
+         * **Note:** It is possible to override this method and use a custom parser e.g.
+         * in the absence of the Link plugin.
+         *
+         * **Note:** If a custom parser is used, a data model format produced by the parser
+         * must be compatible with {@link #getLinkAttributesGetter}.
+         *
+         * **Note:** If a custom parser is used, it should be compatible with the
+         * {@link CKEDITOR.plugins.link#parseLinkAttributes} data model format. Otherwise the
+         * Link plugin dialog may not be populated correctly with parsed data. However
+         * as long as Enhanced Image is **not** used with the Link plugin dialog, any custom data model
+         * will work, being stored as an internal property of Enhanced Image widget's data only.
+         *
+         * @returns {Function} A function that parses attributes.
+         * @since 4.5.5
+         */
+        getLinkAttributesParser: function getLinkAttributesParser() {
+            // #13885
+            return CKEDITOR.plugins.link.parseLinkAttributes;
+        }
+    };
+
+    function setWrapperAlign(widget, alignClasses) {
+        var wrapper = widget.wrapper,
+            align = widget.data.align,
+            hasCaption = widget.data.hasCaption;
+
+        if (alignClasses) {
+            // Remove all align classes first.
+            for (var i = 3; i--;) {
+                wrapper.removeClass(alignClasses[i]);
+            }if (align == 'center') {
+                // Avoid touching non-captioned, centered widgets because
+                // they have the class set on the element instead of wrapper:
+                //
+                // 	<div class="cke_widget_wrapper">
+                // 		<p class="center-class">
+                // 			<img />
+                // 		</p>
+                // 	</div>
+                if (hasCaption) {
+                    wrapper.addClass(alignClasses[1]);
+                }
+            } else if (align != 'none') {
+                wrapper.addClass(alignClasses[alignmentsObj[align]]);
+            }
+        } else {
+            if (align == 'center') {
+                if (hasCaption) wrapper.setStyle('text-align', 'center');else wrapper.removeStyle('text-align');
+
+                wrapper.removeStyle('float');
+            } else {
+                if (align == 'none') wrapper.removeStyle('float');else wrapper.setStyle('float', align);
+
+                wrapper.removeStyle('text-align');
+            }
+        }
+    }
+
+    // Returns a function that creates widgets from all <img> and
+    // <figure class="{config.ae_dragresize_ie11_captionedClass}"> elements.
+    //
+    // @param {CKEDITOR.editor} editor
+    // @returns {Function}
+    function upcastWidgetElement(editor) {
+        var isCenterWrapper = centerWrapperChecker(editor),
+            captionedClass = editor.config.ae_dragresize_ie11_captionedClass;
+
+        // @param {CKEDITOR.htmlParser.element} el
+        // @param {Object} data
+        return function (el, data) {
+            var dimensions = { width: 1, height: 1 },
+                name = el.name,
+                image;
+
+            // #11110 Don't initialize on pasted fake objects.
+            if (el.attributes['data-cke-realelement']) return;
+
+            // If a center wrapper is found, there are 3 possible cases:
+            //
+            // 1. <div style="text-align:center"><figure>...</figure></div>.
+            //    In this case centering is done with a class set on widget.wrapper.
+            //    Simply replace centering wrapper with figure (it's no longer necessary).
+            //
+            // 2. <p style="text-align:center"><img/></p>.
+            //    Nothing to do here: <p> remains for styling purposes.
+            //
+            // 3. <div style="text-align:center"><img/></div>.
+            //    Nothing to do here (2.) but that case is only possible in enterMode different
+            //    than ENTER_P.
+            if (isCenterWrapper(el)) {
+                if (name == 'div') {
+                    var figure = el.getFirst('figure');
+
+                    // Case #1.
+                    if (figure) {
+                        el.replaceWith(figure);
+                        el = figure;
+                    }
+                }
+                // Cases #2 and #3 (handled transparently)
+
+                // If there's a centering wrapper, save it in data.
+                data.align = 'center';
+
+                // Image can be wrapped in link <a><img/></a>.
+                image = el.getFirst('img') || el.getFirst('a').getFirst('img');
+            }
+
+            // No center wrapper has been found.
+            else if (name == 'figure' && el.hasClass(captionedClass)) {
+                    image = el.getFirst('img') || el.getFirst('a').getFirst('img');
+
+                    // Upcast linked image like <a><img/></a>.
+                } else if (isLinkedOrStandaloneImage(el)) {
+                    image = el.name == 'a' ? el.children[0] : el;
+                }
+
+            if (!image) return;
+
+            // If there's an image, then cool, we got a widget.
+            // Now just remove dimension attributes expressed with %.
+            for (var d in dimensions) {
+                var dimension = image.attributes[d];
+
+                if (dimension && dimension.match(regexPercent)) delete image.attributes[d];
+            }
+
+            return el;
+        };
+    }
+
+    // Returns a function which transforms the widget to the external format
+    // according to the current configuration.
+    //
+    // @param {CKEDITOR.editor}
+    function downcastWidgetElement(editor) {
+        var alignClasses = editor.config.ae_dragresize_ie11_alignClasses;
+
+        // @param {CKEDITOR.htmlParser.element} el
+        return function (el) {
+            // In case of <a><img/></a>, <img/> is the element to hold
+            // inline styles or classes (ae_dragresize_ie11_alignClasses).
+            var attrsHolder = el.name == 'a' ? el.getFirst() : el,
+                attrs = attrsHolder.attributes,
+                align = this.data.align;
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./src/components/buttons/button-code.jsx":
 /*!************************************************!*\
   !*** ./src/components/buttons/button-code.jsx ***!
   \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
+=======
+                if (resizeWrapper) resizeWrapper.replaceWith(resizeWrapper.getFirst({ img: 1, a: 1 }));
+            }
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 "use strict";
 
+<<<<<<< HEAD
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+=======
+                // When the widget is captioned (<figure>) and internally centering is done
+                // with widget's wrapper style/class, in the external data representation,
+                // <figure> must be wrapped with an element holding an style/class:
+                //
+                // 	<div style="text-align:center">
+                // 		<figure class="image" style="display:inline-block">...</figure>
+                // 	</div>
+                // or
+                // 	<div class="some-center-class">
+                // 		<figure class="image">...</figure>
+                // 	</div>
+                //
+                if (align == 'center' && el.name == 'figure') {
+                    el = el.wrapWith(new CKEDITOR.htmlParser.element('div', alignClasses ? { 'class': alignClasses[1] } : { style: 'text-align:center' }));
+                }
+
+                // If left/right, add float style to the downcasted element.
+                else if (align in { left: 1, right: 1 }) {
+                        if (alignClasses) attrsHolder.addClass(alignClasses[alignmentsObj[align]]);else styles['float'] = align;
+                    }
+
+                // Update element styles.
+                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) attrs.style = CKEDITOR.tools.writeCssText(styles);
+            }
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 var _buttonActionStyle = __webpack_require__(/*! ../base/button-action-style.js */ "./src/components/base/button-action-style.js");
 
+<<<<<<< HEAD
 var _buttonActionStyle2 = _interopRequireDefault(_buttonActionStyle);
 
 var _buttonStateClasses = __webpack_require__(/*! ../base/button-state-classes.js */ "./src/components/base/button-state-classes.js");
@@ -4560,13 +5953,33 @@ var _buttonStateClasses = __webpack_require__(/*! ../base/button-state-classes.j
 var _buttonStateClasses2 = _interopRequireDefault(_buttonStateClasses);
 
 var _buttonStyle = __webpack_require__(/*! ../base/button-style.js */ "./src/components/base/button-style.js");
+=======
+    // Returns a function that checks if an element is a centering wrapper.
+    //
+    // @param {CKEDITOR.editor} editor
+    // @returns {Function}
+    function centerWrapperChecker(editor) {
+        var captionedClass = editor.config.ae_dragresize_ie11_captionedClass,
+            alignClasses = editor.config.ae_dragresize_ie11_alignClasses,
+            validChildren = { figure: 1, a: 1, img: 1 };
+
+        return function (el) {
+            // Wrapper must be either <div> or <p>.
+            if (!(el.name in { div: 1, p: 1 })) return false;
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 var _buttonStyle2 = _interopRequireDefault(_buttonStyle);
 
+<<<<<<< HEAD
 var _react = __webpack_require__(/*! react */ "react");
+=======
+            // Centering wrapper can have only one child.
+            if (children.length !== 1) return false;
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 var _react2 = _interopRequireDefault(_react);
 
+<<<<<<< HEAD
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4574,6 +5987,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+=======
+            // Only <figure> or <img /> can be first (only) child of centering wrapper,
+            // regardless of its type.
+            if (!(child.name in validChildren)) return false;
+
+            // If centering wrapper is <p>, only <img /> can be the child.
+            //   <p style="text-align:center"><img /></p>
+            if (el.name == 'p') {
+                if (!isLinkedOrStandaloneImage(child)) return false;
+            }
+            // Centering <div> can hold <img/> or <figure>, depending on enterMode.
+            else {
+                    // If a <figure> is the first (only) child, it must have a class.
+                    //   <div style="text-align:center"><figure>...</figure><div>
+                    if (child.name == 'figure') {
+                        if (!child.hasClass(captionedClass)) return false;
+                    } else {
+                        // Centering <div> can hold <img/> or <a><img/></a> only when enterMode
+                        // is ENTER_(BR|DIV).
+                        //   <div style="text-align:center"><img /></div>
+                        //   <div style="text-align:center"><a><img /></a></div>
+                        if (editor.enterMode == CKEDITOR.ENTER_P) return false;
+
+                        // Regardless of enterMode, a child which is not <figure> must be
+                        // either <img/> or <a><img/></a>.
+                        if (!isLinkedOrStandaloneImage(child)) return false;
+                    }
+                }
+
+            // Centering wrapper got to be... centering. If ae_dragresize_ie11_alignClasses are defined,
+            // check for centering class. Otherwise, check the style.
+            if (alignClasses ? el.hasClass(alignClasses[1]) : CKEDITOR.tools.parseCssText(el.attributes.style || '', true)['text-align'] == 'center') return true;
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 /**
  * The ButtonCode class provides wraps a selection in `pre` element.
@@ -4592,6 +6038,7 @@ var ButtonCode = function (_React$Component) {
         return _possibleConstructorReturn(this, (ButtonCode.__proto__ || Object.getPrototypeOf(ButtonCode)).apply(this, arguments));
     }
 
+<<<<<<< HEAD
     _createClass(ButtonCode, [{
         key: 'render',
 
@@ -4613,10 +6060,18 @@ var ButtonCode = function (_React$Component) {
             );
         }
     }]);
+=======
+    // Checks whether element is <img/> or <a><img/></a>.
+    //
+    // @param {CKEDITOR.htmlParser.element}
+    function isLinkedOrStandaloneImage(el) {
+        if (el.name == 'img') return true;else if (el.name == 'a') return el.children.length == 1 && el.getFirst('img');
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
     return ButtonCode;
 }(_react2.default.Component);
 
+<<<<<<< HEAD
 /**
  * The name which will be used as an alias of the button in the configuration.
  *
@@ -4640,9 +6095,23 @@ ButtonCode.key = 'code';
 ButtonCode.defaultProps = {
     style: {
         element: 'pre'
+=======
+    // Sets width and height of the widget image according to current widget data.
+    //
+    // @param {CKEDITOR.plugins.widget} widget
+    function setDimensions(widget) {
+        var data = widget.data,
+            dimensions = { width: data.width, height: data.height },
+            image = widget.parts.image;
+
+        for (var d in dimensions) {
+            if (dimensions[d]) image.setAttribute(d, dimensions[d]);else image.removeAttribute(d);
+        }
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
     }
 };
 
+<<<<<<< HEAD
 exports.default = (0, _buttonActionStyle2.default)((0, _buttonStateClasses2.default)((0, _buttonStyle2.default)(ButtonCode)));
 
 /***/ }),
@@ -4664,9 +6133,33 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _buttonCommand = __webpack_require__(/*! ../base/button-command.js */ "./src/components/base/button-command.js");
+=======
+    // Defines all features related to drag-driven image resizing.
+    //
+    // @param {CKEDITOR.plugins.widget} widget
+    function setupResizer(widget) {
+        var editor = widget.editor,
+            editable = editor.editable(),
+            doc = editor.document,
+
+
+        // Store the resizer in a widget for testing (#11004).
+        resizer = widget.resizer = doc.createElement('span');
+
+        resizer.addClass('cke_image_resizer');
+        //resizer.setAttribute( 'title', editor.lang.ae_dragresize_ie11.resizer );
+        resizer.append(new CKEDITOR.dom.text('\u200B', doc));
+
+        // Inline widgets don't need a resizer wrapper as an image spans the entire widget.
+        if (!widget.inline) {
+            var imageOrLink = widget.parts.link || widget.parts.image,
+                oldResizeWrapper = imageOrLink.getParent(),
+                resizeWrapper = doc.createElement('span');
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 var _buttonCommand2 = _interopRequireDefault(_buttonCommand);
 
+<<<<<<< HEAD
 var _react = __webpack_require__(/*! react */ "react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -4713,6 +6206,48 @@ var ButtonCommandListItem = function (_React$Component) {
                 this.props.description
             );
         }
+=======
+            // Remove the old wrapper which could came from e.g. pasted HTML
+            // and which could be corrupted (e.g. resizer span has been lost).
+            if (oldResizeWrapper.is('span')) oldResizeWrapper.remove();
+        } else {
+            widget.wrapper.append(resizer);
+        }
+
+        // Calculate values of size variables and mouse offsets.
+        resizer.on('mousedown', function (evt) {
+            var image = widget.parts.image,
+
+
+            // "factor" can be either 1 or -1. I.e.: For right-aligned images, we need to
+            // subtract the difference to get proper width, etc. Without "factor",
+            // resizer starts working the opposite way.
+            factor = widget.data.align == 'right' ? -1 : 1,
+
+
+            // The x-coordinate of the mouse relative to the screen
+            // when button gets pressed.
+            startX = evt.data.$.screenX,
+                startY = evt.data.$.screenY,
+
+
+            // The initial dimensions and aspect ratio of the image.
+            startWidth = image.$.clientWidth,
+                startHeight = image.$.clientHeight,
+                ratio = startWidth / startHeight,
+                listeners = [],
+
+
+            // A class applied to editable during resizing.
+            cursorClass = 'cke_image_s' + (!~factor ? 'w' : 'e'),
+                nativeEvt,
+                newWidth,
+                newHeight,
+                updateData,
+                moveDiffX,
+                moveDiffY,
+                moveRatio;
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
         /**
          * Returns the class name of Widget.
@@ -4740,6 +6275,7 @@ var ButtonCommandListItem = function (_React$Component) {
     return ButtonCommandListItem;
 }(_react2.default.Component);
 
+<<<<<<< HEAD
 /**
  * The name which will be used as an alias of the button in the configuration.
  *
@@ -4751,11 +6287,21 @@ var ButtonCommandListItem = function (_React$Component) {
 
 
 ButtonCommandListItem.key = 'buttonCommandListItem';
+=======
+            // Attaches an event to a global document if inline editor.
+            // Additionally, if classic (`iframe`-based) editor, also attaches the same event to `iframe`'s document.
+            function attachToDocuments(name, callback, collection) {
+                var globalDoc = CKEDITOR.document,
+                    listeners = [];
+
+                if (!doc.equals(globalDoc)) listeners.push(globalDoc.on(name, callback));
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 exports.default = (0, _buttonCommand2.default)(ButtonCommandListItem);
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./src/components/buttons/button-commands-list.jsx":
 /*!*********************************************************!*\
   !*** ./src/components/buttons/button-commands-list.jsx ***!
@@ -4765,6 +6311,38 @@ exports.default = (0, _buttonCommand2.default)(ButtonCommandListItem);
 
 "use strict";
 
+=======
+            // Calculate with first, and then adjust height, preserving ratio.
+            function adjustToX() {
+                newWidth = startWidth + factor * moveDiffX;
+                newHeight = Math.round(newWidth / ratio);
+            }
+
+            // Calculate height first, and then adjust width, preserving ratio.
+            function adjustToY() {
+                newHeight = startHeight - moveDiffY;
+                newWidth = Math.round(newHeight * ratio);
+            }
+
+            // This is how variables refer to the geometry.
+            // Note: x corresponds to moveOffset, this is the position of mouse
+            // Note: o corresponds to [startX, startY].
+            //
+            // 	+--------------+--------------+
+            // 	|              |              |
+            // 	|      I       |      II      |
+            // 	|              |              |
+            // 	+------------- o -------------+ _ _ _
+            // 	|              |              |      ^
+            // 	|      VI      |     III      |      | moveDiffY
+            // 	|              |         x _ _ _ _ _ v
+            // 	+--------------+---------|----+
+            // 	               |         |
+            // 	                <------->
+            // 	                moveDiffX
+            function onMouseMove(evt) {
+                nativeEvt = evt.data.$;
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -4772,6 +6350,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _buttonCommandListItem = __webpack_require__(/*! ./button-command-list-item.jsx */ "./src/components/buttons/button-command-list-item.jsx");
 
 var _buttonCommandListItem2 = _interopRequireDefault(_buttonCommandListItem);
@@ -4781,21 +6360,96 @@ var _react = __webpack_require__(/*! react */ "react");
 var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(/*! react-dom */ "react-dom");
+=======
+                // Left, center or none-aligned widget.
+                if (factor == 1) {
+                    if (moveDiffX <= 0) {
+                        // Case: IV.
+                        if (moveDiffY <= 0) adjustToX();
+
+                        // Case: I.
+                        else {
+                                if (moveRatio >= ratio) adjustToX();else adjustToY();
+                            }
+                    } else {
+                        // Case: III.
+                        if (moveDiffY <= 0) {
+                            if (moveRatio >= ratio) adjustToY();else adjustToX();
+                        }
+
+                        // Case: II.
+                        else {
+                                adjustToY();
+                            }
+                    }
+                }
+
+                // Right-aligned widget. It mirrors behaviours, so I becomes II,
+                // IV becomes III and vice-versa.
+                else {
+                        if (moveDiffX <= 0) {
+                            // Case: IV.
+                            if (moveDiffY <= 0) {
+                                if (moveRatio >= ratio) adjustToY();else adjustToX();
+                            }
+
+                            // Case: I.
+                            else {
+                                    adjustToY();
+                                }
+                        } else {
+                            // Case: III.
+                            if (moveDiffY <= 0) adjustToX();
+
+                            // Case: II.
+                            else {
+                                    if (moveRatio >= ratio) {
+                                        adjustToX();
+                                    } else {
+                                        adjustToY();
+                                    }
+                                }
+                        }
+                    }
+
+                // Don't update attributes if less than 10.
+                // This is to prevent images to visually disappear.
+                if (newWidth >= 15 && newHeight >= 15) {
+                    image.setAttributes({ width: newWidth, height: newHeight });
+                    updateData = true;
+                } else {
+                    updateData = false;
+                }
+            }
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+<<<<<<< HEAD
 var _widgetFocusManager = __webpack_require__(/*! ../base/widget-focus-manager.js */ "./src/components/base/widget-focus-manager.js");
 
 var _widgetFocusManager2 = _interopRequireDefault(_widgetFocusManager);
+=======
+                while (l = listeners.pop()) {
+                    l.removeListener();
+                } // Restore default cursor by removing special class.
+                editable.removeClass(cursorClass);
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+<<<<<<< HEAD
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+=======
+                if (updateData) {
+                    widget.setData({ width: newWidth, height: newHeight });
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * The ButtonCommandsList class provides functionality for showing a list of commands that can be
@@ -4814,32 +6468,71 @@ var ButtonCommandsList = function (_React$Component) {
 =======
         widget.parts.image.on('click', function () {
             var selection = editor.getSelection();
+=======
+        // Change the position of the widget resizer when data changes.
+        widget.on('data', function () {
+            resizer[widget.data.align == 'right' ? 'addClass' : 'removeClass']('cke_image_resizer_left');
+        });
+    }
 
-            if (selection) {
-                var element = selection.getStartElement();
+    /**
+     * Removes the alignment value of an image
+     *
+     * @param {CKEDITOR.dom.element} image The image element
+     * @param {String} imageAlignment The image alignment value to be removed
+     */
+    var removeWidgetAlignment = function removeWidgetAlignment(widget, imageAlignment) {
+        if (imageAlignment === 'left' || imageAlignment === 'right') {
+            widget.wrapper.removeStyle('float');
+        } else if (imageAlignment === 'center') {
+            widget.editor.execCommand('justifyleft');
+            widget.editor.execCommand('justifyleft');
+        }
+    };
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
-                if (element) {
-                    var widgetElement = element.findOne('img');
+    // Integrates widget alignment setting with justify
+    // plugin's commands (execution and refreshment).
+    // @param {CKEDITOR.editor} editor
+    // @param {String} value 'left', 'right', 'center' or 'block'
+    function alignCommandIntegrator(editor) {
+        var execCallbacks = [],
+            enabled;
 
-                    if (widgetElement) {
-                        var region = element.getClientRect();
+        return function (value) {
+            var command = editor.getCommand('justify' + value);
 
-                        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
-                        region.left -= scrollPosition.x;
-                        region.top += scrollPosition.y;
+            // Most likely, the justify plugin isn't loaded.
+            if (!command) return;
 
-                        region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+            // This command will be manually refreshed along with
+            // other commands after exec.
+            execCallbacks.push(function () {
+                command.refresh(editor, editor.elementPath());
+            });
 
-                        editor.fire('editorInteraction', {
-                            nativeEvent: event,
-                            selectionData: {
-                                element: widgetElement,
-                                region: region
-                            }
-                        });
+            if (value in { right: 1, left: 1, center: 1 }) {
+                command.on('exec', function (evt) {
+                    var widget = getFocusedWidget(editor);
+
+                    if (widget) {
+                        if (widget.data.align === value) {
+                            removeWidgetAlignment(widget, value);
+
+                            delete widget.data.align;
+                        } else {
+                            widget.setData('align', value);
+                        }
+
+                        // Once the widget changed its align, all the align commands
+                        // must be refreshed: the event is to be cancelled.
+                        for (var i = execCallbacks.length; i--;) {
+                            execCallbacks[i]();
+                        }evt.cancel();
                     }
-                }
+                });
             }
+<<<<<<< HEAD
         });
 >>>>>>> 126f2ec4... Build files (auto-generated)
     }
@@ -4907,6 +6600,106 @@ var ButtonCommandsList = function (_React$Component) {
                         _react2.default.createElement(_buttonCommandListItem2.default, { command: item.command, description: typeof item.label === 'string' ? item.label : item.label(), editor: editor })
                     );
                 });
+=======
+
+            command.on('refresh', function (evt) {
+                var widget = getFocusedWidget(editor),
+                    allowed = { right: 1, left: 1, center: 1 };
+
+                if (!widget) return;
+
+                // Cache "enabled" on first use. This is because filter#checkFeature may
+                // not be available during plugin's afterInit in the future — a moment when
+                // alignCommandIntegrator is called.
+                if (enabled === undefined) enabled = editor.filter.checkFeature(editor.widgets.registered.image.features.align);
+
+                // Don't allow justify commands when widget alignment is disabled (#11004).
+                if (!enabled) this.setState(CKEDITOR.TRISTATE_DISABLED);else {
+                    this.setState(widget.data.align == value ? CKEDITOR.TRISTATE_ON : value in allowed ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED);
+                }
+
+                evt.cancel();
+            });
+        };
+    }
+
+    // Returns the focused widget, if of the type specific for this plugin.
+    // If no widget is focused, `null` is returned.
+    //
+    // @param {CKEDITOR.editor}
+    // @returns {CKEDITOR.plugins.widget}
+    function getFocusedWidget(editor) {
+        var widget = editor.widgets.focused;
+
+        if (widget && widget.name == 'image') return widget;
+
+        return null;
+    }
+
+    // Returns a set of widget allowedContent rules, depending
+    // on configurations like config#ae_dragresize_ie11_alignClasses or
+    // config#ae_dragresize_ie11_captionedClass.
+    //
+    // @param {CKEDITOR.editor}
+    // @returns {Object}
+    function getWidgetAllowedContent(editor) {
+        var alignClasses = editor.config.ae_dragresize_ie11_alignClasses,
+            rules = {
+            // Widget may need <div> or <p> centering wrapper.
+            div: {
+                match: centerWrapperChecker(editor)
+            },
+            p: {
+                match: centerWrapperChecker(editor)
+            },
+            img: {
+                attributes: '!src,alt,width,height'
+            },
+            figure: {
+                classes: '!' + editor.config.ae_dragresize_ie11_captionedClass
+            },
+            figcaption: true
+        };
+
+        if (alignClasses) {
+            // Centering class from the config.
+            rules.div.classes = alignClasses[1];
+            rules.p.classes = rules.div.classes;
+
+            // Left/right classes from the config.
+            rules.img.classes = alignClasses[0] + ',' + alignClasses[2];
+            rules.figure.classes += ',' + rules.img.classes;
+        } else {
+            // Centering with text-align.
+            rules.div.styles = 'text-align';
+            rules.p.styles = 'text-align';
+
+            rules.img.styles = 'float';
+            rules.figure.styles = 'float,display';
+        }
+
+        return rules;
+    }
+
+    // Returns a set of widget feature rules, depending
+    // on editor configuration. Note that the following may not cover
+    // all the possible cases since requiredContent supports a single
+    // tag only.
+    //
+    // @param {CKEDITOR.editor}
+    // @returns {Object}
+    function getWidgetFeatures(editor) {
+        var alignClasses = editor.config.ae_dragresize_ie11_alignClasses,
+            features = {
+            dimension: {
+                requiredContent: 'img[width,height]'
+            },
+            align: {
+                requiredContent: 'img' + (alignClasses ? '(' + alignClasses[0] + ')' : '{float}')
+            },
+            caption: {
+                requiredContent: 'figcaption'
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
             }
 
             return items;
@@ -4917,6 +6710,7 @@ var ButtonCommandsList = function (_React$Component) {
 }(_react2.default.Component);
 
 /**
+<<<<<<< HEAD
  * The name which will be used as an alias of the button in the configuration.
  *
  * @default buttonCommandsList
@@ -4924,6 +6718,21 @@ var ButtonCommandsList = function (_React$Component) {
  * @property {String} key
  * @static
  */
+=======
+ * A CSS class applied to the `<figure>` element of a captioned image.
+ *
+ * Read more in the [documentation](#!/guide/dev_captionedimage) and see the
+ * [SDK sample](http://sdk.ckeditor.com/samples/captionedimage.html).
+ *
+ *		// Changes the class to "captionedImage".
+ *		config.ae_dragresize_ie11_captionedClass = 'captionedImage';
+ *
+ * @cfg {String} [ae_dragresize_ie11_captionedClass='image']
+ * @member CKEDITOR.config
+ */
+CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
+'use strict';
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 
 ButtonCommandsList.key = 'buttonCommandsList';
@@ -7338,6 +9147,7 @@ var ButtonLinkEdit = function (_React$Component) {
 
 ButtonLinkEdit.key = 'linkEdit';
 
+<<<<<<< HEAD
 /**
  * Lifecycle. Returns the default values of the properties used in the widget.
  *
@@ -7364,6 +9174,23 @@ ButtonLinkEdit.defaultProps = {
 };
 
 exports.default = (0, _buttonProps2.default)((0, _widgetDropdown2.default)((0, _widgetFocusManager2.default)(ButtonLinkEdit)));
+=======
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method imageSelectionSetPosition
+     * @param {Object} payload Payload, should contain the selection data for retrieving the
+     * client rectangle of the selected image
+     * @return {Boolean} True, in all cases
+     */
+    var imageSelectionSetPosition = function imageSelectionSetPosition(payload) {
+        if (payload.selectionData && payload.selectionData.element) {
+            centerToolbar(this, payload.selectionData.element.getClientRect());
+
+            return true;
+        }
+    };
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 /***/ }),
 
@@ -7450,6 +9277,7 @@ var ButtonLinkTargetEdit = function (_React$Component) {
             );
         }
 
+<<<<<<< HEAD
         /**
          * Lifecycle. Invoked before rendering when new props or state are being received.
          * This method is not called for the initial render or when forceUpdate is used.
@@ -7460,6 +9288,16 @@ var ButtonLinkTargetEdit = function (_React$Component) {
          * @return {Boolean} Returns false when the transition to the new props and state will not
          * require a component update.
          */
+=======
+        var isImageWidget = function isImageWidget(element) {
+            return element.getAttribute('data-widget') === 'image' || element.getAscendant(function (el) {
+                return el.getAttribute('data-widget') === 'image';
+            });
+        };
+
+        return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionEmpty && (!selectionData.element.isReadOnly() || isImageWidget(selectionData.element)));
+    };
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
     }, {
         key: 'shouldComponentUpdate',
@@ -7525,7 +9363,16 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+<<<<<<< HEAD
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+=======
+            if (CKEDITOR.env.ie && !CKEDITOR.env.edge) {
+                var plugin = CKEDITOR.env.version === 11 ? 'ae_dragresize_ie11' : 'ae_dragresize_ie';
+
+                editor.config.extraPlugins = editor.config.extraPlugins.replace('ae_dragresize', plugin);
+                editor.config.removePlugins = editor.config.removePlugins.replace('ae_dragresize', plugin);
+            }
+>>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
@@ -8475,8 +10322,8 @@ var _buttonCommand = __webpack_require__(/*! ../base/button-command.js */ "./src
                 left = document.body.offsetWidth - halfWidth;
             }
 
-            if (left > document.body.offsetWidth - halfWidth) {
-                left = document.body.offsetWidth - halfWidth;
+            if (left > document.body.offsetWidth - offsetWidth) {
+                left = document.body.offsetWidth - offsetWidth;
             }
 
             if (top < 0) {

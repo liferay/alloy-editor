@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.11</b>
+                        API Docs for Version: <b>1.5.12</b>
                     </p>
                 </li>
             </div>
@@ -228,9 +228,11 @@
                                  * @return {Boolean} True, in all cases
                                  */
                                 var imageSelectionSetPosition = function(payload) {
-                                    centerToolbar(this, payload.selectionData.element.getClientRect());
+                                    if (payload.selectionData &amp;&amp; payload.selectionData.element) {
+                                        centerToolbar(this, payload.selectionData.element.getClientRect());
                             
-                                    return true;
+                                        return true;
+                                    }
                                 };
                             
                                 /**
