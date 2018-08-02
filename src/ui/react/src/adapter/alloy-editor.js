@@ -48,8 +48,10 @@
             AlloyEditor.Lang.mix(editor.config, config);
 
             if (CKEDITOR.env.ie && !CKEDITOR.env.edge) {
-                editor.config.extraPlugins = editor.config.extraPlugins.replace('ae_dragresize', 'ae_dragresize_ie');
-                editor.config.removePlugins = editor.config.removePlugins.replace('ae_dragresize', 'ae_dragresize_ie');
+                var plugin = (CKEDITOR.env.version === 11) ? 'ae_dragresize_ie11' : 'ae_dragresize_ie';
+
+                editor.config.extraPlugins = editor.config.extraPlugins.replace('ae_dragresize', plugin);
+                editor.config.removePlugins = editor.config.removePlugins.replace('ae_dragresize', plugin);
             }
 
             editor.once('contentDom', function() {
