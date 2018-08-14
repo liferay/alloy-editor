@@ -58,6 +58,10 @@
                     if (event.data.method === 'paste') {
                         var data = event.data.dataValue;
 
+                        if ( data.indexOf( '<' ) > -1 ) {
+                            return;
+                        }
+
                         var match = data.match(REGEX_URL);
 
                         if (match && match.length) {
