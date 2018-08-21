@@ -112,7 +112,11 @@
             it('should detect an image selection', function() {
                 var nativeEditor = this.editor.get('nativeEditor');
 
-                var payload = getPayload.call(this, nativeEditor.element.findOne('#editable'));
+                var element = nativeEditor.element.findOne('#editable');
+
+                nativeEditor.getSelection().selectElement(element);
+
+                var payload = getPayload.call(this, element);
 
                 assert.isTrue(imageTest(payload));
             });

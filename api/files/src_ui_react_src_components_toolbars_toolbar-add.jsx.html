@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.1</b>
+                        API Docs for Version: <b>1.5.12</b>
                     </p>
                 </li>
             </div>
@@ -502,10 +502,14 @@
                             
                                                 domNode.style.top = Math.floor((region.bottom + region.top) / 2) + &#x27;px&#x27;;
                             
+                                                const uiNode = this.props.editor.get(&#x27;uiNode&#x27;);
+                            
+                                                const scrollTop = uiNode ? uiNode.scrollTop : 0;
+                            
                                                 if (nativeEditor.element.getStyle(&#x27;overflow&#x27;) !== &#x27;auto&#x27;) {
-                                                    domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + &#x27;px&#x27;;
+                                                    domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + (startRect.height/2) + scrollTop) + &#x27;px&#x27;;
                                                 } else {
-                                                    domNode.style.top = Math.floor( nativeEditor.element.$.offsetTop + (startRect.height / 2) - (domNode.offsetHeight / 2) ) + &#x27;px&#x27;;
+                                                    domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + (startRect.height / 2) - (domNode.offsetHeight / 2)) + &#x27;px&#x27;;
                                                 }
                             
                                                 domNode.style.opacity = 1;

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.1</b>
+                        API Docs for Version: <b>1.5.12</b>
                     </p>
                 </li>
             </div>
@@ -216,6 +216,22 @@
                                     });
                                 };
                             
+                                // Filters the requires object to remove unwanted dependencies. At this point
+                                // only &#x27;toolbar&#x27; has been identified, but more can appear. An unwanted plugin
+                                // dependency is one that prevents a necessary plugin from being removed
+                                //
+                                // @param {string|Array&lt;string&gt;} requires The requires object
+                                // @return {string} The filtered requires object
+                                var filterUnwantedDependencies = function(requires) {
+                                    if (typeof requires === &#x27;string&#x27;) {
+                                        requires = requires.split(&#x27;,&#x27;);
+                                    }
+                            
+                                    return requires.filter(function(require) {
+                                        return require !== &#x27;toolbar&#x27;;
+                                    });
+                                };
+                            
                                 /**
                                  * CKEDITOR.plugins class utility which adds additional methods to those of CKEditor.
                                  *
@@ -242,7 +258,13 @@
                                         pluginsLoad.call(this, names, function(plugins) {
                                             if (callback) {
                                                 Object.keys(plugins).forEach(function(pluginName) {
-                                                    wrapPluginLifecycle(plugins[pluginName]);
+                                                    var plugin = plugins[pluginName];
+                            
+                                                    if (plugin.requires) {
+                                                        plugin.requires = filterUnwantedDependencies(plugin.requires);
+                                                    }
+                            
+                                                    wrapPluginLifecycle(plugin);
                                                 });
                             
                                                 callback.call(scope, plugins);

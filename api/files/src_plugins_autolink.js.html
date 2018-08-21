@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.1</b>
+                        API Docs for Version: <b>1.5.12</b>
                     </p>
                 </li>
             </div>
@@ -211,7 +211,7 @@
                             
                                 var REGEX_LAST_WORD = /[^\s]+/mg;
                             
-                                var REGEX_URL = /(https?\:\/\/|www\.)(-\.)?([^(\s/?\.#-)]+\.?)+(\b\/[^\s]*)?$/i;
+                                var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&amp;=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&amp;=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&amp;;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
                             
                                 /**
                                  * CKEditor plugin which automatically generates links when user types text which looks like URL.
@@ -238,6 +238,24 @@
                                                 editable.attachListener(editable, &#x27;keyup&#x27;, this._onKeyUp, this, {
                                                     editor: editor
                                                 });
+                                            }.bind(this));
+                            
+                                            editor.on(&#x27;paste&#x27;, function (event) {
+                                                if (event.data.method === &#x27;paste&#x27;) {
+                                                    var data = event.data.dataValue;
+                            
+                                                    var match = data.match(REGEX_URL);
+                            
+                                                    if (match &amp;&amp; match.length) {
+                                                        match = match[0];
+                            
+                                                        var remainder = data.replace(match, &#x27;&#x27;);
+                            
+                                                        if (this._isValidURL(match)) {
+                                                            event.data.dataValue = &#x27;&lt;a href=\&quot;&#x27; + match + &#x27;\&quot;&gt;&#x27; + match + &#x27;&lt;/a&gt;&#x27; + remainder;
+                                                        }
+                                                    }
+                                                }
                                             }.bind(this));
                                         },
                             

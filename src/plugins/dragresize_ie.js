@@ -546,6 +546,8 @@
             // inline styles or classes (image2_alignClasses).
             var attrsHolder = el.name == 'a' ? el.getFirst() : el;
 
+            delete attrsHolder.attributes.contenteditable;
+
             var attrs = attrsHolder.attributes;
 
             var align = this.data.align;
@@ -920,15 +922,32 @@
         });
 
         widget.parts.image.on('click', function () {
+            var selection = editor.getSelection();
 
-            editor._.editable.editor.getSelection().selectElement(this);
+            if (selection) {
+                var element = selection.getStartElement();
 
-            var selectionData = editor._.editable.editor.getSelectionData();
-            if (selectionData) {
-                editor.fire('editorInteraction', {
-                    nativeEvent: event,
-                    selectionData: selectionData
-                });
+                if (element) {
+                    var widgetElement = element.findOne('img');
+
+                    if (widgetElement) {
+                        var region = element.getClientRect();
+
+                        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+                        region.left -= scrollPosition.x;
+                        region.top += scrollPosition.y;
+
+                        region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                        editor.fire('editorInteraction', {
+                            nativeEvent: event,
+                            selectionData: {
+                                element: widgetElement,
+                                region: region
+                            }
+                        });
+                    }
+                }
             }
         });
 

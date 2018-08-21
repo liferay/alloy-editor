@@ -42,9 +42,11 @@
      * @return {Boolean} True, in all cases
      */
     var imageSelectionSetPosition = function(payload) {
-        centerToolbar(this, payload.selectionData.element.getClientRect());
+        if (payload.selectionData && payload.selectionData.element) {
+            centerToolbar(this, payload.selectionData.element.getClientRect());
 
-        return true;
+            return true;
+        }
     };
 
     /**
@@ -57,10 +59,15 @@
      */
     var tableSelectionSetPosition = function(payload) {
         var nativeEditor = payload.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode;
+
+        var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += scrollTop;
 
-        centerToolbar(this, table.getClientRect());
+        centerToolbar(this, rect);
 
         return true;
     };

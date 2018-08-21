@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.1</b>
+                        API Docs for Version: <b>1.5.12</b>
                     </p>
                 </li>
             </div>
@@ -228,9 +228,11 @@
                                  * @return {Boolean} True, in all cases
                                  */
                                 var imageSelectionSetPosition = function(payload) {
-                                    centerToolbar(this, payload.selectionData.element.getClientRect());
+                                    if (payload.selectionData &amp;&amp; payload.selectionData.element) {
+                                        centerToolbar(this, payload.selectionData.element.getClientRect());
                             
-                                    return true;
+                                        return true;
+                                    }
                                 };
                             
                                 /**
@@ -243,10 +245,15 @@
                                  */
                                 var tableSelectionSetPosition = function(payload) {
                                     var nativeEditor = payload.editor.get(&#x27;nativeEditor&#x27;);
+                                    var uiNode = nativeEditor.config.uiNode;
+                            
+                                    var scrollTop = uiNode ? uiNode.scrollTop : 0;
                             
                                     var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+                                    var rect = table.getClientRect();
+                                    rect.top += scrollTop;
                             
-                                    centerToolbar(this, table.getClientRect());
+                                    centerToolbar(this, rect);
                             
                                     return true;
                                 };

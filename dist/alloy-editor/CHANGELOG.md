@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.5.1](https://github.com/liferay/alloy-editor/tree/v1.5.1) (2017-11-23)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/1.5.0...v1.5.1)
+
+**Fixed bugs:**
+
+- Plugin dragresize\_ie throws on Edge [\#802](https://github.com/liferay/alloy-editor/issues/802)
+
+**Merged pull requests:**
+
+- v1.5.1 [\#804](https://github.com/liferay/alloy-editor/pull/804) ([jbalsas](https://github.com/jbalsas))
+- Prevents replacing the dragresize plugin in Edge [\#803](https://github.com/liferay/alloy-editor/pull/803) ([jbalsas](https://github.com/jbalsas))
+
 ## [1.5.0](https://github.com/liferay/alloy-editor/tree/1.5.0) (2017-11-16)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/1.4.1...1.5.0)
 

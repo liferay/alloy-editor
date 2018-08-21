@@ -123,9 +123,12 @@
             var domNode = ReactDOM.findDOMNode(this);
 
             var gutter = this.props.gutter;
+            var offsetWidth = domNode.offsetWidth;
+            var halfWidth = offsetWidth / 2;
+
 
             if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
-                left = left - gutter.left - (domNode.offsetWidth / 2);
+                left = left - gutter.left - halfWidth;
 
                 top = (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) ? (top + gutter.top) :
                     (top - domNode.offsetHeight - gutter.top);
@@ -144,9 +147,16 @@
                 left = 0;
             }
 
+
+            if (left > document.body.offsetWidth - offsetWidth) {
+                left = document.body.offsetWidth - offsetWidth;
+            }
+
             if (top < 0) {
                 top = 0;
             }
+
+
 
             return [left, top];
         },
@@ -211,6 +221,9 @@
          */
         show: function() {
             var domNode = ReactDOM.findDOMNode(this);
+            var uiNode = this.props.editor.get('uiNode');
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
             if (!this.isVisible() && domNode) {
                 var interactionPoint = this.getInteractionPoint();
@@ -239,9 +252,9 @@
                     }
 
                     if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                        initialY = this.props.selectionData.region.bottom;
+                        initialY = this.props.selectionData.region.bottom + scrollTop;
                     } else {
-                        initialY = this.props.selectionData.region.top;
+                        initialY = this.props.selectionData.region.top + scrollTop;
                     }
 
                     this.moveToPoint([initialX, initialY], [finalX, finalY]);
@@ -262,7 +275,12 @@
             var domNode = ReactDOM.findDOMNode(this);
 
             if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode');
+
+                var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += scrollTop;
 
                 new CKEDITOR.dom.element(domNode).setStyles({
                     left: xy[0] + 'px',
