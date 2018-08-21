@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.12
+ * AlloyEditor v1.5.13
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -22310,6 +22310,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             editor.on('paste', function (event) {
                 if (event.data.method === 'paste') {
                     var data = event.data.dataValue;
+
+                    if (data.indexOf('<') > -1) {
+                        return;
+                    }
 
                     var match = data.match(REGEX_URL);
 

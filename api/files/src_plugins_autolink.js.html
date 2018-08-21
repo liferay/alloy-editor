@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.12</b>
+                        API Docs for Version: <b>1.5.13</b>
                     </p>
                 </li>
             </div>
@@ -243,6 +243,10 @@
                                             editor.on(&#x27;paste&#x27;, function (event) {
                                                 if (event.data.method === &#x27;paste&#x27;) {
                                                     var data = event.data.dataValue;
+                            
+                                                    if ( data.indexOf( &#x27;&lt;&#x27; ) &gt; -1 ) {
+                                                        return;
+                                                    }
                             
                                                     var match = data.match(REGEX_URL);
                             
