@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/react/src/adapter/alloy-editor.js - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/ui/react/src/adapter/alloy-editor.js</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                /**
+                                 * AlloyEditor main class. Creates instance of the editor and provides the user configuration
+                                 * to the UI.
+                                 *
+                                 * @class Core
+                                 * @constructor
+                                 */
+                                function Core(config) {
+                                    Core.superclass.constructor.call(this, config);
+                                }
+                            
+                                AlloyEditor.OOP.extend(Core, AlloyEditor.Base, {
+                                    /**
+                                     * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
+                                     * instance, passing it the provided configuration attributes.
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @protected
+                                     * @method initializer
+                                     * @param config {Object} Configuration object literal for the editor.
+                                     */
+                                    initializer: function(config) {
+                                        var node = this.get(&#x27;srcNode&#x27;);
+                            
+                                        if (this.get(&#x27;enableContentEditable&#x27;)) {
+                                            node.setAttribute(&#x27;contenteditable&#x27;, &#x27;true&#x27;);
+                                        }
+                            
+                                        var editor = CKEDITOR.inline(node);
+                            
+                                        editor.config.allowedContent = this.get(&#x27;allowedContent&#x27;);
+                            
+                                        editor.config.toolbars = this.get(&#x27;toolbars&#x27;);
+                            
+                                        editor.config.removePlugins = this.get(&#x27;removePlugins&#x27;);
+                                        editor.config.extraPlugins = this.get(&#x27;extraPlugins&#x27;);
+                                        editor.config.placeholderClass = this.get(&#x27;placeholderClass&#x27;);
+                            
+                                        editor.config.pasteFromWordRemoveStyles = false;
+                                        editor.config.pasteFromWordRemoveFontStyles = false;
+                            
+                                        editor.config.selectionKeystrokes = this.get(&#x27;selectionKeystrokes&#x27;);
+                            
+                                        AlloyEditor.Lang.mix(editor.config, config);
+                            
+                                        if (CKEDITOR.env.ie &amp;&amp; !CKEDITOR.env.edge) {
+                                            editor.config.extraPlugins = editor.config.extraPlugins.replace(&#x27;ae_dragresize&#x27;, &#x27;ae_dragresize_ie&#x27;);
+                                            editor.config.removePlugins = editor.config.removePlugins.replace(&#x27;ae_dragresize&#x27;, &#x27;ae_dragresize_ie&#x27;);
+                                        }
+                            
+                                        editor.once(&#x27;contentDom&#x27;, function() {
+                            
+                                            this._addReadOnlyLinkClickListener(editor);
+                            
+                                            var editable = editor.editable();
+                            
+                                            editable.addClass(&#x27;ae-editable&#x27;);
+                            
+                                        }.bind(this));
+                            
+                                        this._editor = editor;
+                            
+                                        AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
+                                    },
+                            
+                                    /**
+                                     * Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor
+                                     * instance and destroys all created toolbars.
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @protected
+                                     * @method destructor
+                                     */
+                                    destructor: function() {
+                                        this._destroyed = true;
+                            
+                                        if (this._editorUIElement) {
+                                            ReactDOM.unmountComponentAtNode(this._editorUIElement);
+                                            this._editorUIElement.parentNode.removeChild(this._editorUIElement);
+                                        }
+                            
+                                        var nativeEditor = this.get(&#x27;nativeEditor&#x27;);
+                            
+                                        if (nativeEditor) {
+                                            var editable = nativeEditor.editable();
+                            
+                                            if (editable) {
+                                                editable.removeClass(&#x27;ae-editable&#x27;);
+                            
+                                                if (this.get(&#x27;enableContentEditable&#x27;)) {
+                                                    this.get(&#x27;srcNode&#x27;).setAttribute(&#x27;contenteditable&#x27;, &#x27;false&#x27;);
+                                                }
+                                            }
+                            
+                                            this._clearSelections();
+                            
+                                            nativeEditor.destroy();
+                                        }
+                                    },
+                            
+                            
+                                    /**
+                                     * Clear selections from window object
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @protected
+                                     * @method _clearSelections
+                                     */
+                                    _clearSelections: function() {
+                                        var nativeEditor = this.get(&#x27;nativeEditor&#x27;);
+                                        var isMSSelection = typeof window.getSelection != &#x27;function&#x27;;
+                            
+                                        if (isMSSelection) {
+                                            nativeEditor.document.$.selection.empty();
+                                        } else {
+                                            nativeEditor.document.getWindow().$.getSelection().removeAllRanges();
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Method to set default link behavior
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @protected
+                                     * @method _addReadOnlyLinkClickListener
+                                     * @param {Object} editor
+                                     */
+                                    _addReadOnlyLinkClickListener: function(editor) {
+                                        editor.editable().on(&#x27;click&#x27;, this._defaultReadOnlyClickFn, this, {
+                                            editor: editor
+                                        });
+                                    },
+                            
+                                    /**
+                                     * Called on &#x60;click&#x60; event when the editor is in read only mode. Navigates to link&#x27;s URL or opens
+                                     * the link in a new window.
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @event readOnlyClick
+                                     * @protected
+                                     * @method _defaultReadOnlyClickFn
+                                     * @param {Object} event The fired &#x60;click&#x60; event payload
+                                     */
+                                    _defaultReadOnlyClickFn: function(event) {
+                                        var mouseEvent = event.data.$;
+                                        var hasCtrlKey = mouseEvent.ctrlKey || mouseEvent.metaKey;
+                                        var shouldOpen = this._editor.config.readOnly || hasCtrlKey;
+                            
+                                        mouseEvent.preventDefault();
+                            
+                                        if (!shouldOpen) {
+                                            return;
+                                        }
+                            
+                                        if (event.listenerData.editor.editable().editor.fire(&#x27;readOnlyClick&#x27;, event.data) !== false) {
+                                            var ckElement = new CKEDITOR.dom.elementPath(event.data.getTarget(), this);
+                                            var link = ckElement.lastElement;
+                            
+                                            if (link) {
+                                                var href = link.$.attributes.href ? link.$.attributes.href.value : null;
+                                                var target = hasCtrlKey ? &#x27;_blank&#x27; : link.$.attributes.target ? link.$.attributes.target.value : null;
+                                                this._redirectLink(href, target);
+                                            }
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @protected
+                                     * @method _getNativeEditor
+                                     * @return {Object} The current instance of CKEditor.
+                                     */
+                                    _getNativeEditor: function() {
+                                        return this._editor;
+                                    },
+                            
+                                    /**
+                                     * Redirects the browser to a given link
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @protected
+                                     * @method _redirectLink
+                                     * @param {string} href The href to take the browser to
+                                     * @param {string=} target Specifies where to display the link
+                                     */
+                                    _redirectLink: function(href, target) {
+                                        if (target &amp;&amp; href) {
+                                            window.open(href, target);
+                                        }
+                                        else if (href) {
+                                            window.location.href = href;
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Renders the specified from the user toolbars.
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @protected
+                                     * @method _renderUI
+                                     */
+                                    _renderUI: function() {
+                                        if (!this._destroyed) {
+                                            var editorUIElement = document.createElement(&#x27;div&#x27;);
+                                            editorUIElement.className = &#x27;ae-ui&#x27;;
+                            
+                                            var uiNode = this.get(&#x27;uiNode&#x27;) || document.body;
+                            
+                                            uiNode.appendChild(editorUIElement);
+                            
+                                            this._mainUI = ReactDOM.render(React.createElement(AlloyEditor.UI, {
+                                                editor: this,
+                                                eventsDelay: this.get(&#x27;eventsDelay&#x27;),
+                                                toolbars: this.get(&#x27;toolbars&#x27;)
+                                            }), editorUIElement);
+                            
+                                            this._editorUIElement = editorUIElement;
+                            
+                                            this.get(&#x27;nativeEditor&#x27;).fire(&#x27;uiReady&#x27;);
+                                        }
+                                    },
+                            
+                                    /**
+                                     * The function returns an HTML element from the passed value. If the passed value is a string, it should be
+                                     * the Id of the element which have to be retrieved from the DOM.
+                                     * If an HTML Element is passed, the element itself will be returned.
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @method _toElement
+                                     * @protected
+                                     * @param {!(String|HTMLElement)} value String, which have to correspond to an HTML element from the DOM,
+                                     * or the HTML element itself. If Id is passed, the HTML element will be retrieved from the DOM.
+                                     * @return {HTMLElement} An HTML element.
+                                     */
+                                    _toElement: function(value) {
+                                        if (AlloyEditor.Lang.isString(value)) {
+                                            value = document.getElementById(value);
+                                        }
+                            
+                                        return value;
+                                    },
+                            
+                                    /**
+                                     * Validates the allowed content attribute. Look
+                                     * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
+                                     * supported values.
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @protected
+                                     * @method _validateAllowedContent
+                                     * @param {Any} The value to be checked
+                                     * @return {Boolean} True if the current value is valid configuration, false otherwise
+                                     */
+                                    _validateAllowedContent: function(value) {
+                                        return AlloyEditor.Lang.isString(value) || AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isBoolean(value);
+                                    },
+                            
+                                    /**
+                                     * Validates the value of toolbars attribute
+                                     *
+                                     * @memberof Core
+                                     * @instance
+                                     * @protected
+                                     * @method _validateToolbars
+                                     * @param {Any} The value to be checked
+                                     * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
+                                     */
+                                    _validateToolbars: function(value) {
+                                        return AlloyEditor.Lang.isObject(value) || AlloyEditor.Lang.isNull(value);
+                                    }
+                                }, {
+                                    ATTRS: {
+                                        /**
+                                         * Configures the allowed content for the current instance of AlloyEditor.
+                                         * Look on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)
+                                         * for more information about the valid values.
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property allowedContent
+                                         * @default true
+                                         * @writeOnce
+                                         * @type {Boolean, String, Object}
+                                         */
+                                        allowedContent: {
+                                            validator: &#x27;_validateAllowedContent&#x27;,
+                                            value: true,
+                                            writeOnce: true
+                                        },
+                            
+                                        /**
+                                         * Specifies whether AlloyEditor set the contenteditable attribute
+                                         * to &quot;true&quot; on its srcNode.
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property enableContentEditable
+                                         * @type Boolean
+                                         * @default true
+                                         * @writeOnce
+                                         */
+                                        enableContentEditable: {
+                                            validator: AlloyEditor.Lang.isBoolean,
+                                            value: true,
+                                            writeOnce: true
+                                        },
+                            
+                                        /**
+                                         * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property eventsDelay
+                                         * @type {Number}
+                                         */
+                                        eventsDelay: {
+                                            validator: AlloyEditor.Lang.isNumber,
+                                            value: 100
+                                        },
+                            
+                                        /**
+                                         * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
+                                         * make AlloyEditor to work properly.
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property extraPlugins
+                                         * @default &#x27;uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink&#x27;
+                                         * @writeOnce
+                                         * @type {String}
+                                         */
+                                        extraPlugins: {
+                                            validator: AlloyEditor.Lang.isString,
+                                            value: &#x27;ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,&#x27; +
+                                                &#x27;ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize,&#x27; +
+                                                &#x27;ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge&#x27;,
+                                            writeOnce: true
+                                        },
+                            
+                                        /**
+                                         * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property nativeEditor
+                                         * @readOnly
+                                         * @type {Object}
+                                         */
+                                        nativeEditor: {
+                                            getter: &#x27;_getNativeEditor&#x27;,
+                                            readOnly: true
+                                        },
+                            
+                                        /**
+                                         * Specifies the class, which should be added by Placeholder plugin
+                                         * {{#crossLink &quot;CKEDITOR.plugins.ae_placeholder}}{{/crossLink}}
+                                         * when editor is not focused.
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property placeholderClass
+                                         * @default &#x27;ae-placeholder&#x27;
+                                         * @writeOnce
+                                         * @type {String}
+                                         */
+                                        placeholderClass: {
+                                            validator: AlloyEditor.Lang.isString,
+                                            value: &#x27;ae-placeholder&#x27;,
+                                            writeOnce: true
+                                        },
+                            
+                                        /**
+                                         * Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.
+                                         * These plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor
+                                         * comes with its own highly optimized copy of CKEditor (just customized via their official download page).
+                                         * This version does not come with the unneeded plugins, so the value of this property won&#x27;t be needed.
+                                         * However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the
+                                         * plugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn&#x27;t remove them
+                                         * entirely from CKEditor. It just removes them from its current instance, in which you will use different
+                                         * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
+                                         * page!
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property removePlugins
+                                         * @default &#x27;contextmenu,toolbar,elementspath,resize,liststyle,link&#x27;
+                                         * @writeOnce
+                                         * @type {String}
+                                         */
+                                        removePlugins: {
+                                            validator: AlloyEditor.Lang.isString,
+                                            value: &#x27;contextmenu,toolbar,elementspath,resize,liststyle,link&#x27;,
+                                            writeOnce: true
+                                        },
+                            
+                                        /**
+                                         * Array of manual selection triggers. They can be configured to manually show a specific selection toolbar
+                                         * by forcing the selection type. A selectionKeystroke item consists of a keys property with a [CKEditor keystroke
+                                         * definition](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-keystrokes) and a selection property with
+                                         * the selection name to trigger.
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property selectionKeystrokes
+                                         * @type {Array}
+                                         */
+                                        selectionKeystrokes: {
+                                            validator: AlloyEditor.Lang.isArray,
+                                            value: [{
+                                                keys: CKEDITOR.CTRL + 76 /*L*/,
+                                                selection: &#x27;link&#x27;
+                                            }, {
+                                                keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/,
+                                                selection: &#x27;embed&#x27;
+                                            }]
+                                        },
+                            
+                                        /**
+                                         * The Node ID or HTMl node, which AlloyEditor should use as an editable area.
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property srcNode
+                                         * @type String | Node
+                                         * @writeOnce
+                                         */
+                                        srcNode: {
+                                            setter: &#x27;_toElement&#x27;,
+                                            writeOnce: true
+                                        },
+                            
+                                        /**
+                                         * The toolbars configuration for this editor instance
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property {Object} toolbars
+                                         */
+                                        toolbars: {
+                                            validator: &#x27;_validateToolbars&#x27;,
+                                            value: {
+                                                add: {
+                                                    buttons: [&#x27;image&#x27;, &#x27;embed&#x27;, &#x27;camera&#x27;, &#x27;hline&#x27;, &#x27;table&#x27;],
+                                                    tabIndex: 2
+                                                },
+                                                styles: {
+                                                    selections: AlloyEditor.Selections,
+                                                    tabIndex: 1
+                                                }
+                                            }
+                                        },
+                            
+                                        /**
+                                         * The Node ID or HTMl node, where AlloyEditor&#x27;s UI should be rendered.
+                                         *
+                                         * @memberof Core
+                                         * @instance
+                                         * @property uiNode
+                                         * @type String | Node
+                                         * @writeOnce
+                                         */
+                                        uiNode: {
+                                            setter: &#x27;_toElement&#x27;,
+                                            writeOnce: true
+                                        }
+                                    }
+                                });
+                            
+                                CKEDITOR.event.implementOn(Core);
+                            
+                                AlloyEditor.Core = Core;
+                            }());
+                            
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

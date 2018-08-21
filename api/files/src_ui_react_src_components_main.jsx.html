@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/react/src/components/main.jsx - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/ui/react/src/components/main.jsx</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function () {
+                                &#x27;use strict&#x27;;
+                            
+                                /**
+                                 * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
+                                 *
+                                 * @class UI
+                                 * @uses WidgetExclusive
+                                 * @uses WidgetFocusManager
+                                 */
+                                var UI = createReactClass({
+                                    mixins: [AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager],
+                            
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * Localized messages for live aria updates. Should include the following messages:
+                                         * - noToolbar: Notification for no available toolbar in the editor.
+                                         * - oneToolbar: Notification for just one available toolbar in the editor.
+                                         * - manyToolbars: Notification for more than one available toolbar in the editor.
+                                         *
+                                         * @instance
+                                         * @memberof UI
+                                         * @property {Object} ariaUpdates
+                                         */
+                                        ariaUpdates: PropTypes.object,
+                            
+                                        /**
+                                         * The editor instance where the component is being used.
+                                         *
+                                         * @instance
+                                         * @memberof UI
+                                         * @property {Object} editor
+                                         */
+                                        editor: PropTypes.object.isRequired,
+                            
+                                        /**
+                                         * The delay (ms), after which key or mouse events will be processed.
+                                         *
+                                         * @instance
+                                         * @memberof UI
+                                         * @property {Number} eventsDelay
+                                         */
+                                        eventsDelay: PropTypes.number,
+                            
+                                        /**
+                                         * The toolbars configuration for this editor instance
+                                         *
+                                         * @instance
+                                         * @memberof UI
+                                         * @property {Object} toolbars
+                                         */
+                                        toolbars: PropTypes.object.isRequired
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked once before the component is mounted.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @method getInitialState
+                                     */
+                                    getInitialState: function() {
+                                        return {
+                                            hidden: false
+                                        };
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Returns the default values of the properties used in the widget.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @method getDefaultProps
+                                     * @return {Object} The default properties.
+                                     */
+                                    getDefaultProps: function() {
+                                        return {
+                                            circular: true,
+                                            descendants: &#x27;[class^=ae-toolbar-]&#x27;,
+                                            eventsDelay: 0,
+                                            keys: {
+                                                next: 9
+                                            }
+                                        };
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @method componentDidMount
+                                     */
+                                    componentDidMount: function () {
+                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                                        editor.on(&#x27;editorInteraction&#x27;, this._onEditorInteraction, this);
+                                        editor.on(&#x27;actionPerformed&#x27;, this._onActionPerformed, this);
+                                        editor.on(&#x27;key&#x27;, this._onEditorKey, this);
+                            
+                                        // Set up events for hiding the UI when user stops interacting with the editor.
+                                        // This may happen when he just clicks outside of the editor. However,
+                                        // this does not include a situation when he clicks on some button, part of
+                                        // editor&#x27;s UI.
+                            
+                                        // It is not easy to debounce _setUIHidden on mousedown, because if we
+                                        // debounce it, when the handler is being invoked, the target might be no more part
+                                        // of the editor&#x27;s UI - onActionPerformed causes re-render.
+                                        this._mousedownListener = function (event) {
+                                            this._setUIHidden(event.target);
+                                        }.bind(this);
+                            
+                                        this._keyDownListener = CKEDITOR.tools.debounce(function(event) {
+                                            this._setUIHidden(document.activeElement);
+                                        }, this.props.eventsDelay, this);
+                            
+                                        document.addEventListener(&#x27;mousedown&#x27;, this._mousedownListener);
+                                        document.addEventListener(&#x27;keydown&#x27;, this._keyDownListener);
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked immediately after the component&#x27;s updates are flushed to the DOM.
+                                     * Fires &#x60;ariaUpdate&#x60; event passing ARIA related messages.
+                                     * Fires &#x60;editorUpdate&#x60; event passing the previous and current properties and state.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @method componentDidUpdate
+                                     */
+                                    componentDidUpdate: function (prevProps, prevState) {
+                                        var domNode = ReactDOM.findDOMNode(this);
+                            
+                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                                        if (domNode) {
+                                            editor.fire(&#x27;ariaUpdate&#x27;, {
+                                                message: this._getAvailableToolbarsMessage(domNode)
+                                            });
+                                        }
+                            
+                                        editor.fire(&#x27;editorUpdate&#x27;, {
+                                            prevProps: prevProps,
+                                            prevState: prevState,
+                                            props: this.props,
+                                            state: this.state
+                                        });
+                                    },
+                            
+                                    _getAriaUpdateTemplate: function(ariaUpdate) {
+                                        if (!this._ariaUpdateTemplates) {
+                                            this._ariaUpdateTemplates = {};
+                                        }
+                            
+                                        if (!this._ariaUpdateTemplates[ariaUpdate]) {
+                                            this._ariaUpdateTemplates[ariaUpdate] = new CKEDITOR.template(this._getAriaUpdates()[ariaUpdate]);
+                                        }
+                            
+                                        return this._ariaUpdateTemplates[ariaUpdate];
+                                    },
+                            
+                                    /**
+                                     * Returns the templates for ARIA messages.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @protected
+                                     * @method _getAriaUpdates
+                                     * @return {Object} ARIA relates messages. Default:
+                                     * {
+                                     *      noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
+                                     *      oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
+                                     *      manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
+                                     *  }
+                                     */
+                                    _getAriaUpdates: function() {
+                                        return this.props.ariaUpdates || {
+                                            noToolbar: AlloyEditor.Strings.ariaUpdateNoToolbar,
+                                            oneToolbar: AlloyEditor.Strings.ariaUpdateOneToolbar,
+                                            manyToolbars: AlloyEditor.Strings.ariaUpdateManyToolbars
+                                        };
+                                    },
+                            
+                                    /**
+                                     * Returns an ARIA message which represents the number of currently available toolbars.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @method _getAvailableToolbarsMessage
+                                     * @protected
+                                     * @param {CKEDITOR.dom.element} domNode The DOM node from which the available toolbars will be retrieved.
+                                     * @return {String} The ARIA message for the number of available toolbars
+                                     */
+                                    _getAvailableToolbarsMessage: function(domNode) {
+                                        var toolbarsNodeList = domNode.querySelectorAll(&#x27;[role=&quot;toolbar&quot;]&#x27;);
+                            
+                                        if (!toolbarsNodeList.length) {
+                                            return this._getAriaUpdates().noToolbar;
+                                        } else {
+                                            var toolbarNames = Array.prototype.slice.call(toolbarsNodeList).map(function(toolbar) {
+                                                return toolbar.getAttribute(&#x27;aria-label&#x27;);
+                                            });
+                            
+                                            var ariaUpdate = toolbarNames.length === 1 ? &#x27;oneToolbar&#x27; : &#x27;manyToolbars&#x27;;
+                            
+                                            return this._getAriaUpdateTemplate(ariaUpdate).output({
+                                                toolbars: toolbarNames.join(&#x27;,&#x27;).replace(/,([^,]*)$/, &#x27; and &#x27; + &#x27;$1&#x27;)
+                                            });
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @method componentWillUnmount
+                                     */
+                                    componentWillUnmount: function() {
+                                        if (this._mousedownListener) {
+                                            document.removeEventListener(&#x27;mousedown&#x27;, this._mousedownListener);
+                                        }
+                            
+                                        if (this._keyDownListener) {
+                                            this._keyDownListener.detach();
+                                            document.removeEventListener(&#x27;keydown&#x27;, this._keyDownListener);
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Renders the UI of the editor. This may include several toolbars and buttons.
+                                     * The editor&#x27;s UI also takes care of rendering the items in exclusive mode.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @method render
+                                     * @return {Object} The content which should be rendered.
+                                     */
+                                    render: function() {
+                                        if (this.state.hidden) {
+                                            return null;
+                                        }
+                            
+                                        var toolbars = Object.keys(this.props.toolbars).map(function(toolbar) {
+                                            return AlloyEditor.Toolbars[toolbar] || window[toolbar];
+                                        });
+                            
+                                        toolbars = this.filterExclusive(toolbars).map(function(toolbar) {
+                                            var props = this.mergeExclusiveProps({
+                                                config: this.props.toolbars[toolbar.key],
+                                                editor: this.props.editor,
+                                                editorEvent: this.state.editorEvent,
+                                                key: toolbar.key,
+                                                onDismiss: this._onDismissToolbarFocus,
+                                                selectionData: this.state.selectionData
+                                            }, toolbar.key);
+                            
+                                            return React.createElement(toolbar, props);
+                                        }.bind(this));
+                            
+                                        return (
+                                            &lt;div className=&quot;ae-toolbars&quot; onKeyDown={this.handleKey}&gt;
+                                                {toolbars}
+                                            &lt;/div&gt;
+                                        );
+                                    },
+                            
+                                    /**
+                                     * Listener to the editor&#x27;s &#x60;actionPerformed&#x60; event. Sets state and redraws the UI of the editor.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @protected
+                                     * @method _onActionPerformed
+                                     * @param {SynteticEvent} event The provided event
+                                     */
+                                    _onActionPerformed: function(event) {
+                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                                        editor.focus();
+                            
+                                        this.setState({
+                                            itemExclusive: null,
+                                            selectionData: editor.getSelectionData()
+                                        });
+                                    },
+                            
+                                    /**
+                                     * Executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @protected
+                                     * @method _onDismissToolbarFocus
+                                     */
+                                    _onDismissToolbarFocus: function() {
+                                        var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                                        editor.focus();
+                                    },
+                            
+                                    /**
+                                     * Listener to the editor&#x27;s &#x60;userInteraction&#x60; event. Retrieves the data about the user selection and
+                                     * provides it via component&#x27;s state property.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @protected
+                                     * @method _onEditorInteraction
+                                     * @param {SynteticEvent} event The provided event
+                                     */
+                                    _onEditorInteraction: function(event) {
+                                        this.setState({
+                                            editorEvent: event,
+                                            hidden: false,
+                                            itemExclusive: null,
+                                            selectionData: event.data.selectionData
+                                        });
+                                    },
+                            
+                                    /**
+                                     * Focuses on the active toolbar when the combination ALT+F10 is pressed inside the editor.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @protected
+                                     * @method _onEditorKey
+                                     */
+                                    _onEditorKey: function(event) {
+                                        var nativeEvent = event.data.domEvent.$;
+                            
+                                        if (nativeEvent.altKey &amp;&amp; nativeEvent.keyCode === 121) {
+                                            this.focus();
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Checks if the target with which the user interacted is part of editor&#x27;s UI or it is
+                                     * the editable area. If none of these, sets the state of editor&#x27;s UI to be hidden.
+                                     *
+                                     * @instance
+                                     * @memberof UI
+                                     * @protected
+                                     * @method _setUIHidden
+                                     * @param {DOMElement} target The DOM element with which user interacted lastly.
+                                     */
+                                    _setUIHidden: function(target) {
+                                        var domNode = ReactDOM.findDOMNode(this);
+                            
+                                        if (domNode) {
+                                            var editable = this.props.editor.get(&#x27;nativeEditor&#x27;).editable();
+                                            var targetNode = new CKEDITOR.dom.node(target);
+                            
+                                            if (!editable) {
+                                                this.setState({
+                                                    hidden: true
+                                                });
+                                            } else {
+                                                var res = (editable.$ === target) || editable.contains(targetNode) ||
+                                                    (new CKEDITOR.dom.element(domNode)).contains(targetNode);
+                            
+                                                if (!res) {
+                                                    this.setState({
+                                                        hidden: true
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            
+                                /**
+                                 * Fired when component updates and when it is rendered in the DOM.
+                                 * The payload consists from a &#x60;message&#x60; property containing the ARIA message.
+                                 *
+                                 * @event ariaUpdate
+                                 */
+                            
+                                /**
+                                 * Fired when component updates. The payload consists from an object with the following
+                                 * properties:
+                                 * - prevProps - The previous properties of the component
+                                 * - prevState - The previous state of the component
+                                 * - props - The current properties of the component
+                                 * - state - The current state of the component
+                                 *
+                                 * @event ariaUpdate
+                                 */
+                            
+                                AlloyEditor.UI = UI;
+                            }());
+                            
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

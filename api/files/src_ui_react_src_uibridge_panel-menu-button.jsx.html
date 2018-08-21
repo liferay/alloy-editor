@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/react/src/uibridge/panel-menu-button.jsx - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/ui/react/src/uibridge/panel-menu-button.jsx</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                /* istanbul ignore if */
+                                if (CKEDITOR.plugins.get(&#x27;ae_panelmenubuttonbridge&#x27;)) {
+                                    return;
+                                }
+                            
+                                /* istanbul ignore next */
+                                function noop() {}
+                            
+                                // API not yet implemented inside the panel menu button bridge. By mocking the unsupported methods, we
+                                // prevent plugins from crashing if they make use of them.
+                                var UNSUPPORTED_PANEL_MENU_BUTTON_API = {
+                                    createPanel: noop
+                                };
+                            
+                                var PANEL_MENU_DEFS = {};
+                            
+                                /**
+                                 * Generates a PanelMenuButtonBridge React class for a given panelmenubutton definition if it has not been
+                                 * already created based on the panelmenubutton name and definition.
+                                 *
+                                 * @private
+                                 * @method generatePanelMenuButtonBridge
+                                 * @param {String} panelMenuButtonName The panel button name
+                                 * @param {Object} panelMenuButtonDefinition The panel button definition
+                                 * @return {Object} The generated or already existing React PanelMenuButton Class
+                                 */
+                                var generatePanelMenuButtonBridge = function(panelMenuButtonName, panelMenuButtonDefinition, editor) {
+                                    var PanelMenuButtonBridge = AlloyEditor.Buttons[panelMenuButtonName];
+                            
+                                    PANEL_MENU_DEFS[editor.name] = PANEL_MENU_DEFS[editor.name] || {};
+                                    PANEL_MENU_DEFS[editor.name][panelMenuButtonName] = PANEL_MENU_DEFS[editor.name][panelMenuButtonName] || panelMenuButtonDefinition;
+                            
+                                    if (!PanelMenuButtonBridge) {
+                                        PanelMenuButtonBridge = createReactClass(
+                                            CKEDITOR.tools.merge(UNSUPPORTED_PANEL_MENU_BUTTON_API, {
+                                                displayName: panelMenuButtonName,
+                            
+                                                propTypes: {
+                                                    editor: PropTypes.object.isRequired
+                                                },
+                            
+                                                statics: {
+                                                    key: panelMenuButtonName
+                                                },
+                            
+                                                render: function() {
+                                                    var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                                                    var panelMenuButtonDisplayName = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].name || PANEL_MENU_DEFS[editor.name][panelMenuButtonName].command || panelMenuButtonName;
+                            
+                                                    var buttonClassName = &#x27;ae-button ae-button-bridge&#x27;;
+                            
+                                                    var iconClassName = &#x27;ae-icon-&#x27; + panelMenuButtonDisplayName;
+                            
+                                                    var iconStyle = {};
+                            
+                                                    var cssStyle = CKEDITOR.skin.getIconStyle(panelMenuButtonDisplayName);
+                            
+                                                    if (cssStyle) {
+                                                        var cssStyleParts = cssStyle.split(&#x27;;&#x27;);
+                            
+                                                        iconStyle.backgroundImage = cssStyleParts[0].substring(cssStyleParts[0].indexOf(&#x27;:&#x27;) + 1);
+                                                        iconStyle.backgroundPosition = cssStyleParts[1].substring(cssStyleParts[1].indexOf(&#x27;:&#x27;) + 1);
+                                                        iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(&#x27;:&#x27;) + 1);
+                                                    }
+                            
+                                                    var panel;
+                            
+                                                    if (this.props.expanded) {
+                                                        panel = this._getPanel();
+                                                    }
+                            
+                                                    return (
+                                                        &lt;div className=&quot;ae-container ae-has-dropdown&quot;&gt;
+                                                            &lt;button aria-expanded={this.props.expanded} aria-label={PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label} className={buttonClassName} onClick={this.props.toggleDropdown} role=&quot;combobox&quot; tabIndex={this.props.tabIndex} title={PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label}&gt;
+                                                                &lt;span className={iconClassName} style={iconStyle}&gt;&lt;/span&gt;
+                                                            &lt;/button&gt;
+                                                            {panel}
+                                                        &lt;/div&gt;
+                                                    );
+                                                },
+                            
+                                                _getPanel: function() {
+                                                    var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                                                    var panelMenuButtonOnBlock = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].onBlock;
+                            
+                                                    var panel = {
+                                                        hide: this.props.toggleDropdown,
+                                                        show: this.props.toggleDropdown
+                                                    };
+                            
+                                                    var blockElement = new CKEDITOR.dom.element(&#x27;div&#x27;);
+                            
+                                                    var block = {
+                                                        element: blockElement,
+                                                        keys: {}
+                                                    };
+                            
+                                                    /* istanbul ignore else */
+                                                    if (panelMenuButtonOnBlock) {
+                                                        panelMenuButtonOnBlock.call(this, panel, block);
+                                                    }
+                            
+                                                    // TODO
+                                                    // Use block.keys to configure the panel keyboard navigation
+                            
+                                                    return (
+                                                        &lt;AlloyEditor.ButtonDropdown onDismiss={this.props.toggleDropdown}&gt;
+                                                            &lt;div className={blockElement.getAttribute(&#x27;class&#x27;)} dangerouslySetInnerHTML={{__html: blockElement.getHtml()}} /&gt;
+                                                        &lt;/AlloyEditor.ButtonDropdown&gt;
+                                                    );
+                                                }
+                                            })
+                                        );
+                            
+                                        AlloyEditor.Buttons[panelMenuButtonName] = PanelMenuButtonBridge;
+                                    }
+                            
+                                    return PanelMenuButtonBridge;
+                                };
+                            
+                                /* istanbul ignore else */
+                                if (!CKEDITOR.plugins.get(&#x27;panelmenubutton&#x27;)) {
+                                    CKEDITOR.UI_PANELBUTTON = &#x27;panelmenubutton&#x27;;
+                            
+                                    CKEDITOR.plugins.add(&#x27;panelmenubutton&#x27;, {});
+                                }
+                            
+                                /* istanbul ignore else */
+                                if (!CKEDITOR.plugins.get(&#x27;panelbutton&#x27;)) {
+                                    CKEDITOR.UI_PANELBUTTON = &#x27;panelbutton&#x27;;
+                            
+                                    CKEDITOR.plugins.add(&#x27;panelbutton&#x27;, {});
+                                }
+                            
+                                /**
+                                 * CKEditor plugin that bridges the support offered by CKEditor PanelButton plugin. It takes over the
+                                 * responsibility of registering and creating buttons via:
+                                 * - editor.ui.addPanelMenuButton(name, definition)
+                                 * - editor.ui.add(name, CKEDITOR.UI_PANELBUTTON, definition)
+                                 *
+                                 * @class CKEDITOR.plugins.ae_panelmenubuttonbridge
+                                 * @requires CKEDITOR.plugins.ae_uibridge
+                                 * @constructor
+                                 */
+                                CKEDITOR.plugins.add(&#x27;ae_panelmenubuttonbridge&#x27;, {
+                                    requires: [&#x27;ae_uibridge&#x27;],
+                            
+                                    /**
+                                     * Set the add handler for UI_PANELBUTTON to our own. We do this in the init phase to override
+                                     * the one in the native plugin in case it&#x27;s present
+                                     *
+                                     * @method init
+                                     * @param {Object} editor The CKEditor instance being initialized
+                                     */
+                                    beforeInit: function(editor) {
+                                        editor.ui.addPanelMenuButton = function(panelMenuButtonName, panelMenuButtonDefinition) {
+                                            this.add(panelMenuButtonName, CKEDITOR.UI_PANELBUTTON, panelMenuButtonDefinition);
+                                        };
+                            
+                                        editor.ui.addHandler(CKEDITOR.UI_PANELBUTTON, {
+                                            add: generatePanelMenuButtonBridge,
+                                            create: function(panelMenuButtonDefinition) {
+                                                var panelMenuButtonName = &#x27;panelMenuButtonBridge&#x27; + ((Math.random() * 1e9) &gt;&gt;&gt; 0);
+                                                var PanelMenuButtonBridge = generatePanelMenuButtonBridge(panelMenuButtonName, panelMenuButtonDefinition);
+                            
+                                                return new PanelMenuButtonBridge();
+                                            }
+                                        });
+                                    }
+                                });
+                            }());
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

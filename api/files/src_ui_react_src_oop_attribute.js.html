@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/react/src/oop/attribute.js - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/ui/react/src/oop/attribute.js</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                /**
+                                 * Attribute implementation.
+                                 *
+                                 * @class Attribute
+                                 * @constructor
+                                */
+                                function Attribute(config) {
+                                    this.__config__ = config || {};
+                                    this.__ATTRS__ = {};
+                                }
+                            
+                                Attribute.prototype = {
+                                    constructor: Attribute,
+                            
+                                    /**
+                                     * Retrieves the value of an attribute.
+                                     *
+                                     * @instance
+                                     * @memberof Attribute
+                                     * @method get
+                                     * @param {String} attr The attribute which value should be retrieved.
+                                     * @return {Any} The value of the attribute.
+                                     */
+                                    get: function(attr) {
+                                        var currentAttr = this.constructor.ATTRS[attr];
+                            
+                                        if (!currentAttr) {
+                                            return;
+                                        }
+                            
+                                        if (!this._isInitialized(attr)) {
+                                            this._init(attr);
+                                        }
+                            
+                                        var curValue = this.__ATTRS__[attr];
+                            
+                                        if (currentAttr.getter) {
+                                            curValue = this._callStringOrFunction(currentAttr.getter, curValue);
+                                        }
+                            
+                                        return curValue;
+                                    },
+                            
+                                    /**
+                                     * Sets the value of an attribute.
+                                     *
+                                     * @instance
+                                     * @memberof Attribute
+                                     * @method set
+                                     * @param {String} attr The attribute which value should be set.
+                                     * @param {Any} value The value which should be set to the attribute.
+                                     */
+                                    set: function(attr, value) {
+                                        var currentAttr = this.constructor.ATTRS[attr];
+                            
+                                        if (!currentAttr) {
+                                            return;
+                                        }
+                            
+                                        if (!this._isInitialized(attr)) {
+                                            this._init(attr);
+                                        }
+                            
+                                        if (currentAttr.readOnly) {
+                                            return;
+                                        }
+                            
+                                        if (currentAttr.writeOnce &amp;&amp; this._isInitialized(attr)) {
+                                            return;
+                                        }
+                            
+                                        if (currentAttr.validator &amp;&amp; !this._callStringOrFunction(currentAttr.validator, value)) {
+                                            return;
+                                        }
+                            
+                                        if (currentAttr.setter) {
+                                            value = this._callStringOrFunction(currentAttr.setter, value);
+                                        }
+                            
+                                        this.__ATTRS__[attr] = value;
+                                    },
+                            
+                                    /**
+                                     * Calls the provided param as function with the supplied arguments.
+                                     * If param provided as string, a corresponding function in this object will
+                                     * be called. If provided param is a function, it will be directly called.
+                                     *
+                                     * @instance
+                                     * @memberof Attribute
+                                     * @method _callStringOrFunction
+                                     * @param  {Any|Array} args The arguments which will be provided to the called function
+                                     * @param  {String|Function} stringOrFunction The function which should be called
+                                     * @protected
+                                     * @return {Any} The returned value from the called function
+                                     */
+                                    _callStringOrFunction: function(stringOrFunction, args) {
+                                        var result = null;
+                            
+                                        if (!AlloyEditor.Lang.isArray(args)) {
+                                            args = [args];
+                                        }
+                            
+                                        if (AlloyEditor.Lang.isString(stringOrFunction) &amp;&amp; AlloyEditor.Lang.isFunction(this[stringOrFunction])) {
+                                            result = this[stringOrFunction].apply(this, args);
+                                        } else if (AlloyEditor.Lang.isFunction(stringOrFunction)) {
+                                            result = stringOrFunction.apply(this, args);
+                                        }
+                            
+                                        return result;
+                                    },
+                            
+                                    /**
+                                     * Initializes an attribute. Sets its default value depending on the flags of the
+                                     * attribute and the passed configuration object to the constructor.
+                                     *
+                                     * @instance
+                                     * @memberof Attribute
+                                     * @method _init
+                                     * @param {String} attr The name of the attribute which have to be initialized.
+                                     * @protected
+                                     */
+                                    _init: function(attr) {
+                                        var value;
+                            
+                                        var currentAttr = this.constructor.ATTRS[attr];
+                            
+                                        // Check if there is default value or passed one via configuration object
+                                        var hasDefaultValue = Object.prototype.hasOwnProperty.call(currentAttr, &#x27;value&#x27;);
+                                        var hasPassedValueViaConfig = Object.prototype.hasOwnProperty.call(this.__config__, attr);
+                            
+                                        // If there is valueFn, set the value to be the result of invocation of this function
+                                        if (currentAttr.valueFn) {
+                                            value = this._callStringOrFunction(currentAttr.valueFn, value);
+                            
+                                            this.__ATTRS__[attr] = value;
+                                        }
+                                        // else if the attribute has readOnly flag, set the default value from the attribute,
+                                        // regardless if there is value or not
+                                        else if (currentAttr.readOnly) {
+                                            value = currentAttr.value;
+                                        }
+                                        // else if the attribute has writeOnce value, set it from the passed configuration or from the
+                                        // default value, in this order. Otherwise, return miserable.
+                                        else if (currentAttr.writeOnce) {
+                                            if (hasPassedValueViaConfig) {
+                                                value = this.__config__[attr];
+                                            } else if (hasDefaultValue) {
+                                                value = currentAttr.value;
+                                            } else {
+                                                return;
+                                            }
+                                        }
+                                        // These two cases below are easy - set the value to be from the passed config or
+                                        // from the default value, in this order.
+                                        else if (hasPassedValueViaConfig) {
+                                            value = this.__config__[attr];
+                                        } else if (hasDefaultValue) {
+                                            value = currentAttr.value;
+                                        }
+                            
+                                        // If there is validator, and user passed config object - check the returned value.
+                                        // If it is false, then set as initial value the default one.
+                                        // However, if there is no default value, just return.
+                                        if (currentAttr.validator &amp;&amp; hasPassedValueViaConfig &amp;&amp; !this._callStringOrFunction(currentAttr.validator, value)) {
+                                            if (hasDefaultValue) {
+                                                value = currentAttr.value;
+                                            } else {
+                                                return;
+                                            }
+                                        }
+                            
+                                        // If there is setter and user passed config object - pass the value thought the setter.
+                                        // The value might be one from defaultFn, default value or provided from the config.
+                                        if (currentAttr.setter &amp;&amp; hasPassedValueViaConfig) {
+                                            value = this._callStringOrFunction(currentAttr.setter, value);
+                                        }
+                            
+                                        // Finally, set the value as initial value to the storage with values.
+                                        this.__ATTRS__[attr] = value;
+                                    },
+                            
+                                    /**
+                                     * Checks if an attribute is initialized. An attribute is considered as initialized
+                                     * when there is an own property with this name in the local collection of attribute values
+                                     * for the current instance.
+                                     *
+                                     * @instance
+                                     * @memberof Attribute
+                                     * @method _isInitialized
+                                     * @param {String} attr The attribute which should be checked if it is initialized.
+                                     * @protected
+                                     * @return {Boolean} Returns true if the attribute has been initialized, false otherwise.
+                                     */
+                                    _isInitialized: function(attr) {
+                                        return Object.prototype.hasOwnProperty.call(this.__ATTRS__, attr);
+                                    }
+                                };
+                            
+                                AlloyEditor.Attribute = Attribute;
+                            }());
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

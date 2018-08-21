@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Core - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                                <h1>Core <small>Class</small></h1>
+                            </div>
+                            
+                            <div class="well well-small">
+                            
+                            
+                                    <div class="foundat">
+                                        Defined in: <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:4</code></a>
+                                    </div>
+                            
+                            
+                            </div>
+                            
+                            
+                            <div class="well well-small intro">
+                                <p>AlloyEditor main class. Creates instance of the editor and provides the user configuration
+                            to the UI.</p>
+                            
+                            </div>
+                            
+                                <div class="constructor">
+                                    <h2>Constructor</h2>
+                                    <div id="method_Core" class="method item">
+                                        <h3 class="name"><code>Core</code></h3>
+                                    
+                                            <span class="paren">()</span>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        <div class="meta">
+                                                    <p>
+                                                    Defined in
+                                            <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l4"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:4</code></a>
+                                            </p>
+                                    
+                                    
+                                    
+                                        </div>
+                                    
+                                        <div class="description">
+                                            
+                                        </div>
+                                    
+                                    
+                                    
+                                    </div>
+                                </div>
+                            
+                            <div id="classdocs">
+                                <ul class="api-class-tabs nav nav-tabs">
+                                    <li class="api-class-tab index"><a href="#index">Index</a></li>
+                            
+                                        <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+                                        <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+                                </ul>
+                            
+                                <div>
+                                    <div id="index" class="api-class-tabpanel index tab-pane">
+                                        <h2 class="off-left">Index</h2>
+                            
+                                            <div class="index-section methods">
+                                                <h3>Methods</h3>
+                            
+                                                <ul class="index-list methods">
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__addReadOnlyLinkClickListener">_addReadOnlyLinkClickListener</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__clearSelections">_clearSelections</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__defaultReadOnlyClickFn">_defaultReadOnlyClickFn</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__getNativeEditor">_getNativeEditor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__redirectLink">_redirectLink</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__renderUI">_renderUI</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__toElement">_toElement</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__validateAllowedContent">_validateAllowedContent</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method__validateToolbars">_validateToolbars</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method_destructor">destructor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method protected">
+                                                            <a href="#method_initializer">initializer</a>
+                            
+                                                        </li>
+                                                </ul>
+                                            </div>
+                            
+                                            <div class="index-section properties tab-pane">
+                                                <h3>Properties</h3>
+                            
+                                                <ul class="index-list properties">
+                                                        <li class="index-item property">
+                                                            <a href="#property_allowedContent">allowedContent</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_enableContentEditable">enableContentEditable</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_eventsDelay">eventsDelay</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_extraPlugins">extraPlugins</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_nativeEditor">nativeEditor</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_placeholderClass">placeholderClass</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_removePlugins">removePlugins</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_selectionKeystrokes">selectionKeystrokes</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_srcNode">srcNode</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_toolbars">toolbars</a>
+                            
+                                                        </li>
+                                                        <li class="index-item property">
+                                                            <a href="#property_uiNode">uiNode</a>
+                            
+                                                        </li>
+                                                </ul>
+                                            </div>
+                            
+                            
+                                    </div>
+                            
+                                        <div id="methods" class="api-class-tabpanel tab-pane">
+                                            <h2 class="off-left">Methods</h2>
+                            
+                                                <div id="method__addReadOnlyLinkClickListener" class="method item protected">
+                                                    <h3 class="name"><code>_addReadOnlyLinkClickListener</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>editor</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l126"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:126</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Method to set default link behavior</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">editor</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                         
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method__clearSelections" class="method item protected">
+                                                    <h3 class="name"><code>_clearSelections</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l107"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:107</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Clear selections from window object</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method__defaultReadOnlyClickFn" class="method item protected">
+                                                    <h3 class="name"><code>_defaultReadOnlyClickFn</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>event</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l141"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:141</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Called on <code>click</code> event when the editor is in read only mode. Navigates to link&#39;s URL or opens
+                                                the link in a new window.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">event</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The fired <code>click</code> event payload</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method__getNativeEditor" class="method item protected">
+                                                    <h3 class="name"><code>_getNativeEditor</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Object</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l175"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:175</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Object</span>:
+                                                                    <p>The current instance of CKEditor.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method__redirectLink" class="method item protected">
+                                                    <h3 class="name"><code>_redirectLink</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>href</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>target</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l188"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:188</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Redirects the browser to a given link</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">href</code>
+                                                                        <span class="type">String</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The href to take the browser to</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">target</code>
+                                                                        <span class="type">String=</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Specifies where to display the link</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                                <div id="method__renderUI" class="method item protected">
+                                                    <h3 class="name"><code>_renderUI</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l207"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:207</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Renders the specified from the user toolbars.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method__toElement" class="method item protected">
+                                                    <h3 class="name"><code>_toElement</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>value</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">HTMLElement</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l236"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:236</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The function returns an HTML element from the passed value. If the passed value is a string, it should be
+                                                the Id of the element which have to be retrieved from the DOM.
+                                                If an HTML Element is passed, the element itself will be returned.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">value</code>
+                                                                        <span class="type">!(String | HTMLElement)</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>String, which have to correspond to an HTML element from the DOM,
+                                                or the HTML element itself. If Id is passed, the HTML element will be retrieved from the DOM.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">HTMLElement</span>:
+                                                                    <p>An HTML element.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method__validateAllowedContent" class="method item protected">
+                                                    <h3 class="name"><code>_validateAllowedContent</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>The</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Boolean</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l257"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:257</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Validates the allowed content attribute. Look
+                                                <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent">here</a> for more information about the
+                                                supported values.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">The</code>
+                                                                        <span class="type">Any</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>value to be checked</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Boolean</span>:
+                                                                    <p>True if the current value is valid configuration, false otherwise</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method__validateToolbars" class="method item protected">
+                                                    <h3 class="name"><code>_validateToolbars</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>The</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Boolean</span>
+                                                        </span>
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l273"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:273</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Validates the value of toolbars attribute</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">The</code>
+                                                                        <span class="type">Any</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>value to be checked</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Boolean</span>:
+                                                                    <p>True if the current value is valid toolbars configuration, false otherwise</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div id="method_destructor" class="method item protected">
+                                                    <h3 class="name"><code>destructor</code></h3>
+                                                
+                                                        <span class="paren">()</span>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l70"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:70</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor
+                                                instance and destroys all created toolbars.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="method_initializer" class="method item protected">
+                                                    <h3 class="name"><code>initializer</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>config</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                
+                                                
+                                                        <span class="flag protected">protected</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l16"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:16</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
+                                                instance, passing it the provided configuration attributes.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">config</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Configuration object literal for the editor.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                
+                                                </div>
+                                        </div>
+                            
+                                        <div id="properties" class="api-class-tabpanel tab-pane">
+                                            <h2 class="off-left">Properties</h2>
+                            
+                                                <div id="property_allowedContent" class="property item">
+                                                    <h3 class="name"><code>allowedContent</code></h3>
+                                                    <span class="type">Boolean, String, Object</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l288"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:288</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Configures the allowed content for the current instance of AlloyEditor.
+                                                Look on the <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent">official CKEditor API</a>
+                                                for more information about the valid values.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <p><strong>Default:</strong> true</p>
+                                                
+                                                
+                                                </div>
+                                                <div id="property_enableContentEditable" class="property item">
+                                                    <h3 class="name"><code>enableContentEditable</code></h3>
+                                                    <span class="type">Boolean</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l306"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:306</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Specifies whether AlloyEditor set the contenteditable attribute
+                                                to &quot;true&quot; on its srcNode.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <p><strong>Default:</strong> true</p>
+                                                
+                                                
+                                                </div>
+                                                <div id="property_eventsDelay" class="property item">
+                                                    <h3 class="name"><code>eventsDelay</code></h3>
+                                                    <span class="type">Number</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l323"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:323</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The delay (timeout), in ms, after which events such like key or mouse events will be processed.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_extraPlugins" class="property item">
+                                                    <h3 class="name"><code>extraPlugins</code></h3>
+                                                    <span class="type">String</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l336"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:336</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
+                                                make AlloyEditor to work properly.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <p><strong>Default:</strong> &#x27;uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink&#x27;</p>
+                                                
+                                                
+                                                </div>
+                                                <div id="property_nativeEditor" class="property item">
+                                                    <h3 class="name"><code>nativeEditor</code></h3>
+                                                    <span class="type">Object</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l355"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:355</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_placeholderClass" class="property item">
+                                                    <h3 class="name"><code>placeholderClass</code></h3>
+                                                    <span class="type">String</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l369"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:369</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Specifies the class, which should be added by Placeholder plugin
+                                                {{#crossLink "CKEDITOR.plugins.ae_placeholder}}{{/crossLink}}
+                                                when editor is not focused.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <p><strong>Default:</strong> &#x27;ae-placeholder&#x27;</p>
+                                                
+                                                
+                                                </div>
+                                                <div id="property_removePlugins" class="property item">
+                                                    <h3 class="name"><code>removePlugins</code></h3>
+                                                    <span class="type">String</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l387"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:387</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.
+                                                These plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor
+                                                comes with its own highly optimized copy of CKEditor (just customized via their official download page).
+                                                This version does not come with the unneeded plugins, so the value of this property won&#39;t be needed.
+                                                However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the
+                                                plugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn&#39;t remove them
+                                                entirely from CKEditor. It just removes them from its current instance, in which you will use different
+                                                UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
+                                                page!</p>
+                                                
+                                                    </div>
+                                                
+                                                        <p><strong>Default:</strong> &#x27;contextmenu,toolbar,elementspath,resize,liststyle,link&#x27;</p>
+                                                
+                                                
+                                                </div>
+                                                <div id="property_selectionKeystrokes" class="property item">
+                                                    <h3 class="name"><code>selectionKeystrokes</code></h3>
+                                                    <span class="type">Array</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l411"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:411</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Array of manual selection triggers. They can be configured to manually show a specific selection toolbar
+                                                by forcing the selection type. A selectionKeystroke item consists of a keys property with a <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-keystrokes">CKEditor keystroke
+                                                definition</a> and a selection property with
+                                                the selection name to trigger.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_srcNode" class="property item">
+                                                    <h3 class="name"><code>srcNode</code></h3>
+                                                    <span class="type">String | Node</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l433"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:433</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The Node ID or HTMl node, which AlloyEditor should use as an editable area.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_toolbars" class="property item">
+                                                    <h3 class="name"><code>toolbars</code></h3>
+                                                    <span class="type">Object</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l447"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:447</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The toolbars configuration for this editor instance</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div id="property_uiNode" class="property item">
+                                                    <h3 class="name"><code>uiNode</code></h3>
+                                                    <span class="type">String | Node</span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>
+                                                                Defined in
+                                                        <a href="../files/src_ui_react_src_adapter_alloy-editor.js.html#l468"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;adapter&#x2F;alloy-editor.js:468</code></a>
+                                                        </p>
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>The Node ID or HTMl node, where AlloyEditor&#39;s UI should be rendered.</p>
+                                                
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                        </div>
+                            
+                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

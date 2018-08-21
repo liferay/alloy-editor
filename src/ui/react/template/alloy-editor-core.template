@@ -1,0 +1,35 @@
+/**
+ * AlloyEditor v<%= version %>
+ *
+ * Copyright 2014-present, Liferay, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the GNU LGPL-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+(function() {
+    <%= main %>
+
+    var React = (function() {
+    	return (0, eval)('this').React;
+    }());
+
+    if (typeof React === 'undefined') {
+        React = AlloyEditor.React;
+    }
+
+    var ReactDOM = (function() {
+        return (0, eval)('this').ReactDOM;
+    }());
+
+    if (typeof React === 'undefined') {
+        ReactDOM = AlloyEditor.ReactDOM;
+    }
+
+    <%= reactBridge %>
+
+    if (typeof window !== 'undefined') {
+        <%= ui %>
+    }
+}());

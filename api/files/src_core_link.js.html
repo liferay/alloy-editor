@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/core/link.js - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/core/link.js</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                var REGEX_BOOKMARK_SCHEME = /^#.*/i;
+                                var REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F\._-]+@/i;
+                                var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
+                            
+                                /**
+                                 * Link class utility. Provides methods for create, delete and update links.
+                                 *
+                                 * @class CKEDITOR.Link
+                                 * @constructor
+                                 * @param {Object} editor The CKEditor instance.
+                                 */
+                                function Link(editor, config) {
+                                    this._editor = editor;
+                                    this.appendProtocol = config &amp;&amp; config.appendProtocol === false ? false : true;
+                                }
+                            
+                                Link.prototype = {
+                                    constructor: Link,
+                            
+                                    /**
+                                     * Advances the editor selection to the next available position after a
+                                     * given link or the one in the current selection.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
+                                     * @method advanceSelection
+                                     * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+                                     */
+                                    advanceSelection: function(link) {
+                                        link = link || this.getFromSelection();
+                            
+                                        var range = this._editor.getSelection().getRanges()[0];
+                            
+                                        if (link) {
+                                            range.moveToElementEditEnd(link);
+                            
+                                            var nextNode = range.getNextEditableNode();
+                            
+                                            if (nextNode &amp;&amp; !this._editor.element.equals(nextNode.getCommonAncestor(link))) {
+                                                var whitespace = /\s/.exec(nextNode.getText());
+                            
+                                                var offset = whitespace ? whitespace.index + 1 : 0;
+                            
+                                                range.setStart(nextNode, offset);
+                                                range.setEnd(nextNode, offset);
+                                            }
+                                        }
+                            
+                                        this._editor.getSelection().selectRanges([range]);
+                                    },
+                            
+                                    /**
+                                     * Create a link with given URI as href.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
+                                     * @method create
+                                     * @param {Object} attrs A config object with link attributes. These might be arbitrary DOM attributes.
+                                     * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
+                                     * @param {String} URI The URI of the link.
+                                     */
+                                    create: function(URI, attrs, modifySelection) {
+                                        var selection = this._editor.getSelection();
+                            
+                                        var range = selection.getRanges()[0];
+                            
+                                        if (range.collapsed) {
+                                            var text = new CKEDITOR.dom.text(URI, this._editor.document);
+                                            range.insertNode(text);
+                                            range.selectNodeContents(text);
+                                        }
+                            
+                                        URI = this._getCompleteURI(URI);
+                            
+                                        var linkAttrs = CKEDITOR.tools.merge({
+                                            &#x27;data-cke-saved-href&#x27;: URI,
+                                            href: URI
+                                        }, attrs);
+                            
+                                        var style = new CKEDITOR.style({
+                                            attributes: linkAttrs,
+                                            element: &#x27;a&#x27;
+                                        });
+                            
+                                        style.type = CKEDITOR.STYLE_INLINE;
+                                        style.applyToRange(range, this._editor);
+                            
+                                        if (modifySelection &amp;&amp; modifySelection.advance) {
+                                            this.advanceSelection();
+                                        } else {
+                                            range.select();
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Retrieves a link from the current selection.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
+                                     * @method getFromSelection
+                                     * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
+                                     */
+                                    getFromSelection: function() {
+                                        var selection = this._editor.getSelection();
+                            
+                                        var selectedElement = selection.getSelectedElement();
+                            
+                                        if (selectedElement &amp;&amp; selectedElement.is(&#x27;a&#x27;)) {
+                                            return selectedElement;
+                                        }
+                            
+                                        var range = selection.getRanges()[0];
+                            
+                                        if (range) {
+                                            range.shrink(CKEDITOR.SHRINK_TEXT);
+                            
+                                            return this._editor.elementPath(range.getCommonAncestor()).contains(&#x27;a&#x27;, 1);
+                                        }
+                            
+                                        return null;
+                                    },
+                            
+                                    /**
+                                     * Removes a link from the editor.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
+                                     * @method remove
+                                     * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
+                                     * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
+                                     */
+                                    remove: function(link, modifySelection) {
+                                        var editor = this._editor;
+                            
+                                        if (link) {
+                                            if (modifySelection &amp;&amp; modifySelection.advance) {
+                                                this.advanceSelection();
+                                            }
+                            
+                                            link.remove(editor);
+                                        } else {
+                                            var style = new CKEDITOR.style({
+                                                alwaysRemoveElement: 1,
+                                                element: &#x27;a&#x27;,
+                                                type: CKEDITOR.STYLE_INLINE
+                                            });
+                            
+                                            // &#x27;removeStyle()&#x27; removes the style from the editor&#x27;s current selection.
+                                            //  We need to force the selection to be the whole link element
+                                            //  to remove it properly.
+                            
+                                            var selection = editor.getSelection();
+                                            selection.selectElement(selection.getStartElement());
+                            
+                                            editor.removeStyle(style);
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Updates the href of an already existing link.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
+                                     * @method update
+                                     * @param {CKEDITOR.dom.element} link The link element which href should be removed.
+                                     * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
+                                     * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
+                                     */
+                                    update: function(attrs, link, modifySelection) {
+                                        var instance =  this;
+                            
+                                        link = link || this.getFromSelection();
+                            
+                                        if (typeof attrs === &#x27;string&#x27;) {
+                                            var uri = instance._getCompleteURI(attrs);
+                            
+                                            link.setAttributes({
+                                                &#x27;data-cke-saved-href&#x27;: uri,
+                                                href: uri
+                                            });
+                                        } else if (typeof attrs === &#x27;object&#x27;) {
+                                            var removeAttrs = [];
+                            
+                                            var setAttrs = {};
+                            
+                                            Object.keys(attrs).forEach(function(key) {
+                                                if (attrs[key] === null) {
+                                                    if (key === &#x27;href&#x27;) {
+                                                        removeAttrs.push(&#x27;data-cke-saved-href&#x27;);
+                                                    }
+                            
+                                                    removeAttrs.push(key);
+                                                } else {
+                                                    if (key === &#x27;href&#x27;) {
+                                                        var uri = instance._getCompleteURI(attrs[key]);
+                            
+                                                        setAttrs[&#x27;data-cke-saved-href&#x27;] = uri;
+                                                        setAttrs[key] = uri;
+                                                    } else {
+                                                        setAttrs[key] = attrs[key];
+                                                    }
+                                                }
+                                            });
+                            
+                                            link.removeAttributes(removeAttrs);
+                                            link.setAttributes(setAttrs);
+                                        }
+                            
+                                        if (modifySelection &amp;&amp; modifySelection.advance) {
+                                            this.advanceSelection(link);
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Checks if the URI begins with a &#x27;#&#x27; symbol to determine if it&#x27;s an on page bookmark.
+                                     * If it doesn&#x27;t, it then checks if the URI has an &#x27;@&#x27; symbol. If it does and the URI
+                                     * looks like an email and doesn&#x27;t have &#x27;mailto:&#x27;, &#x27;mailto:&#x27; is added to the URI.
+                                     * If it doesn&#x27;t and the URI doesn&#x27;t have a scheme, the default &#x27;http&#x27; scheme with
+                                     * hierarchical path &#x27;//&#x27; is added to the URI.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Link
+                                     * @method _getCompleteURI
+                                     * @param {String} URI The URI of the link.
+                                     * @protected
+                                     * @return {String} The URI updated with the protocol.
+                                     */
+                                    _getCompleteURI: function(URI) {
+                                        if (REGEX_BOOKMARK_SCHEME.test(URI)) {
+                                            return URI;
+                                        } else if (REGEX_EMAIL_SCHEME.test(URI)) {
+                                            URI = &#x27;mailto:&#x27; + URI;
+                                        } else if (!REGEX_URI_SCHEME.test(URI)) {
+                                            URI = this.appendProtocol ? &#x27;http://&#x27; + URI : URI;
+                                        }
+                            
+                                        return URI;
+                                    }
+                                };
+                            
+                                CKEDITOR.Link = CKEDITOR.Link || Link;
+                            }());
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

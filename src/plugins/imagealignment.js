@@ -1,5 +1,3 @@
-import SelectionTest from '../selections/selection-test.js';
-
 (function() {
     'use strict';
 
@@ -150,7 +148,7 @@ import SelectionTest from '../selections/selection-test.js';
                         command.on('exec', function(event) {
                             var selectionData = editor.getSelectionData();
 
-                            if (selectionData && SelectionTest.image({data: {selectionData: selectionData}})) {
+                            if (selectionData && AlloyEditor.SelectionTest.image({data: {selectionData: selectionData}})) {
                                 var image = selectionData.element;
 
                                 var imageAlignment = getImageAlignment(image);
@@ -172,7 +170,7 @@ import SelectionTest from '../selections/selection-test.js';
                                 element: event.data.path.lastElement
                             };
 
-                            if (SelectionTest.image({data: {selectionData: selectionData}})) {
+                            if (AlloyEditor.SelectionTest.image({data: {selectionData: selectionData}})) {
                                 var imageAlignment = getImageAlignment(selectionData.element);
 
                                 this.setState(imageAlignment === value ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF);

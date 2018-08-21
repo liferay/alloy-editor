@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/react/src/components/base/widget-focus-manager.js - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/ui/react/src/components/base/widget-focus-manager.js</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                var DIRECTION_NONE = 0;
+                                var DIRECTION_NEXT = 1;
+                                var DIRECTION_PREV = -1;
+                            
+                                var ACTION_NONE = 0;
+                                var ACTION_MOVE_FOCUS = 1;
+                                var ACTION_DISMISS_FOCUS = 2;
+                            
+                                /**
+                                 * WidgetFocusManager is a mixin that provides keyboard navigation inside a widget. To do this,
+                                 * it exposes the following props and methods:
+                                 *
+                                 * @class WidgetFocusManager
+                                 */
+                                var WidgetFocusManager = {
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                            
+                                        /**
+                                         * Callback method to be invoked when the focus manager is to be dismissed. This happens
+                                         * in the following scenarios if a dismiss callback has been specified:
+                                         * - A dismiss key has been pressed
+                                         * - In a non-circular focus manager, when:
+                                         *     - The active descendant is the first one and a prev key has been pressed.
+                                         *     - The active descendant is the last one and a next key has been pressed.
+                                         *
+                                         * @instance
+                                         * @memberof WidgetFocusManager
+                                         * @property {Function} onDismiss
+                                         */
+                                        onDismiss: PropTypes.func,
+                            
+                                        /**
+                                         * Indicates if focus should be set to the first/last descendant when the limits are reached.
+                                         *
+                                         * @instance
+                                         * @memberof WidgetFocusManager
+                                         * @property {boolean} circular
+                                         */
+                                        circular: PropTypes.bool.isRequired,
+                            
+                                        /**
+                                         * Indicate if should focus the first child of a container
+                                         * @instance
+                                         * @memberof WidgetFocusManager
+                                         * @property {Boolean} focusFirstChild
+                                         */
+                                        focusFirstChild: PropTypes.bool,
+                            
+                                        /**
+                                         * String representing the CSS selector used to define the elements that should be handled.
+                                         *
+                                         * @instance
+                                         * @memberof WidgetFocusManager
+                                         * @property {String} descendants
+                                         */
+                                        descendants: PropTypes.string.isRequired,
+                            
+                                        /**
+                                         * Object representing the keys used to navigate between descendants. The format for the prop is:
+                                         * &#x60;{dismiss: value, dismissNext: value, dismissPrev: value, next: value, prev: value}&#x60; where
+                                         * value can be both a number or an array of numbers with the allowed keyCodes.
+                                         *
+                                         * @instance
+                                         * @memberof WidgetFocusManager
+                                         * @property {Object} keys
+                                         */
+                                        keys: PropTypes.object.isRequired
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method componentDidMount
+                                     */
+                                    componentDidMount: function() {
+                                        this._refresh();
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked immediately after the component&#x27;s updates are flushed to the DOM.
+                                     * Refreshes the descendants list.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method componentDidUpdate
+                                     */
+                                    componentDidUpdate: function() {
+                                        this._refresh();
+                                    },
+                            
+                                    /**
+                                     * Focuses the current active descendant.
+                                     *
+                                     * Several Widgets can be nested in a component hierarchy by attaching this focus method to
+                                     * the widget DOM node, transferring the DOM focus control to the inner FocusManager.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method focus
+                                     */
+                                    focus: function(event) {
+                                        if (!event || this._isValidTarget(event.target)) {
+                                            if (this._descendants &amp;&amp; this._descendants.length) {
+                                                var activeDescendantEl = this._descendants[this._activeDescendant];
+                                                // When user clicks with the mouse, the activeElement is already set and there
+                                                // is no need to focus it. Focusing of the active descendant (usually some button) is required
+                                                // in case of keyboard navigation, because the focused element might be not the first button,
+                                                // but the div element, which contains the button.
+                                                if (document.activeElement !== activeDescendantEl &amp;&amp; !this.props.focusFirstChild) {
+                                                    if (this._descendants.indexOf(document.activeElement) === -1) {
+                                                        activeDescendantEl.focus();
+                                                    }
+                                                }
+                            
+                                                if (event) {
+                                                    event.stopPropagation();
+                                                    event.preventDefault();
+                                                }
+                                            }
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Handles the key events on a DOM node to execute the appropriate navigation when needed.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @param {Object} event The Keyboard event that was detected on the widget DOM node.
+                                     * @method handleKey
+                                     */
+                                    handleKey: function(event) {
+                                        if (this._isValidTarget(event.target) &amp;&amp; this._descendants) {
+                                            var action = this._getFocusAction(event);
+                            
+                                            if (action.type) {
+                                                event.stopPropagation();
+                                                event.preventDefault();
+                            
+                                                if (action.type === ACTION_MOVE_FOCUS) {
+                                                    this._moveFocus(action.direction);
+                                                }
+                            
+                                                if (action.type === ACTION_DISMISS_FOCUS) {
+                                                    this.props.onDismiss(action.direction);
+                                                }
+                                            }
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Moves the focus among descendants in the especified direction.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method moveFocus
+                                     * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
+                                     */
+                                    moveFocus: function(direction) {
+                                        direction = AlloyEditor.Lang.isNumber(direction) ? direction : 0;
+                            
+                                        this._moveFocus(direction);
+                                    },
+                            
+                                    /**
+                                     * Returns the action, if any, that a keyboard event in the current focus manager state
+                                     * should produce.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method _getFocusAction
+                                     * @param {object} event The Keyboard event.
+                                     * @protected
+                                     * @return {Object} An action object with type and direction properties.
+                                     */
+                                    _getFocusAction: function(event) {
+                                        var action = {
+                                            type: ACTION_NONE
+                                        };
+                            
+                                        if (this.props.keys) {
+                                            var direction = this._getFocusMoveDirection(event);
+                            
+                                            if (direction) {
+                                                action.direction = direction;
+                                                action.type = ACTION_MOVE_FOCUS;
+                                            }
+                            
+                                            var dismissAction = this._getFocusDismissAction(event, direction);
+                            
+                                            if (dismissAction.dismiss) {
+                                                action.direction = dismissAction.direction;
+                                                action.type = ACTION_DISMISS_FOCUS;
+                                            }
+                                        }
+                            
+                                        return action;
+                                    },
+                            
+                                    /**
+                                     * Returns the dismiss action, if any, the focus manager should execute to yield the focus. This
+                                     * will happen in any of these scenarios if a dismiss callback has been specified:
+                                     * - A dismiss key has been pressed
+                                     * - In a non-circular focus manager, when:
+                                     *     - The active descendant is the first one and a prev key has been pressed.
+                                     *     - The active descendant is the last one and a next key has been pressed.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method _getFocusDismissAction
+                                     * @param {Number} focusMoveDirection The focus movement direction (if any).
+                                     * @param {Object} event The Keyboard event.
+                                     * @protected
+                                     * @return {Object} A dismiss action with dismiss and direction properties.
+                                     */
+                                    _getFocusDismissAction: function(event, focusMoveDirection) {
+                                        var dismissAction = {
+                                            direction: focusMoveDirection,
+                                            dismiss: false
+                                        };
+                            
+                                        if (this.props.onDismiss) {
+                                            if (this._isValidKey(event.keyCode, this.props.keys.dismiss)) {
+                                                dismissAction.dismiss = true;
+                                            }
+                                            if (this._isValidKey(event.keyCode, this.props.keys.dismissNext)) {
+                                                dismissAction.dismiss = true;
+                                                dismissAction.direction = DIRECTION_NEXT;
+                                            }
+                                            if (this._isValidKey(event.keyCode, this.props.keys.dismissPrev)) {
+                                                dismissAction.dismiss = true;
+                                                dismissAction.direction = DIRECTION_PREV;
+                                            }
+                            
+                                            if (!dismissAction.dismiss &amp;&amp; !this.props.circular &amp;&amp; focusMoveDirection) {
+                                                dismissAction.dismiss = (
+                                                    focusMoveDirection === DIRECTION_PREV &amp;&amp; this._activeDescendant === 0 ||
+                                                    focusMoveDirection === DIRECTION_NEXT &amp;&amp; this._activeDescendant === this._descendants.length - 1
+                                                );
+                                            }
+                                        }
+                            
+                                        return dismissAction;
+                                    },
+                            
+                                    /**
+                                     * Returns the direction, if any, in which the focus should be moved. In presence of the
+                                     * shift key modifier, the direction of the movement is inverted.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method _getFocusMoveDirection
+                                     * @param {Object} event The Keyboard event.
+                                     * @protected
+                                     * @return {Number} The computed direction of the expected focus movement.
+                                     */
+                                    _getFocusMoveDirection: function(event) {
+                                        var direction = DIRECTION_NONE;
+                            
+                                        if (this._isValidKey(event.keyCode, this.props.keys.next)) {
+                                            direction = DIRECTION_NEXT;
+                                        }
+                                        if (this._isValidKey(event.keyCode, this.props.keys.prev)) {
+                                            direction = DIRECTION_PREV;
+                                        }
+                            
+                                        if (event.shifKey) {
+                                            direction *= -1;
+                                        }
+                            
+                                        return direction;
+                                    },
+                            
+                                    /**
+                                     * Indicates if a given keyCode is valid for the given set of keys.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method _isValidKey
+                                     * @param {Array|Number} keys A key set. Can be a number an array of numbers representing the allowed keyCodes.
+                                     * @param {Number} keyCode An event keyCode.
+                                     * @protected
+                                     * @return {Boolean} A boolean value indicating if the key is valid.
+                                     */
+                                    _isValidKey: function(keyCode, keys) {
+                                        return AlloyEditor.Lang.isArray(keys) ? (keys.indexOf(keyCode) !== -1) : (keyCode === keys);
+                                    },
+                            
+                                    /**
+                                     * Indicates if a given element is valid for focus management. User input elements such as
+                                     * input, select or textarea are excluded.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method _isValidKey
+                                     * @param {DOMNode} element A DOM element.
+                                     * @protected
+                                     * @return {Boolean} A boolean value indicating if the element is valid.
+                                     */
+                                    _isValidTarget: function(element) {
+                                        var tagName = element.tagName.toLowerCase();
+                            
+                                        return (tagName !== &#x27;input&#x27; &amp;&amp; tagName !== &#x27;select&#x27; &amp;&amp; tagName !== &#x27;textarea&#x27;);
+                                    },
+                            
+                                    /**
+                                     * Moves the focus among descendants in the especified direction.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method _moveFocus
+                                     * @param {number} direction The direction (1 or -1) of the focus movement among descendants.
+                                     * @protected
+                                     */
+                                    _moveFocus: function(direction) {
+                                        var numDescendants = this._descendants.length;
+                            
+                                        var descendant = this._descendants[this._activeDescendant];
+                            
+                                        descendant.setAttribute(&#x27;tabIndex&#x27;, -1);
+                            
+                                        this._activeDescendant += direction;
+                            
+                                        if (this.props.circular) {
+                                            // Calculate proper modulo result since remainder operator doesn&#x27;t behave in the
+                                            // same way for negative numbers
+                                            this._activeDescendant = ((this._activeDescendant % numDescendants) + numDescendants) % numDescendants;
+                                        } else {
+                                            this._activeDescendant = Math.max(Math.min(this._activeDescendant, numDescendants - 1), 0);
+                                        }
+                            
+                                        descendant = this._descendants[this._activeDescendant];
+                            
+                                        descendant.setAttribute(&#x27;tabIndex&#x27;, 0);
+                                        descendant.focus();
+                                    },
+                            
+                                    /**
+                                     * Refreshes the descendants list by executing the CSS selector again and resets the descendants tabIndex.
+                                     *
+                                     * @instance
+                                     * @memberof WidgetFocusManager
+                                     * @method _refresh
+                                     * @protected
+                                     */
+                                    _refresh: function() {
+                                        var domNode = ReactDOM.findDOMNode(this);
+                            
+                                        if (domNode) {
+                                            var descendants = domNode.querySelectorAll(this.props.descendants);
+                            
+                                            var priorityDescendants = [];
+                            
+                                            this._descendants = [];
+                            
+                                            Array.prototype.slice.call(descendants).forEach(function(item) {
+                                                var dataTabIndex = item.getAttribute(&#x27;data-tabindex&#x27;);
+                            
+                                                if (dataTabIndex) {
+                                                    priorityDescendants.push(item);
+                                                } else {
+                                                    this._descendants.push(item);
+                                                }
+                                            }.bind(this));
+                            
+                                            priorityDescendants = priorityDescendants.sort(function(a, b) {
+                                                return (AlloyEditor.Lang.toInt(a.getAttribute(&#x27;data-tabindex&#x27;)) &gt; AlloyEditor.Lang.toInt(b.getAttribute(&#x27;data-tabindex&#x27;)));
+                                            });
+                            
+                                            this._descendants = priorityDescendants.concat(this._descendants);
+                            
+                                            this._activeDescendant = 0;
+                            
+                                            this._descendants.some(function(item, index) {
+                                                if (item.getAttribute(&#x27;tabindex&#x27;) === &#x27;0&#x27;) {
+                                                    this._activeDescendant = index;
+                                                    this.focus();
+                            
+                                                    return true;
+                                                }
+                                            }.bind(this));
+                                        }
+                                    }
+                                };
+                            
+                                AlloyEditor.WidgetFocusManager = WidgetFocusManager;
+                            }());
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

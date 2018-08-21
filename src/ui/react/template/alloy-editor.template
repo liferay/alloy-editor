@@ -1,0 +1,55 @@
+/**
+ * AlloyEditor v<%= version %>
+ *
+ * Copyright 2014-present, Liferay, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the GNU LGPL-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+(function() {
+    function deployCKEditor() {
+        <%= ckeditor %>
+
+        if (typeof CKEDITOR !== 'undefined') {
+            CKEDITOR.disableAutoInline = true;
+        }
+    }
+
+    <%= alloyeditorMain %>
+
+    <%= react %>
+
+    var React = (function() {
+        return (0, eval)('this').React;
+    }());
+
+    if (typeof React === 'undefined' && typeof AlloyEditor !== 'undefined') {
+        React = AlloyEditor.React;
+    }
+
+    if (typeof React === 'undefined' && typeof require === 'function') {
+        React = require('react');
+    }
+
+    var ReactDOM = (function() {
+        return (0, eval)('this').ReactDOM;
+    }());
+
+    if (typeof ReactDOM === 'undefined' && typeof AlloyEditor !== 'undefined') {
+        ReactDOM = AlloyEditor.ReactDOM;
+    }
+
+    if (typeof ReactDOM === 'undefined' && typeof require === 'function') {
+        ReactDOM = require('react-dom');
+    }
+
+    <%= reactBridge %>
+
+    if (typeof window !== 'undefined') {
+       deployCKEditor();
+
+        <%= alloyeditorUI %>
+    }
+}());

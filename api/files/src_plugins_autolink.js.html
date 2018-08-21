@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/plugins/autolink.js - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/plugins/autolink.js</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                if (CKEDITOR.plugins.get(&#x27;ae_autolink&#x27;)) {
+                                    return;
+                                }
+                            
+                                // Disables the auto URL detection feature in IE, their lacks functionality:
+                                // They convert the links only on space. We do on space, comma, semicolon and Enter.
+                                if (/MSIE ([^;]*)|Trident.*; rv:([0-9.]+)/.test(navigator.userAgent)) {
+                                    document.execCommand(&#x27;AutoUrlDetect&#x27;, false, false);
+                                }
+                            
+                                var KEY_BACK = 8;
+                            
+                                var KEY_COMMA = 188;
+                            
+                                var KEY_ENTER = 13;
+                            
+                                var KEY_SEMICOLON = 186;
+                            
+                                var KEY_SPACE = 32;
+                            
+                                var DELIMITERS = [KEY_COMMA, KEY_ENTER, KEY_SEMICOLON, KEY_SPACE];
+                            
+                                var REGEX_LAST_WORD = /[^\s]+/mg;
+                            
+                                var REGEX_URL = /(https?\:\/\/|www\.)(-\.)?([^(\s/?\.#-)]+\.?)+(\b\/[^\s]*)?$/i;
+                            
+                                /**
+                                 * CKEditor plugin which automatically generates links when user types text which looks like URL.
+                                 *
+                                 * @class CKEDITOR.plugins.ae_autolink
+                                 * @constructor
+                                 */
+                                CKEDITOR.plugins.add(
+                                    &#x27;ae_autolink&#x27;, {
+                            
+                                        /**
+                                         * Initialization of the plugin, part of CKEditor plugin lifecycle.
+                                         * The function registers the &#x60;keyup&#x60; event on the editing area.
+                                         *
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @method init
+                                         * @param {Object} editor The current editor instance
+                                         */
+                                        init: function(editor) {
+                                            editor.once(&#x27;contentDom&#x27;, function() {
+                                                var editable = editor.editable();
+                            
+                                                editable.attachListener(editable, &#x27;keyup&#x27;, this._onKeyUp, this, {
+                                                    editor: editor
+                                                });
+                                            }.bind(this));
+                                        },
+                            
+                                        /**
+                                         * Retrieves the last word introduced by the user. Reads from the current
+                                         * caret position backwards until it finds the first white space.
+                                         *
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @method _getLastWord
+                                         * @protected
+                                         * @return {String} The last word introduced by user
+                                         */
+                                        _getLastWord: function(editor) {
+                                            var range = editor.getSelection().getRanges()[0];
+                            
+                                            var offset = range.startOffset;
+                            
+                                            var previousText = &#x27;&#x27;;
+                            
+                                            // The user pressed Enter, so we have to look on the previous node
+                                            if (this._currentKeyCode === KEY_ENTER) {
+                                                var previousNode = range.startContainer.getPrevious();
+                            
+                                                var lastChild;
+                            
+                                                if (previousNode) {
+                                                    // If previous node is a SPACE, (it does not have &#x27;getLast&#x27; method),
+                                                    // ignore it and find the previous text node
+                                                    while (!previousNode.getLast) {
+                                                        previousNode = previousNode.getPrevious();
+                                                    }
+                            
+                                                    lastChild = previousNode.getLast();
+                            
+                                                    // Depending on the browser, the last child node may be a &lt;BR&gt;
+                                                    // (which does not have &#x27;getText&#x27; method),
+                                                    // so ignore it and find the previous text node
+                                                    while (lastChild &amp;&amp; !lastChild.getText()) {
+                                                        lastChild = lastChild.getPrevious();
+                                                    }
+                                                }
+                            
+                                                // Check if the lastChild is already a link
+                                                if (!(lastChild &amp;&amp; lastChild.$.href)) {
+                                                    this._startContainer = lastChild;
+                                                    previousText = lastChild ? lastChild.getText() : &#x27;&#x27;;
+                                                    this._offset = previousText.length;
+                                                }
+                                            } else {
+                                                this._startContainer = range.startContainer;
+                            
+                                                // Last character is the delimiter, ignore it
+                                                previousText = this._startContainer.getText().substring(0, offset - 1);
+                            
+                                                this._offset = offset - 1;
+                                            }
+                            
+                                            var lastWord = &#x27;&#x27;;
+                            
+                                            var match = previousText.match(REGEX_LAST_WORD);
+                            
+                                            if (match) {
+                                                lastWord = match.pop();
+                                            }
+                            
+                                            return lastWord;
+                                        },
+                            
+                                        /**
+                                         * Checks if the given link is a valid URL.
+                                         *
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @method isValidURL
+                                         * @param {String} link The link we want to know if it is a valid URL
+                                         * @protected
+                                         * @return {Boolean} Returns true if the link is a valid URL, false otherwise
+                                         */
+                                        _isValidURL: function(link) {
+                                            return REGEX_URL.test(link);
+                                        },
+                            
+                                        /**
+                                         * Listens to the &#x60;keydown&#x60; event and if the keycode is &#x60;Backspace&#x60;, removes the previously
+                                         * created link.
+                                         *
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @method _onKeyDown
+                                         * @param {EventFacade} event EventFacade object
+                                         * @protected
+                                         */
+                                        _onKeyDown: function(event) {
+                                            var nativeEvent = event.data.$;
+                            
+                                            var editor = event.listenerData.editor;
+                            
+                                            var editable = editor.editable();
+                            
+                                            editable.removeListener(&#x27;keydown&#x27;, this._onKeyDown);
+                            
+                                            if (nativeEvent.keyCode === KEY_BACK) {
+                                                event.cancel();
+                                                event.data.preventDefault();
+                            
+                                                this._removeLink(editor);
+                                            }
+                            
+                                            this._ckLink = null;
+                                        },
+                            
+                                        /**
+                                         * Listens to the &#x60;Enter&#x60; and &#x60;Space&#x60; key events in order to check if the last word
+                                         * introduced by the user should be replaced by a link element.
+                                         *
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @method _onKeyUp
+                                         * @param {EventFacade} event EventFacade object
+                                         * @protected
+                                         */
+                                        _onKeyUp: function(event) {
+                                            var nativeEvent = event.data.$;
+                            
+                                            this._currentKeyCode = nativeEvent.keyCode;
+                            
+                                            if (DELIMITERS.indexOf(this._currentKeyCode) !== -1) {
+                                                var editor = event.listenerData.editor;
+                            
+                                                var lastWord = this._getLastWord(editor);
+                            
+                                                if (this._isValidURL(lastWord)) {
+                                                    this._replaceContentByLink(editor, lastWord);
+                                                }
+                                            }
+                                        },
+                            
+                                        /**
+                                         * Replaces content by a link element.
+                                         *
+                                         * @fires CKEDITOR.plugins.ae_autolink#autolinkAdd
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @method _replaceContentByLink
+                                         * @param {String} content The text that has to be replaced by an link element
+                                         * @protected
+                                         */
+                                        _replaceContentByLink: function(editor, content) {
+                                            var range = editor.createRange();
+                                            var node = CKEDITOR.dom.element.get(this._startContainer);
+                                            var offset = this._offset;
+                            
+                                            // Select the content, so CKEDITOR.Link can properly replace it
+                                            range.setStart(node, offset - content.length);
+                                            range.setEnd(node, offset);
+                                            range.select();
+                            
+                                            var ckLink = new CKEDITOR.Link(editor);
+                                            ckLink.create(content);
+                                            this._ckLink = ckLink;
+                            
+                                            var linkNode = ckLink.getFromSelection();
+                                            editor.fire(&#x27;autolinkAdd&#x27;, linkNode);
+                            
+                                            this._subscribeToKeyEvent(editor);
+                            
+                                            // Now range is on the link and it is selected. We have to
+                                            // return focus to the caret position.
+                                            range = editor.getSelection().getRanges()[0];
+                            
+                                            // If user pressed &#x60;Enter&#x60;, get the next editable node at position 0,
+                                            // otherwise set the cursor at the next character of the link (the white space)
+                                            if (this._currentKeyCode === KEY_ENTER) {
+                                                var nextEditableNode = range.getNextEditableNode();
+                            
+                                                range.setStart(nextEditableNode, 0);
+                                                range.setEnd(nextEditableNode, 0);
+                                            } else {
+                                                var nextNode = range.getNextNode();
+                            
+                                                range.setStart(nextNode, 1);
+                                                range.setEnd(nextNode, 1);
+                                            }
+                            
+                                            range.select();
+                                        },
+                            
+                                        /**
+                                         * Fired when a URL is detected in text and converted to a link.
+                                         *
+                                         * @event CKEDITOR.plugins.ae_autolink#autolinkAdd
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @param {CKEDITOR.dom.element} el Node of the created link.
+                                         */
+                            
+                                        /**
+                                         * Removes the created link element, and replaces it by its text.
+                                         *
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @method _removeLink
+                                         * @protected
+                                         */
+                                        _removeLink: function(editor) {
+                                            var range = editor.getSelection().getRanges()[0];
+                                            var caretOffset = range.startOffset;
+                            
+                                            // Select the link, so CKEDITOR.Link can properly remove it
+                                            var linkNode = this._startContainer.getNext() || this._startContainer;
+                            
+                                            var newRange = editor.createRange();
+                                            newRange.setStart(linkNode, 0);
+                                            newRange.setEndAfter(linkNode);
+                                            newRange.select();
+                            
+                                            this._ckLink.remove();
+                            
+                                            // Return focus to the caret position
+                                            range.setEnd(range.startContainer, caretOffset);
+                                            range.setStart(range.startContainer, caretOffset);
+                            
+                                            range.select();
+                                        },
+                            
+                                        /**
+                                         * Subscribe to a key event of the editable aria.
+                                         *
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @method _subscribeToKeyEvent
+                                         * @protected
+                                         */
+                                        _subscribeToKeyEvent: function(editor) {
+                                            var editable = editor.editable();
+                            
+                                            // Change the priority of keydown listener - 1 means the highest priority.
+                                            // In Chrome on pressing &#x60;Enter&#x60; the listener is not being invoked.
+                                            // See http://dev.ckeditor.com/ticket/11861 for more information.
+                                            editable.attachListener(editable, &#x27;keydown&#x27;, this._onKeyDown, this, {
+                                                editor: editor
+                                            }, 1);
+                                        }
+                                    }
+                                );
+                            }());
+                            
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

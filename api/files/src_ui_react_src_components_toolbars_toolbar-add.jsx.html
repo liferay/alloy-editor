@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/react/src/components/toolbars/toolbar-add.jsx - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/ui/react/src/components/toolbars/toolbar-add.jsx</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function () {
+                                &#x27;use strict&#x27;;
+                            
+                                var POSITION_LEFT = 1;
+                                var POSITION_RIGHT = 2;
+                            
+                                /**
+                                 * The ToolbarAdd class provides functionality for adding content to the editor.
+                                 *
+                                 * @class ToolbarAdd
+                                 * @uses ToolbarButtons
+                                 * @uses WidgetArrowBox
+                                 * @uses WidgetDropdown
+                                 * @uses WidgetExclusive
+                                 * @uses WidgetFocusManager
+                                 * @uses WidgetPosition
+                                 */
+                                var ToolbarAdd = createReactClass({
+                                    mixins: [AlloyEditor.WidgetDropdown, AlloyEditor.WidgetExclusive, AlloyEditor.WidgetFocusManager, AlloyEditor.ToolbarButtons, AlloyEditor.WidgetPosition, AlloyEditor.WidgetArrowBox],
+                            
+                                    // Allows validating props being passed to the component.
+                                    propTypes: {
+                                        /**
+                                         * The toolbar configuration.
+                                         *
+                                         * @instance
+                                         * @memberof ToolbarAdd
+                                         * @property {Object} config
+                                         */
+                                        config: PropTypes.object,
+                            
+                                        /**
+                                         * The editor instance where the component is being used.
+                                         *
+                                         * @instance
+                                         * @memberof ToolbarAdd
+                                         * @property {Object} editor
+                                         */
+                                        editor: PropTypes.object.isRequired,
+                            
+                                        /**
+                                         * The payload from &quot;editorInteraction&quot; event
+                                         *
+                                         * @instance
+                                         * @memberof ToolbarAdd
+                                         * @property {Object} editorEvent
+                                         */
+                                        editorEvent: PropTypes.object,
+                            
+                                        /**
+                                         * The gutter to be applied to the widget when rendered in exclusive mode
+                                         *
+                                         * @instance
+                                         * @memberof ToolbarAdd
+                                         * @property {Object} gutterExclusive
+                                         */
+                                        gutterExclusive: PropTypes.object,
+                            
+                                        /**
+                                         * The label that should be used for accessibility purposes.
+                                         *
+                                         * @instance
+                                         * @memberof ToolbarAdd
+                                         * @property {String} label
+                                         */
+                                        label: PropTypes.string,
+                            
+                                        /**
+                                         * Provides a callback which should be executed when a dismiss key is pressed over a toolbar to return the focus to the editor.
+                                         *
+                                         * @instance
+                                         * @memberof ToolbarAdd
+                                         * @property {Function} onDismiss
+                                         */
+                                        onDismiss: PropTypes.func,
+                            
+                                        /**
+                                         * Whether the Toolbar should be shown on left or on right of the editable area. Could be one of these:
+                                         * - ToolbarAdd.left
+                                         * - ToolbarAdd.right
+                                         *
+                                         * @instance
+                                         * @memberof ToolbarAdd
+                                         * @property {Enum} position
+                                         */
+                                        position: PropTypes.oneOf([POSITION_LEFT, POSITION_RIGHT]),
+                            
+                                        /**
+                                         * The data, returned from {{#crossLink &quot;CKEDITOR.plugins.selectionregion/getSelectionData:method&quot;}}{{/crossLink}}
+                                         *
+                                         * @instance
+                                         * @memberof ToolbarAdd
+                                         * @property {Object} selectionData
+                                         */
+                                        selectionData: PropTypes.object
+                                    },
+                            
+                                    // Lifecycle. Provides static properties to the widget.
+                                    statics: {
+                                        /**
+                                         * The name which will be used as an alias of the button in the configuration.
+                                         *
+                                         * @default add
+                                         * @memberof ToolbarAdd
+                                         * @property {String} key
+                                         * @static
+                                         */
+                                        key: &#x27;add&#x27;,
+                            
+                                        /**
+                                         * Defines the constant for positioning the Toolbar on left of the editable area.
+                                         *
+                                         * @default 1
+                                         * @memberof ToolbarAdd
+                                         * @property {String} left
+                                         * @static
+                                         */
+                                        left: POSITION_LEFT,
+                            
+                                        /**
+                                         * Defines the constant for positioning the Toolbar on right of the editable area.
+                                         *
+                                         * @default 2
+                                         * @memberof ToolbarAdd
+                                         * @property {String} right
+                                         * @static
+                                         */
+                                        right: POSITION_RIGHT
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Returns the default values of the properties used in the widget.
+                                     *
+                                     * @instance
+                                     * @memberof ToolbarAdd
+                                     * @method getDefaultProps
+                                     * @return {Object} The default properties.
+                                     */
+                                    getDefaultProps: function() {
+                                        return {
+                                            circular: true,
+                                            descendants: &#x27;.ae-button&#x27;,
+                                            gutterExclusive: {
+                                                left: 10,
+                                                top: 0
+                                            },
+                                            keys: {
+                                                dismiss: [27],
+                                                next: [39, 40],
+                                                prev: [37, 38]
+                                            },
+                                            position: POSITION_LEFT
+                                        };
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked once, only on the client (not on the server),
+                                     * immediately after the initial rendering occurs.
+                                     *
+                                     * @instance
+                                     * @memberof ToolbarAdd
+                                     * @method componentDidMount
+                                     */
+                                    componentDidMount: function () {
+                                        this._updatePosition();
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Invoked immediately after the component&#x27;s updates are flushed to the DOM.
+                                     * This method is not called for the initial render.
+                                     *
+                                     * @instance
+                                     * @memberof ToolbarAdd
+                                     * @method componentDidUpdate
+                                     * @param {Object} prevProps The previous state of the component&#x27;s properties.
+                                     * @param {Object} prevState Component&#x27;s previous state.
+                                     */
+                                    componentDidUpdate: function (prevProps, prevState) {
+                                        this._updatePosition();
+                            
+                                        // In case of exclusive rendering, focus the first descendant (button)
+                                        // so the user will be able to start interacting with the buttons immediately.
+                                        if (this.props.renderExclusive) {
+                                            this.focus();
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Lifecycle. Renders the buttons for adding content or hides the toolbar
+                                     * if user interacted with a non-editable element.
+                                     *
+                                     * @instance
+                                     * @memberof ToolbarAdd
+                                     * @method render
+                                     * @return {Object|null} The content which should be rendered.
+                                     */
+                                    render: function() {
+                                        // Some operations such as &#x60;requestExclusive&#x60; may force editor to blur which will
+                                        // invalidate the &#x60;props.editorEvent&#x60; stored value, without causing a &#x60;props&#x60; change.
+                                        // For example, if the editor is empty, &#x60;ae_placeholder&#x60; plugin will remove
+                                        // the target from the DOM and will prevent &#x60;add&#x60; toolbar from rendering.
+                                        //
+                                        // It should be safe to assume that if you have been able to render the toolbar
+                                        // and request the exclusive mode, then rendering might be kept until the exclusive mode is left.
+                                        if (!this.state.itemExclusive &amp;&amp;
+                                                this.props.editorEvent &amp;&amp;
+                                                this.props.editorEvent.data.nativeEvent.target &amp;&amp;
+                                                !this.props.editorEvent.data.nativeEvent.target.isContentEditable) {
+                                            return null;
+                                        }
+                            
+                                        var buttons = this._getButtons();
+                                        var className = this._getToolbarClassName();
+                            
+                                        return (
+                                            &lt;div aria-label={AlloyEditor.Strings.add} className={className} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
+                                                &lt;div className=&quot;ae-container&quot;&gt;
+                                                    {buttons}
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                        );
+                                    },
+                            
+                                    /**
+                                     * Returns a list of buttons that will eventually render to HTML.
+                                     *
+                                     * @instance
+                                     * @memberof ToolbarAdd
+                                     * @method _getButtons
+                                     * @protected
+                                     * @return {Object} The buttons which have to be rendered.
+                                     */
+                                    _getButtons: function() {
+                                        var buttons;
+                            
+                                        if (this.props.renderExclusive) {
+                                            buttons = this.getToolbarButtons(this.props.config.buttons);
+                                        } else {
+                                            if (this.props.selectionData &amp;&amp; this.props.selectionData.region) {
+                                                buttons = (
+                                                    &lt;button aria-label={AlloyEditor.Strings.add} className=&quot;ae-button ae-button-add&quot; onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}&gt;
+                                                        &lt;span className=&quot;ae-icon-add&quot;&gt;&lt;/span&gt;
+                                                    &lt;/button&gt;
+                                                );
+                                            }
+                                        }
+                            
+                                        return buttons;
+                                    },
+                            
+                                    /**
+                                     * Returns the class name of the toolbar in case of both exclusive and normal mode.
+                                     *
+                                     * @instance
+                                     * @memberof ToolbarAdd
+                                     * @method _getToolbarClassName
+                                     * @protected
+                                     * @return {String} The class name which have to be applied to the DOM element.
+                                     */
+                                    _getToolbarClassName: function() {
+                                        var cssClass = &#x27;ae-toolbar-add&#x27;;
+                            
+                                        if (this.props.renderExclusive) {
+                                            cssClass = &#x27;ae-toolbar &#x27; + this.getArrowBoxClasses();
+                                        }
+                            
+                                        return cssClass;
+                                    },
+                            
+                                    /**
+                                     * Calculates and sets the position of the toolbar in exclusive or normal mode.
+                                     *
+                                     * @instance
+                                     * @memberof ToolbarAdd
+                                     * @method _updatePosition
+                                     * @protected
+                                     */
+                                    _updatePosition: function() {
+                                        var region;
+                            
+                                        // If component is not mounted, there is nothing to do
+                                        if (!ReactDOM.findDOMNode(this)) {
+                                            return;
+                                        }
+                            
+                                        if (this.props.renderExclusive) {
+                                            this.updatePosition();
+                                            this.show();
+                                        } else {
+                                            if (this.props.selectionData) {
+                                                region = this.props.selectionData.region;
+                                            }
+                            
+                                            if (region) {
+                                                var domNode = ReactDOM.findDOMNode(this);
+                            
+                                                var domElement = new CKEDITOR.dom.element(domNode);
+                            
+                                                var startRect = region.startRect || region;
+                            
+                                                var nativeEditor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                                                var clientRect = nativeEditor.editable().getClientRect();
+                            
+                                                var offsetLeft;
+                            
+                                                var position = this.props.config.position || this.props.position;
+                            
+                                                if (position === POSITION_LEFT) {
+                                                    offsetLeft = clientRect.left - domNode.offsetWidth - this.props.gutterExclusive.left + &#x27;px&#x27;;
+                                                } else {
+                                                    offsetLeft = clientRect.right + this.props.gutterExclusive.left + &#x27;px&#x27;;
+                                                }
+                            
+                                                domNode.style.left = offsetLeft;
+                            
+                                                domNode.style.top = Math.floor((region.bottom + region.top) / 2) + &#x27;px&#x27;;
+                            
+                                                if (nativeEditor.element.getStyle(&#x27;overflow&#x27;) !== &#x27;auto&#x27;) {
+                                                    domNode.style.top = Math.floor(region.top - domNode.offsetHeight/2 + startRect.height/2) + &#x27;px&#x27;;
+                                                } else {
+                                                    domNode.style.top = Math.floor( nativeEditor.element.$.offsetTop + (startRect.height / 2) - (domNode.offsetHeight / 2) ) + &#x27;px&#x27;;
+                                                }
+                            
+                                                domNode.style.opacity = 1;
+                            
+                                                domElement.removeClass(&#x27;ae-arrow-box&#x27;);
+                            
+                                                this.cancelAnimation();
+                                            }
+                                        }
+                                    }
+                                });
+                            
+                                AlloyEditor.Toolbars[ToolbarAdd.key] = AlloyEditor.ToolbarAdd = ToolbarAdd;
+                            }());
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

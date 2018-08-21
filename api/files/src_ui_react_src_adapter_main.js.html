@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/ui/react/src/adapter/main.js - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/ui/react/src/adapter/main.js</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                // An object containing all currently registered plugins in AlloyEditor.
+                                var BRIDGE_BUTTONS = {};
+                            
+                                /**
+                                 * AlloyEditor static object.
+                                 *
+                                 * @class AlloyEditor
+                                 */
+                                var AlloyEditor = {
+                                    /**
+                                     * Creates an instance of AlloyEditor.
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @method editable
+                                     * @static
+                                     * @param {String|Node} node The Node ID or HTMl node, which AlloyEditor should use as an editable area.
+                                     * @param {Object} config Configuration attributes for the current instance of AlloyEditor.
+                                     * @return {Object} An instance of {{#crossLink &quot;Core&quot;}}{{/crossLink}}
+                                     */
+                                    editable: function(node, config) {
+                                        config = config || {};
+                                        config.srcNode = node;
+                            
+                                        AlloyEditor.implementEventTarget();
+                            
+                                        return new AlloyEditor.Core(config);
+                                    },
+                            
+                                    /**
+                                     * The full URL for the AlloyEditor installation directory.
+                                     * It is possible to manually provide the base path by setting a
+                                     * global variable named &#x60;ALLOYEDITOR_BASEPATH&#x60;. This global variable
+                                     * must be set **before** the editor script loading.
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @method getBasePath
+                                     * @static
+                                     * @return {String} The found base path
+                                     */
+                                    getBasePath: function() {
+                                        // Find out the editor directory path, based on its &lt;script&gt; tag.
+                                        var path = window.ALLOYEDITOR_BASEPATH || &#x27;&#x27;;
+                            
+                                        if (!path) {
+                                            var scripts = document.getElementsByTagName(&#x27;script&#x27;);
+                            
+                                            for (var i = 0; i &lt; scripts.length; i++) {
+                                                var match = scripts[ i ].src.match(AlloyEditor.regexBasePath);
+                            
+                            
+                                                if (match) {
+                                                    path = match[1];
+                                                    break;
+                                                }
+                                            }
+                                        }
+                            
+                                        // In IE (only) the script.src string is the raw value entered in the
+                                        // HTML source. Other browsers return the full resolved URL instead.
+                                        if (path.indexOf(&#x27;:/&#x27;) === -1 &amp;&amp; path.slice(0, 2) !== &#x27;//&#x27; ) {
+                                            // Absolute path.
+                                            if (path.indexOf(&#x27;/&#x27;) === 0) {
+                                                path = location.href.match(/^.*?:\/\/[^\/]*/)[0] + path;
+                                            }
+                                            // Relative path.
+                                            else {
+                                                path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
+                                            }
+                                        }
+                            
+                                        if (!path){
+                                            throw &#x27;The AlloyEditor installation path could not be automatically detected. Please set the global variable &quot;ALLOYEDITOR_BASEPATH&quot; before creating editor instances.&#x27;;
+                                        }
+                            
+                                        return path;
+                                    },
+                            
+                                    /**
+                                     * Detects and load the corresponding language file if AlloyEditor language strings are not already present.
+                                     * The function fires a {{#crossLink &quot;AlloyEditor/languageResourcesLoaded:event&quot;}}{{/crossLink}} event
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @method loadLanguageResources
+                                     * @static
+                                     * @param {Function} callback Optional callback to be called when AlloyEditor loads the language resource.
+                                     */
+                                    loadLanguageResources: function(callback) {
+                                        AlloyEditor.implementEventTarget();
+                            
+                                        if (AlloyEditor.Lang.isFunction(callback)) {
+                                            if (AlloyEditor.Strings) {
+                                                setTimeout(callback, 0);
+                                            } else {
+                                                AlloyEditor.once(&#x27;languageResourcesLoaded&#x27;, function() {
+                                                    setTimeout(callback, 0);
+                                                });
+                                            }
+                                        }
+                            
+                                        if (!AlloyEditor._langResourceRequested) {
+                                            AlloyEditor._langResourceRequested = true;
+                            
+                                            var languages = [&#x27;af&#x27;, &#x27;ar&#x27;, &#x27;bg&#x27;, &#x27;bn&#x27;, &#x27;bs&#x27;, &#x27;ca&#x27;, &#x27;cs&#x27;, &#x27;cy&#x27;, &#x27;da&#x27;, &#x27;de&#x27;, &#x27;el&#x27;, &#x27;en-au&#x27;, &#x27;en-ca&#x27;, &#x27;en-gb&#x27;, &#x27;en&#x27;, &#x27;eo&#x27;, &#x27;es&#x27;, &#x27;et&#x27;, &#x27;eu&#x27;, &#x27;fa&#x27;, &#x27;fi&#x27;, &#x27;fo&#x27;, &#x27;fr-ca&#x27;, &#x27;fr&#x27;, &#x27;gl&#x27;, &#x27;gu&#x27;, &#x27;he&#x27;, &#x27;hi&#x27;, &#x27;hr&#x27;, &#x27;hu&#x27;, &#x27;id&#x27;, &#x27;is&#x27;, &#x27;it&#x27;, &#x27;ja&#x27;, &#x27;ka&#x27;, &#x27;km&#x27;, &#x27;ko&#x27;, &#x27;ku&#x27;, &#x27;lt&#x27;, &#x27;lv&#x27;, &#x27;mk&#x27;, &#x27;mn&#x27;, &#x27;ms&#x27;, &#x27;nb&#x27;, &#x27;nl&#x27;, &#x27;no&#x27;, &#x27;pl&#x27;, &#x27;pt-br&#x27;, &#x27;pt&#x27;, &#x27;ro&#x27;, &#x27;ru&#x27;, &#x27;si&#x27;, &#x27;sk&#x27;, &#x27;sl&#x27;, &#x27;sq&#x27;, &#x27;sr-latn&#x27;, &#x27;sr&#x27;, &#x27;sv&#x27;, &#x27;th&#x27;, &#x27;tr&#x27;, &#x27;tt&#x27;, &#x27;ug&#x27;, &#x27;uk&#x27;, &#x27;vi&#x27;, &#x27;zh-cn&#x27;, &#x27;zh&#x27;];
+                            
+                                            var userLanguage = navigator.language || navigator.userLanguage || &#x27;en&#x27;;
+                            
+                                            var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
+                                            var lang = parts[1];
+                                            var locale = parts[2];
+                            
+                                            if (languages.indexOf(lang + &#x27;-&#x27; + locale) &gt;= 0) {
+                                                lang = lang + &#x27;-&#x27; + locale;
+                                            } else if (languages.indexOf(lang) === -1) {
+                                                lang = &#x27;en&#x27;;
+                                            }
+                            
+                                            CKEDITOR.scriptLoader.load(AlloyEditor.getUrl(&#x27;lang/alloy-editor/&#x27; + lang + &#x27;.js&#x27;), function(loaded) {
+                                                if (loaded) {
+                                                    AlloyEditor.fire(&#x27;languageResourcesLoaded&#x27;);
+                                                }
+                                            }, this);
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Gets the full URL for AlloyEditor resources. By default, URLs
+                                     * returned by this function contain a querystring parameter (&quot;t&quot;)
+                                     * set to the {@link CKEDITOR#timestamp} value.
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @method getUrl
+                                     * @static
+                                     * @param {String} resource The resource whose full URL we want to get.
+                                     * It may be a full, absolute, or relative URL.
+                                     * @return {String} The full URL.
+                                     */
+                                    getUrl: function(resource) {
+                                        var basePath = AlloyEditor.getBasePath();
+                            
+                                        // If this is not a full or absolute path.
+                                        if (resource.indexOf(&#x27;:/&#x27;) === -1 &amp;&amp; resource.indexOf(&#x27;/&#x27;) !== 0) {
+                                            resource = basePath + resource;
+                                        }
+                            
+                                        // Add the timestamp, except for directories.
+                                        if (CKEDITOR.timestamp &amp;&amp; resource.charAt( resource.length - 1 ) !== &#x27;/&#x27; &amp;&amp; !(/[&amp;?]t=/).test(resource)) {
+                                            resource += (resource.indexOf(&#x27;?&#x27;) &gt;= 0 ? &#x27;&amp;&#x27; : &#x27;?&#x27;) + &#x27;t=&#x27; + CKEDITOR.timestamp;
+                                        }
+                            
+                                        return resource;
+                                    },
+                            
+                                    /**
+                                     * Implements event firing and subscribing via CKEDITOR.event.
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @method implementEventTarget
+                                     * @static
+                                     */
+                                    implementEventTarget: function() {
+                                        if (!AlloyEditor.fire &amp;&amp; !AlloyEditor.on) {
+                                            CKEDITOR.event.implementOn(AlloyEditor);
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Regular expression which should match the script which have been used to load AlloyEditor.
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @property regexBasePath
+                                     * @type {RegExp}
+                                     * @static
+                                     */
+                                    regexBasePath: /(^|.*[\\\/])(?:alloy-editor[^/]+|alloy-editor)\.js(?:\?.*|;.*)?$/i,
+                            
+                                    /**
+                                     * And object, containing all currently registered buttons in AlloyEditor.
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @property Buttons
+                                     * @type {Object}
+                                     * @static
+                                     */
+                                    Buttons: {},
+                            
+                                    /**
+                                     * And object, containing all currently registered toolbars in AlloyEditor.
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @property Toolbars
+                                     * @type {Object}
+                                     * @static
+                                     */
+                                    Toolbars: {},
+                            
+                                    /**
+                                     * Fired when AlloyEditor detects the browser language and loads the corresponding language file. Once this event
+                                     * is fired, AlloyEditor.Strings will be populated with data.
+                                     *
+                                     * @event languageResourcesLoaded
+                                     */
+                            
+                                    /**
+                                     * Returns the required plugin names needed for a given plugin
+                                     * if it is already registered or an empty array.
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @method getButtons
+                                     * @param {Array} buttons An array of buttons or plugin names.
+                                     * @return {Function} A function that can be invoked to resolve the requested button names.
+                                     * @static
+                                     */
+                                    getButtons: function(buttons) {
+                                        return function() {
+                                            return buttons.reduce(function(acc, val) {
+                                                val = BRIDGE_BUTTONS[val] || [val];
+                                                return acc.concat(val);
+                                            }, []);
+                                        };
+                                    },
+                            
+                                    /**
+                                     * Register a button and try to get its required plugins.
+                                     *
+                                     * @memberof AlloyEditor
+                                     * @method registerBridgeButton
+                                     * @param {String} buttonName The name of the button.
+                                     * @param {String} pluginName The name of the plugin that registers the button.
+                                     * @static
+                                     */
+                                    registerBridgeButton: function(buttonName, pluginName) {
+                                        if (!BRIDGE_BUTTONS[pluginName]) {
+                                            BRIDGE_BUTTONS[pluginName] = [];
+                                        }
+                            
+                                        BRIDGE_BUTTONS[pluginName].push(buttonName);
+                                    }
+                                };
+                            
+                                if (typeof module !== &#x27;undefined&#x27; &amp;&amp; typeof module.exports === &#x27;object&#x27;) {
+                                    module.exports = AlloyEditor;
+                                }
+                            
+                                if (typeof window !== &#x27;undefined&#x27;) {
+                                    window.AlloyEditor = AlloyEditor;
+                                } else if (typeof global !== &#x27;undefined&#x27;) {
+                                    global.AlloyEditor = AlloyEditor;
+                                } else if (typeof self !== &#x27;undefined&#x27;) {
+                                    self.AlloyEditor = AlloyEditor;
+                                } else {
+                                    this.AlloyEditor = AlloyEditor;
+                                }
+                            }());
+                            
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/core/selection-region.js - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/core/selection-region.js</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                if (CKEDITOR.plugins.get(&#x27;ae_selectionregion&#x27;)) {
+                                    return;
+                                }
+                            
+                                CKEDITOR.SELECTION_TOP_TO_BOTTOM = 0;
+                                CKEDITOR.SELECTION_BOTTOM_TO_TOP = 1;
+                                CKEDITOR.SELECTION_LEFT_TO_RIGHT = 2;
+                                CKEDITOR.SELECTION_RIGHT_TO_LEFT = 3;
+                            
+                                /**
+                                 * SelectionRegion utility class which provides metadata about the selection. The metadata may be the start and end
+                                 * rectangles, caret region, etc. **This class is not intended to be used standalone. Its functions will
+                                 * be merged into each editor instance, so the developer may use them directly via the editor, without making
+                                 * an instance of this class**.
+                                 *
+                                 * @class SelectionRegion
+                                 * @constructor
+                                 */
+                                function SelectionRegion() {}
+                            
+                                SelectionRegion.prototype = {
+                                    constructor: SelectionRegion,
+                            
+                                    /**
+                                     * Creates selection from two points in page coordinates.
+                                     *
+                                     * @instance
+                                     * @memberof SelectionRegion
+                                     * @method createSelectionFromPoint
+                                     * @param {Number} x X point in page coordinates.
+                                     * @param {Number} y Y point in page coordinates.
+                                     */
+                                    createSelectionFromPoint: function(x, y) {
+                                        this.createSelectionFromRange(x, y, x, y);
+                                    },
+                            
+                                    /**
+                                     * Creates selection from range. A range consists from two points in page coordinates.
+                                     *
+                                     * @instance
+                                     * @memberof SelectionRegion
+                                     * @method createSelectionFromRange
+                                     * @param {Number} startX X coordinate of the first point.
+                                     * @param {Number} startY Y coordinate of the first point.
+                                     * @param {Number} endX X coordinate of the second point.
+                                     * @param {Number} endY Y coordinate of the second point.
+                                     */
+                                    createSelectionFromRange: function(startX, startY, endX, endY) {
+                                        var end;
+                                        var endContainer;
+                                        var endOffset;
+                                        var range;
+                                        var start;
+                                        var startContainer;
+                                        var startOffset;
+                            
+                                        if (typeof document.caretPositionFromPoint === &#x27;function&#x27;) {
+                                            start = document.caretPositionFromPoint(startX, startY);
+                                            end = document.caretPositionFromPoint(endX, endY);
+                            
+                                            startContainer = start.offsetNode;
+                                            endContainer = end.offsetNode;
+                            
+                                            startOffset = start.offset;
+                                            endOffset = end.offset;
+                            
+                                            range = this.createRange();
+                                        } else if (typeof document.caretRangeFromPoint === &#x27;function&#x27;) {
+                                            start = document.caretRangeFromPoint(startX, startY);
+                                            end = document.caretRangeFromPoint(endX, endY);
+                            
+                                            startContainer = start.startContainer;
+                                            endContainer = end.startContainer;
+                            
+                                            startOffset = start.startOffset;
+                                            endOffset = end.startOffset;
+                            
+                                            range = this.createRange();
+                                        }
+                            
+                                        if (range &amp;&amp; document.getSelection) {
+                                            range.setStart(new CKEDITOR.dom.node(startContainer), startOffset);
+                                            range.setEnd(new CKEDITOR.dom.node(endContainer), endOffset);
+                            
+                                            this.getSelection().selectRanges([range]);
+                                        } else if (typeof document.body.createTextRange === &#x27;function&#x27;) {
+                                            var selection = this.getSelection();
+                            
+                                            selection.unlock();
+                            
+                                            range = document.body.createTextRange();
+                                            range.moveToPoint(startX, startY);
+                            
+                                            var endRange = range.duplicate();
+                                            endRange.moveToPoint(endX, endY);
+                            
+                                            range.setEndPoint(&#x27;EndToEnd&#x27;, endRange);
+                                            range.select();
+                            
+                                            this.getSelection().lock();
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Returns the region of the current position of the caret. The points are in page coordinates.
+                                     *
+                                     * @instance
+                                     * @memberof SelectionRegion
+                                     * @method getCaretRegion
+                                     * @return {Object} Returns object with the following properties:
+                                     * - bottom
+                                     * - left
+                                     * - right
+                                     * - top
+                                     */
+                                    getCaretRegion: function() {
+                                        var selection = this.getSelection();
+                            
+                                        var region = {
+                                            bottom: 0,
+                                            left: 0,
+                                            right: 0,
+                                            top: 0
+                                        };
+                            
+                                        var bookmarks = selection.createBookmarks();
+                            
+                                        if (!bookmarks.length) {
+                                            return region;
+                                        }
+                            
+                                        var bookmarkNodeEl = bookmarks[0].startNode.$;
+                            
+                                        bookmarkNodeEl.style.display = &#x27;inline-block&#x27;;
+                            
+                                        region = new CKEDITOR.dom.element(bookmarkNodeEl).getClientRect();
+                            
+                                        bookmarkNodeEl.parentNode.removeChild(bookmarkNodeEl);
+                            
+                                        var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
+                            
+                                        region.bottom = scrollPos.y + region.bottom;
+                                        region.left = scrollPos.x + region.left;
+                                        region.right = scrollPos.x + region.right;
+                                        region.top = scrollPos.y + region.top;
+                            
+                                        return region;
+                                    },
+                            
+                                    /**
+                                     * Returns data for the current selection.
+                                     *
+                                     * @instance
+                                     * @memberof SelectionRegion
+                                     * @method getSelectionData
+                                     * @return {Object|null} Returns an object with the following data:
+                                     * - element - The currently selected element, if any
+                                     * - text - The selected text
+                                     * - region - The data, returned from {{#crossLink &quot;CKEDITOR.plugins.ae_selectionregion/getSelectionRegion:method&quot;}}{{/crossLink}}
+                                     */
+                                    getSelectionData: function() {
+                                        var selection = this.getSelection();
+                            
+                                        if (!selection.getNative()) {
+                                            return null;
+                                        }
+                            
+                                        var result = {
+                                            element: selection.getSelectedElement(),
+                                            text: selection.getSelectedText()
+                                        };
+                            
+                                        result.region = this.getSelectionRegion(selection);
+                            
+                                        return result;
+                                    },
+                            
+                                    /**
+                                     * Returns the region of the current selection.
+                                     *
+                                     * @instance
+                                     * @memberof SelectionRegion
+                                     * @method getSelectionRegion
+                                     * @return {Object} Returns object which is being returned from
+                                     * {{#crossLink &quot;CKEDITOR.plugins.ae_selectionregion/getClientRectsRegion:method&quot;}}{{/crossLink}} with three more properties:
+                                     * - direction - the direction of the selection. Can be one of these:
+                                     *   1. CKEDITOR.SELECTION_TOP_TO_BOTTOM
+                                     *   2. CKEDITOR.SELECTION_BOTTOM_TO_TOP
+                                     * - height - The height of the selection region
+                                     * - width - The width of the selection region
+                                     */
+                                    getSelectionRegion: function() {
+                                        var region = this.getClientRectsRegion();
+                            
+                                        region.direction = this.getSelectionDirection();
+                            
+                                        region.height = region.bottom - region.top;
+                                        region.width = region.right - region.left;
+                            
+                                        return region;
+                                    },
+                            
+                                    /**
+                                     * Returns true if the current selection is empty, false otherwise.
+                                     *
+                                     * @instance
+                                     * @memberof SelectionRegion
+                                     * @method isSelectionEmpty
+                                     * @return {Boolean} Returns true if the current selection is empty, false otherwise.
+                                     */
+                                    isSelectionEmpty: function() {
+                                        var ranges;
+                            
+                                        var selection = this.getSelection();
+                            
+                                        return (selection.getType() === CKEDITOR.SELECTION_NONE) ||
+                                            ((ranges = selection.getRanges()) &amp;&amp; ranges.length === 1 &amp;&amp; ranges[0].collapsed);
+                                    },
+                            
+                                    /**
+                                     * Returns object with data about the [client rectangles](https://developer.mozilla.org/en-US/docs/Web/API/Element.getClientRects) of the selection,
+                                     * normalized across browses. All offsets below are in page coordinates.
+                                     *
+                                     * @instance
+                                     * @memberof SelectionRegion
+                                     * @method getClientRectsRegion
+                                     * @return {Object} Returns object with the following data:
+                                     * - bottom - bottom offset of all client rectangles
+                                     * - left - left offset of all client rectangles
+                                     * - right - right offset of all client rectangles
+                                     * - top - top offset of all client rectangles
+                                     * - startRect - An Object, which contains the following information:
+                                     *     + bottom - bottom offset
+                                     *     + height - the height of the rectangle
+                                     *     + left - left offset of the selection
+                                     *     + right - right offset of the selection
+                                     *     + top - top offset of the selection
+                                     *     + width - the width of the rectangle
+                                     * - endRect - An Object, which contains the following information:
+                                     *     + bottom - bottom offset
+                                     *     + height - the height of the rectangle
+                                     *     + left - left offset of the selection
+                                     *     + right - right offset of the selection
+                                     *     + top - top offset of the selection
+                                     *     + width - the width of the rectangle
+                                     *
+                                     * If there is no native selection, the objects will be filled with 0.
+                                     */
+                                    getClientRectsRegion: function() {
+                                        var selection = this.getSelection();
+                                        var nativeSelection = selection.getNative();
+                            
+                                        var defaultRect = {
+                                            bottom: 0,
+                                            height: 0,
+                                            left: 0,
+                                            right: 0,
+                                            top: 0,
+                                            width: 0
+                                        };
+                            
+                                        var region = {
+                                            bottom: 0,
+                                            endRect: defaultRect,
+                                            left: 0,
+                                            right: 0,
+                                            top: 0,
+                                            startRect: defaultRect
+                                        };
+                            
+                                        if (!nativeSelection) {
+                                            return region;
+                                        }
+                            
+                                        var bottom = 0;
+                                        var clientRects;
+                                        var left = Infinity;
+                                        var rangeCount;
+                                        var right = -Infinity;
+                                        var top = Infinity;
+                            
+                                        if (nativeSelection.createRange) {
+                                            clientRects = nativeSelection.createRange().getClientRects();
+                                        } else {
+                                            rangeCount = nativeSelection.rangeCount;
+                                            clientRects = (nativeSelection.rangeCount &gt; 0) ? nativeSelection.getRangeAt(0).getClientRects() : [];
+                                        }
+                            
+                                        if (clientRects.length === 0) {
+                                            region = this.getCaretRegion();
+                                        } else {
+                                            for (var i = 0, length = clientRects.length; i &lt; length; i++) {
+                                                var item = clientRects[i];
+                            
+                                                if (item.left &lt; left) {
+                                                    left = item.left;
+                                                }
+                            
+                                                if (item.right &gt; right) {
+                                                    right = item.right;
+                                                }
+                            
+                                                if (item.top &lt; top) {
+                                                    top = item.top;
+                                                }
+                            
+                                                if (item.bottom &gt; bottom) {
+                                                    bottom = item.bottom;
+                                                }
+                                            }
+                            
+                                            var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
+                            
+                                            region.bottom = scrollPos.y + bottom;
+                                            region.left = scrollPos.x + left;
+                                            region.right = scrollPos.x + right;
+                                            region.top = scrollPos.y + top;
+                            
+                                            if (clientRects.length) {
+                                                var endRect = clientRects[clientRects.length - 1];
+                                                var startRect = clientRects[0];
+                            
+                                                region.endRect = {
+                                                    bottom: scrollPos.y + endRect.bottom,
+                                                    height: endRect.height,
+                                                    left: scrollPos.x + endRect.left,
+                                                    right: scrollPos.x + endRect.right,
+                                                    top: scrollPos.y + endRect.top,
+                                                    width: endRect.width
+                                                };
+                            
+                                                region.startRect = {
+                                                    bottom: scrollPos.y + startRect.bottom,
+                                                    height: startRect.height,
+                                                    left: scrollPos.x + startRect.left,
+                                                    right: scrollPos.x + startRect.right,
+                                                    top: scrollPos.y + startRect.top,
+                                                    width: startRect.width
+                                                };
+                                            }
+                                        }
+                            
+                                        return region;
+                                    },
+                            
+                                    /**
+                                     * Retrieves the direction of the selection. The direction is from top to bottom or from bottom to top.
+                                     * For IE &lt; 9 it is not possible, so the direction for these browsers will be always CKEDITOR.SELECTION_TOP_TO_BOTTOM.
+                                     *
+                                     * @instance
+                                     * @memberof SelectionRegion
+                                     * @method getSelectionDirection
+                                     * @return {Number} Returns a number which represents selection direction. It might be one of these:
+                                     * - CKEDITOR.SELECTION_TOP_TO_BOTTOM;
+                                     * - CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+                                     */
+                                    getSelectionDirection: function() {
+                                        var direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
+                                        var selection = this.getSelection();
+                                        var nativeSelection = selection.getNative();
+                            
+                                        if (!nativeSelection) {
+                                            return direction;
+                                        }
+                            
+                                        var anchorNode;
+                            
+                                        if ((anchorNode = nativeSelection.anchorNode) &amp;&amp; anchorNode.compareDocumentPosition) {
+                                            var position = anchorNode.compareDocumentPosition(nativeSelection.focusNode);
+                            
+                                            if (!position &amp;&amp; nativeSelection.anchorOffset &gt; nativeSelection.focusOffset || position === Node.DOCUMENT_POSITION_PRECEDING) {
+                                                direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+                                            }
+                                        }
+                            
+                                        return direction;
+                                    }
+                                };
+                            
+                                CKEDITOR.plugins.add(
+                                    &#x27;ae_selectionregion&#x27;, {
+                                        init: function(editor) {
+                                            var attr,
+                                                hasOwnProperty;
+                            
+                                            hasOwnProperty = Object.prototype.hasOwnProperty;
+                            
+                                            for (attr in SelectionRegion.prototype) {
+                                                if (hasOwnProperty.call(SelectionRegion.prototype, attr) &amp;&amp; typeof editor[attr] === &#x27;undefined&#x27;) {
+                                                    editor[attr] = SelectionRegion.prototype[attr];
+                                                }
+                                            }
+                                        }
+                                    }
+                                );
+                            }());
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>src/core/table.js - alloyeditor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+
+    <!-- AlloyUI -->
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h1 class="brand">
+                <a href="/">
+                    <img alt="alloyeditor" src="../assets/img/logo-small.png" title="alloyeditor">
+                </a>
+            </h1>
+            <div class="nav">
+                <li class="divider-vertical"></li>
+                <li>
+                    <p class="navbar-text">
+                        API Docs for Version: <b>1.5.1</b>
+                    </p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd" class="container">
+        <div class="row">
+            <div class="span3">
+                <div id="docs-sidebar" class="sidebar apidocs">
+                    <div id="api-list">
+                        <h2 class="off-left">APIs</h2>
+                        <div id="api-tabview">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#api-classes">Classes</a></li>
+                                <li><a href="#api-modules">Modules</a></li>
+                            </ul>
+                    
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                            </div>
+                    
+                            <div id="api-tabview-panel">
+                                <ul id="api-classes" class="apis classes tab-pane">
+                                    <li><a href="../classes/ae_uicore.html">ae_uicore</a></li>
+                                    <li><a href="../classes/AlloyEditor.html">AlloyEditor</a></li>
+                                    <li><a href="../classes/Attribute.html">Attribute</a></li>
+                                    <li><a href="../classes/Base.html">Base</a></li>
+                                    <li><a href="../classes/ButtonActionStyle.html">ButtonActionStyle</a></li>
+                                    <li><a href="../classes/ButtonBold.html">ButtonBold</a></li>
+                                    <li><a href="../classes/ButtonCamera.html">ButtonCamera</a></li>
+                                    <li><a href="../classes/ButtonCameraImage.html">ButtonCameraImage</a></li>
+                                    <li><a href="../classes/ButtonCfgProps.html">ButtonCfgProps</a></li>
+                                    <li><a href="../classes/ButtonCode.html">ButtonCode</a></li>
+                                    <li><a href="../classes/ButtonCommand.html">ButtonCommand</a></li>
+                                    <li><a href="../classes/ButtonCommandActive.html">ButtonCommandActive</a></li>
+                                    <li><a href="../classes/ButtonCommandListItem.html">ButtonCommandListItem</a></li>
+                                    <li><a href="../classes/ButtonCommandsList.html">ButtonCommandsList</a></li>
+                                    <li><a href="../classes/ButtonDropdown.html">ButtonDropdown</a></li>
+                                    <li><a href="../classes/ButtonEmbed.html">ButtonEmbed</a></li>
+                                    <li><a href="../classes/ButtonEmbedEdit.html">ButtonEmbedEdit</a></li>
+                                    <li><a href="../classes/ButtonH1.html">ButtonH1</a></li>
+                                    <li><a href="../classes/ButtonH2.html">ButtonH2</a></li>
+                                    <li><a href="../classes/ButtonHline.html">ButtonHline</a></li>
+                                    <li><a href="../classes/ButtonImage.html">ButtonImage</a></li>
+                                    <li><a href="../classes/ButtonImageAlignCenter.html">ButtonImageAlignCenter</a></li>
+                                    <li><a href="../classes/ButtonImageAlignLeft.html">ButtonImageAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonImageAlignRight.html">ButtonImageAlignRight</a></li>
+                                    <li><a href="../classes/ButtonIndentBlock.html">ButtonIndentBlock</a></li>
+                                    <li><a href="../classes/ButtonItalic.html">ButtonItalic</a></li>
+                                    <li><a href="../classes/ButtonKeystroke.html">ButtonKeystroke</a></li>
+                                    <li><a href="../classes/ButtonLink.html">ButtonLink</a></li>
+                                    <li><a href="../classes/ButtonLinkAutocompleteList.html">ButtonLinkAutocompleteList</a></li>
+                                    <li><a href="../classes/ButtonLinkEdit.html">ButtonLinkEdit</a></li>
+                                    <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
+                                    <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
+                                    <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
+                                    <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
+                                    <li><a href="../classes/ButtonParagraphJustify.html">ButtonParagraphJustify</a></li>
+                                    <li><a href="../classes/ButtonQuote.html">ButtonQuote</a></li>
+                                    <li><a href="../classes/ButtonRemoveFormat.html">ButtonRemoveFormat</a></li>
+                                    <li><a href="../classes/ButtonsStylesListHeader.html">ButtonsStylesListHeader</a></li>
+                                    <li><a href="../classes/ButtonStateClasses.html">ButtonStateClasses</a></li>
+                                    <li><a href="../classes/ButtonStrike.html">ButtonStrike</a></li>
+                                    <li><a href="../classes/ButtonStyle.html">ButtonStyle</a></li>
+                                    <li><a href="../classes/ButtonStyles.html">ButtonStyles</a></li>
+                                    <li><a href="../classes/ButtonStylesList.html">ButtonStylesList</a></li>
+                                    <li><a href="../classes/ButtonStylesListItem.html">ButtonStylesListItem</a></li>
+                                    <li><a href="../classes/ButtonStylesListItemRemove.html">ButtonStylesListItemRemove</a></li>
+                                    <li><a href="../classes/ButtonSubscript.html">ButtonSubscript</a></li>
+                                    <li><a href="../classes/ButtonSuperscript.html">ButtonSuperscript</a></li>
+                                    <li><a href="../classes/ButtonTable.html">ButtonTable</a></li>
+                                    <li><a href="../classes/ButtonTableCell.html">ButtonTableCell</a></li>
+                                    <li><a href="../classes/ButtonTableColumn.html">ButtonTableColumn</a></li>
+                                    <li><a href="../classes/ButtonTableEdit.html">ButtonTableEdit</a></li>
+                                    <li><a href="../classes/ButtonTableHeading.html">ButtonTableHeading</a></li>
+                                    <li><a href="../classes/ButtonTableRemove.html">ButtonTableRemove</a></li>
+                                    <li><a href="../classes/ButtonTableRow.html">ButtonTableRow</a></li>
+                                    <li><a href="../classes/ButtonTargetList.html">ButtonTargetList</a></li>
+                                    <li><a href="../classes/ButtonTwitter.html">ButtonTwitter</a></li>
+                                    <li><a href="../classes/ButtonUnderline.html">ButtonUnderline</a></li>
+                                    <li><a href="../classes/ButtonUnorderedlist.html">ButtonUnorderedlist</a></li>
+                                    <li><a href="../classes/CKEDITOR.Link.html">CKEDITOR.Link</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.html">CKEDITOR.plugins</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_autolink.html">CKEDITOR.plugins.ae_autolink</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_buttonbridge.html">CKEDITOR.plugins.ae_buttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubridge.html">CKEDITOR.plugins.ae_menubridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_menubuttonbridge.html">CKEDITOR.plugins.ae_menubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_panelmenubuttonbridge.html">CKEDITOR.plugins.ae_panelmenubuttonbridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_placeholder.html">CKEDITOR.plugins.ae_placeholder</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_richcombobridge.html">CKEDITOR.plugins.ae_richcombobridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.plugins.ae_uibridge.html">CKEDITOR.plugins.ae_uibridge</a></li>
+                                    <li><a href="../classes/CKEDITOR.Table.html">CKEDITOR.Table</a></li>
+                                    <li><a href="../classes/CKEDITOR.tools.html">CKEDITOR.tools</a></li>
+                                    <li><a href="../classes/Core.html">Core</a></li>
+                                    <li><a href="../classes/Lang.html">Lang</a></li>
+                                    <li><a href="../classes/OOP.html">OOP</a></li>
+                                    <li><a href="../classes/SelectionRegion.html">SelectionRegion</a></li>
+                                    <li><a href="../classes/ToolbarAdd.html">ToolbarAdd</a></li>
+                                    <li><a href="../classes/ToolbarButtons.html">ToolbarButtons</a></li>
+                                    <li><a href="../classes/ToolbarStyles.html">ToolbarStyles</a></li>
+                                    <li><a href="../classes/UI.html">UI</a></li>
+                                    <li><a href="../classes/WidgetArrowBox.html">WidgetArrowBox</a></li>
+                                    <li><a href="../classes/WidgetDropdown.html">WidgetDropdown</a></li>
+                                    <li><a href="../classes/WidgetExclusive.html">WidgetExclusive</a></li>
+                                    <li><a href="../classes/WidgetFocusManager.html">WidgetFocusManager</a></li>
+                                    <li><a href="../classes/WidgetInteractionPoint.html">WidgetInteractionPoint</a></li>
+                                    <li><a href="../classes/WidgetPosition.html">WidgetPosition</a></li>
+                                </ul>
+                    
+                                <ul id="api-modules" class="apis modules tab-pane">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                    <div id="api-options" class="form-inline pull-right">
+                        Show:
+                        <label for="api-show-inherited">
+                            <input type="checkbox" id="api-show-inherited" checked>
+                            Inherited
+                        </label>
+                
+                        <label for="api-show-protected">
+                            <input type="checkbox" id="api-show-protected">
+                            Protected
+                        </label>
+                
+                        <label for="api-show-private">
+                            <input type="checkbox" id="api-show-private">
+                            Private
+                        </label>
+                        <label for="api-show-deprecated">
+                            <input type="checkbox" id="api-show-deprecated">
+                            Deprecated
+                        </label>
+                
+                    </div>
+                
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+                            <div class="page-header">
+                              <h1><small>File</small> <code>src/core/table.js</code></h1>
+                            </div>
+                            
+                            <div class="file">
+                                <pre class="code prettyprint linenums">
+                            (function() {
+                                &#x27;use strict&#x27;;
+                            
+                                var IE_NON_DIRECTLY_EDITABLE_ELEMENT = {
+                                    &#x27;table&#x27;: 1,
+                                    &#x27;col&#x27;: 1,
+                                    &#x27;colgroup&#x27;: 1,
+                                    &#x27;tbody&#x27;: 1,
+                                    &#x27;td&#x27;: 1,
+                                    &#x27;tfoot&#x27;: 1,
+                                    &#x27;th&#x27;: 1,
+                                    &#x27;thead&#x27;: 1,
+                                    &#x27;tr&#x27;: 1
+                                };
+                            
+                                /**
+                                 * Table class utility. Provides methods for create, delete and update tables.
+                                 *
+                                 * @class CKEDITOR.Table
+                                 * @constructor
+                                 * @param {Object} editor The CKEditor instance.
+                                 */
+                            
+                                function Table(editor) {
+                                    this._editor = editor;
+                                }
+                            
+                                Table.HEADING_BOTH = &#x27;Both&#x27;;
+                                Table.HEADING_COL = &#x27;Column&#x27;;
+                                Table.HEADING_NONE = &#x27;None&#x27;;
+                                Table.HEADING_ROW = &#x27;Row&#x27;;
+                            
+                                Table.prototype = {
+                                    constructor: Table,
+                            
+                                    /**
+                                     * Creates a table.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
+                                     * @method create
+                                     * @param {Object} config Table configuration object
+                                     * @return {Object} The created table
+                                     */
+                                    create: function(config) {
+                                        var editor = this._editor;
+                                        var table = this._createElement(&#x27;table&#x27;);
+                            
+                                        config = config || {};
+                            
+                                        // Generate the rows and cols.
+                                        var tbody = table.append(this._createElement(&#x27;tbody&#x27;));
+                                        var rows = config.rows || 1;
+                                        var cols = config.cols || 1;
+                            
+                                        for (var i = 0; i &lt; rows; i++) {
+                                            var row = tbody.append(this._createElement(&#x27;tr&#x27;));
+                                            for (var j = 0; j &lt; cols; j++) {
+                                                var cell = row.append(this._createElement(&#x27;td&#x27;));
+                            
+                                                cell.appendBogus();
+                                            }
+                                        }
+                            
+                                        this.setAttributes(table, config.attrs);
+                                        this.setHeading(table, config.heading);
+                            
+                                        // Insert the table element if we&#x27;re creating one.
+                                        editor.insertElement(table);
+                            
+                                        var firstCell = new CKEDITOR.dom.element(table.$.rows[0].cells[0]);
+                                        var range = editor.createRange();
+                                        range.moveToPosition(firstCell, CKEDITOR.POSITION_AFTER_START);
+                                        range.select();
+                            
+                                        return table;
+                                    },
+                            
+                                    /**
+                                     * Retrieves a table from the current selection.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
+                                     * @method getFromSelection
+                                     * @return {CKEDITOR.dom.element} The retrieved table or null if not found.
+                                     */
+                                    getFromSelection: function() {
+                                        var table;
+                                        var selection = this._editor.getSelection();
+                                        var selected = selection.getSelectedElement();
+                            
+                                        if (selected &amp;&amp; selected.is(&#x27;table&#x27;)) {
+                                            table = selected;
+                                        } else {
+                                            var ranges = selection.getRanges();
+                            
+                                            if (ranges.length &gt; 0) {
+                                                // Webkit could report the following range on cell selection (#4948):
+                                                // &lt;table&gt;&lt;tr&gt;&lt;td&gt;[&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]
+                            
+                                                /* istanbul ignore else */
+                                                if (CKEDITOR.env.webkit) {
+                                                    ranges[0].shrink(CKEDITOR.NODE_ELEMENT);
+                                                }
+                            
+                                                table = this._editor.elementPath(ranges[0].getCommonAncestor(true)).contains(&#x27;table&#x27;, 1);
+                                            }
+                                        }
+                            
+                                        return table;
+                                    },
+                            
+                                    /**
+                                     * Checks if a given table can be considered as editable. This method
+                                     * workarounds a limitation of IE where for some elements (like table),
+                                     * &#x60;isContentEditable&#x60; returns always false. This is because IE does not support
+                                     * &#x60;contenteditable&#x60; on such elements. However, despite such elements
+                                     * cannot be set as content editable directly, a content editable SPAN,
+                                     * or DIV element can be placed inside the individual table cells.
+                                     * See https://msdn.microsoft.com/en-us/library/ms537837%28v=VS.85%29.aspx
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
+                                     * @method isEditable
+                                     * @param {CKEDITOR.dom.element} el The table element to test if editable
+                                     * @return {Boolean}
+                                     */
+                                    isEditable: function (el) {
+                                        if (!CKEDITOR.env.ie || !el.is(IE_NON_DIRECTLY_EDITABLE_ELEMENT)) {
+                                            return !el.isReadOnly();
+                                        }
+                            
+                                        if (el.hasAttribute(&#x27;contenteditable&#x27;)) {
+                                            return (el.getAttribute(&#x27;contenteditable&#x27;) !== &#x27;false&#x27;);
+                                        }
+                            
+                                        return this.isEditable(el.getParent());
+                                    },
+                            
+                                    /**
+                                     * Returns which heading style is set for the given table.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
+                                     * @method getHeading
+                                     * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
+                                     * @return {String} The heading of the table. Expected values are &#x60;CKEDITOR.Table.NONE&#x60;, &#x60;CKEDITOR.Table.ROW&#x60;, &#x60;CKEDITOR.Table.COL&#x60; and &#x60;CKEDITOR.Table.BOTH&#x60;.
+                                     */
+                                    getHeading: function(table) {
+                                        table = table || this.getFromSelection();
+                            
+                                        if (!table) {
+                                            return null;
+                                        }
+                            
+                                        var rowHeadingSettings = table.$.tHead !== null;
+                            
+                                        var colHeadingSettings = true;
+                            
+                                        // Check if all of the first cells in every row are TH
+                                        for (var row = 0; row &lt; table.$.rows.length; row++) {
+                                            // If just one cell isn&#x27;t a TH then it isn&#x27;t a header column
+                                            var cell = table.$.rows[row].cells[0];
+                            
+                                            if (cell &amp;&amp; cell.nodeName.toLowerCase() !== &#x27;th&#x27;) {
+                                                colHeadingSettings = false;
+                                                break;
+                                            }
+                                        }
+                            
+                                        var headingSettings = Table.HEADING_NONE;
+                            
+                                        if (rowHeadingSettings) {
+                                            headingSettings = Table.HEADING_ROW;
+                                        }
+                            
+                                        if (colHeadingSettings) {
+                                            headingSettings = (headingSettings === Table.HEADING_ROW ? Table.HEADING_BOTH : Table.HEADING_COL);
+                                        }
+                            
+                                        return headingSettings;
+                                    },
+                            
+                                    /**
+                                     * Removes a table from the editor.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
+                                     * @method remove
+                                     * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
+                                     */
+                                    remove: function(table) {
+                                        var editor = this._editor;
+                            
+                                        if (table) {
+                                            table.remove();
+                                        } else {
+                                            table = editor.elementPath().contains(&#x27;table&#x27;, 1);
+                            
+                                            if (table) {
+                                                // If the table&#x27;s parent has only one child remove it as well (unless it&#x27;s a table cell, or the editable element) (#5416, #6289, #12110)
+                                                var parent = table.getParent();
+                                                var editable = editor.editable();
+                            
+                                                if (parent.getChildCount() === 1 &amp;&amp; !parent.is(&#x27;td&#x27;, &#x27;th&#x27;) &amp;&amp; !parent.equals(editable)) {
+                                                    table = parent;
+                                                }
+                            
+                                                var range = editor.createRange();
+                                                range.moveToPosition(table, CKEDITOR.POSITION_BEFORE_START);
+                                                table.remove();
+                                                range.select();
+                                            }
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Assigns provided attributes to a table.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
+                                     * @method setAttributes
+                                     * @param {Object} table The table to which the attributes should be assigned
+                                     * @param {Object} attrs The attributes which have to be assigned to the table
+                                     */
+                                    setAttributes: function(table, attrs) {
+                                        if (attrs) {
+                                            Object.keys(attrs).forEach(function(attr) {
+                                                table.setAttribute(attr, attrs[attr]);
+                                            });
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Sets the appropriate table heading style to a table.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
+                                     * @method setHeading
+                                     * @param {CKEDITOR.dom.element} table The table element to which the heading should be set. If null, it will be retrieved from the current selection.
+                                     * @param {String} heading The table heading to be set. Accepted values are: &#x60;CKEDITOR.Table.NONE&#x60;, &#x60;CKEDITOR.Table.ROW&#x60;, &#x60;CKEDITOR.Table.COL&#x60; and &#x60;CKEDITOR.Table.BOTH&#x60;.
+                                     */
+                                    setHeading: function(table, heading) {
+                                        table = table || this.getFromSelection();
+                            
+                                        var i, newCell;
+                                        var tableHead;
+                                        var tableBody = table.getElementsByTag(&#x27;tbody&#x27;).getItem(0);
+                            
+                                        var tableHeading = this.getHeading(table);
+                                        var hadColHeading = (tableHeading === Table.HEADING_COL || tableHeading === Table.HEADING_BOTH);
+                            
+                                        var needColHeading = heading === Table.HEADING_COL || heading === Table.HEADING_BOTH;
+                                        var needRowHeading = heading === Table.HEADING_ROW || heading === Table.HEADING_BOTH;
+                            
+                                        // If we need row heading and don&#x27;t have a &lt;thead&gt; element yet, move the
+                                        // first row of the table to the head and convert the nodes to &lt;th&gt; ones.
+                                        if (!table.$.tHead &amp;&amp; needRowHeading) {
+                                            var tableFirstRow = tableBody.getElementsByTag(&#x27;tr&#x27;).getItem(0);
+                                            var tableFirstRowChildCount = tableFirstRow.getChildCount();
+                            
+                                            // Change TD to TH:
+                                            for (i = 0; i &lt; tableFirstRowChildCount; i++) {
+                                                var cell = tableFirstRow.getChild(i);
+                            
+                                                // Skip bookmark nodes. (#6155)
+                                                if (cell.type === CKEDITOR.NODE_ELEMENT &amp;&amp; !cell.data(&#x27;cke-bookmark&#x27;)) {
+                                                    cell.renameNode(&#x27;th&#x27;);
+                                                    cell.setAttribute(&#x27;scope&#x27;, &#x27;col&#x27;);
+                                                }
+                                            }
+                            
+                                            tableHead = this._createElement(table.$.createTHead());
+                                            tableHead.append(tableFirstRow.remove());
+                                        }
+                            
+                                        // If we don&#x27;t need row heading and we have a &lt;thead&gt; element, move the
+                                        // row out of there and into the &lt;tbody&gt; element.
+                                        if (table.$.tHead !== null &amp;&amp; !needRowHeading) {
+                                            // Move the row out of the THead and put it in the TBody:
+                                            tableHead = this._createElement(table.$.tHead);
+                            
+                                            var previousFirstRow = tableBody.getFirst();
+                            
+                                            while (tableHead.getChildCount() &gt; 0) {
+                                                var newFirstRow = tableHead.getFirst();
+                                                var newFirstRowChildCount = newFirstRow.getChildCount();
+                            
+                                                for (i = 0; i &lt; newFirstRowChildCount; i++) {
+                                                    newCell = newFirstRow.getChild(i);
+                            
+                                                    if (newCell.type === CKEDITOR.NODE_ELEMENT) {
+                                                        newCell.renameNode(&#x27;td&#x27;);
+                                                        newCell.removeAttribute(&#x27;scope&#x27;);
+                                                    }
+                                                }
+                            
+                                                newFirstRow.insertBefore(previousFirstRow);
+                                            }
+                            
+                                            tableHead.remove();
+                                        }
+                            
+                                        tableHeading = this.getHeading(table);
+                                        var hasColHeading = (tableHeading === Table.HEADING_COL || tableHeading === Table.HEADING_BOTH);
+                            
+                                        // If we need column heading and the table doesn&#x27;t have it, convert every first cell in
+                                        // every row into a &#x60;&lt;th scope=&quot;row&quot;&gt;&#x60; element.
+                                        if (!hasColHeading &amp;&amp; needColHeading) {
+                                            for (i = 0; i &lt; table.$.rows.length; i++) {
+                                                if (table.$.rows[i].cells[0].nodeName.toLowerCase() !== &#x27;th&#x27;) {
+                                                    newCell = new CKEDITOR.dom.element(table.$.rows[i].cells[0]);
+                                                    newCell.renameNode(&#x27;th&#x27;);
+                                                    newCell.setAttribute(&#x27;scope&#x27;, &#x27;row&#x27;);
+                                                }
+                                            }
+                                        }
+                            
+                                        // If we don&#x27;t need column heading but the table has it, convert every first cell in every
+                                        // row back into a &#x60;&lt;td&gt;&#x60; element.
+                                        if (hadColHeading &amp;&amp; !needColHeading) {
+                                            for (i = 0; i &lt; table.$.rows.length; i++) {
+                                                var row = new CKEDITOR.dom.element(table.$.rows[i]);
+                            
+                                                if (row.getParent().getName() === &#x27;tbody&#x27;) {
+                                                    newCell = new CKEDITOR.dom.element(row.$.cells[0]);
+                                                    newCell.renameNode(&#x27;td&#x27;);
+                                                    newCell.removeAttribute(&#x27;scope&#x27;);
+                                                }
+                                            }
+                                        }
+                                    },
+                            
+                                    /**
+                                     * Creates a new CKEDITOR.dom.element using the passed tag name.
+                                     *
+                                     * @instance
+                                     * @memberof CKEDITOR.Table
+                                     * @protected
+                                     * @method _createElement
+                                     * @param {String} name The tag name from which an element should be created
+                                     * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class
+                                     */
+                                    _createElement: function(name) {
+                                        return new CKEDITOR.dom.element(name, this._editor.document);
+                                    }
+                                };
+                            
+                                CKEDITOR.on(&#x27;instanceReady&#x27;, function(event) {
+                                    var headingCommands = [Table.HEADING_NONE, Table.HEADING_ROW, Table.HEADING_COL, Table.HEADING_BOTH];
+                            
+                                    var tableUtils = new Table(event.editor);
+                            
+                                    headingCommands.forEach(function(heading) {
+                                        event.editor.addCommand(&#x27;tableHeading&#x27; + heading, {
+                                            exec: function(editor) {
+                                                tableUtils.setHeading(null, heading);
+                                            }
+                                        });
+                                    });
+                                });
+                            
+                                CKEDITOR.Table = CKEDITOR.Table || Table;
+                            }());
+                            
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/js/yui-prettify.js"></script>
+    <script src="../assets/../api.js"></script>
+    <script src="../assets/js/api-filter.js"></script>
+    <script src="../assets/js/api-list.js"></script>
+    <script src="../assets/js/api-search.js"></script>
+    <script src="../assets/js/apidocs.js"></script>
+
+</body>
+</html>
