@@ -107,7 +107,13 @@ filesToLoad.push({
 
 module.exports = {
     // base path that will be used to resolve all patterns (eg. files, exclude)
+<<<<<<< HEAD:karma.common.js
     basePath: './',
+=======
+    basePath: '../../..',
+
+    browsers: ['Chrome'],
+>>>>>>> 3f7a0dae... Fixes #873 - Adds Contributing Guidelines and Release process documentation:src/ui/react/karma.js
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
