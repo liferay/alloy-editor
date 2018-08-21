@@ -143,6 +143,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -204,6 +205,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.12
 >>>>>>> 43bf4eea96ff96301112a7c1d858efbf0086149b
+=======
+ * AlloyEditor v1.5.13
+>>>>>>> 0fa7e4c0... Build Files (auto-generated)
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2308,6 +2312,10 @@ exports.default = function (WrappedComponent) {
             editor.on('paste', function (event) {
                 if (event.data.method === 'paste') {
                     var data = event.data.dataValue;
+
+                    if (data.indexOf('<') > -1) {
+                        return;
+                    }
 
                     var match = data.match(REGEX_URL);
 

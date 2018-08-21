@@ -101,6 +101,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -162,6 +163,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.12
 >>>>>>> 43bf4eea96ff96301112a7c1d858efbf0086149b
+=======
+ * AlloyEditor v1.5.13
+>>>>>>> 0fa7e4c0... Build Files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9536,6 +9540,10 @@ var ReactFiberBeginWork = function (config, hostContext, legacyContext, newConte
             editor.on('paste', function (event) {
                 if (event.data.method === 'paste') {
                     var data = event.data.dataValue;
+
+                    if (data.indexOf('<') > -1) {
+                        return;
+                    }
 
                     var match = data.match(REGEX_URL);
 

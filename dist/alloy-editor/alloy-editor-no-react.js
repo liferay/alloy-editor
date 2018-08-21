@@ -96,7 +96,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
 =======
 /**
- * AlloyEditor v1.5.12
+ * AlloyEditor v1.5.13
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -3056,6 +3056,10 @@ var _get = function get(object, property, receiver) { if (object === null) objec
             editor.on('paste', function (event) {
                 if (event.data.method === 'paste') {
                     var data = event.data.dataValue;
+
+                    if (data.indexOf('<') > -1) {
+                        return;
+                    }
 
                     var match = data.match(REGEX_URL);
 
