@@ -82,17 +82,32 @@ git checkout -b release/vX.X.X
 git checkout master && git pull upstream master
 ```
 
-5. Publish npm modules and push release tags
+5. Update npm version
 
 ```
-lerna publish (major/minor/patch accordingly)
+npm version patch|minor|major
 ```
 
-6. Generate changelog
+6. Generate and commit dist files
+
+```
+gulp release
+git add .
+git commit -m "Build Files (auto-generated)"
+```
+
+7. Publish npm modules and push release tags
+
+```
+npm publish
+git push && git push --tags
+```
+
+8. Generate changelog
 
 github_changelog_generator (https://github.com/skywinder/github-changelog-generator)
 
-7. Commit changelog and push to `master`
+9. Commit changelog and push to `master`
 
 ```
 git add CHANGELOG.md
@@ -100,14 +115,14 @@ git commit -m "Updates CHANGELOG for vX.X.X"
 git push
 ```
 
-8. Sync `develop` with `master`
+10. Sync `develop` with `master`
 
 ```
 git checkout develop
 git merge master
 ```
 
-9. Do GitHub release using the pushed vX.X.X tag and the appropriate portion of
+11. Do GitHub release using the pushed vX.X.X tag and the appropriate portion of
 CHANGELOG.md
 
 ## Hot fix
@@ -123,4 +138,4 @@ git checkout -b feature/fix_foo
 
 2. Send a fix PR to `master`
 
-3. Follow steps 3-9 of a scheduled release
+3. Follow steps 3-11 of a scheduled release
