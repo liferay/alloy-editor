@@ -66,7 +66,12 @@
 
                 var endPoint = spy.getCall(0).args[1];
 
-                assert.strictEqual(endPoint[0], (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                var uiNode = nativeEditor.config.uiNode || document.body;
+                var uiNodeStyle =  getComputedStyle(uiNode);
+                var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+
+                assert.ok(endPoint[0] > (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                assert.strictEqual(endPoint[0], uiNodeMarginLeft);
             });
         });
 
@@ -91,7 +96,12 @@
 
                 var endPoint = spy.getCall(0).args[1];
 
-                assert.strictEqual(endPoint[0], (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                var uiNode = nativeEditor.config.uiNode || document.body;
+                var uiNodeStyle =  getComputedStyle(uiNode);
+                var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+
+                assert.ok(endPoint[0] > (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                assert.strictEqual(endPoint[0], uiNodeMarginLeft);
             });
         });
     });
