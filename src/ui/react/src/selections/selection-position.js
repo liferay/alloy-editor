@@ -16,21 +16,18 @@
      */
     var centerToolbar = function(toolbar, rect) {
         var toolbarNode = ReactDOM.findDOMNode(toolbar);
-
         var halfNodeWidth = toolbarNode.offsetWidth / 2;
         var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
-
         var gutter = toolbar.props.gutter || DEFAULT_GUTTER;
 
         var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
 
-        toolbar.moveToPoint([
-            widgetXY[0],
-            widgetXY[1]
-        ], [
+        var endPosition = [
             rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
             rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top
-        ]);
+        ];
+
+        toolbar.moveToPoint(widgetXY, endPosition);
     };
 
     /**
