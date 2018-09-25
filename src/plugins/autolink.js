@@ -25,8 +25,10 @@
 
     var REGEX_LAST_WORD = /[^\s]+/mg;
 
-    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
-
+    var REGEX_URL =  /(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1}-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?/igm;
+	
+	var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/igm;
+		
     /**
      * CKEditor plugin which automatically generates links when user types text which looks like URL.
      *
@@ -56,23 +58,22 @@
 
                 editor.on('paste', function (event) {
                     if (event.data.method === 'paste') {
-                        var data = event.data.dataValue;
-
-                        if ( data.indexOf( '<' ) > -1 ) {
+						
+						if (event.data.dataValue.indexOf('<') > -1  || event.data.dataValue.indexOf('&lt;') > -1) {
                             return;
-                        }
-
-                        var match = data.match(REGEX_URL);
-
-                        if (match && match.length) {
-                            match = match[0];
-
-                            var remainder = data.replace(match, '');
-
-                            if (this._isValidURL(match)) {
-                                event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
-                            }
-                        }
+						}
+					  
+						var instance = this;
+						
+						event.data.dataValue = event.data.dataValue.replace(REGEX_URL, function (url) {
+							if (instance._isValidURL(url)) {
+								if (instance._isValidEmail(url)) {
+									return '<a href=\"mailto:' + url + '\">' + url + '</a>';
+								} else {
+									return '<a href=\"' + url + '\">' + url + '</a>';
+								}
+							}
+						});
                     }
                 }.bind(this));
             },
@@ -142,6 +143,20 @@
 
                 return lastWord;
             },
+			
+			/**
+             * Checks if the given link is a valid Email.
+             *
+             * @instance
+             * @memberof CKEDITOR.plugins.ae_autolink
+             * @method isValidEmail
+             * @param {String} link The email we want to know if it is a valid Email
+             * @protected
+             * @return {Boolean} Returns true if the email is a valid Email, false otherwise
+             */
+            _isValidEmail: function(email) {
+                return RegExp(REGEX_EMAIL, 'i').test(email);
+            },
 
             /**
              * Checks if the given link is a valid URL.
@@ -154,7 +169,7 @@
              * @return {Boolean} Returns true if the link is a valid URL, false otherwise
              */
             _isValidURL: function(link) {
-                return REGEX_URL.test(link);
+                return RegExp(REGEX_URL, 'i').test(link);
             },
 
             /**
