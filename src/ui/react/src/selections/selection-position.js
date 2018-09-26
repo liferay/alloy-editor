@@ -17,6 +17,12 @@
     var centerToolbar = function(toolbar, rect) {
         var toolbarNode = ReactDOM.findDOMNode(toolbar);
 
+        var nativeEditor = toolbar.props.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNodeStyle = getComputedStyle(uiNode);
+        var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+        var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+
         var halfNodeWidth = toolbarNode.offsetWidth / 2;
         var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
 
@@ -24,13 +30,20 @@
 
         var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
 
-        toolbar.moveToPoint([
-            widgetXY[0],
-            widgetXY[1]
-        ], [
+        var endPosition = [
             rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
             rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top
-        ]);
+        ];
+
+        if (endPosition[0] < uiNodeMarginLeft) {
+            endPosition[0] = uiNodeMarginLeft;
+        }
+        else if (endPosition[0] > uiNode.offsetWidth + uiNodeMarginRight - halfNodeWidth * 2) {
+            endPosition[0] = uiNode.offsetWidth + uiNodeMarginRight - halfNodeWidth * 2;
+        }
+
+
+        toolbar.moveToPoint(widgetXY, endPosition);
     };
 
     /**
