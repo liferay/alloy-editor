@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.13</b>
+                        API Docs for Version: <b>1.5.14</b>
                     </p>
                 </li>
             </div>
@@ -334,8 +334,8 @@
                                         }
                             
                             
-                                        if (left &gt; document.body.offsetWidth - offsetWidth) {
-                                            left = document.body.offsetWidth - offsetWidth;
+                                        if (left &gt; document.body.offsetWidth - halfWidth) {
+                                            left = document.body.offsetWidth - halfWidth;
                                         }
                             
                                         if (top &lt; 0) {
@@ -461,12 +461,23 @@
                                         var domNode = ReactDOM.findDOMNode(this);
                             
                                         if (interactionPoint &amp;&amp; domNode) {
-                                            var uiNode = this.props.editor.get(&#x27;uiNode&#x27;);
+                                            var uiNode = this.props.editor.get(&#x27;uiNode&#x27;) || document.body;
+                                            var uiNodeStyle = getComputedStyle(uiNode);
+                                            var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue(&#x27;margin-left&#x27;), 10);
+                                            var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue(&#x27;margin-right&#x27;), 10);
+                                            var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
                             
                                             var scrollTop = uiNode ? uiNode.scrollTop : 0;
                             
                                             var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
                                             xy[1] += scrollTop;
+                            
+                                            if (xy[0] &lt; 0) {
+                                                xy[0] = 0;
+                                            }
+                                            if (xy[0] &gt; totalWidth - domNode.offsetWidth) {
+                                                xy[0] = totalWidth - domNode.offsetWidth;
+                                            }
                             
                                             new CKEDITOR.dom.element(domNode).setStyles({
                                                 left: xy[0] + &#x27;px&#x27;,

@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.13
+ * AlloyEditor v1.5.14
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2019,9 +2019,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     var DELIMITERS = [KEY_COMMA, KEY_ENTER, KEY_SEMICOLON, KEY_SPACE];
 
-    var REGEX_LAST_WORD = /[^\s]+/mg;
+    var REGEX_LAST_WORD = /[^\s]+/gim;
 
-    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+
+    var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
 
     /**
      * CKEditor plugin which automatically generates links when user types text which looks like URL.
@@ -2051,23 +2053,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             editor.on('paste', function (event) {
                 if (event.data.method === 'paste') {
-                    var data = event.data.dataValue;
 
-                    if (data.indexOf('<') > -1) {
+                    if (event.data.dataValue.indexOf('<') > -1 || event.data.dataValue.indexOf('&lt;') > -1) {
                         return;
                     }
 
-                    var match = data.match(REGEX_URL);
+                    var instance = this;
 
-                    if (match && match.length) {
-                        match = match[0];
-
-                        var remainder = data.replace(match, '');
-
-                        if (this._isValidURL(match)) {
-                            event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                    event.data.dataValue = event.data.dataValue.replace(RegExp(REGEX_URL, 'gim'), function (url) {
+                        if (instance._isValidURL(url)) {
+                            if (instance._isValidEmail(url)) {
+                                return '<a href=\"mailto:' + url + '\">' + url + '</a>';
+                            } else {
+                                return '<a href=\"' + url + '\">' + url + '</a>';
+                            }
                         }
-                    }
+                    });
                 }
             }.bind(this));
         },
@@ -2136,6 +2137,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
 
             return lastWord;
+        },
+
+        /**
+         * Checks if the given link is a valid Email.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
+         * @method isValidEmail
+         * @param {String} link The email we want to know if it is a valid Email
+         * @protected
+         * @return {Boolean} Returns true if the email is a valid Email, false otherwise
+         */
+        _isValidEmail: function _isValidEmail(email) {
+            return REGEX_EMAIL.test(email);
         },
 
         /**
@@ -8642,6 +8657,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     var centerToolbar = function centerToolbar(toolbar, rect) {
         var toolbarNode = ReactDOM.findDOMNode(toolbar);
 
+        var nativeEditor = toolbar.props.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNodeStyle = getComputedStyle(uiNode);
+        var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+        var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+        var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+
         var halfNodeWidth = toolbarNode.offsetWidth / 2;
         var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
 
@@ -8649,7 +8671,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
 
-        toolbar.moveToPoint([widgetXY[0], widgetXY[1]], [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top]);
+        var endPosition = [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top];
+
+        if (endPosition[0] < 0) {
+            endPosition[0] = 0;
+        } else if (endPosition[0] > totalWidth - toolbarNode.offsetWidth) {
+            endPosition[0] = totalWidth - toolbarNode.offsetWidth;
+        }
+
+        toolbar.moveToPoint(widgetXY, endPosition);
     };
 
     /**
@@ -10722,8 +10752,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 left = 0;
             }
 
-            if (left > document.body.offsetWidth - offsetWidth) {
-                left = document.body.offsetWidth - offsetWidth;
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
             }
 
             if (top < 0) {
@@ -10844,12 +10874,23 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var domNode = ReactDOM.findDOMNode(this);
 
             if (interactionPoint && domNode) {
-                var uiNode = this.props.editor.get('uiNode');
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+                var uiNodeStyle = getComputedStyle(uiNode);
+                var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+                var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+                var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
 
                 var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
                 xy[1] += scrollTop;
+
+                if (xy[0] < 0) {
+                    xy[0] = 0;
+                }
+                if (xy[0] > totalWidth - domNode.offsetWidth) {
+                    xy[0] = totalWidth - domNode.offsetWidth;
+                }
 
                 new CKEDITOR.dom.element(domNode).setStyles({
                     left: xy[0] + 'px',
