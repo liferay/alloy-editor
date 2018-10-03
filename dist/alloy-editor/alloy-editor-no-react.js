@@ -96,7 +96,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
 =======
 /**
- * AlloyEditor v1.5.13
+ * AlloyEditor v1.5.14
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -3026,6 +3026,7 @@ exports.default = function (WrappedComponent) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 "use strict";
 
 <<<<<<< HEAD
@@ -3036,6 +3037,13 @@ exports.default = function (WrappedComponent) {
 =======
     var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
 >>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
+=======
+    var REGEX_LAST_WORD = /[^\s]+/gim;
+
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+
+    var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
+>>>>>>> 43348fb3... Build Files (auto-generated)
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -3055,23 +3063,22 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 
             editor.on('paste', function (event) {
                 if (event.data.method === 'paste') {
-                    var data = event.data.dataValue;
 
-                    if (data.indexOf('<') > -1) {
+                    if (event.data.dataValue.indexOf('<') > -1 || event.data.dataValue.indexOf('&lt;') > -1) {
                         return;
                     }
 
-                    var match = data.match(REGEX_URL);
+                    var instance = this;
 
-                    if (match && match.length) {
-                        match = match[0];
-
-                        var remainder = data.replace(match, '');
-
-                        if (this._isValidURL(match)) {
-                            event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                    event.data.dataValue = event.data.dataValue.replace(RegExp(REGEX_URL, 'gim'), function (url) {
+                        if (instance._isValidURL(url)) {
+                            if (instance._isValidEmail(url)) {
+                                return '<a href=\"mailto:' + url + '\">' + url + '</a>';
+                            } else {
+                                return '<a href=\"' + url + '\">' + url + '</a>';
+                            }
                         }
-                    }
+                    });
                 }
             }.bind(this));
         },
@@ -3128,9 +3135,39 @@ var DIRECTION_NONE = 0;
 var DIRECTION_NEXT = 1;
 var DIRECTION_PREV = -1;
 
+<<<<<<< HEAD
 var ACTION_NONE = 0;
 var ACTION_MOVE_FOCUS = 1;
 var ACTION_DISMISS_FOCUS = 2;
+=======
+        /**
+         * Checks if the given link is a valid Email.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
+         * @method isValidEmail
+         * @param {String} link The email we want to know if it is a valid Email
+         * @protected
+         * @return {Boolean} Returns true if the email is a valid Email, false otherwise
+         */
+        _isValidEmail: function _isValidEmail(email) {
+            return REGEX_EMAIL.test(email);
+        },
+
+        /**
+         * Checks if the given link is a valid URL.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
+         * @method isValidURL
+         * @param {String} link The link we want to know if it is a valid URL
+         * @protected
+         * @return {Boolean} Returns true if the link is a valid URL, false otherwise
+         */
+        _isValidURL: function _isValidURL(link) {
+            return REGEX_URL.test(link);
+        },
+>>>>>>> 43348fb3... Build Files (auto-generated)
 
 /**
  * WidgetFocusManager is a mixin that provides keyboard navigation inside a widget. To do this,
@@ -9325,13 +9362,38 @@ var _buttonCommand2 = _interopRequireDefault(_buttonCommand);
 
 var _buttonCommandActive = __webpack_require__(/*! ../base/button-command-active.js */ "./src/components/base/button-command-active.js");
 
+<<<<<<< HEAD
 var _buttonCommandActive2 = _interopRequireDefault(_buttonCommandActive);
+=======
+        var nativeEditor = toolbar.props.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNodeStyle = getComputedStyle(uiNode);
+        var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+        var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+        var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+
+        var halfNodeWidth = toolbarNode.offsetWidth / 2;
+        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+>>>>>>> 43348fb3... Build Files (auto-generated)
 
 var _buttonStateClasses = __webpack_require__(/*! ../base/button-state-classes.js */ "./src/components/base/button-state-classes.js");
 
 var _buttonStateClasses2 = _interopRequireDefault(_buttonStateClasses);
 
+<<<<<<< HEAD
 var _react = __webpack_require__(/*! react */ "react");
+=======
+        var endPosition = [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top];
+
+        if (endPosition[0] < 0) {
+            endPosition[0] = 0;
+        } else if (endPosition[0] > totalWidth - toolbarNode.offsetWidth) {
+            endPosition[0] = totalWidth - toolbarNode.offsetWidth;
+        }
+
+        toolbar.moveToPoint(widgetXY, endPosition);
+    };
+>>>>>>> 43348fb3... Build Files (auto-generated)
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -11004,7 +11066,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var nativeEditor = payload.editor.get('nativeEditor');
         var uiNode = nativeEditor.config.uiNode;
 
+<<<<<<< HEAD
         var scrollTop = uiNode ? uiNode.scrollTop : 0;
+=======
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
+            }
+>>>>>>> 43348fb3... Build Files (auto-generated)
 
         var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
         var rect = table.getClientRect();
@@ -11108,13 +11176,38 @@ var _buttonCommand = __webpack_require__(/*! ../base/button-command.js */ "./src
 
 var _buttonCommand2 = _interopRequireDefault(_buttonCommand);
 
+<<<<<<< HEAD
 var _buttonCommandActive = __webpack_require__(/*! ../base/button-command-active.js */ "./src/components/base/button-command-active.js");
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+                var uiNodeStyle = getComputedStyle(uiNode);
+                var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+                var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+                var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+>>>>>>> 43348fb3... Build Files (auto-generated)
 
 var _buttonCommandActive2 = _interopRequireDefault(_buttonCommandActive);
 
 var _buttonStateClasses = __webpack_require__(/*! ../base/button-state-classes.js */ "./src/components/base/button-state-classes.js");
 
+<<<<<<< HEAD
 var _buttonStateClasses2 = _interopRequireDefault(_buttonStateClasses);
+=======
+                if (xy[0] < 0) {
+                    xy[0] = 0;
+                }
+                if (xy[0] > totalWidth - domNode.offsetWidth) {
+                    xy[0] = totalWidth - domNode.offsetWidth;
+                }
+
+                new CKEDITOR.dom.element(domNode).setStyles({
+                    left: xy[0] + 'px',
+                    top: xy[1] + 'px'
+                });
+            }
+        },
+>>>>>>> 43348fb3... Build Files (auto-generated)
 
 var _react = __webpack_require__(/*! react */ "react");
 

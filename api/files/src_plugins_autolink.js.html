@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.13</b>
+                        API Docs for Version: <b>1.5.14</b>
                     </p>
                 </li>
             </div>
@@ -209,10 +209,12 @@
                             
                                 var DELIMITERS = [KEY_COMMA, KEY_ENTER, KEY_SEMICOLON, KEY_SPACE];
                             
-                                var REGEX_LAST_WORD = /[^\s]+/mg;
+                                var REGEX_LAST_WORD = /[^\s]+/gim;
                             
-                                var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&amp;=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&amp;=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&amp;;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
-                            
+                                var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&amp;=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&amp;=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&amp;;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+                            	
+                                var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
+                            	
                                 /**
                                  * CKEditor plugin which automatically generates links when user types text which looks like URL.
                                  *
@@ -242,23 +244,22 @@
                             
                                             editor.on(&#x27;paste&#x27;, function (event) {
                                                 if (event.data.method === &#x27;paste&#x27;) {
-                                                    var data = event.data.dataValue;
-                            
-                                                    if ( data.indexOf( &#x27;&lt;&#x27; ) &gt; -1 ) {
+                            						
+                                                    if (event.data.dataValue.indexOf(&#x27;&lt;&#x27;) &gt; -1  || event.data.dataValue.indexOf(&#x27;&amp;lt;&#x27;) &gt; -1) {
                                                         return;
                                                     }
                             
-                                                    var match = data.match(REGEX_URL);
-                            
-                                                    if (match &amp;&amp; match.length) {
-                                                        match = match[0];
-                            
-                                                        var remainder = data.replace(match, &#x27;&#x27;);
-                            
-                                                        if (this._isValidURL(match)) {
-                                                            event.data.dataValue = &#x27;&lt;a href=\&quot;&#x27; + match + &#x27;\&quot;&gt;&#x27; + match + &#x27;&lt;/a&gt;&#x27; + remainder;
+                                                    var instance = this;
+                            						
+                                                    event.data.dataValue = event.data.dataValue.replace(RegExp(REGEX_URL, &#x27;gim&#x27;), function (url) {
+                                                        if (instance._isValidURL(url)) {
+                                                            if (instance._isValidEmail(url)) {
+                                                                return &#x27;&lt;a href=\&quot;mailto:&#x27; + url + &#x27;\&quot;&gt;&#x27; + url + &#x27;&lt;/a&gt;&#x27;;
+                                                            } else {
+                                                                return &#x27;&lt;a href=\&quot;&#x27; + url + &#x27;\&quot;&gt;&#x27; + url + &#x27;&lt;/a&gt;&#x27;;
+                                                            }
                                                         }
-                                                    }
+                                                    });
                                                 }
                                             }.bind(this));
                                         },
@@ -327,6 +328,20 @@
                                             }
                             
                                             return lastWord;
+                                        },
+                            			
+                                        /**
+                                         * Checks if the given link is a valid Email.
+                                         *
+                                         * @instance
+                                         * @memberof CKEDITOR.plugins.ae_autolink
+                                         * @method isValidEmail
+                                         * @param {String} link The email we want to know if it is a valid Email
+                                         * @protected
+                                         * @return {Boolean} Returns true if the email is a valid Email, false otherwise
+                                         */
+                                        _isValidEmail: function(email) {
+                                            return REGEX_EMAIL.test(email);
                                         },
                             
                                         /**

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.13</b>
+                        API Docs for Version: <b>1.5.14</b>
                     </p>
                 </li>
             </div>
@@ -203,6 +203,13 @@
                                 var centerToolbar = function(toolbar, rect) {
                                     var toolbarNode = ReactDOM.findDOMNode(toolbar);
                             
+                                    var nativeEditor = toolbar.props.editor.get(&#x27;nativeEditor&#x27;);
+                                    var uiNode = nativeEditor.config.uiNode || document.body;
+                                    var uiNodeStyle = getComputedStyle(uiNode);
+                                    var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue(&#x27;margin-left&#x27;), 10);
+                                    var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue(&#x27;margin-right&#x27;), 10);
+                                    var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+                            
                                     var halfNodeWidth = toolbarNode.offsetWidth / 2;
                                     var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
                             
@@ -210,13 +217,19 @@
                             
                                     var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
                             
-                                    toolbar.moveToPoint([
-                                        widgetXY[0],
-                                        widgetXY[1]
-                                    ], [
-                                        rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
-                                        rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top
-                                    ]);
+                                    var endPosition = [
+                                      rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
+                                      rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top
+                                    ];
+                            
+                                    if (endPosition[0] &lt; 0) {
+                                        endPosition[0] = 0;
+                                    }
+                                    else if (endPosition[0] &gt; totalWidth - toolbarNode.offsetWidth) {
+                                        endPosition[0] = totalWidth - toolbarNode.offsetWidth;
+                                    }
+                            
+                                    toolbar.moveToPoint(widgetXY, endPosition);
                                 };
                             
                                 /**
