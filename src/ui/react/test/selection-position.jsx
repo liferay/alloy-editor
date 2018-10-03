@@ -66,7 +66,7 @@
 
                 var endPoint = spy.getCall(0).args[1];
 
-                assert.strictEqual(endPoint[0], (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                assert.ok(endPoint[0] > (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
             });
         });
 
@@ -91,7 +91,7 @@
 
                 var endPoint = spy.getCall(0).args[1];
 
-                assert.strictEqual(endPoint[0], (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                assert.ok(endPoint[0] > (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
             });
         });
     });

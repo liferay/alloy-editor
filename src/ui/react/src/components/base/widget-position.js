@@ -148,8 +148,8 @@
             }
 
 
-            if (left > document.body.offsetWidth - offsetWidth) {
-                left = document.body.offsetWidth - offsetWidth;
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
             }
 
             if (top < 0) {
@@ -275,12 +275,23 @@
             var domNode = ReactDOM.findDOMNode(this);
 
             if (interactionPoint && domNode) {
-                var uiNode = this.props.editor.get('uiNode');
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+                var uiNodeStyle = getComputedStyle(uiNode);
+                var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+                var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+                var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
 
                 var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
                 xy[1] += scrollTop;
+
+                if (xy[0] < 0) {
+                    xy[0] = 0;
+                }
+                if (xy[0] > totalWidth - domNode.offsetWidth) {
+                    xy[0] = totalWidth - domNode.offsetWidth;
+                }
 
                 new CKEDITOR.dom.element(domNode).setStyles({
                     left: xy[0] + 'px',
