@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.5.15](https://github.com/liferay/alloy-editor/tree/v1.5.15) (2018-10-23)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.14...v1.5.15)
+
+**Fixed bugs:**
+
+- Changing table column width in editor fails randomly [\#845](https://github.com/liferay/alloy-editor/issues/845)
+
+**Merged pull requests:**
+
+- Fix \#845 - Remove resizer everytime the cursor gets out of the pillar. Keeping the resizer there without any reason creates a black hole where the CKEditor's mousemove event is never triggered [\#893](https://github.com/liferay/alloy-editor/pull/893) ([julien](https://github.com/julien))
+
 ## [v1.5.14](https://github.com/liferay/alloy-editor/tree/v1.5.14) (2018-10-03)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.13...v1.5.14)
 
