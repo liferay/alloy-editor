@@ -147,6 +147,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -220,6 +221,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.14
 >>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
+=======
+ * AlloyEditor v1.5.15
+>>>>>>> 885782f2... Build Files (auto-generated)
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -6130,8 +6134,13 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
 
                 imageOrLink.replace(element);
 
+<<<<<<< HEAD
                 return imageOrLink;
             }
+=======
+    function columnResizer(editor, pillar) {
+        var document, resizer, resizing, startOffset, currentShift;
+>>>>>>> 885782f2... Build Files (auto-generated)
 
             // Wraps <img/> -> <a><img/></a>.
             // Returns reference to <a>.
@@ -6146,6 +6155,7 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                     }
                 });
 
+<<<<<<< HEAD
                 link.replace(img);
                 img.move(link);
 
@@ -6159,6 +6169,13 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             // @returns {CKEDITOR.dom.element}
             function unwrapFromLink(link) {
                 var img = link.findOne('img');
+=======
+        function detach() {
+            resizer.removeListener('mouseup', onMouseUp);
+            resizer.removeListener('mousedown', onMouseDown);
+            resizer.removeListener('mousemove', onMouseMove);
+        }
+>>>>>>> 885782f2... Build Files (auto-generated)
 
                 img.replace(link);
 
@@ -6182,16 +6199,36 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                 }
             }
 
+<<<<<<< HEAD
             return function (shift) {
                 var name, i;
+=======
+            // Cache the list of cells to be resized.
+            leftSideCells = leftColumnCells;
+            rightSideCells = rightColumnCells;
+
+            // Cache the resize limit boundaries.
+            leftShiftBoundary = pillar.x - leftMinSize;
+            rightShiftBoundary = pillar.x + rightMinSize;
+
+            resizer.setOpacity(0.5);
+            startOffset = parseInt(resizer.getStyle('left'), 10);
+            currentShift = 0;
+            resizing = 1;
+>>>>>>> 885782f2... Build Files (auto-generated)
 
                 shift.changed = {};
 
                 for (i = 0; i < shiftables.length; i++) {
                     name = shiftables[i];
 
+<<<<<<< HEAD
                     shift.changed[name] = shift.oldData ? shift.oldData[name] !== shift.newData[name] : false;
                 }
+=======
+        function resizeEnd() {
+            resizing = 0;
+>>>>>>> 885782f2... Build Files (auto-generated)
 
                 // Iterate over possible state variables.
                 for (i = 0; i < shiftables.length; i++) {
@@ -6302,6 +6339,7 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             align = widget.data.align,
             hasCaption = widget.data.hasCaption;
 
+<<<<<<< HEAD
         if (alignClasses) {
             // Remove all align classes first.
             for (var i = 3; i--;) {
@@ -6324,11 +6362,20 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
         } else {
             if (align == 'center') {
                 if (hasCaption) wrapper.setStyle('text-align', 'center');else wrapper.removeStyle('text-align');
+=======
+        // Clean DOM when editor is destroyed.
+        editor.on('destroy', function () {
+            detach();
+
+            resizer.remove();
+        });
+>>>>>>> 885782f2... Build Files (auto-generated)
 
                 wrapper.removeStyle('float');
             } else {
                 if (align == 'none') wrapper.removeStyle('float');else wrapper.setStyle('float', align);
 
+<<<<<<< HEAD
                 wrapper.removeStyle('text-align');
             }
         }
@@ -6391,6 +6438,29 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                     // Upcast linked image like <a><img/></a>.
                 } else if (isLinkedOrStandaloneImage(el)) {
                     image = el.name == 'a' ? el.children[0] : el;
+=======
+        resizer.setStyles({
+            width: pxUnit(pillar.width),
+            height: pxUnit(pillar.height),
+            left: pxUnit(pillar.x),
+            top: pxUnit(pillar.y)
+        });
+
+        resizer.on('mousedown', onMouseDown, this);
+
+        document.getBody().setStyle('cursor', 'col-resize');
+
+        // Display the resizer to receive events but don't show it,
+        // only change the cursor to resizable shape.
+        resizer.show();
+
+        var move = this.move = function (posX) {
+            var resizerNewPosition = posX - Math.round(resizer.$.offsetWidth / 2);
+
+            if (isResizing) {
+                if (resizerNewPosition === leftShiftBoundary || resizerNewPosition === rightShiftBoundary) {
+                    return;
+>>>>>>> 885782f2... Build Files (auto-generated)
                 }
 
             if (!image) return;
@@ -6400,10 +6470,26 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             for (var d in dimensions) {
                 var dimension = image.attributes[d];
 
+<<<<<<< HEAD
                 if (dimension && dimension.match(regexPercent)) delete image.attributes[d];
             }
 
             return el;
+=======
+            resizer.setStyle('left', pxUnit(resizerNewPosition));
+        };
+
+        var destroy = this.destroy = function () {
+            detach();
+
+            document.getBody().setStyle('cursor', 'auto');
+
+            resizer.remove();
+        };
+
+        var isResizing = this.isResizing = function () {
+            return resizing;
+>>>>>>> 885782f2... Build Files (auto-generated)
         };
     }
 
@@ -6455,10 +6541,28 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             }
 >>>>>>> 2c0a76e4... Build Files (auto-generated)
 
+<<<<<<< HEAD
                 videoEl.setAttribute('width', this.props.videoWidth);
                 videoEl.setAttribute('height', height);
                 canvasEl.setAttribute('width', this.props.videoWidth);
                 canvasEl.setAttribute('height', height);
+=======
+                    // If we're already attached to a pillar, simply move the
+                    // resizer.
+                    if (resizer) {
+                        if (resizer.isResizing()) {
+                            resizer.move(pageX);
+
+                            cancel(evt);
+
+                            return;
+                        } else {
+                            resizer.destroy();
+
+                            resizer = null;
+                        }
+                    }
+>>>>>>> 885782f2... Build Files (auto-generated)
 
 <<<<<<< HEAD
                 this._videoHeight = height;
@@ -6493,9 +6597,16 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                     el = el.wrapWith(new CKEDITOR.htmlParser.element('div', alignClasses ? { 'class': alignClasses[1] } : { style: 'text-align:center' }));
                 }
 
+<<<<<<< HEAD
                 // If left/right, add float style to the downcasted element.
                 else if (align in { left: 1, right: 1 }) {
                         if (alignClasses) attrsHolder.addClass(alignClasses[alignmentsObj[align]]);else styles['float'] = align;
+=======
+                    var pillar = getPillarAtPosition(pillars, pageX);
+
+                    if (pillar) {
+                        resizer = new columnResizer(editor, pillar);
+>>>>>>> 885782f2... Build Files (auto-generated)
                     }
 
                 // Update element styles.

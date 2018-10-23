@@ -1,5 +1,20 @@
 # Change Log
 
+## [v1.5.14](https://github.com/liferay/alloy-editor/tree/v1.5.14) (2018-10-03)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.13...v1.5.14)
+
+**Closed issues:**
+
+- Improper formatting in editor in case of pasting a text that contains an email address or URL [\#885](https://github.com/liferay/alloy-editor/issues/885)
+- How can I add/remove a CSS class to an Element via Button? [\#879](https://github.com/liferay/alloy-editor/issues/879)
+- Image Toolbar extend past browser [\#876](https://github.com/liferay/alloy-editor/issues/876)
+
+**Merged pull requests:**
+
+- Updates CHANGELOG for v1.15.14 [\#889](https://github.com/liferay/alloy-editor/pull/889) ([julien](https://github.com/julien))
+- Fixes \#876 | Fix toolbar position [\#888](https://github.com/liferay/alloy-editor/pull/888) ([julien](https://github.com/julien))
+- Fixes \#885 | Fix editor.on paste function and enhance REGEX\_URL [\#886](https://github.com/liferay/alloy-editor/pull/886) ([rolandpakai](https://github.com/rolandpakai))
+
 ## [v1.5.13](https://github.com/liferay/alloy-editor/tree/v1.5.13) (2018-08-21)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.12...v1.5.13)
 

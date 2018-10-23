@@ -105,6 +105,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -178,6 +179,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.14
 >>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
+=======
+ * AlloyEditor v1.5.15
+>>>>>>> 885782f2... Build Files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32515,8 +32519,38 @@ var ButtonTwitter = function (_React$Component) {
         return _possibleConstructorReturn(this, (ButtonTwitter.__proto__ || Object.getPrototypeOf(ButtonTwitter)).apply(this, arguments));
     }
 
+<<<<<<< HEAD
     _createClass(ButtonTwitter, [{
         key: 'handleClick',
+=======
+    function columnResizer(editor, pillar) {
+        var document, resizer, resizing, startOffset, currentShift;
+
+        var leftSideCells, rightSideCells, leftShiftBoundary, rightShiftBoundary;
+
+        function detach() {
+            resizer.removeListener('mouseup', onMouseUp);
+            resizer.removeListener('mousedown', onMouseDown);
+            resizer.removeListener('mousemove', onMouseMove);
+        }
+
+        function resizeStart() {
+            // Before starting to resize, figure out which cells to change
+            // and the boundaries of this resizing shift.
+
+            var columnIndex = pillar.index,
+                map = CKEDITOR.tools.buildTableMap(pillar.table),
+                leftColumnCells = [],
+                rightColumnCells = [],
+                leftMinSize = Number.MAX_VALUE,
+                rightMinSize = leftMinSize,
+                rtl = pillar.rtl;
+
+            for (var i = 0, len = map.length; i < len; i++) {
+                var row = map[i],
+                    leftCell = row[columnIndex + (rtl ? 1 : 0)],
+                    rightCell = row[columnIndex + (rtl ? 0 : 1)];
+>>>>>>> 885782f2... Build Files (auto-generated)
 
         /**
          * Creates or removes the twitter link on the selection.
@@ -32542,6 +32576,7 @@ var ButtonTwitter = function (_React$Component) {
             editor.fire('actionPerformed', this);
         }
 
+<<<<<<< HEAD
         /**
          * Checks if the current selection is contained within a link that points to twitter.com/intent/tweet.
          *
@@ -32550,6 +32585,12 @@ var ButtonTwitter = function (_React$Component) {
          * @method isActive
          * @return {Boolean} True if the selection is inside a twitter link, false otherwise.
          */
+=======
+            resizer.setOpacity(0.5);
+            startOffset = parseInt(resizer.getStyle('left'), 10);
+            currentShift = 0;
+            resizing = 1;
+>>>>>>> 885782f2... Build Files (auto-generated)
 
     }, {
         key: 'isActive',
@@ -32559,6 +32600,7 @@ var ButtonTwitter = function (_React$Component) {
             return link && link.getAttribute('href').indexOf('twitter.com/intent/tweet') !== -1;
         }
 
+<<<<<<< HEAD
         /**
          * Lifecycle. Renders the UI of the button.
          *
@@ -32567,6 +32609,14 @@ var ButtonTwitter = function (_React$Component) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
+=======
+        function resizeEnd() {
+            resizing = 0;
+
+            resizer.setOpacity(0);
+
+            currentShift && resizeColumn();
+>>>>>>> 885782f2... Build Files (auto-generated)
 
     }, {
         key: 'render',
@@ -32640,11 +32690,21 @@ exports.default = (0, _buttonStateClasses2.default)(ButtonTwitter);
 
 "use strict";
 
+<<<<<<< HEAD
+=======
+        // Clean DOM when editor is destroyed.
+        editor.on('destroy', function () {
+            detach();
+
+            resizer.remove();
+        });
+>>>>>>> 885782f2... Build Files (auto-generated)
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+<<<<<<< HEAD
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _buttonCommand = __webpack_require__(/*! ../base/button-command.js */ "./src/components/base/button-command.js");
@@ -32664,11 +32724,36 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+=======
+        resizer.setStyles({
+            width: pxUnit(pillar.width),
+            height: pxUnit(pillar.height),
+            left: pxUnit(pillar.x),
+            top: pxUnit(pillar.y)
+        });
+
+        resizer.on('mousedown', onMouseDown, this);
+
+        document.getBody().setStyle('cursor', 'col-resize');
+
+        // Display the resizer to receive events but don't show it,
+        // only change the cursor to resizable shape.
+        resizer.show();
+
+        var move = this.move = function (posX) {
+            var resizerNewPosition = posX - Math.round(resizer.$.offsetWidth / 2);
+
+            if (isResizing) {
+                if (resizerNewPosition === leftShiftBoundary || resizerNewPosition === rightShiftBoundary) {
+                    return;
+                }
+>>>>>>> 885782f2... Build Files (auto-generated)
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
+<<<<<<< HEAD
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
@@ -32686,6 +32771,22 @@ var ButtonUnorderedlist = function (_React$Component) {
         _classCallCheck(this, ButtonUnorderedlist);
 
         return _possibleConstructorReturn(this, (ButtonUnorderedlist.__proto__ || Object.getPrototypeOf(ButtonUnorderedlist)).apply(this, arguments));
+=======
+            resizer.setStyle('left', pxUnit(resizerNewPosition));
+        };
+
+        var destroy = this.destroy = function () {
+            detach();
+
+            document.getBody().setStyle('cursor', 'auto');
+
+            resizer.remove();
+        };
+
+        var isResizing = this.isResizing = function () {
+            return resizing;
+        };
+>>>>>>> 885782f2... Build Files (auto-generated)
     }
 
     _createClass(ButtonUnorderedlist, [{
@@ -32758,7 +32859,25 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+<<<<<<< HEAD
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+=======
+                    // If we're already attached to a pillar, simply move the
+                    // resizer.
+                    if (resizer) {
+                        if (resizer.isResizing()) {
+                            resizer.move(pageX);
+
+                            cancel(evt);
+
+                            return;
+                        } else {
+                            resizer.destroy();
+
+                            resizer = null;
+                        }
+                    }
+>>>>>>> 885782f2... Build Files (auto-generated)
 
 var _buttonCommand = __webpack_require__(/*! ../base/button-command.js */ "./src/components/base/button-command.js");
 
@@ -32770,7 +32889,21 @@ var _buttonKeystroke2 = _interopRequireDefault(_buttonKeystroke);
 
 var _buttonStateClasses = __webpack_require__(/*! ../base/button-state-classes.js */ "./src/components/base/button-state-classes.js");
 
+<<<<<<< HEAD
 var _buttonStateClasses2 = _interopRequireDefault(_buttonStateClasses);
+=======
+                    var pillar = getPillarAtPosition(pillars, pageX);
+
+                    if (pillar) {
+                        resizer = new columnResizer(editor, pillar);
+                    }
+                });
+            });
+        }
+    });
+})();
+'use strict';
+>>>>>>> 885782f2... Build Files (auto-generated)
 
 var _buttonStyle = __webpack_require__(/*! ../base/button-style.js */ "./src/components/base/button-style.js");
 
