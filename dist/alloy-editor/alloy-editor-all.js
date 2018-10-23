@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.14
+ * AlloyEditor v1.5.15
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -27190,21 +27190,15 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
         (evt.data || evt).preventDefault();
     }
 
-    function columnResizer(editor) {
-        var pillar, document, resizer, isResizing, startOffset, currentShift;
+    function columnResizer(editor, pillar) {
+        var document, resizer, resizing, startOffset, currentShift;
 
         var leftSideCells, rightSideCells, leftShiftBoundary, rightShiftBoundary;
 
         function detach() {
-            pillar = null;
-            currentShift = 0;
-            isResizing = 0;
-
-            document.removeListener('mouseup', onMouseUp);
+            resizer.removeListener('mouseup', onMouseUp);
             resizer.removeListener('mousedown', onMouseDown);
             resizer.removeListener('mousemove', onMouseMove);
-
-            document.getBody().setStyle('cursor', 'auto');
         }
 
         function resizeStart() {
@@ -27247,7 +27241,7 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             resizer.setOpacity(0.5);
             startOffset = parseInt(resizer.getStyle('left'), 10);
             currentShift = 0;
-            isResizing = 1;
+            resizing = 1;
 
             resizer.on('mousemove', onMouseMove);
 
@@ -27256,7 +27250,7 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
         }
 
         function resizeEnd() {
-            isResizing = 0;
+            resizing = 0;
 
             resizer.setOpacity(0);
 
@@ -27318,6 +27312,8 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
 
         // Clean DOM when editor is destroyed.
         editor.on('destroy', function () {
+            detach();
+
             resizer.remove();
         });
 
@@ -27325,45 +27321,27 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
         // from being editable.
         document.getDocumentElement().append(resizer);
 
-        this.attachTo = function (targetPillar) {
-            // Accept only one pillar at a time.
-            if (isResizing) {
-                return;
-            }
+        resizer.setStyles({
+            width: pxUnit(pillar.width),
+            height: pxUnit(pillar.height),
+            left: pxUnit(pillar.x),
+            top: pxUnit(pillar.y)
+        });
 
-            pillar = targetPillar;
+        resizer.on('mousedown', onMouseDown, this);
 
-            resizer.setStyles({
-                width: pxUnit(targetPillar.width),
-                height: pxUnit(targetPillar.height),
-                left: pxUnit(targetPillar.x),
-                top: pxUnit(targetPillar.y)
-            });
+        document.getBody().setStyle('cursor', 'col-resize');
 
-            resizer.on('mousedown', onMouseDown, this);
-
-            document.getBody().setStyle('cursor', 'col-resize');
-
-            // Display the resizer to receive events but don't show it,
-            // only change the cursor to resizable shape.
-            resizer.show();
-        };
+        // Display the resizer to receive events but don't show it,
+        // only change the cursor to resizable shape.
+        resizer.show();
 
         var move = this.move = function (posX) {
-            if (!pillar) {
-                return 0;
-            }
-
-            if (!isResizing && (posX < pillar.x || posX > pillar.x + pillar.width)) {
-                detach();
-                return 0;
-            }
-
             var resizerNewPosition = posX - Math.round(resizer.$.offsetWidth / 2);
 
             if (isResizing) {
                 if (resizerNewPosition === leftShiftBoundary || resizerNewPosition === rightShiftBoundary) {
-                    return 1;
+                    return;
                 }
 
                 resizerNewPosition = Math.max(resizerNewPosition, leftShiftBoundary);
@@ -27373,8 +27351,18 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             }
 
             resizer.setStyle('left', pxUnit(resizerNewPosition));
+        };
 
-            return 1;
+        var destroy = this.destroy = function () {
+            detach();
+
+            document.getBody().setStyle('cursor', 'auto');
+
+            resizer.remove();
+        };
+
+        var isResizing = this.isResizing = function () {
+            return resizing;
         };
     }
 
@@ -27425,9 +27413,18 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
 
                     // If we're already attached to a pillar, simply move the
                     // resizer.
-                    if (resizer && resizer.move(pageX)) {
-                        cancel(evt);
-                        return;
+                    if (resizer) {
+                        if (resizer.isResizing()) {
+                            resizer.move(pageX);
+
+                            cancel(evt);
+
+                            return;
+                        } else {
+                            resizer.destroy();
+
+                            resizer = null;
+                        }
                     }
 
                     // Considering table, tr, td, tbody but nothing else.
@@ -27453,9 +27450,9 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                     }
 
                     var pillar = getPillarAtPosition(pillars, pageX);
+
                     if (pillar) {
-                        !resizer && (resizer = new columnResizer(editor));
-                        resizer.attachTo(pillar);
+                        resizer = new columnResizer(editor, pillar);
                     }
                 });
             });
