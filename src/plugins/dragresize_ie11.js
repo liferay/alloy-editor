@@ -863,6 +863,10 @@
 
                 wrapper.removeStyle( 'text-align' );
             }
+
+            var image = wrapper.$.querySelector('img');
+
+            image.removeAttribute('style');
         }
     }
 
