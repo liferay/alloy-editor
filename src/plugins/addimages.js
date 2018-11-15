@@ -7,6 +7,13 @@
         return;
     }
 
+    window.addEventListener('dragover', function(event){
+        event.preventDefault();
+    },false);
+    window.addEventListener('drop', function(event){
+        event.preventDefault();
+    },false);
+
     /**
      * CKEditor plugin which allows Drag&Drop of images directly into the editable area. The image will be encoded
      * as Data URI. An event `beforeImageAdd` will be fired with the list of dropped images. If any of the listeners
