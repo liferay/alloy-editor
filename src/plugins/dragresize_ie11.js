@@ -1000,7 +1000,7 @@
 
                 // Update element styles.
                 if ( !alignClasses && !CKEDITOR.tools.isEmpty( styles ) )
-                    attrs.style = CKEDITOR.tools.writeCssText( styles );
+                    attrs.style = CKEDITOR.tools.writeCssText( styles ) + ';';
             }
 
             return el;
