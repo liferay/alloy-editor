@@ -66,6 +66,23 @@
                 return styleCheck;
             });
 
+            if (!imageAlignment) {
+                var imageContainer = image.$.parentNode;
+
+                if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                    CENTERED_IMAGE_STYLE.forEach(function (style) {
+                        image.setStyle(style.name, style.value);
+
+                        if (style.vendorPrefixes) {
+                            style.vendorPrefixes.forEach(function (vendorPrefix) {
+                                image.setStyle(vendorPrefix + style.name, style.value);
+                            });
+                        }
+                    });
+                    centeredImage = true;
+                }
+            }
+
             imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
         }
 
@@ -95,6 +112,12 @@
                     });
                 }
             });
+
+            var imageContainer = image.$.parentNode;
+
+            if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                imageContainer.style.textAlign = '';
+            }
         }
     };
 
@@ -119,6 +142,11 @@
                     });
                 }
             });
+
+            var imageContainer = image.$.parentNode;
+
+            imageContainer.style.textAlign = IMAGE_ALIGNMENT.CENTER;
+
         }
     };
 
