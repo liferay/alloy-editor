@@ -50,7 +50,7 @@
             // Bottom-left corner style of the resizer.
             '.cke_image_resizer.cke_image_resizer_left{' +
                 'right:auto;' +
-                'left:-5px;' +
+                'left:-25px;' +
                 'cursor:sw-resize;' +
             '}' +
             '.cke_widget_wrapper:hover .cke_image_resizer,' +
