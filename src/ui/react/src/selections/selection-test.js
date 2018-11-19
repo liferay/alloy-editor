@@ -32,15 +32,12 @@
         var range = nativeEditor.getSelection().getRanges()[0];
         var selectionData = payload.data.selectionData;
 
-        var selectionDataName;
-
         var element;
-
-        if (selectionData.element) selectionDataName = selectionData.element.getName();
 
         return !!(
             nativeEditor.isSelectionEmpty() &&
-            selectionDataName !== 'img' &&
+            selectionData.element &&
+            selectionData.element.getName() !== 'img' &&
             (element = (new CKEDITOR.Link(nativeEditor)).getFromSelection()) &&
             element.getText().length !== range.endOffset &&
             !element.isReadOnly() &&
