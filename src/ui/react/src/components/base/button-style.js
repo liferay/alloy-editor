@@ -24,7 +24,17 @@
             style: PropTypes.oneOfType([
                 PropTypes.object,
                 PropTypes.string
-            ])
+            ]),
+
+			/**
+			 * The style function the button should handle.
+             * If specified, style function has higher priority than style property.
+			 *
+			 * @instance
+			 * @memberof ButtonStyle
+			 * @property {function} styleFn
+			 */
+            styleFn: PropTypes.func
         },
 
         /**
