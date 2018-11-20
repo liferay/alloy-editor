@@ -26,9 +26,9 @@
     var REGEX_LAST_WORD = /[^\s]+/gim;
 
     var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
-	
+
     var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
-	
+
     /**
      * CKEditor plugin which automatically generates links when user types text which looks like URL.
      *
@@ -58,13 +58,16 @@
 
                 editor.on('paste', function (event) {
                     if (event.data.method === 'paste') {
-						
-                        if (event.data.dataValue.indexOf('<') > -1  || event.data.dataValue.indexOf('&lt;') > -1) {
+
+                        if (event.data.dataValue.indexOf('<') > -1 || event.data.dataValue.indexOf('&lt;') > -1) {
+                            if(event.data.dataValue.indexOf('<u><font color=\"') > -1) {
+                                event.data.dataValue = event.data.dataValue.replace(/<u><font color=\"#(.*?)\">|<\/font><\/u>/g,'');
+                            }
                             return;
                         }
 
                         var instance = this;
-						
+
                         event.data.dataValue = event.data.dataValue.replace(RegExp(REGEX_URL, 'gim'), function (url) {
                             if (instance._isValidURL(url)) {
                                 if (instance._isValidEmail(url)) {
@@ -143,7 +146,7 @@
 
                 return lastWord;
             },
-			
+
             /**
              * Checks if the given link is a valid Email.
              *
