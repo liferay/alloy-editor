@@ -74,12 +74,17 @@
          * @protected
          */
         _onClick: function() {
-            // Typically, we want the style to be the only one applied to the current selection, so
-            // we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
-            // However, this is consistent with other editors implementations of this feature.
-            this.props.editor.get('nativeEditor').execCommand('removeFormat');
+            if (this.props.styleFn) {
+				this.props.styleFn();
+            }
+            else {
+				// Typically, we want the style to be the only one applied to the current selection, so
+				// we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
+				// However, this is consistent with other editors implementations of this feature.
+				this.props.editor.get('nativeEditor').execCommand('removeFormat');
 
-            this.applyStyle();
+				this.applyStyle();
+            }
         }
     });
 

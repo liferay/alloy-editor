@@ -138,7 +138,7 @@
                 items = styles.map(function(item) {
                     return (
                         <li key={item.name} role="option">
-                            <AlloyEditor.ButtonStylesListItem activeStyle={this.props.activeStyle} editor={editor} name={item.name} style={item.style} />
+                            <AlloyEditor.ButtonStylesListItem activeStyle={this.props.activeStyle} editor={editor} name={item.name} style={item.style} styleFn={item.styleFn} />
                         </li>
                     );
                 }.bind(this));
