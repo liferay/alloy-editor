@@ -27,6 +27,8 @@
                 // wrapper is displayed property.
                 'line-height:0' +
             '}' +
+            '.cke_editable.cke_image_ne, .cke_editable.cke_image_ne *{cursor:ne-resize !important}' +
+            '.cke_editable.cke_image_nw, .cke_editable.cke_image_nw *{cursor:nw-resize !important}' +
             '.cke_editable.cke_image_sw, .cke_editable.cke_image_sw *{cursor:sw-resize !important}' +
             '.cke_editable.cke_image_se, .cke_editable.cke_image_se *{cursor:se-resize !important}' +
             '.cke_image_resizer{' +
@@ -46,6 +48,34 @@
                 'position:relative;' +
                 'display:inline-block;' +
                 'line-height:0;' +
+            '}' +
+            // Top-right corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_ne{' +
+                'cursor:ne-resize;' +
+                'left:auto;' +
+                'right:-15px;' +
+                'top:-25px;' +
+            '}' +
+            // Top-left corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_nw{' +
+                'cursor:nw-resize;' +    
+                'left:-25px;' +
+                'right:auto;' +
+                'top:-25px;' +
+            '}' +
+            // Bottom-right corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_se{' +
+                'bottom:-15px;' +
+                'cursor:se-resize;' +
+                'left:auto;' +
+                'right:-15px;' +
+            '}' +
+            // Bottom-left corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_sw{' +
+                'bottom:-15px;' +
+                'cursor:sw-resize;' +
+                'left:-25px;' +
+                'right:auto;' +
             '}' +
             // Bottom-left corner style of the resizer.
             '.cke_image_resizer.cke_image_resizer_left{' +
