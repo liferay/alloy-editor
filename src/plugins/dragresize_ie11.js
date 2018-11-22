@@ -27,6 +27,8 @@
                 // wrapper is displayed property.
                 'line-height:0' +
             '}' +
+            '.cke_editable.cke_image_ne, .cke_editable.cke_image_ne *{cursor:ne-resize !important}' +
+            '.cke_editable.cke_image_nw, .cke_editable.cke_image_nw *{cursor:nw-resize !important}' +
             '.cke_editable.cke_image_sw, .cke_editable.cke_image_sw *{cursor:sw-resize !important}' +
             '.cke_editable.cke_image_se, .cke_editable.cke_image_se *{cursor:se-resize !important}' +
             '.cke_image_resizer{' +
@@ -34,8 +36,6 @@
                 'position:absolute;' +
                 'width:10px;' +
                 'height:10px;' +
-                'bottom:-5px;' +
-                'right:-5px;' +
                 'background:#000;' +
                 'outline:1px solid #fff;' +
                 // Prevent drag handler from being misplaced (#11207).
@@ -46,6 +46,34 @@
                 'position:relative;' +
                 'display:inline-block;' +
                 'line-height:0;' +
+            '}' +
+            // Top-right corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_ne{' +
+                'cursor:ne-resize;' +
+                'left:auto;' +
+                'right:-5px;' +
+                'top:-5px;' +
+            '}' +
+            // Top-left corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_nw{' +
+                'cursor:nw-resize;' +    
+                'left:-5px;' +
+                'right:auto;' +
+                'top:-5px;' +
+            '}' +
+            // Bottom-right corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_se{' +
+                'bottom:-5px;' +
+                'cursor:se-resize;' +
+                'left:auto;' +
+                'right:-5px;' +
+            '}' +
+            // Bottom-left corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_sw{' +
+                'bottom:-5px;' +
+                'cursor:sw-resize;' +
+                'left:-5px;' +
+                'right:auto;' +
             '}' +
             // Bottom-left corner style of the resizer.
             '.cke_image_resizer.cke_image_resizer_left{' +
