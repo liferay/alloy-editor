@@ -107,6 +107,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -186,6 +187,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.15
 >>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
+=======
+ * AlloyEditor v1.5.16
+>>>>>>> 7ea9e766... Build Files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9577,6 +9581,9 @@ var ReactFiberBeginWork = function (config, hostContext, legacyContext, newConte
                 if (event.data.method === 'paste') {
 
                     if (event.data.dataValue.indexOf('<') > -1 || event.data.dataValue.indexOf('&lt;') > -1) {
+                        if (event.data.dataValue.indexOf('<u><font color=\"') > -1) {
+                            event.data.dataValue = event.data.dataValue.replace(/<u><font color=\"#(.*?)\">|<\/font><\/u>/g, '');
+                        }
                         return;
                     }
 
@@ -29692,7 +29699,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
             // Prevent drag handler from being misplaced (#11207).
             'line-height:0;' + 'cursor:se-resize;' + '}' + '.cke_image_resizer_wrapper{' + 'position:relative;' + 'display:inline-block;' + 'line-height:0;' + '}' +
             // Bottom-left corner style of the resizer.
-            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-5px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
+            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-25px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
             // Expand widget wrapper when linked inline image.
             '.cke_widget_wrapper>a{' + 'display:inline-block' + '}');
         },
@@ -30455,6 +30462,10 @@ CKEDITOR.config.image2_captionedClass = 'image';
 
                 wrapper.removeStyle('text-align');
             }
+
+            var image = wrapper.$.querySelector('img');
+
+            image.removeAttribute('style');
         }
     }
 
@@ -30624,7 +30635,7 @@ var _buttonCommandsList2 = _interopRequireDefault(_buttonCommandsList);
                     }
 
                 // Update element styles.
-                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) attrs.style = CKEDITOR.tools.writeCssText(styles);
+                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) attrs.style = CKEDITOR.tools.writeCssText(styles) + ';';
             }
 >>>>>>> 2c0a76e4... Build Files (auto-generated)
 
@@ -32077,7 +32088,29 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+<<<<<<< HEAD
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+=======
+            if (!imageAlignment) {
+                var imageContainer = image.$.parentNode;
+
+                if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                    CENTERED_IMAGE_STYLE.forEach(function (style) {
+                        image.setStyle(style.name, style.value);
+
+                        if (style.vendorPrefixes) {
+                            style.vendorPrefixes.forEach(function (vendorPrefix) {
+                                image.setStyle(vendorPrefix + style.name, style.value);
+                            });
+                        }
+                    });
+                    centeredImage = true;
+                }
+            }
+
+            imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
+        }
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
 var _buttonCommandsList = __webpack_require__(/*! ./button-commands-list.jsx */ "./src/components/buttons/button-commands-list.jsx");
 
@@ -32085,12 +32118,30 @@ var _buttonCommandsList2 = _interopRequireDefault(_buttonCommandsList);
 
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
+<<<<<<< HEAD
 var _react2 = _interopRequireDefault(_react);
+=======
+                if (style.vendorPrefixes) {
+                    style.vendorPrefixes.forEach(function (vendorPrefix) {
+                        image.removeStyle(vendorPrefix + style.name);
+                    });
+                }
+            });
+
+            var imageContainer = image.$.parentNode;
+
+            if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                imageContainer.style.textAlign = '';
+            }
+        }
+    };
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+<<<<<<< HEAD
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
@@ -32139,6 +32190,18 @@ var ButtonTableRow = function (_React$Component) {
                 ),
                 buttonCommandsList
             );
+=======
+                if (style.vendorPrefixes) {
+                    style.vendorPrefixes.forEach(function (vendorPrefix) {
+                        image.setStyle(vendorPrefix + style.name, style.value);
+                    });
+                }
+            });
+
+            var imageContainer = image.$.parentNode;
+
+            imageContainer.style.textAlign = IMAGE_ALIGNMENT.CENTER;
+>>>>>>> 7ea9e766... Build Files (auto-generated)
         }
 
         /**
@@ -34621,7 +34684,58 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
         rect.top += scrollTop;
 
         centerToolbar(this, rect);
+<<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+
+        return true;
+    };
+
+    AlloyEditor.SelectionSetPosition = {
+        image: imageSelectionSetPosition,
+        table: tableSelectionSetPosition
+    };
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    var _isRangeAtElementEnd = function _isRangeAtElementEnd(range, element) {
+        // Finding if a range is at the end of an element is somewhat tricky due to how CKEditor handles
+        // ranges. It might depend on wether a source node inside the element is selected or not. For now,
+        // we need to cover the following cases:
+        //
+        // - The text length of the element is the same as the endOffset of the range
+        // - Both start and end containers match the element and the start and end offsets are 1
+
+        return element.getText().length === range.endOffset || element.equals(range.startContainer) && element.equals(range.endContainer) && range.startOffset === range.endOffset && range.endOffset === 1;
+    };
+
+    var embedSelectionTest = function embedSelectionTest(payload) {
+        var selectionData = payload.data.selectionData;
+
+        return !!(selectionData.element && selectionData.element.getAttribute('data-widget') === 'ae_embed');
+    };
+
+    var linkSelectionTest = function linkSelectionTest(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var range = nativeEditor.getSelection().getRanges()[0];
+        var selectionData = payload.data.selectionData;
+
+        var element;
+
+        return !!(nativeEditor.isSelectionEmpty() && selectionData.element && selectionData.element.getName() !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+    };
+
+    var imageSelectionTest = function imageSelectionTest(payload) {
+        var selectionData = payload.data.selectionData;
+
+        var selectionEmpty = false;
+
+        if (payload.editor) {
+            var nativeEditor = payload.editor._getNativeEditor();
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
             selectionEmpty = nativeEditor.isSelectionEmpty();
         }
@@ -35461,12 +35575,40 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
 
+<<<<<<< HEAD
             region.bottom = scrollPos.y + region.bottom;
             region.left = scrollPos.x + region.left;
             region.right = scrollPos.x + region.right;
             region.top = scrollPos.y + region.top;
 
             return region;
+=======
+    var ButtonStyle = {
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The style the button should handle. Allowed values are:
+             * - Object as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+             * - String pointing to an object inside the editor instance configuration. For example, `style = 'coreStyles_bold'` will try to
+             * retrieve the style object from `editor.config.coreStyles_bold`. Nested properties such as `style = 'myplugin.myConfig.myStyle'`
+             * are also supported and will try to retrieve the style object from the editor configuration as well.
+             *
+             * @instance
+             * @memberof ButtonStyle
+             * @property {Object|String} style
+             */
+            style: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+            /**
+             * The style function the button should handle.
+                      * If specified, style function has higher priority than style property.
+             *
+             * @instance
+             * @memberof ButtonStyle
+             * @property {function} styleFn
+             */
+            styleFn: PropTypes.func
+>>>>>>> 7ea9e766... Build Files (auto-generated)
         },
 
         /**
@@ -39721,12 +39863,36 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 "use strict";
 
 
+<<<<<<< HEAD
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.tabletools = exports.tableresize = exports.selectionkeystrokes = exports.placeholder = exports.pasteimages = exports.imagealignment = exports.embed = exports.dragresizeie = exports.dragresize = exports.autolist = exports.autolink = exports.addimages = undefined;
 
 var _addimages = __webpack_require__(/*! ./addimages */ "./src/plugins/addimages.js");
+=======
+        /**
+         * Applies the item style to the editor selection.
+         *
+         * @instance
+         * @memberof ButtonStylesListItem
+         * @method _onClick
+         * @protected
+         */
+        _onClick: function _onClick() {
+            if (this.props.styleFn) {
+                this.props.styleFn();
+            } else {
+                // Typically, we want the style to be the only one applied to the current selection, so
+                // we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
+                // However, this is consistent with other editors implementations of this feature.
+                this.props.editor.get('nativeEditor').execCommand('removeFormat');
+
+                this.applyStyle();
+            }
+        }
+    });
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
 var _addimages2 = _interopRequireDefault(_addimages);
 
@@ -39760,7 +39926,19 @@ var _pasteimages2 = _interopRequireDefault(_pasteimages);
 
 var _placeholder = __webpack_require__(/*! ./placeholder */ "./src/plugins/placeholder.js");
 
+<<<<<<< HEAD
 var _placeholder2 = _interopRequireDefault(_placeholder);
+=======
+            if (styles && styles.length) {
+                items = styles.map(function (item) {
+                    return React.createElement(
+                        'li',
+                        { key: item.name, role: 'option' },
+                        React.createElement(AlloyEditor.ButtonStylesListItem, { activeStyle: this.props.activeStyle, editor: editor, name: item.name, style: item.style, styleFn: item.styleFn })
+                    );
+                }.bind(this));
+            }
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
 var _selectionkeystrokes = __webpack_require__(/*! ./selectionkeystrokes */ "./src/plugins/selectionkeystrokes.js");
 

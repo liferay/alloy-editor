@@ -149,6 +149,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -228,6 +229,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.15
 >>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
+=======
+ * AlloyEditor v1.5.16
+>>>>>>> 7ea9e766... Build Files (auto-generated)
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2349,6 +2353,9 @@ exports.default = function (WrappedComponent) {
                 if (event.data.method === 'paste') {
 
                     if (event.data.dataValue.indexOf('<') > -1 || event.data.dataValue.indexOf('&lt;') > -1) {
+                        if (event.data.dataValue.indexOf('<u><font color=\"') > -1) {
+                            event.data.dataValue = event.data.dataValue.replace(/<u><font color=\"#(.*?)\">|<\/font><\/u>/g, '');
+                        }
                         return;
                     }
 
@@ -4164,7 +4171,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
             // Prevent drag handler from being misplaced (#11207).
             'line-height:0;' + 'cursor:se-resize;' + '}' + '.cke_image_resizer_wrapper{' + 'position:relative;' + 'display:inline-block;' + 'line-height:0;' + '}' +
             // Bottom-left corner style of the resizer.
-            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-5px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
+            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-25px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
             // Expand widget wrapper when linked inline image.
             '.cke_widget_wrapper>a{' + 'display:inline-block' + '}');
         },
@@ -4927,6 +4934,10 @@ CKEDITOR.config.image2_captionedClass = 'image';
 
                 wrapper.removeStyle('text-align');
             }
+
+            var image = wrapper.$.querySelector('img');
+
+            image.removeAttribute('style');
         }
     }
 
@@ -5051,7 +5062,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
                     }
 
                 // Update element styles.
-                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) attrs.style = CKEDITOR.tools.writeCssText(styles);
+                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) attrs.style = CKEDITOR.tools.writeCssText(styles) + ';';
             }
 
             return el;
@@ -5628,9 +5639,30 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             var align = { left: 1, right: 1, center: 1, block: 1 },
                 integrate = alignCommandIntegrator(editor);
 
+<<<<<<< HEAD
             for (var value in align) {
                 integrate(value);
             }
+=======
+            if (!imageAlignment) {
+                var imageContainer = image.$.parentNode;
+
+                if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                    CENTERED_IMAGE_STYLE.forEach(function (style) {
+                        image.setStyle(style.name, style.value);
+
+                        if (style.vendorPrefixes) {
+                            style.vendorPrefixes.forEach(function (vendorPrefix) {
+                                image.setStyle(vendorPrefix + style.name, style.value);
+                            });
+                        }
+                    });
+                    centeredImage = true;
+                }
+            }
+
+            imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
+>>>>>>> 7ea9e766... Build Files (auto-generated)
         }
     });
 
@@ -5733,6 +5765,7 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
         function deflate() {
             if (this.deflated) return;
 
+<<<<<<< HEAD
             // Remember whether widget was focused before destroyed.
             if (editor.widgets.focused == this.widget) this.focused = true;
 
@@ -5740,6 +5773,20 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
 
             // Mark widget was destroyed.
             this.deflated = true;
+=======
+                if (style.vendorPrefixes) {
+                    style.vendorPrefixes.forEach(function (vendorPrefix) {
+                        image.removeStyle(vendorPrefix + style.name);
+                    });
+                }
+            });
+
+            var imageContainer = image.$.parentNode;
+
+            if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                imageContainer.style.textAlign = '';
+            }
+>>>>>>> 7ea9e766... Build Files (auto-generated)
         }
 
         function inflate() {
@@ -5760,6 +5807,16 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                     block.replace(this.widget.wrapper);
                     this.widget.wrapper.move(block);
                 }
+<<<<<<< HEAD
+=======
+            });
+
+            var imageContainer = image.$.parentNode;
+
+            imageContainer.style.textAlign = IMAGE_ALIGNMENT.CENTER;
+        }
+    };
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
                 // The focus must be transferred from the old one (destroyed)
                 // to the new one (just created).
@@ -8761,6 +8818,7 @@ var _buttonStateClasses = __webpack_require__(/*! ../base/button-state-classes.j
 
 var _buttonStateClasses2 = _interopRequireDefault(_buttonStateClasses);
 
+<<<<<<< HEAD
 var _react = __webpack_require__(/*! react */ "react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -8768,6 +8826,12 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+=======
+        var element;
+
+        return !!(nativeEditor.isSelectionEmpty() && selectionData.element && selectionData.element.getName() !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+    };
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
@@ -9293,7 +9357,36 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+<<<<<<< HEAD
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+=======
+    var ButtonStyle = {
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The style the button should handle. Allowed values are:
+             * - Object as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+             * - String pointing to an object inside the editor instance configuration. For example, `style = 'coreStyles_bold'` will try to
+             * retrieve the style object from `editor.config.coreStyles_bold`. Nested properties such as `style = 'myplugin.myConfig.myStyle'`
+             * are also supported and will try to retrieve the style object from the editor configuration as well.
+             *
+             * @instance
+             * @memberof ButtonStyle
+             * @property {Object|String} style
+             */
+            style: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+            /**
+             * The style function the button should handle.
+                      * If specified, style function has higher priority than style property.
+             *
+             * @instance
+             * @memberof ButtonStyle
+             * @property {function} styleFn
+             */
+            styleFn: PropTypes.func
+        },
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
@@ -20529,11 +20622,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
          * @method afterInit
          * @param {Object} editor The current editor instance
          */
+<<<<<<< HEAD
         afterInit: function afterInit(editor) {
             var self = this;
 
             ALIGN_VALUES.forEach(function (value) {
                 var command = editor.getCommand('justify' + value);
+=======
+        _onClick: function _onClick() {
+            if (this.props.styleFn) {
+                this.props.styleFn();
+            } else {
+                // Typically, we want the style to be the only one applied to the current selection, so
+                // we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
+                // However, this is consistent with other editors implementations of this feature.
+                this.props.editor.get('nativeEditor').execCommand('removeFormat');
+
+                this.applyStyle();
+            }
+        }
+    });
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
                 if (command) {
                     command.on('exec', function (event) {
@@ -20604,6 +20713,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 "use strict";
 
+<<<<<<< HEAD
+=======
+            if (styles && styles.length) {
+                items = styles.map(function (item) {
+                    return React.createElement(
+                        'li',
+                        { key: item.name, role: 'option' },
+                        React.createElement(AlloyEditor.ButtonStylesListItem, { activeStyle: this.props.activeStyle, editor: editor, name: item.name, style: item.style, styleFn: item.styleFn })
+                    );
+                }.bind(this));
+            }
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
 Object.defineProperty(exports, "__esModule", {
     value: true

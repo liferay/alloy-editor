@@ -96,7 +96,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
 =======
 /**
- * AlloyEditor v1.5.15
+ * AlloyEditor v1.5.16
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -3073,6 +3073,9 @@ var _get = function get(object, property, receiver) { if (object === null) objec
                 if (event.data.method === 'paste') {
 
                     if (event.data.dataValue.indexOf('<') > -1 || event.data.dataValue.indexOf('&lt;') > -1) {
+                        if (event.data.dataValue.indexOf('<u><font color=\"') > -1) {
+                            event.data.dataValue = event.data.dataValue.replace(/<u><font color=\"#(.*?)\">|<\/font><\/u>/g, '');
+                        }
                         return;
                     }
 
@@ -5101,7 +5104,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
             // Prevent drag handler from being misplaced (#11207).
             'line-height:0;' + 'cursor:se-resize;' + '}' + '.cke_image_resizer_wrapper{' + 'position:relative;' + 'display:inline-block;' + 'line-height:0;' + '}' +
             // Bottom-left corner style of the resizer.
-            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-5px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
+            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-25px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
             // Expand widget wrapper when linked inline image.
             '.cke_widget_wrapper>a{' + 'display:inline-block' + '}');
         },
@@ -5864,6 +5867,10 @@ CKEDITOR.config.image2_captionedClass = 'image';
 
                 wrapper.removeStyle('text-align');
             }
+
+            var image = wrapper.$.querySelector('img');
+
+            image.removeAttribute('style');
         }
     }
 
@@ -5988,7 +5995,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
                     }
 
                 // Update element styles.
-                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) attrs.style = CKEDITOR.tools.writeCssText(styles);
+                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) attrs.style = CKEDITOR.tools.writeCssText(styles) + ';';
             }
 
             return el;
@@ -6683,11 +6690,42 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             var editable = editor.editable(),
                 doc = editor.document;
 
+<<<<<<< HEAD
             // Create a new widget. This widget will be either captioned
             // non-captioned, block or inline according to what is the
             // new state of the widget.
             if (this.deflated) {
                 this.widget = editor.widgets.initOn(this.element, 'image', this.widget.data);
+=======
+                if (!styleCheck && style.vendorPrefixes) {
+                    styleCheck = style.vendorPrefixes.some(function (vendorPrefix) {
+                        return image.getStyle(vendorPrefix + style.name) === style.value;
+                    });
+                }
+
+                return styleCheck;
+            });
+
+            if (!imageAlignment) {
+                var imageContainer = image.$.parentNode;
+
+                if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                    CENTERED_IMAGE_STYLE.forEach(function (style) {
+                        image.setStyle(style.name, style.value);
+
+                        if (style.vendorPrefixes) {
+                            style.vendorPrefixes.forEach(function (vendorPrefix) {
+                                image.setStyle(vendorPrefix + style.name, style.value);
+                            });
+                        }
+                    });
+                    centeredImage = true;
+                }
+            }
+
+            imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
+        }
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
                 // Once widget was re-created, it may become an inline element without
                 // block wrapper (i.e. when unaligned, end not captioned). Let's do some
@@ -6713,6 +6751,16 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             else {
                     setWrapperAlign(this.widget, alignClasses);
                 }
+<<<<<<< HEAD
+=======
+            });
+
+            var imageContainer = image.$.parentNode;
+
+            if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                imageContainer.style.textAlign = '';
+            }
+>>>>>>> 7ea9e766... Build Files (auto-generated)
         }
 
         return {
@@ -6720,7 +6768,22 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
 
             requiredContent: 'img[src,alt]',
 
+<<<<<<< HEAD
             features: getWidgetFeatures(editor),
+=======
+                if (style.vendorPrefixes) {
+                    style.vendorPrefixes.forEach(function (vendorPrefix) {
+                        image.setStyle(vendorPrefix + style.name, style.value);
+                    });
+                }
+            });
+
+            var imageContainer = image.$.parentNode;
+
+            imageContainer.style.textAlign = IMAGE_ALIGNMENT.CENTER;
+        }
+    };
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
             styleableElements: 'img figure',
 
@@ -9713,6 +9776,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+<<<<<<< HEAD
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "react");
@@ -9720,6 +9784,12 @@ var _react = __webpack_require__(/*! react */ "react");
 var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(/*! react-dom */ "react-dom");
+=======
+        var element;
+
+        return !!(nativeEditor.isSelectionEmpty() && selectionData.element && selectionData.element.getName() !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+    };
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -10189,6 +10259,51 @@ var ButtonLinkAutocompleteList = function (_React$Component) {
      * @method componentWillReceiveProps
      */
 
+<<<<<<< HEAD
+=======
+    var ButtonStyle = {
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The style the button should handle. Allowed values are:
+             * - Object as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+             * - String pointing to an object inside the editor instance configuration. For example, `style = 'coreStyles_bold'` will try to
+             * retrieve the style object from `editor.config.coreStyles_bold`. Nested properties such as `style = 'myplugin.myConfig.myStyle'`
+             * are also supported and will try to retrieve the style object from the editor configuration as well.
+             *
+             * @instance
+             * @memberof ButtonStyle
+             * @property {Object|String} style
+             */
+            style: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+            /**
+             * The style function the button should handle.
+                      * If specified, style function has higher priority than style property.
+             *
+             * @instance
+             * @memberof ButtonStyle
+             * @property {function} styleFn
+             */
+            styleFn: PropTypes.func
+        },
+
+        /**
+         * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         *
+         * @instance
+         * @memberof ButtonStyle
+         * @method componentWillMount
+         */
+        componentWillMount: function componentWillMount() {
+            var Lang = AlloyEditor.Lang;
+            var style = this.props.style;
+
+            if (Lang.isString(style)) {
+                var parts = style.split('.');
+                var currentMember = this.props.editor.get('nativeEditor').config;
+                var property = parts.shift();
+>>>>>>> 7ea9e766... Build Files (auto-generated)
 
     _createClass(ButtonLinkAutocompleteList, [{
         key: 'componentWillReceiveProps',
@@ -14036,6 +14151,7 @@ var ButtonTableRemove = function (_React$Component) {
          * @method _removeTable
          * @protected
          */
+<<<<<<< HEAD
 
     }, {
         key: "_removeTable",
@@ -14046,6 +14162,19 @@ var ButtonTableRemove = function (_React$Component) {
             tableUtils.remove();
 
             editor.fire('actionPerformed', this);
+=======
+        _onClick: function _onClick() {
+            if (this.props.styleFn) {
+                this.props.styleFn();
+            } else {
+                // Typically, we want the style to be the only one applied to the current selection, so
+                // we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
+                // However, this is consistent with other editors implementations of this feature.
+                this.props.editor.get('nativeEditor').execCommand('removeFormat');
+
+                this.applyStyle();
+            }
+>>>>>>> 7ea9e766... Build Files (auto-generated)
         }
     }]);
 
@@ -14157,6 +14286,7 @@ var ButtonTableRow = function (_React$Component) {
          * @return {Array} The list of available commands.
          */
 
+<<<<<<< HEAD
     }, {
         key: '_getCommands',
         value: function _getCommands() {
@@ -14170,6 +14300,19 @@ var ButtonTableRow = function (_React$Component) {
                 command: 'rowDelete',
                 label: AlloyEditor.Strings.rowDelete
             }];
+=======
+            if (styles && styles.length) {
+                items = styles.map(function (item) {
+                    return React.createElement(
+                        'li',
+                        { key: item.name, role: 'option' },
+                        React.createElement(AlloyEditor.ButtonStylesListItem, { activeStyle: this.props.activeStyle, editor: editor, name: item.name, style: item.style, styleFn: item.styleFn })
+                    );
+                }.bind(this));
+            }
+
+            return items;
+>>>>>>> 7ea9e766... Build Files (auto-generated)
         }
     }]);
 
