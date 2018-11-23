@@ -1,5 +1,28 @@
 # Change Log
 
+## [v1.5.16](https://github.com/liferay/alloy-editor/tree/v1.5.16) (2018-11-23)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.15...v1.5.16)
+
+**Fixed bugs:**
+
+- Check published code for missing semi colons particularly in IE11 [\#900](https://github.com/liferay/alloy-editor/issues/900)
+- Image alignment Center CSS clashes when switching from IE to Chrome [\#898](https://github.com/liferay/alloy-editor/issues/898)
+
+**Closed issues:**
+
+- AlloyEditor image resize handle position is misplaced in IE11 when image is right aligned [\#911](https://github.com/liferay/alloy-editor/issues/911)
+- Copy and paste text link add tags in IE11 [\#908](https://github.com/liferay/alloy-editor/issues/908)
+
+**Merged pull requests:**
+
+- Fixes \#908 Remove unwanted tags after paste [\#919](https://github.com/liferay/alloy-editor/pull/919) ([fortunatomaldonado](https://github.com/fortunatomaldonado))
+- Fixes \#915 - Checks if selection data exists in linkSelectionTest [\#918](https://github.com/liferay/alloy-editor/pull/918) ([julien](https://github.com/julien))
+- LPS-87500 Add styleFn support for the ButtonStylesList component [\#916](https://github.com/liferay/alloy-editor/pull/916) ([pavel-savinov](https://github.com/pavel-savinov))
+- Fixes https://github.com/liferay/alloy-editor/issues/900 Add closing … [\#913](https://github.com/liferay/alloy-editor/pull/913) ([SpencerWoo](https://github.com/SpencerWoo))
+- Fixes \#911 Use correct CSS to place drag resize handle at the corner [\#912](https://github.com/liferay/alloy-editor/pull/912) ([brianikim](https://github.com/brianikim))
+- Fix autolink test [\#907](https://github.com/liferay/alloy-editor/pull/907) ([julien](https://github.com/julien))
+- Fix \#898 | Added center align css interaction between IE11 and other … [\#899](https://github.com/liferay/alloy-editor/pull/899) ([fortunatomaldonado](https://github.com/fortunatomaldonado))
+
 ## [v1.5.15](https://github.com/liferay/alloy-editor/tree/v1.5.15) (2018-10-23)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.14...v1.5.15)
 
