@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.15
+ * AlloyEditor v1.5.16
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2858,6 +2858,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 if (event.data.method === 'paste') {
 
                     if (event.data.dataValue.indexOf('<') > -1 || event.data.dataValue.indexOf('&lt;') > -1) {
+                        if (event.data.dataValue.indexOf('<u><font color=\"') > -1) {
+                            event.data.dataValue = event.data.dataValue.replace(/<u><font color=\"#(.*?)\">|<\/font><\/u>/g, '');
+                        }
                         return;
                     }
 
@@ -4811,7 +4814,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
             // Prevent drag handler from being misplaced (#11207).
             'line-height:0;' + 'cursor:se-resize;' + '}' + '.cke_image_resizer_wrapper{' + 'position:relative;' + 'display:inline-block;' + 'line-height:0;' + '}' +
             // Bottom-left corner style of the resizer.
-            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-5px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
+            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-25px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
             // Expand widget wrapper when linked inline image.
             '.cke_widget_wrapper>a{' + 'display:inline-block' + '}');
         },
@@ -5574,6 +5577,10 @@ CKEDITOR.config.image2_captionedClass = 'image';
 
                 wrapper.removeStyle('text-align');
             }
+
+            var image = wrapper.$.querySelector('img');
+
+            image.removeAttribute('style');
         }
     }
 
@@ -5698,7 +5705,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
                     }
 
                 // Update element styles.
-                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) attrs.style = CKEDITOR.tools.writeCssText(styles);
+                if (!alignClasses && !CKEDITOR.tools.isEmpty(styles)) attrs.style = CKEDITOR.tools.writeCssText(styles) + ';';
             }
 
             return el;
@@ -6440,6 +6447,23 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                 return styleCheck;
             });
 
+            if (!imageAlignment) {
+                var imageContainer = image.$.parentNode;
+
+                if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                    CENTERED_IMAGE_STYLE.forEach(function (style) {
+                        image.setStyle(style.name, style.value);
+
+                        if (style.vendorPrefixes) {
+                            style.vendorPrefixes.forEach(function (vendorPrefix) {
+                                image.setStyle(vendorPrefix + style.name, style.value);
+                            });
+                        }
+                    });
+                    centeredImage = true;
+                }
+            }
+
             imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
         }
 
@@ -6469,6 +6493,12 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                     });
                 }
             });
+
+            var imageContainer = image.$.parentNode;
+
+            if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                imageContainer.style.textAlign = '';
+            }
         }
     };
 
@@ -6493,6 +6523,10 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                     });
                 }
             });
+
+            var imageContainer = image.$.parentNode;
+
+            imageContainer.style.textAlign = IMAGE_ALIGNMENT.CENTER;
         }
     };
 
@@ -9553,13 +9587,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var range = nativeEditor.getSelection().getRanges()[0];
         var selectionData = payload.data.selectionData;
 
-        var selectionDataName;
-
         var element;
 
-        if (selectionData.element) selectionDataName = selectionData.element.getName();
-
-        return !!(nativeEditor.isSelectionEmpty() && selectionDataName !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+        return !!(nativeEditor.isSelectionEmpty() && selectionData.element && selectionData.element.getName() !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
     };
 
     var imageSelectionTest = function imageSelectionTest(payload) {
@@ -10461,7 +10491,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * @memberof ButtonStyle
              * @property {Object|String} style
              */
-            style: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+            style: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+            /**
+             * The style function the button should handle.
+                      * If specified, style function has higher priority than style property.
+             *
+             * @instance
+             * @memberof ButtonStyle
+             * @property {function} styleFn
+             */
+            styleFn: PropTypes.func
         },
 
         /**
@@ -15998,12 +16038,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
          * @protected
          */
         _onClick: function _onClick() {
-            // Typically, we want the style to be the only one applied to the current selection, so
-            // we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
-            // However, this is consistent with other editors implementations of this feature.
-            this.props.editor.get('nativeEditor').execCommand('removeFormat');
+            if (this.props.styleFn) {
+                this.props.styleFn();
+            } else {
+                // Typically, we want the style to be the only one applied to the current selection, so
+                // we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
+                // However, this is consistent with other editors implementations of this feature.
+                this.props.editor.get('nativeEditor').execCommand('removeFormat');
 
-            this.applyStyle();
+                this.applyStyle();
+            }
         }
     });
 
@@ -16152,7 +16196,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     return React.createElement(
                         'li',
                         { key: item.name, role: 'option' },
-                        React.createElement(AlloyEditor.ButtonStylesListItem, { activeStyle: this.props.activeStyle, editor: editor, name: item.name, style: item.style })
+                        React.createElement(AlloyEditor.ButtonStylesListItem, { activeStyle: this.props.activeStyle, editor: editor, name: item.name, style: item.style, styleFn: item.styleFn })
                     );
                 }.bind(this));
             }

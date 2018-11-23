@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.15</b>
+                        API Docs for Version: <b>1.5.16</b>
                     </p>
                 </li>
             </div>
@@ -260,12 +260,17 @@
                                      * @protected
                                      */
                                     _onClick: function() {
-                                        // Typically, we want the style to be the only one applied to the current selection, so
-                                        // we execute the &#x27;removeFormat&#x27; command first. Note that block styles won&#x27;t be cleaned.
-                                        // However, this is consistent with other editors implementations of this feature.
-                                        this.props.editor.get(&#x27;nativeEditor&#x27;).execCommand(&#x27;removeFormat&#x27;);
+                                        if (this.props.styleFn) {
+                            				this.props.styleFn();
+                                        }
+                                        else {
+                            				// Typically, we want the style to be the only one applied to the current selection, so
+                            				// we execute the &#x27;removeFormat&#x27; command first. Note that block styles won&#x27;t be cleaned.
+                            				// However, this is consistent with other editors implementations of this feature.
+                            				this.props.editor.get(&#x27;nativeEditor&#x27;).execCommand(&#x27;removeFormat&#x27;);
                             
-                                        this.applyStyle();
+                            				this.applyStyle();
+                                        }
                                     }
                                 });
                             
