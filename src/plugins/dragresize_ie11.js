@@ -75,12 +75,6 @@
                 'left:-5px;' +
                 'right:auto;' +
             '}' +
-            // Bottom-left corner style of the resizer.
-            '.cke_image_resizer.cke_image_resizer_left{' +
-                'right:auto;' +
-                'left:-25px;' +
-                'cursor:sw-resize;' +
-            '}' +
             '.cke_widget_wrapper:hover .cke_image_resizer,' +
             '.cke_image_resizer.cke_image_resizing{' +
                 'display:block' +
@@ -1348,11 +1342,6 @@
                 // Don't update data twice or more.
                 updateData = false;
             }
-        } );
-
-        // Change the position of the widget resizer when data changes.
-        widget.on( 'data', function() {
-            resizer[ widget.data.align == 'right' ? 'addClass' : 'removeClass' ]( 'cke_image_resizer_left' );
         } );
     }
 
