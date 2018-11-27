@@ -66,6 +66,30 @@ var filesToLoad = [
         included: true,
         watched: false
     }, {
+        pattern: path.join(alloyEditorDir, 'plugins/colorbutton/plugin.js'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'plugins/floatpanel/plugin.js'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'plugins/font/plugin.js'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'plugins/listblock/plugin.js'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'plugins/panel/plugin.js'),
+        included: true,
+        watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'plugins/**/lang/*.js'),
+        included: true,
+        watched: false
+    }, {
         pattern: path.join(alloyEditorDir, 'plugins/test_*/plugin.js'),
         included: true,
         watched: false
