@@ -16,7 +16,20 @@
         test: AlloyEditor.SelectionTest.image
     }, {
         name: 'text',
-        buttons: ['styles', 'bold', 'italic', 'underline', 'link', 'twitter'],
+        buttons: {
+            full: [
+                [
+                    'styles', 'separator', 'bold', 'italic', 'underline', 'strike', 'separator',
+                    'link', 'separator', 'Font', 'FontSize'
+                ],
+                [
+                    'TextColor', 'BGColor', 'separator', 'paragraphAlign', 'separator',
+                    'ul', 'ol', 'separator',  'h1', 'h2', 'separator', 'indentBlock', 'outdentBlock',
+                    'separator', 'code', 'quote', 'separator', 'removeFormat'
+                ]
+            ],
+            simple: ['styles', 'bold', 'italic', 'underline', 'link']
+        },
         test: AlloyEditor.SelectionTest.text
     }, {
         name: 'table',

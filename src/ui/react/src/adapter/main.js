@@ -187,6 +187,16 @@
         Buttons: {},
 
         /**
+         * And object, containing all currently registered elements in AlloyEditor.
+         *
+         * @memberof AlloyEditor
+         * @property Elements
+         * @type {Object}
+         * @static
+         */
+        Elements: {},
+
+        /**
          * And object, containing all currently registered toolbars in AlloyEditor.
          *
          * @memberof AlloyEditor
