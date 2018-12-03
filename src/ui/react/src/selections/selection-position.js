@@ -55,8 +55,11 @@
      * @return {Boolean} True, in all cases
      */
     var imageSelectionSetPosition = function(payload) {
-        if (payload.selectionData && payload.selectionData.element) {
-            centerToolbar(this, payload.selectionData.element.getClientRect());
+        var selectionData = payload.selectionData ? payload.selectionData : payload.editorEvent ?
+            payload.editorEvent.data.selectionData : null;
+
+        if (selectionData && selectionData.element) {
+            centerToolbar(this, selectionData.element.getClientRect());
 
             return true;
         }
