@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    var MAX_TWEET_LENGTH = 280;
+
     /**
      * The ButtonTwitter class provides functionality for creating a link which
      * allows people to tweet part of the content in the editor.
@@ -126,7 +128,7 @@
          */
         _getHref: function() {
             var nativeEditor = this.props.editor.get('nativeEditor');
-            var selectedText = nativeEditor.getSelection().getSelectedText();
+            var selectedText = nativeEditor.getSelection().getSelectedText().substring(0, MAX_TWEET_LENGTH);
             var url = this.props.url;
             var via = this.props.via;
             var twitterHref = 'https://twitter.com/intent/tweet?text=' + selectedText;
