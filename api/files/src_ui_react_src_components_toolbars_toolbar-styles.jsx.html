@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.16</b>
+                        API Docs for Version: <b>1.5.17</b>
                     </p>
                 </li>
             </div>
@@ -89,6 +89,7 @@
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlign.html">ButtonParagraphAlign</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
                                     <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
@@ -341,18 +342,50 @@
                             
                                             var cssClasses = &#x27;ae-toolbar-styles &#x27; + arrowBoxClasses;
                             
-                                            var buttons = this.getToolbarButtons(
-                                                currentSelection.buttons,
+                                            var buttons = currentSelection.buttons;
+                            
+                                            if (typeof buttons === &#x27;object&#x27; &amp;&amp; !Array.isArray(buttons)) {
+                                                buttons = buttons[this.props.editor.get(&#x27;mode&#x27;)] || buttons[&#x27;simple&#x27;];
+                                            }
+                            
+                                            var buttonsGroup = this.getToolbarButtonGroups(
+                                                buttons,
                                                 {
                                                     manualSelection: this.props.editorEvent ? this.props.editorEvent.data.manualSelection : null,
                                                     selectionType: currentSelection.name
                                                 }
                                             );
                             
+                                            var hasGroups = buttonsGroup.filter(function(button) {
+                                                return Array.isArray(button);
+                                            }).length &gt; 0;
+                            
+                                            var className = &#x27;ae-container&#x27;;
+                            
+                                            if (hasGroups) {
+                                                className += &#x27; ae-container-column&#x27;;
+                                            }
+                            
                                             return (
                                                 &lt;div aria-label={AlloyEditor.Strings.styles} className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus} onKeyDown={this.handleKey} role=&quot;toolbar&quot; tabIndex=&quot;-1&quot;&gt;
-                                                    &lt;div className=&quot;ae-container&quot;&gt;
-                                                        {buttons}
+                                                    &lt;div className={className}&gt;
+                                                        {
+                                                            buttonsGroup.map(function (value, index) {
+                                                                if (Array.isArray(value)) {
+                                                                    return (
+                                                                        &lt;div className=&quot;ae-row&quot; key={index.toString()}&gt;
+                                                                            {
+                                                                                value.map(function (button) {
+                                                                                    return button;
+                                                                                })
+                                                                            }
+                                                                        &lt;/div&gt;
+                                                                    );
+                                                                } else {
+                                                                    return value;
+                                                                }
+                                                            })
+                                                        }
                                                     &lt;/div&gt;
                                                 &lt;/div&gt;
                                             );

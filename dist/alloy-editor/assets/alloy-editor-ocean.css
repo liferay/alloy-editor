@@ -378,6 +378,10 @@
     .ae-ui .ae-container .ae-container:not(:last-child), .ae-ui .ae-container [class^=ae-container-]:not(:last-child), .ae-ui .ae-container .ae-button:not(:last-child), .ae-ui .ae-container .ae-toolbar-element:not(:last-child), .ae-ui .ae-container label:not(:last-child), .ae-ui [class^=ae-container-] .ae-container:not(:last-child), .ae-ui [class^=ae-container-] [class^=ae-container-]:not(:last-child), .ae-ui [class^=ae-container-] .ae-button:not(:last-child), .ae-ui [class^=ae-container-] .ae-toolbar-element:not(:last-child), .ae-ui [class^=ae-container-] label:not(:last-child) {
       margin-right: 10px; }
 
+.ae-ui .ae-container-column {
+  align-items: inherit;
+  flex-direction: column; }
+
 .ae-ui .ae-container-link-edit-browse {
   display: inherit; }
 
@@ -393,6 +397,11 @@
   .ae-ui .ae-container-edit-link IE10-PLUS::-ms-reveal, .ae-ui .ae-container-edit-link label, .ae-ui .ae-container-edit-table IE10-PLUS::-ms-reveal, .ae-ui .ae-container-edit-table label {
     top: 0;
     transform: translateY(0); }
+
+.ae-ui .ae-row {
+  display: flex; }
+  .ae-ui .ae-row:not(:first-child) {
+    margin-top: 8px; }
 
 .ae-ui .ae-container-input {
   -webkit-box-lines: single;
@@ -468,6 +477,9 @@
         top: 0;
         transform: translateY(0); }
 
+.ae-ui .ae-container-dropdown-xsmall {
+  width: 36px !important; }
+
 .ae-ui .ae-container-dropdown-small {
   width: 48px !important; }
 
@@ -494,7 +506,7 @@
   left: 0;
   padding: 4px;
   position: absolute;
-  z-index: 0;
+  z-index: 1;
   top: 34px; }
   .ae-ui .ae-dropdown .ae-list-header, .ae-ui [class^=ae-dropdown-] .ae-list-header {
     display: inline-block;
@@ -539,6 +551,18 @@
     top: -10000px; }
   .ae-ui .ae-camera .ae-camera-shoot {
     margin-top: 10px; }
+
+.ae-ui .ae-separator {
+  height: 24px;
+  margin-right: 10px;
+  position: relative; }
+  .ae-ui .ae-separator::after {
+    border-right: 1px solid white;
+    content: '';
+    height: 12px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); }
 
 /** GENERAL VARIABLES **/
 /**

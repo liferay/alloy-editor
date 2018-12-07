@@ -33,6 +33,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonLinkTargetEdit",
         "ButtonOrderedList",
         "ButtonOutdentBlock",
+        "ButtonParagraphAlign",
         "ButtonParagraphAlignLeft",
         "ButtonParagraphAlignRight",
         "ButtonParagraphCenter",

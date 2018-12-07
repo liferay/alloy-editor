@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/base/button-keystroke.js - alloyeditor</title>
+    <title>src/ui/react/src/components/buttons/button-paragraph-align.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -180,87 +180,172 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/base/button-keystroke.js</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-paragraph-align.jsx</code></h1>
                             </div>
                             
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            (function() {
-                                &#x27;use strict&#x27;;
+                            (function () {
+                            	&#x27;use strict&#x27;;
                             
-                                /**
-                                 * ButtonKeystroke is a mixin that provides a &#x60;keystroke&#x60; prop that allows configuring
-                                 * a function of the instance to be invoked upon the keystroke activation.
-                                 *
-                                 * @class ButtonKeystroke
-                                 */
-                                var ButtonKeystroke = {
-                                    // Allows validating props being passed to the component.
-                                    propTypes: {
-                                        /**
-                                         * The keystroke definition. An object with the following properties:
-                                         * - fn: The function to be executed
-                                         * - keys: The keystroke definition, as expected by http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke
-                                         * - name: The name for the CKEditor command that will be created. If empty,
-                                         * a random name will be created on the fly
-                                         *
-                                         * @instance
-                                         * @memberof ButtonKeystroke
-                                         * @property {Object} keystroke
-                                         */
-                                        keystroke: PropTypes.object.isRequired
-                                    },
+                            	/**
+                            	 * The ButtonParagraphAlign class provides functionality to work with table rows.
+                            	 *
+                            	 * @class ButtonParagraphAlign
+                            	 */
+                            	var ButtonParagraphAlign = createReactClass({
+                            			// Allows validating props being passed to the component.
+                            			propTypes: {
+                            					/**
+                            					 * List of the commands the button is able to handle.
+                            					 *
+                            					 * @instance
+                            					 * @memberof ButtonParagraphAlign
+                            					 * @property {Array} commands
+                            					 */
+                            					commands: PropTypes.arrayOf(PropTypes.object),
                             
-                                    /**
-                                     * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
-                                     *
-                                     * @instance
-                                     * @memberof ButtonKeystroke
-                                     * @method componentWillMount
-                                     */
-                                    componentWillMount: function() {
-                                        var nativeEditor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                                        var keystroke = this.props.keystroke;
+                            					/**
+                            					 * The editor instance where the component is being used.
+                            					 *
+                            					 * @instance
+                            					 * @memberof ButtonParagraphAlign
+                            					 * @property {Object} editor
+                            					 */
+                            					editor: PropTypes.object.isRequired,
                             
-                                        var commandName = keystroke.name || ((Math.random() * 1e9) &gt;&gt;&gt; 0).toString();
+                            					/**
+                            					 * Indicates whether the styles list is expanded or not.
+                            					 *
+                            					 * @instance
+                            					 * @memberof ButtonParagraphAlign
+                            					 * @property {Boolean} expanded
+                            					 */
+                            					expanded: PropTypes.bool,
                             
-                                        var command = nativeEditor.getCommand(commandName);
+                            					/**
+                            					 * The label that should be used for accessibility purposes.
+                            					 *
+                            					 * @instance
+                            					 * @memberof ButtonParagraphAlign
+                            					 * @property {String} label
+                            					 */
+                            					label: PropTypes.string,
                             
-                                        if (!command) {
-                                            command = new CKEDITOR.command(nativeEditor, {
-                                                exec: function(editor) {
-                                                        var keystrokeFn = keystroke.fn;
+                            					/**
+                            					 * The tabIndex of the button in its toolbar current state. A value other than -1
+                            					 * means that the button has focus and is the active element.
+                            					 *
+                            					 * @instance
+                            					 * @memberof ButtonParagraphAlign
+                            					 * @property {Number} tabIndex
+                            					 */
+                            					tabIndex: PropTypes.number,
                             
-                                                        if (AlloyEditor.Lang.isString(keystrokeFn)) {
-                                                            this[keystrokeFn].call(this, editor);
-                                                        } else if (AlloyEditor.Lang.isFunction(keystrokeFn)) {
-                                                            keystrokeFn.call(this, editor);
-                                                        }
-                                                    }.bind(this)
-                                                }
-                                            );
+                            					/**
+                            					 * Callback provided by the button host to notify when the styles list has been expanded.
+                            					 *
+                            					 * @instance
+                            					 * @memberof ButtonParagraphAlign
+                            					 * @property {Function} toggleDropdown
+                            					 */
+                            					toggleDropdown: PropTypes.func
+                            			},
                             
-                                            nativeEditor.addCommand(commandName, command);
-                                        }
+                            			// Lifecycle. Provides static properties to the widget.
+                            			statics: {
+                            					/**
+                            					 * The name which will be used as an alias of the button in the configuration.
+                            					 *
+                            					 * @default paragraphAlign
+                            					 * @memberof ButtonParagraphAlign
+                            					 * @property {String} key
+                            					 * @static
+                            					 */
+                            					key: &#x27;paragraphAlign&#x27;
+                            			},
                             
-                                        this._defaultKeystrokeCommand = nativeEditor.keystrokeHandler.keystrokes[keystroke.keys];
+                            			/**
+                            			 * Lifecycle. Renders the UI of the button.
+                            			 *
+                            			 * @instance
+                            			 * @memberof ButtonParagraphAlign
+                            			 * @method render
+                            			 * @return {Object} The content which should be rendered.
+                            			 */
+                            			render: function() {
+                            					var activeAlignment = AlloyEditor.Strings.alignLeft;
                             
-                                        nativeEditor.setKeystroke(keystroke.keys, commandName);
-                                    },
+                            					var buttonCommandsList;
+                            					var buttonCommandsListId;
                             
-                                    /**
-                                     * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
-                                     *
-                                     * @instance
-                                     * @memberof ButtonKeystroke
-                                     * @method componentWillUnmount
-                                     */
-                                    componentWillUnmount: function() {
-                                        this.props.editor.get(&#x27;nativeEditor&#x27;).setKeystroke(this.props.keystroke.keys, this._defaultKeystrokeCommand);
-                                    }
-                                };
+                            					if (this.props.expanded) {
+                            							buttonCommandsListId = ButtonParagraphAlign.key + &#x27;List&#x27;;
+                            							buttonCommandsList = &lt;AlloyEditor.ButtonCommandsList commands={this._getCommands()} editor={this.props.editor} listId={buttonCommandsListId} inlineIcons={false} onDismiss={this.props.toggleDropdown} /&gt;
+                            					}
                             
-                                AlloyEditor.ButtonKeystroke = ButtonKeystroke;
+                            					var editor = this.props.editor.get(&#x27;nativeEditor&#x27;);
+                            
+                            					var activeCommand = this._getCommands().filter(
+                            						alignment =&gt; {
+                            							var command = editor.getCommand(alignment.command);
+                            
+                            							return command ? command.state === CKEDITOR.TRISTATE_ON : false;
+                            						}
+                            					).pop();
+                            
+                            					var iconClassName = &#x60;ae-icon-${activeCommand.icon}&#x60;;
+                            
+                            					return (
+                            						&lt;div className=&quot;ae-container-dropdown ae-container-dropdown-xsmall ae-has-dropdown&quot;&gt;
+                            							&lt;button aria-expanded={this.props.expanded} aria-label={activeCommand.label} aria-owns={buttonCommandsListId} className=&quot;ae-toolbar-element&quot; onClick={this.props.toggleDropdown} role=&quot;combobox&quot; tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.row}&gt;
+                            								&lt;div className=&quot;ae-container&quot;&gt;
+                            									&lt;span className={iconClassName}&gt;&lt;/span&gt;
+                            									&lt;span className=&quot;ae-icon-arrow&quot;&gt;&lt;/span&gt;
+                            								&lt;/div&gt;
+                            							&lt;/button&gt;
+                            							{buttonCommandsList}
+                            						&lt;/div&gt;
+                            					);
+                            			},
+                            
+                            			/**
+                            			 * Returns a list of commands. If a list of commands was passed
+                            			 * as property &#x60;commands&#x60;, it will take a precedence over the default ones.
+                            			 *
+                            			 * @instance
+                            			 * @memberof ButtonParagraphAlign
+                            			 * @method _getCommands
+                            			 * @protected
+                            			 * @return {Array} The list of available commands.
+                            			 */
+                            			_getCommands: function () {
+                            					return this.props.commands || [
+                            							{
+                            									command: &#x27;justifyleft&#x27;,
+                            									icon: &#x27;align-left&#x27;,
+                            									label: AlloyEditor.Strings.alignLeft
+                            							},
+                            							{
+                            									command: &#x27;justifycenter&#x27;,
+                            									icon: &#x27;align-center&#x27;,
+                            									label: AlloyEditor.Strings.alignCenter
+                            							},
+                            							{
+                            									command: &#x27;justifyright&#x27;,
+                            									icon: &#x27;align-right&#x27;,
+                            									label: AlloyEditor.Strings.alignRight
+                            							},
+                            							{
+                            								command: &#x27;justifyblock&#x27;,
+                            								icon: &#x27;align-justified&#x27;,
+                            								label: AlloyEditor.Strings.alignJustify
+                            							}
+                            					];
+                            			}
+                            	});
+                            
+                            	AlloyEditor.Buttons[ButtonParagraphAlign.key] = AlloyEditor.ButtonParagraphAlign = ButtonParagraphAlign;
                             }());
                                 </pre>
                             </div>

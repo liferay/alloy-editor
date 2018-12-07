@@ -20,7 +20,7 @@
 
         <div class="ae-placeholder" contenteditable="true" data-placeholder="Write here the description" id="description"></div>
 
-        <div id="editable" contenteditable="true" data-placeholder="Write here the content">
+        <div id="editable1" contenteditable="true" data-placeholder="Write here the content">
             <p><strong>Apollo 11</strong> was the spaceflight that landed the first humans, Americans <a href="http://en.wikipedia.org/wiki/Neil_Armstrong">Neil Armstrong</a> and <a href="http://en.wikipedia.org/wiki/Buzz_Aldrin">Buzz Aldrin</a>, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the lunar surface 6 hours later on July 21 at 02:56 UTC.</p>
 
             <p>Armstrong spent about <s>three and a half</s> two and a half hours outside the spacecraft, Aldrin slightly less; and together they collected 47.5 pounds (21.5&nbsp;kg) of lunar material for return to Earth. A third member of the mission, <a href="http://en.wikipedia.org/wiki/Michael_Collins_(astronaut)">Michael Collins</a>, piloted the <a href="http://en.wikipedia.org/wiki/Apollo_Command/Service_Module">command</a> spacecraft alone in lunar orbit until Armstrong and Aldrin returned to it for the trip back to Earth.</p>
@@ -83,10 +83,29 @@
             <p style="text-align: right;"><small>Source: <a href="http://en.wikipedia.org/wiki/Apollo_11">Wikipedia.org</a></small></p>
         </div>
 
+        <h3>Full toolbar demo</h3>
+
+        <div id="editable2" contenteditable="true" placeholder="Write some content here too">
+            <p>Bacon ipsum dolor amet salami cow beef chuck pastrami prosciutto. Ground round landjaeger pancetta, cupim capicola turkey pastrami jowl pork shank chuck flank kevin. Sausage pastrami doner short loin burgdoggen spare ribs. Drumstick picanha pastrami ham hock ground round porchetta. Meatball hamburger cow turducken, flank jowl biltong kielbasa t-bone. Chicken tongue doner, picanha salami pork belly filet mignon brisket strip steak landjaeger venison.</p>
+
+            <p>Porchetta <strong>tenderloin doner</strong>, swine landjaeger chicken pork chop. Fatback ground round pork chop, ham hock andouille drumstick hamburger kielbasa brisket burgdoggen ribeye frankfurter. Beef ribs ham ball tip bacon chuck doner. Short ribs leberkas chuck sirloin tongue beef, andouille boudin. Short loin burgdoggen spare ribs jowl meatball.</p>
+
+            <blockquote>Ground round chicken meatball ham hock.</blockquote>
+
+            <p>Corned beef jowl biltong alcatra, picanha hamburger kevin cow venison shank chicken. Boudin tenderloin doner, leberkas venison alcatra ribeye brisket tail flank beef ribs pork. Chicken tenderloin cupim, doner flank alcatra meatball sirloin bacon jowl kielbasa t-bone. Beef ribs tail flank, biltong pork belly sausage porchetta doner tri-tip. Salami ball tip ribeye kevin short ribs pork capicola. Flank drumstick prosciutto bresaola corned beef short ribs meatball boudin.</p>
+
+            <p>Tri-tip shankle bacon landjaeger, flank hamburger picanha sausage tenderloin tongue pork chop meatball short ribs chicken. Shankle cupim shank ball tip turkey boudin biltong tongue ham hock short ribs pig pork chop. Pork chop ground round shankle jerky pork beef ribs biltong kielbasa. Meatloaf tri-tip ball tip venison, shoulder landjaeger short loin hamburger spare ribs pig strip steak. Pancetta meatball jowl tri-tip, bresaola doner pig shank corned beef venison pastrami shoulder.</p>
+
+            <p>Pork jowl drumstick t-bone tail, turkey rump kielbasa kevin ham hock. Meatball picanha chuck pork chop bacon ham flank spare ribs tri-tip sirloin pork. Tongue biltong cow, ham sausage corned beef kevin tenderloin <strong>alcatra capicola shank picanha</strong>. Ribeye beef ribs burgdoggen, shoulder ham cow cupim turkey sausage strip steak tongue chuck pork chop chicken pastrami. Corned beef tongue porchetta, jowl bresaola pork meatball frankfurter sirloin prosciutto shoulder pig drumstick.</p>
+        </div>
+
         <script>
             var editor1 = AlloyEditor.editable('description');
-            var editor2 = AlloyEditor.editable('editable');
+            var editor2 = AlloyEditor.editable('editable1');
             var editor3 = AlloyEditor.editable('headline');
+            var editor4 = AlloyEditor.editable('editable2', {
+                mode: 'full'
+            });
         </script>
 
         <div id="footer">

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.16</b>
+                        API Docs for Version: <b>1.5.17</b>
                     </p>
                 </li>
             </div>
@@ -89,6 +89,7 @@
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlign.html">ButtonParagraphAlign</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
                                     <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
@@ -195,6 +196,33 @@
                                  */
                                 var ToolbarButtons = {
                                     /**
+                                     * Analayses the current selection and returns the buttons or button groups to be rendered.
+                                     *
+                                     * @instance
+                                     * @method getToolbarButtonGroups
+                                     * @param {Array} buttons The buttons could be shown, prior to the state filtering.
+                                     * @param {Object} additionalProps Additional props that should be passed down to the buttons.
+                                     * @return {Array} An Array which contains the buttons or button groups that should be rendered.
+                                     */
+                                    getToolbarButtonGroups: function(buttons, additionalProps) {
+                                        var instance = this;
+                            
+                                        if (AlloyEditor.Lang.isFunction(buttons)) {
+                                            buttons = buttons.call(this) || [];
+                                        }
+                            
+                            
+                                        return buttons.reduce(function(list, button) {
+                                            if (Array.isArray(button)) {
+                                                list.push(instance.getToolbarButtons(button, additionalProps));
+                                                return list;
+                                            } else {
+                                                return instance.getToolbarButtons(buttons, additionalProps);
+                                            }
+                                        }, []);
+                                    },
+                            
+                                    /**
                                      * Analyzes the current selection and the buttons exclusive mode value to figure out which
                                      * buttons should be present in a given state.
                                      *
@@ -231,10 +259,10 @@
                                                     return button;
                                                 })
                                             )
-                                            .map(function(button) {
+                                            .map(function(button, index) {
                                                 var props = this.mergeExclusiveProps({
                                                     editor: this.props.editor,
-                                                    key: button.key,
+                                                    key: button.key !== &#x27;separator&#x27; ? button.key : &#x60;${button.key}-${index}&#x60;,
                                                     tabKey: button.key,
                                                     tabIndex: (this.props.trigger &amp;&amp; this.props.trigger.props.tabKey === button.key) ? 0 : -1,
                                                     trigger: this.props.trigger

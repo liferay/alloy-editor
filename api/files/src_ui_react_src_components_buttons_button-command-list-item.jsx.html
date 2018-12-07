@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.16</b>
+                        API Docs for Version: <b>1.5.17</b>
                     </p>
                 </li>
             </div>
@@ -89,6 +89,7 @@
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlign.html">ButtonParagraphAlign</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
                                     <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
@@ -239,8 +240,13 @@
                                      * @return {Object} The content which should be rendered.
                                      */
                                     render: function() {
+                                        var iconClassName = &#x60;ae-icon-${this.props.icon}&#x60;;
+                            
                                         return (
-                                            &lt;button aria-label={this.props.description} className={this._getClassName()} onClick={this.execCommand} tabIndex={this.props.tabIndex}&gt;{this.props.description}&lt;/button&gt;
+                                            &lt;button aria-label={this.props.description} className={this._getClassName()} onClick={this.execCommand} tabIndex={this.props.tabIndex}&gt;
+                                                {this.props.icon &amp;&amp; (&lt;span className={iconClassName}&gt;&lt;/span&gt;)}
+                                                {this.props.description}
+                                            &lt;/button&gt;
                                         );
                                     },
                             
@@ -254,11 +260,7 @@
                                      * @return {String} The class name of the Widget.
                                      */
                                     _getClassName: function() {
-                                        var className = &#x27;ae-toolbar-element&#x27;;
-                            
-                                        if (this.props.icon) {
-                                            className += &#x27; ae-icon-&#x27; + this.props.icon;
-                                        }
+                                        var className = &#x27;ae-container ae-toolbar-element&#x27;;
                             
                                         return className;
                                     }

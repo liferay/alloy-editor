@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>src/ui/react/src/components/base/button-keystroke.js - alloyeditor</title>
+    <title>src/ui/react/src/components/buttons/button-separator.jsx - alloyeditor</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
@@ -180,87 +180,53 @@
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
-                              <h1><small>File</small> <code>src/ui/react/src/components/base/button-keystroke.js</code></h1>
+                              <h1><small>File</small> <code>src/ui/react/src/components/buttons/button-separator.jsx</code></h1>
                             </div>
                             
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            (function() {
-                                &#x27;use strict&#x27;;
+                            (function () {
+                            	&#x27;use strict&#x27;;
                             
-                                /**
-                                 * ButtonKeystroke is a mixin that provides a &#x60;keystroke&#x60; prop that allows configuring
-                                 * a function of the instance to be invoked upon the keystroke activation.
-                                 *
-                                 * @class ButtonKeystroke
-                                 */
-                                var ButtonKeystroke = {
-                                    // Allows validating props being passed to the component.
-                                    propTypes: {
-                                        /**
-                                         * The keystroke definition. An object with the following properties:
-                                         * - fn: The function to be executed
-                                         * - keys: The keystroke definition, as expected by http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setKeystroke
-                                         * - name: The name for the CKEditor command that will be created. If empty,
-                                         * a random name will be created on the fly
-                                         *
-                                         * @instance
-                                         * @memberof ButtonKeystroke
-                                         * @property {Object} keystroke
-                                         */
-                                        keystroke: PropTypes.object.isRequired
-                                    },
+                            	/**
+                            	 * The Separator class renders a simple separator.
+                            	 *
+                            	 * @class ButtonBold
+                            	 * @uses ButtonCommand
+                            	 * @uses ButtonKeystroke
+                            	 * @uses ButtonStateClasses
+                            	 * @uses ButtonStyle
+                            	 */
+                            	var Separator = createReactClass({
+                            			// Lifecycle. Provides static properties to the widget.
+                            			statics: {
+                            					/**
+                            					 * The name which will be used as an alias of the separator in the configuration.
+                            					 *
+                            					 * @default |
+                            					 * @memberof Separator
+                            					 * @property {String} key
+                            					 * @static
+                            					 */
+                            					key: &#x27;separator&#x27;
+                            			},
                             
-                                    /**
-                                     * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
-                                     *
-                                     * @instance
-                                     * @memberof ButtonKeystroke
-                                     * @method componentWillMount
-                                     */
-                                    componentWillMount: function() {
-                                        var nativeEditor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                                        var keystroke = this.props.keystroke;
+                            			/**
+                            			 * Lifecycle. Renders the UI of the separator.
+                            			 *
+                            			 * @instance
+                            			 * @memberof Separator
+                            			 * @method render
+                            			 * @return {Object} The content which should be rendered.
+                            			 */
+                            			render: function() {
+                            					return (
+                            							&lt;span className=&quot;ae-separator&quot;&gt;&lt;/span&gt;
+                            					);
+                            			}
+                            	});
                             
-                                        var commandName = keystroke.name || ((Math.random() * 1e9) &gt;&gt;&gt; 0).toString();
-                            
-                                        var command = nativeEditor.getCommand(commandName);
-                            
-                                        if (!command) {
-                                            command = new CKEDITOR.command(nativeEditor, {
-                                                exec: function(editor) {
-                                                        var keystrokeFn = keystroke.fn;
-                            
-                                                        if (AlloyEditor.Lang.isString(keystrokeFn)) {
-                                                            this[keystrokeFn].call(this, editor);
-                                                        } else if (AlloyEditor.Lang.isFunction(keystrokeFn)) {
-                                                            keystrokeFn.call(this, editor);
-                                                        }
-                                                    }.bind(this)
-                                                }
-                                            );
-                            
-                                            nativeEditor.addCommand(commandName, command);
-                                        }
-                            
-                                        this._defaultKeystrokeCommand = nativeEditor.keystrokeHandler.keystrokes[keystroke.keys];
-                            
-                                        nativeEditor.setKeystroke(keystroke.keys, commandName);
-                                    },
-                            
-                                    /**
-                                     * Lifecycle. Invoked immediately before a component is unmounted from the DOM.
-                                     *
-                                     * @instance
-                                     * @memberof ButtonKeystroke
-                                     * @method componentWillUnmount
-                                     */
-                                    componentWillUnmount: function() {
-                                        this.props.editor.get(&#x27;nativeEditor&#x27;).setKeystroke(this.props.keystroke.keys, this._defaultKeystrokeCommand);
-                                    }
-                                };
-                            
-                                AlloyEditor.ButtonKeystroke = ButtonKeystroke;
+                            	AlloyEditor.Buttons[Separator.key] = AlloyEditor.Separator = Separator;
                             }());
                                 </pre>
                             </div>

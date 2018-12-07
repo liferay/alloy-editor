@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.16</b>
+                        API Docs for Version: <b>1.5.17</b>
                     </p>
                 </li>
             </div>
@@ -89,6 +89,7 @@
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlign.html">ButtonParagraphAlign</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
                                     <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
@@ -241,8 +242,11 @@
                                  * @return {Boolean} True, in all cases
                                  */
                                 var imageSelectionSetPosition = function(payload) {
-                                    if (payload.selectionData &amp;&amp; payload.selectionData.element) {
-                                        centerToolbar(this, payload.selectionData.element.getClientRect());
+                                    var selectionData = payload.selectionData ? payload.selectionData : payload.editorEvent ?
+                                        payload.editorEvent.data.selectionData : null;
+                            
+                                    if (selectionData &amp;&amp; selectionData.element) {
+                                        centerToolbar(this, selectionData.element.getClientRect());
                             
                                         return true;
                                     }
