@@ -42,6 +42,10 @@
     }
 }
 
+.ae-container-dropdown-xsmall {
+    width: $container-dropdown-xsmall-width-multiplier * $container-dropdown-base-width !important;
+}
+
 .ae-container-dropdown-small {
     width: $container-dropdown-small-width-multiplier * $container-dropdown-base-width !important;
 }
