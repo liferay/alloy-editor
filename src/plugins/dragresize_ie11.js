@@ -27,6 +27,8 @@
                 // wrapper is displayed property.
                 'line-height:0' +
             '}' +
+            '.cke_editable.cke_image_ne, .cke_editable.cke_image_ne *{cursor:ne-resize !important}' +
+            '.cke_editable.cke_image_nw, .cke_editable.cke_image_nw *{cursor:nw-resize !important}' +
             '.cke_editable.cke_image_sw, .cke_editable.cke_image_sw *{cursor:sw-resize !important}' +
             '.cke_editable.cke_image_se, .cke_editable.cke_image_se *{cursor:se-resize !important}' +
             '.cke_image_resizer{' +
@@ -34,8 +36,6 @@
                 'position:absolute;' +
                 'width:10px;' +
                 'height:10px;' +
-                'bottom:-5px;' +
-                'right:-5px;' +
                 'background:#000;' +
                 'outline:1px solid #fff;' +
                 // Prevent drag handler from being misplaced (#11207).
@@ -47,11 +47,33 @@
                 'display:inline-block;' +
                 'line-height:0;' +
             '}' +
-            // Bottom-left corner style of the resizer.
-            '.cke_image_resizer.cke_image_resizer_left{' +
+            // Top-right corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_ne{' +
+                'cursor:ne-resize;' +
+                'left:auto;' +
+                'right:-5px;' +
+                'top:-5px;' +
+            '}' +
+            // Top-left corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_nw{' +
+                'cursor:nw-resize;' +    
+                'left:-5px;' +
                 'right:auto;' +
-                'left:-25px;' +
+                'top:-5px;' +
+            '}' +
+            // Bottom-right corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_se{' +
+                'bottom:-5px;' +
+                'cursor:se-resize;' +
+                'left:auto;' +
+                'right:-5px;' +
+            '}' +
+            // Bottom-left corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_sw{' +
+                'bottom:-5px;' +
                 'cursor:sw-resize;' +
+                'left:-5px;' +
+                'right:auto;' +
             '}' +
             '.cke_widget_wrapper:hover .cke_image_resizer,' +
             '.cke_image_resizer.cke_image_resizing{' +
@@ -1109,9 +1131,32 @@
             doc = editor.document,
 
             // Store the resizer in a widget for testing (#11004).
-            resizer = widget.resizer = doc.createElement( 'span' );
+            resizer = widget.resizer = doc.createElement( 'span' ),
 
-        resizer.addClass( 'cke_image_resizer' );
+            // Create resizer for each corner (NE, NW, SE, SW)
+            resizer_ne = doc.createElement( 'span' ),
+            resizer_nw = doc.createElement( 'span' ),
+            resizer_se = doc.createElement( 'span' ),
+            resizer_sw = doc.createElement( 'span' );
+
+        resizer_ne.addClass( 'cke_image_resizer' );
+        resizer_ne.addClass( 'cke_image_resizer_ne' );
+
+        resizer_nw.addClass( 'cke_image_resizer' );
+        resizer_nw.addClass( 'cke_image_resizer_nw' );
+
+        resizer_se.addClass( 'cke_image_resizer' );
+        resizer_se.addClass( 'cke_image_resizer_se' );
+
+        resizer_sw.addClass( 'cke_image_resizer' );
+        resizer_sw.addClass( 'cke_image_resizer_sw' );
+
+        // Add each directional resizer as a child of resizer
+        resizer.append( resizer_ne );
+        resizer.append( resizer_nw );
+        resizer.append( resizer_se );
+        resizer.append( resizer_sw );
+
         //resizer.setAttribute( 'title', editor.lang.ae_dragresize_ie11.resizer );
         resizer.append( new CKEDITOR.dom.text( '\u200b', doc ) );
 
@@ -1138,11 +1183,6 @@
         resizer.on( 'mousedown', function( evt ) {
             var image = widget.parts.image,
 
-                // "factor" can be either 1 or -1. I.e.: For right-aligned images, we need to
-                // subtract the difference to get proper width, etc. Without "factor",
-                // resizer starts working the opposite way.
-                factor = widget.data.align == 'right' ? -1 : 1,
-
                 // The x-coordinate of the mouse relative to the screen
                 // when button gets pressed.
                 startX = evt.data.$.screenX,
@@ -1155,11 +1195,33 @@
 
                 listeners = [],
 
-                // A class applied to editable during resizing.
-                cursorClass = 'cke_image_s' + ( !~factor ? 'w' : 'e' ),
+                target = evt.data.getTarget(),
 
-                nativeEvt, newWidth, newHeight, updateData,
-                moveDiffX, moveDiffY, moveRatio;
+                factorX, factorY, moveDiffX, moveDiffY,
+                nativeEvt, newHeight, newWidth, updateData;
+
+            // "factorX" and "factorY" can be either 1 or -1. I.e.: We need to
+            // add/subtract the difference to get proper width, etc. Without "factorX"
+            // and "factorY", resizer starts working the opposite way.
+            if (target.hasClass( 'cke_image_resizer_ne' )) {
+                factorX = 1;
+                factorY = 1;
+            }
+            else if (target.hasClass( 'cke_image_resizer_nw' )) {
+                factorX = -1;
+                factorY = 1;
+            }
+            else if (target.hasClass( 'cke_image_resizer_se' )) {
+                factorX = 1;
+                factorY = -1;
+            }
+            else if (target.hasClass( 'cke_image_resizer_sw' )) {
+                factorX = -1;
+                factorY = -1;
+            }
+
+            // A class applied to editable during resizing.
+            var cursorClass = 'cke_image_' + ( !~factorY ? 's' : 'n' ) + ( !~factorX ? 'w' : 'e' );
 
             // Save the undo snapshot first: before resizing.
             editor.fire( 'saveSnapshot' );
@@ -1193,15 +1255,15 @@
                 }
             }
 
-            // Calculate with first, and then adjust height, preserving ratio.
+            // Calculate width first, and then adjust height, preserving ratio.
             function adjustToX() {
-                newWidth = startWidth + factor * moveDiffX;
+                newWidth = startWidth + factorX * moveDiffX;
                 newHeight = Math.round( newWidth / ratio );
             }
 
             // Calculate height first, and then adjust width, preserving ratio.
             function adjustToY() {
-                newHeight = startHeight - moveDiffY;
+                newHeight = startHeight + factorY * moveDiffY;
                 newWidth = Math.round( newHeight * ratio );
             }
 
@@ -1231,72 +1293,29 @@
                 // This is the aspect ratio of the move difference.
                 moveRatio = Math.abs( moveDiffX / moveDiffY );
 
-                // Left, center or none-aligned widget.
-                if ( factor == 1 ) {
+                // Resize with NE, SE drag handles
+                if ( factorX == 1 ) {
                     if ( moveDiffX <= 0 ) {
-                        // Case: IV.
-                        if ( moveDiffY <= 0 )
-                            adjustToX();
-
-                        // Case: I.
-                        else {
-                            if ( moveRatio >= ratio )
-                                adjustToX();
-                            else
-                                adjustToY();
-                        }
+                        adjustToY();
                     } else {
-                        // Case: III.
-                        if ( moveDiffY <= 0 ) {
-                            if ( moveRatio >= ratio )
-                                adjustToY();
-                            else
-                                adjustToX();
-                        }
-
-                        // Case: II.
-                        else {
-                            adjustToY();
-                        }
+                        adjustToX();
                     }
                 }
-
-                // Right-aligned widget. It mirrors behaviours, so I becomes II,
-                // IV becomes III and vice-versa.
+                // Resize with NW, SW drag handles
                 else {
                     if ( moveDiffX <= 0 ) {
-                        // Case: IV.
-                        if ( moveDiffY <= 0 ) {
-                            if ( moveRatio >= ratio )
-                                adjustToY();
-                            else
-                                adjustToX();
-                        }
-
-                        // Case: I.
-                        else {
-                            adjustToY();
-                        }
+                        adjustToX();
                     } else {
-                        // Case: III.
-                        if ( moveDiffY <= 0 )
-                            adjustToX();
-
-                        // Case: II.
-                        else {
-                            if ( moveRatio >= ratio ) {
-                                adjustToX();
-                            } else {
-                                adjustToY();
-                            }
-                        }
+                        adjustToY();
                     }
                 }
 
                 // Don't update attributes if less than 10.
                 // This is to prevent images to visually disappear.
                 if ( newWidth >= 15 && newHeight >= 15 ) {
-                    image.setAttributes( { width: newWidth, height: newHeight } );
+                    image.$.style.width = newWidth + 'px';
+                    image.$.style.height = newHeight + 'px';
+
                     updateData = true;
                 } else {
                     updateData = false;
@@ -1316,7 +1335,8 @@
                 resizer.removeClass( 'cke_image_resizing' );
 
                 if ( updateData ) {
-                    widget.setData( { width: newWidth, height: newHeight } );
+                    widget.element.$.style.width = newWidth + 'px';
+                    widget.element.$.style.height = newHeight + 'px';
 
                     // Save another undo snapshot: after resizing.
                     editor.fire( 'saveSnapshot' );
@@ -1325,11 +1345,6 @@
                 // Don't update data twice or more.
                 updateData = false;
             }
-        } );
-
-        // Change the position of the widget resizer when data changes.
-        widget.on( 'data', function() {
-            resizer[ widget.data.align == 'right' ? 'addClass' : 'removeClass' ]( 'cke_image_resizer_left' );
         } );
     }
 

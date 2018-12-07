@@ -878,10 +878,9 @@
                 // Don't update attributes if less than 10.
                 // This is to prevent images to visually disappear.
                 if (newWidth >= 15 && (newHeight >= 15 || newHeight === 'auto')) {
-                    image.setAttributes({
-                        width: newWidth,
-                        height: newHeight
-                    });
+                    image.$.style.width = newWidth + 'px';
+                    image.$.style.height = newHeight + 'px';
+
                     updateData = true;
                 } else {
                     updateData = false;
@@ -902,10 +901,8 @@
                 resizer.removeClass('cke_image_resizing');
 
                 if (updateData) {
-                    widget.setData({
-                        height: newHeight,
-                        width: newWidth
-                    });
+                    widget.element.$.style.width = newWidth + 'px';
+                    widget.element.$.style.height = newHeight + 'px';
 
                     // Save another undo snapshot: after resizing.
                     editor.fire('saveSnapshot');

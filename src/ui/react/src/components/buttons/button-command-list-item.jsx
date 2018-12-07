@@ -53,8 +53,13 @@
          * @return {Object} The content which should be rendered.
          */
         render: function() {
+            var iconClassName = `ae-icon-${this.props.icon}`;
+
             return (
-                <button aria-label={this.props.description} className={this._getClassName()} onClick={this.execCommand} tabIndex={this.props.tabIndex}>{this.props.description}</button>
+                <button aria-label={this.props.description} className={this._getClassName()} onClick={this.execCommand} tabIndex={this.props.tabIndex}>
+                    {this.props.icon && (<span className={iconClassName}></span>)}
+                    {this.props.description}
+                </button>
             );
         },
 
@@ -68,11 +73,7 @@
          * @return {String} The class name of the Widget.
          */
         _getClassName: function() {
-            var className = 'ae-toolbar-element';
-
-            if (this.props.icon) {
-                className += ' ae-icon-' + this.props.icon;
-            }
+            var className = 'ae-container ae-toolbar-element';
 
             return className;
         }
