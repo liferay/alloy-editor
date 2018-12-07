@@ -350,8 +350,22 @@
                 validator: AlloyEditor.Lang.isString,
                 value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,' +
                     'ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize,' +
-                    'ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge',
+                    'ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge,font,colorbutton',
                 writeOnce: true
+            },
+
+            /**
+             * Specifies the "mode" for alloy editor
+             * @memberof Core
+             * @instance
+             * @property mode
+             * @default 'simple'
+             * @writeOnce
+             * @type {String}
+             */
+            mode: {
+                validator: AlloyEditor.Lang.isString,
+                value: 'simple'
             },
 
             /**

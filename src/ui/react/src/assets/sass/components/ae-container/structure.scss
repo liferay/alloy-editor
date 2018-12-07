@@ -24,6 +24,11 @@
     }
 }
 
+.ae-container-column {
+    align-items: inherit;
+    flex-direction: column;
+}
+
 .ae-container-link-edit-browse {
     display: inherit;
 }
@@ -45,5 +50,13 @@
     #{$IE10-PLUS}::-ms-reveal, label {
         top: 0;
         transform: translateY(0);
+    }
+}
+
+.ae-row {
+    display: flex;
+
+    &:not(:first-child) {
+        margin-top: 8px;
     }
 }
