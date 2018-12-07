@@ -65,4 +65,8 @@ To test your installation, just call the following page at your website:
 
 For example:
 
+<<<<<<< HEAD
 	http://www.example.com/ckeditor/samples/index.html
+=======
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/alloy-editor.svg)](https://saucelabs.com/u/alloy-editor)
+>>>>>>> ffe61125... Build Files (auto-generated)

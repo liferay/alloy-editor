@@ -109,6 +109,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -194,6 +195,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.16
 >>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
+=======
+ * AlloyEditor v1.5.17
+>>>>>>> ffe61125... Build Files (auto-generated)
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29544,10 +29548,9 @@ CKEDITOR.config.image2_captionedClass = 'image';
                 // Don't update attributes if less than 10.
                 // This is to prevent images to visually disappear.
                 if (newWidth >= 15 && (newHeight >= 15 || newHeight === 'auto')) {
-                    image.setAttributes({
-                        width: newWidth,
-                        height: newHeight
-                    });
+                    image.$.style.width = newWidth + 'px';
+                    image.$.style.height = newHeight + 'px';
+
                     updateData = true;
                 } else {
                     updateData = false;
@@ -29568,10 +29571,8 @@ CKEDITOR.config.image2_captionedClass = 'image';
                 resizer.removeClass('cke_image_resizing');
 
                 if (updateData) {
-                    widget.setData({
-                        height: newHeight,
-                        width: newWidth
-                    });
+                    widget.element.$.style.width = newWidth + 'px';
+                    widget.element.$.style.height = newHeight + 'px';
 
                     // Save another undo snapshot: after resizing.
                     editor.fire('saveSnapshot');
@@ -29699,11 +29700,17 @@ CKEDITOR.config.image2_captionedClass = 'image';
             CKEDITOR.addCss('.cke_image_nocaption{' +
             // This is to remove unwanted space so resize
             // wrapper is displayed property.
-            'line-height:0' + '}' + '.cke_editable.cke_image_sw, .cke_editable.cke_image_sw *{cursor:sw-resize !important}' + '.cke_editable.cke_image_se, .cke_editable.cke_image_se *{cursor:se-resize !important}' + '.cke_image_resizer{' + 'display:none;' + 'position:absolute;' + 'width:10px;' + 'height:10px;' + 'bottom:-5px;' + 'right:-5px;' + 'background:#000;' + 'outline:1px solid #fff;' +
+            'line-height:0' + '}' + '.cke_editable.cke_image_ne, .cke_editable.cke_image_ne *{cursor:ne-resize !important}' + '.cke_editable.cke_image_nw, .cke_editable.cke_image_nw *{cursor:nw-resize !important}' + '.cke_editable.cke_image_sw, .cke_editable.cke_image_sw *{cursor:sw-resize !important}' + '.cke_editable.cke_image_se, .cke_editable.cke_image_se *{cursor:se-resize !important}' + '.cke_image_resizer{' + 'display:none;' + 'position:absolute;' + 'width:10px;' + 'height:10px;' + 'background:#000;' + 'outline:1px solid #fff;' +
             // Prevent drag handler from being misplaced (#11207).
             'line-height:0;' + 'cursor:se-resize;' + '}' + '.cke_image_resizer_wrapper{' + 'position:relative;' + 'display:inline-block;' + 'line-height:0;' + '}' +
+            // Top-right corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_ne{' + 'cursor:ne-resize;' + 'left:auto;' + 'right:-5px;' + 'top:-5px;' + '}' +
+            // Top-left corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_nw{' + 'cursor:nw-resize;' + 'left:-5px;' + 'right:auto;' + 'top:-5px;' + '}' +
+            // Bottom-right corner style of the resizer.
+            '.cke_image_resizer.cke_image_resizer_se{' + 'bottom:-5px;' + 'cursor:se-resize;' + 'left:auto;' + 'right:-5px;' + '}' +
             // Bottom-left corner style of the resizer.
-            '.cke_image_resizer.cke_image_resizer_left{' + 'right:auto;' + 'left:-25px;' + 'cursor:sw-resize;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
+            '.cke_image_resizer.cke_image_resizer_sw{' + 'bottom:-5px;' + 'cursor:sw-resize;' + 'left:-5px;' + 'right:auto;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
             // Expand widget wrapper when linked inline image.
             '.cke_widget_wrapper>a{' + 'display:inline-block' + '}');
         },
@@ -30880,9 +30887,33 @@ var _buttonCommandsList2 = _interopRequireDefault(_buttonCommandsList);
 
 
         // Store the resizer in a widget for testing (#11004).
-        resizer = widget.resizer = doc.createElement('span');
+        resizer = widget.resizer = doc.createElement('span'),
 
-        resizer.addClass('cke_image_resizer');
+
+        // Create resizer for each corner (NE, NW, SE, SW)
+        resizer_ne = doc.createElement('span'),
+            resizer_nw = doc.createElement('span'),
+            resizer_se = doc.createElement('span'),
+            resizer_sw = doc.createElement('span');
+
+        resizer_ne.addClass('cke_image_resizer');
+        resizer_ne.addClass('cke_image_resizer_ne');
+
+        resizer_nw.addClass('cke_image_resizer');
+        resizer_nw.addClass('cke_image_resizer_nw');
+
+        resizer_se.addClass('cke_image_resizer');
+        resizer_se.addClass('cke_image_resizer_se');
+
+        resizer_sw.addClass('cke_image_resizer');
+        resizer_sw.addClass('cke_image_resizer_sw');
+
+        // Add each directional resizer as a child of resizer
+        resizer.append(resizer_ne);
+        resizer.append(resizer_nw);
+        resizer.append(resizer_se);
+        resizer.append(resizer_sw);
+
         //resizer.setAttribute( 'title', editor.lang.ae_dragresize_ie11.resizer );
         resizer.append(new CKEDITOR.dom.text('\u200B', doc));
 
@@ -31026,12 +31057,6 @@ Object.defineProperty(exports, "__esModule", {
             var image = widget.parts.image,
 
 
-            // "factor" can be either 1 or -1. I.e.: For right-aligned images, we need to
-            // subtract the difference to get proper width, etc. Without "factor",
-            // resizer starts working the opposite way.
-            factor = widget.data.align == 'right' ? -1 : 1,
-
-
             // The x-coordinate of the mouse relative to the screen
             // when button gets pressed.
             startX = evt.data.$.screenX,
@@ -31043,19 +31068,41 @@ Object.defineProperty(exports, "__esModule", {
                 startHeight = image.$.clientHeight,
                 ratio = startWidth / startHeight,
                 listeners = [],
-
-
-            // A class applied to editable during resizing.
-            cursorClass = 'cke_image_s' + (!~factor ? 'w' : 'e'),
-                nativeEvt,
-                newWidth,
-                newHeight,
-                updateData,
+                target = evt.data.getTarget(),
+                factorX,
+                factorY,
                 moveDiffX,
                 moveDiffY,
+<<<<<<< HEAD
                 moveRatio;
 <<<<<<< HEAD
 >>>>>>> 2c0a76e4... Build Files (auto-generated)
+=======
+                nativeEvt,
+                newHeight,
+                newWidth,
+                updateData;
+
+            // "factorX" and "factorY" can be either 1 or -1. I.e.: We need to
+            // add/subtract the difference to get proper width, etc. Without "factorX"
+            // and "factorY", resizer starts working the opposite way.
+            if (target.hasClass('cke_image_resizer_ne')) {
+                factorX = 1;
+                factorY = 1;
+            } else if (target.hasClass('cke_image_resizer_nw')) {
+                factorX = -1;
+                factorY = 1;
+            } else if (target.hasClass('cke_image_resizer_se')) {
+                factorX = 1;
+                factorY = -1;
+            } else if (target.hasClass('cke_image_resizer_sw')) {
+                factorX = -1;
+                factorY = -1;
+            }
+
+            // A class applied to editable during resizing.
+            var cursorClass = 'cke_image_' + (!~factorY ? 's' : 'n') + (!~factorX ? 'w' : 'e');
+>>>>>>> ffe61125... Build Files (auto-generated)
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -31128,15 +31175,15 @@ var ButtonTableEdit = function (_React$Component) {
                 newWidth = Math.round(newHeight * ratio);
             }
 
-            // Calculate with first, and then adjust height, preserving ratio.
+            // Calculate width first, and then adjust height, preserving ratio.
             function adjustToX() {
-                newWidth = startWidth + factor * moveDiffX;
+                newWidth = startWidth + factorX * moveDiffX;
                 newHeight = Math.round(newWidth / ratio);
             }
 
             // Calculate height first, and then adjust width, preserving ratio.
             function adjustToY() {
-                newHeight = startHeight - moveDiffY;
+                newHeight = startHeight + factorY * moveDiffY;
                 newWidth = Math.round(newHeight * ratio);
             }
 
@@ -31200,6 +31247,7 @@ var ButtonTableEdit = function (_React$Component) {
          * @protected
          */
 
+<<<<<<< HEAD
     }, {
         key: '_createTable',
         value: function _createTable() {
@@ -31225,15 +31273,14 @@ var ButtonTableEdit = function (_React$Component) {
 =======
                 // Left, center or none-aligned widget.
                 if (factor == 1) {
+=======
+                // Resize with NE, SE drag handles
+                if (factorX == 1) {
+>>>>>>> ffe61125... Build Files (auto-generated)
                     if (moveDiffX <= 0) {
-                        // Case: IV.
-                        if (moveDiffY <= 0) adjustToX();
-
-                        // Case: I.
-                        else {
-                                if (moveRatio >= ratio) adjustToX();else adjustToY();
-                            }
+                        adjustToY();
                     } else {
+<<<<<<< HEAD
                         // Case: III.
                         if (moveDiffY <= 0) {
                             if (moveRatio >= ratio) adjustToY();else adjustToX();
@@ -31244,41 +31291,26 @@ var ButtonTableEdit = function (_React$Component) {
                         else {
                                 adjustToY();
                             }
+=======
+                        adjustToX();
+>>>>>>> ffe61125... Build Files (auto-generated)
                     }
                 }
-
-                // Right-aligned widget. It mirrors behaviours, so I becomes II,
-                // IV becomes III and vice-versa.
+                // Resize with NW, SW drag handles
                 else {
                         if (moveDiffX <= 0) {
-                            // Case: IV.
-                            if (moveDiffY <= 0) {
-                                if (moveRatio >= ratio) adjustToY();else adjustToX();
-                            }
-
-                            // Case: I.
-                            else {
-                                    adjustToY();
-                                }
+                            adjustToX();
                         } else {
-                            // Case: III.
-                            if (moveDiffY <= 0) adjustToX();
-
-                            // Case: II.
-                            else {
-                                    if (moveRatio >= ratio) {
-                                        adjustToX();
-                                    } else {
-                                        adjustToY();
-                                    }
-                                }
+                            adjustToY();
                         }
                     }
 
                 // Don't update attributes if less than 10.
                 // This is to prevent images to visually disappear.
                 if (newWidth >= 15 && newHeight >= 15) {
-                    image.setAttributes({ width: newWidth, height: newHeight });
+                    image.$.style.width = newWidth + 'px';
+                    image.$.style.height = newHeight + 'px';
+
                     updateData = true;
                 } else {
                     updateData = false;
@@ -31315,16 +31347,22 @@ var ButtonTableEdit = function (_React$Component) {
                         var region = element.getClientRect();
 =======
                 if (updateData) {
+<<<<<<< HEAD
                     widget.setData({ width: newWidth, height: newHeight });
 <<<<<<< HEAD
 >>>>>>> 2c0a76e4... Build Files (auto-generated)
 =======
 >>>>>>> 43bf4eea96ff96301112a7c1d858efbf0086149b
+=======
+                    widget.element.$.style.width = newWidth + 'px';
+                    widget.element.$.style.height = newHeight + 'px';
+>>>>>>> ffe61125... Build Files (auto-generated)
 
                         var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
                         region.left -= scrollPosition.x;
                         region.top += scrollPosition.y;
 
+<<<<<<< HEAD
                         region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
 
                         editor.fire('editorInteraction', {
@@ -31336,6 +31374,10 @@ var ButtonTableEdit = function (_React$Component) {
                         });
                     }
                 }
+=======
+                // Don't update data twice or more.
+                updateData = false;
+>>>>>>> ffe61125... Build Files (auto-generated)
             }
         });
     }
@@ -34678,8 +34720,10 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
      * @return {Boolean} True, in all cases
      */
     var imageSelectionSetPosition = function imageSelectionSetPosition(payload) {
-        if (payload.selectionData && payload.selectionData.element) {
-            centerToolbar(this, payload.selectionData.element.getClientRect());
+        var selectionData = payload.selectionData ? payload.selectionData : payload.editorEvent ? payload.editorEvent.data.selectionData : null;
+
+        if (selectionData && selectionData.element) {
+            centerToolbar(this, selectionData.element.getClientRect());
 
             return true;
         }
@@ -34810,7 +34854,10 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
         test: AlloyEditor.SelectionTest.image
     }, {
         name: 'text',
-        buttons: ['styles', 'bold', 'italic', 'underline', 'link', 'twitter'],
+        buttons: {
+            full: [['Font', 'FontSize', 'separator', 'bold', 'italic', 'underline', 'strike', 'separator', 'link'], ['paragraphAlign', 'separator', 'ul', 'ol', 'separator', 'h1', 'h2', 'separator', 'indentBlock', 'outdentBlock', 'separator', 'TextColor', 'BGColor', 'separator', 'code', 'quote', 'separator', 'removeFormat']],
+            simple: ['styles', 'bold', 'italic', 'underline', 'link']
+        },
         test: AlloyEditor.SelectionTest.text
     }, {
         name: 'table',
@@ -35273,6 +35320,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (typeof attrs === 'string') {
                 var uri = instance._getCompleteURI(attrs);
 
+<<<<<<< HEAD
                 link.setAttributes({
                     'data-cke-saved-href': uri,
                     href: uri
@@ -35281,6 +35329,52 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 var removeAttrs = [];
 
                 var setAttrs = {};
+=======
+            /**
+             * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
+             * make AlloyEditor to work properly.
+             *
+             * @memberof Core
+             * @instance
+             * @property extraPlugins
+             * @default 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink'
+             * @writeOnce
+             * @type {String}
+             */
+            extraPlugins: {
+                validator: AlloyEditor.Lang.isString,
+                value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,' + 'ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize,' + 'ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge,font,colorbutton',
+                writeOnce: true
+            },
+
+            /**
+             * Specifies the "mode" for alloy editor
+             * @memberof Core
+             * @instance
+             * @property mode
+             * @default 'simple'
+             * @writeOnce
+             * @type {String}
+             */
+            mode: {
+                validator: AlloyEditor.Lang.isString,
+                value: 'simple'
+            },
+
+            /**
+             * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
+             *
+             * @memberof Core
+             * @instance
+             * @property nativeEditor
+             * @readOnly
+             * @type {Object}
+             */
+            nativeEditor: {
+                getter: '_getNativeEditor',
+                readOnly: true
+            },
+>>>>>>> ffe61125... Build Files (auto-generated)
 
                 Object.keys(attrs).forEach(function (key) {
                     if (attrs[key] === null) {
@@ -35692,15 +35786,98 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
         /**
+<<<<<<< HEAD
          * Returns true if the current selection is empty, false otherwise.
+=======
+         * Analayses the current selection and returns the buttons or button groups to be rendered.
+         *
+         * @instance
+         * @method getToolbarButtonGroups
+         * @param {Array} buttons The buttons could be shown, prior to the state filtering.
+         * @param {Object} additionalProps Additional props that should be passed down to the buttons.
+         * @return {Array} An Array which contains the buttons or button groups that should be rendered.
+         */
+        getToolbarButtonGroups: function getToolbarButtonGroups(buttons, additionalProps) {
+            var instance = this;
+
+            if (AlloyEditor.Lang.isFunction(buttons)) {
+                buttons = buttons.call(this) || [];
+            }
+
+            return buttons.reduce(function (list, button) {
+                if (Array.isArray(button)) {
+                    list.push(instance.getToolbarButtons(button, additionalProps));
+                    return list;
+                } else {
+                    return instance.getToolbarButtons(buttons, additionalProps);
+                }
+            }, []);
+        },
+
+        /**
+         * Analyzes the current selection and the buttons exclusive mode value to figure out which
+         * buttons should be present in a given state.
+>>>>>>> ffe61125... Build Files (auto-generated)
          *
          * @instance
          * @memberof SelectionRegion
          * @method isSelectionEmpty
          * @return {Boolean} Returns true if the current selection is empty, false otherwise.
          */
+<<<<<<< HEAD
         isSelectionEmpty: function isSelectionEmpty() {
             var ranges;
+=======
+        getToolbarButtons: function getToolbarButtons(buttons, additionalProps) {
+            var buttonProps = {};
+
+            var nativeEditor = this.props.editor.get('nativeEditor');
+            var buttonCfg = nativeEditor.config.buttonCfg || {};
+
+            if (AlloyEditor.Lang.isFunction(buttons)) {
+                buttons = buttons.call(this) || [];
+            }
+
+            var toolbarButtons = this.filterExclusive(buttons.filter(function (button) {
+                return button && (AlloyEditor.Buttons[button] || AlloyEditor.Buttons[button.name]);
+            }).map(function (button) {
+                if (AlloyEditor.Lang.isString(button)) {
+                    buttonProps[button] = buttonCfg[button];
+                    button = AlloyEditor.Buttons[button];
+                } else if (AlloyEditor.Lang.isString(button.name)) {
+                    buttonProps[AlloyEditor.Buttons[button.name].key] = CKEDITOR.tools.merge(buttonCfg[button], button.cfg);
+                    button = AlloyEditor.Buttons[button.name];
+                }
+
+                return button;
+            })).map(function (button, index) {
+                var props = this.mergeExclusiveProps({
+                    editor: this.props.editor,
+                    key: button.key !== 'separator' ? button.key : button.key + '-' + index,
+                    tabKey: button.key,
+                    tabIndex: this.props.trigger && this.props.trigger.props.tabKey === button.key ? 0 : -1,
+                    trigger: this.props.trigger
+                }, button.key);
+
+                props = this.mergeDropdownProps(props, button.key);
+
+                if (additionalProps) {
+                    props = CKEDITOR.tools.merge(props, additionalProps);
+                }
+
+                props = CKEDITOR.tools.merge(props, buttonProps[button.key]);
+
+                return React.createElement(button, props);
+            }, this);
+
+            return toolbarButtons;
+        }
+    };
+
+    AlloyEditor.ToolbarButtons = ToolbarButtons;
+})();
+'use strict';
+>>>>>>> ffe61125... Build Files (auto-generated)
 
             var selection = this.getSelection();
 
@@ -37136,6 +37313,7 @@ var Lang = {
     isObject: function isObject(value) {
         var valueType = typeof value === 'undefined' ? 'undefined' : _typeof(value);
 
+<<<<<<< HEAD
         return value && (valueType === 'object' || Lang.isFunction(value));
     },
 
@@ -37165,6 +37343,38 @@ var Lang = {
      */
     mix: function mix(receiver, supplier) {
         var hasOwnProperty = Object.prototype.hasOwnProperty;
+=======
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @instance
+         * @memberof ButtonCommandListItem
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            var iconClassName = 'ae-icon-' + this.props.icon;
+
+            return React.createElement(
+                'button',
+                { 'aria-label': this.props.description, className: this._getClassName(), onClick: this.execCommand, tabIndex: this.props.tabIndex },
+                this.props.icon && React.createElement('span', { className: iconClassName }),
+                this.props.description
+            );
+        },
+
+        /**
+         * Returns the class name of Widget.
+         *
+         * @instance
+         * @memberof ButtonCommandListItem
+         * @method _getClassName
+         * @protected
+         * @return {String} The class name of the Widget.
+         */
+        _getClassName: function _getClassName() {
+            var className = 'ae-container ae-toolbar-element';
+>>>>>>> ffe61125... Build Files (auto-generated)
 
         for (var key in supplier) {
             if (hasOwnProperty.call(supplier, key)) {
@@ -37229,9 +37439,21 @@ var extend = function extend(receiver, supplier, protoProps, staticProps) {
         throw 'extend failed, verify dependencies';
     }
 
+<<<<<<< HEAD
     var supplierProto = supplier.prototype,
         receiverProto = Object.create(supplierProto);
     receiver.prototype = receiverProto;
+=======
+            if (commands && commands.length) {
+                items = commands.map(function (item) {
+                    return React.createElement(
+                        'li',
+                        { key: item.command, role: 'option' },
+                        React.createElement(AlloyEditor.ButtonCommandListItem, { command: item.command, description: typeof item.label === 'string' ? item.label : item.label(), icon: item.icon, editor: editor })
+                    );
+                });
+            }
+>>>>>>> ffe61125... Build Files (auto-generated)
 
     receiverProto.constructor = receiver;
     receiver.superclass = supplierProto;
@@ -39399,7 +39621,176 @@ exports.default = extend;
             resizer[widget.data.align == 'right' ? 'addClass' : 'removeClass']('cke_image_resizer_left');
         });
 
+<<<<<<< HEAD
         widget.parts.image.on('click', function () {
+=======
+(function () {
+		'use strict';
+
+		/**
+   * The ButtonParagraphAlign class provides functionality to work with table rows.
+   *
+   * @class ButtonParagraphAlign
+   */
+
+		var ButtonParagraphAlign = createReactClass({
+				displayName: 'ButtonParagraphAlign',
+
+				// Allows validating props being passed to the component.
+				propTypes: {
+						/**
+       * List of the commands the button is able to handle.
+       *
+       * @instance
+       * @memberof ButtonParagraphAlign
+       * @property {Array} commands
+       */
+						commands: PropTypes.arrayOf(PropTypes.object),
+
+						/**
+       * The editor instance where the component is being used.
+       *
+       * @instance
+       * @memberof ButtonParagraphAlign
+       * @property {Object} editor
+       */
+						editor: PropTypes.object.isRequired,
+
+						/**
+       * Indicates whether the styles list is expanded or not.
+       *
+       * @instance
+       * @memberof ButtonParagraphAlign
+       * @property {Boolean} expanded
+       */
+						expanded: PropTypes.bool,
+
+						/**
+       * The label that should be used for accessibility purposes.
+       *
+       * @instance
+       * @memberof ButtonParagraphAlign
+       * @property {String} label
+       */
+						label: PropTypes.string,
+
+						/**
+       * The tabIndex of the button in its toolbar current state. A value other than -1
+       * means that the button has focus and is the active element.
+       *
+       * @instance
+       * @memberof ButtonParagraphAlign
+       * @property {Number} tabIndex
+       */
+						tabIndex: PropTypes.number,
+
+						/**
+       * Callback provided by the button host to notify when the styles list has been expanded.
+       *
+       * @instance
+       * @memberof ButtonParagraphAlign
+       * @property {Function} toggleDropdown
+       */
+						toggleDropdown: PropTypes.func
+				},
+
+				// Lifecycle. Provides static properties to the widget.
+				statics: {
+						/**
+       * The name which will be used as an alias of the button in the configuration.
+       *
+       * @default paragraphAlign
+       * @memberof ButtonParagraphAlign
+       * @property {String} key
+       * @static
+       */
+						key: 'paragraphAlign'
+				},
+
+				/**
+     * Lifecycle. Renders the UI of the button.
+     *
+     * @instance
+     * @memberof ButtonParagraphAlign
+     * @method render
+     * @return {Object} The content which should be rendered.
+     */
+				render: function render() {
+						var activeAlignment = AlloyEditor.Strings.alignLeft;
+
+						var buttonCommandsList;
+						var buttonCommandsListId;
+
+						if (this.props.expanded) {
+								buttonCommandsListId = ButtonParagraphAlign.key + 'List';
+								buttonCommandsList = React.createElement(AlloyEditor.ButtonCommandsList, { commands: this._getCommands(), editor: this.props.editor, listId: buttonCommandsListId, inlineIcons: false, onDismiss: this.props.toggleDropdown });
+						}
+
+						var editor = this.props.editor.get('nativeEditor');
+
+						var activeCommand = this._getCommands().filter(function (alignment) {
+								var command = editor.getCommand(alignment.command);
+
+								return command ? command.state === CKEDITOR.TRISTATE_ON : false;
+						}).pop();
+
+						var iconClassName = 'ae-icon-' + activeCommand.icon;
+
+						return React.createElement(
+								'div',
+								{ className: 'ae-container-dropdown ae-container-dropdown-xsmall ae-has-dropdown' },
+								React.createElement(
+										'button',
+										{ 'aria-expanded': this.props.expanded, 'aria-label': activeCommand.label, 'aria-owns': buttonCommandsListId, className: 'ae-toolbar-element', onClick: this.props.toggleDropdown, role: 'combobox', tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.row },
+										React.createElement(
+												'div',
+												{ className: 'ae-container' },
+												React.createElement('span', { className: iconClassName }),
+												React.createElement('span', { className: 'ae-icon-arrow' })
+										)
+								),
+								buttonCommandsList
+						);
+				},
+
+				/**
+     * Returns a list of commands. If a list of commands was passed
+     * as property `commands`, it will take a precedence over the default ones.
+     *
+     * @instance
+     * @memberof ButtonParagraphAlign
+     * @method _getCommands
+     * @protected
+     * @return {Array} The list of available commands.
+     */
+				_getCommands: function _getCommands() {
+						return this.props.commands || [{
+								command: 'justifyleft',
+								icon: 'align-left',
+								label: AlloyEditor.Strings.alignLeft
+						}, {
+								command: 'justifycenter',
+								icon: 'align-center',
+								label: AlloyEditor.Strings.alignCenter
+						}, {
+								command: 'justifyright',
+								icon: 'align-right',
+								label: AlloyEditor.Strings.alignRight
+						}, {
+								command: 'justifyblock',
+								icon: 'align-justified',
+								label: AlloyEditor.Strings.alignJustify
+						}];
+				}
+		});
+
+		AlloyEditor.Buttons[ButtonParagraphAlign.key] = AlloyEditor.ButtonParagraphAlign = ButtonParagraphAlign;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+>>>>>>> ffe61125... Build Files (auto-generated)
 
             editor._.editable.editor.getSelection().selectElement(this);
 
@@ -39678,6 +40069,52 @@ var _selectionTest = __webpack_require__(/*! ../selections/selection-test.js */ 
 var _selectionTest2 = _interopRequireDefault(_selectionTest);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(function () {
+		'use strict';
+
+		/**
+   * The Separator class renders a simple separator.
+   *
+   * @class ButtonBold
+   * @uses ButtonCommand
+   * @uses ButtonKeystroke
+   * @uses ButtonStateClasses
+   * @uses ButtonStyle
+   */
+
+		var Separator = createReactClass({
+				displayName: 'Separator',
+
+				// Lifecycle. Provides static properties to the widget.
+				statics: {
+						/**
+       * The name which will be used as an alias of the separator in the configuration.
+       *
+       * @default |
+       * @memberof Separator
+       * @property {String} key
+       * @static
+       */
+						key: 'separator'
+				},
+
+				/**
+     * Lifecycle. Renders the UI of the separator.
+     *
+     * @instance
+     * @memberof Separator
+     * @method render
+     * @return {Object} The content which should be rendered.
+     */
+				render: function render() {
+						return React.createElement('span', { className: 'ae-separator' });
+				}
+		});
+
+		AlloyEditor.Buttons[Separator.key] = AlloyEditor.Separator = Separator;
+})();
+'use strict';
 
 (function () {
     'use strict';
@@ -40800,6 +41237,7 @@ exports.tabletools = _tabletools2.default;
 		return null;
 	}
 
+<<<<<<< HEAD
 	function insertRow(selection, insertBefore) {
 		var cells = getSelectedCells(selection),
 		    firstCell = cells[0],
@@ -40817,6 +41255,19 @@ exports.tabletools = _tabletools2.default;
 		    cloneRow = map[rowIndex],
 		    nextRow = insertBefore ? map[rowIndex - 1] : map[rowIndex + 1],
 		    width = map[0].length;
+=======
+    var MAX_TWEET_LENGTH = 280;
+
+    /**
+     * The ButtonTwitter class provides functionality for creating a link which
+     * allows people to tweet part of the content in the editor.
+     *
+     * @class ButtonTwitter
+     * @uses ButtonStateClasses
+     */
+    var ButtonTwitter = createReactClass({
+        displayName: 'ButtonTwitter',
+>>>>>>> ffe61125... Build Files (auto-generated)
 
 		var newRow = doc.createElement('tr');
 		for (var i = 0; cloneRow[i] && i < width; i++) {
@@ -40895,8 +41346,27 @@ exports.tabletools = _tabletools2.default;
 			if (table.$.rows.length == 1) table.remove();else selectionOrRow.remove();
 		}
 
+<<<<<<< HEAD
 		return null;
 	}
+=======
+        /**
+         * Generates the appropriate twitter url based on the selected text and the configuration
+         * options received via props.
+         *
+         * @instance
+         * @memberof ButtonTwitter
+         * @method _getHref
+         * @protected
+         * @return {String} A valid twitter url with the selected text and given configuration.
+         */
+        _getHref: function _getHref() {
+            var nativeEditor = this.props.editor.get('nativeEditor');
+            var selectedText = nativeEditor.getSelection().getSelectedText().substring(0, MAX_TWEET_LENGTH);
+            var url = this.props.url;
+            var via = this.props.via;
+            var twitterHref = 'https://twitter.com/intent/tweet?text=' + selectedText;
+>>>>>>> ffe61125... Build Files (auto-generated)
 
 	function getCellColIndex(cell, isStart) {
 		var row = cell.getParent(),
@@ -41325,6 +41795,7 @@ exports.tabletools = _tabletools2.default;
 		init: function init(editor) {
 			var lang = editor.lang.table;
 
+<<<<<<< HEAD
 			function createDef(def) {
 				return CKEDITOR.tools.extend(def || {}, {
 					contextSensitive: 1,
@@ -41335,6 +41806,12 @@ exports.tabletools = _tabletools2.default;
 			}
 			function addCmd(name, def) {
 				var cmd = editor.getCommand(name);
+=======
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+(function () {
+    'use strict';
+>>>>>>> ffe61125... Build Files (auto-generated)
 
 				if (cmd) {
 					return;
@@ -41473,10 +41950,56 @@ exports.tabletools = _tabletools2.default;
 CKEDITOR.tools.buildTableMap = function (table) {
 	var aRows = table.$.rows;
 
+<<<<<<< HEAD
 	// Row and Column counters.
 	var r = -1;
 
 	var aMap = [];
+=======
+                var buttons = currentSelection.buttons;
+
+                if ((typeof buttons === 'undefined' ? 'undefined' : _typeof(buttons)) === 'object' && !Array.isArray(buttons)) {
+                    buttons = buttons[this.props.editor.get('mode')] || buttons['simple'];
+                }
+
+                var buttonsGroup = this.getToolbarButtonGroups(buttons, {
+                    manualSelection: this.props.editorEvent ? this.props.editorEvent.data.manualSelection : null,
+                    selectionType: currentSelection.name
+                });
+
+                var hasGroups = buttonsGroup.filter(function (button) {
+                    return Array.isArray(button);
+                }).length > 0;
+
+                var className = 'ae-container';
+
+                if (hasGroups) {
+                    className += ' ae-container-column';
+                }
+
+                return React.createElement(
+                    'div',
+                    { 'aria-label': AlloyEditor.Strings.styles, className: cssClasses, 'data-tabindex': this.props.config.tabIndex || 0, onFocus: this.focus, onKeyDown: this.handleKey, role: 'toolbar', tabIndex: '-1' },
+                    React.createElement(
+                        'div',
+                        { className: className },
+                        buttonsGroup.map(function (value, index) {
+                            if (Array.isArray(value)) {
+                                return React.createElement(
+                                    'div',
+                                    { className: 'ae-row', key: index.toString() },
+                                    value.map(function (button) {
+                                        return button;
+                                    })
+                                );
+                            } else {
+                                return value;
+                            }
+                        })
+                    )
+                );
+            }
+>>>>>>> ffe61125... Build Files (auto-generated)
 
 	for (var i = 0; i < aRows.length; i++) {
 		r++;

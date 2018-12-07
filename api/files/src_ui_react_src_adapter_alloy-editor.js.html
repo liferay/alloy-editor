@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.16</b>
+                        API Docs for Version: <b>1.5.17</b>
                     </p>
                 </li>
             </div>
@@ -89,6 +89,7 @@
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlign.html">ButtonParagraphAlign</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
                                     <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
@@ -536,8 +537,22 @@
                                             validator: AlloyEditor.Lang.isString,
                                             value: &#x27;ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,&#x27; +
                                                 &#x27;ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize,&#x27; +
-                                                &#x27;ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge&#x27;,
+                                                &#x27;ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge,font,colorbutton&#x27;,
                                             writeOnce: true
+                                        },
+                            
+                                        /**
+                                         * Specifies the &quot;mode&quot; for alloy editor
+                                         * @memberof Core
+                                         * @instance
+                                         * @property mode
+                                         * @default &#x27;simple&#x27;
+                                         * @writeOnce
+                                         * @type {String}
+                                         */
+                                        mode: {
+                                            validator: AlloyEditor.Lang.isString,
+                                            value: &#x27;simple&#x27;
                                         },
                             
                                         /**

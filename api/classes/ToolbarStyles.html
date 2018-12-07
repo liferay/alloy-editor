@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.16</b>
+                        API Docs for Version: <b>1.5.17</b>
                     </p>
                 </li>
             </div>
@@ -89,6 +89,7 @@
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlign.html">ButtonParagraphAlign</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
                                     <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
@@ -311,6 +312,10 @@
                             
                                                         </li>
                                                         <li class="index-item method inherited">
+                                                            <a href="#method_getToolbarButtonGroups">getToolbarButtonGroups</a>
+                            
+                                                        </li>
+                                                        <li class="index-item method inherited">
                                                             <a href="#method_getToolbarButtons">getToolbarButtons</a>
                             
                                                         </li>
@@ -504,7 +509,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-styles.jsx.html#l213"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-styles.jsx:213</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-styles.jsx.html#l245"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-styles.jsx:245</code></a>
                                                         </p>
                                                 
                                                 
@@ -776,7 +781,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-styles.jsx.html#l178"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-styles.jsx:178</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-styles.jsx.html#l210"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-styles.jsx:210</code></a>
                                                         </p>
                                                 
                                                 
@@ -1001,7 +1006,7 @@
                                                     <div class="meta">
                                                                 <p>
                                                                 Defined in
-                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-styles.jsx.html#l249"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-styles.jsx:249</code></a>
+                                                        <a href="../files/src_ui_react_src_components_toolbars_toolbar-styles.jsx.html#l281"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;toolbars&#x2F;toolbar-styles.jsx:281</code></a>
                                                         </p>
                                                 
                                                 
@@ -1543,6 +1548,85 @@
                                                 
                                                 
                                                 </div>
+                                                <div id="method_getToolbarButtonGroups" class="method item inherited">
+                                                    <h3 class="name"><code>getToolbarButtonGroups</code></h3>
+                                                
+                                                        <div class="args">
+                                                            <span class="paren">(</span><ul class="args-list inline commas">
+                                                                <li class="arg">
+                                                                        <code>buttons</code>
+                                                                </li>
+                                                                <li class="arg">
+                                                                        <code>additionalProps</code>
+                                                                </li>
+                                                            </ul><span class="paren">)</span>
+                                                        </div>
+                                                
+                                                        <span class="returns-inline">
+                                                            <span class="type">Array</span>
+                                                        </span>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="meta">
+                                                                <p>Inherited from
+                                                                <a href="../classes/ToolbarButtons.html#method_getToolbarButtonGroups">ToolbarButtons</a>:
+                                                        <a href="../files/src_ui_react_src_components_base_toolbar-buttons.js.html#l11"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;toolbar-buttons.js:11</code></a>
+                                                        </p>
+                                                
+                                                
+                                                
+                                                    </div>
+                                                
+                                                    <div class="description">
+                                                        <p>Analayses the current selection and returns the buttons or button groups to be rendered.</p>
+                                                
+                                                    </div>
+                                                
+                                                        <div class="params">
+                                                            <h4>Parameters:</h4>
+                                                
+                                                            <ul class="params-list">
+                                                                <li class="param">
+                                                                        <code class="param-name">buttons</code>
+                                                                        <span class="type">Array</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>The buttons could be shown, prior to the state filtering.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                                <li class="param">
+                                                                        <code class="param-name">additionalProps</code>
+                                                                        <span class="type">Object</span>
+                                                
+                                                
+                                                                    <div class="param-description">
+                                                                        <p>Additional props that should be passed down to the buttons.</p>
+                                                
+                                                                    </div>
+                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                
+                                                        <div class="returns">
+                                                            <h4>Returns:</h4>
+                                                
+                                                            <div class="returns-description">
+                                                                        <span class="type">Array</span>:
+                                                                    <p>An Array which contains the buttons or button groups that should be rendered.</p>
+                                                
+                                                            </div>
+                                                        </div>
+                                                
+                                                </div>
                                                 <div id="method_getToolbarButtons" class="method item inherited">
                                                     <h3 class="name"><code>getToolbarButtons</code></h3>
                                                 
@@ -1570,7 +1654,7 @@
                                                     <div class="meta">
                                                                 <p>Inherited from
                                                                 <a href="../classes/ToolbarButtons.html#method_getToolbarButtons">ToolbarButtons</a>:
-                                                        <a href="../files/src_ui_react_src_components_base_toolbar-buttons.js.html#l11"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;toolbar-buttons.js:11</code></a>
+                                                        <a href="../files/src_ui_react_src_components_base_toolbar-buttons.js.html#l38"><code>src&#x2F;ui&#x2F;react&#x2F;src&#x2F;components&#x2F;base&#x2F;toolbar-buttons.js:38</code></a>
                                                         </p>
                                                 
                                                 

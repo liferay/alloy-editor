@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.16</b>
+                        API Docs for Version: <b>1.5.17</b>
                     </p>
                 </li>
             </div>
@@ -89,6 +89,7 @@
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlign.html">ButtonParagraphAlign</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
                                     <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
@@ -186,6 +187,8 @@
                                 <pre class="code prettyprint linenums">
                             (function () {
                                 &#x27;use strict&#x27;;
+                            
+                                var MAX_TWEET_LENGTH = 280;
                             
                                 /**
                                  * The ButtonTwitter class provides functionality for creating a link which
@@ -312,7 +315,7 @@
                                      */
                                     _getHref: function() {
                                         var nativeEditor = this.props.editor.get(&#x27;nativeEditor&#x27;);
-                                        var selectedText = nativeEditor.getSelection().getSelectedText();
+                                        var selectedText = nativeEditor.getSelection().getSelectedText().substring(0, MAX_TWEET_LENGTH);
                                         var url = this.props.url;
                                         var via = this.props.via;
                                         var twitterHref = &#x27;https://twitter.com/intent/tweet?text=&#x27; + selectedText;

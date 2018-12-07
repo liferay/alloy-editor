@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.16</b>
+                        API Docs for Version: <b>1.5.17</b>
                     </p>
                 </li>
             </div>
@@ -89,6 +89,7 @@
                                     <li><a href="../classes/ButtonLinkTargetEdit.html">ButtonLinkTargetEdit</a></li>
                                     <li><a href="../classes/ButtonOrderedList.html">ButtonOrderedList</a></li>
                                     <li><a href="../classes/ButtonOutdentBlock.html">ButtonOutdentBlock</a></li>
+                                    <li><a href="../classes/ButtonParagraphAlign.html">ButtonParagraphAlign</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignLeft.html">ButtonParagraphAlignLeft</a></li>
                                     <li><a href="../classes/ButtonParagraphAlignRight.html">ButtonParagraphAlignRight</a></li>
                                     <li><a href="../classes/ButtonParagraphCenter.html">ButtonParagraphCenter</a></li>
@@ -310,7 +311,7 @@
                                             items = commands.map(function(item) {
                                                 return (
                                                     &lt;li key={item.command} role=&quot;option&quot;&gt;
-                                                        &lt;AlloyEditor.ButtonCommandListItem command={item.command} description={typeof item.label === &#x27;string&#x27; ? item.label : item.label()} editor={editor} /&gt;
+                                                        &lt;AlloyEditor.ButtonCommandListItem command={item.command} description={typeof item.label === &#x27;string&#x27; ? item.label : item.label()} icon={item.icon} editor={editor} /&gt;
                                                     &lt;/li&gt;
                                                 );
                                             });
