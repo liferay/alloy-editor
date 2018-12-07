@@ -1,5 +1,33 @@
 # Change Log
 
+## [v1.5.17](https://github.com/liferay/alloy-editor/tree/v1.5.17) (2018-12-07)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.16...v1.5.17)
+
+**Fixed bugs:**
+
+- When Aligning an Image Context Bar Not Following Alignment \(Internet Explorer\) [\#853](https://github.com/liferay/alloy-editor/issues/853)
+- Twitter link allows too many characters to be tweeted [\#829](https://github.com/liferay/alloy-editor/issues/829)
+
+**Closed issues:**
+
+- Alloy Editor is Mislabeled as a WYSIWYG editor [\#936](https://github.com/liferay/alloy-editor/issues/936)
+- Fix saucelabs badge in README [\#931](https://github.com/liferay/alloy-editor/issues/931)
+- Fix installation with node v10.13.x [\#928](https://github.com/liferay/alloy-editor/issues/928)
+- Feature Request: Feature Sets [\#906](https://github.com/liferay/alloy-editor/issues/906)
+- Bug when editing a image link on IE 11 [\#858](https://github.com/liferay/alloy-editor/issues/858)
+- Toolbar doesn't close after hyperlinking an image [\#848](https://github.com/liferay/alloy-editor/issues/848)
+
+**Merged pull requests:**
+
+- Updates CHANGELOG for v1.5.16 [\#943](https://github.com/liferay/alloy-editor/pull/943) ([julien](https://github.com/julien))
+- Fixes \#853 | Updates toolbar position when changing image alignment [\#935](https://github.com/liferay/alloy-editor/pull/935) ([julien](https://github.com/julien))
+- Fixes \#924 Add four drag handles for image resizing [\#934](https://github.com/liferay/alloy-editor/pull/934) ([diana-lin](https://github.com/diana-lin))
+- Fixes \#829 | Limit tweet text to 280 chars [\#933](https://github.com/liferay/alloy-editor/pull/933) ([julien](https://github.com/julien))
+- Fixes \#931 | Fixes the saucelabs browser-matrix badge [\#932](https://github.com/liferay/alloy-editor/pull/932) ([julien](https://github.com/julien))
+- Fixes \#906 | Implement feature sets [\#930](https://github.com/liferay/alloy-editor/pull/930) ([julien](https://github.com/julien))
+- Fixes \#928 | Update gulp-sass to work with node v10.x.x [\#929](https://github.com/liferay/alloy-editor/pull/929) ([julien](https://github.com/julien))
+- Change dragresize implementation on IE to modify heigh and width insi… [\#923](https://github.com/liferay/alloy-editor/pull/923) ([gregory-bretall](https://github.com/gregory-bretall))
+
 ## [v1.5.16](https://github.com/liferay/alloy-editor/tree/v1.5.16) (2018-11-23)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.15...v1.5.16)
 
@@ -10,6 +38,7 @@
 
 **Closed issues:**
 
+- IE11 needs four drag handles when resizing an image [\#924](https://github.com/liferay/alloy-editor/issues/924)
 - AlloyEditor image resize handle position is misplaced in IE11 when image is right aligned [\#911](https://github.com/liferay/alloy-editor/issues/911)
 - Copy and paste text link add tags in IE11 [\#908](https://github.com/liferay/alloy-editor/issues/908)
 
