@@ -139,3 +139,23 @@ git checkout -b feature/fix_foo
 2. Send a fix PR to `master`
 
 3. Follow steps 3-11 of a scheduled release
+
+## Updating CKEditor.
+
+1. Open your favourite browser and navigate to https://ckeditor.com/cke4/builder.
+
+2. On this page you should see a button labelled "Upload build-config.js", *click it*:
+
+	This will open a file dialog letting you choose CKEditor's build configuration file:
+
+	This file is located in `lib/ckeditor/build-config.js`, select it to upload it.
+
+4. Optionally if you want to add more plugins, scroll down and you should see two panels:
+
+	On the left you'll see the list of selected plugins (automatically detected by parsing the `build-config.js` file uploaded previously) and on the right a list of the available plugins. Click on the plugins you wish to add and on the left arrow button ("<"), this will add the new plugins into the "selected plugins" panel.
+
+5. Finally, scroll to the bottom of the page, agree to the terms of use and click the "Download CKEditor" button.
+
+6. Once the file downloaded, unzip it and *replace* the `lib/ckeditor` directory with the new directory you unzipped.
+
+7. Run `gulp release` and have a look at the demo to make sure everything is working correctly.
