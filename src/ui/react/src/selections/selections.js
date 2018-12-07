@@ -19,13 +19,13 @@
         buttons: {
             full: [
                 [
-                    'styles', 'separator', 'bold', 'italic', 'underline', 'strike', 'separator',
-                    'link', 'separator', 'Font', 'FontSize'
+                    'Font', 'FontSize', 'separator', 'bold', 'italic',
+                    'underline', 'strike', 'separator', 'link'
                 ],
                 [
-                    'TextColor', 'BGColor', 'separator', 'paragraphAlign', 'separator',
-                    'ul', 'ol', 'separator',  'h1', 'h2', 'separator', 'indentBlock', 'outdentBlock',
-                    'separator', 'code', 'quote', 'separator', 'removeFormat'
+                    'paragraphAlign', 'separator', 'ul', 'ol', 'separator', 'h1', 'h2',
+                    'separator', 'indentBlock', 'outdentBlock', 'separator',
+                    'TextColor', 'BGColor', 'separator', 'code', 'quote', 'separator', 'removeFormat'
                 ]
             ],
             simple: ['styles', 'bold', 'italic', 'underline', 'link']
