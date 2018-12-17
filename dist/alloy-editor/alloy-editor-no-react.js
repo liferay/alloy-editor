@@ -1666,7 +1666,17 @@ var getUrl = function getUrl(resource) {
 };
 =======
             if (selectedElement && CKEDITOR.env.ie) {
-                return selectedElement.getChildren('a').getItem(0);
+                var children = selectedElement.getChildren();
+
+                var count = children.count();
+
+                for (var i = 0; i < count; i++) {
+                    var node = children.getItem(i);
+
+                    if (node.is('a')) {
+                        return node;
+                    }
+                }
             }
 
             if (selectedElement && CKEDITOR.env.ie) {
@@ -4514,6 +4524,8 @@ var ButtonCamera = function (_React$Component) {
 <<<<<<< HEAD
 ButtonCamera.key = 'camera';
 =======
+            delete attrsHolder.attributes.contenteditable;
+
             delete attrsHolder.attributes.contenteditable;
 
             var attrs = attrsHolder.attributes;

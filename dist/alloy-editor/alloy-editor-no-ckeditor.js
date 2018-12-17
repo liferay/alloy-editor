@@ -96,6 +96,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -142,6 +143,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.10
 >>>>>>> 6aa8bc0d... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.10
+>>>>>>> f10103176800c497f0e01c5c6f70a98a500cd832
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -6049,7 +6053,17 @@ var SelectEventPlugin = {
     var targetNode = targetInst ? getNodeFromInstance$1(targetInst) : window;
 =======
             if (selectedElement && CKEDITOR.env.ie) {
-                return selectedElement.getChildren('a').getItem(0);
+                var children = selectedElement.getChildren();
+
+                var count = children.count();
+
+                for (var i = 0; i < count; i++) {
+                    var node = children.getItem(i);
+
+                    if (node.is('a')) {
+                        return node;
+                    }
+                }
             }
 
             if (selectedElement && CKEDITOR.env.ie) {
@@ -12814,6 +12828,7 @@ var ReactFiberScheduler = function (config) {
       }
     }
 
+<<<<<<< HEAD
     isCommitting = false;
     isWorking = false;
     stopCommitLifeCyclesTimer();
@@ -12824,6 +12839,11 @@ var ReactFiberScheduler = function (config) {
     if (true && ReactFiberInstrumentation_1.debugTool) {
       ReactFiberInstrumentation_1.debugTool.onCommitWork(finishedWork);
     }
+=======
+            delete attrsHolder.attributes.contenteditable;
+
+            var attrs = attrsHolder.attributes;
+>>>>>>> f10103176800c497f0e01c5c6f70a98a500cd832
 
     var remainingTime = root.current.expirationTime;
     if (remainingTime === NoWork) {
