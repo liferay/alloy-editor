@@ -125,6 +125,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -132,6 +133,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.3
 >>>>>>> 1658a122... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.3
+>>>>>>> caf17dec5790097eb405b57e816e3bfb5c7c1034
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -982,6 +986,22 @@ exports.default = function (WrappedComponent) {
                         editor.applyStyle(this.getStyle());
                     }
 =======
+    // Filters the requires object to remove unwanted dependencies. At this point
+    // only 'toolbar' has been identified, but more can appear. An unwanted plugin
+    // dependency is one that prevents a necessary plugin from being removed
+    //
+    // @param {string|Array<string>} requires The requires object
+    // @return {string} The filtered requires object
+    var filterUnwantedDependencies = function filterUnwantedDependencies(requires) {
+        if (typeof requires === 'string') {
+            requires = requires.split(',');
+        }
+
+        return requires.filter(function (require) {
+            return require !== 'toolbar';
+        });
+    };
+
     // Filters the requires object to remove unwanted dependencies. At this point
     // only 'toolbar' has been identified, but more can appear. An unwanted plugin
     // dependency is one that prevents a necessary plugin from being removed
@@ -1962,6 +1982,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 /**
  * Provides functionality for managing exclusive state of an widget.
  * The exclusive state means that a button may request to be the only rendered
@@ -1982,6 +2003,20 @@ exports.default = function (WrappedComponent) {
 
         _createClass(_class, [{
             key: 'cancelExclusive',
+=======
+            var transferFiles = nativeEvent.dataTransfer.files;
+
+            if (transferFiles.length > 0) {
+                new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+                var editor = event.listenerData.editor;
+
+                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                this._handleFiles(transferFiles, editor);
+            }
+        },
+>>>>>>> caf17dec5790097eb405b57e816e3bfb5c7c1034
 
             /**
              * Cancels the exclusive state of an widget.

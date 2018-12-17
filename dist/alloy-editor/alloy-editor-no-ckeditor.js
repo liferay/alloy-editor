@@ -83,6 +83,7 @@ window["AlloyEditor"] =
 /**
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -90,6 +91,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.3
 >>>>>>> 1658a122... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.3
+>>>>>>> caf17dec5790097eb405b57e816e3bfb5c7c1034
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -6274,6 +6278,22 @@ function createFiberFromElement(element, mode, expirationTime) {
         });
     };
 
+    // Filters the requires object to remove unwanted dependencies. At this point
+    // only 'toolbar' has been identified, but more can appear. An unwanted plugin
+    // dependency is one that prevents a necessary plugin from being removed
+    //
+    // @param {string|Array<string>} requires The requires object
+    // @return {string} The filtered requires object
+    var filterUnwantedDependencies = function filterUnwantedDependencies(requires) {
+        if (typeof requires === 'string') {
+            requires = requires.split(',');
+        }
+
+        return requires.filter(function (require) {
+            return require !== 'toolbar';
+        });
+    };
+
     /**
      * CKEDITOR.plugins class utility which adds additional methods to those of CKEditor.
      *
@@ -9043,6 +9063,7 @@ function ChildReconciler(shouldTrackSideEffects) {
       child = child.sibling;
     }
 
+<<<<<<< HEAD
     if (element.type === REACT_FRAGMENT_TYPE) {
       var created = createFiberFromFragment(element.props.children, returnFiber.mode, expirationTime, element.key);
       created['return'] = returnFiber;
@@ -9097,6 +9118,20 @@ function ChildReconciler(shouldTrackSideEffects) {
     if (typeof newChild === 'object' && newChild !== null && newChild.type === REACT_FRAGMENT_TYPE && newChild.key === null) {
       newChild = newChild.props.children;
     }
+=======
+            var transferFiles = nativeEvent.dataTransfer.files;
+
+            if (transferFiles.length > 0) {
+                new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+                var editor = event.listenerData.editor;
+
+                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                this._handleFiles(transferFiles, editor);
+            }
+        },
+>>>>>>> caf17dec5790097eb405b57e816e3bfb5c7c1034
 
 <<<<<<< HEAD
     // Handle object types

@@ -112,7 +112,10 @@ Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 */
 (function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;window.CKEDITOR||(window.CKEDITOR=function(){var a=/(^|.*[\\\/])alloy-editor-no-react\.js(?:\?.*|;.*)?$/i,d={timestamp:"H8DA",version:"4.7.3",revision:"dee99e2",rnd:Math.floor(900*Math.random())+100,_:{pending:[],basePathSrcPattern:a},status:"unloaded",basePath:function(){var b=window.CKEDITOR_BASEPATH||"";if(!b)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var k=c[d].src.match(a);if(k){b=k[1];break}}-1==b.indexOf(":/")&&"//"!=b.slice(0,2)&&(b=0===b.indexOf("/")?location.href.match(/^.*?:\/\/[^\/]*/)[0]+
+<<<<<<< HEAD
 >>>>>>> cad4c7a0... Build files (auto-generated)
+=======
+>>>>>>> caf17dec5790097eb405b57e816e3bfb5c7c1034
 b:location.href.match(/^[^\?]*\/(?:)/)[0]+b);if(!b)throw'The CKEditor installation path could not be automatically detected. Please set the global variable "CKEDITOR_BASEPATH" before creating editor instances.';return b}(),getUrl:function(a){-1==a.indexOf(":/")&&0!==a.indexOf("/")&&(a=this.basePath+a);this.timestamp&&"/"!=a.charAt(a.length-1)&&!/[&?]t=/.test(a)&&(a+=(0<=a.indexOf("?")?"\x26":"?")+"t\x3d"+this.timestamp);return a},domReady:function(){function a(){try{document.addEventListener?(document.removeEventListener("DOMContentLoaded",
 a,!1),b()):document.attachEvent&&"complete"===document.readyState&&(document.detachEvent("onreadystatechange",a),b())}catch(c){}}function b(){for(var a;a=c.shift();)a()}var c=[];return function(b){function n(){try{document.documentElement.doScroll("left")}catch(f){setTimeout(n,1);return}a()}c.push(b);"complete"===document.readyState&&setTimeout(a,1);if(1==c.length)if(document.addEventListener)document.addEventListener("DOMContentLoaded",a,!1),window.addEventListener("load",a,!1);else if(document.attachEvent){document.attachEvent("onreadystatechange",
 a);window.attachEvent("onload",a);b=!1;try{b=!window.frameElement}catch(q){}document.documentElement.doScroll&&b&&n()}}}()},b=window.CKEDITOR_GETURL;if(b){var c=d.getUrl;d.getUrl=function(a){return b.call(d,a)||c.call(d,a)}}return d}());
@@ -1856,6 +1859,22 @@ exports.default = function (WrappedComponent) {
         });
     };
 
+    // Filters the requires object to remove unwanted dependencies. At this point
+    // only 'toolbar' has been identified, but more can appear. An unwanted plugin
+    // dependency is one that prevents a necessary plugin from being removed
+    //
+    // @param {string|Array<string>} requires The requires object
+    // @return {string} The filtered requires object
+    var filterUnwantedDependencies = function filterUnwantedDependencies(requires) {
+        if (typeof requires === 'string') {
+            requires = requires.split(',');
+        }
+
+        return requires.filter(function (require) {
+            return require !== 'toolbar';
+        });
+    };
+
     /**
      * CKEDITOR.plugins class utility which adds additional methods to those of CKEditor.
      *
@@ -1883,6 +1902,16 @@ exports.default = function (WrappedComponent) {
                 if (callback) {
                     Object.keys(plugins).forEach(function (pluginName) {
                         var plugin = plugins[pluginName];
+<<<<<<< HEAD
+=======
+
+                        if (plugin.requires) {
+                            plugin.requires = filterUnwantedDependencies(plugin.requires);
+                        }
+
+                        wrapPluginLifecycle(plugin);
+                    });
+>>>>>>> caf17dec5790097eb405b57e816e3bfb5c7c1034
 
                         if (plugin.requires) {
                             plugin.requires = filterUnwantedDependencies(plugin.requires);
@@ -2778,6 +2807,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
 var _lang = __webpack_require__(/*! ../../oop/lang.js */ "./src/oop/lang.js");
@@ -2786,6 +2816,20 @@ var _lang = __webpack_require__(/*! ../../oop/lang.js */ "./src/oop/lang.js");
 var _lang2 = _interopRequireDefault(_lang);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+=======
+            var transferFiles = nativeEvent.dataTransfer.files;
+
+            if (transferFiles.length > 0) {
+                new CKEDITOR.dom.event(nativeEvent).preventDefault();
+
+                var editor = event.listenerData.editor;
+
+                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                this._handleFiles(transferFiles, editor);
+            }
+        },
+>>>>>>> caf17dec5790097eb405b57e816e3bfb5c7c1034
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
