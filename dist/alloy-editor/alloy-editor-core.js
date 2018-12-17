@@ -144,6 +144,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -208,6 +209,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.13
 >>>>>>> 0fa7e4c0... Build Files (auto-generated)
+=======
+ * AlloyEditor v1.5.13
+>>>>>>> 43b6522dad14873ef2e17a4f579e8f9a66e1de58
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
