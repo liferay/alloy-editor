@@ -104,6 +104,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -174,6 +175,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.14
 >>>>>>> 43348fb3... Build Files (auto-generated)
+=======
+ * AlloyEditor v1.5.14
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9488,6 +9492,7 @@ var ReactFiberBeginWork = function (config, hostContext, legacyContext, newConte
     return workInProgress.child;
   }
 
+<<<<<<< HEAD
   function updateClassComponent(current, workInProgress, renderExpirationTime) {
     // Push context providers early to prevent context stack mismatches.
     // During mounting we don't know the child context yet as the instance doesn't exist.
@@ -9526,6 +9531,13 @@ var ReactFiberBeginWork = function (config, hostContext, legacyContext, newConte
 >>>>>>> 77c835ae... Build files (auto-generated)
 =======
     var REGEX_LAST_WORD = /[^\s]+/gim;
+=======
+    var REGEX_LAST_WORD = /[^\s]+/gim;
+
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+
+    var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
     var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
 
@@ -9561,6 +9573,7 @@ var ReactFiberBeginWork = function (config, hostContext, legacyContext, newConte
                     }
 
                     var instance = this;
+<<<<<<< HEAD
 
                     event.data.dataValue = event.data.dataValue.replace(RegExp(REGEX_URL, 'gim'), function (url) {
                         if (instance._isValidURL(url)) {
@@ -9586,11 +9599,18 @@ var ReactFiberBeginWork = function (config, hostContext, legacyContext, newConte
                         match = match[0];
 
                         var remainder = data.replace(match, '');
+=======
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
-                        if (this._isValidURL(match)) {
-                            event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                    event.data.dataValue = event.data.dataValue.replace(RegExp(REGEX_URL, 'gim'), function (url) {
+                        if (instance._isValidURL(url)) {
+                            if (instance._isValidEmail(url)) {
+                                return '<a href=\"mailto:' + url + '\">' + url + '</a>';
+                            } else {
+                                return '<a href=\"' + url + '\">' + url + '</a>';
+                            }
                         }
-                    }
+                    });
                 }
             }.bind(this));
         },
@@ -9763,6 +9783,20 @@ var ReactFiberBeginWork = function (config, hostContext, legacyContext, newConte
       return null;
     }
 =======
+        /**
+         * Checks if the given link is a valid Email.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
+         * @method isValidEmail
+         * @param {String} link The email we want to know if it is a valid Email
+         * @protected
+         * @return {Boolean} Returns true if the email is a valid Email, false otherwise
+         */
+        _isValidEmail: function _isValidEmail(email) {
+            return REGEX_EMAIL.test(email);
+        },
+
         /**
          * Checks if the given link is a valid Email.
          *
@@ -21828,7 +21862,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+<<<<<<< HEAD
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+=======
+        var nativeEditor = toolbar.props.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNodeStyle = getComputedStyle(uiNode);
+        var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+        var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+        var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+
+        var halfNodeWidth = toolbarNode.offsetWidth / 2;
+        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
@@ -21841,8 +21887,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 exports.default = function (WrappedComponent) {
     var _class, _temp;
 
+<<<<<<< HEAD
     return _temp = _class = function (_WrappedComponent) {
         _inherits(_class, _WrappedComponent);
+=======
+        var endPosition = [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top];
+
+        if (endPosition[0] < 0) {
+            endPosition[0] = 0;
+        } else if (endPosition[0] > totalWidth - toolbarNode.offsetWidth) {
+            endPosition[0] = totalWidth - toolbarNode.offsetWidth;
+        }
+
+        toolbar.moveToPoint(widgetXY, endPosition);
+    };
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
         function _class() {
             _classCallCheck(this, _class);
@@ -23157,7 +23216,13 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+<<<<<<< HEAD
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+=======
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
+            }
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -23264,13 +23329,38 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
+<<<<<<< HEAD
 var _reactDom2 = _interopRequireDefault(_reactDom);
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+                var uiNodeStyle = getComputedStyle(uiNode);
+                var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+                var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+                var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+<<<<<<< HEAD
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+=======
+                if (xy[0] < 0) {
+                    xy[0] = 0;
+                }
+                if (xy[0] > totalWidth - domNode.offsetWidth) {
+                    xy[0] = totalWidth - domNode.offsetWidth;
+                }
+
+                new CKEDITOR.dom.element(domNode).setStyles({
+                    left: xy[0] + 'px',
+                    top: xy[1] + 'px'
+                });
+            }
+        },
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 

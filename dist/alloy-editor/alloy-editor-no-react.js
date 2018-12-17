@@ -3040,10 +3040,18 @@ exports.default = function (WrappedComponent) {
 =======
     var REGEX_LAST_WORD = /[^\s]+/gim;
 
+<<<<<<< HEAD
     var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
 
     var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
 >>>>>>> 43348fb3... Build Files (auto-generated)
+=======
+    var REGEX_LAST_WORD = /[^\s]+/gim;
+
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+
+    var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -3140,6 +3148,20 @@ var ACTION_NONE = 0;
 var ACTION_MOVE_FOCUS = 1;
 var ACTION_DISMISS_FOCUS = 2;
 =======
+        /**
+         * Checks if the given link is a valid Email.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
+         * @method isValidEmail
+         * @param {String} link The email we want to know if it is a valid Email
+         * @protected
+         * @return {Boolean} Returns true if the email is a valid Email, false otherwise
+         */
+        _isValidEmail: function _isValidEmail(email) {
+            return REGEX_EMAIL.test(email);
+        },
+
         /**
          * Checks if the given link is a valid Email.
          *
@@ -9372,6 +9394,13 @@ var _buttonCommandActive2 = _interopRequireDefault(_buttonCommandActive);
         var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
         var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
 
+        var nativeEditor = toolbar.props.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNodeStyle = getComputedStyle(uiNode);
+        var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+        var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+        var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+
         var halfNodeWidth = toolbarNode.offsetWidth / 2;
         var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
 >>>>>>> 43348fb3... Build Files (auto-generated)
@@ -9385,6 +9414,11 @@ var _react = __webpack_require__(/*! react */ "react");
 =======
         var endPosition = [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top];
 
+<<<<<<< HEAD
+=======
+        var endPosition = [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top];
+
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
         if (endPosition[0] < 0) {
             endPosition[0] = 0;
         } else if (endPosition[0] > totalWidth - toolbarNode.offsetWidth) {
@@ -11067,8 +11101,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var uiNode = nativeEditor.config.uiNode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         var scrollTop = uiNode ? uiNode.scrollTop : 0;
 =======
+=======
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
             if (left > document.body.offsetWidth - halfWidth) {
                 left = document.body.offsetWidth - halfWidth;
             }
@@ -11185,6 +11222,7 @@ var _buttonCommandActive = __webpack_require__(/*! ../base/button-command-active
                 var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
                 var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
                 var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+<<<<<<< HEAD
 >>>>>>> 43348fb3... Build Files (auto-generated)
 
 var _buttonCommandActive2 = _interopRequireDefault(_buttonCommandActive);
@@ -11194,6 +11232,20 @@ var _buttonStateClasses = __webpack_require__(/*! ../base/button-state-classes.j
 <<<<<<< HEAD
 var _buttonStateClasses2 = _interopRequireDefault(_buttonStateClasses);
 =======
+                if (xy[0] < 0) {
+                    xy[0] = 0;
+                }
+                if (xy[0] > totalWidth - domNode.offsetWidth) {
+                    xy[0] = totalWidth - domNode.offsetWidth;
+                }
+=======
+
+                var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+                var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += scrollTop;
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
+
                 if (xy[0] < 0) {
                     xy[0] = 0;
                 }

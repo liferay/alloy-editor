@@ -146,6 +146,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -216,6 +217,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.14
 >>>>>>> 43348fb3... Build Files (auto-generated)
+=======
+ * AlloyEditor v1.5.14
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2255,6 +2259,7 @@ exports.default = function (WrappedComponent) {
 "use strict";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -2297,6 +2302,13 @@ var ACTION_DISMISS_FOCUS = 2;
 >>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
 =======
     var REGEX_LAST_WORD = /[^\s]+/gim;
+=======
+    var REGEX_LAST_WORD = /[^\s]+/gim;
+
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+
+    var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
     var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
 
@@ -2470,6 +2482,20 @@ exports.default = function (WrappedComponent) {
                 if (this._isValidTarget(event.target) && this._descendants) {
                     var action = this._getFocusAction(event);
 =======
+        /**
+         * Checks if the given link is a valid Email.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
+         * @method isValidEmail
+         * @param {String} link The email we want to know if it is a valid Email
+         * @protected
+         * @return {Boolean} Returns true if the email is a valid Email, false otherwise
+         */
+        _isValidEmail: function _isValidEmail(email) {
+            return REGEX_EMAIL.test(email);
+        },
+
         /**
          * Checks if the given link is a valid Email.
          *
@@ -8396,6 +8422,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
         var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
 
+        var nativeEditor = toolbar.props.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+        var uiNodeStyle = getComputedStyle(uiNode);
+        var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+        var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+        var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+
         var halfNodeWidth = toolbarNode.offsetWidth / 2;
         var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
 >>>>>>> 43348fb3... Build Files (auto-generated)
@@ -8440,6 +8473,17 @@ var ButtonImageAlignCenter = function (_React$Component) {
             endPosition[0] = totalWidth - toolbarNode.offsetWidth;
         }
 
+<<<<<<< HEAD
+=======
+        var endPosition = [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top];
+
+        if (endPosition[0] < 0) {
+            endPosition[0] = 0;
+        } else if (endPosition[0] > totalWidth - toolbarNode.offsetWidth) {
+            endPosition[0] = totalWidth - toolbarNode.offsetWidth;
+        }
+
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
         toolbar.moveToPoint(widgetXY, endPosition);
     };
 >>>>>>> 43348fb3... Build Files (auto-generated)
@@ -10132,12 +10176,17 @@ exports.default = ButtonLinkTargetEdit;
 >>>>>>> 2c0a76e4... Build Files (auto-generated)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 =======
             if (left > document.body.offsetWidth - offsetWidth) {
                 left = document.body.offsetWidth - offsetWidth;
+=======
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
             }
 >>>>>>> 43bf4eea96ff96301112a7c1d858efbf0086149b
 
@@ -10207,6 +10256,7 @@ var ButtonLink = function (_React$Component) {
             return new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection() !== null;
         }
 
+<<<<<<< HEAD
         /**
          * Lifecycle. Renders the UI of the button.
          *
@@ -10215,6 +10265,14 @@ var ButtonLink = function (_React$Component) {
          * @method render
          * @return {Object} The content which should be rendered.
          */
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+                var uiNodeStyle = getComputedStyle(uiNode);
+                var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+                var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+                var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
 
     }, {
         key: 'render',
@@ -10224,6 +10282,7 @@ var ButtonLink = function (_React$Component) {
             if (this.props.renderExclusive) {
                 var props = this.mergeButtonCfgProps();
 
+<<<<<<< HEAD
                 return _react2.default.createElement(_buttonLinkEdit2.default, props);
             } else {
                 return _react2.default.createElement(
@@ -10231,6 +10290,19 @@ var ButtonLink = function (_React$Component) {
                     { 'aria-label': AlloyEditor.Strings.link, className: cssClass, 'data-type': 'button-link', onClick: this._requestExclusive.bind(this), tabIndex: this.props.tabIndex, title: AlloyEditor.Strings.link },
                     _react2.default.createElement('span', { className: 'ae-icon-link' })
                 );
+=======
+                if (xy[0] < 0) {
+                    xy[0] = 0;
+                }
+                if (xy[0] > totalWidth - domNode.offsetWidth) {
+                    xy[0] = totalWidth - domNode.offsetWidth;
+                }
+
+                new CKEDITOR.dom.element(domNode).setStyles({
+                    left: xy[0] + 'px',
+                    top: xy[1] + 'px'
+                });
+>>>>>>> 91238c5fbc1c0042669a76d85b31d387cb621331
             }
         }
 
