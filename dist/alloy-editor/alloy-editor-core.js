@@ -140,6 +140,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -192,6 +193,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.11
 >>>>>>> 031ae200... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.11
+>>>>>>> 980e7825291c9377c0fbfb5d78a333d75698d88b
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -7957,7 +7961,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
             if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
                 left = left - gutter.left - halfWidth;
+<<<<<<< HEAD
 >>>>>>> 031ae200... Build files (auto-generated)
+=======
+>>>>>>> 980e7825291c9377c0fbfb5d78a333d75698d88b
 
 var _react = __webpack_require__(/*! react */ "react");
 
@@ -7970,6 +7977,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 <<<<<<< HEAD
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 =======
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
+            }
+
             if (left > document.body.offsetWidth - halfWidth) {
                 left = document.body.offsetWidth - halfWidth;
             }

@@ -8454,7 +8454,10 @@ exports.default = (0, _buttonCommand2.default)((0, _buttonStateClasses2.default)
 
             if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
                 left = left - gutter.left - halfWidth;
+<<<<<<< HEAD
 >>>>>>> 031ae200... Build files (auto-generated)
+=======
+>>>>>>> 980e7825291c9377c0fbfb5d78a333d75698d88b
 
 "use strict";
 
@@ -8468,6 +8471,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 <<<<<<< HEAD
 var _buttonCommand = __webpack_require__(/*! ../base/button-command.js */ "./src/components/base/button-command.js");
 =======
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
+            }
+
             if (left > document.body.offsetWidth - halfWidth) {
                 left = document.body.offsetWidth - halfWidth;
             }

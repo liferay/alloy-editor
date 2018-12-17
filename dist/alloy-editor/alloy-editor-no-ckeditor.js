@@ -98,6 +98,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -150,6 +151,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.11
 >>>>>>> 031ae200... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.11
+>>>>>>> 980e7825291c9377c0fbfb5d78a333d75698d88b
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32164,11 +32168,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
                 left = left - gutter.left - halfWidth;
+<<<<<<< HEAD
 >>>>>>> 031ae200... Build files (auto-generated)
 
                 callback(response);
             });
         };
+=======
+>>>>>>> 980e7825291c9377c0fbfb5d78a333d75698d88b
 
         var scriptElement = new CKEDITOR.dom.element('script');
         scriptElement.setAttribute('src', urlTemplate.output(urlParams));
@@ -32191,6 +32198,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 <<<<<<< HEAD
         CKEDITOR.document.getBody().append(scriptElement);
 =======
+            if (left > document.body.offsetWidth - halfWidth) {
+                left = document.body.offsetWidth - halfWidth;
+            }
+
             if (left > document.body.offsetWidth - halfWidth) {
                 left = document.body.offsetWidth - halfWidth;
             }
