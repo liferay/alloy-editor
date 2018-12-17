@@ -8,6 +8,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor v1.5.1
 =======
 /**
@@ -119,6 +120,9 @@ window.AlloyEditor=function(e){var t={};function n(r){if(t[r])return t[r].export
 =======
  * AlloyEditor v1.5.6
 >>>>>>> 02f02748... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.6
+>>>>>>> e8d0cc5551764d8ac67f65bcdf607aa0a7be0f46
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.

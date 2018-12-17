@@ -131,6 +131,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -156,6 +157,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.6
 >>>>>>> 02f02748... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.6
+>>>>>>> e8d0cc5551764d8ac67f65bcdf607aa0a7be0f46
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -799,6 +803,10 @@ var loadLanguageResources = function loadLanguageResources(callback) {
         var lang = parts[1];
         var locale = parts[2];
 =======
+            if (selectedElement && CKEDITOR.env.ie) {
+                return selectedElement.getChildren('a').getItem(0);
+            }
+
             if (selectedElement && CKEDITOR.env.ie) {
                 return selectedElement.getChildren('a').getItem(0);
             }

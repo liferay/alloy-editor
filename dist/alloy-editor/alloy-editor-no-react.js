@@ -1669,6 +1669,10 @@ var getUrl = function getUrl(resource) {
                 return selectedElement.getChildren('a').getItem(0);
             }
 
+            if (selectedElement && CKEDITOR.env.ie) {
+                return selectedElement.getChildren('a').getItem(0);
+            }
+
             var range = selection.getRanges()[0];
 >>>>>>> 02f02748... Build files (auto-generated)
 
