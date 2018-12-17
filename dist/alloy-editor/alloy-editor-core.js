@@ -148,6 +148,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -224,6 +225,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.15
 >>>>>>> 885782f2... Build Files (auto-generated)
+=======
+ * AlloyEditor v1.5.15
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -6135,12 +6139,17 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                 imageOrLink.replace(element);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 return imageOrLink;
             }
 =======
     function columnResizer(editor, pillar) {
         var document, resizer, resizing, startOffset, currentShift;
 >>>>>>> 885782f2... Build Files (auto-generated)
+=======
+    function columnResizer(editor, pillar) {
+        var document, resizer, resizing, startOffset, currentShift;
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
 
             // Wraps <img/> -> <a><img/></a>.
             // Returns reference to <a>.
@@ -6156,6 +6165,7 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 link.replace(img);
                 img.move(link);
 
@@ -6170,6 +6180,8 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             function unwrapFromLink(link) {
                 var img = link.findOne('img');
 =======
+=======
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
         function detach() {
             resizer.removeListener('mouseup', onMouseUp);
             resizer.removeListener('mousedown', onMouseDown);
@@ -6215,7 +6227,10 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             startOffset = parseInt(resizer.getStyle('left'), 10);
             currentShift = 0;
             resizing = 1;
+<<<<<<< HEAD
 >>>>>>> 885782f2... Build Files (auto-generated)
+=======
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
 
                 shift.changed = {};
 
@@ -6228,7 +6243,10 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
 =======
         function resizeEnd() {
             resizing = 0;
+<<<<<<< HEAD
 >>>>>>> 885782f2... Build Files (auto-generated)
+=======
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
 
                 // Iterate over possible state variables.
                 for (i = 0; i < shiftables.length; i++) {
@@ -6376,6 +6394,7 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                 if (align == 'none') wrapper.removeStyle('float');else wrapper.setStyle('float', align);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 wrapper.removeStyle('text-align');
             }
         }
@@ -6454,13 +6473,33 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
         // only change the cursor to resizable shape.
         resizer.show();
 
+=======
+        resizer.setStyles({
+            width: pxUnit(pillar.width),
+            height: pxUnit(pillar.height),
+            left: pxUnit(pillar.x),
+            top: pxUnit(pillar.y)
+        });
+
+        resizer.on('mousedown', onMouseDown, this);
+
+        document.getBody().setStyle('cursor', 'col-resize');
+
+        // Display the resizer to receive events but don't show it,
+        // only change the cursor to resizable shape.
+        resizer.show();
+
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
         var move = this.move = function (posX) {
             var resizerNewPosition = posX - Math.round(resizer.$.offsetWidth / 2);
 
             if (isResizing) {
                 if (resizerNewPosition === leftShiftBoundary || resizerNewPosition === rightShiftBoundary) {
                     return;
+<<<<<<< HEAD
 >>>>>>> 885782f2... Build Files (auto-generated)
+=======
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
                 }
 
             if (!image) return;
@@ -6477,6 +6516,21 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             return el;
 =======
             resizer.setStyle('left', pxUnit(resizerNewPosition));
+<<<<<<< HEAD
+=======
+        };
+
+        var destroy = this.destroy = function () {
+            detach();
+
+            document.getBody().setStyle('cursor', 'auto');
+
+            resizer.remove();
+        };
+
+        var isResizing = this.isResizing = function () {
+            return resizing;
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
         };
 
         var destroy = this.destroy = function () {
@@ -6552,6 +6606,19 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                     if (resizer) {
                         if (resizer.isResizing()) {
                             resizer.move(pageX);
+<<<<<<< HEAD
+=======
+
+                            cancel(evt);
+
+                            return;
+                        } else {
+                            resizer.destroy();
+
+                            resizer = null;
+                        }
+                    }
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
 
                             cancel(evt);
 
@@ -6576,9 +6643,19 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                 videoEl.src = (window.URL || window.webkitURL).createObjectURL(stream);
             }
 
+<<<<<<< HEAD
             videoEl.play();
 
             _reactDom2.default.findDOMNode(this.refs.buttonTakePhoto).disabled = false;
+=======
+                    var pillar = getPillarAtPosition(pillars, pageX);
+
+                    if (pillar) {
+                        resizer = new columnResizer(editor, pillar);
+                    }
+                });
+            });
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
         }
 =======
                 // When the widget is captioned (<figure>) and internally centering is done

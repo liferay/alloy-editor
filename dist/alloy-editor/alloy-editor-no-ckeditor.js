@@ -106,6 +106,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -182,6 +183,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.15
 >>>>>>> 885782f2... Build Files (auto-generated)
+=======
+ * AlloyEditor v1.5.15
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32520,9 +32524,12 @@ var ButtonTwitter = function (_React$Component) {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     _createClass(ButtonTwitter, [{
         key: 'handleClick',
 =======
+=======
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
     function columnResizer(editor, pillar) {
         var document, resizer, resizing, startOffset, currentShift;
 
@@ -32590,7 +32597,10 @@ var ButtonTwitter = function (_React$Component) {
             startOffset = parseInt(resizer.getStyle('left'), 10);
             currentShift = 0;
             resizing = 1;
+<<<<<<< HEAD
 >>>>>>> 885782f2... Build Files (auto-generated)
+=======
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
 
     }, {
         key: 'isActive',
@@ -32705,6 +32715,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _buttonCommand = __webpack_require__(/*! ../base/button-command.js */ "./src/components/base/button-command.js");
@@ -32740,6 +32751,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
         // only change the cursor to resizable shape.
         resizer.show();
 
+=======
+        resizer.setStyles({
+            width: pxUnit(pillar.width),
+            height: pxUnit(pillar.height),
+            left: pxUnit(pillar.x),
+            top: pxUnit(pillar.y)
+        });
+
+        resizer.on('mousedown', onMouseDown, this);
+
+        document.getBody().setStyle('cursor', 'col-resize');
+
+        // Display the resizer to receive events but don't show it,
+        // only change the cursor to resizable shape.
+        resizer.show();
+
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
         var move = this.move = function (posX) {
             var resizerNewPosition = posX - Math.round(resizer.$.offsetWidth / 2);
 
@@ -32774,6 +32802,7 @@ var ButtonUnorderedlist = function (_React$Component) {
 =======
             resizer.setStyle('left', pxUnit(resizerNewPosition));
         };
+<<<<<<< HEAD
 
         var destroy = this.destroy = function () {
             detach();
@@ -32783,6 +32812,17 @@ var ButtonUnorderedlist = function (_React$Component) {
             resizer.remove();
         };
 
+=======
+
+        var destroy = this.destroy = function () {
+            detach();
+
+            document.getBody().setStyle('cursor', 'auto');
+
+            resizer.remove();
+        };
+
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
         var isResizing = this.isResizing = function () {
             return resizing;
         };
@@ -32867,6 +32907,19 @@ var _createClass = function () { function defineProperties(target, props) { for 
                     if (resizer) {
                         if (resizer.isResizing()) {
                             resizer.move(pageX);
+<<<<<<< HEAD
+=======
+
+                            cancel(evt);
+
+                            return;
+                        } else {
+                            resizer.destroy();
+
+                            resizer = null;
+                        }
+                    }
+>>>>>>> d97896d65aa580dfed912f945047e557beb6eb8b
 
                             cancel(evt);
 
