@@ -150,6 +150,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -232,6 +233,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.16
 >>>>>>> 7ea9e766... Build Files (auto-generated)
+=======
+ * AlloyEditor v1.5.16
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -5661,6 +5665,23 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
                 }
             }
 
+            if (!imageAlignment) {
+                var imageContainer = image.$.parentNode;
+
+                if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                    CENTERED_IMAGE_STYLE.forEach(function (style) {
+                        image.setStyle(style.name, style.value);
+
+                        if (style.vendorPrefixes) {
+                            style.vendorPrefixes.forEach(function (vendorPrefix) {
+                                image.setStyle(vendorPrefix + style.name, style.value);
+                            });
+                        }
+                    });
+                    centeredImage = true;
+                }
+            }
+
             imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
 >>>>>>> 7ea9e766... Build Files (auto-generated)
         }
@@ -5786,7 +5807,10 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
                 imageContainer.style.textAlign = '';
             }
+<<<<<<< HEAD
 >>>>>>> 7ea9e766... Build Files (auto-generated)
+=======
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
         }
 
         function inflate() {
@@ -8819,6 +8843,7 @@ var _buttonStateClasses = __webpack_require__(/*! ../base/button-state-classes.j
 var _buttonStateClasses2 = _interopRequireDefault(_buttonStateClasses);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var _react = __webpack_require__(/*! react */ "react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -8829,6 +8854,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 =======
         var element;
 
+=======
+        var element;
+
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
         return !!(nativeEditor.isSelectionEmpty() && selectionData.element && selectionData.element.getName() !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
     };
 >>>>>>> 7ea9e766... Build Files (auto-generated)
@@ -13550,6 +13579,7 @@ var ButtonTableRow = function (_React$Component) {
          * @protected
          * @return {Array} The list of available commands.
          */
+<<<<<<< HEAD
 
     }, {
         key: '_getCommands',
@@ -13564,6 +13594,19 @@ var ButtonTableRow = function (_React$Component) {
                 command: 'rowDelete',
                 label: AlloyEditor.Strings.rowDelete
             }];
+=======
+        _onClick: function _onClick() {
+            if (this.props.styleFn) {
+                this.props.styleFn();
+            } else {
+                // Typically, we want the style to be the only one applied to the current selection, so
+                // we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
+                // However, this is consistent with other editors implementations of this feature.
+                this.props.editor.get('nativeEditor').execCommand('removeFormat');
+
+                this.applyStyle();
+            }
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
         }
     }]);
 
@@ -13672,6 +13715,18 @@ var ButtonTable = function (_React$Component) {
  * @static
  */
 
+<<<<<<< HEAD
+=======
+            if (styles && styles.length) {
+                items = styles.map(function (item) {
+                    return React.createElement(
+                        'li',
+                        { key: item.name, role: 'option' },
+                        React.createElement(AlloyEditor.ButtonStylesListItem, { activeStyle: this.props.activeStyle, editor: editor, name: item.name, style: item.style, styleFn: item.styleFn })
+                    );
+                }.bind(this));
+            }
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
 
 ButtonTable.key = 'table';
 

@@ -108,6 +108,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -190,6 +191,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.16
 >>>>>>> 7ea9e766... Build Files (auto-generated)
+=======
+ * AlloyEditor v1.5.16
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32108,6 +32112,23 @@ var _createClass = function () { function defineProperties(target, props) { for 
                 }
             }
 
+            if (!imageAlignment) {
+                var imageContainer = image.$.parentNode;
+
+                if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+                    CENTERED_IMAGE_STYLE.forEach(function (style) {
+                        image.setStyle(style.name, style.value);
+
+                        if (style.vendorPrefixes) {
+                            style.vendorPrefixes.forEach(function (vendorPrefix) {
+                                image.setStyle(vendorPrefix + style.name, style.value);
+                            });
+                        }
+                    });
+                    centeredImage = true;
+                }
+            }
+
             imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
         }
 >>>>>>> 7ea9e766... Build Files (auto-generated)
@@ -32201,7 +32222,10 @@ var ButtonTableRow = function (_React$Component) {
             var imageContainer = image.$.parentNode;
 
             imageContainer.style.textAlign = IMAGE_ALIGNMENT.CENTER;
+<<<<<<< HEAD
 >>>>>>> 7ea9e766... Build Files (auto-generated)
+=======
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
         }
 
         /**
@@ -35608,7 +35632,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * @property {function} styleFn
              */
             styleFn: PropTypes.func
+<<<<<<< HEAD
 >>>>>>> 7ea9e766... Build Files (auto-generated)
+=======
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
         },
 
         /**

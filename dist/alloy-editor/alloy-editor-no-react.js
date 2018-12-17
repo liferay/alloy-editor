@@ -6760,7 +6760,10 @@ CKEDITOR.config.ae_dragresize_ie11_captionedClass = 'image';
             if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
                 imageContainer.style.textAlign = '';
             }
+<<<<<<< HEAD
 >>>>>>> 7ea9e766... Build Files (auto-generated)
+=======
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
         }
 
         return {
@@ -9777,6 +9780,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "react");
@@ -9787,6 +9791,10 @@ var _reactDom = __webpack_require__(/*! react-dom */ "react-dom");
 =======
         var element;
 
+=======
+        var element;
+
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
         return !!(nativeEditor.isSelectionEmpty() && selectionData.element && selectionData.element.getName() !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
     };
 >>>>>>> 7ea9e766... Build Files (auto-generated)
@@ -21325,12 +21333,36 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 "use strict";
 
 
+<<<<<<< HEAD
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.tabletools = exports.tableresize = exports.selectionkeystrokes = exports.placeholder = exports.pasteimages = exports.imagealignment = exports.embed = exports.dragresizeie = exports.dragresize = exports.autolist = exports.autolink = exports.addimages = undefined;
 
 var _addimages = __webpack_require__(/*! ./addimages */ "./src/plugins/addimages.js");
+=======
+        /**
+         * Applies the item style to the editor selection.
+         *
+         * @instance
+         * @memberof ButtonStylesListItem
+         * @method _onClick
+         * @protected
+         */
+        _onClick: function _onClick() {
+            if (this.props.styleFn) {
+                this.props.styleFn();
+            } else {
+                // Typically, we want the style to be the only one applied to the current selection, so
+                // we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
+                // However, this is consistent with other editors implementations of this feature.
+                this.props.editor.get('nativeEditor').execCommand('removeFormat');
+
+                this.applyStyle();
+            }
+        }
+    });
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
 
 var _addimages2 = _interopRequireDefault(_addimages);
 
@@ -21364,7 +21396,19 @@ var _pasteimages2 = _interopRequireDefault(_pasteimages);
 
 var _placeholder = __webpack_require__(/*! ./placeholder */ "./src/plugins/placeholder.js");
 
+<<<<<<< HEAD
 var _placeholder2 = _interopRequireDefault(_placeholder);
+=======
+            if (styles && styles.length) {
+                items = styles.map(function (item) {
+                    return React.createElement(
+                        'li',
+                        { key: item.name, role: 'option' },
+                        React.createElement(AlloyEditor.ButtonStylesListItem, { activeStyle: this.props.activeStyle, editor: editor, name: item.name, style: item.style, styleFn: item.styleFn })
+                    );
+                }.bind(this));
+            }
+>>>>>>> 7f87818484f1bcb30517801c85310757c8e0b04a
 
 var _selectionkeystrokes = __webpack_require__(/*! ./selectionkeystrokes */ "./src/plugins/selectionkeystrokes.js");
 
