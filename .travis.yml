@@ -17,7 +17,11 @@ node_js:
 
 script:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - npm run test:saucelabs
 =======
 - npm run testSaucelabs
 >>>>>>> 3f7a0dae... Fixes #873 - Adds Contributing Guidelines and Release process documentation
+=======
+- npm run testSaucelabs
+>>>>>>> c66fcb67b132c120dc83a48940e0d19f1cbbdf75

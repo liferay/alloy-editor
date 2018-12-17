@@ -113,7 +113,10 @@ module.exports = {
     basePath: '../../..',
 
     browsers: ['Chrome'],
+<<<<<<< HEAD:karma.common.js
 >>>>>>> 3f7a0dae... Fixes #873 - Adds Contributing Guidelines and Release process documentation:src/ui/react/karma.js
+=======
+>>>>>>> c66fcb67b132c120dc83a48940e0d19f1cbbdf75:src/ui/react/karma.js
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
