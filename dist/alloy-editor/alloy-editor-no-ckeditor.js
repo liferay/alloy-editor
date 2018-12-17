@@ -85,6 +85,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -98,6 +99,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.4
 >>>>>>> 77c835ae... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.4
+>>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9360,7 +9364,11 @@ var ReactFiberBeginWork = function (config, hostContext, legacyContext, newConte
     var unmaskedContext = getUnmaskedContext(workInProgress);
     var context = getMaskedContext(workInProgress, unmaskedContext);
 
+<<<<<<< HEAD
     var nextChildren = void 0;
+=======
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+>>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
 
     {
       ReactCurrentOwner.current = workInProgress;
@@ -9430,6 +9438,26 @@ var ReactFiberBeginWork = function (config, hostContext, legacyContext, newConte
                     editor: editor
                 });
             }.bind(this));
+<<<<<<< HEAD
+=======
+
+            editor.on('paste', function (event) {
+                var data = event.data.dataValue;
+
+                var match = data.match(REGEX_URL);
+
+                if (match && match.length) {
+                    match = match[0];
+
+                    var remainder = data.replace(match, '');
+
+                    if (this._isValidURL(match)) {
+                        event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                    }
+                }
+            }.bind(this));
+        },
+>>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
 
             editor.on('paste', function (event) {
                 var data = event.data.dataValue;

@@ -127,6 +127,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -140,6 +141,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.4
 >>>>>>> 77c835ae... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.4
+>>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -2176,12 +2180,16 @@ var DIRECTION_NEXT = 1;
 var DIRECTION_PREV = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var ACTION_NONE = 0;
 var ACTION_MOVE_FOCUS = 1;
 var ACTION_DISMISS_FOCUS = 2;
 =======
     var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
 >>>>>>> 77c835ae... Build files (auto-generated)
+=======
+    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+>>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
 
 /**
  * WidgetFocusManager is a mixin that provides keyboard navigation inside a widget. To do this,
@@ -2202,6 +2210,39 @@ exports.default = function (WrappedComponent) {
                     editor: editor
                 });
             }.bind(this));
+<<<<<<< HEAD
+=======
+
+            editor.on('paste', function (event) {
+                var data = event.data.dataValue;
+
+                var match = data.match(REGEX_URL);
+
+                if (match && match.length) {
+                    match = match[0];
+
+                    var remainder = data.replace(match, '');
+
+                    if (this._isValidURL(match)) {
+                        event.data.dataValue = '<a href=\"' + match + '\">' + match + '</a>' + remainder;
+                    }
+                }
+            }.bind(this));
+        },
+
+        /**
+         * Retrieves the last word introduced by the user. Reads from the current
+         * caret position backwards until it finds the first white space.
+         *
+         * @instance
+         * @memberof CKEDITOR.plugins.ae_autolink
+         * @method _getLastWord
+         * @protected
+         * @return {String} The last word introduced by user
+         */
+        _getLastWord: function _getLastWord(editor) {
+            var range = editor.getSelection().getRanges()[0];
+>>>>>>> 11e2816e92bc1f07344bbef98f8bd2e2680d09aa
 
             editor.on('paste', function (event) {
                 var data = event.data.dataValue;
