@@ -7648,9 +7648,29 @@ var _react = __webpack_require__(/*! react */ "react");
 
 var _react2 = _interopRequireDefault(_react);
 
+<<<<<<< HEAD
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+=======
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method tableSelectionSetPosition
+     * @param {Object} payload Object, which contains the selection data for retrieving the
+     * client rectangle of the selected table
+     * @return {Boolean} True, in all cases
+     */
+    var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode;
+
+        var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += scrollTop;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
@@ -8901,6 +8921,14 @@ var ButtonStylesListItem = function (_React$Component) {
          * @method _onClick
          * @protected
          */
+<<<<<<< HEAD
+=======
+        show: function show() {
+            var domNode = ReactDOM.findDOMNode(this);
+            var uiNode = this.props.editor.get('uiNode');
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
     }, {
         key: '_onClick',
@@ -8929,7 +8957,15 @@ var ButtonStylesListItem = function (_React$Component) {
 
 ButtonStylesListItem.key = 'buttonStylesListItem';
 
+<<<<<<< HEAD
 exports.default = (0, _buttonActionStyle2.default)((0, _buttonStyle2.default)(ButtonStylesListItem));
+=======
+                    if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                        initialY = this.props.selectionData.region.bottom + scrollTop;
+                    } else {
+                        initialY = this.props.selectionData.region.top + scrollTop;
+                    }
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
 /***/ }),
 
@@ -8942,10 +8978,20 @@ exports.default = (0, _buttonActionStyle2.default)((0, _buttonStyle2.default)(Bu
 
 "use strict";
 
+<<<<<<< HEAD
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode');
+
+                var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+                var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += scrollTop;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18853,6 +18899,7 @@ exports.tabletools = _tabletools2.default;
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			addCmd('rowDelete', createDef({
 				requiredContent: 'table',
 				exec: function exec(editor) {
@@ -18862,6 +18909,11 @@ exports.tabletools = _tabletools2.default;
 			}));
 =======
                     var uiNode = this.props.editor.get('uiNode') || document.body;
+=======
+                    var uiNode = this.props.editor.get('uiNode');
+
+                    var scrollTop = uiNode ? uiNode.scrollTop : 0;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
                     var uiNode = this.props.editor.get('uiNode');
 

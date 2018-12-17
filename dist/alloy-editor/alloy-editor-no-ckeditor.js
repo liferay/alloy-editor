@@ -93,6 +93,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -130,6 +131,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.8
 >>>>>>> 4e8e54e6... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.8
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32209,6 +32213,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         show: function show() {
             var domNode = ReactDOM.findDOMNode(this);
 <<<<<<< HEAD
+<<<<<<< HEAD
             var uiNode = this.props.editor.get('uiNode') || document.body;
 <<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
@@ -32216,6 +32221,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 >>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 =======
             var uiNode = this.props.editor.get('uiNode');
+=======
+            var uiNode = this.props.editor.get('uiNode');
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
             var scrollTop = uiNode ? uiNode.scrollTop : 0;
 >>>>>>> 4e8e54e6... Build files (auto-generated)
@@ -32315,6 +32325,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 xy[1] += uiNode.scrollTop;
 <<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
@@ -32323,6 +32334,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 =======
                 xy[1] += scrollTop;
 >>>>>>> 4e8e54e6... Build files (auto-generated)
+=======
+                xy[1] += scrollTop;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
     /**
      * Specifies the default timeout after which the {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event
@@ -36968,6 +36982,7 @@ exports.tabletools = _tabletools2.default;
 		if (cells.length > 1) return false;else if (isDetect) return true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		var cell = cells[0],
 		    tr = cell.getParent(),
 		    table = tr.getAscendant('table'),
@@ -36980,6 +36995,11 @@ exports.tabletools = _tabletools2.default;
 		    newCellColSpan;
 =======
                     var uiNode = this.props.editor.get('uiNode') || document.body;
+=======
+                    var uiNode = this.props.editor.get('uiNode');
+
+                    var scrollTop = uiNode ? uiNode.scrollTop : 0;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
                     var uiNode = this.props.editor.get('uiNode');
 

@@ -135,6 +135,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -172,6 +173,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.8
 >>>>>>> 4e8e54e6... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.8
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -6514,9 +6518,29 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+<<<<<<< HEAD
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+=======
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method tableSelectionSetPosition
+     * @param {Object} payload Object, which contains the selection data for retrieving the
+     * client rectangle of the selected table
+     * @return {Boolean} True, in all cases
+     */
+    var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode;
+
+        var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += scrollTop;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
@@ -7747,7 +7771,22 @@ ButtonStrike.defaultProps = {
 
 exports.default = (0, _buttonCommand2.default)((0, _buttonStateClasses2.default)((0, _buttonStyle2.default)(ButtonStrike)));
 
+<<<<<<< HEAD
 /***/ }),
+=======
+        /**
+         * Shows the widget with the default animation transition.
+         *
+         * @instance
+         * @memberof WidgetPosition
+         * @method show
+         */
+        show: function show() {
+            var domNode = ReactDOM.findDOMNode(this);
+            var uiNode = this.props.editor.get('uiNode');
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
 /***/ "./src/components/buttons/button-styles-list-header.jsx":
 /*!**************************************************************!*\
@@ -7767,7 +7806,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _react = __webpack_require__(/*! react */ "react");
 
+<<<<<<< HEAD
 var _react2 = _interopRequireDefault(_react);
+=======
+                    if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
+                        initialY = this.props.selectionData.region.bottom + scrollTop;
+                    } else {
+                        initialY = this.props.selectionData.region.top + scrollTop;
+                    }
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7775,6 +7822,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
+<<<<<<< HEAD
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
@@ -7784,6 +7832,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  */
 var ButtonsStylesListHeader = function (_React$Component) {
     _inherits(ButtonsStylesListHeader, _React$Component);
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode');
+
+                var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+                var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += scrollTop;
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
     function ButtonsStylesListHeader() {
         _classCallCheck(this, ButtonsStylesListHeader);
@@ -11917,6 +11974,7 @@ var _uicore2 = _interopRequireDefault(_uicore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+<<<<<<< HEAD
 exports.debounce = _debounce2.default;
 exports.link = _link2.default;
 exports.plugins = _plugins2.default;
@@ -11926,6 +11984,17 @@ exports.tools = _tools2.default;
 exports.uicore = _uicore2.default;
 
 /***/ }),
+=======
+                    var uiNode = this.props.editor.get('uiNode');
+
+                    var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+                    if (nativeEditor.element.getStyle('overflow') !== 'auto') {
+                        domNode.style.top = Math.floor(region.top - domNode.offsetHeight / 2 + startRect.height / 2 + scrollTop) + 'px';
+                    } else {
+                        domNode.style.top = Math.floor(nativeEditor.element.$.offsetTop + startRect.height / 2 - domNode.offsetHeight / 2) + 'px';
+                    }
+>>>>>>> d3c3794b8c59d0dfde2c6a7179d453a0d223955c
 
 /***/ "./src/core/link.js":
 /*!**************************!*\
