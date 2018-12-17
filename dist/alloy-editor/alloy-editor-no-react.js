@@ -12353,10 +12353,19 @@ var ToolbarStyles = function (_React$Component) {
     };
 >>>>>>> c1d36639... Build files (auto-generated)
 
+<<<<<<< HEAD
             // If current selection has a function called `setPosition`, call it
             // and check the returned value. If false, fallback to the default positioning logic.
             if (currentSelection) {
                 var setPositionFn = this._getSelectionFunction(currentSelection.setPosition);
+=======
+    var linkSelectionTest = function linkSelectionTest(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var range = nativeEditor.getSelection().getRanges()[0];
+        var selectionData = payload.data.selectionData;
+
+        var selectionDataName;
+>>>>>>> 044ae5d4b4217bbf7f6d2cfdce575e8db6192a43
 
 <<<<<<< HEAD
                 if (setPositionFn) {
@@ -12370,12 +12379,30 @@ var ToolbarStyles = function (_React$Component) {
 =======
         var selectionEmpty = false;
 
+<<<<<<< HEAD
+        if (payload.editor) {
+            var nativeEditor = payload.editor._getNativeEditor();
+=======
+        if (selectionData.element) selectionDataName = selectionData.element.getName();
+
+        return !!(nativeEditor.isSelectionEmpty() && selectionDataName !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+    };
+>>>>>>> 044ae5d4b4217bbf7f6d2cfdce575e8db6192a43
+
+            selectionEmpty = nativeEditor.isSelectionEmpty();
+        }
+
+<<<<<<< HEAD
+=======
+        var selectionEmpty = false;
+
         if (payload.editor) {
             var nativeEditor = payload.editor._getNativeEditor();
 
             selectionEmpty = nativeEditor.isSelectionEmpty();
         }
 
+>>>>>>> 044ae5d4b4217bbf7f6d2cfdce575e8db6192a43
         return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionEmpty && !selectionData.element.isReadOnly());
     };
 >>>>>>> c1d36639... Build files (auto-generated)
@@ -19061,6 +19088,10 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_react__;
 /*! no static exports found */
 /***/ (function(module, exports) {
 =======
+                    if (parentNode) {
+                        res = res || parentNode.id === "ckimgrsz";
+                    }
+
                     if (parentNode) {
                         res = res || parentNode.id === "ckimgrsz";
                     }

@@ -129,6 +129,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -148,6 +149,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.5
 >>>>>>> c1d36639... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.5
+>>>>>>> 044ae5d4b4217bbf7f6d2cfdce575e8db6192a43
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -11699,18 +11703,42 @@ var _plugins2 = _interopRequireDefault(_plugins);
         var nativeEditor = payload.editor.get('nativeEditor');
         var range = nativeEditor.getSelection().getRanges()[0];
         var selectionData = payload.data.selectionData;
+<<<<<<< HEAD
+=======
+
+        var selectionDataName;
+>>>>>>> 044ae5d4b4217bbf7f6d2cfdce575e8db6192a43
 
         var selectionDataName;
 >>>>>>> c1d36639... Build files (auto-generated)
 
+<<<<<<< HEAD
 var _selectionRegion = __webpack_require__(/*! ./selection-region */ "./src/core/selection-region.js");
+=======
+        if (selectionData.element) selectionDataName = selectionData.element.getName();
+
+        return !!(nativeEditor.isSelectionEmpty() && selectionDataName !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+    };
+>>>>>>> 044ae5d4b4217bbf7f6d2cfdce575e8db6192a43
 
 <<<<<<< HEAD
 var _selectionRegion2 = _interopRequireDefault(_selectionRegion);
 =======
         if (selectionData.element) selectionDataName = selectionData.element.getName();
 
+<<<<<<< HEAD
         return !!(nativeEditor.isSelectionEmpty() && selectionDataName !== 'img' && (element = new CKEDITOR.Link(nativeEditor).getFromSelection()) && element.getText().length !== range.endOffset && !element.isReadOnly() && !_isRangeAtElementEnd(range, element));
+=======
+        var selectionEmpty = false;
+
+        if (payload.editor) {
+            var nativeEditor = payload.editor._getNativeEditor();
+
+            selectionEmpty = nativeEditor.isSelectionEmpty();
+        }
+
+        return !!(selectionData.element && selectionData.element.getName() === 'img' && !selectionEmpty && !selectionData.element.isReadOnly());
+>>>>>>> 044ae5d4b4217bbf7f6d2cfdce575e8db6192a43
     };
 >>>>>>> c1d36639... Build files (auto-generated)
 
@@ -18220,6 +18248,10 @@ exports.default = Selections;
 /*! no static exports found */
 /***/ (function(module, exports) {
 =======
+                    if (parentNode) {
+                        res = res || parentNode.id === "ckimgrsz";
+                    }
+
                     if (parentNode) {
                         res = res || parentNode.id === "ckimgrsz";
                     }
