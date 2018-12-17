@@ -12586,6 +12586,7 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
 
             var result = [];
 
+<<<<<<< HEAD
             for (var len = arguments.length, startIndex = 0; startIndex < len; ++startIndex) {
                 result.push(arguments[startIndex]);
             }
@@ -12596,6 +12597,25 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
                 callback.apply(callContext, callArgs);
             }, timeout);
         };
+=======
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method tableSelectionSetPosition
+     * @param {Object} payload Object, which contains the selection data for retrieving the
+     * client rectangle of the selected table
+     * @return {Boolean} True, in all cases
+     */
+    var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+
+        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += uiNode.scrollTop;
+
+        centerToolbar(this, rect);
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 
         callFn.detach = function () {
             clearTimeout(debounceHandle);
@@ -14033,7 +14053,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         show: function show() {
             var domNode = ReactDOM.findDOMNode(this);
             var uiNode = this.props.editor.get('uiNode') || document.body;
+<<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 
             var handleUI = CKEDITOR.tools.debounce(function (event) {
                 ariaState = [];
@@ -14069,14 +14092,32 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
                     } else {
                         initialY = this.props.selectionData.region.top + uiNode.scrollTop;
+<<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
                     }
                 }
 
+<<<<<<< HEAD
                 if (!found) {
                     handleUI(event);
                 }
             }, uiTasksTimeout);
+=======
+            if (interactionPoint && domNode) {
+                var uiNode = this.props.editor.get('uiNode') || document.body;
+
+                var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += uiNode.scrollTop;
+
+                new CKEDITOR.dom.element(domNode).setStyles({
+                    left: xy[0] + 'px',
+                    top: xy[1] + 'px'
+                });
+            }
+        },
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 
             editor.on('ariaUpdate', function (event) {
                 // handleAria is debounced function, so if it is being called multiple times, it will
@@ -18732,6 +18773,8 @@ exports.tabletools = _tabletools2.default;
 				}
 			}));
 =======
+                    var uiNode = this.props.editor.get('uiNode') || document.body;
+
                     var uiNode = this.props.editor.get('uiNode') || document.body;
 
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {

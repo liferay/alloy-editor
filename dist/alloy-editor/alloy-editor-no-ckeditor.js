@@ -91,6 +91,7 @@ window["AlloyEditor"] =
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013-present, Facebook, Inc.
 =======
  * AlloyEditor v1.5.2
@@ -122,6 +123,9 @@ window["AlloyEditor"] =
 =======
  * AlloyEditor v1.5.7
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.7
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30395,6 +30399,7 @@ var ToolbarStyles = function (_React$Component) {
                 );
             }
 
+<<<<<<< HEAD
             return null;
         }
 
@@ -30408,6 +30413,64 @@ var ToolbarStyles = function (_React$Component) {
          * @protected
          * @return {Function} The mapped function.
          */
+=======
+    var DEFAULT_GUTTER = {
+        left: 0,
+        top: 0
+    };
+
+    /**
+     * Centers a Toolbar according to given rectangle
+     *
+     * @method centerToolbar
+     * @param {Object} toolbar The toolbar to be centered
+     * @param {Object} rect The rectangle according to which the Toolbar will be centered
+     */
+    var centerToolbar = function centerToolbar(toolbar, rect) {
+        var toolbarNode = ReactDOM.findDOMNode(toolbar);
+
+        var halfNodeWidth = toolbarNode.offsetWidth / 2;
+        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+
+        var gutter = toolbar.props.gutter || DEFAULT_GUTTER;
+
+        var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+
+        toolbar.moveToPoint([widgetXY[0], widgetXY[1]], [rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x, rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top]);
+    };
+
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method imageSelectionSetPosition
+     * @param {Object} payload Payload, should contain the selection data for retrieving the
+     * client rectangle of the selected image
+     * @return {Boolean} True, in all cases
+     */
+    var imageSelectionSetPosition = function imageSelectionSetPosition(payload) {
+        centerToolbar(this, payload.selectionData.element.getClientRect());
+
+        return true;
+    };
+
+    /**
+     * Sets the position of a toolbar according to the position of the selected image
+     *
+     * @method tableSelectionSetPosition
+     * @param {Object} payload Object, which contains the selection data for retrieving the
+     * client rectangle of the selected table
+     * @return {Boolean} True, in all cases
+     */
+    var tableSelectionSetPosition = function tableSelectionSetPosition(payload) {
+        var nativeEditor = payload.editor.get('nativeEditor');
+        var uiNode = nativeEditor.config.uiNode || document.body;
+
+        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+        var rect = table.getClientRect();
+        rect.top += uiNode.scrollTop;
+
+        centerToolbar(this, rect);
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 
     }, {
         key: '_getSelectionFunction',
@@ -32097,7 +32160,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         show: function show() {
             var domNode = ReactDOM.findDOMNode(this);
             var uiNode = this.props.editor.get('uiNode') || document.body;
+<<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 
     /**
      * Simulates event on a DOM element.
@@ -32192,7 +32258,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
                 xy[1] += uiNode.scrollTop;
+<<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 
     /**
      * Specifies the default timeout after which the {{#crossLink "CKEDITOR.plugins.ae_uicore/editorInteraction:event"}}{{/crossLink}} event
@@ -36849,6 +36918,8 @@ exports.tabletools = _tabletools2.default;
 		    newColSpan,
 		    newCellColSpan;
 =======
+                    var uiNode = this.props.editor.get('uiNode') || document.body;
+
                     var uiNode = this.props.editor.get('uiNode') || document.body;
 
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {

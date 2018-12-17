@@ -133,6 +133,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
 =======
@@ -164,6 +165,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 =======
  * AlloyEditor v1.5.7
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+ * AlloyEditor v1.5.7
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -11722,7 +11726,10 @@ exports.default = (0, _widgetArrowBox2.default)((0, _widgetDropdown2.default)((0
         rect.top += uiNode.scrollTop;
 
         centerToolbar(this, rect);
+<<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -13183,7 +13190,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         show: function show() {
             var domNode = ReactDOM.findDOMNode(this);
             var uiNode = this.props.editor.get('uiNode') || document.body;
+<<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 
             var ariaElement = this._createAriaElement(editor.id);
 
@@ -13211,7 +13221,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         initialY = this.props.selectionData.region.bottom + uiNode.scrollTop;
                     } else {
                         initialY = this.props.selectionData.region.top + uiNode.scrollTop;
+<<<<<<< HEAD
 >>>>>>> f1d775e5... Build files (auto-generated)
+=======
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
                     }
                 }
             }, uiTasksTimeout);
@@ -13228,6 +13241,133 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 =======
             if (interactionPoint && domNode) {
                 var uiNode = this.props.editor.get('uiNode') || document.body;
+<<<<<<< HEAD
+=======
+
+                var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+                xy[1] += uiNode.scrollTop;
+
+                new CKEDITOR.dom.element(domNode).setStyles({
+                    left: xy[0] + 'px',
+                    top: xy[1] + 'px'
+                });
+            }
+        },
+
+        /**
+         * Requests an animation frame, if possible, to simulate an animation.
+         *
+         * @instance
+         * @memberof WidgetPosition
+         * @method _animate
+         * @param {Function} callback The function to be executed on the scheduled frame.
+         * @protected
+         */
+        _animate: function _animate(callback) {
+            if (window.requestAnimationFrame) {
+                this._animationFrameId = window.requestAnimationFrame(callback);
+            } else {
+                callback();
+            }
+        }
+    };
+
+    AlloyEditor.WidgetPosition = WidgetPosition;
+})();
+'use strict';
+
+(function () {
+    'use strict';
+
+    /**
+     * The ButtonBold class provides functionality for styling an selection with strong (bold) style.
+     *
+     * @class ButtonBold
+     * @uses ButtonCommand
+     * @uses ButtonKeystroke
+     * @uses ButtonStateClasses
+     * @uses ButtonStyle
+     */
+
+    var ButtonBold = createReactClass({
+        displayName: 'ButtonBold',
+
+        mixins: [AlloyEditor.ButtonStyle, AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonCommand, AlloyEditor.ButtonKeystroke],
+
+        // Allows validating props being passed to the component.
+        propTypes: {
+            /**
+             * The editor instance where the component is being used.
+             *
+             * @instance
+             * @memberof ButtonBold
+             * @property {Object} editor
+             */
+            editor: PropTypes.object.isRequired,
+
+            /**
+             * The label that should be used for accessibility purposes.
+             *
+             * @instance
+             * @memberof ButtonBold
+             * @property {String} label
+             */
+            label: PropTypes.string,
+
+            /**
+             * The tabIndex of the button in its toolbar current state. A value other than -1
+             * means that the button has focus and is the active element.
+             *
+             * @instance
+             * @memberof ButtonBold
+             * @property {Number} tabIndex
+             */
+            tabIndex: PropTypes.number
+        },
+
+        // Lifecycle. Provides static properties to the widget.
+        statics: {
+            /**
+             * The name which will be used as an alias of the button in the configuration.
+             *
+             * @default bold
+             * @memberof ButtonBold
+             * @property {String} key
+             * @static
+             */
+            key: 'bold'
+        },
+
+        /**
+         * Lifecycle. Returns the default values of the properties used in the widget.
+         *
+         * @instance
+         * @memberof ButtonBold
+         * @method getDefaultProps
+         * @return {Object} The default properties.
+         */
+        getDefaultProps: function getDefaultProps() {
+            return {
+                command: 'bold',
+                keystroke: {
+                    fn: 'execCommand',
+                    keys: CKEDITOR.CTRL + 66 /*B*/
+                },
+                style: 'coreStyles_bold'
+            };
+        },
+
+        /**
+         * Lifecycle. Renders the UI of the button.
+         *
+         * @instance
+         * @memberof ButtonBold
+         * @method render
+         * @return {Object} The content which should be rendered.
+         */
+        render: function render() {
+            var cssClass = 'ae-button ' + this.getStateClasses();
+>>>>>>> 9e606a51386278fa9f62b17771971673c9b6a41d
 
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
                 xy[1] += uiNode.scrollTop;
@@ -17891,6 +18031,8 @@ exports.tabletools = _tabletools2.default;
 				}
 			}));
 =======
+                    var uiNode = this.props.editor.get('uiNode') || document.body;
+
                     var uiNode = this.props.editor.get('uiNode') || document.body;
 
                     if (nativeEditor.element.getStyle('overflow') !== 'auto') {
