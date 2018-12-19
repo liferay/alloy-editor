@@ -1,4 +1,5 @@
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
+import React from 'react';
 import createReactClass from 'create-react-class';
 
 (function() {

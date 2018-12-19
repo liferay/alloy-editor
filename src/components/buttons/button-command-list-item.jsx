@@ -33,11 +33,7 @@ class ButtonCommandListItem extends React.Component {
      * @return {String} The class name of the Widget.
      */
     _getClassName() {
-        var className = 'ae-toolbar-element';
-
-        if (this.props.icon) {
-            className += ' ae-icon-' + this.props.icon;
-        }
+        var className = 'ae-container ae-toolbar-element';
 
         return className;
     }

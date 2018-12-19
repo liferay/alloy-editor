@@ -25,4 +25,6 @@ class ButtonsStylesListHeader extends React.Component {
     }
 }
 
+ButtonsStylesListHeader.key = 'buttonStylesListHeader';
+
 export default ButtonsStylesListHeader;

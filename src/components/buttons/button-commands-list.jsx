@@ -59,7 +59,7 @@ class ButtonCommandsList extends React.Component {
             items = commands.map(function(item) {
                 return (
                     <li key={item.command} role="option">
-                        <ButtonCommandListItem command={item.command} description={typeof item.label === 'string' ? item.label : item.label()} editor={editor} />
+                        <ButtonCommandListItem command={item.command} description={typeof item.label === 'string' ? item.label : item.label()} icon={item.icon} editor={editor} />
                     </li>
                 );
             });

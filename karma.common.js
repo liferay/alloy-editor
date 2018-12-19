@@ -107,16 +107,9 @@ filesToLoad.push({
 
 module.exports = {
     // base path that will be used to resolve all patterns (eg. files, exclude)
-<<<<<<< HEAD:karma.common.js
     basePath: './',
-=======
-    basePath: '../../..',
 
     browsers: ['Chrome'],
-<<<<<<< HEAD:karma.common.js
->>>>>>> 3f7a0dae... Fixes #873 - Adds Contributing Guidelines and Release process documentation:src/ui/react/karma.js
-=======
->>>>>>> c66fcb67b132c120dc83a48940e0d19f1cbbdf75:src/ui/react/karma.js
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -134,16 +127,16 @@ module.exports = {
 
     webpack: {
         mode: 'development',
-		module: {
-			rules: [{
+        module: {
+            rules: [{
                 test: /\.(js|jsx)$/,
-				exclude: /(node_modules)/,
-				use: {
-					loader: 'babel-loader'
-				}
-			}]
-		}
-	},
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            }]
+        }
+    },
 
     webpackMiddleware: {
         logLevel: 'error',

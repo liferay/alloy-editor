@@ -1,7 +1,7 @@
 import '../core';
 import '../plugins';
 
-import '../components/uibridge/uibridge.js';
+import '../components/uibridge';
 
 import extend from '../oop/oop';
 import Lang from '../oop/lang';
@@ -48,7 +48,9 @@ extend(Core, Base, {
         editor.config.toolbars = this.get('toolbars');
 
         editor.config.removePlugins = this.get('removePlugins');
+
         editor.config.extraPlugins = this.get('extraPlugins');
+
         editor.config.placeholderClass = this.get('placeholderClass');
 
         editor.config.pasteFromWordRemoveStyles = false;
@@ -357,10 +359,23 @@ extend(Core, Base, {
         extraPlugins: {
             validator: Lang.isString,
             value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,' +
-                'ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize,' +
-                'ae_uibridge',
-                //'ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge',
+            'ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize,' +
+            'ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge,font,colorbutton',
             writeOnce: true
+        },
+
+        /**
+         * Specifies the "mode" for alloy editor
+         * @memberof Core
+         * @instance
+         * @property mode
+         * @default 'simple'
+         * @writeOnce
+         * @type {String}
+         */
+        mode: {
+            validator: Lang.isString,
+            value: 'simple'
         },
 
         /**

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import WidgetExclusive from './base/widget-exclusive.js';
 import WidgetFocusManager from './base/widget-focus-manager.js';
+import PropTypes from 'prop-types';
 
 /**
  * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
@@ -283,6 +284,7 @@ class UI extends React.Component {
 
         if (domNode) {
             var editable = this.props.editor.get('nativeEditor').editable();
+            var parentNode = target.parentNode;
             var targetNode = new CKEDITOR.dom.node(target);
 
             if (!editable) {
@@ -292,6 +294,10 @@ class UI extends React.Component {
             } else {
                 var res = (editable.$ === target) || editable.contains(targetNode) ||
                     (new CKEDITOR.dom.element(domNode)).contains(targetNode);
+
+                if (parentNode) {
+                    res = res || parentNode.id === "ckimgrsz";
+                }
 
                 if (!res) {
                     this.setState({
@@ -337,6 +343,47 @@ UI.defaultProps = {
  *
  * @event ariaUpdate
  */
+
+UI.propTypes = {
+    /**
+     * Localized messages for live aria updates. Should include the following messages:
+     * - noToolbar: Notification for no available toolbar in the editor.
+     * - oneToolbar: Notification for just one available toolbar in the editor.
+     * - manyToolbars: Notification for more than one available toolbar in the editor.
+     *
+     * @instance
+     * @memberof UI
+     * @property {Object} ariaUpdates
+     */
+    ariaUpdates: PropTypes.object,
+
+    /**
+     * The editor instance where the component is being used.
+     *
+     * @instance
+     * @memberof UI
+     * @property {Object} editor
+     */
+    editor: PropTypes.object.isRequired,
+
+    /**
+     * The delay (ms), after which key or mouse events will be processed.
+     *
+     * @instance
+     * @memberof UI
+     * @property {Number} eventsDelay
+     */
+    eventsDelay: PropTypes.number,
+
+    /**
+     * The toolbars configuration for this editor instance
+     *
+     * @instance
+     * @memberof UI
+     * @property {Object} toolbars
+     */
+    toolbars: PropTypes.object.isRequired
+};
 
 export default WidgetExclusive(
     WidgetFocusManager(

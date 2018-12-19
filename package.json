@@ -15,7 +15,6 @@
     "dir-compare": "^1.4.0",
     "eslint": "3.1.1",
     "event-stream": "3.3.1",
-<<<<<<< HEAD
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-consolidate": "^0.2.0",
@@ -25,23 +24,6 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^4.0.1",
     "gulp-template": "^5.0.0",
-=======
-    "gulp": "~3.9.0",
-    "gulp-babel": "6.1.1",
-    "gulp-compass": "2.1.0",
-    "gulp-concat": "2.6.0",
-    "gulp-consolidate": "0.2.0",
-    "gulp-cssnano": "2.0.0",
-    "gulp-empty": "0.1.1",
-    "gulp-iconfont": "8.0.1",
-    "gulp-rename": "1.2.2",
-    "gulp-replace": "0.5.3",
-    "gulp-sass": "3.1.0",
-    "gulp-template": "4.0.0",
-    "gulp-uglify": "2.0.0",
-    "gulp-yuidoc-relative": "0.1.2",
-    "gulp-zip": "3.0.2",
->>>>>>> abed0b17... Fixes #928 | Update gulp-sass to work with node v10.x.x
     "hash-files": "^1.1.1",
     "karma": "1.4.0",
     "karma-babel-preprocessor": "6.0.1",
@@ -73,22 +55,12 @@
   },
   "main": "dist/alloy-editor/alloy-editor-no-react.js",
   "scripts": {
-<<<<<<< HEAD
-<<<<<<< HEAD
     "build:assets": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
     "build": "npm run build:assets -- --release && webpack --config webpack.prod.js && webpack --config webpack.dev.js",
     "dev": "npm run build:assets && webpack --config webpack.dev.js",
-    "start": "webpack-dev-server --config webpack.dev.js --open",
-    "test:saucelabs": "karma start karma-saucelabs.js",
-    "test": "karma start karma.js"
-=======
-    "test": "gulp test",
-    "testSaucelabs": "gulp test:saucelabs"
->>>>>>> 3f7a0dae... Fixes #873 - Adds Contributing Guidelines and Release process documentation
-=======
-    "test": "gulp test",
-    "testSaucelabs": "gulp test:saucelabs"
->>>>>>> c66fcb67b132c120dc83a48940e0d19f1cbbdf75
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "test": "karma start karma.js",
+    "testSaucelabs": "karma start karma-saucelabs.js"
   },
   "repository": {
     "type": "git",
@@ -106,7 +78,8 @@
   "homepage": "http://alloyeditor.com",
   "dependencies": {
     "create-react-class": "^15.6.3",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1"
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   }
 }

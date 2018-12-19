@@ -318,6 +318,9 @@ export default WrappedComponent => class extends WrappedComponent {
      */
     show() {
         var domNode = ReactDOM.findDOMNode(this);
+        var uiNode = this.props.editor.get('uiNode');
+
+        var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
         if (!this.isVisible() && domNode) {
             var interactionPoint = this.getInteractionPoint();
@@ -346,9 +349,9 @@ export default WrappedComponent => class extends WrappedComponent {
                 }
 
                 if (interactionPoint.direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) {
-                    initialY = this.props.selectionData.region.bottom;
+                    initialY = this.props.selectionData.region.bottom + scrollTop;
                 } else {
-                    initialY = this.props.selectionData.region.top;
+                    initialY = this.props.selectionData.region.top + scrollTop;
                 }
 
                 this.moveToPoint([initialX, initialY], [finalX, finalY]);
@@ -369,7 +372,23 @@ export default WrappedComponent => class extends WrappedComponent {
         var domNode = ReactDOM.findDOMNode(this);
 
         if (interactionPoint && domNode) {
+            var uiNode = this.props.editor.get('uiNode') || document.body;
+            var uiNodeStyle = getComputedStyle(uiNode);
+            var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
+            var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
+            var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
             var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
+            xy[1] += scrollTop;
+
+            if (xy[0] < 0) {
+                xy[0] = 0;
+            }
+            if (xy[0] > totalWidth - domNode.offsetWidth) {
+                xy[0] = totalWidth - domNode.offsetWidth;
+            }
 
             new CKEDITOR.dom.element(domNode).setStyles({
                 left: xy[0] + 'px',

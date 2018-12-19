@@ -76,18 +76,50 @@ class ToolbarStyles extends React.Component{
 
             var cssClasses = 'ae-toolbar-styles ' + arrowBoxClasses;
 
-            var buttons = this.getToolbarButtons(
-                currentSelection.buttons,
+            var buttons = currentSelection.buttons;
+
+            if (typeof buttons === 'object' && !Array.isArray(buttons)) {
+                buttons = buttons[this.props.editor.get('mode')] || buttons['simple'];
+            }
+
+            var buttonsGroup = this.getToolbarButtonGroups(
+                buttons,
                 {
                     manualSelection: this.props.editorEvent ? this.props.editorEvent.data.manualSelection : null,
                     selectionType: currentSelection.name
                 }
             );
 
+            var hasGroups = buttonsGroup.filter(function(button) {
+                return Array.isArray(button);
+            }).length > 0;
+
+            var className = 'ae-container';
+
+            if (hasGroups) {
+                className += ' ae-container-column';
+            }
+
             return (
                 <div aria-label={AlloyEditor.Strings.styles} className={cssClasses} data-tabindex={this.props.config.tabIndex || 0} onFocus={this.focus.bind(this)} onKeyDown={this.handleKey.bind(this)} role="toolbar" tabIndex="-1">
-                    <div className="ae-container">
-                        {buttons}
+                    <div className={className}>
+                        {
+                            buttonsGroup.map(function (value, index) {
+                                if (Array.isArray(value)) {
+                                    return (
+                                        <div className="ae-row" key={index.toString()}>
+                                            {
+                                                value.map(function (button) {
+                                                    return button;
+                                                })
+                                            }
+                                        </div>
+                                    );
+                                } else {
+                                    return value;
+                                }
+                            })
+                        }
                     </div>
                 </div>
             );
