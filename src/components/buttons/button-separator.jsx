@@ -1,24 +1,12 @@
 import React from 'react';
 
 /**
- * The ButtonSeparator class renders a simple separator.
- *
- * @class ButtonSeparator
+ * The ButtonSeparator function renders a simple separator.
  */
-class ButtonSeparator extends React.Component {
-    /**
-     * Lifecycle. Renders the UI of the separator.
-     *
-     * @instance
-     * @memberof ButtonSeparator
-     * @method render
-     * @return {Object} The content which should be rendered.
-     */
-    render() {
-        return (
-            <span className="ae-separator"></span>
-        );
-    }
+function ButtonSeparator(props) {
+    return (
+        <span className="ae-separator"></span>
+    );
 }
 
 /**

@@ -107,7 +107,7 @@ class ToolbarStyles extends React.Component{
                             buttonsGroup.map(function (value, index) {
                                 if (Array.isArray(value)) {
                                     return (
-                                        <div className="ae-row" key={index.toString()}>
+                                        <div className="ae-row" key={index}>
                                             {
                                                 value.map(function (button) {
                                                     return button;

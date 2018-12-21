@@ -18,19 +18,16 @@ export default WrappedComponent => class extends WrappedComponent {
      * @return {Array} An Array which contains the buttons or button groups that should be rendered.
      */
     getToolbarButtonGroups(buttons, additionalProps) {
-        var instance = this;
-
         if (Lang.isFunction(buttons)) {
             buttons = buttons.call(this) || [];
         }
 
-
-        return buttons.reduce(function(list, button) {
+        return buttons.reduce((list, button) => {
             if (Array.isArray(button)) {
-                list.push(instance.getToolbarButtons(button, additionalProps));
+                list.push(this.getToolbarButtons(button, additionalProps));
                 return list;
             } else {
-                return instance.getToolbarButtons(buttons, additionalProps);
+                return this.getToolbarButtons(buttons, additionalProps);
             }
         }, []);
     }

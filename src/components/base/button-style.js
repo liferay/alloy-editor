@@ -1,5 +1,4 @@
 import Lang from '../../oop/lang.js'
-import PropTypes from 'prop-types';
 
 /**
  * ButtonStyle is a mixin that provides a style prop and some methods to apply the resulting
@@ -87,30 +86,3 @@ export default WrappedComponent => class extends WrappedComponent {
         return result;
     }
 };
-
-// WrappedComponent.propTypes = {
-//     /**
-//     * The style the button should handle. Allowed values are:
-//     * - Object as described by http://docs.ckeditor.com/#!/api/CKEDITOR.style.
-//     * - String pointing to an object inside the editor instance configuration. For example, `style = 'coreStyles_bold'` will try to
-//     * retrieve the style object from `editor.config.coreStyles_bold`. Nested properties such as `style = 'myplugin.myConfig.myStyle'`
-//     * are also supported and will try to retrieve the style object from the editor configuration as well.
-//     *
-//     * @instance
-//     * @memberof ButtonStyle
-//     * @property {Object|String} style
-//     */
-//     style: PropTypes.oneOfType([
-//         PropTypes.object,
-//         PropTypes.string
-//     ]),
-//     /**
-//      * The style function the button should handle.
-//      * If specified, style function has higher priority than style property.
-//      *
-//      * @instance
-//      * @memberof ButtonStyle
-//      * @property {function} styleFn
-//      */
-//     styleFn: PropTypes.func
-// };
