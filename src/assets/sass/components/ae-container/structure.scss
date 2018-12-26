@@ -2,15 +2,13 @@
     @include align-items(center);
     @include display(inline-flex);
     @include flex-direction(row);
-    @include flex-wrap(wrap);
-
+    @include flex-wrap(nowrap);
     box-sizing: border-box;
 
     *, *:after, *:before {
         box-sizing: inherit;
         color: inherit;
     }
-
     input, textarea, keygen, select, button {
         color: initial;
     }
@@ -24,6 +22,15 @@
             margin-right: $container-element-margin;
         }
     }
+}
+
+.ae-container-column {
+    align-items: inherit;
+    flex-direction: column;
+}
+
+.ae-container-link-edit-browse {
+    display: inherit;
 }
 
 .ae-container-edit-link, .ae-container-edit-table {
@@ -43,5 +50,13 @@
     #{$IE10-PLUS}::-ms-reveal, label {
         top: 0;
         transform: translateY(0);
+    }
+}
+
+.ae-row {
+    display: flex;
+
+    &:not(:first-child) {
+        margin-top: 8px;
     }
 }

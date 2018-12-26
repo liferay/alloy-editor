@@ -1,0 +1,14 @@
+.ae-separator {
+	height: 24px;
+	margin-right: 10px;
+	position: relative;
+
+	&::after {
+		border-right: 1px solid white;
+		content: '';
+		height: 12px;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}

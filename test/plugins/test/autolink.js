@@ -79,7 +79,7 @@
 
             testLink.call(this, {
                 expected: expected,
-                html: '<p>link www.liferay.com<br/></p>{ }<p>text</p>',
+                html: '<p>link www.liferay.com</p>{ }<p>text</p>',
                 keyCode: KEY_ENTER
             });
         });

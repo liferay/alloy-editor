@@ -11,6 +11,7 @@ import SelectionTest from '../selections/selection-test';
 
 import Attribute from '../oop/attribute';
 import extend from '../oop/oop';
+import '../plugins';
 
 // An object containing all currently registered plugins in AlloyEditor.
 var BRIDGE_BUTTONS = {};

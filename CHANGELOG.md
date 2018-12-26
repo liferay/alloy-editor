@@ -1,5 +1,193 @@
 # Change Log
 
+## [v1.5.17](https://github.com/liferay/alloy-editor/tree/v1.5.17) (2018-12-07)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.16...v1.5.17)
+
+**Fixed bugs:**
+
+- When Aligning an Image Context Bar Not Following Alignment \(Internet Explorer\) [\#853](https://github.com/liferay/alloy-editor/issues/853)
+- Twitter link allows too many characters to be tweeted [\#829](https://github.com/liferay/alloy-editor/issues/829)
+
+**Closed issues:**
+
+- Alloy Editor is Mislabeled as a WYSIWYG editor [\#936](https://github.com/liferay/alloy-editor/issues/936)
+- Fix saucelabs badge in README [\#931](https://github.com/liferay/alloy-editor/issues/931)
+- Fix installation with node v10.13.x [\#928](https://github.com/liferay/alloy-editor/issues/928)
+- Feature Request: Feature Sets [\#906](https://github.com/liferay/alloy-editor/issues/906)
+- Bug when editing a image link on IE 11 [\#858](https://github.com/liferay/alloy-editor/issues/858)
+- Toolbar doesn't close after hyperlinking an image [\#848](https://github.com/liferay/alloy-editor/issues/848)
+
+**Merged pull requests:**
+
+- Updates CHANGELOG for v1.5.16 [\#943](https://github.com/liferay/alloy-editor/pull/943) ([julien](https://github.com/julien))
+- Fixes \#853 | Updates toolbar position when changing image alignment [\#935](https://github.com/liferay/alloy-editor/pull/935) ([julien](https://github.com/julien))
+- Fixes \#924 Add four drag handles for image resizing [\#934](https://github.com/liferay/alloy-editor/pull/934) ([diana-lin](https://github.com/diana-lin))
+- Fixes \#829 | Limit tweet text to 280 chars [\#933](https://github.com/liferay/alloy-editor/pull/933) ([julien](https://github.com/julien))
+- Fixes \#931 | Fixes the saucelabs browser-matrix badge [\#932](https://github.com/liferay/alloy-editor/pull/932) ([julien](https://github.com/julien))
+- Fixes \#906 | Implement feature sets [\#930](https://github.com/liferay/alloy-editor/pull/930) ([julien](https://github.com/julien))
+- Fixes \#928 | Update gulp-sass to work with node v10.x.x [\#929](https://github.com/liferay/alloy-editor/pull/929) ([julien](https://github.com/julien))
+- Change dragresize implementation on IE to modify heigh and width insi… [\#923](https://github.com/liferay/alloy-editor/pull/923) ([gregory-bretall](https://github.com/gregory-bretall))
+
+## [v1.5.16](https://github.com/liferay/alloy-editor/tree/v1.5.16) (2018-11-23)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.15...v1.5.16)
+
+**Fixed bugs:**
+
+- Check published code for missing semi colons particularly in IE11 [\#900](https://github.com/liferay/alloy-editor/issues/900)
+- Image alignment Center CSS clashes when switching from IE to Chrome [\#898](https://github.com/liferay/alloy-editor/issues/898)
+
+**Closed issues:**
+
+- IE11 needs four drag handles when resizing an image [\#924](https://github.com/liferay/alloy-editor/issues/924)
+- AlloyEditor image resize handle position is misplaced in IE11 when image is right aligned [\#911](https://github.com/liferay/alloy-editor/issues/911)
+- Copy and paste text link add tags in IE11 [\#908](https://github.com/liferay/alloy-editor/issues/908)
+
+**Merged pull requests:**
+
+- Fixes \#908 Remove unwanted tags after paste [\#919](https://github.com/liferay/alloy-editor/pull/919) ([fortunatomaldonado](https://github.com/fortunatomaldonado))
+- Fixes \#915 - Checks if selection data exists in linkSelectionTest [\#918](https://github.com/liferay/alloy-editor/pull/918) ([julien](https://github.com/julien))
+- LPS-87500 Add styleFn support for the ButtonStylesList component [\#916](https://github.com/liferay/alloy-editor/pull/916) ([pavel-savinov](https://github.com/pavel-savinov))
+- Fixes https://github.com/liferay/alloy-editor/issues/900 Add closing … [\#913](https://github.com/liferay/alloy-editor/pull/913) ([SpencerWoo](https://github.com/SpencerWoo))
+- Fixes \#911 Use correct CSS to place drag resize handle at the corner [\#912](https://github.com/liferay/alloy-editor/pull/912) ([brianikim](https://github.com/brianikim))
+- Fix autolink test [\#907](https://github.com/liferay/alloy-editor/pull/907) ([julien](https://github.com/julien))
+- Fix \#898 | Added center align css interaction between IE11 and other … [\#899](https://github.com/liferay/alloy-editor/pull/899) ([fortunatomaldonado](https://github.com/fortunatomaldonado))
+
+## [v1.5.15](https://github.com/liferay/alloy-editor/tree/v1.5.15) (2018-10-23)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.14...v1.5.15)
+
+**Fixed bugs:**
+
+- Changing table column width in editor fails randomly [\#845](https://github.com/liferay/alloy-editor/issues/845)
+
+**Merged pull requests:**
+
+- Fix \#845 - Remove resizer everytime the cursor gets out of the pillar. Keeping the resizer there without any reason creates a black hole where the CKEditor's mousemove event is never triggered [\#893](https://github.com/liferay/alloy-editor/pull/893) ([julien](https://github.com/julien))
+
+## [v1.5.14](https://github.com/liferay/alloy-editor/tree/v1.5.14) (2018-10-03)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.13...v1.5.14)
+
+**Closed issues:**
+
+- Improper formatting in editor in case of pasting a text that contains an email address or URL [\#885](https://github.com/liferay/alloy-editor/issues/885)
+- How can I add/remove a CSS class to an Element via Button? [\#879](https://github.com/liferay/alloy-editor/issues/879)
+- Image Toolbar extend past browser [\#876](https://github.com/liferay/alloy-editor/issues/876)
+
+**Merged pull requests:**
+
+- Updates CHANGELOG for v1.15.14 [\#889](https://github.com/liferay/alloy-editor/pull/889) ([julien](https://github.com/julien))
+- Fixes \#876 | Fix toolbar position [\#888](https://github.com/liferay/alloy-editor/pull/888) ([julien](https://github.com/julien))
+- Fixes \#885 | Fix editor.on paste function and enhance REGEX\_URL [\#886](https://github.com/liferay/alloy-editor/pull/886) ([rolandpakai](https://github.com/rolandpakai))
+
+## [v1.5.13](https://github.com/liferay/alloy-editor/tree/v1.5.13) (2018-08-21)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.12...v1.5.13)
+
+**Closed issues:**
+
+- Add CONTRIBUTING.md and release documentation [\#873](https://github.com/liferay/alloy-editor/issues/873)
+
+**Merged pull requests:**
+
+- v1.15.13 [\#875](https://github.com/liferay/alloy-editor/pull/875) ([jbalsas](https://github.com/jbalsas))
+- Fixes \#873 - Adds Contributing Guidelines and Release process documentation [\#874](https://github.com/liferay/alloy-editor/pull/874) ([jbalsas](https://github.com/jbalsas))
+- \[TS\] LPS-84123 [\#872](https://github.com/liferay/alloy-editor/pull/872) ([arthurchan35](https://github.com/arthurchan35))
+
+## [v1.5.12](https://github.com/liferay/alloy-editor/tree/v1.5.12) (2018-08-02)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.11...v1.5.12)
+
+**Closed issues:**
+
+- Text styling isn't removed when text is deleted [\#870](https://github.com/liferay/alloy-editor/issues/870)
+- Toolbar increases in size when close to right window edge [\#866](https://github.com/liferay/alloy-editor/issues/866)
+
+**Merged pull requests:**
+
+- Adds special image2 version for IE11 [\#871](https://github.com/liferay/alloy-editor/pull/871) ([jbalsas](https://github.com/jbalsas))
+- Adjust toolbar placement on right side to prevent overflow [\#868](https://github.com/liferay/alloy-editor/pull/868) ([fortunatomaldonado](https://github.com/fortunatomaldonado))
+
+## [v1.5.11](https://github.com/liferay/alloy-editor/tree/v1.5.11) (2018-07-12)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.10...v1.5.11)
+
+**Merged pull requests:**
+
+- Controls the placement of the toolbar [\#867](https://github.com/liferay/alloy-editor/pull/867) ([julien](https://github.com/julien))
+
+## [v1.5.10](https://github.com/liferay/alloy-editor/tree/v1.5.10) (2018-06-26)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.9...v1.5.10)
+
+## [v1.5.9](https://github.com/liferay/alloy-editor/tree/v1.5.9) (2018-06-25)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.8...v1.5.9)
+
+**Merged pull requests:**
+
+- \#858 getChildren is not filtering 'a' [\#864](https://github.com/liferay/alloy-editor/pull/864) ([matuzalemsteles](https://github.com/matuzalemsteles))
+
+## [v1.5.8](https://github.com/liferay/alloy-editor/tree/v1.5.8) (2018-06-15)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.7...v1.5.8)
+
+**Merged pull requests:**
+
+- Prevents defaulting uiNode to body if unset [\#863](https://github.com/liferay/alloy-editor/pull/863) ([jbalsas](https://github.com/jbalsas))
+- Use uiNode in dragresize plugin [\#862](https://github.com/liferay/alloy-editor/pull/862) ([julien](https://github.com/julien))
+
+## [v1.5.7](https://github.com/liferay/alloy-editor/tree/v1.5.7) (2018-06-14)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.6...v1.5.7)
+
+**Merged pull requests:**
+
+- Update position according to uiNode [\#861](https://github.com/liferay/alloy-editor/pull/861) ([jbalsas](https://github.com/jbalsas))
+
+## [v1.5.6](https://github.com/liferay/alloy-editor/tree/v1.5.6) (2018-06-12)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.5...v1.5.6)
+
+**Merged pull requests:**
+
+- \#858 getting right element for IE [\#859](https://github.com/liferay/alloy-editor/pull/859) ([matuzalemsteles](https://github.com/matuzalemsteles))
+
+## [v1.5.5](https://github.com/liferay/alloy-editor/tree/v1.5.5) (2018-06-12)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.4...v1.5.5)
+
+**Merged pull requests:**
+
+- Resize visible [\#855](https://github.com/liferay/alloy-editor/pull/855) ([SpencerWoo](https://github.com/SpencerWoo))
+- Image link dev [\#849](https://github.com/liferay/alloy-editor/pull/849) ([SpencerWoo](https://github.com/SpencerWoo))
+
+## [v1.5.4](https://github.com/liferay/alloy-editor/tree/v1.5.4) (2018-06-05)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.3...v1.5.4)
+
+**Fixed bugs:**
+
+- Drag and Drop Doesn't Work Within the Editor [\#839](https://github.com/liferay/alloy-editor/issues/839)
+
+**Merged pull requests:**
+
+- LPS-79540 AlloyEditor removes links with invalid characters [\#850](https://github.com/liferay/alloy-editor/pull/850) ([diegonvs](https://github.com/diegonvs))
+
+## [v1.5.3](https://github.com/liferay/alloy-editor/tree/v1.5.3) (2018-05-17)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.2...v1.5.3)
+
+## [v1.5.2](https://github.com/liferay/alloy-editor/tree/v1.5.2) (2018-05-17)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.1...v1.5.2)
+
+**Implemented enhancements:**
+
+- Update 1.x CKEditor to 4.7? [\#797](https://github.com/liferay/alloy-editor/issues/797)
+
+**Closed issues:**
+
+- AlloyEditor is not working with ReactJS 16 [\#807](https://github.com/liferay/alloy-editor/issues/807)
+- Crowdin setup [\#705](https://github.com/liferay/alloy-editor/issues/705)
+- Internationalization Support [\#696](https://github.com/liferay/alloy-editor/issues/696)
+- Support Ace inside of alloy-editor [\#400](https://github.com/liferay/alloy-editor/issues/400)
+- Improve "how to use ckeditor plugins" documentation [\#384](https://github.com/liferay/alloy-editor/issues/384)
+
+**Merged pull requests:**
+
+- Changes the way to get the selected item in the ae\_dragresize\_ie plugin [\#841](https://github.com/liferay/alloy-editor/pull/841) ([matuzalemsteles](https://github.com/matuzalemsteles))
+- Drag and Drop Doesn't Work Within the Editor Fixes \#839 [\#840](https://github.com/liferay/alloy-editor/pull/840) ([gregory-bretall](https://github.com/gregory-bretall))
+- Adding webpack 4 in the build process, upgrading to React 16.3.1 and removing support for IE 9 and 10 [\#815](https://github.com/liferay/alloy-editor/pull/815) ([matuzalemsteles](https://github.com/matuzalemsteles))
+- Fix broken link in README.md [\#812](https://github.com/liferay/alloy-editor/pull/812) ([lpsBetty](https://github.com/lpsBetty))
+- Wraps load method to remove unwanted dependencies introduced in CKEditor plugins [\#805](https://github.com/liferay/alloy-editor/pull/805) ([jbalsas](https://github.com/jbalsas))
+
 ## [v1.5.1](https://github.com/liferay/alloy-editor/tree/v1.5.1) (2017-11-23)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/1.5.0...v1.5.1)
 

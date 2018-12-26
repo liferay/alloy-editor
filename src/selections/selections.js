@@ -4,7 +4,7 @@ import SelectionTest from './selection-test.js';
 
 const Selections = [{
     name: 'embed',
-    buttons: ['embedRemove', 'embedEdit'],
+    buttons: ['embedRemove','embedEdit'],
     test: SelectionTest.embed
 }, {
     name: 'link',
@@ -17,7 +17,20 @@ const Selections = [{
     test: SelectionTest.image
 }, {
     name: 'text',
-    buttons: ['styles', 'bold', 'italic', 'underline', 'link', 'twitter'],
+    buttons: {
+        full: [
+            [
+                'Font', 'FontSize', 'separator', 'bold', 'italic',
+                'underline', 'strike', 'separator', 'link'
+            ],
+            [
+                'paragraphAlign', 'separator', 'ul', 'ol', 'separator', 'h1', 'h2',
+                'separator', 'indentBlock', 'outdentBlock', 'separator',
+                'TextColor', 'BGColor', 'separator', 'code', 'quote', 'separator', 'removeFormat'
+            ]
+        ],
+        simple: ['styles', 'bold', 'italic', 'underline', 'link']
+    },
     test: SelectionTest.text
 }, {
     name: 'table',

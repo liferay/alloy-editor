@@ -1,5 +1,6 @@
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import createReactClass from 'create-react-class';
+import React from 'react';
 
 (function() {
     'use strict';

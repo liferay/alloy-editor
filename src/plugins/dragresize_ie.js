@@ -546,6 +546,8 @@
             // inline styles or classes (image2_alignClasses).
             var attrsHolder = el.name == 'a' ? el.getFirst() : el;
 
+            delete attrsHolder.attributes.contenteditable;
+
             var attrs = attrsHolder.attributes;
 
             var align = this.data.align;
@@ -876,10 +878,9 @@
                 // Don't update attributes if less than 10.
                 // This is to prevent images to visually disappear.
                 if (newWidth >= 15 && (newHeight >= 15 || newHeight === 'auto')) {
-                    image.setAttributes({
-                        width: newWidth,
-                        height: newHeight
-                    });
+                    image.$.style.width = newWidth + 'px';
+                    image.$.style.height = newHeight + 'px';
+
                     updateData = true;
                 } else {
                     updateData = false;
@@ -900,10 +901,8 @@
                 resizer.removeClass('cke_image_resizing');
 
                 if (updateData) {
-                    widget.setData({
-                        height: newHeight,
-                        width: newWidth
-                    });
+                    widget.element.$.style.width = newWidth + 'px';
+                    widget.element.$.style.height = newHeight + 'px';
 
                     // Save another undo snapshot: after resizing.
                     editor.fire('saveSnapshot');
@@ -920,15 +919,32 @@
         });
 
         widget.parts.image.on('click', function () {
+            var selection = editor.getSelection();
 
-            editor._.editable.editor.getSelection().selectElement(this);
+            if (selection) {
+                var element = selection.getStartElement();
 
-            var selectionData = editor._.editable.editor.getSelectionData();
-            if (selectionData) {
-                editor.fire('editorInteraction', {
-                    nativeEvent: event,
-                    selectionData: selectionData
-                });
+                if (element) {
+                    var widgetElement = element.findOne('img');
+
+                    if (widgetElement) {
+                        var region = element.getClientRect();
+
+                        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+                        region.left -= scrollPosition.x;
+                        region.top += scrollPosition.y;
+
+                        region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
+
+                        editor.fire('editorInteraction', {
+                            nativeEvent: event,
+                            selectionData: {
+                                element: widgetElement,
+                                region: region
+                            }
+                        });
+                    }
+                }
             }
         });
 

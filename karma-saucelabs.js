@@ -9,9 +9,30 @@ if (sauceLabsAccessKey) {
 }
 
 var customLaunchers = {
-    sl_chrome: {
+    sl_chrome_mac_10_11: {
         base: 'SauceLabs',
-        browserName: 'chrome'
+        browserName: 'chrome',
+        platform: 'OS X 10.11'
+    },
+    sl_chrome_mac_10_12: {
+        base: 'SauceLabs',
+        browserName: 'chrome',
+        platform: 'macOS 10.12'
+    },
+    sl_chrome_mac_10_13: {
+        base: 'SauceLabs',
+        browserName: 'chrome',
+        platform: 'macOS 10.13'
+    },
+    sl_chrome_linux: {
+        base: 'SauceLabs',
+        browserName: 'chrome',
+        platform: 'Linux'
+    },
+    sl_chrome_windows: {
+        base: 'SauceLabs',
+        browserName: 'chrome',
+        platform: 'Windows 10'
     },
     sl_firefox: {
         base: 'SauceLabs',
@@ -20,7 +41,7 @@ var customLaunchers = {
     sl_ie_11: {
         base: 'SauceLabs',
         browserName: 'internet explorer',
-        platform: 'Windows 8.1',
+        platform: 'Windows 10',
         version: '11'
     },
     sl_edge_20: {

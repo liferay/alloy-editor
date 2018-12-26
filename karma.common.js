@@ -109,6 +109,8 @@ module.exports = {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: './',
 
+    browsers: ['Chrome'],
+
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['chai', 'fixture', 'mocha', 'sinon'],
@@ -125,16 +127,16 @@ module.exports = {
 
     webpack: {
         mode: 'development',
-		module: {
-			rules: [{
+        module: {
+            rules: [{
                 test: /\.(js|jsx)$/,
-				exclude: /(node_modules)/,
-				use: {
-					loader: 'babel-loader'
-				}
-			}]
-		}
-	},
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            }]
+        }
+    },
 
     webpackMiddleware: {
         logLevel: 'error',

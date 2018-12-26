@@ -123,13 +123,17 @@
             _onDragDrop: function(event) {
                 var nativeEvent = event.data.$;
 
-                new CKEDITOR.dom.event(nativeEvent).preventDefault();
+                var transferFiles = nativeEvent.dataTransfer.files;
 
-                var editor = event.listenerData.editor;
+                if (transferFiles.length > 0) {
+                    new CKEDITOR.dom.event(nativeEvent).preventDefault();
 
-                event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+                    var editor = event.listenerData.editor;
 
-                this._handleFiles(nativeEvent.dataTransfer.files, editor);
+                    event.listenerData.editor.createSelectionFromPoint(nativeEvent.clientX, nativeEvent.clientY);
+
+                    this._handleFiles(transferFiles, editor);
+                }
             },
 
             /**

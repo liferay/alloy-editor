@@ -7,7 +7,7 @@ const Common = require('./karma.common');
 const defaultConfig = Object.assign(
     Common,
     {
-        browsers: ['Chrome', 'Firefox', 'IE9 - Win7', 'IE10 - Win7', 'IE11 - Win7', 'MSEdge - Win10'],
+        browsers: ['Chrome'],
 
         // test results reporter to use
         // possible values: 'dots', 'progress'

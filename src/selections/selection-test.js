@@ -16,12 +16,12 @@ var _isRangeAtElementEnd = function(range, element) {
 };
 
 var embedSelectionTest = function(payload) {
-    var selectionData = payload.data.selectionData;
+        var selectionData = payload.data.selectionData;
 
-    return !!(
-        selectionData.element &&
-        selectionData.element.getAttribute('data-widget') === 'ae_embed'
-    );
+        return !!(
+            selectionData.element &&
+            selectionData.element.getAttribute('data-widget') === 'ae_embed'
+        );
 };
 
 var linkSelectionTest = function(payload) {

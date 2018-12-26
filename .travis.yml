@@ -9,9 +9,11 @@ before_script:
 - gem update --system
 - gem install sass
 - gem install compass
+
 language: node_js
+
 node_js:
 - '8'
 
 script:
-    - npm run test:saucelabs
+  - npm run testSaucelabs

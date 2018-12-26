@@ -217,14 +217,22 @@
             return false;
         },
         show: function(el) {
+            var uiNode = this.editor.config.uiNode;
+
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
             this.el = el;
             if (this.cfg.snapToSize) {
                 this.otherImages = toArray(this.document.getElementsByTagName('img'));
                 this.otherImages.splice(this.otherImages.indexOf(el), 1);
             }
             var box = this.box = getBoundingBox(this.window, el);
-            positionElement(this.container, box.left, box.top);
-            this.document.body.appendChild(this.container);
+            positionElement(this.container, box.left, box.top + scrollTop);
+
+            uiNode = uiNode || document.body;
+
+            uiNode.appendChild(this.container);
+
             this.el.classList.add('ckimgrsz');
             this.showHandles();
         },
