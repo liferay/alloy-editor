@@ -25,7 +25,7 @@
 
     var REGEX_LAST_WORD = /[^\s]+/gim;
 
-    var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
+    var REGEX_URL = '((([A - Za - z]{ 3, 9}: (?: \\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(https?\\:\\/\\/|www.|[-;:&=.\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))((.*):(\\d*)\\/?(.*))?)';
 
     var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
 
@@ -172,7 +172,7 @@
              * @return {Boolean} Returns true if the link is a valid URL, false otherwise
              */
             _isValidURL: function(link) {
-                return REGEX_URL.test(link);
+                return RegExp(REGEX_URL, 'i').test(link);
             },
 
             /**
