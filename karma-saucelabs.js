@@ -101,6 +101,7 @@ const defaultConfig = Object.assign(
             recordScreenshots: false,
             startConnect: true,
             connectOptions: {
+                'no-ssl-bump-domains': 'all',
                 port: 5757,
                 logfile: 'sauce_connect.log'
             }
