@@ -180,13 +180,15 @@ class UI extends React.Component {
             return AlloyEditor.Toolbars[toolbar] || window[toolbar];
         });
 
+        var instance = this;
+
         toolbars = this.filterExclusive(toolbars).map(function(toolbar) {
             var props = this.mergeExclusiveProps({
                 config: this.props.toolbars[toolbar.key],
                 editor: this.props.editor,
                 editorEvent: this.state.editorEvent,
                 key: toolbar.key,
-                onDismiss: this._onDismissToolbarFocus,
+                onDismiss: this._onDismissToolbarFocus.bind(instance),
                 selectionData: this.state.selectionData
             }, toolbar.key);
 

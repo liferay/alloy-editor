@@ -1,5 +1,5 @@
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 /**
  * The ButtonImage class inserts an image to the content.
@@ -7,6 +7,16 @@ import ReactDOM from 'react-dom';
  * @class ButtonImage
  */
 class ButtonImage extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default image
+     * @memberof ButtonImage
+     * @property {String} key
+     * @static
+     */
+    static key = 'image';
+
     constructor(props) {
         super(props);
         this.fileInput = React.createRef();
@@ -26,7 +36,7 @@ class ButtonImage extends React.Component {
         return (
             <div>
                 <button aria-label={AlloyEditor.Strings.image} className="ae-button" data-type="button-image" onClick={this.handleClick.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.image}>
-                    <span className="ae-icon-image"></span>
+                    <ButtonIcon editor={this.props.editor} symbol="document-image" />
                 </button>
 
                 <input accept="image/*" onChange={this._onInputChange.bind(this)} ref={this.fileInput} style={inputSyle} type="file"/>
@@ -103,15 +113,5 @@ class ButtonImage extends React.Component {
         inputEl.value = '';
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default image
- * @memberof ButtonImage
- * @property {String} key
- * @static
- */
-ButtonImage.key = 'image';
 
 export default ButtonImage;

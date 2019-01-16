@@ -1,6 +1,7 @@
 import ButtonCfgProps from '../base/button-props.js';
-import ButtonLinkEdit from './button-link-edit.jsx';
+import ButtonIcon from './button-icon.jsx';
 import ButtonKeystroke from '../base/button-keystroke.js';
+import ButtonLinkEdit from './button-link-edit.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import React from 'react';
 
@@ -17,6 +18,31 @@ import React from 'react';
  * @uses ButtonStateClasses
  */
 class ButtonLink extends React.Component {
+    /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonLink
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        keystroke: {
+            fn: '_requestExclusive',
+            keys: CKEDITOR.CTRL + 76 /*L*/
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default link
+     * @memberof ButtonLink
+     * @property {String} key
+     * @static
+     */
+    static key = 'link';
+
     /**
      * Checks if the current selection is contained within a link.
      *
@@ -49,7 +75,7 @@ class ButtonLink extends React.Component {
         } else {
             return (
                 <button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type="button-link" onClick={this._requestExclusive.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
-                    <span className="ae-icon-link"></span>
+                    <ButtonIcon editor={this.props.editor} symbol="link" />
                 </button>
             );
         }
@@ -67,31 +93,6 @@ class ButtonLink extends React.Component {
         this.props.requestExclusive(ButtonLink.key);
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default link
- * @memberof ButtonLink
- * @property {String} key
- * @static
- */
-ButtonLink.key = 'link';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonLink
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonLink.defaultProps = {
-    keystroke: {
-        fn: '_requestExclusive',
-        keys: CKEDITOR.CTRL + 76 /*L*/
-    }
-};
 
 export default ButtonCfgProps(
     ButtonKeystroke(

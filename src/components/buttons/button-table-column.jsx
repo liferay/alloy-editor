@@ -1,4 +1,5 @@
 import ButtonCommandsList from './button-commands-list.jsx';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -7,6 +8,16 @@ import React from 'react';
  * @class ButtonTableColumn
  */
 class ButtonTableColumn extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default tableColumn
+     * @memberof ButtonTableColumn
+     * @property {String} key
+     * @static
+     */
+    static key = 'tableColumn';
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -27,7 +38,7 @@ class ButtonTableColumn extends React.Component {
         return (
             <div className="ae-container ae-has-dropdown">
                 <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.column} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown.bind(this)} role="listbox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.column}>
-                    <span className="ae-icon-column"></span>
+                    <ButtonIcon editor={this.props.editor} symbol="add-column" />
                 </button>
                 {buttonCommandsList}
             </div>
@@ -61,15 +72,5 @@ class ButtonTableColumn extends React.Component {
         ];
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default tableColumn
- * @memberof ButtonTableColumn
- * @property {String} key
- * @static
- */
-ButtonTableColumn.key = 'tableColumn';
 
 export default ButtonTableColumn;

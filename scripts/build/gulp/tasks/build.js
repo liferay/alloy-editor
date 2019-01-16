@@ -20,7 +20,8 @@ gulp.task('build', function(callback) {
         [
             'build-css',
             'copy-ckeditor',
-            'copy-languages'
+            'copy-languages',
+            'copy-svgs'
         ],
         task,
         callback

@@ -10,6 +10,16 @@ import React from 'react';
  */
 class ButtonCommandListItem extends React.Component {
     /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default buttonCommandListItem
+     * @memberof ButtonCommandListItem
+     * @property {String} key
+     * @static
+     */
+    static key = 'buttonCommandListItem';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -38,16 +48,6 @@ class ButtonCommandListItem extends React.Component {
         return className;
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default buttonCommandListItem
- * @memberof ButtonCommandListItem
- * @property {String} key
- * @static
- */
-ButtonCommandListItem.key = 'buttonCommandListItem';
 
 export default ButtonCommand(
     ButtonCommandListItem

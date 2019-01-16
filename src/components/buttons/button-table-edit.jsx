@@ -1,5 +1,5 @@
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 var KEY_ENTER = 13;
 var KEY_ESC = 27;
@@ -11,6 +11,32 @@ var KEY_ESC = 27;
  * @class ButtonTableEdit
  */
 class ButtonTableEdit extends React.Component {
+    /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonTableEdit
+     * @method getDefaultProps
+     */
+    static defaultProps = {
+        tableAttributes: {
+            border: 1,
+            cellPadding: 0,
+            cellSpacing: 0,
+            style: 'width: 100%'
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default tableEdit
+     * @memberof ButtonTableEdit
+     * @property {String} key
+     * @static
+     */
+    static key = 'tableEdit';
+
     /**
      * Lifecycle. Invoked once before the component is mounted.
      *
@@ -132,37 +158,11 @@ class ButtonTableEdit extends React.Component {
                 </div>
 
                 <button aria-label="Confirm" className="ae-button" onClick={this._createTable.bind(this)}>
-                    <span className="ae-icon-ok"></span>
+                    <ButtonIcon editor={this.props.editor} symbol="check" />
                 </button>
             </div>
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default tableEdit
- * @memberof ButtonTableEdit
- * @property {String} key
- * @static
- */
-ButtonTableEdit.key = 'tableEdit';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonTableEdit
- * @method getDefaultProps
- */
-ButtonTableEdit.defaultProps = {
-    tableAttributes: {
-        border: 1,
-        cellPadding: 0,
-        cellSpacing: 0,
-        style: 'width: 100%'
-    }
-};
 
 export default ButtonTableEdit;

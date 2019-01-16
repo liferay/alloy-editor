@@ -4,6 +4,7 @@ import autolist from './autolist';
 import dragresize from './dragresize';
 import dragresizeie from './dragresize_ie';
 import embed from './embed';
+import embedurl from './embedurl';
 import imagealignment from './imagealignment';
 import pasteimages from './pasteimages';
 import placeholder from './placeholder';
@@ -18,6 +19,7 @@ export {
     dragresize,
     dragresizeie,
     embed,
+    embedurl,
     imagealignment,
     pasteimages,
     placeholder,

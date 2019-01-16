@@ -32,7 +32,7 @@ import ButtonLinkTargetEdit from '../../../src/components/buttons/button-link-ta
 
             TestUtils.Simulate.change(inputLink, {target: {value: 'link.com'}});
 
-            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-ok');
+            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-svg-check');
 
             Simulate.click(buttonOk.parentNode);
 
@@ -57,7 +57,7 @@ import ButtonLinkTargetEdit from '../../../src/components/buttons/button-link-ta
 
             TestUtils.Simulate.change(inputLink, {target: {value: 'link.com'}});
 
-            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-ok');
+            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonLink, 'ae-icon-svg-check');
 
             Simulate.click(buttonOk.parentNode);
 

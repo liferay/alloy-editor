@@ -12,6 +12,36 @@ import WidgetFocusManager from '../base/widget-focus-manager.js';
  */
 class ButtonCommandsList extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonCommandsList
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        circular: false,
+        descendants: '.ae-toolbar-element',
+        keys: {
+            dismiss: [27],
+            dismissNext: [39],
+            dismissPrev: [37],
+            next: [40],
+            prev: [38]
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default buttonCommandsList
+     * @memberof ButtonCommandsList
+     * @property {String} key
+     * @static
+     */
+    static key = 'buttonCommandsList';
+
+    /**
      * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
      *
      * Focuses on the list node to allow keyboard interaction.
@@ -68,36 +98,6 @@ class ButtonCommandsList extends React.Component {
         return items;
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default buttonCommandsList
- * @memberof ButtonCommandsList
- * @property {String} key
- * @static
- */
-ButtonCommandsList.key = 'buttonCommandsList';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonCommandsList
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonCommandsList.defaultProps = {
-    circular: false,
-    descendants: '.ae-toolbar-element',
-    keys: {
-        dismiss: [27],
-        dismissNext: [39],
-        dismissPrev: [37],
-        next: [40],
-        prev: [38]
-    }
-};
 
 export default WidgetFocusManager(
     ButtonCommandsList

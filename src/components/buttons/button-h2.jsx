@@ -1,6 +1,7 @@
 import ButtonActionStyle from '../base/button-action-style.js';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import ButtonStyle from '../base/button-style.js';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -12,6 +13,30 @@ import React from 'react';
  * @uses ButtonStyle
  */
 class ButtonH2 extends React.Component {
+    /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonH2
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        style: {
+            element: 'h2'
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default h2
+     * @memberof ButtonH2
+     * @property {String} key
+     * @static
+     */
+    static key = 'h2';
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -25,35 +50,11 @@ class ButtonH2 extends React.Component {
 
         return (
             <button aria-label={AlloyEditor.Strings.h2} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-h2" onClick={this.applyStyle.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.h2}>
-                <span className="ae-icon-h2"></span>
+                <ButtonIcon editor={this.props.editor} symbol="h2" />
             </button>
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default h2
- * @memberof ButtonH2
- * @property {String} key
- * @static
- */
-ButtonH2.key = 'h2';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonH2
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonH2.defaultProps = {
-    style: {
-        element: 'h2'
-    }
-};
 
 export default ButtonActionStyle(
     ButtonStateClasses(

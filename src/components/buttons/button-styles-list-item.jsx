@@ -12,6 +12,16 @@ import React from 'react';
  */
 class ButtonStylesListItem extends React.Component {
     /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default buttonStylesListItem
+     * @memberof ButtonStylesListItem
+     * @property {String} key
+     * @static
+     */
+    static key = 'buttonStylesListItem';
+
+    /**
      * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
      *
      * @instance
@@ -68,16 +78,6 @@ class ButtonStylesListItem extends React.Component {
         this.applyStyle();
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default buttonStylesListItem
- * @memberof ButtonStylesListItem
- * @property {String} key
- * @static
- */
-ButtonStylesListItem.key = 'buttonStylesListItem';
 
 export default ButtonActionStyle(
     ButtonStyle(

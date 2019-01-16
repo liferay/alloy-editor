@@ -8,6 +8,28 @@ import React from 'react';
  */
 class ButtonStylesListItemRemove extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonStylesListItemRemove
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        removeBlocks: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre']
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default buttonStylesListItemRemove
+     * @memberof ButtonStylesListItemRemove
+     * @property {String} key
+     * @static
+     */
+    static key = 'buttonStylesListItemRemove';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -45,27 +67,5 @@ class ButtonStylesListItemRemove extends React.Component {
         editor.fire('actionPerformed', this);
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default buttonStylesListItemRemove
- * @memberof ButtonStylesListItemRemove
- * @property {String} key
- * @static
- */
-ButtonStylesListItemRemove.key = 'buttonStylesListItemRemove';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonStylesListItemRemove
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonStylesListItemRemove.defaultProps = {
-    removeBlocks: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre']
-};
 
 export default ButtonStylesListItemRemove;

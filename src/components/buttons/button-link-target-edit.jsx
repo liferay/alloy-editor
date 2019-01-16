@@ -1,3 +1,4 @@
+import ButtonIcon from './button-icon.jsx';
 import ButtonTargetList from './button-target-list.jsx';
 import React from 'react';
 
@@ -8,6 +9,16 @@ import React from 'react';
  * @class ButtonLinkTargetEdit
  */
 class ButtonLinkTargetEdit extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default linkTargetEdit
+     * @memberof ButtonLinkTargetEdit
+     * @property {String} key
+     * @static
+     */
+    static key = 'linkTargetEdit';
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -25,7 +36,7 @@ class ButtonLinkTargetEdit extends React.Component {
                 <button aria-expanded={this.props.expanded} aria-label={this.props.selectedTarget} className="ae-toolbar-element" onClick={this.props.toggleDropdown.bind(this)} role="combobox" tabIndex={this.props.tabIndex} title={this.props.selectedTarget}>
                     <div className="ae-container">
                         <span className="ae-container-dropdown-selected-item">{this.props.selectedTarget}</span>
-                        <span className="ae-icon-arrow"></span>
+                        <ButtonIcon editor={this.props.editor} symbol="caret-bottom" />
                     </div>
                 </button>
                 {this.props.expanded && (
@@ -49,15 +60,5 @@ class ButtonLinkTargetEdit extends React.Component {
         return nextProps.expanded !== this.props.expanded || nextProps.selectedTarget !== this.props.selectedTarget;
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default linkTargetEdit
- * @memberof ButtonLinkTargetEdit
- * @property {String} key
- * @static
- */
-ButtonLinkTargetEdit.key = 'linkTargetEdit';
 
 export default ButtonLinkTargetEdit;

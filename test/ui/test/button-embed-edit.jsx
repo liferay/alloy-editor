@@ -86,7 +86,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 
             var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
-            var buttonRemove = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-bin');
+            var buttonRemove = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-svg-trash');
 
             Simulate.click(buttonRemove.parentNode);
 
@@ -119,7 +119,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
         it('should not allow to update the embed link if the link input is empty', function() {
             var buttonEmbedEdit = ReactDOM.render(<ButtonEmbedEdit editor={this.editor} />, this.container);
 
-            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-ok');
+            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-svg-check');
 
             assert.isTrue(buttonOk.parentNode.hasAttribute('disabled'));
         });
@@ -159,7 +159,7 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
                 }
             });
 
-            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-ok').parentNode;
+            var buttonOk = TestUtils.findRenderedDOMComponentWithClass(buttonEmbedEdit, 'ae-icon-svg-check').parentNode;
 
             Simulate.click(buttonOk);
 

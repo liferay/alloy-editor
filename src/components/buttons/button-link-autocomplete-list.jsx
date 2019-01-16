@@ -1,6 +1,6 @@
 import ButtonDropdown from './button-dropdown.jsx';
-import WidgetFocusManager from '../base/widget-focus-manager.js';
 import React from 'react';
+import WidgetFocusManager from '../base/widget-focus-manager.js';
 
 /**
  * The ButtonLinkAutocompleteList class provides functionality for showing a list of
@@ -10,6 +10,38 @@ import React from 'react';
  * @uses WidgetFocusManager
  */
 class ButtonLinkAutocompleteList extends React.Component {
+    /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonLinkAutocompleteList
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        circular: false,
+        data: [],
+        delay: 100,
+        descendants: '.ae-toolbar-element',
+        keys: {
+            dismiss: [27],
+            dismissNext: [39],
+            dismissPrev: [37],
+            next: [40],
+            prev: [38]
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default buttonLinkAutocompleteList
+     * @memberof ButtonLinkAutocompleteList
+     * @property {String} key
+     * @static
+     */
+    static key = 'buttonLinkAutocompleteList';
+
     constructor(props) {
         super(props);
 
@@ -146,38 +178,6 @@ class ButtonLinkAutocompleteList extends React.Component {
         });
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default buttonLinkAutocompleteList
- * @memberof ButtonLinkAutocompleteList
- * @property {String} key
- * @static
- */
-ButtonLinkAutocompleteList.key = 'buttonLinkAutocompleteList';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonLinkAutocompleteList
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonLinkAutocompleteList.defaultProps = {
-    circular: false,
-    data: [],
-    delay: 100,
-    descendants: '.ae-toolbar-element',
-    keys: {
-        dismiss: [27],
-        dismissNext: [39],
-        dismissPrev: [37],
-        next: [40],
-        prev: [38]
-    }
-};
 
 export default WidgetFocusManager(
     ButtonLinkAutocompleteList

@@ -1,4 +1,5 @@
 import ButtonCameraImage from './button-camera-image.jsx';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -10,6 +11,16 @@ import React from 'react';
  * @class ButtonCamera
  */
 class ButtonCamera extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default camera
+     * @memberof ButtonCamera
+     * @property {String} key
+     * @static
+     */
+    static key = 'camera';
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -33,21 +44,11 @@ class ButtonCamera extends React.Component {
 
             return (
                 <button aria-label={label} className="ae-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={label}>
-                    <span className="ae-icon-camera"></span>
+                    <ButtonIcon editor={this.props.editor} symbol="camera" />
                 </button>
             );
         }
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default camera
- * @memberof ButtonCamera
- * @property {String} key
- * @static
- */
-ButtonCamera.key = 'camera';
 
 export default ButtonCamera;

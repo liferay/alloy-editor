@@ -1,4 +1,5 @@
 import ButtonCommandsList from './button-commands-list.jsx';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -7,6 +8,7 @@ import React from 'react';
  * @class ButtonParagraphAlign
  */
 class ButtonParagraphAlign extends React.Component {
+    static key = 'paragraphAlign';
 
     /**
      * Lifecycle. Renders the UI of the button.
@@ -37,14 +39,14 @@ class ButtonParagraphAlign extends React.Component {
             }
         ).pop();
 
-        var iconClassName = `ae-icon-${activeCommand.icon}`;
+        var iconClassName = activeCommand.icon;
 
         return (
             <div className="ae-container-dropdown ae-container-dropdown-xsmall ae-has-dropdown">
                 <button aria-expanded={this.props.expanded} aria-label={activeCommand.label} aria-owns={buttonCommandsListId} className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.row}>
                     <div className="ae-container">
-                        <span className={iconClassName}></span>
-                        <span className="ae-icon-arrow"></span>
+                        <ButtonIcon editor={this.props.editor} symbol={iconClassName} />
+                        <ButtonIcon editor={this.props.editor} symbol="caret-bottom" />
                     </div>
                 </button>
                 {buttonCommandsList}
@@ -81,13 +83,11 @@ class ButtonParagraphAlign extends React.Component {
             },
             {
                 command: 'justifyblock',
-                icon: 'align-justified',
+                icon: 'align-justify',
                 label: AlloyEditor.Strings.alignJustify
             }
         ];
     }
 }
-
-ButtonParagraphAlign.key = 'paragraphAlign';
 
 export default ButtonParagraphAlign;

@@ -1,4 +1,5 @@
 import ButtonCommandsList from './button-commands-list.jsx';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -7,6 +8,16 @@ import React from 'react';
  * @class ButtonTableCell
  */
 class ButtonTableCell extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default tableCell
+     * @memberof ButtonTableCell
+     * @property {String} key
+     * @static
+     */
+    static key = 'tableCell';
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -27,7 +38,7 @@ class ButtonTableCell extends React.Component {
         return (
             <div className="ae-container ae-has-dropdown">
                 <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.cell} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.cell}>
-                    <span className="ae-icon-cell"></span>
+                    <ButtonIcon editor={this.props.editor} symbol="add-cell" />
                 </button>
                 {buttonCommandsList}
             </div>
@@ -81,15 +92,5 @@ class ButtonTableCell extends React.Component {
         ];
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default tableCell
- * @memberof ButtonTableCell
- * @property {String} key
- * @static
- */
-ButtonTableCell.key = 'tableCell';
 
 export default ButtonTableCell;

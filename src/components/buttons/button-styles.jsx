@@ -1,3 +1,4 @@
+import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
 import React from 'react';
 
@@ -9,6 +10,16 @@ import React from 'react';
  * @class ButtonStyles
  */
 class ButtonStyles extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default styles
+     * @memberof ButtonStyles
+     * @property {String} key
+     * @static
+     */
+    static key = 'styles';
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -39,7 +50,7 @@ class ButtonStyles extends React.Component {
                 <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.styles + ' ' + activeStyle} className="ae-toolbar-element" onClick={this.props.toggleDropdown.bind(this)} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.styles + ' ' + activeStyle}>
                     <div className="ae-container">
                         <span className="ae-container-dropdown-selected-item">{activeStyle}</span>
-                        <span className="ae-icon-arrow"></span>
+                        <ButtonIcon editor={this.props.editor} symbol="caret-bottom" />
                     </div>
                 </button>
                 {buttonStylesList}
@@ -116,15 +127,5 @@ class ButtonStyles extends React.Component {
         ];
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default styles
- * @memberof ButtonStyles
- * @property {String} key
- * @static
- */
-ButtonStyles.key = 'styles';
 
 export default ButtonStyles;

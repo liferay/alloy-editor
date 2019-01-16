@@ -1,5 +1,6 @@
 import ButtonCommand from '../base/button-command.js';
 import ButtonStyle from '../base/button-style.js';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -11,6 +12,31 @@ import React from 'react';
  */
 class ButtonHline extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonHline
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        command: 'horizontalrule',
+        style: {
+            element: 'hr'
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default hline
+     * @memberof ButtonHline
+     * @property {String} key
+     * @static
+     */
+    static key = 'hline';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -21,36 +47,11 @@ class ButtonHline extends React.Component {
     render() {
         return (
             <button aria-label={AlloyEditor.Strings.horizontalrule} className="ae-button" data-type="button-hline" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.horizontalrule}>
-                <span className="ae-icon-separator"></span>
+                <ButtonIcon editor={this.props.editor} symbol="hr" />
             </button>
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default hline
- * @memberof ButtonHline
- * @property {String} key
- * @static
- */
-ButtonHline.key = 'hline';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonHline
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonHline.defaultProps = {
-    command: 'horizontalrule',
-    style: {
-        element: 'hr'
-    }
-};
 
 export default ButtonCommand(
     ButtonStyle(

@@ -9,6 +9,35 @@ import React from 'react';
  */
 class ButtonDropdown extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonDropdown
+     * @method getDefaultProps
+     */
+    static defaultProps = {
+        circular: false,
+        descendants: '.ae-toolbar-element',
+        keys: {
+            dismiss: [27],
+            dismissNext: [39],
+            dismissPrev: [37],
+            next: [40],
+            prev: [38]
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the dropdown in the configuration.
+     *
+     * @default dropdown
+     * @memberof ButtonDropdown
+     * @property {String} key
+     * @static
+     */
+    static key = 'dropdown';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -26,35 +55,6 @@ class ButtonDropdown extends React.Component {
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the dropdown in the configuration.
- *
- * @default dropdown
- * @memberof ButtonDropdown
- * @property {String} key
- * @static
- */
-ButtonDropdown.key = 'dropdown';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonDropdown
- * @method getDefaultProps
- */
-ButtonDropdown.defaultProps = {
-    circular: false,
-    descendants: '.ae-toolbar-element',
-    keys: {
-        dismiss: [27],
-        dismissNext: [39],
-        dismissPrev: [37],
-        next: [40],
-        prev: [38]
-    }
-};
 
 export default WidgetFocusManager(
     ButtonDropdown

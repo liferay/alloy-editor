@@ -12,6 +12,35 @@ import WidgetFocusManager from '../base/widget-focus-manager.js';
  */
 class ButtonTargetList extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonTargetList
+     * @method getDefaultProps
+     */
+    static defaultProps = {
+        circular: true,
+        descendants: '.ae-toolbar-element',
+        keys: {
+            dismiss: [27],
+            dismissNext: [39],
+            dismissPrev: [37],
+            next: [40],
+            prev: [38]
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default linkTargetEdit
+     * @memberof ButtonTargetList
+     * @property {String} key
+     * @static
+     */
+    static key = 'targetList';
+
+    /**
      * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
      *
      * @instance
@@ -95,35 +124,6 @@ class ButtonTargetList extends React.Component {
         return targets;
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default linkTargetEdit
- * @memberof ButtonTargetList
- * @property {String} key
- * @static
- */
-ButtonTargetList.key = 'targetList';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonTargetList
- * @method getDefaultProps
- */
-ButtonTargetList.defaultProps = {
-    circular: true,
-    descendants: '.ae-toolbar-element',
-    keys: {
-        dismiss: [27],
-        dismissNext: [39],
-        dismissPrev: [37],
-        next: [40],
-        prev: [38]
-    }
-};
 
 export default WidgetFocusManager(
     ButtonTargetList

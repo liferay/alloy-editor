@@ -1,6 +1,6 @@
+import ButtonIcon from './button-icon.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import React from 'react';
-
 
 const MAX_TWEET_LENGTH = 280;
 
@@ -12,6 +12,16 @@ const MAX_TWEET_LENGTH = 280;
  * @uses ButtonStateClasses
  */
 class ButtonTwitter extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default twitter
+     * @memberof ButtonTwitter
+     * @property {String} key
+     * @static
+     */
+    static key = 'twitter';
+
     /**
      * Creates or removes the twitter link on the selection.
      *
@@ -66,7 +76,7 @@ class ButtonTwitter extends React.Component {
 
         return (
             <button aria-label={AlloyEditor.Strings.twitter} className={cssClass} data-type="button-twitter" onClick={this.handleClick.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.twitter}>
-                <span className="ae-icon-twitter"></span>
+                <ButtonIcon editor={this.props.editor} symbol="twitter" />
             </button>
         );
     }
@@ -99,16 +109,6 @@ class ButtonTwitter extends React.Component {
         return twitterHref;
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default twitter
- * @memberof ButtonTwitter
- * @property {String} key
- * @static
- */
-ButtonTwitter.key = 'twitter';
 
 export default ButtonStateClasses(
     ButtonTwitter

@@ -1,9 +1,9 @@
 import ButtonCfgProps from '../base/button-props.js';
+import ButtonIcon from './button-icon.jsx';
 import ButtonLinkAutocompleteList from './button-link-autocomplete-list.jsx';
 import ButtonLinkTargetEdit from './button-link-target-edit.jsx';
 import Lang from '../../oop/lang.js';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import WidgetDropdown from '../base/widget-dropdown.js';
 import WidgetFocusManager from '../base/widget-focus-manager.js';
 
@@ -17,6 +17,41 @@ import WidgetFocusManager from '../base/widget-focus-manager.js';
  * @uses WidgetFocusManager
  */
 class ButtonLinkEdit extends React.Component {
+    /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonLinkEdit
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        appendProtocol: true,
+        autocompleteUrl: '',
+        circular: true,
+        customIndexStart: true,
+        defaultLinkTarget: '',
+        descendants: '.ae-toolbar-element',
+        keys: {
+            dismiss: [27],
+            dismissNext: [39],
+            dismissPrev: [37],
+            next: [40],
+            prev: [38]
+        },
+        showTargetSelector: true
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default linkEdit
+     * @memberof ButtonLinkEdit
+     * @property {String} key
+     * @static
+     */
+    static key = 'linkEdit';
+
     constructor(props) {
         super(props);
 
@@ -113,7 +148,7 @@ class ButtonLinkEdit extends React.Component {
         return (
             <div className="ae-container-edit-link">
                 <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink.bind(this)} title={AlloyEditor.Strings.remove}>
-                    <span className="ae-icon-unlink"></span>
+                    <ButtonIcon editor={this.props.editor} symbol="chain-broken" />
                 </button>
                 <div className="ae-container-input xxl">
                     {this.props.showTargetSelector && <ButtonLinkTargetEdit {...targetSelector} />}
@@ -124,7 +159,7 @@ class ButtonLinkEdit extends React.Component {
                     {buttonClearLink}
                 </div>
                 <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._updateLink.bind(this)} title={AlloyEditor.Strings.confirm}>
-                    <span className="ae-icon-ok"></span>
+                    <ButtonIcon editor={this.props.editor} symbol="check" className="ae-icon-svg-check" />
                 </button>
             </div>
         );
@@ -376,41 +411,6 @@ class ButtonLinkEdit extends React.Component {
         this.props.cancelExclusive();
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default linkEdit
- * @memberof ButtonLinkEdit
- * @property {String} key
- * @static
- */
-ButtonLinkEdit.key = 'linkEdit';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonLinkEdit
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonLinkEdit.defaultProps = {
-    appendProtocol: true,
-    autocompleteUrl: '',
-    circular: true,
-    customIndexStart: true,
-    defaultLinkTarget: '',
-    descendants: '.ae-toolbar-element',
-    keys: {
-        dismiss: [27],
-        dismissNext: [39],
-        dismissPrev: [37],
-        next: [40],
-        prev: [38]
-    },
-    showTargetSelector: true
-};
 
 export default ButtonCfgProps(
     WidgetDropdown(

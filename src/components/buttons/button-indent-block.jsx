@@ -1,5 +1,6 @@
 import ButtonCommand from '../base/button-command.js';
 import ButtonCommandActive from '../base/button-command-active.js';
+import ButtonIcon from './button-icon.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import React from 'react';
 
@@ -13,6 +14,28 @@ import React from 'react';
  */
 class ButtonIndentBlock extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonIndentBlock
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        command: 'indent'
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default indentBlock
+     * @memberof ButtonIndentBlock
+     * @property {String} key
+     * @static
+     */
+    static key = 'indentBlock';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -25,33 +48,11 @@ class ButtonIndentBlock extends React.Component {
 
         return (
             <button aria-label={AlloyEditor.Strings.indent} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-indent-block" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.indent}>
-                <span className="ae-icon-indent-block"></span>
+                <ButtonIcon editor={this.props.editor} symbol="indent-less" />
             </button>
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default indentBlock
- * @memberof ButtonIndentBlock
- * @property {String} key
- * @static
- */
-ButtonIndentBlock.key = 'indentBlock';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonIndentBlock
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonIndentBlock.defaultProps = {
-    command: 'indent'
-};
 
 export default ButtonCommand(
     ButtonCommandActive(

@@ -8,6 +8,26 @@ import ReactDOM from 'react-dom';
  */
 class ButtonCameraImage extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonCameraImage
+     */
+    static defaultProps = {
+        videoWidth: 320
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default cameraImage
+     * @memberof ButtonCameraImage
+     * @property {String} key
+     * @static
+     */
+    static key = 'cameraImage';
+
+    /**
      * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
      *
      * Focuses the take photo button.
@@ -154,7 +174,9 @@ class ButtonCameraImage extends React.Component {
         if (navigator.mozGetUserMedia) {
             videoEl.mozSrcObject = stream;
         } else {
-            videoEl.src = (window.URL || window.webkitURL).createObjectURL(stream);
+            // TODO: Show this "fix" to Chema
+            //       (i.e. the current implementation was failing in Chrome & Safari)
+            videoEl.srcObject = stream;
         }
 
         videoEl.play();
@@ -170,26 +192,5 @@ class ButtonCameraImage extends React.Component {
      * @param {CKEDITOR.dom.element} el The created img element in editor.
      */
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default cameraImage
- * @memberof ButtonCameraImage
- * @property {String} key
- * @static
- */
-ButtonCameraImage.key = 'cameraImage';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonCameraImage
- * @method getDefaultProps
- */
-ButtonCameraImage.defaultProps = {
-    videoWidth: 320
-};
 
 export default ButtonCameraImage;

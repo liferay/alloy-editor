@@ -1,4 +1,5 @@
 import ButtonCommand from '../base/button-command.js';
+import ButtonIcon from './button-icon.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import ButtonStyle from '../base/button-style.js';
 import React from 'react';
@@ -13,6 +14,31 @@ import React from 'react';
  */
 class ButtonOrderedList extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonOrderedList
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        command: 'numberedlist',
+        style: {
+            element: 'ol'
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default ol
+     * @memberof ButtonOrderedList
+     * @property {String} key
+     * @static
+     */
+    static key = 'ol';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -25,36 +51,11 @@ class ButtonOrderedList extends React.Component {
 
         return (
             <button aria-label={AlloyEditor.Strings.numberedlist} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-ol" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.numberedlist}>
-                <span className="ae-icon-numbered-list"></span>
+                <ButtonIcon editor={this.props.editor} symbol="list-ol" />
             </button>
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default ol
- * @memberof ButtonOrderedList
- * @property {String} key
- * @static
- */
-ButtonOrderedList.key = 'ol';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonOrderedList
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonOrderedList.defaultProps = {
-    command: 'numberedlist',
-    style: {
-        element: 'ol'
-    }
-};
 
 export default ButtonCommand(
     ButtonStateClasses(

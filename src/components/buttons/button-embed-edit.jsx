@@ -1,5 +1,5 @@
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 var KEY_ENTER = 13;
 var KEY_ESC = 27;
@@ -11,6 +11,16 @@ var KEY_ESC = 27;
  * @class ButtonEmbedEdit
  */
 class ButtonEmbedEdit extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default embedEdit
+     * @memberof ButtonEmbedEdit
+     * @property {String} key
+     * @static
+     */
+    static key = 'embedEdit';
+
     constructor(props) {
         super(props);
 
@@ -98,17 +108,20 @@ class ButtonEmbedEdit extends React.Component {
             opacity: this.state.linkHref ? 1 : 0
         };
 
+        const editor = this.props.editor;
+
         return (
             <div className="ae-container-edit-link">
                 <button aria-label={AlloyEditor.Strings.deleteEmbed} className="ae-button" data-type="button-embed-remove" disabled={!this.state.element} onClick={this._removeEmbed.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteEmbed}>
-                    <span className="ae-icon-bin"></span>
+                    <ButtonIcon editor={editor} symbol="trash" className="ae-icon-svg-trash" />
                 </button>
                 <div className="ae-container-input xxl">
                     <input className="ae-input" onChange={this._handleLinkHrefChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} placeholder={AlloyEditor.Strings.editLink} ref={this.linkInput} type="text" value={this.state.linkHref}></input>
-                    <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink.bind(this)} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
+                    <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink.bind(this)} style={clearLinkStyle} title={AlloyEditor.Strings.clear}>
+                    </button>
                 </div>
                 <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._embedLink.bind(this)} title={AlloyEditor.Strings.confirm}>
-                    <span className="ae-icon-ok"></span>
+                    <ButtonIcon editor={editor} symbol="check" className="ae-icon-svg-check" />
                 </button>
             </div>
         );
@@ -245,15 +258,5 @@ class ButtonEmbedEdit extends React.Component {
         editor.fire('actionPerformed', this);
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default embedEdit
- * @memberof ButtonEmbedEdit
- * @property {String} key
- * @static
- */
-ButtonEmbedEdit.key = 'embedEdit';
 
 export default ButtonEmbedEdit;
