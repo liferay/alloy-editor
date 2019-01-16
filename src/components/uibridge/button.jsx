@@ -1,5 +1,4 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 
 (function() {
     'use strict';
@@ -9,19 +8,12 @@ import createReactClass from 'create-react-class';
         return;
     }
 
-    /* istanbul ignore next */
-    function noop() {}
-
-    // API not yet implemented inside the button bridge. By mocking the unsupported methods, we
-    // prevent plugins from crashing if they make use of them.
-    //
     // Some methods like `getState` and `setState` clash with React's own state methods. For them,
     // unsupported means that we don't account for the different meaning in the passed or returned
     // arguments.
     var UNSUPPORTED_BUTTON_API = {
         //getState: function() {},
         //setState: function(state) {},
-        toFeature: noop
     };
 
     var BUTTON_DEFS = {};
@@ -44,63 +36,67 @@ import createReactClass from 'create-react-class';
         BUTTON_DEFS[editor.name][buttonName] = BUTTON_DEFS[editor.name][buttonName] || buttonDefinition;
 
         if (!ButtonBridge) {
-            ButtonBridge = createReactClass(
-                CKEDITOR.tools.merge(UNSUPPORTED_BUTTON_API, {
-                    displayName: buttonName,
+            ButtonBridge = class extends React.Component {
+                static displayName = buttonName;
 
-                    statics: {
-                        key: buttonName
-                    },
+                statics = {
+                    key: buttonName
+                };
 
-                    render: function() {
-                        var editor = this.props.editor.get('nativeEditor');
+                // API not yet implemented inside the button
+                // bridge. By mocking the unsupported method, we prevent
+                // plugins from crashing if they make use of it.
+                toFeature() {
+                }
 
-                        var buttonClassName = 'ae-button ae-button-bridge';
+                render() {
+                    var editor = this.props.editor.get('nativeEditor');
 
-                        var buttonDisplayName = BUTTON_DEFS[editor.name][buttonName].name || BUTTON_DEFS[editor.name][buttonName].command || buttonName;
+                    var buttonClassName = 'ae-button ae-button-bridge';
 
-                        var buttonLabel = BUTTON_DEFS[editor.name][buttonName].label;
+                    var buttonDisplayName = BUTTON_DEFS[editor.name][buttonName].name || BUTTON_DEFS[editor.name][buttonName].command || buttonName;
 
-                        var buttonType = 'button-' + buttonDisplayName;
+                    var buttonLabel = BUTTON_DEFS[editor.name][buttonName].label;
 
-                        var iconClassName = 'ae-icon-' + buttonDisplayName;
+                    var buttonType = 'button-' + buttonDisplayName;
 
-                        var iconStyle = {};
+                    var iconClassName = 'ae-icon-' + buttonDisplayName;
 
-                        var cssStyle = CKEDITOR.skin.getIconStyle(buttonDisplayName);
+                    var iconStyle = {};
 
-                        if (cssStyle) {
-                            var cssStyleParts = cssStyle.split(';');
+                    var cssStyle = CKEDITOR.skin.getIconStyle(buttonDisplayName);
 
-                            iconStyle.backgroundImage = cssStyleParts[0].substring(cssStyleParts[0].indexOf(':') + 1);
-                            iconStyle.backgroundPosition = cssStyleParts[1].substring(cssStyleParts[1].indexOf(':') + 1);
-                            iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(':') + 1);
-                        }
+                    if (cssStyle) {
+                        var cssStyleParts = cssStyle.split(';');
 
-                        return (
-                            <button aria-label={buttonLabel} className={buttonClassName} data-type={buttonType} onClick={this._handleClick} tabIndex={this.props.tabIndex} title={buttonLabel}>
-                                <span className={iconClassName} style={iconStyle}></span>
-                            </button>
-                        );
-                    },
-
-                    _handleClick: function(event) {
-                        var editor = this.props.editor.get('nativeEditor');
-
-                        var buttonCommand = BUTTON_DEFS[editor.name][buttonName].command;
-
-                        var buttonOnClick = BUTTON_DEFS[editor.name][buttonName].onClick;
-
-                        if (buttonOnClick) {
-                            buttonOnClick.call(this);
-                        } else {
-                            editor.execCommand(buttonCommand);
-                        }
-
-                        editor.fire('actionPerformed', this);
+                        iconStyle.backgroundImage = cssStyleParts[0].substring(cssStyleParts[0].indexOf(':') + 1);
+                        iconStyle.backgroundPosition = cssStyleParts[1].substring(cssStyleParts[1].indexOf(':') + 1);
+                        iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(':') + 1);
                     }
-                })
-            );
+
+                    return (
+                        <button aria-label={buttonLabel} className={buttonClassName} data-type={buttonType} onClick={this._handleClick} tabIndex={this.props.tabIndex} title={buttonLabel}>
+                            <span className={iconClassName} style={iconStyle}></span>
+                        </button>
+                    );
+                }
+
+                _handleClick = (event) => {
+                    var editor = this.props.editor.get('nativeEditor');
+
+                    var buttonCommand = BUTTON_DEFS[editor.name][buttonName].command;
+
+                    var buttonOnClick = BUTTON_DEFS[editor.name][buttonName].onClick;
+
+                    if (buttonOnClick) {
+                        buttonOnClick.call(this);
+                    } else {
+                        editor.execCommand(buttonCommand);
+                    }
+
+                    editor.fire('actionPerformed', this);
+                };
+            };
 
             AlloyEditor.Buttons[buttonName] = ButtonBridge;
         }
