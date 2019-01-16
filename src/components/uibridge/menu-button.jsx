@@ -1,6 +1,5 @@
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import React from 'react';
-import createReactClass from 'create-react-class';
 
 (function() {
     'use strict';
@@ -10,19 +9,12 @@ import createReactClass from 'create-react-class';
         return;
     }
 
-    /* istanbul ignore next */
-    function noop() {}
-
-    // API not yet implemented inside the menubutton bridge. By mocking the unsupported methods, we
-    // prevent plugins from crashing if they make use of them.
-    //
     // Some methods like `getState` and `setState` clash with React's own state methods. For them,
     // unsupported means that we don't account for the different meaning in the passed or returned
     // arguments.
     var UNSUPPORTED_MENUBUTTON_API = {
         //getState: function() {},
         //setState: function(state) {},
-        toFeature: noop
     };
 
     var MENUBUTTON_DEFS = {};
@@ -44,83 +36,87 @@ import createReactClass from 'create-react-class';
         MENUBUTTON_DEFS[editor.name][menuButtonName] = MENUBUTTON_DEFS[editor.name][menuButtonName] || menuButtonDefinition;
 
         if (!MenuButtonBridge) {
-            MenuButtonBridge = createReactClass(
-                CKEDITOR.tools.merge(UNSUPPORTED_MENUBUTTON_API, {
-                    displayName: menuButtonName,
+            MenuButtonBridge = class extends React.Component {
+              static displayName = menuButtonName;
 
-                    statics: {
-                        key: menuButtonName
-                    },
+              statics = {
+                  key: menuButtonName
+              };
 
-                    render: function() {
-                        var editor = this.props.editor.get('nativeEditor');
+              // API not yet implemented inside the menubutton
+              // bridge. By mocking the unsupported method, we prevent
+              // plugins from crashing if they make use of it.
+              toFeature() {
+              }
 
-                        var panelMenuButtonDisplayName = MENUBUTTON_DEFS[editor.name][menuButtonName].name || MENUBUTTON_DEFS[editor.name][menuButtonName].command || menuButtonName;
+              render() {
+                  var editor = this.props.editor.get('nativeEditor');
 
-                        var buttonClassName = 'ae-button ae-button-bridge';
+                  var panelMenuButtonDisplayName = MENUBUTTON_DEFS[editor.name][menuButtonName].name || MENUBUTTON_DEFS[editor.name][menuButtonName].command || menuButtonName;
 
-                        var iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
+                  var buttonClassName = 'ae-button ae-button-bridge';
 
-                        var iconStyle = {};
+                  var iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
 
-                        var cssStyle = CKEDITOR.skin.getIconStyle(panelMenuButtonDisplayName);
+                  var iconStyle = {};
 
-                        if (cssStyle) {
-                            var cssStyleParts = cssStyle.split(';');
+                  var cssStyle = CKEDITOR.skin.getIconStyle(panelMenuButtonDisplayName);
 
-                            iconStyle.backgroundImage = cssStyleParts[0].substring(cssStyleParts[0].indexOf(':') + 1);
-                            iconStyle.backgroundPosition = cssStyleParts[1].substring(cssStyleParts[1].indexOf(':') + 1);
-                            iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(':') + 1);
-                        }
+                  if (cssStyle) {
+                      var cssStyleParts = cssStyle.split(';');
 
-                        return (
-                            <div className="ae-container ae-has-dropdown">
-                                <button aria-expanded={this.props.expanded} aria-label={MENUBUTTON_DEFS[editor.name][menuButtonName].label} className={buttonClassName} onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={MENUBUTTON_DEFS[editor.name][menuButtonName].label}>
-                                    <span className={iconClassName} style={iconStyle}></span>
-                                </button>
-                                {this.props.expanded && (
-                                    <ButtonDropdown onDismiss={this.props.toggleDropdown}>
-                                        {this._getMenuItems()}
-                                    </ButtonDropdown>
-                                )}
-                            </div>
-                        );
-                    },
+                      iconStyle.backgroundImage = cssStyleParts[0].substring(cssStyleParts[0].indexOf(':') + 1);
+                      iconStyle.backgroundPosition = cssStyleParts[1].substring(cssStyleParts[1].indexOf(':') + 1);
+                      iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(':') + 1);
+                  }
 
-                    _getMenuItems: function() {
-                        var editor = this.props.editor.get('nativeEditor');
-                        var items = menuButtonDefinition.onMenu();
-                        var menuItems = Object.keys(items).map(function(key) {
-                            var menuItem = editor.getMenuItem(key);
+                  return (
+                      <div className="ae-container ae-has-dropdown">
+                          <button aria-expanded={this.props.expanded} aria-label={MENUBUTTON_DEFS[editor.name][menuButtonName].label} className={buttonClassName} onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={MENUBUTTON_DEFS[editor.name][menuButtonName].label}>
+                              <span className={iconClassName} style={iconStyle}></span>
+                          </button>
+                          {this.props.expanded && (
+                              <ButtonDropdown onDismiss={this.props.toggleDropdown}>
+                                  {this._getMenuItems()}
+                              </ButtonDropdown>
+                          )}
+                      </div>
+                  );
+              }
 
-                            if (!menuItem) {
-                                return null;
-                            }
+              _getMenuItems() {
+                  var editor = this.props.editor.get('nativeEditor');
+                  var items = menuButtonDefinition.onMenu();
+                  var menuItems = Object.keys(items).map(function(key) {
+                      var menuItem = editor.getMenuItem(key);
 
-                            var menuItemDefinition = menuItem.definition || menuItem;
-                            var menuItemState = items[key];
+                      if (!menuItem) {
+                          return null;
+                      }
 
-                            var className = 'ae-toolbar-element ' + (menuItemState === CKEDITOR.TRISTATE_ON ? 'active' : '');
-                            var disabled = menuItemState === CKEDITOR.TRISTATE_DISABLED;
-                            var onClick = function() {
-                                if (menuItemDefinition.command) {
-                                    editor.execCommand(menuItemDefinition.command);
-                                } else if (menuItemDefinition.onClick) {
-                                    menuItemDefinition.onClick.apply(menuItemDefinition);
-                                }
-                            };
+                      var menuItemDefinition = menuItem.definition || menuItem;
+                      var menuItemState = items[key];
 
-                            return (
-                                <li key={menuItem.name} role="option">
-                                    <button className={className} disabled={disabled} onClick={onClick}>{menuItemDefinition.label}</button>
-                                </li>
-                            );
-                        }.bind(this));
+                      var className = 'ae-toolbar-element ' + (menuItemState === CKEDITOR.TRISTATE_ON ? 'active' : '');
+                      var disabled = menuItemState === CKEDITOR.TRISTATE_DISABLED;
+                      var onClick = function() {
+                          if (menuItemDefinition.command) {
+                              editor.execCommand(menuItemDefinition.command);
+                          } else if (menuItemDefinition.onClick) {
+                              menuItemDefinition.onClick.apply(menuItemDefinition);
+                          }
+                      };
 
-                        return menuItems;
-                    }
-                })
-            );
+                      return (
+                          <li key={menuItem.name} role="option">
+                              <button className={className} disabled={disabled} onClick={onClick}>{menuItemDefinition.label}</button>
+                          </li>
+                      );
+                  }.bind(this));
+
+                  return menuItems;
+              }
+            };
 
             AlloyEditor.Buttons[menuButtonName] = MenuButtonBridge;
         }
