@@ -64,17 +64,17 @@ class ButtonLink extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         if (this.props.renderExclusive) {
-            var props = this.mergeButtonCfgProps();
+            const props = this.mergeButtonCfgProps();
 
             return (
                 <ButtonLinkEdit {...props} />
             );
         } else {
             return (
-                <button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type="button-link" onClick={this._requestExclusive.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
+                <button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type="button-link" onClick={this._requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
                     <ButtonIcon editor={this.props.editor} symbol="link" />
                 </button>
             );
@@ -89,7 +89,7 @@ class ButtonLink extends React.Component {
      * @method _requestExclusive
      * @protected
      */
-    _requestExclusive() {
+    _requestExclusive = () => {
         this.props.requestExclusive(ButtonLink.key);
     }
 }

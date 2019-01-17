@@ -66,12 +66,12 @@ class ButtonStylesList extends React.Component {
      * @method componentWillMount
      */
     componentWillMount() {
-        var blockStyles = [];
-        var inlineStyles = [];
-        var objectStyles = [];
+        const blockStyles = [];
+        const inlineStyles = [];
+        const objectStyles = [];
 
         this.props.styles.forEach(function(item) {
-            var style = new CKEDITOR.style(item.style);
+            const style = new CKEDITOR.style(item.style);
 
             if (style.type === CKEDITOR.STYLE_BLOCK) {
                 blockStyles.push(item);
@@ -96,7 +96,7 @@ class ButtonStylesList extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var removeStylesItem;
+        let removeStylesItem;
 
         if (this.props.showRemoveStylesItem) {
             removeStylesItem = <ButtonStylesListItemRemove editor={this.props.editor} onDismiss={this.props.toggleDropdown} />;
@@ -129,17 +129,17 @@ class ButtonStylesList extends React.Component {
      * @return {Array} Rendered instances of ButtonStylesListItem class
      */
     _renderStylesItems(styles) {
-        var editor = this.props.editor;
-        var items;
+        const editor = this.props.editor;
+        let items;
 
         if (styles && styles.length) {
-            items = styles.map(function(item) {
+            items = styles.map(item => {
                 return (
                     <li key={item.name} role="option">
                         <ButtonStylesListItem activeStyle={this.props.activeStyle} editor={editor} name={item.name} style={item.style} />
                     </li>
                 );
-            }.bind(this));
+            });
         }
 
         return items;

@@ -64,7 +64,7 @@ class ButtonCommandsList extends React.Component {
      */
     render() {
         return (
-            <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus.bind(this)} onKeyDown={this.handleKey.bind(this)} tabIndex="0">
+            <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
                 <ul className="ae-listbox" id={this.props.listId} role="listbox">
                     {this._renderActions(this.props.commands)}
                 </ul>
@@ -82,8 +82,8 @@ class ButtonCommandsList extends React.Component {
      * @return {Array} Rendered instances of ButtonCommandListItem class
      */
     _renderActions(commands) {
-        var editor = this.props.editor;
-        var items;
+        const editor = this.props.editor;
+        let items;
 
         if (commands && commands.length) {
             items = commands.map(function(item) {

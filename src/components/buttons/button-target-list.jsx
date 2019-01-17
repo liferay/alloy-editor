@@ -60,7 +60,7 @@ class ButtonTargetList extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var listTargets = this._renderListTargets();
+        const listTargets = this._renderListTargets();
 
         return (
             <ButtonDropdown {...this.props}>
@@ -107,19 +107,19 @@ class ButtonTargetList extends React.Component {
      * @return {Object} Returns the rendered link items
      */
     _renderListTargets() {
-        var targets = this._getAllowedTargetItems();
+        let targets = this._getAllowedTargetItems();
 
-        var handleLinkTargetChange = this.props.handleLinkTargetChange;
+        const handleLinkTargetChange = this.props.handleLinkTargetChange;
 
-        targets = targets.map(function(target) {
-            var className = this.props.selectedTarget === target.value ? 'ae-toolbar-element active' : 'ae-toolbar-element';
+        targets = targets.map(target => {
+            const className = this.props.selectedTarget === target.value ? 'ae-toolbar-element active' : 'ae-toolbar-element';
 
             return (
                 <li key={target.value} role="option">
                     <button className={className} data-value={target.value} onClick={handleLinkTargetChange}>{target.label}</button>
                 </li>
             );
-        }.bind(this));
+        });
 
         return targets;
     }

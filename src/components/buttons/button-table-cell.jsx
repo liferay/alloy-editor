@@ -27,8 +27,8 @@ class ButtonTableCell extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var buttonCommandsList;
-        var buttonCommandsListId;
+        let buttonCommandsList;
+        let buttonCommandsListId;
 
         if (this.props.expanded) {
             buttonCommandsListId = ButtonTableCell.key + 'List';
@@ -37,7 +37,7 @@ class ButtonTableCell extends React.Component {
 
         return (
             <div className="ae-container ae-has-dropdown">
-                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.cell} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.cell}>
+                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.cell} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.cell}>
                     <ButtonIcon editor={this.props.editor} symbol="add-cell" />
                 </button>
                 {buttonCommandsList}

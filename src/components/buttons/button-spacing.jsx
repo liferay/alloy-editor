@@ -89,15 +89,15 @@ class ButtonSpacing extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var activeSpacing = '1.0x';
+        let activeSpacing = '1.0x';
 
-        var spacings = this._getSpacings();
+        const spacings = this._getSpacings();
 
-        spacings.forEach(function (item) {
+        spacings.forEach(item => {
             if (this._checkActive(item.style)) {
                 activeSpacing = item.name;
             }
-        }.bind(this));
+        });
 
         const {
             editor,
@@ -106,7 +106,7 @@ class ButtonSpacing extends React.Component {
             toggleDropdown
         } = this.props;
 
-        var buttonStylesProps = {
+        const buttonStylesProps = {
             activeStyle: activeSpacing,
             editor: editor,
             onDismiss: toggleDropdown,
@@ -137,26 +137,24 @@ class ButtonSpacing extends React.Component {
     }
 
     _applyStyle(className) {
-        var editor = this.props.editor.get('nativeEditor');
+        const editor = this.props.editor.get('nativeEditor');
 
-        var styleConfig = {
+        const styleConfig = {
             element: 'div',
             attributes: {
                 class: className
             }
         };
 
-        var style = new CKEDITOR.style(styleConfig);
+        const style = new CKEDITOR.style(styleConfig);
 
         editor.getSelection().lock();
 
-        this._getSpacings().forEach(
-            function (item) {
-                if (this._checkActive(item.style)) {
-                    editor.removeStyle(new CKEDITOR.style(item.style));
-                }
-            }.bind(this)
-        );
+        this._getSpacings().forEach( item => {
+            if (this._checkActive(item.style)) {
+                editor.removeStyle(new CKEDITOR.style(item.style));
+            }
+        });
 
         editor.applyStyle(style);
 
@@ -176,11 +174,11 @@ class ButtonSpacing extends React.Component {
      * @return {Boolean} Returns true if the spacing is applied to the selection, false otherwise.
      */
     _checkActive(styleConfig) {
-        var nativeEditor = this.props.editor.get('nativeEditor');
+        const nativeEditor = this.props.editor.get('nativeEditor');
 
-        var active = true;
+        let active = true;
 
-        var elementPath = nativeEditor.elementPath();
+        const elementPath = nativeEditor.elementPath();
 
         if (elementPath && elementPath.lastElement) {
             styleConfig.attributes.class.split(' ').forEach(

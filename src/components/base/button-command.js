@@ -12,8 +12,8 @@ export default WrappedComponent => class extends WrappedComponent {
      * @param {Object=} data Optional data to be passed to CKEDITOR's `execCommand` method.
      * @method execCommand
      */
-    execCommand(data) {
-        var editor = this.props.editor.get('nativeEditor');
+    execCommand = data => {
+        const editor = this.props.editor.get('nativeEditor');
 
         editor.execCommand(this.props.command, data);
 

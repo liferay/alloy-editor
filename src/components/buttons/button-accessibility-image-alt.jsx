@@ -31,11 +31,11 @@ class ButtonAccessibilityImageAlt extends React.Component {
     constructor(prop, context) {
         super(prop, context);
 
-        const image = this.props.editor.get('nativeEditor').getSelection().getSelectedElement();
+        const element = this.props.editor.get('nativeEditor').getSelection().getSelectedElement();
 
         this.state = {
-            element: image,
-            imageAlt: image ? image.getAttribute('alt') : ''
+            element,
+            imageAlt: element ? element.getAttribute('alt') : ''
         };
     }
 
@@ -46,15 +46,15 @@ class ButtonAccessibilityImageAlt extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = 'ae-button ' + this.getStateClasses();
 
         if (this.props.renderExclusive) {
             return (
                 <div className="ae-container-edit-link">
                     <div className="ae-container-input xxl">
-                        <input aria-label="alt" className="ae-input" onChange={this._handleAltChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} placeholder="alt" ref="refAltInput" title="alt" type="text" value={this.state.imageAlt}></input>
+                        <input aria-label="alt" className="ae-input" onChange={this._handleAltChange} onKeyDown={this._handleKeyDown} placeholder="alt" ref="refAltInput" title="alt" type="text" value={this.state.imageAlt}></input>
                     </div>
-                    <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" onClick={this._updateImageAlt.bind(this)} title={AlloyEditor.Strings.confirm}>
+                    <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" onClick={this._updateImageAlt} title={AlloyEditor.Strings.confirm}>
                         <ButtonIcon editor={this.props.editor} symbol="check" />
                     </button>
                 </div>
@@ -62,7 +62,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
         }
         else {
             return (
-                <button className={cssClass} onClick={this._requestExclusive.bind(this)} tabIndex={this.props.tabIndex}>
+                <button className={cssClass} onClick={this._requestExclusive} tabIndex={this.props.tabIndex}>
                     <small className="ae-icon small">Alt</small>
                 </button>
             );
@@ -76,9 +76,9 @@ class ButtonAccessibilityImageAlt extends React.Component {
      * @method _focusAltInput
      */
     _focusAltInput() {
-        var instance = this;
+        const instance = this;
 
-        var focusAltEl = function () {
+        const focusAltEl = function () {
             ReactDOM.findDOMNode(instance.refs.refAltInput).focus();
         };
 
@@ -97,7 +97,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
      * @method  _handleAltChange
      * @param {MouseEvent} event
      */
-    _handleAltChange(event) {
+    _handleAltChange = event => {
         this.setState({
             imageAlt: event.target.value
         });
@@ -113,7 +113,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
      * @method  _handleKeyDown
      * @param {MouseEvent} event
      */
-    _handleKeyDown(event) {
+    _handleKeyDown = event => {
         if (event.keyCode === 13) {
             event.preventDefault();
 
@@ -127,7 +127,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
      * @protected
      * @method _requestExclusive
      */
-    _requestExclusive() {
+    _requestExclusive = () => {
         this.props.requestExclusive(ButtonAccessibilityImageAlt.key);
     }
 
@@ -138,16 +138,16 @@ class ButtonAccessibilityImageAlt extends React.Component {
      * @protected
      * @method  _updateImageAlt
      */
-    _updateImageAlt() {
-        var editor = this.props.editor.get('nativeEditor');
+    _updateImageAlt = () => {
+        const editor = this.props.editor.get('nativeEditor');
 
-        var newValue = this.refs.refAltInput.value;
+        const imageAlt = this.refs.refAltInput.value;
 
         this.setState({
-            imageAlt: newValue
+            imageAlt
         });
 
-        this.state.element.setAttribute('alt', newValue);
+        this.state.element.setAttribute('alt', imageAlt);
 
         editor.fire('actionPerformed', this);
 

@@ -47,10 +47,10 @@ class ButtonOrderedList extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         return (
-            <button aria-label={AlloyEditor.Strings.numberedlist} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-ol" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.numberedlist}>
+            <button aria-label={AlloyEditor.Strings.numberedlist} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-ol" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.numberedlist}>
                 <ButtonIcon editor={this.props.editor} symbol="list-ol" />
             </button>
         );

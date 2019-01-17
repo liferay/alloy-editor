@@ -49,9 +49,9 @@ class ButtonEmbedVideoEdit extends React.Component {
             // We need to wait for the next rendering cycle before focusing to avoid undesired
             // scrolls on the page
             if (window.requestAnimationFrame) {
-                window.requestAnimationFrame(this._focusVideoUrlInput.bind(this));
+                window.requestAnimationFrame(this._focusVideoUrlInput);
             } else {
-                setTimeout(this._focusVideoUrlInput.bind(this), 0);
+                setTimeout(this._focusVideoUrlInput, 0);
             }
         }
     }
@@ -77,20 +77,20 @@ class ButtonEmbedVideoEdit extends React.Component {
      * @method getInitialState
      */
     getInitialState() {
-        var editor = this.props.editor.get('nativeEditor');
-        var embed;
+        const editor = this.props.editor.get('nativeEditor');
+        let embed;
 
-        var selection = editor.getSelection();
+        const selection = editor.getSelection();
 
         if (selection) {
-            var selectedElement = selection.getSelectedElement();
+            const selectedElement = selection.getSelectedElement();
 
             if (selectedElement) {
                 embed = selectedElement.findOne('[data-widget="videoembed"]');
             }
         }
 
-        var videoURL = embed ? embed.getAttribute('data-embed-video-url') : '';
+        const videoURL = embed ? embed.getAttribute('data-embed-video-url') : '';
 
         return {
             element: embed,
@@ -112,7 +112,7 @@ class ButtonEmbedVideoEdit extends React.Component {
     render() {
         const inputPlaceholder = AlloyEditor.Strings.pasteVideoLink;
 
-        var clearVideoURLStyle = {
+        const clearVideoURLStyle = {
             opacity: this.state.videoURL ? 1 : 0
         };
 
@@ -121,10 +121,10 @@ class ButtonEmbedVideoEdit extends React.Component {
         return (
             <div className="ae-container-embed-video-edit">
                 <div className="ae-container-input xxl">
-                    <input className="ae-input" onChange={this._handleVideoURLChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} placeholder={inputPlaceholder} ref="linkInput" type="text" value={this.state.videoURL}></input>
-                    <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink.bind(this)} style={clearVideoURLStyle} title={AlloyEditor.Strings.clear}></button>
+                    <input className="ae-input" onChange={this._handleVideoURLChange} onKeyDown={this._handleKeyDown} placeholder={inputPlaceholder} ref="linkInput" type="text" value={this.state.videoURL}></input>
+                    <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} style={clearVideoURLStyle} title={AlloyEditor.Strings.clear}></button>
                 </div>
-                <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._embedVideoURL.bind(this)} title={AlloyEditor.Strings.confirm}>
+                <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._embedVideoURL} title={AlloyEditor.Strings.confirm}>
                     <ButtonIcon editor={this.props.editor} symbol="check" />
                 </button>
             </div>
@@ -155,8 +155,8 @@ class ButtonEmbedVideoEdit extends React.Component {
      * @method _embedVideoURL
      * @protected
      */
-    _embedVideoURL() {
-        var nativeEditor = this.props.editor.get('nativeEditor');
+    _embedVideoURL = () => {
+        const nativeEditor = this.props.editor.get('nativeEditor');
 
         nativeEditor.execCommand('embedUrl', {
             type: 'video',
@@ -176,7 +176,7 @@ class ButtonEmbedVideoEdit extends React.Component {
      * @method _focusVideoUrlInput
      * @protected
      */
-    _focusVideoUrlInput() {
+    _focusVideoUrlInput = () => {
         ReactDOM.findDOMNode(this.refs.linkInput).focus();
     }
 
@@ -191,7 +191,7 @@ class ButtonEmbedVideoEdit extends React.Component {
      * @param {SyntheticEvent} event The keyboard event.
      * @protected
      */
-    _handleKeyDown(event) {
+    _handleKeyDown = event => {
         if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
             event.preventDefault();
         }
@@ -212,7 +212,7 @@ class ButtonEmbedVideoEdit extends React.Component {
      * @param {SyntheticEvent} event The change event.
      * @protected
      */
-    _handleVideoURLChange(event) {
+    _handleVideoURLChange = event => {
         this.setState({
             videoURL: event.target.value
         });
@@ -229,7 +229,7 @@ class ButtonEmbedVideoEdit extends React.Component {
      * @return {Boolean} True if the state is valid, false otherwise
      */
     _isValidState() {
-        var validState =
+        const validState =
             this.state.videoURL && (
                 this.state.videoURL !== this.state.initialEmbed.videoURL
             );

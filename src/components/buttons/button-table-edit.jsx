@@ -1,8 +1,8 @@
 import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
-var KEY_ENTER = 13;
-var KEY_ESC = 27;
+const KEY_ENTER = 13;
+const KEY_ESC = 27;
 
 /**
  * The ButtonTableEdit class provides functionality for creating and editing a table in a document.
@@ -77,9 +77,9 @@ class ButtonTableEdit extends React.Component {
      * @method _createTable
      * @protected
      */
-    _createTable() {
-        var editor = this.props.editor.get('nativeEditor');
-        var tableUtils = new CKEDITOR.Table(editor);
+    _createTable = () => {
+        const editor = this.props.editor.get('nativeEditor');
+        const tableUtils = new CKEDITOR.Table(editor);
 
         tableUtils.create({
             attrs: this.props.tableAttributes,
@@ -102,8 +102,8 @@ class ButtonTableEdit extends React.Component {
      * @param {SyntheticEvent} event The provided event.
      * @protected
      */
-    _handleChange(inputName, event) {
-        var state = {};
+    _handleChange = (inputName, event) => {
+        const state = {};
         state[inputName] = event.target.value;
 
         this.setState(state);
@@ -120,7 +120,7 @@ class ButtonTableEdit extends React.Component {
      * @param {SyntheticEvent} event The keyboard event.
      * @protected
      */
-    _handleKeyDown(event) {
+    _handleKeyDown = event => {
         if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
             event.preventDefault();
         }
@@ -141,23 +141,23 @@ class ButtonTableEdit extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var time = Date.now();
-        var rowsId = time + 'rows';
-        var colsId = time + 'cols';
+        const time = Date.now();
+        const rowsId = time + 'rows';
+        const colsId = time + 'cols';
 
         return (
             <div className="ae-container-edit-table">
                 <label htmlFor={rowsId}>{AlloyEditor.Strings.rows}</label>
                 <div className="ae-container-input small">
-                    <input className="ae-input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} min="1" onKeyDown={this._handleKeyDown.bind(this)} placeholder="Rows" ref={this.rowsRef} type="number" value={this.state.rows}></input>
+                    <input className="ae-input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} min="1" onKeyDown={this._handleKeyDown} placeholder="Rows" ref={this.rowsRef} type="number" value={this.state.rows}></input>
                 </div>
 
                 <label htmlFor={colsId}>{AlloyEditor.Strings.columns}</label>
                 <div className="ae-container-input small">
-                    <input className="ae-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" onKeyDown={this._handleKeyDown.bind(this)} placeholder="Colums" ref={this.colsRef} type="number" value={this.state.cols}></input>
+                    <input className="ae-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" onKeyDown={this._handleKeyDown} placeholder="Colums" ref={this.colsRef} type="number" value={this.state.cols}></input>
                 </div>
 
-                <button aria-label="Confirm" className="ae-button" onClick={this._createTable.bind(this)}>
+                <button aria-label="Confirm" className="ae-button" onClick={this._createTable}>
                     <ButtonIcon editor={this.props.editor} symbol="check" />
                 </button>
             </div>

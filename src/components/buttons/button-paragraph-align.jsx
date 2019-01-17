@@ -19,27 +19,27 @@ class ButtonParagraphAlign extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var activeAlignment = AlloyEditor.Strings.alignLeft;
+        const activeAlignment = AlloyEditor.Strings.alignLeft;
 
-        var buttonCommandsList;
-        var buttonCommandsListId;
+        let buttonCommandsList;
+        let buttonCommandsListId;
 
         if (this.props.expanded) {
             buttonCommandsListId = ButtonParagraphAlign.key + 'List';
             buttonCommandsList = <ButtonCommandsList commands={this._getCommands()} editor={this.props.editor} listId={buttonCommandsListId} inlineIcons={false} onDismiss={this.props.toggleDropdown} />
         }
 
-        var editor = this.props.editor.get('nativeEditor');
+        const editor = this.props.editor.get('nativeEditor');
 
-        var activeCommand = this._getCommands().filter(
+        const activeCommand = this._getCommands().filter(
             alignment => {
-                var command = editor.getCommand(alignment.command);
+                const command = editor.getCommand(alignment.command);
 
                 return command ? command.state === CKEDITOR.TRISTATE_ON : false;
             }
         ).pop();
 
-        var iconClassName = activeCommand.icon;
+        const iconClassName = activeCommand.icon;
 
         return (
             <div className="ae-container-dropdown ae-container-dropdown-xsmall ae-has-dropdown">

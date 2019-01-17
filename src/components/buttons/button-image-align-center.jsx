@@ -44,10 +44,10 @@ class ButtonImageAlignCenter extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         return (
-            <button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-image-align-center" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}>
+            <button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-image-align-center" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}>
                 <ButtonIcon editor={this.props.editor} symbol="align-image-center" />
             </button>
         );

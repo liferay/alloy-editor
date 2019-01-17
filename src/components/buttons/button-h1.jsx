@@ -46,10 +46,10 @@ class ButtonH1 extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         return (
-            <button aria-label={AlloyEditor.Strings.h1} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-h1" onClick={this.applyStyle.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.h1}>
+            <button aria-label={AlloyEditor.Strings.h1} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-h1" onClick={this.applyStyle} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.h1}>
                 <ButtonIcon editor={this.props.editor} symbol="h1" />
             </button>
         );

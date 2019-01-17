@@ -46,10 +46,10 @@ class ButtonSubscript extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         return (
-            <button aria-label={AlloyEditor.Strings.subscript} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-subscript" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.subscript}>
+            <button aria-label={AlloyEditor.Strings.subscript} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-subscript" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.subscript}>
                 <ButtonIcon editor={this.props.editor} symbol="subscript" />
             </button>
         );

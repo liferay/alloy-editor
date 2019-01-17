@@ -29,17 +29,17 @@ class ButtonStyles extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var activeStyle = AlloyEditor.Strings.normal;
+        let activeStyle = AlloyEditor.Strings.normal;
 
-        var styles = this._getStyles();
+        const styles = this._getStyles();
 
-        styles.forEach(function(item) {
+        styles.forEach(item => {
             if (this._checkActive(item.style)) {
                 activeStyle = item.name;
             }
-        }.bind(this));
+        });
 
-        var buttonStylesList;
+        let buttonStylesList;
 
         if (this.props.expanded) {
             buttonStylesList = <ButtonStylesList activeStyle={activeStyle} editor={this.props.editor} onDismiss={this.props.toggleDropdown} showRemoveStylesItem={this.props.showRemoveStylesItem} styles={styles} />;
@@ -47,7 +47,7 @@ class ButtonStyles extends React.Component {
 
         return (
             <div className="ae-container-dropdown ae-has-dropdown">
-                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.styles + ' ' + activeStyle} className="ae-toolbar-element" onClick={this.props.toggleDropdown.bind(this)} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.styles + ' ' + activeStyle}>
+                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.styles + ' ' + activeStyle} className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.styles + ' ' + activeStyle}>
                     <div className="ae-container">
                         <span className="ae-container-dropdown-selected-item">{activeStyle}</span>
                         <ButtonIcon editor={this.props.editor} symbol="caret-bottom" />
@@ -69,13 +69,13 @@ class ButtonStyles extends React.Component {
      * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
      */
     _checkActive(styleConfig) {
-        var nativeEditor = this.props.editor.get('nativeEditor');
+        const nativeEditor = this.props.editor.get('nativeEditor');
 
         // Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
         // to a 'span' element works for most of those cases with no defined element.
         styleConfig = CKEDITOR.tools.merge({element: 'span'}, styleConfig);
 
-        var style = new CKEDITOR.style(styleConfig);
+        const style = new CKEDITOR.style(styleConfig);
 
         return style.checkActive(nativeEditor.elementPath(), nativeEditor);
     }

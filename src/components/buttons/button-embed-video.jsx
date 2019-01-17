@@ -55,10 +55,8 @@ class ButtonEmbedVideo extends React.Component {
                 <ButtonEmbedVideoEdit {...this.props} />
             );
         } else {
-            const buttonIconPath = 'alloy-editor/assets/icons/icons.svg#video';
-
             return (
-                <button className="ae-button" data-type="button-embed-video" onClick={this.props.requestExclusive.bind(this)} tabIndex={this.props.tabIndex}>
+                <button className="ae-button" data-type="button-embed-video" onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex}>
                     <ButtonIcon editor={this.props.editor} symbol="video" />
                 </button>
             );

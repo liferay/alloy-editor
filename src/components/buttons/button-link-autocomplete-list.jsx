@@ -137,17 +137,17 @@ class ButtonLinkAutocompleteList extends React.Component {
     _renderAutocompleteItems(items) {
         items = items || [];
 
-        var handleLinkAutocompleteClick = this.props.handleLinkAutocompleteClick;
+        const handleLinkAutocompleteClick = this.props.handleLinkAutocompleteClick;
 
-        return items.map(function(item) {
-            var className = this.props.term === item.url ? 'ae-toolbar-element active' : 'ae-toolbar-element';
+        return items.map(item => {
+            const className = this.props.term === item.url ? 'ae-toolbar-element active' : 'ae-toolbar-element';
 
             return (
                 <li key={item.url} role="option">
                     <button className={className} onClick={handleLinkAutocompleteClick} data-value={item.url}>{item.title}</button>
                 </li>
             );
-        }.bind(this));
+        });
     }
 
     /**
@@ -159,20 +159,20 @@ class ButtonLinkAutocompleteList extends React.Component {
      * @protected
      */
     _updateItems() {
-        var instance = this;
+        const instance = this;
 
         if (!this.props.term) {
             return;
         }
 
-        var promise = Promise.resolve(this.props.data(this.props.term));
+        const promise = Promise.resolve(this.props.data(this.props.term));
 
-        promise.then(function(items) {
+        promise.then(items => {
             if (items.length) {
-                !instance.props.expanded && instance.props.toggleDropdown();
+                !this.props.expanded && this.props.toggleDropdown();
             }
 
-            instance.setState({
+            this.setState({
                 items: items
             });
         });

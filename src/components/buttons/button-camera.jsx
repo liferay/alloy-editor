@@ -35,12 +35,12 @@ class ButtonCamera extends React.Component {
                 <ButtonCameraImage {...this.props} />
             );
         } else {
-            var disabled = !(navigator.getUserMedia ||
+            const disabled = !(navigator.getUserMedia ||
                 (navigator.webkitGetUserMedia && location.protocol === 'https') ||
                 navigator.mozGetUserMedia ||
                 navigator.msGetUserMedia);
 
-            var label = disabled ? AlloyEditor.Strings.cameraDisabled : AlloyEditor.Strings.camera;
+            const label = disabled ? AlloyEditor.Strings.cameraDisabled : AlloyEditor.Strings.camera;
 
             return (
                 <button aria-label={label} className="ae-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={label}>

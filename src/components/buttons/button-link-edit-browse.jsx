@@ -44,7 +44,7 @@ class ButtonLinkEditBrowse extends React.Component {
         return (
             <div className="ae-container-link-edit-browse">
                 <ButtonLinkEdit ref='linkEditButton' {...this.props} />
-                <button aria-label="Browse" className="ae-button" onClick={this._browseClick.bind(this)} title="browse">
+                <button aria-label="Browse" className="ae-button" onClick={this._browseClick} title="browse">
                     <ButtonIcon editor={this.props.editor} symbol="folder" />
                 </button>
             </div>
@@ -57,14 +57,14 @@ class ButtonLinkEditBrowse extends React.Component {
      * @protected
      * @method _browseClick
      */
-    _browseClick() {
-        var instance = this;
+    _browseClick = () => {
+        const instance = this;
 
-        var editor = this.props.editor.get('nativeEditor');
+        const editor = this.props.editor.get('nativeEditor');
 
-        var url = editor.config.documentBrowseLinkUrl;
+        const url = editor.config.documentBrowseLinkUrl;
 
-        var linkTarget = this.refs.linkEditButton.state.linkTarget;
+        const linkTarget = this.refs.linkEditButton.state.linkTarget;
 
         // TODO: This should invoke callback or emit an event
         //       Let's talk about the solution we prefer.
@@ -81,12 +81,12 @@ class ButtonLinkEditBrowse extends React.Component {
      * @param {String} linkTitle if the link is a title that points to a wiki page (only works for creole)
      */
     _updateLink(linkHref, linkTarget, linkTitle) {
-        var editor = this.props.editor.get('nativeEditor');
-        var linkUtils = new CKEDITOR.Link(editor, { appendProtocol: false });
-        var linkAttrs = {
+        const editor = this.props.editor.get('nativeEditor');
+        const linkUtils = new CKEDITOR.Link(editor, { appendProtocol: false });
+        const linkAttrs = {
             target: linkTarget
         };
-        var modifySelection = { advance: true };
+        const modifySelection = { advance: true };
 
         if (linkHref) {
             if (editor.plugins && editor.plugins.creole && !linkTitle) {

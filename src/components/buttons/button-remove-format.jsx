@@ -41,7 +41,7 @@ class ButtonRemoveFormat extends React.Component {
      */
     render() {
         return (
-            <button aria-label={AlloyEditor.Strings.removeformat} className='ae-button' data-type="button-removeformat" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.removeformat}>
+            <button aria-label={AlloyEditor.Strings.removeformat} className='ae-button' data-type="button-removeformat" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.removeformat}>
                 <ButtonIcon editor={this.props.editor} symbol="remove-style" />
             </button>
         );

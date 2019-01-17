@@ -95,13 +95,13 @@ class ButtonColor extends React.Component {
 
         const colors = this._getColors();
 
-        colors.forEach(function (item) {
+        colors.forEach(item => {
             if (this._checkActive(item.style)) {
                 activeColor = item.name;
 
                 activeColorClass = item.style.attributes.class;
             }
-        }.bind(this));
+        });
 
         const {
             editor,
@@ -139,26 +139,24 @@ class ButtonColor extends React.Component {
     }
 
     _applyStyle(className) {
-        var editor = this.props.editor.get('nativeEditor');
+        const editor = this.props.editor.get('nativeEditor');
 
-        var styleConfig = {
+        const styleConfig = {
             element: 'span',
             attributes: {
                 class: className
             }
         };
 
-        var style = new CKEDITOR.style(styleConfig);
+        const style = new CKEDITOR.style(styleConfig);
 
         editor.getSelection().lock();
 
-        this._getColors().forEach(
-            function (item) {
-                if (this._checkActive(item.style)) {
-                    editor.removeStyle(new CKEDITOR.style(item.style));
-                }
-            }.bind(this)
-        );
+        this._getColors().forEach(item => {
+            if (this._checkActive(item.style)) {
+                editor.removeStyle(new CKEDITOR.style(item.style));
+            }
+        });
 
         editor.applyStyle(style);
 
@@ -178,13 +176,13 @@ class ButtonColor extends React.Component {
         * @return {Boolean} Returns true if the color is applied to the selection, false otherwise.
         */
     _checkActive(styleConfig) {
-        var nativeEditor = this.props.editor.get('nativeEditor');
+        const nativeEditor = this.props.editor.get('nativeEditor');
 
         // Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
         // to a 'span' element works for most of those cases with no defined element.
         styleConfig = CKEDITOR.tools.merge({ element: 'span' }, styleConfig);
 
-        var style = new CKEDITOR.style(styleConfig);
+        const style = new CKEDITOR.style(styleConfig);
 
         return style.checkActive(nativeEditor.elementPath(), nativeEditor);
     }

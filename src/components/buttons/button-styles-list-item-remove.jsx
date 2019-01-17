@@ -40,7 +40,7 @@ class ButtonStylesListItemRemove extends React.Component {
     render() {
         return (
             <li role="option">
-                <button className="ae-toolbar-element" onClick={this._removeStyles.bind(this)} tabIndex={this.props.tabIndex}>{AlloyEditor.Strings.normal}</button>
+                <button className="ae-toolbar-element" onClick={this._removeStyles} tabIndex={this.props.tabIndex}>{AlloyEditor.Strings.normal}</button>
             </li>
         );
     }
@@ -53,13 +53,13 @@ class ButtonStylesListItemRemove extends React.Component {
      * @method _removeStyles
      * @protected
      */
-    _removeStyles() {
-        var editor = this.props.editor.get('nativeEditor');
+    _removeStyles = () => {
+        const editor = this.props.editor.get('nativeEditor');
 
         editor.execCommand('removeFormat');
 
         this.props.removeBlocks.forEach(function(blockItem) {
-            var blockStyle = new CKEDITOR.style({element: blockItem});
+            const blockStyle = new CKEDITOR.style({element: blockItem});
 
             editor.removeStyle(blockStyle);
         });

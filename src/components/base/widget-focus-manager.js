@@ -57,7 +57,7 @@ export default WrappedComponent => class extends WrappedComponent {
      * @memberof WidgetFocusManager
      * @method focus
      */
-    focus(event) {
+    focus = event => {
         if (!event || this._isValidTarget(event.target)) {
             if (this._descendants && this._descendants.length) {
                 var activeDescendantEl = this._descendants[this._activeDescendant];
@@ -87,7 +87,7 @@ export default WrappedComponent => class extends WrappedComponent {
      * @param {Object} event The Keyboard event that was detected on the widget DOM node.
      * @method handleKey
      */
-    handleKey(event) {
+    handleKey = event => {
         if (this._isValidTarget(event.target) && this._descendants) {
             var action = this._getFocusAction(event);
 

@@ -29,7 +29,7 @@ class ButtonCommandListItem extends React.Component {
      */
     render() {
         return (
-            <button aria-label={this.props.description} className={this._getClassName()} onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex}>{this.props.description}</button>
+            <button aria-label={this.props.description} className={this._getClassName()} onClick={this.execCommand} tabIndex={this.props.tabIndex}>{this.props.description}</button>
         );
     }
 
@@ -43,7 +43,7 @@ class ButtonCommandListItem extends React.Component {
      * @return {String} The class name of the Widget.
      */
     _getClassName() {
-        var className = 'ae-container ae-toolbar-element';
+        const className = 'ae-container ae-toolbar-element';
 
         return className;
     }

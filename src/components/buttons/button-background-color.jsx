@@ -81,20 +81,20 @@ class ButtonBackgroundColor extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var activeColor = AlloyEditor.Strings.normal;
+        let activeColor = AlloyEditor.Strings.normal;
 
-        var activeColorClass = '';
+        let activeColorClass = '';
 
-        var colors = this._getColors();
+        const colors = this._getColors();
 
-        var itemStyle = {
+        const itemStyle = {
             element: 'span',
             attributes: {
                 class: ''
             }
         };
 
-        colors.forEach(function (item) {
+        colors.forEach(item => {
             itemStyle.attributes.class = item.styleClass;
 
             if (this._checkActive(itemStyle)) {
@@ -102,7 +102,7 @@ class ButtonBackgroundColor extends React.Component {
 
                 activeColorClass = item.style.attributes.class;
             }
-        }.bind(this));
+        });
 
         const {
             editor,
@@ -111,7 +111,7 @@ class ButtonBackgroundColor extends React.Component {
             toggleDropdown
         } = this.props;
 
-        var buttonStylesProps = {
+        const buttonStylesProps = {
             activeStyle: activeColor,
             editor,
             onDismiss: toggleDropdown,
@@ -140,9 +140,9 @@ class ButtonBackgroundColor extends React.Component {
     }
 
     _applyStyle(className) {
-        var editor = this.props.editor.get('nativeEditor');
+        const editor = this.props.editor.get('nativeEditor');
 
-        var styleConfig = {
+        const styleConfig = {
             element: 'span',
             attributes: {
                 class: className
@@ -151,19 +151,17 @@ class ButtonBackgroundColor extends React.Component {
 
         editor.getSelection().lock();
 
-        this._getColors().forEach(
-            function (item) {
-                styleConfig.attributes.class = item.styleClass;
+        this._getColors().forEach( item => {
+            styleConfig.attributes.class = item.styleClass;
 
-                if (this._checkActive(styleConfig)) {
-                    editor.removeStyle(new CKEDITOR.style(styleConfig));
-                }
-            }.bind(this)
-        );
+            if (this._checkActive(styleConfig)) {
+                editor.removeStyle(new CKEDITOR.style(styleConfig));
+            }
+        });
 
         styleConfig.attributes.class = className;
 
-        var style = new CKEDITOR.style(styleConfig);
+        const style = new CKEDITOR.style(styleConfig);
 
         editor.applyStyle(style);
 
@@ -183,13 +181,13 @@ class ButtonBackgroundColor extends React.Component {
  * @return {Boolean} Returns true if the color is applied to the selection, false otherwise.
  */
     _checkActive(styleConfig) {
-        var nativeEditor = this.props.editor.get('nativeEditor');
+        const nativeEditor = this.props.editor.get('nativeEditor');
 
         // Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
         // to a 'span' element works for most of those cases with no defined element.
         styleConfig = CKEDITOR.tools.merge({ element: 'span' }, styleConfig);
 
-        var style = new CKEDITOR.style(styleConfig);
+        const style = new CKEDITOR.style(styleConfig);
 
         return style.checkActive(nativeEditor.elementPath(), nativeEditor);
     }

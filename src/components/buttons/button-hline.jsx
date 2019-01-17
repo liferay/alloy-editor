@@ -46,7 +46,7 @@ class ButtonHline extends React.Component {
      */
     render() {
         return (
-            <button aria-label={AlloyEditor.Strings.horizontalrule} className="ae-button" data-type="button-hline" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.horizontalrule}>
+            <button aria-label={AlloyEditor.Strings.horizontalrule} className="ae-button" data-type="button-hline" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.horizontalrule}>
                 <ButtonIcon editor={this.props.editor} symbol="hr" />
             </button>
         );

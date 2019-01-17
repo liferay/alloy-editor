@@ -99,7 +99,7 @@ export default WrappedComponent => class extends WrappedComponent {
      * @method requestExclusive
      * @param {Object} itemExclusive The widget which requests exclusive state.
      */
-    requestExclusive(itemExclusive) {
+    requestExclusive = itemExclusive => {
         this.setState({
             itemExclusive: itemExclusive
         });

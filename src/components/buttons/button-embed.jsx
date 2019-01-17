@@ -54,7 +54,7 @@ class ButtonEmbed extends React.Component {
             );
         } else {
             return (
-                <button aria-label={AlloyEditor.Strings.link} className="ae-button" data-type="button-embed" onClick={this._requestExclusive.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
+                <button aria-label={AlloyEditor.Strings.link} className="ae-button" data-type="button-embed" onClick={this._requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
                     <ButtonIcon editor={this.props.editor} symbol="plus" />
                 </button>
             );
@@ -69,7 +69,7 @@ class ButtonEmbed extends React.Component {
      * @method _requestExclusive
      * @protected
      */
-    _requestExclusive() {
+    _requestExclusive = () => {
         this.props.requestExclusive(ButtonEmbed.key);
     }
 }

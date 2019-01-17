@@ -27,8 +27,8 @@ class ButtonTableRow extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var buttonCommandsList;
-        var buttonCommandsListId;
+        let buttonCommandsList;
+        let buttonCommandsListId;
 
         if (this.props.expanded) {
             buttonCommandsListId = ButtonTableRow.key + 'List';
@@ -37,7 +37,7 @@ class ButtonTableRow extends React.Component {
 
         return (
             <div className="ae-container ae-has-dropdown">
-                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.row} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown.bind(this)} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.row}>
+                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.row} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.row}>
                     <ButtonIcon editor={this.props.editor} symbol="add-row" />
                 </button>
                 {buttonCommandsList}

@@ -44,10 +44,10 @@ class ButtonOutdentBlock extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         return (
-            <button aria-label={AlloyEditor.Strings.outdent} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-outdent-block" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.outdent}>
+            <button aria-label={AlloyEditor.Strings.outdent} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-outdent-block" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.outdent}>
                 <ButtonIcon editor={this.props.editor} symbol="indent-more" />
             </button>
         );

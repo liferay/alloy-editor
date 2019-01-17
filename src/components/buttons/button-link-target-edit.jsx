@@ -28,12 +28,12 @@ class ButtonLinkTargetEdit extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var handleLinkTargetChange = this.props.handleLinkTargetChange;
-        var allowedLinkTargets = this.props.allowedTargets;
+        const handleLinkTargetChange = this.props.handleLinkTargetChange;
+        const allowedLinkTargets = this.props.allowedTargets;
 
         return (
             <div className="ae-container-edit-link-target ae-container-dropdown ae-container-dropdown-medium ae-has-dropdown" tabIndex="0">
-                <button aria-expanded={this.props.expanded} aria-label={this.props.selectedTarget} className="ae-toolbar-element" onClick={this.props.toggleDropdown.bind(this)} role="combobox" tabIndex={this.props.tabIndex} title={this.props.selectedTarget}>
+                <button aria-expanded={this.props.expanded} aria-label={this.props.selectedTarget} className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={this.props.selectedTarget}>
                     <div className="ae-container">
                         <span className="ae-container-dropdown-selected-item">{this.props.selectedTarget}</span>
                         <ButtonIcon editor={this.props.editor} symbol="caret-bottom" />

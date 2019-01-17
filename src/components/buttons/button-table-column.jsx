@@ -27,8 +27,8 @@ class ButtonTableColumn extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var buttonCommandsList,
-            buttonCommandsListId;
+        let buttonCommandsList;
+        let buttonCommandsListId;
 
         if (this.props.expanded) {
             buttonCommandsListId = ButtonTableColumn.key + 'List';
@@ -37,7 +37,7 @@ class ButtonTableColumn extends React.Component {
 
         return (
             <div className="ae-container ae-has-dropdown">
-                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.column} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown.bind(this)} role="listbox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.column}>
+                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.column} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown} role="listbox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.column}>
                     <ButtonIcon editor={this.props.editor} symbol="add-column" />
                 </button>
                 {buttonCommandsList}

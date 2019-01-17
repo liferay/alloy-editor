@@ -31,15 +31,15 @@ class ButtonImage extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var inputSyle = {display: 'none'};
+        const inputSyle = {display: 'none'};
 
         return (
             <div>
-                <button aria-label={AlloyEditor.Strings.image} className="ae-button" data-type="button-image" onClick={this.handleClick.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.image}>
+                <button aria-label={AlloyEditor.Strings.image} className="ae-button" data-type="button-image" onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.image}>
                     <ButtonIcon editor={this.props.editor} symbol="document-image" />
                 </button>
 
-                <input accept="image/*" onChange={this._onInputChange.bind(this)} ref={this.fileInput} style={inputSyle} type="file"/>
+                <input accept="image/*" onChange={this._onInputChange} ref={this.fileInput} style={inputSyle} type="file"/>
             </div>
         );
     }
@@ -52,7 +52,7 @@ class ButtonImage extends React.Component {
      * @method handleClick
      * @param {SyntheticEvent} event The received click event on the button.
      */
-    handleClick() {
+    handleClick =  () => {
         this.fileInput.current.click();
     }
 
@@ -73,7 +73,7 @@ class ButtonImage extends React.Component {
      * @protected
      */
     _onInputChange() {
-        var inputEl = this.fileInput.current;
+        const inputEl = this.fileInput.current;
 
         // On IE11 the function might be called with an empty array of
         // files. In such a case, no actions will be taken.
@@ -81,24 +81,24 @@ class ButtonImage extends React.Component {
             return;
         }
 
-        var reader = new FileReader();
-        var file = inputEl.files[0];
+        const reader = new FileReader();
+        const file = inputEl.files[0];
 
-        reader.onload = function(event) {
-            var editor = this.props.editor.get('nativeEditor');
+        reader.onload = event => {
+            const editor = this.props.editor.get('nativeEditor');
 
-            var result = editor.fire('beforeImageAdd', {
+            const result = editor.fire('beforeImageAdd', {
                 imageFiles: file
             });
 
             if (!!result) {
-                var el = CKEDITOR.dom.element.createFromHtml('<img src="' + event.target.result + '">');
+                const el = CKEDITOR.dom.element.createFromHtml(`<img src="${event.target.result}">`);
 
                 editor.insertElement(el);
 
                 editor.fire('actionPerformed', this);
 
-                var imageData = {
+                const imageData = {
                     el: el,
                     file: file
                 };
@@ -106,7 +106,7 @@ class ButtonImage extends React.Component {
 
                 editor.fire('imageAdd', imageData);
             }
-        }.bind(this);
+        };
 
         reader.readAsDataURL(file);
 
