@@ -171,15 +171,15 @@ class ButtonBackgroundColor extends React.Component {
     }
 
     /**
- * Checks if the given color definition is applied to the current selection in the editor.
- *
- * @instance
- * @memberof ButtonBackgroundColor
- * @method _checkActive
- * @param {Object} styleConfig olor definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
- * @protected
- * @return {Boolean} Returns true if the color is applied to the selection, false otherwise.
- */
+     * Checks if the given color definition is applied to the current selection in the editor.
+     *
+     * @instance
+     * @memberof ButtonBackgroundColor
+     * @method _checkActive
+     * @param {Object} styleConfig olor definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+     * @protected
+     * @return {Boolean} Returns true if the color is applied to the selection, false otherwise.
+     */
     _checkActive(styleConfig) {
         const nativeEditor = this.props.editor.get('nativeEditor');
 
@@ -193,17 +193,17 @@ class ButtonBackgroundColor extends React.Component {
     }
 
     /**
- * Returns an array of colors. Each color consists from two properties:
- * - name - the style name, for example "default"
- * - style - an object with one property, called `element` which value
- * represents the style which have to be applied to the element.
- *
- * @instance
- * @memberof ButtonBackgroundColor
- * @method _getColor
- * @protected
- * @return {Array<object>} An array of objects containing the colors.
- */
+     * Returns an array of colors. Each color consists from two properties:
+     * - name - the style name, for example "default"
+     * - style - an object with one property, called `element` which value
+     * represents the style which have to be applied to the element.
+     *
+     * @instance
+     * @memberof ButtonBackgroundColor
+     * @method _getColor
+     * @protected
+     * @return {Array<object>} An array of objects containing the colors.
+     */
     _getColors() {
         return this.props.styles || [{
             name: AlloyEditor.Strings.normal,
