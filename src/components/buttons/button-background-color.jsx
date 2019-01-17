@@ -193,7 +193,7 @@ class ButtonBackgroundColor extends React.Component {
     }
 
     /**
-     * Returns an array of colors. Each color consists from two properties:
+     * Returns an array of colors. Each color consists of two properties:
      * - name - the style name, for example "default"
      * - style - an object with one property, called `element` which value
      * represents the style which have to be applied to the element.
