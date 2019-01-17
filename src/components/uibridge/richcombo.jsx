@@ -1,5 +1,4 @@
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
-import createReactClass from 'create-react-class';
 import React from 'react';
 
 (function() {
@@ -10,27 +9,10 @@ import React from 'react';
         return;
     }
 
-    /* istanbul ignore next */
-    function noop() {}
-
-    // API not yet implemented inside the richcombo bridge. By mocking the unsupported methods, we
-    // prevent plugins from crashing if they make use of them.
-    //
     // Some methods like `setState` clash with React's own state methods. For them, unsupported means
     // that we don't account for the different meaning in the passed or returned arguments.
     var UNSUPPORTED_RICHCOMBO_API = {
-        commit: noop,
-        createPanel: noop,
-        disable: noop,
-        enable: noop,
-        getState: noop,
-        hideGroup: noop,
-        hideItem: noop,
-        mark: noop,
         //setState: noop,
-        showAll: noop,
-        startGroup: noop,
-        unmarkAll: noop
     };
 
     var RICH_COMBO_DEFS = {};
@@ -53,126 +35,139 @@ import React from 'react';
         RICH_COMBO_DEFS[editor.name][richComboName].currentValue = undefined;
 
         if (!RichComboBridge) {
-            RichComboBridge = createReactClass(
-                CKEDITOR.tools.merge(UNSUPPORTED_RICHCOMBO_API, {
-                    displayName: richComboName,
+            RichComboBridge = class extends React.Component {
+				static displayName = richComboName;
 
-                    statics: {
-                        key: richComboName
-                    },
+				statics = {
+					key: richComboName
+				};
 
-                    add: function(value, preview, title) {
-                        this._items.push({
-                            preview: preview,
-                            title: title,
-                            value: value
-                        });
-                    },
+				constructor(props) {
+					super(props);
+					this.state = {
+						value: RICH_COMBO_DEFS[editor.name][richComboName].currentValue
+					};
+				}
 
-                    componentWillMount: function () {
-                        var editor = this.props.editor.get('nativeEditor');
+				// API not yet implemented inside the richcombo bridge. By mocking the unsupported methods, we
+				// prevent plugins from crashing if they make use of them.
+				commit() {}
+				createPanel() {}
+				disable() {}
+				enable() {}
+				getState() {}
+				hideGroup() {}
+				hideItem() {}
+				mark() {}
+				showAll() {}
+				startGroup() {}
+				unmarkAll() {}
 
-                        var editorCombo = RICH_COMBO_DEFS[editor.name][richComboName];
+				add(value, preview, title) {
+					this._items.push({
+						preview: preview,
+						title: title,
+						value: value
+					});
+				}
 
-                        this._items = [];
+				componentWillMount() {
+					var editor = this.props.editor.get('nativeEditor');
 
-                        this.setValue = this._setValue;
+					var editorCombo = RICH_COMBO_DEFS[editor.name][richComboName];
 
-                        if (editorCombo.init) {
-                            editorCombo.init.call(this);
-                        }
+					this._items = [];
 
-                        if (editorCombo.onRender) {
-                            editorCombo.onRender.call(this);
-                        }
-                    },
+					this.setValue = this._setValue;
 
-                    componentWillUnmount: function () {
-                        this._cacheValue(this.state.value);
+					if (editorCombo.init) {
+						editorCombo.init.call(this);
+					}
 
-                        this.setValue = this._cacheValue;
-                    },
+					if (editorCombo.onRender) {
+						editorCombo.onRender.call(this);
+					}
+				}
 
-                    getInitialState: function() {
-                        return {
-                            value: RICH_COMBO_DEFS[editor.name][richComboName].currentValue
-                        };
-                    },
+				componentWillUnmount() {
+					this._cacheValue(this.state.value);
 
-                    getValue: function() {
-                        return this.state.value;
-                    },
+					this.setValue = this._cacheValue;
+				}
 
-                    render: function() {
-                        var editor = this.props.editor.get('nativeEditor');
+				getValue() {
+					return this.state.value;
+				}
 
-                        var richComboLabel = RICH_COMBO_DEFS[editor.name][richComboName].currentValue || richComboDefinition.label;
+				render() {
+					var editor = this.props.editor.get('nativeEditor');
 
-                        return (
-                            <div className="ae-container-dropdown ae-has-dropdown">
-                                <button aria-expanded={this.props.expanded} aria-label={richComboLabel} className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={richComboLabel}>
-                                    <div className="ae-container">
-                                        <span className="ae-container-dropdown-selected-item">{richComboLabel}</span>
-                                        <span className="ae-icon-arrow"></span>
-                                    </div>
-                                </button>
-                                {this.props.expanded && (
-                                    <ButtonDropdown onDismiss={this.props.toggleDropdown}>
-                                        {this._getItems()}
-                                    </ButtonDropdown>
-                                )}
-                            </div>
-                        );
-                    },
+					var richComboLabel = RICH_COMBO_DEFS[editor.name][richComboName].currentValue || richComboDefinition.label;
 
-                    _cacheValue: function(value) {
-                        var editor = this.props.editor.get('nativeEditor');
+					return (
+						<div className="ae-container-dropdown ae-has-dropdown">
+							<button aria-expanded={this.props.expanded} aria-label={richComboLabel} className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={richComboLabel}>
+								<div className="ae-container">
+									<span className="ae-container-dropdown-selected-item">{richComboLabel}</span>
+									<span className="ae-icon-arrow"></span>
+								</div>
+							</button>
+							{this.props.expanded && (
+								<ButtonDropdown onDismiss={this.props.toggleDropdown}>
+									{this._getItems()}
+								</ButtonDropdown>
+							)}
+						</div>
+					);
+				}
 
-                        RICH_COMBO_DEFS[editor.name][richComboName].currentValue = value;
-                    },
+				_cacheValue(value) {
+					var editor = this.props.editor.get('nativeEditor');
 
-                    _getItems: function() {
-                        var richCombo = this;
+					RICH_COMBO_DEFS[editor.name][richComboName].currentValue = value;
+				}
 
-                        var items = this._items.map(function(item) {
+				_getItems() {
+					var richCombo = this;
 
-                            var className = 'ae-toolbar-element ' + (item.value === this.state.value ? 'active' : '');
+					var items = this._items.map(function(item) {
 
-                            return (
-                                <li key={item.title} role="option">
-                                    <button className={className} dangerouslySetInnerHTML={{__html: item.preview}} data-value={item.value} onClick={richCombo._onClick}></button>
-                                </li>
-                            );
-                        }.bind(this));
+						var className = 'ae-toolbar-element ' + (item.value === this.state.value ? 'active' : '');
 
-                        return items;
-                    },
+						return (
+							<li key={item.title} role="option">
+								<button className={className} dangerouslySetInnerHTML={{__html: item.preview}} data-value={item.value} onClick={richCombo._onClick}></button>
+							</li>
+						);
+					}.bind(this));
 
-                    _onClick: function(event) {
-                        var editor = this.props.editor.get('nativeEditor');
+					return items;
+				}
 
-                        var editorCombo = RICH_COMBO_DEFS[editor.name][richComboName];
+				_onClick = (event) => {
+					var editor = this.props.editor.get('nativeEditor');
 
-                        if (editorCombo.onClick) {
-                            var newValue = event.currentTarget.getAttribute('data-value');
+					var editorCombo = RICH_COMBO_DEFS[editor.name][richComboName];
 
-                            editorCombo.onClick.call(this, newValue);
+					if (editorCombo.onClick) {
+						var newValue = event.currentTarget.getAttribute('data-value');
 
-                            RICH_COMBO_DEFS[editor.name][richComboName].currentValue = newValue;
+						editorCombo.onClick.call(this, newValue);
 
-                            editor.fire('actionPerformed', this);
-                        }
-                    },
+						RICH_COMBO_DEFS[editor.name][richComboName].currentValue = newValue;
 
-                    _setValue: function(value) {
-                        this._cacheValue(value);
+						editor.fire('actionPerformed', this);
+					}
+				};
 
-                        this.setState({
-                            value: value
-                        });
-                    }
-                })
-            );
+				_setValue(value) {
+					this._cacheValue(value);
+
+					this.setState({
+						value: value
+					});
+				}
+			}
 
             AlloyEditor.Buttons[richComboName] = RichComboBridge;
         }
