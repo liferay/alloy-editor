@@ -1,5 +1,4 @@
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
-import createReactClass from 'create-react-class';
 import React from 'react';
 
 (function() {
@@ -9,15 +8,6 @@ import React from 'react';
     if (CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
         return;
     }
-
-    /* istanbul ignore next */
-    function noop() {}
-
-    // API not yet implemented inside the panel menu button bridge. By mocking the unsupported methods, we
-    // prevent plugins from crashing if they make use of them.
-    var UNSUPPORTED_PANEL_MENU_BUTTON_API = {
-        createPanel: noop
-    };
 
     var PANEL_MENU_DEFS = {};
 
@@ -38,84 +28,87 @@ import React from 'react';
         PANEL_MENU_DEFS[editor.name][panelMenuButtonName] = PANEL_MENU_DEFS[editor.name][panelMenuButtonName] || panelMenuButtonDefinition;
 
         if (!PanelMenuButtonBridge) {
-            PanelMenuButtonBridge = createReactClass(
-                CKEDITOR.tools.merge(UNSUPPORTED_PANEL_MENU_BUTTON_API, {
-                    displayName: panelMenuButtonName,
+            PanelMenuButtonBridge = class extends React.Component {
+				static displayName = panelMenuButtonName;
 
-                    statics: {
-                        key: panelMenuButtonName
-                    },
+				statics = {
+					key: panelMenuButtonName
+				};
 
-                    render: function() {
-                        var editor = this.props.editor.get('nativeEditor');
+				// API not yet implemented inside the panel menu button bridge. By mocking the unsupported methods, we
+				// prevent plugins from crashing if they make use of them.
+				createPanel() {
+				}
 
-                        var panelMenuButtonDisplayName = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].name || PANEL_MENU_DEFS[editor.name][panelMenuButtonName].command || panelMenuButtonName;
+				render() {
+					var editor = this.props.editor.get('nativeEditor');
 
-                        var buttonClassName = 'ae-button ae-button-bridge';
+					var panelMenuButtonDisplayName = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].name || PANEL_MENU_DEFS[editor.name][panelMenuButtonName].command || panelMenuButtonName;
 
-                        var iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
+					var buttonClassName = 'ae-button ae-button-bridge';
 
-                        var iconStyle = {};
+					var iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
 
-                        var cssStyle = CKEDITOR.skin.getIconStyle(panelMenuButtonDisplayName);
+					var iconStyle = {};
 
-                        if (cssStyle) {
-                            var cssStyleParts = cssStyle.split(';');
+					var cssStyle = CKEDITOR.skin.getIconStyle(panelMenuButtonDisplayName);
 
-                            iconStyle.backgroundImage = cssStyleParts[0].substring(cssStyleParts[0].indexOf(':') + 1);
-                            iconStyle.backgroundPosition = cssStyleParts[1].substring(cssStyleParts[1].indexOf(':') + 1);
-                            iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(':') + 1);
-                        }
+					if (cssStyle) {
+						var cssStyleParts = cssStyle.split(';');
 
-                        var panel;
+						iconStyle.backgroundImage = cssStyleParts[0].substring(cssStyleParts[0].indexOf(':') + 1);
+						iconStyle.backgroundPosition = cssStyleParts[1].substring(cssStyleParts[1].indexOf(':') + 1);
+						iconStyle.backgroundSize = cssStyleParts[2].substring(cssStyleParts[2].indexOf(':') + 1);
+					}
 
-                        if (this.props.expanded) {
-                            panel = this._getPanel();
-                        }
+					var panel;
 
-                        return (
-                            <div className="ae-container ae-has-dropdown">
-                                <button aria-expanded={this.props.expanded} aria-label={PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label} className={buttonClassName} onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label}>
-                                    <span className={iconClassName} style={iconStyle}></span>
-                                </button>
-                                {panel}
-                            </div>
-                        );
-                    },
+					if (this.props.expanded) {
+						panel = this._getPanel();
+					}
 
-                    _getPanel: function() {
-                        var editor = this.props.editor.get('nativeEditor');
+					return (
+						<div className="ae-container ae-has-dropdown">
+							<button aria-expanded={this.props.expanded} aria-label={PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label} className={buttonClassName} onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={PANEL_MENU_DEFS[editor.name][panelMenuButtonName].label}>
+								<span className={iconClassName} style={iconStyle}></span>
+							</button>
+							{panel}
+						</div>
+					);
+				}
 
-                        var panelMenuButtonOnBlock = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].onBlock;
+				_getPanel() {
+					var editor = this.props.editor.get('nativeEditor');
 
-                        var panel = {
-                            hide: this.props.toggleDropdown,
-                            show: this.props.toggleDropdown
-                        };
+					var panelMenuButtonOnBlock = PANEL_MENU_DEFS[editor.name][panelMenuButtonName].onBlock;
 
-                        var blockElement = new CKEDITOR.dom.element('div');
+					var panel = {
+						hide: this.props.toggleDropdown,
+						show: this.props.toggleDropdown
+					};
 
-                        var block = {
-                            element: blockElement,
-                            keys: {}
-                        };
+					var blockElement = new CKEDITOR.dom.element('div');
 
-                        /* istanbul ignore else */
-                        if (panelMenuButtonOnBlock) {
-                            panelMenuButtonOnBlock.call(this, panel, block);
-                        }
+					var block = {
+						element: blockElement,
+						keys: {}
+					};
 
-                        // TODO
-                        // Use block.keys to configure the panel keyboard navigation
+					/* istanbul ignore else */
+					if (panelMenuButtonOnBlock) {
+						panelMenuButtonOnBlock.call(this, panel, block);
+					}
 
-                        return (
-                            <ButtonDropdown onDismiss={this.props.toggleDropdown}>
-                                <div className={blockElement.getAttribute('class')} dangerouslySetInnerHTML={{__html: blockElement.getHtml()}} />
-                            </ButtonDropdown>
-                        );
-                    }
-                })
-            );
+					// TODO
+					// Use block.keys to configure the panel keyboard navigation
+
+					return (
+						<ButtonDropdown onDismiss={this.props.toggleDropdown}>
+							<div className={blockElement.getAttribute('class')} dangerouslySetInnerHTML={{__html: blockElement.getHtml()}} />
+						</ButtonDropdown>
+					);
+				}
+			}
 
             AlloyEditor.Buttons[panelMenuButtonName] = PanelMenuButtonBridge;
         }
