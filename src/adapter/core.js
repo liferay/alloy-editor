@@ -12,6 +12,9 @@ import UI from '../components/main.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+const EMBED_VIDEO_WIDTH = 560;
+const EMBED_VIDEO_HEIGHT = 315;
+
 /**
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
@@ -334,31 +337,30 @@ extend(Core, Base, {
             value: [
                 {
                     id: 'facebook',
-                    tpl: '<iframe allowFullScreen="true" allowTransparency="true" ' +
-                         'frameborder="0" height="315" ' +
-                         'src="https://www.facebook.com/plugins/video.php?href={embedId}' +
-                         '&show_text=0&width=560&height=315" scrolling="no" ' +
-                         'style="border:none;overflow:hidden" width="560"></iframe>',
+                    tpl: `<iframe allowFullScreen="true" allowTransparency="true"
+                         frameborder="0" height="${EMBED_VIDEO_HEIGHT}"
+                         src="https://www.facebook.com/plugins/video.php?href={embedId}'
+                         &show_text=0&width=${EMBED_VIDEO_WIDTH}&height=${EMBED_VIDEO_HEIGHT}" scrolling="no"
+                         style="border:none;overflow:hidden" width="${EMBED_VIDEO_WIDTH}}"></iframe>`,
                     urlSchemes: [
                         '(https?:\\/\\/(?:www\\.)?facebook.com\\/\\S*\\/videos\\/\\S*)'
                     ]
                 },
                 {
                     id: 'twitch',
-                    tpl: '<iframe allowfullscreen="true" frameborder="0" ' +
-                         'height="315" ' +
-                         'src="https://player.twitch.tv/?autoplay=false&video={embedId}" ' +
-                         'scrolling="no" width="560"></iframe>',
+                    tpl: `<iframe allowfullscreen="true" frameborder="0"
+                         height="${EMBED_VIDEO_HEIGHT}"
+                         src="https://player.twitch.tv/?autoplay=false&video={embedId}"
+                         scrolling="no" width="${EMBED_VIDEO_WIDTH}"></iframe>`,
                     urlSchemes: [
                         'https?:\\/\\/(?:www\\.)?twitch.tv\\/videos\\/(\\S*)$'
                     ]
                 },
                 {
                     id: 'vimeo',
-                    tpl: '<iframe allowfullscreen frameborder="0" height="315" ' +
-                         'mozallowfullscreen ' +
-                         'src="https://player.vimeo.com/video/{embedId}" ' +
-                         'webkitallowfullscreen width="560"></iframe>',
+                    tpl: `<iframe allowfullscreen frameborder="0" height="${EMBED_VIDEO_HEIGHT}"
+                         mozallowfullscreen src="https://player.vimeo.com/video/{embedId}"
+                         webkitallowfullscreen width="${EMBED_VIDEO_WIDTH}"></iframe>`,
                     urlSchemes: [
                         'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/album\\/.*\\/video\\/(\\S*)',
                         'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/channels\\/.*\\/(\\S*)',
@@ -368,10 +370,10 @@ extend(Core, Base, {
                 },
                 {
                     id: 'youtube',
-                    tpl: '<iframe allow="autoplay; encrypted-media" allowfullscreen ' +
-                         'height="315" frameborder="0" ' +
-                         'src="https://www.youtube.com/embed/{embedId}?rel=0" ' +
-                         'width="560"></iframe>',
+                    tpl: `<iframe allow="autoplay; encrypted-media" allowfullscreen
+                         height="${EMBED_VIDEO_HEIGHT}" frameborder="0"
+                         src="https://www.youtube.com/embed/{embedId}?rel=0"
+                         width="${EMBED_VIDEO_WIDTH}"></iframe>`,
                     urlSchemes: [
                         'https?:\\/\\/(?:www\\.)?youtube.com\\/watch\\?v=(\\S*)$'
                     ]
@@ -560,7 +562,7 @@ extend(Core, Base, {
             validator: '_validateToolbars',
             value: {
                 add: {
-                    buttons: ['image', 'embed', 'camera', 'hline', 'table', 'embedVideo'],
+                    buttons: ['image', 'embed', 'camera', 'hline', 'table'],
                     tabIndex: 2
                 },
                 styles: {
