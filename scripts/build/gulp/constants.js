@@ -11,12 +11,12 @@ const editorDistFolder = path.join(distFolder, 'alloy-editor');
 const srcLangDir = path.join(rootDir, 'src', 'lang');
 
 module.exports = {
-    rootDir,
-    assetsDir,
-    ckeditorLangKeys,
-    ckeditorLangContent,
-    distFolder,
-    editorDistFolder,
-    langDir,
-    srcLangDir
+	rootDir,
+	assetsDir,
+	ckeditorLangKeys,
+	ckeditorLangContent,
+	distFolder,
+	editorDistFolder,
+	langDir,
+	srcLangDir
 };

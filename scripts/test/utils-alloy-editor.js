@@ -1,82 +1,104 @@
 (function() {
-    'use strict';
+	'use strict';
 
-    if (!window.Utils) {
-        window.Utils = {};
-    }
+	if (!window.Utils) {
+		window.Utils = {};
+	}
 
-    window.Utils.assertDropdownCommandButtonResult = (function() {
-        var assertResult = window.Utils.assertResult('test/ui/test/fixtures');
+	window.Utils.assertDropdownCommandButtonResult = (function() {
+		var assertResult = window.Utils.assertResult('test/ui/test/fixtures');
 
-        return function(config) {
-            var TestUtils = ReactTestUtils;
-            var Simulate = TestUtils.Simulate;
+		return function(config) {
+			var TestUtils = ReactTestUtils;
+			var Simulate = TestUtils.Simulate;
 
-            var command = function() {
-                var dropdown = TestUtils.findAllInRenderedTree(config.buttonDropdown, function(component) {
-                    return TestUtils.isCompositeComponentWithType(component, config.buttonCommandsList);
-                });
+			var command = function() {
+				var dropdown = TestUtils.findAllInRenderedTree(
+					config.buttonDropdown,
+					function(component) {
+						return TestUtils.isCompositeComponentWithType(
+							component,
+							config.buttonCommandsList
+						);
+					}
+				);
 
-                assert.ok(dropdown);
-                assert.equal(1, dropdown.length);
+				assert.ok(dropdown);
+				assert.equal(1, dropdown.length);
 
-                var commandButtons = TestUtils.findAllInRenderedTree(dropdown[0], function(component) {
-                    return !TestUtils.isDOMComponent(component) && component.props.command === config.buttonCommand;
-                });
+				var commandButtons = TestUtils.findAllInRenderedTree(
+					dropdown[0],
+					function(component) {
+						return (
+							!TestUtils.isDOMComponent(component) &&
+							component.props.command === config.buttonCommand
+						);
+					}
+				);
 
-                assert.ok(commandButtons.length);
+				assert.ok(commandButtons.length);
 
-                if (config.selectionFn) {
-                    config.selectionFn.call(this);
-                }
+				if (config.selectionFn) {
+					config.selectionFn.call(this);
+				}
 
-                Simulate.click(ReactDOM.findDOMNode(commandButtons[0]));
-            };
+				Simulate.click(ReactDOM.findDOMNode(commandButtons[0]));
+			};
 
-            assertResult.call(this,
-                config.initialFixture, command, config.expectedFixture, config.errorMessage
-            );
-        };
-    }());
+			assertResult.call(
+				this,
+				config.initialFixture,
+				command,
+				config.expectedFixture,
+				config.errorMessage
+			);
+		};
+	})();
 
-    window.Utils.createAlloyEditor = function(done, config) {
-        var editable = document.createElement('div');
+	window.Utils.createAlloyEditor = function(done, config) {
+		var editable = document.createElement('div');
 
-        editable.setAttribute('id', 'editable');
-        editable.setAttribute('contenteditable', true);
+		editable.setAttribute('id', 'editable');
+		editable.setAttribute('contenteditable', true);
 
-        document.getElementsByTagName('body')[0].appendChild(editable);
+		document.getElementsByTagName('body')[0].appendChild(editable);
 
-        this._editable = editable;
+		this._editable = editable;
 
-        assert.ok(bender);
-        assert.ok(CKEDITOR);
-        assert.ok(AlloyEditor);
+		assert.ok(bender);
+		assert.ok(CKEDITOR);
+		assert.ok(AlloyEditor);
 
-        config = CKEDITOR.tools.merge({
-            toolbars: {}
-        }, config);
+		config = CKEDITOR.tools.merge(
+			{
+				toolbars: {}
+			},
+			config
+		);
 
-        this.editor = AlloyEditor.editable('editable', config);
+		this.editor = AlloyEditor.editable('editable', config);
 
-        this.nativeEditor = this.editor.get('nativeEditor');
+		this.nativeEditor = this.editor.get('nativeEditor');
 
-        this.nativeEditor.on('instanceReady', function() {
-            window.Utils.focusEditor(this.nativeEditor);
+		this.nativeEditor.on(
+			'instanceReady',
+			function() {
+				window.Utils.focusEditor(this.nativeEditor);
 
-            done();
-        }.bind(this));
-    };
+				done();
+			}.bind(this)
+		);
+	};
 
-    window.Utils.destroyAlloyEditor = function(done) {
-        if (this.editor) {
-            this.editor.destroy();
-        }
+	window.Utils.destroyAlloyEditor = function(done) {
+		if (this.editor) {
+			this.editor.destroy();
+		}
 
-        this._editable.parentNode.removeChild(this._editable);
+		this._editable.parentNode.removeChild(this._editable);
 
-        if (done) {
-            done();
-        }
-    };
-}());
+		if (done) {
+			done();
+		}
+	};
+})();

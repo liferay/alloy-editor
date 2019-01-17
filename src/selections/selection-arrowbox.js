@@ -1,9 +1,9 @@
 var tableSelectionGetArrowBoxClasses = function() {
-    return 'ae-arrow-box ae-arrow-box-bottom';
+	return 'ae-arrow-box ae-arrow-box-bottom';
 };
 
 const SelectionGetArrowBoxClasses = {
-    table: tableSelectionGetArrowBoxClasses
+	table: tableSelectionGetArrowBoxClasses
 };
 
 export default SelectionGetArrowBoxClasses;

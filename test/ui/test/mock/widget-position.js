@@ -1,7 +1,5 @@
 import WidgetPosition from '../../../../src/components/base/widget-position.js';
 
-class Component {};
+class Component {}
 
-export default WidgetPosition(
-    Component
-);
+export default WidgetPosition(Component);

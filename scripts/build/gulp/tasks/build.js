@@ -9,60 +9,62 @@ const runSequence = require('run-sequence');
 const template = require('gulp-template');
 
 gulp.task('build', function(callback) {
-    const task = ['build-demo', 'post-cleanup'];
+	const task = ['build-demo', 'post-cleanup'];
 
-    if (argv.release) {
-        task.push('minimize-css');
-    }
+	if (argv.release) {
+		task.push('minimize-css');
+	}
 
-    runSequence(
-        'clean-dist',
-        [
-            'build-css',
-            'copy-ckeditor',
-            'copy-languages',
-            'copy-svgs'
-        ],
-        task,
-        callback
-    );
+	runSequence(
+		'clean-dist',
+		['build-css', 'copy-ckeditor', 'copy-languages', 'copy-svgs'],
+		task,
+		callback
+	);
 });
 
 gulp.task('clean-dist', function(callback) {
-    del(Constants.distFolder, {force: true}).then(function() {
-        callback();
-    });
+	del(Constants.distFolder, {force: true}).then(function() {
+		callback();
+	});
 });
 
 gulp.task('build-demo', function() {
-    var templateHead;
+	var templateHead;
 
-    if (argv.release) {
-        templateHead = 'head-release.template';
-    } else {
-        templateHead = 'head-dev.template';
-    }
+	if (argv.release) {
+		templateHead = 'head-release.template';
+	} else {
+		templateHead = 'head-dev.template';
+	}
 
-    return gulp.src([
-            path.join('./demo', 'index.html')
-        ])
-        .pipe(template({
-            resources: fs.readFileSync(path.join('./template', templateHead)).toString()
-        }))
-        .pipe(gulp.dest(path.join(Constants.distFolder)));
+	return gulp
+		.src([path.join('./demo', 'index.html')])
+		.pipe(
+			template({
+				resources: fs
+					.readFileSync(path.join('./template', templateHead))
+					.toString()
+			})
+		)
+		.pipe(gulp.dest(path.join(Constants.distFolder)));
 });
 
 gulp.task('copy-ckeditor', function() {
-    return gulp.src(path.join(Constants.rootDir, 'lib', 'ckeditor', '/**'))
-        .pipe(gulp.dest(Constants.editorDistFolder));
+	return gulp
+		.src(path.join(Constants.rootDir, 'lib', 'ckeditor', '/**'))
+		.pipe(gulp.dest(Constants.editorDistFolder));
 });
 
 gulp.task('post-cleanup', function(callback) {
-    del([
-        path.join(Constants.editorDistFolder, 'adapters'),
-        path.join(Constants.editorDistFolder, 'CHANGES.md'),
-        path.join(Constants.editorDistFolder, 'samples')
-    ], {force: true}).then(function() {
-        callback();
-    });
+	del(
+		[
+			path.join(Constants.editorDistFolder, 'adapters'),
+			path.join(Constants.editorDistFolder, 'CHANGES.md'),
+			path.join(Constants.editorDistFolder, 'samples')
+		],
+		{force: true}
+	).then(function() {
+		callback();
+	});
 });

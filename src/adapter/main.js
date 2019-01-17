@@ -27,12 +27,12 @@ var BRIDGE_BUTTONS = {};
  * @return {Object} An instance of {{#crossLink "Core"}}{{/crossLink}}
  */
 const editable = function(node, config) {
-    config = config || {};
-    config.srcNode = node;
+	config = config || {};
+	config.srcNode = node;
 
-    AlloyEditor.implementEventTarget();
+	AlloyEditor.implementEventTarget();
 
-    return new Core(config);
+	return new Core(config);
 };
 
 /**
@@ -47,41 +47,40 @@ const editable = function(node, config) {
  * @return {String} The found base path
  */
 const getBasePath = function() {
-    // Find out the editor directory path, based on its <script> tag.
-    var path = window.ALLOYEDITOR_BASEPATH || '';
+	// Find out the editor directory path, based on its <script> tag.
+	var path = window.ALLOYEDITOR_BASEPATH || '';
 
-    if (!path) {
-        var scripts = document.getElementsByTagName('script');
+	if (!path) {
+		var scripts = document.getElementsByTagName('script');
 
-        for (var i = 0; i < scripts.length; i++) {
-            var match = scripts[ i ].src.match(AlloyEditor.regexBasePath);
+		for (var i = 0; i < scripts.length; i++) {
+			var match = scripts[i].src.match(AlloyEditor.regexBasePath);
 
+			if (match) {
+				path = match[1];
+				break;
+			}
+		}
+	}
 
-            if (match) {
-                path = match[1];
-                break;
-            }
-        }
-    }
+	// In IE (only) the script.src string is the raw value entered in the
+	// HTML source. Other browsers return the full resolved URL instead.
+	if (path.indexOf(':/') === -1 && path.slice(0, 2) !== '//') {
+		// Absolute path.
+		if (path.indexOf('/') === 0) {
+			path = location.href.match(/^.*?:\/\/[^\/]*/)[0] + path;
+		}
+		// Relative path.
+		else {
+			path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
+		}
+	}
 
-    // In IE (only) the script.src string is the raw value entered in the
-    // HTML source. Other browsers return the full resolved URL instead.
-    if (path.indexOf(':/') === -1 && path.slice(0, 2) !== '//' ) {
-        // Absolute path.
-        if (path.indexOf('/') === 0) {
-            path = location.href.match(/^.*?:\/\/[^\/]*/)[0] + path;
-        }
-        // Relative path.
-        else {
-            path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
-        }
-    }
+	if (!path) {
+		throw 'The AlloyEditor installation path could not be automatically detected. Please set the global variable "ALLOYEDITOR_BASEPATH" before creating editor instances.';
+	}
 
-    if (!path){
-        throw 'The AlloyEditor installation path could not be automatically detected. Please set the global variable "ALLOYEDITOR_BASEPATH" before creating editor instances.';
-    }
-
-    return path;
+	return path;
 };
 
 /**
@@ -94,41 +93,112 @@ const getBasePath = function() {
  * @param {Function} callback Optional callback to be called when AlloyEditor loads the language resource.
  */
 const loadLanguageResources = function(callback) {
-    AlloyEditor.implementEventTarget();
+	AlloyEditor.implementEventTarget();
 
-    if (Lang.isFunction(callback)) {
-        if (AlloyEditor.Strings) {
-            setTimeout(callback, 0);
-        } else {
-            AlloyEditor.once('languageResourcesLoaded', function() {
-                setTimeout(callback, 0);
-            });
-        }
-    }
+	if (Lang.isFunction(callback)) {
+		if (AlloyEditor.Strings) {
+			setTimeout(callback, 0);
+		} else {
+			AlloyEditor.once('languageResourcesLoaded', function() {
+				setTimeout(callback, 0);
+			});
+		}
+	}
 
-    if (!AlloyEditor._langResourceRequested) {
-        AlloyEditor._langResourceRequested = true;
+	if (!AlloyEditor._langResourceRequested) {
+		AlloyEditor._langResourceRequested = true;
 
-        var languages = ['af', 'ar', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en-au', 'en-ca', 'en-gb', 'en', 'eo', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca', 'fr', 'gl', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'ku', 'lt', 'lv', 'mk', 'mn', 'ms', 'nb', 'nl', 'no', 'pl', 'pt-br', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr-latn', 'sr', 'sv', 'th', 'tr', 'tt', 'ug', 'uk', 'vi', 'zh-cn', 'zh'];
+		var languages = [
+			'af',
+			'ar',
+			'bg',
+			'bn',
+			'bs',
+			'ca',
+			'cs',
+			'cy',
+			'da',
+			'de',
+			'el',
+			'en-au',
+			'en-ca',
+			'en-gb',
+			'en',
+			'eo',
+			'es',
+			'et',
+			'eu',
+			'fa',
+			'fi',
+			'fo',
+			'fr-ca',
+			'fr',
+			'gl',
+			'gu',
+			'he',
+			'hi',
+			'hr',
+			'hu',
+			'id',
+			'is',
+			'it',
+			'ja',
+			'ka',
+			'km',
+			'ko',
+			'ku',
+			'lt',
+			'lv',
+			'mk',
+			'mn',
+			'ms',
+			'nb',
+			'nl',
+			'no',
+			'pl',
+			'pt-br',
+			'pt',
+			'ro',
+			'ru',
+			'si',
+			'sk',
+			'sl',
+			'sq',
+			'sr-latn',
+			'sr',
+			'sv',
+			'th',
+			'tr',
+			'tt',
+			'ug',
+			'uk',
+			'vi',
+			'zh-cn',
+			'zh'
+		];
 
-        var userLanguage = navigator.language || navigator.userLanguage || 'en';
+		var userLanguage = navigator.language || navigator.userLanguage || 'en';
 
-        var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
-        var lang = parts[1];
-        var locale = parts[2];
+		var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
+		var lang = parts[1];
+		var locale = parts[2];
 
-        if (languages.indexOf(lang + '-' + locale) >= 0) {
-            lang = lang + '-' + locale;
-        } else if (languages.indexOf(lang) === -1) {
-            lang = 'en';
-        }
+		if (languages.indexOf(lang + '-' + locale) >= 0) {
+			lang = lang + '-' + locale;
+		} else if (languages.indexOf(lang) === -1) {
+			lang = 'en';
+		}
 
-        CKEDITOR.scriptLoader.load(AlloyEditor.getUrl('lang/alloy-editor/' + lang + '.js'), function(loaded) {
-            if (loaded) {
-                AlloyEditor.fire('languageResourcesLoaded');
-            }
-        }, this);
-    }
+		CKEDITOR.scriptLoader.load(
+			AlloyEditor.getUrl('lang/alloy-editor/' + lang + '.js'),
+			function(loaded) {
+				if (loaded) {
+					AlloyEditor.fire('languageResourcesLoaded');
+				}
+			},
+			this
+		);
+	}
 };
 
 /**
@@ -144,19 +214,26 @@ const loadLanguageResources = function(callback) {
  * @return {String} The full URL.
  */
 const getUrl = function(resource) {
-    var basePath = AlloyEditor.getBasePath();
+	var basePath = AlloyEditor.getBasePath();
 
-    // If this is not a full or absolute path.
-    if (resource.indexOf(':/') === -1 && resource.indexOf('/') !== 0) {
-        resource = basePath + resource;
-    }
+	// If this is not a full or absolute path.
+	if (resource.indexOf(':/') === -1 && resource.indexOf('/') !== 0) {
+		resource = basePath + resource;
+	}
 
-    // Add the timestamp, except for directories.
-    if (CKEDITOR.timestamp && resource.charAt( resource.length - 1 ) !== '/' && !(/[&?]t=/).test(resource)) {
-        resource += (resource.indexOf('?') >= 0 ? '&' : '?') + 't=' + CKEDITOR.timestamp;
-    }
+	// Add the timestamp, except for directories.
+	if (
+		CKEDITOR.timestamp &&
+		resource.charAt(resource.length - 1) !== '/' &&
+		!/[&?]t=/.test(resource)
+	) {
+		resource +=
+			(resource.indexOf('?') >= 0 ? '&' : '?') +
+			't=' +
+			CKEDITOR.timestamp;
+	}
 
-    return resource;
+	return resource;
 };
 
 /**
@@ -167,9 +244,9 @@ const getUrl = function(resource) {
  * @static
  */
 const implementEventTarget = function() {
-    if (!AlloyEditor.fire && !AlloyEditor.on) {
-        CKEDITOR.event.implementOn(AlloyEditor);
-    }
+	if (!AlloyEditor.fire && !AlloyEditor.on) {
+		CKEDITOR.event.implementOn(AlloyEditor);
+	}
 };
 
 /**
@@ -200,12 +277,12 @@ const regexBasePath = /(^|.*[\\\/])(?:alloy-editor[^/]+|alloy-editor)\.js(?:\?.*
  * @static
  */
 const getButtons = function(buttons) {
-    return function() {
-        return buttons.reduce(function(acc, val) {
-            val = BRIDGE_BUTTONS[val] || [val];
-            return acc.concat(val);
-        }, []);
-    };
+	return function() {
+		return buttons.reduce(function(acc, val) {
+			val = BRIDGE_BUTTONS[val] || [val];
+			return acc.concat(val);
+		}, []);
+	};
 };
 
 /**
@@ -218,11 +295,11 @@ const getButtons = function(buttons) {
  * @static
  */
 const registerBridgeButton = function(buttonName, pluginName) {
-    if (!BRIDGE_BUTTONS[pluginName]) {
-        BRIDGE_BUTTONS[pluginName] = [];
-    }
+	if (!BRIDGE_BUTTONS[pluginName]) {
+		BRIDGE_BUTTONS[pluginName] = [];
+	}
 
-    BRIDGE_BUTTONS[pluginName].push(buttonName);
+	BRIDGE_BUTTONS[pluginName].push(buttonName);
 };
 
 /**
@@ -230,25 +307,25 @@ const registerBridgeButton = function(buttonName, pluginName) {
  * @memberof AlloyEditor
  */
 const OOP = {
-    extend
+	extend
 };
 
 export {
-    Attribute,
-    Buttons,
-    Core,
-    editable,
-    getBasePath,
-    getButtons,
-    getUrl,
-    implementEventTarget,
-    Lang,
-    loadLanguageResources,
-    OOP,
-    registerBridgeButton,
-    SelectionGetArrowBoxClasses,
-    Selections,
-    SelectionSetPosition,
-    SelectionTest,
-    Toolbars
+	Attribute,
+	Buttons,
+	Core,
+	editable,
+	getBasePath,
+	getButtons,
+	getUrl,
+	implementEventTarget,
+	Lang,
+	loadLanguageResources,
+	OOP,
+	registerBridgeButton,
+	SelectionGetArrowBoxClasses,
+	Selections,
+	SelectionSetPosition,
+	SelectionTest,
+	Toolbars
 };

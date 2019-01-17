@@ -14,32 +14,36 @@ import Lang from './lang';
  * @static
  */
 const extend = function(receiver, supplier, protoProps, staticProps) {
-    if (!supplier || !receiver) {
-        throw 'extend failed, verify dependencies';
-    }
+	if (!supplier || !receiver) {
+		throw 'extend failed, verify dependencies';
+	}
 
-    var supplierProto = supplier.prototype, receiverProto = Object.create(supplierProto);
-    receiver.prototype = receiverProto;
+	var supplierProto = supplier.prototype,
+		receiverProto = Object.create(supplierProto);
+	receiver.prototype = receiverProto;
 
-    receiverProto.constructor = receiver;
-    receiver.superclass = supplierProto;
+	receiverProto.constructor = receiver;
+	receiver.superclass = supplierProto;
 
-    // assign constructor property
-    if (supplier !== Object && supplierProto.constructor === Object.prototype.constructor) {
-        supplierProto.constructor = supplier;
-    }
+	// assign constructor property
+	if (
+		supplier !== Object &&
+		supplierProto.constructor === Object.prototype.constructor
+	) {
+		supplierProto.constructor = supplier;
+	}
 
-    // add prototype overrides
-    if (protoProps) {
-        Lang.mix(receiverProto, protoProps);
-    }
+	// add prototype overrides
+	if (protoProps) {
+		Lang.mix(receiverProto, protoProps);
+	}
 
-    // add object overrides
-    if (staticProps) {
-        Lang.mix(receiver, staticProps);
-    }
+	// add object overrides
+	if (staticProps) {
+		Lang.mix(receiver, staticProps);
+	}
 
-    return receiver;
+	return receiver;
 };
 
 export default extend;

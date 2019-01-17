@@ -10,29 +10,30 @@ import Lang from '../../oop/lang';
  *
  * @class ButtonStateClasses
  */
-export default WrappedComponent => class extends WrappedComponent {
-    /**
-     * Returns the list of state classes associated to the current element's state, according
-     * to the results of the isActive and isDisabled methods.
-     *
-     * @instance
-     * @memberof ButtonStateClasses
-     * @method getStateClasses
-     * @return {String} A string with the state CSS classes.
-     */
-    getStateClasses() {
-        var stateClasses = '';
+export default WrappedComponent =>
+	class extends WrappedComponent {
+		/**
+		 * Returns the list of state classes associated to the current element's state, according
+		 * to the results of the isActive and isDisabled methods.
+		 *
+		 * @instance
+		 * @memberof ButtonStateClasses
+		 * @method getStateClasses
+		 * @return {String} A string with the state CSS classes.
+		 */
+		getStateClasses() {
+			var stateClasses = '';
 
-        // Check for active state
-        if (Lang.isFunction(this.isActive) && this.isActive()) {
-            stateClasses += 'ae-button-pressed';
-        }
+			// Check for active state
+			if (Lang.isFunction(this.isActive) && this.isActive()) {
+				stateClasses += 'ae-button-pressed';
+			}
 
-        // Check for disabled state
-        if (Lang.isFunction(this.isDisabled) && this.isDisabled()) {
-            stateClasses += ' ae-button-disabled';
-        }
+			// Check for disabled state
+			if (Lang.isFunction(this.isDisabled) && this.isDisabled()) {
+				stateClasses += ' ae-button-disabled';
+			}
 
-        return stateClasses;
-    }
-};
+			return stateClasses;
+		}
+	};

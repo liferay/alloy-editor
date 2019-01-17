@@ -5,11 +5,4 @@ import panelMenuButton from './panel-menu-button.jsx';
 import richcombo from './richcombo.jsx';
 import uibridge from './uibridge';
 
-export {
-    button,
-    menuButton,
-    menu,
-    panelMenuButton,
-    richcombo,
-    uibridge
-};
+export {button, menuButton, menu, panelMenuButton, richcombo, uibridge};

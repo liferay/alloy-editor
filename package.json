@@ -43,6 +43,7 @@
     "karma-verbose-reporter": "0.0.6",
     "karma-webpack": "^3.0.0",
     "mocha": "3.2.0",
+    "prettier": "1.15.3",
     "require-dir": "^1.0.0",
     "run-sequence": "^2.2.1",
     "sinon": "1.15.4",
@@ -58,7 +59,10 @@
   "scripts": {
     "build:assets": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
     "build": "npm run build:assets -- --release && webpack --config webpack.prod.js && webpack --config webpack.dev.js",
+    "checkFormat": "prettier --list-different -- '*.js' '{api,scripts,src,test}/**/*.js'",
     "dev": "npm run build:assets && webpack --config webpack.dev.js",
+    "format": "prettier --write -- '*.js' '{api,scripts,src,test}/**/*.js'",
+    "prettier": "prettier --write -- '*.js' '{api,scripts,src,test}/**/*.js'",
     "start": "webpack-dev-server --config webpack.dev.js",
     "test": "karma start karma.js",
     "testSaucelabs": "karma start karma-saucelabs.js"
