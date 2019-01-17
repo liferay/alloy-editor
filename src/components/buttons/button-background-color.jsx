@@ -176,7 +176,7 @@ class ButtonBackgroundColor extends React.Component {
      * @instance
      * @memberof ButtonBackgroundColor
      * @method _checkActive
-     * @param {Object} styleConfig olor definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
+     * @param {Object} styleConfig color definition as per http://docs.ckeditor.com/#!/api/CKEDITOR.style.
      * @protected
      * @return {Boolean} Returns true if the color is applied to the selection, false otherwise.
      */
