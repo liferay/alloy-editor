@@ -95,7 +95,7 @@ class ButtonColor extends React.Component {
 
         const colors = this._getColors();
 
-        colors.forEach(item => {
+        colors.some(item => {
             if (this._checkActive(item.style)) {
                 activeColor = item.name;
 
@@ -188,10 +188,11 @@ class ButtonColor extends React.Component {
     }
 
     /**
-     * Returns an array of colors. Each color consists from two properties:
-     * - name - the style name, for example "default"
-     * - style - an object with one property, called `element` which value
-     * represents the style which have to be applied to the element.
+     * Returns an array of colors. Each color consists of two properties:
+     * - name - The style name, for example "default".
+     * - style - An object with one property, called `element` which value
+     *          represents the style which have to be applied to the element.
+     * - styleFn - The function that is invoked to apply the style to the element.
      *
      * @instance
      * @memberof ButtonColor
