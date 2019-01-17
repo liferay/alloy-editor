@@ -78,7 +78,7 @@ class ButtonEmbedVideoEdit extends React.Component {
      */
     getInitialState() {
         const editor = this.props.editor.get('nativeEditor');
-        let embed;
+        let element;
 
         const selection = editor.getSelection();
 
@@ -86,18 +86,18 @@ class ButtonEmbedVideoEdit extends React.Component {
             const selectedElement = selection.getSelectedElement();
 
             if (selectedElement) {
-                embed = selectedElement.findOne('[data-widget="videoembed"]');
+                element = selectedElement.findOne('[data-widget="videoembed"]');
             }
         }
 
-        const videoURL = embed ? embed.getAttribute('data-embed-video-url') : '';
+        const videoURL = element ? element.getAttribute('data-embed-video-url') : '';
 
         return {
-            element: embed,
+            element,
             initialEmbed: {
-                videoURL: videoURL
+                videoUrl
             },
-            videoURL: videoURL
+            videoURL
         };
     }
 
