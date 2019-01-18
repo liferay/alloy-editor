@@ -11,7 +11,11 @@ CKEDITOR.plugins.add('test_richcombobridge', {
 					for (var i = 0; i < richComboentries.length; i++) {
 						var entryName = richComboentries[i];
 
-						this.add(entryName, '<span>' + entryName + '</span>', entryName);
+						this.add(
+							entryName,
+							'<span>' + entryName + '</span>',
+							entryName
+						);
 					}
 
 					editor.fire('richComboInit');

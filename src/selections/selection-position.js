@@ -2,8 +2,8 @@ import ReactDOM from 'react-dom';
 
 // Default gutter value for toolbar positioning
 var DEFAULT_GUTTER = {
-    left: 0,
-    top: 0
+	left: 0,
+	top: 0
 };
 
 /**
@@ -14,35 +14,44 @@ var DEFAULT_GUTTER = {
  * @param {Object} rect The rectangle according to which the Toolbar will be centered
  */
 var centerToolbar = function(toolbar, rect) {
-        var toolbarNode = ReactDOM.findDOMNode(toolbar);
+	var toolbarNode = ReactDOM.findDOMNode(toolbar);
 
-        var nativeEditor = toolbar.props.editor.get('nativeEditor');
-        var uiNode = nativeEditor.config.uiNode || document.body;
-        var uiNodeStyle = getComputedStyle(uiNode);
-        var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
-        var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
-        var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+	var nativeEditor = toolbar.props.editor.get('nativeEditor');
+	var uiNode = nativeEditor.config.uiNode || document.body;
+	var uiNodeStyle = getComputedStyle(uiNode);
+	var uiNodeMarginLeft = parseInt(
+		uiNodeStyle.getPropertyValue('margin-left'),
+		10
+	);
+	var uiNodeMarginRight = parseInt(
+		uiNodeStyle.getPropertyValue('margin-right'),
+		10
+	);
+	var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
 
-        var halfNodeWidth = toolbarNode.offsetWidth / 2;
-        var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+	var halfNodeWidth = toolbarNode.offsetWidth / 2;
+	var scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
 
-        var gutter = toolbar.props.gutter || DEFAULT_GUTTER;
+	var gutter = toolbar.props.gutter || DEFAULT_GUTTER;
 
-        var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
+	var widgetXY = toolbar.getWidgetXYPoint(
+		rect.left + rect.width / 2 - scrollPosition.x,
+		rect.top + scrollPosition.y,
+		CKEDITOR.SELECTION_BOTTOM_TO_TOP
+	);
 
-        var endPosition = [
-          rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
-          rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top
-        ];
+	var endPosition = [
+		rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
+		rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top
+	];
 
-        if (endPosition[0] < 0) {
-            endPosition[0] = 0;
-        }
-        else if (endPosition[0] > totalWidth - toolbarNode.offsetWidth) {
-            endPosition[0] = totalWidth - toolbarNode.offsetWidth;
-        }
+	if (endPosition[0] < 0) {
+		endPosition[0] = 0;
+	} else if (endPosition[0] > totalWidth - toolbarNode.offsetWidth) {
+		endPosition[0] = totalWidth - toolbarNode.offsetWidth;
+	}
 
-        toolbar.moveToPoint(widgetXY, endPosition);
+	toolbar.moveToPoint(widgetXY, endPosition);
 };
 
 /**
@@ -54,14 +63,17 @@ var centerToolbar = function(toolbar, rect) {
  * @return {Boolean} True, in all cases
  */
 var imageSelectionSetPosition = function(payload) {
-        var selectionData = payload.selectionData ? payload.selectionData : payload.editorEvent ?
-            payload.editorEvent.data.selectionData : null;
+	var selectionData = payload.selectionData
+		? payload.selectionData
+		: payload.editorEvent
+		? payload.editorEvent.data.selectionData
+		: null;
 
-        if (selectionData && selectionData.element) {
-            centerToolbar(this, selectionData.element.getClientRect());
+	if (selectionData && selectionData.element) {
+		centerToolbar(this, selectionData.element.getClientRect());
 
-            return true;
-        }
+		return true;
+	}
 };
 
 /**
@@ -73,23 +85,23 @@ var imageSelectionSetPosition = function(payload) {
  * @return {Boolean} True, in all cases
  */
 var tableSelectionSetPosition = function(payload) {
-        var nativeEditor = payload.editor.get('nativeEditor');
-        var uiNode = nativeEditor.config.uiNode;
+	var nativeEditor = payload.editor.get('nativeEditor');
+	var uiNode = nativeEditor.config.uiNode;
 
-        var scrollTop = uiNode ? uiNode.scrollTop : 0;
+	var scrollTop = uiNode ? uiNode.scrollTop : 0;
 
-        var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
-        var rect = table.getClientRect();
-        rect.top += scrollTop;
+	var table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+	var rect = table.getClientRect();
+	rect.top += scrollTop;
 
-        centerToolbar(this, rect);
+	centerToolbar(this, rect);
 
-        return true;
+	return true;
 };
 
 const SelectionSetPosition = {
-    image: imageSelectionSetPosition,
-    table: tableSelectionSetPosition
+	image: imageSelectionSetPosition,
+	table: tableSelectionSetPosition
 };
 
 export default SelectionSetPosition;

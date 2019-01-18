@@ -23,570 +23,612 @@ const EMBED_VIDEO_HEIGHT = 315;
  * @constructor
  */
 function Core(config) {
-    Core.superclass.constructor.call(this, config);
+	Core.superclass.constructor.call(this, config);
 }
 
-extend(Core, Base, {
-    /**
-     * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
-     * instance, passing it the provided configuration attributes.
-     *
-     * @memberof Core
-     * @instance
-     * @protected
-     * @method initializer
-     * @param config {Object} Configuration object literal for the editor.
-     */
-    initializer: function(config) {
-        var node = this.get('srcNode');
+extend(
+	Core,
+	Base,
+	{
+		/**
+		 * Initializer lifecycle implementation for the AlloyEditor class. Creates a CKEditor
+		 * instance, passing it the provided configuration attributes.
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @protected
+		 * @method initializer
+		 * @param config {Object} Configuration object literal for the editor.
+		 */
+		initializer: function(config) {
+			var node = this.get('srcNode');
 
-        if (this.get('enableContentEditable')) {
-            node.setAttribute('contenteditable', 'true');
-        }
+			if (this.get('enableContentEditable')) {
+				node.setAttribute('contenteditable', 'true');
+			}
 
-        var editor = CKEDITOR.inline(node);
+			var editor = CKEDITOR.inline(node);
 
-        editor.config.allowedContent = this.get('allowedContent');
+			editor.config.allowedContent = this.get('allowedContent');
 
-        editor.config.toolbars = this.get('toolbars');
+			editor.config.toolbars = this.get('toolbars');
 
-        editor.config.removePlugins = this.get('removePlugins');
+			editor.config.removePlugins = this.get('removePlugins');
 
-        editor.config.extraPlugins = this.get('extraPlugins');
+			editor.config.extraPlugins = this.get('extraPlugins');
 
-        editor.config.embedProviders = this.get('embedProviders');
+			editor.config.embedProviders = this.get('embedProviders');
 
-        editor.config.placeholderClass = this.get('placeholderClass');
+			editor.config.placeholderClass = this.get('placeholderClass');
 
-        editor.config.pasteFromWordRemoveStyles = false;
-        editor.config.pasteFromWordRemoveFontStyles = false;
+			editor.config.pasteFromWordRemoveStyles = false;
+			editor.config.pasteFromWordRemoveFontStyles = false;
 
-        editor.config.selectionKeystrokes = this.get('selectionKeystrokes');
+			editor.config.selectionKeystrokes = this.get('selectionKeystrokes');
 
-        editor.config.spritemap = this.get('spritemap');
+			editor.config.spritemap = this.get('spritemap');
 
-        Lang.mix(editor.config, config);
+			Lang.mix(editor.config, config);
 
-        if (CKEDITOR.env.ie && !CKEDITOR.env.edge) {
-            editor.config.extraPlugins = editor.config.extraPlugins.replace('ae_dragresize', 'ae_dragresize_ie');
-            editor.config.removePlugins = editor.config.removePlugins.replace('ae_dragresize', 'ae_dragresize_ie');
-        }
+			if (CKEDITOR.env.ie && !CKEDITOR.env.edge) {
+				editor.config.extraPlugins = editor.config.extraPlugins.replace(
+					'ae_dragresize',
+					'ae_dragresize_ie'
+				);
+				editor.config.removePlugins = editor.config.removePlugins.replace(
+					'ae_dragresize',
+					'ae_dragresize_ie'
+				);
+			}
 
-        editor.once('contentDom', function() {
+			editor.once(
+				'contentDom',
+				function() {
+					this._addReadOnlyLinkClickListener(editor);
 
-            this._addReadOnlyLinkClickListener(editor);
+					var editable = editor.editable();
 
-            var editable = editor.editable();
+					editable.addClass('ae-editable');
+				}.bind(this)
+			);
 
-            editable.addClass('ae-editable');
+			this._editor = editor;
 
-        }.bind(this));
+			AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
+		},
 
-        this._editor = editor;
+		/**
+		 * Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor
+		 * instance and destroys all created toolbars.
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @protected
+		 * @method destructor
+		 */
+		destructor: function() {
+			this._destroyed = true;
 
-        AlloyEditor.loadLanguageResources(this._renderUI.bind(this));
-    },
+			if (this._editorUIElement) {
+				ReactDOM.unmountComponentAtNode(this._editorUIElement);
+				this._editorUIElement.parentNode.removeChild(
+					this._editorUIElement
+				);
+			}
 
-    /**
-     * Destructor lifecycle implementation for the AlloyEdtor class. Destroys the CKEditor
-     * instance and destroys all created toolbars.
-     *
-     * @memberof Core
-     * @instance
-     * @protected
-     * @method destructor
-     */
-    destructor: function() {
-        this._destroyed = true;
+			var nativeEditor = this.get('nativeEditor');
 
-        if (this._editorUIElement) {
-            ReactDOM.unmountComponentAtNode(this._editorUIElement);
-            this._editorUIElement.parentNode.removeChild(this._editorUIElement);
-        }
+			if (nativeEditor) {
+				var editable = nativeEditor.editable();
 
-        var nativeEditor = this.get('nativeEditor');
+				if (editable) {
+					editable.removeClass('ae-editable');
 
-        if (nativeEditor) {
-            var editable = nativeEditor.editable();
+					if (this.get('enableContentEditable')) {
+						this.get('srcNode').setAttribute(
+							'contenteditable',
+							'false'
+						);
+					}
+				}
 
-            if (editable) {
-                editable.removeClass('ae-editable');
+				this._clearSelections();
 
-                if (this.get('enableContentEditable')) {
-                    this.get('srcNode').setAttribute('contenteditable', 'false');
-                }
-            }
+				nativeEditor.destroy();
+			}
+		},
 
-            this._clearSelections();
+		/**
+		 * Clear selections from window object
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @protected
+		 * @method _clearSelections
+		 */
+		_clearSelections: function() {
+			var nativeEditor = this.get('nativeEditor');
+			var isMSSelection = typeof window.getSelection != 'function';
 
-            nativeEditor.destroy();
-        }
-    },
+			if (isMSSelection) {
+				nativeEditor.document.$.selection.empty();
+			} else {
+				nativeEditor.document
+					.getWindow()
+					.$.getSelection()
+					.removeAllRanges();
+			}
+		},
 
+		/**
+		 * Method to set default link behavior
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @protected
+		 * @method _addReadOnlyLinkClickListener
+		 * @param {Object} editor
+		 */
+		_addReadOnlyLinkClickListener: function(editor) {
+			editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
+				editor: editor
+			});
+		},
 
-    /**
-     * Clear selections from window object
-     *
-     * @memberof Core
-     * @instance
-     * @protected
-     * @method _clearSelections
-     */
-    _clearSelections: function() {
-        var nativeEditor = this.get('nativeEditor');
-        var isMSSelection = typeof window.getSelection != 'function';
+		/**
+		 * Called on `click` event when the editor is in read only mode. Navigates to link's URL or opens
+		 * the link in a new window.
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @event readOnlyClick
+		 * @protected
+		 * @method _defaultReadOnlyClickFn
+		 * @param {Object} event The fired `click` event payload
+		 */
+		_defaultReadOnlyClickFn: function(event) {
+			var mouseEvent = event.data.$;
+			var hasCtrlKey = mouseEvent.ctrlKey || mouseEvent.metaKey;
+			var shouldOpen = this._editor.config.readOnly || hasCtrlKey;
 
-        if (isMSSelection) {
-            nativeEditor.document.$.selection.empty();
-        } else {
-            nativeEditor.document.getWindow().$.getSelection().removeAllRanges();
-        }
-    },
+			mouseEvent.preventDefault();
 
-    /**
-     * Method to set default link behavior
-     *
-     * @memberof Core
-     * @instance
-     * @protected
-     * @method _addReadOnlyLinkClickListener
-     * @param {Object} editor
-     */
-    _addReadOnlyLinkClickListener: function(editor) {
-        editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
-            editor: editor
-        });
-    },
+			if (!shouldOpen) {
+				return;
+			}
 
-    /**
-     * Called on `click` event when the editor is in read only mode. Navigates to link's URL or opens
-     * the link in a new window.
-     *
-     * @memberof Core
-     * @instance
-     * @event readOnlyClick
-     * @protected
-     * @method _defaultReadOnlyClickFn
-     * @param {Object} event The fired `click` event payload
-     */
-    _defaultReadOnlyClickFn: function(event) {
-        var mouseEvent = event.data.$;
-        var hasCtrlKey = mouseEvent.ctrlKey || mouseEvent.metaKey;
-        var shouldOpen = this._editor.config.readOnly || hasCtrlKey;
+			if (
+				event.listenerData.editor
+					.editable()
+					.editor.fire('readOnlyClick', event.data) !== false
+			) {
+				var ckElement = new CKEDITOR.dom.elementPath(
+					event.data.getTarget(),
+					this
+				);
+				var link = ckElement.lastElement;
 
-        mouseEvent.preventDefault();
+				if (link) {
+					var href = link.$.attributes.href
+						? link.$.attributes.href.value
+						: null;
+					var target = hasCtrlKey
+						? '_blank'
+						: link.$.attributes.target
+						? link.$.attributes.target.value
+						: null;
+					this._redirectLink(href, target);
+				}
+			}
+		},
 
-        if (!shouldOpen) {
-            return;
-        }
+		/**
+		 * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @protected
+		 * @method _getNativeEditor
+		 * @return {Object} The current instance of CKEditor.
+		 */
+		_getNativeEditor: function() {
+			return this._editor;
+		},
 
-        if (event.listenerData.editor.editable().editor.fire('readOnlyClick', event.data) !== false) {
-            var ckElement = new CKEDITOR.dom.elementPath(event.data.getTarget(), this);
-            var link = ckElement.lastElement;
+		/**
+		 * Redirects the browser to a given link
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @protected
+		 * @method _redirectLink
+		 * @param {string} href The href to take the browser to
+		 * @param {string=} target Specifies where to display the link
+		 */
+		_redirectLink: function(href, target) {
+			if (target && href) {
+				window.open(href, target);
+			} else if (href) {
+				window.location.href = href;
+			}
+		},
 
-            if (link) {
-                var href = link.$.attributes.href ? link.$.attributes.href.value : null;
-                var target = hasCtrlKey ? '_blank' : link.$.attributes.target ? link.$.attributes.target.value : null;
-                this._redirectLink(href, target);
-            }
-        }
-    },
+		/**
+		 * Renders the specified from the user toolbars.
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @protected
+		 * @method _renderUI
+		 */
+		_renderUI: function() {
+			if (!this._destroyed) {
+				var editorUIElement = document.createElement('div');
+				editorUIElement.className = 'ae-ui';
 
-    /**
-     * Retrieves the native CKEditor instance. Having this, the developer may use the API of CKEditor OOTB.
-     *
-     * @memberof Core
-     * @instance
-     * @protected
-     * @method _getNativeEditor
-     * @return {Object} The current instance of CKEditor.
-     */
-    _getNativeEditor: function() {
-        return this._editor;
-    },
+				var uiNode = this.get('uiNode') || document.body;
 
-    /**
-     * Redirects the browser to a given link
-     *
-     * @memberof Core
-     * @instance
-     * @protected
-     * @method _redirectLink
-     * @param {string} href The href to take the browser to
-     * @param {string=} target Specifies where to display the link
-     */
-    _redirectLink: function(href, target) {
-        if (target && href) {
-            window.open(href, target);
-        }
-        else if (href) {
-            window.location.href = href;
-        }
-    },
+				uiNode.appendChild(editorUIElement);
 
-    /**
-     * Renders the specified from the user toolbars.
-     *
-     * @memberof Core
-     * @instance
-     * @protected
-     * @method _renderUI
-     */
-    _renderUI: function() {
-        if (!this._destroyed) {
-            var editorUIElement = document.createElement('div');
-            editorUIElement.className = 'ae-ui';
+				this._mainUI = ReactDOM.render(
+					<UI
+						editor={this}
+						eventsDelay={this.get('eventsDelay')}
+						toolbars={this.get('toolbars')}
+					/>,
+					editorUIElement
+				);
 
-            var uiNode = this.get('uiNode') || document.body;
+				this._editorUIElement = editorUIElement;
 
-            uiNode.appendChild(editorUIElement);
+				this.get('nativeEditor').fire('uiReady');
+			}
+		},
 
-            this._mainUI = ReactDOM.render(<UI
-                editor={this}
-                eventsDelay={this.get('eventsDelay')}
-                toolbars={this.get('toolbars')} />, editorUIElement);
+		/**
+		 * The function returns an HTML element from the passed value. If the passed value is a string, it should be
+		 * the Id of the element which have to be retrieved from the DOM.
+		 * If an HTML Element is passed, the element itself will be returned.
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @method _toElement
+		 * @protected
+		 * @param {!(String|HTMLElement)} value String, which have to correspond to an HTML element from the DOM,
+		 * or the HTML element itself. If Id is passed, the HTML element will be retrieved from the DOM.
+		 * @return {HTMLElement} An HTML element.
+		 */
+		_toElement: function(value) {
+			if (Lang.isString(value)) {
+				value = document.getElementById(value);
+			}
 
-            this._editorUIElement = editorUIElement;
+			return value;
+		},
 
-            this.get('nativeEditor').fire('uiReady');
-        }
-    },
+		/**
+		 * Validates the allowed content attribute. Look
+		 * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
+		 * supported values.
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @protected
+		 * @method _validateAllowedContent
+		 * @param {Any} The value to be checked
+		 * @return {Boolean} True if the current value is valid configuration, false otherwise
+		 */
+		_validateAllowedContent: function(value) {
+			return (
+				Lang.isString(value) ||
+				Lang.isObject(value) ||
+				Lang.isBoolean(value)
+			);
+		},
 
-    /**
-     * The function returns an HTML element from the passed value. If the passed value is a string, it should be
-     * the Id of the element which have to be retrieved from the DOM.
-     * If an HTML Element is passed, the element itself will be returned.
-     *
-     * @memberof Core
-     * @instance
-     * @method _toElement
-     * @protected
-     * @param {!(String|HTMLElement)} value String, which have to correspond to an HTML element from the DOM,
-     * or the HTML element itself. If Id is passed, the HTML element will be retrieved from the DOM.
-     * @return {HTMLElement} An HTML element.
-     */
-    _toElement: function(value) {
-        if (Lang.isString(value)) {
-            value = document.getElementById(value);
-        }
+		/**
+		 * Validates the value of toolbars attribute
+		 *
+		 * @memberof Core
+		 * @instance
+		 * @protected
+		 * @method _validateToolbars
+		 * @param {Any} The value to be checked
+		 * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
+		 */
+		_validateToolbars: function(value) {
+			return Lang.isObject(value) || Lang.isNull(value);
+		}
+	},
+	{
+		ATTRS: {
+			/**
+			 * Configures the allowed content for the current instance of AlloyEditor.
+			 * Look on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)
+			 * for more information about the valid values.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property allowedContent
+			 * @default true
+			 * @writeOnce
+			 * @type {Boolean, String, Object}
+			 */
+			allowedContent: {
+				validator: '_validateAllowedContent',
+				value: true,
+				writeOnce: true
+			},
 
-        return value;
-    },
-
-    /**
-     * Validates the allowed content attribute. Look
-     * [here](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent) for more information about the
-     * supported values.
-     *
-     * @memberof Core
-     * @instance
-     * @protected
-     * @method _validateAllowedContent
-     * @param {Any} The value to be checked
-     * @return {Boolean} True if the current value is valid configuration, false otherwise
-     */
-    _validateAllowedContent: function(value) {
-        return Lang.isString(value) || Lang.isObject(value) || Lang.isBoolean(value);
-    },
-
-    /**
-     * Validates the value of toolbars attribute
-     *
-     * @memberof Core
-     * @instance
-     * @protected
-     * @method _validateToolbars
-     * @param {Any} The value to be checked
-     * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
-     */
-    _validateToolbars: function(value) {
-        return Lang.isObject(value) || Lang.isNull(value);
-    }
-}, {
-    ATTRS: {
-        /**
-         * Configures the allowed content for the current instance of AlloyEditor.
-         * Look on the [official CKEditor API](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-allowedContent)
-         * for more information about the valid values.
-         *
-         * @memberof Core
-         * @instance
-         * @property allowedContent
-         * @default true
-         * @writeOnce
-         * @type {Boolean, String, Object}
-         */
-        allowedContent: {
-            validator: '_validateAllowedContent',
-            value: true,
-            writeOnce: true
-        },
-
-
-        /**
-         * List of embed providers for videos
-         *
-         * @memberof Core
-         * @instance
-         * @property embedProviders
-         * @default []
-         * @type Array}
-         */
-        embedProviders: {
-            validator: Lang.isArray,
-            value: [
-                {
-                    id: 'facebook',
-                    tpl: `<iframe allowFullScreen="true" allowTransparency="true"
+			/**
+			 * List of embed providers for videos
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property embedProviders
+			 * @default []
+			 * @type Array}
+			 */
+			embedProviders: {
+				validator: Lang.isArray,
+				value: [
+					{
+						id: 'facebook',
+						tpl: `<iframe allowFullScreen="true" allowTransparency="true"
                          frameborder="0" height="${EMBED_VIDEO_HEIGHT}"
                          src="https://www.facebook.com/plugins/video.php?href={embedId}'
                          &show_text=0&width=${EMBED_VIDEO_WIDTH}&height=${EMBED_VIDEO_HEIGHT}" scrolling="no"
                          style="border:none;overflow:hidden" width="${EMBED_VIDEO_WIDTH}}"></iframe>`,
-                    urlSchemes: [
-                        '(https?:\\/\\/(?:www\\.)?facebook.com\\/\\S*\\/videos\\/\\S*)'
-                    ]
-                },
-                {
-                    id: 'twitch',
-                    tpl: `<iframe allowfullscreen="true" frameborder="0"
+						urlSchemes: [
+							'(https?:\\/\\/(?:www\\.)?facebook.com\\/\\S*\\/videos\\/\\S*)'
+						]
+					},
+					{
+						id: 'twitch',
+						tpl: `<iframe allowfullscreen="true" frameborder="0"
                          height="${EMBED_VIDEO_HEIGHT}"
                          src="https://player.twitch.tv/?autoplay=false&video={embedId}"
                          scrolling="no" width="${EMBED_VIDEO_WIDTH}"></iframe>`,
-                    urlSchemes: [
-                        'https?:\\/\\/(?:www\\.)?twitch.tv\\/videos\\/(\\S*)$'
-                    ]
-                },
-                {
-                    id: 'vimeo',
-                    tpl: `<iframe allowfullscreen frameborder="0" height="${EMBED_VIDEO_HEIGHT}"
+						urlSchemes: [
+							'https?:\\/\\/(?:www\\.)?twitch.tv\\/videos\\/(\\S*)$'
+						]
+					},
+					{
+						id: 'vimeo',
+						tpl: `<iframe allowfullscreen frameborder="0" height="${EMBED_VIDEO_HEIGHT}"
                          mozallowfullscreen src="https://player.vimeo.com/video/{embedId}"
                          webkitallowfullscreen width="${EMBED_VIDEO_WIDTH}"></iframe>`,
-                    urlSchemes: [
-                        'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/album\\/.*\\/video\\/(\\S*)',
-                        'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/channels\\/.*\\/(\\S*)',
-                        'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/groups\\/.*\\/videos\\/(\\S*)',
-                        'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/(\\S*)$'
-                    ]
-                },
-                {
-                    id: 'youtube',
-                    tpl: `<iframe allow="autoplay; encrypted-media" allowfullscreen
+						urlSchemes: [
+							'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/album\\/.*\\/video\\/(\\S*)',
+							'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/channels\\/.*\\/(\\S*)',
+							'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/groups\\/.*\\/videos\\/(\\S*)',
+							'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/(\\S*)$'
+						]
+					},
+					{
+						id: 'youtube',
+						tpl: `<iframe allow="autoplay; encrypted-media" allowfullscreen
                          height="${EMBED_VIDEO_HEIGHT}" frameborder="0"
                          src="https://www.youtube.com/embed/{embedId}?rel=0"
                          width="${EMBED_VIDEO_WIDTH}"></iframe>`,
-                    urlSchemes: [
-                        'https?:\\/\\/(?:www\\.)?youtube.com\\/watch\\?v=(\\S*)$'
-                    ]
-                }
-            ]
-        },
+						urlSchemes: [
+							'https?:\\/\\/(?:www\\.)?youtube.com\\/watch\\?v=(\\S*)$'
+						]
+					}
+				]
+			},
 
-        /**
-         * Specifies whether AlloyEditor set the contenteditable attribute
-         * to "true" on its srcNode.
-         *
-         * @memberof Core
-         * @instance
-         * @property enableContentEditable
-         * @type Boolean
-         * @default true
-         * @writeOnce
-         */
-        enableContentEditable: {
-            validator: Lang.isBoolean,
-            value: true,
-            writeOnce: true
-        },
+			/**
+			 * Specifies whether AlloyEditor set the contenteditable attribute
+			 * to "true" on its srcNode.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property enableContentEditable
+			 * @type Boolean
+			 * @default true
+			 * @writeOnce
+			 */
+			enableContentEditable: {
+				validator: Lang.isBoolean,
+				value: true,
+				writeOnce: true
+			},
 
-        /**
-         * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
-         *
-         * @memberof Core
-         * @instance
-         * @property eventsDelay
-         * @type {Number}
-         */
-        eventsDelay: {
-            validator: Lang.isNumber,
-            value: 100
-        },
+			/**
+			 * The delay (timeout), in ms, after which events such like key or mouse events will be processed.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property eventsDelay
+			 * @type {Number}
+			 */
+			eventsDelay: {
+				validator: Lang.isNumber,
+				value: 100
+			},
 
-        /**
-         * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
-         * make AlloyEditor to work properly.
-         *
-         * @memberof Core
-         * @instance
-         * @property extraPlugins
-         * @default 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink'
-         * @writeOnce
-         * @type {String}
-         */
-        extraPlugins: {
-            validator: Lang.isString,
-            value: 'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,' +
-            'ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize,' +
-            'ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge,font,colorbutton',
-            writeOnce: true
-        },
+			/**
+			 * Specifies the extra plugins which have to be loaded to the current CKEditor instance in order to
+			 * make AlloyEditor to work properly.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property extraPlugins
+			 * @default 'uicore,selectionregion,dragresize,addimages,placeholder,tabletools,tableresize,autolink'
+			 * @writeOnce
+			 * @type {String}
+			 */
+			extraPlugins: {
+				validator: Lang.isString,
+				value:
+					'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,' +
+					'ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize,' +
+					'ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge,font,colorbutton',
+				writeOnce: true
+			},
 
-        /**
-         * Specifies the "mode" for alloy editor
-         * @memberof Core
-         * @instance
-         * @property mode
-         * @default 'simple'
-         * @writeOnce
-         * @type {String}
-         */
-        mode: {
-            validator: Lang.isString,
-            value: 'simple'
-        },
+			/**
+			 * Specifies the "mode" for alloy editor
+			 * @memberof Core
+			 * @instance
+			 * @property mode
+			 * @default 'simple'
+			 * @writeOnce
+			 * @type {String}
+			 */
+			mode: {
+				validator: Lang.isString,
+				value: 'simple'
+			},
 
-        /**
-         * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
-         *
-         * @memberof Core
-         * @instance
-         * @property nativeEditor
-         * @readOnly
-         * @type {Object}
-         */
-        nativeEditor: {
-            getter: '_getNativeEditor',
-            readOnly: true
-        },
+			/**
+			 * Retrieves the native CKEditor instance. Having this, the developer may use the full API of CKEditor.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property nativeEditor
+			 * @readOnly
+			 * @type {Object}
+			 */
+			nativeEditor: {
+				getter: '_getNativeEditor',
+				readOnly: true
+			},
 
-        /**
-         * Specifies the class, which should be added by Placeholder plugin
-         * {{#crossLink "CKEDITOR.plugins.ae_placeholder}}{{/crossLink}}
-         * when editor is not focused.
-         *
-         * @memberof Core
-         * @instance
-         * @property placeholderClass
-         * @default 'ae-placeholder'
-         * @writeOnce
-         * @type {String}
-         */
-        placeholderClass: {
-            validator: Lang.isString,
-            value: 'ae-placeholder',
-            writeOnce: true
-        },
+			/**
+			 * Specifies the class, which should be added by Placeholder plugin
+			 * {{#crossLink "CKEDITOR.plugins.ae_placeholder}}{{/crossLink}}
+			 * when editor is not focused.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property placeholderClass
+			 * @default 'ae-placeholder'
+			 * @writeOnce
+			 * @type {String}
+			 */
+			placeholderClass: {
+				validator: Lang.isString,
+				value: 'ae-placeholder',
+				writeOnce: true
+			},
 
-        /**
-         * Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.
-         * These plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor
-         * comes with its own highly optimized copy of CKEditor (just customized via their official download page).
-         * This version does not come with the unneeded plugins, so the value of this property won't be needed.
-         * However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the
-         * plugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them
-         * entirely from CKEditor. It just removes them from its current instance, in which you will use different
-         * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
-         * page!
-         *
-         * @memberof Core
-         * @instance
-         * @property removePlugins
-         * @default 'contextmenu,toolbar,elementspath,resize,liststyle,link'
-         * @writeOnce
-         * @type {String}
-         */
-        removePlugins: {
-            validator: Lang.isString,
-            value: 'contextmenu,toolbar,elementspath,resize,liststyle,link',
-            writeOnce: true
-        },
+			/**
+			 * Specifies the plugins, which come by default with CKEditor, but which are not needed by AlloyEditor.
+			 * These plugins add the default UI for CKeditor, which is no more needed. Please note that AlloyEdtor
+			 * comes with its own highly optimized copy of CKEditor (just customized via their official download page).
+			 * This version does not come with the unneeded plugins, so the value of this property won't be needed.
+			 * However, if you decide to go with the OOTB version of CKEditor, you will have to remove some of the
+			 * plugins if you decide to use AlloyEditor. Keep in mind that removing these plugins doesn't remove them
+			 * entirely from CKEditor. It just removes them from its current instance, in which you will use different
+			 * UI - those of AlloyEditor. You will be fully able to use both OOTB CKEditor and AlloyEditor on the same
+			 * page!
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property removePlugins
+			 * @default 'contextmenu,toolbar,elementspath,resize,liststyle,link'
+			 * @writeOnce
+			 * @type {String}
+			 */
+			removePlugins: {
+				validator: Lang.isString,
+				value: 'contextmenu,toolbar,elementspath,resize,liststyle,link',
+				writeOnce: true
+			},
 
-        /**
-         * Array of manual selection triggers. They can be configured to manually show a specific selection toolbar
-         * by forcing the selection type. A selectionKeystroke item consists of a keys property with a [CKEditor keystroke
-         * definition](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-keystrokes) and a selection property with
-         * the selection name to trigger.
-         *
-         * @memberof Core
-         * @instance
-         * @property selectionKeystrokes
-         * @type {Array}
-         */
-        selectionKeystrokes: {
-            validator: Lang.isArray,
-            value: [{
-                keys: CKEDITOR.CTRL + 76 /*L*/,
-                selection: 'link'
-            }, {
-                keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/,
-                selection: 'embed'
-            }]
-        },
+			/**
+			 * Array of manual selection triggers. They can be configured to manually show a specific selection toolbar
+			 * by forcing the selection type. A selectionKeystroke item consists of a keys property with a [CKEditor keystroke
+			 * definition](http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-keystrokes) and a selection property with
+			 * the selection name to trigger.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property selectionKeystrokes
+			 * @type {Array}
+			 */
+			selectionKeystrokes: {
+				validator: Lang.isArray,
+				value: [
+					{
+						keys: CKEDITOR.CTRL + 76 /*L*/,
+						selection: 'link'
+					},
+					{
+						keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/,
+						selection: 'embed'
+					}
+				]
+			},
 
-        /**
-         * The path to the spritemap SVG used for icons
-         *
-         * @memberof Core
-         * @instance
-         * @property spritemap
-         * @type String
-         * @writeOnce
-         */
-        spritemap: {
-            validator: Lang.isString,
-            value: 'alloy-editor/assets/icons/icons.svg',
-            writeOnce: true
-        },
+			/**
+			 * The path to the spritemap SVG used for icons
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property spritemap
+			 * @type String
+			 * @writeOnce
+			 */
+			spritemap: {
+				validator: Lang.isString,
+				value: 'alloy-editor/assets/icons/icons.svg',
+				writeOnce: true
+			},
 
-        /**
-         * The Node ID or HTMl node, which AlloyEditor should use as an editable area.
-         *
-         * @memberof Core
-         * @instance
-         * @property srcNode
-         * @type String | Node
-         * @writeOnce
-         */
-        srcNode: {
-            setter: '_toElement',
-            writeOnce: true
-        },
+			/**
+			 * The Node ID or HTMl node, which AlloyEditor should use as an editable area.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property srcNode
+			 * @type String | Node
+			 * @writeOnce
+			 */
+			srcNode: {
+				setter: '_toElement',
+				writeOnce: true
+			},
 
-        /**
-         * The toolbars configuration for this editor instance
-         *
-         * @memberof Core
-         * @instance
-         * @property {Object} toolbars
-         */
-        toolbars: {
-            validator: '_validateToolbars',
-            value: {
-                add: {
-                    buttons: ['image', 'embed', 'camera', 'hline', 'table'],
-                    tabIndex: 2
-                },
-                styles: {
-                    selections: Selections,
-                    tabIndex: 1
-                }
-            }
-        },
+			/**
+			 * The toolbars configuration for this editor instance
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property {Object} toolbars
+			 */
+			toolbars: {
+				validator: '_validateToolbars',
+				value: {
+					add: {
+						buttons: ['image', 'embed', 'camera', 'hline', 'table'],
+						tabIndex: 2
+					},
+					styles: {
+						selections: Selections,
+						tabIndex: 1
+					}
+				}
+			},
 
-        /**
-         * The Node ID or HTMl node, where AlloyEditor's UI should be rendered.
-         *
-         * @memberof Core
-         * @instance
-         * @property uiNode
-         * @type String | Node
-         * @writeOnce
-         */
-        uiNode: {
-            setter: '_toElement',
-            writeOnce: true
-        }
-    }
-});
+			/**
+			 * The Node ID or HTMl node, where AlloyEditor's UI should be rendered.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property uiNode
+			 * @type String | Node
+			 * @writeOnce
+			 */
+			uiNode: {
+				setter: '_toElement',
+				writeOnce: true
+			}
+		}
+	}
+);
 
 CKEDITOR.event.implementOn(Core);
 

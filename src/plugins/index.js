@@ -13,17 +13,17 @@ import tableresize from './tableresize';
 import tabletools from './tabletools';
 
 export {
-    addimages,
-    autolink,
-    autolist,
-    dragresize,
-    dragresizeie,
-    embed,
-    embedurl,
-    imagealignment,
-    pasteimages,
-    placeholder,
-    selectionkeystrokes,
-    tableresize,
-    tabletools
+	addimages,
+	autolink,
+	autolist,
+	dragresize,
+	dragresizeie,
+	embed,
+	embedurl,
+	imagealignment,
+	pasteimages,
+	placeholder,
+	selectionkeystrokes,
+	tableresize,
+	tabletools
 };

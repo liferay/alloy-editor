@@ -11,29 +11,33 @@ import Lang from '../../oop/lang.js';
  *
  * @class ButtonActionStyle
  */
-export default WrappedComponent => class extends WrappedComponent {
-    /**
-     * Removes or applies the component style to the current selection.
-     *
-     * @instance
-     * @memberof ButtonActionStyle
-     * @method applyStyle
-     */
-    applyStyle = () => {
-        if (Lang.isFunction(this.isActive) && Lang.isFunction(this.getStyle)) {
-            var editor = this.props.editor.get('nativeEditor');
+export default WrappedComponent =>
+	class extends WrappedComponent {
+		/**
+		 * Removes or applies the component style to the current selection.
+		 *
+		 * @instance
+		 * @memberof ButtonActionStyle
+		 * @method applyStyle
+		 */
+		applyStyle = () => {
+			if (
+				Lang.isFunction(this.isActive) &&
+				Lang.isFunction(this.getStyle)
+			) {
+				var editor = this.props.editor.get('nativeEditor');
 
-            editor.getSelection().lock();
+				editor.getSelection().lock();
 
-            if (this.isActive()) {
-                editor.removeStyle(this.getStyle());
-            } else {
-                editor.applyStyle(this.getStyle());
-            }
+				if (this.isActive()) {
+					editor.removeStyle(this.getStyle());
+				} else {
+					editor.applyStyle(this.getStyle());
+				}
 
-            editor.getSelection().unlock();
+				editor.getSelection().unlock();
 
-            editor.fire('actionPerformed', this);
-        }
-    }
-};
+				editor.fire('actionPerformed', this);
+			}
+		};
+	};

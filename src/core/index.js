@@ -6,12 +6,4 @@ import table from './table';
 import tools from './tools';
 import uicore from './uicore';
 
-export {
-    debounce,
-    link,
-    plugins,
-    selectionRegion,
-    table,
-    tools,
-    uicore
-};
+export {debounce, link, plugins, selectionRegion, table, tools, uicore};
