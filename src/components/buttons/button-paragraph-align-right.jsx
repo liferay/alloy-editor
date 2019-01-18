@@ -1,7 +1,9 @@
 import ButtonCommand from '../base/button-command.js';
 import ButtonCommandActive from '../base/button-command-active.js';
+import ButtonIcon from './button-icon.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import React from 'react';
+
 /**
  * The ButtonParagraphAlignRight class provides functionality for aligning a paragraph on right.
  *
@@ -12,6 +14,28 @@ import React from 'react';
  */
 class ButtonParagraphAlignRight extends React.Component {
     /**
+    * Lifecycle. Returns the default values of the properties used in the widget.
+    *
+    * @instance
+    * @memberof ButtonParagraphAlignRight
+    * @method getDefaultProps
+    * @return {Object} The default properties.
+    */
+    static defaultProps = {
+        command: 'justifyright'
+    };
+
+   /**
+    * The name which will be used as an alias of the button in the configuration.
+    *
+    * @default paragraphRight
+    * @memberof ButtonParagraphAlignRight
+    * @property {String} key
+    * @static
+    */
+   static key = 'paragraphRight';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -20,37 +44,15 @@ class ButtonParagraphAlignRight extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         return (
-            <button aria-label={AlloyEditor.Strings.alignRight} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-align-right" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignRight}>
-                <span className="ae-icon-align-right"></span>
+            <button aria-label={AlloyEditor.Strings.alignRight} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-align-right" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignRight}>
+                <ButtonIcon editor={this.props.editor} symbol="align-right" />
             </button>
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default paragraphRight
- * @memberof ButtonParagraphAlignRight
- * @property {String} key
- * @static
- */
-ButtonParagraphAlignRight.key = 'paragraphRight';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonParagraphAlignRight
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonParagraphAlignRight.defaultProps = {
-    command: 'justifyright'
-};
 
 export default ButtonCommand(
     ButtonCommandActive(

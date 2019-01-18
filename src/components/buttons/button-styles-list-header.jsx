@@ -6,6 +6,8 @@ import React from 'react';
  * @class ButtonsStylesListHeader
  */
 class ButtonsStylesListHeader extends React.Component {
+    static key = 'buttonStylesListHeader';
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -24,7 +26,5 @@ class ButtonsStylesListHeader extends React.Component {
         }
     }
 }
-
-ButtonsStylesListHeader.key = 'buttonStylesListHeader';
 
 export default ButtonsStylesListHeader;

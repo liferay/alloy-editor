@@ -1,9 +1,9 @@
 import ButtonCfgProps from '../base/button-props.js';
+import ButtonIcon from './button-icon.jsx';
 import ButtonLinkAutocompleteList from './button-link-autocomplete-list.jsx';
 import ButtonLinkTargetEdit from './button-link-target-edit.jsx';
 import Lang from '../../oop/lang.js';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import WidgetDropdown from '../base/widget-dropdown.js';
 import WidgetFocusManager from '../base/widget-focus-manager.js';
 
@@ -17,6 +17,41 @@ import WidgetFocusManager from '../base/widget-focus-manager.js';
  * @uses WidgetFocusManager
  */
 class ButtonLinkEdit extends React.Component {
+    /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonLinkEdit
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        appendProtocol: true,
+        autocompleteUrl: '',
+        circular: true,
+        customIndexStart: true,
+        defaultLinkTarget: '',
+        descendants: '.ae-toolbar-element',
+        keys: {
+            dismiss: [27],
+            dismissNext: [39],
+            dismissPrev: [37],
+            next: [40],
+            prev: [38]
+        },
+        showTargetSelector: true
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default linkEdit
+     * @memberof ButtonLinkEdit
+     * @property {String} key
+     * @static
+     */
+    static key = 'linkEdit';
+
     constructor(props) {
         super(props);
 
@@ -63,27 +98,27 @@ class ButtonLinkEdit extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var targetSelector = {
+        let targetSelector = {
             allowedTargets: this.props.allowedTargets,
             editor: this.props.editor,
-            handleLinkTargetChange: this._handleLinkTargetChange.bind(this),
+            handleLinkTargetChange: this._handleLinkTargetChange,
             selectedTarget: this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault
         };
 
         targetSelector = this.mergeDropdownProps(targetSelector, ButtonLinkTargetEdit.key);
 
-        var autocompleteDropdown;
+        let autocompleteDropdown;
 
         if (this.props.data) {
-            var dataFn = this.props.data;
+            let dataFn = this.props.data;
 
             if (!Lang.isFunction(dataFn)) {
-                var items = this.props.data;
+                const items = this.props.data;
 
                 dataFn = () => items;
             }
 
-            var autocompleteDropdownProps = {
+            let autocompleteDropdownProps = {
                 autocompleteSelected: this.state.autocompleteSelected,
                 data: dataFn,
                 editor: this.props.editor,
@@ -98,13 +133,13 @@ class ButtonLinkEdit extends React.Component {
             autocompleteDropdown = <ButtonLinkAutocompleteList {...autocompleteDropdownProps} />;
         }
 
-        var buttonClearLink;
+        let buttonClearLink;
 
         if (this.state.linkHref) {
-            buttonClearLink = <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink.bind(this)} title={AlloyEditor.Strings.clear}></button>;
+            buttonClearLink = <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} title={AlloyEditor.Strings.clear}></button>;
         }
 
-        var placeholderProp = {};
+        const placeholderProp = {};
 
         if (!CKEDITOR.env.ie && AlloyEditor.Strings) {
             placeholderProp.placeholder = AlloyEditor.Strings.editLink;
@@ -112,19 +147,19 @@ class ButtonLinkEdit extends React.Component {
 
         return (
             <div className="ae-container-edit-link">
-                <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink.bind(this)} title={AlloyEditor.Strings.remove}>
-                    <span className="ae-icon-unlink"></span>
+                <button aria-label={AlloyEditor.Strings.removeLink} className="ae-button" disabled={!this.state.element} onClick={this._removeLink} title={AlloyEditor.Strings.remove}>
+                    <ButtonIcon editor={this.props.editor} symbol="chain-broken" />
                 </button>
                 <div className="ae-container-input xxl">
                     {this.props.showTargetSelector && <ButtonLinkTargetEdit {...targetSelector} />}
                     <div className="ae-container-input">
-                        <input className="ae-input" onChange={this._handleLinkHrefChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} { ...placeholderProp } ref={this.linkInput} type="text" value={this.state.linkHref}></input>
+                        <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} { ...placeholderProp } ref={this.linkInput} type="text" value={this.state.linkHref}></input>
                         {autocompleteDropdown}
                     </div>
                     {buttonClearLink}
                 </div>
-                <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._updateLink.bind(this)} title={AlloyEditor.Strings.confirm}>
-                    <span className="ae-icon-ok"></span>
+                <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._updateLink} title={AlloyEditor.Strings.confirm}>
+                    <ButtonIcon editor={this.props.editor} symbol="check" className="ae-icon-svg-check" />
                 </button>
             </div>
         );
@@ -168,7 +203,7 @@ class ButtonLinkEdit extends React.Component {
      * @method _clearLink
      * @protected
      */
-    _clearLink() {
+    _clearLink = () => {
         this.setState({
             linkHref: ''
         });
@@ -185,9 +220,9 @@ class ButtonLinkEdit extends React.Component {
      * @protected
      */
     _focusLinkInput() {
-        var instance = this;
+        const instance = this;
 
-        var focusLinkEl = function() {
+        const focusLinkEl = function() {
             instance.linkInput.current.focus();
         };
 
@@ -209,7 +244,7 @@ class ButtonLinkEdit extends React.Component {
      * @param {SyntheticEvent} event The keyboard event.
      * @protected
      */
-    _handleKeyDown(event) {
+    _handleKeyDown = event => {
         if (event.keyCode === 13 || event.keyCode === 27) {
             event.preventDefault();
         }
@@ -221,7 +256,7 @@ class ButtonLinkEdit extends React.Component {
                 autocompleteSelected: true
             });
         } else if (event.keyCode === 27) {
-            var editor = this.props.editor.get('nativeEditor');
+            const editor = this.props.editor.get('nativeEditor');
 
             new CKEDITOR.Link(editor).advanceSelection();
 
@@ -238,7 +273,7 @@ class ButtonLinkEdit extends React.Component {
      * @param {SyntheticEvent} event The change event.
      * @protected
      */
-    _handleLinkHrefChange(event) {
+    _handleLinkHrefChange = event => {
         this.setState({
             linkHref: event.target.value
         });
@@ -255,7 +290,7 @@ class ButtonLinkEdit extends React.Component {
      * @param {SyntheticEvent} event The click event.
      * @protected
      */
-    _handleLinkTargetChange(event) {
+    _handleLinkTargetChange = event => {
         this.setState({
             itemDropdown: null,
             linkTarget: event.target.getAttribute('data-value')
@@ -294,7 +329,7 @@ class ButtonLinkEdit extends React.Component {
      * @return {Boolean} [description]
      */
     _isValidState() {
-        var validState =
+        const validState =
             this.state.linkHref && (
                 this.state.linkHref !== this.state.initialLink.href ||
                 this.state.linkTarget !== this.state.initialLink.target
@@ -311,11 +346,11 @@ class ButtonLinkEdit extends React.Component {
      * @method _removeLink
      * @protected
      */
-    _removeLink() {
-        var editor = this.props.editor.get('nativeEditor');
-        var linkUtils = new CKEDITOR.Link(editor);
-        var selection = editor.getSelection();
-        var bookmarks = selection.createBookmarks();
+    _removeLink = () => {
+        const editor = this.props.editor.get('nativeEditor');
+        const linkUtils = new CKEDITOR.Link(editor);
+        const selection = editor.getSelection();
+        const bookmarks = selection.createBookmarks();
 
         linkUtils.remove(this.state.element, { advance: true });
 
@@ -351,13 +386,13 @@ class ButtonLinkEdit extends React.Component {
      * @method _updateLink
      * @protected
      */
-    _updateLink() {
-        var editor = this.props.editor.get('nativeEditor');
-        var linkUtils = new CKEDITOR.Link(editor, {appendProtocol: this.props.appendProtocol});
-        var linkAttrs = {
+    _updateLink = () => {
+        const editor = this.props.editor.get('nativeEditor');
+        const linkUtils = new CKEDITOR.Link(editor, {appendProtocol: this.props.appendProtocol});
+        const linkAttrs = {
             target: this.state.linkTarget
         };
-        var modifySelection = { advance: true };
+        const modifySelection = { advance: true };
 
         if (this.state.linkHref) {
             if (this.state.element) {
@@ -376,41 +411,6 @@ class ButtonLinkEdit extends React.Component {
         this.props.cancelExclusive();
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default linkEdit
- * @memberof ButtonLinkEdit
- * @property {String} key
- * @static
- */
-ButtonLinkEdit.key = 'linkEdit';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonLinkEdit
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonLinkEdit.defaultProps = {
-    appendProtocol: true,
-    autocompleteUrl: '',
-    circular: true,
-    customIndexStart: true,
-    defaultLinkTarget: '',
-    descendants: '.ae-toolbar-element',
-    keys: {
-        dismiss: [27],
-        dismissNext: [39],
-        dismissPrev: [37],
-        next: [40],
-        prev: [38]
-    },
-    showTargetSelector: true
-};
 
 export default ButtonCfgProps(
     WidgetDropdown(

@@ -9,6 +9,35 @@ import React from 'react';
  */
 class ButtonDropdown extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonDropdown
+     * @method getDefaultProps
+     */
+    static defaultProps = {
+        circular: false,
+        descendants: '.ae-toolbar-element',
+        keys: {
+            dismiss: [27],
+            dismissNext: [39],
+            dismissPrev: [37],
+            next: [40],
+            prev: [38]
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the dropdown in the configuration.
+     *
+     * @default dropdown
+     * @memberof ButtonDropdown
+     * @property {String} key
+     * @static
+     */
+    static key = 'dropdown';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -18,7 +47,7 @@ class ButtonDropdown extends React.Component {
      */
     render() {
         return (
-            <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus.bind(this)} onKeyDown={this.handleKey.bind(this)} tabIndex="0">
+            <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
                 <ul className="ae-listbox" role="listbox">
                     {this.props.children}
                 </ul>
@@ -26,35 +55,6 @@ class ButtonDropdown extends React.Component {
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the dropdown in the configuration.
- *
- * @default dropdown
- * @memberof ButtonDropdown
- * @property {String} key
- * @static
- */
-ButtonDropdown.key = 'dropdown';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonDropdown
- * @method getDefaultProps
- */
-ButtonDropdown.defaultProps = {
-    circular: false,
-    descendants: '.ae-toolbar-element',
-    keys: {
-        dismiss: [27],
-        dismissNext: [39],
-        dismissPrev: [37],
-        next: [40],
-        prev: [38]
-    }
-};
 
 export default WidgetFocusManager(
     ButtonDropdown

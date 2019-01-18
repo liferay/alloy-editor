@@ -1,6 +1,6 @@
 import ButtonDropdown from './button-dropdown.jsx';
-import WidgetFocusManager from '../base/widget-focus-manager.js';
 import React from 'react';
+import WidgetFocusManager from '../base/widget-focus-manager.js';
 
 /**
  * The ButtonLinkAutocompleteList class provides functionality for showing a list of
@@ -10,6 +10,38 @@ import React from 'react';
  * @uses WidgetFocusManager
  */
 class ButtonLinkAutocompleteList extends React.Component {
+    /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonLinkAutocompleteList
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        circular: false,
+        data: [],
+        delay: 100,
+        descendants: '.ae-toolbar-element',
+        keys: {
+            dismiss: [27],
+            dismissNext: [39],
+            dismissPrev: [37],
+            next: [40],
+            prev: [38]
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default buttonLinkAutocompleteList
+     * @memberof ButtonLinkAutocompleteList
+     * @property {String} key
+     * @static
+     */
+    static key = 'buttonLinkAutocompleteList';
+
     constructor(props) {
         super(props);
 
@@ -105,17 +137,17 @@ class ButtonLinkAutocompleteList extends React.Component {
     _renderAutocompleteItems(items) {
         items = items || [];
 
-        var handleLinkAutocompleteClick = this.props.handleLinkAutocompleteClick;
+        const handleLinkAutocompleteClick = this.props.handleLinkAutocompleteClick;
 
-        return items.map(function(item) {
-            var className = this.props.term === item.url ? 'ae-toolbar-element active' : 'ae-toolbar-element';
+        return items.map(item => {
+            const className = this.props.term === item.url ? 'ae-toolbar-element active' : 'ae-toolbar-element';
 
             return (
                 <li key={item.url} role="option">
                     <button className={className} onClick={handleLinkAutocompleteClick} data-value={item.url}>{item.title}</button>
                 </li>
             );
-        }.bind(this));
+        });
     }
 
     /**
@@ -127,57 +159,25 @@ class ButtonLinkAutocompleteList extends React.Component {
      * @protected
      */
     _updateItems() {
-        var instance = this;
+        const instance = this;
 
         if (!this.props.term) {
             return;
         }
 
-        var promise = Promise.resolve(this.props.data(this.props.term));
+        const promise = Promise.resolve(this.props.data(this.props.term));
 
-        promise.then(function(items) {
+        promise.then(items => {
             if (items.length) {
-                !instance.props.expanded && instance.props.toggleDropdown();
+                !this.props.expanded && this.props.toggleDropdown();
             }
 
-            instance.setState({
+            this.setState({
                 items: items
             });
         });
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default buttonLinkAutocompleteList
- * @memberof ButtonLinkAutocompleteList
- * @property {String} key
- * @static
- */
-ButtonLinkAutocompleteList.key = 'buttonLinkAutocompleteList';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonLinkAutocompleteList
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonLinkAutocompleteList.defaultProps = {
-    circular: false,
-    data: [],
-    delay: 100,
-    descendants: '.ae-toolbar-element',
-    keys: {
-        dismiss: [27],
-        dismissNext: [39],
-        dismissPrev: [37],
-        next: [40],
-        prev: [38]
-    }
-};
 
 export default WidgetFocusManager(
     ButtonLinkAutocompleteList

@@ -1,3 +1,4 @@
+import ButtonIcon from './button-icon.jsx';
 import ButtonTableEdit from './button-table-edit.jsx';
 import React from 'react';
 
@@ -11,6 +12,16 @@ import React from 'react';
  * @class ButtonTable
  */
 class ButtonTable extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default table
+     * @memberof ButtonTable
+     * @property {String} key
+     * @static
+     */
+    static key = 'table';
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -27,21 +38,11 @@ class ButtonTable extends React.Component {
         } else {
             return (
                 <button aria-label={AlloyEditor.Strings.table} className="ae-button" data-type="button-table" onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.table}>
-                    <span className="ae-icon-table"></span>
+                    <ButtonIcon editor={this.props.editor} symbol="table" />
                 </button>
             );
         }
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default table
- * @memberof ButtonTable
- * @property {String} key
- * @static
- */
-ButtonTable.key = 'table';
 
 export default ButtonTable;

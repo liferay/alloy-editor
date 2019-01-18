@@ -28,7 +28,7 @@ class UI extends React.Component {
      * @method componentDidMount
      */
     componentDidMount() {
-        var editor = this.props.editor.get('nativeEditor');
+        const editor = this.props.editor.get('nativeEditor');
 
         editor.on('editorInteraction', this._onEditorInteraction, this);
         editor.on('actionPerformed', this._onActionPerformed, this);
@@ -42,11 +42,11 @@ class UI extends React.Component {
         // It is not easy to debounce _setUIHidden on mousedown, because if we
         // debounce it, when the handler is being invoked, the target might be no more part
         // of the editor's UI - onActionPerformed causes re-render.
-        this._mousedownListener = function (event) {
+        this._mousedownListener = event => {
             this._setUIHidden(event.target);
-        }.bind(this);
+        };
 
-        this._keyDownListener = CKEDITOR.tools.debounce(function(event) {
+        this._keyDownListener = CKEDITOR.tools.debounce(event => {
             this._setUIHidden(document.activeElement);
         }, this.props.eventsDelay, this);
 
@@ -64,9 +64,9 @@ class UI extends React.Component {
      * @method componentDidUpdate
      */
     componentDidUpdate (prevProps, prevState) {
-        var domNode = ReactDOM.findDOMNode(this);
+        const domNode = ReactDOM.findDOMNode(this);
 
-        var editor = this.props.editor.get('nativeEditor');
+        const editor = this.props.editor.get('nativeEditor');
 
         if (domNode) {
             editor.fire('ariaUpdate', {
@@ -127,16 +127,16 @@ class UI extends React.Component {
      * @return {String} The ARIA message for the number of available toolbars
      */
     _getAvailableToolbarsMessage(domNode) {
-        var toolbarsNodeList = domNode.querySelectorAll('[role="toolbar"]');
+        const toolbarsNodeList = domNode.querySelectorAll('[role="toolbar"]');
 
         if (!toolbarsNodeList.length) {
             return this._getAriaUpdates().noToolbar;
         } else {
-            var toolbarNames = Array.prototype.slice.call(toolbarsNodeList).map(function(toolbar) {
+            const toolbarNames = Array.prototype.slice.call(toolbarsNodeList).map(toolbar => {
                 return toolbar.getAttribute('aria-label');
             });
 
-            var ariaUpdate = toolbarNames.length === 1 ? 'oneToolbar' : 'manyToolbars';
+            const ariaUpdate = toolbarNames.length === 1 ? 'oneToolbar' : 'manyToolbars';
 
             return this._getAriaUpdateTemplate(ariaUpdate).output({
                 toolbars: toolbarNames.join(',').replace(/,([^,]*)$/, ' and ' + '$1')
@@ -176,12 +176,12 @@ class UI extends React.Component {
             return null;
         }
 
-        var toolbars = Object.keys(this.props.toolbars).map(function(toolbar) {
+        let toolbars = Object.keys(this.props.toolbars).map(toolbar => {
             return AlloyEditor.Toolbars[toolbar] || window[toolbar];
         });
 
-        toolbars = this.filterExclusive(toolbars).map(function(toolbar) {
-            var props = this.mergeExclusiveProps({
+        toolbars = this.filterExclusive(toolbars).map(toolbar => {
+            const props = this.mergeExclusiveProps({
                 config: this.props.toolbars[toolbar.key],
                 editor: this.props.editor,
                 editorEvent: this.state.editorEvent,
@@ -191,10 +191,10 @@ class UI extends React.Component {
             }, toolbar.key);
 
             return React.createElement(toolbar, props);
-        }.bind(this));
+        });
 
         return (
-            <div className="ae-toolbars" onKeyDown={this.handleKey.bind(this)}>
+            <div className="ae-toolbars" onKeyDown={this.handleKey}>
                 {toolbars}
             </div>
         );
@@ -210,7 +210,7 @@ class UI extends React.Component {
      * @param {SynteticEvent} event The provided event
      */
     _onActionPerformed(event) {
-        var editor = this.props.editor.get('nativeEditor');
+        const editor = this.props.editor.get('nativeEditor');
 
         editor.focus();
 
@@ -228,8 +228,8 @@ class UI extends React.Component {
      * @protected
      * @method _onDismissToolbarFocus
      */
-    _onDismissToolbarFocus() {
-        var editor = this.props.editor.get('nativeEditor');
+    _onDismissToolbarFocus = () => {
+        const editor = this.props.editor.get('nativeEditor');
 
         editor.focus();
     }
@@ -262,7 +262,7 @@ class UI extends React.Component {
      * @method _onEditorKey
      */
     _onEditorKey(event) {
-        var nativeEvent = event.data.domEvent.$;
+        const nativeEvent = event.data.domEvent.$;
 
         if (nativeEvent.altKey && nativeEvent.keyCode === 121) {
             this.focus();
@@ -280,19 +280,19 @@ class UI extends React.Component {
      * @param {DOMElement} target The DOM element with which user interacted lastly.
      */
     _setUIHidden(target) {
-        var domNode = ReactDOM.findDOMNode(this);
+        const domNode = ReactDOM.findDOMNode(this);
 
         if (domNode) {
-            var editable = this.props.editor.get('nativeEditor').editable();
-            var parentNode = target.parentNode;
-            var targetNode = new CKEDITOR.dom.node(target);
+            const editable = this.props.editor.get('nativeEditor').editable();
+            const parentNode = target.parentNode;
+            const targetNode = new CKEDITOR.dom.node(target);
 
             if (!editable) {
                 this.setState({
                     hidden: true
                 });
             } else {
-                var res = (editable.$ === target) || editable.contains(targetNode) ||
+                let res = (editable.$ === target) || editable.contains(targetNode) ||
                     (new CKEDITOR.dom.element(domNode)).contains(targetNode);
 
                 if (parentNode) {

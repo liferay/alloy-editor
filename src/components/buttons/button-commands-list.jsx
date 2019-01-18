@@ -12,6 +12,36 @@ import WidgetFocusManager from '../base/widget-focus-manager.js';
  */
 class ButtonCommandsList extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonCommandsList
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        circular: false,
+        descendants: '.ae-toolbar-element',
+        keys: {
+            dismiss: [27],
+            dismissNext: [39],
+            dismissPrev: [37],
+            next: [40],
+            prev: [38]
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default buttonCommandsList
+     * @memberof ButtonCommandsList
+     * @property {String} key
+     * @static
+     */
+    static key = 'buttonCommandsList';
+
+    /**
      * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
      *
      * Focuses on the list node to allow keyboard interaction.
@@ -34,7 +64,7 @@ class ButtonCommandsList extends React.Component {
      */
     render() {
         return (
-            <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus.bind(this)} onKeyDown={this.handleKey.bind(this)} tabIndex="0">
+            <div className="ae-dropdown ae-arrow-box ae-arrow-box-top-left" onFocus={this.focus} onKeyDown={this.handleKey} tabIndex="0">
                 <ul className="ae-listbox" id={this.props.listId} role="listbox">
                     {this._renderActions(this.props.commands)}
                 </ul>
@@ -52,8 +82,8 @@ class ButtonCommandsList extends React.Component {
      * @return {Array} Rendered instances of ButtonCommandListItem class
      */
     _renderActions(commands) {
-        var editor = this.props.editor;
-        var items;
+        const editor = this.props.editor;
+        let items;
 
         if (commands && commands.length) {
             items = commands.map(function(item) {
@@ -68,36 +98,6 @@ class ButtonCommandsList extends React.Component {
         return items;
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default buttonCommandsList
- * @memberof ButtonCommandsList
- * @property {String} key
- * @static
- */
-ButtonCommandsList.key = 'buttonCommandsList';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonCommandsList
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonCommandsList.defaultProps = {
-    circular: false,
-    descendants: '.ae-toolbar-element',
-    keys: {
-        dismiss: [27],
-        dismissNext: [39],
-        dismissPrev: [37],
-        next: [40],
-        prev: [38]
-    }
-};
 
 export default WidgetFocusManager(
     ButtonCommandsList

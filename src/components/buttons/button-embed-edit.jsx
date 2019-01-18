@@ -1,8 +1,8 @@
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-var KEY_ENTER = 13;
-var KEY_ESC = 27;
+const KEY_ENTER = 13;
+const KEY_ESC = 27;
 
 /**
  * The ButtonEmbedEdit class provides functionality for creating and editing an embed link in a document.
@@ -11,6 +11,16 @@ var KEY_ESC = 27;
  * @class ButtonEmbedEdit
  */
 class ButtonEmbedEdit extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default embedEdit
+     * @memberof ButtonEmbedEdit
+     * @property {String} key
+     * @static
+     */
+    static key = 'embedEdit';
+
     constructor(props) {
         super(props);
 
@@ -33,9 +43,9 @@ class ButtonEmbedEdit extends React.Component {
             // We need to wait for the next rendering cycle before focusing to avoid undesired
             // scrolls on the page
             if (window.requestAnimationFrame) {
-                window.requestAnimationFrame(this._focusLinkInput.bind(this));
+                window.requestAnimationFrame(this._focusLinkInput);
             } else {
-                setTimeout(this._focusLinkInput.bind(this), 0);
+                setTimeout(this._focusLinkInput, 0);
             }
         }
     }
@@ -61,20 +71,20 @@ class ButtonEmbedEdit extends React.Component {
      * @method getInitialState
      */
     getInitialState() {
-        var editor = this.props.editor.get('nativeEditor');
-        var embed;
+        const editor = this.props.editor.get('nativeEditor');
+        let embed;
 
-        var selection = editor.getSelection();
+        const selection = editor.getSelection();
 
         if (selection) {
-            var selectedElement = selection.getSelectedElement();
+            const selectedElement = selection.getSelectedElement();
 
             if (selectedElement) {
                 embed = selectedElement.findOne('[data-widget="ae_embed"]');
             }
         }
 
-        var href = embed ? embed.getAttribute('data-ae-embed-url') : '';
+        const href = embed ? embed.getAttribute('data-ae-embed-url') : '';
 
         return {
             element: embed,
@@ -94,21 +104,24 @@ class ButtonEmbedEdit extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var clearLinkStyle = {
+        const clearLinkStyle = {
             opacity: this.state.linkHref ? 1 : 0
         };
 
+        const editor = this.props.editor;
+
         return (
             <div className="ae-container-edit-link">
-                <button aria-label={AlloyEditor.Strings.deleteEmbed} className="ae-button" data-type="button-embed-remove" disabled={!this.state.element} onClick={this._removeEmbed.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteEmbed}>
-                    <span className="ae-icon-bin"></span>
+                <button aria-label={AlloyEditor.Strings.deleteEmbed} className="ae-button" data-type="button-embed-remove" disabled={!this.state.element} onClick={this._removeEmbed} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteEmbed}>
+                    <ButtonIcon editor={editor} symbol="trash" className="ae-icon-svg-trash" />
                 </button>
                 <div className="ae-container-input xxl">
-                    <input className="ae-input" onChange={this._handleLinkHrefChange.bind(this)} onKeyDown={this._handleKeyDown.bind(this)} placeholder={AlloyEditor.Strings.editLink} ref={this.linkInput} type="text" value={this.state.linkHref}></input>
-                    <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink.bind(this)} style={clearLinkStyle} title={AlloyEditor.Strings.clear}></button>
+                    <input className="ae-input" onChange={this._handleLinkHrefChange} onKeyDown={this._handleKeyDown} placeholder={AlloyEditor.Strings.editLink} ref={this.linkInput} type="text" value={this.state.linkHref}></input>
+                    <button aria-label={AlloyEditor.Strings.clearInput} className="ae-button ae-icon-remove" onClick={this._clearLink} style={clearLinkStyle} title={AlloyEditor.Strings.clear}>
+                    </button>
                 </div>
-                <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._embedLink.bind(this)} title={AlloyEditor.Strings.confirm}>
-                    <span className="ae-icon-ok"></span>
+                <button aria-label={AlloyEditor.Strings.confirm} className="ae-button" disabled={!this._isValidState()} onClick={this._embedLink} title={AlloyEditor.Strings.confirm}>
+                    <ButtonIcon editor={editor} symbol="check" className="ae-icon-svg-check" />
                 </button>
             </div>
         );
@@ -124,7 +137,7 @@ class ButtonEmbedEdit extends React.Component {
      * @method _clearLink
      * @protected
      */
-    _clearLink() {
+    _clearLink = () => {
         this.setState({
             linkHref: ''
         });
@@ -138,8 +151,8 @@ class ButtonEmbedEdit extends React.Component {
      * @method _embedLink
      * @protected
      */
-    _embedLink() {
-        var nativeEditor = this.props.editor.get('nativeEditor');
+    _embedLink = () => {
+        const nativeEditor = this.props.editor.get('nativeEditor');
 
         nativeEditor.execCommand('embedUrl', {
             url: this.state.linkHref
@@ -158,7 +171,7 @@ class ButtonEmbedEdit extends React.Component {
      * @method _focusLinkInput
      * @protected
      */
-    _focusLinkInput() {
+    _focusLinkInput = () => {
         this.linkInput.current.focus();
     }
 
@@ -173,7 +186,7 @@ class ButtonEmbedEdit extends React.Component {
      * @param {SyntheticEvent} event The keyboard event.
      * @protected
      */
-    _handleKeyDown(event) {
+    _handleKeyDown = event => {
         if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
             event.preventDefault();
         }
@@ -181,7 +194,7 @@ class ButtonEmbedEdit extends React.Component {
         if (event.keyCode === KEY_ENTER) {
             this._embedLink();
         } else if (event.keyCode === KEY_ESC) {
-            var editor = this.props.editor.get('nativeEditor');
+            const editor = this.props.editor.get('nativeEditor');
 
             // We need to cancelExclusive with the bound parameters in case the button is used
             // inside another in exclusive mode (such is the case of the link button)
@@ -200,7 +213,7 @@ class ButtonEmbedEdit extends React.Component {
      * @param {SyntheticEvent} event The change event.
      * @protected
      */
-    _handleLinkHrefChange(event) {
+    _handleLinkHrefChange = event => {
         this.setState({
             linkHref: event.target.value
         });
@@ -217,7 +230,7 @@ class ButtonEmbedEdit extends React.Component {
      * @return {Boolean} True if the state is valid, false otherwise
      */
     _isValidState() {
-        var validState =
+        const validState =
             this.state.linkHref && (
                 this.state.linkHref !== this.state.initialLink.href
             );
@@ -233,10 +246,10 @@ class ButtonEmbedEdit extends React.Component {
      * @method _removeEmbed
      * @protected
      */
-    _removeEmbed() {
-        var editor = this.props.editor.get('nativeEditor');
+    _removeEmbed = () => {
+        const editor = this.props.editor.get('nativeEditor');
 
-        var embedWrapper = this.state.element.getAscendant(function(element) {
+        const embedWrapper = this.state.element.getAscendant(function(element) {
             return element.hasClass('cke_widget_wrapper');
         });
 
@@ -245,15 +258,5 @@ class ButtonEmbedEdit extends React.Component {
         editor.fire('actionPerformed', this);
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default embedEdit
- * @memberof ButtonEmbedEdit
- * @property {String} key
- * @static
- */
-ButtonEmbedEdit.key = 'embedEdit';
 
 export default ButtonEmbedEdit;

@@ -1,4 +1,5 @@
 import ButtonCommandsList from './button-commands-list.jsx';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -8,6 +9,16 @@ import React from 'react';
  */
 class ButtonTableHeading extends React.Component {
     /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default tableRow
+     * @memberof ButtonTableHeading
+     * @property {String} key
+     * @static
+     */
+    static key = 'tableHeading';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -16,24 +27,24 @@ class ButtonTableHeading extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var buttonCommandsList;
-        var buttonCommandsListId;
+        let buttonCommandsList;
+        let buttonCommandsListId;
 
         if (this.props.expanded) {
             buttonCommandsListId = ButtonTableHeading.key + 'List';
             buttonCommandsList = <ButtonCommandsList commands={this._getCommands()} editor={this.props.editor} listId={buttonCommandsListId} onDismiss={this.props.toggleDropdown} />;
         }
 
-        var activeHeading = new CKEDITOR.Table(this.props.editor.get('nativeEditor')).getHeading();
-        var activeHeadingIntro = AlloyEditor.Strings.headers + ':';
-        var activeHeadingLabel = AlloyEditor.Strings['headers' + activeHeading];
+        const activeHeading = new CKEDITOR.Table(this.props.editor.get('nativeEditor')).getHeading();
+        const activeHeadingIntro = AlloyEditor.Strings.headers + ':';
+        const activeHeadingLabel = AlloyEditor.Strings['headers' + activeHeading];
 
         return (
             <div className="ae-container-dropdown-xl ae-has-dropdown">
-                <button aria-expanded={this.props.expanded} aria-label="" className="ae-toolbar-element" onClick={this.props.toggleDropdown.bind(this)} role="combobox" tabIndex={this.props.tabIndex} title="">
+                <button aria-expanded={this.props.expanded} aria-label="" className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title="">
                     <div className="ae-container">
                         <span className="ae-container-dropdown-selected-item">{activeHeadingIntro} <strong>{activeHeadingLabel}</strong></span>
-                        <span className="ae-icon-arrow"></span>
+                        <ButtonIcon editor={this.props.editor} symbol="caret-bottom" />
                     </div>
                 </button>
                 {buttonCommandsList}
@@ -72,15 +83,5 @@ class ButtonTableHeading extends React.Component {
         ];
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default tableRow
- * @memberof ButtonTableHeading
- * @property {String} key
- * @static
- */
-ButtonTableHeading.key = 'tableHeading';
 
 export default ButtonTableHeading;

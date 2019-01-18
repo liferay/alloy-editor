@@ -1,4 +1,5 @@
 import ButtonCommandsList from './button-commands-list.jsx';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -7,6 +8,7 @@ import React from 'react';
  * @class ButtonParagraphAlign
  */
 class ButtonParagraphAlign extends React.Component {
+    static key = 'paragraphAlign';
 
     /**
      * Lifecycle. Renders the UI of the button.
@@ -17,34 +19,34 @@ class ButtonParagraphAlign extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var activeAlignment = AlloyEditor.Strings.alignLeft;
+        const activeAlignment = AlloyEditor.Strings.alignLeft;
 
-        var buttonCommandsList;
-        var buttonCommandsListId;
+        let buttonCommandsList;
+        let buttonCommandsListId;
 
         if (this.props.expanded) {
             buttonCommandsListId = ButtonParagraphAlign.key + 'List';
             buttonCommandsList = <ButtonCommandsList commands={this._getCommands()} editor={this.props.editor} listId={buttonCommandsListId} inlineIcons={false} onDismiss={this.props.toggleDropdown} />
         }
 
-        var editor = this.props.editor.get('nativeEditor');
+        const editor = this.props.editor.get('nativeEditor');
 
-        var activeCommand = this._getCommands().filter(
+        const activeCommand = this._getCommands().filter(
             alignment => {
-                var command = editor.getCommand(alignment.command);
+                const command = editor.getCommand(alignment.command);
 
                 return command ? command.state === CKEDITOR.TRISTATE_ON : false;
             }
         ).pop();
 
-        var iconClassName = `ae-icon-${activeCommand.icon}`;
+        const iconClassName = activeCommand.icon;
 
         return (
             <div className="ae-container-dropdown ae-container-dropdown-xsmall ae-has-dropdown">
                 <button aria-expanded={this.props.expanded} aria-label={activeCommand.label} aria-owns={buttonCommandsListId} className="ae-toolbar-element" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.row}>
                     <div className="ae-container">
-                        <span className={iconClassName}></span>
-                        <span className="ae-icon-arrow"></span>
+                        <ButtonIcon editor={this.props.editor} symbol={iconClassName} />
+                        <ButtonIcon editor={this.props.editor} symbol="caret-bottom" />
                     </div>
                 </button>
                 {buttonCommandsList}
@@ -81,13 +83,11 @@ class ButtonParagraphAlign extends React.Component {
             },
             {
                 command: 'justifyblock',
-                icon: 'align-justified',
+                icon: 'align-justify',
                 label: AlloyEditor.Strings.alignJustify
             }
         ];
     }
 }
-
-ButtonParagraphAlign.key = 'paragraphAlign';
 
 export default ButtonParagraphAlign;

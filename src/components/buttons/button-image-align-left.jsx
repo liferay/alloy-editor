@@ -1,5 +1,6 @@
 import ButtonCommand from '../base/button-command.js';
 import ButtonCommandActive from '../base/button-command-active.js';
+import ButtonIcon from './button-icon.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import React from 'react';
 
@@ -13,6 +14,28 @@ import React from 'react';
  */
 class ButtonImageAlignLeft extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonImageAlignLeft
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        command: 'justifyleft'
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default imageLeft
+     * @memberof ButtonImageAlignLeft
+     * @property {String} key
+     * @static
+     */
+     static key = 'imageLeft';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -21,37 +44,15 @@ class ButtonImageAlignLeft extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         return (
-            <button aria-label={AlloyEditor.Strings.alignLeft} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-image-align-left" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignLeft}>
-                <span className="ae-icon-align-left"></span>
+            <button aria-label={AlloyEditor.Strings.alignLeft} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-image-align-left" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignLeft}>
+                <ButtonIcon editor={this.props.editor} symbol="align-image-left" />
             </button>
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default imageLeft
- * @memberof ButtonImageAlignLeft
- * @property {String} key
- * @static
- */
-ButtonImageAlignLeft.key = 'imageLeft';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonImageAlignLeft
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonImageAlignLeft.defaultProps = {
-    command: 'justifyleft'
-};
 
 export default ButtonCommand(
     ButtonCommandActive(

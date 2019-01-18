@@ -8,6 +8,26 @@ import ReactDOM from 'react-dom';
  */
 class ButtonCameraImage extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonCameraImage
+     */
+    static defaultProps = {
+        videoWidth: 320
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default cameraImage
+     * @memberof ButtonCameraImage
+     * @property {String} key
+     * @static
+     */
+    static key = 'cameraImage';
+
+    /**
      * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
      *
      * Focuses the take photo button.
@@ -49,7 +69,7 @@ class ButtonCameraImage extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var getUserMedia = navigator.getUserMedia ||
+        const getUserMedia = navigator.getUserMedia ||
             navigator.webkitGetUserMedia ||
             navigator.mozGetUserMedia ||
             navigator.msGetUserMedia;
@@ -57,12 +77,12 @@ class ButtonCameraImage extends React.Component {
         getUserMedia.call(navigator, {
             video: true,
             audio: false
-        }, this._handleStreamSuccess.bind(this), this._handleStreamError.bind(this));
+        }, this._handleStreamSuccess, this._handleStreamError);
 
         return (
             <div className="ae-camera">
                 <video ref="videoContainer">Video stream not available.</video>
-                <button className="ae-camera-shoot" onClick={this.takePhoto.bind(this)} ref="buttonTakePhoto">Take photo</button>
+                <button className="ae-camera-shoot" onClick={this.takePhoto} ref="buttonTakePhoto">Take photo</button>
                 <canvas className="ae-camera-canvas" ref="canvasContainer"></canvas>
             </div>
         );
@@ -76,14 +96,14 @@ class ButtonCameraImage extends React.Component {
      * @memberof ButtonCameraImage
      * @method takePhoto
      */
-    takePhoto() {
-        var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
-        var canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
+    takePhoto = () => {
+        const videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
+        const canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
 
-        var context = canvasEl.getContext('2d');
+        const context = canvasEl.getContext('2d');
 
-        var height = this._videoHeight;
-        var width = this.props.videoWidth;
+        const height = this._videoHeight;
+        const width = this.props.videoWidth;
 
         if (width && height) {
             canvasEl.width = width;
@@ -91,11 +111,11 @@ class ButtonCameraImage extends React.Component {
 
             context.drawImage(videoEl, 0, 0, width, height);
 
-            var imgURL = canvasEl.toDataURL('image/png');
+            const imgURL = canvasEl.toDataURL('image/png');
 
-            var el = CKEDITOR.dom.element.createFromHtml('<img src="' + imgURL + '">');
+            const el = CKEDITOR.dom.element.createFromHtml('<img src="' + imgURL + '">');
 
-            var editor = this.props.editor.get('nativeEditor');
+            const editor = this.props.editor.get('nativeEditor');
 
             editor.insertElement(el);
 
@@ -116,7 +136,7 @@ class ButtonCameraImage extends React.Component {
      * @param {Event} error The fired event in case of error.
      * @protected
      */
-    _handleStreamError(error) {
+    _handleStreamError = error => {
         window.alert('An error occurred! ' + error);
     }
 
@@ -130,12 +150,12 @@ class ButtonCameraImage extends React.Component {
      * @param {Object} stream The video stream
      * @protected
      */
-    _handleStreamSuccess(stream) {
-        var videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
-        var canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
+    _handleStreamSuccess = stream => {
+        const videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
+        const canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
 
-        videoEl.addEventListener('canplay', function(event) {
-            var height = videoEl.videoHeight / (videoEl.videoWidth/this.props.videoWidth);
+        videoEl.addEventListener('canplay', () => {
+            let height = videoEl.videoHeight / (videoEl.videoWidth/this.props.videoWidth);
 
             if (isNaN(height)) {
                 height = this.props.videoWidth / (4/3);
@@ -147,14 +167,14 @@ class ButtonCameraImage extends React.Component {
             canvasEl.setAttribute('height', height);
 
             this._videoHeight = height;
-        }.bind(this), false);
+        }, false);
 
         this._stream = stream;
 
         if (navigator.mozGetUserMedia) {
             videoEl.mozSrcObject = stream;
         } else {
-            videoEl.src = (window.URL || window.webkitURL).createObjectURL(stream);
+            videoEl.srcObject = stream;
         }
 
         videoEl.play();
@@ -170,26 +190,5 @@ class ButtonCameraImage extends React.Component {
      * @param {CKEDITOR.dom.element} el The created img element in editor.
      */
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default cameraImage
- * @memberof ButtonCameraImage
- * @property {String} key
- * @static
- */
-ButtonCameraImage.key = 'cameraImage';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonCameraImage
- * @method getDefaultProps
- */
-ButtonCameraImage.defaultProps = {
-    videoWidth: 320
-};
 
 export default ButtonCameraImage;

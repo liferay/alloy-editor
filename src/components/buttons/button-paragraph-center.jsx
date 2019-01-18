@@ -1,5 +1,6 @@
 import ButtonCommand from '../base/button-command.js';
 import ButtonCommandActive from '../base/button-command-active.js';
+import ButtonIcon from './button-icon.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import React from 'react';
 
@@ -13,6 +14,28 @@ import React from 'react';
  */
 class ButtonParagraphCenter extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonParagraphCenter
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        command: 'justifycenter'
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default paragraphCenter
+     * @memberof ButtonParagraphCenter
+     * @property {String} key
+     * @static
+     */
+    static key = 'paragraphCenter';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -21,37 +44,15 @@ class ButtonParagraphCenter extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         return (
-            <button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-center" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}>
-                <span className="ae-icon-align-center"></span>
+            <button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-center" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}>
+                <ButtonIcon editor={this.props.editor} symbol="align-center" />
             </button>
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default paragraphCenter
- * @memberof ButtonParagraphCenter
- * @property {String} key
- * @static
- */
-ButtonParagraphCenter.key = 'paragraphCenter';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonParagraphCenter
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonParagraphCenter.defaultProps = {
-    command: 'justifycenter'
-};
 
 export default ButtonCommand(
     ButtonCommandActive(

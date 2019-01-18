@@ -1,6 +1,7 @@
 import ButtonCfgProps from '../base/button-props.js';
-import ButtonLinkEdit from './button-link-edit.jsx';
+import ButtonIcon from './button-icon.jsx';
 import ButtonKeystroke from '../base/button-keystroke.js';
+import ButtonLinkEdit from './button-link-edit.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import React from 'react';
 
@@ -17,6 +18,31 @@ import React from 'react';
  * @uses ButtonStateClasses
  */
 class ButtonLink extends React.Component {
+    /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonLink
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        keystroke: {
+            fn: '_requestExclusive',
+            keys: CKEDITOR.CTRL + 76 /*L*/
+        }
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default link
+     * @memberof ButtonLink
+     * @property {String} key
+     * @static
+     */
+    static key = 'link';
+
     /**
      * Checks if the current selection is contained within a link.
      *
@@ -38,18 +64,18 @@ class ButtonLink extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         if (this.props.renderExclusive) {
-            var props = this.mergeButtonCfgProps();
+            const props = this.mergeButtonCfgProps();
 
             return (
                 <ButtonLinkEdit {...props} />
             );
         } else {
             return (
-                <button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type="button-link" onClick={this._requestExclusive.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
-                    <span className="ae-icon-link"></span>
+                <button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type="button-link" onClick={this._requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
+                    <ButtonIcon editor={this.props.editor} symbol="link" />
                 </button>
             );
         }
@@ -63,35 +89,10 @@ class ButtonLink extends React.Component {
      * @method _requestExclusive
      * @protected
      */
-    _requestExclusive() {
+    _requestExclusive = () => {
         this.props.requestExclusive(ButtonLink.key);
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default link
- * @memberof ButtonLink
- * @property {String} key
- * @static
- */
-ButtonLink.key = 'link';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonLink
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonLink.defaultProps = {
-    keystroke: {
-        fn: '_requestExclusive',
-        keys: CKEDITOR.CTRL + 76 /*L*/
-    }
-};
 
 export default ButtonCfgProps(
     ButtonKeystroke(

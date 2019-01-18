@@ -10,6 +10,16 @@ import React from 'react';
  */
 class ButtonCommandListItem extends React.Component {
     /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default buttonCommandListItem
+     * @memberof ButtonCommandListItem
+     * @property {String} key
+     * @static
+     */
+    static key = 'buttonCommandListItem';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -19,7 +29,7 @@ class ButtonCommandListItem extends React.Component {
      */
     render() {
         return (
-            <button aria-label={this.props.description} className={this._getClassName()} onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex}>{this.props.description}</button>
+            <button aria-label={this.props.description} className={this._getClassName()} onClick={this.execCommand} tabIndex={this.props.tabIndex}>{this.props.description}</button>
         );
     }
 
@@ -33,21 +43,11 @@ class ButtonCommandListItem extends React.Component {
      * @return {String} The class name of the Widget.
      */
     _getClassName() {
-        var className = 'ae-container ae-toolbar-element';
+        const className = 'ae-container ae-toolbar-element';
 
         return className;
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default buttonCommandListItem
- * @memberof ButtonCommandListItem
- * @property {String} key
- * @static
- */
-ButtonCommandListItem.key = 'buttonCommandListItem';
 
 export default ButtonCommand(
     ButtonCommandListItem

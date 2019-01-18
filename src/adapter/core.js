@@ -12,6 +12,9 @@ import UI from '../components/main.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+const EMBED_VIDEO_WIDTH = 560;
+const EMBED_VIDEO_HEIGHT = 315;
+
 /**
  * AlloyEditor main class. Creates instance of the editor and provides the user configuration
  * to the UI.
@@ -51,12 +54,16 @@ extend(Core, Base, {
 
         editor.config.extraPlugins = this.get('extraPlugins');
 
+        editor.config.embedProviders = this.get('embedProviders');
+
         editor.config.placeholderClass = this.get('placeholderClass');
 
         editor.config.pasteFromWordRemoveStyles = false;
         editor.config.pasteFromWordRemoveFontStyles = false;
 
         editor.config.selectionKeystrokes = this.get('selectionKeystrokes');
+
+        editor.config.spritemap = this.get('spritemap');
 
         Lang.mix(editor.config, config);
 
@@ -315,6 +322,65 @@ extend(Core, Base, {
             writeOnce: true
         },
 
+
+        /**
+         * List of embed providers for videos
+         *
+         * @memberof Core
+         * @instance
+         * @property embedProviders
+         * @default []
+         * @type Array}
+         */
+        embedProviders: {
+            validator: Lang.isArray,
+            value: [
+                {
+                    id: 'facebook',
+                    tpl: `<iframe allowFullScreen="true" allowTransparency="true"
+                         frameborder="0" height="${EMBED_VIDEO_HEIGHT}"
+                         src="https://www.facebook.com/plugins/video.php?href={embedId}'
+                         &show_text=0&width=${EMBED_VIDEO_WIDTH}&height=${EMBED_VIDEO_HEIGHT}" scrolling="no"
+                         style="border:none;overflow:hidden" width="${EMBED_VIDEO_WIDTH}}"></iframe>`,
+                    urlSchemes: [
+                        '(https?:\\/\\/(?:www\\.)?facebook.com\\/\\S*\\/videos\\/\\S*)'
+                    ]
+                },
+                {
+                    id: 'twitch',
+                    tpl: `<iframe allowfullscreen="true" frameborder="0"
+                         height="${EMBED_VIDEO_HEIGHT}"
+                         src="https://player.twitch.tv/?autoplay=false&video={embedId}"
+                         scrolling="no" width="${EMBED_VIDEO_WIDTH}"></iframe>`,
+                    urlSchemes: [
+                        'https?:\\/\\/(?:www\\.)?twitch.tv\\/videos\\/(\\S*)$'
+                    ]
+                },
+                {
+                    id: 'vimeo',
+                    tpl: `<iframe allowfullscreen frameborder="0" height="${EMBED_VIDEO_HEIGHT}"
+                         mozallowfullscreen src="https://player.vimeo.com/video/{embedId}"
+                         webkitallowfullscreen width="${EMBED_VIDEO_WIDTH}"></iframe>`,
+                    urlSchemes: [
+                        'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/album\\/.*\\/video\\/(\\S*)',
+                        'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/channels\\/.*\\/(\\S*)',
+                        'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/groups\\/.*\\/videos\\/(\\S*)',
+                        'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/(\\S*)$'
+                    ]
+                },
+                {
+                    id: 'youtube',
+                    tpl: `<iframe allow="autoplay; encrypted-media" allowfullscreen
+                         height="${EMBED_VIDEO_HEIGHT}" frameborder="0"
+                         src="https://www.youtube.com/embed/{embedId}?rel=0"
+                         width="${EMBED_VIDEO_WIDTH}"></iframe>`,
+                    urlSchemes: [
+                        'https?:\\/\\/(?:www\\.)?youtube.com\\/watch\\?v=(\\S*)$'
+                    ]
+                }
+            ]
+        },
+
         /**
          * Specifies whether AlloyEditor set the contenteditable attribute
          * to "true" on its srcNode.
@@ -454,6 +520,21 @@ extend(Core, Base, {
                 keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/,
                 selection: 'embed'
             }]
+        },
+
+        /**
+         * The path to the spritemap SVG used for icons
+         *
+         * @memberof Core
+         * @instance
+         * @property spritemap
+         * @type String
+         * @writeOnce
+         */
+        spritemap: {
+            validator: Lang.isString,
+            value: 'alloy-editor/assets/icons/icons.svg',
+            writeOnce: true
         },
 
         /**

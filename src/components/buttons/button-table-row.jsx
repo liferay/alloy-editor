@@ -1,4 +1,5 @@
 import ButtonCommandsList from './button-commands-list.jsx';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -8,6 +9,16 @@ import React from 'react';
  */
 class ButtonTableRow extends React.Component {
     /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default tableRow
+     * @memberof ButtonTableRow
+     * @property {String} key
+     * @static
+     */
+    static key = 'tableRow';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -16,8 +27,8 @@ class ButtonTableRow extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var buttonCommandsList;
-        var buttonCommandsListId;
+        let buttonCommandsList;
+        let buttonCommandsListId;
 
         if (this.props.expanded) {
             buttonCommandsListId = ButtonTableRow.key + 'List';
@@ -26,8 +37,8 @@ class ButtonTableRow extends React.Component {
 
         return (
             <div className="ae-container ae-has-dropdown">
-                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.row} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown.bind(this)} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.row}>
-                    <span className="ae-icon-row"></span>
+                <button aria-expanded={this.props.expanded} aria-label={AlloyEditor.Strings.row} aria-owns={buttonCommandsListId} className="ae-button" onClick={this.props.toggleDropdown} role="combobox" tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.row}>
+                    <ButtonIcon editor={this.props.editor} symbol="add-row" />
                 </button>
                 {buttonCommandsList}
             </div>
@@ -61,15 +72,5 @@ class ButtonTableRow extends React.Component {
         ];
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default tableRow
- * @memberof ButtonTableRow
- * @property {String} key
- * @static
- */
-ButtonTableRow.key = 'tableRow';
 
 export default ButtonTableRow;

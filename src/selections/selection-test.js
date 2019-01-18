@@ -24,6 +24,30 @@ var embedSelectionTest = function(payload) {
         );
 };
 
+const embedUrlSelectionTest = function(payload) {
+    const selectionData = payload.data.selectionData;
+
+    return !!(
+        selectionData.element &&
+        selectionData.element.getAttribute('data-widget') === 'embedurl'
+    );
+};
+
+const headingTextSelectionTest = function(payload) {
+    const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+    const nativeEditor = payload.editor.get('nativeEditor');
+    const selectionData = payload.data.selectionData;
+    const selectionEmpty = nativeEditor.isSelectionEmpty();
+
+    return !!(
+        !selectionData.element &&
+        selectionData.region &&
+        !selectionEmpty &&
+        !nativeEditor.getSelection().getCommonAncestor().isReadOnly() &&
+        nativeEditor.elementPath().contains(headings)
+    );
+};
+
 var linkSelectionTest = function(payload) {
     var nativeEditor = payload.editor.get('nativeEditor');
     var range = nativeEditor.getSelection().getRanges()[0];
@@ -75,6 +99,8 @@ var tableSelectionTest = function(payload) {
 
 const SelectionTest = {
     embed: embedSelectionTest,
+    embedUrl: embedUrlSelectionTest,
+    header: headingTextSelectionTest,
     image: imageSelectionTest,
     link: linkSelectionTest,
     table: tableSelectionTest,

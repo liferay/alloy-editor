@@ -19,7 +19,7 @@ export default WrappedComponent => class extends WrappedComponent {
      * @memberof ButtonActionStyle
      * @method applyStyle
      */
-    applyStyle() {
+    applyStyle = () => {
         if (Lang.isFunction(this.isActive) && Lang.isFunction(this.getStyle)) {
             var editor = this.props.editor.get('nativeEditor');
 

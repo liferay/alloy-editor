@@ -1,4 +1,5 @@
 import ButtonCommand from '../base/button-command.js';
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -9,6 +10,28 @@ import React from 'react';
  */
 class ButtonRemoveFormat extends React.Component {
     /**
+     * Lifecycle. Returns the default values of the properties used in the widget.
+     *
+     * @instance
+     * @memberof ButtonRemoveFormat
+     * @method getDefaultProps
+     * @return {Object} The default properties.
+     */
+    static defaultProps = {
+        command: 'removeFormat'
+    };
+
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default removeFormat
+     * @memberof ButtonRemoveFormat
+     * @property {String} key
+     * @static
+     */
+    static key = 'removeFormat';
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @instance
@@ -18,34 +41,12 @@ class ButtonRemoveFormat extends React.Component {
      */
     render() {
         return (
-            <button aria-label={AlloyEditor.Strings.removeformat} className='ae-button' data-type="button-removeformat" onClick={this.execCommand.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.removeformat}>
-                <span className="ae-icon-removeformat"></span>
+            <button aria-label={AlloyEditor.Strings.removeformat} className='ae-button' data-type="button-removeformat" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.removeformat}>
+                <ButtonIcon editor={this.props.editor} symbol="remove-style" />
             </button>
         );
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default removeFormat
- * @memberof ButtonRemoveFormat
- * @property {String} key
- * @static
- */
-ButtonRemoveFormat.key = 'removeFormat';
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof ButtonRemoveFormat
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-ButtonRemoveFormat.defaultProps = {
-    command: 'removeFormat'
-};
 
 export default ButtonCommand(
     ButtonRemoveFormat

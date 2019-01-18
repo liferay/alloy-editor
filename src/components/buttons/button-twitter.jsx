@@ -1,6 +1,6 @@
+import ButtonIcon from './button-icon.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import React from 'react';
-
 
 const MAX_TWEET_LENGTH = 280;
 
@@ -13,16 +13,26 @@ const MAX_TWEET_LENGTH = 280;
  */
 class ButtonTwitter extends React.Component {
     /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default twitter
+     * @memberof ButtonTwitter
+     * @property {String} key
+     * @static
+     */
+    static key = 'twitter';
+
+    /**
      * Creates or removes the twitter link on the selection.
      *
      * @instance
      * @memberof ButtonTwitter
      * @method handleClick
      */
-    handleClick() {
-        var editor = this.props.editor.get('nativeEditor');
+    handleClick = () => {
+        const editor = this.props.editor.get('nativeEditor');
 
-        var linkUtils = new CKEDITOR.Link(editor);
+        const linkUtils = new CKEDITOR.Link(editor);
 
         if (this.isActive()) {
             linkUtils.remove(linkUtils.getFromSelection());
@@ -48,7 +58,7 @@ class ButtonTwitter extends React.Component {
      * @return {Boolean} True if the selection is inside a twitter link, false otherwise.
      */
     isActive() {
-        var link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
+        const link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
 
         return (link && (link.getAttribute('href').indexOf('twitter.com/intent/tweet') !== -1));
     }
@@ -62,11 +72,11 @@ class ButtonTwitter extends React.Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        var cssClass = 'ae-button ' + this.getStateClasses();
+        const cssClass = `ae-button ${this.getStateClasses()}`;
 
         return (
-            <button aria-label={AlloyEditor.Strings.twitter} className={cssClass} data-type="button-twitter" onClick={this.handleClick.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.twitter}>
-                <span className="ae-icon-twitter"></span>
+            <button aria-label={AlloyEditor.Strings.twitter} className={cssClass} data-type="button-twitter" onClick={this.handleClick} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.twitter}>
+                <ButtonIcon editor={this.props.editor} symbol="twitter" />
             </button>
         );
     }
@@ -82,11 +92,11 @@ class ButtonTwitter extends React.Component {
      * @return {String} A valid twitter url with the selected text and given configuration.
      */
     _getHref() {
-        var nativeEditor = this.props.editor.get('nativeEditor');
-        var selectedText = nativeEditor.getSelection().getSelectedText().substring(0, MAX_TWEET_LENGTH);
-        var url = this.props.url;
-        var via = this.props.via;
-        var twitterHref = 'https://twitter.com/intent/tweet?text=' + selectedText;
+        const nativeEditor = this.props.editor.get('nativeEditor');
+        const selectedText = nativeEditor.getSelection().getSelectedText().substring(0, MAX_TWEET_LENGTH);
+        const url = this.props.url;
+        let via = this.props.via;
+        let twitterHref = 'https://twitter.com/intent/tweet?text=' + selectedText;
 
         if (url) {
             twitterHref += '&url=' + url;
@@ -99,16 +109,6 @@ class ButtonTwitter extends React.Component {
         return twitterHref;
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default twitter
- * @memberof ButtonTwitter
- * @property {String} key
- * @static
- */
-ButtonTwitter.key = 'twitter';
 
 export default ButtonStateClasses(
     ButtonTwitter

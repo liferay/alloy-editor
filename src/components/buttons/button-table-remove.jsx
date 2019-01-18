@@ -1,3 +1,4 @@
+import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 
 /**
@@ -6,6 +7,16 @@ import React from 'react';
  * @class ButtonTableRemove
  */
 class ButtonTableRemove extends React.Component {
+    /**
+     * The name which will be used as an alias of the button in the configuration.
+     *
+     * @default tableRemove
+     * @memberof ButtonTableRemove
+     * @property {String} key
+     * @static
+     */
+    static key = 'tableRemove';
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -16,8 +27,8 @@ class ButtonTableRemove extends React.Component {
      */
     render() {
         return (
-            <button aria-label={AlloyEditor.Strings.deleteTable} className="ae-button" data-type="button-table-remove" onClick={this._removeTable.bind(this)} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteTable}>
-                <span className="ae-icon-bin"></span>
+            <button aria-label={AlloyEditor.Strings.deleteTable} className="ae-button" data-type="button-table-remove" onClick={this._removeTable} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.deleteTable}>
+                <ButtonIcon editor={this.props.editor} symbol="trash" />
             </button>
         );
     }
@@ -30,24 +41,14 @@ class ButtonTableRemove extends React.Component {
      * @method _removeTable
      * @protected
      */
-    _removeTable() {
-        var editor = this.props.editor.get('nativeEditor');
-        var tableUtils = new CKEDITOR.Table(editor);
+    _removeTable = () => {
+        const editor = this.props.editor.get('nativeEditor');
+        const tableUtils = new CKEDITOR.Table(editor);
 
         tableUtils.remove();
 
         editor.fire('actionPerformed', this);
     }
 }
-
-/**
- * The name which will be used as an alias of the button in the configuration.
- *
- * @default tableRemove
- * @memberof ButtonTableRemove
- * @property {String} key
- * @static
- */
-ButtonTableRemove.key = 'tableRemove';
 
 export default ButtonTableRemove;

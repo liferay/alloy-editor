@@ -7,12 +7,16 @@ const Selections = [{
     buttons: ['embedRemove','embedEdit'],
     test: SelectionTest.embed
 }, {
+    name: 'embedUrl',
+    buttons: ['embedVideo', 'embedVideoEdit'],
+    test: SelectionTest.embedUrl
+}, {
     name: 'link',
     buttons: ['linkEdit'],
     test: SelectionTest.link
 }, {
     name: 'image',
-    buttons: ['imageLeft', 'imageCenter', 'imageRight'],
+    buttons: ['imageLeft', 'imageCenter', 'imageRight', 'AccessibilityImageAlt'],
     setPosition: SelectionSetPosition.image,
     test: SelectionTest.image
 }, {
@@ -29,7 +33,52 @@ const Selections = [{
                 'TextColor', 'BGColor', 'separator', 'code', 'quote', 'separator', 'removeFormat'
             ]
         ],
+
         simple: ['styles', 'bold', 'italic', 'underline', 'link']
+
+        // simple: [
+        //     'backgroundColor',
+        //     'camera',
+        //     'color',
+        //     'embed',
+        //     'h1',
+        //     'h2',
+        //     'hline',
+        //     'image',
+        //     'imageCenter',
+        //     'imageLeft',
+        //     'imageRight',
+        //     'indentBlock',
+        //     'italic',
+        //     'link',
+        //     'linkBrowse',
+        //     'linkTargetEdit',
+        //     'ol',
+        //     'outdentBlock',
+        //     'paragraphAlign',
+        //     'paragraphCenter',
+        //     'paragraphJustify',
+        //     'paragraphLeft',
+        //     'paragraphRight',
+        //     'quote',
+        //     'removeFormat',
+        //     'spacing',
+        //     'spacing',
+        //     'strike',
+        //     'styles',
+        //     'subscript',
+        //     'superscript',
+        //     'tableCell',
+        //     'tableColumn',
+        //     'tableEdit',
+        //     'tableHeading',
+        //     'tableRemove',
+        //     'tableRow',
+        //     'table',
+        //     'twitter',
+        //     'ul',
+        //     'underline'
+        // ]
     },
     test: SelectionTest.text
 }, {
