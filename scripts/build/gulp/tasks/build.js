@@ -23,10 +23,8 @@ gulp.task('build', function(callback) {
 	);
 });
 
-gulp.task('clean-dist', function(callback) {
-	del(Constants.distFolder, {force: true}).then(function() {
-		callback();
-	});
+gulp.task('clean-dist', function() {
+	return del(Constants.distFolder, {force: true});
 });
 
 gulp.task('build-demo', function() {
@@ -56,15 +54,13 @@ gulp.task('copy-ckeditor', function() {
 		.pipe(gulp.dest(Constants.editorDistFolder));
 });
 
-gulp.task('post-cleanup', function(callback) {
-	del(
+gulp.task('post-cleanup', function() {
+	return del(
 		[
 			path.join(Constants.editorDistFolder, 'adapters'),
 			path.join(Constants.editorDistFolder, 'CHANGES.md'),
 			path.join(Constants.editorDistFolder, 'samples')
 		],
 		{force: true}
-	).then(function() {
-		callback();
-	});
+	);
 });

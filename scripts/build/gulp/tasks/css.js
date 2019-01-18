@@ -85,10 +85,8 @@ gulp.task('minimize-css', function() {
 		.pipe(gulp.dest(path.join(Constants.editorDistFolder, 'assets')));
 });
 
-gulp.task('clean-fonts', function(callback) {
-	del([path.join(Constants.editorDistFolder, 'assets/css')], {
+gulp.task('clean-fonts', function() {
+	return del([path.join(Constants.editorDistFolder, 'assets/css')], {
 		force: true
-	}).then(function() {
-		callback();
 	});
 });
