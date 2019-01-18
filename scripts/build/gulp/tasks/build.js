@@ -9,16 +9,16 @@ const runSequence = require('run-sequence');
 const template = require('gulp-template');
 
 gulp.task('build', function(callback) {
-	const task = ['build-demo', 'post-cleanup'];
+	const tasks = ['build-demo', 'post-cleanup'];
 
 	if (argv.release) {
-		task.push('minimize-css');
+		tasks.push('minimize-css');
 	}
 
 	runSequence(
 		'clean-dist',
 		['build-css', 'copy-ckeditor', 'copy-languages', 'copy-svgs'],
-		task,
+		tasks,
 		callback
 	);
 });
