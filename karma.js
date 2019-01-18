@@ -10,9 +10,9 @@ const defaultConfig = Object.assign(
         browsers: ['Chrome'],
 
         // test results reporter to use
-        // possible values: 'dots', 'progress'
+        // possible values: 'coverage', 'dots', 'progress', 'verbose'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['coverage', 'progress'],
+        reporters: ['verbose', 'coverage'],
     }
 );
 

@@ -40,6 +40,7 @@
     "karma-safari-launcher": "1.0.0",
     "karma-sauce-launcher": "1.1.0",
     "karma-sinon": "1.0.4",
+    "karma-verbose-reporter": "0.0.6",
     "karma-webpack": "^3.0.0",
     "mocha": "3.2.0",
     "require-dir": "^1.0.0",
@@ -78,7 +79,6 @@
   "homepage": "http://alloyeditor.com",
   "dependencies": {
     "clay-css": "2.5.1",
-    "create-react-class": "^15.6.3",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
