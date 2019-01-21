@@ -8,7 +8,6 @@ const es = require('event-stream');
 const fs = require('fs');
 const gulp = require('gulp');
 const iconfont = require('gulp-iconfont');
-const noop = require('gulp-empty');
 const path = require('path');
 const rename = require('gulp-rename');
 const runSequence = require('run-sequence');
