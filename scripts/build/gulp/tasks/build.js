@@ -24,7 +24,13 @@ gulp.task('build', function(callback) {
 });
 
 gulp.task('clean-dist', function() {
-	return del(Constants.distFolder, {force: true});
+	// Remove everything inside "dist" recursively, except "dist"
+	// itself, and its .gitignore.
+	return del([
+		path.join(Constants.distFolder, '**'),
+		`!${Constants.distFolder}`,
+		`!${path.join(Constants.distFolder, '.gitignore')}`
+	], {force: true});
 });
 
 gulp.task('build-demo', function() {
