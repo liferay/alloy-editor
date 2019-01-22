@@ -1,5 +1,23 @@
 # Change Log
 
+## [v1.5.19](https://github.com/liferay/alloy-editor/tree/v1.5.19) (2019-01-22)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.18...v1.5.19)
+
+**Closed issues:**
+
+- IE11 Text with \(bold, italic, underline\) and link will not display toolbar [\#956](https://github.com/liferay/alloy-editor/issues/956)
+
+**Merged pull requests:**
+
+- Updates CHANGELOG for v1.5.18 [\#964](https://github.com/liferay/alloy-editor/pull/964) ([julien](https://github.com/julien))
+- Apply some minor clean-up while investigating slow build speeds [\#963](https://github.com/liferay/alloy-editor/pull/963) ([wincent](https://github.com/wincent))
+- Remove never-used gulp-empty dependency [\#962](https://github.com/liferay/alloy-editor/pull/962) ([wincent](https://github.com/wincent))
+- Fixes \#956 | Fix link with styles in IE [\#959](https://github.com/liferay/alloy-editor/pull/959) ([julien](https://github.com/julien))
+- Add Prettier [\#957](https://github.com/liferay/alloy-editor/pull/957) ([wincent](https://github.com/wincent))
+- Migrate away from reactCreateClass [\#955](https://github.com/liferay/alloy-editor/pull/955) ([wincent](https://github.com/wincent))
+- Add extra buttons from liferay-portal [\#954](https://github.com/liferay/alloy-editor/pull/954) ([julien](https://github.com/julien))
+- Update Karma dependency to resolve security issues [\#952](https://github.com/liferay/alloy-editor/pull/952) ([wincent](https://github.com/wincent))
+
 ## [v1.5.18](https://github.com/liferay/alloy-editor/tree/v1.5.18) (2019-01-08)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.17...v1.5.18)
 
