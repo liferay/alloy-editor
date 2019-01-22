@@ -13,6 +13,7 @@ const config = {
 		minimizer: [
 			new TerserJsPlugin({
 				cache: true,
+				parallel: true,
 				sourceMap: true,
 				terserOptions: {
 					compress: {
