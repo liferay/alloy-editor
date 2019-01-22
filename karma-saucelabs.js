@@ -81,7 +81,8 @@ const defaultConfig = Object.assign(Common, {
 		connectOptions: {
 			port: 5757,
 			logfile: 'sauce_connect.log'
-		}
+		},
+		reporters: ['verbose']
 	}
 });
 
