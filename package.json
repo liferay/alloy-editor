@@ -56,10 +56,10 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build:assets": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
-    "build": "npm run build:assets -- --release && webpack --config webpack.prod.js && webpack --config webpack.dev.js",
+    "build:assets": "gulp --gulpfile scripts/build/gulp/gulpfile.js build:assets",
+    "build": "gulp --gulpfile scripts/build/gulp/gulpfile.js --release",
     "checkFormat": "prettier --list-different -- '*.js' '{api,scripts,src,test}/**/*.js'",
-    "dev": "npm run build:assets && webpack --config webpack.dev.js",
+    "dev": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
     "format": "prettier --write -- '*.js' '{api,scripts,src,test}/**/*.js'",
     "prettier": "prettier --write -- '*.js' '{api,scripts,src,test}/**/*.js'",
     "start": "webpack-dev-server --config webpack.dev.js",
