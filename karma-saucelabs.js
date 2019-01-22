@@ -69,7 +69,8 @@ const defaultConfig = Object.assign(Common, {
 	// test results reporter to use
 	// possible values: 'dots', 'progress'
 	// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-	reporters: ['progress', 'saucelabs'],
+	// reporters: ['progress', 'saucelabs'],
+	reporters: ['verbose', 'saucelabs'],
 
 	// soucelabs specific configuration
 	sauceLabs: {
@@ -81,8 +82,7 @@ const defaultConfig = Object.assign(Common, {
 		connectOptions: {
 			port: 5757,
 			logfile: 'sauce_connect.log'
-		},
-		reporters: ['verbose']
+		}
 	}
 });
 
