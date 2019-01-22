@@ -31,16 +31,15 @@
         var nativeEditor = payload.editor.get('nativeEditor');
         var range = nativeEditor.getSelection().getRanges()[0];
         var selectionData = payload.data.selectionData;
-
-        var element;
+        var element = new CKEDITOR.Link(nativeEditor).getFromSelection();
+        var isSelectionEmpty = nativeEditor.isSelectionEmpty();
+        var elementIsNotImage = selectionData.element ? selectionData.element.getName() !== 'img' : true;
 
         return !!(
-            nativeEditor.isSelectionEmpty() &&
-            selectionData.element &&
-            selectionData.element.getName() !== 'img' &&
-            (element = (new CKEDITOR.Link(nativeEditor)).getFromSelection()) &&
-            element.getText().length !== range.endOffset &&
-            !element.isReadOnly() &&
+            isSelectionEmpty &&
+            elementIsNotImage &&
+            element && element.getText().length !== range.endOffset &&
+            element && !element.isReadOnly() &&
             !_isRangeAtElementEnd(range, element)
         );
     };
