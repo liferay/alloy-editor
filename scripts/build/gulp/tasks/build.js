@@ -1,12 +1,12 @@
-const gulp = require('gulp');
-
 const argv = require('yargs').argv;
-const Constants = require('../constants');
+
 const del = require('del');
 const fs = require('fs');
+const gulp = require('gulp');
 const path = require('path');
 const runSequence = require('run-sequence');
 const template = require('gulp-template');
+const Constants = require('../constants');
 
 gulp.task('build', function(callback) {
 	const tasks = ['build-demo', 'post-cleanup'];
