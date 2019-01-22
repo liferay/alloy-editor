@@ -9,24 +9,22 @@ const runSequence = require('run-sequence');
 const template = require('gulp-template');
 
 gulp.task('build', function(callback) {
-	const task = ['build-demo', 'post-cleanup'];
+	const tasks = ['build-demo', 'post-cleanup'];
 
 	if (argv.release) {
-		task.push('minimize-css');
+		tasks.push('minimize-css');
 	}
 
 	runSequence(
 		'clean-dist',
 		['build-css', 'copy-ckeditor', 'copy-languages', 'copy-svgs'],
-		task,
+		tasks,
 		callback
 	);
 });
 
-gulp.task('clean-dist', function(callback) {
-	del(Constants.distFolder, {force: true}).then(function() {
-		callback();
-	});
+gulp.task('clean-dist', function() {
+	return del(Constants.distFolder, {force: true});
 });
 
 gulp.task('build-demo', function() {
@@ -56,15 +54,13 @@ gulp.task('copy-ckeditor', function() {
 		.pipe(gulp.dest(Constants.editorDistFolder));
 });
 
-gulp.task('post-cleanup', function(callback) {
-	del(
+gulp.task('post-cleanup', function() {
+	return del(
 		[
 			path.join(Constants.editorDistFolder, 'adapters'),
 			path.join(Constants.editorDistFolder, 'CHANGES.md'),
 			path.join(Constants.editorDistFolder, 'samples')
 		],
 		{force: true}
-	).then(function() {
-		callback();
-	});
+	);
 });
