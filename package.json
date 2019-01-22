@@ -52,6 +52,9 @@
     "yargs": "6.6.0"
   },
   "main": "dist/alloy-editor/alloy-editor-no-react.js",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "build:assets": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
     "build": "npm run build:assets -- --release && webpack --config webpack.prod.js && webpack --config webpack.dev.js",
