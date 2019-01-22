@@ -1,5 +1,18 @@
 # Change Log
 
+## [v1.5.18](https://github.com/liferay/alloy-editor/tree/v1.5.18) (2019-01-08)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.17...v1.5.18)
+
+**Fixed bugs:**
+
+- In IE11 copy-paste doesnt work [\#945](https://github.com/liferay/alloy-editor/issues/945)
+
+**Merged pull requests:**
+
+- Updates CHANGELOG for v1.5.17 [\#949](https://github.com/liferay/alloy-editor/pull/949) ([julien](https://github.com/julien))
+- Fixes \#945 | Fix regexp for IE [\#948](https://github.com/liferay/alloy-editor/pull/948) ([julien](https://github.com/julien))
+- Feature/react [\#946](https://github.com/liferay/alloy-editor/pull/946) ([julien](https://github.com/julien))
+
 ## [v1.5.17](https://github.com/liferay/alloy-editor/tree/v1.5.17) (2018-12-07)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.16...v1.5.17)
 
