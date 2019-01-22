@@ -1,14 +1,14 @@
 const common = require('./webpack.common.js');
 const merge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserJsPlugin = require('terser-webpack-plugin');
 
 const config = {
 	mode: 'production',
 	devtool: 'source-map',
 	plugins: [
-		new UglifyJsPlugin({
+		new TerserJsPlugin({
 			sourceMap: true,
-			uglifyOptions: {
+			terserOptions: {
 				output: {
 					comments: false
 				}

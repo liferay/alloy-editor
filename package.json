@@ -43,7 +43,7 @@
     "require-dir": "^1.0.0",
     "run-sequence": "^2.2.1",
     "sinon": "1.15.4",
-    "uglifyjs-webpack-plugin": "^1.2.4",
+    "terser-webpack-plugin": "^1.2.1",
     "walk": "^2.3.9",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
