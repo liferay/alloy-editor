@@ -12,6 +12,7 @@ const config = {
 	optimization: {
 		minimizer: [
 			new TerserJsPlugin({
+				cache: true,
 				sourceMap: true,
 				terserOptions: {
 					compress: {
