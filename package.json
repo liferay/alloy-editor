@@ -12,7 +12,6 @@
     "bourbon": "https://github.com/thoughtbot/bourbon.git#v4.2.6",
     "chai": "^3.5.0",
     "del": "^3.0.0",
-    "dir-compare": "^1.4.0",
     "eslint": "3.1.1",
     "event-stream": "3.3.1",
     "gulp": "^3.9.1",
