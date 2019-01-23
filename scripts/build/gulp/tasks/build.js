@@ -5,7 +5,6 @@ const fs = require('fs');
 const gulp = require('gulp');
 const path = require('path');
 const runSequence = require('run-sequence');
-const template = require('gulp-template');
 const webpack = require('webpack');
 const Constants = require('../constants');
 
@@ -50,7 +49,7 @@ gulp.task('build:assets', function(callback) {
 	runSequence(
 		'clean-dist',
 		['build-css', 'copy-ckeditor', 'copy-languages', 'copy-svgs'],
-		['build-demo', 'post-cleanup', ifRelease('minimize-css')],
+		['copy-demo', 'post-cleanup', ifRelease('minimize-css')],
 		callback
 	);
 });
@@ -73,25 +72,10 @@ gulp.task('clean-dist', function() {
 	], {force: true});
 });
 
-gulp.task('build-demo', function() {
-	var templateHead;
-
-	if (argv.release) {
-		templateHead = 'head-release.template';
-	} else {
-		templateHead = 'head-dev.template';
-	}
-
+gulp.task('copy-demo', function() {
 	return gulp
-		.src([path.join('./demo', 'index.html')])
-		.pipe(
-			template({
-				resources: fs
-					.readFileSync(path.join('./template', templateHead))
-					.toString()
-			})
-		)
-		.pipe(gulp.dest(path.join(Constants.distFolder)));
+		.src(path.join(__dirname, '..', 'demo', 'index.html'))
+		.pipe(gulp.dest(Constants.distFolder));
 });
 
 gulp.task('copy-ckeditor', function() {
