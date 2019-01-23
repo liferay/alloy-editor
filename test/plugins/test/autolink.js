@@ -18,7 +18,7 @@
 
 		before(function(done) {
 			Utils.createCKEditor.call(this, done, {
-				extraPlugins: 'ae_autolink'
+				extraPlugins: 'ae_autolink',
 			});
 		});
 
@@ -33,14 +33,14 @@
 				expected:
 					'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
 				html: '<p>link www.liferay.com { }</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			testLink.call(this, {
 				expected:
 					'<p>link <a href="http://www.liferay.com">www.liferay.com</a> text</p>',
 				html: '<p>link www.liferay.com { }text</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 		});
 
@@ -49,14 +49,14 @@
 				expected:
 					'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
 				html: '<p>link www.liferay.com { }</p>',
-				keyCode: KEY_COMMA
+				keyCode: KEY_COMMA,
 			});
 
 			testLink.call(this, {
 				expected:
 					'<p>link <a href="http://www.liferay.com">www.liferay.com</a> text</p>',
 				html: '<p>link www.liferay.com { }text</p>',
-				keyCode: KEY_COMMA
+				keyCode: KEY_COMMA,
 			});
 		});
 
@@ -65,14 +65,14 @@
 				expected:
 					'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
 				html: '<p>link www.liferay.com { }</p>',
-				keyCode: KEY_SEMICOLON
+				keyCode: KEY_SEMICOLON,
 			});
 
 			testLink.call(this, {
 				expected:
 					'<p>link <a href="http://www.liferay.com">www.liferay.com</a> text</p>',
 				html: '<p>link www.liferay.com { }text</p>',
-				keyCode: KEY_SEMICOLON
+				keyCode: KEY_SEMICOLON,
 			});
 		});
 
@@ -90,7 +90,7 @@
 			testLink.call(this, {
 				expected: expected,
 				html: '<p>link www.liferay.com</p>{ }<p>text</p>',
-				keyCode: KEY_ENTER
+				keyCode: KEY_ENTER,
 			});
 		});
 
@@ -108,7 +108,7 @@
 			spaceElement.insertAfter(spanElement);
 
 			happen.keyup(this._editable, {
-				keyCode: KEY_ENTER
+				keyCode: KEY_ENTER,
 			});
 
 			var data = this.nativeEditor.element.$.innerHTML;
@@ -120,25 +120,25 @@
 			testLink.call(this, {
 				expected: '<p>invalid link ww.liferay.com</p>',
 				html: 'invalid link ww.liferay.com { }',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			testLink.call(this, {
 				expected: '<p>invalid link ww.liferay.com</p>',
 				html: 'invalid link ww.liferay.com { }',
-				keyCode: KEY_COMMA
+				keyCode: KEY_COMMA,
 			});
 
 			testLink.call(this, {
 				expected: '<p>invalid link some_word</p>',
 				html: 'invalid link some_word { }',
-				keyCode: KEY_SEMICOLON
+				keyCode: KEY_SEMICOLON,
 			});
 
 			testLink.call(this, {
 				expected: '<p>invalid link ww.liferay.com</p><p>text</p>',
 				html: '<p>invalid link ww.liferay.com</p>{ }<p>text</p>',
-				keyCode: KEY_ENTER
+				keyCode: KEY_ENTER,
 			});
 		});
 
@@ -151,11 +151,11 @@
 			var editable = this.nativeEditor.editable();
 
 			happen.keyup(editable.$, {
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			happen.keydown(editable.$, {
-				keyCode: KEY_BACK
+				keyCode: KEY_BACK,
 			});
 
 			var data = getData.call(this);
@@ -169,7 +169,7 @@
 					'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
 				html:
 					'<p>link <a href="http://www.liferay.com">www.liferay.com</a> { }</p>',
-				keyCode: KEY_BACK
+				keyCode: KEY_BACK,
 			});
 		});
 
@@ -178,47 +178,47 @@
 				expected:
 					'<p>link <a href="http://www.liferay.org">www.liferay.org</a></p>',
 				html: '<p>link www.liferay.org { }</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			testLink.call(this, {
 				expected:
 					'<p>link <a href="http://www.liferay.com">http://www.liferay.com</a></p>',
 				html: '<p>link http://www.liferay.com { }</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			testLink.call(this, {
 				expected:
 					'<p>link <a href="http://liferay.com">http://liferay.com</a></p>',
 				html: '<p>link http://liferay.com { }</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			testLink.call(this, {
 				expected:
 					'<p>link <a href="https://www.liferay.com">https://www.liferay.com</a></p>',
 				html: '<p>link https://www.liferay.com { }</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			testLink.call(this, {
 				expected:
 					'<p>link <a href="http://www.alloy-editor.com">http://www.alloy-editor.com</a></p>',
 				html: '<p>link http://www.alloy-editor.com { }</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			testLink.call(this, {
 				expected: '<p>invalid link ww.liferay.com</p>',
 				html: '<p>invalid link ww.liferay.com { }</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			testLink.call(this, {
 				expected: '<p>invalid link liferay.com</p>',
 				html: '<p>invalid link liferay.com { }</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 		});
 
@@ -242,7 +242,7 @@
 			bender.tools.selection.setWithHtml(this.nativeEditor, config.html);
 
 			happen.keyup(this._editable, {
-				keyCode: config.keyCode
+				keyCode: config.keyCode,
 			});
 
 			var data = getData.call(this);
@@ -275,7 +275,7 @@
 		function getData() {
 			return bender.tools.getData(this.nativeEditor, {
 				compatHtml: true,
-				fixHtml: true
+				fixHtml: true,
 			});
 		}
 	});

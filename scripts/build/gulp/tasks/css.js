@@ -20,11 +20,11 @@ gulp.task('css:sass', function sassCSS(callback) {
 						Constants.rootDir,
 						'node_modules/bourbon/app/assets/stylesheets'
 					),
-					path.join(Constants.rootDir, 'src/assets/sass')
+					path.join(Constants.rootDir, 'src/assets/sass'),
 				],
 				onError(err) {
 					callback(err);
-				}
+				},
 			})
 		)
 		.pipe(gulp.dest(path.join(Constants.editorDistFolder, 'assets/css')));
@@ -51,7 +51,7 @@ function getJoinTasks() {
 							'.font-cache',
 							skinFontFileName
 						),
-						path.join(cssDir, 'skin', skin, 'main.css')
+						path.join(cssDir, 'skin', skin, 'main.css'),
 					],
 					{allowEmpty: true}
 				)
@@ -73,7 +73,7 @@ gulp.task('css:minimize', function() {
 		.pipe(minifyCSS())
 		.pipe(
 			rename({
-				suffix: '-min'
+				suffix: '-min',
 			})
 		)
 		.pipe(gulp.dest(path.join(Constants.editorDistFolder, 'assets')));

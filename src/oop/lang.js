@@ -129,7 +129,7 @@ const Lang = {
 	 */
 	toInt: function(value) {
 		return parseInt(value, 10);
-	}
+	},
 };
 
 export default Lang;

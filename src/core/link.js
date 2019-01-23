@@ -84,14 +84,14 @@
 			var linkAttrs = CKEDITOR.tools.merge(
 				{
 					'data-cke-saved-href': URI,
-					href: URI
+					href: URI,
 				},
 				attrs
 			);
 
 			var style = new CKEDITOR.style({
 				attributes: linkAttrs,
-				element: 'a'
+				element: 'a',
 			});
 
 			style.type = CKEDITOR.STYLE_INLINE;
@@ -170,7 +170,7 @@
 				var style = new CKEDITOR.style({
 					alwaysRemoveElement: 1,
 					element: 'a',
-					type: CKEDITOR.STYLE_INLINE
+					type: CKEDITOR.STYLE_INLINE,
 				});
 
 				// 'removeStyle()' removes the style from the editor's current selection.
@@ -204,7 +204,7 @@
 
 				link.setAttributes({
 					'data-cke-saved-href': uri,
-					href: uri
+					href: uri,
 				});
 			} else if (typeof attrs === 'object') {
 				var removeAttrs = [];
@@ -263,7 +263,7 @@
 			}
 
 			return URI;
-		}
+		},
 	};
 
 	CKEDITOR.Link = CKEDITOR.Link || Link;

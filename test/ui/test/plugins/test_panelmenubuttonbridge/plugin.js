@@ -4,7 +4,7 @@ CKEDITOR.plugins.add('test_panelmenubuttonbridge', {
 			onBlock: function(panel, block) {
 				block.element.addClass('test_panelmenubuttonbridge');
 				block.element.setHtml('<span>panelMenuContent</span>');
-			}
+			},
 		});
-	}
+	},
 });

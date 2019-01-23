@@ -7,9 +7,9 @@
 				'mouseup',
 				'mousemove',
 				'mouseover',
-				'mouseout'
+				'mouseout',
 			],
-			key: ['keydown', 'keyup', 'keypress']
+			key: ['keydown', 'keyup', 'keypress'],
 		},
 		s,
 		i;

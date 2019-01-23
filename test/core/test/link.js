@@ -23,12 +23,12 @@
 			);
 
 			link.create('http://test.com', {
-				target: '_blank'
+				target: '_blank',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -46,12 +46,12 @@
 			);
 
 			link.create('http://test.com', {
-				target: '_blank'
+				target: '_blank',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -69,12 +69,12 @@
 			);
 
 			link.create('test.com', {
-				target: '_blank'
+				target: '_blank',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -92,12 +92,12 @@
 			);
 
 			link.create('//test.com', {
-				target: '_blank'
+				target: '_blank',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -115,12 +115,12 @@
 			);
 
 			link.create('#bookmark', {
-				target: '_blank'
+				target: '_blank',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -138,12 +138,12 @@
 			);
 
 			link.create('test@example.com', {
-				target: '_self'
+				target: '_self',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -161,12 +161,12 @@
 			);
 
 			link.create('mailto:test@example.com', {
-				target: '_self'
+				target: '_self',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -184,12 +184,12 @@
 			);
 
 			link.create('medium.com/@whoever/something-else', {
-				target: '_blank'
+				target: '_blank',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -256,7 +256,7 @@
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual('<p>remove a link from a selection.</p>', data);
@@ -274,7 +274,7 @@
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual('<p>remove a link from a selection.</p>', data);
@@ -295,7 +295,7 @@
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -316,7 +316,7 @@
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -339,14 +339,14 @@
 			link.update(
 				{
 					href: 'http://new.com',
-					target: '_self'
+					target: '_self',
 				},
 				linkEl
 			);
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -365,12 +365,12 @@
 
 			link.update({
 				href: 'http://new.com',
-				target: '_self'
+				target: '_self',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -394,14 +394,14 @@
 				{
 					href: null,
 					rel: null,
-					target: ''
+					target: '',
 				},
 				linkEl
 			);
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -421,12 +421,12 @@
 			link.update({
 				href: null,
 				rel: null,
-				target: ''
+				target: '',
 			});
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -450,7 +450,7 @@
 
 			var data = bender.tools.getData(this.nativeEditor, {
 				fixHtml: true,
-				compatHtml: true
+				compatHtml: true,
 			});
 
 			assert.strictEqual(
@@ -476,10 +476,10 @@
 			link.create(
 				'http://test.com',
 				{
-					target: '_blank'
+					target: '_blank',
 				},
 				{
-					advance: true
+					advance: true,
 				}
 			);
 
@@ -516,10 +516,10 @@
 			link.create(
 				'http://test.com',
 				{
-					target: '_blank'
+					target: '_blank',
 				},
 				{
-					advance: true
+					advance: true,
 				}
 			);
 
@@ -540,7 +540,7 @@
 		describe('when appendProtocol is false', function() {
 			it('should not add default protocol when creating a link', function() {
 				var link = new CKEDITOR.Link(this.nativeEditor, {
-					appendProtocol: false
+					appendProtocol: false,
 				});
 
 				bender.tools.selection.setWithHtml(
@@ -552,7 +552,7 @@
 
 				var data = bender.tools.getData(this.nativeEditor, {
 					fixHtml: true,
-					compatHtml: true
+					compatHtml: true,
 				});
 
 				assert.strictEqual(
@@ -563,7 +563,7 @@
 
 			it('should not add default protocol when updating a link with string parameter', function() {
 				var link = new CKEDITOR.Link(this.nativeEditor, {
-					appendProtocol: false
+					appendProtocol: false,
 				});
 
 				bender.tools.selection.setWithHtml(
@@ -578,7 +578,7 @@
 
 				var data = bender.tools.getData(this.nativeEditor, {
 					fixHtml: true,
-					compatHtml: true
+					compatHtml: true,
 				});
 
 				assert.strictEqual(
@@ -589,7 +589,7 @@
 
 			it('should not use the default protocol when editing an existing link with object parameter', function() {
 				var link = new CKEDITOR.Link(this.nativeEditor, {
-					appendProtocol: false
+					appendProtocol: false,
 				});
 
 				bender.tools.selection.setWithHtml(
@@ -601,14 +601,14 @@
 
 				link.update(
 					{
-						href: 'test.com'
+						href: 'test.com',
 					},
 					linkEl
 				);
 
 				var data = bender.tools.getData(this.nativeEditor, {
 					fixHtml: true,
-					compatHtml: true
+					compatHtml: true,
 				});
 
 				assert.strictEqual(

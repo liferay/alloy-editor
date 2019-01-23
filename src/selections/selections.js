@@ -6,17 +6,17 @@ const Selections = [
 	{
 		name: 'embed',
 		buttons: ['embedRemove', 'embedEdit'],
-		test: SelectionTest.embed
+		test: SelectionTest.embed,
 	},
 	{
 		name: 'embedUrl',
 		buttons: ['embedVideo', 'embedVideoEdit'],
-		test: SelectionTest.embedUrl
+		test: SelectionTest.embedUrl,
 	},
 	{
 		name: 'link',
 		buttons: ['linkEdit'],
-		test: SelectionTest.link
+		test: SelectionTest.link,
 	},
 	{
 		name: 'image',
@@ -24,10 +24,10 @@ const Selections = [
 			'imageLeft',
 			'imageCenter',
 			'imageRight',
-			'AccessibilityImageAlt'
+			'AccessibilityImageAlt',
 		],
 		setPosition: SelectionSetPosition.image,
-		test: SelectionTest.image
+		test: SelectionTest.image,
 	},
 	{
 		name: 'text',
@@ -42,7 +42,7 @@ const Selections = [
 					'underline',
 					'strike',
 					'separator',
-					'link'
+					'link',
 				],
 				[
 					'paragraphAlign',
@@ -62,11 +62,11 @@ const Selections = [
 					'code',
 					'quote',
 					'separator',
-					'removeFormat'
-				]
+					'removeFormat',
+				],
 			],
 
-			simple: ['styles', 'bold', 'italic', 'underline', 'link']
+			simple: ['styles', 'bold', 'italic', 'underline', 'link'],
 
 			// simple: [
 			//     'backgroundColor',
@@ -112,7 +112,7 @@ const Selections = [
 			//     'underline'
 			// ]
 		},
-		test: SelectionTest.text
+		test: SelectionTest.text,
 	},
 	{
 		name: 'table',
@@ -121,12 +121,12 @@ const Selections = [
 			'tableRow',
 			'tableColumn',
 			'tableCell',
-			'tableRemove'
+			'tableRemove',
 		],
 		getArrowBoxClasses: SelectionGetArrowBoxClasses.table,
 		setPosition: SelectionSetPosition.table,
-		test: SelectionTest.table
-	}
+		test: SelectionTest.table,
+	},
 ];
 
 export default Selections;

@@ -19,9 +19,9 @@ export default WrappedComponent =>
 			...WrappedComponent.defaultProps,
 			gutter: {
 				left: 0,
-				top: 10
+				top: 10,
 			},
-			constrainToViewport: true
+			constrainToViewport: true,
 		};
 
 		/**
@@ -72,7 +72,7 @@ export default WrappedComponent =>
 
 			return {
 				x: x,
-				y: y
+				y: y,
 			};
 		}
 
@@ -109,7 +109,7 @@ export default WrappedComponent =>
 
 			var pos = {
 				x: eventPayload.nativeEvent.pageX,
-				y: selectionData.region.top
+				y: selectionData.region.top,
 			};
 
 			var direction = selectionData.region.direction;
@@ -152,7 +152,7 @@ export default WrappedComponent =>
 			return {
 				direction: direction,
 				x: x,
-				y: y
+				y: y,
 			};
 		}
 
@@ -315,7 +315,7 @@ export default WrappedComponent =>
 			domElement.setStyles({
 				left: startPoint[0] + 'px',
 				top: startPoint[1] + 'px',
-				opacity: 0
+				opacity: 0,
 			});
 
 			domElement.removeClass('alloy-editor-invisible');
@@ -326,7 +326,7 @@ export default WrappedComponent =>
 				domElement.setStyles({
 					left: endPoint[0] + 'px',
 					top: endPoint[1] + 'px',
-					opacity: 1
+					opacity: 1,
 				});
 			});
 		}
@@ -360,7 +360,7 @@ export default WrappedComponent =>
 							height: parseFloat(domNode.offsetHeight),
 							left: finalX,
 							top: finalY,
-							width: parseFloat(domNode.offsetWidth)
+							width: parseFloat(domNode.offsetWidth),
 						});
 
 						finalX = res.x;
@@ -427,7 +427,7 @@ export default WrappedComponent =>
 
 				new CKEDITOR.dom.element(domNode).setStyles({
 					left: xy[0] + 'px',
-					top: xy[1] + 'px'
+					top: xy[1] + 'px',
 				});
 			}
 		}

@@ -110,7 +110,7 @@ const SelectionTest = {
 	image: imageSelectionTest,
 	link: linkSelectionTest,
 	table: tableSelectionTest,
-	text: textSelectionTest
+	text: textSelectionTest,
 };
 
 export default SelectionTest;

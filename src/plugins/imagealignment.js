@@ -14,7 +14,7 @@ import SelectionTest from '../selections/selection-test.js';
 	var IMAGE_ALIGNMENT = {
 		CENTER: 'center',
 		LEFT: 'left',
-		RIGHT: 'right'
+		RIGHT: 'right',
 	};
 
 	/**
@@ -24,7 +24,7 @@ import SelectionTest from '../selections/selection-test.js';
 	var ALIGN_VALUES = [
 		IMAGE_ALIGNMENT.LEFT,
 		IMAGE_ALIGNMENT.RIGHT,
-		IMAGE_ALIGNMENT.CENTER
+		IMAGE_ALIGNMENT.CENTER,
 	];
 
 	/**
@@ -34,16 +34,16 @@ import SelectionTest from '../selections/selection-test.js';
 	var CENTERED_IMAGE_STYLE = [
 		{
 			name: 'display',
-			value: 'block'
+			value: 'block',
 		},
 		{
 			name: 'margin-left',
-			value: 'auto'
+			value: 'auto',
 		},
 		{
 			name: 'margin-right',
-			value: 'auto'
-		}
+			value: 'auto',
+		},
 	];
 
 	/**
@@ -203,7 +203,7 @@ import SelectionTest from '../selections/selection-test.js';
 						if (
 							selectionData &&
 							SelectionTest.image({
-								data: {selectionData: selectionData}
+								data: {selectionData: selectionData},
 							})
 						) {
 							var image = selectionData.element;
@@ -227,12 +227,12 @@ import SelectionTest from '../selections/selection-test.js';
 
 					command.on('refresh', function(event) {
 						var selectionData = {
-							element: event.data.path.lastElement
+							element: event.data.path.lastElement,
 						};
 
 						if (
 							SelectionTest.image({
-								data: {selectionData: selectionData}
+								data: {selectionData: selectionData},
 							})
 						) {
 							var imageAlignment = getImageAlignment(
@@ -268,6 +268,6 @@ import SelectionTest from '../selections/selection-test.js';
 					command.refresh(editor, elementPath);
 				}
 			});
-		}
+		},
 	});
 })();

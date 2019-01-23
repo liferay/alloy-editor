@@ -62,7 +62,7 @@
 		describe('with enableContentEditable set to true', function() {
 			beforeEach(function(done) {
 				initEditor.call(this, done, {
-					enableContentEditable: true
+					enableContentEditable: true,
 				});
 			});
 
@@ -89,7 +89,7 @@
 		describe('with enableContentEditable set to false', function() {
 			beforeEach(function(done) {
 				initEditor.call(this, done, {
-					enableContentEditable: false
+					enableContentEditable: false,
 				});
 			});
 
@@ -212,7 +212,7 @@
 		describe('with readonly set to true', function() {
 			beforeEach(function(done) {
 				initEditor.call(this, done, {
-					readOnly: true
+					readOnly: true,
 				});
 			});
 
@@ -401,7 +401,7 @@
 						done();
 					}.bind(this),
 					{
-						extraPlugins: 'ae_dragresize'
+						extraPlugins: 'ae_dragresize',
 					}
 				);
 			});

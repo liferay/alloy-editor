@@ -8,5 +8,5 @@ const getFolders = function(dir) {
 };
 
 module.exports = {
-	getFolders
+	getFolders,
 };

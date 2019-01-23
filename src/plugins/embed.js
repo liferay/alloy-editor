@@ -63,10 +63,10 @@
 				exec: function(editor, data) {
 					editor.insertHtml(
 						AE_EMBED_WIDGET_TPL.output({
-							url: data.url
+							url: data.url,
 						})
 					);
-				}
+				},
 			});
 
 			// Create a widget to properly handle embed operations
@@ -91,7 +91,7 @@
 						CKEDITOR.tools.jsonp(
 							AE_EMBED_URL_TPL,
 							{
-								url: encodeURIComponent(url)
+								url: encodeURIComponent(url),
 							},
 							function(response) {
 								if (response.html) {
@@ -121,7 +121,7 @@
 						.getSelectedElement();
 
 					var aTagHtml = AE_EMBED_DEFAULT_LINK_TPL.output({
-						url: url
+						url: url,
 					});
 
 					this.editor.insertHtml(aTagHtml);
@@ -141,7 +141,7 @@
 						defaultEmbedWidgetUpcastFn;
 
 					return embedWidgetUpcastFn(element, data);
-				}
+				},
 			});
 
 			// Add a listener to handle paste events and turn links into embed objects
@@ -153,7 +153,7 @@
 						event.stop();
 
 						editor.execCommand('embedUrl', {
-							url: event.data.dataValue
+							url: event.data.dataValue,
 						});
 					}
 				});
@@ -187,8 +187,8 @@
 								nativeEvent: {},
 								selectionData: {
 									element: widgetElement,
-									region: region
-								}
+									region: region,
+								},
 							});
 						}
 					}
@@ -201,6 +201,6 @@
 					return CKEDITOR.FILTER_SKIP_TREE;
 				}
 			});
-		}
+		},
 	});
 })();

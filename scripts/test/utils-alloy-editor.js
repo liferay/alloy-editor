@@ -71,7 +71,7 @@
 
 		config = CKEDITOR.tools.merge(
 			{
-				toolbars: {}
+				toolbars: {},
 			},
 			config
 		);

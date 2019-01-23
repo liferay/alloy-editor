@@ -88,10 +88,10 @@ YUI.add('yuidoc-meta', function(Y) {
 				'WidgetFocusManager',
 				'WidgetInteractionPoint',
 				'WidgetPosition',
-				'ae_uicore'
+				'ae_uicore',
 			],
 			modules: [],
-			allModules: []
-		}
+			allModules: [],
+		},
 	};
 });

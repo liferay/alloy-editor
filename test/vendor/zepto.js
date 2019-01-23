@@ -131,7 +131,7 @@ var Zepto = (function() {
 			'line-height': 1,
 			opacity: 1,
 			'z-index': 1,
-			zoom: 1
+			zoom: 1,
 		},
 		l = /^\s*<(\w+|!)[^>]*>/,
 		h = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
@@ -149,7 +149,7 @@ var Zepto = (function() {
 			tfoot: y,
 			td: x,
 			th: x,
-			'*': a.createElement('div')
+			'*': a.createElement('div'),
 		},
 		w = /complete|loaded|interactive/,
 		E = /^[\w-]*$/,
@@ -169,7 +169,7 @@ var Zepto = (function() {
 			colspan: 'colSpan',
 			usemap: 'useMap',
 			frameborder: 'frameBorder',
-			contenteditable: 'contentEditable'
+			contenteditable: 'contentEditable',
 		},
 		A =
 			Array.isArray ||
@@ -703,7 +703,7 @@ var Zepto = (function() {
 					left: e.left + window.pageXOffset,
 					top: e.top + window.pageYOffset,
 					width: Math.round(e.width),
-					height: Math.round(e.height)
+					height: Math.round(e.height),
 				};
 			},
 			css: function(t, i) {
@@ -874,7 +874,7 @@ var Zepto = (function() {
 						t = t.offsetParent;
 					return t;
 				});
-			}
+			},
 		}),
 		(n.fn.detach = n.fn.remove),
 		['width', 'height'].forEach(function(e) {
@@ -981,7 +981,7 @@ var Zepto = (function() {
 				ns: e
 					.slice(1)
 					.sort()
-					.join(' ')
+					.join(' '),
 			};
 		}
 		function d(t) {
@@ -1116,7 +1116,7 @@ var Zepto = (function() {
 			E = {
 				preventDefault: 'isDefaultPrevented',
 				stopImmediatePropagation: 'isImmediatePropagationStopped',
-				stopPropagation: 'isPropagationStopped'
+				stopPropagation: 'isPropagationStopped',
 			};
 		(t.fn.delegate = function(t, e, n) {
 			return this.on(e, t, n);
@@ -1159,7 +1159,7 @@ var Zepto = (function() {
 										return o && o !== r
 											? ((n = t.extend(S(e), {
 													currentTarget: o,
-													liveFired: r
+													liveFired: r,
 											  })),
 											  (c || u).apply(
 													o,
@@ -1400,12 +1400,12 @@ var Zepto = (function() {
 					json: u,
 					xml: 'application/xml, text/xml',
 					html: f,
-					text: 'text/plain'
+					text: 'text/plain',
 				},
 				crossDomain: !1,
 				timeout: 0,
 				processData: !0,
-				cache: !0
+				cache: !0,
 			}),
 			(t.ajax = function(e) {
 				var a,
@@ -1650,7 +1650,7 @@ var Zepto = (function() {
 				},
 				isZ: function(e) {
 					return 'array' === t.type(e) && '__Z' in e;
-				}
+				},
 			});
 		try {
 			getComputedStyle(void 0);

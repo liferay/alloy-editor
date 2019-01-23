@@ -121,8 +121,8 @@
 								nativeEvent: {},
 								selectionData: {
 									element: widgetElement,
-									region: region
-								}
+									region: region,
+								},
 							});
 						}
 					}
@@ -136,7 +136,7 @@
 				integrate = alignCommandIntegrator(editor);
 
 			for (var value in align) integrate(value);
-		}
+		},
 	});
 
 	// Wiget states (forms) depending on alignment and configuration.
@@ -309,13 +309,13 @@
 			editables: {
 				caption: {
 					selector: 'figcaption',
-					allowedContent: 'br em strong sub sup u s; a[!href,target]'
-				}
+					allowedContent: 'br em strong sub sup u s; a[!href,target]',
+				},
 			},
 
 			parts: {
 				image: 'img',
-				caption: 'figcaption'
+				caption: 'figcaption',
 				// parts#link defined in widget#init
 			},
 
@@ -346,7 +346,7 @@
 					oldData: this.oldData,
 					newData: this.data,
 					deflate: deflate,
-					inflate: inflate
+					inflate: inflate,
 				});
 
 				// Update widget.parts.link since it will not auto-update unless widget
@@ -364,7 +364,7 @@
 					// This internal is required by the editor.
 					'data-cke-saved-src': this.data.src,
 
-					alt: this.data.alt
+					alt: this.data.alt,
 				});
 
 				// If shifting non-captioned -> captioned, remove classes
@@ -400,7 +400,7 @@
 						// Lock ratio is on by default (#10833).
 						lock: this.ready
 							? helpers.checkHasNaturalRatio(image)
-							: true
+							: true,
 					};
 
 				// If we used 'a' in widget#parts definition, it could happen that
@@ -536,7 +536,7 @@
 				var label = (this.data.alt || '') + ' ' + this.pathName;
 
 				return this.editor.lang.widget.label.replace(/%1/, label);
-			}
+			},
 		};
 	}
 
@@ -624,7 +624,7 @@
 								captionedClass: captionedClass,
 								captionPlaceholder:
 									editor.lang.ae_dragresize_ie11
-										.captionPlaceholder
+										.captionPlaceholder,
 							}),
 							doc
 						);
@@ -694,7 +694,7 @@
 
 						if (needsDeflate) shift.element = newEl;
 					}
-				}
+				},
 			};
 
 			function wrapInCentering(editor, element) {
@@ -735,8 +735,8 @@
 			function wrapInLink(img, linkData) {
 				var link = doc.createElement('a', {
 					attributes: {
-						href: linkData.url
-					}
+						href: linkData.url,
+					},
 				});
 
 				link.replace(img);
@@ -843,7 +843,7 @@
 			if (image.$.naturalWidth) {
 				dimensions = {
 					width: image.$.naturalWidth,
-					height: image.$.naturalHeight
+					height: image.$.naturalHeight,
 				};
 			} else {
 				var img = new Image();
@@ -851,7 +851,7 @@
 
 				dimensions = {
 					width: img.width,
-					height: img.height
+					height: img.height,
 				};
 			}
 
@@ -901,7 +901,7 @@
 		getLinkAttributesParser: function() {
 			// #13885
 			return CKEDITOR.plugins.link.parseLinkAttributes;
-		}
+		},
 	};
 
 	function setWrapperAlign(widget, alignClasses) {
@@ -1516,19 +1516,19 @@
 			rules = {
 				// Widget may need <div> or <p> centering wrapper.
 				div: {
-					match: centerWrapperChecker(editor)
+					match: centerWrapperChecker(editor),
 				},
 				p: {
-					match: centerWrapperChecker(editor)
+					match: centerWrapperChecker(editor),
 				},
 				img: {
-					attributes: '!src,alt,width,height'
+					attributes: '!src,alt,width,height',
 				},
 				figure: {
 					classes:
-						'!' + editor.config.ae_dragresize_ie11_captionedClass
+						'!' + editor.config.ae_dragresize_ie11_captionedClass,
 				},
-				figcaption: true
+				figcaption: true,
 			};
 
 		if (alignClasses) {
@@ -1562,16 +1562,18 @@
 		var alignClasses = editor.config.ae_dragresize_ie11_alignClasses,
 			features = {
 				dimension: {
-					requiredContent: 'img[width,height]'
+					requiredContent: 'img[width,height]',
 				},
 				align: {
 					requiredContent:
 						'img' +
-						(alignClasses ? '(' + alignClasses[0] + ')' : '{float}')
+						(alignClasses
+							? '(' + alignClasses[0] + ')'
+							: '{float}'),
 				},
 				caption: {
-					requiredContent: 'figcaption'
-				}
+					requiredContent: 'figcaption',
+				},
 			};
 
 		return features;

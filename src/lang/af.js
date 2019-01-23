@@ -84,5 +84,5 @@ AlloyEditor.Strings = {
 	success: 'Success',
 	table: 'Insert Table',
 	videoPlaybackDisabled: 'Video playback is disabled during edit mode',
-	warning: 'Warning'
+	warning: 'Warning',
 };

@@ -10,7 +10,7 @@
 		tfoot: 1,
 		th: 1,
 		thead: 1,
-		tr: 1
+		tr: 1,
 	};
 
 	/**
@@ -365,7 +365,7 @@
 		 */
 		_createElement: function(name) {
 			return new CKEDITOR.dom.element(name, this._editor.document);
-		}
+		},
 	};
 
 	CKEDITOR.on('instanceReady', function(event) {
@@ -373,7 +373,7 @@
 			Table.HEADING_NONE,
 			Table.HEADING_ROW,
 			Table.HEADING_COL,
-			Table.HEADING_BOTH
+			Table.HEADING_BOTH,
 		];
 
 		var tableUtils = new Table(event.editor);
@@ -382,7 +382,7 @@
 			event.editor.addCommand('tableHeading' + heading, {
 				exec: function(editor) {
 					tableUtils.setHeading(null, heading);
-				}
+				},
 			});
 		});
 	});

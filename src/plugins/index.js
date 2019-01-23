@@ -25,5 +25,5 @@ export {
 	placeholder,
 	selectionkeystrokes,
 	tableresize,
-	tabletools
+	tabletools,
 };

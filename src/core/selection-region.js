@@ -126,7 +126,7 @@
 				bottom: 0,
 				left: 0,
 				right: 0,
-				top: 0
+				top: 0,
 			};
 
 			var bookmarks = selection.createBookmarks();
@@ -173,7 +173,7 @@
 
 			var result = {
 				element: selection.getSelectedElement(),
-				text: selection.getSelectedText()
+				text: selection.getSelectedText(),
 			};
 
 			result.region = this.getSelectionRegion(selection);
@@ -266,7 +266,7 @@
 				left: 0,
 				right: 0,
 				top: 0,
-				width: 0
+				width: 0,
 			};
 
 			var region = {
@@ -275,7 +275,7 @@
 				left: 0,
 				right: 0,
 				top: 0,
-				startRect: defaultRect
+				startRect: defaultRect,
 			};
 
 			if (!nativeSelection) {
@@ -341,7 +341,7 @@
 						left: scrollPos.x + endRect.left,
 						right: scrollPos.x + endRect.right,
 						top: scrollPos.y + endRect.top,
-						width: endRect.width
+						width: endRect.width,
 					};
 
 					region.startRect = {
@@ -350,7 +350,7 @@
 						left: scrollPos.x + startRect.left,
 						right: scrollPos.x + startRect.right,
 						top: scrollPos.y + startRect.top,
-						width: startRect.width
+						width: startRect.width,
 					};
 				}
 			}
@@ -399,7 +399,7 @@
 			}
 
 			return direction;
-		}
+		},
 	};
 
 	CKEDITOR.plugins.add('ae_selectionregion', {
@@ -416,6 +416,6 @@
 					editor[attr] = SelectionRegion.prototype[attr];
 				}
 			}
-		}
+		},
 	});
 })();

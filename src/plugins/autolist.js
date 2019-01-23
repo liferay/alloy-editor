@@ -12,12 +12,12 @@
 	var DEFAULT_CONFIG = [
 		{
 			regex: /^\*$/,
-			type: 'bulletedlist'
+			type: 'bulletedlist',
 		},
 		{
 			regex: /^1\.$/,
-			type: 'numberedlist'
-		}
+			type: 'numberedlist',
+		},
 	];
 
 	/**
@@ -48,7 +48,7 @@
 						this._onKeyDown,
 						this,
 						{
-							editor: editor
+							editor: editor,
 						}
 					);
 				}.bind(this)
@@ -118,7 +118,7 @@
 						bullet: bullet,
 						editor: editor,
 						text: text,
-						type: regexItem.type
+						type: regexItem.type,
 					};
 
 					break;
@@ -158,7 +158,7 @@
 				this,
 				{
 					editor: editor,
-					bullet: listConfig.bullet
+					bullet: listConfig.bullet,
 				},
 				1
 			);
@@ -185,6 +185,6 @@
 					this._createList(listConfig);
 				}
 			}
-		}
+		},
 	});
 })();

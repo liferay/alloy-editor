@@ -10,9 +10,9 @@
 				data: {
 					selectionData: {
 						element: element,
-						region: region
-					}
-				}
+						region: region,
+					},
+				},
 			};
 		};
 

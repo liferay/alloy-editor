@@ -8,7 +8,7 @@ const alloyEditorDir = 'dist/alloy-editor/';
 const preprocessors = {
 	'test/**/*.html': ['html2js'],
 	'+(test|src)/**/*.js*': ['webpack'],
-	'scripts/test/loader-alloy-editor.js': ['webpack']
+	'scripts/test/loader-alloy-editor.js': ['webpack'],
 };
 
 if (!(argv.debug || argv.d)) {
@@ -20,7 +20,7 @@ const filesToLoad = [
 	{
 		pattern: path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
 		included: true,
-		watched: false
+		watched: false,
 	},
 
 	'test/vendor/zepto.js',
@@ -30,32 +30,32 @@ const filesToLoad = [
 	{
 		pattern: path.join(alloyEditorDir, 'ckeditor.js'),
 		included: true,
-		watched: false
+		watched: false,
 	},
 	{
 		pattern: path.join(alloyEditorDir, 'styles.js'),
 		included: true,
-		watched: false
+		watched: false,
 	},
 	{
 		pattern: path.join(alloyEditorDir, 'config.js'),
 		included: true,
-		watched: false
+		watched: false,
 	},
 	{
 		pattern: path.join(alloyEditorDir, 'skins/moono/*.css'),
 		included: true,
-		watched: false
+		watched: false,
 	},
 	{
 		pattern: path.join(alloyEditorDir, 'lang/*.js'),
 		included: true,
-		watched: false
+		watched: false,
 	},
 	{
 		pattern: 'test/ui/test/plugins/test_*/plugin.js',
 		included: true,
-		watched: false
+		watched: false,
 	},
 
 	/* bender requires CKEDITOR, should be after ckeditor.js */
@@ -67,39 +67,39 @@ const filesToLoad = [
 
 	/* Fixtures */
 	'test/core/test/fixtures/**/*',
-	'test/ui/test/fixtures/**/*'
+	'test/ui/test/fixtures/**/*',
 ];
 
 srcFiles.forEach(function(file) {
 	filesToLoad.push({
 		pattern: path.join('src/', file),
 		included: true,
-		watched: false
+		watched: false,
 	});
 });
 
 filesToLoad.push({
 	pattern: 'test/core/test/*.js*',
 	included: true,
-	watched: false
+	watched: false,
 });
 
 filesToLoad.push({
 	pattern: 'test/plugins/test/*.js*',
 	included: true,
-	watched: false
+	watched: false,
 });
 
 filesToLoad.push({
 	pattern: 'test/ui/test/*.js*',
 	included: true,
-	watched: false
+	watched: false,
 });
 
 filesToLoad.push({
 	pattern: 'src/lang/en.js',
 	included: true,
-	watched: false
+	watched: false,
 });
 
 module.exports = {
@@ -130,16 +130,16 @@ module.exports = {
 					test: /\.(js|jsx)$/,
 					exclude: /(node_modules)/,
 					use: {
-						loader: 'babel-loader'
-					}
-				}
-			]
-		}
+						loader: 'babel-loader',
+					},
+				},
+			],
+		},
 	},
 
 	webpackMiddleware: {
 		logLevel: 'error',
-		stats: 'errors-only'
+		stats: 'errors-only',
 	},
 
 	// web server port
@@ -155,5 +155,5 @@ module.exports = {
 	// enable / disable watching file and executing tests whenever any file changes
 	autoWatch: false,
 
-	singleRun: true
+	singleRun: true,
 };

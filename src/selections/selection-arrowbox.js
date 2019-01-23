@@ -3,7 +3,7 @@ var tableSelectionGetArrowBoxClasses = function() {
 };
 
 const SelectionGetArrowBoxClasses = {
-	table: tableSelectionGetArrowBoxClasses
+	table: tableSelectionGetArrowBoxClasses,
 };
 
 export default SelectionGetArrowBoxClasses;

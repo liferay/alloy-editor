@@ -15,7 +15,7 @@
 		before(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'undo,ae_autolist,undo',
-				allowedContent: 'p ol ul li'
+				allowedContent: 'p ol ul li',
 			});
 		});
 
@@ -29,7 +29,7 @@
 			testList.call(this, {
 				expected: '<ol><li>&nbsp;</li></ol>',
 				html: '<p>1.{}</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 		});
 
@@ -37,7 +37,7 @@
 			testList.call(this, {
 				expected: '<ol><li>first line</li></ol>',
 				html: '<p>1.{}first line</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 		});
 
@@ -45,7 +45,7 @@
 			testList.call(this, {
 				expected: '<ul><li>&nbsp;</li></ul>',
 				html: '<p>*{}</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 		});
 
@@ -53,7 +53,7 @@
 			testList.call(this, {
 				expected: '<ul><li>first line</li></ul>',
 				html: '<p>*{}first line</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 		});
 
@@ -61,7 +61,7 @@
 			testList.call(this, {
 				expected: '<p>1. no list</p>',
 				html: '<p>1. {}no list</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 		});
 
@@ -69,7 +69,7 @@
 			testList.call(this, {
 				expected: '<p>* not create list</p>',
 				html: '<p>* not create{} list</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 		});
 
@@ -77,11 +77,11 @@
 			testList.call(this, {
 				expected: '<ul><li>&nbsp;</li></ul>',
 				html: '<p>*{}</p>',
-				keyCode: KEY_SPACE
+				keyCode: KEY_SPACE,
 			});
 
 			happen.keydown(this._editable, {
-				keyCode: KEY_BACK
+				keyCode: KEY_BACK,
 			});
 
 			var data = getData.call(this);
@@ -93,7 +93,7 @@
 			bender.tools.selection.setWithHtml(this.nativeEditor, config.html);
 
 			happen.keydown(this._editable, {
-				keyCode: config.keyCode
+				keyCode: config.keyCode,
 			});
 
 			var data = getData.call(this);
@@ -103,7 +103,7 @@
 		function getData() {
 			return bender.tools.getData(this.nativeEditor, {
 				compatHtml: true,
-				fixHtml: true
+				fixHtml: true,
 			});
 		}
 	});

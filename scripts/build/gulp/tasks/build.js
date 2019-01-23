@@ -61,7 +61,7 @@ gulp.task('build:clean', function() {
 		[
 			path.join(Constants.distFolder, '**'),
 			`!${Constants.distFolder}`,
-			`!${path.join(Constants.distFolder, '.gitignore')}`
+			`!${path.join(Constants.distFolder, '.gitignore')}`,
 		],
 		{force: true}
 	);
@@ -84,7 +84,7 @@ gulp.task('build:strip', function() {
 		[
 			path.join(Constants.editorDistFolder, 'adapters'),
 			path.join(Constants.editorDistFolder, 'CHANGES.md'),
-			path.join(Constants.editorDistFolder, 'samples')
+			path.join(Constants.editorDistFolder, 'samples'),
 		],
 		{force: true}
 	);

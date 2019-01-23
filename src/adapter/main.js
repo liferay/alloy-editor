@@ -174,7 +174,7 @@ const loadLanguageResources = function(callback) {
 			'uk',
 			'vi',
 			'zh-cn',
-			'zh'
+			'zh',
 		];
 
 		var userLanguage = navigator.language || navigator.userLanguage || 'en';
@@ -307,7 +307,7 @@ const registerBridgeButton = function(buttonName, pluginName) {
  * @memberof AlloyEditor
  */
 const OOP = {
-	extend
+	extend,
 };
 
 export {
@@ -327,5 +327,5 @@ export {
 	Selections,
 	SelectionSetPosition,
 	SelectionTest,
-	Toolbars
+	Toolbars,
 };

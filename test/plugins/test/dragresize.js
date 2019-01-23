@@ -17,7 +17,7 @@
 
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
-					extraPlugins: 'ae_dragresize'
+					extraPlugins: 'ae_dragresize',
 				});
 			});
 
@@ -76,7 +76,7 @@
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize',
-					imageScaleResize: 'scale'
+					imageScaleResize: 'scale',
 				});
 			});
 
@@ -108,7 +108,7 @@
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize',
-					imageScaleResize: 'width'
+					imageScaleResize: 'width',
 				});
 			});
 
@@ -140,7 +140,7 @@
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize',
-					imageScaleResize: 'height'
+					imageScaleResize: 'height',
 				});
 			});
 

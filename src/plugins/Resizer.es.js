@@ -21,7 +21,7 @@ const POSITION_ELEMENT_FN = {
 	},
 	tr(handle, left, top, box) {
 		positionElement(handle, box.width - 4 + left, -3 + top);
-	}
+	},
 };
 
 const positionElement = (el, left, top) => {
@@ -36,7 +36,7 @@ const getBoundingBox = (window, el) => {
 		height: rect.height,
 		left: rect.left + window.pageXOffset,
 		top: rect.top + window.pageYOffset,
-		width: rect.width
+		width: rect.width,
 	};
 };
 
@@ -237,7 +237,7 @@ class Resizer {
 
 		this.result = {
 			height: box.height,
-			width: box.width
+			width: box.width,
 		};
 
 		this.preview.style.display = 'none';
@@ -248,7 +248,7 @@ class Resizer {
 			height: this.box.height,
 			left: 0,
 			top: 0,
-			width: this.box.width
+			width: this.box.width,
 		};
 
 		if (!data) {

@@ -724,7 +724,7 @@
 								? CKEDITOR.TRISTATE_OFF
 								: CKEDITOR.TRISTATE_DISABLED
 						);
-					}
+					},
 				});
 			}
 			function addCmd(name, def) {
@@ -745,7 +745,7 @@
 					exec: function(editor) {
 						var selection = editor.getSelection();
 						placeCursorInCell(deleteRows(selection));
-					}
+					},
 				})
 			);
 
@@ -756,7 +756,7 @@
 					exec: function(editor) {
 						var selection = editor.getSelection();
 						insertRow(selection, true);
-					}
+					},
 				})
 			);
 
@@ -767,7 +767,7 @@
 					exec: function(editor) {
 						var selection = editor.getSelection();
 						insertRow(selection);
-					}
+					},
 				})
 			);
 
@@ -779,7 +779,7 @@
 						var selection = editor.getSelection();
 						var element = deleteColumns(selection);
 						element && placeCursorInCell(element, true);
-					}
+					},
 				})
 			);
 
@@ -790,7 +790,7 @@
 					exec: function(editor) {
 						var selection = editor.getSelection();
 						insertColumn(selection, true);
-					}
+					},
 				})
 			);
 
@@ -801,7 +801,7 @@
 					exec: function(editor) {
 						var selection = editor.getSelection();
 						insertColumn(selection);
-					}
+					},
 				})
 			);
 
@@ -812,7 +812,7 @@
 					exec: function(editor) {
 						var selection = editor.getSelection();
 						deleteCells(selection);
-					}
+					},
 				})
 			);
 
@@ -826,7 +826,7 @@
 							mergeCells(editor.getSelection()),
 							true
 						);
-					}
+					},
 				})
 			);
 
@@ -840,7 +840,7 @@
 							mergeCells(editor.getSelection(), 'right'),
 							true
 						);
-					}
+					},
 				})
 			);
 
@@ -854,7 +854,7 @@
 							mergeCells(editor.getSelection(), 'down'),
 							true
 						);
-					}
+					},
 				})
 			);
 
@@ -867,7 +867,7 @@
 						placeCursorInCell(
 							verticalSplitCell(editor.getSelection())
 						);
-					}
+					},
 				})
 			);
 
@@ -880,7 +880,7 @@
 						placeCursorInCell(
 							horizontalSplitCell(editor.getSelection())
 						);
-					}
+					},
 				})
 			);
 
@@ -891,7 +891,7 @@
 					exec: function(editor) {
 						var selection = editor.getSelection();
 						insertCell(selection, true);
-					}
+					},
 				})
 			);
 
@@ -902,12 +902,12 @@
 					exec: function(editor) {
 						var selection = editor.getSelection();
 						insertCell(selection);
-					}
+					},
 				})
 			);
 		},
 
-		getSelectedCells: getSelectedCells
+		getSelectedCells: getSelectedCells,
 	});
 })();
 

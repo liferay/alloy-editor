@@ -6,7 +6,7 @@ class DragEvent {
 		this.events = {
 			keydown: this.keydown.bind(this),
 			mousemove: this.mousemove.bind(this),
-			mouseup: this.mouseup.bind(this)
+			mouseup: this.mouseup.bind(this),
 		};
 	}
 
@@ -20,7 +20,7 @@ class DragEvent {
 
 		this.startPos = {
 			x: event.clientX,
-			y: event.clientY
+			y: event.clientY,
 		};
 
 		this.update(event);
@@ -43,18 +43,18 @@ class DragEvent {
 	update(event) {
 		this.currentPos = {
 			x: event.clientX,
-			y: event.clientY
+			y: event.clientY,
 		};
 
 		this.delta = {
 			x: event.clientX - this.startPos.x,
-			y: event.clientY - this.startPos.y
+			y: event.clientY - this.startPos.y,
 		};
 
 		this.keys = {
 			alt: event.altKey,
 			ctrl: event.ctrlKey,
-			shift: event.shiftKey
+			shift: event.shiftKey,
 		};
 	}
 

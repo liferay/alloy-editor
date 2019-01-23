@@ -48,7 +48,7 @@
 						this._onPaste,
 						this,
 						{
-							editor: editor
+							editor: editor,
 						}
 					);
 				}.bind(this)
@@ -77,7 +77,7 @@
 
 					reader.onload = function(event) {
 						var result = editor.fire('beforeImageAdd', {
-							imageFiles: imageFile
+							imageFiles: imageFile,
 						});
 
 						if (!!result) {
@@ -89,7 +89,7 @@
 
 							var imageData = {
 								el: el,
-								file: imageFile
+								file: imageFile,
 							};
 
 							editor.fire('imageAdd', imageData);
@@ -99,6 +99,6 @@
 					reader.readAsDataURL(imageFile);
 				}
 			}
-		}
+		},
 	});
 })();

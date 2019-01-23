@@ -171,7 +171,7 @@ extend(
 		 */
 		_addReadOnlyLinkClickListener: function(editor) {
 			editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
-				editor: editor
+				editor: editor,
 			});
 		},
 
@@ -338,7 +338,7 @@ extend(
 		 */
 		_validateToolbars: function(value) {
 			return Lang.isObject(value) || Lang.isNull(value);
-		}
+		},
 	},
 	{
 		ATTRS: {
@@ -357,7 +357,7 @@ extend(
 			allowedContent: {
 				validator: '_validateAllowedContent',
 				value: true,
-				writeOnce: true
+				writeOnce: true,
 			},
 
 			/**
@@ -380,8 +380,8 @@ extend(
                          &show_text=0&width=${EMBED_VIDEO_WIDTH}&height=${EMBED_VIDEO_HEIGHT}" scrolling="no"
                          style="border:none;overflow:hidden" width="${EMBED_VIDEO_WIDTH}}"></iframe>`,
 						urlSchemes: [
-							'(https?:\\/\\/(?:www\\.)?facebook.com\\/\\S*\\/videos\\/\\S*)'
-						]
+							'(https?:\\/\\/(?:www\\.)?facebook.com\\/\\S*\\/videos\\/\\S*)',
+						],
 					},
 					{
 						id: 'twitch',
@@ -390,8 +390,8 @@ extend(
                          src="https://player.twitch.tv/?autoplay=false&video={embedId}"
                          scrolling="no" width="${EMBED_VIDEO_WIDTH}"></iframe>`,
 						urlSchemes: [
-							'https?:\\/\\/(?:www\\.)?twitch.tv\\/videos\\/(\\S*)$'
-						]
+							'https?:\\/\\/(?:www\\.)?twitch.tv\\/videos\\/(\\S*)$',
+						],
 					},
 					{
 						id: 'vimeo',
@@ -402,8 +402,8 @@ extend(
 							'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/album\\/.*\\/video\\/(\\S*)',
 							'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/channels\\/.*\\/(\\S*)',
 							'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/groups\\/.*\\/videos\\/(\\S*)',
-							'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/(\\S*)$'
-						]
+							'https?:\\/\\/(?:www\\.)?vimeo\\.com\\/(\\S*)$',
+						],
 					},
 					{
 						id: 'youtube',
@@ -412,10 +412,10 @@ extend(
                          src="https://www.youtube.com/embed/{embedId}?rel=0"
                          width="${EMBED_VIDEO_WIDTH}"></iframe>`,
 						urlSchemes: [
-							'https?:\\/\\/(?:www\\.)?youtube.com\\/watch\\?v=(\\S*)$'
-						]
-					}
-				]
+							'https?:\\/\\/(?:www\\.)?youtube.com\\/watch\\?v=(\\S*)$',
+						],
+					},
+				],
 			},
 
 			/**
@@ -432,7 +432,7 @@ extend(
 			enableContentEditable: {
 				validator: Lang.isBoolean,
 				value: true,
-				writeOnce: true
+				writeOnce: true,
 			},
 
 			/**
@@ -445,7 +445,7 @@ extend(
 			 */
 			eventsDelay: {
 				validator: Lang.isNumber,
-				value: 100
+				value: 100,
 			},
 
 			/**
@@ -465,7 +465,7 @@ extend(
 					'ae_uicore,ae_selectionregion,ae_selectionkeystrokes,ae_imagealignment,ae_addimages,ae_placeholder,' +
 					'ae_tabletools,ae_tableresize,ae_autolink,ae_embed,ae_autolist,ae_dragresize,' +
 					'ae_uibridge,ae_richcombobridge,ae_panelmenubuttonbridge,ae_menubridge,ae_menubuttonbridge,ae_buttonbridge,font,colorbutton',
-				writeOnce: true
+				writeOnce: true,
 			},
 
 			/**
@@ -479,7 +479,7 @@ extend(
 			 */
 			mode: {
 				validator: Lang.isString,
-				value: 'simple'
+				value: 'simple',
 			},
 
 			/**
@@ -493,7 +493,7 @@ extend(
 			 */
 			nativeEditor: {
 				getter: '_getNativeEditor',
-				readOnly: true
+				readOnly: true,
 			},
 
 			/**
@@ -511,7 +511,7 @@ extend(
 			placeholderClass: {
 				validator: Lang.isString,
 				value: 'ae-placeholder',
-				writeOnce: true
+				writeOnce: true,
 			},
 
 			/**
@@ -535,7 +535,7 @@ extend(
 			removePlugins: {
 				validator: Lang.isString,
 				value: 'contextmenu,toolbar,elementspath,resize,liststyle,link',
-				writeOnce: true
+				writeOnce: true,
 			},
 
 			/**
@@ -554,13 +554,13 @@ extend(
 				value: [
 					{
 						keys: CKEDITOR.CTRL + 76 /*L*/,
-						selection: 'link'
+						selection: 'link',
 					},
 					{
 						keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/,
-						selection: 'embed'
-					}
-				]
+						selection: 'embed',
+					},
+				],
 			},
 
 			/**
@@ -575,7 +575,7 @@ extend(
 			spritemap: {
 				validator: Lang.isString,
 				value: 'alloy-editor/assets/icons/icons.svg',
-				writeOnce: true
+				writeOnce: true,
 			},
 
 			/**
@@ -589,7 +589,7 @@ extend(
 			 */
 			srcNode: {
 				setter: '_toElement',
-				writeOnce: true
+				writeOnce: true,
 			},
 
 			/**
@@ -604,13 +604,13 @@ extend(
 				value: {
 					add: {
 						buttons: ['image', 'embed', 'camera', 'hline', 'table'],
-						tabIndex: 2
+						tabIndex: 2,
 					},
 					styles: {
 						selections: Selections,
-						tabIndex: 1
-					}
-				}
+						tabIndex: 1,
+					},
+				},
 			},
 
 			/**
@@ -624,9 +624,9 @@ extend(
 			 */
 			uiNode: {
 				setter: '_toElement',
-				writeOnce: true
-			}
-		}
+				writeOnce: true,
+			},
+		},
 	}
 );
 

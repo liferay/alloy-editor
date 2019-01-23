@@ -57,7 +57,7 @@
 						this._onDragEnter,
 						this,
 						{
-							editor: editor
+							editor: editor,
 						}
 					);
 
@@ -67,7 +67,7 @@
 						this._onDragOver,
 						this,
 						{
-							editor: editor
+							editor: editor,
 						}
 					);
 
@@ -77,7 +77,7 @@
 						this._onDragDrop,
 						this,
 						{
-							editor: editor
+							editor: editor,
 						}
 					);
 
@@ -87,7 +87,7 @@
 						this._onPaste,
 						this,
 						{
-							editor: editor
+							editor: editor,
 						}
 					);
 				}.bind(this)
@@ -121,7 +121,7 @@
 			}
 
 			var result = editor.fire('beforeImageAdd', {
-				imageFiles: imageFiles
+				imageFiles: imageFiles,
 			});
 
 			if (!!result) {
@@ -264,13 +264,13 @@
 
 				var imageData = {
 					el: el,
-					file: file
+					file: file,
 				};
 
 				editor.fire('imageAdd', imageData);
 			});
 
 			reader.readAsDataURL(file);
-		}
+		},
 	});
 })();

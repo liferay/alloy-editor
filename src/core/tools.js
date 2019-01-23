@@ -66,7 +66,7 @@
 
 		return {
 			cancel: cleanUp,
-			id: callbackKey
+			id: callbackKey,
 		};
 	};
 
