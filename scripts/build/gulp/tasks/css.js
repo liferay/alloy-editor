@@ -19,7 +19,6 @@ function errorHandler(error) {
 
 gulp.task('build-css', function(callback) {
 	runSequence(
-		'generate-fonts',
 		'sass2css',
 		'join-css',
 		'clean-fonts',
