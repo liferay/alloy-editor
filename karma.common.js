@@ -22,22 +22,6 @@ const filesToLoad = [
 		included: true,
 		watched: false
 	},
-	{
-		pattern: path.join(
-			alloyEditorDir,
-			'assets/fonts/alloyeditor-ocean.woff'
-		),
-		included: false,
-		watched: false
-	},
-	{
-		pattern: path.join(
-			alloyEditorDir,
-			'assets/fonts/alloyeditor-ocean.ttf'
-		),
-		included: false,
-		watched: false
-	},
 
 	'test/vendor/zepto.js',
 	'test/vendor/happen.js',
