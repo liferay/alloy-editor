@@ -21,7 +21,6 @@ gulp.task('build-css', function(callback) {
 	runSequence(
 		'sass2css',
 		'join-css',
-		'clean-fonts',
 		callback
 	);
 });
@@ -84,8 +83,3 @@ gulp.task('minimize-css', function() {
 		.pipe(gulp.dest(path.join(Constants.editorDistFolder, 'assets')));
 });
 
-gulp.task('clean-fonts', function() {
-	return del([path.join(Constants.editorDistFolder, 'assets/css')], {
-		force: true
-	});
-});
