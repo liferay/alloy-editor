@@ -2,8 +2,8 @@ const Constants = require('../constants');
 const gulp = require('gulp');
 const path = require('path');
 
-gulp.task('copy-svgs', function() {
-	var iconsPath = path.join(
+gulp.task('icons:copy', function copyIcons() {
+	const iconsPath = path.join(
 		Constants.rootDir,
 		'node_modules',
 		'clay-css',

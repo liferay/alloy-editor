@@ -15,12 +15,6 @@ const hashSources = [
 
 const hashFile = path.join('./', '_hash');
 
-function errorHandler(error) {
-	console.log(error.toString());
-
-	this.emit('end');
-}
-
 /**
  * Normalizes the different string values that can be stored in a language template.
  * @param  {String} value The stored value
@@ -37,7 +31,7 @@ const getStringLangValue = function(value, lang) {
 	return eval(value);
 };
 
-var updateLangFiles = function(callback) {
+function updateLangFiles(callback) {
 	// Mock the CKEDITOR.lang object to walk the ckeditor js lang files
 	global.CKEDITOR = {
 		lang: {}
@@ -48,19 +42,22 @@ var updateLangFiles = function(callback) {
 		Strings: {}
 	};
 
-	var langWalker = walk.walk(Constants.srcLangDir);
-	langWalker.on('end', callback);
+	const langWalker = walk.walk(Constants.srcLangDir);
+	langWalker.on('end', () => callback());
 
-	var defaultTranslations = require(path.join(Constants.langDir, 'en.json'));
+	const defaultTranslations = require(path.join(
+		Constants.langDir,
+		'en.json'
+	));
 
 	// Iterate over every existing lang file inside src/lang
-	langWalker.on('file', function(root, fileStats, next) {
-		var lang = path.basename(fileStats.name, '.js');
+	langWalker.on('file', (root, fileStats, next) => {
+		const lang = path.basename(fileStats.name, '.js');
 
 		// Load the matching CKEDITOR lang file with all the strings
 		require(path.join(Constants.rootDir, 'lib', 'lang', fileStats.name));
 
-		Object.keys(Constants.ckeditorLangContent).forEach(function(key) {
+		Object.keys(Constants.ckeditorLangContent).forEach(key => {
 			AlloyEditor.Strings[key] = getStringLangValue(
 				Constants.ckeditorLangContent[key],
 				lang
@@ -68,7 +65,7 @@ var updateLangFiles = function(callback) {
 		});
 
 		// Try to load translations for "lang"
-		var translations;
+		let translations;
 		try {
 			translations = require(path.join(
 				Constants.langDir,
@@ -79,11 +76,11 @@ var updateLangFiles = function(callback) {
 		}
 
 		if (translations) {
-			Object.keys(defaultTranslations).forEach(function(key) {
+			Object.keys(defaultTranslations).forEach(key => {
 				AlloyEditor.Strings[key] = defaultTranslations[key];
 			});
 
-			Object.keys(translations).forEach(function(key) {
+			Object.keys(translations).forEach(key => {
 				AlloyEditor.Strings[key] = translations[key];
 			});
 		}
@@ -94,63 +91,55 @@ var updateLangFiles = function(callback) {
 			'AlloyEditor.Strings = ' +
 				JSON.stringify(AlloyEditor.Strings) +
 				';',
-			function(err) {
+			err => {
 				if (err) {
-					errorHandler(err);
+					return callback(err);
 				}
-
 				next();
 			}
 		);
 	});
-};
+}
 
 function createHash(callback) {
-	hashFiles({files: hashSources}, function(err, hash) {
+	hashFiles({files: hashSources}, (err, hash) => {
 		if (err) {
-			return callback(err, null);
+			return callback(err);
 		}
 
-		fs.writeFile(hashFile, hash, function(err) {
+		fs.writeFile(hashFile, hash, err => {
 			if (err) {
-				return callback(err, null);
+				return callback(err);
 			}
-			callback(null, hash);
+			callback();
 		});
 	});
 }
 
 function compareHash(originalHash, callback) {
-	hashFiles({files: hashSources}, function(err, hash) {
+	hashFiles({files: hashSources}, (err, hash) => {
 		if (err) {
-			return callback(err, false);
+			return callback(err);
 		}
 
-		var changed = originalHash !== hash;
+		const changed = originalHash !== hash;
 		callback(changed);
 	});
 }
 
-gulp.task('build-languages', function(callback) {
-	var self = this;
-	fs.exists(hashFile, function(exists) {
+function buildLanguages(callback) {
+	fs.exists(hashFile, exists => {
 		if (!exists) {
-			updateLangFiles(function() {
-				createHash(callback);
-			});
+			updateLangFiles(() => createHash(callback));
 		} else {
-			fs.readFile(hashFile, function(err, data) {
+			fs.readFile(hashFile, (err, data) => {
 				if (err) {
-					console.error(err);
-					self.emit('end');
-					return;
+					return callback(err);
 				}
 
-				compareHash(data.toString(), function(changed) {
+				compareHash(data.toString(), changed => {
 					if (changed) {
-						updateLangFiles(function() {
-							createHash(callback);
-						});
+						updateLangFiles(() => createHash(callback));
 					} else {
 						callback();
 					}
@@ -158,9 +147,9 @@ gulp.task('build-languages', function(callback) {
 			});
 		}
 	});
-});
+}
 
-gulp.task('copy-languages', ['build-languages'], function() {
+function copyLanguages() {
 	return gulp
 		.src(path.join(Constants.rootDir, 'src', 'lang', '/**'))
 		.pipe(
@@ -168,4 +157,6 @@ gulp.task('copy-languages', ['build-languages'], function() {
 				path.join(Constants.editorDistFolder, 'lang', 'alloy-editor')
 			)
 		);
-});
+}
+
+gulp.task('languages:copy', gulp.series(buildLanguages, copyLanguages));

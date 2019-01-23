@@ -4,14 +4,23 @@ const del = require('del');
 const fs = require('fs');
 const gulp = require('gulp');
 const path = require('path');
-const runSequence = require('run-sequence');
 const webpack = require('webpack');
 const Constants = require('../constants');
 
-runSequence.options.ignoreUndefinedTasks = true;
+require('./css');
+require('./icons');
+require('./languages');
 
 function ifRelease(task) {
-	return !!argv.release && task;
+	if (argv.release) {
+		return task;
+	} else {
+		const skipTask = callback => {
+			callback();
+		};
+		skipTask.displayName = `${task}:skipping:this-is-not-a-release-build`;
+		return skipTask;
+	}
 }
 
 function createBundle(configName, callback) {
@@ -37,54 +46,40 @@ function createBundle(configName, callback) {
 	});
 }
 
-gulp.task('webpack.prod', callback => {
+gulp.task('build:webpack.prod', callback => {
 	createBundle('webpack.prod', callback);
 });
 
-gulp.task('webpack.dev', callback => {
+gulp.task('build:webpack.dev', callback => {
 	createBundle('webpack.dev', callback);
 });
 
-gulp.task('build:assets', function(callback) {
-	runSequence(
-		'clean-dist',
-		['build-css', 'copy-ckeditor', 'copy-languages', 'copy-svgs'],
-		['copy-demo', 'post-cleanup', ifRelease('minimize-css')],
-		callback
-	);
-});
-
-gulp.task('build', function(callback) {
-	runSequence(
-		'build:assets',
-		[ifRelease('webpack.prod'), 'webpack.dev'],
-		callback
-	);
-});
-
-gulp.task('clean-dist', function() {
+gulp.task('build:clean', function() {
 	// Remove everything inside "dist" recursively, except "dist"
 	// itself, and its .gitignore.
-	return del([
-		path.join(Constants.distFolder, '**'),
-		`!${Constants.distFolder}`,
-		`!${path.join(Constants.distFolder, '.gitignore')}`
-	], {force: true});
+	return del(
+		[
+			path.join(Constants.distFolder, '**'),
+			`!${Constants.distFolder}`,
+			`!${path.join(Constants.distFolder, '.gitignore')}`
+		],
+		{force: true}
+	);
 });
 
-gulp.task('copy-demo', function() {
+gulp.task('build:demo', function() {
 	return gulp
 		.src(path.join(__dirname, '..', 'demo', 'index.html'))
 		.pipe(gulp.dest(Constants.distFolder));
 });
 
-gulp.task('copy-ckeditor', function() {
+gulp.task('build:ckeditor', function() {
 	return gulp
 		.src(path.join(Constants.rootDir, 'lib', 'ckeditor', '/**'))
 		.pipe(gulp.dest(Constants.editorDistFolder));
 });
 
-gulp.task('post-cleanup', function() {
+gulp.task('build:strip', function() {
 	return del(
 		[
 			path.join(Constants.editorDistFolder, 'adapters'),
@@ -94,3 +89,25 @@ gulp.task('post-cleanup', function() {
 		{force: true}
 	);
 });
+
+gulp.task(
+	'build:assets',
+	gulp.series(
+		gulp.parallel('build:clean'),
+		gulp.parallel(
+			'css:build',
+			'build:ckeditor',
+			'languages:copy',
+			'icons:copy'
+		),
+		gulp.parallel('build:demo', 'build:strip', ifRelease('css:minimize'))
+	)
+);
+
+gulp.task(
+	'build',
+	gulp.series(
+		gulp.parallel('build:assets'),
+		gulp.parallel(ifRelease('build:webpack.prod'), 'build:webpack.dev')
+	)
+);
