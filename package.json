@@ -37,7 +37,6 @@
     "karma-webpack": "^3.0.0",
     "mocha": "5.2.0",
     "prettier": "1.15.3",
-    "require-dir": "^1.0.0",
     "run-sequence": "^2.2.1",
     "sinon": "1.15.4",
     "terser-webpack-plugin": "^1.2.1",
