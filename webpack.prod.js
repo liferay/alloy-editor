@@ -33,7 +33,7 @@ const config = {
 						reduce_vars: false,
 						switches: false,
 						toplevel: false,
-						typeofs: false,
+						typeofs: false
 					},
 					output: {
 						comments: false

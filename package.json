@@ -59,6 +59,7 @@
     "dev": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
     "format": "prettier --write -- '*.js' '{api,scripts,src,test}/**/*.js'",
     "prettier": "prettier --write -- '*.js' '{api,scripts,src,test}/**/*.js'",
+    "prepublishOnly": "npm run checkFormat && npm run test",
     "start": "webpack-dev-server --config webpack.dev.js",
     "test": "karma start karma.js",
     "testSaucelabs": "karma start karma-saucelabs.js"
