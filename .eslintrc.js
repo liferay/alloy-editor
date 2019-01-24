@@ -16,4 +16,7 @@ module.exports = {
 	rules: {
 		'no-for-of-loops/no-for-of-loops': 2,
 	},
+	globals: {
+		CKEDITOR: true,
+	},
 };
