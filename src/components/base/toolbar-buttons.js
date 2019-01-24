@@ -45,16 +45,16 @@ export default WrappedComponent =>
 		 * @return {Array} An Array which contains the buttons that should be rendered.
 		 */
 		getToolbarButtons(buttons, additionalProps) {
-			var buttonProps = {};
+			let buttonProps = {};
 
-			var nativeEditor = this.props.editor.get('nativeEditor');
-			var buttonCfg = nativeEditor.config.buttonCfg || {};
+			let nativeEditor = this.props.editor.get('nativeEditor');
+			let buttonCfg = nativeEditor.config.buttonCfg || {};
 
 			if (Lang.isFunction(buttons)) {
 				buttons = buttons.call(this) || [];
 			}
 
-			var toolbarButtons = this.filterExclusive(
+			let toolbarButtons = this.filterExclusive(
 				buttons
 					.filter(function(button) {
 						return (
@@ -80,7 +80,7 @@ export default WrappedComponent =>
 						return button;
 					})
 			).map(function(button, index) {
-				var props = this.mergeExclusiveProps(
+				let props = this.mergeExclusiveProps(
 					{
 						editor: this.props.editor,
 						key:

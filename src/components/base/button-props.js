@@ -20,9 +20,9 @@ export default WrappedComponent =>
 		mergeButtonCfgProps(props) {
 			props = props || this.props;
 
-			var nativeEditor = this.props.editor.get('nativeEditor');
-			var buttonCfg = nativeEditor.config.buttonCfg || {};
-			var result = CKEDITOR.tools.merge(props, buttonCfg['linkEdit']);
+			let nativeEditor = this.props.editor.get('nativeEditor');
+			let buttonCfg = nativeEditor.config.buttonCfg || {};
+			let result = CKEDITOR.tools.merge(props, buttonCfg['linkEdit']);
 
 			return result;
 		}

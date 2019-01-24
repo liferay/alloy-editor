@@ -12,9 +12,9 @@
 	 * @property
 	 * @type {string}
 	 */
-	var brFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
+	let brFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
 
-	var enterModeEmptyValue = {
+	let enterModeEmptyValue = {
 		1: ['<p>' + brFiller + '</p>'],
 		2: ['', ' ', brFiller],
 		3: ['<div>' + brFiller + '</div>'],
@@ -59,13 +59,13 @@
 		 * @param {CKEDITOR.dom.event} editor event, fired from CKEditor
 		 */
 		_checkEmptyData: function(event) {
-			var editor = event.editor;
+			let editor = event.editor;
 
-			var editableNode = editor.editable();
+			let editableNode = editor.editable();
 
-			var innerHtml = editableNode.$.innerHTML.trim();
+			let innerHtml = editableNode.$.innerHTML.trim();
 
-			var isEmpty = enterModeEmptyValue[editor.config.enterMode].some(
+			let isEmpty = enterModeEmptyValue[editor.config.enterMode].some(
 				function(element) {
 					return innerHtml === element;
 				}
@@ -86,9 +86,9 @@
              + @param {CKEDITOR.dom.event} editor event, fired from CKEditor
              */
 		_removePlaceholderClass: function(event) {
-			var editor = event.editor;
+			let editor = event.editor;
 
-			var editorNode = new CKEDITOR.dom.element(editor.element.$);
+			let editorNode = new CKEDITOR.dom.element(editor.element.$);
 
 			editorNode.removeClass(editor.config.placeholderClass);
 		},

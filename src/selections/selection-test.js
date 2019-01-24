@@ -1,4 +1,4 @@
-var _isRangeAtElementEnd = function(range, element) {
+let _isRangeAtElementEnd = function(range, element) {
 	// Finding if a range is at the end of an element is somewhat tricky due to how CKEditor handles
 	// ranges. It might depend on wether a source node inside the element is selected or not. For now,
 	// we need to cover the following cases:
@@ -15,8 +15,8 @@ var _isRangeAtElementEnd = function(range, element) {
 	);
 };
 
-var embedSelectionTest = function(payload) {
-	var selectionData = payload.data.selectionData;
+let embedSelectionTest = function(payload) {
+	let selectionData = payload.data.selectionData;
 
 	return !!(
 		selectionData.element &&
@@ -51,11 +51,11 @@ const headingTextSelectionTest = function(payload) {
 	);
 };
 
-var linkSelectionTest = function(payload) {
-	var nativeEditor = payload.editor.get('nativeEditor');
-	var range = nativeEditor.getSelection().getRanges()[0];
+let linkSelectionTest = function(payload) {
+	let nativeEditor = payload.editor.get('nativeEditor');
+	let range = nativeEditor.getSelection().getRanges()[0];
 
-	var element;
+	let element;
 
 	return !!(
 		nativeEditor.isSelectionEmpty() &&
@@ -66,8 +66,8 @@ var linkSelectionTest = function(payload) {
 	);
 };
 
-var imageSelectionTest = function(payload) {
-	var selectionData = payload.data.selectionData;
+let imageSelectionTest = function(payload) {
+	let selectionData = payload.data.selectionData;
 
 	return !!(
 		selectionData.element &&
@@ -76,12 +76,12 @@ var imageSelectionTest = function(payload) {
 	);
 };
 
-var textSelectionTest = function(payload) {
-	var nativeEditor = payload.editor.get('nativeEditor');
+let textSelectionTest = function(payload) {
+	let nativeEditor = payload.editor.get('nativeEditor');
 
-	var selectionEmpty = nativeEditor.isSelectionEmpty();
+	let selectionEmpty = nativeEditor.isSelectionEmpty();
 
-	var selectionData = payload.data.selectionData;
+	let selectionData = payload.data.selectionData;
 
 	return !!(
 		!selectionData.element &&
@@ -94,11 +94,11 @@ var textSelectionTest = function(payload) {
 	);
 };
 
-var tableSelectionTest = function(payload) {
-	var nativeEditor = payload.editor.get('nativeEditor');
+let tableSelectionTest = function(payload) {
+	let nativeEditor = payload.editor.get('nativeEditor');
 
-	var table = new CKEDITOR.Table(nativeEditor);
-	var element = table.getFromSelection();
+	let table = new CKEDITOR.Table(nativeEditor);
+	let element = table.getFromSelection();
 
 	return !!(element && table.isEditable(element));
 };

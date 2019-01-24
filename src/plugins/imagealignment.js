@@ -11,7 +11,7 @@ import SelectionTest from '../selections/selection-test.js';
 	 * Enum for supported image alignments
 	 * @type {Object}
 	 */
-	var IMAGE_ALIGNMENT = {
+	let IMAGE_ALIGNMENT = {
 		CENTER: 'center',
 		LEFT: 'left',
 		RIGHT: 'right',
@@ -21,7 +21,7 @@ import SelectionTest from '../selections/selection-test.js';
 	 * Enum values for supported image alignments
 	 * @type {Array}
 	 */
-	var ALIGN_VALUES = [
+	let ALIGN_VALUES = [
 		IMAGE_ALIGNMENT.LEFT,
 		IMAGE_ALIGNMENT.RIGHT,
 		IMAGE_ALIGNMENT.CENTER,
@@ -31,7 +31,7 @@ import SelectionTest from '../selections/selection-test.js';
 	 * Necessary styles for the center alignment
 	 * @type {Array.<Object>}
 	 */
-	var CENTERED_IMAGE_STYLE = [
+	let CENTERED_IMAGE_STYLE = [
 		{
 			name: 'display',
 			value: 'block',
@@ -52,8 +52,8 @@ import SelectionTest from '../selections/selection-test.js';
 	 * @param {CKEDITOR.dom.element} image The image element
 	 * @return {String} The alignment value
 	 */
-	var getImageAlignment = function(image) {
-		var imageAlignment = image.getStyle('float');
+	let getImageAlignment = function(image) {
+		let imageAlignment = image.getStyle('float');
 
 		if (
 			!imageAlignment ||
@@ -64,8 +64,8 @@ import SelectionTest from '../selections/selection-test.js';
 		}
 
 		if (!imageAlignment) {
-			var centeredImage = CENTERED_IMAGE_STYLE.every(function(style) {
-				var styleCheck = image.getStyle(style.name) === style.value;
+			let centeredImage = CENTERED_IMAGE_STYLE.every(function(style) {
+				let styleCheck = image.getStyle(style.name) === style.value;
 
 				if (!styleCheck && style.vendorPrefixes) {
 					styleCheck = style.vendorPrefixes.some(function(
@@ -82,7 +82,7 @@ import SelectionTest from '../selections/selection-test.js';
 			});
 
 			if (!imageAlignment) {
-				var imageContainer = image.$.parentNode;
+				let imageContainer = image.$.parentNode;
 
 				if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
 					CENTERED_IMAGE_STYLE.forEach(function(style) {
@@ -115,7 +115,7 @@ import SelectionTest from '../selections/selection-test.js';
 	 * @param {CKEDITOR.dom.element} image The image element
 	 * @param {String} imageAlignment The image alignment value to be removed
 	 */
-	var removeImageAlignment = function(image, imageAlignment) {
+	let removeImageAlignment = function(image, imageAlignment) {
 		if (
 			imageAlignment === IMAGE_ALIGNMENT.LEFT ||
 			imageAlignment === IMAGE_ALIGNMENT.RIGHT
@@ -136,7 +136,7 @@ import SelectionTest from '../selections/selection-test.js';
 				}
 			});
 
-			var imageContainer = image.$.parentNode;
+			let imageContainer = image.$.parentNode;
 
 			if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
 				imageContainer.style.textAlign = '';
@@ -150,7 +150,7 @@ import SelectionTest from '../selections/selection-test.js';
 	 * @param {CKEDITOR.dom.element} image The image element
 	 * @param {String} imageAlignment The image alignment value to be set
 	 */
-	var setImageAlignment = function(image, imageAlignment) {
+	let setImageAlignment = function(image, imageAlignment) {
 		removeImageAlignment(image, getImageAlignment(image));
 
 		if (
@@ -169,7 +169,7 @@ import SelectionTest from '../selections/selection-test.js';
 				}
 			});
 
-			var imageContainer = image.$.parentNode;
+			let imageContainer = image.$.parentNode;
 
 			imageContainer.style.textAlign = IMAGE_ALIGNMENT.CENTER;
 		}
@@ -191,14 +191,14 @@ import SelectionTest from '../selections/selection-test.js';
 		 * @param {Object} editor The current editor instance
 		 */
 		afterInit: function(editor) {
-			var self = this;
+			let self = this;
 
 			ALIGN_VALUES.forEach(function(value) {
-				var command = editor.getCommand('justify' + value);
+				let command = editor.getCommand('justify' + value);
 
 				if (command) {
 					command.on('exec', function(event) {
-						var selectionData = editor.getSelectionData();
+						let selectionData = editor.getSelectionData();
 
 						if (
 							selectionData &&
@@ -206,9 +206,9 @@ import SelectionTest from '../selections/selection-test.js';
 								data: {selectionData: selectionData},
 							})
 						) {
-							var image = selectionData.element;
+							let image = selectionData.element;
 
-							var imageAlignment = getImageAlignment(image);
+							let imageAlignment = getImageAlignment(image);
 
 							if (imageAlignment === value) {
 								removeImageAlignment(image, value);
@@ -226,7 +226,7 @@ import SelectionTest from '../selections/selection-test.js';
 					});
 
 					command.on('refresh', function(event) {
-						var selectionData = {
+						let selectionData = {
 							element: event.data.path.lastElement,
 						};
 
@@ -235,7 +235,7 @@ import SelectionTest from '../selections/selection-test.js';
 								data: {selectionData: selectionData},
 							})
 						) {
-							var imageAlignment = getImageAlignment(
+							let imageAlignment = getImageAlignment(
 								selectionData.element
 							);
 
@@ -262,7 +262,7 @@ import SelectionTest from '../selections/selection-test.js';
 		 */
 		refreshCommands: function(editor, elementPath) {
 			ALIGN_VALUES.forEach(function(value) {
-				var command = editor.getCommand('justify' + value);
+				let command = editor.getCommand('justify' + value);
 
 				if (command) {
 					command.refresh(editor, elementPath);

@@ -5,11 +5,11 @@
 		return;
 	}
 
-	var KEY_BACK = 8;
+	let KEY_BACK = 8;
 
-	var KEY_SPACE = 32;
+	let KEY_SPACE = 32;
 
-	var DEFAULT_CONFIG = [
+	let DEFAULT_CONFIG = [
 		{
 			regex: /^\*$/,
 			type: 'bulletedlist',
@@ -40,7 +40,7 @@
 			editor.once(
 				'contentDom',
 				function() {
-					var editable = editor.editable();
+					let editable = editor.editable();
 
 					editable.attachListener(
 						editable,
@@ -65,11 +65,11 @@
 		 * @protected
 		 */
 		_checkForBackspaceAndUndo: function(event) {
-			var editor = event.listenerData.editor;
+			let editor = event.listenerData.editor;
 
-			var nativeEvent = event.data.$;
+			let nativeEvent = event.data.$;
 
-			var editable = editor.editable();
+			let editable = editor.editable();
 
 			editable.removeListener('keydown', this._checkForBackspaceAndUndo);
 
@@ -91,27 +91,27 @@
 		 * @return {Object|null} Returns an object which contains the detected list config if any
 		 */
 		_getListConfig: function(editor) {
-			var configRegex = editor.config.autolist || DEFAULT_CONFIG;
+			let configRegex = editor.config.autolist || DEFAULT_CONFIG;
 
-			var range = editor.getSelection().getRanges()[0];
+			let range = editor.getSelection().getRanges()[0];
 
-			var textContainer = range.endContainer.getText();
+			let textContainer = range.endContainer.getText();
 
-			var bullet = textContainer.substring(0, range.startOffset);
+			let bullet = textContainer.substring(0, range.startOffset);
 
-			var text = textContainer.substring(
+			let text = textContainer.substring(
 				range.startOffset,
 				textContainer.length
 			);
 
-			var index = 0;
+			let index = 0;
 
-			var regexLen = configRegex.length;
+			let regexLen = configRegex.length;
 
-			var autolistCfg = null;
+			let autolistCfg = null;
 
 			while (!autolistCfg && regexLen > index) {
-				var regexItem = configRegex[index];
+				let regexItem = configRegex[index];
 
 				if (regexItem.regex.test(bullet)) {
 					autolistCfg = {
@@ -140,14 +140,14 @@
 		 * @protected
 		 */
 		_createList: function(listConfig) {
-			var editor = listConfig.editor;
+			let editor = listConfig.editor;
 
-			var range = editor.getSelection().getRanges()[0];
+			let range = editor.getSelection().getRanges()[0];
 
 			range.endContainer.setText(listConfig.text);
 			editor.execCommand(listConfig.type);
 
-			var editable = editor.editable();
+			let editable = editor.editable();
 
 			// Subscribe to keydown in order to check if the next key press is `Backspace`.
 			// If so, the creation of the list will be discarded.
@@ -175,10 +175,10 @@
 		 * @protected
 		 */
 		_onKeyDown: function(event) {
-			var nativeEvent = event.data.$;
+			let nativeEvent = event.data.$;
 
 			if (nativeEvent.keyCode === KEY_SPACE) {
-				var listConfig = this._getListConfig(event.listenerData.editor);
+				let listConfig = this._getListConfig(event.listenerData.editor);
 
 				if (listConfig) {
 					event.data.preventDefault();

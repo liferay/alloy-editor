@@ -69,15 +69,15 @@
 		 * @protected
 		 */
 		init: function(editor) {
-			var ariaState = [];
+			let ariaState = [];
 
-			var ariaElement = this._createAriaElement(editor.id);
+			let ariaElement = this._createAriaElement(editor.id);
 
-			var uiTasksTimeout = editor.config.uicore
+			let uiTasksTimeout = editor.config.uicore
 				? editor.config.uicore.timeout
 				: 50;
 
-			var handleUI = CKEDITOR.tools.debounce(function(event) {
+			let handleUI = CKEDITOR.tools.debounce(function(event) {
 				ariaState = [];
 
 				if (
@@ -85,7 +85,7 @@
 					event.data.$.keyCode !== 27 ||
 					editor.config.allowEsc
 				) {
-					var selectionData = editor.getSelectionData();
+					let selectionData = editor.getSelectionData();
 
 					if (selectionData) {
 						editor.fire('editorInteraction', {
@@ -96,16 +96,16 @@
 				}
 			}, uiTasksTimeout);
 
-			var handleAria = CKEDITOR.tools.debounce(function(event) {
+			let handleAria = CKEDITOR.tools.debounce(function(event) {
 				ariaElement.innerHTML = ariaState.join('. ');
 			}, uiTasksTimeout);
 
-			var handleMouseLeave = CKEDITOR.tools.debounce(function(event) {
-				var aeUINodes = document.querySelectorAll('.ae-ui');
+			let handleMouseLeave = CKEDITOR.tools.debounce(function(event) {
+				let aeUINodes = document.querySelectorAll('.ae-ui');
 
-				var found;
+				let found;
 
-				for (var i = 0; i < aeUINodes.length; i++) {
+				for (let i = 0; i < aeUINodes.length; i++) {
 					if (aeUINodes[i].contains(event.data.$.relatedTarget)) {
 						found = true;
 						break;
@@ -130,7 +130,7 @@
 			});
 
 			editor.once('contentDom', function() {
-				var editable = editor.editable();
+				let editable = editor.editable();
 
 				var focusHandler = editable.attachListener(
 					editable,
@@ -168,7 +168,7 @@
 		 * @return {HTMLElement} The created and applied to DOM element.
 		 */
 		_createAriaElement: function(id) {
-			var statusElement = document.createElement('div');
+			let statusElement = document.createElement('div');
 
 			statusElement.className = 'ae-sr-only';
 

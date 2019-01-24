@@ -6,11 +6,11 @@
 		return;
 	}
 
-	var REGEX_HTTP = /^https?/;
+	let REGEX_HTTP = /^https?/;
 
-	var REGEX_DEFAULT_LINK = /<a href=/;
+	let REGEX_DEFAULT_LINK = /<a href=/;
 
-	var PROVIDERS = ['youtube', 'twitter'];
+	let PROVIDERS = ['youtube', 'twitter'];
 
 	CKEDITOR.DEFAULT_AE_EMBED_URL_TPL =
 		'http://alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
@@ -32,22 +32,22 @@
 	CKEDITOR.plugins.add('ae_embed', {
 		requires: 'widget',
 		init: function(editor) {
-			var AE_EMBED_URL_TPL = new CKEDITOR.template(
+			let AE_EMBED_URL_TPL = new CKEDITOR.template(
 				editor.config.embedUrlTemplate ||
 					CKEDITOR.DEFAULT_AE_EMBED_URL_TPL
 			);
-			var AE_EMBED_WIDGET_TPL = new CKEDITOR.template(
+			let AE_EMBED_WIDGET_TPL = new CKEDITOR.template(
 				editor.config.embedWidgetTpl ||
 					CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
 			);
-			var AE_EMBED_DEFAULT_LINK_TPL = new CKEDITOR.template(
+			let AE_EMBED_DEFAULT_LINK_TPL = new CKEDITOR.template(
 				editor.config.embedLinkDefaultTpl ||
 					CKEDITOR.DEFAULT_AE_EMBED_DEFAULT_LINK_TPL
 			);
 
 			// Default function to upcast DOM elements to embed widgets.
 			// It matches CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
-			var defaultEmbedWidgetUpcastFn = function(element, data) {
+			let defaultEmbedWidgetUpcastFn = function(element, data) {
 				if (
 					element.name === 'div' &&
 					element.attributes['data-ae-embed-url']
@@ -83,9 +83,9 @@
 				 * @param {event} event Data change event
 				 */
 				data: function(event) {
-					var widget = this;
+					let widget = this;
 
-					var url = event.data.url;
+					let url = event.data.url;
 
 					if (url) {
 						CKEDITOR.tools.jsonp(
@@ -116,11 +116,11 @@
 				createATag: function(url) {
 					this.editor.execCommand('undo');
 
-					var currentSelection = this.editor
+					let currentSelection = this.editor
 						.getSelection()
 						.getSelectedElement();
 
-					var aTagHtml = AE_EMBED_DEFAULT_LINK_TPL.output({
+					let aTagHtml = AE_EMBED_DEFAULT_LINK_TPL.output({
 						url: url,
 					});
 
@@ -136,7 +136,7 @@
 				 * @param {Object} data The object that will be passed to the widget
 				 */
 				upcast: function(element, data) {
-					var embedWidgetUpcastFn =
+					let embedWidgetUpcastFn =
 						editor.config.embedWidgetUpcastFn ||
 						defaultEmbedWidgetUpcastFn;
 
@@ -147,7 +147,7 @@
 			// Add a listener to handle paste events and turn links into embed objects
 			editor.once('contentDom', function() {
 				editor.on('paste', function(event) {
-					var link = event.data.dataValue;
+					let link = event.data.dataValue;
 
 					if (REGEX_HTTP.test(link)) {
 						event.stop();
@@ -162,20 +162,20 @@
 			// Add a listener to handle selection change events and properly detect editor
 			// interactions on the widgets without messing with widget native selection
 			editor.on('selectionChange', function(event) {
-				var selection = editor.getSelection();
+				let selection = editor.getSelection();
 
 				if (selection) {
-					var element = selection.getSelectedElement();
+					let element = selection.getSelectedElement();
 
 					if (element) {
-						var widgetElement = element.findOne(
+						let widgetElement = element.findOne(
 							'[data-widget="ae_embed"]'
 						);
 
 						if (widgetElement) {
-							var region = element.getClientRect();
+							let region = element.getClientRect();
 
-							var scrollPosition = new CKEDITOR.dom.window(
+							let scrollPosition = new CKEDITOR.dom.window(
 								window
 							).getScrollPosition();
 							region.left -= scrollPosition.x;

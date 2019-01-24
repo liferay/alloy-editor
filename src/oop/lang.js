@@ -79,7 +79,7 @@ const Lang = {
 	 * @static
 	 */
 	isObject: function(value) {
-		var valueType = typeof value;
+		let valueType = typeof value;
 
 		return value && (valueType === 'object' || Lang.isFunction(value));
 	},
@@ -109,9 +109,9 @@ const Lang = {
 	 * @static
 	 */
 	mix: function(receiver, supplier) {
-		var hasOwnProperty = Object.prototype.hasOwnProperty;
+		let hasOwnProperty = Object.prototype.hasOwnProperty;
 
-		for (var key in supplier) {
+		for (let key in supplier) {
 			if (hasOwnProperty.call(supplier, key)) {
 				receiver[key] = supplier[key];
 			}

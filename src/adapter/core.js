@@ -41,13 +41,13 @@ extend(
 		 * @param config {Object} Configuration object literal for the editor.
 		 */
 		initializer: function(config) {
-			var node = this.get('srcNode');
+			let node = this.get('srcNode');
 
 			if (this.get('enableContentEditable')) {
 				node.setAttribute('contenteditable', 'true');
 			}
 
-			var editor = CKEDITOR.inline(node);
+			let editor = CKEDITOR.inline(node);
 
 			editor.config.allowedContent = this.get('allowedContent');
 
@@ -86,7 +86,7 @@ extend(
 				function() {
 					this._addReadOnlyLinkClickListener(editor);
 
-					var editable = editor.editable();
+					let editable = editor.editable();
 
 					editable.addClass('ae-editable');
 				}.bind(this)
@@ -116,10 +116,10 @@ extend(
 				);
 			}
 
-			var nativeEditor = this.get('nativeEditor');
+			let nativeEditor = this.get('nativeEditor');
 
 			if (nativeEditor) {
-				var editable = nativeEditor.editable();
+				let editable = nativeEditor.editable();
 
 				if (editable) {
 					editable.removeClass('ae-editable');
@@ -147,8 +147,8 @@ extend(
 		 * @method _clearSelections
 		 */
 		_clearSelections: function() {
-			var nativeEditor = this.get('nativeEditor');
-			var isMSSelection = typeof window.getSelection != 'function';
+			let nativeEditor = this.get('nativeEditor');
+			let isMSSelection = typeof window.getSelection != 'function';
 
 			if (isMSSelection) {
 				nativeEditor.document.$.selection.empty();
@@ -187,9 +187,9 @@ extend(
 		 * @param {Object} event The fired `click` event payload
 		 */
 		_defaultReadOnlyClickFn: function(event) {
-			var mouseEvent = event.data.$;
-			var hasCtrlKey = mouseEvent.ctrlKey || mouseEvent.metaKey;
-			var shouldOpen = this._editor.config.readOnly || hasCtrlKey;
+			let mouseEvent = event.data.$;
+			let hasCtrlKey = mouseEvent.ctrlKey || mouseEvent.metaKey;
+			let shouldOpen = this._editor.config.readOnly || hasCtrlKey;
 
 			mouseEvent.preventDefault();
 
@@ -202,17 +202,17 @@ extend(
 					.editable()
 					.editor.fire('readOnlyClick', event.data) !== false
 			) {
-				var ckElement = new CKEDITOR.dom.elementPath(
+				let ckElement = new CKEDITOR.dom.elementPath(
 					event.data.getTarget(),
 					this
 				);
-				var link = ckElement.lastElement;
+				let link = ckElement.lastElement;
 
 				if (link) {
-					var href = link.$.attributes.href
+					let href = link.$.attributes.href
 						? link.$.attributes.href.value
 						: null;
-					var target = hasCtrlKey
+					let target = hasCtrlKey
 						? '_blank'
 						: link.$.attributes.target
 						? link.$.attributes.target.value
@@ -263,10 +263,10 @@ extend(
 		 */
 		_renderUI: function() {
 			if (!this._destroyed) {
-				var editorUIElement = document.createElement('div');
+				let editorUIElement = document.createElement('div');
 				editorUIElement.className = 'ae-ui';
 
-				var uiNode = this.get('uiNode') || document.body;
+				let uiNode = this.get('uiNode') || document.body;
 
 				uiNode.appendChild(editorUIElement);
 
@@ -553,11 +553,11 @@ extend(
 				validator: Lang.isArray,
 				value: [
 					{
-						keys: CKEDITOR.CTRL + 76 /*L*/,
+						keys: CKEDITOR.CTRL + 76 /* L*/,
 						selection: 'link',
 					},
 					{
-						keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/,
+						keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /* L*/,
 						selection: 'embed',
 					},
 				],

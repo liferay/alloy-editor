@@ -14,7 +14,7 @@ import extend from '../oop/oop';
 import '../plugins';
 
 // An object containing all currently registered plugins in AlloyEditor.
-var BRIDGE_BUTTONS = {};
+let BRIDGE_BUTTONS = {};
 
 /**
  * Creates an instance of AlloyEditor.
@@ -48,13 +48,13 @@ const editable = function(node, config) {
  */
 const getBasePath = function() {
 	// Find out the editor directory path, based on its <script> tag.
-	var path = window.ALLOYEDITOR_BASEPATH || '';
+	let path = window.ALLOYEDITOR_BASEPATH || '';
 
 	if (!path) {
-		var scripts = document.getElementsByTagName('script');
+		let scripts = document.getElementsByTagName('script');
 
-		for (var i = 0; i < scripts.length; i++) {
-			var match = scripts[i].src.match(AlloyEditor.regexBasePath);
+		for (let i = 0; i < scripts.length; i++) {
+			let match = scripts[i].src.match(AlloyEditor.regexBasePath);
 
 			if (match) {
 				path = match[1];
@@ -108,7 +108,7 @@ const loadLanguageResources = function(callback) {
 	if (!AlloyEditor._langResourceRequested) {
 		AlloyEditor._langResourceRequested = true;
 
-		var languages = [
+		let languages = [
 			'af',
 			'ar',
 			'bg',
@@ -177,11 +177,11 @@ const loadLanguageResources = function(callback) {
 			'zh',
 		];
 
-		var userLanguage = navigator.language || navigator.userLanguage || 'en';
+		let userLanguage = navigator.language || navigator.userLanguage || 'en';
 
-		var parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
-		var lang = parts[1];
-		var locale = parts[2];
+		let parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
+		let lang = parts[1];
+		let locale = parts[2];
 
 		if (languages.indexOf(lang + '-' + locale) >= 0) {
 			lang = lang + '-' + locale;
@@ -214,7 +214,7 @@ const loadLanguageResources = function(callback) {
  * @return {String} The full URL.
  */
 const getUrl = function(resource) {
-	var basePath = AlloyEditor.getBasePath();
+	let basePath = AlloyEditor.getBasePath();
 
 	// If this is not a full or absolute path.
 	if (resource.indexOf(':/') === -1 && resource.indexOf('/') !== 0) {

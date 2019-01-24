@@ -20,13 +20,13 @@ export default WrappedComponent =>
 				super.componentWillMount();
 			}
 
-			var style = this.props.style;
+			let style = this.props.style;
 
 			if (Lang.isString(style)) {
-				var parts = style.split('.');
-				var currentMember = this.props.editor.get('nativeEditor')
+				let parts = style.split('.');
+				let currentMember = this.props.editor.get('nativeEditor')
 					.config;
-				var property = parts.shift();
+				let property = parts.shift();
 
 				while (
 					property &&
@@ -81,11 +81,11 @@ export default WrappedComponent =>
 		 * @return {Boolean} True if style is active, false otherwise.
 		 */
 		isActive() {
-			var result;
+			let result;
 
-			var editor = this.props.editor.get('nativeEditor');
+			let editor = this.props.editor.get('nativeEditor');
 
-			var elementPath = editor.elementPath();
+			let elementPath = editor.elementPath();
 
 			result = this.getStyle().checkActive(elementPath, editor);
 

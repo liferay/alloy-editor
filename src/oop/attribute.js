@@ -24,7 +24,7 @@ Attribute.prototype = {
 	 * @return {Any} The value of the attribute.
 	 */
 	get: function(attr) {
-		var currentAttr = this.constructor.ATTRS[attr];
+		let currentAttr = this.constructor.ATTRS[attr];
 
 		if (!currentAttr) {
 			return;
@@ -34,7 +34,7 @@ Attribute.prototype = {
 			this._init(attr);
 		}
 
-		var curValue = this.__ATTRS__[attr];
+		let curValue = this.__ATTRS__[attr];
 
 		if (currentAttr.getter) {
 			curValue = this._callStringOrFunction(currentAttr.getter, curValue);
@@ -53,7 +53,7 @@ Attribute.prototype = {
 	 * @param {Any} value The value which should be set to the attribute.
 	 */
 	set: function(attr, value) {
-		var currentAttr = this.constructor.ATTRS[attr];
+		let currentAttr = this.constructor.ATTRS[attr];
 
 		if (!currentAttr) {
 			return;
@@ -99,7 +99,7 @@ Attribute.prototype = {
 	 * @return {Any} The returned value from the called function
 	 */
 	_callStringOrFunction: function(stringOrFunction, args) {
-		var result = null;
+		let result = null;
 
 		if (!Lang.isArray(args)) {
 			args = [args];
@@ -128,16 +128,16 @@ Attribute.prototype = {
 	 * @protected
 	 */
 	_init: function(attr) {
-		var value;
+		let value;
 
-		var currentAttr = this.constructor.ATTRS[attr];
+		let currentAttr = this.constructor.ATTRS[attr];
 
 		// Check if there is default value or passed one via configuration object
-		var hasDefaultValue = Object.prototype.hasOwnProperty.call(
+		let hasDefaultValue = Object.prototype.hasOwnProperty.call(
 			currentAttr,
 			'value'
 		);
-		var hasPassedValueViaConfig = Object.prototype.hasOwnProperty.call(
+		let hasPassedValueViaConfig = Object.prototype.hasOwnProperty.call(
 			this.__config__,
 			attr
 		);

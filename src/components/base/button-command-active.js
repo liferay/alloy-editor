@@ -15,9 +15,9 @@ export default WrappedComponent =>
 		 * @return {Boolean} True if the command is active, false otherwise.
 		 */
 		isActive() {
-			var editor = this.props.editor.get('nativeEditor');
+			let editor = this.props.editor.get('nativeEditor');
 
-			var command = editor.getCommand(this.props.command);
+			let command = editor.getCommand(this.props.command);
 
 			return command ? command.state === CKEDITOR.TRISTATE_ON : false;
 		}

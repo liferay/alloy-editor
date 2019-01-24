@@ -10,7 +10,7 @@
 		return;
 	}
 
-	var pxUnit = CKEDITOR.tools.cssLength;
+	let pxUnit = CKEDITOR.tools.cssLength;
 
 	function getWidth(el) {
 		return CKEDITOR.env.ie
@@ -19,12 +19,13 @@
 	}
 
 	function getBorderWidth(element, side) {
-		var computed = element.getComputedStyle('border-' + side + '-width'),
-			borderMap = {
-				thin: '0px',
-				medium: '1px',
-				thick: '2px',
-			};
+		let computed = element.getComputedStyle('border-' + side + '-width');
+
+		let borderMap = {
+			thin: '0px',
+			medium: '1px',
+			thick: '2px',
+		};
 
 		if (computed.indexOf('px') < 0) {
 			// look up keywords
@@ -43,13 +44,17 @@
 
 	// Gets the table row that contains the most columns.
 	function getMasterPillarRow(table) {
-		var $rows = table.$.rows,
-			maxCells = 0,
-			cellsCount,
-			$elected,
-			$tr;
+		let $rows = table.$.rows;
 
-		for (var i = 0, len = $rows.length; i < len; i++) {
+		let maxCells = 0;
+
+		let cellsCount;
+
+		let $elected;
+
+		let $tr;
+
+		for (let i = 0, len = $rows.length; i < len; i++) {
 			$tr = $rows[i];
 			cellsCount = $tr.cells.length;
 
@@ -63,33 +68,38 @@
 	}
 
 	function buildTableColumnPillars(table) {
-		var pillars = [],
-			pillarIndex = -1,
-			rtl = table.getComputedStyle('direction') === 'rtl';
+		let pillars = [];
+
+		let pillarIndex = -1;
+
+		let rtl = table.getComputedStyle('direction') === 'rtl';
 
 		// Get the raw row element that cointains the most columns.
-		var $tr = getMasterPillarRow(table);
+		let $tr = getMasterPillarRow(table);
 
 		// Get the tbody element and position, which will be used to set the
 		// top and bottom boundaries.
-		var tbody = new CKEDITOR.dom.element(table.$.tBodies[0]),
-			tbodyPosition = tbody.getDocumentPosition();
+		let tbody = new CKEDITOR.dom.element(table.$.tBodies[0]);
+
+		let tbodyPosition = tbody.getDocumentPosition();
 
 		// Loop thorugh all cells, building pillars after each one of them.
-		for (var i = 0, len = $tr.cells.length; i < len; i++) {
+		for (let i = 0, len = $tr.cells.length; i < len; i++) {
 			// Both the current cell and the successive one will be used in the
 			// pillar size calculation.
-			var td = new CKEDITOR.dom.element($tr.cells[i]),
-				nextTd =
-					$tr.cells[i + 1] &&
-					new CKEDITOR.dom.element($tr.cells[i + 1]);
+			let td = new CKEDITOR.dom.element($tr.cells[i]);
+
+			let nextTd =
+				$tr.cells[i + 1] && new CKEDITOR.dom.element($tr.cells[i + 1]);
 
 			pillarIndex += td.$.colSpan || 1;
 
 			// Calculate the pillar boundary positions.
-			var pillarLeft, pillarRight, pillarWidth;
+			var pillarLeft;
+			var pillarRight;
+			var pillarWidth;
 
-			var x = td.getDocumentPosition().x;
+			let x = td.getDocumentPosition().x;
 
 			// Calculate positions based on the current cell.
 			rtl
@@ -136,8 +146,8 @@
 	}
 
 	function getPillarAtPosition(pillars, positionX) {
-		for (var i = 0, len = pillars.length; i < len; i++) {
-			var pillar = pillars[i];
+		for (let i = 0, len = pillars.length; i < len; i++) {
+			let pillar = pillars[i];
 
 			if (positionX >= pillar.x && positionX <= pillar.x + pillar.width) {
 				return pillar;
@@ -152,12 +162,19 @@
 	}
 
 	function columnResizer(editor, pillar) {
-		var document, resizer, resizing, startOffset, currentShift;
+		let document;
+		let resizer;
+		let resizing;
+		let startOffset;
+		let currentShift;
 
-		var leftSideCells,
-			rightSideCells,
-			leftShiftBoundary,
-			rightShiftBoundary;
+		let leftSideCells;
+
+		let rightSideCells;
+
+		let leftShiftBoundary;
+
+		let rightShiftBoundary;
 
 		function detach() {
 			resizer.removeListener('mouseup', onMouseUp);
@@ -169,18 +186,26 @@
 			// Before starting to resize, figure out which cells to change
 			// and the boundaries of this resizing shift.
 
-			var columnIndex = pillar.index,
-				map = CKEDITOR.tools.buildTableMap(pillar.table),
-				leftColumnCells = [],
-				rightColumnCells = [],
-				leftMinSize = Number.MAX_VALUE,
-				rightMinSize = leftMinSize,
-				rtl = pillar.rtl;
+			let columnIndex = pillar.index;
 
-			for (var i = 0, len = map.length; i < len; i++) {
-				var row = map[i],
-					leftCell = row[columnIndex + (rtl ? 1 : 0)],
-					rightCell = row[columnIndex + (rtl ? 0 : 1)];
+			let map = CKEDITOR.tools.buildTableMap(pillar.table);
+
+			let leftColumnCells = [];
+
+			let rightColumnCells = [];
+
+			let leftMinSize = Number.MAX_VALUE;
+
+			let rightMinSize = leftMinSize;
+
+			let rtl = pillar.rtl;
+
+			for (let i = 0, len = map.length; i < len; i++) {
+				let row = map[i];
+
+				let leftCell = row[columnIndex + (rtl ? 1 : 0)];
+
+				let rightCell = row[columnIndex + (rtl ? 0 : 1)];
 
 				leftCell = leftCell && new CKEDITOR.dom.element(leftCell);
 				rightCell = rightCell && new CKEDITOR.dom.element(rightCell);
@@ -228,7 +253,7 @@
 
 			currentShift && resizeColumn();
 
-			var table = pillar.table;
+			let table = pillar.table;
 			setTimeout(function() {
 				table.removeCustomData('_cke_table_pillars');
 			}, 0);
@@ -237,14 +262,17 @@
 		}
 
 		function resizeColumn() {
-			var rtl = pillar.rtl,
-				cellsCount = rtl ? rightSideCells.length : leftSideCells.length;
+			let rtl = pillar.rtl;
+
+			let cellsCount = rtl ? rightSideCells.length : leftSideCells.length;
 
 			// Perform the actual resize to table cells, only for those by side of the pillar.
-			for (var i = 0; i < cellsCount; i++) {
-				var leftCell = leftSideCells[i],
-					rightCell = rightSideCells[i],
-					table = pillar.table;
+			for (let i = 0; i < cellsCount; i++) {
+				let leftCell = leftSideCells[i];
+
+				let rightCell = rightSideCells[i];
+
+				var table = pillar.table;
 
 				// Defer the resizing to avoid any interference among cells.
 				CKEDITOR.tools.setTimeout(
@@ -347,7 +375,7 @@
 		resizer.show();
 
 		var move = (this.move = function(posX) {
-			var resizerNewPosition =
+			let resizerNewPosition =
 				posX - Math.round(resizer.$.offsetWidth / 2);
 
 			if (isResizing) {
@@ -373,7 +401,7 @@
 			resizer.setStyle('left', pxUnit(resizerNewPosition));
 		});
 
-		var destroy = (this.destroy = function() {
+		let destroy = (this.destroy = function() {
 			detach();
 
 			document.getBody().setStyle('cursor', 'auto');
@@ -387,7 +415,7 @@
 	}
 
 	function clearPillarsCache(evt) {
-		var target = evt.data.getTarget();
+		let target = evt.data.getTarget();
 
 		if (evt.name === 'mouseout') {
 			// Bypass interal mouse move.
@@ -395,7 +423,7 @@
 				return;
 			}
 
-			var dest = new CKEDITOR.dom.element(
+			let dest = new CKEDITOR.dom.element(
 				evt.data.$.relatedTarget || evt.data.$.toElement
 			);
 			while (dest && dest.$ && !dest.equals(target) && !dest.is('body')) {
@@ -415,8 +443,9 @@
 
 		init: function(editor) {
 			editor.on('contentDom', function() {
-				var resizer,
-					editable = editor.editable();
+				let resizer;
+
+				let editable = editor.editable();
 
 				// In Classic editor it is better to use document
 				// instead of editable so event will work below body.
@@ -426,7 +455,7 @@
 					function(evt) {
 						evt = evt.data;
 
-						var target = evt.getTarget();
+						let target = evt.getTarget();
 
 						// FF may return document and IE8 some UFO (object with no nodeType property...)
 						// instead of an element (#11823).
@@ -434,7 +463,7 @@
 							return;
 						}
 
-						var pageX = evt.getPageOffset().x;
+						let pageX = evt.getPageOffset().x;
 
 						// If we're already attached to a pillar, simply move the
 						// resizer.
@@ -453,7 +482,8 @@
 						}
 
 						// Considering table, tr, td, tbody but nothing else.
-						var table, pillars;
+						let table;
+						let pillars;
 
 						if (
 							!target.is('table') &&
@@ -484,7 +514,7 @@
 							table.on('mousedown', clearPillarsCache);
 						}
 
-						var pillar = getPillarAtPosition(pillars, pageX);
+						let pillar = getPillarAtPosition(pillars, pageX);
 
 						if (pillar) {
 							resizer = new columnResizer(editor, pillar);

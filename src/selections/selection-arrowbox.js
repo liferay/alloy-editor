@@ -1,4 +1,4 @@
-var tableSelectionGetArrowBoxClasses = function() {
+let tableSelectionGetArrowBoxClasses = function() {
 	return 'ae-arrow-box ae-arrow-box-bottom';
 };
 

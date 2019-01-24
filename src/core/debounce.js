@@ -19,24 +19,24 @@
 	CKEDITOR.tools.debounce =
 		CKEDITOR.tools.debounce ||
 		function(callback, timeout, context, args) {
-			var debounceHandle;
+			let debounceHandle;
 
-			var callFn = function() {
-				var callContext = context || this;
+			let callFn = function() {
+				let callContext = context || this;
 
 				clearTimeout(debounceHandle);
 
-				var result = [];
+				let result = [];
 
 				for (
-					var len = arguments.length, startIndex = 0;
+					let len = arguments.length, startIndex = 0;
 					startIndex < len;
 					++startIndex
 				) {
 					result.push(arguments[startIndex]);
 				}
 
-				var callArgs = result.concat(args || []);
+				let callArgs = result.concat(args || []);
 
 				debounceHandle = setTimeout(function() {
 					callback.apply(callContext, callArgs);

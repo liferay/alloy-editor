@@ -22,7 +22,7 @@ export default WrappedComponent =>
 		 * @return {String} A string with the state CSS classes.
 		 */
 		getStateClasses() {
-			var stateClasses = '';
+			let stateClasses = '';
 
 			// Check for active state
 			if (Lang.isFunction(this.isActive) && this.isActive()) {
