@@ -40,9 +40,7 @@ import React from 'react';
 			ButtonBridge = class extends React.Component {
 				static displayName = buttonName;
 
-				statics = {
-					key: buttonName,
-				};
+				static key = buttonName;
 
 				// API not yet implemented inside the button
 				// bridge. By mocking the unsupported method, we prevent
@@ -99,7 +97,7 @@ import React from 'react';
 					);
 				}
 
-				_handleClick = event => {
+				_handleClick = () => {
 					var editor = this.props.editor.get('nativeEditor');
 
 					var buttonCommand =

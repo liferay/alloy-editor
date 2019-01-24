@@ -148,10 +148,14 @@ class ButtonLinkEdit extends React.Component {
 			buttonClearLink = (
 				<button
 					aria-label={AlloyEditor.Strings.clearInput}
-					className="ae-button ae-icon-remove"
+					className="ae-button ae-button-clear"
 					onClick={this._clearLink}
-					title={AlloyEditor.Strings.clear}
-				/>
+					title={AlloyEditor.Strings.clear}>
+					<ButtonIcon
+						editor={this.props.editor}
+						symbol="times-circle"
+					/>
+				</button>
 			);
 		}
 
