@@ -18,84 +18,88 @@ import React from 'react';
  * @uses ButtonStateClasses
  */
 class ButtonLink extends React.Component {
-    /**
-     * Lifecycle. Returns the default values of the properties used in the widget.
-     *
-     * @instance
-     * @memberof ButtonLink
-     * @method getDefaultProps
-     * @return {Object} The default properties.
-     */
-    static defaultProps = {
-        keystroke: {
-            fn: '_requestExclusive',
-            keys: CKEDITOR.CTRL + 76 /*L*/
-        }
-    };
+	/**
+	 * Lifecycle. Returns the default values of the properties used in the widget.
+	 *
+	 * @instance
+	 * @memberof ButtonLink
+	 * @method getDefaultProps
+	 * @return {Object} The default properties.
+	 */
+	static defaultProps = {
+		keystroke: {
+			fn: '_requestExclusive',
+			keys: CKEDITOR.CTRL + 76 /*L*/,
+		},
+	};
 
-    /**
-     * The name which will be used as an alias of the button in the configuration.
-     *
-     * @default link
-     * @memberof ButtonLink
-     * @property {String} key
-     * @static
-     */
-    static key = 'link';
+	/**
+	 * The name which will be used as an alias of the button in the configuration.
+	 *
+	 * @default link
+	 * @memberof ButtonLink
+	 * @property {String} key
+	 * @static
+	 */
+	static key = 'link';
 
-    /**
-     * Checks if the current selection is contained within a link.
-     *
-     * @instance
-     * @memberof ButtonLink
-     * @method isActive
-     * @return {Boolean} True if the selection is inside a link, false otherwise.
-     */
-    isActive() {
-        return (new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection() !== null);
-    }
+	/**
+	 * Checks if the current selection is contained within a link.
+	 *
+	 * @instance
+	 * @memberof ButtonLink
+	 * @method isActive
+	 * @return {Boolean} True if the selection is inside a link, false otherwise.
+	 */
+	isActive() {
+		return (
+			new CKEDITOR.Link(
+				this.props.editor.get('nativeEditor')
+			).getFromSelection() !== null
+		);
+	}
 
-    /**
-     * Lifecycle. Renders the UI of the button.
-     *
-     * @instance
-     * @memberof ButtonLink
-     * @method render
-     * @return {Object} The content which should be rendered.
-     */
-    render() {
-        const cssClass = `ae-button ${this.getStateClasses()}`;
+	/**
+	 * Lifecycle. Renders the UI of the button.
+	 *
+	 * @instance
+	 * @memberof ButtonLink
+	 * @method render
+	 * @return {Object} The content which should be rendered.
+	 */
+	render() {
+		const cssClass = `ae-button ${this.getStateClasses()}`;
 
-        if (this.props.renderExclusive) {
-            const props = this.mergeButtonCfgProps();
+		if (this.props.renderExclusive) {
+			const props = this.mergeButtonCfgProps();
 
-            return (
-                <ButtonLinkEdit {...props} />
-            );
-        } else {
-            return (
-                <button aria-label={AlloyEditor.Strings.link} className={cssClass} data-type="button-link" onClick={this._requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.link}>
-                    <ButtonIcon editor={this.props.editor} symbol="link" />
-                </button>
-            );
-        }
-    }
+			return <ButtonLinkEdit {...props} />;
+		} else {
+			return (
+				<button
+					aria-label={AlloyEditor.Strings.link}
+					className={cssClass}
+					data-type="button-link"
+					onClick={this._requestExclusive}
+					tabIndex={this.props.tabIndex}
+					title={AlloyEditor.Strings.link}>
+					<ButtonIcon editor={this.props.editor} symbol="link" />
+				</button>
+			);
+		}
+	}
 
-    /**
-     * Requests the link button to be rendered in exclusive mode to allow the creation of a link.
-     *
-     * @instance
-     * @memberof ButtonLink
-     * @method _requestExclusive
-     * @protected
-     */
-    _requestExclusive = () => {
-        this.props.requestExclusive(ButtonLink.key);
-    }
+	/**
+	 * Requests the link button to be rendered in exclusive mode to allow the creation of a link.
+	 *
+	 * @instance
+	 * @memberof ButtonLink
+	 * @method _requestExclusive
+	 * @protected
+	 */
+	_requestExclusive = () => {
+		this.props.requestExclusive(ButtonLink.key);
+	};
 }
 
-export default ButtonCfgProps(
-    ButtonKeystroke(
-    ButtonStateClasses(
-        ButtonLink
-)));
+export default ButtonCfgProps(ButtonKeystroke(ButtonStateClasses(ButtonLink)));

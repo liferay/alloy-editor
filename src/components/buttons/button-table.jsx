@@ -12,37 +12,41 @@ import React from 'react';
  * @class ButtonTable
  */
 class ButtonTable extends React.Component {
-    /**
-     * The name which will be used as an alias of the button in the configuration.
-     *
-     * @default table
-     * @memberof ButtonTable
-     * @property {String} key
-     * @static
-     */
-    static key = 'table';
+	/**
+	 * The name which will be used as an alias of the button in the configuration.
+	 *
+	 * @default table
+	 * @memberof ButtonTable
+	 * @property {String} key
+	 * @static
+	 */
+	static key = 'table';
 
-    /**
-     * Lifecycle. Renders the UI of the button.
-     *
-     * @instance
-     * @memberof ButtonTable
-     * @method render
-     * @return {Object} The content which should be rendered.
-     */
-    render() {
-        if (this.props.renderExclusive) {
-            return (
-                <ButtonTableEdit {...this.props} />
-            );
-        } else {
-            return (
-                <button aria-label={AlloyEditor.Strings.table} className="ae-button" data-type="button-table" onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.table}>
-                    <ButtonIcon editor={this.props.editor} symbol="table" />
-                </button>
-            );
-        }
-    }
+	/**
+	 * Lifecycle. Renders the UI of the button.
+	 *
+	 * @instance
+	 * @memberof ButtonTable
+	 * @method render
+	 * @return {Object} The content which should be rendered.
+	 */
+	render() {
+		if (this.props.renderExclusive) {
+			return <ButtonTableEdit {...this.props} />;
+		} else {
+			return (
+				<button
+					aria-label={AlloyEditor.Strings.table}
+					className="ae-button"
+					data-type="button-table"
+					onClick={this.props.requestExclusive}
+					tabIndex={this.props.tabIndex}
+					title={AlloyEditor.Strings.table}>
+					<ButtonIcon editor={this.props.editor} symbol="table" />
+				</button>
+			);
+		}
+	}
 }
 
 export default ButtonTable;

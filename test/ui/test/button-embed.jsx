@@ -1,50 +1,79 @@
 import ButtonEmbed from '../../../src/components/buttons/button-embed.jsx';
 
 (function() {
-    'use strict';
+	'use strict';
 
-    var assert = chai.assert;
-    var Simulate = ReactTestUtils.Simulate;
-    var TestUtils = ReactTestUtils;
+	var assert = chai.assert;
+	var Simulate = ReactTestUtils.Simulate;
+	var TestUtils = ReactTestUtils;
 
-    describe('ButtonEmbed Component', function() {
-        this.timeout(35000);
+	describe('ButtonEmbed Component', function() {
+		this.timeout(35000);
 
-        before(Utils.createAlloyEditor);
+		before(Utils.createAlloyEditor);
 
-        after(Utils.destroyAlloyEditor);
+		after(Utils.destroyAlloyEditor);
 
-        beforeEach(Utils.beforeEach);
+		beforeEach(Utils.beforeEach);
 
-        afterEach(Utils.afterEach);
+		afterEach(Utils.afterEach);
 
-        it('should render just the embed button when not in exclusive mode', function() {
-            var buttonEmbed = ReactDOM.render(<ButtonEmbed cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={false} />, this.container);
+		it('should render just the embed button when not in exclusive mode', function() {
+			var buttonEmbed = ReactDOM.render(
+				<ButtonEmbed
+					cancelExclusive={sinon.stub()}
+					editor={this.editor}
+					renderExclusive={false}
+				/>,
+				this.container
+			);
 
-            var button = TestUtils.findRenderedDOMComponentWithTag(buttonEmbed, 'button');
+			var button = TestUtils.findRenderedDOMComponentWithTag(
+				buttonEmbed,
+				'button'
+			);
 
-            var editLink = TestUtils.scryRenderedDOMComponentsWithClass(buttonEmbed, 'ae-container-edit-link');
+			var editLink = TestUtils.scryRenderedDOMComponentsWithClass(
+				buttonEmbed,
+				'ae-container-edit-link'
+			);
 
-            assert.ok(button);
-            assert.notOk(editLink.length);
-        });
+			assert.ok(button);
+			assert.notOk(editLink.length);
+		});
 
-        it('should show the embed edit button when in exclusive mode', function() {
-            var buttonEmbed = ReactDOM.render(<ButtonEmbed cancelExclusive={sinon.stub()} editor={this.editor} renderExclusive={true} />, this.container);
+		it('should show the embed edit button when in exclusive mode', function() {
+			var buttonEmbed = ReactDOM.render(
+				<ButtonEmbed
+					cancelExclusive={sinon.stub()}
+					editor={this.editor}
+					renderExclusive={true}
+				/>,
+				this.container
+			);
 
-            var editLink = TestUtils.findRenderedDOMComponentWithClass(buttonEmbed, 'ae-container-edit-link');
+			var editLink = TestUtils.findRenderedDOMComponentWithClass(
+				buttonEmbed,
+				'ae-container-edit-link'
+			);
 
-            assert.ok(editLink);
-        });
+			assert.ok(editLink);
+		});
 
-        it('should invoke requestExclusive when clicking on the button', function() {
-            var requestExclusiveListener = sinon.stub();
+		it('should invoke requestExclusive when clicking on the button', function() {
+			var requestExclusiveListener = sinon.stub();
 
-            var buttonEmbed = ReactDOM.render(<ButtonEmbed editor={this.editor} requestExclusive={requestExclusiveListener} />, this.container);
+			var buttonEmbed = ReactDOM.render(
+				<ButtonEmbed
+					editor={this.editor}
+					requestExclusive={requestExclusiveListener}
+				/>,
+				this.container
+			);
 
-            Simulate.click(ReactDOM.findDOMNode(buttonEmbed));
+			Simulate.click(ReactDOM.findDOMNode(buttonEmbed));
 
-            assert.isTrue(requestExclusiveListener.calledOnce);
-        });
-    });
-}());
+			assert.isTrue(requestExclusiveListener.calledOnce);
+		});
+	});
+})();

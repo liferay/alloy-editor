@@ -14,50 +14,53 @@ import React from 'react';
  * @uses ButtonStyle
  */
 class ButtonSubscript extends React.Component {
-    /**
-     * Lifecycle. Returns the default values of the properties used in the widget.
-     *
-     * @instance
-     * @memberof ButtonSubscript
-     * @method getDefaultProps
-     * @return {Object} The default properties.
-     */
-    static defaultProps = {
-        command: 'subscript',
-        style: 'coreStyles_subscript'
-    };
+	/**
+	 * Lifecycle. Returns the default values of the properties used in the widget.
+	 *
+	 * @instance
+	 * @memberof ButtonSubscript
+	 * @method getDefaultProps
+	 * @return {Object} The default properties.
+	 */
+	static defaultProps = {
+		command: 'subscript',
+		style: 'coreStyles_subscript',
+	};
 
-    /**
-     * The name which will be used as an alias of the button in the configuration.
-     *
-     * @default subscript
-     * @memberof ButtonSubscript
-     * @property {String} key
-     * @static
-     */
-    static key = 'subscript';
+	/**
+	 * The name which will be used as an alias of the button in the configuration.
+	 *
+	 * @default subscript
+	 * @memberof ButtonSubscript
+	 * @property {String} key
+	 * @static
+	 */
+	static key = 'subscript';
 
-    /**
-     * Lifecycle. Renders the UI of the button.
-     *
-     * @instance
-     * @memberof ButtonSubscript
-     * @method render
-     * @return {Object} The content which should be rendered.
-     */
-    render() {
-        const cssClass = `ae-button ${this.getStateClasses()}`;
+	/**
+	 * Lifecycle. Renders the UI of the button.
+	 *
+	 * @instance
+	 * @memberof ButtonSubscript
+	 * @method render
+	 * @return {Object} The content which should be rendered.
+	 */
+	render() {
+		const cssClass = `ae-button ${this.getStateClasses()}`;
 
-        return (
-            <button aria-label={AlloyEditor.Strings.subscript} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-subscript" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.subscript}>
-                <ButtonIcon editor={this.props.editor} symbol="subscript" />
-            </button>
-        );
-    }
+		return (
+			<button
+				aria-label={AlloyEditor.Strings.subscript}
+				aria-pressed={cssClass.indexOf('pressed') !== -1}
+				className={cssClass}
+				data-type="button-subscript"
+				onClick={this.execCommand}
+				tabIndex={this.props.tabIndex}
+				title={AlloyEditor.Strings.subscript}>
+				<ButtonIcon editor={this.props.editor} symbol="subscript" />
+			</button>
+		);
+	}
 }
 
-export default ButtonCommand(
-    ButtonStateClasses(
-    ButtonStyle(
-        ButtonSubscript
-)));
+export default ButtonCommand(ButtonStateClasses(ButtonStyle(ButtonSubscript)));

@@ -1,56 +1,92 @@
 import ButtonDropdown from '../../../src/components/buttons/button-dropdown.jsx';
 
 (function() {
-    'use strict';
+	'use strict';
 
-    var assert = chai.assert;
-    var TestUtils = ReactTestUtils;
-    var Simulate = TestUtils.Simulate;
+	var assert = chai.assert;
+	var TestUtils = ReactTestUtils;
+	var Simulate = TestUtils.Simulate;
 
-    describe('PanelMenuButtonBridge', function() {
-        this.timeout(35000);
+	describe('PanelMenuButtonBridge', function() {
+		this.timeout(35000);
 
-        before(function(done) {
-            Utils.createAlloyEditor.call(this, done, {
-                extraPlugins: AlloyEditor.Core.ATTRS.extraPlugins.value + ',ae_panelmenubuttonbridge,test_panelmenubuttonbridge'
-            });
-        });
+		before(function(done) {
+			Utils.createAlloyEditor.call(this, done, {
+				extraPlugins:
+					AlloyEditor.Core.ATTRS.extraPlugins.value +
+					',ae_panelmenubuttonbridge,test_panelmenubuttonbridge',
+			});
+		});
 
-        after(Utils.destroyAlloyEditor);
+		after(Utils.destroyAlloyEditor);
 
-        beforeEach(Utils.beforeEach);
+		beforeEach(Utils.beforeEach);
 
-        afterEach(Utils.afterEach);
+		afterEach(Utils.afterEach);
 
-        it('should create a panel menu button', function() {
-            assert.property(AlloyEditor.Buttons, 'ButtonPanelMenuButton', 'ButtonPanelMenuButton should have been registered');
-        });
+		it('should create a panel menu button', function() {
+			assert.property(
+				AlloyEditor.Buttons,
+				'ButtonPanelMenuButton',
+				'ButtonPanelMenuButton should have been registered'
+			);
+		});
 
-        it('should render just the menu button when not expanded', function() {
-            var panelMenuButton = ReactDOM.render(<AlloyEditor.Buttons.ButtonPanelMenuButton editor={this.editor} expanded={false} />, this.container);
+		it('should render just the menu button when not expanded', function() {
+			var panelMenuButton = ReactDOM.render(
+				<AlloyEditor.Buttons.ButtonPanelMenuButton
+					editor={this.editor}
+					expanded={false}
+				/>,
+				this.container
+			);
 
-            var menuButton = TestUtils.findRenderedDOMComponentWithTag(panelMenuButton, 'button');
+			var menuButton = TestUtils.findRenderedDOMComponentWithTag(
+				panelMenuButton,
+				'button'
+			);
 
-            var dropdown = TestUtils.scryRenderedDOMComponentsWithClass(panelMenuButton, 'ae-dropdown');
+			var dropdown = TestUtils.scryRenderedDOMComponentsWithClass(
+				panelMenuButton,
+				'ae-dropdown'
+			);
 
-            assert.ok(menuButton);
-            assert.equal(0, dropdown.length);
-        });
+			assert.ok(menuButton);
+			assert.equal(0, dropdown.length);
+		});
 
-        it.skip('should show a dropdown with the panel css class and panel contents when expanded', function() {
-            var panelMenuButton = ReactDOM.render(<AlloyEditor.Buttons.ButtonPanelMenuButton editor={this.editor} expanded={true} />, this.container);
+		it.skip('should show a dropdown with the panel css class and panel contents when expanded', function() {
+			var panelMenuButton = ReactDOM.render(
+				<AlloyEditor.Buttons.ButtonPanelMenuButton
+					editor={this.editor}
+					expanded={true}
+				/>,
+				this.container
+			);
 
-            var dropdown = TestUtils.findAllInRenderedTree(panelMenuButton, function(component) {
-                return TestUtils.isCompositeComponentWithType(component, ButtonDropdown);
-            });
+			var dropdown = TestUtils.findAllInRenderedTree(
+				panelMenuButton,
+				function(component) {
+					return TestUtils.isCompositeComponentWithType(
+						component,
+						ButtonDropdown
+					);
+				}
+			);
 
-            assert.ok(dropdown);
-            assert.equal(1, dropdown.length);
+			assert.ok(dropdown);
+			assert.equal(1, dropdown.length);
 
-            var panelContent = TestUtils.scryRenderedDOMComponentsWithClass(dropdown[0], 'test_panelmenubuttonbridge')[0];
+			var panelContent = TestUtils.scryRenderedDOMComponentsWithClass(
+				dropdown[0],
+				'test_panelmenubuttonbridge'
+			)[0];
 
-            assert.ok(panelContent);
-            assert.equal(panelContent.innerHTML, '<span>panelMenuContent</span>');
-        });
-    });
-}());
+			assert.ok(panelContent);
+			assert.equal(
+				panelContent.innerHTML,
+				'<span>panelMenuContent</span>'
+			);
+		});
+	});
+})();

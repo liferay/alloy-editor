@@ -11,44 +11,54 @@ import React from 'react';
  * @class ButtonCamera
  */
 class ButtonCamera extends React.Component {
-    /**
-     * The name which will be used as an alias of the button in the configuration.
-     *
-     * @default camera
-     * @memberof ButtonCamera
-     * @property {String} key
-     * @static
-     */
-    static key = 'camera';
+	/**
+	 * The name which will be used as an alias of the button in the configuration.
+	 *
+	 * @default camera
+	 * @memberof ButtonCamera
+	 * @property {String} key
+	 * @static
+	 */
+	static key = 'camera';
 
-    /**
-     * Lifecycle. Renders the UI of the button.
-     *
-     * @instance
-     * @memberof ButtonCamera
-     * @method render
-     * @return {Object} The content which should be rendered.
-     */
-    render() {
-        if (this.props.renderExclusive) {
-            return (
-                <ButtonCameraImage {...this.props} />
-            );
-        } else {
-            const disabled = !(navigator.getUserMedia ||
-                (navigator.webkitGetUserMedia && location.protocol === 'https') ||
-                navigator.mozGetUserMedia ||
-                navigator.msGetUserMedia);
+	/**
+	 * Lifecycle. Renders the UI of the button.
+	 *
+	 * @instance
+	 * @memberof ButtonCamera
+	 * @method render
+	 * @return {Object} The content which should be rendered.
+	 */
+	render() {
+		if (this.props.renderExclusive) {
+			return <ButtonCameraImage {...this.props} />;
+		} else {
+			const disabled = !(
+				navigator.getUserMedia ||
+				(navigator.webkitGetUserMedia &&
+					location.protocol === 'https') ||
+				navigator.mozGetUserMedia ||
+				navigator.msGetUserMedia
+			);
 
-            const label = disabled ? AlloyEditor.Strings.cameraDisabled : AlloyEditor.Strings.camera;
+			const label = disabled
+				? AlloyEditor.Strings.cameraDisabled
+				: AlloyEditor.Strings.camera;
 
-            return (
-                <button aria-label={label} className="ae-button" data-type="button-image-camera" disabled={disabled} onClick={this.props.requestExclusive.bind(ButtonCamera.key)} tabIndex={this.props.tabIndex} title={label}>
-                    <ButtonIcon editor={this.props.editor} symbol="camera" />
-                </button>
-            );
-        }
-    }
+			return (
+				<button
+					aria-label={label}
+					className="ae-button"
+					data-type="button-image-camera"
+					disabled={disabled}
+					onClick={this.props.requestExclusive.bind(ButtonCamera.key)}
+					tabIndex={this.props.tabIndex}
+					title={label}>
+					<ButtonIcon editor={this.props.editor} symbol="camera" />
+				</button>
+			);
+		}
+	}
 }
 
 export default ButtonCamera;

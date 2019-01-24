@@ -11,158 +11,181 @@ const KEY_ESC = 27;
  * @class ButtonTableEdit
  */
 class ButtonTableEdit extends React.Component {
-    /**
-     * Lifecycle. Returns the default values of the properties used in the widget.
-     *
-     * @instance
-     * @memberof ButtonTableEdit
-     * @method getDefaultProps
-     */
-    static defaultProps = {
-        tableAttributes: {
-            border: 1,
-            cellPadding: 0,
-            cellSpacing: 0,
-            style: 'width: 100%'
-        }
-    };
+	/**
+	 * Lifecycle. Returns the default values of the properties used in the widget.
+	 *
+	 * @instance
+	 * @memberof ButtonTableEdit
+	 * @method getDefaultProps
+	 */
+	static defaultProps = {
+		tableAttributes: {
+			border: 1,
+			cellPadding: 0,
+			cellSpacing: 0,
+			style: 'width: 100%',
+		},
+	};
 
-    /**
-     * The name which will be used as an alias of the button in the configuration.
-     *
-     * @default tableEdit
-     * @memberof ButtonTableEdit
-     * @property {String} key
-     * @static
-     */
-    static key = 'tableEdit';
+	/**
+	 * The name which will be used as an alias of the button in the configuration.
+	 *
+	 * @default tableEdit
+	 * @memberof ButtonTableEdit
+	 * @property {String} key
+	 * @static
+	 */
+	static key = 'tableEdit';
 
-    /**
-     * Lifecycle. Invoked once before the component is mounted.
-     *
-     * @instance
-     * @memberof ButtonTableEdit
-     * @method getInitialState
-     */
-    constructor(props) {
-        super(props);
+	/**
+	 * Lifecycle. Invoked once before the component is mounted.
+	 *
+	 * @instance
+	 * @memberof ButtonTableEdit
+	 * @method getInitialState
+	 */
+	constructor(props) {
+		super(props);
 
-        this.rowsRef = React.createRef();
-        this.colsRef = React.createRef();
-        this.state = {
-            cols: 3,
-            rows: 3
-        };
-    }
+		this.rowsRef = React.createRef();
+		this.colsRef = React.createRef();
+		this.state = {
+			cols: 3,
+			rows: 3,
+		};
+	}
 
-    /**
-     * Lifecycle. Invoked once, only on the client (not on the server),
-     * immediately after the initial rendering occurs.
-     *
-     * Focuses on the link input to immediately allow editing.
-     *
-     * @instance
-     * @memberof ButtonTableEdit
-     * @method componentDidMount
-     */
-    componentDidMount() {
-        this.rowsRef.current.focus();
-    }
+	/**
+	 * Lifecycle. Invoked once, only on the client (not on the server),
+	 * immediately after the initial rendering occurs.
+	 *
+	 * Focuses on the link input to immediately allow editing.
+	 *
+	 * @instance
+	 * @memberof ButtonTableEdit
+	 * @method componentDidMount
+	 */
+	componentDidMount() {
+		this.rowsRef.current.focus();
+	}
 
-    /**
-     * Creates a table.
-     *
-     * @instance
-     * @memberof ButtonTableEdit
-     * @method _createTable
-     * @protected
-     */
-    _createTable = () => {
-        const editor = this.props.editor.get('nativeEditor');
-        const tableUtils = new CKEDITOR.Table(editor);
+	/**
+	 * Creates a table.
+	 *
+	 * @instance
+	 * @memberof ButtonTableEdit
+	 * @method _createTable
+	 * @protected
+	 */
+	_createTable = () => {
+		const editor = this.props.editor.get('nativeEditor');
+		const tableUtils = new CKEDITOR.Table(editor);
 
-        tableUtils.create({
-            attrs: this.props.tableAttributes,
-            cols: this.state.cols,
-            rows: this.state.rows
-        });
+		tableUtils.create({
+			attrs: this.props.tableAttributes,
+			cols: this.state.cols,
+			rows: this.state.rows,
+		});
 
-        this.props.cancelExclusive();
+		this.props.cancelExclusive();
 
-        editor.fire('actionPerformed', this);
-    }
+		editor.fire('actionPerformed', this);
+	};
 
-    /**
-     * Handles a change in input value. Sets the provided value from the user back to the input.
-     *
-     * @instance
-     * @memberof ButtonTableEdit
-     * @method _handleChange
-     * @param {String} inputName The name of the input which value should be updated.
-     * @param {SyntheticEvent} event The provided event.
-     * @protected
-     */
-    _handleChange = (inputName, event) => {
-        const state = {};
-        state[inputName] = event.target.value;
+	/**
+	 * Handles a change in input value. Sets the provided value from the user back to the input.
+	 *
+	 * @instance
+	 * @memberof ButtonTableEdit
+	 * @method _handleChange
+	 * @param {String} inputName The name of the input which value should be updated.
+	 * @param {SyntheticEvent} event The provided event.
+	 * @protected
+	 */
+	_handleChange = (inputName, event) => {
+		const state = {};
+		state[inputName] = event.target.value;
 
-        this.setState(state);
-    }
+		this.setState(state);
+	};
 
-    /**
-     * Monitors key interaction inside the input element to respond to the keys:
-     * - Enter: Creates the table.
-     * - Escape: Discards the changes.
-     *
-     * @instance
-     * @memberof ButtonTableEdit
-     * @method _handleKeyDown
-     * @param {SyntheticEvent} event The keyboard event.
-     * @protected
-     */
-    _handleKeyDown = event => {
-        if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
-            event.preventDefault();
-        }
+	/**
+	 * Monitors key interaction inside the input element to respond to the keys:
+	 * - Enter: Creates the table.
+	 * - Escape: Discards the changes.
+	 *
+	 * @instance
+	 * @memberof ButtonTableEdit
+	 * @method _handleKeyDown
+	 * @param {SyntheticEvent} event The keyboard event.
+	 * @protected
+	 */
+	_handleKeyDown = event => {
+		if (event.keyCode === KEY_ENTER || event.keyCode === KEY_ESC) {
+			event.preventDefault();
+		}
 
-        if (event.keyCode === KEY_ENTER) {
-            this._createTable();
-        } else if (event.keyCode === KEY_ESC) {
-            this.props.cancelExclusive();
-        }
-    }
+		if (event.keyCode === KEY_ENTER) {
+			this._createTable();
+		} else if (event.keyCode === KEY_ESC) {
+			this.props.cancelExclusive();
+		}
+	};
 
-    /**
-     * Lifecycle. Renders the UI of the button.
-     *
-     * @instance
-     * @memberof ButtonTableEdit
-     * @method render
-     * @return {Object} The content which should be rendered.
-     */
-    render() {
-        const time = Date.now();
-        const rowsId = time + 'rows';
-        const colsId = time + 'cols';
+	/**
+	 * Lifecycle. Renders the UI of the button.
+	 *
+	 * @instance
+	 * @memberof ButtonTableEdit
+	 * @method render
+	 * @return {Object} The content which should be rendered.
+	 */
+	render() {
+		const time = Date.now();
+		const rowsId = time + 'rows';
+		const colsId = time + 'cols';
 
-        return (
-            <div className="ae-container-edit-table">
-                <label htmlFor={rowsId}>{AlloyEditor.Strings.rows}</label>
-                <div className="ae-container-input small">
-                    <input className="ae-input" id={rowsId} onChange={this._handleChange.bind(this, 'rows')} min="1" onKeyDown={this._handleKeyDown} placeholder="Rows" ref={this.rowsRef} type="number" value={this.state.rows}></input>
-                </div>
+		return (
+			<div className="ae-container-edit-table">
+				<label htmlFor={rowsId}>{AlloyEditor.Strings.rows}</label>
+				<div className="ae-container-input small">
+					<input
+						className="ae-input"
+						id={rowsId}
+						onChange={this._handleChange.bind(this, 'rows')}
+						min="1"
+						onKeyDown={this._handleKeyDown}
+						placeholder="Rows"
+						ref={this.rowsRef}
+						type="number"
+						value={this.state.rows}
+					/>
+				</div>
 
-                <label htmlFor={colsId}>{AlloyEditor.Strings.columns}</label>
-                <div className="ae-container-input small">
-                    <input className="ae-input" id={colsId} onChange={this._handleChange.bind(this, 'cols')} min="1" onKeyDown={this._handleKeyDown} placeholder="Colums" ref={this.colsRef} type="number" value={this.state.cols}></input>
-                </div>
+				<label htmlFor={colsId}>{AlloyEditor.Strings.columns}</label>
+				<div className="ae-container-input small">
+					<input
+						className="ae-input"
+						id={colsId}
+						onChange={this._handleChange.bind(this, 'cols')}
+						min="1"
+						onKeyDown={this._handleKeyDown}
+						placeholder="Colums"
+						ref={this.colsRef}
+						type="number"
+						value={this.state.cols}
+					/>
+				</div>
 
-                <button aria-label="Confirm" className="ae-button" onClick={this._createTable}>
-                    <ButtonIcon editor={this.props.editor} symbol="check" />
-                </button>
-            </div>
-        );
-    }
+				<button
+					aria-label="Confirm"
+					className="ae-button"
+					onClick={this._createTable}>
+					<ButtonIcon editor={this.props.editor} symbol="check" />
+				</button>
+			</div>
+		);
+	}
 }
 
 export default ButtonTableEdit;

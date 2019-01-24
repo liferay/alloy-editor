@@ -1,45 +1,63 @@
 import ButtonQuote from '../../../src/components/buttons/button-quote.jsx';
 
 (function() {
-    'use strict';
+	'use strict';
 
-    var assert = chai.assert;
-    var Simulate = ReactTestUtils.Simulate;
+	var assert = chai.assert;
+	var Simulate = ReactTestUtils.Simulate;
 
-    describe('ButtonQuote', function() {
-        this.timeout(35000);
+	describe('ButtonQuote', function() {
+		this.timeout(35000);
 
-        before(Utils.createAlloyEditor);
+		before(Utils.createAlloyEditor);
 
-        after(Utils.destroyAlloyEditor);
+		after(Utils.destroyAlloyEditor);
 
-        beforeEach(Utils.beforeEach);
+		beforeEach(Utils.beforeEach);
 
-        afterEach(Utils.afterEach);
+		afterEach(Utils.afterEach);
 
-        it('should make a text selection quote on click', function() {
-            bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made quote.');
+		it('should make a text selection quote on click', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'There should be a {selection} made quote.'
+			);
 
-            var buttonQuote = ReactDOM.render(<ButtonQuote editor={this.editor} />, this.container);
+			var buttonQuote = ReactDOM.render(
+				<ButtonQuote editor={this.editor} />,
+				this.container
+			);
 
-            Simulate.click(ReactDOM.findDOMNode(buttonQuote));
+			Simulate.click(ReactDOM.findDOMNode(buttonQuote));
 
-            var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: false,
-                compatHtml: true
-            });
+			var data = bender.tools.getData(this.nativeEditor, {
+				fixHtml: false,
+				compatHtml: true,
+			});
 
-            assert.strictEqual(data, '<blockquote><p>There should be a selection made quote.</p></blockquote>');
-        });
+			assert.strictEqual(
+				data,
+				'<blockquote><p>There should be a selection made quote.</p></blockquote>'
+			);
+		});
 
-        it('should add class which represents pressed button', function() {
-            bender.tools.selection.setWithHtml(this.nativeEditor, '<blockquote>A {selection} made quote.</blockquote>');
+		it('should add class which represents pressed button', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<blockquote>A {selection} made quote.</blockquote>'
+			);
 
-            var buttonQuote = ReactDOM.render(<ButtonQuote editor={this.editor} />, this.container);
+			var buttonQuote = ReactDOM.render(
+				<ButtonQuote editor={this.editor} />,
+				this.container
+			);
 
-            var buttonDOMNode = ReactDOM.findDOMNode(buttonQuote);
+			var buttonDOMNode = ReactDOM.findDOMNode(buttonQuote);
 
-            assert.strictEqual($(buttonDOMNode).hasClass('ae-button-pressed'), true);
-        });
-    });
-}());
+			assert.strictEqual(
+				$(buttonDOMNode).hasClass('ae-button-pressed'),
+				true
+			);
+		});
+	});
+})();

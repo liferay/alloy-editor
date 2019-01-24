@@ -1,45 +1,63 @@
 import ButtonOrderedList from '../../../src/components/buttons/button-ol.jsx';
 
 (function() {
-    'use strict';
+	'use strict';
 
-    var assert = chai.assert;
-    var Simulate = ReactTestUtils.Simulate;
+	var assert = chai.assert;
+	var Simulate = ReactTestUtils.Simulate;
 
-    describe('ButtonOrderedList', function() {
-        this.timeout(35000);
+	describe('ButtonOrderedList', function() {
+		this.timeout(35000);
 
-        before(Utils.createAlloyEditor);
+		before(Utils.createAlloyEditor);
 
-        after(Utils.destroyAlloyEditor);
+		after(Utils.destroyAlloyEditor);
 
-        beforeEach(Utils.beforeEach);
+		beforeEach(Utils.beforeEach);
 
-        afterEach(Utils.afterEach);
+		afterEach(Utils.afterEach);
 
-        it('should make a text selection an ordered list on click', function() {
-            bender.tools.selection.setWithHtml(this.nativeEditor, '<p>There should be a {selection made...</p><p>An ordereed} list.</p>');
+		it('should make a text selection an ordered list on click', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<p>There should be a {selection made...</p><p>An ordereed} list.</p>'
+			);
 
-            var buttonOrderedlist = ReactDOM.render(<ButtonOrderedList editor={this.editor} />, this.container);
+			var buttonOrderedlist = ReactDOM.render(
+				<ButtonOrderedList editor={this.editor} />,
+				this.container
+			);
 
-            Simulate.click(ReactDOM.findDOMNode(buttonOrderedlist));
+			Simulate.click(ReactDOM.findDOMNode(buttonOrderedlist));
 
-            var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: false,
-                compatHtml: true
-            });
+			var data = bender.tools.getData(this.nativeEditor, {
+				fixHtml: false,
+				compatHtml: true,
+			});
 
-            assert.strictEqual(data, '<ol><li>There should be a selection made...</li><li>An ordereed list.</li></ol>');
-        });
+			assert.strictEqual(
+				data,
+				'<ol><li>There should be a selection made...</li><li>An ordereed list.</li></ol>'
+			);
+		});
 
-        it('should add class which represents pressed button', function() {
-            bender.tools.selection.setWithHtml(this.nativeEditor, '<ol><li>A {selection made...</li><li>An ordereed} list.</li></ol>');
+		it('should add class which represents pressed button', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<ol><li>A {selection made...</li><li>An ordereed} list.</li></ol>'
+			);
 
-            var buttonOrderedlist = ReactDOM.render(<ButtonOrderedList editor={this.editor} />, this.container);
+			var buttonOrderedlist = ReactDOM.render(
+				<ButtonOrderedList editor={this.editor} />,
+				this.container
+			);
 
-            var buttonDOMNode = ReactDOM.findDOMNode(buttonOrderedlist);
+			var buttonDOMNode = ReactDOM.findDOMNode(buttonOrderedlist);
 
-            assert.strictEqual($(buttonDOMNode).hasClass('ae-button-pressed'), true);
-        });
-    });
-}());
+			assert.strictEqual(
+				$(buttonDOMNode).hasClass('ae-button-pressed'),
+				true
+			);
+		});
+	});
+})();

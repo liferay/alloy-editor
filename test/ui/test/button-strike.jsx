@@ -1,45 +1,63 @@
 import ButtonStrike from '../../../src/components/buttons/button-strike.jsx';
 
 (function() {
-    'use strict';
+	'use strict';
 
-    var assert = chai.assert;
-    var Simulate = ReactTestUtils.Simulate;
+	var assert = chai.assert;
+	var Simulate = ReactTestUtils.Simulate;
 
-    describe('ButtonStrike', function() {
-        this.timeout(35000);
+	describe('ButtonStrike', function() {
+		this.timeout(35000);
 
-        before(Utils.createAlloyEditor);
+		before(Utils.createAlloyEditor);
 
-        after(Utils.destroyAlloyEditor);
+		after(Utils.destroyAlloyEditor);
 
-        beforeEach(Utils.beforeEach);
+		beforeEach(Utils.beforeEach);
 
-        afterEach(Utils.afterEach);
+		afterEach(Utils.afterEach);
 
-        it('should make a text selection strike on click', function() {
-            bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made strike.');
+		it('should make a text selection strike on click', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'There should be a {selection} made strike.'
+			);
 
-            var buttonStrike = ReactDOM.render(<ButtonStrike editor={this.editor} />, this.container);
+			var buttonStrike = ReactDOM.render(
+				<ButtonStrike editor={this.editor} />,
+				this.container
+			);
 
-            Simulate.click(ReactDOM.findDOMNode(buttonStrike));
+			Simulate.click(ReactDOM.findDOMNode(buttonStrike));
 
-            var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: false,
-                compatHtml: true
-            });
+			var data = bender.tools.getData(this.nativeEditor, {
+				fixHtml: false,
+				compatHtml: true,
+			});
 
-            assert.strictEqual(data, '<p>There should be a <s>selection</s> made strike.</p>');
-        });
+			assert.strictEqual(
+				data,
+				'<p>There should be a <s>selection</s> made strike.</p>'
+			);
+		});
 
-        it('should add class which represents pressed button', function() {
-            bender.tools.selection.setWithHtml(this.nativeEditor, 'A <s>{selection}</s> made strike.');
+		it('should add class which represents pressed button', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'A <s>{selection}</s> made strike.'
+			);
 
-            var buttonStrike = ReactDOM.render(<ButtonStrike editor={this.editor} />, this.container);
+			var buttonStrike = ReactDOM.render(
+				<ButtonStrike editor={this.editor} />,
+				this.container
+			);
 
-            var buttonDOMNode = ReactDOM.findDOMNode(buttonStrike);
+			var buttonDOMNode = ReactDOM.findDOMNode(buttonStrike);
 
-            assert.strictEqual($(buttonDOMNode).hasClass('ae-button-pressed'), true);
-        });
-    });
-}());
+			assert.strictEqual(
+				$(buttonDOMNode).hasClass('ae-button-pressed'),
+				true
+			);
+		});
+	});
+})();
