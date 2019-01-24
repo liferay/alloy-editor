@@ -8,22 +8,9 @@ const gulp = require('gulp');
 const minifyCSS = require('gulp-cssnano');
 const path = require('path');
 const rename = require('gulp-rename');
-const runSequence = require('run-sequence');
 const sass = require('gulp-sass');
 
-function errorHandler(error) {
-	this.emit('end');
-}
-
-gulp.task('build-css', function(callback) {
-	runSequence(
-		'sass2css',
-		'join-css',
-		callback
-	);
-});
-
-gulp.task('sass2css', function() {
+gulp.task('css:sass', function sassCSS(callback) {
 	return gulp
 		.src(path.join(Constants.rootDir, 'src/assets/sass/**/main.scss'))
 		.pipe(
@@ -35,41 +22,52 @@ gulp.task('sass2css', function() {
 					),
 					path.join(Constants.rootDir, 'src/assets/sass')
 				],
-				onError: errorHandler.bind(this)
+				onError(err) {
+					callback(err);
+				}
 			})
 		)
 		.pipe(gulp.dest(path.join(Constants.editorDistFolder, 'assets/css')));
 });
 
-gulp.task('join-css', function() {
-	var cssDir = path.join(Constants.editorDistFolder, 'assets/css');
-	var skins = getFolders(
-		path.join(Constants.editorDistFolder, 'assets/css/skin')
+function getJoinTasks() {
+	const cssDir = path.join(Constants.editorDistFolder, 'assets/css');
+	const skins = getFolders(
+		path.join(Constants.rootDir, 'src/assets/sass/skin')
 	);
 
-	var tasks = skins.map(function(skin) {
-		var skinFileName = 'alloy-editor-' + skin + '.css';
-		var skinFontFileName = 'alloyeditor-font-' + skin + '.css';
+	return skins.map(function(skin) {
+		const skinFileName = 'alloy-editor-' + skin + '.css';
+		const skinFontFileName = 'alloyeditor-font-' + skin + '.css';
 
-		return gulp
-			.src([
-				path.join(
-					Constants.rootDir,
-					'src/assets/sass/skin',
-					skin,
-					'.font-cache',
-					skinFontFileName
-				),
-				path.join(cssDir, 'skin', skin, 'main.css')
-			])
-			.pipe(concat(skinFileName))
-			.pipe(gulp.dest(path.join(Constants.editorDistFolder, 'assets')));
+		const fn = function() {
+			return gulp
+				.src(
+					[
+						path.join(
+							Constants.rootDir,
+							'src/assets/sass/skin',
+							skin,
+							'.font-cache',
+							skinFontFileName
+						),
+						path.join(cssDir, 'skin', skin, 'main.css')
+					],
+					{allowEmpty: true}
+				)
+				.pipe(concat(skinFileName))
+				.pipe(
+					gulp.dest(path.join(Constants.editorDistFolder, 'assets'))
+				);
+		};
+		fn.displayName = `css:join:${skin}`;
+		return fn;
 	});
+}
 
-	return es.concat.apply(null, tasks);
-});
+gulp.task('css:join', gulp.parallel(...getJoinTasks()));
 
-gulp.task('minimize-css', function() {
+gulp.task('css:minimize', function() {
 	return gulp
 		.src(path.join(Constants.editorDistFolder, 'assets/*.css'))
 		.pipe(minifyCSS())
@@ -81,3 +79,4 @@ gulp.task('minimize-css', function() {
 		.pipe(gulp.dest(path.join(Constants.editorDistFolder, 'assets')));
 });
 
+gulp.task('css:build', gulp.series('css:sass', 'css:join'));
