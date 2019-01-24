@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ButtonIcon from '../buttons/button-icon.jsx';
 import ToolbarButtons from '../base/toolbar-buttons.js';
 import WidgetArrowBox from '../base/widget-arrow-box.js';
 import WidgetDropdown from '../base/widget-dropdown.js';
@@ -114,7 +115,7 @@ class ToolbarAdd extends React.Component{
             if (this.props.selectionData && this.props.selectionData.region) {
                 buttons = (
                     <button aria-label={AlloyEditor.Strings.add} className="ae-button ae-button-add" onClick={this.props.requestExclusive.bind(this, ToolbarAdd.key)} title={AlloyEditor.Strings.add}>
-                        <span className="ae-icon-add"></span>
+                        <ButtonIcon editor={this.props.editor} symbol="plus" />
                     </button>
                 );
             }
