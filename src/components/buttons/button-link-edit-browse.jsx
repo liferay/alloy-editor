@@ -11,99 +11,109 @@ import React from 'react';
  * @class ButtonLinkEditBrowse
  */
 class ButtonLinkEditBrowse extends React.Component {
-    static propTypes = {
-        /**
-         * The editor instance where the component is being used.
-         *
-         * @property {Object} editor
-         */
-        editor: PropTypes.object.isRequired
-    };
+	static propTypes = {
+		/**
+		 * The editor instance where the component is being used.
+		 *
+		 * @property {Object} editor
+		 */
+		editor: PropTypes.object.isRequired,
+	};
 
-    static key = 'linkEditBrowse';
+	static key = 'linkEditBrowse';
 
-    constructor(props, context) {
-        super(props, context);
+	constructor(props, context) {
+		super(props, context);
 
-        const link = new CKEDITOR.Link(this.props.editor.get('nativeEditor')).getFromSelection();
-        const href = link ? link.getAttribute('href') : '';
+		const link = new CKEDITOR.Link(
+			this.props.editor.get('nativeEditor')
+		).getFromSelection();
+		const href = link ? link.getAttribute('href') : '';
 
-        this.state = {
-            element: link,
-            linkHref: href
-        };
-    }
+		this.state = {
+			element: link,
+			linkHref: href,
+		};
+	}
 
-    /**
-     * Lifecycle. Renders the UI of the button.
-     *
-     * @method render
-     * @return {Object} The content which should be rendered.
-     */
-    render() {
-        return (
-            <div className="ae-container-link-edit-browse">
-                <ButtonLinkEdit ref='linkEditButton' {...this.props} />
-                <button aria-label="Browse" className="ae-button" onClick={this._browseClick} title="browse">
-                    <ButtonIcon editor={this.props.editor} symbol="folder" />
-                </button>
-            </div>
-        );
-    }
+	/**
+	 * Lifecycle. Renders the UI of the button.
+	 *
+	 * @method render
+	 * @return {Object} The content which should be rendered.
+	 */
+	render() {
+		return (
+			<div className="ae-container-link-edit-browse">
+				<ButtonLinkEdit ref="linkEditButton" {...this.props} />
+				<button
+					aria-label="Browse"
+					className="ae-button"
+					onClick={this._browseClick}
+					title="browse">
+					<ButtonIcon editor={this.props.editor} symbol="folder" />
+				</button>
+			</div>
+		);
+	}
 
-    /**
-     * Opens an item selector dialog.
-     *
-     * @protected
-     * @method _browseClick
-     */
-    _browseClick = () => {
-        const instance = this;
+	/**
+	 * Opens an item selector dialog.
+	 *
+	 * @protected
+	 * @method _browseClick
+	 */
+	_browseClick = () => {
+		const instance = this;
 
-        const editor = this.props.editor.get('nativeEditor');
+		const editor = this.props.editor.get('nativeEditor');
 
-        const url = editor.config.documentBrowseLinkUrl;
+		const url = editor.config.documentBrowseLinkUrl;
 
-        const linkTarget = this.refs.linkEditButton.state.linkTarget;
+		const linkTarget = this.refs.linkEditButton.state.linkTarget;
 
-        // TODO: This should invoke callback or emit an event
-        //       Let's talk about the solution we prefer.
-    }
+		// TODO: This should invoke callback or emit an event
+		//       Let's talk about the solution we prefer.
+	};
 
-    /**
-     * Updates the link in the editor element. If the element didn't exist previously, it will
-     * create a new <a> element with the href specified in the link input.
-     *
-     * @protected
-     * @method _updateLink
-     * @param {String} linkHref href value for the link
-     * @param {String} linkTarget target value for the link
-     * @param {String} linkTitle if the link is a title that points to a wiki page (only works for creole)
-     */
-    _updateLink(linkHref, linkTarget, linkTitle) {
-        const editor = this.props.editor.get('nativeEditor');
-        const linkUtils = new CKEDITOR.Link(editor, { appendProtocol: false });
-        const linkAttrs = {
-            target: linkTarget
-        };
-        const modifySelection = { advance: true };
+	/**
+	 * Updates the link in the editor element. If the element didn't exist previously, it will
+	 * create a new <a> element with the href specified in the link input.
+	 *
+	 * @protected
+	 * @method _updateLink
+	 * @param {String} linkHref href value for the link
+	 * @param {String} linkTarget target value for the link
+	 * @param {String} linkTitle if the link is a title that points to a wiki page (only works for creole)
+	 */
+	_updateLink(linkHref, linkTarget, linkTitle) {
+		const editor = this.props.editor.get('nativeEditor');
+		const linkUtils = new CKEDITOR.Link(editor, {appendProtocol: false});
+		const linkAttrs = {
+			target: linkTarget,
+		};
+		const modifySelection = {advance: true};
 
-        if (linkHref) {
-            if (editor.plugins && editor.plugins.creole && !linkTitle) {
-                linkHref = location.origin + linkHref;
-            }
+		if (linkHref) {
+			if (editor.plugins && editor.plugins.creole && !linkTitle) {
+				linkHref = location.origin + linkHref;
+			}
 
-            if (this.state.element) {
-                linkAttrs.href = linkHref;
+			if (this.state.element) {
+				linkAttrs.href = linkHref;
 
-                linkUtils.update(linkAttrs, this.state.element, modifySelection);
-            } else {
-                linkUtils.create(linkHref, linkAttrs, modifySelection);
-            }
+				linkUtils.update(
+					linkAttrs,
+					this.state.element,
+					modifySelection
+				);
+			} else {
+				linkUtils.create(linkHref, linkAttrs, modifySelection);
+			}
 
-            editor.fire('actionPerformed', this);
-        }
-    }
+			editor.fire('actionPerformed', this);
+		}
+	}
 }
 
 export default ButtonLinkEditBrowse;

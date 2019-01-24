@@ -1,12 +1,12 @@
 import ButtonIndentBlock from '../../../src/components/buttons/button-indent-block.jsx';
 
-(function () {
+(function() {
 	'use strict';
 
 	var assert = chai.assert;
 	var Simulate = ReactTestUtils.Simulate;
 
-	describe('ButtonIndent', function () {
+	describe('ButtonIndent', function() {
 		this.timeout(35000);
 
 		before(Utils.createAlloyEditor);
@@ -17,53 +17,80 @@ import ButtonIndentBlock from '../../../src/components/buttons/button-indent-blo
 
 		afterEach(Utils.afterEach);
 
-		it('should indent the content when the indent button is clicked', function () {
-			bender.tools.selection.setWithHtml(this.nativeEditor, 'This text will be indented {selection}.');
+		it('should indent the content when the indent button is clicked', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'This text will be indented {selection}.'
+			);
 
-            var buttonIndent = ReactDOM.render(<ButtonIndentBlock editor={this.editor} />, this.container);
+			var buttonIndent = ReactDOM.render(
+				<ButtonIndentBlock editor={this.editor} />,
+				this.container
+			);
 
-            Simulate.click(ReactDOM.findDOMNode(buttonIndent));
+			Simulate.click(ReactDOM.findDOMNode(buttonIndent));
 
-            var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: false,
-                compatHtml: true
-            });
+			var data = bender.tools.getData(this.nativeEditor, {
+				fixHtml: false,
+				compatHtml: true,
+			});
 
-            assert.strictEqual(data, '<p style="margin-left: 40px;">This text will be indented selection.</p>');
+			assert.strictEqual(
+				data,
+				'<p style="margin-left: 40px;">This text will be indented selection.</p>'
+			);
 		});
 
-		it('should indent the content with customizable indentation', function () {
+		it('should indent the content with customizable indentation', function() {
 			this.nativeEditor.config.indentOffset = 25;
-			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100px">This text will be indent {selection}.</p>');
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<p style="margin-left: 100px">This text will be indent {selection}.</p>'
+			);
 
-            var buttonIndent = ReactDOM.render(<ButtonIndentBlock editor={this.editor} />, this.container);
+			var buttonIndent = ReactDOM.render(
+				<ButtonIndentBlock editor={this.editor} />,
+				this.container
+			);
 
-            Simulate.click(ReactDOM.findDOMNode(buttonIndent));
+			Simulate.click(ReactDOM.findDOMNode(buttonIndent));
 
-            var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: false,
-                compatHtml: true
-            });
+			var data = bender.tools.getData(this.nativeEditor, {
+				fixHtml: false,
+				compatHtml: true,
+			});
 
-            assert.strictEqual(data, '<p style="margin-left: 125px;">This text will be indent selection.</p>');
+			assert.strictEqual(
+				data,
+				'<p style="margin-left: 125px;">This text will be indent selection.</p>'
+			);
 		});
 
-		it('Should indent the content with a customizable indentation unit', function () {
+		it('Should indent the content with a customizable indentation unit', function() {
 			this.nativeEditor.config.indentOffset = 25;
 			this.nativeEditor.config.indentUnit = 'em';
 
-			bender.tools.selection.setWithHtml(this.nativeEditor, '<p style="margin-left: 100em">This text will be indent {selection}.</p>');
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<p style="margin-left: 100em">This text will be indent {selection}.</p>'
+			);
 
-            var buttonIndent = ReactDOM.render(<ButtonIndentBlock editor={this.editor} />, this.container);
+			var buttonIndent = ReactDOM.render(
+				<ButtonIndentBlock editor={this.editor} />,
+				this.container
+			);
 
-            Simulate.click(ReactDOM.findDOMNode(buttonIndent));
+			Simulate.click(ReactDOM.findDOMNode(buttonIndent));
 
-            var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: false,
-                compatHtml: true
-            });
+			var data = bender.tools.getData(this.nativeEditor, {
+				fixHtml: false,
+				compatHtml: true,
+			});
 
-            assert.strictEqual(data, '<p style="margin-left: 125em;">This text will be indent selection.</p>');
+			assert.strictEqual(
+				data,
+				'<p style="margin-left: 125em;">This text will be indent selection.</p>'
+			);
 		});
 	});
-}());
+})();

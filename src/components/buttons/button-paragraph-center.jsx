@@ -13,49 +13,54 @@ import React from 'react';
  * @uses ButtonStateClasses
  */
 class ButtonParagraphCenter extends React.Component {
-    /**
-     * Lifecycle. Returns the default values of the properties used in the widget.
-     *
-     * @instance
-     * @memberof ButtonParagraphCenter
-     * @method getDefaultProps
-     * @return {Object} The default properties.
-     */
-    static defaultProps = {
-        command: 'justifycenter'
-    };
+	/**
+	 * Lifecycle. Returns the default values of the properties used in the widget.
+	 *
+	 * @instance
+	 * @memberof ButtonParagraphCenter
+	 * @method getDefaultProps
+	 * @return {Object} The default properties.
+	 */
+	static defaultProps = {
+		command: 'justifycenter',
+	};
 
-    /**
-     * The name which will be used as an alias of the button in the configuration.
-     *
-     * @default paragraphCenter
-     * @memberof ButtonParagraphCenter
-     * @property {String} key
-     * @static
-     */
-    static key = 'paragraphCenter';
+	/**
+	 * The name which will be used as an alias of the button in the configuration.
+	 *
+	 * @default paragraphCenter
+	 * @memberof ButtonParagraphCenter
+	 * @property {String} key
+	 * @static
+	 */
+	static key = 'paragraphCenter';
 
-    /**
-     * Lifecycle. Renders the UI of the button.
-     *
-     * @instance
-     * @memberof ButtonParagraphCenter
-     * @method render
-     * @return {Object} The content which should be rendered.
-     */
-    render() {
-        const cssClass = `ae-button ${this.getStateClasses()}`;
+	/**
+	 * Lifecycle. Renders the UI of the button.
+	 *
+	 * @instance
+	 * @memberof ButtonParagraphCenter
+	 * @method render
+	 * @return {Object} The content which should be rendered.
+	 */
+	render() {
+		const cssClass = `ae-button ${this.getStateClasses()}`;
 
-        return (
-            <button aria-label={AlloyEditor.Strings.alignCenter} aria-pressed={cssClass.indexOf('pressed') !== -1} className={cssClass} data-type="button-paragraph-center" onClick={this.execCommand} tabIndex={this.props.tabIndex} title={AlloyEditor.Strings.alignCenter}>
-                <ButtonIcon editor={this.props.editor} symbol="align-center" />
-            </button>
-        );
-    }
+		return (
+			<button
+				aria-label={AlloyEditor.Strings.alignCenter}
+				aria-pressed={cssClass.indexOf('pressed') !== -1}
+				className={cssClass}
+				data-type="button-paragraph-center"
+				onClick={this.execCommand}
+				tabIndex={this.props.tabIndex}
+				title={AlloyEditor.Strings.alignCenter}>
+				<ButtonIcon editor={this.props.editor} symbol="align-center" />
+			</button>
+		);
+	}
 }
 
 export default ButtonCommand(
-    ButtonCommandActive(
-    ButtonStateClasses(
-        ButtonParagraphCenter
-)));
+	ButtonCommandActive(ButtonStateClasses(ButtonParagraphCenter))
+);

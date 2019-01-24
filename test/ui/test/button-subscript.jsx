@@ -1,45 +1,63 @@
 import ButtonSubscript from '../../../src/components/buttons/button-subscript.jsx';
 
 (function() {
-    'use strict';
+	'use strict';
 
-    var assert = chai.assert;
-    var Simulate = ReactTestUtils.Simulate;
+	var assert = chai.assert;
+	var Simulate = ReactTestUtils.Simulate;
 
-    describe('ButtonSubscript', function() {
-        this.timeout(35000);
+	describe('ButtonSubscript', function() {
+		this.timeout(35000);
 
-        before(Utils.createAlloyEditor);
+		before(Utils.createAlloyEditor);
 
-        after(Utils.destroyAlloyEditor);
+		after(Utils.destroyAlloyEditor);
 
-        beforeEach(Utils.beforeEach);
+		beforeEach(Utils.beforeEach);
 
-        afterEach(Utils.afterEach);
+		afterEach(Utils.afterEach);
 
-        it('should make a text selection subscript on click', function() {
-            bender.tools.selection.setWithHtml(this.nativeEditor, 'There should be a {selection} made subscript.');
+		it('should make a text selection subscript on click', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'There should be a {selection} made subscript.'
+			);
 
-            var buttonSubscript = ReactDOM.render(<ButtonSubscript editor={this.editor} />, this.container);
+			var buttonSubscript = ReactDOM.render(
+				<ButtonSubscript editor={this.editor} />,
+				this.container
+			);
 
-            Simulate.click(ReactDOM.findDOMNode(buttonSubscript));
+			Simulate.click(ReactDOM.findDOMNode(buttonSubscript));
 
-            var data = bender.tools.getData(this.nativeEditor, {
-                fixHtml: false,
-                compatHtml: true
-            });
+			var data = bender.tools.getData(this.nativeEditor, {
+				fixHtml: false,
+				compatHtml: true,
+			});
 
-            assert.strictEqual(data, '<p>There should be a <sub>selection</sub> made subscript.</p>');
-        });
+			assert.strictEqual(
+				data,
+				'<p>There should be a <sub>selection</sub> made subscript.</p>'
+			);
+		});
 
-        it('should add class which represents pressed button', function() {
-            bender.tools.selection.setWithHtml(this.nativeEditor, 'A <sub>{selection}</sub> made subscript.');
+		it('should add class which represents pressed button', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'A <sub>{selection}</sub> made subscript.'
+			);
 
-            var buttonSubscript = ReactDOM.render(<ButtonSubscript editor={this.editor} />, this.container);
+			var buttonSubscript = ReactDOM.render(
+				<ButtonSubscript editor={this.editor} />,
+				this.container
+			);
 
-            var buttonDOMNode = ReactDOM.findDOMNode(buttonSubscript);
+			var buttonDOMNode = ReactDOM.findDOMNode(buttonSubscript);
 
-            assert.strictEqual($(buttonDOMNode).hasClass('ae-button-pressed'), true);
-        });
-    });
-}());
+			assert.strictEqual(
+				$(buttonDOMNode).hasClass('ae-button-pressed'),
+				true
+			);
+		});
+	});
+})();

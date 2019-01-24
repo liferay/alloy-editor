@@ -6,25 +6,23 @@ import React from 'react';
  * @class ButtonsStylesListHeader
  */
 class ButtonsStylesListHeader extends React.Component {
-    static key = 'buttonStylesListHeader';
+	static key = 'buttonStylesListHeader';
 
-    /**
-     * Lifecycle. Renders the UI of the button.
-     *
-     * @instance
-     * @memberof ButtonsStylesListHeader
-     * @method render
-     * @return {Object} The content which should be rendered.
-     */
-    render() {
-        if (this.props.styles && this.props.styles.length) {
-            return (
-                <span className="ae-list-header">{this.props.name}</span>
-            );
-        } else {
-            return null;
-        }
-    }
+	/**
+	 * Lifecycle. Renders the UI of the button.
+	 *
+	 * @instance
+	 * @memberof ButtonsStylesListHeader
+	 * @method render
+	 * @return {Object} The content which should be rendered.
+	 */
+	render() {
+		if (this.props.styles && this.props.styles.length) {
+			return <span className="ae-list-header">{this.props.name}</span>;
+		} else {
+			return null;
+		}
+	}
 }
 
 export default ButtonsStylesListHeader;
