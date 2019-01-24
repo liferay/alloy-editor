@@ -3,5 +3,5 @@ import ToolbarStyles from './toolbar-styles.jsx';
 
 export default {
 	[ToolbarAdd.key]: ToolbarAdd,
-	[ToolbarStyles.key]: ToolbarStyles
+	[ToolbarStyles.key]: ToolbarStyles,
 };

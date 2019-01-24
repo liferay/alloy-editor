@@ -32,9 +32,9 @@
 							editor.fire('editorInteraction', {
 								manualSelection: selectionKeystroke.selection,
 								nativeEvent: {},
-								selectionData: editor.getSelectionData()
+								selectionData: editor.getSelectionData(),
 							});
-						}
+						},
 					});
 
 					var commandName =
@@ -44,6 +44,6 @@
 					editor.setKeystroke(selectionKeystroke.keys, commandName);
 				});
 			}
-		}
+		},
 	});
 })();

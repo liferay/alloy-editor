@@ -18,5 +18,5 @@ module.exports = {
 	distFolder,
 	editorDistFolder,
 	langDir,
-	srcLangDir
+	srcLangDir,
 };

@@ -7,7 +7,7 @@
 	var expectedEmptyValue = {
 		1: ['<p>' + brFiller + '</p>'],
 		2: ['', ' ', brFiller],
-		3: ['<div>' + brFiller + '</div>']
+		3: ['<div>' + brFiller + '</div>'],
 	};
 
 	var placeholderClass = 'ae-placeholder';
@@ -23,10 +23,10 @@
 					{
 						enterMode: CKEDITOR.ENTER_P,
 						extraPlugins: 'ae_placeholder',
-						placeholderClass: placeholderClass
+						placeholderClass: placeholderClass,
 					},
 					{
-						'data-placeholder': 'This is placeholder'
+						'data-placeholder': 'This is placeholder',
 					}
 				);
 			});
@@ -157,10 +157,10 @@
 					{
 						enterMode: CKEDITOR.ENTER_BR,
 						extraPlugins: 'ae_placeholder',
-						placeholderClass: 'ae-placeholder'
+						placeholderClass: 'ae-placeholder',
 					},
 					{
-						'data-placeholder': 'This is placeholder'
+						'data-placeholder': 'This is placeholder',
 					}
 				);
 			});
@@ -298,10 +298,10 @@
 					{
 						enterMode: CKEDITOR.ENTER_DIV,
 						extraPlugins: 'ae_placeholder',
-						placeholderClass: 'ae-placeholder'
+						placeholderClass: 'ae-placeholder',
 					},
 					{
-						'data-placeholder': 'This is placeholder'
+						'data-placeholder': 'This is placeholder',
 					}
 				);
 			});

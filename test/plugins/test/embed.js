@@ -37,7 +37,7 @@
 			);
 
 			nativeEditor.fire('paste', {
-				dataValue: 'this a <a href="http://test"></a> test'
+				dataValue: 'this a <a href="http://test"></a> test',
 			});
 
 			assert.isTrue(spy.notCalled);
@@ -63,7 +63,7 @@
 			bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
 			nativeEditor.fire('paste', {
-				dataValue: url
+				dataValue: url,
 			});
 
 			assert.strictEqual(
@@ -96,7 +96,7 @@
 			bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
 			nativeEditor.fire('paste', {
-				dataValue: url
+				dataValue: url,
 			});
 
 			assert.strictEqual(
@@ -123,7 +123,7 @@
 			) {
 				success({
 					html: tweetReturnHtml,
-					provider_name: 'other_provider'
+					provider_name: 'other_provider',
 				});
 			});
 
@@ -139,7 +139,7 @@
 			bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
 			nativeEditor.fire('paste', {
-				dataValue: url
+				dataValue: url,
 			});
 
 			assert.isTrue(isCalled);
@@ -169,7 +169,7 @@
 			bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
 			nativeEditor.fire('paste', {
-				dataValue: url
+				dataValue: url,
 			});
 
 			assert.isTrue(isCalled);

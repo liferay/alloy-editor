@@ -10,7 +10,7 @@ const defaultConfig = Object.assign(Common, {
 	// test results reporter to use
 	// possible values: 'coverage', 'dots', 'progress', 'verbose'
 	// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-	reporters: ['verbose', 'coverage']
+	reporters: ['verbose', 'coverage'],
 });
 
 module.exports = function(config) {

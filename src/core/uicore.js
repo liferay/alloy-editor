@@ -90,7 +90,7 @@
 					if (selectionData) {
 						editor.fire('editorInteraction', {
 							nativeEvent: event.data.$,
-							selectionData: selectionData
+							selectionData: selectionData,
 						});
 					}
 				}
@@ -179,6 +179,6 @@
 			document.body.appendChild(statusElement);
 
 			return statusElement;
-		}
+		},
 	});
 })();

@@ -25,7 +25,7 @@
 
 				var data = bender.tools.getData(this.nativeEditor, {
 					fixHtml: true,
-					compatHtml: true
+					compatHtml: true,
 				});
 
 				assert.strictEqual(data, expected, message);
@@ -133,7 +133,7 @@
 			}
 
 			return fixtureString;
-		}
+		},
 	};
 
 	window.Utils = Utils;

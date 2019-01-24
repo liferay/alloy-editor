@@ -8,7 +8,7 @@
 
 		it('should merge objects and ignore inherited properties', function() {
 			var obj1 = {
-				prop1: 'val1'
+				prop1: 'val1',
 			};
 
 			Object.prototype.test123 = 'val123';

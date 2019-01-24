@@ -23,7 +23,7 @@
 			borderMap = {
 				thin: '0px',
 				medium: '1px',
-				thick: '2px'
+				thick: '2px',
 			};
 
 		if (computed.indexOf('px') < 0) {
@@ -128,7 +128,7 @@
 				y: tbodyPosition.y,
 				width: pillarWidth,
 				height: tbody.$.offsetHeight,
-				rtl: rtl
+				rtl: rtl,
 			});
 		}
 
@@ -287,7 +287,7 @@
 							getWidth(table) +
 								getBorderWidth(table, 'left') +
 								getBorderWidth(table, 'right'),
-						currentShift
+						currentShift,
 					]
 				);
 			}
@@ -335,7 +335,7 @@
 			width: pxUnit(pillar.width),
 			height: pxUnit(pillar.height),
 			left: pxUnit(pillar.x),
-			top: pxUnit(pillar.y)
+			top: pxUnit(pillar.y),
 		});
 
 		resizer.on('mousedown', onMouseDown, this);
@@ -492,6 +492,6 @@
 					}
 				);
 			});
-		}
+		},
 	});
 })();

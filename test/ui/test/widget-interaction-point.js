@@ -24,7 +24,7 @@ import WidgetPosition from './mock/widget-position';
 						data: {
 							nativeEvent: {
 								pageX: 300,
-								pageY: 300
+								pageY: 300,
 							},
 							selectionData: {
 								region: {
@@ -37,18 +37,18 @@ import WidgetPosition from './mock/widget-position';
 									endRect: {
 										left: 10,
 										right: 20,
-										top: 600
+										top: 600,
 									},
 									startRect: {
 										left: 10,
 										right: 60,
-										top: 600
-									}
-								}
-							}
-						}
-					}
-				}
+										top: 600,
+									},
+								},
+							},
+						},
+					},
+				},
 			};
 
 			done();
@@ -73,7 +73,7 @@ import WidgetPosition from './mock/widget-position';
 				var result = {
 					direction: 1,
 					x: 20,
-					y: 600
+					y: 600,
 				};
 
 				assert.deepEqual(
@@ -92,7 +92,7 @@ import WidgetPosition from './mock/widget-position';
 				var result = {
 					direction: 0,
 					x: 20,
-					y: 700
+					y: 700,
 				};
 
 				assert.deepEqual(
@@ -113,7 +113,7 @@ import WidgetPosition from './mock/widget-position';
 				var result = {
 					direction: 0,
 					x: 20,
-					y: 700
+					y: 700,
 				};
 
 				assert.deepEqual(
@@ -128,7 +128,7 @@ import WidgetPosition from './mock/widget-position';
 				var result = {
 					direction: 1,
 					x: 20,
-					y: 600
+					y: 600,
 				};
 
 				assert.deepEqual(
@@ -145,7 +145,7 @@ import WidgetPosition from './mock/widget-position';
 				var result = {
 					direction: 1,
 					x: 30,
-					y: 600
+					y: 600,
 				};
 
 				assert.deepEqual(
@@ -166,7 +166,7 @@ import WidgetPosition from './mock/widget-position';
 				var result = {
 					direction: 1,
 					x: 300,
-					y: 500
+					y: 500,
 				};
 				assert.deepEqual(
 					result,
@@ -186,7 +186,7 @@ import WidgetPosition from './mock/widget-position';
 				var result = {
 					direction: 1,
 					x: 300,
-					y: 500
+					y: 500,
 				};
 
 				assert.deepEqual(
@@ -206,7 +206,7 @@ import WidgetPosition from './mock/widget-position';
 				var result = {
 					direction: 1,
 					x: 35,
-					y: 600
+					y: 600,
 				};
 
 				assert.deepEqual(
@@ -225,7 +225,7 @@ import WidgetPosition from './mock/widget-position';
 				var result = {
 					direction: 0,
 					x: 35,
-					y: 5
+					y: 5,
 				};
 
 				assert.deepEqual(

@@ -58,7 +58,7 @@
 						this._onKeyUp,
 						this,
 						{
-							editor: editor
+							editor: editor,
 						}
 					);
 				}.bind(this)
@@ -375,10 +375,10 @@
 				this._onKeyDown,
 				this,
 				{
-					editor: editor
+					editor: editor,
 				},
 				1
 			);
-		}
+		},
 	});
 })();

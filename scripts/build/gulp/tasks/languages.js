@@ -10,7 +10,7 @@ const walk = require('walk');
 const hashSources = [
 	path.join(Constants.rootDir, 'lib', 'lang/*.js'),
 	Constants.ckeditorLangKeys,
-	path.join(Constants.langDir + '/*.json')
+	path.join(Constants.langDir + '/*.json'),
 ];
 
 const hashFile = path.join('./', '_hash');
@@ -34,12 +34,12 @@ const getStringLangValue = function(value, lang) {
 function updateLangFiles(callback) {
 	// Mock the CKEDITOR.lang object to walk the ckeditor js lang files
 	global.CKEDITOR = {
-		lang: {}
+		lang: {},
 	};
 
 	// Mock AlloyEditor
 	global.AlloyEditor = {
-		Strings: {}
+		Strings: {},
 	};
 
 	const langWalker = walk.walk(Constants.srcLangDir);

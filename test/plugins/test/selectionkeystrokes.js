@@ -14,9 +14,9 @@
 				selectionKeystrokes: [
 					{
 						keys: CKEDITOR.CTRL + KEY_L,
-						selection: 'foo'
-					}
-				]
+						selection: 'foo',
+					},
+				],
 			});
 		});
 
@@ -33,7 +33,7 @@
 
 			happen.keydown(this._editable, {
 				ctrlKey: true,
-				keyCode: KEY_L
+				keyCode: KEY_L,
 			});
 
 			assert.ok(onEditorInteraction.calledOnce);

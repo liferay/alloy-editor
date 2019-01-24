@@ -48,7 +48,7 @@
 				var tableUtils = new CKEDITOR.Table(this.nativeEditor);
 
 				tableUtils.create({
-					rows: 3
+					rows: 3,
 				});
 			};
 
@@ -62,7 +62,7 @@
 				var tableUtils = new CKEDITOR.Table(this.nativeEditor);
 
 				tableUtils.create({
-					cols: 3
+					cols: 3,
 				});
 			};
 
@@ -78,7 +78,7 @@
 				tableUtils.create({
 					cols: 3,
 					heading: CKEDITOR.Table.HEADING_ROW,
-					rows: 3
+					rows: 3,
 				});
 			};
 
@@ -94,7 +94,7 @@
 				tableUtils.create({
 					cols: 3,
 					heading: CKEDITOR.Table.HEADING_COL,
-					rows: 3
+					rows: 3,
 				});
 			};
 
@@ -110,7 +110,7 @@
 				tableUtils.create({
 					cols: 3,
 					heading: CKEDITOR.Table.HEADING_BOTH,
-					rows: 3
+					rows: 3,
 				});
 			};
 
@@ -214,7 +214,7 @@
 				{initial: HEADING_COL, expected: HEADING_BOTH},
 				{initial: HEADING_BOTH, expected: HEADING_NONE},
 				{initial: HEADING_BOTH, expected: HEADING_ROW},
-				{initial: HEADING_BOTH, expected: HEADING_COL}
+				{initial: HEADING_BOTH, expected: HEADING_COL},
 			];
 
 			testMatrix.forEach(
@@ -310,8 +310,8 @@
 					attrs: {
 						bgcolor: '#ff0',
 						border: 0,
-						style: 'width: 100%;'
-					}
+						style: 'width: 100%;',
+					},
 				});
 			};
 

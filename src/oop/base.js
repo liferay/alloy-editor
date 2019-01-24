@@ -71,7 +71,7 @@ extend(Base, Attribute, {
 
 			item.apply(this, args);
 		}
-	}
+	},
 });
 
 export default Base;

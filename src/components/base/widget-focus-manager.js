@@ -143,7 +143,7 @@ export default WrappedComponent =>
 		 */
 		_getFocusAction(event) {
 			var action = {
-				type: ACTION_NONE
+				type: ACTION_NONE,
 			};
 
 			if (this.props.keys) {
@@ -187,7 +187,7 @@ export default WrappedComponent =>
 		_getFocusDismissAction(event, focusMoveDirection) {
 			var dismissAction = {
 				direction: focusMoveDirection,
-				dismiss: false
+				dismiss: false,
 			};
 
 			if (this.props.onDismiss) {

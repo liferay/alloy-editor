@@ -14,7 +14,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 	const EMBED_ALIGNMENT = {
 		CENTER: 'center',
 		LEFT: 'left',
-		RIGHT: 'right'
+		RIGHT: 'right',
 	};
 
 	/**
@@ -25,7 +25,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 	const ALIGN_VALUES = [
 		EMBED_ALIGNMENT.CENTER,
 		EMBED_ALIGNMENT.LEFT,
-		EMBED_ALIGNMENT.RIGHT
+		EMBED_ALIGNMENT.RIGHT,
 	];
 
 	/**
@@ -36,16 +36,16 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 	const CENTERED_EMBED_STYLE = [
 		{
 			name: 'display',
-			value: 'block'
+			value: 'block',
 		},
 		{
 			name: 'margin-left',
-			value: 'auto'
+			value: 'auto',
 		},
 		{
 			name: 'margin-right',
-			value: 'auto'
-		}
+			value: 'auto',
+		},
 	];
 
 	/**
@@ -148,7 +148,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 	const getSelectedElement = function(editor) {
 		const result = {
 			alignment: null,
-			element: null
+			element: null,
 		};
 
 		const selection = editor.getSelection();
@@ -277,7 +277,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 					type: provider.type,
 					urlSchemes: provider.urlSchemes.map(
 						scheme => new RegExp(scheme)
-					)
+					),
 				};
 			});
 
@@ -288,7 +288,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 					helpMessageIcon: Liferay.Util.getLexiconIconTpl(
 						'info-circle'
 					),
-					url: url
+					url: url,
 				});
 			};
 
@@ -365,7 +365,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 									const embedId = scheme.exec(url)[1];
 
 									content = provider.tpl.output({
-										embedId: embedId
+										embedId: embedId,
 									});
 								}
 
@@ -387,7 +387,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 					} else {
 						showError(AlloyEditor.Strings.enterValidUrl);
 					}
-				}
+				},
 			});
 
 			editor.widgets.add('embedurl', {
@@ -418,7 +418,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 								: Math.round((width / bounds.width) * 100);
 
 						styles = {
-							width: `${pwidth}%`
+							width: `${pwidth}%`,
 						};
 					}
 
@@ -450,7 +450,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 						defaultEmbedWidgetUpcastFn;
 
 					return embedWidgetUpcastFn(element, data);
-				}
+				},
 			});
 
 			window.addEventListener(
@@ -488,8 +488,8 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 								nativeEvent: {},
 								selectionData: {
 									element: widgetElement,
-									region: region
-								}
+									region: region,
+								},
 							});
 						}
 
@@ -545,7 +545,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 						setEmbedAlignment(currentElement, currentAlignment);
 					}
 					selectWidget(editor);
-				}
+				},
 			});
 
 			document.addEventListener('mousedown', mouseDownListener, false);
@@ -645,7 +645,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 					});
 				}
 			});
-		}
+		},
 	});
 }
 

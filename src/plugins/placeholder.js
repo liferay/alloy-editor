@@ -17,7 +17,7 @@
 	var enterModeEmptyValue = {
 		1: ['<p>' + brFiller + '</p>'],
 		2: ['', ' ', brFiller],
-		3: ['<div>' + brFiller + '</div>']
+		3: ['<div>' + brFiller + '</div>'],
 	};
 
 	/**
@@ -91,6 +91,6 @@
 			var editorNode = new CKEDITOR.dom.element(editor.element.$);
 
 			editorNode.removeClass(editor.config.placeholderClass);
-		}
+		},
 	});
 })();

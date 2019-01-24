@@ -13,8 +13,8 @@
 
 			Clazz.ATTRS = {
 				attr1: {
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
@@ -30,14 +30,14 @@
 
 			Clazz.ATTRS = {
 				attr1: {
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'new val'
+				attr1: 'new val',
 			});
 			assert.strictEqual('new val', inst.get('attr1'));
 		});
@@ -49,8 +49,8 @@
 
 			Clazz.ATTRS = {
 				attr1: {
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
@@ -74,8 +74,8 @@
 			Clazz.ATTRS = {
 				attr1: {
 					getter: getter,
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
@@ -99,14 +99,14 @@
 
 			Clazz.ATTRS = {
 				attr1: {
-					setter: setter
-				}
+					setter: setter,
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'val1'
+				attr1: 'val1',
 			});
 
 			var val = inst.get('attr1');
@@ -125,8 +125,8 @@
 			Clazz.ATTRS = {
 				attr1: {
 					setter: setter,
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
@@ -149,8 +149,8 @@
 			Clazz.ATTRS = {
 				attr1: {
 					setter: setter,
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
@@ -169,14 +169,14 @@
 			Clazz.ATTRS = {
 				attr1: {
 					readOnly: true,
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'val2'
+				attr1: 'val2',
 			});
 
 			assert.strictEqual('val1', inst.get('attr1'));
@@ -190,8 +190,8 @@
 			Clazz.ATTRS = {
 				attr1: {
 					readOnly: true,
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
@@ -210,14 +210,14 @@
 
 			Clazz.ATTRS = {
 				attr1: {
-					readOnly: true
-				}
+					readOnly: true,
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'val2'
+				attr1: 'val2',
 			});
 
 			assert.isUndefined(inst.get('attr1'));
@@ -231,14 +231,14 @@
 			Clazz.ATTRS = {
 				attr1: {
 					readOnly: true,
-					writeOnce: true
-				}
+					writeOnce: true,
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'val2'
+				attr1: 'val2',
 			});
 
 			assert.isUndefined(inst.get('attr1'));
@@ -251,14 +251,14 @@
 
 			Clazz.ATTRS = {
 				attr1: {
-					writeOnce: true
-				}
+					writeOnce: true,
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'val1'
+				attr1: 'val1',
 			});
 
 			inst.set('attr1', 'val2');
@@ -274,14 +274,14 @@
 			Clazz.ATTRS = {
 				attr1: {
 					writeOnce: true,
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'val2'
+				attr1: 'val2',
 			});
 
 			inst.set('attr1', 'val3');
@@ -296,8 +296,8 @@
 
 			Clazz.ATTRS = {
 				attr1: {
-					writeOnce: true
-				}
+					writeOnce: true,
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
@@ -321,14 +321,14 @@
 					validator: function(val) {
 						return false;
 					},
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'val2'
+				attr1: 'val2',
 			});
 
 			assert.strictEqual('val1', inst.get('attr1'));
@@ -344,8 +344,8 @@
 					validator: function(val) {
 						return false;
 					},
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
@@ -367,14 +367,14 @@
 
 			Clazz.ATTRS = {
 				attr1: {
-					validator: validator
-				}
+					validator: validator,
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'val2'
+				attr1: 'val2',
 			});
 
 			assert.ok(validator.notCalled);
@@ -391,14 +391,14 @@
 					validator: function(val) {
 						return true;
 					},
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
 
 			var inst = new Clazz({
-				attr1: 'val2'
+				attr1: 'val2',
 			});
 
 			assert.strictEqual('val2', inst.get('attr1'));
@@ -416,8 +416,8 @@
 			Clazz.ATTRS = {
 				attr1: {
 					validator: validator,
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);
@@ -434,8 +434,8 @@
 
 			Clazz1.ATTRS = {
 				attr1: {
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			var Clazz2 = function(config) {
@@ -444,19 +444,19 @@
 
 			Clazz2.ATTRS = {
 				attr1: {
-					value: 'val2'
-				}
+					value: 'val2',
+				},
 			};
 
 			Clazz1 = AlloyEditor.OOP.extend(Clazz1, AlloyEditor.Attribute);
 			Clazz2 = AlloyEditor.OOP.extend(Clazz2, AlloyEditor.Attribute);
 
 			var inst1 = new Clazz1({
-				attr1: 'val1.1'
+				attr1: 'val1.1',
 			});
 
 			var inst2 = new Clazz1({
-				attr1: 'val2.2'
+				attr1: 'val2.2',
 			});
 
 			assert.strictEqual('val1.1', inst1.get('attr1'));
@@ -475,8 +475,8 @@
 			Clazz.ATTRS = {
 				attr1: {
 					valueFn: valueFn,
-					value: 'val1'
-				}
+					value: 'val1',
+				},
 			};
 
 			Clazz = AlloyEditor.OOP.extend(Clazz, AlloyEditor.Attribute);

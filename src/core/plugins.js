@@ -17,7 +17,7 @@
 					function(originalPluginMethod) {
 						var payload = {
 							phase: methodName,
-							plugin: plugin
+							plugin: plugin,
 						};
 
 						return function(editor) {

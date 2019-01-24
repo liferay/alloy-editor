@@ -21,7 +21,7 @@ export default WrappedComponent =>
 		cancelExclusive(itemExclusive) {
 			if (this.state.itemExclusive === itemExclusive) {
 				this.setState({
-					itemExclusive: null
+					itemExclusive: null,
 				});
 			}
 		}
@@ -45,7 +45,7 @@ export default WrappedComponent =>
 			// Re-rendering is triggered by editorInteraction, so we have to
 			// reset the exclusive state and render the UI according to the new selection.
 			this.setState({
-				itemExclusive: null
+				itemExclusive: null,
 			});
 		}
 
@@ -90,7 +90,7 @@ export default WrappedComponent =>
 			return CKEDITOR.tools.merge(obj, {
 				cancelExclusive: this.cancelExclusive.bind(this, itemKey),
 				renderExclusive: this.state.itemExclusive === itemKey,
-				requestExclusive: this.requestExclusive.bind(this, itemKey)
+				requestExclusive: this.requestExclusive.bind(this, itemKey),
 			});
 		}
 
@@ -104,7 +104,7 @@ export default WrappedComponent =>
 		 */
 		requestExclusive = itemExclusive => {
 			this.setState({
-				itemExclusive: itemExclusive
+				itemExclusive: itemExclusive,
 			});
 		};
 	};

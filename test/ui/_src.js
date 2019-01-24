@@ -21,5 +21,5 @@ module.exports = [
 	'components/base/*.js*',
 	'components/buttons/*.js*',
 	'components/toolbars/*.js*',
-	'components/main.js*'
+	'components/main.js*',
 ];

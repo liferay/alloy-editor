@@ -117,5 +117,5 @@ export default {
 	[ButtonTargetList.key]: ButtonTargetList,
 	[ButtonTwitter.key]: ButtonTwitter,
 	[ButtonUl.key]: ButtonUl,
-	[ButtonUnderline.key]: ButtonUnderline
+	[ButtonUnderline.key]: ButtonUnderline,
 };

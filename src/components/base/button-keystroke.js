@@ -38,7 +38,7 @@ export default WrappedComponent =>
 						} else if (Lang.isFunction(keystrokeFn)) {
 							keystrokeFn.call(this, editor);
 						}
-					}.bind(this)
+					}.bind(this),
 				});
 
 				nativeEditor.addCommand(commandName, command);

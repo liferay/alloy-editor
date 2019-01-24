@@ -67,8 +67,8 @@ function bender() {}
 			elements: {
 				'^': function(el) {
 					if (el.attributes['data-cke-temp']) return false;
-				}
-			}
+				},
+			},
 		});
 
 	bender.tools = {
@@ -556,7 +556,7 @@ function bender() {}
 				editorOrElement.fire('selectionChange', {
 					selection: sel,
 					path: currentPath,
-					element: firstElement
+					element: firstElement,
 				});
 			}
 
@@ -850,7 +850,7 @@ function bender() {}
 
 				pause: function() {
 					paused = true;
-				}
+				},
 			};
 		},
 
@@ -896,8 +896,8 @@ function bender() {}
 				// Clipboard is checking for existance of evt.data.$.clipboardData.
 				// Do not fail there.
 				$: {
-					ctrlKey: true
-				}
+					ctrlKey: true,
+				},
 			});
 
 			// Insert given HTML into the current selection, which should be in pastebin.
@@ -978,7 +978,7 @@ function bender() {}
 					init: 1,
 					'async:init': 1,
 					setUp: 1,
-					tearDown: 1
+					tearDown: 1,
 				};
 
 			for (var method in specialMethods) {
@@ -1017,7 +1017,7 @@ function bender() {}
 			}
 
 			return outputTests;
-		}
+		},
 	};
 
 	bender.tools.range = {
@@ -1311,7 +1311,7 @@ function bender() {}
 					'$1'
 				);
 			};
-		})()
+		})(),
 	};
 
 	bender.tools.selection = {
@@ -1374,7 +1374,7 @@ function bender() {}
 			}
 
 			return bender.tools.range.getWithHtml(editor.editable(), ranges[0]);
-		}
+		},
 	};
 
 	bender.tools.html = {
@@ -1484,7 +1484,7 @@ function bender() {}
 				);
 
 			return new RegExp('^' + pattern + '$');
-		}
+		},
 	};
 })(bender);
 

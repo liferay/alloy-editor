@@ -25,8 +25,8 @@ CKEDITOR.plugins.add('test_richcombobridge', {
 				},
 				onRender: function() {
 					editor.fire('richComboRender');
-				}
+				},
 			});
 		}
-	}
+	},
 });

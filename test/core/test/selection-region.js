@@ -9,7 +9,7 @@
 		describe('with focusing the editor after instance create', function() {
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
-					extraPlugins: 'ae_selectionregion'
+					extraPlugins: 'ae_selectionregion',
 				});
 			});
 
@@ -142,7 +142,7 @@
 				this._editable = editable;
 
 				this.nativeEditor = CKEDITOR.inline('editable', {
-					extraPlugins: 'ae_selectionregion'
+					extraPlugins: 'ae_selectionregion',
 				});
 
 				this.nativeEditor.on('instanceReady', function() {

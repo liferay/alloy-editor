@@ -13,24 +13,24 @@ if (sauceLabsAccessKey) {
 var customLaunchers = {
 	sl_chrome_linux: {
 		base: 'SauceLabs',
-		browserName: 'chrome'
+		browserName: 'chrome',
 	},
 	sl_firefox: {
 		base: 'SauceLabs',
-		browserName: 'firefox'
+		browserName: 'firefox',
 	},
 	sl_ie_11: {
 		base: 'SauceLabs',
 		browserName: 'internet explorer',
 		platform: 'Windows 10',
-		version: '11'
+		version: '11',
 	},
 	sl_edge_22: {
 		base: 'SauceLabs',
 		browserName: 'microsoftedge',
 		platform: 'Windows 10',
-		version: 'latest'
-	}
+		version: 'latest',
+	},
 };
 
 const defaultConfig = Object.assign(Common, {
@@ -52,7 +52,7 @@ const defaultConfig = Object.assign(Common, {
 		'karma-mocha',
 		'karma-sinon',
 		'karma-webpack',
-		karmaSauceLauncher
+		karmaSauceLauncher,
 	],
 
 	// test results reporter to use
@@ -70,9 +70,9 @@ const defaultConfig = Object.assign(Common, {
 		connectOptions: {
 			'no-ssl-bump-domains': 'all',
 			port: 5757,
-			logfile: 'sauce_connect.log'
-		}
-	}
+			logfile: 'sauce_connect.log',
+		},
+	},
 });
 
 module.exports = function(config) {

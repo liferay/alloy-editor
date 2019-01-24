@@ -41,10 +41,10 @@
 				{
 					method1: function() {
 						return 7;
-					}
+					},
 				},
 				{
-					STATIC1: 'static1'
+					STATIC1: 'static1',
 				}
 			);
 

@@ -93,7 +93,7 @@ export default WrappedComponent =>
 							this.props.trigger.props.tabKey === button.key
 								? 0
 								: -1,
-						trigger: this.props.trigger
+						trigger: this.props.trigger,
 					},
 					button.key
 				);

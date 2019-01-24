@@ -3,8 +3,8 @@ module.exports = {
 		ecmaVersion: 6,
 		sourceType: 'module',
 		ecmaFeatures: {
-			jsx: true
-		}
+			jsx: true,
+		},
 	},
 	globals: {
 		happen: true,
@@ -21,7 +21,7 @@ module.exports = {
 		describe: true,
 		it: true,
 		sinon: true,
-		Utils: true
+		Utils: true,
 	},
 	extends: 'eslint:recommended',
 	rules: {
@@ -75,10 +75,10 @@ module.exports = {
 		'keyword-spacing': 2,
 		'space-unary-ops': [2, {words: true, nonwords: false}],
 		strict: [2, 'function'],
-		yoda: [2, 'never']
+		yoda: [2, 'never'],
 	},
 	env: {
 		browser: true,
-		node: true
-	}
+		node: true,
+	},
 };

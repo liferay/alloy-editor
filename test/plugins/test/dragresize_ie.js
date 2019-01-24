@@ -20,7 +20,7 @@
 
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
-					extraPlugins: 'ae_dragresize_ie'
+					extraPlugins: 'ae_dragresize_ie',
 				});
 			});
 
@@ -84,7 +84,7 @@
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize_ie',
-					imageScaleResize: 'height'
+					imageScaleResize: 'height',
 				});
 			});
 
@@ -122,7 +122,7 @@
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize_ie',
-					imageScaleResize: 'scale'
+					imageScaleResize: 'scale',
 				});
 			});
 
@@ -160,7 +160,7 @@
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize_ie',
-					imageScaleResize: 'width'
+					imageScaleResize: 'width',
 				});
 			});
 

@@ -211,7 +211,7 @@ Attribute.prototype = {
 	 */
 	_isInitialized: function(attr) {
 		return Object.prototype.hasOwnProperty.call(this.__ATTRS__, attr);
-	}
+	},
 };
 
 export default Attribute;

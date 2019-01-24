@@ -25,10 +25,10 @@ const base = {
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /(node_modules|lib)/,
-				loader: 'babel-loader'
-			}
-		]
-	}
+				loader: 'babel-loader',
+			},
+		],
+	},
 };
 
 module.exports = {
@@ -36,8 +36,8 @@ module.exports = {
 		...base,
 		entry: './scripts/build/index.js',
 		output: {
-			path: toAbsolute('./dist/alloy-editor')
-		}
+			path: toAbsolute('./dist/alloy-editor'),
+		},
 	},
 	core: {
 		...base,
@@ -45,7 +45,7 @@ module.exports = {
 		output: {
 			library: 'AlloyEditor',
 			libraryTarget: 'window',
-			path: toAbsolute('./dist/alloy-editor')
+			path: toAbsolute('./dist/alloy-editor'),
 		},
 		externals: {
 			react: {
@@ -53,16 +53,16 @@ module.exports = {
 				commonjs2: 'react',
 				commonjs: 'react',
 				amd: 'react',
-				umd: 'react'
+				umd: 'react',
 			},
 			'react-dom': {
 				root: 'ReactDOM',
 				commonjs2: 'react-dom',
 				commonjs: 'react-dom',
 				amd: 'react-dom',
-				umd: 'react-dom'
-			}
-		}
+				umd: 'react-dom',
+			},
+		},
 	},
 	noCkeditor: {
 		...base,
@@ -70,8 +70,8 @@ module.exports = {
 		output: {
 			library: 'AlloyEditor',
 			libraryTarget: 'window',
-			path: toAbsolute('./dist/alloy-editor')
-		}
+			path: toAbsolute('./dist/alloy-editor'),
+		},
 	},
 	noReact: {
 		...base,
@@ -79,7 +79,7 @@ module.exports = {
 		output: {
 			library: 'AlloyEditor',
 			libraryTarget: 'umd',
-			path: toAbsolute('./dist/alloy-editor')
+			path: toAbsolute('./dist/alloy-editor'),
 		},
 		externals: {
 			react: {
@@ -87,15 +87,15 @@ module.exports = {
 				commonjs2: 'react',
 				commonjs: 'react',
 				amd: 'react',
-				umd: 'react'
+				umd: 'react',
 			},
 			'react-dom': {
 				root: 'ReactDOM',
 				commonjs2: 'react-dom',
 				commonjs: 'react-dom',
 				amd: 'react-dom',
-				umd: 'react-dom'
-			}
-		}
-	}
+				umd: 'react-dom',
+			},
+		},
+	},
 };

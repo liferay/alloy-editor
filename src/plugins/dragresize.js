@@ -17,7 +17,7 @@
 		both: ['tl', 'tm', 'tr', 'lm', 'rm', 'bl', 'bm', 'br'],
 		height: ['tl', 'tm', 'tr', 'bl', 'bm', 'br'],
 		scale: ['tl', 'tr', 'bl', 'br'],
-		width: ['tl', 'tr', 'lm', 'rm', 'bl', 'br']
+		width: ['tl', 'tr', 'lm', 'rm', 'bl', 'br'],
 	};
 
 	var POSITION_ELEMENT_FN = {
@@ -60,7 +60,7 @@
 				box.width - 4 + left,
 				Math.round(box.height / 2) - 3 + top
 			);
-		}
+		},
 	};
 
 	var IMAGE_SNAP_TO_SIZE = 7;
@@ -95,7 +95,7 @@
 			editor.once('contentDom', function(evt) {
 				init(editor);
 			});
-		}
+		},
 	});
 
 	function init(editor) {
@@ -117,7 +117,7 @@
 
 		var resizer = new Resizer(editor, {
 			imageScaleResize: editor.config.imageScaleResize,
-			snapToSize: snapToSize
+			snapToSize: snapToSize,
 		});
 
 		var mouseDownListener = function(e) {
@@ -356,7 +356,7 @@
 			var box = getBoundingBox(this.window, this.preview);
 			this.result = {
 				width: box.width,
-				height: box.height
+				height: box.height,
 			};
 			this.preview.style.display = 'none';
 		},
@@ -365,7 +365,7 @@
 				top: 0,
 				left: 0,
 				width: this.box.width,
-				height: this.box.height
+				height: this.box.height,
 			});
 
 			if (!data) return;
@@ -426,7 +426,7 @@
 				this.result.width,
 				this.result.height
 			);
-		}
+		},
 	};
 
 	function DragEvent(window, document) {
@@ -435,7 +435,7 @@
 		this.events = {
 			mousemove: bind(this.mousemove, this),
 			keydown: bind(this.keydown, this),
-			mouseup: bind(this.mouseup, this)
+			mouseup: bind(this.mouseup, this),
 		};
 	}
 
@@ -447,7 +447,7 @@
 			this.attr = e.target.className;
 			this.startPos = {
 				x: e.clientX,
-				y: e.clientY
+				y: e.clientY,
 			};
 			this.update(e);
 			var events = this.events;
@@ -464,16 +464,16 @@
 		update: function(e) {
 			this.currentPos = {
 				x: e.clientX,
-				y: e.clientY
+				y: e.clientY,
 			};
 			this.delta = {
 				x: e.clientX - this.startPos.x,
-				y: e.clientY - this.startPos.y
+				y: e.clientY - this.startPos.y,
 			};
 			this.keys = {
 				shift: e.shiftKey,
 				ctrl: e.ctrlKey,
-				alt: e.altKey
+				alt: e.altKey,
 			};
 		},
 		mousemove: function(e) {
@@ -506,7 +506,7 @@
 			this.document.removeEventListener('keydown', events.keydown, false);
 			this.document.removeEventListener('mouseup', events.mouseup, false);
 			this.onRelease && this.onRelease();
-		}
+		},
 	};
 
 	//helper functions
@@ -556,7 +556,7 @@
 			left: rect.left + window.pageXOffset,
 			top: rect.top + window.pageYOffset,
 			width: rect.width,
-			height: rect.height
+			height: rect.height,
 		};
 	}
 })();

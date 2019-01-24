@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 // Default gutter value for toolbar positioning
 var DEFAULT_GUTTER = {
 	left: 0,
-	top: 0
+	top: 0,
 };
 
 /**
@@ -42,7 +42,7 @@ var centerToolbar = function(toolbar, rect) {
 
 	var endPosition = [
 		rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
-		rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top
+		rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top,
 	];
 
 	if (endPosition[0] < 0) {
@@ -101,7 +101,7 @@ var tableSelectionSetPosition = function(payload) {
 
 const SelectionSetPosition = {
 	image: imageSelectionSetPosition,
-	table: tableSelectionSetPosition
+	table: tableSelectionSetPosition,
 };
 
 export default SelectionSetPosition;

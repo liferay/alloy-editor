@@ -12,7 +12,7 @@
 	var alignmentsObj = {
 		center: 1,
 		left: 0,
-		right: 2
+		right: 2,
 	};
 
 	/*
@@ -23,7 +23,7 @@
 		both: 'nwse-resize',
 		height: 'ns-resize',
 		scale: 'nwse-resize',
-		width: 'ew-resize'
+		width: 'ew-resize',
 	};
 
 	var regexPercent = /^\s*(\d+\%)\s*$/i;
@@ -86,7 +86,7 @@
 			);
 		},
 
-		requires: 'widget'
+		requires: 'widget',
 	});
 
 	// Wiget states (forms) depending on alignment and configuration.
@@ -208,7 +208,7 @@
 						? helpers.checkHasNaturalRatio(image)
 						: true,
 					src: image.getAttribute('src'),
-					width: image.getAttribute('width') || ''
+					width: image.getAttribute('width') || '',
 				};
 
 				// If we used 'a' in widget#parts definition, it could happen that
@@ -317,7 +317,7 @@
 					// This internal is required by the editor.
 					'data-cke-saved-src': this.data.src,
 
-					src: this.data.src
+					src: this.data.src,
 				});
 
 				// If shifting non-captioned -> captioned, remove classes
@@ -350,8 +350,8 @@
 			editables: {
 				caption: {
 					selector: 'figcaption',
-					allowedContent: 'br em strong sub sup u s; a[!href,target]'
-				}
+					allowedContent: 'br em strong sub sup u s; a[!href,target]',
+				},
 			},
 
 			features: getWidgetFeatures(editor),
@@ -396,7 +396,7 @@
 
 			parts: {
 				caption: 'figcaption',
-				image: 'img'
+				image: 'img',
 			},
 
 			// Overrides default method to handle internal mutability of Image2.
@@ -412,7 +412,7 @@
 			// Template of the widget: plain image.
 			template: template,
 
-			upcast: upcastWidgetElement(editor)
+			upcast: upcastWidgetElement(editor),
 		};
 	}
 
@@ -460,7 +460,7 @@
 			if (image.$.naturalWidth) {
 				dimensions = {
 					height: image.$.naturalHeigh,
-					width: image.$.naturalWidth
+					width: image.$.naturalWidth,
 				};
 			} else {
 				var img = new Image();
@@ -469,12 +469,12 @@
 
 				dimensions = {
 					height: img.heigh,
-					width: img.width
+					width: img.width,
 				};
 			}
 
 			return dimensions;
-		}
+		},
 	};
 
 	// Returns a function that creates widgets from all <img> and
@@ -492,7 +492,7 @@
 		return function(el, data) {
 			var dimensions = {
 				height: 1,
-				width: 1
+				width: 1,
 			};
 
 			var name = el.name;
@@ -590,7 +590,7 @@
 					resizeWrapper.replaceWith(
 						resizeWrapper.getFirst({
 							a: 1,
-							img: 1
+							img: 1,
 						})
 					);
 				}
@@ -617,10 +617,10 @@
 							'div',
 							alignClasses
 								? {
-										class: alignClasses[1]
+										class: alignClasses[1],
 								  }
 								: {
-										style: 'text-align:center'
+										style: 'text-align:center',
 								  }
 						)
 					);
@@ -631,7 +631,7 @@
 					align in
 					{
 						left: 1,
-						right: 1
+						right: 1,
 					}
 				) {
 					if (alignClasses) {
@@ -665,7 +665,7 @@
 		var validChildren = {
 			a: 1,
 			figure: 1,
-			img: 1
+			img: 1,
 		};
 
 		return function(el) {
@@ -675,7 +675,7 @@
 					el.name in
 					{
 						div: 1,
-						p: 1
+						p: 1,
 					}
 				)
 			) {
@@ -767,7 +767,7 @@
 
 		var dimensions = {
 			height: data.height,
-			width: data.width
+			width: data.width,
 		};
 
 		var image = widget.parts.image;
@@ -1009,8 +1009,8 @@
 							nativeEvent: event,
 							selectionData: {
 								element: widgetElement,
-								region: region
-							}
+								region: region,
+							},
 						});
 					}
 				}
@@ -1028,11 +1028,11 @@
 		var rules = {
 			figcaption: true,
 			figure: {
-				classes: '!' + editor.config.image2_captionedClass
+				classes: '!' + editor.config.image2_captionedClass,
 			},
 			img: {
-				attributes: '!src,alt,width,height'
-			}
+				attributes: '!src,alt,width,height',
+			},
 		};
 
 		return rules;
@@ -1052,14 +1052,14 @@
 			align: {
 				requiredContent:
 					'img' +
-					(alignClasses ? '(' + alignClasses[0] + ')' : '{float}')
+					(alignClasses ? '(' + alignClasses[0] + ')' : '{float}'),
 			},
 			caption: {
-				requiredContent: 'figcaption'
+				requiredContent: 'figcaption',
 			},
 			dimension: {
-				requiredContent: 'img[width,height]'
-			}
+				requiredContent: 'img[width,height]',
+			},
 		};
 
 		return features;

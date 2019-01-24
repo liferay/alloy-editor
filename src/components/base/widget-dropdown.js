@@ -14,7 +14,7 @@ export default WrappedComponent =>
 			this.state = {
 				...this.state,
 				dropdownTrigger: null,
-				itemDropdown: null
+				itemDropdown: null,
 			};
 		}
 
@@ -33,7 +33,7 @@ export default WrappedComponent =>
 
 			this.setState({
 				dropdownTrigger: null,
-				itemDropdown: null
+				itemDropdown: null,
 			});
 		}
 
@@ -54,7 +54,7 @@ export default WrappedComponent =>
 			return CKEDITOR.tools.merge(obj, {
 				expanded: this.state.itemDropdown === itemKey ? true : false,
 				tabIndex: this.state.dropdownTrigger === itemKey ? 0 : -1,
-				toggleDropdown: this.toggleDropdown.bind(this, itemKey)
+				toggleDropdown: this.toggleDropdown.bind(this, itemKey),
 			});
 		}
 
@@ -74,7 +74,7 @@ export default WrappedComponent =>
 					itemDropdown:
 						itemDropdown !== this.state.itemDropdown
 							? itemDropdown
-							: null
+							: null,
 				},
 				function() {
 					if (!this.state.itemDropdown) {
