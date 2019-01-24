@@ -50,13 +50,13 @@ export default WrappedComponent =>
 		 * @param {Object} itemKey They key of an React Widget which contains the dropdown.
 		 * @return {Object} The merged object.
 		 */
-		mergeDropdownProps(obj, itemKey) {
+		mergeDropdownProps = (obj, itemKey) => {
 			return CKEDITOR.tools.merge(obj, {
 				expanded: this.state.itemDropdown === itemKey ? true : false,
 				tabIndex: this.state.dropdownTrigger === itemKey ? 0 : -1,
 				toggleDropdown: this.toggleDropdown.bind(this, itemKey),
 			});
-		}
+		};
 
 		/**
 		 * Sets the active dropdown of the widget or discards the toggled item from the state.
@@ -67,7 +67,7 @@ export default WrappedComponent =>
 		 * @param {Object} itemDropdown The widget which requests to toggle its dropdown.
 		 * @param {Number} toggleDirection User movement direction when toggled via keyboard.
 		 */
-		toggleDropdown(itemDropdown, toggleDirection) {
+		toggleDropdown = (itemDropdown, toggleDirection) => {
 			this.setState(
 				{
 					dropdownTrigger: itemDropdown,
@@ -76,7 +76,7 @@ export default WrappedComponent =>
 							? itemDropdown
 							: null,
 				},
-				function() {
+				() => {
 					if (!this.state.itemDropdown) {
 						if (this.moveFocus) {
 							this.moveFocus(toggleDirection);
@@ -86,5 +86,5 @@ export default WrappedComponent =>
 					}
 				}
 			);
-		}
+		};
 	};

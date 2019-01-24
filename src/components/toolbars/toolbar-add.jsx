@@ -6,6 +6,7 @@ import WidgetDropdown from '../base/widget-dropdown.js';
 import WidgetExclusive from '../base/widget-exclusive.js';
 import WidgetFocusManager from '../base/widget-focus-manager.js';
 import WidgetPosition from '../base/widget-position.js';
+import ButtonIcon from '../buttons/button-icon.jsx';
 
 let POSITION_LEFT = 1;
 let POSITION_RIGHT = 2;

@@ -138,11 +138,13 @@ class ButtonEmbedEdit extends React.Component {
 					/>
 					<button
 						aria-label={AlloyEditor.Strings.clearInput}
-						className="ae-button ae-icon-remove"
+						className="ae-button ae-button-clear"
 						onClick={this._clearLink}
 						style={clearLinkStyle}
-						title={AlloyEditor.Strings.clear}
-					/>
+						title={AlloyEditor.Strings.clear}>
+						<ButtonIcon editor={editor} symbol="times-clear" />
+					</button>
+					>
 				</div>
 				<button
 					aria-label={AlloyEditor.Strings.confirm}

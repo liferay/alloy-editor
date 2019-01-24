@@ -1,4 +1,5 @@
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
+import ButtonIcon from '../buttons/button-icon.jsx';
 import React from 'react';
 
 (function() {
@@ -43,9 +44,7 @@ import React from 'react';
 			RichComboBridge = class extends React.Component {
 				static displayName = richComboName;
 
-				statics = {
-					key: richComboName,
-				};
+				static key = richComboName;
 
 				constructor(props) {
 					super(props);
@@ -128,7 +127,10 @@ import React from 'react';
 									<span className="ae-container-dropdown-selected-item">
 										{richComboLabel}
 									</span>
-									<span className="ae-icon-arrow" />
+									<ButtonIcon
+										editor={this.props.editor}
+										symbol="caret-bottom"
+									/>
 								</div>
 							</button>
 							{this.props.expanded && (

@@ -45,9 +45,7 @@ import React from 'react';
 			MenuButtonBridge = class extends React.Component {
 				static displayName = menuButtonName;
 
-				statics = {
-					key: menuButtonName,
-				};
+				static key = menuButtonName;
 
 				// API not yet implemented inside the menubutton
 				// bridge. By mocking the unsupported method, we prevent
