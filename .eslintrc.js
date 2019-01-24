@@ -17,6 +17,22 @@ module.exports = {
 	rules: {
 		'require-jsdoc': 'warn',
 		'new-cap': ['error', {
+			capIsNewExceptions: [
+				'ButtonActionStyle',
+				'ButtonCfgProps',
+				'ButtonCommand',
+				'ButtonCommandActive',
+				'ButtonKeystroke',
+				'ButtonProps',
+				'ButtonStateClasses',
+				'ButtonStyle',
+				'ToolbarButtons',
+				'WidgetArrowBox',
+				'WidgetDropdown',
+				'WidgetExclusive',
+				'WidgetFocusManager',
+				'WidgetPosition',
+			],
 			newIsCapExceptions: [
 				'CKEDITOR.command',
 				'CKEDITOR.dom.comment',

@@ -161,7 +161,7 @@
 		(evt.data || evt).preventDefault();
 	}
 
-	function columnResizer(editor, pillar) {
+	function ColumnResizer(editor, pillar) {
 		let document;
 		let resizer;
 		let resizing;
@@ -517,7 +517,7 @@
 						let pillar = getPillarAtPosition(pillars, pageX);
 
 						if (pillar) {
-							resizer = new columnResizer(editor, pillar);
+							resizer = new ColumnResizer(editor, pillar);
 						}
 					}
 				);

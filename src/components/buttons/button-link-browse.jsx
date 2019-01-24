@@ -1,4 +1,4 @@
-import ButtonKeyStroke from '../base/button-keystroke.js';
+import ButtonKeystroke from '../base/button-keystroke.js';
 import ButtonLink from './button-link.jsx';
 import ButtonLinkEditBrowse from './button-link-edit-browse.jsx';
 import ButtonProps from '../base/button-props.js';
@@ -9,7 +9,7 @@ import React from 'react';
 /**
  * The ButtonLinkBrowse class provides functionality for changing text color in a document.
  *
- * @uses ButtonKeyStroke
+ * @uses ButtonKeystroke
  * @uses ButtonProps
  * @uses ButtonStateClasses
  *
@@ -77,5 +77,5 @@ class ButtonLinkBrowse extends React.Component {
 }
 
 export default ButtonProps(
-	ButtonStateClasses(ButtonKeyStroke(ButtonLinkBrowse))
+	ButtonStateClasses(ButtonKeystroke(ButtonLinkBrowse))
 );
