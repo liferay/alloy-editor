@@ -29,7 +29,7 @@ class ButtonLink extends React.Component {
 	static defaultProps = {
 		keystroke: {
 			fn: '_requestExclusive',
-			keys: CKEDITOR.CTRL + 76 /*L*/,
+			keys: CKEDITOR.CTRL + 76 /* L*/,
 		},
 	};
 

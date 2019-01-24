@@ -25,7 +25,7 @@ export default WrappedComponent =>
 				Lang.isFunction(this.isActive) &&
 				Lang.isFunction(this.getStyle)
 			) {
-				var editor = this.props.editor.get('nativeEditor');
+				let editor = this.props.editor.get('nativeEditor');
 
 				editor.getSelection().lock();
 

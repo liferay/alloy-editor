@@ -25,7 +25,7 @@ class ButtonEmbed extends React.Component {
 	static defaultProps = {
 		keystroke: {
 			fn: '_requestExclusive',
-			keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /*L*/,
+			keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /* L*/,
 		},
 	};
 

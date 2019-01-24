@@ -12,12 +12,12 @@ import React from 'react';
 	// Some methods like `getState` and `setState` clash with React's own state methods. For them,
 	// unsupported means that we don't account for the different meaning in the passed or returned
 	// arguments.
-	var UNSUPPORTED_MENUBUTTON_API = {
-		//getState: function() {},
-		//setState: function(state) {},
+	let UNSUPPORTED_MENUBUTTON_API = {
+		// getState: function() {},
+		// setState: function(state) {},
 	};
 
-	var MENUBUTTON_DEFS = {};
+	let MENUBUTTON_DEFS = {};
 
 	/**
 	 * Generates a MenuButtonBridge React class for a given menuButton definition if it has not been
@@ -34,7 +34,7 @@ import React from 'react';
 		menuButtonDefinition,
 		editor
 	) {
-		var MenuButtonBridge = AlloyEditor.Buttons[menuButtonName];
+		let MenuButtonBridge = AlloyEditor.Buttons[menuButtonName];
 
 		MENUBUTTON_DEFS[editor.name] = MENUBUTTON_DEFS[editor.name] || {};
 		MENUBUTTON_DEFS[editor.name][menuButtonName] =
@@ -53,25 +53,25 @@ import React from 'react';
 				toFeature() {}
 
 				render() {
-					var editor = this.props.editor.get('nativeEditor');
+					let editor = this.props.editor.get('nativeEditor');
 
-					var panelMenuButtonDisplayName =
+					let panelMenuButtonDisplayName =
 						MENUBUTTON_DEFS[editor.name][menuButtonName].name ||
 						MENUBUTTON_DEFS[editor.name][menuButtonName].command ||
 						menuButtonName;
 
-					var buttonClassName = 'ae-button ae-button-bridge';
+					let buttonClassName = 'ae-button ae-button-bridge';
 
-					var iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
+					let iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
 
-					var iconStyle = {};
+					let iconStyle = {};
 
-					var cssStyle = CKEDITOR.skin.getIconStyle(
+					let cssStyle = CKEDITOR.skin.getIconStyle(
 						panelMenuButtonDisplayName
 					);
 
 					if (cssStyle) {
-						var cssStyleParts = cssStyle.split(';');
+						let cssStyleParts = cssStyle.split(';');
 
 						iconStyle.backgroundImage = cssStyleParts[0].substring(
 							cssStyleParts[0].indexOf(':') + 1
@@ -116,51 +116,47 @@ import React from 'react';
 				}
 
 				_getMenuItems() {
-					var editor = this.props.editor.get('nativeEditor');
-					var items = menuButtonDefinition.onMenu();
-					var menuItems = Object.keys(items).map(
-						function(key) {
-							var menuItem = editor.getMenuItem(key);
+					let editor = this.props.editor.get('nativeEditor');
+					let items = menuButtonDefinition.onMenu();
+					let menuItems = Object.keys(items).map(function(key) {
+						let menuItem = editor.getMenuItem(key);
 
-							if (!menuItem) {
-								return null;
+						if (!menuItem) {
+							return null;
+						}
+
+						let menuItemDefinition =
+							menuItem.definition || menuItem;
+						let menuItemState = items[key];
+
+						let className =
+							'ae-toolbar-element ' +
+							(menuItemState === CKEDITOR.TRISTATE_ON
+								? 'active'
+								: '');
+						let disabled =
+							menuItemState === CKEDITOR.TRISTATE_DISABLED;
+						let onClick = function() {
+							if (menuItemDefinition.command) {
+								editor.execCommand(menuItemDefinition.command);
+							} else if (menuItemDefinition.onClick) {
+								menuItemDefinition.onClick.apply(
+									menuItemDefinition
+								);
 							}
+						};
 
-							var menuItemDefinition =
-								menuItem.definition || menuItem;
-							var menuItemState = items[key];
-
-							var className =
-								'ae-toolbar-element ' +
-								(menuItemState === CKEDITOR.TRISTATE_ON
-									? 'active'
-									: '');
-							var disabled =
-								menuItemState === CKEDITOR.TRISTATE_DISABLED;
-							var onClick = function() {
-								if (menuItemDefinition.command) {
-									editor.execCommand(
-										menuItemDefinition.command
-									);
-								} else if (menuItemDefinition.onClick) {
-									menuItemDefinition.onClick.apply(
-										menuItemDefinition
-									);
-								}
-							};
-
-							return (
-								<li key={menuItem.name} role="option">
-									<button
-										className={className}
-										disabled={disabled}
-										onClick={onClick}>
-										{menuItemDefinition.label}
-									</button>
-								</li>
-							);
-						}.bind(this)
-					);
+						return (
+							<li key={menuItem.name} role="option">
+								<button
+									className={className}
+									disabled={disabled}
+									onClick={onClick}>
+									{menuItemDefinition.label}
+								</button>
+							</li>
+						);
+					});
 
 					return menuItems;
 				}
@@ -215,9 +211,9 @@ import React from 'react';
 			editor.ui.addHandler(CKEDITOR.UI_MENUBUTTON, {
 				add: generateMenuButtonBridge,
 				create: function(menuButtonDefinition) {
-					var menuButtonName =
+					let menuButtonName =
 						'buttonBridge' + ((Math.random() * 1e9) >>> 0);
-					var MenuButtonBridge = generateMenuButtonBridge(
+					let MenuButtonBridge = generateMenuButtonBridge(
 						menuButtonName,
 						menuButtonDefinition
 					);

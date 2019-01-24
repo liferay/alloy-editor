@@ -27,7 +27,7 @@ class ButtonBold extends React.Component {
 		command: 'bold',
 		keystroke: {
 			fn: 'execCommand',
-			keys: CKEDITOR.CTRL + 66 /*B*/,
+			keys: CKEDITOR.CTRL + 66 /* B*/,
 		},
 		style: 'coreStyles_bold',
 	};

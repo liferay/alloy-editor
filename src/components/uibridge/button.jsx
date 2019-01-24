@@ -11,12 +11,12 @@ import React from 'react';
 	// Some methods like `getState` and `setState` clash with React's own state methods. For them,
 	// unsupported means that we don't account for the different meaning in the passed or returned
 	// arguments.
-	var UNSUPPORTED_BUTTON_API = {
-		//getState: function() {},
-		//setState: function(state) {},
+	let UNSUPPORTED_BUTTON_API = {
+		// getState: function() {},
+		// setState: function(state) {},
 	};
 
-	var BUTTON_DEFS = {};
+	let BUTTON_DEFS = {};
 
 	/**
 	 * Generates a ButtonBridge React class for a given button definition if it has not been
@@ -30,7 +30,7 @@ import React from 'react';
 	 */
 
 	function generateButtonBridge(buttonName, buttonDefinition, editor) {
-		var ButtonBridge = AlloyEditor.Buttons[buttonName];
+		let ButtonBridge = AlloyEditor.Buttons[buttonName];
 
 		BUTTON_DEFS[editor.name] = BUTTON_DEFS[editor.name] || {};
 		BUTTON_DEFS[editor.name][buttonName] =
@@ -48,30 +48,30 @@ import React from 'react';
 				toFeature() {}
 
 				render() {
-					var editor = this.props.editor.get('nativeEditor');
+					let editor = this.props.editor.get('nativeEditor');
 
-					var buttonClassName = 'ae-button ae-button-bridge';
+					let buttonClassName = 'ae-button ae-button-bridge';
 
-					var buttonDisplayName =
+					let buttonDisplayName =
 						BUTTON_DEFS[editor.name][buttonName].name ||
 						BUTTON_DEFS[editor.name][buttonName].command ||
 						buttonName;
 
-					var buttonLabel =
+					let buttonLabel =
 						BUTTON_DEFS[editor.name][buttonName].label;
 
-					var buttonType = 'button-' + buttonDisplayName;
+					let buttonType = 'button-' + buttonDisplayName;
 
-					var iconClassName = 'ae-icon-' + buttonDisplayName;
+					let iconClassName = 'ae-icon-' + buttonDisplayName;
 
-					var iconStyle = {};
+					let iconStyle = {};
 
-					var cssStyle = CKEDITOR.skin.getIconStyle(
+					let cssStyle = CKEDITOR.skin.getIconStyle(
 						buttonDisplayName
 					);
 
 					if (cssStyle) {
-						var cssStyleParts = cssStyle.split(';');
+						let cssStyleParts = cssStyle.split(';');
 
 						iconStyle.backgroundImage = cssStyleParts[0].substring(
 							cssStyleParts[0].indexOf(':') + 1
@@ -98,12 +98,12 @@ import React from 'react';
 				}
 
 				_handleClick = () => {
-					var editor = this.props.editor.get('nativeEditor');
+					let editor = this.props.editor.get('nativeEditor');
 
-					var buttonCommand =
+					let buttonCommand =
 						BUTTON_DEFS[editor.name][buttonName].command;
 
-					var buttonOnClick =
+					let buttonOnClick =
 						BUTTON_DEFS[editor.name][buttonName].onClick;
 
 					if (buttonOnClick) {
@@ -157,9 +157,9 @@ import React from 'react';
 			editor.ui.addHandler(CKEDITOR.UI_BUTTON, {
 				add: generateButtonBridge,
 				create: function(buttonDefinition) {
-					var buttonName =
+					let buttonName =
 						'buttonBridge' + ((Math.random() * 1e9) >>> 0);
-					var ButtonBridge = generateButtonBridge(
+					let ButtonBridge = generateButtonBridge(
 						buttonName,
 						buttonDefinition
 					);
