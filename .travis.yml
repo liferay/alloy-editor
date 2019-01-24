@@ -13,7 +13,7 @@ before_script:
 language: node_js
 
 node_js:
-- '8'
+- 'node'
 
 script:
   - npm run build && npm run testSaucelabs
