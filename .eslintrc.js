@@ -17,6 +17,7 @@ module.exports = {
 		'no-for-of-loops/no-for-of-loops': 2,
 	},
 	globals: {
+		AlloyEditor: true,
 		CKEDITOR: true,
 	},
 };
