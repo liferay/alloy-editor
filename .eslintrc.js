@@ -14,7 +14,8 @@ module.exports = {
 	extends: ['liferay', 'prettier'],
 	plugins: ['no-for-of-loops'],
 	rules: {
-		'no-for-of-loops/no-for-of-loops': 2,
+		'require-jsdoc': 'warn',
+		'no-for-of-loops/no-for-of-loops': 'error',
 	},
 	globals: {
 		AlloyEditor: true,
