@@ -16,6 +16,7 @@ module.exports = {
 	rules: {
 		'require-jsdoc': 'warn',
 		'no-for-of-loops/no-for-of-loops': 'error',
+		'valid-jsdoc': 'warn',
 	},
 	globals: {
 		AlloyEditor: true,
