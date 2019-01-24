@@ -50,9 +50,9 @@ extend(Base, Attribute, {
 	 * @protected
 	 */
 	_callChain: function(wat, args) {
-		var arr = [];
+		let arr = [];
 
-		var ctor = this.constructor;
+		let ctor = this.constructor;
 
 		while (ctor) {
 			if (Lang.isFunction(ctor.prototype[wat])) {
@@ -66,8 +66,8 @@ extend(Base, Attribute, {
 
 		args = Lang.isArray(args) ? args : [args];
 
-		for (var i = 0; i < arr.length; i++) {
-			var item = arr[i];
+		for (let i = 0; i < arr.length; i++) {
+			let item = arr[i];
 
 			item.apply(this, args);
 		}

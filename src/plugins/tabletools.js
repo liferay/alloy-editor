@@ -10,12 +10,12 @@
 		return;
 	}
 
-	var cellNodeRegex = /^(?:td|th)$/;
+	let cellNodeRegex = /^(?:td|th)$/;
 
 	function getSelectedCells(selection) {
-		var ranges = selection.getRanges();
-		var retval = [];
-		var database = {};
+		let ranges = selection.getRanges();
+		let retval = [];
+		let database = {};
 
 		function moveOutOfCellGuard(node) {
 			// Apply to the first cell only.
@@ -38,18 +38,18 @@
 			}
 		}
 
-		for (var i = 0; i < ranges.length; i++) {
-			var range = ranges[i];
+		for (let i = 0; i < ranges.length; i++) {
+			let range = ranges[i];
 
 			if (range.collapsed) {
 				// Walker does not handle collapsed ranges yet - fall back to old API.
-				var startNode = range.getCommonAncestor();
-				var nearestCell =
+				let startNode = range.getCommonAncestor();
+				let nearestCell =
 					startNode.getAscendant('td', true) ||
 					startNode.getAscendant('th', true);
 				if (nearestCell) retval.push(nearestCell);
 			} else {
-				var walker = new CKEDITOR.dom.walker(range);
+				let walker = new CKEDITOR.dom.walker(range);
 				var node;
 				walker.guard = moveOutOfCellGuard;
 
@@ -65,7 +65,7 @@
 						node.type != CKEDITOR.NODE_ELEMENT ||
 						!node.is(CKEDITOR.dtd.table)
 					) {
-						var parent =
+						let parent =
 							node.getAscendant('td', true) ||
 							node.getAscendant('th', true);
 						if (parent && !parent.getCustomData('selected_cell')) {
@@ -88,12 +88,17 @@
 	}
 
 	function getFocusElementAfterDelCells(cellsToDelete) {
-		var i = 0,
-			last = cellsToDelete.length - 1,
-			database = {},
-			cell,
-			focusedCell,
-			tr;
+		let i = 0;
+
+		let last = cellsToDelete.length - 1;
+
+		let database = {};
+
+		let cell;
+
+		let focusedCell;
+
+		let tr;
 
 		while ((cell = cellsToDelete[i++]))
 			CKEDITOR.dom.element.setMarker(database, cell, 'delete_cell', true);
@@ -126,26 +131,39 @@
 	}
 
 	function insertRow(selection, insertBefore) {
-		var cells = getSelectedCells(selection),
-			firstCell = cells[0],
-			table = firstCell.getAscendant('table'),
-			doc = firstCell.getDocument(),
-			startRow = cells[0].getParent(),
-			startRowIndex = startRow.$.rowIndex,
-			lastCell = cells[cells.length - 1],
-			endRowIndex =
-				lastCell.getParent().$.rowIndex + lastCell.$.rowSpan - 1,
-			endRow = new CKEDITOR.dom.element(table.$.rows[endRowIndex]),
-			rowIndex = insertBefore ? startRowIndex : endRowIndex,
-			row = insertBefore ? startRow : endRow;
+		let cells = getSelectedCells(selection);
 
-		var map = CKEDITOR.tools.buildTableMap(table),
-			cloneRow = map[rowIndex],
-			nextRow = insertBefore ? map[rowIndex - 1] : map[rowIndex + 1],
-			width = map[0].length;
+		let firstCell = cells[0];
 
-		var newRow = doc.createElement('tr');
-		for (var i = 0; cloneRow[i] && i < width; i++) {
+		let table = firstCell.getAscendant('table');
+
+		let doc = firstCell.getDocument();
+
+		let startRow = cells[0].getParent();
+
+		let startRowIndex = startRow.$.rowIndex;
+
+		let lastCell = cells[cells.length - 1];
+
+		let endRowIndex =
+			lastCell.getParent().$.rowIndex + lastCell.$.rowSpan - 1;
+
+		let endRow = new CKEDITOR.dom.element(table.$.rows[endRowIndex]);
+
+		let rowIndex = insertBefore ? startRowIndex : endRowIndex;
+
+		let row = insertBefore ? startRow : endRow;
+
+		let map = CKEDITOR.tools.buildTableMap(table);
+
+		let cloneRow = map[rowIndex];
+
+		let nextRow = insertBefore ? map[rowIndex - 1] : map[rowIndex + 1];
+
+		let width = map[0].length;
+
+		let newRow = doc.createElement('tr');
+		for (let i = 0; cloneRow[i] && i < width; i++) {
 			var cell;
 			// Check whether there's a spanning row here, do not break it.
 			if (
@@ -171,25 +189,35 @@
 
 	function deleteRows(selectionOrRow) {
 		if (selectionOrRow instanceof CKEDITOR.dom.selection) {
-			var cells = getSelectedCells(selectionOrRow),
-				firstCell = cells[0],
-				table = firstCell.getAscendant('table'),
-				map = CKEDITOR.tools.buildTableMap(table),
-				startRow = cells[0].getParent(),
-				startRowIndex = startRow.$.rowIndex,
-				lastCell = cells[cells.length - 1],
-				endRowIndex =
-					lastCell.getParent().$.rowIndex + lastCell.$.rowSpan - 1,
-				rowsToDelete = [];
+			let cells = getSelectedCells(selectionOrRow);
+
+			let firstCell = cells[0];
+
+			var table = firstCell.getAscendant('table');
+
+			let map = CKEDITOR.tools.buildTableMap(table);
+
+			let startRow = cells[0].getParent();
+
+			let startRowIndex = startRow.$.rowIndex;
+
+			let lastCell = cells[cells.length - 1];
+
+			let endRowIndex =
+				lastCell.getParent().$.rowIndex + lastCell.$.rowSpan - 1;
+
+			let rowsToDelete = [];
 
 			// Delete cell or reduce cell spans by checking through the table map.
 			for (var i = startRowIndex; i <= endRowIndex; i++) {
-				var mapRow = map[i],
-					row = new CKEDITOR.dom.element(table.$.rows[i]);
+				let mapRow = map[i];
 
-				for (var j = 0; j < mapRow.length; j++) {
-					var cell = new CKEDITOR.dom.element(mapRow[j]),
-						cellRowIndex = cell.getParent().$.rowIndex;
+				let row = new CKEDITOR.dom.element(table.$.rows[i]);
+
+				for (let j = 0; j < mapRow.length; j++) {
+					let cell = new CKEDITOR.dom.element(mapRow[j]);
+
+					let cellRowIndex = cell.getParent().$.rowIndex;
 
 					if (cell.$.rowSpan == 1) cell.remove();
 					// Row spanned cell.
@@ -198,7 +226,7 @@
 						cell.$.rowSpan -= 1;
 						// Root row of the cell, root cell to next row.
 						if (cellRowIndex == i) {
-							var nextMapRow = map[i + 1];
+							let nextMapRow = map[i + 1];
 							nextMapRow[j - 1]
 								? cell.insertAfter(
 										new CKEDITOR.dom.element(
@@ -217,13 +245,13 @@
 				rowsToDelete.push(row);
 			}
 
-			var rows = table.$.rows;
+			let rows = table.$.rows;
 
 			// Where to put the cursor after rows been deleted?
 			// 1. Into next sibling row if any;
 			// 2. Into previous sibling row if any;
 			// 3. Into table's parent element if it's the very last row.
-			var cursorPosition = new CKEDITOR.dom.element(
+			let cursorPosition = new CKEDITOR.dom.element(
 				rows[endRowIndex + 1] ||
 					(startRowIndex > 0 ? rows[startRowIndex - 1] : null) ||
 					table.$.parentNode
@@ -244,12 +272,13 @@
 	}
 
 	function getCellColIndex(cell, isStart) {
-		var row = cell.getParent(),
-			rowCells = row.$.cells;
+		let row = cell.getParent();
 
-		var colIndex = 0;
-		for (var i = 0; i < rowCells.length; i++) {
-			var mapCell = rowCells[i];
+		let rowCells = row.$.cells;
+
+		let colIndex = 0;
+		for (let i = 0; i < rowCells.length; i++) {
+			let mapCell = rowCells[i];
 			colIndex += isStart ? 1 : mapCell.colSpan;
 			if (mapCell == cell.$) break;
 		}
@@ -258,9 +287,9 @@
 	}
 
 	function getColumnsIndices(cells, isStart) {
-		var retval = isStart ? Infinity : 0;
-		for (var i = 0; i < cells.length; i++) {
-			var colIndex = getCellColIndex(cells[i], isStart);
+		let retval = isStart ? Infinity : 0;
+		for (let i = 0; i < cells.length; i++) {
+			let colIndex = getCellColIndex(cells[i], isStart);
 			if (isStart ? colIndex < retval : colIndex > retval)
 				retval = colIndex;
 		}
@@ -268,21 +297,29 @@
 	}
 
 	function insertColumn(selection, insertBefore) {
-		var cells = getSelectedCells(selection),
-			firstCell = cells[0],
-			table = firstCell.getAscendant('table'),
-			startCol = getColumnsIndices(cells, 1),
-			lastCol = getColumnsIndices(cells),
-			colIndex = insertBefore ? startCol : lastCol;
+		let cells = getSelectedCells(selection);
 
-		var map = CKEDITOR.tools.buildTableMap(table),
-			cloneCol = [],
-			nextCol = [],
-			height = map.length;
+		let firstCell = cells[0];
+
+		let table = firstCell.getAscendant('table');
+
+		let startCol = getColumnsIndices(cells, 1);
+
+		let lastCol = getColumnsIndices(cells);
+
+		let colIndex = insertBefore ? startCol : lastCol;
+
+		let map = CKEDITOR.tools.buildTableMap(table);
+
+		let cloneCol = [];
+
+		let nextCol = [];
+
+		let height = map.length;
 
 		for (var i = 0; i < height; i++) {
 			cloneCol.push(map[i][colIndex]);
-			var nextCell = insertBefore
+			let nextCell = insertBefore
 				? map[i][colIndex - 1]
 				: map[i][colIndex + 1];
 			nextCol.push(nextCell);
@@ -313,14 +350,21 @@
 	}
 
 	function deleteColumns(selectionOrCell) {
-		var cells = getSelectedCells(selectionOrCell),
-			firstCell = cells[0],
-			lastCell = cells[cells.length - 1],
-			table = firstCell.getAscendant('table'),
-			map = CKEDITOR.tools.buildTableMap(table),
-			startColIndex,
-			endColIndex,
-			rowsToDelete = [];
+		let cells = getSelectedCells(selectionOrCell);
+
+		let firstCell = cells[0];
+
+		let lastCell = cells[cells.length - 1];
+
+		let table = firstCell.getAscendant('table');
+
+		let map = CKEDITOR.tools.buildTableMap(table);
+
+		let startColIndex;
+
+		let endColIndex;
+
+		let rowsToDelete = [];
 
 		// Figure out selected cells' column indices.
 		for (var i = 0, rows = map.length; i < rows; i++) {
@@ -333,9 +377,11 @@
 		// Delete cell or reduce cell spans by checking through the table map.
 		for (i = startColIndex; i <= endColIndex; i++) {
 			for (j = 0; j < map.length; j++) {
-				var mapRow = map[j],
-					row = new CKEDITOR.dom.element(table.$.rows[j]),
-					cell = new CKEDITOR.dom.element(mapRow[i]);
+				let mapRow = map[j];
+
+				let row = new CKEDITOR.dom.element(table.$.rows[j]);
+
+				let cell = new CKEDITOR.dom.element(mapRow[i]);
 
 				if (cell.$) {
 					if (cell.$.colSpan == 1) cell.remove();
@@ -349,13 +395,13 @@
 			}
 		}
 
-		var firstRowCells = table.$.rows[0] && table.$.rows[0].cells;
+		let firstRowCells = table.$.rows[0] && table.$.rows[0].cells;
 
 		// Where to put the cursor after columns been deleted?
 		// 1. Into next cell of the first row if any;
 		// 2. Into previous cell of the first row if any;
 		// 3. Into table's parent element;
-		var cursorPosition = new CKEDITOR.dom.element(
+		let cursorPosition = new CKEDITOR.dom.element(
 			firstRowCells[startColIndex] ||
 				(startColIndex
 					? firstRowCells[startColIndex - 1]
@@ -369,15 +415,15 @@
 	}
 
 	function insertCell(selection, insertBefore) {
-		var startElement = selection.getStartElement();
-		var cell =
+		let startElement = selection.getStartElement();
+		let cell =
 			startElement.getAscendant('td', 1) ||
 			startElement.getAscendant('th', 1);
 
 		if (!cell) return;
 
 		// Create the new cell element to be added.
-		var newCell = cell.clone();
+		let newCell = cell.clone();
 		newCell.appendBogus();
 
 		if (insertBefore) newCell.insertBefore(cell);
@@ -386,18 +432,18 @@
 
 	function deleteCells(selectionOrCell) {
 		if (selectionOrCell instanceof CKEDITOR.dom.selection) {
-			var cellsToDelete = getSelectedCells(selectionOrCell);
-			var table =
+			let cellsToDelete = getSelectedCells(selectionOrCell);
+			let table =
 				cellsToDelete[0] && cellsToDelete[0].getAscendant('table');
-			var cellToFocus = getFocusElementAfterDelCells(cellsToDelete);
+			let cellToFocus = getFocusElementAfterDelCells(cellsToDelete);
 
-			for (var i = cellsToDelete.length - 1; i >= 0; i--)
+			for (let i = cellsToDelete.length - 1; i >= 0; i--)
 				deleteCells(cellsToDelete[i]);
 
 			if (cellToFocus) placeCursorInCell(cellToFocus, true);
 			else if (table) table.remove();
 		} else if (selectionOrCell instanceof CKEDITOR.dom.element) {
-			var tr = selectionOrCell.getParent();
+			let tr = selectionOrCell.getParent();
 			if (tr.getChildCount() == 1) tr.remove();
 			else selectionOrCell.remove();
 		}
@@ -405,14 +451,15 @@
 
 	// Remove filler at end and empty spaces around the cell content.
 	function trimCell(cell) {
-		var bogus = cell.getBogus();
+		let bogus = cell.getBogus();
 		bogus && bogus.remove();
 		cell.trim();
 	}
 
 	function placeCursorInCell(cell, placeAtEnd) {
-		var docInner = cell.getDocument(),
-			docOuter = CKEDITOR.document;
+		let docInner = cell.getDocument();
+
+		let docOuter = CKEDITOR.document;
 
 		// Fixing "Unspecified error" thrown in IE10 by resetting
 		// selection the dirty and shameful way (#10308).
@@ -423,7 +470,7 @@
 			docInner.focus();
 		}
 
-		var range = new CKEDITOR.dom.range(docInner);
+		let range = new CKEDITOR.dom.range(docInner);
 		if (
 			!range['moveToElementEdit' + (placeAtEnd ? 'End' : 'Start')](cell)
 		) {
@@ -434,10 +481,10 @@
 	}
 
 	function cellInRow(tableMap, rowIndex, cell) {
-		var oRow = tableMap[rowIndex];
+		let oRow = tableMap[rowIndex];
 		if (typeof cell == 'undefined') return oRow;
 
-		for (var c = 0; oRow && c < oRow.length; c++) {
+		for (let c = 0; oRow && c < oRow.length; c++) {
 			if (cell.is && oRow[c] == cell.$) return c;
 			else if (c == cell) return new CKEDITOR.dom.element(oRow[c]);
 		}
@@ -445,9 +492,9 @@
 	}
 
 	function cellInCol(tableMap, colIndex) {
-		var oCol = [];
-		for (var r = 0; r < tableMap.length; r++) {
-			var row = tableMap[r];
+		let oCol = [];
+		for (let r = 0; r < tableMap.length; r++) {
+			let row = tableMap[r];
 			oCol.push(row[colIndex]);
 
 			// Avoid adding duplicate cells.
@@ -457,13 +504,13 @@
 	}
 
 	function mergeCells(selection, mergeDirection, isDetect) {
-		var cells = getSelectedCells(selection);
+		let cells = getSelectedCells(selection);
 
 		// Invalid merge request if:
 		// 1. In batch mode despite that less than two selected.
 		// 2. In solo mode while not exactly only one selected.
 		// 3. Cells distributed in different table groups (e.g. from both thead and tbody).
-		var commonAncestor;
+		let commonAncestor;
 		if (
 			(mergeDirection ? cells.length != 1 : cells.length < 2) ||
 			((commonAncestor = selection.getCommonAncestor()) &&
@@ -472,21 +519,28 @@
 		)
 			return false;
 
-		var cell,
-			firstCell = cells[0],
-			table = firstCell.getAscendant('table'),
-			map = CKEDITOR.tools.buildTableMap(table),
-			mapHeight = map.length,
-			mapWidth = map[0].length,
-			startRow = firstCell.getParent().$.rowIndex,
-			startColumn = cellInRow(map, startRow, firstCell);
+		let cell;
+
+		let firstCell = cells[0];
+
+		let table = firstCell.getAscendant('table');
+
+		let map = CKEDITOR.tools.buildTableMap(table);
+
+		let mapHeight = map.length;
+
+		let mapWidth = map[0].length;
+
+		let startRow = firstCell.getParent().$.rowIndex;
+
+		let startColumn = cellInRow(map, startRow, firstCell);
 
 		if (mergeDirection) {
-			var targetCell;
+			let targetCell;
 			try {
-				var rowspan =
+				let rowspan =
 					parseInt(firstCell.getAttribute('rowspan'), 10) || 1;
-				var colspan =
+				let colspan =
 					parseInt(firstCell.getAttribute('colspan'), 10) || 1;
 
 				targetCell =
@@ -520,23 +574,34 @@
 		}
 
 		// Start from here are merging way ignorance (merge up/right, batch merge).
-		var doc = firstCell.getDocument(),
-			lastRowIndex = startRow,
-			totalRowSpan = 0,
-			totalColSpan = 0,
-			// Use a documentFragment as buffer when appending cell contents.
-			frag = !isDetect && new CKEDITOR.dom.documentFragment(doc),
-			dimension = 0;
+		let doc = firstCell.getDocument();
+
+		let lastRowIndex = startRow;
+
+		let totalRowSpan = 0;
+
+		let totalColSpan = 0;
+
+		// Use a documentFragment as buffer when appending cell contents.
+
+		let frag = !isDetect && new CKEDITOR.dom.documentFragment(doc);
+
+		let dimension = 0;
 
 		for (var i = 0; i < cells.length; i++) {
 			cell = cells[i];
 
-			var tr = cell.getParent(),
-				cellFirstChild = cell.getFirst(),
-				colSpan = cell.$.colSpan,
-				rowSpan = cell.$.rowSpan,
-				rowIndex = tr.$.rowIndex,
-				colIndex = cellInRow(map, rowIndex, cell);
+			let tr = cell.getParent();
+
+			let cellFirstChild = cell.getFirst();
+
+			let colSpan = cell.$.colSpan;
+
+			let rowSpan = cell.$.rowSpan;
+
+			let rowIndex = tr.$.rowIndex;
+
+			let colIndex = cellInRow(map, rowIndex, cell);
 
 			// Accumulated the actual places taken by all selected cells.
 			dimension += colSpan * rowSpan;
@@ -562,7 +627,7 @@
 							cellFirstChild.isBlockBoundary({br: 1})
 						)
 					) {
-						var last = frag.getLast(
+						let last = frag.getLast(
 							CKEDITOR.dom.walker.whitespaces(true)
 						);
 						if (last && !(last.is && last.is('br')))
@@ -588,11 +653,12 @@
 			else firstCell.$.colSpan = totalColSpan;
 
 			// Swip empty <tr> left at the end of table due to the merging.
-			var trs = new CKEDITOR.dom.nodeList(table.$.rows),
-				count = trs.count();
+			let trs = new CKEDITOR.dom.nodeList(table.$.rows);
+
+			let count = trs.count();
 
 			for (i = count - 1; i >= 0; i--) {
-				var tailTr = trs.getItem(i);
+				let tailTr = trs.getItem(i);
 				if (!tailTr.$.cells.length) {
 					tailTr.remove();
 					count++;
@@ -610,34 +676,46 @@
 	}
 
 	function verticalSplitCell(selection, isDetect) {
-		var cells = getSelectedCells(selection);
+		let cells = getSelectedCells(selection);
 		if (cells.length > 1) return false;
 		else if (isDetect) return true;
 
-		var cell = cells[0],
-			tr = cell.getParent(),
-			table = tr.getAscendant('table'),
-			map = CKEDITOR.tools.buildTableMap(table),
-			rowIndex = tr.$.rowIndex,
-			colIndex = cellInRow(map, rowIndex, cell),
-			rowSpan = cell.$.rowSpan,
-			newCell,
-			newRowSpan,
-			newCellRowSpan,
-			newRowIndex;
+		let cell = cells[0];
+
+		let tr = cell.getParent();
+
+		let table = tr.getAscendant('table');
+
+		let map = CKEDITOR.tools.buildTableMap(table);
+
+		let rowIndex = tr.$.rowIndex;
+
+		let colIndex = cellInRow(map, rowIndex, cell);
+
+		let rowSpan = cell.$.rowSpan;
+
+		let newCell;
+
+		let newRowSpan;
+
+		let newCellRowSpan;
+
+		let newRowIndex;
 
 		if (rowSpan > 1) {
 			newRowSpan = Math.ceil(rowSpan / 2);
 			newCellRowSpan = Math.floor(rowSpan / 2);
 			newRowIndex = rowIndex + newRowSpan;
-			var newCellTr = new CKEDITOR.dom.element(table.$.rows[newRowIndex]),
-				newCellRow = cellInRow(map, newRowIndex),
-				candidateCell;
+			var newCellTr = new CKEDITOR.dom.element(table.$.rows[newRowIndex]);
+
+			let newCellRow = cellInRow(map, newRowIndex);
+
+			let candidateCell;
 
 			newCell = cell.clone();
 
 			// Figure out where to insert the new cell by checking the vitual row.
-			for (var c = 0; c < newCellRow.length; c++) {
+			for (let c = 0; c < newCellRow.length; c++) {
 				candidateCell = newCellRow[c];
 				// Catch first cell actually following the column.
 				if (candidateCell.parentNode == newCellTr.$ && c > colIndex) {
@@ -659,8 +737,8 @@
 			newCellTr.insertAfter(tr);
 			newCellTr.append((newCell = cell.clone()));
 
-			var cellsInSameRow = cellInRow(map, rowIndex);
-			for (var i = 0; i < cellsInSameRow.length; i++)
+			let cellsInSameRow = cellInRow(map, rowIndex);
+			for (let i = 0; i < cellsInSameRow.length; i++)
 				cellsInSameRow[i].rowSpan++;
 		}
 
@@ -675,28 +753,37 @@
 	}
 
 	function horizontalSplitCell(selection, isDetect) {
-		var cells = getSelectedCells(selection);
+		let cells = getSelectedCells(selection);
 		if (cells.length > 1) return false;
 		else if (isDetect) return true;
 
-		var cell = cells[0],
-			tr = cell.getParent(),
-			table = tr.getAscendant('table'),
-			map = CKEDITOR.tools.buildTableMap(table),
-			rowIndex = tr.$.rowIndex,
-			colIndex = cellInRow(map, rowIndex, cell),
-			colSpan = cell.$.colSpan,
-			newCell,
-			newColSpan,
-			newCellColSpan;
+		let cell = cells[0];
+
+		let tr = cell.getParent();
+
+		let table = tr.getAscendant('table');
+
+		let map = CKEDITOR.tools.buildTableMap(table);
+
+		let rowIndex = tr.$.rowIndex;
+
+		let colIndex = cellInRow(map, rowIndex, cell);
+
+		let colSpan = cell.$.colSpan;
+
+		let newCell;
+
+		let newColSpan;
+
+		let newCellColSpan;
 
 		if (colSpan > 1) {
 			newColSpan = Math.ceil(colSpan / 2);
 			newCellColSpan = Math.floor(colSpan / 2);
 		} else {
 			newCellColSpan = newColSpan = 1;
-			var cellsInSameCol = cellInCol(map, colIndex);
-			for (var i = 0; i < cellsInSameCol.length; i++)
+			let cellsInSameCol = cellInCol(map, colIndex);
+			for (let i = 0; i < cellsInSameCol.length; i++)
 				cellsInSameCol[i].colSpan++;
 		}
 		newCell = cell.clone();
@@ -713,7 +800,7 @@
 
 	CKEDITOR.plugins.add('ae_tabletools', {
 		init: function(editor) {
-			var lang = editor.lang.table;
+			let lang = editor.lang.table;
 
 			function createDef(def) {
 				return CKEDITOR.tools.extend(def || {}, {
@@ -728,7 +815,7 @@
 				});
 			}
 			function addCmd(name, def) {
-				var cmd = editor.getCommand(name);
+				let cmd = editor.getCommand(name);
 
 				if (cmd) {
 					return;
@@ -743,7 +830,7 @@
 				createDef({
 					requiredContent: 'table',
 					exec: function(editor) {
-						var selection = editor.getSelection();
+						let selection = editor.getSelection();
 						placeCursorInCell(deleteRows(selection));
 					},
 				})
@@ -754,7 +841,7 @@
 				createDef({
 					requiredContent: 'table',
 					exec: function(editor) {
-						var selection = editor.getSelection();
+						let selection = editor.getSelection();
 						insertRow(selection, true);
 					},
 				})
@@ -765,7 +852,7 @@
 				createDef({
 					requiredContent: 'table',
 					exec: function(editor) {
-						var selection = editor.getSelection();
+						let selection = editor.getSelection();
 						insertRow(selection);
 					},
 				})
@@ -776,8 +863,8 @@
 				createDef({
 					requiredContent: 'table',
 					exec: function(editor) {
-						var selection = editor.getSelection();
-						var element = deleteColumns(selection);
+						let selection = editor.getSelection();
+						let element = deleteColumns(selection);
 						element && placeCursorInCell(element, true);
 					},
 				})
@@ -788,7 +875,7 @@
 				createDef({
 					requiredContent: 'table',
 					exec: function(editor) {
-						var selection = editor.getSelection();
+						let selection = editor.getSelection();
 						insertColumn(selection, true);
 					},
 				})
@@ -799,7 +886,7 @@
 				createDef({
 					requiredContent: 'table',
 					exec: function(editor) {
-						var selection = editor.getSelection();
+						let selection = editor.getSelection();
 						insertColumn(selection);
 					},
 				})
@@ -810,7 +897,7 @@
 				createDef({
 					requiredContent: 'table',
 					exec: function(editor) {
-						var selection = editor.getSelection();
+						let selection = editor.getSelection();
 						deleteCells(selection);
 					},
 				})
@@ -889,7 +976,7 @@
 				createDef({
 					requiredContent: 'table',
 					exec: function(editor) {
-						var selection = editor.getSelection();
+						let selection = editor.getSelection();
 						insertCell(selection, true);
 					},
 				})
@@ -900,7 +987,7 @@
 				createDef({
 					requiredContent: 'table',
 					exec: function(editor) {
-						var selection = editor.getSelection();
+						let selection = editor.getSelection();
 						insertCell(selection);
 					},
 				})
@@ -919,32 +1006,32 @@
  * @member CKEDITOR.tools
  */
 CKEDITOR.tools.buildTableMap = function(table) {
-	var aRows = table.$.rows;
+	let aRows = table.$.rows;
 
 	// Row and Column counters.
-	var r = -1;
+	let r = -1;
 
-	var aMap = [];
+	let aMap = [];
 
-	for (var i = 0; i < aRows.length; i++) {
+	for (let i = 0; i < aRows.length; i++) {
 		r++;
 		!aMap[r] && (aMap[r] = []);
 
-		var c = -1;
+		let c = -1;
 
-		for (var j = 0; j < aRows[i].cells.length; j++) {
-			var oCell = aRows[i].cells[j];
+		for (let j = 0; j < aRows[i].cells.length; j++) {
+			let oCell = aRows[i].cells[j];
 
 			c++;
 			while (aMap[r][c]) c++;
 
-			var iColSpan = isNaN(oCell.colSpan) ? 1 : oCell.colSpan;
-			var iRowSpan = isNaN(oCell.rowSpan) ? 1 : oCell.rowSpan;
+			let iColSpan = isNaN(oCell.colSpan) ? 1 : oCell.colSpan;
+			let iRowSpan = isNaN(oCell.rowSpan) ? 1 : oCell.rowSpan;
 
-			for (var rs = 0; rs < iRowSpan; rs++) {
+			for (let rs = 0; rs < iRowSpan; rs++) {
 				if (!aMap[r + rs]) aMap[r + rs] = [];
 
-				for (var cs = 0; cs < iColSpan; cs++) {
+				for (let cs = 0; cs < iColSpan; cs++) {
 					aMap[r + rs][c + cs] = aRows[i].cells[j];
 				}
 			}

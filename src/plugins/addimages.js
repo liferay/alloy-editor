@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	var isIE = CKEDITOR.env.ie;
+	let isIE = CKEDITOR.env.ie;
 
 	if (CKEDITOR.plugins.get('ae_addimages')) {
 		return;
@@ -49,7 +49,7 @@
 			editor.once(
 				'contentDom',
 				function() {
-					var editable = editor.editable();
+					let editable = editor.editable();
 
 					editable.attachListener(
 						editable,
@@ -107,10 +107,10 @@
 		 * @protected
 		 */
 		_handleFiles: function(files, editor) {
-			var file;
-			var i;
+			let file;
+			let i;
 
-			var imageFiles = [];
+			let imageFiles = [];
 
 			for (i = 0; i < files.length; i++) {
 				file = files[i];
@@ -120,11 +120,11 @@
 				}
 			}
 
-			var result = editor.fire('beforeImageAdd', {
+			let result = editor.fire('beforeImageAdd', {
 				imageFiles: imageFiles,
 			});
 
-			if (!!result) {
+			if (result) {
 				for (i = 0; i < imageFiles.length; i++) {
 					file = imageFiles[i];
 
@@ -147,14 +147,14 @@
 		 * @protected
 		 */
 		_onDragDrop: function(event) {
-			var nativeEvent = event.data.$;
+			let nativeEvent = event.data.$;
 
-			var transferFiles = nativeEvent.dataTransfer.files;
+			let transferFiles = nativeEvent.dataTransfer.files;
 
 			if (transferFiles.length > 0) {
 				new CKEDITOR.dom.event(nativeEvent).preventDefault();
 
-				var editor = event.listenerData.editor;
+				let editor = event.listenerData.editor;
 
 				event.listenerData.editor.createSelectionFromPoint(
 					nativeEvent.clientX,
@@ -213,10 +213,10 @@
 				event.data.$.clipboardData.items &&
 				event.data.$.clipboardData.items.length > 0
 			) {
-				var pastedData = event.data.$.clipboardData.items[0];
+				let pastedData = event.data.$.clipboardData.items[0];
 
 				if (pastedData.type.indexOf('image') === 0) {
-					var imageFile = pastedData.getAsFile();
+					let imageFile = pastedData.getAsFile();
 
 					this._processFile(imageFile, event.listenerData.editor);
 				}
@@ -251,18 +251,18 @@
 		 * @protected
 		 */
 		_processFile: function(file, editor) {
-			var reader = new FileReader();
+			let reader = new FileReader();
 
 			reader.addEventListener('loadend', function() {
-				var bin = reader.result;
+				let bin = reader.result;
 
-				var el = CKEDITOR.dom.element.createFromHtml(
+				let el = CKEDITOR.dom.element.createFromHtml(
 					'<img src="' + bin + '">'
 				);
 
 				editor.insertElement(el);
 
-				var imageData = {
+				let imageData = {
 					el: el,
 					file: file,
 				};

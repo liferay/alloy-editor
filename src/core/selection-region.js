@@ -49,13 +49,13 @@
 		 * @param {Number} endY Y coordinate of the second point.
 		 */
 		createSelectionFromRange: function(startX, startY, endX, endY) {
-			var end;
-			var endContainer;
-			var endOffset;
-			var range;
-			var start;
-			var startContainer;
-			var startOffset;
+			let end;
+			let endContainer;
+			let endOffset;
+			let range;
+			let start;
+			let startContainer;
+			let startOffset;
 
 			if (typeof document.caretPositionFromPoint === 'function') {
 				start = document.caretPositionFromPoint(startX, startY);
@@ -90,14 +90,14 @@
 
 				this.getSelection().selectRanges([range]);
 			} else if (typeof document.body.createTextRange === 'function') {
-				var selection = this.getSelection();
+				let selection = this.getSelection();
 
 				selection.unlock();
 
 				range = document.body.createTextRange();
 				range.moveToPoint(startX, startY);
 
-				var endRange = range.duplicate();
+				let endRange = range.duplicate();
 				endRange.moveToPoint(endX, endY);
 
 				range.setEndPoint('EndToEnd', endRange);
@@ -120,22 +120,22 @@
 		 * - top
 		 */
 		getCaretRegion: function() {
-			var selection = this.getSelection();
+			let selection = this.getSelection();
 
-			var region = {
+			let region = {
 				bottom: 0,
 				left: 0,
 				right: 0,
 				top: 0,
 			};
 
-			var bookmarks = selection.createBookmarks();
+			let bookmarks = selection.createBookmarks();
 
 			if (!bookmarks.length) {
 				return region;
 			}
 
-			var bookmarkNodeEl = bookmarks[0].startNode.$;
+			let bookmarkNodeEl = bookmarks[0].startNode.$;
 
 			bookmarkNodeEl.style.display = 'inline-block';
 
@@ -143,7 +143,7 @@
 
 			bookmarkNodeEl.parentNode.removeChild(bookmarkNodeEl);
 
-			var scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
+			let scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
 
 			region.bottom = scrollPos.y + region.bottom;
 			region.left = scrollPos.x + region.left;
@@ -165,13 +165,13 @@
 		 * - region - The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionRegion:method"}}{{/crossLink}}
 		 */
 		getSelectionData: function() {
-			var selection = this.getSelection();
+			let selection = this.getSelection();
 
 			if (!selection.getNative()) {
 				return null;
 			}
 
-			var result = {
+			let result = {
 				element: selection.getSelectedElement(),
 				text: selection.getSelectedText(),
 			};
@@ -196,7 +196,7 @@
 		 * - width - The width of the selection region
 		 */
 		getSelectionRegion: function() {
-			var region = this.getClientRectsRegion();
+			let region = this.getClientRectsRegion();
 
 			region.direction = this.getSelectionDirection();
 
@@ -215,9 +215,9 @@
 		 * @return {Boolean} Returns true if the current selection is empty, false otherwise.
 		 */
 		isSelectionEmpty: function() {
-			var ranges;
+			let ranges;
 
-			var selection = this.getSelection();
+			let selection = this.getSelection();
 
 			return (
 				selection.getType() === CKEDITOR.SELECTION_NONE ||
@@ -257,10 +257,10 @@
 		 * If there is no native selection, the objects will be filled with 0.
 		 */
 		getClientRectsRegion: function() {
-			var selection = this.getSelection();
-			var nativeSelection = selection.getNative();
+			let selection = this.getSelection();
+			let nativeSelection = selection.getNative();
 
-			var defaultRect = {
+			let defaultRect = {
 				bottom: 0,
 				height: 0,
 				left: 0,
@@ -269,7 +269,7 @@
 				width: 0,
 			};
 
-			var region = {
+			let region = {
 				bottom: 0,
 				endRect: defaultRect,
 				left: 0,
@@ -282,12 +282,12 @@
 				return region;
 			}
 
-			var bottom = 0;
-			var clientRects;
-			var left = Infinity;
-			var rangeCount;
-			var right = -Infinity;
-			var top = Infinity;
+			let bottom = 0;
+			let clientRects;
+			let left = Infinity;
+			let rangeCount;
+			let right = -Infinity;
+			let top = Infinity;
 
 			if (nativeSelection.createRange) {
 				clientRects = nativeSelection.createRange().getClientRects();
@@ -302,8 +302,8 @@
 			if (clientRects.length === 0) {
 				region = this.getCaretRegion();
 			} else {
-				for (var i = 0, length = clientRects.length; i < length; i++) {
-					var item = clientRects[i];
+				for (let i = 0, length = clientRects.length; i < length; i++) {
+					let item = clientRects[i];
 
 					if (item.left < left) {
 						left = item.left;
@@ -322,7 +322,7 @@
 					}
 				}
 
-				var scrollPos = new CKEDITOR.dom.window(
+				let scrollPos = new CKEDITOR.dom.window(
 					window
 				).getScrollPosition();
 
@@ -332,8 +332,8 @@
 				region.top = scrollPos.y + top;
 
 				if (clientRects.length) {
-					var endRect = clientRects[clientRects.length - 1];
-					var startRect = clientRects[0];
+					let endRect = clientRects[clientRects.length - 1];
+					let startRect = clientRects[0];
 
 					region.endRect = {
 						bottom: scrollPos.y + endRect.bottom,
@@ -370,21 +370,21 @@
 		 * - CKEDITOR.SELECTION_BOTTOM_TO_TOP;
 		 */
 		getSelectionDirection: function() {
-			var direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
-			var selection = this.getSelection();
-			var nativeSelection = selection.getNative();
+			let direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
+			let selection = this.getSelection();
+			let nativeSelection = selection.getNative();
 
 			if (!nativeSelection) {
 				return direction;
 			}
 
-			var anchorNode;
+			let anchorNode;
 
 			if (
 				(anchorNode = nativeSelection.anchorNode) &&
 				anchorNode.compareDocumentPosition
 			) {
-				var position = anchorNode.compareDocumentPosition(
+				let position = anchorNode.compareDocumentPosition(
 					nativeSelection.focusNode
 				);
 
@@ -404,7 +404,8 @@
 
 	CKEDITOR.plugins.add('ae_selectionregion', {
 		init: function(editor) {
-			var attr, hasOwnProperty;
+			let attr;
+			let hasOwnProperty;
 
 			hasOwnProperty = Object.prototype.hasOwnProperty;
 

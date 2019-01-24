@@ -22,12 +22,12 @@
 		 * @param {Object} editor The current editor instance
 		 */
 		beforeInit: function(editor) {
-			var originalUIAddFn = editor.ui.add;
+			let originalUIAddFn = editor.ui.add;
 
 			editor.ui.add = function(name, type, definition) {
 				originalUIAddFn.apply(this, arguments);
 
-				var typeHandler = this._.handlers[type];
+				let typeHandler = this._.handlers[type];
 
 				if (typeHandler && typeHandler.add) {
 					typeHandler.add(name, definition, editor);

@@ -27,7 +27,7 @@
 		callback,
 		errorCallback
 	) {
-		var callbackKey = CKEDITOR.tools.getNextNumber();
+		let callbackKey = CKEDITOR.tools.getNextNumber();
 
 		urlParams = urlParams || {};
 		urlParams.callback = 'CKEDITOR._.jsonpCallbacks[' + callbackKey + ']';
@@ -44,7 +44,7 @@
 			});
 		};
 
-		var scriptElement = new CKEDITOR.dom.element('script');
+		let scriptElement = new CKEDITOR.dom.element('script');
 		scriptElement.setAttribute('src', urlTemplate.output(urlParams));
 		scriptElement.on('error', function() {
 			cleanUp();
@@ -86,12 +86,12 @@
 	CKEDITOR.tools.merge =
 		CKEDITOR.tools.merge ||
 		function() {
-			var result = {};
+			let result = {};
 
-			for (var i = 0; i < arguments.length; ++i) {
-				var obj = arguments[i];
+			for (let i = 0; i < arguments.length; ++i) {
+				let obj = arguments[i];
 
-				for (var key in obj) {
+				for (let key in obj) {
 					if (Object.prototype.hasOwnProperty.call(obj, key)) {
 						result[key] = obj[key];
 					}
@@ -111,7 +111,7 @@
 	 * @static
 	 */
 	CKEDITOR.tools.simulate = function(element, event) {
-		var eventInstance = document.createEvent('Events');
+		let eventInstance = document.createEvent('Events');
 		eventInstance.initEvent(event, true, false);
 		element.dispatchEvent(eventInstance);
 	};

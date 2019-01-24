@@ -18,7 +18,7 @@ export default WrappedComponent =>
 		 * @return {String} A string with the arrow box CSS classes.
 		 */
 		getArrowBoxClasses() {
-			var arrowBoxClasses = 'ae-arrow-box';
+			let arrowBoxClasses = 'ae-arrow-box';
 
 			if (
 				Lang.isFunction(this.getInteractionPoint) &&

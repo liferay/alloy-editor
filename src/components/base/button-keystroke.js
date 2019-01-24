@@ -20,18 +20,18 @@ export default WrappedComponent =>
 				super.componentWillMount();
 			}
 
-			var nativeEditor = this.props.editor.get('nativeEditor');
-			var keystroke = this.props.keystroke;
+			let nativeEditor = this.props.editor.get('nativeEditor');
+			let keystroke = this.props.keystroke;
 
-			var commandName =
+			let commandName =
 				keystroke.name || ((Math.random() * 1e9) >>> 0).toString();
 
-			var command = nativeEditor.getCommand(commandName);
+			let command = nativeEditor.getCommand(commandName);
 
 			if (!command) {
 				command = new CKEDITOR.command(nativeEditor, {
 					exec: function(editor) {
-						var keystrokeFn = keystroke.fn;
+						let keystrokeFn = keystroke.fn;
 
 						if (Lang.isString(keystrokeFn)) {
 							this[keystrokeFn].call(this, editor);

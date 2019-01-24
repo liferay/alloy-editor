@@ -9,7 +9,7 @@
 		return;
 	}
 
-	var alignmentsObj = {
+	let alignmentsObj = {
 		center: 1,
 		left: 0,
 		right: 2,
@@ -19,16 +19,16 @@
 	 * Set cursor css depend on imageScaleResize config
 	 **/
 
-	var cursor = {
+	let cursor = {
 		both: 'nwse-resize',
 		height: 'ns-resize',
 		scale: 'nwse-resize',
 		width: 'ew-resize',
 	};
 
-	var regexPercent = /^\s*(\d+\%)\s*$/i;
+	let regexPercent = /^\s*(\d+\%)\s*$/i;
 
-	var template = '<img alt="" src="" />';
+	let template = '<img alt="" src="" />';
 
 	CKEDITOR.plugins.add('ae_dragresize_ie', {
 		hidpi: true,
@@ -36,7 +36,7 @@
 		icons: 'image',
 
 		init: function(editor) {
-			var image = widgetDef(editor);
+			let image = widgetDef(editor);
 
 			// Register the widget.
 			editor.widgets.add('image', image);
@@ -189,17 +189,17 @@
 			editor.widgets.initOn(imageData.data.el, 'image');
 		});
 
-		var alignClasses = editor.config.image2_alignClasses;
+		let alignClasses = editor.config.image2_alignClasses;
 
-		var captionedClass = editor.config.image2_captionedClass;
+		let captionedClass = editor.config.image2_captionedClass;
 
 		return {
 			init: function() {
-				var helpers = CKEDITOR.plugins.image2;
+				let helpers = CKEDITOR.plugins.image2;
 
-				var image = this.parts.image;
+				let image = this.parts.image;
 
-				var data = {
+				let data = {
 					alt: image.getAttribute('alt') || '',
 					hasCaption: !!this.parts.caption,
 					height: image.getAttribute('height') || '',
@@ -214,7 +214,7 @@
 				// If we used 'a' in widget#parts definition, it could happen that
 				// selected element is a child of widget.parts#caption. Since there's no clever
 				// way to solve it with CSS selectors, it's done like that. (#11783).
-				var link = image.getAscendant('a');
+				let link = image.getAscendant('a');
 
 				if (link && this.wrapper.contains(link)) {
 					this.parts.link = link;
@@ -225,7 +225,7 @@
 				// Note: Center alignment is detected during upcast, so only left/right cases
 				// are checked below.
 				if (!data.align) {
-					var alignElement = data.hasCaption ? this.element : image;
+					let alignElement = data.hasCaption ? this.element : image;
 
 					// Read the initial left/right alignment from the class set on element.
 					if (alignClasses) {
@@ -275,7 +275,7 @@
 			contentTransformations: [['img[width]: sizeToAttribute']],
 
 			data: function() {
-				var features = this.features;
+				let features = this.features;
 
 				// Image can't be captioned when figcaption is disallowed (#11004).
 				if (
@@ -327,7 +327,7 @@
 					!this.oldData.hasCaption &&
 					this.data.hasCaption
 				) {
-					for (var c in this.data.classes) {
+					for (let c in this.data.classes) {
 						this.parts.image.removeClass(c);
 					}
 				}
@@ -359,20 +359,20 @@
 			// Overrides default method to handle internal mutability of Image2.
 			// @see CKEDITOR.plugins.widget#getClasses
 			getClasses: (function() {
-				var classRegex = new RegExp(
+				let classRegex = new RegExp(
 					'^(' +
 						[].concat(captionedClass, alignClasses).join('|') +
 						')$'
 				);
 
 				return function() {
-					var classes = this.repository.parseElementClasses(
+					let classes = this.repository.parseElementClasses(
 						getStyleableElement(this).getAttribute('class')
 					);
 
 					// Neither config.image2_captionedClass nor config.image2_alignClasses
 					// do not belong to style classes.
-					for (var c in classes) {
+					for (let c in classes) {
 						if (classRegex.test(c)) {
 							delete classes[c];
 						}
@@ -383,7 +383,7 @@
 			})(),
 
 			getLabel: function() {
-				var label = (this.data.alt || '') + ' ' + this.pathName;
+				let label = (this.data.alt || '') + ' ' + this.pathName;
 
 				return label;
 			},
@@ -428,11 +428,12 @@
 		 * by comparing dimensions.
 		 *
 		 * @param {CKEDITOR.dom.element} image
-		 * @returns {Boolean}
+		 * @return {Boolean}
 		 */
 		checkHasNaturalRatio: function(image) {
-			var $ = image.$,
-				natural = this.getNatural(image);
+			let $ = image.$;
+
+			let natural = this.getNatural(image);
 
 			// The reason for two alternative comparisons is that the rounding can come from
 			// both dimensions, e.g. there are two cases:
@@ -452,10 +453,10 @@
 		 * a new image and reads the dimensions.
 		 *
 		 * @param {CKEDITOR.dom.element} image
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		getNatural: function(image) {
-			var dimensions;
+			let dimensions;
 
 			if (image.$.naturalWidth) {
 				dimensions = {
@@ -463,7 +464,7 @@
 					width: image.$.naturalWidth,
 				};
 			} else {
-				var img = new Image();
+				let img = new Image();
 
 				img.src = image.getAttribute('src');
 
@@ -483,21 +484,21 @@
 	// @param {CKEDITOR.editor} editor
 	// @returns {Function}
 	function upcastWidgetElement(editor) {
-		var isCenterWrapper = centerWrapperChecker(editor);
+		let isCenterWrapper = centerWrapperChecker(editor);
 
-		var captionedClass = editor.config.image2_captionedClass;
+		let captionedClass = editor.config.image2_captionedClass;
 
 		// @param {CKEDITOR.htmlParser.element} el
 		// @param {Object} data
 		return function(el, data) {
-			var dimensions = {
+			let dimensions = {
 				height: 1,
 				width: 1,
 			};
 
-			var name = el.name;
+			let name = el.name;
 
-			var image;
+			let image;
 
 			// #11110 Don't initialize on pasted fake objects.
 			if (el.attributes['data-cke-realelement']) {
@@ -518,7 +519,7 @@
 			//    than ENTER_P.
 			if (isCenterWrapper(el)) {
 				if (name == 'div') {
-					var figure = el.getFirst('figure');
+					let figure = el.getFirst('figure');
 
 					// Case #1.
 					if (figure) {
@@ -550,8 +551,8 @@
 
 			// If there's an image, then cool, we got a widget.
 			// Now just remove dimension attributes expressed with %.
-			for (var d in dimensions) {
-				var dimension = image.attributes[d];
+			for (let d in dimensions) {
+				let dimension = image.attributes[d];
 
 				if (dimension && dimension.match(regexPercent)) {
 					delete image.attributes[d];
@@ -567,24 +568,24 @@
 	//
 	// @param {CKEDITOR.editor}
 	function downcastWidgetElement(editor) {
-		var alignClasses = editor.config.image2_alignClasses;
+		let alignClasses = editor.config.image2_alignClasses;
 
 		// @param {CKEDITOR.htmlParser.element} el
 		return function(el) {
 			// In case of <a><img/></a>, <img/> is the element to hold
 			// inline styles or classes (image2_alignClasses).
-			var attrsHolder = el.name == 'a' ? el.getFirst() : el;
+			let attrsHolder = el.name == 'a' ? el.getFirst() : el;
 
 			delete attrsHolder.attributes.contenteditable;
 
-			var attrs = attrsHolder.attributes;
+			let attrs = attrsHolder.attributes;
 
-			var align = this.data.align;
+			let align = this.data.align;
 
 			// De-wrap the image from resize handle wrapper.
 			// Only block widgets have one.
 			if (!this.inline) {
-				var resizeWrapper = el.getFirst('span');
+				let resizeWrapper = el.getFirst('span');
 
 				if (resizeWrapper) {
 					resizeWrapper.replaceWith(
@@ -597,7 +598,7 @@
 			}
 
 			if (align && align != 'none') {
-				var styles = CKEDITOR.tools.parseCssText(attrs.style || '');
+				let styles = CKEDITOR.tools.parseCssText(attrs.style || '');
 
 				// When the widget is captioned (<figure>) and internally centering is done
 				// with widget's wrapper style/class, in the external data representation,
@@ -658,11 +659,11 @@
 	// @param {CKEDITOR.editor} editor
 	// @returns {Function}
 	function centerWrapperChecker(editor) {
-		var captionedClass = editor.config.image2_captionedClass;
+		let captionedClass = editor.config.image2_captionedClass;
 
-		var alignClasses = editor.config.image2_alignClasses;
+		let alignClasses = editor.config.image2_alignClasses;
 
-		var validChildren = {
+		let validChildren = {
 			a: 1,
 			figure: 1,
 			img: 1,
@@ -682,14 +683,14 @@
 				return false;
 			}
 
-			var children = el.children;
+			let children = el.children;
 
 			// Centering wrapper can have only one child.
 			if (children.length !== 1) {
 				return false;
 			}
 
-			var child = children[0];
+			let child = children[0];
 
 			// Only <figure> or <img /> can be first (only) child of centering wrapper,
 			// regardless of its type.
@@ -763,16 +764,16 @@
 	//
 	// @param {CKEDITOR.plugins.widget} widget
 	function setDimensions(widget) {
-		var data = widget.data;
+		let data = widget.data;
 
-		var dimensions = {
+		let dimensions = {
 			height: data.height,
 			width: data.width,
 		};
 
-		var image = widget.parts.image;
+		let image = widget.parts.image;
 
-		for (var d in dimensions) {
+		for (let d in dimensions) {
 			if (dimensions[d]) {
 				image.setAttribute(d, dimensions[d]);
 			} else {
@@ -785,14 +786,14 @@
 	//
 	// @param {CKEDITOR.plugins.widget} widget
 	function setupResizer(widget) {
-		var editor = widget.editor;
+		let editor = widget.editor;
 
-		var editable = editor.editable();
+		let editable = editor.editable();
 
-		var doc = editor.document;
+		let doc = editor.document;
 
 		// Store the resizer in a widget for testing (#11004).
-		var resizer = (widget.resizer = doc.createElement('span'));
+		let resizer = (widget.resizer = doc.createElement('span'));
 
 		resizer.addClass('cke_image_resizer');
 		resizer.addClass(
@@ -802,11 +803,11 @@
 
 		// Inline widgets don't need a resizer wrapper as an image spans the entire widget.
 		if (!widget.inline) {
-			var imageOrLink = widget.parts.link || widget.parts.image;
+			let imageOrLink = widget.parts.link || widget.parts.image;
 
-			var oldResizeWrapper = imageOrLink.getParent();
+			let oldResizeWrapper = imageOrLink.getParent();
 
-			var resizeWrapper = doc.createElement('span');
+			let resizeWrapper = doc.createElement('span');
 
 			resizeWrapper.addClass('cke_image_resizer_wrapper');
 			resizeWrapper.append(imageOrLink);
@@ -824,32 +825,37 @@
 
 		// Calculate values of size variables and mouse offsets.
 		resizer.on('mousedown', function(evt) {
-			var image = widget.parts.image;
+			let image = widget.parts.image;
 
 			// "factor" can be either 1 or -1. I.e.: For right-aligned images, we need to
 			// subtract the difference to get proper width, etc. Without "factor",
 			// resizer starts working the opposite way.
-			var factor = widget.data.align == 'right' ? -1 : 1;
+			let factor = widget.data.align == 'right' ? -1 : 1;
 
 			// The x-coordinate of the mouse relative to the screen
 			// when button gets pressed.
-			var startX = evt.data.$.screenX;
+			let startX = evt.data.$.screenX;
 
-			var startY = evt.data.$.screenY;
+			let startY = evt.data.$.screenY;
 
 			// The initial dimensions and aspect ratio of the image.
-			var startWidth = image.$.clientWidth;
+			let startWidth = image.$.clientWidth;
 
-			var startHeight = image.$.clientHeight;
+			let startHeight = image.$.clientHeight;
 
-			var listeners = [];
+			let listeners = [];
 
 			// A class applied to editable during resizing.
-			var cursorClass = 'cke_image_s' + (!~factor ? 'w' : 'e');
+			let cursorClass = 'cke_image_s' + (!~factor ? 'w' : 'e');
 
-			var nativeEvt, newWidth, newHeight, updateData;
+			let nativeEvt;
+			let newWidth;
+			let newHeight;
+			let updateData;
 
-			var moveDiffX, moveDiffY, moveRatio;
+			let moveDiffX;
+			let moveDiffY;
+			let moveRatio;
 
 			// Save the undo snapshot first: before resizing.
 			editor.fire('saveSnapshot');
@@ -869,9 +875,9 @@
 			// Attaches an event to a global document if inline editor.
 			// Additionally, if classic (`iframe`-based) editor, also attaches the same event to `iframe`'s document.
 			function attachToDocuments(name, callback, collection) {
-				var globalDoc = CKEDITOR.document;
+				let globalDoc = CKEDITOR.document;
 
-				var listeners = [];
+				let listeners = [];
 
 				if (!doc.equals(globalDoc)) {
 					listeners.push(globalDoc.on(name, callback));
@@ -880,7 +886,7 @@
 				listeners.push(doc.on(name, callback));
 
 				if (collection) {
-					for (var i = listeners.length; i--; ) {
+					for (let i = listeners.length; i--; ) {
 						collection.push(listeners.pop());
 					}
 				}
@@ -904,7 +910,7 @@
 			// 	                <------->
 			// 	                moveDiffX
 			function onMouseMove(evt) {
-				var imageScaleResize = editor.config.imageScaleResize;
+				let imageScaleResize = editor.config.imageScaleResize;
 
 				nativeEvt = evt.data.$;
 
@@ -953,7 +959,7 @@
 			}
 
 			function onMouseUp() {
-				var l;
+				let l;
 
 				while ((l = listeners.pop())) {
 					l.removeListener();
@@ -986,18 +992,18 @@
 		});
 
 		widget.parts.image.on('click', function() {
-			var selection = editor.getSelection();
+			let selection = editor.getSelection();
 
 			if (selection) {
-				var element = selection.getStartElement();
+				let element = selection.getStartElement();
 
 				if (element) {
-					var widgetElement = element.findOne('img');
+					let widgetElement = element.findOne('img');
 
 					if (widgetElement) {
-						var region = element.getClientRect();
+						let region = element.getClientRect();
 
-						var scrollPosition = new CKEDITOR.dom.window(
+						let scrollPosition = new CKEDITOR.dom.window(
 							window
 						).getScrollPosition();
 						region.left -= scrollPosition.x;
@@ -1025,7 +1031,7 @@
 	// @param {CKEDITOR.editor}
 	// @returns {Object}
 	function getWidgetAllowedContent(editor) {
-		var rules = {
+		let rules = {
 			figcaption: true,
 			figure: {
 				classes: '!' + editor.config.image2_captionedClass,
@@ -1046,9 +1052,9 @@
 	// @param {CKEDITOR.editor}
 	// @returns {Object}
 	function getWidgetFeatures(editor) {
-		var alignClasses = editor.config.image2_alignClasses;
+		let alignClasses = editor.config.image2_alignClasses;
 
-		var features = {
+		let features = {
 			align: {
 				requiredContent:
 					'img' +

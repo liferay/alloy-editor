@@ -40,7 +40,7 @@
 			editor.once(
 				'contentDom',
 				function() {
-					var editable = editor.editable();
+					let editable = editor.editable();
 
 					editable.attachListener(
 						editable,
@@ -68,33 +68,33 @@
 		 */
 		_onPaste: function(event) {
 			if (event.data.$.clipboardData) {
-				var pastedData = event.data.$.clipboardData.items[0];
-				var editor = event.listenerData.editor;
+				let pastedData = event.data.$.clipboardData.items[0];
+				let editor = event.listenerData.editor;
 
 				if (pastedData.type.indexOf('image') === 0) {
-					var reader = new FileReader();
-					var imageFile = pastedData.getAsFile();
+					let reader = new FileReader();
+					let imageFile = pastedData.getAsFile();
 
 					reader.onload = function(event) {
-						var result = editor.fire('beforeImageAdd', {
+						let result = editor.fire('beforeImageAdd', {
 							imageFiles: imageFile,
 						});
 
-						if (!!result) {
-							var el = CKEDITOR.dom.element.createFromHtml(
+						if (result) {
+							let el = CKEDITOR.dom.element.createFromHtml(
 								'<img src="' + event.target.result + '">'
 							);
 
 							editor.insertElement(el);
 
-							var imageData = {
+							let imageData = {
 								el: el,
 								file: imageFile,
 							};
 
 							editor.fire('imageAdd', imageData);
 						}
-					}.bind(this);
+					};
 
 					reader.readAsDataURL(imageFile);
 				}

@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	var REGEX_BOOKMARK_SCHEME = /^#.*/i;
-	var REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F\._-]+@/i;
-	var REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
+	let REGEX_BOOKMARK_SCHEME = /^#.*/i;
+	let REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F\._-]+@/i;
+	let REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
 
 	/**
 	 * Link class utility. Provides methods for create, delete and update links.
@@ -33,12 +33,12 @@
 		advanceSelection: function(link) {
 			link = link || this.getFromSelection();
 
-			var range = this._editor.getSelection().getRanges()[0];
+			let range = this._editor.getSelection().getRanges()[0];
 
 			if (link) {
 				range.moveToElementEditEnd(link);
 
-				var nextNode = range.getNextEditableNode();
+				let nextNode = range.getNextEditableNode();
 
 				if (
 					nextNode &&
@@ -46,9 +46,9 @@
 						nextNode.getCommonAncestor(link)
 					)
 				) {
-					var whitespace = /\s/.exec(nextNode.getText());
+					let whitespace = /\s/.exec(nextNode.getText());
 
-					var offset = whitespace ? whitespace.index + 1 : 0;
+					let offset = whitespace ? whitespace.index + 1 : 0;
 
 					range.setStart(nextNode, offset);
 					range.setEnd(nextNode, offset);
@@ -69,19 +69,19 @@
 		 * @param {String} URI The URI of the link.
 		 */
 		create: function(URI, attrs, modifySelection) {
-			var selection = this._editor.getSelection();
+			let selection = this._editor.getSelection();
 
-			var range = selection.getRanges()[0];
+			let range = selection.getRanges()[0];
 
 			if (range.collapsed) {
-				var text = new CKEDITOR.dom.text(URI, this._editor.document);
+				let text = new CKEDITOR.dom.text(URI, this._editor.document);
 				range.insertNode(text);
 				range.selectNodeContents(text);
 			}
 
 			URI = this._getCompleteURI(URI);
 
-			var linkAttrs = CKEDITOR.tools.merge(
+			let linkAttrs = CKEDITOR.tools.merge(
 				{
 					'data-cke-saved-href': URI,
 					href: URI,
@@ -89,7 +89,7 @@
 				attrs
 			);
 
-			var style = new CKEDITOR.style({
+			let style = new CKEDITOR.style({
 				attributes: linkAttrs,
 				element: 'a',
 			});
@@ -113,21 +113,21 @@
 		 * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
 		 */
 		getFromSelection: function() {
-			var selection = this._editor.getSelection();
+			let selection = this._editor.getSelection();
 
-			var selectedElement = selection.getSelectedElement();
+			let selectedElement = selection.getSelectedElement();
 
 			if (selectedElement && selectedElement.is('a')) {
 				return selectedElement;
 			}
 
 			if (selectedElement && CKEDITOR.env.ie) {
-				var children = selectedElement.getChildren();
+				let children = selectedElement.getChildren();
 
-				var count = children.count();
+				let count = children.count();
 
-				for (var i = 0; i < count; i++) {
-					var node = children.getItem(i);
+				for (let i = 0; i < count; i++) {
+					let node = children.getItem(i);
 
 					if (node.is('a')) {
 						return node;
@@ -135,7 +135,7 @@
 				}
 			}
 
-			var range = selection.getRanges()[0];
+			let range = selection.getRanges()[0];
 
 			if (range) {
 				range.shrink(CKEDITOR.SHRINK_TEXT);
@@ -158,7 +158,7 @@
 		 * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
 		 */
 		remove: function(link, modifySelection) {
-			var editor = this._editor;
+			let editor = this._editor;
 
 			if (link) {
 				if (modifySelection && modifySelection.advance) {
@@ -167,7 +167,7 @@
 
 				link.remove(editor);
 			} else {
-				var style = new CKEDITOR.style({
+				let style = new CKEDITOR.style({
 					alwaysRemoveElement: 1,
 					element: 'a',
 					type: CKEDITOR.STYLE_INLINE,
@@ -177,7 +177,7 @@
 				//  We need to force the selection to be the whole link element
 				//  to remove it properly.
 
-				var selection = editor.getSelection();
+				let selection = editor.getSelection();
 				selection.selectElement(selection.getStartElement());
 
 				editor.removeStyle(style);
@@ -195,21 +195,21 @@
 		 * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
 		 */
 		update: function(attrs, link, modifySelection) {
-			var instance = this;
+			let instance = this;
 
 			link = link || this.getFromSelection();
 
 			if (typeof attrs === 'string') {
-				var uri = instance._getCompleteURI(attrs);
+				let uri = instance._getCompleteURI(attrs);
 
 				link.setAttributes({
 					'data-cke-saved-href': uri,
 					href: uri,
 				});
 			} else if (typeof attrs === 'object') {
-				var removeAttrs = [];
+				let removeAttrs = [];
 
-				var setAttrs = {};
+				let setAttrs = {};
 
 				Object.keys(attrs).forEach(function(key) {
 					if (attrs[key] === null) {
@@ -220,7 +220,7 @@
 						removeAttrs.push(key);
 					} else {
 						if (key === 'href') {
-							var uri = instance._getCompleteURI(attrs[key]);
+							let uri = instance._getCompleteURI(attrs[key]);
 
 							setAttrs['data-cke-saved-href'] = uri;
 							setAttrs[key] = uri;
