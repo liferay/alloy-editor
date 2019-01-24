@@ -60,6 +60,11 @@ module.exports = {
 		'react/prop-types': 'warn',
 		'valid-jsdoc': 'warn',
 	},
+	settings: {
+		react: {
+			version: 'detect',
+		},
+	},
 	globals: {
 		AlloyEditor: true,
 		CKEDITOR: true,
