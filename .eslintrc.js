@@ -12,7 +12,7 @@ module.exports = {
 			jsx: true,
 		},
 	},
-	extends: ['liferay', 'prettier'],
+	extends: ['plugin:react/recommended', 'liferay', 'prettier'],
 	plugins: ['no-for-of-loops'],
 	rules: {
 		'require-jsdoc': 'warn',
@@ -57,6 +57,7 @@ module.exports = {
 			],
 		}],
 		'no-for-of-loops/no-for-of-loops': 'error',
+		'react/prop-types': 'warn',
 		'valid-jsdoc': 'warn',
 	},
 	globals: {

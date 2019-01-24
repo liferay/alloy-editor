@@ -17,6 +17,7 @@
     "eslint-config-liferay": "2.0.18",
     "eslint-config-prettier": "3.6.0",
     "eslint-plugin-no-for-of-loops": "1.0.0",
+    "eslint-plugin-react": "7.12.4",
     "event-stream": "3.3.1",
     "gulp": "4.0.0",
     "gulp-concat": "^2.6.1",
