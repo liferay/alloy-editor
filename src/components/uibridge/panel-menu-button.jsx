@@ -9,7 +9,7 @@ import React from 'react';
 		return;
 	}
 
-	var PANEL_MENU_DEFS = {};
+	let PANEL_MENU_DEFS = {};
 
 	/**
 	 * Generates a PanelMenuButtonBridge React class for a given panelmenubutton definition if it has not been
@@ -21,12 +21,12 @@ import React from 'react';
 	 * @param {Object} panelMenuButtonDefinition The panel button definition
 	 * @return {Object} The generated or already existing React PanelMenuButton Class
 	 */
-	var generatePanelMenuButtonBridge = function(
+	let generatePanelMenuButtonBridge = function(
 		panelMenuButtonName,
 		panelMenuButtonDefinition,
 		editor
 	) {
-		var PanelMenuButtonBridge = AlloyEditor.Buttons[panelMenuButtonName];
+		let PanelMenuButtonBridge = AlloyEditor.Buttons[panelMenuButtonName];
 
 		PANEL_MENU_DEFS[editor.name] = PANEL_MENU_DEFS[editor.name] || {};
 		PANEL_MENU_DEFS[editor.name][panelMenuButtonName] =
@@ -44,27 +44,27 @@ import React from 'react';
 				createPanel() {}
 
 				render() {
-					var editor = this.props.editor.get('nativeEditor');
+					let editor = this.props.editor.get('nativeEditor');
 
-					var panelMenuButtonDisplayName =
+					let panelMenuButtonDisplayName =
 						PANEL_MENU_DEFS[editor.name][panelMenuButtonName]
 							.name ||
 						PANEL_MENU_DEFS[editor.name][panelMenuButtonName]
 							.command ||
 						panelMenuButtonName;
 
-					var buttonClassName = 'ae-button ae-button-bridge';
+					let buttonClassName = 'ae-button ae-button-bridge';
 
-					var iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
+					let iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
 
-					var iconStyle = {};
+					let iconStyle = {};
 
-					var cssStyle = CKEDITOR.skin.getIconStyle(
+					let cssStyle = CKEDITOR.skin.getIconStyle(
 						panelMenuButtonDisplayName
 					);
 
 					if (cssStyle) {
-						var cssStyleParts = cssStyle.split(';');
+						let cssStyleParts = cssStyle.split(';');
 
 						iconStyle.backgroundImage = cssStyleParts[0].substring(
 							cssStyleParts[0].indexOf(':') + 1
@@ -77,7 +77,7 @@ import React from 'react';
 						);
 					}
 
-					var panel;
+					let panel;
 
 					if (this.props.expanded) {
 						panel = this._getPanel();
@@ -112,20 +112,20 @@ import React from 'react';
 				}
 
 				_getPanel() {
-					var editor = this.props.editor.get('nativeEditor');
+					let editor = this.props.editor.get('nativeEditor');
 
-					var panelMenuButtonOnBlock =
+					let panelMenuButtonOnBlock =
 						PANEL_MENU_DEFS[editor.name][panelMenuButtonName]
 							.onBlock;
 
-					var panel = {
+					let panel = {
 						hide: this.props.toggleDropdown,
 						show: this.props.toggleDropdown,
 					};
 
-					var blockElement = new CKEDITOR.dom.element('div');
+					let blockElement = new CKEDITOR.dom.element('div');
 
-					var block = {
+					let block = {
 						element: blockElement,
 						keys: {},
 					};
@@ -206,9 +206,9 @@ import React from 'react';
 			editor.ui.addHandler(CKEDITOR.UI_PANELBUTTON, {
 				add: generatePanelMenuButtonBridge,
 				create: function(panelMenuButtonDefinition) {
-					var panelMenuButtonName =
+					let panelMenuButtonName =
 						'panelMenuButtonBridge' + ((Math.random() * 1e9) >>> 0);
-					var PanelMenuButtonBridge = generatePanelMenuButtonBridge(
+					let PanelMenuButtonBridge = generatePanelMenuButtonBridge(
 						panelMenuButtonName,
 						panelMenuButtonDefinition
 					);

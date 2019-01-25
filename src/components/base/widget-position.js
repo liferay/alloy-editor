@@ -59,8 +59,8 @@ export default WrappedComponent =>
 				viewPaneSize ||
 				new CKEDITOR.dom.window(window).getViewPaneSize();
 
-			var x = attrs.left;
-			var y = attrs.top;
+			let x = attrs.left;
+			let y = attrs.top;
 
 			if (attrs.left + attrs.width > viewPaneSize.width) {
 				x -= attrs.left + attrs.width - viewPaneSize.width;
@@ -95,7 +95,7 @@ export default WrappedComponent =>
 		 * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
 		 */
 		getInteractionPoint() {
-			var eventPayload = this.props.editorEvent
+			let eventPayload = this.props.editorEvent
 				? this.props.editorEvent.data
 				: null;
 
@@ -103,27 +103,27 @@ export default WrappedComponent =>
 				return;
 			}
 
-			var selectionData = eventPayload.selectionData;
+			let selectionData = eventPayload.selectionData;
 
-			var nativeEvent = eventPayload.nativeEvent;
+			let nativeEvent = eventPayload.nativeEvent;
 
-			var pos = {
+			let pos = {
 				x: eventPayload.nativeEvent.pageX,
 				y: selectionData.region.top,
 			};
 
-			var direction = selectionData.region.direction;
+			let direction = selectionData.region.direction;
 
-			var endRect = selectionData.region.endRect;
+			let endRect = selectionData.region.endRect;
 
-			var startRect = selectionData.region.startRect;
+			let startRect = selectionData.region.startRect;
 
 			if (endRect && startRect && startRect.top === endRect.top) {
 				direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
 			}
 
-			var x;
-			var y;
+			let x;
+			let y;
 
 			// If we have the point where user released the mouse, show Toolbar at this point
 			// otherwise show it on the middle of the selection.
@@ -168,18 +168,18 @@ export default WrappedComponent =>
 		 * @return {Number} The calculated X point in page coordinates.
 		 */
 		_getXPoint(selectionData, eventX) {
-			var region = selectionData.region;
+			let region = selectionData.region;
 
-			var left = region.startRect ? region.startRect.left : region.left;
-			var right = region.endRect ? region.endRect.right : region.right;
+			let left = region.startRect ? region.startRect.left : region.left;
+			let right = region.endRect ? region.endRect.right : region.right;
 
-			var x;
+			let x;
 
 			if (left < eventX && right > eventX) {
 				x = eventX;
 			} else {
-				var leftDist = Math.abs(left - eventX);
-				var rightDist = Math.abs(right - eventX);
+				let leftDist = Math.abs(left - eventX);
+				let rightDist = Math.abs(right - eventX);
 
 				if (leftDist < rightDist) {
 					// user raised the mouse on left on the selection
@@ -204,10 +204,10 @@ export default WrappedComponent =>
 		 * @return {Number} The calculated Y point in page coordinates.
 		 */
 		_getYPoint(selectionData, nativeEvent) {
-			var y = 0;
+			let y = 0;
 
 			if (selectionData && nativeEvent) {
-				var elementTarget = new CKEDITOR.dom.element(
+				let elementTarget = new CKEDITOR.dom.element(
 					nativeEvent.target
 				);
 
@@ -241,9 +241,9 @@ export default WrappedComponent =>
 		 * @return {Array} An Array with left and top offsets in page coordinates.
 		 */
 		getWidgetXYPoint(left, top, direction) {
-			var domNode = ReactDOM.findDOMNode(this);
+			let domNode = ReactDOM.findDOMNode(this);
 
-			var gutter = this.props.gutter;
+			let gutter = this.props.gutter;
 
 			if (
 				direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM ||
@@ -287,10 +287,10 @@ export default WrappedComponent =>
 		 * @return {Boolean} True if the widget is visible, false otherwise
 		 */
 		isVisible() {
-			var domNode = ReactDOM.findDOMNode(this);
+			let domNode = ReactDOM.findDOMNode(this);
 
 			if (domNode) {
-				var domElement = new CKEDITOR.dom.element(domNode);
+				let domElement = new CKEDITOR.dom.element(domNode);
 
 				return domElement.hasClass('alloy-editor-visible');
 			}
@@ -308,7 +308,7 @@ export default WrappedComponent =>
 		 * @param  {Object} endPoint The destination point for the movement.
 		 */
 		moveToPoint(startPoint, endPoint) {
-			var domElement = new CKEDITOR.dom.element(
+			let domElement = new CKEDITOR.dom.element(
 				ReactDOM.findDOMNode(this)
 			);
 
@@ -339,24 +339,27 @@ export default WrappedComponent =>
 		 * @method show
 		 */
 		show() {
-			var domNode = ReactDOM.findDOMNode(this);
-			var uiNode = this.props.editor.get('uiNode');
+			let domNode = ReactDOM.findDOMNode(this);
+			let uiNode = this.props.editor.get('uiNode');
 
-			var scrollTop = uiNode ? uiNode.scrollTop : 0;
+			let scrollTop = uiNode ? uiNode.scrollTop : 0;
 
 			if (!this.isVisible() && domNode) {
-				var interactionPoint = this.getInteractionPoint();
+				let interactionPoint = this.getInteractionPoint();
 
 				if (interactionPoint) {
-					var domElement = new CKEDITOR.dom.element(domNode);
+					let domElement = new CKEDITOR.dom.element(domNode);
 
-					var finalX, finalY, initialX, initialY;
+					let finalX;
+					let finalY;
+					let initialX;
+					let initialY;
 
 					finalX = initialX = parseFloat(domElement.getStyle('left'));
 					finalY = initialY = parseFloat(domElement.getStyle('top'));
 
 					if (this.props.constrainToViewport) {
-						var res = this.getConstrainedPosition({
+						let res = this.getConstrainedPosition({
 							height: parseFloat(domNode.offsetHeight),
 							left: finalX,
 							top: finalY,
@@ -391,27 +394,27 @@ export default WrappedComponent =>
 		 * @method updatePosition
 		 */
 		updatePosition() {
-			var interactionPoint = this.getInteractionPoint();
+			let interactionPoint = this.getInteractionPoint();
 
-			var domNode = ReactDOM.findDOMNode(this);
+			let domNode = ReactDOM.findDOMNode(this);
 
 			if (interactionPoint && domNode) {
-				var uiNode = this.props.editor.get('uiNode') || document.body;
-				var uiNodeStyle = getComputedStyle(uiNode);
-				var uiNodeMarginLeft = parseInt(
+				let uiNode = this.props.editor.get('uiNode') || document.body;
+				let uiNodeStyle = getComputedStyle(uiNode);
+				let uiNodeMarginLeft = parseInt(
 					uiNodeStyle.getPropertyValue('margin-left'),
 					10
 				);
-				var uiNodeMarginRight = parseInt(
+				let uiNodeMarginRight = parseInt(
 					uiNodeStyle.getPropertyValue('margin-right'),
 					10
 				);
-				var totalWidth =
+				let totalWidth =
 					uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
 
-				var scrollTop = uiNode ? uiNode.scrollTop : 0;
+				let scrollTop = uiNode ? uiNode.scrollTop : 0;
 
-				var xy = this.getWidgetXYPoint(
+				let xy = this.getWidgetXYPoint(
 					interactionPoint.x,
 					interactionPoint.y,
 					interactionPoint.direction

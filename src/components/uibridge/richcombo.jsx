@@ -12,11 +12,11 @@ import React from 'react';
 
 	// Some methods like `setState` clash with React's own state methods. For them, unsupported means
 	// that we don't account for the different meaning in the passed or returned arguments.
-	var UNSUPPORTED_RICHCOMBO_API = {
-		//setState: noop,
+	let UNSUPPORTED_RICHCOMBO_API = {
+		// setState: noop,
 	};
 
-	var RICH_COMBO_DEFS = {};
+	let RICH_COMBO_DEFS = {};
 
 	/**
 	 * Generates a RichComboBridge React class for a given richcombo definition if it has not been
@@ -28,12 +28,12 @@ import React from 'react';
 	 * @param {Object} richComboDefinition The rich combo definition
 	 * @return {Object} The generated or already existing React RichCombo Class
 	 */
-	var generateRichComboBridge = function(
+	let generateRichComboBridge = function(
 		richComboName,
 		richComboDefinition,
 		editor
 	) {
-		var RichComboBridge = AlloyEditor.Buttons[richComboName];
+		let RichComboBridge = AlloyEditor.Buttons[richComboName];
 
 		RICH_COMBO_DEFS[editor.name] = RICH_COMBO_DEFS[editor.name] || {};
 		RICH_COMBO_DEFS[editor.name][richComboName] =
@@ -78,9 +78,9 @@ import React from 'react';
 				}
 
 				componentWillMount() {
-					var editor = this.props.editor.get('nativeEditor');
+					let editor = this.props.editor.get('nativeEditor');
 
-					var editorCombo =
+					let editorCombo =
 						RICH_COMBO_DEFS[editor.name][richComboName];
 
 					this._items = [];
@@ -107,9 +107,9 @@ import React from 'react';
 				}
 
 				render() {
-					var editor = this.props.editor.get('nativeEditor');
+					let editor = this.props.editor.get('nativeEditor');
 
-					var richComboLabel =
+					let richComboLabel =
 						RICH_COMBO_DEFS[editor.name][richComboName]
 							.currentValue || richComboDefinition.label;
 
@@ -144,7 +144,7 @@ import React from 'react';
 				}
 
 				_cacheValue(value) {
-					var editor = this.props.editor.get('nativeEditor');
+					let editor = this.props.editor.get('nativeEditor');
 
 					RICH_COMBO_DEFS[editor.name][
 						richComboName
@@ -152,11 +152,11 @@ import React from 'react';
 				}
 
 				_getItems() {
-					var richCombo = this;
+					let richCombo = this;
 
-					var items = this._items.map(
+					let items = this._items.map(
 						function(item) {
-							var className =
+							let className =
 								'ae-toolbar-element ' +
 								(item.value === this.state.value
 									? 'active'
@@ -181,13 +181,13 @@ import React from 'react';
 				}
 
 				_onClick = event => {
-					var editor = this.props.editor.get('nativeEditor');
+					let editor = this.props.editor.get('nativeEditor');
 
-					var editorCombo =
+					let editorCombo =
 						RICH_COMBO_DEFS[editor.name][richComboName];
 
 					if (editorCombo.onClick) {
-						var newValue = event.currentTarget.getAttribute(
+						let newValue = event.currentTarget.getAttribute(
 							'data-value'
 						);
 
@@ -258,9 +258,9 @@ import React from 'react';
 			editor.ui.addHandler(CKEDITOR.UI_RICHCOMBO, {
 				add: generateRichComboBridge,
 				create: function(richComboDefinition) {
-					var richComboName =
+					let richComboName =
 						'richComboBridge' + ((Math.random() * 1e9) >>> 0);
-					var RichComboBridge = generateRichComboBridge(
+					let RichComboBridge = generateRichComboBridge(
 						richComboName,
 						richComboDefinition
 					);

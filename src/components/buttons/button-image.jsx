@@ -106,7 +106,7 @@ class ButtonImage extends React.Component {
 				imageFiles: file,
 			});
 
-			if (!!result) {
+			if (result) {
 				const el = CKEDITOR.dom.element.createFromHtml(
 					`<img src="${event.target.result}">`
 				);

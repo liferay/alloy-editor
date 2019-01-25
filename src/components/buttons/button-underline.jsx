@@ -27,7 +27,7 @@ class ButtonUnderline extends React.Component {
 		command: 'underline',
 		keystroke: {
 			fn: 'execCommand',
-			keys: CKEDITOR.CTRL + 85 /*U*/,
+			keys: CKEDITOR.CTRL + 85 /* U*/,
 		},
 		style: 'coreStyles_underline',
 	};

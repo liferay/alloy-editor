@@ -68,16 +68,18 @@ const getBasePath = function() {
 	if (path.indexOf(':/') === -1 && path.slice(0, 2) !== '//') {
 		// Absolute path.
 		if (path.indexOf('/') === 0) {
-			path = location.href.match(/^.*?:\/\/[^\/]*/)[0] + path;
+			path = location.href.match(/^.*?:\/\/[^/]*/)[0] + path;
 		}
 		// Relative path.
 		else {
-			path = location.href.match(/^[^\?]*\/(?:)/)[0] + path;
+			path = location.href.match(/^[^?]*\/(?:)/)[0] + path;
 		}
 	}
 
 	if (!path) {
-		throw 'The AlloyEditor installation path could not be automatically detected. Please set the global variable "ALLOYEDITOR_BASEPATH" before creating editor instances.';
+		throw new Error(
+			'The AlloyEditor installation path could not be automatically detected. Please set the global variable "ALLOYEDITOR_BASEPATH" before creating editor instances.'
+		);
 	}
 
 	return path;
@@ -196,7 +198,9 @@ const loadLanguageResources = function(callback) {
 					AlloyEditor.fire('languageResourcesLoaded');
 				}
 			},
-			this
+			/* eslint-disable no-invalid-this */
+			this // Always `AlloyEditor`.
+			/* eslint-enable no-invalid-this */
 		);
 	}
 };
@@ -257,7 +261,7 @@ const implementEventTarget = function() {
  * @type {RegExp}
  * @static
  */
-const regexBasePath = /(^|.*[\\\/])(?:alloy-editor[^/]+|alloy-editor)\.js(?:\?.*|;.*)?$/i;
+const regexBasePath = /(^|.*[\\/])(?:alloy-editor[^/]+|alloy-editor)\.js(?:\?.*|;.*)?$/i;
 
 /**
  * Fired when AlloyEditor detects the browser language and loads the corresponding language file. Once this event
@@ -314,18 +318,19 @@ export {
 	Attribute,
 	Buttons,
 	Core,
+	Lang,
+	OOP,
+	SelectionGetArrowBoxClasses,
+	SelectionSetPosition,
+	SelectionTest,
+	Selections,
+	Toolbars,
 	editable,
 	getBasePath,
 	getButtons,
 	getUrl,
 	implementEventTarget,
-	Lang,
 	loadLanguageResources,
-	OOP,
+	regexBasePath,
 	registerBridgeButton,
-	SelectionGetArrowBoxClasses,
-	Selections,
-	SelectionSetPosition,
-	SelectionTest,
-	Toolbars,
 };
