@@ -280,11 +280,7 @@
                 var uiNodeMarginLeft = parseInt(uiNodeStyle.getPropertyValue('margin-left'), 10);
                 var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue('margin-right'), 10);
                 var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
-
-                var scrollTop = uiNode ? uiNode.scrollTop : 0;
-
                 var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
-                xy[1] += scrollTop;
 
                 if (xy[0] < 0) {
                     xy[0] = 0;
