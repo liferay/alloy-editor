@@ -24,7 +24,7 @@ const base = {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				exclude: /(node_modules|lib)/,
+				include: toAbsolute('./src'),
 				loader: 'babel-loader',
 			},
 		],
