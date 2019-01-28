@@ -16,7 +16,7 @@ const POSITION_ELEMENT_FN = {
 			Math.round(box.height / 2) - 3 + top
 		);
 	},
-	tl(handle, left, top, box) {
+	tl(handle, left, top, _box) {
 		positionElement(handle, left - 3, top - 3);
 	},
 	tr(handle, left, top, box) {
@@ -68,7 +68,7 @@ class Resizer {
 
 		this.handles = {};
 
-		IMAGE_HANDLES.forEach((handleName, index) => {
+		IMAGE_HANDLES.forEach((handleName) => {
 			this.handles[handleName] = this.createHandle(handleName);
 		});
 
