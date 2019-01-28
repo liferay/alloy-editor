@@ -25,23 +25,39 @@ function ifRelease(task) {
 
 function createBundle(configName, callback) {
 	const config = require(path.join(process.env.PWD, configName));
-	webpack(config, (error, {stats}) => {
-		if (error) {
-			callback(error);
+	webpack(config, (error, stats) => {
+		if (error || stats.hasErrors()) {
+			if (error) {
+				// Configuration errors etc.
+				// See: https://webpack.js.org/api/node/#webpack-
+				callback(error);
+			} else {
+				// Compilation errors.
+				const errors = stats.stats.reduce(
+					(acc, {compilation: {errors}}) => {
+						if (errors) {
+							acc.push(...errors);
+						}
+						return acc;
+					},
+					[]
+				);
+				const [firstError, ...remainingErrors] = errors;
+				if (firstError) {
+					remainingErrors.forEach(console.log.bind(console));
+					callback(firstError);
+				}
+				console.log(stats.toString({colors: true}));
+			}
 			return;
 		}
-		const errors = stats.reduce((acc, {compilation: {errors}}) => {
-			if (errors) {
-				acc.push(...errors);
-			}
-			return acc;
-		}, []);
-		const [firstError, ...remainingErrors] = errors;
-		if (firstError) {
-			remainingErrors.forEach(console.log.bind(console));
-			callback(firstError);
+		if (process.env.STATS) {
+			console.log(`\n${stats.toString({colors: true})}\n`);
+		} else {
+			console.log(
+				'\nNot showing webpack stats; run with `env STATS=1` to show\n'
+			);
 		}
-		console.log(stats.toString({colors: true}));
 		callback();
 	});
 }
