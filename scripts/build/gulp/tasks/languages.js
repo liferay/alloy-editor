@@ -3,17 +3,10 @@
 const Constants = require('../constants');
 const fs = require('fs');
 const gulp = require('gulp');
-const hashFiles = require('hash-files');
 const path = require('path');
 const walk = require('walk');
 
-const hashSources = [
-	path.join(Constants.rootDir, 'lib', 'lang/*.js'),
-	Constants.ckeditorLangKeys,
-	path.join(Constants.langDir + '/*.json'),
-];
-
-const hashFile = path.join('./', '_hash');
+const langWhitelist = /^\w\.js/;
 
 /**
  * Normalizes the different string values that can be stored in a language template.
@@ -31,7 +24,7 @@ const getStringLangValue = function(value, lang) {
 	return eval(value);
 };
 
-function updateLangFiles(callback) {
+function buildLanguages(callback) {
 	// Mock the CKEDITOR.lang object to walk the ckeditor js lang files
 	global.CKEDITOR = {
 		lang: {},
@@ -52,6 +45,12 @@ function updateLangFiles(callback) {
 
 	// Iterate over every existing lang file inside src/lang
 	langWalker.on('file', (root, fileStats, next) => {
+		if (!langWhitelist.test(fileStats.name)) {
+			next();
+
+			return;
+		}
+
 		const lang = path.basename(fileStats.name, '.js');
 
 		// Load the matching CKEDITOR lang file with all the strings
@@ -89,7 +88,10 @@ function updateLangFiles(callback) {
 		fs.writeFile(
 			path.join(Constants.rootDir, 'src', 'lang', fileStats.name),
 			'AlloyEditor.Strings = ' +
-				JSON.stringify(AlloyEditor.Strings) +
+				JSON.stringify(AlloyEditor.Strings, null, 2).replace(
+					/^  /gm,
+					'\t'
+				) +
 				';',
 			err => {
 				if (err) {
@@ -98,54 +100,6 @@ function updateLangFiles(callback) {
 				next();
 			}
 		);
-	});
-}
-
-function createHash(callback) {
-	hashFiles({files: hashSources}, (err, hash) => {
-		if (err) {
-			return callback(err);
-		}
-
-		fs.writeFile(hashFile, hash, err => {
-			if (err) {
-				return callback(err);
-			}
-			callback();
-		});
-	});
-}
-
-function compareHash(originalHash, callback) {
-	hashFiles({files: hashSources}, (err, hash) => {
-		if (err) {
-			return callback(err);
-		}
-
-		const changed = originalHash !== hash;
-		callback(changed);
-	});
-}
-
-function buildLanguages(callback) {
-	fs.exists(hashFile, exists => {
-		if (!exists) {
-			updateLangFiles(() => createHash(callback));
-		} else {
-			fs.readFile(hashFile, (err, data) => {
-				if (err) {
-					return callback(err);
-				}
-
-				compareHash(data.toString(), changed => {
-					if (changed) {
-						updateLangFiles(() => createHash(callback));
-					} else {
-						callback();
-					}
-				});
-			});
-		}
 	});
 }
 
