@@ -109,7 +109,7 @@ Attribute.prototype = {
 			Lang.isString(stringOrFunction) &&
 			Lang.isFunction(this[stringOrFunction])
 		) {
-			result = this[stringOrFunction].apply(this, args);
+			result = this[stringOrFunction](...args);
 		} else if (Lang.isFunction(stringOrFunction)) {
 			result = stringOrFunction.apply(this, args);
 		}
