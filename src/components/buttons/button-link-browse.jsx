@@ -72,7 +72,7 @@ class ButtonLinkBrowse extends React.Component {
 	 * @method _requestExclusive
 	 */
 	_requestExclusive() {
-		this.props.requestExclusive(LinkBrowse.key);
+		this.props.requestExclusive(ButtonLinkBrowse.key);
 	}
 }
 
