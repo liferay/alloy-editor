@@ -96,7 +96,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 		return {
 			element,
 			initialEmbed: {
-				videoUrl,
+				videoURL,
 			},
 			videoURL,
 		};
