@@ -3,8 +3,8 @@ const argv = require('yargs').argv;
 const del = require('del');
 const fs = require('fs');
 const gulp = require('gulp');
+const run = require('parallel-webpack').run;
 const path = require('path');
-const webpack = require('webpack');
 const Constants = require('../constants');
 
 require('./css');
@@ -23,35 +23,57 @@ function ifRelease(task) {
 	}
 }
 
-function createBundle(configName, callback) {
-	const config = require(path.join(process.env.PWD, configName));
-	webpack(config, (error, {stats}) => {
-		if (error) {
-			callback(error);
-			return;
-		}
-		const errors = stats.reduce((acc, {compilation: {errors}}) => {
-			if (errors) {
-				acc.push(...errors);
+let haveShownHint = false;
+
+function createBundle(configName) {
+	const config = path.join(process.env.PWD, `${configName}.js`);
+	const showStats = !!process.env.STATS;
+	if (!showStats && !haveShownHint) {
+		console.log(
+			'\nNot showing webpack stats; run with `env STATS=1` to show\n'
+		);
+		haveShownHint = true;
+	}
+
+	return run(config, {
+		watch: false,
+		maxRetries: 1,
+		stats: showStats,
+		maxConcurrentWorkers: 4,
+	})
+		.then(results => {
+			if (results) {
+				results.forEach(result => {
+					let parsed;
+					try {
+						// Expect an object with "errors", "warnings" etc keys. Not
+						// currently using it for anything but leaving this here as
+						// documentation.
+						JSON.parse(result);
+					} catch (e) {
+						console.warn('Unable to parse worker result!');
+					}
+				});
 			}
-			return acc;
-		}, []);
-		const [firstError, ...remainingErrors] = errors;
-		if (firstError) {
-			remainingErrors.forEach(console.log.bind(console));
-			callback(firstError);
-		}
-		console.log(stats.toString({colors: true}));
-		callback();
-	});
+		})
+		.catch(error => {
+			if (error.message) {
+				// parallel-webpack seems to throw errors that are not Error
+				// instances, and they get logged by gulp as "Error: [object
+				// Object]", so wrap them here to make them useful.
+				throw new Error(error.message);
+			} else {
+				throw error;
+			}
+		});
 }
 
-gulp.task('build:webpack.prod', callback => {
-	createBundle('webpack.prod', callback);
+gulp.task('build:webpack.prod', () => {
+	return createBundle('webpack.prod');
 });
 
-gulp.task('build:webpack.dev', callback => {
-	createBundle('webpack.dev', callback);
+gulp.task('build:webpack.dev', () => {
+	return createBundle('webpack.dev');
 });
 
 gulp.task('build:clean', function() {
