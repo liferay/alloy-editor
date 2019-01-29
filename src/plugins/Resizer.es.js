@@ -68,7 +68,7 @@ class Resizer {
 
 		this.handles = {};
 
-		IMAGE_HANDLES.forEach((handleName) => {
+		IMAGE_HANDLES.forEach(handleName => {
 			this.handles[handleName] = this.createHandle(handleName);
 		});
 

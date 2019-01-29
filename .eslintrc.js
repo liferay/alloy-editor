@@ -62,7 +62,7 @@ module.exports = {
 		'babel/no-invalid-this': 'error',
 		'no-invalid-this': 'off',
 		'no-for-of-loops/no-for-of-loops': 'error',
-		'no-unused-vars': ['error', {'argsIgnorePattern': '^_'}],
+		'no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
 		'react/prop-types': 'warn',
 		'valid-jsdoc': 'warn',
 	},
