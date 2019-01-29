@@ -93,14 +93,19 @@ class ButtonCameraImage extends React.Component {
 
 		return (
 			<div className="ae-camera">
-				<video ref={this._videoContainerRef}>Video stream not available.</video>
+				<video ref={this._videoContainerRef}>
+					Video stream not available.
+				</video>
 				<button
 					className="ae-camera-shoot"
 					onClick={this.takePhoto}
 					ref={this._buttonTakePhotoRef}>
 					Take photo
 				</button>
-				<canvas className="ae-camera-canvas" ref={this._canvasContainerRef} />
+				<canvas
+					className="ae-camera-canvas"
+					ref={this._canvasContainerRef}
+				/>
 			</div>
 		);
 	}
