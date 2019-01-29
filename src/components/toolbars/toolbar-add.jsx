@@ -51,7 +51,7 @@ class ToolbarAdd extends React.Component {
 	 * @param {Object} prevProps The previous state of the component's properties.
 	 * @param {Object} prevState Component's previous state.
 	 */
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate(_prevProps, _prevState) {
 		this._updatePosition();
 
 		// In case of exclusive rendering, focus the first descendant (button)

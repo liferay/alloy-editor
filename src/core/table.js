@@ -381,7 +381,7 @@
 
 		headingCommands.forEach(function(heading) {
 			event.editor.addCommand('tableHeading' + heading, {
-				exec: function(editor) {
+				exec: function(_editor) {
 					tableUtils.setHeading(null, heading);
 				},
 			});

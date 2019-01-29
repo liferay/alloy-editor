@@ -101,7 +101,7 @@
 
 			// Add a listener to handle selection change events and properly detect editor
 			// interactions on the widgets without messing with widget native selection
-			editor.on('selectionChange', function(event) {
+			editor.on('selectionChange', function(_event) {
 				let selection = editor.getSelection();
 
 				if (selection) {
