@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * The ButtonSeparator function renders a simple separator.
  */
-function ButtonSeparator(props) {
+function ButtonSeparator(_props) {
 	return <span className="ae-separator" />;
 }
 
