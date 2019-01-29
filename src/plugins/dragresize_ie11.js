@@ -140,7 +140,11 @@
 
 			let integrate = alignCommandIntegrator(editor);
 
-			for (let value in align) integrate(value);
+			for (let value in align) {
+				if (align.hasOwnProperty(value)) {
+					integrate(value);
+				}
+			}
 		},
 	});
 
@@ -381,8 +385,11 @@
 					!this.oldData.hasCaption &&
 					this.data.hasCaption
 				) {
-					for (let c in this.data.classes)
-						this.parts.image.removeClass(c);
+					for (let c in this.data.classes) {
+						if (this.data.classes.hasOwnProperty(c)) {
+							this.parts.image.removeClass(c);
+						}
+					}
 				}
 
 				// Set dimensions of the image according to gathered data.
@@ -1036,7 +1043,9 @@
 			// If there's an image, then cool, we got a widget.
 			// Now just remove dimension attributes expressed with %.
 			for (let d in dimensions) {
-				let dimension = image.attributes[d];
+				if (dimensions.hasOwnProperty(d)) {
+					let dimension = image.attributes[d];
+				}
 
 				if (dimension && dimension.match(regexPercent))
 					delete image.attributes[d];
