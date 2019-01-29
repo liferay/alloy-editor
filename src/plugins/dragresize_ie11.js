@@ -148,7 +148,7 @@
 		},
 	});
 
-	// Wiget states (forms) depending on alignment and configuration.
+	// Widget states (forms) depending on alignment and configuration.
 	//
 	// Non-captioned widget (inline styles)
 	// 		┌──────┬───────────────────────────────┬─────────────────────────────┐
