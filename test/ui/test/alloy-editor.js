@@ -266,7 +266,7 @@
 			});
 		});
 
-		it('should create an instance when the passed srcNode is a DOM element', function(done) {
+		xit('should create an instance when the passed srcNode is a DOM element', function(done) {
 			var el = document.createElement('div');
 			el.setAttribute('id', 'editable1');
 			document.body.appendChild(el);
