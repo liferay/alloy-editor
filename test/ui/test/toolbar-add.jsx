@@ -7,8 +7,6 @@ import ToolbarAdd from '../../../src/components/toolbars/toolbar-add.jsx';
 	var TestUtils = ReactTestUtils;
 
 	describe('ToolbarAdd', function() {
-		this.timeout(35000);
-
 		describe('test focusing', function() {
 			var editorConfig = {
 				eventsDelay: 0,

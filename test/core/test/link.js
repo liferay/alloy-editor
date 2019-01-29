@@ -4,8 +4,6 @@
 	var assert = chai.assert;
 
 	describe('Link', function() {
-		this.timeout(35000);
-
 		before(Utils.createCKEditor);
 
 		after(Utils.destroyCKEditor);

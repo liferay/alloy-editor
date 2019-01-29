@@ -7,8 +7,6 @@ import ButtonUnorderedlist from '../../../src/components/buttons/button-ul.jsx';
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonUnorderedlist', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

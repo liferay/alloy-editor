@@ -8,8 +8,6 @@ import ButtonStylesListItemRemove from '../../../src/components/buttons/button-s
 	var TestUtils = ReactTestUtils;
 
 	describe('ButtonStylesList', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

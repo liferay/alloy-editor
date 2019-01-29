@@ -7,8 +7,6 @@ import ButtonTwitter from '../../../src/components/buttons/button-twitter.jsx';
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonTwitter', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

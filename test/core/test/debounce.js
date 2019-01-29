@@ -4,8 +4,6 @@
 	var assert = chai.assert;
 
 	describe('Debounce', function() {
-		this.timeout(35000);
-
 		it('should debounce function execution', function(done) {
 			var listener = sinon.stub();
 			var fn = CKEDITOR.tools.debounce(listener, 0);

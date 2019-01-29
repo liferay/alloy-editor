@@ -32,8 +32,6 @@
 	};
 
 	describe('AlloyEditor', function() {
-		this.timeout(35000);
-
 		describe('with default enableContentEditable config', function() {
 			beforeEach(function(done) {
 				initEditor.call(this, done);
@@ -359,8 +357,6 @@
 		});
 
 		describe('in IE browsers', function() {
-			this.timeout(35000);
-
 			beforeEach(function() {
 				doTestIE.call(this);
 			});

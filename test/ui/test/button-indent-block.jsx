@@ -7,8 +7,6 @@ import ButtonIndentBlock from '../../../src/components/buttons/button-indent-blo
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonIndent', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

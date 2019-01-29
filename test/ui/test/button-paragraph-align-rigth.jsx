@@ -7,8 +7,6 @@ import ButtonParagraphAlignRight from '../../../src/components/buttons/button-pa
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonParagraphAlignRight', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

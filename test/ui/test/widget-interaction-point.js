@@ -7,8 +7,6 @@ import WidgetPosition from './mock/widget-position';
 	var WidgetPositionComponent = new WidgetPosition();
 
 	describe('widget interaction point', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

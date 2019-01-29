@@ -14,7 +14,6 @@
 	var KEY_SPACE = 32;
 
 	describe('AutoLink', function() {
-		this.timeout(35000);
 
 		before(function(done) {
 			Utils.createCKEditor.call(this, done, {

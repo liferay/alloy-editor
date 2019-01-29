@@ -4,8 +4,6 @@
 	var assert = chai.assert;
 
 	describe('OOP', function() {
-		this.timeout(35000);
-
 		it('should extend a class from another class', function() {
 			var Parent = function() {};
 

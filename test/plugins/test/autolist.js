@@ -10,8 +10,6 @@
 	var KEY_SPACE = 32;
 
 	describe('Autolist', function() {
-		this.timeout(35000);
-
 		before(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'undo,ae_autolist,undo',

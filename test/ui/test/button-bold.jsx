@@ -9,8 +9,6 @@ import ButtonBold from '../../../src/components/buttons/button-bold.jsx';
 	var KEY_B = 66;
 
 	describe('ButtonBold', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

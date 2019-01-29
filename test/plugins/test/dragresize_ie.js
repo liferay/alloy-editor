@@ -16,8 +16,6 @@
 		var url = 'http://localhost/url_test';
 
 		describe('with the default value "both"', function() {
-			this.timeout(35000);
-
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize_ie',
@@ -79,8 +77,6 @@
 		});
 
 		describe('with height value', function() {
-			this.timeout(35000);
-
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize_ie',
@@ -117,8 +113,6 @@
 		});
 
 		describe('with scale value', function() {
-			this.timeout(35000);
-
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize_ie',
@@ -155,8 +149,6 @@
 		});
 
 		describe('with width value', function() {
-			this.timeout(35000);
-
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
 					extraPlugins: 'ae_dragresize_ie',

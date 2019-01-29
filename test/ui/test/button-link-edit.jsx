@@ -9,8 +9,6 @@ import ButtonLinkTargetEdit from '../../../src/components/buttons/button-link-ta
 	var TestUtils = ReactTestUtils;
 
 	describe('ButtonLink', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

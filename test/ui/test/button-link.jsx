@@ -9,8 +9,6 @@ import ButtonLink from '../../../src/components/buttons/button-link.jsx';
 	var KEY_L = 76;
 
 	describe('ButtonLink', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

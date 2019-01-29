@@ -7,8 +7,6 @@ import ButtonH1 from '../../../src/components/buttons/button-h1.jsx';
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonH1', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

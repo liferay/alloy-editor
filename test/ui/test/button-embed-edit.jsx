@@ -16,8 +16,6 @@ import ButtonEmbedEdit from '../../../src/components/buttons/button-embed-edit.j
 	var getFixture = Utils.getFixture('test/ui/test/fixtures');
 
 	describe('ButtonEmbedEdit Component', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

@@ -13,8 +13,6 @@
 	var placeholderClass = 'ae-placeholder';
 
 	describe('Placeholder', function() {
-		this.timeout(35000);
-
 		describe('when CKEditor enterMode is CKEDITOR_ENTER_P (1)', function() {
 			before(function(done) {
 				Utils.createCKEditor.call(

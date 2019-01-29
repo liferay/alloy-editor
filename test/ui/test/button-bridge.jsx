@@ -6,7 +6,6 @@
 	var Simulate = TestUtils.Simulate;
 
 	describe('ButtonBridge', function() {
-		this.timeout(35000);
 
 		before(function(done) {
 			Utils.createAlloyEditor.call(this, done, {

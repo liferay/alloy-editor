@@ -7,8 +7,6 @@ import ButtonOrderedList from '../../../src/components/buttons/button-ol.jsx';
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonOrderedList', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

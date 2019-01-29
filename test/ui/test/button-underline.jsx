@@ -9,8 +9,6 @@ import ButtonUnderline from '../../../src/components/buttons/button-underline.js
 	var KEY_U = 85;
 
 	describe('ButtonUnderline', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

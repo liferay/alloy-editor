@@ -7,8 +7,6 @@ import ButtonImageAlignRight from '../../../src/components/buttons/button-image-
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonImageAlignRight', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);
