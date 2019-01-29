@@ -64,8 +64,6 @@ class ButtonLinkEditBrowse extends React.Component {
 	 * @method _browseClick
 	 */
 	_browseClick = () => {
-		const instance = this;
-
 		const editor = this.props.editor.get('nativeEditor');
 
 		const url = editor.config.documentBrowseLinkUrl;
