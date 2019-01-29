@@ -77,7 +77,9 @@
 			 */
 			editor.addMenuItems = function(definitions) {
 				for (let itemName in definitions) {
-					this.addMenuItem(itemName, definitions[itemName]);
+					if (definitions.hasOwnProperty(itemName)) {
+						this.addMenuItem(itemName, definitions[itemName]);
+					}
 				}
 			};
 
