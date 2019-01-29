@@ -7,8 +7,6 @@
 	var getFixture = Utils.getFixture('test/core/test/fixtures');
 
 	describe('Table', function() {
-		this.timeout(35000);
-
 		before(Utils.createCKEditor);
 
 		after(Utils.destroyCKEditor);

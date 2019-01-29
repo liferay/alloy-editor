@@ -4,8 +4,6 @@
 	var assert = chai.assert;
 
 	describe('Plugin ae_addimages', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

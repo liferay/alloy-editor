@@ -4,8 +4,6 @@
 	var assert = chai.assert;
 
 	describe('Embed plugin', function() {
-		this.timeout(35000);
-
 		before(function(done) {
 			Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_embed'});
 		});

@@ -7,8 +7,6 @@ import ButtonParagraphJustify from '../../../src/components/buttons/button-parag
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonParagraphJustify', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

@@ -11,8 +11,6 @@ import ButtonTargetList from '../../../src/components/buttons/button-target-list
 	var TestUtils = ReactTestUtils;
 
 	describe('ButtonTargetList', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

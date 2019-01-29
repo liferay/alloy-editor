@@ -8,8 +8,6 @@ import ButtonTableRemove from '../../../src/components/buttons/button-table-remo
 	var Simulate = TestUtils.Simulate;
 
 	describe('ButtonTableRemove', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

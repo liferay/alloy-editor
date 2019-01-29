@@ -4,8 +4,6 @@
 	var assert = chai.assert;
 
 	describe('Attribute', function() {
-		this.timeout(35000);
-
 		it('should retrieve a default value from an attribute', function() {
 			var Clazz = function(config) {
 				Clazz.superclass.constructor.call(this, config);

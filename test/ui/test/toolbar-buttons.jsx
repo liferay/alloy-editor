@@ -7,8 +7,6 @@ import ToolbarAdd from '../../../src/components/toolbars/toolbar-add.jsx';
 	var TestUtils = ReactTestUtils;
 
 	describe('ToolbarButtons', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

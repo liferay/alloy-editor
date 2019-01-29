@@ -13,8 +13,6 @@ import ButtonTableEdit from '../../../src/components/buttons/button-table-edit.j
 	var getFixture = Utils.getFixture('test/ui/test/fixtures');
 
 	describe('ButtonTableEdit', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

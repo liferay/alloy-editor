@@ -7,8 +7,6 @@ import ButtonImageAlignCenter from '../../../src/components/buttons/button-image
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonImageAlignCenter', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

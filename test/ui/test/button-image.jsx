@@ -6,8 +6,6 @@ import ButtonImage from '../../../src/components/buttons/button-image.jsx';
 	var assert = chai.assert;
 
 	describe('ButtonImage', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

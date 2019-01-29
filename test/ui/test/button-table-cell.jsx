@@ -8,8 +8,6 @@ import ButtonCommandsList from '../../../src/components/buttons/button-commands-
 	var TestUtils = ReactTestUtils;
 
 	describe('ButtonTableCell', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

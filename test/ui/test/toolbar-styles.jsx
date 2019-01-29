@@ -7,8 +7,6 @@ import ToolbarStyles from '../../../src/components/toolbars/toolbar-styles.jsx';
 	var TestUtils = ReactTestUtils;
 
 	describe('ToolbarStyles', function() {
-		this.timeout(35000);
-
 		var cleanUpEditor = function() {
 			if (this.alloyEditor) {
 				this.alloyEditor.destroy();

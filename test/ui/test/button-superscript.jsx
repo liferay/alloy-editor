@@ -7,8 +7,6 @@ import ButtonSuperscript from '../../../src/components/buttons/button-superscrip
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonSuperscript', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

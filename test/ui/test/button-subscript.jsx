@@ -7,8 +7,6 @@ import ButtonSubscript from '../../../src/components/buttons/button-subscript.js
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonSubscript', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

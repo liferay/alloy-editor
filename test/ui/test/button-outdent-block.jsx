@@ -7,8 +7,6 @@ import ButtonOutdentBlock from '../../../src/components/buttons/button-outdent-b
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonOutdent', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

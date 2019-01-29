@@ -8,8 +8,6 @@ import ButtonEmbed from '../../../src/components/buttons/button-embed.jsx';
 	var TestUtils = ReactTestUtils;
 
 	describe('ButtonEmbed Component', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

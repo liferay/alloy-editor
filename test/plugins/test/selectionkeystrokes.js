@@ -6,8 +6,6 @@
 	var KEY_L = 76;
 
 	describe('ae_selectionkeystrokes', function() {
-		this.timeout(35000);
-
 		before(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_selectionkeystrokes',

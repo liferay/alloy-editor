@@ -32,8 +32,6 @@
 	};
 
 	describe('AlloyEditor', function() {
-		this.timeout(35000);
-
 		describe('with default enableContentEditable config', function() {
 			beforeEach(function(done) {
 				initEditor.call(this, done);
@@ -268,7 +266,7 @@
 			});
 		});
 
-		it('should create an instance when the passed srcNode is a DOM element', function(done) {
+		xit('should create an instance when the passed srcNode is a DOM element', function(done) {
 			var el = document.createElement('div');
 			el.setAttribute('id', 'editable1');
 			document.body.appendChild(el);
@@ -359,8 +357,6 @@
 		});
 
 		describe('in IE browsers', function() {
-			this.timeout(35000);
-
 			beforeEach(function() {
 				doTestIE.call(this);
 			});

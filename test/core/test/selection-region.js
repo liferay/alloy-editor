@@ -4,8 +4,6 @@
 	var assert = chai.assert;
 
 	describe('SelectionRegion', function() {
-		this.timeout(35000);
-
 		describe('with focusing the editor after instance create', function() {
 			before(function(done) {
 				Utils.createCKEditor.call(this, done, {
@@ -129,8 +127,6 @@
 		});
 
 		describe('without focusing the editor after instance create', function() {
-			this.timeout(35000);
-
 			before(function(done) {
 				var editable = document.createElement('div');
 

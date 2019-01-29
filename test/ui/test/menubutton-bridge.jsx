@@ -8,8 +8,6 @@ import ButtonDropdown from '../../../src/components/buttons/button-dropdown.jsx'
 	var Simulate = TestUtils.Simulate;
 
 	describe('MenuButtonBridge', function() {
-		this.timeout(35000);
-
 		before(function(done) {
 			Utils.createAlloyEditor.call(this, done, {
 				extraPlugins:

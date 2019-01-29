@@ -4,8 +4,6 @@
 	var assert = chai.assert;
 
 	describe('Tools', function() {
-		this.timeout(35000);
-
 		it('should merge objects and ignore inherited properties', function() {
 			var obj1 = {
 				prop1: 'val1',

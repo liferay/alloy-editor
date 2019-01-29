@@ -4,8 +4,6 @@
 	var assert = chai.assert;
 
 	describe('Lang', function() {
-		this.timeout(35000);
-
 		it('should check if a param is an array', function() {
 			assert.ok(AlloyEditor.Lang.isArray(['test']));
 			assert.notOk(AlloyEditor.Lang.isArray('test'));

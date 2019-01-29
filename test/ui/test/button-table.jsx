@@ -8,8 +8,6 @@ import ButtonTable from '../../../src/components/buttons/button-table.jsx';
 	var Simulate = TestUtils.Simulate;
 
 	describe('ButtonTableEdit', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

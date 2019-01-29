@@ -7,8 +7,6 @@ import ButtonQuote from '../../../src/components/buttons/button-quote.jsx';
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonQuote', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

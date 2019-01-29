@@ -7,8 +7,6 @@ import ButtonCode from '../../../src/components/buttons/button-code.jsx';
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonCode', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);

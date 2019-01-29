@@ -7,8 +7,6 @@ import ButtonStrike from '../../../src/components/buttons/button-strike.jsx';
 	var Simulate = ReactTestUtils.Simulate;
 
 	describe('ButtonStrike', function() {
-		this.timeout(35000);
-
 		before(Utils.createAlloyEditor);
 
 		after(Utils.destroyAlloyEditor);
