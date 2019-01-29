@@ -92,7 +92,6 @@
 		init: function(editor) {
 			// Adapts configuration from original image plugin. Should be removed
 			// when we'll rename ae_dragresize_ie11 to image.
-			let config = editor.config;
 
 			let image = widgetDef(editor);
 
@@ -1045,10 +1044,9 @@
 			for (let d in dimensions) {
 				if (dimensions.hasOwnProperty(d)) {
 					let dimension = image.attributes[d];
+					if (dimension && dimension.match(regexPercent))
+						delete image.attributes[d];
 				}
-
-				if (dimension && dimension.match(regexPercent))
-					delete image.attributes[d];
 			}
 
 			return el;

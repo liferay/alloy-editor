@@ -800,8 +800,6 @@
 
 	CKEDITOR.plugins.add('ae_tabletools', {
 		init: function(editor) {
-			let lang = editor.lang.table;
-
 			function createDef(def) {
 				return CKEDITOR.tools.extend(def || {}, {
 					contextSensitive: 1,
