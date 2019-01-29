@@ -10,8 +10,6 @@
 
 	let REGEX_DEFAULT_LINK = /<a href=/;
 
-	let PROVIDERS = ['youtube', 'twitter'];
-
 	CKEDITOR.DEFAULT_AE_EMBED_URL_TPL =
 		'http://alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
 	CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL =
@@ -106,7 +104,7 @@
 									widget.createATag(url);
 								}
 							},
-							function(msg) {
+							function(_msg) {
 								widget.createATag(url);
 							}
 						);
@@ -115,10 +113,6 @@
 
 				createATag: function(url) {
 					this.editor.execCommand('undo');
-
-					let currentSelection = this.editor
-						.getSelection()
-						.getSelectedElement();
 
 					let aTagHtml = AE_EMBED_DEFAULT_LINK_TPL.output({
 						url: url,
@@ -161,7 +155,7 @@
 
 			// Add a listener to handle selection change events and properly detect editor
 			// interactions on the widgets without messing with widget native selection
-			editor.on('selectionChange', function(event) {
+			editor.on('selectionChange', function(_event) {
 				let selection = editor.getSelection();
 
 				if (selection) {
