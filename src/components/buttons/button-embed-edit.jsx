@@ -144,7 +144,6 @@ class ButtonEmbedEdit extends React.Component {
 						title={AlloyEditor.Strings.clear}>
 						<ButtonIcon editor={editor} symbol="times-clear" />
 					</button>
-					>
 				</div>
 				<button
 					aria-label={AlloyEditor.Strings.confirm}
