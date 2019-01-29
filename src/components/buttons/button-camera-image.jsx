@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 /**
  * The ButtonCameraImage class takes photo from camera and inserts it to the content.
@@ -27,6 +26,13 @@ class ButtonCameraImage extends React.Component {
 	 */
 	static key = 'cameraImage';
 
+	constructor(props) {
+		super(props);
+		this._buttonTakePhotoRef = React.createRef();
+		this._canvasContainerRef = React.createRef();
+		this._videoContainerRef = React.createRef();
+	}
+
 	/**
 	 * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
 	 *
@@ -37,7 +43,7 @@ class ButtonCameraImage extends React.Component {
 	 * @method componentDidMount
 	 */
 	componentDidMount() {
-		ReactDOM.findDOMNode(this.refs.buttonTakePhoto).focus();
+		this._buttonTakePhotoRef.current.focus();
 	}
 
 	/**
@@ -87,14 +93,14 @@ class ButtonCameraImage extends React.Component {
 
 		return (
 			<div className="ae-camera">
-				<video ref="videoContainer">Video stream not available.</video>
+				<video ref={this._videoContainerRef}>Video stream not available.</video>
 				<button
 					className="ae-camera-shoot"
 					onClick={this.takePhoto}
-					ref="buttonTakePhoto">
+					ref={this._buttonTakePhotoRef}>
 					Take photo
 				</button>
-				<canvas className="ae-camera-canvas" ref="canvasContainer" />
+				<canvas className="ae-camera-canvas" ref={this._canvasContainerRef} />
 			</div>
 		);
 	}
@@ -108,8 +114,8 @@ class ButtonCameraImage extends React.Component {
 	 * @method takePhoto
 	 */
 	takePhoto = () => {
-		const videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
-		const canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
+		const videoEl = this._videoContainerRef.current;
+		const canvasEl = this._canvasContainerRef.current;
 
 		const context = canvasEl.getContext('2d');
 
@@ -164,8 +170,8 @@ class ButtonCameraImage extends React.Component {
 	 * @protected
 	 */
 	_handleStreamSuccess = stream => {
-		const videoEl = ReactDOM.findDOMNode(this.refs.videoContainer);
-		const canvasEl = ReactDOM.findDOMNode(this.refs.canvasContainer);
+		const videoEl = this._videoContainerRef.current;
+		const canvasEl = this._canvasContainerRef.current;
 
 		videoEl.addEventListener(
 			'canplay',
@@ -198,7 +204,7 @@ class ButtonCameraImage extends React.Component {
 
 		videoEl.play();
 
-		ReactDOM.findDOMNode(this.refs.buttonTakePhoto).disabled = false;
+		this._buttonTakePhotoRef.current.disabled = false;
 	};
 
 	/**
