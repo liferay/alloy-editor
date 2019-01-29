@@ -18,28 +18,18 @@
 	 */
 	CKEDITOR.tools.debounce =
 		CKEDITOR.tools.debounce ||
-		function(callback, timeout, context, args) {
+		function(callback, timeout, context, args = []) {
 			let debounceHandle;
 
-			let callFn = function() {
+			let callFn = function(...callArgs) {
+				/* eslint-disable babel/no-invalid-this */
 				let callContext = context || this;
+				/* eslint-enable babel/no-invalid-this */
 
 				clearTimeout(debounceHandle);
 
-				let result = [];
-
-				for (
-					let len = arguments.length, startIndex = 0;
-					startIndex < len;
-					++startIndex
-				) {
-					result.push(arguments[startIndex]);
-				}
-
-				let callArgs = result.concat(args || []);
-
 				debounceHandle = setTimeout(function() {
-					callback.apply(callContext, callArgs);
+					callback.apply(callContext, [...callArgs, ...args]);
 				}, timeout);
 			};
 
