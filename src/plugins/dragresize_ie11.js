@@ -1415,9 +1415,6 @@
 				moveDiffX = nativeEvt.screenX - startX;
 				moveDiffY = startY - nativeEvt.screenY;
 
-				// This is the aspect ratio of the move difference.
-				moveRatio = Math.abs(moveDiffX / moveDiffY);
-
 				// Resize with NE, SE drag handles
 				if (factorX == 1) {
 					if (moveDiffX <= 0) {
