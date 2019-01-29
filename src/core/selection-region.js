@@ -285,14 +285,12 @@
 			let bottom = 0;
 			let clientRects;
 			let left = Infinity;
-			let rangeCount;
 			let right = -Infinity;
 			let top = Infinity;
 
 			if (nativeSelection.createRange) {
 				clientRects = nativeSelection.createRange().getClientRects();
 			} else {
-				rangeCount = nativeSelection.rangeCount;
 				clientRects =
 					nativeSelection.rangeCount > 0
 						? nativeSelection.getRangeAt(0).getClientRects()
