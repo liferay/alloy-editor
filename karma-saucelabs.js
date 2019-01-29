@@ -2,7 +2,7 @@
 
 const Common = require('./karma.common');
 const karmaSauceLauncher = require('karma-sauce-launcher');
-const sauceLabsAccessKey = process.env.SAUCE_ACCESS_KEY_ENC;
+let sauceLabsAccessKey = process.env.SAUCE_ACCESS_KEY_ENC;
 
 if (sauceLabsAccessKey) {
 	sauceLabsAccessKey = new Buffer(sauceLabsAccessKey, 'base64').toString(
