@@ -26,7 +26,7 @@
 		width: 'ew-resize',
 	};
 
-	let regexPercent = /^\s*(\d+\%)\s*$/i;
+	let regexPercent = /^\s*(\d+%)\s*$/i;
 
 	let template = '<img alt="" src="" />';
 
