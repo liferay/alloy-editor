@@ -19,7 +19,7 @@
 
 	let alignmentsObj = {left: 0, center: 1, right: 2};
 
-	let regexPercent = /^\s*(\d+\%)\s*$/i;
+	let regexPercent = /^\s*(\d+%)\s*$/i;
 
 	CKEDITOR.plugins.add('ae_dragresize_ie11', {
 		requires: 'widget',

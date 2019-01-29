@@ -78,7 +78,7 @@
 								) > -1
 							) {
 								event.data.dataValue = event.data.dataValue.replace(
-									/<u><font color=\"#(.*?)\">|<\/font><\/u>/g,
+									/<u><font color="#(.*?)">|<\/font><\/u>/g,
 									''
 								);
 							}

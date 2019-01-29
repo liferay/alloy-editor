@@ -2,8 +2,8 @@
 	'use strict';
 
 	let REGEX_BOOKMARK_SCHEME = /^#.*/i;
-	let REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F\._-]+@/i;
-	let REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*)\:|^\//i;
+	let REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F._-]+@/i;
+	let REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*):|^\//i;
 
 	/**
 	 * Link class utility. Provides methods for create, delete and update links.
