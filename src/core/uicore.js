@@ -96,7 +96,7 @@
 				}
 			}, uiTasksTimeout);
 
-			let handleAria = CKEDITOR.tools.debounce(function(event) {
+			let handleAria = CKEDITOR.tools.debounce(function(_event) {
 				ariaElement.innerHTML = ariaState.join('. ');
 			}, uiTasksTimeout);
 
@@ -132,7 +132,7 @@
 			editor.once('contentDom', function() {
 				let editable = editor.editable();
 
-				var focusHandler = editable.attachListener(
+				const focusHandler = editable.attachListener(
 					editable,
 					'focus',
 					function(event) {
@@ -151,7 +151,7 @@
 				);
 			});
 
-			editor.on('destroy', function(event) {
+			editor.on('destroy', function(_event) {
 				ariaElement.parentNode.removeChild(ariaElement);
 
 				handleUI.detach();
