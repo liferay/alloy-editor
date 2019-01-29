@@ -15,7 +15,7 @@ import Lang from './lang';
  */
 const extend = function(receiver, supplier, protoProps, staticProps) {
 	if (!supplier || !receiver) {
-		throw 'extend failed, verify dependencies';
+		throw new Error('extend failed, verify dependencies');
 	}
 
 	let supplierProto = supplier.prototype;
