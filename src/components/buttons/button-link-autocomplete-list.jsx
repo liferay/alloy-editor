@@ -172,8 +172,6 @@ class ButtonLinkAutocompleteList extends React.Component {
 	 * @protected
 	 */
 	_updateItems() {
-		const instance = this;
-
 		if (!this.props.term) {
 			return;
 		}
