@@ -38,7 +38,7 @@ export default WrappedComponent =>
 		 */
 		componentWillReceiveProps(nextProps) {
 			if (Lang.isFunction(super.componentWillReceiveProps)) {
-				super.componentWillReceiveProps();
+				super.componentWillReceiveProps(nextProps);
 			}
 
 			// Receiving properties means that the component is being re-rendered.
