@@ -23,6 +23,7 @@
 						return function(editor) {
 							editor.__processingPlugin__ = payload;
 
+							// eslint-disable-next-line babel/no-invalid-this
 							originalPluginMethod.call(this, editor);
 
 							editor.__processingPlugin__ = null;
@@ -74,6 +75,7 @@
 			// Wrap original load function so we can transform the plugin input parameter
 			// before passing it down to the original callback
 			return function(names, callback, scope) {
+				// eslint-disable-next-line babel/no-invalid-this
 				pluginsLoad.call(this, names, function(plugins) {
 					if (callback) {
 						Object.keys(plugins).forEach(function(pluginName) {
