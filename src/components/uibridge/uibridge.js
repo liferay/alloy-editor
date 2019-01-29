@@ -25,7 +25,7 @@
 			let originalUIAddFn = editor.ui.add;
 
 			editor.ui.add = function(name, type, definition) {
-				originalUIAddFn.apply(this, arguments);
+				originalUIAddFn.call(this, name, type, definition);
 
 				let typeHandler = this._.handlers[type];
 
