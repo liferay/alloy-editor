@@ -89,7 +89,7 @@
 		requires: 'widget',
 	});
 
-	// Wiget states (forms) depending on alignment and configuration.
+	// Widget states (forms) depending on alignment and configuration.
 	//
 	// Non-captioned widget (inline styles)
 	// 		┌──────┬───────────────────────────────┬─────────────────────────────┐
@@ -328,7 +328,9 @@
 					this.data.hasCaption
 				) {
 					for (let c in this.data.classes) {
-						this.parts.image.removeClass(c);
+						if (this.data.classes.hasOwnProperty(c)) {
+							this.parts.image.removeClass(c);
+						}
 					}
 				}
 
@@ -552,10 +554,12 @@
 			// If there's an image, then cool, we got a widget.
 			// Now just remove dimension attributes expressed with %.
 			for (let d in dimensions) {
-				let dimension = image.attributes[d];
+				if (dimensions.hasOwnProperty(d)) {
+					let dimension = image.attributes[d];
 
-				if (dimension && dimension.match(regexPercent)) {
-					delete image.attributes[d];
+					if (dimension && dimension.match(regexPercent)) {
+						delete image.attributes[d];
+					}
 				}
 			}
 

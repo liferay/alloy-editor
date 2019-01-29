@@ -236,7 +236,9 @@
 			});
 
 			for (let n in handles) {
-				container.appendChild(handles[n]);
+				if (handles.hasOwnProperty(n)) {
+					container.appendChild(handles[n]);
+				}
 			}
 		},
 		createHandle: function(name) {
@@ -325,20 +327,31 @@
 			let handles = this.handles;
 
 			for (let handle in handles) {
-				POSITION_ELEMENT_FN[handle](handles[handle], left, top, box);
+				if (handles.hasOwnProperty(handle)) {
+					POSITION_ELEMENT_FN[handle](
+						handles[handle],
+						left,
+						top,
+						box
+					);
+				}
 			}
 		},
 		showHandles: function() {
 			let handles = this.handles;
 			this.updateHandles(this.box);
 			for (let n in handles) {
-				handles[n].style.display = 'block';
+				if (handles.hasOwnProperty(n)) {
+					handles[n].style.display = 'block';
+				}
 			}
 		},
 		hideHandles: function() {
 			let handles = this.handles;
 			for (let n in handles) {
-				handles[n].style.display = 'none';
+				if (handles.hasOwnProperty(n)) {
+					handles[n].style.display = 'none';
+				}
 			}
 		},
 		showPreview: function() {
