@@ -10,12 +10,6 @@ import React from 'react';
 		return;
 	}
 
-	// Some methods like `setState` clash with React's own state methods. For them, unsupported means
-	// that we don't account for the different meaning in the passed or returned arguments.
-	let UNSUPPORTED_RICHCOMBO_API = {
-		// setState: noop,
-	};
-
 	let RICH_COMBO_DEFS = {};
 
 	/**

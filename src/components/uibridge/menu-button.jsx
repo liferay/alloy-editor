@@ -9,14 +9,6 @@ import React from 'react';
 		return;
 	}
 
-	// Some methods like `getState` and `setState` clash with React's own state methods. For them,
-	// unsupported means that we don't account for the different meaning in the passed or returned
-	// arguments.
-	let UNSUPPORTED_MENUBUTTON_API = {
-		// getState: function() {},
-		// setState: function(state) {},
-	};
-
 	let MENUBUTTON_DEFS = {};
 
 	/**
