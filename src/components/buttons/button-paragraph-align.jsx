@@ -19,8 +19,6 @@ class ButtonParagraphAlign extends React.Component {
 	 * @return {Object} The content which should be rendered.
 	 */
 	render() {
-		const activeAlignment = AlloyEditor.Strings.alignLeft;
-
 		let buttonCommandsList;
 		let buttonCommandsListId;
 
