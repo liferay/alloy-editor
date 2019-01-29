@@ -1,6 +1,5 @@
 import ButtonCommandListItem from './button-command-list-item.jsx';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import WidgetFocusManager from '../base/widget-focus-manager.js';
 
 /**
@@ -41,6 +40,11 @@ class ButtonCommandsList extends React.Component {
 	 */
 	static key = 'buttonCommandsList';
 
+	constructor(props) {
+		super(props);
+		this._ref = React.createRef();
+	}
+
 	/**
 	 * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
 	 *
@@ -51,7 +55,7 @@ class ButtonCommandsList extends React.Component {
 	 * @method componentDidMount
 	 */
 	componentDidMount() {
-		ReactDOM.findDOMNode(this).focus();
+		this._ref.current.focus();
 	}
 
 	/**
@@ -68,6 +72,7 @@ class ButtonCommandsList extends React.Component {
 				className="ae-dropdown ae-arrow-box ae-arrow-box-top-left"
 				onFocus={this.focus}
 				onKeyDown={this.handleKey}
+				ref={this._ref}
 				tabIndex="0">
 				<ul
 					className="ae-listbox"
