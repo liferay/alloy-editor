@@ -1,3 +1,4 @@
+import Lang from '../../oop/lang';
 import ButtonIcon from './button-icon.jsx';
 import ButtonLinkEdit from './button-link-edit.jsx';
 import PropTypes from 'prop-types';
@@ -21,14 +22,20 @@ class ButtonLinkEditBrowse extends React.Component {
 	};
 
 	static key = 'linkEditBrowse';
-
+	/**
+	 *
+	 * @inheritDoc
+	 */
 	constructor(props, context) {
 		super(props, context);
 
 		const link = new CKEDITOR.Link(
 			this.props.editor.get('nativeEditor')
 		).getFromSelection();
+
 		const href = link ? link.getAttribute('href') : '';
+
+		this.linkEditButtonRef = React.createRef();
 
 		this.state = {
 			element: link,
@@ -45,7 +52,7 @@ class ButtonLinkEditBrowse extends React.Component {
 	render() {
 		return (
 			<div className="ae-container-link-edit-browse">
-				<ButtonLinkEdit ref="linkEditButton" {...this.props} />
+				<ButtonLinkEdit ref={this.linkEditButtonRef} {...this.props} />
 				<button
 					aria-label="Browse"
 					className="ae-button"
@@ -65,13 +72,13 @@ class ButtonLinkEditBrowse extends React.Component {
 	 */
 	_browseClick = () => {
 		const editor = this.props.editor.get('nativeEditor');
-
 		const url = editor.config.documentBrowseLinkUrl;
+		const cb = editor.config.documentBrowseLinkCallback;
+		const linkTarget = this.linkEditButtonRef.current.state.linkTarget;
 
-		const linkTarget = this.refs.linkEditButton.state.linkTarget;
-
-		// TODO: This should invoke callback or emit an event
-		//       Let's talk about the solution we prefer.
+		if (Lang.isFunction(cb)) {
+			cb.apply(null, [editor, url, linkTarget]);
+		}
 	};
 
 	/**
