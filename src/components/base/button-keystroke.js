@@ -16,10 +16,6 @@ export default WrappedComponent =>
 		 * @method componentWillMount
 		 */
 		componentWillMount() {
-			if (Lang.isFunction(super.componentWillMount)) {
-				super.componentWillMount();
-			}
-
 			let nativeEditor = this.props.editor.get('nativeEditor');
 			let keystroke = this.props.keystroke;
 
@@ -58,10 +54,6 @@ export default WrappedComponent =>
 		 * @method componentWillUnmount
 		 */
 		componentWillUnmount() {
-			if (Lang.isFunction(super.componentWillUnmount)) {
-				super.componentWillUnmount();
-			}
-
 			this.props.editor
 				.get('nativeEditor')
 				.setKeystroke(
