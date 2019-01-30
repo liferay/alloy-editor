@@ -50,7 +50,7 @@
 				if (nearestCell) retval.push(nearestCell);
 			} else {
 				let walker = new CKEDITOR.dom.walker(range);
-				var node;
+				let node;
 				walker.guard = moveOutOfCellGuard;
 
 				while ((node = walker.next())) {
@@ -164,7 +164,7 @@
 
 		let newRow = doc.createElement('tr');
 		for (let i = 0; cloneRow[i] && i < width; i++) {
-			var cell;
+			let cell;
 			// Check whether there's a spanning row here, do not break it.
 			if (
 				cloneRow[i].rowSpan > 1 &&
@@ -193,7 +193,7 @@
 
 			let firstCell = cells[0];
 
-			var table = firstCell.getAscendant('table');
+			const table = firstCell.getAscendant('table');
 
 			let map = CKEDITOR.tools.buildTableMap(table);
 
@@ -209,7 +209,7 @@
 			let rowsToDelete = [];
 
 			// Delete cell or reduce cell spans by checking through the table map.
-			for (var i = startRowIndex; i <= endRowIndex; i++) {
+			for (let i = startRowIndex; i <= endRowIndex; i++) {
 				let mapRow = map[i];
 
 				let row = new CKEDITOR.dom.element(table.$.rows[i]);
@@ -257,12 +257,12 @@
 					table.$.parentNode
 			);
 
-			for (i = rowsToDelete.length; i >= 0; i--)
+			for (let i = rowsToDelete.length; i >= 0; i--)
 				deleteRows(rowsToDelete[i]);
 
 			return cursorPosition;
 		} else if (selectionOrRow instanceof CKEDITOR.dom.element) {
-			table = selectionOrRow.getAscendant('table');
+			const table = selectionOrRow.getAscendant('table');
 
 			if (table.$.rows.length == 1) table.remove();
 			else selectionOrRow.remove();
@@ -317,7 +317,7 @@
 
 		let height = map.length;
 
-		for (var i = 0; i < height; i++) {
+		for (let i = 0; i < height; i++) {
 			cloneCol.push(map[i][colIndex]);
 			let nextCell = insertBefore
 				? map[i][colIndex - 1]
@@ -325,8 +325,8 @@
 			nextCol.push(nextCell);
 		}
 
-		for (i = 0; i < height; i++) {
-			var cell;
+		for (let i = 0; i < height; i++) {
+			let cell;
 
 			if (!cloneCol[i]) continue;
 
@@ -366,17 +366,19 @@
 
 		let rowsToDelete = [];
 
+		let rows;
+
 		// Figure out selected cells' column indices.
-		for (var i = 0, rows = map.length; i < rows; i++) {
-			for (var j = 0, cols = map[i].length; j < cols; j++) {
+		for (let i = 0, rows = map.length; i < rows; i++) {
+			for (let j = 0, cols = map[i].length; j < cols; j++) {
 				if (map[i][j] == firstCell.$) startColIndex = j;
 				if (map[i][j] == lastCell.$) endColIndex = j;
 			}
 		}
 
 		// Delete cell or reduce cell spans by checking through the table map.
-		for (i = startColIndex; i <= endColIndex; i++) {
-			for (j = 0; j < map.length; j++) {
+		for (let i = startColIndex; i <= endColIndex; i++) {
+			for (let j = 0; j < map.length; j++) {
 				let mapRow = map[j];
 
 				let row = new CKEDITOR.dom.element(table.$.rows[j]);
@@ -588,7 +590,7 @@
 
 		let dimension = 0;
 
-		for (var i = 0; i < cells.length; i++) {
+		for (let i = 0; i < cells.length; i++) {
 			cell = cells[i];
 
 			let tr = cell.getParent();
@@ -657,7 +659,7 @@
 
 			let count = trs.count();
 
-			for (i = count - 1; i >= 0; i--) {
+			for (let i = count - 1; i >= 0; i--) {
 				let tailTr = trs.getItem(i);
 				if (!tailTr.$.cells.length) {
 					tailTr.remove();
@@ -706,7 +708,9 @@
 			newRowSpan = Math.ceil(rowSpan / 2);
 			newCellRowSpan = Math.floor(rowSpan / 2);
 			newRowIndex = rowIndex + newRowSpan;
-			var newCellTr = new CKEDITOR.dom.element(table.$.rows[newRowIndex]);
+			const newCellTr = new CKEDITOR.dom.element(
+				table.$.rows[newRowIndex]
+			);
 
 			let newCellRow = cellInRow(map, newRowIndex);
 
@@ -733,7 +737,7 @@
 		} else {
 			newCellRowSpan = newRowSpan = 1;
 
-			newCellTr = tr.clone();
+			const newCellTr = tr.clone();
 			newCellTr.insertAfter(tr);
 			newCellTr.append((newCell = cell.clone()));
 
@@ -800,8 +804,6 @@
 
 	CKEDITOR.plugins.add('ae_tabletools', {
 		init: function(editor) {
-			let lang = editor.lang.table;
-
 			function createDef(def) {
 				return CKEDITOR.tools.extend(def || {}, {
 					contextSensitive: 1,
