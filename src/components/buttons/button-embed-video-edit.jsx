@@ -117,8 +117,6 @@ class ButtonEmbedVideoEdit extends React.Component {
 			opacity: this.state.videoURL ? 1 : 0,
 		};
 
-		const icon = this.getIcon();
-
 		return (
 			<div className="ae-container-embed-video-edit">
 				<div className="ae-container-input xxl">

@@ -401,13 +401,13 @@
 			resizer.setStyle('left', pxUnit(resizerNewPosition));
 		});
 
-		let destroy = (this.destroy = function() {
+		this.destroy = function() {
 			detach();
 
 			document.getBody().setStyle('cursor', 'auto');
 
 			resizer.remove();
-		});
+		};
 
 		var isResizing = (this.isResizing = function() {
 			return resizing;
