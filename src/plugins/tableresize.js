@@ -95,9 +95,9 @@
 			pillarIndex += td.$.colSpan || 1;
 
 			// Calculate the pillar boundary positions.
-			var pillarLeft;
-			var pillarRight;
-			var pillarWidth;
+			let pillarLeft;
+			let pillarRight;
+			let pillarWidth;
 
 			let x = td.getDocumentPosition().x;
 
@@ -163,6 +163,8 @@
 
 	function ColumnResizer(editor, pillar) {
 		let document;
+		let isResizing;
+		let move;
 		let resizer;
 		let resizing;
 		let startOffset;
@@ -272,7 +274,7 @@
 
 				let rightCell = rightSideCells[i];
 
-				var table = pillar.table;
+				const table = pillar.table;
 
 				// Defer the resizing to avoid any interference among cells.
 				CKEDITOR.tools.setTimeout(
@@ -374,7 +376,7 @@
 		// only change the cursor to resizable shape.
 		resizer.show();
 
-		var move = (this.move = function(posX) {
+		move = (this.move = function(posX) {
 			let resizerNewPosition =
 				posX - Math.round(resizer.$.offsetWidth / 2);
 
@@ -409,7 +411,7 @@
 			resizer.remove();
 		};
 
-		var isResizing = (this.isResizing = function() {
+		isResizing = (this.isResizing = function() {
 			return resizing;
 		});
 	}
