@@ -227,7 +227,7 @@
 			let handles = (this.handles = {});
 
 			IMAGE_HANDLES[this.cfg.imageScaleResize].forEach(function(
-				handleName,
+				handleName
 			) {
 				handles[handleName] = instance.handles[
 					handleName

@@ -14,7 +14,6 @@
 	var KEY_SPACE = 32;
 
 	describe('AutoLink', function() {
-
 		before(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_autolink',
