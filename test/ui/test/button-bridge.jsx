@@ -6,7 +6,6 @@
 	var Simulate = TestUtils.Simulate;
 
 	describe('ButtonBridge', function() {
-
 		before(function(done) {
 			Utils.createAlloyEditor.call(this, done, {
 				extraPlugins:
