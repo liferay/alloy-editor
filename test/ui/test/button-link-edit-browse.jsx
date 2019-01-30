@@ -3,19 +3,19 @@ import ButtonLinkEditBrowse from '../../../src/components/buttons/button-link-ed
 (function() {
 	'use strict';
 
-	var assert = chai.assert;
-	var Simulate = ReactTestUtils.Simulate;
-	var TestUtils = ReactTestUtils;
-	var documentBrowseLinkCallback;
-	var documentBrowseLinkUrl = 'http://alloyeditor.com/some/location';
+	const assert = chai.assert;
+	const Simulate = ReactTestUtils.Simulate;
+	const TestUtils = ReactTestUtils;
+	const documentBrowseLinkUrl = 'http://alloyeditor.com/some/location';
+	let documentBrowseLinkCallback;
 
-	describe('ButtonLinkEditBrowse', function() {
-		before(function(done) {
+	describe('ButtonLinkEditBrowse', () => {
+		before(done => {
 			documentBrowseLinkCallback = sinon.spy();
 
 			Utils.createAlloyEditor.call(this, done, {
-				documentBrowseLinkCallback: documentBrowseLinkCallback,
-				documentBrowseLinkUrl: documentBrowseLinkUrl
+				documentBrowseLinkCallback,
+				documentBrowseLinkUrl,
 			});
 		});
 
@@ -25,25 +25,25 @@ import ButtonLinkEditBrowse from '../../../src/components/buttons/button-link-ed
 
 		afterEach(Utils.afterEach);
 
-		it('should invoke a callback', function() {
+		it('should invoke a callback', () => {
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<a href="http://alloyeditor.com" target="_blank">{Alloy Editor}</a>'
 			);
 
-			var buttonLinkEditBrowse = ReactDOM.render(
+			const buttonLinkEditBrowse = ReactDOM.render(
 				<ButtonLinkEditBrowse
 					editor={this.editor}
 				/>,
 				this.container
 			);
 
-			var buttons = TestUtils.scryRenderedDOMComponentsWithClass(
+			const buttons = TestUtils.scryRenderedDOMComponentsWithClass(
 				buttonLinkEditBrowse,
 				'ae-button'
 			);
 
-			var buttonBrowse = buttons[buttons.length - 1];
+			const buttonBrowse = buttons[buttons.length - 1];
 
 			Simulate.click(buttonBrowse);
 
