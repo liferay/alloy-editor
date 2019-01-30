@@ -462,7 +462,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 				false
 			);
 
-			editor.on('selectionChange', event => {
+			editor.on('selectionChange', _event => {
 				const selection = editor.getSelection();
 
 				if (selection) {

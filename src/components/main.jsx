@@ -47,7 +47,7 @@ class UI extends React.Component {
 		};
 
 		this._keyDownListener = CKEDITOR.tools.debounce(
-			event => {
+			_event => {
 				this._setUIHidden(document.activeElement);
 			},
 			this.props.eventsDelay,
@@ -225,7 +225,7 @@ class UI extends React.Component {
 	 * @method _onActionPerformed
 	 * @param {SynteticEvent} event The provided event
 	 */
-	_onActionPerformed(event) {
+	_onActionPerformed(_event) {
 		const editor = this.props.editor.get('nativeEditor');
 
 		editor.focus();

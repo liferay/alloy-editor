@@ -41,7 +41,7 @@
 				Math.round(box.height / 2) - 3 + top
 			);
 		},
-		tl: function(handle, left, top, box) {
+		tl: function(handle, left, top, _box) {
 			positionElement(handle, left - 3, top - 3);
 		},
 		tm: function(handle, left, top, box) {
@@ -92,7 +92,7 @@
 				return;
 			}
 
-			editor.once('contentDom', function(evt) {
+			editor.once('contentDom', function(_evt) {
 				init(editor);
 			});
 		},
@@ -228,7 +228,6 @@
 
 			IMAGE_HANDLES[this.cfg.imageScaleResize].forEach(function(
 				handleName,
-				index
 			) {
 				handles[handleName] = instance.handles[
 					handleName
