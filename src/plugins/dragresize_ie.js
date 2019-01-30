@@ -859,7 +859,6 @@
 
 			let moveDiffX;
 			let moveDiffY;
-			let moveRatio;
 
 			// Save the undo snapshot first: before resizing.
 			editor.fire('saveSnapshot');
@@ -921,9 +920,6 @@
 				// This is how far the mouse is from the point the button was pressed.
 				moveDiffX = nativeEvt.screenX - startX;
 				moveDiffY = startY - nativeEvt.screenY;
-
-				// This is the aspect ratio of the move difference.
-				moveRatio = Math.abs(moveDiffX / moveDiffY);
 
 				if (
 					imageScaleResize === 'width' ||
