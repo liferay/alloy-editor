@@ -85,11 +85,11 @@
 	 */
 	CKEDITOR.tools.merge =
 		CKEDITOR.tools.merge ||
-		function() {
+		function(...args) {
 			let result = {};
 
-			for (let i = 0; i < arguments.length; ++i) {
-				let obj = arguments[i];
+			for (let i = 0; i < args.length; ++i) {
+				let obj = args[i];
 
 				for (let key in obj) {
 					if (Object.prototype.hasOwnProperty.call(obj, key)) {
