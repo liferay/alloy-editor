@@ -21,6 +21,7 @@ const EMBED_VIDEO_HEIGHT = 315;
  *
  * @class Core
  * @constructor
+ * @param {Object} config The configuration to be used.
  */
 function Core(config) {
 	Core.superclass.constructor.call(this, config);
@@ -38,7 +39,7 @@ extend(
 		 * @instance
 		 * @protected
 		 * @method initializer
-		 * @param config {Object} Configuration object literal for the editor.
+		 * @param {Object} config Configuration object literal for the editor.
 		 */
 		initializer: function(config) {
 			let node = this.get('srcNode');
@@ -315,7 +316,7 @@ extend(
 		 * @instance
 		 * @protected
 		 * @method _validateAllowedContent
-		 * @param {Any} The value to be checked
+		 * @param {Any} value The value to be checked
 		 * @return {Boolean} True if the current value is valid configuration, false otherwise
 		 */
 		_validateAllowedContent: function(value) {
@@ -333,7 +334,7 @@ extend(
 		 * @instance
 		 * @protected
 		 * @method _validateToolbars
-		 * @param {Any} The value to be checked
+		 * @param {Any} value The value to be checked
 		 * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
 		 */
 		_validateToolbars: function(value) {
@@ -358,6 +359,38 @@ extend(
 				validator: '_validateAllowedContent',
 				value: true,
 				writeOnce: true,
+			},
+
+			/**
+			 * Callback to be invoked when clicking on the
+			 * <code>src/components/buttons/button-link-edit-browse.jsx</code>
+			 * component.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @propety documentBrowseLinkCallback
+			 * @default undefined
+			 * @type {Function|undefined}
+			 */
+			documentBrowseLinkCallback: {
+				validator: Lang.isFunction,
+				value: undefined,
+			},
+
+			/**
+			 * Configuration for the
+			 * <code>src/components/buttons/button-link-edit-browse.jsx</code>
+			 * component.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @propety documentBrowseLinkUrl
+			 * @default undefined
+			 * @type {String|undefined}
+			 */
+			documentBrowseLinkUrl: {
+				validator: Lang.isString,
+				value: undefined,
 			},
 
 			/**
