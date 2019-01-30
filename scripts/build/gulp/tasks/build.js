@@ -26,7 +26,7 @@ function ifRelease(task) {
 let haveShownHint = false;
 
 function createBundle(configName) {
-	const config = path.join(process.env.PWD, `${configName}.js`);
+	const config = path.join(__dirname, '../../../..',  `${configName}.js`);
 	const showStats = !!process.env.STATS;
 	if (!showStats && !haveShownHint) {
 		console.log(
