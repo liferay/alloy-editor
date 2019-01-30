@@ -62,6 +62,7 @@
     "fix": "eslint --fix 'src/**/*.{js,jsx}'",
     "format": "prettier --write -- '*.js' '{api,scripts,src,test}/**/*.{js,jsx}'",
     "lint": "eslint 'src/**/*.{js,jsx}'",
+    "lint:changed": "git ls-files -mz -- 'src/**/*.js' 'src/**/*.jsx' | xargs -0 eslint",
     "lint:quiet": "eslint --quiet 'src/**/*.{js,jsx}'",
     "prettier": "prettier --write -- '*.js' '{api,scripts,src,test}/**/*.{js,jsx}'",
     "prepublishOnly": "npm run checkFormat && npm run test",
