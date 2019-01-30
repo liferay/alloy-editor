@@ -1234,31 +1234,31 @@
 
 		// Create resizer for each corner (NE, NW, SE, SW)
 
-		let resizer_ne = doc.createElement('span');
+		let resizerNE = doc.createElement('span');
 
-		let resizer_nw = doc.createElement('span');
+		let resizerNW = doc.createElement('span');
 
-		let resizer_se = doc.createElement('span');
+		let resizerSE = doc.createElement('span');
 
-		let resizer_sw = doc.createElement('span');
+		let resizerSW = doc.createElement('span');
 
-		resizer_ne.addClass('cke_image_resizer');
-		resizer_ne.addClass('cke_image_resizer_ne');
+		resizerNE.addClass('cke_image_resizer');
+		resizerNE.addClass('cke_image_resizer_ne');
 
-		resizer_nw.addClass('cke_image_resizer');
-		resizer_nw.addClass('cke_image_resizer_nw');
+		resizerNW.addClass('cke_image_resizer');
+		resizerNW.addClass('cke_image_resizer_nw');
 
-		resizer_se.addClass('cke_image_resizer');
-		resizer_se.addClass('cke_image_resizer_se');
+		resizerSE.addClass('cke_image_resizer');
+		resizerSE.addClass('cke_image_resizer_se');
 
-		resizer_sw.addClass('cke_image_resizer');
-		resizer_sw.addClass('cke_image_resizer_sw');
+		resizerSW.addClass('cke_image_resizer');
+		resizerSW.addClass('cke_image_resizer_sw');
 
 		// Add each directional resizer as a child of resizer
-		resizer.append(resizer_ne);
-		resizer.append(resizer_nw);
-		resizer.append(resizer_se);
-		resizer.append(resizer_sw);
+		resizer.append(resizerNE);
+		resizer.append(resizerNW);
+		resizer.append(resizerSE);
+		resizer.append(resizerSW);
 
 		// resizer.setAttribute( 'title', editor.lang.ae_dragresize_ie11.resizer );
 		resizer.append(new CKEDITOR.dom.text('\u200b', doc));
