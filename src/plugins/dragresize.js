@@ -537,8 +537,8 @@
 		if (fn.bind) {
 			return fn.bind(ctx);
 		}
-		return function() {
-			fn.apply(ctx, arguments);
+		return function(...args) {
+			fn.apply(ctx, args);
 		};
 	}
 
