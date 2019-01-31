@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import EditorContext from '../../adapter/editor-context';
 
 /**
  * Calculates the position where an Widget should be displayed based on the point
@@ -8,6 +9,8 @@ import ReactDOM from 'react-dom';
  */
 export default WrappedComponent =>
 	class extends WrappedComponent {
+		static contextType = EditorContext;
+
 		/**
 		 * Lifecycle. Returns the default values of the properties used in the widget.
 		 *
@@ -339,10 +342,10 @@ export default WrappedComponent =>
 		 * @method show
 		 */
 		show() {
-			let domNode = ReactDOM.findDOMNode(this);
-			let uiNode = this.props.editor.get('uiNode');
+			const domNode = ReactDOM.findDOMNode(this);
+			const uiNode = this.context.editor.get('uiNode');
 
-			let scrollTop = uiNode ? uiNode.scrollTop : 0;
+			const scrollTop = uiNode ? uiNode.scrollTop : 0;
 
 			if (!this.isVisible() && domNode) {
 				let interactionPoint = this.getInteractionPoint();
@@ -399,7 +402,7 @@ export default WrappedComponent =>
 			let domNode = ReactDOM.findDOMNode(this);
 
 			if (interactionPoint && domNode) {
-				let uiNode = this.props.editor.get('uiNode') || document.body;
+				let uiNode = this.context.editor.get('uiNode') || document.body;
 				let uiNodeStyle = getComputedStyle(uiNode);
 				let uiNodeMarginLeft = parseInt(
 					uiNodeStyle.getPropertyValue('margin-left'),

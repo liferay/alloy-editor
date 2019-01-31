@@ -1,3 +1,5 @@
+import EditorContext from '../../adapter/editor-context';
+
 /**
  * ButtonCommand is a mixin that executes a command via CKEDITOR's API.
  *
@@ -5,6 +7,8 @@
  */
 export default WrappedComponent =>
 	class extends WrappedComponent {
+		static contextType = EditorContext;
+
 		/**
 		 * Executes a CKEditor command and fires `actionPerformed` event.
 		 *
@@ -14,7 +18,7 @@ export default WrappedComponent =>
 		 * @method execCommand
 		 */
 		execCommand = data => {
-			const editor = this.props.editor.get('nativeEditor');
+			const editor = this.context.editor.get('nativeEditor');
 
 			editor.execCommand(this.props.command, data);
 
