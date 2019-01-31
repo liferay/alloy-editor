@@ -3,6 +3,7 @@ import '../plugins';
 
 import '../components/uibridge';
 
+import EditorContext from './editor-context';
 import extend from '../oop/oop';
 import Lang from '../oop/lang';
 import Base from '../oop/base';
@@ -277,11 +278,12 @@ extend(
 				uiNode.appendChild(editorUIElement);
 
 				this._mainUI = ReactDOM.render(
-					<UI
-						editor={this}
-						eventsDelay={this.get('eventsDelay')}
-						toolbars={this.get('toolbars')}
-					/>,
+					<EditorContext.Provider value={{editor: this}}>
+						<UI
+							eventsDelay={this.get('eventsDelay')}
+							toolbars={this.get('toolbars')}
+						/>
+					</EditorContext.Provider>,
 					editorUIElement
 				);
 

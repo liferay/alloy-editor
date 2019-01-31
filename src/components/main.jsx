@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WidgetExclusive from './base/widget-exclusive.js';
 import WidgetFocusManager from './base/widget-focus-manager.js';
-import PropTypes from 'prop-types';
+import EditorContext from '../adapter/editor-context.js';
 
 /**
  * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
@@ -28,7 +29,7 @@ class UI extends React.Component {
 	 * @method componentDidMount
 	 */
 	componentDidMount() {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		editor.on('editorInteraction', this._onEditorInteraction, this);
 		editor.on('actionPerformed', this._onActionPerformed, this);
@@ -70,7 +71,7 @@ class UI extends React.Component {
 	componentDidUpdate(prevProps, prevState) {
 		const domNode = ReactDOM.findDOMNode(this);
 
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		if (domNode) {
 			editor.fire('ariaUpdate', {
@@ -197,7 +198,7 @@ class UI extends React.Component {
 			const props = this.mergeExclusiveProps(
 				{
 					config: this.props.toolbars[toolbar.key],
-					editor: this.props.editor,
+					editor: this.context.editor,
 					editorEvent: this.state.editorEvent,
 					key: toolbar.key,
 					onDismiss: this._onDismissToolbarFocus,
@@ -226,7 +227,7 @@ class UI extends React.Component {
 	 * @param {SynteticEvent} event The provided event
 	 */
 	_onActionPerformed(_event) {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		editor.focus();
 
@@ -245,7 +246,7 @@ class UI extends React.Component {
 	 * @method _onDismissToolbarFocus
 	 */
 	_onDismissToolbarFocus = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		editor.focus();
 	};
@@ -299,7 +300,7 @@ class UI extends React.Component {
 		const domNode = ReactDOM.findDOMNode(this);
 
 		if (domNode) {
-			const editable = this.props.editor.get('nativeEditor').editable();
+			const editable = this.context.editor.get('nativeEditor').editable();
 			const parentNode = target.parentNode;
 			const targetNode = new CKEDITOR.dom.node(target);
 
@@ -326,6 +327,8 @@ class UI extends React.Component {
 		}
 	}
 }
+
+UI.contextType = EditorContext;
 
 /**
  * Lifecycle. Returns the default values of the properties used in the widget.
@@ -374,15 +377,6 @@ UI.propTypes = {
 	 * @property {Object} ariaUpdates
 	 */
 	ariaUpdates: PropTypes.object,
-
-	/**
-	 * The editor instance where the component is being used.
-	 *
-	 * @instance
-	 * @memberof UI
-	 * @property {Object} editor
-	 */
-	editor: PropTypes.object.isRequired,
 
 	/**
 	 * The delay (ms), after which key or mouse events will be processed.
