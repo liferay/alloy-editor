@@ -3,8 +3,8 @@ import Lang from '../../oop/lang.js';
 import React from 'react';
 
 /**
- * ToolbarButtons is a mixin which provides a list of buttons which have to be
- * displayed on the current toolbar depending on user preferences and given state.
+ * ToolbarButtons provides a list of buttons which have to be displayed
+ * on the current toolbar depending on user preferences and given state.
  *
  * @class ToolbarButtons
  */
@@ -13,7 +13,7 @@ export default WrappedComponent =>
 		static contextType = EditorContext;
 
 		/**
-		 * Analayses the current selection and returns the buttons or button groups to be rendered.
+		 * Analyses the current selection and returns the buttons or button groups to be rendered.
 		 *
 		 * @instance
 		 * @method getToolbarButtonGroups
