@@ -1,3 +1,4 @@
+import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang.js';
 import React from 'react';
 
@@ -9,6 +10,8 @@ import React from 'react';
  */
 export default WrappedComponent =>
 	class extends WrappedComponent {
+		static contextType = EditorContext;
+
 		/**
 		 * Analayses the current selection and returns the buttons or button groups to be rendered.
 		 *
@@ -47,7 +50,7 @@ export default WrappedComponent =>
 		getToolbarButtons(buttons, additionalProps) {
 			let buttonProps = {};
 
-			let nativeEditor = this.props.editor.get('nativeEditor');
+			let nativeEditor = this.context.editor.get('nativeEditor');
 			let buttonCfg = nativeEditor.config.buttonCfg || {};
 
 			if (Lang.isFunction(buttons)) {
@@ -82,7 +85,7 @@ export default WrappedComponent =>
 			).map(function(button, index) {
 				let props = this.mergeExclusiveProps(
 					{
-						editor: this.props.editor,
+						editor: this.context.editor,
 						key:
 							button.key !== 'separator'
 								? button.key
