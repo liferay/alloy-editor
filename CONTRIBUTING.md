@@ -53,7 +53,7 @@ TBD
 
 ## JS Docs
 
-All methods should be documented, following [google's format](https://github.com/google/closure-compiler/wiki/Annotating-JavaScript-for-the-Closure-Compiler).
+All methods should be documented, following [Google's format](https://github.com/google/closure-compiler/wiki/Annotating-JavaScript-for-the-Closure-Compiler).
 
 # Releasing
 
@@ -88,32 +88,31 @@ git checkout master && git pull upstream master
 npm version patch|minor|major
 ```
 
-6. Generate and commit dist files
+6. Build the dist files
 
 ```
-gulp release
-git add .
-git commit -m "Build Files (auto-generated)"
+npm run build
 ```
 
-7. Publish npm modules and push release tags
-
-```
-npm publish
-git push && git push --tags
-```
-
-8. Generate changelog
+7. Generate changelog
 
 github_changelog_generator (https://github.com/skywinder/github-changelog-generator)
 
-9. Commit changelog and push to `master`
+8. Commit changelog
 
 ```
 git add CHANGELOG.md
 git commit -m "Updates CHANGELOG for vX.X.X"
-git push
 ```
+
+9. Publish npm modules and push release tags
+
+```
+npm publish --dry-run # Final sanity check.
+npm publish
+git push --follow-tags
+```
+
 
 10. Sync `develop` with `master`
 
