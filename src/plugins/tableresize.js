@@ -376,7 +376,7 @@
 		// only change the cursor to resizable shape.
 		resizer.show();
 
-		move = (this.move = function(posX) {
+		move = this.move = function(posX) {
 			let resizerNewPosition =
 				posX - Math.round(resizer.$.offsetWidth / 2);
 
@@ -401,7 +401,7 @@
 			}
 
 			resizer.setStyle('left', pxUnit(resizerNewPosition));
-		});
+		};
 
 		this.destroy = function() {
 			detach();
@@ -411,9 +411,9 @@
 			resizer.remove();
 		};
 
-		isResizing = (this.isResizing = function() {
+		isResizing = this.isResizing = function() {
 			return resizing;
-		});
+		};
 	}
 
 	function clearPillarsCache(evt) {

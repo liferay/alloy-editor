@@ -32,9 +32,7 @@ import ButtonLinkEditBrowse from '../../../src/components/buttons/button-link-ed
 			);
 
 			const buttonLinkEditBrowse = ReactDOM.render(
-				<ButtonLinkEditBrowse
-					editor={this.editor}
-				/>,
+				<ButtonLinkEditBrowse editor={this.editor} />,
 				this.container
 			);
 
@@ -49,11 +47,13 @@ import ButtonLinkEditBrowse from '../../../src/components/buttons/button-link-ed
 
 			assert(documentBrowseLinkCallback.called);
 
-			assert(documentBrowseLinkCallback.calledWith(
-				this.nativeEditor,
-				documentBrowseLinkUrl,
-				'_blank'
-			));
+			assert(
+				documentBrowseLinkCallback.calledWith(
+					this.nativeEditor,
+					documentBrowseLinkUrl,
+					'_blank'
+				)
+			);
 		});
 	});
 })();

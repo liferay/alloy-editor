@@ -1,5 +1,124 @@
 # Change Log
 
+## 2.0.0-alpha.1
+
+**Implemented enhancements:**
+
+- Make sure code is correctly formatted before publishing [\#983](https://github.com/liferay/alloy-editor/issues/983)
+- Upgrade to Gulp v4 [\#980](https://github.com/liferay/alloy-editor/issues/980)
+- Don't use process.env.PWD in build [\#1044](https://github.com/liferay/alloy-editor/pull/1044) ([wincent](https://github.com/wincent))
+- Parallelize webpack builds [\#968](https://github.com/liferay/alloy-editor/pull/968) ([wincent](https://github.com/wincent))
+
+**Fixed bugs:**
+
+- React warnings when editing photo "alt" tags [\#1030](https://github.com/liferay/alloy-editor/issues/1030)
+- Left-side add icon not showing up on 2.x branch [\#992](https://github.com/liferay/alloy-editor/issues/992)
+- Eliminate React warnings when editing image alt attribute [\#1033](https://github.com/liferay/alloy-editor/pull/1033) ([wincent](https://github.com/wincent))
+- Fix 8 more lints, including last of the "no-unused-vars" [\#1032](https://github.com/liferay/alloy-editor/pull/1032) ([wincent](https://github.com/wincent))
+- Fix bad identifier in button-embed-video-edit.jsx \(no-undef\) [\#1026](https://github.com/liferay/alloy-editor/pull/1026) ([wincent](https://github.com/wincent))
+- Fix bad variable name in button-link-browse.jsx \(no-undef\) [\#1025](https://github.com/liferay/alloy-editor/pull/1025) ([wincent](https://github.com/wincent))
+- Remove stray "\>" from button-embed-edit.jsx, fixing 1 lint [\#1009](https://github.com/liferay/alloy-editor/pull/1009) ([wincent](https://github.com/wincent))
+
+**Closed issues:**
+
+- Optimize build [\#1000](https://github.com/liferay/alloy-editor/issues/1000)
+- Remove .editorconfig [\#988](https://github.com/liferay/alloy-editor/issues/988)
+- Clean up dist folder [\#969](https://github.com/liferay/alloy-editor/issues/969)
+
+**Merged pull requests:**
+
+- Bump version [\#1051](https://github.com/liferay/alloy-editor/pull/1051) ([julien](https://github.com/julien))
+- Use strict equality [\#1049](https://github.com/liferay/alloy-editor/pull/1049) ([julien](https://github.com/julien))
+- Fix last lint in dragresize\_ie.js \(no-unused-vars\) [\#1043](https://github.com/liferay/alloy-editor/pull/1043) ([wincent](https://github.com/wincent))
+- Fix 6 lints in src/plugins/tableresize.js \(no-var\) [\#1042](https://github.com/liferay/alloy-editor/pull/1042) ([wincent](https://github.com/wincent))
+- Add support for running lints on changed files only [\#1041](https://github.com/liferay/alloy-editor/pull/1041) ([wincent](https://github.com/wincent))
+- Implement callback in ButtonLinkEditBrowse [\#1040](https://github.com/liferay/alloy-editor/pull/1040) ([julien](https://github.com/julien))
+- Fix 11 lints in src/plugins/tabletools.js [\#1039](https://github.com/liferay/alloy-editor/pull/1039) ([wincent](https://github.com/wincent))
+- Fix last 4 lints in dragresize\_ie11.js [\#1038](https://github.com/liferay/alloy-editor/pull/1038) ([wincent](https://github.com/wincent))
+- Fix last lint in src/plugins/dragresize.js \(prefer-rest-params\) [\#1036](https://github.com/liferay/alloy-editor/pull/1036) ([wincent](https://github.com/wincent))
+- Fix last lint in src/core/tools.js \(prefer-rest-params\) [\#1035](https://github.com/liferay/alloy-editor/pull/1035) ([wincent](https://github.com/wincent))
+- Apply Prettier's desired changes [\#1034](https://github.com/liferay/alloy-editor/pull/1034) ([wincent](https://github.com/wincent))
+- Deal with 12 remaining "no-used-vars" lints related to function args [\#1029](https://github.com/liferay/alloy-editor/pull/1029) ([wincent](https://github.com/wincent))
+- Turn "babel/no-invalid-this" into a warning in plug-in files [\#1028](https://github.com/liferay/alloy-editor/pull/1028) ([wincent](https://github.com/wincent))
+- Fix no-undef lint in src/plugins/dragresize\_ie11.js [\#1027](https://github.com/liferay/alloy-editor/pull/1027) ([wincent](https://github.com/wincent))
+- Fix lint in core/selection-region.js \(no-unused-vars\) [\#1024](https://github.com/liferay/alloy-editor/pull/1024) ([wincent](https://github.com/wincent))
+- Fix lint in src/oop/oop.js \(no-throw-literal\) [\#1023](https://github.com/liferay/alloy-editor/pull/1023) ([wincent](https://github.com/wincent))
+- Fix lint in oop/attribute.js \(prefer-spread\) [\#1022](https://github.com/liferay/alloy-editor/pull/1022) ([wincent](https://github.com/wincent))
+- Fix 2 lints in core/debounce.js [\#1021](https://github.com/liferay/alloy-editor/pull/1021) ([wincent](https://github.com/wincent))
+- Fix 3 lints in src/core/uicore.js [\#1020](https://github.com/liferay/alloy-editor/pull/1020) ([wincent](https://github.com/wincent))
+- Fix 9 remaining "guard-for-in" lints [\#1019](https://github.com/liferay/alloy-editor/pull/1019) ([wincent](https://github.com/wincent))
+- Fix lint in uibridge/menu.jsx \(guard-for-in\) [\#1018](https://github.com/liferay/alloy-editor/pull/1018) ([wincent](https://github.com/wincent))
+- Fix 1 lint in uibridge/uibridge.js \(prefer-rest-params\) [\#1017](https://github.com/liferay/alloy-editor/pull/1017) ([wincent](https://github.com/wincent))
+- Fix 3 lints by removing UNSUPPORTED\_\*\_API variables [\#1016](https://github.com/liferay/alloy-editor/pull/1016) ([wincent](https://github.com/wincent))
+- Fix lint in button-separator.jsx \(no-unused-vars\) [\#1015](https://github.com/liferay/alloy-editor/pull/1015) ([wincent](https://github.com/wincent))
+- Fix 1 lint in button-paragraph-align.jsx \(no-unused-vars\) [\#1014](https://github.com/liferay/alloy-editor/pull/1014) ([wincent](https://github.com/wincent))
+- Fix 1 lint in button-link-autocomplete-list.jsx \(no-unused-vars\) [\#1013](https://github.com/liferay/alloy-editor/pull/1013) ([wincent](https://github.com/wincent))
+- Fix 6 no-useless-escape lints [\#1012](https://github.com/liferay/alloy-editor/pull/1012) ([wincent](https://github.com/wincent))
+- Fix lint in button-commands-list.jsx \(react/no-find-dom-node\) [\#1011](https://github.com/liferay/alloy-editor/pull/1011) ([wincent](https://github.com/wincent))
+- Freshen formatting [\#1008](https://github.com/liferay/alloy-editor/pull/1008) ([wincent](https://github.com/wincent))
+- Fix 15 lints in src/components/buttons/button-camera-image.jsx [\#1007](https://github.com/liferay/alloy-editor/pull/1007) ([wincent](https://github.com/wincent))
+- Remove timeout in tests [\#1006](https://github.com/liferay/alloy-editor/pull/1006) ([julien](https://github.com/julien))
+- Fix lint in src/components/base/widget-exclusive.js [\#1005](https://github.com/liferay/alloy-editor/pull/1005) ([wincent](https://github.com/wincent))
+- Fix lints in src/plugins/embed.js [\#1004](https://github.com/liferay/alloy-editor/pull/1004) ([wincent](https://github.com/wincent))
+- Restore lint suppression in src/adapter/main.js [\#1003](https://github.com/liferay/alloy-editor/pull/1003) ([wincent](https://github.com/wincent))
+- Fix lints in plugins/Resizer.es.js [\#1002](https://github.com/liferay/alloy-editor/pull/1002) ([wincent](https://github.com/wincent))
+- Fixes \#1000 - Speed up builds [\#1001](https://github.com/liferay/alloy-editor/pull/1001) ([wincent](https://github.com/wincent))
+- Adds language.json as the default entry point for i18n for crowdin integration [\#997](https://github.com/liferay/alloy-editor/pull/997) ([jbalsas](https://github.com/jbalsas))
+- Fix for various buttons [\#996](https://github.com/liferay/alloy-editor/pull/996) ([julien](https://github.com/julien))
+- Fix most "systematic" lint issues [\#995](https://github.com/liferay/alloy-editor/pull/995) ([wincent](https://github.com/wincent))
+- Fixes \#990 - Bring linting up to date [\#994](https://github.com/liferay/alloy-editor/pull/994) ([wincent](https://github.com/wincent))
+- Fixes \#992 - Left-side add icon not showing up on 2.x branch \#992 [\#993](https://github.com/liferay/alloy-editor/pull/993) ([wincent](https://github.com/wincent))
+- Fixes \#990 — Bring linting up to date [\#991](https://github.com/liferay/alloy-editor/pull/991) ([wincent](https://github.com/wincent))
+- Fixes \#988 - Remove .editorconfig [\#989](https://github.com/liferay/alloy-editor/pull/989) ([wincent](https://github.com/wincent))
+- Use a more recent Node in Travis [\#987](https://github.com/liferay/alloy-editor/pull/987) ([wincent](https://github.com/wincent))
+- Add trailingComma to our Prettier config [\#986](https://github.com/liferay/alloy-editor/pull/986) ([wincent](https://github.com/wincent))
+- Remove unused dir-compare dependency [\#985](https://github.com/liferay/alloy-editor/pull/985) ([wincent](https://github.com/wincent))
+- Fixes \#983 - Make sure code is correctly formatted before publishing [\#984](https://github.com/liferay/alloy-editor/pull/984) ([wincent](https://github.com/wincent))
+- Fixes \#980 - Update to Gulp v4 [\#982](https://github.com/liferay/alloy-editor/pull/982) ([wincent](https://github.com/wincent))
+- Remove require-dir dependency [\#981](https://github.com/liferay/alloy-editor/pull/981) ([wincent](https://github.com/wincent))
+- Remove unused requires from scripts/build/gulp/tasks/css.js [\#979](https://github.com/liferay/alloy-editor/pull/979) ([wincent](https://github.com/wincent))
+- Remove unnecessary demo app templating [\#978](https://github.com/liferay/alloy-editor/pull/978) ([wincent](https://github.com/wincent))
+- Remove unused font related resources and tasks [\#977](https://github.com/liferay/alloy-editor/pull/977) ([julien](https://github.com/julien))
+- Remove unused demo [\#976](https://github.com/liferay/alloy-editor/pull/976) ([julien](https://github.com/julien))
+- Update mocha as recommended by `npm audit` [\#975](https://github.com/liferay/alloy-editor/pull/975) ([wincent](https://github.com/wincent))
+- Update karma-sauce-launcher as recommended by `npm audit` [\#974](https://github.com/liferay/alloy-editor/pull/974) ([wincent](https://github.com/wincent))
+- Speed up build with improvements to the minification configuration [\#973](https://github.com/liferay/alloy-editor/pull/973) ([wincent](https://github.com/wincent))
+- Update browsers in saucelabs config [\#971](https://github.com/liferay/alloy-editor/pull/971) ([julien](https://github.com/julien))
+- Fixes \#969 - Don't commit the "dist" contents to the Git repo [\#970](https://github.com/liferay/alloy-editor/pull/970) ([wincent](https://github.com/wincent))
+- Fix conflicts in package.json [\#966](https://github.com/liferay/alloy-editor/pull/966) ([julien](https://github.com/julien))
+- Deal with security issues identified by npm audit [\#958](https://github.com/liferay/alloy-editor/pull/958) ([julien](https://github.com/julien))
+
+## [v1.5.19](https://github.com/liferay/alloy-editor/tree/v1.5.19) (2019-01-22)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.18...v1.5.19)
+
+**Closed issues:**
+
+- IE11 Text with \(bold, italic, underline\) and link will not display toolbar [\#956](https://github.com/liferay/alloy-editor/issues/956)
+
+**Merged pull requests:**
+
+- Updates CHANGELOG for v1.5.18 [\#964](https://github.com/liferay/alloy-editor/pull/964) ([julien](https://github.com/julien))
+- Apply some minor clean-up while investigating slow build speeds [\#963](https://github.com/liferay/alloy-editor/pull/963) ([wincent](https://github.com/wincent))
+- Remove never-used gulp-empty dependency [\#962](https://github.com/liferay/alloy-editor/pull/962) ([wincent](https://github.com/wincent))
+- Fixes \#956 | Fix link with styles in IE [\#959](https://github.com/liferay/alloy-editor/pull/959) ([julien](https://github.com/julien))
+- Add Prettier [\#957](https://github.com/liferay/alloy-editor/pull/957) ([wincent](https://github.com/wincent))
+- Migrate away from reactCreateClass [\#955](https://github.com/liferay/alloy-editor/pull/955) ([wincent](https://github.com/wincent))
+- Add extra buttons from liferay-portal [\#954](https://github.com/liferay/alloy-editor/pull/954) ([julien](https://github.com/julien))
+- Update Karma dependency to resolve security issues [\#952](https://github.com/liferay/alloy-editor/pull/952) ([wincent](https://github.com/wincent))
+
+## [v1.5.18](https://github.com/liferay/alloy-editor/tree/v1.5.18) (2019-01-08)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.17...v1.5.18)
+
+**Fixed bugs:**
+
+- In IE11 copy-paste doesnt work [\#945](https://github.com/liferay/alloy-editor/issues/945)
+
+**Merged pull requests:**
+
+- Updates CHANGELOG for v1.5.17 [\#949](https://github.com/liferay/alloy-editor/pull/949) ([julien](https://github.com/julien))
+- Fixes \#945 | Fix regexp for IE [\#948](https://github.com/liferay/alloy-editor/pull/948) ([julien](https://github.com/julien))
+- Feature/react [\#946](https://github.com/liferay/alloy-editor/pull/946) ([julien](https://github.com/julien))
+
 ## [v1.5.17](https://github.com/liferay/alloy-editor/tree/v1.5.17) (2018-12-07)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.16...v1.5.17)
 
