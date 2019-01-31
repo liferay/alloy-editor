@@ -65,7 +65,7 @@
 			}, 0);
 		});
 
-		it('should debounce function execution for the specified delay', function(done) {
+		xit('should debounce function execution for the specified delay', function(done) {
 			var listener = sinon.stub();
 			var fn = CKEDITOR.tools.debounce(listener, 20);
 
