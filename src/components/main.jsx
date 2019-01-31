@@ -13,6 +13,57 @@ import EditorContext from '../adapter/editor-context.js';
  * @uses WidgetFocusManager
  */
 class UI extends React.Component {
+	static contextType = EditorContext;
+
+	/**
+	 * Lifecycle. Returns the default values of the properties used in the widget.
+	 *
+	 * @instance
+	 * @memberof UI
+	 * @method getDefaultProps
+	 * @return {Object} The default properties.
+	 */
+	static defaultProps = {
+		circular: true,
+		descendants: '[class^=ae-toolbar-]',
+		eventsDelay: 0,
+		keys: {
+			next: 9,
+		},
+	};
+
+	static propTypes = {
+		/**
+		 * Localized messages for live aria updates. Should include the following messages:
+		 * - noToolbar: Notification for no available toolbar in the editor.
+		 * - oneToolbar: Notification for just one available toolbar in the editor.
+		 * - manyToolbars: Notification for more than one available toolbar in the editor.
+		 *
+		 * @instance
+		 * @memberof UI
+		 * @property {Object} ariaUpdates
+		 */
+		ariaUpdates: PropTypes.object,
+
+		/**
+		 * The delay (ms), after which key or mouse events will be processed.
+		 *
+		 * @instance
+		 * @memberof UI
+		 * @property {Number} eventsDelay
+		 */
+		eventsDelay: PropTypes.number,
+
+		/**
+		 * The toolbars configuration for this editor instance
+		 *
+		 * @instance
+		 * @memberof UI
+		 * @property {Object} toolbars
+		 */
+		toolbars: PropTypes.object.isRequired,
+	};
+
 	constructor(props) {
 		super(props);
 
@@ -328,25 +379,6 @@ class UI extends React.Component {
 	}
 }
 
-UI.contextType = EditorContext;
-
-/**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof UI
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-UI.defaultProps = {
-	circular: true,
-	descendants: '[class^=ae-toolbar-]',
-	eventsDelay: 0,
-	keys: {
-		next: 9,
-	},
-};
-
 /**
  * Fired when component updates and when it is rendered in the DOM.
  * The payload consists from a `message` property containing the ARIA message.
@@ -364,37 +396,5 @@ UI.defaultProps = {
  *
  * @event ariaUpdate
  */
-
-UI.propTypes = {
-	/**
-	 * Localized messages for live aria updates. Should include the following messages:
-	 * - noToolbar: Notification for no available toolbar in the editor.
-	 * - oneToolbar: Notification for just one available toolbar in the editor.
-	 * - manyToolbars: Notification for more than one available toolbar in the editor.
-	 *
-	 * @instance
-	 * @memberof UI
-	 * @property {Object} ariaUpdates
-	 */
-	ariaUpdates: PropTypes.object,
-
-	/**
-	 * The delay (ms), after which key or mouse events will be processed.
-	 *
-	 * @instance
-	 * @memberof UI
-	 * @property {Number} eventsDelay
-	 */
-	eventsDelay: PropTypes.number,
-
-	/**
-	 * The toolbars configuration for this editor instance
-	 *
-	 * @instance
-	 * @memberof UI
-	 * @property {Object} toolbars
-	 */
-	toolbars: PropTypes.object.isRequired,
-};
 
 export default WidgetExclusive(WidgetFocusManager(UI));
