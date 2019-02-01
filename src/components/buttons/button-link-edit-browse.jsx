@@ -33,7 +33,8 @@ class ButtonLinkEditBrowse extends React.Component {
 		super(props);
 
 		const link = new CKEDITOR.Link(
-			this.context.editor.get('nativeEditor')
+			// Can't access context from constructor, so get editor from props.
+			this.props.context.editor.get('nativeEditor')
 		).getFromSelection();
 
 		const href = link ? link.getAttribute('href') : '';
@@ -127,4 +128,4 @@ class ButtonLinkEditBrowse extends React.Component {
 	};
 }
 
-export default ButtonLinkEditBrowse;
+export default EditorContext.toProps(ButtonLinkEditBrowse);

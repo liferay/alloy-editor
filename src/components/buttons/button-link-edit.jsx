@@ -218,7 +218,9 @@ class ButtonLinkEdit extends React.Component {
 	 * @return {Object}
 	 */
 	_getInitialState() {
-		const {editor, defaultLinkTarget} = this.props;
+		// Can't access context from contructor, so get editor from props.
+		const {editor} = this.props.context;
+		const {defaultLinkTarget} = this.props;
 
 		const link = new CKEDITOR.Link(
 			editor.get('nativeEditor')
@@ -466,6 +468,6 @@ class ButtonLinkEdit extends React.Component {
 	};
 }
 
-export default ButtonCfgProps(
-	WidgetDropdown(WidgetFocusManager(ButtonLinkEdit))
+export default EditorContext.toProps(
+	ButtonCfgProps(WidgetDropdown(WidgetFocusManager(ButtonLinkEdit)))
 );

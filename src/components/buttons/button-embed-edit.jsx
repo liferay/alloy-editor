@@ -74,7 +74,8 @@ class ButtonEmbedEdit extends React.Component {
 	 * @method getInitialState
 	 */
 	getInitialState() {
-		const editor = this.context.editor.get('nativeEditor');
+		// Can't access context from constructor, so get editor from props.
+		const editor = this.props.context.editor.get('nativeEditor');
 		let embed;
 
 		const selection = editor.getSelection();
@@ -293,4 +294,4 @@ class ButtonEmbedEdit extends React.Component {
 	};
 }
 
-export default ButtonEmbedEdit;
+export default EditorContext.toProps(ButtonEmbedEdit);

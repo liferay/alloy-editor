@@ -33,7 +33,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	constructor(prop) {
 		super(prop);
 
-		const element = this.context.editor
+		const element = props.context.editor
 			.get('nativeEditor')
 			.getSelection()
 			.getSelectedElement();
@@ -179,4 +179,6 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	};
 }
 
-export default ButtonProps(ButtonStateClasses(ButtonAccessibilityImageAlt));
+export default EditorContext.toProps(
+	ButtonProps(ButtonStateClasses(ButtonAccessibilityImageAlt))
+);
