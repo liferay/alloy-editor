@@ -199,10 +199,7 @@ class ButtonLinkEdit extends React.Component {
 					disabled={!this._isValidState()}
 					onClick={this._updateLink}
 					title={AlloyEditor.Strings.confirm}>
-					<ButtonIcon
-						symbol="check"
-						className="ae-icon-svg-check"
-					/>
+					<ButtonIcon symbol="check" className="ae-icon-svg-check" />
 				</button>
 			</div>
 		);
@@ -307,7 +304,9 @@ class ButtonLinkEdit extends React.Component {
 
 			new CKEDITOR.Link(editor).advanceSelection();
 
-			this.context.editor.get('nativeEditor').fire('actionPerformed', this);
+			this.context.editor
+				.get('nativeEditor')
+				.fire('actionPerformed', this);
 		}
 	};
 

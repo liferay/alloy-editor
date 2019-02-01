@@ -85,7 +85,8 @@ class ToolbarStyles extends React.Component {
 
 			if (typeof buttons === 'object' && !Array.isArray(buttons)) {
 				buttons =
-					buttons[this.context.editor.get('mode')] || buttons['simple'];
+					buttons[this.context.editor.get('mode')] ||
+					buttons['simple'];
 			}
 
 			let buttonsGroup = this.getToolbarButtonGroups(buttons, {

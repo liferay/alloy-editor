@@ -124,10 +124,7 @@ class ButtonEmbedEdit extends React.Component {
 					onClick={this._removeEmbed}
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.deleteEmbed}>
-					<ButtonIcon
-						symbol="trash"
-						className="ae-icon-svg-trash"
-					/>
+					<ButtonIcon symbol="trash" className="ae-icon-svg-trash" />
 				</button>
 				<div className="ae-container-input xxl">
 					<input
@@ -154,10 +151,7 @@ class ButtonEmbedEdit extends React.Component {
 					disabled={!this._isValidState()}
 					onClick={this._embedLink}
 					title={AlloyEditor.Strings.confirm}>
-					<ButtonIcon
-						symbol="check"
-						className="ae-icon-svg-check"
-					/>
+					<ButtonIcon symbol="check" className="ae-icon-svg-check" />
 				</button>
 			</div>
 		);
