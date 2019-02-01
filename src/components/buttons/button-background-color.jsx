@@ -13,15 +13,6 @@ class ButtonBackgroundColor extends React.Component {
 
 	static propTypes = {
 		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @instance
-		 * @memberof ButtonBackgroundColor
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-
-		/**
 		 * Indicates whether the styles list is expanded or not.
 		 *
 		 * @instance
@@ -107,11 +98,10 @@ class ButtonBackgroundColor extends React.Component {
 			}
 		});
 
-		const {editor, expanded, tabIndex, toggleDropdown} = this.props;
+		const {expanded, tabIndex, toggleDropdown} = this.props;
 
 		const buttonStylesProps = {
 			activeStyle: activeColor,
-			editor,
 			onDismiss: toggleDropdown,
 			showRemoveStylesItem: false,
 			styles: colors,

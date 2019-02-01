@@ -19,16 +19,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 
 	static key = 'embedVideoEdit';
 
-	static propTypes = {
-		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @instance
-		 * @memberof ButtonEmbedVideoEdit
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-	};
+	static propTypes = {};
 
 	constructor(props) {
 		super(props);

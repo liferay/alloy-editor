@@ -38,7 +38,6 @@ class ButtonTableHeading extends React.Component {
 			buttonCommandsList = (
 				<ButtonCommandsList
 					commands={this._getCommands()}
-					editor={this.context.editor}
 					listId={buttonCommandsListId}
 					onDismiss={this.props.toggleDropdown}
 				/>

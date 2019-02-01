@@ -19,16 +19,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
 
 	static key = 'AccessibilityImageAlt';
 
-	static propTypes = {
-		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @instance
-		 * @memberof ButtonAccessibilityImageAlt
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-	};
+	static propTypes = {};
 
 	constructor(prop) {
 		super(prop);

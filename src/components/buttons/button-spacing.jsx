@@ -4,7 +4,6 @@ import ButtonIcon from './button-icon.jsx';
 import ButtonProps from '../base/button-props.js';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import ButtonStylesList from './button-styles-list.jsx';
-import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonSpacing class provides functionality for changing text color in a document.
@@ -15,20 +14,9 @@ import EditorContext from '../../adapter/editor-context';
  * @class ButtonSpacing
  */
 class ButtonSpacing extends React.Component {
-	static contextType = EditorContext;
-
 	static key = 'spacing';
 
 	static propTypes = {
-		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @instance
-		 * @memberof Spacing
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-
 		/**
 		 * Indicates whether the styles list is expanded or not.
 		 *

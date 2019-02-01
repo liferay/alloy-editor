@@ -15,16 +15,10 @@ import Lang from '../../oop/lang';
 class ButtonLinkEditBrowse extends React.Component {
 	static contextType = EditorContext;
 
-	static propTypes = {
-		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-	};
+	static propTypes = {};
 
 	static key = 'linkEditBrowse';
+
 	/**
 	 *
 	 * @inheritDoc

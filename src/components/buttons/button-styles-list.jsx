@@ -5,7 +5,6 @@ import ButtonsStylesListHeader from './button-styles-list-header.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WidgetFocusManager from '../base/widget-focus-manager.js';
-import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonStylesList class provides functionality for showing a list of styles that can be
@@ -15,8 +14,6 @@ import EditorContext from '../../adapter/editor-context';
  * @uses WidgetFocusManager
  */
 class ButtonStylesList extends React.Component {
-	static contextType = EditorContext;
-
 	/**
 	 * Lifecycle. Returns the default values of the properties used in the widget.
 	 *
@@ -104,7 +101,6 @@ class ButtonStylesList extends React.Component {
 		if (this.props.showRemoveStylesItem) {
 			removeStylesItem = (
 				<ButtonStylesListItemRemove
-					editor={this.context.editor}
 					onDismiss={this.props.toggleDropdown}
 				/>
 			);
@@ -146,7 +142,6 @@ class ButtonStylesList extends React.Component {
 	 * @return {Array} Rendered instances of ButtonStylesListItem class
 	 */
 	_renderStylesItems(styles) {
-		const editor = this.context.editor;
 		let items;
 
 		if (styles && styles.length) {
@@ -155,7 +150,6 @@ class ButtonStylesList extends React.Component {
 					<li key={item.name} role="option">
 						<ButtonStylesListItem
 							activeStyle={this.props.activeStyle}
-							editor={editor}
 							name={item.name}
 							style={item.style}
 						/>

@@ -1,6 +1,5 @@
 import ButtonCommandsList from './button-commands-list.jsx';
 import ButtonIcon from './button-icon.jsx';
-import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 
 /**
@@ -9,8 +8,6 @@ import React from 'react';
  * @class ButtonTableCell
  */
 class ButtonTableCell extends React.Component {
-	static contextType = EditorContext;
-
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
@@ -38,7 +35,6 @@ class ButtonTableCell extends React.Component {
 			buttonCommandsList = (
 				<ButtonCommandsList
 					commands={this._getCommands()}
-					editor={this.context.editor}
 					listId={buttonCommandsListId}
 					onDismiss={this.props.toggleDropdown}
 				/>

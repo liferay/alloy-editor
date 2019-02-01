@@ -48,7 +48,6 @@ class ButtonStyles extends React.Component {
 			buttonStylesList = (
 				<ButtonStylesList
 					activeStyle={activeStyle}
-					editor={this.context.editor}
 					onDismiss={this.props.toggleDropdown}
 					showRemoveStylesItem={this.props.showRemoveStylesItem}
 					styles={styles}

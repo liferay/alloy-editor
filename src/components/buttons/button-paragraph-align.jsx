@@ -30,7 +30,6 @@ class ButtonParagraphAlign extends React.Component {
 			buttonCommandsList = (
 				<ButtonCommandsList
 					commands={this._getCommands()}
-					editor={this.context.editor}
 					listId={buttonCommandsListId}
 					inlineIcons={false}
 					onDismiss={this.props.toggleDropdown}

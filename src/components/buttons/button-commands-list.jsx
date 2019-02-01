@@ -1,6 +1,5 @@
 import React from 'react';
 import ButtonCommandListItem from './button-command-list-item.jsx';
-import EditorContext from '../../adapter/editor-context';
 import WidgetFocusManager from '../base/widget-focus-manager.js';
 
 /**
@@ -11,8 +10,6 @@ import WidgetFocusManager from '../base/widget-focus-manager.js';
  * @uses WidgetFocusManager
  */
 class ButtonCommandsList extends React.Component {
-	static contextType = EditorContext;
-
 	/**
 	 * Lifecycle. Returns the default values of the properties used in the widget.
 	 *
@@ -97,7 +94,6 @@ class ButtonCommandsList extends React.Component {
 	 * @return {Array} Rendered instances of ButtonCommandListItem class
 	 */
 	_renderActions(commands) {
-		const editor = this.context.editor;
 		let items;
 
 		if (commands && commands.length) {
@@ -112,7 +108,6 @@ class ButtonCommandsList extends React.Component {
 									: item.label()
 							}
 							icon={item.icon}
-							editor={editor}
 						/>
 					</li>
 				);
