@@ -42,10 +42,7 @@ class ButtonImage extends React.Component {
 					onClick={this.handleClick}
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.image}>
-					<ButtonIcon
-						editor={this.props.editor}
-						symbol="document-image"
-					/>
+					<ButtonIcon symbol="document-image" />
 				</button>
 
 				<input

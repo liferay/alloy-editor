@@ -143,7 +143,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 					disabled={!this._isValidState()}
 					onClick={this._embedVideoURL}
 					title={AlloyEditor.Strings.confirm}>
-					<ButtonIcon editor={this.props.editor} symbol="check" />
+					<ButtonIcon symbol="check" />
 				</button>
 			</div>
 		);

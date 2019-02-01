@@ -124,10 +124,7 @@ import EditorContext from '../../adapter/editor-context';
 									<span className="ae-container-dropdown-selected-item">
 										{richComboLabel}
 									</span>
-									<ButtonIcon
-										editor={this.context.editor}
-										symbol="caret-bottom"
-									/>
+									<ButtonIcon symbol="caret-bottom" />
 								</div>
 							</button>
 							{this.props.expanded && (

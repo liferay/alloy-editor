@@ -59,7 +59,7 @@ class ButtonEmbedVideo extends React.Component {
 					data-type="button-embed-video"
 					onClick={this.props.requestExclusive}
 					tabIndex={this.props.tabIndex}>
-					<ButtonIcon editor={this.props.editor} symbol="video" />
+					<ButtonIcon symbol="video" />
 				</button>
 			);
 		}

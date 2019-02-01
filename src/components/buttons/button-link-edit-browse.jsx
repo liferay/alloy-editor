@@ -58,7 +58,7 @@ class ButtonLinkEditBrowse extends React.Component {
 					className="ae-button"
 					onClick={this._browseClick}
 					title="browse">
-					<ButtonIcon editor={this.props.editor} symbol="folder" />
+					<ButtonIcon symbol="folder" />
 				</button>
 			</div>
 		);

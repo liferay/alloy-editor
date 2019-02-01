@@ -56,7 +56,7 @@ class ButtonCode extends React.Component {
 				onClick={this.applyStyle}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.code}>
-				<ButtonIcon editor={this.props.editor} symbol="code" />
+				<ButtonIcon symbol="code" />
 			</button>
 		);
 	}

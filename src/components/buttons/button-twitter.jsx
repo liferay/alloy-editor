@@ -84,7 +84,7 @@ class ButtonTwitter extends React.Component {
 				onClick={this.handleClick}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.twitter}>
-				<ButtonIcon editor={this.props.editor} symbol="twitter" />
+				<ButtonIcon symbol="twitter" />
 			</button>
 		);
 	}

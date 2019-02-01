@@ -122,7 +122,7 @@ class ButtonColor extends React.Component {
 					role="combobox"
 					tabIndex={tabIndex}>
 					<span className={activeColorClass}>
-						<ButtonIcon editor={editor} symbol="text-editor" />
+						<ButtonIcon symbol="text-editor" />
 					</span>
 				</button>
 				{expanded && <ButtonStylesList {...buttonStylesProps} />}

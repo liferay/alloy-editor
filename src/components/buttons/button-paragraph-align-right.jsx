@@ -55,7 +55,7 @@ class ButtonParagraphAlignRight extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.alignRight}>
-				<ButtonIcon editor={this.props.editor} symbol="align-right" />
+				<ButtonIcon symbol="align-right" />
 			</button>
 		);
 	}

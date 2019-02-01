@@ -181,7 +181,7 @@ class ButtonTableEdit extends React.Component {
 					aria-label="Confirm"
 					className="ae-button"
 					onClick={this._createTable}>
-					<ButtonIcon editor={this.props.editor} symbol="check" />
+					<ButtonIcon symbol="check" />
 				</button>
 			</div>
 		);

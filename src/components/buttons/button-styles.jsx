@@ -67,10 +67,7 @@ class ButtonStyles extends React.Component {
 						<span className="ae-container-dropdown-selected-item">
 							{activeStyle}
 						</span>
-						<ButtonIcon
-							editor={this.props.editor}
-							symbol="caret-bottom"
-						/>
+						<ButtonIcon symbol="caret-bottom" />
 					</div>
 				</button>
 				{buttonStylesList}

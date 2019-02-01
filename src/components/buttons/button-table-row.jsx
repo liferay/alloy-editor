@@ -53,7 +53,7 @@ class ButtonTableRow extends React.Component {
 					role="combobox"
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.row}>
-					<ButtonIcon editor={this.props.editor} symbol="add-row" />
+					<ButtonIcon symbol="add-row" />
 				</button>
 				{buttonCommandsList}
 			</div>

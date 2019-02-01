@@ -48,7 +48,7 @@ class ButtonRemoveFormat extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.removeformat}>
-				<ButtonIcon editor={this.props.editor} symbol="remove-style" />
+				<ButtonIcon symbol="remove-style" />
 			</button>
 		);
 	}

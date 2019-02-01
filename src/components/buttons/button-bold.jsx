@@ -62,7 +62,7 @@ class ButtonBold extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.bold}>
-				<ButtonIcon editor={this.props.editor} symbol="bold" />
+				<ButtonIcon symbol="bold" />
 			</button>
 		);
 	}

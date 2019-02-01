@@ -118,7 +118,7 @@ class ButtonSpacing extends React.Component {
 					role="combobox"
 					tabIndex={tabIndex}>
 					<span>
-						<ButtonIcon editor={editor} symbol="separator" />
+						<ButtonIcon symbol="separator" />
 						&nbsp;
 						{activeSpacing}
 					</span>

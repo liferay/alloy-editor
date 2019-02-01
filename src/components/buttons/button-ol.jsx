@@ -58,7 +58,7 @@ class ButtonOrderedList extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.numberedlist}>
-				<ButtonIcon editor={this.props.editor} symbol="list-ol" />
+				<ButtonIcon symbol="list-ol" />
 			</button>
 		);
 	}

@@ -34,7 +34,7 @@ class ButtonTableRemove extends React.Component {
 				onClick={this._removeTable}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.deleteTable}>
-				<ButtonIcon editor={this.props.editor} symbol="trash" />
+				<ButtonIcon symbol="trash" />
 			</button>
 		);
 	}

@@ -55,10 +55,7 @@ class ButtonImageAlignRight extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.alignRight}>
-				<ButtonIcon
-					editor={this.props.editor}
-					symbol="align-image-right"
-				/>
+				<ButtonIcon symbol="align-image-right" />
 			</button>
 		);
 	}

@@ -151,10 +151,7 @@ class ButtonLinkEdit extends React.Component {
 					className="ae-button ae-button-clear"
 					onClick={this._clearLink}
 					title={AlloyEditor.Strings.clear}>
-					<ButtonIcon
-						editor={this.props.editor}
-						symbol="times-circle"
-					/>
+					<ButtonIcon symbol="times-circle" />
 				</button>
 			);
 		}
@@ -173,10 +170,7 @@ class ButtonLinkEdit extends React.Component {
 					disabled={!this.state.element}
 					onClick={this._removeLink}
 					title={AlloyEditor.Strings.remove}>
-					<ButtonIcon
-						editor={this.props.editor}
-						symbol="chain-broken"
-					/>
+					<ButtonIcon symbol="chain-broken" />
 				</button>
 				<div className="ae-container-input xxl">
 					{this.props.showTargetSelector && (
@@ -203,7 +197,6 @@ class ButtonLinkEdit extends React.Component {
 					onClick={this._updateLink}
 					title={AlloyEditor.Strings.confirm}>
 					<ButtonIcon
-						editor={this.props.editor}
 						symbol="check"
 						className="ae-icon-svg-check"
 					/>

@@ -59,7 +59,7 @@ class ButtonEmbed extends React.Component {
 					onClick={this._requestExclusive}
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.link}>
-					<ButtonIcon editor={this.props.editor} symbol="plus" />
+					<ButtonIcon symbol="plus" />
 				</button>
 			);
 		}

@@ -121,7 +121,6 @@ class ButtonEmbedEdit extends React.Component {
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.deleteEmbed}>
 					<ButtonIcon
-						editor={editor}
 						symbol="trash"
 						className="ae-icon-svg-trash"
 					/>
@@ -142,7 +141,7 @@ class ButtonEmbedEdit extends React.Component {
 						onClick={this._clearLink}
 						style={clearLinkStyle}
 						title={AlloyEditor.Strings.clear}>
-						<ButtonIcon editor={editor} symbol="times-clear" />
+						<ButtonIcon symbol="times-clear" />
 					</button>
 				</div>
 				<button
@@ -152,7 +151,6 @@ class ButtonEmbedEdit extends React.Component {
 					onClick={this._embedLink}
 					title={AlloyEditor.Strings.confirm}>
 					<ButtonIcon
-						editor={editor}
 						symbol="check"
 						className="ae-icon-svg-check"
 					/>

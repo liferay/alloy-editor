@@ -73,7 +73,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
 						className="ae-button"
 						onClick={this._updateImageAlt}
 						title={AlloyEditor.Strings.confirm}>
-						<ButtonIcon editor={this.props.editor} symbol="check" />
+						<ButtonIcon symbol="check" />
 					</button>
 				</div>
 			);

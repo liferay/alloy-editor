@@ -55,7 +55,7 @@ class ButtonParagraphJustify extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.alignJustify}>
-				<ButtonIcon editor={this.props.editor} symbol="align-justify" />
+				<ButtonIcon symbol="align-justify" />
 			</button>
 		);
 	}

@@ -42,7 +42,7 @@ class ButtonTable extends React.Component {
 					onClick={this.props.requestExclusive}
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.table}>
-					<ButtonIcon editor={this.props.editor} symbol="table" />
+					<ButtonIcon symbol="table" />
 				</button>
 			);
 		}

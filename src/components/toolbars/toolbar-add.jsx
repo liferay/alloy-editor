@@ -129,7 +129,7 @@ class ToolbarAdd extends React.Component {
 							ToolbarAdd.key
 						)}
 						title={AlloyEditor.Strings.add}>
-						<ButtonIcon editor={this.props.editor} symbol="plus" />
+						<ButtonIcon symbol="plus" />
 					</button>
 				);
 			}

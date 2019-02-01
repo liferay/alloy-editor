@@ -53,10 +53,7 @@ class ButtonTableColumn extends React.Component {
 					role="listbox"
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.column}>
-					<ButtonIcon
-						editor={this.props.editor}
-						symbol="add-column"
-					/>
+					<ButtonIcon symbol="add-column" />
 				</button>
 				{buttonCommandsList}
 			</div>

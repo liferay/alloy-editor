@@ -55,7 +55,7 @@ class ButtonIndentBlock extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.indent}>
-				<ButtonIcon editor={this.props.editor} symbol="indent-less" />
+				<ButtonIcon symbol="indent-less" />
 			</button>
 		);
 	}

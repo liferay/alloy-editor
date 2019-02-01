@@ -64,10 +64,7 @@ class ButtonTableHeading extends React.Component {
 							{activeHeadingIntro}{' '}
 							<strong>{activeHeadingLabel}</strong>
 						</span>
-						<ButtonIcon
-							editor={this.props.editor}
-							symbol="caret-bottom"
-						/>
+						<ButtonIcon symbol="caret-bottom" />
 					</div>
 				</button>
 				{buttonCommandsList}

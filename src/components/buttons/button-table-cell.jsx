@@ -52,7 +52,7 @@ class ButtonTableCell extends React.Component {
 					onClick={this.props.toggleDropdown}
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.cell}>
-					<ButtonIcon editor={this.props.editor} symbol="add-cell" />
+					<ButtonIcon symbol="add-cell" />
 				</button>
 				{buttonCommandsList}
 			</div>

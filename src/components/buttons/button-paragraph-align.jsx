@@ -59,14 +59,8 @@ class ButtonParagraphAlign extends React.Component {
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.row}>
 					<div className="ae-container">
-						<ButtonIcon
-							editor={this.props.editor}
-							symbol={iconClassName}
-						/>
-						<ButtonIcon
-							editor={this.props.editor}
-							symbol="caret-bottom"
-						/>
+						<ButtonIcon symbol={iconClassName} />
+						<ButtonIcon symbol="caret-bottom" />
 					</div>
 				</button>
 				{buttonCommandsList}
