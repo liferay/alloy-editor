@@ -1,5 +1,6 @@
-import ButtonIcon from './button-icon.jsx';
 import React from 'react';
+import ButtonIcon from './button-icon.jsx';
+import EditorContext from '../../adapter/editor-context';
 
 const KEY_ENTER = 13;
 const KEY_ESC = 27;
@@ -11,6 +12,8 @@ const KEY_ESC = 27;
  * @class ButtonEmbedEdit
  */
 class ButtonEmbedEdit extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
@@ -71,7 +74,7 @@ class ButtonEmbedEdit extends React.Component {
 	 * @method getInitialState
 	 */
 	getInitialState() {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 		let embed;
 
 		const selection = editor.getSelection();
@@ -108,7 +111,7 @@ class ButtonEmbedEdit extends React.Component {
 			opacity: this.state.linkHref ? 1 : 0,
 		};
 
-		const editor = this.props.editor;
+		const editor = this.context.editor;
 
 		return (
 			<div className="ae-container-edit-link">
@@ -184,7 +187,7 @@ class ButtonEmbedEdit extends React.Component {
 	 * @protected
 	 */
 	_embedLink = () => {
-		const nativeEditor = this.props.editor.get('nativeEditor');
+		const nativeEditor = this.context.editor.get('nativeEditor');
 
 		nativeEditor.execCommand('embedUrl', {
 			url: this.state.linkHref,
@@ -226,7 +229,7 @@ class ButtonEmbedEdit extends React.Component {
 		if (event.keyCode === KEY_ENTER) {
 			this._embedLink();
 		} else if (event.keyCode === KEY_ESC) {
-			const editor = this.props.editor.get('nativeEditor');
+			const editor = this.context.editor.get('nativeEditor');
 
 			// We need to cancelExclusive with the bound parameters in case the button is used
 			// inside another in exclusive mode (such is the case of the link button)
@@ -278,7 +281,7 @@ class ButtonEmbedEdit extends React.Component {
 	 * @protected
 	 */
 	_removeEmbed = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		const embedWrapper = this.state.element.getAscendant(function(element) {
 			return element.hasClass('cke_widget_wrapper');
