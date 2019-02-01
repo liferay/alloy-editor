@@ -8,7 +8,7 @@ import Lang from '../../oop/lang.js';
  * @class ButtonStyle
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class ButtonStyle extends WrappedComponent {
 		static contextType = EditorContext;
 
 		/**

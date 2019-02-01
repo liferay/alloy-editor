@@ -8,7 +8,7 @@ import EditorContext from '../../adapter/editor-context';
  * @class WidgetPosition
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class WidgetPosition extends WrappedComponent {
 		static contextType = EditorContext;
 
 		/**

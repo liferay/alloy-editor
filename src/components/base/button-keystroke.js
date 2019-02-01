@@ -8,7 +8,7 @@ import Lang from '../../oop/lang.js';
  * @class ButtonKeystroke
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class ButtonKeystroke extends WrappedComponent {
 		static contextType = EditorContext;
 
 		/**

@@ -9,7 +9,7 @@ import React from 'react';
  * @class ToolbarButtons
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class ToolbarButtons extends WrappedComponent {
 		static contextType = EditorContext;
 
 		/**

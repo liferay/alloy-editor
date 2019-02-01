@@ -13,7 +13,7 @@ import Lang from '../../oop/lang.js';
  * @class ButtonActionStyle
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class ButtonActionStyle extends WrappedComponent {
 		static contextType = EditorContext;
 
 		/**

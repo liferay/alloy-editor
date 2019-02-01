@@ -7,7 +7,7 @@ import EditorContext from '../../adapter/editor-context';
  * @class ButtonCommandActive
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class ButtonCommandActive extends WrappedComponent {
 		static contextType = EditorContext;
 
 		/**
