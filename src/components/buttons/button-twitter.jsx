@@ -1,5 +1,6 @@
 import ButtonIcon from './button-icon.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
+import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 
 const MAX_TWEET_LENGTH = 280;
@@ -12,6 +13,8 @@ const MAX_TWEET_LENGTH = 280;
  * @uses ButtonStateClasses
  */
 class ButtonTwitter extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
@@ -30,7 +33,7 @@ class ButtonTwitter extends React.Component {
 	 * @method handleClick
 	 */
 	handleClick = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		const linkUtils = new CKEDITOR.Link(editor);
 
@@ -56,7 +59,7 @@ class ButtonTwitter extends React.Component {
 	 */
 	isActive() {
 		const link = new CKEDITOR.Link(
-			this.props.editor.get('nativeEditor')
+			this.context.editor.get('nativeEditor')
 		).getFromSelection();
 
 		return (
@@ -100,7 +103,7 @@ class ButtonTwitter extends React.Component {
 	 * @return {String} A valid twitter url with the selected text and given configuration.
 	 */
 	_getHref() {
-		const nativeEditor = this.props.editor.get('nativeEditor');
+		const nativeEditor = this.context.editor.get('nativeEditor');
 		const selectedText = nativeEditor
 			.getSelection()
 			.getSelectedText()

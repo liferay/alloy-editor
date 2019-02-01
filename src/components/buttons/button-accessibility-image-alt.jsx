@@ -1,6 +1,7 @@
 import ButtonIcon from './button-icon.jsx';
 import ButtonProps from '../base/button-props.js';
 import ButtonStateClasses from '../base/button-state-classes.js';
+import EditorContext from '../../adapter/editor-context';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -14,6 +15,8 @@ import ReactDOM from 'react-dom';
  *
  */
 class ButtonAccessibilityImageAlt extends React.Component {
+	static contextType = EditorContext;
+
 	static key = 'AccessibilityImageAlt';
 
 	static propTypes = {
@@ -27,10 +30,10 @@ class ButtonAccessibilityImageAlt extends React.Component {
 		editor: PropTypes.object.isRequired,
 	};
 
-	constructor(prop, context) {
-		super(prop, context);
+	constructor(prop) {
+		super(prop);
 
-		const element = this.props.editor
+		const element = this.context.editor
 			.get('nativeEditor')
 			.getSelection()
 			.getSelectedElement();
@@ -158,7 +161,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	 * @method  _updateImageAlt
 	 */
 	_updateImageAlt = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		const imageAlt = this.refs.refAltInput.value;
 

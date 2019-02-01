@@ -1,4 +1,5 @@
 import React from 'react';
+import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonStylesListItemRemove class provides functionality for previewing a style definition
@@ -7,6 +8,8 @@ import React from 'react';
  * @class ButtonStylesListItemRemove
  */
 class ButtonStylesListItemRemove extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * Lifecycle. Returns the default values of the properties used in the widget.
 	 *
@@ -59,7 +62,7 @@ class ButtonStylesListItemRemove extends React.Component {
 	 * @protected
 	 */
 	_removeStyles = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		editor.execCommand('removeFormat');
 

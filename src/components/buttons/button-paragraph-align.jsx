@@ -1,6 +1,7 @@
+import React from 'react';
 import ButtonCommandsList from './button-commands-list.jsx';
 import ButtonIcon from './button-icon.jsx';
-import React from 'react';
+import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonParagraphAlign class provides functionality to work with table rows.
@@ -8,6 +9,8 @@ import React from 'react';
  * @class ButtonParagraphAlign
  */
 class ButtonParagraphAlign extends React.Component {
+	static contextType = EditorContext;
+
 	static key = 'paragraphAlign';
 
 	/**
@@ -27,7 +30,7 @@ class ButtonParagraphAlign extends React.Component {
 			buttonCommandsList = (
 				<ButtonCommandsList
 					commands={this._getCommands()}
-					editor={this.props.editor}
+					editor={this.context.editor}
 					listId={buttonCommandsListId}
 					inlineIcons={false}
 					onDismiss={this.props.toggleDropdown}
@@ -35,7 +38,7 @@ class ButtonParagraphAlign extends React.Component {
 			);
 		}
 
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		const activeCommand = this._getCommands()
 			.filter(alignment => {

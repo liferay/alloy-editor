@@ -2,6 +2,7 @@ import ButtonProps from '../base/button-props.js';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
+import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -14,6 +15,8 @@ import PropTypes from 'prop-types';
  * @uses ButtonStateClasses
  */
 class ButtonColor extends React.Component {
+	static contextType = EditorContext;
+
 	static key = 'color';
 
 	static propTypes = {
@@ -131,7 +134,7 @@ class ButtonColor extends React.Component {
 	}
 
 	_applyStyle(className) {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		const styleConfig = {
 			element: 'span',
@@ -168,7 +171,7 @@ class ButtonColor extends React.Component {
 	 * @return {Boolean} Returns true if the color is applied to the selection, false otherwise.
 	 */
 	_checkActive(styleConfig) {
-		const nativeEditor = this.props.editor.get('nativeEditor');
+		const nativeEditor = this.context.editor.get('nativeEditor');
 
 		// Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
 		// to a 'span' element works for most of those cases with no defined element.

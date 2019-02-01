@@ -1,6 +1,7 @@
+import React from 'react';
 import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
-import React from 'react';
+import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonStyles class provides functionality for styling a selection with a list of
@@ -10,6 +11,8 @@ import React from 'react';
  * @class ButtonStyles
  */
 class ButtonStyles extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
@@ -45,7 +48,7 @@ class ButtonStyles extends React.Component {
 			buttonStylesList = (
 				<ButtonStylesList
 					activeStyle={activeStyle}
-					editor={this.props.editor}
+					editor={this.context.editor}
 					onDismiss={this.props.toggleDropdown}
 					showRemoveStylesItem={this.props.showRemoveStylesItem}
 					styles={styles}
@@ -86,7 +89,7 @@ class ButtonStyles extends React.Component {
 	 * @return {Boolean} Returns true if the style is applied to the selection, false otherwise.
 	 */
 	_checkActive(styleConfig) {
-		const nativeEditor = this.props.editor.get('nativeEditor');
+		const nativeEditor = this.context.editor.get('nativeEditor');
 
 		// Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
 		// to a 'span' element works for most of those cases with no defined element.

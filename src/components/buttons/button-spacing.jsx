@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
+import React from 'react';
 import ButtonIcon from './button-icon.jsx';
 import ButtonProps from '../base/button-props.js';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import ButtonStylesList from './button-styles-list.jsx';
-import PropTypes from 'prop-types';
-import React from 'react';
+import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonSpacing class provides functionality for changing text color in a document.
@@ -14,6 +15,8 @@ import React from 'react';
  * @class ButtonSpacing
  */
 class ButtonSpacing extends React.Component {
+	static contextType = EditorContext;
+
 	static key = 'spacing';
 
 	static propTypes = {
@@ -129,7 +132,7 @@ class ButtonSpacing extends React.Component {
 	}
 
 	_applyStyle(className) {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		const styleConfig = {
 			element: 'div',
@@ -166,7 +169,7 @@ class ButtonSpacing extends React.Component {
 	 * @return {Boolean} Returns true if the spacing is applied to the selection, false otherwise.
 	 */
 	_checkActive(styleConfig) {
-		const nativeEditor = this.props.editor.get('nativeEditor');
+		const nativeEditor = this.context.editor.get('nativeEditor');
 
 		let active = true;
 

@@ -1,4 +1,5 @@
 import ButtonIcon from './button-icon.jsx';
+import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -14,6 +15,8 @@ const KEY_ESC = 27;
  * @class ButtonEmbedVideoEdit
  */
 class ButtonEmbedVideoEdit extends React.Component {
+	static contextType = EditorContext;
+
 	static key = 'embedVideoEdit';
 
 	static propTypes = {
@@ -27,8 +30,8 @@ class ButtonEmbedVideoEdit extends React.Component {
 		editor: PropTypes.object.isRequired,
 	};
 
-	constructor(props, context) {
-		super(props, context);
+	constructor(props) {
+		super(props);
 
 		this.state = this.getInitialState();
 	}
@@ -76,7 +79,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 	 * @method getInitialState
 	 */
 	getInitialState() {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 		let element;
 
 		const selection = editor.getSelection();
@@ -174,7 +177,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 	 * @protected
 	 */
 	_embedVideoURL = () => {
-		const nativeEditor = this.props.editor.get('nativeEditor');
+		const nativeEditor = this.context.editor.get('nativeEditor');
 
 		nativeEditor.execCommand('embedUrl', {
 			type: 'video',

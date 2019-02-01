@@ -1,4 +1,5 @@
 import React from 'react';
+import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonCameraImage class takes photo from camera and inserts it to the content.
@@ -6,6 +7,8 @@ import React from 'react';
  * @class ButtonCameraImage
  */
 class ButtonCameraImage extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * Lifecycle. Returns the default values of the properties used in the widget.
 	 *
@@ -139,7 +142,7 @@ class ButtonCameraImage extends React.Component {
 				'<img src="' + imgURL + '">'
 			);
 
-			const editor = this.props.editor.get('nativeEditor');
+			const editor = this.context.editor.get('nativeEditor');
 
 			editor.insertElement(el);
 

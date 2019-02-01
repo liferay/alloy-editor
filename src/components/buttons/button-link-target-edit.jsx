@@ -1,5 +1,6 @@
 import ButtonIcon from './button-icon.jsx';
 import ButtonTargetList from './button-target-list.jsx';
+import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 
 /**
@@ -9,6 +10,8 @@ import React from 'react';
  * @class ButtonLinkTargetEdit
  */
 class ButtonLinkTargetEdit extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
@@ -52,7 +55,7 @@ class ButtonLinkTargetEdit extends React.Component {
 				</button>
 				{this.props.expanded && (
 					<ButtonTargetList
-						editor={this.props.editor}
+						editor={this.context.editor}
 						onDismiss={this.props.toggleDropdown}
 						allowedLinkTargets={allowedLinkTargets}
 						handleLinkTargetChange={handleLinkTargetChange}

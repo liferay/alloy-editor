@@ -1,5 +1,6 @@
 import ButtonActionStyle from '../base/button-action-style.js';
 import ButtonStyle from '../base/button-style.js';
+import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 
 /**
@@ -11,6 +12,8 @@ import React from 'react';
  * @uses ButtonStyle
  */
 class ButtonStylesListItem extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
@@ -83,7 +86,7 @@ class ButtonStylesListItem extends React.Component {
 		// Typically, we want the style to be the only one applied to the current selection, so
 		// we execute the 'removeFormat' command first. Note that block styles won't be cleaned.
 		// However, this is consistent with other editors implementations of this feature.
-		this.props.editor.get('nativeEditor').execCommand('removeFormat');
+		this.context.editor.get('nativeEditor').execCommand('removeFormat');
 
 		this.applyStyle();
 	};
