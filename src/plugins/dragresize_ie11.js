@@ -56,7 +56,7 @@
             '}' +
             // Top-left corner style of the resizer.
             '.cke_image_resizer.cke_image_resizer_nw{' +
-                'cursor:nw-resize;' +    
+                'cursor:nw-resize;' +
                 'left:-5px;' +
                 'right:auto;' +
                 'top:-5px;' +
@@ -1335,8 +1335,10 @@
                 resizer.removeClass( 'cke_image_resizing' );
 
                 if ( updateData ) {
-                    widget.element.$.style.width = newWidth + 'px';
-                    widget.element.$.style.height = newHeight + 'px';
+                    widget.setData({
+                        height: newHeight,
+                        width: newWidth
+                    });
 
                     // Save another undo snapshot: after resizing.
                     editor.fire( 'saveSnapshot' );
