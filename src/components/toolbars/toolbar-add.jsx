@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import EditorContext from '../../adapter/editor-context';
 import ToolbarButtons from '../base/toolbar-buttons.js';
 import WidgetArrowBox from '../base/widget-arrow-box.js';
 import WidgetDropdown from '../base/widget-dropdown.js';
@@ -23,6 +24,8 @@ let POSITION_RIGHT = 2;
  * @uses WidgetPosition
  */
 class ToolbarAdd extends React.Component {
+	static contextType = EditorContext;
+
 	constructor(props) {
 		super(props);
 
@@ -188,7 +191,7 @@ class ToolbarAdd extends React.Component {
 
 				let startRect = region.startRect || region;
 
-				let nativeEditor = this.props.editor.get('nativeEditor');
+				let nativeEditor = this.context.editor.get('nativeEditor');
 
 				let clientRect = nativeEditor.editable().getClientRect();
 
@@ -215,7 +218,7 @@ class ToolbarAdd extends React.Component {
 				domNode.style.top =
 					Math.floor((region.bottom + region.top) / 2) + 'px';
 
-				const uiNode = this.props.editor.get('uiNode');
+				const uiNode = this.context.editor.get('uiNode');
 
 				const scrollTop = uiNode ? uiNode.scrollTop : 0;
 
