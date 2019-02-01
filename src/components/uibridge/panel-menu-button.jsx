@@ -1,5 +1,6 @@
-import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import React from 'react';
+import ButtonDropdown from '../buttons/button-dropdown.jsx';
+import EditorContext from '../../adapter/editor-context';
 
 (function() {
 	'use strict';
@@ -35,6 +36,8 @@ import React from 'react';
 
 		if (!PanelMenuButtonBridge) {
 			PanelMenuButtonBridge = class extends React.Component {
+				static contextType = EditorContext;
+
 				static displayName = panelMenuButtonName;
 
 				static key = panelMenuButtonName;
@@ -44,7 +47,7 @@ import React from 'react';
 				createPanel() {}
 
 				render() {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 
 					let panelMenuButtonDisplayName =
 						PANEL_MENU_DEFS[editor.name][panelMenuButtonName]
@@ -112,7 +115,7 @@ import React from 'react';
 				}
 
 				_getPanel() {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 
 					let panelMenuButtonOnBlock =
 						PANEL_MENU_DEFS[editor.name][panelMenuButtonName]

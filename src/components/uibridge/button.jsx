@@ -1,4 +1,5 @@
 import React from 'react';
+import EditorContext from '../../adapter/editor-context';
 
 (function() {
 	'use strict';
@@ -30,6 +31,8 @@ import React from 'react';
 
 		if (!ButtonBridge) {
 			ButtonBridge = class extends React.Component {
+				static contextType = EditorContext;
+
 				static displayName = buttonName;
 
 				static key = buttonName;
@@ -40,7 +43,7 @@ import React from 'react';
 				toFeature() {}
 
 				render() {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 
 					let buttonClassName = 'ae-button ae-button-bridge';
 
@@ -90,7 +93,7 @@ import React from 'react';
 				}
 
 				_handleClick = () => {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 
 					let buttonCommand =
 						BUTTON_DEFS[editor.name][buttonName].command;
