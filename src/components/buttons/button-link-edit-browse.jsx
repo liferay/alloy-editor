@@ -73,11 +73,11 @@ class ButtonLinkEditBrowse extends React.Component {
 	_browseClick = () => {
 		const editor = this.props.editor.get('nativeEditor');
 		const url = editor.config.documentBrowseLinkUrl;
-		const cb = editor.config.documentBrowseLinkCallback;
+		const documentBrowseLinkCallback = editor.config.documentBrowseLinkCallback;
 		const linkTarget = this.linkEditButtonRef.current.state.linkTarget;
 
 		if (Lang.isFunction(cb)) {
-			cb.apply(null, [editor, url, linkTarget]);
+			documentBrowseLinkCallback.apply(null, [editor, url, this._updateLink]);
 		}
 	};
 
@@ -91,7 +91,7 @@ class ButtonLinkEditBrowse extends React.Component {
 	 * @param {String} linkTarget target value for the link
 	 * @param {String} linkTitle if the link is a title that points to a wiki page (only works for creole)
 	 */
-	_updateLink(linkHref, linkTarget, linkTitle) {
+	_updateLink = (linkHref, linkTarget, linkTitle) => {
 		const editor = this.props.editor.get('nativeEditor');
 		const linkUtils = new CKEDITOR.Link(editor, {appendProtocol: false});
 		const linkAttrs = {
