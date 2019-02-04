@@ -26,14 +26,14 @@ class ButtonItemSelectorVideo extends React.Component {
 				data-type="button-video"
 				onClick={this._handleClick}
 				tabIndex={this.props.tabIndex}>
-				<ButtonIcon editor={this.props.editor} symbol="video"/>
+				<ButtonIcon editor={this.props.editor} symbol="video" />
 			</button>
 		);
 	}
 
 	_handleClick = () => {
 		this.execCommand(null);
-	}
+	};
 }
 
 export default ButtonCommand(ButtonItemSelectorVideo);

@@ -121,7 +121,7 @@ class ButtonLinkEditBrowse extends React.Component {
 
 			editor.fire('actionPerformed', this);
 		}
-	}
+	};
 }
 
 export default ButtonLinkEditBrowse;

@@ -26,14 +26,14 @@ class ButtonItemSelectorImage extends React.Component {
 				data-type="button-image"
 				onClick={this._handleClick}
 				tabIndex={this.props.tabIndex}>
-				<ButtonIcon editor={this.props.editor} symbol="picture"/>
+				<ButtonIcon editor={this.props.editor} symbol="picture" />
 			</button>
 		);
 	}
 
 	_handleClick = () => {
 		this.execCommand(null);
-	}
+	};
 }
 
 export default ButtonCommand(ButtonItemSelectorImage);

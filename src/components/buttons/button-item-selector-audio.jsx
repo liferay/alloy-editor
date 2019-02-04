@@ -25,14 +25,14 @@ class ButtonItemSelectorAudio extends React.Component {
 				data-type="button-audio"
 				onClick={this._handleClick}
 				tabIndex={this.props.tabIndex}>
-				<ButtonIcon editor={this.props.editor} symbol="audio"/>
+				<ButtonIcon editor={this.props.editor} symbol="audio" />
 			</button>
 		);
 	}
 
 	_handleClick = () => {
 		this.execCommand(null);
-	}
+	};
 }
 
 export default ButtonCommand(ButtonItemSelectorAudio);
