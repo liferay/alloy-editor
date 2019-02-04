@@ -1,0 +1,6 @@
+<svg id="custom-field" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<polygon class="lexicon-icon-outline custom-field-cursor" points="416,32 416,0 288,0 288,32 320,32 320,480 288,480 288,512 416,512 416,480 384,480 384,32 "/>
+	<path class="lexicon-icon-outline custom-field-placeholder" d="M224,224h-96c-41.6,0-41.6,60.8,0,64h96C265.6,288,265.6,224,224,224z"/>
+	<path class="lexicon-icon-outline custom-field-border1" d="M288,352H64V160h224V96H32c-19.2,0-32,12.8-32,32v256c0,19.2,12.8,32,32,32h256V352z"/>
+	<path class="lexicon-icon-outline custom-field-border2" d="M480,96h-64v64h32v192h-32v64h64c19.2,0,32-12.8,32-32V128C512,108.8,499.2,96,480,96z"/>
+</svg>

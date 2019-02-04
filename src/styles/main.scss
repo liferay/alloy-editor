@@ -1,0 +1,29 @@
+@import "variables"; // variables of clay
+@import "site/variables"; // variables of the site
+
+@import "atlas"; // clay?
+
+@import "site/site"; // general site (new) -> general?
+@import "navbar"; // navbar
+@import "footer"; // footer
+
+@import "landing"; // home
+@import "docs"; // page with sidebar "themes"
+@import "code"; // style of sidebar-offset's content
+@import "prismjs"; // style of sidebar-offset-content's code
+
+// @import "site/content-site";
+
+// @import "sidebar";
+// @import "site/sidebar-site";
+
+// @import "charts";
+// @import "animations";
+// @import "api";
+// @import "autocomplete";
+// @import "onboarding";
+// @import "docsearch";
+// @import "guide";
+// @import "login";
+// @import "try";
+// @import "updates";

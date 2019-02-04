@@ -1,0 +1,10 @@
+.login {
+    width: 350px;
+    margin: 0 auto;
+
+    .sheet {
+        position: relative;
+        top: 100%;
+        transform: translateY(-50%);
+    }
+}

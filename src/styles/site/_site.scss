@@ -1,0 +1,62 @@
+// We use this file to define the general styles of the website
+
+.container {
+	padding-left: $grid-gutter-width/2*3;
+	padding-right: $grid-gutter-width/2*3;
+    @include media-breakpoint-up(sm) {
+		padding-left: $grid-gutter-width/2;
+		padding-right: $grid-gutter-width/2;
+    }
+}
+
+// New Boostrap Classes (remove this part when bootstrap 4.2+ is installed)
+.mb-n5 {
+	margin-bottom: -3rem!important;
+}
+
+.text-decoration-none {
+	text-decoration: none!important;
+}
+
+.min-vh-100 {
+	min-height: 100vh;
+}
+
+// Element Classes
+.btn-white {
+	color: $primary;
+	box-shadow: 0px 8px 16px rgba(39, 40, 51, 0.16);
+
+	&:hover {
+			color: $primary;
+	}
+}
+
+.bg-light2 {
+	background-color: #E7E7ED;
+}
+
+.card {
+	transition: all 0.4s;
+
+	&:hover {
+			box-shadow: 6px 9px 36px rgba(48, 49, 63, 0.2);
+			transform: translateY(-4px);
+	}
+}
+
+.title-1 {
+	font-size: 40px;
+
+	@include media-breakpoint-up(lg) {
+			font-size: 56px;
+	}
+}
+
+.pt-header {
+	padding-top: $header-height;
+
+	@include media-breakpoint-up(md) {
+		padding-top: $header-height-md;
+	}
+}

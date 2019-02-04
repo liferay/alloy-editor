@@ -1,0 +1,5 @@
+<svg id="align-image-center" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="lexicon-icon-outline align-image-center-page-bottom" d="M479.9,480H32c-43.7-2-41.5-62.2,0-64h447.9C524.5,418.1,520.8,478.6,479.9,480z"/>
+	<path class="lexicon-icon-outline align-image-center-page-top" d="M479.9,96H32c-43.7-2-41.5-62.2,0-64h447.9C524.5,34.1,520.8,94.7,479.9,96z"/>
+	<rect class="lexicon-icon-outline align-image-center-image" x="128" y="160" width="256" height="192"/>
+</svg>

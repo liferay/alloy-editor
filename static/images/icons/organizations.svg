@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="organizations" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0px"
+	 y="0px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<path class="lexicon-icon-outline" d="M468,320h-20v-64c0-17.6729-14.3271-32-32-32H288v-32h20c24.2617,0,44-19.7383,44-44V44c0-24.2617-19.7383-44-44-44H204
+	c-24.2617,0-44,19.7383-44,44v104c0,24.2617,19.7383,44,44,44h20v32H96c-17.6729,0-32,14.3271-32,32v64H44
+	c-24.2617,0-44,19.7383-44,44v104c0,24.2617,19.7383,44,44,44h104c24.2617,0,44-19.7383,44-44V364c0-24.2617-19.7383-44-44-44h-20
+	v-32h256v32h-20c-24.2617,0-44,19.7383-44,44v104c0,24.2617,19.7383,44,44,44h104c24.2617,0,44-19.7383,44-44V364
+	C512,339.7383,492.2617,320,468,320z M224,64h64v64h-64V64z M128,448H64v-64h64V448z M448,448h-64v-64h64V448z"/>
+</svg>

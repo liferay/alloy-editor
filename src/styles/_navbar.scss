@@ -1,0 +1,54 @@
+// We use this file to define the style of the header/navbar
+
+.navbar {
+	padding: 16px 24px;
+	transition: all 0.4s ease-in-out;
+	will-change: background-color, padding;
+
+	&.scroll {
+		background-color: $primary;
+		padding: 16px 24px;
+	}
+
+	.navbar-nav {
+		font-size: 14px;
+		width: 100%;
+
+		.nav-item .nav-link {
+			position: relative;
+
+			&:before {
+				border: 5px solid;
+				content: '';
+				position: absolute;
+				left: 50%;
+				bottom: 0;
+				opacity: 0;
+			}
+		}
+
+		@include media-breakpoint-up(sm) {
+			font-size: 18px;
+		}
+
+		@include media-breakpoint-up(md) {
+			width: auto;
+		}
+	}
+
+	.logo {
+		max-height: 32px;
+	}
+
+	.brand {
+		font-size: 18px;
+
+		@include media-breakpoint-up(sm) {
+			font-size: 20px;
+		}
+	}
+
+    @include media-breakpoint-up(lg) {
+		padding: 32px 56px;
+    }
+}

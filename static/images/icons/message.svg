@@ -1,0 +1,5 @@
+<svg id="message" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="lexicon-icon-outline message-speech-balloon-outline" d="M480,31.9H32c-19.2,0-32,12.8-32,32v320c0,19.2,12.8,32,32,32h64v32c0,25.6,32,44.8,54.4,22.4l54.4-54.4l0,0H480c19.2,0,32-12.8,32-32v-320C512,44.7,499.2,31.9,480,31.9z M448,351.9H64v-256h384V351.9z"/>
+	<path class="lexicon-icon-outline message-speech-balloon-content1" d="M336,159.9H144c-22.4,0-22.4,32,0,32h192C355.2,191.9,358.4,159.9,336,159.9z"/>
+	<path class="lexicon-icon-outline message-speech-balloon-content2" d="M272,255.9H144c-22.4,0-22.4,32,0,32h128C291.2,287.9,294.4,255.9,272,255.9z"/>
+</svg>

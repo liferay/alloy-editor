@@ -1,0 +1,34 @@
+.container {
+    max-width: 34rem;
+}
+
+.social {
+    text-align: center;
+    margin-top: 96px;
+    margin-bottom: 144px;
+}
+
+.social .social-banner {
+    margin-bottom: 12px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.social-banner-title {
+    font-weight: bold;
+}
+
+.social .social-buttons .social-button {
+    transition: background-color 0.3s ease-in-out;
+    display: inline-block;
+    height: 48px;
+    width: 48px;
+    border-bottom: none;
+    border-radius: 50%;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+

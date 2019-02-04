@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<path class="lexicon-icon-body" fill="none" d="M419.1,96L419.1,96L384,96V64c0-35.3-28.7-64-64-64H192c-35.3,0-64,28.7-64,64v32H92.9C41.6,96,0,137.6,0,188.9
+	v230.2C0,470.4,41.6,512,92.9,512h326.2c51.3,0,92.9-41.6,92.9-92.9V188.9C512,137.6,470.4,96,419.1,96z M320,96H192V64h128V96z"/>
+<path class="lexicon-icon-outline" d="M419.1,96H384V64c0-35.3-28.7-64-64-64H192c-35.3,0-64,28.7-64,64v32H92.9C41.6,96,0,137.6,0,188.9v230.2
+	C0,470.4,41.6,512,92.9,512h326.2c51.3,0,92.9-41.6,92.9-92.9V188.9C512,137.6,470.4,96,419.1,96L419.1,96z M192,64h128v32H192V64z
+	 M448,419.1c0,15.9-13,28.9-28.9,28.9H92.9C77,448,64,435,64,419.1V188.9C64,173,77,160,92.9,160h326.2c15.9,0,28.9,13,28.9,28.9
+	V419.1z"/>
+</svg>

@@ -1,0 +1,171 @@
+// We use this file to define the style of the document-page
+
+.sidebar {
+    left: 0;
+    transform: translateX(-100%);
+    transition: 300ms ease-in-out;
+	top: 0;
+	width: 100%;
+    z-index: 10;
+
+    &.toggler-expanded {
+		transform: translateX(0%);
+	}
+
+	a {
+		color: $secondary;
+	}
+
+	.nav-nested {
+		& > li:not(.active) > ul {
+			display: none;
+		}
+	}
+
+	.nav-pills {
+		& > li > {
+			a {
+				display: block;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				position: relative;
+
+				span {
+					display: inline-block;
+					vertical-align: middle;
+					position: relative;
+
+					&:before {
+						border: 5px solid;
+						content: '';
+						position: absolute;
+						left: -20px;
+						top: 7px;
+						display: none;
+					}
+				}
+
+				.clay-icon {
+					display: inline-block;
+					fill: currentColor;
+					height: 16px;
+					vertical-align: middle;
+					width: 16px;
+				}
+			}
+		}
+
+		& > li.active > a,
+		& > li > ul > li.active > a {
+			font-weight: 700;
+
+			span:before {
+				display: inline-block;
+			}
+		}
+
+		& li {
+			> a > .collapse-toggle {
+				display: inline-block;
+				height: 40px;
+				margin: 0;
+				min-height: auto;
+				padding: 12px;
+				position: absolute;
+				right: 0;
+				top: 0;
+				transform: rotate(-90deg);
+				transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+				width: 40px;
+			}
+
+			&.active > a > .collapse-toggle {
+				transform: rotate(0);
+			}
+		}
+	}
+
+    @include media-breakpoint-up(lg) {
+        transform: translateX(0%);
+        width: $sidebar-width;
+    }
+}
+
+.sidebar-offset {
+	min-height: 100vh;
+
+	@include media-breakpoint-up(lg) {
+		padding-left: $sidebar-width;
+	}
+}
+
+.docs-content {
+	color: $secondary;
+
+	h1, h2, h3, h4, h5, h6 {
+		color: $dark;
+		font-weight: 700;
+		margin-bottom: 1.5rem;
+	}
+
+	h1 {
+		font-size: 24px;
+
+		@include media-breakpoint-up(sm) {
+			font-size: 32px;
+		}
+	}
+
+	h2 {
+		font-size: 20px;
+
+		@include media-breakpoint-up(sm) {
+			font-size: 24px;
+		}
+	}
+
+	h3 {
+		font-size: 18px;
+
+		@include media-breakpoint-up(sm) {
+			font-size: 22px;
+		}
+	}
+
+	h4 {
+		font-size: 16px;
+
+		@include media-breakpoint-up(sm) {
+			font-size: 20px;
+		}
+	}
+
+	h5 {
+		font-size: 16px;
+
+		@include media-breakpoint-up(sm) {
+			font-size: 18px;
+		}
+	}
+
+	h6 {
+		font-size: 16px;
+
+		@include media-breakpoint-up(sm) {
+			font-size: 16px;
+		}
+	}
+
+	img {
+		@extend .img-fluid;
+	}
+
+	p {
+		// @extend .col-xl-8;
+		// @extend .mx-auto;
+
+		&:last-child(){
+			margin-bottom: 0;
+		}
+	}
+}

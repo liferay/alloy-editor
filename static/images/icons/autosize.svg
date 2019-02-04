@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+<path class="lexicon-icon-outline autosize-border" d="M460.8,51.2v409.6H51.2V51.2H460.8 M460.8,0H51.2C23,0,0,23,0,51.2v409.6C0,489,23,512,51.2,512h409.6
+c28.2,0,51.2-23,51.2-51.2V51.2C512,23,489,0,460.8,0L460.8,0z"/>
+<path class="lexicon-icon-outline autosize-arrow-bottom-left" d="M128,409.6h69.1c23,0,33.3-28.2,17.9-43.5l-15.4-15.4l46.1-46.1c22-21.8-8.7-60.4-35.8-35.8l-46.1,46.1l-15.4-15.4c-15.4-15.4-43.5-5.1-43.5,17.9v69.1C102.4,399.4,112.6,409.6,128,409.6z"/>
+<path class="lexicon-icon-outline autosize-arrow-top-right" d="M384,102.4h-69.1c-23,0-33.3,28.2-17.9,43.5l15.4,15.4l-46.1,46.1c-23.5,24.8,12,58.9,35.8,35.8l46.1-46.1l15.4,15.4c15.4,15.4,43.5,5.1,43.5-17.9v-69.1C409.6,112.6,399.4,99.8,384,102.4z"/>
+</svg>

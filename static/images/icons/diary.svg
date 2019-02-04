@@ -1,0 +1,5 @@
+<svg id="diary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="lexicon-icon-outline diary-inner-content1" d="M305.7,128h-99.4c-19.3,0-19.3,32,0,32h99.4C325,160,325,128,305.7,128L305.7,128z"/>
+	<path class="lexicon-icon-outline diary-inner-content2" d="M305.7,192h-99.4c-19.3,0-19.3,32,0,32h99.4C325,224,325,192,305.7,192L305.7,192z"/>
+	<path class="lexicon-icon-outline diary-border" d="M384,0H57.2C25.6,0,0,25.6,0,57.2v397.5C0,486.4,25.6,512,57.2,512H384c35.3,0,64-28.7,64-64v-96h32c42,0,42-64,0-64h-32v-32h32c42,0,42-64,0-64h-32v-32h32c42,0,42-64,0-64h-32V64C448,28.7,419.3,0,384,0L384,0z M128,448V64h256v384H128L128,448z"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg id="textbox" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="lexicon-icon-outline" d="M448,64H64C28.7,64,0,92.7,0,128v256c0,35.3,28.7,64,64,64h384c35.3,0,64-28.7,64-64V128C512,92.7,483.3,64,448,64z M232.2,375.6l-19.6-68h-84.5l-19.6,68H63.2L145,124.5h52.2L279,375.6H232.2z M448,375.6H320v-32h128
+	V375.6z"/>
+	<polygon class="lexicon-icon-outline" points="170.3,159.1 138.5,272.7 202.6,272.7 "/>
+</svg>

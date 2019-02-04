@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="print" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<path class="lexicon-icon-body" fill="none" d="M448,96h-63.5V33c0-18.2-14.8-33-33-33H161.4c-18.2,0-33,14.8-33,33v63H64c-35.3,0-64,27.7-64,63v193.3
+	c0,35.3,28.7,64,64,64h32.6v64.3c0,18.2,14.8,33,33,33h254.9c18.2,0,32-14.8,32-33v-64.3H448c35.3,0,64-28.7,64-64V159
+	C512,123.7,483.3,96,448,96z"/>
+<path class="lexicon-icon-outline" d="M448,96h-63.5V33c0-18.2-14.8-33-33-33H161.4c-18.2,0-33,14.8-33,33v63H64c-35.3,0-64,27.7-64,63v193.3
+	c0,35.3,28.7,64,64,64h32.6v64.3c0,18.2,14.8,33,33,33h254.9c18.2,0,32-14.8,32-33v-64.3H448c35.3,0,64-28.7,64-64V159
+	C512,123.7,483.3,96,448,96z M192.4,64h128.1v32.4H192.4V64z M351.6,447.6h-191v-95.3h190.9L351.6,447.6z M448,352.3h-31.4v-31.1
+	c0-18.2-14.8-33-33-33h-254c-18.2,0-33,14.8-33,33v31.1H64V160h384V352.3L448,352.3z"/>
+<circle class="lexicon-icon-outline" cx="112" cy="208.3" r="16"/>
+<circle class="lexicon-icon-outline" cx="176.3" cy="208" r="15.7"/>
+</svg>

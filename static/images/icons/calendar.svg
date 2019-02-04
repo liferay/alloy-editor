@@ -1,0 +1,18 @@
+<svg id="calendar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="calendar-border lexicon-icon-outline" d="M512,160c0-35-28.7-64-63.7-64l-0.3,0v-64c0-44-64-41-64,0v64h-96v-64c0-40-64-44-64,0v64h-96v-64c0-45-64-40-64,0v64l-0.3,0c-35,0-63.7,29-63.7,64V448c0,35,29,64,64,64h352l96-96V160z M384,448.1v-64h64L384,448.1z M448,320H320v128H64V160h384V320z"/>
+	<rect class="calendar-date lexicon-icon-outline" x="96" y="192" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="160" y="192" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="224" y="192" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="288" y="192" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="352" y="192" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="96" y="256" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="160" y="256" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="224" y="256" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="288" y="256" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="352" y="256" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="96" y="320" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="96" y="384" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="160" y="384" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="160" y="320" width="32" height="32"/>
+	<rect class="calendar-date lexicon-icon-outline" x="224" y="320" width="32" height="32"/>
+</svg>

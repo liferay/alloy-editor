@@ -1,0 +1,5 @@
+<svg id="shopping-cart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<circle class="lexicon-icon-outline shopping-cart-wheel1" cx="144" cy="464" r="48"/>
+	<circle class="lexicon-icon-outline shopping-cart-wheel2" cx="432" cy="464" r="48"/>
+	<path class="lexicon-icon-outline shopping-cart-basket" d="M495.9,352.1H192.5c-17.7,0-32.4-14.2-32.4-31.8s14.9-31.9,32.6-31.9c2.5,0,305-34.8,305-34.8c8.1-0.9,14.2-7.7,14.2-15.9V80.1c0-8.8-7.1-15.9-15.9-15.9H129.2l-20.8-53.9C106,4.1,100.1,0,93.5,0H16C-5.5,0.7-5.1,31.7,16.1,32h66.5l88.2,228.5c-24.4,9-42.6,32.2-42.6,59.7c0,35.3,29.2,63.8,64.5,63.8H496C517.9,382.5,516.6,353,495.9,352.1z M288.1,160.1v-64h94.5L384,160L288.1,160.1z M480.1,160H416l0.1-64h64V160z M256,96.1l0.1,63.9h-89.9l-24.7-63.9H256z"/>
+</svg>

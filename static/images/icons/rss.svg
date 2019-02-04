@@ -1,0 +1,5 @@
+<svg id="rss" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<circle class="lexicon-icon-outline rss-dot" cx="78.6" cy="433.4" r="76.7"/>
+	<path class="lexicon-icon-outline rss-wave-1" d="M41.9,152c-54.9,0-54.9,81.5,0,83.8c129.2,0,234.3,105.1,234.3,234.3c0,54.1,83.8,57.4,83.8,0C360,276.9,199,152,41.9,152z"/>
+	<path class="lexicon-icon-outline rss-wave-2" d="M41.9,0C-14,0-12,83.8,41.9,83.8C256,83.8,428.2,256,428.2,470.1c0,55.8,83.8,52.8,83.8,0C512,212.9,305,0,41.9,0z"/>
+</svg>

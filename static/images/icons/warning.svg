@@ -1,0 +1,5 @@
+<svg id="warning" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="lexicon-icon-outline warning-border" d="M496.1,409.7L290.8,54.1c-15.8-26.4-52.5-27.1-69.6,0L15.9,409.7c-13.9,26,1.1,60.2,34.8,60.2h410.6C491.7,469.9,512,438,496.1,409.7z M83.2,407L256,107.6L428.8,407H83.2z"/>
+	<path class="lexicon-icon-outline warning-stem" d="M284,285v-75c0-38-56-37.5-56,0v75C228,322.5,284,322,284,285z"/>
+	<circle class="lexicon-icon-outline warning-dot" cx="256" cy="361.9" r="32"/>
+</svg>

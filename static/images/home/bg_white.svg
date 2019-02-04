@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1056px" height="1056px" viewBox="0 0 1056 1056" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M216,336 L240,120 C240,53.72583 186.27417,0 120,0 C53.72583,0 0,53.72583 0,120 L24,336 L216,336 Z" id="path-1"></path>
+        <path d="M744,864 L768,648 C768,581.72583 714.27417,528 648,528 C581.72583,528 528,581.72583 528,648 L552,864 L744,864 Z" id="path-2"></path>
+        <circle id="path-3" cx="684" cy="324" r="60"></circle>
+        <circle id="path-4" cx="612" cy="444" r="60"></circle>
+        <circle id="path-5" cx="156" cy="852" r="60"></circle>
+        <circle id="path-6" cx="84" cy="972" r="60"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-Copy-9">
+            <g id="Group-2">
+                <rect id="Rectangle-5" fill="#F7F7F9" x="0" y="0" width="1056" height="1056"></rect>
+                <g id="Group" transform="translate(12.000000, 12.000000)">
+                    <rect id="Rectangle-7-Copy-13" stroke="#FFFFFF" stroke-width="24" transform="translate(384.000000, 252.000000) scale(1, -1) translate(-384.000000, -252.000000) " x="276" y="12" width="216" height="480"></rect>
+                    <path d="M285,300 L413,300" id="Line-Copy-2" stroke="#FFFFFF" stroke-width="24" stroke-linecap="square"></path>
+                    <path d="M285,396 L413,396" id="Line-Copy-4" stroke="#FFFFFF" stroke-width="24" stroke-linecap="square"></path>
+                    <path d="M285,204 L413,204" id="Line-Copy-7" stroke="#FFFFFF" stroke-width="24" stroke-linecap="square"></path>
+                    <circle id="Oval-2-Copy-21" stroke="#FFFFFF" stroke-width="24" transform="translate(408.000000, 96.000000) scale(1, -1) translate(-408.000000, -96.000000) " cx="408" cy="96" r="36"></circle>
+                    <path d="M81.7297322,404.408382 L81.7297322,284.5 L159.56757,284.5 L159.56757,405.760328 L180,414.22973 L160.540541,492.067568 L82.7027027,492.067568 L60,414.22973 L81.7297322,404.408382 Z" id="Combined-Shape" stroke="#FFFFFF" stroke-width="24"></path>
+                    <g id="Combined-Shape">
+                        <use fill="#F7F7F9" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <path stroke="#FFFFFF" stroke-width="24" d="M205.259486,324 L227.9981,119.352481 C227.649666,60.003695 179.430765,12 120,12 C60.5692352,12 12.3503342,60.003695 12.0019003,119.352481 L34.7405135,324 L205.259486,324 Z"></path>
+                    </g>
+                    <path d="M156,156 L156,288" id="Line-Copy" stroke="#FFFFFF" stroke-width="24" fill="#FFFFFF"></path>
+                    <path d="M84,156 L84,288" id="Line-Copy-5" stroke="#FFFFFF" stroke-width="24" fill="#FFFFFF"></path>
+                    <path d="M8,120 L232,120" id="Line-Copy-3" stroke="#FFFFFF" stroke-width="24" fill="#FFFFFF"></path>
+                    <rect id="Rectangle-7-Copy-13" stroke="#FFFFFF" stroke-width="24" transform="translate(912.000000, 780.000000) scale(1, -1) translate(-912.000000, -780.000000) " x="804" y="540" width="216" height="480"></rect>
+                    <path d="M813,828 L941,828" id="Line-Copy-2" stroke="#FFFFFF" stroke-width="24" stroke-linecap="square"></path>
+                    <path d="M813,924 L941,924" id="Line-Copy-4" stroke="#FFFFFF" stroke-width="24" stroke-linecap="square"></path>
+                    <path d="M813,732 L941,732" id="Line-Copy-7" stroke="#FFFFFF" stroke-width="24" stroke-linecap="square"></path>
+                    <circle id="Oval-2-Copy-21" stroke="#FFFFFF" stroke-width="24" transform="translate(936.000000, 624.000000) scale(1, -1) translate(-936.000000, -624.000000) " cx="936" cy="624" r="36"></circle>
+                    <path d="M609.729732,932.408382 L609.729732,812.5 L687.56757,812.5 L687.56757,933.760328 L708,942.22973 L688.540541,1020.06757 L610.702703,1020.06757 L588,942.22973 L609.729732,932.408382 Z" id="Combined-Shape" stroke="#FFFFFF" stroke-width="24"></path>
+                    <g id="Combined-Shape">
+                        <use fill="#F7F7F9" fill-rule="evenodd" xlink:href="#path-2"></use>
+                        <path stroke="#FFFFFF" stroke-width="24" d="M733.259486,852 L755.9981,647.352481 C755.649666,588.003695 707.430765,540 648,540 C588.569235,540 540.350334,588.003695 540.0019,647.352481 L562.740514,852 L733.259486,852 Z"></path>
+                    </g>
+                    <path d="M684,684 L684,816" id="Line-Copy" stroke="#FFFFFF" stroke-width="24" fill="#FFFFFF"></path>
+                    <path d="M612,684 L612,816" id="Line-Copy-5" stroke="#FFFFFF" stroke-width="24" fill="#FFFFFF"></path>
+                    <path d="M536,648 L760,648" id="Line-Copy-3" stroke="#FFFFFF" stroke-width="24" fill="#FFFFFF"></path>
+                    <path d="M528,324 L768,324" id="Line" stroke="#FFFFFF" stroke-width="24"></path>
+                    <g id="Oval-2-Copy-19" transform="translate(684.000000, 324.000000) scale(1, -1) translate(-684.000000, -324.000000) ">
+                        <use fill="#F7F7F9" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        <circle stroke="#FFFFFF" stroke-width="24" cx="684" cy="324" r="48"></circle>
+                    </g>
+                    <path d="M528,445 L768,445" id="Line-Copy" stroke="#FFFFFF" stroke-width="24"></path>
+                    <g id="Oval-2-Copy-20" transform="translate(612.000000, 444.000000) scale(1, -1) translate(-612.000000, -444.000000) ">
+                        <use fill="#F7F7F9" fill-rule="evenodd" xlink:href="#path-4"></use>
+                        <circle stroke="#FFFFFF" stroke-width="24" cx="612" cy="444" r="48"></circle>
+                    </g>
+                    <circle id="Oval-2-Copy-20" stroke="#FFFFFF" stroke-width="24" transform="translate(912.000000, 120.000000) scale(1, -1) translate(-912.000000, -120.000000) " cx="912" cy="120" r="108"></circle>
+                    <circle id="Oval-2-Copy-20" stroke="#FFFFFF" stroke-width="24" transform="translate(912.000000, 120.000000) scale(1, -1) translate(-912.000000, -120.000000) " cx="912" cy="120" r="42"></circle>
+                    <path d="M540,168 L648,168 L648,216.783442 L716.813713,168 L756,168 L756,12 L540,12 L540,168 Z" id="Path" stroke="#FFFFFF" stroke-width="24" transform="translate(648.000000, 120.000000) scale(-1, 1) translate(-648.000000, -120.000000) "></path>
+                    <rect id="Rectangle-7-Copy-14" stroke="#FFFFFF" stroke-width="24" transform="translate(912.000000, 384.000000) scale(1, -1) translate(-912.000000, -384.000000) " x="804" y="276" width="216" height="216"></rect>
+                    <polyline id="Path-4" stroke="#FFFFFF" stroke-width="24" transform="translate(867.000000, 384.000000) rotate(-270.000000) translate(-867.000000, -384.000000) " points="819 363 866.691157 405 915 364.001084"></polyline>
+                    <polyline id="Path-4-Copy" stroke="#FFFFFF" stroke-width="24" transform="translate(957.000000, 384.000000) scale(-1, 1) rotate(-270.000000) translate(-957.000000, -384.000000) " points="909 363 956.691157 405 1005 364.001084"></polyline>
+                    <path d="M0,852 L240,852" id="Line" stroke="#FFFFFF" stroke-width="24"></path>
+                    <g id="Oval-2-Copy-19" transform="translate(156.000000, 852.000000) scale(1, -1) translate(-156.000000, -852.000000) ">
+                        <use fill="#F7F7F9" fill-rule="evenodd" xlink:href="#path-5"></use>
+                        <circle stroke="#FFFFFF" stroke-width="24" cx="156" cy="852" r="48"></circle>
+                    </g>
+                    <path d="M0,973 L240,973" id="Line-Copy" stroke="#FFFFFF" stroke-width="24"></path>
+                    <g id="Oval-2-Copy-20" transform="translate(84.000000, 972.000000) scale(1, -1) translate(-84.000000, -972.000000) ">
+                        <use fill="#F7F7F9" fill-rule="evenodd" xlink:href="#path-6"></use>
+                        <circle stroke="#FFFFFF" stroke-width="24" cx="84" cy="972" r="48"></circle>
+                    </g>
+                    <circle id="Oval-2-Copy-20" stroke="#FFFFFF" stroke-width="24" transform="translate(384.000000, 648.000000) scale(1, -1) translate(-384.000000, -648.000000) " cx="384" cy="648" r="108"></circle>
+                    <circle id="Oval-2-Copy-20" stroke="#FFFFFF" stroke-width="24" transform="translate(384.000000, 648.000000) scale(1, -1) translate(-384.000000, -648.000000) " cx="384" cy="648" r="42"></circle>
+                    <path d="M12,696 L108,696 L120,696 L120,744.783442 L188.813713,696 L228,696 L228,540 L12,540 L12,696 Z" id="Path" stroke="#FFFFFF" stroke-width="24" transform="translate(120.000000, 648.000000) scale(-1, 1) translate(-120.000000, -648.000000) "></path>
+                    <rect id="Rectangle-7-Copy-14" stroke="#FFFFFF" stroke-width="24" transform="translate(384.000000, 912.000000) scale(1, -1) translate(-384.000000, -912.000000) " x="276" y="804" width="216" height="216"></rect>
+                    <polyline id="Path-4" stroke="#FFFFFF" stroke-width="24" transform="translate(339.000000, 912.000000) rotate(-270.000000) translate(-339.000000, -912.000000) " points="291 891 338.691157 933 387 892.001084"></polyline>
+                    <polyline id="Path-4-Copy" stroke="#FFFFFF" stroke-width="24" transform="translate(429.000000, 912.000000) scale(-1, 1) rotate(-270.000000) translate(-429.000000, -912.000000) " points="381 891 428.691157 933 477 892.001084"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

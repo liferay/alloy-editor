@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="168px" height="168px" viewBox="0 0 168 168" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Canvas-Copy-60" transform="translate(-12.000000, -12.000000)">
+            <g id="Group-3" transform="translate(16.000000, 16.000000)">
+                <polygon id="Rectangle-7-Copy-14" stroke="#B3472D" stroke-width="8" fill="#FFFFFF" transform="translate(118.500000, 11.000000) scale(1, -1) translate(-118.500000, -11.000000) " points="160 0 160 22 96 22 77 0"></polygon>
+                <rect id="Rectangle-7-Copy-17" stroke="#B3472D" stroke-width="8" fill="#F7ECEA" x="0" y="22" width="160" height="138"></rect>
+                <g id="Group-2" transform="translate(88.000000, 52.000000)" stroke="#B3472D" stroke-width="8" stroke-linecap="square">
+                    <path d="M0,1 L48,1" id="Line-Copy-2"></path>
+                    <path d="M0,20 L32,20" id="Line-Copy-4"></path>
+                </g>
+                <g id="Group" transform="translate(88.000000, 110.000000)" stroke="#B3472D" stroke-width="8" stroke-linecap="square">
+                    <path d="M0,1 L48,1" id="Line-Copy-3"></path>
+                    <path d="M0,19 L32,19" id="Line-Copy-5"></path>
+                </g>
+                <rect id="Rectangle-7-Copy-16" stroke="#B3472D" stroke-width="8" fill="#FFFFFF" x="24" y="44" width="36" height="36"></rect>
+                <rect id="Rectangle-7-Copy-18" stroke="#B3472D" stroke-width="8" fill="#FFFFFF" x="24" y="102" width="36" height="36"></rect>
+                <polygon id="Shape" stroke="#FFCD72" stroke-width="2.5" fill="#FFCD72" points="35.8799749 58.1836344 39.7039799 54.4847817 49.5371357 63.9961173 70.2960201 43.9166311 74.1200251 47.6154838 49.5371357 71.3938227"></polygon>
+                <polygon id="Shape-Copy" stroke="#FFCD72" stroke-width="2.5" fill="#FFCD72" points="35.8799749 116.183634 39.7039799 112.484782 49.5371357 121.996117 70.2960201 101.916631 74.1200251 105.615484 49.5371357 129.393823"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

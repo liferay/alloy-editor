@@ -1,0 +1,4 @@
+<svg id="open-id" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="lexicon-icon-outline open-id-tail" d="M224,64v382.2C128.3,436.4,64,383.8,64,336c0-42.3,50.3-88.3,128-105.2v-65C81.6,185.3,0,254,0,336c0,89.7,97.8,165.2,224,176l96-64V0L224,64z"/>
+	<path class="lexicon-icon-outline open-id-head" d="M512,320l-32-128l-35.2,26.4c-25.6-19.5-56.7-35.5-92.8-45.5v66.9c7.2,2.6,26.3,7.5,41.8,16.8L352,288L512,320z"/>
+</svg>

@@ -1,0 +1,23 @@
+// We use this file to define the style of the footer
+
+.footer {
+	padding: 90px 0;
+
+	a {
+		color: inherit;
+	}
+
+	.nav-link {
+		opacity: .6;
+		transition: all 0.4s ease-in-out;
+		will-change: opacity;
+
+		svg {
+			font-size: 1.5rem;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}

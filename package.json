@@ -1,0 +1,78 @@
+{
+  "name": "gatsby-boilerplate",
+  "description": "An awesome boilerplate to start projects in Gatsby considering as starter point the development experience of Electric.js",
+  "version": "1.0.2",
+  "author": "Diego Nascimento <diego.nascimento@liferay.com",
+  "bugs": {
+    "url": "https://github.com/diegonvs/gatsby-boilerplate"
+  },
+  "homepage": "https://gatsby-boilerplate.wedeploy.io#readme",
+  "keywords": [
+    "gatsby",
+    "gatsby-starter",
+    "electric",
+    "liferay",
+    "clay",
+    "wedeploy"
+  ],
+  "license": "BSD-3-Clause",
+  "engines": {
+    "node": ">= 8"
+  },
+  "scripts": {
+    "dev": "rimraf public .cache && gatsby develop",
+    "deploy": "gatsby build && gh-pages -d public -b wedeploy",
+    "develop": "rimraf public .cache && gatsby develop",
+    "start": "npm run develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve"
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "0.15.7",
+    "@mdx-js/tag": "0.16.6",
+    "babel-preset-metal-jsx": "0.1.1",
+    "browser-monads": "1.0.0",
+    "classnames": "2.2.6",
+    "clay-alert": "2.5.0",
+    "clay-badge": "2.5.0",
+    "clay-button": "2.5.0",
+    "clay-charts": "2.5.0",
+    "clay-css": "2.5.0",
+    "clay-dropdown": "2.5.0",
+    "clay-tooltip": "2.5.0",
+    "countries-list": "2.3.2",
+    "documentation": "9.0.0",
+    "gatsby": "2.0.64",
+    "gatsby-mdx": "0.1.4",
+    "gatsby-plugin-google-analytics": "2.0.8",
+    "gatsby-plugin-manifest": "2.0.11",
+    "gatsby-plugin-offline": "2.0.19",
+    "gatsby-plugin-react-helmet": "3.0.4",
+    "gatsby-plugin-sass": "2.0.7",
+    "gatsby-plugin-zopfli": "1.0.2",
+    "gatsby-remark-component": "1.1.3",
+    "gatsby-remark-copy-linked-files": "2.0.7",
+    "gatsby-remark-prismjs": "3.1.4",
+    "gatsby-source-filesystem": "2.0.11",
+    "gatsby-transformer-remark": "2.1.15",
+    "languages": "0.1.3",
+    "metal-clipboard": "2.0.1",
+    "metal-dom": "2.16.7",
+    "metal-jsx": "2.16.7",
+    "metal-tabs": "2.3.1",
+    "node-sass": "4.11.0",
+    "nothing": "0.1.0",
+    "prismjs": "1.15.0",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
+    "react-helmet": "5.2.0",
+    "react-live": "1.12.0",
+    "wedeploy": "4.5.1",
+    "wowjs": "1.1.3"
+  },
+  "devDependencies": {
+    "gh-pages": "2.0.1",
+    "globby": "8.0.1",
+    "rimraf": "2.6.2"
+  }
+}

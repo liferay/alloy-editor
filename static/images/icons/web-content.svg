@@ -1,0 +1,7 @@
+<svg id="web-content" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="lexicon-icon-outline web-content-border" d="M0,64v384c0,35.3,28.7,64,64,64h384c35.3,0,64-28.7,64-64V64c0-35.3-28.7-64-64-64H64C28.7,0,0,28.7,0,64z M448,448H64V64h384V448z"/>
+	<path class="lexicon-icon-outline web-content-text-1" d="M144,320h224c22,0,21-32,0-32H144C123,288,123,320,144,320z"/>
+	<path class="lexicon-icon-outline web-content-text-2" d="M144,384h160c22,0,20-32,0-32H144C123,352,122,384,144,384z"/>
+	<circle class="lexicon-icon-outline web-content-circle" cx="320" cy="160" r="64"/>
+	<polygon class="lexicon-icon-outline web-content-triangle" points="128,224 192,96 256,224 "/>
+</svg>

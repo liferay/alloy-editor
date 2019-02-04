@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="180px" height="185px" viewBox="0 0 180 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>Group Copy 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Canvas-Copy-45" stroke="#B3472D" stroke-width="9">
+            <g id="Group-Copy-3" transform="translate(4.000000, 4.000000)">
+                <path d="M0,137.6 L1.164846e-12,0 L172,0 C172,4.3 172,50.1666667 172,137.6 C155.688057,137.6 141.354724,137.6 137.6,137.6 L94.6,172 L94.6,137.6" id="Path" fill="#F7ECEA" stroke-linecap="square"></path>
+                <path d="M94.6,137.6 C78.2395324,137.6 48.1395324,137.6 4.3,137.6 L4.3,137.6" id="Path" fill="#F7ECEA" stroke-linecap="square" stroke-linejoin="round"></path>
+                <rect id="Rectangle-7-Copy-17" fill="#FFFFFF" x="43" y="77.4" width="34.4" height="34.4"></rect>
+                <circle id="Oval-2-Copy-22" fill="#FFDF9F" cx="111.8" cy="43" r="17.2"></circle>
+                <g id="Group-Copy" transform="translate(60.200000, 43.000000) scale(1, -1) translate(-60.200000, -43.000000) translate(43.000000, 25.800000)" stroke-linecap="square">
+                    <path d="M17.2,-2.84217094e-14 L17.2,30.1" id="Line-Copy"></path>
+                    <polyline id="Path-2-Copy" transform="translate(17.200000, 25.800000) scale(1, -1) translate(-17.200000, -25.800000) " points="0 34.4 17.4799105 17.2 34.4 34.4"></polyline>
+                </g>
+                <g id="Group-Copy-2" transform="translate(94.600000, 78.475000)" stroke-linecap="square">
+                    <path d="M17.2,-2.84217094e-14 L17.2,30.0886855" id="Line-Copy"></path>
+                    <polyline id="Path-2-Copy" transform="translate(17.200000, 25.800000) scale(1, -1) translate(-17.200000, -25.800000) " points="0 34.4 17.4799105 17.2 34.4 34.4"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

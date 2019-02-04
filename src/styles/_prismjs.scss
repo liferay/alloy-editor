@@ -1,0 +1,139 @@
+$dark: #282a36;
+$white: #ffffff;
+
+$char: #D8DEE9;
+$comment: #6272a4;
+$keyword: #ff79c6;
+$attribute: #50fa7b;
+$lineHighlight: #14161a;
+$primitive: #5a9bcf;
+$string: #f1fa8c;
+$variable: #50fa7b;
+$boolean: #ff8b50;
+$punctuation: #ff79c6;
+$tag: #ff79c6;
+$function: #79b6f2;
+$className: #FAC863;
+$method: #6699CC;
+$operator: #ff79c6;
+
+.gatsby-highlight {
+    background: $dark;
+    color: $white;
+    border-radius: 4px;
+    overflow: auto;
+    tab-size: 1.5em;
+}
+
+.gatsby-highlight pre[class*="gatsby-code-"],
+.gatsby-highlight pre.prism-code {
+    height: auto !important;
+    margin: 1rem;
+    color: $white;
+    font-size: 13px;
+    line-height: 20px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+  
+.gatsby-highlight + .gatsby-highlight {
+    margin-top: 20;
+}
+
+.gatsby-highlight-code-line {
+    background-color: $lineHighlight;
+    display: block;
+    margin: -0.125rem calc(-1rem - 15px);
+    padding: 0.125rem calc(1rem + 15px);
+}
+  
+.token.attr-name {
+    color: $attribute,
+}
+  
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: $comment;
+}
+  
+.token.property,
+.token.number,
+.token.function-name,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: $primitive;
+}
+  
+.token.boolean {
+    color: $boolean;
+}
+  
+.token.tag {
+    color: $tag;
+}
+  
+.token.string {
+color: $string;
+}
+  
+.token.punctuation {
+    color: $punctuation;
+}
+  
+.token.selector,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: $char;
+}
+  
+.token.function {
+    color: $function;
+}
+
+.token.operator {
+    color: $operator;
+}
+
+.token.entity,
+.token.url,
+.token.variable {
+    color: $variable;
+}
+  
+.token.attr-value {
+    color: $string;
+}
+  
+.token.keyword {
+    color: $keyword;
+}
+  
+.token.atrule,
+.token.class-name {
+    color: $className;
+}
+  
+.token.important {
+    font-weight: 400;
+}
+  
+.token.bold {
+    font-weight: 700;
+}
+
+.token.italic {
+    font-style: italic;
+}
+  
+.token.entity {
+    cursor: help;
+}
+  
+.namespace {
+    opacity: 0.7;
+}

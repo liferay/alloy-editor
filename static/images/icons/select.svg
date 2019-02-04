@@ -1,0 +1,6 @@
+<svg id="select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="lexicon-icon-outline select-border" d="M448,64v384H64V64H448 M64,0C28.7,0,0,28.7,0,64v384c0,35.3,28.7,64,64,64h384c35.3,0,64-28.7,64-64V64c0-35.3-28.7-64-64-64H64z"/>
+	<polygon class="lexicon-icon-outline select-caret-up" points="414.5,224 278.8,224 346.7,156.1 "/>
+	<polygon class="lexicon-icon-outline select-caret-down" points="278.8,288 414.5,288 346.7,355.9 "/>
+	<path class="lexicon-icon-outline select-s" d="M104.8,306.8c14.2,20.2,94.7,49.1,96.9-3.6C205,259,89.5,268.5,91.5,193.3c6-77.3,100-83.3,143.7-35.9C229,166,215,183.8,215,183.8c-43.2-35.8-84.9-17.7-83.6,7.5C129,237,238,215,242.2,300.1c2.8,92.4-135.7,76.4-160.7,34.9L104.8,306.8z"/>
+</svg>

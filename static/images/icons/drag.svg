@@ -1,0 +1,8 @@
+<svg id="drag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<circle class="lexicon-icon-outline drag-dot-1" cx="192" cy="128" r="32"/>
+	<circle class="lexicon-icon-outline drag-dot-2" cx="192" cy="256" r="32"/>
+	<circle class="lexicon-icon-outline drag-dot-3" cx="192" cy="384" r="32"/>
+	<circle class="lexicon-icon-outline drag-dot-4" cx="320" cy="128" r="32"/>
+	<circle class="lexicon-icon-outline drag-dot-5" cx="320" cy="256" r="32"/>
+	<circle class="lexicon-icon-outline drag-dot-6" cx="320" cy="384" r="32"/>
+</svg>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="indent-less" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0px"
+	 y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<path class="lexicon-icon-outline" d="M64,96h384c17.7,0,32-14.3,32-32s-14.3-32-32-32H64c-17.7,0-32,14.3-32,32S46.3,96,64,96z"/>
+<path class="lexicon-icon-outline" d="M448,416H64c-17.7,0-32,14.3-32,32s14.3,32,32,32h384c17.7,0,32-14.3,32-32S465.7,416,448,416z"/>
+<path class="lexicon-icon-outline" d="M448,288H320c-17.7,0-32,14.3-32,32s14.3,32,32,32h128c17.7,0,32-14.3,32-32S465.7,288,448,288z"/>
+<path class="lexicon-icon-outline" d="M448,160H320c-17.7,0-32,14.3-32,32s14.3,32,32,32h128c17.7,0,32-14.3,32-32S465.7,160,448,160z"/>
+<path class="lexicon-icon-outline" d="M64,288h81.8l-16.7,16.7c-12.7,12.7-12.7,33.2,0,45.8c12.7,12.7,33.2,12.7,45.8,0l71.6-71.6c6.1-6.1,9.5-14.3,9.5-22.9
+	c0-8.6-3.4-16.8-9.5-22.9l-71.6-71.6c-12.7-12.7-33.2-12.7-45.8,0c-6.3,6.3-9.5,14.6-9.5,22.9s3.2,16.6,9.5,22.9l16.7,16.7H64
+	c-17.7,0-32,14.3-32,32S46.3,288,64,288z"/>
+</svg>

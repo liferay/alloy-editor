@@ -1,0 +1,5 @@
+<svg id="separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="lexicon-icon-outline separator-content-2" d="M416,448H96c-17.7,0-32-14.3-32-32v-32c0-17.7,14.3-32,32-32h320c17.7,0,32,14.3,32,32v32C448,433.7,433.7,448,416,448z"/>
+	<path class="lexicon-icon-outline separator-divider" d="M464,272H48c-21.2,0-20.5-32,0-32h416C484.8,240,485.8,272,464,272z"/>
+	<path class="lexicon-icon-outline separator-content-1" d="M416,160H96c-17.7,0-32-14.3-32-32V96c0-17.7,14.3-32,32-32h320c17.7,0,32,14.3,32,32v32C448,145.7,433.7,160,416,160z"/>
+</svg>

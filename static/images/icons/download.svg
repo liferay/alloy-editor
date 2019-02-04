@@ -1,0 +1,4 @@
+<svg id="download" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	<path class="download-arrow-down lexicon-icon-outline" d="M233.2,374.5c13.1,13.2,33.5,12.2,45.6,0l71.3-71.6c29.8-29.9-14.3-77.2-45.6-45.8l-16.6,16.7V32.1c0-42.5-63.7-43-63.7,0v241.7l-16.6-16.7c-30.8-30.9-75.5,15.8-45.6,45.8L233.2,374.5z"/>
+	<path class="download-border lexicon-icon-outline" d="M384,384.5v63.8H128v-63.8c0-43.8-64-41.8-64,0V512h384V384.5C448,340.7,384,341.7,384,384.5z"/>
+</svg>

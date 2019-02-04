@@ -1,0 +1,95 @@
+// We use this file to define the style of the document-page-sidebar-offset's content
+
+.code-container {
+	margin: calc(1rem * 1.5) 0;
+	position: relative;
+}
+
+.code-container.hide {
+	display: none;
+}
+
+.code-container pre code {
+	white-space: pre;
+}
+
+.code-container .btn-copy {
+	@include transition(background 0.3s ease-in-out);
+
+	animation: fadeIn 0.5s cubic-bezier(0.3, 0, 0.3, 1) 0s 1 forwards;
+	background: rgba(255, 255, 255, 0.6);
+	cursor: pointer;
+	height: 24px;
+	line-height: 20px;
+	padding: 0;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 24px;
+	z-index: 9;
+
+	&:focus {
+		box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+	}
+}
+
+.code-container .btn-copy .lexicon-icon {
+	height: 12px;
+	vertical-align: baseline;
+	width: 12px;
+}
+
+.code-container.btn-copy:hover {
+	background: rgba(255, 255, 255, 0.8);
+}
+
+.tooltip.bottom {
+	position: absolute;
+	top: 0;
+}
+
+.docs-content blockquote {
+	border-left: .25em solid $gray-300;
+	color: $secondary;
+	margin-bottom: 2em;
+	padding: 0 1em;
+}
+
+.nav.nav-tabs.nav-code-tabs {
+	border-width: 0;
+	margin-bottom: -20px;
+	margin-top: 32px;
+}
+
+.nav.nav-tabs.nav-code-tabs > li > button {
+	background: transparent;
+	border-width: 0;
+	color: rgba($secondary, 0.8);
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 20px;
+	margin-right: 12px;
+	padding: 0;
+	text-transform: uppercase;
+
+	&:hover,
+	&:focus {
+		background: transparent;
+		color: rgba($dark, 0.6);
+		outline: none;
+	}
+}
+
+.nav.nav-tabs.nav-code-tabs > li:last-child > button {
+	margin-right: 0;
+}
+
+.nav.nav-tabs.nav-code-tabs > li.active > button {
+	border-width: 0;
+	color: $dark;
+
+	&:focus {
+		color: rgba($dark, 0.6);
+	}
+}

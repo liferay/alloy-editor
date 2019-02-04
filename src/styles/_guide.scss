@@ -1,0 +1,50 @@
+.docs {
+	header {
+		padding: $base-size / 2 0;
+
+		@media (min-width: $grid-float-breakpoint) {
+			padding: $base-size * 2 0 $base-size;
+		}
+
+		h1 {
+			font-size: $base-size * 1.5;
+		}
+	}
+
+	.clay-h3 {
+		font-weight: 700 !important;
+		margin-bottom: $base-size * 1.2 !important;
+	}
+
+	.clay-h4 {
+		font-weight: 600 !important;
+		margin-bottom: $base-size * 1.2 !important;
+		padding-top: $base-size * 1.1;
+	}
+
+	.clay-p {
+		line-height: 1.5;
+		margin-bottom: $base-size * 0.5;
+	}
+
+	blockquote {
+		border-left: 0.25em solid #dfe2e5;
+		color: #6a737d;
+		margin-bottom: 2em;
+		padding: 0 1em;
+	}
+}
+
+.blog {
+	
+}
+
+.about {
+	font-size: 18px;
+	padding: $base-size 0;
+}
+
+.about.about-inverted {
+	background-color: rgba(0, 0, 0, 0.8);
+	color: #FFF;
+}
