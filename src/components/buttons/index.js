@@ -21,6 +21,9 @@ import ButtonImageAlignRight from './button-image-align-right.jsx';
 import ButtonImage from './button-image.jsx';
 import ButtonIndentBlock from './button-indent-block.jsx';
 import ButtonItalic from './button-italic.jsx';
+import ButtonItemSelectorAudio from './button-item-selector-audio.jsx';
+import ButtonItemSelectorImage from './button-item-selector-image.jsx';
+import ButtonItemSelectorVideo from './button-item-selector-video.jsx';
 import ButtonLinkAutocompleteList from './button-link-autocomplete-list.jsx';
 import ButtonLinkBrowse from './button-link-browse.jsx';
 import ButtonLinkEditBrowse from './button-link-edit-browse.jsx';
@@ -82,6 +85,9 @@ export default {
 	[ButtonImage.key]: ButtonImage,
 	[ButtonIndentBlock.key]: ButtonIndentBlock,
 	[ButtonItalic.key]: ButtonItalic,
+	[ButtonItemSelectorAudio.key]: ButtonItemSelectorAudio,
+	[ButtonItemSelectorImage.key]: ButtonItemSelectorImage,
+	[ButtonItemSelectorVideo.key]: ButtonItemSelectorVideo,
 	[ButtonLinkAutocompleteList.key]: ButtonLinkAutocompleteList,
 	[ButtonLinkBrowse.key]: ButtonLinkBrowse,
 	[ButtonLinkEditBrowse.key]: ButtonLinkEditBrowse,
