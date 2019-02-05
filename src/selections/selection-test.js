@@ -54,14 +54,17 @@ const headingTextSelectionTest = function(payload) {
 let linkSelectionTest = function(payload) {
 	let nativeEditor = payload.editor.get('nativeEditor');
 	let range = nativeEditor.getSelection().getRanges()[0];
+	let selectionData = payload.data.selectionData;
 
-	let element;
+	let element = new CKEDITOR.Link(nativeEditor).getFromSelection();
+	let isSelectionEmpty = nativeEditor.isSelectionEmpty();
+	let elementIsNotImage = selectionData.element ? selectionData.element.getName() !== 'img' : true;
 
 	return !!(
-		nativeEditor.isSelectionEmpty() &&
-		(element = new CKEDITOR.Link(nativeEditor).getFromSelection()) &&
-		element.getText().length !== range.endOffset &&
-		!element.isReadOnly() &&
+		isSelectionEmpty &&
+		elementIsNotImage &&
+		element && element.getText().length !== range.endOffset &&
+		element && !element.isReadOnly() &&
 		!_isRangeAtElementEnd(range, element)
 	);
 };
