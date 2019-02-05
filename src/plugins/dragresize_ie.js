@@ -972,8 +972,10 @@
 				resizer.removeClass('cke_image_resizing');
 
 				if (updateData) {
-					widget.element.$.style.width = newWidth + 'px';
-					widget.element.$.style.height = newHeight + 'px';
+					widget.setData({
+						height: newHeight,
+						width: newWidth
+					});
 
 					// Save another undo snapshot: after resizing.
 					editor.fire('saveSnapshot');
