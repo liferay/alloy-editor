@@ -55,9 +55,9 @@ class LayoutNav extends Component {
         return (
             <nav ref="navElement" className={styles}>
                 <Link to="/" className="navbar-brand">
-                    <img className="logo mr-3" src="/images/home/liferay_logo.svg" alt="" />
+                    <img className="logo mr-3" src="https://alloyeditor.com/images/logo.png" alt="" />
                     {/* <span className="title align-middle h1">{process.env.PROJECT_NAME}</span> */}
-                    <span className="brand font-weight-bold align-middle">Liferay Theming Site</span>
+                    {/* <span className="brand font-weight-bold align-middle">Alloy Editor</span> */}
                 </Link>
 
                 {sidebarHamburguerIcon &&
@@ -70,10 +70,10 @@ class LayoutNav extends Component {
 
                 <ul className="navbar-nav font-weight-bold ml-md-auto">
                     <li className="nav-item">
-                        <Link className="nav-link ml-lg-5" to="/docs/">Themes</Link>
+                        <Link className="nav-link ml-lg-5" to="/onboarding/">API</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link ml-lg-5" to="/onboarding/">About Themes</Link>
+                        <Link className="nav-link ml-lg-5" to="/docs/">Docs</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link ml-lg-5" to="/updates/">Updates</Link>

@@ -1,8 +1,8 @@
 // We use this file to define the general styles of the website
 
 .container {
-	padding-left: $grid-gutter-width/2*3;
-	padding-right: $grid-gutter-width/2*3;
+	padding-left: $grid-gutter-width;
+	padding-right: $grid-gutter-width;
     @include media-breakpoint-up(sm) {
 		padding-left: $grid-gutter-width/2;
 		padding-right: $grid-gutter-width/2;
@@ -45,11 +45,15 @@
 	}
 }
 
-.title-1 {
-	font-size: 40px;
+.display-2 {
+	@include media-breakpoint-down(sm) {
+		font-size: 40px;
+	}
+}
 
-	@include media-breakpoint-up(lg) {
-			font-size: 56px;
+.h1 {
+	@include media-breakpoint-down(sm) {
+		font-size: 30px;
 	}
 }
 

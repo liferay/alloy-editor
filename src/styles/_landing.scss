@@ -1,32 +1,24 @@
 // We use this file to define the style of the home-page
 
 .header {
-    padding: 300px 0 70px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 150px 0 100px;
 
-    .header-image {
-        top: 0;
-        left: 0;
-        background-position: center;
-        background-size: cover;
-    }
-
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
         padding: 150px 0;
     }
-}
-
-.themes-latest {
-    padding: 56px 0;
 
     @include media-breakpoint-up(lg) {
-        padding: 120px 0;
+        padding: 200px 0 300px;
     }
 }
 
-.themes-all {
-    padding: 56px 0;
+.my-row {
+    margin: 70px 0;
 
     @include media-breakpoint-up(lg) {
-        padding: 90px 0;
+        margin: 150px 0;
     }
 }
