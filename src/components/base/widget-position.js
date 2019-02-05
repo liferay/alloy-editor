@@ -412,7 +412,8 @@ export default WrappedComponent =>
 				let totalWidth =
 					uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
 
-				let scrollTop = uiNode.tagName !== 'BODY' ? uiNode.scrollTop : 0;
+				let scrollTop =
+					uiNode.tagName !== 'BODY' ? uiNode.scrollTop : 0;
 
 				let xy = this.getWidgetXYPoint(
 					interactionPoint.x,

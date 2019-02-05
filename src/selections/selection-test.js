@@ -58,13 +58,17 @@ let linkSelectionTest = function(payload) {
 
 	let element = new CKEDITOR.Link(nativeEditor).getFromSelection();
 	let isSelectionEmpty = nativeEditor.isSelectionEmpty();
-	let elementIsNotImage = selectionData.element ? selectionData.element.getName() !== 'img' : true;
+	let elementIsNotImage = selectionData.element
+		? selectionData.element.getName() !== 'img'
+		: true;
 
 	return !!(
 		isSelectionEmpty &&
 		elementIsNotImage &&
-		element && element.getText().length !== range.endOffset &&
-		element && !element.isReadOnly() &&
+		element &&
+		element.getText().length !== range.endOffset &&
+		element &&
+		!element.isReadOnly() &&
 		!_isRangeAtElementEnd(range, element)
 	);
 };

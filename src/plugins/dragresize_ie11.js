@@ -1456,7 +1456,7 @@
 				if (updateData) {
 					widget.setData({
 						height: newHeight,
-						width: newWidth
+						width: newWidth,
 					});
 
 					// Save another undo snapshot: after resizing.
