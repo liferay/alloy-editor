@@ -1,28 +1,9 @@
-## Prelude
-Preliminary history of the issue. Share any information that could ease the understanding of why this issue exists. Try to line up the major concerns that might affect the project up until this issue is not implemented.
+**Do you want to request a *feature* or report a *bug*?**
 
-## User story
-Provide the Connextra styled explanation of the issue.
-As a {actor}
-I'd like to {activity}
-So that {value}
+**What is the current behavior?**
 
-## Acceptance Criteria
-Collect all the conditions to be fulfilled when the issue is regarded done.
-- condition 1
-- condition 2
-- condition 3
-- ...
+**If the current behavior is a bug, please provide the steps to reproduce and if possible a minimal demo of the problem.**
 
-## BDD Scenarios
-Collect all the scenarios relevant to the applied changes and compose them in a Gherkin Syntax.
+**What is the expected behavior?**
 
-Scenario 1:
-GIVEN ...
-WHEN ...
-THEN ..
-
-Scenario 2:
-GIVEN ...
-WHEN ...
-THEN ...
+**Which versions of alloy-editor, and which browser / OS are affected by this issue? Did this work in previous versions?**
