@@ -68,13 +68,8 @@ describe('Debounce', () => {
 
 		fn();
 
-		setTimeout(() => {
-			fn();
-		}, 10);
-
-		setTimeout(() => {
-			fn();
-		}, 10);
+		setTimeout(fn, 10);
+		setTimeout(fn, 10);
 
 		setTimeout(() => {
 			assert.ok(listener.calledOnce);
