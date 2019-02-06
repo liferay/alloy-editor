@@ -69,9 +69,10 @@ describe('Debounce', () => {
 		clock.tick(10);
 		fn();
 		clock.tick(10);
+		assert.notOk(listener.calledOnce);
+
 		fn();
 		clock.tick(40);
-
 		assert.ok(listener.calledOnce);
 	});
 });
