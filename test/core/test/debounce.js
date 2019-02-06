@@ -1,7 +1,17 @@
 const assert = chai.assert;
 
 describe('Debounce', () => {
-	it('should debounce function execution', done => {
+	let clock;
+
+	beforeEach(() => {
+		clock = sinon.useFakeTimers();
+	});
+
+	afterEach(() => {
+		clock.restore();
+	});
+
+	it('should debounce function execution', () => {
 		const listener = sinon.stub();
 		const fn = CKEDITOR.tools.debounce(listener, 0);
 
@@ -9,26 +19,21 @@ describe('Debounce', () => {
 		fn();
 		fn();
 
-		setTimeout(() => {
-			assert.ok(listener.calledOnce);
-
-			done();
-		}, 0);
+		clock.tick(10);
+		assert.ok(listener.calledOnce);
 	});
 
-	it('should call debounced function with additional alguments', done => {
+	it('should call debounced function with additional alguments', () => {
 		const listener = sinon.stub();
 		const fn = CKEDITOR.tools.debounce(listener, 0);
 
 		fn('param1');
 
-		setTimeout(() => {
-			assert.ok(listener.calledWith('param1'));
-			done();
-		}, 0);
+		clock.tick(10);
+		assert.ok(listener.calledWith('param1'));
 	});
 
-	it('should debounce function execution with context and params', done => {
+	it('should debounce function execution with context and params', () => {
 		const ctx = {};
 		const listener = sinon.stub();
 		const args = ['param1', 'param2'];
@@ -38,16 +43,13 @@ describe('Debounce', () => {
 		fn();
 		fn();
 
-		setTimeout(() => {
-			assert.ok(listener.calledOnce);
-			assert.ok(listener.calledOn(ctx));
-			assert.ok(listener.calledWith('param1', 'param2'));
-
-			done();
-		}, 0);
+		clock.tick(10);
+		assert.ok(listener.calledOnce);
+		assert.ok(listener.calledOn(ctx));
+		assert.ok(listener.calledWith('param1', 'param2'));
 	});
 
-	it('should detach a debounced function execution', done => {
+	it('should detach a debounced function execution', () => {
 		const listener = sinon.stub();
 		const fn = CKEDITOR.tools.debounce(listener, 100);
 
@@ -55,26 +57,21 @@ describe('Debounce', () => {
 
 		fn.detach();
 
-		setTimeout(() => {
-			assert.notOk(listener.calledOnce);
-
-			done();
-		}, 0);
+		clock.tick(10);
+		assert.notOk(listener.calledOnce);
 	});
 
-	it('should debounce function execution for the specified delay', done => {
+	it('should debounce function execution for the specified delay', () => {
 		const listener = sinon.stub();
 		const fn = CKEDITOR.tools.debounce(listener, 20);
 
 		fn();
+		clock.tick(10);
+		fn();
+		clock.tick(10);
+		fn();
+		clock.tick(40);
 
-		setTimeout(fn, 10);
-		setTimeout(fn, 10);
-
-		setTimeout(() => {
-			assert.ok(listener.calledOnce);
-
-			done();
-		}, 40);
+		assert.ok(listener.calledOnce);
 	});
 });
