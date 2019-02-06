@@ -13,26 +13,28 @@
  * @param {Object} context The context in which the callback will be called. This argument is optional.
  * @static
  */
-CKEDITOR.tools.debounce =
-	CKEDITOR.tools.debounce ||
-	function(callback, timeout, context, args = []) {
-		let debounceHandle;
+function debounce(callback, timeout, context, args = []) {
+	let debounceHandle;
 
-		let callFn = function(...callArgs) {
-			/* eslint-disable babel/no-invalid-this */
-			let callContext = context || this;
-			/* eslint-enable babel/no-invalid-this */
+	let callFn = function(...callArgs) {
+		/* eslint-disable babel/no-invalid-this */
+		let callContext = context || this;
+		/* eslint-enable babel/no-invalid-this */
 
-			clearTimeout(debounceHandle);
+		clearTimeout(debounceHandle);
 
-			debounceHandle = setTimeout(function() {
-				callback.apply(callContext, [...callArgs, ...args]);
-			}, timeout);
-		};
-
-		callFn.detach = function() {
-			clearTimeout(debounceHandle);
-		};
-
-		return callFn;
+		debounceHandle = setTimeout(function() {
+			callback.apply(callContext, [...callArgs, ...args]);
+		}, timeout);
 	};
+
+	callFn.detach = function() {
+		clearTimeout(debounceHandle);
+	};
+
+	return callFn;
+}
+
+CKEDITOR.tools.debounce = CKEDITOR.tools.debounce || debounce;
+
+export default debounce;
