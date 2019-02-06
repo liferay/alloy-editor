@@ -38,23 +38,12 @@ function getJoinTasks() {
 
 	return skins.map(function(skin) {
 		const skinFileName = 'alloy-editor-' + skin + '.css';
-		const skinFontFileName = 'alloyeditor-font-' + skin + '.css';
 
 		const fn = function() {
 			return gulp
-				.src(
-					[
-						path.join(
-							Constants.rootDir,
-							'src/assets/sass/skin',
-							skin,
-							'.font-cache',
-							skinFontFileName
-						),
-						path.join(cssDir, 'skin', skin, 'main.css'),
-					],
-					{allowEmpty: true}
-				)
+				.src([path.join(cssDir, 'skin', skin, 'main.css')], {
+					allowEmpty: true,
+				})
 				.pipe(concat(skinFileName))
 				.pipe(
 					gulp.dest(path.join(Constants.editorDistFolder, 'assets'))
