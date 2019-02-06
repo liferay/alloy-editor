@@ -62,7 +62,7 @@ describe('Debounce', () => {
 		}, 0);
 	});
 
-	xit('should debounce function execution for the specified delay', done => {
+	it('should debounce function execution for the specified delay', done => {
 		const listener = sinon.stub();
 		const fn = CKEDITOR.tools.debounce(listener, 20);
 
