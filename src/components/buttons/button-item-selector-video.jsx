@@ -16,7 +16,6 @@ class ButtonItemSelectorVideo extends React.Component {
 
 	static propTypes = {
 		editor: PropTypes.object.isRequired,
-		imageTPL: PropTypes.string.isRequired,
 	};
 
 	render() {
