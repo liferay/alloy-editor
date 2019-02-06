@@ -3,6 +3,7 @@ import autolink from './autolink';
 import autolist from './autolist';
 import dragresize from './dragresize';
 import dragresizeie from './dragresize_ie';
+import dragresizeie11 from './dragresize_ie11';
 import embed from './embed';
 import embedurl from './embedurl';
 import imagealignment from './imagealignment';
@@ -18,6 +19,7 @@ export {
 	autolist,
 	dragresize,
 	dragresizeie,
+	dragresizeie11,
 	embed,
 	embedurl,
 	imagealignment,
