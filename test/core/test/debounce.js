@@ -1,9 +1,9 @@
-var assert = chai.assert;
+const assert = chai.assert;
 
 describe('Debounce', function() {
 	it('should debounce function execution', function(done) {
-		var listener = sinon.stub();
-		var fn = CKEDITOR.tools.debounce(listener, 0);
+		const listener = sinon.stub();
+		const fn = CKEDITOR.tools.debounce(listener, 0);
 
 		fn();
 		fn();
@@ -17,8 +17,8 @@ describe('Debounce', function() {
 	});
 
 	it('should call debounced function with additional alguments', function(done) {
-		var listener = sinon.stub();
-		var fn = CKEDITOR.tools.debounce(listener, 0);
+		const listener = sinon.stub();
+		const fn = CKEDITOR.tools.debounce(listener, 0);
 
 		fn('param1');
 
@@ -29,10 +29,10 @@ describe('Debounce', function() {
 	});
 
 	it('should debounce function execution with context and params', function(done) {
-		var ctx = {};
-		var listener = sinon.stub();
-		var args = ['param1', 'param2'];
-		var fn = CKEDITOR.tools.debounce(listener, 0, ctx, args);
+		const ctx = {};
+		const listener = sinon.stub();
+		const args = ['param1', 'param2'];
+		const fn = CKEDITOR.tools.debounce(listener, 0, ctx, args);
 
 		fn();
 		fn();
@@ -48,8 +48,8 @@ describe('Debounce', function() {
 	});
 
 	it('should detach a debounced function execution', function(done) {
-		var listener = sinon.stub();
-		var fn = CKEDITOR.tools.debounce(listener, 100);
+		const listener = sinon.stub();
+		const fn = CKEDITOR.tools.debounce(listener, 100);
 
 		fn();
 
@@ -63,8 +63,8 @@ describe('Debounce', function() {
 	});
 
 	xit('should debounce function execution for the specified delay', function(done) {
-		var listener = sinon.stub();
-		var fn = CKEDITOR.tools.debounce(listener, 20);
+		const listener = sinon.stub();
+		const fn = CKEDITOR.tools.debounce(listener, 20);
 
 		fn();
 
