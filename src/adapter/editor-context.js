@@ -14,10 +14,14 @@ const EditorContext = React.createContext({});
  * elsewhere, such as in a constructor, the context needs to be passed
  * in via a prop.
  */
-EditorContext.toProps = Component => props => (
-	<EditorContext.Consumer>
-		{context => <Component {...props} context={context} />}
-	</EditorContext.Consumer>
-);
+EditorContext.toProps = Component => {
+	const componentWithContext = props => (
+		<EditorContext.Consumer>
+			{context => <Component {...props} context={context} />}
+		</EditorContext.Consumer>
+	);
+	componentWithContext.key = Component.key;
+	return componentWithContext;
+};
 
 export default EditorContext;
