@@ -28,7 +28,7 @@ class ButtonOutdentBlock extends React.Component {
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
-	 * @default indentBlock
+	 * @default outdentBlock
 	 * @memberof ButtonOutdentBlock
 	 * @property {String} key
 	 * @static
