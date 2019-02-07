@@ -2,6 +2,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import arrangeIntoTree from '../../utils/arrangeIntoTree';
 import Navigation from './Navigation';
 import React from 'react';
+import Search from './Search';
 
 const getSection = ({allMdx: {edges}}) => {
 	const resolveNode = edges.map(({node}) => {
@@ -47,7 +48,7 @@ export default (props) => (
 		`}
 		render={data => {
 
-			let navbarClasses = 'sidebar pt-header position-fixed bg-light';
+			let navbarClasses = 'sidebar pt-header position-fixed bg-white shadow';
 			if (props.navbarToggled) {
 				navbarClasses += ' toggler-expanded';
 			}
@@ -55,6 +56,8 @@ export default (props) => (
 			return (
 				<nav className={navbarClasses} id="clay-sidebar">
 					<div className="p-3 p-sm-5">
+						<Search placeholder="Search" />
+
 						<Navigation sectionList={getSection(data)} location={props.location} />
 					</div>
 				</nav>

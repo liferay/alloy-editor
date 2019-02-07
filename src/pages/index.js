@@ -19,7 +19,7 @@ class Index extends Component {
         const description = "Your all-about-liferay-themes place 💖";
 
         const headerImage = {
-            backgroundImage: 'url(https://alloyeditor.com/images/banner_back.png)'
+            backgroundImage: 'url(/images/home/banner_back.png)'
         }
 
         return (
@@ -75,8 +75,8 @@ class Index extends Component {
                             <div className="row">
                                 <div className="col-12 col-xl-10 mx-auto">
                                     <div className="row my-row">
-                                        <div className="col-12 col-lg-6 order-lg-1 text-center text-lg-right">
-                                            <img className="img-fluid" alt="" src="https://alloyeditor.com/images/landing_features/features_ui.png" />
+                                        <div className="col-12 col-lg-6 order-lg-1 d-flex justify-content-center justify-content-lg-end align-items-center">
+                                            <img className="img-fluid" alt="" src="/images/home/features_ui.png" />
                                         </div>
 
                                         <div className="col-12 col-lg-6 text-center text-lg-left">
@@ -88,12 +88,12 @@ class Index extends Component {
                                         </div>
                                     </div>
 
-                                    <div className="row my-row text-center text-lg-left">
-                                        <div className="col-12 col-lg-6">
-                                            <img className="img-fluid" alt="" src="https://alloyeditor.com/images/landing_features/features_estanterias.png" />
+                                    <div className="row my-row">
+                                        <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start align-items-center">
+                                            <img className="img-fluid" alt="" src="/images/home/features_estanterias.png" />
                                         </div>
 
-                                        <div className="col-12 col-lg-6">
+                                        <div className="col-12 col-lg-6 text-center text-lg-left">
                                             <h2 className="h1 font-weight-bold mt-5 mt-lg-0">So many things to do!</h2>
 
                                             <p className="mt-4">AlloyEditor comes out of the box with as much editing power as you'll probably ever need, but we plan to keep on adding new features so you can edit your content in any way you can imagine.</p>
@@ -103,8 +103,8 @@ class Index extends Component {
                                     </div>
 
                                     <div className="row my-row">
-                                        <div className="col-12 col-lg-6 order-lg-1 text-center text-lg-right">
-                                            <img className="img-fluid" alt="" src="https://alloyeditor.com/images/landing_features/features_corazon.png" />
+                                        <div className="col-12 col-lg-6 order-lg-1 d-flex justify-content-center justify-content-lg-end align-items-center">
+                                            <img className="img-fluid" alt="" src="/images/home/features_corazon.png" />
                                         </div>
 
                                         <div className="col-12 col-lg-6 text-center text-lg-left">

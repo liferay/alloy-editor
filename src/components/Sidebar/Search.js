@@ -19,7 +19,7 @@ class Search extends Component {
 				inputSelector: '#algolia-doc-search',
 			});
 		} else {
-			this.setState({disabled: true});
+			// this.setState({disabled: true});
 		}
 	}
 
@@ -38,18 +38,20 @@ class Search extends Component {
 						<div className="input-group">
 							<input
 								disabled={this.state.disabled}
-								className="form-control"
+								className="form-control h-auto"
 								id="algolia-doc-search"
 								name="q"
 								placeholder={placeholder}
 								required
 								type="text"
 							/>
-							<span className="input-group-addon">
-								<svg className="lexicon-icon">
-									<use xlinkHref="/images/icons/icons.svg#search" />
-								</svg>
-							</span>
+							<div className="input-group-append">
+								<button className="btn btn-outline-secondary" type="button">
+									<svg className="lexicon-icon">
+										<use href="/images/icons/icons.svg#search" />
+									</svg>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>

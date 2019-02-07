@@ -1,6 +1,6 @@
 ---
 layout: "redirect"
-redirect: "/docs/Porygon/detail.html"
+redirect: "/docs/Develop/about.html"
 title: "All Themes"
 mainPage: false
 ---

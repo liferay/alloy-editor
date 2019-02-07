@@ -23,27 +23,22 @@
 }
 
 // Element Classes
-.btn-white {
-	color: $primary;
-	box-shadow: 0px 8px 16px rgba(39, 40, 51, 0.16);
+.btn-primary {
+	color: white;
 
 	&:hover {
-			color: $primary;
+		color: white;
 	}
 }
 
-.bg-light2 {
-	background-color: #E7E7ED;
-}
+// .card {
+// 	transition: all 0.4s;
 
-.card {
-	transition: all 0.4s;
-
-	&:hover {
-			box-shadow: 6px 9px 36px rgba(48, 49, 63, 0.2);
-			transform: translateY(-4px);
-	}
-}
+// 	&:hover {
+// 			box-shadow: 6px 9px 36px rgba(48, 49, 63, 0.2);
+// 			transform: translateY(-4px);
+// 	}
+// }
 
 .display-2 {
 	@include media-breakpoint-down(sm) {

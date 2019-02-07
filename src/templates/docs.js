@@ -65,10 +65,20 @@ export default class Docs extends Component {
                             <Sidebar location={location} navbarToggled={this.state.navbarToggled} />
 
                             <div className="sidebar-offset pt-header">
-                                <div className="py-4 p-sm-5 min-vh-100">
+                                <div className="py-5 bg-dark text-white">
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-md-12">
+                                                <h1 class="text-center my-5">{title}</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="py-4 p-sm-5 min-vh-100">
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col-md-12 col-xl-8 mx-auto">
                                                 <article className="docs-content">
                                                     <MDXRenderer>{code.body}</MDXRenderer>
                                                 </article>
