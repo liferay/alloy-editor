@@ -3,57 +3,53 @@ import ButtonLinkEdit from '../../../src/components/buttons/button-link-edit.jsx
 import ButtonLinkTargetEdit from '../../../src/components/buttons/button-link-target-edit.jsx';
 import ButtonTargetList from '../../../src/components/buttons/button-target-list.jsx';
 
-(function() {
-	'use strict';
+var assert = chai.assert;
+var Simulate = ReactTestUtils.Simulate;
+var TestUtils = ReactTestUtils;
 
-	var assert = chai.assert;
-	var Simulate = ReactTestUtils.Simulate;
-	var TestUtils = ReactTestUtils;
+describe('ButtonTargetList', function() {
+	before(Utils.createAlloyEditor);
 
-	describe('ButtonTargetList', function() {
-		before(Utils.createAlloyEditor);
+	after(Utils.destroyAlloyEditor);
 
-		after(Utils.destroyAlloyEditor);
+	beforeEach(Utils.beforeEach);
 
-		beforeEach(Utils.beforeEach);
+	afterEach(Utils.afterEach);
 
-		afterEach(Utils.afterEach);
+	it('should ButtonTargetList dropdown component when dropdown button is pressed', function() {
+		bender.tools.selection.setWithHtml(
+			this.nativeEditor,
+			'There should be a <a>{selection}</a> made bold.'
+		);
 
-		it('should ButtonTargetList dropdown component when dropdown button is pressed', function() {
-			bender.tools.selection.setWithHtml(
-				this.nativeEditor,
-				'There should be a <a>{selection}</a> made bold.'
-			);
+		var buttonLink = ReactDOM.render(
+			<ButtonLinkEdit editor={this.editor} />,
+			this.container
+		);
 
-			var buttonLink = ReactDOM.render(
-				<ButtonLinkEdit editor={this.editor} />,
-				this.container
-			);
+		var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(
+			buttonLink,
+			ButtonLinkTargetEdit
+		);
 
-			var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(
-				buttonLink,
-				ButtonLinkTargetEdit
-			);
+		var button = ReactDOM.findDOMNode(
+			buttonLinkTargetEditRendered[0]
+		).getElementsByTagName('button')[0];
 
-			var button = ReactDOM.findDOMNode(
-				buttonLinkTargetEditRendered[0]
-			).getElementsByTagName('button')[0];
+		Simulate.click(button);
 
-			Simulate.click(button);
+		var buttonDropdown = TestUtils.scryRenderedComponentsWithType(
+			buttonLink,
+			ButtonDropdown
+		);
 
-			var buttonDropdown = TestUtils.scryRenderedComponentsWithType(
-				buttonLink,
-				ButtonDropdown
-			);
+		var buttonTargetList = TestUtils.scryRenderedComponentsWithType(
+			buttonLink,
+			ButtonTargetList
+		);
 
-			var buttonTargetList = TestUtils.scryRenderedComponentsWithType(
-				buttonLink,
-				ButtonTargetList
-			);
+		assert.strictEqual(buttonTargetList.length, 1);
 
-			assert.strictEqual(buttonTargetList.length, 1);
-
-			assert.strictEqual(buttonDropdown.length, 1);
-		});
+		assert.strictEqual(buttonDropdown.length, 1);
 	});
-})();
+});

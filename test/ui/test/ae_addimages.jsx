@@ -1,21 +1,17 @@
-(function() {
-	'use strict';
+var assert = chai.assert;
 
-	var assert = chai.assert;
+describe('Plugin ae_addimages', function() {
+	before(Utils.createAlloyEditor);
 
-	describe('Plugin ae_addimages', function() {
-		before(Utils.createAlloyEditor);
+	after(Utils.destroyAlloyEditor);
 
-		after(Utils.destroyAlloyEditor);
+	beforeEach(Utils.beforeEach);
 
-		beforeEach(Utils.beforeEach);
+	afterEach(Utils.afterEach);
 
-		afterEach(Utils.afterEach);
-
-		it('should not throw error in case of missing `clipboardData.items` property', function() {
-			assert.doesNotThrow(
-				this.nativeEditor.plugins.ae_addimages._onPaste.bind(null, {})
-			);
-		});
+	it('should not throw error in case of missing `clipboardData.items` property', function() {
+		assert.doesNotThrow(
+			this.nativeEditor.plugins.ae_addimages._onPaste.bind(null, {})
+		);
 	});
-})();
+});
