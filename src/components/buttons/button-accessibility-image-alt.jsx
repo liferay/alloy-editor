@@ -21,8 +21,8 @@ class ButtonAccessibilityImageAlt extends React.Component {
 
 	static propTypes = {};
 
-	constructor(prop) {
-		super(prop);
+	constructor(props) {
+		super(props);
 
 		const element = props.context.editor
 			.get('nativeEditor')
