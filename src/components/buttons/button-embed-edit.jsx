@@ -112,8 +112,6 @@ class ButtonEmbedEdit extends React.Component {
 			opacity: this.state.linkHref ? 1 : 0,
 		};
 
-		const editor = this.context.editor;
-
 		return (
 			<div className="ae-container-edit-link">
 				<button
