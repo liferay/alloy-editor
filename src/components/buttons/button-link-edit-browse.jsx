@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import ButtonIcon from './button-icon.jsx';
 import ButtonLinkEdit from './button-link-edit.jsx';

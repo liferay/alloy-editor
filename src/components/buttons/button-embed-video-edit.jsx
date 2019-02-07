@@ -2,7 +2,6 @@ import ButtonIcon from './button-icon.jsx';
 import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 
 const KEY_ENTER = 13;
 const KEY_ESC = 27;
