@@ -2,14 +2,8 @@ import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import ButtonIcon from '../buttons/button-icon.jsx';
 import React from 'react';
 
-(function() {
-	'use strict';
-
-	/* istanbul ignore if */
-	if (CKEDITOR.plugins.get('ae_richcombobridge')) {
-		return;
-	}
-
+/* istanbul ignore if */
+if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 	let RICH_COMBO_DEFS = {};
 
 	/**
@@ -264,4 +258,4 @@ import React from 'react';
 			});
 		},
 	});
-})();
+}

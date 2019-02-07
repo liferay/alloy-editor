@@ -3,13 +3,7 @@
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_tabletools')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_tabletools')) {
 	let cellNodeRegex = /^(?:td|th)$/;
 
 	function getSelectedCells(selection) {
@@ -998,7 +992,7 @@
 
 		getSelectedCells: getSelectedCells,
 	});
-})();
+}
 
 /**
  * Create a two-dimension array that reflects the actual layout of table cells,

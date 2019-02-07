@@ -1,13 +1,7 @@
 import React from 'react';
 
-(function() {
-	'use strict';
-
-	/* istanbul ignore if */
-	if (CKEDITOR.plugins.get('ae_buttonbridge')) {
-		return;
-	}
-
+/* istanbul ignore if */
+if (!CKEDITOR.plugins.get('ae_buttonbridge')) {
 	let BUTTON_DEFS = {};
 
 	/**
@@ -161,4 +155,4 @@ import React from 'react';
 			});
 		},
 	});
-})();
+}

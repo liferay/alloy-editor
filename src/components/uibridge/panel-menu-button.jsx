@@ -1,14 +1,8 @@
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import React from 'react';
 
-(function() {
-	'use strict';
-
-	/* istanbul ignore if */
-	if (CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
-		return;
-	}
-
+/* istanbul ignore if */
+if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
 	let PANEL_MENU_DEFS = {};
 
 	/**
@@ -218,4 +212,4 @@ import React from 'react';
 			});
 		},
 	});
-})();
+}

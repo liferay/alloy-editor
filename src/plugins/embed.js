@@ -1,11 +1,5 @@
-(function() {
-	'use strict';
-
-	/* istanbul ignore if */
-	if (CKEDITOR.plugins.get('ae_embed')) {
-		return;
-	}
-
+/* istanbul ignore if */
+if (!CKEDITOR.plugins.get('ae_embed')) {
 	let REGEX_HTTP = /^https?/;
 
 	let REGEX_DEFAULT_LINK = /<a href=/;
@@ -197,4 +191,4 @@
 			});
 		},
 	});
-})();
+}

@@ -1,10 +1,4 @@
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_uicore')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_uicore')) {
 	/**
 	 * UICore class which will handle user interactions with the editor. These interactions
 	 * might be triggered via mouse, keyboard or touch devices. The class fill fire an event via
@@ -181,4 +175,4 @@
 			return statusElement;
 		},
 	});
-})();
+}

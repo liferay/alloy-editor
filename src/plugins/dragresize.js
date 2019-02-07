@@ -6,13 +6,7 @@
  * - Snap to size of other images in editor
  * - Escape while dragging cancels resize
  */
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_dragresize')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_dragresize')) {
 	let IMAGE_HANDLES = {
 		both: ['tl', 'tm', 'tr', 'lm', 'rm', 'bl', 'bm', 'br'],
 		height: ['tl', 'tm', 'tr', 'bl', 'bm', 'br'],
@@ -573,4 +567,4 @@
 			height: rect.height,
 		};
 	}
-})();
+}

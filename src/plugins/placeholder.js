@@ -1,10 +1,4 @@
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_placeholder')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_placeholder')) {
 	/**
 	 * CKEDITOR enterMode config set the behavior of paragraphs
 	 * When the content is empty CKEDITOR keeps the enterMode string
@@ -93,4 +87,4 @@
 			editorNode.removeClass(editor.config.placeholderClass);
 		},
 	});
-})();
+}

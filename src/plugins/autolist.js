@@ -1,10 +1,4 @@
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_autolist')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_autolist')) {
 	let KEY_BACK = 8;
 
 	let KEY_SPACE = 32;
@@ -187,4 +181,4 @@
 			}
 		},
 	});
-})();
+}

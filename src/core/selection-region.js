@@ -1,10 +1,4 @@
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_selectionregion')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 	CKEDITOR.SELECTION_TOP_TO_BOTTOM = 0;
 	CKEDITOR.SELECTION_BOTTOM_TO_TOP = 1;
 	CKEDITOR.SELECTION_LEFT_TO_RIGHT = 2;
@@ -417,4 +411,4 @@
 			}
 		},
 	});
-})();
+}

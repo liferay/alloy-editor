@@ -1,12 +1,6 @@
-(function() {
-	'use strict';
+let isIE = CKEDITOR.env.ie;
 
-	let isIE = CKEDITOR.env.ie;
-
-	if (CKEDITOR.plugins.get('ae_addimages')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_addimages')) {
 	/**
 	 * CKEditor plugin which allows Drag&Drop of images directly into the editable area. The image will be encoded
 	 * as Data URI. An event `beforeImageAdd` will be fired with the list of dropped images. If any of the listeners
@@ -273,4 +267,4 @@
 			reader.readAsDataURL(file);
 		},
 	});
-})();
+}

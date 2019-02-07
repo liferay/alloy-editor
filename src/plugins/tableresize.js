@@ -3,13 +3,7 @@
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_tableresize')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_tableresize')) {
 	let pxUnit = CKEDITOR.tools.cssLength;
 
 	function getWidth(el) {
@@ -526,4 +520,4 @@
 			});
 		},
 	});
-})();
+}

@@ -1,10 +1,4 @@
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_autolink')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_autolink')) {
 	// Disables the auto URL detection feature in IE, their lacks functionality:
 	// They convert the links only on space. We do on space, comma, semicolon and Enter.
 	if (/MSIE ([^;]*)|Trident.*; rv:([0-9.]+)/.test(navigator.userAgent)) {
@@ -381,4 +375,4 @@
 			);
 		},
 	});
-})();
+}
