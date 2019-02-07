@@ -1,89 +1,80 @@
-(function() {
-	'use strict';
+const assert = chai.assert;
 
-	var assert = chai.assert;
+import debounce from '../../../src/core/debounce';
 
-	describe('Debounce', function() {
-		it('should debounce function execution', function(done) {
-			var listener = sinon.stub();
-			var fn = CKEDITOR.tools.debounce(listener, 0);
+describe('Debounce', () => {
+	let clock;
 
-			fn();
-			fn();
-			fn();
-
-			setTimeout(function() {
-				assert.ok(listener.calledOnce);
-
-				done();
-			}, 0);
-		});
-
-		it('should call debounced function with additional alguments', function(done) {
-			var listener = sinon.stub();
-			var fn = CKEDITOR.tools.debounce(listener, 0);
-
-			fn('param1');
-
-			setTimeout(function() {
-				assert.ok(listener.calledWith('param1'));
-				done();
-			}, 0);
-		});
-
-		it('should debounce function execution with context and params', function(done) {
-			var ctx = {};
-			var listener = sinon.stub();
-			var args = ['param1', 'param2'];
-			var fn = CKEDITOR.tools.debounce(listener, 0, ctx, args);
-
-			fn();
-			fn();
-			fn();
-
-			setTimeout(function() {
-				assert.ok(listener.calledOnce);
-				assert.ok(listener.calledOn(ctx));
-				assert.ok(listener.calledWith('param1', 'param2'));
-
-				done();
-			}, 0);
-		});
-
-		it('should detach a debounced function execution', function(done) {
-			var listener = sinon.stub();
-			var fn = CKEDITOR.tools.debounce(listener, 100);
-
-			fn();
-
-			fn.detach();
-
-			setTimeout(function() {
-				assert.notOk(listener.calledOnce);
-
-				done();
-			}, 0);
-		});
-
-		xit('should debounce function execution for the specified delay', function(done) {
-			var listener = sinon.stub();
-			var fn = CKEDITOR.tools.debounce(listener, 20);
-
-			fn();
-
-			setTimeout(function() {
-				fn();
-			}, 10);
-
-			setTimeout(function() {
-				fn();
-			}, 10);
-
-			setTimeout(function() {
-				assert.ok(listener.calledOnce);
-
-				done();
-			}, 40);
-		});
+	beforeEach(() => {
+		clock = sinon.useFakeTimers();
 	});
-})();
+
+	afterEach(() => {
+		clock.restore();
+	});
+
+	it('debounces function execution', () => {
+		const listener = sinon.stub();
+		const fn = debounce(listener, 0);
+
+		fn();
+		fn();
+		fn();
+
+		clock.tick(10);
+		assert.ok(listener.calledOnce);
+	});
+
+	it('calls debounced function with additional alguments', () => {
+		const listener = sinon.stub();
+		const fn = debounce(listener, 0);
+
+		fn('param1');
+
+		clock.tick(10);
+		assert.ok(listener.calledWith('param1'));
+	});
+
+	it('debounces function execution with context and params', () => {
+		const ctx = {};
+		const listener = sinon.stub();
+		const args = ['param1', 'param2'];
+		const fn = debounce(listener, 0, ctx, args);
+
+		fn();
+		fn();
+		fn();
+
+		clock.tick(10);
+		assert.ok(listener.calledOnce);
+		assert.ok(listener.calledOn(ctx));
+		assert.ok(listener.calledWith('param1', 'param2'));
+	});
+
+	it('detaches a debounced function execution', () => {
+		const listener = sinon.stub();
+		const fn = debounce(listener, 100);
+
+		fn();
+
+		fn.detach();
+
+		clock.tick(10);
+		assert.notOk(listener.calledOnce);
+	});
+
+	it('debounces function execution for the specified delay', () => {
+		const listener = sinon.stub();
+		const fn = debounce(listener, 20);
+
+		fn();
+		clock.tick(10);
+		fn();
+		clock.tick(10);
+		assert.notOk(listener.calledOnce);
+
+		fn();
+		clock.tick(40);
+		assert.ok(listener.calledOnce);
+	});
+});
