@@ -1,7 +1,7 @@
 import ButtonIcon from './button-icon.jsx';
+import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 
 const KEY_ENTER = 13;
 const KEY_ESC = 27;
@@ -14,21 +14,14 @@ const KEY_ESC = 27;
  * @class ButtonEmbedVideoEdit
  */
 class ButtonEmbedVideoEdit extends React.Component {
+	static contextType = EditorContext;
+
 	static key = 'embedVideoEdit';
 
-	static propTypes = {
-		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @instance
-		 * @memberof ButtonEmbedVideoEdit
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-	};
+	static propTypes = {};
 
-	constructor(props, context) {
-		super(props, context);
+	constructor(props) {
+		super(props);
 
 		this.state = this.getInitialState();
 	}
@@ -76,7 +69,8 @@ class ButtonEmbedVideoEdit extends React.Component {
 	 * @method getInitialState
 	 */
 	getInitialState() {
-		const editor = this.props.editor.get('nativeEditor');
+		// Can't access context from constructor, so get editor from props.
+		const editor = this.props.context.editor.get('nativeEditor');
 		let element;
 
 		const selection = editor.getSelection();
@@ -143,7 +137,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 					disabled={!this._isValidState()}
 					onClick={this._embedVideoURL}
 					title={AlloyEditor.Strings.confirm}>
-					<ButtonIcon editor={this.props.editor} symbol="check" />
+					<ButtonIcon symbol="check" />
 				</button>
 			</div>
 		);
@@ -174,7 +168,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 	 * @protected
 	 */
 	_embedVideoURL = () => {
-		const nativeEditor = this.props.editor.get('nativeEditor');
+		const nativeEditor = this.context.editor.get('nativeEditor');
 
 		nativeEditor.execCommand('embedUrl', {
 			type: 'video',
@@ -255,4 +249,4 @@ class ButtonEmbedVideoEdit extends React.Component {
 	}
 }
 
-export default ButtonEmbedVideoEdit;
+export default EditorContext.toProps(ButtonEmbedVideoEdit);

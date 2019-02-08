@@ -62,7 +62,7 @@ class ButtonUnderline extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.underline}>
-				<ButtonIcon editor={this.props.editor} symbol="underline" />
+				<ButtonIcon symbol="underline" />
 			</button>
 		);
 	}

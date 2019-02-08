@@ -1,3 +1,4 @@
+import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang.js';
 
 /**
@@ -7,7 +8,9 @@ import Lang from '../../oop/lang.js';
  * @class ButtonStyle
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class ButtonStyle extends WrappedComponent {
+		static contextType = EditorContext;
+
 		/**
 		 * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
 		 *
@@ -24,7 +27,7 @@ export default WrappedComponent =>
 
 			if (Lang.isString(style)) {
 				let parts = style.split('.');
-				let currentMember = this.props.editor.get('nativeEditor')
+				let currentMember = this.context.editor.get('nativeEditor')
 					.config;
 				let property = parts.shift();
 
@@ -81,14 +84,8 @@ export default WrappedComponent =>
 		 * @return {Boolean} True if style is active, false otherwise.
 		 */
 		isActive() {
-			let result;
-
-			let editor = this.props.editor.get('nativeEditor');
-
-			let elementPath = editor.elementPath();
-
-			result = this.getStyle().checkActive(elementPath, editor);
-
-			return result;
+			const editor = this.context.editor.get('nativeEditor');
+			const elementPath = editor.elementPath();
+			return this.getStyle().checkActive(elementPath, editor);
 		}
 	};

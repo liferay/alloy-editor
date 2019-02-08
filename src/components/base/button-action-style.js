@@ -1,3 +1,4 @@
+import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang.js';
 
 /**
@@ -12,7 +13,9 @@ import Lang from '../../oop/lang.js';
  * @class ButtonActionStyle
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class ButtonActionStyle extends WrappedComponent {
+		static contextType = EditorContext;
+
 		/**
 		 * Removes or applies the component style to the current selection.
 		 *
@@ -25,7 +28,7 @@ export default WrappedComponent =>
 				Lang.isFunction(this.isActive) &&
 				Lang.isFunction(this.getStyle)
 			) {
-				let editor = this.props.editor.get('nativeEditor');
+				const editor = this.context.editor.get('nativeEditor');
 
 				editor.getSelection().lock();
 

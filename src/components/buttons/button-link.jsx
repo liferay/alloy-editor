@@ -3,6 +3,7 @@ import ButtonIcon from './button-icon.jsx';
 import ButtonKeystroke from '../base/button-keystroke.js';
 import ButtonLinkEdit from './button-link-edit.jsx';
 import ButtonStateClasses from '../base/button-state-classes.js';
+import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 
 /**
@@ -18,6 +19,8 @@ import React from 'react';
  * @uses ButtonStateClasses
  */
 class ButtonLink extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * Lifecycle. Returns the default values of the properties used in the widget.
 	 *
@@ -54,7 +57,7 @@ class ButtonLink extends React.Component {
 	isActive() {
 		return (
 			new CKEDITOR.Link(
-				this.props.editor.get('nativeEditor')
+				this.context.editor.get('nativeEditor')
 			).getFromSelection() !== null
 		);
 	}
@@ -83,7 +86,7 @@ class ButtonLink extends React.Component {
 					onClick={this._requestExclusive}
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.link}>
-					<ButtonIcon editor={this.props.editor} symbol="link" />
+					<ButtonIcon symbol="link" />
 				</button>
 			);
 		}

@@ -7,7 +7,7 @@ import Lang from '../../oop/lang.js';
  * @class WidgetArrowBox
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class WidgetArrowBox extends WrappedComponent {
 		/**
 		 * Returns the list of arrow box classes associated to the current element's state. It relies
 		 * on the getInteractionPoint method to calculate the selection direction.

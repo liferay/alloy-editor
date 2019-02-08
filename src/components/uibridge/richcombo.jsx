@@ -1,6 +1,7 @@
+import React from 'react';
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import ButtonIcon from '../buttons/button-icon.jsx';
-import React from 'react';
+import EditorContext from '../../adapter/editor-context';
 
 (function() {
 	'use strict';
@@ -36,6 +37,8 @@ import React from 'react';
 
 		if (!RichComboBridge) {
 			RichComboBridge = class extends React.Component {
+				static contextType = EditorContext;
+
 				static displayName = richComboName;
 
 				static key = richComboName;
@@ -72,7 +75,7 @@ import React from 'react';
 				}
 
 				componentWillMount() {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 
 					let editorCombo =
 						RICH_COMBO_DEFS[editor.name][richComboName];
@@ -101,7 +104,7 @@ import React from 'react';
 				}
 
 				render() {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 
 					let richComboLabel =
 						RICH_COMBO_DEFS[editor.name][richComboName]
@@ -121,10 +124,7 @@ import React from 'react';
 									<span className="ae-container-dropdown-selected-item">
 										{richComboLabel}
 									</span>
-									<ButtonIcon
-										editor={this.props.editor}
-										symbol="caret-bottom"
-									/>
+									<ButtonIcon symbol="caret-bottom" />
 								</div>
 							</button>
 							{this.props.expanded && (
@@ -138,7 +138,7 @@ import React from 'react';
 				}
 
 				_cacheValue(value) {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 
 					RICH_COMBO_DEFS[editor.name][
 						richComboName
@@ -175,7 +175,7 @@ import React from 'react';
 				}
 
 				_onClick = event => {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 
 					let editorCombo =
 						RICH_COMBO_DEFS[editor.name][richComboName];

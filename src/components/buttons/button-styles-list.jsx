@@ -101,7 +101,6 @@ class ButtonStylesList extends React.Component {
 		if (this.props.showRemoveStylesItem) {
 			removeStylesItem = (
 				<ButtonStylesListItemRemove
-					editor={this.props.editor}
 					onDismiss={this.props.toggleDropdown}
 				/>
 			);
@@ -143,7 +142,6 @@ class ButtonStylesList extends React.Component {
 	 * @return {Array} Rendered instances of ButtonStylesListItem class
 	 */
 	_renderStylesItems(styles) {
-		const editor = this.props.editor;
 		let items;
 
 		if (styles && styles.length) {
@@ -152,7 +150,6 @@ class ButtonStylesList extends React.Component {
 					<li key={item.name} role="option">
 						<ButtonStylesListItem
 							activeStyle={this.props.activeStyle}
-							editor={editor}
 							name={item.name}
 							style={item.style}
 						/>

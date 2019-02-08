@@ -16,7 +16,7 @@ let DEFAULT_GUTTER = {
 let centerToolbar = function(toolbar, rect) {
 	let toolbarNode = ReactDOM.findDOMNode(toolbar);
 
-	let nativeEditor = toolbar.props.editor.get('nativeEditor');
+	let nativeEditor = toolbar.context.editor.get('nativeEditor');
 	let uiNode = nativeEditor.config.uiNode || document.body;
 	let uiNodeStyle = getComputedStyle(uiNode);
 	let uiNodeMarginLeft = parseInt(

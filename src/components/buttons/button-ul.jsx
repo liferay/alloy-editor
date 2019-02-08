@@ -58,7 +58,7 @@ class ButtonUnorderedlist extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.bulletedlist}>
-				<ButtonIcon editor={this.props.editor} symbol="list-ul" />
+				<ButtonIcon symbol="list-ul" />
 			</button>
 		);
 	}

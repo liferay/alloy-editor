@@ -1,5 +1,6 @@
-import ButtonIcon from './button-icon.jsx';
 import React from 'react';
+import ButtonIcon from './button-icon.jsx';
+import EditorContext from '../../adapter/editor-context';
 
 const KEY_ENTER = 13;
 const KEY_ESC = 27;
@@ -11,6 +12,8 @@ const KEY_ESC = 27;
  * @class ButtonTableEdit
  */
 class ButtonTableEdit extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * Lifecycle. Returns the default values of the properties used in the widget.
 	 *
@@ -78,7 +81,7 @@ class ButtonTableEdit extends React.Component {
 	 * @protected
 	 */
 	_createTable = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 		const tableUtils = new CKEDITOR.Table(editor);
 
 		tableUtils.create({
@@ -181,7 +184,7 @@ class ButtonTableEdit extends React.Component {
 					aria-label="Confirm"
 					className="ae-button"
 					onClick={this._createTable}>
-					<ButtonIcon editor={this.props.editor} symbol="check" />
+					<ButtonIcon symbol="check" />
 				</button>
 			</div>
 		);

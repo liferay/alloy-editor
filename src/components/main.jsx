@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WidgetExclusive from './base/widget-exclusive.js';
 import WidgetFocusManager from './base/widget-focus-manager.js';
-import PropTypes from 'prop-types';
+import EditorContext from '../adapter/editor-context.js';
 
 /**
  * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).
@@ -12,6 +13,57 @@ import PropTypes from 'prop-types';
  * @uses WidgetFocusManager
  */
 class UI extends React.Component {
+	static contextType = EditorContext;
+
+	/**
+	 * Lifecycle. Returns the default values of the properties used in the widget.
+	 *
+	 * @instance
+	 * @memberof UI
+	 * @method getDefaultProps
+	 * @return {Object} The default properties.
+	 */
+	static defaultProps = {
+		circular: true,
+		descendants: '[class^=ae-toolbar-]',
+		eventsDelay: 0,
+		keys: {
+			next: 9,
+		},
+	};
+
+	static propTypes = {
+		/**
+		 * Localized messages for live aria updates. Should include the following messages:
+		 * - noToolbar: Notification for no available toolbar in the editor.
+		 * - oneToolbar: Notification for just one available toolbar in the editor.
+		 * - manyToolbars: Notification for more than one available toolbar in the editor.
+		 *
+		 * @instance
+		 * @memberof UI
+		 * @property {Object} ariaUpdates
+		 */
+		ariaUpdates: PropTypes.object,
+
+		/**
+		 * The delay (ms), after which key or mouse events will be processed.
+		 *
+		 * @instance
+		 * @memberof UI
+		 * @property {Number} eventsDelay
+		 */
+		eventsDelay: PropTypes.number,
+
+		/**
+		 * The toolbars configuration for this editor instance
+		 *
+		 * @instance
+		 * @memberof UI
+		 * @property {Object} toolbars
+		 */
+		toolbars: PropTypes.object.isRequired,
+	};
+
 	constructor(props) {
 		super(props);
 
@@ -28,7 +80,7 @@ class UI extends React.Component {
 	 * @method componentDidMount
 	 */
 	componentDidMount() {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		editor.on('editorInteraction', this._onEditorInteraction, this);
 		editor.on('actionPerformed', this._onActionPerformed, this);
@@ -70,7 +122,7 @@ class UI extends React.Component {
 	componentDidUpdate(prevProps, prevState) {
 		const domNode = ReactDOM.findDOMNode(this);
 
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		if (domNode) {
 			editor.fire('ariaUpdate', {
@@ -197,7 +249,7 @@ class UI extends React.Component {
 			const props = this.mergeExclusiveProps(
 				{
 					config: this.props.toolbars[toolbar.key],
-					editor: this.props.editor,
+					editor: this.context.editor,
 					editorEvent: this.state.editorEvent,
 					key: toolbar.key,
 					onDismiss: this._onDismissToolbarFocus,
@@ -226,7 +278,7 @@ class UI extends React.Component {
 	 * @param {SynteticEvent} event The provided event
 	 */
 	_onActionPerformed(_event) {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		editor.focus();
 
@@ -245,7 +297,7 @@ class UI extends React.Component {
 	 * @method _onDismissToolbarFocus
 	 */
 	_onDismissToolbarFocus = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		editor.focus();
 	};
@@ -299,7 +351,7 @@ class UI extends React.Component {
 		const domNode = ReactDOM.findDOMNode(this);
 
 		if (domNode) {
-			const editable = this.props.editor.get('nativeEditor').editable();
+			const editable = this.context.editor.get('nativeEditor').editable();
 			const parentNode = target.parentNode;
 			const targetNode = new CKEDITOR.dom.node(target);
 
@@ -328,23 +380,6 @@ class UI extends React.Component {
 }
 
 /**
- * Lifecycle. Returns the default values of the properties used in the widget.
- *
- * @instance
- * @memberof UI
- * @method getDefaultProps
- * @return {Object} The default properties.
- */
-UI.defaultProps = {
-	circular: true,
-	descendants: '[class^=ae-toolbar-]',
-	eventsDelay: 0,
-	keys: {
-		next: 9,
-	},
-};
-
-/**
  * Fired when component updates and when it is rendered in the DOM.
  * The payload consists from a `message` property containing the ARIA message.
  *
@@ -361,46 +396,5 @@ UI.defaultProps = {
  *
  * @event ariaUpdate
  */
-
-UI.propTypes = {
-	/**
-	 * Localized messages for live aria updates. Should include the following messages:
-	 * - noToolbar: Notification for no available toolbar in the editor.
-	 * - oneToolbar: Notification for just one available toolbar in the editor.
-	 * - manyToolbars: Notification for more than one available toolbar in the editor.
-	 *
-	 * @instance
-	 * @memberof UI
-	 * @property {Object} ariaUpdates
-	 */
-	ariaUpdates: PropTypes.object,
-
-	/**
-	 * The editor instance where the component is being used.
-	 *
-	 * @instance
-	 * @memberof UI
-	 * @property {Object} editor
-	 */
-	editor: PropTypes.object.isRequired,
-
-	/**
-	 * The delay (ms), after which key or mouse events will be processed.
-	 *
-	 * @instance
-	 * @memberof UI
-	 * @property {Number} eventsDelay
-	 */
-	eventsDelay: PropTypes.number,
-
-	/**
-	 * The toolbars configuration for this editor instance
-	 *
-	 * @instance
-	 * @memberof UI
-	 * @property {Object} toolbars
-	 */
-	toolbars: PropTypes.object.isRequired,
-};
 
 export default WidgetExclusive(WidgetFocusManager(UI));

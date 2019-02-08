@@ -1,9 +1,10 @@
+import React from 'react';
 import ButtonCfgProps from '../base/button-props.js';
 import ButtonIcon from './button-icon.jsx';
 import ButtonLinkAutocompleteList from './button-link-autocomplete-list.jsx';
 import ButtonLinkTargetEdit from './button-link-target-edit.jsx';
+import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang.js';
-import React from 'react';
 import WidgetDropdown from '../base/widget-dropdown.js';
 import WidgetFocusManager from '../base/widget-focus-manager.js';
 
@@ -17,6 +18,8 @@ import WidgetFocusManager from '../base/widget-focus-manager.js';
  * @uses WidgetFocusManager
  */
 class ButtonLinkEdit extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * Lifecycle. Returns the default values of the properties used in the widget.
 	 *
@@ -100,7 +103,7 @@ class ButtonLinkEdit extends React.Component {
 	render() {
 		let targetSelector = {
 			allowedTargets: this.props.allowedTargets,
-			editor: this.props.editor,
+			editor: this.context.editor,
 			handleLinkTargetChange: this._handleLinkTargetChange,
 			selectedTarget:
 				this.state.linkTarget || AlloyEditor.Strings.linkTargetDefault,
@@ -125,7 +128,7 @@ class ButtonLinkEdit extends React.Component {
 			let autocompleteDropdownProps = {
 				autocompleteSelected: this.state.autocompleteSelected,
 				data: dataFn,
-				editor: this.props.editor,
+				editor: this.context.editor,
 				handleLinkAutocompleteClick: this._handleLinkAutocompleteClick,
 				onDismiss: this.props.toggleDropdown,
 				setAutocompleteState: this._setAutocompleteState,
@@ -151,10 +154,7 @@ class ButtonLinkEdit extends React.Component {
 					className="ae-button ae-button-clear"
 					onClick={this._clearLink}
 					title={AlloyEditor.Strings.clear}>
-					<ButtonIcon
-						editor={this.props.editor}
-						symbol="times-circle"
-					/>
+					<ButtonIcon symbol="times-circle" />
 				</button>
 			);
 		}
@@ -173,10 +173,7 @@ class ButtonLinkEdit extends React.Component {
 					disabled={!this.state.element}
 					onClick={this._removeLink}
 					title={AlloyEditor.Strings.remove}>
-					<ButtonIcon
-						editor={this.props.editor}
-						symbol="chain-broken"
-					/>
+					<ButtonIcon symbol="chain-broken" />
 				</button>
 				<div className="ae-container-input xxl">
 					{this.props.showTargetSelector && (
@@ -202,11 +199,7 @@ class ButtonLinkEdit extends React.Component {
 					disabled={!this._isValidState()}
 					onClick={this._updateLink}
 					title={AlloyEditor.Strings.confirm}>
-					<ButtonIcon
-						editor={this.props.editor}
-						symbol="check"
-						className="ae-icon-svg-check"
-					/>
+					<ButtonIcon symbol="check" className="ae-icon-svg-check" />
 				</button>
 			</div>
 		);
@@ -222,7 +215,9 @@ class ButtonLinkEdit extends React.Component {
 	 * @return {Object}
 	 */
 	_getInitialState() {
-		const {editor, defaultLinkTarget} = this.props;
+		// Can't access context from contructor, so get editor from props.
+		const {editor} = this.props.context;
+		const {defaultLinkTarget} = this.props;
 
 		const link = new CKEDITOR.Link(
 			editor.get('nativeEditor')
@@ -305,11 +300,13 @@ class ButtonLinkEdit extends React.Component {
 				autocompleteSelected: true,
 			});
 		} else if (event.keyCode === 27) {
-			const editor = this.props.editor.get('nativeEditor');
+			const editor = this.context.editor.get('nativeEditor');
 
 			new CKEDITOR.Link(editor).advanceSelection();
 
-			this.props.editor.get('nativeEditor').fire('actionPerformed', this);
+			this.context.editor
+				.get('nativeEditor')
+				.fire('actionPerformed', this);
 		}
 	};
 
@@ -395,7 +392,7 @@ class ButtonLinkEdit extends React.Component {
 	 * @protected
 	 */
 	_removeLink = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 		const linkUtils = new CKEDITOR.Link(editor);
 		const selection = editor.getSelection();
 		const bookmarks = selection.createBookmarks();
@@ -435,7 +432,7 @@ class ButtonLinkEdit extends React.Component {
 	 * @protected
 	 */
 	_updateLink = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 		const linkUtils = new CKEDITOR.Link(editor, {
 			appendProtocol: this.props.appendProtocol,
 		});
@@ -470,6 +467,6 @@ class ButtonLinkEdit extends React.Component {
 	};
 }
 
-export default ButtonCfgProps(
-	WidgetDropdown(WidgetFocusManager(ButtonLinkEdit))
+export default EditorContext.toProps(
+	ButtonCfgProps(WidgetDropdown(WidgetFocusManager(ButtonLinkEdit)))
 );

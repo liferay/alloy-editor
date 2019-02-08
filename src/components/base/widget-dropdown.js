@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
  * @class WidgetDropdown
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class WidgetDropdown extends WrappedComponent {
 		constructor(props) {
 			super(props);
 

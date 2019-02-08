@@ -55,10 +55,7 @@ class ButtonImageAlignCenter extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.alignCenter}>
-				<ButtonIcon
-					editor={this.props.editor}
-					symbol="align-image-center"
-				/>
+				<ButtonIcon symbol="align-image-center" />
 			</button>
 		);
 	}

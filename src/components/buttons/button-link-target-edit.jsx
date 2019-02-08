@@ -47,15 +47,11 @@ class ButtonLinkTargetEdit extends React.Component {
 						<span className="ae-container-dropdown-selected-item">
 							{this.props.selectedTarget}
 						</span>
-						<ButtonIcon
-							editor={this.props.editor}
-							symbol="caret-bottom"
-						/>
+						<ButtonIcon symbol="caret-bottom" />
 					</div>
 				</button>
 				{this.props.expanded && (
 					<ButtonTargetList
-						editor={this.props.editor}
 						onDismiss={this.props.toggleDropdown}
 						allowedLinkTargets={allowedLinkTargets}
 						handleLinkTargetChange={handleLinkTargetChange}

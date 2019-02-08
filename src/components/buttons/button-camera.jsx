@@ -54,7 +54,7 @@ class ButtonCamera extends React.Component {
 					onClick={this.props.requestExclusive.bind(ButtonCamera.key)}
 					tabIndex={this.props.tabIndex}
 					title={label}>
-					<ButtonIcon editor={this.props.editor} symbol="camera" />
+					<ButtonIcon symbol="camera" />
 				</button>
 			);
 		}

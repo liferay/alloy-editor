@@ -58,7 +58,7 @@ class ButtonQuote extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.quote}>
-				<ButtonIcon editor={this.props.editor} symbol="quote-right" />
+				<ButtonIcon symbol="quote-right" />
 			</button>
 		);
 	}

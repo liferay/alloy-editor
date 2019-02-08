@@ -35,7 +35,6 @@ class ButtonTableCell extends React.Component {
 			buttonCommandsList = (
 				<ButtonCommandsList
 					commands={this._getCommands()}
-					editor={this.props.editor}
 					listId={buttonCommandsListId}
 					onDismiss={this.props.toggleDropdown}
 				/>
@@ -52,7 +51,7 @@ class ButtonTableCell extends React.Component {
 					onClick={this.props.toggleDropdown}
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.cell}>
-					<ButtonIcon editor={this.props.editor} symbol="add-cell" />
+					<ButtonIcon symbol="add-cell" />
 				</button>
 				{buttonCommandsList}
 			</div>

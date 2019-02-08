@@ -11,7 +11,7 @@ import Lang from '../../oop/lang';
  * @class ButtonStateClasses
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class ButtonStateClasses extends WrappedComponent {
 		/**
 		 * Returns the list of state classes associated to the current element's state, according
 		 * to the results of the isActive and isDisabled methods.

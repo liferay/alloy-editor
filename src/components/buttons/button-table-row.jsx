@@ -35,7 +35,6 @@ class ButtonTableRow extends React.Component {
 			buttonCommandsList = (
 				<ButtonCommandsList
 					commands={this._getCommands()}
-					editor={this.props.editor}
 					listId={buttonCommandsListId}
 					onDismiss={this.props.toggleDropdown}
 				/>
@@ -53,7 +52,7 @@ class ButtonTableRow extends React.Component {
 					role="combobox"
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.row}>
-					<ButtonIcon editor={this.props.editor} symbol="add-row" />
+					<ButtonIcon symbol="add-row" />
 				</button>
 				{buttonCommandsList}
 			</div>

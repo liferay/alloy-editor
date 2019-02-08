@@ -57,7 +57,7 @@ class ButtonSubscript extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.subscript}>
-				<ButtonIcon editor={this.props.editor} symbol="subscript" />
+				<ButtonIcon symbol="subscript" />
 			</button>
 		);
 	}

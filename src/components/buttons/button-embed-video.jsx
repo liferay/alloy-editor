@@ -15,15 +15,6 @@ class ButtonEmbedVideo extends React.Component {
 
 	static propTypes = {
 		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @instance
-		 * @memberof ButtonEmbedVideo
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-
-		/**
 		 * The label that should be used for accessibility purposes.
 		 *
 		 * @instance
@@ -59,7 +50,7 @@ class ButtonEmbedVideo extends React.Component {
 					data-type="button-embed-video"
 					onClick={this.props.requestExclusive}
 					tabIndex={this.props.tabIndex}>
-					<ButtonIcon editor={this.props.editor} symbol="video" />
+					<ButtonIcon symbol="video" />
 				</button>
 			);
 		}

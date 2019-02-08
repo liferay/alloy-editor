@@ -1,7 +1,7 @@
 import ButtonIcon from './button-icon.jsx';
 import ButtonProps from '../base/button-props.js';
 import ButtonStateClasses from '../base/button-state-classes.js';
-import PropTypes from 'prop-types';
+import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -14,23 +14,16 @@ import ReactDOM from 'react-dom';
  *
  */
 class ButtonAccessibilityImageAlt extends React.Component {
+	static contextType = EditorContext;
+
 	static key = 'AccessibilityImageAlt';
 
-	static propTypes = {
-		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @instance
-		 * @memberof ButtonAccessibilityImageAlt
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-	};
+	static propTypes = {};
 
-	constructor(prop, context) {
-		super(prop, context);
+	constructor(props) {
+		super(props);
 
-		const element = this.props.editor
+		const element = props.context.editor
 			.get('nativeEditor')
 			.getSelection()
 			.getSelectedElement();
@@ -73,7 +66,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
 						className="ae-button"
 						onClick={this._updateImageAlt}
 						title={AlloyEditor.Strings.confirm}>
-						<ButtonIcon editor={this.props.editor} symbol="check" />
+						<ButtonIcon symbol="check" />
 					</button>
 				</div>
 			);
@@ -158,7 +151,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	 * @method  _updateImageAlt
 	 */
 	_updateImageAlt = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		const imageAlt = this.refs.refAltInput.value;
 
@@ -176,4 +169,6 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	};
 }
 
-export default ButtonProps(ButtonStateClasses(ButtonAccessibilityImageAlt));
+export default EditorContext.toProps(
+	ButtonProps(ButtonStateClasses(ButtonAccessibilityImageAlt))
+);

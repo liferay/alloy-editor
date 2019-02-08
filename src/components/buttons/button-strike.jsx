@@ -55,7 +55,7 @@ class ButtonStrike extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.strike}>
-				<ButtonIcon editor={this.props.editor} symbol="strikethrough" />
+				<ButtonIcon symbol="strikethrough" />
 			</button>
 		);
 	}

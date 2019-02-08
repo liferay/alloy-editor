@@ -2,22 +2,16 @@ import ButtonIcon from './button-icon.jsx';
 import ButtonProps from '../base/button-props.js';
 import ButtonStateClasses from '../base/button-state-classes.js';
 import ButtonStylesList from './button-styles-list.jsx';
+import EditorContext from '../../adapter/editor-context';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 class ButtonBackgroundColor extends React.Component {
+	static contextType = EditorContext;
+
 	static key = 'backgroundColor';
 
 	static propTypes = {
-		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @instance
-		 * @memberof ButtonBackgroundColor
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-
 		/**
 		 * Indicates whether the styles list is expanded or not.
 		 *
@@ -104,11 +98,10 @@ class ButtonBackgroundColor extends React.Component {
 			}
 		});
 
-		const {editor, expanded, tabIndex, toggleDropdown} = this.props;
+		const {expanded, tabIndex, toggleDropdown} = this.props;
 
 		const buttonStylesProps = {
 			activeStyle: activeColor,
-			editor,
 			onDismiss: toggleDropdown,
 			showRemoveStylesItem: false,
 			styles: colors,
@@ -123,7 +116,7 @@ class ButtonBackgroundColor extends React.Component {
 					role="combobox"
 					tabIndex={tabIndex}>
 					<span className={activeColorClass}>
-						<ButtonIcon editor={editor} symbol="textbox" />
+						<ButtonIcon symbol="textbox" />
 					</span>
 				</button>
 				{expanded && <ButtonStylesList {...buttonStylesProps} />}
@@ -132,7 +125,7 @@ class ButtonBackgroundColor extends React.Component {
 	}
 
 	_applyStyle(className) {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 
 		const styleConfig = {
 			element: 'span',
@@ -173,7 +166,7 @@ class ButtonBackgroundColor extends React.Component {
 	 * @return {Boolean} Returns true if the color is applied to the selection, false otherwise.
 	 */
 	_checkActive(styleConfig) {
-		const nativeEditor = this.props.editor.get('nativeEditor');
+		const nativeEditor = this.context.editor.get('nativeEditor');
 
 		// Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
 		// to a 'span' element works for most of those cases with no defined element.

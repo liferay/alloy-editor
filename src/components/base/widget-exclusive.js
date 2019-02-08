@@ -9,7 +9,7 @@ import Lang from '../../oop/lang.js';
  * @class WidgetExclusive
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class WidgetExclusive extends WrappedComponent {
 		/**
 		 * Cancels the exclusive state of an widget.
 		 *

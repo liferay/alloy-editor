@@ -1,6 +1,7 @@
+import React from 'react';
 import ButtonCommandsList from './button-commands-list.jsx';
 import ButtonIcon from './button-icon.jsx';
-import React from 'react';
+import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonTableHeading class provides functionality to work with table heading.
@@ -8,6 +9,8 @@ import React from 'react';
  * @class ButtonTableHeading
  */
 class ButtonTableHeading extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
@@ -35,7 +38,6 @@ class ButtonTableHeading extends React.Component {
 			buttonCommandsList = (
 				<ButtonCommandsList
 					commands={this._getCommands()}
-					editor={this.props.editor}
 					listId={buttonCommandsListId}
 					onDismiss={this.props.toggleDropdown}
 				/>
@@ -43,7 +45,7 @@ class ButtonTableHeading extends React.Component {
 		}
 
 		const activeHeading = new CKEDITOR.Table(
-			this.props.editor.get('nativeEditor')
+			this.context.editor.get('nativeEditor')
 		).getHeading();
 		const activeHeadingIntro = AlloyEditor.Strings.headers + ':';
 		const activeHeadingLabel =
@@ -64,10 +66,7 @@ class ButtonTableHeading extends React.Component {
 							{activeHeadingIntro}{' '}
 							<strong>{activeHeadingLabel}</strong>
 						</span>
-						<ButtonIcon
-							editor={this.props.editor}
-							symbol="caret-bottom"
-						/>
+						<ButtonIcon symbol="caret-bottom" />
 					</div>
 				</button>
 				{buttonCommandsList}

@@ -1,3 +1,4 @@
+import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang.js';
 
 /**
@@ -7,7 +8,9 @@ import Lang from '../../oop/lang.js';
  * @class ButtonKeystroke
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class ButtonKeystroke extends WrappedComponent {
+		static contextType = EditorContext;
+
 		/**
 		 * Lifecycle. Invoked once, both on the client and server, immediately before the initial rendering occurs.
 		 *
@@ -20,10 +23,10 @@ export default WrappedComponent =>
 				super.componentWillMount();
 			}
 
-			let nativeEditor = this.props.editor.get('nativeEditor');
-			let keystroke = this.props.keystroke;
+			const nativeEditor = this.context.editor.get('nativeEditor');
+			const keystroke = this.props.keystroke;
 
-			let commandName =
+			const commandName =
 				keystroke.name || ((Math.random() * 1e9) >>> 0).toString();
 
 			let command = nativeEditor.getCommand(commandName);
@@ -62,7 +65,7 @@ export default WrappedComponent =>
 				super.componentWillUnmount();
 			}
 
-			this.props.editor
+			this.context.editor
 				.get('nativeEditor')
 				.setKeystroke(
 					this.props.keystroke.keys,

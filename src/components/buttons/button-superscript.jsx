@@ -57,7 +57,7 @@ class ButtonSuperscript extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.superscript}>
-				<ButtonIcon editor={this.props.editor} symbol="superscript" />
+				<ButtonIcon symbol="superscript" />
 			</button>
 		);
 	}

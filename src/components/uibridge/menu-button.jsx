@@ -1,5 +1,6 @@
-import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import React from 'react';
+import ButtonDropdown from '../buttons/button-dropdown.jsx';
+import EditorContext from '../../adapter/editor-context';
 
 (function() {
 	'use strict';
@@ -35,6 +36,8 @@ import React from 'react';
 
 		if (!MenuButtonBridge) {
 			MenuButtonBridge = class extends React.Component {
+				static contextType = EditorContext;
+
 				static displayName = menuButtonName;
 
 				static key = menuButtonName;
@@ -45,7 +48,7 @@ import React from 'react';
 				toFeature() {}
 
 				render() {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 
 					let panelMenuButtonDisplayName =
 						MENUBUTTON_DEFS[editor.name][menuButtonName].name ||
@@ -108,7 +111,7 @@ import React from 'react';
 				}
 
 				_getMenuItems() {
-					let editor = this.props.editor.get('nativeEditor');
+					let editor = this.context.editor.get('nativeEditor');
 					let items = menuButtonDefinition.onMenu();
 					let menuItems = Object.keys(items).map(function(key) {
 						let menuItem = editor.getMenuItem(key);

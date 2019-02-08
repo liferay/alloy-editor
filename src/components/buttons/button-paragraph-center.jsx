@@ -55,7 +55,7 @@ class ButtonParagraphCenter extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.alignCenter}>
-				<ButtonIcon editor={this.props.editor} symbol="align-center" />
+				<ButtonIcon symbol="align-center" />
 			</button>
 		);
 	}

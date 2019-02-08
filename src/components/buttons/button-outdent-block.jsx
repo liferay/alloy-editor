@@ -28,7 +28,7 @@ class ButtonOutdentBlock extends React.Component {
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
-	 * @default indentBlock
+	 * @default outdentBlock
 	 * @memberof ButtonOutdentBlock
 	 * @property {String} key
 	 * @static
@@ -55,7 +55,7 @@ class ButtonOutdentBlock extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.outdent}>
-				<ButtonIcon editor={this.props.editor} symbol="indent-more" />
+				<ButtonIcon symbol="indent-more" />
 			</button>
 		);
 	}

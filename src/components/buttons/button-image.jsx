@@ -1,4 +1,5 @@
 import ButtonIcon from './button-icon.jsx';
+import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 
 /**
@@ -7,6 +8,8 @@ import React from 'react';
  * @class ButtonImage
  */
 class ButtonImage extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
@@ -42,10 +45,7 @@ class ButtonImage extends React.Component {
 					onClick={this.handleClick}
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.image}>
-					<ButtonIcon
-						editor={this.props.editor}
-						symbol="document-image"
-					/>
+					<ButtonIcon symbol="document-image" />
 				</button>
 
 				<input
@@ -100,7 +100,7 @@ class ButtonImage extends React.Component {
 		const file = inputEl.files[0];
 
 		reader.onload = event => {
-			const editor = this.props.editor.get('nativeEditor');
+			const editor = this.context.editor.get('nativeEditor');
 
 			const result = editor.fire('beforeImageAdd', {
 				imageFiles: file,

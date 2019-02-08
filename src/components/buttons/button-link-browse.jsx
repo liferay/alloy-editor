@@ -27,13 +27,6 @@ class ButtonLinkBrowse extends React.Component {
 
 	static propTypes = {
 		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-
-		/**
 		 * The label that should be used for accessibility purposes.
 		 *
 		 * @property {String} label

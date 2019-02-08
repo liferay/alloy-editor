@@ -1,8 +1,8 @@
-import Lang from '../../oop/lang';
+import React from 'react';
 import ButtonIcon from './button-icon.jsx';
 import ButtonLinkEdit from './button-link-edit.jsx';
-import PropTypes from 'prop-types';
-import React from 'react';
+import EditorContext from '../../adapter/editor-context';
+import Lang from '../../oop/lang';
 
 /**
  * The LinkEditBrowse class provides functionality for creating and editing a link in a document,
@@ -12,25 +12,22 @@ import React from 'react';
  * @class ButtonLinkEditBrowse
  */
 class ButtonLinkEditBrowse extends React.Component {
-	static propTypes = {
-		/**
-		 * The editor instance where the component is being used.
-		 *
-		 * @property {Object} editor
-		 */
-		editor: PropTypes.object.isRequired,
-	};
+	static contextType = EditorContext;
+
+	static propTypes = {};
 
 	static key = 'linkEditBrowse';
+
 	/**
 	 *
 	 * @inheritDoc
 	 */
-	constructor(props, context) {
-		super(props, context);
+	constructor(props) {
+		super(props);
 
 		const link = new CKEDITOR.Link(
-			this.props.editor.get('nativeEditor')
+			// Can't access context from constructor, so get editor from props.
+			this.props.context.editor.get('nativeEditor')
 		).getFromSelection();
 
 		const href = link ? link.getAttribute('href') : '';
@@ -58,7 +55,7 @@ class ButtonLinkEditBrowse extends React.Component {
 					className="ae-button"
 					onClick={this._browseClick}
 					title="browse">
-					<ButtonIcon editor={this.props.editor} symbol="folder" />
+					<ButtonIcon symbol="folder" />
 				</button>
 			</div>
 		);
@@ -71,7 +68,7 @@ class ButtonLinkEditBrowse extends React.Component {
 	 * @method _browseClick
 	 */
 	_browseClick = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 		const url = editor.config.documentBrowseLinkUrl;
 		const browseLinkCallback = editor.config.documentBrowseLinkCallback;
 		const linkTarget = this.linkEditButtonRef.current.state.linkTarget;
@@ -95,7 +92,7 @@ class ButtonLinkEditBrowse extends React.Component {
 	 * @param {String} linkTitle if the link is a title that points to a wiki page (only works for creole)
 	 */
 	_updateLink = (linkHref, linkTarget, linkTitle) => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 		const linkUtils = new CKEDITOR.Link(editor, {appendProtocol: false});
 		const linkAttrs = {
 			target: linkTarget,
@@ -124,4 +121,4 @@ class ButtonLinkEditBrowse extends React.Component {
 	};
 }
 
-export default ButtonLinkEditBrowse;
+export default EditorContext.toProps(ButtonLinkEditBrowse);

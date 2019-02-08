@@ -57,7 +57,7 @@ class ButtonH1 extends React.Component {
 				onClick={this.applyStyle}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.h1}>
-				<ButtonIcon editor={this.props.editor} symbol="h1" />
+				<ButtonIcon symbol="h1" />
 			</button>
 		);
 	}

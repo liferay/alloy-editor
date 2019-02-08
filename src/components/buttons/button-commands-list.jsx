@@ -1,5 +1,5 @@
-import ButtonCommandListItem from './button-command-list-item.jsx';
 import React from 'react';
+import ButtonCommandListItem from './button-command-list-item.jsx';
 import WidgetFocusManager from '../base/widget-focus-manager.js';
 
 /**
@@ -94,7 +94,6 @@ class ButtonCommandsList extends React.Component {
 	 * @return {Array} Rendered instances of ButtonCommandListItem class
 	 */
 	_renderActions(commands) {
-		const editor = this.props.editor;
 		let items;
 
 		if (commands && commands.length) {
@@ -109,7 +108,6 @@ class ButtonCommandsList extends React.Component {
 									: item.label()
 							}
 							icon={item.icon}
-							editor={editor}
 						/>
 					</li>
 				);

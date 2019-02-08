@@ -53,7 +53,7 @@ class ButtonHline extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.horizontalrule}>
-				<ButtonIcon editor={this.props.editor} symbol="hr" />
+				<ButtonIcon symbol="hr" />
 			</button>
 		);
 	}

@@ -62,7 +62,7 @@ class ButtonItalic extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.italic}>
-				<ButtonIcon editor={this.props.editor} symbol="italic" />
+				<ButtonIcon symbol="italic" />
 			</button>
 		);
 	}

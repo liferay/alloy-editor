@@ -16,7 +16,7 @@ let ACTION_DISMISS_FOCUS = 2;
  * @class WidgetFocusManager
  */
 export default WrappedComponent =>
-	class extends WrappedComponent {
+	class WidgetFocusManager extends WrappedComponent {
 		/**
 		 * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
 		 *

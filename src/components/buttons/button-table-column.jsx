@@ -1,6 +1,6 @@
+import React from 'react';
 import ButtonCommandsList from './button-commands-list.jsx';
 import ButtonIcon from './button-icon.jsx';
-import React from 'react';
 
 /**
  * The ButtonTableColumn class provides functionality to work with table columns.
@@ -35,7 +35,6 @@ class ButtonTableColumn extends React.Component {
 			buttonCommandsList = (
 				<ButtonCommandsList
 					commands={this._getCommands()}
-					editor={this.props.editor}
 					listId={buttonCommandsListId}
 					onDismiss={this.props.toggleDropdown}
 				/>
@@ -53,10 +52,7 @@ class ButtonTableColumn extends React.Component {
 					role="listbox"
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.column}>
-					<ButtonIcon
-						editor={this.props.editor}
-						symbol="add-column"
-					/>
+					<ButtonIcon symbol="add-column" />
 				</button>
 				{buttonCommandsList}
 			</div>

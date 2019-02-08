@@ -57,7 +57,7 @@ class ButtonH2 extends React.Component {
 				onClick={this.applyStyle}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.h2}>
-				<ButtonIcon editor={this.props.editor} symbol="h2" />
+				<ButtonIcon symbol="h2" />
 			</button>
 		);
 	}

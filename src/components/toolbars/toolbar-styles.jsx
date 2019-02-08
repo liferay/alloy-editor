@@ -1,4 +1,3 @@
-import Lang from '../../oop/lang.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ToolbarButtons from '../base/toolbar-buttons.js';
@@ -7,6 +6,8 @@ import WidgetDropdown from '../base/widget-dropdown.js';
 import WidgetExclusive from '../base/widget-exclusive.js';
 import WidgetFocusManager from '../base/widget-focus-manager.js';
 import WidgetPosition from '../base/widget-position.js';
+import EditorContext from '../../adapter/editor-context';
+import Lang from '../../oop/lang.js';
 
 /**
  * The ToolbarStyles class hosts the buttons for styling a text selection.
@@ -20,6 +21,8 @@ import WidgetPosition from '../base/widget-position.js';
  * @uses WidgetPosition
  */
 class ToolbarStyles extends React.Component {
+	static contextType = EditorContext;
+
 	constructor(props) {
 		super(props);
 
@@ -82,7 +85,8 @@ class ToolbarStyles extends React.Component {
 
 			if (typeof buttons === 'object' && !Array.isArray(buttons)) {
 				buttons =
-					buttons[this.props.editor.get('mode')] || buttons['simple'];
+					buttons[this.context.editor.get('mode')] ||
+					buttons['simple'];
 			}
 
 			let buttonsGroup = this.getToolbarButtonGroups(buttons, {
@@ -196,7 +200,7 @@ class ToolbarStyles extends React.Component {
 						eventPayload.manualSelection === item.name ||
 						testFn({
 							data: eventPayload,
-							editor: this.props.editor,
+							editor: this.context.editor,
 						});
 				}
 
@@ -237,7 +241,7 @@ class ToolbarStyles extends React.Component {
 
 			if (setPositionFn) {
 				result = setPositionFn.call(this, {
-					editor: this.props.editor,
+					editor: this.context.editor,
 					editorEvent: this.props.editorEvent,
 					selectionData: this.props.selectionData,
 				});

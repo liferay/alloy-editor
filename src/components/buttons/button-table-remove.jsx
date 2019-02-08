@@ -1,5 +1,6 @@
-import ButtonIcon from './button-icon.jsx';
 import React from 'react';
+import ButtonIcon from './button-icon.jsx';
+import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonTableRemove class provides functionality for removing a table
@@ -7,6 +8,8 @@ import React from 'react';
  * @class ButtonTableRemove
  */
 class ButtonTableRemove extends React.Component {
+	static contextType = EditorContext;
+
 	/**
 	 * The name which will be used as an alias of the button in the configuration.
 	 *
@@ -34,7 +37,7 @@ class ButtonTableRemove extends React.Component {
 				onClick={this._removeTable}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.deleteTable}>
-				<ButtonIcon editor={this.props.editor} symbol="trash" />
+				<ButtonIcon symbol="trash" />
 			</button>
 		);
 	}
@@ -48,7 +51,7 @@ class ButtonTableRemove extends React.Component {
 	 * @protected
 	 */
 	_removeTable = () => {
-		const editor = this.props.editor.get('nativeEditor');
+		const editor = this.context.editor.get('nativeEditor');
 		const tableUtils = new CKEDITOR.Table(editor);
 
 		tableUtils.remove();
