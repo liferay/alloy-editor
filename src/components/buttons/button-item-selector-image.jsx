@@ -1,6 +1,5 @@
 import ButtonCommand from '../base/button-command.js';
 import ButtonIcon from './button-icon.jsx';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 /**
