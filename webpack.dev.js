@@ -14,6 +14,7 @@ const All = merge(common.config, config, {
 	devServer: {
 		contentBase: './dist',
 		port: 9000,
+		publicPath: '/alloy-editor',
 	},
 });
 
