@@ -1,55 +1,51 @@
 import ButtonLink from '../../../src/components/buttons/button-link.jsx';
 
-(function() {
-	'use strict';
+var assert = chai.assert;
+var Simulate = ReactTestUtils.Simulate;
 
-	var assert = chai.assert;
-	var Simulate = ReactTestUtils.Simulate;
+var KEY_L = 76;
 
-	var KEY_L = 76;
+describe('ButtonLink', function() {
+	before(Utils.createAlloyEditor);
 
-	describe('ButtonLink', function() {
-		before(Utils.createAlloyEditor);
+	after(Utils.destroyAlloyEditor);
 
-		after(Utils.destroyAlloyEditor);
+	beforeEach(Utils.beforeEach);
 
-		beforeEach(Utils.beforeEach);
+	afterEach(Utils.afterEach);
 
-		afterEach(Utils.afterEach);
+	it('should invoke requestExclusive when clicking on the button', function() {
+		var requestExclusiveListener = sinon.stub();
 
-		it('should invoke requestExclusive when clicking on the button', function() {
-			var requestExclusiveListener = sinon.stub();
+		var buttonLink = ReactDOM.render(
+			<ButtonLink
+				editor={this.editor}
+				requestExclusive={requestExclusiveListener}
+			/>,
+			this.container
+		);
 
-			var buttonLink = ReactDOM.render(
-				<ButtonLink
-					editor={this.editor}
-					requestExclusive={requestExclusiveListener}
-				/>,
-				this.container
-			);
+		Simulate.click(ReactDOM.findDOMNode(buttonLink));
 
-			Simulate.click(ReactDOM.findDOMNode(buttonLink));
-
-			assert.isTrue(requestExclusiveListener.calledOnce);
-		});
-
-		it('should invoke requestExclusive when pressing the keystroke [Ctrl|Cmd]+L', function() {
-			var requestExclusiveListener = sinon.stub();
-
-			ReactDOM.render(
-				<ButtonLink
-					editor={this.editor}
-					requestExclusive={requestExclusiveListener}
-				/>,
-				this.container
-			);
-
-			happen.keydown(this._editable, {
-				ctrlKey: true,
-				keyCode: KEY_L,
-			});
-
-			assert.isTrue(requestExclusiveListener.calledOnce);
-		});
+		assert.isTrue(requestExclusiveListener.calledOnce);
 	});
-})();
+
+	it('should invoke requestExclusive when pressing the keystroke [Ctrl|Cmd]+L', function() {
+		var requestExclusiveListener = sinon.stub();
+
+		ReactDOM.render(
+			<ButtonLink
+				editor={this.editor}
+				requestExclusive={requestExclusiveListener}
+			/>,
+			this.container
+		);
+
+		happen.keydown(this._editable, {
+			ctrlKey: true,
+			keyCode: KEY_L,
+		});
+
+		assert.isTrue(requestExclusiveListener.calledOnce);
+	});
+});

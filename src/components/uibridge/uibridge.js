@@ -1,11 +1,5 @@
-(function() {
-	'use strict';
-
-	/* istanbul ignore if */
-	if (CKEDITOR.plugins.get('ae_uibridge')) {
-		return;
-	}
-
+/* istanbul ignore if */
+if (!CKEDITOR.plugins.get('ae_uibridge')) {
 	/**
 	 * CKEditor plugin that extends CKEDITOR.ui.add function so an add handler can be specified
 	 * on top of the original ones. It bridges the calls to add components via:
@@ -39,4 +33,4 @@
 			};
 		},
 	});
-})();
+}

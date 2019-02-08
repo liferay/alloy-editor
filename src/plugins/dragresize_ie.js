@@ -2,13 +2,7 @@
  * CKEditor plugin: Image2
  * - Show gripper to resize images on IE
  */
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_dragresize_ie')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 	let alignmentsObj = {
 		center: 1,
 		left: 0,
@@ -1082,6 +1076,6 @@
 	function getStyleableElement(widget) {
 		return widget.data.hasCaption ? widget.element : widget.parts.image;
 	}
-})();
+}
 
 CKEDITOR.config.image2_captionedClass = 'image';

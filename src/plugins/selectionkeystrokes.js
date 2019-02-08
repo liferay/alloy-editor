@@ -1,10 +1,4 @@
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_selectionkeystrokes')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_selectionkeystrokes')) {
 	/**
 	 * CKEditor plugin that simulates editor interaction events based on manual keystrokes. This
 	 * can be used to trigger different reactions in the editor.
@@ -46,4 +40,4 @@
 			}
 		},
 	});
-})();
+}

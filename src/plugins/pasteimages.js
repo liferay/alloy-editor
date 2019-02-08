@@ -1,10 +1,4 @@
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_pasteimages')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_pasteimages')) {
 	/**
 	 * CKEditor plugin which allows pasting images directly into the editable area. The image will be encoded
 	 * as Data URI. An event `beforeImageAdd` will be fired with the list of pasted images. If any of the listeners
@@ -101,4 +95,4 @@
 			}
 		},
 	});
-})();
+}

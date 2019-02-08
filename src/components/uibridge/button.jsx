@@ -1,14 +1,8 @@
 import React from 'react';
 import EditorContext from '../../adapter/editor-context';
 
-(function() {
-	'use strict';
-
-	/* istanbul ignore if */
-	if (CKEDITOR.plugins.get('ae_buttonbridge')) {
-		return;
-	}
-
+/* istanbul ignore if */
+if (!CKEDITOR.plugins.get('ae_buttonbridge')) {
 	let BUTTON_DEFS = {};
 
 	/**
@@ -164,4 +158,4 @@ import EditorContext from '../../adapter/editor-context';
 			});
 		},
 	});
-})();
+}

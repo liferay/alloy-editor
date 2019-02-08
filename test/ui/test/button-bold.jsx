@@ -1,90 +1,86 @@
 import ButtonBold from '../../../src/components/buttons/button-bold.jsx';
 
-(function() {
-	'use strict';
+var assert = chai.assert;
+var Simulate = ReactTestUtils.Simulate;
 
-	var assert = chai.assert;
-	var Simulate = ReactTestUtils.Simulate;
+var KEY_B = 66;
 
-	var KEY_B = 66;
+describe('ButtonBold', function() {
+	before(Utils.createAlloyEditor);
 
-	describe('ButtonBold', function() {
-		before(Utils.createAlloyEditor);
+	after(Utils.destroyAlloyEditor);
 
-		after(Utils.destroyAlloyEditor);
+	beforeEach(Utils.beforeEach);
 
-		beforeEach(Utils.beforeEach);
+	afterEach(Utils.afterEach);
 
-		afterEach(Utils.afterEach);
+	it('should make a text selection bold on click', function() {
+		bender.tools.selection.setWithHtml(
+			this.nativeEditor,
+			'There should be a {selection} made bold.'
+		);
 
-		it('should make a text selection bold on click', function() {
-			bender.tools.selection.setWithHtml(
-				this.nativeEditor,
-				'There should be a {selection} made bold.'
-			);
+		var buttonBold = ReactDOM.render(
+			<ButtonBold editor={this.editor} />,
+			this.container
+		);
 
-			var buttonBold = ReactDOM.render(
-				<ButtonBold editor={this.editor} />,
-				this.container
-			);
+		ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(buttonBold));
 
-			ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(buttonBold));
-
-			var data = bender.tools.getData(this.nativeEditor, {
-				fixHtml: false,
-				compatHtml: true,
-			});
-
-			assert.strictEqual(
-				data,
-				'<p>There should be a <strong>selection</strong> made bold.</p>'
-			);
+		var data = bender.tools.getData(this.nativeEditor, {
+			fixHtml: false,
+			compatHtml: true,
 		});
 
-		it('should make a text selection bold on [Ctrl|Cmd] + B', function() {
-			bender.tools.selection.setWithHtml(
-				this.nativeEditor,
-				'There should be a {selection} made bold.'
-			);
-
-			var buttonBold = ReactDOM.render(
-				<ButtonBold editor={this.editor} />,
-				this.container
-			);
-
-			happen.keydown(this._editable, {
-				ctrlKey: true,
-				keyCode: KEY_B,
-			});
-
-			var data = bender.tools.getData(this.nativeEditor, {
-				fixHtml: false,
-				compatHtml: true,
-			});
-
-			assert.strictEqual(
-				data,
-				'<p>There should be a <strong>selection</strong> made bold.</p>'
-			);
-		});
-
-		it('should add class which represents pressed button', function() {
-			bender.tools.selection.setWithHtml(
-				this.nativeEditor,
-				'A <strong>{selection}</strong> made bold.'
-			);
-
-			var buttonBold = ReactDOM.render(
-				<ButtonBold editor={this.editor} />,
-				this.container
-			);
-
-			var buttonDOMNode = ReactDOM.findDOMNode(buttonBold);
-
-			assert.strictEqual(
-				$(buttonDOMNode).hasClass('ae-button-pressed'),
-				true
-			);
-		});
+		assert.strictEqual(
+			data,
+			'<p>There should be a <strong>selection</strong> made bold.</p>'
+		);
 	});
-})();
+
+	it('should make a text selection bold on [Ctrl|Cmd] + B', function() {
+		bender.tools.selection.setWithHtml(
+			this.nativeEditor,
+			'There should be a {selection} made bold.'
+		);
+
+		var buttonBold = ReactDOM.render(
+			<ButtonBold editor={this.editor} />,
+			this.container
+		);
+
+		happen.keydown(this._editable, {
+			ctrlKey: true,
+			keyCode: KEY_B,
+		});
+
+		var data = bender.tools.getData(this.nativeEditor, {
+			fixHtml: false,
+			compatHtml: true,
+		});
+
+		assert.strictEqual(
+			data,
+			'<p>There should be a <strong>selection</strong> made bold.</p>'
+		);
+	});
+
+	it('should add class which represents pressed button', function() {
+		bender.tools.selection.setWithHtml(
+			this.nativeEditor,
+			'A <strong>{selection}</strong> made bold.'
+		);
+
+		var buttonBold = ReactDOM.render(
+			<ButtonBold editor={this.editor} />,
+			this.container
+		);
+
+		var buttonDOMNode = ReactDOM.findDOMNode(buttonBold);
+
+		assert.strictEqual(
+			$(buttonDOMNode).hasClass('ae-button-pressed'),
+			true
+		);
+	});
+});

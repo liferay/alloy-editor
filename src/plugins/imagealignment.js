@@ -1,12 +1,6 @@
 import SelectionTest from '../selections/selection-test.js';
 
-(function() {
-	'use strict';
-
-	if (CKEDITOR.plugins.get('ae_imagealignment')) {
-		return;
-	}
-
+if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	/**
 	 * Enum for supported image alignments
 	 * @type {Object}
@@ -270,4 +264,4 @@ import SelectionTest from '../selections/selection-test.js';
 			});
 		},
 	});
-})();
+}

@@ -1,11 +1,5 @@
-(function() {
-	'use strict';
-
-	/* istanbul ignore if */
-	if (CKEDITOR.plugins.get('ae_menubridge')) {
-		return;
-	}
-
+/* istanbul ignore if */
+if (!CKEDITOR.plugins.get('ae_menubridge')) {
 	/**
 	 * CKEditor plugin that bridges the support offered by CKEditor Menu plugin. It takes over the
 	 * responsibility of adding, removing and retrieving menu groups and items
@@ -105,4 +99,4 @@
 			};
 		},
 	});
-})();
+}

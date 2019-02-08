@@ -2,14 +2,8 @@ import React from 'react';
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import EditorContext from '../../adapter/editor-context';
 
-(function() {
-	'use strict';
-
-	/* istanbul ignore if */
-	if (CKEDITOR.plugins.get('ae_menubuttonbridge')) {
-		return;
-	}
-
+/* istanbul ignore if */
+if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
 	let MENUBUTTON_DEFS = {};
 
 	/**
@@ -218,4 +212,4 @@ import EditorContext from '../../adapter/editor-context';
 			});
 		},
 	});
-})();
+}

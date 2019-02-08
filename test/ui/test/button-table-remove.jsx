@@ -1,61 +1,57 @@
 import ButtonTableRemove from '../../../src/components/buttons/button-table-remove.jsx';
 
-(function() {
-	'use strict';
+var assert = chai.assert;
+var TestUtils = ReactTestUtils;
+var Simulate = TestUtils.Simulate;
 
-	var assert = chai.assert;
-	var TestUtils = ReactTestUtils;
-	var Simulate = TestUtils.Simulate;
+describe('ButtonTableRemove', function() {
+	before(Utils.createAlloyEditor);
 
-	describe('ButtonTableRemove', function() {
-		before(Utils.createAlloyEditor);
+	after(Utils.destroyAlloyEditor);
 
-		after(Utils.destroyAlloyEditor);
+	beforeEach(Utils.beforeEach);
 
-		beforeEach(Utils.beforeEach);
+	afterEach(Utils.afterEach);
 
-		afterEach(Utils.afterEach);
+	it('should remove a table if selection is inside one', function() {
+		var buttonTableRemove = ReactDOM.render(
+			<ButtonTableRemove editor={this.editor} />,
+			this.container
+		);
 
-		it('should remove a table if selection is inside one', function() {
-			var buttonTableRemove = ReactDOM.render(
-				<ButtonTableRemove editor={this.editor} />,
-				this.container
-			);
+		bender.tools.selection.setWithHtml(
+			this.nativeEditor,
+			'<table><tbody><tr><td> {}</td></tr></tbody></table>'
+		);
 
-			bender.tools.selection.setWithHtml(
-				this.nativeEditor,
-				'<table><tbody><tr><td> {}</td></tr></tbody></table>'
-			);
+		Simulate.click(ReactDOM.findDOMNode(buttonTableRemove));
 
-			Simulate.click(ReactDOM.findDOMNode(buttonTableRemove));
-
-			var data = bender.tools.getData(this.nativeEditor, {
-				fixHtml: false,
-				compatHtml: true,
-			});
-
-			assert.strictEqual(data, '');
+		var data = bender.tools.getData(this.nativeEditor, {
+			fixHtml: false,
+			compatHtml: true,
 		});
 
-		it('should noop if selection is outside a table', function() {
-			var buttonTableRemove = ReactDOM.render(
-				<ButtonTableRemove editor={this.editor} />,
-				this.container
-			);
-
-			bender.tools.selection.setWithHtml(
-				this.nativeEditor,
-				'Content with {no} table'
-			);
-
-			Simulate.click(ReactDOM.findDOMNode(buttonTableRemove));
-
-			var data = bender.tools.getData(this.nativeEditor, {
-				fixHtml: false,
-				compatHtml: true,
-			});
-
-			assert.strictEqual(data, '<p>Content with no table</p>');
-		});
+		assert.strictEqual(data, '');
 	});
-})();
+
+	it('should noop if selection is outside a table', function() {
+		var buttonTableRemove = ReactDOM.render(
+			<ButtonTableRemove editor={this.editor} />,
+			this.container
+		);
+
+		bender.tools.selection.setWithHtml(
+			this.nativeEditor,
+			'Content with {no} table'
+		);
+
+		Simulate.click(ReactDOM.findDOMNode(buttonTableRemove));
+
+		var data = bender.tools.getData(this.nativeEditor, {
+			fixHtml: false,
+			compatHtml: true,
+		});
+
+		assert.strictEqual(data, '<p>Content with no table</p>');
+	});
+});
