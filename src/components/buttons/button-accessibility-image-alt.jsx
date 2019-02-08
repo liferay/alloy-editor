@@ -18,8 +18,6 @@ class ButtonAccessibilityImageAlt extends React.Component {
 
 	static key = 'AccessibilityImageAlt';
 
-	static propTypes = {};
-
 	constructor(props) {
 		super(props);
 

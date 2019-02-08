@@ -14,10 +14,6 @@ class ButtonItemSelectorImage extends React.Component {
 
 	static key = 'image';
 
-	static propTypes = {
-		editor: PropTypes.object.isRequired,
-	};
-
 	render() {
 		return (
 			<button
@@ -25,7 +21,7 @@ class ButtonItemSelectorImage extends React.Component {
 				data-type="button-image"
 				onClick={this._handleClick}
 				tabIndex={this.props.tabIndex}>
-				<ButtonIcon editor={this.props.editor} symbol="picture" />
+				<ButtonIcon symbol="picture" />
 			</button>
 		);
 	}
