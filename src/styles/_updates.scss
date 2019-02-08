@@ -1,5 +1,89 @@
-.updates {
-    .container {
-        max-width: $content-max-width;
+.update-container {
+    overflow: hidden;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 100px;
+        height: 100%;
+        border-left: 1px solid $primary;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50px;
+        width: 100%;
+        border-top: 1px solid $primary;
+    }
+
+    .update-version {
+        @extend .h3;
+        width: 100px;
+        height: 100px;
+        z-index: 10;
+    }
+
+    .update-item {
+        // @extend .text-right;
+        @extend .justify-content-end;
+        margin-top: 100px;
+        margin-bottom: 100px;
+
+        &:before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 150px;
+            border-top: 1px solid $primary;
+        }
+
+        .update-icon {
+            width: 60px;
+            height: 60px;
+            transform: translateX(50%);
+        }
+
+        .update-content {
+            margin-right: 100px;
+        }
+
+        &:nth-child(odd) {
+            @extend .ml-auto;
+            // @extend .text-left;
+            @extend .justify-content-start;
+
+            &:before {
+                left: 0;
+            }
+
+            .update-icon {
+                transform: translateX(-50%);
+            }
+
+            .update-content {
+                margin-right: 0;
+                margin-left: 100px;
+            }
+        }
+    }
+
+    &.update-minor {
+        &:before {
+            top: 80px;
+        }
+
+        &:after {
+            top: 40px;
+        }
+
+        .update-version {
+            @extend .h4;
+            width: 80px;
+            height: 80px;
+        }
     }
 }
