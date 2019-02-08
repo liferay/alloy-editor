@@ -14,10 +14,6 @@ class ButtonItemSelectorVideo extends React.Component {
 
 	static key = 'video';
 
-	static propTypes = {
-		editor: PropTypes.object.isRequired,
-	};
-
 	render() {
 		return (
 			<button
@@ -25,7 +21,7 @@ class ButtonItemSelectorVideo extends React.Component {
 				data-type="button-video"
 				onClick={this._handleClick}
 				tabIndex={this.props.tabIndex}>
-				<ButtonIcon editor={this.props.editor} symbol="video" />
+				<ButtonIcon symbol="video" />
 			</button>
 		);
 	}

@@ -14,10 +14,6 @@ class ButtonItemSelectorAudio extends React.Component {
 
 	static key = 'audio';
 
-	static propTypes = {
-		editor: PropTypes.object.isRequired,
-	};
-
 	render() {
 		return (
 			<button
@@ -25,7 +21,7 @@ class ButtonItemSelectorAudio extends React.Component {
 				data-type="button-audio"
 				onClick={this._handleClick}
 				tabIndex={this.props.tabIndex}>
-				<ButtonIcon editor={this.props.editor} symbol="audio" />
+				<ButtonIcon symbol="audio" />
 			</button>
 		);
 	}
