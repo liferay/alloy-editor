@@ -1,9 +1,9 @@
 import debounce from './debounce';
-import link from './link';
-import plugins from './plugins';
-import selectionRegion from './selection-region';
-import table from './table';
-import tools from './tools';
-import uicore from './uicore';
+import './link';
+import './plugins';
+import './selection-region';
+import './table';
+import './tools';
+import './uicore';
 
-export {debounce, link, plugins, selectionRegion, table, tools, uicore};
+export {debounce};
