@@ -18,8 +18,6 @@ class ButtonEmbedVideoEdit extends React.Component {
 
 	static key = 'embedVideoEdit';
 
-	static propTypes = {};
-
 	constructor(props) {
 		super(props);
 
