@@ -1,62 +1,38 @@
-import ButtonCommand from '../base/button-command';
-import ButtonStyle from '../base/button-style';
-import ButtonIcon from './button-icon.jsx';
 import React from 'react';
+import ButtonIcon from './button-icon.jsx';
+import useButtonStyle from '../hooks/use-button-style';
+import useExecCommand  from '../hooks/use-exec-command';
 
 /**
- * The ButtonHline class provides inserts horizontal line.
- *
- * @class ButtonHline
- * @uses ButtonCommand
- * @uses ButtonStyle
+ * The ButtonHline component inserts a horizontal line.
  */
-class ButtonHline extends React.Component {
-	/**
-	 * Lifecycle. Returns the default values of the properties used in the widget.
-	 *
-	 * @instance
-	 * @memberof ButtonHline
-	 * @method getDefaultProps
-	 * @return {Object} The default properties.
-	 */
-	static defaultProps = {
-		command: 'horizontalrule',
-		style: {
-			element: 'hr',
-		},
-	};
+function ButtonHline({
+	// TODO: find out whether anybody ever overrides this, or the style prop
+	command = 'horizontalrule',
+	style = {element: 'hr'},
+	tabIndex,
+	modifiesSelection
+}) {
+	const execCommand = useExecCommand(command, modifiesSelection);
+	const [isActive, _style] = useButtonStyle(style);
+	const {horizontalrule} = AlloyEditor.Strings;
 
-	/**
-	 * The name which will be used as an alias of the button in the configuration.
-	 *
-	 * @default hline
-	 * @memberof ButtonHline
-	 * @property {String} key
-	 * @static
-	 */
-	static key = 'hline';
-
-	/**
-	 * Lifecycle. Renders the UI of the button.
-	 *
-	 * @instance
-	 * @memberof ButtonHline
-	 * @method render
-	 * @return {Object} The content which should be rendered.
-	 */
-	render() {
-		return (
-			<button
-				aria-label={AlloyEditor.Strings.horizontalrule}
-				className="ae-button"
-				data-type="button-hline"
-				onClick={this.execCommand}
-				tabIndex={this.props.tabIndex}
-				title={AlloyEditor.Strings.horizontalrule}>
-				<ButtonIcon symbol="hr" />
-			</button>
-		);
-	}
+	return (
+		<button
+			aria-label={horizontalrule}
+			className="ae-button"
+			data-type="button-hline"
+			onClick={execCommand}
+			tabIndex={tabIndex}
+			title={horizontalrule}>
+			<ButtonIcon symbol="hr" />
+		</button>
+	);
 }
 
-export default ButtonCommand(ButtonStyle(ButtonHline));
+/**
+ * The name which will be used as an alias of the button in the configuration.
+ */
+ButtonHline.key = 'hline';
+
+export default ButtonHline;
