@@ -23,7 +23,6 @@ const filesToLoad = [
 		watched: false,
 	},
 
-	'test/vendor/zepto.js',
 	'test/vendor/happen.js',
 
 	/* CKEditor JS files */
