@@ -1,6 +1,55 @@
 # Change Log
 
-## 2.0.0-alpha.1
+## [v2.0.0-alpha.5](https://github.com/liferay/alloy-editor/tree/v2.0.0-alpha.5) (2019-02-06)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-alpha.4...v2.0.0-alpha.5)
+
+**Fixed bugs:**
+
+- Don't ship font-related CSS any more [\#1069](https://github.com/liferay/alloy-editor/pull/1069) ([wincent](https://github.com/wincent))
+- Fixes \#1065 - Resolve console warnings about imageTPL prop [\#1067](https://github.com/liferay/alloy-editor/pull/1067) ([wincent](https://github.com/wincent))
+
+**Merged pull requests:**
+
+- Add the ae\_dragresize\_ie11 plugin for IE11 [\#1071](https://github.com/liferay/alloy-editor/pull/1071) ([julien](https://github.com/julien))
+- New Crowdin translations [\#1066](https://github.com/liferay/alloy-editor/pull/1066) ([liferay-translation](https://github.com/liferay-translation))
+- Modify github issue and pull request templates: [\#1064](https://github.com/liferay/alloy-editor/pull/1064) ([julien](https://github.com/julien))
+
+## [v2.0.0-alpha.4](https://github.com/liferay/alloy-editor/tree/v2.0.0-alpha.4) (2019-02-05)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-alpha.3...v2.0.0-alpha.4)
+
+**Merged pull requests:**
+
+- Apply changes from \#959 into 2.x-develop [\#1063](https://github.com/liferay/alloy-editor/pull/1063) ([julien](https://github.com/julien))
+- Bump version to 2.0.0-alpha.3 [\#1062](https://github.com/liferay/alloy-editor/pull/1062) ([julien](https://github.com/julien))
+- Fixes \#1057 Keep styles in the image for IE [\#1060](https://github.com/liferay/alloy-editor/pull/1060) ([fortunatomaldonado](https://github.com/fortunatomaldonado))
+
+## [v2.0.0-alpha.3](https://github.com/liferay/alloy-editor/tree/v2.0.0-alpha.3) (2019-02-05)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-alpha.2...v2.0.0-alpha.3)
+
+## [v2.0.0-alpha.2](https://github.com/liferay/alloy-editor/tree/v2.0.0-alpha.2) (2019-02-04)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-alpha.1...v2.0.0-alpha.2)
+
+**Implemented enhancements:**
+
+- Add "npm run format:changed" [\#1046](https://github.com/liferay/alloy-editor/pull/1046) ([wincent](https://github.com/wincent))
+
+**Fixed bugs:**
+
+- IE11 Resized image loses size when aligned [\#1057](https://github.com/liferay/alloy-editor/issues/1057)
+
+**Closed issues:**
+
+- Bring linting up to date [\#990](https://github.com/liferay/alloy-editor/issues/990)
+
+**Merged pull requests:**
+
+- Fix reference error [\#1059](https://github.com/liferay/alloy-editor/pull/1059) ([julien](https://github.com/julien))
+- Feature/item selector buttons [\#1058](https://github.com/liferay/alloy-editor/pull/1058) ([julien](https://github.com/julien))
+- Rename "fix" to "lint:fix" to make it clear what is being fixed [\#1054](https://github.com/liferay/alloy-editor/pull/1054) ([wincent](https://github.com/wincent))
+- Update CONTRIBUTING.md based on 2.x.x-alpha.1 release [\#1053](https://github.com/liferay/alloy-editor/pull/1053) ([wincent](https://github.com/wincent))
+
+## [v2.0.0-alpha.1](https://github.com/liferay/alloy-editor/tree/v2.0.0-alpha.1) (2019-01-31)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.19...v2.0.0-alpha.1)
 
 **Implemented enhancements:**
 
@@ -22,6 +71,7 @@
 **Closed issues:**
 
 - Optimize build [\#1000](https://github.com/liferay/alloy-editor/issues/1000)
+- Toolbar displays incorrectly in Safari with scrolled window [\#998](https://github.com/liferay/alloy-editor/issues/998)
 - Remove .editorconfig [\#988](https://github.com/liferay/alloy-editor/issues/988)
 - Clean up dist folder [\#969](https://github.com/liferay/alloy-editor/issues/969)
 
