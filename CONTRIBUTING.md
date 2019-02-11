@@ -94,9 +94,14 @@ npm version patch|minor|major
 npm run build
 ```
 
-7. Generate changelog
+7. Generate changelog with [github_changelog_generator](https://github.com/skywinder/github-changelog-generator)
 
-github_changelog_generator (https://github.com/skywinder/github-changelog-generator)
+```
+gem install github_changelog_generator # using `sudo` if necessary
+github_changelog_generator liferay/alloy-editor -t $GITHUB_ACCESS_TOKEN
+```
+
+The `$GITHUB_ACCESS_TOKEN` can be generated at [github.com/settings/tokens/new](https://github.com/settings/tokens/new), and only needs minimal capabilities ("repo:status", "repo_deployment", "public_repo" should suffice).
 
 8. Commit changelog
 
