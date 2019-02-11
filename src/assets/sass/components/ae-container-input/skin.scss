@@ -1,0 +1,34 @@
+.ae-container-input {
+    background-color: $container-input-bg-color;
+    border-radius: $container-input-border-radius;
+
+    .ae-button-clear:not(:hover) svg {
+        fill: $container-input-clear-color;
+    }
+
+    .ae-container-dropdown {
+        background-color: $container-input-dropdown-bg-color;
+        color: $container-input-dropdown-color;
+    }
+
+    input, .ae-input {
+        @include placeholder {
+            color: $container-input-placeholder-color;
+        }
+
+        border-radius: $container-input-border-radius;
+        border-width: 0;
+        font-family: $container-input-font-family;
+        font-size: $container-input-font-size;
+        line-height: $container-input-font-size;
+        outline: none;
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &::-ms-clear {
+            display: none;
+        }
+    }
+}

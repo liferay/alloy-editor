@@ -1,148 +1,173 @@
-(function() {
-    'use strict';
+var assert = chai.assert;
 
-    var assert = chai.assert;
+var Simulate = ReactTestUtils.Simulate;
 
-    var Simulate = React.addons.TestUtils.Simulate;
+var doTestIE = function() {
+	if (!CKEDITOR.env.ie) {
+		this.skip();
+	}
+	return;
+};
 
-    var doTestIE = function() {
-        if (!CKEDITOR.env.ie) {
-            this.skip();
-        }
-        return;
-    };
+describe('imageScaleResize on IE', function() {
+	var url = 'http://localhost/url_test';
 
-    describe('imageScaleResize on IE', function() {
-        var url = 'http://localhost/url_test';
+	describe('with the default value "both"', function() {
+		before(function(done) {
+			Utils.createCKEditor.call(this, done, {
+				extraPlugins: 'ae_dragresize_ie',
+			});
+		});
 
-        describe('with the default value "both"', function() {
-            this.timeout(35000);
+		after(Utils.destroyCKEditor);
 
-            before(function(done) {
-                Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_dragresize_ie'});
-            });
+		beforeEach(Utils.beforeEach);
 
-            after(Utils.destroyCKEditor);
+		afterEach(Utils.afterEach);
 
-            beforeEach(Utils.beforeEach);
+		it('should have imageScaleResize value as default "both"', function() {
+			doTestIE.call(this);
 
-            afterEach(Utils.afterEach);
+			assert.strictEqual(
+				this.nativeEditor.config.imageScaleResize,
+				'both'
+			);
+		});
 
-            it('should have imageScaleResize value as default "both"', function() {
-                doTestIE.call(this);
+		it('should set data-widget to the image', function() {
+			doTestIE.call(this);
 
-                assert.strictEqual(this.nativeEditor.config.imageScaleResize, 'both');
-            });
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
+			);
 
-            it('should set data-widget to the image', function() {
-                doTestIE.call(this);
+			var el = new CKEDITOR.dom.element(document.getElementById('image'));
 
-                bender.tools.selection.setWithHtml(this.nativeEditor, '<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>');
+			this.nativeEditor.widgets.initOn(el, 'image');
 
-                var el = new CKEDITOR.dom.element(document.getElementById('image'));
+			assert.strictEqual(el.getAttribute('data-widget'), 'image');
+		});
 
-                this.nativeEditor.widgets.initOn( el, 'image' );
+		it('should have span to resize image with cursor nwse-resize', function() {
+			doTestIE.call(this);
 
-                assert.strictEqual(el.getAttribute('data-widget'), 'image');
-            });
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
+			);
 
-            it('should have span to resize image with cursor nwse-resize', function() {
-                doTestIE.call(this);
+			var el = new CKEDITOR.dom.element(document.getElementById('image'));
 
-                bender.tools.selection.setWithHtml(this.nativeEditor, '<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>');
+			this.nativeEditor.widgets.initOn(el, 'image');
 
-                var el = new CKEDITOR.dom.element(document.getElementById('image'));
+			var span = document.getElementsByClassName(
+				'cke_image_resizer_nwse-resize'
+			)[0];
 
-                this.nativeEditor.widgets.initOn( el, 'image' );
+			assert(span);
+		});
+	});
 
-                var span = document.getElementsByClassName('cke_image_resizer_nwse-resize')[0];
+	describe('with height value', function() {
+		before(function(done) {
+			Utils.createCKEditor.call(this, done, {
+				extraPlugins: 'ae_dragresize_ie',
+				imageScaleResize: 'height',
+			});
+		});
 
-                assert(span);
-            });
-        });
+		after(Utils.destroyCKEditor);
 
-        describe('with height value', function() {
-            this.timeout(35000);
+		beforeEach(Utils.beforeEach);
 
-            before(function(done) {
-                Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_dragresize_ie', imageScaleResize: 'height'});
-            });
+		afterEach(Utils.afterEach);
 
-            after(Utils.destroyCKEditor);
+		it('should have span to resize image with cursor ns-resize', function() {
+			doTestIE.call(this);
 
-            beforeEach(Utils.beforeEach);
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
+			);
 
-            afterEach(Utils.afterEach);
+			var el = new CKEDITOR.dom.element(document.getElementById('image'));
 
-            it('should have span to resize image with cursor ns-resize', function() {
-                doTestIE.call(this);
+			this.nativeEditor.widgets.initOn(el, 'image');
 
-                bender.tools.selection.setWithHtml(this.nativeEditor, '<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>');
+			var span = document.getElementsByClassName(
+				'cke_image_resizer_ns-resize'
+			)[0];
 
-                var el = new CKEDITOR.dom.element(document.getElementById('image'));
+			assert(span);
+		});
+	});
 
-                this.nativeEditor.widgets.initOn( el, 'image' );
+	describe('with scale value', function() {
+		before(function(done) {
+			Utils.createCKEditor.call(this, done, {
+				extraPlugins: 'ae_dragresize_ie',
+				imageScaleResize: 'scale',
+			});
+		});
 
-                var span = document.getElementsByClassName('cke_image_resizer_ns-resize')[0];
+		after(Utils.destroyCKEditor);
 
-                assert(span);
-            });
-        });
+		beforeEach(Utils.beforeEach);
 
-        describe('with scale value', function() {
-            this.timeout(35000);
+		afterEach(Utils.afterEach);
 
-            before(function(done) {
-                Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_dragresize_ie', imageScaleResize: 'scale'});
-            });
+		it('should have span to resize image with cursor nwse-resize', function() {
+			doTestIE.call(this);
 
-            after(Utils.destroyCKEditor);
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
+			);
 
-            beforeEach(Utils.beforeEach);
+			var el = new CKEDITOR.dom.element(document.getElementById('image'));
 
-            afterEach(Utils.afterEach);
+			this.nativeEditor.widgets.initOn(el, 'image');
 
-            it('should have span to resize image with cursor nwse-resize', function() {
-                doTestIE.call(this);
+			var span = document.getElementsByClassName(
+				'cke_image_resizer_nwse-resize'
+			)[0];
 
-                bender.tools.selection.setWithHtml(this.nativeEditor, '<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>');
+			assert(span);
+		});
+	});
 
-                var el = new CKEDITOR.dom.element(document.getElementById('image'));
+	describe('with width value', function() {
+		before(function(done) {
+			Utils.createCKEditor.call(this, done, {
+				extraPlugins: 'ae_dragresize_ie',
+				imageScaleResize: 'width',
+			});
+		});
 
-                this.nativeEditor.widgets.initOn( el, 'image' );
+		after(Utils.destroyCKEditor);
 
-                var span = document.getElementsByClassName('cke_image_resizer_nwse-resize')[0];
+		beforeEach(Utils.beforeEach);
 
-                assert(span);
-            });
-        });
+		afterEach(Utils.afterEach);
 
-        describe('with width value', function() {
-            this.timeout(35000);
+		it('should have span to resize image with cursor ew-resize', function() {
+			doTestIE.call(this);
 
-            before(function(done) {
-                Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_dragresize_ie', imageScaleResize: 'width'});
-            });
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
+			);
 
-            after(Utils.destroyCKEditor);
+			var el = new CKEDITOR.dom.element(document.getElementById('image'));
 
-            beforeEach(Utils.beforeEach);
+			this.nativeEditor.widgets.initOn(el, 'image');
 
-            afterEach(Utils.afterEach);
+			var span = document.getElementsByClassName(
+				'cke_image_resizer_ew-resize'
+			)[0];
 
-            it('should have span to resize image with cursor ew-resize', function() {
-                doTestIE.call(this);
-
-                bender.tools.selection.setWithHtml(this.nativeEditor, '<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>');
-
-                var el = new CKEDITOR.dom.element(document.getElementById('image'));
-
-                this.nativeEditor.widgets.initOn( el, 'image' );
-
-                var span = document.getElementsByClassName('cke_image_resizer_ew-resize')[0];
-
-                assert(span);
-            });
-        });
-    });
-}());
+			assert(span);
+		});
+	});
+});

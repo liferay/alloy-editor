@@ -1,0 +1,15 @@
+.ae-separator {
+	height: $separator-height;
+	margin-right: $separator-margin-right;
+	position: relative;
+
+	&::after {
+		border-right-style: solid;
+		border-right-width: $separator-line-border-width;
+		content: '';
+		height: $separator-line-height;
+		position: absolute;
+		top: $separator-line-top;
+		transform: $separator-line-translateY;
+	}
+}

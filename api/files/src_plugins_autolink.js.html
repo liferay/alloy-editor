@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.19</b>
+                        API Docs for Version: <b>1.5.17</b>
                     </p>
                 </li>
             </div>
@@ -212,7 +212,7 @@
                             
                                 var REGEX_LAST_WORD = /[^\s]+/gim;
                             
-                                var REGEX_URL = &#x27;((([A - Za - z]{ 3, 9}: (?: \\/\\/)?)(?:[-;:&amp;=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(https?\\:\\/\\/|www.|[-;:&amp;=.\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&amp;;%@.\\w_]*)#?(?:[\\w]*))((.*):(\\d*)\\/?(.*))?)&#x27;;
+                                var REGEX_URL = /((([A - Za - z]{ 3, 9}: (?: \/\/)?)(?:[-;:&amp;=\+\$,\w]+@)?[A-Za-z0-9.-]+|(https?\:\/\/|www.|[-;:&amp;=.\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&amp;;%@.\w_]*)#?(?:[\w]*))((.*):(\d*)\/?(.*))?)/i;
                             
                                 var REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
                             
@@ -359,7 +359,7 @@
                                          * @return {Boolean} Returns true if the link is a valid URL, false otherwise
                                          */
                                         _isValidURL: function(link) {
-                                            return RegExp(REGEX_URL, &#x27;i&#x27;).test(link);
+                                            return REGEX_URL.test(link);
                                         },
                             
                                         /**

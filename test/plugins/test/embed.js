@@ -1,135 +1,144 @@
-(function() {
-    'use strict';
+var assert = chai.assert;
 
-    var assert = chai.assert;
+describe('Embed plugin', function() {
+	before(function(done) {
+		Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_embed'});
+	});
 
-    describe('Embed plugin', function() {
-        this.timeout(35000);
+	after(Utils.destroyCKEditor);
 
-        before(function(done) {
-            Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_embed'});
-        });
+	beforeEach(Utils.beforeEach);
 
-        after(Utils.destroyCKEditor);
+	afterEach(function(done) {
+		if (CKEDITOR.tools.jsonp.restore) {
+			CKEDITOR.tools.jsonp.restore();
+		}
 
-        beforeEach(Utils.beforeEach);
+		if (this.nativeEditor.insertHtml.restore) {
+			this.nativeEditor.insertHtml.restore();
+		}
 
-        afterEach(function(done) {
-            if (CKEDITOR.tools.jsonp.restore) {
-                CKEDITOR.tools.jsonp.restore();
-            }
+		Utils.afterEach.call(this, done);
+	});
 
-            if (this.nativeEditor.insertHtml.restore) {
-                this.nativeEditor.insertHtml.restore();
-            }
+	it('should not convert links inside content', function() {
+		var nativeEditor = this.nativeEditor;
 
-            Utils.afterEach.call(this, done);
-        });
+		var spy = sinon.spy(nativeEditor, 'execCommand');
 
-        it('should not convert links inside content', function() {
-            var nativeEditor = this.nativeEditor;
+		bender.tools.selection.setWithHtml(
+			nativeEditor,
+			'There should be a {selection} here.'
+		);
 
-            var spy = sinon.spy(nativeEditor, 'execCommand');
+		nativeEditor.fire('paste', {
+			dataValue: 'this a <a href="http://test"></a> test',
+		});
 
-            bender.tools.selection.setWithHtml(nativeEditor, 'There should be a {selection} here.');
+		assert.isTrue(spy.notCalled);
+	});
 
-            nativeEditor.fire('paste', {
-                dataValue: 'this a <a href="http://test"></a> test'
-            });
+	it('should create embed content when url is pasted and its provider is Twitter', function() {
+		var url = 'https://foo.com';
 
-            assert.isTrue(spy.notCalled);
-        });
+		var tweetReturnHtml =
+			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-        it('should create embed content when url is pasted and its provider is Twitter', function() {
-            var url = 'https://foo.com';
+		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
+			success({html: tweetReturnHtml, provider_name: 'Twitter'});
+		});
 
-            var tweetReturnHtml = '<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
+		var nativeEditor = this.nativeEditor;
 
-            sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-                success({html: tweetReturnHtml, provider_name: 'Twitter'});
-            });
+		bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
-            var nativeEditor = this.nativeEditor;
+		nativeEditor.fire('paste', {
+			dataValue: url,
+		});
 
-            bender.tools.selection.setWithHtml(nativeEditor, '{}');
+		assert.strictEqual(
+			nativeEditor.getData(),
+			'<div data-ae-embed-url="' + url + '">' + tweetReturnHtml + '</div>'
+		);
+	});
 
-            nativeEditor.fire('paste', {
-                dataValue: url
-            });
+	it('should create embed content when url is pasted and its provider is YouTube', function() {
+		var url = 'https://foo.com';
 
-            assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + tweetReturnHtml + '</div>');
-        });
+		var tweetReturnHtml =
+			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-        it('should create embed content when url is pasted and its provider is YouTube', function() {
-            var url = 'https://foo.com';
+		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
+			success({html: tweetReturnHtml, provider_name: 'YouTube'});
+		});
 
-            var tweetReturnHtml = '<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
+		var nativeEditor = this.nativeEditor;
 
-            sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-                success({html: tweetReturnHtml, provider_name: 'YouTube'});
-            });
+		bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
-            var nativeEditor = this.nativeEditor;
+		nativeEditor.fire('paste', {
+			dataValue: url,
+		});
 
-            bender.tools.selection.setWithHtml(nativeEditor, '{}');
+		assert.strictEqual(
+			nativeEditor.getData(),
+			'<div data-ae-embed-url="' + url + '">' + tweetReturnHtml + '</div>'
+		);
+	});
 
-            nativeEditor.fire('paste', {
-                dataValue: url
-            });
+	it('should create embed content only with url when url is pasted and it is not into providers YouTube or Twitter', function() {
+		var url = 'https://foo.com';
 
-            assert.strictEqual(nativeEditor.getData(), '<div data-ae-embed-url="' + url + '">' + tweetReturnHtml + '</div>');
-        });
+		var tweetReturnHtml =
+			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-        it('should create embed content only with url when url is pasted and it is not into providers YouTube or Twitter', function() {
-            var url = 'https://foo.com';
+		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
+			success({
+				html: tweetReturnHtml,
+				provider_name: 'other_provider',
+			});
+		});
 
-            var tweetReturnHtml = '<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
+		var nativeEditor = this.nativeEditor;
 
-            sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-                success({html: tweetReturnHtml, provider_name: 'other_provider'});
-            });
+		var isCalled = false;
 
-            var nativeEditor = this.nativeEditor;
+		sinon.stub(nativeEditor, 'insertHtml', function() {
+			isCalled = true;
+			return;
+		});
 
-            var isCalled = false;
+		bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
-            sinon.stub(nativeEditor, 'insertHtml', function() {
-                isCalled = true;
-                return;
-            });
+		nativeEditor.fire('paste', {
+			dataValue: url,
+		});
 
-            bender.tools.selection.setWithHtml(nativeEditor, '{}');
+		assert.isTrue(isCalled);
+	});
 
-            nativeEditor.fire('paste', {
-                dataValue: url
-            });
+	it('should create a tag with url as href when url is pasted and there is a connection error', function() {
+		var url = 'https://foo.com';
 
-            assert.isTrue(isCalled);
-        });
+		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
+			fail({});
+		});
 
-        it('should create a tag with url as href when url is pasted and there is a connection error', function() {
-            var url = 'https://foo.com';
+		var nativeEditor = this.nativeEditor;
 
-            sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-                fail({});
-            });
+		var isCalled = false;
 
-            var nativeEditor = this.nativeEditor;
+		sinon.stub(nativeEditor, 'insertHtml', function() {
+			isCalled = true;
+			return;
+		});
 
-            var isCalled = false;
+		bender.tools.selection.setWithHtml(nativeEditor, '{}');
 
-            sinon.stub(nativeEditor, 'insertHtml', function() {
-                isCalled = true;
-                return;
-            });
+		nativeEditor.fire('paste', {
+			dataValue: url,
+		});
 
-            bender.tools.selection.setWithHtml(nativeEditor, '{}');
-
-            nativeEditor.fire('paste', {
-                dataValue: url
-            });
-
-            assert.isTrue(isCalled);
-        });
-    });
-}());
+		assert.isTrue(isCalled);
+	});
+});

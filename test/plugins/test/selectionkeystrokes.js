@@ -1,41 +1,40 @@
-(function() {
-    'use strict';
+var assert = chai.assert;
 
-    var assert = chai.assert;
+var KEY_L = 76;
 
-    var KEY_L = 76;
+describe('ae_selectionkeystrokes', function() {
+	before(function(done) {
+		Utils.createCKEditor.call(this, done, {
+			extraPlugins: 'ae_selectionkeystrokes',
+			selectionKeystrokes: [
+				{
+					keys: CKEDITOR.CTRL + KEY_L,
+					selection: 'foo',
+				},
+			],
+		});
+	});
 
-    describe('ae_selectionkeystrokes', function() {
-        this.timeout(35000);
+	after(Utils.destroyCKEditor);
 
-        before(function(done) {
-            Utils.createCKEditor.call(this, done, {
-                extraPlugins: 'ae_selectionkeystrokes',
-                selectionKeystrokes: [{
-                    keys: CKEDITOR.CTRL + KEY_L,
-                    selection: 'foo'
-                }]
-            });
-        });
+	beforeEach(Utils.beforeEach);
 
-        after(Utils.destroyCKEditor);
+	afterEach(Utils.afterEach);
 
-        beforeEach(Utils.beforeEach);
+	it('should fire an editorInteraction change when pressing the configured keystroke', function() {
+		var onEditorInteraction = sinon.spy();
 
-        afterEach(Utils.afterEach);
+		this.nativeEditor.on('editorInteraction', onEditorInteraction);
 
-        it('should fire an editorInteraction change when pressing the configured keystroke', function() {
-            var onEditorInteraction = sinon.spy();
+		happen.keydown(this._editable, {
+			ctrlKey: true,
+			keyCode: KEY_L,
+		});
 
-            this.nativeEditor.on('editorInteraction', onEditorInteraction);
-
-            happen.keydown(this._editable, {
-                ctrlKey: true,
-                keyCode: KEY_L
-            });
-
-            assert.ok(onEditorInteraction.calledOnce);
-            assert.strictEqual(onEditorInteraction.getCall(0).args[0].data.manualSelection, 'foo');
-        });
-    });
-}());
+		assert.ok(onEditorInteraction.calledOnce);
+		assert.strictEqual(
+			onEditorInteraction.getCall(0).args[0].data.manualSelection,
+			'foo'
+		);
+	});
+});

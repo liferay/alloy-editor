@@ -1,175 +1,184 @@
-(function() {
-	'use strict';
+if (!CKEDITOR.plugins.get('ae_autolist')) {
+	let KEY_BACK = 8;
 
-    if (CKEDITOR.plugins.get('ae_autolist')) {
-        return;
-    }
+	let KEY_SPACE = 32;
 
-    var KEY_BACK = 8;
-
-    var KEY_SPACE = 32;
-
-    var DEFAULT_CONFIG = [
-        {
-            regex: /^\*$/,
-            type: 'bulletedlist'
-        },
-        {
-            regex: /^1\.$/,
-            type: 'numberedlist'
-        }
-    ];
+	let DEFAULT_CONFIG = [
+		{
+			regex: /^\*$/,
+			type: 'bulletedlist',
+		},
+		{
+			regex: /^1\.$/,
+			type: 'numberedlist',
+		},
+	];
 
 	/**
-     * CKEditor plugin which automatically generates ordered/unordered list when user types text which looks like a list.
-     *
-     * @class CKEDITOR.plugins.ae_autolist
-     * @constructor
-     */
-    CKEDITOR.plugins.add(
-        'ae_autolist', {
+	 * CKEditor plugin which automatically generates ordered/unordered list when user types text which looks like a list.
+	 *
+	 * @class CKEDITOR.plugins.ae_autolist
+	 * @constructor
+	 */
+	CKEDITOR.plugins.add('ae_autolist', {
+		/**
+		 * Initialization of the plugin, part of CKeditor plugin lifecycle.
+		 * The function registers the `keydown` event on the content editing area.
+		 *
+		 * @instance
+		 * @memberof CKEDITOR.plugins.ae_autolist
+		 * @method init
+		 * @param {Object} editor The current editor instance
+		 */
+		init: function(editor) {
+			editor.once(
+				'contentDom',
+				function() {
+					let editable = editor.editable();
 
-            /**
-             * Initialization of the plugin, part of CKeditor plugin lifecycle.
-             * The function registers the `keydown` event on the content editing area.
-             *
-             * @instance
-             * @memberof CKEDITOR.plugins.ae_autolist
-             * @method init
-             * @param {Object} editor The current editor instance
-             */
-            init: function(editor) {
-                editor.once('contentDom', function() {
-                    var editable = editor.editable();
+					editable.attachListener(
+						editable,
+						'keydown',
+						this._onKeyDown,
+						this,
+						{
+							editor: editor,
+						}
+					);
+				}.bind(this)
+			);
+		},
 
-                    editable.attachListener(editable, 'keydown', this._onKeyDown, this, {
-                        editor: editor
-                    });
+		/**
+		 * Checks for pressing the `Backspace` key in order to undo the list creation.
+		 *
+		 * @instance
+		 * @memberof CKEDITOR.plugins.ae_autolist
+		 * @method _checkForBackspaceAndUndo
+		 * @param {Event} event Event object
+		 * @protected
+		 */
+		_checkForBackspaceAndUndo: function(event) {
+			let editor = event.listenerData.editor;
 
-                }.bind(this));
-            },
+			let nativeEvent = event.data.$;
 
-            /**
-             * Checks for pressing the `Backspace` key in order to undo the list creation.
-             *
-             * @instance
-             * @memberof CKEDITOR.plugins.ae_autolist
-             * @method _checkForBackspaceAndUndo
-             * @param {Event} event Event object
-             * @protected
-             */
-            _checkForBackspaceAndUndo: function(event) {
-                var editor = event.listenerData.editor;
+			let editable = editor.editable();
 
-                var nativeEvent = event.data.$;
+			editable.removeListener('keydown', this._checkForBackspaceAndUndo);
 
-                var editable = editor.editable();
+			if (nativeEvent.keyCode === KEY_BACK) {
+				editor.execCommand('undo');
+				editor.insertHtml(event.listenerData.bullet + '&nbsp;');
+				event.data.preventDefault();
+			}
+		},
 
-                editable.removeListener('keydown', this._checkForBackspaceAndUndo);
+		/**
+		 * Checks current line to find match with MATCHES object to create OL or UL.
+		 *
+		 * @instance
+		 * @memberof CKEDITOR.plugins.ae_autolist
+		 * @method _checkLine
+		 * @param {editor} Editor object
+		 * @protected
+		 * @return {Object|null} Returns an object which contains the detected list config if any
+		 */
+		_getListConfig: function(editor) {
+			let configRegex = editor.config.autolist || DEFAULT_CONFIG;
 
-                if (nativeEvent.keyCode === KEY_BACK) {
-                    editor.execCommand('undo');
-                    editor.insertHtml(event.listenerData.bullet + '&nbsp;');
-                    event.data.preventDefault();
-                }
-            },
+			let range = editor.getSelection().getRanges()[0];
 
-            /**
-             * Checks current line to find match with MATCHES object to create OL or UL.
-             *
-             * @instance
-             * @memberof CKEDITOR.plugins.ae_autolist
-             * @method _checkLine
-             * @param {editor} Editor object
-             * @protected
-             * @return {Object|null} Returns an object which contains the detected list config if any
-             */
-            _getListConfig: function(editor) {
-                var configRegex = editor.config.autolist || DEFAULT_CONFIG;
+			let textContainer = range.endContainer.getText();
 
-                var range = editor.getSelection().getRanges()[0];
+			let bullet = textContainer.substring(0, range.startOffset);
 
-                var textContainer = range.endContainer.getText();
+			let text = textContainer.substring(
+				range.startOffset,
+				textContainer.length
+			);
 
-                var bullet = textContainer.substring(0, range.startOffset);
+			let index = 0;
 
-                var text = textContainer.substring(range.startOffset, textContainer.length);
+			let regexLen = configRegex.length;
 
-                var index = 0;
+			let autolistCfg = null;
 
-                var regexLen = configRegex.length;
+			while (!autolistCfg && regexLen > index) {
+				let regexItem = configRegex[index];
 
-                var autolistCfg = null;
+				if (regexItem.regex.test(bullet)) {
+					autolistCfg = {
+						bullet: bullet,
+						editor: editor,
+						text: text,
+						type: regexItem.type,
+					};
 
-                while (!autolistCfg && regexLen > index) {
-                    var regexItem = configRegex[index];
+					break;
+				}
 
-                    if (regexItem.regex.test(bullet)) {
-                        autolistCfg = {
-                            bullet: bullet,
-                            editor: editor,
-                            text: text,
-                            type: regexItem.type
-                        };
+				index++;
+			}
 
-                        break;
-                    }
+			return autolistCfg;
+		},
 
-                    index++;
-                }
+		/**
+		 * Create list with different types: Bulleted or Numbered list
+		 *
+		 * @instance
+		 * @memberof CKEDITOR.plugins.ae_autolist
+		 * @method _createList
+		 * @param {Object} listConfig Object that contains bullet, text and type for creating the list
+		 * @protected
+		 */
+		_createList: function(listConfig) {
+			let editor = listConfig.editor;
 
-                return autolistCfg;
-            },
+			let range = editor.getSelection().getRanges()[0];
 
-			/**
-             * Create list with different types: Bulleted or Numbered list
-             *
-             * @instance
-             * @memberof CKEDITOR.plugins.ae_autolist
-             * @method _createList
-             * @param {Object} listConfig Object that contains bullet, text and type for creating the list
-             * @protected
-			 */
-            _createList: function(listConfig) {
-                var editor = listConfig.editor;
+			range.endContainer.setText(listConfig.text);
+			editor.execCommand(listConfig.type);
 
-                var range = editor.getSelection().getRanges()[0];
+			let editable = editor.editable();
 
-                range.endContainer.setText(listConfig.text);
-                editor.execCommand(listConfig.type);
+			// Subscribe to keydown in order to check if the next key press is `Backspace`.
+			// If so, the creation of the list will be discarded.
+			editable.attachListener(
+				editable,
+				'keydown',
+				this._checkForBackspaceAndUndo,
+				this,
+				{
+					editor: editor,
+					bullet: listConfig.bullet,
+				},
+				1
+			);
+		},
 
-                var editable = editor.editable();
+		/**
+		 * Listens to the `Space` key events to check if the last word
+		 * introduced by the user should be replaced by a list (OL or UL)
+		 *
+		 * @instance
+		 * @memberof CKEDITOR.plugins.ae_autolist
+		 * @method _onKeyDown
+		 * @param {Event} event Event object
+		 * @protected
+		 */
+		_onKeyDown: function(event) {
+			let nativeEvent = event.data.$;
 
-                // Subscribe to keydown in order to check if the next key press is `Backspace`.
-                // If so, the creation of the list will be discarded.
-                editable.attachListener(editable, 'keydown', this._checkForBackspaceAndUndo, this, {
-                    editor: editor,
-                    bullet: listConfig.bullet
-                }, 1);
-            },
+			if (nativeEvent.keyCode === KEY_SPACE) {
+				let listConfig = this._getListConfig(event.listenerData.editor);
 
-			/**
-             * Listens to the `Space` key events to check if the last word
-             * introduced by the user should be replaced by a list (OL or UL)
-             *
-             * @instance
-             * @memberof CKEDITOR.plugins.ae_autolist
-             * @method _onKeyDown
-             * @param {Event} event Event object
-             * @protected
-             */
-            _onKeyDown: function(event) {
-                var nativeEvent = event.data.$;
-
-                if (nativeEvent.keyCode === KEY_SPACE) {
-                    var listConfig = this._getListConfig(event.listenerData.editor);
-
-                    if (listConfig) {
-                        event.data.preventDefault();
-                        this._createList(listConfig);
-                    }
-                }
-            }
-        }
-	);
-}());
+				if (listConfig) {
+					event.data.preventDefault();
+					this._createList(listConfig);
+				}
+			}
+		},
+	});
+}

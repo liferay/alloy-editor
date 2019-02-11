@@ -1,0 +1,27 @@
+/**
+ * The order of imports is as follow:
+ * CSS for outer (parent) components should precede
+ * the CSS of nested components or components which
+ * stay on the same level in the hierarchy.
+ */
+
+@import "bourbon";
+
+@import "components/ae-editable/structure";
+@import "components/ae-placeholder/structure";
+@import "components/ae-twitter-link/structure";
+@import "components/ae-sr-only/structure";
+@import "components/ae-icon/structure";
+@import "components/ae-separator/structure";
+
+.ae-ui {
+	@import "components/ae-toolbar/structure";
+	@import "components/ae-arrow-box/structure";
+	@import "components/ae-container/structure";
+	@import "components/ae-container-input/structure";
+	@import "components/ae-container-dropdown/structure";
+	@import "components/ae-button-bridge/structure";
+	@import "components/ae-dropdown/structure";
+	@import "components/ae-camera/structure";
+	@import "components/ae-separator/structure";
+}

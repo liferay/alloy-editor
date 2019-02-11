@@ -1,139 +1,162 @@
-(function() {
-    'use strict';
+var assert = chai.assert;
 
-    var assert = chai.assert;
+describe('SelectionRegion', function() {
+	describe('with focusing the editor after instance create', function() {
+		before(function(done) {
+			Utils.createCKEditor.call(this, done, {
+				extraPlugins: 'ae_selectionregion',
+			});
+		});
 
-    describe('SelectionRegion', function() {
-        this.timeout(35000);
+		after(Utils.destroyCKEditor);
 
-        describe('with focusing the editor after instance create', function() {
-            before(function(done) {
-                Utils.createCKEditor.call(this, done, {
-                    extraPlugins: 'ae_selectionregion'
-                });
-            });
+		beforeEach(Utils.beforeEach);
 
-            after(Utils.destroyCKEditor);
+		afterEach(Utils.afterEach);
 
-            beforeEach(Utils.beforeEach);
+		it('should create selection from range', function() {
+			this.nativeEditor.setData(
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas rhoncus augue a scelerisque imperdiet. Nunc quis nunc dolor. Nunc nisl felis, lacinia eu condimentum quis, interdum in tellus. Donec eget ipsum sed felis egestas euismod ultricies at arcu. Suspendisse potenti. Curabitur sed augue in sem efficitur fermentum ac quis mi. Fusce volutpat feugiat justo, non hendrerit justo bibendum eu. Maecenas pellentesque urna vitae odio condimentum, suscipit tempus nibh interdum. Fusce lacinia magna et nisl vestibulum, nec viverra nisl tempus. Curabitur viverra, arcu a vehicula imperdiet, lectus nisi faucibus velit, eget sodales ante lacus nec ligula. Morbi in placerat ligula. Maecenas volutpat sem id augue elementum auctor.'
+			);
 
-            afterEach(Utils.afterEach);
+			var editable = this.nativeEditor.editable();
 
-            it('should create selection from range', function() {
-                this.nativeEditor.setData('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas rhoncus augue a scelerisque imperdiet. Nunc quis nunc dolor. Nunc nisl felis, lacinia eu condimentum quis, interdum in tellus. Donec eget ipsum sed felis egestas euismod ultricies at arcu. Suspendisse potenti. Curabitur sed augue in sem efficitur fermentum ac quis mi. Fusce volutpat feugiat justo, non hendrerit justo bibendum eu. Maecenas pellentesque urna vitae odio condimentum, suscipit tempus nibh interdum. Fusce lacinia magna et nisl vestibulum, nec viverra nisl tempus. Curabitur viverra, arcu a vehicula imperdiet, lectus nisi faucibus velit, eget sodales ante lacus nec ligula. Morbi in placerat ligula. Maecenas volutpat sem id augue elementum auctor.');
+			var region = editable.getClientRect();
 
-                var editable = this.nativeEditor.editable();
+			// Add - 5 or + 5 to make sure the points are in the editable area
+			this.nativeEditor.createSelectionFromRange(
+				region.left + 5,
+				region.top + 5,
+				region.right - 5,
+				region.bottom - 5
+			);
 
-                var region = editable.getClientRect();
+			assert.isFalse(this.nativeEditor.isSelectionEmpty());
+		});
 
-                // Add - 5 or + 5 to make sure the points are in the editable area
-                this.nativeEditor.createSelectionFromRange(region.left + 5, region.top + 5, region.right - 5, region.bottom - 5);
+		it('should create empty selection from point', function() {
+			this.nativeEditor.setData(
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas rhoncus augue a scelerisque imperdiet. Nunc quis nunc dolor. Nunc nisl felis, lacinia eu condimentum quis, interdum in tellus. Donec eget ipsum sed felis egestas euismod ultricies at arcu. Suspendisse potenti. Curabitur sed augue in sem efficitur fermentum ac quis mi. Fusce volutpat feugiat justo, non hendrerit justo bibendum eu. Maecenas pellentesque urna vitae odio condimentum, suscipit tempus nibh interdum. Fusce lacinia magna et nisl vestibulum, nec viverra nisl tempus. Curabitur viverra, arcu a vehicula imperdiet, lectus nisi faucibus velit, eget sodales ante lacus nec ligula. Morbi in placerat ligula. Maecenas volutpat sem id augue elementum auctor.'
+			);
 
-                assert.isFalse(this.nativeEditor.isSelectionEmpty());
-            });
+			var editable = this.nativeEditor.editable();
 
-            it('should create empty selection from point', function() {
-                this.nativeEditor.setData('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas rhoncus augue a scelerisque imperdiet. Nunc quis nunc dolor. Nunc nisl felis, lacinia eu condimentum quis, interdum in tellus. Donec eget ipsum sed felis egestas euismod ultricies at arcu. Suspendisse potenti. Curabitur sed augue in sem efficitur fermentum ac quis mi. Fusce volutpat feugiat justo, non hendrerit justo bibendum eu. Maecenas pellentesque urna vitae odio condimentum, suscipit tempus nibh interdum. Fusce lacinia magna et nisl vestibulum, nec viverra nisl tempus. Curabitur viverra, arcu a vehicula imperdiet, lectus nisi faucibus velit, eget sodales ante lacus nec ligula. Morbi in placerat ligula. Maecenas volutpat sem id augue elementum auctor.');
+			var region = editable.getClientRect();
 
-                var editable = this.nativeEditor.editable();
+			// Add - 5 or + 5 to make sure the points are in the editable area
+			this.nativeEditor.createSelectionFromPoint(
+				region.left + 5,
+				region.top + 5
+			);
 
-                var region = editable.getClientRect();
+			assert.isTrue(this.nativeEditor.isSelectionEmpty());
+		});
 
-                // Add - 5 or + 5 to make sure the points are in the editable area
-                this.nativeEditor.createSelectionFromPoint(region.left + 5, region.top + 5);
+		it('should retrieve the caret region', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'The caret shoud be in this {selection}.'
+			);
 
-                assert.isTrue(this.nativeEditor.isSelectionEmpty());
-            });
+			var caretRegion = this.nativeEditor.getCaretRegion();
 
-            it('should retrieve the caret region', function() {
-                bender.tools.selection.setWithHtml(this.nativeEditor, 'The caret shoud be in this {selection}.');
+			assert.isObject(caretRegion);
+			assert.property(caretRegion, 'bottom');
+			assert.property(caretRegion, 'left');
+			assert.property(caretRegion, 'right');
+			assert.property(caretRegion, 'top');
+		});
 
-                var caretRegion = this.nativeEditor.getCaretRegion();
+		it('should check if the selection is empty', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'The selection should be empty in this case.'
+			);
+			var isSelectionEmpty = this.nativeEditor.isSelectionEmpty();
+			assert.isTrue(isSelectionEmpty);
 
-                assert.isObject(caretRegion);
-                assert.property(caretRegion, 'bottom');
-                assert.property(caretRegion, 'left');
-                assert.property(caretRegion, 'right');
-                assert.property(caretRegion, 'top');
-            });
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'The selection should {not} be empty in this case.'
+			);
+			isSelectionEmpty = this.nativeEditor.isSelectionEmpty();
+			assert.isFalse(isSelectionEmpty);
+		});
 
-            it('should check if the selection is empty', function() {
-                bender.tools.selection.setWithHtml(this.nativeEditor, 'The selection should be empty in this case.');
-                var isSelectionEmpty = this.nativeEditor.isSelectionEmpty();
-                assert.isTrue(isSelectionEmpty);
+		it('should retrieve client selection regions', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'Here we should have {selection}.'
+			);
 
-                bender.tools.selection.setWithHtml(this.nativeEditor, 'The selection should {not} be empty in this case.');
-                isSelectionEmpty = this.nativeEditor.isSelectionEmpty();
-                assert.isFalse(isSelectionEmpty);
-            });
+			var rect = this.nativeEditor.getClientRectsRegion();
 
-            it('should retrieve client selection regions', function () {
-                bender.tools.selection.setWithHtml(this.nativeEditor, 'Here we should have {selection}.');
+			assert.isObject(rect);
+			assert.property(rect, 'bottom');
+			assert.property(rect, 'left');
+			assert.property(rect, 'right');
+			assert.property(rect, 'top');
 
-                var rect = this.nativeEditor.getClientRectsRegion();
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'Here we should have an empty selection.'
+			);
 
-                assert.isObject(rect);
-                assert.property(rect, 'bottom');
-                assert.property(rect, 'left');
-                assert.property(rect, 'right');
-                assert.property(rect, 'top');
+			rect = this.nativeEditor.getClientRectsRegion();
 
+			assert.isObject(rect);
+			assert.property(rect, 'bottom');
+			assert.property(rect, 'left');
+			assert.property(rect, 'right');
+			assert.property(rect, 'top');
+		});
 
-                bender.tools.selection.setWithHtml(this.nativeEditor, 'Here we should have an empty selection.');
+		it('should retrieve selection direction', function() {
+			bender.tools.selection.setWithHtml(
+				this.nativeEditor,
+				'Here we should have {selection}.'
+			);
 
-                rect = this.nativeEditor.getClientRectsRegion();
+			var direction = this.nativeEditor.getSelectionDirection();
 
-                assert.isObject(rect);
-                assert.property(rect, 'bottom');
-                assert.property(rect, 'left');
-                assert.property(rect, 'right');
-                assert.property(rect, 'top');
-            });
+			assert.strictEqual(CKEDITOR.SELECTION_TOP_TO_BOTTOM, direction);
+		});
+	});
 
-            it('should retrieve selection direction', function() {
-                bender.tools.selection.setWithHtml(this.nativeEditor, 'Here we should have {selection}.');
+	describe('without focusing the editor after instance create', function() {
+		before(function(done) {
+			var editable = document.createElement('div');
 
-                var direction = this.nativeEditor.getSelectionDirection();
+			editable.setAttribute('id', 'editable');
+			editable.setAttribute('contenteditable', true);
 
-                assert.strictEqual(CKEDITOR.SELECTION_TOP_TO_BOTTOM, direction);
-            });
-        });
+			document.getElementsByTagName('body')[0].appendChild(editable);
 
-        describe('without focusing the editor after instance create', function() {
-            this.timeout(35000);
+			this._editable = editable;
 
-            before(function(done) {
-                var editable = document.createElement('div');
+			this.nativeEditor = CKEDITOR.inline('editable', {
+				extraPlugins: 'ae_selectionregion',
+			});
 
-                editable.setAttribute('id', 'editable');
-                editable.setAttribute('contenteditable', true);
+			this.nativeEditor.on('instanceReady', function() {
+				done();
+			});
+		});
 
-                document.getElementsByTagName('body')[0].appendChild(editable);
+		after(function() {
+			if (this.nativeEditor) {
+				this.nativeEditor.destroy();
+			}
 
-                this._editable = editable;
+			this._editable.parentNode.removeChild(this._editable);
+		});
 
-                this.nativeEditor = CKEDITOR.inline('editable', {
-                    extraPlugins: 'ae_selectionregion'
-                });
-
-                this.nativeEditor.on('instanceReady', function() {
-                    done();
-                });
-            });
-
-            after(function() {
-                if (this.nativeEditor) {
-                    this.nativeEditor.destroy();
-                }
-
-                this._editable.parentNode.removeChild(this._editable);
-            })
-
-            it('should not throw exception on retrieving the caret region', function() {
-                assert.doesNotThrow(function() {
-                    this.nativeEditor.getCaretRegion();
-                }.bind(this));
-            });
-        });
-    });
-}());
+		it('should not throw exception on retrieving the caret region', function() {
+			assert.doesNotThrow(
+				function() {
+					this.nativeEditor.getCaretRegion();
+				}.bind(this)
+			);
+		});
+	});
+});
