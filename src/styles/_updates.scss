@@ -29,26 +29,44 @@
     .update-item {
         // @extend .text-right;
         @extend .justify-content-end;
-        margin-top: 100px;
-        margin-bottom: 100px;
-
-        &:before {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            width: 150px;
-            border-top: 1px solid $primary;
-        }
+        @extend .bg-white;
+        @extend .border;
+        @extend .border-primary;
+        @extend .rounded;
+        margin-top: 50px;
+        margin-bottom: 50px;
 
         .update-icon {
             width: 60px;
             height: 60px;
-            transform: translateX(50%);
+            @extend .bg-white;
+            // @extend .text-white;
+            @extend .border;
+            @extend .border-primary;
+            // border-width: 5px !important;
+
+            @include media-breakpoint-up(md) {
+                transform: translateX(50%);
+                // color: $dark !important;
+                // background-color: white !important;
+            }
         }
 
         .update-content {
-            margin-right: 100px;
+            right: 100px;
+            @extend .w-100;
+            @extend .text-center;
+
+            @include media-breakpoint-up(md) {
+                // background-color: transparent;
+                // @extend .border;
+                // @extend .border-primary;
+                // @extend .rounded;
+                border: 1px solid $primary;
+                text-align: left !important;
+                position: absolute;
+                width: auto !important;
+            }
         }
 
         &:nth-child(odd) {
@@ -61,12 +79,31 @@
             }
 
             .update-icon {
-                transform: translateX(-50%);
+                @include media-breakpoint-up(md) {
+                    transform: translateX(-50%);
+                }
             }
 
             .update-content {
-                margin-right: 0;
-                margin-left: 100px;
+                right: auto;
+                left: 100px;
+            }
+        }
+
+        @include media-breakpoint-up(md) {
+            background-color: transparent !important;
+            border: none !important;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            width: 50%;
+
+            &:before {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 50%;
+                width: 150px;
+                border-top: 1px solid $primary;
             }
         }
     }
