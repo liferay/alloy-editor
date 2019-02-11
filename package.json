@@ -30,6 +30,7 @@
   "dependencies": {
     "@mdx-js/mdx": "0.15.7",
     "@mdx-js/tag": "0.16.6",
+    "alloyeditor": "^2.0.0-alpha.5",
     "babel-preset-metal-jsx": "0.1.1",
     "browser-monads": "1.0.0",
     "classnames": "2.2.6",

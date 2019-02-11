@@ -4,7 +4,7 @@ import Navigation from './Navigation';
 import React from 'react';
 import Search from './Search';
 
-const getSection = ({allMdx: {edges}}) => {
+const getSectionx = ({allMdx: {edges}}) => {
 	const resolveNode = edges.map(({node}) => {
 		const {
 			slug,
@@ -26,6 +26,44 @@ const getSection = ({allMdx: {edges}}) => {
 
 	return arrangeIntoTree(resolveNode);
 }
+
+const getSection = data => {
+	const elements = data.allMdx.edges.map(({node}) => {
+		const { fields: { slug, title, alwaysActive, order } } = node;
+
+		return toSectionElements(slug.replace('.html', ''), title, order, alwaysActive);
+	});
+
+	let rootElements = elements.filter(path => path.isRoot);
+
+	return rootElements.map(path => toSectionItem(path, elements))
+		.sort((a, b) => a.order - b.order);
+};
+
+const toSectionElements = (slug, title, order, alwaysActive) => {
+	const slugs = slug.split("/");
+	const lastSlug = slugs[slugs.length - 1];
+	const penultimateSlug = slugs[slugs.length - 2];
+
+	const id = lastSlug === "index" ? penultimateSlug : lastSlug;
+	const link = '/' + slug;
+	const parentLink = '/' + slug.substring(0, slug.lastIndexOf("/") + 1);
+	const isFolder = lastSlug === "index";
+	const isRoot = (slugs.length === 3 && isFolder) || (slugs.length === 2 && !isFolder);
+
+	return {id, link, title, parentLink, isFolder, isRoot, order, alwaysActive};
+};
+
+const toSectionItem = (item, paths) => {
+	if (item.isFolder) {
+		item.items = paths.filter(path => path.link !== item.link)
+			.filter(path => path.link === (item.parentLink + path.id + (path.isFolder ? "/index" : "")))
+			.map(path => toSectionItem(path, paths))
+			.sort((a, b) => a.order - b.order);
+	}
+
+	return item;
+};
 
 export default (props) => (
 	<StaticQuery

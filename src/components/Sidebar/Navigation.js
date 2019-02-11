@@ -15,21 +15,14 @@ class Navigation extends Component {
 
     _isActive(section) {
         const { location } = this.props;
-        // this is easy to understand with an example:
-        // let's say we have the location.pathname equal to "/docs/Porygon/detail.html"
-        // we extract the location path without the ".html" part in order to obtain "/docs/Porygon/detail"
+
         const sectionLocation = location.pathname.split('.')[0];
 
-        // if there is no section.link it means we are looking at the parent-menu
-        if (!section.link) {
-            // in the parent-menu we can use the section.id corrisponding to "Porygon" instead of section.link
-            // so we ask 'is there a "Porygon" in "/docs/Porygon/detail" ?'
+        if (section.isFolder) {
             return sectionLocation.includes(section.id);
         }
-        // otherwise we compare the sectionLocation with the section.link
-        // in the latest versions of gatsby-boilerplate, the parent link exists and it ends in "/index"
-        // we need to remove the "/index" part to avoid the use of "alwaysActive" flag
-        return sectionLocation.includes(section.link.split('/index')[0]);
+
+        return sectionLocation == section.link;
     }
 
     renderNavigationItems() {

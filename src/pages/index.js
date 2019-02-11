@@ -49,9 +49,9 @@ class Index extends Component {
                                         Get Started
                                     </Link>
 
-                                    <Link to="/docs/" className="btn btn-lg btn-outline-light text-uppercase mt-4 mt-lg-5 mx-3">
-                                        Download (1.5.0)
-                                    </Link>
+                                    <a href="https://github.com/liferay/alloy-editor" target="_blank" className="btn btn-lg btn-outline-light text-uppercase mt-4 mt-lg-5 mx-3">
+                                        Download
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -61,10 +61,14 @@ class Index extends Component {
                         <div className="container my-lg-5">
                             <div className="row">
                                 <div className="col-12 col-xl-10 mx-auto">
-                                    <div className="bg-white p-3 p-sm-5">Live Editor placeholder</div>
-                                    <div className="bg-white py-5"></div>
-                                    <div className="bg-white py-5"></div>
-                                    <div className="bg-white py-5"></div>
+                                    <div id="editable" className="bg-white p-3 p-sm-5">
+                                        <h1>This is a a Live Demo</h1>
+                                        <h3 className="my-4">Click/Tap here to edit</h3>
+                                        <p>Cupcake ipsum dolor sit amet halvah. Icing I love carrot cake cotton candy danish brownie wafer I love. Cake chocolate cake biscuit tiramisu ice cream pudding pastry. Gingerbread muffin candy canes tart tootsie roll.</p>
+                                        <img className="my-4" src="images/home/cupcakes.jpg" />
+                                        <p>Muffin cotton candy cotton candy wafer lollipop cheesecake bear claw. Pastry caramels toffee cake dragée toffee chocolate cake cupcake. Pastry lemon drops I love wafer macaroon bonbon marzipan.</p>
+                                        <p>Muffin soufflé jelly beans macaroon I love I love. Cheesecake brownie sugar plum. Cookie donut carrot cake gummies. Biscuit jelly sweet dessert sesame snaps tiramisu I love ice cream.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

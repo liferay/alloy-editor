@@ -82,6 +82,12 @@ export default class Docs extends Component {
                                                 <article className="docs-content">
                                                     <MDXRenderer>{code.body}</MDXRenderer>
                                                 </article>
+
+                                                {/* <a className="btn btn-dark btn-lg" href={"https://github.com/"+site.githubRepo+"/tree/master/"+page.srcFilePath} target="_blank"> */}
+                                                {/* <a className="btn btn-dark btn-sm float-right mt-5" href="#" target="_blank" title="Edit this section on GitHub">
+                                                    <img className="align-middle" src="/images/home/GitHub-Mark-64px.svg" alt="" />
+                                                    <span className="align-middle ml-3">Edit</span>
+                                                </a> */}
                                             </div>
                                         </div>
                                     </div>

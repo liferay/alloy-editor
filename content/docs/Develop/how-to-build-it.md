@@ -1,6 +1,7 @@
 ---
 title: Build it
 description: How to build a version of AlloyEditor.
+order: 2
 ---
 
 ## Install NodeJS

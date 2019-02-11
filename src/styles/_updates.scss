@@ -90,6 +90,22 @@
             }
         }
 
+        &:hover {
+            .update-icon {
+                color: white;
+                background-color: $primary !important;
+            }
+
+            .update-content {
+                color: white;
+                background-color: $primary !important;
+
+                p {
+                    color: white !important;
+                }
+            }
+        }
+
         @include media-breakpoint-up(md) {
             background-color: transparent !important;
             border: none !important;

@@ -66,11 +66,11 @@ class Timeline extends Component {
                         ))}
                     </div>
                 ))}
-                <div className="col-12 update-container">
+                {/* <div className="col-12 update-container">
                     <div class="update-version position-relative bg-white border border-primary rounded-circle mx-auto d-flex justify-content-center align-items-center mb-0">
                         <span>1.0.0</span>
                     </div>
-                </div>
+                </div> */}
             </>
         );
     }

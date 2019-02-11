@@ -1,6 +1,6 @@
 ---
 layout: "redirect"
-redirect: "/docs/Develop/about.html"
+redirect: "/docs/develop/about.html"
 title: "All Themes"
 mainPage: false
 ---
