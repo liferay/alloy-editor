@@ -69,7 +69,10 @@ class ButtonLinkEditBrowse extends React.Component {
 		const editor = this.context.editor.get('nativeEditor');
 		const url = editor.config.documentBrowseLinkUrl;
 		const browseLinkCallback = editor.config.documentBrowseLinkCallback;
-		const linkTarget = this.linkEditButtonRef.current.state.linkTarget;
+		const linkTarget = this.linkEditButtonRef.current
+			? this.linkEditButtonRef.current.state.linkTarget
+			: '';
+
 		const changeLinkCallback = selectedItem => {
 			this._updateLink(selectedItem.value, linkTarget, selectedItem.href);
 		};
