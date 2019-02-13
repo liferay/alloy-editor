@@ -27,7 +27,6 @@
     }
 
     .update-item {
-        // @extend .text-right;
         @extend .justify-content-end;
         @extend .bg-white;
         @extend .border;
@@ -40,15 +39,14 @@
             width: 60px;
             height: 60px;
             @extend .bg-white;
-            // @extend .text-white;
             @extend .border;
             @extend .border-primary;
-            // border-width: 5px !important;
+            transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+            -webkit-transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+            will-change: color, background-color;
 
             @include media-breakpoint-up(md) {
                 transform: translateX(50%);
-                // color: $dark !important;
-                // background-color: white !important;
             }
         }
 
@@ -56,12 +54,17 @@
             right: 100px;
             @extend .w-100;
             @extend .text-center;
+            transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+            -webkit-transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+            will-change: color, background-color;
+
+            p {
+                transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+                -webkit-transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+                will-change: color, background-color;
+            }
 
             @include media-breakpoint-up(md) {
-                // background-color: transparent;
-                // @extend .border;
-                // @extend .border-primary;
-                // @extend .rounded;
                 border: 1px solid $primary;
                 text-align: left !important;
                 position: absolute;
@@ -71,7 +74,6 @@
 
         &:nth-child(odd) {
             @extend .ml-auto;
-            // @extend .text-left;
             @extend .justify-content-start;
 
             &:before {

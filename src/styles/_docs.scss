@@ -3,7 +3,10 @@
 .sidebar {
     left: 0;
     transform: translateX(-100%);
-    transition: 300ms ease-in-out;
+    -webkit-transform: translateX(-100%);
+    transition: transform 300ms ease-in-out;
+	-webkit-transition: -webkit-transform 300ms ease-in-out;
+	will-change: transform, -webkit-transform;
 	top: 0;
 	width: 100%;
     z-index: 10;
@@ -18,6 +21,9 @@
 				color: $secondary;
 				display: block;
 				padding: 15px;
+				transition: background-color 150ms ease-in-out;
+				-webkit-transition: background-color 150ms ease-in-out;
+				will-change: background-color;
 
 				&:hover {
 					text-decoration: none;
@@ -76,6 +82,7 @@
 		color: $dark;
 		font-weight: 700;
 		margin-bottom: 1.5rem;
+		margin-top: 3rem;
 	}
 
 	img {
