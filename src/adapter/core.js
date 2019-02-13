@@ -99,16 +99,19 @@ extend(
 
 					let extraCommands = this.get('extraCommands');
 
-					Object.entries(extraCommands).forEach(([commandName, command]) => {
+					const extraCommandKeys = Object.keys(extraCommands);
+					for (let i = 0; i < extraCommandKeys.length; i++) {
+						const commandName = extraCommandKeys[i];
+
 						if (editor.commands[commandName]) {
-							return;
+							continue;
 						}
 
 						editor.addCommand(
 							commandName,
 							extraCommands[commandName]
 						);
-					});
+					}
 
 					editable.addClass('ae-editable');
 				}.bind(this)
