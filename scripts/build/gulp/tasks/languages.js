@@ -6,7 +6,7 @@ const gulp = require('gulp');
 const path = require('path');
 const walk = require('walk');
 
-const langWhitelist = /^\w\.js/;
+const langWhitelist = /^[\w-]+\.js/;
 
 /**
  * Normalizes the different string values that can be stored in a language template.
