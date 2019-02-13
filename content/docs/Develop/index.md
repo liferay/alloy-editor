@@ -2,5 +2,5 @@
 layout: redirect
 redirect: /docs/develop/about.html
 title: Develop
-weight: 1
+order: 1
 ---

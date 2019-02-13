@@ -7,7 +7,7 @@ module.exports = exports.onCreateNode = ({ node, actions, getNode}) => {
 			path,
 			redirect,
 			title,
-			weight,
+			order,
 			date,
 			description,
 			author,
@@ -46,8 +46,8 @@ module.exports = exports.onCreateNode = ({ node, actions, getNode}) => {
 
 		createNodeField({
 			node,
-			name: 'weight',
-			value: weight || 0,
+			name: 'order',
+			value: order || 0,
 		});
 
 		createNodeField({

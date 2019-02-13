@@ -1,7 +1,7 @@
 ---
+layout: develop
 title: About
 description: The main idea behind the editor is to fully separate the core from the UI. And not only to separate it, but to give opportunity to people to add very easy new Buttons and Toolbars or to create completely new UI, based on different Framework or vanilla JavaScript.
-icon: "code"
 order: 1
 ---
 

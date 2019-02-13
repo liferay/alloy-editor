@@ -1,9 +1,7 @@
 ---
-description: AlloyEditor can be used on the server too. On the server, a possible way of usage is to create a React component, which can render the content for editing and create an instance of AlloyEditor in the browser. This will be a significant performance improvement.
-layout: guide
 title: Creating a React component
-order: 30
-
+description: AlloyEditor can be used on the server too. On the server, a possible way of usage is to create a React component, which can render the content for editing and create an instance of AlloyEditor in the browser. This will be a significant performance improvement.
+order: 3
 ---
 
 ###### AlloyEditor can be used on the server too. On the server, a possible way of usage is to create a React component, which can render the content for editing and create an instance of AlloyEditor in the browser. This will be a significant performance improvement.

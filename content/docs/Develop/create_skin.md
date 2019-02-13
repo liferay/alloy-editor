@@ -1,8 +1,7 @@
 ---
+layout: develop
+title: Create Skins
 description: AlloyEditor bundles a couple of gorgeus skins that you can use out of the box. However, if you need a better integration with your app's look and feel, you can easily create your own skin.
-
-layout: "guide"
-title: "Create Skins"
 order: 5
 ---
 

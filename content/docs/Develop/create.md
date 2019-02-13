@@ -1,8 +1,8 @@
 ---
+layout: develop
+title: Create
 description: How to create your buttons, skins, toolbars and UI!
-layout: "guide"
-title: "Create"
-weight: 3
+order: 3
 ---
 
 ###### How to create your buttons, skins, toolbars and UI!

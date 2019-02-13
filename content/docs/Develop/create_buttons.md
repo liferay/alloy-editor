@@ -1,8 +1,7 @@
 ---
+layout: develop
+title: Create Buttons
 description: If you run the editor with the default UI, which is written in React, then adding a button will be straightforward. Buttons are standard React classes. For your convenience, there is also a number of mixins, which you can use that provide basic functionality out of the box. Then, use CKEditor's API to do style the content and that is it!
-
-layout: "guide"
-title: "Create Buttons"
 order: 4
 ---
 

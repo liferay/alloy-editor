@@ -1,8 +1,7 @@
 ---
+layout: develop
+title: Create Toolbars
 description: Adding a new toolbar is also as straightforward as adding a button.
-
-layout: "guide"
-title: "Create Toolbars"
 order: 6
 ---
 

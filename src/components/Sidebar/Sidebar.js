@@ -49,11 +49,10 @@ export default (props) => (
 					edges {
 						node {
 							fields {
-								layout
 								redirect
 								slug
 								title
-								weight
+								order
 							}
 						}
 					}

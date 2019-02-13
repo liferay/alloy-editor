@@ -1,8 +1,7 @@
 ---
-description: Is there an existing CKEditor plugin you like? Chances are you will be able to use it with AlloyEditor as well!
-layout: "guide"
 title: How to use CKEditor Plugins?
-order: 40
+description: Is there an existing CKEditor plugin you like? Chances are you will be able to use it with AlloyEditor as well!
+order: 4
 ---
 
 ###### There are some CKEDITOR plugins that it add button through their UI. This tutorial is about using this kind of plugins.

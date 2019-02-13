@@ -1,8 +1,7 @@
 ---
-description: AlloyEditor allows you to configure the editor in the way you prefer. You will be able to custom Toolbars, Buttons and Editor behavior!
-layout: guide
 title: Editor Configuration
-order: 50
+description: AlloyEditor allows you to configure the editor in the way you prefer. You will be able to custom Toolbars, Buttons and Editor behavior!
+order: 5
 ---
 
 ###### AlloyEditor allows you to configure the editor in the way you prefer. You will be able to custom Toolbars, Buttons and Editor behavior!

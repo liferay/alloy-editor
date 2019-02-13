@@ -1,7 +1,7 @@
 ---
+layout: develop
+title: Create entirely new UI
 description: You don't like React? You prefer jQuery? Or you are JavaScript ninja and prefer writing vanilla JS? Welcome on board. You'll see how straightforward it is to create a whole new UI for AlloyEditor.
-layout: "guide"
-title: "Create entirely new UI"
 order: 7
 ---
 

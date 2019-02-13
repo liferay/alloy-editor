@@ -1,7 +1,6 @@
 ---
-description: "Develop description."
-layout: "guide"
-title: "Use"
+title: Basic use
+description: Develop description.
 order: 1
 ---
 
