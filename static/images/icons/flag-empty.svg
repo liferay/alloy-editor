@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="flag_empty" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<path class="lexicon-icon-body" fill="none" d="M415,32H160c0-17.7-14.3-32-32-32S96,14.3,96,32v33v190.2V480c0,17.7,14.3,32,32,32s32-14.3,32-32V288h255
-	c18.2,0,33-14.8,33-33V65C448,46.8,433.2,32,415,32z"/>
-<path class="lexicon-icon-outline" d="M415,32H160c0-17.7-14.3-32-32-32S96,14.3,96,32v33v190.2V480c0,17.7,14.3,32,32,32s32-14.3,32-32V288h255
-	c18.2,0,33-14.8,33-33V65C448,46.8,433.2,32,415,32z M384,224H160V96h224V224L384,224z"/>
-</svg>

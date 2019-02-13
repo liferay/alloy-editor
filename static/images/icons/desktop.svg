@@ -1,7 +1,0 @@
-<svg id="desktop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="lexicon-icon-outline desktop-monitor" d="M448,0H64C28.8,0,0,28.8,0,64v289.2c0,35.2,28.8,64,64,64h384c35.2,0,64-28.8,64-64V64C512,28.8,483.2,0,448,0z M448,320H64V64h384V320z"/>
-	<path class="lexicon-icon-outline desktop-stand" d="M320,448H192c-42.3,0-43,64,0,64h128C362.3,512,363.3,448,320,448z"/>
-	<path class="lexicon-icon-outline desktop-content-circle" d="M160,256L160,256c-35.3,0-64-28.7-64-64l0,0c0-35.3,28.7-64,64-64l0,0c35.3,0,64,28.7,64,64l0,0C224,227.3,195.3,256,160,256z"/>
-	<rect class="lexicon-icon-outline desktop-content-rectangle1" x="288" y="128" width="128" height="32"/>
-	<rect class="lexicon-icon-outline desktop-content-rectangle2" x="288" y="224" width="96" height="32"/>
-</svg>

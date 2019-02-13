@@ -22,7 +22,7 @@ class Navigation extends Component {
             return sectionLocation.includes(section.id);
         }
 
-        return sectionLocation == section.link;
+        return sectionLocation === section.link;
     }
 
     renderNavigationItems() {
@@ -62,7 +62,7 @@ const Anchor = ({page}) => {
                 {/* <svg className="collapse-toggle clay-icon icon-monospaced">
                     <use xlinkHref="/images/icons/icons.svg#caret-bottom" />
                 </svg> */}
-                <svg class="lexicon-icon float-right mt-1">
+                <svg className="lexicon-icon float-right mt-1">
                     <use href="/images/icons/icons.svg#caret-bottom" />
                 </svg>
             </a>

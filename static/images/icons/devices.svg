@@ -1,4 +1,0 @@
-<svg id="devices" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="lexicon-icon-outline devices1" d="M224,128H32c-17.7,0-32,14.3-32,32v320c0,17.7,14.3,32,32,32h192c17.7,0,32-14.3,32-32V160C256,142.3,241.7,128,224,128L224,128z M64,416V192h128v224H64L64,416z"/>
-	<path class="lexicon-icon-outline devices2" d="M448,0H192c-35.3,0-64,28.7-64,64v32h64V64h256v384H288v64h160c35.3,0,64-28.7,64-64V64C512,28.7,483.3,0,448,0z"/>
-</svg>

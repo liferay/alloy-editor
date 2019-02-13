@@ -45,19 +45,19 @@ class Timeline extends Component {
 
                 {updates.map(({ version, major, features }, updatesIndex) => (
                     <div key={updatesIndex} className={major ? 'col-12 update-container' : 'col-12 update-container update-minor'}>
-                        <div class="update-version position-relative bg-white border border-primary rounded-circle mx-auto d-flex justify-content-center align-items-center mb-0">
+                        <div className="update-version position-relative bg-white border border-primary rounded-circle mx-auto d-flex justify-content-center align-items-center mb-0">
                             <span>{version}</span>
                         </div>
 
                         {features.map((featProp, featuresIndex) => (
-                            <a href={featProp.url} key={featuresIndex} target="_blank" className="update-item position-relative d-flex flex-column flex-md-row align-items-center py-4 py-md-0 text-dark">
-                                <div class="update-icon position-relative rounded-circle flex-shrink-0 p-3 d-flex justify-content-center align-items-center">
-                                    <svg class="lexicon-icon m-0">
+                            <a href={featProp.url} key={featuresIndex} target="_blank" rel="noopener noreferrer" className="update-item position-relative d-flex flex-column flex-md-row align-items-center py-4 py-md-0 text-dark">
+                                <div className="update-icon position-relative rounded-circle flex-shrink-0 p-3 d-flex justify-content-center align-items-center">
+                                    <svg className="lexicon-icon m-0">
                                         <use href={"/images/icons/icons.svg#"+featProp.icon} />
                                     </svg>
                                 </div>
 
-                                <div class="update-content bg-white rounded px-4 pt-3 py-md-4">
+                                <div className="update-content bg-white rounded px-4 pt-3 py-md-4">
                                     <h3>{featProp.title}</h3>
 
                                     <p className="text-secondary mb-0">{featProp.description}</p>
@@ -67,7 +67,7 @@ class Timeline extends Component {
                     </div>
                 ))}
                 {/* <div className="col-12 update-container">
-                    <div class="update-version position-relative bg-white border border-primary rounded-circle mx-auto d-flex justify-content-center align-items-center mb-0">
+                    <div className="update-version position-relative bg-white border border-primary rounded-circle mx-auto d-flex justify-content-center align-items-center mb-0">
                         <span>1.0.0</span>
                     </div>
                 </div> */}

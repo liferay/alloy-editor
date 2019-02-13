@@ -1,8 +1,0 @@
-<svg id="environment-connected" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="environment-connected-server-bottom-right lexicon-icon-outline" d="M480,288h-96c-17.7,0-32,14.3-32,32v160c0,17.7,14.3,32,32,32h96c17.7,0,32-14.3,32-32V320C512,302.3,497.7,288,480,288z M464,384h-64c-21.3,0-22-32,0-32h64C485.3,352,484.9,384,464,384z"/>
-	<path class="environment-connected-server-bottom-left lexicon-icon-outline" d="M128,288H32c-17.7,0-32,14.3-32,32v160c0,17.7,14.3,32,32,32h96c17.7,0,32-14.3,32-32V320C160,302.3,145.7,288,128,288z M112,384H48c-21.3,0-22-32,0-32h64C133.3,352,132.9,384,112,384z"/>
-	<path class="environment-connected-server-top lexicon-icon-outline" d="M320,0H192c-17.7,0-32,14.3-32,32v160c0,17.7,14.3,32,32,32h128c17.7,0,32-14.3,32-32V32C352,14.3,337.7,0,320,0z M304,96h-96c-21.3,0-22-32,0-32h96C325.3,64,324.9,96,304,96z"/>
-	<rect class="environment-connected-border-bottom lexicon-icon-outline" x="192" y="384" width="128" height="32"/>
-	<path class="environment-connected-border-left lexicon-icon-outline" d="M128,95.2C80.7,133,50.3,190.9,50.3,256h27.4c0-48.1,19.2-91.7,50.3-123.8V95.2z"/>
-	<path class="environment-connected-border-right lexicon-icon-outline" d="M384,95.2v37c31.1,32.1,50.3,75.7,50.3,123.8h27.4C461.7,190.9,431.3,133,384,95.2z"/>
-</svg>

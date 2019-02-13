@@ -1,7 +1,0 @@
-<svg id="lock-dots" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<circle class="lexicon-icon-outline lock-dots-dot1" cx="464" cy="48" r="48"/>
-	<circle class="lexicon-icon-outline lock-dots-dot2" cx="464" cy="240" r="48"/>
-	<circle class="lexicon-icon-outline lock-dots-dot3" cx="464" cy="432" r="48"/>
-	<polygon class="lexicon-icon-outline lock-dots-connector" points="288,192 384,96 352,96 288,160 "/>
-	<path class="lexicon-icon-outline lock-dots-lock" d="M384,224H96v-96c0-84,128-84,128,0v31.5h32V128C256,1,64,0,64,128v96H44.8C16.6,224,0,247,0,275.2v153.6C0,457,16.6,480,44.8,480h224c28.2,0,51.2-23,51.2-51.2v-87.5l64,42.7v-32l-64-42.7l0.5-53.3H384V224z M192,416h-64v-96h64V416z"/>
-</svg>

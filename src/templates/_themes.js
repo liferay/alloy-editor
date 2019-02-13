@@ -28,7 +28,7 @@ export default class Onboarding extends Component {
                     <div className="aspect-ratio bg-checkered">
                         <img className="aspect-ratio-item-center-middle aspect-ratio-item-fluid" alt={imageAlt} src={imageSrc} />
                     </div>
-                    <span class="sticker sticker-top-right sticker-light px-3 py-2 mt-3">{version}</span>
+                    <span className="sticker sticker-top-right sticker-light px-3 py-2 mt-3">{version}</span>
                     <div className="card-body p-0">
                         <h3 className="card-title text-truncate mt-2">{title}</h3>    
                         <p className="card-text text-secondary text-truncate mt-2">{text}</p>

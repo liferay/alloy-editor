@@ -69,7 +69,7 @@ export default class Docs extends Component {
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-md-12">
-                                                <h1 class="text-center my-5">{title}</h1>
+                                                <h1 className="text-center my-5">{title}</h1>
                                             </div>
                                         </div>
                                     </div>

@@ -1,4 +1,0 @@
-<svg id="check-square" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="lexicon-icon-outline check-square-border" d="M480,301.2v114.6c0,35.4-28.7,64.2-64.2,64.2H96.2C60.7,480,32,451.3,32,415.8V96.2C32,60.7,60.7,32,96.2,32h178.6c43.3,0,43.3,64,0,64H96.2L96,415.8l319.8,0.2l0.1-114.8C417,258,480,259,480,301.2z"/>
-	<path class="lexicon-icon-outline check-square-check" d="M224,342.6l-75.3-75.3C134,251,156,231,171.3,244.7l52.7,52.7L436.7,84.7C452,71,474,91,459.3,107.3L224,342.6z"/>
-</svg>

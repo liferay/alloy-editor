@@ -14,21 +14,21 @@ const Footer = () => {
                         <ul className="nav justify-content-center mt-4">
                             <li className="nav-item mx-sm-1">
                                 <a className="nav-link" href={process.env.GITHUB_REPO} target="_blank" rel="noopener noreferrer">
-                                    <svg class="lexicon-icon">
+                                    <svg className="lexicon-icon">
                                             <use href="/images/icons/icons.svg#social-facebook" />
                                         </svg>
                                     </a>
                             </li>
                             <li className="nav-item mx-sm-1">
                                 <a className="nav-link" href={process.env.GITHUB_REPO} target="_blank" rel="noopener noreferrer">
-                                    <svg class="lexicon-icon">
+                                    <svg className="lexicon-icon">
                                         <use href="/images/icons/icons.svg#twitter" />
                                     </svg>
                                 </a>
                             </li>
                             <li className="nav-item mx-sm-1">
                                 <a className="nav-link" href={process.env.GITHUB_REPO} target="_blank" rel="noopener noreferrer">
-                                    <svg class="lexicon-icon">
+                                    <svg className="lexicon-icon">
                                         <use href="/images/icons/icons.svg#social-linkedin" />
                                     </svg>
                                 </a>

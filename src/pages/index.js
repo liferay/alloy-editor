@@ -49,7 +49,7 @@ class Index extends Component {
                                         Get Started
                                     </Link>
 
-                                    <a href="https://github.com/liferay/alloy-editor" target="_blank" className="btn btn-lg btn-outline-light text-uppercase mt-4 mt-lg-5 mx-3">
+                                    <a href="https://github.com/liferay/alloy-editor" target="_blank" rel="noopener noreferrer" className="btn btn-lg btn-outline-light text-uppercase mt-4 mt-lg-5 mx-3">
                                         Download
                                     </a>
                                 </div>
@@ -62,10 +62,10 @@ class Index extends Component {
                             <div className="row">
                                 <div className="col-12 col-xl-10 mx-auto">
                                     <div id="editable" className="bg-white p-3 p-sm-5">
-                                        <h1>This is a a Live Demo</h1>
+                                        <h2 className="h1">This is a a Live Demo</h2>
                                         <h3 className="my-4">Click/Tap here to edit</h3>
                                         <p>Cupcake ipsum dolor sit amet halvah. Icing I love carrot cake cotton candy danish brownie wafer I love. Cake chocolate cake biscuit tiramisu ice cream pudding pastry. Gingerbread muffin candy canes tart tootsie roll.</p>
-                                        <img className="my-4" src="images/home/cupcakes.jpg" />
+                                        <img className="my-4" src="images/home/cupcakes.jpg" alt="" />
                                         <p>Muffin cotton candy cotton candy wafer lollipop cheesecake bear claw. Pastry caramels toffee cake dragée toffee chocolate cake cupcake. Pastry lemon drops I love wafer macaroon bonbon marzipan.</p>
                                         <p>Muffin soufflé jelly beans macaroon I love I love. Cheesecake brownie sugar plum. Cookie donut carrot cake gummies. Biscuit jelly sweet dessert sesame snaps tiramisu I love ice cream.</p>
                                     </div>
@@ -112,9 +112,7 @@ class Index extends Component {
                                         </div>
 
                                         <div className="col-12 col-lg-6 text-center text-lg-left">
-                                            <h2 className="h1 font-weight-bold mt-5 mt-lg-0">We <svg class="lexicon-icon text-danger"><use href="/images/icons/icons.svg#heart" /></svg><span class="sr-only">love</span> writing</h2>
-
-                                            <h3 class="highlight-title"></h3>
+                                            <h2 className="h1 font-weight-bold mt-5 mt-lg-0">We <svg className="lexicon-icon text-danger"><use href="/images/icons/icons.svg#heart" /></svg><span className="sr-only">love</span> writing</h2>
 
                                             <p className="mt-4">In the AlloyEditor team, we believe the content is the king, and so, we want to create a simple user interface where what you write is all that really matters.</p>
 
@@ -134,7 +132,7 @@ class Index extends Component {
 
                                     <div className="row mt-5 text-center text-md-left">
                                         <div className="col-12 col-md-2">
-                                            <svg class="lexicon-icon text-primary display-1"><use href="/images/icons/icons.svg#announcement" /></svg>
+                                            <svg className="lexicon-icon text-primary display-1"><use href="/images/icons/icons.svg#announcement" /></svg>
                                         </div>
 
                                         <div className="col-12 col-md-10">

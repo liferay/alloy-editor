@@ -1,7 +1,0 @@
-<svg id="mark-as-answer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="lexicon-icon-outline mark-as-answer-hook" d="M105,109.4c0-47.6,73-48.6,73,0c0,53.2-73,53.2-73,145.9c0,50.9,73,46.9,73,0c0-49.9,73-56.9,73-145.9C251-35,32-38,32,109.4C32,158.6,105,157.6,105,109.4z"/>
-	<path class="lexicon-icon-outline mark-as-answer-item-2" d="M312.4,390h131.2c48.1,0,49.1-64,0-64H312.4C264.9,326,262.9,390,312.4,390z"/>
-	<path class="lexicon-icon-outline mark-as-answer-item-1" d="M312.4,262h131.2c48.1,0,49.1-64,0-64H312.4C264.9,198,262.9,262,312.4,262z"/>
-	<path class="lexicon-icon-outline mark-as-answer-item-3" d="M312.4,511h67.2c48.1,0,49.1-64,0-64h-67.2C264.9,447,262.9,511,312.4,511z"/>
-	<circle class="lexicon-icon-outline mark-as-answer-dot" cx="141.1" cy="358" r="36"/>
-</svg>

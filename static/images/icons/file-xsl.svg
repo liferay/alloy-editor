@@ -1,7 +1,0 @@
-<svg id="file-xsl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="lexicon-icon-outline file-xsl-border1" d="M96,192V64h224v64c0,19.2,12.8,32,32,32h64v32h64v-38.4c0-32-19.2-44.8-64-89.6S358.4,0,326.4,0H96C60.8,0,32,28.8,32,64v128H96z"/>
-	<path class="lexicon-icon-outline file-xsl-border2" d="M32,448c0,35.2,28.8,64,64,64h320c35.2,0,64-28.8,64-64H32z"/>
-	<path class="lexicon-icon-outline file-xsl-x" d="M80,326.4l-44.8-83.2H80l26.2,52.1l24.9-52.1h41.6L128,326.4l48,89.6h-44.8l-28.8-64l0,0l-28.8,64H32L80,326.4z"/>
-	<path class="lexicon-icon-outline file-xsl-s" d="M198.4,393.6l22.4-25.6c12.8,12.8,64,28.8,67.2,0c3.2-22.4-83.2-19.2-83.2-76.8c0-48,73.6-73.6,115.2-28.8L304,288c-25.6-19.2-60.8-16-60.8,3.2c0,25.6,86.4,16,86.4,76.8C329.6,425.6,259.2,441.6,198.4,393.6z"/>
-	<path class="lexicon-icon-outline file-xsl-l" d="M374.4,243.2h38.4V384H480v32H374.4V243.2z"/>
-</svg>

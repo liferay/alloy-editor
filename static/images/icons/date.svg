@@ -1,9 +1,0 @@
-<svg id="date" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="date-border lexicon-icon-outline" d="M512,160.1c0-35-28.7-64-63.7-64l-0.3,0V32c0-44-64-41-64,0v64h-96V32c0-40-64-44-64,0v64h-96V32c0-45-64-40-64,0v64l-0.3,0C28.7,96,0,125,0,160v288.1c0,35,29,64,64,64h352l96-96V160.1z M384,448.2v-64h64L384,448.2z M448,320.1H320v128H64V160.1h384V320.1z"/>
-	<polygon class="date-1 lexicon-icon-outline" points="256,416 288,416 288,256 288,224 288,192 256,192 256,224 224,224 224,256 256,256 "/>
-	<rect class="date-3 lexicon-icon-outline" x="96" y="192" width="64" height="32"/>
-	<rect class="date-3 lexicon-icon-outline" x="160" y="224" width="32" height="63"/>
-	<rect class="date-3 lexicon-icon-outline" x="98.3" y="288" width="61.7" height="32"/>
-	<polygon class="date-3 lexicon-icon-outline" points="160,416 160,384 96,384 96,416 "/>
-	<rect class="date-3 lexicon-icon-outline" x="160" y="320" width="32" height="63"/>
-</svg>

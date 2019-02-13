@@ -1,4 +1,0 @@
-<svg id="dynamic-data-list" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="dynamic-data-list-bolt lexicon-icon-outline" d="M474.6,416.2L429.4,390l22.8-54.7c4.7-11.4-8.3-19.9-16.9-12.5l-80,75.6c-5.4,6.1-3.9,13.1,2,17l45.3,26.3L379.5,497c-4.1,10.7,8.1,20.2,17.2,11.9l80-75.6C481.4,429,481.4,419.8,474.6,416.2z"/>
-	<path class="dynamic-data-list-border lexicon-icon-outline" d="M415.7,0H95.9C60.6,0,32,28.6,32,63.9V384c0,35.3,28.7,64,63.9,64h192.2l-0.1-64l0,0h-64v-64h128V192h64v64v0.2h64V64.3C480,28.8,451.2,0,415.7,0z M160,384H96v-64h64V384z M160,256H96v-64h64V256z M160,128H96V64h64V128z M288,256h-64v-64h64V256z M288,128h-64V64h64V128z M416,128h-64V64h64V128z"/>
-</svg>

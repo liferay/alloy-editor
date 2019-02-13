@@ -1,7 +1,0 @@
-<svg id="align-image-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="lexicon-icon-outline align-image-left-page-bottom" d="M479.9,480H32c-43.7-2-41.5-62.2,0-64h447.9C524.5,418.1,520.8,478.6,479.9,480z"/>
-	<path class="lexicon-icon-outline align-image-left-middle-text1" d="M479.9,224h-160c-44.8-3.4-40.4-62.3,0-64h160C525.4,163.3,519.9,221.9,479.9,224z"/>
-	<path class="lexicon-icon-outline align-image-left-middle-text2" d="M479.9,352h-160c-44.8-3.4-40.4-62.3,0-64h160C525.4,291.3,519.9,349.9,479.9,352z"/>
-	<path class="lexicon-icon-outline align-image-left-page-top" d="M479.9,96H32c-43.7-2-41.5-62.2,0-64h447.9C524.5,34.2,520.8,94.7,479.9,96z"/>
-	<rect class="lexicon-icon-outline align-image-left-image" y="160" width="224" height="192"/>
-</svg>

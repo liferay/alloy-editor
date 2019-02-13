@@ -1,6 +1,0 @@
-<svg id="message-boards" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="lexicon-icon-outline message-boards-speech-balloon-content1" d="M272.8,256.1h-160c-22.4,0-22.4,32,0,32h160C292,288.1,295.2,256.1,272.8,256.1z"/>
-	<path class="lexicon-icon-outline message-boards-speech-balloon-content2" d="M208.8,320.1h-96c-22.4,0-22.4,32,0,32h96C228,352.1,231.2,320.1,208.8,320.1z"/>
-	<path class="lexicon-icon-outline message-boards-speech-balloon-outline" d="M352,160.1H32c-17.7,0-32,14.3-32,32v224c0,17.7,14.3,32,32,32h32v32c0.4,30.2,36.2,41.7,54.6,22.6l54.4-54.6H352c17.7,0,32-14.3,32-32v-224C384,174.4,369.6,160.1,352,160.1z M352,416.1H32v-224H352V416.1z"/>
-	<path class="lexicon-icon-outline message-boards-speech-balloon-solid" d="M480,64.1h-32v-32c0.3-25.1-31.5-44.5-54.6-22.6l-54.4,54.6H160c-17.7,0-32,14.3-32,32v32h225.2c34.7,0,62.8,28.1,62.8,62.8v161.2h64c17.7,0,32-14.3,32-32v-224C511.9,78.5,497.6,64.1,480,64.1z"/>
-</svg>

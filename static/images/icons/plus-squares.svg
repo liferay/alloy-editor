@@ -1,6 +1,0 @@
-<svg id="plus-squares" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="lexicon-icon-outline plus-squares-square1" d="M481,1H321c-17.7,0-32,14.3-32,32v160c0,17.7,14.3,32,32,32h160c17.7,0,32-14.3,32-32V33C513,15.3,498.7,1,481,1z M449,161h-96V65h96V161z"/>
-	<path class="lexicon-icon-outline plus-squares-square2" d="M481,289H321c-17.7,0-32,14.3-32,32v160c0,17.7,14.3,32,32,32h160c17.7,0,32-14.3,32-32V321C513,303.3,498.7,289,481,289z M449,449h-96v-96h96V449z"/>
-	<path class="lexicon-icon-outline plus-squares-square3" d="M193,289H33c-17.7,0-32,14.3-32,32v160c0,17.7,14.3,32,32,32h160c17.7,0,32-14.3,32-32V321C225,303.3,210.7,289,193,289z M161,449H65v-96h96V449z"/>
-	<polygon class="lexicon-icon-outline plus-squares-plus" points="129,33 97,33 97,97 33,97 33,129 97,129 97,193.1 129,193.1 129,129 193,129 193,97 129,97 "/>
-</svg>

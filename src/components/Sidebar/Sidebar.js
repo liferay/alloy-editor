@@ -1,31 +1,7 @@
 import { StaticQuery, graphql } from 'gatsby';
-import arrangeIntoTree from '../../utils/arrangeIntoTree';
 import Navigation from './Navigation';
 import React from 'react';
 import Search from './Search';
-
-const getSectionx = ({allMdx: {edges}}) => {
-	const resolveNode = edges.map(({node}) => {
-		const {
-			slug,
-			title,
-			weight,
-			layout,
-		} = node.fields;
-		const slugWithoutExtension = slug.replace('.html', '');
-		const pathSplit = slugWithoutExtension.split('/');
-
-		return {
-			id: pathSplit[pathSplit.length - 1],
-			layout,
-			link: '/' + slugWithoutExtension,
-			title,
-			weight,
-		};
-	});
-
-	return arrangeIntoTree(resolveNode);
-}
 
 const getSection = data => {
 	const elements = data.allMdx.edges.map(({node}) => {

@@ -1,6 +1,0 @@
-<svg id="info-book" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-	<path class="lexicon-icon-outline info-book-i-dot" d="M272.3,95.4c-8.8,0-16,7.2-16,16s7.2,16,16,16s16-7.2,16-16S281.1,95.4,272.3,95.4L272.3,95.4z"/>
-	<path class="lexicon-icon-outline info-book-i-stem" d="M288.1,160h-48c-21,0.6-22,30.6,0,32h16v80c0.9,20.2,29.9,23,32,0V160L288.1,160z"/>
-	<path class="lexicon-icon-outline info-book-pages" d="M400,448H143.8c-22.2-1.1-20.1-31.7,0-32H400C419.4,416.3,423.1,446.3,400,448z"/>
-	<path class="lexicon-icon-outline info-book-border" d="M448,352V32c0-17.7-14.3-32-32-32H160c-53,0-96,43-96,96v336.1c0,0-0.9,73.8,78.3,79.7c0.6,0.1,289.7,0.3,289.7,0.3c21.6-1.4,20.9-30.7,0-32c0,0-286.8-0.2-288-0.2c-65.2-2.3-61-93.4-1.7-95.8H416C433.7,384,448,369.7,448,352z M160.1,320V64h224v256H160.1z"/>
-</svg>
