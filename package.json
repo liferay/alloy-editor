@@ -20,12 +20,13 @@
     "node": ">= 8"
   },
   "scripts": {
-    "dev": "rimraf public .cache && gatsby develop",
+    "dev": "npm run copy:alloyeditor && rimraf public .cache && gatsby develop",
     "deploy": "gatsby build && gh-pages -d public -b wedeploy",
-    "develop": "rimraf public .cache && gatsby develop",
+    "develop": "npm run copy:alloyeditor && rimraf public .cache && gatsby develop",
     "start": "npm run develop",
     "build": "gatsby build",
-    "serve": "gatsby serve"
+    "serve": "gatsby serve",
+    "copy:alloyeditor": "cp -r node_modules/alloyeditor/dist/alloy-editor static/"
   },
   "dependencies": {
     "@mdx-js/mdx": "0.15.7",

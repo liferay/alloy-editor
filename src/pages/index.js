@@ -4,15 +4,23 @@ import { Link } from 'gatsby';
 import LayoutNav from '../components/LayoutNav';
 import {WOW} from 'wowjs';
 import Footer from '../components/Footer';
+import 'alloyeditor';
 
 class Index extends Component {
     componentDidMount() {
         this._wow = new WOW();
         this._wow.init();
+
+        window.ALLOYEDITOR_BASEPATH = '/alloy-editor/';
+
+        window.CKEDITOR.basePath += 'alloy-editor/';
+
+        this._alloyEditor = window.AlloyEditor.editable('editable');
     }
 
     componentWillUnmount() {
         this._wow = null;
+        this._alloyEditor = null;
     }
 
     render() {
@@ -30,6 +38,7 @@ class Index extends Component {
                     <meta name="og:description" content={description} />
                     <meta name="twitter:description" content={description} />
                     <meta name="og:title" content={process.env.PROJECT_NAME} />
+                    <link href="alloy-editor/assets/alloy-editor-ocean.css" rel="stylesheet" />
                 </Helmet>
 
                 <main className="content">
