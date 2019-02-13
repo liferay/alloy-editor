@@ -175,4 +175,4 @@ On the left you'll see the list of selected plugins (automatically detected by p
 
 ### 6. Once the file downloaded, unzip it and *replace* the `lib/ckeditor` directory with the new directory you unzipped.
 
-### 7. Run `gulp release` and have a look at the demo to make sure everything is working correctly.
+### 7. Run `npm run build` and have a look at the demo to make sure everything is working correctly.
