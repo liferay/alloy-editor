@@ -1,4 +1,4 @@
-import SelectionTest from '../selections/selection-test.js';
+import SelectionTest from '../selections/selection-test';
 
 if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	/**

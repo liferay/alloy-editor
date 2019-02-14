@@ -1,5 +1,5 @@
 import EditorContext from '../../adapter/editor-context';
-import Lang from '../../oop/lang.js';
+import Lang from '../../oop/lang';
 
 /**
  * ButtonKeystroke is a mixin that provides a `keystroke` prop that allows configuring

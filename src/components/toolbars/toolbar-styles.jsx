@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ToolbarButtons from '../base/toolbar-buttons.js';
-import WidgetArrowBox from '../base/widget-arrow-box.js';
-import WidgetDropdown from '../base/widget-dropdown.js';
-import WidgetExclusive from '../base/widget-exclusive.js';
-import WidgetFocusManager from '../base/widget-focus-manager.js';
-import WidgetPosition from '../base/widget-position.js';
+import ToolbarButtons from '../base/toolbar-buttons';
+import WidgetArrowBox from '../base/widget-arrow-box';
+import WidgetDropdown from '../base/widget-dropdown';
+import WidgetExclusive from '../base/widget-exclusive';
+import WidgetFocusManager from '../base/widget-focus-manager';
+import WidgetPosition from '../base/widget-position';
 import EditorContext from '../../adapter/editor-context';
-import Lang from '../../oop/lang.js';
+import Lang from '../../oop/lang';
 
 /**
  * The ToolbarStyles class hosts the buttons for styling a text selection.

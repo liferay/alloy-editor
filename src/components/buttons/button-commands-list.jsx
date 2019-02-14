@@ -1,6 +1,6 @@
 import React from 'react';
 import ButtonCommandListItem from './button-command-list-item.jsx';
-import WidgetFocusManager from '../base/widget-focus-manager.js';
+import WidgetFocusManager from '../base/widget-focus-manager';
 
 /**
  * The ButtonCommandsList class provides functionality for showing a list of commands that can be

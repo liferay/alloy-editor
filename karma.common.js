@@ -2,7 +2,7 @@
 
 const argv = require('yargs').argv;
 const path = require('path');
-const srcFiles = require('./test/ui/_src.js');
+const srcFiles = require('./test/ui/_src');
 const alloyEditorDir = 'dist/alloy-editor/';
 
 const preprocessors = {

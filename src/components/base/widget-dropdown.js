@@ -1,4 +1,4 @@
-import Lang from '../../oop/lang.js';
+import Lang from '../../oop/lang';
 import ReactDOM from 'react-dom';
 
 /**

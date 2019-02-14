@@ -1,5 +1,5 @@
-import Core from './core.js';
-import Lang from '../oop/lang.js';
+import Core from './core';
+import Lang from '../oop/lang';
 
 import Buttons from '../components/buttons';
 import Toolbars from '../components/toolbars';

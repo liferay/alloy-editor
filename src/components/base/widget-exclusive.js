@@ -1,4 +1,4 @@
-import Lang from '../../oop/lang.js';
+import Lang from '../../oop/lang';
 
 /**
  * Provides functionality for managing exclusive state of an widget.

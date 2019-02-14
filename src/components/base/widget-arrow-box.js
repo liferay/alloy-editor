@@ -1,4 +1,4 @@
-import Lang from '../../oop/lang.js';
+import Lang from '../../oop/lang';
 
 /**
  * Provides functionality for displaying Widget Arrow box on top or on bottom of the widget

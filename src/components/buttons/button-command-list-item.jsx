@@ -1,4 +1,4 @@
-import ButtonCommand from '../base/button-command.js';
+import ButtonCommand from '../base/button-command';
 import React from 'react';
 
 /**

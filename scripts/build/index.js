@@ -1,6 +1,6 @@
-import '../../lib/ckeditor/ckeditor.js';
+import '../../lib/ckeditor/ckeditor';
 
-import * as AlloyEditor from '../../src/adapter/main.js';
+import * as AlloyEditor from '../../src/adapter/main';
 
 if (typeof window !== 'undefined') {
 	window.CKEDITOR.disableAutoInline = true;

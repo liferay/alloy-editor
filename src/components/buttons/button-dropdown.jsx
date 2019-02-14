@@ -1,4 +1,4 @@
-import WidgetFocusManager from '../base/widget-focus-manager.js';
+import WidgetFocusManager from '../base/widget-focus-manager';
 import React from 'react';
 
 /**

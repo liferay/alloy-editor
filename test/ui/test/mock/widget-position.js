@@ -1,4 +1,4 @@
-import WidgetPosition from '../../../../src/components/base/widget-position.js';
+import WidgetPosition from '../../../../src/components/base/widget-position';
 
 class Component {}
 

@@ -1,6 +1,6 @@
 import ButtonDropdown from './button-dropdown.jsx';
 import React from 'react';
-import WidgetFocusManager from '../base/widget-focus-manager.js';
+import WidgetFocusManager from '../base/widget-focus-manager';
 
 /**
  * The ButtonLinkAutocompleteList class provides functionality for showing a list of
