@@ -14,7 +14,6 @@ export default function useExecCommand(command, modifiesSelection) {
 			editor.selectionChange(true);
 		}
 
-		// TODO: find out what relies on `this` here:
-		editor.fire('actionPerformed', this);
+		editor.fire('actionPerformed', command);
 	};
 }
