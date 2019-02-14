@@ -1,7 +1,7 @@
 import ButtonDropdown from './button-dropdown.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WidgetFocusManager from '../base/widget-focus-manager.js';
+import WidgetFocusManager from '../base/widget-focus-manager';
 
 /**
  * The ButtonTargetList class provides functionality for changing the target of a link

@@ -1,6 +1,6 @@
 import ButtonEmbedVideoEdit from './button-embed-video-edit.jsx';
 import ButtonIcon from './button-icon.jsx';
-import ButtonProps from '../base/button-props.js';
+import ButtonProps from '../base/button-props';
 import PropTypes from 'prop-types';
 import React from 'react';
 

@@ -1,6 +1,6 @@
-import SelectionGetArrowBoxClasses from './selection-arrowbox.js';
-import SelectionSetPosition from './selection-position.js';
-import SelectionTest from './selection-test.js';
+import SelectionGetArrowBoxClasses from './selection-arrowbox';
+import SelectionSetPosition from './selection-position';
+import SelectionTest from './selection-test';
 
 const Selections = [
 	{

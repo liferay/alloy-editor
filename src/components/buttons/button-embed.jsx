@@ -1,6 +1,6 @@
 import ButtonEmbedEdit from './button-embed-edit.jsx';
 import ButtonIcon from './button-icon.jsx';
-import ButtonKeystroke from '../base/button-keystroke.js';
+import ButtonKeystroke from '../base/button-keystroke';
 import React from 'react';
 
 /**

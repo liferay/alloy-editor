@@ -1,5 +1,5 @@
-import ButtonActionStyle from '../base/button-action-style.js';
-import ButtonStyle from '../base/button-style.js';
+import ButtonActionStyle from '../base/button-action-style';
+import ButtonStyle from '../base/button-style';
 import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 

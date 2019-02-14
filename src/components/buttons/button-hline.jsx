@@ -1,5 +1,5 @@
-import ButtonCommand from '../base/button-command.js';
-import ButtonStyle from '../base/button-style.js';
+import ButtonCommand from '../base/button-command';
+import ButtonStyle from '../base/button-style';
 import ButtonIcon from './button-icon.jsx';
 import React from 'react';
 

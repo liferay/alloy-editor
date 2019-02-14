@@ -1,5 +1,5 @@
 import EditorContext from '../../adapter/editor-context';
-import Lang from '../../oop/lang.js';
+import Lang from '../../oop/lang';
 
 /**
  * ButtonStyle is a mixin that provides a style prop and some methods to apply the resulting

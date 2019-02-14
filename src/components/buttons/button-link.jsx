@@ -1,8 +1,8 @@
-import ButtonCfgProps from '../base/button-props.js';
+import ButtonCfgProps from '../base/button-props';
 import ButtonIcon from './button-icon.jsx';
-import ButtonKeystroke from '../base/button-keystroke.js';
+import ButtonKeystroke from '../base/button-keystroke';
 import ButtonLinkEdit from './button-link-edit.jsx';
-import ButtonStateClasses from '../base/button-state-classes.js';
+import ButtonStateClasses from '../base/button-state-classes';
 import EditorContext from '../../adapter/editor-context';
 import React from 'react';
 

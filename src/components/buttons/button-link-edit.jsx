@@ -1,12 +1,12 @@
 import React from 'react';
-import ButtonCfgProps from '../base/button-props.js';
+import ButtonCfgProps from '../base/button-props';
 import ButtonIcon from './button-icon.jsx';
 import ButtonLinkAutocompleteList from './button-link-autocomplete-list.jsx';
 import ButtonLinkTargetEdit from './button-link-target-edit.jsx';
 import EditorContext from '../../adapter/editor-context';
-import Lang from '../../oop/lang.js';
-import WidgetDropdown from '../base/widget-dropdown.js';
-import WidgetFocusManager from '../base/widget-focus-manager.js';
+import Lang from '../../oop/lang';
+import WidgetDropdown from '../base/widget-dropdown';
+import WidgetFocusManager from '../base/widget-focus-manager';
 
 /**
  * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.

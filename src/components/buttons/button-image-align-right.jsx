@@ -1,7 +1,7 @@
-import ButtonCommand from '../base/button-command.js';
-import ButtonCommandActive from '../base/button-command-active.js';
+import ButtonCommand from '../base/button-command';
+import ButtonCommandActive from '../base/button-command-active';
 import ButtonIcon from './button-icon.jsx';
-import ButtonStateClasses from '../base/button-state-classes.js';
+import ButtonStateClasses from '../base/button-state-classes';
 import React from 'react';
 
 /**

@@ -1,6 +1,6 @@
-import Attribute from './attribute.js';
-import Lang from './lang.js';
-import extend from './oop.js';
+import Attribute from './attribute';
+import Lang from './lang';
+import extend from './oop';
 
 /**
  * Quick and dirty impl of Base class.

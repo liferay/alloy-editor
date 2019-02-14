@@ -4,7 +4,7 @@ import ButtonStylesListItemRemove from './button-styles-list-item-remove.jsx';
 import ButtonsStylesListHeader from './button-styles-list-header.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WidgetFocusManager from '../base/widget-focus-manager.js';
+import WidgetFocusManager from '../base/widget-focus-manager';
 
 /**
  * The ButtonStylesList class provides functionality for showing a list of styles that can be
