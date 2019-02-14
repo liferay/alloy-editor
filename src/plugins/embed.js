@@ -1,3 +1,5 @@
+import {HIGH_PRIORITY} from './priorities';
+
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_embed')) {
 	let REGEX_HTTP = /^https?/;
@@ -134,17 +136,26 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 
 			// Add a listener to handle paste events and turn links into embed objects
 			editor.once('contentDom', function() {
-				editor.on('paste', function(event) {
-					let link = event.data.dataValue;
+				editor.on(
+					'paste',
+					function(event) {
+						let link = event.data.dataValue;
 
-					if (REGEX_HTTP.test(link)) {
-						event.stop();
+						if (REGEX_HTTP.test(link)) {
+							event.stop();
 
-						editor.execCommand('embedUrl', {
-							url: event.data.dataValue,
-						});
-					}
-				});
+							editor.execCommand('embedUrl', {
+								url: event.data.dataValue,
+							});
+						}
+					},
+					null,
+					null,
+					// Make sure we run before autolink's paste handler,
+					// otherwise the link will be turned into an anchor and our
+					// REGEX_HTTP test will fail.
+					HIGH_PRIORITY
+				);
 			});
 
 			// Add a listener to handle selection change events and properly detect editor
