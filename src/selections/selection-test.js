@@ -73,13 +73,15 @@ let linkSelectionTest = function(payload) {
 	);
 };
 
-let imageSelectionTest = function(payload) {
-	let selectionData = payload.data.selectionData;
+const imageSelectionTest = function(payload) {
+	const selectionData = payload.data.selectionData;
+	const element = selectionData.element;
+	const hasImage = !!element && !!element.findOne('img');
+	const isImage = !!element && element.getName() === 'img';
 
 	return !!(
-		selectionData.element &&
-		selectionData.element.getName() === 'img' &&
-		!selectionData.element.isReadOnly()
+		element &&
+		(hasImage || isImage)
 	);
 };
 
