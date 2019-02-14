@@ -20,12 +20,7 @@ const Selections = [
 	},
 	{
 		name: 'image',
-		buttons: [
-			'imageLeft',
-			'imageCenter',
-			'imageRight',
-			'AccessibilityImageAlt',
-		],
+		buttons: ['imageLeft', 'imageCenter', 'imageRight', 'removeImage'],
 		setPosition: SelectionSetPosition.image,
 		test: SelectionTest.image,
 	},

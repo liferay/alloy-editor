@@ -10,6 +10,8 @@ import Base from '../oop/base';
 import Selections from '../selections/selections';
 import UI from '../components/main.jsx';
 
+import {removeImageCommand} from '../commands';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -94,6 +96,22 @@ extend(
 					this._addReadOnlyLinkClickListener(editor);
 
 					let editable = editor.editable();
+
+					let extraCommands = this.get('extraCommands');
+
+					const extraCommandKeys = Object.keys(extraCommands);
+					for (let i = 0; i < extraCommandKeys.length; i++) {
+						const commandName = extraCommandKeys[i];
+
+						if (editor.commands[commandName]) {
+							continue;
+						}
+
+						editor.addCommand(
+							commandName,
+							extraCommands[commandName]
+						);
+					}
 
 					editable.addClass('ae-editable');
 				}.bind(this)
@@ -486,6 +504,22 @@ extend(
 			eventsDelay: {
 				validator: Lang.isNumber,
 				value: 100,
+			},
+
+			/**
+			 * The list of extra commands to be added to the editor.
+			 *
+			 * @memberof Core
+			 * @instance
+			 * @property extraCommands
+			 * @type {Object}
+			 */
+			extraCommands: {
+				validator: Lang.isObject,
+				value: {
+					removeImage: removeImageCommand,
+				},
+				writeOnce: true,
 			},
 
 			/**

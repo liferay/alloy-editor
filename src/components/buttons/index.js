@@ -39,6 +39,7 @@ import ButtonParagraphCenter from './button-paragraph-center.jsx';
 import ButtonParagraphJustify from './button-paragraph-justify.jsx';
 import ButtonQuote from './button-quote.jsx';
 import ButtonRemoveFormat from './button-remove-format.jsx';
+import ButtonRemoveImage from './button-remove-image.jsx';
 import ButtonSeparator from './button-separator.jsx';
 import ButtonSpacing from './button-spacing.jsx';
 import ButtonStrike from './button-strike.jsx';
@@ -103,6 +104,7 @@ export default {
 	[ButtonParagraphJustify.key]: ButtonParagraphJustify,
 	[ButtonQuote.key]: ButtonQuote,
 	[ButtonRemoveFormat.key]: ButtonRemoveFormat,
+	[ButtonRemoveImage.key]: ButtonRemoveImage,
 	[ButtonSeparator.key]: ButtonSeparator,
 	[ButtonSpacing.key]: ButtonSpacing,
 	[ButtonStrike.key]: ButtonStrike,
