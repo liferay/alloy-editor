@@ -10,12 +10,6 @@ class Index extends Component {
     componentDidMount() {
         this._wow = new WOW();
         this._wow.init();
-
-        window.ALLOYEDITOR_BASEPATH = '/alloy-editor/';
-
-        window.CKEDITOR.basePath += 'alloy-editor/';
-
-        this._alloyEditor = window.AlloyEditor.editable('editable');
     }
 
     componentWillUnmount() {
@@ -54,7 +48,6 @@ class Index extends Component {
                     <meta name="twitter:image:alt" content="AlloyEditor presentation" />
 
                     <link href="alloy-editor/assets/alloy-editor-ocean.css" rel="stylesheet" />
-
                 </Helmet>
 
                 <main className="content">
