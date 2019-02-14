@@ -94,6 +94,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 						}
 					});
 					centeredImage = true;
+					imageContainer.style.textAlign = '';
 				}
 			}
 
@@ -162,10 +163,6 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 					});
 				}
 			});
-
-			let imageContainer = image.$.parentNode;
-
-			imageContainer.style.textAlign = IMAGE_ALIGNMENT.CENTER;
 		}
 	};
 
