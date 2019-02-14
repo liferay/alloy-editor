@@ -96,7 +96,7 @@ filesToLoad.push({
 });
 
 filesToLoad.push({
-	pattern: 'src/lang/en.js',
+	pattern: 'src/__generated__/lang/en.js',
 	included: true,
 	watched: false,
 });
