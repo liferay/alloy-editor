@@ -18,8 +18,9 @@ class Search extends Component {
 				indexName: indexName || 'indexName',
 				inputSelector: '#algolia-doc-search',
 			});
-		} else {
-			// this.setState({disabled: true});
+		}
+		else {
+			this.setState({disabled: true});
 		}
 	}
 
@@ -29,7 +30,6 @@ class Search extends Component {
 		if (isProduction && this.state.disabled) {
 			return false;
 		}
-
 
 		return (
 			<div className="sidebar-search">
@@ -45,6 +45,7 @@ class Search extends Component {
 								required
 								type="text"
 							/>
+
 							<div className="input-group-append">
 								<button className="btn btn-outline-secondary" type="button">
 									<svg className="lexicon-icon">

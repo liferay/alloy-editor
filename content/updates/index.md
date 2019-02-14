@@ -2,7 +2,23 @@
 title: Updates
 description: Check out what's new
 mainPage: true
+icons: https://clayui.com/docs/components/icons.html
 updates:
+ -
+  version: 2.0.0
+  major: true
+
+  features:
+  -
+    icon: heart
+    title: News 1
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non viverra elit, sed feugiat dui. Nulla facilisi. Morbi facilisis ornare nulla, id sollicitudin augue blandit ut.
+    url: https://github.com/liferay/alloy-editor
+  -
+    icon: heart
+    title: News 2
+    description: Integer luctus ac mauris a vehicula. Morbi vitae nunc non nibh luctus lobortis et ut tellus. Sed sed blandit sapien.
+    url: https://github.com/liferay/alloy-editor
  -
   version: 1.5.0
   major: true

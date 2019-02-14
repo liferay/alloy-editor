@@ -37,23 +37,33 @@ export default class Docs extends Component {
     render() {
         const { data, location } = this.props;
 
-        const { mdx: { code, frontmatter: {title, needsAuth}, excerpt, timeToRead } } = data;
+        const { mdx: { code, frontmatter: {title, needsAuth}, excerpt } } = data;
+
+        const pageTitle = "AlloyEditor | "+title;
+
+        const pageDescription = excerpt;
+
+        const pageImage = "/images/home/banner_back.png";
 
         return (
             <Auth needsAuth={needsAuth}>
                 <div className="docs">
                     <Helmet>
-                        <title>{title}</title>
-                        <meta name="description" content={excerpt} />
-                        <meta name="og:description" content={excerpt} />
-                        <meta name="twitter:description" content={excerpt} />
-                        <meta name="og:title" content={title} />
-                        <meta name="og:type" content="article" />
-                        <meta name="twitter.label1" content="Reading time" />
-                        <meta
-                            name="twitter:data1"
-                            content={`${timeToRead} min read`}
-                        />
+                        <title>{pageTitle}</title>
+
+                        <meta name="description" content={pageDescription} />
+
+                        <meta property="og:title" content={pageTitle} />
+
+                        <meta property="og:description" content={pageDescription} />
+
+                        <meta property="og:image" content={pageImage} />
+
+                        <meta name="twitter:card" content="summary_large_image" />
+
+                        <meta property="og:site_name" content="AlloyEditor" />
+
+                        <meta name="twitter:image:alt" content="AlloyEditor presentation" />
                     </Helmet>
 
                     <main className="content">
@@ -82,12 +92,6 @@ export default class Docs extends Component {
                                                 <article className="docs-content">
                                                     <MDXRenderer>{code.body}</MDXRenderer>
                                                 </article>
-
-                                                {/* <a className="btn btn-dark btn-lg" href={"https://github.com/"+site.githubRepo+"/tree/master/"+page.srcFilePath} target="_blank"> */}
-                                                {/* <a className="btn btn-dark btn-sm float-right mt-5" href="#" target="_blank" title="Edit this section on GitHub">
-                                                    <img className="align-middle" src="/images/home/GitHub-Mark-64px.svg" alt="" />
-                                                    <span className="align-middle ml-3">Edit</span>
-                                                </a> */}
                                             </div>
                                         </div>
                                     </div>

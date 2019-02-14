@@ -54,6 +54,8 @@
             right: 100px;
             @extend .w-100;
             @extend .text-center;
+            max-height: 300px;
+            overflow: auto;
             transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
             -webkit-transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
             will-change: color, background-color;

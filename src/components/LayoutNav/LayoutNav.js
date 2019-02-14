@@ -54,10 +54,8 @@ class LayoutNav extends Component {
 
         return (
             <nav ref="navElement" className={styles}>
-                <Link to="/" className="navbar-brand">
-                    <img className="logo mr-3" src="/images/home/logo.png" alt="" />
-                    {/* <span className="title align-middle h1">{process.env.PROJECT_NAME}</span> */}
-                    {/* <span className="brand font-weight-bold align-middle">Alloy Editor</span> */}
+                <Link to="/" className="navbar-brand" title="alloyeditor.com">
+                    <img className="logo mr-3" src="/images/home/logo.png" alt="alloy editor" />
                 </Link>
 
                 {sidebarHamburguerIcon &&
@@ -69,22 +67,12 @@ class LayoutNav extends Component {
                 }
 
                 <ul className="navbar-nav font-weight-bold ml-md-auto">
-                    {/* <li className="nav-item">
-                        <Link className="nav-link ml-lg-5" to="/onboarding/">API</Link>
-                    </li> */}
                     <li className="nav-item">
                         <Link className="nav-link ml-lg-5" to="/docs/">Docs</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link ml-lg-5" to="/updates/">Updates</Link>
                     </li>
-                    {/*
-                    <li className="nav-item">
-                        <a className="mx-3 mr-lg-0" href={process.env.GITHUB_REPO}  target="_blank" rel="noopener noreferrer">
-                            <img src="/images/home/GitHub-Mark-64px.svg" alt="" />
-                        </a>
-                    </li>
-                    */}
                 </ul>
             </nav>
         );

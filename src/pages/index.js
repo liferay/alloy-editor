@@ -24,7 +24,11 @@ class Index extends Component {
     }
 
     render() {
-        const description = "Your all-about-liferay-themes place 💖";
+        const pageTitle = "AlloyEditor | Home";
+
+        const pageDescription = "A modern WYSIWYG editor built on top of CKEDITOR, designed to create modern and gorgeous web content.";
+
+        const pageImage = "/images/home/banner_back.png";
 
         const headerImage = {
             backgroundImage: 'url(/images/home/banner_back.png)'
@@ -33,12 +37,24 @@ class Index extends Component {
         return (
             <div className="home">
                 <Helmet>
-                    <title>{process.env.PROJECT_NAME}</title>
-                    <meta name="description" content={description} />
-                    <meta name="og:description" content={description} />
-                    <meta name="twitter:description" content={description} />
-                    <meta name="og:title" content={process.env.PROJECT_NAME} />
+                    <title>{pageTitle}</title>
+
+                    <meta name="description" content={pageDescription} />
+
+                    <meta property="og:title" content={pageTitle} />
+
+                    <meta property="og:description" content={pageDescription} />
+
+                    <meta property="og:image" content={pageImage} />
+
+                    <meta name="twitter:card" content="summary_large_image" />
+
+                    <meta property="og:site_name" content="AlloyEditor" />
+
+                    <meta name="twitter:image:alt" content="AlloyEditor presentation" />
+
                     <link href="alloy-editor/assets/alloy-editor-ocean.css" rel="stylesheet" />
+
                 </Helmet>
 
                 <main className="content">
@@ -72,10 +88,15 @@ class Index extends Component {
                                 <div className="col-12 col-xl-10 mx-auto">
                                     <div id="editable" className="bg-white p-3 p-sm-5">
                                         <h2 className="h1">This is a Live Demo</h2>
+
                                         <h3 className="my-4">Click/Tap here to edit</h3>
+
                                         <p>Cupcake ipsum dolor sit amet halvah. Icing I love carrot cake cotton candy danish brownie wafer I love. Cake chocolate cake biscuit tiramisu ice cream pudding pastry. Gingerbread muffin candy canes tart tootsie roll.</p>
-                                        <img className="my-4" src="images/home/cupcakes.jpg" alt="" />
+
+                                        <img className="my-4 img-fluid" src="images/home/cupcakes.jpg" alt="" />
+
                                         <p>Muffin cotton candy cotton candy wafer lollipop cheesecake bear claw. Pastry caramels toffee cake dragée toffee chocolate cake cupcake. Pastry lemon drops I love wafer macaroon bonbon marzipan.</p>
+
                                         <p>Muffin soufflé jelly beans macaroon I love I love. Cheesecake brownie sugar plum. Cookie donut carrot cake gummies. Biscuit jelly sweet dessert sesame snaps tiramisu I love ice cream.</p>
                                     </div>
                                 </div>

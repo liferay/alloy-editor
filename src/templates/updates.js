@@ -9,23 +9,34 @@ import Timeline from '../components/Timeline';
 export default class Updates extends Component {
     render() {
         const { data } = this.props;
-        const { mdx: { frontmatter: { title, needsAuth, updates }, excerpt, timeToRead } } = data;
+
+        const { mdx: { frontmatter: { title, needsAuth, updates }, excerpt } } = data;
+
+        const pageTitle = "AlloyEditor | "+title;
+
+        const pageDescription = excerpt;
+
+        const pageImage = "/images/home/banner_back.png";
 
         return (
             <Auth needsAuth={needsAuth}>
                 <div className="updates">
                     <Helmet>
-                        <title>Updates</title>
-                        <meta name="description" content={excerpt} />
-                        <meta name="og:description" content={excerpt} />
-                        <meta name="twitter:description" content={excerpt} />
-                        <meta name="og:title" content="Blog Template" />
-                        <meta name="og:type" content="article" />
-                        <meta name="twitter.label1" content="Reading time" />
-                        <meta
-                            name="twitter:data1"
-                            content={`${timeToRead} min read`}
-                        />
+                        <title>{pageTitle}</title>
+
+                        <meta name="description" content={pageDescription} />
+
+                        <meta property="og:title" content={pageTitle} />
+
+                        <meta property="og:description" content={pageDescription} />
+
+                        <meta property="og:image" content={pageImage} />
+
+                        <meta name="twitter:card" content="summary_large_image" />
+
+                        <meta property="og:site_name" content="AlloyEditor" />
+
+                        <meta name="twitter:image:alt" content="AlloyEditor presentation" />
                     </Helmet>
 
                     <header>
