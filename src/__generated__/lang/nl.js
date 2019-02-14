@@ -82,6 +82,7 @@ AlloyEditor.Strings = {
 	"pasteVideoLink": "Videolink plakken",
 	"platformNotSupported": "Sorry, dit platform wordt niet ondersteund",
 	"primary": "Primair",
+	"removeImage": "Remove Image",
 	"removeLink": "Link verwijderen",
 	"rows": "Rijen",
 	"success": "Geslaagd",

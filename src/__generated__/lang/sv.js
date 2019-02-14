@@ -82,6 +82,7 @@ AlloyEditor.Strings = {
 	"pasteVideoLink": "Klistra in videolänk",
 	"platformNotSupported": "Den här plattformen stöds inte",
 	"primary": "Primär",
+	"removeImage": "Remove Image",
 	"removeLink": "Ta bort länk",
 	"rows": "Rader",
 	"success": "Lyckades",

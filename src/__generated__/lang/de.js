@@ -82,6 +82,7 @@ AlloyEditor.Strings = {
 	"pasteVideoLink": "Videolink einfügen",
 	"platformNotSupported": "Sorry, diese Plattform wird nicht unterstützt",
 	"primary": "Primär",
+	"removeImage": "Remove Image",
 	"removeLink": "Link entfernen",
 	"rows": "Zeilen",
 	"success": "Fertig",
