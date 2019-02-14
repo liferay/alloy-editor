@@ -10,17 +10,21 @@ export default function useButtonActionStyle(buttonStyle) {
 
 	const [isActive, style] = useButtonStyle(buttonStyle);
 
-	return function applyStyle() {
-		editor.getSelection().lock();
+	return {
+		applyStyle() {
+			editor.getSelection().lock();
 
-		if (isActive) {
-			editor.removeStyle(style);
-		} else {
-			editor.applyStyle(style);
-		}
+			if (isActive) {
+				editor.removeStyle(style);
+			} else {
+				editor.applyStyle(style);
+			}
 
-		editor.getSelection().unlock();
+			editor.getSelection().unlock();
 
-		editor.fire('actionPerformed');
+			editor.fire('actionPerformed');
+		},
+		isActive,
+		style,
 	};
 }

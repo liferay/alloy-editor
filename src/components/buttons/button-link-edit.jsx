@@ -304,9 +304,7 @@ class ButtonLinkEdit extends React.Component {
 
 			new CKEDITOR.Link(editor).advanceSelection();
 
-			this.context.editor
-				.get('nativeEditor')
-				.fire('actionPerformed');
+			this.context.editor.get('nativeEditor').fire('actionPerformed');
 		}
 	};
 

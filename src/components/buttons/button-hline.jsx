@@ -1,7 +1,7 @@
 import React from 'react';
 import ButtonIcon from './button-icon.jsx';
 import useButtonStyle from '../hooks/use-button-style';
-import useExecCommand  from '../hooks/use-exec-command';
+import useExecCommand from '../hooks/use-exec-command';
 
 /**
  * The ButtonHline component inserts a horizontal line.
@@ -11,7 +11,7 @@ function ButtonHline({
 	command = 'horizontalrule',
 	style = {element: 'hr'},
 	tabIndex,
-	modifiesSelection
+	modifiesSelection,
 }) {
 	const execCommand = useExecCommand(command, modifiesSelection);
 	const [isActive, _style] = useButtonStyle(style);

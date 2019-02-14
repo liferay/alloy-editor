@@ -9,28 +9,31 @@ import Lang from '../../oop/lang';
 export default function useButtonStyle(buttonStyle) {
 	const editor = useContext(EditorContext).editor.get('nativeEditor');
 
-	const style = useMemo(() => {
-		if (Lang.isString(buttonStyle)) {
-			const parts = buttonStyle.split('.');
-			let currentMember = editor.config;
-			let property = parts.shift();
+	const style = useMemo(
+		() => {
+			if (Lang.isString(buttonStyle)) {
+				const parts = buttonStyle.split('.');
+				let currentMember = editor.config;
+				let property = parts.shift();
 
-			while (
-				property &&
-				Lang.isObject(currentMember) &&
-				Lang.isObject(currentMember[property])
-			) {
-				currentMember = currentMember[property];
-				property = parts.shift();
+				while (
+					property &&
+					Lang.isObject(currentMember) &&
+					Lang.isObject(currentMember[property])
+				) {
+					currentMember = currentMember[property];
+					property = parts.shift();
+				}
+
+				if (Lang.isObject(currentMember)) {
+					buttonStyle = currentMember;
+				}
 			}
 
-			if (Lang.isObject(currentMember)) {
-				buttonStyle = currentMember;
-			}
-		}
-
-		return new CKEDITOR.style(buttonStyle);
-	}, buttonStyle);
+			return new CKEDITOR.style(buttonStyle);
+		},
+		[buttonStyle]
+	);
 
 	const elementPath = editor.elementPath();
 	const isActive = style.checkActive(elementPath, editor);
