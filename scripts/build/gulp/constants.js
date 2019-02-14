@@ -8,7 +8,7 @@ const ckeditorLangKeys = path.join(langDir, 'vendor', 'ckeditor.json');
 const ckeditorLangContent = require(ckeditorLangKeys);
 const distFolder = path.join(rootDir, 'dist');
 const editorDistFolder = path.join(distFolder, 'alloy-editor');
-const srcLangDir = path.join(rootDir, 'src', 'lang');
+const srcLangDir = path.join(rootDir, 'src', '__generated__', 'lang');
 
 module.exports = {
 	rootDir,

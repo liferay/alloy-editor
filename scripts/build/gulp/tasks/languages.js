@@ -43,7 +43,7 @@ function buildLanguages(callback) {
 		'en.json'
 	));
 
-	// Iterate over every existing lang file inside src/lang
+	// Iterate over every existing lang file inside src/__generated__/lang
 	langWalker.on('file', (root, fileStats, next) => {
 		if (!langWhitelist.test(fileStats.name)) {
 			next();
@@ -99,7 +99,13 @@ function buildLanguages(callback) {
 			` */\n` +
 			`\n`;
 		fs.writeFile(
-			path.join(Constants.rootDir, 'src', 'lang', fileStats.name),
+			path.join(
+				Constants.rootDir,
+				'src',
+				'__generated__',
+				'lang',
+				fileStats.name
+			),
 			header +
 				`AlloyEditor.Strings = ` +
 				JSON.stringify(AlloyEditor.Strings, null, 2).replace(
@@ -119,7 +125,9 @@ function buildLanguages(callback) {
 
 function copyLanguages() {
 	return gulp
-		.src(path.join(Constants.rootDir, 'src', 'lang', '/**'))
+		.src(
+			path.join(Constants.rootDir, 'src', '__generated__', 'lang', '/**')
+		)
 		.pipe(
 			gulp.dest(
 				path.join(Constants.editorDistFolder, 'lang', 'alloy-editor')
