@@ -185,7 +185,7 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 							richComboName
 						].currentValue = newValue;
 
-						editor.fire('actionPerformed', this);
+						editor.fire('actionPerformed');
 					}
 				};
 

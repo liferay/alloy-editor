@@ -40,7 +40,7 @@ export default WrappedComponent =>
 
 				editor.getSelection().unlock();
 
-				editor.fire('actionPerformed', this);
+				editor.fire('actionPerformed');
 			}
 		};
 	};

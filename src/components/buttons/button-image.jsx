@@ -113,7 +113,7 @@ class ButtonImage extends React.Component {
 
 				editor.insertElement(el);
 
-				editor.fire('actionPerformed', this);
+				editor.fire('actionPerformed');
 
 				const imageData = {
 					el: el,

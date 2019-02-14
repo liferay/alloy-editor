@@ -92,7 +92,7 @@ class ButtonTableEdit extends React.Component {
 
 		this.props.cancelExclusive();
 
-		editor.fire('actionPerformed', this);
+		editor.fire('actionPerformed');
 	};
 
 	/**

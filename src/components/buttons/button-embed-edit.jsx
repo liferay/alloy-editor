@@ -228,7 +228,7 @@ class ButtonEmbedEdit extends React.Component {
 			// inside another in exclusive mode (such is the case of the link button)
 			this.props.cancelExclusive();
 
-			editor.fire('actionPerformed', this);
+			editor.fire('actionPerformed');
 		}
 	};
 
@@ -282,7 +282,7 @@ class ButtonEmbedEdit extends React.Component {
 
 		embedWrapper.remove();
 
-		editor.fire('actionPerformed', this);
+		editor.fire('actionPerformed');
 	};
 }
 

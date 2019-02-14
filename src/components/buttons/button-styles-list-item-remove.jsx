@@ -72,7 +72,7 @@ class ButtonStylesListItemRemove extends React.Component {
 			editor.removeStyle(blockStyle);
 		});
 
-		editor.fire('actionPerformed', this);
+		editor.fire('actionPerformed');
 	};
 }
 

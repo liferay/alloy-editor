@@ -159,7 +159,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
 
 		this.state.element.setAttribute('alt', imageAlt);
 
-		editor.fire('actionPerformed', this);
+		editor.fire('actionPerformed');
 
 		// We need to cancelExclusive with the bound parameters in case the button is used
 		// inside another in exclusive mode (such is the case of the alt button)

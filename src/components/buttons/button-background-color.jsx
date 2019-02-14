@@ -152,7 +152,7 @@ class ButtonBackgroundColor extends React.Component {
 
 		editor.getSelection().unlock();
 
-		editor.fire('actionPerformed', this);
+		editor.fire('actionPerformed');
 	}
 
 	/**

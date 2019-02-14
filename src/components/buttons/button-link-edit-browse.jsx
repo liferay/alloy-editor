@@ -117,7 +117,7 @@ class ButtonLinkEditBrowse extends React.Component {
 				linkUtils.create(linkHref, linkAttrs, modifySelection);
 			}
 
-			editor.fire('actionPerformed', this);
+			editor.fire('actionPerformed');
 		}
 	};
 }

@@ -306,7 +306,7 @@ class ButtonLinkEdit extends React.Component {
 
 			this.context.editor
 				.get('nativeEditor')
-				.fire('actionPerformed', this);
+				.fire('actionPerformed');
 		}
 	};
 
@@ -405,7 +405,7 @@ class ButtonLinkEdit extends React.Component {
 		// inside another in exclusive mode (such is the case of the link button)
 		this.props.cancelExclusive();
 
-		editor.fire('actionPerformed', this);
+		editor.fire('actionPerformed');
 	};
 
 	/**
@@ -458,7 +458,7 @@ class ButtonLinkEdit extends React.Component {
 				);
 			}
 
-			editor.fire('actionPerformed', this);
+			editor.fire('actionPerformed');
 		}
 
 		// We need to cancelExclusive with the bound parameters in case the button is used

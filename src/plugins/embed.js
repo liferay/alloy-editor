@@ -115,7 +115,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 					});
 
 					this.editor.insertHtml(aTagHtml);
-					this.editor.fire('actionPerformed', this);
+					this.editor.fire('actionPerformed');
 				},
 
 				/**

@@ -101,7 +101,7 @@ if (!CKEDITOR.plugins.get('ae_buttonbridge')) {
 						editor.execCommand(buttonCommand);
 					}
 
-					editor.fire('actionPerformed', this);
+					editor.fire('actionPerformed');
 				};
 			};
 

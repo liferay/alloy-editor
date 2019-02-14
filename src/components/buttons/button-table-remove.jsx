@@ -56,7 +56,7 @@ class ButtonTableRemove extends React.Component {
 
 		tableUtils.remove();
 
-		editor.fire('actionPerformed', this);
+		editor.fire('actionPerformed');
 	};
 }
 

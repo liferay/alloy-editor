@@ -46,7 +46,7 @@ class ButtonTwitter extends React.Component {
 			});
 		}
 
-		editor.fire('actionPerformed', this);
+		editor.fire('actionPerformed');
 	};
 
 	/**

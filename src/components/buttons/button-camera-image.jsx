@@ -148,7 +148,7 @@ class ButtonCameraImage extends React.Component {
 
 			this.props.cancelExclusive();
 
-			editor.fire('actionPerformed', this);
+			editor.fire('actionPerformed');
 
 			editor.fire('imageCameraAdd', el);
 		}

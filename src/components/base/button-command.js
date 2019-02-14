@@ -26,6 +26,6 @@ export default WrappedComponent =>
 				editor.selectionChange(true);
 			}
 
-			editor.fire('actionPerformed', this);
+			editor.fire('actionPerformed');
 		};
 	};
