@@ -82,6 +82,7 @@ AlloyEditor.Strings = {
 	"pasteVideoLink": "粘贴视频链接",
 	"platformNotSupported": "抱歉，此平台不受支持",
 	"primary": "主要",
+	"removeImage": "Remove Image",
 	"removeLink": "移除链接",
 	"rows": "行",
 	"success": "成功",

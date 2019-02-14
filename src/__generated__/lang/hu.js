@@ -82,6 +82,7 @@ AlloyEditor.Strings = {
 	"pasteVideoLink": "Videó hivatkozás beillesztése",
 	"platformNotSupported": "Sajnáljuk, ez a platform nem támogatott",
 	"primary": "Elsődleges",
+	"removeImage": "Remove Image",
 	"removeLink": "Hivatkozás eltávolítása",
 	"rows": "Sorok",
 	"success": "Sikerült",

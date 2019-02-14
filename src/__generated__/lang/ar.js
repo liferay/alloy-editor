@@ -82,6 +82,7 @@ AlloyEditor.Strings = {
 	"pasteVideoLink": "الصق رابط الفيديو",
 	"platformNotSupported": "معذرة، هذا النظام غير مدعوم",
 	"primary": "رئيسي",
+	"removeImage": "Remove Image",
 	"removeLink": "إزالة الرابط",
 	"rows": "الصفوف",
 	"success": "تم بنجاح",

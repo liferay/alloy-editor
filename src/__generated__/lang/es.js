@@ -82,6 +82,7 @@ AlloyEditor.Strings = {
 	"pasteVideoLink": "Pegar enlace de vídeo",
 	"platformNotSupported": "Esta plataforma no es compatible",
 	"primary": "Principal",
+	"removeImage": "Remove Image",
 	"removeLink": "Eliminar enlace",
 	"rows": "Filas",
 	"success": "Operación correcta",
