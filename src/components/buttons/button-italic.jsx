@@ -12,7 +12,9 @@ import useButtonKeystroke from '../hooks/use-button-keystroke';
 function ButtonItalic({
 	command = 'italic',
 	keystroke = {
-		fn: 'execCommand',
+		// TODO: given that this property can't be given a meaningful default
+		// value, consider not providing it.
+		fn: () => {},
 		keys: CKEDITOR.CTRL + 73 /* I*/,
 		name: 'italic',
 	},
