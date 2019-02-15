@@ -26,8 +26,7 @@ export default WrappedComponent =>
 			const nativeEditor = this.context.editor.get('nativeEditor');
 			const keystroke = this.props.keystroke;
 
-			const commandName =
-				keystroke.name || ((Math.random() * 1e9) >>> 0).toString();
+			const commandName = `keystroke:${keystroke.name}`;
 
 			let command = nativeEditor.getCommand(commandName);
 

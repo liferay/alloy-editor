@@ -29,6 +29,7 @@ class ButtonItalic extends React.Component {
 		keystroke: {
 			fn: 'execCommand',
 			keys: CKEDITOR.CTRL + 73 /* I*/,
+			name: 'italic',
 		},
 		style: 'coreStyles_italic',
 	};

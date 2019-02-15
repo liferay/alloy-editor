@@ -27,6 +27,7 @@ class ButtonEmbed extends React.Component {
 		keystroke: {
 			fn: '_requestExclusive',
 			keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /* L*/,
+			name: 'embed',
 		},
 	};
 
