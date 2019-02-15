@@ -79,10 +79,7 @@ const imageSelectionTest = function(payload) {
 	const hasImage = !!element && !!element.findOne('img');
 	const isImage = !!element && element.getName() === 'img';
 
-	return !!(
-		element &&
-		(hasImage || isImage)
-	);
+	return !!(element && (hasImage || isImage));
 };
 
 let textSelectionTest = function(payload) {
