@@ -7,7 +7,6 @@ import CodeClipboard from '../components/CodeClipboard';
 import BlogMain from '../components/Blog/BlogMain';
 import BlogArticle from '../components/Blog/BlogArticle';
 import LayoutNav from '../components/LayoutNav';
-import Auth from '../components/Auth';
 
 export default class Blog extends Component {
     componentDidMount() {
@@ -22,10 +21,9 @@ export default class Blog extends Component {
 
     render() {
         const { data } = this.props;
-        const { mdx: { code, frontmatter: { title, mainPage, date, author, needsAuth }, excerpt, timeToRead } } = data;
+        const { mdx: { code, frontmatter: { title, mainPage, date, author }, excerpt, timeToRead } } = data;
 
         return (
-            <Auth needsAuth={needsAuth}>
                 <div className="blog">
                     <Helmet>
                         <title>{title}</title>
@@ -80,7 +78,6 @@ export default class Blog extends Component {
 
                     <Footer />
                 </div>
-            </Auth>
         );
     }
 }
@@ -96,7 +93,6 @@ export const pageQuery = graphql`
                 mainPage
                 date(formatString: "MMMM DD, YYYY")
                 author
-                needsAuth
             }
             code {
                 body

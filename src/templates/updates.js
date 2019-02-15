@@ -3,14 +3,13 @@ import Helmet from 'react-helmet';
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
 import LayoutNav from '../components/LayoutNav';
-import Auth from '../components/Auth';
 import Timeline from '../components/Timeline';
 
 export default class Updates extends Component {
     render() {
         const { data } = this.props;
 
-        const { mdx: { frontmatter: { title, needsAuth, updates }, excerpt } } = data;
+        const { mdx: { frontmatter: { title, updates }, excerpt } } = data;
 
         const pageTitle = "AlloyEditor | "+title;
 
@@ -19,7 +18,6 @@ export default class Updates extends Component {
         const pageImage = "/images/home/banner_back.png";
 
         return (
-            <Auth needsAuth={needsAuth}>
                 <div className="updates">
                     <Helmet>
                         <title>{pageTitle}</title>
@@ -59,7 +57,6 @@ export default class Updates extends Component {
 
                     <Footer />
                 </div>
-            </Auth>
         );
     }
 }
@@ -72,7 +69,6 @@ export const pageQuery = graphql`
             timeToRead
             frontmatter {
                 title
-                needsAuth
                 updates {
                     version
                     major

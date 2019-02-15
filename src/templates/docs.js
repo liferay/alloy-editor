@@ -7,7 +7,6 @@ import Sidebar from '../components/Sidebar';
 import LayoutNav from '../components/LayoutNav';
 import CodeTabs from '../components/CodeTabs';
 import CodeClipboard from '../components/CodeClipboard';
-import Auth from '../components/Auth';
 import Footer from '../components/Footer';
 
 export default class Docs extends Component {
@@ -37,7 +36,7 @@ export default class Docs extends Component {
     render() {
         const { data, location } = this.props;
 
-        const { mdx: { code, frontmatter: {title, needsAuth}, excerpt } } = data;
+        const { mdx: { code, frontmatter: {title}, excerpt } } = data;
 
         const pageTitle = "AlloyEditor | "+title;
 
@@ -46,7 +45,6 @@ export default class Docs extends Component {
         const pageImage = "/images/home/banner_back.png";
 
         return (
-            <Auth needsAuth={needsAuth}>
                 <div className="docs">
                     <Helmet>
                         <title>{pageTitle}</title>
@@ -102,7 +100,6 @@ export default class Docs extends Component {
                         </section>
                     </main>
                 </div>
-            </Auth>
         );
     }
 }
@@ -114,7 +111,6 @@ export const pageQuery = graphql`
             timeToRead
             frontmatter {
                 title
-                needsAuth
             }
             code {
                 body

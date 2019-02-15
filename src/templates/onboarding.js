@@ -5,7 +5,6 @@ import Footer from '../components/Footer';
 import CodeTabs from '../components/CodeTabs';
 import CodeClipboard from '../components/CodeClipboard';
 import LayoutNav from '../components/LayoutNav';
-import Auth from '../components/Auth';
 
 export default class Onboarding extends Component {
     componentDidMount() {
@@ -19,10 +18,9 @@ export default class Onboarding extends Component {
     }
 
     render() {
-        let { mdx: { excerpt, timeToRead, frontmatter: { title, needsAuth } } } = this.props.data;
+        let { mdx: { excerpt, timeToRead, frontmatter: { title } } } = this.props.data;
 
         return(
-            <Auth needsAuth={needsAuth}>
                 <div className="onboarding">
                     <Helmet>
                         <title>{title}</title>
@@ -57,7 +55,6 @@ export default class Onboarding extends Component {
 
                     <Footer />
                 </div>
-            </Auth>
         );
     }
 }
@@ -71,7 +68,6 @@ export const pageQuery = graphql`
                 title
                 mainPage
                 stepNumber
-                needsAuth
                 description
                 title
             }
