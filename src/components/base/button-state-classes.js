@@ -29,11 +29,6 @@ export default WrappedComponent =>
 				stateClasses += 'ae-button-pressed';
 			}
 
-			// Check for disabled state
-			if (Lang.isFunction(this.isDisabled) && this.isDisabled()) {
-				stateClasses += ' ae-button-disabled';
-			}
-
 			return stateClasses;
 		}
 	};
