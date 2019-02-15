@@ -1,65 +1,40 @@
-import ButtonActionStyle from '../base/button-action-style';
-import ButtonStateClasses from '../base/button-state-classes';
-import ButtonStyle from '../base/button-style';
-import ButtonIcon from './button-icon.jsx';
 import React from 'react';
+import ButtonIcon from './button-icon.jsx';
+import useButtonActionStyle from '../hooks/use-button-action-style';
+import useButtonStateClasses from '../hooks/use-button-state-classes';
 
 /**
- * The ButtonCode class provides wraps a selection in `pre` element.
- *
- * @class ButtonCode
- * @uses ButtonActionStyle
- * @uses ButtonStateClasses
- * @uses ButtonStyle
+ * The ButtonCode component provides a button that wraps a selection in
+ * `pre` element.
  */
-class ButtonCode extends React.Component {
-	/**
-	 * Lifecycle. Returns the default values of the properties used in the widget.
-	 *
-	 * @instance
-	 * @memberof ButtonCode
-	 * @return {Object} The default properties.
-	 */
-	static defaultProps = {
-		style: {
-			element: 'pre',
-		},
-	};
+function ButtonCode({
+	style = {
+		element: 'pre',
+	},
+	tabIndex,
+}) {
+	const {applyStyle} = useButtonActionStyle(style);
+	const buttonClasses = useButtonStateClasses(style);
+	const cssClass = `ae-button ${buttonClasses}`;
 
-	/**
-	 * The name which will be used as an alias of the button in the configuration.
-	 *
-	 * @default code
-	 * @memberof ButtonCode
-	 * @property {String} key
-	 * @static
-	 */
-	static key = 'code';
-
-	/**
-	 * Lifecycle. Renders the UI of the button.
-	 *
-	 * @instance
-	 * @memberof ButtonCode
-	 * @method render
-	 * @return {Object} The content which should be rendered.
-	 */
-	render() {
-		const cssClass = `ae-button ${this.getStateClasses()}`;
-
-		return (
-			<button
-				aria-label={AlloyEditor.Strings.code}
-				aria-pressed={cssClass.indexOf('pressed') !== -1}
-				className={cssClass}
-				data-type="button-code"
-				onClick={this.applyStyle}
-				tabIndex={this.props.tabIndex}
-				title={AlloyEditor.Strings.code}>
-				<ButtonIcon symbol="code" />
-			</button>
-		);
-	}
+	return (
+		<button
+			aria-label={AlloyEditor.Strings.code}
+			aria-pressed={cssClass.indexOf('pressed') !== -1}
+			className={cssClass}
+			data-type="button-code"
+			onClick={applyStyle}
+			tabIndex={tabIndex}
+			title={AlloyEditor.Strings.code}>
+			<ButtonIcon symbol="code" />
+		</button>
+	);
 }
 
-export default ButtonActionStyle(ButtonStateClasses(ButtonStyle(ButtonCode)));
+/**
+ * The name which will be used as an alias of the button in the configuration.
+ */
+ButtonCode.key = 'code';
+
+export default ButtonCode;
+// export default ButtonActionStyle(ButtonStateClasses(ButtonStyle(ButtonCode)));
