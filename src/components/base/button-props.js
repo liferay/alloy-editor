@@ -1,8 +1,8 @@
 import EditorContext from '../../adapter/editor-context';
 
 /**
- * ButtonCfgProps is a mixin that provides a style prop and some methods to apply the resulting
- * style and checking if it is present in a given path or selection.
+ * ButtonCfgProps is a class that provides a mergeButtonCfgProps method for
+ * merging React props and the native CKEDITOR's buttonCfg.
  *
  * @class ButtonCfgProps
  */

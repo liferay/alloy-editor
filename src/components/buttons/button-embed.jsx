@@ -14,7 +14,7 @@ import useButtonKeystroke from '../hooks/use-button-keystroke';
 function ButtonEmbed({
 	keystroke = {
 		fn: () => {},
-		keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /* L*/,
+		keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /* L */,
 		name: 'embed',
 	},
 
