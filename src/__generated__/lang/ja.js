@@ -67,7 +67,7 @@ AlloyEditor.Strings = {
 	"columns": "列",
 	"confirm": "確認",
 	"danger": "危険",
-	"deleteEmbed": "埋め込みリンクを削除",
+	"deleteEmbed": "埋め込み動画を削除",
 	"disabled": "無効",
 	"editLink": "リンクをここに入力するか貼り付けてください",
 	"enterValidUrl": "有効なURLを入力してください",
