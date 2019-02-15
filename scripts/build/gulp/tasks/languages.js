@@ -40,7 +40,7 @@ function buildLanguages(callback) {
 
 	const defaultTranslations = require(path.join(
 		Constants.langDir,
-		'en.json'
+		'language.json'
 	));
 
 	// Iterate over every existing lang file inside src/__generated__/lang
