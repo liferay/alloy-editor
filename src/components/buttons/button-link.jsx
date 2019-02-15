@@ -33,6 +33,7 @@ class ButtonLink extends React.Component {
 		keystroke: {
 			fn: '_requestExclusive',
 			keys: CKEDITOR.CTRL + 76 /* L*/,
+			name: 'link',
 		},
 	};
 
