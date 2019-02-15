@@ -3,7 +3,7 @@ import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang';
 
 /**
- * A hook that provides a style prop and some methods to apply the resulting
+ * A hook that provides a style value and some methods to apply the resulting
  * style and checking if it is present in a given path or selection.
  */
 export default function useButtonStyle(buttonStyle) {
