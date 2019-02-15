@@ -9,32 +9,29 @@ import Lang from '../../oop/lang';
 export default function useButtonKeystroke(keystroke) {
 	const editor = useContext(EditorContext).editor.get('nativeEditor');
 	const defaultKeystrokeCommand = useRef();
-	useEffect(
-		function mount() {
-			const commandName = `keystroke:${keystroke.name}`;
+	useEffect(function mount() {
+		const commandName = `keystroke:${keystroke.name}`;
 
-			let command = editor.getCommand(commandName);
+		let command = editor.getCommand(commandName);
 
-			if (!command) {
-				command = new CKEDITOR.command(editor, {
-					exec: keystroke.fn,
-				});
+		if (!command) {
+			command = new CKEDITOR.command(editor, {
+				exec: keystroke.fn,
+			});
 
-				editor.addCommand(commandName, command);
-			}
+			editor.addCommand(commandName, command);
+		}
 
-			defaultKeystrokeCommand.current =
-				editor.keystrokeHandler.keystrokes[keystroke.keys];
+		defaultKeystrokeCommand.current =
+			editor.keystrokeHandler.keystrokes[keystroke.keys];
 
-			editor.setKeystroke(keystroke.keys, commandName);
+		editor.setKeystroke(keystroke.keys, commandName);
 
-			return function unmount() {
-				editor.setKeystroke(
-					keystroke.keys,
-					defaultKeystrokeCommand.current
-				);
-			};
-		},
-		[]
-	);
+		return function unmount() {
+			editor.setKeystroke(
+				keystroke.keys,
+				defaultKeystrokeCommand.current
+			);
+		};
+	}, []);
 }
