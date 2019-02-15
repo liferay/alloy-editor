@@ -4,7 +4,6 @@ const path = require('path');
 module.exports = {
 	plugins: [
 		'gatsby-plugin-meta-redirect',
-		'gatsby-transformer-try-examples',
 		{
 			resolve: 'gatsby-plugin-sass',
 			options: {
