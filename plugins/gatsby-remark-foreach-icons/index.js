@@ -5,18 +5,20 @@ const globby = require('globby');
 const langs = require('languages');
 
 const alternateCodes = {
-	'in': 'id',
-	'iw': 'he',
-	'nb': 'no',
+	in: 'id',
+	iw: 'he',
+	nb: 'no',
 };
 
 function replaceValue(array) {
-	const htmlValue = array.map(item => `<li>
+	const htmlValue = array.map(
+		item => `<li>
         <svg class="lexicon-icon lexicon-icon-${item.icon}">
             <use xlink:href="/images/icons/icons.svg#${item.icon}" />
         </svg>
         <span>${item.name}</span>
-    </li>`);
+    </li>`
+	);
 
 	return htmlValue.join(' ');
 }
@@ -58,7 +60,9 @@ module.exports = ({markdownAST}) => {
 				const langCode = parts[1];
 				const countryCode = parts[2];
 
-				let lang = langs.getLanguageInfo(alternateCodes[langCode] || langCode).name;
+				let lang = langs.getLanguageInfo(
+					alternateCodes[langCode] || langCode
+				).name;
 
 				if (countryCode) {
 					const country = countries[countryCode.toUpperCase()];
@@ -76,19 +80,27 @@ module.exports = ({markdownAST}) => {
 				};
 			});
 
-			node.value = node.value.replace(foreachFlags, replaceValue(dataFlags));
+			node.value = node.value.replace(
+				foreachFlags,
+				replaceValue(dataFlags)
+			);
 		}
 
 		if (node.value.includes(foreachIcons)) {
 			let dataIcons = getFiles(path, ['*']);
 
-			dataIcons = dataIcons.map(item => {
-				if (!item.name.includes('flags') && item.name !== 'icons') {
-					return item;
-				}
-			}).filter(value => typeof value !== 'undefined');
+			dataIcons = dataIcons
+				.map(item => {
+					if (!item.name.includes('flags') && item.name !== 'icons') {
+						return item;
+					}
+				})
+				.filter(value => typeof value !== 'undefined');
 
-			node.value = node.value.replace(foreachIcons, replaceValue(dataIcons));
+			node.value = node.value.replace(
+				foreachIcons,
+				replaceValue(dataIcons)
+			);
 		}
 	});
 };

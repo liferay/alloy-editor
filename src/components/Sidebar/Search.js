@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 const apiKey = process.env.ALGOLIA_API_KEY;
 
@@ -8,7 +8,7 @@ const isProduction = process.env.NODE_ENV === 'production' ? true : false;
 
 class Search extends Component {
 	state = {
-		disabled: false
+		disabled: false,
 	};
 
 	componentDidMount() {
@@ -18,14 +18,13 @@ class Search extends Component {
 				indexName: indexName || 'indexName',
 				inputSelector: '#algolia-doc-search',
 			});
-		}
-		else {
+		} else {
 			this.setState({disabled: true});
 		}
 	}
 
 	render() {
-		const { placeholder } = this.props;
+		const {placeholder} = this.props;
 
 		if (isProduction && this.state.disabled) {
 			return false;
@@ -47,7 +46,9 @@ class Search extends Component {
 							/>
 
 							<div className="input-group-append">
-								<button className="btn btn-outline-secondary" type="button">
+								<button
+									className="btn btn-outline-secondary"
+									type="button">
 									<svg className="lexicon-icon">
 										<use href="/images/icons/icons.svg#search" />
 									</svg>
@@ -57,7 +58,7 @@ class Search extends Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 

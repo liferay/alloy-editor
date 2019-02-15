@@ -14,7 +14,7 @@ function type(ast) {
 
 function defaultValue(ast) {
 	return {
-		[ast.title]: ast.description
+		[ast.title]: ast.description,
 	};
 }
 
@@ -23,7 +23,7 @@ function NullableType(ast) {
 
 	return {
 		required: false,
-		type: VISITOR[expression.type](expression)
+		type: VISITOR[expression.type](expression),
 	};
 }
 
@@ -32,7 +32,7 @@ function NonNullableType(ast) {
 
 	return {
 		required: true,
-		type: VISITOR[expression.type](expression)
+		type: VISITOR[expression.type](expression),
 	};
 }
 
@@ -41,9 +41,11 @@ function NameExpression(type) {
 }
 
 function UnionType(type) {
-	return type.elements.map(element => {
-		return VISITOR[element.type](element);
-	}).join('/');
+	return type.elements
+		.map(element => {
+			return VISITOR[element.type](element);
+		})
+		.join('/');
 }
 
 function UndefinedLiteral(type) {

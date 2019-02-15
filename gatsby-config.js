@@ -9,14 +9,9 @@ module.exports = {
 			resolve: 'gatsby-plugin-sass',
 			options: {
 				precision: 8,
-				includePaths: clay
-					.includePaths
-					.concat(
-						path.join(
-							clay.includePaths[0],
-							'node_modules'
-						)
-					),
+				includePaths: clay.includePaths.concat(
+					path.join(clay.includePaths[0], 'node_modules')
+				),
 			},
 		},
 		{
@@ -32,10 +27,16 @@ module.exports = {
 				extensions: ['.mdx', '.md'],
 				gatsbyRemarkPlugins: [
 					{
-						resolve: path.resolve(__dirname, './plugins/gatsby-remark-code-label-extractor'),
+						resolve: path.resolve(
+							__dirname,
+							'./plugins/gatsby-remark-code-label-extractor'
+						),
 					},
 					{
-						resolve: path.resolve(__dirname, './plugins/gatsby-remark-foreach-icons'),
+						resolve: path.resolve(
+							__dirname,
+							'./plugins/gatsby-remark-foreach-icons'
+						),
 					},
 					{
 						resolve: 'gatsby-remark-prismjs',
@@ -44,10 +45,16 @@ module.exports = {
 						},
 					},
 					{
-						resolve: path.resolve(__dirname, './plugins/gatsby-remark-use-clipboard'),
+						resolve: path.resolve(
+							__dirname,
+							'./plugins/gatsby-remark-use-clipboard'
+						),
 					},
 					{
-						resolve: path.resolve(__dirname, './plugins/gatsby-remark-api-table'),
+						resolve: path.resolve(
+							__dirname,
+							'./plugins/gatsby-remark-api-table'
+						),
 					},
 				],
 			},
@@ -70,16 +77,16 @@ module.exports = {
 				display: 'minimal-ui',
 				icons: [
 					{
-						"src": "/favicons/android-chrome-192x192.png",
-						"sizes": "192x192",
-						"type": "image/png"
+						src: '/favicons/android-chrome-192x192.png',
+						sizes: '192x192',
+						type: 'image/png',
 					},
 					{
-						"src": "/favicons/android-chrome-512x512.png",
-						"sizes": "512x512",
-						"type": "image/png"
-					}
-				]
+						src: '/favicons/android-chrome-512x512.png',
+						sizes: '512x512',
+						type: 'image/png',
+					},
+				],
 			},
 		},
 		{
@@ -88,6 +95,6 @@ module.exports = {
 				globPatterns: ['**/*.{js,jpg,png,gif,html,css,svg}'],
 			},
 		},
-		'gatsby-plugin-zopfli'
+		'gatsby-plugin-zopfli',
 	],
 };
