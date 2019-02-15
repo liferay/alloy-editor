@@ -1,74 +1,54 @@
-import ButtonCommand from '../base/button-command';
-import ButtonIcon from './button-icon.jsx';
-import ButtonKeystroke from '../base/button-keystroke';
-import ButtonStateClasses from '../base/button-state-classes';
-import ButtonStyle from '../base/button-style';
 import React from 'react';
+import ButtonIcon from './button-icon.jsx';
+import useExecCommand from '../hooks/use-exec-command';
+import useButtonStateClasses from '../hooks/use-button-state-classes';
+import useButtonStyle from '../hooks/use-button-style';
+import useButtonKeystroke from '../hooks/use-button-keystroke';
 
 /**
- * The ButtonItalic class provides functionality for styling an selection with italic (em) style.
- *
- * @class ButtonItalic
- * @uses ButtonCommand
- * @uses ButtonKeystroke
- * @uses ButtonStateClasses
- * @uses ButtonStyle
+ * The ButtonItalic component provides functionality for styling a
+ * selection with italic (em) style.
  */
-class ButtonItalic extends React.Component {
-	/**
-	 * Lifecycle. Returns the default values of the properties used in the widget.
-	 *
-	 * @instance
-	 * @memberof ButtonItalic
-	 * @method getDefaultProps
-	 * @return {Object} The default properties.
-	 */
-	static defaultProps = {
-		command: 'italic',
-		keystroke: {
-			fn: 'execCommand',
-			keys: CKEDITOR.CTRL + 73 /* I*/,
-			name: 'italic',
-		},
-		style: 'coreStyles_italic',
-	};
+function ButtonItalic({
+	command = 'italic',
+	keystroke = {
+		fn: 'execCommand',
+		keys: CKEDITOR.CTRL + 73 /* I*/,
+		name: 'italic',
+	},
+	style = 'coreStyles_italic',
 
-	/**
-	 * The name which will be used as an alias of the button in the configuration.
-	 *
-	 * @default italic
-	 * @memberof ButtonItalic
-	 * @property {String} key
-	 * @static
-	 */
-	static key = 'italic';
+	// TODO: kill this feature? nobody ever passes this prop
+	modifiesSelection,
 
-	/**
-	 * Lifecycle. Renders the UI of the button.
-	 *
-	 * @instance
-	 * @memberof ButtonItalic
-	 * @method render
-	 * @return {Object} The content which should be rendered.
-	 */
-	render() {
-		const cssClass = `ae-button ${this.getStateClasses()}`;
+	tabIndex,
+}) {
+	const execCommand = useExecCommand(command, modifiesSelection);
+	const stateClasses = useButtonStateClasses(style);
+	const [isActive, _style] = useButtonStyle(style);
+	const classNames = `ae-button ${stateClasses}`;
 
-		return (
-			<button
-				aria-label={AlloyEditor.Strings.italic}
-				aria-pressed={cssClass.indexOf('pressed') !== -1}
-				className={cssClass}
-				data-type="button-italic"
-				onClick={this.execCommand}
-				tabIndex={this.props.tabIndex}
-				title={AlloyEditor.Strings.italic}>
-				<ButtonIcon symbol="italic" />
-			</button>
-		);
-	}
+	useButtonKeystroke({
+		...keystroke,
+		fn: execCommand,
+	});
+
+	return (
+		<button
+			aria-label={AlloyEditor.Strings.italic}
+			aria-pressed={isActive}
+			className={classNames}
+			data-type="button-italic"
+			onClick={execCommand}
+			tabIndex={tabIndex}
+			title={AlloyEditor.Strings.italic}>
+			<ButtonIcon symbol="italic" />
+		</button>
+	);
 }
+/**
+ * The name which will be used as an alias of the button in the configuration.
+ */
+ButtonItalic.key = 'italic';
 
-export default ButtonCommand(
-	ButtonKeystroke(ButtonStateClasses(ButtonStyle(ButtonItalic)))
-);
+export default ButtonItalic;
