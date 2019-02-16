@@ -9,35 +9,30 @@ import useMergedProps from '../hooks/use-merged-props';
  * The ButtonLinkBrowse component provides functionality for editing links in
  * the document.
  */
-function ButtonLinkBrowse({
-	keystroke = {
-		fn: () => {},
-		keys: CKEDITOR.CTRL + 76 /* L*/,
-		name: 'linkBrowse',
-	},
-	label,
-	renderExclusive,
-	requestExclusive,
-	tabIndex,
+function ButtonLinkBrowse(props) {
+	const {
+		keystroke = {
+			fn: () => {},
+			keys: CKEDITOR.CTRL + 76 /* L*/,
+			name: 'linkBrowse',
+		},
+		label,
+		renderExclusive,
+		requestExclusive,
+		tabIndex,
 
-	...restProps
-}) {
+		...restProps
+	} = props;
+
 	const execCommand = () => requestExclusive(ButtonLinkBrowse.key);
 	useButtonKeystroke({
 		...keystroke,
 		fn: execCommand,
 	});
 
-	const props = {
-		label,
-		renderExclusive,
-		requestExclusive,
-		tabIndex,
-		...restProps,
-	};
-	const mergedProps = useMergedProps(props);
+	const getMerged = useMergedProps(props);
 	if (renderExclusive) {
-		return <ButtonLinkEditBrowse {...mergedProps} />;
+		return <ButtonLinkEditBrowse {...getMerged()} />;
 	} else {
 		return <ButtonLink {...props} />;
 	}

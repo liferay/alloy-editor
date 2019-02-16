@@ -7,6 +7,8 @@ import EditorContext from '../../adapter/editor-context';
  */
 export default function useMergedProps(props) {
 	const editor = useContext(EditorContext).editor.get('nativeEditor');
-	const buttonCfg = editor.config.buttonCfg || {};
-	return CKEDITOR.tools.merge(props, buttonCfg['linkEdit']);
+	return function mergeConfig() {
+		const buttonCfg = editor.config.buttonCfg || {};
+		return CKEDITOR.tools.merge(props, buttonCfg['linkEdit']);
+	};
 }
