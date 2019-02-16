@@ -11,19 +11,18 @@ import useButtonKeystroke from '../hooks/use-button-keystroke';
  * - Normal: Just a button that allows to switch to the editing mode
  * - Exclusive: The ButtonEmbedEdit UI with all the link editing controls.
  */
-function ButtonEmbed({
-	keystroke = {
-		fn: () => {},
-		keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /* L */,
-		name: 'embed',
-	},
+function ButtonEmbed(props) {
+	const {
+		keystroke = {
+			fn: () => {},
+			keys: CKEDITOR.CTRL + CKEDITOR.SHIFT + 76 /* L */,
+			name: 'embed',
+		},
+		renderExclusive,
+		requestExclusive,
+		tabIndex,
+	} = props;
 
-	renderExclusive,
-	requestExclusive,
-	tabIndex,
-
-	...restProps
-}) {
 	const execCommand = () => requestExclusive(ButtonEmbed.key);
 	useButtonKeystroke({
 		...keystroke,
@@ -31,7 +30,7 @@ function ButtonEmbed({
 	});
 
 	if (renderExclusive) {
-		return <ButtonEmbedEdit {...restProps} />;
+		return <ButtonEmbedEdit {...props} />;
 	} else {
 		return (
 			<button
