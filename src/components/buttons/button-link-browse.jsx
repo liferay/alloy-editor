@@ -24,10 +24,9 @@ function ButtonLinkBrowse(props) {
 		...restProps
 	} = props;
 
-	const execCommand = () => requestExclusive(ButtonLinkBrowse.key);
 	useButtonKeystroke({
 		...keystroke,
-		fn: execCommand,
+		fn: () => requestExclusive(ButtonLinkBrowse.key),
 	});
 
 	const getMerged = useMergedProps(props);
