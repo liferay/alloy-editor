@@ -4,12 +4,13 @@ import {Link} from 'gatsby';
 import LayoutNav from '../components/LayoutNav';
 import {WOW} from 'wowjs';
 import Footer from '../components/Footer';
-import 'alloyeditor';
 
 class Index extends Component {
 	componentDidMount() {
 		this._wow = new WOW();
 		this._wow.init();
+
+		AlloyEditor.editable('editable');
 	}
 
 	componentWillUnmount() {
