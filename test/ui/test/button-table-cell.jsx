@@ -16,10 +16,9 @@ describe('ButtonTableCell', function() {
 	it('should render just the menu button when not expanded', function() {
 		var toggleDropdown = sinon.stub();
 
-		var buttonTableCell = ReactDOM.render(
+		var buttonTableCell = this.render(
 			<ButtonTableCell
 				toggleDropdown={toggleDropdown}
-				editor={this.editor}
 				expanded={false}
 			/>,
 			this.container
@@ -42,12 +41,8 @@ describe('ButtonTableCell', function() {
 	it('should show a dropdown with the action buttons when expanded', function() {
 		var toggleDropdown = sinon.stub();
 
-		var buttonTableCell = ReactDOM.render(
-			<ButtonTableCell
-				toggleDropdown={toggleDropdown}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonTableCell = this.render(
+			<ButtonTableCell toggleDropdown={toggleDropdown} expanded={true} />,
 			this.container
 		);
 
@@ -76,12 +71,8 @@ describe('ButtonTableCell', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_3_table_extra_cell_second_col.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableCell
-				toggleDropdown={toggleDropdown}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableCell toggleDropdown={toggleDropdown} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'cellInsertBefore';
@@ -99,12 +90,8 @@ describe('ButtonTableCell', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_3_table_extra_cell_third_col.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableCell
-				toggleDropdown={toggleDropdown}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableCell toggleDropdown={toggleDropdown} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'cellInsertAfter';
@@ -122,12 +109,8 @@ describe('ButtonTableCell', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_3_table_missing_cell_second_col.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableCell
-				toggleDropdown={toggleDropdown}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableCell toggleDropdown={toggleDropdown} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'cellDelete';
@@ -145,12 +128,8 @@ describe('ButtonTableCell', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table_selected_second_row.html';
 		var expectedFixture = '3_by_3_table_merged_second_row.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableCell
-				toggleDropdown={toggleDropdown}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableCell toggleDropdown={toggleDropdown} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'cellMerge';
@@ -168,12 +147,8 @@ describe('ButtonTableCell', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_3_table_merged_second_cell_down.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableCell
-				toggleDropdown={toggleDropdown}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableCell toggleDropdown={toggleDropdown} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'cellMergeDown';
@@ -191,12 +166,8 @@ describe('ButtonTableCell', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_3_table_merged_second_cell_right.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableCell
-				toggleDropdown={toggleDropdown}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableCell toggleDropdown={toggleDropdown} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'cellMergeRight';
@@ -214,12 +185,8 @@ describe('ButtonTableCell', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_3_table_split_second_col.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableCell
-				toggleDropdown={toggleDropdown}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableCell toggleDropdown={toggleDropdown} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'cellHorizontalSplit';
@@ -237,12 +204,8 @@ describe('ButtonTableCell', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_3_table_split_second_row.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableCell
-				toggleDropdown={toggleDropdown}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableCell toggleDropdown={toggleDropdown} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'cellVerticalSplit';

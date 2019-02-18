@@ -85,6 +85,18 @@ window.Utils.createAlloyEditor = function(done, config) {
 			done();
 		}.bind(this)
 	);
+
+	this.render = function(component, container, editor) {
+		editor = editor || this.editor;
+		return ReactDOM.render(
+			React.createElement(
+				EditorContext.Provider,
+				{value: {editor: editor}},
+				component
+			),
+			container
+		);
+	}.bind(this);
 };
 
 window.Utils.destroyAlloyEditor = function(done) {

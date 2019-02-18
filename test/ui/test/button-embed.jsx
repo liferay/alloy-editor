@@ -14,10 +14,9 @@ describe('ButtonEmbed Component', function() {
 	afterEach(Utils.afterEach);
 
 	it('should render just the embed button when not in exclusive mode', function() {
-		var buttonEmbed = ReactDOM.render(
+		var buttonEmbed = this.render(
 			<ButtonEmbed
 				cancelExclusive={sinon.stub()}
-				editor={this.editor}
 				renderExclusive={false}
 			/>,
 			this.container
@@ -38,10 +37,9 @@ describe('ButtonEmbed Component', function() {
 	});
 
 	it('should show the embed edit button when in exclusive mode', function() {
-		var buttonEmbed = ReactDOM.render(
+		var buttonEmbed = this.render(
 			<ButtonEmbed
 				cancelExclusive={sinon.stub()}
-				editor={this.editor}
 				renderExclusive={true}
 			/>,
 			this.container
@@ -58,11 +56,8 @@ describe('ButtonEmbed Component', function() {
 	it('should invoke requestExclusive when clicking on the button', function() {
 		var requestExclusiveListener = sinon.stub();
 
-		var buttonEmbed = ReactDOM.render(
-			<ButtonEmbed
-				editor={this.editor}
-				requestExclusive={requestExclusiveListener}
-			/>,
+		var buttonEmbed = this.render(
+			<ButtonEmbed requestExclusive={requestExclusiveListener} />,
 			this.container
 		);
 

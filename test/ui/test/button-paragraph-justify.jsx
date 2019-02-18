@@ -18,8 +18,8 @@ describe('ButtonParagraphJustify', function() {
 			'{There should be a paragraph justified.}'
 		);
 
-		var buttonParagraphJustify = ReactDOM.render(
-			<ButtonParagraphJustify editor={this.editor} />,
+		var buttonParagraphJustify = this.render(
+			<ButtonParagraphJustify />,
 			this.container
 		);
 
@@ -42,8 +42,8 @@ describe('ButtonParagraphJustify', function() {
 			'<h1 style="color: red;">{There should be a paragraph justified.}</h1>'
 		);
 
-		var buttonParagraphJustify = ReactDOM.render(
-			<ButtonParagraphJustify editor={this.editor} />,
+		var buttonParagraphJustify = this.render(
+			<ButtonParagraphJustify />,
 			this.container
 		);
 
@@ -66,8 +66,8 @@ describe('ButtonParagraphJustify', function() {
 			'<p style="text-align: justify;">{A paragraph justified.}</p>'
 		);
 
-		var buttonParagraphJustify = ReactDOM.render(
-			<ButtonParagraphJustify editor={this.editor} />,
+		var buttonParagraphJustify = this.render(
+			<ButtonParagraphJustify />,
 			this.container
 		);
 

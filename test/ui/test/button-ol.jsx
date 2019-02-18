@@ -18,8 +18,8 @@ describe('ButtonOrderedList', function() {
 			'<p>There should be a {selection made...</p><p>An ordereed} list.</p>'
 		);
 
-		var buttonOrderedlist = ReactDOM.render(
-			<ButtonOrderedList editor={this.editor} />,
+		var buttonOrderedlist = this.render(
+			<ButtonOrderedList />,
 			this.container
 		);
 
@@ -42,8 +42,8 @@ describe('ButtonOrderedList', function() {
 			'<ol><li>A {selection made...</li><li>An ordereed} list.</li></ol>'
 		);
 
-		var buttonOrderedlist = ReactDOM.render(
-			<ButtonOrderedList editor={this.editor} />,
+		var buttonOrderedlist = this.render(
+			<ButtonOrderedList />,
 			this.container
 		);
 

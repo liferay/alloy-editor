@@ -14,8 +14,8 @@ describe('ButtonTableRemove', function() {
 	afterEach(Utils.afterEach);
 
 	it('should remove a table if selection is inside one', function() {
-		var buttonTableRemove = ReactDOM.render(
-			<ButtonTableRemove editor={this.editor} />,
+		var buttonTableRemove = this.render(
+			<ButtonTableRemove />,
 			this.container
 		);
 
@@ -35,8 +35,8 @@ describe('ButtonTableRemove', function() {
 	});
 
 	it('should noop if selection is outside a table', function() {
-		var buttonTableRemove = ReactDOM.render(
-			<ButtonTableRemove editor={this.editor} />,
+		var buttonTableRemove = this.render(
+			<ButtonTableRemove />,
 			this.container
 		);
 

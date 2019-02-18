@@ -36,8 +36,8 @@ describe('ToolbarAdd', function() {
 				},
 			};
 
-			var mainUI = ReactDOM.render(
-				<ToolbarAdd editor={this.editor} editorEvent={editorEvent} />,
+			var mainUI = this.render(
+				<ToolbarAdd editorEvent={editorEvent} />,
 				this.container
 			);
 

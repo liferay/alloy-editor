@@ -20,10 +20,7 @@ describe('ButtonBold', function() {
 			'There should be a {selection} made bold.'
 		);
 
-		var buttonBold = ReactDOM.render(
-			<ButtonBold editor={this.editor} />,
-			this.container
-		);
+		var buttonBold = this.render(<ButtonBold />, this.container);
 
 		ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(buttonBold));
 
@@ -44,10 +41,7 @@ describe('ButtonBold', function() {
 			'There should be a {selection} made bold.'
 		);
 
-		var buttonBold = ReactDOM.render(
-			<ButtonBold editor={this.editor} />,
-			this.container
-		);
+		var buttonBold = this.render(<ButtonBold />, this.container);
 
 		happen.keydown(this._editable, {
 			ctrlKey: true,
@@ -71,10 +65,7 @@ describe('ButtonBold', function() {
 			'A <strong>{selection}</strong> made bold.'
 		);
 
-		var buttonBold = ReactDOM.render(
-			<ButtonBold editor={this.editor} />,
-			this.container
-		);
+		var buttonBold = this.render(<ButtonBold />, this.container);
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonBold);
 

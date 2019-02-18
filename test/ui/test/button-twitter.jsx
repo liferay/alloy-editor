@@ -15,10 +15,7 @@ describe('ButtonTwitter', function() {
 	it('should add ae-twitter-link', function() {
 		bender.tools.selection.setWithHtml(this.nativeEditor, '{tweet}');
 
-		var buttonTwitter = ReactDOM.render(
-			<ButtonTwitter editor={this.editor} />,
-			this.container
-		);
+		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonTwitter));
 
@@ -31,10 +28,7 @@ describe('ButtonTwitter', function() {
 	it('should create link to tweet the word that is selected', function() {
 		bender.tools.selection.setWithHtml(this.nativeEditor, '{tweet}');
 
-		var buttonTwitter = ReactDOM.render(
-			<ButtonTwitter editor={this.editor} />,
-			this.container
-		);
+		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonTwitter));
 
@@ -55,10 +49,7 @@ describe('ButtonTwitter', function() {
 			'<a class="ae-twitter-link" href="https://twitter.com/intent/tweet?text=tweet" target="_blank">{tweet}</a>'
 		);
 
-		var buttonTwitter = ReactDOM.render(
-			<ButtonTwitter editor={this.editor} />,
-			this.container
-		);
+		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonTwitter);
 
@@ -74,10 +65,7 @@ describe('ButtonTwitter', function() {
 			'<a class="ae-twitter-link" href="https://twitter.com/intent/tweet?text=tweet" target="_blank">{tweet}</a>'
 		);
 
-		var buttonTwitter = ReactDOM.render(
-			<ButtonTwitter editor={this.editor} />,
-			this.container
-		);
+		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonTwitter));
 

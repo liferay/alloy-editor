@@ -51,9 +51,10 @@ describe('ToolbarStyles', function() {
 		});
 
 		it('should render buttons with properties from buttonCfg', function() {
-			var toolbarStyles = ReactDOM.render(
-				<ToolbarStyles editor={this.alloyEditor} />,
-				this.container
+			var toolbarStyles = this.render(
+				<ToolbarStyles />,
+				this.container,
+				this.alloyEditor
 			);
 
 			var buttons = toolbarStyles.getToolbarButtons(['bold', 'italic'], {
@@ -85,10 +86,7 @@ describe('ToolbarStyles', function() {
 		afterEach(Utils.afterEach);
 
 		it("should constrain the toolbar's position", function() {
-			var toolbarStyles = ReactDOM.render(
-				<ToolbarStyles editor={this.editor} />,
-				this.container
-			);
+			var toolbarStyles = this.render(<ToolbarStyles />, this.container);
 
 			var res = toolbarStyles.getConstrainedPosition(
 				{

@@ -22,10 +22,7 @@ describe('ButtonTargetList', function() {
 			'There should be a <a>{selection}</a> made bold.'
 		);
 
-		var buttonLink = ReactDOM.render(
-			<ButtonLinkEdit editor={this.editor} />,
-			this.container
-		);
+		var buttonLink = this.render(<ButtonLinkEdit />, this.container);
 
 		var buttonLinkTargetEditRendered = TestUtils.scryRenderedComponentsWithType(
 			buttonLink,

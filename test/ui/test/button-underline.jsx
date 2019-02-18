@@ -20,10 +20,7 @@ describe('ButtonUnderline', function() {
 			'There should be a {selection} made underline.'
 		);
 
-		var buttonUnderline = ReactDOM.render(
-			<ButtonUnderline editor={this.editor} />,
-			this.container
-		);
+		var buttonUnderline = this.render(<ButtonUnderline />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonUnderline));
 
@@ -44,10 +41,7 @@ describe('ButtonUnderline', function() {
 			'There should be a {selection} made underline.'
 		);
 
-		var buttonUnderline = ReactDOM.render(
-			<ButtonUnderline editor={this.editor} />,
-			this.container
-		);
+		var buttonUnderline = this.render(<ButtonUnderline />, this.container);
 
 		happen.keydown(this._editable, {
 			ctrlKey: true,
@@ -71,10 +65,7 @@ describe('ButtonUnderline', function() {
 			'A <u>{selection}</u> made underline.'
 		);
 
-		var buttonUnderline = ReactDOM.render(
-			<ButtonUnderline editor={this.editor} />,
-			this.container
-		);
+		var buttonUnderline = this.render(<ButtonUnderline />, this.container);
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonUnderline);
 

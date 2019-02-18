@@ -20,10 +20,7 @@ describe('ButtonItalic', function() {
 			'There should be a {selection} made italic.'
 		);
 
-		var buttonItalic = ReactDOM.render(
-			<ButtonItalic editor={this.editor} />,
-			this.container
-		);
+		var buttonItalic = this.render(<ButtonItalic />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonItalic));
 
@@ -44,10 +41,7 @@ describe('ButtonItalic', function() {
 			'There should be a {selection} made italic.'
 		);
 
-		var buttonItalic = ReactDOM.render(
-			<ButtonItalic editor={this.editor} />,
-			this.container
-		);
+		var buttonItalic = this.render(<ButtonItalic />, this.container);
 
 		happen.keydown(this._editable, {
 			ctrlKey: true,
@@ -71,10 +65,7 @@ describe('ButtonItalic', function() {
 			'A <em>{selection}</em> made italic.'
 		);
 
-		var buttonItalic = ReactDOM.render(
-			<ButtonItalic editor={this.editor} />,
-			this.container
-		);
+		var buttonItalic = this.render(<ButtonItalic />, this.container);
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonItalic);
 

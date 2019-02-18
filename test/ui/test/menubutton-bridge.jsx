@@ -28,11 +28,8 @@ describe('MenuButtonBridge', function() {
 	});
 
 	it('should render just the menuButton button when not expanded', function() {
-		var menuButton = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonMenuButton
-				editor={this.editor}
-				expanded={false}
-			/>,
+		var menuButton = this.render(
+			<AlloyEditor.Buttons.ButtonMenuButton expanded={false} />,
 			this.container
 		);
 
@@ -51,11 +48,8 @@ describe('MenuButtonBridge', function() {
 	});
 
 	it.skip('should show a dropdown with the menu items that have a valid group when expanded', function() {
-		var menuButton = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonMenuButton
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var menuButton = this.render(
+			<AlloyEditor.Buttons.ButtonMenuButton expanded={true} />,
 			this.container
 		);
 
@@ -92,11 +86,8 @@ describe('MenuButtonBridge', function() {
 
 		this.nativeEditor.execCommand = stub;
 
-		var menuButton = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonMenuButton
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var menuButton = this.render(
+			<AlloyEditor.Buttons.ButtonMenuButton expanded={true} />,
 			this.container
 		);
 

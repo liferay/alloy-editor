@@ -40,8 +40,8 @@ describe('ButtonBridge', function() {
 
 		this.nativeEditor.once('buttonCommand', clickListener);
 
-		var button = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonCommand editor={this.editor} />,
+		var button = this.render(
+			<AlloyEditor.Buttons.ButtonCommand />,
 			this.container
 		);
 
@@ -55,8 +55,8 @@ describe('ButtonBridge', function() {
 
 		this.nativeEditor.once('buttonClick', clickListener);
 
-		var button = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonClick editor={this.editor} />,
+		var button = this.render(
+			<AlloyEditor.Buttons.ButtonClick />,
 			this.container
 		);
 
@@ -72,8 +72,8 @@ describe('ButtonBridge', function() {
 		this.nativeEditor.once('buttonClick', clickListener1);
 		this.nativeEditor.once('buttonClick2', clickListener2);
 
-		var button = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonClick editor={this.editor} />,
+		var button = this.render(
+			<AlloyEditor.Buttons.ButtonClick />,
 			this.container
 		);
 
@@ -84,8 +84,8 @@ describe('ButtonBridge', function() {
 	});
 
 	it('should render the button icon with css class or style if it exists in ckeditor', function() {
-		var button = ReactDOM.render(
-			<AlloyEditor.Buttons.PasteFromWord editor={this.editor} />,
+		var button = this.render(
+			<AlloyEditor.Buttons.PasteFromWord />,
 			this.container
 		);
 

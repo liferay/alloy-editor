@@ -73,10 +73,9 @@ describe('selectionPosition', function() {
 				nativeEditor.element.findOne('#testImage')
 			);
 
-			var toolbarStyles = ReactDOM.render(
+			var toolbarStyles = this.render(
 				<ToolbarStyles
 					config={config}
-					editor={this.editor}
 					editorEvent={editorEvent}
 					selectionData={editorEvent.data.selectionData}
 				/>,
@@ -118,10 +117,9 @@ describe('selectionPosition', function() {
 				nativeEditor.element.findOne('#testTable')
 			);
 
-			var toolbarStyles = ReactDOM.render(
+			var toolbarStyles = this.render(
 				<ToolbarStyles
 					config={config}
-					editor={this.editor}
 					editorEvent={editorEvent}
 					selectionData={editorEvent.data.selectionData}
 				/>,

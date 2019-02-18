@@ -21,9 +21,8 @@ describe('ButtonLink', function() {
 
 		var cancelExclusive = sinon.stub();
 
-		var buttonLink = ReactDOM.render(
+		var buttonLink = this.render(
 			<ButtonLinkEdit
-				editor={this.editor}
 				cancelExclusive={cancelExclusive}
 				requestExclusive={requestExclusiveListener}
 			/>,
@@ -62,9 +61,8 @@ describe('ButtonLink', function() {
 
 		var cancelExclusive = sinon.stub();
 
-		var buttonLink = ReactDOM.render(
+		var buttonLink = this.render(
 			<ButtonLinkEdit
-				editor={this.editor}
 				appendProtocol={false}
 				cancelExclusive={cancelExclusive}
 				requestExclusive={requestExclusiveListener}
@@ -109,11 +107,8 @@ describe('ButtonLink', function() {
 			},
 		];
 
-		var buttonLink = ReactDOM.render(
-			<ButtonLinkEdit
-				editor={this.editor}
-				allowedTargets={allowedTargets}
-			/>,
+		var buttonLink = this.render(
+			<ButtonLinkEdit allowedTargets={allowedTargets} />,
 			this.container
 		);
 
@@ -140,11 +135,8 @@ describe('ButtonLink', function() {
 			},
 		];
 
-		var buttonLink = ReactDOM.render(
-			<ButtonLinkEdit
-				editor={this.editor}
-				allowedTargets={allowedTargets}
-			/>,
+		var buttonLink = this.render(
+			<ButtonLinkEdit allowedTargets={allowedTargets} />,
 			this.container
 		);
 
@@ -159,11 +151,8 @@ describe('ButtonLink', function() {
 	it('should not render target selector on link edit button when passing showTargetSelector property as false', function() {
 		var showTargetSelector = false;
 
-		var buttonLink = ReactDOM.render(
-			<ButtonLinkEdit
-				editor={this.editor}
-				showTargetSelector={showTargetSelector}
-			/>,
+		var buttonLink = this.render(
+			<ButtonLinkEdit showTargetSelector={showTargetSelector} />,
 			this.container
 		);
 

@@ -17,11 +17,8 @@ describe('ButtonLink', function() {
 	it('should invoke requestExclusive when clicking on the button', function() {
 		var requestExclusiveListener = sinon.stub();
 
-		var buttonLink = ReactDOM.render(
-			<ButtonLink
-				editor={this.editor}
-				requestExclusive={requestExclusiveListener}
-			/>,
+		var buttonLink = this.render(
+			<ButtonLink requestExclusive={requestExclusiveListener} />,
 			this.container
 		);
 
@@ -33,11 +30,8 @@ describe('ButtonLink', function() {
 	it('should invoke requestExclusive when pressing the keystroke [Ctrl|Cmd]+L', function() {
 		var requestExclusiveListener = sinon.stub();
 
-		ReactDOM.render(
-			<ButtonLink
-				editor={this.editor}
-				requestExclusive={requestExclusiveListener}
-			/>,
+		this.render(
+			<ButtonLink requestExclusive={requestExclusiveListener} />,
 			this.container
 		);
 

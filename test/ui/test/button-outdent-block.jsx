@@ -18,10 +18,7 @@ describe('ButtonOutdent', function() {
 			'<p style="margin-left: 100px">This text will be outdent {selection}.</p>'
 		);
 
-		var buttonOutdent = ReactDOM.render(
-			<ButtonOutdentBlock editor={this.editor} />,
-			this.container
-		);
+		var buttonOutdent = this.render(<ButtonOutdentBlock />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
 
@@ -43,10 +40,7 @@ describe('ButtonOutdent', function() {
 			'<p style="margin-left: 100px">This text will be outdent {selection}.</p>'
 		);
 
-		var buttonOutdent = ReactDOM.render(
-			<ButtonOutdentBlock editor={this.editor} />,
-			this.container
-		);
+		var buttonOutdent = this.render(<ButtonOutdentBlock />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
 
@@ -70,10 +64,7 @@ describe('ButtonOutdent', function() {
 			'<p style="margin-left: 100em">This text will be outdent {selection}.</p>'
 		);
 
-		var buttonOutdent = ReactDOM.render(
-			<ButtonOutdentBlock editor={this.editor} />,
-			this.container
-		);
+		var buttonOutdent = this.render(<ButtonOutdentBlock />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
 

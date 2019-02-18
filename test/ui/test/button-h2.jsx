@@ -18,10 +18,7 @@ describe('ButtonH2', function() {
 			'There should be a {selection} made h2.'
 		);
 
-		var buttonH2 = ReactDOM.render(
-			<ButtonH2 editor={this.editor} />,
-			this.container
-		);
+		var buttonH2 = this.render(<ButtonH2 />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonH2));
 
@@ -42,10 +39,7 @@ describe('ButtonH2', function() {
 			'<h2>A {selection} made h2.</h2>'
 		);
 
-		var buttonH2 = ReactDOM.render(
-			<ButtonH2 editor={this.editor} />,
-			this.container
-		);
+		var buttonH2 = this.render(<ButtonH2 />, this.container);
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonH2);
 

@@ -23,12 +23,8 @@ describe('ButtonStylesList', function() {
 			},
 		];
 
-		var buttonStylesList = ReactDOM.render(
-			<ButtonStylesList
-				toggleDropdown={sinon.stub()}
-				editor={this.editor}
-				styles={styles}
-			/>,
+		var buttonStylesList = this.render(
+			<ButtonStylesList toggleDropdown={sinon.stub()} styles={styles} />,
 			this.container
 		);
 
@@ -50,12 +46,8 @@ describe('ButtonStylesList', function() {
 			},
 		];
 
-		var buttonStylesList = ReactDOM.render(
-			<ButtonStylesList
-				editor={this.editor}
-				showRemoveStylesItem={false}
-				styles={styles}
-			/>,
+		var buttonStylesList = this.render(
+			<ButtonStylesList showRemoveStylesItem={false} styles={styles} />,
 			this.container
 		);
 
