@@ -2,7 +2,6 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'gatsby';
 import LayoutNav from '../components/LayoutNav';
-import 'alloyeditor';
 
 const pageTitle = "AlloyEditor | Page 404";
 
