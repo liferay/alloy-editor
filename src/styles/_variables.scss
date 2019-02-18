@@ -7,10 +7,7 @@ $font-size-base: 1.125rem;
 // font
 $font-family-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-// border-radius
-// $enable-rounded: false;
-
-// titles
+// headings
 $h1-font-size: 48px;
 $h2-font-size: 32px;
 $h3-font-size: 24px;
@@ -19,26 +16,10 @@ $h5-font-size: 18px;
 
 $display-2-size: 5rem;
 
-// new button?
+// buttons
 $btn-padding-y-lg: 12px;
 $btn-padding-x-lg: 32px;
 $btn-line-height-lg: 32px;
-// $theme-colors: (
-//   "white": white
-// );
-
-// cards
-$card-margin-bottom: 0;
-$card-box-shadow: none;
-$card-title: (
-	font-size: 20px
-);
-
-// sticker in cards?
-$sticker-font-size: 16px;
-$sticker-size: auto;
-$sticker-light-color: #6B6C7E;
-// $sticker-inside-offset: 3rem; // i wanted to use this for the margin top but i can't because it's use for the margin right as well
 
 // colors
 $dark: #272833;
@@ -51,5 +32,7 @@ $navigation-bar-light: (
 	link-font-weight: 700
 );
 
-// timeline
-$timeline-increment-bg: #F1F2F5;
+// header
+$header-height: 122px;
+$header-height-md: 81px;
+$sidebar-width: 400px;

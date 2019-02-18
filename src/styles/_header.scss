@@ -1,5 +1,20 @@
 // We use this file to define the style of the header/navbar
 
+.header {
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 150px 0 100px;
+
+    @include media-breakpoint-up(md) {
+        padding: 150px 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+        padding: 200px 0 300px;
+    }
+}
+
 .navbar {
 	padding: 16px 24px;
 	transition: all 0.4s ease-in-out;
