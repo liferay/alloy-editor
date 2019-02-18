@@ -79,7 +79,7 @@ describe('ButtonItalic', function() {
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonItalic);
 
 		assert.strictEqual(
-			$(buttonDOMNode).hasClass('ae-button-pressed'),
+			buttonDOMNode.classList.contains('ae-button-pressed'),
 			true
 		);
 	});

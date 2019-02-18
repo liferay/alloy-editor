@@ -73,6 +73,6 @@ describe('ButtonParagraphJustify', function() {
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonParagraphJustify);
 
-		assert.isTrue($(buttonDOMNode).hasClass('ae-button-pressed'));
+		assert.isTrue(buttonDOMNode.classList.contains('ae-button-pressed'));
 	});
 });

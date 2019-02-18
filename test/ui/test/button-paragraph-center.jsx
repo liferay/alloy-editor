@@ -73,6 +73,6 @@ describe('ButtonParagraphCenter', function() {
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonParagraphCenter);
 
-		assert.isTrue($(buttonDOMNode).hasClass('ae-button-pressed'));
+		assert.isTrue(buttonDOMNode.classList.contains('ae-button-pressed'));
 	});
 });

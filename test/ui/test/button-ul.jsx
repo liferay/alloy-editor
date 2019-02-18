@@ -50,7 +50,7 @@ describe('ButtonUnorderedlist', function() {
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonUnorderedlist);
 
 		assert.strictEqual(
-			$(buttonDOMNode).hasClass('ae-button-pressed'),
+			buttonDOMNode.classList.contains('ae-button-pressed'),
 			true
 		);
 	});
