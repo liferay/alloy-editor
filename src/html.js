@@ -49,9 +49,10 @@ class HTML extends Component {
 					/>
 					<link href="/alloy-editor/assets/css/alloy-editor-ocean.css" />
 					<script>
-						var ALLOYEDITOR_BASEPATH = CKEDITOR_BASEPATH = (/alloy-editor/).toString();
+						var ALLOYEDITOR_BASEPATH = CKEDITOR_BASEPATH =
+						(/alloy-editor/).toString();
 					</script>
-					<script src="/alloy-editor/alloy-editor-all-min.js"></script>
+					<script src="/alloy-editor/alloy-editor-all-min.js" />
 				</head>
 				<body {...this.props.bodyAttributes}>
 					<div
