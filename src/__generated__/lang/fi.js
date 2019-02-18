@@ -82,7 +82,7 @@ AlloyEditor.Strings = {
 	"pasteVideoLink": "Liitä Videolinkki",
 	"platformNotSupported": "Pahoittelemme, tätä alustaa ei tueta",
 	"primary": "Ensisijainen",
-	"removeImage": "Remove Image",
+	"removeImage": "Poista Kuva",
 	"removeLink": "Poista linkki",
 	"rows": "Rivit",
 	"success": "Onnistui",
