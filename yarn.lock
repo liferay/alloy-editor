@@ -1397,6 +1397,16 @@ ajv@^6.1.0, ajv@^6.5.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+alloyeditor@^2.0.0-alpha.5:
+  version "2.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/alloyeditor/-/alloyeditor-2.0.0-alpha.5.tgz#a9981ebbb749e4a72bb3f7e05471e86de604ce4c"
+  integrity sha512-W/8UDfJKIu7oCjAQx3312TSpovXAXSOHUYNmBec2dY1ZgP44eiYcx+KARTBJzDX2B2BRgaBuyJWMQx8T4fVfIw==
+  dependencies:
+    clay-css "2.5.1"
+    prop-types "^15.6.2"
+    react "^16.6.3"
+    react-dom "^16.6.3"
+
 alphanum-sort@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
@@ -3090,6 +3100,11 @@ clay-css@2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/clay-css/-/clay-css-2.5.0.tgz#820712f0abb75f8fba2f7a2899512229cb83179d"
   integrity sha512-95txHpiNyp0fUUJ2dNxqbCUAE9kYlx8Ddf1H9xugq847JQdoOJlxefp+rKVs/qfcqDuFCVe9Zf10+fJFyi0A/g==
+
+clay-css@2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/clay-css/-/clay-css-2.5.1.tgz#e47a2427d16766502b09487441ec31dc48873720"
+  integrity sha512-J9EEbLe7X9BA1mS4DZXqKM/J6ukt5Gw++67KTMuwooSUc2TH3tLkadueBibNhxTGSkAHWQwPk4VU3BtONC89fQ==
 
 clay-dropdown@2.5.0:
   version "2.5.0"
@@ -10586,6 +10601,16 @@ react-dom@16.6.3:
     prop-types "^15.6.2"
     scheduler "^0.11.2"
 
+react-dom@^16.6.3:
+  version "16.8.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.2.tgz#7c8a69545dd554d45d66442230ba04a6a0a3c3d3"
+  integrity sha512-cPGfgFfwi+VCZjk73buu14pYkYBR1b/SRMSYqkLDdhSEHnSwcuYTPu6/Bh6ZphJFIk80XLvbSe2azfcRzNF+Xg==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.13.2"
+
 react-dom@~15.4.1:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.2.tgz#015363f05b0a1fd52ae9efdd3a0060d90695208f"
@@ -10660,6 +10685,16 @@ react@16.6.3:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.11.2"
+
+react@^16.6.3:
+  version "16.8.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.8.2.tgz#83064596feaa98d9c2857c4deae1848b542c9c0c"
+  integrity sha512-aB2ctx9uQ9vo09HVknqv3DGRpI7OIGJhCx3Bt0QqoRluEjHSaObJl+nG12GDdYH6sTgE7YiPJ6ZUyMx9kICdXw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.13.2"
 
 react@~15.4.1:
   version "15.4.2"
@@ -11412,6 +11447,14 @@ scheduler@^0.11.2:
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.11.2.tgz#a8db5399d06eba5abac51b705b7151d2319d33d3"
   integrity sha512-+WCP3s3wOaW4S7C1tl3TEXp4l9lJn0ZK8G3W3WKRWmw77Z2cIFUW2MiNTMHn5sCjxN+t7N43HAOOgMjyAg5hlg==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+
+scheduler@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.13.2.tgz#969eaee2764a51d2e97b20a60963b2546beff8fa"
+  integrity sha512-qK5P8tHS7vdEMCW5IPyt8v9MJOHqTrOUgPXib7tqm9vh834ibBX5BNhwkplX/0iOzHW5sXyluehYfS9yrkz9+w==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
