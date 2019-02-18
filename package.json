@@ -31,7 +31,8 @@
     "lint:fix": "eslint --fix '{plugins,src}/**/*.{js,jsx}'",
     "lint:quiet": "eslint --quiet '{plugins,src}/**/*.{js,jsx}'",
     "prettier": "prettier --write -- '*.js' '{plugins,src}/**/*.{js,jsx}'",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "serve": "gatsby serve"
   },
   "dependencies": {
     "@mdx-js/mdx": "0.15.7",
