@@ -1,89 +1,94 @@
-import { graphql } from 'gatsby';
+import {graphql} from 'gatsby';
 import Helmet from 'react-helmet';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Footer from '../components/Footer';
 import LayoutNav from '../components/LayoutNav';
-import Auth from '../components/Auth';
 import Timeline from '../components/Timeline';
 
 export default class Updates extends Component {
-    render() {
-        const { data } = this.props;
+	render() {
+		const {data} = this.props;
 
-        const { mdx: { frontmatter: { title, needsAuth, updates }, excerpt } } = data;
+		const {
+			mdx: {
+				frontmatter: {title, updates},
+				excerpt,
+			},
+		} = data;
 
-        const pageTitle = "AlloyEditor | "+title;
+		const pageTitle = 'AlloyEditor | ' + title;
 
-        const pageDescription = excerpt;
+		const pageDescription = excerpt;
 
-        const pageImage = "/images/home/banner_back.png";
+		const pageImage = '/images/home/banner_back.png';
 
-        return (
-            <Auth needsAuth={needsAuth}>
-                <div className="updates">
-                    <Helmet>
-                        <title>{pageTitle}</title>
+		return (
+			<div className="updates">
+				<Helmet>
+					<title>{pageTitle}</title>
 
-                        <meta name="description" content={pageDescription} />
+					<meta name="description" content={pageDescription} />
 
-                        <meta property="og:title" content={pageTitle} />
+					<meta property="og:title" content={pageTitle} />
 
-                        <meta property="og:description" content={pageDescription} />
+					<meta property="og:description" content={pageDescription} />
 
-                        <meta property="og:image" content={pageImage} />
+					<meta property="og:image" content={pageImage} />
 
-                        <meta name="twitter:card" content="summary_large_image" />
+					<meta name="twitter:card" content="summary_large_image" />
 
-                        <meta property="og:site_name" content="AlloyEditor" />
+					<meta property="og:site_name" content="AlloyEditor" />
 
-                        <meta name="twitter:image:alt" content="AlloyEditor presentation" />
-                    </Helmet>
+					<meta
+						name="twitter:image:alt"
+						content="AlloyEditor presentation"
+					/>
+				</Helmet>
 
-                    <header>
-                        <LayoutNav effect={true} static={true} />
-                    </header>
+				<header>
+					<LayoutNav effect={true} static={true} />
+				</header>
 
-                    <main className="pt-header bg-light">
-                        <div className="container py-5 text-centerx">
-                            <div className="row my-5">
-                                <div className="col-12 text-center mb-5">
-                                    <h1 className="">Updates</h1>
+				<main className="pt-header bg-light">
+					<div className="container py-5 text-centerx">
+						<div className="row my-5">
+							<div className="col-12 text-center mb-5">
+								<h1 className="">Updates</h1>
 
-                                    <h2 className="h3 font-weight-light">Check out what's new</h2>
-                                </div>
+								<h2 className="h3 font-weight-light">
+									Check out what's new
+								</h2>
+							</div>
 
-                                <Timeline data={updates} />
-                            </div>
-                        </div>
-                    </main>
+							<Timeline data={updates} />
+						</div>
+					</div>
+				</main>
 
-                    <Footer />
-                </div>
-            </Auth>
-        );
-    }
+				<Footer />
+			</div>
+		);
+	}
 }
 
-
 export const pageQuery = graphql`
-    query($slug: String!) {
-        mdx(fields: { slug: { eq: $slug } }) {
-            excerpt
-            timeToRead
-            frontmatter {
-                title
-                needsAuth
-                updates {
-                    version
-                    major
-                    features {
-                        icon
-                        title
-                        description
-                        url
-                    }
-                }
-            }
-        }
-    }
+	query($slug: String!) {
+		mdx(fields: {slug: {eq: $slug}}) {
+			excerpt
+			timeToRead
+			frontmatter {
+				title
+				updates {
+					version
+					major
+					features {
+						icon
+						title
+						description
+						url
+					}
+				}
+			}
+		}
+	}
 `;

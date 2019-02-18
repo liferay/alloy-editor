@@ -1,9 +1,11 @@
 function findWhere(array, key, value) {
 	let t = 0;
-	while (t < array.length && array[t][key] !== value) { t++; };
+	while (t < array.length && array[t][key] !== value) {
+		t++;
+	}
 
 	if (t < array.length) {
-		return array[t]
+		return array[t];
 	} else {
 		return false;
 	}
@@ -20,7 +22,7 @@ function arrangeIntoTree(paths) {
 		}
 
 		const path = node.link.split('/').filter(elem => elem);
-        let currentLevel = tree || [];
+		let currentLevel = tree || [];
 		for (let j = 0; j < path.length; j++) {
 			let part = path[j];
 
@@ -34,15 +36,17 @@ function arrangeIntoTree(paths) {
 
 			// If the path exist, navigate, if not, create it and navigate
 			if (existingPath) {
-				currentLevel = existingPath.items || [];
+				currentLevel = existingPath.items || [];
 			} else {
-				let nodePart = paths.find(elem => elem.link.endsWith(`/${part}/index`));
+				let nodePart = paths.find(elem =>
+					elem.link.endsWith(`/${part}/index`)
+				);
 				let newPart = {
 					id: part,
 					items: [],
 					title: nodePart.title,
 					weight: nodePart.weight,
-				}
+				};
 
 				currentLevel.push(newPart);
 				currentLevel = newPart.items;
@@ -72,7 +76,7 @@ function sortBy(tree) {
 		});
 		/* eslint-enable */
 
-		tree.items.map((item) => sortBy(item));
+		tree.items.map(item => sortBy(item));
 	}
 
 	return tree;

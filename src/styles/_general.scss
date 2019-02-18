@@ -9,7 +9,7 @@
     }
 }
 
-// New Boostrap Classes (remove this part when bootstrap 4.2+ is installed)
+// New Bootstrap classes (remove this part when Bootstrap 4.2+ is installed)
 .mb-n5 {
 	margin-bottom: -3rem!important;
 }
@@ -22,7 +22,7 @@
 	min-height: 100vh;
 }
 
-// Element Classes
+// Element classes
 .btn-primary {
 	color: white;
 
@@ -30,15 +30,6 @@
 		color: white;
 	}
 }
-
-// .card {
-// 	transition: all 0.4s;
-
-// 	&:hover {
-// 			box-shadow: 6px 9px 36px rgba(48, 49, 63, 0.2);
-// 			transform: translateY(-4px);
-// 	}
-// }
 
 .display-2 {
 	@include media-breakpoint-down(sm) {
@@ -52,10 +43,19 @@
 	}
 }
 
+// Custom classes
 .pt-header {
 	padding-top: $header-height;
 
 	@include media-breakpoint-up(md) {
 		padding-top: $header-height-md;
 	}
+}
+
+.my-row {
+    margin: 70px 0;
+
+    @include media-breakpoint-up(lg) {
+        margin: 150px 0;
+    }
 }
