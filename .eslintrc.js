@@ -13,7 +13,7 @@ module.exports = {
 		},
 	},
 	extends: ['plugin:react/recommended', 'liferay', 'prettier'],
-	plugins: ['babel', 'no-for-of-loops'],
+	plugins: ['babel', 'no-for-of-loops', 'react-hooks'],
 	rules: {
 		'require-jsdoc': 'warn',
 		'new-cap': [
