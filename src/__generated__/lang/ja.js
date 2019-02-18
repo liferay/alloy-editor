@@ -82,7 +82,7 @@ AlloyEditor.Strings = {
 	"pasteVideoLink": "動画リンクを貼り付け",
 	"platformNotSupported": "申し訳ございません。このプラットフォームはサポートされていません。",
 	"primary": "プライマリ",
-	"removeImage": "Remove Image",
+	"removeImage": "画像を削除",
 	"removeLink": "リンクを削除",
 	"rows": "行",
 	"success": "成功",
