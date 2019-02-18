@@ -50,7 +50,7 @@ describe('ButtonH1', function() {
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonH1);
 
 		assert.strictEqual(
-			$(buttonDOMNode).hasClass('ae-button-pressed'),
+			buttonDOMNode.classList.contains('ae-button-pressed'),
 			true
 		);
 	});

@@ -50,7 +50,7 @@ describe('ButtonSuperscript', function() {
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonSuperscript);
 
 		assert.strictEqual(
-			$(buttonDOMNode).hasClass('ae-button-pressed'),
+			buttonDOMNode.classList.contains('ae-button-pressed'),
 			true
 		);
 	});

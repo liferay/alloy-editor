@@ -87,7 +87,7 @@ describe('ButtonImageAlignRight', function() {
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonImageAlignRight);
 
 		assert.strictEqual(
-			$(buttonDOMNode).hasClass('ae-button-pressed'),
+			buttonDOMNode.classList.contains('ae-button-pressed'),
 			true
 		);
 	});

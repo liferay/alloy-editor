@@ -73,6 +73,6 @@ describe('ButtonParagraphAlignRight', function() {
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonParagraphAlignRight);
 
-		assert.isTrue($(buttonDOMNode).hasClass('ae-button-pressed'));
+		assert.isTrue(buttonDOMNode.classList.contains('ae-button-pressed'));
 	});
 });
