@@ -4,31 +4,13 @@ import {Link} from 'gatsby';
 import LayoutNav from '../components/LayoutNav';
 import {WOW} from 'wowjs';
 import Footer from '../components/Footer';
-import 'alloyeditor';
 
 class Index extends Component {
 	componentDidMount() {
 		this._wow = new WOW();
 		this._wow.init();
 
-		// Here be dragons...
-		window.ALLOYEDITOR_BASEPATH = '/alloy-editor/';
-
-		// This doesn't work although it's supposed to as documented here
-		// https://ckeditor.com/docs/ckeditor4/latest/guide/dev_basepath.html
-		// window.CKEDITOR_BASEPATH = '/alloy-editor/';
-
-		// This is also probably a bad idea but it's the only way I found to load
-		// CKEDITOR's scripts, but it still fails when trying
-		// to load the plugin's assets (images, etc...)
-		// (it should be set automagically when setting CKEDITOR_BASEPATH)
-		window.CKEDITOR.basePath = 'http://localhost:8000/alloy-editor/';
-
-		// Setting CKEDITOR.plugins.basePath does not work either
-		// (it should be set automagically when setting CKEDITOR_BASEPATH)
-		// window.CKEDITOR.plugins.basePath = 'http://localhost:8000/alloy-editor/plugins/';
-
-		this._alloyEditor = window.AlloyEditor.editable('editable');
+		AlloyEditor.editable('editable');
 	}
 
 	componentWillUnmount() {
