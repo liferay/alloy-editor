@@ -123,6 +123,12 @@ module.exports = {
 
 	webpack: {
 		mode: 'development',
+
+		// Beware! Don't set devtool to 'eval' or similar because it will
+		// cause modules to be executed as many times as they are required
+		// instead of once only, breaking everything.
+		devtool: false,
+
 		module: {
 			rules: [
 				{
