@@ -22,7 +22,6 @@ const filesToLoad = [
 	/* AlloyEditor skins */
 	{
 		pattern: path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
-		included: true,
 		watched: false,
 	},
 
@@ -31,32 +30,26 @@ const filesToLoad = [
 	/* CKEditor JS files */
 	{
 		pattern: path.join(alloyEditorDir, 'ckeditor.js'),
-		included: true,
 		watched: false,
 	},
 	{
 		pattern: path.join(alloyEditorDir, 'styles.js'),
-		included: true,
 		watched: false,
 	},
 	{
 		pattern: path.join(alloyEditorDir, 'config.js'),
-		included: true,
 		watched: false,
 	},
 	{
 		pattern: path.join(alloyEditorDir, 'skins/moono/*.css'),
-		included: true,
 		watched: false,
 	},
 	{
 		pattern: path.join(alloyEditorDir, 'lang/*.js'),
-		included: true,
 		watched: false,
 	},
 	{
 		pattern: 'test/ui/test/plugins/test_*/plugin.js',
-		included: true,
 		watched: false,
 	},
 
@@ -75,33 +68,28 @@ const filesToLoad = [
 srcFiles.forEach(function(file) {
 	filesToLoad.push({
 		pattern: path.join('src/', file),
-		included: true,
 		watched: false,
 	});
 });
 
 filesToLoad.push({
 	pattern: 'test/core/test/*.js*',
-	included: true,
 	watched: false,
 });
 
 filesToLoad.push({
 	pattern: 'test/plugins/test/*.js*',
-	included: true,
 	watched: false,
 });
 
 filesToLoad.push({
 	pattern: 'test/ui/test/*.js*',
-	included: true,
 	watched: false,
 });
 
 filesToLoad.push({
-	pattern: 'src/__generated__/lang/en.js',
-	included: true,
-	watched: false,
+       pattern: 'src/__generated__/lang/en.js',
+        watched: false,
 });
 
 module.exports = {
