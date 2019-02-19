@@ -7,7 +7,6 @@ const preprocessors = {
 	'test/**/*.html': ['html2js'],
 	'src/**/*.js*': ['webpack'],
 	'test/**/*.js*': ['webpack'],
-	'scripts/test/globals.js': ['webpack'],
 };
 
 const DEBUG = argv.debug || argv.d;
