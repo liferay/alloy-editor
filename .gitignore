@@ -1,9 +1,11 @@
-node_modules
+.cache
 .font-cache
 .sass-cache
-*sublime*
-test-results.xml
-sauce_connect.log
-coverage
-jsconfig.json
 .vscode
+coverage
+gatsby
+jsconfig.json
+node_modules
+public
+sauce_connect.log
+test-results.xml
