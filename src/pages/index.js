@@ -15,7 +15,6 @@ class Index extends Component {
 
 	componentWillUnmount() {
 		this._wow = null;
-		this._alloyEditor = null;
 	}
 
 	render() {
