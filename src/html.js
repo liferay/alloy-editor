@@ -11,43 +11,24 @@ class HTML extends Component {
 						name="viewport"
 						content="width=device-width, initial-scale=1.0"
 					/>
-					<link
-						rel="shortcut icon"
-						type="image/png"
-						href="/favicons/favicon-32x32.png"
-						sizes="16x16 32x32"
-					/>
-					<link
-						rel="apple-touch-icon"
-						sizes="180x180"
-						href="/favicons/apple-touch-icon.png"
-					/>
-					<link
-						rel="icon"
-						type="image/png"
-						sizes="32x32"
-						href="/favicons/favicon-32x32.png"
-					/>
-					<link
-						rel="icon"
-						type="image/png"
-						sizes="16x16"
-						href="/favicons/favicon-16x16.png"
-					/>
-					<link
-						rel="mask-icon"
-						href="/favicons/safari-pinned-tab.svg"
-						color="#0b5fff"
-					/>
+					<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png" />
+					<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png" />
+					<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png" />
+					<link rel="manifest" href="favicons/site.webmanifest" />
+					<link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5" />
+					<link rel="shortcut icon" href="favicons/favicon.ico" />
 					<meta name="msapplication-TileColor" content="#ffffff" />
+					<meta name="msapplication-config" content="favicons/browserconfig.xml" />
 					<meta name="theme-color" content="#ffffff" />
 					{this.props.headComponents}
-
 					<link
 						rel="stylesheet"
 						href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
 					/>
-					<link href="/alloy-editor/assets/css/alloy-editor-ocean.css" />
+					<link
+						href="alloy-editor/assets/alloy-editor-ocean.css"
+						rel="stylesheet"
+					/>
 					<script>
 						var ALLOYEDITOR_BASEPATH = CKEDITOR_BASEPATH =
 						(/alloy-editor/).toString();

@@ -51,10 +51,6 @@ class Index extends Component {
 						content="AlloyEditor presentation"
 					/>
 
-					<link
-						href="alloy-editor/assets/alloy-editor-ocean.css"
-						rel="stylesheet"
-					/>
 				</Helmet>
 
 				<main className="content">
@@ -88,7 +84,7 @@ class Index extends Component {
 									</Link>
 
 									<a
-										href="https://github.com/liferay/alloy-editor"
+										href="https://www.npmjs.com/package/alloyeditor"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="btn btn-lg btn-outline-light text-uppercase mt-4 mt-lg-5 mx-3">
