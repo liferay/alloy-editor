@@ -69,6 +69,7 @@
     "prepublishOnly": "npm run checkFormat && npm run test",
     "start": "webpack-dev-server --config webpack.dev.js",
     "test": "karma start karma.js",
+    "test:debug": "karma start karma.js --debug",
     "testSaucelabs": "karma start karma-saucelabs.js"
   },
   "repository": {
