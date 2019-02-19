@@ -7,7 +7,7 @@ const preprocessors = {
 	'test/**/*.html': ['html2js'],
 	'src/**/*.js*': ['webpack'],
 	'test/**/*.js*': ['webpack'],
-	'scripts/test/loader-alloy-editor.js': ['webpack'],
+	'scripts/test/globals.js': ['webpack'],
 };
 
 const DEBUG = argv.debug || argv.d;
@@ -33,7 +33,6 @@ const filesToLoad = [
 	/* bender requires CKEDITOR, should be after ckeditor.js */
 	'scripts/test/bender.js',
 
-	'scripts/test/loader-alloy-editor.js',
 	'scripts/test/utils-alloy-editor.js',
 	'scripts/test/utils-ckeditor.js',
 
@@ -42,6 +41,7 @@ const filesToLoad = [
 	'test/ui/test/fixtures/**/*',
 
 	/* Source files */
+	'scripts/test/globals.js',
 	'src/adapter/main.js',
 	'src/core/debounce.js',
 	'src/core/link.js',
