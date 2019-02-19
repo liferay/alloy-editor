@@ -36,7 +36,7 @@ function globPatternToRegExp(pattern) {
 	return new RegExp('^' + pattern.replace(/\*/g, '[^/]*') + '$');
 }
 
-module.exports = function () {
+module.exports = function() {
 	var sources = [
 		'scripts/test/globals.js',
 		'src/adapter/main.js',
@@ -65,14 +65,14 @@ module.exports = function () {
 		'src/__generated__/lang/en.js',
 		'test/core/test/*.js*',
 		'test/plugins/test/*.js*',
-		'test/ui/test/*.js*'
+		'test/ui/test/*.js*',
 	];
 
 	var code = '';
 
 	sources.forEach(function(source) {
 		if (source.indexOf('*') === -1) {
-			code += "import '../" + source + "\';\n";
+			code += "import '../" + source + "';\n";
 		} else {
 			var regExp = globPatternToRegExp(source);
 			var directory = path.dirname(source);
@@ -81,7 +81,7 @@ module.exports = function () {
 			entries.forEach(function(entry) {
 				var name = path.join(directory, entry.toString());
 				if (regExp.test(name)) {
-					code += "import '../" + name + "\';\n";
+					code += "import '../" + name + "';\n";
 				}
 			});
 		}
