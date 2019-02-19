@@ -1,4 +1,4 @@
 {
-	"id": "gatsby",
-	"image": "wedeploy/hosting:2.0.1"
+	"id": "hosting",
+	"image": "wedeploy/hosting:0.0.1"
 }
