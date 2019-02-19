@@ -64,8 +64,8 @@ const filesToLoad = [
 	'scripts/test/bender.js',
 
 	'scripts/test/loader-alloy-editor.js',
-	'scripts/test/utils-ckeditor.js',
 	'scripts/test/utils-alloy-editor.js',
+	'scripts/test/utils-ckeditor.js',
 
 	/* Fixtures */
 	'test/core/test/fixtures/**/*',
