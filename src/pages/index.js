@@ -51,10 +51,6 @@ class Index extends Component {
 						content="AlloyEditor presentation"
 					/>
 
-					<link
-						href="alloy-editor/assets/alloy-editor-ocean.css"
-						rel="stylesheet"
-					/>
 				</Helmet>
 
 				<main className="content">

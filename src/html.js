@@ -25,7 +25,10 @@ class HTML extends Component {
 						rel="stylesheet"
 						href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
 					/>
-					<link href="/alloy-editor/assets/css/alloy-editor-ocean.css" />
+					<link
+						href="alloy-editor/assets/alloy-editor-ocean.css"
+						rel="stylesheet"
+					/>
 					<script>
 						var ALLOYEDITOR_BASEPATH = CKEDITOR_BASEPATH =
 						(/alloy-editor/).toString();
