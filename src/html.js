@@ -26,7 +26,7 @@ class HTML extends Component {
 						href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
 					/>
 					<link
-						href="alloy-editor/assets/alloy-editor-ocean.css"
+						href="/alloy-editor/assets/alloy-editor-ocean.css"
 						rel="stylesheet"
 					/>
 					<script>
