@@ -44,9 +44,11 @@ describe('Embed plugin', function() {
 		var tweetReturnHtml =
 			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-			success({html: tweetReturnHtml, provider_name: 'Twitter'});
-		});
+		sinon
+			.stub(CKEDITOR.tools, 'jsonp')
+			.callsFake(function(fn, data, success, fail) {
+				success({html: tweetReturnHtml, provider_name: 'Twitter'});
+			});
 
 		var nativeEditor = this.nativeEditor;
 
@@ -68,9 +70,11 @@ describe('Embed plugin', function() {
 		var tweetReturnHtml =
 			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-			success({html: tweetReturnHtml, provider_name: 'YouTube'});
-		});
+		sinon
+			.stub(CKEDITOR.tools, 'jsonp')
+			.callsFake(function(fn, data, success, fail) {
+				success({html: tweetReturnHtml, provider_name: 'YouTube'});
+			});
 
 		var nativeEditor = this.nativeEditor;
 
@@ -92,18 +96,20 @@ describe('Embed plugin', function() {
 		var tweetReturnHtml =
 			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-			success({
-				html: tweetReturnHtml,
-				provider_name: 'other_provider',
+		sinon
+			.stub(CKEDITOR.tools, 'jsonp')
+			.callsFake(function(fn, data, success, fail) {
+				success({
+					html: tweetReturnHtml,
+					provider_name: 'other_provider',
+				});
 			});
-		});
 
 		var nativeEditor = this.nativeEditor;
 
 		var isCalled = false;
 
-		sinon.stub(nativeEditor, 'insertHtml', function() {
+		sinon.stub(nativeEditor, 'insertHtml').callsFake(function() {
 			isCalled = true;
 			return;
 		});
@@ -120,15 +126,17 @@ describe('Embed plugin', function() {
 	it('should create a tag with url as href when url is pasted and there is a connection error', function() {
 		var url = 'https://foo.com';
 
-		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-			fail({});
-		});
+		sinon
+			.stub(CKEDITOR.tools, 'jsonp')
+			.callsFake(function(fn, data, success, fail) {
+				fail({});
+			});
 
 		var nativeEditor = this.nativeEditor;
 
 		var isCalled = false;
 
-		sinon.stub(nativeEditor, 'insertHtml', function() {
+		sinon.stub(nativeEditor, 'insertHtml').callsFake(function() {
 			isCalled = true;
 			return;
 		});
