@@ -55,7 +55,7 @@ module.exports = async ({actions, graphql}) => {
 
 	return graphql(`
 		query {
-			allMdx(sort: {order:ASC, fields: frontmatter___stepNumber}) {
+			allMdx(sort: {order:ASC, fields: frontmatter___title}) {
 				edges {
 					node {
 						fields {

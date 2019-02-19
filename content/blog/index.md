@@ -1,3 +1,0 @@
----
-mainPage: true
----
