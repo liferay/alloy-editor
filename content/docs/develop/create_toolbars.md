@@ -107,7 +107,7 @@ AlloyEditor.Toolbars[ToolbarVersions.key] = AlloyEditor.ToolbarVersions = Toolba
 
 ## Using a Toolbar
 
-<p>After creating your toolbar, you have to add it to the configuration of the editor where you want to use it.</p>
+After creating your toolbar, you have to add it to the configuration of the editor where you want to use it.
 
 ```javascript
 var toolbars = {
@@ -122,7 +122,7 @@ var toolbars = {
 }
 ```
 
-<p>In this example, <em>annotate</em>, <em>comment</em>, <em>acceptChanges</em> and <em>rejectChanges</em> will be the buttons that will be loaded on the toolbar, and that will help us handle document version changes. Read our <a href="/docs/develop/create/create_buttons.html">Create Buttons</a> Guide to know how to do this!</p>
+In this example, <em>annotate</em>, <em>comment</em>, <em>acceptChanges</em> and <em>rejectChanges</em> will be the buttons that will be loaded on the toolbar, and that will help us handle document version changes. Read our <a href="/docs/develop/create/create_buttons.html">Create Buttons</a> Guide to know how to do this!
 
 </article>
 

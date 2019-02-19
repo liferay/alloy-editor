@@ -11,7 +11,7 @@ order: 5
 
 ## Get ready to build AlloyEditor
 
-<p>Follow the instructions in our <a href="/docs/use/how_to_build_it.html">How to build it</a> guide to know how to change and build AlloyEditor.</p>
+Follow the instructions in our <a href="/docs/use/how_to_build_it.html">How to build it</a> guide to know how to change and build AlloyEditor.
 
 </article>
 
@@ -19,9 +19,9 @@ order: 5
 
 ## Create skin folders
 
-<p>Create a new directory under <code>src/ui/react/assets/icons/</code> with the name of your skin <small>(e.g <code>zebra</code>)</small>. This directory will contain all the required icons of your skin.</p>
+Create a new directory under <code>src/ui/react/assets/icons/</code> with the name of your skin <small>(e.g <code>zebra</code>)</small>. This directory will contain all the required icons of your skin.
 
-<p>Create a new directory under <code>src/ui/react/assets/sass/skin</code> with the name of your skin <small>(e.g <code>zebra</code>)</small>. This directory will contain the styling of the skin.</p>
+Create a new directory under <code>src/ui/react/assets/sass/skin</code> with the name of your skin <small>(e.g <code>zebra</code>)</small>. This directory will contain the styling of the skin.
 
 
 > Note: You can reuse our own <a href="/docs/use/skins.html">Skin Architecture</a> to simplify the process of creating your own skin!
@@ -32,9 +32,9 @@ order: 5
 
 ## Create your Skin
 
-<p>Place all the icons you need inside an <code>svg</code> folder in your skin's icon folder. These icons will be merged with the default ones, and the resulting set will be used to generate your skin icon font</p>
+Place all the icons you need inside an <code>svg</code> folder in your skin's icon folder. These icons will be merged with the default ones, and the resulting set will be used to generate your skin icon font
 
-<p>Create a file called <code>main.scss</code> inside your skin folder. This will be the entry point of your skin and should contain all the styling of your look and feel.</p>
+Create a file called <code>main.scss</code> inside your skin folder. This will be the entry point of your skin and should contain all the styling of your look and feel.
 
 </article>
 
@@ -60,6 +60,6 @@ gulp [build]
 <link href="alloy-editor/assets/alloy-editor-zebra-min.css" rel="stylesheet">
 ```
 
-<p>That is everything! Now AlloyEditor will appear with a new beautiful look and feel!</p>
+That is everything! Now AlloyEditor will appear with a new beautiful look and feel!
 
 </article>

@@ -56,7 +56,7 @@ AlloyEditor.Buttons[ButtonMarquee.key] = AlloyEditor.ButtonMarquee = ButtonMarqu
 
 ## Using a Button
 
-<p>After creating your button, you have to add it to the configuration of the Toolbar where you want to use it.</p>
+After creating your button, you have to add it to the configuration of the Toolbar where you want to use it.
 
 <span class="code-header">Buttons, which handle styles are usually used within the Styles Toolbar, inside a text-like selection</span>
 
