@@ -2,7 +2,6 @@
 
 const argv = require('yargs').argv;
 const path = require('path');
-const srcFiles = require('./test/ui/_src');
 const alloyEditorDir = 'dist/alloy-editor/';
 
 const preprocessors = {
@@ -42,16 +41,38 @@ const filesToLoad = [
 	/* Fixtures */
 	'test/core/test/fixtures/**/*',
 	'test/ui/test/fixtures/**/*',
+
+	/* Source files */
+	'src/adapter/main.js',
+	'src/core/debounce.js',
+	'src/core/link.js',
+	'src/core/plugins.js',
+	'src/core/selection-region.js',
+	'src/core/table.js',
+	'src/core/tools.js',
+	'src/core/uicore.js',
+	'src/plugins/*.js',
+	'src/components/uibridge/*.js*',
+	'src/oop/lang.js',
+	'src/oop/oop.js',
+	'src/oop/attribute.js',
+	'src/oop/base.js',
+	'src/selections/selection-arrowbox.js',
+	'src/selections/selection-position.js',
+	'src/selections/selection-test.js',
+	'src/selections/selections.js',
+	'src/adapter/core.js',
+	'src/components/base/*.js*',
+	'src/components/buttons/*.js*',
+	'src/components/toolbars/*.js*',
+	'src/components/main.js*',
+
+	/* Other */
+	'test/core/test/*.js*',
+	'test/plugins/test/*.js*',
+	'test/ui/test/*.js*',
+	'src/__generated__/lang/en.js',
 ];
-
-srcFiles.forEach(function(file) {
-	filesToLoad.push(path.join('src/', file));
-});
-
-filesToLoad.push('test/core/test/*.js*');
-filesToLoad.push('test/plugins/test/*.js*');
-filesToLoad.push('test/ui/test/*.js*');
-filesToLoad.push('src/__generated__/lang/en.js');
 
 module.exports = {
 	// base path that will be used to resolve all patterns (eg. files, exclude)
