@@ -20,38 +20,17 @@ if (!DEBUG) {
 
 const filesToLoad = [
 	/* AlloyEditor skins */
-	{
-		pattern: path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
-		watched: false,
-	},
+	path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
 
 	'test/vendor/happen.js',
 
 	/* CKEditor JS files */
-	{
-		pattern: path.join(alloyEditorDir, 'ckeditor.js'),
-		watched: false,
-	},
-	{
-		pattern: path.join(alloyEditorDir, 'styles.js'),
-		watched: false,
-	},
-	{
-		pattern: path.join(alloyEditorDir, 'config.js'),
-		watched: false,
-	},
-	{
-		pattern: path.join(alloyEditorDir, 'skins/moono/*.css'),
-		watched: false,
-	},
-	{
-		pattern: path.join(alloyEditorDir, 'lang/*.js'),
-		watched: false,
-	},
-	{
-		pattern: 'test/ui/test/plugins/test_*/plugin.js',
-		watched: false,
-	},
+	path.join(alloyEditorDir, 'ckeditor.js'),
+	path.join(alloyEditorDir, 'styles.js'),
+	path.join(alloyEditorDir, 'config.js'),
+	path.join(alloyEditorDir, 'skins/moono/*.css'),
+	path.join(alloyEditorDir, 'lang/*.js'),
+	'test/ui/test/plugins/test_*/plugin.js',
 
 	/* bender requires CKEDITOR, should be after ckeditor.js */
 	'scripts/test/bender.js',
@@ -66,31 +45,13 @@ const filesToLoad = [
 ];
 
 srcFiles.forEach(function(file) {
-	filesToLoad.push({
-		pattern: path.join('src/', file),
-		watched: false,
-	});
+	filesToLoad.push(path.join('src/', file));
 });
 
-filesToLoad.push({
-	pattern: 'test/core/test/*.js*',
-	watched: false,
-});
-
-filesToLoad.push({
-	pattern: 'test/plugins/test/*.js*',
-	watched: false,
-});
-
-filesToLoad.push({
-	pattern: 'test/ui/test/*.js*',
-	watched: false,
-});
-
-filesToLoad.push({
-       pattern: 'src/__generated__/lang/en.js',
-        watched: false,
-});
+filesToLoad.push('test/core/test/*.js*');
+filesToLoad.push('test/plugins/test/*.js*');
+filesToLoad.push('test/ui/test/*.js*');
+filesToLoad.push('src/__generated__/lang/en.js');
 
 module.exports = {
 	// base path that will be used to resolve all patterns (eg. files, exclude)
