@@ -1,7 +1,6 @@
 'use strict';
 
 const argv = require('yargs').argv;
-const path = require('path');
 const alloyEditorDir = 'dist/alloy-editor/';
 
 const preprocessors = {
@@ -14,21 +13,21 @@ const preprocessors = {
 const DEBUG = argv.debug || argv.d;
 
 if (!DEBUG) {
-	preprocessors[path.join(alloyEditorDir, 'src/**/*.js')] = ['coverage'];
+	preprocessors['dist/alloy-editor/src/**/*.js'] = ['coverage'];
 }
 
 const filesToLoad = [
 	/* AlloyEditor skins */
-	path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
+	'dist/alloy-editor/assets/alloy-editor-ocean.css',
 
 	'test/vendor/happen.js',
 
 	/* CKEditor JS files */
-	path.join(alloyEditorDir, 'ckeditor.js'),
-	path.join(alloyEditorDir, 'styles.js'),
-	path.join(alloyEditorDir, 'config.js'),
-	path.join(alloyEditorDir, 'skins/moono/*.css'),
-	path.join(alloyEditorDir, 'lang/*.js'),
+	'dist/alloy-editor/ckeditor.js',
+	'dist/alloy-editor/styles.js',
+	'dist/alloy-editor/config.js',
+	'dist/alloy-editor/skins/moono/*.css',
+	'dist/alloy-editor/lang/*.js',
 	'test/ui/test/plugins/test_*/plugin.js',
 
 	/* bender requires CKEDITOR, should be after ckeditor.js */
