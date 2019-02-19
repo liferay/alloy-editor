@@ -5,7 +5,7 @@ if (!window.Utils) {
 window.Utils.assertDropdownCommandButtonResult = (function() {
 	var assertResult = window.Utils.assertResult('test/ui/test/fixtures');
 
-	return function(config) {
+	return function assertDropdownCommandButtonResult(config) {
 		var TestUtils = ReactTestUtils;
 		var Simulate = TestUtils.Simulate;
 
@@ -52,7 +52,7 @@ window.Utils.assertDropdownCommandButtonResult = (function() {
 	};
 })();
 
-window.Utils.createAlloyEditor = function(done, config) {
+window.Utils.createAlloyEditor = function createAlloyEditor(done, config) {
 	var editable = document.createElement('div');
 
 	editable.setAttribute('id', 'editable');
@@ -99,7 +99,7 @@ window.Utils.createAlloyEditor = function(done, config) {
 	}.bind(this);
 };
 
-window.Utils.destroyAlloyEditor = function(done) {
+window.Utils.destroyAlloyEditor = function destroyAlloyEditor(done) {
 	if (this.editor) {
 		this.editor.destroy();
 	}
