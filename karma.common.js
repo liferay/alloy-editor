@@ -40,37 +40,8 @@ const filesToLoad = [
 	'test/core/test/fixtures/**/*',
 	'test/ui/test/fixtures/**/*',
 
-	/* Source files */
-	'scripts/test/globals.js',
-	'src/adapter/main.js',
-	'src/core/debounce.js',
-	'src/core/link.js',
-	'src/core/plugins.js',
-	'src/core/selection-region.js',
-	'src/core/table.js',
-	'src/core/tools.js',
-	'src/core/uicore.js',
-	'src/plugins/*.js',
-	'src/components/uibridge/*.js*',
-	'src/oop/lang.js',
-	'src/oop/oop.js',
-	'src/oop/attribute.js',
-	'src/oop/base.js',
-	'src/selections/selection-arrowbox.js',
-	'src/selections/selection-position.js',
-	'src/selections/selection-test.js',
-	'src/selections/selections.js',
-	'src/adapter/core.js',
-	'src/components/base/*.js*',
-	'src/components/buttons/*.js*',
-	'src/components/toolbars/*.js*',
-	'src/components/main.js*',
-
-	/* Other */
-	'test/core/test/*.js*',
-	'test/plugins/test/*.js*',
-	'test/ui/test/*.js*',
-	'src/__generated__/lang/en.js',
+	/* Main test bundle. */
+	'test/index.js',
 ];
 
 module.exports = {
@@ -108,6 +79,12 @@ module.exports = {
 					exclude: /(node_modules)/,
 					use: {
 						loader: 'babel-loader',
+					},
+				},
+				{
+					test: /test\/index\.js$/,
+					use: {
+						loader: 'val-loader',
 					},
 				},
 			],
