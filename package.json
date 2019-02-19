@@ -38,7 +38,7 @@
     "karma-sinon": "1.0.4",
     "karma-verbose-reporter": "0.0.6",
     "karma-webpack": "4.0.0-rc.6",
-    "mocha": "5.2.0",
+    "mocha": "6.0.0",
     "parallel-webpack": "2.3.0",
     "prettier": "1.15.3",
     "sinon": "1.15.4",
