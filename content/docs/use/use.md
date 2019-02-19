@@ -10,25 +10,25 @@ order: 1
 
 ## Download AlloyEditor
 
-<p>Option 1) Download AlloyEditor from <a>here</a>, then unzip it.</p>
+Option 1) Download AlloyEditor from <a>here</a>, then unzip it.
 
-<p>Option 2) Install AlloyEditor via Bower (<code>bower install alloyeditor</code>)</p>
+Option 2) Install AlloyEditor via Bower (<code>bower install alloyeditor</code>)
 
-<p>Option 3) Install AlloyEditor via NPM (<code>npm install alloyeditor</code>)</p>
+Option 3) Install AlloyEditor via NPM (<code>npm install alloyeditor</code>)
 </article>
 
 <article id="article2">
 
 ## Copy and Paste
 
-<p>If you downloaded the zip file:</p>
+If you downloaded the zip file:
 
 ```text/html
 <link href="alloy-editor/assets/alloy-editor-ocean-min.css" rel="stylesheet">
 <script src="alloy-editor/alloy-editor-all-min.js"></script>
 ```
 
-<p>If you downloaded it via Bower:</p>
+If you downloaded it via Bower:
 
 ```text/html
 <link href="bower_components/alloyeditor/dist/alloy-editor/assets/alloy-editor-ocean-min.css" rel="stylesheet">
@@ -47,6 +47,6 @@ order: 1
 AlloyEditor.editable('myContentEditable');
 ```
 
-<p class="guide-note">And that is everything you need to get started!</p>
+And that is everything you need to get started!
 
 </article>
