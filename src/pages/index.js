@@ -84,7 +84,7 @@ class Index extends Component {
 									</Link>
 
 									<a
-										href="https://github.com/liferay/alloy-editor"
+										href="https://www.npmjs.com/package/alloyeditor"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="btn btn-lg btn-outline-light text-uppercase mt-4 mt-lg-5 mx-3">
