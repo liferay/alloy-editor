@@ -3,7 +3,7 @@ var TestUtils = ReactTestUtils;
 var Simulate = TestUtils.Simulate;
 
 describe('ButtonBridge', function() {
-	before(function(done) {
+	beforeEach(function(done) {
 		Utils.createAlloyEditor.call(this, done, {
 			extraPlugins:
 				AlloyEditor.Core.ATTRS.extraPlugins.value +
@@ -11,11 +11,7 @@ describe('ButtonBridge', function() {
 		});
 	});
 
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should name buttons based on their input params', function() {
 		assert.property(

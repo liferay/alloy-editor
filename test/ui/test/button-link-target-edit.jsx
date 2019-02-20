@@ -5,13 +5,8 @@ var assert = chai.assert;
 var TestUtils = ReactTestUtils;
 
 describe('ButtonLinkTargetEdit', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should render ButtonLinkTargetEdit into ButtonLinkEdit by default', function() {
 		bender.tools.selection.setWithHtml(

@@ -5,13 +5,8 @@ var Simulate = ReactTestUtils.Simulate;
 var TestUtils = ReactTestUtils;
 
 describe('ButtonEmbed Component', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should render just the embed button when not in exclusive mode', function() {
 		var buttonEmbed = this.render(

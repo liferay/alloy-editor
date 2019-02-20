@@ -348,7 +348,7 @@ describe('AlloyEditor', function() {
 	});
 
 	describe('in IE browsers', function() {
-		beforeEach(function() {
+		before(function() {
 			doTestIE.call(this);
 		});
 

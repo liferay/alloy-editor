@@ -11,7 +11,7 @@ var placeholderClass = 'ae-placeholder';
 
 describe('Placeholder', function() {
 	describe('when CKEditor enterMode is CKEDITOR_ENTER_P (1)', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(
 				this,
 				done,
@@ -26,11 +26,7 @@ describe('Placeholder', function() {
 			);
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should assert the html value of the editor is the same as passed value on creating the instance', function() {
 			var html = this.nativeEditor
@@ -139,7 +135,7 @@ describe('Placeholder', function() {
 	});
 
 	describe('when CKEditor enterMode is CKEDITOR_ENTER_BR (2)', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(
 				this,
 				done,
@@ -154,11 +150,7 @@ describe('Placeholder', function() {
 			);
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should assert the html value of the editor is the same as passed value on creating the instance', function() {
 			var html = this.nativeEditor
@@ -276,7 +268,7 @@ describe('Placeholder', function() {
 	});
 
 	describe('when CKEditor enterMode is CKEDITOR_ENTER_DIV (3)', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(
 				this,
 				done,
@@ -291,11 +283,7 @@ describe('Placeholder', function() {
 			);
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should assert the html value of the editor is the same as passed value on creating the instance', function() {
 			var html = this.nativeEditor

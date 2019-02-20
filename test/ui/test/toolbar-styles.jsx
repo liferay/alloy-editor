@@ -4,35 +4,9 @@ var assert = chai.assert;
 var TestUtils = ReactTestUtils;
 
 describe('ToolbarStyles', function() {
-	var cleanUpEditor = function() {
-		if (this.alloyEditor) {
-			this.alloyEditor.destroy();
-			this.alloyEditor = null;
-		}
-
-		document.body.removeChild(this.el);
-		document.body.removeChild(this.container);
-	};
-
-	var initEditor = function(done, config) {
-		this.el = document.createElement('div');
-		this.el.setAttribute('id', 'editable');
-		document.body.appendChild(this.el);
-
-		this.container = document.createElement('div');
-		document.body.appendChild(this.container);
-
-		this.alloyEditor = AlloyEditor.editable('editable', config);
-		this.nativeEditor = this.alloyEditor.get('nativeEditor');
-
-		this.nativeEditor.once('instanceReady', function() {
-			done();
-		});
-	};
-
 	describe('with buttonCfg object', function() {
 		beforeEach(function(done) {
-			initEditor.call(this, done, {
+			Utils.createAlloyEditor.call(this, done, {
 				buttonCfg: {
 					bold: {
 						label: 'btn-bold',
@@ -46,9 +20,7 @@ describe('ToolbarStyles', function() {
 			});
 		});
 
-		afterEach(function() {
-			cleanUpEditor.call(this);
-		});
+		afterEach(Utils.destroyAlloyEditor);
 
 		it('should render buttons with properties from buttonCfg', function() {
 			var toolbarStyles = this.render(
@@ -77,13 +49,8 @@ describe('ToolbarStyles', function() {
 	});
 
 	describe('with default editor configuration', function() {
-		before(Utils.createAlloyEditor);
-
-		after(Utils.destroyAlloyEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		beforeEach(Utils.createAlloyEditor);
+		afterEach(Utils.destroyAlloyEditor);
 
 		it("should constrain the toolbar's position", function() {
 			var toolbarStyles = this.render(<ToolbarStyles />, this.container);

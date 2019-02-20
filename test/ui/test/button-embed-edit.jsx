@@ -13,18 +13,14 @@ var KEY_ESC = 27;
 var getFixture = Utils.getFixture('test/ui/test/fixtures');
 
 describe('ButtonEmbedEdit Component', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
+	beforeEach(Utils.createAlloyEditor);
 
 	afterEach(function(done) {
 		if (CKEDITOR.tools.jsonp.restore) {
 			CKEDITOR.tools.jsonp.restore();
 		}
 
-		Utils.afterEach.call(this, done);
+		Utils.destroyAlloyEditor.call(this, done);
 	});
 
 	it('should focus on the link input as soon as the component gets rendered', function(done) {

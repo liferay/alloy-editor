@@ -6,13 +6,8 @@ var Simulate = ReactTestUtils.Simulate;
 var KEY_B = 66;
 
 describe('ButtonBold', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should make a text selection bold on click', function() {
 		bender.tools.selection.setWithHtml(

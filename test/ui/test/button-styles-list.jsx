@@ -5,13 +5,8 @@ var assert = chai.assert;
 var TestUtils = ReactTestUtils;
 
 describe('ButtonStylesList', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should render remove styles button by default', function() {
 		var styles = [

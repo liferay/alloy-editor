@@ -11,13 +11,8 @@ var selectTable = function() {
 };
 
 describe('ButtonTableHeading', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should render just the menu button when not expanded', function() {
 		var buttonTableHeading = this.render(

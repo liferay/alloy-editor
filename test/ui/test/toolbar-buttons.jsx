@@ -4,13 +4,8 @@ var assert = chai.assert;
 var TestUtils = ReactTestUtils;
 
 describe('ToolbarButtons', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it("should propagate user's configuration to a button", function() {
 		var tableAttrs = {

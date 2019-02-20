@@ -4,13 +4,9 @@ var assert = chai.assert;
 var Simulate = ReactTestUtils.Simulate;
 
 describe('ButtonImageAlignRight', function() {
-	before(Utils.createAlloyEditor);
+	beforeEach(Utils.createAlloyEditor);
 
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should apply styles for aligning an image on right', function() {
 		bender.tools.selection.setWithHtml(

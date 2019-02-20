@@ -36,22 +36,16 @@ describe('selectionPosition', function() {
 		};
 	};
 
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
 	beforeEach(function(done) {
-		Utils.beforeEach.call(this);
+		Utils.createAlloyEditor.call(this, done);
 
 		this.container.setAttribute(
 			'style',
 			'top: 0; left: 0; width: ' + TEST_TOOLBAR_WIDTH + 'px;'
 		);
-
-		done();
 	});
 
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyAlloyEditor);
 
 	describe('image', function() {
 		it('toolbar should show centered when the selection is in an image', function() {

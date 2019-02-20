@@ -5,13 +5,8 @@ var assert = chai.assert;
 var TestUtils = ReactTestUtils;
 
 describe('ButtonTableRow', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should render just the menu button when not expanded', function() {
 		var buttonTableRow = ReactDOM.render(

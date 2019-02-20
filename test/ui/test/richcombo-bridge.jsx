@@ -5,7 +5,7 @@ var TestUtils = ReactTestUtils;
 var Simulate = TestUtils.Simulate;
 
 describe('RichComboBridge', function() {
-	before(function(done) {
+	beforeEach(function(done) {
 		Utils.createAlloyEditor.call(this, done, {
 			extraPlugins:
 				AlloyEditor.Core.ATTRS.extraPlugins.value +
@@ -13,11 +13,7 @@ describe('RichComboBridge', function() {
 		});
 	});
 
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should create a rich combo and invoke its initialization methods', function() {
 		assert.property(

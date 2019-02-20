@@ -11,17 +11,13 @@ var KEY_SEMICOLON = 186;
 var KEY_SPACE = 32;
 
 describe('AutoLink', function() {
-	before(function(done) {
+	beforeEach(function(done) {
 		Utils.createCKEditor.call(this, done, {
 			extraPlugins: 'ae_autolink',
 		});
 	});
 
-	after(Utils.destroyCKEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyCKEditor);
 
 	it('should create a link when pressing SPACE', function() {
 		testLink.call(this, {

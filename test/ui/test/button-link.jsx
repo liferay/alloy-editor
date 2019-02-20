@@ -6,13 +6,8 @@ var Simulate = ReactTestUtils.Simulate;
 var KEY_L = 76;
 
 describe('ButtonLink', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should invoke requestExclusive when clicking on the button', function() {
 		var requestExclusiveListener = sinon.stub();

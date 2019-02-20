@@ -17,17 +17,13 @@ describe('imageScaleResize on IE', function() {
 	});
 
 	describe('with the default value "both"', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize_ie',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have imageScaleResize value as default "both"', function() {
 			assert.strictEqual(
@@ -68,18 +64,14 @@ describe('imageScaleResize on IE', function() {
 	});
 
 	describe('with height value', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize_ie',
 				imageScaleResize: 'height',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have span to resize image with cursor ns-resize', function() {
 			bender.tools.selection.setWithHtml(
@@ -100,18 +92,14 @@ describe('imageScaleResize on IE', function() {
 	});
 
 	describe('with scale value', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize_ie',
 				imageScaleResize: 'scale',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have span to resize image with cursor nwse-resize', function() {
 			bender.tools.selection.setWithHtml(
@@ -132,18 +120,14 @@ describe('imageScaleResize on IE', function() {
 	});
 
 	describe('with width value', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize_ie',
 				imageScaleResize: 'width',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have span to resize image with cursor ew-resize', function() {
 			bender.tools.selection.setWithHtml(

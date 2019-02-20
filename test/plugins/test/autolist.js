@@ -7,18 +7,14 @@ var KEY_BACK = 8;
 var KEY_SPACE = 32;
 
 describe('Autolist', function() {
-	before(function(done) {
+	beforeEach(function(done) {
 		Utils.createCKEditor.call(this, done, {
 			extraPlugins: 'undo,ae_autolist,undo',
 			allowedContent: 'p ol ul li',
 		});
 	});
 
-	after(Utils.destroyCKEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyCKEditor);
 
 	it('should create an empty numbered list when pressing SPACE', function() {
 		testList.call(this, {

@@ -16,11 +16,7 @@ describe('ButtonLinkEditBrowse', () => {
 		});
 	});
 
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should invoke a callback', () => {
 		bender.tools.selection.setWithHtml(

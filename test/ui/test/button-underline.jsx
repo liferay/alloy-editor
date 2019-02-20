@@ -6,13 +6,8 @@ var Simulate = ReactTestUtils.Simulate;
 var KEY_U = 85;
 
 describe('ButtonUnderline', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should make a text selection underline on click', function() {
 		bender.tools.selection.setWithHtml(

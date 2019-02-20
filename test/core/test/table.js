@@ -4,13 +4,8 @@ var assertResult = Utils.assertResult('test/core/test/fixtures');
 var getFixture = Utils.getFixture('test/core/test/fixtures');
 
 describe('Table', function() {
-	before(Utils.createCKEditor);
-
-	after(Utils.destroyCKEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createCKEditor);
+	afterEach(Utils.destroyCKEditor);
 
 	it('should create a 1x1 table when no parameters are specified', function() {
 		var initialFixture = 'empty.html';

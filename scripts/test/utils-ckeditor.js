@@ -2,16 +2,6 @@ if (!window.Utils) {
 	window.Utils = {};
 }
 
-window.Utils.afterEach = function afterEach(done) {
-	Utils.removeContainer.call(this);
-
-	fixture.cleanup();
-
-	if (done) {
-		done();
-	}
-};
-
 window.Utils.assertResult = function assertResult(fixtureBase) {
 	var getFixture = Utils.getFixture(fixtureBase);
 
@@ -32,23 +22,17 @@ window.Utils.assertResult = function assertResult(fixtureBase) {
 	};
 };
 
-window.Utils.beforeEach = function beforeEach(done) {
-	Utils.createContainer.call(this);
-
-	// CKEDITOR in Firefox needs to have cursor and at least an empty string
-	// before doing anything ;)
-	bender.tools.selection.setWithHtml(this.nativeEditor, ' {}');
-
-	if (done) {
-		done();
-	}
-};
-
 window.Utils.createCKEditor = function createCKEditor(
 	done,
 	config,
 	attributes
 ) {
+	assert.ok(done);
+	assert.ok(bender);
+	assert.ok(CKEDITOR);
+
+	Utils.createContainer.call(this);
+
 	var editable = document.createElement('div');
 
 	editable.setAttribute('id', 'editable');
@@ -75,15 +59,16 @@ window.Utils.createCKEditor = function createCKEditor(
 
 	this._editable = editable;
 
-	assert.ok(bender);
-	assert.ok(CKEDITOR);
-
 	this.nativeEditor = CKEDITOR.inline('editable', config);
 
 	this.nativeEditor.on(
 		'instanceReady',
 		function() {
 			this.nativeEditor.focus();
+
+			// CKEDITOR in Firefox needs to have cursor and at least an
+			// empty string before doing anything ;)
+			bender.tools.selection.setWithHtml(this.nativeEditor, ' {}');
 
 			done();
 		}.bind(this)
@@ -99,9 +84,13 @@ window.Utils.createContainer = function createContainer() {
 window.Utils.destroyCKEditor = function destroyCKEditor(done) {
 	if (this.nativeEditor) {
 		this.nativeEditor.destroy();
+		this.nativeEditor = null;
 	}
 
 	this._editable.parentNode.removeChild(this._editable);
+	this._editable = null;
+	Utils.removeContainer.call(this);
+	fixture.cleanup();
 
 	if (done) {
 		done();
@@ -127,6 +116,7 @@ window.Utils.getFixture = function getFixture(fixtureBase) {
 
 window.Utils.removeContainer = function removeContainer() {
 	this.container.parentNode.removeChild(this.container);
+	this.container = null;
 };
 
 window.Utils._prepareFixtureForAssertion = function _prepareFixtureForAssertion(

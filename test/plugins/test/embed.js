@@ -1,24 +1,24 @@
 var assert = chai.assert;
 
 describe('Embed plugin', function() {
-	before(function(done) {
+	beforeEach(function(done) {
 		Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_embed'});
 	});
 
-	after(Utils.destroyCKEditor);
-
-	beforeEach(Utils.beforeEach);
-
 	afterEach(function(done) {
-		if (CKEDITOR.tools.jsonp.restore) {
-			CKEDITOR.tools.jsonp.restore();
-		}
+		try {
+			if (CKEDITOR.tools.jsonp.restore) {
+				CKEDITOR.tools.jsonp.restore();
+			}
 
-		if (this.nativeEditor.insertHtml.restore) {
-			this.nativeEditor.insertHtml.restore();
+			if (this.nativeEditor.insertHtml.restore) {
+				this.nativeEditor.insertHtml.restore();
+			}
+		} catch (error) {
+			console.error(error);
+		} finally {
+			Utils.destroyCKEditor.call(this, done);
 		}
-
-		Utils.afterEach.call(this, done);
 	});
 
 	it('should not convert links inside content', function() {

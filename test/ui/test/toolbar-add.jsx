@@ -15,15 +15,11 @@ describe('ToolbarAdd', function() {
 			},
 		};
 
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createAlloyEditor.call(this, done, editorConfig);
 		});
 
-		after(Utils.destroyAlloyEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyAlloyEditor);
 
 		it('should not render when user interacts with a non-editable node', function() {
 			var editorEvent = {
@@ -172,15 +168,11 @@ describe('ToolbarAdd', function() {
 			},
 		};
 
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createAlloyEditor.call(this, done, editorConfig);
 		});
 
-		after(Utils.destroyAlloyEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyAlloyEditor);
 
 		it('should render the toolbar on right', function() {
 			// Test passes on IE11 and Windows 7 locally, fails when executed by

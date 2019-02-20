@@ -53,6 +53,13 @@ window.Utils.assertDropdownCommandButtonResult = function assertDropdownCommandB
 };
 
 window.Utils.createAlloyEditor = function createAlloyEditor(done, config) {
+	assert.ok(done);
+	assert.ok(bender);
+	assert.ok(CKEDITOR);
+	assert.ok(AlloyEditor);
+
+	window.Utils.createContainer.call(this);
+
 	var editable = document.createElement('div');
 
 	editable.setAttribute('id', 'editable');
@@ -61,10 +68,6 @@ window.Utils.createAlloyEditor = function createAlloyEditor(done, config) {
 	document.getElementsByTagName('body')[0].appendChild(editable);
 
 	this._editable = editable;
-
-	assert.ok(bender);
-	assert.ok(CKEDITOR);
-	assert.ok(AlloyEditor);
 
 	config = CKEDITOR.tools.merge(
 		{
@@ -81,6 +84,10 @@ window.Utils.createAlloyEditor = function createAlloyEditor(done, config) {
 		'instanceReady',
 		function() {
 			window.Utils.focusEditor(this.nativeEditor);
+
+			// CKEDITOR in Firefox needs to have cursor and at least an
+			// empty string before doing anything ;)
+			bender.tools.selection.setWithHtml(this.nativeEditor, ' {}');
 
 			done();
 		}.bind(this)
@@ -102,9 +109,13 @@ window.Utils.createAlloyEditor = function createAlloyEditor(done, config) {
 window.Utils.destroyAlloyEditor = function destroyAlloyEditor(done) {
 	if (this.editor) {
 		this.editor.destroy();
+		this.editor = null;
 	}
 
 	this._editable.parentNode.removeChild(this._editable);
+	this._editable = null;
+	Utils.removeContainer.call(this);
+	fixture.cleanup();
 
 	if (done) {
 		done();

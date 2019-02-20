@@ -4,13 +4,7 @@ var assert = chai.assert;
 var WidgetPositionComponent = new WidgetPosition();
 
 describe('widget interaction point', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
 	beforeEach(function(done) {
-		Utils.beforeEach.call(this);
-
 		this.objProps = {
 			_getXPoint: WidgetPositionComponent._getXPoint,
 			_getYPoint: WidgetPositionComponent._getYPoint,
@@ -46,10 +40,10 @@ describe('widget interaction point', function() {
 			},
 		};
 
-		done();
+		Utils.createAlloyEditor.call(this, done);
 	});
 
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyAlloyEditor);
 
 	describe('When selection is done by mouse', function() {
 		it("Should return undefined when toolbar doesn't have editorEvent prop", function() {
