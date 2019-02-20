@@ -16,7 +16,7 @@ const headerImage = {
 
 const ErrorPage = () => (
 	<>
-		<div className="404">
+		<div className="page-404">
 			<Helmet>
 				<title>{pageTitle}</title>
 
@@ -40,7 +40,7 @@ const ErrorPage = () => (
 
 			<main className="content">
 				<header
-					className="header position-relative bg-primary text-white min-vh-100"
+					className="header position-relative bg-primary text-white vh-100 d-flex flex-column justify-content-center"
 					style={headerImage}>
 					<LayoutNav />
 
