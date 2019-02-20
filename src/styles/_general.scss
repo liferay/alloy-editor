@@ -22,6 +22,12 @@
 	min-height: 100vh;
 }
 
+.min-vh-lg-100 {
+	@include media-breakpoint-up(lg) {
+		min-height: 100vh;
+	}
+}
+
 // Element classes
 .btn-primary {
 	color: white;
