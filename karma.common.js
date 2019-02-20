@@ -7,12 +7,15 @@ const alloyEditorDir = 'dist/alloy-editor/';
 
 const preprocessors = {
 	'test/**/*.html': ['html2js'],
-	'+(test|src)/**/*.js*': ['webpack'],
+	'src/**/*.js*': ['webpack'],
+	'test/**/*.js*': ['webpack'],
 	'scripts/test/loader-alloy-editor.js': ['webpack'],
 };
 
-if (!(argv.debug || argv.d)) {
-	preprocessors[path.join(alloyEditorDir, 'test/**/*.js')] = ['coverage'];
+const DEBUG = argv.debug || argv.d;
+
+if (!DEBUG) {
+	preprocessors[path.join(alloyEditorDir, 'src/**/*.js')] = ['coverage'];
 }
 
 const filesToLoad = [
@@ -155,10 +158,10 @@ module.exports = {
 
 	// level of logging
 	// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-	logLevel: 'info',
+	logLevel: DEBUG ? 'debug' : 'info',
 
 	// enable / disable watching file and executing tests whenever any file changes
 	autoWatch: false,
 
-	singleRun: true,
+	singleRun: !DEBUG,
 };
