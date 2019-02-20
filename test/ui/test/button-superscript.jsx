@@ -18,8 +18,8 @@ describe('ButtonSuperscript', function() {
 			'There should be a {selection} made superscript.'
 		);
 
-		var buttonSuperscript = ReactDOM.render(
-			<ButtonSuperscript editor={this.editor} />,
+		var buttonSuperscript = this.render(
+			<ButtonSuperscript />,
 			this.container
 		);
 
@@ -42,8 +42,8 @@ describe('ButtonSuperscript', function() {
 			'A <sup>{selection}</sup> made superscript.'
 		);
 
-		var buttonSuperscript = ReactDOM.render(
-			<ButtonSuperscript editor={this.editor} />,
+		var buttonSuperscript = this.render(
+			<ButtonSuperscript />,
 			this.container
 		);
 

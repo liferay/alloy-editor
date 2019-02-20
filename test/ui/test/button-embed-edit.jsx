@@ -40,8 +40,8 @@ describe('ButtonEmbedEdit Component', function() {
 			callback();
 		});
 
-		var buttonEmbedEdit = ReactDOM.render(
-			<ButtonEmbedEdit editor={this.editor} renderExclusive={true} />,
+		var buttonEmbedEdit = this.render(
+			<ButtonEmbedEdit renderExclusive={true} />,
 			this.container
 		);
 
@@ -64,8 +64,8 @@ describe('ButtonEmbedEdit Component', function() {
 
 		window.requestAnimationFrame = null;
 
-		var buttonEmbedEdit = ReactDOM.render(
-			<ButtonEmbedEdit editor={this.editor} renderExclusive={true} />,
+		var buttonEmbedEdit = this.render(
+			<ButtonEmbedEdit renderExclusive={true} />,
 			this.container
 		);
 
@@ -88,10 +88,7 @@ describe('ButtonEmbedEdit Component', function() {
 			.getSelection()
 			.selectElement(this.nativeEditor.element.findOne('#embedfoo'));
 
-		var buttonEmbedEdit = ReactDOM.render(
-			<ButtonEmbedEdit editor={this.editor} />,
-			this.container
-		);
+		var buttonEmbedEdit = this.render(<ButtonEmbedEdit />, this.container);
 
 		assert.strictEqual(
 			buttonEmbedEdit.linkInput.current.value,
@@ -109,10 +106,7 @@ describe('ButtonEmbedEdit Component', function() {
 			.getSelection()
 			.selectElement(this.nativeEditor.element.findOne('#embedfoo'));
 
-		var buttonEmbedEdit = ReactDOM.render(
-			<ButtonEmbedEdit editor={this.editor} />,
-			this.container
-		);
+		var buttonEmbedEdit = this.render(<ButtonEmbedEdit />, this.container);
 
 		var buttonRemove = TestUtils.findRenderedDOMComponentWithClass(
 			buttonEmbedEdit,
@@ -141,10 +135,7 @@ describe('ButtonEmbedEdit Component', function() {
 			.getSelection()
 			.selectElement(this.nativeEditor.element.findOne('#embedfoo'));
 
-		buttonEmbedEdit = ReactDOM.render(
-			<ButtonEmbedEdit editor={this.editor} />,
-			this.container
-		);
+		buttonEmbedEdit = this.render(<ButtonEmbedEdit />, this.container);
 
 		assert.strictEqual(
 			buttonEmbedEdit.linkInput.current.value,
@@ -155,10 +146,7 @@ describe('ButtonEmbedEdit Component', function() {
 			.getSelection()
 			.selectElement(this.nativeEditor.element.findOne('#embedbar'));
 
-		buttonEmbedEdit = ReactDOM.render(
-			<ButtonEmbedEdit editor={this.editor} />,
-			this.container
-		);
+		buttonEmbedEdit = this.render(<ButtonEmbedEdit />, this.container);
 
 		assert.strictEqual(
 			buttonEmbedEdit.linkInput.current.value,
@@ -167,10 +155,7 @@ describe('ButtonEmbedEdit Component', function() {
 	});
 
 	it('should not allow to update the embed link if the link input is empty', function() {
-		var buttonEmbedEdit = ReactDOM.render(
-			<ButtonEmbedEdit editor={this.editor} />,
-			this.container
-		);
+		var buttonEmbedEdit = this.render(<ButtonEmbedEdit />, this.container);
 
 		var buttonOk = TestUtils.findRenderedDOMComponentWithClass(
 			buttonEmbedEdit,
@@ -183,10 +168,9 @@ describe('ButtonEmbedEdit Component', function() {
 	it('should clear the link input when the remove button inside the link input is clicked', function() {
 		var cancelExclusive = sinon.stub();
 
-		var buttonEmbedEdit = ReactDOM.render(
+		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit
 				cancelExclusive={cancelExclusive}
-				editor={this.editor}
 				renderExclusive={true}
 			/>,
 			this.container
@@ -217,10 +201,9 @@ describe('ButtonEmbedEdit Component', function() {
 			});
 		});
 
-		var buttonEmbedEdit = ReactDOM.render(
+		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit
 				cancelExclusive={sinon.stub()}
-				editor={this.editor}
 				renderExclusive={true}
 			/>,
 			this.container
@@ -258,10 +241,9 @@ describe('ButtonEmbedEdit Component', function() {
 			});
 		});
 
-		var buttonEmbedEdit = ReactDOM.render(
+		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit
 				cancelExclusive={sinon.stub()}
-				editor={this.editor}
 				renderExclusive={true}
 			/>,
 			this.container
@@ -294,12 +276,8 @@ describe('ButtonEmbedEdit Component', function() {
 	it('should close the toolbar when KEY_ESC is pressed inside the link input', function() {
 		var spy = sinon.spy();
 
-		var buttonEmbedEdit = ReactDOM.render(
-			<ButtonEmbedEdit
-				cancelExclusive={spy}
-				editor={this.editor}
-				renderExclusive={true}
-			/>,
+		var buttonEmbedEdit = this.render(
+			<ButtonEmbedEdit cancelExclusive={spy} renderExclusive={true} />,
 			this.container
 		);
 

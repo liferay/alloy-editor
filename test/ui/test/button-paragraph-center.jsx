@@ -18,8 +18,8 @@ describe('ButtonParagraphCenter', function() {
 			'{There should be a paragraph centered.}'
 		);
 
-		var buttonParagraphCenter = ReactDOM.render(
-			<ButtonParagraphCenter editor={this.editor} />,
+		var buttonParagraphCenter = this.render(
+			<ButtonParagraphCenter />,
 			this.container
 		);
 
@@ -42,8 +42,8 @@ describe('ButtonParagraphCenter', function() {
 			'<h1 style="color: red;">{There should be a paragraph centered.}</h1>'
 		);
 
-		var buttonParagraphCenter = ReactDOM.render(
-			<ButtonParagraphCenter editor={this.editor} />,
+		var buttonParagraphCenter = this.render(
+			<ButtonParagraphCenter />,
 			this.container
 		);
 
@@ -66,8 +66,8 @@ describe('ButtonParagraphCenter', function() {
 			'<p style="text-align: center;">{A paragraph centered.}</p>'
 		);
 
-		var buttonParagraphCenter = ReactDOM.render(
-			<ButtonParagraphCenter editor={this.editor} />,
+		var buttonParagraphCenter = this.render(
+			<ButtonParagraphCenter />,
 			this.container
 		);
 

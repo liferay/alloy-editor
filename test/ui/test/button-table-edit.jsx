@@ -19,11 +19,8 @@ describe('ButtonTableEdit', function() {
 	afterEach(Utils.afterEach);
 
 	it('should create a 3x3 table by default when clicking on the confirm button', function() {
-		var buttonTableEdit = ReactDOM.render(
-			<ButtonTableEdit
-				cancelExclusive={sinon.stub()}
-				editor={this.editor}
-			/>,
+		var buttonTableEdit = this.render(
+			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
 			this.container
 		);
 
@@ -45,11 +42,8 @@ describe('ButtonTableEdit', function() {
 	});
 
 	it('should create a 6 x 4 table based on the rows and cols inputs when clicking on the confirm button', function() {
-		var buttonTableEdit = ReactDOM.render(
-			<ButtonTableEdit
-				cancelExclusive={sinon.stub()}
-				editor={this.editor}
-			/>,
+		var buttonTableEdit = this.render(
+			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
 			this.container
 		);
 
@@ -78,11 +72,8 @@ describe('ButtonTableEdit', function() {
 	});
 
 	it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the rows input', function() {
-		var buttonTableEdit = ReactDOM.render(
-			<ButtonTableEdit
-				cancelExclusive={sinon.stub()}
-				editor={this.editor}
-			/>,
+		var buttonTableEdit = this.render(
+			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
 			this.container
 		);
 
@@ -108,11 +99,8 @@ describe('ButtonTableEdit', function() {
 	});
 
 	it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the cols input', function() {
-		var buttonTableEdit = ReactDOM.render(
-			<ButtonTableEdit
-				cancelExclusive={sinon.stub()}
-				editor={this.editor}
-			/>,
+		var buttonTableEdit = this.render(
+			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
 			this.container
 		);
 
@@ -140,11 +128,8 @@ describe('ButtonTableEdit', function() {
 	it('should not create a table and dismiss the ui when pressing escape on the rows input', function() {
 		var cancelExclusive = sinon.stub();
 
-		var buttonTableEdit = ReactDOM.render(
-			<ButtonTableEdit
-				cancelExclusive={cancelExclusive}
-				editor={this.editor}
-			/>,
+		var buttonTableEdit = this.render(
+			<ButtonTableEdit cancelExclusive={cancelExclusive} />,
 			this.container
 		);
 
@@ -167,11 +152,8 @@ describe('ButtonTableEdit', function() {
 	it('should not create a table and dismiss the ui when pressing escape on the cols input', function() {
 		var cancelExclusive = sinon.stub();
 
-		var buttonTableEdit = ReactDOM.render(
-			<ButtonTableEdit
-				cancelExclusive={cancelExclusive}
-				editor={this.editor}
-			/>,
+		var buttonTableEdit = this.render(
+			<ButtonTableEdit cancelExclusive={cancelExclusive} />,
 			this.container
 		);
 

@@ -38,12 +38,8 @@ describe('ButtonTableRow', function() {
 	});
 
 	it('should show a dropdown with the action buttons when expanded', function() {
-		var buttonTableRow = ReactDOM.render(
-			<ButtonTableRow
-				toggleDropdown={sinon.stub()}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonTableRow = this.render(
+			<ButtonTableRow toggleDropdown={sinon.stub()} expanded={true} />,
 			this.container
 		);
 
@@ -70,12 +66,8 @@ describe('ButtonTableRow', function() {
 	it('should insert a row before the current one when clicking on the rowInsertBefore button', function() {
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '4_by_3_table_second_row_empty.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableRow
-				toggleDropdown={sinon.stub()}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableRow toggleDropdown={sinon.stub()} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'rowInsertBefore';
@@ -92,12 +84,8 @@ describe('ButtonTableRow', function() {
 	it('should insert a row after the current one when clicking on the rowInsertAfter button', function() {
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '4_by_3_table_third_row_empty.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableRow
-				toggleDropdown={sinon.stub()}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableRow toggleDropdown={sinon.stub()} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'rowInsertAfter';
@@ -114,12 +102,8 @@ describe('ButtonTableRow', function() {
 	it('should delete the current row when clicking on the rowDelete button', function() {
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '2_by_3_table.html';
-		var buttonDropdown = ReactDOM.render(
-			<ButtonTableRow
-				toggleDropdown={sinon.stub()}
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonDropdown = this.render(
+			<ButtonTableRow toggleDropdown={sinon.stub()} expanded={true} />,
 			this.container
 		);
 		var buttonCommand = 'rowDelete';

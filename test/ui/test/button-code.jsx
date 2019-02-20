@@ -18,10 +18,7 @@ describe('ButtonCode', function() {
 			'There should be a {selection} made code.'
 		);
 
-		var buttonCode = ReactDOM.render(
-			<ButtonCode editor={this.editor} />,
-			this.container
-		);
+		var buttonCode = this.render(<ButtonCode />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonCode));
 
@@ -42,10 +39,7 @@ describe('ButtonCode', function() {
 			'<pre>A {selection} made code.</pre>'
 		);
 
-		var buttonCode = ReactDOM.render(
-			<ButtonCode editor={this.editor} />,
-			this.container
-		);
+		var buttonCode = this.render(<ButtonCode />, this.container);
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonCode);
 

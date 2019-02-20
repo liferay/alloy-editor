@@ -1,108 +1,47 @@
 'use strict';
 
 const argv = require('yargs').argv;
-const path = require('path');
-const srcFiles = require('./test/ui/_src');
 const alloyEditorDir = 'dist/alloy-editor/';
 
 const preprocessors = {
 	'test/**/*.html': ['html2js'],
 	'src/**/*.js*': ['webpack'],
 	'test/**/*.js*': ['webpack'],
-	'scripts/test/loader-alloy-editor.js': ['webpack'],
 };
 
 const DEBUG = argv.debug || argv.d;
 
 if (!DEBUG) {
-	preprocessors[path.join(alloyEditorDir, 'src/**/*.js')] = ['coverage'];
+	preprocessors['dist/alloy-editor/src/**/*.js'] = ['coverage'];
 }
 
 const filesToLoad = [
 	/* AlloyEditor skins */
-	{
-		pattern: path.join(alloyEditorDir, 'assets/alloy-editor-ocean.css'),
-		included: true,
-		watched: false,
-	},
+	'dist/alloy-editor/assets/alloy-editor-ocean.css',
 
 	'test/vendor/happen.js',
 
 	/* CKEditor JS files */
-	{
-		pattern: path.join(alloyEditorDir, 'ckeditor.js'),
-		included: true,
-		watched: false,
-	},
-	{
-		pattern: path.join(alloyEditorDir, 'styles.js'),
-		included: true,
-		watched: false,
-	},
-	{
-		pattern: path.join(alloyEditorDir, 'config.js'),
-		included: true,
-		watched: false,
-	},
-	{
-		pattern: path.join(alloyEditorDir, 'skins/moono/*.css'),
-		included: true,
-		watched: false,
-	},
-	{
-		pattern: path.join(alloyEditorDir, 'lang/*.js'),
-		included: true,
-		watched: false,
-	},
-	{
-		pattern: 'test/ui/test/plugins/test_*/plugin.js',
-		included: true,
-		watched: false,
-	},
+	'dist/alloy-editor/ckeditor.js',
+	'dist/alloy-editor/styles.js',
+	'dist/alloy-editor/config.js',
+	'dist/alloy-editor/skins/moono/*.css',
+	'dist/alloy-editor/lang/*.js',
+	'test/ui/test/plugins/test_*/plugin.js',
 
 	/* bender requires CKEDITOR, should be after ckeditor.js */
 	'scripts/test/bender.js',
 
-	'scripts/test/loader-alloy-editor.js',
-	'scripts/test/utils-ckeditor.js',
 	'scripts/test/utils-alloy-editor.js',
+	'scripts/test/utils-ckeditor.js',
 
 	/* Fixtures */
 	'test/core/test/fixtures/**/*',
 	'test/ui/test/fixtures/**/*',
+
+	/* Main test bundle. */
+	'test/index.js',
 ];
-
-srcFiles.forEach(function(file) {
-	filesToLoad.push({
-		pattern: path.join('src/', file),
-		included: true,
-		watched: false,
-	});
-});
-
-filesToLoad.push({
-	pattern: 'test/core/test/*.js*',
-	included: true,
-	watched: false,
-});
-
-filesToLoad.push({
-	pattern: 'test/plugins/test/*.js*',
-	included: true,
-	watched: false,
-});
-
-filesToLoad.push({
-	pattern: 'test/ui/test/*.js*',
-	included: true,
-	watched: false,
-});
-
-filesToLoad.push({
-	pattern: 'src/__generated__/lang/en.js',
-	included: true,
-	watched: false,
-});
 
 module.exports = {
 	// base path that will be used to resolve all patterns (eg. files, exclude)
@@ -139,6 +78,12 @@ module.exports = {
 					exclude: /(node_modules)/,
 					use: {
 						loader: 'babel-loader',
+					},
+				},
+				{
+					test: /test\/index\.js$/,
+					use: {
+						loader: 'val-loader',
 					},
 				},
 			],

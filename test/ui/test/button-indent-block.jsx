@@ -18,10 +18,7 @@ describe('ButtonIndent', function() {
 			'This text will be indented {selection}.'
 		);
 
-		var buttonIndent = ReactDOM.render(
-			<ButtonIndentBlock editor={this.editor} />,
-			this.container
-		);
+		var buttonIndent = this.render(<ButtonIndentBlock />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonIndent));
 
@@ -43,10 +40,7 @@ describe('ButtonIndent', function() {
 			'<p style="margin-left: 100px">This text will be indent {selection}.</p>'
 		);
 
-		var buttonIndent = ReactDOM.render(
-			<ButtonIndentBlock editor={this.editor} />,
-			this.container
-		);
+		var buttonIndent = this.render(<ButtonIndentBlock />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonIndent));
 
@@ -70,10 +64,7 @@ describe('ButtonIndent', function() {
 			'<p style="margin-left: 100em">This text will be indent {selection}.</p>'
 		);
 
-		var buttonIndent = ReactDOM.render(
-			<ButtonIndentBlock editor={this.editor} />,
-			this.container
-		);
+		var buttonIndent = this.render(<ButtonIndentBlock />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonIndent));
 

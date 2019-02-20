@@ -16,10 +16,9 @@ describe('ButtonTableColumn', function() {
 	it('should render just the menu button when not expanded', function() {
 		var toggleDropdown = sinon.stub();
 
-		var buttonTableCol = ReactDOM.render(
+		var buttonTableCol = this.render(
 			<ButtonTableColumn
 				toggleDropdown={toggleDropdown}
-				editor={this.editor}
 				expanded={false}
 			/>,
 			this.container
@@ -42,10 +41,9 @@ describe('ButtonTableColumn', function() {
 	it('should show a dropdown with the action buttons when expanded', function() {
 		var toggleDropdown = sinon.stub();
 
-		var buttonTableCol = ReactDOM.render(
+		var buttonTableCol = this.render(
 			<ButtonTableColumn
 				toggleDropdown={toggleDropdown}
-				editor={this.editor}
 				expanded={true}
 			/>,
 			this.container
@@ -75,10 +73,9 @@ describe('ButtonTableColumn', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_4_table_second_col_empty.html';
-		var buttonDropdown = ReactDOM.render(
+		var buttonDropdown = this.render(
 			<ButtonTableColumn
 				toggleDropdown={toggleDropdown}
-				editor={this.editor}
 				expanded={true}
 			/>,
 			this.container
@@ -98,10 +95,9 @@ describe('ButtonTableColumn', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_4_table_third_col_empty.html';
-		var buttonDropdown = ReactDOM.render(
+		var buttonDropdown = this.render(
 			<ButtonTableColumn
 				toggleDropdown={toggleDropdown}
-				editor={this.editor}
 				expanded={true}
 			/>,
 			this.container
@@ -121,10 +117,9 @@ describe('ButtonTableColumn', function() {
 		var toggleDropdown = sinon.stub();
 		var initialFixture = '3_by_3_table.html';
 		var expectedFixture = '3_by_2_table.html';
-		var buttonDropdown = ReactDOM.render(
+		var buttonDropdown = this.render(
 			<ButtonTableColumn
 				toggleDropdown={toggleDropdown}
-				editor={this.editor}
 				expanded={true}
 			/>,
 			this.container

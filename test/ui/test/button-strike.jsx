@@ -18,10 +18,7 @@ describe('ButtonStrike', function() {
 			'There should be a {selection} made strike.'
 		);
 
-		var buttonStrike = ReactDOM.render(
-			<ButtonStrike editor={this.editor} />,
-			this.container
-		);
+		var buttonStrike = this.render(<ButtonStrike />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonStrike));
 
@@ -42,10 +39,7 @@ describe('ButtonStrike', function() {
 			'A <s>{selection}</s> made strike.'
 		);
 
-		var buttonStrike = ReactDOM.render(
-			<ButtonStrike editor={this.editor} />,
-			this.container
-		);
+		var buttonStrike = this.render(<ButtonStrike />, this.container);
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonStrike);
 

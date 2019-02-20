@@ -18,8 +18,8 @@ describe('ButtonUnorderedlist', function() {
 			'<p>There should be a {selection made...</p><p>An unordered} list.</p>'
 		);
 
-		var buttonUnorderedlist = ReactDOM.render(
-			<ButtonUnorderedlist editor={this.editor} />,
+		var buttonUnorderedlist = this.render(
+			<ButtonUnorderedlist />,
 			this.container
 		);
 
@@ -42,8 +42,8 @@ describe('ButtonUnorderedlist', function() {
 			'<ul><li>A {selection made...</li><li>An unordered} list.</li></ul>'
 		);
 
-		var buttonUnorderedlist = ReactDOM.render(
-			<ButtonUnorderedlist editor={this.editor} />,
+		var buttonUnorderedlist = this.render(
+			<ButtonUnorderedlist />,
 			this.container
 		);
 

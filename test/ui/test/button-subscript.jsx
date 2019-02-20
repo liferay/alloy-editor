@@ -18,10 +18,7 @@ describe('ButtonSubscript', function() {
 			'There should be a {selection} made subscript.'
 		);
 
-		var buttonSubscript = ReactDOM.render(
-			<ButtonSubscript editor={this.editor} />,
-			this.container
-		);
+		var buttonSubscript = this.render(<ButtonSubscript />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonSubscript));
 
@@ -42,10 +39,7 @@ describe('ButtonSubscript', function() {
 			'A <sub>{selection}</sub> made subscript.'
 		);
 
-		var buttonSubscript = ReactDOM.render(
-			<ButtonSubscript editor={this.editor} />,
-			this.container
-		);
+		var buttonSubscript = this.render(<ButtonSubscript />, this.container);
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonSubscript);
 

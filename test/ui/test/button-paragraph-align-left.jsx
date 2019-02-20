@@ -18,8 +18,8 @@ describe('ButtonParagraphAlignLeft', function() {
 			'<p style="text-align:right">{There should be a paragraph aligned to the left.}</p>'
 		);
 
-		var buttonParagraphAlignLeft = ReactDOM.render(
-			<ButtonParagraphAlignLeft editor={this.editor} />,
+		var buttonParagraphAlignLeft = this.render(
+			<ButtonParagraphAlignLeft />,
 			this.container
 		);
 
@@ -42,8 +42,8 @@ describe('ButtonParagraphAlignLeft', function() {
 			'<h1 style="color: red;">{There should be a paragraph aligned to the left.}</h1>'
 		);
 
-		var buttonParagraphAlignLeft = ReactDOM.render(
-			<ButtonParagraphAlignLeft editor={this.editor} />,
+		var buttonParagraphAlignLeft = this.render(
+			<ButtonParagraphAlignLeft />,
 			this.container
 		);
 
@@ -66,8 +66,8 @@ describe('ButtonParagraphAlignLeft', function() {
 			'<p>{A paragraph aligned to the left.}</p>'
 		);
 
-		var buttonParagraphAlignLeft = ReactDOM.render(
-			<ButtonParagraphAlignLeft editor={this.editor} />,
+		var buttonParagraphAlignLeft = this.render(
+			<ButtonParagraphAlignLeft />,
 			this.container
 		);
 

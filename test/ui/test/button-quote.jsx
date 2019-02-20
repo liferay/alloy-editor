@@ -18,10 +18,7 @@ describe('ButtonQuote', function() {
 			'There should be a {selection} made quote.'
 		);
 
-		var buttonQuote = ReactDOM.render(
-			<ButtonQuote editor={this.editor} />,
-			this.container
-		);
+		var buttonQuote = this.render(<ButtonQuote />, this.container);
 
 		Simulate.click(ReactDOM.findDOMNode(buttonQuote));
 
@@ -42,10 +39,7 @@ describe('ButtonQuote', function() {
 			'<blockquote>A {selection} made quote.</blockquote>'
 		);
 
-		var buttonQuote = ReactDOM.render(
-			<ButtonQuote editor={this.editor} />,
-			this.container
-		);
+		var buttonQuote = this.render(<ButtonQuote />, this.container);
 
 		var buttonDOMNode = ReactDOM.findDOMNode(buttonQuote);
 

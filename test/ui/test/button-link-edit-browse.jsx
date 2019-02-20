@@ -28,8 +28,8 @@ describe('ButtonLinkEditBrowse', () => {
 			'<a href="http://alloyeditor.com" target="_blank">{Alloy Editor}</a>'
 		);
 
-		const buttonLinkEditBrowse = ReactDOM.render(
-			<ButtonLinkEditBrowse editor={this.editor} />,
+		const buttonLinkEditBrowse = this.render(
+			<ButtonLinkEditBrowse />,
 			this.container
 		);
 

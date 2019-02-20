@@ -14,10 +14,9 @@ describe('ButtonTableEdit', function() {
 	afterEach(Utils.afterEach);
 
 	it('should render just the table button when not in exclusive mode', function() {
-		var buttonTable = ReactDOM.render(
+		var buttonTable = this.render(
 			<ButtonTable
 				cancelExclusive={sinon.stub()}
-				editor={this.editor}
 				renderExclusive={false}
 			/>,
 			this.container
@@ -38,10 +37,9 @@ describe('ButtonTableEdit', function() {
 	});
 
 	it('should show the table edit button when in exclusive mode', function() {
-		var buttonTable = ReactDOM.render(
+		var buttonTable = this.render(
 			<ButtonTable
 				cancelExclusive={sinon.stub()}
-				editor={this.editor}
 				renderExclusive={true}
 			/>,
 			this.container

@@ -28,11 +28,8 @@ describe('PanelMenuButtonBridge', function() {
 	});
 
 	it('should render just the menu button when not expanded', function() {
-		var panelMenuButton = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonPanelMenuButton
-				editor={this.editor}
-				expanded={false}
-			/>,
+		var panelMenuButton = this.render(
+			<AlloyEditor.Buttons.ButtonPanelMenuButton expanded={false} />,
 			this.container
 		);
 
@@ -51,11 +48,8 @@ describe('PanelMenuButtonBridge', function() {
 	});
 
 	it.skip('should show a dropdown with the panel css class and panel contents when expanded', function() {
-		var panelMenuButton = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonPanelMenuButton
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var panelMenuButton = this.render(
+			<AlloyEditor.Buttons.ButtonPanelMenuButton expanded={true} />,
 			this.container
 		);
 

@@ -34,21 +34,15 @@ describe('RichComboBridge', function() {
 
 		this.nativeEditor.once('richComboRender', renderListener);
 
-		ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonRichCombo editor={this.editor} />,
-			this.container
-		);
+		this.render(<AlloyEditor.Buttons.ButtonRichCombo />, this.container);
 
 		assert.isTrue(initListener.calledOnce);
 		assert.isTrue(renderListener.calledOnce);
 	});
 
 	it('should render just the menu button when not expanded', function() {
-		var buttonRichCombo = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonRichCombo
-				editor={this.editor}
-				expanded={false}
-			/>,
+		var buttonRichCombo = this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={false} />,
 			this.container
 		);
 
@@ -67,11 +61,8 @@ describe('RichComboBridge', function() {
 	});
 
 	it.skip('should show a dropdown with the action buttons when expanded', function() {
-		var buttonRichCombo = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonRichCombo
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonRichCombo = this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
 			this.container
 		);
 
@@ -97,11 +88,8 @@ describe('RichComboBridge', function() {
 	});
 
 	it.skip('should show a dropdown with the action buttons when expanded', function() {
-		var buttonRichCombo = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonRichCombo
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonRichCombo = this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
 			this.container
 		);
 
@@ -135,11 +123,8 @@ describe('RichComboBridge', function() {
 
 		this.nativeEditor.once('richComboClick', clickListenerProxy);
 
-		var buttonRichCombo = ReactDOM.render(
-			<AlloyEditor.Buttons.ButtonRichCombo
-				editor={this.editor}
-				expanded={true}
-			/>,
+		var buttonRichCombo = this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
 			this.container
 		);
 

@@ -20,10 +20,9 @@ describe('ButtonTableHeading', function() {
 	afterEach(Utils.afterEach);
 
 	it('should render just the menu button when not expanded', function() {
-		var buttonTableHeading = ReactDOM.render(
+		var buttonTableHeading = this.render(
 			<ButtonTableHeading
 				toggleDropdown={sinon.stub()}
-				editor={this.editor}
 				expanded={false}
 			/>,
 			this.container
@@ -44,10 +43,9 @@ describe('ButtonTableHeading', function() {
 	});
 
 	it('should show a dropdown with the action buttons when expanded', function() {
-		var buttonTableHeading = ReactDOM.render(
+		var buttonTableHeading = this.render(
 			<ButtonTableHeading
 				toggleDropdown={sinon.stub()}
-				editor={this.editor}
 				expanded={true}
 			/>,
 			this.container
@@ -112,10 +110,9 @@ describe('ButtonTableHeading', function() {
 					' did not produce the expected result';
 				var initialFixture = headingFixtures[testData.initial];
 				var expectedFixture = headingFixtures[testData.expected];
-				var buttonDropdown = ReactDOM.render(
+				var buttonDropdown = this.render(
 					<ButtonTableHeading
 						toggleDropdown={sinon.stub()}
-						editor={this.editor}
 						expanded={true}
 					/>,
 					this.container

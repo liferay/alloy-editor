@@ -12,10 +12,7 @@ describe('ButtonImage', function() {
 	afterEach(Utils.afterEach);
 
 	it('should call a click listener of the file input', function() {
-		var buttonImage = ReactDOM.render(
-			<ButtonImage editor={this.editor} />,
-			this.container
-		);
+		var buttonImage = this.render(<ButtonImage />, this.container);
 
 		var fileInputStub = sinon.spy(function(event) {
 			event.preventDefault();
