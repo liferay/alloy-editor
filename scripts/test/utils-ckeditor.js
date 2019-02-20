@@ -65,11 +65,6 @@ window.Utils.createCKEditor = function createCKEditor(
 		'instanceReady',
 		function() {
 			this.nativeEditor.focus();
-
-			// CKEDITOR in Firefox needs to have cursor and at least an
-			// empty string before doing anything ;)
-			bender.tools.selection.setWithHtml(this.nativeEditor, ' {}');
-
 			done();
 		}.bind(this)
 	);

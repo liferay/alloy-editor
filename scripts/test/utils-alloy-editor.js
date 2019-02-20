@@ -84,11 +84,6 @@ window.Utils.createAlloyEditor = function createAlloyEditor(done, config) {
 		'instanceReady',
 		function() {
 			window.Utils.focusEditor(this.nativeEditor);
-
-			// CKEDITOR in Firefox needs to have cursor and at least an
-			// empty string before doing anything ;)
-			bender.tools.selection.setWithHtml(this.nativeEditor, ' {}');
-
 			done();
 		}.bind(this)
 	);
