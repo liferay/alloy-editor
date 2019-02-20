@@ -62,7 +62,16 @@ window.Utils.createCKEditor = function createCKEditor(
 		}
 	}
 
-	document.getElementsByTagName('body')[0].appendChild(editable);
+	const cruft = document.querySelectorAll('#editable');
+	if (cruft.length) {
+		console.warn('Pre-existing #editable element found in DOM!');
+		for (var i = 0; i < cruft.length; i++) {
+			cruft[i].parentNode.removeChild(cruft[i]);
+		}
+	}
+
+	var body = document.getElementsByTagName('body')[0];
+	body.appendChild(editable);
 
 	this._editable = editable;
 
