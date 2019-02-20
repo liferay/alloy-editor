@@ -357,8 +357,6 @@ describe('AlloyEditor', function() {
 		});
 
 		it('should use the ae_dragresize_ie plugin instead of ae_dragresize by default', function(done) {
-			doTestIE.call(this);
-
 			initEditor.call(
 				this,
 				function() {

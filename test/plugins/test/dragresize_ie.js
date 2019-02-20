@@ -26,8 +26,6 @@ describe('imageScaleResize on IE', function() {
 		afterEach(Utils.afterEach);
 
 		it('should have imageScaleResize value as default "both"', function() {
-			doTestIE.call(this);
-
 			assert.strictEqual(
 				this.nativeEditor.config.imageScaleResize,
 				'both'
@@ -35,8 +33,6 @@ describe('imageScaleResize on IE', function() {
 		});
 
 		it('should set data-widget to the image', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
@@ -50,8 +46,6 @@ describe('imageScaleResize on IE', function() {
 		});
 
 		it('should have span to resize image with cursor nwse-resize', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
@@ -84,8 +78,6 @@ describe('imageScaleResize on IE', function() {
 		afterEach(Utils.afterEach);
 
 		it('should have span to resize image with cursor ns-resize', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
@@ -118,8 +110,6 @@ describe('imageScaleResize on IE', function() {
 		afterEach(Utils.afterEach);
 
 		it('should have span to resize image with cursor nwse-resize', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
@@ -152,8 +142,6 @@ describe('imageScaleResize on IE', function() {
 		afterEach(Utils.afterEach);
 
 		it('should have span to resize image with cursor ew-resize', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
