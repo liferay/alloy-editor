@@ -93,12 +93,11 @@ window.Utils.createAlloyEditor = function createAlloyEditor(done, config) {
 		}.bind(this)
 	);
 
-	this.render = function(component, container, editor) {
-		editor = editor || this.editor;
+	this.render = function(component, container) {
 		return ReactDOM.render(
 			React.createElement(
 				EditorContext.Provider,
-				{value: {editor: editor}},
+				{value: {editor: this.editor}},
 				component
 			),
 			container

@@ -22,12 +22,8 @@ describe('ToolbarStyles', function() {
 
 		afterEach(Utils.destroyAlloyEditor);
 
-		it('should render buttons with properties from buttonCfg', function() {
-			var toolbarStyles = this.render(
-				<ToolbarStyles />,
-				this.container,
-				this.alloyEditor
-			);
+		it('renders buttons with properties from buttonCfg', function() {
+			var toolbarStyles = this.render(<ToolbarStyles />, this.container);
 
 			var buttons = toolbarStyles.getToolbarButtons(['bold', 'italic'], {
 				manualSelection: null,
@@ -52,7 +48,7 @@ describe('ToolbarStyles', function() {
 		beforeEach(Utils.createAlloyEditor);
 		afterEach(Utils.destroyAlloyEditor);
 
-		it("should constrain the toolbar's position", function() {
+		it("constrains the toolbar's position", function() {
 			var toolbarStyles = this.render(<ToolbarStyles />, this.container);
 
 			var res = toolbarStyles.getConstrainedPosition(
