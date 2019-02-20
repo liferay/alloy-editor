@@ -10,9 +10,7 @@ order: 6
 
 ## Default Configuration
 
-<p>
-    This is the default editor toolbars configuration
-</p>
+This is the default editor toolbars configuration
 
 ```javascript
 var toolbars = {
@@ -26,9 +24,8 @@ var toolbars = {
   }
 };
 ```
-<p>
-  where <code>AlloyEditor.Selections</code> is
-</p>
+
+where <code>AlloyEditor.Selections</code> is
 
 ```javascript
 var Selections = [{
@@ -52,13 +49,9 @@ var Selections = [{
 }];
 ```
 
-<p>
-  The configuration above represents two toolbars - for adding content (images, code, etc.) and modify content based on the current selection type. You may remove any of those and the toolbar won't be shown when user makes the corresponding selection.
-</p>
+The configuration above represents two toolbars - for adding content (images, code, etc.) and modify content based on the current selection type. You may remove any of those and the toolbar won't be shown when user makes the corresponding selection.
 
-<p>
-  To remove the toolbar for adding content, just <strong>remove</strong> the property <em>add</em>
-</p>
+To remove the toolbar for adding content, just <strong>remove</strong> the property <em>add</em>
 
 ```javascript
 var toolbars = {
@@ -75,13 +68,9 @@ var toolbars = {
 
 ## Configuring Buttons
 
-<p>
-  In the default UI, which uses React, some of the buttons accept configuration parameters so you can tailor them to suit your needs.
-</p>
+In the default UI, which uses React, some of the buttons accept configuration parameters so you can tailor them to suit your needs.
 
-<p>
-  Here is an example of a custom configuration for the <em>Styles</em> button inside a text selection
-</p>
+Here is an example of a custom configuration for the <em>Styles</em> button inside a text selection
 
 ```javascript
 var Selections = [{
@@ -98,9 +87,8 @@ var Selections = [{
   test: AlloyEditor.SelectionTest.text
 }];
 ```
-<p>
-  In this case a different array of styles is passed to the Styles button, so they will be shown when user selects a text instead of the default ones.
-</p>
+
+In this case a different array of styles is passed to the Styles button, so they will be shown when user selects a text instead of the default ones.
 
 </article>
 
@@ -108,9 +96,7 @@ var Selections = [{
 
 ## Reordering Buttons
 
-<p>
-  If you are not happy with the order of the buttons, you can just reorder them in the toolbar configuration. They will follow the order in which you specify them. For example, if you want the <em>table</em> button to appear before the <em>hline</em> button in the <em>Add</em> toolbar, you just need to do the following:
-</p>
+If you are not happy with the order of the buttons, you can just reorder them in the toolbar configuration. They will follow the order in which you specify them. For example, if you want the <em>table</em> button to appear before the <em>hline</em> button in the <em>Add</em> toolbar, you just need to do the following:
 
 ```javascript
 var toolbars = {
@@ -121,8 +107,6 @@ var toolbars = {
 };
 ```
 
-<p>
-  If you remove a button from the buttons property of a toolbar, or from the selections in Styles toolbar, then this button won't be available when the toolbar gets visible.
-</p>
+If you remove a button from the buttons property of a toolbar, or from the selections in Styles toolbar, then this button won't be available when the toolbar gets visible.
 
 </article>

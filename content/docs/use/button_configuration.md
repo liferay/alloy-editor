@@ -10,9 +10,7 @@ order: 7
 
 ## Passing configuration options to the buttons
 
-<p>
-	The buttons are configured via a common <strong>buttonCfg</strong> property, like this:
-</p>
+The buttons are configured via a common <strong>buttonCfg</strong> property, like this:
 
 ```javascript
 var editor = AlloyEditor.editable('editable', {
@@ -24,14 +22,6 @@ var editor = AlloyEditor.editable('editable', {
 });
 ```
 
-<p>
-	The <code>buttonCfg</code> is the property which contains the configurations for the different buttons. In this example, <code>bold</code> is the name of the button, which has to be configured and <code>tabIndex</code> is the property with the new value of 1 (by default 0). Each button has a static property <strong>key</strong> which value is the button name as should be passed to the configuration.
-</p>
+The <code>buttonCfg</code> is the property which contains the configurations for the different buttons. In this example, <code>bold</code> is the name of the button, which has to be configured and <code>tabIndex</code> is the property with the new value of 1 (by default 0). Each button has a static property <strong>key</strong> which value is the button name as should be passed to the configuration.
 
 </article>
-
-
-
-
-
-

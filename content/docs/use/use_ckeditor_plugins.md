@@ -21,9 +21,8 @@ you can paste it into <strong>plugins folder</strong>
 <article id="article2">
 
 ## Configuration AlloyEditor
-<p>
-  Our UI bridges allow us to use CKEDITOR plugin easier, you only need to add appropriates plugins to extraPlugins configuration and to retrieve its buttons using <strong>AlloyEditor.getButtons(['PLUGIN_NAME', MORE_BUTTONS])</strong>
-</p>
+
+Our UI bridges allow us to use CKEDITOR plugin easier, you only need to add appropriates plugins to extraPlugins configuration and to retrieve its buttons using <strong>AlloyEditor.getButtons(['PLUGIN_NAME', MORE_BUTTONS])</strong>
 
 ```javascript
   AlloyEditor.editable('MyEditable', {
@@ -47,17 +46,13 @@ you can paste it into <strong>plugins folder</strong>
   <img class="img img-polaroid" src="/images/guides/ckeditor_plugins.gif"/>
 </div>
 
-<p>
-  If you want to customize and to add other buttons to text selections you can add them like this:
-</p>
+If you want to customize and to add other buttons to text selections you can add them like this:
 
 ```javascript
   buttons: AlloyEditor.getButtons(['font', 'bold', 'italic', ...]),
 ```
 
-<p>
- Or if you prefer to keep previous buttons you can do:
-</p>
+Or if you prefer to keep previous buttons you can do:
 
 ```javascript
   var selections = AlloyEditor.Selections;
@@ -76,16 +71,13 @@ you can paste it into <strong>plugins folder</strong>
   <img class="img img-polaroid" src="/images/guides/ckeditor_ui_richcombo.png"/>
 </div>
 
-
 </article>
 
 <article id="article3">
 
 ## Use moono skin for visual compatibility
 
-<p>
-  AlloyEditor's UI Bridge is in its early stages, so there are still some uncovered areas. For example, dialogs are not converted and will still appear with CKEditor's default look and feel.
-</p>
+AlloyEditor's UI Bridge is in its early stages, so there are still some uncovered areas. For example, dialogs are not converted and will still appear with CKEditor's default look and feel.
 
 Use the new <strong>moono</strong> skin to close the gap between AlloyEditor default look and feel and CKEditor's.
 
@@ -96,6 +88,5 @@ Use the new <strong>moono</strong> skin to close the gap between AlloyEditor def
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/guides/ckeditor_moono.gif"/>
 </div>
-
 
 </article>
