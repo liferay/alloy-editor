@@ -12,6 +12,10 @@ var doTestIE = function() {
 describe('imageScaleResize on IE', function() {
 	var url = 'http://localhost/url_test';
 
+	before(function() {
+		doTestIE.call(this);
+	});
+
 	describe('with the default value "both"', function() {
 		before(function(done) {
 			Utils.createCKEditor.call(this, done, {
