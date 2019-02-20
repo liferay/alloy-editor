@@ -9,24 +9,16 @@ describe('ButtonTableRow', function() {
 	afterEach(Utils.destroyAlloyEditor);
 
 	it('should render just the menu button when not expanded', function() {
-		var buttonTableRow = ReactDOM.render(
-			<ButtonTableRow
-				toggleDropdown={sinon.stub()}
-				editor={this.editor}
-				expanded={false}
-			/>,
+		var buttonTableRow = this.render(
+			<ButtonTableRow toggleDropdown={sinon.stub()} expanded={false} />,
 			this.container
 		);
 
-		var menuButton = TestUtils.findRenderedDOMComponentWithTag(
-			buttonTableRow,
-			'button'
-		);
+		var menuButtons = this.container.querySelectorAll('button');
+		assert.equal(menuButtons.length, 1);
+		var menuButton = menuButtons[0];
 
-		var dropdown = TestUtils.scryRenderedDOMComponentsWithClass(
-			buttonTableRow,
-			'ae-dropdown'
-		);
+		var dropdown = this.container.querySelectorAll('.ae-dropdown');
 
 		assert.ok(menuButton);
 		assert.equal(0, dropdown.length);

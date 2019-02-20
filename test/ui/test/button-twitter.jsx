@@ -12,7 +12,7 @@ describe('ButtonTwitter', function() {
 
 		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTwitter));
+		Simulate.click(this.container.firstChild);
 
 		assert.strictEqual(
 			1,
@@ -25,7 +25,7 @@ describe('ButtonTwitter', function() {
 
 		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTwitter));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,
@@ -46,7 +46,7 @@ describe('ButtonTwitter', function() {
 
 		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonTwitter);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),
@@ -62,7 +62,7 @@ describe('ButtonTwitter', function() {
 
 		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTwitter));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,

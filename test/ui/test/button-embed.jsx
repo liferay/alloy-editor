@@ -56,7 +56,7 @@ describe('ButtonEmbed Component', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonEmbed));
+		Simulate.click(this.container.firstChild);
 
 		assert.isTrue(requestExclusiveListener.calledOnce);
 	});

@@ -19,7 +19,7 @@ describe('ButtonTableRemove', function() {
 			'<table><tbody><tr><td> {}</td></tr></tbody></table>'
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTableRemove));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -40,7 +40,7 @@ describe('ButtonTableRemove', function() {
 			'Content with {no} table'
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTableRemove));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,

@@ -18,7 +18,7 @@ describe('ButtonParagraphAlignLeft', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonParagraphAlignLeft));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,
@@ -42,7 +42,7 @@ describe('ButtonParagraphAlignLeft', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonParagraphAlignLeft));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,
@@ -66,7 +66,7 @@ describe('ButtonParagraphAlignLeft', function() {
 			this.container
 		);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonParagraphAlignLeft);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.isTrue(buttonDOMNode.classList.contains('ae-button-pressed'));
 	});

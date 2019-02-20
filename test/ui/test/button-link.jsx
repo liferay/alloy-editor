@@ -17,7 +17,7 @@ describe('ButtonLink', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonLink));
+		Simulate.click(this.container.firstChild);
 
 		assert.isTrue(requestExclusiveListener.calledOnce);
 	});

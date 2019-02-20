@@ -15,7 +15,7 @@ describe('ButtonStrike', function() {
 
 		var buttonStrike = this.render(<ButtonStrike />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonStrike));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -36,7 +36,7 @@ describe('ButtonStrike', function() {
 
 		var buttonStrike = this.render(<ButtonStrike />, this.container);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonStrike);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),

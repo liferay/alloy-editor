@@ -41,7 +41,7 @@ describe('ButtonBridge', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(button));
+		Simulate.click(this.container.firstChild);
 
 		assert.isTrue(clickListener.calledOnce);
 	});
@@ -56,7 +56,7 @@ describe('ButtonBridge', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(button));
+		Simulate.click(this.container.firstChild);
 
 		assert.isTrue(clickListener.calledOnce);
 	});
@@ -73,7 +73,7 @@ describe('ButtonBridge', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(button));
+		Simulate.click(this.container.firstChild);
 
 		assert.isTrue(clickListener1.calledOnce);
 		assert.equal(0, clickListener2.callCount);

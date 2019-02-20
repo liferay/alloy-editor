@@ -19,12 +19,10 @@ describe('ButtonTableEdit', function() {
 			this.container
 		);
 
-		var confirmButton = TestUtils.findRenderedDOMComponentWithTag(
-			buttonTableEdit,
-			'button'
-		);
+		var confirmButton = this.container.querySelector('button');
+		assert.ok(confirmButton);
 
-		Simulate.click(ReactDOM.findDOMNode(confirmButton));
+		Simulate.click(confirmButton);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,
@@ -49,12 +47,10 @@ describe('ButtonTableEdit', function() {
 			target: {value: 4},
 		});
 
-		var confirmButton = TestUtils.findRenderedDOMComponentWithTag(
-			buttonTableEdit,
-			'button'
-		);
+		var confirmButton = this.container.querySelector('button');
+		assert.ok(confirmButton);
 
-		Simulate.click(ReactDOM.findDOMNode(confirmButton));
+		Simulate.click(confirmButton);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,

@@ -15,7 +15,7 @@ describe('ButtonOutdent', function() {
 
 		var buttonOutdent = this.render(<ButtonOutdentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -37,7 +37,7 @@ describe('ButtonOutdent', function() {
 
 		var buttonOutdent = this.render(<ButtonOutdentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -61,7 +61,7 @@ describe('ButtonOutdent', function() {
 
 		var buttonOutdent = this.render(<ButtonOutdentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,

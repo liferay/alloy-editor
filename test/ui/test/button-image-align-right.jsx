@@ -19,7 +19,7 @@ describe('ButtonImageAlignRight', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonImageAlignRight));
+		Simulate.click(this.container.firstChild);
 
 		var testImageEl = new CKEDITOR.dom.element(
 			document.getElementById('testImage')
@@ -39,7 +39,7 @@ describe('ButtonImageAlignRight', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonImageAlignRight));
+		Simulate.click(this.container.firstChild);
 
 		var testImageEl = new CKEDITOR.dom.element(
 			document.getElementById('testImage')
@@ -60,7 +60,7 @@ describe('ButtonImageAlignRight', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonImageAlignRight));
+		Simulate.click(this.container.firstChild);
 
 		var testImageEl = new CKEDITOR.dom.element(
 			document.getElementById('testImage')
@@ -80,7 +80,7 @@ describe('ButtonImageAlignRight', function() {
 			this.container
 		);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonImageAlignRight);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),

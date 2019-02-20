@@ -32,12 +32,12 @@ describe('ToolbarAdd', function() {
 				},
 			};
 
-			var mainUI = this.render(
+			this.render(
 				<ToolbarAdd editorEvent={editorEvent} />,
 				this.container
 			);
 
-			assert.isNull(ReactDOM.findDOMNode(mainUI));
+			assert.isNull(this.container.firstChild);
 		});
 
 		it('should render in the focused editor', function(done) {

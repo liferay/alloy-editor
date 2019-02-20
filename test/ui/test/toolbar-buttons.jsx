@@ -27,8 +27,9 @@ describe('ToolbarButtons', function() {
 			tabIndex: 2,
 		};
 
-		var toolbarAdd = TestUtils.renderIntoDocument(
-			<ToolbarAdd editor={this.editor} config={toolbarAddConfig} />
+		var toolbarAdd = this.render(
+			<ToolbarAdd config={toolbarAddConfig} />,
+			this.container
 		);
 
 		var buttons = toolbarAdd.getToolbarButtons(toolbarAddConfig.buttons);

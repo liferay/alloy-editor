@@ -17,7 +17,7 @@ describe('ButtonItalic', function() {
 
 		var buttonItalic = this.render(<ButtonItalic />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonItalic));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -62,7 +62,7 @@ describe('ButtonItalic', function() {
 
 		var buttonItalic = this.render(<ButtonItalic />, this.container);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonItalic);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),

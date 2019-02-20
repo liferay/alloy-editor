@@ -13,10 +13,7 @@ describe('ButtonImage', function() {
 			event.preventDefault();
 		});
 
-		ReactDOM.findDOMNode(buttonImage.fileInput.current).addEventListener(
-			'click',
-			fileInputStub
-		);
+		this.container.firstChild.addEventListener('click', fileInputStub);
 
 		buttonImage.handleClick();
 

@@ -15,7 +15,7 @@ describe('ButtonIndent', function() {
 
 		var buttonIndent = this.render(<ButtonIndentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonIndent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -37,7 +37,7 @@ describe('ButtonIndent', function() {
 
 		var buttonIndent = this.render(<ButtonIndentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonIndent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -61,7 +61,7 @@ describe('ButtonIndent', function() {
 
 		var buttonIndent = this.render(<ButtonIndentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonIndent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,

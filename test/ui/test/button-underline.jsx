@@ -17,7 +17,7 @@ describe('ButtonUnderline', function() {
 
 		var buttonUnderline = this.render(<ButtonUnderline />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonUnderline));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -62,7 +62,7 @@ describe('ButtonUnderline', function() {
 
 		var buttonUnderline = this.render(<ButtonUnderline />, this.container);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonUnderline);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),

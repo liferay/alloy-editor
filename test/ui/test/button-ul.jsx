@@ -18,7 +18,7 @@ describe('ButtonUnorderedlist', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonUnorderedlist));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -42,7 +42,7 @@ describe('ButtonUnorderedlist', function() {
 			this.container
 		);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonUnorderedlist);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),
