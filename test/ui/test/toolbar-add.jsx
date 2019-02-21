@@ -4,6 +4,46 @@ var assert = chai.assert;
 var TestUtils = ReactTestUtils;
 
 describe('ToolbarAdd', function() {
+	describe('test rendering', function() {
+		var editorConfig = {
+			eventsDelay: 0,
+			toolbars: {
+				add: {
+					position: ToolbarAdd.right,
+				},
+			},
+			uicore: {
+				timeout: 0,
+			},
+		};
+
+		beforeEach(function(done) {
+			Utils.createAlloyEditor.call(this, done, editorConfig);
+		});
+
+		afterEach(Utils.destroyAlloyEditor);
+
+		it('renders the toolbar on the right', function(done) {
+			// Test passes on IE11 and Windows 7 locally, fails when executed by
+			// Travis on SauceLabs, so it will be disabled
+			if (CKEDITOR.env.ie && CKEDITOR.env.version === 11) {
+				return;
+			}
+
+			var editable = this.nativeEditor.editable();
+
+			this.nativeEditor.on('editorInteraction', () => {
+				var domNode = ReactDOM.findDOMNode(
+					this.editor._mainUI
+				).querySelector('.ae-toolbar-add');
+				assert.isTrue(domNode.offsetLeft > editable.$.offsetLeft);
+				done();
+			});
+
+			happen.mousedown(editable);
+		});
+	});
+
 	describe('test focusing', function() {
 		var editorConfig = {
 			eventsDelay: 0,
@@ -152,46 +192,6 @@ describe('ToolbarAdd', function() {
 					);
 				}.bind(this)
 			);
-		});
-	});
-
-	describe('test rendering', function() {
-		var editorConfig = {
-			eventsDelay: 0,
-			toolbars: {
-				add: {
-					position: ToolbarAdd.right,
-				},
-			},
-			uicore: {
-				timeout: 0,
-			},
-		};
-
-		beforeEach(function(done) {
-			Utils.createAlloyEditor.call(this, done, editorConfig);
-		});
-
-		afterEach(Utils.destroyAlloyEditor);
-
-		it('should render the toolbar on right', function() {
-			// Test passes on IE11 and Windows 7 locally, fails when executed by
-			// Travis on SauceLabs, so it will be disabled
-			if (CKEDITOR.env.ie && CKEDITOR.env.version === 11) {
-				return;
-			}
-
-			var editable = this.nativeEditor.editable();
-			happen.mousedown(editable);
-
-			var toolbarAdd = TestUtils.findRenderedDOMComponentWithClass(
-				this.editor._mainUI,
-				'ae-toolbar-add'
-			);
-
-			var domNode = ReactDOM.findDOMNode(toolbarAdd);
-
-			assert.isTrue(domNode.offsetLeft > editable.$.offsetLeft);
 		});
 	});
 });
