@@ -17,9 +17,7 @@ const EditorContext = React.createContext({});
 EditorContext.toProps = Component => {
 	const forwardingComponent = React.forwardRef((props, ref) => (
 		<EditorContext.Consumer>
-			{context => (
-				<Component {...props} context={context} ref={ref} />
-			)}
+			{context => <Component {...props} context={context} ref={ref} />}
 		</EditorContext.Consumer>
 	));
 	forwardingComponent.key = Component.key;
