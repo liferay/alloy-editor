@@ -144,7 +144,7 @@ describe('AlloyEditor', function() {
 			cleanUpEditor.call(this);
 		});
 
-		it('should fire an editorUpdate event when the component state changes', function() {
+		it('should fire an editorUpdate event when the component state changes', function(done) {
 			var onEditorUpdate = sinon.stub();
 
 			var alloyEditor = this.alloyEditor;
@@ -152,10 +152,12 @@ describe('AlloyEditor', function() {
 			var nativeEditor = alloyEditor.get('nativeEditor');
 
 			nativeEditor.on('editorUpdate', onEditorUpdate);
-
-			alloyEditor._mainUI.setState({hidden: true});
-
-			assert.ok(onEditorUpdate.calledOnce);
+			nativeEditor.on('uiReady', () => {
+				alloyEditor._mainUI.setState({hidden: true}, () => {
+					assert.ok(onEditorUpdate.calledOnce);
+					done();
+				});
+			});
 		});
 
 		it('should dispatch a uiReady event', function(done) {

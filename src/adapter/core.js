@@ -298,6 +298,7 @@ extend(
 				const callbackRef = element => {
 					if (!this._mainUI && element) {
 						this._mainUI = element;
+						this.get('nativeEditor').fire('uiReady');
 					}
 				};
 
@@ -313,8 +314,6 @@ extend(
 				);
 
 				this._editorUIElement = editorUIElement;
-
-				this.get('nativeEditor').fire('uiReady');
 			}
 		},
 
