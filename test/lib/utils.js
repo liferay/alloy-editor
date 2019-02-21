@@ -1,7 +1,7 @@
 if (!window.Utils) {
 	const Utils = {
 		assertDropdownCommandButtonResult(config) {
-			var assertResult = window.Utils.assertResult(
+			var assertResult = Utils.assertResult(
 				'test/ui/test/fixtures'
 			);
 
@@ -56,7 +56,7 @@ if (!window.Utils) {
 			assert.ok(CKEDITOR);
 			assert.ok(AlloyEditor);
 
-			window.Utils.createContainer.call(this);
+			Utils.createContainer.call(this);
 
 			var editable = document.createElement('div');
 
@@ -81,7 +81,7 @@ if (!window.Utils) {
 			this.nativeEditor.on(
 				'instanceReady',
 				function() {
-					window.Utils.focusEditor(this.nativeEditor);
+					Utils.focusEditor(this.nativeEditor);
 					done();
 				}.bind(this)
 			);
