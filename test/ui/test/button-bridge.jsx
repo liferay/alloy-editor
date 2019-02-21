@@ -3,11 +3,16 @@ var TestUtils = ReactTestUtils;
 var Simulate = TestUtils.Simulate;
 
 describe('ButtonBridge', function() {
+	let counter = 0;
+	let buttonClickName = null;
+
 	beforeEach(function(done) {
+		buttonClickName = `ButtonClick${++counter}`;
 		Utils.createAlloyEditor.call(this, done, {
 			extraPlugins:
 				AlloyEditor.Core.ATTRS.extraPlugins.value +
 				',ae_buttonbridge,test_buttonbridge',
+			buttonClickName,
 		});
 	});
 
@@ -21,8 +26,8 @@ describe('ButtonBridge', function() {
 		);
 		assert.property(
 			AlloyEditor.Buttons,
-			'ButtonClick',
-			'ButtonCommand should have been registered'
+			buttonClickName,
+			`${buttonClickName} should have been registered`
 		);
 		assert.property(
 			AlloyEditor.Buttons,
@@ -51,10 +56,8 @@ describe('ButtonBridge', function() {
 
 		this.nativeEditor.once('buttonClick', clickListener);
 
-		var button = this.render(
-			<AlloyEditor.Buttons.ButtonClick />,
-			this.container
-		);
+		var Component = AlloyEditor.Buttons[buttonClickName];
+		var button = this.render(<Component />, this.container);
 
 		Simulate.click(this.container.firstChild);
 
@@ -68,10 +71,8 @@ describe('ButtonBridge', function() {
 		this.nativeEditor.once('buttonClick', clickListener1);
 		this.nativeEditor.once('buttonClick2', clickListener2);
 
-		var button = this.render(
-			<AlloyEditor.Buttons.ButtonClick />,
-			this.container
-		);
+		var Component = AlloyEditor.Buttons[buttonClickName];
+		var button = this.render(<Component />, this.container);
 
 		Simulate.click(this.container.firstChild);
 

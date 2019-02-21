@@ -7,18 +7,20 @@ CKEDITOR.plugins.add('test_buttonbridge', {
 		});
 
 		if (editor.ui.addButton) {
+			var buttonClickName = editor.config.buttonClickName;
+
 			editor.ui.addButton('ButtonCommand', {
 				command: 'buttonCommand',
 			});
 
-			editor.ui.addButton('ButtonClick', {
+			editor.ui.addButton(buttonClickName, {
 				onClick: function() {
 					editor.fire('buttonClick');
 				},
 			});
 
 			// Duplicated buttons should not override existing ones
-			editor.ui.addButton('ButtonClick', {
+			editor.ui.addButton(buttonClickName, {
 				onClick: function() {
 					editor.fire('buttonClick2');
 				},
