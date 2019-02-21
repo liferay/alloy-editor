@@ -221,25 +221,29 @@ describe('Table', function() {
 		);
 	});
 
-	it('should attach commands to the editor for every possible heading setting', function() {
-		var afterCommandExec = sinon.stub();
+	it('should attach commands to the editor for every possible heading setting', function(done) {
+		CKEDITOR.on('instanceReady', function() {
+			var afterCommandExec = sinon.stub();
 
-		var initialFixture = getFixture('3_by_3_table_no_heading.html');
+			var initialFixture = getFixture('3_by_3_table_no_heading.html');
 
-		bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
+			bender.tools.selection.setWithHtml(this.nativeEditor, initialFixture);
 
-		var tableElement = this.nativeEditor.element.find('table').getItem(0);
+			var tableElement = this.nativeEditor.element.find('table').getItem(0);
 
-		this.nativeEditor.getSelection().selectElement(tableElement);
+			this.nativeEditor.getSelection().selectElement(tableElement);
 
-		this.nativeEditor.on('afterCommandExec', afterCommandExec);
+			this.nativeEditor.on('afterCommandExec', afterCommandExec);
 
-		this.nativeEditor.execCommand('tableHeadingRow');
-		this.nativeEditor.execCommand('tableHeadingColumn');
-		this.nativeEditor.execCommand('tableHeadingBoth');
-		this.nativeEditor.execCommand('tableHeadingNone');
+			this.nativeEditor.execCommand('tableHeadingRow');
+			this.nativeEditor.execCommand('tableHeadingColumn');
+			this.nativeEditor.execCommand('tableHeadingBoth');
+			this.nativeEditor.execCommand('tableHeadingNone');
 
-		assert.strictEqual(afterCommandExec.callCount, 4);
+			assert.strictEqual(afterCommandExec.callCount, 4);
+
+			done();
+		}.bind(this));
 	});
 
 	it('should say the table has no heading if it does not have neither row nor column heading', function() {
