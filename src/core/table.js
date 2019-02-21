@@ -215,7 +215,6 @@ Table.prototype = {
 				let range = editor.createRange();
 				range.moveToPosition(table, CKEDITOR.POSITION_BEFORE_START);
 				table.remove();
-				range.select();
 			}
 		}
 	},
