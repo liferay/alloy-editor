@@ -15,7 +15,7 @@ describe('RichComboBridge', function() {
 
 	afterEach(Utils.destroyAlloyEditor);
 
-	it('should create a rich combo and invoke its initialization methods', function() {
+	it('creates a rich combo and invoke its initialization methods', function() {
 		assert.property(
 			AlloyEditor.Buttons,
 			'ButtonRichCombo',
@@ -36,11 +36,14 @@ describe('RichComboBridge', function() {
 		assert.isTrue(renderListener.calledOnce);
 	});
 
-	it('should render just the menu button when not expanded', function() {
-		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={false} />,
+	it('renders just the menu button when not expanded', function() {
+		var ref = React.createRef();
+		this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={false} ref={ref} />,
 			this.container
 		);
+		var buttonRichCombo = ref.current;
+		assert.ok(buttonRichCombo);
 
 		var menuButton = TestUtils.findRenderedDOMComponentWithTag(
 			buttonRichCombo,
@@ -56,11 +59,14 @@ describe('RichComboBridge', function() {
 		assert.equal(0, dropdown.length);
 	});
 
-	it.skip('should show a dropdown with the action buttons when expanded', function() {
-		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
+	it('shows a dropdown with the action buttons when expanded', function() {
+		var ref = React.createRef();
+		this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} ref={ref} />,
 			this.container
 		);
+		var buttonRichCombo = ref.current;
+		assert.ok(buttonRichCombo);
 
 		var dropdown = TestUtils.findAllInRenderedTree(
 			buttonRichCombo,
@@ -83,11 +89,14 @@ describe('RichComboBridge', function() {
 		assert.ok(actionButtons.length);
 	});
 
-	it.skip('should show a dropdown with the action buttons when expanded', function() {
-		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
+	it('shows a dropdown with the action buttons when expanded', function() {
+		var ref = React.createRef();
+		this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} ref={ref} />,
 			this.container
 		);
+		var buttonRichCombo = ref.current;
+		assert.ok(buttonRichCombo);
 
 		var dropdown = TestUtils.findAllInRenderedTree(
 			buttonRichCombo,
@@ -110,19 +119,18 @@ describe('RichComboBridge', function() {
 		assert.ok(actionButtons.length);
 	});
 
-	it.skip('should execute the onClick method with the item value when clicking on an item', function() {
+	it('executes the onClick method with the item value when clicking on an item', function() {
 		var clickListener = sinon.stub();
 
-		var clickListenerProxy = function(event) {
-			clickListener(event.data);
-		};
+		this.nativeEditor.once('richComboClick', clickListener);
 
-		this.nativeEditor.once('richComboClick', clickListenerProxy);
-
-		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
+		var ref = React.createRef();
+		this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} ref={ref} />,
 			this.container
 		);
+		var buttonRichCombo = ref.current;
+		assert.ok(buttonRichCombo);
 
 		var dropdown = TestUtils.findAllInRenderedTree(
 			buttonRichCombo,
@@ -137,19 +145,15 @@ describe('RichComboBridge', function() {
 		assert.ok(dropdown);
 		assert.equal(1, dropdown.length);
 
-		var richComboItem = TestUtils.findAllInRenderedTree(
-			dropdown[0],
-			function(component) {
-				return (
-					TestUtils.isDOMComponent(component) &&
-					component.getAttribute('data-value') === 'entry2'
-				);
-			}
+		var richComboItem = ReactDOM.findDOMNode(buttonRichCombo).querySelector(
+			'[data-value=entry2]'
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(richComboItem[0]));
+		Simulate.click(richComboItem);
 
 		assert.isTrue(clickListener.calledOnce);
-		assert.isTrue(clickListener.calledWith('entry2'));
+		assert.isTrue(
+			clickListener.firstCall.calledWith(sinon.match({data: 'entry2'}))
+		);
 	});
 });
