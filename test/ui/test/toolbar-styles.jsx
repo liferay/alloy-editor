@@ -23,10 +23,10 @@ describe('ToolbarStyles', function() {
 		afterEach(Utils.destroyAlloyEditor);
 
 		it('renders buttons with properties from buttonCfg', function() {
-			var toolbarStyles = toolbarStyles = this.render(
+			var toolbarStyles = (toolbarStyles = this.render(
 				<ToolbarStyles />,
 				this.container
-			);
+			));
 
 			var buttons = toolbarStyles.getToolbarButtons(['bold', 'italic'], {
 				manualSelection: null,

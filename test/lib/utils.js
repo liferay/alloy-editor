@@ -91,10 +91,7 @@ if (!window.Utils) {
 					React.createElement(
 						EditorContext.Provider,
 						{value: {editor: this.editor}},
-						React.cloneElement(
-							component,
-							{ref}
-						),
+						React.cloneElement(component, {ref})
 					),
 					container
 				);
