@@ -37,13 +37,10 @@ describe('RichComboBridge', function() {
 	});
 
 	it('renders just the menu button when not expanded', function() {
-		var ref = React.createRef();
-		this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={false} ref={ref} />,
+		var buttonRichCombo = this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={false} />,
 			this.container
 		);
-		var buttonRichCombo = ref.current;
-		assert.ok(buttonRichCombo);
 
 		var menuButton = TestUtils.findRenderedDOMComponentWithTag(
 			buttonRichCombo,
@@ -60,13 +57,10 @@ describe('RichComboBridge', function() {
 	});
 
 	it('shows a dropdown with the action buttons when expanded', function() {
-		var ref = React.createRef();
-		this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} ref={ref} />,
+		var buttonRichCombo = this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
 			this.container
 		);
-		var buttonRichCombo = ref.current;
-		assert.ok(buttonRichCombo);
 
 		var dropdown = TestUtils.findAllInRenderedTree(
 			buttonRichCombo,
@@ -90,13 +84,10 @@ describe('RichComboBridge', function() {
 	});
 
 	it('shows a dropdown with the action buttons when expanded', function() {
-		var ref = React.createRef();
-		this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} ref={ref} />,
+		var buttonRichCombo = this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
 			this.container
 		);
-		var buttonRichCombo = ref.current;
-		assert.ok(buttonRichCombo);
 
 		var dropdown = TestUtils.findAllInRenderedTree(
 			buttonRichCombo,
@@ -124,13 +115,10 @@ describe('RichComboBridge', function() {
 
 		this.nativeEditor.once('richComboClick', clickListener);
 
-		var ref = React.createRef();
-		this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} ref={ref} />,
+		var buttonRichCombo = this.render(
+			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
 			this.container
 		);
-		var buttonRichCombo = ref.current;
-		assert.ok(buttonRichCombo);
 
 		var dropdown = TestUtils.findAllInRenderedTree(
 			buttonRichCombo,
@@ -153,7 +141,7 @@ describe('RichComboBridge', function() {
 
 		assert.isTrue(clickListener.calledOnce);
 		assert.isTrue(
-			clickListener.firstCall.calledWith(sinon.match({data: 'entry2'}))
+			clickListener.firstCall.calledWithMatch({data: 'entry2'})
 		);
 	});
 });

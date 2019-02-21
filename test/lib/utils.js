@@ -85,14 +85,21 @@ if (!window.Utils) {
 			);
 
 			this.render = function(component, container) {
-				return ReactDOM.render(
+				const ref = React.createRef();
+
+				ReactDOM.render(
 					React.createElement(
 						EditorContext.Provider,
 						{value: {editor: this.editor}},
-						component
+						React.cloneElement(
+							component,
+							{ref}
+						),
 					),
 					container
 				);
+
+				return ref.current;
 			}.bind(this);
 		},
 
