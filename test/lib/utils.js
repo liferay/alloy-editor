@@ -1,9 +1,7 @@
 if (!window.Utils) {
 	const Utils = {
 		assertDropdownCommandButtonResult(config) {
-			const assertResult = Utils.assertResult(
-				'test/ui/test/fixtures'
-			);
+			const assertResult = Utils.assertResult('test/ui/test/fixtures');
 
 			const TestUtils = ReactTestUtils;
 			const Simulate = TestUtils.Simulate;
