@@ -23,7 +23,10 @@ describe('ToolbarStyles', function() {
 		afterEach(Utils.destroyAlloyEditor);
 
 		it('renders buttons with properties from buttonCfg', function() {
-			var toolbarStyles = this.render(<ToolbarStyles />, this.container);
+			var ref = React.createRef();
+			toolbarStyles = this.render(<ToolbarStyles ref={ref} />, this.container);
+			var toolbarStyles = ref.current;
+			assert.ok(toolbarStyles);
 
 			var buttons = toolbarStyles.getToolbarButtons(['bold', 'italic'], {
 				manualSelection: null,
@@ -49,7 +52,10 @@ describe('ToolbarStyles', function() {
 		afterEach(Utils.destroyAlloyEditor);
 
 		it("constrains the toolbar's position", function() {
-			var toolbarStyles = this.render(<ToolbarStyles />, this.container);
+			var ref = React.createRef();
+			this.render(<ToolbarStyles ref={ref} />, this.container);
+			var toolbarStyles = ref.current;
+			assert.ok(toolbarStyles);
 
 			var res = toolbarStyles.getConstrainedPosition(
 				{
