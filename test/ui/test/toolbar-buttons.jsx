@@ -27,12 +27,15 @@ describe('ToolbarButtons', function() {
 			tabIndex: 2,
 		};
 
-		var toolbarAdd = this.render(
-			<ToolbarAdd config={toolbarAddConfig} />,
+		const ref = React.createRef();
+
+		this.render(
+			<ToolbarAdd config={toolbarAddConfig} ref={ref} />,
 			this.container
 		);
 
-		var buttons = toolbarAdd.getToolbarButtons(toolbarAddConfig.buttons);
+		assert.ok(ref.current);
+		var buttons = ref.current.getToolbarButtons(toolbarAddConfig.buttons);
 
 		assert.deepEqual(tableAttrs, buttons[0].props.tableAttributes);
 	});
