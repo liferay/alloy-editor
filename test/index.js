@@ -40,6 +40,7 @@ module.exports = function() {
 	var sources = [
 		'test/lib/globals.js',
 		'test/lib/utils.js',
+		'test/lib/karma-overrides.js',
 		'src/adapter/main.js',
 		'src/core/debounce.js',
 		'src/core/link.js',
