@@ -32,15 +32,19 @@ describe('ToolbarAdd', function() {
 
 			var editable = this.nativeEditor.editable();
 
-			this.nativeEditor.on('editorInteraction', () => {
+			happen.mousedown(editable);
+
+			// DOM node may be in wrong position if we read its position
+			// immediately (for example, if the editor had previously been drawn
+			// on the screen with different config). Reading after a minimum
+			// delay allows it to be drawn in the right position.
+			setTimeout(() => {
 				var domNode = ReactDOM.findDOMNode(
 					this.editor._mainUI
 				).querySelector('.ae-toolbar-add');
 				assert.isTrue(domNode.offsetLeft > editable.$.offsetLeft);
 				done();
-			});
-
-			happen.mousedown(editable);
+			}, 0);
 		});
 	});
 
