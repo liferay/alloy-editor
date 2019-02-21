@@ -5,11 +5,16 @@ var TestUtils = ReactTestUtils;
 var Simulate = TestUtils.Simulate;
 
 describe('RichComboBridge', function() {
+	let counter = 0;
+	let richComboName = null;
+
 	beforeEach(function(done) {
+		richComboName = `TestButtonRichCombo${++counter}`;
 		Utils.createAlloyEditor.call(this, done, {
 			extraPlugins:
 				AlloyEditor.Core.ATTRS.extraPlugins.value +
 				',test_richcombobridge',
+			richComboName,
 		});
 	});
 
@@ -18,8 +23,8 @@ describe('RichComboBridge', function() {
 	it('creates a rich combo and invoke its initialization methods', function() {
 		assert.property(
 			AlloyEditor.Buttons,
-			'ButtonRichCombo',
-			'ButtonRichCombo should have been registered'
+			richComboName,
+			`${richComboName} should have been registered`
 		);
 
 		var initListener = sinon.stub();
@@ -30,15 +35,17 @@ describe('RichComboBridge', function() {
 
 		this.nativeEditor.once('richComboRender', renderListener);
 
-		this.render(<AlloyEditor.Buttons.ButtonRichCombo />, this.container);
+		const Component = AlloyEditor.Buttons[richComboName];
+		this.render(<Component />, this.container);
 
 		assert.isTrue(initListener.calledOnce);
 		assert.isTrue(renderListener.calledOnce);
 	});
 
 	it('renders just the menu button when not expanded', function() {
+		const Component = AlloyEditor.Buttons[richComboName];
 		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={false} />,
+			<Component expanded={false} />,
 			this.container
 		);
 
@@ -57,8 +64,9 @@ describe('RichComboBridge', function() {
 	});
 
 	it('shows a dropdown with the action buttons when expanded', function() {
+		const Component = AlloyEditor.Buttons[richComboName];
 		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
+			<Component expanded={true} />,
 			this.container
 		);
 
@@ -84,8 +92,9 @@ describe('RichComboBridge', function() {
 	});
 
 	it('shows a dropdown with the action buttons when expanded', function() {
+		const Component = AlloyEditor.Buttons[richComboName];
 		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
+			<Component expanded={true} />,
 			this.container
 		);
 
@@ -115,8 +124,9 @@ describe('RichComboBridge', function() {
 
 		this.nativeEditor.once('richComboClick', clickListener);
 
+		const Component = AlloyEditor.Buttons[richComboName];
 		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
+			<Component expanded={true} />,
 			this.container
 		);
 
