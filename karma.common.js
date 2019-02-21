@@ -32,9 +32,6 @@ const filesToLoad = [
 	/* bender requires CKEDITOR, should be after ckeditor.js */
 	'scripts/test/bender.js',
 
-	'scripts/test/utils-alloy-editor.js',
-	'scripts/test/utils-ckeditor.js',
-
 	/* Fixtures */
 	'test/core/test/fixtures/**/*',
 	'test/ui/test/fixtures/**/*',
