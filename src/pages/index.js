@@ -55,7 +55,7 @@ class Index extends Component {
 
 				<main className="content">
 					<header
-						className="header position-relative bg-primary text-white"
+						className="header position-relative bg-primary text-white vh-100 d-flex flex-column justify-content-center"
 						style={headerImage}>
 						<LayoutNav />
 
