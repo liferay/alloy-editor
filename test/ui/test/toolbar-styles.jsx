@@ -24,7 +24,10 @@ describe('ToolbarStyles', function() {
 
 		it('renders buttons with properties from buttonCfg', function() {
 			var ref = React.createRef();
-			toolbarStyles = this.render(<ToolbarStyles ref={ref} />, this.container);
+			toolbarStyles = this.render(
+				<ToolbarStyles ref={ref} />,
+				this.container
+			);
 			var toolbarStyles = ref.current;
 			assert.ok(toolbarStyles);
 

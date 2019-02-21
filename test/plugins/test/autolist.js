@@ -84,7 +84,10 @@ describe('Autolist', function() {
 
 		var data = getData.call(this);
 
-		assert.oneOf(data, ['<p>' + zeroWidthSpace + '*</p>', '<p>' + zeroWidthSpace + '*&nbsp;</p>']);
+		assert.oneOf(data, [
+			'<p>' + zeroWidthSpace + '*</p>',
+			'<p>' + zeroWidthSpace + '*&nbsp;</p>',
+		]);
 	});
 
 	function testList(config) {
