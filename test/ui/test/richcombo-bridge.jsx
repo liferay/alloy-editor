@@ -9,7 +9,7 @@ describe('RichComboBridge', function() {
 		Utils.createAlloyEditor.call(this, done, {
 			extraPlugins:
 				AlloyEditor.Core.ATTRS.extraPlugins.value +
-				',ae_richcombobridge,test_richcombobridge',
+				',test_richcombobridge',
 		});
 	});
 
