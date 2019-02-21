@@ -222,7 +222,7 @@ describe('Table', function() {
 	});
 
 	it('should attach commands to the editor for every possible heading setting', function(done) {
-		CKEDITOR.on('instanceReady', function() {
+		CKEDITOR.once('instanceReady', function() {
 			var afterCommandExec = sinon.stub();
 
 			var initialFixture = getFixture('3_by_3_table_no_heading.html');
