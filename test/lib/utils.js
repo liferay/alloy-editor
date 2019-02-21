@@ -1,15 +1,15 @@
 if (!window.Utils) {
 	const Utils = {
 		assertDropdownCommandButtonResult(config) {
-			var assertResult = Utils.assertResult(
+			const assertResult = Utils.assertResult(
 				'test/ui/test/fixtures'
 			);
 
-			var TestUtils = ReactTestUtils;
-			var Simulate = TestUtils.Simulate;
+			const TestUtils = ReactTestUtils;
+			const Simulate = TestUtils.Simulate;
 
-			var command = function() {
-				var dropdown = TestUtils.findAllInRenderedTree(
+			const command = function() {
+				const dropdown = TestUtils.findAllInRenderedTree(
 					config.buttonDropdown,
 					function(component) {
 						return TestUtils.isCompositeComponentWithType(
@@ -22,7 +22,7 @@ if (!window.Utils) {
 				assert.ok(dropdown);
 				assert.equal(1, dropdown.length);
 
-				var commandButtons = TestUtils.findAllInRenderedTree(
+				const commandButtons = TestUtils.findAllInRenderedTree(
 					dropdown[0],
 					function(component) {
 						return (
@@ -58,7 +58,7 @@ if (!window.Utils) {
 
 			Utils.createContainer.call(this);
 
-			var editable = document.createElement('div');
+			const editable = document.createElement('div');
 
 			editable.setAttribute('id', 'editable');
 			editable.setAttribute('contenteditable', true);
@@ -115,17 +115,17 @@ if (!window.Utils) {
 		},
 
 		assertResult(fixtureBase) {
-			var getFixture = Utils.getFixture(fixtureBase);
+			const getFixture = Utils.getFixture(fixtureBase);
 
 			return function(initialFixture, command, expectedFixture, message) {
-				var initial = getFixture(initialFixture);
-				var expected = getFixture(expectedFixture);
+				const initial = getFixture(initialFixture);
+				const expected = getFixture(expectedFixture);
 
 				bender.tools.selection.setWithHtml(this.nativeEditor, initial);
 
 				command.call(this);
 
-				var data = bender.tools.getData(this.nativeEditor, {
+				const data = bender.tools.getData(this.nativeEditor, {
 					fixHtml: true,
 					compatHtml: true,
 				});
@@ -141,13 +141,13 @@ if (!window.Utils) {
 
 			Utils.createContainer.call(this);
 
-			var editable = document.createElement('div');
+			const editable = document.createElement('div');
 
 			editable.setAttribute('id', 'editable');
 			editable.setAttribute('contenteditable', true);
 
 			if (attributes) {
-				for (var attribute in attributes) {
+				for (let attribute in attributes) {
 					if (
 						Object.prototype.hasOwnProperty.call(
 							attributes,
@@ -162,12 +162,12 @@ if (!window.Utils) {
 			const cruft = document.querySelectorAll('#editable');
 			if (cruft.length) {
 				console.warn('Pre-existing #editable element found in DOM!');
-				for (var i = 0; i < cruft.length; i++) {
+				for (let i = 0; i < cruft.length; i++) {
 					cruft[i].parentNode.removeChild(cruft[i]);
 				}
 			}
 
-			var body = document.getElementsByTagName('body')[0];
+			const body = document.getElementsByTagName('body')[0];
 			body.appendChild(editable);
 
 			this._editable = editable;
@@ -228,7 +228,7 @@ if (!window.Utils) {
 		},
 
 		_prepareFixtureForAssertion(htmlFixture) {
-			var fixtureString;
+			let fixtureString;
 
 			if (htmlFixture) {
 				fixtureString = bender.tools.fixHtml(
