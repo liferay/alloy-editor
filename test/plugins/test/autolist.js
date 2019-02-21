@@ -10,7 +10,7 @@ var KEY_SPACE = 32;
 var zeroWidthSpace = '';
 
 for (var i = 0; i < 7; i++) {
-	zeroWidthSpace += '\u200b'
+	zeroWidthSpace += '\u200b';
 }
 
 describe('Autolist', function() {
