@@ -39,8 +39,7 @@ function globPatternToRegExp(pattern) {
 module.exports = function() {
 	var sources = [
 		'test/lib/globals.js',
-		'test/lib/utils-alloy-editor.js',
-		'test/lib/utils-ckeditor.js',
+		'test/lib/utils.js',
 		'src/adapter/main.js',
 		'src/core/debounce.js',
 		'src/core/link.js',
