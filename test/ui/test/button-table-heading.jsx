@@ -67,7 +67,7 @@ describe('ButtonTableHeading', function() {
 		assert.ok(actionButtons.length);
 	});
 
-	it('should switch from any given heading setting to any possible setting properly', function() {
+	describe('transitions between settings', function() {
 		var HEADING_NONE = CKEDITOR.Table.HEADING_NONE,
 			HEADING_COL = CKEDITOR.Table.HEADING_COL,
 			HEADING_ROW = CKEDITOR.Table.HEADING_ROW,
@@ -95,8 +95,10 @@ describe('ButtonTableHeading', function() {
 			{initial: HEADING_BOTH, expected: HEADING_COL},
 		];
 
-		testMatrix.forEach(
-			function(testData) {
+		testMatrix.forEach(function(testData) {
+			it(`switches from ${
+				testData.initial
+			} to ${testData.expected}`, function() {
 				var errorMessage =
 					'Changing table heading from ' +
 					testData.initial +
@@ -123,7 +125,7 @@ describe('ButtonTableHeading', function() {
 					selectionFn: selectTable,
 					buttonCommandsList: ButtonCommandsList,
 				});
-			}.bind(this)
-		);
+			});
+		}, this);
 	});
 });
