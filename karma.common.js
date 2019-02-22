@@ -30,7 +30,6 @@ const filesToLoad = [
 	`${CKEDITOR_DIR}/lang/*.js`,
 	`${CKEDITOR_DIR}/skins/moono/*.css`,
 
-
 	'test/ui/test/plugins/test_*/plugin.js',
 
 	/* bender requires CKEDITOR, should be after ckeditor.js */
