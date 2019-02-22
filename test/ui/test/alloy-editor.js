@@ -255,7 +255,7 @@ describe('AlloyEditor', function() {
 				// sure that we can refresh the page to re-run the tests, so we
 				// need to reset the location back to its original state.
 				if (window.history.replaceState) {
-				   window.history.replaceState(null, '', locationHref);
+					window.history.replaceState(null, '', locationHref);
 				}
 			}
 		});

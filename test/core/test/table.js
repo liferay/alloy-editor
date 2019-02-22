@@ -322,7 +322,7 @@ describe('Table', function() {
 		assertResult.call(this, initialFixture, command, expectedFixture);
 	});
 
-  xit('should keep the table when the selection is outside and no parameters are specified', function() {
+	xit('should keep the table when the selection is outside and no parameters are specified', function() {
 		var initialFixture = '1_by_1_table.html';
 		var expectedFixture = '1_by_1_table.html';
 		var command = function() {
