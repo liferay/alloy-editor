@@ -17,16 +17,20 @@ if (!DEBUG) {
 	preprocessors['dist/alloy-editor/src/**/*.js'] = ['coverage'];
 }
 
+const CKEDITOR_DIR = DEBUG ? 'lib/ckeditor-debug' : 'dist/alloy-editor';
+
 const filesToLoad = [
 	/* AlloyEditor skins */
 	'dist/alloy-editor/assets/alloy-editor-ocean.css',
 
-	/* CKEditor JS files */
-	'dist/alloy-editor/ckeditor.js',
-	'dist/alloy-editor/styles.js',
-	'dist/alloy-editor/config.js',
-	'dist/alloy-editor/skins/moono/*.css',
-	'dist/alloy-editor/lang/*.js',
+	/* CKEditor files */
+	`${CKEDITOR_DIR}/ckeditor.js`,
+	`${CKEDITOR_DIR}/styles.js`,
+	`${CKEDITOR_DIR}/config.js`,
+	`${CKEDITOR_DIR}/lang/*.js`,
+	`${CKEDITOR_DIR}/skins/moono/*.css`,
+
+
 	'test/ui/test/plugins/test_*/plugin.js',
 
 	/* bender requires CKEDITOR, should be after ckeditor.js */
