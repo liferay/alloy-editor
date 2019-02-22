@@ -197,8 +197,11 @@ if (!window.Utils) {
 				this.nativeEditor = null;
 			}
 
-			this._editable.parentNode.removeChild(this._editable);
-			this._editable = null;
+			if (this._editable) {
+				this._editable.parentNode.removeChild(this._editable);
+				this._editable = null;
+			}
+
 			Utils.removeContainer.call(this);
 			fixture.cleanup();
 
@@ -225,8 +228,10 @@ if (!window.Utils) {
 		},
 
 		removeContainer() {
-			this.container.parentNode.removeChild(this.container);
-			this.container = null;
+			if (this.container) {
+				this.container.parentNode.removeChild(this.container);
+				this.container = null;
+			}
 		},
 
 		_prepareFixtureForAssertion(htmlFixture) {
