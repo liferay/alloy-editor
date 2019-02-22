@@ -38,13 +38,20 @@ describe('ButtonLinkEditBrowse', function() {
 
 		Simulate.click(buttonBrowse);
 
-		assert.ok(documentBrowseLinkCallback.called);
+		assert.ok(documentBrowseLinkCallback.calledOnce);
 
 		assert.ok(
 			documentBrowseLinkCallback.calledWith(
 				this.nativeEditor,
 				documentBrowseLinkUrl,
-				'_blank'
+				sinon.match(value => {
+					// This is a dynamically-constructed callback function
+					// created in `_browseClick` in <ButtonLinkEditBrowse>:
+					return (
+						typeof value === 'function' &&
+						value.toString().match(/\blinkTarget\b/)
+					);
+				})
 			)
 		);
 	});
