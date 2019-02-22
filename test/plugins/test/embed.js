@@ -1,30 +1,29 @@
 var assert = chai.assert;
 
+var sandbox = sinon.createSandbox();
+
+function applyFirefoxHack(nativeEditor) {
+	// Hack for Firefox.
+	// If a contenteditable has been in the DOM before this test runs,
+	// CKEDITOR will blow up on trying to insertHtml, unless we insert this
+	// magical content (whitespace and an empty selection) first.
+	bender.tools.selection.setWithHtml(nativeEditor, ' {}');
+}
+
 describe('Embed plugin', function() {
 	beforeEach(function(done) {
 		Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_embed'});
 	});
 
 	afterEach(function(done) {
-		try {
-			if (CKEDITOR.tools.jsonp.restore) {
-				CKEDITOR.tools.jsonp.restore();
-			}
-
-			if (this.nativeEditor.insertHtml.restore) {
-				this.nativeEditor.insertHtml.restore();
-			}
-		} catch (error) {
-			console.error(error);
-		} finally {
-			Utils.destroyCKEditor.call(this, done);
-		}
+		sandbox.restore();
+		Utils.destroyCKEditor.call(this, done);
 	});
 
 	it('should not convert links inside content', function() {
 		var nativeEditor = this.nativeEditor;
 
-		var spy = sinon.spy(nativeEditor, 'execCommand');
+		var spy = sandbox.spy(nativeEditor, 'execCommand');
 
 		bender.tools.selection.setWithHtml(
 			nativeEditor,
@@ -44,7 +43,7 @@ describe('Embed plugin', function() {
 		var tweetReturnHtml =
 			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-		sinon
+		sandbox
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				success({html: tweetReturnHtml, provider_name: 'Twitter'});
@@ -52,7 +51,7 @@ describe('Embed plugin', function() {
 
 		var nativeEditor = this.nativeEditor;
 
-		bender.tools.selection.setWithHtml(nativeEditor, '{}');
+		applyFirefoxHack(nativeEditor);
 
 		nativeEditor.fire('paste', {
 			dataValue: url,
@@ -70,7 +69,7 @@ describe('Embed plugin', function() {
 		var tweetReturnHtml =
 			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-		sinon
+		sandbox
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				success({html: tweetReturnHtml, provider_name: 'YouTube'});
@@ -78,7 +77,7 @@ describe('Embed plugin', function() {
 
 		var nativeEditor = this.nativeEditor;
 
-		bender.tools.selection.setWithHtml(nativeEditor, '{}');
+		applyFirefoxHack(nativeEditor);
 
 		nativeEditor.fire('paste', {
 			dataValue: url,
@@ -96,7 +95,7 @@ describe('Embed plugin', function() {
 		var tweetReturnHtml =
 			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-		sinon
+		sandbox
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				success({
@@ -109,7 +108,7 @@ describe('Embed plugin', function() {
 
 		var isCalled = false;
 
-		sinon.stub(nativeEditor, 'insertHtml').callsFake(function() {
+		sandbox.stub(nativeEditor, 'insertHtml').callsFake(function() {
 			isCalled = true;
 			return;
 		});
@@ -126,7 +125,7 @@ describe('Embed plugin', function() {
 	it('should create a tag with url as href when url is pasted and there is a connection error', function() {
 		var url = 'https://foo.com';
 
-		sinon
+		sandbox
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				fail({});
@@ -136,7 +135,7 @@ describe('Embed plugin', function() {
 
 		var isCalled = false;
 
-		sinon.stub(nativeEditor, 'insertHtml').callsFake(function() {
+		sandbox.stub(nativeEditor, 'insertHtml').callsFake(function() {
 			isCalled = true;
 			return;
 		});
