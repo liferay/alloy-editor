@@ -166,47 +166,9 @@ See [the Releases listing](https://github.com/liferay/alloy-editor/releases) on 
 
 ## Updating CKEditor.
 
-```sh
-# Update (and initialize) the ckeditor-dev submodule.
-git submodule update --init
+To update to, for example, v4.11.2, run: `scripts/build/build-ckeditor.sh 4.11.2` and commit the result. This is a wrapper for the `ckbuilder` tool.
 
-# Switch to the submodule.
-cd lib/ckeditor-dev
-
-# Checkout the desired target version.
-git checkout 4.11.2
-
-# Grab the build config.
-cp ../ckeditor-build-config.js dev/builder/build-config.js
-
-# Make the release build.
-dev/builder/build.sh --skip-omitted-in-build-config
-
-# Remove old build files.
-rm -r ../ckeditor/*
-
-# Replace with new build files.
-cp -r dev/builder/release/ckeditor/* ../ckeditor/
-
-# Make the debug build.
-dev/builder/build.sh \
-  --skip-omitted-in-build-config \
-  --leave-css-unminified \
-  --leave-js-unminified
-
-# Remove old build files.
-rm -r ../ckeditor-debug/*
-
-# Replace with new build files.
-cp -r dev/builder/release/ckeditor/* ../ckeditor-debug/
-
-# Check that everything is still working with the new build.
-cd ../..
-npm run build && npm run test
-npm run start # check demo
-```
-
-To see other switches that can be passed to the `build.sh` script, run:
+If you wish to modify the wrapper, see other switches that can be passed to the underlying tool with:
 
 ```sh
 java -jar lib/ckeditor-dev/dev/builder/ckbuilder/2.3.2/ckbuilder.jar
