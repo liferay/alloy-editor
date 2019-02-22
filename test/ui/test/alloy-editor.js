@@ -314,7 +314,7 @@ describe('AlloyEditor', function() {
 		AlloyEditor.loadLanguageResources(langResourcesLoaded);
 
 		setTimeout(function() {
-			assert(langResourcesLoaded.calledOnce);
+			assert.ok(langResourcesLoaded.calledOnce);
 			assert.property(AlloyEditor, 'Strings');
 			done();
 		}, 50);

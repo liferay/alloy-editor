@@ -38,9 +38,9 @@ describe('ButtonLinkEditBrowse', function() {
 
 		Simulate.click(buttonBrowse);
 
-		assert(documentBrowseLinkCallback.called);
+		assert.ok(documentBrowseLinkCallback.called);
 
-		assert(
+		assert.ok(
 			documentBrowseLinkCallback.calledWith(
 				this.nativeEditor,
 				documentBrowseLinkUrl,

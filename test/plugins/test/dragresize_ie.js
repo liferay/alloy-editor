@@ -59,7 +59,7 @@ describe('imageScaleResize on IE', function() {
 				'cke_image_resizer_nwse-resize'
 			)[0];
 
-			assert(span);
+			assert.ok(span);
 		});
 	});
 
@@ -87,7 +87,7 @@ describe('imageScaleResize on IE', function() {
 				'cke_image_resizer_ns-resize'
 			)[0];
 
-			assert(span);
+			assert.ok(span);
 		});
 	});
 
@@ -115,7 +115,7 @@ describe('imageScaleResize on IE', function() {
 				'cke_image_resizer_nwse-resize'
 			)[0];
 
-			assert(span);
+			assert.ok(span);
 		});
 	});
 
@@ -143,7 +143,7 @@ describe('imageScaleResize on IE', function() {
 				'cke_image_resizer_ew-resize'
 			)[0];
 
-			assert(span);
+			assert.ok(span);
 		});
 	});
 });
