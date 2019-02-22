@@ -1,13 +1,8 @@
 var assert = chai.assert;
 
 describe('Plugin ae_addimages', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should not throw error in case of missing `clipboardData.items` property', function() {
 		assert.doesNotThrow(

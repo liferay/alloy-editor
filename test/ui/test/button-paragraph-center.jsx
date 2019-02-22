@@ -4,13 +4,8 @@ var assert = chai.assert;
 var Simulate = ReactTestUtils.Simulate;
 
 describe('ButtonParagraphCenter', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should center the selection on click', function() {
 		bender.tools.selection.setWithHtml(
@@ -23,7 +18,7 @@ describe('ButtonParagraphCenter', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonParagraphCenter));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,
@@ -47,7 +42,7 @@ describe('ButtonParagraphCenter', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonParagraphCenter));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,
@@ -71,7 +66,7 @@ describe('ButtonParagraphCenter', function() {
 			this.container
 		);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonParagraphCenter);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.isTrue(buttonDOMNode.classList.contains('ae-button-pressed'));
 	});

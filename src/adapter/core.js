@@ -295,10 +295,18 @@ extend(
 
 				uiNode.appendChild(editorUIElement);
 
-				this._mainUI = ReactDOM.render(
+				const callbackRef = element => {
+					if (!this._mainUI && element) {
+						this._mainUI = element;
+						this.get('nativeEditor').fire('uiReady');
+					}
+				};
+
+				ReactDOM.render(
 					<EditorContext.Provider value={{editor: this}}>
 						<UI
 							eventsDelay={this.get('eventsDelay')}
+							ref={callbackRef}
 							toolbars={this.get('toolbars')}
 						/>
 					</EditorContext.Provider>,
@@ -306,8 +314,6 @@ extend(
 				);
 
 				this._editorUIElement = editorUIElement;
-
-				this.get('nativeEditor').fire('uiReady');
 			}
 		},
 

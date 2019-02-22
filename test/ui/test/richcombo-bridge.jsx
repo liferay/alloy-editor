@@ -5,25 +5,26 @@ var TestUtils = ReactTestUtils;
 var Simulate = TestUtils.Simulate;
 
 describe('RichComboBridge', function() {
-	before(function(done) {
+	let counter = 0;
+	let richComboName = null;
+
+	beforeEach(function(done) {
+		richComboName = `TestButtonRichCombo${++counter}`;
 		Utils.createAlloyEditor.call(this, done, {
 			extraPlugins:
 				AlloyEditor.Core.ATTRS.extraPlugins.value +
-				',ae_richcombobridge,test_richcombobridge',
+				',test_richcombobridge',
+			richComboName,
 		});
 	});
 
-	after(Utils.destroyAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
-
-	it('should create a rich combo and invoke its initialization methods', function() {
+	it('creates a rich combo and invoke its initialization methods', function() {
 		assert.property(
 			AlloyEditor.Buttons,
-			'ButtonRichCombo',
-			'ButtonRichCombo should have been registered'
+			richComboName,
+			`${richComboName} should have been registered`
 		);
 
 		var initListener = sinon.stub();
@@ -34,15 +35,17 @@ describe('RichComboBridge', function() {
 
 		this.nativeEditor.once('richComboRender', renderListener);
 
-		this.render(<AlloyEditor.Buttons.ButtonRichCombo />, this.container);
+		const Component = AlloyEditor.Buttons[richComboName];
+		this.render(<Component />, this.container);
 
 		assert.isTrue(initListener.calledOnce);
 		assert.isTrue(renderListener.calledOnce);
 	});
 
-	it('should render just the menu button when not expanded', function() {
+	it('renders just the menu button when not expanded', function() {
+		const Component = AlloyEditor.Buttons[richComboName];
 		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={false} />,
+			<Component expanded={false} />,
 			this.container
 		);
 
@@ -60,9 +63,10 @@ describe('RichComboBridge', function() {
 		assert.equal(0, dropdown.length);
 	});
 
-	it.skip('should show a dropdown with the action buttons when expanded', function() {
+	it('shows a dropdown with the action buttons when expanded', function() {
+		const Component = AlloyEditor.Buttons[richComboName];
 		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
+			<Component expanded={true} />,
 			this.container
 		);
 
@@ -87,9 +91,10 @@ describe('RichComboBridge', function() {
 		assert.ok(actionButtons.length);
 	});
 
-	it.skip('should show a dropdown with the action buttons when expanded', function() {
+	it('shows a dropdown with the action buttons when expanded', function() {
+		const Component = AlloyEditor.Buttons[richComboName];
 		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
+			<Component expanded={true} />,
 			this.container
 		);
 
@@ -114,17 +119,14 @@ describe('RichComboBridge', function() {
 		assert.ok(actionButtons.length);
 	});
 
-	it.skip('should execute the onClick method with the item value when clicking on an item', function() {
+	it('executes the onClick method with the item value when clicking on an item', function() {
 		var clickListener = sinon.stub();
 
-		var clickListenerProxy = function(event) {
-			clickListener(event.data);
-		};
+		this.nativeEditor.once('richComboClick', clickListener);
 
-		this.nativeEditor.once('richComboClick', clickListenerProxy);
-
+		const Component = AlloyEditor.Buttons[richComboName];
 		var buttonRichCombo = this.render(
-			<AlloyEditor.Buttons.ButtonRichCombo expanded={true} />,
+			<Component expanded={true} />,
 			this.container
 		);
 
@@ -141,19 +143,15 @@ describe('RichComboBridge', function() {
 		assert.ok(dropdown);
 		assert.equal(1, dropdown.length);
 
-		var richComboItem = TestUtils.findAllInRenderedTree(
-			dropdown[0],
-			function(component) {
-				return (
-					TestUtils.isDOMComponent(component) &&
-					component.getAttribute('data-value') === 'entry2'
-				);
-			}
+		var richComboItem = ReactDOM.findDOMNode(buttonRichCombo).querySelector(
+			'[data-value=entry2]'
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(richComboItem[0]));
+		Simulate.click(richComboItem);
 
 		assert.isTrue(clickListener.calledOnce);
-		assert.isTrue(clickListener.calledWith('entry2'));
+		assert.isTrue(
+			clickListener.firstCall.calledWithMatch({data: 'entry2'})
+		);
 	});
 });

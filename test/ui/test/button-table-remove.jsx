@@ -5,13 +5,8 @@ var TestUtils = ReactTestUtils;
 var Simulate = TestUtils.Simulate;
 
 describe('ButtonTableRemove', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should remove a table if selection is inside one', function() {
 		var buttonTableRemove = this.render(
@@ -24,7 +19,7 @@ describe('ButtonTableRemove', function() {
 			'<table><tbody><tr><td> {}</td></tr></tbody></table>'
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTableRemove));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -45,7 +40,7 @@ describe('ButtonTableRemove', function() {
 			'Content with {no} table'
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTableRemove));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,

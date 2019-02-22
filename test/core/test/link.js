@@ -1,13 +1,8 @@
 var assert = chai.assert;
 
 describe('Link', function() {
-	before(Utils.createCKEditor);
-
-	after(Utils.destroyCKEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createCKEditor);
+	afterEach(Utils.destroyCKEditor);
 
 	it('should create a link from a selection', function() {
 		var link = new CKEDITOR.Link(this.nativeEditor);

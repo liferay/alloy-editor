@@ -6,7 +6,9 @@ const alloyEditorDir = 'dist/alloy-editor/';
 const preprocessors = {
 	'test/**/*.html': ['html2js'],
 	'src/**/*.js*': ['webpack'],
-	'test/**/*.js*': ['webpack'],
+	'test/*.js': ['webpack'],
+	'test/lib/*.js': ['webpack'],
+	'test/(core|plugins|ui)/**/*.js*': ['webpack'],
 };
 
 const DEBUG = argv.debug || argv.d;
@@ -19,8 +21,6 @@ const filesToLoad = [
 	/* AlloyEditor skins */
 	'dist/alloy-editor/assets/alloy-editor-ocean.css',
 
-	'test/vendor/happen.js',
-
 	/* CKEditor JS files */
 	'dist/alloy-editor/ckeditor.js',
 	'dist/alloy-editor/styles.js',
@@ -30,10 +30,8 @@ const filesToLoad = [
 	'test/ui/test/plugins/test_*/plugin.js',
 
 	/* bender requires CKEDITOR, should be after ckeditor.js */
-	'scripts/test/bender.js',
-
-	'scripts/test/utils-alloy-editor.js',
-	'scripts/test/utils-ckeditor.js',
+	'test/lib/vendor/bender.js',
+	'test/lib/vendor/happen.js',
 
 	/* Fixtures */
 	'test/core/test/fixtures/**/*',

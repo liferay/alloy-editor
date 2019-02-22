@@ -2,17 +2,13 @@ var assert = chai.assert;
 
 describe('SelectionRegion', function() {
 	describe('with focusing the editor after instance create', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_selectionregion',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should create selection from range', function() {
 			this.nativeEditor.setData(

@@ -6,8 +6,8 @@ const TestUtils = ReactTestUtils;
 const documentBrowseLinkUrl = 'http://alloyeditor.com/some/location';
 let documentBrowseLinkCallback;
 
-describe('ButtonLinkEditBrowse', () => {
-	before(done => {
+describe('ButtonLinkEditBrowse', function() {
+	beforeEach(function(done) {
 		documentBrowseLinkCallback = sinon.spy();
 
 		Utils.createAlloyEditor.call(this, done, {
@@ -16,13 +16,9 @@ describe('ButtonLinkEditBrowse', () => {
 		});
 	});
 
-	after(Utils.destroyAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
-
-	it('should invoke a callback', () => {
+	it('should invoke a callback', function() {
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
 			'<a href="http://alloyeditor.com" target="_blank">{Alloy Editor}</a>'
@@ -42,13 +38,20 @@ describe('ButtonLinkEditBrowse', () => {
 
 		Simulate.click(buttonBrowse);
 
-		assert(documentBrowseLinkCallback.called);
+		assert.ok(documentBrowseLinkCallback.calledOnce);
 
-		assert(
+		assert.ok(
 			documentBrowseLinkCallback.calledWith(
 				this.nativeEditor,
 				documentBrowseLinkUrl,
-				'_blank'
+				sinon.match(value => {
+					// This is a dynamically-constructed callback function
+					// created in `_browseClick` in <ButtonLinkEditBrowse>:
+					return (
+						typeof value === 'function' &&
+						value.toString().match(/\blinkTarget\b/)
+					);
+				})
 			)
 		);
 	});

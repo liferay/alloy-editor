@@ -9,22 +9,20 @@ var skipTestIE = function() {
 describe('imageScaleResize', function() {
 	var url = 'http://localhost/url_test';
 
+	before(function() {
+		skipTestIE.call(this);
+	});
+
 	describe('with the default value "both"', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have 8 resize handlers', function() {
-			skipTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'Test image dragresize plugin {<img src="url_test" />} here.'
@@ -36,8 +34,6 @@ describe('imageScaleResize', function() {
 		});
 
 		it('should set backgroundImage url equal to the src of the img when mousedown is fired', function(done) {
-			skipTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'Test image dragresize plugin {<img src="' + url + '" />} here.'
@@ -64,22 +60,16 @@ describe('imageScaleResize', function() {
 	});
 
 	describe('with the value "scale', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize',
 				imageScaleResize: 'scale',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have 4 handlers', function() {
-			skipTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'Test image dragresize plugin {<img src="' + url + '" />} here.'
@@ -92,22 +82,16 @@ describe('imageScaleResize', function() {
 	});
 
 	describe('with the value "width"', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize',
 				imageScaleResize: 'width',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have 6 handlers', function() {
-			skipTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'Test image dragresize plugin {<img src="' + url + '" />} here.'
@@ -120,22 +104,16 @@ describe('imageScaleResize', function() {
 	});
 
 	describe('with the value "height"', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize',
 				imageScaleResize: 'height',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have 6 handlers', function() {
-			skipTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'Test image dragresize plugin {<img src="' + url + '" />} here.'

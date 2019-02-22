@@ -4,13 +4,8 @@ var assert = chai.assert;
 var Simulate = ReactTestUtils.Simulate;
 
 describe('ButtonImageAlignCenter', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should apply styles for centering an image', function() {
 		bender.tools.selection.setWithHtml(
@@ -23,7 +18,7 @@ describe('ButtonImageAlignCenter', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonImageAlignCenter));
+		Simulate.click(this.container.firstChild);
 
 		var testImageEl = new CKEDITOR.dom.element(
 			document.getElementById('testImage')
@@ -45,7 +40,7 @@ describe('ButtonImageAlignCenter', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonImageAlignCenter));
+		Simulate.click(this.container.firstChild);
 
 		var testImageEl = new CKEDITOR.dom.element(
 			document.getElementById('testImage')
@@ -66,7 +61,7 @@ describe('ButtonImageAlignCenter', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonImageAlignCenter));
+		Simulate.click(this.container.firstChild);
 
 		var testImageEl = new CKEDITOR.dom.element(
 			document.getElementById('testImage')
@@ -88,7 +83,7 @@ describe('ButtonImageAlignCenter', function() {
 			this.container
 		);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonImageAlignCenter);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),

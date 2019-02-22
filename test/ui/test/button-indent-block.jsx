@@ -4,13 +4,8 @@ var assert = chai.assert;
 var Simulate = ReactTestUtils.Simulate;
 
 describe('ButtonIndent', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should indent the content when the indent button is clicked', function() {
 		bender.tools.selection.setWithHtml(
@@ -20,7 +15,7 @@ describe('ButtonIndent', function() {
 
 		var buttonIndent = this.render(<ButtonIndentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonIndent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -42,7 +37,7 @@ describe('ButtonIndent', function() {
 
 		var buttonIndent = this.render(<ButtonIndentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonIndent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -66,7 +61,7 @@ describe('ButtonIndent', function() {
 
 		var buttonIndent = this.render(<ButtonIndentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonIndent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,

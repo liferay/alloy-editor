@@ -38,7 +38,9 @@ function globPatternToRegExp(pattern) {
 
 module.exports = function() {
 	var sources = [
-		'scripts/test/globals.js',
+		'test/lib/globals.js',
+		'test/lib/utils.js',
+		'test/lib/karma-overrides.js',
 		'src/adapter/main.js',
 		'src/core/debounce.js',
 		'src/core/link.js',

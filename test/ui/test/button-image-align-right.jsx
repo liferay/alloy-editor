@@ -4,13 +4,9 @@ var assert = chai.assert;
 var Simulate = ReactTestUtils.Simulate;
 
 describe('ButtonImageAlignRight', function() {
-	before(Utils.createAlloyEditor);
+	beforeEach(Utils.createAlloyEditor);
 
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should apply styles for aligning an image on right', function() {
 		bender.tools.selection.setWithHtml(
@@ -23,7 +19,7 @@ describe('ButtonImageAlignRight', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonImageAlignRight));
+		Simulate.click(this.container.firstChild);
 
 		var testImageEl = new CKEDITOR.dom.element(
 			document.getElementById('testImage')
@@ -43,7 +39,7 @@ describe('ButtonImageAlignRight', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonImageAlignRight));
+		Simulate.click(this.container.firstChild);
 
 		var testImageEl = new CKEDITOR.dom.element(
 			document.getElementById('testImage')
@@ -64,7 +60,7 @@ describe('ButtonImageAlignRight', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonImageAlignRight));
+		Simulate.click(this.container.firstChild);
 
 		var testImageEl = new CKEDITOR.dom.element(
 			document.getElementById('testImage')
@@ -84,7 +80,7 @@ describe('ButtonImageAlignRight', function() {
 			this.container
 		);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonImageAlignRight);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),

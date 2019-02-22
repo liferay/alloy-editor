@@ -4,13 +4,8 @@ var assert = chai.assert;
 var Simulate = ReactTestUtils.Simulate;
 
 describe('ButtonH1', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should make a text selection h1 on click', function() {
 		bender.tools.selection.setWithHtml(
@@ -20,7 +15,7 @@ describe('ButtonH1', function() {
 
 		var buttonH1 = this.render(<ButtonH1 />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonH1));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -41,7 +36,7 @@ describe('ButtonH1', function() {
 
 		var buttonH1 = this.render(<ButtonH1 />, this.container);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonH1);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),

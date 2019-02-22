@@ -4,6 +4,50 @@ var assert = chai.assert;
 var TestUtils = ReactTestUtils;
 
 describe('ToolbarAdd', function() {
+	describe('test rendering', function() {
+		var editorConfig = {
+			eventsDelay: 0,
+			toolbars: {
+				add: {
+					position: ToolbarAdd.right,
+				},
+			},
+			uicore: {
+				timeout: 0,
+			},
+		};
+
+		beforeEach(function(done) {
+			Utils.createAlloyEditor.call(this, done, editorConfig);
+		});
+
+		afterEach(Utils.destroyAlloyEditor);
+
+		it('renders the toolbar on the right', function(done) {
+			// Test passes on IE11 and Windows 7 locally, fails when executed by
+			// Travis on SauceLabs, so it will be disabled
+			if (CKEDITOR.env.ie && CKEDITOR.env.version === 11) {
+				return;
+			}
+
+			var editable = this.nativeEditor.editable();
+
+			happen.mousedown(editable);
+
+			// DOM node may be in wrong position if we read its position
+			// immediately (for example, if the editor had previously been drawn
+			// on the screen with different config). Reading after a minimum
+			// delay allows it to be drawn in the right position.
+			setTimeout(() => {
+				var domNode = ReactDOM.findDOMNode(
+					this.editor._mainUI
+				).querySelector('.ae-toolbar-add');
+				assert.isTrue(domNode.offsetLeft > editable.$.offsetLeft);
+				done();
+			}, 0);
+		});
+	});
+
 	describe('test focusing', function() {
 		var editorConfig = {
 			eventsDelay: 0,
@@ -15,15 +59,11 @@ describe('ToolbarAdd', function() {
 			},
 		};
 
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createAlloyEditor.call(this, done, editorConfig);
 		});
 
-		after(Utils.destroyAlloyEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyAlloyEditor);
 
 		it('should not render when user interacts with a non-editable node', function() {
 			var editorEvent = {
@@ -36,12 +76,12 @@ describe('ToolbarAdd', function() {
 				},
 			};
 
-			var mainUI = this.render(
+			this.render(
 				<ToolbarAdd editorEvent={editorEvent} />,
 				this.container
 			);
 
-			assert.isNull(ReactDOM.findDOMNode(mainUI));
+			assert.isNull(this.container.firstChild);
 		});
 
 		it('should render in the focused editor', function(done) {
@@ -156,50 +196,6 @@ describe('ToolbarAdd', function() {
 					);
 				}.bind(this)
 			);
-		});
-	});
-
-	describe('test rendering', function() {
-		var editorConfig = {
-			eventsDelay: 0,
-			toolbars: {
-				add: {
-					position: ToolbarAdd.right,
-				},
-			},
-			uicore: {
-				timeout: 0,
-			},
-		};
-
-		before(function(done) {
-			Utils.createAlloyEditor.call(this, done, editorConfig);
-		});
-
-		after(Utils.destroyAlloyEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
-
-		it('should render the toolbar on right', function() {
-			// Test passes on IE11 and Windows 7 locally, fails when executed by
-			// Travis on SauceLabs, so it will be disabled
-			if (CKEDITOR.env.ie && CKEDITOR.env.version === 11) {
-				return;
-			}
-
-			var editable = this.nativeEditor.editable();
-			happen.mousedown(editable);
-
-			var toolbarAdd = TestUtils.findRenderedDOMComponentWithClass(
-				this.editor._mainUI,
-				'ae-toolbar-add'
-			);
-
-			var domNode = ReactDOM.findDOMNode(toolbarAdd);
-
-			assert.isTrue(domNode.offsetLeft > editable.$.offsetLeft);
 		});
 	});
 });

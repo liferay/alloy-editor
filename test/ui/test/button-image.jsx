@@ -3,13 +3,8 @@ import ButtonImage from '../../../src/components/buttons/button-image.jsx';
 var assert = chai.assert;
 
 describe('ButtonImage', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should call a click listener of the file input', function() {
 		var buttonImage = this.render(<ButtonImage />, this.container);
@@ -18,10 +13,7 @@ describe('ButtonImage', function() {
 			event.preventDefault();
 		});
 
-		ReactDOM.findDOMNode(buttonImage.fileInput.current).addEventListener(
-			'click',
-			fileInputStub
-		);
+		this.container.firstChild.addEventListener('click', fileInputStub);
 
 		buttonImage.handleClick();
 

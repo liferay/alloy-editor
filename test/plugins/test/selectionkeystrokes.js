@@ -3,7 +3,7 @@ var assert = chai.assert;
 var KEY_L = 76;
 
 describe('ae_selectionkeystrokes', function() {
-	before(function(done) {
+	beforeEach(function(done) {
 		Utils.createCKEditor.call(this, done, {
 			extraPlugins: 'ae_selectionkeystrokes',
 			selectionKeystrokes: [
@@ -15,11 +15,7 @@ describe('ae_selectionkeystrokes', function() {
 		});
 	});
 
-	after(Utils.destroyCKEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyCKEditor);
 
 	it('should fire an editorInteraction change when pressing the configured keystroke', function() {
 		var onEditorInteraction = sinon.spy();

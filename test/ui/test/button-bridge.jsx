@@ -3,19 +3,20 @@ var TestUtils = ReactTestUtils;
 var Simulate = TestUtils.Simulate;
 
 describe('ButtonBridge', function() {
-	before(function(done) {
+	let counter = 0;
+	let buttonClickName = null;
+
+	beforeEach(function(done) {
+		buttonClickName = `ButtonClick${++counter}`;
 		Utils.createAlloyEditor.call(this, done, {
 			extraPlugins:
 				AlloyEditor.Core.ATTRS.extraPlugins.value +
 				',ae_buttonbridge,test_buttonbridge',
+			buttonClickName,
 		});
 	});
 
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should name buttons based on their input params', function() {
 		assert.property(
@@ -25,8 +26,8 @@ describe('ButtonBridge', function() {
 		);
 		assert.property(
 			AlloyEditor.Buttons,
-			'ButtonClick',
-			'ButtonCommand should have been registered'
+			buttonClickName,
+			`${buttonClickName} should have been registered`
 		);
 		assert.property(
 			AlloyEditor.Buttons,
@@ -45,7 +46,7 @@ describe('ButtonBridge', function() {
 			this.container
 		);
 
-		Simulate.click(ReactDOM.findDOMNode(button));
+		Simulate.click(this.container.firstChild);
 
 		assert.isTrue(clickListener.calledOnce);
 	});
@@ -55,12 +56,10 @@ describe('ButtonBridge', function() {
 
 		this.nativeEditor.once('buttonClick', clickListener);
 
-		var button = this.render(
-			<AlloyEditor.Buttons.ButtonClick />,
-			this.container
-		);
+		var Component = AlloyEditor.Buttons[buttonClickName];
+		var button = this.render(<Component />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(button));
+		Simulate.click(this.container.firstChild);
 
 		assert.isTrue(clickListener.calledOnce);
 	});
@@ -72,12 +71,10 @@ describe('ButtonBridge', function() {
 		this.nativeEditor.once('buttonClick', clickListener1);
 		this.nativeEditor.once('buttonClick2', clickListener2);
 
-		var button = this.render(
-			<AlloyEditor.Buttons.ButtonClick />,
-			this.container
-		);
+		var Component = AlloyEditor.Buttons[buttonClickName];
+		var button = this.render(<Component />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(button));
+		Simulate.click(this.container.firstChild);
 
 		assert.isTrue(clickListener1.calledOnce);
 		assert.equal(0, clickListener2.callCount);

@@ -2,8 +2,9 @@ CKEDITOR.plugins.add('test_richcombobridge', {
 	init: function(editor) {
 		if (editor.ui.addRichCombo) {
 			var richComboentries = ['entry1', 'entry2', 'entry3'];
+			var richComboName = editor.config.richComboName;
 
-			editor.ui.addRichCombo('ButtonRichCombo', {
+			editor.ui.addRichCombo(richComboName, {
 				label: 'Button 1',
 				init: function() {
 					this.startGroup('test_richcombo_group');

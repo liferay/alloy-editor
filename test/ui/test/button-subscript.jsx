@@ -4,13 +4,8 @@ var assert = chai.assert;
 var Simulate = ReactTestUtils.Simulate;
 
 describe('ButtonSubscript', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should make a text selection subscript on click', function() {
 		bender.tools.selection.setWithHtml(
@@ -20,7 +15,7 @@ describe('ButtonSubscript', function() {
 
 		var buttonSubscript = this.render(<ButtonSubscript />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonSubscript));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -41,7 +36,7 @@ describe('ButtonSubscript', function() {
 
 		var buttonSubscript = this.render(<ButtonSubscript />, this.container);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonSubscript);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),

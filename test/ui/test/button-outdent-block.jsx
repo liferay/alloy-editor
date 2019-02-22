@@ -4,13 +4,8 @@ var assert = chai.assert;
 var Simulate = ReactTestUtils.Simulate;
 
 describe('ButtonOutdent', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should outdent the content when the outdent button is clicked', function() {
 		bender.tools.selection.setWithHtml(
@@ -20,7 +15,7 @@ describe('ButtonOutdent', function() {
 
 		var buttonOutdent = this.render(<ButtonOutdentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -42,7 +37,7 @@ describe('ButtonOutdent', function() {
 
 		var buttonOutdent = this.render(<ButtonOutdentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,
@@ -66,7 +61,7 @@ describe('ButtonOutdent', function() {
 
 		var buttonOutdent = this.render(<ButtonOutdentBlock />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonOutdent));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: false,

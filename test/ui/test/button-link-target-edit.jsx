@@ -5,15 +5,10 @@ var assert = chai.assert;
 var TestUtils = ReactTestUtils;
 
 describe('ButtonLinkTargetEdit', function() {
-	before(Utils.createAlloyEditor);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
-
-	it('should render ButtonLinkTargetEdit into ButtonLinkEdit by default', function() {
+	it('renders ButtonLinkTargetEdit into ButtonLinkEdit by default', function() {
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
 			'There should be a <a>{selection}</a> made bold.'
@@ -29,7 +24,7 @@ describe('ButtonLinkTargetEdit', function() {
 		assert.strictEqual(buttonLinkTargetEditRendered.length, 1);
 	});
 
-	it('should dont render ButtonLinkTargetEdit when showTargetSelector is false', function() {
+	it('does not render ButtonLinkTargetEdit when showTargetSelector is false', function() {
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
 			'There should be a <a>{selection}</a> made bold.'

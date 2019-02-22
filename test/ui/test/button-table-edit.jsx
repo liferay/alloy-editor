@@ -10,13 +10,8 @@ var KEY_ESC = 27;
 var getFixture = Utils.getFixture('test/ui/test/fixtures');
 
 describe('ButtonTableEdit', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should create a 3x3 table by default when clicking on the confirm button', function() {
 		var buttonTableEdit = this.render(
@@ -24,12 +19,10 @@ describe('ButtonTableEdit', function() {
 			this.container
 		);
 
-		var confirmButton = TestUtils.findRenderedDOMComponentWithTag(
-			buttonTableEdit,
-			'button'
-		);
+		var confirmButton = this.container.querySelector('button');
+		assert.ok(confirmButton);
 
-		Simulate.click(ReactDOM.findDOMNode(confirmButton));
+		Simulate.click(confirmButton);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,
@@ -54,12 +47,10 @@ describe('ButtonTableEdit', function() {
 			target: {value: 4},
 		});
 
-		var confirmButton = TestUtils.findRenderedDOMComponentWithTag(
-			buttonTableEdit,
-			'button'
-		);
+		var confirmButton = this.container.querySelector('button');
+		assert.ok(confirmButton);
 
-		Simulate.click(ReactDOM.findDOMNode(confirmButton));
+		Simulate.click(confirmButton);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,

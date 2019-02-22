@@ -6,13 +6,8 @@ var Simulate = ReactTestUtils.Simulate;
 var TestUtils = ReactTestUtils;
 
 describe('ButtonLink', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should create link with default http protocol', function() {
 		bender.tools.selection.setWithHtml(this.nativeEditor, '{selection}');

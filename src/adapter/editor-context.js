@@ -15,13 +15,13 @@ const EditorContext = React.createContext({});
  * in via a prop.
  */
 EditorContext.toProps = Component => {
-	const componentWithContext = props => (
+	const forwardingComponent = React.forwardRef((props, ref) => (
 		<EditorContext.Consumer>
-			{context => <Component {...props} context={context} />}
+			{context => <Component {...props} context={context} ref={ref} />}
 		</EditorContext.Consumer>
-	);
-	componentWithContext.key = Component.key;
-	return componentWithContext;
+	));
+	forwardingComponent.key = Component.key;
+	return forwardingComponent;
 };
 
 export default EditorContext;

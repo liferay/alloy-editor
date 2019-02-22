@@ -12,22 +12,20 @@ var doTestIE = function() {
 describe('imageScaleResize on IE', function() {
 	var url = 'http://localhost/url_test';
 
+	before(function() {
+		doTestIE.call(this);
+	});
+
 	describe('with the default value "both"', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize_ie',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have imageScaleResize value as default "both"', function() {
-			doTestIE.call(this);
-
 			assert.strictEqual(
 				this.nativeEditor.config.imageScaleResize,
 				'both'
@@ -35,8 +33,6 @@ describe('imageScaleResize on IE', function() {
 		});
 
 		it('should set data-widget to the image', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
@@ -50,8 +46,6 @@ describe('imageScaleResize on IE', function() {
 		});
 
 		it('should have span to resize image with cursor nwse-resize', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
@@ -65,27 +59,21 @@ describe('imageScaleResize on IE', function() {
 				'cke_image_resizer_nwse-resize'
 			)[0];
 
-			assert(span);
+			assert.ok(span);
 		});
 	});
 
 	describe('with height value', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize_ie',
 				imageScaleResize: 'height',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have span to resize image with cursor ns-resize', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
@@ -99,27 +87,21 @@ describe('imageScaleResize on IE', function() {
 				'cke_image_resizer_ns-resize'
 			)[0];
 
-			assert(span);
+			assert.ok(span);
 		});
 	});
 
 	describe('with scale value', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize_ie',
 				imageScaleResize: 'scale',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have span to resize image with cursor nwse-resize', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
@@ -133,27 +115,21 @@ describe('imageScaleResize on IE', function() {
 				'cke_image_resizer_nwse-resize'
 			)[0];
 
-			assert(span);
+			assert.ok(span);
 		});
 	});
 
 	describe('with width value', function() {
-		before(function(done) {
+		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
 				extraPlugins: 'ae_dragresize_ie',
 				imageScaleResize: 'width',
 			});
 		});
 
-		after(Utils.destroyCKEditor);
-
-		beforeEach(Utils.beforeEach);
-
-		afterEach(Utils.afterEach);
+		afterEach(Utils.destroyCKEditor);
 
 		it('should have span to resize image with cursor ew-resize', function() {
-			doTestIE.call(this);
-
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
 				'<p>Test image dragresize plugin {<img alt="" id="image" src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg" />} here.</p>'
@@ -167,7 +143,7 @@ describe('imageScaleResize on IE', function() {
 				'cke_image_resizer_ew-resize'
 			)[0];
 
-			assert(span);
+			assert.ok(span);
 		});
 	});
 });

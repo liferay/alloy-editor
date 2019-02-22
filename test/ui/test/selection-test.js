@@ -13,13 +13,8 @@ describe('SelectionTest', function() {
 		};
 	};
 
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	describe('link', function() {
 		var linkTest = AlloyEditor.SelectionTest.link;

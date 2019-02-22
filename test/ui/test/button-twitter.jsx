@@ -4,20 +4,15 @@ var assert = chai.assert;
 var Simulate = ReactTestUtils.Simulate;
 
 describe('ButtonTwitter', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
-
-	afterEach(Utils.afterEach);
+	beforeEach(Utils.createAlloyEditor);
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('should add ae-twitter-link', function() {
 		bender.tools.selection.setWithHtml(this.nativeEditor, '{tweet}');
 
 		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTwitter));
+		Simulate.click(this.container.firstChild);
 
 		assert.strictEqual(
 			1,
@@ -30,7 +25,7 @@ describe('ButtonTwitter', function() {
 
 		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTwitter));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,
@@ -51,7 +46,7 @@ describe('ButtonTwitter', function() {
 
 		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
-		var buttonDOMNode = ReactDOM.findDOMNode(buttonTwitter);
+		var buttonDOMNode = this.container.firstChild;
 
 		assert.strictEqual(
 			buttonDOMNode.classList.contains('ae-button-pressed'),
@@ -67,7 +62,7 @@ describe('ButtonTwitter', function() {
 
 		var buttonTwitter = this.render(<ButtonTwitter />, this.container);
 
-		Simulate.click(ReactDOM.findDOMNode(buttonTwitter));
+		Simulate.click(this.container.firstChild);
 
 		var data = bender.tools.getData(this.nativeEditor, {
 			fixHtml: true,

@@ -302,10 +302,10 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 				range.setStart(nextEditableNode, 0);
 				range.setEnd(nextEditableNode, 0);
 			} else {
-				let nextNode = range.getNextNode();
+				let enclosedNode = range.getEnclosedNode();
 
-				range.setStart(nextNode, 1);
-				range.setEnd(nextNode, 1);
+				range.setStart(enclosedNode, 0);
+				range.setEnd(enclosedNode, 0);
 			}
 
 			range.select();

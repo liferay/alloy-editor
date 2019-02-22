@@ -13,18 +13,14 @@ var KEY_ESC = 27;
 var getFixture = Utils.getFixture('test/ui/test/fixtures');
 
 describe('ButtonEmbedEdit Component', function() {
-	before(Utils.createAlloyEditor);
-
-	after(Utils.destroyAlloyEditor);
-
-	beforeEach(Utils.beforeEach);
+	beforeEach(Utils.createAlloyEditor);
 
 	afterEach(function(done) {
 		if (CKEDITOR.tools.jsonp.restore) {
 			CKEDITOR.tools.jsonp.restore();
 		}
 
-		Utils.afterEach.call(this, done);
+		Utils.destroyAlloyEditor.call(this, done);
 	});
 
 	it('should focus on the link input as soon as the component gets rendered', function(done) {
@@ -34,11 +30,11 @@ describe('ButtonEmbedEdit Component', function() {
 			return;
 		}
 		// Make requestAnimationFrame synchronous to avoid unnecessary test delays
-		var stub = sinon.stub(window, 'requestAnimationFrame', function(
-			callback
-		) {
-			callback();
-		});
+		var stub = sinon
+			.stub(window, 'requestAnimationFrame')
+			.callsFake(function(callback) {
+				callback();
+			});
 
 		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit renderExclusive={true} />,
@@ -58,7 +54,9 @@ describe('ButtonEmbedEdit Component', function() {
 	it('should focus on the link input as soon as the component gets rendered in older browsers', function() {
 		// Make setTimeout synchronous to avoid unnecessary test delays
 		var requestAnimationFrame = window.requestAnimationFrame;
-		var stub = sinon.stub(window, 'setTimeout', function(callback) {
+		var stub = this.stub(window, 'setTimeout').callsFake(function(
+			callback
+		) {
 			callback();
 		});
 
@@ -195,11 +193,13 @@ describe('ButtonEmbedEdit Component', function() {
 	});
 
 	it('should update the embed content when the embed url is changed', function() {
-		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-			success({
-				html: getFixture('embed_content.html'),
+		sinon
+			.stub(CKEDITOR.tools, 'jsonp')
+			.callsFake(function(fn, data, success, fail) {
+				success({
+					html: getFixture('embed_content.html'),
+				});
 			});
-		});
 
 		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit
@@ -235,11 +235,13 @@ describe('ButtonEmbedEdit Component', function() {
 	});
 
 	it('should change the embed content when the KEY_ENTER is pressed inside the link input', function() {
-		sinon.stub(CKEDITOR.tools, 'jsonp', function(fn, data, success, fail) {
-			success({
-				html: getFixture('embed_content.html'),
+		sinon
+			.stub(CKEDITOR.tools, 'jsonp')
+			.callsFake(function(fn, data, success, fail) {
+				success({
+					html: getFixture('embed_content.html'),
+				});
 			});
-		});
 
 		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit

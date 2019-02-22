@@ -222,8 +222,9 @@ class ButtonLinkEdit extends React.Component {
 		const link = new CKEDITOR.Link(
 			editor.get('nativeEditor')
 		).getFromSelection();
-		const href = link ? link.getAttribute('href') : '';
-		const target = link ? link.getAttribute('target') : defaultLinkTarget;
+		const href = (link && link.getAttribute('href')) || '';
+		const target =
+			(link && link.getAttribute('target')) || defaultLinkTarget;
 
 		return {
 			autocompleteSelected: false,

@@ -152,12 +152,20 @@ describe('AlloyEditor', function() {
 			var nativeEditor = alloyEditor.get('nativeEditor');
 
 			nativeEditor.on('editorUpdate', onEditorUpdate);
+			nativeEditor.on('uiReady', () => {
+				alloyEditor._mainUI.setState({hidden: true}, () => {
+					assert.ok(onEditorUpdate.calledOnce);
+					done();
+				});
+			});
+		});
+
+		it('should dispatch a uiReady event', function(done) {
+			var alloyEditor = this.alloyEditor;
+
+			var nativeEditor = alloyEditor.get('nativeEditor');
 
 			nativeEditor.on('uiReady', function() {
-				alloyEditor._mainUI.setState({hidden: true});
-
-				assert.ok(onEditorUpdate.calledOnce);
-
 				done();
 			});
 		});
@@ -240,7 +248,16 @@ describe('AlloyEditor', function() {
 
 			happen.click(document.getElementById('link_foo'));
 
-			assert.strictEqual(window.location.href, locationHref + '#foo');
+			try {
+				assert.strictEqual(window.location.href, locationHref + '#foo');
+			} finally {
+				// When running in debug mode in a browser window, want to make
+				// sure that we can refresh the page to re-run the tests, so we
+				// need to reset the location back to its original state.
+				if (window.history.replaceState) {
+				   window.history.replaceState(null, '', locationHref);
+				}
+			}
 		});
 
 		it('should not redirect when clicking on links and readonly has been set to', function() {
@@ -306,7 +323,7 @@ describe('AlloyEditor', function() {
 		AlloyEditor.loadLanguageResources(langResourcesLoaded);
 
 		setTimeout(function() {
-			assert(langResourcesLoaded.calledOnce);
+			assert.ok(langResourcesLoaded.calledOnce);
 			assert.property(AlloyEditor, 'Strings');
 			done();
 		}, 50);
@@ -348,7 +365,7 @@ describe('AlloyEditor', function() {
 	});
 
 	describe('in IE browsers', function() {
-		beforeEach(function() {
+		before(function() {
 			doTestIE.call(this);
 		});
 
@@ -357,8 +374,6 @@ describe('AlloyEditor', function() {
 		});
 
 		it('should use the ae_dragresize_ie plugin instead of ae_dragresize by default', function(done) {
-			doTestIE.call(this);
-
 			initEditor.call(
 				this,
 				function() {
