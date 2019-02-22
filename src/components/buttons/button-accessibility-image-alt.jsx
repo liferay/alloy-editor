@@ -16,7 +16,7 @@ import ReactDOM from 'react-dom';
 class ButtonAccessibilityImageAlt extends React.Component {
 	static contextType = EditorContext;
 
-	static key = 'AccessibilityImageAlt';
+	static key = 'imageAlt';
 
 	constructor(props) {
 		super(props);
