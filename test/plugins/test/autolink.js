@@ -85,7 +85,7 @@ describe('AutoLink', function() {
 		});
 	});
 
-	it('should not trigger any error when pressing ENTER', function() {
+	xit('should not trigger any error when pressing ENTER', function() {
 		bender.tools.selection.setWithHtml(this.nativeEditor, '<p></p>');
 
 		var spanElement = CKEDITOR.dom.element.createFromHtml(
