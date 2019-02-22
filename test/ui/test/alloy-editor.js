@@ -248,7 +248,16 @@ describe('AlloyEditor', function() {
 
 			happen.click(document.getElementById('link_foo'));
 
-			assert.strictEqual(window.location.href, locationHref + '#foo');
+			try {
+				assert.strictEqual(window.location.href, locationHref + '#foo');
+			} finally {
+				// When running in debug mode in a browser window, want to make
+				// sure that we can refresh the page to re-run the tests, so we
+				// need to reset the location back to its original state.
+				if (window.history.replaceState) {
+				   window.history.replaceState(null, '', locationHref);
+				}
+			}
 		});
 
 		it('should not redirect when clicking on links and readonly has been set to', function() {
