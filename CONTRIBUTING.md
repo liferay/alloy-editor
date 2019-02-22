@@ -105,12 +105,16 @@ npm version --no-git-tag-version patch|minor|major
 
 ## 4. Generate changelog with [github_changelog_generator](https://github.com/skywinder/github-changelog-generator)
 
-```
+```sh
 gem install github_changelog_generator # using `sudo` if necessary
-github_changelog_generator liferay/alloy-editor -t $GITHUB_ACCESS_TOKEN
+github_changelog_generator liferay/alloy-editor \
+  -t $GITHUB_ACCESS_TOKEN \
+  --base CHANGELOG-1.x.md \
+  --since-tag v1.5.19 \
+  --future-release $VERSION
 ```
 
-The `$GITHUB_ACCESS_TOKEN` can be generated at [github.com/settings/tokens/new](https://github.com/settings/tokens/new), and only needs minimal capabilities ("repo:status", "repo_deployment", "public_repo" should suffice).
+Where `$VERSION` is the version you are about to release and the `$GITHUB_ACCESS_TOKEN` can be generated at [github.com/settings/tokens/new](https://github.com/settings/tokens/new). The token only needs minimal capabilities ("repo:status", "repo_deployment", "public_repo" should suffice).
 
 ## 5. Commit changelog
 
