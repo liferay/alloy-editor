@@ -2,6 +2,14 @@ var assert = chai.assert;
 
 var sandbox = sinon.createSandbox();
 
+function applyFirefoxHack(nativeEditor) {
+	// Hack for Firefox.
+	// If a contenteditable has been in the DOM before this test runs,
+	// CKEDITOR will blow up on trying to insertHtml, unless we insert this
+	// magical content (whitespace and an empty selection) first.
+	bender.tools.selection.setWithHtml(nativeEditor, ' {}');
+}
+
 describe('Embed plugin', function() {
 	beforeEach(function(done) {
 		Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_embed'});
@@ -43,7 +51,7 @@ describe('Embed plugin', function() {
 
 		var nativeEditor = this.nativeEditor;
 
-		bender.tools.selection.setWithHtml(nativeEditor, '{}');
+		applyFirefoxHack(nativeEditor);
 
 		nativeEditor.fire('paste', {
 			dataValue: url,
@@ -69,7 +77,7 @@ describe('Embed plugin', function() {
 
 		var nativeEditor = this.nativeEditor;
 
-		bender.tools.selection.setWithHtml(nativeEditor, '{}');
+		applyFirefoxHack(nativeEditor);
 
 		nativeEditor.fire('paste', {
 			dataValue: url,
