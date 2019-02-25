@@ -1,0 +1,4 @@
+[submodule "lib/ckeditor-dev"]
+	ignore = dirty
+	path = lib/ckeditor-dev
+	url = https://github.com/ckeditor/ckeditor-dev.git

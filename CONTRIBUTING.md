@@ -20,7 +20,9 @@ With each major version release, new maintenance branches are created, and futur
 ### Key files and directories
 
 * [dist/alloy-editor](https://github.com/liferay/alloy-editor/tree/master/dist): target directory where bundles (alloy-editor-all.js and friends) are built.
-* [lib/ckeditor](https://github.com/liferay/alloy-editor/tree/master/lib/ckeditor): source files from upstream CKEditor project.
+* [lib/ckeditor](https://github.com/liferay/alloy-editor/tree/master/lib/ckeditor): production-ready built files from the upstream CKEditor project.
+* [lib/ckeditor-debug](https://github.com/liferay/alloy-editor/tree/master/lib/ckeditor-debug): built-but-unminified files from the upstream CKEditor project.
+* [lib/ckeditor-dev](https://github.com/liferay/alloy-editor/tree/master/lib/ckeditor-dev): source files for building `lib/ckeditor` and `lib/ckeditor-debug`.
 * [lib/lang](https://github.com/liferay/alloy-editor/tree/master/lib/lang): language strings from upstream CKEditor project.
 * [src/adapter/main.js](https://github.com/liferay/alloy-editor/tree/master/src/adapter/main.js): defines the top-level `AlloyEditor` API.
 * [src/assets/lang](https://github.com/liferay/alloy-editor/tree/master/src/assets/lang): defines AlloyEditor-specific strings.
@@ -164,20 +166,12 @@ See [the Releases listing](https://github.com/liferay/alloy-editor/releases) on 
 
 ## Updating CKEditor.
 
-### 1. Open your favourite browser and navigate to https://ckeditor.com/cke4/builder.
+To update to, for example, v4.11.2, run: `scripts/build/build-ckeditor.sh 4.11.2` and commit the result. This is a wrapper for the `ckbuilder` tool.
 
-### 2. On this page you should see a button labelled "Upload build-config.js", *click it*:
+If you wish to modify the wrapper, see other switches that can be passed to the underlying tool with:
 
-This will open a file dialog letting you choose CKEditor's build configuration file:
-
-This file is located in `lib/ckeditor/build-config.js`, select it to upload it.
-
-### 4. Optionally if you want to add more plugins, scroll down and you should see two panels:
-
-On the left you'll see the list of selected plugins (automatically detected by parsing the `build-config.js` file uploaded previously) and on the right a list of the available plugins. Click on the plugins you wish to add and on the left arrow button ("<"), this will add the new plugins into the "selected plugins" panel.
-
-### 5. Finally, scroll to the bottom of the page, agree to the terms of use and click the "Download CKEditor" button.
-
-### 6. Once the file downloaded, unzip it and *replace* the `lib/ckeditor` directory with the new directory you unzipped.
+```sh
+java -jar lib/ckeditor-dev/dev/builder/ckbuilder/2.3.2/ckbuilder.jar
+```
 
 ### 7. Run `npm run build` and have a look at the demo to make sure everything is working correctly.
