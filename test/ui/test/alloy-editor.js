@@ -233,8 +233,6 @@ describe('AlloyEditor', function() {
 
 			happen.click(document.getElementById('link_foo'));
 
-			stub.restore();
-
 			assert.isTrue(stub.calledOnce);
 		});
 

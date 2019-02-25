@@ -1,7 +1,5 @@
 var assert = chai.assert;
 
-var sandbox = sinon.createSandbox();
-
 function applyFirefoxHack(nativeEditor) {
 	// Hack for Firefox.
 	// If a contenteditable has been in the DOM before this test runs,
@@ -15,15 +13,12 @@ describe('Embed plugin', function() {
 		Utils.createCKEditor.call(this, done, {extraPlugins: 'ae_embed'});
 	});
 
-	afterEach(function(done) {
-		sandbox.restore();
-		Utils.destroyCKEditor.call(this, done);
-	});
+	afterEach(Utils.destroyCKEditor);
 
 	it('should not convert links inside content', function() {
 		var nativeEditor = this.nativeEditor;
 
-		var spy = sandbox.spy(nativeEditor, 'execCommand');
+		var spy = sinon.spy(nativeEditor, 'execCommand');
 
 		bender.tools.selection.setWithHtml(
 			nativeEditor,
@@ -43,7 +38,7 @@ describe('Embed plugin', function() {
 		var tweetReturnHtml =
 			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-		sandbox
+		sinon
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				success({html: tweetReturnHtml, provider_name: 'Twitter'});
@@ -69,7 +64,7 @@ describe('Embed plugin', function() {
 		var tweetReturnHtml =
 			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-		sandbox
+		sinon
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				success({html: tweetReturnHtml, provider_name: 'YouTube'});
@@ -95,7 +90,7 @@ describe('Embed plugin', function() {
 		var tweetReturnHtml =
 			'<blockquote class="twitter-tweet" align="center">Hello Earth! Can you hear me?</blockquote>';
 
-		sandbox
+		sinon
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				success({
@@ -108,7 +103,7 @@ describe('Embed plugin', function() {
 
 		var isCalled = false;
 
-		sandbox.stub(nativeEditor, 'insertHtml').callsFake(function() {
+		sinon.stub(nativeEditor, 'insertHtml').callsFake(function() {
 			isCalled = true;
 			return;
 		});
@@ -125,7 +120,7 @@ describe('Embed plugin', function() {
 	it('should create a tag with url as href when url is pasted and there is a connection error', function() {
 		var url = 'https://foo.com';
 
-		sandbox
+		sinon
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				fail({});
@@ -135,7 +130,7 @@ describe('Embed plugin', function() {
 
 		var isCalled = false;
 
-		sandbox.stub(nativeEditor, 'insertHtml').callsFake(function() {
+		sinon.stub(nativeEditor, 'insertHtml').callsFake(function() {
 			isCalled = true;
 			return;
 		});
