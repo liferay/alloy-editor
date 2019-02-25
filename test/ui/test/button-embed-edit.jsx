@@ -12,16 +12,10 @@ var KEY_ESC = 27;
 
 var getFixture = Utils.getFixture('test/ui/test/fixtures');
 
-var sandbox = sinon.createSandbox();
-
 describe('ButtonEmbedEdit Component', function() {
 	beforeEach(Utils.createAlloyEditor);
 
-	afterEach(function(done) {
-		sandbox.restore();
-
-		Utils.destroyAlloyEditor.call(this, done);
-	});
+	afterEach(Utils.destroyAlloyEditor);
 
 	it('focuses on the link input as soon as the component gets rendered', function(done) {
 		// On IE9 window.requestAnimationFrame does not exist. Avoid this test on IE9
@@ -30,7 +24,7 @@ describe('ButtonEmbedEdit Component', function() {
 			return;
 		}
 		// Make requestAnimationFrame synchronous to avoid unnecessary test delays
-		var stub = sandbox
+		sinon
 			.stub(window, 'requestAnimationFrame')
 			.callsFake(function(callback) {
 				callback();
@@ -40,8 +34,6 @@ describe('ButtonEmbedEdit Component', function() {
 			<ButtonEmbedEdit renderExclusive={true} />,
 			this.container
 		);
-
-		stub.restore();
 
 		assert.strictEqual(
 			document.activeElement,
@@ -54,7 +46,7 @@ describe('ButtonEmbedEdit Component', function() {
 	it('focuses on the link input as soon as the component gets rendered in older browsers', function() {
 		// Make setTimeout synchronous to avoid unnecessary test delays
 		var requestAnimationFrame = window.requestAnimationFrame;
-		var stub = sandbox
+		sinon
 			.stub(window, 'setTimeout')
 			.callsFake(function(callback) {
 				callback();
@@ -68,7 +60,6 @@ describe('ButtonEmbedEdit Component', function() {
 		);
 
 		window.requestAnimationFrame = requestAnimationFrame;
-		stub.restore();
 
 		assert.strictEqual(
 			document.activeElement,
@@ -164,7 +155,7 @@ describe('ButtonEmbedEdit Component', function() {
 	});
 
 	it('clears the link input when the remove button inside the link input is clicked', function() {
-		var cancelExclusive = sandbox.stub();
+		var cancelExclusive = sinon.stub();
 
 		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit
@@ -193,7 +184,7 @@ describe('ButtonEmbedEdit Component', function() {
 	});
 
 	it('updates the embed content when the embed url is changed', function() {
-		sandbox
+		sinon
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				success({
@@ -203,7 +194,7 @@ describe('ButtonEmbedEdit Component', function() {
 
 		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit
-				cancelExclusive={sandbox.stub()}
+				cancelExclusive={sinon.stub()}
 				renderExclusive={true}
 			/>,
 			this.container
@@ -235,7 +226,7 @@ describe('ButtonEmbedEdit Component', function() {
 	});
 
 	it('changes the embed content when the KEY_ENTER is pressed inside the link input', function() {
-		sandbox
+		sinon
 			.stub(CKEDITOR.tools, 'jsonp')
 			.callsFake(function(fn, data, success, fail) {
 				success({
@@ -245,7 +236,7 @@ describe('ButtonEmbedEdit Component', function() {
 
 		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit
-				cancelExclusive={sandbox.stub()}
+				cancelExclusive={sinon.stub()}
 				renderExclusive={true}
 			/>,
 			this.container
@@ -276,7 +267,7 @@ describe('ButtonEmbedEdit Component', function() {
 	});
 
 	it('close the toolbar when KEY_ESC is pressed inside the link input', function() {
-		var spy = sandbox.spy();
+		var spy = sinon.spy();
 
 		var buttonEmbedEdit = this.render(
 			<ButtonEmbedEdit cancelExclusive={spy} renderExclusive={true} />,

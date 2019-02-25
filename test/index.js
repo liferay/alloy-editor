@@ -41,6 +41,7 @@ module.exports = function() {
 		'test/lib/globals.js',
 		'test/lib/utils.js',
 		'test/lib/karma-overrides.js',
+		'test/lib/mocha.js',
 		'src/adapter/main.js',
 		'src/core/debounce.js',
 		'src/core/link.js',
