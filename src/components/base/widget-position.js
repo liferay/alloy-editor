@@ -334,8 +334,8 @@ export default WrappedComponent =>
 				});
 			});
 
-			if(domElement.$){
-				domElement.$.addEventListener('transitionend', () =>{
+			if (domElement.$) {
+				domElement.$.addEventListener('transitionend', () => {
 					domElement.setStyles({
 						pointerEvents: '',
 					});
