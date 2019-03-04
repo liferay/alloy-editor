@@ -26,7 +26,7 @@ export default WrappedComponent =>
 			let style = this.props.style;
 
 			if (Lang.isString(style)) {
-				let parts = style.split('.');
+				const parts = style.split('.');
 				let currentMember = this.context.editor.get('nativeEditor')
 					.config;
 				let property = parts.shift();

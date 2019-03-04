@@ -2,9 +2,9 @@ import {HIGH_PRIORITY} from './priorities';
 
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_embed')) {
-	let REGEX_HTTP = /^https?/;
+	const REGEX_HTTP = /^https?/;
 
-	let REGEX_DEFAULT_LINK = /<a href=/;
+	const REGEX_DEFAULT_LINK = /<a href=/;
 
 	CKEDITOR.DEFAULT_AE_EMBED_URL_TPL =
 		'http://alloy.iframe.ly/api/oembed?url={url}&callback={callback}';
@@ -25,23 +25,23 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 	 */
 	CKEDITOR.plugins.add('ae_embed', {
 		requires: 'widget',
-		init: function(editor) {
-			let AE_EMBED_URL_TPL = new CKEDITOR.template(
+		init(editor) {
+			const AE_EMBED_URL_TPL = new CKEDITOR.template(
 				editor.config.embedUrlTemplate ||
 					CKEDITOR.DEFAULT_AE_EMBED_URL_TPL
 			);
-			let AE_EMBED_WIDGET_TPL = new CKEDITOR.template(
+			const AE_EMBED_WIDGET_TPL = new CKEDITOR.template(
 				editor.config.embedWidgetTpl ||
 					CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
 			);
-			let AE_EMBED_DEFAULT_LINK_TPL = new CKEDITOR.template(
+			const AE_EMBED_DEFAULT_LINK_TPL = new CKEDITOR.template(
 				editor.config.embedLinkDefaultTpl ||
 					CKEDITOR.DEFAULT_AE_EMBED_DEFAULT_LINK_TPL
 			);
 
 			// Default function to upcast DOM elements to embed widgets.
 			// It matches CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
-			let defaultEmbedWidgetUpcastFn = function(element, data) {
+			const defaultEmbedWidgetUpcastFn = function(element, data) {
 				if (
 					element.name === 'div' &&
 					element.attributes['data-ae-embed-url']
@@ -54,7 +54,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 
 			// Create a embedUrl command that can be invoked to easily embed media URLs
 			editor.addCommand('embedUrl', {
-				exec: function(editor, data) {
+				exec(editor, data) {
 					editor.insertHtml(
 						AE_EMBED_WIDGET_TPL.output({
 							url: data.url,
@@ -76,10 +76,10 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 				 * @method data
 				 * @param {event} event Data change event
 				 */
-				data: function(event) {
-					let widget = this;
+				data(event) {
+					const widget = this;
 
-					let url = event.data.url;
+					const url = event.data.url;
 
 					if (url) {
 						CKEDITOR.tools.jsonp(
@@ -107,11 +107,11 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 					}
 				},
 
-				createATag: function(url) {
+				createATag(url) {
 					this.editor.execCommand('undo');
 
-					let aTagHtml = AE_EMBED_DEFAULT_LINK_TPL.output({
-						url: url,
+					const aTagHtml = AE_EMBED_DEFAULT_LINK_TPL.output({
+						url,
 					});
 
 					this.editor.insertHtml(aTagHtml);
@@ -125,8 +125,8 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 				 * @param {CKEDITOR.htmlParser.element} element The element to be checked
 				 * @param {Object} data The object that will be passed to the widget
 				 */
-				upcast: function(element, data) {
-					let embedWidgetUpcastFn =
+				upcast(element, data) {
+					const embedWidgetUpcastFn =
 						editor.config.embedWidgetUpcastFn ||
 						defaultEmbedWidgetUpcastFn;
 
@@ -139,7 +139,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 				editor.on(
 					'paste',
 					function(event) {
-						let link = event.data.dataValue;
+						const link = event.data.dataValue;
 
 						if (REGEX_HTTP.test(link)) {
 							event.stop();
@@ -161,20 +161,20 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 			// Add a listener to handle selection change events and properly detect editor
 			// interactions on the widgets without messing with widget native selection
 			editor.on('selectionChange', function(_event) {
-				let selection = editor.getSelection();
+				const selection = editor.getSelection();
 
 				if (selection) {
-					let element = selection.getSelectedElement();
+					const element = selection.getSelectedElement();
 
 					if (element) {
-						let widgetElement = element.findOne(
+						const widgetElement = element.findOne(
 							'[data-widget="ae_embed"]'
 						);
 
 						if (widgetElement) {
-							let region = element.getClientRect();
+							const region = element.getClientRect();
 
-							let scrollPosition = new CKEDITOR.dom.window(
+							const scrollPosition = new CKEDITOR.dom.window(
 								window
 							).getScrollPosition();
 							region.left -= scrollPosition.x;
@@ -186,7 +186,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 								nativeEvent: {},
 								selectionData: {
 									element: widgetElement,
-									region: region,
+									region,
 								},
 							});
 						}

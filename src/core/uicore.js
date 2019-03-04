@@ -62,16 +62,16 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 		 * @param {Object} editor The current CKEditor instance.
 		 * @protected
 		 */
-		init: function(editor) {
+		init(editor) {
 			let ariaState = [];
 
-			let ariaElement = this._createAriaElement(editor.id);
+			const ariaElement = this._createAriaElement(editor.id);
 
-			let uiTasksTimeout = editor.config.uicore
+			const uiTasksTimeout = editor.config.uicore
 				? editor.config.uicore.timeout
 				: 50;
 
-			let handleUI = CKEDITOR.tools.debounce(function(event) {
+			const handleUI = CKEDITOR.tools.debounce(function(event) {
 				ariaState = [];
 
 				if (
@@ -79,23 +79,23 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 					event.data.$.keyCode !== 27 ||
 					editor.config.allowEsc
 				) {
-					let selectionData = editor.getSelectionData();
+					const selectionData = editor.getSelectionData();
 
 					if (selectionData) {
 						editor.fire('editorInteraction', {
 							nativeEvent: event.data.$,
-							selectionData: selectionData,
+							selectionData,
 						});
 					}
 				}
 			}, uiTasksTimeout);
 
-			let handleAria = CKEDITOR.tools.debounce(function(_event) {
+			const handleAria = CKEDITOR.tools.debounce(function(_event) {
 				ariaElement.innerHTML = ariaState.join('. ');
 			}, uiTasksTimeout);
 
-			let handleMouseLeave = CKEDITOR.tools.debounce(function(event) {
-				let aeUINodes = document.querySelectorAll('.ae-ui');
+			const handleMouseLeave = CKEDITOR.tools.debounce(function(event) {
+				const aeUINodes = document.querySelectorAll('.ae-ui');
 
 				let found;
 
@@ -124,7 +124,7 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 			});
 
 			editor.once('contentDom', function() {
-				let editable = editor.editable();
+				const editable = editor.editable();
 
 				const focusHandler = editable.attachListener(
 					editable,
@@ -161,8 +161,8 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 		 * @protected
 		 * @return {HTMLElement} The created and applied to DOM element.
 		 */
-		_createAriaElement: function(id) {
-			let statusElement = document.createElement('div');
+		_createAriaElement(id) {
+			const statusElement = document.createElement('div');
 
 			statusElement.className = 'ae-sr-only';
 

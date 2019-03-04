@@ -74,8 +74,8 @@ export default WrappedComponent =>
 			}
 
 			return {
-				x: x,
-				y: y,
+				x,
+				y,
 			};
 		}
 
@@ -98,7 +98,7 @@ export default WrappedComponent =>
 		 * CKEDITOR.SELECTION_BOTTOM_TO_TOP or CKEDITOR.SELECTION_TOP_TO_BOTTOM
 		 */
 		getInteractionPoint() {
-			let eventPayload = this.props.editorEvent
+			const eventPayload = this.props.editorEvent
 				? this.props.editorEvent.data
 				: null;
 
@@ -106,20 +106,20 @@ export default WrappedComponent =>
 				return;
 			}
 
-			let selectionData = eventPayload.selectionData;
+			const selectionData = eventPayload.selectionData;
 
-			let nativeEvent = eventPayload.nativeEvent;
+			const nativeEvent = eventPayload.nativeEvent;
 
-			let pos = {
+			const pos = {
 				x: eventPayload.nativeEvent.pageX,
 				y: selectionData.region.top,
 			};
 
 			let direction = selectionData.region.direction;
 
-			let endRect = selectionData.region.endRect;
+			const endRect = selectionData.region.endRect;
 
-			let startRect = selectionData.region.startRect;
+			const startRect = selectionData.region.startRect;
 
 			if (endRect && startRect && startRect.top === endRect.top) {
 				direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
@@ -153,9 +153,9 @@ export default WrappedComponent =>
 			}
 
 			return {
-				direction: direction,
-				x: x,
-				y: y,
+				direction,
+				x,
+				y,
 			};
 		}
 
@@ -171,18 +171,18 @@ export default WrappedComponent =>
 		 * @return {Number} The calculated X point in page coordinates.
 		 */
 		_getXPoint(selectionData, eventX) {
-			let region = selectionData.region;
+			const region = selectionData.region;
 
-			let left = region.startRect ? region.startRect.left : region.left;
-			let right = region.endRect ? region.endRect.right : region.right;
+			const left = region.startRect ? region.startRect.left : region.left;
+			const right = region.endRect ? region.endRect.right : region.right;
 
 			let x;
 
 			if (left < eventX && right > eventX) {
 				x = eventX;
 			} else {
-				let leftDist = Math.abs(left - eventX);
-				let rightDist = Math.abs(right - eventX);
+				const leftDist = Math.abs(left - eventX);
+				const rightDist = Math.abs(right - eventX);
 
 				if (leftDist < rightDist) {
 					// user raised the mouse on left on the selection
@@ -210,7 +210,7 @@ export default WrappedComponent =>
 			let y = 0;
 
 			if (selectionData && nativeEvent) {
-				let elementTarget = new CKEDITOR.dom.element(
+				const elementTarget = new CKEDITOR.dom.element(
 					nativeEvent.target
 				);
 
@@ -244,9 +244,9 @@ export default WrappedComponent =>
 		 * @return {Array} An Array with left and top offsets in page coordinates.
 		 */
 		getWidgetXYPoint(left, top, direction) {
-			let domNode = ReactDOM.findDOMNode(this);
+			const domNode = ReactDOM.findDOMNode(this);
 
-			let gutter = this.props.gutter;
+			const gutter = this.props.gutter;
 
 			if (
 				direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM ||
@@ -290,10 +290,10 @@ export default WrappedComponent =>
 		 * @return {Boolean} True if the widget is visible, false otherwise
 		 */
 		isVisible() {
-			let domNode = ReactDOM.findDOMNode(this);
+			const domNode = ReactDOM.findDOMNode(this);
 
 			if (domNode) {
-				let domElement = new CKEDITOR.dom.element(domNode);
+				const domElement = new CKEDITOR.dom.element(domNode);
 
 				return domElement.hasClass('alloy-editor-visible');
 			}
@@ -311,7 +311,7 @@ export default WrappedComponent =>
 		 * @param  {Object} endPoint The destination point for the movement.
 		 */
 		moveToPoint(startPoint, endPoint) {
-			let domElement = new CKEDITOR.dom.element(
+			const domElement = new CKEDITOR.dom.element(
 				ReactDOM.findDOMNode(this)
 			);
 
@@ -339,7 +339,7 @@ export default WrappedComponent =>
 					domElement.setStyles({
 						pointerEvents: '',
 					});
-				})
+				});
 			}
 		}
 
@@ -357,10 +357,10 @@ export default WrappedComponent =>
 			const scrollTop = uiNode ? uiNode.scrollTop : 0;
 
 			if (!this.isVisible() && domNode) {
-				let interactionPoint = this.getInteractionPoint();
+				const interactionPoint = this.getInteractionPoint();
 
 				if (interactionPoint) {
-					let domElement = new CKEDITOR.dom.element(domNode);
+					const domElement = new CKEDITOR.dom.element(domNode);
 
 					let finalX;
 					let finalY;
@@ -371,7 +371,7 @@ export default WrappedComponent =>
 					finalY = initialY = parseFloat(domElement.getStyle('top'));
 
 					if (this.props.constrainToViewport) {
-						let res = this.getConstrainedPosition({
+						const res = this.getConstrainedPosition({
 							height: parseFloat(domNode.offsetHeight),
 							left: finalX,
 							top: finalY,
@@ -406,28 +406,29 @@ export default WrappedComponent =>
 		 * @method updatePosition
 		 */
 		updatePosition() {
-			let interactionPoint = this.getInteractionPoint();
+			const interactionPoint = this.getInteractionPoint();
 
-			let domNode = ReactDOM.findDOMNode(this);
+			const domNode = ReactDOM.findDOMNode(this);
 
 			if (interactionPoint && domNode) {
-				let uiNode = this.context.editor.get('uiNode') || document.body;
-				let uiNodeStyle = getComputedStyle(uiNode);
-				let uiNodeMarginLeft = parseInt(
+				const uiNode =
+					this.context.editor.get('uiNode') || document.body;
+				const uiNodeStyle = getComputedStyle(uiNode);
+				const uiNodeMarginLeft = parseInt(
 					uiNodeStyle.getPropertyValue('margin-left'),
 					10
 				);
-				let uiNodeMarginRight = parseInt(
+				const uiNodeMarginRight = parseInt(
 					uiNodeStyle.getPropertyValue('margin-right'),
 					10
 				);
-				let totalWidth =
+				const totalWidth =
 					uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
 
-				let scrollTop =
+				const scrollTop =
 					uiNode.tagName !== 'BODY' ? uiNode.scrollTop : 0;
 
-				let xy = this.getWidgetXYPoint(
+				const xy = this.getWidgetXYPoint(
 					interactionPoint.x,
 					interactionPoint.y,
 					interactionPoint.direction

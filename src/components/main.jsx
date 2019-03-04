@@ -131,8 +131,8 @@ class UI extends React.Component {
 		}
 
 		editor.fire('editorUpdate', {
-			prevProps: prevProps,
-			prevState: prevState,
+			prevProps,
+			prevState,
 			props: this.props,
 			state: this.state,
 		});

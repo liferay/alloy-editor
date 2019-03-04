@@ -18,9 +18,9 @@ const extend = function(receiver, supplier, protoProps, staticProps) {
 		throw new Error('extend failed, verify dependencies');
 	}
 
-	let supplierProto = supplier.prototype;
+	const supplierProto = supplier.prototype;
 
-	let receiverProto = Object.create(supplierProto);
+	const receiverProto = Object.create(supplierProto);
 	receiver.prototype = receiverProto;
 
 	receiverProto.constructor = receiver;

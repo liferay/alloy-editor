@@ -116,8 +116,8 @@ class ButtonImage extends React.Component {
 				editor.fire('actionPerformed', this);
 
 				const imageData = {
-					el: el,
-					file: file,
+					el,
+					file,
 				};
 
 				editor.fire('imageAdd', imageData);

@@ -4,17 +4,17 @@
 // in which it is happening
 //
 // @param {Object} plugin The plugin to wrap lifecycle methods
-let wrapPluginLifecycle = function(plugin) {
-	let methods = ['beforeInit', 'init', 'afterInit'];
+const wrapPluginLifecycle = function(plugin) {
+	const methods = ['beforeInit', 'init', 'afterInit'];
 
 	methods.forEach(function(methodName) {
 		if (plugin[methodName]) {
 			plugin[methodName] = CKEDITOR.tools.override(
 				plugin[methodName],
 				function(originalPluginMethod) {
-					let payload = {
+					const payload = {
 						phase: methodName,
-						plugin: plugin,
+						plugin,
 					};
 
 					return function(editor) {
@@ -37,7 +37,7 @@ let wrapPluginLifecycle = function(plugin) {
 //
 // @param {string|Array<string>} requires The requires object
 // @return {string} The filtered requires object
-let filterUnwantedDependencies = function(requires) {
+const filterUnwantedDependencies = function(requires) {
 	if (typeof requires === 'string') {
 		requires = requires.split(',');
 	}
@@ -76,7 +76,7 @@ CKEDITOR.plugins.load = CKEDITOR.tools.override(CKEDITOR.plugins.load, function(
 		pluginsLoad.call(this, names, function(plugins) {
 			if (callback) {
 				Object.keys(plugins).forEach(function(pluginName) {
-					let plugin = plugins[pluginName];
+					const plugin = plugins[pluginName];
 
 					if (plugin.requires) {
 						plugin.requires = filterUnwantedDependencies(

@@ -1,13 +1,13 @@
 import Lang from '../../oop/lang';
 import ReactDOM from 'react-dom';
 
-let DIRECTION_NONE = 0;
-let DIRECTION_NEXT = 1;
-let DIRECTION_PREV = -1;
+const DIRECTION_NONE = 0;
+const DIRECTION_NEXT = 1;
+const DIRECTION_PREV = -1;
 
-let ACTION_NONE = 0;
-let ACTION_MOVE_FOCUS = 1;
-let ACTION_DISMISS_FOCUS = 2;
+const ACTION_NONE = 0;
+const ACTION_MOVE_FOCUS = 1;
+const ACTION_DISMISS_FOCUS = 2;
 
 /**
  * WidgetFocusManager is a mixin that provides keyboard navigation inside a widget. To do this,
@@ -61,7 +61,7 @@ export default WrappedComponent =>
 		focus = event => {
 			if (!event || this._isValidTarget(event.target)) {
 				if (this._descendants && this._descendants.length) {
-					let activeDescendantEl = this._descendants[
+					const activeDescendantEl = this._descendants[
 						this._activeDescendant
 					];
 					// When user clicks with the mouse, the activeElement is already set and there
@@ -99,7 +99,7 @@ export default WrappedComponent =>
 		 */
 		handleKey = event => {
 			if (this._isValidTarget(event.target) && this._descendants) {
-				let action = this._getFocusAction(event);
+				const action = this._getFocusAction(event);
 
 				if (action.type) {
 					event.stopPropagation();
@@ -142,19 +142,19 @@ export default WrappedComponent =>
 		 * @return {Object} An action object with type and direction properties.
 		 */
 		_getFocusAction(event) {
-			let action = {
+			const action = {
 				type: ACTION_NONE,
 			};
 
 			if (this.props.keys) {
-				let direction = this._getFocusMoveDirection(event);
+				const direction = this._getFocusMoveDirection(event);
 
 				if (direction) {
 					action.direction = direction;
 					action.type = ACTION_MOVE_FOCUS;
 				}
 
-				let dismissAction = this._getFocusDismissAction(
+				const dismissAction = this._getFocusDismissAction(
 					event,
 					direction
 				);
@@ -185,7 +185,7 @@ export default WrappedComponent =>
 		 * @return {Object} A dismiss action with dismiss and direction properties.
 		 */
 		_getFocusDismissAction(event, focusMoveDirection) {
-			let dismissAction = {
+			const dismissAction = {
 				direction: focusMoveDirection,
 				dismiss: false,
 			};
@@ -281,7 +281,7 @@ export default WrappedComponent =>
 		 * @return {Boolean} A boolean value indicating if the element is valid.
 		 */
 		_isValidTarget(element) {
-			let tagName = element.tagName.toLowerCase();
+			const tagName = element.tagName.toLowerCase();
 
 			return (
 				tagName !== 'input' &&
@@ -300,7 +300,7 @@ export default WrappedComponent =>
 		 * @protected
 		 */
 		_moveFocus(direction) {
-			let numDescendants = this._descendants.length;
+			const numDescendants = this._descendants.length;
 
 			let descendant = this._descendants[this._activeDescendant];
 
@@ -337,10 +337,10 @@ export default WrappedComponent =>
 		 * @protected
 		 */
 		_refresh() {
-			let domNode = ReactDOM.findDOMNode(this);
+			const domNode = ReactDOM.findDOMNode(this);
 
 			if (domNode) {
-				let descendants = domNode.querySelectorAll(
+				const descendants = domNode.querySelectorAll(
 					this.props.descendants
 				);
 
@@ -350,7 +350,7 @@ export default WrappedComponent =>
 
 				Array.prototype.slice.call(descendants).forEach(
 					function(item) {
-						let dataTabIndex = item.getAttribute('data-tabindex');
+						const dataTabIndex = item.getAttribute('data-tabindex');
 
 						if (dataTabIndex) {
 							priorityDescendants.push(item);

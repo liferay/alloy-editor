@@ -24,7 +24,7 @@ extend(Base, Attribute, {
 	 * @method init
 	 * @param {Object} config Configuration object
 	 */
-	init: function(config) {
+	init(config) {
 		this._callChain('initializer', config);
 	},
 
@@ -35,7 +35,7 @@ extend(Base, Attribute, {
 	 * @memberof Base
 	 * @method destroy
 	 */
-	destroy: function() {
+	destroy() {
 		this._callChain('destructor');
 	},
 
@@ -49,7 +49,7 @@ extend(Base, Attribute, {
 	 * @param {String} wat  The method, which should be invoked
 	 * @protected
 	 */
-	_callChain: function(wat, args) {
+	_callChain(wat, args) {
 		let arr = [];
 
 		let ctor = this.constructor;
@@ -67,7 +67,7 @@ extend(Base, Attribute, {
 		args = Lang.isArray(args) ? args : [args];
 
 		for (let i = 0; i < arr.length; i++) {
-			let item = arr[i];
+			const item = arr[i];
 
 			item.apply(this, args);
 		}

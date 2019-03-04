@@ -20,15 +20,15 @@ if (!CKEDITOR.plugins.get('ae_menubridge')) {
 		 * @method init
 		 * @param {Object} editor The CKEditor instance being initialized
 		 */
-		beforeInit: function(editor) {
+		beforeInit(editor) {
 			// Do nothing if the real menu plugin is present
 			if (CKEDITOR.plugins.get('menu')) {
 				return;
 			}
 
-			let groups = [];
-			let groupsOrder = (editor._.menuGroups = {});
-			let menuItems = (editor._.menuItems = {});
+			const groups = [];
+			const groupsOrder = (editor._.menuGroups = {});
+			const menuItems = (editor._.menuItems = {});
 
 			for (let i = 0; i < groups.length; i++) {
 				groupsOrder[groups[i]] = i + 1;
@@ -57,8 +57,8 @@ if (!CKEDITOR.plugins.get('ae_menubridge')) {
 			editor.addMenuItem = function(name, definition) {
 				if (groupsOrder[definition.group]) {
 					menuItems[name] = {
-						name: name,
-						definition: definition,
+						name,
+						definition,
 					};
 				}
 			};
@@ -70,7 +70,7 @@ if (!CKEDITOR.plugins.get('ae_menubridge')) {
 			 * @param {Object} definitions Object where keys are used as itemName and corresponding values as definition for a {@link #addMenuItem} call.
 			 */
 			editor.addMenuItems = function(definitions) {
-				for (let itemName in definitions) {
+				for (const itemName in definitions) {
 					if (definitions.hasOwnProperty(itemName)) {
 						this.addMenuItem(itemName, definitions[itemName]);
 					}

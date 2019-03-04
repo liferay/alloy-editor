@@ -6,9 +6,9 @@ if (!CKEDITOR.plugins.get('ae_placeholder')) {
 	 * @property
 	 * @type {string}
 	 */
-	let brFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
+	const brFiller = CKEDITOR.env.needsBrFiller ? '<br>' : '';
 
-	let enterModeEmptyValue = {
+	const enterModeEmptyValue = {
 		1: ['<p>' + brFiller + '</p>'],
 		2: ['', ' ', brFiller],
 		3: ['<div>' + brFiller + '</div>'],
@@ -37,7 +37,7 @@ if (!CKEDITOR.plugins.get('ae_placeholder')) {
 		 * @method init
 		 * @param {Object} editor The current editor instance
 		 */
-		init: function(editor) {
+		init(editor) {
 			editor.on('blur', this._checkEmptyData, this);
 			editor.on('change', this._checkEmptyData, this);
 			editor.on('focus', this._removePlaceholderClass, this);
@@ -52,14 +52,14 @@ if (!CKEDITOR.plugins.get('ae_placeholder')) {
 		 * @method _checkEmptyData
 		 * @param {CKEDITOR.dom.event} editor event, fired from CKEditor
 		 */
-		_checkEmptyData: function(event) {
-			let editor = event.editor;
+		_checkEmptyData(event) {
+			const editor = event.editor;
 
-			let editableNode = editor.editable();
+			const editableNode = editor.editable();
 
-			let innerHtml = editableNode.$.innerHTML.trim();
+			const innerHtml = editableNode.$.innerHTML.trim();
 
-			let isEmpty = enterModeEmptyValue[editor.config.enterMode].some(
+			const isEmpty = enterModeEmptyValue[editor.config.enterMode].some(
 				function(element) {
 					return innerHtml === element;
 				}
@@ -79,10 +79,10 @@ if (!CKEDITOR.plugins.get('ae_placeholder')) {
              * @method _removePlaceholderClass
              + @param {CKEDITOR.dom.event} editor event, fired from CKEditor
              */
-		_removePlaceholderClass: function(event) {
-			let editor = event.editor;
+		_removePlaceholderClass(event) {
+			const editor = event.editor;
 
-			let editorNode = new CKEDITOR.dom.element(editor.element.$);
+			const editorNode = new CKEDITOR.dom.element(editor.element.$);
 
 			editorNode.removeClass(editor.config.placeholderClass);
 		},

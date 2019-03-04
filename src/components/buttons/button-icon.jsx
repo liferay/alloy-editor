@@ -1,7 +1,7 @@
 import React from 'react';
 import EditorContext from '../../adapter/editor-context';
 
-export default function ButtonIcon({symbol, className = ''}) {
+export default function ButtonIcon({className = '', symbol}) {
 	return (
 		<EditorContext.Consumer>
 			{({editor}) => {

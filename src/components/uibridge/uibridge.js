@@ -15,13 +15,13 @@ if (!CKEDITOR.plugins.get('ae_uibridge')) {
 		 * @method beforeInit
 		 * @param {Object} editor The current editor instance
 		 */
-		beforeInit: function(editor) {
-			let originalUIAddFn = editor.ui.add;
+		beforeInit(editor) {
+			const originalUIAddFn = editor.ui.add;
 
 			editor.ui.add = function(name, type, definition) {
 				originalUIAddFn.call(this, name, type, definition);
 
-				let typeHandler = this._.handlers[type];
+				const typeHandler = this._.handlers[type];
 
 				if (typeHandler && typeHandler.add) {
 					typeHandler.add(name, definition, editor);

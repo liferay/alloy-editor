@@ -46,11 +46,9 @@ describe('ButtonEmbedEdit Component', function() {
 	it('focuses on the link input as soon as the component gets rendered in older browsers', function() {
 		// Make setTimeout synchronous to avoid unnecessary test delays
 		var requestAnimationFrame = window.requestAnimationFrame;
-		sinon
-			.stub(window, 'setTimeout')
-			.callsFake(function(callback) {
-				callback();
-			});
+		sinon.stub(window, 'setTimeout').callsFake(function(callback) {
+			callback();
+		});
 
 		window.requestAnimationFrame = null;
 

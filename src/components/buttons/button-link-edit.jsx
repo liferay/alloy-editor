@@ -230,8 +230,8 @@ class ButtonLinkEdit extends React.Component {
 			autocompleteSelected: false,
 			element: link,
 			initialLink: {
-				href: href,
-				target: target,
+				href,
+				target,
 			},
 			linkHref: href,
 			linkTarget: target,

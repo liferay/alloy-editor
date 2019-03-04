@@ -1,6 +1,6 @@
-let REGEX_BOOKMARK_SCHEME = /^#.*/i;
-let REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F._-]+@/i;
-let REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*):|^\//i;
+const REGEX_BOOKMARK_SCHEME = /^#.*/i;
+const REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F._-]+@/i;
+const REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*):|^\//i;
 
 /**
  * Link class utility. Provides methods for create, delete and update links.
@@ -27,23 +27,23 @@ Link.prototype = {
 	 * @method advanceSelection
 	 * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
 	 */
-	advanceSelection: function(link) {
+	advanceSelection(link) {
 		link = link || this.getFromSelection();
 
-		let range = this._editor.getSelection().getRanges()[0];
+		const range = this._editor.getSelection().getRanges()[0];
 
 		if (link) {
 			range.moveToElementEditEnd(link);
 
-			let nextNode = range.getNextEditableNode();
+			const nextNode = range.getNextEditableNode();
 
 			if (
 				nextNode &&
 				!this._editor.element.equals(nextNode.getCommonAncestor(link))
 			) {
-				let whitespace = /\s/.exec(nextNode.getText());
+				const whitespace = /\s/.exec(nextNode.getText());
 
-				let offset = whitespace ? whitespace.index + 1 : 0;
+				const offset = whitespace ? whitespace.index + 1 : 0;
 
 				range.setStart(nextNode, offset);
 				range.setEnd(nextNode, offset);
@@ -63,20 +63,20 @@ Link.prototype = {
 	 * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
 	 * @param {String} URI The URI of the link.
 	 */
-	create: function(URI, attrs, modifySelection) {
-		let selection = this._editor.getSelection();
+	create(URI, attrs, modifySelection) {
+		const selection = this._editor.getSelection();
 
-		let range = selection.getRanges()[0];
+		const range = selection.getRanges()[0];
 
 		if (range.collapsed) {
-			let text = new CKEDITOR.dom.text(URI, this._editor.document);
+			const text = new CKEDITOR.dom.text(URI, this._editor.document);
 			range.insertNode(text);
 			range.selectNodeContents(text);
 		}
 
 		URI = this._getCompleteURI(URI);
 
-		let linkAttrs = CKEDITOR.tools.merge(
+		const linkAttrs = CKEDITOR.tools.merge(
 			{
 				'data-cke-saved-href': URI,
 				href: URI,
@@ -84,7 +84,7 @@ Link.prototype = {
 			attrs
 		);
 
-		let style = new CKEDITOR.style({
+		const style = new CKEDITOR.style({
 			attributes: linkAttrs,
 			element: 'a',
 		});
@@ -107,22 +107,22 @@ Link.prototype = {
 	 * @method getFromSelection
 	 * @return {CKEDITOR.dom.element} The retrieved link or null if not found.
 	 */
-	getFromSelection: function() {
-		let selection = this._editor.getSelection();
+	getFromSelection() {
+		const selection = this._editor.getSelection();
 
-		let selectedElement = selection.getSelectedElement();
+		const selectedElement = selection.getSelectedElement();
 
 		if (selectedElement && selectedElement.is('a')) {
 			return selectedElement;
 		}
 
 		if (selectedElement && CKEDITOR.env.ie) {
-			let children = selectedElement.getChildren();
+			const children = selectedElement.getChildren();
 
-			let count = children.count();
+			const count = children.count();
 
 			for (let i = 0; i < count; i++) {
-				let node = children.getItem(i);
+				const node = children.getItem(i);
 
 				if (node.is('a')) {
 					return node;
@@ -130,7 +130,7 @@ Link.prototype = {
 			}
 		}
 
-		let range = selection.getRanges()[0];
+		const range = selection.getRanges()[0];
 
 		if (range) {
 			range.shrink(CKEDITOR.SHRINK_TEXT);
@@ -152,8 +152,8 @@ Link.prototype = {
 	 * @param {CKEDITOR.dom.element} link The link element which link style should be removed.
 	 * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
 	 */
-	remove: function(link, modifySelection) {
-		let editor = this._editor;
+	remove(link, modifySelection) {
+		const editor = this._editor;
 
 		if (link) {
 			if (modifySelection && modifySelection.advance) {
@@ -162,7 +162,7 @@ Link.prototype = {
 
 			link.remove(editor);
 		} else {
-			let style = new CKEDITOR.style({
+			const style = new CKEDITOR.style({
 				alwaysRemoveElement: 1,
 				element: 'a',
 				type: CKEDITOR.STYLE_INLINE,
@@ -172,7 +172,7 @@ Link.prototype = {
 			//  We need to force the selection to be the whole link element
 			//  to remove it properly.
 
-			let selection = editor.getSelection();
+			const selection = editor.getSelection();
 			selection.selectElement(selection.getStartElement());
 
 			editor.removeStyle(style);
@@ -189,22 +189,22 @@ Link.prototype = {
 	 * @param {Object|String} attrs The attributes to update or remove. Attributes with null values will be removed.
 	 * @param {Object} modifySelection A config object with an advance attribute to indicate if the selection should be moved after the link creation.
 	 */
-	update: function(attrs, link, modifySelection) {
-		let instance = this;
+	update(attrs, link, modifySelection) {
+		const instance = this;
 
 		link = link || this.getFromSelection();
 
 		if (typeof attrs === 'string') {
-			let uri = instance._getCompleteURI(attrs);
+			const uri = instance._getCompleteURI(attrs);
 
 			link.setAttributes({
 				'data-cke-saved-href': uri,
 				href: uri,
 			});
 		} else if (typeof attrs === 'object') {
-			let removeAttrs = [];
+			const removeAttrs = [];
 
-			let setAttrs = {};
+			const setAttrs = {};
 
 			Object.keys(attrs).forEach(function(key) {
 				if (attrs[key] === null) {
@@ -215,7 +215,7 @@ Link.prototype = {
 					removeAttrs.push(key);
 				} else {
 					if (key === 'href') {
-						let uri = instance._getCompleteURI(attrs[key]);
+						const uri = instance._getCompleteURI(attrs[key]);
 
 						setAttrs['data-cke-saved-href'] = uri;
 						setAttrs[key] = uri;
@@ -248,7 +248,7 @@ Link.prototype = {
 	 * @protected
 	 * @return {String} The URI updated with the protocol.
 	 */
-	_getCompleteURI: function(URI) {
+	_getCompleteURI(URI) {
 		if (REGEX_BOOKMARK_SCHEME.test(URI)) {
 			return URI;
 		} else if (REGEX_EMAIL_SCHEME.test(URI)) {

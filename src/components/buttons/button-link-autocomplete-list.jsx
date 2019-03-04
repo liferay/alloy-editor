@@ -179,12 +179,12 @@ class ButtonLinkAutocompleteList extends React.Component {
 		const promise = Promise.resolve(this.props.data(this.props.term));
 
 		promise.then(items => {
-			if (items.length) {
-				!this.props.expanded && this.props.toggleDropdown();
+			if (items.length && !this.props.expanded) {
+				this.props.toggleDropdown();
 			}
 
 			this.setState({
-				items: items,
+				items,
 			});
 		});
 	}

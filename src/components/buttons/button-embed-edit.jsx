@@ -93,7 +93,7 @@ class ButtonEmbedEdit extends React.Component {
 		return {
 			element: embed,
 			initialLink: {
-				href: href,
+				href,
 			},
 			linkHref: href,
 		};

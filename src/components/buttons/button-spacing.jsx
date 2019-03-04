@@ -94,7 +94,7 @@ class ButtonSpacing extends React.Component {
 
 		const buttonStylesProps = {
 			activeStyle: activeSpacing,
-			editor: editor,
+			editor,
 			onDismiss: toggleDropdown,
 			showRemoveStylesItem: false,
 			styles: spacings,

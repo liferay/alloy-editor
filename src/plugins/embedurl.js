@@ -187,7 +187,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 			);
 
 			if (widgetElement) {
-				let styles =
+				const styles =
 					JSON.parse(widgetElement.getAttribute('data-styles')) || {};
 
 				styles.width = `${width}px`;
@@ -283,12 +283,12 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 
 			const generateEmbedContent = (url, content) => {
 				return LFR_EMBED_WIDGET_TPL.output({
-					content: content,
+					content,
 					helpMessage: AlloyEditor.Strings.videoPlaybackDisabled,
 					helpMessageIcon: Liferay.Util.getLexiconIconTpl(
 						'info-circle'
 					),
-					url: url,
+					url,
 				});
 			};
 
@@ -365,7 +365,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 									const embedId = scheme.exec(url)[1];
 
 									content = provider.tpl.output({
-										embedId: embedId,
+										embedId,
 									});
 								}
 
@@ -478,7 +478,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 								window
 							).getScrollPosition();
 
-							let region = element.getClientRect();
+							const region = element.getClientRect();
 
 							region.direction = CKEDITOR.SELECTION_BOTTOM_TO_TOP;
 							region.left -= scrollPosition.x;
@@ -488,7 +488,7 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 								nativeEvent: {},
 								selectionData: {
 									element: widgetElement,
-									region: region,
+									region,
 								},
 							});
 						}

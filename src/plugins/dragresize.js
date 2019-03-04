@@ -7,48 +7,48 @@
  * - Escape while dragging cancels resize
  */
 if (!CKEDITOR.plugins.get('ae_dragresize')) {
-	let IMAGE_HANDLES = {
+	const IMAGE_HANDLES = {
 		both: ['tl', 'tm', 'tr', 'lm', 'rm', 'bl', 'bm', 'br'],
 		height: ['tl', 'tm', 'tr', 'bl', 'bm', 'br'],
 		scale: ['tl', 'tr', 'bl', 'br'],
 		width: ['tl', 'tr', 'lm', 'rm', 'bl', 'br'],
 	};
 
-	let POSITION_ELEMENT_FN = {
-		bl: function(handle, left, top, box) {
+	const POSITION_ELEMENT_FN = {
+		bl(handle, left, top, box) {
 			positionElement(handle, -3 + left, box.height - 4 + top);
 		},
-		bm: function(handle, left, top, box) {
+		bm(handle, left, top, box) {
 			positionElement(
 				handle,
 				Math.round(box.width / 2) - 3 + left,
 				box.height - 4 + top
 			);
 		},
-		br: function(handle, left, top, box) {
+		br(handle, left, top, box) {
 			positionElement(handle, box.width - 4 + left, box.height - 4 + top);
 		},
-		lm: function(handle, left, top, box) {
+		lm(handle, left, top, box) {
 			positionElement(
 				handle,
 				-3 + left,
 				Math.round(box.height / 2) - 3 + top
 			);
 		},
-		tl: function(handle, left, top, _box) {
+		tl(handle, left, top, _box) {
 			positionElement(handle, left - 3, top - 3);
 		},
-		tm: function(handle, left, top, box) {
+		tm(handle, left, top, box) {
 			positionElement(
 				handle,
 				Math.round(box.width / 2) - 3 + left,
 				-3 + top
 			);
 		},
-		tr: function(handle, left, top, box) {
+		tr(handle, left, top, box) {
 			positionElement(handle, box.width - 4 + left, -3 + top);
 		},
-		rm: function(handle, left, top, box) {
+		rm(handle, left, top, box) {
 			positionElement(
 				handle,
 				box.width - 4 + left,
@@ -57,13 +57,13 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		},
 	};
 
-	let IMAGE_SNAP_TO_SIZE = 7;
+	const IMAGE_SNAP_TO_SIZE = 7;
 
-	let isFirefox = 'MozAppearance' in document.documentElement.style;
+	const isFirefox = 'MozAppearance' in document.documentElement.style;
 
-	let isWebKit = 'WebkitAppearance' in document.documentElement.style;
+	const isWebKit = 'WebkitAppearance' in document.documentElement.style;
 
-	let enablePlugin = isWebKit || isFirefox;
+	const enablePlugin = isWebKit || isFirefox;
 
 	if (enablePlugin) {
 		// CSS is added in a compressed form
@@ -76,12 +76,12 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 	 * Initializes the plugin
 	 */
 	CKEDITOR.plugins.add('ae_dragresize', {
-		onLoad: function() {
+		onLoad() {
 			if (!enablePlugin) {
 				return;
 			}
 		},
-		init: function(editor) {
+		init(editor) {
 			if (!enablePlugin) {
 				return;
 			}
@@ -93,16 +93,16 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 	});
 
 	function init(editor) {
-		let window = editor.window.$;
+		const window = editor.window.$;
 
-		let document = editor.document.$;
+		const document = editor.document.$;
 
 		if (isFirefox) {
 			// Disable the native image resizing
 			document.execCommand('enableObjectResizing', false, false);
 		}
 
-		let snapToSize =
+		const snapToSize =
 			typeof IMAGE_SNAP_TO_SIZE === 'undefined'
 				? null
 				: IMAGE_SNAP_TO_SIZE;
@@ -110,12 +110,12 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		editor.config.imageScaleResize =
 			editor.config.imageScaleResize || 'both';
 
-		let resizer = new Resizer(editor, {
+		const resizer = new Resizer(editor, {
 			imageScaleResize: editor.config.imageScaleResize,
-			snapToSize: snapToSize,
+			snapToSize,
 		});
 
-		let mouseDownListener = function(e) {
+		const mouseDownListener = function(e) {
 			if (resizer.isHandle(e.target)) {
 				resizer.initDrag(e);
 			}
@@ -124,7 +124,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		document.addEventListener('mousedown', mouseDownListener, false);
 
 		function selectionChange() {
-			let selection = editor.getSelection();
+			const selection = editor.getSelection();
 
 			if (!selection) return;
 			// If an element is selected and that element is an IMG
@@ -175,7 +175,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		});
 
 		editor.on('destroy', function() {
-			let resizeElement = document.getElementById('ckimgrsz');
+			const resizeElement = document.getElementById('ckimgrsz');
 
 			if (resizeElement) {
 				resizeElement.remove();
@@ -207,10 +207,10 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 	}
 
 	Resizer.prototype = {
-		init: function() {
-			let instance = this;
+		init() {
+			const instance = this;
 
-			let container = (this.container = this.document.createElement(
+			const container = (this.container = this.document.createElement(
 				'div'
 			));
 
@@ -218,7 +218,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			this.preview = this.document.createElement('span');
 			container.appendChild(this.preview);
 
-			let handles = (this.handles = {});
+			const handles = (this.handles = {});
 
 			IMAGE_HANDLES[this.cfg.imageScaleResize].forEach(function(
 				handleName
@@ -228,30 +228,30 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				] = instance.createHandle(handleName);
 			});
 
-			for (let n in handles) {
+			for (const n in handles) {
 				if (handles.hasOwnProperty(n)) {
 					container.appendChild(handles[n]);
 				}
 			}
 		},
-		createHandle: function(name) {
-			let el = this.document.createElement('i');
+		createHandle(name) {
+			const el = this.document.createElement('i');
 			el.classList.add(name);
 			return el;
 		},
-		isHandle: function(el) {
-			let handles = this.handles;
-			for (let n in handles) {
+		isHandle(el) {
+			const handles = this.handles;
+			for (const n in handles) {
 				if (handles[n] === el) {
 					return true;
 				}
 			}
 			return false;
 		},
-		show: function(el) {
+		show(el) {
 			let uiNode = this.editor.config.uiNode;
 
-			let scrollTop = uiNode ? uiNode.scrollTop : 0;
+			const scrollTop = uiNode ? uiNode.scrollTop : 0;
 
 			this.el = el;
 			if (this.cfg.snapToSize) {
@@ -260,7 +260,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				);
 				this.otherImages.splice(this.otherImages.indexOf(el), 1);
 			}
-			let box = (this.box = getBoundingBox(this.window, el));
+			const box = (this.box = getBoundingBox(this.window, el));
 			positionElement(this.container, box.left, box.top + scrollTop);
 
 			uiNode = uiNode || document.body;
@@ -270,9 +270,9 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			this.el.classList.add('ckimgrsz');
 			this.showHandles();
 		},
-		hide: function() {
+		hide() {
 			// Remove class from all img.ckimgrsz
-			let elements = this.document.getElementsByClassName('ckimgrsz');
+			const elements = this.document.getElementsByClassName('ckimgrsz');
 			for (let i = 0; i < elements.length; ++i) {
 				elements[i].classList.remove('ckimgrsz');
 			}
@@ -281,13 +281,13 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				this.container.parentNode.removeChild(this.container);
 			}
 		},
-		initDrag: function(e) {
+		initDrag(e) {
 			if (e.button !== 0) {
 				// right-click or middle-click
 				return;
 			}
-			let resizer = this;
-			let drag = new DragEvent(this.window, this.document);
+			const resizer = this;
+			const drag = new DragEvent(this.window, this.document);
 			drag.onStart = function() {
 				resizer.showPreview();
 				resizer.isDragging = true;
@@ -296,7 +296,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			drag.onDrag = function() {
 				resizer.calculateSize(this);
 				resizer.updatePreview();
-				let box = resizer.previewBox;
+				const box = resizer.previewBox;
 				resizer.updateHandles(box, box.left, box.top);
 			};
 			drag.onRelease = function() {
@@ -314,12 +314,12 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			};
 			drag.start(e);
 		},
-		updateHandles: function(box, left, top) {
+		updateHandles(box, left, top) {
 			left = left || 0;
 			top = top || 0;
-			let handles = this.handles;
+			const handles = this.handles;
 
-			for (let handle in handles) {
+			for (const handle in handles) {
 				if (handles.hasOwnProperty(handle)) {
 					POSITION_ELEMENT_FN[handle](
 						handles[handle],
@@ -330,45 +330,45 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				}
 			}
 		},
-		showHandles: function() {
-			let handles = this.handles;
+		showHandles() {
+			const handles = this.handles;
 			this.updateHandles(this.box);
-			for (let n in handles) {
+			for (const n in handles) {
 				if (handles.hasOwnProperty(n)) {
 					handles[n].style.display = 'block';
 				}
 			}
 		},
-		hideHandles: function() {
-			let handles = this.handles;
-			for (let n in handles) {
+		hideHandles() {
+			const handles = this.handles;
+			for (const n in handles) {
 				if (handles.hasOwnProperty(n)) {
 					handles[n].style.display = 'none';
 				}
 			}
 		},
-		showPreview: function() {
+		showPreview() {
 			this.preview.style.backgroundImage = 'url("' + this.el.src + '")';
 			this.calculateSize();
 			this.updatePreview();
 			this.preview.style.display = 'block';
 		},
-		updatePreview: function() {
-			let box = this.previewBox;
+		updatePreview() {
+			const box = this.previewBox;
 			positionElement(this.preview, box.left, box.top);
 			this.preview.style.width = this.previewBox.width + 'px';
 			this.preview.style.height = this.previewBox.height + 'px';
 		},
-		hidePreview: function() {
-			let box = getBoundingBox(this.window, this.preview);
+		hidePreview() {
+			const box = getBoundingBox(this.window, this.preview);
 			this.result = {
 				width: box.width,
 				height: box.height,
 			};
 			this.preview.style.display = 'none';
 		},
-		calculateSize: function(data) {
-			let box = (this.previewBox = {
+		calculateSize(data) {
+			const box = (this.previewBox = {
 				top: 0,
 				left: 0,
 				width: this.box.width,
@@ -377,7 +377,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 			if (!data) return;
 
-			let attr = data.target.className;
+			const attr = data.target.className;
 
 			if (~attr.indexOf('r')) {
 				box.width = Math.max(32, this.box.width + data.delta.x);
@@ -393,7 +393,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			}
 			// if dragging corner, enforce aspect ratio (unless shift key is being held)
 			if (attr.indexOf('m') < 0 && !data.keys.shift) {
-				let ratio = this.box.width / this.box.height;
+				const ratio = this.box.width / this.box.height;
 				if (box.width / box.height > ratio) {
 					box.height = Math.round(box.width / ratio);
 				} else {
@@ -401,12 +401,12 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				}
 			}
 
-			let snapToSize = this.cfg.snapToSize;
+			const snapToSize = this.cfg.snapToSize;
 
 			if (snapToSize) {
-				let others = this.otherImages;
+				const others = this.otherImages;
 				for (let i = 0; i < others.length; i++) {
-					let other = getBoundingBox(this.window, others[i]);
+					const other = getBoundingBox(this.window, others[i]);
 					if (
 						Math.abs(box.width - other.width) <= snapToSize &&
 						Math.abs(box.height - other.height) <= snapToSize
@@ -426,7 +426,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				box.top = this.box.height - box.height;
 			}
 		},
-		resizeComplete: function() {
+		resizeComplete() {
 			resizeElement.call(
 				this,
 				this.el,
@@ -447,7 +447,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 	}
 
 	DragEvent.prototype = {
-		start: function(e) {
+		start(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			this.target = e.target;
@@ -457,7 +457,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				y: e.clientY,
 			};
 			this.update(e);
-			let events = this.events;
+			const events = this.events;
 			this.document.addEventListener(
 				'mousemove',
 				events.mousemove,
@@ -466,9 +466,11 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			this.document.addEventListener('keydown', events.keydown, false);
 			this.document.addEventListener('mouseup', events.mouseup, false);
 			this.document.body.classList.add('dragging-' + this.attr);
-			this.onStart && this.onStart();
+			if (this.onStart) {
+				this.onStart();
+			}
 		},
-		update: function(e) {
+		update(e) {
 			this.currentPos = {
 				x: e.clientX,
 				y: e.clientY,
@@ -483,28 +485,32 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				alt: e.altKey,
 			};
 		},
-		mousemove: function(e) {
+		mousemove(e) {
 			this.update(e);
-			this.onDrag && this.onDrag();
+			if (this.onDrag) {
+				this.onDrag();
+			}
 			if (e.which === 0) {
 				// mouse button released outside window; mouseup wasn't fired (Chrome)
 				this.mouseup(e);
 			}
 		},
-		keydown: function(e) {
+		keydown(e) {
 			// escape key cancels dragging
 			if (e.keyCode === 27) {
 				this.release();
 			}
 		},
-		mouseup: function(e) {
+		mouseup(e) {
 			this.update(e);
 			this.release();
-			this.onComplete && this.onComplete();
+			if (this.onComplete) {
+				this.onComplete();
+			}
 		},
-		release: function() {
+		release() {
 			this.document.body.classList.remove('dragging-' + this.attr);
-			let events = this.events;
+			const events = this.events;
 			this.document.removeEventListener(
 				'mousemove',
 				events.mousemove,
@@ -512,15 +518,17 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			);
 			this.document.removeEventListener('keydown', events.keydown, false);
 			this.document.removeEventListener('mouseup', events.mouseup, false);
-			this.onRelease && this.onRelease();
+			if (this.onRelease) {
+				this.onRelease();
+			}
 		},
 	};
 
 	// helper functions
 	function toArray(obj) {
-		let len = obj.length;
+		const len = obj.length;
 
-		let arr = new Array(len);
+		const arr = new Array(len);
 		for (let i = 0; i < len; i++) {
 			arr[i] = obj[i];
 		}
@@ -542,7 +550,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 	}
 
 	function resizeElement(el, width, height) {
-		let imageScaleResize = this.editor.config.imageScaleResize;
+		const imageScaleResize = this.editor.config.imageScaleResize;
 		if (imageScaleResize === 'both') {
 			el.style.width = String(width) + 'px';
 			el.style.height = String(height) + 'px';
@@ -559,7 +567,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 	}
 
 	function getBoundingBox(window, el) {
-		let rect = el.getBoundingClientRect();
+		const rect = el.getBoundingClientRect();
 		return {
 			left: rect.left + window.pageXOffset,
 			top: rect.top + window.pageYOffset,
