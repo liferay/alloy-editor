@@ -9,3 +9,4 @@ node_modules
 public
 sauce_connect.log
 test-results.xml
+/website/
