@@ -13,7 +13,7 @@ module.exports = {
 		},
 	},
 	extends: ['plugin:react/recommended', 'liferay', 'prettier'],
-	plugins: ['babel', 'no-for-of-loops'],
+	plugins: ['babel'],
 	rules: {
 		'require-jsdoc': 'warn',
 		'new-cap': [
@@ -62,8 +62,6 @@ module.exports = {
 		'babel/no-invalid-this': 'error',
 		'no-inner-declarations': 'off',
 		'no-invalid-this': 'off',
-		'no-for-of-loops/no-for-of-loops': 'error',
-		'no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
 		'react/prop-types': 'warn',
 		'sort-keys': 'off',
 		'valid-jsdoc': 'warn',
