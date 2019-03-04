@@ -23,8 +23,8 @@ Attribute.prototype = {
 	 * @param {String} attr The attribute which value should be retrieved.
 	 * @return {Any} The value of the attribute.
 	 */
-	get: function(attr) {
-		let currentAttr = this.constructor.ATTRS[attr];
+	get(attr) {
+		const currentAttr = this.constructor.ATTRS[attr];
 
 		if (!currentAttr) {
 			return;
@@ -52,8 +52,8 @@ Attribute.prototype = {
 	 * @param {String} attr The attribute which value should be set.
 	 * @param {Any} value The value which should be set to the attribute.
 	 */
-	set: function(attr, value) {
-		let currentAttr = this.constructor.ATTRS[attr];
+	set(attr, value) {
+		const currentAttr = this.constructor.ATTRS[attr];
 
 		if (!currentAttr) {
 			return;
@@ -98,7 +98,7 @@ Attribute.prototype = {
 	 * @protected
 	 * @return {Any} The returned value from the called function
 	 */
-	_callStringOrFunction: function(stringOrFunction, args) {
+	_callStringOrFunction(stringOrFunction, args) {
 		let result = null;
 
 		if (!Lang.isArray(args)) {
@@ -127,17 +127,17 @@ Attribute.prototype = {
 	 * @param {String} attr The name of the attribute which have to be initialized.
 	 * @protected
 	 */
-	_init: function(attr) {
+	_init(attr) {
 		let value;
 
-		let currentAttr = this.constructor.ATTRS[attr];
+		const currentAttr = this.constructor.ATTRS[attr];
 
 		// Check if there is default value or passed one via configuration object
-		let hasDefaultValue = Object.prototype.hasOwnProperty.call(
+		const hasDefaultValue = Object.prototype.hasOwnProperty.call(
 			currentAttr,
 			'value'
 		);
-		let hasPassedValueViaConfig = Object.prototype.hasOwnProperty.call(
+		const hasPassedValueViaConfig = Object.prototype.hasOwnProperty.call(
 			this.__config__,
 			attr
 		);
@@ -209,7 +209,7 @@ Attribute.prototype = {
 	 * @protected
 	 * @return {Boolean} Returns true if the attribute has been initialized, false otherwise.
 	 */
-	_isInitialized: function(attr) {
+	_isInitialized(attr) {
 		return Object.prototype.hasOwnProperty.call(this.__ATTRS__, attr);
 	},
 };

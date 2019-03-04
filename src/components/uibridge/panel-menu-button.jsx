@@ -4,7 +4,7 @@ import EditorContext from '../../adapter/editor-context';
 
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
-	let PANEL_MENU_DEFS = {};
+	const PANEL_MENU_DEFS = {};
 
 	/**
 	 * Generates a PanelMenuButtonBridge React class for a given panelmenubutton definition if it has not been
@@ -16,7 +16,7 @@ if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
 	 * @param {Object} panelMenuButtonDefinition The panel button definition
 	 * @return {Object} The generated or already existing React PanelMenuButton Class
 	 */
-	let generatePanelMenuButtonBridge = function(
+	const generatePanelMenuButtonBridge = function(
 		panelMenuButtonName,
 		panelMenuButtonDefinition,
 		editor
@@ -41,27 +41,28 @@ if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
 				createPanel() {}
 
 				render() {
-					let editor = this.context.editor.get('nativeEditor');
+					const editor = this.context.editor.get('nativeEditor');
 
-					let panelMenuButtonDisplayName =
+					const panelMenuButtonDisplayName =
 						PANEL_MENU_DEFS[editor.name][panelMenuButtonName]
 							.name ||
 						PANEL_MENU_DEFS[editor.name][panelMenuButtonName]
 							.command ||
 						panelMenuButtonName;
 
-					let buttonClassName = 'ae-button ae-button-bridge';
+					const buttonClassName = 'ae-button ae-button-bridge';
 
-					let iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
+					const iconClassName =
+						'ae-icon-' + panelMenuButtonDisplayName;
 
-					let iconStyle = {};
+					const iconStyle = {};
 
-					let cssStyle = CKEDITOR.skin.getIconStyle(
+					const cssStyle = CKEDITOR.skin.getIconStyle(
 						panelMenuButtonDisplayName
 					);
 
 					if (cssStyle) {
-						let cssStyleParts = cssStyle.split(';');
+						const cssStyleParts = cssStyle.split(';');
 
 						iconStyle.backgroundImage = cssStyleParts[0].substring(
 							cssStyleParts[0].indexOf(':') + 1
@@ -109,20 +110,20 @@ if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
 				}
 
 				_getPanel() {
-					let editor = this.context.editor.get('nativeEditor');
+					const editor = this.context.editor.get('nativeEditor');
 
-					let panelMenuButtonOnBlock =
+					const panelMenuButtonOnBlock =
 						PANEL_MENU_DEFS[editor.name][panelMenuButtonName]
 							.onBlock;
 
-					let panel = {
+					const panel = {
 						hide: this.props.toggleDropdown,
 						show: this.props.toggleDropdown,
 					};
 
-					let blockElement = new CKEDITOR.dom.element('div');
+					const blockElement = new CKEDITOR.dom.element('div');
 
-					let block = {
+					const block = {
 						element: blockElement,
 						keys: {},
 					};
@@ -188,7 +189,7 @@ if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
 		 * @method init
 		 * @param {Object} editor The CKEditor instance being initialized
 		 */
-		beforeInit: function(editor) {
+		beforeInit(editor) {
 			editor.ui.addPanelMenuButton = function(
 				panelMenuButtonName,
 				panelMenuButtonDefinition
@@ -202,10 +203,10 @@ if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
 
 			editor.ui.addHandler(CKEDITOR.UI_PANELBUTTON, {
 				add: generatePanelMenuButtonBridge,
-				create: function(panelMenuButtonDefinition) {
-					let panelMenuButtonName =
+				create(panelMenuButtonDefinition) {
+					const panelMenuButtonName =
 						'panelMenuButtonBridge' + ((Math.random() * 1e9) >>> 0);
-					let PanelMenuButtonBridge = generatePanelMenuButtonBridge(
+					const PanelMenuButtonBridge = generatePanelMenuButtonBridge(
 						panelMenuButtonName,
 						panelMenuButtonDefinition
 					);

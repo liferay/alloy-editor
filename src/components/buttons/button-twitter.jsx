@@ -109,7 +109,7 @@ class ButtonTwitter extends React.Component {
 			.getSelectedText()
 			.substring(0, MAX_TWEET_LENGTH);
 		const url = this.props.url;
-		let via = this.props.via;
+		const via = this.props.via;
 		let twitterHref =
 			'https://twitter.com/intent/tweet?text=' + selectedText;
 

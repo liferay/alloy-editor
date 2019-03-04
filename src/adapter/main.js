@@ -14,7 +14,7 @@ import extend from '../oop/oop';
 import '../plugins';
 
 // An object containing all currently registered plugins in AlloyEditor.
-let BRIDGE_BUTTONS = {};
+const BRIDGE_BUTTONS = {};
 
 /**
  * Creates an instance of AlloyEditor.
@@ -51,10 +51,10 @@ const getBasePath = function() {
 	let path = window.ALLOYEDITOR_BASEPATH || '';
 
 	if (!path) {
-		let scripts = document.getElementsByTagName('script');
+		const scripts = document.getElementsByTagName('script');
 
 		for (let i = 0; i < scripts.length; i++) {
-			let match = scripts[i].src.match(AlloyEditor.regexBasePath);
+			const match = scripts[i].src.match(AlloyEditor.regexBasePath);
 
 			if (match) {
 				path = match[1];
@@ -110,7 +110,7 @@ const loadLanguageResources = function(callback) {
 	if (!AlloyEditor._langResourceRequested) {
 		AlloyEditor._langResourceRequested = true;
 
-		let languages = [
+		const languages = [
 			'af',
 			'ar',
 			'bg',
@@ -179,11 +179,14 @@ const loadLanguageResources = function(callback) {
 			'zh',
 		];
 
-		let userLanguage = navigator.language || navigator.userLanguage || 'en';
+		const userLanguage =
+			navigator.language || navigator.userLanguage || 'en';
 
-		let parts = userLanguage.toLowerCase().match(/([a-z]+)(?:-([a-z]+))?/);
+		const parts = userLanguage
+			.toLowerCase()
+			.match(/([a-z]+)(?:-([a-z]+))?/);
 		let lang = parts[1];
-		let locale = parts[2];
+		const locale = parts[2];
 
 		if (languages.indexOf(lang + '-' + locale) >= 0) {
 			lang = lang + '-' + locale;
@@ -218,7 +221,7 @@ const loadLanguageResources = function(callback) {
  * @return {String} The full URL.
  */
 const getUrl = function(resource) {
-	let basePath = AlloyEditor.getBasePath();
+	const basePath = AlloyEditor.getBasePath();
 
 	// If this is not a full or absolute path.
 	if (resource.indexOf(':/') === -1 && resource.indexOf('/') !== 0) {

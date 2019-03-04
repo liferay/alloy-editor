@@ -16,9 +16,9 @@
 function debounce(callback, timeout, context, args = []) {
 	let debounceHandle;
 
-	let callFn = function(...callArgs) {
+	const callFn = function(...callArgs) {
 		/* eslint-disable babel/no-invalid-this */
-		let callContext = context || this;
+		const callContext = context || this;
 		/* eslint-enable babel/no-invalid-this */
 
 		clearTimeout(debounceHandle);

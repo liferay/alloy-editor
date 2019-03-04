@@ -30,11 +30,11 @@ if (!CKEDITOR.plugins.get('ae_pasteimages')) {
 		 * @method init
 		 * @param {Object} editor The current editor instance
 		 */
-		init: function(editor) {
+		init(editor) {
 			editor.once(
 				'contentDom',
 				function() {
-					let editable = editor.editable();
+					const editable = editor.editable();
 
 					editable.attachListener(
 						editable,
@@ -42,7 +42,7 @@ if (!CKEDITOR.plugins.get('ae_pasteimages')) {
 						this._onPaste,
 						this,
 						{
-							editor: editor,
+							editor,
 						}
 					);
 				}.bind(this)
@@ -60,29 +60,29 @@ if (!CKEDITOR.plugins.get('ae_pasteimages')) {
 		 * @protected
 		 * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
 		 */
-		_onPaste: function(event) {
+		_onPaste(event) {
 			if (event.data.$.clipboardData) {
-				let pastedData = event.data.$.clipboardData.items[0];
-				let editor = event.listenerData.editor;
+				const pastedData = event.data.$.clipboardData.items[0];
+				const editor = event.listenerData.editor;
 
 				if (pastedData.type.indexOf('image') === 0) {
-					let reader = new FileReader();
-					let imageFile = pastedData.getAsFile();
+					const reader = new FileReader();
+					const imageFile = pastedData.getAsFile();
 
 					reader.onload = function(event) {
-						let result = editor.fire('beforeImageAdd', {
+						const result = editor.fire('beforeImageAdd', {
 							imageFiles: imageFile,
 						});
 
 						if (result) {
-							let el = CKEDITOR.dom.element.createFromHtml(
+							const el = CKEDITOR.dom.element.createFromHtml(
 								'<img src="' + event.target.result + '">'
 							);
 
 							editor.insertElement(el);
 
-							let imageData = {
-								el: el,
+							const imageData = {
+								el,
 								file: imageFile,
 							};
 

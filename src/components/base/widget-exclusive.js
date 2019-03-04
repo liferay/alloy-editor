@@ -104,7 +104,7 @@ export default WrappedComponent =>
 		 */
 		requestExclusive = itemExclusive => {
 			this.setState({
-				itemExclusive: itemExclusive,
+				itemExclusive,
 			});
 		};
 	};

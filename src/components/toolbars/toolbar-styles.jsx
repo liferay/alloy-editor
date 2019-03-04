@@ -65,10 +65,10 @@ class ToolbarStyles extends React.Component {
 	 * @return {Object|null} The content which should be rendered.
 	 */
 	render() {
-		let currentSelection = this._getCurrentSelection();
+		const currentSelection = this._getCurrentSelection();
 
 		if (currentSelection) {
-			let getArrowBoxClassesFn = this._getSelectionFunction(
+			const getArrowBoxClassesFn = this._getSelectionFunction(
 				currentSelection.getArrowBoxClasses
 			);
 			let arrowBoxClasses;
@@ -79,7 +79,7 @@ class ToolbarStyles extends React.Component {
 				arrowBoxClasses = this.getArrowBoxClasses();
 			}
 
-			let cssClasses = 'ae-toolbar-styles ' + arrowBoxClasses;
+			const cssClasses = 'ae-toolbar-styles ' + arrowBoxClasses;
 
 			let buttons = currentSelection.buttons;
 
@@ -89,14 +89,14 @@ class ToolbarStyles extends React.Component {
 					buttons['simple'];
 			}
 
-			let buttonsGroup = this.getToolbarButtonGroups(buttons, {
+			const buttonsGroup = this.getToolbarButtonGroups(buttons, {
 				manualSelection: this.props.editorEvent
 					? this.props.editorEvent.data.manualSelection
 					: null,
 				selectionType: currentSelection.name,
 			});
 
-			let hasGroups =
+			const hasGroups =
 				buttonsGroup.filter(function(button) {
 					return Array.isArray(button);
 				}).length > 0;
@@ -154,7 +154,7 @@ class ToolbarStyles extends React.Component {
 		if (Lang.isFunction(selectionFn)) {
 			selectionFunction = selectionFn;
 		} else if (Lang.isString(selectionFn)) {
-			let parts = selectionFn.split('.');
+			const parts = selectionFn.split('.');
 			let currentMember = window;
 			let property = parts.shift();
 
@@ -185,14 +185,14 @@ class ToolbarStyles extends React.Component {
 	 * @return {Object} The matched selection configuration.
 	 */
 	_getCurrentSelection() {
-		let eventPayload = this.props.editorEvent
+		const eventPayload = this.props.editorEvent
 			? this.props.editorEvent.data
 			: null;
 		let selection;
 
 		if (eventPayload) {
 			this.props.config.selections.some(function(item) {
-				let testFn = this._getSelectionFunction(item.test);
+				const testFn = this._getSelectionFunction(item.test);
 				let result;
 
 				if (testFn) {
@@ -229,13 +229,13 @@ class ToolbarStyles extends React.Component {
 			return;
 		}
 
-		let currentSelection = this._getCurrentSelection();
+		const currentSelection = this._getCurrentSelection();
 		let result;
 
 		// If current selection has a function called `setPosition`, call it
 		// and check the returned value. If false, fallback to the default positioning logic.
 		if (currentSelection) {
-			let setPositionFn = this._getSelectionFunction(
+			const setPositionFn = this._getSelectionFunction(
 				currentSelection.setPosition
 			);
 

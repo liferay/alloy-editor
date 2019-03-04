@@ -5,7 +5,7 @@ import EditorContext from '../../adapter/editor-context';
 
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
-	let RICH_COMBO_DEFS = {};
+	const RICH_COMBO_DEFS = {};
 
 	/**
 	 * Generates a RichComboBridge React class for a given richcombo definition if it has not been
@@ -17,7 +17,7 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 	 * @param {Object} richComboDefinition The rich combo definition
 	 * @return {Object} The generated or already existing React RichCombo Class
 	 */
-	let generateRichComboBridge = function(
+	const generateRichComboBridge = function(
 		richComboName,
 		richComboDefinition,
 		editor
@@ -62,16 +62,16 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 
 				add(value, preview, title) {
 					this._items.push({
-						preview: preview,
-						title: title,
-						value: value,
+						preview,
+						title,
+						value,
 					});
 				}
 
 				componentWillMount() {
-					let editor = this.context.editor.get('nativeEditor');
+					const editor = this.context.editor.get('nativeEditor');
 
-					let editorCombo =
+					const editorCombo =
 						RICH_COMBO_DEFS[editor.name][richComboName];
 
 					this._items = [];
@@ -98,9 +98,9 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 				}
 
 				render() {
-					let editor = this.context.editor.get('nativeEditor');
+					const editor = this.context.editor.get('nativeEditor');
 
-					let richComboLabel =
+					const richComboLabel =
 						RICH_COMBO_DEFS[editor.name][richComboName]
 							.currentValue || richComboDefinition.label;
 
@@ -132,7 +132,7 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 				}
 
 				_cacheValue(value) {
-					let editor = this.context.editor.get('nativeEditor');
+					const editor = this.context.editor.get('nativeEditor');
 
 					RICH_COMBO_DEFS[editor.name][
 						richComboName
@@ -140,11 +140,11 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 				}
 
 				_getItems() {
-					let richCombo = this;
+					const richCombo = this;
 
-					let items = this._items.map(
+					const items = this._items.map(
 						function(item) {
-							let className =
+							const className =
 								'ae-toolbar-element ' +
 								(item.value === this.state.value
 									? 'active'
@@ -169,13 +169,13 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 				}
 
 				_onClick = event => {
-					let editor = this.context.editor.get('nativeEditor');
+					const editor = this.context.editor.get('nativeEditor');
 
-					let editorCombo =
+					const editorCombo =
 						RICH_COMBO_DEFS[editor.name][richComboName];
 
 					if (editorCombo.onClick) {
-						let newValue = event.currentTarget.getAttribute(
+						const newValue = event.currentTarget.getAttribute(
 							'data-value'
 						);
 
@@ -193,7 +193,7 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 					this._cacheValue(value);
 
 					this.setState({
-						value: value,
+						value,
 					});
 				}
 			};
@@ -231,7 +231,7 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 		 * @method init
 		 * @param {Object} editor The CKEditor instance being initialized
 		 */
-		beforeInit: function(editor) {
+		beforeInit(editor) {
 			editor.ui.addRichCombo = function(
 				richComboName,
 				richComboDefinition
@@ -245,10 +245,10 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 
 			editor.ui.addHandler(CKEDITOR.UI_RICHCOMBO, {
 				add: generateRichComboBridge,
-				create: function(richComboDefinition) {
-					let richComboName =
+				create(richComboDefinition) {
+					const richComboName =
 						'richComboBridge' + ((Math.random() * 1e9) >>> 0);
-					let RichComboBridge = generateRichComboBridge(
+					const RichComboBridge = generateRichComboBridge(
 						richComboName,
 						richComboDefinition
 					);

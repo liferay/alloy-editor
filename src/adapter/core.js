@@ -44,14 +44,14 @@ extend(
 		 * @method initializer
 		 * @param {Object} config Configuration object literal for the editor.
 		 */
-		initializer: function(config) {
-			let node = this.get('srcNode');
+		initializer(config) {
+			const node = this.get('srcNode');
 
 			if (this.get('enableContentEditable')) {
 				node.setAttribute('contenteditable', 'true');
 			}
 
-			let editor = CKEDITOR.inline(node);
+			const editor = CKEDITOR.inline(node);
 
 			editor.config.allowedContent = this.get('allowedContent');
 
@@ -95,9 +95,9 @@ extend(
 				function() {
 					this._addReadOnlyLinkClickListener(editor);
 
-					let editable = editor.editable();
+					const editable = editor.editable();
 
-					let extraCommands = this.get('extraCommands');
+					const extraCommands = this.get('extraCommands');
 
 					const extraCommandKeys = Object.keys(extraCommands);
 					for (let i = 0; i < extraCommandKeys.length; i++) {
@@ -131,7 +131,7 @@ extend(
 		 * @protected
 		 * @method destructor
 		 */
-		destructor: function() {
+		destructor() {
 			this._destroyed = true;
 
 			if (this._editorUIElement) {
@@ -141,10 +141,10 @@ extend(
 				);
 			}
 
-			let nativeEditor = this.get('nativeEditor');
+			const nativeEditor = this.get('nativeEditor');
 
 			if (nativeEditor) {
-				let editable = nativeEditor.editable();
+				const editable = nativeEditor.editable();
 
 				if (editable) {
 					editable.removeClass('ae-editable');
@@ -171,9 +171,9 @@ extend(
 		 * @protected
 		 * @method _clearSelections
 		 */
-		_clearSelections: function() {
-			let nativeEditor = this.get('nativeEditor');
-			let isMSSelection = typeof window.getSelection != 'function';
+		_clearSelections() {
+			const nativeEditor = this.get('nativeEditor');
+			const isMSSelection = typeof window.getSelection != 'function';
 
 			if (isMSSelection) {
 				nativeEditor.document.$.selection.empty();
@@ -194,9 +194,9 @@ extend(
 		 * @method _addReadOnlyLinkClickListener
 		 * @param {Object} editor
 		 */
-		_addReadOnlyLinkClickListener: function(editor) {
+		_addReadOnlyLinkClickListener(editor) {
 			editor.editable().on('click', this._defaultReadOnlyClickFn, this, {
-				editor: editor,
+				editor,
 			});
 		},
 
@@ -211,10 +211,10 @@ extend(
 		 * @method _defaultReadOnlyClickFn
 		 * @param {Object} event The fired `click` event payload
 		 */
-		_defaultReadOnlyClickFn: function(event) {
-			let mouseEvent = event.data.$;
-			let hasCtrlKey = mouseEvent.ctrlKey || mouseEvent.metaKey;
-			let shouldOpen = this._editor.config.readOnly || hasCtrlKey;
+		_defaultReadOnlyClickFn(event) {
+			const mouseEvent = event.data.$;
+			const hasCtrlKey = mouseEvent.ctrlKey || mouseEvent.metaKey;
+			const shouldOpen = this._editor.config.readOnly || hasCtrlKey;
 
 			mouseEvent.preventDefault();
 
@@ -227,17 +227,17 @@ extend(
 					.editable()
 					.editor.fire('readOnlyClick', event.data) !== false
 			) {
-				let ckElement = new CKEDITOR.dom.elementPath(
+				const ckElement = new CKEDITOR.dom.elementPath(
 					event.data.getTarget(),
 					this
 				);
-				let link = ckElement.lastElement;
+				const link = ckElement.lastElement;
 
 				if (link) {
-					let href = link.$.attributes.href
+					const href = link.$.attributes.href
 						? link.$.attributes.href.value
 						: null;
-					let target = hasCtrlKey
+					const target = hasCtrlKey
 						? '_blank'
 						: link.$.attributes.target
 						? link.$.attributes.target.value
@@ -256,7 +256,7 @@ extend(
 		 * @method _getNativeEditor
 		 * @return {Object} The current instance of CKEditor.
 		 */
-		_getNativeEditor: function() {
+		_getNativeEditor() {
 			return this._editor;
 		},
 
@@ -270,7 +270,7 @@ extend(
 		 * @param {string} href The href to take the browser to
 		 * @param {string=} target Specifies where to display the link
 		 */
-		_redirectLink: function(href, target) {
+		_redirectLink(href, target) {
 			if (target && href) {
 				window.open(href, target);
 			} else if (href) {
@@ -286,12 +286,12 @@ extend(
 		 * @protected
 		 * @method _renderUI
 		 */
-		_renderUI: function() {
+		_renderUI() {
 			if (!this._destroyed) {
-				let editorUIElement = document.createElement('div');
+				const editorUIElement = document.createElement('div');
 				editorUIElement.className = 'ae-ui';
 
-				let uiNode = this.get('uiNode') || document.body;
+				const uiNode = this.get('uiNode') || document.body;
 
 				uiNode.appendChild(editorUIElement);
 
@@ -330,7 +330,7 @@ extend(
 		 * or the HTML element itself. If Id is passed, the HTML element will be retrieved from the DOM.
 		 * @return {HTMLElement} An HTML element.
 		 */
-		_toElement: function(value) {
+		_toElement(value) {
 			if (Lang.isString(value)) {
 				value = document.getElementById(value);
 			}
@@ -350,7 +350,7 @@ extend(
 		 * @param {Any} value The value to be checked
 		 * @return {Boolean} True if the current value is valid configuration, false otherwise
 		 */
-		_validateAllowedContent: function(value) {
+		_validateAllowedContent(value) {
 			return (
 				Lang.isString(value) ||
 				Lang.isObject(value) ||
@@ -368,7 +368,7 @@ extend(
 		 * @param {Any} value The value to be checked
 		 * @return {Boolean} True if the current value is valid toolbars configuration, false otherwise
 		 */
-		_validateToolbars: function(value) {
+		_validateToolbars(value) {
 			return Lang.isObject(value) || Lang.isNull(value);
 		},
 	},

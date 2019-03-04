@@ -24,7 +24,7 @@ CKEDITOR.tools.jsonp = function(
 	callback,
 	errorCallback
 ) {
-	let callbackKey = CKEDITOR.tools.getNextNumber();
+	const callbackKey = CKEDITOR.tools.getNextNumber();
 
 	urlParams = urlParams || {};
 	urlParams.callback = 'CKEDITOR._.jsonpCallbacks[' + callbackKey + ']';
@@ -83,12 +83,12 @@ CKEDITOR.tools.jsonp = function(
 CKEDITOR.tools.merge =
 	CKEDITOR.tools.merge ||
 	function(...args) {
-		let result = {};
+		const result = {};
 
 		for (let i = 0; i < args.length; ++i) {
-			let obj = args[i];
+			const obj = args[i];
 
-			for (let key in obj) {
+			for (const key in obj) {
 				if (Object.prototype.hasOwnProperty.call(obj, key)) {
 					result[key] = obj[key];
 				}
@@ -108,7 +108,7 @@ CKEDITOR.tools.merge =
  * @static
  */
 CKEDITOR.tools.simulate = function(element, event) {
-	let eventInstance = document.createEvent('Events');
+	const eventInstance = document.createEvent('Events');
 	eventInstance.initEvent(event, true, false);
 	element.dispatchEvent(eventInstance);
 };

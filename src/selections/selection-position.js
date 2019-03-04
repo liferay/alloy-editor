@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 
 // Default gutter value for toolbar positioning
-let DEFAULT_GUTTER = {
+const DEFAULT_GUTTER = {
 	left: 0,
 	top: 0,
 };
@@ -13,34 +13,35 @@ let DEFAULT_GUTTER = {
  * @param {Object} toolbar The toolbar to be centered
  * @param {Object} rect The rectangle according to which the Toolbar will be centered
  */
-let centerToolbar = function(toolbar, rect) {
-	let toolbarNode = ReactDOM.findDOMNode(toolbar);
+const centerToolbar = function(toolbar, rect) {
+	const toolbarNode = ReactDOM.findDOMNode(toolbar);
 
-	let nativeEditor = toolbar.context.editor.get('nativeEditor');
-	let uiNode = nativeEditor.config.uiNode || document.body;
-	let uiNodeStyle = getComputedStyle(uiNode);
-	let uiNodeMarginLeft = parseInt(
+	const nativeEditor = toolbar.context.editor.get('nativeEditor');
+	const uiNode = nativeEditor.config.uiNode || document.body;
+	const uiNodeStyle = getComputedStyle(uiNode);
+	const uiNodeMarginLeft = parseInt(
 		uiNodeStyle.getPropertyValue('margin-left'),
 		10
 	);
-	let uiNodeMarginRight = parseInt(
+	const uiNodeMarginRight = parseInt(
 		uiNodeStyle.getPropertyValue('margin-right'),
 		10
 	);
-	let totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+	const totalWidth =
+		uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
 
-	let halfNodeWidth = toolbarNode.offsetWidth / 2;
-	let scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
+	const halfNodeWidth = toolbarNode.offsetWidth / 2;
+	const scrollPosition = new CKEDITOR.dom.window(window).getScrollPosition();
 
-	let gutter = toolbar.props.gutter || DEFAULT_GUTTER;
+	const gutter = toolbar.props.gutter || DEFAULT_GUTTER;
 
-	let widgetXY = toolbar.getWidgetXYPoint(
+	const widgetXY = toolbar.getWidgetXYPoint(
 		rect.left + rect.width / 2 - scrollPosition.x,
 		rect.top + scrollPosition.y,
 		CKEDITOR.SELECTION_BOTTOM_TO_TOP
 	);
 
-	let endPosition = [
+	const endPosition = [
 		rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
 		rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top,
 	];
@@ -62,8 +63,8 @@ let centerToolbar = function(toolbar, rect) {
  * client rectangle of the selected image
  * @return {Boolean} True, in all cases
  */
-let imageSelectionSetPosition = function(payload) {
-	let selectionData = payload.selectionData
+const imageSelectionSetPosition = function(payload) {
+	const selectionData = payload.selectionData
 		? payload.selectionData
 		: payload.editorEvent
 		? payload.editorEvent.data.selectionData
@@ -84,14 +85,14 @@ let imageSelectionSetPosition = function(payload) {
  * client rectangle of the selected table
  * @return {Boolean} True, in all cases
  */
-let tableSelectionSetPosition = function(payload) {
-	let nativeEditor = payload.editor.get('nativeEditor');
-	let uiNode = nativeEditor.config.uiNode;
+const tableSelectionSetPosition = function(payload) {
+	const nativeEditor = payload.editor.get('nativeEditor');
+	const uiNode = nativeEditor.config.uiNode;
 
-	let scrollTop = uiNode ? uiNode.scrollTop : 0;
+	const scrollTop = uiNode ? uiNode.scrollTop : 0;
 
-	let table = new CKEDITOR.Table(nativeEditor).getFromSelection();
-	let rect = table.getClientRect();
+	const table = new CKEDITOR.Table(nativeEditor).getFromSelection();
+	const rect = table.getClientRect();
 	rect.top += scrollTop;
 
 	centerToolbar(this, rect);

@@ -5,7 +5,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	 * Enum for supported image alignments
 	 * @type {Object}
 	 */
-	let IMAGE_ALIGNMENT = {
+	const IMAGE_ALIGNMENT = {
 		CENTER: 'center',
 		LEFT: 'left',
 		RIGHT: 'right',
@@ -15,7 +15,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	 * Enum values for supported image alignments
 	 * @type {Array}
 	 */
-	let ALIGN_VALUES = [
+	const ALIGN_VALUES = [
 		IMAGE_ALIGNMENT.LEFT,
 		IMAGE_ALIGNMENT.RIGHT,
 		IMAGE_ALIGNMENT.CENTER,
@@ -25,7 +25,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	 * Necessary styles for the center alignment
 	 * @type {Array.<Object>}
 	 */
-	let CENTERED_IMAGE_STYLE = [
+	const CENTERED_IMAGE_STYLE = [
 		{
 			name: 'display',
 			value: 'block',
@@ -46,7 +46,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	 * @param {CKEDITOR.dom.element} image The image element
 	 * @return {String} The alignment value
 	 */
-	let getImageAlignment = function(image) {
+	const getImageAlignment = function(image) {
 		let imageAlignment = image.getStyle('float');
 
 		if (
@@ -76,7 +76,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 			});
 
 			if (!imageAlignment) {
-				let imageContainer = image.$.parentNode;
+				const imageContainer = image.$.parentNode;
 
 				if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
 					CENTERED_IMAGE_STYLE.forEach(function(style) {
@@ -110,7 +110,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	 * @param {CKEDITOR.dom.element} image The image element
 	 * @param {String} imageAlignment The image alignment value to be removed
 	 */
-	let removeImageAlignment = function(image, imageAlignment) {
+	const removeImageAlignment = function(image, imageAlignment) {
 		if (
 			imageAlignment === IMAGE_ALIGNMENT.LEFT ||
 			imageAlignment === IMAGE_ALIGNMENT.RIGHT
@@ -131,7 +131,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 				}
 			});
 
-			let imageContainer = image.$.parentNode;
+			const imageContainer = image.$.parentNode;
 
 			if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
 				imageContainer.style.textAlign = '';
@@ -145,7 +145,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	 * @param {CKEDITOR.dom.element} image The image element
 	 * @param {String} imageAlignment The image alignment value to be set
 	 */
-	let setImageAlignment = function(image, imageAlignment) {
+	const setImageAlignment = function(image, imageAlignment) {
 		removeImageAlignment(image, getImageAlignment(image));
 
 		if (
@@ -181,25 +181,25 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 		 * @method afterInit
 		 * @param {Object} editor The current editor instance
 		 */
-		afterInit: function(editor) {
-			let self = this;
+		afterInit(editor) {
+			const self = this;
 
 			ALIGN_VALUES.forEach(function(value) {
-				let command = editor.getCommand('justify' + value);
+				const command = editor.getCommand('justify' + value);
 
 				if (command) {
 					command.on('exec', function(event) {
-						let selectionData = editor.getSelectionData();
+						const selectionData = editor.getSelectionData();
 
 						if (
 							selectionData &&
 							SelectionTest.image({
-								data: {selectionData: selectionData},
+								data: {selectionData},
 							})
 						) {
-							let image = selectionData.element;
+							const image = selectionData.element;
 
-							let imageAlignment = getImageAlignment(image);
+							const imageAlignment = getImageAlignment(image);
 
 							if (imageAlignment === value) {
 								removeImageAlignment(image, value);
@@ -217,16 +217,16 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 					});
 
 					command.on('refresh', function(event) {
-						let selectionData = {
+						const selectionData = {
 							element: event.data.path.lastElement,
 						};
 
 						if (
 							SelectionTest.image({
-								data: {selectionData: selectionData},
+								data: {selectionData},
 							})
 						) {
-							let imageAlignment = getImageAlignment(
+							const imageAlignment = getImageAlignment(
 								selectionData.element
 							);
 
@@ -251,9 +251,9 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 		 * @param {CKEDITOR.editor} editor The editor instance
 		 * @param {CKEDITOR.dom.elementPath} elementPath The path of the selected image
 		 */
-		refreshCommands: function(editor, elementPath) {
+		refreshCommands(editor, elementPath) {
 			ALIGN_VALUES.forEach(function(value) {
-				let command = editor.getCommand('justify' + value);
+				const command = editor.getCommand('justify' + value);
 
 				if (command) {
 					command.refresh(editor, elementPath);

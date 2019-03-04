@@ -34,7 +34,7 @@ export default WrappedComponent =>
 			if (!command) {
 				command = new CKEDITOR.command(nativeEditor, {
 					exec: function(editor) {
-						let keystrokeFn = keystroke.fn;
+						const keystrokeFn = keystroke.fn;
 
 						if (Lang.isString(keystrokeFn)) {
 							this[keystrokeFn].call(this, editor);

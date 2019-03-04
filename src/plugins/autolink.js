@@ -5,24 +5,24 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		document.execCommand('AutoUrlDetect', false, false);
 	}
 
-	let KEY_BACK = 8;
+	const KEY_BACK = 8;
 
-	let KEY_COMMA = 188;
+	const KEY_COMMA = 188;
 
-	let KEY_ENTER = 13;
+	const KEY_ENTER = 13;
 
-	let KEY_SEMICOLON = 186;
+	const KEY_SEMICOLON = 186;
 
-	let KEY_SPACE = 32;
+	const KEY_SPACE = 32;
 
-	let DELIMITERS = [KEY_COMMA, KEY_ENTER, KEY_SEMICOLON, KEY_SPACE];
+	const DELIMITERS = [KEY_COMMA, KEY_ENTER, KEY_SEMICOLON, KEY_SPACE];
 
-	let REGEX_LAST_WORD = /[^\s]+/gim;
+	const REGEX_LAST_WORD = /[^\s]+/gim;
 
-	let REGEX_URL =
+	const REGEX_URL =
 		'((([A - Za - z]{ 3, 9}: (?: \\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(https?\\:\\/\\/|www.|[-;:&=.\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))((.*):(\\d*)\\/?(.*))?)';
 
-	let REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
+	const REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
 
 	/**
 	 * CKEditor plugin which automatically generates links when user types text which looks like URL.
@@ -40,11 +40,11 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @method init
 		 * @param {Object} editor The current editor instance
 		 */
-		init: function(editor) {
+		init(editor) {
 			editor.once(
 				'contentDom',
 				function() {
-					let editable = editor.editable();
+					const editable = editor.editable();
 
 					editable.attachListener(
 						editable,
@@ -52,7 +52,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 						this._onKeyUp,
 						this,
 						{
-							editor: editor,
+							editor,
 						}
 					);
 				}.bind(this)
@@ -79,7 +79,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 							return;
 						}
 
-						let instance = this;
+						const instance = this;
 
 						event.data.dataValue = event.data.dataValue.replace(
 							RegExp(REGEX_URL, 'gim'),
@@ -120,10 +120,10 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @protected
 		 * @return {String} The last word introduced by user
 		 */
-		_getLastWord: function(editor) {
-			let range = editor.getSelection().getRanges()[0];
+		_getLastWord(editor) {
+			const range = editor.getSelection().getRanges()[0];
 
-			let offset = range.startOffset;
+			const offset = range.startOffset;
 
 			let previousText = '';
 
@@ -169,7 +169,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 
 			let lastWord = '';
 
-			let match = previousText.match(REGEX_LAST_WORD);
+			const match = previousText.match(REGEX_LAST_WORD);
 
 			if (match) {
 				lastWord = match.pop();
@@ -188,7 +188,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @protected
 		 * @return {Boolean} Returns true if the email is a valid Email, false otherwise
 		 */
-		_isValidEmail: function(email) {
+		_isValidEmail(email) {
 			return REGEX_EMAIL.test(email);
 		},
 
@@ -202,7 +202,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @protected
 		 * @return {Boolean} Returns true if the link is a valid URL, false otherwise
 		 */
-		_isValidURL: function(link) {
+		_isValidURL(link) {
 			return RegExp(REGEX_URL, 'i').test(link);
 		},
 
@@ -216,12 +216,12 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @param {EventFacade} event EventFacade object
 		 * @protected
 		 */
-		_onKeyDown: function(event) {
-			let nativeEvent = event.data.$;
+		_onKeyDown(event) {
+			const nativeEvent = event.data.$;
 
-			let editor = event.listenerData.editor;
+			const editor = event.listenerData.editor;
 
-			let editable = editor.editable();
+			const editable = editor.editable();
 
 			editable.removeListener('keydown', this._onKeyDown);
 
@@ -245,15 +245,15 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @param {EventFacade} event EventFacade object
 		 * @protected
 		 */
-		_onKeyUp: function(event) {
-			let nativeEvent = event.data.$;
+		_onKeyUp(event) {
+			const nativeEvent = event.data.$;
 
 			this._currentKeyCode = nativeEvent.keyCode;
 
 			if (DELIMITERS.indexOf(this._currentKeyCode) !== -1) {
-				let editor = event.listenerData.editor;
+				const editor = event.listenerData.editor;
 
-				let lastWord = this._getLastWord(editor);
+				const lastWord = this._getLastWord(editor);
 
 				if (this._isValidURL(lastWord)) {
 					this._replaceContentByLink(editor, lastWord);
@@ -271,21 +271,21 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @param {String} content The text that has to be replaced by an link element
 		 * @protected
 		 */
-		_replaceContentByLink: function(editor, content) {
+		_replaceContentByLink(editor, content) {
 			let range = editor.createRange();
-			let node = CKEDITOR.dom.element.get(this._startContainer);
-			let offset = this._offset;
+			const node = CKEDITOR.dom.element.get(this._startContainer);
+			const offset = this._offset;
 
 			// Select the content, so CKEDITOR.Link can properly replace it
 			range.setStart(node, offset - content.length);
 			range.setEnd(node, offset);
 			range.select();
 
-			let ckLink = new CKEDITOR.Link(editor);
+			const ckLink = new CKEDITOR.Link(editor);
 			ckLink.create(content);
 			this._ckLink = ckLink;
 
-			let linkNode = ckLink.getFromSelection();
+			const linkNode = ckLink.getFromSelection();
 			editor.fire('autolinkAdd', linkNode);
 
 			this._subscribeToKeyEvent(editor);
@@ -297,12 +297,12 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 			// If user pressed `Enter`, get the next editable node at position 0,
 			// otherwise set the cursor at the next character of the link (the white space)
 			if (this._currentKeyCode === KEY_ENTER) {
-				let nextEditableNode = range.getNextEditableNode();
+				const nextEditableNode = range.getNextEditableNode();
 
 				range.setStart(nextEditableNode, 0);
 				range.setEnd(nextEditableNode, 0);
 			} else {
-				let enclosedNode = range.getEnclosedNode();
+				const enclosedNode = range.getEnclosedNode();
 
 				range.setStart(enclosedNode, 0);
 				range.setEnd(enclosedNode, 0);
@@ -327,15 +327,15 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @method _removeLink
 		 * @protected
 		 */
-		_removeLink: function(editor) {
-			let range = editor.getSelection().getRanges()[0];
-			let caretOffset = range.startOffset;
+		_removeLink(editor) {
+			const range = editor.getSelection().getRanges()[0];
+			const caretOffset = range.startOffset;
 
 			// Select the link, so CKEDITOR.Link can properly remove it
-			let linkNode =
+			const linkNode =
 				this._startContainer.getNext() || this._startContainer;
 
-			let newRange = editor.createRange();
+			const newRange = editor.createRange();
 			newRange.setStart(linkNode, 0);
 			newRange.setEndAfter(linkNode);
 			newRange.select();
@@ -357,8 +357,8 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @method _subscribeToKeyEvent
 		 * @protected
 		 */
-		_subscribeToKeyEvent: function(editor) {
-			let editable = editor.editable();
+		_subscribeToKeyEvent(editor) {
+			const editable = editor.editable();
 
 			// Change the priority of keydown listener - 1 means the highest priority.
 			// In Chrome on pressing `Enter` the listener is not being invoked.
@@ -369,7 +369,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 				this._onKeyDown,
 				this,
 				{
-					editor: editor,
+					editor,
 				},
 				1
 			);

@@ -3,7 +3,7 @@ import EditorContext from '../../adapter/editor-context';
 
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_buttonbridge')) {
-	let BUTTON_DEFS = {};
+	const BUTTON_DEFS = {};
 
 	/**
 	 * Generates a ButtonBridge React class for a given button definition if it has not been
@@ -37,30 +37,30 @@ if (!CKEDITOR.plugins.get('ae_buttonbridge')) {
 				toFeature() {}
 
 				render() {
-					let editor = this.context.editor.get('nativeEditor');
+					const editor = this.context.editor.get('nativeEditor');
 
-					let buttonClassName = 'ae-button ae-button-bridge';
+					const buttonClassName = 'ae-button ae-button-bridge';
 
-					let buttonDisplayName =
+					const buttonDisplayName =
 						BUTTON_DEFS[editor.name][buttonName].name ||
 						BUTTON_DEFS[editor.name][buttonName].command ||
 						buttonName;
 
-					let buttonLabel =
+					const buttonLabel =
 						BUTTON_DEFS[editor.name][buttonName].label;
 
-					let buttonType = 'button-' + buttonDisplayName;
+					const buttonType = 'button-' + buttonDisplayName;
 
-					let iconClassName = 'ae-icon-' + buttonDisplayName;
+					const iconClassName = 'ae-icon-' + buttonDisplayName;
 
-					let iconStyle = {};
+					const iconStyle = {};
 
-					let cssStyle = CKEDITOR.skin.getIconStyle(
+					const cssStyle = CKEDITOR.skin.getIconStyle(
 						buttonDisplayName
 					);
 
 					if (cssStyle) {
-						let cssStyleParts = cssStyle.split(';');
+						const cssStyleParts = cssStyle.split(';');
 
 						iconStyle.backgroundImage = cssStyleParts[0].substring(
 							cssStyleParts[0].indexOf(':') + 1
@@ -87,12 +87,12 @@ if (!CKEDITOR.plugins.get('ae_buttonbridge')) {
 				}
 
 				_handleClick = () => {
-					let editor = this.context.editor.get('nativeEditor');
+					const editor = this.context.editor.get('nativeEditor');
 
-					let buttonCommand =
+					const buttonCommand =
 						BUTTON_DEFS[editor.name][buttonName].command;
 
-					let buttonOnClick =
+					const buttonOnClick =
 						BUTTON_DEFS[editor.name][buttonName].onClick;
 
 					if (buttonOnClick) {
@@ -138,17 +138,17 @@ if (!CKEDITOR.plugins.get('ae_buttonbridge')) {
 		 * @method init
 		 * @param {Object} editor The CKEditor instance being initialized
 		 */
-		beforeInit: function(editor) {
+		beforeInit(editor) {
 			editor.ui.addButton = function(buttonName, buttonDefinition) {
 				this.add(buttonName, CKEDITOR.UI_BUTTON, buttonDefinition);
 			};
 
 			editor.ui.addHandler(CKEDITOR.UI_BUTTON, {
 				add: generateButtonBridge,
-				create: function(buttonDefinition) {
-					let buttonName =
+				create(buttonDefinition) {
+					const buttonName =
 						'buttonBridge' + ((Math.random() * 1e9) >>> 0);
-					let ButtonBridge = generateButtonBridge(
+					const ButtonBridge = generateButtonBridge(
 						buttonName,
 						buttonDefinition
 					);

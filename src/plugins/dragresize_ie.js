@@ -3,7 +3,7 @@
  * - Show gripper to resize images on IE
  */
 if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
-	let alignmentsObj = {
+	const alignmentsObj = {
 		center: 1,
 		left: 0,
 		right: 2,
@@ -13,30 +13,30 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 	 * Set cursor css depend on imageScaleResize config
 	 **/
 
-	let cursor = {
+	const cursor = {
 		both: 'nwse-resize',
 		height: 'ns-resize',
 		scale: 'nwse-resize',
 		width: 'ew-resize',
 	};
 
-	let regexPercent = /^\s*(\d+%)\s*$/i;
+	const regexPercent = /^\s*(\d+%)\s*$/i;
 
-	let template = '<img alt="" src="" />';
+	const template = '<img alt="" src="" />';
 
 	CKEDITOR.plugins.add('ae_dragresize_ie', {
 		hidpi: true,
 
 		icons: 'image',
 
-		init: function(editor) {
-			let image = widgetDef(editor);
+		init(editor) {
+			const image = widgetDef(editor);
 
 			// Register the widget.
 			editor.widgets.add('image', image);
 		},
 
-		onLoad: function() {
+		onLoad() {
 			CKEDITOR.addCss(
 				'.cke_image_resizer_nwse-resize{' +
 					'cursor: nwse-resize;' +
@@ -183,17 +183,17 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 			editor.widgets.initOn(imageData.data.el, 'image');
 		});
 
-		let alignClasses = editor.config.image2_alignClasses;
+		const alignClasses = editor.config.image2_alignClasses;
 
-		let captionedClass = editor.config.image2_captionedClass;
+		const captionedClass = editor.config.image2_captionedClass;
 
 		return {
-			init: function() {
-				let helpers = CKEDITOR.plugins.image2;
+			init() {
+				const helpers = CKEDITOR.plugins.image2;
 
-				let image = this.parts.image;
+				const image = this.parts.image;
 
-				let data = {
+				const data = {
 					alt: image.getAttribute('alt') || '',
 					hasCaption: !!this.parts.caption,
 					height: image.getAttribute('height') || '',
@@ -208,7 +208,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 				// If we used 'a' in widget#parts definition, it could happen that
 				// selected element is a child of widget.parts#caption. Since there's no clever
 				// way to solve it with CSS selectors, it's done like that. (#11783).
-				let link = image.getAscendant('a');
+				const link = image.getAscendant('a');
 
 				if (link && this.wrapper.contains(link)) {
 					this.parts.link = link;
@@ -219,7 +219,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 				// Note: Center alignment is detected during upcast, so only left/right cases
 				// are checked below.
 				if (!data.align) {
-					let alignElement = data.hasCaption ? this.element : image;
+					const alignElement = data.hasCaption ? this.element : image;
 
 					// Read the initial left/right alignment from the class set on element.
 					if (alignClasses) {
@@ -259,7 +259,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 
 			// Overrides default method to handle internal mutability of Image2.
 			// @see CKEDITOR.plugins.widget#addClass
-			addClass: function(className) {
+			addClass(className) {
 				getStyleableElement(this).addClass(className);
 			},
 
@@ -268,8 +268,8 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 			// This widget converts style-driven dimensions to attributes.
 			contentTransformations: [['img[width]: sizeToAttribute']],
 
-			data: function() {
-				let features = this.features;
+			data() {
+				const features = this.features;
 
 				// Image can't be captioned when figcaption is disallowed (#11004).
 				if (
@@ -321,7 +321,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 					!this.oldData.hasCaption &&
 					this.data.hasCaption
 				) {
-					for (let c in this.data.classes) {
+					for (const c in this.data.classes) {
 						if (this.data.classes.hasOwnProperty(c)) {
 							this.parts.image.removeClass(c);
 						}
@@ -355,20 +355,20 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 			// Overrides default method to handle internal mutability of Image2.
 			// @see CKEDITOR.plugins.widget#getClasses
 			getClasses: (function() {
-				let classRegex = new RegExp(
+				const classRegex = new RegExp(
 					'^(' +
 						[].concat(captionedClass, alignClasses).join('|') +
 						')$'
 				);
 
 				return function() {
-					let classes = this.repository.parseElementClasses(
+					const classes = this.repository.parseElementClasses(
 						getStyleableElement(this).getAttribute('class')
 					);
 
 					// Neither config.image2_captionedClass nor config.image2_alignClasses
 					// do not belong to style classes.
-					for (let c in classes) {
+					for (const c in classes) {
 						if (classRegex.test(c)) {
 							delete classes[c];
 						}
@@ -378,15 +378,15 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 				};
 			})(),
 
-			getLabel: function() {
-				let label = (this.data.alt || '') + ' ' + this.pathName;
+			getLabel() {
+				const label = (this.data.alt || '') + ' ' + this.pathName;
 
 				return label;
 			},
 
 			// Overrides default method to handle internal mutability of Image2.
 			// @see CKEDITOR.plugins.widget#hasClass
-			hasClass: function(className) {
+			hasClass(className) {
 				return getStyleableElement(this).hasClass(className);
 			},
 
@@ -397,7 +397,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 
 			// Overrides default method to handle internal mutability of Image2.
 			// @see CKEDITOR.plugins.widget#removeClass
-			removeClass: function(className) {
+			removeClass(className) {
 				getStyleableElement(this).removeClass(className);
 			},
 
@@ -406,7 +406,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 			styleableElements: 'img figure',
 
 			// Template of the widget: plain image.
-			template: template,
+			template,
 
 			upcast: upcastWidgetElement(editor),
 		};
@@ -426,10 +426,10 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 		 * @param {CKEDITOR.dom.element} image
 		 * @return {Boolean}
 		 */
-		checkHasNaturalRatio: function(image) {
-			let $ = image.$;
+		checkHasNaturalRatio(image) {
+			const $ = image.$;
 
-			let natural = this.getNatural(image);
+			const natural = this.getNatural(image);
 
 			// The reason for two alternative comparisons is that the rounding can come from
 			// both dimensions, e.g. there are two cases:
@@ -451,7 +451,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 		 * @param {CKEDITOR.dom.element} image
 		 * @return {Object}
 		 */
-		getNatural: function(image) {
+		getNatural(image) {
 			let dimensions;
 
 			if (image.$.naturalWidth) {
@@ -460,7 +460,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 					width: image.$.naturalWidth,
 				};
 			} else {
-				let img = new Image();
+				const img = new Image();
 
 				img.src = image.getAttribute('src');
 
@@ -480,19 +480,19 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 	// @param {CKEDITOR.editor} editor
 	// @returns {Function}
 	function upcastWidgetElement(editor) {
-		let isCenterWrapper = centerWrapperChecker(editor);
+		const isCenterWrapper = centerWrapperChecker(editor);
 
-		let captionedClass = editor.config.image2_captionedClass;
+		const captionedClass = editor.config.image2_captionedClass;
 
 		// @param {CKEDITOR.htmlParser.element} el
 		// @param {Object} data
 		return function(el, data) {
-			let dimensions = {
+			const dimensions = {
 				height: 1,
 				width: 1,
 			};
 
-			let name = el.name;
+			const name = el.name;
 
 			let image;
 
@@ -515,7 +515,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 			//    than ENTER_P.
 			if (isCenterWrapper(el)) {
 				if (name == 'div') {
-					let figure = el.getFirst('figure');
+					const figure = el.getFirst('figure');
 
 					// Case #1.
 					if (figure) {
@@ -547,9 +547,9 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 
 			// If there's an image, then cool, we got a widget.
 			// Now just remove dimension attributes expressed with %.
-			for (let d in dimensions) {
+			for (const d in dimensions) {
 				if (dimensions.hasOwnProperty(d)) {
-					let dimension = image.attributes[d];
+					const dimension = image.attributes[d];
 
 					if (dimension && dimension.match(regexPercent)) {
 						delete image.attributes[d];
@@ -566,24 +566,24 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 	//
 	// @param {CKEDITOR.editor}
 	function downcastWidgetElement(editor) {
-		let alignClasses = editor.config.image2_alignClasses;
+		const alignClasses = editor.config.image2_alignClasses;
 
 		// @param {CKEDITOR.htmlParser.element} el
 		return function(el) {
 			// In case of <a><img/></a>, <img/> is the element to hold
 			// inline styles or classes (image2_alignClasses).
-			let attrsHolder = el.name == 'a' ? el.getFirst() : el;
+			const attrsHolder = el.name == 'a' ? el.getFirst() : el;
 
 			delete attrsHolder.attributes.contenteditable;
 
-			let attrs = attrsHolder.attributes;
+			const attrs = attrsHolder.attributes;
 
-			let align = this.data.align;
+			const align = this.data.align;
 
 			// De-wrap the image from resize handle wrapper.
 			// Only block widgets have one.
 			if (!this.inline) {
-				let resizeWrapper = el.getFirst('span');
+				const resizeWrapper = el.getFirst('span');
 
 				if (resizeWrapper) {
 					resizeWrapper.replaceWith(
@@ -596,7 +596,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 			}
 
 			if (align && align != 'none') {
-				let styles = CKEDITOR.tools.parseCssText(attrs.style || '');
+				const styles = CKEDITOR.tools.parseCssText(attrs.style || '');
 
 				// When the widget is captioned (<figure>) and internally centering is done
 				// with widget's wrapper style/class, in the external data representation,
@@ -657,11 +657,11 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 	// @param {CKEDITOR.editor} editor
 	// @returns {Function}
 	function centerWrapperChecker(editor) {
-		let captionedClass = editor.config.image2_captionedClass;
+		const captionedClass = editor.config.image2_captionedClass;
 
-		let alignClasses = editor.config.image2_alignClasses;
+		const alignClasses = editor.config.image2_alignClasses;
 
-		let validChildren = {
+		const validChildren = {
 			a: 1,
 			figure: 1,
 			img: 1,
@@ -681,14 +681,14 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 				return false;
 			}
 
-			let children = el.children;
+			const children = el.children;
 
 			// Centering wrapper can have only one child.
 			if (children.length !== 1) {
 				return false;
 			}
 
-			let child = children[0];
+			const child = children[0];
 
 			// Only <figure> or <img /> can be first (only) child of centering wrapper,
 			// regardless of its type.
@@ -762,16 +762,16 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 	//
 	// @param {CKEDITOR.plugins.widget} widget
 	function setDimensions(widget) {
-		let data = widget.data;
+		const data = widget.data;
 
-		let dimensions = {
+		const dimensions = {
 			height: data.height,
 			width: data.width,
 		};
 
-		let image = widget.parts.image;
+		const image = widget.parts.image;
 
-		for (let d in dimensions) {
+		for (const d in dimensions) {
 			if (dimensions[d]) {
 				image.setAttribute(d, dimensions[d]);
 			} else {
@@ -784,14 +784,14 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 	//
 	// @param {CKEDITOR.plugins.widget} widget
 	function setupResizer(widget) {
-		let editor = widget.editor;
+		const editor = widget.editor;
 
-		let editable = editor.editable();
+		const editable = editor.editable();
 
-		let doc = editor.document;
+		const doc = editor.document;
 
 		// Store the resizer in a widget for testing (#11004).
-		let resizer = (widget.resizer = doc.createElement('span'));
+		const resizer = (widget.resizer = doc.createElement('span'));
 
 		resizer.addClass('cke_image_resizer');
 		resizer.addClass(
@@ -801,11 +801,11 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 
 		// Inline widgets don't need a resizer wrapper as an image spans the entire widget.
 		if (!widget.inline) {
-			let imageOrLink = widget.parts.link || widget.parts.image;
+			const imageOrLink = widget.parts.link || widget.parts.image;
 
-			let oldResizeWrapper = imageOrLink.getParent();
+			const oldResizeWrapper = imageOrLink.getParent();
 
-			let resizeWrapper = doc.createElement('span');
+			const resizeWrapper = doc.createElement('span');
 
 			resizeWrapper.addClass('cke_image_resizer_wrapper');
 			resizeWrapper.append(imageOrLink);
@@ -823,28 +823,28 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 
 		// Calculate values of size variables and mouse offsets.
 		resizer.on('mousedown', function(evt) {
-			let image = widget.parts.image;
+			const image = widget.parts.image;
 
 			// "factor" can be either 1 or -1. I.e.: For right-aligned images, we need to
 			// subtract the difference to get proper width, etc. Without "factor",
 			// resizer starts working the opposite way.
-			let factor = widget.data.align == 'right' ? -1 : 1;
+			const factor = widget.data.align == 'right' ? -1 : 1;
 
 			// The x-coordinate of the mouse relative to the screen
 			// when button gets pressed.
-			let startX = evt.data.$.screenX;
+			const startX = evt.data.$.screenX;
 
-			let startY = evt.data.$.screenY;
+			const startY = evt.data.$.screenY;
 
 			// The initial dimensions and aspect ratio of the image.
-			let startWidth = image.$.clientWidth;
+			const startWidth = image.$.clientWidth;
 
-			let startHeight = image.$.clientHeight;
+			const startHeight = image.$.clientHeight;
 
-			let listeners = [];
+			const listeners = [];
 
 			// A class applied to editable during resizing.
-			let cursorClass = 'cke_image_s' + (!~factor ? 'w' : 'e');
+			const cursorClass = 'cke_image_s' + (!~factor ? 'w' : 'e');
 
 			let nativeEvt;
 			let newWidth;
@@ -872,9 +872,9 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 			// Attaches an event to a global document if inline editor.
 			// Additionally, if classic (`iframe`-based) editor, also attaches the same event to `iframe`'s document.
 			function attachToDocuments(name, callback, collection) {
-				let globalDoc = CKEDITOR.document;
+				const globalDoc = CKEDITOR.document;
 
-				let listeners = [];
+				const listeners = [];
 
 				if (!doc.equals(globalDoc)) {
 					listeners.push(globalDoc.on(name, callback));
@@ -907,7 +907,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 			// 	                <------->
 			// 	                moveDiffX
 			function onMouseMove(evt) {
-				let imageScaleResize = editor.config.imageScaleResize;
+				const imageScaleResize = editor.config.imageScaleResize;
 
 				nativeEvt = evt.data.$;
 
@@ -988,18 +988,18 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 		});
 
 		widget.parts.image.on('click', function() {
-			let selection = editor.getSelection();
+			const selection = editor.getSelection();
 
 			if (selection) {
-				let element = selection.getStartElement();
+				const element = selection.getStartElement();
 
 				if (element) {
-					let widgetElement = element.findOne('img');
+					const widgetElement = element.findOne('img');
 
 					if (widgetElement) {
-						let region = element.getClientRect();
+						const region = element.getClientRect();
 
-						let scrollPosition = new CKEDITOR.dom.window(
+						const scrollPosition = new CKEDITOR.dom.window(
 							window
 						).getScrollPosition();
 						region.left -= scrollPosition.x;
@@ -1011,7 +1011,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 							nativeEvent: event,
 							selectionData: {
 								element: widgetElement,
-								region: region,
+								region,
 							},
 						});
 					}
@@ -1027,7 +1027,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 	// @param {CKEDITOR.editor}
 	// @returns {Object}
 	function getWidgetAllowedContent(editor) {
-		let rules = {
+		const rules = {
 			figcaption: true,
 			figure: {
 				classes: '!' + editor.config.image2_captionedClass,
@@ -1048,9 +1048,9 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 	// @param {CKEDITOR.editor}
 	// @returns {Object}
 	function getWidgetFeatures(editor) {
-		let alignClasses = editor.config.image2_alignClasses;
+		const alignClasses = editor.config.image2_alignClasses;
 
-		let features = {
+		const features = {
 			align: {
 				requiredContent:
 					'img' +

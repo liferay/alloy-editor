@@ -16,13 +16,13 @@ if (!CKEDITOR.plugins.get('ae_selectionkeystrokes')) {
 		 * @method init
 		 * @param {Object} editor The current editor instance
 		 */
-		init: function(editor) {
+		init(editor) {
 			if (editor.config.selectionKeystrokes) {
 				editor.config.selectionKeystrokes.forEach(function(
 					selectionKeystroke
 				) {
-					let command = new CKEDITOR.command(editor, {
-						exec: function(editor) {
+					const command = new CKEDITOR.command(editor, {
+						exec(editor) {
 							editor.fire('editorInteraction', {
 								manualSelection: selectionKeystroke.selection,
 								nativeEvent: {},
@@ -31,7 +31,7 @@ if (!CKEDITOR.plugins.get('ae_selectionkeystrokes')) {
 						},
 					});
 
-					let commandName =
+					const commandName =
 						'selectionKeystroke' + selectionKeystroke.selection;
 
 					editor.addCommand(commandName, command);

@@ -9,8 +9,8 @@ import WidgetFocusManager from '../base/widget-focus-manager';
 import WidgetPosition from '../base/widget-position';
 import ButtonIcon from '../buttons/button-icon.jsx';
 
-let POSITION_LEFT = 1;
-let POSITION_RIGHT = 2;
+const POSITION_LEFT = 1;
+const POSITION_RIGHT = 2;
 
 /**
  * The ToolbarAdd class provides functionality for adding content to the editor.
@@ -90,8 +90,8 @@ class ToolbarAdd extends React.Component {
 			return null;
 		}
 
-		let buttons = this._getButtons();
-		let className = this._getToolbarClassName();
+		const buttons = this._getButtons();
+		const className = this._getToolbarClassName();
 
 		return (
 			<div
@@ -185,19 +185,19 @@ class ToolbarAdd extends React.Component {
 			}
 
 			if (region) {
-				let domNode = ReactDOM.findDOMNode(this);
+				const domNode = ReactDOM.findDOMNode(this);
 
-				let domElement = new CKEDITOR.dom.element(domNode);
+				const domElement = new CKEDITOR.dom.element(domNode);
 
-				let startRect = region.startRect || region;
+				const startRect = region.startRect || region;
 
-				let nativeEditor = this.context.editor.get('nativeEditor');
+				const nativeEditor = this.context.editor.get('nativeEditor');
 
-				let clientRect = nativeEditor.editable().getClientRect();
+				const clientRect = nativeEditor.editable().getClientRect();
 
 				let offsetLeft;
 
-				let position =
+				const position =
 					this.props.config.position || this.props.position;
 
 				if (position === POSITION_LEFT) {

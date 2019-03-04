@@ -13,7 +13,7 @@ const Lang = {
 	 * @return {Boolean} True if the passed value is an array, false otherwise.
 	 * @static
 	 */
-	isArray: function(value) {
+	isArray(value) {
 		return Object.prototype.toString.call(value) === '[object Array]';
 	},
 
@@ -26,7 +26,7 @@ const Lang = {
 	 * @return {Boolean} True if the passed value is boolean, false otherwise.
 	 * @static
 	 */
-	isBoolean: function(value) {
+	isBoolean(value) {
 		return typeof value === 'boolean';
 	},
 
@@ -39,7 +39,7 @@ const Lang = {
 	 * @return {Boolean} True if the passed value is a function, false otherwise.
 	 * @static
 	 */
-	isFunction: function(value) {
+	isFunction(value) {
 		return typeof value === 'function';
 	},
 
@@ -52,7 +52,7 @@ const Lang = {
 	 * @return {Boolean} True if the passed value is NULL, false otherwise.
 	 * @static
 	 */
-	isNull: function(value) {
+	isNull(value) {
 		return value === null;
 	},
 
@@ -65,7 +65,7 @@ const Lang = {
 	 * @return {Boolean} True if the passed value is number, false otherwise.
 	 * @static
 	 */
-	isNumber: function(value) {
+	isNumber(value) {
 		return typeof value === 'number' && isFinite(value);
 	},
 
@@ -78,8 +78,8 @@ const Lang = {
 	 * @return {Boolean} True if the passed value is an object, false otherwise.
 	 * @static
 	 */
-	isObject: function(value) {
-		let valueType = typeof value;
+	isObject(value) {
+		const valueType = typeof value;
 
 		return value && (valueType === 'object' || Lang.isFunction(value));
 	},
@@ -93,7 +93,7 @@ const Lang = {
 	 * @return {Boolean} True if the passed value is a string, false otherwise.
 	 * @static
 	 */
-	isString: function(value) {
+	isString(value) {
 		return typeof value === 'string';
 	},
 
@@ -108,10 +108,10 @@ const Lang = {
 	 * @return {Object} The modified receiver.
 	 * @static
 	 */
-	mix: function(receiver, supplier) {
-		let hasOwnProperty = Object.prototype.hasOwnProperty;
+	mix(receiver, supplier) {
+		const hasOwnProperty = Object.prototype.hasOwnProperty;
 
-		for (let key in supplier) {
+		for (const key in supplier) {
 			if (hasOwnProperty.call(supplier, key)) {
 				receiver[key] = supplier[key];
 			}
@@ -127,7 +127,7 @@ const Lang = {
 	 * @return {Integer} The converted value.
 	 * @static
 	 */
-	toInt: function(value) {
+	toInt(value) {
 		return parseInt(value, 10);
 	},
 };

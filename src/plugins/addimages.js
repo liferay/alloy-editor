@@ -1,4 +1,4 @@
-let isIE = CKEDITOR.env.ie;
+const isIE = CKEDITOR.env.ie;
 
 if (!CKEDITOR.plugins.get('ae_addimages')) {
 	/**
@@ -39,11 +39,11 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		 * @method init
 		 * @param {Object} editor The current editor instance
 		 */
-		init: function(editor) {
+		init(editor) {
 			editor.once(
 				'contentDom',
 				function() {
-					let editable = editor.editable();
+					const editable = editor.editable();
 
 					editable.attachListener(
 						editable,
@@ -51,7 +51,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 						this._onDragEnter,
 						this,
 						{
-							editor: editor,
+							editor,
 						}
 					);
 
@@ -61,7 +61,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 						this._onDragOver,
 						this,
 						{
-							editor: editor,
+							editor,
 						}
 					);
 
@@ -71,7 +71,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 						this._onDragDrop,
 						this,
 						{
-							editor: editor,
+							editor,
 						}
 					);
 
@@ -81,7 +81,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 						this._onPaste,
 						this,
 						{
-							editor: editor,
+							editor,
 						}
 					);
 				}.bind(this)
@@ -100,11 +100,11 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		 * @param {Object} editor The current editor instance
 		 * @protected
 		 */
-		_handleFiles: function(files, editor) {
+		_handleFiles(files, editor) {
 			let file;
 			let i;
 
-			let imageFiles = [];
+			const imageFiles = [];
 
 			for (i = 0; i < files.length; i++) {
 				file = files[i];
@@ -114,8 +114,8 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 				}
 			}
 
-			let result = editor.fire('beforeImageAdd', {
-				imageFiles: imageFiles,
+			const result = editor.fire('beforeImageAdd', {
+				imageFiles,
 			});
 
 			if (result) {
@@ -140,15 +140,15 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		 * @param {CKEDITOR.dom.event} event dragdrop event, as received natively from CKEditor
 		 * @protected
 		 */
-		_onDragDrop: function(event) {
-			let nativeEvent = event.data.$;
+		_onDragDrop(event) {
+			const nativeEvent = event.data.$;
 
-			let transferFiles = nativeEvent.dataTransfer.files;
+			const transferFiles = nativeEvent.dataTransfer.files;
 
 			if (transferFiles.length > 0) {
 				new CKEDITOR.dom.event(nativeEvent).preventDefault();
 
-				let editor = event.listenerData.editor;
+				const editor = event.listenerData.editor;
 
 				event.listenerData.editor.createSelectionFromPoint(
 					nativeEvent.clientX,
@@ -168,7 +168,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		 * @param {DOM event} event dragenter event, as received natively from CKEditor
 		 * @protected
 		 */
-		_onDragEnter: function(event) {
+		_onDragEnter(event) {
 			if (isIE) {
 				this._preventEvent(event);
 			}
@@ -183,7 +183,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		 * @param {DOM event} event dragover event, as received natively from CKEditor
 		 * @protected
 		 */
-		_onDragOver: function(event) {
+		_onDragOver(event) {
 			if (isIE) {
 				this._preventEvent(event);
 			}
@@ -199,7 +199,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		 * @param {CKEDITOR.dom.event} event A `paste` event, as received natively from CKEditor
 		 * @protected
 		 */
-		_onPaste: function(event) {
+		_onPaste(event) {
 			if (
 				event.data &&
 				event.data.$ &&
@@ -207,10 +207,10 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 				event.data.$.clipboardData.items &&
 				event.data.$.clipboardData.items.length > 0
 			) {
-				let pastedData = event.data.$.clipboardData.items[0];
+				const pastedData = event.data.$.clipboardData.items[0];
 
 				if (pastedData.type.indexOf('image') === 0) {
-					let imageFile = pastedData.getAsFile();
+					const imageFile = pastedData.getAsFile();
 
 					this._processFile(imageFile, event.listenerData.editor);
 				}
@@ -226,7 +226,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		 * @param {DOM event} event The event to be prevented.
 		 * @protected
 		 */
-		_preventEvent: function(event) {
+		_preventEvent(event) {
 			event = new CKEDITOR.dom.event(event.data.$);
 
 			event.preventDefault();
@@ -244,21 +244,21 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		 * @param {DOM event} event The event to be prevented.
 		 * @protected
 		 */
-		_processFile: function(file, editor) {
-			let reader = new FileReader();
+		_processFile(file, editor) {
+			const reader = new FileReader();
 
 			reader.addEventListener('loadend', function() {
-				let bin = reader.result;
+				const bin = reader.result;
 
-				let el = CKEDITOR.dom.element.createFromHtml(
+				const el = CKEDITOR.dom.element.createFromHtml(
 					'<img src="' + bin + '">'
 				);
 
 				editor.insertElement(el);
 
-				let imageData = {
-					el: el,
-					file: file,
+				const imageData = {
+					el,
+					file,
 				};
 
 				editor.fire('imageAdd', imageData);

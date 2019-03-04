@@ -27,7 +27,7 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 		 * @param {Number} x X point in page coordinates.
 		 * @param {Number} y Y point in page coordinates.
 		 */
-		createSelectionFromPoint: function(x, y) {
+		createSelectionFromPoint(x, y) {
 			this.createSelectionFromRange(x, y, x, y);
 		},
 
@@ -42,7 +42,7 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 		 * @param {Number} endX X coordinate of the second point.
 		 * @param {Number} endY Y coordinate of the second point.
 		 */
-		createSelectionFromRange: function(startX, startY, endX, endY) {
+		createSelectionFromRange(startX, startY, endX, endY) {
 			let end;
 			let endContainer;
 			let endOffset;
@@ -84,14 +84,14 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 
 				this.getSelection().selectRanges([range]);
 			} else if (typeof document.body.createTextRange === 'function') {
-				let selection = this.getSelection();
+				const selection = this.getSelection();
 
 				selection.unlock();
 
 				range = document.body.createTextRange();
 				range.moveToPoint(startX, startY);
 
-				let endRange = range.duplicate();
+				const endRange = range.duplicate();
 				endRange.moveToPoint(endX, endY);
 
 				range.setEndPoint('EndToEnd', endRange);
@@ -113,8 +113,8 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 		 * - right
 		 * - top
 		 */
-		getCaretRegion: function() {
-			let selection = this.getSelection();
+		getCaretRegion() {
+			const selection = this.getSelection();
 
 			let region = {
 				bottom: 0,
@@ -123,13 +123,13 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 				top: 0,
 			};
 
-			let bookmarks = selection.createBookmarks();
+			const bookmarks = selection.createBookmarks();
 
 			if (!bookmarks.length) {
 				return region;
 			}
 
-			let bookmarkNodeEl = bookmarks[0].startNode.$;
+			const bookmarkNodeEl = bookmarks[0].startNode.$;
 
 			bookmarkNodeEl.style.display = 'inline-block';
 
@@ -137,7 +137,9 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 
 			bookmarkNodeEl.parentNode.removeChild(bookmarkNodeEl);
 
-			let scrollPos = new CKEDITOR.dom.window(window).getScrollPosition();
+			const scrollPos = new CKEDITOR.dom.window(
+				window
+			).getScrollPosition();
 
 			region.bottom = scrollPos.y + region.bottom;
 			region.left = scrollPos.x + region.left;
@@ -158,14 +160,14 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 		 * - text - The selected text
 		 * - region - The data, returned from {{#crossLink "CKEDITOR.plugins.ae_selectionregion/getSelectionRegion:method"}}{{/crossLink}}
 		 */
-		getSelectionData: function() {
-			let selection = this.getSelection();
+		getSelectionData() {
+			const selection = this.getSelection();
 
 			if (!selection.getNative()) {
 				return null;
 			}
 
-			let result = {
+			const result = {
 				element: selection.getSelectedElement(),
 				text: selection.getSelectedText(),
 			};
@@ -189,8 +191,8 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 		 * - height - The height of the selection region
 		 * - width - The width of the selection region
 		 */
-		getSelectionRegion: function() {
-			let region = this.getClientRectsRegion();
+		getSelectionRegion() {
+			const region = this.getClientRectsRegion();
 
 			region.direction = this.getSelectionDirection();
 
@@ -208,17 +210,15 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 		 * @method isSelectionEmpty
 		 * @return {Boolean} Returns true if the current selection is empty, false otherwise.
 		 */
-		isSelectionEmpty: function() {
-			let ranges;
+		isSelectionEmpty() {
+			const selection = this.getSelection();
 
-			let selection = this.getSelection();
+			if (selection.getType() === CKEDITOR.SELECTION_NONE) {
+				return true;
+			}
 
-			return (
-				selection.getType() === CKEDITOR.SELECTION_NONE ||
-				((ranges = selection.getRanges()) &&
-					ranges.length === 1 &&
-					ranges[0].collapsed)
-			);
+			const ranges = selection.getRanges();
+			return ranges && ranges.length === 1 && ranges[0].collapsed;
 		},
 
 		/**
@@ -250,11 +250,11 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 		 *
 		 * If there is no native selection, the objects will be filled with 0.
 		 */
-		getClientRectsRegion: function() {
-			let selection = this.getSelection();
-			let nativeSelection = selection.getNative();
+		getClientRectsRegion() {
+			const selection = this.getSelection();
+			const nativeSelection = selection.getNative();
 
-			let defaultRect = {
+			const defaultRect = {
 				bottom: 0,
 				height: 0,
 				left: 0,
@@ -295,7 +295,7 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 				region = this.getCaretRegion();
 			} else {
 				for (let i = 0, length = clientRects.length; i < length; i++) {
-					let item = clientRects[i];
+					const item = clientRects[i];
 
 					if (item.left < left) {
 						left = item.left;
@@ -314,7 +314,7 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 					}
 				}
 
-				let scrollPos = new CKEDITOR.dom.window(
+				const scrollPos = new CKEDITOR.dom.window(
 					window
 				).getScrollPosition();
 
@@ -324,8 +324,8 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 				region.top = scrollPos.y + top;
 
 				if (clientRects.length) {
-					let endRect = clientRects[clientRects.length - 1];
-					let startRect = clientRects[0];
+					const endRect = clientRects[clientRects.length - 1];
+					const startRect = clientRects[0];
 
 					region.endRect = {
 						bottom: scrollPos.y + endRect.bottom,
@@ -361,10 +361,10 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 		 * - CKEDITOR.SELECTION_TOP_TO_BOTTOM;
 		 * - CKEDITOR.SELECTION_BOTTOM_TO_TOP;
 		 */
-		getSelectionDirection: function() {
+		getSelectionDirection() {
 			let direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
-			let selection = this.getSelection();
-			let nativeSelection = selection.getNative();
+			const selection = this.getSelection();
+			const nativeSelection = selection.getNative();
 
 			if (!nativeSelection) {
 				return direction;
@@ -376,7 +376,7 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 				(anchorNode = nativeSelection.anchorNode) &&
 				anchorNode.compareDocumentPosition
 			) {
-				let position = anchorNode.compareDocumentPosition(
+				const position = anchorNode.compareDocumentPosition(
 					nativeSelection.focusNode
 				);
 
@@ -395,11 +395,9 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 	};
 
 	CKEDITOR.plugins.add('ae_selectionregion', {
-		init: function(editor) {
+		init(editor) {
 			let attr;
-			let hasOwnProperty;
-
-			hasOwnProperty = Object.prototype.hasOwnProperty;
+			const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 			for (attr in SelectionRegion.prototype) {
 				if (

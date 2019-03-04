@@ -4,7 +4,7 @@ import EditorContext from '../../adapter/editor-context';
 
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
-	let MENUBUTTON_DEFS = {};
+	const MENUBUTTON_DEFS = {};
 
 	/**
 	 * Generates a MenuButtonBridge React class for a given menuButton definition if it has not been
@@ -42,25 +42,26 @@ if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
 				toFeature() {}
 
 				render() {
-					let editor = this.context.editor.get('nativeEditor');
+					const editor = this.context.editor.get('nativeEditor');
 
-					let panelMenuButtonDisplayName =
+					const panelMenuButtonDisplayName =
 						MENUBUTTON_DEFS[editor.name][menuButtonName].name ||
 						MENUBUTTON_DEFS[editor.name][menuButtonName].command ||
 						menuButtonName;
 
-					let buttonClassName = 'ae-button ae-button-bridge';
+					const buttonClassName = 'ae-button ae-button-bridge';
 
-					let iconClassName = 'ae-icon-' + panelMenuButtonDisplayName;
+					const iconClassName =
+						'ae-icon-' + panelMenuButtonDisplayName;
 
-					let iconStyle = {};
+					const iconStyle = {};
 
-					let cssStyle = CKEDITOR.skin.getIconStyle(
+					const cssStyle = CKEDITOR.skin.getIconStyle(
 						panelMenuButtonDisplayName
 					);
 
 					if (cssStyle) {
-						let cssStyleParts = cssStyle.split(';');
+						const cssStyleParts = cssStyle.split(';');
 
 						iconStyle.backgroundImage = cssStyleParts[0].substring(
 							cssStyleParts[0].indexOf(':') + 1
@@ -105,27 +106,27 @@ if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
 				}
 
 				_getMenuItems() {
-					let editor = this.context.editor.get('nativeEditor');
-					let items = menuButtonDefinition.onMenu();
-					let menuItems = Object.keys(items).map(function(key) {
-						let menuItem = editor.getMenuItem(key);
+					const editor = this.context.editor.get('nativeEditor');
+					const items = menuButtonDefinition.onMenu();
+					const menuItems = Object.keys(items).map(function(key) {
+						const menuItem = editor.getMenuItem(key);
 
 						if (!menuItem) {
 							return null;
 						}
 
-						let menuItemDefinition =
+						const menuItemDefinition =
 							menuItem.definition || menuItem;
-						let menuItemState = items[key];
+						const menuItemState = items[key];
 
-						let className =
+						const className =
 							'ae-toolbar-element ' +
 							(menuItemState === CKEDITOR.TRISTATE_ON
 								? 'active'
 								: '');
-						let disabled =
+						const disabled =
 							menuItemState === CKEDITOR.TRISTATE_DISABLED;
-						let onClick = function() {
+						const onClick = function() {
 							if (menuItemDefinition.command) {
 								editor.execCommand(menuItemDefinition.command);
 							} else if (menuItemDefinition.onClick) {
@@ -185,7 +186,7 @@ if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
 		 * @method init
 		 * @param {Object} editor The CKEditor instance being initialized
 		 */
-		beforeInit: function(editor) {
+		beforeInit(editor) {
 			editor.ui.addMenuButton = function(
 				menuButtonName,
 				menuButtonDefinition
@@ -199,10 +200,10 @@ if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
 
 			editor.ui.addHandler(CKEDITOR.UI_MENUBUTTON, {
 				add: generateMenuButtonBridge,
-				create: function(menuButtonDefinition) {
-					let menuButtonName =
+				create(menuButtonDefinition) {
+					const menuButtonName =
 						'buttonBridge' + ((Math.random() * 1e9) >>> 0);
-					let MenuButtonBridge = generateMenuButtonBridge(
+					const MenuButtonBridge = generateMenuButtonBridge(
 						menuButtonName,
 						menuButtonDefinition
 					);

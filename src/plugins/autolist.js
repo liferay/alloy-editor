@@ -1,9 +1,9 @@
 if (!CKEDITOR.plugins.get('ae_autolist')) {
-	let KEY_BACK = 8;
+	const KEY_BACK = 8;
 
-	let KEY_SPACE = 32;
+	const KEY_SPACE = 32;
 
-	let DEFAULT_CONFIG = [
+	const DEFAULT_CONFIG = [
 		{
 			regex: /^\*$/,
 			type: 'bulletedlist',
@@ -30,11 +30,11 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 		 * @method init
 		 * @param {Object} editor The current editor instance
 		 */
-		init: function(editor) {
+		init(editor) {
 			editor.once(
 				'contentDom',
 				function() {
-					let editable = editor.editable();
+					const editable = editor.editable();
 
 					editable.attachListener(
 						editable,
@@ -42,7 +42,7 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 						this._onKeyDown,
 						this,
 						{
-							editor: editor,
+							editor,
 						}
 					);
 				}.bind(this)
@@ -58,12 +58,12 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 		 * @param {Event} event Event object
 		 * @protected
 		 */
-		_checkForBackspaceAndUndo: function(event) {
-			let editor = event.listenerData.editor;
+		_checkForBackspaceAndUndo(event) {
+			const editor = event.listenerData.editor;
 
-			let nativeEvent = event.data.$;
+			const nativeEvent = event.data.$;
 
-			let editable = editor.editable();
+			const editable = editor.editable();
 
 			editable.removeListener('keydown', this._checkForBackspaceAndUndo);
 
@@ -84,34 +84,34 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 		 * @protected
 		 * @return {Object|null} Returns an object which contains the detected list config if any
 		 */
-		_getListConfig: function(editor) {
-			let configRegex = editor.config.autolist || DEFAULT_CONFIG;
+		_getListConfig(editor) {
+			const configRegex = editor.config.autolist || DEFAULT_CONFIG;
 
-			let range = editor.getSelection().getRanges()[0];
+			const range = editor.getSelection().getRanges()[0];
 
-			let textContainer = range.endContainer.getText();
+			const textContainer = range.endContainer.getText();
 
-			let bullet = textContainer.substring(0, range.startOffset);
+			const bullet = textContainer.substring(0, range.startOffset);
 
-			let text = textContainer.substring(
+			const text = textContainer.substring(
 				range.startOffset,
 				textContainer.length
 			);
 
 			let index = 0;
 
-			let regexLen = configRegex.length;
+			const regexLen = configRegex.length;
 
 			let autolistCfg = null;
 
 			while (!autolistCfg && regexLen > index) {
-				let regexItem = configRegex[index];
+				const regexItem = configRegex[index];
 
 				if (regexItem.regex.test(bullet)) {
 					autolistCfg = {
-						bullet: bullet,
-						editor: editor,
-						text: text,
+						bullet,
+						editor,
+						text,
 						type: regexItem.type,
 					};
 
@@ -133,15 +133,15 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 		 * @param {Object} listConfig Object that contains bullet, text and type for creating the list
 		 * @protected
 		 */
-		_createList: function(listConfig) {
-			let editor = listConfig.editor;
+		_createList(listConfig) {
+			const editor = listConfig.editor;
 
-			let range = editor.getSelection().getRanges()[0];
+			const range = editor.getSelection().getRanges()[0];
 
 			range.endContainer.setText(listConfig.text);
 			editor.execCommand(listConfig.type);
 
-			let editable = editor.editable();
+			const editable = editor.editable();
 
 			// Subscribe to keydown in order to check if the next key press is `Backspace`.
 			// If so, the creation of the list will be discarded.
@@ -151,7 +151,7 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 				this._checkForBackspaceAndUndo,
 				this,
 				{
-					editor: editor,
+					editor,
 					bullet: listConfig.bullet,
 				},
 				1
@@ -168,11 +168,13 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 		 * @param {Event} event Event object
 		 * @protected
 		 */
-		_onKeyDown: function(event) {
-			let nativeEvent = event.data.$;
+		_onKeyDown(event) {
+			const nativeEvent = event.data.$;
 
 			if (nativeEvent.keyCode === KEY_SPACE) {
-				let listConfig = this._getListConfig(event.listenerData.editor);
+				const listConfig = this._getListConfig(
+					event.listenerData.editor
+				);
 
 				if (listConfig) {
 					event.data.preventDefault();

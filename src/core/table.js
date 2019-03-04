@@ -1,4 +1,4 @@
-let IE_NON_DIRECTLY_EDITABLE_ELEMENT = {
+const IE_NON_DIRECTLY_EDITABLE_ELEMENT = {
 	table: 1,
 	col: 1,
 	colgroup: 1,
@@ -39,21 +39,21 @@ Table.prototype = {
 	 * @param {Object} config Table configuration object
 	 * @return {Object} The created table
 	 */
-	create: function(config) {
-		let editor = this._editor;
-		let table = this._createElement('table');
+	create(config) {
+		const editor = this._editor;
+		const table = this._createElement('table');
 
 		config = config || {};
 
 		// Generate the rows and cols.
-		let tbody = table.append(this._createElement('tbody'));
-		let rows = config.rows || 1;
-		let cols = config.cols || 1;
+		const tbody = table.append(this._createElement('tbody'));
+		const rows = config.rows || 1;
+		const cols = config.cols || 1;
 
 		for (let i = 0; i < rows; i++) {
-			let row = tbody.append(this._createElement('tr'));
+			const row = tbody.append(this._createElement('tr'));
 			for (let j = 0; j < cols; j++) {
-				let cell = row.append(this._createElement('td'));
+				const cell = row.append(this._createElement('td'));
 
 				cell.appendBogus();
 			}
@@ -65,8 +65,8 @@ Table.prototype = {
 		// Insert the table element if we're creating one.
 		editor.insertElement(table);
 
-		let firstCell = new CKEDITOR.dom.element(table.$.rows[0].cells[0]);
-		let range = editor.createRange();
+		const firstCell = new CKEDITOR.dom.element(table.$.rows[0].cells[0]);
+		const range = editor.createRange();
 		range.moveToPosition(firstCell, CKEDITOR.POSITION_AFTER_START);
 		range.select();
 
@@ -81,15 +81,15 @@ Table.prototype = {
 	 * @method getFromSelection
 	 * @return {CKEDITOR.dom.element} The retrieved table or null if not found.
 	 */
-	getFromSelection: function() {
+	getFromSelection() {
 		let table;
-		let selection = this._editor.getSelection();
-		let selected = selection.getSelectedElement();
+		const selection = this._editor.getSelection();
+		const selected = selection.getSelectedElement();
 
 		if (selected && selected.is('table')) {
 			table = selected;
 		} else {
-			let ranges = selection.getRanges();
+			const ranges = selection.getRanges();
 
 			if (ranges.length > 0) {
 				// Webkit could report the following range on cell selection (#4948):
@@ -124,7 +124,7 @@ Table.prototype = {
 	 * @param {CKEDITOR.dom.element} el The table element to test if editable
 	 * @return {Boolean}
 	 */
-	isEditable: function(el) {
+	isEditable(el) {
 		if (!CKEDITOR.env.ie || !el.is(IE_NON_DIRECTLY_EDITABLE_ELEMENT)) {
 			return !el.isReadOnly();
 		}
@@ -145,21 +145,21 @@ Table.prototype = {
 	 * @param {CKEDITOR.dom.element} table The table to gather the heading from. If null, it will be retrieved from the current selection.
 	 * @return {String} The heading of the table. Expected values are `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
 	 */
-	getHeading: function(table) {
+	getHeading(table) {
 		table = table || this.getFromSelection();
 
 		if (!table) {
 			return null;
 		}
 
-		let rowHeadingSettings = table.$.tHead !== null;
+		const rowHeadingSettings = table.$.tHead !== null;
 
 		let colHeadingSettings = true;
 
 		// Check if all of the first cells in every row are TH
 		for (let row = 0; row < table.$.rows.length; row++) {
 			// If just one cell isn't a TH then it isn't a header column
-			let cell = table.$.rows[row].cells[0];
+			const cell = table.$.rows[row].cells[0];
 
 			if (cell && cell.nodeName.toLowerCase() !== 'th') {
 				colHeadingSettings = false;
@@ -191,8 +191,8 @@ Table.prototype = {
 	 * @method remove
 	 * @param {CKEDITOR.dom.element} table The table element which table style should be removed.
 	 */
-	remove: function(table) {
-		let editor = this._editor;
+	remove(table) {
+		const editor = this._editor;
 
 		if (table) {
 			table.remove();
@@ -201,8 +201,8 @@ Table.prototype = {
 
 			if (table) {
 				// If the table's parent has only one child remove it as well (unless it's a table cell, or the editable element) (#5416, #6289, #12110)
-				let parent = table.getParent();
-				let editable = editor.editable();
+				const parent = table.getParent();
+				const editable = editor.editable();
 
 				if (
 					parent.getChildCount() === 1 &&
@@ -212,7 +212,7 @@ Table.prototype = {
 					table = parent;
 				}
 
-				let range = editor.createRange();
+				const range = editor.createRange();
 				range.moveToPosition(table, CKEDITOR.POSITION_BEFORE_START);
 				table.remove();
 			}
@@ -228,7 +228,7 @@ Table.prototype = {
 	 * @param {Object} table The table to which the attributes should be assigned
 	 * @param {Object} attrs The attributes which have to be assigned to the table
 	 */
-	setAttributes: function(table, attrs) {
+	setAttributes(table, attrs) {
 		if (attrs) {
 			Object.keys(attrs).forEach(function(attr) {
 				table.setAttribute(attr, attrs[attr]);
@@ -245,33 +245,33 @@ Table.prototype = {
 	 * @param {CKEDITOR.dom.element} table The table element to which the heading should be set. If null, it will be retrieved from the current selection.
 	 * @param {String} heading The table heading to be set. Accepted values are: `CKEDITOR.Table.NONE`, `CKEDITOR.Table.ROW`, `CKEDITOR.Table.COL` and `CKEDITOR.Table.BOTH`.
 	 */
-	setHeading: function(table, heading) {
+	setHeading(table, heading) {
 		table = table || this.getFromSelection();
 
 		let i;
 		let newCell;
 		let tableHead;
-		let tableBody = table.getElementsByTag('tbody').getItem(0);
+		const tableBody = table.getElementsByTag('tbody').getItem(0);
 
 		let tableHeading = this.getHeading(table);
-		let hadColHeading =
+		const hadColHeading =
 			tableHeading === Table.HEADING_COL ||
 			tableHeading === Table.HEADING_BOTH;
 
-		let needColHeading =
+		const needColHeading =
 			heading === Table.HEADING_COL || heading === Table.HEADING_BOTH;
-		let needRowHeading =
+		const needRowHeading =
 			heading === Table.HEADING_ROW || heading === Table.HEADING_BOTH;
 
 		// If we need row heading and don't have a <thead> element yet, move the
 		// first row of the table to the head and convert the nodes to <th> ones.
 		if (!table.$.tHead && needRowHeading) {
-			let tableFirstRow = tableBody.getElementsByTag('tr').getItem(0);
-			let tableFirstRowChildCount = tableFirstRow.getChildCount();
+			const tableFirstRow = tableBody.getElementsByTag('tr').getItem(0);
+			const tableFirstRowChildCount = tableFirstRow.getChildCount();
 
 			// Change TD to TH:
 			for (i = 0; i < tableFirstRowChildCount; i++) {
-				let cell = tableFirstRow.getChild(i);
+				const cell = tableFirstRow.getChild(i);
 
 				// Skip bookmark nodes. (#6155)
 				if (
@@ -293,11 +293,11 @@ Table.prototype = {
 			// Move the row out of the THead and put it in the TBody:
 			tableHead = this._createElement(table.$.tHead);
 
-			let previousFirstRow = tableBody.getFirst();
+			const previousFirstRow = tableBody.getFirst();
 
 			while (tableHead.getChildCount() > 0) {
-				let newFirstRow = tableHead.getFirst();
-				let newFirstRowChildCount = newFirstRow.getChildCount();
+				const newFirstRow = tableHead.getFirst();
+				const newFirstRowChildCount = newFirstRow.getChildCount();
 
 				for (i = 0; i < newFirstRowChildCount; i++) {
 					newCell = newFirstRow.getChild(i);
@@ -315,7 +315,7 @@ Table.prototype = {
 		}
 
 		tableHeading = this.getHeading(table);
-		let hasColHeading =
+		const hasColHeading =
 			tableHeading === Table.HEADING_COL ||
 			tableHeading === Table.HEADING_BOTH;
 
@@ -337,7 +337,7 @@ Table.prototype = {
 		// row back into a `<td>` element.
 		if (hadColHeading && !needColHeading) {
 			for (i = 0; i < table.$.rows.length; i++) {
-				let row = new CKEDITOR.dom.element(table.$.rows[i]);
+				const row = new CKEDITOR.dom.element(table.$.rows[i]);
 
 				if (row.getParent().getName() === 'tbody') {
 					newCell = new CKEDITOR.dom.element(row.$.cells[0]);
@@ -358,24 +358,24 @@ Table.prototype = {
 	 * @param {String} name The tag name from which an element should be created
 	 * @return {CKEDITOR.dom.element} Instance of CKEDITOR DOM element class
 	 */
-	_createElement: function(name) {
+	_createElement(name) {
 		return new CKEDITOR.dom.element(name, this._editor.document);
 	},
 };
 
 CKEDITOR.on('instanceReady', function(event) {
-	let headingCommands = [
+	const headingCommands = [
 		Table.HEADING_NONE,
 		Table.HEADING_ROW,
 		Table.HEADING_COL,
 		Table.HEADING_BOTH,
 	];
 
-	let tableUtils = new Table(event.editor);
+	const tableUtils = new Table(event.editor);
 
 	headingCommands.forEach(function(heading) {
 		event.editor.addCommand('tableHeading' + heading, {
-			exec: function(_editor) {
+			exec(_editor) {
 				tableUtils.setHeading(null, heading);
 			},
 		});
