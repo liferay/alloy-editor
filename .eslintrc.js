@@ -63,7 +63,6 @@ module.exports = {
 		'no-inner-declarations': 'off',
 		'no-invalid-this': 'off',
 		'react/prop-types': 'warn',
-		'sort-keys': 'off',
 		'valid-jsdoc': 'warn',
 	},
 	settings: {
