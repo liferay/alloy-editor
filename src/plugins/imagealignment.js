@@ -80,6 +80,7 @@
                         }
                     });
                     centeredImage = true;
+                    imageContainer.style.textAlign = '';
                 }
             }
 
@@ -142,11 +143,6 @@
                     });
                 }
             });
-
-            var imageContainer = image.$.parentNode;
-
-            imageContainer.style.textAlign = IMAGE_ALIGNMENT.CENTER;
-
         }
     };
 
