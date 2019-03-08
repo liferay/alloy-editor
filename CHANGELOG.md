@@ -1,5 +1,23 @@
 # Change Log
 
+## [v1.5.20](https://github.com/liferay/alloy-editor/tree/v1.5.20)(2019-03-08)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.19...v1.5.20)
+
+**Closed issues**
+
+- Fixes #1061 Allow only required style for IE and other browsers (11 hours ago) <Fortunato Maldonado>
+- Fixes #1057 Keep styles in the image for IE (5 weeks ago) <Fortunato Maldonado>
+- Fixes #998 check for BODY tagName (5 weeks ago) <Fortunato Maldonado>
+- Fixes #998 Readd scrollTop and recheck uiNode (6 weeks ago) <Fortunato Maldonado>
+- Fixes #998 Remove scrollTop from position for Safari (6 weeks ago) <Fortunato Maldonado>
+
+**Merged pull requests:**
+
+- Use strict equality (5 weeks ago) <Julien Castelain>
+- Updates CHANGELOG for v1.5.19 (6 weeks ago) <Julien Castelain>
+- Build files (auto-generated) (6 weeks ago) <Julien Castelain>
+- (tag: v1.5.19) 1.5.19 (6 weeks ago) <Julien Castelain>
+
 ## [v1.5.19](https://github.com/liferay/alloy-editor/tree/v1.5.19) (2019-01-22)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.18...v1.5.19)
 
