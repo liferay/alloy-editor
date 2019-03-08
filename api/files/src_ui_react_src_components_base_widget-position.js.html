@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.19</b>
+                        API Docs for Version: <b>1.5.20</b>
                     </p>
                 </li>
             </div>
@@ -468,7 +468,7 @@
                                             var uiNodeMarginRight = parseInt(uiNodeStyle.getPropertyValue(&#x27;margin-right&#x27;), 10);
                                             var totalWidth = uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
                             
-                                            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+                                            var scrollTop = uiNode.tagName !== &#x27;BODY&#x27; ? uiNode.scrollTop : 0;
                             
                                             var xy = this.getWidgetXYPoint(interactionPoint.x, interactionPoint.y, interactionPoint.direction);
                                             xy[1] += scrollTop;
