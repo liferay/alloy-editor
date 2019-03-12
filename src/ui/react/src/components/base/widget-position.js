@@ -196,7 +196,8 @@
             domElement.setStyles({
                 left: startPoint[0] + 'px',
                 top: startPoint[1] + 'px',
-                opacity: 0
+                opacity: 0,
+                pointerEvents: 'none',
             });
 
             domElement.removeClass('alloy-editor-invisible');
@@ -210,6 +211,14 @@
                     opacity: 1
                 });
             });
+
+            if (domElement.$) {
+                domElement.$.addEventListener('transitionend', () => {
+                    domElement.setStyles({
+                        pointerEvents: '',
+                    });
+                })
+            }
         },
 
         /**
