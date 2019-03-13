@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Advanced Editing Demo</title>
+
+        <link href="alloy-editor/assets/alloy-editor-ocean-min.css" rel="stylesheet">
+
+<script src="alloy-editor/alloy-editor-all-min.js"></script>
+
+        <style>
+            body {
+                margin: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Alloy Editor demo</h1>
+        <div class="ae-placeholder" contenteditable="true" data-placeholder="Write here the headline" id="headline"></div>
+
+        <div class="ae-placeholder" contenteditable="true" data-placeholder="Write here the description" id="description"></div>
+
+        <div id="editable1" contenteditable="true" data-placeholder="Write here the content">
+            <p><strong>Apollo 11</strong> was the spaceflight that landed the first humans, Americans <a href="http://en.wikipedia.org/wiki/Neil_Armstrong">Neil Armstrong</a> and <a href="http://en.wikipedia.org/wiki/Buzz_Aldrin">Buzz Aldrin</a>, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the lunar surface 6 hours later on July 21 at 02:56 UTC.</p>
+
+            <p>Armstrong spent about <s>three and a half</s> two and a half hours outside the spacecraft, Aldrin slightly less; and together they collected 47.5 pounds (21.5&nbsp;kg) of lunar material for return to Earth. A third member of the mission, <a href="http://en.wikipedia.org/wiki/Michael_Collins_(astronaut)">Michael Collins</a>, piloted the <a href="http://en.wikipedia.org/wiki/Apollo_Command/Service_Module">command</a> spacecraft alone in lunar orbit until Armstrong and Aldrin returned to it for the trip back to Earth.</p>
+
+            <h2>Broadcasting and <em>quotes</em> <a id="quotes" name="quotes"></a></h2>
+
+            <p>Broadcast on live TV to a world-wide audience, Armstrong stepped onto the lunar surface and described the event as:</p>
+
+            <blockquote>
+                <p>One small step for [a] man, one giant leap for mankind.</p>
+            </blockquote>
+
+            <p>Apollo 11 effectively ended the <a href="http://en.wikipedia.org/wiki/Space_Race">Space Race</a> and fulfilled a national goal proposed in 1961 by the late U.S. President <a href="http://en.wikipedia.org/wiki/John_F._Kennedy">John F. Kennedy</a> in a speech before the United States Congress:</p>
+
+            <blockquote>
+                <p>[...] before this decade is out, of landing a man on the Moon and returning him safely to the Earth.</p>
+            </blockquote>
+
+            <h2>Technical details <a id="tech-details" name="tech-details"></a></h2>
+
+            <table align="right" border="1" bordercolor="#ccc" cellpadding="5" cellspacing="0" style="border-collapse:collapse;margin:10px 0 10px 15px;">
+                <caption><strong>Mission crew</strong></caption>
+                <thead>
+                <tr>
+                    <th scope="col">Position</th>
+                    <th scope="col">Astronaut</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Commander</td>
+                    <td>Neil A. Armstrong</td>
+                </tr>
+                <tr>
+                    <td>Command Module Pilot</td>
+                    <td>Michael Collins</td>
+                </tr>
+                <tr>
+                    <td>Lunar Module Pilot</td>
+                    <td>Edwin &quot;Buzz&quot; E. Aldrin, Jr.</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p>Launched by a <strong>Saturn V</strong> rocket from <a href="http://en.wikipedia.org/wiki/Kennedy_Space_Center">Kennedy Space Center</a> in Merritt Island, Florida on July 16, Apollo 11 was the fifth manned mission of <a href="http://en.wikipedia.org/wiki/NASA">NASA</a>&#39;s Apollo program. The Apollo spacecraft had three parts:</p>
+
+            <img src="http://21stcenturywaves.com/wp-content/uploads/2009/07/fullmoon.thumbnail.jpg">
+
+            <ol>
+                <li><strong>Command Module</strong> with a cabin for the three astronauts which was the only part which landed back on Earth</li>
+                <li><strong>Service Module</strong> which supported the Command Module with propulsion, electrical power, oxygen and water</li>
+                <li><strong>Lunar Module</strong> for landing on the Moon.</li>
+            </ol>
+
+            <p></p>
+
+            <p>After being sent to the Moon by the Saturn V&#39;s upper stage, the astronauts separated the spacecraft from it and travelled for three days until they entered into lunar orbit. Armstrong and Aldrin then moved into the Lunar Module and landed in the <a href="http://en.wikipedia.org/wiki/Mare_Tranquillitatis">Sea of Tranquility</a>. They stayed a total of about 21 and a half hours on the lunar surface. After lifting off in the upper part of the Lunar Module and rejoining Collins in the Command Module, they returned to Earth and landed in the <a href="http://en.wikipedia.org/wiki/Pacific_Ocean">Pacific Ocean</a> on July 24.</p>
+
+            <hr />
+            <p style="text-align: right;"><small>Source: <a href="http://en.wikipedia.org/wiki/Apollo_11">Wikipedia.org</a></small></p>
+        </div>
+
+        <h3>Full toolbar demo</h3>
+
+        <div id="editable2" contenteditable="true" placeholder="Write some content here too">
+            <p>Bacon ipsum dolor amet salami cow beef chuck pastrami prosciutto. Ground round landjaeger pancetta, cupim capicola turkey pastrami jowl pork shank chuck flank kevin. Sausage pastrami doner short loin burgdoggen spare ribs. Drumstick picanha pastrami ham hock ground round porchetta. Meatball hamburger cow turducken, flank jowl biltong kielbasa t-bone. Chicken tongue doner, picanha salami pork belly filet mignon brisket strip steak landjaeger venison.</p>
+
+            <p>Porchetta <strong>tenderloin doner</strong>, swine landjaeger chicken pork chop. Fatback ground round pork chop, ham hock andouille drumstick hamburger kielbasa brisket burgdoggen ribeye frankfurter. Beef ribs ham ball tip bacon chuck doner. Short ribs leberkas chuck sirloin tongue beef, andouille boudin. Short loin burgdoggen spare ribs jowl meatball.</p>
+
+            <blockquote>Ground round chicken meatball ham hock.</blockquote>
+
+            <p>Corned beef jowl biltong alcatra, picanha hamburger kevin cow venison shank chicken. Boudin tenderloin doner, leberkas venison alcatra ribeye brisket tail flank beef ribs pork. Chicken tenderloin cupim, doner flank alcatra meatball sirloin bacon jowl kielbasa t-bone. Beef ribs tail flank, biltong pork belly sausage porchetta doner tri-tip. Salami ball tip ribeye kevin short ribs pork capicola. Flank drumstick prosciutto bresaola corned beef short ribs meatball boudin.</p>
+
+            <p>Tri-tip shankle bacon landjaeger, flank hamburger picanha sausage tenderloin tongue pork chop meatball short ribs chicken. Shankle cupim shank ball tip turkey boudin biltong tongue ham hock short ribs pig pork chop. Pork chop ground round shankle jerky pork beef ribs biltong kielbasa. Meatloaf tri-tip ball tip venison, shoulder landjaeger short loin hamburger spare ribs pig strip steak. Pancetta meatball jowl tri-tip, bresaola doner pig shank corned beef venison pastrami shoulder.</p>
+
+            <p>Pork jowl drumstick t-bone tail, turkey rump kielbasa kevin ham hock. Meatball picanha chuck pork chop bacon ham flank spare ribs tri-tip sirloin pork. Tongue biltong cow, ham sausage corned beef kevin tenderloin <strong>alcatra capicola shank picanha</strong>. Ribeye beef ribs burgdoggen, shoulder ham cow cupim turkey sausage strip steak tongue chuck pork chop chicken pastrami. Corned beef tongue porchetta, jowl bresaola pork meatball frankfurter sirloin prosciutto shoulder pig drumstick.</p>
+        </div>
+
+        <script>
+            var editor1 = AlloyEditor.editable('description');
+            var editor2 = AlloyEditor.editable('editable1');
+            var editor3 = AlloyEditor.editable('headline');
+            var editor4 = AlloyEditor.editable('editable2', {
+                mode: 'full'
+            });
+        </script>
+
+        <div id="footer">
+            <hr>
+            <p contenteditable="true">
+                CKEditor - The text editor for the Internet - <a class="samples" href="http://ckeditor.com/">
+                    http://ckeditor.com</a>
+            </p>
+            <p id="copy">
+                Copyright &copy; 2003-2014, <a class="samples" href="http://cksource.com/">CKSource</a>
+                - Frederico Knabben. All rights reserved.
+            </p>
+        </div>
+    </body>
+</html>
