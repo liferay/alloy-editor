@@ -1,15 +1,20 @@
 # Change Log
 
-## [v1.5.21](https://github.com/liferay/alloy-editor/tree/v1.5.21)(2019-03-13)
+## [v1.5.22](https://github.com/liferay/alloy-editor/tree/v1.5.22) (2019-03-13)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.21...v1.5.22)
+
+**Closed issues**
+
+- Fixes #1160 Add transitionend event to enable pointerEvents ([fortunatomaldonado](https://github.com/fortunatomaldonado))
+
+## [v1.5.21](https://github.com/liferay/alloy-editor/tree/v1.5.21) (2019-03-13)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.20...v1.5.21)
 
 **Closed issues**
 
 - Include missing build files from previous release (#1169) ([wincent](https://github.com/wincent))
 
-https://github.com/liferay/alloy-editor/issues/1179
-
-## [v1.5.20](https://github.com/liferay/alloy-editor/tree/v1.5.20)(2019-03-08)
+## [v1.5.20](https://github.com/liferay/alloy-editor/tree/v1.5.20) (2019-03-08)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.19...v1.5.20)
 
 **Closed issues**

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>1.5.21</b>
+                        API Docs for Version: <b>1.5.22</b>
                     </p>
                 </li>
             </div>
@@ -383,7 +383,8 @@
                                         domElement.setStyles({
                                             left: startPoint[0] + &#x27;px&#x27;,
                                             top: startPoint[1] + &#x27;px&#x27;,
-                                            opacity: 0
+                                            opacity: 0,
+                                            pointerEvents: &#x27;none&#x27;,
                                         });
                             
                                         domElement.removeClass(&#x27;alloy-editor-invisible&#x27;);
@@ -397,6 +398,14 @@
                                                 opacity: 1
                                             });
                                         });
+                            
+                                        if (domElement.$) {
+                                            domElement.$.addEventListener(&#x27;transitionend&#x27;, () =&gt; {
+                                                domElement.setStyles({
+                                                    pointerEvents: &#x27;&#x27;,
+                                                });
+                                            })
+                                        }
                                     },
                             
                                     /**

@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.21
+ * AlloyEditor v1.5.22
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -32120,7 +32120,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             domElement.setStyles({
                 left: startPoint[0] + 'px',
                 top: startPoint[1] + 'px',
-                opacity: 0
+                opacity: 0,
+                pointerEvents: 'none'
             });
 
             domElement.removeClass('alloy-editor-invisible');
@@ -32134,6 +32135,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     opacity: 1
                 });
             });
+
+            if (domElement.$) {
+                domElement.$.addEventListener('transitionend', function () {
+                    domElement.setStyles({
+                        pointerEvents: ''
+                    });
+                });
+            }
         },
 
         /**
