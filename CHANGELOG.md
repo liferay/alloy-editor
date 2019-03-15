@@ -1,5 +1,27 @@
 # Change Log
 
+## [v2.0.0-beta.2](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.2) (2019-03-15)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.1...v2.0.0-beta.2)
+
+**Implemented enhancements:**
+
+- Update to eslint-config-liferay v3.0.0 [\#1169](https://github.com/liferay/alloy-editor/pull/1169) ([wincent](https://github.com/wincent))
+- Make it convenient to check out website as worktree [\#1166](https://github.com/liferay/alloy-editor/pull/1166) ([wincent](https://github.com/wincent))
+- Update to react/react-dom 16.8.3 [\#1159](https://github.com/liferay/alloy-editor/pull/1159) ([wincent](https://github.com/wincent))
+- Streamline and fool-proof-ize the clean up of Sinon stubs [\#1158](https://github.com/liferay/alloy-editor/pull/1158) ([wincent](https://github.com/wincent))
+- Automate CKEditor build process [\#1155](https://github.com/liferay/alloy-editor/pull/1155) ([wincent](https://github.com/wincent))
+
+**Fixed bugs:**
+
+- Add transitionend event to enable pointerEvents [\#1162](https://github.com/liferay/alloy-editor/pull/1162) ([fortunatomaldonado](https://github.com/fortunatomaldonado))
+- Fix button-embed-edit tests [\#1157](https://github.com/liferay/alloy-editor/pull/1157) ([wincent](https://github.com/wincent))
+- Fix embed tests [\#1154](https://github.com/liferay/alloy-editor/pull/1154) ([wincent](https://github.com/wincent))
+
+**Closed issues:**
+
+- Make it possible to run with non-minified CKEDITOR build [\#1150](https://github.com/liferay/alloy-editor/issues/1150) ([wincent](https://github.com/wincent))
+
+
 ## [v2.0.0-beta.1](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.1) (2019-02-22)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-alpha.5...v2.0.0-beta.1)
 
