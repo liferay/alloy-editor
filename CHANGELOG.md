@@ -1,6 +1,6 @@
 # Change Log
 
-## [v2.0.0-beta.2](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.2) (2019-03-14)
+## [v2.0.0-beta.2](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.2) (2019-03-15)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.1...v2.0.0-beta.2)
 
 **Implemented enhancements:**
@@ -8,7 +8,7 @@
 - Update to eslint-config-liferay v3.0.0 [\#1169](https://github.com/liferay/alloy-editor/pull/1169) ([wincent](https://github.com/wincent))
 - Make it convenient to check out website as worktree [\#1166](https://github.com/liferay/alloy-editor/pull/1166) ([wincent](https://github.com/wincent))
 - Update to react/react-dom 16.8.3 [\#1159](https://github.com/liferay/alloy-editor/pull/1159) ([wincent](https://github.com/wincent))
-- Streamline and fool-proof-ize the clean up of Sinon stubs [\#1158](https://github.com/liferay/alloy-editor/pull/1158) ([wincent](https://github.com/wincent)) 
+- Streamline and fool-proof-ize the clean up of Sinon stubs [\#1158](https://github.com/liferay/alloy-editor/pull/1158) ([wincent](https://github.com/wincent))
 - Automate CKEditor build process [\#1155](https://github.com/liferay/alloy-editor/pull/1155) ([wincent](https://github.com/wincent))
 
 **Fixed bugs:**
